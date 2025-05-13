@@ -1,0 +1,345 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17. Titel und Autor
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}[runin]{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}[:]
+\titleformat{\subsubsection}[runin]{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}[:]
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\CustomHeading{Definition}{#1}{#2}}{}
+\newenvironment{PROP}[2]{\CustomHeading{Proposition}{#1}{#2}}{}
+\newenvironment{THEO}[2]{\CustomHeading{Theorem}{#1}{#2}}{}
+\newenvironment{LEM}[2]{\CustomHeading{Lemma}{#1}{#2}}{}
+\newenvironment{KORO}[2]{\CustomHeading{Corollar}{#1}{#2}}{}
+\newenvironment{REM}[2]{\CustomHeading{Remark}{#1}{#2}}{}
+\newenvironment{EXA}[2]{\CustomHeading{Example}{#1}{#2}}{}
+\newenvironment{STUD}[2]{\CustomHeading{Study}{#1}{#2}}{}
+\newenvironment{CONC}[2]{\CustomHeading{Concept}{#1}{#2}}{}
+
+\newenvironment{PROOF}
+  {\begin{proof}}%
+{\end{proof}}
+
+% --- 17. Titel und Autor ---
+\title{Eichfeldtheorie 1}
+\author{Tim Jaschik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+…
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\tableofcontents
+
+
+\pagebreak
+
+
+\section{Faserbündel}
+
+\subsection{Definitionen}
+
+\begin{DEF}{2.1}{Lokale Trivialisierung mit typischen Fasern auf Mfk}
+    Seien $E, M$ und $F$ differenzierbare Mannigfaltikeiten und $\pi: E \rightarrow M$ eine differenzierbare Abbildung. Dann heißt $(E, \pi, M)$ eine lokal triviale Faserung mit typischer Faser $F$, wenn es zu jedem $x \in M$ eine offene Umgebung $U$ gibt und einen Diffeomorphismus $\varphi: \pi^{-1}(U):=E \mid U \rightarrow$ $U \times F$, sodass
+
+    $$
+    \begin{array}{lll}
+    E \mid U & \xrightarrow{\varphi} & U \times F \\
+    \pi \searrow & & \swarrow p r_1 \\
+    & U &
+    \end{array}
+    $$
+    
+    kommutiert. Man spricht auch von der lokal trivialen Faserung $E \rightarrow M$ oder $E$.
+\end{DEF}
+
+
+\begin{DEF}{2.2}{Vektorraumbündel}
+    Sei $(E,\pi,M)$ eine lokale triviale Faserung mit typischer Faser $E$. Ist $F=\mathbb{R}^k$ und ist $\pi^{-1}(x)$ ein $k$-dimensionaler Vektorraum und 
+    $$p r_2 \circ \left.\varphi\right|_{\pi^{-1}(x)}: \pi^{-1}(x) \rightarrow \mathbb{R}^k$$ 
+    ein Isomorphismus, so heißt $E$ ein Vektorraumbündel der Dimension $k$.
+\end{DEF}
+
+
+\begin{DEF}{2.7}{Lokale Triviale Faser als Tripel (Totalraum,Basisraum,Projektion)}
+    Sei $(E, \pi, M)$ eine lokal triviale Faserung wie in 1.1. Dann heißt $E T o$ talraum, $M$ Basis, $\pi$ Bündelprojektion und $F$ typische Faser.
+\end{DEF}
+
+
+\begin{DEF}{2.8}{Reale Fasern in lokal trivialen Bündeln}
+    Sei $(E, \pi, M)$ eine lokal triviale Faserung. Für jedes $x \in M$ heißt $E_x=\pi^{-1}(x)$ reale Faser an der Stelle $x$.
+    Für $U \subset M$ offen heißt $\varphi: E \mid U \rightarrow U \times F$ Bündelkarte und
+    
+    $$
+    \left\{\left(U_\lambda, \varphi_\lambda\right) \mid\left(U_\lambda, \varphi_\lambda\right) \text { Bündelkarte }, \bigcup_{\lambda \in \Lambda} U_\lambda=M\right\}
+    $$
+    
+    heißt Bündelatlas.
+    Die Abbildung $\varphi_x: E_x \rightarrow F, \varphi_x:=p r_2 \circ \varphi \mid E_x$ heißt Faserkarte. Sind $(U, \varphi)$ und $(V, \psi)$ Bündelkarten, so heißt die Abbildung
+    
+    $$
+    \omega: U \cap V \rightarrow \operatorname{Diffeo}(F), x \mapsto \psi_x \circ \varphi_x^{-1}
+    $$
+    
+    der Bündelkartenwechsel zwischen $\varphi$ und $\psi$.
+\end{DEF}
+
+
+\begin{DEF}{2.9}{Bündelkarten für offene Teilmengen der Basis und Bündelatlas}
+    Sei $(E, \pi, M)$ eine lokal triviale Faserung. 
+    Für $U \subset M$ offen heißt $\varphi: E \mid U \rightarrow U \times F$ Bündelkarte und
+    
+    $$
+    \left\{\left(U_\lambda, \varphi_\lambda\right) \mid\left(U_\lambda, \varphi_\lambda\right) \text { Bündelkarte }, \bigcup_{\lambda \in \Lambda} U_\lambda=M\right\}
+    $$
+
+    heißt Bündelatlas.
+\end{DEF}
+
+
+\begin{DEF}{2.11}{Faserkarte am Punkt $x$ im Basisraum}
+    Sind $(U, \varphi)$ und $(V, \psi)$ Bündelkarten, so heißt die Abbildung
+
+    $$
+    \omega: U \cap V \rightarrow \operatorname{Diffeo}(F), x \mapsto \psi_x \circ \varphi_x^{-1}
+    $$
+    
+    der Bündelkartenwechsel zwischen $\varphi$ und $\psi$.
+\end{DEF}
+
+
+\begin{DEF}{2.12}{Bündelkartenwechsel zwischen Bündelkarten}
+
+\end{DEF}
+
+
+\begin{DEF}{2.13}{G-Faserbündel mit Liegruppen als Strukturgruppen}
+
+\end{DEF}
+
+
+\begin{DEF}{2.14}{Prinzipalbündel}
+
+\end{DEF}
+
+
+\begin{DEF}{2.16}{(Lokale) Schnitte in lokal trivialen Faserungen}
+
+\end{DEF}
+
+
+\begin{DEF}{2.17}{Raum der differenzierbaren lokalen Schnitte}
+
+\end{DEF}
+
+
+\begin{DEF}{2.37}{Bündelmetrik auf Totalraum}
+
+\end{DEF}
+
+
+\begin{DEF}{2.40}{Vektorraumbündel von endlichem Typ}
+
+\end{DEF}
+
+
+\begin{DEF}{2.43}{Bündelisomorphismus}
+
+\end{DEF}
+
+
+\begin{DEF}{2.44}{Trivialisierung von Totalraum}
+
+\end{DEF}
+
+
+\begin{DEF}{2.45}{Vektorraumbündelabbildung über diff. Abbildungen zw. Vektorraumbündeln}
+
+\end{DEF}
+
+
+\begin{DEF}{2.46}{Vektorraumbündelisomorphismus}
+
+\end{DEF}
+
+
+\begin{DEF}{2.48}{Induzierte Bündel durch Abbildungen}
+
+\end{DEF}
+
+
+\begin{DEF}{2.54}{Induzierte Bündel bei Einbettungen von UMfk}
+
+\end{DEF}
+
+
+\begin{DEF}{2.55}{Untervektorraumbündel}
+
+\end{DEF}
+
+
+\begin{DEF}{2.63}{Reduktionen von Faserbündeln mit Strukturgruppe bzgl. abgeschlossener Untergruppe}
+
+\end{DEF}
+
+
+
+\subsection{Propositions}
+
+
+
+
+
+
+\pagebreak
+
+
+\printbibliography
+\end{document}

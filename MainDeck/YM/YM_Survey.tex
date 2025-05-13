@@ -1,0 +1,910 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Angepasster Theorem-Stil
+
+% --- 1. Seitenlayout und Ränder ---
+% --- Ränder breiter setzen ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+% --- Sprach- und Zeichensatz-Einstellungen ---
+\usepackage[english]{babel} % Sprache auf Englisch setzen
+\usepackage[T1]{fontenc} % Font-Encoding für europäische Zeichen
+\usepackage[utf8]{inputenc} % UTF-8 für Eingabecodierung
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+% --- Pakete für Mathematik, Theorem-Umgebungen und Symbole ---
+\usepackage{amsmath, amssymb, amsthm} % Mathematikpakete
+\DeclareMathOperator{\WF}{WF} % Beispiel für eine eigene Mathematik-Operator-Deklaration
+\usepackage{mathrsfs}
+
+% --- 4. Eigene Makros ---
+% --- Eigene Makros ---
+\usepackage{xcolor} % Farbdefinitionen für Text und Makros
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle} % Skalarprodukt
+\newcommand{\R}{\mathbb{R}} % Reelle Zahlen
+\newcommand{\N}{\mathbb{N}} % Natürliche Zahlen
+\newcommand{\Q}{\mathbb{Q}} % Rationale Zahlen
+\newcommand{\Z}{\mathbb{Z}} % Ganze Zahlen
+\newcommand{\C}{\mathbb{C}} % Komplexe Zahlen
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}} % Hervorhebung in Blau für Entwürfe
+
+% --- 5. Diagramme und Grafiken ---
+% --- Diagramme und Grafik ---
+\usepackage{graphicx} % Zum Einfügen von Grafiken
+\usepackage{tikz} % TikZ für Diagramme
+\usetikzlibrary{decorations.pathreplacing} % Dekorationen
+\usetikzlibrary{arrows.meta} % Pfeile
+\usetikzlibrary{positioning} % Positionierung von Elementen
+\usepackage{tikz-cd} % Kommutative Diagramme mit TikZ
+
+% --- 6. Tabellen und Aufzählungen ---
+% --- Tabellen und Aufzählungen ---
+\usepackage{enumitem} % Erweiterte Kontrolle über Listen
+\setlist[itemize]{left=0.5cm} % Anpassung von itemize-Listen
+
+% Neue enumerate-Umgebung für römische Nummerierung mit optionaler Überschrift
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&% Wenn kein Argument angegeben ist, keine Überschrift
+    \else
+      \textbf{#1}\quad % Überschrift als normaler Text ohne Punkt
+    \fi
+    \begin{enumerate}[label=\roman*)] % Römische Nummerierung
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+% --- Inhaltsverzeichnis ---
+\usepackage{tocloft} % Kontrolle über das Inhaltsverzeichnis
+\renewcommand{\cftsecfont}{\footnotesize} % Schriftgröße für Sektionen
+\renewcommand{\cftsubsecfont}{\footnotesize} % Schriftgröße für Subsektionen
+\renewcommand{\cftsubsubsecfont}{\footnotesize} % Schriftgröße für Subsubsektionen
+\renewcommand{\cftsecpagefont}{\footnotesize} % Seitennummer-Schrift für Sektionen
+\renewcommand{\cftsubsecpagefont}{\footnotesize} % Seitennummer-Schrift für Subsektionen
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize} % Seitennummer-Schrift für Subsubsektionen
+\usepackage{etoc} % Erweiterte Inhaltsverzeichnis-Kontrolle
+
+% --- 8. Abschnittsüberschriften ---
+% --- Abschnittsüberschriften ---
+\usepackage{titlesec} % Kontrolle über Überschriften
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{} % Anpassung der Section-Überschrift
+\titleformat{\subsection}[runin]{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}[:] % Subsection im Textlauf
+\titleformat{\subsubsection}[runin]{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}[:] % Subsubsection im Textlauf
+\setcounter{secnumdepth}{4} % Nummerierungstiefe
+
+% --- 9. Abstrakt-Umgebung ---
+% --- Abstrakt-Umgebung ---
+\renewenvironment{abstract}
+  {\small
+   \begin{center}
+   \normalfont\abstractname\vspace{-0.5em}\vspace{0pt} % Titel und Abstand des Abstracts
+   \end{center}
+   \list{}{%
+     \setlength{\leftmargin}{0mm}%
+     \setlength{\rightmargin}{\leftmargin}%
+   }%
+   \item\relax}
+  {\endlist}
+
+% --- 10. Todos/Notizen ---
+% --- Todos/Notizen ---
+\usepackage{todonotes} % Notizen und TODOs
+
+% --- 11. Rahmen/Box-Umgebungen ---
+% --- Rahmen/Box-Umgebungen ---
+\usepackage{mdframed} % Rahmen für Umgebungen
+\usepackage{tcolorbox} % Alternative Rahmen und farbige Boxen
+\colorlet{shadecolor}{gray!25} % Standardfarbe für Boxen
+
+% Beispiel für eine eigene Theorem-Box
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% % --- 12. Python-Integration ---
+% % --- Python- und Sage-Integration ---
+% \usepackage{pythontex} % Python-Integration
+% \usepackage[makestderr]{pythontex} % Fehlerausgabe
+% % \usepackage{sagetex}   % falls benötigt, sonst auskommentiert lassen
+
+% --- 13. Literaturverwaltung ---
+% --- Literaturverwaltung ---
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex} % Biblatex für Literaturverwaltung
+\addbibresource{bibliography.bib}
+
+
+% --- 14. Hyperlinks ---
+% --- Hyperlinks ---
+\usepackage{hyperref} % Hyperlinks
+\hypersetup{
+  colorlinks   = true, % Aktiviert farbige Links
+  urlcolor     = blue, % Farbe für URLs
+  linkcolor    = blue, % Farbe für interne Links
+  citecolor    = blue, % Farbe für Zitate
+  frenchlinks  = true % Französisch-stilierte Links
+}
+
+% --- 15. Absatzeinstellungen ---
+% --- Absatzeinstellungen ---
+\usepackage{parskip}
+%\usepackage[parfill]{parskip} % Abstand zwischen Absätzen
+\sloppy % Vermeidung von Overfull-Boxen
+\usepackage{changepage} % Für adjustwidth
+
+
+% --- 16. Angepasster Theorem-Stil ---
+% --- Angepasster Theorem-Stil ---
+\newtheoremstyle{custom}
+  {10pt} % Space above
+  {10pt} % Space below
+  {\itshape} % Body font
+  {} % Indent amount
+  {\bfseries} % Head font
+  {} % Punctuation after theorem head
+  { } % Space after theorem head
+  {\thmnumber{#2.} \thmname{#1} \thmnote{ (#3)}}
+
+% Definition der Theorem-Umgebungen
+\theoremstyle{custom}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Korollar}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Beispiel}
+\newtheorem{remark}[theorem]{Bemerkung}
+
+
+
+% --- 17. Angepasstes Abstract ---
+% --- Angepasstes Abstract ---
+\renewenvironment{abstract}
+  {
+    \begin{center}
+      \normalfont\bfseries Abstract
+    \end{center}
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+  }
+  {
+    \end{adjustwidth}
+  }
+
+
+
+
+
+
+
+% % --- Titelangaben ---
+% \title{Title of Document}
+% \author{Name of Author}
+
+
+
+
+\begin{document}
+
+
+\begin{center}
+    \Large{Survey on Yang-Mills}\\[10pt]
+\end{center}
+\begin{center}
+    {Herrn Prof. Dr. Scheuer: \textit{Forschungspraktikum} (WS24/25)}
+\end{center}
+
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+% Inhalt Deines Abstracts
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\tableofcontents
+
+
+
+\pagebreak
+
+\title{\textbf{What is Yang--Mills Theory? \\ \large Eine erste Einführung}}
+\author{}
+\date{\today}
+\maketitle
+
+
+\begin{abstract}
+In diesem kurzen Artikel skizzieren wir die grundlegenden Konzepte der Yang--Mills-Theorie. Wir beginnen mit Lie-Gruppen und deren Lie-Algebren, um anschließend Prinzipalbündel, Zusammenhänge und Krümmung einzuführen. Darauf aufbauend formulieren wir die Yang--Mills-Gleichungen als Variationsproblem und illustrieren die Theorie an Beispielen wie den Maxwell-Gleichungen (abelscher Fall \(\mathrm{U}(1)\)) und dem \(\mathrm{SU}(2)\)-Fall. Abschließend geben wir einen kurzen Ausblick auf den Yang--Mills-Flow und darauf aufbauende Forschung.
+\end{abstract}
+
+
+
+\section{Einleitung und Motivation}
+Die \emph{Yang--Mills-Theorie} ist historisch aus der Quantenfeldtheorie hervorgegangen und bildet die Grundlage des modernen Verständnisses von Eichtheorien. Mathematisch handelt es sich dabei um ein Variationsproblem auf Prinzipalbündeln, bei dem man eine bestimmte Energie (das \emph{Yang--Mills-Funktional}) minimiert. Die entsprechenden \emph{Yang--Mills-Gleichungen} sind nichtlineare partielle Differentialgleichungen, die eine reiche Geometrie und Analysis aufweisen.
+
+Schon der abelsche Spezialfall \(\mathrm{U}(1)\) reproduziert die klassischen Maxwell-Gleichungen der Elektrodynamik. Die nichtabelschen Fälle \(\mathrm{SU}(2)\), \(\mathrm{SU}(N)\) etc.\ sind ebenso von zentraler Bedeutung für das Standardmodell der Teilchenphysik und spielen in der modernen Differentialgeometrie (Donaldson-Theorie, Instantonen, Index-Theorie) eine wesentliche Rolle.
+
+\section{Grundlagen: Lie-Gruppen und Lie-Algebren}
+
+\subsection{Lie-Gruppen}
+Lie-Gruppen dienen als Symmetriegruppen in vielen mathematischen und physikalischen Kontexten. Sie beschreiben kontinuierliche Transformationen, wie Rotationen oder Skalierungen, die eine Struktur unverändert lassen. In der Yang--Mills-Theorie spielen Lie-Gruppen eine zentrale Rolle als \emph{Gauge-Gruppen}, welche die interne Symmetrie des zugrunde liegenden physikalischen Systems repräsentieren. Jede Wahl einer Lie-Gruppe bestimmt die Struktur des zugehörigen Prinzipialbündels und die möglichen Zusammenhänge darauf.
+
+\begin{definition}
+Eine \emph{Lie-Gruppe} \(G\) ist eine glatte Mannigfaltigkeit, auf der eine Gruppenstruktur definiert ist, so dass die Verknüpfungs- und Inversions-Abbildungen glatt sind.
+\end{definition}
+
+\begin{example}[Klassische kompakte Lie-Gruppen] Wichtige Beispiele sind:
+\begin{itemize}[leftmargin=1.2em]
+  \item \(\mathrm{U}(1)\): Die Gruppe aller komplexen \(1\times 1\)-Matrizen (also komplexer Zahlen vom Betrag \(1\)). Sie ist \emph{abelsch} und \emph{kompakt}.
+  \item \(\mathrm{SU}(2)\): Die Gruppe aller \(2\times 2\)-Matrizen, die unitär sind und Determinante \(1\) haben. Sie ist \emph{nicht-abelsch} und kompakt.
+  \item \(\mathrm{SU}(N)\): Verallgemeinerung auf \(N\times N\)-unitäre Matrizen mit Determinante \(1\).
+\end{itemize}
+\end{example}
+
+\begin{remark}
+Es gibt ebenso \emph{nicht-kompakte} (z.\,B.\ \(\mathrm{SL}(2,\mathbb{R})\), \(\mathrm{SO}(1,n)\)) und \emph{nicht-abelsche} Lie-Gruppen, die in der Yang--Mills-Theorie auftreten können.
+\end{remark}
+
+\subsection{Lie-Algebren}
+Lie-Algebren kodieren die lokale Struktur einer Lie-Gruppe und beschreiben deren infinitesimale Symmetrien. Sie erlauben eine linearisierte Betrachtung von Gruppeneigenschaften, was ihre Analyse und Darstellung vereinfacht. In der Yang--Mills-Theorie wird die Lie-Algebra \(\mathfrak{g}\) der Gauge-Gruppe \(\mathcal{G}\) benötigt, da Zusammenhänge und Krümmungen \(\mathfrak{g}\)-wertige Differentialformen sind.
+
+\begin{definition}
+Die \emph{Lie-Algebra} \(\mathfrak{g}\) einer Lie-Gruppe \(G\) ist der Tangentialraum am neutralen Element, also \(\mathfrak{g} = T_e G\), ausgestattet mit der Lie-Klammer, die aus den linksinvarianten Vektorfeldern resultiert.
+\end{definition}
+
+\begin{remark}
+Falls \(G\) \emph{kompakt} ist, existiert häufig eine \emph{positiv definite} und \emph{invariante} symmetrische Bilinearform auf \(\mathfrak{g}\) (z.\,B.\ die Killing-Form, gegebenenfalls skaliert). Dies ist zentral für die Definition des \(\mathrm{Ad}(G)\)-invarianten Skalarprodukts, das in der Yang--Mills-Theorie verwendet wird.
+\end{remark}
+
+\section{Prinzipialbündel und assoziierte Strukturen}
+
+Ein Prinzipial-\(G\)-Bündel ist eine geometrische Struktur, die lokale Symmetrien in einen konsistenten globalen Rahmen einbettet. Es erlaubt, die globale Geometrie einer Mannigfaltigkeit \(M\) durch lokale Daten und Transformationen der Strukturgruppe \(G\) zu beschreiben. Die Strukturgruppe \(G\) fungiert dabei als Symmetriegruppe, die die zulässigen Transformationen innerhalb der Fasern des Bündels definiert. Die wesentliche Idee eines Prinzipialbündels besteht darin, die Wirkung von \(G\) auf den lokalen Trivialisierungen mit der globalen Topologie und Geometrie von \(M\) zu verknüpfen.
+
+Mathematisch bilden Prinzipialbündel die Grundlage für die Definition von Zusammenhängen, die Regeln für den Paralleltransport auf \(M\) liefern. Ein Zusammenhang auf einem Prinzipialbündel definiert eine horizontale Verteilung im Tangentialbündel von \(P\), die invariant unter der Wirkung von \(G\) ist. Die Krümmung dieses Zusammenhangs misst, wie stark die horizontale Verteilung von der Integrabilität abweicht. In der Yang--Mills-Theorie beschreibt die Krümmung die dynamischen Freiheitsgrade des Systems und ist der zentrale geometrische Ausdruck, der das Variationsproblem bestimmt.
+
+\subsection{Prinzipial-\(G\)-Bündel}
+
+
+Die Yang--Mills-Theorie nutzt Prinzipialbündel, um interne Symmetrien geometrisch zu formulieren. Die Symmetriegruppe \(G\) und deren Lie-Algebra \(\mathfrak{g}\) definieren die Struktur des Systems und bestimmen die Transformationseigenschaften der Felder. Auf diese Weise verknüpfen Prinzipialbündel die lokale Symmetrie mit der globalen Geometrie der zugrunde liegenden Mannigfaltigkeit und ermöglichen eine präzise mathematische Beschreibung von Zusammenhängen und Krümmungen.
+
+In der Physik repräsentiert ein Prinzipial-\(G\)-Bündel die interne Symmetrie eines Systems. Die Basis \(M\) stellt in der Regel den physikalischen Raum(-zeit) dar, während die Faser \(G\) die interne Symmetriegruppe beschreibt. Beispielsweise steht \(G = \mathrm{U}(1)\) für die Elektrodynamik und \(G = \mathrm{SU}(2)\) für die schwache Wechselwirkung. Prinzipialbündel bieten daher eine universelle Sprache, um physikalische und mathematische Symmetrien in einem einheitlichen Rahmen zu beschreiben.
+
+
+\begin{definition}
+Ein \emph{Prinzipial-\(G\)-Bündel} \(\pi: P \to M\) über einer glatten Mannigfaltigkeit \(M\) ist ein Faserbündel mit Strukturgruppe \(G\), dessen Faser (typischerweise) \(G\) selbst ist. Zusätzlich gibt es eine \emph{freie} und \emph{transitive} (Rechts-)Wirkung von \(G\) auf \(P\), die mit der Faserstruktur verträglich ist.
+\end{definition}
+
+\begin{remark}[Strukturgruppe als Lie-Gruppe]
+In der Differentialgeometrie und insbesondere in der Yang--Mills-Theorie wird \(G\) fast immer als \emph{Lie-Gruppe} angenommen. Dies liegt daran, dass Lie-Gruppen sowohl eine glatte Geometrie als auch eine algebraische Gruppenstruktur besitzen, was notwendig ist, um lokale Trivialisierungen, glatte Übergangsabbildungen und differenzierbare Strukturen auf dem Bündel zu definieren.  
+
+Im allgemeinen Bündelbegriff könnte \(G\) auch eine diskrete Gruppe oder eine topologische Gruppe sein. In solchen Fällen fehlen jedoch die glatten Strukturen, die in der Differentialgeometrie zentral sind. Für Prinzipialbündel, die in der Yang--Mills-Theorie auftreten, ist daher \(G\) immer eine Lie-Gruppe.
+\end{remark}
+
+\begin{example}[Triviale und nichttriviale Bündel] Wichtige Beispiele sind:
+\begin{itemize}[leftmargin=1.2em]
+  \item Ein \emph{triviales Prinzipial-\(G\)-Bündel} ist \(P = M \times G\) mit der kanonischen Projektion \(\pi: (x, g) \mapsto x\). Hier wirken Gruppenelemente \(h \in G\) auf der Faser durch \((x, g) \cdot h = (x, gh)\).
+  \item Ein \emph{nichttriviales Prinzipial-\(G\)-Bündel} kann nicht global in dieser Form dargestellt werden, sondern besitzt einen komplexeren topologischen Aufbau. Ein Beispiel ist das Hopf-Bündel \(S^3 \to S^2\) mit Strukturgruppe \(\mathrm{U}(1)\). Nichttriviale Bündel erfordern eine sorgfältigere Analyse ihres topologischen und geometrischen Aufbaus (z.\,B.\ Chern-Klassen, charakteristische Klassen in höheren Dimensionen).
+\end{itemize}
+\end{example}
+
+\subsection{Prinzipial-Zusammenhang und Krümmung}
+
+Ein Prinzipial-Zusammenhang beschreibt eine Regel für den Paralleltransport entlang der Basis \(M\) des Bündels und definiert eine Zerlegung des Tangentialraums von \(P\) in horizontale und vertikale Richtungen. Die Krümmung \(F_A\) misst die Nichtintegrabilität der horizontalen Verteilung. Mathematisch ist die Krümmung ein Maß dafür, wie weit ein Prinzipialbündel von der Trivialität abweicht, und spielt eine zentrale Rolle in der Formulierung von Variationsproblemen wie dem Yang--Mills-Funktional.
+
+In der Physik wird der Zusammenhang \(A\) als Eichfeld interpretiert, das die Wechselwirkung zwischen Teilchen vermittelt. Die Krümmung \(F_A\) entspricht dem Feldstärketensor, der die physikalischen Effekte der Wechselwirkungen beschreibt, wie z.\,B.\ das elektromagnetische Feld (\(G = \mathrm{U}(1)\)).
+
+
+\begin{definition}
+Sei \(\pi: P \to M\) ein glattes Prinzipial-\(G\)-Bündel über einer glatten Mannigfaltigkeit \(M\). Eine \emph{Prinzipial-\(G\)-Verbindung} (oder ein Prinzipial-Zusammenhang) auf \(P\) ist eine \(\mathfrak{g}\)-wertige Differential-1-Form \(\omega\) auf \(P\), wobei \(\mathfrak{g}\) die Lie-Algebra von \(G\) bezeichnet. Diese Verbindung erfüllt die folgenden Eigenschaften:
+\begin{itemize}[leftmargin=1.2em]
+    \item \textbf{\(G\)-Äquivarianz:} Für jedes \(g \in G\) gilt
+    \[
+    R_g^* \omega = \operatorname{Ad}_g^{-1} \omega,
+    \]
+    wobei \(R_g\) die Rechtsmultiplikation mit \(g\) und \(\operatorname{Ad}_g\) die adjungierte Darstellung von \(G\) auf \(\mathfrak{g}\) bezeichnet. Die adjungierte Darstellung ist explizit durch
+    \[
+    \operatorname{Ad}_g(\xi) = \left.\frac{d}{dt} g \exp(t \xi) g^{-1} \right|_{t=0}, \quad \xi \in \mathfrak{g},
+    \]
+    gegeben.
+    \item \textbf{Reproduktion der Fundamentalfelder:} Für jedes \(\xi \in \mathfrak{g}\) gilt
+    \[
+    \omega(X_\xi) = \xi,
+    \]
+    wobei \(X_\xi\) das Fundamentalfeld auf \(P\) ist, das durch die \(G\)-Wirkung und \(\xi\) definiert wird. Dieses Fundamentalfeld beschreibt die durch \(G\) induzierte Bewegung entlang der Fasern.
+\end{itemize}
+Eine Prinzipial-\(G\)-Verbindung wird oft durch das Paar \((P, \omega)\) beschrieben, wobei \(\omega\) selbst als die \emph{Verbindungsform} oder \emph{Verbindungs-1-Form} bezeichnet wird.
+\end{definition}
+
+
+Die zugehörige \emph{Krümmung} (oder \emph{Krümmungsform}) \(F_A\) ist eine \(\mathfrak{g}\)-wertige \(2\)-Form, lokal gegeben durch
+\[
+F_A \;=\; dA \;+\; A \wedge A.
+\]
+Dabei bezeichnet \(\wedge\) die Keil- bzw.\ äußere Produktstruktur, kombiniert mit dem Lie-Klammer-Anteil in \(\mathfrak{g}\).
+
+\begin{remark}[Bianchi-Identität]
+Die Krümmungsform erfüllt stets
+\[
+d_A F_A \;=\; 0,
+\]
+wobei \(d_A\) die \emph{kovariante Ableitung} (äußere Ableitung) zum Zusammenhang \(A\) ist. Dies ist die \emph{Bianchi-Identität}.
+\end{remark}
+
+\subsection{Assoziierte Bündel und adjungiertes Bündel} Assoziierte Bündel erlauben es, Prinzipialbündel in einen geometrischen Kontext zu bringen, der mit Vektorbündeln verknüpft ist. Während ein Prinzipialbündel primär die Symmetriegruppe \(G\) beschreibt, wird durch eine sogenannte Darstellung \(\rho\) von $G$ festgelegt, wie diese Symmetrie auf einem Vektorraum \(V\) wirkt. Dadurch entsteht ein Vektorbündel, das in vielen Anwendungen zentral ist, insbesondere für die Definition von Feldern und Tensoren, die auf der Basis \(M\) definiert sind. In der Yang--Mills-Theorie dienen assoziierte Bündel als Träger der physikalischen Felder.
+
+\begin{definition}
+Gegeben ein Prinzipial-\(G\)-Bündel \(\pi: P \to M\) und eine Darstellung \(\rho: G \to \mathrm{GL}(V)\), lässt sich das \emph{assoziierte Vektorbündel} \(E\) definieren als
+\[
+E = P \times_G V = (P \times V) / \sim,
+\]
+wobei die Äquivalenzrelation \((p, v) \sim (p \cdot g, \rho(g^{-1}) v)\) für alle \(g \in G\) gilt. Dieses Bündel hat als typische Faser den Vektorraum \(V\), und die Wirkung von \(G\) bestimmt die Transformationsregel zwischen lokalen Trivialisierungen.
+\end{definition}
+
+
+\entwurf{Das adjungierte Bündel ist ein fundamentales Objekt, da es die Struktur der Lie-Gruppe \(G\) und ihrer Lie-Algebra \(\mathfrak{g}\) direkt auf der Basis \(M\) widerspiegelt. Viele geometrische Größen in der Yang--Mills-Theorie, wie die Krümmungsform \(F_A\), sind Abschnitte von \(\mathrm{ad}(P)\)-wertigen Differentialformen. Das adjungierte Bündel liefert somit eine mathematische Sprache für die Beschreibung der Krümmung und ihrer Transformationseigenschaften.}
+
+\begin{definition}
+Ein spezieller Fall eines assoziierten Bündels entsteht durch die \emph{adjungierte Darstellung} \(\mathrm{Ad}: G \to \mathrm{GL}(\mathfrak{g})\), bei der \(G\) auf seiner Lie-Algebra \(\mathfrak{g}\) durch
+\[
+\mathrm{Ad}(g)(X) = g X g^{-1}, \quad \forall g \in G, \, X \in \mathfrak{g}
+\]
+wirkt. Das dadurch entstehende \emph{adjungierte Bündel} ist
+\[
+\mathrm{ad}(P) = P \times_G \mathfrak{g}.
+\]
+Dieses Bündel hat als typische Faser die Lie-Algebra \(\mathfrak{g}\) und ist eng mit den Krümmungs- und Zusammenhangsformen auf \(P\) verknüpft.
+\end{definition}
+
+\begin{example}
+Für ein triviales Prinzipialbündel \(P = M \times G\) mit \(G = \mathrm{SU}(2)\) und der adjungierten Darstellung wirkt \(G\) auf \(\mathfrak{g} = \mathfrak{su}(2)\) durch Konjugation. Das adjungierte Bündel ist dann isomorph zu \(M \times \mathfrak{su}(2)\), wobei Abschnitte von \(\mathrm{ad}(P)\) lokal als \(\mathfrak{su}(2)\)-wertige Funktionen auf \(M\) beschrieben werden.
+\end{example}
+
+
+
+
+\subsection{Gauge-Transformationen}
+Eine \emph{Gauge-Transformation} (oder \emph{Bündelautomorphismus}) ist eine Faserbündel-Automorphismusabbildung \(\psi: P \to P\), die die \(G\)-Struktur respektiert.  
+Im lokalen Bild bedeutet dies, dass \(\psi\) dem Übergang \(\mathrm{g}\)-wertiger Funktionen entspricht, welche \(A\) und \(F_A\) auf charakteristische Weise transformieren:
+\[
+A \;\mapsto\; A^\psi \;=\; \psi\,A\,\psi^{-1} \;+\; \psi\,d\psi^{-1},
+\]
+\[
+F_A \;\mapsto\; F_{A^\psi} \;=\; \psi\,F_A\,\psi^{-1}.
+\]
+Die Menge aller Gauge-Transformationen bildet die \emph{Gauge-Gruppe} \(\mathcal{G}\).
+
+\section{Riemannsche Geometrie und Hodge-Theorie}
+
+Nun wollen wir die Funktion auch in der dritten Variable testen.
+
+\begin{definition}[Hodge-Stern-Operator]
+Sei \(M\) eine orientierte, Riemannsche \(n\)-Mannigfaltigkeit. Der \emph{Hodge-\(\star\)-Operator} ist
+\[
+\star: \Omega^k(M) \;\longrightarrow\; \Omega^{n-k}(M),
+\]
+der lokal durch die Riemannsche Metrik definiert ist und eine natürliche Innerproduktstruktur auf den Differentialformen induziert:
+\[
+(\omega,\mu) \;=\; \int_M \omega \wedge \star \,\mu.
+\]
+Dieser Operator erlaubt es, eine partielle Differentialgleichung wie \(\mathrm{d}\star F_A = 0\) kompakt zu schreiben.
+\end{definition}
+
+\begin{definition}[Metrik auf \(\mathrm{ad}(P)\)-wertigen Formen]
+Liegt auf \(\mathfrak{g}\) eine \(\mathrm{Ad}(G)\)-\emph{invariante} symmetrische Bilinearform \(\langle\cdot,\cdot\rangle_{\mathfrak{g}}\) vor, so erhalten wir für \(\omega, \mu \in \Omega^k(M,\mathrm{ad}(P))\) das \emph{natürliche} Skalarprodukt
+\[
+(\omega,\mu)
+\;=\;
+\int_M \langle \omega, \mu\rangle_{\mathfrak{g}} \;\mathrm{dvol},
+\]
+wobei \(\mathrm{dvol}\) die Riemannsche Volumenform ist. Unter der Verwendung des Hodge-Operators \(\star\) kann man so die \(\mathrm{L}^2\)-Norm beliebiger \(\mathrm{g}\)-wertiger Formen definieren.
+\end{definition}
+
+
+\begin{definition}[Formale Adjungierte und kovariante Ableitung]
+Für die kovariante äußere Ableitung
+\[
+d_A: \Omega^k\bigl(M,\mathrm{ad}(P)\bigr)\,\to\,\Omega^{k+1}\bigl(M,\mathrm{ad}(P)\bigr)
+\]
+gibt es eine \emph{formale Adjungierte} \(d_A^*\) bzgl.\ des Skalarprodukts, definiert durch
+\[
+\int_M \langle d_A \,\omega, \mu\rangle_{\mathfrak{g}}\;\mathrm{dvol}
+\;=\;
+\int_M \langle \omega, d_A^* \,\mu\rangle_{\mathfrak{g}}\;\mathrm{dvol}.
+\]
+\end{definition}
+
+
+\section{Yang--Mills-Theorie und Yang--Mills-Gleichungen}
+
+\subsection{Das Yang--Mills-Funktional}
+Das Herzstück der Theorie ist das \emph{Yang--Mills-Funktional}:
+\[
+S(A)
+\;=\;
+\| F_A\|_{L^2}^2 
+\;=\;
+\int_X 
+\langle F_A, F_A \rangle_{\mathfrak{g}}
+\;\mathrm{dvol},
+\]
+wobei \(F_A\) die Krümmung des Zusammenhangs \(A\) ist.
+
+\subsection{Euler--Lagrange-Gleichungen}
+Minimiert man \(\,S(A)\) über alle möglichen Zusammenhänge \(A\), so erhält man als Euler--Lagrange-Gleichung genau die \emph{Yang--Mills-Gleichung}:
+\[
+d_A^* F_A = 0 
+\quad\Longleftrightarrow\quad
+d_A \star\,F_A = 0,
+\]
+eine nichtlineare partielle Differentialgleichung.  
+Nichtlinearität entsteht durch den Term \(A\wedge A\) in \(\,F_A\) und durch die Abhängigkeit von \(A\) in \(d_A\).
+
+\section{Beispiele: Maxwell und \(\mathrm{SU}(2)\)}
+
+\subsection{Abelscher Fall \(\mathrm{U}(1)\) (Maxwell)}
+Betrachten wir ein triviales \(\mathrm{U}(1)\)-Bündel über dem Minkowski-Raum \(\mathbb{R}^{1,3}\). Ein Zusammenhang \(A\) ist dann eine gewöhnliche \(1\)-Form (das elektromagnetische Potential). Da \(\mathrm{U}(1)\) abelsch ist, verschwindet der Kommutatorterm:
+\[
+F_A \;=\; dA.
+\]
+Die Yang--Mills-Gleichungen \(\,d\star F_A=0\) entsprechen im Minkowski-Raum den \emph{vacuum Maxwell-Gleichungen}. Diese lauten in Vektorform:
+\[
+\nabla \cdot \mathbf{E} \;=\; 0, 
+\quad
+\nabla \cdot \mathbf{B} \;=\; 0,
+\quad
+\nabla\times \mathbf{B} \;=\; \tfrac{\partial \mathbf{E}}{\partial t},
+\quad
+\nabla\times \mathbf{E} \;=\; -\tfrac{\partial \mathbf{B}}{\partial t}.
+\]
+Dies stellt den abelschen Prototyp einer Yang--Mills-Theorie dar.
+
+\subsection{\(\mathrm{SU}(2)\)-Yang--Mills}
+Für ein triviales \(\mathrm{SU}(2)\)-Bündel auf \(\mathbb{R}^4\) (im euklidischen Setting) schreibt man ein \(\mathfrak{su}(2)\)-wertiges Feld \(A_\mu\). Die Krümmung hat die lokale Form
+\[
+F_{\mu\nu} \;=\;
+\partial_\mu A_\nu
+-\partial_\nu A_\mu
+\;+\;
+[A_\mu, A_\nu].
+\]
+Die zugehörigen Yang--Mills-Gleichungen lauten
+\[
+\partial^\mu F_{\mu\nu}
+\;+\;
+[A^\mu,\,F_{\mu\nu}]
+\;=\;
+0.
+\]
+Diese Gleichungen sind hochgradig nichtlinear und erlauben Instanton-Lösungen, welche in der \emph{Donaldson-Theorie} und der \emph{Topologie 4-dimensionaler Mannigfaltigkeiten} wichtig sind.
+
+\section{Yang--Mills-Flow und Ausblick}
+\subsection{Yang--Mills-Flow}
+Eine Möglichkeit, Yang--Mills-Lösungen zu konstruieren, besteht in der Betrachtung des \emph{Yang--Mills-Flows}, definiert als Gradientenfluss des Funktionals \(S(A)\):
+\[
+\frac{\partial A}{\partial t}
+\;=\;
+-\, d_A^* F_A.
+\]
+Analog zum Wärmeleitungsproblem glättet dieser Fluss gewissermaßen die Krümmung. Unter geeigneten Anfangsbedingungen und technischen Voraussetzungen nähert sich der Fluss im Grenzfall \(t\to\infty\) stationären Punkten, also \emph{Yang--Mills-Zusammenhängen}.
+
+\subsection{Fazit und Ausblick}
+Die Yang--Mills-Theorie verbindet zentrale Konzepte der Differentialgeometrie, der Analysis und der theoretischen Physik. Bereits der abelsche Fall \(\mathrm{U}(1)\) liefert die Maxwell-Theorie, während nichtabelsche Gruppen wie \(\mathrm{SU}(2)\) zu reichhaltigen Phänomenen (Instantonen, Monopolen, Topologie in 4 Dimensionen, etc.) führen.  
+
+Neben ihrer fundamentalen Rolle in der Physik (Quantenchromodynamik und das Standardmodell) hat die Yang--Mills-Theorie auch in der reinen Mathematik zu Durchbrüchen in der 4-dimensionalen Geometrie und Topologie geführt (Donaldson-Theorie, Atiyah--Singer-Index-Theorie). Aktuelle Forschung untersucht zudem verallgemeinerte Flüsse, supersymmetrische Variationen und das Verhalten von Yang--Mills-Lösungen auf Mannigfaltigkeiten mit speziellen Geometrien.
+
+
+
+
+
+
+
+
+\pagebreak
+
+
+
+\section{Studienverlaufsplan}
+
+{\small
+\[
+\begin{tikzcd}
+& & & & \text{Moduli Space [5]} \\
+\text{Lie [1]} \arrow[r] & \text{Principal [2]} \arrow[r] & \text{YM [3]} \arrow[r] &  \text{Uhlenbeck [4]} \arrow[r]\arrow[ru]\arrow[rd] & \text{Gradient-Flow [6]} \arrow[r,dashed] & \text{MS-Dynamics [8]} \\
+& & & & \text{Boundary Problem [7]}\\
+\end{tikzcd}
+\]
+}
+
+
+Grundlagen für [1] (Lie-Gruppen, Lie-Algebra, Lie-Gruppen-Action), [2] (Hauptfaserbündel und assoziierte Faserbündel, Zusammenhänge, Krümmung, Holonomietheorie/Gruppen, Charakteristische Klassen) und [3] in \cite{baum2014eichfeld}, \cite{hamilton2017gauge}, \cite{husemoller1975fibre}. Studien können intensiviert werden durch folgende Veranstaltungen: Riemannische Geometrie (Bernig, SS25), Lie-Gruppen (Bernig, WS25/26), Eichfeldtheorie 1/2 (Kraus, SS25 / WS25/26), Topologie (Kreck, WS24/25).
+
+Grundlagen für [4] (Zusammenhänge mit $L^p$-beschränkten Krümmungen, Sigularitäten Entfernung, Kompaktheit) in \cite{uhlenbeck1982connections}, \cite{uhlenbeck1982removable}, \cite{wehrheim2021uhlenbeck}. Die Arbeiten von Uhlenbeck werden in der YM-Literatur, insbesonderen bei Minimierungsverfahren für YM-Funktionale und Randwert-/Plateau-Problemen zitiert.  
+
+
+
+\subsubsection{Object of Interesst: Moduli-Spaces von Zusammenhängen in $G$-hauptfaserbündeln} 
+
+Sei … ein $G$-Hauptfaserbündel. Der Raum der Zusammenhänge … affine Raum .
+
+Ohne Modulation ist $\mathcal{A}$ unendlichdimensional. Der modullierte Raum reduziert diese Dimension durch die Quotientierung nach der Gauge-Gruppe $G$.
+
+Vorteil: Der resultierende modullierte Raum ist oft endlichdimensional oder hat eine überschaubare Struktur, was Berechnungen und theoretische Studien erheblich erleichtert.
+
+In der Litertur tretten unteranderem folgende Modulräume auf:
+
+
+
+
+Folgende Ausführung betrifft mein erstes Ansatz eines möglichen Object of Interest, woran man langfristig die Studien ausrichten könnte: 
+
+\begin{romanenum}
+    \item \textbf{Beziehung zwischen Geometrie des Basisraumes und dem Moduliraum}
+    \item \textbf{Räume von Moduliräumen}: Welche Beziehungen existieren zwischen Modulräumen von Riemannischen Mannigfaltigkeiten? 
+    \begin{romanenum}
+        \item Gibt es interessante (topologische / geometrische) Raumstrukturen auf Klassen von Moduliräumen von Zusammenhängen von geeigneten Klassen von Riemannischen Mannigfaltigkeiten? 
+        \item Lässt sich ein Derivations-Begriff auf diesen Räumen entwickeln?
+    \end{romanenum}
+    \item Optimality-Theorie: Können mittels spezifischer Operatoren auf einzelnen Modulräumen gewisse Optimalitätseigenschaften der zugrundeliegenden Basisräume identifiziert werden. ((Mean Values) Integral von YM-Energie über Kritische Mannigfaltigkeiten der Moduliräume \cite{swoboda2018morse})
+\end{romanenum}
+
+
+$$\mathcal{Q}(t)=\sum\limits_{\mathcal{C}\in\mathcal{CR}^a}\int\limits_{A\in\mathcal{C}/\mathcal{G}_0^{2,p}(P)}\int\limits_{M}|F_A|^2$$
+
+$$\mathcal{Q}(t)=\sum\limits_{\mathcal{C}\in\mathcal{CR}^a_t}\int\limits_{\mathcal{C}/\mathcal{G}_0^{2,p}(P)}d\mu$$
+
+
+\vspace{1cm}
+
+\section{Concept Survey}
+
+
+\begin{romanenum}
+    \item Charakteristic Classes (Chern-Weil Representation)
+    \item Line Bundles
+    \item Adjoint Operator
+    \item Moduli-Space
+    \item Sobolev Space
+    \item Orbit Space
+    \item Betti-Numbers
+\end{romanenum}
+
+
+
+
+\section{Objects of Interest}
+
+
+
+
+
+\section{Literature Review}
+
+
+
+
+
+\subsection{General Introduction}
+
+\subsubsection{Baum: Eichfeldtheorie—Eine Einführung in die Differentialgeometrie auf Faserbündeln \cite{baum2014eichfeld}} 
+This book provides a comprehensive introduction to differential geometry on fiber bundles with a focus on gauge theory. It begins with foundational topics such as Lie groups, Lie algebras, and principal fiber bundles, progressing to advanced topics like connections, curvature, and characteristic classes. Applications to gauge theory in physics, including the mathematical modeling of fundamental interactions like electromagnetism and gravity, are explored. It is ideal for students seeking a deeper understanding of the mathematical methods underlying gauge field theories.
+
+
+\subsubsection{Hamilton: Mathematical Gauge Theory. With Applications to the Standard
+Model of Particle Physics \cite{hamilton2017gauge}}
+This book provides an introduction to mathematical gauge theory, with applications to the Standard Model of particle physics. It offers a rigorous treatment of the mathematical structures underlying gauge theories, including connections, curvature, and their physical interpretations.
+
+
+\subsubsection{Husemoller: Fibre Bundles \cite{husemoller1975fibre}}
+This book is a classic introduction to the theory of fiber bundles, providing a comprehensive foundation for students and researchers in topology and geometry. The second edition includes additional material and examples, enriching the understanding of key concepts.
+
+
+\subsubsection{Schwarz: Morse Homology \cite{schwarz1993morse}}
+This book provides a comprehensive treatment of Morse homology, emphasizing its connections to relative Morse theory and Conley's continuation principle. It establishes the foundations of Morse homology as an axiomatic theory and explores its applications in finite-dimensional and infinite-dimensional settings.
+
+\subsection{Uhlenbeck Theorie - Compactness of Sequences of Connection and Singularity Removal} Uhlenbeck Theory provides the analytical framework for studying weak moduli spaces of connections in gauge theory. It establishes foundational results such as the compactness of sequences of connections with $L^p$-bounded curvature (Uhlenbeck Compactness), the removal of singularities via gauge transformations, and regularity theorems for solutions to the Yang-Mills equations. These results are pivotal for the geometric and topological analysis of moduli spaces, particularly in the study of instantons and four-dimensional manifolds.
+
+
+
+\subsubsection{Uhlenbeck: Connections with \(L^p\) Bounds on Curvature \cite{uhlenbeck1982connections}} 
+This foundational paper establishes key results on the regularity of connections with \(L^p\)-bounded curvature. Uhlenbeck proves a compactness theorem for sequences of such connections and introduces gauge transformations that remove singularities, providing the basis for studying weak moduli spaces in gauge theory.
+
+
+
+\subsubsection{Uhlenbeck: Removable Singularities in Yang-Mills Fields \cite{uhlenbeck1982removable}} 
+This paper establishes a fundamental result regarding the removability of isolated singularities in Yang-Mills fields. Uhlenbeck proves that under appropriate curvature bounds, singularities in Yang-Mills connections on higher-dimensional manifolds can be removed by gauge transformations.
+
+
+\subsubsection{Uhlenbeck: Variational Problems for Gauge Fields \cite{uhlenbeck1985variational}} 
+This paper explores the variational framework for gauge fields, focusing on critical points of the Yang-Mills functional. Uhlenbeck introduces key analytical techniques to study the regularity and compactness properties of gauge field solutions, laying the foundation for modern gauge theory.
+
+
+\subsubsection{Wehrheim: Uhlenbeck Compactness and Applications to Gauge Theory \cite{wehrheim2021uhlenbeck}} 
+This monograph provides a detailed exposition of Uhlenbeck compactness, focusing on its applications in gauge theory. Wehrheim rigorously develops the compactness theorems for connections with bounded curvature and explores their implications for the structure and analysis of moduli spaces in gauge theory.
+
+
+\vspace{1cm}
+
+\subsection{Important Results} 
+
+
+
+\subsubsection{Hong \& Tian: Asymptotical Behaviour of the Yang-Mills Flow and Singular Yang-Mills Connections \cite{hongtian2004yangmills}} 
+This paper investigates the asymptotic behavior of the Yang-Mills flow on vector bundles over compact manifolds. Key results include the convergence properties of the flow in the presence of singularities and the characterization of singular Yang-Mills connections, which arise as limits of the flow.
+
+
+\begin{theorem}[Theorem A.]
+    Let $E$ be a vector bundle over a compact Riemmanian manifold $M$. Let A be a global smooth solution of the Yang-Mills flow (1.3) in $M \times[0, \infty)$ with smooth initial value $A_0$. Then there exists a sequence $\left\{t_i\right\}$ such that, as $t_i \rightarrow \infty$, $A\left(x, t_i\right)$ converges, modulo gauge transformations, to a Yang-Mills connection $A$ in smooth topology outside a closed set $\Sigma$. Moreover, the set $\Sigma$ is $(m-4)$-rectifiable.
+\end{theorem}
+
+
+
+\subsubsection{Sedlacek: A Direct Method for Minimizing the Yang-Mills Functional over Four-Dimensional Manifolds \cite{sedlacek1982direct}} 
+This paper develops a direct variational method to minimize the Yang-Mills functional on four-dimensional manifolds. Key results include the existence of minimizing connections and their regularity, along with an analysis of the role of singularities in the variational approach.
+
+
+\subsubsection{Bourguignon \& Lawson: Stability and Isolation Phenomena for Yang-Mills Fields \cite{bourguignon1981stability}} 
+This paper explores the stability and isolation phenomena of Yang-Mills fields on spheres and other homogeneous spaces. Key results include the proof that weakly stable Yang-Mills fields on \( S^4 \) with groups \( SU(2) \), \( SU(3) \), or \( U(2) \) must be self-dual or anti-self-dual. The study also establishes gap phenomena, showing explicit neighborhoods around minimal Yang-Mills fields that contain no other solutions.
+
+
+\subsubsection{Stern: Geometry of Minimal Energy Yang-Mills Connections \cite{stern2010minimal}}
+This paper investigates the geometry of energy-minimizing Yang-Mills connections on various classes of manifolds, such as compact homogeneous 4-manifolds, Calabi-Yau 3-folds, and 3-dimensional manifolds with nonnegative Ricci curvature. Key results include conditions under which such connections decompose into self-dual and anti-self-dual components.
+
+
+\vspace{1cm}
+
+\subsection{Yang-Mills Boundary Problem}
+
+
+\subsubsection{Marini: Dirichlet and Neumann Boundary Value Problems for Yang-Mills Connections \cite{marini1992boundary}} 
+This paper studies boundary value problems for Yang-Mills connections, focusing on the Dirichlet and Neumann conditions. Key results include the existence and regularity of solutions in bounded domains and the role of boundary conditions in the analysis of Yang-Mills equations.
+
+\begin{romanenum}[Notes]
+    \item Clear and detailed elaboration (formulation) on Dirichlet-Problem 
+    \item Variational-Calculus-Structure: a) Existence of weak-limiting Connection b) Interior Regularity c) Boundary Regularity
+    \item Uses Good-Gauge-Theorem (Theorem 2.1 in \cite{uhlenbeck1982connections}) for the Interior and argues analogue to \cite{sedlacek1982direct} for Existence-Theory (Direct Minimization Method)
+\end{romanenum}
+
+{\small
+\begin{theorem}[Theorem 3.6.]
+    Let $\left\{A_i\right\}$ be a sequence of $L_1^2$ connections on fiber bundles $P_i \rightarrow M$ with prescribed smooth tangential boundary components $\left.\left(A_i\right)_\tau\right|_{\partial M} \equiv$ $a_\tau$, which also minimizes the energy functional, i.e., $\mathscr{I}_{\mathcal{M}} .\left(A_i\right) \rightarrow m\left(a_\tau\right)$. Then there exists a collection of neighborhoods $\left\{U_\alpha\right\}$ covering $M$ except at most a finite number of points $\left\{x_1, x_2, \ldots, x_k\right\}$ and trivializations $\sigma_\alpha(i)$, such that a subsequence can be found that admits a weak limit in $L_1^2$, on each $U_\alpha$, called $A_\alpha$. The collection $\left\{A_\alpha\right\}$ makes a connection $A_{\infty}$ on a bundle over $M-\left\{x_1, \ldots, x_k\right\}$, with transition functions in $L_2^2$. This connection solves the Dirichlet problem, as defined in Section 2.2, with boundary data $\hat{a}_\tau$, gauge equivalent to $a_\tau$, via a smooth gauge transformation. The connection $A_{\infty}$ satisfies $(\mathbf{a}) \div(\mathrm{c})$ of Theorem 3.2.
+\end{theorem}
+
+\begin{theorem}[Theorem 4.5.]
+    If $A \in L_1^2(U)$ is a solution of the Dirichlet boundary value problem on $U=\left\{x \in U: x^n \geqq 0\right\}$,
+    $$
+    \mathscr{D}: \begin{cases}D^* F(A)=0 & \text { on } U \\ A_\tau \equiv \hat{a}_\tau & \text { on } \partial_1 U,\end{cases}
+    $$
+    with smooth boundary data, and satisfies the good gauge equations (a) $\div$ (c) of Theorem 3.2, then $A$ is smooth in $U$ including the boundary $\partial_1(U)$.
+\end{theorem}
+}
+
+\subsubsection{Isobe: Topological and Analytical Properties of Sobolev Bundles, I: The Critical Case \cite{isobe2012sobolev}} 
+This paper investigates the topological and analytical properties of Sobolev bundles in the critical case. Key results include the classification of Sobolev bundles under gauge equivalence and an analysis of compactness and continuity properties crucial for variational problems in gauge theory.
+
+
+\subsubsection{Wehrheim: Energy Quantization and Mean Value Inequalities for Nonlinear Boundary Value Problems \cite{wehrheim2005energy}} 
+This paper presents a unified framework for mean value inequalities for energy densities of solutions to nonlinear PDEs, including those with boundary conditions. Wehrheim introduces a generalized energy quantization principle, demonstrating that for sequences of solutions with bounded energy, the energy can only concentrate at finitely many points. This result is applied to various contexts, such as Yang–Mills connections and pseudoholomorphic curves, extending compactness results to settings involving nonlinear bounds on the Laplacian and normal derivatives.
+
+{\small
+Moreover, we equip $g$ with a $G$-invariant metric $\langle\cdot, \cdot\rangle$ and let $\mathcal{U}\subset \mathbb{H}^4$ be equipped with any Riemannian metric. The covariant derivative $\nabla_A$ is given for sections $\xi: \mathcal{U} \rightarrow \mathfrak{g}$ by $\nabla_A \xi=\mathrm{d}_A \xi$, but it extends to differential forms by the Leibniz rule using the Levi-Civita connection on $\mathcal{U}$. The formal dual operators of $\nabla_A$ and $\mathrm{d}_A$ are denoted by $\nabla_A^*$ and by $\mathrm{d}_A^*: \Omega^{k+1}(\mathcal{U}, \mathfrak{g}) \rightarrow \Omega^k(\mathcal{U}, \mathfrak{g})$.
+
+\begin{lemma}[Lemma A.2.]
+Consider a Yang-Mills connection $A \in \Omega^1(\mathcal{U}, \mathfrak{g})$,
+$$
+\mathrm{d}_A^* F_A=0, \quad * F_A l_{\partial H^4}=0
+$$
+Its energy density $e(A)=\left|F_A\right|^2: \mathcal{U} \rightarrow[0, \infty)$ satisfies
+$$
+\Delta e \leq C e+c e^{3 / 2},\left.\quad \quad \frac{\partial}{\partial v}\right|_{\partial \mathrm{H}^4} e \leq B e
+$$
+with constants $B, c, C$ that only depend on the metric on $\mathcal{U}$.
+\end{lemma} 
+}
+
+\vspace{1cm}
+
+\subsection{Yang-Mills Plateau Problem}
+
+
+
+\subsubsection{Rivière: The Variations of the Yang-Mills Lagrangian \cite{riviere2015yangmills}} 
+This work addresses the Yang-Mills Plateau problem, a variational problem for gauge fields that minimizes the Yang-Mills energy functional:
+$$
+\text{YM}(A) = \int_{B^m} |dA + A \wedge A|^2 \, dx^m
+$$
+under prescribed boundary data. Rivière develops a rigorous framework to handle challenges such as gauge invariance and the lack of coercivity. Key results include the existence of minimizers, regularity theorems ensuring smooth solutions except at a singular set, and a detailed study of the role of Coulomb gauges in resolving gauge ambiguities. This work highlights the geometric and analytical subtleties of the Yang-Mills energy in both subcritical and critical dimensions.
+
+
+\subsubsection{Petrache \& Rivière: The Resolution of the Yang-Mills Plateau Problem in Super-Critical Dimensions \cite{petrache2016yangmills}} 
+This paper addresses the Yang-Mills Plateau problem in dimensions \(n \geq 5\), developing a function space analogous to integral currents for formulating the problem in higher dimensions. Key results include the existence of weak solutions in these dimensions, optimal regularity for minimizers, and a Coulomb gauge extraction theorem for weak curvatures with small Yang-Mills density. The authors also demonstrate that minimizers exhibit isolated singularities, extending the classical theory to super-critical settings.
+
+
+\subsubsection{Petrache: Notes on a Slice Distance for Singular \(L^p\)-Bundles \cite{petrache2014slicedistance}} 
+This paper introduces a novel slice distance for weak \(L^p\)-bundles, providing a robust framework for minimizing problems involving weak curvatures with boundary constraints. Key results include a closure theorem for weak \(L^p\)-curvatures under sequential convergence and the definition of a boundary trace that remains stable under weak convergence. Applications include variational problems in supercritical dimensions and the characterization of singularities in weak bundles.
+
+
+
+
+\vspace{1cm}
+
+
+
+
+
+
+
+
+\subsection{Yang-Mills and Moduli-Spaces}
+
+\subsubsection{Hitchin: The Moduli Space of Special Lagrangian Submanifolds \cite{hitchin1997moduli}} 
+This paper explores the geometry of the moduli space of special Lagrangian submanifolds in Calabi-Yau manifolds. Hitchin proves that the moduli space has the local structure of a Lagrangian submanifold within a symplectic vector space and discusses its Riemannian metric derived from harmonic forms. Connections are drawn to mirror symmetry, emphasizing the moduli space's potential as a "special" Lagrangian structure. The work is based on deformation theory by McLean and contributions by Strominger, Yau, and Zaslow.
+
+
+
+
+\subsubsection{Donaldson \& Kronheimer: Yang-Mills Moduli Spaces \cite{donaldson1990geometry}} 
+Chapter 4 of this seminal book focuses on the structure and properties of Yang-Mills moduli spaces over four-manifolds. Key topics include examples of moduli spaces, the analytical foundations such as compactness theorems and transversality, and the compactification of moduli spaces, which is critical for understanding the boundary behavior of moduli spaces. This chapter provides the analytical and geometric tools to study the topology of four-manifolds using Yang-Mills theory.
+
+\subsubsection{Freed \& Uhlenbeck: Instantons and Four-Manifolds \cite{freed1984instantons}} 
+This book provides a foundational introduction to the theory of instantons on four-dimensional manifolds. Key results include the classification of self-dual solutions to the Yang-Mills equations and their applications to the topology of four-manifolds, particularly in the context of Donaldson theory.
+
+
+
+
+\vspace{1cm}
+
+
+\subsection{Volume of Moduli-Space}
+
+
+
+
+
+
+\subsection{Yang-Mills Gradient Flow}
+
+\subsubsection{Råde: On the Yang-Mills Heat Equation in Two and Three Dimensions \cite{rade1992heat}} 
+This paper studies the Yang-Mills heat equation in two and three dimensions, focusing on the existence, uniqueness, and regularity of solutions. Råde provides a detailed analysis of the gradient flow associated with the Yang-Mills functional and establishes convergence to critical points. The work includes compactness results for the heat flow in dimensions two and three and examines its implications for the structure of moduli spaces.
+
+\subsubsection{Feehan: Global Existence and Convergence of Solutions to Gradient Systems and Applications to Yang-Mills Gradient Flow \cite{feehan2016gradient}} 
+This monograph develops a comprehensive framework for studying the global existence and convergence of solutions to gradient systems in Banach spaces, with a focus on applications to Yang-Mills gradient flow over closed Riemannian manifolds. Key contributions include a detailed analysis of the Lojasiewicz-Simon gradient inequality, energy quantization phenomena, and convergence rates for Yang-Mills gradient flow, especially in the critical and super-critical dimensions. The work unifies various techniques in nonlinear analysis and geometric analysis, providing new tools to address singularities and bubbling phenomena in gradient flows.
+
+
+\subsubsection{Feehan: Optimal \L{}ojasiewicz–Simon Inequalities and Morse–Bott Yang–Mills Energy Functions \cite{feehan2020lojasiewicz}} 
+This paper extends the theory of \L{}ojasiewicz–Simon gradient inequalities to abstract Morse–Bott functions on Banach manifolds, with applications to Yang–Mills and self-dual Yang–Mills energy functions. Key results include the establishment of optimal gradient inequalities (with exponent \(1/2\)) and proofs of the Morse–Bott properties of the Yang–Mills energy function near critical points, including anti-self-dual connections and flat connections. The work provides significant tools for analyzing the global convergence and stability of gradient flows in gauge theory.
+
+\subsubsection{Feehan: Morse Theory for the Yang-Mills Energy Function Near Flat Connections \cite{feehan2024morse}} 
+This monograph develops a detailed Morse-theoretic framework for analyzing the Yang-Mills energy function near flat connections on closed Riemannian manifolds. Key results include refinements to Uhlenbeck's weak compactness theorem, the introduction of a \L{}ojasiewicz distance inequality, and the proof of an energy gap for Yang-Mills connections. The study also provides insights into the deformation retraction properties of moduli spaces and the convergence of Yang-Mills gradient flows, with applications to the structure of moduli spaces of flat connections.
+
+
+\subsubsection{Feehan \& Maridakis: \L{}ojasiewicz–Simon Gradient Inequalities for Coupled Yang–Mills Energy Functions \cite{feehan2019lojasiewicz}} 
+This paper establishes \L{}ojasiewicz–Simon gradient inequalities for a broad class of coupled Yang–Mills energy functions, extending the classical results to include boson and fermion coupled energy systems. Key contributions include the derivation of gradient inequalities for various physical models, such as Yang–Mills–Higgs and Seiberg–Witten energy functions, with applications to gradient flows, energy gaps, and convergence analysis in gauge theory.
+
+
+
+\subsubsection{Janner \& Swoboda: Elliptic Yang–Mills Flow Theory \cite{janner2013elliptic}} 
+This work establishes a new framework for studying the Morse homology of the Yang–Mills functional, introducing an elliptic variant of the classical parabolic gradient flow. The authors define a gauge-invariant functional \( J \) and show that its \( L^2 \)-gradient flow leads to a novel system of elliptic PDEs. Key results include the analysis of moduli spaces of solutions, the construction of an elliptic Yang–Mills Morse homology, and a conjectural comparison with classical parabolic Yang–Mills Morse homology.
+
+
+\subsubsection{(!) Swoboda: Morse Homology for the Yang–Mills Gradient Flow \cite{swoboda2018morse}} 
+This work introduces a Morse homology framework for the Yang–Mills gradient flow on connections over a closed Riemann surface. Key contributions include the construction of a Morse chain complex using Yang–Mills connections as generators, a boundary operator defined via counting elements in moduli spaces of gradient flow lines, and a full analytical treatment of the gradient flow including Fredholm theory and transversality.
+
+{\small
+We introduce some further notation and recall several results from $[5,18,19]$ concerning the set of critical points of the unperturbed Yang-Mills functional $\mathcal{Y} \mathcal{M}$. Let
+$$
+\operatorname{crit}(\mathcal{Y} \mathcal{M}):=\left\{A \in \mathcal{A}^{1, p}(P) \mid d_A^* F_A=0\right\}
+$$
+denote the set of critical points of $\mathcal{Y} \mathcal{M}$, the equation $d_A^* F_A=0$ being understood in the weak sense. Similarly, the notation $\operatorname{crit}\left(\mathcal{Y} \mathcal{M}^{\mathcal{V}}\right)$ refers to the set of critical points of the perturbed Yang-Mills functional. We let $\mathcal{C R}$ denote the set of connected components of $\operatorname{crit}(\mathcal{Y} \mathcal{M})$. The group $\mathcal{G}_0^{2, p}(P)$ of based gauge transformations of class $W^{2, p}$ acts freely on each $\mathcal{C} \in \mathcal{C R}$. The quotient $\mathcal{C} / \mathcal{G}_0^{2, p}(P)$ is a finite-dimensional compact smooth manifold, cf. [18, Section 2]. Below a given level set $a>0$ there exist at most finitely many critical manifolds as the following proposition shows.}
+
+
+\subsubsection{Janner: Morse Homology of the Loop Space on the Moduli Space of Flat Connections and Yang-Mills Theory \cite{janner2010morse}} 
+This dissertation explores the relationship between Morse homology on the loop space of the moduli space of flat connections and Yang-Mills theory. Key results include the construction of a map between perturbed geodesics and perturbed Yang-Mills connections, proving a bijective relationship between their critical points and gradient flows. The work extends Morse homology to include $\varepsilon$-dependent Yang-Mills flows, establishing an isomorphism between the bounded Morse homologies of loop spaces and moduli spaces of connections under small perturbations.
+
+
+
+
+\vspace{1cm}
+
+\subsection{Yang-Mill, Palais Smale Conditions and Morse Theory on $\infty$-dim Manifolds}
+
+\subsubsection{Chang: Infinite Dimensional Morse Theory and Multiple Solution Problems \cite{chang1993morse}} 
+This monograph introduces and develops infinite-dimensional Morse theory as a tool for addressing critical point theory and multiple solution problems in nonlinear analysis. Key results include extensions of classical Morse theory to infinite-dimensional Banach and Hilbert manifolds, critical group definitions for isolated critical points, and the application of minimax principles. The book also explores connections with degree theory, Ljusternik-Schnirelman theory, and variational inequalities, providing a unified framework for studying semilinear elliptic equations, Hamiltonian systems, and geometric variational problems.
+
+
+\subsubsection{Palais: Lusternik-Schnirelman Theory on Banach Manifolds \cite{palais1966lusternik}} 
+This foundational paper extends the Lusternik-Schnirelman theory to Banach manifolds. Palais provides key existence theorems for critical points of smooth functions, including extensions of Morse theory to infinite-dimensional settings. The work emphasizes the interplay between topological and analytical tools, including the use of pseudo-gradient vector fields and Finsler structures, to prove critical point results and explore applications in the calculus of variations.
+
+
+\subsubsection{Katagiri: On the Existence of Yang-Mills Connections by Conformal Changes in Higher Dimensions \cite{katagiri1994existence}} 
+This paper establishes the existence of Yang-Mills connections on principal bundles over higher-dimensional Riemannian manifolds (\(n \geq 5\)) under conformal changes of the metric. Katagiri proves that for any smooth principal \(G\)-bundle, there exists a conformally equivalent metric such that a connection on the bundle is Yang-Mills with respect to the new metric. The work leverages techniques from the theory of harmonic maps and Palais-Smale conditions to establish the result.
+
+
+\subsubsection{Hong \& Schabrun: The Energy Identity for a Sequence of Yang-Mills \(\alpha\)-Connections \cite{hong2014energy}} 
+This paper establishes an energy identity for Yang-Mills \(\alpha\)-connections as \(\alpha \to 1\). The authors demonstrate that the Yang-Mills \(\alpha\)-functional satisfies the Palais-Smale condition, ensuring the existence of critical points called Yang-Mills \(\alpha\)-connections. As \(\alpha\) approaches 1, the sequence of \(\alpha\)-connections converges, up to gauge transformations, to a Yang-Mills connection away from a finite number of singularities. Key results include a bubble-neck decomposition and a complete energy identity, which is further applied to the Yang-Mills flow at the maximal existence time.
+
+
+\subsubsection{Huang: The Analysis of Inhomogeneous Yang–Mills Connections on Closed Riemannian Manifolds \cite{huang2020inhomogeneous}} 
+This paper studies inhomogeneous Yang–Mills connections on closed Riemannian manifolds, focusing on the existence, regularity, and compactness of solutions to the inhomogeneous Yang–Mills equations. Key results include the extension of classical compactness theorems and an analysis of the behavior of connections under energy bounds and inhomogeneous terms.
+
+
+\subsubsection{Råde: Compactness Theorems for Invariant Connections \cite{rade2000compactness}} 
+This paper generalizes compactness theorems for Yang-Mills connections, focusing on invariant connections under group actions on compact manifolds. Råde introduces new results on the Palais-Smale Condition C for the Yang-Mills functional, proving weak and strong conditions for invariant Yang-Mills connections in dimensions where the orbits of the group action have codimension \(\leq 3\). The work extends prior results by Parker and provides sufficient conditions for irreducibility and finiteness of preimages under the projection map of invariant connections.
+
+
+
+\vspace{1cm}
+
+\subsection{Yang-Mills and Quermassintegrals}
+
+\subsubsection{Cabezas-Rivas \& Scheuer: The Quermassintegral Preserving Mean Curvature Flow in the Sphere \cite{cabezasrivas2022quermassintegral}} 
+This paper introduces a mean curvature flow with a global term for convex hypersurfaces in the sphere, designed to preserve any quermassintegral. The authors prove that starting from a strictly convex initial hypersurface, the flow exists for all times and converges smoothly to a geodesic sphere. This resolves issues with the volume-preserving mean curvature flow introduced by Huisken in 1987, which does not preserve convexity in the sphere. The study also includes classifications for solitons and constant curvature type equations in space forms, highlighting the geometric and analytical implications of the flow.
+
+
+
+
+
+
+\vspace{1cm}
+
+
+
+
+
+\section{More Exotic Literature}
+
+\subsection{Yang-Mills and Floer-Theory}
+
+
+\subsubsection{Atiyah \& Bott: The Yang-Mills Equations over Riemann Surfaces \cite{atiyah1983yangmills}} 
+This seminal paper analyzes the Yang-Mills equations in the context of Riemann surfaces, establishing connections between the equations and algebraic geometry. Key results include the identification of Yang-Mills connections with stable holomorphic bundles and the development of a Morse-theoretic framework to study the moduli space of connections.
+
+
+\subsubsection{Bott: Morse Theory Indomitable \cite{bott1988morse}} 
+This paper presents an elegant survey of Morse theory and its powerful applications in topology and geometry. Bott revisits classical results and highlights the versatility of Morse theory in modern mathematical contexts, including gauge theory and the study of moduli spaces.
+
+\subsubsection{Audin, Damian \& Erné: Morse Theory and Floer Homology \cite{audin2014morse}} 
+This comprehensive book introduces Morse theory and its extension to Floer homology. It covers the foundational concepts of critical point theory, gradient flows, and their applications to infinite-dimensional settings, providing a bridge to modern developments in symplectic geometry and topology.
+
+
+
+
+
+
+
+
+
+
+% Literaturverzeichnis
+\printbibliography
+
+\end{document}
