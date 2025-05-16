@@ -16,15 +16,16 @@ const itemStyle = {
 }
 
 export default function PlaygroundGrouped({ playground, setPlayground }) {
-  const sections = useMemo(() => {
-    const grouped = {}
-    for (const entry of playground) {
-      const key = entry.Section || '(keine Section)'
-      if (!grouped[key]) grouped[key] = []
-      grouped[key].push(entry)
-    }
-    return grouped
-  }, [playground])
+    const sections = useMemo(() => {
+        const grouped = {}
+        for (const entry of playground) {
+            const key = entry.Section?.trim() || '(keine Section)'
+            if (!grouped[key]) grouped[key] = []
+            grouped[key].push(entry)
+        }
+        return grouped
+        }, [playground])
+      
 
   const handleRenameSection = (oldName, newName) => {
     setPlayground(prev =>
@@ -88,9 +89,10 @@ export default function PlaygroundGrouped({ playground, setPlayground }) {
             title={section}
             itemIDs={entries.map(u => u.UnitID)}
             onRename={(newTitle) => {
+                const trimmedTitle = newTitle.trim()
                 setPlayground(prev =>
                 prev.map(unit =>
-                    unit.Section === section ? { ...unit, Section: newTitle } : unit
+                    unit.Section === section ? { ...unit, Section: trimmedTitle } : unit
                 )
                 )
             }}
