@@ -1,68 +1,65 @@
-// src/components/StructureEditor.jsx
-import { useState } from 'react'
-import { useDroppable, useDraggable } from '@dnd-kit/core'
+import {
+  DndContext,
+  useDroppable,
+  useSensor,
+  useSensors,
+  PointerSensor,
+} from '@dnd-kit/core'
+import {
+  SortableContext,
+  useSortable,
+  arrayMove,
+  verticalListSortingStrategy
+} from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
 
 export default function StructureEditor({ structure, setStructure }) {
-  const addSection = () => {
-    const name = prompt("Section-Name eingeben:")
-    if (!name?.trim()) return
-    const newSection = {
-      id: `sec-${Date.now()}`,
-      name: name.trim(),
-      subsections: []
-    }
-    setStructure(prev => [...prev, newSection])
-  }
-
-  const addSubsection = (sectionID) => {
-    const name = prompt("Subsection-Name eingeben:")
-    if (!name?.trim()) return
-    setStructure(prev =>
-      prev.map(sec =>
-        sec.id === sectionID
-          ? {
-              ...sec,
-              subsections: [
-                ...sec.subsections,
-                { id: `sub-${Date.now()}`, name: name.trim(), unitIDs: [] }
-              ]
-            }
-          : sec
-      )
-    )
-  }
+  const sensors = useSensors(useSensor(PointerSensor))
 
   const handleDragEnd = ({ active, over }) => {
     if (!active || !over) return
-  
-    const draggedID = active.id
-    const fromSubID = active.data?.current?.fromSubID
-    const toSubID = over.id
-  
-    if (!fromSubID || !toSubID) return
+
+    const activeId = active.id
+    const overId = over.id
+    const overSubID = over.data?.current?.subsectionId || overId
+
+    // Externe Unit aus Playground
+    if (activeId.startsWith('external__')) {
+      const unitID = activeId.replace('external__', '')
+      setStructure(prev =>
+        prev.map(section => ({
+          ...section,
+          subsections: section.subsections.map(sub =>
+            sub.id === overSubID && !sub.unitIDs.includes(unitID)
+              ? { ...sub, unitIDs: [...sub.unitIDs, unitID] }
+              : sub
+          )
+        }))
+      )
+      return
+    }
+
+    // Interner Move
+    const [fromSubID, unitID] = activeId.split('__')
+    const [toSubID, overUnitID] = overId.split('__')
+
     if (fromSubID === toSubID) {
-      // ✅ Reordering innerhalb derselben Subsection
       setStructure(prev =>
         prev.map(section => ({
           ...section,
           subsections: section.subsections.map(sub => {
             if (sub.id !== fromSubID) return sub
-  
-            const oldIndex = sub.unitIDs.indexOf(draggedID)
-            const newIndex = sub.unitIDs.indexOf(over.data?.current?.unitID)
-  
+            const oldIndex = sub.unitIDs.indexOf(unitID)
+            const newIndex = sub.unitIDs.indexOf(overUnitID)
             if (oldIndex < 0 || newIndex < 0 || oldIndex === newIndex) return sub
-  
             const reordered = [...sub.unitIDs]
             reordered.splice(oldIndex, 1)
-            reordered.splice(newIndex, 0, draggedID)
-  
+            reordered.splice(newIndex, 0, unitID)
             return { ...sub, unitIDs: reordered }
           })
         }))
       )
     } else {
-      // ✅ Verschieben zwischen Subsections
       setStructure(prev =>
         prev.map(section => ({
           ...section,
@@ -70,13 +67,13 @@ export default function StructureEditor({ structure, setStructure }) {
             if (sub.id === fromSubID) {
               return {
                 ...sub,
-                unitIDs: sub.unitIDs.filter(id => id !== draggedID)
+                unitIDs: sub.unitIDs.filter(id => id !== unitID)
               }
             }
-            if (sub.id === toSubID && !sub.unitIDs.includes(draggedID)) {
+            if (sub.id === toSubID && !sub.unitIDs.includes(unitID)) {
               return {
                 ...sub,
-                unitIDs: [...sub.unitIDs, draggedID]
+                unitIDs: [...sub.unitIDs, unitID]
               }
             }
             return sub
@@ -85,130 +82,99 @@ export default function StructureEditor({ structure, setStructure }) {
       )
     }
   }
-  
-
-  const handleRemoveUnit = (subID, uid) => {
-    setStructure(prev =>
-      prev.map(section => ({
-        ...section,
-        subsections: section.subsections.map(sub =>
-          sub.id === subID
-            ? { ...sub, unitIDs: sub.unitIDs.filter(id => id !== uid) }
-            : sub
-        )
-      }))
-    )
-  }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-      <button onClick={addSection}>➕ Neue Section</button>
+    <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        {structure.map(section => (
+          <div key={section.id} style={styles.section}>
+            <strong>{section.name}</strong>
+            {section.subsections.map(sub => (
+              <DroppableSubsection key={sub.id} subsection={sub} />
+            ))}
+          </div>
+        ))}
+      </div>
+    </DndContext>
+  )
+}
 
-      {structure.map(section => (
-        <div
-          key={section.id}
-          style={{
-            border: '1px solid #555',
-            borderRadius: '8px',
-            padding: '1rem',
-            backgroundColor: '#1e1e1e'
-          }}
-        >
-          <strong>{section.name}</strong>
-          <button
-            style={{ marginLeft: '0.5rem', fontSize: '0.8rem' }}
-            onClick={() => addSubsection(section.id)}
-          >
-            ➕ Subsection
-          </button>
+function DroppableSubsection({ subsection }) {
+  const { setNodeRef, isOver } = useDroppable({
+    id: subsection.id,
+    data: { subsectionId: subsection.id }
+  })
 
-          {section.subsections.length === 0 ? (
-            <p style={{ color: '#777' }}>Keine Subsections</p>
-          ) : (
-            section.subsections.map(sub => (
-              <DroppableSubsection
-                key={sub.id}
-                subsection={sub}
-                onRemoveUnit={(uid) => handleRemoveUnit(sub.id, uid)}
-              />
-            ))
-          )}
-        </div>
-      ))}
+  return (
+    <div ref={setNodeRef} style={{
+      ...styles.subsection,
+      borderColor: isOver ? '#4fc3f7' : '#777'
+    }}>
+      <strong>{subsection.name}</strong>
+      <SortableContext
+        items={subsection.unitIDs.map(uid => `${subsection.id}__${uid}`)}
+        strategy={verticalListSortingStrategy}
+      >
+        <ul style={styles.ul}>
+          {subsection.unitIDs.map(uid => (
+            <SortableUnit
+              key={uid}
+              id={`${subsection.id}__${uid}`}
+              uid={uid}
+            />
+          ))}
+        </ul>
+      </SortableContext>
     </div>
   )
 }
 
-// 🔻 Subsection mit Dropzone
-function DroppableSubsection({ subsection, onRemoveUnit }) {
-  const { setNodeRef, isOver } = useDroppable({
-    id: subsection.id,
-    data: { type: 'subsection', id: subsection.id }
-  })
+function SortableUnit({ id, uid }) {
+  const {
+    setNodeRef,
+    attributes,
+    listeners,
+    transform,
+    transition,
+    isDragging
+  } = useSortable({ id })
 
   const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+    display: 'flex',
+    justifyContent: 'space-between',
+    cursor: 'grab',
+    padding: '0.2rem 0'
+  }
+
+  return (
+    <li ref={setNodeRef} {...attributes} {...listeners} style={style}>
+      <span>{uid}</span>
+    </li>
+  )
+}
+
+const styles = {
+  section: {
+    border: '1px solid #555',
+    borderRadius: '8px',
+    padding: '1rem',
+    backgroundColor: '#1e1e1e'
+  },
+  subsection: {
     marginTop: '0.5rem',
     padding: '0.5rem',
-    border: isOver ? '2px dashed #4fc3f7' : '1px dashed #777',
+    border: '1px dashed #777',
     borderRadius: '4px',
     backgroundColor: '#2a2a2a',
     transition: '0.2s ease all'
+  },
+  ul: {
+    listStyle: 'none',
+    paddingLeft: 0,
+    marginTop: '0.5rem',
+    fontSize: '0.9rem'
   }
-
-  return (
-    <div ref={setNodeRef} style={style}>
-      <strong>{subsection.name}</strong>
-      <ul style={{ fontSize: '0.9rem', marginTop: '0.5rem', listStyle: 'none', paddingLeft: 0 }}>
-        {subsection.unitIDs.length === 0 ? (
-          <li style={{ color: '#888' }}>⏳ keine Units</li>
-        ) : (
-          subsection.unitIDs.map(uid => (
-            <DraggableUnit
-              key={uid}
-              uid={uid}
-              fromSubID={subsection.id}
-              onRemove={() => onRemoveUnit(uid)}
-            />
-          ))
-        )}
-      </ul>
-    </div>
-  )
-}
-
-// 🔻 Drag-fähige einzelne Unit
-function DraggableUnit({ uid, fromSubID, onRemove }) {
-  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
-    id: uid,
-    data: { type: 'unit', unitID: uid, fromSubID }
-  })  
-  return (
-    <li
-      ref={setNodeRef}
-      {...attributes}
-      {...listeners}
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        opacity: isDragging ? 0.5 : 1,
-        padding: '0.2rem 0',
-        cursor: 'grab',
-      }}
-    >
-      <span>{uid}</span>
-      <button
-        onClick={onRemove}
-        style={{
-          marginLeft: '1rem',
-          background: 'transparent',
-          border: 'none',
-          color: '#aaa',
-          cursor: 'pointer',
-        }}
-      >
-        ✕
-      </button>
-    </li>
-  )
 }

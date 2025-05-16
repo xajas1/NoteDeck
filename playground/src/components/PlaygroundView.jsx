@@ -15,8 +15,12 @@ export default function PlaygroundView({ playground, setPlayground }) {
 
 function DraggableUnit({ unit, onRemove }) {
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
-    id: unit.UnitID,
-    data: { type: 'unit', unitID: unit.UnitID }
+    id: `external__${unit.UnitID}`,
+    data: {
+      type: 'unit',
+      unitID: unit.UnitID,
+      from: 'external'
+    }
   })
 
   const style = {
@@ -32,13 +36,7 @@ function DraggableUnit({ unit, onRemove }) {
   }
 
   return (
-      <div
-            id={unit.UnitID}
-            ref={setNodeRef}
-            style={style}
-            {...attributes}
-            {...listeners}
-      >
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
       <span>{unit.UnitID}</span>
       <button
         onClick={() => onRemove(unit.UnitID)}
