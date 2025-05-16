@@ -12,6 +12,12 @@ CMD+,: Word wrap: on
 
 
 
+git add .
+git commit -m "Aktueller Arbeitsstand (Playground, Sidebar, Wrapper)"
+git push
+
+
+
 
 
 

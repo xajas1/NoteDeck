@@ -1,7 +1,8 @@
 import { DndContext, closestCenter } from '@dnd-kit/core'
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { useMemo } from 'react'
-import SortableItem from './SortableItem'
+import SortableItem from './SortableItemWrapper'
+
 
 export default function PlaygroundGrouped({ playground, setPlayground }) {
   const sections = useMemo(() => {
