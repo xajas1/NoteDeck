@@ -1,0 +1,909 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17. Titel und Autor
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\CustomHeading{Definition}{#1}{#2}}{}
+\newenvironment{PROP}[2]{\CustomHeading{Proposition}{#1}{#2}}{}
+\newenvironment{THEO}[2]{\CustomHeading{Theorem}{#1}{#2}}{}
+\newenvironment{LEM}[2]{\CustomHeading{Lemma}{#1}{#2}}{}
+\newenvironment{KORO}[2]{\CustomHeading{Corollar}{#1}{#2}}{}
+\newenvironment{REM}[2]{\CustomHeading{Remark}{#1}{#2}}{}
+\newenvironment{EXA}[2]{\CustomHeading{Example}{#1}{#2}}{}
+\newenvironment{STUD}[2]{\CustomHeading{Study}{#1}{#2}}{}
+\newenvironment{CONC}[2]{\CustomHeading{Concept}{#1}{#2}}{}
+
+\newenvironment{PROOF}
+  {\begin{proof}}%
+{\end{proof}}
+
+% --- 17. Titel und Autor ---
+\title{Homologische Algebra}
+\author{Tim Jaschik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+…
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\tableofcontents
+
+\pagebreak
+
+
+\section{Kategorien und Funktoren in HA}
+
+\subsection{Definition}
+
+\subsection{Example}
+
+\subsection{Study}
+
+
+
+\begin{STUD}{HA-1-01-22}{3 Grundbegriffe: Kat, Funk, naat Trafo}
+
+\end{STUD}
+
+\begin{STUD}{HA-1-01-23}{Von (kleinen) Funktorkategorien zur Kategorie der Komplexe in der Kategroei der Abelschen Gruppen}
+
+\end{STUD}
+
+
+
+
+
+
+
+\begin{EXA}{HA-1-01-2}{Exa Kategorien}
+
+\end{EXA}
+
+\begin{EXA}{HA-1-01-20}{Exa Kleine Funktorenkategorie: Diag / Seq }
+
+\end{EXA}
+
+\begin{EXA}{HA-1-01-5}{Exa Volle Unterkategorie}
+
+\end{EXA}
+
+\begin{EXA}{HA-1-01-7}{Hom-Funktor}
+
+\end{EXA}
+
+
+
+
+
+
+
+
+
+
+
+\begin{DEF}{HA-1-01-1}{Kategorie}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-01-10}{Weg in Kategorie}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-01-11}{Gelabelter Weg}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-01-12}{Einfacher Weg}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-01-13}{Kommutatives Diagramm}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-01-14}{Kontravariante Funktoren}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-01-15}{Isopmorphie in Kategorie}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-01-16}{Natürliche Transformation}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-01-17}{Natürlicher Isomorphismus}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-01-18}{Komposition von Natürlichen Transformationen}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-01-19}{(Kleine) Funktorenkategorie}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-01-21}{Komplex und Ketten-Abbildung}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-01-3}{Unterkategorie}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-01-4}{Volle Unterkategorie}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-01-6}{Funktor}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-01-8}{Sequenz in Kategorie}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-01-9}{Diagramm in Katagorie}
+
+\end{DEF}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Moduln in HA}
+
+\subsection{Definition}
+
+\subsection{Theorem}
+
+
+
+\begin{THEO}{HA-1-02-5}{ISO-Sätze}
+
+\end{THEO}
+
+
+
+
+
+\begin{DEF}{HA-1-02-1}{Links/Rechts Moduln}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-02-2}{Abelsche Gruppe}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-02-4}{Kern / Im / CoKern für R-Hom}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-02-6}{Freie R-Moduln}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-02-7}{Freie Abelsche Gruppe}
+
+\end{DEF}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Tensorprodukt in HA}
+
+
+
+
+\section{Abelsche Kategorien}
+
+\subsection{Definition}
+
+\subsection{Example}
+
+\subsection{Proposition}
+
+\subsection{Remark}
+
+\subsection{Study}
+
+
+
+\begin{STUD}{HA-1-04-20}{Herleitung abelscher Kategorien und additiver Funktoren als allg. Rahmen für Komplexe in abelschen Kategorien}
+
+\end{STUD}
+
+
+
+
+
+\begin{REM}{HA-1-04-15}{Exaktheit in abelschen Kategorien durch Subobjekt in Gadgete}
+
+\end{REM}
+
+
+
+
+
+\begin{PROP}{HA-1-04-17}{Funktorkategorie zu abelschen Kategorie ist abelsch}
+
+\end{PROP}
+
+\begin{PROP}{HA-1-04-8}{Beziehung Monic / Epic und ker / cokern in additiven Kategorien}
+
+\end{PROP}
+
+
+
+
+
+
+
+\begin{EXA}{HA-1-04-12}{Exa abelsche Kategorie: (Volle Unterkategorien von) Abelsche Gruppen }
+
+\end{EXA}
+
+\begin{EXA}{HA-1-04-14}{Exa Exakte Kategorie}
+
+\end{EXA}
+
+
+
+
+
+
+
+\begin{DEF}{HA-1-04-1}{Additive Kategorie}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-04-10}{Quotienten-Objekt in additiven Kategorien}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-04-11}{Abelsche Kategorie}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-04-13}{Exakte Kategorie}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-04-16}{Abelsche Unterkategorie}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-04-18}{Projektive Objekte in abelschen Kategorien}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-04-19}{Injektive Objekte in abelschen Kategorien}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-04-2}{Additiver Funktor von additiven Kategorien}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-04-3}{Direkte Summe in additiven Kategorien}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-04-4}{Monomorphismen in Kategorien}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-04-5}{Epimorphismen in Kategorien}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-04-6}{Monics / Epics in additiven Kategorien}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-04-7}{Ker / Coker in additiven Kategorien}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-04-9}{Subgadget von Objekten in additiven Katgeorien}
+
+\end{DEF}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Homologie Funktor in HA}
+
+\subsection{Definition}
+
+\subsection{Example}
+
+\subsection{Proposition}
+
+\subsection{Theorem}
+
+\subsection{Remark}
+
+\subsection{Study}
+
+
+
+\begin{STUD}{HA-1-05-26}{Einführung der Homologie-Funktoren}
+
+\end{STUD}
+
+\begin{STUD}{HA-1-05-27}{(Natürlicher) Zusammenhangs-Homomorphismus}
+
+\end{STUD}
+
+\begin{STUD}{HA-1-05-28}{Interpretation des Zusammenhangs-Isomorphismus via Arrow Kategorie}
+
+\end{STUD}
+
+\begin{STUD}{HA-1-05-29}{Was ist die Singuläre Homologie Theorie}
+
+\end{STUD}
+
+
+
+
+
+
+
+
+
+
+
+\begin{REM}{HA-1-05-1}{Exakte Sequenzen sind Komplexe}
+
+\end{REM}
+
+\begin{REM}{HA-1-05-18}{Interpretation des Zusammenhangs-Homomorphismus}
+
+\end{REM}
+
+\begin{REM}{HA-1-05-2}{Kurze Exakte Sequenzen zu Komplexen erweitern}
+
+\end{REM}
+
+\begin{REM}{HA-1-05-7}{Homologie als Abweichung von Exaktheit eines Komplexes}
+
+\end{REM}
+
+
+
+
+
+
+
+
+
+
+
+\begin{THEO}{HA-1-05-11}{Zu kurzen exakte Sequenz (K,KAbb) in abel. Kategorie der Komplexe existiert ein Zusammenhangs-Homomorphismus}
+
+\end{THEO}
+
+\begin{THEO}{HA-1-05-13}{Kurze Exakte Sequenz in Kategorie der Komplexe induziert lange exakte Homologie-Sequenz}
+
+\end{THEO}
+
+\begin{THEO}{HA-1-05-15}{Zusammenhangs-Homomorphismus zu kurzen exakten Sequenzen in Kategorie der Komplexe ist natürlich}
+
+\end{THEO}
+
+
+
+
+
+
+
+
+
+\begin{PROP}{HA-1-05-22}{Homotope Ketten Abbildungen induzieren gleiche Homologie Abbildungen}
+
+\end{PROP}
+
+\begin{PROP}{HA-1-05-25}{Kontrahierbare Komplexe sind azyklisch}
+
+\end{PROP}
+
+\begin{PROP}{HA-1-05-9}{n-te Homologie ist additiver Funktor}
+
+\end{PROP}
+
+
+
+
+
+
+
+
+
+\begin{EXA}{HA-1-05-20}{Exa Grad einer Abbildung zwischen Komplexen}
+
+\end{EXA}
+
+\begin{EXA}{HA-1-05-8}{Fundamentale Exakte Sequenzen für Komplexe: Zyklen Ränder und Homologie}
+
+\end{EXA}
+
+
+
+
+
+
+
+\begin{DEF}{HA-1-05-17}{Arrow Kategorie}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-05-19}{Grad einer Abbildung zwischen Komplexen}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-05-21}{Homotope Ketten Abbildungen (Null-Homotopie)}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-05-24}{Kontrahierbare Komplexe}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-05-3}{Sequenzen von Objekte}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-05-4}{Positive / Negative Komplexe}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-05-5}{Ketten / Zyklen / Ränder in Komplexen}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-05-6}{n-te Homologie in Komplexen}
+
+\end{DEF}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Komplexe in HA}
+
+\subsection{Definition}
+
+\subsection{Proposition}
+
+\subsection{Study}
+
+
+
+\begin{STUD}{HA-1-06-13}{Basics der allg. Komplexe in abelschen Kategorien und die Kategorie der Komplexe}
+
+\end{STUD}
+
+
+
+
+
+\begin{PROP}{HA-1-06-12}{Kettenabbildung in Quotienten Komplex durch natürliche Abbildung}
+
+\end{PROP}
+
+\begin{PROP}{HA-1-06-5}{Kategorie der Komplexe abelsch, falls Kategorie abelsch}
+
+\end{PROP}
+
+
+
+
+
+
+
+\begin{DEF}{HA-1-06-1}{Komplex in abelschen Kategorien}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-06-10}{Kurze Exakte Sequenzen von Komplexen und Ketten Abbildungen}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-06-11}{Quotienten Komplex}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-06-2}{Ketten Abbildung zwischen Komplexen in abelschen Kategorien}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-06-3}{Kategorie der Komplexe in abelschen Kategorien}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-06-4}{Unterkomplex in abelschen Kategorien}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-06-7}{Isomorphie in Kategorie der Komplexe}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-06-8}{Direkte Summe von Komplexen}
+
+\end{DEF}
+
+\begin{DEF}{HA-1-06-9}{Exaktheit von Sequenze von Komplexen und Ketten Abbildungen}
+
+\end{DEF}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Hilftslemma für Diagramme der HA}
+
+\subsection{Lemma}
+
+
+
+\begin{LEM}{HA-1-07-1}{Basics für Exaktheit von Sequenzen}
+
+\end{LEM}
+
+\begin{LEM}{HA-1-07-2}{Kurze Exakte Sequenzen Basics}
+
+\end{LEM}
+
+\begin{LEM}{HA-1-07-3}{Links/Rechts Vervollständigung von 03-03 Komm Exa}
+
+\end{LEM}
+
+\begin{LEM}{HA-1-07-4}{5-Lemma}
+
+\end{LEM}
+
+\begin{LEM}{HA-1-07-5}{030-030 vert ISO: oben exa gdw unten exa}
+
+\end{LEM}
+
+\begin{LEM}{HA-1-07-6}{3x3 Lemma}
+
+\end{LEM}
+
+\begin{LEM}{HA-1-07-7}{Schlagstock Lemma}
+
+\end{LEM}
+
+\begin{LEM}{HA-1-07-8}{Schlangen Lemma}
+
+\end{LEM}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Exaktheit von Sequenzen}
+
+
+
+
+\section{Splitting}
+
+\subsection{Definition}
+
+\subsection{Lemma}
+
+
+
+\begin{LEM}{HA-1-10-2}{Splitting Cases}
+
+\end{LEM}
+
+
+
+
+
+\begin{DEF}{HA-1-10-1}{Splitting Basics}
+
+\end{DEF}
+
+
+
+
+
+
+\section{Kategorische Formulierung der Homologietheorie}
+
+\subsection{Definition}
+
+
+
+\begin{DEF}{HA-1-12-1}{Eilenberg-Stennrod Axiom}
+
+\end{DEF}
+
+
+
+
+
+
+\section{Homologie mit Koeffizienten}
+
+
+
+
+\pagebreak
+\printbibliography
+\end{document}

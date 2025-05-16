@@ -1,0 +1,3222 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17. Titel und Autor
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\CustomHeading{Definition}{#1}{#2}}{}
+\newenvironment{PROP}[2]{\CustomHeading{Proposition}{#1}{#2}}{}
+\newenvironment{THEO}[2]{\CustomHeading{Theorem}{#1}{#2}}{}
+\newenvironment{LEM}[2]{\CustomHeading{Lemma}{#1}{#2}}{}
+\newenvironment{KORO}[2]{\CustomHeading{Corollar}{#1}{#2}}{}
+\newenvironment{REM}[2]{\CustomHeading{Remark}{#1}{#2}}{}
+\newenvironment{EXA}[2]{\CustomHeading{Example}{#1}{#2}}{}
+\newenvironment{STUD}[2]{\CustomHeading{Study}{#1}{#2}}{}
+\newenvironment{CONC}[2]{\CustomHeading{Concept}{#1}{#2}}{}
+
+\newenvironment{PROOF}
+  {\begin{proof}}%
+{\end{proof}}
+
+
+% --- Unit Umgebung ---
+\usepackage{mdframed}
+\newmdenv[
+  linewidth=1pt,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftmargin=0cm,
+  rightmargin=0cm,
+  skipabove=10pt,
+  skipbelow=10pt,
+  innertopmargin=0.5\baselineskip,
+  innerbottommargin=0.5\baselineskip,
+  backgroundcolor=gray!10,
+  linecolor=gray
+]{unitbox}
+
+\newenvironment{unit}[1]
+  {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
+  {\end{unitbox}}
+
+
+% --- 17. Titel und Autor ---
+\title{Mein Titel}
+\author{Tim Jaschik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+Kurze Beschreibung …
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\tableofcontents
+
+\pagebreak
+
+\section*{$\S 1$ Einführung und Vorbereitungen}
+
+Ziel dieser Vorlesung ist eine Einführung in die Lösungstheorie einer Klasse von nichtlinearen partiellen Differentialgleichungen. Aus Zeitgründen müssen wir uns dabei im Wesentlichen auf semilineare elliptische Gleichungen zweiter Ordnung und zugehörige Randwertprobleme beschränken. In diesem Fall lassen sich die in der einführenden Vorlesung über Lineare Partielle Differentialgleichung erlernten Methoden und Prinzipien besonders effektiv anwenden. Dies betrifft insbesondere Maximumprinzipien, die Theorie der Sobolevräume und die Regularitätstheorie für schwache Lösungen der Poissongleichung.
+
+In dieser Vorlesung werden, exemplarisch für eine größere Klasse ähnlich behandelbarer Randwertprobleme, semilineare Dirichletprobleme der Form
+
+$$
+\left\{\begin{aligned}
+-\Delta u & =f(x, u) & & \text { in } \Omega \\
+u & =0 & & \text { auf } \partial \Omega
+\end{aligned}\right.
+$$
+
+im Mittelpunkt stehen. Hier und im Folgenden sei stets $\Omega \subset \mathbb{R}^{N}$ ein Gebiet, und $f: \Omega \times \mathbb{R} \rightarrow \mathbb{R}$ sei eine gegebene Funktion, welche im Folgenden "Nichtlinearität" genannt wird. Genauer steht der Term auf der rechten Seite von (*) für die auf $\Omega$ definierte Funktion
+
+$$
+x \mapsto f(x, u(x))
+$$
+
+wobei hier $u: \Omega \rightarrow \mathbb{R}$ die gesuchte Lösung ist, welche man in die Nichtlinearität $f$ einsetzen muss. Die Entwicklung und Wahl von Methoden zur Analyse der Lösungsmenge von $(*)$ hängt von speziellen Eigenschaften der Funktion $f$ ab. Ein typisches Beispiel ist z.B. die Nichtlinearität
+
+$$
+f(x, u)=a(x) u^{3}
+$$
+
+Hier werden wir z.B. sehen, dass die Gestalt der Lösungsmenge von $(*)$ entscheidend vom Vorzeichen der Funktion $a: \Omega \rightarrow \mathbb{R}$ und der Raumdimension $N$ abhängt.
+
+Wir wiederholen zunächst einige Ergebnisse zur Lösungstheorie der linearen inhomogenen Schrödingergleichung
+
+$$
+-\Delta u+q(x) u=f
+$$
+
+(ohne Beweis) und ergänzen einen Nachtrag hierzu (mit Beweis).
+
+Bezeichnung und Bemerkung: Für ein beschränktes Gebiet $\Omega \subset \mathbb{R}^{N}$ bezeichne $C_{0}(\Omega)$ im Folgenden den Raum der stetigen Funktion $f \in C(\bar{\Omega})$ mit $f \equiv 0$ auf $\partial \Omega$ (versehen mit $\left.\|\cdot\|_{\infty}\right)$.
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{unit}{A-1-3-3}
+Sei $\Omega \subset \mathbb{R}^{N}$ ein beschränktes Gebiet, $q \in L^{\infty}(\Omega)$ nichtnegativ und $f \in L^{2}(\Omega)$. Dann hat das Dirichletproblem
+$$
+-\Delta u+q(x) u=f \quad \text { in } \Omega, \quad u=0 \quad \text { auf } \partial \Omega
+$$
+eine eindeutig bestimmte schwache Lösung $u \in H_{0}^{1}(\Omega)$. Ist ferner $f \in L^{\infty}(\Omega)$, so gilt:
+
+(i) $u \in C^{1}(\Omega) \cap L^{\infty}(\Omega)$.//
+
+(ii) Ist $\Omega^{\prime} \subset \subset \Omega$, so existiert eine nur von $\|q\|_{\infty}$ und $\Omega^{\prime}$ abhängige Konstante $C_{1}>0 \mathrm{mit}$
+$$
+\|u\|_{C^{1}\left(\overline{\Omega^{\prime}}\right)} \leq C_{1}\left(\|u\|_{L^{\infty}(\Omega)}+\|f\|_{L^{\infty}(\Omega)}\right)
+$$
+
+(iii) Erfüllt $\Omega$ eine gleichmäßige äußere Sphärenbedingung, so gilt $u \in C_{0}(\Omega)$, und es existiert eine nur von $\|f\|_{L^{\infty}(\Omega)}$ abhängige Konstante $C_{2}$ mit
+$$
+|u(x)| \leq C_{2} \operatorname{dist}(x, \partial \Omega) \quad \text { für } x \in \Omega \text {. }
+$$
+
+Erinnerung: $u \in H_{0}^{1}(\Omega)$ heißt schwache Lösung von (1.1), falls
+$$
+a_{L}(u, \varphi):=\int_{\Omega}(\nabla u \nabla \varphi+q(x) u \varphi) d x=\int_{\Omega} f u d x \quad \text { für alle } \varphi \in H_{0}^{1}(\Omega) \text {. }
+$$
+Wir testen auf Veränderung.
+\end{unit}
+
+
+
+
+
+Beweis. Die eindeutige Existenz der schwachen Lösung folgt aus LPDGL 7.10. Man beachte hierzu, dass die Bedingung $q \geq 0$ die Koerzivität der zu $L=-\Delta+q$ gehörenden Dirichletform $a_{L}$ liefert.
+
+Die Eigenschaft (i) haben wir in LPDGL 10.16 notiert.
+
+Zum Beweis von (ii) bemerken wir zunächst, dass gemäß LPDGL 10.12 für $1<p<$ $\infty$ die Ungleichung
+
+$$
+\|u\|_{W^{2, p}\left(\Omega^{\prime}\right)} \leq C\left(\|u\|_{L^{1}(\Omega)}+\|f-q u\|_{L^{p}(\Omega)}\right) \leq \tilde{C}\left(\|u\|_{L^{\infty}(\Omega)}+\|f\|_{L^{\infty}}\right)
+$$
+
+mit Konstanten $C, \tilde{C}>0$ gilt (lokale $L^{p}$-Regularität).
+
+Wählt man speziell $p>N$, so erhält man die Abschätzung für $\|u\|_{C^{1}\left(\Omega^{\prime}\right)}$ nach Anpassung von $\Omega^{\prime}$ in (1.2) aus der in LPDGL 10.13 notierten lokalen Sobolev-Einbettung. Die Eigenschaft (iii) haben wir in LPDGL 10.22 bewiesen.
+
+
+\subsection*{Satz}
+
+Sei $\Omega \subset \mathbb{R}^{N}$ beschränkt mit gleichmäßiger äußerer Sphärenbedingung, und sei $q \in$ $L^{\infty}(\Omega)$ nichtnegativ. Für $f \in L^{\infty}(\Omega)$ sei ferner $K f:=u \in H_{0}^{1}(\Omega)$ die eindeutig bestimmte schwache Lösung des Problems
+
+$$
+-\Delta u+q(x) u=f \quad \text { in } \Omega, \quad u=0 \quad \text { auf } \partial \Omega
+$$
+
+Dann definiert $K$ einen kompakten linearen Operator von $L^{\infty}(\Omega)$ nach $C_{0}(\Omega)$.
+
+    
+Beweis. Gemäß 1.1 definiert $K$ einen linearen Operator von $L^{\infty}(\Omega)$ nach $C_{0}(\Omega)$. Es bleibt die Kompaktheit von $K$ zu zeigen. Sei dazu $\left(f_{n}\right)_{n} \subset L^{\infty}(\Omega)$ eine beschränkte Folge, und sei $u_{n}:=K f_{n}$ für $n \in \mathbb{N}$.
+
+Aus der Abschätzung in 1.1(iii) folgt dann, dass die Folge $\left(u_{n}\right)_{n}$ in $L^{\infty}(\Omega)$ beschränkt ist.
+
+Wir zeigen nun, dass die Folge $\left(u_{n}\right)_{n}$ auch gleichgradig stetig ist.
+
+Sei dazu $\varepsilon>0$, und sei im Folgenden $\Omega_{\delta}:=\{x \in \Omega: \operatorname{dist}(x, \partial \Omega)>\delta\}$ für $\delta>0$. Gemäß 1.1(iii) können wir $\delta>0$ so wählen, dass
+
+$$
+\left|u_{n}\right| \leq \frac{\varepsilon}{2} \quad \text { in } A_{\delta}:=\Omega \backslash \Omega_{3 \delta} \text { für alle } n \in \mathbb{N} \text { gilt. }
+$$
+
+Ferner existiert gemäß 1.1(iii) eine Konstante $C_{\delta}>0$ mit
+
+$$
+\left\|u_{n}\right\|_{C^{1}\left(\overline{\Omega_{\delta}}\right)} \leq C_{\delta} \quad \text { für alle } n \in \mathbb{N} \text {. }
+$$
+
+Sei nun $r:=\min \left\{\delta, \frac{\varepsilon}{C_{\delta}}\right\}$, und seien $x, y \in \Omega$ beliebig mit $|x-y|<r$. Sind $x, y \in A_{\delta}$, so folgt
+
+$$
+\left|u_{n}(x)-u_{n}(y)\right| \leq \varepsilon \quad \text { für alle } n \in \mathbb{N}
+$$
+
+wegen (1.3). Ist $x \notin A_{\delta}$ oder $y \notin A_{\delta}$, so ist $z:=\frac{x+y}{2} \in \Omega_{2 \delta}$ und $x, y \in U_{r}(z) \subset \Omega_{\delta}$. Es folgt dann ebenfalls
+
+$$
+\left|u_{n}(x)-u_{n}(y)\right| \leq\left\|u_{n}\right\|_{C^{1}\left(\Omega_{\delta}\right)}|x-y| \leq C_{\delta}|x-y| \leq C_{\delta} r \leq \varepsilon
+$$
+
+Wir erhalten für alle $n \in \mathbb{N}$ also $\left|u_{n}(x)-u_{n}(y)\right| \leq \varepsilon$. Somit folgt die gleichgradige Stetigkeit der Folge $\left(u_{n}\right)_{n}$. Der Satz von Arzela-Ascoli (vgl. LPDGL, Beweis von 3.7) liefert nun eine in $C_{0}(\Omega)$ konvergente Teilfolge von $\left(u_{n}\right)_{n}$. Dies zeigt die Kompaktheit von $K$.
+
+
+
+\section*{$\S 2$ Die Methode der monotonen Approximation für semilineare Dirichletprobleme}
+
+In diesem Kapitel werden wir erste Ergebnisse über die Existenz schwacher Lösungen semilinearer Dirichletprobleme der Form
+
+$$
+\left\{\begin{aligned}
+-\Delta u & =f(x, u) & & \text { in } \Omega \\
+u & =0 & & \text { auf } \partial \Omega
+\end{aligned}\right.
+$$
+
+herleiten. Hier und im Folgenden sei stets $\Omega \subset \mathbb{R}^{N}$ ein Gebiet. Zunüchst müssen wir klären, welche Arten von Nichtlinearitäten $f(x, u)$ zulässig sind.
+
+\subsection*{Definition}
+
+Eine Funktion $f: \Omega \times \mathbb{R} \rightarrow \mathbb{R}$ heißt Carathéodory-Funktion (kurz: $\mathcal{C}$-Funktion) auf $\Omega$, wenn gilt:
+
+$\left(\mathcal{C}_{1}\right) s \mapsto f(x, s)$ ist stetig für fast alle $x \in \Omega$;
+
+$\left(\mathcal{C}_{2}\right) x \mapsto f(x, s)$ ist messbar für alle $s \in \mathbb{R}$.
+
+\subsection*{Beispiel}
+
+Sei $w: \Omega \rightarrow \mathbb{R}$ messbar und $g: \mathbb{R} \rightarrow \mathbb{R}$ stetig. Dann ist
+
+$$
+f: \Omega \times \mathbb{R} \rightarrow \mathbb{R}, \quad f(x, t)=w(x) g(t)
+$$
+
+eine $\mathcal{C}$-Funktion auf $\Omega$.
+
+Im Folgenden bezeichne $\mathcal{M}(\Omega, \mathbb{R})$ die Menge der (Lebesgue-)messbaren Funktionen $\Omega \rightarrow \mathbb{R}$.
+
+\subsection*{Satz und Definition}
+
+Sei $f$ eine $\mathcal{C}$-Funktion auf $\Omega$, und sei $u \in \mathcal{M}(\Omega, \mathbb{R})$. Dann ist auch die Funktion
+
+$$
+N_{f}(u): \Omega \rightarrow \mathbb{R}, \quad N_{f}(u)(x)=f(x, u(x))
+$$
+
+messbar. Der Operator
+
+$$
+N_{f}: \mathcal{M}(\Omega, \mathbb{R}) \rightarrow \mathcal{M}(\Omega, \mathbb{R}), \quad u \mapsto N_{f}(u)
+$$
+
+heißt der zu f gehörige Substitutionsoperator (bzw. Nemitzki-Operator).
+
+Beweis. Übung.
+
+\subsection*{Satz}
+
+Sei $\Omega \subset \mathbb{R}^{N}$ beschränkt und $f: \bar{\Omega} \times \mathbb{R} \rightarrow \mathbb{R}$ stetig. Dann ist
+
+$$
+N_{f}:\left\{\begin{array}{l}
+L^{\infty}(\Omega) \rightarrow L^{\infty}(\Omega) \\
+C(\bar{\Omega}) \rightarrow C(\bar{\Omega})
+\end{array}\right.
+$$
+
+stetig. Ist ferner $f(x, 0)=0$ für $x \in \partial \Omega$, so ist auch $N_{f}: C_{0}(\Omega) \rightarrow C_{0}(\Omega)$ wohldefiniert und stetig.
+
+Beweis. Seien $u, u_{n} \in L^{\infty}(\Omega), n \in \mathbb{N}$ mit $u_{n} \rightarrow u$ in $L^{\infty}(\Omega)$ für $n \rightarrow \infty$. Dann existiert $C>0$ mit $\left\|u_{n}\right\|_{\infty} \leq C$ für alle $n \in \mathbb{N}$ und $\|u\|_{\infty} \leq C$. Sei nun $\varepsilon>0$. Da $f$ auf der kompakten Menge $\bar{\Omega} \times[-C, C]$ gleichmäßig stetig ist, existiert $\delta>0$ mit
+
+$$
+|f(x, r)-f(x, s)|<\varepsilon \quad \text { für alle } x \in \Omega \text { und } r, s \in[-C, C] \text { mit }|r-s|<\delta \text {. }
+$$
+
+Ferner existiert $n_{0} \in \mathbb{N}$ mit $\left\|u_{n}-u\right\|_{L^{\infty}}<\delta$ für $n \geq n_{0}$ und somit
+
+$$
+\left\|N_{f}\left(u_{n}\right)-N_{f}(u)\right\|_{\infty}=\sup _{x \in \Omega}\left|f\left(x, u_{n}(x)\right)-f(x, u(x))\right| \leq \varepsilon
+$$
+
+Dies zeigt: $N_{f}\left(u_{n}\right) \rightarrow N_{f}(u)$ bezüglich $\|\cdot\|_{\infty}$. Daraus folgen die Behauptungen des Satzes.
+
+\subsection*{Definition}
+
+Sei $\Omega \subset \mathbb{R}^{N}$ ein beschränktes Gebiet, und sei $f$ eine $\mathcal{C}$-Funktion auf $\Omega$. Wir betrachten die Gleichung
+
+$$
+-\Delta u=f(x, u) \quad \text { in } \Omega
+$$
+
+und wir nennen $u \in H^{1}(\Omega)$ eine
+
+(i) schwache Lösung von (2.1), wenn gilt:
+
+$$
+\int_{\Omega} \nabla u \nabla \varphi d x=\int_{\Omega} f(x, u(x)) \varphi(x) d x \quad \text { für alle } \varphi \in C_{0}^{\infty}(\Omega) \text {. }
+$$
+
+(ii) schwache Sublösung von (2.1), wenn gilt:
+
+$$
+\int_{\Omega} \nabla u \nabla \varphi d x \leq \int_{\Omega} f(x, u(x)) \varphi(x) d x \quad \text { für alle } \varphi \in C_{0}^{\infty}(\Omega), \varphi \geq 0 \text {. }
+$$
+(iii) schwache Superlösung von (2.1), wenn gilt:
+
+$$
+\int_{\Omega} \nabla u \nabla \varphi d x \geq \int_{\Omega} f(x, u(x)) \varphi(x) d x \quad \text { für alle } \varphi \in C_{0}^{\infty}(\Omega), \varphi \geq 0 \text {. }
+$$
+
+Hierbei sei jeweils die Existenz der Integrale auf der rechten Seite im Lebesgue-Sinne als Teil der definierenden Eigenschaft mit vorausgesetzt.
+
+Man beachte:
+
+(i) Ist $u \in C^{2}(\Omega), f: \Omega \times \mathbb{R} \rightarrow \mathbb{R}$ beschränkt und $-\Delta u(x) \leq f(x, u(x))$ für $x \in \Omega$, so ist $u$ eine schwache Sublösung von (2.1) (man nennt $u$ in diesem Fall auch eine starke Sublösung). Analoges gilt für Superlösungen.
+
+(ii) Ist
+
+$$
+N_{f}(u) \in \begin{cases}L^{\frac{2 N}{N+2}}(\Omega) & \text { im Fall } N \geq 3 \\ L^{p}(\Omega) \text { für ein } p>1 & \text { im Fall } N=2, \\ L^{1}(\Omega) & \text { im Fall } N=1\end{cases}
+$$
+
+so existieren die jeweiligen Integrale auf der rechten Seite sogar für Testfunktionen $\varphi \in H_{0}^{1}(\Omega)$, und durch Approximation erhält man die Gültigkeit der entsprechenden (Un-)gleichungen auch für diese Testfunktionen.
+
+\subsection*{Bemerkung (zu Schreibweisen)}
+
+(i) Eine schwache Lösung der Gleichung $-\Delta u=f(x, u)$ nennt man auch eine schwache Lösung des Problems
+
+$$
+\left\{\begin{aligned}
+-\Delta u & =f(x, u) & & \text { in } \Omega, \\
+u & =0 & & \text { auf } \partial \Omega,
+\end{aligned}\right.
+$$
+
+wenn $u \in H_{0}^{1}(\Omega)$ ist.
+
+(ii) Ist $u \in H^{1}(\Omega)$, so schreiben wir " $u \geq 0$ auf $\partial \Omega$ ", falls $u^{-} \in H_{0}^{1}(\Omega)$ ist. Analog schreiben wir " $u \leq 0$ auf $\partial \Omega$ ", falls $u^{+} \in H_{0}^{1}(\Omega)$ ist.
+
+Diese Schreibweise hatten wir bereits in LPDGL 10.18 eingeführt. Wir kommen nun zum Hauptsatz des Kapitels.
+
+\subsection*{Hauptsatz}
+
+Sei $\Omega \subset \mathbb{R}^{N}$ beschränkt, und seien $\bar{u}, \underline{u} \in H^{1}(\Omega)$ mit
+
+$$
+\underline{u} \leq \bar{u} \quad \text { in } \Omega, \quad \underline{u} \leq 0 \leq \bar{u} \quad \text { auf } \partial \Omega
+$$
+
+Sei ferner $f$ eine $\mathcal{C}$-Funktion auf $\Omega$ mit folgenden Eigenschaften:
+(i) $f$ ist auf der Menge
+
+$$
+\Omega(\underline{u}, \bar{u}):=\{(x, s): x \in \Omega, \underline{u}(x) \leq s \leq \bar{u}(x)\}
+$$
+
+beschränkt.
+
+(ii) $\bar{u}$ ist eine schwache Superlösung und $\underline{u}$ ist eine schwache Sublösung der Gleichung $-\Delta u=f(x, u)$ in $\Omega$.
+
+(iii) Es existiert $\lambda>0$ mit folgender Eigenschaft:
+
+(2.6) Für alle $x \in \Omega$ ist $s \mapsto f(x, s)+\lambda s$ monoton wachsend auf $[\underline{u}(x), \bar{u}(x)]$.
+
+Dann existiert eine schwache Lösung $u \in H_{0}^{1}(\Omega)$ des Dirichletproblems
+
+$$
+\left\{\begin{aligned}
+-\Delta u & =f(x, u) & & \text { in } \Omega, \\
+u & =0 & & \text { auf } \partial \Omega,
+\end{aligned}\right.
+$$
+
+mit $\underline{u} \leq u \leq \bar{u}$ in $\Omega$. Dabei ist $u \in C^{1}(\Omega) \cap L^{\infty}(\Omega)$.
+
+Ist zudem $f \in C_{l o c}^{\alpha}(\Omega \times \mathbb{R})$, so ist $u \in C^{2}(\Omega)$ und somit eine klassische Lösung von $(2.7)$.
+
+\subsection*{Beispiel}
+
+Sei $\Omega \subset \mathbb{R}^{N}$ ein beschränktes Gebiet.
+
+(i) Sei $g \in L^{\infty}(\Omega), g \geq 0$. Dann besitzt das Dirichletproblem
+
+$$
+\left\{\begin{aligned}
+-\Delta u & =g(x)-u^{p} & & \text { in } \Omega \\
+u & =0 & & \text { auf } \partial \Omega,
+\end{aligned}\right.
+$$
+
+für alle $p \geq 1$ eine Lösung $u \in H_{0}^{1}(\Omega)$ mit $0 \leq u \leq g_{\infty}:=\sqrt[p]{\|g\|_{L^{\infty}(\Omega)}}$. Tatsächlich ist nämlich $\underline{u} \equiv 0$ eine Sublösung und $\bar{u} \equiv g_{\infty}$ eine Superlösung der Gleichung $-\Delta u=g(x)-u^{p}$. Die restlichen Voraussetzungen von 2.7 erfüllt die $\mathcal{C}$-Funktion $(x, s) \mapsto g(x)-|s|^{p}$ offenbar.
+
+Man kann zeigen, dass (2.8) sogar genau eine nichtnegative Lösung $u$ besitzt (Übungsaufgabe, Blatt 1 ). Insbesondere ist $u \equiv 0$ genau dann, wenn $g \equiv 0$ ist.
+
+(ii) Sei $\mu>\lambda_{1}$, wobei $\lambda_{1}>0$ der erste Eigenwert des Dirichlet-Eigenwertproblems
+
+$$
+-\Delta \varphi=\lambda \varphi \quad \text { in } \Omega, \quad \varphi=0 \quad \text { on } \partial \Omega
+$$
+sei, vergleiche LPDGL 9.2. Dann existiert für jedes $p>1$ eine nichtnegative schwache Lösung $u \in H_{0}^{1}(\Omega) \backslash\{0\}$ des Dirichletproblems
+
+$$
+\left\{\begin{aligned}
+-\Delta u & =\mu\left(u-u^{p}\right) & & \text { in } \Omega \\
+u & =0 & & \text { auf } \partial \Omega,
+\end{aligned}\right.
+$$
+
+Um dies zu sehen, beachten wir zunächst, dass $\bar{u} \equiv 1$ offensichtlich eine schwache Superlösung der Gleichung $-\Delta u=\mu\left(u-u^{p}\right)$ ist. Ferner existiert gemäß LPDGL 9.5 und 10.16 eine eindeutige positive Dirichlet-Eigenfunktion $\varphi_{1} \in H_{0}^{1}(\Omega)$ von $-\Delta$ zum Eigenwert $\lambda_{1}$ mit $\left\|\varphi_{1}\right\|_{L^{\infty}(\Omega)}=1$.
+
+Wir setzen nun $\underline{u}:=\varepsilon \varphi_{1} \in H_{0}^{1}(\Omega)$, wobei $\varepsilon \in(0,1)$ mit $\varepsilon^{p-1}<1-\frac{\lambda_{1}}{\mu}$ gewählt sei. Dann ist
+
+$$
+\mu\left(\underline{u}-\underline{u}^{p}\right) \geq \mu \underline{u}\left(1-\varepsilon^{p-1}\right) \geq \lambda_{1} \underline{u}=-\Delta \underline{u} \quad \text { in } \Omega
+$$
+
+so dass $\underline{u}$ eine Sublösung der Gleichung $-\Delta u=\mu\left(u-u^{p}\right)$ ist. Die restlichen Voraussetzungen von 2.7 sind wiederum offenbar mit der $\mathcal{C}$-Funktion
+
+$$
+f: \Omega \times \mathbb{R} \rightarrow \mathbb{R}, \quad f(x, s)=\mu\left(s-|s|^{p}\right)
+$$
+
+erfüllt.
+
+\subsection*{Hilfssatz (schwaches Maximumsprinzip)}
+
+Sei $\Omega$ beschränkt, $q \in L^{\infty}(\Omega)$ nichtnegativ, und sei $u \in H^{1}(\Omega)$ eine schwache Sublösung der Gleichung $-\Delta u=-q(x) u$ in $\Omega$ mit $u \leq 0$ auf $\partial \Omega$. Dann ist $u \leq 0$ in $\Omega$.
+
+Dies ist eine Verallgemeinerung von LPDGL 10.19, da der Begriff einer schwachen Sublösung hier über Testen mit $C_{\infty}^{1}(\Omega)$ definiert ist.
+
+Beweis. Nach Voraussetzung gilt
+
+$$
+\int_{\Omega} \nabla u \nabla \varphi d x \leq-\int_{\Omega} q(x) u \varphi d x \quad \text { für alle } \varphi \in C_{0}^{\infty}(\Omega), \varphi \geq 0 \text {. }
+$$
+
+Da $u \in H^{1}(\Omega) \subset L^{2}(\Omega)$ gilt und somit die Abbildung
+
+$$
+H_{0}^{1}(\Omega) \rightarrow \mathbb{R}, \quad \varphi \mapsto \int_{\Omega} q(x) u \varphi d x
+$$
+
+stetig ist, folgt (2.10) auch für $\varphi \in H_{0}^{1}(\Omega)$ durch Approximation (vgl. die Bemerkung in 2.5).
+
+Eine Anwendung von (2.10) mit $\varphi=u^{+} \in H_{0}^{1}(\Omega)$ liefert
+
+$$
+\left\|\nabla u^{+}\right\|_{L^{2}(\Omega)}^{2}=\int_{\Omega} \nabla u \cdot \nabla u^{+} d x \leq-\int_{\Omega} q(x) u u^{+} d x=-\int_{\Omega} q(x)\left|u^{+}\right|^{2} d x \leq 0
+$$
+
+Es folgt $\nabla u^{+} \equiv 0$ und somit $u^{+} \equiv 0$ in $\Omega$ gemäß LPDGL 6.27 (PoincareUngleichung).
+
+\subsection*{Hilfssatz}
+
+Sei $u \in H^{1}(\Omega)$ und $u_{0} \in H_{0}^{1}(\Omega)$.
+
+i). Gilt $u \leq 0$ auf $\partial \Omega$, so ist auch $u+u_{0} \leq 0$ auf $\partial \Omega$;
+
+ii). Gilt $u \geq 0$ auf $\partial \Omega$, so ist auch $u+u_{0} \geq 0$ auf $\partial \Omega$.
+
+Beweis. Siehe LPDGL 10.21.
+
+Wir kommen nun zum Beweis des Hauptsatzes.
+
+Beweis von 2.7. Sei $\lambda>0$ mit der Eigenschaft (2.6) gewählt, und sei $g(x, s):=$ $f(x, s)+\lambda s$ für $x \in \Omega, s \in \mathbb{R}$. Wir setzen im Folgenden $u_{0}:=\underline{u}$ und definieren $u_{k} \in H_{0}^{1}(\Omega), k \in \mathbb{N}$ induktiv als die gemäß LPDGL 7.10 eindeutig existierende schwache Lösung $u \in H_{0}^{1}(\Omega)$ der Gleichung
+
+$$
+-\Delta u_{k}+\lambda u_{k}=N_{g}\left(u_{k-1}\right) \quad \text { in } \Omega \text {. }
+$$
+
+Hierzu müssen wir zeigen, dass $N_{g}\left(u_{k-1}\right) \in L^{2}(\Omega)$ liegt. Dies folgt induktiv aus der Bedingung (i) für $f$, denn wir beweisen per Induktion:
+
+$$
+\underline{u} \leq u_{k-1} \leq u_{k} \leq \bar{u} \quad \text { in } \Omega \text { für alle } k \in \mathbb{N} \text {. }
+$$
+
+Sei dazu zunächst $v:=u_{0}-u_{1}=\underline{u}-u_{1} \in H^{1}(\Omega)$. Nach Voraussetzung und 2.10 gilt dann $v \leq 0$ auf $\partial \Omega$, und ferner gilt
+
+$\int_{\Omega}(\nabla v \nabla \varphi+\lambda v \varphi) d x \leq \int\left(g(x, \underline{u}(x))-g\left(x, u_{0}(x)\right)\right) \varphi d x=0 \quad$ für $\varphi \in C_{c}^{\infty}(\Omega), \varphi \geq 0$.
+
+Mit 2.9, angewandt auf $q \equiv \lambda$, folgt $v \leq 0$ in $\Omega$, d.h. $u_{1} \geq u_{0}=\underline{u}$ in $\Omega$.
+
+Sei nun $w:=u_{1}-\bar{u} \in H^{1}(\Omega)$. Nach Voraussetzung und 2.10 gilt dann $w \leq 0$ auf $\partial \Omega$, und ferner gilt
+
+$\int_{\Omega}(\nabla w \nabla \varphi+\lambda w \varphi) d x \leq \int\left(g(x, \underline{u}(x))-g(x, \bar{u}(x)) \varphi d x \leq 0 \quad\right.$ für $\varphi \in C_{c}^{\infty}(\Omega), \varphi \geq 0$,
+
+wobei wir im letzten Schritt (2.6) verwendet haben. Mit 2.9 folgt $w \leq 0$ in $\Omega$, d.h. $u_{1} \leq \bar{u} \in \Omega$.
+
+Sei nun angenommen, dass die Ungleichungen in (2.11) für $k \in \mathbb{N}$ gelten. Für $v:=$ $u_{k}-u_{k+1} \in H_{0}^{1}(\Omega)$ gilt dann
+
+$\int_{\Omega}(\nabla v \nabla \varphi+\lambda v \varphi) d x=\int\left(g\left(x, u_{k-1}(x)\right)-g\left(x, u_{k}(x)\right)\right) \varphi d x \leq 0 \quad$ für $\varphi \in C_{c}^{\infty}(\Omega), \varphi \geq 0$,
+wobei wir im letzten Schritt (2.6) und die Induktionsannahme verwendet haben. Mit 2.9 folgt $v \geq 0$ in $\Omega$, d.h. $u_{k} \leq u_{k+1}$.
+
+Sei nun $w:=u_{k+1}-\bar{u} \in H^{1}(\Omega)$. Nach Voraussetzung und 2.10 gilt wiederum $w \leq 0$ auf $\partial \Omega$; ferner gilt
+
+$\int_{\Omega}(\nabla w \nabla \varphi+\lambda v \varphi) d x \leq \int\left(g\left(x, u_{k}(x)\right)-g(x, \bar{u}(x)) \varphi d x \leq 0 \quad\right.$ für $\varphi \in C_{c}^{\infty}(\Omega), \varphi \geq 0$.
+
+gemäß (2.6) und der Induktionsannahme. Mit 2.9 folgt $w \leq 0$ in $\Omega$, d.h. $u_{k+1} \leq \bar{u} \in$ $\Omega$.
+
+Somit ist (2.11) bewiesen, und aus (2.11) folgt die Existenz des punktweise Grenzwertes
+
+$$
+u(x):=\lim _{k \rightarrow \infty} u_{k}(x), \quad \text { wobei } \underline{u} \leq u \leq \bar{u} \text { in } \Omega \text { gilt. }
+$$
+
+Insbesondere ist $u \in L^{2}(\Omega)$, und der Satz von der dominierten Konvergenz liefert aufgrund der Bedingung (i) an $f$
+
+$$
+u_{k} \rightarrow u, \quad N_{g}\left(u_{k}\right) \rightarrow N_{g}(u) \quad \text { in } L^{2}(\Omega) \text {. }
+$$
+
+Für $k, l \in \mathbb{N}$ ist schließlich
+
+$$
+\begin{aligned}
+\left\|\nabla\left(u_{k}-u_{l}\right)\right\|_{L^{2}}^{2}+\lambda\left\|u_{k}-u_{l}\right\|_{L^{2}}^{2} & =\int_{\Omega}\left(g\left(x, u_{k-1}(x)\right)-g\left(x, u_{l-1}(x)\right)\right)\left[u_{k}(x)-u_{l}(x)\right] d x \\
+& \leq\left\|N_{g}\left(u_{k-1}\right)-N_{g}\left(u_{l-1}\right)\right\|_{L^{2}}\left\|u_{k}-u_{l}\right\|_{L^{2}},
+\end{aligned}
+$$
+
+und wegen (2.12) ist somit $\left(u_{k}\right)_{k}$ eine Cauchyfolge in $H_{0}^{1}(\Omega)$, welcher nichts anderes übrig bleibt, als in $H_{0}^{1}(\Omega)$ gegen $u$ zu konvergieren. Es folgt $u \in H_{0}^{1}(\Omega)$ und
+
+$$
+\begin{aligned}
+\int_{\Omega} \nabla u \nabla \varphi d x & =\lim _{k \rightarrow \infty} \int_{\Omega} \nabla u_{k} \nabla \varphi d x=\lim _{k \rightarrow \infty} \int_{\Omega}\left[N_{g}\left(u_{k-1}\right)-\lambda u_{k}\right] \varphi d x \\
+& =\int_{\Omega}\left[N_{g}(u)-\lambda u\right] \varphi d x=\int_{\Omega} N_{f}(u) \varphi d x \quad \text { für } \varphi \in C_{c}^{\infty}(\Omega) .
+\end{aligned}
+$$
+
+Somit ist $u$ eine schwache Lösung von (2.7), wie behauptet.
+
+Nach Voraussetzung (i) ist $N_{f}(u)$, d.h. die Funktion $x \mapsto f(x, u(x)$ ), zudem beschränkt auf $\Omega$. Somit folgt mit 1.1, angewandt auf $q \equiv 0$, die Regularitätseigenschaft $u \in C^{1}(\Omega) \cap L^{\infty}(\Omega)$. Ist schließlich $f \in C_{l o c}^{\alpha}(\Omega \times \mathbb{R})$, so ist $N_{f}(u) \in C_{\text {loc }}^{\alpha}(\Omega)$ (Übungsaufgabe, Blatt 2). In diesem Fall folgt dann $u \in C^{2}(\Omega)$ mit LPDGL 10.16(iv).
+
+\section*{$\S 3$ Fixpunktmethoden für semilineare Dirichletprobleme}
+
+\subsection*{Bemerkung}
+
+Im Folgenden wollen wir eine weitere Strategie zur Lösungen von semilinearen Dirichletproblemen diskutieren, welche ohne Monotoniebedingungen der Form (2.6) auskommt. Um diese Strategie zu motivieren, erinnern wir an den linearen Operator $K: L^{\infty}(\Omega) \rightarrow C_{0}(\Omega)$ aus Satz 1.2. Hier war $\Omega \subset \mathbb{R}^{N}$ ein beschränktes Gebiet, welches eine gleichmäßige äußere Sphärenbedingung erfüllt. Ferner war $q \in L^{\infty}(\Omega)$ mit $q \geq 0$ gegeben, und für $g \in L^{\infty}(\Omega)$ war $u:=K g$ als die eindeutige schwache Lösung $u \in H_{0}^{1}(\Omega)$ der Gleichung
+
+$$
+-\Delta u+q(x) u=g
+$$
+
+definiert. Sei nun $f: \bar{\Omega} \times \mathbb{R} \rightarrow \mathbb{R}$ stetig und $N_{f}: C(\bar{\Omega}) \rightarrow C(\bar{\Omega})$ der stetige Substitutionsoperator gemäß 2.4.
+
+Dann gilt: Genau dann ist $u \in H_{0}^{1}(\Omega) \cap C(\bar{\Omega})$ eine schwache Lösung des Dirichletproblems
+
+$$
+\left\{\begin{aligned}
+-\Delta u+q(x) u & =f(x, u) & & \text { in } \Omega, \\
+u & =0 & & \text { auf } \partial \Omega,
+\end{aligned}\right.
+$$
+
+wenn $u$ ein Fixpunkt der stetigen nichtlinearen Abbildung $A: K \circ N_{f}: C(\bar{\Omega}) \rightarrow C(\bar{\Omega})$ ist.
+
+Allgemein nennt man solche (nicht notwendig linearen) Abbildungen zwischen Banachräumen auch nichtlineare Operatoren.
+
+Die Abbildung $A$ ist hierbei aufgrund von 1.2 auch kompakt im Sinne der folgenden Definition. Daher liegt es nahe, die Existenz von Lösungen von (3.1) aus allgemeinen Existenzsätzen für nichtlineare kompakte Operatoren in Banachräumen zu folgern.
+
+\subsection*{Definition}
+
+Seien $E, F$ Banachräume über $\mathbb{R}$ und $M \subset E$. Eine Abbildung $A: M \rightarrow F$ heißt
+
+(i) beschränkt, wenn für jede beschränkte Teilmenge $Y \subset M$ die Menge $A(Y) \subset F$ beschränkt ist.
+(ii) kompakt, wenn für jede beschränkte Teilmenge $Y \subset M$ die Menge $A(Y) \subset F$ relativ kompakt ist.
+
+Dies ist genau dann der Fall, wenn für jede beschränkte Folge $\left(u_{n}\right)_{n} \subset M$ die Bildfolge $A\left(u_{n}\right)_{n} \subset F$ eine konvergente Teilfolge besitzt.
+
+\subsection*{Bemerkung}
+
+(i) Aus der Kompaktheit einer folgt im Allgemeinen nicht die Stetigkeit von $A$. Dies gilt nur bei linearen Operatoren.
+
+(ii) Seien $E, F$ und $M \subset E$ wie in 3.2, und sei $A: M \rightarrow F$ kompakt. Sei ferner $G$ ein weiterer Banachraum und $N \subset G$. Dann gilt:
+
+- Ist $B: F \rightarrow G$ stetig, so ist $B \circ A: M \rightarrow G$ kompakt.
+
+- Ist $B: N \rightarrow E$ beschränkt mit $B(N) \subset M$, so ist $A \circ B: N \rightarrow F$ kompakt.
+
+(iii) Ist $f: \bar{\Omega} \times \mathbb{R} \rightarrow \mathbb{R}$ stetig, so ist der zugehörige Substitutionsoperator als Abbildung $N_{f}: L^{\infty}(\Omega) \rightarrow L^{\infty}(\Omega)$ bzw. $N_{f}: C(\bar{\Omega}) \rightarrow C(\bar{\Omega})$ beschränkt. Ist nämlich $Y \subset L^{\infty}(\Omega)$ eine beschränkte Teilmenge und $r:=\sup _{u \in Y}\|u\|_{\infty}<\infty$, so ist aufgrund der Kompaktheit von $\bar{\Omega} \times[-r, r]$ auch
+
+$$
+s:=\sup |f|(\bar{\Omega} \times[-r, r])<\infty .
+$$
+
+Dies liefert $\left\|N_{f}(u)\right\|_{\infty} \leq s$ für alle $u \in Y$, und somit ist $N_{f}(Y)$ beschränkt. Es folgt nun aus (ii), dass der Operator $A$ aus 3.1 kompakt ist.
+
+\subsection*{Satz (Schauderscher Fixpunktsatz, 1. Version)}
+
+Sei $E$ ein $\mathbb{R}$-Banachraum, $X \subset E$ eine nichtleere, kompakte, konvexe Teilmenge, und $A: X \rightarrow X$ stetig. Dann hat $A$ einen Fixpunkt in $X$.
+
+Beweis. Folgt später.
+
+\subsection*{Hilfssatz}
+
+Sei $E$ ein $\mathbb{R}$-Banachraum und $Y \subset E$ relativ kompakt. Dann ist auch die konvexe Hülle $\operatorname{conv}(Y)$ von $Y$ relativ kompakt.
+
+Hier sei $\operatorname{conv}(Y)$ den Schnitt aller konvexen Teilmengen $C \subset E$ mit $Y \subset C$ ("die kleinste konvexe Menge, welche $Y$ enthält").
+
+Beweis. Wir verwenden folgende sehr nützliche äquivalente Charakterisierung der relativen Kompaktheit: Eine Teilmenge $M$ eines Banachraums $E$ ist genau dann relativ kompakt, wenn für jedes $\varepsilon>0$ eine endliche Menge $L \subset E$ existiert mit $M \subset U_{\varepsilon}(L)$, wobei
+
+$$
+U_{\varepsilon}(L):=\{x \in E: \operatorname{dist}(x, L)<\varepsilon\}
+$$
+
+sei. Ferner verwenden wir die folgende Charakterisierung von $\operatorname{conv}(Y)$ :
+
+$$
+\operatorname{conv}(Y):=\left\{\sum_{i=1}^{n} \lambda_{i} x_{i}: n \in \mathbb{N}, 0 \leq \lambda_{i} \leq 1, x_{i} \in Y, \sum_{i=1}^{n} \lambda_{i}=1\right\}
+$$
+
+Sei nun $\varepsilon>0$ beliebig, und sei $L \subset E$ endlich mit $Y \subset U_{\frac{\varepsilon}{2}}(L)$. Dann ist $\operatorname{conv}(L)$ beschränkt und in einem endlich-dimensionalen Teilraum von $E$ enthalten; somit also relativ kompakt. Es existiert also eine endliche Teilmenge $L^{\prime} \subset E$ mit $\operatorname{conv}(L) \subset$ $U_{\frac{\varepsilon}{2}}\left(L^{\prime}\right)$. Ferner sieht man leicht anhand von (3.2), dass $\operatorname{conv}(Y) \subset U_{\frac{\varepsilon}{2}}(\operatorname{conv}(L))$ ist. Es folgt
+
+$$
+\operatorname{conv}(Y) \subset U_{\frac{\varepsilon}{2}}\left(U_{\frac{\varepsilon}{2}}\left(L^{\prime}\right)\right) \subset U_{\varepsilon}\left(L^{\prime}\right)
+$$
+
+und damit ist $\operatorname{conv}(Y)$ relativ kompakt.
+
+\subsection*{Satz (Schauderscher Fixpunktsatz, 2. Version)}
+
+Sei $E$ ein $\mathbb{R}$-Banachraum, $Y \subset E$ eine nichtleere, konvexe und abgeschlossene Teilmenge. Sei ferner $A: Y \rightarrow Y$ stetig und derart, dass $A(Y)$ relativ kompakt in $E$ ist. Dann hat $A$ einen Fixpunkt in $Y$.
+
+Beweis. Sei $X:=\overline{\operatorname{conv}(A(Y))}$, dann ist $X \subset E$ kompakt (gemäß 3.5) und konvex. Ferner ist $X \subset Y$, da $Y$ abgeschlossen und konvex ist. Somit definiert $A: X \rightarrow X$ eine stetige Abbildung, und aus 3.4 folgt die Existenz eines Fixpunktes von $A$ in $X \subset Y$.
+
+\subsection*{Satz (Anwendung)}
+
+Sei $\Omega \subset \mathbb{R}^{N}$ beschränkt mit gleichmäßiger äußerer Sphärenbedingung, seien $a, b \in \mathbb{R}$, $a<0<b$, und sei $g:[a, b] \rightarrow \mathbb{R}$ eine stetige Funktion derart, dass $q \in \mathbb{R}, q>0$ existieren möge mit
+
+$$
+-q(s-a) \leq g(s) \leq q(b-s) \quad \text { für } s \in[a, b] \text {. }
+$$
+
+Dann besitzt das Problem
+
+$$
+\left\{\begin{aligned}
+-\Delta u & =g(u), & & \text { in } \Omega, \\
+u & =0 & & \text { auf } \partial \Omega
+\end{aligned}\right.
+$$
+eine schwache Lösung $u \in H_{0}^{1}(\Omega)$ mit $a \leq u \leq b$ in $\Omega$.
+
+Bemerkung: Eine notwendige Bedingung für (3.3) ist $g(a) \geq 0$ und $g(b) \leq 0$.
+
+Diese Bedingung ist auch hinreichend, wenn $g$ in den Randpunkten a und $b$ (einseitig) differenzierbar ist.
+
+Alternativ dazu sind die Bedingungen $g(a)>0$ und $g(b)<0$ (ohne weitere Differenzierbarkeitsvorausetzung) ebenfalls hinreichend für (3.3).
+
+Beweis. Wir definieren $f: \bar{\Omega} \times \mathbb{R} \rightarrow \mathbb{R}$ durch $f(x, s)=g(s)+q s$. Seien $K$ und $A: C(\bar{\Omega}) \rightarrow C(\bar{\Omega})$ dann wie in Bemerkung 3.1 zu $f$ und $q(x) \equiv q$ definiert. Mit anderen Worten: Zu $v \in C(\bar{\Omega})$ ist $w=A v$ die eindeutige schwache Lösung des Problems
+
+$$
+\left\{\begin{aligned}
+-\Delta w+q w & =g(v)+q v, & & \text { in } \Omega, \\
+w & =0 & & \text { auf } \partial \Omega .
+\end{aligned}\right.
+$$
+
+Wir betrachten nun die abgeschlossene, beschränkte und konvexe Teilmenge
+
+$$
+Y:=\{u \in C(\bar{\Omega}): a \leq u \leq b \text { in } \Omega\} \subset C(\bar{\Omega}) .
+$$
+
+Wir zeigen:
+
+$$
+A(Y) \subset Y \text {. }
+$$
+
+Ist nämlich $v \in Y$ und $w=A v \in H_{0}^{1}(\Omega) \cap C(\bar{\Omega})$, so ist
+
+$$
+-\Delta(w-b)+q(w-b)=g(v)+q(v-b) \leq 0 \quad \text { in } \Omega
+$$
+
+im schwachen Sinne wegen (3.3); ferner ist $w-b \leq 0$ auf $\partial \Omega$, da $b \geq 0$. Mit 2.9 folgt $w-b \leq 0$ in $\Omega$, d.h. $w \leq b$ in $\Omega$. Ferner ist
+
+$$
+-\Delta(a-w)+q(a-w)=q(a-v)-g(v) \leq 0 \quad \text { in } \Omega
+$$
+
+im schwachen Sinne wegen (3.3); ferner ist $a-w \leq 0$ auf $\partial \Omega$, da $a \leq 0$. Mit 2.9 folgt $a-w \leq 0$ in $\Omega$, d.h. $a \leq w$ in $\Omega$.
+
+Insgesamt folgt $w \in Y$, und somit folgt (3.6). Aus der Kompaktheit von $A$ und der Beschränktheit von $Y$ folgt zudem, dass $A(Y)$ relativ kompakt in $C(\bar{\Omega})$ ist. Gemäß 3.6 folgt nun die Existenz eines Fixpunktes $u$ von $A$ in $Y$, und dieser ist gemäß 3.1 eine schwache Lösung von (3.5) mit $a \leq u \leq b$ in $\Omega$.
+
+\subsection*{Satz (Schaefers Fixpunktsatz)}
+
+Sei $E$ ein $\mathbb{R}$-Banachraum und $A: E \rightarrow E$ eine kompakte, stetige Abbildung. Ferner sei die Menge
+
+$$
+R_{A}:=\{u \in E: u=\lambda A(u) \text { für ein } \lambda \in[0,1]\}
+$$
+
+beschränkt in $E$. Dann hat $A$ einen Fixpunkt.
+
+Bemerkung: Der Vorteil dieses Fixpunktsatzes ist es, dass wir keine konvexe Menge $X \subset E$ finden müssen, so dass $A(X) \subset X$ gilt.
+
+Beweis. Sei $r>0$ mit $R_{A} \subset U_{r}(0):=\{u \in E:\|u\|<r\}$. Sei ferner
+
+$$
+Y:=B_{r}(0)=\{u \in E:\|u\| \leq r\} \subset E .
+$$
+
+Definiere
+
+$$
+A_{0}: E \rightarrow E, \quad A_{0}(u)= \begin{cases}A(u), & \text { falls }\|A(u)\| \leq r \\ r \frac{A(u)}{\|A(u)\|}, & \text { falls }\|A(u)\|>r .\end{cases}
+$$
+
+Dann ist $A_{0}$ stetig und kompakt (wegen 3.3 (ii)); ferner gilt $A_{0}(Y) \subset Y$. Gemäß 3.6 hat $A_{0}$ nun einen Fixpunkt $u \in Y$. Tatsächlich ist $u$ sogar ein Fixpunkt von $A$, denn andernfalls wäre $\|A(u)\|>r$ und
+
+$$
+u=A_{0}(u)=\frac{r}{\|A(u)\|} A(u), \quad \text { d.h. } u \in R_{A} \text { und }\|u\|=\left\|A_{0}(u)\right\|=r \text {. }
+$$
+
+Dies widerspricht der obigen Wahl von $r$. Also hat $A$ einen Fixpunkt.
+
+\subsection*{Satz (Anwendung)}
+
+Das beschränkte Gebiet $\Omega$ möge eine gleichmäßige äußere Sphärenbedingung erfüllen. Sei ferner $f: \bar{\Omega} \times \mathbb{R} \rightarrow \mathbb{R}$ eine stetige Funktion, und es gelte
+
+$$
+|f(x, s)| \leq a\left(1+|s|^{p}\right) \quad \text { für }(x, s) \in \bar{\Omega} \times \mathbb{R} \text { mit Konstanten } a>0, p \in(0,1) \text {. }
+$$
+
+Dann hat das Problem
+
+$$
+\left\{\begin{aligned}
+-\Delta u & =f(x, u) & & \text { in } \Omega \\
+u & =0 & & \text { auf } \partial \Omega
+\end{aligned}\right.
+$$
+
+eine schwache Lösung $u \in H_{0}^{1}(\Omega)$.
+
+Beweis. Sei wiederum $E:=C(\bar{\Omega})$ und $A: E \rightarrow E$ wie in 3.1 zu $f$ und $q(x) \equiv 0$ definiert. Mit anderen Worten: $\mathrm{Zu} v \in E$ ist $w=A(v) \in H_{0}^{1}(\Omega)$ die eindeutige schwache Lösung des Problems
+
+$$
+\left\{\begin{aligned}
+-\Delta w & =f(x, v(x)) & & \text { in } \Omega, \\
+w & =0 & & \text { auf } \partial \Omega .
+\end{aligned}\right.
+$$
+
+Wir müssen zeigen, dass $A$ einen Fixpunkt besitzt. Wie bereits in 3.1 bemerkt, ist $A$ kompakt und stetig. Gemäß 3.8 bleibt also zu zeigen, dass die in (3.7) definierte Menge $R_{A}$ beschränkt in $E=C(\bar{\Omega})$ ist. Angenommen, dies wäre falsch. Dann würde eine Folge $\left(u_{n}\right)_{n}$ in $R_{A}$ existieren mit $\left\|u_{n}\right\|_{\infty} \rightarrow \infty$. Nach Definition von $R_{A}$ existiert für jedes $n \in \mathbb{N}$ nun ein $\lambda_{n} \in[0,1]$ mit $u_{n}=\lambda_{n} A\left(u_{n}\right)$, d.h. $u_{n} \in H_{0}^{1}(\Omega)$ ist eine schwache Lösung von
+
+$$
+-\Delta u_{n}=\lambda_{n}\left(-\Delta A\left(u_{n}\right)\right)=\lambda_{n} f_{n} \quad \text { in } \Omega \operatorname{mit} f_{n}:=N_{f}\left(u_{n}\right) \in C(\bar{\Omega})
+$$
+
+Ohne Einschränkung ist dabei $u_{n} \not \equiv 0$ und somit auch $f_{n} \not \equiv 0$. Wir wenden nun 10.22 an auf die Funktionen $w_{n}:=\frac{u_{n}}{\left\|f_{n}\right\|_{\infty}} \in H_{0}^{1}(\Omega)$, welche in $\Omega$ die Gleichung $-\Delta w_{n}=\tilde{f}_{n}$ mit $\tilde{f}_{n}:=\frac{\lambda_{n}}{\left\|f_{n}\right\|_{\infty}} f_{n} \in C(\bar{\Omega})$ im schwachen Sinne lösen. Da $\left\|\tilde{f}_{n}\right\|_{\infty}=\lambda_{n} \leq 1$ für alle $n \in \mathbb{N}$ gilt, existiert gemäß 1.2 ein $C>0$ mit
+
+$$
+\frac{\left|u_{n}(x)\right|}{\left\|f_{n}\right\|_{\infty}}=\left|w_{n}(x)\right| \leq C \operatorname{dist}(x, \partial \Omega) \quad \text { für } x \in \Omega, n \in \mathbb{N}
+$$
+
+und somit
+
+$$
+\left\|u_{n}\right\|_{\infty} \leq C_{1}\left\|f_{n}\right\|_{\infty} \quad \text { für } n \in \mathbb{N} \text { mit } C_{1}:=C \operatorname{diam}(\Omega) \text {. }
+$$
+
+Aufgrund der Voraussetzung (3.8) ist ferner
+
+$$
+\left\|f_{n}\right\|_{\infty} \leq a\left(1+\left\|u_{n}\right\|_{\infty}^{p}\right) \quad \text { für } n \in \mathbb{N}
+$$
+
+und somit
+
+$$
+\left\|u_{n}\right\|_{\infty} \leq a C_{1}\left(1+\left\|u_{n}\right\|_{\infty}^{p}\right) \quad \text { für } n \in \mathbb{N}
+$$
+
+Wegen $0<p<1$ folgt somit die Beschränktheit von $\left(u_{n}\right)_{n}$ bzgl. $\|\cdot\|_{\infty}$ im Widerspruch zur Annahme.
+
+\subsection*{Beispiele}
+
+Das beschränkte Gebiet $\Omega$ möge eine gleichmäßige äußere Sphärenbedingung erfüllen.
+(i) Die Wachstumsbedingung (3.8) ist offensichtlich für beschränkte, stetige Funktionen $f: \Omega \times \mathbb{R} \rightarrow \mathbb{R}$ erfüllt. Insbesondere hat z.B. das Problem
+
+$$
+\left\{\begin{aligned}
+-\Delta u & =g(x)+\sin u & & \text { in } \Omega ; \\
+u & =0 & & \text { auf } \partial \Omega
+\end{aligned}\right.
+$$
+
+für jedes $g \in C(\bar{\Omega})$ gemäß 3.9 eine schwache Lösung.
+
+(ii) Sei $g \in C(\bar{\Omega}), g \geq 0$ und $p \in(0,1)$. Dann hat das Dirichletproblem
+
+$$
+\left\{\begin{aligned}
+-\Delta u & =g(x)-u^{p} & & \text { in } \Omega \\
+u & =0 & & \text { auf } \partial \Omega,
+\end{aligned}\right.
+$$
+
+eine nichtnegative schwache Lösung $u \in H_{0}^{1}(\Omega)$. Dies sieht durch Anwendung von 3.9 auf die stetige Funktion $f: \bar{\Omega} \times \mathbb{R} \rightarrow \mathbb{R}, f(x, s)=g(x)-\left(s^{+}\right)^{p}$ mit $s^{+}:=\max \{s, 0\}$, welche offensichtlich die Wachstumsbedingung (3.8) erfüllt. Der Satz liefert dann eine schwache Lösung $u \in H_{0}^{1}(\Omega)$ des Problems
+
+$$
+\left\{\begin{aligned}
+-\Delta u & =g(x)-\left[u^{+}\right]^{p} & & \text { in } \Omega \\
+u & =0 & & \text { auf } \partial \Omega
+\end{aligned}\right.
+$$
+
+d.h. es gilt
+
+$$
+\int_{\Omega} \nabla u \cdot \nabla \varphi d x=\int_{\Omega}\left(g-\left[u^{+}\right]^{p}\right) \varphi d x \quad \text { für alle } \varphi \in H_{0}^{1}(\Omega) \text {. }
+$$
+
+Setzt man hier speziell $\varphi=u^{-}=-\min \{u, 0\} \in H_{0}^{1}(\Omega)$ ein, so erhält man (wegen $\nabla u^{-}=-1_{u<0} \nabla u$ )
+
+$$
+-\int_{\Omega}\left|\nabla u^{-}\right|^{2} d x=\int_{\Omega} g(x) u^{-} d x \geq 0
+$$
+
+und somit $u^{-} \equiv 0$. Also ist $u$ eine nichtnegative schwache Lösung von (3.12). Man beachte, dass dieses Ergebnis Beispiel 2.8(i) durch Betrachtung des neuen Parameterbereichs $0<p<1$ ergänzt. Das Ergebnis erhält man nicht aus 2.7, da die Monotoniebedingung (2.6) für $f$ nicht erfüllt ist.
+
+(iii) Mit einem ähnlichen Argument wie in (ii) erhält man im Falle $g \in C(\bar{\Omega}), g \geq 0$ und $0<p<1$ aus 3.9 auch eine nichtnegative schwache Lösung $u \in H_{0}^{1}(\Omega)$ des Problems
+
+$$
+\left\{\begin{aligned}
+-\Delta u & =g(x)+u^{p} & & \text { in } \Omega, \\
+u & =0 & & \text { auf } \partial \Omega
+\end{aligned}\right.
+$$
+
+(Übungsaufgabe, Blatt 2). Wir haben allerdings bisher noch keine Methode, um z.B. für das Problem
+
+$$
+\left\{\begin{aligned}
+-\Delta u & =u^{p} & & \text { in } \Omega \\
+u & =0 & & \text { auf } \partial \Omega,
+\end{aligned}\right.
+$$
+
+im Fall $p>1$ die Existenz einer nichtnegativen schwachen Lösung $u \in$ $H_{0}^{1}(\Omega) \backslash\{0\}$ herzuleiten. Wir werden diese Herleitung im kommenden Kapitel zumindest für einen Bereich von Exponenten $p>1$ mit Hilfe von variationellen Methoden durchführen.
+
+\subsection*{Bemerkung (zur Regularität)}
+
+Sei $f: \Omega \times \mathbb{R} \rightarrow \mathbb{R}$ stetig, und sei $u \in H_{0}^{1}(\Omega) \cap C(\Omega)$ eine schwache Lösung des Problems
+
+$$
+\left\{\begin{aligned}
+-\Delta u & =f(x, u) & & \text { in } \Omega, \\
+u & =0 & & \text { auf } \partial \Omega .
+\end{aligned}\right.
+$$
+
+Dann ist $u \in W_{l o c}^{2, p}(\Omega) \cap C_{l o c}^{1, \alpha}(\Omega)$ für $p \in(1, \infty), \alpha \in(0,1)$; und die Gleichung in (3.15) gilt f.ü. in $\Omega$. Dies folgt aus den Regularitätssätzen des letzten Kapitels.
+
+Ist $f$ sogar lokal Hölderstetig in $\Omega \times \mathbb{R}$, d.h. für jede kompakte Teilmenge $K \subset \Omega \times \mathbb{R}$ existiert $C_{K}>0$ und $\alpha_{K} \in(0,1)$ mit
+
+$$
+|f(x, s)-f(y, t)| \leq C_{K}(|x-y|+|s-t|)^{\alpha_{K}} \quad \text { für alle }(x, s),(y, t) \in K \text {, }
+$$
+
+so ist auch die Funktion $N_{f}(u): \Omega \rightarrow \mathbb{R}$ lokal Hölderstetig (Übungsaufgabe, Blatt 2). In diesem Fall ist dann sogar $u \in C^{2}(\Omega)$ eine klassische Lösung der Gleichung in (3.15) gemäß 10.7.
+
+Diese Regularitätseigenschaften gelten insbesondere für die in den Sätzen 5.11 und 3.9 gefundenen schwachen Lösungen.
+
+Der Rest des Kapitels ist dem Beweis des Schauderschen Fixpunktsatzes 3.4 gewidmet. Wir beginnnen mit einigen sehr wichtigen Sätzen im endlich dimensionalen Fall.
+
+\subsection*{Satz}
+
+Sei $B \subset \mathbb{R}^{N}$ die abgeschlossene Einheitskugel mit Rand $S$. Dann existiert keine stetige Abbildung $w: B \rightarrow S$ mit $\left.w\right|_{S}=\operatorname{id}_{S}$.
+
+Beweis. 1. Schritt: Angenommen, es gäbe eine $C^{1}$-Abbildung $w: B \rightarrow \mathbb{R}^{N}$ mit $w(B) \subset S$ mit $\left.w\right|_{S}=\operatorname{id}_{S}$. Wir führen zunächst dies zum Widerspruch. Für $t \in[0,1]$ definieren wir dazu
+
+$$
+w_{t}: B \rightarrow \mathbb{R}^{N}, \quad w_{t}(x)=(1-t) x+t w(x) .
+$$
+
+Dann gilt auch $w_{t}(B) \subset B$ und $\left.w_{t}\right|_{S}=\operatorname{id}_{S}$ für $t \in[0,1]$; ferner ist $w_{0}=$ id und $w_{1}=w$. Wähle nun $\varepsilon \in(0,1) \mathrm{mit}$
+
+$$
+\sup _{z \in B}\|d w(z)\|_{\mathcal{L}\left(\mathbb{R}^{N}\right)}<\frac{1-\varepsilon}{\varepsilon}
+$$
+
+wobei $d w(z) \in \mathcal{L}\left(\mathbb{R}^{N}\right)$ die Ableitung von $w$ im Punkt $z$ bezeichne. Dann ist $w_{t}$ injektiv für $t \in[0, \varepsilon)$, da für $x, y \in B$
+
+$\left|w_{t}(x)-w_{t}(y)\right| \geq(1-t)|x-y|-t|w(x)-w(y)| \geq \underbrace{\left(1-t-t \sup _{z \in B}\|d w(z)\|_{\mathcal{L}\left(\mathbb{R}^{N}\right)}\right.}_{>0})|x-y|$
+
+gilt. Für die entsprechenden Jacobimatrizen gilt zudem
+
+$$
+J_{w_{t}}(x)=(1-t) \mathbb{1}+t J_{w}(x) \quad \text { für } t \in[0,1], x \in B \text {. }
+$$
+
+Aufgrund der Stetigkeit der Determinante können wir nach Verkleinerung von $\varepsilon$ daher annehmen, dass
+
+$$
+\operatorname{det} J_{w_{t}}(x)>0 \quad \text { für } x \in B, t \in[0, \varepsilon) \text { gilt. }
+$$
+
+Sei nun $U:=U_{1}(0)$. Für $t \in[0,1)$ und $x \in U$ gilt dann
+
+$$
+\left|w_{t}(x)\right| \leq(1-t)|x|+t|w(x)|<(1-t)+t=1
+$$
+
+also $w_{t}(U) \subset U$. Der Satz von der inversen Funktion liefert nun für $t \in[0, \varepsilon)$, dass $w_{t}(U) \subset U$ offen und $w_{t}: U \rightarrow w_{t}(U)$ ein $C^{1}$-Diffeomorphismus ist. Wegen $w_{t}(S) \cap U=S \cap U=\varnothing$ können wir ferner
+
+$$
+U=w_{t}(U) \cup\left(U \backslash w_{t}(U)\right)=w_{t}(U) \cup\left(U \backslash w_{t}(B)\right)
+$$
+
+schreiben. Diese Vereinigung ist offensichtlich disjunkt. Ferner ist neben $w_{t}(U)$ auch $U \backslash w_{t}(B)$ offen in $U$, da $B$ und somit $w_{t}(B)$ kompakt ist. Da $U$ zusammenhängend und $w_{t}(U) \neq \varnothing$ ist, muss
+
+$$
+U=w_{t}(U)
+$$
+
+und somit $\left|w_{t}(U)\right|=|B|=|U|$ für $t \in[0, \varepsilon)$ gelten. Für die Funktion
+
+$$
+p:[0,1] \rightarrow \mathbb{R}, \quad p(t)=\int_{U} \operatorname{det} J_{w_{t}}(x) d x
+$$
+gilt somit mit dem Integraltransformationssatz
+
+$$
+p(t)=|B| \quad \text { für } t \in[0, \varepsilon) \text {. }
+$$
+
+Die Multilinearität der Determinante und (3.16) implizieren jedoch, dass $p$ eine Polynomfunktion ist, und somit folgt
+
+$$
+p(t)=|B| \quad \text { für } t \in[0,1] \text {. }
+$$
+
+Insbesondere ist also
+
+$$
+\int_{U} \operatorname{det} J_{w}(x) d x=p(1)=|B| \neq 0
+$$
+
+Andererseits ist aber $|w|^{2} \equiv 1$ in $U$, und Differentiation liefert $d w(x) w(x)=0$ für $x \in U$; insbesondere also $\operatorname{det} J_{w}(x)=0$ für $x \in U$. Dies widerspricht (3.17), und damit kann eine solche Abbildung nicht existieren.
+
+2. Schritt: Angenommen, es würde eine stetige Abbildung $v: B \rightarrow S$ mit $\left.v\right|_{S}=\operatorname{id}_{S}$ existieren. Wir setzen dann $v$ auf ganz $\mathbb{R}^{N}$ stetig fort durch $v(x):=x$ für $x \in \mathbb{R}^{N} \backslash B$. Für $\varepsilon>0$ sei nun
+
+$$
+v^{\varepsilon} \in C^{\infty}\left(\mathbb{R}^{N}, \mathbb{R}^{N}\right): v^{\varepsilon}(x)=\int_{\mathbb{R}^{N}} \rho_{\varepsilon}(x-y) v(y) d y
+$$
+
+die komponentenweise definierte Glättung von $v$. Dann die Komponenten von $v$ in $\mathbb{R}^{N} \backslash B$ harmonisch sind, gilt $v^{\varepsilon}(x)=v(x)=x$ für $x \in \mathbb{R}^{N} \backslash U_{2}(0)$ und $\varepsilon \in(0,1)$ (s. Beweis von LPDGL 3.7). Da ferner $v^{\varepsilon} \rightarrow v$ lokal gleichmäßig auf $\mathbb{R}^{N}$ für $\varepsilon \rightarrow 0$ und $v(x) \neq 0$ für $x \in B_{2}(0)$, existiert $\varepsilon \in(0,1)$ mit $v^{\varepsilon}(x) \neq 0$ für $x \in B_{2}(0)$. Definiere nun
+
+$$
+w: B \rightarrow \mathbb{R}^{N}, \quad w(x)=\frac{v^{\varepsilon}(2 x)}{\left|v^{\varepsilon}(2 x)\right|}
+$$
+
+Diese Abbildung hat dann die Eigenschaften aus Schritt 1, so dass sich ein Widerspruch ergibt. Der Beweis ist somit beendet.
+
+\subsection*{Korollar (Brouwerscher Fixpunktsatz)}
+
+Sei $B \subset \mathbb{R}^{N}$ die abgeschlossene Einheitskugel und $f: B \rightarrow B$ stetig. Dann hat $f$ einen Fixpunkt.
+
+Beweis. Angenommen, es wäre $f(x) \neq x$ für alle $x \in B$. Dann (Übungsaufgabe, Blatt 3) existiert zu jedem $x \in B$ genau ein $\alpha(x) \geq 0$ mit
+
+$$
+w(x):=x+\alpha(x)(x-f(x)) \in S
+$$
+
+und die Abbildung $x \mapsto \alpha(x)$ ist stetig. Geometrisch ist $w(x)$ der (eindeutige) Schnittpunkt der von $f(x)$ ausgehenden und durch $x$ laufenden Halbgeraden mit $S$. Somit ist $w: B \rightarrow S$ stetig mit $\left.w\right|_{S}=\mathrm{id}_{S}$, im Widerspruch zu 3.12. Also existiert $x_{0} \in B$ mit $f\left(x_{0}\right)=x_{0}$.
+
+\subsection*{Korollar}
+
+Sei $K \subset \mathbb{R}^{N}$ nichtleer, kompakt und konvex, und sei $f: K \rightarrow K$ stetig. Dann hat $f$ einen Fixpunkt.
+
+Beweis. Ohne Einschränkung können wir (vermöge einer Translation) annehmen, dass $0 \in K$ gilt. Dann ist $K$ homeomorph zur Einheitskugel in dem von $K$ erzeugten Unterraum von $\mathbb{R}^{N}$ (Übungsaufgabe, Blatt 3), und somit folgt die Behauptung aus 3.13 .
+
+Schluss des Beweises von 3.4. Sei $j \in \mathbb{N}$. Da $K \subset E$ kompakt ist, existieren $u_{1}, \ldots, u_{n} \in K$ mit
+
+$$
+K \subset \bigcup_{i=1}^{n} U_{i} \quad \text { für } U_{i}:=U_{\frac{1}{j}}\left(u_{i}\right)
+$$
+
+Sei $K_{j}:=\operatorname{conv}\left(\left\{u_{1}, \ldots, u_{n}\right\}\right)$. Dann ist $K_{j} \subset K$, da $K$ konvex ist. Wir definieren
+
+$$
+P_{j}: K \rightarrow K_{j}, \quad P_{j}(u):=\frac{\sum_{i=1}^{n} \operatorname{dist}\left(u, \mathbb{R}^{N} \backslash U_{i}\right) u_{i}}{\sum_{i=1}^{n} \operatorname{dist}\left(u, \mathbb{R}^{N} \backslash U_{i}\right)}
+$$
+
+Diese Abbildung ist wohldefiniert und stetig wegen (3.18). Ferner gilt
+
+$$
+\left\|P_{j} u-u\right\| \leq \frac{\sum_{i=1}^{n} \operatorname{dist}\left(u, \mathbb{R}^{N} \backslash U_{i}\right)\left\|u_{i}-u\right\|}{\sum_{i=1}^{n} \operatorname{dist}\left(u, \mathbb{R}^{N} \backslash U_{i}\right)} \leq \frac{1}{j} \quad \text { für } u \in K .
+$$
+
+Wir betrachten nun die stetige Abbildung
+
+$$
+A_{j}:=P_{j} \circ A \quad: \quad K_{j} \rightarrow K_{j}
+$$
+
+Da $K_{j}$ kompakt, konvex und in einem endlich dimensionalen Teilraum von $E$ enthalten ist, folgt aus 3.14 die Existenz eines Fixpunktes $v_{j} \in K_{j} \subset K$ von $A_{j}$. Die so definierte Folge $\left(v_{j}\right)_{j} \subset K$ besitzt aufgrund der Kompaktheit von $K$ eine Teilfolge $\left(v_{j_{k}}\right)$ mit $v_{j_{k}} \rightarrow v \in K$ für $k \rightarrow \infty$. Ferner gilt wegen (3.19)
+
+$$
+\left\|v_{j_{k}}-A\left(v_{j_{k}}\right)\right\|=\left\|A_{j_{k}}\left(v_{j_{k}}\right)-A\left(v_{j_{k}}\right)\right\|=\left\|P_{j_{k}}\left(A\left(v_{j_{k}}\right)\right)-A\left(v_{j_{k}}\right)\right\| \leq \frac{1}{j_{k}}
+$$
+
+Durch Grenzübergang $k \rightarrow \infty$ folgt $A(v)=v$ aufgrund der Stetigkeit von $A$, d.h. $v$ ist ein Fixpunkt von $A$.
+
+\section*{$\S 4$ Elementare variationelle Methoden für semilineare Dirichletprobleme}
+
+Sei $\Omega \subset \mathbb{R}^{N}$ ein Gebiet. In diesem Kapitel wollen wir eine weitere, sehr flexible Methodenklasse zur Untersuchung semilinearer Dirichletprobleme der Form
+
+$$
+\left\{\begin{aligned}
+-\Delta u & =f(x, u) & & \text { in } \Omega, \\
+u & =0 & & \text { auf } \partial \Omega
+\end{aligned}\right.
+$$
+
+kennenlernen. Die Grundidee ist es, eine schwache Lösung dieses Problems als kritischen Punkt eines Funktionals $H_{0}^{1}(\Omega) \rightarrow \mathbb{R}$ aufzufassen. Wir müssen dazu zunächst grundlegende Begriffe zur Differenzierbarkeit in Banachräumen untersuchen. Im Folgenden seien $E, F, G$ stets Banachräume über $\mathbb{R}$. Falls nicht speziell vermerkt, seien die Normen von $E, F$ und $G$ allesamt mit $\|\cdot\|$ bezeichnet. Sei ferner $U \subset E$ offen.
+
+\subsection*{Definition}
+
+Sei $f: U \rightarrow F$ eine Abbildung und $u \in U$.
+
+i). $f$ heißt differenzierbar in $u$ (auch: Fréchet-differenzierbar), wenn eine stetige lineare Abbildung $T \in \mathcal{L}(E, F)$ existiert mit
+
+$$
+\text { (*) } \quad \lim _{\substack{v \rightarrow 0 \\ v \in E \backslash\{0\}}} \frac{f(u+v)-f(u)-T v}{\|v\|}=0 \quad \text { in } F \text {. }
+$$
+
+ii). $f$ heißt Gâteaux-differenzierbar in u, wenn alle Richtungsableitungen
+
+$$
+\partial_{v} f(u):=\lim _{t \rightarrow 0} \frac{f(u+t v)-f(u)}{t} \in F, \quad v \in E
+$$
+
+existieren und die Abbildung
+
+$$
+d f(u): E \rightarrow F, \quad d f(u) v=\partial_{v} f(u)
+$$
+
+stetig und linear ist. In diesem Fall nennt man $d f(u) \in \mathcal{L}(E, F)$ die GâteauxAbleitung von $f$ in $u$.
+
+\subsection*{Bemerkung}
+
+Seien $U, f$, und $u$ wie in 4.1.
+
+i). Ist $f$ differenzierbar in $u$ und $T$ wie in 4.1 , so existieren offensichtlich alle Richtungsableitungen von $f$ in $u$, und es gilt
+
+$$
+(* *) \quad \partial_{v} f(u)=T v \quad \text { für alle } v \in E \text {. }
+$$
+
+Also ist $f$ in $u$ Gâteaux-differenzierbar mit $d f(u)=T$; insbesondere ist $T$ durch $(*)$ eindeutig bestimmt. In diesem Fall nennt man $d f(u) \in \mathcal{L}(E, F)$ auch die (Fréchet)-Ableitung von $f$ in $u$ und schreibt auch oft $f^{\prime}(u)$ anstelle von $d f(u)$.
+
+ii). Die Eigenschaften der Differenzierbarkeit und Gâteaux-Differenzierbarkeit von $f$ in $u$ ändern sich nicht nach Übergang zu äquivalenten Normen.
+
+iii). Ist $f$ differenzierbar in $u$, so ist $f$ auch stetig in $u$. Aus der GâteauxDifferenzierbarkeit von $f$ in $u$ folgt aber im Allgemeinen nicht die Stetigkeit und damit auch nicht Differenzierbarkeit; betrachte dazu z.B.
+
+$$
+f: \mathbb{R}^{2} \rightarrow \mathbb{R}, \quad f(x, y)= \begin{cases}1, & x^{2}=y \neq 0 \\ 0, & \text { sonst }\end{cases}
+$$
+
+und den Punkt $u=(0,0)$. Dann existiert die Gâteaux-Ableitung $d f(0,0)=$ $0 \in \mathcal{L}\left(\mathbb{R}^{2}, \mathbb{R}\right)$, aber $f$ ist nicht stetig in $(0,0)$.
+
+iv). Ist $f$ in allen Punkten von $U$ differenzierbar (bzw. Gâteaux-differenzierbar), so nennt man $f$ differenzierbar in $U$ (bzw. Gâteaux-differenzierbar in $U$ ). In diesem Fall nennt man die Abbildung
+
+$$
+f^{\prime}: U \rightarrow \mathcal{L}(E, F), \quad u \mapsto f^{\prime}(u) \quad \text { bzw. } \quad d f: U \rightarrow \mathcal{L}(E, F), \quad u \mapsto d f(u)
+$$
+
+die (Fréchet)-Ableitung (bzw. Gâteaux-Ableitung) von $f$.
+
+\subsection*{Beispiele}
+
+i). Sei $f: E \rightarrow F$ affin linear und stetig, d.h. $f(u)=T u+w$ mit $T \in \mathcal{L}(E, F)$ und $w \in F$. Dann ist $f$ differenzierbar mit $f^{\prime}(u)=T$ für alle $u \in E$.
+
+ii). Im Folgenden sei $E \times F$ mit der durch $\|(u, v)\|:=\|u\|+\|v\|$ definierten Norm versehen ( $l^{1}$-Produktnorm); damit ist $E \times F$ ein Banachraum. Eine Abbildung $B: E \times F \rightarrow G$ heißt bilinear, wenn die Abbildungen
+
+$$
+B(\cdot, v): E \rightarrow G, \quad B(u, \cdot): F \rightarrow G
+$$
+linear sind für $u \in E, v \in F$. Dann sind äquivalent:
+
+$$
+B \text { ist stetig } \Longleftrightarrow\|B\|:=\sup _{\substack{u \in E \backslash\{0\} \\ v \in F \backslash\{0\}}} \frac{\|B(u, v)\|}{\|u\|\|v\|}<\infty
+$$
+
+(Übungsaufgabe Blatt 3).
+
+Tatsächlich wird so eine Norm $\|\cdot\|$ auf dem Raum der bilinearen stetigen Abbildungen $E \times F \rightarrow G$ definiert (ebenfalls Übungsaufgabe Blatt 3).
+
+Ist $B$ stetig, so ist $B$ auch differenzierbar mit
+
+$$
+B^{\prime}(u, v)(a, b)=B(u, b)+B(a, v) \quad \text { für }(u, v),(a, b) \in E \times F \text {. }
+$$
+
+Es gilt nämlich
+
+$$
+\|B(u+a, v+b)-B(u, v)-(B(u, b)+B(a, v))\|=\|B(a, b)\| \leq\|B\|\|a\|\|b\|
+$$
+
+und
+
+$$
+\frac{\|a\|\|b\|}{\|a\|+\|b\|} \rightarrow 0 \quad \text { für }(a, b) \rightarrow(0,0) \text { in } E \times F \text {. }
+$$
+
+\subsection*{Satz (Ableitungsregeln)}
+
+Sei $u \in U$
+
+i). Sind $f, g: U \rightarrow F$ in $u$ differenzierbar, so ist für $\lambda, \mu \in \mathbb{R}$ auch die Funktion $\lambda f+\mu g: U \rightarrow F$ differenzierbar mit
+
+$$
+(\lambda f+\mu g)^{\prime}(u) v=\lambda f^{\prime}(u) v+\mu g^{\prime}(u) v \text {. }
+$$
+
+ii). (Kettenregel) Ist $V \subset F$ offen, und ist $f: U \rightarrow F$ eine in $u$ differenzierbare Abbildung mit $f(U) \subset V$ und $g: V \rightarrow G$ in $f(u)$ differenzierbar, so ist auch $g \circ f$ in $u$ differenzierbar mit
+
+$$
+(g \circ f)^{\prime}(u) v=g^{\prime}(f(u)) f^{\prime}(u) v \quad \text { für } v \in E \text {. }
+$$
+
+Beweis. Genau wie im endlich-dimensionalen Fall (Analysis II)
+
+\subsection*{Bemerkung}
+
+4.4 i) gilt auch für Gâteaux-Differenzierbarkeit anstelle von Differenzierbarkeit.
+
+4.4 ii) gilt im Allgemeinen aber nicht für Gâteaux-Differenzierbarkeit (Übungsaufgabe).
+
+\subsection*{Beispiel}
+
+Sei $B: E \times E \rightarrow G$ bilinear und stetig, und sei $b: E \rightarrow G$ definiert durch $b(u)=$ $B(u, u)$. Es ist also $b=B \circ h$ mit
+
+$$
+h \in \mathcal{L}(E, E \times E), \quad h(u)=(u, u)
+$$
+
+Mit der Kettenregel folgt die Differenzierbarkeit von $b$, und es gilt
+
+$$
+b^{\prime}(u) v=B^{\prime}(h(u)) h^{\prime}(u) v=B^{\prime}(u, u)(v, v)=B(u, v)+B(v, u)
+$$
+
+Konkretes Beispiel: Sei $\Omega \subset \mathbb{R}^{N}$ ein Gebiet und $E:=H_{0}^{1}(\Omega)$. Sei ferner $b: E \rightarrow \mathbb{R}$ definiert durch $b(u)=\int_{\Omega}|\nabla u|^{2} d x$. Dann ist $b$ differenzierbar mit
+
+$$
+b^{\prime}(u) v=2 \int_{\Omega} \nabla u \nabla v d x \quad \text { für } u, v \in E \text {. }
+$$
+
+Sei ferner $f \in L^{2}(\Omega)$ gegeben, und sei $\varphi \in E^{\prime}$ definiert durch $\varphi(u)=\int_{\Omega} f u d x$. Da die Einbettung $E \rightarrow L^{2}(\Omega)$ stetig ist, ist auch $\varphi$ stetig und somit (als lineare Abbildung) differenzierbar mit
+
+$$
+\varphi^{\prime}(u) v=\varphi(v)=\int_{\Omega} f v d x \quad \text { für } u, v \in E \text {. }
+$$
+
+Sei schliesslich
+
+$$
+\Phi:=\frac{1}{2} b-\varphi: E \rightarrow \mathbb{R}, \quad \Phi(u)=\frac{1}{2} \int_{\Omega}|\nabla u|^{2} d x-\int_{\Omega} f u d x .
+$$
+
+Dann ist $\Phi$ differenzierbar, und für $u \in E$ sind äquivalent:
+
+$$
+\Phi^{\prime}(u)=0 \Longleftrightarrow \int_{\Omega} \nabla u \nabla v d x=\int_{\Omega} f v d x \text { für alle } v \in E \text {. }
+$$
+
+Nullstellen von $\Phi^{\prime}$ entsprechen also genau den schwachen Lösungen des Randwertproblems
+
+$$
+\left\{\begin{aligned}
+-\Delta u & =f & & \text { in } \Omega \\
+u & =0 & & \text { auf } \partial \Omega .
+\end{aligned}\right.
+$$
+
+\subsection*{Definition}
+
+Sei $g: U \rightarrow F$ differenzierbar, und seien $u \in U, w \in F$.
+
+i). $u$ heißt kritischer Punkt von $g$, wenn $g^{\prime}(u) \in \mathcal{L}(E, F)$ nicht surjektiv ist, ansonsten regulärer Punkt.
+
+ii). $w$ heißt kritischer Wert von $g$, wenn die Urbildmenge $g^{-1}(w) \subset U$ mindestens einen kritischen Punkt enthält, ansonsten regulärer Wert.
+
+\subsection*{Definition}
+
+Eine Abbildung $\Phi: U \rightarrow \mathbb{R}$ nennt man auch Funktional. Ist $E$ ein Hilbertraum mit Skalarprodukt $\langle\cdot, \cdot\rangle$ und $\Phi$ differenzierbar in einem Punkt $u \in U$, so existiert nach dem Rieszschen Darstellungssatz genau ein Element grad $\Phi(u) \in E$ mit
+
+$$
+\Phi^{\prime}(u) v=\langle v, \operatorname{grad} \Phi(u)\rangle \quad \text { für alle } v \in E .
+$$
+
+Wir nennen $\operatorname{grad} \Phi(u)$ den Gradient von $\Phi$ in u.
+
+\subsection*{Bemerkung}
+
+Ist $\Phi: U \rightarrow \mathbb{R}$ ein differenzierbares Funktional, so ist $u \in U$ ein kritischer Punkt von $\Phi$ genau dann, wenn $\Phi^{\prime}(u)=0 \in E^{\prime}$ ist. Ist $E$ ein Hilbertraum, so ist dies wiederum äquivalent zu $\operatorname{grad} \Phi(u)=0$ in $E$.
+
+Im Folgenden werden wir ein weiteres bekanntes Hilfsmittel aus der Funktionalanalysis benötigen.
+
+\subsection*{Satz (Spezialfall des Satzes von Hahn-Banach)}
+
+Sei $E$ ein normierter $\mathbb{R}$-Vektorraum. Dann existiert zu jedem $v \in E \backslash\{0\}$ eine Linearform $\psi \in E^{\prime}$ mit $\|\psi\|=1$ und $\psi(v)=\|v\|$.
+
+Beweis. Standardliteratur zur linearen Funktionalanalysis.
+
+Für $u, v \in U$ sei im Folgenden $[u, v]:=\{(1-t) u+t v: 0 \leq t \leq 1\}$
+
+\subsection*{Satz (Schrankensatz)}
+
+Sei $f: U \rightarrow F$ Gâteaux-differenzierbar, und seien $u, v \in U$ mit $[u, v] \subset U$. Dann gilt
+
+$$
+\|f(v)-f(u)\| \leq M\|v-u\| \quad \text { mit } M:=\sup _{w \in[u, v]}\|d f(w)\|_{\mathcal{L}(E, F)}
+$$
+
+Beweis. Ohne Einschränkung sei $f(u) \neq f(v)$. Nach 4.10 existiert ein $\psi \in F^{\prime}$ mit $\|\psi\|=1$ und $\psi(f(v)-f(u))=\|f(v)-f(u)\|$. Sei $h:[0,1] \rightarrow \mathbb{R}$ definiert durch $h(t)=\psi(f(\gamma(t)))$ mit $\gamma(t)=[1-t] u+t v$. Für $t \in(0,1)$ existiert dann
+
+$$
+\begin{aligned}
+h^{\prime}(t)=\lim _{\tau \rightarrow 0} & \frac{h(t+\tau)-h(t)}{\tau}=\lim _{\tau \rightarrow 0} \psi\left(\frac{f(\gamma(t+\tau))-f(\gamma(t))}{\tau}\right) \\
+& =\psi\left(\lim _{\tau \rightarrow 0} \frac{f(\gamma(t)+\tau(v-u))-f(\gamma(t))}{\tau}\right)=\psi(d f(\gamma(t))(v-u)),
+\end{aligned}
+$$
+
+Hier haben wir im letzten Schritt nur die vorausgesetzte Gâteaux-Differenzierbarkeit von $f$ verwendet (die Kettenregel steht in diesem Fall nicht zur Verfügung). Nach dem Mittelwertsatz aus Analysis 1 existiert nun $\theta \in(0,1)$ mit
+
+$$
+\begin{aligned}
+\|f(v)-f(u)\|=h(1)-h(0)=h^{\prime}(\theta) & =\psi(d f(\gamma(\theta))(v-u)) \\
+& \leq\|\psi\|\|d f(\gamma(\theta))\|\|v-u\| \leq M\|v-u\| .
+\end{aligned}
+$$
+
+\subsection*{Korollar}
+
+Ist $U$ zusammenhängend und $f: U \rightarrow F$ Gâteaux-differenzierbar mit $d f(u)=0$ für alle $u \in U$, so ist $f$ konstant.
+
+Beweis. Als offene Teilmenge von $E$ ist $U$ auch wegzusammenhängend; genauer kann man je zwei Punkte aus $U$ durch einen stückweise affin linearen Streckenzug verbinden. Mit 4.11 folgt daher, dass $f$ in je zwei Punkten aus $U$ den gleichen Wert annimmt. Damit ist $f$ konstant auf $U$.
+
+\subsection*{Satz}
+
+Sei $u \in U$ und $f: U \rightarrow F$ Gâteaux-differenzierbar. Ferner sei die Gâteaux-Ableitung $d f: U \rightarrow \mathcal{L}(E, F)$ stetig in $u$. Dann ist $f$ auch differenzierbar in $u$.
+
+Beweis. Sei $\varepsilon>0$ mit $U_{\varepsilon}(u) \subset U$, und sei $R: U_{\varepsilon}(0) \rightarrow F$ definiert durch
+
+$$
+R(v):=f(u+v)-f(u)-d f(u) v
+$$
+
+Dann ist $R$ Gâteaux-differenzierbar mit
+
+$$
+d R(v)=d f(u+v)-d f(u) \in \mathcal{L}(E, F)
+$$
+
+insbesondere ist also $d R: U_{\varepsilon}(0) \rightarrow \mathcal{L}(E, F)$ stetig in 0 nach Voraussetzung. Anwendung von 4.11 liefert
+
+$$
+\|R(v)\|=\|R(v)-R(0)\| \leq\|v\| \sup _{0 \leq t \leq 1}\|d R(t v)\| \quad \text { für } v \in U_{\varepsilon}(0)
+$$
+
+wobei
+
+$$
+\sup _{0 \leq t \leq 1}\|d R(t v)\| \rightarrow\|d R(0)\|=\|d f(0)-d f(0)\|=0 \quad \text { für } v \rightarrow 0
+$$
+
+aufgrund der Stetigkeit von $d R$ in 0 . Es folgt $R(v)=o(\|v\|)$ für $v \rightarrow 0$, und dies ist die Differenzierbarkeit von $f$ in $u$.
+
+\subsection*{Bemerkung und Definition}
+
+Ist $f: U \rightarrow F$ Gâteaux-differenzierbar mit stetiger Gâteaux-Ableitung $d f: U \rightarrow$ $\mathcal{L}(E, F)$, so ist $f$ auch differenzierbar nach 4.13. In diesem Fall schreiben wir im Folgenden auch $f \in C^{1}(U, F)$. Ist $F=\mathbb{R}$, so schreiben wir kurz $f \in C^{1}(U)$.
+
+Unser Ziel ist es nun, zu zeigen, dass Nemitzki-Operatoren zu $\mathcal{C}$-Funktionen auf Gebieten $\Omega \subset \mathbb{R}^{N}$ unter gewissen Zusatzbedingungen als (stetige) Ableitungen eines Funktionals $H_{0}^{1}(\Omega) \rightarrow \mathbb{R}$ aufgefasst werden können. Wir benötigen noch eine wichtige Eigenschaft der $L^{p}$-Räume, welche wir ohne Beweis zitieren. Im Folgenden sei stets $\Omega \subset \mathbb{R}^{N}$ Lebesgue-messbar.
+
+\subsection*{Hilfssatz}
+
+Sei $1 \leq p \leq \infty$ und $\left(u_{n}\right)_{n} \subset L^{p}(\Omega)$ eine Folge mit $u_{n} \rightarrow u$ in $L^{p}(\Omega)$. Dann existiert eine Teilfolge $\left(u_{n_{k}}\right)_{k}$ und $h \in L^{p}(\Omega)$ mit
+
+$$
+\left|u_{n_{k}}\right| \leq h \quad \text { in } \Omega \text { für alle } k \in \mathbb{N} \quad \text { und } \quad u_{n_{k}} \rightarrow u \quad \text { f.ü. in } \Omega \text {. }
+$$
+
+Beweis. Übungsaufgabe aus LPDGL.
+
+\subsection*{Satz}
+
+Sei $|\Omega|<\infty$, seien $p, q \in[1, \infty), \alpha=\frac{p}{q}$, und sei $f$ eine $\mathcal{C}$-Funktion auf $\Omega$. Ferner gebe es $C>0$ mit
+
+$$
+|f(x, s)| \leq C\left(1+|s|^{\alpha}\right) \quad \text { für }(x, s) \in \Omega \times \mathbb{R} \text {. }
+$$
+
+Dann ist $N_{f}: L^{p}(\Omega) \rightarrow L^{q}(\Omega)$ wohldefiniert und stetig.
+
+Beweis. Sei $N:=N_{f}$, und sei $u \in L^{p}(\Omega)$. Dann ist
+
+$$
+|N(u)|^{q} \leq\left[2 C \max \left(1,|u|^{\alpha}\right)\right]^{q}=(2 C)^{q} \max \left\{1,|u|^{p}\right\} \quad \text { auf } \Omega
+$$
+
+und somit $N(u) \in L^{q}(\Omega)$, da $\Omega$ nach Voraussetzung endliches Maß hat. Angenommen, es gäbe eine Folge $\left(u_{n}\right)_{n}$ in $L^{p}(\Omega)$ und $\varepsilon>0$ mit $\left\|u_{n}-u\right\|_{p} \rightarrow 0$ für $n \rightarrow \infty$ und $\left\|N\left(u_{n}\right)-N(u)\right\|_{q} \geq \varepsilon$ für alle $n \in \mathbb{N}$. Nach 4.15 existiert eine Teilfolge $\left(u_{n_{k}}\right)_{k}$ und $h \in L^{p}(\Omega)$ mit
+
+$$
+\left|u_{n_{k}}\right| \leq h \quad \text { in } \Omega \text { für alle } k \in \mathbb{N} \quad \text { und } \quad u_{n_{k}} \rightarrow u \text { f.ü. in } \Omega \text {. }
+$$
+
+Dies liefert
+
+$$
+\left|N\left(u_{n_{k}}\right)-N(u)\right|^{q} \leq 2^{q-1}\left(\left|N\left(u_{n_{k}}\right)\right|^{q}+|N(u)|^{q}\right) \leq 2^{q-1}\left[(2 C)^{q} \max \left\{1, h^{p}\right\}+|N(u)|^{q}\right]
+$$
+in $\Omega$ für alle $k \in \mathbb{N}$, wobei die rechte Seite über $\Omega$ integrierbar ist. Die Bedingung $\left(\mathcal{C}_{2}\right)$ für $f$ liefert ferner
+
+$$
+N\left(u_{n_{k}}\right) \rightarrow N(u) \quad \text { und somit } \quad\left|N\left(u_{n_{k}}\right)-N(u)\right|^{q} \rightarrow 0 \quad \text { f.ü. auf } \Omega \text {. }
+$$
+
+Aus dem Satz über die dominierte Konvergenz folgt somit
+
+$$
+\left\|N\left(u_{n_{k}}\right)-N(u)\right\|_{q}^{q}=\int_{\Omega}\left|N\left(u_{n_{k}}\right)-N(u)\right|^{q} d x \rightarrow 0 \quad \text { für } k \rightarrow \infty \text {, }
+$$
+
+im Widerspruch zur Annahme. Es folgt die Stetigkeit von $N$ in $u$.
+
+\subsection*{Satz}
+
+Sei $|\Omega|<\infty, p \geq 1$ und $f$ eine $\mathcal{C}$-Funktion mit
+
+$$
+|f(x, t)| \leq C\left(1+|t|^{p-1}\right) \quad \text { für }(x, t) \in \Omega \times \mathbb{R}
+$$
+
+mit einer Konstanten $C>0$. Sei ferner $F: \Omega \times \mathbb{R} \rightarrow \mathbb{R}$ definiert durch $F(x, t)=$ $\int_{0}^{t} f(x, s) d s$. Dann ist
+
+$$
+\varphi: L^{p}(\Omega) \rightarrow \mathbb{R}, \quad \varphi(u)=\int_{\Omega} F(x, u(x)) d x
+$$
+
+ein $C^{1}$-Funktional mit
+
+$$
+\varphi^{\prime}(u) v=\int_{\Omega} f(x, u(x)) v(x) d x
+$$
+
+Beweis. Sei $u \in L^{p}(\Omega)$. Es ist
+
+$|F(x, t)|=\left|\int_{0}^{t} f(x, s) d s\right| \leq C \int_{0}^{|t|}\left(1+s^{p-1}\right) d s=C\left(|t|+\frac{|t|^{p}}{p}\right) \quad$ für $(x, t) \in \Omega \times \mathbb{R}$,
+
+also ist die Funktion $x \mapsto F(x, u(x))$ integrierbar und somit $\varphi$ wohldefiniert. Sei nun $v \in L^{p}(\Omega)$. Dann existiert
+
+$$
+\begin{aligned}
+\left.\partial_{t}\right|_{t=0} \varphi(u+t v) & =\left.\partial_{t}\right|_{t=0} \int_{\Omega} F(x, u(x)+t v(x)) d x \\
+& \left.\stackrel{(*)}{=} \int_{\Omega} \partial_{t}\right|_{t=0} F(x, u(x)+t v(x)) d x=\int_{\Omega} f(x, u(x)) v(x) d x .
+\end{aligned}
+$$
+
+Das Differenzieren unter dem Integral in $(*)$ rechtfertigt sich dabei wie folgt: Für $t \in(-1,1)$ und $x \in \Omega$ ist
+
+$$
+\left|\partial_{t} F(x, u(x)+t v(x))\right|=|f(x, u(x)+t v(x)) v(x)| \leq C\left(1+|u(x)+t v(x)|^{p-1}\right)|v(x)| \leq g(x)
+$$
+
+mit der Funktion
+
+$$
+g=\underbrace{C\left(1+(|u|+|v|)^{p-1}\right)}_{\in L^{\frac{p}{p-1}}(\Omega)} \underbrace{|v|}_{\in L^{p}(\Omega)}
+$$
+welche aufgrund der Hölderschen Ungleichung integrierbar ist.
+
+Es folgt nun, dass $\varphi$ Gâteaux-differenzierbar ist mit
+
+$$
+d \varphi(u) v=\int_{\Omega} f(x, u(x)) v(x) d x=\int_{\Omega} N_{f}(u) v d x \quad \text { für } u, v \in L^{p}(\Omega) .
+$$
+
+Wir zeigen nun die Stetigkeit von $d \varphi: L^{p}(\Omega) \rightarrow\left(L^{p}(\Omega)\right)^{\prime}$. Sei dazu $\left(u_{n}\right)_{n}$ eine Folge in $L^{p}(\Omega)$ mit $u_{n} \rightarrow u$ in $L^{p}(\Omega)$. Dann gilt $N_{f}\left(u_{n}\right) \rightarrow N_{f}(u)$ in $L^{p^{\prime}}(\Omega)$ gemäß 4.16 (angewandt mit $\alpha=p-1, q=p^{\prime}=\frac{p}{\alpha}$ ). Für $v \in L^{p}(\Omega)$ ist dabei
+
+$\left|\left(d \varphi\left(u_{n}\right)-d \varphi(u)\right) v\right|=\left|\int_{\Omega}\left(N_{f}\left(u_{n}\right)-N_{f}(u)\right) v d x\right| \leq\left\|N_{f}\left(u_{n}\right)-N_{f}(u)\right\|_{L^{p^{\prime}}(\Omega)}\|v\|_{L^{p}(\Omega)}$,
+
+und somit folgt
+
+$$
+\left\|d \varphi\left(u_{n}\right)-d \varphi(u)\right\| \leq\left\|N_{f}\left(u_{n}\right)-N_{f}(u)\right\|_{L^{p^{\prime}}(\Omega)} \rightarrow 0 \quad \text { für } n \rightarrow \infty \text {. }
+$$
+
+Dies zeigt die Stetigkeit von $d \varphi$, und mit 4.14 folgt die Behauptung.
+
+\subsection*{Korollar}
+
+Sei $\Omega \subset \mathbb{R}^{N}$ ein Gebiet mit endlichem Maß, $p \geq 1$ und $f$ eine $\mathcal{C}$-Funktion auf $\Omega$ mit
+
+$$
+|f(x, t)| \leq C\left(1+|t|^{p-1}\right) \quad \text { für }(x, t) \in \Omega \times \mathbb{R} \text { mit einer Konstanten } C>0 \text {. }
+$$
+
+Im Fall $N \geq 3$ gelte zudem $p \leq 2^{*}=\frac{2 N}{N-2}$. Sei $F: \Omega \times \mathbb{R} \rightarrow \mathbb{R}$ definiert durch $F(x, t)=\int_{0}^{t} f(x, s) d s$. Dann wird durch
+
+$$
+\psi: H_{0}^{1}(\Omega) \rightarrow \mathbb{R}, \quad \psi(u)=\int_{\Omega} F(x, u(x)) d x
+$$
+
+ein $C^{1}$-Funktional definiert mit
+
+$$
+\psi^{\prime}(u) v=\int_{\Omega} f(x, u(x)) v(x) d x \quad \text { für } u, v \in H_{0}^{1}(\Omega) .
+$$
+
+Beweis. Es ist $\psi=\varphi \circ i: H_{0}^{1}(\Omega) \rightarrow \mathbb{R}$, wobei $i: H_{0}^{1}(\Omega) \rightarrow L^{p}(\Omega)$ die stetige Einbettung aus LPDGL 8.5 und $\varphi: L^{p}(\Omega) \rightarrow \mathbb{R}$ das Funktional aus 4.17 ist. Mit Kettenregel und 4.17 folgt $\psi \in \mathcal{C}^{1}\left(H_{0}^{1}(\Omega)\right)$ mit
+
+$$
+\psi^{\prime}(u) v=\varphi^{\prime}(i(u)) i^{\prime}(u) v=\varphi^{\prime}(u) v=\int_{\Omega} f(x, u(x)) v(x) d x \quad \text { für } u, v \in H_{0}^{1}(\Omega),
+$$
+
+wie behauptet.
+
+\subsection*{Bemerkung}
+
+Sei, unter den Voraussetzungen von 4.18 , das Funktional $\psi: H_{0}^{1}(\Omega) \rightarrow \mathbb{R}$ wie in (4.4) definiert. Sei ferner
+
+$$
+\Phi: H_{0}^{1}(\Omega) \rightarrow \mathbb{R}, \quad \Phi(u)=\frac{1}{2} \int_{\Omega}|\nabla u|^{2} d x-\psi(u)
+$$
+
+Dann ist $\Phi$ ein $C^{1}$-Funktional. Ferner ist $u \in H_{0}^{1}(\Omega)$ genau dann ein kritischer Punkt von $\Phi$, wenn $u$ eine schwache Lösung des Randwertproblems
+
+$$
+\left\{\begin{aligned}
+-\Delta u & =f(x, u) & & \text { in } \Omega, \\
+u & =0 & & \text { auf } \partial \Omega
+\end{aligned}\right.
+$$
+
+ist. Es liegt daher nahe, hinreichende Kriterien für die Existenz kritischer Punkte von Funktionalen zu untersuchen.
+
+\subsection*{Lemma}
+
+Sei $U \subset E$ offen und $u \in U$ ein lokales Extremum eines in $u$ Gâteauxdifferenzierbaren Funktional $\Phi: U \rightarrow \mathbb{R}$. Dann ist $d \Phi(u)=0$.
+
+Beweis. Sei $v \in E$. Nach Voraussetzung wechselt die Funktion $t \mapsto \Phi(u+t v)-\Phi(u)$ in einer Umgebung von $0 \in \mathbb{R}$ nicht das Vorzeichen. Aus der Existenz des Grenzwerts folgt
+
+$$
+d \Phi(u) v=\lim _{t \rightarrow 0} \frac{\Phi(u+t v)-\Phi(u)}{t}=0
+$$
+
+\subsection*{Definition und Bemerkung}
+
+Sei $U \subset E$ und $\Phi: U \rightarrow \mathbb{R}$ ein Funktional.
+
+(i) $\Phi$ heißt koerziv, wenn gilt:
+
+$$
+\begin{aligned}
+& \Phi(u) \rightarrow \infty \text { für }\|u\| \rightarrow \infty, \text { d.h. } \\
+& \lim _{n \rightarrow \infty} \Phi\left(u_{n}\right)=\infty \quad \text { für jede Folge }\left(u_{n}\right)_{n} \text { in } U \text { mit }\left\|u_{n}\right\| \rightarrow \infty .
+\end{aligned}
+$$
+
+(ii) Eine Folge $\left(u_{n}\right)_{n} \subset U$ heißt Minimalfolge von $\Phi$, wenn gilt:
+
+$$
+\lim _{n \rightarrow \infty} \Phi\left(u_{n}\right) \rightarrow \inf _{U} \Phi
+$$
+
+Ist $\Phi$ koerziv, so ist offensichtlich jede Minimalfolge für $\Phi$ beschränkt.
+
+\subsection*{Hilfssatz}
+
+Sei $\Omega \subset \mathbb{R}^{N}$ ein beschränktes Gebiet, und sei $p \geq 1$ sowie $p<\frac{2 N}{N-2}$ im Fall $N \geq 3$. Sei ferner $\left(u_{n}\right)_{n} \subset H_{0}^{1}(\Omega)$ eine beschränkte Folge. Dann existiert eine Teilfolge wiederum $\left(u_{n}\right)_{n}$ genannt - und $u \in H_{0}^{1}(\Omega)$ mit
+
+$$
+u_{n} \rightarrow u \quad \text { in } L^{p}\left(\mathbb{R}^{N}\right) \quad \text { und } \quad\|u\| \leq \liminf _{n \rightarrow \infty}\left\|u_{n}\right\|
+$$
+
+Hier und im Folgenden sei $\|\cdot\|$ gegeben durch $\|u\|^{2}:=\int_{\Omega}|\nabla u|^{2} d x$.
+
+Beweis. Ohne Einschränkung sei $p \geq 2$. Gemäß LPDGL 8.15 existiert eine Teilfolge - wiederum $\left(u_{n}\right)_{n}$ genannt - und $u \in L^{p}(\Omega)$ mit $u_{n} \rightarrow u$ in $L^{p}(\Omega)$. Wir definieren nun
+
+$$
+h: C_{c}^{\infty}(\Omega) \rightarrow \mathbb{R}, \quad h(v)=-\int_{\Omega} u \Delta v d x
+$$
+
+Dann gilt
+
+$$
+h(v)=-\lim _{n \rightarrow \infty} \int_{\Omega} u_{n} \Delta v d x=\lim _{n \rightarrow \infty} \int_{\Omega} \nabla u_{n} \nabla v d x \leq C\|v\|
+$$
+
+mit $C:=\liminf _{n \rightarrow \infty}\left\|u_{n}\right\|$. Somit lässt sich $h$ zu einer stetigen Linearform auf $H_{0}^{1}(\Omega)$ fortsetzen, und nach dem Rieszschen Darstellungssatz (vgl. LPDGL 7.15) existiert ein $w \in H_{0}^{1}(\Omega)$ mit
+
+$$
+\lim _{n \rightarrow \infty} \int_{\Omega} \nabla u_{n} \nabla v d x=h(v)=\int_{\Omega} \nabla w \cdot \nabla v d x \quad \text { für alle } v \in C_{0}^{\infty}(\Omega)
+$$
+
+wobei
+
+$$
+\|w\|=\|h\|_{\left[H_{0}^{1}(\Omega)\right]^{\prime}} \leq C
+$$
+
+gilt. Sei nun $v \in H_{0}^{1}(\Omega), \varepsilon>0$ und $\tilde{v} \in C_{c}^{\infty}(\Omega)$ mit $\|v-\tilde{v}\|<\varepsilon$. Dann ist
+
+$$
+\begin{aligned}
+& \limsup _{n \rightarrow \infty} \int_{\Omega} \nabla\left(u_{n}-w\right) \nabla v d x \\
+& \leq \lim _{n \rightarrow \infty} \int_{\Omega} \nabla\left(u_{n}-w\right) \nabla \tilde{v} d x+\sup _{n \in \mathbb{N}} \int_{\Omega} \nabla\left(u_{n}-w\right) \nabla(v-\tilde{v}) d x \leq \varepsilon \sup _{n \in \mathbb{N}}\left\|u_{n}-w\right\| .
+\end{aligned}
+$$
+
+Da $\left(u_{n}\right)_{n} \subset H_{0}^{1}(\Omega)$ beschränkt ist und $\varepsilon>0$ beliebig gewählt war, folgt also
+
+$$
+\int_{\Omega} \nabla\left(u_{n}-w\right) \nabla v d x \rightarrow 0 \quad \text { für alle } v \in H_{0}^{1}(\Omega) \text {. }
+$$
+
+Sei nun $v \in H_{0}^{1}(\Omega)$ eine schwache Lösung des Problems $-\Delta v=u-w$ (existiert nach LPDGL 7.10). Dann ist
+
+$$
+0=\lim _{n \rightarrow \infty} \int_{\Omega} \nabla\left(u_{n}-w\right) \nabla v d x=\lim _{n \rightarrow \infty} \int_{\Omega}\left(u_{n}-w\right)(u-w) d x=\|u-w\|_{L^{2}(\Omega)}^{2}
+$$
+
+Somit folgt $u=w \in H_{0}^{1}(\Omega)$, und $\|u\| \leq C=\liminf _{n \rightarrow \infty}\left\|u_{n}\right\|$ gemäß (4.6).
+
+\subsection*{Hauptsatz}
+
+Sei $\Omega \subset \mathbb{R}^{N}$ ein beschränktes Gebiet und $f$ eine $\mathcal{C}$-Funktion auf $\Omega$ mit
+
+$$
+|f(x, t)| \leq C_{1}\left(1+|t|^{p-1}\right) \quad \text { für }(x, t) \in \Omega \times \mathbb{R} \text {. }
+$$
+
+mit Konstanten $C_{1}>0, p \geq 1$ sowie $p<\frac{2 N}{N-2}$ im Fall $N \geq 3$. Sei ferner $F: \Omega \times \mathbb{R} \rightarrow$ $\mathbb{R}, F(x, t)=\int_{0}^{t} f(x, s) d s$, und es gelte
+
+$$
+F(x, t) \leq \frac{\lambda}{2} t^{2}+C_{2} \quad \text { für }(x, t) \in \Omega \times \mathbb{R}
+$$
+
+mit Konstanten $C_{2}>0$ und $\lambda<\lambda_{1}(\Omega)$, wobei $\lambda_{1}(\Omega)$ den ersten Dirichleteigenwert von $-\Delta$ in $\Omega$ bezeichne (vgl. LPDGL 9.2).
+
+Dann nimmt das $C^{1}$-Funktional
+
+$$
+\Phi: H_{0}^{1}(\Omega) \rightarrow \mathbb{R}, \quad \Phi(u)=\frac{1}{2} \int_{\Omega}|\nabla u|^{2} d x-\int_{\Omega} F(x, u(x)) d x
+$$
+
+ein Minimum an, und jeder Minimierer $u$ löst das Problem (4.5).
+
+Beweis. Gemäß Übungsblatt 5, Aufgabe 4 ist das Funktional $\Phi$ koerziv auf $H_{0}^{1}(\Omega)$. Sei $\left(u_{n}\right)_{n} \subset H_{0}^{1}(\Omega)$ eine Folge mit $\Phi\left(u_{n}\right) \rightarrow \inf _{H_{0}^{1}(\Omega)} \Phi$ für $n \rightarrow \infty$. Wie in 4.21 bemerkt, ist dann $\left(u_{n}\right)_{n}$ beschränkt in $H_{0}^{1}(\Omega)$. Anwendung von 4.22 liefert nach Übergang zu einer Teilfolge also $u \in H_{0}^{1}(\Omega)$ mit
+
+$$
+u_{n} \rightarrow u \quad \text { in } L^{p}\left(\mathbb{R}^{N}\right) \quad \text { und } \quad\|u\| \leq \liminf _{n \rightarrow \infty}\left\|u_{n}\right\|
+$$
+
+Aus der ersteren Konvergenzeigenschaft folgt gemäß 4.17 auch
+
+$$
+\lim _{n \rightarrow \infty} \int_{\Omega} F\left(x, u_{n}(x)\right) d x=\int_{\Omega} F(x, u(x)) d x
+$$
+
+Man erhält somit
+
+$$
+\begin{aligned}
+\Phi(u)=\frac{\|u\|^{2}}{2}-\int_{\Omega} F(x, u(x)) d x & \leq \liminf _{n \rightarrow \infty}\left(\frac{\left\|u_{n}\right\|^{2}}{2}-\int_{\Omega} F\left(x, u_{n}(x)\right) d x\right) \\
+& =\liminf _{n \rightarrow \infty} \Phi\left(u_{n}\right)=\inf _{H_{0}^{1}(\Omega)} \Phi .
+\end{aligned}
+$$
+
+Somit nimmt $\Phi$ in $u$ ein Minimum an. Ferner löst $u$ das Problem (4.5) gemäß 4.20 und 4.19.
+
+\subsection*{Beispiel}
+
+Satz 4.23 ist insbesondere auf die in 3.10(i)-(iii) betrachteten $\mathcal{C}$-Funktionen anwendbar. Anders als dort vorausgesetzt, muss $\Omega$ hier keine gleichmäßige äußere Sphärenbedingung erfüllen. Man kann, angelehnt an 3.10(i), auch die (allgemeinere) Funktion
+
+$$
+f(x, t)=g(x) t+\sin t+h(x)
+$$
+
+mit $g, h \in L^{\infty}(\Omega)$ betrachten, wobei hier esssup $g<\lambda_{1}(\Omega)$ gelte. Damit erhält man eine schwache Lösung des Problems
+
+$$
+\left\{\begin{aligned}
+-\Delta u & =g(x) u+\sin u+h(x), & & x \in \Omega, \\
+u & =0, & & \text { auf } \partial \Omega .
+\end{aligned}\right.
+$$
+
+\subsection*{Beispiel}
+
+Wir betrachten nun den (superlinearen) Spezialfall $f(x, t)=|t|^{p-2} t$ mit $p>2$ und $p<\frac{2 N}{N-2}$ im Fall $N \geq 3$, d.h. das Randwertproblem
+
+$$
+\left\{\begin{aligned}
+-\Delta u & =|u|^{p-2} u & & \text { in } \Omega, \\
+u & =0 & & \text { auf } \partial \Omega .
+\end{aligned}\right.
+$$
+
+In der bisherigen Notation ist dann $F(x, t)=\frac{|t|^{p}}{p}$ und somit das zugehörige Funktional gegeben durch
+
+$$
+\Phi: H_{0}^{1}(\Omega) \rightarrow \mathbb{R}, \quad \Phi(u)=\frac{\|u\|^{2}}{2}-\frac{1}{p} \int_{\Omega}|u|^{p} d x
+$$
+
+Dieses Funktional ist nicht nach unten beschränkt; tatsächlich gilt für jede Funktion $u \in H_{0}^{1}(\Omega) \backslash\{0\}$ die Beziehung
+
+$$
+\Phi(s u)=s^{2} \frac{\|u\|^{2}}{2}-\frac{s^{p}}{p} \int_{\Omega}|u|^{p} d x \rightarrow-\infty \quad \text { für } s \rightarrow \infty .
+$$
+
+Also ist der Hauptsatz 4.23 zur Minimierung hier nicht anwendbar.
+
+$\Phi$ ist auch nicht nach oben beschränkt. Dies zeigen wir exemplarisch im Fall $N \geq 3$ : Für $k \in \mathbb{N}$ sei $\psi_{k} \in H_{0}^{1}(\Omega)$ eine Dirichlet-Eigenfunktion von $-\Delta$ in $\Omega$ zum Eigenwert $\lambda_{k}$ mit $\left\|\psi_{k}\right\|_{L^{p}(\Omega)}=1$ (vgl. LPDGL 9.2). Dann ist (gemäß der Interpolationsungleichung)
+
+$$
+1=\left\|\psi_{k}\right\|_{L^{p}(\Omega)} \leq\left\|\psi_{k}\right\|_{L^{2}(\Omega)}^{\alpha}\left\|\psi_{k}\right\|_{L^{2^{*}(\Omega)}}^{1-\alpha} \quad \text { für alle } k,
+$$
+
+wobei $\alpha \in(0,1)$ durch die Gleichung $\frac{1}{p}=\frac{\alpha}{2}+\frac{1-\alpha}{2^{*}}$ gegeben ist. Ferner ist
+
+$$
+\sqrt{\lambda_{k}}\left\|\psi_{k}\right\|_{L^{2}(\Omega)}=\left\|\psi_{k}\right\| \quad \text { und } \quad\left\|\psi_{k}\right\|_{L^{2^{*}}(\Omega)} \leq c\left\|\psi_{k}\right\|
+$$
+mit einer von $k$ unabhängigen Konstanten $c>0$ gemäß LPDGL 8.5 (SobolevEinbettung). Mit (4.8) folgt somit
+
+$$
+1 \leq \lambda_{k}^{-\frac{\alpha}{2}} c^{1-\alpha}\left\|\psi_{k}\right\| \quad \text { für alle } k
+$$
+
+und damit
+
+$$
+2 \Phi\left(\psi_{k}\right)=\left\|\psi_{k}\right\|^{2}-\frac{2}{p} \geq \lambda_{k}^{\alpha} c^{-2(1-\alpha)}-\frac{2}{p} \rightarrow \infty \quad \text { für } k \rightarrow \infty
+$$
+
+da $\lim _{k \rightarrow \infty} \lambda_{k}=\infty$ ist.
+
+Da also $\Phi$ weder nach oben noch nach unten beschränkt ist, benötigen wir einen Satz, der einen kritischen Punkt $u \neq 0$ anderer Gestalt, z.B. einen Sattelpunkt von $\Phi$, liefert.
+
+Ein geometrischer Hinweis für die Existenz eines Sattelpunktes ist die Tatsache, das $\Phi$ zwar nicht nach unten beschränkt ist, aber im Nullpunkt ein lokales Minimum besitzt. Letztere Eigenschaft folgt mit $\kappa:=\sup \left\{\|u\|_{L^{p}(\Omega)}: u \in H_{0}^{1}(\Omega),\|u\|=1\right\}$ aus der Abschätzung
+
+$$
+\Phi(u) \geq \frac{1}{2}\|u\|^{2}-\frac{\kappa^{p}}{p}\|u\|^{p}=\|u\|^{2}\left(\frac{1}{2}-\frac{\kappa^{p}}{p}\|u\|^{p-2}\right)>0 \quad \text { für } 0<\|u\|<\left(\frac{p}{2 \kappa^{p}}\right)^{\frac{1}{p-2}} \text {. }
+$$
+
+Man spricht in diesem Fall von einer Mountain-Pass-Geometrie des Funktionals $\Phi$.
+
+\subsection*{Hauptsatz}
+
+Sei $(E,\|\cdot\|)$ ein $\mathbb{R}$-Hilbertraum und $\psi: E \rightarrow \mathbb{R}$ ein $\mathcal{C}^{1}$-Funktional. Dabei gelte:
+
+i). Für alle $u \in E \backslash\{0\}$ ist die Funktion $t \mapsto \frac{\psi^{\prime}(t u) u}{t}$ streng monoton wachsend auf $(0, \infty) \mathrm{mit}$
+
+$$
+\lim _{t \rightarrow 0} \frac{\psi^{\prime}(t u) u}{t}<\|u\|^{2}<\lim _{t \rightarrow \infty} \frac{\psi^{\prime}(t u) u}{t} \leq \infty
+$$
+
+ii). Zu jeder beschränkten Folge $\left(u_{n}\right)_{n} \subset E$ existiert eine Teilfolge - im Folgenden auch $\left(u_{n}\right)_{n}$ genannt - und $u \in E$ mit
+
+$$
+\|u\| \leq \liminf _{n \rightarrow \infty}\left\|u_{n}\right\| \quad \text { und } \quad \psi(t u)=\lim _{n \rightarrow \infty} \psi\left(t u_{n}\right) \quad \text { für alle } t>0 \text {. }
+$$
+
+Dann hat das $\mathcal{C}^{1}$-Funktional
+
+$$
+\Phi: E \rightarrow \mathbb{R}, \quad \Phi(u)=\frac{1}{2}\|u\|^{2}-\psi(u)
+$$
+
+einen kritischen Punkt in $E \backslash\{0\}$. Genauer gilt: $\Phi$ nimmt auf der Menge
+
+$$
+\left.\mathcal{N}:=\left\{u \in E \backslash\{0\}: \Phi^{\prime}(u) u=0\right\} \quad \text { (Neharimenge } z u \Phi\right)
+$$
+
+ein Minimum an, und jeder Mimimierer $u \in \mathcal{N}$ von $\left.\Phi\right|_{\mathcal{N}}$ ist ein kritischer Punkt von $\Phi$.
+
+\subsection*{Korollar}
+
+Sei $\Omega \subset \mathbb{R}^{N}$ ein beschränktes Gebiet, $p>2$ und $p<\frac{2 N}{N-2}$ im Fall $N \geq 3$. Dann hat das Problem
+
+$$
+\left\{\begin{aligned}
+-\Delta u & =|u|^{p-2} u & & \text { in } \Omega, \\
+u & =0 & & \text { auf } \partial \Omega
+\end{aligned}\right.
+$$
+
+neben der trivialen Lösung $u \equiv 0$ noch eine nichttriviale schwache Lösung $u \in$ $H_{0}^{1}(\Omega)$.
+
+Beweis. Sei $E:=H_{0}^{1}(\Omega)$, wie bisher mit Norm $\|u\|:=\left(\int_{\Omega}|\nabla u|^{2} d x\right)^{\frac{1}{2}}$ versehen. Sei ferner
+
+$$
+\psi: E \rightarrow \mathbb{R}, \quad \psi(u)=\frac{1}{p} \int_{\Omega}|u|^{p} d x
+$$
+
+Gemäß 4.18 ist $\psi$ ein $C^{1}$-Funktional auf $E$. Ferner sind schwache Lösungen von (4.9) genau die kritischen Punkte des $C^{1}$-Funktionals
+
+$$
+\Phi: E \rightarrow \mathbb{R}, \quad \Phi(u)=\frac{1}{2}\|u\|^{2}-\psi(u)
+$$
+
+Wir müssen also nur noch zeigen, dass $\psi$ die Voraussetzungen von 4.26 erfüllt: Zu i): Sei $u \in E \backslash\{0\}$. Dann ist
+
+$$
+\frac{\psi^{\prime}(t u) u}{t}=\frac{1}{t} \int_{\Omega}|t u|^{p-2} t u^{2} d x=t^{p-2} \int_{\Omega}|u|^{p} d x \quad \text { strikt wachsend in } t \in[0, \infty)
+$$
+
+mit
+
+$$
+\lim _{t \rightarrow 0} \frac{\psi^{\prime}(t u) u}{t}=0 \quad \text { und } \quad \lim _{t \rightarrow \infty} \frac{\psi^{\prime}(t u) u}{t}=\infty
+$$
+
+Zu ii): Sei $\left(u_{n}\right)_{n} \subset E$ eine beschränkte Folge. Gemäß 4.22 existiert dann eine Teilfolge - wiederum $\left(u_{n}\right)_{n}$ genannt - und $u \in E$ mit $\|u\| \leq \liminf _{n \rightarrow \infty}\left\|u_{n}\right\|$ und $u_{n} \rightarrow u$ in $L^{p}(\Omega)$, also auch
+
+$$
+\psi(t u)=\frac{1}{p}\|t u\|_{L^{p}(\Omega)}^{p}=\lim _{n \rightarrow \infty} \frac{1}{p}\left\|t u_{n}\right\|_{L^{p}(\Omega)}=\lim _{n \rightarrow \infty} \psi\left(t u_{n}\right) \quad \text { für alle } t>0 .
+$$
+
+Beweis von 4.26. 1. Schritt (Vorbereitungen): Sei $\gamma: E \rightarrow \mathbb{R}$ definiert durch
+
+$$
+\gamma(u)=\Phi^{\prime}(u) u=\|u\|^{2}-\psi^{\prime}(u) u
+$$
+
+Dann ist $\mathcal{N}=\gamma^{-1}(0) \backslash\{0\} \subset E$. Sei nun $u \in E \backslash\{0\}$. Dann gilt
+
+$$
+\frac{d}{d t} \Phi(t u)=\Phi^{\prime}(t u) u=\frac{\gamma(t u)}{t}=t\left(\|u\|^{2}-\frac{\psi^{\prime}(t u) u}{t}\right) \quad \text { für } t>0 \text {. }
+$$
+
+Nach Voraussetzung i) existiert also genau ein $t_{u} \in(0, \infty)$ mit
+
+$$
+\left.\frac{d}{d t}\right|_{t_{u}} \Phi(t u)=0, \quad \text { also } \gamma\left(t_{u} u\right)=0 \text { und somit } t_{u} u \in \mathcal{N}
+$$
+
+wobei gilt:
+
+$$
+t \mapsto \Phi(t u) \text { ist strikt wachsend auf }\left[0, t_{u}\right] \text { und strikt fallend auf }\left[t_{u}, \infty\right)
+$$
+
+Somit folgt $\Phi\left(t_{u} u\right)=\max _{t \geq 0} \Phi(t u)$. Ist speziell $u \in \mathcal{N}$, so ist $t_{u}=1$ und somit
+
+$$
+\Phi(u)=\max _{t \geq 0} \Phi(t u) .
+$$
+
+2. Schritt: Sei im Folgenden $c:=\left.\inf \Phi\right|_{\mathcal{N}}$, und sei $\left(u_{n}\right)_{n} \subset \mathcal{N}$ eine Folge mit $\lim _{n \rightarrow \infty} \Phi\left(u_{n}\right)=c$. Sei ferner $v_{n}=\frac{u_{n}}{\left\|u_{n}\right\|}$ für $n \in \mathbb{N}$. Nach Voraussetzung ii) existiert ein $v \in E$ mit
+
+$$
+\|v\| \leq \liminf _{n \rightarrow \infty}\left\|v_{n}\right\|=1 \quad \text { und } \quad \lim _{n \rightarrow \infty} \psi\left(t v_{n}\right)=\psi(t v) \quad \text { für alle } t>0 \text {. }
+$$
+
+Für alle $t>0$ ist dann
+
+$$
+c=\lim _{n \rightarrow \infty} \Phi\left(u_{n}\right) \stackrel{(4.10)}{\geq} \lim _{n \rightarrow \infty} \Phi\left(t v_{n}\right)=\frac{t^{2}}{2}-\lim _{n \rightarrow \infty} \psi\left(t v_{n}\right)=\frac{t^{2}}{2}-\psi(t v)
+$$
+
+Daraus folgt $v \neq 0$, denn im Fall $v=0$ wäre $c \geq \frac{t^{2}}{2}-\psi(0)$ für alle $t>0$, Ferner folgt auch $\Phi\left(t_{v} v\right) \leq c$, und somit nimmt $\left.\Phi\right|_{\mathcal{N}}$ in $t_{v} v \in \mathcal{N}$ ein Minimum an.
+
+3. Schritt: Sei $u \in \mathcal{N}$ beliebig mit $\Phi(u)=c$. Wir zeigen, dass $u$ ein kritischer Punkt von $\Phi$ ist. Angenommen, dies wäre nicht der Fall. Dann würde $v \in E$ und $\varepsilon>0$ existieren mit $\Phi^{\prime}(u) v<-\varepsilon$. Aufgrund der Stetigkeit von $\Phi^{\prime}$ existieren dann auch $\delta \in(0,1)$ und $\rho>0 \mathrm{mit}$
+
+$$
+\Phi^{\prime}(t(u+s v)) v<-\varepsilon \quad \text { für } t \in[1-\delta, 1+\delta], s \in[-\rho, \rho] \text {. }
+$$
+
+Da ferner $\gamma((1-\delta) u)>0>\gamma((1+\delta) u)$ gilt, existiert auch $s \in(0, \rho)$ mit
+
+$$
+\gamma((1-\delta)(u+s v))>0>\gamma((1+\delta)(u+s v))
+$$
+
+Nach dem Zwischenwertsatz existiert somit $t \in[1-\delta, 1+\delta]$ mit
+
+$$
+\gamma(t(u+s v))=0, \quad \text { also } \quad t(u+s v) \in \mathcal{N}
+$$
+
+Wegen (4.10) und (4.11) ist ferner
+
+$$
+\Phi(u)-\Phi(t(u+s v)) \geq \Phi(t u)-\Phi(t(u+s v))=-\int_{0}^{s} \Phi^{\prime}(t(u+\tau v)) t v d \tau \geq \varepsilon s t>0
+$$
+
+und somit $\Phi(t(u+s v))<\Phi(u)=c$ im Widerspruch zur Definition von $c$. Es folgt, dass $u$ ein kritischer Punkt von $\Phi$ ist.
+
+\subsection*{Bemerkung}
+
+i) Der Beweis von 4.26 zeigt, dass unter den dortigen Voraussetzungen das Infimum $c$ von $\Phi$ auf der Neharimenge auch gegeben ist durch die MinimaxCharakterisierung
+
+$$
+c=\inf _{u \in E \backslash\{0\}} \sup _{t \geq 0} \Phi(t u)
+$$
+
+ii) In der speziellen Situation von Korollar 4.27 ist
+
+$$
+\Phi^{\prime}(u) v=\int_{\Omega} \nabla u \nabla v d x-\int_{\Omega}|u|^{p-2} u v d x \quad \text { für } u, v \in H_{0}^{1}(\Omega),
+$$
+
+also insbesondere
+
+$$
+\Phi^{\prime}(u) u=\|u\|^{2}-\|u\|_{L^{p}}^{p}
+$$
+
+und
+
+$$
+\Phi^{\prime}(u) u^{ \pm}=\int_{\Omega} \nabla u \nabla u^{ \pm} d x-\int_{\Omega}|u|^{p-2} u u^{ \pm} d x=\left\|u^{ \pm}\right\|^{2}-\left\|u^{ \pm}\right\|_{L^{p}}^{p}=\Phi^{\prime}\left(u^{ \pm}\right) u^{ \pm}
+$$
+
+für $u \in H_{0}^{1}(\Omega)$, wobei wir hier $u^{+}=\max \{u, 0\}, u^{-}=\min \{u, 0\} \in H_{0}^{1}(\Omega)$ betrachten. Es folgt die Identität
+
+$$
+\mathcal{N}=\left\{u \in H_{0}^{1}(\Omega) \backslash\{0\}:\|u\|^{2}=\|u\|_{L^{p}}^{p}\right\}
+$$
+
+und somit
+
+$$
+\Phi(u)=\left(\frac{1}{2}-\frac{1}{p}\right)\|u\|_{L^{p}}^{p} \quad \text { für alle } u \in \mathcal{N} \text {. }
+$$
+
+Ist nun $u \in \mathcal{N}$ ein Minimierer von $\left.\Phi\right|_{\mathcal{N}}$, so ist $\Phi^{\prime}(u)=0$ gemäß 4.26 und somit auch $u^{ \pm} \in \mathcal{N} \cup\{0\}$ wegen (4.12). Aufgrund der Minimalitätseigenschaft von $u$ ist im Fall $u^{+} \neq 0$ dann $\Phi(u) \leq \Phi\left(u^{+}\right)$und somit $\|u\|_{L^{p}} \leq\left\|u^{+}\right\|_{L^{p}}$ wegen (4.13); dies impliziert $u=u^{+}$. Genauso sieht man $u=u^{-}$im Fall $u^{-} \neq 0$. Es folgt, dass $u$ nicht das Vorzeichen wechselt. Da sowohl $\mathcal{N}$ als auch $\Phi$ invariant ist unter Vorzeichenwechsel $u \mapsto-u$, erhält man also insbesondere eine nichtnegative Lösung $u \neq 0$ von (4.9) als Minimierer von $\left.\Phi\right|_{\mathcal{N}}$. Diese löst also
+
+$$
+\left\{\begin{aligned}
+-\Delta u & =u^{p-1} & & \text { in } \Omega, \\
+u & =0 & & \text { auf } \partial \Omega .
+\end{aligned}\right.
+$$
+
+Als superharmonische Funktion nimmt $u$ ferner den Wert 0 nicht im Inneren von $\Omega$ an, und damit ist $u$ strikt positiv.
+
+\section*{$\S 5$ Globale variationelle Methoden: Deformationen und kritische Punkte}
+
+Sei $E$ stets ein $\mathbb{R}$-Banachraum
+
+\subsection*{Definition}
+
+Sei $U \subset E$ und $\Phi: U \rightarrow \mathbb{R}$ ein Funktional. Für $c \in \mathbb{R}$ sei
+
+$$
+\Phi^{c}:=\{u \in U: \Phi(u) \leq c\} \quad(c \text {-Subniveaumenge von } \Phi) .
+$$
+
+\subsection*{Bemerkung und Beispiele}
+
+Sei $\Phi: E \rightarrow \mathbb{R}$ ein stetig differenzierbares Funktional. Wir wollen im Folgenden ein allgemeines Kriterium für die Existenz eines kritischen Punktes von $\Phi$ herleiten. Dazu betrachten wir zunächst einige Beispiele.
+
+Sei zunächst $E=\mathbb{R}^{2}$, und seien $\Phi_{1}, \Phi_{2}: \mathbb{R}^{2} \rightarrow \mathbb{R}$ definiert durch $\Phi_{1}(x, y)=x^{2}+y^{2}$ und $\Phi_{2}(x, y)=x^{2}-y^{2}$. Diese Funktionen haben jeweils $0 \in \mathbb{R}^{2}$ als einzigen kritischen Punkt, und der zugehörige kritische Wert ist 0 . Dabei haben die $c$-Subniveaumengen jeweils eine unterschiedliche topologische Gestalt für $c>0$ und $c<0$. Insbesondere gilt:
+
+i). $\Phi_{1}^{c}:=\left\{(x, y) \in \mathbb{R}^{2}: x^{2}+y^{2} \leq c\right\}$ ist ein Ball für $c>0$ und $\Phi_{1}^{c}=\varnothing$ für $c<0$.
+
+ii). Für $c>0$ ist $\Phi_{2}^{c}:=\left\{(x, y) \in \mathbb{R}^{2}: x^{2}-y^{2} \leq c\right\}$ zusammenhängend, für $c<0$ aber nicht.
+
+Generell muss bei einem kritischen Wert aber kein Topologiewechsel stattfinden. Dies zeigt im Fall $E=\mathbb{R}$ die Funktion $\Phi: \mathbb{R} \rightarrow \mathbb{R}, \Phi(x)=x^{3}$ mit dem kritischen Punkt 0 mit $\Phi(0)=0$. Für alle $c \in \mathbb{R}$ ist $\Phi^{c}$ ein Intervall der Form $(-\infty, \pm \sqrt[3]{|c|})$. Umgekehrt stellt sich die Frage, ob ein Topologiewechsel der Subniveaumengen die Existenz eines kritischen Punktes impliziert. Auch dies stimmt nicht; betrachte dazu die Funktion $\Phi=\exp : \mathbb{R} \rightarrow \mathbb{R}$. Dann ist $\Phi^{c}=(-\infty, \log c)$ für $c>0$ und $\Phi^{c}=\varnothing$ für $c<0$. Trotzdem ist $c=0$ kein kritischer Wert von $\Phi$. Allerdings existiert eine Folge $\left(x_{n}\right)_{n}$ in $\mathbb{R}$ mit $\lim _{n \rightarrow \infty} \Phi\left(x_{n}\right)=c$ und $\lim _{n \rightarrow \infty} \Phi^{\prime}\left(x_{n}\right)=0$.
+
+\subsection*{Definition}
+
+Sei $\Phi \in \mathcal{C}^{1}(E, \mathbb{R})$ und $c \in \mathbb{R}$. Eine Folge $\left(u_{n}\right) \subset E$ heißt Palais-Smale-Folge von $\Phi$ bei $c$ (kurz: $P S_{c}$-Folge), wenn
+
+$$
+\lim _{n \rightarrow \infty} \Phi\left(u_{n}\right)=c \quad \text { und } \quad \lim _{n \rightarrow \infty} \Phi^{\prime}\left(u_{n}\right)=0 \quad \text { in } E^{\prime}
+$$
+
+gilt.
+
+Der Hauptsatz dieses Kapitels ist die folgende Alternative.
+
+\subsection*{Deformationslemma (1. Version)}
+
+Sei $\Phi \in \mathcal{C}^{1}(E, \mathbb{R})$ und $c \in \mathbb{R}$. Dann gilt eine der beiden folgenden Eigenschaften:
+
+i). Es existiert eine $P S_{c}$-Folge von $\Phi$.
+
+ii). Es existiert $\varepsilon_{0}>0$ und für jedes $\varepsilon \in\left(0, \varepsilon_{0}\right)$ eine stetige Abbildung $\eta:[0,1] \times$ $\Phi^{c+\varepsilon} \rightarrow \Phi^{c+\varepsilon},(t, u) \rightarrow \eta_{t}(u)$ mit folgenden Eigenschaften:
+
+- $\eta_{0} \equiv \operatorname{id}_{\Phi^{c+\varepsilon}}$.
+
+- $\eta_{1}\left(\Phi^{c+\varepsilon}\right) \subset \Phi^{c-\varepsilon}$.
+
+- $\left.\eta_{t}\right|_{\Phi^{c-\varepsilon}} \equiv \operatorname{id}_{\Phi^{c-\varepsilon}}$ für alle $t \in[0,1]$.
+
+\subsection*{Bemerkung}
+
+Gelten die Bedingungen aus 5.4ii), so nennt man $\Phi^{c-\varepsilon}$ einen starken Deformationsretrakt von $\Phi^{c+\varepsilon}$. In diesem Fall sind $\Phi^{c+\varepsilon}$ und $\Phi^{c-\varepsilon}$ topologisch nicht unterscheidbar. Wir stellen den Beweis von 5.4 zurück und diskutieren zunächst Anwendungen dieses Satzes.
+
+\subsection*{Definition}
+
+Man sagt, dass ein Funktional $\Phi \in \mathcal{C}^{1}(E, \mathbb{R})$ bei $c \in \mathbb{R}$ die Palais-Smale-Bedingung erfüllt (kurz: $P S_{c}$-Bedingung), wenn jede $P S_{c}$-Folge von $\Phi$ eine konvergente Teilfolge hat. Gilt dies für alle $c \in \mathbb{R}$, so sagt man, dass $\Phi$ die Palais-Smale-Bedingung (kurz: $P S$-Bedingung) erfüllt.
+
+\subsection*{Deformationslemma (2. Version)}
+
+Sei $c \in \mathbb{R}$ und $\Phi: E \rightarrow \mathbb{R}$ ein $\mathcal{C}^{1}$-Funktional, welches die $P S_{c}$ Bedingung erfüllt. Dann gilt eine der beiden folgenden Eigenschaften:
+i). $c$ ist ein kritischer Wert von $\Phi$.
+
+ii). Es existiert $\varepsilon_{0}>0$ derart, dass $\Phi^{c-\varepsilon}$ ein starker Deformationsretrakt von $\Phi^{c+\varepsilon}$ ist für $0<\varepsilon<\varepsilon_{0}$.
+
+Beweis. Gilt ii) nicht, so existiert nach 5.4 eine $P S_{c}$-Folge $\left(u_{n}\right)_{n}$ von $\Phi$. Nach Voraussetzung gilt dabei $u_{n} \rightarrow u \in E$ nach Übergang zu einer Teilfolge. Es folgt
+
+$$
+\Phi(u)=\lim _{n \rightarrow \infty} \Phi\left(u_{n}\right)=c \quad \text { und } \quad \Phi^{\prime}(u)=\lim _{n \rightarrow \infty} \Phi^{\prime}\left(u_{n}\right)=0
+$$
+
+d.h. es gilt i).
+
+\subsection*{Satz (Mountain Pass Theorem)}
+
+Sei $\Phi \in \mathcal{C}^{1}(E, \mathbb{R})$ ein Funktional mit:
+
+i). $\Phi(0)=0$.
+
+ii). Es existiert $\rho>0$ mit $\alpha:=\inf \{\Phi(u):\|u\|=\rho\}>0$.
+
+iii). Es existiert $v \in E$ mit $\|v\|>\rho$ und $\Phi(v)<\alpha$.
+
+Sei ferner
+
+$$
+\Gamma:=\{\gamma \in \mathcal{C}([0,1], E): \gamma(0)=0, \gamma(1)=v\}
+$$
+
+und
+
+$$
+c:=\inf _{\gamma \in \Gamma} \max _{t \in[0,1]} \Phi(\gamma(t))
+$$
+
+Zudem möge $\Phi$ die $P S_{c^{-}}$-Bedingung erfüllen.
+
+Dann ist $c$ ein kritischer Wert von $\Phi$.
+
+Bemerkung: Es gilt $c \geq \alpha>0$, denn für jede Kurve $\gamma \in \Gamma$ existiert ein $t \in(0,1)$ mit $\|\gamma(t)\|=\rho$. Insbesondere folgt, dass $\Phi$ einen kritischen Punkt in $E \backslash\{0\}$ besitzt.
+
+Beweis. Angenommen, dies wäre nicht der Fall. Gemäß 5.7 existiert dann $0<\varepsilon<$ $\min \{c, c-\Phi(v)\}$ derart, dass $\Phi^{c-\varepsilon}$ ein starker Deformationsretrakt von $\Phi^{c+\varepsilon}$ ist. Insbesondere existiert eine stetige Abbildung $\eta_{1}: \Phi^{c+\varepsilon} \rightarrow \Phi^{c-\varepsilon}$ mit $\left.\eta_{1}\right|_{\Phi^{c-\varepsilon}}=\mathrm{id}_{\Phi^{c-\varepsilon}}$. Nach Definition von $c$ existiert ferner $\gamma \in \Gamma \operatorname{mit} \max _{t \in[0,1]} \Phi(\gamma(t))<c+\varepsilon$. Für die stetige Kurve $\tilde{\gamma}:=\eta_{1} \circ \gamma:[0,1] \rightarrow E$ gilt dann $\tilde{\gamma}(0)=\eta_{1}(\gamma(0))=\eta_{1}(0)=0$ und $\tilde{\gamma}(1)=\eta_{1}(\gamma(1))=\eta_{1}(v)=v$, da 0 und $v$ in $\Phi^{c-\varepsilon}$ liegen. Also ist $\tilde{\gamma} \in \Gamma$. Allerdings ist $\max _{t \in[0,1]} \Phi(\tilde{\gamma}(t)) \leq \sup _{\Phi^{c+\varepsilon}} \Phi \circ \eta_{1} \leq c-\varepsilon$ im Widerspruch zur Definition von $c$.
+
+Wir wollen im folgenden Kriterien für die Gültigkeit der PS-Bedingung herleiten.
+
+\subsection*{Satz}
+
+Sei $\Phi \in \mathcal{C}^{1}(E, \mathbb{R})$ ein Funktional mit $\Phi^{\prime}=J+N$, wobei $J \in \mathcal{L}\left(E, E^{\prime}\right)$ ein topologischer Isomorphismus und $N: E \rightarrow E^{\prime}$ eine stetige und kompakte (nichtlineare) Abbildung sei. Sei ferner $c \in \mathbb{R}$ derart gegeben, dass alle $P S_{c}$-Folgen von $\Phi$ beschränkt sind. Dann erfüllt $\Phi$ die $P S_{c}$-Bedingung.
+
+Beweis. Sei $\left(u_{n}\right)_{n} \subset E$ eine $P S_{c}$-Folge von $\Phi$. Nach Voraussetzung ist $\left(u_{n}\right)_{n} \subset E$ beschränkt, nach Übergang zu einer Teilfolge gilt also $N\left(u_{n}\right) \rightarrow v \in E^{\prime}$ und somit
+
+$$
+u_{n}=J^{-1}(\overbrace{\Phi^{\prime}\left(u_{n}\right)}^{\rightarrow 0}-N\left(u_{n}\right)) \rightarrow J^{-1} v \quad \text { für } n \rightarrow \infty
+$$
+
+nach Voraussetzung.
+
+\subsection*{Korollar}
+
+Sei speziell $(E,\langle\cdot, \cdot\rangle)$ ein $\mathbb{R}$-Hilbertraum mit induzierter Norm und
+
+$$
+\Phi \in \mathcal{C}^{1}(E, \mathbb{R}), \quad \Phi(u)=\frac{1}{2}\|u\|^{2}-\psi(u)
+$$
+
+wobei $\psi^{\prime}: E \rightarrow E^{\prime}$ stetig und kompakt sei. Existiert $C>0$ und $p>2$ mit
+
+$(*) \quad p \psi(u) \leq \psi^{\prime}(u) u+C \quad$ für alle $u \in E$,
+
+so erfüllt $\Phi$ die PS-Bedingung.
+
+Beweis. Es ist $\Phi^{\prime}(u) v=\langle u, v\rangle-\psi^{\prime}(u) v$ für $u, v \in E$, also ist $\Phi^{\prime}=J-\psi^{\prime}$, wobei $J: E \rightarrow E^{\prime}$ der kanonische isometrische Isomorphismus und $\psi^{\prime}$ nach Voraussetzung kompakt und stetig ist. Sei nun $c \in \mathbb{R}$ und $\left(u_{n}\right)_{n} \subset E$ eine $P S_{c}$-Folge von $\Phi$. Insbesondere existieren dann $c_{1}, c_{2}>0$ mit $\Phi\left(u_{n}\right) \leq c_{1}$ und $\left\|\Phi^{\prime}\left(u_{n}\right)\right\|_{E^{\prime}} \leq c_{2}$ für alle $n$. Gemäß 5.9 reicht es zu zeigen, dass $\left(u_{n}\right)_{n}$ beschränkt ist. Dies folgt, da für alle $n \in \mathbb{N}$
+
+$p c_{1}+c_{2}\left\|u_{n}\right\| \geq p \Phi\left(u_{n}\right)-\Phi^{\prime}\left(u_{n}\right) u_{n}=\frac{p-2}{2}\left\|u_{n}\right\|^{2}+\psi^{\prime}\left(u_{n}\right) u_{n}-p \psi\left(u_{n}\right) \geq \frac{p-2}{2}\left\|u_{n}\right\|^{2}-C$
+
+und somit
+
+$$
+\left\|u_{n}\right\|^{2} \leq \frac{2}{p-2}\left(p c_{1}+C+c_{2}\left\|u_{n}\right\|\right)
+$$
+
+gilt.
+
+\subsection*{Satz (Anwendung)}
+
+Sei $\Omega \subset \mathbb{R}^{n}$ ein beschränktes Gebiet und $f$ eine $\mathcal{C}$-Funktion auf $\Omega$. Sei ferner $F(x, t):=\int_{0}^{t} f(x, s) d s$ für f.a. $x \in \Omega$, und es gelte:
+
+i). $f(x, 0)=\lim _{t \rightarrow 0} \frac{f(x, t)}{t}=0$ für alle $x \in \Omega$, wobei die Konvergenz gleichmäßig in $x \in \Omega$ sei.
+
+ii). Es existiert $t_{0}>0$ und $p>2$ mit $0<p F(x, t)<f(x, t) t$ für $|t| \geq t_{0}$.
+
+iii). Es existiert $C>0$ und $q>2$ mit $q<2^{*}=\frac{2 N}{N-2}$ falls $N \geq 3$ und derart, dass $|f(x, t)| \leq C\left(1+|t|^{q-1}\right)$ für $(x, t) \in \Omega \times \mathbb{R}$ gilt.
+
+Dann existiert eine nichttriviale schwache Lösung $u$ des Randwertproblems
+
+$$
+(*) \quad\left\{\begin{aligned}
+-\Delta u & =f(x, u) & & \text { in } \Omega \\
+u & =0 & & \text { auf } \partial \Omega
+\end{aligned}\right.
+$$
+
+Beweis. Wir betrachten $H_{0}^{1}(\Omega)$ wiederum mit dem Skalarprodukt
+
+$$
+(u, v) \mapsto \int_{\Omega} \nabla u \nabla v d x
+$$
+
+und der hierdurch induzierten Norm $\|\cdot\|$. Gemäß 4.18 ist das Funktional
+
+$$
+\Phi: H_{0}^{1}(\Omega) \rightarrow \mathbb{R}, \quad \Phi(u)=\frac{1}{2}\|u\|^{2}-\psi(u) \quad \text { mit } \quad \psi(u)=\int_{\Omega} F(x, u(x)) d x
+$$
+
+wohldefiniert und stetig differenzierbar, und kritische Punkte von $\Phi$ sind schwache Lösungen von $(*)$. Es reicht daher, zu zeigen, dass $\Phi$ die Voraussetzungen des Mountain Pass Theorems erfüllt.
+
+Dazu zunächst einige Vorbemerkungen:
+
+VB 1: Integration von iii) liefert $|F(x, t)| \leq C\left(|t|+\frac{|t|^{q}}{q}\right) \leq C\left(|t|+|t|^{q}\right)$ für $(x, t) \in \Omega \times \mathbb{R}$, vgl. den Beweis von 4.17.
+
+VB 2: Sei $h: \Omega \rightarrow \mathbb{R}, h(x)=\frac{F\left(x, t_{0}\right)}{t_{0}^{p}}$. Nach VB1 ist $h \in L^{\infty}(\Omega)$, und wegen Voraussetzung ii) ist $h$ positiv in $\Omega$. Für $t \geq t_{0}, x \in \Omega$ gilt
+
+$$
+\ln \left(\frac{t}{t_{0}}\right)^{p}=p \int_{t_{0}}^{t} \frac{1}{s} d s \leq \int_{t_{0}}^{t} \frac{f(x, s)}{F(x, s)} d s=\int_{t_{0}}^{t} \frac{d}{d s} \ln F(x, s) d s=\ln \frac{F(x, t)}{F\left(x, t_{0}\right)},
+$$
+
+also
+
+$$
+(* *) \quad F(x, t) \geq \frac{F\left(x, t_{0}\right)}{t_{0}^{p}} t^{p}=h(x) t^{p} \quad \text { für } t \geq t_{0}, x \in \Omega .
+$$
+
+VB 3: Sei $\varepsilon>0$ beliebig. Wegen Voraussetzung i) existiert $\delta=\delta(\varepsilon)>0$ mit
+
+$$
+|f(x, t)| \leq \varepsilon|t|, \quad \text { also } \quad|F(x, t)| \leq \frac{\varepsilon}{2}|t|^{2} \quad \text { für alle }(x, t) \in \Omega \times[-\delta, \delta] \text {. }
+$$
+
+Für $|t| \geq \delta$ und $x \in \Omega$ gilt ferner (nach VB 1)
+
+$$
+|F(x, t)| \leq C\left(|t|+|t|^{q}\right) \leq C\left(\frac{|t|^{q}}{\delta^{q-1}}+|t|^{q}\right) \leq C\left(\frac{1}{\delta^{q-1}}+1\right)|t|^{q}
+$$
+
+Mit $C_{\varepsilon}:=C\left(\frac{1}{\delta^{q-1}}+1\right)$ erhält man also
+
+$$
+|F(x, t)| \leq \frac{\varepsilon}{2}|t|^{2}+C_{\varepsilon}|t|^{q} \quad \text { für alle } x \in \Omega, t \in \mathbb{R} \text {, }
+$$
+
+und somit nach Integration über $\Omega$
+
+$$
+\begin{aligned}
+& \psi(u)=\int_{\Omega} F(x, u(x)) d x \\
+& \leq \frac{\varepsilon}{2} \int_{\Omega}|u|^{2} d x+C_{\varepsilon} \int_{\Omega}|u|^{q} d x \\
+& \leq \frac{\varepsilon a^{2}}{8}\|u\|^{2}+\tilde{C}_{\varepsilon}\|u\|^{q} . \quad(* * *)
+\end{aligned}
+$$
+
+Hierbei ist $a>0$ die Konstante aus der Poincaré-Ungleichung 6.27 und $\tilde{C}_{\varepsilon}>0$ eine Konstante, deren Existenz durch die stetige Sobolev-Einbettung $H_{0}^{1}(\Omega) \hookrightarrow L^{q}(\Omega)$ gesichert ist, vgl. 8.5.
+
+Nun zu den Voraussetzungen des Mountain Pass Theorems:
+
+Wegen $f(x, 0)=0$ für f.a. $x \in \Omega$ gilt auch $F(x, 0)=0$ für f.a. $x \in \Omega$ und somit $\Phi(0)=0$, d.h. Voraussetzung 5.8i) ist erfüllt.
+
+Wählt man speziell $\varepsilon=\frac{2}{a^{2}}$ in $(* * *)$, so erhält man $\frac{\varepsilon a^{2}}{8}=\frac{1}{4}$, also
+
+$$
+\psi(u) \leq \frac{1}{4}\|u\|^{2}+\tilde{C}_{\varepsilon}\|u\|^{q}
+$$
+
+und somit
+
+$$
+\Phi(u) \geq\left(\frac{1}{2}-\frac{1}{4}\right)\|u\|^{2}-\tilde{C}_{\varepsilon}\|u\|^{q}=\|u\|^{2}\left(\frac{1}{4}-\tilde{C}_{\varepsilon}\|u\|^{q-2}\right) \quad \text { für } u \in H_{0}^{1}(\Omega) \text {. }
+$$
+
+Wählt man nun $\rho \in\left(0, \sqrt[q-2]{\frac{\tilde{C}_{\varepsilon}}{4}}\right)$, so folgt
+
+$$
+\inf \{\Phi(u):\|u\|=\rho\} \geq \rho^{2}\left(\frac{1}{4}-\tilde{C}_{\varepsilon} \rho^{q-2}\right)>0
+$$
+
+Also ist auch die Voraussetzung ii) in 5.8 erfüllt.
+
+Sei nun $u \in H_{0}^{1}(\Omega) \backslash\{0\}$ nichtnegativ $\operatorname{mit}^{\operatorname{esssup}_{\Omega}} u>1$. Dann gilt für $t \geq t_{0}$ gemäß $(* *)$ :
+
+$$
+\begin{aligned}
+& \int_{\Omega} F(x, t u(x)) d x=\int_{\left\{u \leq \frac{t_{0}}{t}\right\}} F(x, t u(x)) d x+\int_{\left\{u>\frac{t_{0}}{t}\right\}} F(x, t u(x)) d x \\
+& \stackrel{V B 1}{\geq}-C \int_{\left\{u \leq \frac{t_{0}}{t}\right\}}\left(|t u|+|t u|^{q}\right) d x+\int_{\left\{u>\frac{t_{0}}{t}\right\}} h(x)|t u|^{p} d x \\
+& \geq-\underbrace{C|\Omega|\left(t_{0}+t_{0}^{q}\right)}_{=: \tilde{C}}+t^{p} \int_{\{|u|>1\}} h(x)|u|^{p} d x
+\end{aligned}
+$$
+
+Aufgrund der Positivität von $h$ und wegen $\operatorname{esssup}_{\Omega} u>1$ folgt
+
+$$
+\Phi(t u) \leq t^{2} \frac{\|u\|^{2}}{2}+\tilde{C}-t^{p} \int_{\{|u|>1\}} h(x)|u|^{p} d x \rightarrow-\infty \quad \text { für } t \rightarrow \infty .
+$$
+
+Also ist die Voraussetzung iii) aus 5.8 erfüllt.
+
+Es bleibt noch zu zeigen, dass $\Phi$ die Palais-Smale-Bedingung erfüllt. Da $\psi^{\prime}$ : $H_{0}^{1}(\Omega) \rightarrow\left[H_{0}^{1}(\Omega)\right]^{\prime}$ nach 4.18 kompakt und stetig ist, reicht es die Bedingung $5.10(*)$ nach zuweisen. Dazu beachten wir:
+
+$$
+\begin{aligned}
+& \psi^{\prime}(u) u-p \psi(u)=\int_{\Omega}[f(x, u(x)) u(x)-p F(x, u(x))] d x \\
+= & \int_{\left\{|u| \leq t_{0}\right\}}[f(x, u(x)) u(x)-p F(x, u(x))] d x+\int_{\left\{|u|>t_{0}\right\}}[f(x, u(x)) u(x)-p F(x, u(x))] d x \\
+& \stackrel{\text { Vor.ii) }}{\geq} \int_{\left\{|u| \leq t_{0}\right\}}[f(x, u(x)) u(x)-p F(x, u(x))] d x,
+\end{aligned}
+$$
+
+wobei die rechte Seite gemäß Voraussetzung iii) und VB 1 unabhängig von $u$ nach unten beschränkt ist. Also ist $5.10(*)$ erfüllt, und alles ist gezeigt.
+
+\subsection*{Beispiel}
+
+Seien $b_{1}, \ldots, b_{k} \in L^{\infty}(\Omega)$ Funktionen mit $\operatorname{essinf} b_{k}>0$, und seien $0<\sigma_{1}<\sigma_{2}<$ $\cdots<\sigma_{k}$ gegeben mit $\sigma_{k}<2^{*}-2=\frac{4}{N-2}$ im Fall $N \geq 3$. Ferner sei
+
+$$
+f: \Omega \times \mathbb{R} \rightarrow \mathbb{R}, \quad f(x, t)=\sum_{i=1}^{k} b_{i}(x)|t|^{\sigma_{i}} t
+$$
+
+Übungsaufgabe: Die Funktion $f$ erfüllt die Voraussetzung von 5.11, und somit besitzt das Randwertproblem
+
+$$
+(*) \quad\left\{\begin{aligned}
+-\Delta u & =\sum_{i=1}^{k} b_{i}(x)|u|^{\sigma_{i}} u & & \text { in } \Omega, \\
+u & =0 & & \text { auf } \partial \Omega
+\end{aligned}\right.
+$$
+
+eine nichttriviale schwache Lösung. Satz 4.26 ist in diesem Fall übrigens nicht anwendbar, da für gewisse Wahlen von $b_{i}$ und $p_{i}$ die Funktion $t \mapsto \frac{f(x, t)}{|t|}$ nicht streng monoton wachsend ist auf $\mathbb{R} \backslash\{0\}$.
+
+Der Rest dieses Kapitels ist dem Beweis des Deformationslemmas 5.4 gewidmet. Wir benötigen einige Vorbereitungen. Im Folgenden sei stets $E$ ein $\mathbb{R}$-Banachraum und $U \subset E$ offen.
+
+\subsection*{Definition}
+
+i). Eine stetige Abbildung $V: U \rightarrow E$ heißt Vektorfeld auf $U$.
+
+ii). Sei $\Phi: U \rightarrow \mathbb{R}$ ein $C^{1}$-Funktional. Eine lokal Lipschitz-stetige Abbildung $V: U \rightarrow E$ heißt Pseudogradientenfeld von $\Phi$ auf $U$, wenn für alle $u \in U$ gilt:
+
+- $\|V(u)\|_{E} \leq 2\left\|\Phi^{\prime}(u)\right\|_{E^{\prime}}$.
+
+- $\Phi^{\prime}(u) V(u) \geq\left\|\Phi^{\prime}(u)\right\|^{2}$.
+
+\subsection*{Beispiel}
+
+Ist $E$ ein Hilbertraum, $U \subset E$ offen und $\Phi \in \mathcal{C}^{1}(U, \mathbb{R})$ derart, dass $\Phi^{\prime}: U \rightarrow E^{\prime}$ lokal Lipschitz-stetig ist, so ist $\nabla \Phi: U \rightarrow E$ ein Pseudogradientenfeld zu $\Phi$. In 5.13 ii) gilt dann jeweils Gleichheit mit der Konstante 1 (anstelle von 2).
+
+\subsection*{Satz}
+
+Sei $\Phi: U \rightarrow \mathbb{R}$ ein $\mathcal{C}^{1}$-Funktional, und sei $\mathcal{K}$ die Menge der kritischen Punkte von $\Phi$. Dann besitzt $\Phi$ ein Pseudogradientenfeld auf $U \backslash \mathcal{K}$.
+
+Zum Beweis dieses Satzes benötigen wir ein Hilfsmittel aus der Topologie.
+
+\subsection*{Satz (lokal endliche Verfeinerungen)}
+
+Sei $(X, d)$ ein metrischer Raum, und sei $\mathcal{U}=\left\{U_{i}: i \in \mathcal{I}\right\}$ eine offene Überdeckung von $X$, d.h. $U_{i} \subset X$ ist offen für alle $i \in \mathcal{I}$ und $X=\bigcup_{i \in \mathcal{I}} U_{i}$. Dann existiert eine lokal endliche Verfeinerung $\mathcal{M}=\left\{M_{j}: j \in \mathcal{J}\right\}$ der Überdeckung $\mathcal{U}$, d.h.:
+
+i). $\mathcal{M}$ ist auch eine offene Überdeckung von $X$.
+
+ii). Für jedes $j \in \mathcal{J}$ existiert $i \in \mathcal{I}$ mit $M_{j} \subset U_{i}$.
+
+iii). Jedes $u \in X$ besitzt eine Umgebung, welche nur endlich viele der Mengen $M_{j}, j \in \mathcal{J}$ schneidet.
+
+Beweis. siehe z.B. Jänich, Topologie.
+
+\subsection*{Korollar (Zerlegung der Eins)}
+
+Unter den Voraussetzungen von 5.16 existieren Funktionen $\tau_{j}: X \rightarrow \mathbb{R}, j \in \mathcal{J}$ mit folgenden Eigenschaften:
+
+i). $0 \leq \tau_{j} \leq 1$ für alle $j \in \mathcal{J}$.
+
+ii). $\tau_{j}$ ist lokal Lipschitz-stetig für alle $j \in \mathcal{J}$.
+
+iii). Für jedes $j \in \mathcal{J}$ existiert $i \in \mathcal{I}$ mit $M_{j} \subset U_{i}$, wobei $M_{j}=\left\{u \in X: \tau_{j}(u) \neq 0\right\}$ für $j \in \mathcal{J}$ sei.
+
+iv). Zu jedem $u \in X$ existiert eine Umgebung $U_{u}$, welche nur endlich viele der Mengen $M_{j}, j \in \mathcal{J}$ schneidet.
+
+v). $\sum_{j \in \mathcal{J}} \tau_{j} \equiv 1$ auf $X$.
+
+Beweis. Seien $\mathcal{M}=\left\{M_{j}: j \in \mathcal{J}\right\}$ eine lokal endliche Verfeinerung von $\mathcal{U}$ wie in 5.16, und sei
+
+$$
+\tilde{\tau}_{j}: X \rightarrow \mathbb{R}, \quad \tilde{\tau}_{j}(u)=\min \left\{1, \operatorname{dist}\left(u, X \backslash M_{j}\right)\right\}
+$$
+
+für $j \in \mathcal{J}$. Diese Funktionen sind Lipschitz-stetig, und zu jedem $u \in X$ existiert eine Umgebung $U_{u}$, welche nur endlich viele der Mengen $M_{j}=\left\{u \in X: \tau_{j}(u) \neq 0\right\}$, $j \in \mathcal{J}$ schneidet. Insbesondere ist
+
+$$
+\tau: X \rightarrow \mathbb{R}, \quad \tau(u)=\sum_{j \in \mathcal{J}} \tilde{\tau}_{j}
+$$
+
+wohldefiniert und strikt positiv auf $X$. Wir setzen nun
+
+$$
+\tau_{j}: X \rightarrow \mathbb{R}, \quad \tau_{j}(u)=\frac{\tilde{\tau}_{j}(u)}{\tau(u)}
+$$
+
+Nach Konstruktion gelten dann die Eigenschaften i) sowie iii)-v). Ferner ist $\tau_{j}$ lokal Lipschitz-stetig (Übung), und somit folgt die Behauptung.
+
+Beweis von 5.15. Sei $X:=U \backslash \mathcal{K}$. Für alle $u \in X$ existiert nach Definition von $\|\cdot\|_{E^{\prime}}$ ein $V_{u} \in E$ mit $\left\|V_{u}\right\|<2\left\|\Phi^{\prime}(u)\right\|_{E^{\prime}}$ und $\Phi^{\prime}(u) V_{u}>\left\|\Phi^{\prime}(u)\right\|^{2}$. Sei
+
+$$
+U_{u}:=\left\{v \in X:\left\|V_{u}\right\|<2\left\|\Phi^{\prime}(v)\right\|_{E^{\prime}} \text { und } \Phi^{\prime}(v) V_{u}>\left\|\Phi^{\prime}(v)\right\|^{2}\right\}
+$$
+
+Da $\Phi^{\prime}$ stetig ist, ist $U_{u}$ eine offene Umgebung von $u$. Ferner gilt trivialerweise $X=$ $\bigcup_{u \in X} U_{u}$. Seien nun die Funktionen $\tau_{j}: X \rightarrow \mathbb{R}, j \in \mathcal{J}$ wie in 5.17 zu dieser offenen
+
+Überdeckung des metrischen Raums $X$ gewählt. Zu jedem $j \in \mathcal{J}$ existiert dann $u_{j} \in X$ mit $\left\{u \in X: \tau_{j}(u) \neq 0\right\} \subset U_{u_{j}}$. Sei nun
+
+$$
+V: X \rightarrow E \quad \text { definiert durch } \quad V(u)=\sum_{j \in \mathcal{J}} \tau_{j}(u) V_{u_{j}}
+$$
+
+und sei im Folgenden $u \in X$ fest gewählt. Für alle $j \in \mathcal{J}$ mit $\tau_{j}(u) \neq 0$ gilt dann $u \in U_{u_{j}}$ und damit
+
+$$
+\left\|V_{u_{j}}\right\|<2\left\|\Phi^{\prime}(u)\right\|_{E^{\prime}} \quad \text { und } \quad \Phi^{\prime}(u) V_{u_{j}}>\left\|\Phi^{\prime}(u)\right\|^{2}
+$$
+
+Es folgt
+
+$$
+\|V(u)\| \leq \sum_{j \in \mathcal{J}} \tau_{j}(u)\left\|V_{u_{j}}\right\| \leq 2 \sum_{j \in \mathcal{J}} \tau_{j}(u)\left\|\Phi^{\prime}(u)\right\|_{E^{\prime}}=2\left\|\Phi^{\prime}(u)\right\|_{E^{\prime}}
+$$
+
+und
+
+$$
+\Phi^{\prime}(u) V(u)=\sum_{j \in \mathcal{J}} \tau_{j}(u) \Phi^{\prime}(u) V_{u_{j}}>\sum_{j \in \mathcal{J}} \tau_{j}(u)\left\|\Phi^{\prime}(u)\right\|^{2}=\left\|\Phi^{\prime}(u)\right\|^{2}
+$$
+
+wie behauptet. Ferner ist $V$ als lokal endliche Summe lokal Lipschitz-stetiger Funktionen auch lokal Lipschitz stetig.
+
+Sei im Folgenden stets $I \subset \mathbb{R}$ ein Intervall.
+
+\subsection*{Definition (Gewöhnliche Differentialgleichungen in Banachräumen)}
+
+i). Eine stetig differenzierbare Abbildung $\varphi: I \rightarrow U$ nennen wir auch $\mathcal{C}^{1}$-Kurve. Wir schreiben dann auch
+
+$$
+\dot{\varphi}(t)=\varphi^{\prime}(t)=\lim _{h \rightarrow 0} \frac{\varphi(t+h)-\varphi(t)}{h} \quad \text { für alle } t \in I .
+$$
+
+ii). Sei $V: U \rightarrow E$ ein Vektorfeld. Eine $\mathcal{C}^{1}$-Kurve $\varphi: I \rightarrow U$ heißt Lösung der Differentialgleichung $\dot{u}=V(u)$, falls $\dot{\varphi}(t)=V(\varphi(t))$ für alle $t \in I$ gilt. Sind zudem $t_{0} \in I, u_{0} \in U$ gegeben und gilt $\varphi\left(t_{0}\right)=u_{0}$, so nennt man $\varphi$ Lösung des Anfangswertproblems
+
+$$
+(A W P) \quad\left\{\begin{aligned}
+\dot{u} & =V(u) \\
+u\left(t_{0}\right) & =u_{0}
+\end{aligned}\right.
+$$
+
+\subsection*{Hauptsatz über die Lösbarkeit von Anfangwertproblemen}
+
+Sei $V: U \rightarrow E$ lokal Lipschitz-stetig.
+
+i). Sei $u_{0} \in U$ gegeben. Dann existieren eindeutige Werte $T^{+}\left(u_{0}\right) \in(0, \infty]$, $T^{-}\left(u_{0}\right) \in[-\infty, 0)$ und eine eindeutig bestimmte $\mathcal{C}^{1}$-Kurve
+
+$$
+\varphi\left(\cdot, u_{0}\right):\left(T^{-}\left(u_{0}\right), T^{+}\left(u_{0}\right)\right) \rightarrow U, \quad t \mapsto \varphi\left(t, u_{0}\right)
+$$
+
+mit folgenden Eigenschaften:
+
+(a) $\varphi\left(\cdot, u_{0}\right)$ löst das Anfangswertproblem
+
+$$
+(A W P) \quad\left\{\begin{aligned}
+\dot{u} & =V(u) \\
+u\left(t_{0}\right) & =u_{0}
+\end{aligned}\right.
+$$
+
+(b) Ist $T^{+}\left(u_{0}\right)<\infty$, so ist die Menge $\left\{\varphi\left(t, u_{0}\right): t \in\left[0, T^{+}\left(u_{0}\right)\right)\right\}$ nicht relativ kompakt in $U$.
+
+Ist $T^{-}\left(u_{0}\right)>-\infty$, so ist die Menge $\left\{\varphi\left(t, u_{0}\right): t \in\left(T^{-}\left(u_{0}\right), 0\right]\right\}$ nicht relativ kompakt in $U$.
+
+ii). Die Menge
+
+$$
+D:=\left\{\left(t, u_{0}\right): u_{0} \in U, T^{-}\left(u_{0}\right)<t<T^{+}\left(u_{0}\right)\right\} \subset \mathbb{R} \times U
+$$
+
+ist offen in $\mathbb{R} \times U$, und die Funktion
+
+$$
+\varphi: D \rightarrow U, \quad\left(t, u_{0}\right) \rightarrow \varphi\left(t, u_{0}\right)
+$$
+
+ist stetig.
+
+Bemerkung: Die Abbildung $\varphi$ heißt Fluss zur Differentialgleichung $\dot{u}=V(u)$ oder Fluss zum Vektorfeld $V$.
+
+Beweis. siehe z.B. Klaus Deimling, Ordinary differential equations in Banach spaces.
+
+Beweis von 5.4. Sei $c \in \mathbb{R}$, und sei angenommen, dass keine $P S_{c}$-Folge des Funktionals $\Phi \in \mathcal{C}^{1}(E, \mathbb{R})$ existiert. Dann existiert $\varepsilon_{0}>0$ mit
+
+$$
+\kappa:=\inf _{u \in \mathcal{M}_{0}}\left\|\Phi^{\prime}(u)\right\|>0 \quad \text { mit } \quad \mathcal{M}_{0}:=\left\{u \in E: c-\varepsilon_{0} \leq \Phi(u) \leq c+\varepsilon_{0}\right\}
+$$
+
+Insbesondere enthält eine offene Umgebung $U \subset E$ von $\mathcal{M}_{0}$ keine kritischen Punkte von $\Phi$, und somit existiert ein Pseudogradientenfeld $V: U \rightarrow E$ von $\Phi$ auf $U$. Sei
+
+$$
+\varphi: D \rightarrow U, \quad(t, u) \rightarrow \varphi(t, u)
+$$
+
+der Fluss zur Differentialgleichung $\dot{u}=-V(u)$, wobei
+
+$$
+D:=\left\{(t, u): u \in U, T^{-}(u)<t<T^{+}(u)\right\} \subset \mathbb{R} \times U
+$$
+
+und die maximalen Existenzzeiten $T^{ \pm}(u)$ wie in 5.19 gegeben seien. Sei $u \in U$ fest, und sei zur Abkürzung $u^{t}:=\varphi(t, u)$ gesetzt. Da
+
+$$
+\frac{d}{d t} \Phi\left(u^{t}\right)=\Phi^{\prime}\left(u^{t}\right) \dot{u}^{t}=-\Phi^{\prime}\left(u^{t}\right) V\left(u^{t}\right) \leq-\left\|\Phi^{\prime}\left(u^{t}\right)\right\|^{2} \leq 0
+$$
+
+gilt, ist $\Phi$ entlang der Kurve $t \mapsto u^{t}$ monoton fallend. Wir behaupten zunächst:
+
+$$
+\text { Für } 0 \leq t_{1}<t_{2}<T^{+}(u) \text { gilt }\left\|u^{t_{2}}-u^{t_{1}}\right\| \leq 2 \int_{t_{1}}^{t_{2}}\left\|\Phi^{\prime}\left(u^{t}\right)\right\| d t
+$$
+
+Um dies zu sehen, wählen wir gemäß 4.10 ein $\psi \in E^{\prime}$ mit $\|\psi\|=1$ und
+
+$$
+\begin{aligned}
+\left\|u^{t_{2}}-u^{t_{1}}\right\| & =\psi\left(u^{t_{2}}-u^{t_{1}}\right)=\int_{t_{1}}^{t_{2}} \frac{d}{d t} \psi \circ u^{t} d t=\int_{t_{1}}^{t_{2}} \psi \circ \dot{u}^{t} d t \\
+& \leq \int_{t_{1}}^{t_{2}}\left\|\dot{u}^{t}\right\| d t=\int_{t_{1}}^{t_{2}}\left\|V\left(u^{t}\right)\right\| d t \leq 2 \int_{t_{1}}^{t_{2}}\left\|\Phi^{\prime}\left(u^{t}\right)\right\| d t
+\end{aligned}
+$$
+
+Als nächstes zeigen wir:
+
+$(* *) \mathrm{Zu} u \in \Phi^{c+\varepsilon_{0}} \cap U$ existiert $t \in\left[0, T^{+}(u)\right)$ mit $u^{t} \in \Phi^{c-\varepsilon_{0}}$.
+
+Angenommen, dies wäre nicht der Fall; dann wäre $u^{t} \in \Phi^{c+\varepsilon_{0}} \backslash \Phi^{c-\varepsilon_{0}}$ für alle $t \in$ $\left[0, T^{+}(u)\right)$. Wir unterscheiden dann zwei Fälle:
+
+1. Fall: $T^{+}(u)<\infty$. In diesem Fall hat man für $0 \leq t_{1}<t_{2}<T^{+}(u)$ :
+
+$$
+\begin{aligned}
+\left\|u^{t_{2}}-u^{t_{1}}\right\| & \leq 2 \int_{t_{1}}^{t_{2}}\left\|\Phi^{\prime}\left(u^{t}\right)\right\| d t \leq 2\left(t_{2}-t_{1}\right)^{\frac{1}{2}}\left(\int_{t_{1}}^{t_{2}}\left\|\Phi^{\prime}\left(u^{t}\right)\right\|^{2} d t\right)^{\frac{1}{2}} \\
+& \leq 2\left(t_{2}-t_{1}\right)^{\frac{1}{2}}\left(\int_{t_{1}}^{t_{2}} \Phi^{\prime}\left(u^{t}\right) V\left(u^{t}\right) d t\right)^{\frac{1}{2}}=2\left(t_{2}-t_{1}\right)^{\frac{1}{2}}\left(-\int_{t_{1}}^{t_{2}} \frac{d}{d t} \Phi\left(u^{t}\right) d t\right)^{\frac{1}{2}} \\
+& =2\left(t_{2}-t_{1}\right)^{\frac{1}{2}}\left[\Phi\left(u^{t_{1}}\right)-\Phi\left(u^{t_{2}}\right)\right]^{\frac{1}{2}} \leq 2 \sqrt{2 \varepsilon_{0}}\left(t_{2}-t_{1}\right)^{\frac{1}{2}} .
+\end{aligned}
+$$
+
+Daraus erkennt man, dass die Kurve $t \mapsto \varphi(t, u)$ auf $\left[0, T^{+}(u)\right)$ gleichmäßig stetig ist und daher $u^{*}:=\lim _{t \rightarrow T^{+}(u)} \varphi(t, u) \in \mathcal{M}_{0} \subset U$ existiert. Dies widerspricht aber der Definition von $T^{+}(u)$, siehe $\left.\left.5.19 \mathrm{i}\right) \mathrm{b}\right)$.
+
+2. Fall: $T^{+}(u)=\infty$. In diesem Fall hat man für $t \in(0, \infty)$ :
+
+$$
+2 \varepsilon_{0} \geq \Phi(u)-\Phi\left(u^{t}\right)=\int_{0}^{t} \Phi^{\prime}\left(u^{s}\right) V\left(u^{s}\right) d s \geq \int_{0}^{t}\left\|\Phi^{\prime}\left(u^{s}\right)\right\|^{2} d s \geq \kappa^{2} \int_{0}^{t} d s=t \kappa^{2}
+$$
+
+Widerspruch! Es folgt $(* *)$.
+
+Sei nun $\varepsilon \in\left(0, \varepsilon_{0}\right]$ gegeben, und sei
+
+$$
+T(u):=\inf \left\{t \geq 0: \varphi(t, u) \in \Phi^{c-\varepsilon}\right\} \quad \text { für } u \in \Phi^{c+\varepsilon} \cap U \text {. }
+$$
+
+Wir behaupten:
+
+$$
+(* * *) \quad \text { Die Funktion } T: \Phi^{c+\varepsilon} \cap U \rightarrow[0, \infty) \text { ist stetig. }
+$$
+
+Beweis als Übungsaufgabe (hier geht ein, dass $c-\varepsilon$ kein kritischer Wert von $\Phi$ ist).
+
+Wir definieren nun $\eta:[0,1] \times \Phi^{c+\varepsilon} \rightarrow \Phi^{c+\varepsilon},(t, u) \rightarrow \eta_{t}(u)$ durch
+
+$$
+\eta_{t}(u)= \begin{cases}\varphi(t T(u), u), & u \in \Phi^{c+\varepsilon} \cap U \\ u, & u \in \Phi^{c+\varepsilon} \backslash U\end{cases}
+$$
+
+Da $\Phi^{c+\varepsilon} \backslash U \subset \Phi^{c-\varepsilon}$ gilt, definiert dies offensichtlich eine stetige Abbildung mit
+
+- $\eta_{0} \equiv \operatorname{id}_{\Phi^{c+\varepsilon}}$.
+
+- $\eta_{1}\left(\Phi^{c+\varepsilon}\right) \subset \Phi^{c-\varepsilon}$.
+
+- $\left.\eta_{t}\right|_{\Phi^{c-\varepsilon}} \equiv \operatorname{id}_{\Phi^{c-\varepsilon}}$ für alle $t \in[0,1]$.
+
+Dies beendet den Beweis.
+
+\section*{$\S 6$ Symmetrie positiver Lösungen}
+
+Sei stets $\Omega \subset \mathbb{R}^{N}$ ein beschränktes Gebiet. In den bisherigen Kapiteln haben wir verschiedene Methoden kennengelernt, um, unter geeigneten Voraussetzungen an die Nichtlinearität $f$, die Existenz nichttrivialer schwacher Lösungen semilinearer Dirichletprobleme der Form
+
+$$
+\left\{\begin{aligned}
+-\Delta u & =f(x, u) & & \text { in } \Omega \\
+u & =0 & & \text { auf } \partial \Omega
+\end{aligned}\right.
+$$
+
+herzuleiten.
+
+Allerdings wissen wir bisher wenig über die Gestalt dieser Lösungen.
+
+In manchen Fällen konnten wir z.B. die Existenz von positiven Lösungen zeigen. Im Folgenden werden wir zeigen, dass diese Lösungsklasse gewisse Symmetrieeigenschaften des zugrunde liegenden Gebietes erbt. Die hierbei verwendete Beweistechnik heißt "Moving-Plane"-Methode und geht auf Serrin (1971) sowie Gidas, Ni und Nirenberg (1979) zurück.
+
+Wir benötigen einige Vorbereitungen und beschränken uns zunächst auf den Fall $N \geq 3$.
+
+Sei $2^{*}:=\frac{2 N}{N-2}$ der kritische Sobolevexponent.
+
+Aufgrund der Soboleveinbettung $H_{0}^{1}(\Omega) \hookrightarrow L^{2^{*}}(\Omega)$ gilt dann:
+
+$$
+S_{N}:=\inf _{u \in H_{0}^{1}(\Omega) \backslash\{0\}} \frac{\|\nabla u\|_{L^{2}(\Omega)}^{2}}{\|u\|_{L^{2^{*}}(\Omega)}^{2}}>0
+$$
+
+\subsection*{Satz (Verallg. schwaches Maximumsprinzip)}
+
+Sei $N \geq 3, \Omega \subset \mathbb{R}^{N}$ beschränkt, und sei $q \in L^{\infty}(\Omega)$ eine Funktion mit
+
+$$
+\left\|q^{-}\right\|_{L^{\frac{N}{2}}(\Omega)}<S_{N} .
+$$
+
+Sei ferner $u \in H^{1}(\Omega)$ eine schwache Superlösung der Gleichung $-\Delta u+q(x) u$ in $\Omega$ mit $u \geq 0$ auf $\partial \Omega$ (im schwachen Sinne). Dann ist $u \geq 0$ f.ü. in $\Omega$.
+
+Bemerkung: In 10.19 hatten wir dies unter der Voraussetzung $q \geq 0$ bewiesen.
+
+Beweis. Nach Voraussetzung gilt
+
+$$
+\int_{\Omega} \nabla u \nabla \varphi d x \geq-\int_{\Omega} q(x) u \varphi d x \quad \text { für alle } \varphi \in H_{0}^{1}(\Omega), \varphi \geq 0 \text {. }
+$$
+
+Eine Anwendung mit $\varphi=u^{-} \in H_{0}^{1}(\Omega)$ liefert
+
+$$
+\begin{aligned}
+-\left\|\nabla u^{-}\right\|_{L^{2}(\Omega)}^{2} & =\int_{\Omega} \nabla u \cdot \nabla u^{-} d x \geq-\int_{\Omega} q(x) u u^{-} d x \\
+& =\int_{\Omega} q(x)\left|u^{-}\right|^{2} d x \geq-\int_{\Omega} q^{-}(x)\left|u^{-}\right|^{2} d x \geq-\left\|q^{-}\right\|_{L^{\frac{N}{2}}(\Omega)}\left\|u^{-}\right\|_{L^{2^{*}}(\Omega)}^{2} \\
+& \geq-\frac{\left\|q^{-}\right\|_{L^{\frac{N}{2}}(\Omega)}}{S_{N}}\left\|\nabla u^{-}\right\|_{L^{2}(\Omega)}^{2}
+\end{aligned}
+$$
+
+wobei nach Voraussetzung
+
+$$
+\frac{\left\|q^{-}\right\|_{L^{\frac{N}{2}}(\Omega)}}{S_{N}}<1
+$$
+
+gilt. Es folgt $\nabla u^{-} \equiv 0$ und somit $u^{-} \equiv 0$ in $\Omega$, da $u^{-} \in H_{0}^{1}(\Omega)$.
+
+\subsection*{Korollar (Maximumsprinzip für kleine Gebiete)}
+
+Sei $N \geq 3, \Omega \subset \mathbb{R}^{N}$ beschränkt, sei $q \in L^{\infty}(\Omega)$, und es gelte
+
+$$
+|\Omega|:=\operatorname{vol}_{N}(\Omega) \leq \kappa_{q}:=\left(\frac{S_{N}}{1+\left\|q^{-}\right\|_{L^{\infty}(\Omega)}^{\frac{N-2}{2}}}\right)^{\frac{N}{2}}
+$$
+
+Sei ferner $u \in H^{1}(\Omega)$ eine schwache Superlösung der Gleichung $-\Delta u+q(x) u=0$ in $\Omega$ mit $u \geq 0$ auf $\partial \Omega$. Dann ist $u \geq 0$ f.ü. in $\Omega$.
+
+Beweis. Dies folgt direkt aus dem obigen Satz, da gemäß der Interpolationsungleichung
+
+$$
+\left\|q^{-}\right\|_{L^{\frac{N}{2}}(\Omega)} \leq|\Omega|^{\frac{2}{N}}\left\|q^{-}\right\|_{L^{\infty}(\Omega)}^{\frac{N-2}{N}} \leq \frac{S_{N}}{1+\left\|q^{-}\right\|_{L^{\infty}(\Omega)}^{\frac{N-2}{N}}}\left\|q^{-}\right\|_{L^{\infty}(\Omega)}^{\frac{N-2}{N}}<S_{N}
+$$
+
+gilt.
+
+Das nächste Ziel ist eine neue Version des starken Maximumsprinzips für schwache Lösungen der Differentialgleichung $-\Delta u+q(x) u=0$.
+
+Wir kennen das starke Maximumsprinzip bereits für superharmonische Funktionen.
+
+Wir benötigen den folgenden wichtigen Hilfssatz.
+
+\subsection*{Hopfsches Randpunktlemma (einfache Version)}
+
+Sei $U=U_{r}\left(x_{0}\right) \subset \mathbb{R}^{N}$ für ein $x_{0} \in \mathbb{R}^{N}, r>0$, und sei $q \in L^{\infty}(U)$.
+
+Sei ferner $u \in C(\bar{U}) \subset H^{1}(U)$ eine schwache Superlösung der Gleichung
+
+$$
+-\Delta u+q(x) u=0 \quad \text { in } U \quad \text { mit } \quad u>0 \quad \text { in } U \text {. }
+$$
+
+Dann gilt
+
+$$
+\partial_{\nu} u(z):=\limsup _{t \rightarrow 0^{+}} \frac{u(z)-u(z-t \nu)}{t}<0 \quad \text { für alle } z \in \partial U \text { mit } u(z)=0
+$$
+
+wobei hier $\nu: \partial U \rightarrow \mathbb{R}^{N}$ das äußere Einheitsnormalenfeld auf $\partial U$ bezeichne.
+
+Bemerkung: Unter den obigen Voraussetzung muss die Normalenableitung in (6.2) nicht im klassischen Sinne existieren; daher wird der limsup in der Definition verwendet. Es könnte dabei auch $\partial_{\nu} u(z)=-\infty$ gelten.
+
+Beweis. Sei $z \in \partial U$ mit $u(z)=0$.
+
+Wir können ohne Einschränkung annehmen, dass $|U| \leq \kappa_{q}$ mit $\kappa_{q}$ aus dem vorherigen Korollar gilt.
+
+Andernfalls ersetzen wir $U$ durch eine kleinere offene Kugel $U^{\prime} \subset U$ mit $z \in \partial U \cap \partial U^{\prime}$.
+
+Dann stimmen die äußere Normalen bzgl. $\partial U$ und $\partial U^{\prime}$ im Punkt $z$ überein.
+
+O.E. sei zudem $x_{0}=0$, also $U=U_{r}(0)$. Sei ferner $\lambda>0$ so groß fixiert, dass
+
+$$
+-\lambda^{2} r^{2}+\lambda 2 N+\|q\|_{L^{\infty}} \leq 0 \quad \text { gilt. }
+$$
+
+Wir betrachten die Hilfsfunktion
+
+$$
+v \in H_{0}^{1}(U), v_{\lambda}(x)=e^{-\lambda|x|^{2}}-e^{-\lambda r^{2}} .
+$$
+
+Dann gilt $v>0$ in $U$, und für $x \in V:=U \backslash B_{\frac{r}{2}}(0)$ gilt
+
+$$
+\begin{aligned}
+{[-\Delta v](x)+q(x) v(x) } & \leq \operatorname{div}\left(2 \lambda x e^{-\lambda|x|^{2}}\right)+\|q\|_{L^{\infty}} v(x) \\
+& \leq e^{-\lambda|x|^{2}}\left(-4 \lambda^{2}|x|^{2}+\lambda 2 N+\|q\|_{L^{\infty}}\right) \\
+& \leq e^{-\lambda|x|^{2}}\left(-\lambda^{2} r^{2}+\lambda 2 N+\|q\|_{L^{\infty}}\right) \leq 0 .
+\end{aligned}
+$$
+
+Wegen
+
+$$
+u>0 \quad \text { auf } \partial B_{\frac{r}{2}}(0) \quad \text { und } \quad v=0 \quad \text { auf } \partial B_{r}(0)
+$$
+
+können wir $\varepsilon>0$ klein genug wählen, sodass
+
+$$
+w:=u-\varepsilon v \geq 0 \quad \text { auf } \partial V \quad \text { gilt. }
+$$
+
+Da ferner $|V| \leq|U| \leq \kappa_{q}$ und
+
+$$
+-\Delta w+q(x) w \geq 0 \quad \text { in } V
+$$
+
+nach Voraussetzung und obiger Rechnung gilt, folgt $w \geq 0$ in $V$ gemäß dem schwachen Maximumsprinzip für kleine Gebiete.
+
+Dies liefert $u \geq \varepsilon v$ in $V$, und wegen $u(z)=v(z)=0$ folgt
+
+$$
+\partial_{\nu} u(z)=\limsup _{t \rightarrow 0^{+}} \frac{u(z)-u(z-t \nu)}{t} \leq \varepsilon \lim _{t \rightarrow 0^{+}} \frac{v(z)-v(z-t \nu)}{t}=-2 \varepsilon \lambda r e^{-\lambda r^{2}}<0 .
+$$
+
+\subsection*{Satz (Starkes Maximumsprinzip)}
+
+Sei $N \geq 3, \Omega \subset \mathbb{R}^{N}$ beschränkt, und sei $q \in L^{\infty}(\Omega)$. Sei ferner $u \in C^{1}(\Omega) \subset H^{1}(\Omega)$ eine schwache Superlösung der Gleichung $-\Delta u+q(x) u=0$ in $\Omega$ mit $u \geq 0$ in $\Omega$. Dann gilt:
+
+$$
+u \equiv 0 \quad \text { in } \Omega \quad \text { oder } \quad u>0 \quad \text { in } \Omega
+$$
+
+Beweis. Sei
+
+$$
+W:=\{x \in \Omega: u(x)>0\} \quad \subset \Omega .
+$$
+
+Ist $\varnothing \neq W \neq \Omega$, so existiert ein $x_{0} \in W$ mit $r:=\operatorname{dist}\left(x_{0}, \Omega \backslash W\right)<\operatorname{dist}\left(x_{0}, \partial \Omega\right)$.
+
+Dann ist $U=U_{r}\left(x_{0}\right)$ die größte offene Kugel um $x_{0}$, welche noch ganz in $W$ liegt. Ferner gilt $\bar{U} \subset \Omega$, und somit ist $\left.u\right|_{\bar{U}} \in C^{1}(\bar{U})$ nach Voraussetzung.
+
+Anwendung des Hopfschen Randpunktlemmas in einem Punkt
+
+$$
+z \in \partial U \cap \partial W \subset \Omega
+$$
+
+liefert nun $\partial_{\nu} u(z)<0$, wobei $\nu: \partial U \rightarrow \mathbb{R}^{N}$ das äußere Einheitsnormalenfeld auf $\partial U$ bezeichne.
+
+Dies widerspricht der Tatsache, dass $u$ im Punkt $z \in \Omega$ differenzierbar ist und ein lokales Minimum mit $u(z)=0$ annimmt.
+
+Der Beweis ist somit beendet.
+
+Wir haben nun alle Hilfsmittel zum Beweis des folgenden Satzes.
+
+\subsection*{Hauptsatz}
+
+Sei $N \geq 3, \Omega \subset \mathbb{R}^{N}$ ein beschränktes und konvexes Gebiet, welches spiegelsymmetrisch bzgl. der Hyperebene $\left\{x_{1}=0\right\}$ sei.
+
+Sei ferner $f:[0, \infty) \rightarrow \mathbb{R}$ lokal Lipschitz stetig, und sei $u \in H_{0}^{1}(\Omega) \cap L^{\infty}(\Omega)$ eine schwache Lösung der Gleichung
+
+$$
+-\Delta u=f(u) \quad \text { in } \Omega \text {. }
+$$
+
+Ferner gelte $u>0$ in $\Omega$.
+
+Dann ist $u$ symmetrisch in der $x_{1}$-Variable und in $\Omega \cap\left\{x_{1} \geq 0\right\}$ streng monoton fallend in $x_{1}$-Richtung.
+
+Es gilt also
+
+$$
+u\left(x_{1}, x^{\prime}\right)=u\left(-x_{1}, x^{\prime}\right) \quad \text { für alle }\left(x_{1}, x^{\prime}\right) \in \Omega
+$$
+
+und
+
+$$
+u\left(x_{1}, x^{\prime}\right)>u\left(y_{1}, x^{\prime}\right) \quad \text { für alle }\left(x_{1}, x^{\prime}\right),\left(y_{1}, x^{\prime}\right) \in \Omega \text { mit } y_{1}>x_{1} \geq 0 \text {. }
+$$
+
+Beweis. Zunächst folgt aus der Konvexität (und Beschränktheit) von $\Omega$, dass $\Omega$ eine gleichmäßige äußere Sphärenbedingung erfüllt.
+
+Zudem löst $u$ in $\Omega$ die Gleichung
+
+$$
+-\Delta u=f(0)+q_{*}(x) u \quad \text { mit } q_{*}(x)=\frac{f(u(x))-f(0)}{u(x)} \text { für } x \in \Omega .
+$$
+
+Dabei ist $q_{*} \in L^{\infty}(\Omega)$, da $u \in L^{\infty}(\Omega)$ und $f$ als lokal Lipschitzstetig in $[0, \infty)$ vorausgesetzt ist.
+
+Gemäß den in LPDGL bewiesenen Regularitätssätzen für die inhomogene stationäre Schrödingergleichung gilt also
+
+$$
+u \in C^{1}(\Omega) \cap C(\bar{\Omega}) \quad \text { mit } \quad u \equiv 0 \text { auf } \partial \Omega \text {. }
+$$
+
+Wir setzen nun
+
+$$
+\lambda_{0}:=\sup \left\{x_{1}:\left(x_{1}, x^{\prime}\right) \in \Omega \text { für ein } x^{\prime} \in \mathbb{R}^{N-1}\right\} \quad \in(0, \infty) \text {. }
+$$
+
+Für $0 \leq \lambda<\lambda_{0}$ betrachten wir zudem die Teilmenge
+
+$$
+\Sigma(\lambda):=\left\{\left(x_{1}, x^{\prime}\right) \in \Omega: x_{1}>\lambda\right\}
+$$
+
+Aufgrund der Symmetrie und der Konvexität von $\Omega$ ist auch die Reflektion $\widetilde{\Sigma}(\lambda)$ von $\Sigma(\lambda)$ an der Hyperebene $\left\{x_{1}=\lambda\right\}$ eine Teilmenge von $\Omega$.
+
+Ziel ist es nun, für alle $\lambda \in\left(0, \lambda_{0}\right)$ zu zeigen:
+
+$$
+\left(E_{\lambda}\right) \quad u\left(2 \lambda-x_{1}, x^{\prime}\right)>u\left(x_{1}, x^{\prime}\right) \quad \text { für alle }\left(x_{1}, x^{\prime}\right) \in \Sigma(\lambda) \text {. }
+$$
+
+Ist dies gezeigt, so folgt aus Stetigkeitsgründen auch
+
+$(*) \quad u\left(-x_{1}, x^{\prime}\right) \geq u\left(x_{1}, x^{\prime}\right) \quad$ für alle $\left(x_{1}, x^{\prime}\right) \in \Sigma(0)=\Omega \cap\left\{x_{1}>0\right\}$.
+
+Da mit $u$ aber auch die Funktion
+
+$$
+\left(x_{1}, x\right) \mapsto \tilde{u}\left(x_{1}, x\right)=u\left(-x_{1}, x^{\prime}\right)
+$$
+
+die Voraussetzungen des Satzes erfüllt, gilt $(*)$ auch für $\tilde{u}$ anstelle von $u$. Es folgt dann
+
+$$
+u\left(-x_{1}, x^{\prime}\right)=u\left(x_{1}, x^{\prime}\right) \quad \text { für alle }\left(x_{1}, x^{\prime}\right) \in \Sigma(0)=\Omega \cap\left\{x_{1}>0\right\}
+$$
+
+und dies liefert die Symmetrie von $u$ bzgl. der $x_{1}$-Variable.
+
+Die behauptete strikte Monotonieeigenschaft in $x_{1}$-Richtung folgt direkt aus der Eigenschaft $\left(E_{\lambda}\right)$ für $\lambda \in\left(0, \lambda_{0}\right)$.
+
+Es bleibt also die Eigenschaft $\left(E_{\lambda}\right)$ für $\lambda \in\left(0, \lambda_{0}\right)$ zu zeigen.
+
+Wir betrachten dazu die Funktion
+
+$$
+w_{\lambda} \in C(\overline{\Sigma(\lambda)}) \cap C^{1}(\Sigma(\lambda)), \quad w_{\lambda}\left(x_{1}, x^{\prime}\right)=u\left(2 \lambda-x_{1}, x^{\prime}\right)-u\left(x_{1}, x^{\prime}\right)
+$$
+
+Die Eigenschaft $\left(E_{\lambda}\right)$ ist dann äquivalent zu: $w_{\lambda}>0$ in $\Sigma(\lambda)$.
+
+Die Funktion $w_{\lambda}$ ist dabei eine schwache Lösung der (hier punktweise notierten) Gleichung
+
+$$
+\left[-\Delta w_{\lambda}\right](x)=f\left(u\left(2 \lambda-x_{1}, x^{\prime}\right)\right)-f\left(u\left(x_{1}, x^{\prime}\right)\right)=q_{\lambda}(x) w_{\lambda}(x), \quad x=\left(x_{1}, x^{\prime}\right) \in \Sigma(\lambda)
+$$
+
+mit
+
+$$
+q_{\lambda}(x)= \begin{cases}\frac{f\left(u\left(2 \lambda-x_{1}, x^{\prime}\right)\right)-f\left(u\left(x_{1}, x^{\prime}\right)\right)}{w_{\lambda}(x)}, & w_{\lambda}(x) \neq 0 \\ 0, & w_{\lambda}(x)=0 .\end{cases}
+$$
+
+Da $u \in L^{\infty}(\Omega)$ und $f$ auf $[0, \infty)$ lokal Lipschitz stetig ist, gilt $q_{\lambda} \in L^{\infty}(\Sigma(\lambda))$ für alle $\lambda \in\left(0, \lambda_{0}\right)$ und
+
+$$
+\sup _{0<\lambda<\lambda_{0}}\left\|q_{\lambda}\right\|_{L^{\infty}}<\infty .
+$$
+
+Somit gilt auch
+
+$$
+\kappa:=\inf _{0<\lambda<\lambda_{0}} \kappa_{-q_{\lambda}} \in(0, \infty)
+$$
+für die Konstante aus dem Maximumsprinzip für kleine Gebiete.
+
+Wir notieren ferner die wichtige Ungleichung
+
+$$
+w_{\lambda} \geq 0 \quad \text { auf } \partial \Sigma(\lambda)
+$$
+
+welche aus der vorausgesetzten Positivität der Lösung $u$ folgt. Genauer ist
+
+$$
+w_{\lambda} \equiv 0 \quad \text { auf } \partial \Sigma(\lambda) \cap\left\{x_{1}=\lambda\right\}
+$$
+
+und
+
+$$
+w_{\lambda}>0 \quad \text { auf }\left\{\left(x_{1}, x^{\prime}\right) \in \partial \Sigma(\lambda): x_{1}>\lambda,\left(2 \lambda-x_{1}, x^{\prime}\right) \in \Omega\right\}
+$$
+
+wobei die letztere Menge für $\lambda \in\left(0, \lambda_{0}\right)$ nichtleer ist. Insbesondere ist
+
+$$
+w_{\lambda} \not \equiv 0 \quad \text { in } \Sigma(\lambda) \text { für } \lambda \in\left(0, \lambda_{0}\right) \text {. }
+$$
+
+Ist also $\lambda \in\left(0, \lambda_{0}\right)$, so folgt die Eigenschaft $\left(E_{\lambda}\right)$ aufgrund des starken Maximumsprinzips bereits, wenn wir
+
+$$
+\left(F_{\lambda}\right) \quad w_{\lambda} \geq 0 \quad \text { in } \Sigma(\lambda)
+$$
+
+gezeigt haben.
+
+Zum Beweis der Eigenschaft $\left(F_{\lambda}\right), \lambda \in\left(0, \lambda_{0}\right)$ gehen wir nun in zwei Schritten vor.
+
+%![](https://cdn.mathpix.com/cropped/2023_11_07_2035377d68f99ae29cc6g-212.jpg?height=55&width=1299&top_left_y=1526&top_left_x=247)
+
+Wähle dazu $\lambda_{1} \in\left(0, \lambda_{0}\right)$ derart, dass $|\Sigma(\lambda)|<\kappa$ für $\lambda \in\left(\lambda_{1}, \lambda_{0}\right)$ gilt.
+
+Eine Anwendung des Maximumsprinzips für kleine Gebiete auf das Gebiet $\Sigma(\lambda)$ und die Funktion $w_{\lambda}$ liefert dann
+
+$$
+w_{\lambda} \geq 0 \quad \text { in } \Sigma(\lambda) \text { für } \lambda \in\left(\lambda_{1}, \lambda_{0}\right) \text {, }
+$$
+
+wie in Schritt 1 behauptet.
+
+Schritt 2: Gilt $\left(F_{\lambda}\right)$ für ein $\lambda \in\left(0, \lambda_{0}\right)$, so existiert $\varepsilon \in(0, \lambda)$ derart, dass auch $\left(F_{\lambda^{\prime}}\right)$ für $\lambda^{\prime} \in(\lambda-\varepsilon, \lambda)$ gilt.
+
+In der Tat: Das starke Maximumprinzip liefert in diesem Fall zunächst:
+
+$$
+w_{\lambda}>0 \quad \text { in } \Sigma(\lambda) \text {. }
+$$
+
+Wir wählen nun eine kompakte Teilmenge $K \subset \Sigma(\lambda)$ mit
+
+$$
+|\Sigma(\lambda) \backslash K|<\kappa
+$$
+
+Ferner wählen wir $\varepsilon \in(0, \lambda)$, dass für $\lambda^{\prime} \in(\lambda-\varepsilon, \lambda)$ ebenfalls
+
+$$
+\left|\Sigma\left(\lambda^{\prime}\right) \backslash K\right|<\kappa
+$$
+
+gilt. Nach Verkleinerung von $\varepsilon$ können wir aus Stetigkeitsgründen zudem annehmen, dass
+
+$$
+w_{\lambda^{\prime}}>0 \quad \text { in } K \text { für } \lambda^{\prime} \in(\lambda-\varepsilon, \lambda) \text { gilt. }
+$$
+
+Für $\lambda^{\prime} \in(\lambda-\varepsilon, \lambda)$ gilt nun
+
+$$
+-\Delta w_{\lambda^{\prime}}=q_{\lambda}(x) w_{\lambda^{\prime}} \quad \text { in } \Sigma\left(\lambda^{\prime}\right) \backslash K, \quad w_{\lambda^{\prime}} \geq 0 \quad \text { auf } \partial\left(\Sigma\left(\lambda^{\prime}\right) \backslash K\right)
+$$
+
+Das Maximumprinzip für kleine Gebiete liefert somit
+
+$$
+w_{\lambda^{\prime}} \geq 0 \quad \text { in } \Sigma\left(\lambda^{\prime}\right) \backslash K
+$$
+
+und wegen $w_{\lambda^{\prime}}>0$ in $K$ folgt Eigenschaft $\left(F_{\lambda^{\prime}}\right)$ für $\lambda^{\prime} \in(\lambda-\varepsilon, \lambda)$, wie in Schritt 2 behauptet.
+
+Aus Schritt 1 und Schritt 2 folgt nun, dass
+
+$$
+\inf \left\{\lambda \in\left(0, \lambda_{0}\right):\left(F_{\lambda^{\prime}}\right) \text { gilt für } \lambda^{\prime} \in\left[\lambda, \lambda_{0}\right)\right\}=0
+$$
+
+gilt.
+
+Somit gilt $\left(F_{\lambda}\right)$, also auch $\left(E_{\lambda}\right)$ für alle $\lambda \in\left(0, \lambda_{0}\right)$.
+
+Der Beweis des Hauptsatzes ist somit beendet.
+
+\section*{$\S 7$ Quasikonkavität positiver Lösungen im sublinearen Fall}
+
+In diesem Kapitel wollen wir weitere Aussagen zur Gestalt positiver Lösungen des Problems
+
+$$
+-\Delta u=f(u) \quad \text { in } \Omega, \quad u=0 \quad \text { auf } \partial \Omega
+$$
+
+herleiten. Dabei beschränken wir uns auf die Betrachtung beschränkter, strikt konvexer Gebiete $\Omega \subset \mathbb{R}^{N}$ und auf den Fall
+
+$$
+f(u)=u^{p} \quad \text { mit } 0<p<1 \text {. }
+$$
+
+Wir wissen bereits, dass in diesem Fall eine positive Lösung des obigen Problems existiert, vgl. Beispiel 3.10 iii).
+
+Sei im Folgenden also stets $\Omega \subset \mathbb{R}^{N}$ ein beschränktes und strikt konvexes Gebiet, d.h. es gelte
+
+$$
+\frac{x+y}{2} \in \Omega \quad \text { für } x, y \in \bar{\Omega} \text {. }
+$$
+
+Es folgt dann auch
+
+$$
+(1-) \lambda x+\lambda y \in \Omega \quad \text { für } x, y \in \bar{\Omega}, \lambda \in(0,1)
+$$
+
+Wir nehmen ferner an, dass $\Omega$ eine gleichmäßige innere Sphärenbedingung erfüllt (d.h. $R^{N} \backslash \bar{\Omega}$ erfüllt eine gleichmäßige äußere Sphärenbedingung).
+
+\subsection*{Definition}
+
+Eine Funktion $u: \Omega \rightarrow[0, \infty)$ heißt quasikonkav, wenn die Superniveaumengen
+
+$$
+S_{c}:=\{x \in \Omega: u(x) \geq c\}
+$$
+
+für jedes $c \geq 0$ konvex sind.
+
+\subsection*{Beispiel}
+
+Ist $u: \Omega \rightarrow[0, \infty)$ konkav, so ist $u$ auch quasikonkav.
+
+Allgemeiner ist $u$ bereits quasikonkav, wenn eine streng monoton wachsende Funktion $g:[0, \infty) \rightarrow[0, \infty)$ existiert derart, dass $g \circ u$ konkav ist.
+
+In der Tat: Für $c \geq 0, x, y \in S_{c}$ und $\lambda \in[0,1]$ gilt dann
+
+$$
+\begin{aligned}
+{[g \circ u]((1-\lambda) x+\lambda y) } & \geq(1-\lambda)[g \circ u](x)+\lambda[g \circ u](y) \\
+& \geq(1-\lambda) g(c)+\lambda g(c)=g(c)
+\end{aligned}
+$$
+
+also $u((1-\lambda) x+\lambda y) \geq c$ und somit $(1-\lambda) x+\lambda y \in S_{c}$.
+
+\subsection*{Hauptsatz}
+
+Sei $\Omega \subset \mathbb{R}^{N}$ ein beschränktes, strikt konvexes Gebiet mit einer gleichmäßigen inneren Sphärenbedingung, sei $p \in(0,1)$, und sei $u \in C(\bar{\Omega}) \cap C^{2}(\Omega)$ eine positive Lösung des Problems
+
+$$
+-\Delta u=u^{p} \quad \text { in } \Omega, \quad u=0 \quad \text { auf } \partial \Omega
+$$
+
+Dann ist $u$ quasikonkav. Genauer ist die Funktion $u^{\frac{1-p}{2}}: \Omega \rightarrow \mathbb{R}$ konkav in $\Omega$.
+
+Der Rest dieses Kapitels ist dem Beweis dieses Satzes gewidmet.
+
+\subsection*{Lemma}
+
+Eine stetige Funktion $v: \Omega \rightarrow \mathbb{R}$ ist genau dann konkav, wenn
+
+$$
+v\left(\frac{x+y}{2}\right) \geq \frac{v(x)+v(y)}{2} \quad \text { für alle } x, y \in \Omega
+$$
+
+gilt, d.h. wenn die Konkavitätsfunktion
+
+$$
+C_{v}: \Omega \rightarrow \Omega \rightarrow \mathbb{R}, \quad C_{v}(x, y)=v\left(\frac{x+y}{2}\right)-\frac{v(x)+v(y)}{2}
+$$
+
+nichtnegativ ist.
+
+Beweis als Übung!
+
+Bemerkung: Ist $v$ auf $\bar{\Omega}$ definiert, so ist $C_{v}$ auch auf $\overline{\Omega \times \Omega}=\bar{\Omega} \times \bar{\Omega}$ definiert.
+
+Zum Beweis des Hauptsatzes fixieren wir nun $p \in(0,1)$ und betrachten die Funktion
+
+$$
+g \in C^{1}((0, \infty)) \cap C([0, \infty)), \quad g(t)=t^{\frac{1-p}{2}}
+$$
+
+\subsection*{Satz}
+
+Sei $u \in C(\bar{\Omega}) \cap C^{2}(\Omega)$ eine positive Lösung des Problems
+
+$$
+-\Delta u=u^{p} \quad \text { in } \Omega,
+$$
+
+und sei $v:=g \circ u \in C(\bar{\Omega}) \cap C^{2}(\Omega)$.
+
+Dann nimmt die Konkavitätsfunktion $C_{v}$ zu $v$ kein negatives lokales Minimum in $\Omega \times \Omega$ an.
+
+Beweis. Man rechnet zunächst nach, dass $v$ in $\Omega$ die Gleichung
+
+$$
+\Delta v=-\frac{1}{v}\left(h(\nabla v)+c_{p}\right)
+$$
+
+mit $h(w)=\frac{1+p}{1-p}|w|^{2}$ und $c_{p}=\frac{1-p}{2}$ erfüllt (Übung!).
+
+Wir zeigen, dass $C_{v}$ kein negatives inneres lokales Maximum annimmt.
+
+Angenommen, dies wäre doch der Fall, d.h., das Minimum würde in $(x, y) \in \Omega \times \Omega$ angenommen.
+
+Mit $z=\frac{x+y}{2} \in \Omega$ wäre dann
+
+$$
+v(z)<\frac{1}{2}(v(x)+v(y))
+$$
+
+und
+
+$$
+0=\nabla_{x} C_{v}(x, y)=\frac{1}{2}(\nabla v(z)-\nabla v(x))=\nabla_{y} C_{v}(x, y)=\frac{1}{2}(\nabla v(z)-\nabla v(y)) .
+$$
+
+Dies liefert
+
+$$
+\nabla v(z)=\nabla v(x)=\nabla v(y)=: w_{0}
+$$
+
+Wir betrachten die in einem genügend kleinen Ball $U_{\varepsilon}(0) \subset \mathbb{R}^{N}$ definierte Funktion
+
+$$
+a \mapsto D(a)=v(z+a)-\frac{1}{2}(v(x+a)+v(y+a))=C_{v}(x+a, y+a)
+$$
+
+Diese hat nach obiger Annahme ein lokales Minimum bei 0 . Es folgt $\nabla D(0)=0$ und
+
+$$
+\begin{aligned}
+0 & \leq \Delta D(0)=\Delta v(z)-\frac{1}{2}(\Delta v(x)+\Delta v(y)) \\
+& =-\frac{1}{v(z)}\left(h\left(w_{0}\right)+c_{p}\right)+\frac{1}{2}\left[\frac{1}{v(x)}\left(h\left(w_{0}\right)+c_{p}\right)+\frac{1}{v(y)}\left(h\left(w_{0}\right)+c_{p}\right)\right]
+\end{aligned}
+$$
+
+Hier haben wir (7.1) und (7.3) verwendet.
+
+Wegen (7.2) und der Konvexität der Funktion $t \mapsto \frac{1}{t}$ auf $(0, \infty)$ gilt zudem
+
+$$
+-\frac{1}{v(z)}<-\left(\frac{1}{2}(v(x)+v(y))\right)^{-1} \leq-\frac{1}{2}\left(\frac{1}{v(x)}+\frac{1}{v(y)}\right)
+$$
+
+und damit folgt
+
+$$
+0 \leq \Delta D(0)<0
+$$
+
+ein Widerspruch. Der Beweis ist somit beendet.
+
+\subsection*{Satz}
+
+Sei $\Omega$ strikt konvex mit einer innneren Sphärenbedingung, und sei $u \in C^{1}(\Omega) \cap C(\bar{\Omega})$ eine Funktion mit
+
+$$
+u>0 \text { in } \Omega, \quad u=0 \text { auf } \partial \Omega \quad \text { und } \quad \partial_{\nu} u:=\limsup _{t \rightarrow 0^{+}} \frac{u(\cdot)-u(\cdot-t \nu)}{t}<0 \text { auf } \partial \Omega \text {. }
+$$
+
+Sei ferner
+
+$g \in C^{1}((0, \infty)) \cap C([0, \infty))$ mit $g^{\prime}(t)>0$ für $t>0$ und $\lim _{t \rightarrow 0^{+}} g^{\prime}(t)=\infty$.
+
+Sei schließlich $C_{v}$ die Konkavitätsfunktion zu $v=g \circ u$, und es sei angenommen, dass $C_{v}$ kein negatives lokales Minimum in $\Omega \times \Omega$ annimmt.
+
+Dann gilt $\quad C_{v} \geq 0 \quad$ in $\overline{\Omega \times \Omega}$.
+
+Beweis. Sei $a=g(0)$. Da die Funktion $g$ nach Voraussetzung streng monoton wachsend ist, gilt $v(x)=a$ für $x \in \partial \Omega$ und $v(x)>a$ für $x \in \Omega$.
+
+Wäre die Aussage falsch, so müsste die (stetige) Konkavitätsfunktion $C_{v}: \overline{\Omega \times \Omega} \rightarrow$ $\mathbb{R}$ ein negatives Minimum in einem Punkt
+
+$$
+(x, y) \in \partial(\Omega \times \Omega)=\partial \Omega \times \bar{\Omega} \cup \bar{\Omega} \times \partial \Omega
+$$
+
+annehmen.
+
+Wäre $x \in \partial \Omega$ und $y \in \partial \Omega$, so wäre
+
+$$
+C_{v}(x, y)=v\left(\frac{x+y}{2}\right)-\frac{v(x)+v(y)}{2}=v\left(\frac{x+y}{2}\right)-a>0
+$$
+
+da $\frac{x+y}{2} \in \Omega$ ist. Widerspruch!
+
+Wir können also ohne Einschränkung annehmen, dass $x \in \Omega$ und $y \in \partial \Omega$ gilt. Sei $\nu$ der äußere Normalenvektor zum Gebiet $\Omega$ in $y$. Die Minimaleigenschaft des Punktes $(x, y)$ liefert dann
+
+$$
+C_{v}(x, y)-C_{v}(x, y-t \nu) \leq 0 \quad \text { für } t \in\left[0, t_{0}\right]
+$$
+
+mit einem geeigneten $t_{0}>0$. Der Grenzwert
+
+$$
+\lim _{t \rightarrow 0} \frac{v\left(\frac{x+y}{2}\right)-v\left(\frac{x+y-t \nu}{2}\right)}{t}=\frac{1}{2} \nabla v\left(\frac{x+y}{2}\right) \cdot \nu
+$$
+
+existiert nach Voraussetzung.
+
+Ferner gilt
+
+$$
+\begin{aligned}
+v(y)-v(y-t \nu) & =g(u(y))-g(u(y-t \nu))=-\int_{u(y)}^{u(y-t \nu)} g^{\prime}(s) d s \\
+& =-\int_{0}^{u(y-t \nu)} g^{\prime}(s) d s \leq c_{t}(u(y)-u(y-t \nu))
+\end{aligned}
+$$
+
+wobei nach Voraussetzung
+
+$$
+c_{t}:=\inf _{s \in[0, u(y-t \nu)]} g^{\prime}(s) \rightarrow \infty \quad \text { für } t \rightarrow 0^{+}
+$$
+
+gilt. Da ferner
+
+$$
+\limsup _{t \rightarrow 0^{+}} \frac{u(y)-u(y-t \nu)}{t}=\partial_{\nu} u(y)<0 \quad \text { für } t \rightarrow 0^{+}
+$$
+
+nach Voraussetzung gilt, folgt:
+
+$$
+\begin{aligned}
+& \frac{C_{v}(x, y)-C_{v}(x, y-t \nu)}{t}=\frac{v\left(\frac{x+y}{2}\right)-v\left(\frac{x+y-t \nu}{2}\right)}{t}-\frac{1}{t}(v(y)-v(y-t \nu)) \\
+& \rightarrow \infty \quad \text { für } t \rightarrow 0^{+},
+\end{aligned}
+$$
+
+also ebenfalls ein Widerspruch.
+
+Die Behauptung folgt.
+
+Zum Abschluss des Beweises des Hauptsatzes 7.3 reicht es nun, festzustellen, dass jede positive Lösung $u \in C(\bar{\Omega}) \cap C^{2}(\Omega)$ des Problems
+
+$$
+-\Delta u=u^{p} \quad \text { in } \Omega, \quad u=0 \quad \text { auf } \partial \Omega
+$$
+
+zusammen mit $v=g \circ u=u^{\frac{1-p}{2}}$ (sukzessive) die Voraussetzungen der obigen Sätze 7.5 und 7.6 erfüllt.
+
+Die Negativität der Normalenableitung $\partial_{\nu} u$ folgt dabei aus dem Hopfschen Randpunktlemma.
+
+Es folgt also die Nichtnegativität der Konkavitätsfunktion $C_{v}$ und damit die Konkavität von $v$, wie behauptet.
+
+
+
+
+
+
+
+\pagebreak
+\printbibliography
+\end{document}

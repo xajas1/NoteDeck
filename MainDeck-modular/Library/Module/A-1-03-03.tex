@@ -1,0 +1,29 @@
+% Auto‑generiert aus Library.tex
+% UnitID: A-1-03-03
+% Titel : Kommutativer Ring
+
+\begin{DEF}{A-1-03-03}{Kommutativer Ring}
+Sei $\Omega \subset \mathbb{R}^{N}$ ein beschränktes Gebiet, $q \in L^{\infty}(\Omega)$ nichtnegativ und $f \in L^{2}(\Omega)$. Dann hat das Dirichletproblem
+$$
+-\Delta u+q(x) u=f \quad \text { in } \Omega, \quad u=0 \quad \text { auf } \partial \Omega
+$$
+eine eindeutig bestimmte schwache Lösung $u \in H_{0}^{1}(\Omega)$. Ist ferner $f \in L^{\infty}(\Omega)$, so gilt:
+
+(i) $u \in C^{1}(\Omega) \cap L^{\infty}(\Omega)$.
+
+(ii) Ist $\Omega^{\prime} \subset \subset \Omega$, so existiert eine nur von $\|q\|_{\infty}$ und $\Omega^{\prime}$ abhängige Konstante $C_{1}>0 \mathrm{mit}$
+$$
+\|u\|_{C^{1}\left(\overline{\Omega^{\prime}}\right)} \leq C_{1}\left(\|u\|_{L^{\infty}(\Omega)}+\|f\|_{L^{\infty}(\Omega)}\right)
+$$
+
+(iii) Erfüllt $\Omega$ eine gleichmäßige äußere Sphärenbedingung, so gilt $u \in C_{0}(\Omega)$, und es existiert eine nur von $\|f\|_{L^{\infty}(\Omega)}$ abhängige Konstante $C_{2}$ mit
+$$
+|u(x)| \leq C_{2} \operatorname{dist}(x, \partial \Omega) \quad \text { für } x \in \Omega \text {. }
+$$
+
+Erinnerung: $u \in H_{0}^{1}(\Omega)$ heißt schwache Lösung von (1.1), falls
+$$
+a_{L}(u, \varphi):=\int_{\Omega}(\nabla u \nabla \varphi+q(x) u \varphi) d x=\int_{\Omega} f u d x \quad \text { für alle } \varphi \in H_{0}^{1}(\Omega) \text {. }
+$$
+Wir testen auf Veränderung.
+\end{DEF}

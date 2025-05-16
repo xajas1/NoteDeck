@@ -1,0 +1,37 @@
+in 'Preferences: Open User Settings (JSON)' können die Zusatzdateien ein bzw ausgeblendet werden
+
+
+
+snippets für Latex: Preferences: Configure User Snippets > Latex
+
+CMD+,: Word wrap: on
+
+
+
+
+
+
+
+
+
+
+
+
+%%%% React Flow
+
+1) Jedes Mal, wenn du im Terminal (für api) mit dem Backend arbeitest, musst du das venv aktivieren:
+  cd ~/NoteDeck/MainDeck-modular/api
+  source venv/bin/activate
+Dann steht im Terminal
+  (venv) tim@MacBook-Pro-von-Tim api %
+Nur darin funktionieren fastapi, uvicorn usw., denn sie wurden lokal für dieses Projekt installiert.
+
+2) Terminale öffnen
+
+  a)API:
+  cd ~/NoteDeck/MainDeck-modular/api
+  source venv/bin/activate
+  uvicorn main:app --reload
+  b)React
+  cd ~/NoteDeck/playground
+  npm run dev

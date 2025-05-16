@@ -77,8 +77,8 @@
 % --- 8. Abschnittsüberschriften ---
 \usepackage{titlesec}
 \titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
-\titleformat{\subsection}[runin]{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}[:]
-\titleformat{\subsubsection}[runin]{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}[:]
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
 \setcounter{secnumdepth}{4}
 
 % --- 9. Abstrakt-Umgebung ---
@@ -184,9 +184,12 @@
 
 \section{Faserbündel}
 
-\subsection{Definitionen}
 
-\begin{DEF}{2.1}{Lokale Trivialisierung mit typischen Fasern auf Mfk}
+
+
+\subsection{Definition}
+
+\begin{DEF}{EFT1-1-02-1}{Lokale triviale Faserung mit typischen Fasern auf Mfk}
     Seien $E, M$ und $F$ differenzierbare Mannigfaltikeiten und $\pi: E \rightarrow M$ eine differenzierbare Abbildung. Dann heißt $(E, \pi, M)$ eine lokal triviale Faserung mit typischer Faser $F$, wenn es zu jedem $x \in M$ eine offene Umgebung $U$ gibt und einen Diffeomorphismus $\varphi: \pi^{-1}(U):=E \mid U \rightarrow$ $U \times F$, sodass
 
     $$
@@ -200,138 +203,405 @@
     kommutiert. Man spricht auch von der lokal trivialen Faserung $E \rightarrow M$ oder $E$.
 \end{DEF}
 
-
-\begin{DEF}{2.2}{Vektorraumbündel}
-    Sei $(E,\pi,M)$ eine lokale triviale Faserung mit typischer Faser $E$. Ist $F=\mathbb{R}^k$ und ist $\pi^{-1}(x)$ ein $k$-dimensionaler Vektorraum und 
-    $$p r_2 \circ \left.\varphi\right|_{\pi^{-1}(x)}: \pi^{-1}(x) \rightarrow \mathbb{R}^k$$ 
-    ein Isomorphismus, so heißt $E$ ein Vektorraumbündel der Dimension $k$.
-\end{DEF}
-
-
-\begin{DEF}{2.7}{Lokale Triviale Faser als Tripel (Totalraum,Basisraum,Projektion)}
-    Sei $(E, \pi, M)$ eine lokal triviale Faserung wie in 1.1. Dann heißt $E T o$ talraum, $M$ Basis, $\pi$ Bündelprojektion und $F$ typische Faser.
-\end{DEF}
-
-
-\begin{DEF}{2.8}{Reale Fasern in lokal trivialen Bündeln}
-    Sei $(E, \pi, M)$ eine lokal triviale Faserung. Für jedes $x \in M$ heißt $E_x=\pi^{-1}(x)$ reale Faser an der Stelle $x$.
-    Für $U \subset M$ offen heißt $\varphi: E \mid U \rightarrow U \times F$ Bündelkarte und
-    
-    $$
-    \left\{\left(U_\lambda, \varphi_\lambda\right) \mid\left(U_\lambda, \varphi_\lambda\right) \text { Bündelkarte }, \bigcup_{\lambda \in \Lambda} U_\lambda=M\right\}
-    $$
-    
-    heißt Bündelatlas.
-    Die Abbildung $\varphi_x: E_x \rightarrow F, \varphi_x:=p r_2 \circ \varphi \mid E_x$ heißt Faserkarte. Sind $(U, \varphi)$ und $(V, \psi)$ Bündelkarten, so heißt die Abbildung
-    
-    $$
-    \omega: U \cap V \rightarrow \operatorname{Diffeo}(F), x \mapsto \psi_x \circ \varphi_x^{-1}
-    $$
-    
-    der Bündelkartenwechsel zwischen $\varphi$ und $\psi$.
-\end{DEF}
-
-
-\begin{DEF}{2.9}{Bündelkarten für offene Teilmengen der Basis und Bündelatlas}
-    Sei $(E, \pi, M)$ eine lokal triviale Faserung. 
-    Für $U \subset M$ offen heißt $\varphi: E \mid U \rightarrow U \times F$ Bündelkarte und
-    
-    $$
-    \left\{\left(U_\lambda, \varphi_\lambda\right) \mid\left(U_\lambda, \varphi_\lambda\right) \text { Bündelkarte }, \bigcup_{\lambda \in \Lambda} U_\lambda=M\right\}
-    $$
-
-    heißt Bündelatlas.
-\end{DEF}
-
-
-\begin{DEF}{2.11}{Faserkarte am Punkt $x$ im Basisraum}
-    Sind $(U, \varphi)$ und $(V, \psi)$ Bündelkarten, so heißt die Abbildung
-
-    $$
-    \omega: U \cap V \rightarrow \operatorname{Diffeo}(F), x \mapsto \psi_x \circ \varphi_x^{-1}
-    $$
-    
-    der Bündelkartenwechsel zwischen $\varphi$ und $\psi$.
-\end{DEF}
-
-
-\begin{DEF}{2.12}{Bündelkartenwechsel zwischen Bündelkarten}
+\begin{DEF}{EFT1-1-02-10}{Bündelatlas für lokale triviale Faserungen}
 
 \end{DEF}
 
-
-\begin{DEF}{2.13}{G-Faserbündel mit Liegruppen als Strukturgruppen}
-
-\end{DEF}
-
-
-\begin{DEF}{2.14}{Prinzipalbündel}
+\begin{DEF}{EFT1-1-02-11}{Faserkarte am Punkt x im Basisraum}
 
 \end{DEF}
 
-
-\begin{DEF}{2.16}{(Lokale) Schnitte in lokal trivialen Faserungen}
-
-\end{DEF}
-
-
-\begin{DEF}{2.17}{Raum der differenzierbaren lokalen Schnitte}
+\begin{DEF}{EFT1-1-02-12}{Bündelkartenwechsel zwischen Bündelkarten}
 
 \end{DEF}
 
-
-\begin{DEF}{2.37}{Bündelmetrik auf Totalraum}
-
-\end{DEF}
-
-
-\begin{DEF}{2.40}{Vektorraumbündel von endlichem Typ}
+\begin{DEF}{EFT1-1-02-13}{G-Faserbündel mit Liegruppen als Strukturgruppen}
 
 \end{DEF}
 
-
-\begin{DEF}{2.43}{Bündelisomorphismus}
-
-\end{DEF}
-
-
-\begin{DEF}{2.44}{Trivialisierung von Totalraum}
+\begin{DEF}{EFT1-1-02-14}{Prinzipalbüdel / Hauptfaserbündel}
 
 \end{DEF}
 
-
-\begin{DEF}{2.45}{Vektorraumbündelabbildung über diff. Abbildungen zw. Vektorraumbündeln}
-
-\end{DEF}
-
-
-\begin{DEF}{2.46}{Vektorraumbündelisomorphismus}
+\begin{DEF}{EFT1-1-02-16}{(Differenzierbare) (Lokale) Schnitte in lokal trivialen Faserungen}
 
 \end{DEF}
 
-
-\begin{DEF}{2.48}{Induzierte Bündel durch Abbildungen}
-
-\end{DEF}
-
-
-\begin{DEF}{2.54}{Induzierte Bündel bei Einbettungen von UMfk}
+\begin{DEF}{EFT1-1-02-17}{Raum der differenzierbaren lokalen Schnitte}
 
 \end{DEF}
 
-
-\begin{DEF}{2.55}{Untervektorraumbündel}
+\begin{DEF}{EFT1-1-02-2}{Vektorraumbündel}
 
 \end{DEF}
 
+\begin{DEF}{EFT1-1-02-37}{Bündelmetrik auf Totalraum ist ein Schnitt in Sym^2(E), sodass g pw. positiv definit }
 
-\begin{DEF}{2.63}{Reduktionen von Faserbündeln mit Strukturgruppe bzgl. abgeschlossener Untergruppe}
+\end{DEF}
+
+\begin{DEF}{EFT1-1-02-40}{Vektorraumbündel vom endlichen Typ}
+
+\end{DEF}
+
+\begin{DEF}{EFT1-1-02-43}{Bündelisomorphismus}
+
+\end{DEF}
+
+\begin{DEF}{EFT1-1-02-44}{Trivialisierung von Totalraum}
+
+\end{DEF}
+
+\begin{DEF}{EFT1-1-02-45}{Vektorraumbündelabbildung über diff. Abbildungen zwischen Vektorraumbündeln}
+
+\end{DEF}
+
+\begin{DEF}{EFT1-1-02-46}{Vektorraumbündelisomorphismus}
+
+\end{DEF}
+
+\begin{DEF}{EFT1-1-02-48}{Induzierte Bündel durch Abbildungen}
+
+\end{DEF}
+
+\begin{DEF}{EFT1-1-02-54}{Induzierte Bündel bei Einbettungen von UnterMfk}
+
+\end{DEF}
+
+\begin{DEF}{EFT1-1-02-55}{Untervektorraumbündel}
+
+\end{DEF}
+
+\begin{DEF}{EFT1-1-02-63}{Reduktionen von Faserbündeln mit Strukturgruppe bzgl abgeschlossener Untergruppe}
+
+\end{DEF}
+
+\begin{DEF}{EFT1-1-02-7}{Lokale triviale Faserung als Tripel von Totalraum, Basisraum, Bündelprojektion mit typischen Fasern}
+
+\end{DEF}
+
+\begin{DEF}{EFT1-1-02-8}{Reale Fasern in lokal trivialen Faserungen}
+
+\end{DEF}
+
+\begin{DEF}{EFT1-1-02-9}{Bündelkarten für offene Teilmengen der Basis}
 
 \end{DEF}
 
 
 
-\subsection{Propositions}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Example}
+
+\begin{EXA}{EFT1-1-02-18}{Raum der diff. lokalen Schnitte in Kreuzprodukten}
+
+\end{EXA}
+
+\begin{EXA}{EFT1-1-02-19}{Raum der diff. Lokalen Schnitte im Tangentialbündel}
+
+\end{EXA}
+
+\begin{EXA}{EFT1-1-02-20}{Jedes Vektorraumbündel hat einen lokalen Schnitt x auf O_x in E_x}
+
+\end{EXA}
+
+\begin{EXA}{EFT1-1-02-21}{Im Tangentialbündel existiert kein diff. Schnitt, der nirgends verschwindet}
+
+\end{EXA}
+
+\begin{EXA}{EFT1-1-02-22}{S1 auf S1, z auf z^2 gibt es keinen Schnitt}
+
+\end{EXA}
+
+\begin{EXA}{EFT1-1-02-29}{Bündelstruktur von Tangentialbündel als Ergebnis der Konstruktion von Präbündeln}
+
+\end{EXA}
+
+\begin{EXA}{EFT1-1-02-3}{Projektion von Kreuzprodukt ist eine lokal triviale Faserung}
+
+\end{EXA}
+
+\begin{EXA}{EFT1-1-02-30}{Präbündel zum GL-Prinzipalbündel}
+
+\end{EXA}
+
+\begin{EXA}{EFT1-1-02-31}{Präbündel zum O(n)-Prinzipalbündel für Riemannische Mfk}
+
+\end{EXA}
+
+\begin{EXA}{EFT1-1-02-33}{Hom-Raum für Homomorphismen zwischen Vektorraumbündeln sind Vektorraumbündel}
+
+\end{EXA}
+
+\begin{EXA}{EFT1-1-02-34}{Mult}
+
+\end{EXA}
+
+\begin{EXA}{EFT1-1-02-35}{Sym}
+
+\end{EXA}
+
+\begin{EXA}{EFT1-1-02-36}{Alt}
+
+\end{EXA}
+
+\begin{EXA}{EFT1-1-02-38}{Riemannische Metrik als Bündelmetrik im Tangentialbündel}
+
+\end{EXA}
+
+\begin{EXA}{EFT1-1-02-39}{Gamma (Alt^k(TM))}
+
+\end{EXA}
+
+\begin{EXA}{EFT1-1-02-4}{Tangentialbündel mit differenzierbarer Struktur ist Vektorraumbündel}
+
+\end{EXA}
+
+\begin{EXA}{EFT1-1-02-41}{Tangentialbündel von S^n ist von endlichem Typ}
+
+\end{EXA}
+
+\begin{EXA}{EFT1-1-02-47}{Differential von glatten Abbildungen zw. Tangentialbündel von Mfk ist eine Vektorraumbündelabbildung über glatte Abbildung f}
+
+\end{EXA}
+
+\begin{EXA}{EFT1-1-02-5}{Vektorraumbündel zu S1}
+
+\end{EXA}
+
+\begin{EXA}{EFT1-1-02-50}{Menge der Vektorfelder längs Kurven}
+
+\end{EXA}
+
+\begin{EXA}{EFT1-1-02-51}{Vektorraumbündel bzgl Grassmann-Mfk}
+
+\end{EXA}
+
+\begin{EXA}{EFT1-1-02-6}{Lokale triviale Faserung über S1}
+
+\end{EXA}
+
+\begin{EXA}{EFT1-1-02-64}{Charakterisierung von orientierten Mfk}
+
+\end{EXA}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Proposition}
+
+\begin{PROP}{EFT1-1-02-28}{Für Präbündel (E,pi,M) existiert auf E genau einem Topologie und differenzierbare Struktur, sodass (E,pi,M) ein Faserbündel mit Strukturgruppe G wird und Präbündelkarten Bündelkarten werden}
+
+\end{PROP}
+
+\begin{PROP}{EFT1-1-02-49}{Schnitte in induzierten Bündeln längs f}
+
+\end{PROP}
+
+\begin{PROP}{EFT1-1-02-61}{Rang-Satz für Vektorraumhomomorphismen: Konstanter Rang impliziert ker und im sind Untervektorraumbündel}
+
+\end{PROP}
+
+\begin{PROP}{EFT1-1-02-65}{Ehresmannscher Faserungssatz: Totalräume mit eigentlich regulären Abbildungen in zusammenhängenden Basisraum implizieren eine lokale triviale Faserung}
+
+\end{PROP}
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Corollar}
+
+\begin{KORO}{EFT1-1-02-32}{Direkte Summe von Vektorraumbündeln ergeben Prävektorraumbündel}
+
+\end{KORO}
+
+\begin{KORO}{EFT1-1-02-53}{Homotope Abbildungen in Faserbündel induzieren isomorphe Bündel}
+
+\end{KORO}
+
+\begin{KORO}{EFT1-1-02-62}{Charakterisierung von Vektorraumbündeln von endlichem Typ}
+
+\end{KORO}
+
+
+
+
+
+
+
+
+
+
+\subsection{Remark}
+
+\begin{REM}{EFT1-1-02-15}{Beziehung zwischen Vektorraumbündeln und GL-Faserbündeln}
+
+\end{REM}
+
+\begin{REM}{EFT1-1-02-23}{Raum der diff Schnitte in Vektorraumbündeln ist der Vektorraum von glatten Abbildungen auf M}
+
+\end{REM}
+
+\begin{REM}{EFT1-1-02-24}{Für Bündelkarten in Vektorraumbündeln existieren k lokale Schnitte, die an jeder Stelle eine Basis der realen Faser bilden}
+
+\end{REM}
+
+\begin{REM}{EFT1-1-02-25}{k lokale Schnitte, die bei Punkt eine Basis der Faser bilden, induzieren eine Bündelkarte}
+
+\end{REM}
+
+\begin{REM}{EFT1-1-02-26}{Bündelkarten in G-Prinzipalbündeln induzieren lokale Schnitte}
+
+\end{REM}
+
+\begin{REM}{EFT1-1-02-27}{Präbündel mit Strukturgruppe G zu Liegruppe G, Mfk, (disj) Vereinigung von punktweise Mfk und Projektion}
+
+\end{REM}
+
+\begin{REM}{EFT1-1-02-52}{Bündelabbildungen bzgl induzierte Bündel}
+
+\end{REM}
+
+\begin{REM}{EFT1-1-02-56}{Untervektorraumbündel sind Vektorraumbündel}
+
+\end{REM}
+
+\begin{REM}{EFT1-1-02-57}{Quotienten-Räume bzgl Untervektorraumbündel sind Vektorraumbündel}
+
+\end{REM}
+
+\begin{REM}{EFT1-1-02-58}{Untervektorraumbündel bzgl Bündelmetrik}
+
+\end{REM}
+
+\begin{REM}{EFT1-1-02-59}{Tangentialbündel von UnterMfk sind Untervektorraumbündel}
+
+\end{REM}
+
+\begin{REM}{EFT1-1-02-60}{Normalenbündel von UnterMfk}
+
+\end{REM}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
