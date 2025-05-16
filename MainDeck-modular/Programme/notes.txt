@@ -41,3 +41,8 @@ Nur darin funktionieren fastapi, uvicorn usw., denn sie wurden lokal für dieses
   b)React
   cd ~/NoteDeck/playground
   npm run dev
+
+
+Localhost
+
+http://localhost:5173
