@@ -15,13 +15,14 @@ export default function PlaygroundView({ playground, setPlayground }) {
 
 function DraggableUnit({ unit, onRemove }) {
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
-    id: `external__${unit.UnitID}`,
+    id: `__drop__${unit.UnitID}`,
     data: {
       type: 'unit',
       unitID: unit.UnitID,
-      from: 'external'
+      fromSubID: null
     }
   })
+  
 
   const style = {
     padding: '0.5rem 1rem',

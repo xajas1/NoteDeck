@@ -3,12 +3,11 @@ import {
   useDroppable,
   useSensor,
   useSensors,
-  PointerSensor,
+  PointerSensor
 } from '@dnd-kit/core'
 import {
   SortableContext,
   useSortable,
-  arrayMove,
   verticalListSortingStrategy
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
@@ -23,14 +22,15 @@ export default function StructureEditor({ structure, setStructure }) {
     const overId = over.id
     const overSubID = over.data?.current?.subsectionId || overId
 
-    // Externe Unit aus Playground
-    if (activeId.startsWith('external__')) {
-      const unitID = activeId.replace('external__', '')
+    // 🟢 Externe Unit aus Playground
+    if (activeId.startsWith('__drop__')) {
+      const unitID = activeId.replace('__drop__', '')
+      const subID = overId.replace('__drop__', '')
       setStructure(prev =>
         prev.map(section => ({
           ...section,
           subsections: section.subsections.map(sub =>
-            sub.id === overSubID && !sub.unitIDs.includes(unitID)
+            sub.id === subID && !sub.unitIDs.includes(unitID)
               ? { ...sub, unitIDs: [...sub.unitIDs, unitID] }
               : sub
           )
@@ -39,7 +39,7 @@ export default function StructureEditor({ structure, setStructure }) {
       return
     }
 
-    // Interner Move
+    // 🔁 Interner Move
     const [fromSubID, unitID] = activeId.split('__')
     const [toSubID, overUnitID] = overId.split('__')
 
@@ -101,9 +101,14 @@ export default function StructureEditor({ structure, setStructure }) {
 
 function DroppableSubsection({ subsection }) {
   const { setNodeRef, isOver } = useDroppable({
-    id: subsection.id,
+    id: `__drop__${subsection.id}`,
     data: { subsectionId: subsection.id }
   })
+
+  const items = [
+    ...subsection.unitIDs.map(uid => `${subsection.id}__${uid}`),
+    `__drop__${subsection.id}`
+  ]
 
   return (
     <div ref={setNodeRef} style={{
@@ -111,10 +116,7 @@ function DroppableSubsection({ subsection }) {
       borderColor: isOver ? '#4fc3f7' : '#777'
     }}>
       <strong>{subsection.name}</strong>
-      <SortableContext
-        items={subsection.unitIDs.map(uid => `${subsection.id}__${uid}`)}
-        strategy={verticalListSortingStrategy}
-      >
+      <SortableContext items={items} strategy={verticalListSortingStrategy}>
         <ul style={styles.ul}>
           {subsection.unitIDs.map(uid => (
             <SortableUnit
@@ -123,6 +125,13 @@ function DroppableSubsection({ subsection }) {
               uid={uid}
             />
           ))}
+
+          {/* 👇 Unsichtbarer Drop-Target für externe Einheiten */}
+          <li
+            key={`__drop__${subsection.id}`}
+            id={`__drop__${subsection.id}`}
+            style={{ height: '0.5rem' }}
+          />
         </ul>
       </SortableContext>
     </div>
