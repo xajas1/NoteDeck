@@ -2,7 +2,7 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 
-export default function SortableItemWrapper({ id, children }) {
+export default function SortableItemWrapper({ id, sectionID, children }) {
   const {
     attributes,
     listeners,
@@ -10,14 +10,23 @@ export default function SortableItemWrapper({ id, children }) {
     transform,
     transition,
     isDragging,
-  } = useSortable({ id })
+  } = useSortable({
+    id,
+    data: {
+      type: 'unit',
+      unitID: id,
+      fromSection: sectionID,
+    },
+  })
 
   const style = {
-    transform: CSS.Transform.toString(transform),
+    transform: transform ? CSS.Transform.toString(transform) : undefined,
     transition,
-    opacity: isDragging ? 0.6 : 1,
-    cursor: 'grab'
-  }
+    opacity: isDragging ? 0.5 : 1,
+    cursor: 'grab',
+    width: '100%',
+    boxSizing: 'border-box',
+  }  
 
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>

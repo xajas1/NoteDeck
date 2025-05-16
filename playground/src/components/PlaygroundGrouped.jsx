@@ -1,60 +1,111 @@
-import { DndContext, closestCenter } from '@dnd-kit/core'
-import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
+// PlaygroundGrouped.jsx
 import { useMemo } from 'react'
+import { DndContext } from '@dnd-kit/core'
+import { arrayMove } from '@dnd-kit/sortable'
+import PlaygroundSection from './PlaygroundSection'
 import SortableItem from './SortableItemWrapper'
 
+const itemStyle = {
+  background: '#2a2a2a',
+  padding: '0.5rem 1rem',
+  borderRadius: '6px',
+  color: '#eee',
+  fontSize: '0.9rem',
+  display: 'flex',
+  justifyContent: 'space-between',
+}
 
 export default function PlaygroundGrouped({ playground, setPlayground }) {
   const sections = useMemo(() => {
     const grouped = {}
     for (const entry of playground) {
-      if (!grouped[entry.Section]) grouped[entry.Section] = []
-      grouped[entry.Section].push(entry)
+      const key = entry.Section || '(keine Section)'
+      if (!grouped[key]) grouped[key] = []
+      grouped[key].push(entry)
     }
     return grouped
   }, [playground])
 
-  const handleDragEnd = (event) => {
-    const { active, over } = event
-    if (!over || active.id === over.id) return
+  const handleRenameSection = (oldName, newName) => {
+    setPlayground(prev =>
+      prev.map(entry =>
+        entry.Section === oldName ? { ...entry, Section: newName } : entry
+      )
+    )
+  }
 
-    // Finde Section der Unit
-    const section = playground.find(e => e.UnitID === active.id)?.Section
-    if (!section) return
+  const handleDragEnd = ({ active, over }) => {
+    if (!over) return
 
-    const oldIndex = playground.findIndex(e => e.UnitID === active.id)
-    const newIndex = playground.findIndex(e => e.UnitID === over.id)
+    const activeData = active.data.current
+    const overData = over.data.current
 
-    const reordered = arrayMove(playground, oldIndex, newIndex)
-    const withUpdatedOrder = reordered.map((e, i) => ({ ...e, Order: i + 1 }))
-    setPlayground(withUpdatedOrder)
+    if (activeData?.type !== 'unit') return
+
+    const unitID = active.id
+    const fromSec = activeData.fromSection
+    const toSec =
+      overData?.type === 'section'
+        ? over.id
+        : overData?.fromSection
+
+    if (!toSec) return
+
+    const srcList = [...(sections[fromSec] || [])]
+    const dstList = fromSec === toSec ? srcList : [...(sections[toSec] || [])]
+
+    const movingIdx = srcList.findIndex(u => u.UnitID === unitID)
+    const moving = srcList.splice(movingIdx, 1)[0]
+    if (!moving) return
+
+    const insertAt =
+      overData?.type === 'unit'
+        ? dstList.findIndex(u => u.UnitID === over.id)
+        : dstList.length
+
+    dstList.splice(insertAt, 0, { ...moving, Section: toSec })
+
+    const renumber = arr => arr.map((u, i) => ({ ...u, Order: i + 1 }))
+    const allUpdated = renumber(fromSec === toSec ? dstList : srcList)
+      .concat(renumber(fromSec === toSec ? [] : dstList))
+
+    const updatedIDs = new Set(allUpdated.map(u => u.UnitID))
+
+    const next = playground
+      .filter(u => !updatedIDs.has(u.UnitID))
+      .concat(allUpdated)
+
+    setPlayground(next)
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-      {Object.entries(sections).map(([section, entries]) => (
-        <div key={section}>
-          <h3>{section}</h3>
-          <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-            <SortableContext items={entries.map(e => e.UnitID)} strategy={verticalListSortingStrategy}>
-              {entries.map(e => (
-                <SortableItem key={e.UnitID} id={e.UnitID}>
-                  <div style={{
-                    background: '#333',
-                    padding: '0.5rem 1rem',
-                    margin: '0.25rem 0',
-                    borderRadius: '6px',
-                    color: '#fff',
-                    fontSize: '0.9rem'
-                  }}>
-                    {e.UnitID} – {e.Section} / {e.Subsection}
-                  </div>
-                </SortableItem>
-              ))}
-            </SortableContext>
-          </DndContext>
-        </div>
-      ))}
-    </div>
+    <DndContext onDragEnd={handleDragEnd}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', padding: '1rem' }}>
+        {Object.entries(sections).map(([section, entries]) => (
+          <PlaygroundSection
+            key={`section-${section}`}
+            sectionID={section}
+            title={section}
+            itemIDs={entries.map(u => u.UnitID)}
+            onRename={(newTitle) => {
+                setPlayground(prev =>
+                prev.map(unit =>
+                    unit.Section === section ? { ...unit, Section: newTitle } : unit
+                )
+                )
+            }}
+          >
+            {entries.map((e) => (
+              <SortableItem key={`unit-${section}-${e.UnitID}`} id={e.UnitID} sectionID={section}>
+                <div style={itemStyle}>
+                  <span>{e.UnitID}</span>
+                  <span style={{ opacity: 0.7 }}>{e.Section} / {e.Subsection}</span>
+                </div>
+              </SortableItem>
+            ))}
+          </PlaygroundSection>
+        ))}
+      </div>
+    </DndContext>
   )
 }
