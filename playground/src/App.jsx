@@ -17,14 +17,12 @@ function App() {
   const [playground, setPlayground] = useState([])
   const [structure, setStructure] = useState([])
 
-  // 👉 Aktiviere PointerSensor (Maus)
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: { distance: 5 },
     })
   )
 
-  // 🔧 Normalisierungsfunktion für alle Drag-IDs
   const normalizeUnitID = (id) => {
     if (id.includes('____drop__')) {
       return id.split('____drop__')[1]
@@ -38,12 +36,10 @@ function App() {
     return id
   }
 
-  // 🟡 Wenn Drag startet
   const handleDragStart = (event) => {
     console.log('🟡 Drag Start:', event.active.id)
   }
 
-  // 🟠 Wenn Maus über ein Ziel schwebt
   const handleDragOver = ({ active, over }) => {
     console.log('🟠 Drag Over:', {
       active: active?.id,
@@ -51,60 +47,53 @@ function App() {
     })
   }
 
-  // ✅ Wenn Drop erfolgt
   const handleDragEnd = ({ active, over }) => {
     if (!active || !over) return
-  
-    const draggedID = normalizeUnitID(active.id)
+
+    const draggedIDs = active?.data?.current?.draggedIDs || [normalizeUnitID(active.id)]
     const targetSubID = over.id.includes('__')
       ? over.id.split('__')[0]
       : over.id
-  
+
     const targetIndexUnit = over.id.includes('__')
       ? normalizeUnitID(over.id)
       : null
-  
-    const activeSubID = active.id.includes('__')
-      ? active.id.split('__')[0]
-      : null
-  
+
     setStructure(prev =>
       prev.map(section => ({
         ...section,
         subsections: section.subsections.map(sub => {
-          const current = [...sub.unitIDs]
-  
-          // Entferne draggedID aus allen subsections
-          const cleaned = current.filter(id => id !== draggedID)
-  
+          let current = [...sub.unitIDs]
+
+          // Entferne alle draggedIDs
+          draggedIDs.forEach(id => {
+            current = current.filter(u => u !== id)
+          })
+
           if (sub.id !== targetSubID) {
-            return { ...sub, unitIDs: cleaned }
+            return { ...sub, unitIDs: current }
           }
-  
-          // === Ziel-Subsection ===
-          // Berechne neue Position
-          let insertAt = cleaned.length
-          if (targetIndexUnit && cleaned.includes(targetIndexUnit)) {
-            insertAt = cleaned.indexOf(targetIndexUnit)
-  
-            // Korrektur: Wenn dragged ursprünglich vor Ziel → nachrücken
-            const fromIndex = current.indexOf(draggedID)
+
+          // Ziel-Subsection: Einfügeposition berechnen
+          let insertAt = current.length
+          if (targetIndexUnit && current.includes(targetIndexUnit)) {
+            insertAt = current.indexOf(targetIndexUnit)
+            const fromIndex = current.indexOf(draggedIDs[0])
             const toIndex = current.indexOf(targetIndexUnit)
             if (fromIndex < toIndex) insertAt += 1
           }
-  
-          const next = [...cleaned]
-          next.splice(insertAt, 0, draggedID)
-  
-          return { ...sub, unitIDs: next }
+
+          const updated = [...current]
+          draggedIDs.forEach((id, i) => {
+            updated.splice(insertAt + i, 0, id)
+          })
+
+          return { ...sub, unitIDs: updated }
         })
       }))
     )
   }
-  
-  
 
-  // 📦 Lade Units
   useEffect(() => {
     fetch('http://127.0.0.1:8000/units')
       .then(res => res.json())
