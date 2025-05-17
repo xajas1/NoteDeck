@@ -14,44 +14,45 @@ export default function PlaygroundView({ playground, setPlayground }) {
 }
 
 function DraggableUnit({ unit, onRemove }) {
-  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
-    id: unit.UnitID,
-    data: { type: 'unit', unitID: unit.UnitID }
-  })
-
-  const style = {
-    padding: '0.5rem 1rem',
-    borderRadius: '6px',
-    backgroundColor: isDragging ? '#333' : '#2a2a2a',
-    color: '#eee',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    opacity: isDragging ? 0.5 : 1,
-    cursor: 'grab',
-  }
-
-  return (
+    const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
+        id: `__drop__${unit.UnitID}`, // wichtig für Erkennung als externer Drop
+        data: { type: 'unit', unitID: unit.UnitID }
+      })
+      
+  
+    const style = {
+      padding: '0.5rem 1rem',
+      borderRadius: '6px',
+      backgroundColor: isDragging ? '#333' : '#2a2a2a',
+      color: '#eee',
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      opacity: isDragging ? 0.5 : 1,
+      cursor: 'grab',
+    }
+  
+    return (
       <div
-            id={unit.UnitID}
-            ref={setNodeRef}
-            style={style}
-            {...attributes}
-            {...listeners}
+        ref={setNodeRef}
+        style={style}
+        {...attributes}
+        {...listeners}
       >
-      <span>{unit.UnitID}</span>
-      <button
-        onClick={() => onRemove(unit.UnitID)}
-        style={{
-          marginLeft: '1rem',
-          background: 'transparent',
-          border: 'none',
-          color: '#aaa',
-          cursor: 'pointer',
-        }}
-      >
-        ✕
-      </button>
-    </div>
-  )
-}
+        <span>{unit.UnitID}</span>
+        <button
+          onClick={() => onRemove(unit.UnitID)}
+          style={{
+            marginLeft: '1rem',
+            background: 'transparent',
+            border: 'none',
+            color: '#aaa',
+            cursor: 'pointer',
+          }}
+        >
+          ✕
+        </button>
+      </div>
+    )
+  }
+  
