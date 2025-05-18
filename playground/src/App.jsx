@@ -7,9 +7,9 @@ import {
   useSensors,
 } from '@dnd-kit/core'
 
-import Sidebar from './components/Sidebar'
-import PlaygroundView from './components/PlaygroundView'
-import StructureEditor from './components/StructureEditor'
+import TreePlaygroundView from './components/TreePlaygroundView'
+import TreeEditorView from './components/TreeEditorView'
+import TreeSidebar from './components/TreeSidebar'
 
 function App() {
   const [units, setUnits] = useState([])
@@ -92,7 +92,7 @@ function App() {
           return { ...sub, unitIDs: updated }
         })
       }))
-    )
+    );
 
     setSelectedPlaygroundIDs(new Set())
     setSelectedEditorIDs(new Set())
@@ -129,7 +129,7 @@ function App() {
           color: '#eee',
         }}
       >
-        {/* 🔹 Sidebar */}
+        {/* 🔹 TreeSidebar */}
         <div
           style={{
             width: '25%',
@@ -138,14 +138,14 @@ function App() {
             overflowY: 'auto',
           }}
         >
-          <Sidebar
+          <TreeSidebar
             units={units}
             playground={playground}
             setPlayground={setPlayground}
           />
         </div>
 
-        {/* 🔹 Playground */}
+        {/* 🔹 TreePlayground */}
         <div
           style={{
             width: '40%',
@@ -153,23 +153,22 @@ function App() {
             overflowY: 'auto',
           }}
         >
-          <h2 style={{ marginBottom: '1rem' }}>📄 Ausgewählte Einheiten</h2>
+          <h2 style={{ marginBottom: '1rem' }}>📄 Ausgewählte Einheiten (Tree)</h2>
           {loading ? (
             <p>⏳ Lade Inhalte …</p>
           ) : (
-            <PlaygroundView
+            <TreePlaygroundView
               playground={playground}
-              setPlayground={setPlayground}
+              units={units}
               selectedIDs={selectedPlaygroundIDs}
               setSelectedIDs={setSelectedPlaygroundIDs}
               lastSelectedIndex={lastSelectedPlaygroundIndex}
               setLastSelectedIndex={setLastSelectedPlaygroundIndex}
-              units={units} // <— hier!
             />
           )}
         </div>
 
-        {/* 🔹 Struktur-Editor */}
+        {/* 🔹 TreeEditor */}
         <div
           style={{
             width: '35%',
@@ -178,8 +177,8 @@ function App() {
             overflowY: 'auto',
           }}
         >
-          <h2 style={{ marginBottom: '1rem' }}>📦 Struktur</h2>
-          <StructureEditor
+          <h2 style={{ marginBottom: '1rem' }}>📦 Struktur (Tree)</h2>
+          <TreeEditorView
             structure={structure}
             setStructure={setStructure}
             selectedEditorIDs={selectedEditorIDs}
@@ -193,5 +192,5 @@ function App() {
     </DndContext>
   )
 }
- 
+
 export default App
