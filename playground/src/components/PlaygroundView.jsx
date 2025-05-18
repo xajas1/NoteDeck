@@ -1,11 +1,14 @@
-// PlaygroundView.jsx
-import { useState } from 'react'
+// src/components/PlaygroundView.jsx
 import { useDraggable } from '@dnd-kit/core'
 
-export default function PlaygroundView({ playground, setPlayground }) {
-  const [selectedIDs, setSelectedIDs] = useState(new Set())
-  const [lastSelectedIndex, setLastSelectedIndex] = useState(null)
-
+export default function PlaygroundView({
+  playground,
+  setPlayground,
+  selectedIDs,
+  setSelectedIDs,
+  lastSelectedIndex,
+  setLastSelectedIndex,
+}) {
   const toggleSelection = (uid, index, shift = false) => {
     setSelectedIDs(prev => {
       const next = new Set(prev)
@@ -13,7 +16,6 @@ export default function PlaygroundView({ playground, setPlayground }) {
       if (shift && lastSelectedIndex !== null) {
         const start = Math.min(lastSelectedIndex, index)
         const end = Math.max(lastSelectedIndex, index)
-
         for (let i = start; i <= end; i++) {
           next.add(playground[i].UnitID)
         }
@@ -40,7 +42,11 @@ export default function PlaygroundView({ playground, setPlayground }) {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
+      gap: '0.75rem',
+    }}>
       {playground.map((unit, index) => (
         <DraggableUnit
           key={unit.UnitID}
@@ -68,16 +74,19 @@ function DraggableUnit({ unit, index, isSelected, selectedIDs, onRemove, onToggl
   })
 
   const style = {
-    padding: '0.5rem 1rem',
-    borderRadius: '6px',
-    backgroundColor: isSelected ? '#444' : (isDragging ? '#333' : '#2a2a2a'),
-    border: isSelected ? '1px solid #4fc3f7' : '1px solid transparent',
+    padding: '0.75rem',
+    borderRadius: '8px',
+    backgroundColor: isSelected ? '#333' : isDragging ? '#2a2a2a' : '#1e1e1e',
+    border: isSelected ? '2px solid #4fc3f7' : '1px solid #444',
     color: '#eee',
     display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    opacity: isDragging ? 0.5 : 1,
+    flexDirection: 'column',
+    gap: '0.25rem',
     cursor: 'grab',
+    boxShadow: isSelected ? '0 0 0 2px #4fc3f7 inset' : 'none',
+    transition: 'all 0.15s ease',
+    minHeight: '100px',
+    justifyContent: 'space-between'
   }
 
   return (
@@ -91,19 +100,25 @@ function DraggableUnit({ unit, index, isSelected, selectedIDs, onRemove, onToggl
         onToggle(unit.UnitID, index, e.shiftKey)
       }}
     >
-      <span>{unit.UnitID}</span>
+      <div style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>{unit.UnitID}</div>
+      <div style={{ fontSize: '0.75rem', color: '#aaa' }}>
+        {unit.Name ?? '⟨Kein Name⟩'}
+      </div>
       <button
         onClick={(e) => {
           e.stopPropagation()
           onRemove(unit.UnitID)
         }}
         style={{
-          marginLeft: '1rem',
+          alignSelf: 'flex-end',
+          marginTop: '0.5rem',
           background: 'transparent',
           border: 'none',
           color: '#aaa',
+          fontSize: '1rem',
           cursor: 'pointer',
         }}
+        title="Entfernen"
       >
         ✕
       </button>

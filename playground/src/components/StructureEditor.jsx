@@ -1,9 +1,38 @@
-// src/components/StructureEditor.jsx
 import { useDroppable } from '@dnd-kit/core'
 import { SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 
-export default function StructureEditor({ structure, setStructure }) {
+export default function StructureEditor({
+  structure,
+  setStructure,
+  selectedEditorIDs,
+  setSelectedEditorIDs,
+  lastSelectedEditorIndex,
+  setLastSelectedEditorIndex
+}) {
+  const toggleEditorSelection = (fullID, index, shift = false, allIDs = []) => {
+    setSelectedEditorIDs(prev => {
+      const next = new Set(prev)
+
+      if (shift && lastSelectedEditorIndex !== null) {
+        const start = Math.min(lastSelectedEditorIndex, index)
+        const end = Math.max(lastSelectedEditorIndex, index)
+        for (let i = start; i <= end; i++) {
+          next.add(allIDs[i])
+        }
+      } else {
+        if (next.has(fullID)) {
+          next.delete(fullID)
+        } else {
+          next.add(fullID)
+        }
+        setLastSelectedEditorIndex(index)
+      }
+
+      return next
+    })
+  }
+
   const addSection = () => {
     const name = prompt('Section-Name:')
     if (!name?.trim()) return
@@ -20,11 +49,17 @@ export default function StructureEditor({ structure, setStructure }) {
     setStructure(prev =>
       prev.map(sec =>
         sec.id === secID
-          ? { ...sec, subsections: [...sec.subsections, {
-              id: `sub-${Date.now()}`,
-              name: name.trim(),
-              unitIDs: []
-            }] }
+          ? {
+              ...sec,
+              subsections: [
+                ...sec.subsections,
+                {
+                  id: `sub-${Date.now()}`,
+                  name: name.trim(),
+                  unitIDs: []
+                }
+              ]
+            }
           : sec
       )
     )
@@ -41,6 +76,11 @@ export default function StructureEditor({ structure, setStructure }) {
         )
       }))
     )
+    setSelectedEditorIDs(prev => {
+      const next = new Set(prev)
+      next.delete(`${subID}__${uid}`)
+      return next
+    })
   }
 
   return (
@@ -54,7 +94,11 @@ export default function StructureEditor({ structure, setStructure }) {
             <DroppableSubsection
               key={sub.id}
               subsection={sub}
+              selectedEditorIDs={selectedEditorIDs}
               onRemoveUnit={removeUnit}
+              onToggleSelection={toggleEditorSelection}
+              lastSelectedEditorIndex={lastSelectedEditorIndex}
+              setLastSelectedEditorIndex={setLastSelectedEditorIndex}
             />
           ))}
         </div>
@@ -63,39 +107,68 @@ export default function StructureEditor({ structure, setStructure }) {
   )
 }
 
-function DroppableSubsection({ subsection, onRemoveUnit }) {
+function DroppableSubsection({
+  subsection,
+  onRemoveUnit,
+  onToggleSelection,
+  selectedEditorIDs,
+  lastSelectedEditorIndex,
+  setLastSelectedEditorIndex
+}) {
   const { setNodeRef, isOver } = useDroppable({
     id: subsection.id,
     data: { subsectionId: subsection.id }
   })
 
+  const allIDs = subsection.unitIDs.map(id => `${subsection.id}__${id}`)
+
   return (
-    <div ref={setNodeRef} style={{
-      ...styles.subsection,
-      borderColor: isOver ? '#4fc3f7' : '#777'
-    }}>
+    <div
+      ref={setNodeRef}
+      style={{
+        ...styles.subsection,
+        borderColor: isOver ? '#4fc3f7' : '#777'
+      }}
+    >
       <strong>{subsection.name}</strong>
-      <SortableContext
-        items={subsection.unitIDs.map(id => `${subsection.id}__${id}`)}
-        strategy={verticalListSortingStrategy}
-      >
+      <SortableContext items={allIDs} strategy={verticalListSortingStrategy}>
         <ul style={styles.ul}>
-          {subsection.unitIDs.map(uid => (
-            <SortableUnit
-              key={uid}
-              id={`${subsection.id}__${uid}`}
-              uid={uid}
-              fromSubID={subsection.id}
-              onRemove={() => onRemoveUnit(subsection.id, uid)}
-            />
-          ))}
+          {subsection.unitIDs.map((uid, index) => {
+            const fullID = `${subsection.id}__${uid}`
+            return (
+              <SortableUnit
+                key={uid}
+                id={fullID}
+                uid={uid}
+                index={index}
+                fullID={fullID}
+                allIDs={allIDs}
+                isSelected={selectedEditorIDs.has(fullID)}
+                selectedEditorIDs={selectedEditorIDs}
+                onToggleSelection={(shiftKey) =>
+                  onToggleSelection(fullID, index, shiftKey, allIDs)
+                }
+                onRemove={() => onRemoveUnit(subsection.id, uid)}
+              />
+            )
+          })}
         </ul>
       </SortableContext>
     </div>
   )
 }
 
-function SortableUnit({ id, uid, onRemove }) {
+function SortableUnit({
+  id,
+  uid,
+  index,
+  fullID,
+  isSelected,
+  selectedEditorIDs,
+  onToggleSelection,
+  onRemove,
+  allIDs
+}) {
   const {
     setNodeRef,
     attributes,
@@ -103,7 +176,15 @@ function SortableUnit({ id, uid, onRemove }) {
     transform,
     transition,
     isDragging
-  } = useSortable({ id })
+  } = useSortable({
+    id,
+    data: {
+      type: 'unit',
+      draggedIDs: isSelected && selectedEditorIDs.size > 1
+        ? Array.from(selectedEditorIDs).map(x => x.split('__')[1])
+        : [uid]
+    }
+  })
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -112,11 +193,22 @@ function SortableUnit({ id, uid, onRemove }) {
     display: 'flex',
     justifyContent: 'space-between',
     cursor: 'grab',
-    padding: '0.2rem 0'
+    padding: '0.2rem 0',
+    border: isSelected ? '1px solid #4fc3f7' : '1px solid transparent',
+    backgroundColor: isSelected ? '#333' : 'transparent'
   }
 
   return (
-    <li ref={setNodeRef} {...attributes} {...listeners} style={style}>
+    <li
+      ref={setNodeRef}
+      {...attributes}
+      {...listeners}
+      onClick={(e) => {
+        e.stopPropagation()
+        onToggleSelection(e.shiftKey)
+      }}
+      style={style}
+    >
       <span>{uid}</span>
       <button onClick={onRemove} style={styles.remove}>✕</button>
     </li>
