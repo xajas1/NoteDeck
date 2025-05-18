@@ -8,12 +8,12 @@ export default function StructureEditor({
   selectedEditorIDs,
   setSelectedEditorIDs,
   lastSelectedEditorIndex,
-  setLastSelectedEditorIndex
+  setLastSelectedEditorIndex,
+  units
 }) {
   const toggleEditorSelection = (fullID, index, shift = false, allIDs = []) => {
     setSelectedEditorIDs(prev => {
       const next = new Set(prev)
-
       if (shift && lastSelectedEditorIndex !== null) {
         const start = Math.min(lastSelectedEditorIndex, index)
         const end = Math.max(lastSelectedEditorIndex, index)
@@ -28,7 +28,6 @@ export default function StructureEditor({
         }
         setLastSelectedEditorIndex(index)
       }
-
       return next
     })
   }
@@ -99,6 +98,7 @@ export default function StructureEditor({
               onToggleSelection={toggleEditorSelection}
               lastSelectedEditorIndex={lastSelectedEditorIndex}
               setLastSelectedEditorIndex={setLastSelectedEditorIndex}
+              units={units} // ✅ wird weitergegeben
             />
           ))}
         </div>
@@ -113,7 +113,8 @@ function DroppableSubsection({
   onToggleSelection,
   selectedEditorIDs,
   lastSelectedEditorIndex,
-  setLastSelectedEditorIndex
+  setLastSelectedEditorIndex,
+  units
 }) {
   const { setNodeRef, isOver } = useDroppable({
     id: subsection.id,
@@ -135,9 +136,12 @@ function DroppableSubsection({
         <ul style={styles.ul}>
           {subsection.unitIDs.map((uid, index) => {
             const fullID = `${subsection.id}__${uid}`
+            const unit = units?.find(u => u.UnitID === uid)
+            const name = unit?.Content || '⟨Kein Name⟩'
+
             return (
               <SortableUnit
-                key={uid}
+                key={fullID}
                 id={fullID}
                 uid={uid}
                 index={index}
@@ -149,6 +153,7 @@ function DroppableSubsection({
                   onToggleSelection(fullID, index, shiftKey, allIDs)
                 }
                 onRemove={() => onRemoveUnit(subsection.id, uid)}
+                name={name}
               />
             )
           })}
@@ -167,7 +172,8 @@ function SortableUnit({
   selectedEditorIDs,
   onToggleSelection,
   onRemove,
-  allIDs
+  allIDs,
+  name
 }) {
   const {
     setNodeRef,
@@ -209,7 +215,10 @@ function SortableUnit({
       }}
       style={style}
     >
-      <span>{uid}</span>
+      <div>
+        <strong>{uid}</strong><br />
+        <span style={{ fontSize: '0.75rem', color: '#aaa' }}>{name}</span>
+      </div>
       <button onClick={onRemove} style={styles.remove}>✕</button>
     </li>
   )

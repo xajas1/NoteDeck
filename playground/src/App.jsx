@@ -164,6 +164,7 @@ function App() {
               setSelectedIDs={setSelectedPlaygroundIDs}
               lastSelectedIndex={lastSelectedPlaygroundIndex}
               setLastSelectedIndex={setLastSelectedPlaygroundIndex}
+              units={units} // <— hier!
             />
           )}
         </div>
@@ -185,6 +186,7 @@ function App() {
             setSelectedEditorIDs={setSelectedEditorIDs}
             lastSelectedEditorIndex={lastSelectedEditorIndex}
             setLastSelectedEditorIndex={setLastSelectedEditorIndex}
+            units={units}
           />
         </div>
       </div>

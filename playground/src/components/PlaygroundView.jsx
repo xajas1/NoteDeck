@@ -8,11 +8,11 @@ export default function PlaygroundView({
   setSelectedIDs,
   lastSelectedIndex,
   setLastSelectedIndex,
+  units,
 }) {
   const toggleSelection = (uid, index, shift = false) => {
     setSelectedIDs(prev => {
       const next = new Set(prev)
-
       if (shift && lastSelectedIndex !== null) {
         const start = Math.min(lastSelectedIndex, index)
         const end = Math.max(lastSelectedIndex, index)
@@ -27,7 +27,6 @@ export default function PlaygroundView({
         }
         setLastSelectedIndex(index)
       }
-
       return next
     })
   }
@@ -39,6 +38,11 @@ export default function PlaygroundView({
       next.delete(uid)
       return next
     })
+  }
+
+  const getNameByID = (id) => {
+    const entry = units.find(u => u.UnitID === id)
+    return entry?.Content || '⟨Kein Name⟩'
   }
 
   return (
@@ -56,13 +60,14 @@ export default function PlaygroundView({
           selectedIDs={selectedIDs}
           onRemove={removeUnit}
           onToggle={toggleSelection}
+          name={getNameByID(unit.UnitID)}
         />
       ))}
     </div>
   )
 }
 
-function DraggableUnit({ unit, index, isSelected, selectedIDs, onRemove, onToggle }) {
+function DraggableUnit({ unit, index, isSelected, selectedIDs, onRemove, onToggle, name }) {
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
     id: `__drop__${unit.UnitID}`,
     data: {
@@ -101,9 +106,7 @@ function DraggableUnit({ unit, index, isSelected, selectedIDs, onRemove, onToggl
       }}
     >
       <div style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>{unit.UnitID}</div>
-      <div style={{ fontSize: '0.75rem', color: '#aaa' }}>
-        {unit.Name ?? '⟨Kein Name⟩'}
-      </div>
+      <div style={{ fontSize: '0.75rem', color: '#aaa' }}>{name}</div>
       <button
         onClick={(e) => {
           e.stopPropagation()

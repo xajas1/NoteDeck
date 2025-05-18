@@ -23,6 +23,7 @@ export default function Sidebar({ units, playground, setPlayground }) {
         ...playground,
         {
           UnitID: unit.UnitID,
+          Name: unit.Content, // ✅ Name übernehmen
           Section: "",
           Subsection: "",
           Order: playground.length + 1
@@ -33,13 +34,14 @@ export default function Sidebar({ units, playground, setPlayground }) {
 
   const handleToggleAll = (unitIDs) => {
     const allSelected = unitIDs.every(id => isSelected(id))
-  
+
     if (allSelected) {
       setPlayground(playground.filter(p => !unitIDs.includes(p.UnitID)))
     } else {
       const unitsToAdd = units.filter(u => unitIDs.includes(u.UnitID) && !isSelected(u.UnitID))
       const newEntries = unitsToAdd.map((u, i) => ({
         UnitID: u.UnitID,
+        Name: u.Content, // ✅ Name übernehmen
         Section: "",
         Subsection: "",
         Order: playground.length + i + 1
@@ -47,7 +49,6 @@ export default function Sidebar({ units, playground, setPlayground }) {
       setPlayground([...playground, ...newEntries])
     }
   }
-  
 
   // Gruppiere Units nach Subject → Topic
   const grouped = {}
