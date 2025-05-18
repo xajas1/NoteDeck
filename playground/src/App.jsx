@@ -36,64 +36,105 @@ function App() {
   }
 
   const handleDragEnd = ({ active, over }) => {
-    if (!active || !over) return
+    if (!active || !over || active.id === over.id) return
   
-    const draggedIDs =
-      active?.data?.current?.draggedIDs ||
-      (selectedPlaygroundIDs.size > 0
-        ? Array.from(selectedPlaygroundIDs)
-        : selectedEditorIDs.size > 0
-        ? Array.from(selectedEditorIDs)
-        : [normalizeUnitID(active.id)])
+    const activeType = active.data.current?.type
+    const overId = over.id
+    const overType = over.data?.current?.type
   
-    const targetSubID = over.id.includes('__')
-      ? over.id.split('__')[0]
-      : over.id
+    // === 1. Verschiebe Sections ===
+    if (activeType === 'section') {
+      setStructure(prev => {
+        const oldIndex = prev.findIndex(s => s.id === active.id)
+        const newIndex = prev.findIndex(s => s.id === overId)
+        if (oldIndex === -1 || newIndex === -1) return prev
   
-    const targetIndexUnit = over.id.includes('__')
-      ? normalizeUnitID(over.id)
-      : null
+        const updated = [...prev]
+        const [moved] = updated.splice(oldIndex, 1)
+        updated.splice(newIndex, 0, moved)
+        return updated
+      })
+    }
   
-    setStructure(prev =>
-      prev.map(section => ({
-        ...section,
-        subsections: section.subsections.map(sub => {
-          let current = [...sub.unitIDs]
-          const fromIndex = current.indexOf(draggedIDs[0])
-          const toIndex = targetIndexUnit ? current.indexOf(targetIndexUnit) : current.length
+    // === 2. Verschiebe Subsections innerhalb einer Section ===
+    else if (activeType === 'subsection') {
+      const parentId = active.data.current?.parentId
+      setStructure(prev =>
+        prev.map(section => {
+          if (section.id !== parentId) return section
   
-          if (fromIndex === -1 && sub.id !== targetSubID) {
-            // Entferne von anderen Subsections
-            return {
-              ...sub,
-              unitIDs: current.filter(id => !draggedIDs.includes(id))
-            }
-          }
+          const subs = [...section.subsections]
+          const oldIndex = subs.findIndex(sub => sub.id === active.id)
+          const newIndex = subs.findIndex(sub => sub.id === overId)
+          if (oldIndex === -1 || newIndex === -1) return section
   
-          // Hier einfügen
-          let updated = current.filter(id => !draggedIDs.includes(id))
+          const [moved] = subs.splice(oldIndex, 1)
+          subs.splice(newIndex, 0, moved)
   
-          let insertAt = toIndex
-          if (fromIndex < toIndex) {
-            insertAt = toIndex - draggedIDs.length + 1
-          }
-  
-          if (sub.id === targetSubID) {
-            draggedIDs.forEach((id, i) => {
-              updated.splice(insertAt + i, 0, id)
-            })
-          }
-  
-          return { ...sub, unitIDs: updated }
+          return { ...section, subsections: subs }
         })
-      }))
-    )
+      )
+    }
   
+    // === 3. Verschiebe Units innerhalb einer Subsection ===
+    else {
+      const draggedIDs =
+        active?.data?.current?.draggedIDs ||
+        (selectedPlaygroundIDs.size > 0
+          ? Array.from(selectedPlaygroundIDs)
+          : selectedEditorIDs.size > 0
+          ? Array.from(selectedEditorIDs)
+          : [normalizeUnitID(active.id)])
+  
+      const targetSubID = over.id.includes('__')
+        ? over.id.split('__')[0]
+        : over.id
+  
+      const targetIndexUnit = over.id.includes('__')
+        ? normalizeUnitID(over.id)
+        : null
+  
+      setStructure(prev =>
+        prev.map(section => ({
+          ...section,
+          subsections: section.subsections.map(sub => {
+            let current = [...sub.unitIDs]
+            const fromIndex = current.indexOf(draggedIDs[0])
+            const toIndex = targetIndexUnit ? current.indexOf(targetIndexUnit) : current.length
+  
+            if (fromIndex === -1 && sub.id !== targetSubID) {
+              // Entferne von anderen Subsections
+              return {
+                ...sub,
+                unitIDs: current.filter(id => !draggedIDs.includes(id))
+              }
+            }
+  
+            let updated = current.filter(id => !draggedIDs.includes(id))
+            let insertAt = toIndex
+            if (fromIndex < toIndex) {
+              insertAt = toIndex - draggedIDs.length + 1
+            }
+  
+            if (sub.id === targetSubID) {
+              draggedIDs.forEach((id, i) => {
+                updated.splice(insertAt + i, 0, id)
+              })
+            }
+  
+            return { ...sub, unitIDs: updated }
+          })
+        }))
+      )
+    }
+  
+    // Reset selection
     setSelectedPlaygroundIDs(new Set())
     setSelectedEditorIDs(new Set())
     setLastSelectedPlaygroundIndex(null)
     setLastSelectedEditorIndex(null)
   }
+  
   
 
 
@@ -139,6 +180,7 @@ function App() {
               setSelectedIDs={setSelectedPlaygroundIDs}
               lastSelectedIndex={lastSelectedPlaygroundIndex}
               setLastSelectedIndex={setLastSelectedPlaygroundIndex}
+              setPlayground={setPlayground}  // ⬅️ hinzufügen
             />
           )}
         </div>
