@@ -1,13 +1,24 @@
-// src/components/TreePlaygroundView.jsx
 import { useDraggable } from '@dnd-kit/core'
+import { useState } from 'react'
 
-export default function TreePlaygroundView({ playground, units, selectedIDs, setSelectedIDs, lastSelectedIndex, setLastSelectedIndex }) {
+export default function TreePlaygroundView({
+  playground,
+  units,
+  selectedIDs,
+  setSelectedIDs,
+  lastSelectedIndex,
+  setLastSelectedIndex
+}) {
+  const [filterCTyp, setFilterCTyp] = useState('')  // leere Auswahl = kein Filter
+
   const getFullUnitByID = (id) => units.find(u => u.UnitID === id)
 
   const grouped = {}
   for (const unit of playground) {
     const full = getFullUnitByID(unit.UnitID)
     if (!full) continue
+    if (filterCTyp && full.CTyp !== filterCTyp) continue  // Filter aktiv
+
     const subject = full.Subject || '⟨Ohne Subject⟩'
     const topic = full.Topic || '⟨Ohne Topic⟩'
     if (!grouped[subject]) grouped[subject] = {}
@@ -37,6 +48,33 @@ export default function TreePlaygroundView({ playground, units, selectedIDs, set
 
   return (
     <div style={{ fontFamily: 'monospace', fontSize: '0.82rem', color: '#eee' }}>
+      {/* 🔍 Filter */}
+      <div style={{ marginBottom: '0.8rem' }}>
+        <label style={{ marginRight: '0.5rem' }}>Filter by CTyp:</label>
+        <select
+          value={filterCTyp}
+          onChange={(e) => setFilterCTyp(e.target.value)}
+          style={{
+            backgroundColor: '#1e1e1e',
+            color: '#eee',
+            border: '1px solid #444',
+            padding: '0.2rem 0.4rem',
+            borderRadius: '4px',
+            fontSize: '0.82rem'
+          }}
+        >
+          <option value="">— Alle —</option>
+          <option value="DEF">Definitionen</option>
+          <option value="PROP">Propositionen</option>
+          <option value="LEM">Lemmata</option>
+          <option value="THEO">Theoreme</option>
+          <option value="EXA">Beispiele</option>
+          <option value="REM">Bemerkungen</option>
+          <option value="STUD">Studienfragen</option>
+        </select>
+      </div>
+
+      {/* 🧩 Gruppenanzeige */}
       {Object.entries(grouped).map(([subject, topics]) => (
         <div key={subject}>
           <div style={styles.subject}>{subject}</div>

@@ -35,20 +35,9 @@ function App() {
     return id
   }
 
-  const handleDragStart = (event) => {
-    console.log('🟡 Drag Start:', event.active.id)
-  }
-
-  const handleDragOver = ({ active, over }) => {
-    console.log('🟠 Drag Over:', {
-      active: active?.id,
-      over: over?.id,
-    })
-  }
-
   const handleDragEnd = ({ active, over }) => {
     if (!active || !over) return
-
+  
     const draggedIDs =
       active?.data?.current?.draggedIDs ||
       (selectedPlaygroundIDs.size > 0
@@ -56,49 +45,57 @@ function App() {
         : selectedEditorIDs.size > 0
         ? Array.from(selectedEditorIDs)
         : [normalizeUnitID(active.id)])
-
+  
     const targetSubID = over.id.includes('__')
       ? over.id.split('__')[0]
       : over.id
-
+  
     const targetIndexUnit = over.id.includes('__')
       ? normalizeUnitID(over.id)
       : null
-
+  
     setStructure(prev =>
       prev.map(section => ({
         ...section,
         subsections: section.subsections.map(sub => {
           let current = [...sub.unitIDs]
-          draggedIDs.forEach(id => {
-            current = current.filter(u => u !== id)
-          })
-
-          if (sub.id !== targetSubID) return { ...sub, unitIDs: current }
-
-          let insertAt = current.length
-          if (targetIndexUnit && current.includes(targetIndexUnit)) {
-            insertAt = current.indexOf(targetIndexUnit)
-            const fromIndex = current.indexOf(draggedIDs[0])
-            const toIndex = current.indexOf(targetIndexUnit)
-            if (fromIndex < toIndex) insertAt += 1
+          const fromIndex = current.indexOf(draggedIDs[0])
+          const toIndex = targetIndexUnit ? current.indexOf(targetIndexUnit) : current.length
+  
+          if (fromIndex === -1 && sub.id !== targetSubID) {
+            // Entferne von anderen Subsections
+            return {
+              ...sub,
+              unitIDs: current.filter(id => !draggedIDs.includes(id))
+            }
           }
-
-          const updated = [...current]
-          draggedIDs.forEach((id, i) => {
-            updated.splice(insertAt + i, 0, id)
-          })
-
+  
+          // Hier einfügen
+          let updated = current.filter(id => !draggedIDs.includes(id))
+  
+          let insertAt = toIndex
+          if (fromIndex < toIndex) {
+            insertAt = toIndex - draggedIDs.length + 1
+          }
+  
+          if (sub.id === targetSubID) {
+            draggedIDs.forEach((id, i) => {
+              updated.splice(insertAt + i, 0, id)
+            })
+          }
+  
           return { ...sub, unitIDs: updated }
         })
       }))
-    );
-
+    )
+  
     setSelectedPlaygroundIDs(new Set())
     setSelectedEditorIDs(new Set())
     setLastSelectedPlaygroundIndex(null)
     setLastSelectedEditorIndex(null)
   }
+  
+
 
   useEffect(() => {
     fetch('http://127.0.0.1:8000/units')
@@ -116,8 +113,6 @@ function App() {
   return (
     <DndContext
       sensors={sensors}
-      onDragStart={handleDragStart}
-      onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
     >
       <div
@@ -129,31 +124,11 @@ function App() {
           color: '#eee',
         }}
       >
-        {/* 🔹 TreeSidebar */}
-        <div
-          style={{
-            width: '25%',
-            borderRight: '1px solid #333',
-            padding: '1rem',
-            overflowY: 'auto',
-          }}
-        >
-          <TreeSidebar
-            units={units}
-            playground={playground}
-            setPlayground={setPlayground}
-          />
+        <div style={{ width: '25%', borderRight: '1px solid #333', padding: '1rem', overflowY: 'auto' }}>
+          <TreeSidebar units={units} playground={playground} setPlayground={setPlayground} />
         </div>
-
-        {/* 🔹 TreePlayground */}
-        <div
-          style={{
-            width: '40%',
-            padding: '1.5rem',
-            overflowY: 'auto',
-          }}
-        >
-          <h2 style={{ marginBottom: '1rem' }}>📄 Ausgewählte Einheiten (Tree)</h2>
+        <div style={{ width: '40%', padding: '1.5rem', overflowY: 'auto' }}>
+          <h2 style={{ marginBottom: '1rem' }}>Ausgewählte Einheiten (Tree)</h2>
           {loading ? (
             <p>⏳ Lade Inhalte …</p>
           ) : (
@@ -167,16 +142,7 @@ function App() {
             />
           )}
         </div>
-
-        {/* 🔹 TreeEditor */}
-        <div
-          style={{
-            width: '35%',
-            padding: '1.5rem',
-            borderLeft: '1px solid #333',
-            overflowY: 'auto',
-          }}
-        >
+        <div style={{ width: '35%', padding: '1.5rem', borderLeft: '1px solid #333', overflowY: 'auto' }}>
           <h2 style={{ marginBottom: '1rem' }}>📦 Struktur (Tree)</h2>
           <TreeEditorView
             structure={structure}

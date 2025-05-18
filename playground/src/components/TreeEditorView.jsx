@@ -1,7 +1,19 @@
 // src/components/TreeEditorView.jsx
-import { useDroppable } from '@dnd-kit/core'
+import { useState } from 'react'
+import { useDroppable, useDraggable } from '@dnd-kit/core'
 
-export default function TreeEditorView({ structure, units, selectedEditorIDs, setSelectedEditorIDs, lastSelectedEditorIndex, setLastSelectedEditorIndex }) {
+export default function TreeEditorView({
+  structure,
+  setStructure,
+  units,
+  selectedEditorIDs,
+  setSelectedEditorIDs,
+  lastSelectedEditorIndex,
+  setLastSelectedEditorIndex
+}) {
+  const [newSectionName, setNewSectionName] = useState('')
+  const [subInputs, setSubInputs] = useState({})
+
   const getNameByID = (id) => units.find(u => u.UnitID === id)?.Content || '⟨Kein Name⟩'
 
   const toggleSelection = (fullID, index, shift = false, allIDs = []) => {
@@ -22,11 +34,56 @@ export default function TreeEditorView({ structure, units, selectedEditorIDs, se
     })
   }
 
+  const addSection = () => {
+    if (!newSectionName.trim()) return
+    setStructure([...structure, {
+      id: `sec-${Date.now()}`,
+      name: newSectionName,
+      subsections: []
+    }])
+    setNewSectionName('')
+  }
+
+  const addSubsection = (sectionId, name) => {
+    if (!name.trim()) return
+    setStructure(prev => prev.map(s =>
+      s.id === sectionId
+        ? { ...s, subsections: [...s.subsections, { id: `sub-${Date.now()}`, name, unitIDs: [] }] }
+        : s
+    ))
+    setSubInputs({ ...subInputs, [sectionId]: '' })
+  }
+
   return (
-    <div style={{ fontFamily: 'monospace', fontSize: '0.9rem', color: '#eee' }}>
+    <div style={{ fontFamily: 'monospace', fontSize: '0.85rem', color: '#eee' }}>
+      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+        <input
+          type="text"
+          value={newSectionName}
+          onChange={e => setNewSectionName(e.target.value)}
+          placeholder="Neue Section"
+          style={{ backgroundColor: '#111', color: '#eee', padding: '0.4rem', flex: 1 }}
+        />
+        <button onClick={addSection} style={styles.button}>Add</button>
+      </div>
+
       {structure.map(section => (
         <div key={section.id}>
-          <div style={styles.section}>📁 {section.name}</div>
+          <div style={styles.section}>{section.name}</div>
+
+          <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', marginLeft: '1rem' }}>
+            <input
+              type="text"
+              value={subInputs[section.id] || ''}
+              onChange={e => setSubInputs({ ...subInputs, [section.id]: e.target.value })}
+              placeholder="Neue Subsection"
+              style={{ backgroundColor: '#111', color: '#eee', padding: '0.3rem', flex: 1 }}
+            />
+            <button onClick={() => addSubsection(section.id, subInputs[section.id] || '')} style={styles.subButton}>
+              Add
+            </button>
+          </div>
+
           {section.subsections.map(sub => (
             <DroppableSubsection
               key={sub.id}
@@ -44,7 +101,14 @@ export default function TreeEditorView({ structure, units, selectedEditorIDs, se
   )
 }
 
-function DroppableSubsection({ subsection, getNameByID, selectedEditorIDs, toggleSelection, lastSelectedEditorIndex, setLastSelectedEditorIndex }) {
+function DroppableSubsection({
+  subsection,
+  getNameByID,
+  selectedEditorIDs,
+  toggleSelection,
+  lastSelectedEditorIndex,
+  setLastSelectedEditorIndex
+}) {
   const { setNodeRef, isOver } = useDroppable({
     id: subsection.id,
     data: { subsectionId: subsection.id }
@@ -60,24 +124,23 @@ function DroppableSubsection({ subsection, getNameByID, selectedEditorIDs, toggl
         borderColor: isOver ? '#4fc3f7' : '#777'
       }}
     >
-      <div style={styles.subsectionName}>📄 {subsection.name}</div>
+      <div style={styles.subsectionName}>{subsection.name}</div>
       <ul style={styles.ul}>
         {subsection.unitIDs.map((uid, index) => {
           const fullID = `${subsection.id}__${uid}`
           const name = getNameByID(uid)
           return (
-            <li
+            <DraggableEditorLine
               key={fullID}
-              onClick={(e) => toggleSelection(fullID, index, e.shiftKey, allIDs)}
-              style={{
-                padding: '0.15rem 0.3rem',
-                cursor: 'pointer',
-                backgroundColor: selectedEditorIDs.has(fullID) ? '#2a2a2a' : 'transparent',
-                borderLeft: selectedEditorIDs.has(fullID) ? '3px solid #4fc3f7' : '3px solid transparent'
-              }}
-            >
-              🔹 <strong>{uid}</strong>: <span style={{ color: '#aaa' }}>{name}</span>
-            </li>
+              fullID={fullID}
+              uid={uid}
+              name={name}
+              index={index}
+              selectedEditorIDs={selectedEditorIDs}
+              toggleSelection={toggleSelection}
+              lastSelectedEditorIndex={lastSelectedEditorIndex}
+              allIDs={allIDs}
+            />
           )
         })}
       </ul>
@@ -85,10 +148,64 @@ function DroppableSubsection({ subsection, getNameByID, selectedEditorIDs, toggl
   )
 }
 
+function DraggableEditorLine({
+  fullID,
+  uid,
+  name,
+  index,
+  selectedEditorIDs,
+  toggleSelection,
+  lastSelectedEditorIndex,
+  allIDs
+}) {
+  const { attributes, listeners, setNodeRef } = useDraggable({
+    id: fullID,
+    data: {
+      type: 'unit',
+      draggedIDs: selectedEditorIDs.size > 0 ? Array.from(selectedEditorIDs).map(f => f.split('__')[1]) : [uid]
+    }
+  })
+
+  return (
+    <li
+      ref={setNodeRef}
+      {...attributes}
+      {...listeners}
+      onClick={(e) => toggleSelection(fullID, index, e.shiftKey, allIDs)}
+      style={{
+        padding: '0.15rem 0.3rem',
+        cursor: 'pointer',
+        backgroundColor: selectedEditorIDs.has(fullID) ? '#2a2a2a' : 'transparent',
+        borderLeft: selectedEditorIDs.has(fullID) ? '3px solid #4fc3f7' : '3px solid transparent'
+      }}
+    >
+      <strong>{uid}</strong>: <span style={{ color: '#aaa' }}>{name}</span>
+    </li>
+  )
+}
+
 const styles = {
+  button: {
+    backgroundColor: '#333',
+    color: '#eee',
+    padding: '0.4rem 0.8rem',
+    borderRadius: '5px',
+    border: 'none',
+    cursor: 'pointer'
+  },
+  subButton: {
+    backgroundColor: '#222',
+    color: '#ccc',
+    padding: '0.3rem 0.7rem',
+    borderRadius: '4px',
+    border: 'none',
+    fontSize: '0.78rem',
+    cursor: 'pointer'
+  },
   section: {
     fontWeight: 'bold',
     marginTop: '1rem',
+    fontSize: '0.92rem'
   },
   subsection: {
     marginLeft: '1rem',
@@ -96,7 +213,7 @@ const styles = {
     border: '1px dashed #777',
     borderRadius: '4px',
     backgroundColor: '#1e1e1e',
-    marginTop: '0.5rem',
+    marginTop: '0.5rem'
   },
   subsectionName: {
     fontStyle: 'italic',
