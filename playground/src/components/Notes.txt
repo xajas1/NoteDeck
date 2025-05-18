@@ -1,0 +1,735 @@
+App
+
+
+
+// src/App.jsx
+import { useEffect, useState } from 'react'
+import {
+  DndContext,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core'
+
+import Sidebar from './components/Sidebar'
+import PlaygroundView from './components/PlaygroundView'
+import StructureEditor from './components/StructureEditor'
+
+function App() {
+  const [units, setUnits] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [playground, setPlayground] = useState([])
+  const [structure, setStructure] = useState([])
+
+  const [selectedPlaygroundIDs, setSelectedPlaygroundIDs] = useState(new Set())
+  const [selectedEditorIDs, setSelectedEditorIDs] = useState(new Set())
+  const [lastSelectedPlaygroundIndex, setLastSelectedPlaygroundIndex] = useState(null)
+  const [lastSelectedEditorIndex, setLastSelectedEditorIndex] = useState(null)
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: { distance: 5 },
+    })
+  )
+
+  const normalizeUnitID = (id) => {
+    if (id.includes('____drop__')) return id.split('____drop__')[1]
+    if (id.includes('__drop__')) return id.split('__drop__')[1]
+    if (id.includes('__')) return id.split('__')[1]
+    return id
+  }
+
+  const handleDragStart = (event) => {
+    console.log('🟡 Drag Start:', event.active.id)
+  }
+
+  const handleDragOver = ({ active, over }) => {
+    console.log('🟠 Drag Over:', {
+      active: active?.id,
+      over: over?.id,
+    })
+  }
+
+  const handleDragEnd = ({ active, over }) => {
+    if (!active || !over) return
+
+    const draggedIDs =
+      active?.data?.current?.draggedIDs ||
+      (selectedPlaygroundIDs.size > 0
+        ? Array.from(selectedPlaygroundIDs)
+        : selectedEditorIDs.size > 0
+        ? Array.from(selectedEditorIDs)
+        : [normalizeUnitID(active.id)])
+
+    const targetSubID = over.id.includes('__')
+      ? over.id.split('__')[0]
+      : over.id
+
+    const targetIndexUnit = over.id.includes('__')
+      ? normalizeUnitID(over.id)
+      : null
+
+    setStructure(prev =>
+      prev.map(section => ({
+        ...section,
+        subsections: section.subsections.map(sub => {
+          let current = [...sub.unitIDs]
+          draggedIDs.forEach(id => {
+            current = current.filter(u => u !== id)
+          })
+
+          if (sub.id !== targetSubID) return { ...sub, unitIDs: current }
+
+          let insertAt = current.length
+          if (targetIndexUnit && current.includes(targetIndexUnit)) {
+            insertAt = current.indexOf(targetIndexUnit)
+            const fromIndex = current.indexOf(draggedIDs[0])
+            const toIndex = current.indexOf(targetIndexUnit)
+            if (fromIndex < toIndex) insertAt += 1
+          }
+
+          const updated = [...current]
+          draggedIDs.forEach((id, i) => {
+            updated.splice(insertAt + i, 0, id)
+          })
+
+          return { ...sub, unitIDs: updated }
+        })
+      }))
+    )
+
+    setSelectedPlaygroundIDs(new Set())
+    setSelectedEditorIDs(new Set())
+    setLastSelectedPlaygroundIndex(null)
+    setLastSelectedEditorIndex(null)
+  }
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/units')
+      .then(res => res.json())
+      .then(data => {
+        setUnits(data)
+        setLoading(false)
+      })
+      .catch(err => {
+        console.error('Fehler beim Laden der Units:', err)
+        setLoading(false)
+      })
+  }, [])
+
+  return (
+    <DndContext
+      sensors={sensors}
+      onDragStart={handleDragStart}
+      onDragOver={handleDragOver}
+      onDragEnd={handleDragEnd}
+    >
+      <div
+        style={{
+          display: 'flex',
+          height: '100vh',
+          width: '100vw',
+          backgroundColor: '#1a1a1a',
+          color: '#eee',
+        }}
+      >
+        {/* 🔹 Sidebar */}
+        <div
+          style={{
+            width: '25%',
+            borderRight: '1px solid #333',
+            padding: '1rem',
+            overflowY: 'auto',
+          }}
+        >
+          <Sidebar
+            units={units}
+            playground={playground}
+            setPlayground={setPlayground}
+          />
+        </div>
+
+        {/* 🔹 Playground */}
+        <div
+          style={{
+            width: '40%',
+            padding: '1.5rem',
+            overflowY: 'auto',
+          }}
+        >
+          <h2 style={{ marginBottom: '1rem' }}>📄 Ausgewählte Einheiten</h2>
+          {loading ? (
+            <p>⏳ Lade Inhalte …</p>
+          ) : (
+            <PlaygroundView
+              playground={playground}
+              setPlayground={setPlayground}
+              selectedIDs={selectedPlaygroundIDs}
+              setSelectedIDs={setSelectedPlaygroundIDs}
+              lastSelectedIndex={lastSelectedPlaygroundIndex}
+              setLastSelectedIndex={setLastSelectedPlaygroundIndex}
+              units={units} // <— hier!
+            />
+          )}
+        </div>
+
+        {/* 🔹 Struktur-Editor */}
+        <div
+          style={{
+            width: '35%',
+            padding: '1.5rem',
+            borderLeft: '1px solid #333',
+            overflowY: 'auto',
+          }}
+        >
+          <h2 style={{ marginBottom: '1rem' }}>📦 Struktur</h2>
+          <StructureEditor
+            structure={structure}
+            setStructure={setStructure}
+            selectedEditorIDs={selectedEditorIDs}
+            setSelectedEditorIDs={setSelectedEditorIDs}
+            lastSelectedEditorIndex={lastSelectedEditorIndex}
+            setLastSelectedEditorIndex={setLastSelectedEditorIndex}
+            units={units}
+          />
+        </div>
+      </div>
+    </DndContext>
+  )
+}
+ 
+export default App
+
+
+
+
+
+PlaygoundView
+
+// src/components/PlaygroundView.jsx
+import { useDraggable } from '@dnd-kit/core'
+
+export default function PlaygroundView({
+  playground,
+  setPlayground,
+  selectedIDs,
+  setSelectedIDs,
+  lastSelectedIndex,
+  setLastSelectedIndex,
+  units,
+}) {
+  const toggleSelection = (uid, index, shift = false) => {
+    setSelectedIDs(prev => {
+      const next = new Set(prev)
+      if (shift && lastSelectedIndex !== null) {
+        const start = Math.min(lastSelectedIndex, index)
+        const end = Math.max(lastSelectedIndex, index)
+        for (let i = start; i <= end; i++) {
+          next.add(playground[i].UnitID)
+        }
+      } else {
+        if (next.has(uid)) {
+          next.delete(uid)
+        } else {
+          next.add(uid)
+        }
+        setLastSelectedIndex(index)
+      }
+      return next
+    })
+  }
+
+  const removeUnit = (uid) => {
+    setPlayground(prev => prev.filter(u => u.UnitID !== uid))
+    setSelectedIDs(prev => {
+      const next = new Set(prev)
+      next.delete(uid)
+      return next
+    })
+  }
+
+  const getNameByID = (id) => {
+    const entry = units.find(u => u.UnitID === id)
+    return entry?.Content || '⟨Kein Name⟩'
+  }
+
+  return (
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
+      gap: '0.75rem',
+    }}>
+      {playground.map((unit, index) => (
+        <DraggableUnit
+          key={unit.UnitID}
+          unit={unit}
+          index={index}
+          isSelected={selectedIDs.has(unit.UnitID)}
+          selectedIDs={selectedIDs}
+          onRemove={removeUnit}
+          onToggle={toggleSelection}
+          name={getNameByID(unit.UnitID)}
+        />
+      ))}
+    </div>
+  )
+}
+
+function DraggableUnit({ unit, index, isSelected, selectedIDs, onRemove, onToggle, name }) {
+  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
+    id: `__drop__${unit.UnitID}`,
+    data: {
+      type: 'unit',
+      draggedIDs: isSelected && selectedIDs.size > 1
+        ? Array.from(selectedIDs)
+        : [unit.UnitID]
+    }
+  })
+
+  const style = {
+    padding: '0.75rem',
+    borderRadius: '8px',
+    backgroundColor: isSelected ? '#333' : isDragging ? '#2a2a2a' : '#1e1e1e',
+    border: isSelected ? '2px solid #4fc3f7' : '1px solid #444',
+    color: '#eee',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.25rem',
+    cursor: 'grab',
+    boxShadow: isSelected ? '0 0 0 2px #4fc3f7 inset' : 'none',
+    transition: 'all 0.15s ease',
+    minHeight: '100px',
+    justifyContent: 'space-between'
+  }
+
+  return (
+    <div
+      ref={setNodeRef}
+      {...attributes}
+      {...listeners}
+      style={style}
+      onClick={(e) => {
+        e.stopPropagation()
+        onToggle(unit.UnitID, index, e.shiftKey)
+      }}
+    >
+      <div style={{ fontWeight: 'bold', fontSize: '0.9rem' }}>{unit.UnitID}</div>
+      <div style={{ fontSize: '0.75rem', color: '#aaa' }}>{name}</div>
+      <button
+        onClick={(e) => {
+          e.stopPropagation()
+          onRemove(unit.UnitID)
+        }}
+        style={{
+          alignSelf: 'flex-end',
+          marginTop: '0.5rem',
+          background: 'transparent',
+          border: 'none',
+          color: '#aaa',
+          fontSize: '1rem',
+          cursor: 'pointer',
+        }}
+        title="Entfernen"
+      >
+        ✕
+      </button>
+    </div>
+  )
+}
+
+
+
+
+
+
+Sidebar
+
+
+import { useState } from 'react'
+
+export default function Sidebar({ units, playground, setPlayground }) {
+  const [expanded, setExpanded] = useState(new Set())  // eingeklappte Topics
+
+  const toggleExpand = (topic) => {
+    const newExpanded = new Set(expanded)
+    if (expanded.has(topic)) {
+      newExpanded.delete(topic)
+    } else {
+      newExpanded.add(topic)
+    }
+    setExpanded(newExpanded)
+  }
+
+  const isSelected = (uid) => playground.some(p => p.UnitID === uid)
+
+  const handleToggleUnit = (unit) => {
+    if (isSelected(unit.UnitID)) {
+      setPlayground(playground.filter(p => p.UnitID !== unit.UnitID))
+    } else {
+      setPlayground([
+        ...playground,
+        {
+          UnitID: unit.UnitID,
+          Name: unit.Content, // ✅ Name übernehmen
+          Section: "",
+          Subsection: "",
+          Order: playground.length + 1
+        }
+      ])
+    }
+  }
+
+  const handleToggleAll = (unitIDs) => {
+    const allSelected = unitIDs.every(id => isSelected(id))
+
+    if (allSelected) {
+      setPlayground(playground.filter(p => !unitIDs.includes(p.UnitID)))
+    } else {
+      const unitsToAdd = units.filter(u => unitIDs.includes(u.UnitID) && !isSelected(u.UnitID))
+      const newEntries = unitsToAdd.map((u, i) => ({
+        UnitID: u.UnitID,
+        Name: u.Content, // ✅ Name übernehmen
+        Section: "",
+        Subsection: "",
+        Order: playground.length + i + 1
+      }))
+      setPlayground([...playground, ...newEntries])
+    }
+  }
+
+  // Gruppiere Units nach Subject → Topic
+  const grouped = {}
+  for (const u of units) {
+    if (!grouped[u.Subject]) grouped[u.Subject] = {}
+    if (!grouped[u.Subject][u.Topic]) grouped[u.Subject][u.Topic] = []
+    grouped[u.Subject][u.Topic].push(u)
+  }
+
+  return (
+    <div style={{ padding: '1rem', width: '300px', backgroundColor: '#111', color: '#eee', fontSize: '0.9rem' }}>
+      <h2>Inhalte</h2>
+      {Object.entries(grouped).map(([subject, topics]) => {
+        const allIdsInSubject = Object.values(topics).flat().map(u => u.UnitID)
+        return (
+          <div key={subject}>
+            <label>
+              <input
+                type="checkbox"
+                checked={allIdsInSubject.every(id => isSelected(id))}
+                onChange={() => handleToggleAll(allIdsInSubject)}
+              />
+              <strong style={{ marginLeft: "0.5rem" }}>{subject}</strong>
+            </label>
+            <div style={{ paddingLeft: "1rem" }}>
+              {Object.entries(topics).map(([topic, units]) => {
+                const allIdsInTopic = units.map(u => u.UnitID)
+                const isOpen = expanded.has(topic)
+                return (
+                  <div key={topic}>
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked={allIdsInTopic.every(id => isSelected(id))}
+                        onChange={() => handleToggleAll(allIdsInTopic)}
+                      />
+                      <span
+                        style={{ cursor: "pointer", marginLeft: "0.5rem" }}
+                        onClick={() => toggleExpand(topic)}
+                      >
+                        {isOpen ? "▼" : "▶"} {topic}
+                      </span>
+                    </label>
+                    {isOpen && (
+                      <ul style={{ listStyle: "none", paddingLeft: "1.5rem" }}>
+                        {units.map(u => (
+                          <li key={u.UnitID}>
+                            <label>
+                              <input
+                                type="checkbox"
+                                checked={isSelected(u.UnitID)}
+                                onChange={() => handleToggleUnit(u)}
+                              />
+                              <span style={{ marginLeft: "0.5rem" }}>{u.UnitID}: {u.Content}</span>
+                            </label>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
+
+
+
+
+
+
+
+
+StructureEditor
+
+
+
+import { useDroppable } from '@dnd-kit/core'
+import { SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
+
+export default function StructureEditor({
+  structure,
+  setStructure,
+  selectedEditorIDs,
+  setSelectedEditorIDs,
+  lastSelectedEditorIndex,
+  setLastSelectedEditorIndex,
+  units
+}) {
+  const toggleEditorSelection = (fullID, index, shift = false, allIDs = []) => {
+    setSelectedEditorIDs(prev => {
+      const next = new Set(prev)
+      if (shift && lastSelectedEditorIndex !== null) {
+        const start = Math.min(lastSelectedEditorIndex, index)
+        const end = Math.max(lastSelectedEditorIndex, index)
+        for (let i = start; i <= end; i++) {
+          next.add(allIDs[i])
+        }
+      } else {
+        if (next.has(fullID)) {
+          next.delete(fullID)
+        } else {
+          next.add(fullID)
+        }
+        setLastSelectedEditorIndex(index)
+      }
+      return next
+    })
+  }
+
+  const addSection = () => {
+    const name = prompt('Section-Name:')
+    if (!name?.trim()) return
+    setStructure(prev => [...prev, {
+      id: `sec-${Date.now()}`,
+      name: name.trim(),
+      subsections: []
+    }])
+  }
+
+  const addSubsection = (secID) => {
+    const name = prompt('Subsection-Name:')
+    if (!name?.trim()) return
+    setStructure(prev =>
+      prev.map(sec =>
+        sec.id === secID
+          ? {
+              ...sec,
+              subsections: [
+                ...sec.subsections,
+                {
+                  id: `sub-${Date.now()}`,
+                  name: name.trim(),
+                  unitIDs: []
+                }
+              ]
+            }
+          : sec
+      )
+    )
+  }
+
+  const removeUnit = (subID, uid) => {
+    setStructure(prev =>
+      prev.map(section => ({
+        ...section,
+        subsections: section.subsections.map(sub =>
+          sub.id === subID
+            ? { ...sub, unitIDs: sub.unitIDs.filter(id => id !== uid) }
+            : sub
+        )
+      }))
+    )
+    setSelectedEditorIDs(prev => {
+      const next = new Set(prev)
+      next.delete(`${subID}__${uid}`)
+      return next
+    })
+  }
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <button onClick={addSection}>➕ Neue Section</button>
+      {structure.map(section => (
+        <div key={section.id} style={styles.section}>
+          <strong>{section.name}</strong>
+          <button onClick={() => addSubsection(section.id)}>➕ Subsection</button>
+          {section.subsections.map(sub => (
+            <DroppableSubsection
+              key={sub.id}
+              subsection={sub}
+              selectedEditorIDs={selectedEditorIDs}
+              onRemoveUnit={removeUnit}
+              onToggleSelection={toggleEditorSelection}
+              lastSelectedEditorIndex={lastSelectedEditorIndex}
+              setLastSelectedEditorIndex={setLastSelectedEditorIndex}
+              units={units} // ✅ wird weitergegeben
+            />
+          ))}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function DroppableSubsection({
+  subsection,
+  onRemoveUnit,
+  onToggleSelection,
+  selectedEditorIDs,
+  lastSelectedEditorIndex,
+  setLastSelectedEditorIndex,
+  units
+}) {
+  const { setNodeRef, isOver } = useDroppable({
+    id: subsection.id,
+    data: { subsectionId: subsection.id }
+  })
+
+  const allIDs = subsection.unitIDs.map(id => `${subsection.id}__${id}`)
+
+  return (
+    <div
+      ref={setNodeRef}
+      style={{
+        ...styles.subsection,
+        borderColor: isOver ? '#4fc3f7' : '#777'
+      }}
+    >
+      <strong>{subsection.name}</strong>
+      <SortableContext items={allIDs} strategy={verticalListSortingStrategy}>
+        <ul style={styles.ul}>
+          {subsection.unitIDs.map((uid, index) => {
+            const fullID = `${subsection.id}__${uid}`
+            const unit = units?.find(u => u.UnitID === uid)
+            const name = unit?.Content || '⟨Kein Name⟩'
+
+            return (
+              <SortableUnit
+                key={fullID}
+                id={fullID}
+                uid={uid}
+                index={index}
+                fullID={fullID}
+                allIDs={allIDs}
+                isSelected={selectedEditorIDs.has(fullID)}
+                selectedEditorIDs={selectedEditorIDs}
+                onToggleSelection={(shiftKey) =>
+                  onToggleSelection(fullID, index, shiftKey, allIDs)
+                }
+                onRemove={() => onRemoveUnit(subsection.id, uid)}
+                name={name}
+              />
+            )
+          })}
+        </ul>
+      </SortableContext>
+    </div>
+  )
+}
+
+function SortableUnit({
+  id,
+  uid,
+  index,
+  fullID,
+  isSelected,
+  selectedEditorIDs,
+  onToggleSelection,
+  onRemove,
+  allIDs,
+  name
+}) {
+  const {
+    setNodeRef,
+    attributes,
+    listeners,
+    transform,
+    transition,
+    isDragging
+  } = useSortable({
+    id,
+    data: {
+      type: 'unit',
+      draggedIDs: isSelected && selectedEditorIDs.size > 1
+        ? Array.from(selectedEditorIDs).map(x => x.split('__')[1])
+        : [uid]
+    }
+  })
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+    display: 'flex',
+    justifyContent: 'space-between',
+    cursor: 'grab',
+    padding: '0.2rem 0',
+    border: isSelected ? '1px solid #4fc3f7' : '1px solid transparent',
+    backgroundColor: isSelected ? '#333' : 'transparent'
+  }
+
+  return (
+    <li
+      ref={setNodeRef}
+      {...attributes}
+      {...listeners}
+      onClick={(e) => {
+        e.stopPropagation()
+        onToggleSelection(e.shiftKey)
+      }}
+      style={style}
+    >
+      <div>
+        <strong>{uid}</strong><br />
+        <span style={{ fontSize: '0.75rem', color: '#aaa' }}>{name}</span>
+      </div>
+      <button onClick={onRemove} style={styles.remove}>✕</button>
+    </li>
+  )
+}
+
+const styles = {
+  section: {
+    border: '1px solid #555',
+    borderRadius: '8px',
+    padding: '1rem',
+    backgroundColor: '#1e1e1e'
+  },
+  subsection: {
+    marginTop: '0.5rem',
+    padding: '0.5rem',
+    border: '1px dashed #777',
+    borderRadius: '4px',
+    backgroundColor: '#2a2a2a',
+    transition: '0.2s ease all'
+  },
+  ul: {
+    listStyle: 'none',
+    paddingLeft: 0,
+    marginTop: '0.5rem',
+    fontSize: '0.9rem'
+  },
+  remove: {
+    marginLeft: '1rem',
+    background: 'transparent',
+    border: 'none',
+    color: '#aaa',
+    cursor: 'pointer'
+  }
+}
