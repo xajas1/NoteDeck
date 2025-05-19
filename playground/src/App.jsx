@@ -10,6 +10,9 @@ import TreePlaygroundView from './components/TreePlaygroundView'
 import TreeEditorView from './components/TreeEditorView'
 import TreeSidebar from './components/TreeSidebar'
 
+console.log("🚀 App.jsx geladen");
+
+
 function App() {
   const [units, setUnits] = useState([])
   const [loading, setLoading] = useState(true)
@@ -39,6 +42,7 @@ function App() {
   }
 
   const saveCurrentProject = () => {
+    console.log("💾 Speichern gedrückt – beginne saveCurrentProject()");
     if (!activeProject) return alert("⚠️ Kein aktives Projekt ausgewählt.")
     const updated = {
       ...projects,
@@ -51,6 +55,49 @@ function App() {
     setProjects(updated)
     saveProjectsToStorage(updated, activeProject)
     alert(`✅ Projekt '${activeProject}' gespeichert.`)
+
+    // Backend-Sync für tex_export
+    console.log("📡 Sende Daten an Backend …");
+    fetch("http://127.0.0.1:8050/save-projects", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        projects: updated,
+        activeProject: activeProject
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log("📨 Antwort vom Backend erhalten:", data);
+        if (data.success) {
+          console.log("📁 Struktur exportiert:", data.message)
+        } else {
+          console.warn("⚠️ Export fehlgeschlagen:", data.message)
+        }
+      })
+      .catch(err => {
+        console.error("🚫 Fehler beim Senden an Backend:", err)
+      })
+  }
+
+  const exportCurrentProjectAsTex = async () => {
+    if (!activeProject) return alert("⚠️ Kein Projekt aktiv")
+    try {
+      const res = await fetch("http://127.0.0.1:8050/export-tex", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ project: activeProject })
+      })
+      const data = await res.json()
+      if (data.success) {
+        alert(`✅ Export abgeschlossen: ${data.message}`)
+      } else {
+        alert(`❌ Fehler: ${data.message}`)
+      }
+    } catch (err) {
+      console.error(err)
+      alert("⚠️ Verbindung zum Export-Service fehlgeschlagen.")
+    }
   }
 
   const loadProject = (name) => {
@@ -186,7 +233,7 @@ function App() {
   return (
     <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
       <div style={{ height: '100vh', width: '100vw', backgroundColor: '#1a1a1a', color: '#eee', display: 'flex', flexDirection: 'column' }}>
-        
+
         {/* Topbar */}
         <div style={{ padding: '0.5rem 1rem', display: 'flex', alignItems: 'center', gap: '0.7rem', borderBottom: '1px solid #444', backgroundColor: '#111' }}>
           <span>Projekt:</span>
@@ -201,10 +248,19 @@ function App() {
           </select>
           <button onClick={renameProject} style={topbarButton}>📝 Umbenennen</button>
           <button onClick={createNewProject} style={topbarButton}>➕ Neu</button>
-          <button onClick={saveCurrentProject} style={topbarButton}>💾 Speichern</button>
+          <button
+            onClick={() => {
+              console.log("💾 Speichern-Button wurde geklickt");
+              saveCurrentProject();
+            }}
+            style={topbarButton}
+          >
+            💾 Speichern
+          </button>
           <button onClick={() => loadProject(activeProject)} style={topbarButton}>📂 Laden</button>
           <button onClick={resetToSavedProjectState} style={topbarButton}>↩ Wiederherstellen</button>
           <button onClick={() => deleteProject(activeProject)} style={topbarButton}>🗑️ Löschen</button>
+          <button onClick={exportCurrentProjectAsTex} style={topbarButton}>📄 Export als .tex</button>
         </div>
 
         {/* Main content area */}
