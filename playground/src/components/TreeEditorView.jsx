@@ -1,7 +1,12 @@
 import { useState } from 'react'
 import { useDroppable } from '@dnd-kit/core'
-import { useSortable, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
+import {
+  useSortable,
+  SortableContext,
+  verticalListSortingStrategy
+} from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+
 
 export default function TreeEditorView({
   structure,
@@ -56,75 +61,131 @@ export default function TreeEditorView({
     <div style={{ fontFamily: 'monospace', fontSize: '0.78rem', color: '#eee' }}>
       <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.7rem' }}>
         <input
-            type="text"
-            value={newSectionName}
-            onChange={e => setNewSectionName(e.target.value)}
-            onKeyDown={(e) => { if (e.key === 'Enter') addSection() }}
-            placeholder="Neue Section"
-            style={{
-            backgroundColor: '#111',
-            color: '#eee',
-            padding: '0.2rem',
-            fontSize: '0.75rem',
-            flex: 1
-            }}
+          type="text"
+          value={newSectionName}
+          onChange={e => setNewSectionName(e.target.value)}
+          onKeyDown={(e) => { if (e.key === 'Enter') addSection() }}
+          placeholder="Neue Section"
+          style={{ backgroundColor: '#111', color: '#eee', padding: '0.2rem', fontSize: '0.75rem', flex: 1 }}
         />
         <button onClick={addSection} style={styles.button}>Add</button>
-        </div>
+      </div>
 
-
-      {structure.map(section => (
-        <div key={section.id}>
-          <div style={styles.section}>{section.name}</div>
-
-          <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.3rem', marginLeft: '1rem' }}>
-            <input
-                type="text"
-                value={subInputs[section.id] || ''}
-                onChange={e => setSubInputs({ ...subInputs, [section.id]: e.target.value })}
-                onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                    addSubsection(section.id, subInputs[section.id] || '')
-                }
-                }}
-                placeholder="Neue Subsection"
-                style={{
-                backgroundColor: '#111',
-                color: '#eee',
-                padding: '0.2rem',
-                fontSize: '0.72rem',
-                flex: 1
-                }}
-            />
-            <button
-                onClick={() => addSubsection(section.id, subInputs[section.id] || '')}
-                style={styles.subButton}
-            >
-                Add
-            </button>
-          </div>
-
-
-          {section.subsections.map(sub => (
-            <DroppableSubsection
-              key={sub.id}
-              subsection={sub}
-              getUnitByID={getUnitByID}
-              selectedEditorIDs={selectedEditorIDs}
-              toggleSelection={toggleSelection}
-              lastSelectedEditorIndex={lastSelectedEditorIndex}
-              setLastSelectedEditorIndex={setLastSelectedEditorIndex}
-              setStructure={setStructure}
-            />
-          ))}
-        </div>
-      ))}
+      <SortableContext items={structure.map(s => s.id)} strategy={verticalListSortingStrategy}>
+        {structure.map(section => (
+          <SortableSection
+            key={section.id}
+            section={section}
+            setStructure={setStructure}
+            subInputs={subInputs}
+            setSubInputs={setSubInputs}
+            getUnitByID={getUnitByID}
+            selectedEditorIDs={selectedEditorIDs}
+            toggleSelection={toggleSelection}
+            lastSelectedEditorIndex={lastSelectedEditorIndex}
+            setLastSelectedEditorIndex={setLastSelectedEditorIndex}
+          />
+        ))}
+      </SortableContext>
     </div>
   )
 }
 
-function DroppableSubsection({
+function SortableSection({
+  section,
+  setStructure,
+  subInputs,
+  setSubInputs,
+  getUnitByID,
+  selectedEditorIDs,
+  toggleSelection,
+  lastSelectedEditorIndex,
+  setLastSelectedEditorIndex
+}) {
+  const {
+    setNodeRef,
+    transform,
+    transition,
+    attributes,
+    listeners,
+    isDragging
+  } = useSortable({
+    id: section.id,
+    data: { type: 'section' }
+  })
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+    marginBottom: '1.5rem'
+  }
+
+  return (
+    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
+      <div style={styles.section}>{section.name}</div>
+
+      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.3rem', marginLeft: '1rem' }}>
+        <input
+          type="text"
+          value={subInputs[section.id] || ''}
+          onChange={e => setSubInputs({ ...subInputs, [section.id]: e.target.value })}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              const name = subInputs[section.id] || ''
+              setSubInputs({ ...subInputs, [section.id]: '' })
+              setStructure(prev =>
+                prev.map(s =>
+                  s.id === section.id
+                    ? { ...s, subsections: [...s.subsections, { id: `sub-${Date.now()}`, name, unitIDs: [] }] }
+                    : s
+                )
+              )
+            }
+          }}
+          placeholder="Neue Subsection"
+          style={{ backgroundColor: '#111', color: '#eee', padding: '0.2rem', fontSize: '0.72rem', flex: 1 }}
+        />
+        <button
+          onClick={() => {
+            const name = subInputs[section.id] || ''
+            setSubInputs({ ...subInputs, [section.id]: '' })
+            setStructure(prev =>
+              prev.map(s =>
+                s.id === section.id
+                  ? { ...s, subsections: [...s.subsections, { id: `sub-${Date.now()}`, name, unitIDs: [] }] }
+                  : s
+              )
+            )
+          }}
+          style={styles.subButton}
+        >
+          Add
+        </button>
+      </div>
+
+      <SortableContext items={section.subsections.map(sub => sub.id)} strategy={verticalListSortingStrategy}>
+        {section.subsections.map(sub => (
+          <SortableSubsection
+            key={sub.id}
+            subsection={sub}
+            sectionId={section.id}
+            getUnitByID={getUnitByID}
+            selectedEditorIDs={selectedEditorIDs}
+            toggleSelection={toggleSelection}
+            lastSelectedEditorIndex={lastSelectedEditorIndex}
+            setLastSelectedEditorIndex={setLastSelectedEditorIndex}
+            setStructure={setStructure}
+          />
+        ))}
+      </SortableContext>
+    </div>
+  )
+}
+
+function SortableSubsection({
   subsection,
+  sectionId,
   getUnitByID,
   selectedEditorIDs,
   toggleSelection,
@@ -132,9 +193,16 @@ function DroppableSubsection({
   setLastSelectedEditorIndex,
   setStructure
 }) {
-  const { setNodeRef, isOver } = useDroppable({
+  const {
+    setNodeRef,
+    transform,
+    transition,
+    attributes,
+    listeners,
+    isDragging
+  } = useSortable({
     id: subsection.id,
-    data: { subsectionId: subsection.id }
+    data: { type: 'subsection', parentId: sectionId }
   })
 
   const allIDs = subsection.unitIDs.map(id => `${subsection.id}__${id}`)
@@ -142,9 +210,13 @@ function DroppableSubsection({
   return (
     <div
       ref={setNodeRef}
+      {...attributes}
+      {...listeners}
       style={{
         ...styles.subsection,
-        borderColor: isOver ? '#4fc3f7' : '#777'
+        transform: CSS.Transform.toString(transform),
+        transition,
+        opacity: isDragging ? 0.5 : 1
       }}
     >
       <div style={styles.subsectionName}>{subsection.name}</div>
@@ -295,7 +367,8 @@ const styles = {
   },
   section: {
     fontWeight: 'bold',
-    marginTop: '0.9rem',
+    marginTop: '1.2rem',
+    marginBottom: '0.4rem',
     fontSize: '0.9rem'
   },
   subsection: {
