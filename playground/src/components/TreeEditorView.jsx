@@ -1,3 +1,4 @@
+// playground/src/components/TreeEditorView.jsx
 import { useState } from 'react'
 import {
   useSortable,
@@ -124,10 +125,7 @@ function SortableSection({
     attributes,
     listeners,
     isDragging
-  } = useSortable({
-    id: section.id,
-    data: { type: 'section' }
-  })
+  } = useSortable({ id: section.id, data: { type: 'section' } })
 
   const style = {
     transform: CSS.Transform.toString(transform),

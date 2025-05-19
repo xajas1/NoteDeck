@@ -1,3 +1,4 @@
+// playground/src/App.jsx
 import React, { useEffect, useState } from 'react'
 import {
   DndContext,
@@ -18,6 +19,12 @@ function App() {
   const [activeProject, setActiveProject] = useState("")
   const [structure, setStructure] = useState([])
   const [playground, setPlayground] = useState([])
+
+  const [selectedIDs, setSelectedIDs] = useState(new Set())
+  const [lastSelectedIndex, setLastSelectedIndex] = useState(null)
+
+  const [selectedEditorIDs, setSelectedEditorIDs] = useState(new Set())
+  const [lastSelectedEditorIndex, setLastSelectedEditorIndex] = useState(null)
 
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }))
   const STORAGE_KEY = "notedeck_projects_v1"
@@ -60,6 +67,10 @@ function App() {
     setPlayground(entry.playground || [])
     setActiveProject(name)
     saveProjectsToStorage(projects, name)
+    setSelectedIDs(new Set())
+    setLastSelectedIndex(null)
+    setSelectedEditorIDs(new Set())
+    setLastSelectedEditorIndex(null)
   }
 
   const deleteProject = (name) => {
@@ -72,6 +83,10 @@ function App() {
     setStructure(copy[nextActive]?.structure || [])
     setPlayground(copy[nextActive]?.playground || [])
     saveProjectsToStorage(copy, nextActive)
+    setSelectedIDs(new Set())
+    setLastSelectedIndex(null)
+    setSelectedEditorIDs(new Set())
+    setLastSelectedEditorIndex(null)
   }
 
   const createNewProject = () => {
@@ -87,6 +102,10 @@ function App() {
     setStructure([])
     setPlayground([])
     saveProjectsToStorage(updated, name)
+    setSelectedIDs(new Set())
+    setLastSelectedIndex(null)
+    setSelectedEditorIDs(new Set())
+    setLastSelectedEditorIndex(null)
   }
 
   const renameProject = () => {
@@ -116,6 +135,10 @@ function App() {
     const saved = projects[activeProject]
     setStructure(saved.structure || [])
     setPlayground(saved.playground || [])
+    setSelectedIDs(new Set())
+    setLastSelectedIndex(null)
+    setSelectedEditorIDs(new Set())
+    setLastSelectedEditorIndex(null)
     alert("↩ Projekt auf gespeicherten Zustand zurückgesetzt.")
   }
 
@@ -157,8 +180,29 @@ function App() {
         })
       }))
     )
+
+    // Auswahl zurücksetzen nach Drag & Drop
+    setSelectedIDs(new Set())
+    setLastSelectedIndex(null)
+    setSelectedEditorIDs(new Set())
+    setLastSelectedEditorIndex(null)
   }
 
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setSelectedIDs(new Set())
+        setLastSelectedIndex(null)
+        setSelectedEditorIDs(new Set())
+        setLastSelectedEditorIndex(null)
+      }
+    }
+  
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [])
+  
   useEffect(() => {
     fetch('http://127.0.0.1:8000/units')
       .then(res => res.json())
@@ -185,7 +229,14 @@ function App() {
 
   return (
     <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-      <div style={{ height: '100vh', width: '100vw', backgroundColor: '#1a1a1a', color: '#eee', display: 'flex', flexDirection: 'column' }}>
+      <div style={{
+        height: '100vh',
+        width: '100vw',
+        backgroundColor: '#1a1a1a',
+        color: '#eee',
+        display: 'flex',
+        flexDirection: 'column'
+      }}>
         
         {/* Topbar */}
         <div style={{ padding: '0.5rem 1rem', display: 'flex', alignItems: 'center', gap: '0.7rem', borderBottom: '1px solid #444', backgroundColor: '#111' }}>
@@ -208,11 +259,22 @@ function App() {
         </div>
 
         {/* Main content area */}
-        <div style={{ display: 'flex', flexGrow: 1 }}>
-          <div style={{ width: '20%', borderRight: '1px solid #333', padding: '1rem', overflowY: 'auto' }}>
+        <div style={{ display: 'flex', flexGrow: 1, height: 0 }}>
+          <div style={{
+            width: '20%',
+            borderRight: '1px solid #333',
+            padding: '1rem',
+            overflowY: 'auto',
+            height: '100%'
+          }}>
             <TreeSidebar units={units} playground={playground} setPlayground={setPlayground} />
           </div>
-          <div style={{ width: '35%', padding: '1.5rem', overflowY: 'auto' }}>
+          <div style={{
+            width: '35%',
+            padding: '1.5rem',
+            overflowY: 'auto',
+            height: '100%'
+          }}>
             <h2 style={{ marginBottom: '1rem' }}>Ausgewählte Einheiten (Tree)</h2>
             {loading ? (
               <p>⏳ Lade Inhalte …</p>
@@ -220,23 +282,29 @@ function App() {
               <TreePlaygroundView
                 playground={playground}
                 units={units}
-                selectedIDs={new Set()}
-                setSelectedIDs={() => {}}
-                lastSelectedIndex={null}
-                setLastSelectedIndex={() => {}}
+                selectedIDs={selectedIDs}
+                setSelectedIDs={setSelectedIDs}
+                lastSelectedIndex={lastSelectedIndex}
+                setLastSelectedIndex={setLastSelectedIndex}
                 setPlayground={setPlayground}
               />
             )}
           </div>
-          <div style={{ width: '45%', padding: '1.5rem', borderLeft: '1px solid #333', overflowY: 'auto' }}>
+          <div style={{
+            width: '45%',
+            padding: '1.5rem',
+            borderLeft: '1px solid #333',
+            overflowY: 'auto',
+            height: '100%'
+          }}>
             <h2 style={{ marginBottom: '1rem' }}>📦 Struktur (Tree)</h2>
             <TreeEditorView
               structure={structure}
               setStructure={setStructure}
-              selectedEditorIDs={new Set()}
-              setSelectedEditorIDs={() => {}}
-              lastSelectedEditorIndex={null}
-              setLastSelectedEditorIndex={() => {}}
+              selectedEditorIDs={selectedEditorIDs}
+              setSelectedEditorIDs={setSelectedEditorIDs}
+              lastSelectedEditorIndex={lastSelectedEditorIndex}
+              setLastSelectedEditorIndex={setLastSelectedEditorIndex}
               units={units}
               updateStructure={setStructure}
             />
