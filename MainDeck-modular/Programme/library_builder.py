@@ -14,7 +14,7 @@ LIB_DIR.mkdir(exist_ok=True)
 LIB_TEX  = LIB_DIR / "Library.tex"
 LIB_JSON = LIB_DIR / "Library.json"
 
-ADDITIONAL = ["Layer", "Comp", "RelInt", "RelId", "Cont", "Cint", "CID"]
+ADDITIONAL = ["Layer", "Comp", "RelInt", "RelId", "Cont", "Cint", "CID", "ParentTopic","TopicPath"]
 
 ENV = {  # CTyp → LaTeX‑Environment
     "DEF": "DEF",  "EXA": "EXA",  "PROP": "PROP",  "THEO": "THEO",
@@ -42,10 +42,15 @@ if missing:
     sys.exit(f"❌  Spalten fehlen: {missing}\nVorhanden: {list(df.columns)}")
 
 base_cols = [norm[k] for k in aliases]
-opt_cols  = [c for c in ADDITIONAL if c in df.columns]
-df        = df[base_cols + opt_cols].dropna(subset=[norm["unitid"],
-                                                   norm["ctyp"],
-                                                   norm["content"]])
+
+# Ergänze fehlende optionale Spalten mit None
+for col in ADDITIONAL:
+    if col not in df.columns:
+        df[col] = None
+
+df = df[base_cols + ADDITIONAL].dropna(subset=[norm["unitid"],
+                                               norm["ctyp"],
+                                               norm["content"]])
 
 records = df.to_dict("records")
 
@@ -113,4 +118,3 @@ with open(LIB_JSON, "w", encoding="utf-8") as fh:
     json.dump(records, fh, indent=2, ensure_ascii=False, allow_nan=False)
 
 print(f"✅  Library.json vollständig überschrieben mit {len(records)} Einträgen.")
-
