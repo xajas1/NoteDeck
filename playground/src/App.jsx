@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   DndContext,
   PointerSensor,
@@ -13,65 +13,134 @@ import TreeSidebar from './components/TreeSidebar'
 function App() {
   const [units, setUnits] = useState([])
   const [loading, setLoading] = useState(true)
-  const [playground, setPlayground] = useState([])
+
+  const [projects, setProjects] = useState({})
+  const [activeProject, setActiveProject] = useState("")
   const [structure, setStructure] = useState([])
+  const [playground, setPlayground] = useState([])
 
   const [selectedPlaygroundIDs, setSelectedPlaygroundIDs] = useState(new Set())
   const [selectedEditorIDs, setSelectedEditorIDs] = useState(new Set())
   const [lastSelectedPlaygroundIndex, setLastSelectedPlaygroundIndex] = useState(null)
   const [lastSelectedEditorIndex, setLastSelectedEditorIndex] = useState(null)
 
-  const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: { distance: 5 },
-    })
-  )
+  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }))
+  const STORAGE_KEY = "notedeck_projects_v1"
 
-  const STORAGE_KEY = "notedeck_playground_v1"
+  // 🔍 Änderungserkennung
+  const isModified = () => {
+    const saved = projects[activeProject]
+    if (!saved) return false
+    return (
+      JSON.stringify(saved.structure) !== JSON.stringify(structure) ||
+      JSON.stringify(saved.playground) !== JSON.stringify(playground)
+    )
+  }
 
-  const saveStructureToLocal = () => {
-    if (!structure || structure.length === 0) {
-      alert("⚠️ Keine Struktur vorhanden zum Speichern.")
+  const loadProjectsFromStorage = () => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY)
+      if (!raw) return
+      const parsed = JSON.parse(raw)
+      if (parsed && typeof parsed === "object") {
+        setProjects(parsed.projects || {})
+        setActiveProject(parsed.activeProject || "")
+        if (parsed.activeProject && parsed.projects?.[parsed.activeProject]) {
+          setStructure(parsed.projects[parsed.activeProject].structure || [])
+          setPlayground(parsed.projects[parsed.activeProject].playground || [])
+        }
+      }
+    } catch (e) {
+      console.error("Fehler beim Laden:", e)
+    }
+  }
+
+  const saveProjectsToStorage = (updatedProjects, selectedProject) => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      projects: updatedProjects,
+      activeProject: selectedProject
+    }))
+  }
+
+  const saveCurrentProject = () => {
+    if (!activeProject) return alert("⚠️ Kein aktives Projekt ausgewählt.")
+    const updated = {
+      ...projects,
+      [activeProject]: {
+        structure,
+        playground,
+        timestamp: Date.now()
+      }
+    }
+    setProjects(updated)
+    saveProjectsToStorage(updated, activeProject)
+    alert(`✅ Projekt '${activeProject}' gespeichert.`)
+  }
+
+  const loadProject = (name) => {
+    const entry = projects[name]
+    if (!entry) return
+    setStructure(entry.structure || [])
+    setPlayground(entry.playground || [])
+    setActiveProject(name)
+    saveProjectsToStorage(projects, name)
+  }
+
+  const deleteProject = (name) => {
+    if (!window.confirm(`❌ Projekt '${name}' wirklich löschen?`)) return
+    const copy = { ...projects }
+    delete copy[name]
+    const nextActive = Object.keys(copy)[0] || ""
+    setProjects(copy)
+    setActiveProject(nextActive)
+    setStructure(copy[nextActive]?.structure || [])
+    setPlayground(copy[nextActive]?.playground || [])
+    saveProjectsToStorage(copy, nextActive)
+  }
+
+  const createNewProject = () => {
+    const name = prompt("🔧 Neuer Projektname:")
+    if (!name || name.trim() === "") return
+    if (projects[name]) return alert("❗ Projektname existiert bereits.")
+    const updated = {
+      ...projects,
+      [name]: { structure: [], playground: [], timestamp: Date.now() }
+    }
+    setProjects(updated)
+    setActiveProject(name)
+    setStructure([])
+    setPlayground([])
+    saveProjectsToStorage(updated, name)
+  }
+
+  const renameProject = () => {
+    if (!activeProject || !projects[activeProject]) return
+    const newName = prompt("📝 Neuer Projektname:", activeProject)
+    if (!newName || newName.trim() === "") return
+    if (projects[newName] && newName !== activeProject) {
+      alert("❗ Ein Projekt mit diesem Namen existiert bereits.")
       return
     }
 
-    const data = {
-      structure,
-      playground,
-      timestamp: Date.now()
+    const updated = { ...projects }
+    updated[newName] = updated[activeProject]
+    if (newName !== activeProject) delete updated[activeProject]
+
+    setProjects(updated)
+    setActiveProject(newName)
+    saveProjectsToStorage(updated, newName)
+  }
+
+  const resetToSavedProjectState = () => {
+    if (!activeProject || !projects[activeProject]) {
+      alert("⚠️ Kein gespeicherter Stand verfügbar.")
+      return
     }
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
-    alert("✅ Struktur gespeichert!")
-  }
 
-  const loadStructureFromLocal = () => {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    if (!raw) return alert("⚠️ Keine gespeicherte Struktur gefunden.")
-
-    try {
-      const parsed = JSON.parse(raw)
-      if (parsed.structure && Array.isArray(parsed.structure)) {
-        setStructure(parsed.structure)
-        setPlayground(parsed.playground || [])
-        alert("📂 Struktur erfolgreich geladen.")
-      } else {
-        alert("❌ Ungültiges Speicherformat.")
-      }
-    } catch (e) {
-      console.error(e)
-      alert("❌ Fehler beim Laden.")
-    }
-  }
-
-  const resetEditorView = () => {
-    setStructure([])
-    setPlayground([])
-    alert("🔄 Editor zurückgesetzt (nicht gespeichert).")
-  }
-
-  const deleteSavedStructure = () => {
-    localStorage.removeItem(STORAGE_KEY)
-    alert("🗑 Lokaler Speicher gelöscht.")
+    const saved = projects[activeProject]
+    setStructure(saved.structure || [])
+    setPlayground(saved.playground || [])
+    alert("↩ Projekt auf gespeicherten Zustand zurückgesetzt.")
   }
 
   const normalizeUnitID = (id) => {
@@ -186,6 +255,8 @@ function App() {
         console.error('Fehler beim Laden der Units:', err)
         setLoading(false)
       })
+
+    loadProjectsFromStorage()
   }, [])
 
   return (
@@ -195,12 +266,37 @@ function App() {
         backgroundColor: '#111',
         borderBottom: '1px solid #333',
         display: 'flex',
-        gap: '0.7rem'
+        gap: '0.7rem',
+        alignItems: 'center'
       }}>
-        <button onClick={saveStructureToLocal} style={buttonStyle}>💾 Speichern</button>
-        <button onClick={loadStructureFromLocal} style={buttonStyle}>📂 Laden</button>
-        <button onClick={resetEditorView} style={buttonStyle}>🔄 Zurücksetzen (UI)</button>
-        <button onClick={deleteSavedStructure} style={buttonStyle}>🗑 Speicher löschen</button>
+        <label style={{ color: '#eee', fontSize: '0.8rem' }}>Projekt:</label>
+        <select
+          value={activeProject}
+          onChange={(e) => loadProject(e.target.value)}
+          style={{
+            backgroundColor: '#222',
+            color: '#eee',
+            border: '1px solid #444',
+            padding: '0.2rem 0.5rem',
+            borderRadius: '4px'
+          }}
+        >
+          {Object.keys(projects).length === 0 && (
+            <option disabled>— Kein Projekt —</option>
+          )}
+          {Object.keys(projects).map(name => (
+            <option key={name} value={name}>
+              {name === activeProject && isModified() ? `*${name}` : name}
+            </option>
+          ))}
+        </select>
+
+        <button onClick={renameProject} style={buttonStyle}>📝 Umbenennen</button>
+        <button onClick={createNewProject} style={buttonStyle}>➕ Neu</button>
+        <button onClick={saveCurrentProject} style={buttonStyle}>💾 Speichern</button>
+        <button onClick={() => loadProject(activeProject)} style={buttonStyle}>📂 Laden</button>
+        <button onClick={resetToSavedProjectState} style={buttonStyle}>↩ Wiederherstellen</button>
+        <button onClick={() => deleteProject(activeProject)} style={buttonStyle}>🗑 Löschen</button>
       </div>
 
       <div style={{
