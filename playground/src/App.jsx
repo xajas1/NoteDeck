@@ -19,15 +19,9 @@ function App() {
   const [structure, setStructure] = useState([])
   const [playground, setPlayground] = useState([])
 
-  const [selectedPlaygroundIDs, setSelectedPlaygroundIDs] = useState(new Set())
-  const [selectedEditorIDs, setSelectedEditorIDs] = useState(new Set())
-  const [lastSelectedPlaygroundIndex, setLastSelectedPlaygroundIndex] = useState(null)
-  const [lastSelectedEditorIndex, setLastSelectedEditorIndex] = useState(null)
-
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }))
   const STORAGE_KEY = "notedeck_projects_v1"
 
-  // 🔍 Änderungserkennung
   const isModified = () => {
     const saved = projects[activeProject]
     if (!saved) return false
@@ -35,24 +29,6 @@ function App() {
       JSON.stringify(saved.structure) !== JSON.stringify(structure) ||
       JSON.stringify(saved.playground) !== JSON.stringify(playground)
     )
-  }
-
-  const loadProjectsFromStorage = () => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY)
-      if (!raw) return
-      const parsed = JSON.parse(raw)
-      if (parsed && typeof parsed === "object") {
-        setProjects(parsed.projects || {})
-        setActiveProject(parsed.activeProject || "")
-        if (parsed.activeProject && parsed.projects?.[parsed.activeProject]) {
-          setStructure(parsed.projects[parsed.activeProject].structure || [])
-          setPlayground(parsed.projects[parsed.activeProject].playground || [])
-        }
-      }
-    } catch (e) {
-      console.error("Fehler beim Laden:", e)
-    }
   }
 
   const saveProjectsToStorage = (updatedProjects, selectedProject) => {
@@ -143,105 +119,44 @@ function App() {
     alert("↩ Projekt auf gespeicherten Zustand zurückgesetzt.")
   }
 
-  const normalizeUnitID = (id) => {
-    if (id.includes('____drop__')) return id.split('____drop__')[1]
-    if (id.includes('__drop__')) return id.split('__drop__')[1]
-    if (id.includes('__')) return id.split('__')[1]
-    return id
-  }
-
   const handleDragEnd = ({ active, over }) => {
     if (!active || !over || active.id === over.id) return
 
-    const activeType = active.data.current?.type
-    const overId = over.id
+    const draggedIDs = active?.data?.current?.draggedIDs || [active.id.split('__').pop()]
+    const targetSubID = over.id.includes('__') ? over.id.split('__')[0] : over.id
+    const targetIndexUnit = over.id.includes('__') ? over.id.split('__')[1] : null
 
-    if (activeType === 'section') {
-      setStructure(prev => {
-        const oldIndex = prev.findIndex(s => s.id === active.id)
-        const newIndex = prev.findIndex(s => s.id === overId)
-        if (oldIndex === -1 || newIndex === -1) return prev
+    setStructure(prev =>
+      prev.map(section => ({
+        ...section,
+        subsections: section.subsections.map(sub => {
+          let current = [...sub.unitIDs]
+          const fromIndex = current.indexOf(draggedIDs[0])
+          const toIndex = targetIndexUnit ? current.indexOf(targetIndexUnit) : current.length
 
-        const updated = [...prev]
-        const [moved] = updated.splice(oldIndex, 1)
-        updated.splice(newIndex, 0, moved)
-        return updated
-      })
-    }
+          if (fromIndex === -1 && sub.id !== targetSubID) {
+            return {
+              ...sub,
+              unitIDs: current.filter(id => !draggedIDs.includes(id))
+            }
+          }
 
-    else if (activeType === 'subsection') {
-      const parentId = active.data.current?.parentId
-      setStructure(prev =>
-        prev.map(section => {
-          if (section.id !== parentId) return section
+          let updated = current.filter(id => !draggedIDs.includes(id))
+          let insertAt = toIndex
+          if (fromIndex < toIndex) {
+            insertAt = toIndex - draggedIDs.length + 1
+          }
 
-          const subs = [...section.subsections]
-          const oldIndex = subs.findIndex(sub => sub.id === active.id)
-          const newIndex = subs.findIndex(sub => sub.id === overId)
-          if (oldIndex === -1 || newIndex === -1) return section
+          if (sub.id === targetSubID) {
+            draggedIDs.forEach((id, i) => {
+              updated.splice(insertAt + i, 0, id)
+            })
+          }
 
-          const [moved] = subs.splice(oldIndex, 1)
-          subs.splice(newIndex, 0, moved)
-
-          return { ...section, subsections: subs }
+          return { ...sub, unitIDs: updated }
         })
-      )
-    }
-
-    else {
-      const draggedIDs =
-        active?.data?.current?.draggedIDs ||
-        (selectedPlaygroundIDs.size > 0
-          ? Array.from(selectedPlaygroundIDs)
-          : selectedEditorIDs.size > 0
-          ? Array.from(selectedEditorIDs)
-          : [normalizeUnitID(active.id)])
-
-      const targetSubID = over.id.includes('__')
-        ? over.id.split('__')[0]
-        : over.id
-
-      const targetIndexUnit = over.id.includes('__')
-        ? normalizeUnitID(over.id)
-        : null
-
-      setStructure(prev =>
-        prev.map(section => ({
-          ...section,
-          subsections: section.subsections.map(sub => {
-            let current = [...sub.unitIDs]
-            const fromIndex = current.indexOf(draggedIDs[0])
-            const toIndex = targetIndexUnit ? current.indexOf(targetIndexUnit) : current.length
-
-            if (fromIndex === -1 && sub.id !== targetSubID) {
-              return {
-                ...sub,
-                unitIDs: current.filter(id => !draggedIDs.includes(id))
-              }
-            }
-
-            let updated = current.filter(id => !draggedIDs.includes(id))
-            let insertAt = toIndex
-            if (fromIndex < toIndex) {
-              insertAt = toIndex - draggedIDs.length + 1
-            }
-
-            if (sub.id === targetSubID) {
-              draggedIDs.forEach((id, i) => {
-                updated.splice(insertAt + i, 0, id)
-              })
-            }
-
-            return { ...sub, unitIDs: updated }
-          })
-        }))
-      )
-    }
-
-    setSelectedPlaygroundIDs(new Set())
-    setSelectedEditorIDs(new Set())
-    setLastSelectedPlaygroundIndex(null)
-    setLastSelectedEditorIndex(null)
+      }))
+    )
   }
 
   useEffect(() => {
@@ -256,96 +171,86 @@ function App() {
         setLoading(false)
       })
 
-    loadProjectsFromStorage()
+    const raw = localStorage.getItem(STORAGE_KEY)
+    if (raw) {
+      const parsed = JSON.parse(raw)
+      setProjects(parsed.projects || {})
+      setActiveProject(parsed.activeProject || "")
+      if (parsed.activeProject && parsed.projects?.[parsed.activeProject]) {
+        setStructure(parsed.projects[parsed.activeProject].structure || [])
+        setPlayground(parsed.projects[parsed.activeProject].playground || [])
+      }
+    }
   }, [])
 
   return (
     <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-      <div style={{
-        padding: '0.5rem 1rem',
-        backgroundColor: '#111',
-        borderBottom: '1px solid #333',
-        display: 'flex',
-        gap: '0.7rem',
-        alignItems: 'center'
-      }}>
-        <label style={{ color: '#eee', fontSize: '0.8rem' }}>Projekt:</label>
-        <select
-          value={activeProject}
-          onChange={(e) => loadProject(e.target.value)}
-          style={{
-            backgroundColor: '#222',
-            color: '#eee',
-            border: '1px solid #444',
-            padding: '0.2rem 0.5rem',
-            borderRadius: '4px'
-          }}
-        >
-          {Object.keys(projects).length === 0 && (
-            <option disabled>— Kein Projekt —</option>
-          )}
-          {Object.keys(projects).map(name => (
-            <option key={name} value={name}>
-              {name === activeProject && isModified() ? `*${name}` : name}
-            </option>
-          ))}
-        </select>
-
-        <button onClick={renameProject} style={buttonStyle}>📝 Umbenennen</button>
-        <button onClick={createNewProject} style={buttonStyle}>➕ Neu</button>
-        <button onClick={saveCurrentProject} style={buttonStyle}>💾 Speichern</button>
-        <button onClick={() => loadProject(activeProject)} style={buttonStyle}>📂 Laden</button>
-        <button onClick={resetToSavedProjectState} style={buttonStyle}>↩ Wiederherstellen</button>
-        <button onClick={() => deleteProject(activeProject)} style={buttonStyle}>🗑 Löschen</button>
-      </div>
-
-      <div style={{
-        display: 'flex',
-        height: '100vh',
-        width: '100vw',
-        backgroundColor: '#1a1a1a',
-        color: '#eee',
-      }}>
-        <div style={{ width: '25%', borderRight: '1px solid #333', padding: '1rem', overflowY: 'auto' }}>
-          <TreeSidebar units={units} playground={playground} setPlayground={setPlayground} />
+      <div style={{ height: '100vh', width: '100vw', backgroundColor: '#1a1a1a', color: '#eee', display: 'flex', flexDirection: 'column' }}>
+        
+        {/* Topbar */}
+        <div style={{ padding: '0.5rem 1rem', display: 'flex', alignItems: 'center', gap: '0.7rem', borderBottom: '1px solid #444', backgroundColor: '#111' }}>
+          <span>Projekt:</span>
+          <select
+            value={activeProject}
+            onChange={e => loadProject(e.target.value)}
+            style={{ padding: '0.2rem 0.4rem', backgroundColor: '#222', color: '#eee', border: '1px solid #555' }}
+          >
+            {Object.keys(projects).map(name => (
+              <option key={name} value={name}>{name}</option>
+            ))}
+          </select>
+          <button onClick={renameProject} style={topbarButton}>📝 Umbenennen</button>
+          <button onClick={createNewProject} style={topbarButton}>➕ Neu</button>
+          <button onClick={saveCurrentProject} style={topbarButton}>💾 Speichern</button>
+          <button onClick={() => loadProject(activeProject)} style={topbarButton}>📂 Laden</button>
+          <button onClick={resetToSavedProjectState} style={topbarButton}>↩ Wiederherstellen</button>
+          <button onClick={() => deleteProject(activeProject)} style={topbarButton}>🗑️ Löschen</button>
         </div>
-        <div style={{ width: '40%', padding: '1.5rem', overflowY: 'auto' }}>
-          <h2 style={{ marginBottom: '1rem' }}>Ausgewählte Einheiten (Tree)</h2>
-          {loading ? (
-            <p>⏳ Lade Inhalte …</p>
-          ) : (
-            <TreePlaygroundView
-              playground={playground}
+
+        {/* Main content area */}
+        <div style={{ display: 'flex', flexGrow: 1 }}>
+          <div style={{ width: '20%', borderRight: '1px solid #333', padding: '1rem', overflowY: 'auto' }}>
+            <TreeSidebar units={units} playground={playground} setPlayground={setPlayground} />
+          </div>
+          <div style={{ width: '35%', padding: '1.5rem', overflowY: 'auto' }}>
+            <h2 style={{ marginBottom: '1rem' }}>Ausgewählte Einheiten (Tree)</h2>
+            {loading ? (
+              <p>⏳ Lade Inhalte …</p>
+            ) : (
+              <TreePlaygroundView
+                playground={playground}
+                units={units}
+                selectedIDs={new Set()}
+                setSelectedIDs={() => {}}
+                lastSelectedIndex={null}
+                setLastSelectedIndex={() => {}}
+                setPlayground={setPlayground}
+              />
+            )}
+          </div>
+          <div style={{ width: '45%', padding: '1.5rem', borderLeft: '1px solid #333', overflowY: 'auto' }}>
+            <h2 style={{ marginBottom: '1rem' }}>📦 Struktur (Tree)</h2>
+            <TreeEditorView
+              structure={structure}
+              setStructure={setStructure}
+              selectedEditorIDs={new Set()}
+              setSelectedEditorIDs={() => {}}
+              lastSelectedEditorIndex={null}
+              setLastSelectedEditorIndex={() => {}}
               units={units}
-              selectedIDs={selectedPlaygroundIDs}
-              setSelectedIDs={setSelectedPlaygroundIDs}
-              lastSelectedIndex={lastSelectedPlaygroundIndex}
-              setLastSelectedIndex={setLastSelectedPlaygroundIndex}
-              setPlayground={setPlayground}
+              updateStructure={setStructure}
             />
-          )}
-        </div>
-        <div style={{ width: '35%', padding: '1.5rem', borderLeft: '1px solid #333', overflowY: 'auto' }}>
-          <h2 style={{ marginBottom: '1rem' }}>📦 Struktur (Tree)</h2>
-          <TreeEditorView
-            structure={structure}
-            setStructure={setStructure}
-            selectedEditorIDs={selectedEditorIDs}
-            setSelectedEditorIDs={setSelectedEditorIDs}
-            lastSelectedEditorIndex={lastSelectedEditorIndex}
-            setLastSelectedEditorIndex={setLastSelectedEditorIndex}
-            units={units}
-          />
+          </div>
         </div>
       </div>
     </DndContext>
   )
 }
 
-const buttonStyle = {
+const topbarButton = {
   backgroundColor: '#333',
   color: '#eee',
-  padding: '0.3rem 0.7rem',
+  padding: '0.3rem 0.6rem',
   borderRadius: '4px',
   border: '1px solid #555',
   fontSize: '0.75rem',
