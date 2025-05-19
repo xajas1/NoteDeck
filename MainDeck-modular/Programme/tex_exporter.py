@@ -1,14 +1,29 @@
 import json
 from pathlib import Path
-import argparse
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+import uvicorn
+
+# === FastAPI Setup ===
+app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # === Konfiguration ===
 ROOT = Path(__file__).resolve().parent.parent  # MainDeck-modular
 MODULE_DIR = ROOT / "Library" / "Module"
 SCRIPT_DIR = ROOT / "Library" / "Scripts"
 STRUCTURE_BASE = Path(__file__).resolve().parent  # Programme/
+PROJECT_FILE = STRUCTURE_BASE / "local_projects.json"
 
-# === LaTeX Header (gekürzt für Demo-Zwecke) ===
+# === LaTeX Header (gekürzt) ===
 LATEX_HEADER = r"""
 \documentclass[10pt, letterpaper]{article}
 \usepackage[margin=3cm]{geometry}
@@ -18,17 +33,30 @@ LATEX_HEADER = r"""
 \tableofcontents
 \newpage
 """
-
 LATEX_FOOTER = r"""
 \end{document}
 """
 
+class ExportRequest(BaseModel):
+    project: str
+
+@app.post("/export-tex")
+def export_tex(req: ExportRequest):
+    structure = load_structure(req.project)
+    if not structure:
+        return {"success": False, "message": f"Projektstruktur '{req.project}' nicht gefunden."}
+    path = write_tex(req.project, structure)
+    return {"success": True, "message": f"Export abgeschlossen: {path.relative_to(ROOT)}"}
+
 def load_structure(project_name):
-    json_path = STRUCTURE_BASE / f"export_structure_{project_name}.json"
-    if not json_path.exists():
-        raise FileNotFoundError(f"Strukturdatei nicht gefunden: {json_path}")
-    with open(json_path, encoding="utf8") as f:
-        return json.load(f)
+    if not PROJECT_FILE.exists():
+        raise FileNotFoundError("local_projects.json nicht gefunden")
+    with open(PROJECT_FILE, encoding="utf8") as f:
+        local_data = json.load(f)
+        projects = local_data.get("projects", {})
+        if project_name not in projects:
+            raise ValueError(f"Projekt '{project_name}' nicht gefunden")
+        return projects[project_name]["structure"]
 
 def read_unit_tex(unit_id):
     tex_path = MODULE_DIR / f"{unit_id}.tex"
@@ -60,12 +88,7 @@ def write_tex(project_name, structure):
         f.write(body)
         f.write("\n\n")
         f.write(LATEX_FOOTER)
-    print(f"✅ Export abgeschlossen: {output_path.relative_to(ROOT)}")
+    return output_path
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--project", required=True, help="Projektname (z.B. test_project4)")
-    args = parser.parse_args()
-
-    structure = load_structure(args.project)
-    write_tex(args.project, structure)
+    uvicorn.run("tex_exporter:app", host="127.0.0.1", port=8050, reload=True)

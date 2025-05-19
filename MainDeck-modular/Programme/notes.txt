@@ -46,3 +46,9 @@ Nur darin funktionieren fastapi, uvicorn usw., denn sie wurden lokal für dieses
 Localhost
 
 http://localhost:5173
+
+
+
+extract_tex aktivieren fast api
+  cd MainDeck-modular/Programme
+  uvicorn tex_exporter:app --port 8050 --reload
