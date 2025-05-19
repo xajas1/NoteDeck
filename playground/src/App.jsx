@@ -10,6 +10,7 @@ import {
 import TreePlaygroundView from './components/TreePlaygroundView'
 import TreeEditorView from './components/TreeEditorView'
 import TreeSidebar from './components/TreeSidebar'
+import ExportButton from './components/ExportButton'
 
 function App() {
   const [units, setUnits] = useState([])
@@ -256,6 +257,7 @@ function App() {
           <button onClick={() => loadProject(activeProject)} style={topbarButton}>📂 Laden</button>
           <button onClick={resetToSavedProjectState} style={topbarButton}>↩ Wiederherstellen</button>
           <button onClick={() => deleteProject(activeProject)} style={topbarButton}>🗑️ Löschen</button>
+          <ExportButton projectName={activeProject} structure={structure} />
         </div>
 
         {/* Main content area */}
