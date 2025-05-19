@@ -1,4 +1,3 @@
-// src/App.jsx
 import { useEffect, useState } from 'react'
 import {
   DndContext,
@@ -28,6 +27,53 @@ function App() {
     })
   )
 
+  const STORAGE_KEY = "notedeck_playground_v1"
+
+  const saveStructureToLocal = () => {
+    if (!structure || structure.length === 0) {
+      alert("⚠️ Keine Struktur vorhanden zum Speichern.")
+      return
+    }
+
+    const data = {
+      structure,
+      playground,
+      timestamp: Date.now()
+    }
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+    alert("✅ Struktur gespeichert!")
+  }
+
+  const loadStructureFromLocal = () => {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    if (!raw) return alert("⚠️ Keine gespeicherte Struktur gefunden.")
+
+    try {
+      const parsed = JSON.parse(raw)
+      if (parsed.structure && Array.isArray(parsed.structure)) {
+        setStructure(parsed.structure)
+        setPlayground(parsed.playground || [])
+        alert("📂 Struktur erfolgreich geladen.")
+      } else {
+        alert("❌ Ungültiges Speicherformat.")
+      }
+    } catch (e) {
+      console.error(e)
+      alert("❌ Fehler beim Laden.")
+    }
+  }
+
+  const resetEditorView = () => {
+    setStructure([])
+    setPlayground([])
+    alert("🔄 Editor zurückgesetzt (nicht gespeichert).")
+  }
+
+  const deleteSavedStructure = () => {
+    localStorage.removeItem(STORAGE_KEY)
+    alert("🗑 Lokaler Speicher gelöscht.")
+  }
+
   const normalizeUnitID = (id) => {
     if (id.includes('____drop__')) return id.split('____drop__')[1]
     if (id.includes('__drop__')) return id.split('__drop__')[1]
@@ -37,46 +83,42 @@ function App() {
 
   const handleDragEnd = ({ active, over }) => {
     if (!active || !over || active.id === over.id) return
-  
+
     const activeType = active.data.current?.type
     const overId = over.id
-    const overType = over.data?.current?.type
-  
-    // === 1. Verschiebe Sections ===
+
     if (activeType === 'section') {
       setStructure(prev => {
         const oldIndex = prev.findIndex(s => s.id === active.id)
         const newIndex = prev.findIndex(s => s.id === overId)
         if (oldIndex === -1 || newIndex === -1) return prev
-  
+
         const updated = [...prev]
         const [moved] = updated.splice(oldIndex, 1)
         updated.splice(newIndex, 0, moved)
         return updated
       })
     }
-  
-    // === 2. Verschiebe Subsections innerhalb einer Section ===
+
     else if (activeType === 'subsection') {
       const parentId = active.data.current?.parentId
       setStructure(prev =>
         prev.map(section => {
           if (section.id !== parentId) return section
-  
+
           const subs = [...section.subsections]
           const oldIndex = subs.findIndex(sub => sub.id === active.id)
           const newIndex = subs.findIndex(sub => sub.id === overId)
           if (oldIndex === -1 || newIndex === -1) return section
-  
+
           const [moved] = subs.splice(oldIndex, 1)
           subs.splice(newIndex, 0, moved)
-  
+
           return { ...section, subsections: subs }
         })
       )
     }
-  
-    // === 3. Verschiebe Units innerhalb einer Subsection ===
+
     else {
       const draggedIDs =
         active?.data?.current?.draggedIDs ||
@@ -85,15 +127,15 @@ function App() {
           : selectedEditorIDs.size > 0
           ? Array.from(selectedEditorIDs)
           : [normalizeUnitID(active.id)])
-  
+
       const targetSubID = over.id.includes('__')
         ? over.id.split('__')[0]
         : over.id
-  
+
       const targetIndexUnit = over.id.includes('__')
         ? normalizeUnitID(over.id)
         : null
-  
+
       setStructure(prev =>
         prev.map(section => ({
           ...section,
@@ -101,42 +143,37 @@ function App() {
             let current = [...sub.unitIDs]
             const fromIndex = current.indexOf(draggedIDs[0])
             const toIndex = targetIndexUnit ? current.indexOf(targetIndexUnit) : current.length
-  
+
             if (fromIndex === -1 && sub.id !== targetSubID) {
-              // Entferne von anderen Subsections
               return {
                 ...sub,
                 unitIDs: current.filter(id => !draggedIDs.includes(id))
               }
             }
-  
+
             let updated = current.filter(id => !draggedIDs.includes(id))
             let insertAt = toIndex
             if (fromIndex < toIndex) {
               insertAt = toIndex - draggedIDs.length + 1
             }
-  
+
             if (sub.id === targetSubID) {
               draggedIDs.forEach((id, i) => {
                 updated.splice(insertAt + i, 0, id)
               })
             }
-  
+
             return { ...sub, unitIDs: updated }
           })
         }))
       )
     }
-  
-    // Reset selection
+
     setSelectedPlaygroundIDs(new Set())
     setSelectedEditorIDs(new Set())
     setLastSelectedPlaygroundIndex(null)
     setLastSelectedEditorIndex(null)
   }
-  
-  
-
 
   useEffect(() => {
     fetch('http://127.0.0.1:8000/units')
@@ -152,19 +189,27 @@ function App() {
   }, [])
 
   return (
-    <DndContext
-      sensors={sensors}
-      onDragEnd={handleDragEnd}
-    >
-      <div
-        style={{
-          display: 'flex',
-          height: '100vh',
-          width: '100vw',
-          backgroundColor: '#1a1a1a',
-          color: '#eee',
-        }}
-      >
+    <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
+      <div style={{
+        padding: '0.5rem 1rem',
+        backgroundColor: '#111',
+        borderBottom: '1px solid #333',
+        display: 'flex',
+        gap: '0.7rem'
+      }}>
+        <button onClick={saveStructureToLocal} style={buttonStyle}>💾 Speichern</button>
+        <button onClick={loadStructureFromLocal} style={buttonStyle}>📂 Laden</button>
+        <button onClick={resetEditorView} style={buttonStyle}>🔄 Zurücksetzen (UI)</button>
+        <button onClick={deleteSavedStructure} style={buttonStyle}>🗑 Speicher löschen</button>
+      </div>
+
+      <div style={{
+        display: 'flex',
+        height: '100vh',
+        width: '100vw',
+        backgroundColor: '#1a1a1a',
+        color: '#eee',
+      }}>
         <div style={{ width: '25%', borderRight: '1px solid #333', padding: '1rem', overflowY: 'auto' }}>
           <TreeSidebar units={units} playground={playground} setPlayground={setPlayground} />
         </div>
@@ -180,7 +225,7 @@ function App() {
               setSelectedIDs={setSelectedPlaygroundIDs}
               lastSelectedIndex={lastSelectedPlaygroundIndex}
               setLastSelectedIndex={setLastSelectedPlaygroundIndex}
-              setPlayground={setPlayground}  // ⬅️ hinzufügen
+              setPlayground={setPlayground}
             />
           )}
         </div>
@@ -199,6 +244,16 @@ function App() {
       </div>
     </DndContext>
   )
+}
+
+const buttonStyle = {
+  backgroundColor: '#333',
+  color: '#eee',
+  padding: '0.3rem 0.7rem',
+  borderRadius: '4px',
+  border: '1px solid #555',
+  fontSize: '0.75rem',
+  cursor: 'pointer'
 }
 
 export default App
