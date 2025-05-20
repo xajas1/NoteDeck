@@ -62,8 +62,6 @@ export default function TreePlaygroundView({
     })
   }
 
-  let globalIndex = 0
-
   return (
     <div style={{ fontFamily: 'monospace', fontSize: '0.68rem', color: '#eee' }}>
       <div style={{ marginBottom: '0.5rem' }}>
@@ -109,7 +107,7 @@ export default function TreePlaygroundView({
                 <ul style={styles.ul}>
                   {ids.map((uid) => {
                     const unit = getFullUnitByID(uid)
-                    const index = globalIndex++
+                    const index = playground.findIndex(p => p.UnitID === uid)
                     return (
                       <DraggableLine
                         key={uid}

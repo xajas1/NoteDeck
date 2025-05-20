@@ -168,44 +168,42 @@ function App() {
 
     const draggedIDs = active?.data?.current?.draggedIDs || [active.id.split('__').pop()]
     const targetSubID = over.id.includes('__') ? over.id.split('__')[0] : over.id
-    const targetIndexUnit = over.id.includes('__') ? over.id.split('__')[1] : null
+    const targetUnitID = over.id.includes('__') ? over.id.split('__')[1] : null
 
-    setStructure(prev =>
-      prev.map(section => ({
+    setStructure(prev => {
+      return prev.map(section => ({
         ...section,
         subsections: section.subsections.map(sub => {
-          let current = [...sub.unitIDs]
-          const fromIndex = current.indexOf(draggedIDs[0])
-          const toIndex = targetIndexUnit ? current.indexOf(targetIndexUnit) : current.length
+          const isTarget = sub.id === targetSubID
+          const original = sub.unitIDs
 
-          if (fromIndex === -1 && sub.id !== targetSubID) {
-            return {
-              ...sub,
-              unitIDs: current.filter(id => !draggedIDs.includes(id))
-            }
+          const cleaned = original.filter(id => !draggedIDs.includes(id))
+
+          if (!isTarget) return { ...sub, unitIDs: cleaned }
+
+          let insertAt = cleaned.length
+          if (targetUnitID) {
+            const targetIndexOriginal = original.indexOf(targetUnitID)
+            const firstDraggedIndex = Math.min(...draggedIDs.map(id => original.indexOf(id)).filter(i => i !== -1))
+            const direction = firstDraggedIndex < targetIndexOriginal ? 'down' : 'up'
+            let correctedIndex = cleaned.findIndex(id => id === targetUnitID)
+            if (correctedIndex === -1) correctedIndex = cleaned.length
+            if (direction === 'down') correctedIndex++
+            insertAt = Math.min(correctedIndex, cleaned.length)
           }
 
-          let updated = current.filter(id => !draggedIDs.includes(id))
-          let insertAt = toIndex
-          if (fromIndex < toIndex) {
-            insertAt = toIndex - draggedIDs.length + 1
-          }
-
-          if (sub.id === targetSubID) {
-            draggedIDs.forEach((id, i) => {
-              updated.splice(insertAt + i, 0, id)
-            })
-          }
-
-          return { ...sub, unitIDs: updated }
+          const result = [...cleaned]
+          result.splice(insertAt, 0, ...draggedIDs)
+          return { ...sub, unitIDs: result }
         })
       }))
-    )
+    })
 
+    const fullIDs = draggedIDs.map(uid => `${targetSubID}__${uid}`)
+    setSelectedEditorIDs(new Set(fullIDs))
+    setLastSelectedEditorIndex(null)
     setSelectedIDs(new Set())
     setLastSelectedIndex(null)
-    setSelectedEditorIDs(new Set())
-    setLastSelectedEditorIndex(null)
   }
 
   useEffect(() => {
@@ -300,10 +298,23 @@ function App() {
 
         {/* Main content area */}
         <div style={{ display: 'flex', flexGrow: 1, height: 0 }}>
-          <div style={{ width: '20%', borderRight: '1px solid #333', padding: '1rem', overflowY: 'auto', height: '100%' }}>
+          <div style={{
+            width: '20%',
+            borderRight: '1px solid #333',
+            padding: '1rem',
+            overflowY: 'auto',
+            overscrollBehavior: 'contain',
+            height: '100%'
+          }}>
             <TreeSidebar units={units} playground={playground} setPlayground={setPlayground} />
           </div>
-          <div style={{ width: '35%', padding: '1.5rem', overflowY: 'auto', height: '100%' }}>
+          <div style={{
+            width: '35%',
+            padding: '1.5rem',
+            overflowY: 'auto',
+            overscrollBehavior: 'contain',
+            height: '100%'
+          }}>
             <h2 style={{ marginBottom: '1rem' }}>Ausgewählte Einheiten (Tree)</h2>
             {loading ? (
               <p>⏳ Lade Inhalte …</p>
@@ -319,7 +330,14 @@ function App() {
               />
             )}
           </div>
-          <div style={{ width: '45%', padding: '1.5rem', borderLeft: '1px solid #333', overflowY: 'auto', height: '100%' }}>
+          <div style={{
+            width: '45%',
+            padding: '1.5rem',
+            borderLeft: '1px solid #333',
+            overflowY: 'auto',
+            overscrollBehavior: 'contain',
+            height: '100%'
+          }}>
             <h2 style={{ marginBottom: '1rem' }}>📦 Struktur (Tree)</h2>
             <TreeEditorView
               structure={structure}

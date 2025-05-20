@@ -7,6 +7,7 @@ import {
 } from '@dnd-kit/sortable'
 import { useDroppable } from '@dnd-kit/core'
 import { CSS } from '@dnd-kit/utilities'
+import React from 'react'
 
 export default function TreeEditorView({
   structure,
@@ -128,9 +129,9 @@ function SortableSection({
   } = useSortable({ id: section.id, data: { type: 'section' } })
 
   const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-    opacity: isDragging ? 0.5 : 1,
+    // transform: CSS.Transform.toString(transform),
+    // transition,
+    opacity: 1,
     marginBottom: '1.5rem'
   }
 
@@ -267,24 +268,27 @@ function SortableSubsection({
               const fullID = `${subsection.id}__${uid}`
               const unit = getUnitByID(uid)
               return (
-                <SortableUnit
-                  key={fullID}
-                  id={fullID}
-                  uid={uid}
-                  fullID={fullID}
-                  index={index}
-                  ctyp={unit?.CTyp}
-                  name={unit?.Content}
-                  isSelected={selectedEditorIDs.has(fullID)}
-                  selectedEditorIDs={selectedEditorIDs}
-                  toggleSelection={toggleSelection}
-                  lastSelectedEditorIndex={lastSelectedEditorIndex}
-                  setLastSelectedEditorIndex={setLastSelectedEditorIndex}
-                  allIDs={allIDs}
-                  setStructure={setStructure}
-                />
+                <React.Fragment key={fullID}>
+                  <DropSlot id={fullID} />
+                  <SortableUnit
+                    id={fullID}
+                    uid={uid}
+                    fullID={fullID}
+                    index={index}
+                    ctyp={unit?.CTyp}
+                    name={unit?.Content}
+                    isSelected={selectedEditorIDs.has(fullID)}
+                    selectedEditorIDs={selectedEditorIDs}
+                    toggleSelection={toggleSelection}
+                    lastSelectedEditorIndex={lastSelectedEditorIndex}
+                    setLastSelectedEditorIndex={setLastSelectedEditorIndex}
+                    allIDs={allIDs}
+                    setStructure={setStructure}
+                  />
+                </React.Fragment>
               )
             })}
+            <DropSlot id={subsection.id} />
           </ul>
         </SortableContext>
       )}
@@ -388,6 +392,11 @@ function SortableUnit({
   )
 }
 
+function DropSlot({ id }) {
+  const { isOver, setNodeRef } = useDroppable({ id })
+  return <div ref={setNodeRef}>{isOver && <div style={styles.dropLine} />}</div>
+}
+
 const styles = {
   button: {
     backgroundColor: '#333',
@@ -434,5 +443,11 @@ const styles = {
     listStyle: 'none',
     paddingLeft: '0.6rem',
     margin: 0
+  },
+  dropLine: {
+    height: '2px',
+    backgroundColor: '#4fc3f7',
+    borderRadius: '1px',
+    margin: '2px 0'
   }
 }
