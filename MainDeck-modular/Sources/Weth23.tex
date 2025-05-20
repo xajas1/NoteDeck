@@ -205,8 +205,14 @@ Kurze Beschreibung …
 
 \section*{$\S 1$ Einführung und Vorbereitungen}
 
-Ziel dieser Vorlesung ist eine Einführung in die Lösungstheorie einer Klasse von nichtlinearen partiellen Differentialgleichungen. Aus Zeitgründen müssen wir uns dabei im Wesentlichen auf semilineare elliptische Gleichungen zweiter Ordnung und zugehörige Randwertprobleme beschränken. In diesem Fall lassen sich die in der einführenden Vorlesung über Lineare Partielle Differentialgleichung erlernten Methoden und Prinzipien besonders effektiv anwenden. Dies betrifft insbesondere Maximumprinzipien, die Theorie der Sobolevräume und die Regularitätstheorie für schwache Lösungen der Poissongleichung.
 
+
+    \begin{unit}{}
+      Ziel dieser Vorlesung ist eine Einführung in die Lösungstheorie einer Klasse von nichtlinearen partiellen Differentialgleichungen. Aus Zeitgründen müssen wir uns dabei im Wesentlichen auf semilineare elliptische Gleichungen zweiter Ordnung und zugehörige Randwertprobleme beschränken. In diesem Fall lassen sich die in der einführenden Vorlesung über Lineare Partielle Differentialgleichung erlernten Methoden und Prinzipien besonders effektiv anwenden. Dies betrifft insbesondere Maximumprinzipien, die Theorie der Sobolevräume und die Regularitätstheorie für schwache Lösungen der Poissongleichung.
+    \end{unit}
+
+    
+    
 In dieser Vorlesung werden, exemplarisch für eine größere Klasse ähnlich behandelbarer Randwertprobleme, semilineare Dirichletprobleme der Form
 
 $$
@@ -281,19 +287,21 @@ Wir testen auf Veränderung.
 
 
 
-Beweis. Die eindeutige Existenz der schwachen Lösung folgt aus LPDGL 7.10. Man beachte hierzu, dass die Bedingung $q \geq 0$ die Koerzivität der zu $L=-\Delta+q$ gehörenden Dirichletform $a_{L}$ liefert.
+    \begin{unit}{A-1-3-4}
+      Beweis. Die eindeutige Existenz der schwachen Lösung folgt aus LPDGL 7.10. Man beachte hierzu, dass die Bedingung $q \geq 0$ die Koerzivität der zu $L=-\Delta+q$ gehörenden Dirichletform $a_{L}$ liefert.
 
-Die Eigenschaft (i) haben wir in LPDGL 10.16 notiert.
-
-Zum Beweis von (ii) bemerken wir zunächst, dass gemäß LPDGL 10.12 für $1<p<$ $\infty$ die Ungleichung
-
-$$
-\|u\|_{W^{2, p}\left(\Omega^{\prime}\right)} \leq C\left(\|u\|_{L^{1}(\Omega)}+\|f-q u\|_{L^{p}(\Omega)}\right) \leq \tilde{C}\left(\|u\|_{L^{\infty}(\Omega)}+\|f\|_{L^{\infty}}\right)
-$$
-
-mit Konstanten $C, \tilde{C}>0$ gilt (lokale $L^{p}$-Regularität).
-
-Wählt man speziell $p>N$, so erhält man die Abschätzung für $\|u\|_{C^{1}\left(\Omega^{\prime}\right)}$ nach Anpassung von $\Omega^{\prime}$ in (1.2) aus der in LPDGL 10.13 notierten lokalen Sobolev-Einbettung. Die Eigenschaft (iii) haben wir in LPDGL 10.22 bewiesen.
+      Die Eigenschaft (i) haben wir in LPDGL 10.16 notiert.
+      
+      Zum Beweis von (ii) bemerken wir zunächst, dass gemäß LPDGL 10.12 für $1<p<$ $\infty$ die Ungleichung
+      
+      $$
+      \|u\|_{W^{2, p}\left(\Omega^{\prime}\right)} \leq C\left(\|u\|_{L^{1}(\Omega)}+\|f-q u\|_{L^{p}(\Omega)}\right) \leq \tilde{C}\left(\|u\|_{L^{\infty}(\Omega)}+\|f\|_{L^{\infty}}\right)
+      $$
+      
+      mit Konstanten $C, \tilde{C}>0$ gilt (lokale $L^{p}$-Regularität).
+      
+      Wählt man speziell $p>N$, so erhält man die Abschätzung für $\|u\|_{C^{1}\left(\Omega^{\prime}\right)}$ nach Anpassung von $\Omega^{\prime}$ in (1.2) aus der in LPDGL 10.13 notierten lokalen Sobolev-Einbettung. Die Eigenschaft (iii) haben wir in LPDGL 10.22 bewiesen.
+    \end{unit}
 
 
 \subsection*{Satz}

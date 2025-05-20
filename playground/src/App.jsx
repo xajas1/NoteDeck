@@ -61,6 +61,26 @@ function App() {
     alert(`✅ Projekt '${activeProject}' gespeichert.`)
   }
 
+  const backupAllProjects = () => {
+    Object.entries(projects).forEach(([name, data]) => {
+      const payload = {
+        projectName: name,
+        structure: data.structure || [],
+        playground: data.playground || []
+      }
+
+      fetch(`http://127.0.0.1:8000/export-project/${name}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      }).then(res => res.json())
+        .then(r => console.log(`✅ Backup: ${name}`, r))
+        .catch(err => console.warn(`❌ Fehler bei ${name}`, err))
+    })
+
+    alert("📦 Alle Projekte gesichert.")
+  }
+
   const loadProject = (name) => {
     const entry = projects[name]
     if (!entry) return
@@ -182,13 +202,11 @@ function App() {
       }))
     )
 
-    // Auswahl zurücksetzen nach Drag & Drop
     setSelectedIDs(new Set())
     setLastSelectedIndex(null)
     setSelectedEditorIDs(new Set())
     setLastSelectedEditorIndex(null)
   }
-
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -198,12 +216,33 @@ function App() {
         setSelectedEditorIDs(new Set())
         setLastSelectedEditorIndex(null)
       }
+      if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key.toLowerCase() === "s") {
+        e.preventDefault()
+        backupAllProjects()
+      }
     }
-  
+
+    const handleBeforeUnload = () => {
+      if (!activeProject || !projects[activeProject]) return
+      const body = {
+        projectName: activeProject,
+        structure,
+        playground
+      }
+      navigator.sendBeacon(
+        `http://127.0.0.1:8000/export-project/${activeProject}`,
+        new Blob([JSON.stringify(body)], { type: 'application/json' })
+      )
+    }
+
     window.addEventListener("keydown", handleKeyDown)
-    return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [])
-  
+    window.addEventListener("beforeunload", handleBeforeUnload)
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown)
+      window.removeEventListener("beforeunload", handleBeforeUnload)
+    }
+  }, [activeProject, structure, playground, projects])
+
   useEffect(() => {
     fetch('http://127.0.0.1:8000/units')
       .then(res => res.json())
@@ -230,15 +269,7 @@ function App() {
 
   return (
     <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-      <div style={{
-        height: '100vh',
-        width: '100vw',
-        backgroundColor: '#1a1a1a',
-        color: '#eee',
-        display: 'flex',
-        flexDirection: 'column'
-      }}>
-        
+      <div style={{ height: '100vh', width: '100vw', backgroundColor: '#1a1a1a', color: '#eee', display: 'flex', flexDirection: 'column' }}>
         {/* Topbar */}
         <div style={{ padding: '0.5rem 1rem', display: 'flex', alignItems: 'center', gap: '0.7rem', borderBottom: '1px solid #444', backgroundColor: '#111' }}>
           <span>Projekt:</span>
@@ -247,9 +278,15 @@ function App() {
             onChange={e => loadProject(e.target.value)}
             style={{ padding: '0.2rem 0.4rem', backgroundColor: '#222', color: '#eee', border: '1px solid #555' }}
           >
-            {Object.keys(projects).map(name => (
-              <option key={name} value={name}>{name}</option>
-            ))}
+            {Object.keys(projects).map(name => {
+              const isDirty =
+                name === activeProject &&
+                (JSON.stringify(projects[name]?.structure) !== JSON.stringify(structure) ||
+                 JSON.stringify(projects[name]?.playground) !== JSON.stringify(playground))
+              return (
+                <option key={name} value={name}>{isDirty ? `${name} *` : name}</option>
+              )
+            })}
           </select>
           <button onClick={renameProject} style={topbarButton}>📝 Umbenennen</button>
           <button onClick={createNewProject} style={topbarButton}>➕ Neu</button>
@@ -258,25 +295,15 @@ function App() {
           <button onClick={resetToSavedProjectState} style={topbarButton}>↩ Wiederherstellen</button>
           <button onClick={() => deleteProject(activeProject)} style={topbarButton}>🗑️ Löschen</button>
           <ExportButton projectName={activeProject} structure={structure} />
+          <button onClick={backupAllProjects} style={{ ...topbarButton, backgroundColor: '#446' }}>📦 Backup alle</button>
         </div>
 
         {/* Main content area */}
         <div style={{ display: 'flex', flexGrow: 1, height: 0 }}>
-          <div style={{
-            width: '20%',
-            borderRight: '1px solid #333',
-            padding: '1rem',
-            overflowY: 'auto',
-            height: '100%'
-          }}>
+          <div style={{ width: '20%', borderRight: '1px solid #333', padding: '1rem', overflowY: 'auto', height: '100%' }}>
             <TreeSidebar units={units} playground={playground} setPlayground={setPlayground} />
           </div>
-          <div style={{
-            width: '35%',
-            padding: '1.5rem',
-            overflowY: 'auto',
-            height: '100%'
-          }}>
+          <div style={{ width: '35%', padding: '1.5rem', overflowY: 'auto', height: '100%' }}>
             <h2 style={{ marginBottom: '1rem' }}>Ausgewählte Einheiten (Tree)</h2>
             {loading ? (
               <p>⏳ Lade Inhalte …</p>
@@ -292,13 +319,7 @@ function App() {
               />
             )}
           </div>
-          <div style={{
-            width: '45%',
-            padding: '1.5rem',
-            borderLeft: '1px solid #333',
-            overflowY: 'auto',
-            height: '100%'
-          }}>
+          <div style={{ width: '45%', padding: '1.5rem', borderLeft: '1px solid #333', overflowY: 'auto', height: '100%' }}>
             <h2 style={{ marginBottom: '1rem' }}>📦 Struktur (Tree)</h2>
             <TreeEditorView
               structure={structure}

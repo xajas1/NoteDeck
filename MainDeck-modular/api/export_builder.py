@@ -4,35 +4,40 @@ from pathlib import Path
 from glob import glob
 
 def build_tex_file(project_name: str):
-    # Absoluter Einstiegspunkt: MainDeck-modular/
+    # Hauptverzeichnis
     base_dir = Path(__file__).resolve().parents[1]
-    export_path = base_dir / "Export" / f"{project_name}.json"
-    modules_path = base_dir / "Library" / "Module"       # ← angepasst!
-    scripts_dir = base_dir / "Library" / "Scripts"
-    scripts_dir.mkdir(parents=True, exist_ok=True)
 
-    # Suche vorhandene Dateien wie Test.tex, Test_v1.tex, Test_v2.tex, ...
-    existing_versions = glob(str(scripts_dir / f"{project_name}*.tex"))
+    export_path   = base_dir / "Export" / f"{project_name}.json"
+    modules_path  = base_dir / "Library" / "Module"
+    scripts_base  = base_dir / "Library" / "Scripts"
+    project_dir   = scripts_base / project_name
+    header_path   = scripts_base / "header.tex"
+
+    # Erstelle Zielordner für dieses Projekt
+    project_dir.mkdir(parents=True, exist_ok=True)
+
+    # Finde vorhandene Tex-Versionen in diesem Projektordner
+    existing_versions = glob(str(project_dir / f"{project_name}_v*.tex"))
     version = 1
-    while (scripts_dir / f"{project_name}_v{version}.tex").exists():
+    while (project_dir / f"{project_name}_v{version}.tex").exists():
         version += 1
 
-    output_path = scripts_dir / f"{project_name}_v{version}.tex"
-    header_path = base_dir / "Library" / "Scripts" / "header.tex"
+    output_path = project_dir / f"{project_name}_v{version}.tex"
 
     if not export_path.exists():
         raise FileNotFoundError(f"❌ JSON-Struktur nicht gefunden: {export_path}")
     if not header_path.exists():
         raise FileNotFoundError(f"❌ Header-Datei fehlt: {header_path}")
 
+    # Lade Daten
     with open(export_path, "r", encoding="utf-8") as f:
         project_data = json.load(f)
 
     with open(header_path, "r", encoding="utf-8") as f:
         header = f.read()
 
+    # Füge Inhalte zusammen
     body_lines = []
-
     for section in project_data["structure"]:
         body_lines.append(f"\\section{{{section['name']}}}\n")
         for sub in section["subsections"]:
@@ -45,11 +50,10 @@ def build_tex_file(project_name: str):
                 else:
                     body_lines.append(f"% ⚠️ FEHLT: {uid}.tex\n")
 
-    content = header.replace("……CONTENT", "\n".join(body_lines).strip())
+    tex_content = header.replace("……CONTENT", "\n".join(body_lines).strip())
 
-    output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "w", encoding="utf-8") as f:
-        f.write(content)
+        f.write(tex_content)
 
     print(f"✅ Export abgeschlossen: {output_path.relative_to(base_dir)}")
 

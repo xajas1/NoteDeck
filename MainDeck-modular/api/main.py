@@ -16,9 +16,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-LIB_JSON = Path("../Library/Library.json").resolve()
-EXPORT_DIR = Path("../Export").resolve()
-EXPORT_SCRIPT = Path("export_builder.py").resolve()
+BASE_DIR       = Path(__file__).resolve().parents[1]
+LIB_JSON       = BASE_DIR / "Library" / "Library.json"
+EXPORT_DIR     = BASE_DIR / "Export"
+EXPORT_SCRIPT  = Path("export_builder.py").resolve()
+
 
 def load_units():
     if not LIB_JSON.exists():
@@ -41,16 +43,24 @@ def get_units(subject: str | None = None,
 
 
 @app.post("/export-project/{project_name}")
-async def export_project(project_name: str, request: Request):
-    """Empfängt Struktur als JSON und erzeugt .tex-Datei."""
+async def backup_project_only_json(project_name: str, request: Request):
+    """🧠 Nur JSON-Struktur sichern. Kein .tex Export."""
     try:
-        # 1. JSON-Struktur vom Frontend empfangen
         body = await request.json()
         EXPORT_DIR.mkdir(parents=True, exist_ok=True)
         json_path = EXPORT_DIR / f"{project_name}.json"
         json_path.write_text(json.dumps(body, indent=2, ensure_ascii=False), encoding="utf-8")
 
-        # 2. Python-Skript aufrufen
+        return {"status": "ok", "path": str(json_path.relative_to(BASE_DIR))}
+
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+
+
+@app.post("/export-tex/{project_name}")
+def export_tex_file(project_name: str):
+    """📄 Rufe das Tex-Erzeugungs-Skript auf."""
+    try:
         subprocess.run(
             ["python3", str(EXPORT_SCRIPT), project_name],
             cwd=os.path.dirname(__file__),
@@ -58,8 +68,7 @@ async def export_project(project_name: str, request: Request):
             capture_output=True,
             text=True
         )
-
-        return {"status": "success", "message": f"Projekt {project_name} erfolgreich exportiert."}
+        return {"status": "success", "message": f"{project_name} wurde als .tex exportiert."}
 
     except subprocess.CalledProcessError as e:
         return {"status": "error", "message": e.stderr.strip() or str(e)}

@@ -1,0 +1,35 @@
+# 🧠 NoteDeck – Projekt-Wiederherstellung nach VS Code Neustart
+
+## 🔁 Schnellstart nach Neustart von VS Code
+
+Wenn du VS Code oder deinen Rechner neu gestartet hast, kannst du NoteDeck einfach mit diesen Schritten erneut starten und auf alle deine Projekte zugreifen:
+
+---
+
+### 🧪 Schritt 1: Backend (FastAPI) starten
+
+1. Öffne das Terminal in VS Code oder macOS Terminal.
+2. Aktiviere dein virtuelles Python-Environment (sofern noch nicht aktiv):
+
+```bash
+cd /Users/tim/NoteDeck/MainDeck-modular/api
+source venv/bin/activate  # oder: . venv/bin/activate
+
+
+3. Starte den API-Server:
+
+uvicorn main:app --reload
+
+
+
+Schritt 2: Frontend (playground) starten
+
+
+1. Öffne ein zweites Terminalfenster oder neuen Tab.
+2. Navigiere in dein Frontend:
+cd /Users/tim/NoteDeck/playground
+
+3. Starte den Entwicklungsserver:
+npm run dev
+
+Die GUI ist jetzt unter http://localhost:5173 verfügbar.
