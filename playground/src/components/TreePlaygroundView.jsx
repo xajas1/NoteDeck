@@ -11,6 +11,7 @@ export default function TreePlaygroundView({
   setPlayground
 }) {
   const [filterCTyp, setFilterCTyp] = useState('')
+  const [filterLitID, setFilterLitID] = useState('')
   const [expandedSubjects, setExpandedSubjects] = useState(new Set())
   const [expandedTopics, setExpandedTopics] = useState({})
   const [expandedSources, setExpandedSources] = useState({})
@@ -22,6 +23,7 @@ export default function TreePlaygroundView({
     const full = getFullUnitByID(unit.UnitID)
     if (!full) continue
     if (filterCTyp && full.CTyp !== filterCTyp) continue
+    if (filterLitID && full.LitID !== filterLitID) continue
 
     const subject = full.Subject || '⟨Ohne Subject⟩'
     const topic = full.Topic || '⟨Ohne Topic⟩'
@@ -87,7 +89,8 @@ export default function TreePlaygroundView({
             border: '1px solid #444',
             padding: '0.15rem 0.4rem',
             borderRadius: '4px',
-            fontSize: '0.68rem'
+            fontSize: '0.68rem',
+            marginRight: '1rem'
           }}
         >
           <option value="">— Alle —</option>
@@ -98,6 +101,25 @@ export default function TreePlaygroundView({
           <option value="EXA">Beispiele</option>
           <option value="REM">Bemerkungen</option>
           <option value="STUD">Studienfragen</option>
+        </select>
+
+        <label style={{ marginRight: '0.4rem' }}>Filter by LitID:</label>
+        <select
+          value={filterLitID}
+          onChange={(e) => setFilterLitID(e.target.value)}
+          style={{
+            backgroundColor: '#1e1e1e',
+            color: '#eee',
+            border: '1px solid #444',
+            padding: '0.15rem 0.4rem',
+            borderRadius: '4px',
+            fontSize: '0.68rem'
+          }}
+        >
+          <option value="">— Alle Quellen —</option>
+          {[...new Set(units.map(u => u.LitID).filter(Boolean))].map(id => (
+            <option key={id} value={id}>{id}</option>
+          ))}
         </select>
       </div>
 
