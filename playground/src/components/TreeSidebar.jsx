@@ -30,7 +30,9 @@ export default function TreeSidebar({ units, playground, setPlayground }) {
 
     for (const u of units) {
       const subject = u.Subject
-      const pathParts = u.TopicPath.split('/')
+      const source = u.LitID || '⟨Ohne Quelle⟩'
+      const pathParts = [...u.TopicPath.split('/'), source]
+
       let node = tree[subject] ??= {}
 
       for (const part of pathParts) {

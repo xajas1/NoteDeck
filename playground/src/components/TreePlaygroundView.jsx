@@ -1,4 +1,3 @@
-// playground/src/components/TreePlaygroundView.jsx
 import { useDraggable } from '@dnd-kit/core'
 import { useState } from 'react'
 
@@ -14,6 +13,7 @@ export default function TreePlaygroundView({
   const [filterCTyp, setFilterCTyp] = useState('')
   const [expandedSubjects, setExpandedSubjects] = useState(new Set())
   const [expandedTopics, setExpandedTopics] = useState({})
+  const [expandedSources, setExpandedSources] = useState({})
 
   const getFullUnitByID = (id) => units.find(u => u.UnitID === id)
 
@@ -25,9 +25,12 @@ export default function TreePlaygroundView({
 
     const subject = full.Subject || '⟨Ohne Subject⟩'
     const topic = full.Topic || '⟨Ohne Topic⟩'
-    if (!grouped[subject]) grouped[subject] = {}
-    if (!grouped[subject][topic]) grouped[subject][topic] = []
-    grouped[subject][topic].push(unit.UnitID)
+    const source = full.LitID || '⟨Ohne Quelle⟩'
+
+    grouped[subject] ??= {}
+    grouped[subject][topic] ??= {}
+    grouped[subject][topic][source] ??= []
+    grouped[subject][topic][source].push(unit.UnitID)
   }
 
   const toggleSubject = (subject) => {
@@ -42,6 +45,15 @@ export default function TreePlaygroundView({
     current.has(topic) ? current.delete(topic) : current.add(topic)
     next[subject] = current
     setExpandedTopics(next)
+  }
+
+  const toggleSource = (subject, topic, source) => {
+    const key = `${subject}/${topic}`
+    const next = { ...expandedSources }
+    const current = new Set(next[key] || [])
+    current.has(source) ? current.delete(source) : current.add(source)
+    next[key] = current
+    setExpandedSources(next)
   }
 
   const toggleSelection = (uid, index, shift = false) => {
@@ -96,34 +108,46 @@ export default function TreePlaygroundView({
               {expandedSubjects.has(subject) ? '▼' : '▶'} {subject}
             </span>
           </div>
-          {expandedSubjects.has(subject) && Object.entries(topics).map(([topic, ids]) => (
+          {expandedSubjects.has(subject) && Object.entries(topics).map(([topic, sources]) => (
             <div key={topic} style={{ paddingLeft: '0.8rem' }}>
               <div style={styles.topic} onClick={() => toggleTopic(subject, topic)}>
                 <span style={{ cursor: 'pointer' }}>
                   {(expandedTopics[subject]?.has(topic)) ? '▼' : '▶'} {topic}
                 </span>
               </div>
-              {expandedTopics[subject]?.has(topic) && (
-                <ul style={styles.ul}>
-                  {ids.map((uid) => {
-                    const unit = getFullUnitByID(uid)
-                    const index = playground.findIndex(p => p.UnitID === uid)
-                    return (
-                      <DraggableLine
-                        key={uid}
-                        uid={uid}
-                        ctyp={unit?.CTyp}
-                        name={unit?.Content}
-                        isSelected={selectedIDs.has(uid)}
-                        selectedIDs={selectedIDs}
-                        onClick={(e) => toggleSelection(uid, index, e.shiftKey)}
-                        setSelectedIDs={setSelectedIDs}
-                        setPlayground={setPlayground}
-                      />
-                    )
-                  })}
-                </ul>
-              )}
+              {expandedTopics[subject]?.has(topic) && Object.entries(sources).map(([source, ids]) => {
+                const key = `${subject}/${topic}`
+                const isSourceOpen = expandedSources[key]?.has(source)
+                return (
+                  <div key={source} style={{ paddingLeft: '1rem' }}>
+                    <div style={{ fontSize: '0.66rem', color: '#aaa', fontStyle: 'italic', cursor: 'pointer' }}
+                      onClick={() => toggleSource(subject, topic, source)}>
+                      {isSourceOpen ? '▼' : '▶'} {source}
+                    </div>
+                    {isSourceOpen && (
+                      <ul style={styles.ul}>
+                        {ids.map((uid) => {
+                          const unit = getFullUnitByID(uid)
+                          const index = playground.findIndex(p => p.UnitID === uid)
+                          return (
+                            <DraggableLine
+                              key={uid}
+                              uid={uid}
+                              ctyp={unit?.CTyp}
+                              name={unit?.Content}
+                              isSelected={selectedIDs.has(uid)}
+                              selectedIDs={selectedIDs}
+                              onClick={(e) => toggleSelection(uid, index, e.shiftKey)}
+                              setSelectedIDs={setSelectedIDs}
+                              setPlayground={setPlayground}
+                            />
+                          )
+                        })}
+                      </ul>
+                    )}
+                  </div>
+                )
+              })}
             </div>
           ))}
         </div>

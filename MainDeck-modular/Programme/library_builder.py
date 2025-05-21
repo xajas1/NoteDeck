@@ -34,7 +34,7 @@ except ValueError as e:
 
 # Spalten‑Alias‑Mapping (robust gegen Groß/Klein)
 aliases = {"unitid": "UnitID", "subject": "Subject", "topic": "Topic",
-           "ctyp": "CTyp", "content": "Content"}
+           "ctyp": "CTyp", "content": "Content", "litid": "LitID"}
 df.columns = [c.strip() for c in df.columns]
 norm = {c.lower(): c for c in df.columns}
 missing = [aliases[k] for k in aliases if k not in norm]
