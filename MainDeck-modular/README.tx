@@ -33,3 +33,15 @@ cd /Users/tim/NoteDeck/playground
 npm run dev
 
 Die GUI ist jetzt unter http://localhost:5173 verfügbar.
+
+
+
+
+
+
+
+
+Tex-Design
+
+\\tag\{(.*?)\}
+% \\tag{$1}

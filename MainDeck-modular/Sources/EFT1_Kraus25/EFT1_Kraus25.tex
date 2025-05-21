@@ -1,0 +1,1626 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17  Graphik
+% 00. Titel und Autor
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\CustomHeading{Definition}{#1}{#2}}{}
+\newenvironment{PROP}[2]{\CustomHeading{Proposition}{#1}{#2}}{}
+\newenvironment{THEO}[2]{\CustomHeading{Theorem}{#1}{#2}}{}
+\newenvironment{LEM}[2]{\CustomHeading{Lemma}{#1}{#2}}{}
+\newenvironment{KORO}[2]{\CustomHeading{Corollar}{#1}{#2}}{}
+\newenvironment{REM}[2]{\CustomHeading{Remark}{#1}{#2}}{}
+\newenvironment{EXA}[2]{\CustomHeading{Example}{#1}{#2}}{}
+\newenvironment{STUD}[2]{\CustomHeading{Study}{#1}{#2}}{}
+\newenvironment{CONC}[2]{\CustomHeading{Concept}{#1}{#2}}{}
+
+\newenvironment{PROOF}
+  {\begin{proof}}%
+{\end{proof}}
+
+% --- Unit Umgebung für Source-Inhalte ---
+\usepackage{mdframed}
+\newmdenv[
+  linewidth=1pt,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftmargin=0cm,
+  rightmargin=0cm,
+  skipabove=10pt,
+  skipbelow=10pt,
+  innertopmargin=0.5\baselineskip,
+  innerbottommargin=0.5\baselineskip,
+  backgroundcolor=gray!10,
+  linecolor=gray
+]{unitbox}
+
+\newenvironment{unit}[1]
+  {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
+  {\end{unitbox}}
+
+% --- 17. Graphik ---
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+
+% --- 00. Titel und Autor ---
+\title{Eichfeldtheorie 1}
+\author{Tim Jaschik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+Kurze Beschreibung …
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\tableofcontents
+
+\pagebreak
+
+
+\section{1 Faserbündel}
+Soweit nichts anderes gesagt ist, sind in dieser Vorlesung Mannigfaltigkeiten und Abbildungen stets als differenzierbar vorausgesetzt.
+
+\subsection*{1.1 Definition}
+a) Seien $E, M$ und $F$ differenzierbare Mannigfaltikeiten und $\pi: E \rightarrow M$ eine differenzierbare Abbildung. Dann heißt ( $E, \pi, M$ ) eine lokal triviale Faserung mit typischer Faser $F$, wenn es zu jedem $x \in M$ eine offene Umgebung $U$ gibt und einen Diffeomorphismus $\varphi: \pi^{-1}(U):=E \mid U \rightarrow$ $U \times F$, sodass
+
+$$
+\begin{array}{lll}
+E \mid U & \xrightarrow{\varphi} & U \times F \\
+\pi \searrow & & \swarrow p r_{1} \\
+& U &
+\end{array}
+$$
+
+kommutiert. Man spricht auch von der lokal trivialen Faserung $E \rightarrow M$ oder $E$.\\
+b) Ist $F=\mathbb{R}^{k}$ und ist $\pi^{-1}(x)$ ein $k$-dimensionaler Vektorraum und $p r_{2} \circ$ $\left.\varphi\right|_{\pi^{-1}(x)}: \pi^{-1}(x) \rightarrow \mathbb{R}^{k}$ ein Isomorphismus, so heißt $E$ ein Vektorraumbündel der Dimension $k$.
+
+\subsection*{1.2 Beispiele}
+a) $p r_{1}: U \times F \rightarrow U$ ist eine lokal triviale Faserung.\\
+b) $T M:=\bigcup_{x \in M} T_{x} M \rightarrow M$ mit der üblichen differenzierbaren Struktur ist ein $\operatorname{dim} M$-dimensionales Vektorraumbündel. Denn ist ( $U, h$ ) eine Karte für $M$ und $\left(\partial_{1}^{(h)}, \ldots, \partial_{n}^{(h)}\right)$ Koordinatenbasis auf $U$, so ist
+
+$$
+\bigcup_{x \in U} T_{x} U \rightarrow U \times \mathbb{R}^{n}, \sim \sum_{i=1}^{n} a_{i}(x) \partial_{i}^{(h)}(x) \mapsto\left(x, a_{1}(x), \ldots, a_{n}(x)\right) .
+$$
+
+eine Bündelkarte.\\
+c) Sei $U:=[0,1] / 0 \sim 1 \cong S^{1}$.\\
+$E:=[0,1] \times \mathbb{R} /(0, t) \sim(1,-t) \neq S^{1} \times \mathbb{R}$. Dann ist $\pi: E \rightarrow U,[(x, t)] \mapsto[x]$ ein Vektorraumbündel:
+
+Ist $x \neq[0]$, so wähle $U=(0,1) \subset M$. Dann ist
+
+$$
+\pi^{-1}(U)=\{(x, t) \mid x \in(0,1), t \in \mathbb{R}\} \underset{\varphi}{\cong} U \times \mathbb{R}
+$$
+
+Ist $x=[0]$, so wähle $U=M \backslash\left\{\frac{1}{2}\right\}$ und
+
+$$
+\varphi: \pi^{-1}(U) \rightarrow U \times \mathbb{R},\left\{[(x, t)] \left\lvert\, x \neq \frac{1}{2}\right., t \in \mathbb{R}\right\} \mapsto \begin{cases}([x], t), & 0 \leq x<\frac{1}{2} \\ ([x],-t) & \frac{1}{2}<x \leq 1\end{cases}
+$$
+
+d) $S^{1} \rightarrow S^{1}, z \mapsto z^{2}$ ist eine lokal triviale Faserung mit $F=\mathbb{Z}_{2}$. (Übungsaufgabe: Was ist $\varphi$ ?)
+
+\subsection*{1.3 Definition}
+a) Sei $(E, \pi, M)$ eine lokal triviale Faserung wie in 1.1. Dann heißt $E$ Totalraum, $M$ Basis, $\pi$ Bündelprojektion und $F$ typische Faser.\\
+Für jedes $x \in M$ heißt $E_{x}=\pi^{-1}(x)$ reale Faser an der Stelle $x$.\\
+Für $U \subset M$ offen heißt $\varphi: E \mid U \rightarrow U \times F$ Bündelkarte und
+
+$$
+\left\{\left(U_{\lambda}, \varphi_{\lambda}\right) \mid\left(U_{\lambda}, \varphi_{\lambda}\right) \text { Bündelkarte }, \bigcup_{\lambda \in \Lambda} U_{\lambda}=M\right\}
+$$
+
+heißt Bündelatlas.\\
+Die Abbildung $\varphi_{x}: E_{x} \rightarrow F, \varphi_{x}:=p r_{2} \circ \varphi \mid E_{x}$ heißt Faserkarte.\\
+Sind $(U, \varphi)$ und $(V, \psi)$ Bündelkarten, so heißt die Abbildung
+
+$$
+\omega: U \cap V \rightarrow \operatorname{Diffeo}(F), x \mapsto \psi_{x} \circ \varphi_{x}^{-1}
+$$
+
+der Bündelkartenwechsel zwischen $\varphi$ und $\psi$.
+
+b) Ist $G$ eine Liegruppe und $G \times F \rightarrow F$ eine $G$-Aktion, und gibt es zu jedem Bündelkartenwechsel $\omega$ eine differenzierbare Abbildung
+
+$$
+g: U \cap V \rightarrow G \text { mit } \omega(x)(f)=g(x) f
+$$
+
+so heißt ( $E, \pi, M$ ) ein $G$-Faserbündel mit Strukturgruppe $G$.
+
+c) Ist ( $E, \pi, M$ ) ein $G$-Faserbündel mit typischer Faser $G$ und der durch die Linksmultiplikation mit $G$ gegebenen $G$-Aktion, so heißt ( $E, \pi, M$ ) ein Prinzipalbündel oder Hauptfaserbündel.
+
+\subsection*{1.4 Bemerkung}
+Ist $E \xrightarrow{\pi} M$ ein $k$-dimensionales Vektorraumbündel, so ist der Bündelkartenwechsel zwischen zwei Bündelkarten stets eine differenzierbare Abbildung
+
+$$
+\omega: U \cap V \rightarrow G L(k, \mathbb{R}) \text { bzw. } G L(k, \mathbb{C}) .
+$$
+
+d.h., $E$ ist ein $G L(k, \mathbb{R})$ - bzw. $G L(k, \mathbb{C})$-Faserbündel. Umgekehrt ist jedes $G L(k, \mathbb{R})$-Faserbündel mit typischer Faser $\mathbb{R}^{k}$ ein Vektorraumbündel.
+
+\subsection*{1.5 Definition}
+Ist $E \xrightarrow{\pi} M$ eine lokal triviale Faserung, $U \subseteq M$, so heißt eine differenzierbare Abbildung $\sigma: U \rightarrow E$ (differenzierbarer) lokaler Schnitt, falls $\pi \circ \sigma=\mathrm{id}_{U}$. $\sigma$ heißt Schnitt, falls zusätzlich $U=M$ gilt. Den Raum der differenzierbaren Schnitte bezeichnet man mit $\Gamma E$.
+
+\subsection*{1.6 Beispiele}
+a) $\Gamma(M \times F)=\left\{\sigma: M \rightarrow M \times F \mid \sigma(x)=(x, f(x)), f \in C^{\infty}(M, F)\right\} \cong$ $C^{\infty}(M, F)$.\\
+b) $\Gamma T M=\{$ differenzierbare Vektorfelder auf $M\}$.\\
+c) Jedes Vektorraumbündel hat einen Schnitt $\sigma: M \rightarrow E, x \mapsto O_{x} \in E_{x}$.\\
+d) $T M$ hat im Allgemeinen keinen Schnitt, der nirgends verschwindet, z.B. hat jedes Vektorfeld auf $M=S^{2}$ eine Nullstelle. Aber in $T T^{2}$ existieren zwei an jeder Stelle linear unabhängige Schnitte.\\
+e) Für $S^{1} \rightarrow S^{1}, z \mapsto z^{2}$ gibt es keinen Schnitt.
+
+\subsection*{1.7 Bemerkungen}
+a) Ist $E \rightarrow M$ ein Vektorraumbündel, so ist $\Gamma E$ ein $C^{\infty}(M)$ Vektorraum.\\
+b) Ist $E \rightarrow M$ ein $k$-dimensionales Vektorraumbündel und $\varphi: E \mid U \rightarrow$ $U \times \mathbb{R}^{k}$ eine Bündelkarte, so gibt es $k$ lokale Schnitte auf $U$, die an jeder Stelle $x \in U$ eine Basis von $E_{x}$ bilden, nämlich $\sigma_{j}\left(x^{\prime}\right)=\varphi^{-1}\left(x^{\prime}, e_{j}\right)$ für $x^{\prime} \in U$.\\
+Umgekehrt: Sind auf $U \in M k$ Schnitte gegeben, die an der Stelle eine Basis bilden, so ist auf $U$ eine Bündelkarte durch
+
+$$
+E \mid U \rightarrow U \times \mathbb{R}^{k}, e=\Sigma a_{i}(x) \sigma_{i}(x) \mapsto\left(x, a_{i}(x), \ldots, a_{k}(x)\right)
+$$
+
+definiert.\\
+c) Sind $P \rightarrow M$ ein $G$-Prinzipalbündel und $\varphi: P \mid U \rightarrow U \times G$ eine Bündelkarte, so ist $\sigma: U \rightarrow P, x \mapsto \varphi^{-1}(x, 1)$ ein lokaler Schnitt.
+
+\subsection*{1.8 Definition}
+Seien $G$ eine Liegruppe, $M$ eine Mannigfaltigkeit, $F$ eine $G$-Mannigfaltigkeit und sei für jedes $x \in M$ eine Mannigfaltigkeit $E_{x} \cong F$ gegeben. Sei $E:=$ $\bigcup_{x \in M} E_{x}$ und $\pi: E \rightarrow M$ die kanonische Projektion. Dann heißt $(E, \pi, M)$ ein Präbündel mit Strukturgruppe $G$, falls es um jedes $x \in M$ eine offene Umgebung $U$ gibt und eine bijektive Abbildung
+
+$$
+\varphi: E \mid U=\pi^{-1}(U) \rightarrow U \times F
+$$
+
+sodass
+
+$$
+\begin{array}{rlll}
+\varphi: E \mid U & \longrightarrow & U \times F & \text { kommutiert } \\
+\pi \searrow & & \swarrow p r & \\
+& U & &
+\end{array}
+$$
+
+für je zwei solcher Abbildungen $\varphi, \psi$ eine differenzierbare Abbildung $g_{\varphi, \psi}$ : $U \cap V \rightarrow G$ existiert mit
+
+$$
+\varphi \circ \psi^{-1}(x, v)=\left(x, g_{\varphi, \psi}(x) v\right)
+$$
+
+Die Definitionen aus 1.3 werden entsprechend übertragen, z.B. heißt $\varphi$ dann Präbündelkarte.
+
+\subsection*{1.9 Satz}
+Ist $(E, \pi, M)$ ein Präbündel, dann existiert auf $E$ genau eine Topologie und differenzierbare Struktur, sodass ( $E, \pi, M$ ) ein Faserbündel mit Strukturgruppe $G$ wird und die Präbündelkarten Bündelkarten werden.
+
+Beweisidee: Man definiert $\Omega \subseteq E$ offen: $\Leftrightarrow$ für jede Präbündelkarte $\varphi$ : $E \mid U \rightarrow U \times F$ ist $\varphi(\Omega \cap E \mid U) \subseteq U \times F$ offen.\\
+Ist $(U, \varphi)$ Präbündelkarte von $E$ und o.B.d.A. $(U, h)$ Mannigfaltigkeitskarte für $M$, so definiert man
+
+$$
+\Phi: E \mid U \xrightarrow{\varphi} U \times F \xrightarrow{h} U^{\prime} \times F .
+$$
+
+Zusammen mit Karten für $F$ erhält man dann eine differenzierbare Struktur auf $E$.
+
+\subsection*{1.10 Beispiele}
+a) Die Bündelstruktur $T M$ wurde wie in Satz 1.9 definiert.\\
+b) Sei $E_{x}:=\left\{\left(v_{1}, \ldots, v_{n}\right) \mid\left(v_{1}, \ldots, v_{n}\right)\right.$ Basis von $\left.T_{x} M\right\}, P_{G L}:=\bigcup_{x \in M} E_{x}$. Dann ist $P_{G L}$ ein Präbündel und wird in kanonischer Weise ein $G L(n, \mathbb{R})$ Prinzipalbündel (Beweis in den Übungen).\\
+Analog, falls ( $M, g$ ) Riemannsch ist und $E_{x}:=\left\{\left(v_{1}, \ldots, v_{n}\right) \mid\left(v_{1}, \ldots, v_{n}\right)\right.$ ist Orthonormalbasis von $\left.T_{x} M\right\}$, so ist $P_{O(n)}:=\bigcup_{x \in M} E_{x}$ in kanonischer Weise ein $O(n)$-Prinzipalbündel.
+
+\subsection*{1.11 Korollar}
+Sind $E \rightarrow M$ und $F \rightarrow M$ zwei Vektorraumbündel der Dimension $k$ und $\ell$, so ist
+
+$$
+E \oplus F:=\bigcup_{x \in M} E_{x} \oplus F_{x}
+$$
+
+ein $k+\ell$-dimensionales Prävektorraumbündel, also in kanonischer Weise ein Vektorraumbündel.
+
+\section*{Beweis:}
+Seien ( $U, \varphi$ ) und ( $U, \psi$ ) Bündelkarten für $E$ und $F$. Dann ist durch
+
+$$
+\begin{aligned}
+\phi: \bigcup_{x \in U} E_{x} \oplus F_{x} & \rightarrow U \times\left(\mathbb{R}^{k} \oplus \mathbb{R}^{\ell}\right) \\
+(e, f) & \mapsto\left(\pi_{E}(e)=\pi_{F}(f)=: x, \varphi_{x}(e), \psi_{x}(f)\right)
+\end{aligned}
+$$
+
+eine Präbündelkarte gegeben.\\
+Sind $(U, \tilde{\varphi})$ und $(U, \tilde{\varphi})$ weitere Bündelkarten mit Bündelkartenwechsel $\omega: U \rightarrow$ $G L(k), \eta: U \rightarrow G L(\ell)$, so ist der Bündelkartenwechsel zwischen $\varphi$ und $\tilde{\varphi}$ durch
+
+$$
+U \rightarrow G L(k+\ell), x \mapsto\left(\begin{array}{cc}
+\omega(x) & 0 \\
+0 & \eta(x)
+\end{array}\right)
+$$
+
+gegeben, also differenzierbar.
+
+\subsection*{1.12 Beispiele}
+Sind $E, F$ Vektorraumbündel, so auch\\
+a) $\operatorname{Hom}(E, F)=\bigcup_{x \in M} \operatorname{Hom}\left(E_{x}, F_{x}\right)$.\\
+b) $\operatorname{Mult}^{k}(E, F)$.\\
+c) $\operatorname{Sym}^{k}(E)$.\\
+d) $\operatorname{Alt}^{k}(E)$ usw.
+
+Die Präbündelkartenwechsel können als Übungsaufgabe konstruiert werden.
+
+\subsection*{1.13 Definition}
+Eine Bündelmetrik auf $E$ ist ein Schnitt $g$ in $\operatorname{Sym}^{2}(E)$, sodass $g(x)$ positiv definit ist für jedes $x \in M$.
+
+\subsection*{1.14 Bemerkungen}
+a) Eine Riemannsche Metrik auf $M$ ist eine Bündelmetrik auf $T M$.\\
+b) $\Omega^{k} M=\Gamma \operatorname{Alt}^{k}(T M)$.
+
+\subsection*{1.15 Definition}
+Ein Vektorraumbündel $E \rightarrow M$ heißt von endlichem Typ, wenn es ein Vektorraumbündel $F \rightarrow M$ gibt und ein $N \in \mathbb{N}$, sodass $E \oplus F=M \times \mathbb{R}^{N}$ ist.
+
+\subsection*{1.16 Beispiel}
+$T S^{n}$ ist von endlichem Typ, denn
+
+$$
+T S^{n} \oplus\left(S^{n} \times \mathbb{R}\right)=S^{n} \times \mathbb{R}^{n-1},(v,(x, \lambda)) \mapsto v+\lambda x .
+$$
+
+\subsection*{1.17 Definition}
+a) Seien $\pi_{i}: E_{i} \rightarrow B_{i}, i=1,2$ Faserbündel mit Strukturgruppe $G$ und typischer Faser $F, f_{0}: B_{1} \rightarrow B_{2}$ eine differenzierbare Abbildung, dann heißt eine differenzierbare Abbildung $f: E_{1} \rightarrow E_{2}$ eine Bündelabbildung über $f_{0}$, falls $f_{0} \circ \pi_{1}=\pi_{2} \circ f$ gilt und $f$ bezüglich Bündelkarten durch differenzierbare Abbildungen $\gamma: U \rightarrow G$, genauer durch
+
+$$
+U \times F \rightarrow V \times F,(x, v) \mapsto\left(f_{0}(x), \gamma(x) v\right)
+$$
+
+gegeben ist.\\
+b) Ist zusätzlich $f_{0}=\mathrm{id}$, so heißt $f$ ein Bündelisomorphismus.\\
+c) Ein Bündelisomorphismus $f: E \rightarrow B \times F$ heißt eine Trivialisierung von $E$.\\
+d) Seien jetzt $E_{i} \rightarrow B_{i}$ zwei Vektorraumbündel $f_{0}: B_{1} \rightarrow B_{2}$ eine differenzierbare Abbildung und $f: E_{1} \rightarrow E_{2}$ eine differenzierbare Abbildung über $f_{0}$, so heißt $f$ eine Vektorraumbündelabbildung über $f$, falls $f_{x}:=f \mid E_{1, x}$ linear ist für jedes $x \in M$.\\
+e) Ist $f_{0}=\mathrm{id}$, so heißt $f$ ein Vektorraumbündelhomomorphismus, es ist dann $f \in \Gamma \operatorname{Hom}\left(E_{1}, E_{2}\right)$.
+
+\subsection*{1.18 Beispiel}
+Ist $f: M \rightarrow N$ eine differenzierbare Abbildung, so ist $d f: T M \rightarrow T N$ eine Vektorraumbündelabbildung über $f$.
+
+\subsection*{1.19 Definition und Satz}
+Ist $f: N \rightarrow M$ eine differenzierbare Abbildung, $E \rightarrow M$ ein Faserbündel mit Strukturgruppe $G$, so ist
+
+$$
+p r_{1}: f^{*} E=\left\{(x, e) \mid x \in N, e \in E_{f(x)}\right\} \rightarrow N
+$$
+
+ein Faserbündel mit Strukturgruppe $G$ über $N$, das von $f$ induzierte Bündel. Schnitte in $f^{*} E$ heißen Schnitte in $E$ längs $f$.
+
+\section*{Beweis:}
+Sei $x \in N$ und $(U, \varphi)$ Bündelkarte um $f(x)$ für $E$. Dann ist $\left(f^{-1}(U), \tilde{\varphi}\right)$ mit
+
+$$
+\begin{aligned}
+\tilde{\varphi}:\left\{(x, e) \mid x \in f^{-1}(U), e \in E_{f(x)}\right\}=p r_{1}^{-1}\left(f^{-1}(U)\right) & \longrightarrow f^{-1}(U) \times F \\
+(x, e) & \mapsto\left(x, \varphi_{f(x)}(e)\right)
+\end{aligned}
+$$
+
+eine Präbündelkarte gegeben. Die Kartenwechsel sind dieselben wie die für $E \xrightarrow{\pi} M$, also differenzierbar.
+
+\subsection*{1.20 Beispiel}
+Ist $\gamma: I \rightarrow M$ differenzierbar, so ist $\Gamma\left(\gamma^{*} T M\right)$ die Menge der Vektorfelder längs $\gamma$.
+
+\subsection*{1.21 Beispiel}
+Sei $G_{k, N}=O(N) /(O(k) \times O(N-k))$ die Grassmann-Mannigfaltigkeit und
+
+$$
+\gamma_{k, N}=\left\{(E, v) \in G_{k, N} \times \mathbb{R}^{N} \mid v \in E\right\}
+$$
+
+dann ist $\gamma_{k, N} \rightarrow G_{k, N}$ ein $k$-dimensionales Vektorraumbündel. $\gamma_{k, N}$ ist offenbar von endlichem Typ und ein Vektorraumbündel $E \rightarrow M$ ist genau dann von endlichem Typ, wenn es ein $N$ gibt und eine Abbildung $f: M \rightarrow G_{k, N}$, sodass $E=f^{*} \gamma_{k, N}$ ist.
+
+\subsection*{1.22 Bemerkung}
+Die Abbildung $\hat{f}: f^{*} E \rightarrow E,(x, e) \mapsto e$ ist eine Bündelabbildung über $f$, sodass $\hat{f} \mid\left(f^{*} E\right)_{x}:\left(f^{*} E\right)_{x} \rightarrow E_{f(x)}$ ein Isomorphismus ist für jedes $x$. Ist $g$ : $\widetilde{E} \rightarrow E$ eine weitere Bündelabbildung über $f$, so ist
+
+$$
+\tilde{g}: \widetilde{E} \rightarrow f^{*} E, \tilde{e} \mapsto(\pi(\tilde{e}), g(\tilde{e}))
+$$
+
+ein Bündelisomorphismus mit $\hat{f} \circ \tilde{g}=g$.
+
+\subsection*{1.23 Satz}
+Sei $E \rightarrow B$ ein Faserbündel, seien $f_{0}, f_{1}: X \rightarrow B$ homotope Abbildungen, dann ist $f_{0}^{*} E \cong f_{1}^{*} E$.
+
+\subsection*{1.24 Korollar}
+Ist $B$ zusammenziehbar, also die Identität homotop zur konstanten Abbildung $c: B \rightarrow B, x \mapsto p$, so ist $E \rightarrow B$ trivial, denn $E=\mathrm{id}^{*} E \cong c^{*} E=B \times E_{p}$.
+
+\section*{Beweis des Satzes:}
+Seien $\xi, \xi^{\prime}$ Faserbündel mit Strukturgruppe $G$ und typischer Faser F. Sei
+
+$$
+\operatorname{Iso}_{G}\left(\xi_{x}, \xi_{x}^{\prime}\right):=\left\{f: \xi_{x} \rightarrow \xi_{x}^{\prime} \mid \psi_{x} \circ f \circ \varphi_{x}^{-1}(v)=g \cdot v \text { für ein } g \in G\right\}
+$$
+
+Dann ist $\bigcup_{x \in B} \operatorname{Iso}_{G}\left(\xi_{x}, \xi_{x}^{\prime}\right)$ in kanonischer Weise ein Faserbündel mit typischer Faser $G$ und Strukturgruppe $G \times G$, die Schnitte in $\operatorname{Iso}_{G}\left(\xi_{x}, \xi_{x}^{\prime}\right)$ sind gerade die Bündelisomorphismen. Benutze nun die Homotopiehochhebungseigenschaft: Ist $(X, A)$ ein $C W$-Paar, (z.B. $(M, \partial M)$ ), $Y \rightarrow[0,1] \times X$ eine lokal triviale Faserung, $\sigma_{0}$ ein Schnitt in $Y \mid((0 \times X) \cup([0,1] \times A))$, dann ist $\sigma$ zu einem Schnitt in $Y$ fortsetzbar, vgl. z.B. Husemoller Fiber Bundles oder Hatcher Algebraic Geometry.\\
+Wende dies an auf das Bündel $\operatorname{Iso}_{G}\left([0,1] \times f_{0}^{*} E, h^{*} E\right)$, wobei $h:[0,1] \times X \rightarrow B$ die Homotopie zwiswchen $f_{0}$ und $f_{1}$ ist. Dann ist $\sigma(0, x)=\operatorname{id}_{E_{f_{0}(x)}}$ fortsetzbar zu einem Schnitt $\sigma$, und $\sigma$ und $\sigma(1, \cdot)$ ist der gesuchte Bündelisomorphismus.
+
+\subsection*{1.25 Definition}
+Ist $i: M_{0} \rightarrow M$ die Einbettung einer Untermannigfaltigkeit $M_{0}$ in $M$, so schreibt man statt $i^{*} E$ auch $\left.E\right|_{M_{0}}$.
+
+\subsection*{1.26 Definition}
+Sei $(E, \pi, M)$ ein $k$-dimensionales Vektorraumbündel. Eine Teilmenge $E_{0} \subseteq E$ heißt ein $m$-dimensionales Untervektorraumbündel, falls es um jedes $x \in M$ eine Bündelkarte $(U, \varphi)$ gibt, sodass $\varphi\left(\pi^{-1}(U) \cap E_{0}\right)=U \times \mathbb{R}^{m} \times 0$ ist.
+
+\subsection*{1.27 Bemerkungen}
+a) Ein $m$-dimensionales Untervektorraumbündel ist offenbar ein $m$-dimensionales Vektorraumbündel.\\
+b) Ist $E_{0} \subset E$ ein Untervektorraumbündel, so ist $E / E_{0}$ ein Vektorraumbündel. Ist $M$ mit einer Bündelmetrik $g$ versehen, so ist
+
+$$
+E_{0}^{\perp}:=\bigcup_{x \in M} E_{0, x}^{\perp}=\left\{e \in E_{x}: g(\tilde{e}, e)=0 \text { für alle } \tilde{e} \in E_{0, x}\right\}
+$$
+
+ein Untervektorraumbündel und es gilt: $E_{0}^{\perp} \cong E / E_{0}$.\\
+c) Ist $M_{0}$ eine Untermannigfaltigkeit, dann ist $\left.T M_{0} \subset T M\right|_{M_{0}}:=\bigcup_{x \in M_{0}} T_{x} M$ ein $\operatorname{dim} M_{0}$-dimensionales Untervektorraumbündel von $\left.T M\right|_{M_{0}}$. $N M_{0}:=\left.T M\right|_{M_{0}} / T M_{0}$ heißt das Normalenbündel von $M_{0}$. Ist $M$ eine Riemannsche Mannigfaltigkeit, so ist $N M_{0} \cong T M_{0}^{\perp}$.
+
+\subsection*{1.28 Satz}
+Ist $f: E \rightarrow F$ ein Vektorraumhomomorphismus von einem Vektorraumbündel der Dimension $k$ und $m$ und ist $\operatorname{rg} f_{x}=$ const.\\
+Dann ist $\operatorname{ker} f:=\bigcup_{x \in M} \operatorname{ker} f_{x} \subset E$ ein Untervektorraumbündel von $E$ und Bild $f:=\bigcup_{x \in M}$ Bild $f_{x} \subset F$ ein Untervektorraumbündel von $F$.
+
+\section*{Beweis:}
+Ohne Einschränkung sei $E=X \times \mathbb{R}^{k}, F=X \times \mathbb{R}^{m}$. Sei $r g f_{x}=r$.
+
+\begin{enumerate}
+  \item Fall: $k \geq m$. Wir zeigen: $\operatorname{ker} f$ ist ein Untervektorraumbündel. OBdA $k=m$, sonst ersetze $F$ durch $F \oplus\left(X \times \mathbb{R}^{k-m}\right)$ und $f$ durch $(f, 0)$. Sei $x \in X$. Nach Wahl geeigneter Karten ist
+\end{enumerate}
+
+$$
+f_{x}=\left(\begin{array}{cccccc}
+1 & & & & & \\
+& \ddots & & & & \\
+& & 1 & & & \\
+& & & 0 & & \\
+& & & & \ddots & \\
+& & & & & 0
+\end{array}\right)
+$$
+
+Setze
+
+$$
+P=\left(\begin{array}{cccccc}
+0 & & & & & \\
+& \ddots & & & & \\
+& & 0 & & & \\
+& & & 1 & & \\
+& & & & \ddots & \\
+& & & & & 1
+\end{array}\right)
+$$
+
+Also ist $f_{x}+P \in G L(k, \mathbb{R})$. Definiere für $x^{\prime} \in X:(f+P)_{x^{\prime}}=f_{x^{\prime}}+P$. Dann existiert eine Umgebung $U$ von $x$ so, dass $(f+P)_{x^{\prime}} \in G L(k, \mathbb{R})$ für alle $x^{\prime} \in U$. Für $x^{\prime} \in U$ ist $(f+P)_{x^{\prime}}\left(\operatorname{ker} f_{x^{\prime}}\right)=0 \times \mathbb{R}^{k-r}$.\\
+" $\subseteq$ " folgt, da $f_{x^{\prime}}\left(\operatorname{ker} f_{x^{\prime}}\right)=0$ und die Gleichheit folgt dann aus Dimensionsgründen.\\
+2. Fall: $k \leq m$. Wir zeigen: Bild $f$ ist ein Untervektorraumbündel.
+
+OBdA $k=m$, sonst ersetze $E$ durch $E \oplus\left(X \times \mathbb{R}^{m-k}\right)$ und $f$ durch $f \circ p r_{k}$. Seien $f_{x}$ und $P$ wie im ersten Fall. Dann ist $\left(f_{x^{\prime}}+P\right)\left(\mathbb{R}^{r} \times 0\right) \subseteq \operatorname{Bild} f_{x^{\prime}}$. Da $\left(f_{x^{\prime}}+P\right): \mathbb{R}^{m} \rightarrow \mathbb{R}^{m}$ ein Isomorphismus ist, folgt die Gleichheit aus Dimensionsgründen. Folglich ist $\left(f_{x^{\prime}}+P\right)^{-1}$ die gesuchte Bündelkarte.\\
+3. Fall: $k \leq m$. Wir zeigen: $\operatorname{ker} f \subset E$ ist ein Untervektorraumbündel.
+
+Wende den 1. Fall auf $f: E \rightarrow \operatorname{Bild} f$ an.\\
+4. Fall: $k \geq m$ : Wir zeigen: Bild $f \subset F$ ist ein Untervektorraumbündel. Wende den 2. Fall auf $\left.E\right|_{\operatorname{kerf}}$ an.
+
+\subsection*{1.29 Korollar}
+Ein Vektorraumbündel $E \rightarrow M$ ist genau dann von endlichem Typ, wenn eine der beiden äquivalenten Bedingungen erfüllt ist:
+
+\begin{enumerate}
+  \item Es existiert ein surjektiver Vektorraumbündelhomomorphismus $M \times \mathbb{R}^{N} \rightarrow$ $E$.
+  \item Es existieren $N$ Schnitte $s_{1}, \ldots, s_{n} \in \Gamma E$, sodass $\left(s_{1}(x), \ldots, s_{n}(x)\right)$ für jedes $x \in M$ die Faser $E_{x}$ erzeugt.
+\end{enumerate}
+
+\subsection*{1.30 Definition}
+Ist $E \rightarrow M$ ein Faserbündel mit Strukturgruppe $G$ und $G_{0} \subseteq G$ eine abgeschlossene Untergruppe. Dann sagt man: $E$ besitzt eine Reduktion auf $G_{0}$ oder eine $G_{0}$-Bündelstruktur, falls es einen Bündelatlas gibt, dessen Bündelkartenwechsel Werte in $G_{0}$ annehmen.
+
+\subsection*{1.31 Beispiel}
+$M$ ist genau dann orientierbar, wenn $T M$ eine $G L^{+}(n, \mathbb{R})$-Bündelstruktur hat. (Übungsaufgabe)
+
+Die folgenden beiden Sätze geben oft eine einfache Möglichkeit zu entscheiden, wann eine Bündelstruktur vorliegt.
+
+\subsection*{1.32 Satz (Ehresmannscher Faserungssatz)}
+Ist $X$ zusammenhängend, $p: E \rightarrow X$ eine eigentliche reguläre Abbildung, so ist $E$ eine lokal triviale Faserung.
+
+\subsection*{1.33 Satz (von Hermann)}
+Ist ( $M, g$ ) vollständig und $\tilde{M}$ zusammenhängend, dann ist jede Riemannsche Submersion $\pi: M \rightarrow \tilde{M}$ ein Faserbündel.
+
+\subsection*{1.34 Übungsaufgaben}
+\begin{enumerate}
+  \item Auf $S^{1} \subset \mathbb{C}$ betrachte man die durch $z \sim \bar{z}$ und $1 \sim-1$ definierte Äquivalenzrelation. Zeigen Sie:\\
+a) $S^{1} / \sim$ ist homöomorph zu $S^{1}$.\\
+b) Die kanonische Projektion $S^{1} \rightarrow S^{1} / \sim$ ist keine lokal triviale Faserung.
+  \item Es sei $E:=\left\{(x, v) \in \mathbb{R P}^{n} \times \mathbb{R}^{n+1} \mid v \in x\right\}$. Geben Sie einen Bündelatlas für die lokal triviale Faserung $E \rightarrow \mathbb{R} \mathbb{P}^{n}$ an.
+  \item Es sei $M$ eine $n$-dimensionale differenzierbare Mannigfaltigkeit mit differenzierbarer Struktur D. Beschreiben Sie den kanonischen Prä-Bündelatlas für $\mathrm{Alt}^{K} T M$, d.h. für die Familie $\left\{\mathrm{Alt}^{K} T_{p} M\right\}_{p \in M}$.
+  \item $\pi_{1}: E_{1} \rightarrow M$ und $\pi_{2}: E_{2} \rightarrow M$ seien lokal triviale Faserungen mit typischen Fasern $F_{1}$ und $F_{2}$. Dann heißt $E_{1} \times_{M} E_{2}:=\left\{\left(e_{1}, e_{2}\right) \in E_{1} \times\right.$ $\left.E_{2} \mid \pi_{1}\left(e_{1}\right)=\pi_{2}\left(e_{2}\right)\right\}$ mit der kanonischen Abildung $\pi: E_{1} \times_{M} E_{2} \rightarrow M$ das gefaserte Produkt oder das Faserprodukt oder das Produkt über $M$ der beiden Faserungen. Konstruieren Sie aus Bündelatlanten $\mathcal{A}_{1}$ und $\mathcal{A}_{2}$ für die Faktoren einen Bündelatlas $\mathcal{A}$ für das gefaserte Produkt.
+  \item a) Es sei ( $M,\langle$,$\rangle ) eine pseudo-Riemannsche n$-dimensionale differenzierbare Mannigfaltigkeit, der Index des Skalarproduktes sei $n-k$. Zeigen Sie, dass diejenigen Bündelkarten des Tangentialbündels, deren Faserkarten Isometrien sind, zusammen eine $O(k, n-k)$-Bündelstruktur für $T M \rightarrow M$ bilden.\\
+b) Zeigen Sie: Eine differenzierbare Mannigfaltigkeit besitzt genau dann eine Metrik vom Index $n-k$, wenn TM eine $O(k, n-k)$-Bündelstruktur hat.
+  \item Eine differenzierbare Mannigfaltigkeit heißt parallelisierbar, wenn ihr Tangentialbündel trivial ist. Zeigen Sie, dass jede Lie-Gruppe parallelisierbar ist, $S^{2 k}$ für $k>1$ aber nicht. Beweisen Sie ferner, dass ( $S^{n} \times$ $\mathbb{R}) \oplus T S^{n}$ für alle $n$ trivial ist.
+  \item Es sei $E \rightarrow B$ ein $n$-dimensionales Vektorraumbündel. Bestimmen Sie die Übergangsfunktionen für $\mathrm{Alt}^{n} E$ aus denen für $E$.
+  \item Für Vektorraumbündel über einer Mannigfaltigkeit zeigen Sie: Ist
+\end{enumerate}
+
+$$
+0 \rightarrow E^{\prime} \rightarrow E \rightarrow E^{\prime \prime} \rightarrow 0
+$$
+
+eine exakte Sequenz von Bündelhomomorphismen, so ist $E \cong E^{\prime} \oplus E^{\prime \prime}$.\\
+9) Für Bündelhomomorphismen $f: E \rightarrow E$ folgere man aus dem Ranglemma:\\
+a) Ist $f \circ f=f$, so sind Kern $f$ und Bild $f$ Teilbündel von $E$.\\
+b) Ist $f \circ f=\mathrm{Id}$, so ist $\operatorname{Fix}(f):=\{e \in E \mid f(e)=e\}$ ein Teilbündel von $E$.
+
+
+
+\pagebreak
+
+\section{Prinzipalbündel}
+\subsection*{2.1 Definition}
+Eine $G$-Aktion $G \times M \rightarrow M$ heißt frei, falls aus $g x=x$ für ein $x \in M$ folgt $g=1$.\\
+Eine $G$-Aktion $G \times M \rightarrow M$ heißt effektiv, falls gilt: wirkt $g$ als Identität, so ist $g=1$.\\
+Eine $G$-Aktion $G \times M \rightarrow M$ heißt transitiv, falls gilt: Zu jedem Paar $(x, y) \in$ $M \times M$ existiert ein $g \in G$ mit $g x=y$.
+
+\subsection*{2.2 Notiz}
+Ist $\phi: G \times M \rightarrow M$ eine freie transitive $G$-Aktion, so ist $G \cong M$.
+
+\section*{Beweis:}
+Sei $x \in M$. Die Abbildung $o_{x}: G \rightarrow M, g \mapsto g x$ ist bijektiv und differenzierbar und $\left.d o_{x}\right|_{1}$ ist injektiv, also ist $\left.d o_{x}\right|_{g}$ bijektiv für jedes $g \in G$, also ist $o_{x}$ ein Diffeomorphismus (vgl. Lee 7.15: differenzierbare Abbildung von konstantem Rang!).
+
+\subsection*{2.3 Satz}
+Auf dem Totalraum eines $G$-Prinzipalbündels gibt es eine $G$-Rechtsaktion, die auf den Fasern frei und transitiv ist. Die Faserkarten $\varphi_{x}$ sind bezüglich dieser Aktion $G$-rechtsäquivariant, d.h., $\varphi_{x}(p g)=\varphi_{x}(p) g$.
+
+\section*{Beweis:}
+Sei $p \in P_{x}$. Setze $p g=\varphi_{x}^{-1}\left(\varphi_{x}(p) g\right)$. Dies ist wohldefiniert, denn ist $\psi$ eine weitere Karte, so ist $\psi_{x}(p)=\omega(x) \varphi_{x}(p)$ für ein $\omega(x) \in G$, also $\psi^{-1}\left(x, \psi_{x}(p) g\right)=$ $\psi^{-1}\left(x, \omega(x) \varphi_{x}(p) g\right)=\varphi^{-1}\left(x, \varphi_{x}(p) g\right)$. Offenbar ist $\varphi_{x}$ rechtsäquivariant und die Operation auf der realen Faser frei und transitiv, weil die $G$-Aktion auf $G$ dies ist.
+
+Für Prinzipalbündel sind Schnitte Bündelkarten, genauer:
+
+\subsection*{2.4 Lemma}
+Ein Prinzipalbündel ist genau dann trivial, wenn es einen Schnitt besitzt.
+
+\section*{Beweis:}
+Ist $\sigma$ ein Schnitt, so setze $P \rightarrow M \times G, \sigma(x) g \mapsto(x, g)$. Umgekehrt: Setze $\sigma(x)=\varphi^{-1}(x, 1)$.
+
+\subsection*{2.5 Bemerkung}
+Ist $P \rightarrow M$ ein $G$-Prinzipalbündel, und ist $\varphi$ die durch $\sigma$ defnierte Bündelkarte und $s(x)=\sigma(x) g(x)$, dann wird $s$ bezüglich $\varphi$ durch $g$ beschrieben.\\
+Ist $\tilde{\sigma}(x)=\sigma(x) a(x)$ ein weiterer Schnitt und $\tilde{\varphi}$ die durch $\tilde{\sigma}$ gegebene Bündelkarte, so ist $s(x)=\tilde{\sigma}(x) a^{-1}(x) g(x)$, wird also bezüglich $\tilde{\sigma}$ durch $a^{-1} g$ beschrieben.
+
+\subsection*{2.6 Bemerkung}
+Die rechtsäquivarianten Abbildungen $f: G \rightarrow G$ sind genau die Linksmultiplikationen mit $f(1) \in G$, denn $f(g)=f(1 g)=f(1) g$.
+
+\subsection*{2.7 Lemma}
+Sei $G$ eine Liegruppe, $P \rightarrow M$ ein Faserbündel mit Strukturgruppe $G$. Dann ist äquivalent:\\
+a) $P \rightarrow M$ ist ein $G$-Prinzipalbündel.\\
+b) Auf dem Totalraum von $P$ ist eine $G$-Rechtsaktion gegeben, die auf den Fasern frei und transitiv operiert.
+
+\section*{Beweis:}
+a) $\Rightarrow$ b) $\checkmark$\\
+b) $\Rightarrow$ a) Nach 2.2 ist die typische Faser $G$, wie in 2.5 sind rechtsinvariante Faserkarten gegeben, und rechtsäquivariante Bündelkartenwechsel sind nach 2.6. durch Linksmultiplikation mit $g \in G$ gegeben.
+
+\subsection*{2.8 Satz}
+Sei $G$ eine Liegruppe, $P \rightarrow M$ eine differenzierbare Abbildung. Dann ist äquivalent:\\
+a) $P \rightarrow M$ ist ein $G$-Prinzipalbündel.\\
+b) $P$ ist eine Rechts- $G$-Mannigfaltigkeit der Dimension $\operatorname{dim} G+\operatorname{dim} M$. Die $G$-Wirkung ist fasertreu und auf den Fasern frei und transitiv. Ferner existiert eine Überdeckung $\left(U_{\lambda}\right)_{\lambda \in \Lambda}$ von $M$ und lokale Schnitte $s_{\lambda}: U_{\lambda} \rightarrow$ $P$.
+
+\section*{Beweis:}
+a) $\Rightarrow$ b) $\checkmark$\\
+b) $\Rightarrow$ a) Da lokale Schnitte existieren, ist $\pi: P \rightarrow M$ eine surjektive Submersion, also ist $\pi^{-1}(x) \subseteq P$ eine $\operatorname{dim} G$-dimensionale Untermannigfaltigkeit von $P$,\\
+also ist nach $2.2 P_{x} \cong G$. Defniere $\psi: U \times G \rightarrow P \mid U,(x, g) \mapsto s(x) g$. Dies definiert eine Bündelkarte $\varphi=\psi^{-1}$. Die Abbildung $\psi$ ist bijektiv, differenzierbar und rechts- $G$-äquivariant. Das Differential
+
+$$
+d \psi_{(x, g)}(X, v)=d R_{g}(X)+d L_{s(x) g}(v)
+$$
+
+ist injektiv, denn ist $d \psi_{(x, g)}(X, v)=0$, so ist
+
+$$
+X=d \pi_{s(x) g} \circ d \psi_{(x, g)}(X, v)=0
+$$
+
+da $(\pi \circ \psi)(x, g)=x$, also ist auch $d L_{s(x)}(v)=0$, also $v=0$ (da $G$ frei operiert).
+
+\subsection*{2.9 Beispiel}
+Die Hopffaserung $S^{3} \rightarrow \mathbb{C} P^{1},\left(z_{1}, z_{2}\right) \mapsto\left[z_{1}: z_{2}\right]$ ist ein $S^{1}$-Prinzipalfaserbündel.\\
+Insbesondere für kompakte Gruppen ist folgender Satz auch nützlich:
+
+\subsection*{2.10 Satz}
+Operiert $G$ frei und eigentlich auf $M$, so ist $M / G$ eine differenzierbare Mannigfaltigkeit und $M \rightarrow M / G$ ein $G$-Prinzipalbündel.
+
+\section*{Beweis:}
+Lee, 9.16 (Quotient manifold theorem).
+
+\subsection*{2.11 Definition}
+a) Sei $\pi_{1}: P \rightarrow M$ ein $G$-Prinzipalbündel, $\pi_{2}: Q \rightarrow N$ ein $H$-Prinzipalbündel, $\alpha: G \rightarrow H$ ein Homomorphismus von Liegruppen, $f_{0}: M \rightarrow N$ differenzierbar. Dann heißt $f: P \rightarrow Q$ ein $\alpha$-Prinzipalbündelhomomorphismus über $f_{0}$, falls $\pi_{2} \circ f=f_{0} \circ \pi_{1}$ gilt und $f(p g)=f(p) \alpha(g)$ ist.\\
+c) Ist $f_{0}=\mathrm{id}$, so heißt ( $P, f$ ) eine $\alpha$-Version von Q. Ist zusätzlich $G=H$ und $\alpha=\mathrm{id}$, so spricht man von einem Prinzipalbündelisomorphismus.\\
+d) Zwei $\alpha$-Versionen heißen äquivalent, falls es einen $G$-Prinzipalbündelisomorphismus $g$ über id gibt, sodass $\tilde{f}=g \circ f$ ist.\\
+Eine Äquivalenzklasse von $\alpha$-Versionen heißt $\alpha$-Struktur. Ist $G \subseteq H$ eine Untergruppe, $\alpha: G \rightarrow H$ die Inklusion, so heißt eine $\alpha$-Struktur auch eine Reduktion von $Q$ auf $G$.
+
+\subsection*{2.12 Beispiel}
+Sei $(M, g)$ eine Riemannsche Mannigfaltigkeit. Dann beschreibt $P_{O(n)}(M) \xrightarrow{i}$ $P_{G L}(M)$ eine $O(n)$-Reduktion von $P_{G L}(M)$.
+
+\subsection*{2.13 Lemma}
+a) Ist $Q$ ein $H$-Prinzipalbündel, $G \subseteq H$ eine abgeschlossene Untergruppe und $P \subseteq Q$ eine Teilmenge, sodass gilt:
+
+\begin{enumerate}
+  \item Die $G$-Rechtsaktion ist aus $P_{x}:=Q_{x} \cap P$ frei und transitiv.
+  \item Es existieren eine offene Überdeckung $\left(U_{\lambda}\right)_{\lambda \in \Lambda}$ von $M$ und lokale Schnitte $\sigma_{\lambda}: U_{\lambda} \rightarrow Q$ mit $\sigma\left(U_{\lambda}\right) \subseteq P$.
+\end{enumerate}
+
+Dann ist ( $P, i$ ) eine $G$-Reduktion von $M$.\\
+Umgekehrt: Besitzt $Q$ eine $G$-Reduktion $(P, f)$, so erfüllt $f(P) \subseteq Q$ die Bedingungen 1. und 2.\\
+b) Ein $H$-Prinzipalbündel $Q$ besitzt genau dann eine Reduktion auf eine abgeschlossene Untergruppe $G \subseteq H$, falls es einen Bündelatlas von Q gibt, dessen Übergangsfunktionen Bilder in $G$ annehmen.
+
+\section*{Beweis von $\mathbf{b}$ ):}
+$" \Leftarrow$ " Ist $A=\left\{U_{\lambda}, \varphi_{\lambda} \mid \lambda \in \Gamma\right\}$ ein Bündelatlas wie gefordert, dann setze
+
+$$
+P=\bigcup_{\lambda \in \Lambda} \varphi_{\lambda}^{-1}\left(U_{\lambda} \times G\right)
+$$
+
+Dies ist eine Teilmenge von Q wie in 1 .\\
+" $\Rightarrow$ " Ist $f: P \rightarrow Q$ eine Reduktion auf $G$, so existieren nach a) lokale Schnitte $\sigma_{\lambda}: U_{\lambda} \rightarrow Q$ mit $\sigma_{\lambda}\left(U_{\lambda}\right) \subseteq f(P)$. Diese definieren Bündelkarten für $P$. Ist $\sigma_{\mu}$ ein weiterer solcher Schnitt, so gilt für $x \in U_{\lambda} \cap U_{\mu}$ :
+
+$$
+\sigma_{\mu}(x)=\sigma_{\lambda}(x) g_{\lambda \mu}(x)
+$$
+
+für $g_{\lambda \mu}: U_{\lambda} \cap U_{\mu} \rightarrow G$. Damit ist der entsprechende Bündelkartenwechsel durch $g_{\lambda \mu}^{-1}: U_{\lambda} \cap U_{\mu} \rightarrow G, x \mapsto\left(g_{\lambda \mu}(x)\right)^{-1}$ gegeben.
+
+\subsection*{2.14 Satz}
+Seien $\pi: Q \rightarrow M$ ein $H$-Prinzipalbündel und $G \subseteq H$ eine abgeschlossene Untergruppe. Dann hat man eine kanonische Bijektion zwischen der Menge aller Reduktionen auf $G$ und der Menge aller Schnitte in $Q / G \rightarrow M$.
+
+\section*{Beweis:}
+" $\Rightarrow$ "Da $H \rightarrow H / G$ ein $G$-Prinzipalbündel ist (Beweis später), ist $\pi_{1}: Q / G \rightarrow$ $M$ ein Faserbündel mit typischer Faser $H / G$ und $Q \rightarrow Q / G$ ein $G$-Prinzipalbündel. Sei $\sigma$ ein Schnitt in $Q / G$. Dann ist $\sigma^{*} Q$ ein $G$-Prinzipalbündel über $M$, und die gesuchte Reduktion ist durch ( $\sigma^{*} Q, \hat{\sigma}$ ) gegeben. Dabei ist $\hat{\sigma}: \sigma^{*} Q \rightarrow Q$ als Bündelhomomorphismus über $M$ aufzufassen, denn $\hat{\sigma}(x, q)=q$ für $q \in$ $\pi_{1}^{-1}(\sigma(x)) \subseteq \pi^{-1}(x)$.\\
+„ $\Leftarrow$ "Sei $f: P \rightarrow Q$ ein Repräsentant einer $G$-Reduktion, also $f(p g)=f(p) g$ für $g \in G$. Dann ist durch $\sigma(x)=[f(p)]_{G}$ für ein $p \in P_{x}$ ein Schnitt in $Q / G$ wohldefiniert. Ist $\tilde{f}: \tilde{P} \rightarrow Q$ ein weiterer Repräsentant, also $\tilde{f}=f \circ F$ für einen Bündelisomorphismus $F: \tilde{P} \rightarrow P$, so existiert für $\tilde{p} \in \tilde{P}_{x}$ und $p \in P_{x}$ ein $g \in G$ mit
+
+$$
+\tilde{f}(\tilde{p})=f(F(\tilde{p}))=f(p g)=f(p) \alpha(g)
+$$
+
+für ein $g \in G$ also
+
+$$
+[\tilde{f}(p)]=[f(p)]
+$$
+
+\subsection*{2.15 Korollar}
+Ist $G \subseteq H$ eine abgeschlossene Untergruppe einer Liegruppe mit $H / G \cong \mathbb{R}^{n}$ für ein $n \in \mathbb{N}$, so besitzt jedes $H$-Prinzipalbündel eine $G$-Reduktion
+
+\subsection*{2.16 Beispiel}
+a) $G L(n, \mathbb{R}) / O(n) \cong \mathbb{R}^{\frac{1}{2} n(n+1)}$.\\
+b) $O(k, n-k) / O(k) \times O(n-k) \cong \mathbb{R}^{m}$ für $1 \leq k \leq n-1$ und $m=k(n-k)$.
+
+\subsection*{2.17 Übungsaufgabe}
+Verallgemeinern Sie die Hopf-Faserung $S^{3} \rightarrow \mathbb{C P}^{1}$ zu $S^{2 n+1} \rightarrow \mathbb{C} \mathbb{P}^{n}$, (Bündelatlas angeben).
+
+
+\pagebreak
+
+\section{An- und Abmontieren der Faser}
+
+\subsection*{3.1 Bemerkung und Definition}
+Sind $G$ eine Liegruppe, $X$ eine Rechts- $G$-Mannigfaltigkeit und $F$ eine Links-$G$-Mannigfaltigkeit, dann ist auf $X \times F$ eine $G$-Aktion durch $G \times(X \times F) \rightarrow$ $X \times F,(g,(x, v)) \mapsto\left(x g, g^{-1} v\right)$ gegeben. Wir schreiben $(X \times F) / \sim=: X \times{ }_{G} F$. Auf $X \times_{G} F$ existieren zwei kanonische Projektionen:
+
+$$
+\begin{gathered}
+X \times_{G} F \rightarrow G \backslash F \\
+\text { und } X \times_{G} F \rightarrow X / G .
+\end{gathered}
+$$
+
+Schreiben wir $X \times_{G} F$ und reden von der Projektion, so meinen wir $X \times_{G} F \rightarrow$ $X / G$.
+
+\subsection*{3.2 Beispiel}
+a) $G \times_{G} F \rightarrow F,[g, v] \mapsto g v$ ist ein Homöomorphismus und $G \times_{a} F$ trägt eine eindeutig bestimmte differenzierbare Struktur, sodass dies ein Diffeomorphismus ist.\\
+b) Ist $X$ eine freie transitive Rechts- $G$-Mannigfaltigkeit, dann ist für jedes $x_{0} \in X$
+
+$$
+X \times_{G} F \rightarrow F,\left[x_{0} g, v\right] \mapsto g v
+$$
+
+ebenfalls ein Diffeomorphismus.\\
+c) Ist $X$ eine freie transitive Rechts- $G$-Mannigfaltigkeit, so ist $U \times X$ kanonisch ebenfalls eine Rechts- $G$-Mannigfaltigkeit und $(U \times X) \times{ }_{G} F \rightarrow$ $U \times F$ ein Diffeomorphismus.
+
+\subsection*{3.3 Satz und Definition}
+Sei $P \rightarrow M$ ein $G$-Prinzipalbündel und $F$ eine $G$-Mannigfaltigkeit. Dann ist $P \times_{G} F$ in kanonischer Weise ein Faserbündel über $M$ mit Strukturgruppe $G$ und typischer Faser $F$. Ein Atlas von $P$ induziert einen Atlas von $P \times_{G} F$, dessen Kartenwechsel durch die selben Übergangsfunktionen gegeben sind. Wir nennen den Funktor $P \rightsquigarrow P \times_{G} F$ das Anmontieren oder Assoziieren der Faser $F$ an $P$. Ist die $G$-Aktion auf $F$ mit $\alpha$ bezeichnet, $\alpha: G \times F \rightarrow F$, dann schreibt man auch $P \times_{G} F \equiv P \times_{\alpha} F$.
+
+\section*{Beweis:}
+Ist $(U, \varphi)$ eine Bündelkarte für $P$, so definiere eine Präbündelkarte durch:
+
+
+\begin{gather*}
+\tilde{\varphi}: \bigcup_{x \in U} P_{x} \times_{G} F=: P \times_{G} F \mid U \xrightarrow{\varphi}(U \times G) \times_{G} F \rightarrow U \times F  \tag{3.1}\\
+{[p, v] \mapsto[\varphi(p), v]=\left[\left(\pi(p), \varphi_{x}(p)\right), v\right] \mapsto\left(\pi(p), \varphi_{x}(p) v\right) .}
+\end{gather*}
+
+
+\subsection*{3.4 Beispiel}
+a) $P_{G L} \times_{G L} \mathbb{R}^{n} \stackrel{\cong}{\rightrightarrows} T M,\left[\left(v_{1}, \ldots, v_{n}\right),\left(a_{1}, \ldots, a_{n}\right)\right] \mapsto \sum_{i=1}^{n} a_{i} v_{i}$\\
+b) Ist $M$ Riemannsch, so ist ebenso ein Isomorphismus der $O(n)$-Reduktion definiert: $P_{O(n)} \times{ }_{O(n)} \mathbb{R}^{n} \stackrel{\cong}{\rightrightarrows} T M$
+
+\subsection*{3.5 Bemerkung und Notation}
+a) Ist $f: P \rightarrow Q$ ein $G$-Prinzipalbündelhomomorphismus, so ist durch $f_{*}$ : $P \times_{G} F \rightarrow Q \times_{G} F,[p, v] \mapsto[f(p), v]$ eine $G$-Bündelabbildung gegeben.\\
+b) Ist $\alpha: G \rightarrow H$ ein Homomorphismus, $f: P \rightarrow Q$ eine $\alpha$-Version und $F$ eine $H$-Mannigfaltigkeit, so ist $f_{*}: P \times_{\alpha} F \rightarrow Q \times_{H} F,[p, v] \mapsto[f(p), v]$ ein Isomorphismus von lokal trivialen Faserungen. und bezüglich geeigneten Bündelkarten durch id gegeben. Fassen wir auch $P \times{ }_{\alpha} F$ als Faserbündel mit Strukturgruppe $H$ auf, so ist $f_{*}$ ein $H$-Faserbündelisomorphismus.\\
+c) Ist insbesondere ist $f: P_{0} \rightarrow P$ eine $G_{0}$-Reduktion von $P$, so ist $P_{0} \times G_{0}$ $F \rightarrow P \times_{G} F$ ein $G$-Bündelisomorphismus.
+
+\section*{Beweis:}
+Ist $\sigma$ ein lokaler Schnitt von $P$, so ist $f \circ \sigma$ ein lokaler Schnitt in $Q$. Für die durch $\sigma$ und $f \circ \sigma$ induzierten Karten $\varphi$ und $f_{*} \varphi$ wie in (3.1) gilt:
+
+$$
+\widetilde{f_{*} \varphi} \circ f \circ \tilde{\varphi}^{-1}: \varphi\left(P \times_{G} F \mid U\right) \rightarrow f_{*} \varphi\left(Q \times_{G} F \mid U\right),(x, v) \mapsto(x, v) .
+$$
+
+\subsection*{3.6 Erinnerung}
+Sei $E \rightarrow M$ ein Faserbündel mit Strukturgruppe $G$, so sagt man, $E$ besitzt eine Reduktion auf $G_{0}$, wenn $E$ einen Bündelatlas besitzt, dessen Bündelabbildungen durch Abbildungen nach $G_{0}$ gegeben sind.
+
+\subsection*{3.7 Bemerkung}
+Ist $E=P \times_{G} F$ und $P_{0} \rightarrow P$ eine Reduktion von $P$, so besitzt $E$ eine Reduktion auf $G_{0}$ (nämlich $P_{0} \times{ }_{G_{0}} F$ ).\\
+Betrachten wir jetzt den Spezialfall, dass wir als typische Faser wieder eine Liegruppe anmontieren.
+
+\subsection*{3.8 Lemma}
+Ist $\alpha: G \rightarrow H$ ein Liegruppenhomomorphismus, so ist $Q=P \times_{\alpha} H$ in kanonischer Weise ein $H$-Prinzipalbündel, und $P$ ist eine $\alpha$-Version von $Q$.\\
+Umgekehrt: Ist $P \rightarrow Q$ eine $\alpha$-Version, so ist $Q \cong P \times_{\alpha} H$.
+
+\section*{Beweis:}
+$Q$ ist ein $H$-Prinzipalbündel nach Lemma 2.8, denn $H$ operiert auf den Fasern von $P \times_{\alpha} H$ frei und transitiv von rechts. Ein $\alpha$-Prinzipalbündelhomomorphismus $P \rightarrow Q$ ist durch $f: P \rightarrow Q, p \mapsto[p, 1]$ gegeben, denn $f(p g)=[p g, 1]=[p, \alpha(g)]=[p, 1] \alpha(g)$.\\
+Ist $P \xrightarrow{f} Q$ eine $\alpha$-Version, so ist durch $\tilde{f}: P \times{ }_{\alpha} H \rightarrow Q,[p, h] \mapsto f(p) \underset{\sim}{h}$ der gesuchte Bündelisomorphismus wohldefiniert, denn $\tilde{f}([p, h] \tilde{h})=\tilde{f}([p, h \tilde{h}])=$ $f(p) h \tilde{h}=\tilde{f}([p, h]) \tilde{h}$.
+
+\subsection*{3.9 Bemerkung}
+a) Ist $\sigma$ ein lokaler Schnitt in $P$, so definiert $\sigma$ eine Bündelkarte für $P \times_{G}$ $F \mid U \cong U \times F$. Also wird ein Schnitt $s$ in $P \times{ }_{G} F \mid U$ nach Wahl von $\sigma$ durch eine Abbildung $U \rightarrow F$ beschrieben.\\
+Genauer: Ist $s(x)=[\sigma(x), v(x)]$, so wird $s$ bezüglich $\sigma$ durch $v$ beschrieben. Ist $\tilde{\sigma}$ ein anderer Schnitt von $P, \tilde{\sigma}=\sigma g$, so wird $s$ bezüglich $\tilde{\sigma}$ durch $g^{-1} v$ beschrieben:
+
+$$
+s(x)=[\sigma(x), v(x)]=\left[\tilde{\sigma} g^{-1}, v(x)\right]
+$$
+
+b) Ein Schnitt $s$ in $P \times{ }_{G} F$ definiert eine Abbildung $\bar{s}: P \rightarrow F$ mit $\bar{s}(p g)=$ $g^{-1} s(p)$ durch
+
+$$
+s(x)=[p(x), \bar{s}(p(x))]=\left[p(x) g(x), g^{-1}(x) s(p(x))\right]
+$$
+
+Umgekehrt: Ist $f: P \rightarrow F$ eine Funktion mit $f(p g)=g^{-1} f(p)$, so definiert $f$ einen Schnitt in $P \times_{G} F$ durch $x \mapsto[p(x), f(p(x))]$ mit $p(x) \in$ $P_{x}$ beliebig.
+
+Jetzt betrachten wir die umgekehrte Konstruktion, die Faserbündeln Prinzipalbündel zuordnet.
+
+\subsection*{3.10 Definition und Satz}
+Sei $F$ eine effektive $G$-Mannigfaltigkeit, $E \rightarrow M$ ein Faserbündel mit typischer Faser $F$ und Strukturgruppe $G$. Sei
+
+
+\begin{align*}
+\operatorname{Iso}_{G}\left(F, E_{x}\right):= & \left\{f_{x}: F \rightarrow E_{x} \mid \varphi_{x} \circ f_{x}=g_{\varphi, f}\right. \\
+& \text { für ein } \left.g_{\varphi, f} \in G \text { für (eine und dann) jede Bündelkarte } \varphi\right\} \tag{*}
+\end{align*}
+
+
+Dann ist $\operatorname{Iso}_{G}(F, E)=\bigcup_{x \in M} \operatorname{Iso}_{G}\left(F, E_{x}\right)$ in kanonischer Weise ein $G$-Prinzipalbündel, das $E$ zugrundeliegende Prinzipalbündel. Die Bündelkartenwechsel sind genau die selben, wie die von $E$.
+
+\section*{Beweis:}
+Sei $(U, \varphi)$ eine Bündelkarte von $E$. Setze
+
+$$
+\bigcup_{x \in U} \operatorname{Iso}_{G}\left(F, E_{x}\right) \rightarrow U \times G, f_{x} \mapsto\left(x, g_{\varphi, f}\right)
+$$
+
+mit $g_{\varphi, f}$ wie in $(*)$. Ist $\psi_{x}=\omega(x) \cdot \varphi_{x}$, so ist $g_{\psi, f}=\omega(x) g_{\varphi, f}$.
+
+\subsection*{3.11 Satz}
+Ist $P$ ein $G$-Prinzipalbündel, $F$ eine effektive $G$-Mannigfaltigkeit, so ist
+
+$$
+\operatorname{Iso}_{G}\left(F, P \times_{G} F\right) \cong P .
+$$
+
+Ist $E$ ein Faserbündel mit typischer Faser $F$ und Strukturgruppe $G$, wobei $G$ effektiv auf $F$ operiert, so ist
+
+$$
+\operatorname{Iso}_{G}(F, E) \times{ }_{G} F \cong E .
+$$
+
+Bezüglich geeigneter Bündelkarten sind die Abbildungen durch id gegeben.
+
+\section*{Beweis:}
+Definiere
+
+$$
+\alpha: P \rightarrow \operatorname{Iso}_{G}\left(F, P \times_{G} F\right), p \mapsto(v \mapsto[p, v])
+$$
+
+und
+
+$$
+\beta: \operatorname{Iso}_{G}(F, E) \times_{G} F \rightarrow E,[f, v] \mapsto f(v) .
+$$
+
+\subsection*{3.12 Beispiel}
+Ist $M$ eine $n$-dimensionale Mannigfaltigkeit, so ist $T M=P_{G L}(M) \times{ }_{G L(n, \mathbb{R})} \mathbb{R}^{n}$ und $P_{G L}(M) \cong \operatorname{Iso}_{G L}\left(\mathbb{R}^{n}, T M\right)$
+
+$$
+\left(v_{1}, \ldots, v_{n}\right) \mapsto\left(\left(a_{1}, \ldots, a_{n}\right) \mapsto \sum_{i=1}^{n} a_{i} v_{i}\right)
+$$
+
+\subsection*{3.13 Bemerkung}
+Besitzt $E \rightarrow M$ eine $G_{0^{-}}$-Reduktion, so ist $\operatorname{Iso}_{G_{0}}(F, E) \subseteq \operatorname{Iso}_{G}(F, E)$ eine $G_{0^{-}}$ Reduktion von $\operatorname{Iso}_{G}(F, E)$.
+
+\subsection*{3.14 Beispiel}
+Ist auf $M$ eine Riemannsche Metrik gegeben, so ist
+
+$$
+\operatorname{Iso}_{O(n)}\left(\mathbb{R}^{n}, T M\right)=P_{O(n)}(M)
+$$
+
+\subsection*{3.15 Lemma}
+Ist $f: E \rightarrow \tilde{E}$ ein $G$-Bündelisomorphismus, so ist
+
+$$
+f_{*}: \operatorname{Iso}_{G}(F, E) \rightarrow \operatorname{Iso}_{G}(F, \tilde{E}), \alpha \mapsto f \circ \alpha
+$$
+
+ein $G$-Prinzipalbündelisomorphismus.
+
+\subsection*{3.16 Sprechweise}
+Der Vorgang $E \rightsquigarrow \operatorname{Iso}_{G}(F, E)$ heißt Abmontieren der Faser.\\
+Anmontieren von Fasern ist auch für nicht effektive Aktionen wichtig:
+
+\subsection*{3.17 Beispiel und Definition}
+Ist $P$ ein $G$-Prinzipalbündel, so heißt $\operatorname{Aut}(P):=P \times_{k o n j} G,[p, g]=\left[p \tilde{g}, \tilde{g}^{-1} g \tilde{g}\right]$ das Bündel der Eichtransformationen. Dies ist ein Bündel mit typischer Faser $G$ und Strukturgruppe $G$, aber kein Prinzipalbündel!\\
+Ist $f \in \Gamma \operatorname{Aut}(P)$, so ist $f$ ein Bündelautomorphismus, denn für $[p, g] \in$ $\operatorname{Aut}_{x}(P)$ und $\tilde{p} \in P_{x}$ definiert
+
+$$
+[p, g](\tilde{p})=:[\tilde{p} \tilde{g}, g](\tilde{p})=\left[\tilde{p}, \tilde{g} g \tilde{g}^{-1}\right](\tilde{p})=\tilde{p} \tilde{g} g \tilde{g}^{-1}
+$$
+
+einen Bündelautomorphismus, denn
+
+$$
+[p, g](\tilde{p} a)=[\tilde{p} \tilde{g}, g](\tilde{p} a)=\left[\tilde{p}, \tilde{g} g \tilde{g}^{-1}\right](\tilde{p} a)=\left[\tilde{p} a, a^{-1} \tilde{g} g \tilde{g}^{-1} a\right](\tilde{p} a)=\tilde{p} \tilde{g} g \tilde{g}^{-1} a .
+$$
+
+Umgekehrt: Ist $f: P \rightarrow P$ ein Bündelautomorphismus, so ist ein Schnitt $s$ in Aut $(P)$ auf folgende Weise gegeben: Es ist für jedes $p \in P$ ist $f(p)=p g$ für ein eindeutig definiertes $g$. Setze $s(x)=[p, g]$. Dies ist wohldefiniert, denn für $\tilde{p}=p a$ ist
+
+$$
+f(\tilde{p})=f(p a)=p g a=\tilde{p} a^{-1} g a \text { und }\left[\tilde{p}, a^{-1} g a\right]=[p, g] .
+$$
+
+\subsection*{3.18 Übungsaufgaben}
+\begin{enumerate}
+  \item Es sei $P \rightarrow B$ ein $G$-Prinzipalfaserbündel und $F$ ein $G$-Raum. Was ist
+\end{enumerate}
+
+$$
+\operatorname{Iso}_{G}\left(F, P \times_{G} F\right) \rightarrow B
+$$
+
+für ein Bündel, wenn die Aktion $G \rightarrow \text{Homöo}(F)$ nicht effektiv ist, sondern einen nichttrivialen Kern $G_{0}$ hat?\\
+2) Auf $\mathbb{R}^{n}$ operiere $\mathbb{Z}_{2}$ durch die Involution $x \mapsto-x$. Dann ist $E_{n}:=$ $S^{1} \times \mathbb{Z}_{2} \mathbb{R}^{n}$ für $n \geq 1$ als Faserbündel mit Strukturgruppe $\mathbb{Z}_{2}$ natürlich nicht trivial (weshalb nämlich?). Wir betrachten $E_{n}$ jetzt aber als Vektorraumbündel über $S^{1}$. Zeigen Sie: $E_{2}$ ist trivial, $E_{1}$ aber nicht. Verallgemeinerung für $E_{n}$ mit $n \geq 3$ ?\\
+3) Es sei $\alpha: H \rightarrow G$ ein Liegruppenepimorphismus, $K$ sein Kern und $P$ ein $H$-Prinzipalfaserbündel. Zeigen Sie: Das $G$-Prinzipalfaserbündel $P \times{ }_{\alpha} G$ ist genau dann trivial, wenn sich die Strukturgruppe von $P$ auf $K$ reduzieren läßt.\\
+4) Bestimmen Sie eine Untergruppe $H \subset G L(n, \mathbb{R})$, sodass gilt: Ein $n$ dimensionales Vektorraumbündel $E$ besitzt genau dann ein eindimensionales Untervektorraumbündel, wenn seine Strukturgruppe auf $H$ reduzierbar ist.\\
+5) Zeigen Sie: Eine differenzierbare $n$-dimensionale Mannigfaltigkeit besitzt genau dann eine Metrik vom Index $k$, wenn das Tangentialbündel TM als Summe $T M=\xi \oplus \eta$ eines $k$-dimensionalen Vektorraumbündels $\xi$ und eines ( $n-k$ )-dimensionalen Vektorraumbündels $\eta$ geschrieben werden kann.
+
+
+
+\pagebreak
+
+\section{Die Parallelverschiebung}
+\subsection*{4.1 Definition}
+Sei $E \xrightarrow{\pi} M$ eine lokal triviale Faserung. Eine Zuordnung $\tau$, die jedem Weg $\gamma:[a, b] \rightarrow M$ einen Diffeomorphismus $\tau_{\gamma}: E_{\gamma(a)} \rightarrow E_{\gamma(b)}$ zuordnet, heißt Paralleltransport oder Parallelverschiebung, falls gilt:
+
+\begin{enumerate}
+  \item Die Abbildung $\tau$ hängt differenzierbar von $\gamma \mathrm{ab}$, d.h. sind $U \subseteq \mathbb{R}^{n}$ offen, $a, b: U \rightarrow \mathbb{R}$ differenzierbar mit $a(u) \leq b(u)$ und ist $\gamma: \bigcup_{u \in U}\{u\} \times$ $[a(u), b(u)] \rightarrow M$ differenzierbar, so ist
+\end{enumerate}
+
+$$
+\begin{gathered}
+\gamma_{\mathrm{Anf}}^{*} E \rightarrow \gamma_{\mathrm{End}}^{*} E, \\
+(u, e) \mapsto\left(u, \tau_{\gamma_{u}}(e)\right)
+\end{gathered}
+$$
+
+differenzierbar. Dabei sind die Anfangs- und Endkurven $\gamma_{\text {Anf,End }}: U \rightarrow$ $M$ durch $\gamma_{\text {Anf }}(u)=\gamma(u, a(u))$ und $\gamma_{\text {End }}(u)=\gamma(u, b(u))$ gegeben und $\gamma_{u}(t)=\gamma(u, t)$.\\
+2. Für $a<c<b$ ist $\tau_{\left.\gamma\right|_{[c, b]}} \circ \tau_{\left.\gamma\right|_{[a, c]}}=\tau_{\gamma}$ (Unterteilbarkeit).\\
+3. Ist $\varphi:[c, d] \rightarrow[a, b]$ differenzierbar, $\varphi(c)=a, \varphi(d)=b$, so ist $\tau_{\gamma}=\tau_{\gamma \circ \varphi}$. (Invarianz unter Umparametrisierungen)\\
+4. Für $e \in E_{x}$ hängt $\left.\frac{d}{d t}\right|_{t=0} \tau_{\left.\gamma\right|_{[a, t]}}(e)$ nur von $\dot{\gamma}(0)$ ab. (Erstes Ordnungsaxiom)
+
+\subsection*{4.2 Notiz}
+Ist $\gamma:[a, b] \rightarrow M$ konstant, so ist $\tau_{\gamma}=\operatorname{id}_{E_{\gamma(a)}}$ nach 2. und 3.
+
+\subsection*{4.3 Definition}
+Ist $\gamma:[a, b] \rightarrow M$ eine Kurve, $a \leq s_{i} \leq b$, so schreiben wir:
+
+$$
+\gamma_{\left[s_{1}, s_{2}\right]}(t)=\gamma\left((1-t) s_{1}+t s_{2}\right), t \in[0,1]
+$$
+
+\subsection*{4.4 Notiz}
+Für $s>a$ ist $\tau_{\gamma_{[a, s]}}=\tau_{\left.\gamma\right|_{[a, s]}}$ und $\tau_{\gamma_{[a, a]}}=\operatorname{id}_{E_{\gamma(a)}}$.
+
+\subsection*{4.5 Notation}
+Ist $\gamma:[a, b] \rightarrow M$ differenzierbar, $e \in E_{\gamma(a)}$, so heißt $\gamma_{e}(t)=\tau_{\gamma_{[a, t]}}(e)$ die (zu e) hochgehobene Kurve.
+
+\subsection*{4.6 Bemerkung}
+Ist $f: M \rightarrow N$ eine differenzierbare Abbildung, $E \rightarrow N$ eine lokal triviale Faserung mit Paralleltransport $\tau$, so ist ein Paralleltransport in $f^{*} E \rightarrow M$ durch
+
+$$
+\left(f^{*} \tau_{\gamma}\right)(x, e)=\left(\gamma(b), \tau_{f \circ \gamma}(e)\right)
+$$
+
+für $\gamma:[a, b] \rightarrow M$ mit $\gamma(a)=x$ und $e \in E_{f(x)}$ wohldefiniert.
+
+\subsection*{4.7 Definition und Satz}
+Ist $\tau$ eine Parallelverschiebung auf $E$ und $\gamma: I \rightarrow M$ eine Kurve in $M$, so ist für jedes $e \in E_{p}$
+
+$$
+\dot{\tau}_{e}: T_{p} M \rightarrow T_{e} E, v \mapsto \dot{\gamma}_{e}(0)
+$$
+
+wobei $\dot{\gamma}(0)=v$ wohldefiniert (1. Ordnungsaxiom). Der dadurch definierte Vektorraumbündelhomomorphismus
+
+$$
+\pi^{*} T M \rightarrow T E,(e, v) \mapsto \dot{\tau}_{e}(v)
+$$
+
+heißt infinitesimaler Parallelismus. Es gilt $(d \pi)_{e} \circ \dot{\tau}_{e}=\operatorname{id}_{T_{\pi(e)} M}$, insbesondere ist $\dot{\tau}_{e}$ injektiv.
+
+\section*{Beweis:}
+Zu zeigen: $\dot{\tau}_{e}$ ist linear. Wir konstruieren durch radialen Paralleltransport einen Schnitt $s$ in $E$ und zeigen, dass $d s=\tau_{e}$ gilt, genauer:\\
+Sei $p \in M,(U, h)$ eine Karte um $p$ mit $h(p)=0$ und $\bar{U}_{1}(0)=h(U)$.\\
+Sei $\gamma: U \times[0,1] \rightarrow M ; \gamma(x, t):=h^{-1}(\operatorname{th}(x))$. Dann ist
+
+$$
+\begin{gathered}
+\gamma_{\mathrm{Anf}}(x)=\gamma(x, 0)=p, \text { also } \gamma_{\mathrm{Anf}}^{*} E=U \times E_{p} \\
+\gamma_{\mathrm{End}}(x)=\gamma(x, 1)=x \text { also } \gamma_{\mathrm{End}}^{*} E=E \mid U
+\end{gathered}
+$$
+
+Die Abbildung $\tau$ : $U \times E_{p} \rightarrow E \mid U,(x, e) \mapsto \tau_{\gamma_{x}}(e)$ ist differenzierbar. Sei $s_{e} \in$ $\Gamma(E \mid U)$ durch $s_{e}(x)=\tau_{\gamma_{x}}(e)$ definiert. Wir zeigen jetzt, dass $d s_{e}(v)=\dot{\tau}_{e}(v)$ gilt, dann folgt sofort: $\dot{\tau}_{e}$ ist linear und $d \pi_{e} \circ \dot{\tau}_{e}=\mathrm{id}$. Es ist $\tau_{\gamma_{[0, t]}}(e)=\tau(\gamma(x, t), e)=s_{e}\left(\gamma_{x}(t)\right)$. Sei $\dot{\gamma}_{x}(0)=v$. Dann ist
+
+$$
+d s_{e}(v)=\left.\frac{d}{d t}\right|_{t=0}\left(s_{e} \circ \gamma_{x}\right)=\left.\frac{d}{d t}\right|_{t=0} \tau_{\gamma_{[0, t]}}(e)=\left.\frac{d}{d t}\right|_{t=0}\left(\gamma_{x_{[0, t]}}\right)_{e}=\dot{\tau}_{e}(v)
+$$
+
+\subsection*{4.8 Definition}
+Der Untervektorraum $H_{e}=\dot{\tau}_{e}\left(T_{\pi(e)} M\right) \subseteq T_{e} E$ heißt der Horizontalraum an der Stelle $e$ des Parallelismus $\tau$. Ein Schnitt $s \in \Gamma E$ heißt horizontal an der Stelle $x$, wenn $d s(v) \in H_{s(x)}$ für alle $v \in T_{x} M$ gilt.
+
+\subsection*{4.9 Notiz}
+Die Vereinigung $H=\bigcup_{e \in E} H_{e} \subseteq T E$ ist in kanonischer Weise ein Untervektorraumbündel mit $H \oplus \operatorname{ker} d \pi=T E$. Es ist $\operatorname{ker} d \pi_{e}=T_{e}^{\prime} E:=T_{e} E_{\pi(e)}$.\\
+Wir verallgemeinern jetzt den Begriff des Horizontalraums eines Parallelismus, ohne das Vorliegen einer Parallelverschiebung zu fordern.
+
+\subsection*{4.10 Definition}
+Wir bezeichnen das Fasertangentialbündel mit $\bigcup T_{e} E_{\pi(e)}=T^{\prime} E$. Ein Zusammenhang ist ein Untervektorraumbündel $H \subseteq T E$, sodass gilt:
+
+$$
+H \oplus T^{\prime} E=T E
+$$
+
+Ist $H$ ein Zusammenhang auf $E$, so heißt $H_{e}$ auch Horizontalraum an der Stelle $e$, ein Schnitt $s \in \Gamma E$ horizontal and der Stelle $x$, falls $d s_{x}\left(T_{x} M\right) \subseteq H_{s(x)}$ und horizontal, falls $d s_{x}\left(T_{x} M\right) \subseteq H_{s(x)}$ für alle $x \in M$ gilt. Eine Kurve $\gamma: I \rightarrow E$ heißt horizontal and der Stelle $t$, falls $\dot{\gamma}(t) \in H_{\gamma(t)}$ und horizontal, falls $\dot{\gamma}(t) \in$ $H_{\gamma(t)}$ für alle $t \in I$.
+
+\subsection*{4.11 Bemerkung}
+In jeder lokal trivialen Faserung gibt es einen Zusammenhang. Man erhält einen Zusammenhang auf $E$, wenn man eine Riemannsche Metrik auf $E$ wählt und $H_{e}:=\left(T_{e}^{\prime} E\right)^{\perp}$ setzt.
+
+\subsection*{4.12 Lemma}
+Ist $\tau$ eine Parallelverschiebung in $E$, so ist durch den zugehörigen infinitesimalen Parallelismus ein Zusammenhang gegeben und die Hochhebungen von Kurven sind Horizontalkurven.
+
+\section*{Beweis:}
+Zu zeigen: Für $\gamma:[0, L] \rightarrow M$ ist stets $\gamma_{e}(t) \in H_{\gamma_{e}(t)}$ für $t \geq 0$. Dies gilt, denn $\gamma_{e} \mid[t, L]$ ist die Hochhebung von $\gamma \mid[t, L]$ zum Anfangspunkt $\gamma_{e}(t)$, also ist $\dot{\gamma}_{e}(t) \in H_{\gamma_{e}(t)}$ (Axiom 2).
+
+\subsection*{4.13 Satz und Definition}
+Sei $E \xrightarrow{\pi} M$ eine lokal triviale Faserung mit Zusammenhang $H \subseteq T E, f$ : $B \rightarrow M$ eine differenzierbare Abbildung. Dann ist auf $f^{*} E$ ein Zusammenhang $f^{*} H$ durch $\left(f^{*} H\right)_{(b, e)}:=\left(d \hat{f}_{(b, e)}\right)^{-1}\left(H_{e}\right)$ definiert. Dabei ist $f^{*} E \xrightarrow{\hat{f}} E$ die kanonische Vektorraumbündelabbildung über $f$.
+
+\section*{Beweis:}
+Durch $f^{*} H \subseteq T\left(f^{*} E\right)$ ist ein Untervektorraumbündel definiert, da $f^{*} H$ der Kern der Vektorraumbündelabbildung $T f^{*} E \rightarrow T E \xrightarrow{p r} T^{\prime} E$ ist. Das Faserdifferenzial\\
+$d \hat{f}_{(b, e)} \mid T_{(b, e)}^{\prime}\left(f^{*} E\right): T_{(b, e)}^{\prime}\left(f^{*} E\right)=T_{(b, e)}\left(\{b\} \times E_{f(b)}\right) \cong T_{e} E_{f(b)} \rightarrow T_{e} E_{f(b)}=T_{e}^{\prime} E$\\
+ist ein Isomorphismus, denn $\hat{f}(b, e)=e$, also $\hat{f} \mid\left(f^{*} E\right)_{b}=\operatorname{pr}_{2}$. Es ist
+
+$$
+\left(f^{*} H\right)_{(b, e)}+T_{(b, e)}^{\prime} f^{*} E=T_{(b, e)} f^{*} E
+$$
+
+denn ist $v \in T_{(b, e)}\left(f^{*} E\right)$, so ist $d \hat{f}(v) \in T_{f(b)} E=T_{e} E_{f(p)} \oplus H_{e}$, also ist $v \in$ $d \hat{f}^{-1}\left(T_{e} E_{f(p)}\right)+d \hat{f}^{-1}\left(H_{e}\right)$.\\
+Die Summe ist direkt: Sei $v \in\left(f^{*} H\right)_{(b, e)} \cap T_{(b, e)}^{\prime}\left(f^{*} E\right)$. Dann ist $d \hat{f}(v)=0$, also ist $v=0$, da $\left.d \hat{f}\right|_{T^{\prime} f^{*} E}$ ein Isomorphismus ist. Also ist $T\left(f^{*} E\right)=\left(f^{*} H\right) \oplus$ $T^{\prime}\left(f^{*} E\right)$.
+
+\subsection*{4.14 Notiz}
+Eine differenzierbare Kurve $\alpha: I \rightarrow f^{*} E$ ist genau dann horizontal bezüglich $f^{*} H$, falls $\hat{f} \circ \alpha$ horizontal bezüglich $H$ ist.
+
+\subsection*{4.15 Lemma}
+Sei $E \rightarrow M$ eine lokal triviale Faserung mit Zusammenhang $H, \beta:\left(t_{1}, t_{2}\right) \rightarrow M$ eine differenzierbare Kurve, $v$ das auf $\beta^{*} E$ eindeutig definierte horizontale Vektorfeld über $\partial_{t}$. Dann entsprechen die Horizontalkurven über $\beta$ genau den Flusslinien von $v$.\\
+Genauer: Ist $\gamma:\left(c_{1}, c_{2}\right) \rightarrow \beta^{*} E$ die eindeutig definierte maximale Integralkurve von $v$ mit $\gamma\left(t_{0}\right)=\left(t_{0}, e\right), e \in E_{\beta\left(t_{0}\right)}$, so ist $\hat{\beta}(\gamma(t))=\operatorname{pr}_{2}(\gamma(t))$ eine Horizontalkurve in $E$ über $\beta$. Umgekehrt ist jede Horizontalkurve von dieser Form.
+
+\section*{Beweis:}
+Sei $\gamma$ eine maximale Integralkurve von $v$ mit
+
+
+\begin{equation*}
+\gamma\left(t_{0}\right)=\left(t_{0}, e_{0}\right), e_{0} \in E_{\beta\left(t_{0}\right)} \tag{4.2}
+\end{equation*}
+
+
+Wegen $d \pi(v)=\partial_{t}$ ist $\gamma(t)=(t+c, \tilde{\gamma}(t))$ mit $\tilde{\gamma}(t) \in E_{\beta(t+c)}$. Wegen 4.2) ist also $\gamma(t)=(t, \tilde{\gamma}(t))$. Da $d \hat{\beta}\left(\beta^{*} H\right) \subseteq H$ ist $\gamma$ genau dann horizontal, wenn $\hat{\beta} \circ \gamma$ horizontal ist.\\
+Umgekehrt: Jede Kurve $\gamma$ in $E$ über $\beta$ (d.h. mit $\pi \circ \gamma=\beta$ ) definiert eine Kurve in $\beta^{*} E$ durch $\beta^{*} \gamma(t)=(t, \gamma(t))$ die genau dann horizontal bezüglich $f^{*} H$ ist, wenn $\gamma$ horizontal bezüglich $H$ ist.
+
+\subsection*{4.16 Definition}
+Ein Zusammenhang $H \subseteq T E$ heißt vollständig, wenn für jede Kurve $\gamma$ : $\left(t_{1}, t_{2}\right) \rightarrow M$ gilt: Jede Horizontalkurve über $\gamma$ ist auf $\left(t_{1}, t_{2}\right)$ definiert.
+
+\subsection*{4.17 Korollar}
+\begin{enumerate}
+  \item Sei $\beta:\left(t_{1}, t_{2}\right) \rightarrow M, t_{0} \in\left(t_{1}, t_{2}\right)$. Dann gibt es genau eine maximale Horizontalkurve $\beta_{e}:\left(c_{1}, c_{2}\right) \rightarrow E$ zu jedem $e \in E_{\beta\left(t_{0}\right)}$.
+  \item Der Zusammenhang einer Parallelverschiebung ist vollständig. Sei nämlich $\gamma:\left(t_{1}, t_{2}\right) \rightarrow M, t_{0} \in\left(t_{1}, t_{2}\right), e \in E_{\gamma\left(t_{0}\right)}$. Setze $\gamma_{e}(t)=\tau_{\gamma\left[t_{0}, t\right]}(e)(*)$ wie in 4.5.
+  \item Jeder vollständige Zusammenhang ist ein Zusammenhang einer Parallelverschiebung, definiere nämlich $\tau_{\gamma}$ durch (*). Dann ist 4.3.1 erfüllt nach dem Satz von Picard-Lindelöff, 4.2.2,3 entsprechen den Flussaxiomen, denn für Lösungskurve eines Flusses gilt $\alpha_{x}(t)=\alpha_{\alpha_{x}\left(t_{0}\right)}\left(t-t_{0}\right)$. 4.3.4 (Erstes Ordnungsaxiom) folgt, da $d \pi_{e}: H_{e} \rightarrow T_{\pi(e)} M$ ein Isomorphismus ist.
+\end{enumerate}
+
+\subsection*{4.18 Lemma}
+Ist $E \rightarrow M$ eine lokal triviale Faserung mit kompakter typischer Faser $F$, so ist jeder Zusammenhang in $E$ vollständig.
+
+\section*{Beweis:}
+Sei $E \rightarrow M$ eine lokal triviale Faserung mit Zusammenhang $H, \beta:\left(t_{1}, t_{2}\right) \rightarrow M$ eine Kurve und $v$ das horizontale Vektorfeld über $\partial_{t}$ in $\beta^{*} E$. Sei $\gamma:\left(\tilde{t}_{1}, \tilde{t}_{2}\right) \rightarrow$ $\beta^{*} E$ eine maximale Lösungskurve zu $v$, also o.B.d.A. $\gamma(t)=(t, \tilde{\gamma}(t))$. Wir benutzen, dass Flusslinien endlicher Lebensdauer schließlich jedes Kompaktum verlassen (d.h. ist $\alpha:\left(t_{1}, t_{2}\right) \rightarrow X$ eine Integralkurve eines Vektorfeldes, $t_{2}<$ $\infty$, dann gibt es zu jeder kompakten Teilmenge $K \subseteq X$ ein $T \in\left(t_{1}, t_{2}\right)$ mit $\alpha(t) \notin K$ für $t>T$ ).\\
+Angenommen $t_{1}<c_{1} \leq \tilde{t}_{1}<\tilde{t}_{2} \leq c_{2}<t_{2}$. Dann wäre Bild $\gamma \subseteq\left[c_{1}, c_{2}\right] \times F$ (kompakt), also wäre $\gamma$ auf ganz $\mathbb{R}$ definiert. Widerspruch!
+
+\subsection*{4.19 Aufgabe}
+Es sei $E \rightarrow M$ eine differenzierbare lokal triviale Faserung mit einem Zusammenhang $H \subset T E$ und $\beta:\left(t_{1}, t_{2}\right) \rightarrow M$ eine differenzierbare Kurve. Man schreibe das Differentialgleichungssystem für die Horizontalkurven $\alpha$ über $\beta$ in lokalen Koordinaten nieder.
+
+\subsection*{4.20 Aufgabe}
+Für die triviale Faserung $S^{1} \times \mathbb{R} \rightarrow S^{1}$ gebe man einen nicht vollständigen Zusammenhang an.
+
+
+
+\pagebreak
+
+\section{Kovariante Ableitung und Zusammenhangsform}
+\subsection*{5.1 Vorbemerkung}
+Sei $V$ ein Vektorraum, $V^{\prime} \subseteq V$ ein Untervektorraum. Die Wahl folgender Objekte ist gleichbedeutend:
+
+\begin{enumerate}
+  \item Ein Komplement $W \subseteq V$ von $V^{\prime}, V^{\prime} \oplus W=V$
+  \item Eine Projektion $V \rightarrow V^{\prime}$
+  \item Ein Rechtsinverses von $V \rightarrow V / V^{\prime}$
+  \item Eine Spaltung der exakten Sequenz $O \rightarrow V^{\prime} \rightarrow V \rightarrow V / V^{\prime} \rightarrow O$
+\end{enumerate}
+
+Entsprechend können Zusammenhänge auf $E \rightarrow M$ auf verschiedene äquivalente Weisen definiert werden.
+
+\subsection*{5.2 Satz und Definition}
+Ist $H$ ein Zusammenhang, so heißt die durch $H$ gegebene $T^{\prime} E$-wertige 1-Form $\omega^{\prime} \in \Gamma \operatorname{Hom}\left(T E, T^{\prime} E\right)=\Omega^{1}\left(E, T^{\prime} E\right)$ mit $\omega^{\prime}(v+w)=v$ für $(v, w) \in T_{e}^{\prime} E \oplus H_{e}$ die Zusammenhangsform zu $H$.\\
+Umgekehrt: Ist $\omega^{\prime} \in \Omega^{1}\left(E, T^{\prime} E\right)$, sodass $\omega_{e}^{\prime}: E_{e} \rightarrow T_{e}^{\prime} E$ eine Projektion ist, so ist $\omega$ die Zusammenhangsform des Zusammenhangs $H=\operatorname{ker} \omega^{\prime}$.
+
+\subsection*{5.3 Definition}
+Ist $H$ ein Zusammenhang auf $E$ mit Zusammenhangsform $\omega^{\prime}$, so ist die kovariante Ableitung (zu H) in Richtung $v \in T_{x} M$ durch
+
+$$
+\nabla_{v} s=\omega_{s(x)}^{\prime}(d s(v)) \in T_{e}^{\prime} E
+$$
+
+für alle $s \in \Gamma(E \mid U)$ mit $x \in U$ definiert.
+
+\subsection*{5.4 Bemerkung}
+Ist $E \rightarrow M$ ein Vektorraumbündel, so ist $T_{e}^{\prime} E=E_{\pi(e)}$, also $\nabla_{v} s \in E_{\pi(v)}$. Insbesondere definiert $\nabla$ dann eine Abbildung
+
+$$
+\Gamma T M \times \Gamma E \rightarrow \Gamma E,(v, s) \mapsto\left(\nabla_{v} s\right)
+$$
+
+\subsection*{5.5 Definition und Satz}
+Sei $R(d \pi) \subseteq \operatorname{Hom}\left(\pi^{*} T M, T E\right)$ das Bündel der Rechtsinversen von $d \pi$, also $R(d \pi)=d \pi^{-1}\left(i d_{\pi^{*} T M}\right)$ also
+
+$$
+\alpha_{e} \in R(d \pi)_{e} \Leftrightarrow d \pi_{e} \circ \alpha_{e}=\operatorname{id}_{T_{\pi(e)} M}
+$$
+
+$R(d \pi)$ ist ein affines Bündel, also ein Bündel mit typischer Faser $\mathbb{R}^{m n}$ und Strukturgruppe Aff $(m n, \mathbb{R})$, wobei $n$ die Dimension von $E$ und $m$ die Dimension von $M$ ist. Das zugehörige Vektorraumbündel ist $\operatorname{Hom}\left(\pi^{*} T M ; T^{\prime} E\right)$, d.h., jedes $\gamma \operatorname{Hom}\left(\pi^{*} T M, T^{\prime} E\right)$ operiert frei und transitiv auf $\Gamma R(d \pi)$. Die Schnitte in $R(d \pi)$ entsprechen genau den Zusammenhängen $H$ in $E$.
+
+\subsection*{5.6 Definition}
+Seien $X$ und $Y$ differenzierbare Mannigfaltigkeiten. Zwei lokal um $x_{0} \in X$ definierte Abbildungen $f$ und $g: U \rightarrow Y$ heißen $k$-äquivalent bei $x_{0}$, wenn gilt:
+
+\begin{enumerate}
+  \item $f\left(x_{0}\right)=g\left(x_{0}\right)$
+  \item Für eine und dann jede Wahl von Karten um $x_{0}$ und $f\left(x_{0}\right)$ stimmen alle partiellen Ableitungen bis zur Ordnung $k$ von $f$ und $g$ überein.
+\end{enumerate}
+
+Man schreibt $[f]_{x_{0}}^{k}$ für die $k$-Äquivalenzklassen bei $x_{0}$. Die Menge dieser Äquivalenzklassen bildet in kanonischer Weise ein differenzierbare Mannigfaltigkeit
+
+$$
+J^{k}(X ; Y)=\left\{[f]_{x}^{k} \mid x \in X ; f \text { lokal um } x \text { definiert }\right\}
+$$
+
+Insbesondere ist $J^{0}(X ; Y)=X \times Y$. Ist $E \rightarrow M$ eine lokal triviale Faserung, so bezeichnet
+
+$$
+J^{k} E:=J^{k}(\pi)=\left\{[f]_{x}^{k} \in J^{k}(M ; E) \mid \pi \circ f=\mathrm{id}\right\}
+$$
+
+\subsection*{5.7 Bemerkung}
+Für jedes $v \in T_{\pi(e)} M$ sei $E \xrightarrow{E} M$ eine lokal triviale Faserung mit Zusammenhang $H$. Dann ist
+
+$$
+\nabla_{v}: J_{e}^{1} E \rightarrow T_{e}^{\prime} E,[s]_{x}^{1} \mapsto \nabla_{v} s
+$$
+
+eine wohldefinierte Abbildung.
+
+\subsection*{5.8 Lemma}
+\begin{enumerate}
+  \item Kanonisch ist $J^{0}(\pi)=E,[s]_{x}^{0} \mapsto s(x)$
+  \item $J^{1}(\pi) \rightarrow R(d \pi),[s]_{x}^{1} \mapsto d s_{x}$ ist ein wohldefinierter Diffeomorphismus über $E$ der $\operatorname{Hom}\left(\pi^{*} T M, T^{\prime} E\right)$-äquivariant ist. Damit ist $J^{1}(E) \rightarrow E$ mit $[s]_{x}^{1} \mapsto s(x)$ ein affnes Bündel über $E$ mit Vektorraumbündel Hom $\left(\pi^{*} T M ; T^{\prime} E\right)$. Die Aktion Hom $\left(\pi^{*} T M, T^{\prime} E\right) \times J^{1}(\pi) \rightarrow J^{1}(\pi)$ ist dabei durch $(\alpha,[s]) \mapsto$ $[s+\alpha]$ ) bezüglich Bündelkarten gegeben. Ein Zusammenhang kann damit gelesen werden als Schnitt in $J^{1}(\pi) \rightarrow E$.
+\end{enumerate}
+
+\section*{Beweis:}
+Seien $[s]$ und $[\tilde{s}] \in J^{1}(\pi)$ mit $s(x)=\tilde{s}(x)$. Dann gilt $[s]_{x}^{1}=[\tilde{s}]_{x}^{1} \Leftrightarrow d s_{x}=d \tilde{s}_{x}$. Folglich ist die Abbildung wohldefiniert und injektiv. Um die Surjektivität zu zeigen, benutzen wir lokale Karten (Details: Übungsaufgabe).
+
+Zusammenfassend ist ein Zusammenhang also eine Spaltung der Sequenz
+
+$$
+0 \rightarrow T^{\prime} E \xrightarrow{i} T E \xrightarrow{d \pi} \pi^{*} T M \rightarrow 0
+$$
+
+\subsection*{5.9 Lemma}
+Sei $\nabla$ die kovariante Ableitung eines Zusammenhangs auf $E \rightarrow M$, dann ist
+
+$$
+\nabla: J^{1} E \rightarrow \operatorname{Hom}\left(\pi^{*} T M ; T^{\prime} E\right)
+$$
+
+eine Vektorisierung des affinen Bündels $J^{1} E \rightarrow E$, d.h. ein translationäquivarianter Diffeomorphismus über $E$. Der Zusammenhang ist dann durch $\nabla^{-1}(0)$ definiert.
+
+\section*{Beweis:}
+Sei $\sigma_{e}: T_{x} M \rightarrow T_{e} E$ das durch den Zusammenhang definierte Rechtsinverse von $d \pi_{e}$ (also $\sigma_{e}\left(T_{x} M\right)=H_{e}$ ). Dann ist
+
+$$
+\begin{aligned}
+J^{1}(\pi)_{e} & =R(d \pi)_{e} \xrightarrow{\nabla} \operatorname{Hom}\left(T_{x} M, T_{e}^{\prime} E\right) \\
+{[s]_{x}^{1} } & =:[\sigma+\varphi] \mapsto \nabla(\sigma+\varphi)=\varphi
+\end{aligned}
+$$
+
+und für $\psi \in \operatorname{Hom}\left(T_{x} M ; T_{e}^{\prime} E\right)$ ist $[s+\psi]=[\sigma+\varphi+\psi]$ also $\nabla(s+\psi)=\varphi+\psi=$ $\nabla s+\psi$.
+
+\subsection*{5.10 Korollar}
+$\nabla[s]=[s]-\sigma(s(x))$, wobei $\sigma$ wie im Beweis von 5.9.
+
+\subsection*{5.11 Definition}
+Unter einer kovarianten Ableitung auf einer lokal trivialen Faserung versteht man eine Vektorisierung des affinen Bündels $J^{1} E \rightarrow E$.
+
+\subsection*{5.12 Korollar}
+Durch $\nabla \rightarrow \nabla^{-1}(0)$ ist eine Bijektion zwischen kovarianten Ableitungen und dem Raum der Zusammenhänge (gelesen als Schnitt in $J^{1}(\pi)$ ) gegeben.
+
+\subsection*{5.13 Definition}
+Ist $\nabla$ eine kovariante Ableitung in $E$ und $\omega^{\prime}$ die zugehörige Zusammenhangsform, so ist für $\alpha: I \rightarrow E$
+
+$$
+\frac{\nabla}{d t} \alpha:=\omega^{\prime}(\dot{\alpha}(t))
+$$
+
+die kovariante Ableitung von $\alpha$.
+
+\subsection*{5.14 Notiz}
+Ist $v \in T_{x} M$ und $\beta$ eine repräsentierende Kurve, also $\beta(0)=v$, dann ist $\frac{\nabla}{d t} s \circ \beta=\nabla_{v} s$, denn $d s_{x}(v)=\left.\frac{d}{d t}\right|_{t=0} s \circ \beta$.
+
+\subsection*{5.15 Notation}
+Sei $\tau$ ein Paralleltransport eines Zusammenhangs, und sind $\beta:\left(t_{1}, t_{2}\right) \rightarrow M$ und $\alpha:\left(t_{1}, t_{2}\right) \rightarrow E$ Kurven mit $\pi \circ \alpha=\beta$. Sei $t_{0} \in\left(t_{1}, t_{2}\right)$, dann nennen wir
+
+$$
+\alpha_{\left(t_{0}\right)}:\left(t_{1}, t_{2}\right) \rightarrow E_{\beta\left(t_{0}\right)}, \alpha_{\left(t_{0}\right)}(t):=\tau_{\beta_{\left[t, t_{0}\right]}}(\alpha(t))
+$$
+
+$\operatorname{mit} \beta_{\left[t, t_{0}\right]}(s)=\beta\left(s t_{0}+(1-s) t\right)$ den $t_{0}$-Monitor von $\alpha$.
+
+\subsection*{5.16 Lemma}
+$$
+\left.\frac{\nabla}{d t}\right|_{t=t_{0}} \alpha=\dot{\alpha}_{\left(t_{o}\right)}\left(t_{0}\right)
+$$
+
+\section*{Beweis:}
+Sei $f:\left(t_{1}, t_{2}\right) \times E_{\beta\left(t_{0}\right)} \rightarrow E,(t, e) \mapsto \tau_{\beta_{\left[t_{0}, t\right]}}(e)$. Dann gilt
+
+\begin{enumerate}
+  \item $f\left(t, \alpha_{\left(t_{0}\right)}(t)\right)=\alpha(t)$
+  \item $f \mid\left\{t_{0}\right\} \times E_{\beta\left(t_{0}\right)}=\mathrm{id}$
+  \item $f$ führt horizontale Kurven im Produkt in horizontale Kurven über.
+\end{enumerate}
+
+Also ist $d f_{(t, e)}\left(1, \dot{\alpha}_{\left(t_{0}\right)}\left(t_{0}\right)\right)=d f\left((1,0)+\left(0, \dot{\alpha}_{\left(t_{0}\right)}\left(t_{0}\right)\right)=v+\dot{\alpha}_{\left(t_{0}\right)}\left(t_{0}\right)\right.$, wobei $v$ horizontal ist, also ist $\left.\frac{\nabla}{d t}\right|_{t=t_{0}} \alpha(t)=\dot{\alpha}_{\left(t_{0}\right)}\left(t_{0}\right)$.
+
+\subsection*{5.17 Notation}
+Wir bezeichnen den affinen Raum der Zusammenhänge über $E \rightarrow M$ mit $\mathcal{C}(E)=\Gamma R(d \pi)=\Gamma J^{1} E$.
+
+\subsection*{5.18 Aufgabe}
+Es sei $G$ eine Liegruppe mit einer gegenüber (Rechts- und Links-) Translation invarianten Riemannschen Metrik und $G_{0} \subset G$ eine kompakte Untergruppe. Man zeige: Die Parallelverschiebung des zu den Fasern orthogonalen Zusammenhangs von $G \rightarrow G / G_{0}$ ist isometrisch.
+
+\subsection*{5.19 Aufgabe}
+Eine Liegruppe sei durch Links- oder Rechtstranslation parallelisiert. Man zeige, dass bezüglich des dadurch kanonisch gegebenen Zusammenhangs für $T G \rightarrow G$ die einparametrigen Untergruppen geodätisch sind.
+
+
+
+\pagebreak
+
+\section{G-Zusammenhänge}
+
+\subsection*{6.1 Definition}
+Sei $E \rightarrow M$ ein Faserbündel mit Strukturgruppe G. Dann heißt eine Parallelverschiebung in $E$ eine $G$-Parallelverschiebung, falls sie bezüglich Karten durch eine $G$-Linksaktion gegeben ist.
+
+\subsection*{6.2 Beispiel}
+\begin{enumerate}
+  \item Ist $P \rightarrow M$ ein Prinzipalbündel, dann ist eine Parallelverschiebung genau dann eine $G$-Parallelverschiebung, wenn für alle $\gamma$ gilt: $\tau_{\gamma}(p g)=\tau_{\gamma}(p) g$
+  \item Ist $E \rightarrow M$ ein Vektorraumbündel, so ist eine Parallelverschiebung genau dann eine $G L(n, \mathbb{R})$-Parallelverschiebung, falls $\tau_{\gamma}$ für alle $\gamma$ linear ist.
+  \item Ist ( $M, g$ ) eine Riemannsche Mannigfaltigkeit, so ist eine Parallelverschiebung auf $T M$ genau dann eine $O(n)$-Parallelverschiebung, falls $\tau_{\gamma}$ eine Isometrie ist für jedes $\gamma$.
+\end{enumerate}
+
+\subsection*{6.3 Satz}
+Ist $\tau$ eine $G$-Parallelverschiebung auf $P$ durch
+
+$$
+\hat{\tau}_{\gamma}: P_{x} \times_{G} F \rightarrow P_{y} \times_{G} F,[p, v] \mapsto\left[\tau_{\gamma}(p), v\right], \quad \gamma(0)=x ; \gamma(1)=y
+$$
+
+eine $G$-Parallelverschiebung auf $P \times_{G} V$ gegeben.\\
+Ist $\tau$ eine $G$-Parallelverschiebung auf $E$, so ist durch
+
+$$
+\tilde{\tau}_{\gamma}: \operatorname{Iso}_{\gamma}\left(F, E_{x}\right) \rightarrow \operatorname{Iso}_{G}\left(F, E_{y}\right), \varphi \mapsto \tau_{\gamma} \circ \varphi
+$$
+
+eine Parallelverschiebung auf $\operatorname{Iso}_{G}(F, E)$ gegeben und es gilt $\tilde{\hat{\tau}}=\tau, \hat{\tilde{\tau}}=\tau$. (Beweis: Übung).
+
+Erinnere: Ist $\tau$ eine Parallelverschiebung, so ist der zugehörige infinitesimale Parallelismus durch
+
+$$
+H_{e}=\left\{\dot{\gamma}_{e}(0) \mid \gamma_{e}(t)=\tau_{\gamma_{[0 ; t]}}(e), \gamma:(-\varepsilon, \varepsilon) \rightarrow M, \gamma(0)=\pi(e)\right\}
+$$
+
+definiert.
+
+\subsection*{6.4 Satz}
+Ein infinitesimaler Parallelismus auf einem $G$-Prinzipalbündel kommt genau dann von einer $G$-Parallelverschiebung, falls gilt $H_{p g}=\left.d R_{g}\right|_{p} H_{p}(*)$.
+
+\section*{Beweis:}
+Für die Horizontalkurven gilt
+
+$$
+\gamma_{p g}(t)=\gamma_{p}(t) \cdot g
+$$
+
+(vgl. 6.2.1), also
+
+$$
+\dot{\gamma}_{p g}(0)=\left.d R_{g}\right|_{p} \dot{\gamma}_{p}(0)
+$$
+
+Andererseits: Gilt (*), so ist für horizontales $\gamma_{p}$ auch $\gamma_{p g}$ horizontal, also $\tau_{\gamma}(p g)=\tau_{\gamma}(p) g$.
+
+\subsection*{6.5 Definition}
+Sei $P \rightarrow M$ ein $G$-Prinzipalbündel, so heißt ein Zusammenhang $H \subseteq T P$ ein $G$-Zusammenhang, falls für alle $p \in P$ und $g \in G$ gilt $d R_{g} H_{p}=H_{p g}$.
+
+\subsection*{6.6 Satz}
+Jeder $G$-Zusammenhang auf einem $G$-Prinzipalbündel $P \rightarrow M$ ist vollständig, d.h., er ist ein infinitesimaler Parallelismus einer $G$-Parallelverschiebung.
+
+\section*{Beweis:}
+Sei $\beta:\left(t_{1}, t_{2}\right) \rightarrow M$ eine differenzierbare Kurve. Es ist zu zeigen: Jede Horizontalkurve über $\beta$ ist auf ganz ( $t_{1}, t_{2}$ ) definiert.\\
+Die Horizontalkurven über $\beta$ entsprechen genau den Lösungskurven des Horizontalvektorfeldes über $\partial_{t} \in \beta^{*} P \cong\left(t_{1}, t_{2}\right) \times G$.\\
+Genauer: Ist $\gamma_{\left(t_{0}, p\right)}(t)=:\left(t+t_{0}, \hat{\gamma}(t)\right)$ eine Lösungskurve des horizontalen Vektorfeldes mit $\gamma_{\left(t_{0}, p\right)}(0)=\left(t_{0}, p\right)$ für $p \in P_{\beta\left(t_{0}\right)}$, so ist $\hat{\gamma}\left(t-t_{0}\right)$ eine Horizontalkurve über $\beta$ und umgekehrt. Sei ( $a_{\left(t_{0}, p\right)}, b_{\left(t_{0}, p\right)}$ ) der maximale Definitionsbereich von $\gamma_{\left(t_{0}, p\right)}$. Dann ist $\left(a_{\left(t_{0}, p g\right)}, b_{\left(t_{0}, p g\right)}\right)=\left(a_{\left(t_{0}, p\right)}, b_{\left(t_{0}, p\right)}\right)$ für alle $g \in G$, also hängt $a_{\left(t_{0}, p\right)}$ und $b_{\left(t_{0}, p\right)}$ nicht von $p$ ab. Ist $\left[T_{1}, T_{2}\right] \subseteq\left(t_{1}, t_{2}\right)$, so gibt es also ein $\varepsilon>0$, sodass $b_{(t, p)}>\varepsilon$ für alle $t \in\left[T_{1}, T_{2}\right]$ und $a_{(t, p)}<-\varepsilon$ für alle $t \in\left[T_{1}, T_{2}\right]$ und alle $p \in P$.\\
+Angenommen, der maximale Definitionsbereich von $\gamma_{\left(t_{0}, p\right)}$ ist $\left(T_{1}, T_{2}\right)$ mit $T_{2}<$ $t_{2}$. Dann wäre $b_{\left(T_{2}-\frac{\varepsilon}{2}, p\right)}=\frac{\varepsilon}{2}$ für alle $p \in P_{\beta\left(T_{2}-\frac{\varepsilon}{2}\right)}$.
+
+\subsection*{6.7 Definition und Satz}
+Ist $H$ ein Zusammenhang auf einem Faserbündel mit Strukturgruppe $G$, so heißt $H$ ein $G$-Zusammenhang, falls er infinitesimaler Parallelismus einer $G$ Parallelverschiebung ist. Ist $E=P \times_{G} F$ mit einem $G$-Zusammenhang $H \subseteq$ $T E$ und $\tilde{H} \subseteq T P$ der zugehörige $G$-Zusammenhang in $P$, so ist $H_{[p, v]}=$ $d f_{v}\left(\tilde{H}_{p}\right)$, wobei $f_{v}: P \rightarrow P \times_{G} F, p \mapsto[p, v]$.\\
+Wir schreiben $C^{G}(E)$ für den Raum der $G$-Zusammenhänge auf $E$.
+
+\subsection*{6.8 Bemerkung}
+Ist $P$ ein $G$-Prinzipalfaserbündel und $L_{p}: G \rightarrow P, g \mapsto p g$, so ist
+
+$$
+T^{\prime} P=P \times \mathfrak{g},\left.(p, X) \mapsto d L_{p}\right|_{1}(X)
+$$
+
+ein Vektorraumbündelisomorphismus.\\
+Das Vektorraumbündel $\pi: T^{\prime} P \rightarrow P$ ist kanonisch ein Rechts- $G$-Bündel, denn ist $R_{g}: P \rightarrow P, p \mapsto p g$ die Rechtsmultiplikation, so ist
+
+$$
+d R_{g}: T_{p}^{\prime} P \rightarrow T_{p g}^{\prime} P
+$$
+
+wohldefiniert und $\pi\left(d R_{g}(v)\right)=\pi(v) g$.\\
+Damit wird auch $P \times \mathfrak{g} \rightarrow P$ zu einem Rechts-Vektorraumbündel mit der Rechts-G-Aktion
+
+$$
+G \times(P \times \mathfrak{g}) \rightarrow(P \times \mathfrak{g}),(g,(p, X)) \mapsto\left(p g, \operatorname{Ad}\left(g^{-1}\right) X\right),
+$$
+
+denn $\left.d L_{p g}\right|_{1}\left(\operatorname{Ad}\left(g^{-1}\right) X\right)=\left.\left.d R_{g}\right|_{p} \circ d L_{p}\right|_{1}(X)$, da
+
+$$
+L_{p g} \circ \operatorname{konj}\left(g^{-1}\right)\left(\gamma(t)=p g g^{-1} \gamma(t) g=p \gamma(t) g=R_{g} \circ L_{p}(\gamma(t)) .\right.
+$$
+
+Insbesondere ist also für $v \in T_{p} P$
+
+
+\begin{equation*}
+d R_{g}(v)=\left.d L_{p g}\right|_{1}\left(\operatorname{Ad}\left(g^{-1}\right)\left(d L_{p}\right)^{-1}(v) .\right. \tag{*}
+\end{equation*}
+
+
+\subsection*{6.9 Definition}
+Ist $\omega^{\prime}$ eine Zusammenhangsform eines $G$-Zusammenhangs $H$ auf einem Prinzipalbündel $P \rightarrow M$, so heißt die durch
+
+$$
+\left.d L_{p}\right|_{1} ^{-1} \circ \omega_{p}^{\prime}=: \omega_{p}
+$$
+
+definierte 1-Form $\omega \in \Omega^{1}(P, \mathfrak{g})$ die ( $G$-)Zusammenhangsform des $G$-Zusammenhangs.
+
+\subsection*{6.10 Satz}
+Eine 1-Form $\omega \in \Omega^{1}(P, \mathfrak{g})$ ist genau dann eine $G$-Zusammenhangsform eines $G$-Zusammenhangs, falls gilt:
+
+\begin{enumerate}
+  \item $\omega \mid T_{p}^{\prime} P=d L_{p}^{-1}$
+  \item $R_{g}^{*} \omega=\operatorname{Ad}\left(g^{-1}\right) \omega$
+\end{enumerate}
+
+\section*{Beweis:}
+Sei $\omega \in \Omega^{1}(P, \mathfrak{g})$ eine $G$-Zusammenhangsform, dann gilt 1) offenbar und ist $v=v_{H}+v^{\prime}$ mit $v_{H} \in H_{p}, v^{\prime} \in T_{p}^{\prime} P$, so ist $d R_{g}\left(v_{H}\right)$ horizontal und $d R_{g}\left(v^{\prime}\right)$ vertikal, also folgt mit (*):
+
+$$
+\begin{gathered}
+\left(R_{g}^{*} \omega\right)_{p}(v)=\omega_{p g}\left(d R_{g}\left(v_{H}\right)+d R_{g}\left(v^{\prime}\right)\right)=\omega_{p g}\left(d R_{g}\left(v^{\prime}\right)=d L_{p g}^{-1} \circ d R_{g}\left(v^{\prime}\right)\right. \\
+=\operatorname{Ad}\left(g^{-1}\right) \circ\left(d L_{p}\right)^{-1}\left(v^{\prime}\right)=\operatorname{Ad}\left(g^{-1}\right) \omega_{p}(v)
+\end{gathered}
+$$
+
+Umgekehrt: Erfüllt $\omega$ die Bedingungen 1) und 2), so definiert $H=\operatorname{ker} \omega$ einen $G$-Zusammenhang, denn es ist $H \cap T^{\prime} P=\{0\}$ und $d R_{g}\left(H_{p}\right)=H_{p g}$.
+
+\subsection*{6.11 Definition}
+Das Vektorraumbündel $P \times_{\text {Ad }} \mathfrak{g}=: \hat{\mathfrak{g}} \rightarrow M$ heißt das Bündel der infinitesimalen Eichtransformationen.
+
+\subsection*{6.12 Bemerkung}
+Ist $\sigma$ ein (lokaler) Schnitt in $P \times_{\text {Ad }} \mathfrak{g}, \sigma(x)=[s(x), v(x)]$, so ist durch
+
+$$
+(\exp \sigma)(x)=[s(x), \exp (v(x))]
+$$
+
+ein (lokaler) Schnitt im Bündel der Eichtransformationen $P \times_{\text {konj }} G$ wohldefiniert.
+
+\subsection*{6.13 Definition}
+Ist $P \rightarrow M$ ein $G$-Prinzipalbündel und $\rho$ eine Darstellung von $G$ auf $V$. Dann heißt $\alpha \in \Omega^{k}(P, V)$
+
+\begin{enumerate}
+  \item horizontal, $\alpha \in \Omega_{\mathrm{hor}}^{k}(P, V)$, falls für $v \in T^{\prime} P$ gilt: $i_{v} \alpha=0$,
+  \item $\rho$-invariant, $\alpha \in \Omega_{\mathrm{inv}}^{k}(P, V)$, falls gilt $R_{g}^{*} \alpha=\rho\left(g^{-1}\right) \alpha$.
+\end{enumerate}
+
+Ist $\omega \in \Omega_{\mathrm{inv}, \mathrm{hor}}^{k}(P, V):=\Omega_{\mathrm{inv}}^{k}(P, V) \cap \Omega_{\mathrm{hor}}^{k}(P, V)$, so heißt $\omega$ auch tensoriell.
+
+\subsection*{6.14 Satz}
+Es gilt: $\Omega_{\text {inv.hor }}^{k}(P, V)=\Omega^{k}\left(M, P \times{ }_{\rho} V\right)$.
+
+\section*{Beweis:}
+Seien $\alpha \in \Omega_{\text {inv }, \text { hor }}^{k}(P, V)$ und $v_{1}, \ldots, v_{k} \in T_{x} M$. Dann ist $\tilde{\alpha} \in \Omega^{k}\left(M, P \times_{\rho} V\right)$ $\operatorname{durch} \tilde{\alpha}_{x}\left(v_{1}, \ldots, v_{k}\right)=\left[p, \alpha_{p}\left(\tilde{v}_{1}, \ldots, \tilde{v}_{k}\right)\right]$, wobei $\tilde{v}_{j} \in T_{p} P$ mit $d \pi\left(\tilde{v}_{j}\right)=v_{j}$ wohldefiniert.\\
+Umgekehrt sind $\alpha \in \Omega^{k}\left(M, P \times_{\rho} V\right)$ und $v_{1}, \ldots, v_{k} \in T_{p} P$, so ist $\hat{\alpha} \in \Omega_{\text {inv }, \text { hor }}^{k}(P, V)$ durch $\alpha_{x}\left(d \pi\left(v_{1}\right), \ldots, d \pi\left(v_{k}\right)\right)=:\left[p, \hat{\alpha}_{p}\left(v_{1}, \ldots, v_{k}\right)\right]$ wohldefiniert.\\
+Mithilfe eines Zusammenhangs können wir jetzt eine Horizontalableitung definieren.
+
+\subsection*{6.15 Definition}
+Sei $H$ ein $G$-Zusammenhang auf $P$. Dann ist die Horizontalableitung auf $P$ durch
+
+$$
+D^{H}: \Omega^{k}(P, V) \rightarrow \Omega_{\mathrm{hor}}^{k+1}(P, V), \omega \mapsto\left(\left(v_{1}, \ldots, v_{k+1}\right) \mapsto(d \omega)\left(\bar{v}_{1}, \ldots, \bar{v}_{k+1}\right)\right)
+$$
+
+wobei $\bar{v}_{j}$ der Horizontalanteil von $v_{j}$ ist, definiert.
+
+\subsection*{6.16 Definition und Bemerkung}
+Das kovariante Differential $d^{H}: \Omega^{k}\left(M, P \times{ }_{\rho} V\right) \rightarrow \Omega^{k+1}\left(M, P \times{ }_{\rho} V\right)$ ist durch $D^{H}$ und die Identifizierung $\Omega\left(M, P \times{ }_{\rho} V\right)=\Omega_{\text {inv,hor }}(P, V)$ wohldefiniert.
+
+\section*{Beweis:}
+Es genügt zu zeigen: Für $\eta \in \Omega_{\mathrm{inv}, \mathrm{hor}}^{k}(P, V)$ ist $D^{H} \eta \in \Omega_{\mathrm{inv}}^{k+1}(P, V)$. Sei $\bar{v}_{j}$ der Horizontalanteil von $v_{j}$. Dann ist
+
+$$
+\begin{aligned}
+\left(R_{g}^{*} D^{H} \eta_{p}\right)\left(v_{1}, \ldots, v_{k+1}\right) & =\left(D^{H} \eta\right)_{p g}\left(d R_{g}\left(v_{1}\right), \ldots, d R g\left(v_{k+1}\right)\right) \\
+& =(d \eta)_{p g}\left(d R_{g}\left(\bar{v}_{1}\right), \ldots, d R_{g}\left(\bar{v}_{k+1}\right)\right) \\
+& =d\left(R_{g}^{*} \eta\right)_{p}\left(\bar{v}_{1}, \ldots, \bar{v}_{k+1}\right)=d\left(\rho\left(g^{-1}\right) \eta\right)_{p}\left(\bar{v}_{1}, \ldots, \bar{v}_{k+1}\right) \\
+& =\rho\left(g^{-1}\right) D^{H} \eta\left(v_{1}, \ldots, v_{k+1}\right)
+\end{aligned}
+$$
+
+\subsection*{6.17 Korollar}
+Ist $\hat{\eta} \in \Omega_{\mathrm{inv}, \text { hor }}^{k}(P, V)$ die durch $\eta \in \Omega^{k}\left(M, P \times{ }_{\rho} V\right)$ gegebene Differenzialform, so ist
+
+$$
+\left(d^{H} \eta\right)_{x}\left(v_{1}, \ldots, v_{k}\right)=\left[p, d \hat{\eta}\left(\bar{v}_{0}, \ldots, \bar{v}_{k}\right)\right]=\left[p, D^{H} \hat{\eta}\left(\tilde{v}_{0}, \ldots, \tilde{v}_{k}\right)\right]
+$$
+
+wobei $\bar{v}_{j} \in T_{p} P$ horizontal ist mit $d \pi\left(\bar{v}_{j}\right)=v_{j}$ und $\tilde{v}_{j} \in T_{p} P$ mit $d \pi\left(\tilde{v}_{j}\right)=v_{j}$.
+
+\subsection*{6.18 Satz}
+Ist $\omega \in \Omega_{\text {inv }}^{1}(P, \mathfrak{g})$ die Zusammenhangsform eines $G$-Zusammenhangs in $P$, $\eta \in \Omega_{\text {inv }, \text { hor }}^{k}(P, V)$, so ist
+
+$$
+D^{H} \eta=d \eta+\rho_{*} \omega \wedge \eta
+$$
+
+wobei
+
+$$
+\left(\rho_{*} \omega \wedge \eta\right)\left(v_{0}, \ldots, v_{k}\right)=\left.\sum_{i=0}^{k}(-1)^{i} d \rho\right|_{1} \omega\left(v_{i}\right) \cdot \eta\left(v_{0}, \ldots, \hat{v}_{i}, \ldots, v_{k}\right)
+$$
+
+\section*{Beweis:}
+\begin{enumerate}
+  \item Fall: $\left(v_{0}, \ldots, v_{k}\right)$ sind alle horizontal. Dann ist $\left(\rho_{*} \omega \wedge \eta\right)\left(v_{0}, \ldots, v_{k}\right)=0$.
+  \item Fall: Mindestens zwei Vektoren sind vertikal. Dann verschwindet die linke Seite und der zweite Summand auf der rechten Seite.\\
+Es ist
+\end{enumerate}
+
+$$
+\begin{aligned}
+d \eta\left(v_{0}, \ldots, v_{k}\right)= & \sum_{i=0}^{k}(-1)^{i} v_{i}\left(\eta\left(v_{0}, \ldots, \hat{v}_{i}, \ldots, v_{k}\right)\right)+ \\
+& +\sum_{i<j}(-1)^{i+j} \eta\left(\left[V_{i}, V_{j}\right], V_{0}, \ldots, \hat{V}_{i}, \ldots, \hat{V}_{j}, \ldots V_{k}\right)
+\end{aligned}
+$$
+
+wobei auf der rechten Seit die Vektoren $v_{i}$ zu Vektorfeldern $V_{i}$ ergänzt sind und zwar so, dass die vertikalen Vektoren zu vertikalen Vektorfeldern ergänzt sind. Dann ist $\left[V_{i}, V_{j}\right]$ vertikal, falls $V_{i}, V_{j}$ vertikal sind. Also ist in diesem Fall $d \eta\left(v_{0}, \ldots, v_{k}\right)=0$.\\
+3. Fall: Genau ein Vektor ist vertikal, alle anderen horizontal. Sei oBdA $v_{0}$ vertikal und alle anderen Vektoren horizontal. Die linke Seite verschwindet. Der zweite Summand auf der rechten Seite ergibt: $d \rho_{1}\left(\omega\left(v_{0}\right)\right) \eta\left(v_{1}, \ldots, v_{k}\right)$. Sei $v_{0}=\left.d L_{p}\right|_{1}(X), X \in \mathfrak{g}$. Wir setzen $v_{0}$ auf die Faser zu $X_{G}(\tilde{p})=$ $d L_{\tilde{p}}(X)$ und $v_{i}$ als horizontale Vektorfelder $v_{i}$ fort. Dann ist $\left[X_{G}, v_{i}\right]=0$, also $d \eta\left(v_{0}, \ldots, v_{k}\right)=X_{G} \eta\left(v_{1}, \ldots, v_{k}\right)$.\\
+Zu zeigen bleibt: $\left.d \rho\right|_{1}(X) \eta\left(v_{1}, \ldots, v_{k}\right)=-X_{G} \eta\left(v_{1}, \ldots, v_{k}\right)$.\\
+Es ist
+
+$$
+\begin{aligned}
+X_{G} \eta\left(v_{1}, \ldots, v_{k}\right) & =\left.\frac{d}{d t}\right|_{t=0} \eta_{p \exp (t X)}\left(v_{1}(p \exp t X), \ldots, v_{k}(p \exp t X)\right) \\
+& \left.\stackrel{\text { Inv. }}{=} \frac{d}{d t}\right|_{t=0} \rho(\exp (-t X)) \eta_{p}\left(v_{1}(p), \ldots, v_{k}(p)\right)
+\end{aligned}
+$$
+
+\subsection*{6.19 Bemerkung}
+Für die triviale Darstellung $\rho$ ist $P \times{ }_{\rho} V=M \times V,[p, v] \mapsto(\pi(p), v)$, also $\Omega^{k}\left(M, P \times{ }_{\rho} V\right)=\Omega^{k}(M, V)$ und $d^{H} \eta=d \eta$.
+
+Was das kovariante Differential mit der kovarianten Ableitung zu tun hat, werden wir im nächsten Abschnitt sehen. Wir wenden uns zuerst noch einmal den Zusammenhangsformen in $P$ zu.
+
+\subsection*{6.20 Korollar}
+Sind $\omega$ und $\tilde{\omega}$ zwei $G$-Zusammenhangsformen zweier $G$-Zusammenhänge $H$ und $\tilde{H}$ auf $P$, dann ist $\omega-\tilde{\omega} \in \Omega^{1}\left(M, P \times_{\text {Ad }} \mathfrak{g}\right)=\Gamma\left(\operatorname{Hom}\left(T M, P \times_{\text {Ad }} \mathfrak{g}\right)\right)$ und umgekehrt: Ist $A \in \Omega^{1}\left(M, P \times_{\text {Ad }} \mathfrak{g}\right)$ und $\omega$ eine $G$-Zusammenhangsform, so ist auch $\omega+A$ eine Zusammenhangsform auf $P$.\\
+Der Raum der $G$-Zusammenhänge auf $P$ ist also ein affner Raum mit Vektorraum $\Omega^{1}\left(M, P \times_{\text {Ad }} \mathfrak{g}\right)$.
+
+\section*{Beweis:}
+Nach Satz 6.14 und 6.10 ist $\omega-\tilde{\omega} \in \Omega_{\text {inv,hor }}^{1}(P, \mathfrak{g})=\Omega^{1}(M, \hat{\mathfrak{g}})$\\
+Umgekehrt: Ist $\alpha \in \Omega^{1}\left(M, P \times_{\text {Ad }} \mathfrak{g}\right)$, so ist durch $(\omega+\alpha)_{p}(v):=\omega_{p}(v)+$ $d L_{p} \hat{\alpha}_{p}(v)$ für $v \in T_{p} P$ mit $\alpha\left(d \pi_{p}(v)\right)=:\left[p, \hat{\alpha}_{p}(v)\right]$ eine $G$-Zusammenhangsform wohldefiniert und es gilt:
+
+\begin{enumerate}
+  \item $(\omega+\alpha)(v)=\omega(v)=d L_{p}^{-1} v$ für $v \in T_{p}^{\prime} P$
+  \item $\hat{\alpha}_{p g}\left(d R_{g}(v)\right)=\operatorname{Ad}\left(g^{-1}\right) \hat{\alpha}_{p}(v)$, also $R_{g}^{*}(\omega+\alpha)=\operatorname{Ad}\left(g^{-1}\right)(\omega+\alpha)$
+\end{enumerate}
+
+\subsection*{6.21 Beispiel}
+\begin{enumerate}
+  \item Sei $M=G / K$ ein reduktiver homogener Raum, also $\mathfrak{g}=\mathfrak{k} \oplus \mathfrak{m}$ mit $\operatorname{Ad}(K) \mathfrak{m} \subseteq \mathfrak{m}$ und $T M=G \times_{\operatorname{Ad}(\mathrm{K})} \mathfrak{m}$, dann ist in dem $K$-Prinzipalbündel $G \rightarrow G / K$ ein $K$-Zusammenhnag $H$ durch
+\end{enumerate}
+
+$$
+H_{g}=d L_{g}(\mathfrak{m})
+$$
+
+wohldefiniert.\\
+2. Wir betrachten $S U(2)=S^{3} \rightarrow S^{2},\left(z_{1}, z_{2}\right) \mapsto\left[z_{1}: z_{2}\right]$. Dies ist ein $S^{1}$-Prinzipalbündel mit $S^{1}$-Rechtsaktion
+
+$$
+S^{3} \times S^{1} \rightarrow S^{3},\left(\left(z_{1}, z_{2}\right), e^{i \theta}\right) \mapsto\left(z_{1} e^{i \theta}, z_{2} e^{i \theta}\right)
+$$
+
+Wir identifizieren $\mathbb{R}^{4} \cong \mathbb{C}^{2}$, also $i\left(p_{1}, p_{2}, p_{3}, p_{4}\right)^{T}=\left(-p_{2}, p_{1},-p_{4}, p_{3}\right)^{T}$ und definieren $\omega \in \Omega^{1}\left(S^{3}, i \mathbb{R}\right)$ durch
+
+$$
+\omega_{p}(Y)=i<Y, i p>\in i \mathbb{R}
+$$
+
+Behauptung: Dies ist eine Zusammenhangsform eines $S^{1}$-Zusammenhangs, denn\\
+(a) Für $Y \in T_{p}^{\prime} S^{3}$ ist $\omega_{p}(y)=d L_{p}^{-1}(y)$.\\
+(b) $R_{g}^{*} \omega=\operatorname{Ad}\left(g^{-1}\right) \omega$ für alle $g \in S^{1}$.
+
+\section*{Beweis:}
+(a) Es ist $T_{p}^{\prime} S^{3}=\mathbb{R} i p$ und $\omega_{p}(i p)=i<i p, i p>=i=d L_{p}^{-1}(i p)$.\\
+(b) $R_{e^{i t}}^{*} \omega_{p}(Y)=\omega_{p e^{i t}}\left(d R_{e^{i t}} Y\right)=i<e^{i t} Y, i e^{i t} p>=i<Y$, ip >= $\left.\omega_{p}(Y)=\operatorname{Ad}\left(e^{i t}\right) \omega_{p}(Y)\right)$.\\
+Also ist $\omega$ eine Zusammenhangsform eines $S^{1}$-Zusammenhangs. Es ist
+
+$$
+H_{e_{1}}=\left\{y \in 0 \times \mathbb{R}^{3} \mid<y, e_{2}>=0\right\}=0 \times R^{2}
+$$
+
+\subsection*{6.22 Definition}
+Sei $\omega \in \Omega^{1}(P, \mathfrak{g})$ die $G$-Zusammenhangsform eines $G$-Zusammenhangs, $s \in$ $\Gamma(P \mid U)$, so heißt $s^{*} \omega$ Beschreibung des Zusammenhangs mittels $s$ oder lokale Zusammenhangsform bezüglich $s$.
+
+\subsection*{6.23 Lemma}
+Sind $s, \tilde{s} \in \Gamma(P \mid U)$ lokale Schnitte, $\tilde{s}(x)=s(x) g(x)$ für $g: U \rightarrow G$, dann ist
+
+$$
+\tilde{s}^{*} \omega=\operatorname{Ad}\left(g^{-1}\right) s^{*} \omega+g^{-1} d g
+$$
+
+\section*{Beweis:}
+Sei $v \in T_{x} M$ und $\gamma$ repräsentierende Kurve, also $\gamma(0)=x, \dot{\gamma}(0)=v$. Sei $g(\gamma(0))=g_{0}$, also $\tilde{s}(x)=s(x) g_{0}$. Dann ist
+
+$$
+d \tilde{s}(v)=\left.\frac{d}{d t}\right|_{t=0}(s(\gamma(t)) \circ g(\gamma(t)))=\left.\left.d R_{g}\right|_{s(x)} \circ d s\right|_{x}+d L_{s(x) g_{0}}\left(d g_{0}^{-1} g\right)_{x}
+$$
+
+Sei $s^{*} \omega=: A$ und $\tilde{s}^{*} \omega=: \tilde{A}$. Dann ist
+
+$$
+\begin{gathered}
+\tilde{A}_{x}=\omega \circ d \tilde{s}_{x}=\left(s^{*} R_{g}^{*} \omega\right)_{x}+\left.\omega_{\tilde{s}\left(x_{0}\right)} \circ d L_{\tilde{s}\left(x_{0}\right)} d\left(g_{0}^{-1} g\right)\right|_{x_{0}} \\
+=\operatorname{Ad}\left(g^{-1}\right) A_{x}+\left.g^{-1}\left(x_{0}\right) d g\right|_{x_{0}}
+\end{gathered}
+$$
+
+da
+
+$$
+d L_{\tilde{s}(x)} d\left(g_{0}^{-1} g\right)_{x}(v) \in T_{\tilde{s}(x)}^{\prime} P \text { für } v \in T_{x} M
+$$
+
+\subsection*{6.24 Bemerkung}
+Sei $\left\{\left(U_{\alpha}, \varphi_{\alpha}\right) \mid \alpha \in \Lambda\right\}$ ein Bündelatlas für $P$. Seien $s_{\alpha}$ die durch $\varphi_{\alpha}$ gegebenen Schnitte mit $s_{\beta}=: s_{\alpha} g_{\alpha \beta}$ auf $U_{\alpha} \cap U_{\beta}$ und ist für jedes $\alpha \in \Lambda$ eine 1-Form $A_{\alpha} \in \Omega^{1}\left(U_{\alpha}, \mathfrak{g}\right)$ gegeben, sodass auf $U_{\alpha} \cap U_{\beta}$ gilt:
+
+$$
+A_{\beta}=\operatorname{Ad}\left(g_{\alpha \beta}\right)^{-1} A_{\alpha}+g_{\alpha \beta}^{-1} d g_{\alpha \beta}^{-1}
+$$
+
+so beschreiben die $A_{\alpha}$ einen $G$-Zusammenhang auf $P$.
+
+\section*{Beweis:}
+Sei $X \in T_{s_{\alpha}(x)} P$ Definiere
+
+$$
+\omega_{s_{\alpha}(x)}(X)=d L_{s_{\alpha}(x)}^{-1}\left(X-\left.d s_{\alpha}\right|_{x} \circ d \pi_{s_{\alpha}(x)}(X)\right)+A_{\alpha}\left(d \pi_{s_{\alpha}(x)}(X)\right)
+$$
+
+Für $X \in T_{s_{\alpha}(x) g} P$ setze $\omega_{s_{\alpha}(x) g}(X)=\operatorname{Ad}\left(g^{-1}\right) \omega_{s_{\alpha}(x)}\left(d R_{g^{-1}}(X)\right)$. Dann ist $s_{\alpha}^{*} \omega=A_{\alpha}$ und $\omega_{\alpha}$ eine $G$-Zusammenhangsform. Wegen Lemma 6.23 ist $\omega \mid \pi^{-1}\left(U_{\alpha}\right)$ unabhängig von der Wahl der Karte ( $U_{\alpha}, \varphi_{\alpha}$ ).
+
+\subsection*{6.25 Aufgabe}
+Es sei $P \xrightarrow{\pi} M$ ein $G$-Prinzipalfaserbündel mit einem $G$-Zusammenhang. Für $u \in P$ bezeichne $P(u) \subset P$ die Menge der Punkte, die man mit $u$ durch eine (stückweise differenzierbare) Horizontalkurve verbinden kann, und es sei
+
+$$
+\operatorname{Hol}(u):=\{g \in G u g \in P(u)\}
+$$
+
+Man zeige, dass $\operatorname{Hol}(u)$ eine Untergruppe von $G$ ist.
+
+\subsection*{6.26 Aufgabe}
+Es werde vorausgesetzt, dass $\operatorname{Hol}(u) \subset G$ abgeschlossen ist (in der Tat ist das immer der Fall). Man zeige, dass $P(u) \subset P$ eine Reduktion der Strukturgruppe von $P$ auf $\operatorname{Hol}(u)$ definiert.
+
+
+\end{document}

@@ -1,33 +1,212 @@
-\documentclass[10pt]{article}
-\usepackage[ngerman]{babel}
-\usepackage[utf8]{inputenc}
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17  Graphik
+% 00. Titel und Autor
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
 \usepackage[T1]{fontenc}
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{amssymb}
-\usepackage[version=4]{mhchem}
-\usepackage{stmaryrd}
-\usepackage{bbold}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+
+% --- 5. Diagramme und Grafiken ---
 \usepackage{graphicx}
-\usepackage[export]{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\CustomHeading{Definition}{#1}{#2}}{}
+\newenvironment{PROP}[2]{\CustomHeading{Proposition}{#1}{#2}}{}
+\newenvironment{THEO}[2]{\CustomHeading{Theorem}{#1}{#2}}{}
+\newenvironment{LEM}[2]{\CustomHeading{Lemma}{#1}{#2}}{}
+\newenvironment{KORO}[2]{\CustomHeading{Corollar}{#1}{#2}}{}
+\newenvironment{REM}[2]{\CustomHeading{Remark}{#1}{#2}}{}
+\newenvironment{EXA}[2]{\CustomHeading{Example}{#1}{#2}}{}
+\newenvironment{STUD}[2]{\CustomHeading{Study}{#1}{#2}}{}
+\newenvironment{CONC}[2]{\CustomHeading{Concept}{#1}{#2}}{}
+
+\newenvironment{PROOF}
+  {\begin{proof}}%
+{\end{proof}}
+
+% --- Unit Umgebung für Source-Inhalte ---
+\usepackage{mdframed}
+\newmdenv[
+  linewidth=1pt,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftmargin=0cm,
+  rightmargin=0cm,
+  skipabove=10pt,
+  skipbelow=10pt,
+  innertopmargin=0.5\baselineskip,
+  innerbottommargin=0.5\baselineskip,
+  backgroundcolor=gray!10,
+  linecolor=gray
+]{unitbox}
+
+\newenvironment{unit}[1]
+  {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
+  {\end{unitbox}}
+
+% --- 17. Graphik ---
+\usepackage{graphicx}
 \graphicspath{ {./images/} }
-\usepackage{yhmath}
+\usepackage[export]{adjustbox}
 
-\title{Riemannsche Geometrie }
-
-\author{Institut für Mathematik\\
-Goethe-Universität Frankfurt am Main\\
-Robert-Mayer-Str. 10\\
-60054 Frankfurt\\
-e-mail: bernig@math.uni-frankfurt.de}
-\date{}
-
+% --- 00. Titel und Autor ---
+\title{Mein Titel}
+\author{Tim Jaschik}
+\date{\today}
 
 \begin{document}
+
 \maketitle
-\section*{Mastervorlesung an der Goethe-Universität \\
- Frankfurt, SoSe 2025 }
-Version: 30. April 2025
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+Kurze Beschreibung …
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\tableofcontents
+
+\pagebreak
+
 
 Literatur:\\
 (1) Gallot, Hulin, Lafontaine: Riemannian Geometry Hauptreferenz für die Vorlesung.\\
@@ -36,42 +215,6 @@ Literatur:\\
 (4) Gromoll, Klingenberg, Meyer: Riemannsche Geometrie im Großen\\
 (5) Sachs, Wu: General relativity for mathematicians
 
-\section*{Inhaltsverzeichnis}
-Kapitel 1. Differenzierbare Mannigfaltigkeiten ..... 5
-
-\begin{enumerate}
-  \item Untermannigfaltigkeiten in Euklidischen Räumen ..... 5
-  \item Glatte Mannigfaltigkeiten ..... 6
-  \item Glatte Abbildungen und Vektorfelder ..... 9\\
-Kapitel 2. Riemannsche Mannigfaltigkeiten ..... 13
-  \item Definition und Beispiele ..... 13
-  \item Levi-Civita-Zusammenhang ..... 19
-  \item Kovariante Ableitung längs einer Kurve ..... 24
-  \item Paralleltransport ..... 26\\
-Kapitel 3. Geodätische und Exponentialabbildung ..... 29
-  \item Geodätische ..... 29
-  \item Exponentialabbildung ..... 32
-  \item Das Theorem von Hopf-Rinow ..... 34\\
-Kapitel 4. Krümmung ..... 43
-  \item Riemannscher Krümmungstensor ..... 43
-  \item Schnitt-, Ricci- und Skalarkrümmung ..... 45
-  \item Krümmung von Untermannigfaltigkeiten ..... 47
-  \item Variationsformeln ..... 51
-  \item Geometrie und Topologie ..... 57
-  \item Jacobifelder ..... 60\\
-Kapitel 5. Submersionen ..... 65
-  \item Uberlagerungen und Faserbündel ..... 65
-  \item Riemannsche Submersionen ..... 68
-  \item Der komplex-projektive Raum ..... 72
-  \item Längen kleiner Kreise ..... 77
-  \item Konjugierte Punkte ..... 79
-  \item Mannigfaltigkeiten konstanter Schnittkrümmung ..... 82\\
-Kapitel 6. Volumen Riemannscher Mannigfaltigkeiten ..... 87
-  \item Der Schnittort ..... 87
-  \item Beispiele für Volumenberechnungen ..... 88
-  \item Volumen und Krümmung ..... 90
-  \item Krümmung und Wachstum der Fundamentalgruppe ..... 97
-\end{enumerate}
 
 \section*{KAPITEL 1}
 \section*{Differenzierbare Mannigfaltigkeiten}

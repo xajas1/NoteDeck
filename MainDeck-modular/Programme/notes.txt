@@ -46,3 +46,10 @@ Nur darin funktionieren fastapi, uvicorn usw., denn sie wurden lokal für dieses
 Localhost
 
 http://localhost:5173
+
+
+
+
+
+
+
