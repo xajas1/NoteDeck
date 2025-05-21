@@ -1,0 +1,40 @@
+{
+  "projectName": "Test5",
+  "structure": [
+    {
+      "id": "sec-1747833353515",
+      "name": "TestTitel",
+      "subsections": [
+        {
+          "id": "sub-1747833361169",
+          "name": "Untertopic",
+          "unitIDs": [
+            "A-T15-03-03",
+            "A-T15-03-04"
+          ]
+        },
+        {
+          "id": "sub-1747833417494",
+          "name": "test4",
+          "unitIDs": []
+        }
+      ]
+    },
+    {
+      "id": "sec-1747833371995",
+      "name": "Topic 2",
+      "subsections": [
+        {
+          "id": "sub-1747833379209",
+          "name": "test3",
+          "unitIDs": [
+            "A-T15-04-01",
+            "A-T15-04-02",
+            "A-T15-03-01",
+            "A-T15-03-02"
+          ]
+        }
+      ]
+    }
+  ]
+}

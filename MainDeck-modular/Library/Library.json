@@ -476,109 +476,7 @@
     "TopicPath": "Ringe/Ringe Basics"
   },
   {
-    "UnitID": "A-T12-03-29",
-    "Subject": "A",
-    "Topic": "Ringe Basics",
-    "CTyp": "PROP",
-    "Content": "Ringhomomorphismen bilden Einheiten auf Einheiten ab und induzieren G-Hom auf Einheitsgruppen",
-    "LitID": "T12",
-    "Layer": null,
-    "Comp": null,
-    "RelInt": null,
-    "RelId": null,
-    "Cont": null,
-    "Cint": 0.0,
-    "CID": 0.0,
-    "ParentTopic": "Ringe",
-    "TopicPath": "Ringe/Ringe Basics"
-  },
-  {
-    "UnitID": "A-T12-03-30",
-    "Subject": "A",
-    "Topic": "Ringe Basics",
-    "CTyp": "DEF",
-    "Content": "Schiefkörper als Ring mit Einheitsgruppe $= R$ ohne $0$",
-    "LitID": "T12",
-    "Layer": null,
-    "Comp": null,
-    "RelInt": null,
-    "RelId": null,
-    "Cont": null,
-    "Cint": 0.0,
-    "CID": 0.0,
-    "ParentTopic": "Ringe",
-    "TopicPath": "Ringe/Ringe Basics"
-  },
-  {
-    "UnitID": "A-T12-03-31",
-    "Subject": "A",
-    "Topic": "Ringe Basics",
-    "CTyp": "DEF",
-    "Content": "Körper als abelscher Schiefkörper",
-    "LitID": "T12",
-    "Layer": null,
-    "Comp": null,
-    "RelInt": null,
-    "RelId": null,
-    "Cont": null,
-    "Cint": 0.0,
-    "CID": 0.0,
-    "ParentTopic": "Ringe",
-    "TopicPath": "Ringe/Ringe Basics"
-  },
-  {
-    "UnitID": "A-T12-03-32",
-    "Subject": "A",
-    "Topic": "Ringe Basics",
-    "CTyp": "EXA",
-    "Content": "Quaternionen als nichtkommutativer Schiefkörper",
-    "LitID": "T12",
-    "Layer": null,
-    "Comp": null,
-    "RelInt": null,
-    "RelId": null,
-    "Cont": null,
-    "Cint": 0.0,
-    "CID": 0.0,
-    "ParentTopic": "Ringe",
-    "TopicPath": "Ringe/Ringe Basics"
-  },
-  {
     "UnitID": "A-T12-04-01",
-    "Subject": "A",
-    "Topic": "Potenzreihenringe und Polynomringe",
-    "CTyp": "DEF",
-    "Content": "Potenzreihenring mit Koeffizienten in Ring",
-    "LitID": "T12",
-    "Layer": null,
-    "Comp": null,
-    "RelInt": null,
-    "RelId": null,
-    "Cont": null,
-    "Cint": 0.0,
-    "CID": 0.0,
-    "ParentTopic": "Ringe",
-    "TopicPath": "Ringe/Potenzreihenringe und Polynomringe"
-  },
-  {
-    "UnitID": "A-T12-04-02",
-    "Subject": "A",
-    "Topic": "Potenzreihenringe und Polynomringe",
-    "CTyp": "DEF",
-    "Content": "Polynomring mit Koeffizienten in Ring als Unterring von Potenzreihenring",
-    "LitID": "T12",
-    "Layer": null,
-    "Comp": null,
-    "RelInt": null,
-    "RelId": null,
-    "Cont": null,
-    "Cint": 0.0,
-    "CID": 0.0,
-    "ParentTopic": "Ringe",
-    "TopicPath": "Ringe/Potenzreihenringe und Polynomringe"
-  },
-  {
-    "UnitID": "A-T12-04-03",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "REM",
@@ -595,7 +493,7 @@
     "TopicPath": "Ringe/Potenzreihenringe und Polynomringe"
   },
   {
-    "UnitID": "A-T12-04-04",
+    "UnitID": "A-T12-04-02",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "REM",
@@ -612,7 +510,7 @@
     "TopicPath": "Ringe/Potenzreihenringe und Polynomringe"
   },
   {
-    "UnitID": "A-T12-04-05",
+    "UnitID": "A-T12-04-03",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "REM",
@@ -629,7 +527,7 @@
     "TopicPath": "Ringe/Potenzreihenringe und Polynomringe"
   },
   {
-    "UnitID": "A-T12-04-06",
+    "UnitID": "A-T12-04-04",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "REM",
@@ -646,7 +544,7 @@
     "TopicPath": "Ringe/Potenzreihenringe und Polynomringe"
   },
   {
-    "UnitID": "A-T12-04-07",
+    "UnitID": "A-T12-04-05",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "PROP",
@@ -663,7 +561,7 @@
     "TopicPath": "Ringe/Potenzreihenringe und Polynomringe"
   },
   {
-    "UnitID": "A-T12-04-08",
+    "UnitID": "A-T12-04-06",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "EXA",
@@ -680,7 +578,7 @@
     "TopicPath": "Ringe/Potenzreihenringe und Polynomringe"
   },
   {
-    "UnitID": "A-T12-04-09",
+    "UnitID": "A-T12-04-07",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "EXA",
@@ -697,7 +595,7 @@
     "TopicPath": "Ringe/Potenzreihenringe und Polynomringe"
   },
   {
-    "UnitID": "A-T12-04-10",
+    "UnitID": "A-T12-04-08",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "DEF",
@@ -714,7 +612,7 @@
     "TopicPath": "Ringe/Potenzreihenringe und Polynomringe"
   },
   {
-    "UnitID": "A-T12-04-11",
+    "UnitID": "A-T12-04-09",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "LEM",
@@ -731,7 +629,7 @@
     "TopicPath": "Ringe/Potenzreihenringe und Polynomringe"
   },
   {
-    "UnitID": "A-T12-04-12",
+    "UnitID": "A-T12-04-10",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "REM",
@@ -748,7 +646,7 @@
     "TopicPath": "Ringe/Potenzreihenringe und Polynomringe"
   },
   {
-    "UnitID": "A-T12-04-13",
+    "UnitID": "A-T12-04-11",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "REM",
@@ -765,7 +663,7 @@
     "TopicPath": "Ringe/Potenzreihenringe und Polynomringe"
   },
   {
-    "UnitID": "A-T12-04-14",
+    "UnitID": "A-T12-04-12",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "LEM",
@@ -782,7 +680,7 @@
     "TopicPath": "Ringe/Potenzreihenringe und Polynomringe"
   },
   {
-    "UnitID": "A-T12-04-15",
+    "UnitID": "A-T12-04-13",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "DEF",
@@ -799,7 +697,7 @@
     "TopicPath": "Ringe/Potenzreihenringe und Polynomringe"
   },
   {
-    "UnitID": "A-T12-04-16",
+    "UnitID": "A-T12-04-14",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "EXA",
@@ -816,7 +714,7 @@
     "TopicPath": "Ringe/Potenzreihenringe und Polynomringe"
   },
   {
-    "UnitID": "A-T12-04-17",
+    "UnitID": "A-T12-04-15",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "PROP",
@@ -833,7 +731,7 @@
     "TopicPath": "Ringe/Potenzreihenringe und Polynomringe"
   },
   {
-    "UnitID": "A-T12-04-18",
+    "UnitID": "A-T12-04-16",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "PROP",
@@ -1681,6 +1579,108 @@
     "CID": 0.0,
     "ParentTopic": "Moduln",
     "TopicPath": "Moduln/Moduln Grundlagen"
+  },
+  {
+    "UnitID": "A-T15-03-01",
+    "Subject": "A",
+    "Topic": "Ringe Basics",
+    "CTyp": "PROP",
+    "Content": "Ringhomomorphismen bilden Einheiten auf Einheiten ab und induzieren G-Hom auf Einheitsgruppen",
+    "LitID": "T15",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "Ringe",
+    "TopicPath": "Ringe/Ringe Basics"
+  },
+  {
+    "UnitID": "A-T15-03-02",
+    "Subject": "A",
+    "Topic": "Ringe Basics",
+    "CTyp": "DEF",
+    "Content": "Schiefkörper als Ring mit Einheitsgruppe $= R$ ohne $0$",
+    "LitID": "T15",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "Ringe",
+    "TopicPath": "Ringe/Ringe Basics"
+  },
+  {
+    "UnitID": "A-T15-03-03",
+    "Subject": "A",
+    "Topic": "Ringe Basics",
+    "CTyp": "DEF",
+    "Content": "Körper als abelscher Schiefkörper",
+    "LitID": "T15",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "Ringe",
+    "TopicPath": "Ringe/Ringe Basics"
+  },
+  {
+    "UnitID": "A-T15-03-04",
+    "Subject": "A",
+    "Topic": "Ringe Basics",
+    "CTyp": "EXA",
+    "Content": "Quaternionen als nichtkommutativer Schiefkörper",
+    "LitID": "T15",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "Ringe",
+    "TopicPath": "Ringe/Ringe Basics"
+  },
+  {
+    "UnitID": "A-T15-04-01",
+    "Subject": "A",
+    "Topic": "Potenzreihenringe und Polynomringe",
+    "CTyp": "DEF",
+    "Content": "Potenzreihenring mit Koeffizienten in Ring",
+    "LitID": "T15",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "Ringe",
+    "TopicPath": "Ringe/Potenzreihenringe und Polynomringe"
+  },
+  {
+    "UnitID": "A-T15-04-02",
+    "Subject": "A",
+    "Topic": "Potenzreihenringe und Polynomringe",
+    "CTyp": "DEF",
+    "Content": "Polynomring mit Koeffizienten in Ring als Unterring von Potenzreihenring",
+    "LitID": "T15",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "Ringe",
+    "TopicPath": "Ringe/Potenzreihenringe und Polynomringe"
   },
   {
     "UnitID": "CM-T12-01-01",
