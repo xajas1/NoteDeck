@@ -10798,5 +10798,23 @@
     "ParentTopic": "",
     "TopicPath": "/TEST",
     "Body": "% TODO: Inhalt ergänzen (Tex)"
+  },
+  {
+    "UnitID": "TEST-T25-01-09",
+    "Subject": "TEST",
+    "Topic": "TEST",
+    "CTyp": "DEF",
+    "Content": "TESTBeispiel10",
+    "LitID": "T25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/TEST",
+    "Body": "a) Sei $(E, \\pi, M)$ eine lokal triviale Faserung wie in 1.1. Dann heißt $E$ Totalraum, $M$ Basis, $\\pi$ Bündelprojektion und $F$ typische Faser.\\\\\nFür jedes $x \\in M$ heißt $E_{x}=\\pi^{-1}(x)$ reale Faser an der Stelle $x$.\\\\\nFür $U \\subset M$ offen heißt $\\varphi: E \\mid U \\rightarrow U \\times F$ Bündelkarte und\n\n$$\n\\left\\{\\left(U_{\\lambda}, \\varphi_{\\lambda}\\right) \\mid\\left(U_{\\lambda}, \\varphi_{\\lambda}\\right) \\text { Bündelkarte }, \\bigcup_{\\lambda \\in \\Lambda} U_{\\lambda}=M\\right\\}\n$$\n\nheißt Bündelatlas.\\\\\nDie Abbildung $\\varphi_{x}: E_{x} \\rightarrow F, \\varphi_{x}:=p r_{2} \\circ \\varphi \\mid E_{x}$ heißt Faserkarte.\\\\\nSind $(U, \\varphi)$ und $(V, \\psi)$ Bündelkarten, so heißt die Abbildung\n\n$$\n\\omega: U \\cap V \\rightarrow \\operatorname{Diffeo}(F), x \\mapsto \\psi_{x} \\circ \\varphi_{x}^{-1}\n$$\n\nder Bündelkartenwechsel zwischen $\\varphi$ und $\\psi$.\n\nb) Ist $G$ eine Liegruppe und $G \\times F \\rightarrow F$ eine $G$-Aktion, und gibt es zu jedem Bündelkartenwechsel $\\omega$ eine differenzierbare Abbildung\n\n$$\ng: U \\cap V \\rightarrow G \\text { mit } \\omega(x)(f)=g(x) f\n$$\n\nso heißt ( $E, \\pi, M$ ) ein $G$-Faserbündel mit Strukturgruppe $G$.\n\nc) Ist ( $E, \\pi, M$ ) ein $G$-Faserbündel mit typischer Faser $G$ und der durch die Linksmultiplikation mit $G$ gegebenen $G$-Aktion, so heißt ( $E, \\pi, M$ ) ein Prinzipalbündel oder Hauptfaserbündel."
   }
 ]

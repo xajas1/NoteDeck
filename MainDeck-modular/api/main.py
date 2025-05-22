@@ -92,8 +92,8 @@ def create_snip(req: SnipRequest):
         "Cint": 0.0,
         "CID": 0.0,
         "ParentTopic": req.ParentTopic,
-        "TopicPath": f"{req.ParentTopic}/{req.Topic}"
-        # "Body": req.Body
+        "TopicPath": f"{req.ParentTopic}/{req.Topic}",
+        "Body": req.Body
     }
 
     data.append(new_entry)

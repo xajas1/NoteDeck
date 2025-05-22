@@ -8,7 +8,7 @@ def build_tex_file(project_name: str):
     base_dir = Path(__file__).resolve().parents[1]
 
     export_path   = base_dir / "Export" / f"{project_name}.json"
-    modules_path  = base_dir / "Library" / "Module"
+    lib_path      = base_dir / "Library" / "Library.json"
     scripts_base  = base_dir / "Library" / "Scripts"
     project_dir   = scripts_base / project_name
     header_path   = scripts_base / "header.tex"
@@ -28,13 +28,19 @@ def build_tex_file(project_name: str):
         raise FileNotFoundError(f"❌ JSON-Struktur nicht gefunden: {export_path}")
     if not header_path.exists():
         raise FileNotFoundError(f"❌ Header-Datei fehlt: {header_path}")
+    if not lib_path.exists():
+        raise FileNotFoundError(f"❌ Library.json fehlt: {lib_path}")
 
     # Lade Daten
     with open(export_path, "r", encoding="utf-8") as f:
         project_data = json.load(f)
-
+    with open(lib_path, "r", encoding="utf-8") as f:
+        lib_data = json.load(f)
     with open(header_path, "r", encoding="utf-8") as f:
         header = f.read()
+
+    # Erstelle Dictionary für schnellen Zugriff auf Body
+    unit_dict = {entry["UnitID"]: entry for entry in lib_data}
 
     # Füge Inhalte zusammen
     body_lines = []
@@ -43,12 +49,15 @@ def build_tex_file(project_name: str):
         for sub in section["subsections"]:
             body_lines.append(f"\\subsection{{{sub['name']}}}\n")
             for uid in sub["unitIDs"]:
-                unit_file = modules_path / f"{uid}.tex"
-                if unit_file.exists():
-                    content = unit_file.read_text(encoding="utf-8").strip()
-                    body_lines.append(content + "\n")
+                entry = unit_dict.get(uid)
+                if entry:
+                    env = entry.get("CTyp", "unit")
+                    title = entry.get("Content", "Ohne Titel")
+                    body  = entry.get("Body", "").strip() or "% TODO: Inhalt ergänzen (Tex)"
+                    block = f"\\begin{{{env}}}{{{uid}}}{{{title}}}\n{body}\n\\end{{{env}}}"
+                    body_lines.append(block + "\n")
                 else:
-                    body_lines.append(f"% ⚠️ FEHLT: {uid}.tex\n")
+                    body_lines.append(f"% ⚠️ FEHLT in Library.json: {uid}\n")
 
     tex_content = header.replace("……CONTENT", "\n".join(body_lines).strip())
 

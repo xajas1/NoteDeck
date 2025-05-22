@@ -16,7 +16,13 @@ export default function TreePlaygroundView({
   const [expandedTopics, setExpandedTopics] = useState({})
   const [expandedSources, setExpandedSources] = useState({})
 
-  const getFullUnitByID = (id) => units.find(u => u.UnitID === id)
+  const getFullUnitByID = (id) => {
+    const unit = units.find(u => u.UnitID === id)
+    if (!unit) {
+      console.warn(`❗ Unit not found for ID: ${id}`)
+    }
+    return unit
+  }
 
   const grouped = {}
   for (const unit of playground) {
@@ -150,6 +156,7 @@ export default function TreePlaygroundView({
                       <ul style={styles.ul}>
                         {ids.map((uid) => {
                           const unit = getFullUnitByID(uid)
+                          if (!unit) return null
                           const index = playground.findIndex(p => p.UnitID === uid)
                           return (
                             <DraggableLine
