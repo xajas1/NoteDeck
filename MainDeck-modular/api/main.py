@@ -93,6 +93,7 @@ def create_snip(req: SnipRequest):
         "CID": 0.0,
         "ParentTopic": req.ParentTopic,
         "TopicPath": f"{req.ParentTopic}/{req.Topic}"
+        # "Body": req.Body
     }
 
     data.append(new_entry)
@@ -100,18 +101,18 @@ def create_snip(req: SnipRequest):
         json.dump(data, f, indent=2, ensure_ascii=False)
 
     # === Modul erzeugen
-    MODULE_DIR = BASE_DIR / "Library" / "Module"
-    MODULE_DIR.mkdir(parents=True, exist_ok=True)
-    module_path = MODULE_DIR / f"{unit_id}.tex"
-    module_content = f"""% Auto‑generiert aus Library.tex
-% UnitID: {unit_id}
-% Titel : {req.Content}
+#     MODULE_DIR = BASE_DIR / "Library" / "Module"
+#     MODULE_DIR.mkdir(parents=True, exist_ok=True)
+#     module_path = MODULE_DIR / f"{unit_id}.tex"
+#     module_content = f"""% Auto‑generiert aus Library.tex
+# % UnitID: {unit_id}
+# % Titel : {req.Content}
 
-\\begin{{{req.CTyp}}}{{{unit_id}}}{{{req.Content}}}
-{req.Body}
-\\end{{{req.CTyp}}}
-"""
-    module_path.write_text(module_content, encoding="utf-8")
+# \\begin{{{req.CTyp}}}{{{unit_id}}}{{{req.Content}}}
+# {req.Body}
+# \\end{{{req.CTyp}}}
+# """
+#     module_path.write_text(module_content, encoding="utf-8")
 
     # === Source-Datei ersetzen
     safe_project = req.project.replace("/", "").replace("..", "")
