@@ -176,7 +176,6 @@ function App() {
         subsections: section.subsections.map(sub => {
           const isTarget = sub.id === targetSubID
           const original = sub.unitIDs
-
           const cleaned = original.filter(id => !draggedIDs.includes(id))
 
           if (!isTarget) return { ...sub, unitIDs: cleaned }
@@ -298,24 +297,11 @@ function App() {
 
         {/* Main content area */}
         <div style={{ display: 'flex', flexGrow: 1, height: 0 }}>
-          <div style={{
-            width: '20%',
-            borderRight: '1px solid #333',
-            padding: '1rem',
-            overflowY: 'auto',
-            overscrollBehavior: 'contain',
-            height: '100%'
-          }}>
+          <div style={{ width: '25%', borderRight: '1px solid #333', padding: '1rem', overflowY: 'auto' }}>
             <TreeSidebar units={units} playground={playground} setPlayground={setPlayground} />
           </div>
-          <div style={{
-            width: '35%',
-            padding: '1.5rem',
-            overflowY: 'auto',
-            overscrollBehavior: 'contain',
-            height: '100%'
-          }}>
-            <h2 style={{ marginBottom: '1rem' }}>Ausgewählte Einheiten (Tree)</h2>
+          <div style={{ width: '35%', padding: '1.5rem', overflowY: 'auto' }}>
+            <h2 style={{ marginBottom: '1rem' }}>Ausgewählte Einheiten</h2>
             {loading ? (
               <p>⏳ Lade Inhalte …</p>
             ) : (
@@ -330,25 +316,20 @@ function App() {
               />
             )}
           </div>
-          <div style={{
-            width: '45%',
-            padding: '1.5rem',
-            borderLeft: '1px solid #333',
-            overflowY: 'auto',
-            overscrollBehavior: 'contain',
-            height: '100%'
-          }}>
-            <h2 style={{ marginBottom: '1rem' }}>📦 Struktur (Tree)</h2>
-            <TreeEditorView
-              structure={structure}
-              setStructure={setStructure}
-              selectedEditorIDs={selectedEditorIDs}
-              setSelectedEditorIDs={setSelectedEditorIDs}
-              lastSelectedEditorIndex={lastSelectedEditorIndex}
-              setLastSelectedEditorIndex={setLastSelectedEditorIndex}
-              units={units}
-              updateStructure={setStructure}
-            />
+          <div style={{ width: '40%', borderLeft: '1px solid #333', height: '100%', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ flex: 1, overflow: 'auto', padding: '1rem' }}>
+              <h2>📦 Struktur</h2>
+              <TreeEditorView
+                structure={structure}
+                setStructure={setStructure}
+                selectedEditorIDs={selectedEditorIDs}
+                setSelectedEditorIDs={setSelectedEditorIDs}
+                lastSelectedEditorIndex={lastSelectedEditorIndex}
+                setLastSelectedEditorIndex={setLastSelectedEditorIndex}
+                units={units}
+                updateStructure={setStructure}
+              />
+            </div>
           </div>
         </div>
       </div>
