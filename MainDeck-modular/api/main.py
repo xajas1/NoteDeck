@@ -20,6 +20,7 @@ app.add_middleware(
 BASE_DIR         = Path(__file__).resolve().parents[1]
 LIB_JSON         = BASE_DIR / "Library" / "Library.json"
 TOPICMAP_JSON    = BASE_DIR / "Library" / "SubjectsTopics.json"
+SOURCEMAP_JSON   = BASE_DIR / "Library" / "SourceMap.json"
 LIB_TEX          = BASE_DIR / "Library" / "Library.tex"
 SOURCE_DIR       = BASE_DIR / "Sources"
 EXPORT_DIR       = BASE_DIR / "Export"
@@ -34,7 +35,7 @@ class SnipRequest(BaseModel):
     Content: str
     Body: str
     ParentTopic: str
-    project: str  # ⬅️ NEU
+    project: str
 
 class TopicAddRequest(BaseModel):
     Subject: str
@@ -44,6 +45,55 @@ class TopicAddRequest(BaseModel):
 class SaveSourceRequest(BaseModel):
     project: str
     content: str
+
+class UpdateUnitRequest(BaseModel):
+    UnitID: str
+    field: str
+    value: str | float | int | None
+
+# === Load Units nach Source (über SourceMap) ===
+@app.get("/load-library")
+def load_library(source: str = ""):
+    if not LIB_JSON.exists():
+        raise HTTPException(status_code=500, detail="Library.json not found")
+    data = json.loads(LIB_JSON.read_text(encoding="utf-8"))
+
+    if not source:
+        return data
+
+    if not SOURCEMAP_JSON.exists():
+        raise HTTPException(status_code=500, detail="SourceMap.json not found")
+
+    source_map = json.loads(SOURCEMAP_JSON.read_text(encoding="utf-8"))
+    litid = source_map.get(source)
+    if not litid:
+        return []
+
+    return [u for u in data if u.get("LitID") == litid]
+
+# === Unit-Feld aktualisieren ===
+@app.post("/update-unit")
+def update_unit(req: UpdateUnitRequest):
+    if not LIB_JSON.exists():
+        raise HTTPException(status_code=500, detail="Library.json not found")
+
+    with LIB_JSON.open("r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    found = False
+    for entry in data:
+        if entry["UnitID"] == req.UnitID:
+            entry[req.field] = req.value
+            found = True
+            break
+
+    if not found:
+        raise HTTPException(status_code=404, detail=f"Unit {req.UnitID} not found")
+
+    with LIB_JSON.open("w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+
+    return {"status": "updated", "UnitID": req.UnitID, "field": req.field, "value": req.value}
 
 # === Snip-Endpunkt ===
 @app.post("/snip")
@@ -55,28 +105,23 @@ def create_snip(req: SnipRequest):
     if not TOPICMAP_JSON.exists():
         raise HTTPException(status_code=500, detail="SubjectsTopics.json not found")
 
-    # Lade beide JSON-Dateien
     with LIB_JSON.open("r", encoding="utf-8") as f:
         data = json.load(f)
     with TOPICMAP_JSON.open("r", encoding="utf-8") as f:
         topicmap = json.load(f)
 
-    # Ermittle TopicIndex aus der Strukturdatei
     try:
         topic_index = topicmap[req.Subject]["topics"][req.Topic]["index"]
     except KeyError:
         raise HTTPException(status_code=400, detail=f"Topic index for '{req.Subject} – {req.Topic}' not found")
 
-    # Ermittle nächste freie Nummer für dieses Topic
     matching = [
         d for d in data
         if d["Subject"] == req.Subject and d["LitID"] == req.LitID and d["Topic"] == req.Topic
     ]
     next_number = max([int(d["UnitID"].split("-")[-1]) for d in matching], default=0) + 1
-
     unit_id = f"{req.Subject}-{req.LitID}-{topic_index:02d}-{next_number:02d}"
 
-    # === JSON-Eintrag
     new_entry = {
         "UnitID": unit_id,
         "Subject": req.Subject,
@@ -100,21 +145,6 @@ def create_snip(req: SnipRequest):
     with LIB_JSON.open("w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
-    # === Modul erzeugen
-#     MODULE_DIR = BASE_DIR / "Library" / "Module"
-#     MODULE_DIR.mkdir(parents=True, exist_ok=True)
-#     module_path = MODULE_DIR / f"{unit_id}.tex"
-#     module_content = f"""% Auto‑generiert aus Library.tex
-# % UnitID: {unit_id}
-# % Titel : {req.Content}
-
-# \\begin{{{req.CTyp}}}{{{unit_id}}}{{{req.Content}}}
-# {req.Body}
-# \\end{{{req.CTyp}}}
-# """
-#     module_path.write_text(module_content, encoding="utf-8")
-
-    # === Source-Datei ersetzen
     safe_project = req.project.replace("/", "").replace("..", "")
     source_path = SOURCE_DIR / safe_project / f"{safe_project}.tex"
     if not source_path.exists():
@@ -131,12 +161,9 @@ def create_snip(req: SnipRequest):
     start, end = match.span()
     replacement = f"\\begin{{{req.CTyp}}}{{{unit_id}}}{{{req.Content}}}\n{req.Body}\n\\end{{{req.CTyp}}}"
     new_code = source_code[:start] + replacement + source_code[end:]
-
     source_path.write_text(new_code, encoding="utf-8")
 
     return {"status": "success", "UnitID": unit_id}
-
-
 
 # === TopicMap-Endpunkte ===
 @app.get("/topic-map")
