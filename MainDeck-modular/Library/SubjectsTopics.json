@@ -1,0 +1,292 @@
+{
+  "A": {
+    "index": 1,
+    "topics": {
+      "Ringe Basics": {
+        "index": 1,
+        "parent": "Ringe"
+      },
+      "Potenzreihenringe und Polynomringe": {
+        "index": 2,
+        "parent": "Ringe"
+      },
+      "Ideale und Quotienten": {
+        "index": 3,
+        "parent": "Ringe"
+      },
+      "Moduln Grundlagen": {
+        "index": 4,
+        "parent": "Moduln"
+      }
+    }
+  },
+  "CM": {
+    "index": 2,
+    "topics": {
+      "Klassische Streutheorie": {
+        "index": 1,
+        "parent": null
+      },
+      "Wirkungsquerschnitt": {
+        "index": 2,
+        "parent": "Klassische Streutheorie"
+      },
+      "Berechnung des Wirkungsquerschnitts für elastische Streuung am Zentralpotential": {
+        "index": 3,
+        "parent": "Klassische Streutheorie"
+      },
+      "Rücktransformation ins Laborsystem": {
+        "index": 4,
+        "parent": "Klassische Streutheorie"
+      },
+      "2-Körper und effektives 1-Körper Problem": {
+        "index": 5,
+        "parent": null
+      },
+      "CM-ÜB-01: Streutheorie": {
+        "index": 6,
+        "parent": "CM-ÜB"
+      }
+    }
+  },
+  "EFT1": {
+    "index": 3,
+    "topics": {
+      "Faserbündel": {
+        "index": 1,
+        "parent": null
+      }
+    }
+  },
+  "GPDE": {
+    "index": 4,
+    "topics": {
+      "Differentialoperatoren": {
+        "index": 1,
+        "parent": "GPDE Basics"
+      },
+      "Regularitätsklassen": {
+        "index": 2,
+        "parent": "GPDE Basics"
+      },
+      "Schwache Maximum Prinzipien": {
+        "index": 3,
+        "parent": "Maximum Prinzipien"
+      },
+      "Starke Maximum Prinzipien": {
+        "index": 4,
+        "parent": "Maximum Prinzipien"
+      },
+      "Hopf Lemma": {
+        "index": 5,
+        "parent": "Maximum Prinzipien"
+      },
+      "Vergleichsprinzipien für voll nicht-lineare Differentialoperatoren": {
+        "index": 6,
+        "parent": "Maximum Prinzipien"
+      }
+    }
+  },
+  "HA": {
+    "index": 5,
+    "topics": {
+      "Kategorien und Funktoren in HA": {
+        "index": 1,
+        "parent": null
+      },
+      "Moduln in HA": {
+        "index": 2,
+        "parent": null
+      },
+      "Abelsche Kategorien": {
+        "index": 3,
+        "parent": null
+      },
+      "Homologie Funktor in HA": {
+        "index": 4,
+        "parent": null
+      },
+      "Komplexe in HA": {
+        "index": 5,
+        "parent": null
+      },
+      "Hilftslemma für Diagramme der HA": {
+        "index": 6,
+        "parent": null
+      },
+      "Splitting": {
+        "index": 7,
+        "parent": null
+      },
+      "Kategorische Formulierung der Homologietheorie": {
+        "index": 8,
+        "parent": null
+      }
+    }
+  },
+  "QM": {
+    "index": 6,
+    "topics": {
+      "Schrödinger Gleichung": {
+        "index": 1,
+        "parent": null
+      },
+      "Wellenpakete in QM": {
+        "index": 2,
+        "parent": "Schrödinger Gleichung"
+      },
+      "Herleitung für freie Teilchen": {
+        "index": 3,
+        "parent": "Einführung der Schrödinger Gleichung"
+      },
+      "Teilchen in äußeren Potentialen": {
+        "index": 4,
+        "parent": "Einführung der Schrödinger Gleichung"
+      },
+      "Operatoren": {
+        "index": 5,
+        "parent": "Einführung der Schrödinger Gleichung"
+      },
+      "Korrespondenz Prinzip": {
+        "index": 6,
+        "parent": "Einführung der Schrödinger Gleichung"
+      },
+      "Wahrscheinlichkeitsdichte": {
+        "index": 7,
+        "parent": "Interpretation der Wellenfunktion"
+      },
+      "Kontinuitätsgleichung": {
+        "index": 8,
+        "parent": "Interpretation der Wellenfunktion"
+      },
+      "Impulsraum": {
+        "index": 9,
+        "parent": "Interpretation der Wellenfunktion"
+      },
+      "Erwartungswert": {
+        "index": 10,
+        "parent": "Interpretation der Wellenfunktion"
+      },
+      "Beugung und Inferenz": {
+        "index": 11,
+        "parent": "Interpretation der Wellenfunktion"
+      },
+      "Hermitisch konjugierte Operatoren": {
+        "index": 12,
+        "parent": "Ehrenfest Theorem"
+      },
+      "Bewegungsgleichung für Erwartungswert": {
+        "index": 13,
+        "parent": "Ehrenfest Theorem"
+      },
+      "Quasiklassische Bewegung": {
+        "index": 14,
+        "parent": "Ehrenfest Theorem"
+      },
+      "Stationäre Schrödinger Gleichung": {
+        "index": 15,
+        "parent": "Eindimensionale Systeme"
+      },
+      "Eindimensionale Potentialstufe": {
+        "index": 16,
+        "parent": "Eindimensionale Systeme"
+      },
+      "Streuzustände": {
+        "index": 17,
+        "parent": "Eindimensionale Potentialstufe"
+      },
+      "Reflektierte Zustände": {
+        "index": 18,
+        "parent": "Eindimensionale Potentialstufe"
+      },
+      "QM-ÜB-01: Delta-Distribution, Kommutator und W-keit": {
+        "index": 19,
+        "parent": "QM-ÜB"
+      }
+    }
+  },
+  "QMS": {
+    "index": 7,
+    "topics": {
+      "Raum Translation": {
+        "index": 1,
+        "parent": "Symmetrie in Quantenmechanik"
+      }
+    }
+  },
+  "RG": {
+    "index": 8,
+    "topics": {
+      "Untermannigfaltigkeiten im euklidischen Raum": {
+        "index": 1,
+        "parent": "Differenzierbare Mannigfaltigkeiten"
+      },
+      "Glatte Mannigfaltigkeiten": {
+        "index": 2,
+        "parent": "Differenzierbare Mannigfaltigkeiten"
+      },
+      "Glatte Abbildungen und Vektorfelder": {
+        "index": 3,
+        "parent": "Differenzierbare Mannigfaltigkeiten"
+      },
+      "Riemannische Mannigfaltigkeiten": {
+        "index": 4,
+        "parent": null
+      },
+      "Levi-Civita Zusammenhang": {
+        "index": 5,
+        "parent": "Riemannische Mannigfaltigkeiten"
+      },
+      "Kovariante Ableitung längs einer Kurve": {
+        "index": 6,
+        "parent": "Riemannische Mannigfaltigkeiten"
+      },
+      "Paralleltransport": {
+        "index": 7,
+        "parent": "Riemannische Mannigfaltigkeiten"
+      },
+      "RG-ÜB-01: Glatte Mannigfaltigkeiten": {
+        "index": 8,
+        "parent": "RG-ÜB"
+      },
+      "RG-ÜB-02: Tangentialbündel und Hyperbolischer Raum": {
+        "index": 9,
+        "parent": "RG-ÜB"
+      }
+    }
+  },
+  "TOP1": {
+    "index": 9,
+    "topics": {
+      "Basics der SHT": {
+        "index": 1,
+        "parent": "Singuläre Homologie (SHT)"
+      },
+      "Unterteilung  und Ausschneidung in SHT": {
+        "index": 2,
+        "parent": "Singuläre Homologie (SHT)"
+      },
+      "Absolute und Relative Homologie": {
+        "index": 3,
+        "parent": null
+      },
+      "Reduzierte Homologie": {
+        "index": 4,
+        "parent": null
+      }
+    }
+  },
+  "TEST": {
+    "index": 10,
+    "topics": {
+      "TEST": {
+        "index": 1,
+        "parent": null
+      },
+      "": {
+        "index": 2,
+        "parent": null
+      }
+    }
+  }
+}

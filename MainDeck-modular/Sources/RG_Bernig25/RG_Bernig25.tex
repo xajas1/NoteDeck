@@ -148,15 +148,16 @@
   \textbf{#1 #2} \textnormal{(#3)}.\enskip%
 }
 
-\newenvironment{DEF}[2]{\CustomHeading{Definition}{#1}{#2}}{}
-\newenvironment{PROP}[2]{\CustomHeading{Proposition}{#1}{#2}}{}
-\newenvironment{THEO}[2]{\CustomHeading{Theorem}{#1}{#2}}{}
-\newenvironment{LEM}[2]{\CustomHeading{Lemma}{#1}{#2}}{}
-\newenvironment{KORO}[2]{\CustomHeading{Corollar}{#1}{#2}}{}
-\newenvironment{REM}[2]{\CustomHeading{Remark}{#1}{#2}}{}
-\newenvironment{EXA}[2]{\CustomHeading{Example}{#1}{#2}}{}
-\newenvironment{STUD}[2]{\CustomHeading{Study}{#1}{#2}}{}
-\newenvironment{CONC}[2]{\CustomHeading{Concept}{#1}{#2}}{}
+\newenvironment{DEF}[2]{\begin{unitbox}\CustomHeading{Definition}{#1}{#2}}{\end{unitbox}}
+\newenvironment{PROP}[2]{\begin{unitbox}\CustomHeading{Proposition}{#1}{#2}}{\end{unitbox}}
+\newenvironment{THEO}[2]{\begin{unitbox}\CustomHeading{Theorem}{#1}{#2}}{\end{unitbox}}
+\newenvironment{LEM}[2]{\begin{unitbox}\CustomHeading{Lemma}{#1}{#2}}{\end{unitbox}}
+\newenvironment{KORO}[2]{\begin{unitbox}\CustomHeading{Corollar}{#1}{#2}}{\end{unitbox}}
+\newenvironment{REM}[2]{\begin{unitbox}\CustomHeading{Remark}{#1}{#2}}{\end{unitbox}}
+\newenvironment{EXA}[2]{\begin{unitbox}\CustomHeading{Example}{#1}{#2}}{\end{unitbox}}
+\newenvironment{STUD}[2]{\begin{unitbox}\CustomHeading{Study}{#1}{#2}}{\end{unitbox}}
+\newenvironment{CONC}[2]{\begin{unitbox}\CustomHeading{Concept}{#1}{#2}}{\end{unitbox}}
+
 
 \newenvironment{PROOF}
   {\begin{proof}}%
