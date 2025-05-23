@@ -53,12 +53,6 @@ const TexSnipTablePage = () => {
         </p>
       )}
 
-      {/* Debug-Ausgabe */}
-      <pre style={{ background: "#111", color: "#0f0", padding: "1rem", fontSize: "0.8rem" }}>
-        🔍 selectedSource: {selectedSource}
-        {"\n"}📦 units.length: {units?.length ?? "undefined"}
-      </pre>
-
       <TexSnipTable units={units} />
     </div>
   )

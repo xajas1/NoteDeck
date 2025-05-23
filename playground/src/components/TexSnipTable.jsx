@@ -11,6 +11,8 @@ const TexSnipTable = ({ units }) => {
   })
 
   const [visibleColumns, setVisibleColumns] = useState({
+    UnitID: true,
+    Subject: true,
     Layer: true,
     Comp: true,
     RelInt: true,
@@ -46,12 +48,17 @@ const TexSnipTable = ({ units }) => {
     return Array.from(new Set(localUnits.map(u => u[key] ?? ""))).sort()
   }
 
+  const isSubstantiveBody = (body) => {
+    const trimmed = (body ?? "").trim()
+    return trimmed.length > 10 && !trimmed.startsWith("%") && !/^%|\\%|\\todo/i.test(trimmed)
+  }
+
   const filteredUnits = localUnits.filter(u => {
     return (
       (filter.Subject === "" || u.Subject === filter.Subject) &&
       (filter.Topic === "" || u.Topic === filter.Topic) &&
       (filter.CTyp === "" || u.CTyp === filter.CTyp) &&
-      (filter.Body === "all" || (filter.Body === "yes" ? u.Body?.trim() : !u.Body?.trim()))
+      (filter.Body === "all" || (filter.Body === "yes" ? isSubstantiveBody(u.Body) : !isSubstantiveBody(u.Body)))
     )
   })
 
@@ -117,8 +124,8 @@ const TexSnipTable = ({ units }) => {
       <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.75rem" }}>
         <thead>
           <tr style={{ backgroundColor: "#222" }}>
-            <th style={cellStyle}>UnitID</th>
-            <th style={cellStyle}>Subject</th>
+            {visibleColumns.UnitID && <th style={cellStyle}>UnitID</th>}
+            {visibleColumns.Subject && <th style={cellStyle}>Subject</th>}
             <th style={cellStyle}>Topic</th>
             <th style={cellStyle}>CTyp</th>
             <th style={cellStyle}>Content</th>
@@ -135,8 +142,8 @@ const TexSnipTable = ({ units }) => {
         <tbody>
           {filteredUnits.map((u, i) => (
             <tr key={u.UnitID} style={{ borderTop: "1px solid #444" }}>
-              <td style={cellStyle}>{u.UnitID}</td>
-              <td style={cellStyle}>{u.Subject}</td>
+              {visibleColumns.UnitID && <td style={cellStyle}>{u.UnitID}</td>}
+              {visibleColumns.Subject && <td style={cellStyle}>{u.Subject}</td>}
               <td style={cellStyle}>{u.Topic}</td>
               <td style={cellStyle}>{u.CTyp}</td>
               <td style={cellStyle}>{u.Content}</td>
@@ -178,7 +185,7 @@ const TexSnipTable = ({ units }) => {
               )}
 
               <td style={{ textAlign: "center", fontSize: "0.9rem" }}>
-                {u.Body && u.Body.trim() !== "" ? "✅" : "❌"}
+                {isSubstantiveBody(u.Body) ? "✅" : "❌"}
               </td>
             </tr>
           ))}

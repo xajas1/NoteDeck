@@ -1,4 +1,11 @@
 {
-    "RG_Test25/RG_Test25.tex": "T25"
-  }
-  
+  "RG_Test25/RG_Test25.tex": "T25",
+  "QM_Gros25/QM_Gros25.tex": "G25",
+  "RG_Bernig25/RG_Bernig25.tex": "B25",
+  "QMS_Rischke25/QMS_Rischke25.tex": "R25",
+  "GPDE_Scheuer25/GPDE_Scheuer25.tex": "S25",
+  "A_Stix23/A_Stix23.tex": "S23",
+  "HA_Rotman79/HA_Rotman79.tex": "R79",
+  "EFT1_Kraus25/EFT1_Kraus.tex": "K25a",
+  "LIE_Kraus25/LIE_Kraus25": "K25b"
+}
