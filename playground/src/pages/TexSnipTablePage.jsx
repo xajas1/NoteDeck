@@ -31,27 +31,23 @@ const TexSnipTablePage = () => {
   }, [selectedSource])
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>Tex Snip Table</h1>
-
-      <label htmlFor="source-select">Wähle eine Quelle:</label>
-      <select
-        id="source-select"
-        value={selectedSource}
-        onChange={e => setSelectedSource(e.target.value)}
-        style={{ marginLeft: "1rem" }}
-      >
-        <option value="">-- Quelle wählen --</option>
-        {sources.map(src => (
-          <option key={src} value={src}>{src}</option>
-        ))}
-      </select>
-
-      {selectedSource && (
-        <p style={{ marginTop: "1rem" }}>
-          {units.length} Units geladen für <strong>{selectedSource}</strong>.
-        </p>
-      )}
+    <div style={{ padding: "0.5rem", fontSize: "0.85rem" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.5rem" }}>
+        <label htmlFor="source-select" style={{ fontWeight: 500 }}>Quelle:</label>
+        <select
+          id="source-select"
+          value={selectedSource}
+          onChange={e => setSelectedSource(e.target.value)}
+        >
+          <option value="">-- Quelle wählen --</option>
+          {sources.map(src => (
+            <option key={src} value={src}>{src}</option>
+          ))}
+        </select>
+        <span style={{ color: "#888", fontSize: "0.75rem" }}>
+          {selectedSource && `(${units.length} Units geladen)`}
+        </span>
+      </div>
 
       <TexSnipTable units={units} />
     </div>

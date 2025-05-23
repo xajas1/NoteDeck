@@ -288,5 +288,14 @@
         "parent": null
       }
     }
+  },
+  "": {
+    "index": 11,
+    "topics": {
+      "Ringe Basics": {
+        "index": 1,
+        "parent": "Ringe"
+      }
+    }
   }
 }
