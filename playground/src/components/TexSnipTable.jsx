@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-const TexSnipTable = ({ units }) => {
+const TexSnipTable = ({ units, onJumpToUnit }) => {
   const [localUnits, setLocalUnits] = useState([])
   const [filter, setFilter] = useState({
     Subject: "",
@@ -101,6 +101,7 @@ const TexSnipTable = ({ units }) => {
         <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.75rem" }}>
           <thead>
             <tr style={{ backgroundColor: "#222" }}>
+              <th style={cellStyle}></th>
               {visibleColumns.UnitID && <th style={cellStyle}>UnitID</th>}
               {visibleColumns.Subject && <th style={cellStyle}>Subject</th>}
               <th style={cellStyle}>Topic</th>
@@ -119,6 +120,15 @@ const TexSnipTable = ({ units }) => {
           <tbody>
             {filteredUnits.map((u, i) => (
               <tr key={u.UnitID} style={{ borderTop: "1px solid #444" }}>
+                <td style={cellStyle}>
+                  <button
+                    onClick={() => onJumpToUnit?.({ unitID: u.UnitID, litID: u.LitID })}
+                    title="Im Editor anzeigen"
+                    style={{ fontSize: "0.8rem", padding: "0 4px" }}
+                  >
+                    🔍
+                  </button>
+                </td>
                 {visibleColumns.UnitID && <td style={cellStyle}>{u.UnitID}</td>}
                 {visibleColumns.Subject && <td style={cellStyle}>{u.Subject}</td>}
                 <td style={cellStyle}>{u.Topic}</td>

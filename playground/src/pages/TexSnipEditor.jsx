@@ -3,7 +3,7 @@ import AceEditor from "react-ace"
 import "ace-builds/src-noconflict/mode-latex"
 import "ace-builds/src-noconflict/theme-twilight"
 
-export default function TexSnipEditor() {
+export default function TexSnipEditor({ splitState, onMetaChange }) {
   const [subject, setSubject] = useState("A")
   const [topic, setTopic] = useState("Ringe Basics")
   const [litID, setLitID] = useState("T12")
@@ -27,6 +27,36 @@ export default function TexSnipEditor() {
     fetch("http://localhost:8000/topic-map").then(res => res.json()).then(setTopicMap)
     fetch("http://localhost:8000/available-sources").then(res => res.json()).then(setProjects)
   }, [])
+
+  useEffect(() => {
+    if (splitState?.sourceFile) {
+      setSelectedProject(splitState.sourceFile)
+      loadSourceByProject(splitState.sourceFile)
+    }
+    if (splitState?.snipMeta) {
+      const m = splitState.snipMeta
+      if (m.Subject) setSubject(m.Subject)
+      if (m.Topic) setTopic(m.Topic)
+      if (m.LitID) setLitID(m.LitID)
+      if (m.Content) setContent(m.Content)
+      if (m.ParentTopic) setParentTopic(m.ParentTopic)
+      if (m.CTyp) setCtyp(m.CTyp)
+    }
+  }, [splitState])
+
+  useEffect(() => {
+    if (onMetaChange) {
+      onMetaChange({
+        Subject: subject,
+        Topic: topic,
+        LitID: litID,
+        CTyp: ctyp,
+        ParentTopic: parentTopic,
+        Content: content,
+        selectedProject
+      })
+    }
+  }, [subject, topic, litID, ctyp, parentTopic, content, selectedProject])
 
   const allSubjects = Object.keys(topicMap)
   const allTopics = subject in topicMap ? Object.keys(topicMap[subject].topics || {}) : []
@@ -143,18 +173,14 @@ export default function TexSnipEditor() {
         <button onClick={saveSource} style={{ fontSize: "0.7rem", padding: "0.2rem 0.5rem" }}>💾</button>
         <button onClick={handleSubmit} style={{ fontSize: "0.7rem", padding: "0.2rem 0.6rem", backgroundColor: "#3c3", color: "black" }}>Snip</button>
       </div>
-  
+
       <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: "0.3rem", fontSize: "0.75rem", marginBottom: "0.5rem" }}>
         <div>
-          <label>LitID:
-            <input type="checkbox" checked={freezeLitID} onChange={() => setFreezeLitID(f => !f)} style={{ marginLeft: "0.4rem" }} />
-          </label>
+          <label>LitID:<input type="checkbox" checked={freezeLitID} onChange={() => setFreezeLitID(f => !f)} style={{ marginLeft: "0.4rem" }} /></label>
           <input value={litID} onChange={e => setLitID(e.target.value)} style={{ width: "100%" }} />
         </div>
         <div>
-          <label>Subject:
-            <input type="checkbox" checked={freezeSubject} onChange={() => setFreezeSubject(f => !f)} style={{ marginLeft: "0.4rem" }} />
-          </label>
+          <label>Subject:<input type="checkbox" checked={freezeSubject} onChange={() => setFreezeSubject(f => !f)} style={{ marginLeft: "0.4rem" }} /></label>
           <input
             list="subjects"
             value={subject}
@@ -167,14 +193,10 @@ export default function TexSnipEditor() {
             }}
             style={{ width: "100%" }}
           />
-          <datalist id="subjects">
-            {Object.keys(topicMap).map(s => <option key={s} value={s} />)}
-          </datalist>
+          <datalist id="subjects">{Object.keys(topicMap).map(s => <option key={s} value={s} />)}</datalist>
         </div>
         <div>
-          <label>Topic:
-            <input type="checkbox" checked={freezeTopic} onChange={() => setFreezeTopic(f => !f)} style={{ marginLeft: "0.4rem" }} />
-          </label>
+          <label>Topic:<input type="checkbox" checked={freezeTopic} onChange={() => setFreezeTopic(f => !f)} style={{ marginLeft: "0.4rem" }} /></label>
           <input
             list="topics"
             value={topic}
@@ -185,14 +207,10 @@ export default function TexSnipEditor() {
             }}
             style={{ width: "100%" }}
           />
-          <datalist id="topics">
-            {(topicMap[subject]?.topics ? Object.keys(topicMap[subject].topics) : []).map(t => <option key={t} value={t} />)}
-          </datalist>
+          <datalist id="topics">{(topicMap[subject]?.topics ? Object.keys(topicMap[subject].topics) : []).map(t => <option key={t} value={t} />)}</datalist>
         </div>
         <div>
-          <label>ParentTopic:
-            <input type="checkbox" checked={freezeParent} onChange={() => setFreezeParent(f => !f)} style={{ marginLeft: "0.4rem" }} />
-          </label>
+          <label>ParentTopic:<input type="checkbox" checked={freezeParent} onChange={() => setFreezeParent(f => !f)} style={{ marginLeft: "0.4rem" }} /></label>
           <input
             list="parents"
             value={parentTopic}
@@ -216,7 +234,7 @@ export default function TexSnipEditor() {
           </select>
         </div>
       </div>
-  
+
       <div style={{ flex: 1 }}>
         <AceEditor
           ref={aceRef}
@@ -233,5 +251,4 @@ export default function TexSnipEditor() {
       </div>
     </div>
   )
-  
 }

@@ -1,0 +1,43 @@
+{
+  "Testprojekt": {
+    "sourceFile": "RG_Test25",
+    "snipMeta": {
+      "Subject": "A",
+      "Topic": "Ringe Basics",
+      "LitID": "T12",
+      "CTyp": "DEF",
+      "ParentTopic": "Ringe",
+      "Content": "",
+      "selectedProject": "RG_Test25"
+    },
+    "tableMeta": {}
+  },
+  "Neues Testprojekt": {
+    "sourceFile": "KNO_Burde14",
+    "snipMeta": {
+      "Subject": "A",
+      "Topic": "Ringe Basics",
+      "LitID": "T12",
+      "CTyp": "DEF",
+      "ParentTopic": "Ringe",
+      "Content": "",
+      "selectedProject": "KNO_Burde14"
+    },
+    "tableMeta": {}
+  },
+  "P10": {
+    "sourceFile": "RG_Bernig25",
+    "snipMeta": {
+      "Subject": "A",
+      "Topic": "Ringe Basics",
+      "LitID": "T12",
+      "CTyp": "DEF",
+      "ParentTopic": "Ringe",
+      "Content": "",
+      "selectedProject": "RG_Bernig25"
+    },
+    "tableMeta": {
+      "SelectedSource": "RG_Bernig25/RG_Bernig25.tex"
+    }
+  }
+}

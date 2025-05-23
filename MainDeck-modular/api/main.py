@@ -21,6 +21,7 @@ BASE_DIR         = Path(__file__).resolve().parents[1]
 LIB_JSON         = BASE_DIR / "Library" / "Library.json"
 TOPICMAP_JSON    = BASE_DIR / "Library" / "SubjectsTopics.json"
 SOURCEMAP_JSON   = BASE_DIR / "Library" / "SourceMap.json"
+PROJECTS_JSON    = BASE_DIR / "Library" / "snipProjects.json"
 LIB_TEX          = BASE_DIR / "Library" / "Library.tex"
 SOURCE_DIR       = BASE_DIR / "Sources"
 EXPORT_DIR       = BASE_DIR / "Export"
@@ -51,77 +52,114 @@ class UpdateUnitRequest(BaseModel):
     field: str
     value: str | float | int | None
 
+class SaveSnipProjectRequest(BaseModel):
+    project_name: str
+    data: dict
+
+class LoadSnipProjectRequest(BaseModel):
+    project_name: str
+
+# === Projekte ===
+@app.get("/snip-projects")
+def list_snip_projects():
+    if not PROJECTS_JSON.exists():
+        return {}
+    return json.loads(PROJECTS_JSON.read_text(encoding="utf-8"))
+
+@app.post("/save-snip-project")
+def save_snip_project(req: SaveSnipProjectRequest):
+    projects = {}
+    if PROJECTS_JSON.exists():
+        projects = json.loads(PROJECTS_JSON.read_text(encoding="utf-8"))
+    projects[req.project_name] = req.data
+    PROJECTS_JSON.write_text(json.dumps(projects, indent=2, ensure_ascii=False), encoding="utf-8")
+    return {"status": "saved", "project_name": req.project_name}
+
+@app.post("/load-snip-project")
+def load_snip_project(req: LoadSnipProjectRequest):
+    if not PROJECTS_JSON.exists():
+        raise HTTPException(status_code=404, detail="snipProjects.json not found")
+    projects = json.loads(PROJECTS_JSON.read_text(encoding="utf-8"))
+    if req.project_name not in projects:
+        raise HTTPException(status_code=404, detail="Projekt nicht gefunden")
+    return projects[req.project_name]
+
+@app.get("/list-splitstates")
+def list_splitstates():
+    if not PROJECTS_JSON.exists() or PROJECTS_JSON.stat().st_size == 0:
+        return []
+    try:
+        data = json.loads(PROJECTS_JSON.read_text(encoding="utf-8"))
+        return list(data.keys())
+    except json.JSONDecodeError:
+        return []
+
+@app.delete("/delete-snip-project")
+def delete_snip_project(project: str):
+    if not PROJECTS_JSON.exists():
+        raise HTTPException(status_code=404, detail="snipProjects.json not found")
+    data = json.loads(PROJECTS_JSON.read_text(encoding="utf-8"))
+    if project in data:
+        del data[project]
+        PROJECTS_JSON.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+    return {"status": "deleted"}
+
+
 # === Load Units nach Source (über SourceMap) ===
 @app.get("/load-library")
 def load_library(source: str = ""):
     if not LIB_JSON.exists():
         raise HTTPException(status_code=500, detail="Library.json not found")
     data = json.loads(LIB_JSON.read_text(encoding="utf-8"))
-
     if not source:
         return data
-
     if not SOURCEMAP_JSON.exists():
         raise HTTPException(status_code=500, detail="SourceMap.json not found")
-
     source_map = json.loads(SOURCEMAP_JSON.read_text(encoding="utf-8"))
     litid = source_map.get(source)
     if not litid:
         return []
-
     return [u for u in data if u.get("LitID") == litid]
 
-# === Unit-Feld aktualisieren ===
 @app.post("/update-unit")
 def update_unit(req: UpdateUnitRequest):
     if not LIB_JSON.exists():
         raise HTTPException(status_code=500, detail="Library.json not found")
-
     with LIB_JSON.open("r", encoding="utf-8") as f:
         data = json.load(f)
-
     found = False
     for entry in data:
         if entry["UnitID"] == req.UnitID:
             entry[req.field] = req.value
             found = True
             break
-
     if not found:
         raise HTTPException(status_code=404, detail=f"Unit {req.UnitID} not found")
-
     with LIB_JSON.open("w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
-
     return {"status": "updated", "UnitID": req.UnitID, "field": req.field, "value": req.value}
 
-# === Snip-Endpunkt ===
 @app.post("/snip")
 def create_snip(req: SnipRequest):
     import re
-
     if not LIB_JSON.exists():
         raise HTTPException(status_code=500, detail="Library.json not found")
     if not TOPICMAP_JSON.exists():
         raise HTTPException(status_code=500, detail="SubjectsTopics.json not found")
-
     with LIB_JSON.open("r", encoding="utf-8") as f:
         data = json.load(f)
     with TOPICMAP_JSON.open("r", encoding="utf-8") as f:
         topicmap = json.load(f)
-
     try:
         topic_index = topicmap[req.Subject]["topics"][req.Topic]["index"]
     except KeyError:
         raise HTTPException(status_code=400, detail=f"Topic index for '{req.Subject} – {req.Topic}' not found")
-
     matching = [
         d for d in data
         if d["Subject"] == req.Subject and d["LitID"] == req.LitID and d["Topic"] == req.Topic
     ]
     next_number = max([int(d["UnitID"].split("-")[-1]) for d in matching], default=0) + 1
     unit_id = f"{req.Subject}-{req.LitID}-{topic_index:02d}-{next_number:02d}"
-
     new_entry = {
         "UnitID": unit_id,
         "Subject": req.Subject,
@@ -140,32 +178,25 @@ def create_snip(req: SnipRequest):
         "TopicPath": f"{req.ParentTopic}/{req.Topic}",
         "Body": req.Body
     }
-
     data.append(new_entry)
     with LIB_JSON.open("w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
-
     safe_project = req.project.replace("/", "").replace("..", "")
     source_path = SOURCE_DIR / safe_project / f"{safe_project}.tex"
     if not source_path.exists():
         raise HTTPException(status_code=404, detail="Quelldatei nicht gefunden")
-
     source_code = source_path.read_text(encoding="utf-8")
     escaped_body = re.escape(req.Body.strip())
     pattern = re.compile(escaped_body, re.DOTALL)
-
     match = pattern.search(source_code)
     if not match:
         raise HTTPException(status_code=400, detail="Markierter Body nicht exakt in Source-Datei gefunden.")
-
     start, end = match.span()
     replacement = f"\\begin{{{req.CTyp}}}{{{unit_id}}}{{{req.Content}}}\n{req.Body}\n\\end{{{req.CTyp}}}"
     new_code = source_code[:start] + replacement + source_code[end:]
     source_path.write_text(new_code, encoding="utf-8")
-
     return {"status": "success", "UnitID": unit_id}
 
-# === TopicMap-Endpunkte ===
 @app.get("/topic-map")
 def get_topic_map():
     if not TOPICMAP_JSON.exists():
@@ -176,35 +207,28 @@ def get_topic_map():
 def add_topic(req: TopicAddRequest):
     if not TOPICMAP_JSON.exists():
         raise HTTPException(status_code=404, detail="SubjectsTopics.json not found")
-
     with TOPICMAP_JSON.open("r", encoding="utf-8") as f:
         data = json.load(f)
-
     subj = req.Subject
     topic = req.Topic
     parent = req.ParentTopic
-
     if subj not in data:
         data[subj] = {
             "index": max([v["index"] for v in data.values()], default=0) + 1,
             "topics": {}
         }
-
     if topic in data[subj]["topics"]:
         return {
             "status": "exists",
             "TopicPath": f"{parent}/{topic}" if parent else topic
         }
-
     next_index = max([t["index"] for t in data[subj]["topics"].values()], default=0) + 1
     data[subj]["topics"][topic] = {
         "index": next_index,
         "parent": parent
     }
-
     with TOPICMAP_JSON.open("w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
-
     topic_path = f"{parent}/{topic}" if parent else topic
     return {
         "status": "added",
@@ -214,7 +238,6 @@ def add_topic(req: TopicAddRequest):
         "index": next_index
     }
 
-# === Source-Dateien ===
 @app.get("/available-sources")
 def available_sources():
     sources = []
@@ -244,7 +267,6 @@ def save_source(req: SaveSourceRequest):
     tex_path.write_text(req.content, encoding="utf-8")
     return {"status": "saved", "project": safe}
 
-# === Bestehende Funktionen ===
 def load_units():
     if not LIB_JSON.exists():
         return []

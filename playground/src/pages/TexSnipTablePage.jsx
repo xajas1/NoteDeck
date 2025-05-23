@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import TexSnipTable from '../components/TexSnipTable'
 
-const TexSnipTablePage = () => {
+const TexSnipTablePage = ({ splitState, onMetaChange }) => {
   const [sources, setSources] = useState([])
   const [selectedSource, setSelectedSource] = useState("")
   const [units, setUnits] = useState([])
 
-  // Lade Quellen
+  // Quellen laden
   useEffect(() => {
     axios.get('http://localhost:8000/available-sources')
       .then(res => {
@@ -17,7 +17,7 @@ const TexSnipTablePage = () => {
       .catch(err => console.error("❌ Fehler beim Laden der Quellen:", err))
   }, [])
 
-  // Lade Units, wenn Quelle ausgewählt wurde
+  // Units laden bei Quellenauswahl
   useEffect(() => {
     if (selectedSource) {
       console.log("📡 Lade Units für:", selectedSource)
@@ -27,6 +27,22 @@ const TexSnipTablePage = () => {
           setUnits(res.data)
         })
         .catch(err => console.error("❌ Fehler beim Laden der Units:", err))
+    }
+  }, [selectedSource])
+
+  // Bei geladenem Snapshot: Quelle übernehmen
+  useEffect(() => {
+    if (splitState?.tableMeta?.SelectedSource) {
+      setSelectedSource(splitState.tableMeta.SelectedSource)
+    }
+  }, [splitState])
+
+  // Metadaten zurückmelden
+  useEffect(() => {
+    if (onMetaChange) {
+      onMetaChange({
+        SelectedSource: selectedSource
+      })
     }
   }, [selectedSource])
 
