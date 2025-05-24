@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import TexSnipTable from '../components/TexSnipTable'
 
-const TexSnipTablePage = ({ splitState, onMetaChange }) => {
+const TexSnipTablePage = ({ splitState, onMetaChange, onJumpToUnit }) => {
   const [sources, setSources] = useState([])
   const [selectedSource, setSelectedSource] = useState("")
   const [units, setUnits] = useState([])
@@ -11,38 +11,33 @@ const TexSnipTablePage = ({ splitState, onMetaChange }) => {
   useEffect(() => {
     axios.get('http://localhost:8000/available-sources')
       .then(res => {
-        console.log("🧾 Quellen geladen:", res.data)
         setSources(res.data)
       })
       .catch(err => console.error("❌ Fehler beim Laden der Quellen:", err))
   }, [])
 
-  // Units laden bei Quellenauswahl
+  // Snapshot-Einstellungen anwenden
+  useEffect(() => {
+    if (splitState?.tableMeta?.selectedSource) {
+      setSelectedSource(splitState.tableMeta.selectedSource)
+    } else if (splitState?.sourceFile) {
+      setSelectedSource(splitState.sourceFile)
+    }
+  }, [splitState])
+
+  // Units laden
   useEffect(() => {
     if (selectedSource) {
-      console.log("📡 Lade Units für:", selectedSource)
       axios.get(`http://localhost:8000/load-library?source=${selectedSource}`)
-        .then(res => {
-          console.log("📥 Units erhalten:", res.data)
-          setUnits(res.data)
-        })
+        .then(res => setUnits(res.data))
         .catch(err => console.error("❌ Fehler beim Laden der Units:", err))
     }
   }, [selectedSource])
 
-  // Bei geladenem Snapshot: Quelle übernehmen
-  useEffect(() => {
-    if (splitState?.tableMeta?.SelectedSource) {
-      setSelectedSource(splitState.tableMeta.SelectedSource)
-    }
-  }, [splitState])
-
-  // Metadaten zurückmelden
+  // tableMeta zurückgeben
   useEffect(() => {
     if (onMetaChange) {
-      onMetaChange({
-        SelectedSource: selectedSource
-      })
+      onMetaChange({ selectedSource })
     }
   }, [selectedSource])
 
@@ -65,7 +60,7 @@ const TexSnipTablePage = ({ splitState, onMetaChange }) => {
         </span>
       </div>
 
-      <TexSnipTable units={units} />
+      <TexSnipTable units={units} onJumpToUnit={onJumpToUnit} />
     </div>
   )
 }

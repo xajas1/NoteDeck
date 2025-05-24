@@ -13,6 +13,7 @@ const TexSnipTable = ({ units, onJumpToUnit }) => {
   const [visibleColumns, setVisibleColumns] = useState({
     UnitID: true,
     Subject: true,
+    ParentTopic: true,
     Layer: true,
     Comp: true,
     RelInt: true,
@@ -105,6 +106,7 @@ const TexSnipTable = ({ units, onJumpToUnit }) => {
               {visibleColumns.UnitID && <th style={cellStyle}>UnitID</th>}
               {visibleColumns.Subject && <th style={cellStyle}>Subject</th>}
               <th style={cellStyle}>Topic</th>
+              {visibleColumns.ParentTopic && <th style={cellStyle}>ParentTopic</th>}
               <th style={cellStyle}>CTyp</th>
               <th style={cellStyle}>Content</th>
               {visibleColumns.Layer && <th style={metricCellStyle}>Layer</th>}
@@ -132,6 +134,7 @@ const TexSnipTable = ({ units, onJumpToUnit }) => {
                 {visibleColumns.UnitID && <td style={cellStyle}>{u.UnitID}</td>}
                 {visibleColumns.Subject && <td style={cellStyle}>{u.Subject}</td>}
                 <td style={cellStyle}>{u.Topic}</td>
+                {visibleColumns.ParentTopic && <td style={cellStyle}>{u.ParentTopic}</td>}
                 <td style={cellStyle}>{u.CTyp}</td>
                 <td style={cellStyle}>{u.Content}</td>
                 {visibleColumns.Layer && <td style={metricCellStyle}><input style={metricInputStyle} value={u.Layer ?? ""} onChange={e => handleChange(i, 'Layer', e.target.value)} /></td>}

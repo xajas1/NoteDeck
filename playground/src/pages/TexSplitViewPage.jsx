@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import SplitPane from 'react-split-pane'
 import TexSnipEditor from './TexSnipEditor'
 import TexSnipTablePage from './TexSnipTablePage'
@@ -12,10 +12,19 @@ const TexSplitViewPage = () => {
   const [snipMeta, setSnipMeta] = useState({})
   const [tableMeta, setTableMeta] = useState({})
 
+  const editorRef = useRef(null)
+
+  const refreshSnapshots = async () => {
+    try {
+      const res = await axios.get("http://localhost:8000/snip-projects")
+      setAvailableSnapshots(Object.keys(res.data))
+    } catch (err) {
+      console.error("❌ Fehler beim Aktualisieren der Snapshot-Liste:", err)
+    }
+  }
+
   useEffect(() => {
-    axios.get("http://localhost:8000/snip-projects")
-      .then(res => setAvailableSnapshots(Object.keys(res.data)))
-      .catch(err => console.error("Fehler beim Laden gespeicherter Snapshots", err))
+    refreshSnapshots()
   }, [])
 
   const saveCurrentSnapshot = async () => {
@@ -30,9 +39,10 @@ const TexSplitViewPage = () => {
         project_name: projectName,
         data: state
       })
-      alert("Snapshot gespeichert.")
+      await refreshSnapshots()
+      alert("✅ Snapshot gespeichert.")
     } catch (err) {
-      console.error("Fehler beim Speichern", err)
+      console.error("❌ Fehler beim Speichern", err)
     }
   }
 
@@ -44,7 +54,13 @@ const TexSplitViewPage = () => {
       setSplitState(res.data)
       setProjectName(name)
     } catch (err) {
-      console.error("Fehler beim Laden", err)
+      console.error("❌ Fehler beim Laden", err)
+    }
+  }
+
+  const handleScrollToUnit = ({ unitID }) => {
+    if (editorRef.current?.scrollToUnit) {
+      editorRef.current.scrollToUnit(unitID)
     }
   }
 
@@ -70,7 +86,7 @@ const TexSplitViewPage = () => {
         </button>
         <select
           onChange={e => loadSnapshot(e.target.value)}
-          value=""
+          value={projectName}
           style={{ fontSize: "0.75rem", padding: "0.3rem" }}
         >
           <option value="" disabled>Snapshot laden …</option>
@@ -89,6 +105,7 @@ const TexSplitViewPage = () => {
       >
         <div style={{ height: '100%', overflow: 'auto' }}>
           <TexSnipEditor
+            ref={editorRef}
             splitState={splitState}
             onMetaChange={setSnipMeta}
           />
@@ -97,6 +114,7 @@ const TexSplitViewPage = () => {
           <TexSnipTablePage
             splitState={splitState}
             onMetaChange={setTableMeta}
+            onJumpToUnit={handleScrollToUnit}
           />
         </div>
       </SplitPane>
