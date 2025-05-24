@@ -407,3 +407,52 @@ def rename_unit(request: dict = Body(...)):
     tex_path.write_text(new_tex, encoding="utf-8")
 
     return {"status": "renamed", "newUnitID": new_id}
+
+
+
+
+@app.post("/update-env-or-content")
+def update_env_or_content(request: dict = Body(...)):
+    old_id = request.get("UnitID")
+    new_content = request.get("Content")
+    new_ctyp = request.get("CTyp")
+
+    if not all([old_id, new_content, new_ctyp]):
+        raise HTTPException(status_code=400, detail="Missing UnitID, Content, or CTyp")
+
+    if not LIB_JSON.exists() or not SOURCEMAP_JSON.exists():
+        raise HTTPException(status_code=500, detail="Required files not found")
+
+    data = json.loads(LIB_JSON.read_text(encoding="utf-8"))
+    sourcemap = json.loads(SOURCEMAP_JSON.read_text(encoding="utf-8"))
+
+    unit = next((u for u in data if u["UnitID"] == old_id), None)
+    if not unit:
+        raise HTTPException(status_code=404, detail="Unit not found")
+
+    # Update in Library.json
+    unit["Content"] = new_content
+    unit["CTyp"] = new_ctyp
+    LIB_JSON.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+
+    # Update in .tex
+    litid = unit.get("LitID")
+    tex_path = next((SOURCE_DIR / f for f, v in sourcemap.items() if v == litid), None)
+    if not tex_path or not tex_path.exists():
+        raise HTTPException(status_code=404, detail="Source file not found for LitID")
+
+    tex = tex_path.read_text(encoding="utf-8")
+    old_content = unit["Content"]
+    old_ctyp = unit["CTyp"]
+
+    pattern = rf"\\begin\{{{re.escape(old_ctyp)}\}}\{{{re.escape(old_id)}\}}\{{(.*?)\}}(.*?)\\end\{{{re.escape(old_ctyp)}\}}"
+    match = re.search(pattern, tex, flags=re.DOTALL)
+    if not match:
+        raise HTTPException(status_code=400, detail="Pattern not found in .tex")
+
+    body = match.group(2)
+    replacement = f"\\begin{{{new_ctyp}}}{{{old_id}}}{{{new_content}}}{body}\\end{{{new_ctyp}}}"
+    new_tex = tex[:match.start()] + replacement + tex[match.end():]
+    tex_path.write_text(new_tex, encoding="utf-8")
+
+    return {"status": "updated", "UnitID": old_id}

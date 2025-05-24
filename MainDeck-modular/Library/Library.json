@@ -10692,24 +10692,6 @@
     "Body": "% TODO: Inhalt ergänzen (Tex)"
   },
   {
-    "UnitID": "TEST-T25-02-01",
-    "Subject": "TEST",
-    "Topic": "",
-    "CTyp": "EXA",
-    "Content": "TESTBeispiel6",
-    "LitID": "T25",
-    "Layer": null,
-    "Comp": null,
-    "RelInt": null,
-    "RelId": null,
-    "Cont": null,
-    "Cint": 0.0,
-    "CID": 0.0,
-    "ParentTopic": "",
-    "TopicPath": "/",
-    "Body": "% TODO: Inhalt ergänzen (Tex)"
-  },
-  {
     "UnitID": "TEST-T25-01-04",
     "Subject": "TEST",
     "Topic": "TEST",
@@ -10872,11 +10854,11 @@
     "Body": "Seien $G$ eine Liegruppe, $M$ eine Mannigfaltigkeit, $F$ eine $G$-Mannigfaltigkeit und sei für jedes $x \\in M$ eine Mannigfaltigkeit $E_{x} \\cong F$ gegeben. Sei $E:=$ $\\bigcup_{x \\in M} E_{x}$ und $\\pi: E \\rightarrow M$ die kanonische Projektion. Dann heißt $(E, \\pi, M)$ ein Präbündel mit Strukturgruppe $G$, falls es um jedes $x \\in M$ eine offene Umgebung $U$ gibt und eine bijektive Abbildung\n\n$$\n\\varphi: E \\mid U=\\pi^{-1}(U) \\rightarrow U \\times F\n$$\n\nsodass\n\n$$\n\\begin{array}{rlll}\n\\varphi: E \\mid U & \\longrightarrow & U \\times F & \\text { kommutiert } \\\\\n\\pi \\searrow & & \\swarrow p r & \\\\\n& U & &\n\\end{array}\n$$\n\nfür je zwei solcher Abbildungen $\\varphi, \\psi$ eine differenzierbare Abbildung $g_{\\varphi, \\psi}$ : $U \\cap V \\rightarrow G$ existiert mit\n\n$$\n\\varphi \\circ \\psi^{-1}(x, v)=\\left(x, g_{\\varphi, \\psi}(x) v\\right)\n$$\n\nDie Definitionen aus 1.3 werden entsprechend übertragen, z.B. heißt $\\varphi$ dann Präbündelkarte."
   },
   {
-    "UnitID": "TEST-T25-01-13",
+    "UnitID": "TEST-T25-01-15",
     "Subject": "TEST",
     "Topic": "TEST",
-    "CTyp": "DEF",
-    "Content": "TESTDef4",
+    "CTyp": "EXA",
+    "Content": "TESTBeispiel13",
     "LitID": "T25",
     "Layer": null,
     "Comp": null,
@@ -10887,14 +10869,14 @@
     "CID": 0.0,
     "ParentTopic": "",
     "TopicPath": "TEST",
-    "Body": "Seien $G$ eine Liegruppe, $M$ eine Mannigfaltigkeit, $F$ eine $G$-Mannigfaltigkeit und sei für jedes $x \\in M$ eine Mannigfaltigkeit $E_{x} \\cong F$ gegeben. Sei $E:=$ $\\bigcup_{x \\in M} E_{x}$ und $\\pi: E \\rightarrow M$ die kanonische Projektion. Dann heißt $(E, \\pi, M)$ ein Präbündel mit Strukturgruppe $G$, falls es um jedes $x \\in M$ eine offene Umgebung $U$ gibt und eine bijektive Abbildung\n\n$$\n\\varphi: E \\mid U=\\pi^{-1}(U) \\rightarrow U \\times F\n$$\n\nsodass\n\n$$\n\\begin{array}{rlll}\n\\varphi: E \\mid U & \\longrightarrow & U \\times F & \\text { kommutiert } \\\\\n\\pi \\searrow & & \\swarrow p r & \\\\\n& U & &\n\\end{array}\n$$\n\nfür je zwei solcher Abbildungen $\\varphi, \\psi$ eine differenzierbare Abbildung $g_{\\varphi, \\psi}$ : $U \\cap V \\rightarrow G$ existiert mit\n\n$$\n\\varphi \\circ \\psi^{-1}(x, v)=\\left(x, g_{\\varphi, \\psi}(x) v\\right)\n$$\n\nDie Definitionen aus 1.3 werden entsprechend übertragen, z.B. heißt $\\varphi$ dann Präbündelkarte."
+    "Body": "% TODO: Inhalt ergänzen (Tex)"
   },
   {
     "UnitID": "TEST-T25-02-02",
     "Subject": "TEST",
     "Topic": "",
     "CTyp": "DEF",
-    "Content": "TESTDef3",
+    "Content": "TESTDef9",
     "LitID": "T25",
     "Layer": null,
     "Comp": null,
@@ -10905,6 +10887,24 @@
     "CID": 0.0,
     "ParentTopic": "",
     "TopicPath": "",
+    "Body": "Seien $G$ eine Liegruppe, $M$ eine Mannigfaltigkeit, $F$ eine $G$-Mannigfaltigkeit und sei für jedes $x \\in M$ eine Mannigfaltigkeit $E_{x} \\cong F$ gegeben. Sei $E:=$ $\\bigcup_{x \\in M} E_{x}$ und $\\pi: E \\rightarrow M$ die kanonische Projektion. Dann heißt $(E, \\pi, M)$ ein Präbündel mit Strukturgruppe $G$, falls es um jedes $x \\in M$ eine offene Umgebung $U$ gibt und eine bijektive Abbildung\n\n$$\n\\varphi: E \\mid U=\\pi^{-1}(U) \\rightarrow U \\times F\n$$\n\nsodass\n\n$$\n\\begin{array}{rlll}\n\\varphi: E \\mid U & \\longrightarrow & U \\times F & \\text { kommutiert } \\\\\n\\pi \\searrow & & \\swarrow p r & \\\\\n& U & &\n\\end{array}\n$$\n\nfür je zwei solcher Abbildungen $\\varphi, \\psi$ eine differenzierbare Abbildung $g_{\\varphi, \\psi}$ : $U \\cap V \\rightarrow G$ existiert mit\n\n$$\n\\varphi \\circ \\psi^{-1}(x, v)=\\left(x, g_{\\varphi, \\psi}(x) v\\right)\n$$\n\nDie Definitionen aus 1.3 werden entsprechend übertragen, z.B. heißt $\\varphi$ dann Präbündelkarte."
+  },
+  {
+    "UnitID": "TEST-T25-01-16",
+    "Subject": "TEST",
+    "Topic": "TEST",
+    "CTyp": "DEF",
+    "Content": "TESTDef5",
+    "LitID": "T25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "TEST",
     "Body": "Seien $G$ eine Liegruppe, $M$ eine Mannigfaltigkeit, $F$ eine $G$-Mannigfaltigkeit und sei für jedes $x \\in M$ eine Mannigfaltigkeit $E_{x} \\cong F$ gegeben. Sei $E:=$ $\\bigcup_{x \\in M} E_{x}$ und $\\pi: E \\rightarrow M$ die kanonische Projektion. Dann heißt $(E, \\pi, M)$ ein Präbündel mit Strukturgruppe $G$, falls es um jedes $x \\in M$ eine offene Umgebung $U$ gibt und eine bijektive Abbildung\n\n$$\n\\varphi: E \\mid U=\\pi^{-1}(U) \\rightarrow U \\times F\n$$\n\nsodass\n\n$$\n\\begin{array}{rlll}\n\\varphi: E \\mid U & \\longrightarrow & U \\times F & \\text { kommutiert } \\\\\n\\pi \\searrow & & \\swarrow p r & \\\\\n& U & &\n\\end{array}\n$$\n\nfür je zwei solcher Abbildungen $\\varphi, \\psi$ eine differenzierbare Abbildung $g_{\\varphi, \\psi}$ : $U \\cap V \\rightarrow G$ existiert mit\n\n$$\n\\varphi \\circ \\psi^{-1}(x, v)=\\left(x, g_{\\varphi, \\psi}(x) v\\right)\n$$\n\nDie Definitionen aus 1.3 werden entsprechend übertragen, z.B. heißt $\\varphi$ dann Präbündelkarte."
   }
 ]
