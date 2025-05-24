@@ -3,6 +3,9 @@ import axios from 'axios'
 
 const TexSnipTable = ({ units, onJumpToUnit }) => {
   const [localUnits, setLocalUnits] = useState([])
+  const [topicIndexMap, setTopicIndexMap] = useState({})
+  const [savedIndex, setSavedIndex] = useState(null)
+
   const [filter, setFilter] = useState({
     Subject: "",
     Topic: "",
@@ -25,7 +28,56 @@ const TexSnipTable = ({ units, onJumpToUnit }) => {
 
   useEffect(() => {
     if (Array.isArray(units)) setLocalUnits(units)
+    axios.get("http://localhost:8000/topic-map")
+      .then(res => setTopicIndexMap(res.data))
+      .catch(err => console.error("Fehler beim Laden von /topic-map:", err))
   }, [units])
+
+  const getTopicIndex = (subject, topic) => {
+    try {
+      return topicIndexMap?.[subject]?.topics?.[topic]?.index?.toString().padStart(2, "0") ?? "XX"
+    } catch {
+      return "XX"
+    }
+  }
+
+  const isIDChanged = (unit) => {
+    const currentID = unit.UnitID?.split("-")
+    if (!currentID || currentID.length !== 4) return false
+  
+    const [oldSubj, oldLitID, oldTopicIndex] = currentID
+    const newSubj = unit.Subject?.trim()
+    const newLitID = unit.LitID?.trim()
+    const newTopicIndex = getTopicIndex(newSubj, unit.Topic?.trim())
+  
+    const original = units.find(u => u.UnitID === unit.UnitID) || {}
+  
+    const contentChanged = original.Content !== unit.Content
+    const ctypChanged    = original.CTyp !== unit.CTyp
+    const litidChanged   = original.LitID !== unit.LitID
+    const subjChanged    = original.Subject !== unit.Subject
+    const topicChanged   = original.Topic !== unit.Topic
+  
+    return (
+      oldSubj !== newSubj ||
+      oldLitID !== newLitID ||
+      oldTopicIndex !== newTopicIndex ||
+      contentChanged ||
+      ctypChanged ||
+      litidChanged ||
+      subjChanged ||
+      topicChanged
+    )
+  }
+  
+  
+
+  const computePreviewID = (unit) => {
+    const subject = unit.Subject?.trim() ?? "SUB"
+    const source = unit.LitID?.trim() ?? "SRC"
+    const topic = getTopicIndex(subject, unit.Topic?.trim())
+    return `${subject}-${source}-${topic}-??`
+  }
 
   const handleChange = (index, field, value) => {
     const updated = [...localUnits]
@@ -39,6 +91,41 @@ const TexSnipTable = ({ units, onJumpToUnit }) => {
     }).then(res => console.log("✅ Update:", res.data))
       .catch(err => console.error("❌ Fehler:", err))
   }
+
+  const handleRename = async (index, oldUnitID, newUnitID) => {
+    const updated = localUnits[index]
+    const payload = {
+        oldUnitID,
+        newUnitID,
+        Subject: updated.Subject,
+        Topic: updated.Topic,
+        LitID: updated.LitID,
+        CTyp: updated.CTyp,
+        Content: updated.Content,
+        updatedFields: {
+          Subject: updated.Subject,
+          Topic: updated.Topic,
+          ParentTopic: updated.ParentTopic,
+          CTyp: updated.CTyp,
+          Content: updated.Content
+        }
+      }
+        
+    try {
+        console.log("🔍 Payload für Rename:", payload)
+      const res = await axios.post("http://localhost:8000/rename-unit", payload)
+      console.log("🔁 Renamed:", res.data)
+      const newLocalUnits = [...localUnits]
+      newLocalUnits.splice(index, 1)
+      newLocalUnits.push({ ...updated, UnitID: res.data.newUnitID })
+      setLocalUnits(newLocalUnits)
+      setSavedIndex(index)
+      setTimeout(() => setSavedIndex(null), 2000)
+    } catch (err) {
+      console.error("❌ Fehler bei rename-unit:", err)
+    }
+  }
+  
 
   const getUniqueValues = (key) => {
     return Array.from(new Set(localUnits.map(u => u[key] ?? ""))).sort()
@@ -120,33 +207,67 @@ const TexSnipTable = ({ units, onJumpToUnit }) => {
             </tr>
           </thead>
           <tbody>
-            {filteredUnits.map((u, i) => (
-              <tr key={u.UnitID} style={{ borderTop: "1px solid #444" }}>
-                <td style={cellStyle}>
-                  <button
-                    onClick={() => onJumpToUnit?.({ unitID: u.UnitID, litID: u.LitID })}
-                    title="Im Editor anzeigen"
-                    style={{ fontSize: "0.8rem", padding: "0 4px" }}
-                  >
-                    🔍
-                  </button>
-                </td>
-                {visibleColumns.UnitID && <td style={cellStyle}>{u.UnitID}</td>}
-                {visibleColumns.Subject && <td style={cellStyle}>{u.Subject}</td>}
-                <td style={cellStyle}>{u.Topic}</td>
-                {visibleColumns.ParentTopic && <td style={cellStyle}>{u.ParentTopic}</td>}
-                <td style={cellStyle}>{u.CTyp}</td>
-                <td style={cellStyle}>{u.Content}</td>
-                {visibleColumns.Layer && <td style={metricCellStyle}><input style={metricInputStyle} value={u.Layer ?? ""} onChange={e => handleChange(i, 'Layer', e.target.value)} /></td>}
-                {visibleColumns.Comp && <td style={metricCellStyle}><input style={metricInputStyle} value={u.Comp ?? ""} onChange={e => handleChange(i, 'Comp', e.target.value)} /></td>}
-                {visibleColumns.RelInt && <td style={metricCellStyle}><input style={metricInputStyle} value={u.RelInt ?? ""} onChange={e => handleChange(i, 'RelInt', e.target.value)} /></td>}
-                {visibleColumns.RelId && <td style={metricCellStyle}><input style={metricInputStyle} value={u.RelId ?? ""} onChange={e => handleChange(i, 'RelId', e.target.value)} /></td>}
-                {visibleColumns.Cont && <td style={metricCellStyle}><input style={metricInputStyle} value={u.Cont ?? ""} onChange={e => handleChange(i, 'Cont', e.target.value)} /></td>}
-                {visibleColumns.Cint && <td style={metricCellStyle}><input style={metricInputStyle} value={u.Cint ?? ""} onChange={e => handleChange(i, 'Cint', e.target.value)} /></td>}
-                {visibleColumns.CID && <td style={metricCellStyle}><input style={metricInputStyle} value={u.CID ?? ""} onChange={e => handleChange(i, 'CID', e.target.value)} /></td>}
-                <td style={{ textAlign: "center" }}>{isSubstantiveBody(u.Body) ? "✅" : "❌"}</td>
-              </tr>
-            ))}
+            {filteredUnits.map((u, i) => {
+              return (
+                <tr key={u.UnitID} style={{ borderTop: "1px solid #444" }}>
+                  <td style={cellStyle}>
+                    <button
+                      onClick={() => onJumpToUnit?.({ unitID: u.UnitID, litID: u.LitID })}
+                      title="Im Editor anzeigen"
+                      style={{ fontSize: "0.8rem", padding: "0 4px" }}
+                    >
+                      🔍
+                    </button>
+                  </td>
+                  {visibleColumns.UnitID && (
+                    <td style={cellStyle}>
+                      {u.UnitID}
+                      {isIDChanged(u) && (
+                        <>
+                          <div style={{ fontSize: "0.65rem", color: "orange" }}>→ {computePreviewID(u)}</div>
+                          <button
+                            onClick={() => handleRename(i, u.UnitID, computePreviewID(u))}
+                            style={{ fontSize: "0.6rem", padding: "1px 4px", marginTop: "2px", backgroundColor: "#444", color: "white", border: "1px solid #888", borderRadius: "3px" }}
+                          >
+                            🔁 Speichern
+                          </button>
+                        </>
+                      )}
+                      {savedIndex === i && (
+                        <div style={{ fontSize: "0.65rem", color: "limegreen" }}>✅ gespeichert</div>
+                      )}
+                    </td>
+                  )}
+                  {visibleColumns.Subject && (
+                    <td style={cellStyle}>
+                      <input style={metricInputStyle} value={u.Subject ?? ""} onChange={e => handleChange(i, 'Subject', e.target.value)} />
+                    </td>
+                  )}
+                  <td style={cellStyle}>
+                    <input style={metricInputStyle} value={u.Topic ?? ""} onChange={e => handleChange(i, 'Topic', e.target.value)} />
+                  </td>
+                  {visibleColumns.ParentTopic && (
+                    <td style={cellStyle}>
+                      <input style={metricInputStyle} value={u.ParentTopic ?? ""} onChange={e => handleChange(i, 'ParentTopic', e.target.value)} />
+                    </td>
+                  )}
+                  <td style={cellStyle}>
+                    <input style={metricInputStyle} value={u.CTyp ?? ""} onChange={e => handleChange(i, 'CTyp', e.target.value)} />
+                  </td>
+                  <td style={cellStyle}>
+                    <input style={{ ...metricInputStyle, width: "10rem" }} value={u.Content ?? ""} onChange={e => handleChange(i, 'Content', e.target.value)} />
+                  </td>
+                  {visibleColumns.Layer && <td style={metricCellStyle}><input style={metricInputStyle} value={u.Layer ?? ""} onChange={e => handleChange(i, 'Layer', e.target.value)} /></td>}
+                  {visibleColumns.Comp && <td style={metricCellStyle}><input style={metricInputStyle} value={u.Comp ?? ""} onChange={e => handleChange(i, 'Comp', e.target.value)} /></td>}
+                  {visibleColumns.RelInt && <td style={metricCellStyle}><input style={metricInputStyle} value={u.RelInt ?? ""} onChange={e => handleChange(i, 'RelInt', e.target.value)} /></td>}
+                  {visibleColumns.RelId && <td style={metricCellStyle}><input style={metricInputStyle} value={u.RelId ?? ""} onChange={e => handleChange(i, 'RelId', e.target.value)} /></td>}
+                  {visibleColumns.Cont && <td style={metricCellStyle}><input style={metricInputStyle} value={u.Cont ?? ""} onChange={e => handleChange(i, 'Cont', e.target.value)} /></td>}
+                  {visibleColumns.Cint && <td style={metricCellStyle}><input style={metricInputStyle} value={u.Cint ?? ""} onChange={e => handleChange(i, 'Cint', e.target.value)} /></td>}
+                  {visibleColumns.CID && <td style={metricCellStyle}><input style={metricInputStyle} value={u.CID ?? ""} onChange={e => handleChange(i, 'CID', e.target.value)} /></td>}
+                  <td style={{ textAlign: "center" }}>{isSubstantiveBody(u.Body) ? "✅" : "❌"}</td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       </div>

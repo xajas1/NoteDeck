@@ -1,10 +1,11 @@
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi import FastAPI, Request, HTTPException
+from fastapi import FastAPI, Request, HTTPException, Body, HTTPException
 from pydantic import BaseModel
 from pathlib import Path
 import json
 import subprocess
 import os
+import re
 
 app = FastAPI(title="NoteDeck-API")
 
@@ -15,6 +16,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 # === Globale Pfade ===
 BASE_DIR         = Path(__file__).resolve().parents[1]
@@ -311,3 +313,97 @@ def export_tex_file(project_name: str):
         return {"status": "error", "message": e.stderr.strip() or str(e)}
     except Exception as e:
         return {"status": "error", "message": str(e)}
+
+
+
+
+
+class RenameUnitRequest(BaseModel):
+    oldUnitID: str
+    updatedFields: dict
+
+@app.post("/rename-unit")
+def rename_unit(request: dict = Body(...)):
+    if not LIB_JSON.exists() or not TOPICMAP_JSON.exists() or not SOURCEMAP_JSON.exists():
+        raise HTTPException(status_code=500, detail="Required file missing")
+
+    data = json.loads(LIB_JSON.read_text(encoding="utf-8"))
+    topicmap = json.loads(TOPICMAP_JSON.read_text(encoding="utf-8"))
+    sourcemap = json.loads(SOURCEMAP_JSON.read_text(encoding="utf-8"))
+
+    try:
+        old_id = request["oldUnitID"]
+        updated = request["updatedFields"]
+        subject = updated["Subject"]
+        topic = updated.get("Topic", "")
+        parent = updated.get("ParentTopic", "")
+        content = updated["Content"]
+        ctyp = updated["CTyp"]
+    except KeyError as e:
+        raise HTTPException(status_code=400, detail="Missing required fields: " + str(e))
+
+    old_unit = next((u for u in data if u["UnitID"] == old_id), None)
+    if not old_unit:
+        raise HTTPException(status_code=404, detail="Old UnitID not found")
+
+    litid = old_unit.get("LitID")
+    required_fields = {
+        "Subject": subject,
+        "LitID": litid,
+        "Content": content,
+        "CTyp": ctyp
+    }
+    missing = [k for k, v in required_fields.items() if not v and v != ""]
+
+    if missing:
+        raise HTTPException(status_code=400, detail=f"Missing required fields: {', '.join(missing)}")
+
+    try:
+        topic_index = topicmap[subject]["topics"][topic]["index"]
+    except KeyError:
+        raise HTTPException(status_code=400, detail=f"Topic index not found for {subject} / {topic}")
+
+    existing = [u for u in data if u["Subject"] == subject and u["LitID"] == litid and u["Topic"] == topic and u["UnitID"] != old_id]
+    next_num = max([int(u["UnitID"].split("-")[-1]) for u in existing], default=0) + 1
+    new_id = f"{subject}-{litid}-{topic_index:02d}-{next_num:02d}"
+
+    # --- Update JSON
+    new_unit = old_unit.copy()
+    new_unit.update({
+        "UnitID": new_id,
+        "Subject": subject,
+        "Topic": topic,
+        "ParentTopic": parent,
+        "CTyp": ctyp,
+        "Content": content,
+        "TopicPath": f"{parent}/{topic}" if parent else topic
+    })
+    data = [u for u in data if u["UnitID"] != old_id]
+    data.append(new_unit)
+    LIB_JSON.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+
+    # --- Update .tex
+    tex_path = None
+    for file, val in sourcemap.items():
+        if val == litid:
+            tex_path = SOURCE_DIR / file
+            break
+    if not tex_path or not tex_path.exists():
+        raise HTTPException(status_code=404, detail=f"Source file for LitID {litid} not found")
+
+    tex = tex_path.read_text(encoding="utf-8")
+
+    begin_block = rf"\\begin\{{{re.escape(ctyp)}\}}\{{{re.escape(old_id)}\}}\{{{re.escape(content)}\}}"
+    end_block = rf"\\end\{{{re.escape(ctyp)}\}}"
+    full_pattern = rf"{begin_block}(.*?){end_block}"
+
+    match = re.search(full_pattern, tex, flags=re.DOTALL)
+    if not match:
+        raise HTTPException(status_code=400, detail=f"Pattern not found in .tex (Type: {ctyp}, ID: {old_id}, Content: {content})")
+
+    body = match.group(1)
+    replacement = f"\\begin{{{ctyp}}}{{{new_id}}}{{{content}}}{body}\\end{{{ctyp}}}"
+    new_tex = tex[:match.start()] + replacement + tex[match.end():]
+    tex_path.write_text(new_tex, encoding="utf-8")
+
+    return {"status": "renamed", "newUnitID": new_id}
