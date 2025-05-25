@@ -6,14 +6,20 @@ const TexSnipTablePage = ({ splitState, onMetaChange, onJumpToUnit }) => {
   const [sources, setSources] = useState([])
   const [selectedSource, setSelectedSource] = useState("")
   const [units, setUnits] = useState([])
+  const [sourceMap, setSourceMap] = useState({})
 
-  // Quellen laden
+  // SourceMap laden
   useEffect(() => {
-    axios.get('http://localhost:8000/available-sources')
-      .then(res => {
-        setSources(res.data)
-      })
-      .catch(err => console.error("❌ Fehler beim Laden der Quellen:", err))
+    axios.get("http://localhost:8000/source-map")
+      .then(res => setSourceMap(res.data))
+      .catch(err => console.error("❌ Fehler beim Laden der SourceMap:", err))
+  }, [])
+
+  // Quellenliste für Dropdown laden
+  useEffect(() => {
+    axios.get("http://localhost:8000/available-sources")
+      .then(res => setSources(res.data))
+      .catch(err => console.error("❌ Fehler beim Laden der Quellenliste:", err))
   }, [])
 
   // Snapshot-Einstellungen anwenden
@@ -25,7 +31,7 @@ const TexSnipTablePage = ({ splitState, onMetaChange, onJumpToUnit }) => {
     }
   }, [splitState])
 
-  // Units laden
+  // Units laden bei Quellenauswahl
   useEffect(() => {
     if (selectedSource) {
       axios.get(`http://localhost:8000/load-library?source=${selectedSource}`)
@@ -40,6 +46,30 @@ const TexSnipTablePage = ({ splitState, onMetaChange, onJumpToUnit }) => {
       onMetaChange({ selectedSource })
     }
   }, [selectedSource])
+
+  // Neue Units per window.onNewUnit
+  useEffect(() => {
+    const handler = (unit) => {
+      console.log("📥 Neue Unit empfangen:", unit)
+      const litID = sourceMap[selectedSource]
+      console.log("🔍 Vergleich:", unit.LitID, "vs.", litID)
+
+      if (unit.LitID === litID) {
+        setUnits(prev => [...prev, unit])
+        console.log("✅ Neue Unit zur Tabelle hinzugefügt:", unit)
+      } else {
+        console.warn("⚠️ Neue Unit gehört nicht zur aktuellen Quelle – wird nicht angezeigt")
+      }
+    }
+
+    window.onNewUnit = handler
+
+    return () => {
+      if (window.onNewUnit === handler) {
+        window.onNewUnit = null
+      }
+    }
+  }, [selectedSource, sourceMap])
 
   return (
     <div style={{ padding: "0.5rem", fontSize: "0.85rem" }}>
@@ -60,7 +90,10 @@ const TexSnipTablePage = ({ splitState, onMetaChange, onJumpToUnit }) => {
         </span>
       </div>
 
-      <TexSnipTable units={units} onJumpToUnit={onJumpToUnit} />
+      <TexSnipTable
+        units={units}
+        onJumpToUnit={onJumpToUnit}
+      />
     </div>
   )
 }

@@ -11,6 +11,7 @@ const TexSplitViewPage = () => {
 
   const [snipMeta, setSnipMeta] = useState({})
   const [tableMeta, setTableMeta] = useState({})
+  const [units, setUnits] = useState([])
 
   const editorRef = useRef(null)
 
@@ -25,6 +26,13 @@ const TexSplitViewPage = () => {
 
   useEffect(() => {
     refreshSnapshots()
+  }, [])
+
+  useEffect(() => {
+    window.onNewUnit = (unit) => {
+      console.log("📥 Neue Unit empfangen:", unit)
+      setUnits(prev => [...prev, unit])
+    }
   }, [])
 
   const saveCurrentSnapshot = async () => {
@@ -112,6 +120,7 @@ const TexSplitViewPage = () => {
         </div>
         <div style={{ height: '100%', overflow: 'auto', padding: '1rem' }}>
           <TexSnipTablePage
+            units={units}
             splitState={splitState}
             onMetaChange={setTableMeta}
             onJumpToUnit={handleScrollToUnit}

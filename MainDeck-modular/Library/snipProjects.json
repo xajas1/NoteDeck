@@ -43,11 +43,11 @@
   "P15": {
     "sourceFile": "RG_Test25",
     "snipMeta": {
-      "Subject": "A",
-      "Topic": "Ringe Basics",
-      "LitID": "T12",
+      "Subject": "TEST",
+      "Topic": "TEST",
+      "LitID": "T25",
       "CTyp": "DEF",
-      "ParentTopic": "Ringe",
+      "ParentTopic": "",
       "Content": "",
       "selectedProject": "RG_Test25"
     },

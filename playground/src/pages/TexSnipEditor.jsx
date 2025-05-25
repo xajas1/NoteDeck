@@ -147,6 +147,10 @@ import React, {
   
       const json = await res.json()
       setResponse(json)
+      if (json.unit && typeof window.onNewUnit === "function") {
+        window.onNewUnit(json.unit)
+      }
+           
   
       if (json.UnitID) {
         const wrappedText = `\\begin{${ctyp}}{${json.UnitID}}{${content}}\n${selectedText}\n\\end{${ctyp}}`

@@ -87,17 +87,67 @@ const TexSnipTable = ({ units, onJumpToUnit }) => {
     const updated = [...localUnits]
     updated[index][field] = value
     setLocalUnits(updated)
-
-    axios.post('http://localhost:8000/update-unit', {
-      UnitID: updated[index].UnitID,
-      field,
-      value
-    }).then(res => console.log("✅ Update:", res.data))
-      .catch(err => console.error("❌ Fehler:", err))
+  
+    // 🧠 ENV/Content Update
+    if (field === "CTyp" || field === "Content") {
+      axios.post('http://localhost:8000/update-env-or-content', {
+        UnitID: updated[index].UnitID,
+        Content: updated[index].Content,
+        CTyp: updated[index].CTyp
+      }).then(res => {
+        console.log("✅ ENV/Content Update:", res.data)
+        originalUnitsRef.current[index] = { ...updated[index] }
+        setSavedIndex(index)
+        setTimeout(() => setSavedIndex(null), 2000)
+      }).catch(err => console.error("❌ Fehler (ENV/Content):", err))
+    }
+  
+    // 🔁 Subject / Topic / LitID → rename-unit verwenden
+    else if (["Subject", "Topic", "LitID"].includes(field)) {
+      const newUnit = updated[index]
+      const payload = {
+        oldUnitID: newUnit.UnitID,
+        Subject: newUnit.Subject,
+        Topic: newUnit.Topic,
+        LitID: newUnit.LitID,
+        CTyp: newUnit.CTyp,
+        Content: newUnit.Content,
+        updatedFields: {
+          Subject: newUnit.Subject,
+          Topic: newUnit.Topic,
+          ParentTopic: newUnit.ParentTopic,
+          CTyp: newUnit.CTyp,
+          Content: newUnit.Content
+        }
+      }
+  
+      axios.post("http://localhost:8000/rename-unit", payload)
+        .then(res => {
+          console.log("🔁 Rename ausgeführt:", res.data)
+          updated[index].UnitID = res.data.newUnitID
+          setLocalUnits(updated)
+          setSavedIndex(index)
+          setTimeout(() => setSavedIndex(null), 2000)
+        })
+        .catch(err => console.error("❌ Fehler (Rename):", err))
+    }
+  
+    // ✅ Normale Felder
+    else {
+      axios.post('http://localhost:8000/update-unit', {
+        UnitID: updated[index].UnitID,
+        field,
+        value
+      }).then(res => console.log("✅ Update:", res.data))
+        .catch(err => console.error("❌ Fehler:", err))
+    }
   }
+  
 
   const handleRename = async (index, oldUnitID, newUnitID) => {
     const updated = localUnits[index]
+    await handleEnvOrContentUpdate(index)
+
     const payload = {
       oldUnitID,
       newUnitID,

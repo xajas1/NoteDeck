@@ -8,14 +8,18 @@ import os
 import re
 
 app = FastAPI(title="NoteDeck-API")
+print("🚀 FastAPI loaded")
+
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+print("🔧 CORS Middleware konfiguriert")
+
 
 
 # === Globale Pfade ===
@@ -125,21 +129,40 @@ def load_library(source: str = ""):
 
 @app.post("/update-unit")
 def update_unit(req: UpdateUnitRequest):
+    allowed_fields = {"Layer", "Comp", "RelInt", "RelId", "Cont", "Cint", "CID"}
+
+    if req.field not in allowed_fields:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Field '{req.field}' not allowed in update-unit. Use rename-unit or update-env-or-content."
+        )
+
     if not LIB_JSON.exists():
         raise HTTPException(status_code=500, detail="Library.json not found")
+
     with LIB_JSON.open("r", encoding="utf-8") as f:
         data = json.load(f)
+
     found = False
     for entry in data:
         if entry["UnitID"] == req.UnitID:
             entry[req.field] = req.value
             found = True
             break
+
     if not found:
         raise HTTPException(status_code=404, detail=f"Unit {req.UnitID} not found")
+
     with LIB_JSON.open("w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
-    return {"status": "updated", "UnitID": req.UnitID, "field": req.field, "value": req.value}
+
+    return {
+        "status": "updated",
+        "UnitID": req.UnitID,
+        "field": req.field,
+        "value": req.value
+    }
+
 
 @app.post("/snip")
 def create_snip(req: SnipRequest):
@@ -197,7 +220,14 @@ def create_snip(req: SnipRequest):
     replacement = f"\\begin{{{req.CTyp}}}{{{unit_id}}}{{{req.Content}}}\n{req.Body}\n\\end{{{req.CTyp}}}"
     new_code = source_code[:start] + replacement + source_code[end:]
     source_path.write_text(new_code, encoding="utf-8")
-    return {"status": "success", "UnitID": unit_id}
+    return {"status": "success", "UnitID": unit_id, "unit": new_entry}
+
+@app.get("/source-map")
+def get_source_map():
+    if not SOURCEMAP_JSON.exists():
+        raise HTTPException(status_code=404, detail="SourceMap.json not found")
+    return json.loads(SOURCEMAP_JSON.read_text(encoding="utf-8"))
+
 
 @app.get("/topic-map")
 def get_topic_map():
@@ -324,6 +354,8 @@ class RenameUnitRequest(BaseModel):
 
 @app.post("/rename-unit")
 def rename_unit(request: dict = Body(...)):
+    import re
+
     if not LIB_JSON.exists() or not TOPICMAP_JSON.exists() or not SOURCEMAP_JSON.exists():
         raise HTTPException(status_code=500, detail="Required file missing")
 
@@ -337,8 +369,6 @@ def rename_unit(request: dict = Body(...)):
         subject = updated["Subject"]
         topic = updated.get("Topic", "")
         parent = updated.get("ParentTopic", "")
-        content = updated["Content"]
-        ctyp = updated["CTyp"]
     except KeyError as e:
         raise HTTPException(status_code=400, detail="Missing required fields: " + str(e))
 
@@ -347,16 +377,8 @@ def rename_unit(request: dict = Body(...)):
         raise HTTPException(status_code=404, detail="Old UnitID not found")
 
     litid = old_unit.get("LitID")
-    required_fields = {
-        "Subject": subject,
-        "LitID": litid,
-        "Content": content,
-        "CTyp": ctyp
-    }
-    missing = [k for k, v in required_fields.items() if not v and v != ""]
-
-    if missing:
-        raise HTTPException(status_code=400, detail=f"Missing required fields: {', '.join(missing)}")
+    ctyp = old_unit.get("CTyp")
+    content = old_unit.get("Content")
 
     try:
         topic_index = topicmap[subject]["topics"][topic]["index"]
@@ -374,8 +396,6 @@ def rename_unit(request: dict = Body(...)):
         "Subject": subject,
         "Topic": topic,
         "ParentTopic": parent,
-        "CTyp": ctyp,
-        "Content": content,
         "TopicPath": f"{parent}/{topic}" if parent else topic
     })
     data = [u for u in data if u["UnitID"] != old_id]
@@ -383,11 +403,7 @@ def rename_unit(request: dict = Body(...)):
     LIB_JSON.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
 
     # --- Update .tex
-    tex_path = None
-    for file, val in sourcemap.items():
-        if val == litid:
-            tex_path = SOURCE_DIR / file
-            break
+    tex_path = next((SOURCE_DIR / file for file, val in sourcemap.items() if val == litid), None)
     if not tex_path or not tex_path.exists():
         raise HTTPException(status_code=404, detail=f"Source file for LitID {litid} not found")
 
@@ -408,16 +424,15 @@ def rename_unit(request: dict = Body(...)):
 
     return {"status": "renamed", "newUnitID": new_id}
 
-
-
-
 @app.post("/update-env-or-content")
 def update_env_or_content(request: dict = Body(...)):
-    old_id = request.get("UnitID")
+    import re
+
+    unit_id = request.get("UnitID")
     new_content = request.get("Content")
     new_ctyp = request.get("CTyp")
 
-    if not all([old_id, new_content, new_ctyp]):
+    if not all([unit_id, new_content, new_ctyp]):
         raise HTTPException(status_code=400, detail="Missing UnitID, Content, or CTyp")
 
     if not LIB_JSON.exists() or not SOURCEMAP_JSON.exists():
@@ -426,33 +441,49 @@ def update_env_or_content(request: dict = Body(...)):
     data = json.loads(LIB_JSON.read_text(encoding="utf-8"))
     sourcemap = json.loads(SOURCEMAP_JSON.read_text(encoding="utf-8"))
 
-    unit = next((u for u in data if u["UnitID"] == old_id), None)
-    if not unit:
+    # ✅ Richtige alte Unit aus JSON lesen (nicht aus verändertem Request)
+    original_unit = next((u for u in data if u["UnitID"] == unit_id), None)
+    if not original_unit:
         raise HTTPException(status_code=404, detail="Unit not found")
 
-    # Update in Library.json
-    unit["Content"] = new_content
-    unit["CTyp"] = new_ctyp
-    LIB_JSON.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+    old_ctyp = original_unit["CTyp"]
+    old_content = original_unit["Content"]
 
-    # Update in .tex
-    litid = unit.get("LitID")
+    litid = original_unit.get("LitID")
     tex_path = next((SOURCE_DIR / f for f, v in sourcemap.items() if v == litid), None)
+
     if not tex_path or not tex_path.exists():
         raise HTTPException(status_code=404, detail="Source file not found for LitID")
 
     tex = tex_path.read_text(encoding="utf-8")
-    old_content = unit["Content"]
-    old_ctyp = unit["CTyp"]
 
-    pattern = rf"\\begin\{{{re.escape(old_ctyp)}\}}\{{{re.escape(old_id)}\}}\{{(.*?)\}}(.*?)\\end\{{{re.escape(old_ctyp)}\}}"
+    # 🔍 DEBUG-Ausgabe
+    print("🧪 Alte CTyp:", old_ctyp)
+    print("🧪 Alte Content:", old_content)
+
+    pattern = (
+        r"\\begin\{" + re.escape(old_ctyp) + r"\}\{" +
+        re.escape(unit_id) + r"\}\{" + re.escape(old_content) + r"\}\s*\n?(.*?)\\end\{" +
+        re.escape(old_ctyp) + r"\}"
+    )
+
+    print("🧪 Pattern:", pattern)
+
     match = re.search(pattern, tex, flags=re.DOTALL)
     if not match:
         raise HTTPException(status_code=400, detail="Pattern not found in .tex")
 
-    body = match.group(2)
-    replacement = f"\\begin{{{new_ctyp}}}{{{old_id}}}{{{new_content}}}{body}\\end{{{new_ctyp}}}"
+    body = match.group(1).strip()
+
+    # ✅ JSON updaten
+    original_unit["Content"] = new_content
+    original_unit["CTyp"] = new_ctyp
+    LIB_JSON.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+
+    # 🧩 Ersatzblock erzeugen und ersetzen
+    replacement = f"\\begin{{{new_ctyp}}}{{{unit_id}}}{{{new_content}}}\n{body}\n\\end{{{new_ctyp}}}"
     new_tex = tex[:match.start()] + replacement + tex[match.end():]
     tex_path.write_text(new_tex, encoding="utf-8")
 
-    return {"status": "updated", "UnitID": old_id}
+    return {"status": "updated", "UnitID": unit_id}
+
