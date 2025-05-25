@@ -4,8 +4,8 @@ import { useState } from 'react'
 export default function TreePlaygroundView({
   playground,
   units,
-  selectedIDs,
-  setSelectedIDs,
+  selectedUIDs,
+  setSelectedUIDs,
   lastSelectedIndex,
   setLastSelectedIndex,
   setPlayground
@@ -16,17 +16,17 @@ export default function TreePlaygroundView({
   const [expandedTopics, setExpandedTopics] = useState({})
   const [expandedSources, setExpandedSources] = useState({})
 
-  const getFullUnitByID = (id) => {
-    const unit = units.find(u => u.UnitID === id)
+  const getFullUnitByUID = (uid) => {
+    const unit = units.find(u => u.UID === uid)
     if (!unit) {
-      console.warn(`❗ Unit not found for ID: ${id}`)
+      console.warn(`❗ Unit not found for UID: ${uid}`)
     }
     return unit
   }
 
   const grouped = {}
-  for (const unit of playground) {
-    const full = getFullUnitByID(unit.UnitID)
+  for (const entry of playground) {
+    const full = getFullUnitByUID(entry.UID)
     if (!full) continue
     if (filterCTyp && full.CTyp !== filterCTyp) continue
     if (filterLitID && full.LitID !== filterLitID) continue
@@ -38,7 +38,7 @@ export default function TreePlaygroundView({
     grouped[subject] ??= {}
     grouped[subject][topic] ??= {}
     grouped[subject][topic][source] ??= []
-    grouped[subject][topic][source].push(unit.UnitID)
+    grouped[subject][topic][source].push(full.UID)
   }
 
   const toggleSubject = (subject) => {
@@ -65,13 +65,13 @@ export default function TreePlaygroundView({
   }
 
   const toggleSelection = (uid, index, shift = false) => {
-    setSelectedIDs(prev => {
+    setSelectedUIDs(prev => {
       const next = new Set(prev)
       if (shift && lastSelectedIndex !== null) {
         const start = Math.min(lastSelectedIndex, index)
         const end = Math.max(lastSelectedIndex, index)
         for (let i = start; i <= end; i++) {
-          next.add(playground[i].UnitID)
+          next.add(playground[i].UID)
         }
       } else {
         if (next.has(uid)) next.delete(uid)
@@ -143,7 +143,7 @@ export default function TreePlaygroundView({
                   {(expandedTopics[subject]?.has(topic)) ? '▼' : '▶'} {topic}
                 </span>
               </div>
-              {expandedTopics[subject]?.has(topic) && Object.entries(sources).map(([source, ids]) => {
+              {expandedTopics[subject]?.has(topic) && Object.entries(sources).map(([source, uids]) => {
                 const key = `${subject}/${topic}`
                 const isSourceOpen = expandedSources[key]?.has(source)
                 return (
@@ -154,20 +154,21 @@ export default function TreePlaygroundView({
                     </div>
                     {isSourceOpen && (
                       <ul style={styles.ul}>
-                        {ids.map((uid) => {
-                          const unit = getFullUnitByID(uid)
+                        {uids.map((uid) => {
+                          const unit = getFullUnitByUID(uid)
                           if (!unit) return null
-                          const index = playground.findIndex(p => p.UnitID === uid)
+                          const index = playground.findIndex(p => p.UID === uid)
                           return (
                             <DraggableLine
                               key={uid}
                               uid={uid}
                               ctyp={unit?.CTyp}
                               name={unit?.Content}
-                              isSelected={selectedIDs.has(uid)}
-                              selectedIDs={selectedIDs}
+                              unitID={unit?.UnitID}
+                              isSelected={selectedUIDs.has(uid)}
+                              selectedUIDs={selectedUIDs}
                               onClick={(e) => toggleSelection(uid, index, e.shiftKey)}
-                              setSelectedIDs={setSelectedIDs}
+                              setSelectedUIDs={setSelectedUIDs}
                               setPlayground={setPlayground}
                             />
                           )
@@ -185,27 +186,27 @@ export default function TreePlaygroundView({
   )
 }
 
-function DraggableLine({ uid, ctyp, name, isSelected, onClick, selectedIDs, setSelectedIDs, setPlayground }) {
-  const draggedIDs = isSelected && selectedIDs.size > 1
-    ? Array.from(selectedIDs)
+function DraggableLine({ uid, ctyp, name, unitID, isSelected, onClick, selectedUIDs, setSelectedUIDs, setPlayground }) {
+  const draggedUIDs = isSelected && selectedUIDs.size > 1
+    ? Array.from(selectedUIDs)
     : [uid]
 
   const { attributes, listeners, setNodeRef } = useDraggable({
     id: `__drop__${uid}`,
     data: {
       type: 'unit',
-      draggedIDs
+      draggedIDs: draggedUIDs
     }
   })
 
   const handleRemove = (e) => {
     e.stopPropagation()
-    setSelectedIDs(prev => {
+    setSelectedUIDs(prev => {
       const next = new Set(prev)
       next.delete(uid)
       return next
     })
-    setPlayground(prev => prev.filter(p => p.UnitID !== uid))
+    setPlayground(prev => prev.filter(p => p.UID !== uid))
   }
 
   return (
@@ -229,7 +230,7 @@ function DraggableLine({ uid, ctyp, name, isSelected, onClick, selectedIDs, setS
     >
       <span>
         <span style={{ fontWeight: 'bold', color: '#7dd3fc' }}>[{ctyp}]</span>{' '}
-        <strong>{uid}</strong>: <span style={{ color: '#bbb' }}>{name}</span>
+        <strong>{unitID}</strong>: <span style={{ color: '#bbb' }}>{name}</span>
       </span>
       <button onClick={handleRemove} style={{
         background: 'transparent',

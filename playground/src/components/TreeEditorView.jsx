@@ -1,4 +1,3 @@
-// playground/src/components/TreeEditorView.jsx
 import { useState } from 'react'
 import {
   useSortable,
@@ -39,7 +38,7 @@ export default function TreeEditorView({
     })
   }
 
-  const getUnitByID = (id) => units.find(u => u.UnitID === id)
+  const getUnitByUID = (uid) => units.find(u => u.UID === uid)
 
   const toggleSelection = (fullID, index, shift = false, allIDs = []) => {
     setSelectedEditorIDs(prev => {
@@ -88,7 +87,7 @@ export default function TreeEditorView({
             setStructure={setStructure}
             subInputs={subInputs}
             setSubInputs={setSubInputs}
-            getUnitByID={getUnitByID}
+            getUnitByUID={getUnitByUID}
             selectedEditorIDs={selectedEditorIDs}
             toggleSelection={toggleSelection}
             lastSelectedEditorIndex={lastSelectedEditorIndex}
@@ -109,7 +108,7 @@ function SortableSection({
   setStructure,
   subInputs,
   setSubInputs,
-  getUnitByID,
+  getUnitByUID,
   selectedEditorIDs,
   toggleSelection,
   lastSelectedEditorIndex,
@@ -129,8 +128,6 @@ function SortableSection({
   } = useSortable({ id: section.id, data: { type: 'section' } })
 
   const style = {
-    // transform: CSS.Transform.toString(transform),
-    // transition,
     opacity: 1,
     marginBottom: '1.5rem'
   }
@@ -163,7 +160,7 @@ function SortableSection({
                   setStructure(prev =>
                     prev.map(s =>
                       s.id === section.id
-                        ? { ...s, subsections: [...s.subsections, { id: `sub-${Date.now()}`, name, unitIDs: [] }] }
+                        ? { ...s, subsections: [...s.subsections, { id: `sub-${Date.now()}`, name, unitUIDs: [] }] }
                         : s
                     )
                   )
@@ -179,7 +176,7 @@ function SortableSection({
                 setStructure(prev =>
                   prev.map(s =>
                     s.id === section.id
-                      ? { ...s, subsections: [...s.subsections, { id: `sub-${Date.now()}`, name, unitIDs: [] }] }
+                      ? { ...s, subsections: [...s.subsections, { id: `sub-${Date.now()}`, name, unitUIDs: [] }] }
                       : s
                   )
                 )
@@ -196,7 +193,7 @@ function SortableSection({
                 key={sub.id}
                 subsection={sub}
                 sectionId={section.id}
-                getUnitByID={getUnitByID}
+                getUnitByUID={getUnitByUID}
                 selectedEditorIDs={selectedEditorIDs}
                 toggleSelection={toggleSelection}
                 lastSelectedEditorIndex={lastSelectedEditorIndex}
@@ -216,7 +213,7 @@ function SortableSection({
 function SortableSubsection({
   subsection,
   sectionId,
-  getUnitByID,
+  getUnitByUID,
   selectedEditorIDs,
   toggleSelection,
   lastSelectedEditorIndex,
@@ -237,7 +234,7 @@ function SortableSubsection({
     data: { type: 'subsection', parentId: sectionId }
   })
 
-  const allIDs = subsection.unitIDs.map(id => `${subsection.id}__${id}`)
+  const allIDs = subsection.unitUIDs.map(uid => `${subsection.id}__${uid}`)
 
   return (
     <div
@@ -264,9 +261,9 @@ function SortableSubsection({
       {!isCollapsed && (
         <SortableContext items={allIDs} strategy={verticalListSortingStrategy}>
           <ul style={styles.ul}>
-            {subsection.unitIDs.map((uid, index) => {
+            {subsection.unitUIDs.map((uid, index) => {
               const fullID = `${subsection.id}__${uid}`
-              const unit = getUnitByID(uid)
+              const unit = getUnitByUID(uid)
               return (
                 <React.Fragment key={fullID}>
                   <DropSlot id={fullID} />
@@ -277,6 +274,7 @@ function SortableSubsection({
                     index={index}
                     ctyp={unit?.CTyp}
                     name={unit?.Content}
+                    unitID={unit?.UnitID}
                     isSelected={selectedEditorIDs.has(fullID)}
                     selectedEditorIDs={selectedEditorIDs}
                     toggleSelection={toggleSelection}
@@ -303,6 +301,7 @@ function SortableUnit({
   index,
   ctyp,
   name,
+  unitID,
   isSelected,
   selectedEditorIDs,
   toggleSelection,
@@ -352,7 +351,7 @@ function SortableUnit({
         ...section,
         subsections: section.subsections.map(sub =>
           sub.id === fullID.split('__')[0]
-            ? { ...sub, unitIDs: sub.unitIDs.filter(id => id !== uid) }
+            ? { ...sub, unitUIDs: sub.unitUIDs.filter(id => id !== uid) }
             : sub
         )
       }))
@@ -372,7 +371,7 @@ function SortableUnit({
     >
       <span>
         <span style={{ fontWeight: 'bold', color: '#7dd3fc' }}>[{ctyp}]</span>{' '}
-        <strong>{uid}</strong>: <span style={{ color: '#bbb' }}>{name}</span>
+        <strong>{unitID}</strong>: <span style={{ color: '#bbb' }}>{name}</span>
       </span>
       <button
         onClick={handleRemove}

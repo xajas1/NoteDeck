@@ -3,13 +3,14 @@ import { useState, useMemo } from 'react'
 export default function TreeSidebar({ units, playground, setPlayground }) {
   const [expandedPaths, setExpandedPaths] = useState(new Set())
 
-  const isSelected = (uid) => playground.some(p => p.UnitID === uid)
+  const isSelected = (uid) => playground.some(p => p.UID === uid)
 
   const toggleUnit = (unit) => {
-    if (isSelected(unit.UnitID)) {
-      setPlayground(playground.filter(u => u.UnitID !== unit.UnitID))
+    if (isSelected(unit.UID)) {
+      setPlayground(playground.filter(u => u.UID !== unit.UID))
     } else {
       setPlayground([...playground, {
+        UID: unit.UID,
         UnitID: unit.UnitID,
         Name: unit.Content,
         Section: "",
@@ -34,7 +35,6 @@ export default function TreeSidebar({ units, playground, setPlayground }) {
       const topicPath = typeof u.TopicPath === "string" ? u.TopicPath : ""
       const pathParts = [...topicPath.split('/'), source]
 
-
       let node = tree[subject] ??= {}
 
       for (const part of pathParts) {
@@ -51,25 +51,37 @@ export default function TreeSidebar({ units, playground, setPlayground }) {
 
   const treeData = useMemo(() => buildTree(units), [units])
 
-  const collectAllUnitIDs = (node) => {
-    let ids = [...(node.units || []).map(u => u.UnitID)]
+  const collectAllUIDs = (node) => {
+    let uids = [...(node.units || []).map(u => u.UID)]
     for (const child of Object.values(node.children || {})) {
-      ids.push(...collectAllUnitIDs(child))
+      uids.push(...collectAllUIDs(child))
     }
-    return ids
+    return uids
   }
 
   const isNodeChecked = (node) =>
-    collectAllUnitIDs(node).every(id => playground.some(p => p.UnitID === id))
+    collectAllUIDs(node).every(uid => playground.some(p => p.UID === uid))
 
   const toggleNodeUnits = (node) => {
-    const ids = collectAllUnitIDs(node)
-    const currentIDs = new Set(playground.map(p => p.UnitID))
-    const allSelected = ids.every(id => currentIDs.has(id))
+    const uids = collectAllUIDs(node)
+    const currentUIDs = new Set(playground.map(p => p.UID))
+    const allSelected = uids.every(uid => currentUIDs.has(uid))
 
     const newPlayground = allSelected
-      ? playground.filter(p => !ids.includes(p.UnitID))
-      : [...playground, ...units.filter(u => ids.includes(u.UnitID) && !currentIDs.has(u.UnitID))]
+      ? playground.filter(p => !uids.includes(p.UID))
+      : [
+          ...playground,
+          ...units
+            .filter(u => uids.includes(u.UID) && !currentUIDs.has(u.UID))
+            .map(u => ({
+              UID: u.UID,
+              UnitID: u.UnitID,
+              Name: u.Content,
+              Section: "",
+              Subsection: "",
+              Order: playground.length + 1
+            }))
+        ]
 
     setPlayground(newPlayground)
   }
@@ -109,10 +121,10 @@ export default function TreeSidebar({ units, playground, setPlayground }) {
               {isOpen && (
                 <div>
                   {child.units?.map(unit => (
-                    <label key={unit.UnitID} style={{ display: 'block', marginLeft: '1.6rem' }}>
+                    <label key={unit.UID} style={{ display: 'block', marginLeft: '1.6rem' }}>
                       <input
                         type="checkbox"
-                        checked={isSelected(unit.UnitID)}
+                        checked={isSelected(unit.UID)}
                         onChange={() => toggleUnit(unit)}
                         style={{ marginRight: '0.5rem' }}
                       />

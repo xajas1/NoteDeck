@@ -21,10 +21,10 @@ function App() {
   const [structure, setStructure] = useState([])
   const [playground, setPlayground] = useState([])
 
-  const [selectedIDs, setSelectedIDs] = useState(new Set())
+  const [selectedUIDs, setSelectedUIDs] = useState(new Set())
   const [lastSelectedIndex, setLastSelectedIndex] = useState(null)
 
-  const [selectedEditorIDs, setSelectedEditorIDs] = useState(new Set())
+  const [selectedEditorUIDs, setSelectedEditorUIDs] = useState(new Set())
   const [lastSelectedEditorIndex, setLastSelectedEditorIndex] = useState(null)
 
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }))
@@ -88,9 +88,9 @@ function App() {
     setPlayground(entry.playground || [])
     setActiveProject(name)
     saveProjectsToStorage(projects, name)
-    setSelectedIDs(new Set())
+    setSelectedUIDs(new Set())
     setLastSelectedIndex(null)
-    setSelectedEditorIDs(new Set())
+    setSelectedEditorUIDs(new Set())
     setLastSelectedEditorIndex(null)
   }
 
@@ -104,9 +104,9 @@ function App() {
     setStructure(copy[nextActive]?.structure || [])
     setPlayground(copy[nextActive]?.playground || [])
     saveProjectsToStorage(copy, nextActive)
-    setSelectedIDs(new Set())
+    setSelectedUIDs(new Set())
     setLastSelectedIndex(null)
-    setSelectedEditorIDs(new Set())
+    setSelectedEditorUIDs(new Set())
     setLastSelectedEditorIndex(null)
   }
 
@@ -123,9 +123,9 @@ function App() {
     setStructure([])
     setPlayground([])
     saveProjectsToStorage(updated, name)
-    setSelectedIDs(new Set())
+    setSelectedUIDs(new Set())
     setLastSelectedIndex(null)
-    setSelectedEditorIDs(new Set())
+    setSelectedEditorUIDs(new Set())
     setLastSelectedEditorIndex(null)
   }
 
@@ -156,9 +156,9 @@ function App() {
     const saved = projects[activeProject]
     setStructure(saved.structure || [])
     setPlayground(saved.playground || [])
-    setSelectedIDs(new Set())
+    setSelectedUIDs(new Set())
     setLastSelectedIndex(null)
-    setSelectedEditorIDs(new Set())
+    setSelectedEditorUIDs(new Set())
     setLastSelectedEditorIndex(null)
     alert("↩ Projekt auf gespeicherten Zustand zurückgesetzt.")
   }
@@ -166,52 +166,52 @@ function App() {
   const handleDragEnd = ({ active, over }) => {
     if (!active || !over || active.id === over.id) return
 
-    const draggedIDs = active?.data?.current?.draggedIDs || [active.id.split('__').pop()]
+    const draggedUIDs = active?.data?.current?.draggedIDs || [active.id.split('__').pop()]
     const targetSubID = over.id.includes('__') ? over.id.split('__')[0] : over.id
-    const targetUnitID = over.id.includes('__') ? over.id.split('__')[1] : null
+    const targetUID = over.id.includes('__') ? over.id.split('__')[1] : null
 
     setStructure(prev => {
       return prev.map(section => ({
         ...section,
         subsections: section.subsections.map(sub => {
           const isTarget = sub.id === targetSubID
-          const original = sub.unitIDs
+          const original = sub.unitUIDs
 
-          const cleaned = original.filter(id => !draggedIDs.includes(id))
+          const cleaned = original.filter(uid => !draggedUIDs.includes(uid))
 
-          if (!isTarget) return { ...sub, unitIDs: cleaned }
+          if (!isTarget) return { ...sub, unitUIDs: cleaned }
 
           let insertAt = cleaned.length
-          if (targetUnitID) {
-            const targetIndexOriginal = original.indexOf(targetUnitID)
-            const firstDraggedIndex = Math.min(...draggedIDs.map(id => original.indexOf(id)).filter(i => i !== -1))
+          if (targetUID) {
+            const targetIndexOriginal = original.indexOf(targetUID)
+            const firstDraggedIndex = Math.min(...draggedUIDs.map(uid => original.indexOf(uid)).filter(i => i !== -1))
             const direction = firstDraggedIndex < targetIndexOriginal ? 'down' : 'up'
-            let correctedIndex = cleaned.findIndex(id => id === targetUnitID)
+            let correctedIndex = cleaned.findIndex(uid => uid === targetUID)
             if (correctedIndex === -1) correctedIndex = cleaned.length
             if (direction === 'down') correctedIndex++
             insertAt = Math.min(correctedIndex, cleaned.length)
           }
 
           const result = [...cleaned]
-          result.splice(insertAt, 0, ...draggedIDs)
-          return { ...sub, unitIDs: result }
+          result.splice(insertAt, 0, ...draggedUIDs)
+          return { ...sub, unitUIDs: result }
         })
       }))
     })
 
-    const fullIDs = draggedIDs.map(uid => `${targetSubID}__${uid}`)
-    setSelectedEditorIDs(new Set(fullIDs))
+    const fullUIDs = draggedUIDs.map(uid => `${targetSubID}__${uid}`)
+    setSelectedEditorUIDs(new Set(fullUIDs))
     setLastSelectedEditorIndex(null)
-    setSelectedIDs(new Set())
+    setSelectedUIDs(new Set())
     setLastSelectedIndex(null)
   }
 
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") {
-        setSelectedIDs(new Set())
+        setSelectedUIDs(new Set())
         setLastSelectedIndex(null)
-        setSelectedEditorIDs(new Set())
+        setSelectedEditorUIDs(new Set())
         setLastSelectedEditorIndex(null)
       }
       if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key.toLowerCase() === "s") {
@@ -322,8 +322,8 @@ function App() {
               <TreePlaygroundView
                 playground={playground}
                 units={units}
-                selectedIDs={selectedIDs}
-                setSelectedIDs={setSelectedIDs}
+                selectedUIDs={selectedUIDs}
+                setSelectedUIDs={setSelectedUIDs}
                 lastSelectedIndex={lastSelectedIndex}
                 setLastSelectedIndex={setLastSelectedIndex}
                 setPlayground={setPlayground}
@@ -342,8 +342,8 @@ function App() {
             <TreeEditorView
               structure={structure}
               setStructure={setStructure}
-              selectedEditorIDs={selectedEditorIDs}
-              setSelectedEditorIDs={setSelectedEditorIDs}
+              selectedEditorUIDs={selectedEditorUIDs}
+              setSelectedEditorUIDs={setSelectedEditorUIDs}
               lastSelectedEditorIndex={lastSelectedEditorIndex}
               setLastSelectedEditorIndex={setLastSelectedEditorIndex}
               units={units}
