@@ -15,7 +15,7 @@ import React, {
   import ace from "ace-builds/src-noconflict/ace"
   ace.config.set("basePath", "/ace")
 
-  const TexSnipEditor = forwardRef(({ splitState, onMetaChange }, ref) => {
+  const TexSnipEditor = forwardRef(({ splitState, onMetaChange, onNewUnit }, ref) => {
     const [subject, setSubject] = useState("A")
     const [topic, setTopic] = useState("Ringe Basics")
     const [litID, setLitID] = useState("T12")
@@ -147,10 +147,10 @@ import React, {
   
       const json = await res.json()
       setResponse(json)
-      if (json.unit && typeof window.onNewUnit === "function") {
-        window.onNewUnit(json.unit)
+      if (json.unit && typeof onNewUnit === "function") {
+        onNewUnit(json.unit)
       }
-           
+                 
   
       if (json.UnitID) {
         const wrappedText = `\\begin{${ctyp}}{${json.UnitID}}{${content}}\n${selectedText}\n\\end{${ctyp}}`

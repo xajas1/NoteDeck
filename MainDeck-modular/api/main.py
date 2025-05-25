@@ -6,6 +6,7 @@ import json
 import subprocess
 import os
 import re
+import uuid
 
 app = FastAPI(title="NoteDeck-API")
 print("🚀 FastAPI loaded")
@@ -186,6 +187,7 @@ def create_snip(req: SnipRequest):
     next_number = max([int(d["UnitID"].split("-")[-1]) for d in matching], default=0) + 1
     unit_id = f"{req.Subject}-{req.LitID}-{topic_index:02d}-{next_number:02d}"
     new_entry = {
+        "UID": str(uuid.uuid4()), 
         "UnitID": unit_id,
         "Subject": req.Subject,
         "Topic": req.Topic,

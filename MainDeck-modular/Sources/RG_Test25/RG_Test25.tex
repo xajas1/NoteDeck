@@ -438,7 +438,7 @@ Ein Vektorraumbündel $E \rightarrow M$ heißt von endlichem Typ, wenn es ein Ve
 \end{EXA}
 
 \subsection*{1.16 Beispiel}
-\begin{EXA}{TEST-T25-02-01}{TESTExample7}
+\begin{EXA}{TEST-T25-01-27}{TESTExample7}
 $T S^{n}$ ist von endlichem Typ, denn
 
 $$
@@ -447,6 +447,7 @@ $$
 \end{EXA}
 
 \subsection*{1.17 Definition}
+\begin{DEF}{TEST-T25-01-28}{TESTDEfinition12}
 a) Seien $\pi_{i}: E_{i} \rightarrow B_{i}, i=1,2$ Faserbündel mit Strukturgruppe $G$ und typischer Faser $F, f_{0}: B_{1} \rightarrow B_{2}$ eine differenzierbare Abbildung, dann heißt eine differenzierbare Abbildung $f: E_{1} \rightarrow E_{2}$ eine Bündelabbildung über $f_{0}$, falls $f_{0} \circ \pi_{1}=\pi_{2} \circ f$ gilt und $f$ bezüglich Bündelkarten durch differenzierbare Abbildungen $\gamma: U \rightarrow G$, genauer durch
 
 $$
@@ -458,11 +459,15 @@ b) Ist zusätzlich $f_{0}=\mathrm{id}$, so heißt $f$ ein Bündelisomorphismus.\
 c) Ein Bündelisomorphismus $f: E \rightarrow B \times F$ heißt eine Trivialisierung von $E$.\\
 d) Seien jetzt $E_{i} \rightarrow B_{i}$ zwei Vektorraumbündel $f_{0}: B_{1} \rightarrow B_{2}$ eine differenzierbare Abbildung und $f: E_{1} \rightarrow E_{2}$ eine differenzierbare Abbildung über $f_{0}$, so heißt $f$ eine Vektorraumbündelabbildung über $f$, falls $f_{x}:=f \mid E_{1, x}$ linear ist für jedes $x \in M$.\\
 e) Ist $f_{0}=\mathrm{id}$, so heißt $f$ ein Vektorraumbündelhomomorphismus, es ist dann $f \in \Gamma \operatorname{Hom}\left(E_{1}, E_{2}\right)$.
+\end{DEF}
 
 \subsection*{1.18 Beispiel}
+\begin{EXA}{TEST-T25-01-29}{TESTExampel 232}
 Ist $f: M \rightarrow N$ eine differenzierbare Abbildung, so ist $d f: T M \rightarrow T N$ eine Vektorraumbündelabbildung über $f$.
+\end{EXA}
 
 \subsection*{1.19 Definition und Satz}
+\begin{DEF}{TEST-T25-01-30}{TESTDefinition 232}
 Ist $f: N \rightarrow M$ eine differenzierbare Abbildung, $E \rightarrow M$ ein Faserbündel mit Strukturgruppe $G$, so ist
 
 $$
@@ -470,6 +475,7 @@ p r_{1}: f^{*} E=\left\{(x, e) \mid x \in N, e \in E_{f(x)}\right\} \rightarrow 
 $$
 
 ein Faserbündel mit Strukturgruppe $G$ über $N$, das von $f$ induzierte Bündel. Schnitte in $f^{*} E$ heißen Schnitte in $E$ längs $f$.
+\end{DEF}
 
 \section*{Beweis:}
 Sei $x \in N$ und $(U, \varphi)$ Bündelkarte um $f(x)$ für $E$. Dann ist $\left(f^{-1}(U), \tilde{\varphi}\right)$ mit

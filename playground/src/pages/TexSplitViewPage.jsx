@@ -119,11 +119,15 @@ const TexSplitViewPage = () => {
         style={{ position: 'relative' }}
       >
         <div style={{ height: '100%', overflow: 'auto' }}>
-          <TexSnipEditor
+        <TexSnipEditor
             ref={editorRef}
             splitState={splitState}
             onMetaChange={setSnipMeta}
-          />
+            onNewUnit={(unit) => {
+                console.log("📥 Neue Unit empfangen:", unit)
+                setUnits(prev => [...prev, unit])
+            }}
+        />
         </div>
         <div style={{ height: '100%', overflow: 'auto', padding: '1rem' }}>
           <TexSnipTablePage
