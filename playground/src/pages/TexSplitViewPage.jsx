@@ -61,10 +61,17 @@ const TexSplitViewPage = () => {
       })
       setSplitState(res.data)
       setProjectName(name)
+  
+      const sourceFile = res.data?.sourceFile?.split("/")?.[0] || ""
+      if (sourceFile) {
+        const unitRes = await axios.get(`http://localhost:8000/load-library?source=${sourceFile}`)
+        setUnits(unitRes.data)
+      }
     } catch (err) {
       console.error("❌ Fehler beim Laden", err)
     }
   }
+  
 
   const handleScrollToUnit = ({ unitID }) => {
     if (editorRef.current?.scrollToUnit) {
@@ -97,7 +104,7 @@ const TexSplitViewPage = () => {
           value={projectName}
           style={{ fontSize: "0.75rem", padding: "0.3rem" }}
         >
-          <option value="" disabled>Snapshot laden …</option>
+          <option value="" disabled hidden>Snapshot laden …</option>
           {availableSnapshots.map(name => (
             <option key={name} value={name}>{name}</option>
           ))}

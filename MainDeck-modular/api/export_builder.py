@@ -39,8 +39,8 @@ def build_tex_file(project_name: str):
     with open(header_path, "r", encoding="utf-8") as f:
         header = f.read()
 
-    # Erstelle Dictionary für schnellen Zugriff auf Body
-    unit_dict = {entry["UnitID"]: entry for entry in lib_data}
+    # Erstelle Dictionary für schnellen Zugriff auf Body per UID
+    unit_dict = {entry["UID"]: entry for entry in lib_data}
 
     # Füge Inhalte zusammen
     body_lines = []
@@ -48,13 +48,14 @@ def build_tex_file(project_name: str):
         body_lines.append(f"\\section{{{section['name']}}}\n")
         for sub in section["subsections"]:
             body_lines.append(f"\\subsection{{{sub['name']}}}\n")
-            for uid in sub["unitIDs"]:
+            for uid in sub["unitUIDs"]:
                 entry = unit_dict.get(uid)
                 if entry:
+                    unit_id = entry.get("UnitID", uid)
                     env = entry.get("CTyp", "unit")
                     title = entry.get("Content", "Ohne Titel")
                     body  = entry.get("Body", "").strip() or "% TODO: Inhalt ergänzen (Tex)"
-                    block = f"\\begin{{{env}}}{{{uid}}}{{{title}}}\n{body}\n\\end{{{env}}}"
+                    block = f"\\begin{{{env}}}{{{unit_id}}}{{{title}}}\n{body}\n\\end{{{env}}}"
                     body_lines.append(block + "\n")
                 else:
                     body_lines.append(f"% ⚠️ FEHLT in Library.json: {uid}\n")

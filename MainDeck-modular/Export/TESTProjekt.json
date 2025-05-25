@@ -1,0 +1,30 @@
+{
+  "projectName": "TESTProjekt",
+  "structure": [
+    {
+      "id": "sec-1748186190389",
+      "name": "TESTSection",
+      "subsections": [
+        {
+          "id": "sub-1748186196198",
+          "name": "TESTSubsection",
+          "unitUIDs": [
+            "93ef2182-7e22-4940-9382-94fe1fde3ed7",
+            "752b76b7-db13-4002-bf4d-35cbb1e5e281",
+            "sub-1748193308054"
+          ]
+        },
+        {
+          "id": "sub-1748193308054",
+          "name": "TESTSubsection2",
+          "unitUIDs": [
+            "5cda9788-1bb2-4802-a889-120c48ba5348",
+            "ac0d1f79-c5d5-4e79-87eb-c1ba2633b045",
+            "b89d1950-b6ae-4300-bc4d-6cc0caec4fef",
+            "sub-1748186196198"
+          ]
+        }
+      ]
+    }
+  ]
+}
