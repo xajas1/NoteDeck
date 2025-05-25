@@ -12,8 +12,8 @@ export default function TreeEditorView({
   structure,
   setStructure,
   units,
-  selectedEditorIDs,
-  setSelectedEditorIDs,
+  selectedEditorUIDs,
+  setSelectedEditorUIDs,
   lastSelectedEditorIndex,
   setLastSelectedEditorIndex
 }) {
@@ -40,8 +40,8 @@ export default function TreeEditorView({
 
   const getUnitByUID = (uid) => units.find(u => u.UID === uid)
 
-  const toggleSelection = (fullID, index, shift = false, allIDs = []) => {
-    setSelectedEditorIDs(prev => {
+  const handleToggleSelection = (fullID, index, shift = false, allIDs = []) => {
+    setSelectedEditorUIDs(prev => {
       const next = new Set(prev)
       if (shift && lastSelectedEditorIndex !== null) {
         const start = Math.min(lastSelectedEditorIndex, index)
@@ -72,7 +72,7 @@ export default function TreeEditorView({
           type="text"
           value={newSectionName}
           onChange={e => setNewSectionName(e.target.value)}
-          onKeyDown={(e) => { if (e.key === 'Enter') addSection() }}
+          onKeyDown={e => { if (e.key === 'Enter') addSection() }}
           placeholder="Neue Section"
           style={{ backgroundColor: '#111', color: '#eee', padding: '0.2rem', fontSize: '0.75rem', flex: 1 }}
         />
@@ -88,8 +88,8 @@ export default function TreeEditorView({
             subInputs={subInputs}
             setSubInputs={setSubInputs}
             getUnitByUID={getUnitByUID}
-            selectedEditorIDs={selectedEditorIDs}
-            toggleSelection={toggleSelection}
+            selectedEditorUIDs={selectedEditorUIDs}
+            toggleSelection={handleToggleSelection}
             lastSelectedEditorIndex={lastSelectedEditorIndex}
             setLastSelectedEditorIndex={setLastSelectedEditorIndex}
             collapsedSections={collapsedSections}
@@ -109,7 +109,7 @@ function SortableSection({
   subInputs,
   setSubInputs,
   getUnitByUID,
-  selectedEditorIDs,
+  selectedEditorUIDs,
   toggleSelection,
   lastSelectedEditorIndex,
   setLastSelectedEditorIndex,
@@ -118,31 +118,14 @@ function SortableSection({
   toggleCollapseSection,
   toggleCollapseSubsection
 }) {
-  const {
-    setNodeRef,
-    transform,
-    transition,
-    attributes,
-    listeners,
-    isDragging
-  } = useSortable({ id: section.id, data: { type: 'section' } })
-
-  const style = {
-    opacity: 1,
-    marginBottom: '1.5rem'
-  }
-
+  const { setNodeRef, transform, transition, attributes, listeners } = useSortable({ id: section.id })
+  const style = { opacity: 1, marginBottom: '1.5rem' }
   const isCollapsed = collapsedSections.has(section.id)
 
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      <div
-        style={styles.section}
-        onClick={() => toggleCollapseSection(section.id)}
-      >
-        <span style={{ cursor: 'pointer', marginRight: '0.4rem' }}>
-          {isCollapsed ? '▶' : '▼'}
-        </span>
+      <div style={styles.section} onClick={() => toggleCollapseSection(section.id)}>
+        <span style={{ cursor: 'pointer', marginRight: '0.4rem' }}>{isCollapsed ? '▶' : '▼'}</span>
         {section.name}
       </div>
 
@@ -153,15 +136,14 @@ function SortableSection({
               type="text"
               value={subInputs[section.id] || ''}
               onChange={e => setSubInputs({ ...subInputs, [section.id]: e.target.value })}
-              onKeyDown={(e) => {
+              onKeyDown={e => {
                 if (e.key === 'Enter') {
                   const name = subInputs[section.id] || ''
                   setSubInputs({ ...subInputs, [section.id]: '' })
                   setStructure(prev =>
-                    prev.map(s =>
-                      s.id === section.id
-                        ? { ...s, subsections: [...s.subsections, { id: `sub-${Date.now()}`, name, unitUIDs: [] }] }
-                        : s
+                    prev.map(s => s.id === section.id
+                      ? { ...s, subsections: [...s.subsections, { id: `sub-${Date.now()}`, name, unitUIDs: [] }] }
+                      : s
                     )
                   )
                 }
@@ -169,24 +151,17 @@ function SortableSection({
               placeholder="Neue Subsection"
               style={{ backgroundColor: '#111', color: '#eee', padding: '0.2rem', fontSize: '0.72rem', flex: 1 }}
             />
-            <button
-              onClick={() => {
-                const name = subInputs[section.id] || ''
-                setSubInputs({ ...subInputs, [section.id]: '' })
-                setStructure(prev =>
-                  prev.map(s =>
-                    s.id === section.id
-                      ? { ...s, subsections: [...s.subsections, { id: `sub-${Date.now()}`, name, unitUIDs: [] }] }
-                      : s
-                  )
+            <button onClick={() => {
+              const name = subInputs[section.id] || ''
+              setSubInputs({ ...subInputs, [section.id]: '' })
+              setStructure(prev =>
+                prev.map(s => s.id === section.id
+                  ? { ...s, subsections: [...s.subsections, { id: `sub-${Date.now()}`, name, unitUIDs: [] }] }
+                  : s
                 )
-              }}
-              style={styles.subButton}
-            >
-              Add
-            </button>
+              )
+            }} style={styles.subButton}>Add</button>
           </div>
-
           <SortableContext items={section.subsections.map(sub => sub.id)} strategy={verticalListSortingStrategy}>
             {section.subsections.map(sub => (
               <SortableSubsection
@@ -194,7 +169,7 @@ function SortableSection({
                 subsection={sub}
                 sectionId={section.id}
                 getUnitByUID={getUnitByUID}
-                selectedEditorIDs={selectedEditorIDs}
+                selectedEditorUIDs={selectedEditorUIDs}
                 toggleSelection={toggleSelection}
                 lastSelectedEditorIndex={lastSelectedEditorIndex}
                 setLastSelectedEditorIndex={setLastSelectedEditorIndex}
@@ -214,7 +189,7 @@ function SortableSubsection({
   subsection,
   sectionId,
   getUnitByUID,
-  selectedEditorIDs,
+  selectedEditorUIDs,
   toggleSelection,
   lastSelectedEditorIndex,
   setLastSelectedEditorIndex,
@@ -222,39 +197,18 @@ function SortableSubsection({
   isCollapsed,
   toggleCollapse
 }) {
-  const {
-    setNodeRef,
-    transform,
-    transition,
-    attributes,
-    listeners,
-    isDragging
-  } = useSortable({
-    id: subsection.id,
-    data: { type: 'subsection', parentId: sectionId }
-  })
-
+  const { setNodeRef, transform, transition, attributes, listeners } = useSortable({ id: subsection.id })
   const allIDs = subsection.unitUIDs.map(uid => `${subsection.id}__${uid}`)
 
   return (
-    <div
-      ref={setNodeRef}
-      {...attributes}
-      {...listeners}
-      style={{
-        ...styles.subsection,
-        transform: CSS.Transform.toString(transform),
-        transition,
-        opacity: isDragging ? 0.5 : 1
-      }}
-    >
-      <div
-        style={styles.subsectionName}
-        onClick={toggleCollapse}
-      >
-        <span style={{ cursor: 'pointer', marginRight: '0.4rem' }}>
-          {isCollapsed ? '▶' : '▼'}
-        </span>
+    <div ref={setNodeRef} {...attributes} {...listeners} style={{
+      ...styles.subsection,
+      transform: CSS.Transform.toString(transform),
+      transition,
+      opacity: 1
+    }}>
+      <div style={styles.subsectionName} onClick={toggleCollapse}>
+        <span style={{ cursor: 'pointer', marginRight: '0.4rem' }}>{isCollapsed ? '▶' : '▼'}</span>
         {subsection.name}
       </div>
 
@@ -275,8 +229,8 @@ function SortableSubsection({
                     ctyp={unit?.CTyp}
                     name={unit?.Content}
                     unitID={unit?.UnitID}
-                    isSelected={selectedEditorIDs.has(fullID)}
-                    selectedEditorIDs={selectedEditorIDs}
+                    selectedEditorUIDs={selectedEditorUIDs}
+                    isSelected={selectedEditorUIDs?.has(fullID)}
                     toggleSelection={toggleSelection}
                     lastSelectedEditorIndex={lastSelectedEditorIndex}
                     setLastSelectedEditorIndex={setLastSelectedEditorIndex}
@@ -303,46 +257,22 @@ function SortableUnit({
   name,
   unitID,
   isSelected,
-  selectedEditorIDs,
+  selectedEditorUIDs,
   toggleSelection,
   lastSelectedEditorIndex,
   setLastSelectedEditorIndex,
   allIDs,
   setStructure
 }) {
-  const {
-    setNodeRef,
-    attributes,
-    listeners,
-    transform,
-    transition,
-    isDragging
-  } = useSortable({
+  const { setNodeRef, attributes, listeners, transform, transition, isDragging } = useSortable({
     id,
     data: {
       type: 'unit',
-      draggedIDs:
-        isSelected && selectedEditorIDs.size > 1
-          ? Array.from(selectedEditorIDs).map(x => x.split('__')[1])
-          : [uid]
+      draggedIDs: isSelected && selectedEditorUIDs?.size > 1
+        ? Array.from(selectedEditorUIDs).map(x => x.split('__')[1])
+        : [uid]
     }
   })
-
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-    opacity: isDragging ? 0.5 : 1,
-    padding: '0rem 0.2rem',
-    backgroundColor: isSelected ? '#2a2a2a' : 'transparent',
-    borderLeft: isSelected ? '2px solid #4fc3f7' : '2px solid transparent',
-    fontSize: '0.68rem',
-    lineHeight: '0.95rem',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '0.02rem',
-    cursor: 'grab'
-  }
 
   const handleRemove = (e) => {
     e.stopPropagation()
@@ -367,26 +297,35 @@ function SortableUnit({
         e.stopPropagation()
         toggleSelection(fullID, index, e.shiftKey, allIDs)
       }}
-      style={style}
+      style={{
+        transform: CSS.Transform.toString(transform),
+        transition,
+        opacity: isDragging ? 0.5 : 1,
+        padding: '0rem 0.2rem',
+        backgroundColor: isSelected ? '#2a2a2a' : 'transparent',
+        borderLeft: isSelected ? '2px solid #4fc3f7' : '2px solid transparent',
+        fontSize: '0.68rem',
+        lineHeight: '0.95rem',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: '0.02rem',
+        cursor: 'grab'
+      }}
     >
       <span>
         <span style={{ fontWeight: 'bold', color: '#7dd3fc' }}>[{ctyp}]</span>{' '}
         <strong>{unitID}</strong>: <span style={{ color: '#bbb' }}>{name}</span>
       </span>
-      <button
-        onClick={handleRemove}
-        style={{
-          background: 'transparent',
-          color: '#60a5fa',
-          border: 'none',
-          cursor: 'pointer',
-          marginLeft: '0.4rem',
-          fontSize: '0.72rem',
-          lineHeight: '1rem'
-        }}
-      >
-        ✕
-      </button>
+      <button onClick={handleRemove} style={{
+        background: 'transparent',
+        color: '#60a5fa',
+        border: 'none',
+        cursor: 'pointer',
+        marginLeft: '0.4rem',
+        fontSize: '0.72rem',
+        lineHeight: '1rem'
+      }}>✕</button>
     </li>
   )
 }
@@ -395,6 +334,9 @@ function DropSlot({ id }) {
   const { isOver, setNodeRef } = useDroppable({ id })
   return <div ref={setNodeRef}>{isOver && <div style={styles.dropLine} />}</div>
 }
+
+
+
 
 const styles = {
   button: {
