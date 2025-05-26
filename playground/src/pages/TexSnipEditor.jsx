@@ -224,7 +224,7 @@ import React, {
           <div><label>Content:</label><input value={content} onChange={e => setContent(e.target.value)} style={{ width: "100%" }} /></div>
           <div><label>CTyp:</label><select value={ctyp} onChange={e => setCtyp(e.target.value)} style={{ width: "100%" }}>{["DEF", "EXA", "PROP", "REM", "THEO"].map(k => <option key={k} value={k}>{k}</option>)}</select></div>
         </div>
-  
+   
         {/* ACE Editor */}
         <div style={{ flex: 1 }}>
           <AceEditor
