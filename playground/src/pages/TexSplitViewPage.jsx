@@ -5,6 +5,15 @@ import TexSnipTablePage from './TexSnipTablePage'
 import axios from 'axios'
 
 const TexSplitViewPage = () => {
+  // globaler dispatcher nur 1x initialisieren
+  if (typeof window.onNewUnit === "undefined") {
+    window.onNewUnitHandlers = []
+    window.onNewUnit = (unit) => {
+      console.log("📣 Globaler onNewUnit-Aufruf:", unit)
+      window.onNewUnitHandlers.forEach(fn => fn(unit))
+    }
+  }
+
   const [projectName, setProjectName] = useState("")
   const [availableSnapshots, setAvailableSnapshots] = useState([])
   const [splitState, setSplitState] = useState(null)
@@ -12,8 +21,15 @@ const TexSplitViewPage = () => {
   const [snipMeta, setSnipMeta] = useState({})
   const [tableMeta, setTableMeta] = useState({})
   const [units, setUnits] = useState([])
+  const [sourceMap, setSourceMap] = useState({})
 
   const editorRef = useRef(null)
+
+  useEffect(() => {
+    axios.get("http://localhost:8000/source-map")
+      .then(res => setSourceMap(res.data))
+      .catch(err => console.error("❌ Fehler beim Laden der SourceMap:", err))
+  }, [])
 
   const refreshSnapshots = async () => {
     try {
@@ -28,12 +44,38 @@ const TexSplitViewPage = () => {
     refreshSnapshots()
   }, [])
 
-  useEffect(() => {
-    window.onNewUnit = (unit) => {
-      console.log("📥 Neue Unit empfangen:", unit)
-      setUnits(prev => [...prev, unit])
+  const handleNewUnit = async (unit) => {
+    console.log("📥 Neue Unit empfangen:", unit)
+
+    const source =
+      tableMeta?.selectedSource ||
+      splitState?.tableMeta?.selectedSource ||
+      splitState?.sourceFile
+
+    if (!source) return
+
+    try {
+      const res = await axios.get(`http://localhost:8000/load-library?source=${source}`)
+      setUnits([...res.data]) // 🔁 zwingt neue Referenz
+      console.log("🔄 Tabelle nach Snip neu geladen")
+    } catch (err) {
+      console.error("❌ Fehler beim Neuladen der Tabelle:", err)
     }
-  }, [])
+  }
+
+  // Registriere globalen Listener für Snip-Aktualisierung
+  useEffect(() => {
+    if (typeof window.onNewUnitHandlers === "undefined") {
+      window.onNewUnitHandlers = []
+    }
+
+    window.onNewUnitHandlers.push(handleNewUnit)
+    console.log("🔗 onNewUnitHandler in SplitView registriert")
+
+    return () => {
+      window.onNewUnitHandlers = window.onNewUnitHandlers.filter(fn => fn !== handleNewUnit)
+    }
+  }, [tableMeta, splitState])
 
   const saveCurrentSnapshot = async () => {
     if (!projectName) return alert("Bitte Projektnamen eingeben")
@@ -61,23 +103,26 @@ const TexSplitViewPage = () => {
       })
       setSplitState(res.data)
       setProjectName(name)
-  
+
       const sourceFile = res.data?.sourceFile?.split("/")?.[0] || ""
       if (sourceFile) {
         const unitRes = await axios.get(`http://localhost:8000/load-library?source=${sourceFile}`)
-        setUnits(unitRes.data)
+        setUnits([...unitRes.data])
       }
     } catch (err) {
       console.error("❌ Fehler beim Laden", err)
     }
   }
-  
 
   const handleScrollToUnit = ({ unitID }) => {
     if (editorRef.current?.scrollToUnit) {
       editorRef.current.scrollToUnit(unitID)
     }
   }
+
+  useEffect(() => {
+    console.log("📦 Aktuelle Units im SplitViewPage:", units.length)
+  }, [units])
 
   return (
     <div style={{ height: '100vh', width: '100vw' }}>
@@ -119,15 +164,12 @@ const TexSplitViewPage = () => {
         style={{ position: 'relative' }}
       >
         <div style={{ height: '100%', overflow: 'auto' }}>
-        <TexSnipEditor
+          <TexSnipEditor
             ref={editorRef}
             splitState={splitState}
             onMetaChange={setSnipMeta}
-            onNewUnit={(unit) => {
-                console.log("📥 Neue Unit empfangen:", unit)
-                setUnits(prev => [...prev, unit])
-            }}
-        />
+            onNewUnit={handleNewUnit}
+          />
         </div>
         <div style={{ height: '100%', overflow: 'auto', padding: '1rem' }}>
           <TexSnipTablePage

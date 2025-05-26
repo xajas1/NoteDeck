@@ -490,9 +490,12 @@ $$
 eine Präbündelkarte gegeben. Die Kartenwechsel sind dieselben wie die für $E \xrightarrow{\pi} M$, also differenzierbar.
 
 \subsection*{1.20 Beispiel}
+\begin{EXA}{TEST-T25-01-31}{TESTExample932}
 Ist $\gamma: I \rightarrow M$ differenzierbar, so ist $\Gamma\left(\gamma^{*} T M\right)$ die Menge der Vektorfelder längs $\gamma$.
+\end{EXA}
 
 \subsection*{1.21 Beispiel}
+\begin{EXA}{TEST-T25-01-32}{TESTExample 374}
 Sei $G_{k, N}=O(N) /(O(k) \times O(N-k))$ die Grassmann-Mannigfaltigkeit und
 
 $$
@@ -500,8 +503,10 @@ $$
 $$
 
 dann ist $\gamma_{k, N} \rightarrow G_{k, N}$ ein $k$-dimensionales Vektorraumbündel. $\gamma_{k, N}$ ist offenbar von endlichem Typ und ein Vektorraumbündel $E \rightarrow M$ ist genau dann von endlichem Typ, wenn es ein $N$ gibt und eine Abbildung $f: M \rightarrow G_{k, N}$, sodass $E=f^{*} \gamma_{k, N}$ ist.
+\end{EXA}
 
 \subsection*{1.22 Bemerkung}
+\begin{REM}{TEST-T25-01-33}{TESTRemark425}
 Die Abbildung $\hat{f}: f^{*} E \rightarrow E,(x, e) \mapsto e$ ist eine Bündelabbildung über $f$, sodass $\hat{f} \mid\left(f^{*} E\right)_{x}:\left(f^{*} E\right)_{x} \rightarrow E_{f(x)}$ ein Isomorphismus ist für jedes $x$. Ist $g$ : $\widetilde{E} \rightarrow E$ eine weitere Bündelabbildung über $f$, so ist
 
 $$
@@ -509,12 +514,17 @@ $$
 $$
 
 ein Bündelisomorphismus mit $\hat{f} \circ \tilde{g}=g$.
+\end{REM}
 
 \subsection*{1.23 Satz}
+\begin{PROP}{TEST-T25-01-34}{TestSatz3}
 Sei $E \rightarrow B$ ein Faserbündel, seien $f_{0}, f_{1}: X \rightarrow B$ homotope Abbildungen, dann ist $f_{0}^{*} E \cong f_{1}^{*} E$.
+\end{PROP}
 
 \subsection*{1.24 Korollar}
+\begin{PROP}{TEST-T25-01-35}{TestSatz5}
 Ist $B$ zusammenziehbar, also die Identität homotop zur konstanten Abbildung $c: B \rightarrow B, x \mapsto p$, so ist $E \rightarrow B$ trivial, denn $E=\mathrm{id}^{*} E \cong c^{*} E=B \times E_{p}$.
+\end{PROP}
 
 \section*{Beweis des Satzes:}
 Seien $\xi, \xi^{\prime}$ Faserbündel mit Strukturgruppe $G$ und typischer Faser F. Sei
@@ -527,12 +537,17 @@ Dann ist $\bigcup_{x \in B} \operatorname{Iso}_{G}\left(\xi_{x}, \xi_{x}^{\prime
 Wende dies an auf das Bündel $\operatorname{Iso}_{G}\left([0,1] \times f_{0}^{*} E, h^{*} E\right)$, wobei $h:[0,1] \times X \rightarrow B$ die Homotopie zwiswchen $f_{0}$ und $f_{1}$ ist. Dann ist $\sigma(0, x)=\operatorname{id}_{E_{f_{0}(x)}}$ fortsetzbar zu einem Schnitt $\sigma$, und $\sigma$ und $\sigma(1, \cdot)$ ist der gesuchte Bündelisomorphismus.
 
 \subsection*{1.25 Definition}
+\begin{DEF}{TEST-T25-01-36}{TestDefinition 4656}
 Ist $i: M_{0} \rightarrow M$ die Einbettung einer Untermannigfaltigkeit $M_{0}$ in $M$, so schreibt man statt $i^{*} E$ auch $\left.E\right|_{M_{0}}$.
+\end{DEF}
 
 \subsection*{1.26 Definition}
+\begin{DEF}{TEST-T25-01-37}{TESTDefinition 6246}
 Sei $(E, \pi, M)$ ein $k$-dimensionales Vektorraumbündel. Eine Teilmenge $E_{0} \subseteq E$ heißt ein $m$-dimensionales Untervektorraumbündel, falls es um jedes $x \in M$ eine Bündelkarte $(U, \varphi)$ gibt, sodass $\varphi\left(\pi^{-1}(U) \cap E_{0}\right)=U \times \mathbb{R}^{m} \times 0$ ist.
+\end{DEF}
 
 \subsection*{1.27 Bemerkungen}
+\begin{REM}{TEST-T25-01-38}{TESTRemark 3245}
 a) Ein $m$-dimensionales Untervektorraumbündel ist offenbar ein $m$-dimensionales Vektorraumbündel.\\
 b) Ist $E_{0} \subset E$ ein Untervektorraumbündel, so ist $E / E_{0}$ ein Vektorraumbündel. Ist $M$ mit einer Bündelmetrik $g$ versehen, so ist
 
@@ -542,10 +557,13 @@ $$
 
 ein Untervektorraumbündel und es gilt: $E_{0}^{\perp} \cong E / E_{0}$.\\
 c) Ist $M_{0}$ eine Untermannigfaltigkeit, dann ist $\left.T M_{0} \subset T M\right|_{M_{0}}:=\bigcup_{x \in M_{0}} T_{x} M$ ein $\operatorname{dim} M_{0}$-dimensionales Untervektorraumbündel von $\left.T M\right|_{M_{0}}$. $N M_{0}:=\left.T M\right|_{M_{0}} / T M_{0}$ heißt das Normalenbündel von $M_{0}$. Ist $M$ eine Riemannsche Mannigfaltigkeit, so ist $N M_{0} \cong T M_{0}^{\perp}$.
+\end{REM}
 
 \subsection*{1.28 Satz}
+\begin{PROP}{TEST-T25-01-39}{TESTSatz5832}
 Ist $f: E \rightarrow F$ ein Vektorraumhomomorphismus von einem Vektorraumbündel der Dimension $k$ und $m$ und ist $\operatorname{rg} f_{x}=$ const.\\
 Dann ist $\operatorname{ker} f:=\bigcup_{x \in M} \operatorname{ker} f_{x} \subset E$ ein Untervektorraumbündel von $E$ und Bild $f:=\bigcup_{x \in M}$ Bild $f_{x} \subset F$ ein Untervektorraumbündel von $F$.
+\end{PROP}
 
 \section*{Beweis:}
 Ohne Einschränkung sei $E=X \times \mathbb{R}^{k}, F=X \times \mathbb{R}^{m}$. Sei $r g f_{x}=r$.
@@ -589,28 +607,39 @@ Wende den 1. Fall auf $f: E \rightarrow \operatorname{Bild} f$ an.\\
 4. Fall: $k \geq m$ : Wir zeigen: Bild $f \subset F$ ist ein Untervektorraumbündel. Wende den 2. Fall auf $\left.E\right|_{\operatorname{kerf}}$ an.
 
 \subsection*{1.29 Korollar}
+\begin{PROP}{TEST-T25-01-40}{TESTKorollar}
 Ein Vektorraumbündel $E \rightarrow M$ ist genau dann von endlichem Typ, wenn eine der beiden äquivalenten Bedingungen erfüllt ist:
 
 \begin{enumerate}
   \item Es existiert ein surjektiver Vektorraumbündelhomomorphismus $M \times \mathbb{R}^{N} \rightarrow$ $E$.
   \item Es existieren $N$ Schnitte $s_{1}, \ldots, s_{n} \in \Gamma E$, sodass $\left(s_{1}(x), \ldots, s_{n}(x)\right)$ für jedes $x \in M$ die Faser $E_{x}$ erzeugt.
 \end{enumerate}
+\end{PROP}
 
 \subsection*{1.30 Definition}
+\begin{DEF}{TEST-T25-01-41}{TESTDefinition3948}
 Ist $E \rightarrow M$ ein Faserbündel mit Strukturgruppe $G$ und $G_{0} \subseteq G$ eine abgeschlossene Untergruppe. Dann sagt man: $E$ besitzt eine Reduktion auf $G_{0}$ oder eine $G_{0}$-Bündelstruktur, falls es einen Bündelatlas gibt, dessen Bündelkartenwechsel Werte in $G_{0}$ annehmen.
+\end{DEF}
 
 \subsection*{1.31 Beispiel}
+\begin{EXA}{TEST-T25-01-42}{TESTExample 5869}
 $M$ ist genau dann orientierbar, wenn $T M$ eine $G L^{+}(n, \mathbb{R})$-Bündelstruktur hat. (Übungsaufgabe)
 
 Die folgenden beiden Sätze geben oft eine einfache Möglichkeit zu entscheiden, wann eine Bündelstruktur vorliegt.
+\end{EXA}
 
 \subsection*{1.32 Satz (Ehresmannscher Faserungssatz)}
+\begin{PROP}{TEST-T25-01-43}{TESTSatz 8374}
 Ist $X$ zusammenhängend, $p: E \rightarrow X$ eine eigentliche reguläre Abbildung, so ist $E$ eine lokal triviale Faserung.
+\end{PROP}
 
 \subsection*{1.33 Satz (von Hermann)}
+\begin{PROP}{TEST-T25-01-44}{TESTSatz 8349}
 Ist ( $M, g$ ) vollständig und $\tilde{M}$ zusammenhängend, dann ist jede Riemannsche Submersion $\pi: M \rightarrow \tilde{M}$ ein Faserbündel.
+\end{PROP}
 
 \subsection*{1.34 Übungsaufgaben}
+\begin{DEF}{TEST-T25-01-45}{TEste24234}
 \begin{enumerate}
   \item Auf $S^{1} \subset \mathbb{C}$ betrachte man die durch $z \sim \bar{z}$ und $1 \sim-1$ definierte Äquivalenzrelation. Zeigen Sie:\\
 a) $S^{1} / \sim$ ist homöomorph zu $S^{1}$.\\
@@ -624,6 +653,7 @@ b) Zeigen Sie: Eine differenzierbare Mannigfaltigkeit besitzt genau dann eine Me
   \item Es sei $E \rightarrow B$ ein $n$-dimensionales Vektorraumbündel. Bestimmen Sie die Übergangsfunktionen für $\mathrm{Alt}^{n} E$ aus denen für $E$.
   \item Für Vektorraumbündel über einer Mannigfaltigkeit zeigen Sie: Ist
 \end{enumerate}
+\end{DEF}
 
 $$
 0 \rightarrow E^{\prime} \rightarrow E \rightarrow E^{\prime \prime} \rightarrow 0
@@ -640,9 +670,11 @@ b) Ist $f \circ f=\mathrm{Id}$, so ist $\operatorname{Fix}(f):=\{e \in E \mid f(
 
 \section{Prinzipalbündel}
 \subsection*{2.1 Definition}
+\begin{DEF}{TEST-T25-01-46}{TESTDEf asd24234}
 Eine $G$-Aktion $G \times M \rightarrow M$ heißt frei, falls aus $g x=x$ für ein $x \in M$ folgt $g=1$.\\
 Eine $G$-Aktion $G \times M \rightarrow M$ heißt effektiv, falls gilt: wirkt $g$ als Identität, so ist $g=1$.\\
 Eine $G$-Aktion $G \times M \rightarrow M$ heißt transitiv, falls gilt: Zu jedem Paar $(x, y) \in$ $M \times M$ existiert ein $g \in G$ mit $g x=y$.
+\end{DEF}
 
 \subsection*{2.2 Notiz}
 Ist $\phi: G \times M \rightarrow M$ eine freie transitive $G$-Aktion, so ist $G \cong M$.
@@ -651,7 +683,9 @@ Ist $\phi: G \times M \rightarrow M$ eine freie transitive $G$-Aktion, so ist $G
 Sei $x \in M$. Die Abbildung $o_{x}: G \rightarrow M, g \mapsto g x$ ist bijektiv und differenzierbar und $\left.d o_{x}\right|_{1}$ ist injektiv, also ist $\left.d o_{x}\right|_{g}$ bijektiv für jedes $g \in G$, also ist $o_{x}$ ein Diffeomorphismus (vgl. Lee 7.15: differenzierbare Abbildung von konstantem Rang!).
 
 \subsection*{2.3 Satz}
+\begin{PROP}{TEST-T25-01-47}{TESTSatz 42677}
 Auf dem Totalraum eines $G$-Prinzipalbündels gibt es eine $G$-Rechtsaktion, die auf den Fasern frei und transitiv ist. Die Faserkarten $\varphi_{x}$ sind bezüglich dieser Aktion $G$-rechtsäquivariant, d.h., $\varphi_{x}(p g)=\varphi_{x}(p) g$.
+\end{PROP}
 
 \section*{Beweis:}
 Sei $p \in P_{x}$. Setze $p g=\varphi_{x}^{-1}\left(\varphi_{x}(p) g\right)$. Dies ist wohldefiniert, denn ist $\psi$ eine weitere Karte, so ist $\psi_{x}(p)=\omega(x) \varphi_{x}(p)$ für ein $\omega(x) \in G$, also $\psi^{-1}\left(x, \psi_{x}(p) g\right)=$ $\psi^{-1}\left(x, \omega(x) \varphi_{x}(p) g\right)=\varphi^{-1}\left(x, \varphi_{x}(p) g\right)$. Offenbar ist $\varphi_{x}$ rechtsäquivariant und die Operation auf der realen Faser frei und transitiv, weil die $G$-Aktion auf $G$ dies ist.
@@ -665,25 +699,33 @@ Ein Prinzipalbündel ist genau dann trivial, wenn es einen Schnitt besitzt.
 Ist $\sigma$ ein Schnitt, so setze $P \rightarrow M \times G, \sigma(x) g \mapsto(x, g)$. Umgekehrt: Setze $\sigma(x)=\varphi^{-1}(x, 1)$.
 
 \subsection*{2.5 Bemerkung}
+\begin{REM}{TEST-T25-01-48}{TESTRemark 35969}
 Ist $P \rightarrow M$ ein $G$-Prinzipalbündel, und ist $\varphi$ die durch $\sigma$ defnierte Bündelkarte und $s(x)=\sigma(x) g(x)$, dann wird $s$ bezüglich $\varphi$ durch $g$ beschrieben.\\
 Ist $\tilde{\sigma}(x)=\sigma(x) a(x)$ ein weiterer Schnitt und $\tilde{\varphi}$ die durch $\tilde{\sigma}$ gegebene Bündelkarte, so ist $s(x)=\tilde{\sigma}(x) a^{-1}(x) g(x)$, wird also bezüglich $\tilde{\sigma}$ durch $a^{-1} g$ beschrieben.
+\end{REM}
 
 \subsection*{2.6 Bemerkung}
+\begin{REM}{TEST-T25-01-49}{TESTRemark 5789}
 Die rechtsäquivarianten Abbildungen $f: G \rightarrow G$ sind genau die Linksmultiplikationen mit $f(1) \in G$, denn $f(g)=f(1 g)=f(1) g$.
+\end{REM}
 
 \subsection*{2.7 Lemma}
+\begin{PROP}{TEST-T25-01-50}{TESTLemma}
 Sei $G$ eine Liegruppe, $P \rightarrow M$ ein Faserbündel mit Strukturgruppe $G$. Dann ist äquivalent:\\
 a) $P \rightarrow M$ ist ein $G$-Prinzipalbündel.\\
 b) Auf dem Totalraum von $P$ ist eine $G$-Rechtsaktion gegeben, die auf den Fasern frei und transitiv operiert.
+\end{PROP}
 
 \section*{Beweis:}
 a) $\Rightarrow$ b) $\checkmark$\\
 b) $\Rightarrow$ a) Nach 2.2 ist die typische Faser $G$, wie in 2.5 sind rechtsinvariante Faserkarten gegeben, und rechtsäquivariante Bündelkartenwechsel sind nach 2.6. durch Linksmultiplikation mit $g \in G$ gegeben.
 
 \subsection*{2.8 Satz}
+\begin{PROP}{TEST-T25-01-51}{TESTSatz 7384}
 Sei $G$ eine Liegruppe, $P \rightarrow M$ eine differenzierbare Abbildung. Dann ist äquivalent:\\
 a) $P \rightarrow M$ ist ein $G$-Prinzipalbündel.\\
 b) $P$ ist eine Rechts- $G$-Mannigfaltigkeit der Dimension $\operatorname{dim} G+\operatorname{dim} M$. Die $G$-Wirkung ist fasertreu und auf den Fasern frei und transitiv. Ferner existiert eine Überdeckung $\left(U_{\lambda}\right)_{\lambda \in \Lambda}$ von $M$ und lokale Schnitte $s_{\lambda}: U_{\lambda} \rightarrow$ $P$.
+\end{PROP}
 
 \section*{Beweis:}
 a) $\Rightarrow$ b) $\checkmark$\\
@@ -703,25 +745,34 @@ $$
 da $(\pi \circ \psi)(x, g)=x$, also ist auch $d L_{s(x)}(v)=0$, also $v=0$ (da $G$ frei operiert).
 
 \subsection*{2.9 Beispiel}
+\begin{EXA}{TEST-T25-01-52}{TESTExample 4738}
 Die Hopffaserung $S^{3} \rightarrow \mathbb{C} P^{1},\left(z_{1}, z_{2}\right) \mapsto\left[z_{1}: z_{2}\right]$ ist ein $S^{1}$-Prinzipalfaserbündel.\\
 Insbesondere für kompakte Gruppen ist folgender Satz auch nützlich:
+\end{EXA}
 
 \subsection*{2.10 Satz}
+\begin{EXA}{TEST-T25-01-53}{TESTSatz9653}
 Operiert $G$ frei und eigentlich auf $M$, so ist $M / G$ eine differenzierbare Mannigfaltigkeit und $M \rightarrow M / G$ ein $G$-Prinzipalbündel.
+\end{EXA}
 
 \section*{Beweis:}
 Lee, 9.16 (Quotient manifold theorem).
 
 \subsection*{2.11 Definition}
+\begin{DEF}{TEST-T25-01-54}{TESTDefinition8594}
 a) Sei $\pi_{1}: P \rightarrow M$ ein $G$-Prinzipalbündel, $\pi_{2}: Q \rightarrow N$ ein $H$-Prinzipalbündel, $\alpha: G \rightarrow H$ ein Homomorphismus von Liegruppen, $f_{0}: M \rightarrow N$ differenzierbar. Dann heißt $f: P \rightarrow Q$ ein $\alpha$-Prinzipalbündelhomomorphismus über $f_{0}$, falls $\pi_{2} \circ f=f_{0} \circ \pi_{1}$ gilt und $f(p g)=f(p) \alpha(g)$ ist.\\
 c) Ist $f_{0}=\mathrm{id}$, so heißt ( $P, f$ ) eine $\alpha$-Version von Q. Ist zusätzlich $G=H$ und $\alpha=\mathrm{id}$, so spricht man von einem Prinzipalbündelisomorphismus.\\
 d) Zwei $\alpha$-Versionen heißen äquivalent, falls es einen $G$-Prinzipalbündelisomorphismus $g$ über id gibt, sodass $\tilde{f}=g \circ f$ ist.\\
 Eine Äquivalenzklasse von $\alpha$-Versionen heißt $\alpha$-Struktur. Ist $G \subseteq H$ eine Untergruppe, $\alpha: G \rightarrow H$ die Inklusion, so heißt eine $\alpha$-Struktur auch eine Reduktion von $Q$ auf $G$.
+\end{DEF}
 
 \subsection*{2.12 Beispiel}
+\begin{EXA}{TEST-T25-01-55}{TESTBEsipiel 5768}
 Sei $(M, g)$ eine Riemannsche Mannigfaltigkeit. Dann beschreibt $P_{O(n)}(M) \xrightarrow{i}$ $P_{G L}(M)$ eine $O(n)$-Reduktion von $P_{G L}(M)$.
+\end{EXA}
 
 \subsection*{2.13 Lemma}
+\begin{PROP}{TEST-T25-01-56}{TESTLemma 3849}
 a) Ist $Q$ ein $H$-Prinzipalbündel, $G \subseteq H$ eine abgeschlossene Untergruppe und $P \subseteq Q$ eine Teilmenge, sodass gilt:
 
 \begin{enumerate}
@@ -732,6 +783,7 @@ a) Ist $Q$ ein $H$-Prinzipalbündel, $G \subseteq H$ eine abgeschlossene Untergr
 Dann ist ( $P, i$ ) eine $G$-Reduktion von $M$.\\
 Umgekehrt: Besitzt $Q$ eine $G$-Reduktion $(P, f)$, so erfüllt $f(P) \subseteq Q$ die Bedingungen 1. und 2.\\
 b) Ein $H$-Prinzipalbündel $Q$ besitzt genau dann eine Reduktion auf eine abgeschlossene Untergruppe $G \subseteq H$, falls es einen Bündelatlas von Q gibt, dessen Übergangsfunktionen Bilder in $G$ annehmen.
+\end{PROP}
 
 \section*{Beweis von $\mathbf{b}$ ):}
 $" \Leftarrow$ " Ist $A=\left\{U_{\lambda}, \varphi_{\lambda} \mid \lambda \in \Gamma\right\}$ ein Bündelatlas wie gefordert, dann setze
@@ -750,7 +802,9 @@ $$
 für $g_{\lambda \mu}: U_{\lambda} \cap U_{\mu} \rightarrow G$. Damit ist der entsprechende Bündelkartenwechsel durch $g_{\lambda \mu}^{-1}: U_{\lambda} \cap U_{\mu} \rightarrow G, x \mapsto\left(g_{\lambda \mu}(x)\right)^{-1}$ gegeben.
 
 \subsection*{2.14 Satz}
+\begin{PROP}{TEST-T25-01-57}{TESTSatz 6978}
 Seien $\pi: Q \rightarrow M$ ein $H$-Prinzipalbündel und $G \subseteq H$ eine abgeschlossene Untergruppe. Dann hat man eine kanonische Bijektion zwischen der Menge aller Reduktionen auf $G$ und der Menge aller Schnitte in $Q / G \rightarrow M$.
+\end{PROP}
 
 \section*{Beweis:}
 " $\Rightarrow$ "Da $H \rightarrow H / G$ ein $G$-Prinzipalbündel ist (Beweis später), ist $\pi_{1}: Q / G \rightarrow$ $M$ ein Faserbündel mit typischer Faser $H / G$ und $Q \rightarrow Q / G$ ein $G$-Prinzipalbündel. Sei $\sigma$ ein Schnitt in $Q / G$. Dann ist $\sigma^{*} Q$ ein $G$-Prinzipalbündel über $M$, und die gesuchte Reduktion ist durch ( $\sigma^{*} Q, \hat{\sigma}$ ) gegeben. Dabei ist $\hat{\sigma}: \sigma^{*} Q \rightarrow Q$ als Bündelhomomorphismus über $M$ aufzufassen, denn $\hat{\sigma}(x, q)=q$ für $q \in$ $\pi_{1}^{-1}(\sigma(x)) \subseteq \pi^{-1}(x)$.\\
@@ -767,14 +821,20 @@ $$
 $$
 
 \subsection*{2.15 Korollar}
+\begin{PROP}{TEST-T25-01-58}{TESTKorollar 6948}
 Ist $G \subseteq H$ eine abgeschlossene Untergruppe einer Liegruppe mit $H / G \cong \mathbb{R}^{n}$ für ein $n \in \mathbb{N}$, so besitzt jedes $H$-Prinzipalbündel eine $G$-Reduktion
+\end{PROP}
 
 \subsection*{2.16 Beispiel}
+\begin{PROP}{TEST-T25-01-59}{TESTÜbung 2}
 a) $G L(n, \mathbb{R}) / O(n) \cong \mathbb{R}^{\frac{1}{2} n(n+1)}$.\\
 b) $O(k, n-k) / O(k) \times O(n-k) \cong \mathbb{R}^{m}$ für $1 \leq k \leq n-1$ und $m=k(n-k)$.
+\end{PROP}
 
 \subsection*{2.17 Übungsaufgabe}
+\begin{EXA}{TEST-T25-01-60}{TESTÜbung4}
 Verallgemeinern Sie die Hopf-Faserung $S^{3} \rightarrow \mathbb{C P}^{1}$ zu $S^{2 n+1} \rightarrow \mathbb{C} \mathbb{P}^{n}$, (Bündelatlas angeben).
+\end{EXA}
 
 
 \pagebreak
@@ -782,6 +842,7 @@ Verallgemeinern Sie die Hopf-Faserung $S^{3} \rightarrow \mathbb{C P}^{1}$ zu $S
 \section{An- und Abmontieren der Faser}
 
 \subsection*{3.1 Bemerkung und Definition}
+\begin{REM}{TEST-T25-01-61}{TESTRemark 48695}
 Sind $G$ eine Liegruppe, $X$ eine Rechts- $G$-Mannigfaltigkeit und $F$ eine Links-$G$-Mannigfaltigkeit, dann ist auf $X \times F$ eine $G$-Aktion durch $G \times(X \times F) \rightarrow$ $X \times F,(g,(x, v)) \mapsto\left(x g, g^{-1} v\right)$ gegeben. Wir schreiben $(X \times F) / \sim=: X \times{ }_{G} F$. Auf $X \times_{G} F$ existieren zwei kanonische Projektionen:
 
 $$
@@ -792,8 +853,10 @@ X \times_{G} F \rightarrow G \backslash F \\
 $$
 
 Schreiben wir $X \times_{G} F$ und reden von der Projektion, so meinen wir $X \times_{G} F \rightarrow$ $X / G$.
+\end{REM}
 
 \subsection*{3.2 Beispiel}
+\begin{EXA}{TEST-T25-01-62}{TESTExample 48695}
 a) $G \times_{G} F \rightarrow F,[g, v] \mapsto g v$ ist ein Homöomorphismus und $G \times_{a} F$ trägt eine eindeutig bestimmte differenzierbare Struktur, sodass dies ein Diffeomorphismus ist.\\
 b) Ist $X$ eine freie transitive Rechts- $G$-Mannigfaltigkeit, dann ist für jedes $x_{0} \in X$
 
@@ -803,9 +866,12 @@ $$
 
 ebenfalls ein Diffeomorphismus.\\
 c) Ist $X$ eine freie transitive Rechts- $G$-Mannigfaltigkeit, so ist $U \times X$ kanonisch ebenfalls eine Rechts- $G$-Mannigfaltigkeit und $(U \times X) \times{ }_{G} F \rightarrow$ $U \times F$ ein Diffeomorphismus.
+\end{EXA}
 
 \subsection*{3.3 Satz und Definition}
+\begin{PROP}{TEST-T25-01-63}{TESTSatz}
 Sei $P \rightarrow M$ ein $G$-Prinzipalbündel und $F$ eine $G$-Mannigfaltigkeit. Dann ist $P \times_{G} F$ in kanonischer Weise ein Faserbündel über $M$ mit Strukturgruppe $G$ und typischer Faser $F$. Ein Atlas von $P$ induziert einen Atlas von $P \times_{G} F$, dessen Kartenwechsel durch die selben Übergangsfunktionen gegeben sind. Wir nennen den Funktor $P \rightsquigarrow P \times_{G} F$ das Anmontieren oder Assoziieren der Faser $F$ an $P$. Ist die $G$-Aktion auf $F$ mit $\alpha$ bezeichnet, $\alpha: G \times F \rightarrow F$, dann schreibt man auch $P \times_{G} F \equiv P \times_{\alpha} F$.
+\end{PROP}
 
 \section*{Beweis:}
 Ist $(U, \varphi)$ eine Bündelkarte für $P$, so definiere eine Präbündelkarte durch:

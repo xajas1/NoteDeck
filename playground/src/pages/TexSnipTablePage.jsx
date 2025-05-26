@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import TexSnipTable from '../components/TexSnipTable'
 
-const TexSnipTablePage = ({ splitState, onMetaChange, onJumpToUnit }) => {
+const TexSnipTablePage = ({ units, splitState, onMetaChange, onJumpToUnit }) => {
   const [sources, setSources] = useState([])
   const [selectedSource, setSelectedSource] = useState("")
-  const [units, setUnits] = useState([])
   const [sourceMap, setSourceMap] = useState({})
 
   // SourceMap laden
@@ -49,27 +48,40 @@ const TexSnipTablePage = ({ splitState, onMetaChange, onJumpToUnit }) => {
 
   // Neue Units per window.onNewUnit
   useEffect(() => {
+    if (!onNewUnit) return
+  
     const handler = (unit) => {
-      console.log("📥 Neue Unit empfangen:", unit)
-      const litID = sourceMap[selectedSource]
-      console.log("🔍 Vergleich:", unit.LitID, "vs.", litID)
-
-      if (unit.LitID === litID) {
+      console.log("📥 [TablePage] Neue Unit empfangen:", unit)
+  
+      const unitLitID = unit?.LitID
+      const currentLitID = sourceMap[selectedSource] || selectedSource?.split("-")?.[1]
+      console.log("🧪 Vergleich: unit.LitID =", unitLitID, "| aktuelle LitID =", currentLitID)
+  
+      if (unitLitID === currentLitID) {
         setUnits(prev => [...prev, unit])
         console.log("✅ Neue Unit zur Tabelle hinzugefügt:", unit)
       } else {
-        console.warn("⚠️ Neue Unit gehört nicht zur aktuellen Quelle – wird nicht angezeigt")
+        console.warn("⚠️ Unit gehört nicht zur aktuellen Quelle – wird ignoriert")
       }
     }
-
-    window.onNewUnit = handler
-
+  
+    if (typeof window.onNewUnitHandlers === "undefined") {
+        window.onNewUnitHandlers = []
+      }
+      window.onNewUnitHandlers.push(handler)
+      console.log("🔗 onNewUnitHandler in TablePage registriert")
+       
     return () => {
       if (window.onNewUnit === handler) {
         window.onNewUnit = null
       }
     }
-  }, [selectedSource, sourceMap])
+  }, [onNewUnit, selectedSource, sourceMap])
+  
+  
+  
+  
+  
 
   return (
     <div style={{ padding: "0.5rem", fontSize: "0.85rem" }}>

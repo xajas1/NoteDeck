@@ -29,19 +29,24 @@ const TexSnipTable = ({ units, onJumpToUnit }) => {
   const originalUnitsRef = useRef([])
 
   useEffect(() => {
-    if (Array.isArray(units)) {
-      setLocalUnits(units)
+    originalUnitsRef.current = JSON.parse(JSON.stringify(localUnits))
+    console.log("📦 [Table] units-Prop wurde aktualisiert:", localUnits)
+  }, [localUnits])
   
-      if (originalUnitsRef.current.length === 0) {
-        // ❗ Nur einmal beim Laden initialisieren
-        originalUnitsRef.current = JSON.parse(JSON.stringify(units)) // Deep Copy
-      }
-    }
   
+// Nur einmal beim ersten Laden:
+useEffect(() => {
     axios.get("http://localhost:8000/topic-map")
       .then(res => setTopicIndexMap(res.data))
       .catch(err => console.error("Fehler beim Laden von /topic-map:", err))
+  }, [])
+  
+  // Bei Update der Units:
+  useEffect(() => {
+    originalUnitsRef.current = JSON.parse(JSON.stringify(units))
+    setLocalUnits(units)
   }, [units])
+  
   
 
   const getTopicIndex = (subject, topic) => {
@@ -223,11 +228,12 @@ const TexSnipTable = ({ units, onJumpToUnit }) => {
   }
   
   
-
   const isSubstantiveBody = (body) => {
     const trimmed = (body ?? "").trim()
-    return trimmed.length > 10 && !trimmed.startsWith("%") && !/^%|\\%|\\todo/i.test(trimmed)
+    if (!trimmed || trimmed.length < 10) return true  // ⚠️ ← angepasst!
+    return !trimmed.startsWith("%") && !/^%|\\%|\\todo/i.test(trimmed)
   }
+  
 
 const filteredUnits = localUnits.filter(u =>
     (filter.Subject === "" || u.Subject?.trim().toLowerCase() === filter.Subject.trim().toLowerCase()) &&
@@ -235,6 +241,22 @@ const filteredUnits = localUnits.filter(u =>
     (filter.CTyp === "" || u.CTyp === filter.CTyp) &&
     (filter.Body === "all" || (filter.Body === "yes" ? isSubstantiveBody(u.Body) : !isSubstantiveBody(u.Body)))
   )
+
+  useEffect(() => {
+    console.log("🔍 Filterzustand:", filter)
+    const missing = units.filter(u =>
+  !filteredUnits.some(fu => fu.UID === u.UID || fu.UnitID === u.UnitID)
+)
+    console.log("❗️Gefilterte Unit(s):", missing.map(u => u.UnitID))
+  }, [filter, units, filteredUnits])
+  
+
+  useEffect(() => {
+    console.log("🔍 Filter:", filter)
+    console.log("🔍 Gefilterte Units (Count):", filteredUnits.length)
+    console.log("🔍 Alle UnitIDs:", filteredUnits.map(u => u.UnitID))
+  }, [localUnits, filter])
+  
 
   const cellStyle = { padding: "2px 4px", fontSize: "0.7rem" }
   const metricCellStyle = { ...cellStyle, textAlign: "center" }
