@@ -11778,5 +11778,24 @@
     "ParentTopic": "",
     "TopicPath": "TEST",
     "Body": "Ist $\\gamma: I \\rightarrow M$ differenzierbar, so ist $\\Gamma\\left(\\gamma^{*} T M\\right)$ die Menge der Vektorfelder längs $\\gamma$."
+  },
+  {
+    "UID": "3592825e-bf03-4c59-897a-e97f09106ee9",
+    "UnitID": "TEST-T25-01-33",
+    "Subject": "TEST",
+    "Topic": "TEST",
+    "CTyp": "REM",
+    "Content": "TESTRemark 3748",
+    "LitID": "T25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/TEST",
+    "Body": "Die Abbildung $\\hat{f}: f^{*} E \\rightarrow E,(x, e) \\mapsto e$ ist eine Bündelabbildung über $f$, sodass $\\hat{f} \\mid\\left(f^{*} E\\right)_{x}:\\left(f^{*} E\\right)_{x} \\rightarrow E_{f(x)}$ ein Isomorphismus ist für jedes $x$. Ist $g$ : $\\widetilde{E} \\rightarrow E$ eine weitere Bündelabbildung über $f$, so ist\n\n$$\n\\tilde{g}: \\widetilde{E} \\rightarrow f^{*} E, \\tilde{e} \\mapsto(\\pi(\\tilde{e}), g(\\tilde{e}))\n$$\n\nein Bündelisomorphismus mit $\\hat{f} \\circ \\tilde{g}=g$."
   }
 ]

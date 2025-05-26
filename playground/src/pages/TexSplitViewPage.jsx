@@ -71,10 +71,6 @@ const TexSplitViewPage = () => {
   
         console.log("📂 Lade Units für Source:", sourceFile)
         console.log("📦 Geladene Units:", unitRes.data)
-  
-        if (onMetaChange) {
-          onMetaChange({ selectedSource: sourceFile })  // 🩺 hier der Fix
-        }
       }
     } catch (err) {
       console.error("❌ Fehler beim Laden", err)

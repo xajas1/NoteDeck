@@ -203,13 +203,15 @@ import React, {
       <div style={{ display: "flex", flexDirection: "column", padding: "1rem", height: "100%" }}>
         {/* Projektleiste */}
         <div style={{ display: "flex", gap: "0.5rem", alignItems: "center", marginBottom: "0.5rem" }}>
-          <select value={selectedProject} onChange={(e) => {
-            setSelectedProject(e.target.value)
-            loadSourceByProject(e.target.value)
-          }}>
-            <option value="">-- auswählen --</option>
-            {projects.map(p => <option key={p} value={p.split("/")[0]}>{p}</option>)}
-          </select>
+        <select value={selectedProject} onChange={(e) => {
+        setSelectedProject(e.target.value)
+        loadSourceByProject(e.target.value)
+        }}>
+        <option value="">-- auswählen --</option>
+        {projects.map(p => (
+            <option key={p} value={p}>{p}</option>  // ✅ Übergibt den ganzen Pfad wie "RG_Test25/RG_Test25.tex"
+        ))}
+        </select>
           <button onClick={() => loadSourceByProject(selectedProject)} style={{ fontSize: "0.7rem", padding: "0.2rem 0.5rem" }}>🔄</button>
           <button onClick={saveSource} style={{ fontSize: "0.7rem", padding: "0.2rem 0.5rem" }}>💾</button>
           <button onClick={handleSubmit} style={{ fontSize: "0.7rem", padding: "0.2rem 0.6rem", backgroundColor: "#3c3", color: "black" }}>Snip</button>
