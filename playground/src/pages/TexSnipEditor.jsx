@@ -216,7 +216,7 @@ import React, {
           <button onClick={saveSource} style={{ fontSize: "0.7rem", padding: "0.2rem 0.5rem" }}>💾</button>
           <button onClick={handleSubmit} style={{ fontSize: "0.7rem", padding: "0.2rem 0.6rem", backgroundColor: "#3c3", color: "black" }}>Snip</button>
         </div>
-  
+   
         {/* Eingabemaske */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: "0.3rem", fontSize: "0.75rem", marginBottom: "0.5rem" }}>
           <div><label>LitID:<input type="checkbox" checked={freezeLitID} onChange={() => setFreezeLitID(f => !f)} style={{ marginLeft: "0.4rem" }} /></label><input value={litID} onChange={e => setLitID(e.target.value)} style={{ width: "100%" }} /></div>
