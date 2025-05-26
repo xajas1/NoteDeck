@@ -21,7 +21,12 @@ app.add_middleware(
 )
 print("🔧 CORS Middleware konfiguriert")
 
-
+class ReplaceBodyRequest(BaseModel):
+    UID: str
+    project: str
+    newBody: str
+    Content: str
+    CTyp: str
 
 # === Globale Pfade ===
 BASE_DIR         = Path(__file__).resolve().parents[1]
@@ -90,6 +95,54 @@ def load_snip_project(req: LoadSnipProjectRequest):
     if req.project_name not in projects:
         raise HTTPException(status_code=404, detail="Projekt nicht gefunden")
     return projects[req.project_name]
+
+@app.post("/replace-body")
+def replace_body(req: ReplaceBodyRequest):
+    import re
+
+    if not LIB_JSON.exists():
+        raise HTTPException(status_code=500, detail="Library.json not found")
+
+    # Library laden
+    data = json.loads(LIB_JSON.read_text(encoding="utf-8"))
+    unit = next((u for u in data if u["UID"] == req.UID), None)
+
+    if not unit:
+        raise HTTPException(status_code=404, detail=f"Unit mit UID {req.UID} nicht gefunden")
+
+    # Quelldatei laden
+    source_path = SOURCE_DIR / req.project
+    if not source_path.exists():
+        raise HTTPException(status_code=404, detail=f"Quelldatei nicht gefunden: {source_path}")
+
+    tex = source_path.read_text(encoding="utf-8")
+
+    # Alte Umgebung entfernen, wenn vorhanden
+    if unit.get("Body"):
+        envname = unit["CTyp"]
+        pattern = rf"\\begin{{{envname}}}{{{re.escape(unit['UnitID'])}}}{{.*?}}\n(.*?)\n\\end{{{envname}}}"
+        tex, count = re.subn(pattern, "", tex, flags=re.DOTALL)
+        print(f"🧹 Alte Umgebung entfernt: {count} Vorkommen")
+
+    # Neue Umgebung einfügen (z. B. an Cursorstelle später)
+    replacement = f"\\begin{{{req.CTyp}}}{{{unit['UnitID']}}}{{{req.Content}}}\n{req.newBody}\n\\end{{{req.CTyp}}}"
+
+    # Für jetzt: einfach am Ende anhängen
+    tex += "\n\n" + replacement.strip() + "\n"
+
+    # Schreiben
+    source_path.write_text(tex.strip(), encoding="utf-8")
+
+    # Library aktualisieren
+    unit["Body"] = req.newBody
+    unit["Content"] = req.Content
+    unit["CTyp"] = req.CTyp
+
+    with LIB_JSON.open("w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+
+    return {"status": "success", "unit": unit}
+
 
 @app.get("/list-splitstates")
 def list_splitstates():

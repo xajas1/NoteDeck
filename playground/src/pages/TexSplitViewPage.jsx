@@ -142,6 +142,7 @@ const TexSplitViewPage = () => {
             splitState={splitState}
             onMetaChange={setTableMeta}
             onJumpToUnit={handleScrollToUnit}
+            editorRef={editorRef}  
           />
         </div>
       </SplitPane>

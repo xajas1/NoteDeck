@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 
-const TexSnipTable = ({ units, onJumpToUnit }) => {
+const TexSnipTable = ({ units, onJumpToUnit, onStartReplaceMode }) => {
   const [localUnits, setLocalUnits] = useState([])
   const [topicIndexMap, setTopicIndexMap] = useState({})
   const [savedIndex, setSavedIndex] = useState(null)
@@ -249,9 +249,10 @@ const filteredUnits = localUnits.filter(u =>
 
   return (
     <div style={{ padding: "0.5rem", display: "flex", flexDirection: "column", height: "100%" }}>
+      {/* Filter und Sichtbarkeitsleiste */}
       <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.8rem", marginBottom: "0.5rem", fontSize: "0.75rem" }}>
         {["Subject", "Topic", "CTyp", "Body"].map((f) => (
-        <label key={f}>
+          <label key={f}>
             {f}:
             <select
               value={filter[f]}
@@ -273,42 +274,44 @@ const filteredUnits = localUnits.filter(u =>
           </label>
         ))}
         <span style={{ marginLeft: "auto", fontSize: "0.7rem", display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-            {Object.keys(visibleColumns).map(col => (
-                <label key={col}>
-                <input
-                    type="checkbox"
-                    checked={visibleColumns[col]}
-                    onChange={() =>
-                    setVisibleColumns(prev => ({ ...prev, [col]: !prev[col] }))
-                    }
-                />
-                {col}
-                </label>
-            ))}
+          {Object.keys(visibleColumns).map(col => (
+            <label key={col}>
+              <input
+                type="checkbox"
+                checked={visibleColumns[col]}
+                onChange={() =>
+                  setVisibleColumns(prev => ({ ...prev, [col]: !prev[col] }))
+                }
+              />
+              {col}
+            </label>
+          ))}
         </span>
       </div>
-
+  
+      {/* Tabellenansicht */}
       <div style={{ flex: 1, overflowY: "auto" }}>
         <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.75rem" }}>
-          <thead>
+        <thead>
             <tr style={{ backgroundColor: "#222" }}>
-              <th style={cellStyle}></th>
-              {visibleColumns.UnitID && <th style={cellStyle}>UnitID</th>}
-              {visibleColumns.Subject && <th style={cellStyle}>Subject</th>}
-              <th style={cellStyle}>Topic</th>
-              {visibleColumns.ParentTopic && <th style={cellStyle}>ParentTopic</th>}
-              <th style={cellStyle}>CTyp</th>
-              <th style={cellStyle}>Content</th>
-              {visibleColumns.Layer && <th style={metricCellStyle}>Layer</th>}
-              {visibleColumns.Comp && <th style={metricCellStyle}>Comp</th>}
-              {visibleColumns.RelInt && <th style={metricCellStyle}>RelInt</th>}
-              {visibleColumns.RelId && <th style={metricCellStyle}>RelId</th>}
-              {visibleColumns.Cont && <th style={metricCellStyle}>Cont</th>}
-              {visibleColumns.Cint && <th style={metricCellStyle}>Cint</th>}
-              {visibleColumns.CID && <th style={metricCellStyle}>CID</th>}
-              <th style={cellStyle}>Body?</th>
+                <th style={cellStyle}></th>
+                {visibleColumns.UnitID && <th style={cellStyle}>UnitID</th>}
+                {visibleColumns.Subject && <th style={cellStyle}>Subject</th>}
+                <th style={cellStyle}>Topic</th>
+                {visibleColumns.ParentTopic && <th style={cellStyle}>ParentTopic</th>}
+                <th style={cellStyle}>CTyp</th>
+                <th style={cellStyle}>Content</th>
+                {visibleColumns.Layer && <th style={metricCellStyle}>Layer</th>}
+                {visibleColumns.Comp && <th style={metricCellStyle}>Comp</th>}
+                {visibleColumns.RelInt && <th style={metricCellStyle}>RelInt</th>}
+                {visibleColumns.RelId && <th style={metricCellStyle}>RelId</th>}
+                {visibleColumns.Cont && <th style={metricCellStyle}>Cont</th>}
+                {visibleColumns.Cint && <th style={metricCellStyle}>Cint</th>}
+                {visibleColumns.CID && <th style={metricCellStyle}>CID</th>}
+                <th style={cellStyle}>Body?</th>
+                <th style={cellStyle}>Replace</th>
             </tr>
-          </thead>
+            </thead>
           <tbody>
             {filteredUnits.map((u, i) => (
               <tr key={u.UnitID} style={{ borderTop: "1px solid #444" }}>
@@ -336,20 +339,20 @@ const filteredUnits = localUnits.filter(u =>
                       </>
                     )}
                     {!isRenameRelevant(u) && isCTypOrContentChanged(u) && (
-                    <button
+                      <button
                         onClick={() => handleEnvOrContentUpdate(i)}
                         style={{
-                        fontSize: "0.6rem",
-                        padding: "1px 4px",
-                        marginTop: "4px",
-                        backgroundColor: "#355",
-                        color: "white",
-                        border: "1px solid #889",
-                        borderRadius: "3px"
+                          fontSize: "0.6rem",
+                          padding: "1px 4px",
+                          marginTop: "4px",
+                          backgroundColor: "#355",
+                          color: "white",
+                          border: "1px solid #889",
+                          borderRadius: "3px"
                         }}
-                    >
+                      >
                         ♻️ Update
-                    </button>
+                      </button>
                     )}
                     {savedIndex === i && (
                       <div style={{ fontSize: "0.65rem", color: "limegreen" }}>✅ gespeichert</div>
@@ -383,6 +386,23 @@ const filteredUnits = localUnits.filter(u =>
                 {visibleColumns.Cint && <td style={metricCellStyle}><input style={metricInputStyle} value={u.Cint ?? ""} onChange={e => handleChange(i, 'Cint', e.target.value)} /></td>}
                 {visibleColumns.CID && <td style={metricCellStyle}><input style={metricInputStyle} value={u.CID ?? ""} onChange={e => handleChange(i, 'CID', e.target.value)} /></td>}
                 <td style={{ textAlign: "center" }}>{isSubstantiveBody(u.Body) ? "✅" : "❌"}</td>
+                <td style={{ textAlign: "center" }}>
+                  {!isSubstantiveBody(u.Body) && onStartReplaceMode && (
+                    <button
+                      onClick={() => onStartReplaceMode(u)}
+                      style={{
+                        fontSize: "0.6rem",
+                        padding: "1px 4px",
+                        backgroundColor: "#335",
+                        color: "white",
+                        border: "1px solid #889",
+                        borderRadius: "3px"
+                      }}
+                    >
+                      🔁
+                    </button>
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -390,6 +410,7 @@ const filteredUnits = localUnits.filter(u =>
       </div>
     </div>
   )
-}
+
+}                   
 
 export default TexSnipTable

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import TexSnipTable from '../components/TexSnipTable'
 
-const TexSnipTablePage = ({ units, splitState, onMetaChange, onJumpToUnit }) => {
+const TexSnipTablePage = ({ units, splitState, onMetaChange, onJumpToUnit, editorRef}) => {
   const [sources, setSources] = useState([])
   const [selectedSource, setSelectedSource] = useState("")
   const [sourceMap, setSourceMap] = useState({})
@@ -62,6 +62,7 @@ const TexSnipTablePage = ({ units, splitState, onMetaChange, onJumpToUnit }) => 
       <TexSnipTable
         units={units}
         onJumpToUnit={onJumpToUnit}
+        onStartReplaceMode={(unit) => editorRef.current?.startReplaceMode(unit)}  // ✅ hinzugefügt
       />
     </div>
   )

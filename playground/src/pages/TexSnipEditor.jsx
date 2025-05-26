@@ -34,22 +34,34 @@ import React, {
     const [selectedProject, setSelectedProject] = useState("")
     const [response, setResponse] = useState(null)
     const aceRef = useRef(null)
+    const [replaceMode, setReplaceMode] = useState(null)
+
   
     // For scrolling from table
     useImperativeHandle(ref, () => ({
-      scrollToUnit(unitID) {
-        const editor = aceRef.current?.editor
-        if (!editor || !unitID) return
-        const session = editor.getSession()
-        const lines = session.getDocument().getAllLines()
-        const lineIndex = lines.findIndex(line => line.includes(`{${unitID}}`))
-        if (lineIndex !== -1) {
-          editor.focus()
-          editor.gotoLine(lineIndex + 1, 0, true)
-          editor.scrollToLine(lineIndex, true, true)
+        scrollToUnit(unitID) {
+          const editor = aceRef.current?.editor
+          if (!editor || !unitID) return
+          const session = editor.getSession()
+          const lines = session.getDocument().getAllLines()
+          const lineIndex = lines.findIndex(line => line.includes(`{${unitID}}`))
+          if (lineIndex !== -1) {
+            editor.focus()
+            editor.gotoLine(lineIndex + 1, 0, true)
+            editor.scrollToLine(lineIndex, true, true)
+          }
+        },
+      
+        startReplaceMode(unit) {
+          setReplaceMode({
+            UID: unit.UID,
+            UnitID: unit.UnitID,
+            Content: unit.Content,
+            CTyp: unit.CTyp
+          })
         }
-      }
-    }))
+      }))
+      
   
     // Setup available projects and topicMap
     useEffect(() => {
@@ -165,6 +177,48 @@ import React, {
       if (!freezeLitID) setLitID("")
     }
   
+    const handleReplaceSubmit = async () => {
+        if (!replaceMode || !selectedProject) return
+      
+        const editor = aceRef.current?.editor
+        const selected = editor.getSelectedText().trim()
+      
+        if (!selected) {
+          alert("❗ Bitte markiere einen Bereich im Editor.")
+          return
+        }
+      
+        const payload = {
+          UID: replaceMode.UID,
+          project: selectedProject,
+          newBody: selected,
+          Content: replaceMode.Content,
+          CTyp: replaceMode.CTyp
+        }
+      
+        try {
+          const res = await fetch("http://localhost:8000/replace-body", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          })
+          const json = await res.json()
+          console.log("✅ Replace erfolgreich:", json)
+      
+          if (typeof onNewUnit === "function") {
+            onNewUnit(json.unit)
+          }
+      
+          setReplaceMode(null)
+          setBody(editor.getValue())  // neu geladenes Dokument im Editor anzeigen
+      
+        } catch (err) {
+          console.error("❌ Fehler beim Replace:", err)
+          alert("Fehler beim Ersetzen.")
+        }
+      }
+      
+
     const loadSourceByProject = async (project) => {
       const res = await fetch(`http://localhost:8000/load-source?project=${project}`)
       const json = await res.json()
@@ -216,7 +270,32 @@ import React, {
           <button onClick={saveSource} style={{ fontSize: "0.7rem", padding: "0.2rem 0.5rem" }}>💾</button>
           <button onClick={handleSubmit} style={{ fontSize: "0.7rem", padding: "0.2rem 0.6rem", backgroundColor: "#3c3", color: "black" }}>Snip</button>
         </div>
-   
+        {replaceMode && (
+            <div style={{
+                background: "#334", color: "white", padding: "0.5rem",
+                marginBottom: "0.5rem", borderRadius: "4px"
+            }}>
+                🔁 <b>Replace-Modus aktiv:</b> {replaceMode.UnitID}. Markiere einen Body im Editor:
+                <button
+                onClick={handleReplaceSubmit}
+                style={{
+                    marginLeft: "1rem", backgroundColor: "#5f5", color: "black",
+                    padding: "0.3rem 0.7rem", border: "none", borderRadius: "3px"
+                }}
+                >
+                ✅ Body übernehmen
+                </button>
+                <button
+                onClick={() => setReplaceMode(null)}
+                style={{
+                    marginLeft: "0.5rem", backgroundColor: "#888", color: "white",
+                    padding: "0.3rem 0.7rem", border: "none", borderRadius: "3px"
+                }}
+                >
+                ❌ Abbrechen
+                </button>
+            </div>
+            )}
         {/* Eingabemaske */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(6, 1fr)", gap: "0.3rem", fontSize: "0.75rem", marginBottom: "0.5rem" }}>
           <div><label>LitID:<input type="checkbox" checked={freezeLitID} onChange={() => setFreezeLitID(f => !f)} style={{ marginLeft: "0.4rem" }} /></label><input value={litID} onChange={e => setLitID(e.target.value)} style={{ width: "100%" }} /></div>
