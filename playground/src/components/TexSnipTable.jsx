@@ -28,20 +28,27 @@ const TexSnipTable = ({ units, onJumpToUnit }) => {
 
   const originalUnitsRef = useRef([])
 
-  useEffect(() => {
+// 🔁 Ref und lokale Units synchronisieren
+useEffect(() => {
     if (Array.isArray(units)) {
       setLocalUnits(units)
   
-      if (originalUnitsRef.current.length === 0) {
-        // ❗ Nur einmal beim Laden initialisieren
-        originalUnitsRef.current = JSON.parse(JSON.stringify(units)) // Deep Copy
-      }
+      units.forEach((unit) => {
+        const exists = originalUnitsRef.current.some(u => u.UnitID === unit.UnitID)
+        if (!exists) {
+          originalUnitsRef.current.push({ ...unit })
+        }
+      })
     }
+  }, [units])
   
+  // 🌐 TopicMap separat laden (nur einmal)
+  useEffect(() => {
     axios.get("http://localhost:8000/topic-map")
       .then(res => setTopicIndexMap(res.data))
       .catch(err => console.error("Fehler beim Laden von /topic-map:", err))
-  }, [units])
+  }, [])
+  
   
 
   const getTopicIndex = (subject, topic) => {

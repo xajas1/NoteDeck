@@ -41,14 +41,14 @@
     }
   },
   "P15": {
-    "sourceFile": "RG_Test25",
+    "sourceFile": "RG_Test25/RG_Test25.tex",
     "snipMeta": {
       "Subject": "TEST",
       "Topic": "TEST",
       "LitID": "T25",
-      "CTyp": "DEF",
-      "ParentTopic": "",
-      "Content": "",
+      "CTyp": "EXA",
+      "ParentTopic": "Ringe",
+      "Content": "TESTExample 3402",
       "selectedProject": "RG_Test25"
     },
     "tableMeta": {

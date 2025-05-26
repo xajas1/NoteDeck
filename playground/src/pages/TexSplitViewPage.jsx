@@ -38,11 +38,11 @@ const TexSplitViewPage = () => {
   const saveCurrentSnapshot = async () => {
     if (!projectName) return alert("Bitte Projektnamen eingeben")
     try {
-      const state = {
-        sourceFile: snipMeta?.selectedProject || "",
-        snipMeta,
-        tableMeta
-      }
+        const state = {
+            sourceFile: tableMeta?.selectedSource || "",
+            snipMeta,
+            tableMeta
+          }          
       await axios.post("http://localhost:8000/save-snip-project", {
         project_name: projectName,
         data: state
@@ -62,15 +62,26 @@ const TexSplitViewPage = () => {
       setSplitState(res.data)
       setProjectName(name)
   
-      const sourceFile = res.data?.sourceFile?.split("/")?.[0] || ""
+      const sourceFile = res.data?.sourceFile || ""
+  
       if (sourceFile) {
         const unitRes = await axios.get(`http://localhost:8000/load-library?source=${sourceFile}`)
+        console.log("🧪 Snapshot-Source (voll):", res.data?.sourceFile)
         setUnits(unitRes.data)
+  
+        console.log("📂 Lade Units für Source:", sourceFile)
+        console.log("📦 Geladene Units:", unitRes.data)
+  
+        if (onMetaChange) {
+          onMetaChange({ selectedSource: sourceFile })  // 🩺 hier der Fix
+        }
       }
     } catch (err) {
       console.error("❌ Fehler beim Laden", err)
     }
   }
+  
+  
   
 
   const handleScrollToUnit = ({ unitID }) => {

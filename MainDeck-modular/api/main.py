@@ -117,16 +117,31 @@ def delete_snip_project(project: str):
 def load_library(source: str = ""):
     if not LIB_JSON.exists():
         raise HTTPException(status_code=500, detail="Library.json not found")
+
     data = json.loads(LIB_JSON.read_text(encoding="utf-8"))
+
     if not source:
         return data
+
     if not SOURCEMAP_JSON.exists():
         raise HTTPException(status_code=500, detail="SourceMap.json not found")
-    source_map = json.loads(SOURCEMAP_JSON.read_text(encoding="utf-8"))
+
+    source_map_raw = SOURCEMAP_JSON.read_text(encoding="utf-8")
+    print("📄 Gelesene source_map.json:", source_map_raw)
+
+    source_map = json.loads(source_map_raw)
+
+    print(f"📥 Request für source = {source}")
+    print(f"🔍 source_map.get({source}) = {source_map.get(source)}")
+
     litid = source_map.get(source)
     if not litid:
+        print("⚠️ Keine LitID für Source gefunden.")
         return []
-    return [u for u in data if u.get("LitID") == litid]
+
+    result = [u for u in data if u.get("LitID") == litid]
+    print(f"✅ Gefundene Units für LitID {litid}: {len(result)}")
+    return result
 
 @app.post("/update-unit")
 def update_unit(req: UpdateUnitRequest):
@@ -164,30 +179,34 @@ def update_unit(req: UpdateUnitRequest):
         "value": req.value
     }
 
-
 @app.post("/snip")
 def create_snip(req: SnipRequest):
     import re
+
     if not LIB_JSON.exists():
         raise HTTPException(status_code=500, detail="Library.json not found")
     if not TOPICMAP_JSON.exists():
         raise HTTPException(status_code=500, detail="SubjectsTopics.json not found")
+
     with LIB_JSON.open("r", encoding="utf-8") as f:
         data = json.load(f)
     with TOPICMAP_JSON.open("r", encoding="utf-8") as f:
         topicmap = json.load(f)
+
     try:
         topic_index = topicmap[req.Subject]["topics"][req.Topic]["index"]
     except KeyError:
         raise HTTPException(status_code=400, detail=f"Topic index for '{req.Subject} – {req.Topic}' not found")
+
     matching = [
         d for d in data
         if d["Subject"] == req.Subject and d["LitID"] == req.LitID and d["Topic"] == req.Topic
     ]
     next_number = max([int(d["UnitID"].split("-")[-1]) for d in matching], default=0) + 1
     unit_id = f"{req.Subject}-{req.LitID}-{topic_index:02d}-{next_number:02d}"
+
     new_entry = {
-        "UID": str(uuid.uuid4()), 
+        "UID": str(uuid.uuid4()),
         "UnitID": unit_id,
         "Subject": req.Subject,
         "Topic": req.Topic,
@@ -205,23 +224,34 @@ def create_snip(req: SnipRequest):
         "TopicPath": f"{req.ParentTopic}/{req.Topic}",
         "Body": req.Body
     }
+
     data.append(new_entry)
+
     with LIB_JSON.open("w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
-    safe_project = req.project.replace("/", "").replace("..", "")
-    source_path = SOURCE_DIR / safe_project / f"{safe_project}.tex"
+
+    # --- Sichere Pfadbehandlung ---
+    if ".." in req.project or req.project.startswith("/"):
+        raise HTTPException(status_code=400, detail="Unsicherer Pfad")
+    source_path = SOURCE_DIR / req.project
+
     if not source_path.exists():
-        raise HTTPException(status_code=404, detail="Quelldatei nicht gefunden")
+        raise HTTPException(status_code=404, detail=f"Quelldatei nicht gefunden: {source_path}")
+
     source_code = source_path.read_text(encoding="utf-8")
     escaped_body = re.escape(req.Body.strip())
     pattern = re.compile(escaped_body, re.DOTALL)
     match = pattern.search(source_code)
+
     if not match:
         raise HTTPException(status_code=400, detail="Markierter Body nicht exakt in Source-Datei gefunden.")
+
     start, end = match.span()
     replacement = f"\\begin{{{req.CTyp}}}{{{unit_id}}}{{{req.Content}}}\n{req.Body}\n\\end{{{req.CTyp}}}"
     new_code = source_code[:start] + replacement + source_code[end:]
+
     source_path.write_text(new_code, encoding="utf-8")
+
     return {"status": "success", "UnitID": unit_id, "unit": new_entry}
 
 @app.get("/source-map")
@@ -285,12 +315,13 @@ def available_sources():
 
 @app.get("/load-source")
 def load_source(project: str):
-    safe = project.replace("/", "").replace("..", "")
-    tex_path = SOURCE_DIR / safe / f"{safe}.tex"
+    # Direkter Zugriff auf verschachtelte .tex-Datei
+    tex_path = SOURCE_DIR / project
     if not tex_path.exists():
         raise HTTPException(status_code=404, detail=f"{tex_path} not found")
     content = tex_path.read_text(encoding="utf-8")
-    return {"filename": f"{safe}.tex", "content": content}
+    return {"filename": tex_path.name, "content": content}
+
 
 @app.post("/save-source")
 def save_source(req: SaveSourceRequest):
