@@ -322,6 +322,7 @@ function App() {
               <TreePlaygroundView
                 playground={playground}
                 units={units}
+                structure={structure}
                 selectedUIDs={selectedUIDs}
                 setSelectedUIDs={setSelectedUIDs}
                 lastSelectedIndex={lastSelectedIndex}

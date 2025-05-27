@@ -117,16 +117,68 @@ function SortableSection({
   collapsedSubsections,
   toggleCollapseSection,
   toggleCollapseSubsection
-}) {
+}) 
+{
   const { setNodeRef, transform, transition, attributes, listeners } = useSortable({ id: section.id })
   const style = { opacity: 1, marginBottom: '1.5rem' }
   const isCollapsed = collapsedSections.has(section.id)
 
+  const [isEditing, setIsEditing] = useState(false)
+  const [editValue, setEditValue] = useState(section.name)
+
+  const handleRename = () => {
+    if (editValue.trim() && editValue !== section.name) {
+      setStructure(prev => prev.map(s =>
+        s.id === section.id ? { ...s, name: editValue.trim() } : s
+      ))
+    }
+    setIsEditing(false)
+  }
+
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      <div style={styles.section} onClick={() => toggleCollapseSection(section.id)}>
-        <span style={{ cursor: 'pointer', marginRight: '0.4rem' }}>{isCollapsed ? '▶' : '▼'}</span>
-        {section.name}
+      <div style={styles.section}>
+        <span onClick={() => toggleCollapseSection(section.id)} style={{ cursor: 'pointer', marginRight: '0.4rem' }}>
+          {isCollapsed ? '▶' : '▼'}
+        </span>
+
+        {isEditing ? (
+          <input
+            type="text"
+            value={editValue}
+            onChange={e => setEditValue(e.target.value)}
+            onBlur={handleRename}
+            onKeyDown={e => { if (e.key === 'Enter') handleRename() }}
+            autoFocus
+            style={{
+              background: 'transparent',
+              border: 'none',
+              borderBottom: '1px solid #555',
+              color: '#eee',
+              fontSize: '0.85rem',
+              flexGrow: 1
+            }}
+          />
+        ) : (
+          <span
+            onClick={() => {
+              setEditValue(section.name)
+              setIsEditing(true)
+            }}
+            style={{ cursor: 'text', flexGrow: 1 }}
+          >
+            {section.name}
+          </span>
+        )}
+
+        <button
+          onClick={() => {
+            if (confirm(`❌ Section "${section.name}" wirklich löschen?`)) {
+              setStructure(prev => prev.filter(s => s.id !== section.id))
+            }
+          }}
+          style={styles.deleteButton}
+        >✕</button>
       </div>
 
       {!isCollapsed && (
@@ -162,6 +214,7 @@ function SortableSection({
               )
             }} style={styles.subButton}>Add</button>
           </div>
+
           <SortableContext items={section.subsections.map(sub => sub.id)} strategy={verticalListSortingStrategy}>
             {section.subsections.map(sub => (
               <SortableSubsection
@@ -185,6 +238,7 @@ function SortableSection({
   )
 }
 
+
 function SortableSubsection({
   subsection,
   sectionId,
@@ -196,20 +250,83 @@ function SortableSubsection({
   setStructure,
   isCollapsed,
   toggleCollapse
-}) {
+}) 
+{
   const { setNodeRef, transform, transition, attributes, listeners } = useSortable({ id: subsection.id })
   const allIDs = subsection.unitUIDs.map(uid => `${subsection.id}__${uid}`)
 
+  const [isEditing, setIsEditing] = useState(false)
+  const [editValue, setEditValue] = useState(subsection.name)
+
+  const handleRename = () => {
+    if (editValue.trim() && editValue !== subsection.name) {
+      setStructure(prev => prev.map(section => ({
+        ...section,
+        subsections: section.subsections.map(sub =>
+          sub.id === subsection.id ? { ...sub, name: editValue.trim() } : sub
+        )
+      })))
+    }
+    setIsEditing(false)
+  }
+
   return (
-    <div ref={setNodeRef} {...attributes} {...listeners} style={{
-      ...styles.subsection,
-      transform: CSS.Transform.toString(transform),
-      transition,
-      opacity: 1
-    }}>
-      <div style={styles.subsectionName} onClick={toggleCollapse}>
-        <span style={{ cursor: 'pointer', marginRight: '0.4rem' }}>{isCollapsed ? '▶' : '▼'}</span>
-        {subsection.name}
+    <div
+      ref={setNodeRef}
+      {...attributes}
+      {...listeners}
+      style={{
+        ...styles.subsection,
+        transform: CSS.Transform.toString(transform),
+        transition,
+        opacity: 1
+      }}
+    >
+      <div style={styles.subsectionName}>
+        <span onClick={toggleCollapse} style={{ cursor: 'pointer', marginRight: '0.4rem' }}>
+          {isCollapsed ? '▶' : '▼'}
+        </span>
+
+        {isEditing ? (
+          <input
+            type="text"
+            value={editValue}
+            onChange={e => setEditValue(e.target.value)}
+            onBlur={handleRename}
+            onKeyDown={e => { if (e.key === "Enter") handleRename() }}
+            autoFocus
+            style={{
+              background: 'transparent',
+              border: 'none',
+              borderBottom: '1px solid #555',
+              color: '#eee',
+              fontSize: '0.8rem',
+              flexGrow: 1
+            }}
+          />
+        ) : (
+          <span
+            onClick={() => {
+              setEditValue(subsection.name)
+              setIsEditing(true)
+            }}
+            style={{ cursor: 'text', flexGrow: 1 }}
+          >
+            {subsection.name}
+          </span>
+        )}
+
+        <button
+          onClick={() => {
+            if (confirm(`❌ Subsection "${subsection.name}" wirklich löschen?`)) {
+              setStructure(prev => prev.map(section => ({
+                ...section,
+                subsections: section.subsections.filter(sub => sub.id !== subsection.id)
+              })))
+            }
+          }}
+          style={styles.deleteButton}
+        >✕</button>
       </div>
 
       {!isCollapsed && (
@@ -247,6 +364,7 @@ function SortableSubsection({
     </div>
   )
 }
+
 
 function SortableUnit({
   id,
@@ -390,5 +508,13 @@ const styles = {
     backgroundColor: '#4fc3f7',
     borderRadius: '1px',
     margin: '2px 0'
+  },
+  deleteButton: {
+    background: 'transparent',
+    color: '#60a5fa',
+    border: 'none',
+    cursor: 'pointer',
+    fontSize: '0.75rem',
+    marginLeft: '0.5rem'
   }
 }

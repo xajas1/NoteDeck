@@ -4,6 +4,7 @@ import { useState } from 'react'
 export default function TreePlaygroundView({
   playground,
   units,
+  structure,
   selectedUIDs,
   setSelectedUIDs,
   lastSelectedIndex,
@@ -23,6 +24,13 @@ export default function TreePlaygroundView({
     }
     return unit
   }
+
+  const isInEditor = (uid) => {
+    return structure.some(section =>
+      section.subsections.some(sub => sub.unitUIDs.includes(uid))
+    )
+  }
+  
 
   const grouped = {}
   for (const entry of playground) {
@@ -178,6 +186,7 @@ export default function TreePlaygroundView({
                               name={unit?.Content}
                               unitID={unit?.UnitID}
                               isSelected={selectedUIDs.has(uid)}
+                              isInEditor={isInEditor(uid)}
                               selectedUIDs={selectedUIDs}
                               onClick={(e) => toggleSelection(uid, index, e.shiftKey)}
                               setSelectedUIDs={setSelectedUIDs}
