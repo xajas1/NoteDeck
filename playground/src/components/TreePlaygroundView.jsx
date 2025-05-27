@@ -99,14 +99,26 @@ export default function TreePlaygroundView({
             marginRight: '1rem'
           }}
         >
+          <>
           <option value="">— Alle —</option>
-          <option value="DEF">Definitionen</option>
-          <option value="PROP">Propositionen</option>
-          <option value="LEM">Lemmata</option>
-          <option value="THEO">Theoreme</option>
-          <option value="EXA">Beispiele</option>
-          <option value="REM">Bemerkungen</option>
-          <option value="STUD">Studienfragen</option>
+          {[
+            ["DEF", "Definitionen"],
+            ["PROP", "Propositionen"],
+            ["THEO", "Theoreme"],
+            ["LEM", "Lemmata"],
+            ["KORO", "Korollare"],
+            ["REM", "Bemerkungen"],
+            ["OTH", "Sonstiges"],
+            ["PROOF", "Beweise"],
+            ["EXA", "Beispiele"],
+            ["STUD", "Studienfragen"],
+            ["CONC", "Konzepte"],
+            ["EXE", "Übungen"],
+            ["MOT", "Motivation"]
+          ].map(([val, label]) => (
+            <option key={val} value={val}>{label}</option>
+          ))}
+        </>
         </select>
 
         <label style={{ marginRight: '0.4rem' }}>Filter by LitID:</label>

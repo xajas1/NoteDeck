@@ -345,7 +345,7 @@ import React, {
           <div><label>Topic:<input type="checkbox" checked={freezeTopic} onChange={() => setFreezeTopic(f => !f)} style={{ marginLeft: "0.4rem" }} /></label><input list="topics" value={topic} onChange={e => { setTopic(e.target.value); const pt = topicMap[subject]?.topics?.[e.target.value]?.parent; if (pt) setParentTopic(pt) }} style={{ width: "100%" }} /><datalist id="topics">{(topicMap[subject]?.topics ? Object.keys(topicMap[subject].topics) : []).map(t => <option key={t} value={t} />)}</datalist></div>
           <div><label>ParentTopic:<input type="checkbox" checked={freezeParent} onChange={() => setFreezeParent(f => !f)} style={{ marginLeft: "0.4rem" }} /></label><input list="parents" value={parentTopic} onChange={e => setParentTopic(e.target.value)} style={{ width: "100%" }} /><datalist id="parents">{Array.from(new Set(Object.values(topicMap[subject]?.topics || {}).map(t => t.parent).filter(Boolean))).map(p => (<option key={p} value={p} />))}</datalist></div>
           <div><label>Content:</label><input value={content} onChange={e => setContent(e.target.value)} style={{ width: "100%" }} /></div>
-          <div><label>CTyp:</label><select value={ctyp} onChange={e => setCtyp(e.target.value)} style={{ width: "100%" }}>{["DEF", "EXA", "PROP", "REM", "THEO"].map(k => <option key={k} value={k}>{k}</option>)}</select></div>
+          <div><label>CTyp:</label><select value={ctyp} onChange={e => setCtyp(e.target.value)} style={{ width: "100%" }}>{["DEF","PROP","THEO","LEM","KORO","REM","OTH","PROOF","EXA","STUD","CONC","EXE","MOT"].map(k => <option key={k} value={k}>{k}</option>)}</select></div>
         </div>
    
         {/* ACE Editor */}

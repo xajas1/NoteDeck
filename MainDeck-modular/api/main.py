@@ -7,6 +7,22 @@ import subprocess
 import os
 import re
 import uuid
+from enum import Enum
+
+class CTypEnum(str, Enum):
+    DEF = "DEF"
+    PROP = "PROP"
+    THEO = "THEO"
+    LEM = "LEM"
+    KORO = "KORO"
+    REM = "REM"
+    OTH = "OTH"
+    PROOF = "PROOF"
+    EXA = "EXA"
+    STUD = "STUD"
+    CONC = "CONC"
+    EXE = "EXE"
+    MOT = "MOT"
 
 app = FastAPI(title="NoteDeck-API")
 print("🚀 FastAPI loaded")
@@ -26,7 +42,7 @@ class ReplaceBodyRequest(BaseModel):
     project: str
     newBody: str
     Content: str
-    CTyp: str
+    CTyp: CTypEnum
 
 # === Globale Pfade ===
 BASE_DIR         = Path(__file__).resolve().parents[1]
@@ -44,7 +60,7 @@ class SnipRequest(BaseModel):
     Subject: str
     Topic: str
     LitID: str
-    CTyp: str
+    CTyp: CTypEnum
     Content: str
     Body: str
     ParentTopic: str

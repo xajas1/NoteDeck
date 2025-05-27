@@ -54,5 +54,20 @@
     "tableMeta": {
       "selectedSource": "RG_Test25/RG_Test25.tex"
     }
+  },
+  "TEST3": {
+    "sourceFile": "RG_Test25/RG_Test25.tex",
+    "snipMeta": {
+      "Subject": "A",
+      "Topic": "Ringe Basics",
+      "LitID": "T12",
+      "CTyp": "DEF",
+      "ParentTopic": "Ringe",
+      "Content": "",
+      "selectedProject": "RG_Test25/RG_Test25.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "RG_Test25/RG_Test25.tex"
+    }
   }
 }

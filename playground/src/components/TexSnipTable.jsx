@@ -274,9 +274,13 @@ const filteredUnits = localUnits.filter(u =>
               {f !== "Body" ? (
                 <>
                   <option value="">(alle)</option>
-                  {getUniqueValues(f).map(v => (
-                    <option key={v} value={v}>{v}</option>
-                  ))}
+                  {f === "CTyp"
+                    ? [
+                        "DEF", "PROP", "THEO", "LEM", "KORO", "REM",
+                        "OTH", "PROOF", "EXA", "STUD", "CONC", "EXE", "MOT"
+                        ].map(v => <option key={v} value={v}>{v}</option>)
+                    : getUniqueValues(f).map(v => <option key={v} value={v}>{v}</option>)
+                    }
                 </>
               ) : (
                 <>
@@ -393,7 +397,16 @@ const filteredUnits = localUnits.filter(u =>
                   </td>
                 )}
                 <td style={cellStyle}>
-                  <input style={metricInputStyle} value={u.CTyp ?? ""} onChange={e => handleChange(i, 'CTyp', e.target.value)} />
+                    <select
+                        value={u.CTyp ?? ""}
+                        onChange={e => handleChange(i, 'CTyp', e.target.value)}
+                        style={{ ...metricInputStyle, width: "6rem" }}>
+                        <option value="">–</option>
+                        {[
+                        "DEF", "PROP", "THEO", "LEM", "KORO", "REM",
+                        "OTH", "PROOF", "EXA", "STUD", "CONC", "EXE", "MOT"
+                        ].map(ct => <option key={ct} value={ct}>{ct}</option>)}
+                    </select>
                 </td>
                 <td style={cellStyle}>
                   <input style={{ ...metricInputStyle, width: "10rem" }} value={u.Content ?? ""} onChange={e => handleChange(i, 'Content', e.target.value)} />
