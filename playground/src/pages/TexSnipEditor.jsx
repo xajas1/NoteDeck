@@ -202,10 +202,18 @@ import React, {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
           })
+      
+          if (!res.ok) {
+            const errorData = await res.json()
+            console.error("❌ Replace fehlgeschlagen:", errorData)
+            alert(`❌ Replace fehlgeschlagen:\n${errorData.detail || "Unbekannter Fehler"}`)
+            return
+          }
+      
           const json = await res.json()
           console.log("✅ Replace erfolgreich:", json)
       
-          if (typeof onNewUnit === "function") {
+          if (json.unit && typeof onNewUnit === "function") {
             onNewUnit(json.unit)
           }
       
@@ -214,9 +222,10 @@ import React, {
       
         } catch (err) {
           console.error("❌ Fehler beim Replace:", err)
-          alert("Fehler beim Ersetzen.")
+          alert("❌ Fehler beim Ersetzen (Netzwerk oder Serverfehler).")
         }
       }
+      
       
 
     const loadSourceByProject = async (project) => {

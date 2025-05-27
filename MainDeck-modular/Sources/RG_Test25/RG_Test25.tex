@@ -1672,17 +1672,14 @@ Es werde vorausgesetzt, dass $\operatorname{Hol}(u) \subset G$ abgeschlossen ist
 
 \end{document}
 
-\begin{DEF}{TEST-T25-01-01}{TEST NAME}
-a) Seien $E, M$ und $F$ differenzierbare Mannigfaltikeiten und $\pi: E \rightarrow M$ eine differenzierbare Abbildung. Dann heißt ( $E, \pi, M$ ) eine lokal triviale Faserung mit typischer Faser $F$, wenn es zu jedem $x \in M$ eine offene Umgebung $U$ gibt und einen Diffeomorphismus $\varphi: \pi^{-1}(U):=E \mid U \rightarrow$ $U \times F$, sodass
 
-$$
-\begin{array}{lll}
-E \mid U & \xrightarrow{\varphi} & U \times F \\
-\pi \searrow & & \swarrow p r_{1} \\
-& U &
-\end{array}
-$$
+\begin{EXA}{TEST-T25-01-03}{TESTBeispiel5}
+\begin{enumerate}
+  \item Kanonisch ist $J^{0}(\pi)=E,[s]_{x}^{0} \mapsto s(x)$
+  \item $J^{1}(\pi) \rightarrow R(d \pi),[s]_{x}^{1} \mapsto d s_{x}$ ist ein wohldefinierter Diffeomorphismus über $E$ der $\operatorname{Hom}\left(\pi^{*} T M, T^{\prime} E\right)$-äquivariant ist. Damit ist $J^{1}(E) \rightarrow E$ mit $[s]_{x}^{1} \mapsto s(x)$ ein affnes Bündel über $E$ mit Vektorraumbündel Hom $\left(\pi^{*} T M ; T^{\prime} E\right)$. Die Aktion Hom $\left(\pi^{*} T M, T^{\prime} E\right) \times J^{1}(\pi) \rightarrow J^{1}(\pi)$ ist dabei durch $(\alpha,[s]) \mapsto$ $[s+\alpha]$ ) bezüglich Bündelkarten gegeben. Ein Zusammenhang kann damit gelesen werden als Schnitt in $J^{1}(\pi) \rightarrow E$.
+\end{enumerate}
+\end{EXA}
 
-kommutiert. Man spricht auch von der lokal trivialen Faserung $E \rightarrow M$ oder $E$.\\
-b) Ist $F=\mathbb{R}^{k}$ und ist $\pi^{-1}(x)$ ein $k$-dimensionaler Vektorraum und $p r_{2} \circ$ $\left.\varphi\right|_{\pi^{-1}(x)}: \pi^{-1}(x) \rightarrow \mathbb{R}^{k}$ ein Isomorphismus, so heißt $E$ ein Vektorraumbündel der Dimension $k$.
-\end{DEF}
+\begin{EXA}{TEST-T25-01-04}{TESTBeispiel7}
+Ist $E \xrightarrow{\pi} M$ eine lokal triviale Faserung, $U \subseteq M$, so heißt eine differenzierbare Abbildung $\sigma: U \rightarrow E$ (differenzierbarer) lokaler Schnitt, falls $\pi \circ \sigma=\mathrm{id}_{U}$. $\sigma$ heißt Schnitt, falls zusätzlich $U=M$ gilt. Den Raum der differenzierbaren Schnitte bezeichnet man mit $\Gamma E$.
+\end{EXA}

@@ -77,6 +77,16 @@ const TexSplitViewPage = () => {
     }
   }
   
+  const handleNewUnit = (newUnit) => {
+    setUnits(prevUnits => {
+      const exists = prevUnits.some(u => u.UID === newUnit.UID)
+      if (exists) {
+        return prevUnits.map(u => (u.UID === newUnit.UID ? newUnit : u))
+      } else {
+        return [...prevUnits, newUnit]
+      }
+    })
+  }
   
   
 
@@ -132,7 +142,12 @@ const TexSplitViewPage = () => {
             onMetaChange={setSnipMeta}
             onNewUnit={(unit) => {
                 console.log("📥 Neue Unit empfangen:", unit)
-                setUnits(prev => [...prev, unit])
+                setUnits(prev => {
+                const exists = prev.some(u => u.UID === unit.UID || u.UnitID === unit.UnitID)
+                return exists
+                    ? prev.map(u => (u.UID === unit.UID || u.UnitID === unit.UnitID ? unit : u))
+                    : [...prev, unit]
+                })
             }}
         />
         </div>

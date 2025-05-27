@@ -11263,7 +11263,7 @@
     "CID": 0.0,
     "ParentTopic": "",
     "TopicPath": "/TEST",
-    "Body": "% TODO: Inhalt ergänzen (Tex)",
+    "Body": "a) Seien $E, M$ und $F$ differenzierbare Mannigfaltikeiten und $\\pi: E \\rightarrow M$ eine differenzierbare Abbildung. Dann heißt ( $E, \\pi, M$ ) eine lokal triviale Faserung mit typischer Faser $F$, wenn es zu jedem $x \\in M$ eine offene Umgebung $U$ gibt und einen Diffeomorphismus $\\varphi: \\pi^{-1}(U):=E \\mid U \\rightarrow$ $U \\times F$, sodass\n\n$$\n\\begin{array}{lll}\nE \\mid U & \\xrightarrow{\\varphi} & U \\times F \\\\\n\\pi \\searrow & & \\swarrow p r_{1} \\\\\n& U &\n\\end{array}\n$$\n\nkommutiert. Man spricht auch von der lokal trivialen Faserung $E \\rightarrow M$ oder $E$.\\\\\nb) Ist $F=\\mathbb{R}^{k}$ und ist $\\pi^{-1}(x)$ ein $k$-dimensionaler Vektorraum und $p r_{2} \\circ$ $\\left.\\varphi\\right|_{\\pi^{-1}(x)}: \\pi^{-1}(x) \\rightarrow \\mathbb{R}^{k}$ ein Isomorphismus, so heißt $E$ ein Vektorraumbündel der Dimension $k$.",
     "UID": "aa0f2508-2dc7-47b4-aafa-e28ea15c34b7"
   },
   {
@@ -11282,7 +11282,7 @@
     "CID": 0.0,
     "ParentTopic": "",
     "TopicPath": "/TEST",
-    "Body": "% TODO: Inhalt ergänzen (Tex)",
+    "Body": "\\begin{enumerate}\n  \\item Kanonisch ist $J^{0}(\\pi)=E,[s]_{x}^{0} \\mapsto s(x)$\n  \\item $J^{1}(\\pi) \\rightarrow R(d \\pi),[s]_{x}^{1} \\mapsto d s_{x}$ ist ein wohldefinierter Diffeomorphismus über $E$ der $\\operatorname{Hom}\\left(\\pi^{*} T M, T^{\\prime} E\\right)$-äquivariant ist. Damit ist $J^{1}(E) \\rightarrow E$ mit $[s]_{x}^{1} \\mapsto s(x)$ ein affnes Bündel über $E$ mit Vektorraumbündel Hom $\\left(\\pi^{*} T M ; T^{\\prime} E\\right)$. Die Aktion Hom $\\left(\\pi^{*} T M, T^{\\prime} E\\right) \\times J^{1}(\\pi) \\rightarrow J^{1}(\\pi)$ ist dabei durch $(\\alpha,[s]) \\mapsto$ $[s+\\alpha]$ ) bezüglich Bündelkarten gegeben. Ein Zusammenhang kann damit gelesen werden als Schnitt in $J^{1}(\\pi) \\rightarrow E$.\n\\end{enumerate}",
     "UID": "8882e020-e6be-4cea-b5ea-3406b0488060"
   },
   {
@@ -11301,7 +11301,7 @@
     "CID": 0.0,
     "ParentTopic": "",
     "TopicPath": "/TEST",
-    "Body": "% TODO: Inhalt ergänzen (Tex)",
+    "Body": "Ist $E \\xrightarrow{\\pi} M$ eine lokal triviale Faserung, $U \\subseteq M$, so heißt eine differenzierbare Abbildung $\\sigma: U \\rightarrow E$ (differenzierbarer) lokaler Schnitt, falls $\\pi \\circ \\sigma=\\mathrm{id}_{U}$. $\\sigma$ heißt Schnitt, falls zusätzlich $U=M$ gilt. Den Raum der differenzierbaren Schnitte bezeichnet man mit $\\Gamma E$.",
     "UID": "7be21daf-0073-49e7-b0a7-29d085b0db4d"
   },
   {
