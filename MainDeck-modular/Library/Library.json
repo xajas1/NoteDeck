@@ -11647,25 +11647,6 @@
     "UID": "cc74e8a7-de31-4def-8448-51877785da1a"
   },
   {
-    "UnitID": "TEST-T25-01-26",
-    "Subject": "TEST",
-    "Topic": "TEST",
-    "CTyp": "EXA",
-    "Content": "TESTDefinition6",
-    "LitID": "T25",
-    "Layer": null,
-    "Comp": null,
-    "RelInt": null,
-    "RelId": null,
-    "Cont": null,
-    "Cint": 0.0,
-    "CID": 0.0,
-    "ParentTopic": "",
-    "TopicPath": "TEST",
-    "Body": "Ein Vektorraumbündel $E \\rightarrow M$ heißt von endlichem Typ, wenn es ein Vektorraumbündel $F \\rightarrow M$ gibt und ein $N \\in \\mathbb{N}$, sodass $E \\oplus F=M \\times \\mathbb{R}^{N}$ ist.",
-    "UID": "95674410-bb66-4f6c-a88d-5565d4dd319c"
-  },
-  {
     "UnitID": "TEST-T25-01-27",
     "Subject": "TEST",
     "Topic": "TEST",
@@ -11797,5 +11778,24 @@
     "ParentTopic": "",
     "TopicPath": "/TEST",
     "Body": "Sei $E \\rightarrow B$ ein Faserbündel, seien $f_{0}, f_{1}: X \\rightarrow B$ homotope Abbildungen, dann ist $f_{0}^{*} E \\cong f_{1}^{*} E$."
+  },
+  {
+    "UnitID": "TEST-T25-02-01",
+    "Subject": "TEST",
+    "Topic": "",
+    "CTyp": "EXA",
+    "Content": "TESTDefinition6",
+    "LitID": "T25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "",
+    "Body": "Ein Vektorraumbündel $E \\rightarrow M$ heißt von endlichem Typ, wenn es ein Vektorraumbündel $F \\rightarrow M$ gibt und ein $N \\in \\mathbb{N}$, sodass $E \\oplus F=M \\times \\mathbb{R}^{N}$ ist.",
+    "UID": "95674410-bb66-4f6c-a88d-5565d4dd319c"
   }
 ]

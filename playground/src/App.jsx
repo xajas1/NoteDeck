@@ -180,7 +180,7 @@ function App() {
           const cleaned = original.filter(uid => !draggedUIDs.includes(uid))
 
           if (!isTarget) return { ...sub, unitUIDs: cleaned }
-
+ 
           let insertAt = cleaned.length
           if (targetUID) {
             const targetIndexOriginal = original.indexOf(targetUID)
