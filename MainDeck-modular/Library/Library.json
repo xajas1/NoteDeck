@@ -11328,7 +11328,7 @@
     "Subject": "TEST",
     "Topic": "TEST",
     "CTyp": "EXA",
-    "Content": "TESTBeispiel8",
+    "Content": "TESTBeispiel",
     "LitID": "T25",
     "Layer": null,
     "Comp": null,
@@ -11461,7 +11461,7 @@
     "Subject": "TEST",
     "Topic": "TEST",
     "CTyp": "EXA",
-    "Content": "TESTBeispiel14",
+    "Content": "TESTBeispiel144",
     "LitID": "T25",
     "Layer": null,
     "Comp": null,
@@ -11472,7 +11472,7 @@
     "CID": 0.0,
     "ParentTopic": "",
     "TopicPath": "TEST",
-    "Body": "Ist $i: M_{0} \\rightarrow M$ die Einbettung einer Untermannigfaltigkeit $M_{0}$ in $M$, so schreibt man statt $i^{*} E$ auch $\\left.E\\right|_{M_{0}}$.",
+    "Body": "Sei $(E, \\pi, M)$ ein $k$-dimensionales Vektorraumbündel. Eine Teilmenge $E_{0} \\subseteq E$ heißt ein $m$-dimensionales Untervektorraumbündel, falls es um jedes $x \\in M$ eine Bündelkarte $(U, \\varphi)$ gibt, sodass $\\varphi\\left(\\pi^{-1}(U) \\cap E_{0}\\right)=U \\times \\mathbb{R}^{m} \\times 0$ ist.",
     "UID": "842797ad-af60-49d4-8588-f23d8b0ffb09"
   },
   {

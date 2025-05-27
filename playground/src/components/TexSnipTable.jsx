@@ -247,163 +247,173 @@ const filteredUnits = localUnits.filter(u =>
   const metricCellStyle = { ...cellStyle, textAlign: "center" }
   const metricInputStyle = { width: "3rem", fontSize: "0.7rem", textAlign: "center", padding: "1px 3px" }
 
-return (
-  <div style={{ padding: "0.5rem", display: "flex", flexDirection: "column", height: "100%" }}>
-    {/* Filter und Sichtbarkeitsleiste */}
-    <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.8rem", marginBottom: "0.5rem", fontSize: "0.75rem" }}>
-      {["Subject", "Topic", "CTyp", "Body"].map((f) => (
-        <label key={f}>
-          {f}:
-          <select
-            value={filter[f]}
-            onChange={e => setFilter({ ...filter, [f]: e.target.value })}
-            style={{ fontSize: "0.75rem", marginLeft: "0.2rem" }}
-          >
-            {f !== "Body"
-              ? <>
+  const buttonStyle = {
+    fontSize: "0.6rem",
+    padding: "0.2rem 0.3rem",
+    border: "none",
+    borderRadius: "3px",
+    cursor: "pointer",
+    backgroundColor: "#444",
+    color: "white",
+    minWidth: "1.5rem"
+  }
+  
+
+  return (
+    <div style={{ padding: "0.5rem", display: "flex", flexDirection: "column", height: "100%" }}>
+      {/* Filter und Sichtbarkeitsleiste */}
+      <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.8rem", marginBottom: "0.5rem", fontSize: "0.75rem" }}>
+        {["Subject", "Topic", "CTyp", "Body"].map((f) => (
+          <label key={f}>
+            {f}:
+            <select
+              value={filter[f]}
+              onChange={e => setFilter({ ...filter, [f]: e.target.value })}
+              style={{ fontSize: "0.75rem", marginLeft: "0.2rem" }}
+            >
+              {f !== "Body" ? (
+                <>
                   <option value="">(alle)</option>
-                  {getUniqueValues(f).map(v => <option key={v} value={v}>{v}</option>)}
+                  {getUniqueValues(f).map(v => (
+                    <option key={v} value={v}>{v}</option>
+                  ))}
                 </>
-              : <>
+              ) : (
+                <>
                   <option value="all">(alle)</option>
                   <option value="yes">✅</option>
                   <option value="no">❌</option>
                 </>
-            }
-          </select>
-        </label>
-      ))}
-      <span style={{ marginLeft: "auto", fontSize: "0.7rem", display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-        {Object.keys(visibleColumns).map(col => (
-          <label key={col}>
-            <input
-              type="checkbox"
-              checked={visibleColumns[col]}
-              onChange={() =>
-                setVisibleColumns(prev => ({ ...prev, [col]: !prev[col] }))
-              }
-            />
-            {col}
+              )}
+            </select>
           </label>
         ))}
-      </span>
-    </div>
-
-    {/* Tabellenansicht */}
-    <div style={{ flex: 1, overflowY: "auto" }}>
-    <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.75rem" }}>
-        <thead>
-        <tr style={{ backgroundColor: "#222" }}>
-            <th style={cellStyle}>Aktionen</th> {/* Neue kompakte Aktionsspalte */}
-            {visibleColumns.UnitID && <th style={cellStyle}>UnitID</th>}
-            {visibleColumns.Subject && <th style={cellStyle}>Subject</th>}
-            <th style={cellStyle}>Topic</th>
-            {visibleColumns.ParentTopic && <th style={cellStyle}>ParentTopic</th>}
-            <th style={cellStyle}>CTyp</th>
-            <th style={cellStyle}>Content</th>
-            {visibleColumns.Layer && <th style={metricCellStyle}>Layer</th>}
-            {visibleColumns.Comp && <th style={metricCellStyle}>Comp</th>}
-            {visibleColumns.RelInt && <th style={metricCellStyle}>RelInt</th>}
-            {visibleColumns.RelId && <th style={metricCellStyle}>RelId</th>}
-            {visibleColumns.Cont && <th style={metricCellStyle}>Cont</th>}
-            {visibleColumns.Cint && <th style={metricCellStyle}>Cint</th>}
-            {visibleColumns.CID && <th style={metricCellStyle}>CID</th>}
-            <th style={cellStyle}>Body?</th>
-        </tr>
-        </thead>
-        <tbody>
-        {filteredUnits.map((u, i) => (
-            <tr key={u.UnitID} style={{ borderTop: "1px solid #444" }}>
-            {/* Kompakte Button-Leiste */}
-            <td style={{ ...cellStyle, display: "flex", flexWrap: "wrap", gap: "0.25rem" }}>
-                <button
-                onClick={() => onJumpToUnit?.({ unitID: u.UnitID, litID: u.LitID })}
-                title="Im Editor anzeigen"
-                style={buttonStyle}
-                >
-                🔍
-                </button>
-                <button
-                onClick={() => onStartReplaceMode?.(u)}
-                title={isSubstantiveBody(u.Body) ? "Vorhandenen Body ersetzen" : "Body hinzufügen"}
-                style={{
-                    ...buttonStyle,
-                    backgroundColor: isSubstantiveBody(u.Body) ? "#775" : "#335"
-                }}
-                >
-                {isSubstantiveBody(u.Body) ? "♻️" : "🔁"}
-                </button>
-                <button
-                onClick={() => handleDelete?.(u)}
-                title="Unit löschen"
-                style={{ ...buttonStyle, backgroundColor: "#933" }}
-                >
-                🗑
-                </button>
-            </td>
-
-            {/* Alle restlichen Datenfelder */}
-            {visibleColumns.UnitID && (
-                <td style={cellStyle}>
-                {u.UnitID}
-                {isRenameRelevant(u) && (
-                    <>
-                    <div style={{ fontSize: "0.65rem", color: "orange" }}>→ {computePreviewID(u)}</div>
-                    <button
-                        onClick={() => handleRename(i, u.UnitID, computePreviewID(u))}
-                        style={{ ...buttonStyle, marginTop: "2px" }}
-                    >
-                        🔁 Speichern
-                    </button>
-                    </>
-                )}
-                {!isRenameRelevant(u) && isCTypOrContentChanged(u) && (
-                    <button
-                    onClick={() => handleEnvOrContentUpdate(i)}
-                    style={{ ...buttonStyle, marginTop: "4px", backgroundColor: "#355" }}
-                    >
-                    ♻️ Update
-                    </button>
-                )}
-                {savedIndex === i && (
-                    <div style={{ fontSize: "0.65rem", color: "limegreen" }}>✅ gespeichert</div>
-                )}
-                </td>
-            )}
-            {visibleColumns.Subject && (
-                <td style={cellStyle}>
-                <input style={metricInputStyle} value={u.Subject ?? ""} onChange={e => handleChange(i, 'Subject', e.target.value)} />
-                </td>
-            )}
-            <td style={cellStyle}>
-                <input style={metricInputStyle} value={u.Topic ?? ""} onChange={e => handleChange(i, 'Topic', e.target.value)} />
-            </td>
-            {visibleColumns.ParentTopic && (
-                <td style={cellStyle}>
-                <input style={metricInputStyle} value={u.ParentTopic ?? ""} onChange={e => handleChange(i, 'ParentTopic', e.target.value)} />
-                </td>
-            )}
-            <td style={cellStyle}>
-                <input style={metricInputStyle} value={u.CTyp ?? ""} onChange={e => handleChange(i, 'CTyp', e.target.value)} />
-            </td>
-            <td style={cellStyle}>
-                <input style={{ ...metricInputStyle, width: "10rem" }} value={u.Content ?? ""} onChange={e => handleChange(i, 'Content', e.target.value)} />
-            </td>
-            {visibleColumns.Layer && <td style={metricCellStyle}><input style={metricInputStyle} value={u.Layer ?? ""} onChange={e => handleChange(i, 'Layer', e.target.value)} /></td>}
-            {visibleColumns.Comp && <td style={metricCellStyle}><input style={metricInputStyle} value={u.Comp ?? ""} onChange={e => handleChange(i, 'Comp', e.target.value)} /></td>}
-            {visibleColumns.RelInt && <td style={metricCellStyle}><input style={metricInputStyle} value={u.RelInt ?? ""} onChange={e => handleChange(i, 'RelInt', e.target.value)} /></td>}
-            {visibleColumns.RelId && <td style={metricCellStyle}><input style={metricInputStyle} value={u.RelId ?? ""} onChange={e => handleChange(i, 'RelId', e.target.value)} /></td>}
-            {visibleColumns.Cont && <td style={metricCellStyle}><input style={metricInputStyle} value={u.Cont ?? ""} onChange={e => handleChange(i, 'Cont', e.target.value)} /></td>}
-            {visibleColumns.Cint && <td style={metricCellStyle}><input style={metricInputStyle} value={u.Cint ?? ""} onChange={e => handleChange(i, 'Cint', e.target.value)} /></td>}
-            {visibleColumns.CID && <td style={metricCellStyle}><input style={metricInputStyle} value={u.CID ?? ""} onChange={e => handleChange(i, 'CID', e.target.value)} /></td>}
-            <td style={{ textAlign: "center" }}>{isSubstantiveBody(u.Body) ? "✅" : "❌"}</td>
+        <span style={{ marginLeft: "auto", fontSize: "0.7rem", display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+          {Object.keys(visibleColumns).map(col => (
+            <label key={col}>
+              <input
+                type="checkbox"
+                checked={visibleColumns[col]}
+                onChange={() =>
+                  setVisibleColumns(prev => ({ ...prev, [col]: !prev[col] }))
+                }
+              />
+              {col}
+            </label>
+          ))}
+        </span>
+      </div>
+  
+      {/* Tabellenansicht */}
+      <div style={{ flex: 1, overflowY: "auto" }}>
+        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.75rem" }}>
+            <thead>
+            <tr style={{ backgroundColor: "#222" }}>
+                <th style={cellStyle}>⚙️</th>
+                {visibleColumns.UnitID ? <th style={cellStyle}>UnitID</th> : null}
+                {visibleColumns.Subject ? <th style={cellStyle}>Subject</th> : null}
+                <th style={cellStyle}>Topic</th>
+                {visibleColumns.ParentTopic ? <th style={cellStyle}>ParentTopic</th> : null}
+                <th style={cellStyle}>CTyp</th>
+                <th style={cellStyle}>Content</th>
+                {visibleColumns.Layer ? <th style={metricCellStyle}>Layer</th> : null}
+                {visibleColumns.Comp ? <th style={metricCellStyle}>Comp</th> : null}
+                {visibleColumns.RelInt ? <th style={metricCellStyle}>RelInt</th> : null}
+                {visibleColumns.RelId ? <th style={metricCellStyle}>RelId</th> : null}
+                {visibleColumns.Cont ? <th style={metricCellStyle}>Cont</th> : null}
+                {visibleColumns.Cint ? <th style={metricCellStyle}>Cint</th> : null}
+                {visibleColumns.CID ? <th style={metricCellStyle}>CID</th> : null}
+                <th style={cellStyle}>Body?</th>
             </tr>
-        ))}
-        </tbody>
-    </table>
+            </thead>
+
+          <tbody>
+            {filteredUnits.map((u, i) => (
+              <tr key={u.UnitID} style={{ borderTop: "1px solid #444" }}>
+                {/* Neue erste Spalte: Aktions-Buttons */}
+                <td style={{ ...cellStyle, display: "flex", flexWrap: "wrap", gap: "0.15rem", justifyContent: "center" }}>
+                  <button
+                    onClick={() => onStartReplaceMode?.(u)}
+                    title={isSubstantiveBody(u.Body) ? "Vorhandenen Body ersetzen" : "Body hinzufügen"}
+                    style={{
+                      ...buttonStyle,
+                      backgroundColor: isSubstantiveBody(u.Body) ? "#775" : "#335"
+                    }}
+                  >
+                    🔁
+                  </button>
+                  <button
+                    onClick={() => onJumpToUnit?.({ unitID: u.UnitID, litID: u.LitID })}
+                    title="Im Editor anzeigen"
+                    style={buttonStyle}
+                  >
+                    🔍
+                  </button>
+                </td>
+  
+                {/* Alle restlichen Spalten (unverändert) */}
+                {visibleColumns.UnitID && (
+                  <td style={cellStyle}>
+                    {u.UnitID}
+                    {isRenameRelevant(u) && (
+                      <>
+                        <div style={{ fontSize: "0.65rem", color: "orange" }}>→ {computePreviewID(u)}</div>
+                        <button
+                          onClick={() => handleRename(i, u.UnitID, computePreviewID(u))}
+                          style={{ ...buttonStyle, marginTop: "2px" }}
+                        >
+                          🔁 Speichern
+                        </button>
+                      </>
+                    )}
+                    {!isRenameRelevant(u) && isCTypOrContentChanged(u) && (
+                      <button
+                        onClick={() => handleEnvOrContentUpdate(i)}
+                        style={{ ...buttonStyle, marginTop: "4px", backgroundColor: "#355" }}
+                      >
+                        ♻️ Update
+                      </button>
+                    )}
+                    {savedIndex === i && (
+                      <div style={{ fontSize: "0.65rem", color: "limegreen" }}>✅ gespeichert</div>
+                    )}
+                  </td>
+                )}
+                {visibleColumns.Subject && (
+                  <td style={cellStyle}>
+                    <input style={metricInputStyle} value={u.Subject ?? ""} onChange={e => handleChange(i, 'Subject', e.target.value)} />
+                  </td>
+                )}
+                <td style={cellStyle}>
+                  <input style={metricInputStyle} value={u.Topic ?? ""} onChange={e => handleChange(i, 'Topic', e.target.value)} />
+                </td>
+                {visibleColumns.ParentTopic && (
+                  <td style={cellStyle}>
+                    <input style={metricInputStyle} value={u.ParentTopic ?? ""} onChange={e => handleChange(i, 'ParentTopic', e.target.value)} />
+                  </td>
+                )}
+                <td style={cellStyle}>
+                  <input style={metricInputStyle} value={u.CTyp ?? ""} onChange={e => handleChange(i, 'CTyp', e.target.value)} />
+                </td>
+                <td style={cellStyle}>
+                  <input style={{ ...metricInputStyle, width: "10rem" }} value={u.Content ?? ""} onChange={e => handleChange(i, 'Content', e.target.value)} />
+                </td>
+                {visibleColumns.Layer && <td style={metricCellStyle}><input style={metricInputStyle} value={u.Layer ?? ""} onChange={e => handleChange(i, 'Layer', e.target.value)} /></td>}
+                {visibleColumns.Comp && <td style={metricCellStyle}><input style={metricInputStyle} value={u.Comp ?? ""} onChange={e => handleChange(i, 'Comp', e.target.value)} /></td>}
+                {visibleColumns.RelInt && <td style={metricCellStyle}><input style={metricInputStyle} value={u.RelInt ?? ""} onChange={e => handleChange(i, 'RelInt', e.target.value)} /></td>}
+                {visibleColumns.RelId && <td style={metricCellStyle}><input style={metricInputStyle} value={u.RelId ?? ""} onChange={e => handleChange(i, 'RelId', e.target.value)} /></td>}
+                {visibleColumns.Cont && <td style={metricCellStyle}><input style={metricInputStyle} value={u.Cont ?? ""} onChange={e => handleChange(i, 'Cont', e.target.value)} /></td>}
+                {visibleColumns.Cint && <td style={metricCellStyle}><input style={metricInputStyle} value={u.Cint ?? ""} onChange={e => handleChange(i, 'Cint', e.target.value)} /></td>}
+                {visibleColumns.CID && <td style={metricCellStyle}><input style={metricInputStyle} value={u.CID ?? ""} onChange={e => handleChange(i, 'CID', e.target.value)} /></td>}
+                <td style={{ textAlign: "center" }}>{isSubstantiveBody(u.Body) ? "✅" : "❌"}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
-)
+  )
+  
 
 
 }                   
