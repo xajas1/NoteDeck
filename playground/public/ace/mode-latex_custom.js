@@ -18,21 +18,29 @@ ace.define("ace/mode/latex_custom", [
           regex: /\\subsection\*?\{.*?\}/
         },
         {
-          token: "environment.def",
-          regex: /\\begin\{(?:DEF|PROP|THEO|LEM|REM|EXA|KORO)\}\{.*?\}\{.*?\}/
-        },
-        {
-          token: "environment.def",
-          regex: /\\end\{(?:DEF|PROP|THEO|LEM|REM|EXA|KORO)\}/
+          token: "environment.envline",
+          regex: /\\begin\{(?:DEF|PROP|THEO|LEM|REM|EXA|KORO)\}\{.*?\}\{.*?\}/,
+          next: "envBody"
         },
         {
           token: "text",
           regex: ".+"
         }
+      ],
+      envBody: [
+        {
+          token: "environment.envline", // gleicher Token wie begin
+          regex: /\\end\{(?:DEF|PROP|THEO|LEM|REM|EXA|KORO)\}/,
+          next: "start"
+        },
+        {
+          token: "environment.body",
+          regex: ".+"
+        }
       ]
     };
     this.normalizeRules();
-  };
+  };   
   oop.inherits(CustomHighlightRules, TextHighlightRules);
 
   const CustomLatexMode = function () {

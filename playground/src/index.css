@@ -134,7 +134,7 @@ input[type="checkbox"] {
 }
 
 
-.ace_editor .ace_heading.ace_section {
+/* .ace_editor .ace_heading.ace_section {
   color: #4da6ff !important;
   font-weight: bold;
 }
@@ -147,4 +147,24 @@ input[type="checkbox"] {
 .ace_editor .ace_environment.ace_def {
   color: #39ff14 !important;
   font-weight: bold;
+} */
+
+/* Abschnittsüberschriften – GRÜN */
+.ace_editor .ace_heading.ace_section,
+.ace_editor .ace_heading.ace_subsection {
+  color: #00cc66 !important;  /* kräftiges Grün */
+  font-weight: bold;
 }
+
+/* begin & end – HELLBLAU */
+.ace_editor .ace_environment.ace_envline {
+  color: #66b3ff !important;  /* freundliches Hellblau */
+  font-weight: normal;
+}
+
+/* Body zwischen begin & end – HELLGRAU */
+.ace_editor .ace_environment.ace_body {
+  color: #999999 !important;  /* gut lesbares Hellgrau */
+}
+
+

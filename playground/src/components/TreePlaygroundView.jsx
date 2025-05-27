@@ -207,7 +207,7 @@ export default function TreePlaygroundView({
   )
 }
 
-function DraggableLine({ uid, ctyp, name, unitID, isSelected, onClick, selectedUIDs, setSelectedUIDs, setPlayground }) {
+function DraggableLine({ uid, ctyp, name, unitID, isSelected, isInEditor, onClick, selectedUIDs, setSelectedUIDs, setPlayground }) {
   const draggedUIDs = isSelected && selectedUIDs.size > 1
     ? Array.from(selectedUIDs)
     : [uid]
@@ -239,7 +239,11 @@ function DraggableLine({ uid, ctyp, name, unitID, isSelected, onClick, selectedU
       style={{
         cursor: 'grab',
         padding: '0rem 0.2rem',
-        backgroundColor: isSelected ? '#2a2a2a' : 'transparent',
+        backgroundColor: isSelected
+        ? '#336b9a22'
+        : isInEditor
+          ? 'rgba(100, 180, 255, 0.15)'
+          : 'transparent',
         borderLeft: isSelected ? '2px solid #4fc3f7' : '2px solid transparent',
         fontSize: '0.68rem',
         lineHeight: '0.95rem',
