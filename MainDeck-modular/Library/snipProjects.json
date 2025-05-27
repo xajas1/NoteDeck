@@ -41,7 +41,7 @@
     }
   },
   "P15": {
-    "sourceFile": "RG_Test25/RG_Test25.tex",
+    "sourceFile": "",
     "snipMeta": {
       "Subject": "TEST",
       "Topic": "TEST",
@@ -52,7 +52,24 @@
       "selectedProject": "RG_Test25/RG_Test25.tex"
     },
     "tableMeta": {
-      "selectedSource": "RG_Test25/RG_Test25.tex"
+      "filter": {
+        "Subject": "",
+        "Topic": "",
+        "CTyp": "",
+        "Body": "all"
+      },
+      "visibleColumns": {
+        "UnitID": true,
+        "Subject": false,
+        "ParentTopic": false,
+        "Layer": false,
+        "Comp": false,
+        "RelInt": false,
+        "RelId": false,
+        "Cont": false,
+        "Cint": false,
+        "CID": false
+      }
     }
   }
 }

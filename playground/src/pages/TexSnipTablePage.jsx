@@ -34,10 +34,11 @@ const TexSnipTablePage = ({ units, splitState, onMetaChange, onJumpToUnit, edito
   // tableMeta zurückgeben
   useEffect(() => {
     if (onMetaChange) {
-      onMetaChange({ selectedSource })
+      onMetaChange({ selectedSource })  // Nur Source initial setzen
     }
   }, [selectedSource])
-
+  
+  
 
 
   return (
@@ -63,6 +64,8 @@ const TexSnipTablePage = ({ units, splitState, onMetaChange, onJumpToUnit, edito
         units={units}
         onJumpToUnit={onJumpToUnit}
         onStartReplaceMode={(unit) => editorRef.current?.startReplaceMode(unit)}  // ✅ hinzugefügt
+        onMetaChange={onMetaChange}
+        splitState={splitState}
       />
     </div>
   )

@@ -41,8 +41,11 @@ const TexSplitViewPage = () => {
         const state = {
             sourceFile: tableMeta?.selectedSource || "",
             snipMeta,
-            tableMeta
-          }          
+            tableMeta: {
+              ...tableMeta,
+              selectedSource: tableMeta?.selectedSource || ""
+            }
+          }                   
       await axios.post("http://localhost:8000/save-snip-project", {
         project_name: projectName,
         data: state

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 
-const TexSnipTable = ({ units, onJumpToUnit, onStartReplaceMode }) => {
+const TexSnipTable = ({ units, onJumpToUnit, onStartReplaceMode, onMetaChange, splitState }) => {
   const [localUnits, setLocalUnits] = useState([])
   const [topicIndexMap, setTopicIndexMap] = useState({})
   const [savedIndex, setSavedIndex] = useState(null)
@@ -49,6 +49,19 @@ useEffect(() => {
       .catch(err => console.error("Fehler beim Laden von /topic-map:", err))
   }, [])
   
+  useEffect(() => {
+    if (typeof onMetaChange === "function") {
+      onMetaChange({ filter, visibleColumns });
+    }
+  }, [filter, visibleColumns]);
+  
+  useEffect(() => {
+    if (splitState?.tableMeta) {
+      const meta = splitState.tableMeta;
+      if (meta.filter) setFilter(meta.filter);
+      if (meta.visibleColumns) setVisibleColumns(meta.visibleColumns);
+    }
+  }, [splitState]);
   
 
   const getTopicIndex = (subject, topic) => {
