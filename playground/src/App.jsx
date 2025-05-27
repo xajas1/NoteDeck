@@ -165,22 +165,42 @@ function App() {
 
   const handleDragEnd = ({ active, over }) => {
     if (!active || !over || active.id === over.id) return
-
+  
+    // 🧩 Sonderfall: Subsections permutieren
+    if (active.id.startsWith("sub-") && over.id.startsWith("sub-")) {
+      setStructure(prev => {
+        return prev.map(section => {
+          const subIDs = section.subsections.map(s => s.id)
+          if (!subIDs.includes(active.id) || !subIDs.includes(over.id)) return section
+  
+          const activeIndex = subIDs.indexOf(active.id)
+          const overIndex = subIDs.indexOf(over.id)
+  
+          const reordered = [...section.subsections]
+          const [moved] = reordered.splice(activeIndex, 1)
+          reordered.splice(overIndex, 0, moved)
+  
+          return { ...section, subsections: reordered }
+        })
+      })
+      return // ❗️Wichtig: keine weitere Verarbeitung für Units in diesem Fall
+    }
+  
+    // 📦 Standardfall: Units innerhalb Subsection verschieben
     const draggedUIDs = active?.data?.current?.draggedIDs || [active.id.split('__').pop()]
     const targetSubID = over.id.includes('__') ? over.id.split('__')[0] : over.id
     const targetUID = over.id.includes('__') ? over.id.split('__')[1] : null
-
+  
     setStructure(prev => {
       return prev.map(section => ({
         ...section,
         subsections: section.subsections.map(sub => {
           const isTarget = sub.id === targetSubID
           const original = sub.unitUIDs
-
+  
           const cleaned = original.filter(uid => !draggedUIDs.includes(uid))
-
           if (!isTarget) return { ...sub, unitUIDs: cleaned }
- 
+  
           let insertAt = cleaned.length
           if (targetUID) {
             const targetIndexOriginal = original.indexOf(targetUID)
@@ -191,20 +211,21 @@ function App() {
             if (direction === 'down') correctedIndex++
             insertAt = Math.min(correctedIndex, cleaned.length)
           }
-
+  
           const result = [...cleaned]
           result.splice(insertAt, 0, ...draggedUIDs)
           return { ...sub, unitUIDs: result }
         })
       }))
     })
-
+  
     const fullUIDs = draggedUIDs.map(uid => `${targetSubID}__${uid}`)
     setSelectedEditorUIDs(new Set(fullUIDs))
     setLastSelectedEditorIndex(null)
     setSelectedUIDs(new Set())
     setLastSelectedIndex(null)
   }
+  
 
   useEffect(() => {
     const handleKeyDown = (e) => {
