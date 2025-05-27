@@ -11320,7 +11320,7 @@
     "CID": 0.0,
     "ParentTopic": "",
     "TopicPath": "/TEST",
-    "Body": "% TODO: Inhalt ergänzen (Tex)",
+    "Body": "Ist $E \\xrightarrow{\\pi} M$ eine lokal triviale Faserung, $U \\subseteq M$, so heißt eine differenzierbare Abbildung $\\sigma: U \\rightarrow E$ (differenzierbarer) lokaler Schnitt, falls $\\pi \\circ \\sigma=\\mathrm{id}_{U}$. $\\sigma$ heißt Schnitt, falls zusätzlich $U=M$ gilt. Den Raum der differenzierbaren Schnitte bezeichnet man mit $\\Gamma E$.",
     "UID": "685f12cd-bfb8-4549-b9c8-782d3c4d883b"
   },
   {
@@ -11339,7 +11339,7 @@
     "CID": 0.0,
     "ParentTopic": "",
     "TopicPath": "/TEST",
-    "Body": "% TODO: Inhalt ergänzen (Tex)",
+    "Body": "Ist $E \\xrightarrow{\\pi} M$ eine lokal triviale Faserung, $U \\subseteq M$, so heißt eine differenzierbare Abbildung $\\sigma: U \\rightarrow E$ (differenzierbarer) lokaler Schnitt, falls $\\pi \\circ \\sigma=\\mathrm{id}_{U}$. $\\sigma$ heißt Schnitt, falls zusätzlich $U=M$ gilt. Den Raum der differenzierbaren Schnitte bezeichnet man mit $\\Gamma E$.",
     "UID": "e45854e0-3485-4a82-ae6c-3fb36474fb5d"
   },
   {
@@ -11472,7 +11472,7 @@
     "CID": 0.0,
     "ParentTopic": "",
     "TopicPath": "TEST",
-    "Body": "% TODO: Inhalt ergänzen (Tex)",
+    "Body": "Ist $i: M_{0} \\rightarrow M$ die Einbettung einer Untermannigfaltigkeit $M_{0}$ in $M$, so schreibt man statt $i^{*} E$ auch $\\left.E\\right|_{M_{0}}$.",
     "UID": "842797ad-af60-49d4-8588-f23d8b0ffb09"
   },
   {
@@ -11586,7 +11586,7 @@
     "CID": 0.0,
     "ParentTopic": "",
     "TopicPath": "/TEST",
-    "Body": "Sind $E \\rightarrow M$ und $F \\rightarrow M$ zwei Vektorraumbündel der Dimension $k$ und $\\ell$, so ist\n\n$$\nE \\oplus F:=\\bigcup_{x \\in M} E_{x} \\oplus F_{x}\n$$\n\nein $k+\\ell$-dimensionales Prävektorraumbündel, also in kanonischer Weise ein Vektorraumbündel.",
+    "Body": "Seien ( $U, \\varphi$ ) und ( $U, \\psi$ ) Bündelkarten für $E$ und $F$. Dann ist durch\n\n$$\n\\begin{aligned}\n\\phi: \\bigcup_{x \\in U} E_{x} \\oplus F_{x} & \\rightarrow U \\times\\left(\\mathbb{R}^{k} \\oplus \\mathbb{R}^{\\ell}\\right) \\\\\n(e, f) & \\mapsto\\left(\\pi_{E}(e)=\\pi_{F}(f)=: x, \\varphi_{x}(e), \\psi_{x}(f)\\right)\n\\end{aligned}\n$$\n\neine Präbündelkarte gegeben.\\\\\nSind $(U, \\tilde{\\varphi})$ und $(U, \\tilde{\\varphi})$ weitere Bündelkarten mit Bündelkartenwechsel $\\omega: U \\rightarrow$ $G L(k), \\eta: U \\rightarrow G L(\\ell)$, so ist der Bündelkartenwechsel zwischen $\\varphi$ und $\\tilde{\\varphi}$ durch\n\n$$\nU \\rightarrow G L(k+\\ell), x \\mapsto\\left(\\begin{array}{cc}\n\\omega(x) & 0 \\\\\n0 & \\eta(x)\n\\end{array}\\right)\n$$\n\ngegeben, also differenzierbar.",
     "UID": "130882a5-626d-4733-bb21-a87d42b5a831"
   },
   {
@@ -11681,7 +11681,7 @@
     "CID": 0.0,
     "ParentTopic": "",
     "TopicPath": "TEST",
-    "Body": "$T S^{n}$ ist von endlichem Typ, denn\n\n$$\nT S^{n} \\oplus\\left(S^{n} \\times \\mathbb{R}\\right)=S^{n} \\times \\mathbb{R}^{n-1},(v,(x, \\lambda)) \\mapsto v+\\lambda x .\n$$",
+    "Body": "Seien $\\xi, \\xi^{\\prime}$ Faserbündel mit Strukturgruppe $G$ und typischer Faser F. Sei\n\n$$\n\\operatorname{Iso}_{G}\\left(\\xi_{x}, \\xi_{x}^{\\prime}\\right):=\\left\\{f: \\xi_{x} \\rightarrow \\xi_{x}^{\\prime} \\mid \\psi_{x} \\circ f \\circ \\varphi_{x}^{-1}(v)=g \\cdot v \\text { für ein } g \\in G\\right\\}\n$$",
     "UID": "ae2e6727-b876-464b-ad4b-01587fec4260"
   },
   {
@@ -11700,7 +11700,7 @@
     "CID": 0.0,
     "ParentTopic": "",
     "TopicPath": "/TEST",
-    "Body": "a) Seien $\\pi_{i}: E_{i} \\rightarrow B_{i}, i=1,2$ Faserbündel mit Strukturgruppe $G$ und typischer Faser $F, f_{0}: B_{1} \\rightarrow B_{2}$ eine differenzierbare Abbildung, dann heißt eine differenzierbare Abbildung $f: E_{1} \\rightarrow E_{2}$ eine Bündelabbildung über $f_{0}$, falls $f_{0} \\circ \\pi_{1}=\\pi_{2} \\circ f$ gilt und $f$ bezüglich Bündelkarten durch differenzierbare Abbildungen $\\gamma: U \\rightarrow G$, genauer durch\n\n$$\nU \\times F \\rightarrow V \\times F,(x, v) \\mapsto\\left(f_{0}(x), \\gamma(x) v\\right)\n$$\n\ngegeben ist.\\\\\nb) Ist zusätzlich $f_{0}=\\mathrm{id}$, so heißt $f$ ein Bündelisomorphismus.\\\\\nc) Ein Bündelisomorphismus $f: E \\rightarrow B \\times F$ heißt eine Trivialisierung von $E$.\\\\\nd) Seien jetzt $E_{i} \\rightarrow B_{i}$ zwei Vektorraumbündel $f_{0}: B_{1} \\rightarrow B_{2}$ eine differenzierbare Abbildung und $f: E_{1} \\rightarrow E_{2}$ eine differenzierbare Abbildung über $f_{0}$, so heißt $f$ eine Vektorraumbündelabbildung über $f$, falls $f_{x}:=f \\mid E_{1, x}$ linear ist für jedes $x \\in M$.\\\\\ne) Ist $f_{0}=\\mathrm{id}$, so heißt $f$ ein Vektorraumbündelhomomorphismus, es ist dann $f \\in \\Gamma \\operatorname{Hom}\\left(E_{1}, E_{2}\\right)$.",
+    "Body": "Sei $x \\in N$ und $(U, \\varphi)$ Bündelkarte um $f(x)$ für $E$. Dann ist $\\left(f^{-1}(U), \\tilde{\\varphi}\\right)$ mit\n\n$$\n\\begin{aligned}\n\\tilde{\\varphi}:\\left\\{(x, e) \\mid x \\in f^{-1}(U), e \\in E_{f(x)}\\right\\}=p r_{1}^{-1}\\left(f^{-1}(U)\\right) & \\longrightarrow f^{-1}(U) \\times F \\\\\n(x, e) & \\mapsto\\left(x, \\varphi_{f(x)}(e)\\right)\n\\end{aligned}\n$$\n\neine Präbündelkarte gegeben. Die Kartenwechsel sind dieselben wie die für $E \\xrightarrow{\\pi} M$, also differenzierbar.",
     "UID": "9c163e33-63d9-478f-9852-c624b6d1ca2a"
   },
   {
@@ -11720,7 +11720,7 @@
     "CID": 0.0,
     "ParentTopic": "",
     "TopicPath": "/TEST",
-    "Body": "Ist $f: M \\rightarrow N$ eine differenzierbare Abbildung, so ist $d f: T M \\rightarrow T N$ eine Vektorraumbündelabbildung über $f$."
+    "Body": "Ist $\\gamma: I \\rightarrow M$ differenzierbar, so ist $\\Gamma\\left(\\gamma^{*} T M\\right)$ die Menge der Vektorfelder längs $\\gamma$."
   },
   {
     "UID": "45853da7-d2a7-4681-b070-2d1e063a503f",
@@ -11739,7 +11739,7 @@
     "CID": 0.0,
     "ParentTopic": "",
     "TopicPath": "/TEST",
-    "Body": "Ist $f: N \\rightarrow M$ eine differenzierbare Abbildung, $E \\rightarrow M$ ein Faserbündel mit Strukturgruppe $G$, so ist\n\n$$\np r_{1}: f^{*} E=\\left\\{(x, e) \\mid x \\in N, e \\in E_{f(x)}\\right\\} \\rightarrow N\n$$\n\nein Faserbündel mit Strukturgruppe $G$ über $N$, das von $f$ induzierte Bündel. Schnitte in $f^{*} E$ heißen Schnitte in $E$ längs $f$."
+    "Body": "Ist $\\gamma: I \\rightarrow M$ differenzierbar, so ist $\\Gamma\\left(\\gamma^{*} T M\\right)$ die Menge der Vektorfelder längs $\\gamma$."
   },
   {
     "UID": "156ebc2e-b271-44e4-9d18-1340e9263bc5",
@@ -11777,7 +11777,7 @@
     "CID": 0.0,
     "ParentTopic": "",
     "TopicPath": "TEST",
-    "Body": "Ist $\\gamma: I \\rightarrow M$ differenzierbar, so ist $\\Gamma\\left(\\gamma^{*} T M\\right)$ die Menge der Vektorfelder längs $\\gamma$."
+    "Body": "Sei $E \\rightarrow B$ ein Faserbündel, seien $f_{0}, f_{1}: X \\rightarrow B$ homotope Abbildungen, dann ist $f_{0}^{*} E \\cong f_{1}^{*} E$."
   },
   {
     "UID": "3592825e-bf03-4c59-897a-e97f09106ee9",
@@ -11796,6 +11796,6 @@
     "CID": 0.0,
     "ParentTopic": "",
     "TopicPath": "/TEST",
-    "Body": "Die Abbildung $\\hat{f}: f^{*} E \\rightarrow E,(x, e) \\mapsto e$ ist eine Bündelabbildung über $f$, sodass $\\hat{f} \\mid\\left(f^{*} E\\right)_{x}:\\left(f^{*} E\\right)_{x} \\rightarrow E_{f(x)}$ ein Isomorphismus ist für jedes $x$. Ist $g$ : $\\widetilde{E} \\rightarrow E$ eine weitere Bündelabbildung über $f$, so ist\n\n$$\n\\tilde{g}: \\widetilde{E} \\rightarrow f^{*} E, \\tilde{e} \\mapsto(\\pi(\\tilde{e}), g(\\tilde{e}))\n$$\n\nein Bündelisomorphismus mit $\\hat{f} \\circ \\tilde{g}=g$."
+    "Body": "Sei $E \\rightarrow B$ ein Faserbündel, seien $f_{0}, f_{1}: X \\rightarrow B$ homotope Abbildungen, dann ist $f_{0}^{*} E \\cong f_{1}^{*} E$."
   }
 ]

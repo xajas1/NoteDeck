@@ -47,7 +47,7 @@
       "Topic": "TEST",
       "LitID": "T25",
       "CTyp": "EXA",
-      "ParentTopic": "Ringe",
+      "ParentTopic": "",
       "Content": "TESTExample 3402",
       "selectedProject": "RG_Test25/RG_Test25.tex"
     },

@@ -1,4 +1,38 @@
-\documentclass[10pt, letterpaper]{article}
+\begin{PROP}{TEST-T25-01-21}{TESTKorollar2}
+Seien ( $U, \varphi$ ) und ( $U, \psi$ ) Bündelkarten für $E$ und $F$. Dann ist durch
+
+$$
+\begin{aligned}
+\phi: \bigcup_{x \in U} E_{x} \oplus F_{x} & \rightarrow U \times\left(\mathbb{R}^{k} \oplus \mathbb{R}^{\ell}\right) \\
+(e, f) & \mapsto\left(\pi_{E}(e)=\pi_{F}(f)=: x, \varphi_{x}(e), \psi_{x}(f)\right)
+\end{aligned}
+$$
+
+eine Präbündelkarte gegeben.\\
+Sind $(U, \tilde{\varphi})$ und $(U, \tilde{\varphi})$ weitere Bündelkarten mit Bündelkartenwechsel $\omega: U \rightarrow$ $G L(k), \eta: U \rightarrow G L(\ell)$, so ist der Bündelkartenwechsel zwischen $\varphi$ und $\tilde{\varphi}$ durch
+
+$$
+U \rightarrow G L(k+\ell), x \mapsto\left(\begin{array}{cc}
+\omega(x) & 0 \\
+0 & \eta(x)
+\end{array}\right)
+$$
+
+gegeben, also differenzierbar.
+\end{PROP}\begin{DEF}{TEST-T25-01-28}{TESTDEfinition12}
+Sei $x \in N$ und $(U, \varphi)$ Bündelkarte um $f(x)$ für $E$. Dann ist $\left(f^{-1}(U), \tilde{\varphi}\right)$ mit
+
+$$
+\begin{aligned}
+\tilde{\varphi}:\left\{(x, e) \mid x \in f^{-1}(U), e \in E_{f(x)}\right\}=p r_{1}^{-1}\left(f^{-1}(U)\right) & \longrightarrow f^{-1}(U) \times F \\
+(x, e) & \mapsto\left(x, \varphi_{f(x)}(e)\right)
+\end{aligned}
+$$
+
+eine Präbündelkarte gegeben. Die Kartenwechsel sind dieselben wie die für $E \xrightarrow{\pi} M$, also differenzierbar.
+\end{DEF}\begin{EXA}{TEST-T25-01-29}{TESTExampel 232}
+Ist $\gamma: I \rightarrow M$ differenzierbar, so ist $\Gamma\left(\gamma^{*} T M\right)$ die Menge der Vektorfelder längs $\gamma$.
+\end{EXA}\documentclass[10pt, letterpaper]{article}
 
 % Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
 % 1. Seitenlayout und Ränder
@@ -300,7 +334,9 @@ d.h., $E$ ist ein $G L(k, \mathbb{R})$ - bzw. $G L(k, \mathbb{C})$-Faserbündel.
 \end{REM}
 
 \subsection*{1.5 Definition}
+\begin{EXA}{TEST-T25-01-06}{TESTBeispiel8}
 Ist $E \xrightarrow{\pi} M$ eine lokal triviale Faserung, $U \subseteq M$, so heißt eine differenzierbare Abbildung $\sigma: U \rightarrow E$ (differenzierbarer) lokaler Schnitt, falls $\pi \circ \sigma=\mathrm{id}_{U}$. $\sigma$ heißt Schnitt, falls zusätzlich $U=M$ gilt. Den Raum der differenzierbaren Schnitte bezeichnet man mit $\Gamma E$.
+\end{EXA}
 
 \subsection*{1.6 Beispiele}
 a) $\Gamma(M \times F)=\left\{\sigma: M \rightarrow M \times F \mid \sigma(x)=(x, f(x)), f \in C^{\infty}(M, F)\right\} \cong$ $C^{\infty}(M, F)$.\\
@@ -378,7 +414,6 @@ Analog, falls ( $M, g$ ) Riemannsch ist und $E_{x}:=\left\{\left(v_{1}, \ldots, 
 \end{EXA}
 
 \subsection*{1.11 Korollar}
-\begin{PROP}{TEST-T25-01-21}{TESTKorollar2}
 Sind $E \rightarrow M$ und $F \rightarrow M$ zwei Vektorraumbündel der Dimension $k$ und $\ell$, so ist
 
 $$
@@ -386,7 +421,7 @@ E \oplus F:=\bigcup_{x \in M} E_{x} \oplus F_{x}
 $$
 
 ein $k+\ell$-dimensionales Prävektorraumbündel, also in kanonischer Weise ein Vektorraumbündel.
-\end{PROP}
+
 
 \section*{Beweis:}
 Seien ( $U, \varphi$ ) und ( $U, \psi$ ) Bündelkarten für $E$ und $F$. Dann ist durch
@@ -409,6 +444,7 @@ U \rightarrow G L(k+\ell), x \mapsto\left(\begin{array}{cc}
 $$
 
 gegeben, also differenzierbar.
+
 
 \subsection*{1.12 Beispiele}
 \begin{EXA}{TEST-T25-01-22}{TESTExample5}
@@ -438,44 +474,13 @@ Ein Vektorraumbündel $E \rightarrow M$ heißt von endlichem Typ, wenn es ein Ve
 \end{EXA}
 
 \subsection*{1.16 Beispiel}
-\begin{EXA}{TEST-T25-01-27}{TESTExample7}
-$T S^{n}$ ist von endlichem Typ, denn
-
-$$
-T S^{n} \oplus\left(S^{n} \times \mathbb{R}\right)=S^{n} \times \mathbb{R}^{n-1},(v,(x, \lambda)) \mapsto v+\lambda x .
-$$
-\end{EXA}
+Ist $\gamma: I \rightarrow M$ differenzierbar, so ist $\Gamma\left(\gamma^{*} T M\right)$ die Menge der Vektorfelder längs $\gamma$.
 
 \subsection*{1.17 Definition}
-\begin{DEF}{TEST-T25-01-28}{TESTDEfinition12}
-a) Seien $\pi_{i}: E_{i} \rightarrow B_{i}, i=1,2$ Faserbündel mit Strukturgruppe $G$ und typischer Faser $F, f_{0}: B_{1} \rightarrow B_{2}$ eine differenzierbare Abbildung, dann heißt eine differenzierbare Abbildung $f: E_{1} \rightarrow E_{2}$ eine Bündelabbildung über $f_{0}$, falls $f_{0} \circ \pi_{1}=\pi_{2} \circ f$ gilt und $f$ bezüglich Bündelkarten durch differenzierbare Abbildungen $\gamma: U \rightarrow G$, genauer durch
-
-$$
-U \times F \rightarrow V \times F,(x, v) \mapsto\left(f_{0}(x), \gamma(x) v\right)
-$$
-
-gegeben ist.\\
-b) Ist zusätzlich $f_{0}=\mathrm{id}$, so heißt $f$ ein Bündelisomorphismus.\\
-c) Ein Bündelisomorphismus $f: E \rightarrow B \times F$ heißt eine Trivialisierung von $E$.\\
-d) Seien jetzt $E_{i} \rightarrow B_{i}$ zwei Vektorraumbündel $f_{0}: B_{1} \rightarrow B_{2}$ eine differenzierbare Abbildung und $f: E_{1} \rightarrow E_{2}$ eine differenzierbare Abbildung über $f_{0}$, so heißt $f$ eine Vektorraumbündelabbildung über $f$, falls $f_{x}:=f \mid E_{1, x}$ linear ist für jedes $x \in M$.\\
-e) Ist $f_{0}=\mathrm{id}$, so heißt $f$ ein Vektorraumbündelhomomorphismus, es ist dann $f \in \Gamma \operatorname{Hom}\left(E_{1}, E_{2}\right)$.
-\end{DEF}
 
 \subsection*{1.18 Beispiel}
-\begin{EXA}{TEST-T25-01-29}{TESTExampel 232}
-Ist $f: M \rightarrow N$ eine differenzierbare Abbildung, so ist $d f: T M \rightarrow T N$ eine Vektorraumbündelabbildung über $f$.
-\end{EXA}
 
 \subsection*{1.19 Definition und Satz}
-\begin{EXA}{TEST-T25-01-30}{TESTDefinition 23}
-Ist $f: N \rightarrow M$ eine differenzierbare Abbildung, $E \rightarrow M$ ein Faserbündel mit Strukturgruppe $G$, so ist
-
-$$
-p r_{1}: f^{*} E=\left\{(x, e) \mid x \in N, e \in E_{f(x)}\right\} \rightarrow N
-$$
-
-ein Faserbündel mit Strukturgruppe $G$ über $N$, das von $f$ induzierte Bündel. Schnitte in $f^{*} E$ heißen Schnitte in $E$ längs $f$.
-\end{EXA}
 
 \section*{Beweis:}
 Sei $x \in N$ und $(U, \varphi)$ Bündelkarte um $f(x)$ für $E$. Dann ist $\left(f^{-1}(U), \tilde{\varphi}\right)$ mit
@@ -490,29 +495,12 @@ $$
 eine Präbündelkarte gegeben. Die Kartenwechsel sind dieselben wie die für $E \xrightarrow{\pi} M$, also differenzierbar.
 
 \subsection*{1.20 Beispiel}
-\begin{EXA}{TEST-T25-01-32}{TESTExample 737}
 Ist $\gamma: I \rightarrow M$ differenzierbar, so ist $\Gamma\left(\gamma^{*} T M\right)$ die Menge der Vektorfelder längs $\gamma$.
-\end{EXA}
+
 
 \subsection*{1.21 Beispiel}
-Sei $G_{k, N}=O(N) /(O(k) \times O(N-k))$ die Grassmann-Mannigfaltigkeit und
-
-$$
-\gamma_{k, N}=\left\{(E, v) \in G_{k, N} \times \mathbb{R}^{N} \mid v \in E\right\}
-$$
-
-dann ist $\gamma_{k, N} \rightarrow G_{k, N}$ ein $k$-dimensionales Vektorraumbündel. $\gamma_{k, N}$ ist offenbar von endlichem Typ und ein Vektorraumbündel $E \rightarrow M$ ist genau dann von endlichem Typ, wenn es ein $N$ gibt und eine Abbildung $f: M \rightarrow G_{k, N}$, sodass $E=f^{*} \gamma_{k, N}$ ist.
 
 \subsection*{1.22 Bemerkung}
-\begin{REM}{TEST-T25-01-33}{TESTRemark 3748}
-Die Abbildung $\hat{f}: f^{*} E \rightarrow E,(x, e) \mapsto e$ ist eine Bündelabbildung über $f$, sodass $\hat{f} \mid\left(f^{*} E\right)_{x}:\left(f^{*} E\right)_{x} \rightarrow E_{f(x)}$ ein Isomorphismus ist für jedes $x$. Ist $g$ : $\widetilde{E} \rightarrow E$ eine weitere Bündelabbildung über $f$, so ist
-
-$$
-\tilde{g}: \widetilde{E} \rightarrow f^{*} E, \tilde{e} \mapsto(\pi(\tilde{e}), g(\tilde{e}))
-$$
-
-ein Bündelisomorphismus mit $\hat{f} \circ \tilde{g}=g$.
-\end{REM}
 
 \subsection*{1.23 Satz}
 Sei $E \rightarrow B$ ein Faserbündel, seien $f_{0}, f_{1}: X \rightarrow B$ homotope Abbildungen, dann ist $f_{0}^{*} E \cong f_{1}^{*} E$.
@@ -521,17 +509,21 @@ Sei $E \rightarrow B$ ein Faserbündel, seien $f_{0}, f_{1}: X \rightarrow B$ ho
 Ist $B$ zusammenziehbar, also die Identität homotop zur konstanten Abbildung $c: B \rightarrow B, x \mapsto p$, so ist $E \rightarrow B$ trivial, denn $E=\mathrm{id}^{*} E \cong c^{*} E=B \times E_{p}$.
 
 \section*{Beweis des Satzes:}
+\begin{EXA}{TEST-T25-01-27}{TESTExample7}
 Seien $\xi, \xi^{\prime}$ Faserbündel mit Strukturgruppe $G$ und typischer Faser F. Sei
 
-$$
+$
 \operatorname{Iso}_{G}\left(\xi_{x}, \xi_{x}^{\prime}\right):=\left\{f: \xi_{x} \rightarrow \xi_{x}^{\prime} \mid \psi_{x} \circ f \circ \varphi_{x}^{-1}(v)=g \cdot v \text { für ein } g \in G\right\}
-$$
+$
+\end{EXA}
 
 Dann ist $\bigcup_{x \in B} \operatorname{Iso}_{G}\left(\xi_{x}, \xi_{x}^{\prime}\right)$ in kanonischer Weise ein Faserbündel mit typischer Faser $G$ und Strukturgruppe $G \times G$, die Schnitte in $\operatorname{Iso}_{G}\left(\xi_{x}, \xi_{x}^{\prime}\right)$ sind gerade die Bündelisomorphismen. Benutze nun die Homotopiehochhebungseigenschaft: Ist $(X, A)$ ein $C W$-Paar, (z.B. $(M, \partial M)$ ), $Y \rightarrow[0,1] \times X$ eine lokal triviale Faserung, $\sigma_{0}$ ein Schnitt in $Y \mid((0 \times X) \cup([0,1] \times A))$, dann ist $\sigma$ zu einem Schnitt in $Y$ fortsetzbar, vgl. z.B. Husemoller Fiber Bundles oder Hatcher Algebraic Geometry.\\
 Wende dies an auf das Bündel $\operatorname{Iso}_{G}\left([0,1] \times f_{0}^{*} E, h^{*} E\right)$, wobei $h:[0,1] \times X \rightarrow B$ die Homotopie zwiswchen $f_{0}$ und $f_{1}$ ist. Dann ist $\sigma(0, x)=\operatorname{id}_{E_{f_{0}(x)}}$ fortsetzbar zu einem Schnitt $\sigma$, und $\sigma$ und $\sigma(1, \cdot)$ ist der gesuchte Bündelisomorphismus.
 
 \subsection*{1.25 Definition}
+\begin{EXA}{TEST-T25-01-15}{TESTBeispiel14}
 Ist $i: M_{0} \rightarrow M$ die Einbettung einer Untermannigfaltigkeit $M_{0}$ in $M$, so schreibt man statt $i^{*} E$ auch $\left.E\right|_{M_{0}}$.
+\end{EXA}
 
 \subsection*{1.26 Definition}
 Sei $(E, \pi, M)$ ein $k$-dimensionales Vektorraumbündel. Eine Teilmenge $E_{0} \subseteq E$ heißt ein $m$-dimensionales Untervektorraumbündel, falls es um jedes $x \in M$ eine Bündelkarte $(U, \varphi)$ gibt, sodass $\varphi\left(\pi^{-1}(U) \cap E_{0}\right)=U \times \mathbb{R}^{m} \times 0$ ist.
@@ -1682,4 +1674,16 @@ Es werde vorausgesetzt, dass $\operatorname{Hol}(u) \subset G$ abgeschlossen ist
 
 \begin{EXA}{TEST-T25-01-04}{TESTBeispiel7}
 Ist $E \xrightarrow{\pi} M$ eine lokal triviale Faserung, $U \subseteq M$, so heißt eine differenzierbare Abbildung $\sigma: U \rightarrow E$ (differenzierbarer) lokaler Schnitt, falls $\pi \circ \sigma=\mathrm{id}_{U}$. $\sigma$ heißt Schnitt, falls zusätzlich $U=M$ gilt. Den Raum der differenzierbaren Schnitte bezeichnet man mit $\Gamma E$.
+\end{EXA}
+
+\begin{REM}{TEST-T25-01-33}{TESTRemark 3748}
+Sei $E \rightarrow B$ ein Faserbündel, seien $f_{0}, f_{1}: X \rightarrow B$ homotope Abbildungen, dann ist $f_{0}^{*} E \cong f_{1}^{*} E$.
+\end{REM}
+
+\begin{EXA}{TEST-T25-01-32}{TESTExample 737}
+Sei $E \rightarrow B$ ein Faserbündel, seien $f_{0}, f_{1}: X \rightarrow B$ homotope Abbildungen, dann ist $f_{0}^{*} E \cong f_{1}^{*} E$.
+\end{EXA}
+
+\begin{EXA}{TEST-T25-01-30}{TESTDefinition 23}
+Ist $\gamma: I \rightarrow M$ differenzierbar, so ist $\Gamma\left(\gamma^{*} T M\right)$ die Menge der Vektorfelder längs $\gamma$.
 \end{EXA}

@@ -97,64 +97,18 @@ def load_snip_project(req: LoadSnipProjectRequest):
     return projects[req.project_name]
 @app.post("/replace-body")
 def replace_body(req: ReplaceBodyRequest):
-    import re
-
-    def is_placeholder_body(text: str) -> bool:
-        return not text.strip() or text.strip().lower().startswith("% todo")
-
     if not LIB_JSON.exists():
         raise HTTPException(status_code=500, detail="Library.json not found")
 
-    # Load library
+    # Library laden
     data = json.loads(LIB_JSON.read_text(encoding="utf-8"))
     unit = next((u for u in data if u["UID"] == req.UID), None)
     if not unit:
         raise HTTPException(status_code=404, detail=f"Unit mit UID {req.UID} nicht gefunden")
 
-    # Load source .tex
-    source_path = SOURCE_DIR / req.project
-    if not source_path.exists():
-        raise HTTPException(status_code=404, detail=f"Quelldatei nicht gefunden: {source_path}")
+    # ❗ Die Quelldatei (.tex) wird NICHT mehr verändert – das übernimmt der Editor
 
-    tex = source_path.read_text(encoding="utf-8")
-    replaced = False
-    current_body = (unit.get("Body") or "").strip()
-
-    # --- Alte Umgebung suchen und Umgebung entfernen, Body erhalten ---
-    if current_body and not is_placeholder_body(current_body):
-        envname = unit["CTyp"]
-        uid = re.escape(unit["UnitID"])
-        pattern = rf"(\\begin{{{envname}}}{{{uid}}}{{.*?}}\n)(.*?)(\n\\end{{{envname}}})"
-        match = re.search(pattern, tex, flags=re.DOTALL)
-
-        if match:
-            old_body = match.group(2)
-            tex = tex[:match.start()] + old_body + tex[match.end():]
-            replaced = True
-            print("🧹 Alte Umgebung entfernt, Body erhalten")
-
-    # --- Neue Umgebung erzeugen ---
-    new_env = f"\\begin{{{req.CTyp}}}{{{unit['UnitID']}}}{{{req.Content}}}\n{req.newBody}\n\\end{{{req.CTyp}}}"
-
-    # --- Wenn keine Umgebung gefunden, versuche alten Body zu ersetzen ---
-    if not replaced and current_body and not is_placeholder_body(current_body):
-        escaped_old_body = re.escape(current_body)
-        match = re.search(escaped_old_body, tex, re.DOTALL)
-        if match:
-            tex = tex[:match.start()] + new_env + tex[match.end():]
-            replaced = True
-            print("🔁 Alter Body direkt ersetzt")
-
-    # --- Wenn gar nichts ersetzt wurde, einfach anhängen (z. B. TODO-Body) ---
-    if not replaced:
-        tex += "\n\n" + new_env.strip() + "\n"
-        print("➕ Neue Umgebung angehängt")
-        replaced = True
-
-    # --- Speichern ---
-    source_path.write_text(tex.strip(), encoding="utf-8")
-
-    # --- Update JSON ---
+    # Nur Library.json aktualisieren
     unit["Body"] = req.newBody
     unit["Content"] = req.Content
     unit["CTyp"] = req.CTyp
@@ -163,6 +117,7 @@ def replace_body(req: ReplaceBodyRequest):
         json.dump(data, f, indent=2, ensure_ascii=False)
 
     return {"status": "success", "unit": unit}
+
 
 
 
@@ -400,12 +355,16 @@ def load_source(project: str):
 
 @app.post("/save-source")
 def save_source(req: SaveSourceRequest):
-    safe = req.project.replace("/", "").replace("..", "")
-    tex_path = SOURCE_DIR / safe / f"{safe}.tex"
+    if not req.project:
+        raise HTTPException(status_code=400, detail="Kein Projekt angegeben")
+
+    tex_path = SOURCE_DIR / Path(req.project)
+
     if not tex_path.exists():
-        raise HTTPException(status_code=404, detail=f"{tex_path} not found")
+        raise HTTPException(status_code=404, detail=f"{tex_path} nicht gefunden")
+
     tex_path.write_text(req.content, encoding="utf-8")
-    return {"status": "saved", "project": safe}
+    return {"status": "saved", "project": req.project}
 
 def load_units():
     if not LIB_JSON.exists():

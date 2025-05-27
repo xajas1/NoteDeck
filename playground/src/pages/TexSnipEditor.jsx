@@ -176,55 +176,88 @@ import React, {
       if (!freezeParent) setParentTopic("")
       if (!freezeLitID) setLitID("")
     }
-  
+
+
     const handleReplaceSubmit = async () => {
-        if (!replaceMode || !selectedProject) return
+        if (!replaceMode || !selectedProject) return;
       
-        const editor = aceRef.current?.editor
-        const selected = editor.getSelectedText().trim()
+        const editor = aceRef.current?.editor;
+        const selected = editor.getSelectedText().trim();
       
         if (!selected) {
-          alert("❗ Bitte markiere einen Bereich im Editor.")
-          return
+          alert("❗ Bitte markiere einen Bereich im Editor.");
+          return;
         }
       
+        const { UID: uid, UnitID: unitID, CTyp: env, Content: content } = replaceMode;
+        const fullText = editor.getValue();
+      
+        const pattern = new RegExp(
+          `\\\\begin\\{${env}\\}\\{${unitID}\\}\\{.*?\\}\\n([\\s\\S]*?)\\n\\\\end\\{${env}\\}`,
+          "g"
+        );
+      
+        const wrapped = `\\begin{${env}}{${unitID}}{${content}}\n${selected}\n\\end{${env}}`;
+        let updatedText = fullText;
+      
+        if (pattern.test(fullText)) {
+          // 🧹 Alte Umgebung komplett löschen
+          updatedText = fullText.replace(pattern, "$1"); // nur den alten Body behalten
+      
+          // 🔍 Jetzt ersetze den alten Body im neuen Text durch den neuen wrapped-Body
+          const bodyPattern = new RegExp(
+            selected.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&"), "g"
+          );
+          if (bodyPattern.test(updatedText)) {
+            updatedText = updatedText.replace(bodyPattern, wrapped);
+            console.log("🧠 Alte Umgebung entfernt + neue Umgebung um markierten Text gesetzt");
+          } else {
+            // fallback: ans Ende
+            updatedText += "\n\n" + wrapped;
+            console.log("⚠️ Alte Umgebung entfernt, aber Text nicht gefunden – ans Ende gehängt");
+          }
+        } else {
+          // ➕ Kein vorheriger Body: einfach neuen um Markierung wickeln
+          const range = editor.getSelectionRange();
+          editor.session.replace(range, wrapped);
+          updatedText = editor.getValue();
+          console.log("✅ Neue Umgebung um markierten Bereich gesetzt");
+        }
+      
+        // 🧠 Speichern
+        await fetch("http://localhost:8000/save-source", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ project: selectedProject, content: updatedText }),
+        });
+      
+        // 🧠 JSON aktualisieren
         const payload = {
-          UID: replaceMode.UID,
+          UID: uid,
           project: selectedProject,
           newBody: selected,
-          Content: replaceMode.Content,
-          CTyp: replaceMode.CTyp
+          Content: content,
+          CTyp: env,
+        };
+      
+        const res = await fetch("http://localhost:8000/replace-body", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+      
+        const json = await res.json();
+        console.log("✅ Replace erfolgreich:", json);
+      
+        if (typeof onNewUnit === "function" && json.unit) {
+          onNewUnit(json.unit);
         }
       
-        try {
-          const res = await fetch("http://localhost:8000/replace-body", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-          })
+        setReplaceMode(null);
+        setBody(updatedText);
+      };
       
-          if (!res.ok) {
-            const errorData = await res.json()
-            console.error("❌ Replace fehlgeschlagen:", errorData)
-            alert(`❌ Replace fehlgeschlagen:\n${errorData.detail || "Unbekannter Fehler"}`)
-            return
-          }
-      
-          const json = await res.json()
-          console.log("✅ Replace erfolgreich:", json)
-      
-          if (json.unit && typeof onNewUnit === "function") {
-            onNewUnit(json.unit)
-          }
-      
-          setReplaceMode(null)
-          setBody(editor.getValue())  // neu geladenes Dokument im Editor anzeigen
-      
-        } catch (err) {
-          console.error("❌ Fehler beim Replace:", err)
-          alert("❌ Fehler beim Ersetzen (Netzwerk oder Serverfehler).")
-        }
-      }
+
       
       
 
@@ -333,6 +366,7 @@ import React, {
       </div>
     )
   })
+
   
   export default TexSnipEditor
   
