@@ -4,19 +4,31 @@
     "topics": {
       "Ringe Basics": {
         "index": 1,
-        "parent": "Ringe"
+        "parent": "Ringe",
+        "litIDs": {
+          "S23": "A-S23-01"
+        }
       },
       "Potenzreihenringe und Polynomringe": {
         "index": 2,
-        "parent": "Ringe"
+        "parent": "Ringe",
+        "litIDs": {
+          "S23": "A-S23-02"
+        }
       },
       "Ideale und Quotienten": {
         "index": 3,
-        "parent": "Ringe"
+        "parent": "Ringe",
+        "litIDs": {
+          "S23": "A-S23-03"
+        }
       },
       "Moduln Grundlagen": {
         "index": 4,
-        "parent": "Moduln"
+        "parent": "Moduln",
+        "litIDs": {
+          "S23": "A-S23-04"
+        }
       }
     }
   },
@@ -25,27 +37,45 @@
     "topics": {
       "Klassische Streutheorie": {
         "index": 1,
-        "parent": null
+        "parent": null,
+        "litIDs": {
+          "T12": "CM-T12-01"
+        }
       },
       "Wirkungsquerschnitt": {
         "index": 2,
-        "parent": "Klassische Streutheorie"
+        "parent": "Klassische Streutheorie",
+        "litIDs": {
+          "T12": "CM-T12-02"
+        }
       },
       "Berechnung des Wirkungsquerschnitts für elastische Streuung am Zentralpotential": {
         "index": 3,
-        "parent": "Klassische Streutheorie"
+        "parent": "Klassische Streutheorie",
+        "litIDs": {
+          "T12": "CM-T12-03"
+        }
       },
       "Rücktransformation ins Laborsystem": {
         "index": 4,
-        "parent": "Klassische Streutheorie"
+        "parent": "Klassische Streutheorie",
+        "litIDs": {
+          "T12": "CM-T12-04"
+        }
       },
       "2-Körper und effektives 1-Körper Problem": {
         "index": 5,
-        "parent": null
+        "parent": null,
+        "litIDs": {
+          "T12": "CM-T12-05"
+        }
       },
       "CM-ÜB-01: Streutheorie": {
         "index": 6,
-        "parent": "CM-ÜB"
+        "parent": "CM-ÜB",
+        "litIDs": {
+          "T12": "CM-T12-06"
+        }
       }
     }
   },
@@ -54,7 +84,10 @@
     "topics": {
       "Faserbündel": {
         "index": 1,
-        "parent": null
+        "parent": null,
+        "litIDs": {
+          "K25": "EFT1-K25-01"
+        }
       }
     }
   },
@@ -63,27 +96,45 @@
     "topics": {
       "Differentialoperatoren": {
         "index": 1,
-        "parent": "GPDE Basics"
+        "parent": "GPDE Basics",
+        "litIDs": {
+          "S25": "GPDE-S25-01"
+        }
       },
       "Regularitätsklassen": {
         "index": 2,
-        "parent": "GPDE Basics"
+        "parent": "GPDE Basics",
+        "litIDs": {
+          "S25": "GPDE-S25-02"
+        }
       },
       "Schwache Maximum Prinzipien": {
         "index": 3,
-        "parent": "Maximum Prinzipien"
+        "parent": "Maximum Prinzipien",
+        "litIDs": {
+          "S25": "GPDE-S25-03"
+        }
       },
       "Starke Maximum Prinzipien": {
         "index": 4,
-        "parent": "Maximum Prinzipien"
+        "parent": "Maximum Prinzipien",
+        "litIDs": {
+          "S25": "GPDE-S25-04"
+        }
       },
       "Hopf Lemma": {
         "index": 5,
-        "parent": "Maximum Prinzipien"
+        "parent": "Maximum Prinzipien",
+        "litIDs": {
+          "S25": "GPDE-S25-05"
+        }
       },
       "Vergleichsprinzipien für voll nicht-lineare Differentialoperatoren": {
         "index": 6,
-        "parent": "Maximum Prinzipien"
+        "parent": "Maximum Prinzipien",
+        "litIDs": {
+          "S25": "GPDE-S25-06"
+        }
       }
     }
   },
@@ -92,35 +143,59 @@
     "topics": {
       "Kategorien und Funktoren in HA": {
         "index": 1,
-        "parent": null
+        "parent": null,
+        "litIDs": {
+          "R79": "HA-R79-01"
+        }
       },
       "Moduln in HA": {
         "index": 2,
-        "parent": null
+        "parent": null,
+        "litIDs": {
+          "R79": "HA-R79-02"
+        }
       },
       "Abelsche Kategorien": {
         "index": 3,
-        "parent": null
+        "parent": null,
+        "litIDs": {
+          "R79": "HA-R79-03"
+        }
       },
       "Homologie Funktor in HA": {
         "index": 4,
-        "parent": null
+        "parent": null,
+        "litIDs": {
+          "R79": "HA-R79-04"
+        }
       },
       "Komplexe in HA": {
         "index": 5,
-        "parent": null
+        "parent": null,
+        "litIDs": {
+          "R79": "HA-R79-05"
+        }
       },
       "Hilftslemma für Diagramme der HA": {
         "index": 6,
-        "parent": null
+        "parent": null,
+        "litIDs": {
+          "R79": "HA-R79-06"
+        }
       },
       "Splitting": {
         "index": 7,
-        "parent": null
+        "parent": null,
+        "litIDs": {
+          "R79": "HA-R79-07"
+        }
       },
       "Kategorische Formulierung der Homologietheorie": {
         "index": 8,
-        "parent": null
+        "parent": null,
+        "litIDs": {
+          "R79": "HA-R79-08"
+        }
       }
     }
   },
@@ -129,79 +204,136 @@
     "topics": {
       "Schrödinger Gleichung": {
         "index": 1,
-        "parent": null
+        "parent": null,
+        "litIDs": {
+          "G25": "QM-G25-01"
+        }
       },
       "Wellenpakete in QM": {
         "index": 2,
-        "parent": "Schrödinger Gleichung"
+        "parent": "Schrödinger Gleichung",
+        "litIDs": {
+          "G25": "QM-G25-02"
+        }
       },
       "Herleitung für freie Teilchen": {
         "index": 3,
-        "parent": "Einführung der Schrödinger Gleichung"
+        "parent": "Einführung der Schrödinger Gleichung",
+        "litIDs": {
+          "G25": "QM-G25-03"
+        }
       },
       "Teilchen in äußeren Potentialen": {
         "index": 4,
-        "parent": "Einführung der Schrödinger Gleichung"
+        "parent": "Einführung der Schrödinger Gleichung",
+        "litIDs": {
+          "G25": "QM-G25-04"
+        }
       },
       "Operatoren": {
         "index": 5,
-        "parent": "Einführung der Schrödinger Gleichung"
+        "parent": "Einführung der Schrödinger Gleichung",
+        "litIDs": {
+          "G25": "QM-G25-05"
+        }
       },
       "Korrespondenz Prinzip": {
         "index": 6,
-        "parent": "Einführung der Schrödinger Gleichung"
+        "parent": "Einführung der Schrödinger Gleichung",
+        "litIDs": {
+          "G25": "QM-G25-06"
+        }
       },
       "Wahrscheinlichkeitsdichte": {
         "index": 7,
-        "parent": "Interpretation der Wellenfunktion"
+        "parent": "Interpretation der Wellenfunktion",
+        "litIDs": {
+          "G25": "QM-G25-07"
+        }
       },
       "Kontinuitätsgleichung": {
         "index": 8,
-        "parent": "Interpretation der Wellenfunktion"
+        "parent": "Interpretation der Wellenfunktion",
+        "litIDs": {
+          "G25": "QM-G25-08"
+        }
       },
       "Impulsraum": {
         "index": 9,
-        "parent": "Interpretation der Wellenfunktion"
+        "parent": "Interpretation der Wellenfunktion",
+        "litIDs": {
+          "G25": "QM-G25-09"
+        }
       },
       "Erwartungswert": {
         "index": 10,
-        "parent": "Interpretation der Wellenfunktion"
+        "parent": "Interpretation der Wellenfunktion",
+        "litIDs": {
+          "G25": "QM-G25-10"
+        }
       },
       "Beugung und Inferenz": {
         "index": 11,
-        "parent": "Interpretation der Wellenfunktion"
+        "parent": "Interpretation der Wellenfunktion",
+        "litIDs": {
+          "G25": "QM-G25-11"
+        }
       },
       "Hermitisch konjugierte Operatoren": {
         "index": 12,
-        "parent": "Ehrenfest Theorem"
+        "parent": "Ehrenfest Theorem",
+        "litIDs": {
+          "G25": "QM-G25-12"
+        }
       },
       "Bewegungsgleichung für Erwartungswert": {
         "index": 13,
-        "parent": "Ehrenfest Theorem"
+        "parent": "Ehrenfest Theorem",
+        "litIDs": {
+          "G25": "QM-G25-13"
+        }
       },
       "Quasiklassische Bewegung": {
         "index": 14,
-        "parent": "Ehrenfest Theorem"
+        "parent": "Ehrenfest Theorem",
+        "litIDs": {
+          "G25": "QM-G25-14"
+        }
       },
       "Stationäre Schrödinger Gleichung": {
         "index": 15,
-        "parent": "Eindimensionale Systeme"
+        "parent": "Eindimensionale Systeme",
+        "litIDs": {
+          "G25": "QM-G25-15"
+        }
       },
       "Eindimensionale Potentialstufe": {
         "index": 16,
-        "parent": "Eindimensionale Systeme"
+        "parent": "Eindimensionale Systeme",
+        "litIDs": {
+          "G25": "QM-G25-16"
+        }
       },
       "Streuzustände": {
         "index": 17,
-        "parent": "Eindimensionale Potentialstufe"
+        "parent": "Eindimensionale Potentialstufe",
+        "litIDs": {
+          "G25": "QM-G25-17"
+        }
       },
       "Reflektierte Zustände": {
         "index": 18,
-        "parent": "Eindimensionale Potentialstufe"
+        "parent": "Eindimensionale Potentialstufe",
+        "litIDs": {
+          "G25": "QM-G25-18"
+        }
       },
       "QM-ÜB-01: Delta-Distribution, Kommutator und W-keit": {
         "index": 19,
-        "parent": "QM-ÜB"
+        "parent": "QM-ÜB",
+        "litIDs": {
+          "G25": "QM-G25-19"
+        }
       }
     }
   },
@@ -210,7 +342,10 @@
     "topics": {
       "Raum Translation": {
         "index": 1,
-        "parent": "Symmetrie in Quantenmechanik"
+        "parent": "Symmetrie in Quantenmechanik",
+        "litIDs": {
+          "R25": "QMS-R25-01"
+        }
       }
     }
   },
@@ -219,39 +354,66 @@
     "topics": {
       "Untermannigfaltigkeiten im euklidischen Raum": {
         "index": 1,
-        "parent": "Differenzierbare Mannigfaltigkeiten"
+        "parent": "Differenzierbare Mannigfaltigkeiten",
+        "litIDs": {
+          "B25": "RG-B25-01"
+        }
       },
       "Glatte Mannigfaltigkeiten": {
         "index": 2,
-        "parent": "Differenzierbare Mannigfaltigkeiten"
+        "parent": "Differenzierbare Mannigfaltigkeiten",
+        "litIDs": {
+          "B25": "RG-B25-02"
+        }
       },
       "Glatte Abbildungen und Vektorfelder": {
         "index": 3,
-        "parent": "Differenzierbare Mannigfaltigkeiten"
+        "parent": "Differenzierbare Mannigfaltigkeiten",
+        "litIDs": {
+          "B25": "RG-B25-03"
+        }
       },
       "Riemannische Mannigfaltigkeiten": {
         "index": 4,
-        "parent": null
+        "parent": null,
+        "litIDs": {
+          "B25": "RG-B25-04"
+        }
       },
       "Levi-Civita Zusammenhang": {
         "index": 5,
-        "parent": "Riemannische Mannigfaltigkeiten"
+        "parent": "Riemannische Mannigfaltigkeiten",
+        "litIDs": {
+          "B25": "RG-B25-05"
+        }
       },
       "Kovariante Ableitung längs einer Kurve": {
         "index": 6,
-        "parent": "Riemannische Mannigfaltigkeiten"
+        "parent": "Riemannische Mannigfaltigkeiten",
+        "litIDs": {
+          "B25": "RG-B25-06"
+        }
       },
       "Paralleltransport": {
         "index": 7,
-        "parent": "Riemannische Mannigfaltigkeiten"
+        "parent": "Riemannische Mannigfaltigkeiten",
+        "litIDs": {
+          "B25": "RG-B25-07"
+        }
       },
       "RG-ÜB-01: Glatte Mannigfaltigkeiten": {
         "index": 8,
-        "parent": "RG-ÜB"
+        "parent": "RG-ÜB",
+        "litIDs": {
+          "B25": "RG-B25-08"
+        }
       },
       "RG-ÜB-02: Tangentialbündel und Hyperbolischer Raum": {
         "index": 9,
-        "parent": "RG-ÜB"
+        "parent": "RG-ÜB",
+        "litIDs": {
+          "B25": "RG-B25-09"
+        }
       }
     }
   },
@@ -260,19 +422,31 @@
     "topics": {
       "Basics der SHT": {
         "index": 1,
-        "parent": "Singuläre Homologie (SHT)"
+        "parent": "Singuläre Homologie (SHT)",
+        "litIDs": {
+          "T12": "TOP1-T12-01"
+        }
       },
       "Unterteilung  und Ausschneidung in SHT": {
         "index": 2,
-        "parent": "Singuläre Homologie (SHT)"
+        "parent": "Singuläre Homologie (SHT)",
+        "litIDs": {
+          "T12": "TOP1-T12-02"
+        }
       },
       "Absolute und Relative Homologie": {
         "index": 3,
-        "parent": null
+        "parent": null,
+        "litIDs": {
+          "T12": "TOP1-T12-03"
+        }
       },
       "Reduzierte Homologie": {
         "index": 4,
-        "parent": null
+        "parent": null,
+        "litIDs": {
+          "T12": "TOP1-T12-04"
+        }
       }
     }
   },
@@ -281,7 +455,10 @@
     "topics": {
       "TEST": {
         "index": 1,
-        "parent": null
+        "parent": null,
+        "litIDs": {
+          "T25": "TEST-T25-01"
+        }
       },
       "": {
         "index": 2,
@@ -289,35 +466,59 @@
       },
       "TEST2": {
         "index": 3,
-        "parent": "TEST"
+        "parent": "TEST",
+        "litIDs": {
+          "T25": "TEST-T25-03"
+        }
       },
       "TEST3": {
         "index": 4,
-        "parent": null
+        "parent": null,
+        "litIDs": {
+          "T25": "TEST-T25-04"
+        }
       },
       "TEST4": {
         "index": 5,
-        "parent": null
+        "parent": null,
+        "litIDs": {
+          "T25": "TEST-T25-05"
+        }
       },
       "TEST5": {
         "index": 6,
-        "parent": null
+        "parent": null,
+        "litIDs": {
+          "T25": "TEST-T25-06"
+        }
       },
       "TEST 6": {
         "index": 7,
-        "parent": null
+        "parent": null,
+        "litIDs": {
+          "T25": "TEST-T25-07"
+        }
       },
       "TEST 7": {
         "index": 8,
-        "parent": null
+        "parent": null,
+        "litIDs": {
+          "T25": "TEST-T25-08"
+        }
       },
       "TEST 8": {
         "index": 9,
-        "parent": null
+        "parent": null,
+        "litIDs": {
+          "T25": "TEST-T25-09"
+        }
       },
       "TEST 9": {
         "index": 10,
-        "parent": null
+        "parent": null,
+        "litIDs": {
+          "T25": "TEST-T25-10"
+        }
       },
       "TEST 10": {
         "index": 11,

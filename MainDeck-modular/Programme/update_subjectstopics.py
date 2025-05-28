@@ -2,8 +2,9 @@ import json
 from pathlib import Path
 from collections import defaultdict
 
-LIB_PATH = Path("MainDeck-modular/Library/Library.json")
-TOPICMAP_PATH = Path("MainDeck-modular/Library/SubjectsTopics.json")
+LIB_PATH = Path("/Users/tim/NoteDeck/MainDeck-modular/Library/Library.json")
+TOPICMAP_PATH = Path("/Users/tim/NoteDeck/MainDeck-modular/Library/SubjectsTopics.json")
+
 
 # Lade vorhandenes TopicMap (wenn vorhanden)
 if TOPICMAP_PATH.exists():
