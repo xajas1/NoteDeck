@@ -159,10 +159,9 @@
 \newenvironment{EXA}[2]{\begin{unitbox}\CustomHeading{Example}{#1}{#2}}{\end{unitbox}}
 \newenvironment{STUD}[2]{\begin{unitbox}\CustomHeading{Study}{#1}{#2}}{\end{unitbox}}
 \newenvironment{CONC}[2]{\begin{unitbox}\CustomHeading{Concept}{#1}{#2}}{\end{unitbox}}
+\newenvironment{PROOF}[2]{\begin{unitbox}\CustomHeading{Proof}{#1}{#2}}{\end{unitbox}}
 
-\newenvironment{PROOF}
-  {\begin{proof}}%
-{\end{proof}}
+
 
 % --- Unit Umgebung für Source-Inhalte ---
 \usepackage{mdframed}
@@ -242,13 +241,20 @@ This is meant to be a gentle introduction to the theory of knots, aimed specific
 
 
 \section{Knotting and unknotting}
-DEFINITION 1. A knot $K$ in a smooth 3-manifold $M^{3}$ is the image of a smooth non-singular imbedding $f: S^{1} \rightarrow M^{3}$.
+DEFINITION 1. 
+\begin{DEF}{KNO-S92-01-01}{Glatter Knoten}
+A knot $K$ in a smooth 3-manifold $M^{3}$ is the image of a smooth non-singular imbedding $f: S^{1} \rightarrow M^{3}$.
+\end{DEF}
 
 Here "non-singular" means that the derivative of f is non-zero and is included only to exclude the sort of pathological behavior shown in figure 1.
 
 Two knots are regarded as equivalent, or isotopic, if you can move one to the other in $M^{3}$. Explicitly
 
-DEFINITION 2. Two knots $K$ and $K^{\prime}$ are isotopic (write $K \sim K^{\prime}$ ) if there is a smooth non-singular level-preserving embedding $F: S^{1} \times I \rightarrow M \times I$ such that $F\left(S^{1} \times\{0\}\right)=K$ and $F\left(S^{1} \times\{1\}\right)=K^{\prime}$.
+DEFINITION 2. 
+
+\begin{DEF}{KNO-S92-01-02}{Isotopische Knoten}
+Two knots $K$ and $K^{\prime}$ are isotopic (write $K \sim K^{\prime}$ ) if there is a smooth non-singular level-preserving embedding $F: S^{1} \times I \rightarrow M \times I$ such that $F\left(S^{1} \times\{0\}\right)=K$ and $F\left(S^{1} \times\{1\}\right)=K^{\prime}$.
+\end{DEF}
 
 Once again non-singular is thrown in to eliminate pathological behavior. In particular, without it, all knots are unknotted! (See figure 2.)
 
@@ -270,12 +276,34 @@ Here we'll only be concerned with knots in 3 -space. Since topologists have a pr
 
 An advantage of working with knots in the 3 -sphere (or 3 -space) instead of an arbitrary 3 -manifold, is the following theorem, called the Alexander trick:
 
-THEOREM 1. $K \sim K^{\prime}$ in $S^{3}$ if and only if there is an orientation preserving diffeomorphism of $S^{3}$ carrying $K$ to $K^{\prime}$.
+THEOREM 1. 
 
-DEFINITION 3. $K$ is unknotted (or the unknot) if it is isotopic to $S^{1} \subset S^{3}$ (equivalently, to the round circle in the plane in 9 -space).
+\begin{DEF}{KNO-S92-01-03}{Charakterisierung von Isotopie für Knoten in $S^3$}
+$K \sim K^{\prime}$ in $S^{3}$ if and only if there is an orientation preserving diffeomorphism of $S^{3}$ carrying $K$ to $K^{\prime}$.
+\end{DEF}
+
+DEFINITION 3. 
+
+\begin{THEO}{KNO-S92-01-04}{Entknotet relativ zu $S^3$}
+$K$ is unknotted (or the unknot) if it is isotopic to $S^{1} \subset S^{3}$ (equivalently, to the round circle in the plane in 9 -space).
+\end{THEO}
 
 Here's an equivalent formulation:\\
-THEOREM 2. $K$ is unknotted in $S^{3}$ if and only if $K$ bounds a smooth disk in $S^{3}$.\\
+THEOREM 2. 
+
+\begin{THEO}{KNO-S92-01-05}{Charakterisierung von Entknotet relativ zu $S^3$}
+$K$ is unknotted in $S^{3}$ if and only if $K$ bounds a smooth disk in $S^{3}$.
+\end{THEO}
+
+Proof: 
+
+\begin{PROOF}{KNO-S92-01-06}{P: Charakterisierung von Entknotet relativ zu $S^3$}
+Suppose $K$ is unknotted in $S^{3}$, so there is a diffeomorphism of $S^{3}$ taking $K$ to $S^{1} \subset S^{3}$. Now $S^{1}$ bounds a hemisphere of $S^{2} \subset S^{3}$; carry the hemisphere back by the inverse of the diffeomorphism.
+
+Conversely, suppose $K$ bounds a smooth disk $D$ in $S^{3}$. A tiny neighborhood of the center of $D$ is essentially a flat round disk $D^{\prime}$, whose boundary is a round circle. The annulus $D-D^{\prime}$ then isotopes $K=\partial D$ to $\partial D^{\prime}$.
+\end{PROOF}
+
+
 \includegraphics[scale=0.2, center]{2025_05_21_037de704f595ce642d3eg-078(1)}
 
 Fig. 3. Polyhedral picture of trefoil knot.\\
@@ -283,9 +311,6 @@ Fig. 3. Polyhedral picture of trefoil knot.\\
 
 Fig. 4. Seifert surface for the trefoil knot.
 
-Proof: Suppose $K$ is unknotted in $S^{3}$, so there is a diffeomorphism of $S^{3}$ taking $K$ to $S^{1} \subset S^{3}$. Now $S^{1}$ bounds a hemisphere of $S^{2} \subset S^{3}$; carry the hemisphere back by the inverse of the diffeomorphism.
-
-Conversely, suppose $K$ bounds a smooth disk $D$ in $S^{3}$. A tiny neighborhood of the center of $D$ is essentially a flat round disk $D^{\prime}$, whose boundary is a round circle. The annulus $D-D^{\prime}$ then isotopes $K=\partial D$ to $\partial D^{\prime}$.
 
 
 
@@ -293,9 +318,17 @@ Conversely, suppose $K$ bounds a smooth disk $D$ in $S^{3}$. A tiny neighborhood
 
 Although only the unknot bounds a disk, a general statement holds for all knots:
 
-THEOREM 3. (Seifert) Any knot bounds some orientable surface in $S^{3}$.
+THEOREM 3. 
 
-Such a surface is called a Seifert surface of the knot. A Seifert surface of a knot isn't unique, even up to isotopy, for one can always attach tubes to a given surface and make it more complicated. Even if we restrict to the simplest possible Seifert surface, there are knots with infinitely many non-isotopic such surfaces. Nonetheless, the complexity of such surfaces is a useful indicator of the complexity of the knot.\\
+\begin{THEO}{KNO-S92-01-07}{Jeder Knoten ist der Rand einer orientierbaren Fläche in $S^3$}
+(Seifert) Any knot bounds some orientable surface in $S^{3}$.
+\end{THEO}
+
+\begin{REM}{KNO-S92-01-08}{Uneindeutigkeit der Seifertflächen}
+Such a surface is called a Seifert surface of the knot. A Seifert surface of a knot isn't unique, even up to isotopy, for one can always attach tubes to a given surface and make it more complicated. Even if we restrict to the simplest possible Seifert surface, there are knots with infinitely many non-isotopic such surfaces. Nonetheless, the complexity of such surfaces is a useful indicator of the complexity of the knot.
+\end{REM}
+
+
 \includegraphics[scale=0.2, center]{2025_05_21_037de704f595ce642d3eg-079}
 
 Fig. 5. A genus three surface.\\
@@ -303,15 +336,36 @@ Fig. 5. A genus three surface.\\
 
 Fig. 6. A regular neighborhood $\eta$ of a knot $K$.
 
-DEFINITION 4. A knot $K$ in $S^{3}$ has genus $n$ if it bounds an orientable surface of genus $n$, but not one of genus $n-1$.
+DEFINITION 4. 
+
+\begin{DEF}{KNO-S92-01-12}{Genus eines Knoten in $S^3$}
+A knot $K$ in $S^{3}$ has genus $n$ if it bounds an orientable surface of genus $n$, but not one of genus $n-1$.
+\end{DEF}
 
 Note: The Seifert surface in figure 4 and the following corollary show that the trefoil knot has genus one.
 
-COROLLARY 1. A knot $K$ has genus 0 if and only if it is unknotted.\\
-Proof: A genus 0 surface with one boundary component is a disk.\\
-THEOREM 4. A smooth knot $K$ has a tubular neighborhood. That is, there is a neighborhood $\eta(K)$ of $K$ so that the pair $(\eta(K) ; K)$ is diffeomorphic to $S^{1} \times\left(D^{2}, 0\right)$.
+COROLLARY 1. 
 
-DEFINITION 5. The boundary $\partial \eta(K)$ of a tubular neighborhood of $K$ is diffeomorphic to the torus $S^{1} \times S^{1}$. It contains two special circles:\\
+\begin{KORO}{KNO-S92-01-09}{Genus 0 Knoten ist äquivalent zu Entknotet}
+A knot $K$ has genus 0 if and only if it is unknotted.
+\end{KORO}
+
+\begin{KORO}{KNO-S92-01-10}{P: Genus 0 Knoten ist äquivalent zu Entknotet}
+Proof: A genus 0 surface with one boundary component is a disk.
+\end{KORO}
+
+
+THEOREM 4. 
+
+\begin{THEO}{KNO-S92-01-11}{Glatte Knoten haben tabulare Umgebungen}
+A smooth knot $K$ has a tubular neighborhood. That is, there is a neighborhood $\eta(K)$ of $K$ so that the pair $(\eta(K) ; K)$ is diffeomorphic to $S^{1} \times\left(D^{2}, 0\right)$.
+\end{THEO}
+
+
+DEFINITION 5. 
+
+\begin{DEF}{KNO-S92-01-13}{Rand von tabularen Knoten-Umgebungen sind diffeomorph zu $S^1\times S^1$ (Meridian, Longitude)}
+The boundary $\partial \eta(K)$ of a tubular neighborhood of $K$ is diffeomorphic to the torus $S^{1} \times S^{1}$. It contains two special circles:\\
 \includegraphics[scale=0.2, center]{2025_05_21_037de704f595ce642d3eg-080}
 
 Fig. 7. Meridian $\mu$ and longitude $\lambda$.
@@ -319,42 +373,77 @@ Fig. 7. Meridian $\mu$ and longitude $\lambda$.
 The meridian is the boundary of a cross-sectional disk $\{*\} \times D^{2} \subset S^{1} \times D^{2}$ and is denoted $\mu$.
 
 The longitude is denoted $\lambda$ and is the boundary of a Seifert surface.
+\end{DEF}
 
-THEOREM 5. The meridian and longitude of a knot $K$ are uniquely defined in $\partial \eta(K)$ up to isotopy.
 
+THEOREM 5. 
+
+\begin{DEF}{KNO-S92-01-14}{Meridan und Longitude von Knoten sind eindeutig bis auf Isotopie}
+The meridian and longitude of a knot $K$ are uniquely defined in $\partial \eta(K)$ up to isotopy.
+\end{DEF}
+
+\begin{THEO}{KNO-S92-01-15}{P: Meridan und Longitude von Knoten sind eindeutig bis auf Isotopie}
 Proof: The harder part is showing the uniqueness of $\lambda$. This can be done by studying the arcs of intersection of two different Seifert surfaces. Alternately, there's an easy proof from algebraic topology. First note that two simple closed curves $c$ and $c^{\prime}$ imbedded in $S^{1} \times S^{1}$ are isotopic if and only if the algebraic intersection $c \cdot c^{\prime}$ is trivial. If $S$ and $S^{\prime}$ are two Seifert surfaces for $K$, then $\partial S \cdot \partial S^{\prime}=\partial\left[S \cdot S^{\prime}\right]$. But $S \cdot S^{\prime}$ is in $H_{1}(M, \partial M)$, which is trivial.
+\end{THEO}
 
-Remark: The natural choice of circles $\lambda$ and $\mu$ then allows us to describe any simple closed curve on $\partial \eta(K)$ by a number in the extended rationals $Q \cup(\infty)$. The curve homologous to $p \mu+q \lambda$ we associate with the rational number $p / q$. (e. g. $\mu \rightarrow \infty$ ).
+Remark: 
+
+\begin{REM}{KNO-S92-01-16}{Charakterisierung von einfachen geschlossen Kurven im tabularen Rand durch Meridian und Longitude}
+The natural choice of circles $\lambda$ and $\mu$ then allows us to describe any simple closed curve on $\partial \eta(K)$ by a number in the extended rationals $Q \cup(\infty)$. The curve homologous to $p \mu+q \lambda$ we associate with the rational number $p / q$. (e. g. $\mu \rightarrow \infty$ ).
+\end{REM}
 
 
 
 \section{Winding, (w)rapping, and satellites}
 
-DEFINITION 6. Suppose $k$ is a knot in $S^{1} \times D^{2}$. Then the winding number of $k$, denoted $w(k)$, is the algebraic intersection $k \cdot D^{2}$ of $k$ with a crosssectional disk $\{*\} \times D^{2}$. Here algebraic intersection means that an intersection in one direction across the disk will cancel an intersection going in the other direction. In contrast, the wrapping number $r(k)$ of $k$ is the number of times which $k$ intersects $D^{2}$ (regardless of direction), minimized by isotopies of $k$ in $S^{1} \times D^{2}$.
+
+DEFINITION 6. 
+
+\begin{DEF}{KNO-S92-01-17}{Windungszahl und Wicklungszahl von Knoten in $S^1\times D^2$}
+Suppose $k$ is a knot in $S^{1} \times D^{2}$. Then the winding number of $k$, denoted $w(k)$, is the algebraic intersection $k \cdot D^{2}$ of $k$ with a crosssectional disk $\{*\} \times D^{2}$. Here algebraic intersection means that an intersection in one direction across the disk will cancel an intersection going in the other direction. 
+
+In contrast, the wrapping number $r(k)$ of $k$ is the number of times which $k$ intersects $D^{2}$ (regardless of direction), minimized by isotopies of $k$ in $S^{1} \times D^{2}$.
+\end{DEF}
 
 Figure 8 illustrates a knot which has winding number zero, but wrapping number 2.\\
 \includegraphics[scale=0.2, center]{2025_05_21_037de704f595ce642d3eg-081}
 
 Fig. 8. How to "double" a knot.
 
+\begin{REM}{KNO-S92-01-19}{Herleitung der Definition von Satelliten(Knoten)}
 One way of creating new knots is by imbedding simple closed curves in the tubular neighborhoods of other knots. Specifically, suppose $K$ is a knot in $S^{3}$. We would like to make the following preliminary definition: $k$ is a satellite of $K$ if $k \subset \eta(K)$.
 
 But a moments reflection shows that some caution is in order. Here are some problems:\\
 a) Any knot is a satellite of the unknot. Indeed, put a little loop $l$ around a given knot $k$. Then the complement of $l$ in $S^{3}$ is itself a (very large) regular neighborhood of an unnamed unknot. Since $k$ lies in the complement of $l, k$ would automatically be a satellite of the unknot.\\
 b) $k$ may be isotopic to $K$ in $\eta(K)$, so in effect $k$ is $K$.\\
 c) If $r(k)=0$ then $k$ misses a cross-sectional disk of $\eta(K)$. The complement of such a disk in $\eta(K)$ is just a 3-ball. Any knot can be isotoped into any 3-ball (just shrink $R^{3}$ ), so if we were to allow $r(k)=0$, then any knot would be a satellite of any other!
+\end{REM}
 
 With these things in mind we make the final
 
-DEFINITION 7. a) $k \subset \eta(K)$ is a satellite of $K$ if $r(k) \neq 0$ and $k$ is not isotopic to $K$ in $\eta(K)$.\\
+DEFINITION 7. 
+
+\begin{DEF}{KNO-S92-01-18}{Satellieten und Satelliten-Knoten}
+a) $k \subset \eta(K)$ is a satellite of $K$ if $r(k) \neq 0$ and $k$ is not isotopic to $K$ in $\eta(K)$.\\
 b) $k$ is a satellite knot if it's a satellite of $K$, for $K$ not the unknot.\\
 (Note that a satellite of the unknot is not necessarily a satellite knot!)
+\end{DEF}
 
-DEFINITION 8. Suppose $k$ is a satellite of $K$. The pattern of $k$ is $h(k)$, for $h: \eta(K) \rightarrow S^{1} \times D^{2}$. In general, ambiguity in the choice of $h$ from possible twisting of $S^{1} \times D^{2}$ would result in ambiguity of the pattern. This can be circumvented by insisting that the longitude in $\eta(K)$ go to $S^{1} \times\{*\}$, for some point * in $\partial D^{2}$.\\
+
+DEFINITION 8. 
+
+\begin{DEF}{KNO-S92-01-20}{Muster von Satellieten}
+Suppose $k$ is a satellite of $K$. The pattern of $k$ is $h(k)$, for $h: \eta(K) \rightarrow S^{1} \times D^{2}$. In general, ambiguity in the choice of $h$ from possible twisting of $S^{1} \times D^{2}$ would result in ambiguity of the pattern. This can be circumvented by insisting that the longitude in $\eta(K)$ go to $S^{1} \times\{*\}$, for some point * in $\partial D^{2}$.
+\end{DEF}
+
+
 \includegraphics[scale=0.2, center]{2025_05_21_037de704f595ce642d3eg-082}
+
 
 Fig. 9. How to cable a knot.
 
+
+\begin{EXA}{KNO-S92-01-21}{Beispiele für Satelliten Knoten}
 Some important examples of satellite knots are those obtained from the following patterns:
 
 \begin{enumerate}
@@ -362,11 +451,22 @@ Some important examples of satellite knots are those obtained from the following
   \item Parallels of a knot: Pick for $k$ several parallel copies of the core knot $K$. (Strictly speaking, this is a link, since there are several components).
   \item Cables of a knot: Let the pattern be the torus knot on $\partial \eta(K)$. See figure 9.
 \end{enumerate}
+\end{EXA}
 
 In some sense, detecting satellite knots is fairly easy, thanks to the following theorem of Alexander.
 
-THEOREM 6. Any $T^{2} \subset S^{3}$ bounds a solid torus on at least one side.\\
-COROLLARY 2. If there's a torus $T^{2} \subset S^{3}-k$ which is not parallel to $\partial \eta(k)$ and doesn't bound a solid torus in $S^{3}-k$, then $k$ is a satellite knot.
+THEOREM 6. 
+
+\begin{THEO}{KNO-S92-01-22}{$T^2\subset S^3$ beschränkt einen Volltorus}
+Any $T^{2} \subset S^{3}$ bounds a solid torus on at least one side.
+\end{THEO}
+
+
+COROLLARY 2. 
+
+\begin{KORO}{KNO-S92-01-23}{Charakterisierung von Satelliten-Knoten durch $T^2\subset S^3\backslash k$}
+If there's a torus $T^{2} \subset S^{3}-k$ which is not parallel to $\partial \eta(k)$ and doesn't bound a solid torus in $S^{3}-k$, then $k$ is a satellite knot.
+\end{KORO}
 
 
 

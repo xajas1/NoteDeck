@@ -175,6 +175,7 @@ import React, {
         ParentTopic: parentTopic,
         project: selectedProject,
       }
+      console.log("📤 Snip Payload:", payload)
   
       const res = await fetch("http://localhost:8000/snip", {
         method: "POST",
@@ -185,6 +186,7 @@ import React, {
       const json = await res.json()
       setResponse(json)
       if (json.unit && typeof onNewUnit === "function") {
+        console.log("✅ Unit empfangen:", json.unit)   
         onNewUnit(json.unit)
       }
                  

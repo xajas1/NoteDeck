@@ -537,5 +537,17 @@
         "parent": "Ringe"
       }
     }
+  },
+  "KNO": {
+    "index": 12,
+    "topics": {
+      "Glatte Knoten": {
+        "index": 1,
+        "parent": null,
+        "litIDs": {
+          "S92": "KNO-S92-1"
+        }
+      }
+    }
   }
 }

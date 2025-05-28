@@ -69,5 +69,20 @@
     "tableMeta": {
       "selectedSource": "RG_Test25/RG_Test25.tex"
     }
+  },
+  "KNO_S92": {
+    "sourceFile": "KNO_Scharlemann92/KNO_Scharlemann92.tex",
+    "snipMeta": {
+      "Subject": "KNO",
+      "Topic": "Glatte Knoten",
+      "LitID": "S92",
+      "CTyp": "DEF",
+      "ParentTopic": "Ringe",
+      "Content": "Glatter Knoten",
+      "selectedProject": "KNO_Scharlemann92/KNO_Scharlemann92.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "KNO_Scharlemann92/KNO_Scharlemann92.tex"
+    }
   }
 }
