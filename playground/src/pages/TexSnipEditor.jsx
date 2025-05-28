@@ -115,22 +115,47 @@ import React, {
     const topicExists = () =>
       topicMap[subject] && Object.keys(topicMap[subject].topics || {}).includes(topic)
   
-    const ensureTopicExists = async () => {
-      if (!topicExists()) {
-        const res = await fetch("http://localhost:8000/add-topic", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ Subject: subject, Topic: topic, ParentTopic: parentTopic || null }),
-        })
-        const json = await res.json()
-        setTopicMap(prev => {
-          const updated = { ...prev }
-          if (!updated[subject]) updated[subject] = { index: 99, topics: {} }
-          updated[subject].topics[topic] = { index: json.index, parent: parentTopic || null }
-          return updated
-        })
+      const ensureTopicExists = async () => {
+        if (!topicExists()) {
+          const payload = {
+            Subject: subject,
+            Topic: topic,
+            ParentTopic: parentTopic || null,
+            LitID: litID
+          }
+      
+          console.log("🛰 Sende Topic-POST:", payload)
+      
+          const res = await fetch("http://localhost:8000/add-topic", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          })
+      
+          const json = await res.json()
+      
+
+          console.log("🧪 ensureTopicExists → Subject:", subject, "Topic:", topic, "LitID:", litID)
+
+      
+          await fetch("http://localhost:8000/topic-map")
+            .then(res => res.json())
+            .then(setTopicMap)
+      
+          setTopicMap(prev => {
+            const updated = { ...prev }
+            if (!updated[subject]) updated[subject] = { index: 99, topics: {} }
+            if (!updated[subject].topics[topic])
+              updated[subject].topics[topic] = {
+                index: json.index,
+                parent: parentTopic || null,
+                litIDs: { [litID]: json.TopicID }  // optional sichtbar machen
+              }
+            return updated
+          })
+        }
       }
-    }
+      
   
     const handleSubmit = async () => {
       await ensureTopicExists()

@@ -7,6 +7,7 @@ import subprocess
 import os
 import re
 import uuid
+from typing import Optional
 from enum import Enum
 
 class CTypEnum(str, Enum):
@@ -70,6 +71,8 @@ class TopicAddRequest(BaseModel):
     Subject: str
     Topic: str
     ParentTopic: str | None = None
+    LitID: Optional[str] = None
+    
 
 class SaveSourceRequest(BaseModel):
     project: str
@@ -256,7 +259,7 @@ def create_snip(req: SnipRequest):
         "UnitID": unit_id,
         "Subject": req.Subject,
         "Topic": req.Topic,
-        "CTyp": req.CTyp,
+        "CTyp": req.CTyp.value if hasattr(req.CTyp, "value") else req.CTyp,
         "Content": req.Content,
         "LitID": req.LitID,
         "Layer": None,
@@ -313,40 +316,76 @@ def get_topic_map():
         raise HTTPException(status_code=404, detail="SubjectsTopics.json not found")
     return json.loads(TOPICMAP_JSON.read_text(encoding="utf-8"))
 
+
 @app.post("/add-topic")
-def add_topic(req: TopicAddRequest):
+def add_topic(req: TopicAddRequest = Body(...)):
+    print("📥 ADD TOPIC REQUEST:", req.dict())
     if not TOPICMAP_JSON.exists():
         raise HTTPException(status_code=404, detail="SubjectsTopics.json not found")
+    
     with TOPICMAP_JSON.open("r", encoding="utf-8") as f:
         data = json.load(f)
+
     subj = req.Subject
     topic = req.Topic
     parent = req.ParentTopic
+    litid = getattr(req, "LitID", None)
+
+    # Neues Subject anlegen
     if subj not in data:
         data[subj] = {
             "index": max([v["index"] for v in data.values()], default=0) + 1,
             "topics": {}
         }
-    if topic in data[subj]["topics"]:
+
+    topics = data[subj]["topics"]
+
+    # Topic existiert bereits
+    if topic in topics:
+        index = topics[topic]["index"]
+        # ➕ LitID ergänzen, falls vorhanden
+        if litid:
+            topics[topic].setdefault("litIDs", {})
+            topicid = f"{subj}-{litid}-{index}"
+            topics[topic]["litIDs"][litid] = topicid
+
+        # Speichern und Rückgabe
+        with TOPICMAP_JSON.open("w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2, ensure_ascii=False)
+
         return {
             "status": "exists",
-            "TopicPath": f"{parent}/{topic}" if parent else topic
+            "TopicPath": f"{parent}/{topic}" if parent else topic,
+            "TopicID": topics[topic].get("litIDs", {}).get(litid)
         }
-    next_index = max([t["index"] for t in data[subj]["topics"].values()], default=0) + 1
-    data[subj]["topics"][topic] = {
+
+    # Neues Topic anlegen
+    next_index = max([t["index"] for t in topics.values()], default=0) + 1
+    topic_entry = {
         "index": next_index,
         "parent": parent
     }
+
+    if litid:
+        topicid = f"{subj}-{litid}-{next_index}"
+        topic_entry["litIDs"] = {litid: topicid}
+
+    topics[topic] = topic_entry
+
     with TOPICMAP_JSON.open("w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
+
     topic_path = f"{parent}/{topic}" if parent else topic
+
     return {
         "status": "added",
         "Topic": topic,
         "Subject": subj,
         "TopicPath": topic_path,
-        "index": next_index
+        "index": next_index,
+        "TopicID": topic_entry.get("litIDs", {}).get(litid)
     }
+
 
 @app.get("/available-sources")
 def available_sources():

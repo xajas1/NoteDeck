@@ -437,17 +437,19 @@ $$
 $$
 \end{EXA}
 
-\begin{PROOF}{TEST-T25-03-04}{TESTRemark New Topic 44}
+\begin{KORO}{TEST-T25-03-04}{TESTRemark New Topic 44}
 eine Präbündelkarte gegeben.\\
 Sind $(U, \tilde{\varphi})$ und $(U, \tilde{\varphi})$ weitere Bündelkarten mit Bündelkartenwechsel $\omega: U \rightarrow$ $G L(k), \eta: U \rightarrow G L(\ell)$, so ist der Bündelkartenwechsel zwischen $\varphi$ und $\tilde{\varphi}$ durch
-\end{PROOF}
+\end{KORO}
 
+\begin{EXA}{TEST-T25-01-34}{TEST LITID}
 $$
 U \rightarrow G L(k+\ell), x \mapsto\left(\begin{array}{cc}
 \omega(x) & 0 \\
 0 & \eta(x)
 \end{array}\right)
 $$
+\end{EXA}
 
 gegeben, also differenzierbar.
 
@@ -489,6 +491,7 @@ Ist $\gamma: I \rightarrow M$ differenzierbar, so ist $\Gamma\left(\gamma^{*} T 
 \subsection*{1.19 Definition und Satz}
 
 \section*{Beweis:}
+\begin{EXA}{TEST-T25-04-01}{TEST LITID2}
 Sei $x \in N$ und $(U, \varphi)$ Bündelkarte um $f(x)$ für $E$. Dann ist $\left(f^{-1}(U), \tilde{\varphi}\right)$ mit
 
 $$
@@ -499,6 +502,7 @@ $$
 $$
 
 eine Präbündelkarte gegeben. Die Kartenwechsel sind dieselben wie die für $E \xrightarrow{\pi} M$, also differenzierbar.
+\end{EXA}
 
 \subsection*{1.20 Beispiel}
 Ist $\gamma: I \rightarrow M$ differenzierbar, so ist $\Gamma\left(\gamma^{*} T M\right)$ die Menge der Vektorfelder längs $\gamma$.
@@ -509,10 +513,18 @@ Ist $\gamma: I \rightarrow M$ differenzierbar, so ist $\Gamma\left(\gamma^{*} T 
 \subsection*{1.22 Bemerkung}
 
 \subsection*{1.23 Satz}
+\begin{PROOF}{TEST-T25-05-01}{TEST LITId 3}
 Sei $E \rightarrow B$ ein Faserbündel, seien $f_{0}, f_{1}: X \rightarrow B$ homotope Abbildungen, dann ist $f_{0}^{*} E \cong f_{1}^{*} E$.
+\end{PROOF}
 
 \subsection*{1.24 Korollar}
+\begin{CTypEnum.EXA}{TEST-T25-08-01}{TEST LITId 6}
+\begin{CTypEnum.EXA}{TEST-T25-07-01}{TEST LITId 5}
+\begin{CTypEnum.PROOF}{TEST-T25-06-01}{TEST LITId 4}
 Ist $B$ zusammenziehbar, also die Identität homotop zur konstanten Abbildung $c: B \rightarrow B, x \mapsto p$, so ist $E \rightarrow B$ trivial, denn $E=\mathrm{id}^{*} E \cong c^{*} E=B \times E_{p}$.
+\end{CTypEnum.PROOF}
+\end{CTypEnum.EXA}
+\end{CTypEnum.EXA}
 
 \section*{Beweis des Satzes:}
 \begin{EXA}{TEST-T25-01-27}{TESTExample7}
@@ -523,11 +535,15 @@ $
 $
 \end{EXA}
 
+\begin{EXA}{TEST-T25-09-01}{TEST LITId 7}
 Dann ist $\bigcup_{x \in B} \operatorname{Iso}_{G}\left(\xi_{x}, \xi_{x}^{\prime}\right)$ in kanonischer Weise ein Faserbündel mit typischer Faser $G$ und Strukturgruppe $G \times G$, die Schnitte in $\operatorname{Iso}_{G}\left(\xi_{x}, \xi_{x}^{\prime}\right)$ sind gerade die Bündelisomorphismen. Benutze nun die Homotopiehochhebungseigenschaft: Ist $(X, A)$ ein $C W$-Paar, (z.B. $(M, \partial M)$ ), $Y \rightarrow[0,1] \times X$ eine lokal triviale Faserung, $\sigma_{0}$ ein Schnitt in $Y \mid((0 \times X) \cup([0,1] \times A))$, dann ist $\sigma$ zu einem Schnitt in $Y$ fortsetzbar, vgl. z.B. Husemoller Fiber Bundles oder Hatcher Algebraic Geometry.\\
 Wende dies an auf das Bündel $\operatorname{Iso}_{G}\left([0,1] \times f_{0}^{*} E, h^{*} E\right)$, wobei $h:[0,1] \times X \rightarrow B$ die Homotopie zwiswchen $f_{0}$ und $f_{1}$ ist. Dann ist $\sigma(0, x)=\operatorname{id}_{E_{f_{0}(x)}}$ fortsetzbar zu einem Schnitt $\sigma$, und $\sigma$ und $\sigma(1, \cdot)$ ist der gesuchte Bündelisomorphismus.
+\end{EXA}
 
 \subsection*{1.25 Definition}
+\begin{CTypEnum.EXA}{TEST-T25-10-01}{TEST LITId 8}
 Ist $i: M_{0} \rightarrow M$ die Einbettung einer Untermannigfaltigkeit $M_{0}$ in $M$, so schreibt man statt $i^{*} E$ auch $\left.E\right|_{M_{0}}$.
+\end{CTypEnum.EXA}
 
 \subsection*{1.26 Definition}
 \begin{EXA}{TEST-T25-01-15}{TESTBeispiel144}
@@ -548,8 +564,10 @@ c) Ist $M_{0}$ eine Untermannigfaltigkeit, dann ist $\left.T M_{0} \subset T M\r
 \end{REM}
 
 \subsection*{1.28 Satz}
+\begin{PROOF}{TEST-T25-10-02}{TEST LITId 10}
 Ist $f: E \rightarrow F$ ein Vektorraumhomomorphismus von einem Vektorraumbündel der Dimension $k$ und $m$ und ist $\operatorname{rg} f_{x}=$ const.\\
 Dann ist $\operatorname{ker} f:=\bigcup_{x \in M} \operatorname{ker} f_{x} \subset E$ ein Untervektorraumbündel von $E$ und Bild $f:=\bigcup_{x \in M}$ Bild $f_{x} \subset F$ ein Untervektorraumbündel von $F$.
+\end{PROOF}
 
 \section*{Beweis:}
 Ohne Einschränkung sei $E=X \times \mathbb{R}^{k}, F=X \times \mathbb{R}^{m}$. Sei $r g f_{x}=r$.
