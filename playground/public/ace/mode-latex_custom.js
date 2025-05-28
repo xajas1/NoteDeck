@@ -19,7 +19,7 @@ ace.define("ace/mode/latex_custom", [
         },
         {
           token: "environment.envline",
-          regex: /\\begin\{(?:DEF|PROP|THEO|LEM|REM|EXA|KORO)\}\{.*?\}\{.*?\}/,
+          regex: /\\begin\{(?:DEF|PROP|THEO|LEM|REM|EXA|KORO|PROOF|MOT|EXE|STUD|CONC|OTH)\}\{.*?\}\{.*?\}/,
           next: "envBody"
         },
         {
@@ -30,7 +30,7 @@ ace.define("ace/mode/latex_custom", [
       envBody: [
         {
           token: "environment.envline", // gleicher Token wie begin
-          regex: /\\end\{(?:DEF|PROP|THEO|LEM|REM|EXA|KORO)\}/,
+          regex: /\\end\{(?:DEF|PROP|THEO|LEM|REM|EXA|KORO|PROOF|MOT|EXE|STUD|CONC|OTH)\}/,
           next: "start"
         },
         {

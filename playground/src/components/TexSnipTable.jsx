@@ -59,28 +59,23 @@ useEffect(() => {
     }
   }
 
+  const computeExpectedUnitID = (unit) => {
+    const subject = unit.Subject?.trim();
+    const litID = unit.LitID?.trim();
+    const topicIndex = getTopicIndex(subject, unit.Topic?.trim());
+  
+    // Versuche, die laufende Nummer aus der aktuellen UnitID zu extrahieren:
+    const parts = unit.UnitID?.split("-");
+    const unitNumber = parts?.[3] ?? "??";
+  
+    return `${subject}-${litID}-${topicIndex}-${unitNumber}`;
+  };
+  
   const isRenameRelevant = (unit) => {
-    const currentID = unit.UnitID?.split("-")
-    if (!currentID || currentID.length !== 4) return false
-
-    const [oldSubj, oldLitID, oldTopicIndex] = currentID
-    const newSubj = unit.Subject?.trim()
-    const newLitID = unit.LitID?.trim()
-    const newTopicIndex = getTopicIndex(newSubj, unit.Topic?.trim())
-
-    // const original = units.find(u => u.UnitID === unit.UnitID)
-    const original = originalUnitsRef.current.find(u => u.UnitID === unit.UnitID)
-    if (!original) return false
-
-    return (
-      oldSubj !== newSubj ||
-      oldLitID !== newLitID ||
-      oldTopicIndex !== newTopicIndex ||
-      original.Subject !== unit.Subject ||
-      original.Topic !== unit.Topic ||
-      original.LitID !== unit.LitID
-    )
-  }
+    // Wenn die erwartete ID bereits gleich der aktuellen ist: kein Rename nötig
+    return unit.UnitID !== computeExpectedUnitID(unit);
+  };
+  
 
 
   const computePreviewID = (unit) => {

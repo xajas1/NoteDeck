@@ -11835,5 +11835,43 @@
     "ParentTopic": "",
     "TopicPath": "TEST2",
     "Body": "Sind $E \\rightarrow M$ und $F \\rightarrow M$ zwei Vektorraumbündel der Dimension $k$ und $\\ell$, so ist\n\n$$\nE \\oplus F:=\\bigcup_{x \\in M} E_{x} \\oplus F_{x}\n$$\n\nein $k+\\ell$-dimensionales Prävektorraumbündel, also in kanonischer Weise ein Vektorraumbündel."
+  },
+  {
+    "UID": "11bca958-aa8d-42ab-a0ea-00f027bee22b",
+    "UnitID": "TEST-T25-03-03",
+    "Subject": "TEST",
+    "Topic": "TEST2",
+    "CTyp": "EXA",
+    "Content": "TESTRemark Ne Topic 3",
+    "LitID": "T25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/TEST2",
+    "Body": "Seien ( $U, \\varphi$ ) und ( $U, \\psi$ ) Bündelkarten für $E$ und $F$. Dann ist durch\n\n$$\n\\begin{aligned}\n\\phi: \\bigcup_{x \\in U} E_{x} \\oplus F_{x} & \\rightarrow U \\times\\left(\\mathbb{R}^{k} \\oplus \\mathbb{R}^{\\ell}\\right) \\\\\n(e, f) & \\mapsto\\left(\\pi_{E}(e)=\\pi_{F}(f)=: x, \\varphi_{x}(e), \\psi_{x}(f)\\right)\n\\end{aligned}\n$$"
+  },
+  {
+    "UID": "45901b1b-abc5-4504-bea9-10d924d809a5",
+    "UnitID": "TEST-T25-03-04",
+    "Subject": "TEST",
+    "Topic": "TEST2",
+    "CTyp": "PROOF",
+    "Content": "TESTRemark New Topic 44",
+    "LitID": "T25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "TEST2",
+    "Body": "eine Präbündelkarte gegeben.\\\\\nSind $(U, \\tilde{\\varphi})$ und $(U, \\tilde{\\varphi})$ weitere Bündelkarten mit Bündelkartenwechsel $\\omega: U \\rightarrow$ $G L(k), \\eta: U \\rightarrow G L(\\ell)$, so ist der Bündelkartenwechsel zwischen $\\varphi$ und $\\tilde{\\varphi}$ durch"
   }
 ]

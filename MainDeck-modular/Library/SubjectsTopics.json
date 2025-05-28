@@ -289,7 +289,7 @@
       },
       "TEST2": {
         "index": 3,
-        "parent": null
+        "parent": "TEST"
       }
     }
   },
