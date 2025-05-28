@@ -286,6 +286,10 @@
       "": {
         "index": 2,
         "parent": null
+      },
+      "TEST2": {
+        "index": 3,
+        "parent": null
       }
     }
   },
