@@ -2,9 +2,9 @@ import json
 from pathlib import Path
 
 # === Parameter anpassen ===
-subject_to_update = "HA"       # z.B. "QM"
-old_litid = "T12"              # aktuelle LitID
-new_litid = "R79"              # neue LitID
+subject_to_update = "EFT1"       # z.B. "QM"
+old_litid = "K25"              # aktuelle LitID
+new_litid = "K25a"              # neue LitID
 
 # === Pfad zur Library.json ===
 library_path = Path("/Users/tim/NoteDeck/MainDeck-modular/Library/Library.json")

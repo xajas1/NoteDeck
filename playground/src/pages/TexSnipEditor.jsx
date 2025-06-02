@@ -20,6 +20,7 @@ import React, {
     const [topic, setTopic] = useState("Ringe Basics")
     const [litID, setLitID] = useState("T12")
     const [ctyp, setCtyp] = useState("DEF")
+    const ctypRef = useRef(ctyp)
     const [parentTopic, setParentTopic] = useState("Ringe")
     const [content, setContent] = useState("")
     const [body, setBody] = useState("")
@@ -100,6 +101,11 @@ import React, {
         })
       }
     }, [subject, topic, litID, ctyp, parentTopic, content, selectedProject])
+
+    useEffect(() => {
+      ctypRef.current = ctyp
+    }, [ctyp])
+    
   
     // Inject custom highlight rules into ace
     useEffect(() => {
@@ -169,7 +175,7 @@ import React, {
         Subject: subject,
         Topic: topic,
         LitID: litID,
-        CTyp: ctyp,
+        CTyp: ctypRef.current,
         Content: content,
         Body: selectedText,
         ParentTopic: parentTopic,
@@ -192,7 +198,7 @@ import React, {
                  
   
       if (json.UnitID) {
-        const wrappedText = `\\begin{${ctyp}}{${json.UnitID}}{${content}}\n${selectedText}\n\\end{${ctyp}}`
+        const wrappedText = `\\begin{${ctypRef.current}}{${json.UnitID}}{${content}}\n${selectedText}\n\\end{${ctypRef.current}}`
         const range = editor.getSelectionRange()
         editor.session.replace(range, wrappedText)
         setBody(editor.getValue())

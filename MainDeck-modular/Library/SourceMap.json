@@ -6,7 +6,15 @@
   "GPDE_Scheuer25/GPDE_Scheuer25.tex": "S25",
   "A_Stix23/A_Stix23.tex": "S23",
   "HA_Rotman79/HA_Rotman79.tex": "R79",
-  "EFT1_Kraus25/EFT1_Kraus.tex": "K25a",
+  "EFT1_Kraus25/EFT1_Kraus25.tex": "K25a",
   "LIE_Kraus25/LIE_Kraus25": "K25b",
-  "KNO_Scharlemann92/KNO_Scharlemann92.tex": "S92"
+  "KNO_Scharlemann92/KNO_Scharlemann92.tex": "S92",
+  "KNO_Burde14/KNO_Burde14.tex": "B14",
+  "DT_Milnor65/DT_Milnor65.tex": "M65",
+  "GPDE_Chow04/GPDE_Chow04.tex": "C04",
+  "AT_Haller09/AT_Haller09.tex": "H09",
+  "GPDE_Andrews11/GPDE_Andrews11.tex": "A11",
+  "GA_Lee13/GA_Lee13.tex": "L13"
 }
+
+

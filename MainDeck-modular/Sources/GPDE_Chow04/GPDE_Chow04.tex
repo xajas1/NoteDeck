@@ -1,0 +1,638 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17  Graphik
+% 18  Extra
+% 00. Titel und Autor
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\begin{unitbox}\CustomHeading{Definition}{#1}{#2}}{\end{unitbox}}
+\newenvironment{PROP}[2]{\begin{unitbox}\CustomHeading{Proposition}{#1}{#2}}{\end{unitbox}}
+\newenvironment{THEO}[2]{\begin{unitbox}\CustomHeading{Theorem}{#1}{#2}}{\end{unitbox}}
+\newenvironment{LEM}[2]{\begin{unitbox}\CustomHeading{Lemma}{#1}{#2}}{\end{unitbox}}
+\newenvironment{KORO}[2]{\begin{unitbox}\CustomHeading{Corollar}{#1}{#2}}{\end{unitbox}}
+\newenvironment{REM}[2]{\begin{unitbox}\CustomHeading{Remark}{#1}{#2}}{\end{unitbox}}
+\newenvironment{EXA}[2]{\begin{unitbox}\CustomHeading{Example}{#1}{#2}}{\end{unitbox}}
+\newenvironment{STUD}[2]{\begin{unitbox}\CustomHeading{Study}{#1}{#2}}{\end{unitbox}}
+\newenvironment{CONC}[2]{\begin{unitbox}\CustomHeading{Concept}{#1}{#2}}{\end{unitbox}}
+\newenvironment{OTH}[2]{\begin{unitbox}\CustomHeading{Other}{#1}{#2}}{\end{unitbox}}
+\newenvironment{EXE}[2]{\begin{unitbox}\CustomHeading{Exercise}{#1}{#2}}{\end{unitbox}}
+\newenvironment{MOT}[2]{\begin{unitbox}\CustomHeading{Motivation}{#1}{#2}}{\end{unitbox}}
+\newenvironment{PROOF}[2]{\begin{unitbox}\CustomHeading{Proof}{#1}{#2}}{\end{unitbox}}
+
+% --- Unit Umgebung für Source-Inhalte ---
+\usepackage{mdframed}
+\newmdenv[
+  linewidth=1pt,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftmargin=0cm,
+  rightmargin=0cm,
+  skipabove=10pt,
+  skipbelow=10pt,
+  innertopmargin=0.5\baselineskip,
+  innerbottommargin=0.5\baselineskip,
+  backgroundcolor=gray!10,
+  linecolor=gray
+]{unitbox}
+
+\newenvironment{unit}[1]
+  {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
+  {\end{unitbox}}
+
+% --- 17. Graphik ---
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage[export]{adjustbox}
+
+% --- 18. Extras ---
+\usepackage{stmaryrd}
+\usepackage{bbold}  % falls du athbb{1} nutzen willst
+
+% --- 00. Titel und Autor ---
+\title{Mein Titel}
+\author{Tim Jaschik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+Kurze Beschreibung …
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\tableofcontents
+
+\pagebreak
+
+\section{Maximum principles}
+
+
+
+Maximum principles are among the most important tools in the study of second-order parabolic differential equations. Moreover, they are robust enough to be effective on manifolds. For this reason, they are particularly useful for the study of the Ricci flow. In this chapter, we review some basic theorems of this type. For pedagogical reasons, the chapter is organized as follows: we begin with the most elementary results and then introduce progressively more general ones. We conclude by stating some powerful and advanced theorems and then presenting a brief discussion of strong maximum principles.
+
+
+\subsection{Weak maximum principles for scalar equations}
+
+
+\subsubsection{The heat equation with a gradient term. }
+
+The heat equation is the prototype for parabolic equations. One of the most important properties it satisfies is the maximum principle. On a compact manifold, the maximum principle says that whatever pointwise bounds hold for a smooth solution to the heat equation at the initial time $t=0$ persist for times $t>0$.
+
+Proposition 4.1 (scalar maximum principle, first version: pointwise bounds are preserved). Let $u: \mathcal{M}^n \times[0, T) \rightarrow \mathbb{R}$ be a $C^2$ solution to the heat equation
+
+$$
+\frac{\partial u}{\partial t}=\Delta_g u
+$$
+
+on a closed Riemannian manifold, where $\Delta_g$ denotes the Laplacian with respect to the metric $g$. If there are constants $C_1 \leq C_2 \in \mathbb{R}$ such that $C_1 \leq u(x, 0) \leq C_2$ for all $x \in \mathcal{M}^n$, then $C_1 \leq u(x, t) \leq C_2$ for all $x \in \mathcal{M}^n$ and $t \in[0, T)$.
+
+The proposition follows immediately from a more general result in which one allows a gradient term on the right-hand side. Let $g(t): t \in[0, T)$ be a 1-parameter family of Riemannian metrics and $X(t): t \in[0, T)$ a 1parameter family of vector fields on a closed manifold $\mathcal{M}^n$. We say a $C^2$ function $u: \mathcal{M}^n \times[0, T) \rightarrow \mathbb{R}$ is a supersolution to the heat-type equation
+
+$$
+\frac{\partial v}{\partial t}=\Delta_{g(t)} v+\langle X, \nabla v\rangle
+$$
+
+at $(x, t) \in \mathcal{M}^n \times[0, T)$ if
+
+$$
+\frac{\partial u}{\partial t}(x, t) \geq\left(\Delta_{g(t)} u\right)(x, t)+\langle X, \nabla u\rangle(x, t) .
+$$
+
+
+THEOREM 4.2 (scalar maximum principle, second version: lower bounds are preserved for supersolutions). 
+
+Let $g(t): t \in[0, T)$ be a 1 -parameter family of Riemannian metrics and $X(t): t \in[0, T)$ a 1 -parameter family of vector fields on a closed manifold $\mathcal{M}^n$. Let $u: \mathcal{M}^n \times[0, T) \rightarrow \mathbb{R}$ be a $C^2$ function. Suppose that there exists $\alpha \in \mathbb{R}$ such that $u(x, 0) \geq \alpha$ for all $x \in \mathcal{M}^n$ and that $u$ is a supersolution of the heat equation at any $(x, t) \in \mathcal{M}^n \times[0, T)$ such that $u(x, t)<\alpha$. Then $u(x, t) \geq \alpha$ for all $x \in \mathcal{M}^n$ and $t \in[0, T)$.
+
+The idea of the proof is eminently simple: in essence, one just applies the first and second derivative tests in calculus.
+
+Proof. If $H: \mathcal{M}^n \times[0, T) \rightarrow \mathbb{R}$ is a $C^2$ function and $\left(x_0, t_0\right)$ is a point and time where $H$ attains its minimum among all points and earlier times, namely
+
+$$
+H\left(x_0, t_0\right)=\min _{\mathcal{M}^n \times\left[0, t_0\right]} H
+$$
+
+then
+
+$$
+\begin{aligned}
+\frac{\partial H}{\partial t}\left(x_0, t_0\right) & \leq 0 \\
+\nabla H\left(x_0, t_0\right) & =0 \\
+\Delta H\left(x_0, t_0\right) & \geq 0
+\end{aligned}
+$$
+
+
+Consider the function $H$ defined by
+
+$$
+H(x, t) \doteqdot[u(x, t)-\alpha]+\varepsilon t+\varepsilon,
+$$
+
+where $\varepsilon$ is any positive number. Note that $H \geq \varepsilon>0$ at $t=0$. Using (4.1), we find that $H$ satisfies
+
+$$
+\frac{\partial H}{\partial t} \geq \Delta H+\langle X, \nabla H\rangle+\varepsilon
+$$
+
+at any point where $u<\alpha$. To prove the theorem, it will suffice to prove the claim that $H>0$ for all $t \in[0, T)$. To prove that claim, suppose that $H \leq 0$ at some $\left(x_1, t_1\right) \in \mathcal{M}^n \times[0, T)$. Then since $\mathcal{M}^n$ is compact and $H>0$ at $t=0$, there is a first time $t_0 \in\left(0, t_1\right]$ such that there exists a point $x_0 \in \mathcal{M}^n$ such that $H\left(x_0, t_0\right)=0$. Then since
+
+$$
+u\left(x_0, t_0\right)=\alpha-\varepsilon t_0-\varepsilon<\alpha
+$$
+
+combining (4.2) with (4.3) implies that
+
+$$
+0 \geq \frac{\partial H}{\partial t}\left(x_0, t_0\right) \geq \Delta H\left(x_0, t_0\right)+\langle X, \nabla H\rangle\left(x_0, t_0\right)+\varepsilon \geq \varepsilon>0
+$$
+
+
+This contradiction proves the claim and hence the theorem.
+
+
+
+\subsection{The heat equation with a linear reaction term }
+
+More generally, one may add in a reaction term. We first consider the case where the reaction term is linear. In particular, if $g(t)$ is a 1-parameter family of metrics, $X(t)$ is a 1-parameter family of vector fields, and $\beta: \mathcal{M}^n \times[0, T) \rightarrow \mathbb{R}$ is a given function, we say $u$ is a supersolution to the linear heat equation
+
+$$
+\frac{\partial v}{\partial t}=\Delta_{g(t)} v+\langle X, \nabla v\rangle+\beta v
+$$
+
+at any points and times where
+
+$$
+\frac{\partial u}{\partial t} \geq \Delta_{g(t)} u+\langle X, \nabla u\rangle+\beta u .
+$$
+
+
+Proposition 4.3 (scalar maximum principle, third version: linear reaction terms preserve lower bounds). 
+
+Let $u: \mathcal{M}^n \times[0, T) \rightarrow \mathbb{R}$ be a $C^2$ supersolution to (4.4) on a closed manifold. Suppose that for each $\tau \in[0, T)$, there exists a constant $C_\tau<\infty$ such that $\beta(x, t) \leq C_\tau$ for all $x \in \mathcal{M}^n$ and $t \in[0, \tau]$. If $u(x, 0) \geq 0$ for all $x \in \mathcal{M}^n$, then $u(x, t) \geq 0$ for all $x \in \mathcal{M}^n$ and $t \in[0, T)$.
+
+Proof. Given $\tau \in(0, T)$, define
+
+$$
+J(x, t) \doteqdot e^{-C_\tau t} u(x, t)
+$$
+
+where $C_\tau$ is as in the hypothesis. One computes that
+
+$$
+\frac{\partial J}{\partial t} \geq \Delta_{g(t)} J+\langle X, \nabla J\rangle+\left(\beta-C_\tau\right) J
+$$
+
+
+Since $\beta-C_\tau \leq 0$ on $\mathcal{M}^n \times[0, \tau]$, one has
+
+$$
+\frac{\partial J}{\partial t}(x, t) \geq\left(\Delta_{g(t)} J\right)(x, t)+\langle X, \nabla J\rangle(x, t)
+$$
+
+for all $(x, t) \in \mathcal{M}^n \times[0, \tau]$ such that $J(x, t) \leq 0$. By Theorem 4.2, one concludes that $J \geq 0$ on $\mathcal{M}^n \times[0, \tau)$. Hence $u \geq 0$ on $\mathcal{M}^n \times[0, \tau)$. Since $\tau \in(0, T)$ was arbitrary, the proposition follows.
+1.3. The heat equation with a nonlinear reaction term. Now we treat the case where the reaction term is nonlinear. In particular, we consider the semilinear heat equation
+
+$$
+\frac{\partial v}{\partial t}=\Delta_{g(t)} v+\langle X, \nabla v\rangle+F(v)
+$$
+
+where $g(t)$ is a 1-parameter family of metrics, $X(t)$ is a 1-parameter family of vector fields, and $F: \mathbb{R} \rightarrow \mathbb{R}$ is a locally Lipschitz function. We say $u$ is a supersolution of (4.5) if
+
+$$
+\frac{\partial u}{\partial t} \geq \Delta_{g(t)} u+\langle X, \nabla u\rangle+F(u)
+$$
+
+and a subsolution if
+
+$$
+\frac{\partial u}{\partial t} \leq \Delta_{g(t)} u+\langle X, \nabla u\rangle+F(u) .
+$$
+
+
+THEOREM 4.4 (scalar maximum principle, fourth version: ODE gives pointwise bounds for PDE). 
+
+Let $u: \mathcal{M}^n \times[0, T) \rightarrow \mathbb{R}$ be a $C^2$ supersolution to (4.5) on a closed manifold. Suppose there exists $C_1 \in \mathbb{R}$ such that that $u(x, 0) \geq C_1$ for all $x \in \mathcal{M}^n$, and let $\varphi_1$ be the solution to the associated ordinary differential equation
+
+$$
+\frac{d \varphi_1}{d t}=F\left(\varphi_1\right)
+$$
+
+satisfying
+
+$$
+\varphi_1(0)=C_1 .
+$$
+
+
+Then
+
+$$
+u(x, t) \geq \varphi_1(t)
+$$
+
+for all $x \in \mathcal{M}^n$ and $t \in[0, T)$ such that $\varphi_1(t)$ exists.
+Similarly, suppose that $u$ is a subsolution to (4.4) and $u(x, 0) \leq C_2$ for all $x \in M$. Let $\varphi_2(t)$ be the solution to the initial value problem
+
+$$
+\begin{aligned}
+\frac{d \varphi_2}{d t} & =F\left(\varphi_2\right) \\
+\varphi_2(0) & =C_2
+\end{aligned}
+$$
+
+
+Then
+
+$$
+u(x, t) \leq \varphi_2(t)
+$$
+
+for all $x \in \mathcal{M}^n$ and $t \in[0, T)$ such that $\varphi_2(t)$ exists.
+Proof. We will just prove the lower bound, since the upper bound is similar. We compute that
+
+$$
+\frac{\partial}{\partial t}\left(u-\varphi_1\right) \geq \Delta\left(u-\varphi_1\right)+\left\langle X, \nabla\left(u-\varphi_1\right)\right\rangle+F(u)-F\left(\varphi_1\right) .
+$$
+
+The assumptions on the initial data imply that $u-\varphi_1 \geq 0$ at $t=0$. We claim that $u-\varphi_1 \geq 0$ for all $t \in[0, T)$. To prove the claim, let $\tau \in(0, T)$ be given. Since $\mathcal{M}^n$ is compact, there exists a constant $C_\tau<\infty$ such that $|u(x, t)| \leq C_\tau$ and $\left|\varphi_1(t)\right| \leq C_\tau$ for all $(x, t) \in \mathcal{M}^n \times[0, \tau]$. Since $F$ is locally Lipschitz, there exists a constant $L_\tau<\infty$ such that
+
+$$
+|F(v)-F(w)| \leq L_\tau|v-w|
+$$
+
+for all $v, w \in\left[-C_\tau, C_\tau\right]$. Hence we have
+
+$$
+\frac{\partial}{\partial t}\left(u-\varphi_1\right) \geq \Delta\left(u-\varphi_1\right)+\left\langle X, \nabla\left(u-\varphi_1\right)\right\rangle-L_\tau \operatorname{sgn}\left(u-\varphi_1\right) \cdot\left(u-\varphi_1\right)
+$$
+
+on $\mathcal{M}^n \times[0, \tau]$, where $\operatorname{sgn}(\cdot) \in\{-1,0,1\}$ denotes the signum function. Applying Proposition 4.3 with $\beta \doteqdot-L_\tau \operatorname{sgn}\left(u-\varphi_1\right)$, we obtain
+
+$$
+u-\varphi_1 \geq 0
+$$
+
+on $\mathcal{M}^n \times[0, \tau]$. This proves the claim. The theorem follows, since $\tau \in(0, T)$ was arbitrary.
+
+
+
+REMARK 4.5. In what follows, we shall freely apply Theorem 4.4 without explicit reference by simply invoking the (parabolic) maximum principle.
+
+
+
+\pagebreak
+
+\subsection{Weak maximum principles for tensor equations}
+
+
+The maximum principle is extremely robust: it applies to general classes of second-order parabolic equations and even to some systems, such as the Ricci flow. The following result is a simple example of the maximum principle for systems. Recall that one writes $A \geq 0$ for a symmetric 2 -tensor $A$ if the quadratic form induced by $A$ is positive semidefinite.
+
+
+
+THEOREM 4.6 (tensor maximum principle, first version: non-negativity is preserved). 
+
+\begin{THEO}{GPDE-C04-07-01}{Tensor Maximum Prinzip (Nicht-Negativität wird erhalten)}
+Let $g(t)$ be a smooth 1-parameter family of Riemannian metrics on a closed manifold $\mathcal{M}^n$. Let $\alpha(t) \in C^{\infty}\left(T^* \mathcal{M}^n \otimes_S T^* \mathcal{M}^n\right)$ be a symmetric $(2,0)$-tensor satisfying the semilinear heat equation
+$$
+\frac{\partial}{\partial t} \alpha \geq \Delta_{g(t)} \alpha+\beta,
+$$
+where $\beta(\alpha, g, t)$ is a symmetric ( 2,0 )-tensor which is locally Lipschitz in all its arguments and satisfies the null eigenvector assumption that
+$$
+\beta(V, V)(x, t)=\left(\beta_{i j} V^i V^j\right)(x, t) \geq 0
+$$
+whenever $V(x, t)$ is a null eigenvector of $\alpha(t)$, that is whenever
+$$
+\left(\alpha_{i j} V^j\right)(x, t)=0
+$$
+If $\alpha(0) \geq 0$ (that is, if $\alpha(0)$ is positive semidefinite), then $\alpha(t) \geq 0$ for all $t \geq 0$ such that the solution exists.
+\end{THEO}
+
+
+
+This result is in a sense a prototype for more advanced tensor maximum principles that we shall encounter later. So before giving the full proof, we will describe the strategy and key concepts behind it.
+
+
+Idea OF THE PROOF. 
+
+\begin{CONC}{GPDE-C04-07-02}{PI: Tensor Maximum Prinzip (Nicht-Negativität wird erhalten)}
+Recall that one proves the scalar maximum principle (for example, Theorem 4.2) by a purely local argument at a point and the first time when the solution becomes zero. The tensor maximum principle essentially follows from the scalar maximum principle by applying the tensor to a fixed vector field. To illustrate this, suppose that $\alpha>0$ for all $0 \leq t<t_0$, but that $\left(x_0, t_0\right)$ is a point and time and $v \in T_{x_0} \mathcal{M}^n$ is a vector such that
+$$
+\alpha_{i j} v^j\left(x_0, t_0\right)=0
+$$
+Then $\alpha_{i j} W^i W^j(x, t) \geq 0$ for all $x \in \mathcal{M}^n, t \in\left[0, t_0\right]$, and tangent vectors $W \in T_x \mathcal{M}^n$. One wants to extend $v$ to a vector field $V$ defined in a spacetime neighborhood of $\left(x_0, t_0\right)$ such that $V\left(x_0, t_0\right)=v$ and
+$$
+\begin{aligned}
+& \frac{\partial V}{\partial t}\left(x_0, t_0\right)=0, \\
+& \nabla V\left(x_0, t_0\right)=0, \\
+& \Delta V\left(x_0, t_0\right)=0 .
+\end{aligned}
+$$
+This may be accomplished by parallel translation (with respect to $g\left(t_0\right)$ ) of $v$ in space along geodesic rays (with respect to $g\left(t_0\right)$ ) emanating from $x_0$, and then taking $V$ to be independent of time. To see that the Laplacian of $V$ vanishes at ( $x_0, t_0$ ), choose any frame $\left\{e_i \in T_{x_0} \mathcal{M}^n\right\}_{i=1}^n$ which is orthonormal with respect to $g\left(t_0\right)$ and parallel translate it in a spatial neighborhood along geodesic rays emanating from $x_0$. With respect to this local orthonormal frame, the Laplacian of $V$ is
+$$
+\begin{aligned}
+\Delta V\left(x_0, t_0\right) & =\sum_{i=1}^n\left[\nabla_{e_i}\left(\nabla_{e_i} V\right)-\nabla_{\nabla_{e_i} e_i} V\right]\left(x_0, t_0\right) \\
+& =\sum_{i=1}^n\left[\nabla_{e_i} \overrightarrow{0}-\nabla_{\overrightarrow{0}} V\right]\left(x_0, t_0\right)=\overrightarrow{0}
+\end{aligned}
+$$
+Then at any point in the space-time neighborhood of ( $x_0, t_0$ ), one has
+$$
+\frac{\partial}{\partial t}\left(\alpha_{i j} V^i V^j\right)=\left(\frac{\partial}{\partial t} \alpha_{i j}\right) V^i V^j=\left(\Delta \alpha_{i j}+\beta_{i j}\right) V^i V^j
+$$
+Now since $\left(\alpha_{i j} V^i V^j\right)\left(x_0, t_0\right)=0$ and $\left(\alpha_{i j} V^i V^j\right)\left(x, t_0\right) \geq 0$ for all $x$ in a spatial neighborhood of $x_0$, one has
+$$
+\Delta\left(\alpha_{i j} V^i V^j\right) \geq 0
+$$
+But equations (4.6) imply that at $\left(x_0, t_0\right)$,
+$$
+\Delta\left(\alpha_{i j} V^i V^j\right)=\left(\Delta \alpha_{i j}\right) V^i V^j
+$$
+Combining these observations with the assumption
+$$
+\left(\beta_{i j} V^i V^j\right)\left(x_0, t_0\right) \geq 0
+$$
+shows that
+$$
+\frac{\partial}{\partial t}\left(\alpha_{i j} V^i V^j\right)=\Delta\left(\alpha_{i j} V^i V^j\right)+\beta_{i j} V^i V^j \geq 0
+$$
+at $\left(x_0, t_0\right)$. Hence, if $\alpha_{i j} V^i V^j$ ever becomes zero, it cannot decrease further.
+Now we give the rest of the argument.
+\end{CONC}
+
+
+Proof of Theorem 4.6. 
+
+\begin{PROOF}{GPDE-C04-07-03}{P: Tensor Maximum Prinzip (Nicht-Negativität wird erhalten)}
+Given any $\tau \in(0, T)$, we shall show that there exists $\delta \in(0, \tau]$ such that for all $t_0 \in[0, \tau-\delta]$, if $\alpha \geq 0$ at $t=t_0$, then $\alpha \geq 0$ on $M \times\left[t_0, t_0+\delta\right]$. The theorem follows easily from this statement.
+
+Fix any $t_0 \in[0, \tau-\delta]$. For $0<\varepsilon \leq 1$, consider the modified $(2,0)$-tensor $A_{\varepsilon}$ defined for all $x \in \mathcal{M}^n$ and $t \in\left[t_0, t_0+\delta\right]$ by
+
+$$
+A_{\varepsilon}(x, t) \doteqdot \alpha(x, t)+\varepsilon\left[\delta+\left(t-t_0\right)\right] \cdot g(x, t)
+$$
+
+where $\delta>0$ will be chosen below. As in the proof of the scalar maximum principle, the term $\varepsilon \delta g$ makes $A_{\varepsilon}$ strictly positive definite at $t=t_0$ because
+
+$$
+A_{\varepsilon}\left(x, t_0\right)=\alpha\left(x, t_0\right)+\varepsilon \delta g\left(x, t_0\right)>0
+$$
+
+and the term $\varepsilon\left(t-t_0\right) g$ will make
+
+$$
+\frac{\partial}{\partial t} A_{\varepsilon}>\frac{\partial}{\partial t} \alpha
+$$
+
+
+for $t \in\left[t_0, t_0+\delta\right]$ when we choose $\delta>0$ sufficiently small, depending on
+
+$$
+\max _{\mathcal{M}^n \times[0, \tau]}\left|\frac{\partial}{\partial t} g\right| .
+$$
+
+
+The evolution of $A_{\varepsilon}$ is given by
+
+$$
+\frac{\partial}{\partial t} A_{\varepsilon}=\frac{\partial}{\partial t} \alpha+\varepsilon g+\varepsilon\left[\delta+\left(t-t_0\right)\right] \frac{\partial g}{\partial t}
+$$
+
+
+Since $\Delta A_{\varepsilon}=\Delta \alpha$, we have
+
+$$
+\frac{\partial}{\partial t} A_{\varepsilon} \geq \Delta A_{\varepsilon}+\beta+\varepsilon g+\varepsilon\left[\delta+\left(t-t_0\right)\right] \frac{\partial g}{\partial t}
+$$
+
+which we rewrite as
+
+$$
+\begin{aligned}
+\frac{\partial}{\partial t} A_{\varepsilon} & \geq \Delta A_{\varepsilon}+\beta\left(A_{\varepsilon}, g, t\right)+\left[\beta(\alpha, g, t)-\beta\left(A_{\varepsilon}, g, t\right)\right] \\
+& +\varepsilon g+\varepsilon\left[\delta+\left(t-t_0\right)\right] \frac{\partial g}{\partial t}
+\end{aligned}
+$$
+
+
+We first choose $\delta_0>0$ depending on $g(t)$ for $t \in[0, \tau]$ to be small enough so that on $\mathcal{M}^n \times\left[t_0, t_0+\delta_0\right]$, we have
+
+$$
+\frac{\partial}{\partial t} g \geq-\frac{1}{4 \delta_0} g .
+$$
+
+
+This implies in particular that
+
+$$
+\varepsilon g+\varepsilon\left[\delta_0+\left(t-t_0\right)\right] \frac{\partial g}{\partial t} \geq \frac{1}{2} \varepsilon g
+$$
+
+on $\mathcal{M}^n \times\left[t_0, t_0+\delta_0\right]$. Since $\beta$ is locally Lipschitz, there exists a constant $K$ depending on the bounds for $\alpha$ and $g$ on $\mathcal{M}^n \times[0, \tau]$ (but not on $\varepsilon$ ) which is large enough that
+
+$$
+\beta(\alpha, g, t)-\beta\left(A_{\varepsilon}, g, t\right) \geq-K \varepsilon\left[\delta_0+\left(t-t_0\right)\right] g \geq-2 K \varepsilon \delta_0 g
+$$
+
+on $\mathcal{M}^n \times\left[t_0, t_0+\delta_0\right]$. Then if we choose $\delta \in\left(0, \delta_0\right)$ so small that
+
+$$
+\delta<\frac{1}{4 K}
+$$
+
+we have
+
+$$
+\beta(\alpha, g, t)-\beta\left(A_{\varepsilon}, g, t\right)>-\frac{1}{2} \varepsilon g .
+$$
+
+
+Hence combining (4.8) and (4.9) to (4.7) shows that
+
+$$
+\frac{\partial}{\partial t} A_{\varepsilon}>\Delta A_{\varepsilon}+\beta\left(A_{\varepsilon}, g, t\right)
+$$
+
+on $\mathcal{M}^n \times\left[t_0, t_0+\delta\right]$. We claim that $A_{\varepsilon}>0$ on $\mathcal{M}^n \times\left[t_0, t_0+\delta\right]$. Suppose the claim is false. Then there exists a point and time $\left(x_1, t_1\right) \in \mathcal{M}^n \times\left(t_0, t_0+\delta\right]$ and a nonzero vector $v \in T_{x_1} \mathcal{M}^n$ such that $A_{\varepsilon}>0$ for all times $t_0 \leq t<t_1$, but
+
+$$
+\left(\left(A_{\varepsilon}\right)_{i j} V^j\right)\left(x_1, t_1\right)=0
+$$
+
+
+Extend $v$ to a vector field $V$ defined in a space-time neighborhood of ( $x_1, t_1$ ) by the method described above. Then (4.10) and the null-eigenvector assumption imply that at ( $x_1, t_1$ ), we have
+
+$$
+\begin{aligned}
+0 & \geq \frac{\partial}{\partial t}\left(\left(A_{\varepsilon}\right)_{i j} V^i V^j\right)=\left(\frac{\partial}{\partial t} A_{\varepsilon}\right)_{i j} V^i V^j \\
+& >\left[\left(\Delta A_{\varepsilon}\right)_{i j}+\beta_{i j}\left(A_{\varepsilon}, g, t\right)\right] V^i V^j \\
+& =\Delta\left(\left(A_{\varepsilon}\right)_{i j} V^j V^j\right)+\beta_{i j}\left(A_{\varepsilon}, g, t\right) V^i V^j \geq 0
+\end{aligned}
+$$
+
+
+This contradiction proves the claim. Then since $\delta>0$ depends only on
+
+$$
+\max _{\mathcal{M}^n \times[0, \tau]}\left|\frac{\partial}{\partial t} g\right|
+$$
+
+and $K$, and is in particular independent of $\varepsilon$, we can let $\varepsilon \searrow 0$. Theorem 4.6 follows.
+\end{PROOF}
+
+
+REMARK 4.7. The proof above corrects a minor oversight in the original argument of Section 9 of $[\mathbf{5 8}]$, which failed to consider the $\frac{\partial g}{\partial t}$ term.
+
+
+
+
+
+\pagebreak
+\printbibliography
+\end{document}

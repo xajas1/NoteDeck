@@ -77,12 +77,132 @@
       "Topic": "Glatte Knoten",
       "LitID": "S92",
       "CTyp": "DEF",
-      "ParentTopic": "Ringe",
-      "Content": "Glatter Knoten",
+      "ParentTopic": "",
+      "Content": "Link in $S^3$",
       "selectedProject": "KNO_Scharlemann92/KNO_Scharlemann92.tex"
     },
     "tableMeta": {
       "selectedSource": "KNO_Scharlemann92/KNO_Scharlemann92.tex"
+    }
+  },
+  "KNO_B14": {
+    "sourceFile": "KNO_Burde14/KNO_Burde14.tex",
+    "snipMeta": {
+      "Subject": "KNO",
+      "Topic": "",
+      "LitID": "B14",
+      "CTyp": "DEF",
+      "ParentTopic": "",
+      "Content": "",
+      "selectedProject": "KNO_Burde14/KNO_Burde14.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "KNO_Burde14/KNO_Burde14.tex"
+    }
+  },
+  "DT_M65": {
+    "sourceFile": "DT_Milnor65/DT_Milnor65.tex",
+    "snipMeta": {
+      "Subject": "DT",
+      "Topic": "",
+      "LitID": "M65",
+      "CTyp": "DEF",
+      "ParentTopic": "",
+      "Content": "",
+      "selectedProject": "DT_Milnor65/DT_Milnor65.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "DT_Milnor65/DT_Milnor65.tex"
+    }
+  },
+  "QMS_R25": {
+    "sourceFile": "QMS_Rischke25/QMS_Rischke25.tex",
+    "snipMeta": {
+      "Subject": "QMS",
+      "Topic": "",
+      "LitID": "R25",
+      "CTyp": "DEF",
+      "ParentTopic": "",
+      "Content": "",
+      "selectedProject": "QMS_Rischke25/QMS_Rischke25.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "QMS_Rischke25/QMS_Rischke25.tex"
+    }
+  },
+  "GPDE_C04": {
+    "sourceFile": "GPDE_Chow04/GPDE_Chow04.tex",
+    "snipMeta": {
+      "Subject": "GPDE",
+      "Topic": "Maximum Prinzip",
+      "LitID": "C04",
+      "CTyp": "PROOF",
+      "ParentTopic": "Tensorielle Maximum Prinzipien",
+      "Content": "P: Tensor Maximum Prinzip (Nicht-Negativität wird erhalten)",
+      "selectedProject": "GPDE_Chow04/GPDE_Chow04.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "GPDE_Chow04/GPDE_Chow04.tex"
+    }
+  },
+  "GPDE_A11": {
+    "sourceFile": "GPDE_Andrews11/GPDE_Andrews11.tex",
+    "snipMeta": {
+      "Subject": "GPDE",
+      "Topic": "",
+      "LitID": "A11",
+      "CTyp": "DEF",
+      "ParentTopic": "",
+      "Content": "",
+      "selectedProject": "GPDE_Andrews11/GPDE_Andrews11.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "GPDE_Andrews11/GPDE_Andrews11.tex"
+    }
+  },
+  "EFT1_K25": {
+    "sourceFile": "EFT1_Kraus25/EFT1_Kraus25.tex",
+    "snipMeta": {
+      "Subject": "BÜN",
+      "Topic": "Faserbündel Grundlagen",
+      "LitID": "K25",
+      "CTyp": "DEF",
+      "ParentTopic": "",
+      "Content": "",
+      "selectedProject": "EFT1_Kraus25/EFT1_Kraus25.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "EFT1_Kraus25/EFT1_Kraus25.tex"
+    }
+  },
+  "EFT1_K25a": {
+    "sourceFile": "EFT1_Kraus25/EFT1_Kraus25.tex",
+    "snipMeta": {
+      "Subject": "BÜN",
+      "Topic": "Faserbündel Grundlagen",
+      "LitID": "K25a",
+      "CTyp": "DEF",
+      "ParentTopic": "",
+      "Content": "",
+      "selectedProject": "EFT1_Kraus25/EFT1_Kraus25.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "EFT1_Kraus25/EFT1_Kraus25.tex"
+    }
+  },
+  "GA_L13": {
+    "sourceFile": "GA_Lee13/GA_Lee13.tex",
+    "snipMeta": {
+      "Subject": "GA",
+      "Topic": "Multilineare Algebra",
+      "LitID": "L13",
+      "CTyp": "DEF",
+      "ParentTopic": "",
+      "Content": "Multilineare Abbildung",
+      "selectedProject": "GA_Lee13/GA_Lee13.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "GA_Lee13/GA_Lee13.tex"
     }
   }
 }

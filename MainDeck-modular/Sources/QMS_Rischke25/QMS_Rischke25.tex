@@ -43,6 +43,9 @@
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\entwurf}[1]{\textcolor{red}{#1}}
 
+\usepackage{braket}
+
+
 % --- 5. Diagramme und Grafiken ---
 \usepackage{graphicx}
 \usepackage{tikz}
@@ -157,10 +160,10 @@
 \newenvironment{EXA}[2]{\begin{unitbox}\CustomHeading{Example}{#1}{#2}}{\end{unitbox}}
 \newenvironment{STUD}[2]{\begin{unitbox}\CustomHeading{Study}{#1}{#2}}{\end{unitbox}}
 \newenvironment{CONC}[2]{\begin{unitbox}\CustomHeading{Concept}{#1}{#2}}{\end{unitbox}}
-
-\newenvironment{PROOF}
-  {\begin{proof}}%
-{\end{proof}}
+\newenvironment{OTH}[2]{\begin{unitbox}\CustomHeading{Other}{#1}{#2}}{\end{unitbox}}
+\newenvironment{EXE}[2]{\begin{unitbox}\CustomHeading{Exercise}{#1}{#2}}{\end{unitbox}}
+\newenvironment{MOT}[2]{\begin{unitbox}\CustomHeading{Motivation}{#1}{#2}}{\end{unitbox}}
+\newenvironment{PROOF}[2]{\begin{unitbox}\CustomHeading{Proof}{#1}{#2}}{\end{unitbox}}
 
 % --- Unit Umgebung für Source-Inhalte ---
 \usepackage{mdframed}
@@ -231,7 +234,9 @@ We will see that symmetries of a theory are not restricted to the invariance und
 We will conclude this lecture course by a discussion of the Poincaré group, which is of eminent importance in relativistic quantum field theory (Chapter 6), because all theories of Nature (which are well-established up to now) are formulated to respect this symmetry.
 
 \section{Symmetries in Quantum Mechanics}
+
 \subsection{Space translations}
+
 Consider the Hilbert-space state $|\psi\rangle$. We can assign a coordinate-space wave function to this state according to
 
 $$
@@ -436,6 +441,8 @@ $$
 
 i.e., the Hamilton operator must not depend explicitly on time. For systems which are invariant under time translations, the time-translation operator is thus identical to the time-evolution operator, cf. Eq. (2.22). The conserved quantity associated with this symmetry is the total energy of the system.
 
+
+
 \subsection{Rotations}
 Let us consider a rotation in space by an infinitesimal angle $\delta \vec{\phi}$ (around an axis defined by the direction of $\delta \vec{\phi}$ ),
 
@@ -499,46 +506,78 @@ $$
 
 This means that the orbital angular momentum is conserved and that one can find a common system of eigenstates of $\hat{H}, \hat{\vec{L}}^{2}$ and $\hat{L}^{z}$.
 
-\section{Introduction to Group Theory}
-Definition: A set
 
+
+
+\section{Introduction to Group Theory}
+Definition: 
+
+\begin{DEF}{QMS-R25-01-01}{Gruppen}
+A set
 $$
 G=\{a, b, c, \ldots\}
 $$
-
 is a group, if there exists an operation ("multiplication"), which combines elements $a, b \in G$,
-
 $$
 a \circ b
 $$
-
 with the following properties:\\
-(i) Closure: $\forall a, b \in G$ also $a \circ b \in G$.
+\begin{enumerate}
+  \item \textbf{Closure:} $\forall a, b \in G$ it holds that $a \circ b \in G$.\\
+  One says that $G$ is closed under the operation (multiplication) which combines group elements.
+  
+  \item \textbf{Identity element:} $\exists e \in G$ such that $\forall a \in G$ it holds that $a \circ e = e \circ a = a$.\\
+  That is, a so-called identity element exists.
 
-One says that $G$ is closed under the operation (multiplication) which combines group elements.\\
-(ii) Identity element: $\exists e \in G$, such that $\forall a \in G$ it holds that $a \circ e=e \circ a=a$, i.e., a so-called identity element exists.\\
-(iii) Inverse element: $\forall a \in G \exists a^{-1} \in G$, such that $a^{-1} \circ a=a \circ a^{-1}=e$, i.e., for each group element exists an inverse element.\\
-(iv) Associativity: $\forall a, b, c \in G$ it holds that $(a \circ b) \circ c=a \circ(b \circ c)$, the so-called law of associativity of group multiplication.
+  \item \textbf{Inverse element:} $\forall a \in G$ there exists $a^{-1} \in G$ such that $a^{-1} \circ a = a \circ a^{-1} = e$.\\
+  That is, for each group element there exists an inverse element.
+
+  \item \textbf{Associativity:} $\forall a, b, c \in G$ it holds that $(a \circ b) \circ c = a \circ (b \circ c)$.\\
+  This is the so-called law of associativity of group multiplication.
+\end{enumerate}
+\end{DEF}
+
 
 The group multiplication is essential to the definition of the group, hence one also denotes the group by ( $G, \circ$ ), i.e., the set of elements $G$ which are combined by the group multiplication $\circ$.\\
-Definition: A group ( $G, \circ$ ) is called abelian, if $\forall a, b \in G$ it holds that $a \circ b=b \circ a$, i.e., the group multiplication fulfills the law of commutativity.\\
-Definition: A group is called continuous, if it is possible to characterize the elements of the group by continuous parameters $\vec{t}=\left(t_{1}, t_{2}, \ldots\right)^{T} \in \mathbb{R}^{n}$, i.e.,
 
+
+Definition: 
+
+\begin{DEF}{QMS-R25-01-02}{Abelsche Gruppe}
+A group ( $G, \circ$ ) is called abelian, if $\forall a, b \in G$ it holds that $a \circ b=b \circ a$, i.e., the group multiplication fulfills the law of commutativity.
+\end{DEF}
+
+
+Definition: 
+
+
+\begin{DEF}{QMS-R25-01-03}{Kontinuierliche Gruppe}
+A group is called continuous, if it is possible to characterize the elements of the group by continuous parameters $\vec{t}=\left(t_{1}, t_{2}, \ldots\right)^{T} \in \mathbb{R}^{n}$, i.e.,
 $$
 G=\{a(\vec{t}), b(\vec{t}), c(\vec{t}), \ldots\}
 $$
+\end{DEF}
 
-Definition: A group is called continuously connected, if one can transform every group element into another one by a continuous change of the parameters $\vec{t}$.\\
-Example 1: The group of space translations
+Definition: 
 
+\begin{DEF}{QMS-R25-01-04}{Kontinuierlich zusammenhängende Gruppe}
+A group is called continuously connected, if one can transform every group element into another one by a continuous change of the parameters $\vec{t}$.
+\end{DEF}
+
+
+Example 1: 
+
+\begin{DEF}{QMS-R25-01-05}{Gruppe der Raum Translationen $(G_{r}, \cdot)$ ist kontinuierlich zusammenhängend}
+The group of space translations
 $$
 \left(G_{r}, \cdot\right)=\left(\left\{\hat{U}_{r}(\vec{a}), \vec{a} \in \mathbb{R}^{3}\right\}, \cdot\right)
 $$
-
 (with the standard multiplication "." of group elements as group multiplication) is a continuously connected, abelian group.\\
-It is continuously connected, since one can generate any arbitrary element of the group by a continuous change of the parameters $\vec{a}=\left(a^{x}, a^{y}, a^{z}\right)^{T}$.\\
-It is abelian, since two arbitrary translations commute with each other. It is sufficient to show this for infinitesimal translations, because, since the group is continuously connected, one can represent any arbitrary finite translation by an infinite series of infinitesimal translations. For two infinitesimal translations by the constant vectors $\delta \vec{a}_{1}$ and $\delta \vec{a}_{2}$ we have
+It is continuously connected, since one can generate any arbitrary element of the group by a continuous change of the parameters $\vec{a}=\left(a^{x}, a^{y}, a^{z}\right)^{T}$.
 
+It is abelian, since two arbitrary translations commute with each other. 
+
+It is sufficient to show this for infinitesimal translations, because, since the group is continuously connected, one can represent any arbitrary finite translation by an infinite series of infinitesimal translations. For two infinitesimal translations by the constant vectors $\delta \vec{a}_{1}$ and $\delta \vec{a}_{2}$ we have
 $$
 \begin{aligned}
 \hat{U}_{r}\left(\delta \vec{a}_{1}\right) \hat{U}_{r}\left(\delta \vec{a}_{2}\right) & =\left(\mathbf{1}-\frac{i}{\hbar} \delta \vec{a}_{1} \cdot \hat{\vec{p}}\right)\left(\mathbf{1}-\frac{i}{\hbar} \delta \vec{a}_{2} \cdot \hat{\vec{p}}\right) \\
@@ -547,93 +586,151 @@ $$
 & =\left(\mathbf{1}-\frac{i}{\hbar} \delta \vec{a}_{2} \cdot \hat{\vec{p}}\right)\left(\mathbf{1}-\frac{i}{\hbar} \delta \vec{a}_{1} \cdot \hat{\vec{p}}\right) \equiv \hat{U}_{r}\left(\delta \vec{a}_{2}\right) \hat{U}_{r}\left(\delta \vec{a}_{1}\right)
 \end{aligned}
 $$
-
 where we used the fact that the components of the momentum operator commute with each other,
-
 $$
 \left[\hat{p}^{i}, \hat{p}^{j}\right]=0, \quad \text { q.e.d.. }
 $$
+\end{DEF}
 
-Example 2: In contrast, the group of rotations in space,
 
+Example 2: 
+
+\begin{DEF}{QMS-R25-01-06}{Gruppe der Raum Rotationen $(G_{R}, \cdot)$ ist kontinuierlich zusammenhängend, nicht abelsch}
+In contrast, the group of rotations in space,
 $$
 \left(G_{R}, \cdot\right)=\left(\left\{\hat{U}_{R}(\vec{\phi}), \vec{\phi} \in S^{2}\right\}, \cdot\right)
 $$
-
 ( $S^{2}$ is the two-dimensional unit sphere around the origin of three-dimensional space) is continuously connected, but non-abelian, since
-
 $$
 \left[\hat{L}^{i}, \hat{L}^{j}\right]=i \hbar \epsilon^{i j k} \hat{L}^{k}
 $$
-
 The commutation residue is responsible for the fact that
-
 $$
 \hat{U}_{R}\left(\vec{\phi}_{1}\right) \hat{U}_{R}\left(\vec{\phi}_{2}\right) \neq \hat{U}_{R}\left(\vec{\phi}_{2}\right) \hat{U}_{R}\left(\vec{\phi}_{1}\right)
 $$
+\end{DEF}
 
-Definition: A continuous group is called compact, if the set of all values assumed by the parameters $\vec{t}$, the so-called group manifold, is compact.
 
-Example: Rotations in two space dimensions, i.e., in a plane, are affected by orthogonal $(2 \times 2)$ matrices
 
+Definition: 
+
+\begin{DEF}{QMS-R25-01-07}{Kompakte kontinuierliche Gruppen}
+A continuous group is called compact, if the set of all values assumed by the parameters $\vec{t}$, the so-called group manifold, is compact.
+\end{DEF}
+
+
+Example: 
+
+\begin{EXA}{QMS-R25-01-08}{Rotation in $\R^2$ als kompakt kontinuierliche Gruppen}
+Rotations in two space dimensions, i.e., in a plane, are affected by orthogonal $(2 \times 2)$ matrices
 $$
 O(\phi) \equiv\left(\begin{array}{cc}
 \cos \phi & \sin \phi \\
 -\sin \phi & \cos \phi
 \end{array}\right)
 $$
-
 with determinant $\operatorname{det} O(\phi)=\cos ^{2} \phi+\sin ^{2} \phi=+1$. These matrices form the group of special orthogonal ( $2 \times 2$ ) matrices,
-
 $$
 (S O(2), \cdot)=(\{O(\phi), \phi \in[0,2 \pi]\}, \cdot)
 $$
+with the standard matrix multiplication "." as group multiplication. It is a one-parameter group, with the rotation angle $\phi$ as group parameter. Since each rotation maps onto itself after rotating by an angle $2 \pi$, one can restrict the group manifold to the compact interval $[0,2 \pi]$. Hence, $(S O(2), \cdot)$ is a compact group.
+\end{EXA}
 
-with the standard matrix multiplication "." as group multiplication. It is a one-parameter group, with the rotation angle $\phi$ as group parameter. Since each rotation maps onto itself after rotating by an angle $2 \pi$, one can restrict the group manifold to the compact interval $[0,2 \pi]$. Hence, $(S O(2), \cdot)$ is a compact group.\\
-Definition: A group ( $G, \circ$ ) is called homomorphic to a group ( $H, \square$ ), if there exists a function $f: G \rightarrow H$ with the property
 
+Definition: 
+
+\begin{DEF}{QMS-R25-01-09}{Gruppen Homomorphismus}
+A group ( $G, \circ$ ) is called homomorphic to a group ( $H, \square$ ), if there exists a function $f: G \rightarrow H$ with the property
 $$
 f(a \circ b)=f(a) \square f(b), \quad \forall a, b \in G, f(a), f(b) \in H
 $$
+In other words, it does not matter whether one first multiplies the two elements $a, b \in G$ and then applies the map $f$, or whether one first applies the map $f$ and then multiplies the two elements $f(a), f(b) \in H$. This ensures that $f\left(e_{G}\right)=e_{H}$ and $f\left(a^{-1}\right)=f^{-1}(a) \forall a \in G$. The function $f$ is called group homomorphism. Its properties are such that it preserves the structure of the group ( $G, \circ$ ) and maps it onto the group ( $H, \square$ ).
+\end{DEF}
 
-In other words, it does not matter whether one first multiplies the two elements $a, b \in G$ and then applies the map $f$, or whether one first applies the map $f$ and then multiplies the two elements $f(a), f(b) \in H$. This ensures that $f\left(e_{G}\right)=e_{H}$ and $f\left(a^{-1}\right)=f^{-1}(a) \forall a \in G$. The function $f$ is called group homomorphism. Its properties are such that it preserves the structure of the group ( $G, \circ$ ) and maps it onto the group ( $H, \square$ ).\\
-Definition: Two groups ( $G, \circ$ ) and ( $H, \square$ ) are called locally isomorphic, if the group homomorphism $f$ is a bijection (a "one-to-one correspondence") between group elements on subsets $U \subset G, V \subset H$,
 
+Definition: 
+
+\begin{DEF}{QMS-R25-01-10}{Lokal isomorphe Gruppen}
+Two groups ( $G, \circ$ ) and ( $H, \square$ ) are called locally isomorphic, if the group homomorphism $f$ is a bijection (a "one-to-one correspondence") between group elements on subsets $U \subset G, V \subset H$,
 $$
 \forall a \in U \subset G, \quad b \in V \subset H \quad: \quad b=f(a), \quad a=f^{-1}(b)
 $$
+\end{DEF}
 
-Example: $(S O(2), \cdot)$ is isomorphic to the group of unitary transformations in one dimension,
 
-$$
+Definition: 
+
+\begin{DEF}{QMS-R25-01-12}{Globale Isomorphie}
+If $U=G, V=H$, one speaks of global isomorphy.
+\end{DEF}
+
+
+Example: 
+
+\begin{EXA}{QMS-R25-01-11}{$(SO(2), \cdot)$ ist isomorph zu $(U(1), \cdot)$}
+$(S O(2), \cdot)$ is isomorphic to the group of unitary transformations in one dimension,
+$
 (U(1), \cdot)=\left(\left\{e^{i \phi}, \phi \in[0,2 \pi]\right\}, \cdot\right)
-$$
+$
+i.e., multiplication with a "phase factor", a complex number of modulus 1 . This can be interpreted as a rotation in the complex plane. The existence of a bijection $f$ is now evident: one simply assigns each element $O(\phi) \in S O(2)$ to the corresponding element $e^{i \phi} \in U(1)$.
 
-i.e., multiplication with a "phase factor", a complex number of modulus 1 . This can be interpreted as a rotation in the complex plane. The existence of a bijection $f$ is now evident: one simply assigns each element $O(\phi) \in S O(2)$ to the corresponding element $e^{i \phi} \in U(1)$.\\
-Definition: If $U=G, V=H$, one speaks of global isomorphy.\\
-Example: Since the group manifold $[0,2 \pi]$ is the same for $(S O(2), \cdot)$ and $(U(1), \cdot)$, these groups are not only locally but even globally isomorphic.\\
-Definition: A group is called finite, if it has a finite number of elements, otherwise it is called infinite. The order of a finite group is the number of its elements.
+Since the group manifold $[0,2 \pi]$ is the same for $(S O(2), \cdot)$ and $(U(1), \cdot)$, these groups are not only locally but even globally isomorphic.
+\end{EXA}
+
+
+Definition: 
+
+\begin{DEF}{QMS-R25-01-13}{Endliche Gruppe}
+A group is called finite, if it has a finite number of elements, otherwise it is called infinite. The order of a finite group is the number of its elements.
+\end{DEF}
+
+
+
+\pagebreak
 
 \subsection{Representation of groups}
-Definition: A representation of a group ( $G, \circ$ ) is a map $D$ of elements $g \in G$ onto the set $L$ of linear operators $D(g)$,
 
+Definition: 
+
+\begin{DEF}{QMS-R25-03-01}{Repräsentation von Gruppen}
+A representation of a group ( $G, \circ$ ) is a map $D$ of elements $g \in G$ onto the set $L$ of linear operators $D(g)$,
 $$
 \begin{aligned}
 D: G & \rightarrow L, \\
 g & \mapsto D(g),
 \end{aligned}
 $$
-
 with the properties\\
-(i) $D(e) \equiv \mathbf{1}$,\\
-the identity element is mapped onto the unit operator, and\\
-(ii) $D(a \circ b)=D(a) \cdot D(b) \equiv D(a) D(b)$,\\
-the group multiplication corresponds to the standard multiplication of linear operators. One can easily check that $D$ is a group homomorphism between the group ( $G, \circ$ ) and (a particular subset of) the set of linear operators $L$.
+\begin{enumerate}[label=(\roman*)]
+  \item $D(e) \equiv \mathbf{1}$,\\
+  the identity element is mapped onto the unit operator, and
 
-Example 1: $e^{i \phi}$ is strictly speaking not an element of the group $(U(1), \cdot)$, but the representation of such an element. In physics, one often uses the terms "representation of a group element" and "group element" synonymously.\\
-Example 2: The linear operator $\hat{U}_{r}(\vec{a})=\exp \left(-\frac{i}{\hbar} \vec{a} \cdot \hat{\vec{p}}\right)$ is strictly speaking the representation of an element of the group ( $G_{r}, \cdot$ ) of space translations, namely that which affects a translation of the position vector $\vec{r}$ by the vector $\vec{a}$.\\
-Example 3: The cyclic group of order 3, ( $Z_{3}, \circ$ ), is defined by the following link table:
+  \item $D(a \circ b) = D(a) \cdot D(b) \equiv D(a)D(b)$,\\
+  the group multiplication corresponds to the standard multiplication of linear operators.
+\end{enumerate}
 
+One can easily check that $D$ is a group homomorphism between the group $(G, \circ)$ and (a particular subset of) the set of linear operators $L$.
+\end{DEF}
+
+
+Example 1: 
+
+\begin{EXA}{QMS-R25-03-02}{$e^{i \phi}$ als Repräsentation von $(U(1), \cdot)$}
+$e^{i \phi}$ is strictly speaking not an element of the group $(U(1), \cdot)$, but the representation of such an element. In physics, one often uses the terms "representation of a group element" and "group element" synonymously.
+\end{EXA}
+
+
+Example 2: 
+
+\begin{EXA}{QMS-R25-03-03}{$\hat{U}_{r}(\vec{a})$ is eine Repräsentation von ($G_{r}, \cdot$)}
+The linear operator $\hat{U}_{r}(\vec{a})=\exp \left(-\frac{i}{\hbar} \vec{a} \cdot \hat{\vec{p}}\right)$ is strictly speaking the representation of an element of the group ( $G_{r}, \cdot$ ) of space translations, namely that which affects a translation of the position vector $\vec{r}$ by the vector $\vec{a}$.
+\end{EXA}
+
+
+Example 3: 
+
+\begin{EXA}{QMS-R25-03-04}{Phasenfaktoren als Repräsentanten von ($Z_{3}, \circ$)}
+The cyclic group of order 3, ( $Z_{3}, \circ$ ), is defined by the following link table:
 \begin{center}
 \begin{tabular}{c||c|c|c|}
 $\circ$ & $e$ & $a$ & $b$ \\
@@ -646,59 +743,65 @@ $b$ & $b$ & $e$ & $a$ \\
 \hline
 \end{tabular}
 \end{center}
+Table 3.1: Link table of ( $Z_{3}, \mathrm{o}$ ).
 
-Table 3.1: Link table of ( $Z_{3}, \mathrm{o}$ ).\\
 The link table obviously provides closure of the group. One also realizes that $b=a^{-1}$ (because $a \circ b=e$ ), such that the existence of an inverse is guaranteed. The validity of the law of associativity can also be readily proven using the link table. The group ( $Z_{3}, \circ$ ) is not a continuous, but a so-called discrete group. Moreover it is abelian, as one can convince oneself using the link table. A representation of $Z_{3}$ is the set of phase factors
-
 $$
 D(e)=1, \quad D(a)=e^{2 \pi i / 3}, \quad D(b)=e^{-2 \pi i / 3} \equiv e^{4 \pi i / 3}
 $$
+One readily checks that this representation, with the standard multiplication as group multiplication, has the same properties as given in the link table.
+\end{EXA}
 
-One readily checks that this representation, with the standard multiplication as group multiplication, has the same properties as given in the link table.\\
-Definition: The dimension of a representation is the dimension of the space, onto which the linear operators of the representation act.\\
-Example: In the above representations of $U(1)$ or $Z_{3}$ this is one dimension, hence these representations are one-dimensional.\\
-Definition: The regular representation $\bar{D}(G)$ of a group ( $G, \circ$ ) corresponds to assigning to each $g_{j} \in G$ a state vector $\left|g_{j}\right\rangle$ of an orthonormal basis of a Hilbert space $\mathcal{H}$,
 
+Definition: 
+
+\begin{DEF}{QMS-R25-03-05}{Dimension der Repräsentation}
+The dimension of a representation is the dimension of the space, onto which the linear operators of the representation act.
+\end{DEF}
+
+
+Example: 
+
+\begin{EXA}{QMS-R25-03-06}{Repräsentation von $U(1)$ und $Z_3$ sind 1-dimensional}
+In the above representations of $U(1)$ or $Z_{3}$ this is one dimension, hence these representations are one-dimensional.
+\end{EXA}
+
+
+Definition: 
+
+\begin{DEF}{QMS-R25-03-07}{Reguläre Repräsentation einer Gruppe}
+The regular representation $\bar{D}(G)$ of a group ( $G, \circ$ ) corresponds to assigning to each $g_{j} \in G$ a state vector $\left|g_{j}\right\rangle$ of an orthonormal basis of a Hilbert space $\mathcal{H}$,
 $$
 \forall g_{j} \in G: \quad g_{j} \mapsto\left|g_{j}\right\rangle, \quad\left\langle g_{i} \mid g_{j}\right\rangle=\delta_{i j} \quad \forall\left|g_{i}\right\rangle,\left|g_{j}\right\rangle \in \mathcal{H},
 $$
-
 and by defining the action of an arbitrary element $g_{i} \in G$ onto the state vector $\left|g_{j}\right\rangle$ via a linear map
-
 $$
 \bar{D}\left(g_{i}\right)\left|g_{j}\right\rangle=\left|g_{i} \circ g_{j}\right\rangle \quad \forall g_{i}, g_{j} \in G
 $$
+\end{DEF}
 
-Example: Let us consider ( $Z_{3}$, o). First we have to assign Hilbert-space states to the group elements,
 
+Example: 
+
+Let us consider ( $Z_{3}$, o). First we have to assign Hilbert-space states to the group elements,
 $$
-\begin{aligned}
-g_{1} \equiv e \mapsto\left|g_{1}\right\rangle & \equiv|e\rangle \\
-g_{2} \equiv a \mapsto\left|g_{2}\right\rangle & \equiv|a\rangle \\
-g_{3} \equiv b & \mapsto\left|g_{3}\right\rangle
-\end{aligned}
+\begin{aligned} g_1 \equiv e & \mapsto\left|g_1\right\rangle \equiv|e\rangle \\ g_2 \equiv a & \mapsto\left|g_2\right\rangle \equiv|a\rangle \\ g_3 \equiv b & \mapsto\left|g_3\right\rangle \equiv|b\rangle\end{aligned}
 $$
-
 with $\left\langle g_{i} \mid g_{j}\right\rangle=\delta_{i j}$. The regular representation follows according to the definition 3.7) and with the help of the link table 3.1.
-
-$$
-\begin{array}{rlrlrl}
-\bar{D}(e)|e\rangle & =|e \circ e\rangle & =|e\rangle, & & \bar{D}(a)|e\rangle & =|a \circ e\rangle \\
-\bar{D}(e)|a\rangle & =|e \circ a\rangle & =|a\rangle, & & \bar{D}(b)|e\rangle & =|b \circ e\rangle \\
-\bar{D}(e)|b\rangle & =|e \circ b\rangle & =|b\rangle, & \bar{D}(a)|a\rangle & =|a \circ a\rangle & =|b\rangle, \\
-\bar{D}(e)|b\rangle & & \bar{D}(b)|a\rangle & =|b \circ a\rangle & =|e\rangle, \\
-& \bar{D}(a)|b\rangle & =|a \circ b\rangle & =|e\rangle, & & \bar{D}(b)|b\rangle \\
-& =|b \circ b\rangle & =|a\rangle .
-\end{array}
-$$
-
+\[
+\begin{aligned}
+\bar{D}(e)\ket{e} &= \ket{e \circ e} = \ket{e}, & \bar{D}(a)\ket{e} &= \ket{a \circ e} = \ket{a}, & \bar{D}(b)\ket{e} &= \ket{b \circ e} = \ket{b}, \\ 
+\bar{D}(e)\ket{a} &= \ket{e \circ a} = \ket{a}, & \bar{D}(a)\ket{a} &= \ket{a \circ a} = \ket{b}, & \bar{D}(b)\ket{a} &= \ket{b \circ a} = \ket{e}, \\
+\bar{D}(e)\ket{b} &= \ket{e \circ b} = \ket{b}, & \bar{D}(a)\ket{b} &= \ket{a \circ b} = \ket{e}, & \bar{D}(b)\ket{b} &= \ket{b \circ b} = \ket{a}. 
+\end{aligned}
+\]
 The dimension of the regular representation of a group corresponds to the order of the group. The order of the cyclic group ( $Z_{3}, \circ$ ) is 3 and thus $\operatorname{dim} \bar{D}\left(Z_{3}\right)=3$.
 
 The regular representation (3.7) can also be written as a matrix representation. To this end one defines
-
 $$
 [\bar{D}(g)]_{i j} \equiv\left\langle g_{i}\right| \bar{D}(g)\left|g_{j}\right\rangle \quad \forall g \in G, \quad\left|g_{i}\right\rangle,\left|g_{j}\right\rangle \in \mathcal{H}
 $$
+
 
 Example: For ( $Z_{3}$, o ) we have
 

@@ -83,10 +83,10 @@
     "index": 3,
     "topics": {
       "Faserbündel": {
-        "index": 1,
+        "index": 2,
         "parent": null,
         "litIDs": {
-          "K25": "EFT1-K25-01"
+          "K25a": "EFT1-K25a-02"
         }
       }
     }
@@ -134,6 +134,20 @@
         "parent": "Maximum Prinzipien",
         "litIDs": {
           "S25": "GPDE-S25-06"
+        }
+      },
+      "Maximum Prinzip": {
+        "index": 7,
+        "parent": "Tensorielle Maximum Prinzipien",
+        "litIDs": {
+          "C04": "GPDE-C04-7"
+        }
+      },
+      "Globale Analysis Grundlagen": {
+        "index": 8,
+        "parent": null,
+        "litIDs": {
+          "A11": "GPDE-A11-8"
         }
       }
     }
@@ -341,10 +355,24 @@
     "index": 7,
     "topics": {
       "Raum Translation": {
-        "index": 1,
+        "index": 2,
         "parent": "Symmetrie in Quantenmechanik",
         "litIDs": {
-          "R25": "QMS-R25-01"
+          "R25": "QMS-R25-02"
+        }
+      },
+      "Gruppen Grundlagen": {
+        "index": 1,
+        "parent": null,
+        "litIDs": {
+          "R25": "QMS-R25-1"
+        }
+      },
+      "Repräsentationen von Gruppen": {
+        "index": 3,
+        "parent": null,
+        "litIDs": {
+          "R25": "QMS-R25-3"
         }
       }
     }
@@ -546,6 +574,84 @@
         "parent": null,
         "litIDs": {
           "S92": "KNO-S92-1"
+        }
+      },
+      "Knoten": {
+        "index": 2,
+        "parent": null,
+        "litIDs": {
+          "B14": "KNO-B14-2"
+        }
+      },
+      "Wirtinger Präsentation": {
+        "index": 3,
+        "parent": "null",
+        "litIDs": {
+          "B14": "KNO-B14-3"
+        }
+      },
+      "Homologie von Knoten": {
+        "index": 4,
+        "parent": null,
+        "litIDs": {
+          "B14": "KNO-B14-4"
+        }
+      }
+    }
+  },
+  "DT": {
+    "index": 13,
+    "topics": {
+      "Theorem von Sard und Brown": {
+        "index": 1,
+        "parent": null,
+        "litIDs": {
+          "M65": "DT-M65-1"
+        }
+      }
+    }
+  },
+  "GA": {
+    "index": 14,
+    "topics": {
+      "Globale Analysis Grundlagen": {
+        "index": 1,
+        "parent": null,
+        "litIDs": {
+          "A11": "GA-A11-1"
+        }
+      },
+      "Multilineare Algebra": {
+        "index": 2,
+        "parent": null,
+        "litIDs": {
+          "L13": "GA-L13-2"
+        }
+      },
+      "Tensoren": {
+        "index": 3,
+        "parent": "Multilineare Algebra",
+        "litIDs": {
+          "L13": "GA-L13-3"
+        }
+      },
+      "Tensorfelder": {
+        "index": 4,
+        "parent": "Multilineare Algebra",
+        "litIDs": {
+          "L13": "GA-L13-4"
+        }
+      }
+    }
+  },
+  "BÜN": {
+    "index": 15,
+    "topics": {
+      "Faserbündel Grundlagen": {
+        "index": 1,
+        "parent": "Ringe",
+        "litIDs": {
+          "K25a": "BÜN-K25a-1"
         }
       }
     }

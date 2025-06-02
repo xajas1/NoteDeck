@@ -149,7 +149,6 @@
   \textbf{#1 #2} \textnormal{(#3)}.\enskip%
 }
 
-
 \newenvironment{DEF}[2]{\begin{unitbox}\CustomHeading{Definition}{#1}{#2}}{\end{unitbox}}
 \newenvironment{PROP}[2]{\begin{unitbox}\CustomHeading{Proposition}{#1}{#2}}{\end{unitbox}}
 \newenvironment{THEO}[2]{\begin{unitbox}\CustomHeading{Theorem}{#1}{#2}}{\end{unitbox}}
@@ -159,6 +158,9 @@
 \newenvironment{EXA}[2]{\begin{unitbox}\CustomHeading{Example}{#1}{#2}}{\end{unitbox}}
 \newenvironment{STUD}[2]{\begin{unitbox}\CustomHeading{Study}{#1}{#2}}{\end{unitbox}}
 \newenvironment{CONC}[2]{\begin{unitbox}\CustomHeading{Concept}{#1}{#2}}{\end{unitbox}}
+\newenvironment{OTH}[2]{\begin{unitbox}\CustomHeading{Other}{#1}{#2}}{\end{unitbox}}
+\newenvironment{EXE}[2]{\begin{unitbox}\CustomHeading{Exercise}{#1}{#2}}{\end{unitbox}}
+\newenvironment{MOT}[2]{\begin{unitbox}\CustomHeading{Motivation}{#1}{#2}}{\end{unitbox}}
 \newenvironment{PROOF}[2]{\begin{unitbox}\CustomHeading{Proof}{#1}{#2}}{\end{unitbox}}
 
 
@@ -472,9 +474,15 @@ If there's a torus $T^{2} \subset S^{3}-k$ which is not parallel to $\partial \e
 
 \section{Band sums and connected sums of knots}
 
-DEFINITION 9. A link is an embedded disjoint union of circles in $S^{3}$. A link is split if it's the distant union of two proper sublinks.
+DEFINITION 9. 
 
-DEFINITION 10. The band-sum $K \#_{b} K^{\prime}$ is obtained by banding together distant copies of $K$ and $K^{\prime}$.
+\begin{DEF}{KNO-S92-01-24}{Link in $S^3$}
+A link is an embedded disjoint union of circles in $S^{3}$. A link is split if it's the distant union of two proper sublinks.
+\end{DEF}
+
+DEFINITION 10. 
+
+The band-sum $K \#_{b} K^{\prime}$ is obtained by banding together distant copies of $K$ and $K^{\prime}$.
 
 DEFINITION 11. The connected sum $K \# K^{\prime}$ is obtained by banding together distant copies of $K$ and $K^{\prime}$ via a band crossing a splitting sphere once. $K \# K^{\prime}$ is called a composite knot.\\
 \includegraphics[scale=0.2, center]{2025_05_21_037de704f595ce642d3eg-083(1)}

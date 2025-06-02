@@ -481,23 +481,39 @@ Conjecture 1.13 (Schoen, [CTZ08, Sch07]). For $n \geq 4$, let $M$ be an $n$-dime
 This chapter establishes the notational conventions used throughout while also providing results and computations needed for later analyses. Readers familiar with differential geometry may wish to skip this chapter and refer back when necessary.
 
 \subsection*{Smooth Manifolds}
+
+\begin{DEF}{GA-A11-01-01}{Glatte Mannigfaltigkeit}
 Suppose $M$ is a topological space. We say $M$ is a $n$-dimensional topological manifold if it is Hausdorff, second countable and is 'locally Euclidean of dimension $n$ ' (i.e. every point $p \in M$ has a neighbourhood $U$ homeomorphic to an open subset of $\mathbb{R}^{n}$ ). A coordinate chart is a pair ( $U, \phi$ ) where $U \subset M$ is open and $\phi: U \rightarrow \phi(U) \subset \mathbb{R}^{n}$ is a homeomorphism. If $(U, \phi)$ and $(V, \psi)$ are two charts, the composition $\psi \circ \phi^{-1}: \phi(U \cap V) \rightarrow \psi(U \cap V)$ is called the transition map from $\phi$ to $\psi$. It is a homeomorphism since both $\phi$ and $\psi$ are.
 
 In order for calculus ideas to pass to the setting of manifolds we need to impose an extra smoothness condition on the chart structure. We say two charts ( $U, \phi$ ) and ( $V, \psi$ ) are smoothly compatible if the transition map $\psi \circ \phi^{-1}$, as a map between open sets of $\mathbb{R}^{n}$, is a diffeomorphism.
 
 We define a smooth atlas for $M$ to be a collection of smoothly compatible charts whose domains cover $M$. We say two smooth atlases are compatible if their union is also a smooth atlas. As compatibility is an equivalence relation, we define a differentiable structure for $M$ to be an equivalence class of smooth atlases. Thus a smooth manifold is a pair ( $M, \mathscr{A}$ ) where $M$ is a topological manifold and $\mathscr{A}$ is a smooth differentiable structure for $M$. When there is no ambiguity, we usually abuse notation and simply refer to a 'differentiable manifold $M$ ' without reference to the atlas. From here on, manifolds will always be of the differentiable kind.
+\end{DEF}
 
 \subsubsection*{Tangent Space}
+
 There are various equivalent ways of defining the tangent space of a manifold. For our purposes, we emphasis the construction of the tangent space as derivations on the algebra $C^{\infty}(M)$.
 
-Definition 2.1. Let $M$ be a smooth manifold with a point $p$. A $\mathbb{R}$-linear map $X: C^{\infty}(M) \rightarrow \mathbb{R}$ is called a derivation at $p$ if it satisfies the Leibniz rule: $X(f g)=f(p) X g+g(p) X f$. The tangent space at $p$, denoted by $T_{p} M$, is the set of all derivations at $p$.
+Definition 2.1. 
+
+\begin{DEF}{GPDE-A11-01-03}{Derivationen}
+Let $M$ be a smooth manifold with a point $p$. A $\mathbb{R}$-linear map $X: C^{\infty}(M) \rightarrow \mathbb{R}$ is called a derivation at $p$ if it satisfies the Leibniz rule: $X(f g)=f(p) X g+g(p) X f$. The tangent space at $p$, denoted by $T_{p} M$, is the set of all derivations at $p$.
 
 The tangent space $T_{p} M$ is clearly a vector space under the canonical operations $(X+Y) f=X f+Y f$ and $(\lambda X) f=\lambda(X f)$ where $\lambda \in \mathbb{R}$. In fact $T_{p} M$ is of finite dimension and isomorphic to $\mathbb{R}^{n}$. By removing the pointwise dependence in the above definition, we define:
 
 Definition 2.2. A derivation is an $\mathbb{R}$-linear map $Y: C^{\infty}(M) \rightarrow C^{\infty}(M)$ which satisfies the Leibniz rule: $Y(f g)=f Y g+g Y f$.
+\end{DEF}
 
 We identify such derivations with vector fields on $M$ (see Remark 2.10 below).\\
-Remark 2.3. In the setting of abstract algebra, a derivation is a function on an algebra which generalises certain features of the derivative operator. Specifically, given an associative algebra $\mathscr{A}$ over a ring or field $R$, a $R$-derivation is a $R$-linear map $D: \mathscr{A} \rightarrow \mathscr{A}$ that satisfies the product rule: $D(a b)=(D a) b+a(D b)$ for $a, b \in \mathscr{A}$. In our case, the algebra $\mathscr{A}=C^{\infty}(M)$ and the field is $\mathbb{R}$.
+
+Remark 2.3. 
+
+\begin{REM}{GPDE-A11-01-04}{Derivationen als algebraisches Objekt}
+In the setting of abstract algebra, a derivation is a function on an algebra which generalises certain features of the derivative operator. Specifically, given an associative algebra $\mathscr{A}$ over a ring or field $R$, a $R$-derivation is a $R$-linear map $D: \mathscr{A} \rightarrow \mathscr{A}$ that satisfies the product rule: $D(a b)=(D a) b+a(D b)$ for $a, b \in \mathscr{A}$. In our case, the algebra $\mathscr{A}=C^{\infty}(M)$ and the field is $\mathbb{R}$.
+\end{REM}
+
+
+
 
 \subsection*{Vector Bundles}
 Definition 2.4. Let $F$ and $M$ be smooth manifolds. A fibre bundle over $M$ with fibre $F$ is a smooth manifold $E$, together with a surjective submersion $\pi: E \rightarrow M$ satisfying a local triviality condition: For any $p \in M$ there exists an open set $U$ in $M$ containing $p$, and a diffeomorphism $\phi: \pi^{-1}(U) \rightarrow$ $U \times F$ (called a local trivialization) such that $\pi=\pi_{1} \circ \phi$ on $\pi^{-1}(U)$, where $\pi_{1}(x, y)=x$ is the projection onto the first factor. The fibre at $p$, denoted $E_{p}$, is the set $\pi^{-1}(p)$, which is diffeomorphic to $F$ for each $p$.
