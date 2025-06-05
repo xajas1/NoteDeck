@@ -233,6 +233,9 @@ We will see that symmetries of a theory are not restricted to the invariance und
 
 We will conclude this lecture course by a discussion of the Poincaré group, which is of eminent importance in relativistic quantum field theory (Chapter 6), because all theories of Nature (which are well-established up to now) are formulated to respect this symmetry.
 
+
+\pagebreak
+
 \section{Symmetries in Quantum Mechanics}
 
 \subsection{Space translations}
@@ -508,8 +511,13 @@ This means that the orbital angular momentum is conserved and that one can find 
 
 
 
+\pagebreak
 
 \section{Introduction to Group Theory}
+
+\subsection{General Remarks}
+
+
 Definition: 
 
 \begin{DEF}{QMS-R25-01-01}{Gruppen}
@@ -783,7 +791,8 @@ $$
 
 Example: 
 
-Let us consider ( $Z_{3}$, o). First we have to assign Hilbert-space states to the group elements,
+\begin{EXA}{QMS-R25-03-08}{Reguläre Repräsentation von $(\mathbb{Z}_3,\circ)$}
+Let us consider $(\mathbb{Z}_3,\circ)$. First we have to assign Hilbert-space states to the group elements,
 $$
 \begin{aligned} g_1 \equiv e & \mapsto\left|g_1\right\rangle \equiv|e\rangle \\ g_2 \equiv a & \mapsto\left|g_2\right\rangle \equiv|a\rangle \\ g_3 \equiv b & \mapsto\left|g_3\right\rangle \equiv|b\rangle\end{aligned}
 $$
@@ -796,15 +805,27 @@ with $\left\langle g_{i} \mid g_{j}\right\rangle=\delta_{i j}$. The regular repr
 \end{aligned}
 \]
 The dimension of the regular representation of a group corresponds to the order of the group. The order of the cyclic group ( $Z_{3}, \circ$ ) is 3 and thus $\operatorname{dim} \bar{D}\left(Z_{3}\right)=3$.
+\end{EXA}
 
-The regular representation (3.7) can also be written as a matrix representation. To this end one defines
+
+
+\begin{DEF}{QMS-R25-03-09}{Reguläre Repräsentation in Matrix Repräsentation}
+The regular representation
+$$
+\bar{D}\left(g_{i}\right)\left|g_{j}\right\rangle=\left|g_{i} \circ g_{j}\right\rangle \quad \forall g_{i}, g_{j} \in G
+$$
+can also be written as a matrix representation. To this end one defines
 $$
 [\bar{D}(g)]_{i j} \equiv\left\langle g_{i}\right| \bar{D}(g)\left|g_{j}\right\rangle \quad \forall g \in G, \quad\left|g_{i}\right\rangle,\left|g_{j}\right\rangle \in \mathcal{H}
 $$
+\end{DEF}
 
 
-Example: For ( $Z_{3}$, o ) we have
+Example: 
 
+
+\begin{EXA}{QMS-R25-03-11}{Reguläre Repräsentation von $(\Z_{3},\circ )$ in Matrix Repräsentation}
+For $(\Z_{3},\circ )$ we have
 $$
 [\bar{D}(e)]=\left(\begin{array}{ccc}
 1 & 0 & 0 \\
@@ -820,34 +841,43 @@ $$
 1 & 0 & 0
 \end{array}\right)
 $$
+\end{EXA}
 
+
+\begin{DEF}{QMS-R25-03-10}{Matrix Multiplikation in Matrix Repräsentation}
 In the matrix representation the group multiplication is the ordinary matrix multiplication,
-
 $$
 \begin{aligned}
 {\left[\bar{D}\left(g_{i} \circ g_{j}\right)\right]_{k \ell} } & =\left\langle g_{k}\right| \bar{D}\left(g_{i} \circ g_{j}\right)\left|g_{\ell}\right\rangle=\left\langle g_{k}\right| \bar{D}\left(g_{i}\right) \bar{D}\left(g_{j}\right)\left|g_{\ell}\right\rangle \\
 & =\sum_{m}\left\langle g_{k}\right| \bar{D}\left(g_{i}\right)\left|g_{m}\right\rangle\left\langle g_{m}\right| \bar{D}\left(g_{j}\right)\left|g_{\ell}\right\rangle=\sum_{m}\left[\bar{D}\left(g_{i}\right)\right]_{k m}\left[\bar{D}\left(g_{j}\right)\right]_{m \ell}
 \end{aligned}
 $$
+\end{DEF}
 
 In general, matrix multiplication is not commutative. One readily checks, however, that this is still true for ( $Z_{3}, \circ$ ) (since it is an abelian group).
 
-In general, matrix representations of a group are again groups themselves, which are (globally) isomorphic to the group. Therefore, in physics one uses the term "group" synonymous with "matrix representation of a group" or "representation of a group".\\
-Example: Let us consider the group of space translations, $\left(G_{r}, \cdot\right)$. We have already encountered a representation of $\left(G_{r}, \cdot\right)$,
 
+
+\begin{REM}{QMS-R25-03-12}{Matrix Repräsentation sind isomorphe Gruppen}
+In general, matrix representations of a group are again groups themselves, which are (globally) isomorphic to the group. Therefore, in physics one uses the term "group" synonymous with "matrix representation of a group" or "representation of a group".
+\end{REM}
+
+Example: 
+
+\begin{EXA}{QMS-R25-03-13}{Matrix Repräsentation der Raumtranslationen $(G_{r}, \cdot)$}
+Let us consider the group of space translations, $\left(G_{r}, \cdot\right)$. We have already encountered a representation of $\left(G_{r}, \cdot\right)$,
 $$
 D\left(G_{r}\right)=\left\{\hat{U}_{r}(\vec{a}), \vec{a} \in \mathbb{R}^{3}\right\}
 $$
+with the linear operator $\hat{U}_{r}(\vec{a})=\exp \left(-\frac{i}{\hbar} \vec{a} \cdot \hat{\vec{p}}\right)$. 
 
-with the linear operator $\hat{U}_{r}(\vec{a})=\exp \left(-\frac{i}{\hbar} \vec{a} \cdot \hat{\vec{p}}\right)$. (Obviously, we have previously been somewhat sloppy with the use of the term "group" and "representation of a group"; we\\
-had introduced the "group" of space translations as a possible representation of this group in the form of the linear operators $\hat{U}_{r}(\vec{a})$.) A matrix representation of ( $G_{r}, \cdot$ ) can be obtained by taking an arbitrary orthonormal basis $\left\{\left|\psi_{n}\right\rangle, n=0,1,2, \ldots\right\}$ and constructing matrices from the representation $D(g(\vec{a}))$ of the group element $g(\vec{a}) \in G_{r}$,
+(Obviously, we have previously been somewhat sloppy with the use of the term "group" and "representation of a group"; we had introduced the "group" of space translations as a possible representation of this group in the form of the linear operators $\hat{U}_{r}(\vec{a})$.) 
 
+A matrix representation of $(G_{r}, \cdot)$ can be obtained by taking an arbitrary orthonormal basis $\left\{\left|\psi_{n}\right\rangle, n=0,1,2, \ldots\right\}$ and constructing matrices from the representation $D(g(\vec{a}))$ of the group element $g(\vec{a}) \in G_{r}$,
 $$
 [D(g(\vec{a}))]_{i j}=\left\langle\psi_{i}\right| D(g(\vec{a}))\left|\psi_{j}\right\rangle \equiv\left\langle\psi_{i}\right| \hat{U}_{r}(\vec{a})\left|\psi_{j}\right\rangle=\left\langle\psi_{i}\right| \exp \left(-\frac{i}{\hbar} \vec{a} \cdot \hat{\vec{p}}\right)\left|\psi_{j}\right\rangle
 $$
-
 By inserting complete sets of position-space eigenstates this can be written as
-
 $$
 \begin{aligned}
 {[D(g(\vec{a}))]_{i j} } & =\int \mathrm{d}^{3} \vec{r}^{\prime} \mathrm{d}^{3} \vec{r}\left\langle\psi_{i} \mid \vec{r}^{\prime}\right\rangle\left\langle\vec{r}^{\prime}\right| \exp \left(-\frac{i}{\hbar} \vec{a} \cdot \hat{\vec{p}}\right)|\vec{r}\rangle\left\langle\vec{r} \mid \psi_{j}\right\rangle \\
@@ -855,105 +885,138 @@ $$
 & =\int \mathrm{d}^{3} \vec{r} \psi_{i}^{*}(\vec{r}) \exp \left(-\vec{a} \cdot \vec{\nabla}_{r}\right) \psi_{j}(\vec{r})
 \end{aligned}
 $$
-
 where we have used the momentum operator in coordinate representation and the orthonormality of the position-space eigenstates.
+\end{EXA}
+
+
+\pagebreak
+
+
 
 \subsection{Lie groups}
-Lie groups are continuous groups with $N \in \mathbb{N}$ real-valued parameters $\vec{\alpha}=\left(\alpha_{1}, \ldots, \alpha_{N}\right)^{T}$ $\in \mathbb{R}^{N}$, whose elements (in the representation as linear operators) can be written in the form
 
+
+\begin{DEF}{QMS-R25-04-01}{Lie Gruppen}
+Lie groups are continuous groups with $N \in \mathbb{N}$ real-valued parameters $\vec{\alpha}=\left(\alpha_{1}, \ldots, \alpha_{N}\right)^{T}$ $\in \mathbb{R}^{N}$, whose elements (in the representation as linear operators) can be written in the form
 $$
 \hat{U}(\vec{\alpha})=\exp \left(-\frac{i}{\hbar} \sum_{j=1}^{N} \alpha_{j} \hat{X}_{j}\right)
 $$
-
 Obviously,
-
 $$
 \hat{U}(\overrightarrow{0})=\mathbf{1}
 $$
+the origin in parameter space is mapped onto the identity element (or its corresponding representation as linear operator, i.e., the unit operator). 
 
-the origin in parameter space is mapped onto the identity element (or its corresponding representation as linear operator, i.e., the unit operator). Note that the factor $1 / \hbar$ in the exponent is pure convention, it could have been absorbed in the parameters $\alpha_{j}$. With this factor, $\alpha_{j} \hat{X}_{j}$ has the dimension of action or angular momentum.
+Note that the factor $1 / \hbar$ in the exponent is pure convention, it could have been absorbed in the parameters $\alpha_{j}$. With this factor, $\alpha_{j} \hat{X}_{j}$ has the dimension of action or angular momentum.
+\end{DEF}
 
 
 
-\subsection{Examples:}
-(i) The elements of the group of space translations, $\left(G_{r}, \cdot\right)$, have a representation in the form of Eq. 3.10, with $N=3, \hat{X}_{j}=\hat{p}^{j}$ and $\alpha_{j}=a^{j}, j=x, y, z$, cf. Eq. 2.7.\\
-(ii) The elements of the rotation group, $\left(G_{R}, \cdot\right)$, have a representation in the form of Eq. (3.10), with $N=3, \hat{X}_{j}=\hat{L}^{j}$ and $\alpha_{j}=\phi^{j}, j=x, y, z$, cf. Eq. 2.32). Since the angular momentum operators $\hat{L}^{j}$ have dimension of $\hbar$, while the rotation angles $\phi^{j}$ are dimensionless, the additional factor $1 / \hbar$ makes the exponent in Eq. 3.10 dimensionless.
+Examples:
 
+(i) 
+
+\begin{EXA}{QMS-R25-04-02}{Lie Gruppen der Raumtranslationen $\left(G_{r}, \cdot\right)$}
+The elements of the group of space translations, $\left(G_{r}, \cdot\right)$, have a representation in the form of Eq. 3.10, with $N=3, \hat{X}_{j}=\hat{p}^{j}$ and $\alpha_{j}=a^{j}, j=x, y, z$, cf. Eq. 2.7:
+$$\hat{U}_r(\vec{a}) \equiv \exp \left(-\frac{i}{\hbar} \vec{a} \cdot \hat{\vec{p}}\right)$$
+\end{EXA}
+
+
+(ii) 
+
+\begin{EXA}{QMS-R25-04-03}{Lie Gruppen der Rotationen $\left(G_{R}, \cdot\right)$}
+The elements of the rotation group, $\left(G_{R}, \cdot\right)$, have a representation in the form of Eq. (3.10), with $N=3, \hat{X}_{j}=\hat{L}^{j}$ and $\alpha_{j}=\phi^{j}, j=x, y, z$, cf. Eq. 2.32):
+$$\hat{U}_R(\vec{\phi}) \equiv \exp \left(-\frac{i}{\hbar} \vec{\phi} \cdot \hat{\vec{L}}\right)$$
+Since the angular momentum operators $\hat{L}^{j}$ have dimension of $\hbar$, while the rotation angles $\phi^{j}$ are dimensionless, the additional factor $1 / \hbar$ makes the exponent in Eq. 3.10 dimensionless.
+\end{EXA}
+
+
+
+\begin{DEF}{QMS-R25-04-04}{Generatoren der Lie Gruppe}
 The so-called generators $\hat{X}_{j}$ of the Lie group are defined as derivatives of a group element with respect to the parameters at the location of the identity element,
-
 $$
 \hat{X}_{j}=\left.i \hbar \frac{\partial}{\partial \alpha_{j}} \hat{U}(\vec{\alpha})\right|_{\vec{\alpha}=0}
 $$
+\end{DEF}
 
+\begin{REM}{QMS-R25-04-05}{Infinitesimale Transformationen in Lie Gruppen}
 Infinitesimal transformations are obtained from the Taylor expansion of the exponential function for infinitesimal parameters, $\left|\delta \alpha_{i}\right| \ll 1, i=1, \ldots, N$ (if $\delta \alpha_{i}$ is dimensionless),
-
 $$
 \hat{U}(\delta \vec{\alpha})=\mathbf{1}-\frac{i}{\hbar} \sum_{j=1}^{N} \delta \alpha_{j} \hat{X}_{j}+O\left(\delta \alpha^{2}\right)
 $$
+\end{REM}
 
+
+\begin{REM}{QMS-R25-04-06}{Darstellung von endlicher Transformationen in Lie Gruppen durch Sequenz von infi. Transformationen}
 Any finite transformation can be written as an infinite sequence of infinitesimal transformations. To see this, let $\alpha_{j}=n \delta \alpha_{j}, n \in \mathbb{N}, j=1, \ldots, N$, and compute
-
 $$
 \begin{aligned}
 \lim _{n \rightarrow \infty}[\hat{U}(\delta \vec{\alpha})]^{n} & =\lim _{n \rightarrow \infty}\left[\mathbf{1}-\frac{i}{\hbar} \sum_{j=1}^{N} \delta \alpha_{j} \hat{X}_{j}\right]^{n}=\lim _{n \rightarrow \infty}\left[\mathbf{1}-\frac{i}{\hbar} \sum_{j=1}^{N} \frac{\alpha_{j}}{n} \hat{X}_{j}\right]^{n} \\
 & =\exp \left(-\frac{i}{\hbar} \sum_{j=1}^{N} \alpha_{j} \hat{X}_{j}\right) \equiv \hat{U}(\vec{\alpha})
 \end{aligned}
 $$
-
 where we have used the identity
-
 $$
 \lim _{n \rightarrow \infty}\left(1+\frac{x}{n}\right)^{n}=e^{x}
 $$
-
 with $x=-(i / \hbar) \sum_{j=1}^{N} \alpha_{j} \hat{X}_{j}$.
+\end{REM}
 
 
 
-\subsection{Consequences:}
-(i) The generators are linearly independent.
 
-Proof: The identity element is unique, so that from the condition
+Consequences:
 
+
+(i) 
+
+\begin{LEM}{QMS-R25-04-07}{Generatoren von Lie Gruppen sind linear unabhängig }
+The generators are linearly independent.
+\end{LEM}
+
+Proof: 
+
+\begin{PROOF}{QMS-R25-04-08}{P: Generatoren von Lie Gruppen sind linear unabhängig }
+The identity element is unique, so that from the condition
 $$
 \hat{U}(\vec{\alpha})=\mathbf{1}
 $$
-
 follows that
-
 $$
 \alpha_{1}=\ldots=\alpha_{N} \equiv 0
 $$
-
 This also holds for infinitesimal parameters $\delta \alpha_{j}$, i.e., from the condition
-
 $$
 \hat{U}(\delta \vec{\alpha})=\mathbf{1}-\frac{i}{\hbar} \sum_{j=1}^{N} \delta \alpha_{j} \hat{X}_{j}+O\left(\delta \alpha^{2}\right)=\mathbf{1}
 $$
-
 follows that
-
 $$
 \delta \alpha_{1}=\ldots=\delta \alpha_{N} \equiv 0
 $$
-
 By subtracting the $\mathbf{1}$ on both sides of Eq. 3.14) and after neglecting quadratically small terms, this condition can be written as
-
 $$
 \sum_{j=1}^{N} \delta \alpha_{j} \hat{X}_{j}=0
 $$
+However, if from this condition follows that all $\delta \alpha_{j}=0$, then all $\hat{X}_{j}$ must be linearly independent, generalizing the definition of linear independence from vectors (cf. lectures on linear algebra) to operators, q.e.d.
+\end{PROOF}
 
-However, if from this condition follows that all $\delta \alpha_{j}=0$, then all $\hat{X}_{j}$ must be linearly independent, generalizing the definition of linear independence from vectors (cf. lectures on linear algebra) to operators, q.e.d.\\
-(ii) For unitary Lie groups the generators $\hat{X}_{j}$ are hermitean.
 
-Proof: For unitary Lie groups we have
+(ii) 
 
+
+\begin{LEM}{QMS-R25-04-09}{Generatoren von unitären Lie Gruppen sind hermitesch}
+For unitary Lie groups the generators $\hat{X}_{j}$ are hermitean.
+\end{LEM}
+
+Proof: 
+
+
+\begin{PROOF}{QMS-R25-04-10}{P: Generatoren von unitären Lie Gruppen sind hermitesch}
+For unitary Lie groups we have
 $$
 \hat{U}^{\dagger}(\vec{\alpha})=\hat{U}^{-1}(\vec{\alpha})
 $$
-
 For infinitesimal transformations this leads to
-
 $$
 \begin{aligned}
 \mathbf{1}+\frac{i}{\hbar} \sum_{j=1}^{N} \delta \alpha_{j}^{*} \hat{X}_{j}^{\dagger}+O\left(\delta \alpha^{2}\right) & =\mathbf{1}-\frac{i}{\hbar} \sum_{j=1}^{N}\left(-\delta \alpha_{j}\right) \hat{X}_{j}+O\left(\delta \alpha^{2}\right) \\
@@ -962,18 +1025,29 @@ $$
 \Longrightarrow \quad & \hat{X}_{j}, \quad j=1, \ldots, N
 \end{aligned}
 $$
+where in the second step we have used that the parameters are real-valued, $\delta \alpha_{j}^{*}=$ $\delta \alpha_{j}$, and in the last step that they can be chosen arbitrarily, q.e.d.
+\end{PROOF}
 
-where in the second step we have used that the parameters are real-valued, $\delta \alpha_{j}^{*}=$ $\delta \alpha_{j}$, and in the last step that they can be chosen arbitrarily, q.e.d.\\
-Example 1: The elements of the group $U(1)$ have the representation $e^{i \phi}$, with the (single) parameter $\phi \in \mathbb{R}$ and the (single) generator $\hat{X} \equiv \mathbf{1} \equiv 1$.
 
-Example 2: The group $S U(2)$ is the group of special unitary ( $\mathbf{2} \times \mathbf{2}$ ) matrices, i.e., the unitary $(2 \times 2)$ matrices with determinant +1 . A representation of the elements of $S U(2)$ is
+Example 1: 
 
+
+
+
+\begin{EXA}{QMS-R25-04-11}{$U(1)$ hat eine Lie Gruppe als Repräsentation}
+The elements of the group $U(1)$ have the representation $e^{i \phi}$, with the (single) parameter $\phi \in \mathbb{R}$ and the (single) generator $\hat{X} \equiv \mathbf{1} \equiv 1$.
+\end{EXA}
+
+
+
+Example 2: 
+
+\begin{EXA}{QMS-R25-04-12}{$SU(2)$ hat eine unitäre Lie Gruppe als Repräsentation}
+The group $S U(2)$ is the group of special unitary ( $\mathbf{2} \times \mathbf{2}$ ) matrices, i.e., the unitary $(2 \times 2)$ matrices with determinant +1 . A representation of the elements of $S U(2)$ is
 $$
 \hat{U}(\vec{\alpha})=\exp \left(-\frac{i}{\hbar} \vec{\alpha} \cdot \hat{\vec{S}}\right)
 $$
-
 where the parameters are $\alpha_{j} \in \mathbb{R}, j=1,2,3$, and $\hat{\vec{S}}=\frac{\hbar}{2} \hat{\vec{\sigma}}$ is the spin operator, which is proportional to the vector of Pauli matrices $\hat{\vec{\sigma}}=\left(\hat{\sigma}_{1}, \hat{\sigma}_{2}, \hat{\sigma}_{3}\right)^{T}$,
-
 $$
 \hat{\sigma}_{1}=\left(\begin{array}{cc}
 0 & 1 \\
@@ -986,8 +1060,9 @@ i & 0
 0 & -1
 \end{array}\right)
 $$
+For this reason, the group $S U(2)$ is also called spin group.
 
-For this reason, the group $S U(2)$ is also called spin group.\\
+
 From Eq. 3.17) it is obvious that $S U(2)$ is a Lie group. But are the elements (3.17) in fact unitary $(2 \times 2)$ matrices with determinant +1 ? The unitarity is immediately obvious from the fact that the parameters $\alpha_{j}$ are real-valued and $\hat{\vec{S}}$ is a hermitean operator (since spin is a physical observable, or because the Pauli matrices are hermitean, respectively),
 
 $$
@@ -995,31 +1070,24 @@ $$
 $$
 
 In order to show that $\hat{U}(\vec{\alpha})$ is a $(2 \times 2)$ matrix, we first compute
-
 $$
 \begin{aligned}
 (\vec{\alpha} \cdot \hat{\vec{\sigma}})^{2 n} & =\left[(\vec{\alpha} \cdot \hat{\vec{\sigma}})^{2}\right]^{n}=[\vec{\alpha} \cdot \vec{\alpha}+i \hat{\vec{\sigma}} \cdot(\vec{\alpha} \times \vec{\alpha})]^{n}=\alpha^{2 n} \mathbf{1}, \\
 (\vec{\alpha} \cdot \hat{\vec{\sigma}})^{2 n+1} & =(\vec{\alpha} \cdot \hat{\vec{\sigma}})^{2 n} \vec{\alpha} \cdot \hat{\vec{\sigma}}=\alpha^{2 n} \vec{\alpha} \cdot \hat{\vec{\sigma}}=\alpha^{2 n+1} \frac{\vec{\alpha}}{\alpha} \cdot \hat{\vec{\sigma}},
 \end{aligned}
 $$
-
 where we have used the identity
-
 $$
 \hat{\vec{\sigma}} \cdot \vec{a} \hat{\vec{\sigma}} \cdot \vec{b}=\vec{a} \cdot \vec{b} \mathbf{1}+i \hat{\sigma} \cdot(\vec{a} \times \vec{b}),
 $$
-
 readily proven by employing the commutation and anticommutation relations of the Pauli matrices,
-
 $$
 \begin{aligned}
 {\left[\hat{\sigma}_{i}, \hat{\sigma}_{j}\right] } & =2 i \epsilon_{i j k} \hat{\sigma}_{k} \\
 \left\{\hat{\sigma}_{i}, \hat{\sigma}_{j}\right\} & =2 \delta_{i j} \mathbf{1} .
 \end{aligned}
 $$
-
 With Eqs. (3.19), 3.20) we can write the Taylor expansion of an element 3.17) of the spin group as
-
 $$
 \begin{aligned}
 \hat{U}(\vec{\alpha}) & =\sum_{n=0}^{\infty} \frac{1}{n!}\left(-\frac{i}{2}\right)^{n}(\vec{\alpha} \cdot \hat{\vec{\sigma}})^{n} \\
@@ -1028,39 +1096,33 @@ $$
 & =\cos \frac{\alpha}{2} \mathbf{1}-i \sin \frac{\alpha}{2} \frac{\vec{\alpha}}{\alpha} \cdot \hat{\vec{\sigma}}
 \end{aligned}
 $$
-
 This is a linear combination of ( $2 \times 2$ ) matrices and thus itself a ( $2 \times 2$ ) matrix. Finally, we compute the determinant of $\hat{U}(\vec{\alpha})$ :
-
 $$
 \ln \operatorname{det} \hat{U}(\vec{\alpha})=\operatorname{Tr} \ln \hat{U}(\vec{\alpha})=\operatorname{Tr}\left(-\frac{i}{2} \vec{\alpha} \cdot \hat{\vec{\sigma}}\right)=-\frac{i}{2} \vec{\alpha} \cdot \operatorname{Tr} \hat{\vec{\sigma}} \equiv 0,
 $$
-
 since the Pauli matrices are traceless. Then we have
-
 $$
 \operatorname{det} \hat{U}(\vec{\alpha})=+1, \quad \text { q.e.d. }
 $$
+\end{EXA}
 
-From the closure of the group under multiplication we now derive another important relation for the generators of a Lie group. In general,
 
+\begin{CONC}{QMS-R25-04-13}{Nicht-Kommutativität in exponentiell Koordinaten}
+From the closure of the group under multiplication we now derive another important relation for the generators of a Lie group. 
+
+In general,
 $$
 \exp \left(-\frac{i}{\hbar} \sum_{j=1}^{N} \alpha_{j} \hat{X}_{j}\right) \exp \left(-\frac{i}{\hbar} \sum_{k=1}^{N} \beta_{k} \hat{X}_{k}\right) \neq \exp \left[-\frac{i}{\hbar} \sum_{i=1}^{N}\left(\alpha_{i}+\beta_{i}\right) \hat{X}_{i}\right] .
 $$
-
 However, it is always true that multiplying two group elements yields another element of the group,
-
 $$
 \exp \left(-\frac{i}{\hbar} \sum_{j=1}^{N} \alpha_{j} \hat{X}_{j}\right) \exp \left(-\frac{i}{\hbar} \sum_{k=1}^{N} \beta_{k} \hat{X}_{k}\right)=\exp \left(-\frac{i}{\hbar} \sum_{i=1}^{N} \delta_{i} \hat{X}_{i}\right)
 $$
-
 We now compute $\delta_{i}$. To this end we take the logarithm on both sides,
-
 $$
 \sum_{i=1}^{N} \delta_{i} \hat{X}_{i}=i \hbar \ln \left[\exp \left(-\frac{i}{\hbar} \sum_{j=1}^{N} \alpha_{j} \hat{X}_{j}\right) \exp \left(-\frac{i}{\hbar} \sum_{k=1}^{N} \beta_{k} \hat{X}_{k}\right)\right]
 $$
-
 and expand the exponential function up to second order in the parameters $\alpha_{j}, \beta_{k}$,
-
 $$
 \begin{aligned}
 \sum_{i=1}^{N} \delta_{i} \hat{X}_{i} \simeq i \hbar \ln & {\left[\left(\mathbf{1}-\frac{i}{\hbar} \sum_{j=1}^{N} \alpha_{j} \hat{X}_{j}-\frac{1}{2 \hbar^{2}} \sum_{j, k=1}^{N} \alpha_{j} \alpha_{k} \hat{X}_{j} \hat{X}_{k}\right)\right.} \\
@@ -1068,15 +1130,11 @@ $$
 \simeq i \hbar \ln & {\left[\mathbf{1}-\frac{i}{\hbar} \sum_{j=1}^{N}\left(\alpha_{j}+\beta_{j}\right) \hat{X}_{j}-\frac{1}{2 \hbar^{2}} \sum_{j, k=1}^{N}\left(\alpha_{j} \alpha_{k}+2 \alpha_{j} \beta_{k}+\beta_{j} \beta_{k}\right) \hat{X}_{j} \hat{X}_{k}\right] }
 \end{aligned}
 $$
-
 Now we also expand the logarithm up to second order in the parameters $\alpha_{j}, \beta_{k}$, using the formula
-
 $$
 \ln (1+x)=x-\frac{x^{2}}{2}+O\left(x^{3}\right)
 $$
-
 and obtain
-
 $$
 \begin{aligned}
 \sum_{i=1}^{N} \delta_{i} \hat{X}_{i} \simeq & i \hbar\left[-\frac{i}{\hbar} \sum_{j=1}^{N}\left(\alpha_{j}+\beta_{j}\right) \hat{X}_{j}-\frac{1}{2 \hbar^{2}} \sum_{j, k=1}^{N}\left(\alpha_{j} \alpha_{k}+2 \alpha_{j} \beta_{k}+\beta_{j} \beta_{k}\right) \hat{X}_{j} \hat{X}_{k}\right. \\
@@ -1084,106 +1142,138 @@ $$
 = & \sum_{j=1}^{N}\left(\alpha_{j}+\beta_{j}\right) \hat{X}_{j}-\frac{i}{2 \hbar} \sum_{j, k=1}^{N}\left(\alpha_{j} \beta_{k}-\beta_{j} \alpha_{k}\right) \hat{X}_{j} \hat{X}_{k}
 \end{aligned}
 $$
+If we move the first term on the right-hand side to the left-hand side and exchange the summation indices in the second term, 
+$\beta_{j} \alpha_{k} \hat{X}_{j} \hat{X}_{k} \rightarrow \beta_{k} \alpha_{j} \hat{X}_{k} \hat{X}_{j}$, we obtain
+\begin{equation}
+2 i \hbar \sum_{i=1}^{N}(\delta_{i}-\alpha_{i}-\beta_{i}) \hat{X}_{i} = \sum_{j,k=1}^{N} \alpha_{j} \beta_{k}[\hat{X}_{j}, \hat{X}_{k}]
+\tag{*}
+\end{equation}
+\end{CONC}
 
-If we move the first term on the right-hand side to the left-hand side and exchange the summation indices in the second term, $\beta_{j} \alpha_{k} \hat{X}_{j} \hat{X}_{k} \rightarrow \beta_{k} \alpha_{j} \hat{X}_{k} \hat{X}_{j}$, we obtain
 
-$$
-2 i \hbar \sum_{i=1}^{N}\left(\delta_{i}-\alpha_{i}-\beta_{i}\right) \hat{X}_{i}=\sum_{j, k=1}^{N} \alpha_{j} \beta_{k}\left[\hat{X}_{j}, \hat{X}_{k}\right]
-$$
+\begin{DEF}{QMS-R25-04-14}{Lie algebra und Struktur Konstanten}
+In the general case, the generators $\hat{X}_{j}$ do not necessarily commute. Let us define
+\[
+2 i \hbar(\delta_{i}-\alpha_{i}-\beta_{i}) \equiv i \hbar \gamma_{i}
+\]
+and compute the $\gamma_{i}$. Clearly, each $\gamma_i$ must be proportional to both $\alpha_{j}$ and $\beta_{k}$, since the expression vanishes if either all $\alpha_{j}$ or all $\beta_{k}$ vanish (cf.\ equation (*)). We therefore make the following ansatz:
+\[
+\gamma_{i} = \sum_{j,k=1}^{N} f_{jki} \alpha_{j} \beta_{k}
+\]
+for some constants $f_{jki}$. Inserting this into (*) yields
+\[
+i \hbar \sum_{i,j,k=1}^{N} f_{jki} \alpha_{j} \beta_{k} \hat{X}_{i} = \sum_{j,k=1}^{N} \alpha_{j} \beta_{k} [\hat{X}_{j}, \hat{X}_{k}]
+\]
+Since the coefficients $\alpha_j$ and $\beta_k$ are arbitrary, we obtain
+\[
+[\hat{X}_{j}, \hat{X}_{k}] = i \hbar \sum_{i=1}^{N} f_{jki} \hat{X}_{i} \equiv i \hbar f_{jki} \hat{X}_{i}
+\]
+where we have again used Einstein summation convention.
 
-If all generators commute with each other,
+These commutation relations define an algebra for the generators of the Lie group — the so-called \emph{Lie algebra}. The constants $f_{jki}$ are called the \emph{structure constants} of the group.
+\end{DEF}
 
-$$
-\left[\hat{X}_{j}, \hat{X}_{k}\right]=0 \quad \forall j, k=1, \ldots, N
-$$
 
-it is now obvious that
 
-$$
-\delta_{i}=\alpha_{i}+\beta_{i}, \quad i=1, \ldots, N
-$$
+\begin{REM}{QMS-R25-04-15}{Spezialfall abelsche Lie Gruppe}
+Let us now consider the special case in which all generators commute:
+\[
+[\hat{X}_{j}, \hat{X}_{k}] = 0 \quad \text{for all } j,k = 1, \ldots, N
+\]
+In this case, equation (*) simplifies to
+\[
+\delta_{i} = \alpha_{i} + \beta_{i}, \quad i = 1, \ldots, N
+\]
+due to the linear independence of the generators.
 
-due to the linear independence of the generators. Then, however, we have
+Then, we have
+\[
+\begin{aligned}
+\exp\left(-\frac{i}{\hbar} \sum_{j=1}^{N} \alpha_{j} \hat{X}_{j}\right) 
+\exp\left(-\frac{i}{\hbar} \sum_{k=1}^{N} \beta_{k} \hat{X}_{k}\right)
+&= \exp\left(-\frac{i}{\hbar} \sum_{i=1}^{N} (\alpha_{i} + \beta_{i}) \hat{X}_{i}\right) \\
+&= \exp\left(-\frac{i}{\hbar} \sum_{k=1}^{N} \beta_{k} \hat{X}_{k}\right) 
+\exp\left(-\frac{i}{\hbar} \sum_{j=1}^{N} \alpha_{j} \hat{X}_{j}\right)
+\end{aligned}
+\]
+That is, the group elements themselves commute. In this case, the Lie group is \emph{abelian}.
+\end{REM}
 
-$$
-\begin{gathered}
-\exp \left(-\frac{i}{\hbar} \sum_{j=1}^{N} \alpha_{j} \hat{X}_{j}\right) \exp \left(-\frac{i}{\hbar} \sum_{k=1}^{N} \beta_{k} \hat{X}_{k}\right)=\exp \left[-\frac{i}{\hbar} \sum_{i=1}^{N}\left(\alpha_{i}+\beta_{i}\right) \hat{X}_{i}\right] \\
-\equiv \exp \left(-\frac{i}{\hbar} \sum_{k=1}^{N} \beta_{k} \hat{X}_{k}\right) \exp \left(-\frac{i}{\hbar} \sum_{j=1}^{N} \alpha_{j} \hat{X}_{j}\right)
-\end{gathered}
-$$
 
-i.e., the group elements themselves commute. In this case we therefore have an abelian group.
 
-However, in general not all generators commute with each other. Let us denote
+Example 1: 
 
-$$
-2 i \hbar\left(\delta_{i}-\alpha_{i}-\beta_{i}\right) \equiv i \hbar \gamma_{i}
-$$
-
-and compute the $\gamma_{i}$. Obviously, they have to be proportional to the $\alpha_{j}$ as well as to the $\beta_{k}$, since they vanish if either all $\alpha_{j}$ or all $\beta_{k}$ vanish, cf. Eq. (3.25). We therefore make the following Ansatz:
-
-$$
-\gamma_{i}=\sum_{j, k=1}^{N} f_{j k i} \alpha_{j} \beta_{k}
-$$
-
-with some constants $f_{j k i}$. Inserting this into Eq. 3.25) we obtain
-
-$$
-i \hbar \sum_{i, j, k=1}^{N} f_{j k i} \alpha_{j} \beta_{k} \hat{X}_{i}=\sum_{j, k=1}^{N} \alpha_{j} \beta_{k}\left[\hat{X}_{j}, \hat{X}_{k}\right]
-$$
-
-or, since $\alpha_{j}, \beta_{k}$ can assume arbitary values,
-
-$$
-\left[\hat{X}_{j}, \hat{X}_{k}\right]=i \hbar \sum_{i=1}^{N} f_{j k i} \hat{X}_{i} \equiv i \hbar f_{j k i} \hat{X}_{i}
-$$
-
-where we have again used Einstein's sum convention. These commutation relations define an algebra for the generators of the Lie group, the so-called Lie algebra. The constants $f_{j k i}$ are the so-called structure constants of the group.\\
-Example 1: For the rotation group $\left(G_{R}, \cdot\right)$, Eq. (3.2), the three generators are the components of the angular momentum operator, which fulfill the angular momentum algebra (3.3). Therefore we have
-
+\begin{EXA}{QMS-R25-04-16}{Lie Algebra zur $\left(G_{R}, \cdot\right)$}
+For the rotation group $\left(G_{R}, \cdot\right)$, Eq. (3.2), the three generators are the components of the angular momentum operator, which fulfill the angular momentum algebra (3.3). Therefore we have
 $$
 f_{j k i} \equiv \epsilon^{j k i}
 $$
+\end{EXA}
 
-Example 2: For the spin group ( $S U(2), \cdot$ ) with elements (3.17) the generators are the components of the spin operator. On account of the commutation relation (3.22) for the Pauli matrices, these obey the Lie algebra
+Example 2: 
 
+\begin{EXA}{QMS-R25-04-17}{Lie Algebra zur $(S U(2), \cdot)$}
+For the spin group $(S U(2), \cdot)$ with elements (3.17) the generators are the components of the spin operator. On account of the commutation relation (3.22) for the Pauli matrices, these obey the Lie algebra
 $$
 \left[\hat{S}^{j}, \hat{S}^{k}\right]=\frac{\hbar^{2}}{4}\left[\hat{\sigma}_{j}, \hat{\sigma}_{k}\right]=\frac{\hbar^{2}}{4} 2 i \epsilon_{j k i} \hat{\sigma}_{i} \equiv i \hbar \epsilon^{j k i} \hat{S}^{i}
 $$
-
 i.e., the same Lie algebra as the rotation group $\left(G_{R}, \cdot\right)$.
+\end{EXA}
 
-\section{Properties of the structure constants:}
-(i) Because of $\left[\hat{X}_{j}, \hat{X}_{k}\right]=-\left[\hat{X}_{k}, \hat{X}_{j}\right]$ we have
 
+
+
+Properties of the structure constants:
+
+
+(i) 
+
+\begin{REM}{QMS-R25-04-18}{Antisymmetrie der Strukturkonstanten}
+Because of $\left[\hat{X}_{j}, \hat{X}_{k}\right]=-\left[\hat{X}_{k}, \hat{X}_{j}\right]$ we have
 $$
 f_{j k i}=-f_{k j i}
 $$
+\end{REM}
 
-For ( $\operatorname{SU}(2), \cdot$ ) and ( $G_{R}, \cdot$ ) this is automatically fulfilled due to the antisymmetry of the Levi-Civitá tensor $\epsilon^{i j k}$.\\
-(ii) For unitary groups the structure constants are real-valued. Namely, using the hermiticity of the generators we compute
 
+\begin{REM}{QMS-R25-04-19}{Antisymmetrie der Strukturkonstanten für Rotation und Spin Gruppe}
+For ( $\operatorname{SU}(2), \cdot$ ) and ( $G_{R}, \cdot$ ) this is automatically fulfilled due to the antisymmetry of the Levi-Civitá tensor $\epsilon^{i j k}$.
+\end{REM}
+
+
+(ii) 
+
+
+\begin{REM}{QMS-R25-04-20}{Strukturkonstanten für hermitesche Lie Gruppen sind reell-wertig}
+For unitary groups the structure constants are real-valued. Namely, using the hermiticity of the generators we compute
 $$
 \begin{aligned}
 {\left[\hat{X}_{j}, \hat{X}_{k}\right]^{\dagger} } & =\left[\hat{X}_{k}^{\dagger}, \hat{X}_{j}^{\dagger}\right]=\left[\hat{X}_{k}, \hat{X}_{j}\right]=-\left[\hat{X}_{j}, \hat{X}_{k}\right]=-i \hbar f_{j k i} \hat{X}_{i} \\
 \Longleftrightarrow-i \hbar f_{j k i}^{*} \hat{X}_{i}^{\dagger} & =-i \hbar f_{j k i}^{*} \hat{X}_{i}=-i \hbar f_{j k i} \hat{X}_{i}
 \end{aligned}
 $$
-
 Due to the linear independence of the $\hat{X}_{i}$ we immediately conclude that
-
 $$
 f_{j k i}^{*}=f_{j k i}, \quad \text { q.e.d. }
 $$
+\end{REM}
 
-(iii) Jacobi identity:
 
+
+(iii) 
+
+
+\begin{LEM}{QMS-R25-04-21}{Strukturkonstanten erfüllen eine Jacobi-Identität}
+Jacobi identity:
 $$
 f_{i j \ell} f_{\ell k m}+f_{j k \ell} f_{\ell i m}+f_{k i \ell} f_{\ell j m}=0
 $$
+\end{LEM}
 
-Proof: We have the following identity for the generators:
+Proof: 
 
+\begin{PROOF}{QMS-R25-04-22}{P: Strukturkonstanten erfüllen eine Jacobi-Identität}
+We have the following identity for the generators:
 $$
 \begin{aligned}
 & \left.\left.\left[\hat{X}_{i}, \hat{X}_{j}\right], \hat{X}_{k}\right]+\left[\left[\hat{X}_{j}, \hat{X}_{k}\right], \hat{X}_{i}\right]+\left[\hat{X}_{k}, \hat{X}_{i}\right], \hat{X}_{j}\right] \\
@@ -1192,18 +1282,24 @@ $$
 & \quad+\hat{X}_{k} \hat{X}_{i} \hat{X}_{j}-\hat{X}_{i} \hat{X}_{k} \hat{X}_{j}-\hat{X}_{j} \hat{X}_{k} \hat{X}_{i}+\hat{X}_{j} \hat{X}_{i} \hat{X}_{k} \equiv 0
 \end{aligned}
 $$
-
 Using the Lie algebra 3.30 this is identical to
-
 $$
 \begin{aligned}
 0 & =i \hbar\left\{f_{i j \ell}\left[\hat{X}_{\ell}, \hat{X}_{k}\right]+f_{j k \ell}\left[\hat{X}_{\ell}, \hat{X}_{i}\right]+f_{k i \ell}\left[\hat{X}_{\ell}, \hat{X}_{j}\right]\right\} \\
 & =-\hbar^{2}\left(f_{i j \ell} f_{\ell k m}+f_{j k \ell} f_{\ell i m}+f_{k i \ell} f_{\ell j m}\right) \hat{X}_{m}
 \end{aligned}
 $$
+Due to the linear independence of the generators the term in parentheses has to vanish, i.e., the Jacobi identity 3.34 holds, q.e.d.
+\end{PROOF}
 
-Due to the linear independence of the generators the term in parentheses has to vanish, i.e., the Jacobi identity 3.34 holds, q.e.d.\\
-Example: The structure constants of the groups $(S U(2), \cdot)$ and $\left(G_{R}, \cdot\right)$, respectively, are given by the components of the Levi-Civitá tensor. From the lectures on classical mechanics we already know that these obey the Jacobi identity (3.34).\\
+
+Example: 
+
+\begin{REM}{QMS-R25-04-23}{Jacobi-Identität für Rotation und Spin Gruppe}
+The structure constants of the groups $(S U(2), \cdot)$ and $\left(G_{R}, \cdot\right)$, respectively, are given by the components of the Levi-Civitá tensor. From the lectures on classical mechanics we already know that these obey the Jacobi identity (3.34).
+\end{REM}
+
+
 Lie groups have the special property that, on account of Eq. (3.10), knowledge of the generators suffices to determine all group elements. A representation of the generators then defines a representation of the group. A particularly important representation is the so-called adjoint representation, where the generators are determined by the structure constants,
 
 $$
@@ -1409,70 +1505,86 @@ $$
 \operatorname{Tr}\left(\hat{X}_{i}^{\prime} \hat{X}_{j}^{\prime}\right) \equiv \lambda_{i} \delta_{i j}, \quad \text { q.e.d. }
 $$
 
-\subsection{Simple and semi-simple Lie groups}
-Definition: An invariant subalgebra $\mathcal{I}$, a so-called ideal, is a set of generators
 
+
+
+
+
+
+\pagebreak
+
+\subsection{Simple and semi-simple Lie groups}
+Definition: 
+
+
+\begin{DEF}{QMS-R25-05-01}{Ideal}
+An invariant subalgebra $\mathcal{I}$, a so-called ideal, is a set of generators
 $$
 \mathcal{I}=\left\{\hat{X}_{i}, i=1, \ldots, M\right\}, \quad M<N
 $$
-
 of the set of all generators
-
 $$
 \left\{\hat{Y}_{j}, j=1, \ldots, N\right\}
 $$
-
 with the property
-
 $$
 \left[\hat{Y}_{j}, \hat{X}_{i}\right] \in \mathcal{I} \quad \forall i=1, \ldots, M, \quad j=1, \ldots, N
 $$
+i.e., the commutator between an arbitrary generator $\hat{Y}_{j}$ with any generator from the ideal is again proportional to (some linear combination of) the generators from the ideal.
+\end{DEF}
 
-i.e., the commutator between an arbitrary generator $\hat{Y}_{j}$ with any generator from the ideal is again proportional to (some linear combination of) the generators from the ideal.\\
-Definition: An invariant subgroup $U \subset G$ is the set of all group elements $u \in G$ for which holds
 
+
+Definition: 
+
+
+\begin{DEF}{QMS-R25-05-02}{Invariante Untergruppe}
+An invariant subgroup $U \subset G$ is the set of all group elements $u \in G$ for which holds
 $$
 g^{-1} u g \in U \quad \forall g \in G .
 $$
+\end{DEF}
 
-Theorem: An ideal defines an invariant subgroup $\mathcal{N}$, a so-called normal Lie subgroup,
 
+Theorem: 
+
+
+\begin{THEO}{QMS-R25-05-03}{Ideale induzieren normale Lie Untergruppen}
+An ideal defines an invariant subgroup $\mathcal{N}$, a so-called normal Lie subgroup,
 $$
 \mathcal{N}=\left\{h=\exp \left(-\frac{i}{\hbar} \alpha_{i} \hat{X}_{i}\right)\right\} \subset G
 $$
-
 In other words, for
-
 $$
 \begin{aligned}
 h & =e^{-i X} \in \mathcal{N}, \quad X \equiv \frac{1}{\hbar} \alpha_{i} \hat{X}_{i} \\
 g & =e^{-i Y} \in G, \quad Y \equiv \frac{1}{\hbar} \beta_{j} \hat{Y}_{j}
 \end{aligned}
 $$
-
 we have
-
 $$
 g^{-1} h g \in \mathcal{N}
 $$
+\end{THEO}
 
-Proof: We have
 
+
+Proof: 
+
+
+\begin{PROOF}{QMS-R25-05-04}{P: Ideale induzieren normale Lie Untergruppen}
+We have with
 $$
 \begin{aligned}
 g^{-1} h g & =e^{i Y} e^{-i X} e^{-i Y}=\sum_{n=0}^{\infty} \frac{(-i)^{n}}{n!} e^{i Y} X^{n} e^{-i Y} \\
 & =\sum_{n=0}^{\infty} \frac{(-i)^{n}}{n!}\left(e^{i Y} X e^{-i Y}\right)^{n} \equiv \sum_{n=0}^{\infty} \frac{(-i)^{n}}{n!} X^{\prime n}=e^{-i X^{\prime}} \equiv h^{\prime}
 \end{aligned}
 $$
-
 where we defined $X^{\prime} \equiv e^{i Y} X e^{-i Y}$. We now have to show that $X^{\prime} \in \mathcal{I}$, since then $h^{\prime} \in \mathcal{N}$. To this end consider the following operator,
-
 $$
 X^{\prime}(\epsilon) \equiv e^{i \epsilon Y} X e^{-i \epsilon Y}
 $$
-
 Obviously, $X^{\prime}(0) \equiv X$ and $X^{\prime}(1) \equiv X^{\prime}$. A Taylor expansion of $X^{\prime}(\epsilon)$ around $\epsilon=0$ yields
-
 $$
 \begin{aligned}
 X^{\prime}(\epsilon)= & X+\left.\epsilon \frac{\partial}{\partial \epsilon} X^{\prime}(\epsilon)\right|_{\epsilon=0}+\left.\frac{\epsilon^{2}}{2} \frac{\partial^{2}}{\partial \epsilon^{2}} X^{\prime}(\epsilon)\right|_{\epsilon=0}+\ldots \\
@@ -1482,15 +1594,11 @@ X^{\prime}(\epsilon)= & X+\left.\epsilon \frac{\partial}{\partial \epsilon} X^{\
 = & X+i \epsilon[Y, X]-\frac{\epsilon^{2}}{2}[Y,[Y, X]]+\ldots
 \end{aligned}
 $$
-
 From this follows that
-
 $$
 X^{\prime}=X^{\prime}(1)=X+i[Y, X]-\frac{1}{2}[Y,[Y, X]]+\ldots
 $$
-
 However, since
-
 $$
 \begin{aligned}
 X & =\frac{1}{\hbar} \alpha_{i} \hat{X}_{i} \in \mathcal{I} \\
@@ -1498,25 +1606,46 @@ X & =\frac{1}{\hbar} \alpha_{i} \hat{X}_{i} \in \mathcal{I} \\
 {[Y,[Y, X]] } & =\frac{1}{\hbar} \beta_{j}\left[\hat{Y}_{j},[Y, X]\right] \in \mathcal{I}, \quad \text { etc. }
 \end{aligned}
 $$
+we obtain that $X^{\prime} \in \mathcal{I}$, q.e.d.
+\end{PROOF}
 
-we obtain that $X^{\prime} \in \mathcal{I}$, q.e.d.\\
-Definition: A so-called abelian normal Lie subgroup is an invariant Lie subgroup where all elements commute with each other,
 
+
+
+Definition: 
+
+\begin{DEF}{QMS-R25-05-05}{Abelsche normale Lie Gruppe}
+A so-called abelian normal Lie subgroup is an invariant Lie subgroup where all elements commute with each other,
 $$
 \forall h, h^{\prime} \in \mathcal{N}:\left[h, h^{\prime}\right]=0
 $$
-
 It is obvious that the ideal $\mathcal{I}$ corresponding to $\mathcal{N}$ has to be a so-called abelian ideal,
-
 $$
 \left[\hat{X}_{i}, \hat{X}_{j}\right]=0, \quad \forall i, j=1, \ldots, M
 $$
+\end{DEF}
 
-Definition: A Lie group is called simple, if it does not have a normal Lie subgroup. Its corresponding Lie algebra is called simple, if it does not have an ideal (except for the Lie algebra itself, $M=N$, and the zero).\\
-Definition: A Lie group is called semi-simple, if it does not have an abelian normal Lie subgroup. Its corresponding Lie algebra is called semi-simple, if it does not have an abelian ideal.
 
-Example 1: Let us consider the rotation group $\left(G_{R}, \cdot\right)$ (or $(S O(3), \cdot$ ) or ( $S U(2), \cdot$ )). The generators obey the commutation relations (3.3),
+Definition: 
 
+\begin{DEF}{QMS-R25-05-06}{Einfache Lie Gruppe}
+A Lie group is called simple, if it does not have a normal Lie subgroup. Its corresponding Lie algebra is called simple, if it does not have an ideal (except for the Lie algebra itself, $M=N$, and the zero).
+\end{DEF}
+
+
+Definition: 
+
+\begin{DEF}{QMS-R25-05-07}{Semi-Einfache Lie Gruppe}
+A Lie group is called semi-simple, if it does not have an abelian normal Lie subgroup. Its corresponding Lie algebra is called semi-simple, if it does not have an abelian ideal.
+\end{DEF}
+
+
+
+Example 1: 
+
+
+\begin{EXA}{QMS-R25-05-08}{$\left(G_{R}, \cdot\right)$ $(S O(3), \cdot)$ $(S U(2), \cdot)$) sind einfache Lie Gruppen}
+Let us consider the rotation group $\left(G_{R}, \cdot\right)$ (or $(S O(3), \cdot)$ or $(S U(2), \cdot)$). The generators obey the commutation relations (3.3),
 $$
 \begin{aligned}
 {\left[\hat{L}^{x}, \hat{L}^{y}\right] } & =i \hbar \hat{L}^{z} \\
@@ -1524,11 +1653,15 @@ $$
 {\left[\hat{L}^{z}, \hat{L}^{x}\right] } & =i \hbar \hat{L}^{y}
 \end{aligned}
 $$
-
 i.e., there is no ideal. ( $G_{R}, \cdot$ ) is therefore not only a semi-simple but even a simple Lie group.
+\end{EXA}
 
-Example 2: Let us consider the product group ( $S U(2) \times S O(3), \cdot$ ). The generators of this group are the components $\hat{S}^{i}$ of the spin operator (for $S U(2)$ ) and the components $\hat{L}^{j}$ of the angular momentum operator (for $S O(3)$ ). We have the commutation relations
 
+
+Example 2: 
+
+\begin{EXA}{QMS-R25-05-09}{$(S U(2) \times S O(3), \cdot)$ ist eine semi-einfache Lie Gruppe}
+Let us consider the product group $(S U(2) \times S O(3), \cdot)$. The generators of this group are the components $\hat{S}^{i}$ of the spin operator (for $S U(2)$ ) and the components $\hat{L}^{j}$ of the angular momentum operator (for $S O(3)$ ). We have the commutation relations
 $$
 \begin{aligned}
 {\left[\hat{S}^{i}, \hat{S}^{j}\right] } & =i \hbar \epsilon^{i j k} \hat{S}^{k} \\
@@ -1536,16 +1669,47 @@ $$
 {\left[\hat{S}^{i}, \hat{L}^{j}\right] } & =0
 \end{aligned}
 $$
+Thus, there are two non-abelian ideals, the set of the $\hat{S}^{i}$ and the set of the $\hat{L}^{j}$. Therefore, the product group $(S U(2) \times S O(3), \cdot)$ is semi-simple.
+\end{EXA}
 
-Thus, there are two non-abelian ideals, the set of the $\hat{S}^{i}$ and the set of the $\hat{L}^{j}$. Therefore, the product group $(S U(2) \times S O(3), \cdot)$ is semi-simple.\\
-Definition: The rank of a semi-simple Lie group is equal to the number of mutually commuting generators of its Lie algebra.\\
-Example 1: The group of space translations $\left(G_{r}, \cdot\right)$ : A representation of the group elements is given by Eq. (2.7). The generators are the components $\hat{p}^{i}$ of the momentum operator. All three generators mutually commute $\left[\hat{p}^{i}, \hat{p}^{j}\right]=0, i, j=1,2,3$. Hence, $\operatorname{rank}\left(G_{r}, \cdot\right)=3$.\\
-Example 2: The rotation group $\left(G_{R}, \cdot\right)$ : A representation of the group elements is given by Eq. (2.32). The generators obey the angular momentum algebra (3.3). Each generator $\hat{L}^{i}$ commutes only with itself, $\operatorname{rank}\left(G_{R}, \cdot\right)=1$.
 
-Definition: The so-called Cartan subalgebra is that algebra which contains the maximum number of mutually commuting generators. Consequently, the rank of a semi-simple Lie group is equal to the number of generators of the Cartan subalgebra.
+Definition: 
 
-\subsubsection{5}
+
+\begin{DEF}{QMS-R25-05-10}{Rang einer semi-einfachen Lie Gruppe}
+The rank of a semi-simple Lie group is equal to the number of mutually commuting generators of its Lie algebra.
+\end{DEF}
+
+
+Example 1: 
+
+
+\begin{EXA}{QMS-R25-05-11}{$\left(G_{r}, \cdot\right)$ ist vom Rang 3}
+The group of space translations $\left(G_{r}, \cdot\right)$ : A representation of the group elements is given by Eq. (2.7). The generators are the components $\hat{p}^{i}$ of the momentum operator. All three generators mutually commute $\left[\hat{p}^{i}, \hat{p}^{j}\right]=0, i, j=1,2,3$. Hence, $\operatorname{rank}\left(G_{r}, \cdot\right)=3$.
+\end{EXA}
+
+
+Example 2: 
+
+\begin{EXA}{QMS-R25-05-12}{$\left(G_{R}, \cdot\right)$ ist vom Rang 1}
+The rotation group $\left(G_{R}, \cdot\right)$ : A representation of the group elements is given by Eq. (2.32). The generators obey the angular momentum algebra (3.3). Each generator $\hat{L}^{i}$ commutes only with itself, $\operatorname{rank}\left(G_{R}, \cdot\right)=1$.
+\end{EXA}
+
+
+
+Definition: 
+
+
+\begin{DEF}{QMS-R25-05-13}{Cartan Unteralgebra}
+The so-called Cartan subalgebra is that algebra which contains the maximum number of mutually commuting generators. Consequently, the rank of a semi-simple Lie group is equal to the number of generators of the Cartan subalgebra.
+\end{DEF}
+
+
+
+
 \subsection{Casimir operators, multiplets, Schur's lemma}
+
+
 Definition: A Casimir operator $\hat{C}$ is an operator which is not identical to the unit operator and which commutes with all group elements,
 
 $$
@@ -1892,10 +2056,17 @@ $$
 \left[\hat{C}_{i}\right]=C_{i} \mathbf{1}_{d \times d}, \quad \text { q.e.d. }
 $$
 
+\pagebreak
+
+
 \section{The group SU(3)}
 The group ( $\operatorname{SU}(3), \cdot$ ), i.e., the group of special unitary transformations in three dimensions, is of paramount importance for the theory of the strong interaction, one of the fundamental forces of Nature. Therefore, we discuss this group separately and in more detail in this chapter.
 
+
+
 \subsection{Generators}
+
+
 The group ( $\operatorname{SU}(N), \cdot$ ) of special unitary transformations in $N$ dimensions possesses $N^{2}-1$ generators.\\
 Example: The group $(S U(2), \cdot)$ has $N^{2}-1=3$ generators, the three components $\hat{S}^{a}$ of the spin operator. These read in the fundamental representation
 

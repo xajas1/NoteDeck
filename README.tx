@@ -1,0 +1,92 @@
+NoteDeck – Startanleitung für gespeicherten Workspace
+=====================================================
+
+Dies ist die Anleitung, wie du dein NoteDeck-Projekt nach dem Neustart von VS Code und Browser vollständig reaktivierst.
+
+1. Workspace öffnen
+--------------------
+
+Öffne deinen gespeicherten Workspace (z. B. NoteDeck.code-workspace):
+
+    File → Open Workspace from File...
+
+Oder direkt per Doppelklick auf die .code-workspace-Datei im Dateibrowser.
+
+2. Backend starten (FastAPI)
+-----------------------------
+
+Öffne ein Terminal in folgendem Ordner:
+
+    cd MainDeck-modular/api
+    uvicorn main:app --reload
+
+Das Backend läuft dann unter:
+
+    http://127.0.0.1:8000
+
+API-Dokumentation (Swagger UI):
+
+    http://127.0.0.1:8000/docs
+
+3. Frontend starten (Vite + React)
+-----------------------------------
+
+Öffne ein zweites Terminal in:
+
+    cd playground
+    npm run dev
+
+Das Frontend läuft dann unter:
+
+    http://localhost:5173
+
+4. Browser-Tabs öffnen
+------------------------
+
+Öffne folgende Seiten in separaten Tabs:
+
+    Snip-Editor:     http://localhost:5173/snip
+    Tree-Playground: http://localhost:5173/tree
+    Split-View:      http://localhost:5173/split
+
+Tipp: Nutze ein Tool wie „Tab Session Manager“, um Tabs zu speichern.
+
+5. Dateistruktur im Projekt
+----------------------------
+
+    MainDeck-modular/api/           → Backend (FastAPI)
+    playground/                     → Frontend (React + Vite)
+    Sources/                        → Tex-Quellen
+    Library/Module/UID.tex          → Gespeicherte Units mit Tex-Körpern
+    Library/library.json            → Metadaten der Units
+    Library/SubjectsTopics.json     → Struktur und Zuordnung von Topics
+
+6. Hinweise zur Nutzung
+------------------------
+
+- Starte IMMER zuerst das Backend, dann das Frontend.
+- Änderungen an .tex und JSON werden beim Snipen/Umbenennen automatisch synchronisiert.
+- Achte auf Sternchen * in der GUI als Marker für ungespeicherte Projekte.
+- Exportierte .tex-Dateien findest du unter:
+
+      MainDeck-modular/Library/Scripts/
+
+7. Mögliche Fehlerquellen
+--------------------------
+
+    Problem:                     Lösung:
+    -------                      -------
+    CORS-Fehler im Browser       → Zuerst Backend starten, dann Frontend
+    Neue Snips erscheinen nicht  → GUI neu laden oder Projekt neu öffnen
+    Änderungen verloren          → Workspace regelmäßig speichern, Git nutzen
+
+8. Checkliste für erfolgreichen Start
+--------------------------------------
+
+[ ] Workspace geöffnet (NoteDeck.code-workspace)
+[ ] Terminal 1: Backend läuft mit "uvicorn main:app --reload"
+[ ] Terminal 2: Frontend läuft mit "npm run dev"
+[ ] Browser-Tabs für Snip / Tree / Split geöffnet
+[ ] Units und Struktur werden korrekt angezeigt
+
+Letztes Update: Juni 2025

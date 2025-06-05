@@ -9,20 +9,25 @@
           "id": "sub-1748186196198",
           "name": "TESTSubsection",
           "unitUIDs": [
-            "93ef2182-7e22-4940-9382-94fe1fde3ed7",
-            "752b76b7-db13-4002-bf4d-35cbb1e5e281",
-            "sub-1748193308054"
+            "96f491be-8a6b-4ec5-968b-b306cc179207",
+            "4de57415-0d9d-43be-b599-f05f0ba63d51",
+            "094a815f-778e-4d84-9d79-c4a8f560280b",
+            "55b126df-0669-43b2-bcc0-ab0958378519",
+            "01e5ac5f-41aa-4cd9-b19e-74c124d05ebd",
+            "68547647-84a1-4e61-942d-ef7e434575ab",
+            "b12a9cb4-ffe2-408e-ac0a-846c479d2a16",
+            "24271a12-aff4-489d-9d19-d03366add2ec",
+            "49f236bf-4f02-4b6d-9da7-338e094e4750",
+            "e324cae0-a9d4-4035-b793-76986272330e",
+            "f6af2bc1-6b98-4a30-8ffb-d43ee5c105fa",
+            "a9a1ca7b-4b2a-4dd3-873f-ed4b2e5348a4",
+            "f1b030af-9396-4d22-ad10-b9173b1a365b"
           ]
         },
         {
           "id": "sub-1748193308054",
           "name": "TESTSubsection2",
-          "unitUIDs": [
-            "5cda9788-1bb2-4802-a889-120c48ba5348",
-            "ac0d1f79-c5d5-4e79-87eb-c1ba2633b045",
-            "b89d1950-b6ae-4300-bc4d-6cc0caec4fef",
-            "sub-1748186196198"
-          ]
+          "unitUIDs": []
         }
       ]
     }

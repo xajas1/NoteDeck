@@ -1,0 +1,585 @@
+\documentclass[10pt]{article}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[version=4]{mhchem}
+\usepackage{stmaryrd}
+\usepackage{bbold}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\graphicspath{ {./images/} }
+
+%New command to display footnote whose markers will always be hidden
+\let\svthefootnote\thefootnote
+\newcommand\blfootnotetext[1]{%
+  \let\thefootnote\relax\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \let\thefootnote\svthefootnote%
+}
+
+%Overriding the \footnotetext command to hide the marker if its value is `0`
+\let\svfootnotetext\footnotetext
+\renewcommand\footnotetext[2][?]{%
+  \if\relax#1\relax%
+    \ifnum\value{footnote}=0\blfootnotetext{#2}\else\svfootnotetext{#2}\fi%
+  \else%
+    \if?#1\ifnum\value{footnote}=0\blfootnotetext{#2}\else\svfootnotetext{#2}\fi%
+    \else\svfootnotetext[#1]{#2}\fi%
+  \fi
+}
+
+\begin{document}
+\section*{Die Fundamentalgruppe}
+Der Begriff des einfachen Zusammenhangs ist in mehreren Gebieten der Mathematik anzutreffen. Etwa besagt der Riemannsche Abbildungssatz, dass jedes einfach zusammenhängende Gebiet in $\mathbb{C}$ biholomorph zu $\mathbb{C}$ oder der Einheitsscheibe $\mathbb{E}=\{z \in \mathbb{C}:|z|<1\}$ ist. Etwas allgemeiner, jede einfach zusammenhängende Riemannsche Fläche (d.h. komplexe 1-dimensionale Mannigfaltigkeit) ist zu genau einer der Flächen $\mathbb{C}, \mathbb{E}$ oder $\mathbb{C} P^{1}$ biholomorph.
+
+Ein Resultat aus der Theorie der Lie-Gruppen besagt, dass für eine einfach zusammenhängende Lie-Gruppe $G$ und jede weitere Lie-Gruppe $H$ die Abbildung die einem Lie-Gruppenhomomorphismus $G \rightarrow H$ den entsprechenden LieAlgebrenhomomorphismus $\mathfrak{g} \rightarrow \mathfrak{h}$ zuordnet bijektiv ist. Daher sind zwei einfach zusammenhängende Lie-Gruppen genau dann isomorph wenn es ihre LieAlgebren sind. Damit ist die Klassifikation der einfach zusammenhängenden LieGruppen auf die Klassifikation der Lie-Algebren zurückgeführt.
+
+Eine vollständige einfach zusammenhängende $n$-dimensionale Riemannsche Mannigfaltigkeit mit konstanter Schnittkrümmung (o.B.d.A. $\kappa=-1,0,1$ ) ist isometrisch zu $\mathbb{R}^{n}$ (falls $\kappa=0$, euklidische Geometrie), $S^{n}$ (falls $\kappa=1$, sphärische Geometrie) oder $H^{n}$ (falls $\kappa=-1$, hyperbolische Geometrie).
+
+Jedem (zusammenhängenden) topologischen Raum mit Basispunkt kann seine Fundamentalgruppe zugeordnet werden. Ihre Elemente sind Homotopieklassen geschlossener Wege beim Basispunkt, die Konkatenation von Wegen liefert die Gruppenstruktur. Ein zusammenhängender Raum ist einfach zusammenhängend genau dann, wenn seine Fundamentalgruppe trivial ist. Die Fundamentalgruppe liefert daher eine feine Abstufung zwischen den beiden Begriffen einfach zusammenhängend und nicht einfach zusammenhängend.
+
+Die Fundamentalgruppe ist eine topologische Invariante, dh. homöomorphe zusammenhängende Räume haben isomorphe Fundamentalgruppen. Gelingt es von zwei Räumen die Fundamentalgruppen auszurechnen, und sind diese nicht isomorph, dann waren die beiden Räume nicht homöomorph. Da die Fundamentalgruppe eine Homotopieinvariante ist, lässt sich sogar schließen, dass die beiden Räume nicht einmal homotopieäquivalent sein können.
+
+Mit Hilfe des Satzes von Seifert-van Kampen kann für einige interessante Räume die Fundamentalgruppe tatsächlich bestimmt werden. Etwa lassen sich die Fundamentalgruppen der geschlossenen Flächen berechnen, woraus dann folgt, dass geschlossene Flächen unterschiedlichen Geschlechts nicht homotopieäquivalent, und daher auch nicht homöomorph sind. Andere Beipiele kommen aus der Knotentheorie, haben die Komplemente zweier Knoten in $\mathbb{R}^{3}$ nicht-isomorphe Fundamentalgruppen, dann können die Knoten nicht äquivalent sein.
+
+Die Fundamentalgruppe hat gute funktorielle Eigenschaften, stetigen Abbildungen zwischen Räumen entsprechen Homomorphismen zwischen ihren Fundamentalgruppen. Dies ist eine typische Situation in der algebraischen Topologie: topologischen Räumen werden algebraische Objekte (Gruppen, Ringe, ...)\\
+zugeordnet, stetige Abbildungen entsprechen dabei in funktorieller Weise Homomorphismen zwischen diesen Objekte. Weitere Beipiele solcher topologischer Invarianten liefern die höheren Homotopiegruppen, die Homologiegruppen oder der Kohomologiering.
+
+Die Berechnung der Fundamentalgruppe des Kreises, $\pi_{1}\left(S^{1}\right) \cong \mathbb{Z}$, führt rasch zu einem Beweis des Fundamentalsatzes der Algebra und auch zu einem Beweis des Browerschen Fixpunktsatzes für stetige Abbildungen $D^{2} \rightarrow D^{2}$. Sie erlaubt es auch für stetige Abbildungen $S^{1} \rightarrow S^{1}$ einen Abbildungsgrad zu definieren. Für stetig differenzierbare Abbildungen kann dieser auch als Integral geschrieben werden und liefert daher ein erstes einfaches Beispiel für den Zusammenhang zwischen Analysis und Topologie.
+
+Der in diesem Kapitel behandelte Stoff ist Standardmaterial das sich in vielen Lehrbüchern findet. Die Darstellung hier orientiert sich eng an jenen in [4, Chapter 1] und [18, Kapitel 5], es seien aber auch [13], [15] und [19] erwähnt.\\
+I.1. Elementare Eigenschaften der Fundamentalgruppe. Es sei $X$ ein topologischer Raum. Weiters bezeichne $I:=[0,1] \subseteq \mathbb{R}$ das kompakte Einheitsintervall versehen mit der üblichen Teilraumtopologie. Unter einem Weg in $X$ verstehen wir eine stetige Abbildung $f: I \rightarrow X$. Wir nennen $f$ einen Weg von $f(0)$ nach $f(1)$. Stimmen die beiden Endpunkte eines Weges $f$ überein, dh. gilt $f(0)=x=f(1)$, dann wird $f$ ein geschlossener Weg oder eine Schleife bei $x$ genannt. Ist $x \in X$, dann bezeichnen wir mit $c_{x}: I \rightarrow X$ den konstanten Weg, $c_{x}(s):=x$.
+
+Unter einer Homotopie von Wegen in $X$ verstehen wir eine stetige Abbildung $H: I \times I \rightarrow X$, sodass $H(0, t)=x_{0}$ und $H(1, t)=x_{1}$ unabhängig von $t$ sind. Für jedes $t \in I$ ist dann $H_{t}: I \rightarrow X, H_{t}(s):=H(s, t)$, ein Weg von $H_{t}(0)=x_{0}$ nach $H_{t}(1)=x_{1}$. Zwei Wege $f, g: I \rightarrow X$ heißen homotop falls eine Homotopie von Wegen $H: I \times I \rightarrow X$ existiert, sodass $H_{0}=f$ und $H_{1}=g$, dh. $H(s, 0)=f(s)$ und $H(s, 1)=g(s)$ für alle $s \in I$. In diesem Fall wird $H$ eine Homotopie von $f$ nach $g$ genannt, und wir schreiben $f \simeq g$ oder $f \stackrel{H}{\simeq} g$. Um zu betonen, dass die Endpunkte fix sind, sprechen wir auch von einer Homotopie relativ Endpunkten und sagen $f$ ist homotop zu $g$ relativ Endpunkten.\\
+I.1.1. Proposition. Homotop relativ Endpunkten zu sein ist eine Äquivalenzrelation auf der Menge der Wege in $X$.
+
+Beweis. Zur Reflexivität: Ist $f$ ein Weg in $X$, dann ist $H: I \times I \rightarrow X$, $H(s, t):=f(s)$, eine Homotopie relativ Endpunkten von $H_{0}=f$ nach $H_{1}=f$, also gilt $f \stackrel{H}{\simeq} f$. Zur Symmetrie: Sei also $f \stackrel{H}{\simeq} g$. Dann ist $G: I \times I \rightarrow X$, $G(s, t):=H(s, 1-t)$ eine Homotopie relativ Endpunkten von $G_{0}=H_{1}=g$ nach $G_{1}=H_{0}=f$, also gilt $g \stackrel{G}{\simeq} f$. Zur Transitivität: Seien also $f \stackrel{H^{\prime}}{\simeq} g$ und $g \stackrel{H^{\prime \prime}}{\simeq} h$.
+
+Dann ist
+
+$$
+H: I \times I \rightarrow X, \quad H(s, t):= \begin{cases}H^{\prime}(s, 2 t) & \text { falls } 0 \leq t \leq 1 / 2 \\ H^{\prime \prime}(s, 2 t-1) & \text { falls } 1 / 2 \leq t \leq 1\end{cases}
+$$
+
+eine Homotopie relativ Endpunkten von $H_{0}=H_{0}^{\prime}=f$ nach $H_{1}=H_{1}^{\prime \prime}=h$, also gilt $f \stackrel{H}{\simeq} h$. Die Stetigkeit von $H$ folgt aus Lemma I.1.2 unten.
+
+Die Äquivalenzklassen der Äquivalenzrelation $\simeq$ heißen Homotopieklassen. Wir schreiben $[f]$ für die Homotopieklasse eines Weges $f$.\\
+I.1.2. Lemma. Es seien $X$ und $Y$ zwei topologische Räume und $f: Y \rightarrow X$ eine Abbildung. Weiters seien $A$ und $B$ zwei abgeschlossene Teilmengen von $Y$, sodass $Y=A \cup B$. In dieser Situation gilt: $f$ ist genau dann stetig, wenn die Einschränkungen $\left.f\right|_{A}: A \rightarrow X$ und $\left.f\right|_{B}: B \rightarrow X$ beide stetig sind.
+
+Beweis. Mit $f$ sind natürlich auch die Einschränkungen $\left.f\right|_{A}$ und $\left.f\right|_{B}$ stetig. Es bleibt daher zu zeigen, dass aus der Stetigkeit der Einschränkungen auch die Stetigkeit von $f$ folgt. Sei dazu $C$ eine abgeschlossene Teilmenge von $X$ und $D:=f^{-1}(C) \subseteq Y$. Es ist zu zeigen, dass $D$ in $Y$ abgeschlossen ist. Aus der Stetigkeit von $\left.f\right|_{A}$ folgt, dass $D \cap A=\left.f\right|_{A} ^{-1}(D)$ abgeschlossen in $A$ ist. Da $A$ in $Y$ abgeschlossen ist folgt, dass $D \cap A$ auch in $Y$ abgeschlossen ist. Ebenso folgt aus der Stetigkeit von $\left.f\right|_{B}$ und der Abgeschlossenheit von $B$, dass $D \cap B$ abgeschlossen in $Y$ ist. Also ist auch ihre Vereinigung $(D \cap A) \cup(D \cap B)=D \cap(A \cup B)=D$ abgeschlossen in $Y$.\\
+I.1.3. Beispiel (Reparametrisierung). Ist $f: I \rightarrow X$ ein Weg und $\varphi: I \rightarrow I$ stetig mit $\varphi(0)=0$ und $\varphi(1)=1$, dann gilt $f \circ \varphi \simeq f$. Es ist nämlich $H$ : $I \times I \rightarrow X, H(s, t):=f((1-t) \varphi(s)+t s)$ eine Homotopie relativ Endpunkten von $H_{0}=f \circ \varphi$ nach $H_{1}=f$. Beachte, dass $(1-t) \varphi(s)+t s$ stets in $I$ liegt und $H$ daher wohldefiniert ist.\\
+I.1.4. Beispiel. Es sei $X \subseteq \mathbb{R}^{n}$ eine konvexe Teilmenge und $f, g: I \rightarrow X$ zwei Wege mit $f(0)=g(0)$ und $f(1)=g(1)$. Dann gilt $f \simeq g$, denn $H: I \times I \rightarrow X$, $H(s, t):=(1-t) f(s)+t g(s)$, ist eine Homotopie relativ Endpunkten von $H_{0}=$ $f$ nach $H_{1}=g$. Beachte, dass wegen der Konvexität von $X$ diese Homotopie tatsächlich Werte in $X$ hat.
+
+Es sei $X$ ein topologischer Raum. Sind $f$ und $g$ zwei Wege in $X$ mit $f(1)=$ $g(0)$, dann ist
+
+$$
+f g: I \rightarrow X, \quad(f g)(s):= \begin{cases}f(2 s) & \text { falls } 0 \leq s \leq 1 / 2 \\ g(2 s-1) & \text { falls } 1 / 2 \leq s \leq 1\end{cases}
+$$
+
+ein Weg von $f(0)$ nach $g(1)$. Er wird der Produktweg, die Konkatenation oder auch Zusammensetzung von $f$ und $g$ genannt.\\
+I.1.5. Lemma. Es seien $f_{0}, f_{1}, g_{0}$ und $g_{1}$ Wege in $X$, sodass $f_{0} \simeq f_{1}, g_{0} \simeq g_{1}$, $f_{0}(1)=g_{0}(0)$ und daher auch $f_{1}(1)=g_{1}(0)$. Dann gilt $f_{0} g_{0} \simeq f_{1} g_{1}$.
+
+Beweis. Sind $F: I \times I \rightarrow X$ und $G: I \times I \rightarrow X$ Homotopien von Wegen mit $f_{0} \stackrel{F}{\simeq} f_{1}$ und $g_{0} \stackrel{G}{\simeq} g_{1}$, dann definiert
+
+$$
+H: I \times I \rightarrow X, \quad H(s, t):= \begin{cases}F(2 s, t) & \text { falls } 0 \leq s \leq 1 / 2 \\ G(2 s-1, t) & \text { falls } 1 / 2 \leq s \leq 1\end{cases}
+$$
+
+eine Homotopie relativ Endpunkten von $H_{0}=f_{0} g_{0}$ nach $H_{1}=f_{1} g_{1}$. Die Stetigkeit von $H$ folgt wieder aus Lemma I.1.2.\\
+I.1.6. Lemma. Sind $f, g$ und $h$ drei Wege in $X$ mit $f(1)=g(0)$ und $g(1)=$ $h(0)$, dann gilt $(f g) h \simeq f(g h)$.
+
+Beweis. (fg) $h$ ist eine Reparametrisierung von $f(g h)$, denn es gilt $(f g) h=$ $(f(g h)) \circ \varphi$ mit
+
+$$
+\varphi: I \rightarrow I, \quad \varphi(s):= \begin{cases}2 \mathrm{~s} & \text { falls } 0 \leq s \leq 1 / 4 \\ \mathrm{~s}+1 / 4 & \text { falls } 1 / 4 \leq s \leq 1 / 2 \\ \mathrm{~s} / 2+1 / 2 & \text { falls } 1 / 2 \leq s \leq 1\end{cases}
+$$
+
+Aus Beispiel I.1.3 folgt daher $(f g) h \simeq f(g h)$.\\
+I.1.7. Lemma. Es sei $f$ ein Weg in $X$ und $x:=f(0), y:=f(1)$. Dann gilt für die Konkatenationen mit den konstanten Wegen $f c_{y} \simeq f$ sowie $c_{x} f \simeq f$.
+
+Beweis. Der Weg $f c_{y}$ ist eine Reparametrisierung von $f$, denn es gilt $f c_{y}=$ $f \circ \varphi$ mit
+
+$$
+\varphi: I \rightarrow I, \quad \varphi(s):= \begin{cases}2 s & \text { falls } 0 \leq s \leq 1 / 2, \text { und } \\ 1 & \text { falls } 1 / 2 \leq s \leq 1\end{cases}
+$$
+
+Aus Beispiel I.1.3 folgt daher $f c_{y} \simeq f$. Analog lässt sich $c_{x} f \simeq f$ zeigen.\\
+Für einen Weg $f: I \rightarrow X$ ist $\bar{f}: I \rightarrow X, \bar{f}(s):=f(1-s)$, ein Weg von $f(1)$ nach $f(0)$. Er wird als der zu $f$ inverse Weg bezeichnet.\\
+I.1.8. Lemma. Es sei $f$ ein Weg in $X$ und $x:=f(0), y:=f(1)$. Dann gilt $f \bar{f} \simeq c_{x}$ und $\bar{f} f \simeq c_{y}$.
+
+Beweis. Es ist
+
+$$
+H: I \times I \rightarrow X, \quad H(s, t):= \begin{cases}f(2 s) & \text { falls } 0 \leq s \leq t / 2 \\ f(t) & \text { falls } t / 2 \leq s \leq 1-t / 2 \\ f(2-2 s) & \text { falls } 1-t / 2 \leq s \leq 1\end{cases}
+$$
+
+eine Homotopie relativ Endpunkten von $H_{0}=c_{x}$ nach $H_{1}=f \bar{f}$. Die Stetigkeit von $H$ folgt wieder aus Lemma I.1.2. Analog lässt sich $\bar{f} f \simeq c_{y}$ zeigen.
+
+Sei $X$ ein topologischer Raum und $x_{0} \in X$ ein Basispunkt. Mit $\pi_{1}\left(X, x_{0}\right)$ bezeichnen wir die Menge aller Homotopieklassen geschlossener Wege bei $x_{0}$, genauer
+
+$$
+\pi_{1}\left(X, x_{0}\right):=\left\{\text { Wege } f: I \rightarrow X \text { mit } f(0)=x_{0}=f(1)\right\} / \simeq
+$$
+
+wobei $\simeq$ die oben besprochene Äquivalenzrelation der Homotopie relativ Endpunkten bezeichnet. Ist $f$ ein Weg in $X$ mit $f(0)=x_{0}=f(1)$ dann schreiben wir $[f]$ für seine Äquivalenzklasse in $\pi_{1}\left(X, x_{0}\right)$. Nach Lemma I.1.5 definiert die Konkatenation von Wegen eine Multiplikation
+
+$$
+\pi_{1}\left(X, x_{0}\right) \times \pi_{1}\left(X, x_{0}\right) \rightarrow \pi_{1}\left(X, x_{0}\right), \quad([f],[g]) \mapsto[f][g]:=[f g]
+$$
+
+die nach Lemma I.1.6 assotiativ ist, $([f][g])[h]=[f]([g][h])$. Die Äquivalenzklasse des konstanten Weges $c_{x_{0}}$ ist nach Lemma I.1.7 neutrales Element dieser Multiplikation, $[f]\left[c_{x_{0}}\right]=[f]=\left[c_{x_{0}}\right][f]$. Nach Lemma I.1.8 gilt weiters $[f][\bar{f}]=\left[c_{x_{0}}\right]=$ $[\bar{f}][f]$. Zusammenfassend erhalten wir\\
+I.1.9. Proposition. Die Konkatenation von Wegen definiert auf $\pi_{1}\left(X, x_{0}\right)$ eine Gruppenstruktur, $[f][g]=[f g]$. Das neutrale Element wird durch den konstanten Weg $c_{x_{0}}$ repräsentiert, $1=\left[c_{x_{0}}\right]$. Das zu $[f]$ inverse Element wird durch den inversen Weg repräsentiert, $[f]^{-1}=[\bar{f}]$.\\
+I.1.10. Definition (Fundamentalgruppe). Die Gruppe $\pi_{1}\left(X, x_{0}\right)$ wird als die Fundamentalgruppe oder erste Homotopiegruppe von $X$ beim Basispunkt $x_{0}$ bezeichnet.\\
+I.1.11. Bemerkung. Die Gruppe $\pi_{1}\left(X, x_{0}\right)$ ist i.A. nicht kommutativ und wird daher i.A. multiplikativ notiert. Insbesondere schreiben wir $1 \in \pi_{1}\left(X, x_{0}\right)$ für das neutrale Element und $\sigma^{-1}$ für das Inverse von $\sigma \in \pi_{1}\left(X, x_{0}\right)$. Ist die Fundamentalgruppe abelsch, so wird sie manchmal auch additiv geschrieben. Ist sie trivial, dh. besteht sie nur aus dem neutralen Element $\pi_{1}\left(X, x_{0}\right)=\{1\}$, dann wird dies üblicherweise durch die additive Schreibweise $\pi_{1}\left(X, x_{0}\right)=0$ ausgedrückt.\\
+I.1.12. Beispiel. Ist $X \subseteq \mathbb{R}^{n}$ eine konvexe Teilmenge und $x_{0} \in X$ so gilt $\pi_{1}\left(X, x_{0}\right)=0$, siehe Beispiel I.1.4.
+
+Unter einem punktierten Raum verstehen wir ein Paar ( $X, x_{0}$ ) wobei $X$ ein topologischer Raum und $x_{0} \in X$ ein Basispunkt ist. Punktierte Räume werden auch als Räume mit Basispunkt bezeichnet. Jedem punktierten Raum ( $X, x_{0}$ ) haben wir in Definition I.1.10 seine Fundamentalgruppe $\pi_{1}\left(X, x_{0}\right)$ zugeordnet.
+
+Sind ( $X, x_{0}$ ) und ( $Y, y_{0}$ ) zwei punktierte Räume und ist $\varphi: X \rightarrow Y$ stetig mit $\varphi\left(x_{0}\right)=y_{0}$, dann nennen wir $\varphi$ eine Abbildung punktierter Räume oder auch basispunkterhaltende stetige Abbildung und schreiben $\varphi:\left(X, x_{0}\right) \rightarrow\left(Y, y_{0}\right)$. Ist $\psi:\left(Y, y_{0}\right) \rightarrow\left(Z, z_{0}\right)$ eine weitere Abbildung punktierter Räume, dann ist auch die Komposition $\psi \circ \varphi:\left(X, x_{0}\right) \rightarrow\left(Z, z_{0}\right)$ eine Abbildung punktierter Räume. Die identische Abbildung $\operatorname{id}_{\left(X, x_{0}\right)}:\left(X, x_{0}\right) \rightarrow\left(X, x_{0}\right)$ ist basispunkterhaltend. Unter\\
+einem Homöomorphismus punktierter Räume verstehen wir einen basispunkterhaltenden Homöomorphismus.\\
+I.1.13. Proposition. Eine Abbildung punktierter Räume $\varphi:\left(X, x_{0}\right) \rightarrow$ ( $Y, y_{0}$ ) induziert einen Gruppenhomomorphismus
+
+$$
+\varphi_{*}: \pi_{1}\left(X, x_{0}\right) \rightarrow \pi_{1}\left(Y, y_{0}\right), \quad \varphi_{*}([f]):=[\varphi \circ f] .
+$$
+
+Ist $\psi:\left(Y, y_{0}\right) \rightarrow\left(Z, z_{0}\right)$ eine weitere Abbildung punktierter Räume, dann gilt $(\psi \circ \varphi)_{*}=\psi_{*} \circ \varphi_{*}$ sowie $\left(\operatorname{id}_{\left(X, x_{0}\right)}\right)_{*}=\operatorname{id}_{\pi_{1}\left(X, x_{0}\right)}$.
+
+Beweis. Sei also $\varphi:\left(X, x_{0}\right) \rightarrow\left(Y, y_{0}\right)$ eine Abbildung punktierter Räume, und $f$ eine Schleife bei $x_{0}$. Dann ist $\varphi \circ f$ eine Schleife bei $y_{0}$. Sind $f_{0}, f_{1}$ zwei Schleife bei $x_{0}$ mit $f_{0} \xrightarrow{H} f_{1}$, so ist $\varphi \circ H: I \times I \rightarrow Y$ eine Homtopie von Wegen mit $\varphi \circ f_{0} \stackrel{\varphi \circ H}{\simeq} \varphi \circ f_{1}$, also $\left[\varphi \circ f_{0}\right]=\left[\varphi \circ f_{1}\right] \in \pi_{1}\left(Y, y_{0}\right)$. Dies zeigt, dass $\varphi_{*}$ wohldefiniert ist. Für zwei Schleifen $f, g$ bei $x_{0}$ gilt offensichtlich $\varphi \circ(f g)=(\varphi \circ f)(\varphi \circ g)$, also $\varphi_{*}([f][g])=\varphi_{*}([f g])=[\varphi \circ(f g)]=[(\varphi \circ f)(\varphi \circ g)]=[\varphi \circ f][\varphi \circ g]=\varphi_{*}([f]) \varphi_{*}([g])$. Dies zeigt, dass $\varphi_{*}$ ein Gruppenhomomorphismus ist. Weiters gilt $(\psi \circ \varphi)_{*}([f])=$ $[(\psi \circ \varphi) \circ f]=[\psi \circ(\varphi \circ f)]=\psi_{*}([\varphi \circ f])=\psi_{*}\left(\varphi_{*}([f])\right)$ und daher $(\psi \circ \varphi)_{*}=\psi_{*} \circ \varphi_{*}$. Die Aussage $\left(\operatorname{id}_{\left(X, x_{0}\right)}\right)_{*}=\operatorname{id}_{\pi_{1}\left(X, x_{0}\right)}$ ist ebenso trivial.\\
+I.1.14. Proposition. Ist $\varphi:\left(X, x_{0}\right) \rightarrow\left(Y, y_{0}\right)$ ein Homöomorphismus punktierter Räume, so ist die induzierte Abbildung $\varphi_{*}: \pi_{1}\left(X, x_{0}\right) \rightarrow \pi_{1}\left(Y, y_{0}\right)$ ein Isomorphismus.
+
+Beweis. Es bezeichne $\varphi^{-1}:\left(Y, y_{0}\right) \rightarrow\left(X, x_{0}\right)$ die Umkehrabbildung. Aus Proposition I.1.13 erhalten wir $\left(\varphi^{-1}\right)_{*} \circ \varphi_{*}=\left(\varphi^{-1} \circ \varphi\right)_{*}=\left(\operatorname{id}_{X}\right)_{*}=\operatorname{id}_{\pi_{1}\left(X, x_{0}\right)}$ sowie $\varphi_{*} \circ\left(\varphi^{-1}\right)_{*}=\left(\varphi \circ \varphi^{-1}\right)_{*}=\left(\operatorname{id}_{Y}\right)_{*}=\operatorname{id}_{\pi_{1}\left(Y, y_{0}\right)}$. Daher sind $\varphi_{*}$ und $\left(\varphi^{-1}\right)_{*}$ zueinander inverse Gruppenisomorphismen.\\
+I.1.15. Bemerkung. Sind $\varphi, \psi:\left(X, x_{0}\right) \rightarrow\left(Y, y_{0}\right)$ zwei Homöomorphismen punktierter Räume, dann stimmen die induzierten Isomorphismen $\varphi_{*}$ und $\psi_{*}$ i.A. nicht überein, siehe etwa Beispiel I.2.2 unten.\\
+I.1.16. Proposition. Es sei ( $X, x_{0}$ ) ein punktierter Raum und es bezeichne $X_{0}$ die Wegzusammenhangskomponente von $x_{0}$. Dann induzierte die kanonische Inklusion $\left(X_{0}, x_{0}\right) \rightarrow\left(X, x_{0}\right)$ einen Isomorphismus $\pi_{1}\left(X_{0}, x_{0}\right) \cong \pi_{1}\left(X, x_{0}\right)$.
+
+Beweis. Es bezeichne $\iota:\left(X_{0}, x_{0}\right) \rightarrow\left(X, x_{0}\right)$ die kanonische Inklusion und $\iota_{*}: \pi_{1}\left(X_{0}, x_{0}\right) \rightarrow \pi_{1}\left(X, x_{0}\right)$ den induzierten Homomorphismus.
+
+Wir zeigen zunächst, dass $\iota_{*}$ surjektiv ist. Ist $f: I \rightarrow X$ eine Schleife bei $x_{0}$, dann liegt diese zur Gänze in $X_{0}$ und kann daher als Schleife $f^{\prime}: I \rightarrow X_{0}$ aufgefasst werden, $\iota \circ f^{\prime}=f$. Diese repräsentiert ein Element $\left[f^{\prime}\right] \in \pi_{1}\left(X_{0}, x_{0}\right)$ für das offensichtlich $\iota_{*}\left(\left[f^{\prime}\right]\right)=\left[\iota \circ f^{\prime}\right]=[f]$ gilt. Somit ist $\iota_{*}$ surjektiv.
+
+Kommen wir nun zur Injektivität von $\iota_{*}$. Es seien $f^{\prime}, g^{\prime}: I \rightarrow X_{0}$ zwei Schleifen bei $x_{0}$ mit $\iota_{*}\left(\left[f^{\prime}\right]\right)=\iota_{*}\left(\left[g^{\prime}\right]\right) \in \pi_{1}\left(X, x_{0}\right)$. Dann existiert eine Homotopie relativ Endpunkten $H: I \times I \rightarrow X$ von $H_{0}=\iota \circ f^{\prime}$ nach $H_{1}=\iota \circ g^{\prime}$. Da\\
+$I \times I$ wegzusammenhängend ist, nimmt $H$ nur Werte in $X_{0}$ an, kann daher als Homotopie $H^{\prime}: I \times I \rightarrow X_{0}$ aufgefasst werden, $\iota \circ H^{\prime}=H$. Insbesondere gilt $\iota \circ H_{0}^{\prime}=H_{0}=\iota \circ f^{\prime}$ und $\iota \circ H_{1}^{\prime}=H_{1}=\iota \circ g^{\prime}$, aus der Injektivität von $\iota$ folgt daher $H_{0}^{\prime}=f^{\prime}$ und $H_{1}^{\prime}=g^{\prime}$. Wir erhalten $f^{\prime} \stackrel{H^{\prime}}{\simeq} g^{\prime}$, dh. $\left[f^{\prime}\right]=\left[g^{\prime}\right] \in \pi_{1}\left(X_{0}, x_{0}\right)$, also ist $\iota_{*}$ injektiv.
+
+Wir wollen uns nun überlegen wie die Fundamentalgruppe eines Produktraumes mit den Fundamentalgruppen der Faktoren zusammenhängt. Wir beginnen damit das Produkt punktierter Räume und das Produkt von Gruppen zu besprechen.
+
+Sind ( $X, x_{0}$ ) und ( $Y, y_{0}$ ) zwei punktierte Räume, dann ist auch
+
+$$
+\left(X, x_{0}\right) \times\left(Y, y_{0}\right):=\left(X \times Y,\left(x_{0}, y_{0}\right)\right)
+$$
+
+ein punktierter Raum, der als das Produkt der punktierten Räume ( $X, x_{0}$ ) und $\left(Y, y_{0}\right)$ bezeichnet wird. Die Projektionen auf die beiden Komponenten liefern zwei Abbildungen punktierter Räume $p_{X}:\left(X, x_{0}\right) \times\left(Y, y_{0}\right) \rightarrow\left(X, x_{0}\right)$ und $p_{Y}:\left(X, x_{0}\right) \times\left(Y, y_{0}\right) \rightarrow\left(Y, y_{0}\right)$, die als kanonische Projektionen bezeichnet werden. Das Produkt punktierter Räume hat die folgende universelle Eigenschaft: Ist $\left(Z, z_{0}\right)$ ein weiterer punktierter Raum und sind $\varphi_{X}:\left(Z, z_{0}\right) \rightarrow\left(X, x_{0}\right)$ sowie $\varphi_{Y}:\left(Z, z_{0}\right) \rightarrow\left(Y, y_{0}\right)$ zwei Abbildungen punktierter Räume, dann existiert genau eine Abbildung punktierter Räume $\varphi:\left(Z, z_{0}\right) \rightarrow\left(X, x_{0}\right) \times\left(Y, y_{0}\right)$, sodass\\
+\includegraphics[max width=\textwidth]{2025_06_05_d7ed2bacd1e9ce1db1f0g-009} $p_{X} \circ \varphi=\varphi_{X}$ und $p_{Y} \circ \varphi=\varphi_{Y}$ gilt. Das nebenstehende kommutative Diagramm soll dies verdeutlichen. Diese Abbildung $\varphi$ ist durch $\varphi(x, y)=\left(\varphi_{X}(x), \varphi_{Y}(x)\right)$ gegeben und wird mit $\left(\varphi_{X}, \varphi_{Y}\right)$ bezeichnet.
+
+Analog definieren wir das Produkt beliebig vieler punktierter Räume ( $X_{\alpha}, x_{\alpha}$ ), $\alpha \in A$, durch
+
+$$
+\prod_{\alpha \in A}\left(X_{\alpha}, x_{\alpha}\right):=\left(\prod_{\alpha \in A} X_{\alpha},\left(x_{\alpha}\right)_{\alpha \in A}\right)
+$$
+
+Dabei bezeichnet $\left(x_{\alpha}\right)_{\alpha \in A}$ den Punkt in $\prod_{\alpha \in A} X_{\alpha}$ mit Komponenten $x_{\alpha}$. Für jedes $\alpha \in A$ haben wir eine kanonische Projektion $p_{\alpha}: \prod_{\alpha^{\prime} \in A}\left(X_{\alpha^{\prime}}, x_{\alpha^{\prime}}\right) \rightarrow\left(X_{\alpha}, x_{\alpha}\right)$ mit folgender universellen Eigenschaft: Ist $\left(Z, z_{0}\right)$ ein punktierter Raum und sind $\varphi_{\alpha}:\left(Z, z_{0}\right) \rightarrow\left(X_{\alpha}, x_{\alpha}\right)$ Abbildungen punktierter Räume, $\alpha \in A$, dann existiert genau eine Abbildung punktierter Räume $\varphi:\left(Z, z_{0}\right) \rightarrow \prod_{\alpha \in A}\left(X_{\alpha}, x_{\alpha}\right)$, sodass $p_{\alpha} \circ \varphi=\varphi_{\alpha}$, für alle $\alpha \in A$. Diese Abbildung ist durch $\varphi(z)=\left(\varphi_{\alpha}(z)\right)_{\alpha \in A}$ gegeben und wird mit $\varphi=\left(\varphi_{\alpha}\right)_{\alpha \in A}$ bezeichnet. Durch diese universelle Eigenschaft ist das Produkt punktierter Räume zusammen mit den kanonischen Projektionen, bis auf kanonische Isomorphie eindeutig bestimmt.
+
+Das Produkt von Gruppen besitzt eine analoge Eigenschaft. Sind $G$ und $H$ zwei Gruppen, dann ist $G \times H$ bezüglich komponentenweiser Multiplikation wieder eine Gruppe. Die beiden kanonischen Projektionen $p_{G}: G \times H \rightarrow G$ und $p_{H}: G \times H \rightarrow H$ sind Gruppenhomomorphismen. Das Produkt $G \times H$ hat die folgende universelle Eigenschaft: Sind $\varphi_{G}: K \rightarrow G$ und $\varphi_{H}$ : $K \rightarrow H$ zwei Gruppenhomomorphismen, dann existiert genau ein Gruppenhomomorphismus $\varphi: K \rightarrow G \times H$ mit $p_{G} \circ \varphi=\varphi_{G}$ und $p_{H} \circ \varphi=\varphi_{H}$. Dieser Homomorphi-\\
+\includegraphics[max width=\textwidth]{2025_06_05_d7ed2bacd1e9ce1db1f0g-010} mus ist durch $\varphi(k)=\left(\varphi_{G}(k), \varphi_{H}(k)\right)$ gegeben und wird mit $\left(\varphi_{G}, \varphi_{H}\right)$ bezeichnet. Auch das Produkt beliebig vieler Gruppen $\prod_{\alpha \in A} G_{\alpha}$ hat diese Eigenschaft. Die kanonischen Projektionen $p_{\alpha}: \prod_{\alpha^{\prime} \in A} G_{\alpha^{\prime}} \rightarrow G_{\alpha}$ sind Gruppenhomomorphismen, und zu Gruppenhomomorphismen $\varphi_{\alpha}: K \rightarrow G_{\alpha}$, $\alpha \in A$, existiert genau ein Gruppenhomomorphismus $\varphi: K \rightarrow \prod_{\alpha \in A} G_{\alpha}$, sodass $p_{\alpha} \circ \varphi=\varphi_{\alpha}$, für alle $\alpha \in A$. Dieser Homomorphimus ist durch $\varphi(k)=\left(\varphi_{\alpha}(k)\right)_{\alpha \in A}$ gegeben und wird mit $\left(\varphi_{\alpha}\right)_{\alpha \in A}$ bezeichnet.
+
+Nun aber zur Fundamentalgruppe des Produkts $\prod_{\alpha \in A}\left(X_{\alpha}, x_{\alpha}\right)$. Die kanonischen Projektionen $p_{\alpha}: \prod_{\alpha^{\prime} \in A}\left(X_{\alpha^{\prime}}, x_{\alpha^{\prime}}\right) \rightarrow\left(X_{\alpha}, x_{\alpha}\right)$ induzieren Gruppenhomomorphismen
+
+$$
+\left(p_{\alpha}\right)_{*}: \pi_{1}\left(\prod_{\alpha^{\prime} \in A}\left(X_{\alpha^{\prime}}, x_{\alpha^{\prime}}\right)\right) \rightarrow \pi_{1}\left(X_{\alpha}, x_{\alpha}\right), \quad[f] \mapsto\left[p_{\alpha} \circ f\right]
+$$
+
+Diese liefern einen Gruppenhomomorphismus
+
+$$
+\pi_{1}\left(\prod_{\alpha \in A}\left(X_{\alpha}, x_{\alpha}\right)\right) \rightarrow \prod_{\alpha \in A} \pi_{1}\left(X_{\alpha}, x_{\alpha}\right), \quad[f] \mapsto\left(\left[p_{\alpha} \circ f\right]\right)_{\alpha \in A^{*}}
+$$
+
+I.1.17. Proposition. Für punktierte Räume ( $X_{\alpha}, x_{\alpha}$ ), $\alpha \in A$, ist (I.1) ein Isomorphismus. Insbesondere gilt $\pi_{1}\left(X \times Y,\left(x_{0}, y_{0}\right)\right) \cong \pi_{1}\left(X, x_{0}\right) \times \pi_{1}\left(Y, y_{0}\right)$ für je zwei punktierte Räume ( $X, x_{0}$ ) und ( $Y, y_{0}$ ).
+
+Beweis. Um die Surjektivität von (I.1) einzusehen, betrachten wir ein beliebiges Element $g \in \prod_{\alpha \in A} \pi_{1}\left(X_{\alpha}, x_{\alpha}\right)$, dh. $g=\left(\left[f_{\alpha}\right]\right)_{\alpha \in A}$ wobei $f_{\alpha}: I \rightarrow X_{\alpha}$ Schleifen bei $x_{\alpha}$ sind die Elemente $\left[f_{\alpha}\right] \in \pi_{1}\left(X_{\alpha}, x_{\alpha}\right)$ repräsentieren, $\alpha \in A$. Es ist dann $f:=\left(f_{\alpha}\right)_{\alpha \in A}: I \rightarrow \prod_{\alpha \in A} X_{\alpha}$ eine Schleife bei $\left(x_{\alpha}\right)_{\alpha \in A}$, definiert daher ein Element $[f] \in \pi_{1}\left(\prod_{\alpha \in A}\left(X_{\alpha}, x_{\alpha}\right)\right)$. Nach Konstruktion wird $[f]$ durch den Homomorphismus (I.1) auf $g$ abgebildet. Also ist (I.1) surjektiv.
+
+Nun zur Injektivität von (I.1). Es seien $f, g: I \rightarrow \prod_{\alpha \in A} X_{\alpha}$ zwei Schleifen bei $\left(x_{\alpha}\right)_{\alpha \in A}$, sodass die davon repräsentierten Elemente $[f],[g] \in \pi_{1}\left(\prod_{\alpha \in A}\left(X_{\alpha}, x_{\alpha}\right)\right)$ dasselbe Bild unter (I.1) haben. Es gilt daher $\left[p_{\alpha} \circ f\right]=\left[p_{\alpha} \circ g\right] \in \pi_{1}\left(X_{\alpha}, x_{\alpha}\right)$, für alle $\alpha \in A$. Also existieren Homotopien relativ Endpunkten $H^{\alpha}: I \times I \rightarrow X_{\alpha}$ von $H_{0}^{\alpha}=p_{\alpha} \circ f$ nach $H_{1}^{\alpha}=p_{\alpha} \circ g, \alpha \in A$. Es definiert dann $H:=\left(H^{\alpha}\right)_{\alpha \in A}$ : $I \times I \rightarrow \prod_{\alpha \in A} X_{\alpha}$ eine Homotopie relativ Endpunkten von $f$ nach $g$. Damit ist $[f]=[g] \in \pi_{1}\left(\prod_{\alpha \in A}\left(X_{\alpha}, x_{\alpha}\right)\right)$ und (I.1) also injektiv.
+
+Wir wenden uns nun der Frage zu, inwiefern die Fundamentalgruppe $\pi_{1}\left(X, x_{0}\right)$ eines Raumes $X$ vom Basispunkt $x_{0}$ abhängt.\\
+I.1.18. Proposition. Es sei $h: I \rightarrow X$ ein Weg und $x_{0}:=h(0), x_{1}:=h(1)$. Dann definiert
+
+$$
+\beta_{h}: \pi_{1}\left(X, x_{1}\right) \rightarrow \pi_{1}\left(X, x_{0}\right), \quad \beta_{h}([f]):=[h f \bar{h}]
+$$
+
+einen Isomorphismus von Gruppen, $\beta_{h}^{-1}=\beta_{\bar{h}}$.\\
+Beweis. Nach den Beobachtungen am Beginn dieses Abschnitts ist $\beta_{h}$ wohldefiniert, ${ }^{1}$ und für $[f],[g] \in \pi_{1}\left(X, x_{1}\right)$ gilt $\beta_{h}([f][g])=[h f g \bar{h}]=\left[h f c_{x_{1}} g \bar{h}\right]=$ $[h f \bar{h} h g \bar{h}]=[h f \bar{h}][h g \bar{h}]=\beta_{h}([f]) \beta_{h}([g])$, also ist $\beta_{h}$ ein Gruppenhomomorphismus. Verwenden wir noch die offensichtliche Tatsache $\overline{\bar{h}}=h$, so erhalten wir $\left(\beta_{\bar{h}} \circ \beta_{h}\right)([f])=\beta_{\bar{h}}([h f \bar{h}])=[\bar{h} h f \bar{h} \overline{\bar{h}}]=[\bar{h} h f \bar{h} h]=\left[c_{x_{1}} f c_{x_{1}}\right]=[f]$. Daher gilt $\beta_{\bar{h}} \circ \beta_{h}=\operatorname{id}_{\pi_{1}\left(X, x_{1}\right)}$. Ebenso lässt sich $\beta_{h} \circ \beta_{\bar{h}}=\operatorname{id}_{\pi_{1}\left(X, x_{0}\right)}$ zeigen, also sind $\beta_{h}$ und $\beta_{\bar{h}}$ zueinander inverse Gruppenisomorphismen.\\
+I.1.19. Bemerkung. Sind $x_{0}$ und $x_{1}$ zwei Basispunkte in $X$ die in derselben Wegzusammenhangskomponente von $X$ liegen, dann sind nach Proposition I.1.18 die Gruppen $\pi_{1}\left(X, x_{0}\right)$ und $\pi_{1}\left(X, x_{1}\right)$ isomorph. Für wegzusammenhängendes $X$ schreiben wir daher oft auch $\pi_{1}(X)$. Liegen $x_{0}$ und $x_{1}$ nicht in derselben Wegzusammenhangskomponente, dann dürfen wir uns i.A. keinerlei Relation zwischen den Gruppen $\pi_{1}\left(X, x_{0}\right)$ und $\pi_{1}\left(X, x_{1}\right)$ erwarten, vgl. Proposition I.1.16.\\
+I.1.20. Bemerkung. Der Isomorphismus $\beta_{h}$ aus Proposition I.1.18 hängt nur von der Homotopieklasse von $h \mathrm{ab}$, dh. aus $h \simeq h^{\prime}$ folgt $\beta_{h}=\beta_{h^{\prime}}$. Genauer, für zwei Wege $h, h^{\prime}$ von $x_{0}$ nach $x_{1}$ gilt $\beta_{h}=\beta_{h^{\prime}}$ genau dann, wenn $\left[h \bar{h}^{\prime}\right]$ im Zentrum ${ }^{2} Z\left(\pi_{1}\left(X, x_{0}\right)\right)$ der Fundamentalgruppe liegt. Ist $\pi_{1}\left(X, x_{0}\right)$ nicht abelsch, dann gilt $Z\left(\pi_{1}\left(X, x_{0}\right)\right) \neq \pi_{1}\left(X, x_{0}\right)$ und der in Proposition I.1.18 konstruierte Isomorphismus hängt tatsächlich von $[h] \mathrm{ab}$. Ist die Fundamentalgruppe nicht abelsch, erhalten wir daher keine kanonische Identifikation von $\pi_{1}\left(X, x_{0}\right)$ mit $\pi_{1}\left(X, x_{1}\right)$.\\
+I.1.21. Proposition. Für einen topologischer Raum $X$ sind äquivalent:\\
+(i) Zu je zwei Punkten $x_{0}, x_{1} \in X$ gibt es genau eine Homotopieklasse von Wegen von $x_{0}$ nach $x_{1}$.\\
+(ii) $X$ ist wegzusammenhängend, und für alle $x_{0} \in X$ gilt $\pi_{1}\left(X, x_{0}\right)=0$.\\
+(iii) $X$ ist wegzusammenhängend, und es existiert $x_{0} \in X$ mit $\pi_{1}\left(X, x_{0}\right)=0$.
+
+Beweis. Die Äquivalenz (ii) $\Leftrightarrow$ (iii) folgt aus Proposition I.1.18. Nun zur Implikation (i) $\Rightarrow$ (ii): Da nach Voraussetzung mindestens eine Homotopieklasse von
+
+\footnotetext{${ }^{1}$ Genaugenommen müssten wir hier Klammern setzten, $\beta_{h}([f])=[(h f) \bar{h}]$ oder $\beta_{h}([f])=$ $[h(f \bar{h})]$, nach Lemma I.1.6 stimmen die Homotopieklassen $[(h f) \bar{h}]$ und $[h(f \bar{h})]$ aber überein.\\
+${ }^{2}$ Das Zentrum einer Gruppe $G$ ist $Z(G):=\{g \in G \mid \forall h \in G: g h=h g\}$. Das Zentrum ist stets ein abelscher Normalteiler. Es gilt $Z(G)=G$ genau dann, wenn $G$ abelsch ist.
+}Wegen von $x_{0}$ nach $x_{1}$ existiert, muss $X$ wegzusammenhängend sein. Betrachten wir nun $x_{1}=x_{0}$, so folgt $\pi_{1}\left(X, x_{0}\right)=0$ aus der Annahme, dass höchstens eine Homotopieklasse von Wegen von $x_{0}$ nach $x_{1}$ existiert. Es bleibt (ii) $\Rightarrow$ (i) zu zeigen. Seien dazu $x_{0}, x_{1} \in X$. Aus dem Wegzusammenhang von $X$ folgt, dass es zumindest eine Homotopieklasse von Wegen von $x_{0}$ nach $x_{1}$ gibt. Sind $f, g: I \rightarrow X$ zwei Wege von $x_{0}$ nach $x_{1}$, dann ist $f \bar{g}$ eine Schleife bei $x_{0}$ die wegen $\pi_{1}\left(X, x_{0}\right)=0$ homotop zum konstanten Weg $c_{x_{0}}$ sein muss, $f \bar{g} \simeq c_{x_{0}}$. Es folgt $f \simeq f c_{x_{1}} \simeq f(\bar{g} g) \simeq(f \bar{g}) g \simeq c_{x_{0}} g \simeq g$, also kann es höchstens eine Homotopieklasse von Wegen von $x_{0}$ nach $x_{1}$ geben.\\
+I.1.22. Definition (Einfacher Zusammenhang). Ein topologischer Raum $X$ heißt einfach zusammenhängend, falls er die (äquivalenten) Bedingungen in Proposition I.1.21 erfüllt.\\
+I.1.23. Beispiel. Jede konvexe Teilmenge von $\mathbb{R}^{n}$ ist einfach zusammenhängend, siehe Beispiel I.1.12. Beachte, dass konvexe Teilmengen offensichtlich wegzusammenhängend sind. Insbesonder sind $\mathbb{R}^{n}$, die abgeschlossenen Bälle $D^{n}:=$ $\left\{x \in \mathbb{R}^{n}:\|x\| \leq 1\right\}$ und die offenen Bälle $B^{n}:=\left\{x \in \mathbb{R}^{n}:\|x\|<1\right\}$ einfach zusammenhängend.\\
+I.1.24. Beispiel. Das Produkt beliebig vieler einfach zusammenhängender Räume ist wieder einfach zusammenhängend, siehe Proposition I.1.17. Beachte, dass Produkte wegzusammenhängender Räume wieder wegzusammenhängend sind.
+
+Für $n \in \mathbb{N}_{0}$ bezeichne $S^{n}:=\left\{x \in \mathbb{R}^{n+1}:\|x\|=1\right\}$ die $n$-dimensionale Einheitssphäre versehen mit der von $\mathbb{R}^{n+1}$ induzierten Teilraumtopologie. Beachte, dass $S^{n}$ abgeschlossen und beschränkt in $\mathbb{R}^{n+1}$ ist. Nach dem Satz von HeineBorel ist $S^{n}$ daher ein kompakter Raum. Etwa besteht $S^{0}=\{-1,1\}$ aus nur zwei Punkten. Die eindimensionale Sphäre können wir auch als Teilraum der komplexen Zahlen auffassen, $S^{1}=\{z \in \mathbb{C}:|z|=1\}$.\\
+I.1.25. Beispiel. $S^{n} \backslash\{P\}$ ist homöomorph zu $\mathbb{R}^{n}$ und daher einfach zusammenhängend, $P \in S^{n}, n \in \mathbb{N}_{0}$. Um dies einzusehen betrachten wir zunächst die Inversion mit Pol $P$,
+
+$$
+\nu_{P}: \mathbb{R}^{n+1} \backslash\{P\} \rightarrow \mathbb{R}^{n+1} \backslash\{P\}, \quad \nu_{P}(x):=P+\frac{2}{\|x-P\|^{2}}(x-P)
+$$
+
+Der Bildpunkt $\nu_{P}(x)$ liegt daher auf dem Halbstrahl von $P$ durch $x$ und es gilt $\|x-P\|\left\|\nu_{P}(x)-P\right\|=2$. Daraus folgt sofort $\nu_{P} \circ \nu_{P}=\operatorname{id}_{\mathbb{R}^{n+1} \backslash\{P\}}$, insbesondere ist $\nu_{P}$ ein Homöomorphismus. Weiters gilt
+
+$$
+\left\|\nu_{P}(x)\right\|^{2}=1+\frac{4\langle x, P\rangle}{\|x-P\|^{2}}
+$$
+
+und daher ist $\nu_{P}(x) \in S^{n}$ genau dann, wenn $x \in P^{\perp}=\left\{x \in \mathbb{R}^{n+1}:\langle x, P\rangle=0\right\}$. Die Einschränkung von $\nu_{P}$ liefert daher einen Homöomorphismus
+
+$$
+\varphi_{P}: P^{\perp} \rightarrow S^{n} \backslash\{P\}, \quad \varphi_{P}(x)=P+\frac{2}{\|x-P\|^{2}}(x-P)
+$$
+
+Dieser Homöomorphismus wird die stereographische Projektion mit Pol P genannt. ${ }^{3}$ Als Hyperebene in $\mathbb{R}^{n+1}$ ist $P^{\perp}$ homöomorph zu $\mathbb{R}^{n}$, daher ist auch $S^{n} \backslash\{P\}$ homöomorph zu $\mathbb{R}^{n}$. Nach Proposition I.1.14 und Beispiel I.1.23 ist daher $S^{n} \backslash\{P\}$ einfach zusammenhängend.\\
+I.1.26. Satz. $S^{n}$ ist einfach zusammenhängend, falls $n \geq 2$.
+
+Beweis. Bezeichne mit $N:=(0, \ldots, 0,1) \in S^{n}$ den Nordpol und mit $x_{0}:=$ $S:=(0, \ldots, 0,-1) \in S^{n}$ den Südpol. Weiters betrachte die offenen Teilmengen $U:=S^{n} \backslash\{N\}$ und $V:=S^{n} \backslash\{S\}$. Nach Beispiel I.1.25 ist $\pi_{1}\left(U, x_{0}\right)=0$, es genügt daher zu zeigen, dass die von der kanonischen Inklusion $\iota$ : $\left(U, x_{0}\right) \rightarrow\left(S^{n}, x_{0}\right)$ induzierte Abbildung $\iota_{*}: \pi_{1}\left(U, x_{0}\right) \rightarrow \pi_{1}\left(S^{n}, x_{0}\right)$ surjektiv ist. Sei dazu $f: I \rightarrow S^{n}$ eine Schleife bei $x_{0}$. Es ist zu zeigen, dass $f$ homotop relativ Endpunkten zu einer Schleife in $U$ ist. Da $\{U, V\}$ eine offene Überdeckung von $S^{n}$ ist, bilden auch die beiden Mengen $f^{-1}(U)$ und $f^{-1}(V)$ eine offene Überdeckung des Intervalls $I$. Da $I$ kompakt ist, existieren $0=s_{0}<s_{1}<\cdots<s_{m}=1$, sodass für jedes $i=1, \ldots, m$ entweder $f\left(\left[s_{i-1}, s_{i}\right]\right) \subseteq U$ oder $f\left(\left[s_{i-1}, s_{i}\right]\right) \subseteq V$ gilt, siehe Lemma I.1.28 unten. Durch Weglassen gewisser $s_{i}$ können wir erreichen, dass $f\left(s_{i}\right) \neq N$, für jedes $0 \leq i \leq m$, denn ist $f\left(s_{i}\right)=N$ dann muss $f\left(\left[s_{i-1}, s_{i}\right]\right) \subseteq V$ und $f\left(\left[s_{i}, s_{i+1}\right]\right) \subseteq V$ gelten. Betrachte die reparametrisierten Einschränkungen $f_{i}: I \rightarrow S^{n}, f_{i}(s):=f\left((1-s) s_{i-1}+s s_{i}\right), i=1,2, \ldots, m$. Nach Beispiel I.1.3 gilt dann $f \simeq f_{1} f_{2} \cdots f_{m}$, wobei wir wieder auf die Klammersetzung verzichten, da sie für die Aussage unwesentlich ist, vgl. Lemma I.1.6. Es genügt nun zu zeigen, dass jedes $f_{i}$ homotop relativ Endpunkten zu einem Weg in $U$ ist, denn dann ist auch $f$ homotop relativ Endpunkten zu einer Schleife in $U$, siehe Lemma I.1.5. Für die $i$ mit $f\left(\left[s_{i-1}, s_{i}\right]\right) \subseteq U$ ist nichts zu zeigen. Betrachten wir also ein $i$ mit $f\left(\left[s_{i-1}, s_{i}\right]\right) \subseteq V$, dh. $f_{i}(I) \subseteq V$. Die stereographischen Projektion $\varphi_{S}: \mathbb{R}^{n}=S^{\perp} \rightarrow S^{n} \backslash\{S\}=V$ aus Beispiel I.1.25 ist ein Homöomorphismus mit $\varphi_{S}(0)=N$. Also ist $\varphi_{S}^{-1} \circ f_{i}: I \rightarrow \mathbb{R}^{n}$ ein Weg in $\mathbb{R}^{n}$ und es gilt $\left(\varphi_{S}^{-1} \circ f_{i}\right)(0) \neq 0 \neq\left(\varphi_{S}^{-1} \circ f_{i}\right)(1)$, denn $f\left(s_{i}\right) \neq N$. Da $n \geq 2$ finden wir einen Weg $g_{i}: I \rightarrow \mathbb{R}^{n} \backslash\{0\}$ mit $g_{i}(0)=\left(\varphi_{S}^{-1} \circ f_{i}\right)(0)$ und $g_{i}(1)=\left(\varphi_{S}^{-1} \circ f_{i}\right)(1)$. Nach Konstruktion ist $\varphi_{S} \circ g_{i}$ ein Weg in $V \backslash\{N\} \subseteq U$. Da $\mathbb{R}^{n}$ einfach zusammenhängend ist, sind die beiden Wege $\varphi_{S}^{-1} \circ f_{i}$ und $g_{i}$ homotop relativ Endpunkten in $\mathbb{R}^{n}$, siehe Proposition I.1.21, also sind auch $f_{i}$ und $\varphi_{S} \circ g_{i}$ homotop relativ Endpunkten in $V \subseteq S^{n}$.\\
+I.1.27. Beispiel. Für $n_{i} \geq 2$ ist $S^{n_{1}} \times \cdots \times S^{n_{k}}$ einfach zusammenhängend, siehe Satz I.1.26 und Beispiel I.1.24
+
+\footnotetext{${ }^{3}$ Unter der stereographischen Projektion wird üblicherweise die stereographische Projektion mit $\operatorname{Pol} P=N=(0, \ldots, 0,1) \in S^{n}$ verstanden.
+}Im Beweis von Satz I.1.26 haben wir von der Lebesguesche Überdeckungszahl Gebrauch gemacht, und wollen daher dieses elementare Resultat kurz wiederholen.\\
+I.1.28. Lemma (Überdeckungszahl von Lebesgue). Es sei ( $X, d$ ) ein kompakter metrischer Raum und $\mathcal{U}$ eine offene Überdeckung von $X$. Dann existiert $\varepsilon>0$, sodass jeder Ball mit Radius $\varepsilon$ zur Gänze in einer der Überdeckungsmengen von $\mathcal{U}$ enthalten ist. Genauer, für jedes $x \in X$ existiert $U \in \mathcal{U}$ mit $B_{\varepsilon}(x) \subseteq U$, wobei $B_{\varepsilon}(x):=\{y \in X: d(x, y)<\varepsilon\}$ den offenen Ball mit Mittelpunkt $x$ und Radius $\varepsilon$ bezeichnet.
+
+Beweis. Da $\mathcal{U}$ eine offene Überdeckung von $X$ bildet, existiert zu jedem $x \in X$ ein $r_{x}>0$ und $U_{x} \in \mathcal{U}$ mit $B_{2 r_{x}}(x) \subseteq U_{x}$. Die Bälle $B_{r_{x}}(x)$ bilden eine offene Überdeckung von $X$. Wegen der Kompaktheit von $X$ überdecken schon endlich viele davon ganz $X$, dh. $B_{r_{x_{1}}}\left(x_{1}\right) \cup \cdots \cup B_{r_{x_{n}}}\left(x_{n}\right)=X$ für gewisse $x_{1}, \ldots, x_{n} \in X$. Wir zeigen nun, dass $\varepsilon:=\min \left\{r_{x_{1}}, \ldots, r_{x_{n}}\right\}>0$ die gewünschte Eigenschaft besitzt. Sei dazu $x \in X$. Wähle $1 \leq i \leq n$ mit $x \in B_{r_{i}}\left(x_{i}\right)$. Aus der Dreiecksungleichung folgt $B_{r_{i}}(x) \subseteq B_{2 r_{i}}\left(x_{i}\right)$, und daher $B_{\varepsilon}(x) \subseteq B_{r_{i}}(x) \subseteq$ $B_{2 r_{i}}\left(x_{i}\right) \subseteq U_{x_{i}}$. Also liegt $B_{\varepsilon}(x)$ zur Gänze in der Überdeckungsmenge $U_{x_{i}}$.\\
+I.2. Die Fundamentalgruppe des Kreises. Wir wollen in diesen Abschnitt die Fundamentalgruppe von $S^{1}:=\{z \in \mathbb{C}:|z|=1\}$ bestimmen. Als Basispunkt verwenden wir $x_{0}:=1 \in S^{1}$. Für $n \in \mathbb{Z}$ betrachten wir den Weg
+
+$$
+\omega_{n}: I \rightarrow S^{1}, \quad \omega_{n}(s):=e^{2 \pi \mathbf{i} n s}=\cos (2 \pi n s)+\mathbf{i} \sin (2 \pi n s)
+$$
+
+Da $\omega_{n}(0)=\omega_{n}(1)=1$ ist jedes $\omega_{n}$ eine Schleife bei $1 \in S^{1}$ und definiert daher eine Homotopieklasse $\left[\omega_{n}\right] \in \pi_{1}\left(S^{1}, 1\right)$.\\
+I.2.1. Satz. Die Abbildung $\phi: \mathbb{Z} \rightarrow \pi_{1}\left(S^{1}, 1\right), \phi(n):=\left[\omega_{n}\right]$, siehe (I.2), ist ein Isomorphismus von Gruppen, $\pi_{1}\left(S^{1}\right) \cong \mathbb{Z}$.\\
+I.2.2. Beispiel. Für $k \in \mathbb{Z}$ betrachte die Basispunkt erhaltende Abbildung $p_{k}:\left(S^{1}, 1\right) \rightarrow\left(S^{1}, 1\right), p(z):=z^{k}$. Wir wollen nun den induzierten Homomorphismus $\left(p_{k}\right)_{*}: \pi_{1}\left(S^{1}, 1\right) \rightarrow \pi_{1}\left(S^{1}, 1\right)$ bestimmen. Genauer wollen wir zeigen, dass nebenstehendes Diagramm kommutiert, wobei $\phi: \mathbb{Z} \rightarrow \pi_{1}\left(S^{1}, 1\right)$ den Isomorphismus aus Satz I.2.1 bezeichent und $\mathbb{Z} \xrightarrow{\cdot k} \mathbb{Z}$ der durch Multiplikation mit $k$ gegebene Gruppenhomomorphismus ist. Tatsächlich\\
+\includegraphics[max width=\textwidth]{2025_06_05_d7ed2bacd1e9ce1db1f0g-014} ist $\left(p_{k} \circ \omega_{n}\right)(s)=\left(e^{2 \pi \mathrm{i} n s}\right)^{k}=e^{2 \pi \mathrm{i} k n s}=\omega_{k n}(s)$, vgl. (I.2), und daher $\left(p_{k}\right)_{*}(\phi(n))=\left(p_{k}\right)_{*}\left(\left[\omega_{n}\right]\right)=\left[p_{k} \circ \omega_{n}\right]=\left[\omega_{k n}\right]=\phi(k n)$. Beachte, dass $p_{1}$ und $p_{-1}$ beides Homöomorphismen sind, die induzierten Homomorphismen $\left(p_{1}\right)_{*}$ und $\left(p_{-1}\right)_{*}$ aber nicht übereinstimmen.
+
+Für den Beweis von Satz I.2.1 betrachten wir die Abbildung
+
+$$
+p: \mathbb{R} \rightarrow S^{1}, \quad p(s):=e^{2 \pi \mathbf{i} s}
+$$
+
+Drei Eigenschaften von $p$ werden wesentlich in den Beweis von Satz I.2.1 eingehen. Erstens ist der Definitionsbereich $\mathbb{R}$ einfach zusammenhängend, siehe Beispiel I.1.23, weiters ist $p^{-1}(1)=\mathbb{Z} \subseteq \mathbb{R}$ und schließlich hat $p$ die sogenannte Homotopieliftungseigenschaft.\\
+I.2.3. Proposition (Homotopieliftungseigenschaft). Es seien $H: Y \times I \rightarrow S^{1}$ und $\tilde{h}: Y \rightarrow \mathbb{R}$ stetig mit $p \circ \tilde{h}=H_{0}$. Dann existiert genau eine stetige Abbildung $\tilde{H}: Y \times I \rightarrow \mathbb{R}$ mit $p \circ \tilde{H}=H$ und $\tilde{H}_{0}=\tilde{h}$. ${ }^{4}$\\
+I.2.4. Bemerkung. Bezeichnen wir mit $\iota_{0}: Y \rightarrow Y \times I, \iota_{0}(y):=(y, 0)$, die Inklusion bei 0, so lässt sich die Aussage von Proposition I.2.3 schön an nebenstehenden Diagramm veranschaulichen. Die Voraussetzung in Proposition I.2.3 besagt gerade, dass das äußere Quadrat kommutiert, dh. die Komposition $p \circ \tilde{h}$ stimmt mit der Komposition $H \circ \iota_{0}$ überein. Die Konklusion von Proposition I.2.3 besagt nun, dass eine eindeutige stetige Abbildung\\
+\includegraphics[max width=\textwidth]{2025_06_05_d7ed2bacd1e9ce1db1f0g-015} $\tilde{H}: Y \times I \rightarrow \mathbb{R}$ existiert, die die beiden Dreiecke kommutativ macht, dh. die Komposition $\tilde{H} \circ \iota_{0}$ stimmt mit $\tilde{h}$ überein, und $p \circ \tilde{H}$ stimmt mit $H$ überein.\\
+I.2.5. Bemerkung. Sind $f: X \rightarrow S^{1}$ und $\tilde{f}: X \rightarrow \mathbb{R}$ stetige Abbildungen mit $p \circ \tilde{f}=f$, dann wird $\tilde{f}$ ein Lift von $f$ genannt. In diesem Fall sagen wir auch $f$ kann über $p$ zu einer stetigen Abbildung $\tilde{f}$ geliftet werden. Nicht jede Abbildung lässt sich stetige über $p$ liften, etwa besitzt die identische Abbildung $\operatorname{id}_{S^{1}}: S^{1} \rightarrow S^{1}$ keinen stetigen Lift, siehe Satz I.2.1. Existiert ein Lift $\tilde{f}$ von $f$, dann ist dieser nicht eindeutig, denn durch Translation mit ganzen Zahlen erhalten wir unendlich viele weitere Lifte.
+
+Wir verschieben den Beweis von Proposition I.2.3 und betrachten zunächst die folgenden beiden Spezialfälle: $Y=\{*\}$, der einpunktige Raum, sowie $Y=I$, siehe die Propositionen I.2.6 und I.2.8 unten.\\
+I.2.6. Proposition. Es sei $f: I \rightarrow S^{1}$ ein Weg und $\tilde{x} \in \mathbb{R}$ mit $p(\tilde{x})=f(0)$. Dann existiert genau ein Weg $\tilde{f}: I \rightarrow \mathbb{R}$ mit $p \circ \tilde{f}=f$ und $\tilde{f}(0)=\tilde{x}$.
+
+Beweis. Wenden wir Proposition I.2.3 auf den einpunktigen Raum $Y:=\{*\}$, die Abbildung $\tilde{h}:\{*\} \rightarrow \mathbb{R}, \tilde{h}(*):=\tilde{x}$, und $H:\{*\} \times I \rightarrow S^{1}, H(*, t):=f(t)$, an so erhalten wir eine eindeutige stetige Abbildung $\tilde{H}:\{*\} \times I \rightarrow \mathbb{R}$ die $p \circ \tilde{H}=H$ und $\tilde{H}_{0}=\tilde{h}$ erfüllt. Offensichtlich hat dann $\tilde{f}(t):=\tilde{H}(*, t)$ alle gewünschten Eigenschaften.\\
+I.2.7. Beispiel. Für die Wege $\tilde{\omega}_{n}: I \rightarrow \mathbb{R}, \tilde{\omega}_{n}(s):=n s, n \in \mathbb{Z}$, gilt $\tilde{\omega}_{n}(0)=0$, $\tilde{\omega}_{n}(1)=n$ und $p \circ \tilde{\omega}_{n}=\omega_{n}$. Insbesondere ist $\tilde{\omega}_{n}$ ein Lift von $\omega_{n}$, siehe (I.2).
+
+\footnotetext{${ }^{4}$ Ist $G: Y \times I \rightarrow X$ eine Abbildung und $t \in I$ so schreiben wir $G_{t}: Y \rightarrow X$ für die durch $G_{t}(y):=G(y, t)$ definierte Abbildung. In dieser Proposition also $H_{0}(y):=H(y, 0)$ und $\tilde{H}_{0}(y):=\tilde{H}(y, 0)$.
+}Beachte, dass $\tilde{\omega}_{n}$ nur für $n=0$ geschlossen ist. Wir werden die Wege $\tilde{\omega}_{n}$ auch im Beweis von Satz I.2.1 unten verwenden.\\
+I.2.8. Proposition. Es sei $\tilde{h}: I \rightarrow \mathbb{R}$ ein Weg und $H: I \times I \rightarrow S^{1}$ eine Homotopie von Wegen mit $H_{0}=p \circ \tilde{h}$. Dann existiert eine eindeutige Homotopie von Wegen $\tilde{H}: I \times I \rightarrow \mathbb{R}$ mit $p \circ \tilde{H}=H$ und $\tilde{H}_{0}=\tilde{h}$.
+
+Beweis. Wenden wir Proposition I.2.3 mit $Y:=I$ an, so erhalten wir eine eindeutige stetige Abbildung $\tilde{H}: I \times I \rightarrow \mathbb{R}$ mit $p \circ \tilde{H}=H$ und $\tilde{H}_{0}=\tilde{h}$. Es ist noch zu zeigen, dass $\tilde{H}$ eine Homotopie relativ Endpunkten ist. Für $i=0,1$ betrachten wir dazu den Weg $\tilde{\sigma}_{i}: I \rightarrow \mathbb{R}, \tilde{\sigma}_{i}(t):=\tilde{H}(i, t)$. Aus $p \circ \tilde{H}=H$ folgt $\left(p \circ \tilde{\sigma}_{i}\right)(t)=H(i, t)$ und dies ist konstant in $t$, da $H$ eine Homotopie von Wegen ist. Aus $\tilde{H}_{0}=\tilde{h}$ erhalten wir weiters $\tilde{\sigma}_{i}(0)=\tilde{H}(i, 0)=\tilde{h}(i)$. Aus der Eindeutigkeitsaussage in Proposition I.2.6 folgt daher, dass $\tilde{\sigma}_{i}$ mit dem konstanten Weg $c_{\tilde{h}(i)}$ übereinstimmen muss. Also ist $\tilde{H}$ tatsächlich eine Homotopie von Wegen.
+
+Beweis von Satz I.2.1. Zur Surjektivität von $\phi$ : Sei $f: I \rightarrow S^{1}$ eine Schleife bei $1 \in S^{1}$. Zu zeigen ist, dass $n \in \mathbb{Z}$ mit $\phi(n)=[f]$ existiert. Nach Proposition I.2.6, und da $p(0)=1$, existiert ein Weg $\tilde{f}: I \rightarrow \mathbb{R}$ mit $p \circ \tilde{f}=f$ und $\tilde{f}(0)=0$. Da $p(\tilde{f}(1))=f(1)=1$, und weil $p^{-1}(1)=\mathbb{Z}$, muss $\tilde{f}(1)$ ganzzahlig sein, $n:=\tilde{f}(1) \in \mathbb{Z}$. Beobachte nun, dass $\tilde{f}$ und $\tilde{\omega}_{n}$ aus Beispiel I.2.7 beides Wege in $\mathbb{R}$ sind die bei 0 starten und bei $n$ enden. Aus dem einfachen Zusammenhang von $\mathbb{R}$, siehe Beispiel I.1.23, und Proposition I.1.21 erhalten wir eine Homotopie von Wegen $\tilde{H}: I \times I \rightarrow \mathbb{R}$ von $\tilde{H}_{0}=\tilde{\omega}_{n}$ nach $\tilde{H}_{1}=\tilde{f}$. Es ist dann $H:=p \circ \tilde{H}: I \times I \rightarrow S^{1}$ eine Homotopie von Wegen von $H_{0}=p \circ \tilde{H}_{0}=p \circ \tilde{\omega}_{n}=\omega_{n}$ nach $H_{1}=p \circ \tilde{H}_{1}=p \circ \tilde{f}=f$. Daher gilt $\phi(n)=\left[\omega_{n}\right]=[f]$.
+
+Zur Injektivität von $\phi$ : Seien also $m, n \in \mathbb{Z}$ und $\phi(m)=\phi(n)$. Zu zeigen ist $n=m$. Da $\phi(m)=\phi(n)$ existiert eine Homotopie von Wegen $H: I \times I \rightarrow S^{1}$ von $H_{0}=\omega_{m}$ nach $H_{1}=\omega_{n}$. Nach Proposition I.2.8, und da $p \circ \tilde{\omega}_{m}=\omega_{m}$, existiert eine Homotopie von Wegen $\tilde{H}: I \times I \rightarrow \mathbb{R}$ mit $p \circ \tilde{H}=H$ und $\tilde{H}_{0}=\tilde{\omega}_{m}$. Da $\tilde{H}$ die Endpunkte fixiert gilt insbesondere $\tilde{H}_{1}(0)=\tilde{H}_{0}(0)=\tilde{\omega}_{m}(0)=0$ und $\tilde{H}_{1}(1)=\tilde{H}_{0}(1)=\tilde{\omega}_{m}(1)=m$. Weiters ist $p \circ \tilde{H}_{1}=H_{1}=\omega_{n}$. Aus der Eindeutigkeitsaussage in Proposition I.2.6 folgt daher $\tilde{H}_{1}=\tilde{\omega}_{n}$, und wir erhalten $m=\tilde{H}_{1}(1)=\tilde{\omega}_{n}(1)=n$.
+
+Zur Homomorphismus Eigenschaft von $\phi$ : Seien $m, n \in \mathbb{Z}$. Es ist zu zeigen $\phi(m+n)=\phi(m) \phi(n)$. Betrachte dazu die Translation $\tau_{m}: \mathbb{R} \rightarrow \mathbb{R}, \tau_{m}(s):=m+s$. Dann ist $\tilde{\omega}_{m}\left(\tau_{m} \circ \tilde{\omega}_{n}\right)$ ein Weg in $\mathbb{R}$ der bei 0 startet und bei $m+n$ endet. Auch $\tilde{\omega}_{m+n}$ ist ein Weg von 0 nach $m+n$. Da $\mathbb{R}$ einfach zusammenhängend ist, existiert eine Homotopie von Wegen $\tilde{H}: I \times I \rightarrow \mathbb{R}$ von $\tilde{H}_{0}=\tilde{\omega}_{m+n} \operatorname{nach} \tilde{H}_{1}=\tilde{\omega}_{m}\left(\tau_{m} \circ \tilde{\omega}_{n}\right)$, siehe Proposition I.1.21. Es ist daher $H:=p \circ \tilde{H}: I \times I \rightarrow S^{1}$ eine Homotopie von Wegen von $H_{0}=p \circ \tilde{H}_{0}=p \circ \tilde{\omega}_{m+n}=\omega_{m+n}$ nach $H_{1}=p \circ \tilde{H}_{1}=p \circ\left(\tilde{\omega}_{m}\left(\tau_{m} \circ \tilde{\omega}_{n}\right)\right)=$ $\left(p \circ \tilde{\omega}_{m}\right)\left(p \circ \tau_{m} \circ \tilde{\omega}_{n}\right)=\left(p \circ \tilde{\omega}_{m}\right)\left(p \circ \tilde{\omega}_{n}\right)=\omega_{m} \omega_{n}$. Es gilt daher $\omega_{m+n} \simeq \omega_{m} \omega_{n}$, also $\phi(m+n)=\left[\omega_{m+n}\right]=\left[\omega_{m} \omega_{n}\right]=\left[\omega_{m}\right]\left[\omega_{n}\right]=\phi(m) \phi(n)$.
+
+Es bleibt schließlich noch Proposition I.2.3 zu beweisen. Wir beginnen mit einigen Vorbereitungen. Für den Rest des Abschnitts seien $H: Y \times I \rightarrow S^{1}$ und $\tilde{h}: Y \rightarrow \mathbb{R}$ stetig mit $p \circ \tilde{h}=H_{0}$ wie in Proposition I.2.3.\\
+I.2.9. LEMMA (Überlagerungseigenschaft). Es existieren offene Teilmengen $U_{\alpha} \subseteq S^{1}$ und offene Teilmengen $\tilde{U}_{\alpha}^{j} \subseteq \mathbb{R}, \alpha \in\{0,1\}, j \in \mathbb{Z}$, mit folgenden Eigenschaften:\\
+(i) $U_{0} \cup U_{1}=S^{1}$.\\
+(ii) $p^{-1}\left(U_{\alpha}\right)=\bigcup_{j \in \mathbb{Z}} \tilde{U}_{\alpha}^{j}$.\\
+(iii) $\tilde{U}_{\alpha}^{j} \cap \tilde{U}_{\alpha}^{k}=\emptyset$, falls $j \neq k$.\\
+(iv) $\left.p\right|_{\tilde{U}_{\alpha}^{j}}: \tilde{U}_{\alpha}^{j} \rightarrow U_{\alpha}$ ist ein Homöomorphismus.
+
+Beweis. Setzen wir $U_{0}:=S^{1} \backslash\{1\}$ und $U_{1}:=S^{1} \backslash\{-1\}$, so ist $\left\{U_{0}, U_{1}\right\}$ eine offene Überdeckung von $S^{1}$, und es gilt $p^{-1}\left(U_{0}\right)=\mathbb{R} \backslash \mathbb{Z}$ sowie $p^{-1}\left(U_{1}\right)=$ $\mathbb{R} \backslash\left(\frac{1}{2}+\mathbb{Z}\right)$. Die Intervalle $\tilde{U}_{0}^{j}:=(j, j+1)$ und $\tilde{U}_{1}^{j}:=\left(j-\frac{1}{2}, j+\frac{1}{2}\right), j \in \mathbb{Z}$, haben dann die gewünschten Eigenschaften.\\
+I.2.10. Lemma. Zu jedem Punkt $y \in Y$ existieren eine offene Umgebung $N$ von $y, 0=t_{0}<t_{1}<t_{2}<\cdots<t_{n}=1$ und $\alpha_{1}, \ldots, \alpha_{n} \in\{0,1\}$, sodass für jedes $i=1, \ldots, n$ gilt $H\left(N \times\left[t_{i-1}, t_{i}\right]\right) \subseteq U_{\alpha_{i}}$.
+
+Beweis. Sei also $y \in Y$ fix. Zu jedem $s \in I$ existiert $\alpha_{s} \in\{0,1\}$ mit $H(y, s) \in$ $U_{\alpha_{s}}$, siehe Lemma I.2.9(i). Da $H$ stetig ist, finden wir zu jedem $s \in I$ eine offene Umgebung $N_{s}$ von $y$ und eine offene Umgebung $J_{s}$ von $s$ mit $H\left(N_{s} \times J_{s}\right) \subseteq U_{\alpha_{s}}$. Klarerweise bildet $\left\{J_{s}\right\}_{s \in I}$ eine offene Überdeckung von $I$. Da $I$ kompakt ist, existieren $0=t_{0}<t_{1}<\cdots<t_{n}=1$ und $s_{1}, \ldots, s_{n} \in I$ mit $\left[t_{i-1}, t_{i}\right] \subseteq J_{s_{i}}$, $1 \leq i \leq n$, siehe Lemma I.1.28. Betrachte nun die offene Umgebung $N:=\bigcap_{i=1}^{n} N_{s_{i}}$ von $y$. Für $1 \leq i \leq n$ gilt dann $H\left(N \times\left[t_{i-1}, t_{i}\right]\right) \subseteq H\left(N_{s_{i}} \times J_{s_{i}}\right) \subseteq U_{\alpha_{s_{i}}}$. Mit $\alpha_{i}:=\alpha_{s_{i}}$ folgt daher die Behauptung.\\
+I.2.11. Lemma. Zu jedem $y \in Y$ existieren eine offene Umgebung $V$ von $y$ und eine stetige Abbildung $\tilde{G}: V \times I \rightarrow \mathbb{R}$ mit $p \circ \tilde{G}=\left.H\right|_{V \times I}$ und $\tilde{G}_{0}=\left.\tilde{h}\right|_{V}$.
+
+Beweis. Sei also $y \in Y$ fix. Nach Lemma I.2.10 existieren eine offene Umgebung $N$ von $y, 0=t_{0}<t_{1}<\cdots<t_{n}=1$ und $\alpha_{1}, \ldots, \alpha_{n} \in\{0,1\}$, sodass
+
+$$
+H\left(N \times\left[t_{i-1}, t_{i}\right]\right) \subseteq U_{\alpha_{i}} \quad \text { für } i=1,2, \ldots, n .
+$$
+
+Wegen (I.4) und $p \circ \tilde{h}=H_{0}$ ist $p(\tilde{h}(y))=H_{t_{0}}(y) \in U_{\alpha_{1}}$, also existiert $j_{1} \in \mathbb{Z}$ mit $\tilde{h}(y) \in \tilde{U}_{\alpha_{1}}^{j_{1}}$, siehe Lemma I.2.9(ii). Betrachte die offene Umgebung $V^{1}:=$ $N \cap \tilde{h}^{-1}\left(\tilde{U}_{\alpha_{1}}^{j_{1}}\right)$ von $y$ und die Abbildung
+
+$$
+\tilde{G}^{1}: V^{1} \times\left[t_{0}, t_{1}\right] \rightarrow \tilde{U}_{\alpha_{1}}^{j_{1}} \subseteq \mathbb{R}, \quad \tilde{G}^{1}:=\left.\left(\left.p\right|_{\tilde{U}_{\alpha_{1}}^{j_{1}}}\right)^{-1} \circ H\right|_{V^{1} \times\left[t_{0}, t_{1}\right]}
+$$
+
+Nach (I.4) und Lemma I.2.9(iv) ist $\tilde{G}^{1}$ wohldefiniert und stetig. Offensichtlich gilt $p \circ \tilde{G}^{1}=\left.H\right|_{V^{1} \times\left[t_{0}, t_{1}\right]}$. Aus $H_{0}=p \circ \tilde{h}$ erhalten wir $p \circ \tilde{G}_{t_{0}}^{1}=\left.H_{t_{0}}\right|_{V^{1}}=\left.p \circ \tilde{h}\right|_{V^{1}}$, und da $p$ auf $\tilde{U}_{\alpha_{1}}^{j_{1}}$ injektiv ist folgt $\tilde{G}_{t_{0}}^{1}=\left.\tilde{h}\right|_{V^{1}}$.
+
+Wegen (I.4) und $p \circ \tilde{G}^{1}=\left.H\right|_{V^{1} \times\left[t_{0}, t_{1}\right]}$ ist $p\left(\tilde{G}_{t_{1}}(y)\right)=H_{t_{1}}(y) \in U_{\alpha_{2}}$, also existiert $j_{2} \in \mathbb{Z}$ mit $\tilde{G}_{t_{1}}^{1}(y) \in \tilde{U}_{\alpha_{2}}^{j_{2}}$, siehe Lemma I.2.9(ii). Betrachte die offene Umgebung $V^{2}:=V^{1} \cap\left(\tilde{G}_{t_{1}}^{1}\right)^{-1}\left(\tilde{U}_{\alpha_{2}}^{j_{2}}\right)$ von $y$ und die Abbildung
+
+$$
+\tilde{G}^{2}: V^{2} \times\left[t_{1}, t_{2}\right] \rightarrow \tilde{U}_{\alpha_{2}}^{j_{2}} \subseteq \mathbb{R}, \quad \tilde{G}^{2}:=\left.\left(\left.p\right|_{\tilde{U}_{\alpha_{2}}^{j_{2}}}\right)^{-1} \circ H\right|_{V^{2} \times\left[t_{1}, t_{2}\right]}
+$$
+
+Nach (I.4) und Lemma I.2.9(iv) ist $\tilde{G}^{2}$ wohldefiniert und stetig. Offensichtlich gilt $p \circ \tilde{G}^{2}=\left.H\right|_{V^{2} \times\left[t_{1}, t_{2}\right]}$. Es folgt $p \circ \tilde{G}_{t_{1}}^{2}=\left.H_{t_{1}}\right|_{V^{2}}=\left.p \circ \tilde{G}_{t_{1}}^{1}\right|_{V^{2}}$, und da $p$ auf $\tilde{U}_{\alpha_{2}}^{j_{2}}$ injektiv ist, erhalten wir $\tilde{G}_{t_{1}}^{2}=\left.\tilde{G}_{t_{1}}^{1}\right|_{V^{1}}$.
+
+Induktiv fortfahrend erhalten wir offene Umgebungen $V^{1} \supseteq V^{2} \supseteq \cdots \supseteq V^{n}$ von $y$ und stetige Abbildungen $\tilde{G}^{i}: V^{i} \times\left[t_{i-1}, t_{i}\right] \rightarrow \subseteq \tilde{U}_{\alpha_{i}}^{j_{i}} \subseteq \mathbb{R}, 1 \leq i \leq n$, sodass
+
+$$
+p \circ \tilde{G}^{i}=\left.H\right|_{V^{i} \times\left[t_{i-1}, t_{i}\right]}, \quad \tilde{G}_{t_{0}}^{1}=\left.\tilde{h}\right|_{V^{1}} \quad \text { und } \quad \tilde{G}_{t_{i-1}}^{i}=\left.\tilde{G}_{t_{i-1}}^{i-1}\right|_{V^{i}} \quad \text { für } i=2, \ldots, n .
+$$
+
+Betrachte nun die offene Umgebung $V:=V^{n}$ von $y$ und definiere eine Abbildung $\tilde{G}: V \times I \rightarrow \mathbb{R}$ durch $\left.\tilde{G}\right|_{V \times\left[t_{i-1}, t_{i}\right]}:=\left.\tilde{G}^{i}\right|_{V \times\left[t_{i-1}, t_{i}\right]}$. Da $\left.\tilde{G}_{t_{i-1}}^{i}\right|_{V}=\left.\tilde{G}_{t_{i-1}}^{i-1}\right|_{V}$ ist dies wohldefiniert. Aus der Stetigkeit von $\left.\tilde{G}^{i}\right|_{V \times\left[t_{i-1}, t_{i}\right]}$ und Lemma I.1.2 folgt, dass $\tilde{G}$ stetig ist. Aus $p \circ \tilde{G}^{i}=\left.H\right|_{V^{i} \times\left[t_{i-1}, t_{i}\right]}$ erhalten wir $p \circ \tilde{G}=\left.H\right|_{V \times I}$. Schließlich folgt aus $\tilde{G}_{t_{0}}^{1}=\left.\tilde{h}\right|_{V^{1}}$ auch $\tilde{G}_{0}=\left.\tilde{h}\right|_{V}$. Also hat $\tilde{G}$ alle gewüschten Eigenschaften.\\
+I.2.12. Lemma. Sind $\tilde{f}, \tilde{g}: I \rightarrow \mathbb{R}$ zwei Wege mit $p \circ \tilde{f}=p \circ \tilde{g}$ und $\tilde{f}(0)=\tilde{g}(0)$, dann gilt $\tilde{f}=\tilde{g}$.
+
+Beweis. Wir betrachten die Menge $Z:=\{s \in I: \tilde{f}(s)=\tilde{g}(s)\}$. Da $\tilde{f}$ und $\tilde{g}$ beide stetig sind, ist $Z$ eine abgeschlossene Teilmenge von $I$. Da $\tilde{f}(0)=\tilde{g}(0)$ ist $0 \in Z$, also $Z \neq \emptyset$. Wir werden unten zeigen, dass $Z$ auch offen in $I$ ist. Aus dem Zusammenhang von $I$ folgt dann $Z=I$, also $\tilde{f}=\tilde{g}$. Um die Offenheit von $I$ zu zeigen, sei $s \in Z$. Nach Lemma I.2.9 existieren $\alpha \in\{0,1\}$ und $j \in \mathbb{Z}$ mit $\tilde{f}(s)=\tilde{g}(s) \in \tilde{U}_{\alpha}^{j}$. Betrachte die offene Umgebung $W:=\tilde{f}^{-1}\left(\tilde{U}_{\alpha}^{j}\right) \cap \tilde{g}^{-1}\left(\tilde{U}_{\alpha}^{j}\right)$ von s. Da $p \circ \tilde{f}=p \circ \tilde{g}$, und da $\left.p\right|_{\tilde{U}_{\alpha}^{j}}: \tilde{U}_{\alpha}^{j} \rightarrow U_{\alpha}$ injektiv ist, siehe Lemma I.2.9(iv), erhalten wir $\left.\tilde{f}\right|_{W}=\left.\tilde{g}\right|_{W}$. Also ist $W \subseteq Z$ und daher $Z$ offen in $I$.
+
+Beweis von Proposition I.2.3. Nach Lemma I.2.11 existiert zu jedem $y \in$ $Y$ eine offene Umgebung $V^{y}$ von $y$ und eine stetige Abbildung $\tilde{G}^{y}: V^{y} \times I \rightarrow \mathbb{R}$ mit $p \circ \tilde{G}^{y}=\left.H\right|_{V^{y} \times I}$ und $\tilde{G}_{0}^{y}=\left.\tilde{h}\right|_{V^{y}}$. Sind $y_{1}, y_{2} \in Y$, so stimmen die Abbildungen $\tilde{G}^{y_{1}}$ und $\tilde{G}^{y_{2}}$ auf ( $V^{y_{1}} \cap V^{y_{2}}$ ) $\times I$ überein, denn ist $y \in V^{y_{1}} \cap V^{y_{2}}$ dann gilt für die Wege $\tilde{f}: I \rightarrow \mathbb{R}, \tilde{f}(t):=\tilde{G}^{y_{1}}(y, t)$, und $\tilde{g}: I \rightarrow \mathbb{R}, \tilde{g}(t):=\tilde{G}^{y_{2}}(y, t)$ sowohl $(p \circ \tilde{f})(t)=H(y, t)=(p \circ \tilde{g})(t), t \in I$, als auch $\tilde{f}(0)=\tilde{h}(y)=\tilde{g}(0)$, und daher $\tilde{G}^{y_{1}}(y, t)=\tilde{f}(t)=\tilde{g}(t)=\tilde{G}^{y_{2}}(y, t)$ für alle $t \in I$, siehe Lemma I.2.12. Wir erhalten daher eine Abbildung $\tilde{H}: Y \times I \rightarrow \mathbb{R}$, sodass $\left.\tilde{H}\right|_{V^{y} \times I}=\tilde{G}^{y}$, für jedes $y \in Y$. Da die Einschränkung von $\tilde{H}$ auf jede der offenen Mengen $V^{y} \times I$ stetig ist, muss $\tilde{H}$ stetig sein. Aus $p \circ \tilde{G}^{y}=\left.H\right|_{V^{y} \times I}$ erhalten wir $p \circ \tilde{H}=H$. Schließlich folgt aus $\tilde{G}_{0}^{y}=\left.\tilde{h}\right|_{V^{y}}$ auch $\tilde{H}_{0}=\tilde{h}$. Damit ist die Existenz der Abbildung $\tilde{H}$ in Proposition I.2.3 gezeigt. Es bleibt noch die Eindeutigkeit zu verifizieren. Seien dazu\\
+$\tilde{H}^{1}, \tilde{H}^{2}: Y \times I \rightarrow \mathbb{R}$ mit $p \circ \tilde{H}^{1}=H=p \circ \tilde{H}^{2}$ und $\tilde{H}_{0}^{1}=\tilde{h}=\tilde{H}^{2}$. Zu $y \in Y$ betrachten wir die Wege $\tilde{f}: I \rightarrow \mathbb{R}, \tilde{f}(t):=\tilde{H}^{1}(y, t)$, und $\tilde{g}: I \rightarrow \mathbb{R}, \tilde{g}(t):=\tilde{H}^{2}(y, t)$. Dann gilt $(p \circ \tilde{f})(t)=H(y, t)=(p \circ \tilde{g})(t), t \in I$, sowie $\tilde{f}(0)=\tilde{h}(y)=\tilde{g}(0)$. Aus Lemma I.2.12 folgt daher $\tilde{H}^{1}(y, t)=\tilde{f}(t)=\tilde{g}(t)=\tilde{H}^{2}(y, t)$ für alle $t \in I$, also stimmen $\tilde{H}^{1}$ und $\tilde{H}^{2}$ überein.
+
+Damit ist der Beweis von Satz I.2.1 vollständig. Im Rest dieses Abschnitts wollen wir noch einige Anwendungen besprechen.\\
+I.2.13. Beispiel. Für $P \in \mathbb{R}^{n}$ ist $\varphi: S^{n-1} \times(0, \infty) \rightarrow \mathbb{R}^{n} \backslash\{P\}, \varphi(x, t):=$ $P+t x$, ein Homöomorphismus. Mit Hilfe von Satz I.1.26 und Proposition I.1.17 sehen wir, dass $\mathbb{R}^{n} \backslash\{P\}$ einfach zusammenhängend ist, falls $n \geq 3$. Im Fall $n=2$ gilt $\pi_{1}\left(\mathbb{R}^{2} \backslash\{P\}\right) \cong \mathbb{Z}$ nach Satz I.2.1 und Proposition I.1.17. Genauer, und für $P=0$, sehen wir, dass die Inklusion $\iota: S^{1} \rightarrow \mathbb{C}^{\times}:=\mathbb{C} \backslash\{0\}$ einen Isomorphismus $\iota_{*}: \pi_{1}\left(S^{1}\right) \rightarrow \pi_{1}\left(\mathbb{C}^{\times}\right)$induziert. Im Fall $n=1$ ist $\mathbb{R}^{1} \backslash\{P\}$ nicht (weg)zusammenhängend, also auch nicht einfach zusammenhängend.\\
+I.2.14. SATZ. $\mathbb{R}^{2}$ ist nicht homöomorph zu $\mathbb{R}^{n}, 2 \neq n$.
+
+Beweis. Sei also $\varphi: \mathbb{R}^{2} \xrightarrow{\cong} \mathbb{R}^{n}$ ein Homöomorphismus. Wähle einen Punkt $P \in \mathbb{R}^{2}$ und setze $Q:=\varphi(P) \in \mathbb{R}^{n}$. Die Einschränkung von $\varphi$ liefert einen Homöomorphismus $\left.\varphi\right|_{\mathbb{R}^{2} \backslash\{P\}}: \mathbb{R}^{2} \backslash\{P\} \xrightarrow{\cong} \mathbb{R}^{n} \backslash\{Q\}$. Ist $n=0$, so erhalten wir einen Widerspruch, denn $\mathbb{R}^{2} \backslash\{P\} \neq \emptyset$ aber $\mathbb{R}^{0} \backslash\{Q\}=\emptyset$. Auch im Fall $n=1$ erhalten wir einen Widerspruch, denn $\mathbb{R}^{2} \backslash\{P\}$ ist wegzusammenhängend, aber $\mathbb{R}^{1} \backslash\{Q\}$ ist nicht wegzusammenhängend. Schließlich führt auch der Fall $n>2$ auf einen Widerspruch, denn $\mathbb{R}^{2} \backslash\{P\}$ ist nicht einfach zusammenhängend, während $\mathbb{R}^{n} \backslash\{Q\}$ sehr wohl einfach zusammenhängend ist, siehe Beispiel I.2.13. Es muss daher $n=2$ sein.\\
+I.2.15. Bemerkung. Es gilt allgemein $\mathbb{R}^{m} \neq \mathbb{R}^{n}$, falls $m \neq n$. Wir werden dies später zeigen, die Fundamentalgruppe reicht hierfür nicht aus. Es ist übrigens leicht zu sehen, dass $\mathbb{R}^{m}$ und $\mathbb{R}^{n}$ nur dann diffeomorph sein können, wenn $m=n$ gilt. Ist nämlich $\varphi: \mathbb{R}^{m} \rightarrow \mathbb{R}^{n}$ ein Diffeomorphismus und $x_{0} \in \mathbb{R}^{m}$ beliebig, dann folgt aus der Kettenregel, dass die Jacobimatrix $D_{x_{0}} \varphi$ einen linearen Isomorphismus zwischen $\mathbb{R}^{m}$ und $\mathbb{R}^{n}$ liefert, und dies ist natürlich nur für $m=n$ möglich.\\
+I.2.16. Beispiel. Für $n \in \mathbb{N}$ bezeichnen wir mit $T^{n}:=S^{1} \times \cdots \times S^{1}$ den $n$-dimensionalen Torus. Aus Proposition I.1.17 und Satz I.2.1 folgt $\pi_{1}\left(T^{n}\right) \cong$ $\mathbb{Z}^{n}=\mathbb{Z} \times \cdots \times \mathbb{Z}$. Ein expliziter Isomorphismus ist durch $\phi_{n}: \mathbb{Z}^{n} \rightarrow \pi_{1}\left(T^{n}, x_{n}\right)$, $\phi_{n}(k):=\left[\omega_{k}\right]$, gegeben. Hierbei bezeichnet $\omega_{k}: I \rightarrow T^{n}$ den Weg $\omega_{k}(s):=$ $\left(e^{2 \pi \mathrm{i} k_{1} s}, \ldots, e^{2 \pi \mathrm{i} k_{n} s}\right), k=\left(k_{1}, \ldots, k_{n}\right) \in \mathbb{Z}^{n}$, und als Basispunkt verwenden wir $x_{n}:=(1, \ldots, 1) \in T^{n}$. Insbesondere sehen wir, dass $S^{2}$ nicht homöomorph zu $T^{2}$ sein kann, denn die Fundamentalgruppen $\pi_{1}\left(S^{2}\right)=0$ und $\pi_{1}\left(T^{2}\right) \cong \mathbb{Z}^{2}$ sind nicht isomorph, siehe Satz I.1.26 und Proposition I.1.14. Etwas allgemeiner sehen wir, dass $S^{n}$ und $T^{n}$ nicht homöomorph sind, $n \geq 2$.\\
+I.2.17. Beispiel. Auf $\mathbb{R}^{n}$ betrachte die Äquivalenzrelation $x \sim y \Leftrightarrow \exists k \in$ $\mathbb{Z}^{n}: y=x+k$. Die Abbildung $p: \mathbb{R}^{n} \rightarrow T^{n}, p\left(x_{1}, \ldots, x_{n}\right):=\left(e^{2 \pi \mathbf{i} x_{1}}, \ldots, e^{2 \pi \mathbf{i} x_{n}}\right)$ induziert einen Homöomorphismus $\mathbb{R}^{n} / \sim \cong T^{n}$. Wir können den Torus daher auch als Quotient von $\mathbb{R}^{n}$ verstehen. Mit $\mathcal{M}_{m, n}(\mathbb{Z})$ bezeichnen wir die Menge aller ganzzahligen $(m \times n)$-Matrizen. Jedes $A \in \mathcal{M}_{m, n}(\mathbb{Z})$ definiert eine stetige (lineare) Abbildung $\tilde{\mu}_{A}: \mathbb{R}^{n} \rightarrow \mathbb{R}^{m}, \tilde{\mu}_{A}(x):=A x$. Beachte, dass aus $x \sim y$ auch $\tilde{\mu}_{A}(x) \sim \tilde{\mu}_{A}(y)$ folgt. Daher faktorisiert $\tilde{\mu}_{A}$ zu einer stetigen Abbildung $\mu_{A}: T^{n} \rightarrow T^{m}, p \circ \tilde{\mu}_{A}=\mu_{A} \circ p$. Beachte auch, dass $\mu_{A}$ Basispunkt erhaltend ist, $\mu_{A}:\left(T^{n}, x_{n}\right) \rightarrow\left(T^{m}, x_{m}\right)$. Wir wollen nun die induzierten Gruppenhomomorphismen $\left(\mu_{A}\right)_{*}: \pi_{1}\left(T^{n}, x_{n}\right) \rightarrow \pi_{1}\left(T^{m}, x_{m}\right)$ bestimmen. Genauer wollen wir zeigen, dass $\left(\mu_{A}\right)_{*}\left(\phi_{n}(k)\right)=$ $\phi_{m}(A k)$ gilt, $k \in \mathbb{Z}^{n}$, wobei $\phi$ den Isomorphismus aus Beispiel I.2.16 bezeichnet. In anderen Worten, wir wollen zeigen, dass das nebenstehende Diagramm kommu-\\
+\includegraphics[max width=\textwidth]{2025_06_05_d7ed2bacd1e9ce1db1f0g-020} tiert. Für $k \in \mathbb{Z}^{n}$ betrachten wir den Weg $\tilde{\omega}_{k}: I \rightarrow \mathbb{R}^{n}$, $\tilde{\omega}_{k}(s):=s k$. Offensichtlich gilt dann $p \circ \tilde{\omega}_{k}=\omega_{k}$, wobei $\omega_{k}: I \rightarrow T^{n}$ den Weg aus Beispiel I. 2.16 bezeichnet. Weiteres haben wir die Relation $\tilde{\mu}_{A} \circ \tilde{\omega}_{k}=\tilde{\omega}_{A k}$. Wir erhalten daraus $\mu_{A} \circ \omega_{k}=\mu_{A} \circ p \circ \tilde{\omega}_{k}=p \circ \tilde{\mu}_{A} \circ \tilde{\omega}_{k}=p \circ \tilde{\omega}_{A k}=\omega_{A k}$, also $\left(\mu_{A}\right)_{*}\left(\phi_{n}(k)\right)=\left(\mu_{A}\right)_{*}\left(\left[\omega_{k}\right]\right)=\left[\mu_{A} \circ \omega_{k}\right]=\left[\omega_{A k}\right]=\phi_{m}(A k)$.
+
+Eine Teilmenge $A$ eines topologischen Raumes $X$ heißt Retrakt von $X$, falls eine stetige Abbildung $r: X \rightarrow A$ existiert mit $r(x)=x$ für alle $x \in A$. Jede solche Abbildung $r$ wird Retraktion von $X$ auf $A$ genannt. Eine Retraktion ist also nichts anderes als eine stetige Linksinverse der kanonischen Inklusion $\iota: A \rightarrow X$, dh. $r \circ \iota=\operatorname{id}_{A}$.\\
+I.2.18. Proposition. Es sei $A$ ein Retrakt von $X$, und $x_{0} \in A$. Dann ist der von der kanonischen Inklusion $\iota:\left(A, x_{0}\right) \rightarrow\left(X, x_{0}\right)$ induzierte Homomorphismus $\iota_{*}: \pi_{1}\left(A, x_{0}\right) \rightarrow \pi_{1}\left(X, x_{0}\right)$ injektiv.
+
+Beweis. Nach Voraussetzung existiert eine Retraktion $r: X \rightarrow A$, dh. $r \circ \iota=$ $\operatorname{id}_{A}$. Insbesondere gilt $r\left(x_{0}\right)=x_{0}$, wir können daher $r$ als Abbildung punktierter Räume $r:\left(X, x_{0}\right) \rightarrow\left(A, x_{0}\right)$ auffassen. Aus Proposition I.1.13 erhalten wir $r_{*} \circ$ $\iota_{*}=(r \circ \iota)_{*}=\left(\operatorname{id}_{\left(A, x_{0}\right)}\right)_{*}=\operatorname{id}_{\pi_{1}\left(A, x_{0}\right)}$, also muss $\iota_{*}$ injektiv sein.\\
+I.2.19. SATZ. $S^{1}$ ist nicht Retrakt von $D^{2}$, dh. es gibt keine stetige Abbildung $r: D^{2} \rightarrow S^{1}$ mit $r(x)=x$ für alle $x \in S^{1}$.
+
+Beweis. Als konvexe Teilmenge von $\mathbb{R}^{2}$ ist $D^{2}$ einfach zusammenhängend, siehe Beispiel I.1.23, also $\pi_{1}\left(D^{2}\right)=0$. Nach Satz I.2.1 gilt $\pi_{1}\left(S^{1}\right) \cong \mathbb{Z}$. Es kann daher keine injektive Abbildung $\pi_{1}\left(S^{1}\right) \rightarrow \pi_{1}\left(D^{2}\right)$ existieren. Aus Proposition I.2.18 folgt nun, dass $S^{1}$ nicht Retrakt von $D^{2}$ sein kann.\\
+I.2.20. Bemerkung. Die Aussage von Satz I.2.19 bleibt in beliebigen Dimensionen richtig, $S^{n-1}$ ist nicht Retrakt von $D^{n}, n \in \mathbb{N}$. Für $n=1$ ist dies trivial,\\
+denn jede stetige Abbildung von $D^{1}=[-1,1]$ nach $S^{0}=\{-1,1\}$ muss konstant sein. Den Fall $n>2$ werden wir später behandeln, die Fundamentalgruppe reicht hierfür nicht aus. Wir wollen hier noch einen differentialtopologischen Beweis dieser Aussage skizzieren. Wir nehmen indirekt an es wäre $r: D^{n} \rightarrow S^{n-1}$ eine Retraktion, $r \circ \iota=\operatorname{id}_{S^{n-1}}$. Wir können $r$ durch eine glatte Retraktion approximieren, dürfen daher o.B.d.A. annehmen, dass $r$ eine glatte Abbildung ist. Nach dem Satz von Sard exisiert ein regulärer Wert $x_{0} \in S^{n-1}$. Nach dem impliziten Funktionensatz ist $M:=r^{-1}\left(x_{0}\right)$ eine kompakte glatte 1-dimensionale Teilmannigfaltigkeit von $D^{n}$ mit Rand $\partial M=M \cap S^{n-1}$. Aus $r \circ \iota=\operatorname{id}_{S^{n-1}}$ folgt $M \cap S^{n-1}=\left\{x_{0}\right\}$, also hat $M$ genau einen Randpunkt. Andererseits ist jede kompakte 1-dimensionale Mannigfaltigkeit zu einer endlichen disjunkten Vereinigung $S^{1} \sqcup \cdots \sqcup S^{1} \sqcup I \sqcup \cdots \sqcup I$ diffeomorph und muss daher eine gerade Anzahl von Randpunkten besitzen. Wir erhalten einen Widerspruch, es kann also keine solche Retraktion $r$ geben. Derselbe Beweis zeigt, dass der Rand $\partial N$ einer kompakten glatten Mannigfaltigkeit mit Rand $N$ nicht Retrakt von $N$ sein kann.\\
+I.2.21. Satz (Brouwerscher Fixpunktsatz). Jede stetige Abbildung $f: D^{2} \rightarrow$ $D^{2}$ besitzt einen Fixpunkt.
+
+Beweis. Indirekt angenommen $f: D^{2} \rightarrow D^{2}$ hätte keinen Fixpunkt. Dann können wir eine stetige Abbildung $r: D^{2} \rightarrow S^{1}$ definieren, indem wir $x \in D^{2}$ den eindeutig bestimmten Schnittpunkt des Halbstrahls $\{x+t(x-f(x)): t \geq 0\}$ mit $S^{1}$ zuordnen. Eine einfache Rechnung zeigt, dass diese Abbildung durch die Formel $r: D^{2} \rightarrow S^{1}, r(x):=x+t(x)(x-f(x))$ gegeben ist, wobei $t: D^{2} \rightarrow[0, \infty)$,
+
+$$
+t(x):=\frac{\langle x, f(x)-x\rangle+\sqrt{\langle x, f(x)-x\rangle^{2}+\left(1-|x|^{2}\right)|f(x)-x|^{2}}}{|f(x)-x|^{2}}
+$$
+
+In dieser Darstellung ist auch die Stetigkeit von $r$ evident. Für $x \in S^{1}$ gilt $r(x)=$ $x$, denn aus $1 \geq|f(x)|^{2}=|x+f(x)-x|^{2}=|x|^{2}+2\langle x, f(x)-x\rangle+|f(x)-x|^{2} \geq$ $1+2\langle x, f(x)-x\rangle+0$ folgt $\langle x, f(x)-x\rangle \leq 0$ und damit $t(x)=0$. Also ist $r$ eine Retraktion von $D^{2}$ auf $S^{1}$, ein Widerspruch zu Satz I.2.19. Daher muss $f$ einen Fixpunkt besizten.\\
+I.2.22. Bemerkung. Auch Satz I.2.21 bleibt in beliebigen Dimensionen richtig, jede stetige Abbildung $f: D^{n} \rightarrow D^{n}$ besitzt einen Fixpunkt, $n \in \mathbb{N}$. Für $n=1$ folgt dies aus dem Zwischenwertsatz der Analysis. Für $n>2$ werden wir dies mit Hilfe derselben Konstruktion aus der höherdimensionalen Version von Satz I.2.19 herleiten, vgl. Bemerkung I.2.20. Es lässt sich auch umgekehrt Satz I.2.19 auf elementare Weise aus Satz I.2.21 herleiten, denn setzen wir eine Retraktion $r: D^{2} \rightarrow S^{1}$ mit der sogenannten Antipodalabbildung $A: S^{1} \rightarrow S^{1}, A(z):=-z$, zusammen, würden wir eine fixpunktfreie Abbildung $\iota \circ A \circ r: D^{2} \rightarrow D^{2}$ erhalten.\\
+I.2.23. Satz (Fundamentalsatz der Algebra). Jedes nicht konstante Polynom mit komplexen Koeffizienten besitzt eine Nullstelle in $\mathbb{C}$.
+
+Beweis. Sei also
+
+$$
+p(z)=a_{n} z^{n}+a_{n-1} z^{n-1}+\cdots+a_{1} z+a_{0}, \quad n \geq 0, a_{i} \in \mathbb{C}, a_{n} \neq 0
+$$
+
+ein Polynom und $p(z) \neq 0$ für alle $z \in \mathbb{C}$. Zu zeigen ist $n=0$. Die Schleife
+
+$$
+f: I \rightarrow S^{1}, \quad f(s):=\frac{p\left(e^{2 \pi \mathbf{i} s}\right) / p(1)}{\left|p\left(e^{2 \pi \mathbf{i} s}\right) / p(1)\right|}
+$$
+
+definiert ein Element $[f] \in \pi_{1}\left(S^{1}, 1\right)$. Die Abbildung
+
+$$
+H: I \times I \rightarrow S^{1}, \quad H(s, t):=\frac{p\left(t e^{2 \pi \mathbf{i} s}\right) / p(t)}{\left|p\left(t e^{2 \pi \mathbf{i} s}\right) / p(t)\right|}
+$$
+
+ist eine Homotopie relativ Endpunkten vom konstanten Weg $H_{0}=c_{1}$ nach $H_{1}=$ $f$. Daher repräsentiert $f$ das neutrale Element in $\pi_{1}\left(S^{1}, 1\right)$. Andererseits ist
+
+$$
+\begin{aligned}
+\tilde{G}: I \times I & \rightarrow \mathbb{C}^{\times}:=\mathbb{C} \backslash\{0\} \\
+\tilde{G}(s, t) & :=t^{n} p\left(e^{2 \pi \mathbf{i} s} / t\right)=a_{n} e^{2 \pi \mathbf{i} n s}+t a_{n-1} e^{2 \pi \mathbf{i}(n-1) s}+\cdots+t^{n-1} a_{1} e^{2 \pi \mathbf{i} s}+t^{n} a_{0}
+\end{aligned}
+$$
+
+eine stetige Abbildung, und
+
+$$
+G: I \times I \rightarrow S^{1}, \quad G(s, t):=\frac{\tilde{G}(s, t) / \tilde{G}(0, t)}{|\tilde{G}(s, t) / \tilde{G}(0, t)|}
+$$
+
+definiert eine Homotopie relative Endpunkten von $G_{0}=w_{n}$ nach $G_{1}=f$, vgl. (I.2). Also gilt $\left[\omega_{n}\right]=[f] \in \pi_{1}\left(S^{1}, 1\right)$, und daher ist auch $\left[\omega_{n}\right]$ das neutrale Element in $\pi_{1}\left(S^{1}, 1\right)$. Aus Satz I.2.1 folgt nun $n=0$.\\
+I.2.24. Korollar. Es sei $p(z)=a_{n} z^{n}+a_{n-1} z^{n-1}+\cdots+a_{1} z+a_{0}$ ein Polynom $n$-ten Grades, $n \in \mathbb{N}, a_{i} \in \mathbb{C}, a_{n} \neq 0$. Dann existieren $\alpha_{1}, \ldots, \alpha_{n} \in \mathbb{C}$, sodass
+
+$$
+p(z)=a_{n}\left(z-\alpha_{1}\right)\left(z-\alpha_{2}\right) \cdots\left(z-\alpha_{n}\right) .
+$$
+
+Über $\mathbb{C}$ zerfällt daher jedes Polynom in Linearfaktoren.\\
+Beweis. Wir dürfen uns auf normierte Polynome beschränken, es sei daher o.B.d.A. $a_{n}=1$. Wir führen den Beweis durch Induktion nach $n$. Für $n=1$ ist die Aussage trivial. Für den Induktionsschritt sei nun $p$ ein normiertes Polynom $n$-ten Grades, $n \geq 2$. Nach Satz I.2.23 existiert $\alpha_{n} \in \mathbb{C}$ mit $p\left(\alpha_{n}\right)=0$. Polynomdivision mit Rest liefert ein Polynom $(n-1)$-ten Grades $q$ und eine Konstante $c \in \mathbb{C}$ mit $p(z)=q(z)\left(z-\alpha_{n}\right)+c$. Setzen wir $z=\alpha_{n}$, so erhalten wir sofort $0=$ $p\left(\alpha_{n}\right)=q\left(\alpha_{n}\right)\left(\alpha_{n}-\alpha_{n}\right)+c=c$, dh. $p(z)=q(z)\left(z-\alpha_{n}\right)$. Beachte, dass mit $p$ auch $q$ ein normiertes Polynom ist. Nach Induktionsvoraussetzung existieren daher $\alpha_{1}, \ldots, \alpha_{n-1} \in \mathbb{C}$ mit $q(z)=\left(z-\alpha_{1}\right) \cdots\left(z-\alpha_{n-1}\right)$, woraus nun $p(z)=$ $\left(z-\alpha_{1}\right) \cdots\left(z-\alpha_{n}\right)$ folgt. Damit ist der Induktionsschritt gezeigt.\\
+I.3. Homotopieinvarianz. Zwei stetige Abbildungen $f, g: X \rightarrow Y$ heißen homotop falls eine stetige Abbildung $H: X \times I \rightarrow Y$ mit $H_{0}=f$ und $H_{1}=g$ existiert. Dabei bezeichnet $H_{t}: X \rightarrow Y$ die stetige Abbildung $H_{t}(x):=H(x, t)$, $t \in I$. Jede solche Abbildung $H$ wird eine Homotopie von $f$ nach $g$ genannt. Wir schreiben $f \simeq g$ oder $f \stackrel{H}{\simeq} g$. Ist $f: X \rightarrow Y$ homotop zu einer konstanten Abbildung, dh. existiert $y_{0} \in Y$ mit $f \simeq c_{y_{0}}$ wobei $c_{y_{0}}: X \rightarrow Y, c_{y_{0}}(x):=y_{0}$, dann nennen wir $f$ nullhomotop.\\
+I.3.1. Proposition. Homotop zu sein ist eine Äquivalenzrelation auf der Menge der stetigen Abbildungen $X \rightarrow Y$.
+
+Beweis. Der Beweis ist völlig analog zu dem Beweis von Proposition I.1.1. Ist $f: X \rightarrow Y$ stetig, dann gilt $f \stackrel{H}{\simeq} f$ mit $H: X \times I \rightarrow Y, H(x, t):=f(x)$, also ist die Relation reflexsiv. Ist $f \stackrel{H}{\simeq} g$, dann folgt $g \stackrel{G}{\simeq} f$ mittels $G(x, t):=H(x, 1-t)$, also ist die Relation symmetrisch. Gilt $f \stackrel{H^{\prime}}{\simeq} g$ und $g \stackrel{H^{\prime \prime}}{\simeq} h$ so definiert
+
+$$
+H: X \times I \rightarrow Y, \quad H(x, t):= \begin{cases}H^{\prime}(x, 2 t) & \text { falls } 0 \leq t \leq 1 / 2 \\ H^{\prime \prime}(x, 2 t-1) & \text { falls } 1 / 2 \leq t \leq 1\end{cases}
+$$
+
+eine Homotopie von $f$ nach $h$, dh. $f \stackrel{H}{\simeq} h$, und damit ist die Relation auch transitiv. Die Stetigkeit von $H$ folgt wieder aus Lemma I.1.2.
+
+Die mit obiger Äquivalenzrelation assoziierten Äquivalenzklassen werden Homotopieklassen genannt. Die Menge der Homotopieklassen stetiger Abbildungen $X \rightarrow Y$ wird mit $[X, Y]$ bezeichnet. Die von $f: X \rightarrow Y$ repräsentierte Klasse werden wir mit $[f]$ bezeichnen.\\
+I.3.2. Beispiel. Bezeichnet $\{*\}$ den einpunktigen Raum, dann können wir $[\{*\}, X]$ mit der Menge der Wegzusammenhangskomponenten von $X$ identifizieren. Dabei entspricht $[f] \in[\{*\}, X]$ die (wohldefinierte) Wegzusammenhangskomponente von $X$ die $f(*)$ enthält.\\
+I.3.3. Bemerkung. Die Menge der Homotopieklassen $\left[S^{1}, X\right]$ hängt eng mit der Fundamentalgruppe $\pi_{1}(X)$ zusammen, siehe Satz I.3.33 unten.\\
+I.3.4. Lemma. Es seien $f_{0}, f_{1}: X \rightarrow Y$ und $g_{0}, g_{1}: Y \rightarrow Z$ stetige Abbildungen mit $f_{0} \simeq f_{1}$ und $g_{0} \simeq g_{1}$. Dann gilt auch $g_{0} \circ f_{0} \simeq g_{1} \circ f_{1}$. Wir erhalten daher eine wohldefinierte Verknüpfung $[X, Y] \times[Y, Z] \rightarrow[X, Z]$, ([ $f$ ],$[g]$ ) $\mapsto[g \circ f]$.
+
+Beweis. Es seien $F: X \times I \rightarrow Y$ und $G: Y \times I \rightarrow Z$ Homotopien mit $f_{0} \stackrel{F}{\simeq} f_{1}$ und $g_{0} \stackrel{G}{\simeq} g_{1}$. Dann liefert $H: X \times I \rightarrow Z, H(x, t):=G(F(x, t), t)$ eine Homotopie von $g_{0} \circ f_{0}$ nach $g_{1} \circ f_{1}$, dh. $g_{0} \circ f_{0} \stackrel{H}{\simeq} g_{1} \circ f_{1}$.\\
+I.3.5. Definition (Homotopieäquivalenz). Eine stetige Abbildung $f: X \rightarrow$ $Y$ wird Homotopieäquivalenz genannt, falls eine stetige Abbildung $g: Y \rightarrow X$\\
+existiert, sodass $g \circ f \simeq \operatorname{id}_{X}$ und $f \circ g \simeq \operatorname{id}_{Y}$ gilt. Zwei topologische Räume $X$ und $Y$ heißen homotopieäquivalent, falls eine Homotopieäquivalenz $f: X \rightarrow Y$ existiert. In diesem Fall schreiben wir $X \simeq Y$, und sagen auch $X$ und $Y$ haben denselben Homotopietyp.
+
+Jeder Homöomorphismus $f: X \rightarrow Y$ ist eine Homotopieäquivalenz, denn $g:=f^{-1}: Y \rightarrow X$ erfüllt ja sogar $g \circ f=\operatorname{id}_{X}$ und $f \circ g=\operatorname{id}_{Y}$. Homöomorphe Räume sind daher stets homotopieäquivalent. Die identische Abbildung $\operatorname{id}_{X}$ : $X \rightarrow X$ ist eine Homotopieäquivalenz, es gilt daher $X \simeq X$. Ist $f: X \rightarrow Y$ eine Homotopieäquivalenz und $g: Y \rightarrow X$ mit $g \circ f \simeq \operatorname{id}_{X}, f \circ g \simeq \operatorname{id}_{Y}$, dann ist trivialerweise auch $g: Y \rightarrow X$ eine Homotopieäquivalenz. Aus $X \simeq Y$ folgt daher $Y \simeq X$. Sind $f: X \rightarrow Y$ und $g: Y \rightarrow Z$ zwei Homotopieäquivalenzen, dann ist auch die Komposition $g \circ f: X \rightarrow Z$ eine Homotopieäquivalenz, siehe Lemma I.3.4. Aus $X \simeq Y$ und $Y \simeq Z$ folgt daher stets $X \simeq Z$. Ist $f: X \rightarrow Y$ eine Homotopieäquivalenz und ist $g: X \rightarrow X$ homotop zu $f$, dann ist auch $g$ eine Homotopieäquivalenz.\\
+I.3.6. Bemerkung. Eine stetige Abbildung $\varphi: Y_{1} \rightarrow Y_{2}$ induziert eine Abbildung $\varphi_{*}:\left[X, Y_{1}\right] \rightarrow\left[X, Y_{2}\right], \varphi_{*}([f]):=[\varphi \circ f]$. Nach Lemma I.3.4 ist $\varphi_{*}$ wohldefiniert. Ist $\psi: Y_{2} \rightarrow Y_{3}$ eine weitere stetige Abbildung, dann gilt offensichtlich $(\psi \circ \varphi)_{*}=\psi_{*} \circ \varphi_{*}:\left[X, Y_{1}\right] \rightarrow\left[X, Y_{3}\right]$ und $\left(\operatorname{id}_{Y}\right)_{*}=\operatorname{id}_{[X, Y]}$. Sind $\varphi_{0}, \varphi_{1}: Y_{1} \rightarrow Y_{2}$ homotop, so gilt $\left(\varphi_{0}\right)_{*}=\left(\varphi_{1}\right)_{*}:\left[X, Y_{1}\right] \rightarrow\left[X, Y_{2}\right]$, siehe Lemma I.3.4. Ist $\varphi: Y_{1} \rightarrow Y_{2}$ eine Homotopieäquivalenz, dann induziert diese eine Bijektion $\varphi_{*}:\left[X, Y_{1}\right] \rightarrow\left[X, Y_{2}\right]$. Ist nämlich $\psi: Y_{2} \rightarrow Y_{1}$ mit $\psi \circ \varphi \simeq \operatorname{id}_{Y_{1}}$ und $\psi \circ \varphi \simeq \operatorname{id}_{Y_{2}}$, dann folgt $\psi_{*} \circ \varphi_{*}=(\psi \circ \varphi)_{*}=\left(\operatorname{id}_{Y_{1}}\right)_{*}=\operatorname{id}_{\left[X, Y_{1}\right]}$ und $\varphi_{*} \circ \psi_{*}=(\varphi \circ \psi)_{*}=\left(\operatorname{id}_{Y_{2}}\right)_{*}=\operatorname{id}_{\left[X, Y_{2}\right]}$, also ist $\psi_{*}:\left[X, Y_{2}\right] \rightarrow\left[X, Y_{1}\right]$ die Inverse von $\varphi_{*}$. Insbesondere induziert eine Homotopieäquivalenz $\varphi: Y_{1} \rightarrow Y_{2}$ eine Bijektion zwischen der Menge der Wegzusammenhangskomponenten von $Y_{1}$ und der Menge der Wegzusammenhangskomponenten von $Y_{2}$, siehe Beispiel I.3.2.\\
+I.3.7. Bemerkung. Eine stetige Abbildung $\varphi: X_{2} \rightarrow X_{1}$ induziert eine Abbildung $\varphi^{*}:\left[X_{1}, Y\right] \rightarrow\left[X_{2}, Y\right], \varphi^{*}([f]):=[f \circ \varphi]$. Wieder ist $\varphi^{*}$ wegen Lemma I.3.4 wohldefiniert. Ist $\psi: X_{3} \rightarrow X_{2}$ eine weitere stetige Abbildung, dann gilt $(\varphi \circ \psi)^{*}=\psi^{*} \circ \varphi^{*}:\left[X_{1}, Y\right] \rightarrow\left[X_{3}, Y\right]$ und $\left(\operatorname{id}_{X}\right)^{*}=\operatorname{id}_{[X, Y]}$. Sind $\varphi_{0}, \varphi_{1}: X_{2} \rightarrow X_{1}$ homotop, so gilt $\left(\varphi_{0}\right)^{*}=\left(\varphi_{1}\right)^{*}:\left[X_{1}, Y\right] \rightarrow\left[X_{2}, Y\right]$, siehe Lemma I.3.4. Ist $\varphi: X_{2} \rightarrow X_{1}$ eine Homotopieäquivalenz, dann induziert diese eine Bijektion $\varphi^{*}:\left[X_{1}, Y\right] \rightarrow\left[X_{2}, Y\right]$. Ist nämlich $\psi: X_{1} \rightarrow X_{2} \operatorname{mit} \varphi \circ \psi \simeq \operatorname{id}_{X_{1}}$ und $\psi \circ \varphi \simeq \operatorname{id}_{X_{2}}$ dann folgt $\psi^{*} \circ \varphi^{*}=(\varphi \circ \psi)^{*}=\left(\operatorname{id}_{X_{1}}\right)^{*}=\operatorname{id}_{\left[X_{1}, Y\right]}$ und $\varphi^{*} \circ \psi^{*}=(\psi \circ \varphi)^{*}=\left(\operatorname{id}_{X_{2}}\right)^{*}=\operatorname{id}_{\left[X_{2}, Y\right]}$, also ist $\psi^{*}:\left[X_{2}, Y\right] \rightarrow\left[X_{1}, Y\right]$ die Inverse von $\varphi^{*}$.\\
+I.3.8 Definition (Kontrahierbare Räume). Ein topologischer Raum $X$ heißt kontrahierbar falls er den Homotopietyp des einpunktigen Raumes hat, $X \simeq\{*\}$.
+
+Ein topologischer Raum $X$ ist genau dann kontrahierbar, wenn die konstante Abbildung $X \rightarrow\{*\}$ eine Homotopieäquivalenz ist. Dies ist genau dann der Fall,\\
+wenn $x_{0} \in X$ existiert, sodass die Inklusion $\left\{x_{0}\right\} \rightarrow X$ eine Homotopieäquivalenz ist. Offensichtlich ist $X$ kontrahierbar genau dann, wenn die identische Abbildung $\operatorname{id}_{X}$ nullhomotop ist, dh. wenn $x_{0} \in X$ und eine Homotopie $H: X \times I \rightarrow X$ mit $H_{0}=\operatorname{id}_{X}$ und $H_{1}=c_{x_{0}}$ existieren, wobei $c_{x_{0}}: X \rightarrow X, c_{x_{0}}(x):=x_{0}$, die konstante Abbildung bezeichnet. ${ }^{5}$ Ein kontrahierbarer Raum muss wegzusammenhängend sein, denn für $x \in X$ ist $t \mapsto H(x, t)$ ein Weg von $x$ nach $x_{0}$. Ist $X$ kontrahierbar und $x_{1} \in X$ beliebig, dann gilt $\operatorname{id}_{X} \simeq c_{x_{1}}$, dh. die Inklusion $\left\{x_{1}\right\} \rightarrow X$ ist eine Homotopieäquivalenz, für jedes $x_{1} \in X$. Letzteres folgt aus der Tatsache, dass ein Weg von $x_{0}$ nach $x_{1}$ als Homotopie zwischen der Inklusion $\left\{x_{0}\right\} \rightarrow X$ und der Inklusion $\left\{x_{1}\right\} \rightarrow X$ aufgefasst werden kann.\\
+I.3.9. Beispiel. Für einen kontrahierbaren Raum $Y$ ist jede stetige Abbildung $X \rightarrow Y$ nullhomotop, die Menge $[X, Y]$ besteht daher aus nur einem Element. Um dies einzusehen fixiere $y \in Y$. Wegen der Kontrahierbarkeit von $Y$ ist die identische Abbildung $\operatorname{id}_{Y}: Y \rightarrow Y$ homotop zur konstanten Abbildung $c_{y}$ : $Y \rightarrow Y, \operatorname{id}_{Y} \simeq c_{y}$. Sei nun $f: X \rightarrow Y$ stetig. Aus Lemma I.3.4 folgt dann $f=\operatorname{id}_{Y} \circ f \simeq c_{y} \circ f=\tilde{c}_{y}$, also ist $f$ homotop zu der konstanten Abbildung $\tilde{c}_{y}: X \rightarrow Y, \tilde{c}_{y}(x):=y$.\\
+I.3.10. Definition (Deformationsretrakt). Ein Teilraum $A$ eines topologischen Raumes $X$ heißt Deformationsretrakt von $X$ falls eine Homotopie $H$ : $X \times I \rightarrow X$ mit folgenden Eigenschaften existiert: $H_{0}=\operatorname{id}_{X}, H_{1}(X) \subseteq A$ und $\left.H_{t}\right|_{A}=\operatorname{id}_{A}$ für alle $t \in I$. In diesem Fall wird $r:=H_{1}: X \rightarrow A$ als Deformationsretraktion bezeichnet, und $H$ wird manchmal eine retrahierende Deformation genannt. Bezeichnet $\iota: A \rightarrow X$ die kanonische Inklusion, so gilt $r \circ \iota=\operatorname{id}_{A}$, Deformationsretraktionen sind daher Retraktionen. Schließlich ist $\iota: A \rightarrow X$ eine Homotopieäquivalenz, denn $\operatorname{id}_{X} \stackrel{H}{\simeq} \iota \circ r .{ }^{6}$\\
+I.3.11. Bemerkung. Existiert $x_{0} \in X$, sodass der einpunktige Teilraum $\left\{x_{0}\right\} \subseteq X$ Deformationsretrakt von $X$ ist, dann ist $X$ offensichtlich kontrahierbar. Die Umkehrung stimmt i.A. jedoch nicht. Es ist nicht schwer einen kontrahierbarer Raum $X$ und ein Punkt $Q \in X$ zu konstruiert, sodass $\{Q\}$ nicht Deformationsretrakt von $X$ ist.\\
+I.3.12. Beispiel. Die Sphäre $S^{n-1}$ ist Deformationsretrakt von $\mathbb{R}^{n} \backslash\{0\}$, es ist nämlich $H: \mathbb{R}^{n} \backslash\{0\} \times I \rightarrow \mathbb{R}^{n} \backslash\{0\}, H(x, t):=(1-t) x+\frac{t}{|x|} x$ eine retrahierende Deformation. Insbesondere ist die kanonische Inklusion $S^{n-1} \rightarrow \mathbb{R}^{n} \backslash\{0\}$ eine Homotopieäquivalenz.
+
+\footnotetext{${ }^{5}$ Es ist nicht verlangt, dass die Homotopie den Punkt $x_{0}$ festhält, dh. wir verlangen nicht, dass $H\left(x_{0}, t\right)=x_{0}$ gilt.\\
+${ }^{6}$ Wir folgen hier den Definitionen in [19, page 24] oder [4, page 2]. In [18, Definition 2.4.3] oder [15, page 30] wird dies als strenger Deformationsretrakt bezeichnet. Verlangen wir statt $\left.H_{t}\right|_{A}=\operatorname{id}_{A}$ nur $\left.H_{1}\right|_{A}=\operatorname{id}_{A}$ dann erhalten wir den Begriff des schwachen Deformationsretrakts. In diesem Fall ist $r: X \rightarrow A$ immer noch eine Retraktion, und auch die Inklusion $\iota: A \rightarrow X$ ist eine Homotopieäquivalenz.
+}
+I.3.13. Beispiel (Sternförmige Teilmengen). Eine Teilmenge $X \subseteq \mathbb{R}^{n}$ heißt sternförmig, falls $z \in X$ mit folgender Eigenschaft existiert: $x \in X, t \in[0,1] \Rightarrow$ $t z+(1-t) x \in X$. Dies bedeutet gerade, dass die affine Strecke von $x$ nach $z$ zur Gänze in $X$ liegt. Jedes solche $z$ wird ein Zentrum von $X$ genannt. Ist $z$ ein Zentrum von $X$, dann ist $\{z\}$ ein Deformationsretrakt von $X$, eine retrahierende Deformation ist durch $H: X \times I \rightarrow X, H(x, t):=t z+(1-t) x$ gegeben. Insbesondere ist die Inklusion $\{z\} \rightarrow X$ eine Homotopieäquivalenz. Sternförmige Teilmengen sind daher stets kontrahierbar. Dasselbe gilt für konvexe Teilmengen, denn konvexe Teilmengen sind sternförmig, jeder ihrer Punkte ist Zentrum.\\
+I.3.14. Beispiel. Es sei $P \in S^{n}$. Dann ist $S^{n} \backslash\{P\} \cong \mathbb{R}^{n}$ kontrahierbar, siehe Beispiel I.1.25. Jede stetige Abbildung $X \rightarrow S^{n} \backslash\{P\}$ ist daher nullhomotop, siehe Beispiel I.3.9. Insbesondere ist die Inklusion des Äquators $S^{n-1} \rightarrow S^{n}, x \mapsto(x, 0)$, nullhomotop. Hierfür lässt sich auch ganz leicht eine explizte Homotopie angeben, $H: S^{n-1} \times I \rightarrow S^{n}, H(x, t):=\left(\sqrt{1-t^{2}} x, t\right)$. Für $t=0$ erhalten wir die Inklusion des Äquators, $H_{0}(x)=(x, 0)$, und für $t=1$ erhalten wir die konstante Abbildung $H_{1}(x)=(0, \ldots, 0,1)$.\\
+I.3.15. Beispiel. Ist $A$ Deformationsretrakt von $X$, und ist $B$ Deformationsretrakt von $Y$, dann ist $A \times B$ Deformationsretrakt von $X \times Y$. Sind nämlich $G: X \times I \rightarrow X$ und $H: Y \times I \rightarrow Y$ retrahierende Deformationen von $X$ auf $A$ bzw. von $Y$ auf $B$, so ist $(x, y, t) \mapsto(G(x, t), H(y, t))$ eine retrahierende Deformation von $X \times Y$ auf $A \times B$.
+
+Für die Konstruktion von Homotopien auf Quotientenräumen wird sich folgendes Resultat der mengentheoretischen Topologie als hilfreich erweisen, ein Beweis findet sich in [14, I.7.9 Satz 5].\\
+I.3.16. Lemma. Es sei \~{} eine Äquivalenzrelation auf einem topologischen Raum $X$, und es bezeichne $p: X \rightarrow X / \sim$ die kanonische Projektion auf den Quotientenraum. Weiters sei $K$ ein lokalkompakter Hausdorffraum. Dann ist
+
+$$
+p \times \operatorname{id}_{K}: X \times K \rightarrow(X / \sim) \times K
+$$
+
+eine Quotientenabbildung, dh. eine Teilmenge $U \subseteq(X / \sim) \times K$ ist genau dann offen, wenn $\left(p \times \mathrm{id}_{K}\right)^{-1}(U)$ offen in $X \times K$ ist.\\
+I.3.17. Lemma. Es sei $\sim$ eine Äquivalenzrelation auf einem topologischen Raum $X$, und es bezeichne $p: X \rightarrow X / \sim$ die Projektion auf den Quotientenraum. Weiters sei $\tilde{H}: X \times I \rightarrow Y$ eine Homotopie mit folgender Eigenschaft
+
+$$
+x_{1}, x_{2} \in X, t \in I, x_{1} \sim x_{2} \Rightarrow \tilde{H}\left(x_{1}, t\right)=\tilde{H}\left(x_{2}, t\right)
+$$
+
+Dann existiert genau eine Homotopie $H:(X / \sim) \times I \rightarrow Y$ mit $H(p(x), t)=$ $\tilde{H}(x, t)$, für alle $x \in X$ und $t \in I$.
+
+Beweis. Offensichtlich gibt es genau eine Abbildung $H:(X / \sim) \times I \rightarrow Y$ mit $H(p(x), t)=\tilde{H}(x, t)$. Es bleibt daher nur die Stetigkeit von $H$ zu zeigen. Dies folgt aber sofort aus Lemma I.3.16 und der Stetigkeit von $\tilde{H}$.
+
+Ist $A$ ein nichtleerer Teilraum eines topologischen Raumes $X$, dann schreiben wir $X / A$ für den Raum der aus $X$ entsteht wenn wir $A$ zu einem einzigen Punkt kollabieren. Genauer bezeichnet $\sim$ die von $a \sim b, a, b \in A$, erzeugte Äquivalenzrelation auf $X$, dann definieren wir $X / A:=X / \sim$ und versehen $X / A$ mit der Quotiententopologie. Wir erhalten eine stetige Abbildung $p: X \rightarrow X / A$, die als kanonische Projektion bezeichnet wird. Sie bildet ganz $A$ auf einen einzigen Punkt in $X / A$ ab den wir mit $*:=p(A)$ bezeichnen. Wir können den Quotienten daher auch als punktierten Raum ( $X / A, *$ ) auffassen. Ist ( $Z, z_{0}$ ) ein punktierter Raum und $f: X \rightarrow Z$ eine stetige Abbildung mit $f(A)=\left\{z_{0}\right\}$, dann gibt es genau eine Abbildung punktierter Räume $\bar{f}:(X / A, *) \rightarrow\left(Z, z_{0}\right)$, sodass $\bar{f} \circ p=f$. Die Stetigkeit von $\bar{f}$ folgt sofort aus der Definition der Quotiententopologie auf $X / A$.\\
+I.3.18. Beispiel (Kegel). Ist $X$ ein topologischer Raum, dann wird
+
+$$
+C X:=(X \times I) /(X \times\{0\})
+$$
+
+der Kegel über $X$ genannt. Der Basispunkt $\{*\}$ ist ein Deformationsretrakt von $C X$, die Abbildung $\tilde{H}:(X \times I) \times I \rightarrow X \times I, \tilde{H}(x, s, t):=(x,(1-t) s)$, faktorisiert zu einer retrahierenden Deformation $H: C X \times I \rightarrow C X$ auf den Punkt $\{*\}$. Die Stetigkeit von $H$ folgt aus Lemma I.3.17. Insbesondere ist die kanonische Inklusion $\{*\} \rightarrow C X$ eine Homotopieäquivalenz, und $C X$ daher kontrahierbar. Die Abbildung $\iota: X \rightarrow C X, \iota(x):=[(x, 1)]$, ist ein Homöomorphismus auf ihr Bild, wir können $X$ daher als Teilraum von $C X$ auffassen. Offensichtlich ist $C X \backslash\{*\}$ eine offene Umgebung von $\iota(X)$, und $\iota(X)$ ist Deformationsretrakt dieser Umgebung, denn $C X \backslash\{*\} \cong X \times(0,1]$.
+
+Ist $A \subseteq Y$ und $\varphi: A \rightarrow X$ stetig, dann definieren wir
+
+$$
+X \cup_{\varphi} Y:=(X \sqcup Y) / \sim
+$$
+
+wobei $\sim$ die von $a \sim \varphi(a), a \in A$, erzeugte Äquivalenzrelation auf der disjunkten Vereinigung $X \sqcup Y$ bezeichnet. Wir sagen der Raum $X \cup_{\varphi} Y$ entsteht aus $X$ durch Ankleben von $Y$ längs $\varphi$. Wir erhalten zwei kanonische stetige Abbildungen $\iota_{X}$ : $X \rightarrow X \cup_{\varphi} Y$ und $\hat{\varphi}: Y \rightarrow X \cup_{\varphi} Y$. Die Abbildung $\iota_{X}$ ist ein Homöomorphismus auf ihr Bild, wir können $X$ daher als Teilraum von $X \cup_{\varphi} Y$ auffassen. Bezeichnet $\iota_{A}: A \rightarrow Y$ die kanonsische Inklusion, dann gilt offensichtlich $\iota_{X} \circ \varphi=\hat{\varphi} \circ \iota_{A}$.\\
+\includegraphics[max width=\textwidth]{2025_06_05_d7ed2bacd1e9ce1db1f0g-027} Der verklebte Raum $X \cup_{\varphi} Y$ hat folgende universelle Eigenschaft. Sind $\psi_{X}: X \rightarrow$ $Z$ und $\psi_{Y}: Y \rightarrow Z$ zwei stetige Abbildungen mit $\psi_{X} \circ \varphi=\psi_{Y} \circ \iota_{A}$ dann existiert eine eindeutige stetige Abbildung $\psi: X \cup_{\varphi} Y \rightarrow Z$ mit $\psi_{X}=\psi \circ \iota_{X}$ und $\psi_{Y}=\psi \circ \hat{\varphi}$. Wir werden diese Abbildung mit $\psi_{X} \cup_{\varphi} \psi_{Y}:=\psi$ bezeichnen.\\
+I.3.19. Lemma. Es sei $A$ ein Deformationsretrakt von $Y$ und $\varphi: A \rightarrow X$ stetig. Dann ist $\iota_{X}(X)$ ein Deformationsretrakt von $X \cup_{\varphi} Y$, und die kanonische Einbettung $\iota_{X}: X \rightarrow X \cup_{\varphi} Y$ daher eine Homotopieäquivalenz.
+
+Beweis. Es sei $H: Y \times I \rightarrow Y$ eine retrahierende Deformation, dh. $H_{0}=\operatorname{id}_{Y}$, $H_{1}(Y) \subseteq A$ und $\left.H_{t}\right|_{A}=\operatorname{id}_{A}$. Betrachte die Abbildung $\tilde{G}:(X \sqcup Y) \times I \rightarrow$ $X \cup_{\varphi} Y$ die durch $\tilde{G}(x, t):=\iota_{X}(x),(x, t) \in X \times I$, und $\tilde{G}(y, t):=\hat{\varphi}(H(y, t))$, $(y, t) \in Y \times I$, definiert ist. Da $\left.H_{t}\right|_{A}=\operatorname{id}_{A}$ faktorisiert $\tilde{G}$ zu einer stetigen Abbildung $G:\left(X \cup_{\varphi} Y\right) \times I \rightarrow X \cup_{\varphi} Y$, vgl. Lemma I.3.17. Wegen $H_{0}=\operatorname{id}_{Y}$ ist $G_{0}=\operatorname{id}_{X \cup_{\varphi} Y}$. Da $H_{1}(Y) \subseteq A$ gilt $G_{1}\left(X \cup_{\varphi} Y\right) \subseteq \iota_{X}(X)$. Schließlich ist $\left.G_{t}\right|_{\iota_{X}(X)}=\operatorname{id}_{\iota_{X}(X)}$ für alle $t \in I$. Daher ist $G$ eine retrahierende Deformation und $\iota_{X}(X)$ ein Deformationsretrakt von $X \cup_{\varphi} Y$.\\
+I.3.20. Beispiel (Abbildungszylinder). Es sei $\varphi: Y \rightarrow X$ stetig, und es bezeichne $\iota_{Y}: Y \rightarrow Y \times I$ die Einbettung $\iota_{Y}(y):=(y, 1)$. Wir können $\varphi$ als eine auf dem Teilraum $A:=\iota_{Y}(Y)=Y \times\{1\}$ definiert Abbildung auffassen. Der Raum $Z_{\varphi}:=$ $X \cup_{\varphi}(Y \times I)$ wird der Abbildungszylinder von $\varphi$ genannt. Wir erhalten eine kanonische Einbettung $\iota_{X}: X \rightarrow Z_{\varphi}$ und eine stetige Abbildung\\
+\includegraphics[max width=\textwidth]{2025_06_05_d7ed2bacd1e9ce1db1f0g-028} $\hat{\varphi}: Y \times I \rightarrow Z_{\varphi}$ mit $\iota_{X} \circ \varphi=\hat{\varphi} \circ \iota_{Y}$. Offensichtlich ist $A$ ein Deformationsretrakt von $Y \times I$, nach Lemma I.3.19 ist daher $\iota_{X}(X)$ ein Deformationsretrakt von $Z_{\varphi}$ und die Einbettung $\iota_{X}: X \rightarrow Z_{\varphi}$ eine Homotopieäquivalenz. Die Abbildung $j_{Y}: Y \rightarrow Z_{\varphi}, j_{Y}(y):=\hat{\varphi}(y, 0)$ liefert auch eine Einbettung von $Y$ in $Z_{\varphi}$. Diese ist zu $\iota_{X} \circ \varphi$ homotop, $H: Y \times I \rightarrow Z_{\varphi}$, $H(y, t):=\hat{\varphi}(y, t)$, liefert eine Homotopie von $H_{0}=j_{Y}$ nach $H_{1}=\hat{\varphi} \circ \iota_{Y}=\iota_{X} \circ \varphi$. Bis auf Homotopie(äquivalenz) können wir daher jede stetige Abbildung als Einbettung auffassen.
+
+Zwei Abbildungen punktierter Räume $f, g:\left(X, x_{0}\right) \rightarrow\left(Y, y_{0}\right)$ heißen homotop relativ Basispunkt falls eine stetige Abbildung $H: I \times X \rightarrow Y$ mit $H_{0}=f$, $H_{1}=g$ und $H\left(x_{0}, t\right)=y_{0}$, für alle $t \in I$, existiert. Jede solche Abbildung $H$ heißt eine Homotopie relativ Basispunkt von $f$ nach $g$. Für jedes $t \in I$ ist $H_{t}:\left(X, x_{0}\right) \rightarrow\left(Y, y_{0}\right), H_{t}(x):=H(x, t)$, eine Abbildung punktierter Räume. Wie in Proposition I.3.1 lässt sich zeigen, dass dies eine Äquivalenzrelation auf der Menge der Abbildungen punktierter Räume liefert. Die Äquivalenzklassen werden wir mit $\left[\left(X, x_{0}\right),\left(Y, y_{0}\right)\right]$ bezeichnen. Auch Lemma I.3.4 bleibt sinngemäß für Abbildungen punktierter Räume richtig. Eine Abbildung punktierter Räume $f:\left(X, x_{0}\right) \rightarrow\left(Y, y_{0}\right)$ wird Homotopieäquivalenz punktierter Räume genannt, falls eine Abbildung punktierter Räume $g:\left(Y, y_{0}\right) \rightarrow\left(X, x_{0}\right)$ existiert, sodass $g \circ f \simeq \operatorname{id}_{\left(X, x_{0}\right)}$ relativ Basispunkt und $f \circ g \simeq \operatorname{id}_{\left(Y, y_{0}\right)}$ relativ Basispunkt. In diesem Fall schreiben wir $\left(X, x_{0}\right) \simeq\left(Y, y_{0}\right)$. Auch die Bemerkungen I.3.6 und I.3.7 haben offensichtliche Analoga für punktierte Räume.\\
+I.3.21. Beispiel. Ist $A$ ein Deformationsretrakt von $X$ und $x_{0} \in A$, dann ist die kanonische Inklusion $\left(A, x_{0}\right) \rightarrow\left(X, x_{0}\right)$ eine Homotopieäquivalenz punktierter Räume. ${ }^{7}$\\
+I.3.22. Beispiel. Ist ( $X, x_{0}$ ) ein punktierter Raum, dann können wir die Menge $\left[\left(S^{0}, 1\right),\left(X, x_{0}\right)\right]$ mit der Menge der Wegzusammenhangskomponenten von $X$ identifizieren. Dabei entspricht $[f] \in\left[\left(S^{0}, 1\right),\left(X, x_{0}\right)\right]$ die (eindeutig bestimmte) Wegzusammenhangskomponente von $X$ die $f(-1)$ enthält.\\
+I.3.23. Beispiel. Ist ( $X, x_{0}$ ) ein punktierter Raum, dann kann die Menge $\left[\left(S^{1}, 1\right),\left(X, x_{0}\right)\right]$ auf kanonische Art mit $\pi_{1}\left(X, x_{0}\right)$ identifiziert werden, siehe Proposition I.3.32 unten.\\
+I.3.24. Proposition. (Homotopieinvarianz) Sind $\varphi, \psi:\left(X, x_{0}\right) \rightarrow\left(Y, y_{0}\right)$ homotop relativ Basispunkt, dann induzieren diese denselben Homomorphismus zwischen den Fundamentalgruppen, dh. $\varphi_{*}=\psi_{*}: \pi_{1}\left(X, x_{0}\right) \rightarrow \pi_{1}\left(Y, y_{0}\right)$.
+
+Beweis. Sei $f: I \rightarrow X$ eine Schleife bei $x_{0}$. Weiters sei $H: X \times I \rightarrow Y$ eine Homotopie relativ Basispunkt von $H_{0}=\varphi$ nach $H_{1}=\psi$. Dann ist $G: I \times I \rightarrow Y$, $G(s, t):=H(f(s), t)$, eine Homotopie relativ Endpunkten von $G_{0}=H_{0} \circ f=\varphi \circ f$ nach $G_{1}=H_{1} \circ f=\psi \circ f$, also $\varphi \circ f \stackrel{G}{\simeq} \psi \circ f$ und damit $\varphi_{*}([f])=[\varphi \circ f]=$ $[\psi \circ f]=\psi_{*}([f])$.\\
+I.3.25. Proposition. Ist $\varphi:\left(X, x_{0}\right) \rightarrow\left(Y, y_{0}\right)$ eine Homotopieäquivalenz punktierter Räume, dann induziert diese einen Isomorphimus zwischen den Fundamentalgruppen, $\varphi_{*}: \pi_{1}\left(X, x_{0}\right) \stackrel{\cong}{\rightrightarrows} \pi_{1}\left(Y, y_{0}\right)$.
+
+Beweis. Sei dazu $\psi:\left(Y, y_{0}\right) \rightarrow\left(X, x_{0}\right)$, sodass $\psi \circ \varphi \simeq \operatorname{id}_{\left(X, x_{0}\right)}$ relativ Basispunkt und $\varphi \circ \psi \simeq \operatorname{id}_{\left(Y, y_{0}\right)}$ relativ Basispunkt. Aus Proposition I.3.24 folgt $\psi_{*} \circ \varphi_{*}=(\psi \circ \varphi)_{*}=\left(\operatorname{id}_{\left(X, x_{0}\right)}\right)_{*}=\operatorname{id}_{\pi_{1}\left(X, x_{0}\right)}$ sowie $\varphi_{*} \circ \psi_{*}=(\varphi \circ \psi)_{*}=\left(\operatorname{id}_{\left(Y, y_{0}\right)}\right)_{*}=$ $\operatorname{id}_{\pi_{1}\left(Y, y_{0}\right)}$. Also sind $\varphi_{*}$ und $\psi_{*}$ zueinander inverse Gruppenisomorphismen.\\
+I.3.26. Proposition. Es sei $H: X \times I \rightarrow Y$ eine Homotopie, $x_{0} \in X$, $y_{0}:=H_{0}\left(x_{0}\right), y_{1}:=H_{1}\left(x_{0}\right)$, und es bezeichne $h: I \rightarrow Y$ den Wegh $(t):=H\left(x_{0}, t\right)$ von $y_{0}$ nach $y_{1}$. Dann gilt $\left(H_{0}\right)_{*}=\beta_{h} \circ\left(H_{1}\right)_{*}: \pi_{1}\left(X, x_{0}\right) \rightarrow \pi_{1}\left(X, y_{0}\right)$.
+
+Beweis. Sei also $f: I \rightarrow X$ eine Schleife bei $x_{0}$. Die Abbildung
+
+$$
+G: I \times I \rightarrow Y, \quad G(s, t):= \begin{cases}h(4 s) & \text { falls } 0 \leq s \leq t / 4 \\ H\left(f\left(\frac{4 s-t}{4-3 t}\right), t\right) & \text { falls } t / 4 \leq s \leq 1-t / 2 \\ h(2-2 s) & \text { falls } 1-t / 2 \leq s \leq 1\end{cases}
+$$
+
+definiert eine Homotopie relativ Endpunkten in $Y$ von $G_{0}=H_{0} \circ f$ nach $G_{1}=$ $\left(h\left(H_{1} \circ f\right)\right) \bar{h}$. Also gilt $\left(H_{0}\right)_{*}([f])=\left[H_{0} \circ f\right]=\left[G_{0}\right]=\left[G_{1}\right]=\left[h\left(H_{1} \circ f\right) \bar{h}\right]=$ $\beta_{h}\left(\left[H_{1} \circ f\right]\right)=\left(\beta_{h} \circ\left(H_{1}\right)_{*}\right)([f])$.
+
+\footnotetext{${ }^{7}$ Ist $A$ nur ein schwacher Deformationsretrakt, dann ist die Inklusion $\left(A, x_{0}\right) \rightarrow\left(X, x_{0}\right)$ i.A. keine Homotopieäquivalenz punktierter Räume.
+}
+I.3.27. Satz (Homotopieinvarianz). Ist $\varphi: X \rightarrow Y$ eine Homotopieäquivalenz und $x_{0} \in X$, dann ist $\varphi_{*}: \pi_{1}\left(X, x_{0}\right) \rightarrow \pi_{1}\left(Y, \varphi\left(x_{0}\right)\right)$ ein Isomorphismus.
+
+Beweis. Da $\varphi$ eine Homtopieäquivalenz ist, existieren eine stetige Abbildung $\psi: Y \rightarrow X$ sowie Homotopien $H: X \times I \rightarrow X$ und $G: Y \times I \rightarrow Y$ mit $\psi \circ \varphi \stackrel{H}{\simeq} \operatorname{id}_{X}$ und $\varphi \circ \psi \stackrel{G}{\simeq} \operatorname{id}_{Y}$. Betrachte den Weg $h: I \rightarrow X, h(t):=H\left(x_{0}, t\right)$ von $\psi\left(\varphi\left(x_{0}\right)\right)$ nach $x_{0}$, und den Weg $g: I \rightarrow Y, g(t):=G\left(\varphi\left(x_{0}\right), t\right)$ von $\varphi\left(\psi\left(\varphi\left(x_{0}\right)\right)\right)$ nach $\varphi\left(x_{0}\right)$. Nach Proposition I.3.26 gilt $\psi_{*} \circ \varphi_{*}=(\psi \circ \varphi)_{*}=\left(H_{0}\right)_{*}=\beta_{h} \circ\left(H_{1}\right)_{*}=$ $\beta_{h} \circ\left(\mathrm{id}_{X}\right)_{*}=\beta_{h}$ sowie $\varphi_{*} \circ \psi_{*}=(\varphi \circ \psi)_{*}=$ $\left(G_{0}\right)_{*}=\beta_{g} \circ\left(G_{1}\right)_{*}=\beta_{g} \circ\left(\mathrm{id}_{Y}\right)_{*}=\beta_{g}$. Daher kommutiert das nebenstehende Diagramm. Nach Proposition I.1.18 ist $\beta_{h}$\\
+\includegraphics[max width=\textwidth]{2025_06_05_d7ed2bacd1e9ce1db1f0g-030} ein Isomorphismus, also muss $\psi_{*}$ surjektiv sein. Da $\beta_{g}$ ein Isomorphismus ist, muss $\psi_{*}$ auch injektiv sein. Damit ist $\psi_{*}$ ein Isomorphismus, woraus wir nun schließen, dass $\varphi_{*}: \pi_{1}\left(X, x_{0}\right) \rightarrow \pi_{1}\left(Y, \varphi\left(x_{0}\right)\right)$ ein Isomorphismus sein muss.\\
+I.3.28. Bemerkung. Aus Propostion I.1.14 folgt, dass wir die Fundamentalgruppe als eine topologische Invariante wegzusammenhängender Räume auffassen können, dh. homöomorphe wegzusammenhängende topologische Räume müssen isomorphe Fundamentalgruppen haben. Satz I.3.27 besagt nun, dass die Fundamentalgruppe sogar eine Homotopieinvariante wegzusammenhängender Räume liefert, dh. homotopieäquivalente wegzusammenhängende topologische Räume müssen isomorphe Fundamentalgruppen haben. In anderen Worten, sind die Fundamentalgruppen zweier wegzusammenhängender Räume nicht isomorph, dann können die Räume nicht einmal homotopieäquivalent sein.\\
+I.3.29. Korollar. Kontrahierbare Räume sind einfach zusammenhängend.
+
+Beweis. Ein kontrahierbarer Raum $X$ ist wegzusammenhägend, siehe oben, und die konstante Abbildung $X \rightarrow\{*\}$ ist eine Homotopieäquivalenz. Nach Satz I.3.27 induziert diese einen Isomorphismus $\pi_{1}(X) \cong \pi_{1}(\{*\})$. Aus $\pi_{1}(\{*\})=$ 0 folgt daher auch $\pi_{1}(X)=0$.\\
+I.3.30. Beispiel (Möbiusband). Auf $I \times[-1,1]$ betrachte die von $(0, y) \sim$ $(1,-y), y \in[-1,1]$, erzeugte Äquivalenzrelation. Der damit assoziierten Quotientenraum $M:=(I \times[-1,1]) / \sim$ wird Möbiusband genannt. Es bezeichne $p: I \times[-1,1] \rightarrow M$ die kanonische Projektion und $S:=p(I \times\{0\})$. Die retrahierende Deformation $\tilde{H}:(I \times[-1,1]) \times I \rightarrow I \times[-1,1], \tilde{H}(x, y, t):=(x,(1-t) y)$, faktorisiert zu einer retrahierenden Deformation $H: M \times I \rightarrow M, p \circ \tilde{H}_{t}=H_{t} \circ p$, von $M$ auf $S$. Daher ist $S$ ein Deformationsretrakt von $M$ und die Inklusion $S \rightarrow M$ eine Homotopieäquivalenz. Da $S$ homöomorph zu $S^{1}$ ist, erhalten wir $\pi_{1}(M) \cong \pi_{1}\left(S^{1}\right) \cong \mathbb{Z}$. Die Schleife $I \rightarrow M, s \mapsto p(s, 0)$, repräsentiert einen Erzeuger von $\pi_{1}(M)$.\\
+I.3.31. Beispiel. Betrachte wieder die Abbildungen $\mu_{A}:\left(T^{n}, x_{n}\right) \rightarrow\left(T^{m}, x_{m}\right)$ aus Beispiel I.2.17, $A \in \mathcal{M}_{m, n}(\mathbb{Z})$. Aus Proposition I.3.24 und der Berechnung des induzierten Homomorphismus in Beispiel I.2.17 sehen wir, dass $\mu_{A}$ und $\mu_{B}$ nicht homotop relativ Basispunkt sind, falls $A \neq B \in \mathcal{M}_{m, n}(\mathbb{Z})$. Die Abbildung $\mathcal{M}_{m, n}(\mathbb{Z}) \rightarrow\left[\left(T^{n}, x_{n}\right),\left(T^{m}, x_{m}\right)\right], A \mapsto\left[\mu_{A}\right]$, ist daher injektiv.
+
+Unter der Einpunktvereinigung zweier punktierter Räume ( $X, x_{0}$ ) und ( $Y, y_{0}$ ) verstehen wir den punktierten Raum der aus der disjunkten Vereinigung $X \sqcup Y$ durch Identifikation der beiden Punkte $x_{0}$ und $y_{0}$ ensteht. Genauer,
+
+$$
+\left(X, x_{0}\right) \vee\left(Y, y_{0}\right):=\left((X \sqcup Y) /\left\{x_{0}, y_{0}\right\}, *\right) .
+$$
+
+Die beiden Abbildungen punktierter Räume $\iota_{X}:\left(X, x_{0}\right) \rightarrow\left(X, x_{0}\right) \vee\left(Y, y_{0}\right)$, $\iota_{X}(x):=\left[\left(x, y_{0}\right)\right]$, und $\iota_{Y}:\left(Y, y_{0}\right) \rightarrow\left(X, x_{0}\right) \vee\left(Y, y_{0}\right), \iota_{Y}(y):=\left[\left(x_{0}, y\right)\right]$, werden als kanonische Einbettungen bezeichnet. Beide sind Homöomorphismen auf ihr Bild, wir können daher ( $X, x_{0}$ ), und ebenso ( $Y, y_{0}$ ), als Teilraum von $\left(X, x_{0}\right) \vee\left(Y, y_{0}\right)$ auffassen. Die Einpunktvereinigung hat die folgende universelle Eigenschaft. Sind $\varphi_{X}$ : $\left(X, x_{0}\right) \rightarrow\left(Z, z_{0}\right)$ und $\varphi_{Y}:\left(Y, y_{0}\right) \rightarrow\left(Z, z_{0}\right)$ zwei Abbildungen punktierter Räume, dann\\
+\includegraphics[max width=\textwidth]{2025_06_05_d7ed2bacd1e9ce1db1f0g-031} existiert eine eindeutige Abbildung punktierter Räume $\varphi:\left(X, x_{0}\right) \vee\left(Y, y_{0}\right) \rightarrow\left(Z, z_{0}\right)$, sodass $\varphi \circ \iota_{X}=\varphi_{X}$ und $\varphi \circ \iota_{Y}=\varphi_{Y}$, siehe nebenstehendes Diagramm. Diese Abbildung ist durch $\varphi\left(x, y_{0}\right):=\varphi_{X}(x)$, $x \in X$, und $\varphi\left(x_{0}, y\right):=\varphi_{Y}(y), y \in Y$, gegeben und wird mit $\varphi_{X} \vee \varphi_{Y}$ bezeichnet. Beachte, dass $\varphi_{X}\left(x_{0}\right)=z_{0}=\varphi_{Y}\left(y_{0}\right)$ und daher $\varphi_{X} \vee \varphi_{Y}$ wohldefiniert ist. Analog definieren wir die Einpunktvereinigung beliebig vieler punktierter Räume $\left(X_{\alpha}, x_{\alpha}\right), \alpha \in A$, durch
+
+$$
+\bigvee_{\alpha \in A}\left(X_{\alpha}, x_{\alpha}\right):=\left(\left(\bigsqcup_{\alpha \in A} X_{\alpha}\right) /\left\{x_{\alpha}: \alpha \in A\right\}, *\right)
+$$
+
+Wieder haben wir kanonische Inklusionen $\iota_{\alpha}:\left(X_{\alpha}, x_{\alpha}\right) \rightarrow \bigvee_{\alpha^{\prime} \in A}\left(X_{\alpha^{\prime}}, x_{\alpha^{\prime}}\right)$ mit folgender universellen Eigenschaft. Ist ( $Z, z_{0}$ ) ein punktierter Raum und sind $\varphi_{\alpha}:\left(X_{\alpha}, x_{\alpha}\right) \rightarrow\left(Z, z_{0}\right)$ Abbildungen punktierter Räume, $\alpha \in A$, dann existiert genau eine Abbildung punktierter Räume $\varphi: \bigvee_{\alpha \in A}\left(X_{\alpha}, x_{\alpha}\right) \rightarrow\left(Z, z_{0}\right)$, sodass $\varphi \circ \iota_{\alpha}=\varphi_{\alpha}$ für alle $\alpha \in A$.
+
+Betrachte nun wieder $S^{1} \subseteq \mathbb{C}$ mit Basispunkt $1 \in S^{1}$. Weiters bezeichnen $\iota_{1}:\left(S^{1}, 1\right) \rightarrow\left(S^{1}, 1\right) \vee\left(S^{1}, 1\right)$ und $\iota_{2}:\left(S^{1}, 1\right) \rightarrow\left(S^{1}, 1\right) \vee\left(S^{1}, 1\right)$ die beiden kanonischen Inklusionen. Definiere Abbildungen punktierter Räume:
+
+$$
+\begin{array}{ll}
+\mu:\left(S^{1}, 1\right) \rightarrow\left(S^{1}, 1\right) \vee\left(S^{1}, 1\right), & \mu(z):= \begin{cases}\iota_{1}\left(z^{2}\right) & \text { falls } \operatorname{Im} z \geq 0 \\
+\iota_{2}\left(z^{2}\right) & \text { falls } \operatorname{Im} z \leq 0\end{cases} \\
+\nu:\left(S^{1}, 1\right) \rightarrow\left(S^{1}, 1\right), & \nu(z):=z^{-1}=\bar{z}
+\end{array}
+$$
+
+Wir können damit eine alternative Beschreibung der Fundamentalgruppe geben.\\
+I.3.32. Proposition. Ist ( $X, x_{0}$ ) ein punktierter Raum, dann definiert
+
+$$
+\Psi=\Psi_{\left(X, x_{0}\right)}:\left[\left(S^{1}, 1\right),\left(X, x_{0}\right)\right] \rightarrow \pi_{1}\left(X, x_{0}\right), \quad \Psi([f]):=\left[f \circ \omega_{1}\right]
+$$
+
+eine Bijektion, siehe (I.2), und es gilt $\Psi([f]) \Psi([g])=\Psi([(f \vee g) \circ \mu])$ sowie $\Psi([f])^{-1}=\Psi([f \circ \nu])$. Diese Bijektion ist natürlich, dh. für jede Abbildung punktierter Räume $\varphi:\left(X, x_{0}\right) \rightarrow\left(Y, y_{0}\right)$ kommutiert das folgende Diagramm:\\
+\includegraphics[max width=\textwidth, center]{2025_06_05_d7ed2bacd1e9ce1db1f0g-032}
+
+Dabei bezeichnet $\varphi_{*}:\left[\left(S^{1}, 1\right),\left(X, x_{0}\right)\right] \rightarrow\left[\left(S^{1}, 1\right),\left(Y, y_{0}\right)\right], \varphi_{*}([f]):=[\varphi \circ f]$.\\
+Beweis. Zunächst ist $\Psi$ wohldefiniert, denn sind $f, g:\left(S^{1}, 1\right) \rightarrow\left(X, x_{0}\right)$ homotop relativ Basispunkt, $f \stackrel{H}{\simeq} g$, dann ist $(s, t) \mapsto H\left(\omega_{1}(s), t\right)$ eine Homotopie relativ Endpunkten von $f \circ \omega_{1}$ nach $g \circ \omega_{1}$, also $\left[f \circ \omega_{1}\right]=\left[g \circ \omega_{1}\right] \in \pi_{1}\left(X, x_{0}\right)$. Beachte, dass $\omega_{1}: I \rightarrow S^{1}$ zu einem Homöomorphismus $I /\{0,1\} \rightarrow S^{1}$ faktorisiert. Daher definiert $f \mapsto f \circ \omega_{1}$ eine Bijektion zwischen der Menge der Abbildungen punktierter Räume $\left(S^{1}, 1\right) \rightarrow\left(X, x_{0}\right)$ und der Menge der Schleifen bei $x_{0}$. Es folgt sofort, dass $\Psi$ surjektiv ist. Wir sehen aber auch, dass $H \mapsto H \circ\left(\omega_{1} \times \mathrm{id}_{I}\right)$ eine Bijektion zwischen der Menge der basispunkterhaltenden Homotopien $S^{1} \times I \rightarrow X$ mit $H_{t}(1)=x_{0}$ und der Menge der Homotopien $I \times I \rightarrow X$ relativ Endpunkt $x_{0}$ liefert. Daraus folgt nun auch die Injektivität von $\Psi$. Nun zur Beschreibung der Gruppenstruktur. Für $f:\left(S^{1}, 1\right) \rightarrow\left(X, x_{0}\right)$ gilt $\Psi([f])^{-1}=\left[f \circ \omega_{1}\right]^{-1}=\left[\overline{f \circ \omega_{1}}\right]=\left[f \circ \bar{\omega}_{1}\right]=\left[f \circ \nu \circ \omega_{1}\right]=\Psi([f \circ \nu])$. Ist weiters $g:\left(S^{1}, 1\right) \rightarrow\left(X, x_{0}\right)$ dann gilt\\
+$\left((f \vee g) \circ \mu \circ \omega_{1}\right)(s)= \begin{cases}(f \vee g)\left(\iota_{1}\left(\omega_{1}(2 s)\right)\right)=f\left(\omega_{1}(2 s)\right) & \text { für } 0 \leq s \leq \frac{1}{2}, \\ (f \vee g)\left(\iota_{2}\left(\omega_{1}(2 s-1)\right)\right)=g\left(\omega_{1}(2 s-1)\right) & \text { für } \frac{1}{2} \leq s \leq 1,\end{cases}$\\
+wobei wir $\omega_{1}(s)^{2}=\omega_{1}(2 s)=\omega_{1}(2 s-1)$ im ersten Gleichheitszeichen verwendet haben. Wir schließen $(f \vee g) \circ \mu \circ \omega_{1}=\left(f \circ \omega_{1}\right)\left(g \circ \omega_{1}\right)$, also $\Psi([(f \vee g) \circ \mu])=$ $\Psi([f]) \Psi([g])$. Für die Natürlichkeitsaussage bemerken wir, $\varphi_{*}\left(\Psi_{\left(X, x_{0}\right)}([f])\right)=$ $\varphi_{*}\left(\left[f \circ \omega_{1}\right]\right)=\left[\varphi \circ\left(f \circ \omega_{1}\right)\right]=\left[(\varphi \circ f) \circ \omega_{1}\right]=\Psi_{\left(Y, y_{0}\right)}([\varphi \circ f])=\Psi_{\left(Y, y_{0}\right)}\left(\varphi_{*}([f])\right)$.
+
+Für einen punktierten Raum $\left(X, x_{0}\right)$ sei $\Phi_{\left(X, x_{0}\right)}: \pi_{1}\left(X, x_{0}\right) \rightarrow\left[S^{1}, X\right]$ durch die Komposition
+
+$$
+\Phi_{\left(X, x_{0}\right)}: \pi_{1}\left(X, x_{0}\right) \xrightarrow{\Psi_{\left(X, x_{0}\right)}^{-1}}\left[\left(S^{1}, 1\right),\left(X, x_{0}\right)\right] \rightarrow\left[S^{1}, X\right],
+$$
+
+definiert, wobei $\Psi_{\left(X, x_{0}\right)}$ die Bijektion aus Proposition I.3.32 bezeichnet und die Abbildung $\left[\left(S^{1}, 1\right),\left(X, x_{0}\right)\right] \rightarrow\left[S^{1}, X\right]$ einer Homotopieklasse relativ Basispunkt die entsprechende sogenannte freie Homotopieklasse zuordnet.
+
+
+\end{document}

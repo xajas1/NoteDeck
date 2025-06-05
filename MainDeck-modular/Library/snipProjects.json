@@ -119,11 +119,11 @@
     "sourceFile": "QMS_Rischke25/QMS_Rischke25.tex",
     "snipMeta": {
       "Subject": "QMS",
-      "Topic": "",
+      "Topic": "Lie Gruppen",
       "LitID": "R25",
-      "CTyp": "DEF",
+      "CTyp": "REM",
       "ParentTopic": "",
-      "Content": "",
+      "Content": "Jacobi-Identität für Rotation und Spin Gruppe",
       "selectedProject": "QMS_Rischke25/QMS_Rischke25.tex"
     },
     "tableMeta": {
@@ -148,12 +148,12 @@
   "GPDE_A11": {
     "sourceFile": "GPDE_Andrews11/GPDE_Andrews11.tex",
     "snipMeta": {
-      "Subject": "GPDE",
-      "Topic": "",
+      "Subject": "RG",
+      "Topic": "Variationsformeln der Riemannischen Geometrie",
       "LitID": "A11",
-      "CTyp": "DEF",
+      "CTyp": "PROOF",
       "ParentTopic": "",
-      "Content": "",
+      "Content": "P: Evolution des skalaren Krümmung unter Ricci Flow 2",
       "selectedProject": "GPDE_Andrews11/GPDE_Andrews11.tex"
     },
     "tableMeta": {
@@ -179,11 +179,11 @@
     "sourceFile": "EFT1_Kraus25/EFT1_Kraus25.tex",
     "snipMeta": {
       "Subject": "BÜN",
-      "Topic": "Faserbündel Grundlagen",
+      "Topic": "Faserbündel",
       "LitID": "K25a",
-      "CTyp": "DEF",
+      "CTyp": "PROOF",
       "ParentTopic": "",
-      "Content": "",
+      "Content": "P: Faserbündel über kontrahierbarer Basis sind trivial",
       "selectedProject": "EFT1_Kraus25/EFT1_Kraus25.tex"
     },
     "tableMeta": {
@@ -194,15 +194,45 @@
     "sourceFile": "GA_Lee13/GA_Lee13.tex",
     "snipMeta": {
       "Subject": "GA",
-      "Topic": "Multilineare Algebra",
+      "Topic": "Vektorbündel",
       "LitID": "L13",
-      "CTyp": "DEF",
+      "CTyp": "REM",
       "ParentTopic": "",
-      "Content": "Multilineare Abbildung",
+      "Content": "Kriterium für Trivialität von Tangentialbündel",
       "selectedProject": "GA_Lee13/GA_Lee13.tex"
     },
     "tableMeta": {
       "selectedSource": "GA_Lee13/GA_Lee13.tex"
+    }
+  },
+  "RG_B25": {
+    "sourceFile": "RG_Bernig25/RG_Bernig25.tex",
+    "snipMeta": {
+      "Subject": "RG",
+      "Topic": "Riemannische Submersionen",
+      "LitID": "B25",
+      "CTyp": "PROP",
+      "ParentTopic": "",
+      "Content": "P: Strukturelle Eigenschaften von Lift-Vektorfeldern und Zusammenhang auf Totalräumen Riemannscher Submersionen",
+      "selectedProject": "RG_Bernig25/RG_Bernig25.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "RG_Bernig25/RG_Bernig25.tex"
+    }
+  },
+  "AT_H09": {
+    "sourceFile": "AT_Haller09/AT_Haller09.tex",
+    "snipMeta": {
+      "Subject": "AT",
+      "Topic": "Freie Gruppen",
+      "LitID": "H09",
+      "CTyp": "REM",
+      "ParentTopic": "",
+      "Content": "Permutation des reduzierten Wortes",
+      "selectedProject": "AT_Haller09/AT_Haller09.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "AT_Haller09/AT_Haller09.tex"
     }
   }
 }

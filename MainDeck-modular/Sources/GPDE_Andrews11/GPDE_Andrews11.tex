@@ -157,11 +157,10 @@
 \newenvironment{EXA}[2]{\begin{unitbox}\CustomHeading{Example}{#1}{#2}}{\end{unitbox}}
 \newenvironment{STUD}[2]{\begin{unitbox}\CustomHeading{Study}{#1}{#2}}{\end{unitbox}}
 \newenvironment{CONC}[2]{\begin{unitbox}\CustomHeading{Concept}{#1}{#2}}{\end{unitbox}}
-
-
-\newenvironment{PROOF}
-  {\begin{proof}}%
-{\end{proof}}
+\newenvironment{OTH}[2]{\begin{unitbox}\CustomHeading{Other}{#1}{#2}}{\end{unitbox}}
+\newenvironment{EXE}[2]{\begin{unitbox}\CustomHeading{Exercise}{#1}{#2}}{\end{unitbox}}
+\newenvironment{MOT}[2]{\begin{unitbox}\CustomHeading{Motivation}{#1}{#2}}{\end{unitbox}}
+\newenvironment{PROOF}[2]{\begin{unitbox}\CustomHeading{Proof}{#1}{#2}}{\end{unitbox}}
 
 % --- Unit Umgebung für Source-Inhalte ---
 \usepackage{mdframed}
@@ -425,7 +424,9 @@ Note that we say a manifold has a 2-positive curvature operator if the sum of th
 However despite this progress it still remained an open problem for over a decade as to whether or not these results could be extended for manifolds $M$ with $\operatorname{dim} M \geq 4$.
 
 \footnotetext{${ }^{3}$ Equivalently one could also say that $R(\phi, \phi)+R(\psi, \psi)>0$ for all 2-forms $\phi$ and $\psi$ satisfying $|\phi|^{2}=|\psi|^{2}$ and $\langle\phi, \psi\rangle=0$.
-}\subsubsection*{Ricci Flow in Higher Dimensions}
+}
+
+\subsubsection*{Ricci Flow in Higher Dimensions}
 Huisken [Hui85] was one of the first to study the Ricci flow on manifolds of dimension $n \geq 4$. His analysis focuses on decomposing the curvature tensor into $R_{i j k \ell}=U_{i j k \ell}+V_{i j k \ell}+W_{i j k \ell}$, where $U_{i j k \ell}$ denotes the part of the curvature tensor associated with the scalar curvature, $V_{i j k \ell}$ is the part of the curvature associated with the trace-free Ricci curvature, and $W_{i j k \ell}$ denotes the Weyl tensor. By following the techniques outlined in [Ham82b], Huisken showed that if the scalar-curvature-free part of the sectional curvature tensor is small compared to the scalar curvature, then the same evolution equation for the curvature yields the same result - a deformation to a constant positive sectional curvature metric.
 
 Theorem 1.9 (Huisken, 1985). Let $n \geq 4$. If the curvature tensor of a smooth compact $n$-dimensional Riemannian manifold of positive scalar curvature satisfies
@@ -597,28 +598,52 @@ $$
 
 We denote the space of all $k$-tensors on $V$ by $T^{k}(V)$, the space of contravariant $\ell$-tensors by $T_{\ell}(V)$, and the space of all mixed ( $k, \ell$ ) tensors by $T_{\ell}^{k}(V)$.
 
-The following canonical isomorphism is frequently useful:\\
-Lemma 2.16. The tensor space $T_{1}^{1}(V)$ is canonically isomorphic to $\operatorname{End}(V)$, where the (bases independent) isomorphism $\Phi: \operatorname{End}(V) \rightarrow T_{1}^{1}(V)$ is given by
 
+The following canonical isomorphism is frequently useful:
+
+
+
+Lemma 2.16. 
+
+
+\begin{LEM}{GA-A11-03-01}{$T_1^1(V)\cong \operatorname{End}(V)$}
+The tensor space $T_{1}^{1}(V)$ is canonically isomorphic to $\operatorname{End}(V)$, where the (bases independent) isomorphism $\Phi: \operatorname{End}(V) \rightarrow T_{1}^{1}(V)$ is given by
 $$
 \Phi(A):(\omega, X) \mapsto \omega(A(X))
 $$
+for all $A \in \operatorname{End}(V), \omega \in V^{*}$, and $X \in V$.
+\end{LEM}
 
-for all $A \in \operatorname{End}(V), \omega \in V^{*}$, and $X \in V$.\\
-Remark 2.17. Alternatively one could state this lemma by saying: If $V$ and $W$ are vector spaces then $V \otimes W^{*} \simeq \operatorname{End}(W, V)$ where the isomorphism $\Psi: V \otimes W^{*} \rightarrow \operatorname{End}(W, V)$ is given by $\Psi(v \otimes \xi): w \rightarrow \xi(w) v$.
 
-A general version of this identification is expressed as follows.\\
-Lemma 2.18. The tensor space $T_{\ell+1}^{k}(V)$ is canonically isomorphic to the space Mult ( $\left(V^{*}\right)^{\ell} \times V^{k}, V$ ), where the isomorphism $\Phi: \operatorname{Mult}\left(\left(V^{*}\right)^{\ell} \times V^{k}, V\right) \rightarrow$ $T_{\ell+1}^{k}(V)$ is given by
 
+Remark 2.17. 
+
+\begin{LEM}{GA-A11-03-02}{$V \otimes W^{*} \cong \operatorname{End}(W, V)$}
+Alternatively one could state this lemma by saying: If $V$ and $W$ are vector spaces then $V \otimes W^{*} \simeq \operatorname{End}(W, V)$ where the isomorphism $\Psi: V \otimes W^{*} \rightarrow \operatorname{End}(W, V)$ is given by $\Psi(v \otimes \xi): w \rightarrow \xi(w) v$.
+\end{LEM}
+
+
+A general version of this identification is expressed as follows.
+
+
+Lemma 2.18. 
+
+\begin{LEM}{GA-A11-03-03}{Kanonischer Isomorphismus zwischen Tensorräumen und Multilinearformen mit Werten in  $V$}
+The tensor space $T_{\ell+1}^{k}(V)$ is canonically isomorphic to the space $\operatorname{Mult} ((V^{*})^{\ell} \times V^{k}, V)$, where the isomorphism $\Phi: \operatorname{Mult}\left(\left(V^{*}\right)^{\ell} \times V^{k}, V\right) \rightarrow$ $T_{\ell+1}^{k}(V)$ is given by
 $$
 \Phi(A):\left(\omega^{0}, \omega^{1}, \ldots, \omega^{\ell}, X_{1}, \ldots, X_{k}\right) \mapsto \omega^{0}\left(A\left(\omega^{1}, \ldots, \omega^{\ell}, X_{1}, \ldots, X_{k}\right)\right)
 $$
+for all $A \in \operatorname{Mult}\left(\left(V^{*}\right)^{\ell} \times V^{k}, V\right), \omega_{i} \in V^{*}$, and $X_{j} \in V$.
+\end{LEM}
 
-for all $A \in \operatorname{Mult}\left(\left(V^{*}\right)^{\ell} \times V^{k}, V\right), \omega_{i} \in V^{*}$, and $X_{j} \in V$. ${ }^{2}$
+${ }^{2}$
+
+
 
 \subsubsection*{Tensor Products}
-There is a natural product that links the various tensor spaces over $V$. If $F \in T_{\ell}^{k}(V)$ and $G \in T_{q}^{p}(V)$, then the tensor product $F \otimes G \in T_{\ell+q}^{k+p}(V)$ is defined to be
 
+
+There is a natural product that links the various tensor spaces over $V$. If $F \in T_{\ell}^{k}(V)$ and $G \in T_{q}^{p}(V)$, then the tensor product $F \otimes G \in T_{\ell+q}^{k+p}(V)$ is defined to be
 $$
 \begin{aligned}
 & (F \otimes G)\left(\omega^{1}, \ldots, \omega^{\ell+q}, X_{1}, \ldots, X_{k+p}\right) \\
@@ -644,52 +669,71 @@ $$
 
 where $F^{j_{1}, \ldots, j_{\ell}}{ }_{i_{1}, \ldots, i_{k}}=F\left(\varphi^{j_{1}}, \ldots, \varphi^{j \ell}, e_{i_{1}}, \ldots, e_{i_{k}}\right)$.
 
+
+
 \subsubsection*{Tensor Contractions}
+
+
+\begin{REM}{GA-A11-03-04}{Wohldefiniertheit der Spur von Tensoren}
 A tensor contraction is an operation on one or more tensors that arises from the natural pairing of a (finite-dimensional) vector space with its dual.
 
 Intuitively there is a natural notion of 'the trace of a matrix' $A=\left(A_{j}^{i}\right) \in$ $\operatorname{Mat}_{n \times n}(\mathbb{R})$ given by $\operatorname{tr} A=\sum_{i} A_{i}^{i}$. It is $\mathbb{R}$-linear and commutative in the sense that $\operatorname{tr} A B=\operatorname{tr} B A$. From the latter property, the trace is also cyclic (in the sense that $\operatorname{tr} A B C=\operatorname{tr} B C A=\operatorname{tr} C A B$ ). Therefore the trace is similarity-invariant, which means for any $P \in \mathrm{GL}(n)$ the trace $\operatorname{tr} P^{-1} A P=\operatorname{tr} P P^{-1} A=\operatorname{tr} A$. Whence we can extend $\operatorname{tr}$ over $\operatorname{End}(V)$ by taking the trace of a matrix representation - this definition is basis independent since different bases give rise to similar matrices - and so by Lemma 2.16 tr can act on tensors as well.
+\end{REM}
 
-Naturally, we define the contraction of any $F \in T_{1}^{1}(V)$ by taking the trace of $F$ as a linear map in $\operatorname{End}(V)$. In which case $\operatorname{tr}: T_{1}^{1}(V) \rightarrow \mathbb{R}$ is given by $\operatorname{tr} F=F\left(\varphi^{i}, e_{i}\right)=\sum_{i} F_{i}^{i}$, since $\Phi^{-1}(F)=\left(F\left(\varphi^{i}, e_{j}\right)\right)_{i, j=1}^{n} \in \operatorname{End}(V)$. In general we define
 
+\begin{DEF}{GA-A11-03-05}{Kontraktion von $T_{\ell+1}^{k+1}(V)$}
+Naturally, we define the contraction of any $F \in T_{1}^{1}(V)$ by taking the trace of $F$ as a linear map in $\operatorname{End}(V)$. In which case $\operatorname{tr}: T_{1}^{1}(V) \rightarrow \mathbb{R}$ is given by 
+$$\operatorname{tr} F=F\left(\varphi^{i}, e_{i}\right)=\sum_{i} F_{i}^{i}$$ 
+since 
+$$\Phi^{-1}(F)=\left(F\left(\varphi^{i}, e_{j}\right)\right)_{i, j=1}^{n} \in \operatorname{End}(V)$$ 
+In general we define
 $$
 \operatorname{tr}: T_{\ell+1}^{k+1}(V) \rightarrow T_{\ell}^{k}(V)
 $$
-
 by
-
 $$
 (\operatorname{tr} F)\left(\omega^{1}, \ldots, \omega^{\ell}, X_{1}, \ldots, X_{k}\right)=\operatorname{tr}\left(F\left(\omega^{1}, \ldots, \omega^{\ell}, \cdot, X_{1}, \ldots, X_{k}, \cdot\right)\right) .
 $$
-
-That is, we define $(\operatorname{tr} F)\left(\omega^{1}, \ldots, \omega^{\ell}, X_{1}, \ldots, X_{k}\right)$ to be the trace of the endomorphism $F\left(\omega^{1}, \ldots, \omega^{\ell}, \cdot, X_{1}, \ldots, X_{k}, \cdot\right) \in T_{1}^{1}(V) \simeq \operatorname{End}(V)$. In components this is equivalent to
-
+That is, we define 
+$$(\operatorname{tr} F)\left(\omega^{1}, \ldots, \omega^{\ell}, X_{1}, \ldots, X_{k}\right)$$ 
+to be the trace of the endomorphism 
+$$F\left(\omega^{1}, \ldots, \omega^{\ell}, \cdot, X_{1}, \ldots, X_{k}, \cdot\right) \in T_{1}^{1}(V) \simeq \operatorname{End}(V)$$ 
+In components this is equivalent to
 $$
 (\operatorname{tr} F)^{j_{1} \ldots j_{\ell}}{ }_{i_{1} \ldots i_{k}}=F^{j_{1} \ldots j_{\ell} m}{ }_{i_{1} \ldots i_{k} m} .
 $$
-
 It is clear that the contraction is linear and lowers the rank of a tensor by 2. Unfortunately there is no general notation for this operation! So it is best to explicitly describe the contraction in words each time it arises. We give some simple examples of how this might occur.
+\end{DEF}
 
-There are several variations of tr: Firstly, there is nothing special about which particular component pairs the contraction is taken over. For instance\\
-if $F=F_{i}{ }^{j}{ }_{k} \varphi^{i} \otimes e_{j} \otimes \varphi^{k} \in T_{1}^{2}(V)$ then one could take the contraction of $F$ over the first two components: $\left(\operatorname{tr}_{12} F\right)_{k}=\operatorname{tr} F\left(\cdot, \cdot, e_{k}\right)=F_{i}{ }^{i}{ }_{k}$ or the last two components: $\left(\operatorname{tr}_{23} F\right)_{k}=\operatorname{tr} F\left(e_{k}, \cdot, \cdot\right)=F_{k}{ }^{i}{ }_{i}$.
 
+There are several variations of tr: 
+
+\begin{EXA}{GA-A11-03-06}{Kontraktion über beliebige Indexpaare (Komponentenwahl)}
+Firstly, there is nothing special about which particular component pairs the contraction is taken over. For instance if $F=F_{i}{ }^{j}{ }_{k} \varphi^{i} \otimes e_{j} \otimes \varphi^{k} \in T_{1}^{2}(V)$ then one could take the contraction of $F$ over the first two components: $\left(\operatorname{tr}_{12} F\right)_{k}=\operatorname{tr} F\left(\cdot, \cdot, e_{k}\right)=F_{i}{ }^{i}{ }_{k}$ or the last two components: $\left(\operatorname{tr}_{23} F\right)_{k}=\operatorname{tr} F\left(e_{k}, \cdot, \cdot\right)=F_{k}{ }^{i}{ }_{i}$.
+\end{EXA}
+
+
+\begin{EXA}{GA-A11-03-07}{Mehrfache Kontraktionen über mehrere Paare}
 Another variation occurs if one wants to take the contraction over multiple component pairs. For example if $F=F_{i j}{ }^{k \ell} \varphi^{i} \otimes \varphi^{j} \otimes e_{k} \otimes e_{\ell} \in T_{2}^{2}(V)$, one could take the trace over the 1st and 3rd with the 2nd and 4th so that $\operatorname{tr} F=\operatorname{tr}_{13} \operatorname{tr}_{24} F=\operatorname{tr} F(\star, \cdot, \star, \cdot)=F_{p q}{ }^{p q}$.
+\end{EXA}
 
+
+
+\begin{EXA}{GA-A11-03-08}{Kontraktion mit Hilfe einer Metrik (nicht-duale Indizes)}
 Furthermore, if one has a metric $g$ then it is possible to take contractions over two indices that are either both vectors or covectors. This is done by taking a tensor product with the metric tensor (or its inverse) and contracting each of the two indices with one of the indices of the metric. This operation is known as metric contraction (see Sect.2.4.3 for further details).
+\end{EXA}
 
+
+\begin{EXA}{GA-A11-03-09}{Evaluierung durch vollständige Kontraktion mit festen Argumenten}
 Finally, one of the most important applications arises when $F=\omega \otimes X \in$ $T_{1}^{1}(V)$ for some (fixed) vector $X$ and covector $\omega$. In this case
-
 $$
 \operatorname{tr} F=F\left(\partial_{i}, d x^{i}\right)=\omega\left(\partial_{i}\right) X\left(d x^{i}\right)=\omega_{i} X^{i}=\omega(X)
 $$
-
 The idea can be extended as follows: If $F \in T_{\ell}^{k}(V)$ with $\omega^{1}, \ldots, \omega^{\ell} \in V^{*}$ and $X_{1}, \ldots, X_{k} \in V$ (fixed) then
-
 $$
 F \otimes \omega^{1} \otimes \cdots \otimes \omega^{\ell} \otimes X_{1} \otimes \cdots \otimes X_{k} \in T_{2 \ell}^{2 k}(V)
 $$
-
 So the contraction of this tensor over all indexes becomes
-
 $$
 \begin{aligned}
 \operatorname{tr} & \left(F \otimes \omega^{1} \otimes \cdots \otimes \omega^{\ell} \otimes X_{1} \otimes \cdots \otimes X_{k}\right) \\
@@ -697,14 +741,18 @@ $$
 & =F\left(\omega^{1}, \ldots, \omega^{\ell}, X_{1}, \ldots, X_{k}\right) .
 \end{aligned}
 $$
+\end{EXA}
+
+
+
 
 \subsubsection*{Tensor Bundles and Tensor Fields}
-For a manifold $M$ we can apply the above tensor construction pointwise on each tangent space $T_{p} M$. In which case a ( $k, \ell$ )-tensor at $p \in M$ is an element $T_{\ell}^{k}\left(T_{p} M\right)$. We define the bundle of ( $k, \ell$ )-tensors on $M$ by
 
+
+For a manifold $M$ we can apply the above tensor construction pointwise on each tangent space $T_{p} M$. In which case a ( $k, \ell$ )-tensor at $p \in M$ is an element $T_{\ell}^{k}\left(T_{p} M\right)$. We define the bundle of ( $k, \ell$ )-tensors on $M$ by
 $$
 T_{\ell}^{k} M=\bigcup_{p \in M} T_{\ell}^{k}\left(T_{p} M\right)=\bigcup_{p \in M} \otimes^{k} T_{p}^{*} M \otimes^{\ell} T_{p} M
 $$
-
 In particular, $T_{1} M=T M$ and $T^{1} M=T^{*} M$. An important subbundle of $T^{2} M$ is $\operatorname{Sym}^{2} T^{*} M$, the space of all symmetric ( 2,0 )-tensors on $M$. A ( $k, \ell$ )tensor field is an element of $\Gamma\left(T_{\ell}^{k} M\right)=\Gamma\left(\otimes^{k} T^{*} M \otimes^{\ell} T M\right)$ - we sometimes use the notation $\mathscr{T}_{\ell}^{k}(M)$ as a synonym for $\Gamma\left(T_{\ell}^{k} M\right)$.
 
 To check that $T_{\ell}^{k} M$ is a vector bundle, let $\pi: T_{\ell}^{k} M \rightarrow M$ send $F \in$ $T_{\ell}^{k}\left(T_{p} M\right)$ to the base point $p$. If $\left(x^{i}\right)$ is a local chart on open $U \subset M$ around point $p$, then any tensor $F \in T_{\ell}^{k}\left(T_{p} M\right)$ can be expressed as
@@ -719,53 +767,146 @@ $$
 \phi: T_{\ell}^{k}\left(T_{p} M\right) \ni F \longmapsto\left(p, F^{j_{1}, \ldots, j_{\ell}}{ }_{i_{1}, \ldots, i_{k}}\right) .
 $$
 
-\subsubsection*{Dual Bundles}
-If $E$ is a vector bundle over $M$, the dual bundle $E^{*}$ is the bundle whose fibres are the dual spaces of the fibres of $E$ :
 
+
+\subsubsection*{Dual Bundles}
+
+
+\begin{DEF}{GA-A11-05-01}{Duales Vektorbündel}
+If $E$ is a vector bundle over $M$, the dual bundle $E^{*}$ is the bundle whose fibres are the dual spaces of the fibres of $E$:
 $$
 E^{*}=\left\{(p, \omega): \omega \in E_{p}^{*}\right\}
 $$
+\end{DEF}
 
+\begin{REM}{GA-A11-05-02}{Lokale Trivialisierung und lokaler Rahmen des duales Vektorbündel aus lokalem Rahmen des Vektorbündels}
 If $\left(\xi_{i}\right)$ is a local frame for $E$ over an open set $U \subset M$, then the map $\phi$ : $\pi_{E^{*}}^{-1}(U) \rightarrow U \times \mathbb{R}^{k}$ defined by $(p, \omega) \mapsto\left(p, \omega\left(\xi_{1}(p)\right), \ldots, \omega\left(\xi_{k}(p)\right)\right)$ is a local trivialisation of $E^{*}$ over $U$. The corresponding local frame for $E^{*}$ is given by the sections $\theta^{i}$ defined by $\theta^{i}\left(\xi_{j}\right)=\delta_{j}^{i}$.
+\end{REM}
 
 \subsubsection*{Tensor Products of Bundles}
-If $E_{1}, \ldots, E_{k}$ are vector bundles over $M$, the tensor product $E_{1} \otimes \cdots \otimes E_{k}$ is the vector bundle whose fibres are the tensor products $\left(E_{1}\right)_{p} \otimes \cdots \otimes\left(E_{k}\right)_{p}$. If $U$ is an open set in $M$ and $\left\{\xi_{i}^{j}: 1 \leq i \leq n_{j}\right\}$ is a local frame for $E_{j}$ over $U$ for $j=1, \ldots, k$, then $\left\{\xi_{i_{1}}^{1} \otimes \cdots \otimes \xi_{i_{k}}^{k}: 1 \leq i_{j} \leq n_{j}, 1 \leq j \leq k\right\}$ forms a local frame for $E_{1} \otimes \cdots \otimes E_{k}$. Taking tensor products commutes with taking duals (in the sense of Sect. 2.3.4) and is associative. That is, $E_{1}^{*} \otimes E_{2}^{*} \simeq\left(E_{1} \otimes E_{2}\right)^{*}$ and $\left(E_{1} \otimes E_{2}\right) \otimes E_{3} \simeq E_{1} \otimes\left(E_{2} \otimes E_{3}\right)$.
+
+
+\begin{DEF}{GA-A11-05-03}{Tensorprodukt von Vektorbündeln}
+If $E_{1}, \ldots, E_{k}$ are vector bundles over $M$, the tensor product $E_{1} \otimes \cdots \otimes E_{k}$ is the vector bundle whose fibres are the tensor products 
+$$\left(E_{1}\right)_{p} \otimes \cdots \otimes\left(E_{k}\right)_{p}$$
+\end{DEF} 
+
+\begin{REM}{GA-A11-05-04}{Lokaler Rahmen des Tensor Bündels aus lokalen Rahmend der Komponenten}
+If $U$ is an open set in $M$ and $\left\{\xi_{i}^{j}: 1 \leq i \leq n_{j}\right\}$ is a local frame for $E_{j}$ over $U$ for $j=1, \ldots, k$, then 
+$$\left\{\xi_{i_{1}}^{1} \otimes \cdots \otimes \xi_{i_{k}}^{k}: 1 \leq i_{j} \leq n_{j}, 1 \leq j \leq k\right\}$$ 
+forms a local frame for $E_{1} \otimes \cdots \otimes E_{k}$.
+\end{REM}
+
+\begin{REM}{GA-A11-05-05}{Tensorprodukt kommutiert mit Dualisierung und ist assoziativ}
+Taking tensor products commutes with taking duals (in the sense of Sect. 2.3.4) and is associative. That is, $E_{1}^{*} \otimes E_{2}^{*} \simeq\left(E_{1} \otimes E_{2}\right)^{*}$ and $\left(E_{1} \otimes E_{2}\right) \otimes E_{3} \simeq E_{1} \otimes\left(E_{2} \otimes E_{3}\right)$.
+\end{REM}
+
+
 
 \subsubsection*{A Test for Tensorality}
-Let $E_{1}, \ldots, E_{k}$ be vector bundles over $M$. Given a tensor field $F \in \Gamma\left(E_{1}^{*} \otimes\right.$ $\left.\cdots \otimes E_{k}^{*}\right)$ and sections $X_{i} \in \Gamma\left(E_{i}\right)$, Proposition 2.8 implies that the function on $U$ defined by
 
+
+\begin{CONC}{GA-A11-04-03}{Test für Tensoralität}
+Let $E_{1}, \ldots, E_{k}$ be vector bundles over $M$. Given a tensor field $F \in \Gamma\left(E_{1}^{*} \otimes\right.$ $\left.\cdots \otimes E_{k}^{*}\right)$ and sections $X_{i} \in \Gamma\left(E_{i}\right)$, Proposition 2.8 implies that the function on $U$ defined by
 $$
 F\left(X_{1}, \ldots, X_{k}\right): p \mapsto F_{p}\left(\left.X_{1}\right|_{p}, \ldots,\left.X_{k}\right|_{p}\right)
 $$
-
 is smooth, so that $F$ induces a mapping $F: \Gamma\left(E_{1}\right) \times \cdots \times \Gamma\left(E_{k}\right) \rightarrow C^{\infty}(M)$. It can easily be seen that this map is multilinear over $C^{\infty}(M)$ in the sense that
-
 $$
 F\left(f_{1} X_{1}, \ldots, f_{k} X_{k}\right)=f_{1} \cdots f_{k} F\left(X_{1}, \ldots, X_{k}\right)
 $$
+for any $f_{i} \in C^{\infty}(M)$ and $X_{i} \in \Gamma\left(E_{i}\right)$. In fact the converse holds as well.
+\end{CONC}
 
-for any $f_{i} \in C^{\infty}(M)$ and $X_{i} \in \Gamma\left(E_{i}\right)$. In fact the converse holds as well.\\
-Proposition 2.19 (Tensor Test). For vector bundles $E_{1}, \ldots, E_{k}$ over $M$, the mapping $F: \Gamma\left(E_{1}\right) \times \cdots \times \Gamma\left(E_{k}\right) \rightarrow C^{\infty}(M)$ is a tensor field, i.e. $F \in$ $\Gamma\left(E_{1}^{*} \otimes \cdots \otimes E_{k}^{*}\right)$, if and only if $F$ is multilinear over $C^{\infty}(M)$.
+
+Proposition 2.19 (Tensor Test). 
+
+\begin{PROP}{GA-A11-04-01}{Tensortest}
+For vector bundles $E_{1}, \ldots, E_{k}$ over $M$, the mapping $F: \Gamma\left(E_{1}\right) \times \cdots \times \Gamma\left(E_{k}\right) \rightarrow C^{\infty}(M)$ is a tensor field, i.e. $F \in$ $\Gamma\left(E_{1}^{*} \otimes \cdots \otimes E_{k}^{*}\right)$, if and only if $F$ is multilinear over $C^{\infty}(M)$.
+\end{PROP}
+
 
 By Lemma 2.18 we also have:\\
-Proposition 2.20 (Bundle Valued Tensor Test). For vector bundles $E_{0}$, $E_{1}, \ldots, E_{k}$ over $M$, the mapping $F: \Gamma\left(E_{1}\right) \times \cdots \times \Gamma\left(E_{k}\right) \rightarrow \Gamma\left(E_{0}\right)$ is a tensor field, i.e. $F \in \Gamma\left(E_{1}^{*} \otimes \cdots \otimes E_{k}^{*} \otimes E_{0}\right)$, if and only if $F$ is multilinear over $C^{\infty}(M)$.
 
-Remark 2.21. This proposition leaves one to interpret
+Proposition 2.20 (Bundle Valued Tensor Test). 
 
+\begin{PROP}{GA-A11-04-02}{Bündel-wertiger Tensortest}
+For vector bundles $E_{0}$, $E_{1}, \ldots, E_{k}$ over $M$, the mapping $F: \Gamma\left(E_{1}\right) \times \cdots \times \Gamma\left(E_{k}\right) \rightarrow \Gamma\left(E_{0}\right)$ is a tensor field, i.e. $F \in \Gamma\left(E_{1}^{*} \otimes \cdots \otimes E_{k}^{*} \otimes E_{0}\right)$, if and only if $F$ is multilinear over $C^{\infty}(M)$.
+\end{PROP}
+
+
+
+
+
+\begin{PROP}{GA-A11-04-04}{Charakterisierung von vektorwertigen Multilinearabbildungen als $(k+1,l)$-Tensorfelder}
+Sei $M$ eine glatte Mannigfaltigkeit. Gegeben sei eine Abbildung von der Form
+\begin{align*}
+    \mathcal{Q}: & \underbrace{\mathcal{T}^{(0,1)}(M) \times \cdots \times \mathcal{T}^{(0,1)}(M)}_{k \text { mal }} \times \underbrace{\mathfrak{X}(M) \times \cdots \times \mathfrak{X}(M)}_{l \text { mal }} \rightarrow \mathfrak{X}(M)\\  
+    &[\Xi^1,…,\Xi^k,X_1,…,X_l] \mapsto \mathcal{Q}[\Xi^1,…,\Xi^k,X_1,…,X_l]:M\to TM
+\end{align*}
+Dann gilt: Genau dann wenn $\mathcal{Q}$ multilinear in $C^\infty(M)$ ist, existiert ein Tensorfeld $T(\cdot)\in \Gamma(T^{k+1,l}TM)$, welches zur Abbildung $\mathcal{Q}$ in folgedem Sinne assoziiert ist: Die Abbildung
+\begin{align*}
+    \mathcal{Q}=&T[\cdot]: \underbrace{\mathcal{T}^{(0,1)}(M) \times \cdots \times \mathcal{T}^{(0,1)}(M)}_{k \text { mal }} \times \underbrace{\mathfrak{X}(M) \times \cdots \times \mathfrak{X}(M)}_{l \text { mal }} \rightarrow \mathfrak{X}(M)\\  
+    &[\Xi^1,…,\Xi^k,X_1,…,X_l] \mapsto T[\Xi^1,…,\Xi^k,X_1,…,X_l]:M\to TM
+\end{align*}
+wird punktweise für $p\in M$ über das Tensorfeld $T(\cdot)$ $\mathfrak{X}(M)$-wertig ausgewertet, d.h. für fixiertes Tupel $[\Xi^1,…,\Xi^k,X_1,…,X_l]$ erhält man die Darstellung
+\begin{align*}
+    T&[\Xi^1,…,\Xi^k,X_1,…,X_l]: M \to \mathfrak{X}(M)\\  
+    &p\mapsto T(\Xi^1|_p,…,\Xi^k|_p,X_1|_p,…,X_l|_p,\cdot_{k+1}]:T_p^*M\to\R
+\end{align*}
+wobei punktweise die ersten $k+l$ Einträge fixiert werden und ein Kovektor $\xi_{k+1}$ in der letzten Komponente variiert und erhält ein Vektorfeld wegen $M\to(T^*M)^*=\mathfrak{X}(M)$. Wir werden mit $T[\cdot]$ die $\mathfrak{X}(M)$-wertige Auswertungsabbbildung und mit $T(\cdot)$ das assoziierte $(k+1,l)$-Tensorfeld bezeichnen.\footnote{Man bezeichnet dann die $\mathfrak{X}(M)$-wertige Auswertungsabbildung $\mathcal{Q}=T[\cdot]$ oft auch als $(k+1,l)$-Tensorfeld und identifiziert $\mathcal{Q}$ mit $T(\cdot)$, was jedoch zu Verwirrungen führen kann.}
+\end{PROP}
+
+
+\begin{PROOF}{GA-A11-04-06}{Charakterisierung von vektorwertigen Multilinearabbildungen als $(k+1,l)$-Tensorfelder}
+\textbf{„(2) \(\Rightarrow\) (1)“:} Sei \( T \in \Gamma(T^{k+1,\ell}TM) \) gegeben. Für jedes Tupel \( (\Xi^1,\dots,\Xi^k,X_1,\dots,X_\ell) \) definieren wir
+\[
+\mathcal{Q}[\Xi^1,\dots,X_\ell](p) := T(p)(\Xi^1|_p,\dots,X_\ell|_p,\cdot) \in T_pM.
+\]
+Dies definiert ein glattes Vektorfeld, da \( T \) glatt ist und die Einsetzung glatter Schnitte in ein glattes Tensorfeld glatt in der Basis ist. Die Multilinearität in den Argumenten folgt direkt aus der Tensorstruktur von \( T \).
+
+\medskip
+
+\textbf{„(1) \(\Rightarrow\) (2)“:} Sei nun \( \mathcal{Q} \) \( C^\infty(M) \)-multilinear. Für \( p \in M \), sowie für \( \xi^1,\dots,\xi^k \in T_p^*M \), \( v_1,\dots,v_\ell \in T_pM \), definieren wir:
+\[
+T(p)(\xi^1,\dots,\xi^k,v_1,\dots,v_\ell,\eta) := \eta\big( \mathcal{Q}[\Xi^1,\dots,\Xi^k,X_1,\dots,X_\ell](p) \big),
+\]
+wobei \( \Xi^i, X_j \) glatte Erweiterungen der jeweiligen Argumente sind mit
+\[
+\Xi^i|_p = \xi^i, \quad X_j|_p = v_j.
+\]
+Diese Definition ist wohldefiniert: Wenn zwei Erweiterungen am Punkt \( p \) übereinstimmen, ist ihr Unterschied in einer Umgebung von \( p \) null. Da \( \mathcal{Q} \) \( C^\infty(M) \)-multilinear ist, folgt, dass auch deren Beiträge in der Definition von \( T(p) \) verschwinden. Somit hängt \( T(p) \) nur von den Werten am Punkt \( p \) ab.
+
+Die so definierte Abbildung \( T: p \mapsto T(p) \in T^{k+1,\ell}(T_p M) \otimes T_p M \) ist glatt, da die Abbildung \( \mathcal{Q} \) glatt in ihren Eingabefeldern ist. Es folgt also \( T \in \Gamma(T^{k+1,\ell} TM) \), und
+\[
+\mathcal{Q}[\Xi^1,\dots,X_\ell](p) = T(p)(\Xi^1|_p,\dots,X_\ell|_p,\cdot) \in T_p M.
+\]
+\end{PROOF}
+
+
+
+
+
+Remark 2.21. 
+
+\begin{CONC}{GA-A11-04-05}{Vektorwertige Tensorfelder als Multilinearabbildungen auf Schnitträumen}
+This proposition leaves one to interpret
 $$
 F \in \Gamma\left(E_{1}^{*} \otimes \cdots \otimes E_{k}^{*} \otimes E_{0}\right)
 $$
-
 as an $E_{0}$-valued tensor acting on $E_{1} \otimes \cdots \otimes E_{k}$.\\
 The importance of Propositions 2.19 and 2.20 is that it allows one to work with tensors without referring to their pointwise attributes. For example, the metric $g$ on $M$ (as we shall see) can be consider as a pointwise inner product $g_{p}: T_{p} M \times T_{p} M \rightarrow \mathbb{R}$ that smoothly depends on its base point. By our identification we can also think of this tensor as a map
-
 $$
 g: \mathscr{X}(M) \times \mathscr{X}(M) \rightarrow C^{\infty}(M)
 $$
-
 Therefore if $X, Y$ and $Z$ are vector fields, $g(X, Y) \in C^{\infty}(M)$ and so by Remark 2.10 we also have $Z g(X, Y) \in C^{\infty}(M)$.
+\end{CONC}
+
+
+
 
 \subsection*{Metric Tensors}
+
 An inner product on a vector space allows one to define lengths of vectors and angles between them. Riemannian metrics bring this structure onto the tangent space of a manifold.
 
 \subsubsection*{Riemannian Metrics}
@@ -788,8 +929,9 @@ $$
 
 As $L(\gamma)^{2} \leq 2 E(\gamma)$, for any smooth curve $\gamma:[0,1] \rightarrow M$, the problem of minimising $L(\gamma)$ amongst all smooth curves $\gamma$ is equivalent to minimising $E(\gamma)$. By doing so we find:
 
-Theorem 2.22. The Euler-Lagrange equations for the energy functional are
 
+
+Theorem 2.22. The Euler-Lagrange equations for the energy functional are
 $$
 \ddot{\gamma}^{i}(t)+\Gamma_{j k}^{i}(\gamma(t)) \dot{\gamma}^{j}(t) \dot{\gamma}^{k}(t)=0,
 $$
@@ -799,77 +941,172 @@ Hence any smooth curve $\gamma:[0,1] \rightarrow M$ satisfying (2.2) is called a
 
 Lemma 2.23 (Short-Time Existence of Geodesics). Suppose ( $M, g$ ) is a Riemannian manifold. Let $p \in M$ and $v \in T_{p} M$ be given. Then there exists $\varepsilon>0$ and precisely one geodesic $\gamma:[0, \varepsilon] \rightarrow M$ with $\gamma(0)=p, \dot{\gamma}(0)=v$ and $\gamma$ depends smoothly on $p$ and $v$.
 
+
+
 \subsubsection*{The Product Metric}
 If ( $M_{1}, g^{(1)}$ ) and ( $M_{2}, g^{(2)}$ ) are two Riemannian manifolds then, by the natural identification $T_{\left(p_{1}, p_{2}\right)} M_{1} \times M_{2} \simeq T_{p_{1}} M_{1} \oplus T_{p_{2}} M_{2}$, there is a canonical Riemannian metric $g=g^{(1)} \oplus g^{(2)}$ on $M_{1} \times M_{2}$ defined by
-
 $$
 g_{\left(p_{1}, p_{2}\right)}\left(u_{1}+u_{2}, v_{1}+v_{2}\right)=g_{p_{1}}^{(1)}\left(u_{1}, u_{2}\right)+g_{p_{2}}^{(2)}\left(v_{1}, v_{2}\right)
 $$
-
 where $u_{1}, u_{2} \in T_{p_{1}} M_{1}$ and $v_{1}, v_{2} \in T_{p_{2}} M_{2}$. If $\operatorname{dim} M_{1}=n$ and $\operatorname{dim} M_{2}=m$, the product metric, in local coordinates ( $x^{1}, \ldots, x^{n+m}$ ) about ( $p_{1}, p_{2}$ ), is the block diagonal matrix:
-
 $$
 \left(g_{i j}\right)=\left(\begin{array}{cc}
 g_{i j}^{(1)} & \\
 & g_{i j}^{(2)}
 \end{array}\right)
 $$
-
 where $\left(g_{i j}^{(1)}\right)$ is an $n \times n$ block and $\left(g_{i j}^{(2)}\right)$ is an $m \times m$ block.
 
+
+
+
+\section*{Musikalische Isomorphismen auf einer Riemannschen Mannigfaltigkeit}
+
+\begin{DEF}{RG-A11-10-01}{Musikalische Isomorphismen}
+Sei \( (M, g) \) eine glatte Riemannsche Mannigfaltigkeit mit Metrik \( g \). Dann induziert \( g \) einen kanonischen Isomorphismus zwischen dem Tangentialraum \( T_p M \) und dem Kotangentialraum \( T_p^* M \) an jedem Punkt \( p \in M \). Diese Isomorphismen werden durch die sogenannten \emph{musikalischen Isomorphismen} \(\flat\) und \(\sharp\) gegeben.
+
+\textbf{\( \flat \)-Isomorphismus (``flat''):} Dies ist eine Abbildung
+\[
+\flat: T_p M \longrightarrow T_p^* M,
+\]
+definiert durch
+\[
+X^\flat := g(X, \cdot),
+\]
+d.h. \( X^\flat \) ist der Kovektor, der jedem \( Y \in T_p M \) den Wert \( g(X, Y) \) zuordnet.
+
+In lokalen Koordinaten \( (x^i) \), falls
+\[
+X = X^j \frac{\partial}{\partial x^j},
+\]
+dann ist
+\[
+X^\flat = g_{ij} X^j dx^i.
+\]
+
+\textbf{\( \sharp \)-Isomorphismus (``sharp''):} Dies ist die inverse Abbildung
+\[
+\sharp: T_p^* M \longrightarrow T_p M,
+\]
+definiert durch die Bedingung:
+\[
+g(\omega^\sharp, Y) = \omega(Y) \quad \text{für alle } Y \in T_p M.
+\]
+
+In lokalen Koordinaten, falls
+\[
+\omega = \omega_j dx^j,
+\]
+dann ergibt sich
+\[
+\omega^\sharp = g^{ij} \omega_j \frac{\partial}{\partial x^i},
+\]
+wobei \( (g^{ij}) \) die Inverse der Metrikmatrix \( (g_{ij}) \) ist.
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Objekt} & \textbf{Darstellung} & \textbf{Isomorphismus} \\
+\hline
+Vektor \( X = X^j \partial_j \) & \( X^\flat = g_{ij} X^j dx^i \) & \( \flat: T_p M \to T_p^* M \) \\
+\hline
+Kovektor \( \omega = \omega_j dx^j \) & \( \omega^\sharp = g^{ij} \omega_j \partial_i \) & \( \sharp: T_p^* M \to T_p M \) \\
+\hline
+\end{tabular}
+\end{center}
+\end{DEF}
+
+
+\subsection*{Beispiel (euklidisch auf \( \mathbb{R}^2 \))}
+
+\begin{EXA}{RG-A11-10-02}{Beispiele für Musikalische Isomorphismen}
+Sei \( g = dx^1 \otimes dx^1 + dx^2 \otimes dx^2 \) die Standardmetrik auf \( \mathbb{R}^2 \), und
+\[
+X = x \frac{\partial}{\partial x^1} + y \frac{\partial}{\partial x^2}.
+\]
+Dann ist
+\[
+X^\flat = x \, dx^1 + y \, dx^2.
+\]
+Umgekehrt ergibt sich für den Kovektor \( \omega = x \, dx^1 + y \, dx^2 \) der Vektor
+\[
+\omega^\sharp = x \frac{\partial}{\partial x^1} + y \frac{\partial}{\partial x^2} = X.
+\]
+\end{EXA}
+
+
+
+
+
+
 \subsubsection*{Metric Contractions}
-As the Riemannian metric $g$ is non-degenerate, there is a canonical $g$ dependent isomorphism between $T M$ and $T^{*} M .^{3}$ By using this it is possible to take tensor contractions over two indices that are either both vectors or covectors.
+
+
+\begin{DEF}{RG-A11-10-03}{Tensor-Kontraktion mit Metrik}
+As the Riemannian metric $g$ is non-degenerate, there is a canonical $g$ dependent isomorphism between $T M$ and $T^{*}M$ By using this it is possible to take tensor contractions over two indices that are either both vectors or covectors.
 
 For example, if $h$ is a symmetric (2,0)-tensor on a Riemannian manifold then $h^{\sharp}$ is a ( 1,1 )-tensor. In which case the trace of $h$ with respect to $g$, denoted by $\operatorname{tr}_{g} h$, is
-
 $$
 \operatorname{tr}_{g} h=\operatorname{tr} h^{\sharp}=h_{i}{ }^{i}=g^{i j} h_{i j} .
 $$
-
 Equivalently one could also write
-
 $$
 \operatorname{tr}_{g} h=\operatorname{tr}_{13} \operatorname{tr}_{24} g^{-1} \otimes h=\left(g^{-1} \otimes h\right)\left(d x^{i}, d x^{j}, \partial_{i}, \partial_{j}\right)=g^{i j} h_{i j}
 $$
+\end{DEF}
+
+
+
+
 
 \subsubsection*{Metrics on Bundles}
-A metric $g$ on a vector bundle $\pi: E \rightarrow M$ is a section of $E^{*} \otimes E^{*}$ such that at each point $p$ of $M, g_{p}$ is an inner product on $E_{p}$ (that is, $g_{p}$ is symmetric and
 
-\footnotetext{${ }^{3}$ Specifically, the isomorphism $\sharp: T^{*} M \rightarrow T M$ sends a covector $\omega$ to $\omega^{\sharp}=\omega^{i} \partial_{i}=$ $g^{i j} \omega_{j} \partial_{i}$, and $b: T M \rightarrow T^{*} M$ sends a vector $X$ to $X^{b}=X_{i} d x^{i}=g_{i j} X^{j} d x^{i}$.
-}
-positive definite for each $p: g_{p}(\xi, \eta)=g_{p}(\eta, \xi)$ for all $\xi, \eta \in E_{p} ; g_{p}(\xi, \xi) \geq 0$ for all $\xi \in E_{p}$, and $\left.g_{p}(\xi, \xi)=0 \Rightarrow \xi=0\right)$.
 
+\begin{DEF}{GA-A11-05-06}{Metriken auf Vektorbündeln}
+A metric $g$ on a vector bundle $\pi: E \rightarrow M$ is a section of $E^{*} \otimes E^{*}$ such that at each point $p$ of $M, g_{p}$ is an inner product on $E_{p}$ (that is, $g_{p}$ is symmetric and positive definite for each $p: g_{p}(\xi, \eta)=g_{p}(\eta, \xi)$ for all $\xi, \eta \in E_{p} ; g_{p}(\xi, \xi) \geq 0$ for all $\xi \in E_{p}$, and $\left.g_{p}(\xi, \xi)=0 \Rightarrow \xi=0\right)$.
+\end{DEF}
+
+\begin{DEF}{GA-A11-05-07}{Metriken als Bündelisomorphismus zwischen Normalem und Dualem Vektorbündel}
 A metric on $E$ defines a bundle isomorphism $\iota_{g}: E \rightarrow E^{*}$ given by $\iota_{g}(\xi)$ : $\eta \mapsto g_{p}(\xi, \eta)$ for all $\xi, \eta \in E_{p}$.
+\end{DEF}
 
 \subsubsection*{Metric on Dual Bundles}
-If $g$ is a metric on $E$, there is a unique metric on $E^{*}$ (also denoted $g$ ) such that $\iota_{g}$ is a bundle isometry:
 
+\begin{DEF}{GA-A11-05-08}{Metriken auf dualem Vektorbündel}
+If $g$ is a metric on $E$, there is a unique metric on $E^{*}$ (also denoted $g$ ) such that $\iota_{g}$ is a bundle isometry:
 $$
 g\left(\iota_{g}(\xi), \iota_{g}(v)\right)=g(\xi, \eta)
 $$
-
 for all $\xi, \eta \in E_{p}$; or equivalently $g(\omega, \sigma)=g\left(\iota_{g}^{-1} \omega, \iota_{g}^{-1} \sigma\right)$ for all $\omega, \sigma \in$ $E_{p}^{*}=\left(E_{p}\right)^{*}$.
+\end{DEF}
 
 \subsubsection*{Metric on Tensor Product Bundles}
-If $g_{1}$ is a metric on $E_{1}$ and $g_{2}$ is a metric on $E_{2}$, then
 
+
+\begin{PROP}{GA-A11-05-09}{Metriken auf Tensorprodukt Bündeln}
+If $g_{1}$ is a metric on $E_{1}$ and $g_{2}$ is a metric on $E_{2}$, then
 $$
 g=g_{1} \otimes g_{2} \in \Gamma\left(\left(E_{1}^{*} \otimes E_{1}^{*}\right) \otimes\left(E_{2}^{*} \otimes E_{2}^{*}\right)\right) \simeq \Gamma\left(\left(E_{1} \otimes E_{2}\right)^{*} \otimes\left(E_{1} \otimes E_{2}\right)^{*}\right)
 $$
-
 is the unique metric on $E_{1} \otimes E_{2}$ such that
-
 $$
 g\left(\xi_{1} \otimes \eta_{1}, \xi_{2} \otimes \eta_{2}\right)=g_{1}\left(\xi_{1}, \xi_{2}\right) g_{2}\left(\eta_{1}, \eta_{2}\right)
 $$
+\end{PROP}
+
+
 
 The construction of metrics on tensor bundles now follows. It is welldefined since the metric constructed on a tensor product of dual bundles agrees with that constructed on the dual bundle of a tensor product.
 
-Example 2.24. Given tensors $S, T \in \mathscr{T}_{\ell}^{k}(M)$, the inner product, denoted by $\langle\cdot, \cdot\rangle$, at $p$ is
+Example 2.24. 
 
+
+\begin{EXA}{GA-A11-05-10}{Beispiel für Metriken auf Tensorprodukt Bündeln}
+Given tensors $S, T \in \mathscr{T}_{\ell}^{k}(M)$, the inner product, denoted by $\langle\cdot, \cdot\rangle$, at $p$ is
 $$
 \langle S, T\rangle=g^{a_{1} b_{1}} \cdots g^{a_{k} b_{k}} g_{i_{1} j_{1}} \cdots g_{i_{\ell} j_{\ell}} S_{a_{1} \ldots a_{k}}{ }^{i_{1} \ldots i_{\ell}} T_{b_{1} \ldots b_{k}}{ }^{j_{1} \ldots j_{\ell}}
 $$
+\end{EXA}
 
 \subsection*{Connections}
 Connections provide a coordinate invariant way of taking directional derivatives of vector fields. In $\mathbb{R}^{n}$, the derivative of a vector field $X=X^{i} e_{i}$ in direction $v$ is given by $D_{v} X=v\left(X^{i}\right) e_{i}$. Simply put, $D_{v}$ differentiates\\
@@ -877,97 +1114,138 @@ the coefficient functions $X^{i}$ and thinks of the basis vectors $e_{i}$ as bei
 
 Our method here is to directly specify how a connection acts on elements of $\Gamma(E)$ as a module over $C^{\infty}(M)$. They are of central importance in modern geometry largely because they allow a comparison between the local geometry at one point and the local geometry at another point.
 
-Definition 2.25. A connection $\nabla$ on a vector bundle $E$ over $M$ is a map
+Definition 2.25. 
 
+
+\begin{DEF}{GA-A11-05-11}{Connection auf Vektorbündel}
+A connection $\nabla$ on a vector bundle $E$ over $M$ is a map
 $$
 \nabla: \mathscr{X}(M) \times \Gamma(E) \rightarrow \Gamma(E)
 $$
-
 written as $(X, \sigma) \mapsto \nabla_{X} \sigma$, that satisfies the following properties:
 
 \begin{enumerate}
-  \item $\nabla$ is $C^{\infty}(M)$-linear in $X$ :
+  \item $\nabla$ ist $C^{\infty}(M)$-linear im ersten Argument (Vektorfeld $X$):
+  \[
+    \nabla_{f_1 X_1 + f_2 X_2} \sigma = f_1 \nabla_{X_1} \sigma + f_2 \nabla_{X_2} \sigma
+  \]
+  
+  \item $\nabla$ ist $\mathbb{R}$-linear im zweiten Argument (Schnitt $\sigma$ eines Vektorbündels):
+  \[
+    \nabla_X(\lambda_1 \sigma_1 + \lambda_2 \sigma_2) = \lambda_1 \nabla_X \sigma_1 + \lambda_2 \nabla_X \sigma_2
+  \]
+  
+  \item Produktregel (Leibnizregel):
+  \[
+    \nabla_X(f \sigma) = (Xf) \sigma + f \nabla_X \sigma
+  \]
 \end{enumerate}
+We say $\nabla_{X} \sigma$ is the covariant derivative of $\sigma$ in the direction $X$.
+\end{DEF}
 
-$$
-\nabla_{f_{1} X_{1}+f_{2} X_{2}} \sigma=f_{1} \nabla_{X_{1}} \sigma+f_{1} \nabla_{X_{1}} \sigma
-$$
 
-\begin{enumerate}
-  \setcounter{enumi}{1}
-  \item $\nabla$ is $\mathbb{R}$-linear in $\sigma$ :
-\end{enumerate}
 
-$$
-\nabla_{X}\left(\lambda_{1} \sigma_{1}+\lambda_{2} \sigma_{2}\right)=\lambda_{1} \nabla_{X} \sigma_{1}+\lambda_{2} \nabla_{X} \sigma_{2}
-$$
+Remark 2.26. 
 
-and $\nabla$ satisfies the product rule:
-
-$$
-\nabla_{X}(f \sigma)=(X f) \sigma+f \nabla_{X} \sigma
-$$
-
-We say $\nabla_{X} \sigma$ is the covariant derivative of $\sigma$ in the direction $X$.\\
-Remark 2.26. Equivalently, we could take the connection to be
-
+Equivalently, we could take the connection to be
 $$
 \nabla: \Gamma(E) \rightarrow \Gamma\left(T^{*} M \otimes E\right)
 $$
-
 which is linear and satisfies the product rule. For if $\sigma \in \Gamma(E)$ then $\nabla \sigma \in$ $\Gamma\left(T^{*} M \otimes E\right)$, where $(\nabla \sigma)(X)=\nabla_{X} \sigma$ is $C^{\infty}(M)$-linear in $X$ by Property 1 of Definition 2.25. Thus Proposition 2.20 implies that $\nabla \sigma: \Gamma(T M) \rightarrow \Gamma(E)$ is an $E$-valued tensor acting on $T M$.
 
-\footnotetext{${ }^{4}$ There is however another generalisation of directional derivatives which is canonical: the Lie derivative. The Lie derivative evaluates the change of one vector field along the flow of another vector field. Thus, one must know both vector fields in an open neighbourhood. The covariant derivative on the other hand only depends on the vector direction at a single point, rather than a vector field in an open neighbourhood of a point. In other words, the covariant derivative is linear over $C^{\infty}(M)$ in the direction argument, while the Lie derivative is $C^{\infty}(M)$-linear in neither argument.
-}For a connection $\nabla$ on the tangent bundle, we define the connection coefficients or Christoffel symbols of $\nabla$ in a given set of local coordinates ( $x^{i}$ ) by defining
 
+\begin{DEF}{GA-A11-05-12}{Connection auf Vektorbündel als Bündelabbildung $\Gamma(E) \longrightarrow \Gamma\left(T^*M \otimes E\right)$}
+Wir können eine Verbindung auf einem Vektorbündel \( E \to M \) äquivalent auffassen als eine Bündelabbildung
+\[
+\nabla: \Gamma(E) \longrightarrow \Gamma\left(T^*M \otimes E\right),
+\]
+die \( \mathbb{R} \)-linear ist und die Produktregel erfüllt.
+
+Für jeden Schnitt \( \sigma \in \Gamma(E) \) ist \( \nabla \sigma \) ein Schnitt im Tensorproduktbündel \( T^*M \otimes E \). Das bedeutet:
+\[
+\nabla \sigma \in \Gamma\left(T^*M \otimes E\right).
+\]
+Dabei beschreibt \( \nabla \sigma \) eine Abbildung
+\[
+(\nabla \sigma)(X) := \nabla_X \sigma,
+\]
+wobei \( X \in \Gamma(TM) \) ein glattes Vektorfeld ist. Nach der ersten Eigenschaft einer kovarianten Ableitung (vgl. Definition 2.25) ist diese Abbildung \( C^{\infty}(M) \)-linear im Argument \( X \).
+
+Da \( \nabla_X \sigma \) in \( X \) \( C^{\infty}(M) \)-linear ist, folgt nach Proposition 2.20, dass \( \nabla \sigma \) ein \( E \)-wertiges Tensorfeld vom Typ \( (1,0) \) ist. Genauer:
+\[
+\nabla \sigma \in \Gamma\left(T^*M \otimes E\right) \cong \operatorname{Hom}_{C^{\infty}(M)}\left(\Gamma(TM), \Gamma(E)\right).
+\]
+Das heißt, \( \nabla \sigma \) ist ein glatter Abschnitt eines \( E \)-wertigen \( (1,0) \)-Tensorfeldes auf \( M \), das auf glatte Vektorfelder wirkt.
+\end{DEF}
+
+
+
+\footnotetext{${ }^{4}$ There is however another generalisation of directional derivatives which is canonical: the Lie derivative. The Lie derivative evaluates the change of one vector field along the flow of another vector field. Thus, one must know both vector fields in an open neighbourhood. The covariant derivative on the other hand only depends on the vector direction at a single point, rather than a vector field in an open neighbourhood of a point. In other words, the covariant derivative is linear over $C^{\infty}(M)$ in the direction argument, while the Lie derivative is $C^{\infty}(M)$-linear in neither argument.
+}
+
+
+
+\begin{DEF}{GA-A11-04-07}{Connection Koeffizienten für Tangentialbündel bzgl lokalen Koordinaten}
+For a connection $\nabla$ on the tangent bundle, we define the connection coefficients or Christoffel symbols of $\nabla$ in a given set of local coordinates $(x^{i})$ by defining
 $$
 \Gamma_{i j}^{k}=d x^{k}\left(\nabla_{\partial_{i}} \partial_{j}\right)
 $$
-
 or equivalently,
-
 $$
 \nabla_{\partial_{i}} \partial_{j}=\Gamma_{i j}{ }^{k} \partial_{k}
 $$
+\end{DEF}
 
+
+\begin{DEF}{GA-A11-05-14}{Connection Koeffizienten für Vektorbündel bzgl lokalen Rahmen}
 More generally, the connection coefficients of a connection $\nabla$ on a bundle $E$ can be defined with respect to a given local frame $\left\{\xi_{\alpha}\right\}$ for $E$ by the equation
-
 $$
 \nabla_{\partial_{i}} \xi_{\alpha}=\Gamma_{i \alpha}{ }^{\beta} \xi_{\beta}
 $$
+\end{DEF}
+
+
 
 \subsubsection*{Covariant Derivative of Tensor Fields}
 In applications one is often interested in computing the covariant derivative on the tensor bundles $T_{\ell}^{k} M$. This is a special case of a more general construction (see Sect. 2.5.3).
 
-Proposition 2.27. Given a connection $\nabla$ on $T M$, there is a unique connection on the tensor bundle, also denoted by $\nabla$, that satisfies the following properties:
+Proposition 2.27. 
+
+\begin{PROP}{GA-A11-04-08}{Eindeutige Charakterisierung von Connections auf $TM$}
+Given a connection $\nabla$ on $T M$, there is a unique connection on the tensor bundle, also denoted by $\nabla$, that satisfies the following properties:
 
 \begin{enumerate}
-  \item On TM, $\nabla$ agrees with the given connection.
-  \item On $C^{\infty}(M)=T^{0} M, \nabla$ is the action of a vector as a derivation:
+  \item On $TM$, $\nabla$ agrees with the given connection.
+  
+  \item On $C^{\infty}(M) = T^0 M$, $\nabla$ is the action of a vector as a derivation:
+  \[
+  \nabla_X f = X(f)
+  \]
+  for any smooth function $f$.
+  
+  \item $\nabla$ obeys the product rule with respect to tensor products:
+  \[
+  \nabla_X(F \otimes G) = (\nabla_X F) \otimes G + F \otimes (\nabla_X G),
+  \]
+  for any tensors $F$ and $G$.
+  
+  \item $\nabla$ commutes with all contractions:
+  \[
+  \nabla_X(\operatorname{tr} F) = \operatorname{tr}(\nabla_X F),
+  \]
+  for any tensor $F$.
 \end{enumerate}
+\end{PROP}
 
-$$
-\nabla_{X} f=X f
-$$
 
-for any smooth function $f$.\\
-3. $\nabla$ obeys the product rule with respect to tensor products:
+Example 2.28. 
 
-$$
-\nabla_{X}(F \otimes G)=\left(\nabla_{X} F\right) \otimes G+F \otimes\left(\nabla_{X} G\right),
-$$
-
-for any tensors $F$ and $G$.\\
-4. $\nabla$ commutes with all contractions:
-
-$$
-\nabla_{X}(\operatorname{tr} F)=\operatorname{tr}\left(\nabla_{X} F\right)
-$$
-
-for any tensor $F$.
-
-Example 2.28. We compute the covariant derivative of a 1 -form $\omega$ with respect to the vector field $X$. Since $\operatorname{tr} d x^{j} \otimes \partial_{i}=\delta_{i}^{j}, \nabla_{X}\left(\operatorname{tr} d x^{j} \otimes \partial_{i}\right)=0$. Thus $\left(\nabla_{X} d x^{j}\right)\left(\partial_{i}\right)=-d x^{j}\left(\nabla_{X} \partial_{i}\right)$ and so
-
+\begin{EXA}{GA-A11-04-09}{Kovariante Ableitung einer 1-Form}
+We compute the covariant derivative of a 1 -form $\omega$ with respect to the vector field $X$. Since 
+$$\operatorname{tr} d x^{j} \otimes \partial_{i}=\delta_{i}^{j}, \nabla_{X}\left(\operatorname{tr} d x^{j} \otimes \partial_{i}\right)=0$$ 
+Thus 
+$$\left(\nabla_{X} d x^{j}\right)\left(\partial_{i}\right)=-d x^{j}\left(\nabla_{X} \partial_{i}\right)$$ 
+and so
 $$
 \begin{aligned}
 \left(\nabla_{X} \omega\right)\left(\partial_{k}\right) & =\nabla_{X} \omega_{k}+\omega_{j}\left(\nabla_{X} d x^{j}\right)\left(\partial_{k}\right) \\
@@ -975,11 +1253,17 @@ $$
 & =X^{i} \partial_{i} \omega_{k}-\omega_{j} X^{i} \Gamma_{i k}^{j}
 \end{aligned}
 $$
+Therefore $\nabla_{X} \omega=\left(X^{i} \partial_{i} \omega_{k}-\omega_{j} X^{i} \Gamma_{i k}^{j}\right) d x^{k}$.
+\end{EXA}
 
-Therefore $\nabla_{X} \omega=\left(X^{i} \partial_{i} \omega_{k}-\omega_{j} X^{i} \Gamma_{i k}^{j}\right) d x^{k}$.\\
-In general we have the following useful formulas.\\
-Proposition 2.29. For any tensor field $F \in \mathscr{T}_{\ell}^{k}(M)$, vector fields $Y_{i}$ and 1 -forms $\omega^{j}$ we have
 
+In general we have the following useful formulas.
+
+
+Proposition 2.29. 
+
+\begin{PROP}{GA-A11-04-10}{Darstellung der Kovariante Ableitung von $(k,l)$-Tensorfeldern}
+For any tensor field $F \in \mathscr{T}_{\ell}^{k}(M)$, vector fields $Y_{i}$ and 1 -forms $\omega^{j}$ we have
 $$
 \begin{aligned}
 & \left(\nabla_{X} F\right)\left(\omega^{1}, \ldots, \omega^{\ell}, Y_{1}, \ldots, Y_{k}\right)=X\left(F\left(\omega^{1}, \ldots, \omega^{\ell}, Y_{1}, \ldots, Y_{k}\right)\right) \\
@@ -987,18 +1271,20 @@ $$
 & \quad-\sum_{i=1}^{k} F\left(\omega^{1}, \ldots, \omega^{\ell}, Y_{1}, \ldots, \nabla_{X} Y_{i}, \ldots, Y_{k}\right)
 \end{aligned}
 $$
+\end{PROP}
 
-Proof. By (2.1) we have
 
+Proof. 
+
+\begin{PROOF}{GA-A11-04-11}{P: Darstellung der Kovariante Ableitung von $(k,l)$-Tensorfeldern}
+By (2.1) we have
 $$
 \begin{aligned}
 \operatorname{tr}\left(F \otimes \omega^{1} \otimes \cdots \otimes \omega^{\ell} \otimes Y_{1} \otimes \cdots \otimes Y_{k}\right) & =\omega_{i_{1}} \cdots \omega_{i_{k}} F^{i_{1} \cdots i_{k}}{ }_{j_{1} \cdots j_{k}} Y^{j_{1}} \cdots Y^{j_{k}} \\
 & =F\left(\omega^{1}, \ldots, \omega^{\ell}, Y_{1}, \ldots, Y_{k}\right)
 \end{aligned}
 $$
-
 Thus by Proposition 2.27,
-
 $$
 \begin{aligned}
 \nabla_{X}(F & \left.\left(\omega^{1}, \ldots, \omega^{\ell}, Y_{1}, \ldots, Y_{k}\right)\right) \\
@@ -1008,30 +1294,59 @@ $$
 & \quad+\cdots+F\left(\omega^{1}, \ldots, \omega^{\ell}, Y_{1}, \ldots, \nabla_{X} Y_{k}\right)
 \end{aligned}
 $$
-
 As the covariant derivative is $C^{\infty}(M)$-linear over $X$, we define $\nabla F \in$ $\Gamma\left(\otimes^{k+1} T^{*} M \otimes^{\ell} T M\right)$ by
-
 $$
 (\nabla F)\left(X, Y_{1}, \ldots, Y_{k}, \omega^{1}, \ldots, \omega^{\ell}\right)=\nabla_{X} F\left(Y_{1}, \ldots, Y_{k}, \omega^{1}, \ldots, \omega^{\ell}\right)
 $$
-
 for any $F \in \mathscr{T}_{\ell}^{k}(M)$. Hence (in this case) $\nabla$ is an $\mathbb{R}$-linear map $\nabla: \mathscr{T}_{\ell}^{k}(M) \rightarrow$ $\mathscr{T}_{\ell}^{k+1}(M)$ that takes a $(k, \ell)$-tensor field and gives a $(k+1, \ell)$-tensor field.
+\end{PROOF}
+
+
 
 \subsubsection*{The Second Covariant Derivative of Tensor Fields}
+
+
 By utilising the results of the previous section, we can make sense of the second covariant derivative $\nabla^{2}$.
 
-To do this, suppose the vector bundle $E=T_{\ell}^{k} M$ with associated connection $\nabla$. By Remark 2.26, if $F \in \Gamma(E)$ then $\nabla F \in \Gamma\left(T^{*} M \otimes E\right)$ and so $\nabla^{2} F \in \Gamma\left(T^{*} M \otimes T^{*} M \otimes E\right)$. Therefore, for any vector fields $X, Y$ we find that
 
-$$
-\begin{aligned}
-\left(\nabla^{2} F\right)(X, Y) & =\left(\nabla_{X}(\nabla F)\right)(Y) \\
-& =\nabla_{X}((\nabla F)(Y))-(\nabla F)\left(\nabla_{X} Y\right) \\
-& \left.=\nabla_{X}\left(\nabla_{Y} F\right)\right)-\left(\nabla_{\nabla_{X} Y} F\right)
-\end{aligned}
-$$
 
-Example 2.30. If $f \in C^{\infty}(M)$ is a ( 0,0 )-tensor, then $\nabla^{2} f$ is a ( 2,0 )-tensor. In local coordinates:
 
+\begin{PROP}{GA-A11-04-12}{Zweifache kovariante Ableitung eines Tensorfeldes}
+Sei $M$ eine glatte Mannigfaltigkeit und $E = T^{k}_{\ell}M$ das Bündel der $(k,\ell)$-Tensoren auf $M$, versehen mit einer Zusammenhangsstruktur $\nabla$. Dann gilt:
+\begin{enumerate}
+  \item Für jedes Tensorfeld $F \in \Gamma(E)$ ist die erste kovariante Ableitung gegeben durch
+  \[
+  \nabla F \in \Gamma(T^*M \otimes E),
+  \]
+  d.\,h. $\nabla F$ ist ein $E$-wertiger 1-Kovektor.
+
+  \item Die zweifache Anwendung der kovarianten Ableitung ergibt einen Schnitt
+  \[
+  \nabla^2 F \in \Gamma(T^*M \otimes T^*M \otimes E).
+  \]
+
+  \item Für beliebige Vektorfelder $X, Y \in \mathfrak{X}(M)$ gilt:
+  \[
+  \left(\nabla^2 F\right)(X, Y) 
+  = \nabla_X \left( \nabla_Y F \right) - \nabla_{\nabla_X Y} F,
+  \]
+  wobei im zweiten Term $\nabla$ auch auf das Vektorfeld $Y$ wirkt. Die Auswertung von $\nabla^2 F$ auf $(X,Y)$ ist wiederum ein Schnitt in $\Gamma(E)$.
+
+  \item Äquivalent hierzu kann man $\nabla^2$ als bilinearen Differentialoperator auf Tensorfeldern $F \in \mathscr{T}_{\ell}^{k}(M) = \Gamma(T^{k}_{\ell}M)$ auffassen. Es gilt:
+  \[
+  \nabla_{Y,X}^2 F := \nabla_Y(\nabla_X F) - \nabla_{\nabla_Y X} F \in \mathscr{T}_{\ell}^{k}(M),
+  \]
+  wobei $X, Y \in \mathscr{X}(M)$ beliebige Vektorfelder sind. Damit ist $\nabla_{Y,X}^2$ ein linearer Endomorphismus des Tensorraums $\mathscr{T}_{\ell}^{k}(M)$, abhängig von den Eingabevektorfeldern.
+\end{enumerate}
+\end{PROP}
+
+
+
+Example 2.30. 
+
+
+\begin{EXA}{GA-A11-04-13}{Zweifache kovariante Ableitung von glatten Funktionen}
+If $f \in C^{\infty}(M)$ is a ( 0,0 )-tensor, then $\nabla^{2} f$ is a ( 2,0 )-tensor. In local coordinates:
 $$
 \begin{aligned}
 \nabla_{\partial_{i}, \partial_{j}}^{2} f & =\left(\nabla_{\partial_{i}}(\nabla f)\right)\left(\partial_{j}\right) \\
@@ -1041,33 +1356,47 @@ $$
 & =\frac{\partial^{2} f}{\partial x^{i} \partial x^{j}}-\Gamma_{i j}^{k} \frac{\partial f}{\partial x^{k}} .
 \end{aligned}
 $$
+\end{EXA}
+
 
 In general equation (2.4) amounts to the following useful formula:\\
-Proposition 2.31. If $\nabla$ is a connection on $T M$, then
 
+
+Proposition 2.31. 
+
+If $\nabla$ is a connection on $T M$, then
 $$
 \nabla_{Y, X}^{2}=\nabla_{Y} \circ \nabla_{X}-\nabla_{\nabla_{Y} X}: \mathscr{T}_{\ell}^{k}(M) \rightarrow \mathscr{T}_{\ell}^{k}(M)
 $$
-
 where $X, Y \in \mathscr{X}(M)$ are given vector fields.
 
-\subsubsection*{Notational Convention}
-It is important to note that we interpret
 
+\subsubsection*{Notational Convention}
+
+\begin{REM}{GA-A11-04-14}{Notation für zweifache kovariante Ableitung eines Tensorfeldes}
+It is important to note that we interpret
 $$
 \nabla_{X} \nabla_{Y} F=\nabla_{X, Y}^{2} F=(\nabla \nabla F)(X, Y, \cdots)=\left(\nabla_{X}(\nabla F)\right)(Y, \ldots),
 $$
-
 whenever no brackets are specified; this is differs from $\nabla_{X}\left(\nabla_{Y} F\right)$ with brackets [KN96, pp. 124-125]. Furthermore, for notational simplicity we often write $\nabla_{\partial_{p}}$ as just $\nabla_{p}$ and $\left(\nabla_{\partial_{p}} F\right)\left(d x^{i_{1}}, \ldots, d x^{i_{\ell}}, \partial_{j_{1}}, \ldots, \partial_{j_{k}}\right)$ simply as $\nabla_{p} F^{i_{1} \cdots i_{\ell}}{ }_{j_{1} \cdots j_{k}}$.
+\end{REM}
+
+
 
 \subsubsection*{The Hessian}
-We define the Hessian of $f \in C^{\infty}(M)$ to be
 
+
+\begin{DEF}{GA-A11-04-15}{Hessian von glatten Abbildungen}
+We define the Hessian of $f \in C^{\infty}(M)$ to be
 $$
 \operatorname{Hess}(f)=\nabla d f
 $$
-
 When applied to vector fields $X, Y \in \mathscr{X}(M)$, we find that $\operatorname{Hess}(f)(X, Y)=$ $(\nabla d f)(X, Y)=\nabla_{X, Y}^{2} f$. Also note that the Hessian is symmetric precisely when the connection is symmetric (see Example 2.30).
+\end{DEF}
+
+
+
+
 
 \subsubsection*{Connections on Dual and Tensor Product Bundles}
 So far we have looked at the covariant derivative on the tensor bundle $\bigotimes^{k} T^{*} M \otimes \bigotimes^{\ell} T M$. In fact much of the same structure works on a general vector bundle as well.
@@ -1105,10 +1434,17 @@ $$
 where $X, Y \in \mathscr{X}(M)$ and $\xi \in \Gamma\left(E_{1}\right)$.
 
 
+
+
 \subsubsection*{The Levi-Civita Connection}
+
+
+
 When working on a Riemannian manifold, it is desirable to work with a particular connection that reflects the geometric properties of the metric. To do so, one needs the notions of compatibility and symmetry.
 
-Definition 2.34. A connection $\nabla$ on a vector bundle $E$ is said to be compatible with a metric $g$ on $E$ if for any $\xi, \eta \in \Gamma(E)$ and $X \in \mathscr{X}(M)$,
+Definition 2.34. 
+
+A connection $\nabla$ on a vector bundle $E$ is said to be compatible with a metric $g$ on $E$ if for any $\xi, \eta \in \Gamma(E)$ and $X \in \mathscr{X}(M)$,
 
 $$
 X(g(\xi, \eta))=g\left(\nabla_{X} \xi, \eta\right)+g\left(\xi, \nabla_{X} \eta\right)
@@ -1118,15 +1454,20 @@ Moreover, if $\nabla$ is compatible with a metric $g$ on $E$, then the induced c
 
 Unfortunately compatibility by itself is not enough to determine a unique connection. To get uniqueness we also need the connection to be symmetric.
 
-Definition 2.35. A connection $\nabla$ on $T M$ is symmetric if its torsion vanishes. ${ }^{5}$ That is, if $\nabla_{X} Y-\nabla_{Y} X=[X, Y]$ or equivalently $\Gamma_{i j}^{k}=\Gamma_{j i}^{k}$.
+
+
+Definition 2.35.
+
+A connection $\nabla$ on $T M$ is symmetric if its torsion vanishes. ${ }^{5}$ That is, if $\nabla_{X} Y-\nabla_{Y} X=[X, Y]$ or equivalently $\Gamma_{i j}^{k}=\Gamma_{j i}^{k}$.
 
 We can now state the fundamental theorem of Riemannian geometry.\\
 Theorem 2.36. Let $(M, g)$ be a Riemannian manifold. There exists a unique connection $\nabla$ on TM which is symmetric and compatible with $g$. This connection is referred to as the Levi-Civita connection of $g$.
 
 The reason why this connection has been anointed the Riemannian connection is that the symmetry and compatibility conditions are invariantly defined natural properties that force the connection to coincide with the tangential connection, whenever $M$ is realised as a submanifold of $\mathbb{R}^{n}$ with the induced metric (which is always possible by the Nash embedding).
 
-Proposition 2.37. In local coordinate ( $x^{i}$ ), the Christoffel symbols of the Levi-Civita connection are given by
+Proposition 2.37. 
 
+In local coordinate ( $x^{i}$ ), the Christoffel symbols of the Levi-Civita connection are given by
 $$
 \Gamma_{i j}^{k}=\frac{1}{2} g^{k \ell}\left(\partial_{j} g_{i \ell}+\partial_{i} g_{j \ell}-\partial_{\ell} g_{i j}\right)
 $$
@@ -1134,15 +1475,22 @@ $$
 \footnotetext{${ }^{5}$ The torsion $\tau$ of $\nabla$ is defined by $\tau(X, Y)=\nabla_{X} Y-\nabla_{Y} X-[X, Y] . \tau$ is a (2,1)-tensor field since $\nabla_{f X}(g Y)-\nabla_{g Y} f X-[f X, g Y]=f g\left(\nabla_{X} Y-\nabla_{Y} X-[X, Y]\right)$.
 }\subsection*{Connection Laplacian}
 In its simplest form, the Laplacian $\Delta$ of $f \in C^{\infty}(M)$ is defined by $\Delta f=$ div $\operatorname{grad} f$. In fact, the Laplacian can be extended to act on tensor bundles over a Riemannian manifold ( $M, g$ ). The resulting differential operator is referred to as the connection Laplacian. Note that there are a number of other second-order, linear, elliptic differential operators bearing the name Laplacian which have alternative definitions.\\
-Definition 2.38. For any tensor field $F \in \mathscr{T}_{\ell}^{k}(M)$, the connection Laplacian
 
+
+
+Definition 2.38. 
+
+\begin{DEF}{GA-A11-04-16}{Connection Laplacian für $(k,l)$-Tensorfelder}
+For any tensor field $F \in \mathscr{T}_{\ell}^{k}(M)$, the connection Laplacian
 $$
 \Delta F=\operatorname{tr}_{g} \nabla^{2} F
 $$
+is the trace of the second covariant derivative with the metric $g$.
+\end{DEF}
 
-is the trace of the second covariant derivative with the metric $g$.\\
+
+\begin{DEF}{GA-A11-04-17}{Lokale Darstellung des Connection Laplacian für $(k,l)$-Tensorfelder}
 Explicitly,
-
 $$
 \begin{aligned}
 (\Delta F)^{j_{1} \ldots j_{\ell}}{ }_{i_{1} \ldots i_{k}} & =\left(\operatorname{tr}_{g} \nabla^{2} F\right)^{j_{1} \ldots j_{\ell}}{ }_{i_{1} \ldots i_{k}} \\
@@ -1150,29 +1498,49 @@ $$
 & =g^{p q}\left(\nabla_{\partial_{p}} \nabla_{\partial_{q}} F\right)\left(\partial_{j_{1}}, \ldots, \partial_{j_{\ell}}, d x^{i_{1}}, \ldots, d x^{i_{k}}\right)
 \end{aligned}
 $$
+\end{DEF}
 
-Example 2.39. If the tensor bundle is $T^{0} M=C^{\infty}(M)$, then (2.5) implies that
 
+
+Example 2.39. 
+
+\begin{EXA}{GA-A11-04-18}{Connection Laplacian für glatte Funktionen}
+If the tensor bundle is $T^{0} M=C^{\infty}(M)$, then (2.5) implies that
 $$
 \begin{aligned}
 \Delta f & =g^{i j} \nabla_{\partial_{i}} \nabla_{\partial_{j}} f \\
 & =g^{i j}\left(\frac{\partial^{2} f}{\partial x^{i} \partial x^{j}}-\Gamma_{i j}^{k} \frac{\partial f}{\partial x^{k}}\right) .
 \end{aligned}
 $$
+\end{EXA}
+
+
+
+
+
 
 \subsection*{Curvature}
+
+
 We introduce the curvature tensor as a purely algebraic object that arises from a connection on a vector bundle. From this we will look at the curvature on specific bundle structures.
 
 \subsubsection*{Curvature on Vector Bundles}
-Definition 2.40. Let $E$ be a vector bundle over $M$. If $\nabla$ is a connection on $E$, then the curvature of the connection $\nabla$ on the bundle $E$ is the section $R_{\nabla} \in \Gamma\left(T^{*} M \otimes T^{*} M \otimes E^{*} \otimes E\right)$ defined by
 
+Definition 2.40. 
+
+\begin{DEF}{GA-A11-05-15}{Krümmung einer Connection}
+Let $E$ be a vector bundle over $M$. If $\nabla$ is a connection on $E$, then the curvature of the connection $\nabla$ on the bundle $E$ is the section $R_{\nabla} \in \Gamma\left(T^{*} M \otimes T^{*} M \otimes E^{*} \otimes E\right)$ defined by
 $$
 R_{\nabla}(X, Y) \xi=\nabla_{Y}\left(\nabla_{X} \xi\right)-\nabla_{X}\left(\nabla_{Y} \xi\right)+\nabla_{[X, Y]} \xi
 $$
+\end{DEF}
+
 
 In the literature, there is much variation in the sign convention; some define the curvature to be of opposite sign to ours.
 
 \subsubsection*{Curvature on Dual and Tensor Product Bundles}
+
+
 The curvature on a dual bundle $E^{*}$, with respect to the dual connection, is characterised by the formula
 
 $$
@@ -1196,22 +1564,30 @@ $$
 where $S \in \Gamma\left(E_{1}^{*} \otimes E_{2}\right), \xi \in \Gamma\left(E_{1}\right)$ and $X, Y \in \mathscr{X}(M)$.
 
 \subsubsection*{Curvature on the Tensor Bundle}
+
+
 One of the most important applications is the curvature of the tensor bundle. By (2.11) and Sect.2.5.1, we have the following:
 
-Proposition 2.42. Let $R$ be the curvature on the ( $k, \ell$ )-tensor bundle. If $F, G \in \mathscr{T}_{\ell}^{k}(M)$ are tensors, then
+Proposition 2.42. 
 
+Let $R$ be the curvature on the ( $k, \ell$ )-tensor bundle. If $F, G \in \mathscr{T}_{\ell}^{k}(M)$ are tensors, then
 $$
 \begin{aligned}
 R(X, Y) \operatorname{tr} F) & =\operatorname{tr}(R(X, Y) F) \\
 R(X, Y)(F \otimes G) & =(R(X, Y) F) \otimes G+F \otimes(R(X, Y) G)
 \end{aligned}
 $$
+for any vector fields $X$ and $Y$.
 
-for any vector fields $X$ and $Y$.\\
+
 Moreover we also have the following important formulas.
 
-Proposition 2.43. Let $R$ be the curvature on the ( $k, \ell$ )-tensor bundle. If $F \in \mathscr{T}_{\ell}^{k}(M)$, then
 
+
+Proposition 2.43. 
+
+\begin{PROP}{GA-A11-04-19}{Krümmung auf $(k,l)$-Tensorbündeln}
+Let $R$ be the curvature on the $(k, \ell)$-tensor bundle. If $F \in \mathscr{T}_{\ell}^{k}(M)$, then
 $$
 \begin{aligned}
 R(X, Y)\left(F \left(\omega^{1}, \ldots, \omega^{\ell}, Z_{1}, \ldots,\right.\right. & \left.\left.Z_{k}\right)\right)=(R(X, Y) F)\left(\omega^{1}, \ldots, \omega^{\ell}, Z_{1}, \ldots, Z_{k}\right) \\
@@ -1219,10 +1595,16 @@ R(X, Y)\left(F \left(\omega^{1}, \ldots, \omega^{\ell}, Z_{1}, \ldots,\right.\ri
 & +\sum_{i=1}^{k} F\left(\omega^{1}, \ldots, \omega^{\ell}, Z_{1}, \ldots, R(X, Y) Z_{i}, \ldots, Z_{k}\right)
 \end{aligned}
 $$
+for any vector fields $X, Y, Z_{i}$ and 1-forms $\omega^{j}$.
+\end{PROP}
 
-for any vector fields $X, Y, Z_{i}$ and 1-forms $\omega^{j}$.\\
-Proof. Let the vector bundle $E=T_{\ell}^{k} M$, so for any $\xi \in \Gamma(E)$ we find that
 
+
+Proof. 
+
+
+\begin{PROOF}{GA-A11-04-20}{P: Krümmung auf $(k,l)$-Tensorbündeln}
+Let the vector bundle $E=T_{\ell}^{k} M$, so for any $\xi \in \Gamma(E)$ we find that
 $$
 \begin{aligned}
 R(X, Y)(F(\xi)) & =R(X, Y)(\operatorname{tr} F \otimes \xi) \\
@@ -1230,87 +1612,163 @@ R(X, Y)(F(\xi)) & =R(X, Y)(\operatorname{tr} F \otimes \xi) \\
 & =(R(X, Y) F)(\xi)+F(R(X, Y) \xi)
 \end{aligned}
 $$
-
 As $\xi$ takes the form
-
 $$
 \xi=\omega^{1} \otimes \cdots \otimes \omega^{\ell} \otimes Z_{1} \otimes \cdots \otimes Z_{k}
 $$
-
 a similar argument shows that $F(R(X, Y) \xi)=F\left(R(X, Y) \omega^{1}, \ldots, Z_{k}\right)+\cdots+$ $F\left(\omega^{1}, \ldots, R(X, Y) Z_{k}\right)$ from which the result follows.
+\end{PROOF}
 
-Proposition 2.44. Let $R$ be the curvature on the ( $k, \ell$ )-tensor bundle. If the connection $\nabla$ on $T M$ is symmetric, then
 
+Proposition 2.44. 
+
+
+\begin{PROP}{GA-A11-04-21}{Darstellung der Krümmung auf $(k,l)$-Tensorbündeln für symmetrische Connections auf $TM$}
+Let $R$ be the curvature on the ( $k, \ell$ )-tensor bundle. If the connection $\nabla$ on $T M$ is symmetric, then
 $$
 R(X, Y)=\nabla_{Y, X}^{2}-\nabla_{X, Y}^{2}
 $$
+and so $R(X, Y): \mathscr{T}_{\ell}^{k}(M) \rightarrow \mathscr{T}_{\ell}^{k}(M)$.
+\end{PROP}
 
-and so $R(X, Y): \mathscr{T}_{\ell}^{k}(M) \rightarrow \mathscr{T}_{\ell}^{k}(M)$.\\
-Proof. For any ( $k, \ell$ )-tensor $F$, we see by (2.6) that
 
+Proof. 
+
+\begin{PROOF}{GA-A11-04-22}{P: Darstellung der Krümmung auf $(k,l)$-Tensorbündeln für symmetrische Connections auf $TM$}
+For any ( $k, \ell$ )-tensor $F$, we see by (2.6) that
 $$
 \begin{aligned}
 \nabla_{Y, X}^{2} F-\nabla_{X, Y}^{2} F & =\nabla_{Y}\left(\nabla_{X} F\right)-\nabla_{\nabla_{Y} X} F-\nabla_{X}\left(\nabla_{Y} F\right)+\nabla_{\nabla_{X} Y} F \\
 & =\nabla_{Y}\left(\nabla_{X} F\right)-\nabla_{X}\left(\nabla_{Y} F\right)+\nabla_{[X, Y]} F
 \end{aligned}
 $$
+\end{PROOF}
 
-Example 2.45. The curvature of $C^{\infty}(M)=T^{0} M$ vanishes since
 
+
+Example 2.45. 
+
+
+\begin{EXA}{GA-A11-04-23}{Krümmung von glatten Funktionen verschwindet}
+The curvature of $C^{\infty}(M)=T^{0} M$ vanishes since
 $$
-R\left(\partial_{i}, \partial_{j}\right) f=\nabla_{\partial_{i}}\left(\nabla_{\partial_{j}} f\right)-\nabla_{\partial_{j}}\left(\nabla_{\partial_{i}} f\right)+\underline{\nabla}_{\left[\partial_{i}, \partial_{j}\right]} f=\partial_{i} \partial_{j} f-\partial_{j} \partial_{i} f=0
+R\left(\partial_{i}, \partial_{j}\right) f=\nabla_{\partial_{i}}\left(\nabla_{\partial_{j}} f\right)-\nabla_{\partial_{j}}\left(\nabla_{\partial_{i}} f\right)+\bcancel{\nabla_{\left[\partial_{i}, \partial_{j}\right]}} f=\partial_{i} \partial_{j} f-\partial_{j} \partial_{i} f=0
 $$
-
 for any $f \in C^{\infty}(M)$.
+\end{EXA}
+
+
+
 
 \subsubsection*{Riemannian Curvature}
-If ( $M, g$ ) is a Riemannian manifold, the curvature $R \in \Gamma\left(\otimes^{3} T^{*} M \otimes T M\right.$ ) of the Levi-Civita connection $\nabla$ on $T M$ is a ( 3,1 )-tensor field that, in local coordinates ( $x^{i}$ ), takes the form
 
+
+\begin{DEF}{RG-A11-14-06}{Riemannischer Krümmungstensoren der Levi-Civita-Connection}
+If $(M, g)$ is a Riemannian manifold, the curvature $R \in \Gamma\left(\otimes^{3} T^{*} M \otimes T M\right).$ of the Levi-Civita connection $\nabla$ on $T M$ is a $(3,1)$-tensor field that, in local coordinates $(x^{i})$, takes the form
 $$
 R=R_{i j k}^{\ell} d x^{i} \otimes d x^{j} \otimes d x^{k} \otimes \partial_{\ell},
 $$
+where $R\left(\partial_{i}, \partial_{j}\right) \partial_{k}=R_{i j k}{ }^{\ell} \partial_{\ell}$. 
 
-where $R\left(\partial_{i}, \partial_{j}\right) \partial_{k}=R_{i j k}{ }^{\ell} \partial_{\ell}$. Accompanying this is the Riemann curvature tensor, also denoted by $R$. It is a covariant ( 4,0 )-tensor field defined by
-
+Accompanying this is the Riemann curvature tensor, also denoted by $R$. It is a covariant ( 4,0 )-tensor field defined by
 $$
 R(X, Y, Z, W)=g(R(X, Y) Z, W)
 $$
+for all $W, X, Y, Z \in \mathscr{X}(M)$. 
 
-for all $W, X, Y, Z \in \mathscr{X}(M)$. In local coordinates $\left(x^{i}\right)$ it can be expressed as
-
+In local coordinates $\left(x^{i}\right)$ it can be expressed as
 $$
 R=R_{i j k \ell} d x^{i} \otimes d x^{j} \otimes d x^{k} \otimes d x^{\ell}
 $$
+where $R_{i j k \ell}=g_{\ell p} R_{i j k}{ }^{p}$.
+\end{DEF}
 
-where $R_{i j k \ell}=g_{\ell p} R_{i j k}{ }^{p}$.\\
-Lemma 2.46. In local coordinates ( $x^{i}$ ), the curvature of the Levi-Civita connection can be expressed as follows:
 
+Lemma 2.46. 
+
+\begin{LEM}{RG-A11-14-07}{Lokale Darstellung der Riemannischen Krümmungstensoren}
+In local coordinates $(x^{i})$, the curvature of the Levi-Civita connection can be expressed as follows:
 $$
 \begin{aligned}
 R_{i j k}^{\ell} & =\partial_{j} \Gamma_{i k}^{\ell}-\partial_{i} \Gamma_{j k}^{\ell}+\Gamma_{i k}^{m} \Gamma_{j m}^{\ell}-\Gamma_{j k}^{m} \Gamma_{i m}^{\ell} \\
 R_{i j k \ell} & =\frac{1}{2}\left(\partial_{j} \partial_{k} g_{i \ell}+\partial_{i} \partial_{\ell} g_{j k}-\partial_{i} \partial_{k} g_{j \ell}-\partial_{j} \partial_{\ell} g_{i k}\right)+g_{\ell p}\left(\Gamma_{i k}^{m} \Gamma_{j m}^{p}-\Gamma_{j k}^{m} \Gamma_{i m}^{p}\right)
 \end{aligned}
 $$
+\end{LEM}
+
+
 
 \subsubsection*{Symmetries of the Curvature Tensor}
-The curvature tensor possesses a number of important symmetry properties. They are:\\
-(a) Antisymmetric in first two arguments: $R_{i j k \ell}+R_{j i k \ell}=0$\\
-(b) Antisymmetric in last two arguments: $R_{i j k \ell}+R_{j i \ell k}=0$\\
-(c) Symmetry between the first and last pair of arguments: $R_{i j k \ell}=R_{k \ell i j}$
 
-In addition to this, there are also the 'cyclic' Bianchi identities:\\
-(d) First Bianchi identity: $R_{i j k \ell}+R_{j k i \ell}+R_{k i j \ell}=0$\\
-(e) Second Bianchi identity: $\nabla_{m} R_{i j k \ell}+\nabla_{k} R_{i j \ell m}+\nabla_{\ell} R_{i j m k}=0$
+
+\begin{PROP}{RG-A11-14-08}{Symmetrie Eigenschaften des Riemannischen Krümmungstensors}
+The curvature tensor possesses a number of important symmetry properties. They are:
+
+\begin{enumerate}
+  \item \textbf{Antisymmetrie in den ersten beiden Indizes:}
+  \[
+  R_{i j k \ell} + R_{j i k \ell} = 0
+  \]
+
+  \item \textbf{Antisymmetrie in den letzten beiden Indizes:}
+  \[
+  R_{i j k \ell} + R_{i j \ell k} = 0
+  \]
+
+  \item \textbf{Symmetrie zwischen erster und letzter Indexgruppe:}
+  \[
+  R_{i j k \ell} = R_{k \ell i j}
+  \]
+
+  \item \textbf{Erste Bianchi-Identität (zyklisch in den ersten drei Indizes):}
+  \[
+  R_{i j k \ell} + R_{j k i \ell} + R_{k i j \ell} = 0
+  \]
+
+  \item \textbf{Zweite Bianchi-Identität (kovariante Ableitung zyklisch):}
+  \[
+  \nabla_{m} R_{i j k \ell} + \nabla_{k} R_{i j \ell m} + \nabla_{\ell} R_{i j m k} = 0
+  \]
+\end{enumerate}
+\end{PROP}
+
 
 \subsubsection*{Ricci and Scalar Curvature}
-As the curvature tensor can be quite complicated, it is useful to consider various contractions that summarise some of the information contained in the\\
-curvature tensor. The first of these contractions is the Ricci tensor, denoted by Ric. It is defined as
 
+
+\begin{DEF}{RG-A11-14-09}{Ricci-Krümmungstensor}
+Sei $(M, g)$ eine Riemannsche Mannigfaltigkeit mit Krümmungstensor $R$. Dann ist der \emph{Ricci-Tensor} $\operatorname{Ric} \in \Gamma(T^*M \otimes T^*M)$ definiert als die Spur des Krümmungstensors in der ersten und vierten Komponente:
+\[
+\operatorname{Ric}(X, Y) := \operatorname{tr}_{g}(Z \mapsto R(Z, X)Y) = g^{ij} \cdot R(e_i, X, Y, e_j) =\left(\operatorname{tr}_{14} \operatorname{tr}_{26} g^{-1} \otimes R\right)(X, Y)
+\]
+für alle Vektorfelder $X, Y \in \mathfrak{X}(M)$, wobei $(e_i)$ ein lokal orthonormales Framefeld ist. In lokalen Koordinaten gilt:
+\[
+\operatorname{Ric}_{ij} = R_{ikj}^{\;\;\;\;\;k} = g^{kl} R_{kilj}
+\]
+Der Ricci-Tensor ist symmetrisch: $\operatorname{Ric}(X,Y) = \operatorname{Ric}(Y,X)$.
+\end{DEF}
+
+
+
+
+As the curvature tensor can be quite complicated, it is useful to consider various contractions that summarise some of the information contained in the curvature tensor. The first of these contractions is the Ricci tensor, denoted by Ric. It is defined as
 $$
 \operatorname{Ric}(X, Y)=\operatorname{tr}_{g} R(X, \cdot, Y, \cdot)=\left(\operatorname{tr}_{14} \operatorname{tr}_{26} g^{-1} \otimes R\right)(X, Y) .
 $$
-
 In component form, $\operatorname{Ric}\left(\partial_{i}, \partial_{j}\right)=R_{i j}=R_{i k j}{ }^{k}=g^{p q} R_{i p j q}$. From the symmetry properties of $R$ it is clear that Ric is symmetric.
+
+
+
+
+\begin{DEF}{RG-A11-14-10}{Skalare Krümmung}
+Sei $(M, g)$ eine Riemannsche Mannigfaltigkeit mit Ricci-Tensor $\operatorname{Ric}$. Dann ist die \emph{Skalarkrümmung} oder \emph{Ricci-Skalar} definiert als die Spur des Ricci-Tensors bezüglich $g$:
+\[
+\operatorname{Scal} := \operatorname{tr}_g(\operatorname{Ric}) = g^{ij} \cdot \operatorname{Ric}_{ij}={Ric}_{i}{ }^{i}
+\]
+Dies ist ein glattes Feld von Funktionen auf $M$, also ein Element von $C^\infty(M)$.
+\end{DEF}
+
+
 
 A further trace of the Ricci tensor gives a scalar quantity called the scalar curvature, denoted by Scal:
 
@@ -1318,52 +1776,64 @@ $$
 \text { Scal }=\operatorname{tr}_{g} \operatorname{Ric}=\operatorname{Ric}_{i}{ }^{i}=g^{i j} R_{i j}
 $$
 
+
+
 It is important to note that if the curvature tensor is defined with opposite sign, the contraction is defined so that the Ricci tensor matches the one given here. Hence the Ricci tensor has the same meaning for everyone. By Lemma 2.46, the Ricci tensor can be expressed locally as follows.
 
-Lemma 2.47. In local coordinates $\left(x^{i}\right)$, the Ricci tensor takes the form\\
-$R_{i k}=\frac{1}{2} g^{j \ell}\left(\frac{\partial^{2} g_{i \ell}}{\partial x^{j} \partial x^{k}}+\frac{\partial^{2} g_{j k}}{\partial x^{i} \partial x^{\ell}}-\frac{\partial^{2} g_{j \ell}}{\partial x^{i} \partial x^{k}}-\frac{\partial^{2} g_{i k}}{\partial x^{j} \partial x^{\ell}}\right)+\Gamma_{i k}^{m} \Gamma_{j m}^{j}-\Gamma_{j k}^{m} \Gamma_{i m}^{j}$.
+
+
+Lemma 2.47. 
+
+
+\begin{LEM}{RG-A11-14-11}{Lokale Darstellung des Ricci-Krümmungstensors}
+In local coordinates $\left(x^{i}\right)$, the Ricci tensor takes the form
+$$R_{i k}=\frac{1}{2} g^{j \ell}\left(\frac{\partial^{2} g_{i \ell}}{\partial x^{j} \partial x^{k}}+\frac{\partial^{2} g_{j k}}{\partial x^{i} \partial x^{\ell}}-\frac{\partial^{2} g_{j \ell}}{\partial x^{i} \partial x^{k}}-\frac{\partial^{2} g_{i k}}{\partial x^{j} \partial x^{\ell}}\right)+\Gamma_{i k}^{m} \Gamma_{j m}^{j}-\Gamma_{j k}^{m} \Gamma_{i m}^{j}$$
+\end{LEM}
 
 \subsubsection*{Contraction Commuting with Covariant Derivative}
+
+
+
 As we are working with a compatible connection, $\nabla g \equiv 0$. Thus one can commute covariant derivatives with metric contractions.
 
-Proposition 2.48. If $\nabla$ is the Levi-Civita connection, then
+Proposition 2.48. 
 
+\begin{PROP}{RG-A11-14-01}{Kovariante Ableitung und Metrik-Kontraktion kommutieren}
+If $\nabla$ is the Levi-Civita connection, then
 $$
 \begin{aligned}
 \nabla_{k} R_{i j} & =g^{p q} \nabla_{k} R_{i p j q} \\
 \nabla_{k, \ell}^{2} R_{i j} & =g^{p q} \nabla_{k, \ell}^{2} R_{i p j q}
 \end{aligned}
 $$
+\end{PROP}
 
-Proof. To show (2.14), let $X, Y, Z \in \mathscr{X}(M)$ so that
+Proof. 
 
+\begin{PROOF}{RG-A11-14-02}{P: Kovariante Ableitung und Metrik-Kontraktion kommutieren}
+To show (2.14), let $X, Y, Z \in \mathscr{X}(M)$ so that
 $$
 \begin{aligned}
-\left(\nabla_{Z} \mathrm{Ric}\right)(X, Y) & =\left(\nabla_{Z}\left(\operatorname{tr} g^{-1} \otimes R\right)\right)(X, Y) \\
+\left(\nabla_{Z} \mathrm{Ric}\right)(X, Y) 
+& =\left(\nabla_{Z}\left(\operatorname{tr} g^{-1} \otimes R\right)\right)(X, Y) \\
 & =\left(\operatorname{tr} \nabla_{Z}\left(g^{-1} \otimes R\right)\right)(X, Y) \\
-& =\left(\operatorname{tr} \nabla_{Z} g^{-1} \otimes R+\operatorname{tr} g^{-1} \otimes \nabla_{Z} R\right)(X, Y) \\
+& =\left(\bcancel{\operatorname{tr} \nabla_{Z} g^{-1}} \otimes R+\operatorname{tr} g^{-1} \otimes \nabla_{Z} R\right)(X, Y) \\
 & =\left(\operatorname{tr}_{14} \operatorname{tr}_{26} g^{-1} \otimes \nabla_{Z} R\right)(X, Y) \\
 & =\left(\operatorname{tr}_{g} \nabla_{Z} R\right)(X, \cdot, Y, \cdot)
 \end{aligned}
 $$
-
 Similarly, to show (2.15) note that
-
 $$
 \begin{aligned}
 \nabla^{2} \operatorname{Ric}=\nabla^{2}\left(\operatorname{tr} g^{-1} \otimes R\right) & =\operatorname{tr}\left(\nabla^{2} g^{-1} \otimes R+2 \nabla g^{-1} \otimes \nabla R+g^{-1} \otimes \nabla^{2} R\right) \\
 & =\operatorname{tr} g^{-1} \otimes \nabla^{2} R
 \end{aligned}
 $$
-
 In later applications we will need the contracted second Bianchi identity:
-
 $$
 g^{j k} \nabla_{k} \operatorname{Ric}_{i j}=\frac{1}{2} \nabla_{i} \mathrm{Scal}
 $$
-
 This follows easily from (2.14) and the second Bianchi identity, since
-
 $$
 \begin{aligned}
 0 & =g^{a m} g^{b n}\left(\nabla_{\ell} R_{a b m n}+\nabla_{m} R_{a b n \ell}+\nabla_{n} R_{a b \ell m}\right) \\
@@ -1372,28 +1842,39 @@ $$
 & =\nabla_{\ell} \operatorname{Scal}-g^{a m} \nabla_{m} \operatorname{Ric}_{a \ell}-g^{b n} \nabla_{n} \operatorname{Ric}_{\ell b}
 \end{aligned}
 $$
-
 from which (2.16) now follows.
+\end{PROOF}
+
+
 
 \subsubsection*{Sectional Curvature}
-Suppose ( $M, g$ ) is a Riemannian manifold. If $\Pi$ is a two-dimensional subspace of $T_{p} M$, we define the sectional curvature $K$ of $\Pi$ to be
 
+
+\begin{DEF}{RG-A11-14-12}{Schnittkrümmung bzgl. 2-dim Unterräumen}
+Suppose $(M, g)$ is a Riemannian manifold. If $\Pi$ is a two-dimensional subspace of $T_{p} M$, we define the sectional curvature $K$ of $\Pi$ to be
 $$
 K(\Pi)=R\left(e_{1}, e_{2}, e_{1}, e_{2}\right),
 $$
+where $\left\{e_{1}, e_{2}\right\}$ is an orthonormal basis for $\Pi$. By a rotation or reflection in the plane, one can show $K$ is independent of the choice of basis. We refer to the oriented plane generated from $e_{i}$ and $e_{j}$ by the notation $e_{i} \wedge e_{j}$ (cf. Sect. C.3). 
 
-where $\left\{e_{1}, e_{2}\right\}$ is an orthonormal basis for $\Pi$. By a rotation or reflection in the plane, one can show $K$ is independent of the choice of basis. We refer to the oriented plane generated from $e_{i}$ and $e_{j}$ by the notation $e_{i} \wedge e_{j}$ (cf. Sect. C.3). Furthermore if $\{u, v\}$ is any basis for the 2 -plane $\Pi$, one has
-
+Furthermore if $\{u, v\}$ is any basis for the 2 -plane $\Pi$, one has
 $$
 K(u \wedge v)=\frac{R(u, v, u, v)}{|u|^{2}|v|^{2}-g(u, v)^{2}}
 $$
+\end{DEF}
+
+
 
 If $U \subset T_{p} M$ is a neighbourhood of zero on which $\exp _{p}$ is a diffeomorphism, then $S_{\Pi}:=\exp _{p}(\Pi \cap U)$ is a 2-dimensional submanifold of $M$ containing $p$, called the plane of section determined by $\Pi$. That is, it is the surface swept out by geodesics whose initial tangent vectors lie in $\Pi$. One can geometrically interpret the sectional curvature of $M$ associated to $\Pi$ to be the Gaussian curvature of the surface $S_{\Pi}$ at $p$ with the induced metric.
 
 By computing the sectional curvature of the plane $\frac{1}{2}\left(e_{i}+e_{k}\right) \wedge\left(e_{j}+e_{\ell}\right)$ one can show:
 
-Proposition 2.49. The curvature tensor $R$ is completely determined by the sectional curvature. In particular,
 
+
+Proposition 2.49. 
+
+\begin{PROP}{RG-A11-14-03}{Riemmanischer Krümmungstensor ist vollständig durch Schnittkrümmung bestimmt}
+The curvature tensor $R$ is completely determined by the sectional curvature. In particular,
 $$
 \begin{aligned}
 R_{i j k \ell}= & \frac{1}{3} K\left(\frac{\left(e_{i}+e_{k}\right) \wedge\left(e_{j}+e_{\ell}\right)}{2}\right)+\frac{1}{3} K\left(\frac{\left(e_{i}-e_{k}\right) \wedge\left(e_{j}-e_{\ell}\right)}{2}\right) \\
@@ -1401,14 +1882,20 @@ R_{i j k \ell}= & \frac{1}{3} K\left(\frac{\left(e_{i}+e_{k}\right) \wedge\left(
 & -\frac{1}{6} K\left(e_{j} \wedge e_{\ell}\right)-\frac{1}{6} K\left(e_{i} \wedge e_{k}\right)+\frac{1}{6} K\left(e_{i} \wedge e_{\ell}\right)+\frac{1}{6} K\left(e_{j} \wedge e_{k}\right)
 \end{aligned}
 $$
+\end{PROP}
 
+
+\begin{PROP}{RG-A11-14-04}{Darstellung der skalaren Krümmung durch Schnittkrümmung}
 One can also show that the scalar curvature Scal $=\operatorname{Ric}_{j}{ }^{j}=\sum_{j \neq k} K\left(e_{j} \wedge e_{k}\right)$, where $\left(e_{i}\right)$ is orthonormal basis for $T_{p} M$.
+\end{PROP}
 
 Each of the model spaces $\mathbb{R}^{n}, S^{n}$ and $\mathbb{H}^{n}$ has an isometry group that acts transitively on orthonormal frames, and so acts transitively on 2-planes in the tangent bundle. Therefore each has a constant sectional curvature - in the sense that the sectional curvatures are the same for all planes at all points.
 
 It is well known that the Euclidean space $\mathbb{R}^{n}$ has constant zero sectional curvature (this is geometrically intuitive as each 2-plane section has zero Gaussian curvature). The sphere $S^{n}$ of radius 1 has constant sectional curvature equal to 1 and the hyperbolic space $\mathbb{H}^{n}$ has constant sectional curvature equal to -1 .
 
 \subsubsection*{Berger's Lemma}
+
+
 A simple but important result is the so-called lemma of Berger [Ber60b, Sect. 6]. Following [Kar70], we show the curvature can be bounded whenever the sectional curvature is bounded from above and below. That is, if a Riemannian manifold ( $M,\langle\cdot, \cdot\rangle$ ) has sectional curvature bounds $\delta=$ $\min _{u, v \in T_{p} M} K(u \wedge v)$ and $\Delta=\max _{u, v \in T_{p} M} K(u \wedge v)$ with the assumption $\delta \geq 0$, we prove the following bounds on the curvature tensor:
 
 Lemma 2.50 (Berger). For orthonormal $u, v, w, x \in T_{p} M$, one can bound the curvature tensor by
@@ -1463,9 +1950,15 @@ $$
 
 for all points $p \in M$.
 
-Example 2.53. Suppose $g$ is a metric on $E$. Then $g \in \Gamma\left(E^{*} \otimes E^{*}\right)$, and by restriction we obtain $g_{f} \in \Gamma\left(\left(f^{*} E\right)^{*} \otimes\left(f^{*} E\right)^{*}\right)$, which is a metric on $f^{*} E$ (the 'restriction of $g$ to $f^{\prime}$ ): If $\xi, \eta \in\left(f^{*} E\right)_{p}=E_{f(p)}$, then $\left(g_{f}(p)\right)(\xi, \eta)=(g(f(p))(\xi, \eta)$.
+Example 2.53. 
 
-Remark 2.54. In using this terminology one wants to distinguish the restriction of a tensor field on $E$ (which is a section of a tensor bundle over $f^{*} E$ ) with the pullback of a tensor on the tangent bundle, which is discussed below. Thus the metric in the above example should not be called the 'pullback metric'. Notice that we can restrict both covariant and contravariant tensors, in contrast to the situation with pullbacks.
+Suppose $g$ is a metric on $E$. Then $g \in \Gamma\left(E^{*} \otimes E^{*}\right)$, and by restriction we obtain $g_{f} \in \Gamma\left(\left(f^{*} E\right)^{*} \otimes\left(f^{*} E\right)^{*}\right)$, which is a metric on $f^{*} E$ (the 'restriction of $g$ to $f^{\prime}$ ): If $\xi, \eta \in\left(f^{*} E\right)_{p}=E_{f(p)}$, then $\left(g_{f}(p)\right)(\xi, \eta)=(g(f(p))(\xi, \eta)$.
+
+
+Remark 2.54. 
+
+In using this terminology one wants to distinguish the restriction of a tensor field on $E$ (which is a section of a tensor bundle over $f^{*} E$ ) with the pullback of a tensor on the tangent bundle, which is discussed below. Thus the metric in the above example should not be called the 'pullback metric'. Notice that we can restrict both covariant and contravariant tensors, in contrast to the situation with pullbacks.
+
 
 \subsubsection*{Pushforwards}
 If $f: M \rightarrow N$ is smooth, then for each $p \in M$, we have the linear map $f_{*}(p): T_{p} M \rightarrow T_{f(p)} N=\left(f^{*} T N\right)_{p}$. That is, $f_{*}(p) \in T_{p}^{*} M \otimes\left(f^{*} T N\right)_{p}$, so $f_{*}$ is a smooth section of $T^{*} M \otimes f^{*} T N$. Given a section $X \in \Gamma(T M)=\mathscr{X}(M)$, the pushforward of $X$ is the section $f_{*} X \in \Gamma\left(f^{*} T N\right)$ given by applying $f_{*}$ to $X$.
@@ -1875,7 +2368,10 @@ In contrast to other natural geometric equations (such as the minimal surface eq
 
 In light of (4.1), it is clear that we are no longer interested in just a single manifold ( $M, g$ ), but rather - assuming a suitable local existence theory - a manifold with a one-parameter family of metrics $t \mapsto g(t)$ parametrised by a 'time' $t$. We adopt this point of view here, taking the metrics $g(t)$ as sections of the fixed bundle $\operatorname{Sym}^{2} T^{*} M$. The rate of change in time of the metric makes sense since at each point $p \in M$ we are simply differentiating $g(t)$ in the vector space given by the fibre of this bundle at $p$. Later (in Chap. 6) we will see that there are advantages in instead working with bundles defined over $M \times \mathbb{R}$, where a more geometrically meaningful notion of the time derivative can be used.
 
-\subsubsection*{Exact Solutions}
+
+\pagebreak
+
+\subsection*{Exact Solutions}
 In order to get a feel for the evolution equation, we present some simple solutions of the Ricci flow.
 
 \subsubsection*{Einstein Metrics}
@@ -1891,7 +2387,11 @@ If we take the product metric (cf. Sect.2.4.2) on a product manifold $M \times N
 
 For example, on $S^{2} \times S^{1}$ the $S^{2}$ shrinks to a point while $S^{1}$ stays fixed so that the manifold collapses to a circle. Moreover, if we take any Riemannian manifold ( $M, g$ ) and evolve the metric $g$ by the Ricci flow, then it will also evolve on the product manifold $M \times \mathbb{R}^{n}, n \geq 1$, with product metric $g \oplus$ $\left(d x_{1}^{2}+\cdots+d x_{n}^{2}\right)$ - since the flow is stationary on the $\mathbb{R}^{n}$ part.
 
-\subsubsection*{Diffeomorphism Invariance}
+
+\pagebreak
+
+
+\subsection*{Diffeomorphism Invariance}
 The curvature of a manifold $M$ can be thought of as the obstruction to being locally isometric to Euclidean space. Indeed, a Riemannian manifold is flat if and only if its curvature tensor vanishes identically. Moreover, recall that:\\
 Theorem 4.1. The Riemann curvature tensor $R$ is invariant under local isometries: If $\varphi:(M, g) \rightarrow(\widetilde{M}, \widetilde{g})$ is a local isometry, then $\varphi^{*} \widetilde{R}=R$.\\
 So if $\varphi: M \rightarrow \widetilde{M}$ is a time-independent diffeomorphism such that $g(t)=$ $\varphi^{*} \widetilde{g}(t)$ and $\widetilde{g}$ is a solution of the Ricci flow, we see that
@@ -1911,7 +2411,10 @@ where the second last equality is due to Theorem 4.1. Hence $g$ is also a soluti
 }\subsubsection*{Preservation of Symmetries}
 The Ricci flow preserves any symmetries that are present in the initial metric. To see this, note that each symmetry is an isometric diffeomorphism of the initial metric; so the pullback of a solution of the Ricci flow by this diffeomorphism gives a solution of Ricci flow. Since the symmetry is an isometry of the initial metric, these are solutions of Ricci flow with the same initial data, and so are identical (assuming the uniqueness result proved in Chap. 5). Therefore the symmetry is an isometry of the metric at any positive time.
 
-\subsubsection*{Parabolic Rescaling of the Ricci Flow}
+
+\pagebreak
+
+\subsection*{Parabolic Rescaling of the Ricci Flow}
 Aside from the geometric symmetries of diffeomorphism invariance, the Ricci flow has additional scaling properties that are essential for blow-up analysis of singularities. The time-independent diffeomorphism invariance allows for changes in the spatial coordinates. We can also translate in the time coordinates: If $g(x, t)$ satisfies Ricci flow, then so does $g\left(x, t-t_{0}\right)$ for any $t_{0} \in \mathbb{R}$. Further, the Ricci flow has a scale invariance: If $g$ is a solution of Ricci flow, and $\lambda>0$, then $g_{\lambda}$ is also a solution, where
 
 $$
@@ -1920,53 +2423,72 @@ $$
 
 The main use of this rescaling will be to analyse singularities that develop under the Ricci flow. In such a case the curvature tends to infinity, so we perform a rescaling to produce metrics with bounded curvature and try to produce a smooth limit of these. We will discuss the machinery required for this in Chap. 9, and return to the blow-up procedure in Sect. 9.5.
 
+
+
+\pagebreak
+
 \subsection*{The Laplacian of Curvature}
+
 We devote this section to the derivation of an expression for the Laplacian of $R_{i j k \ell}$. This will be used to derive an evolution equation for the curvature in Sect. 4.4, where the Ricci flow (4.1) implies a heat-type equation for the Riemannian curvature $R$. In order to do this, we need to introduce quadratic $B_{i j k \ell}$ terms which will help simplify our computation.
 
+
 \subsubsection*{Quadratic Curvature Tensor}
+
+
+\begin{DEF}{RG-A11-14-05}{Quadratischer $(4,0)$-Krümmungstensor}
 Various second order derivatives of the curvature tensor are likely to differ by terms quadratic in the curvature tensor. To this end we introduce the (4, 0)-tensor $B \in \mathscr{T}_{0}^{4}(M)$ defined by
-
-$$
+$
 B(X, Y, W, Z)=\langle R(X, \cdot, Y, \star), R(W, \cdot, Z, \star)\rangle,
-$$
-
-where the inner product $\langle$,$\rangle is given by (2.3). In components this becomes$
-
-$$
+$
+where the inner product $\langle,\rangle$ is given by (2.3). 
+In components this becomes
+$
 B_{i j k \ell}=g^{p r} g^{q s} R_{p i q j} R_{r k s \ell}=R_{i}^{p}{ }_{j}^{q} R_{p k q \ell}
-$$
+$
+
 
 This tensor has some of the symmetries of the curvature tensor, namely
-
-$$
+$
 B_{i j k \ell}=B_{j i \ell k}=B_{k \ell i j}
-$$
+$
+\end{DEF}
 
 However other symmetries of the curvature tensor may fail to hold for $B_{i j k \ell}$.
 
+
 \subsubsection*{Calculating the Connection Laplacian $\Delta R_{i j k \ell}$}
+
+
+
 Using the definition of the Laplacian explicated in Sect. 2.6, we compute the connection Laplacian acting on the $\mathscr{T}_{0}^{4}(M)$ tensor bundle.
 
-Proposition 4.2. On a Riemannian manifold ( $M, g$ ), the Laplacian of the curvature tensor $R$ satisfies
 
+
+Proposition 4.2. 
+
+
+\begin{PROP}{RG-A11-11-01}{Laplacian des Riemannischen $(4,0)$-Krümmungstensors}
+On a Riemannian manifold $(M, g)$, the Laplacian of the curvature tensor $R$ satisfies
 $$
 \begin{aligned}
 \Delta R_{i j k \ell}= & \nabla_{i} \nabla_{k} R_{j \ell}-\nabla_{j} \nabla_{k} R_{i \ell}+\nabla_{j} \nabla_{\ell} R_{i k}-\nabla_{i} \nabla_{\ell} R_{j k} \\
 & -2\left(B_{i j k \ell}-B_{i j \ell k}-B_{i \ell j k}+B_{i k j \ell}\right)+g^{p q}\left(R_{q j k \ell} R_{p i}+R_{i q k \ell} R_{p j}\right) .
 \end{aligned}
 $$
+\end{PROP}
 
-Proof. Using the second Bianchi identity - together with the linearity of $\nabla$ over the space of tensor fields - we find that
+Proof. 
 
+
+\begin{PROOF}{RG-A11-11-04}{P: Laplacian des Riemannischen $(4,0)$-Krümmungstensors}
+Using the second Bianchi identity - together with the linearity of $\nabla$ over the space of tensor fields - we find that
 $$
 \begin{aligned}
 0= & \left(\nabla_{p} \nabla_{q} R\right)\left(\partial_{i}, \partial_{j}, \partial_{k}, \partial_{\ell}\right) \\
 & +\left(\nabla_{p} \nabla_{i} R\right)\left(\partial_{j}, \partial_{q}, \partial_{k}, \partial_{\ell}\right)+\left(\nabla_{p} \nabla_{j} R\right)\left(\partial_{q}, \partial_{i}, \partial_{k}, \partial_{\ell}\right)
 \end{aligned}
 $$
-
 Combining this identity with (2.10) implies that the Laplacian of $R$ takes the form
-
 $$
 \begin{aligned}
 \Delta R_{i j k \ell} & =\left(\operatorname{tr}_{g} \nabla^{2} R\right)_{i j k \ell} \\
@@ -1975,32 +2497,24 @@ $$
 & =g^{p q}\left(\nabla_{p} \nabla_{i} R_{q j k \ell}-\nabla_{p} \nabla_{j} R_{q i k \ell}\right)
 \end{aligned}
 $$
-
 From this it suffices to express $g^{p q} \nabla_{p} \nabla_{i} R_{q j k \ell}$ in terms of lower order terms by commuting derivatives and contracting with the metric.
 
 Firstly, Proposition 2.44 implies that
-
 $$
 \nabla_{p} \nabla_{i} R_{q j k \ell}=\nabla_{i} \nabla_{p} R_{q j k \ell}+\left(R\left(\partial_{i}, \partial_{p}\right) R\right)\left(\partial_{q}, \partial_{j}, \partial_{k}, \partial_{\ell}\right) .
 $$
-
 From the second Bianchi identity, the first term on the right-hand side of (4.3) becomes
-
 $$
 \nabla_{i} \nabla_{p} R_{q j k \ell}=\nabla_{i} \nabla_{k} R_{j q \ell p}-\nabla_{i} \nabla_{\ell} R_{j q k p} .
 $$
-
 Contracting with the metric and invoking Proposition 2.48, (2.15), gives
-
 $$
 \begin{aligned}
 g^{p q} \nabla_{i} \nabla_{p} R_{q j k \ell} & =g^{p q} \nabla_{i} \nabla_{k} R_{j q \ell p}-g^{p q} \nabla_{i} \nabla_{\ell} R_{j q k p} \\
 & =\nabla_{i} \nabla_{k} R_{j \ell}-\nabla_{i} \nabla_{\ell} R_{j k}
 \end{aligned}
 $$
-
 Turning our attention to the second term on the right-hand side of (4.3), we find by Proposition 2.43 that
-
 $$
 \begin{aligned}
 & \left(R\left(\partial_{i}, \partial_{p}\right) R\right)\left(\partial_{q}, \partial_{j}, \partial_{k}, \partial_{\ell}\right) \\
@@ -2009,24 +2523,18 @@ $$
 & \quad=g^{m n}\left(R_{p i q m} R_{n j k \ell}+R_{p i j m} R_{q n k \ell}+R_{p i k m} R_{q j n \ell}+R_{p i \ell m} R_{q j k n}\right) .
 \end{aligned}
 $$
-
 Therefore
-
 $$
 \begin{aligned}
 & g^{p q}\left(R\left(\partial_{i}, \partial_{p}\right) R\right)\left(\partial_{q}, \partial_{j}, \partial_{k}, \partial_{\ell}\right) \\
 & \quad=g^{p q} g^{m n}\left(R_{p i q m} R_{n j k \ell}+R_{p i j m} R_{q n k \ell}+R_{p i k m} R_{q j n \ell}+R_{p i \ell m} R_{q j k n}\right) .
 \end{aligned}
 $$
-
 We now look to simplify this expression by observing that the first term contracts to
-
 $$
 g^{p q} g^{m n} R_{p i q m} R_{n j k \ell}=g^{m n} R_{i p m}{ }^{p} R_{n j k \ell}=g^{m n} R_{n j k \ell} R_{i m}=g^{p q} R_{p j k \ell} R_{i q},
 $$
-
 the second term contracts to
-
 $$
 \begin{aligned}
 g^{p q} g^{m n} R_{p i j m} R_{q n k \ell} & =g^{p q} g^{m n} R_{p i j m}\left(-R_{n k q \ell}-R_{k q n \ell}\right) \\
@@ -2035,9 +2543,7 @@ g^{p q} g^{m n} R_{p i j m} R_{q n k \ell} & =g^{p q} g^{m n} R_{p i j m}\left(-
 & =B_{i j \ell k}-B_{i j k \ell},
 \end{aligned}
 $$
-
 and the third and forth terms contract to
-
 $$
 \begin{aligned}
 g^{p q} g^{m n}\left(R_{p i k m} R_{q j n \ell}+R_{p i \ell m} R_{q j k n}\right) & =g^{p q} g^{m n}\left(-R_{p i m k} R_{q j n \ell}+R_{p i m \ell} R_{q j n k}\right) \\
@@ -2045,76 +2551,102 @@ g^{p q} g^{m n}\left(R_{p i k m} R_{q j n \ell}+R_{p i \ell m} R_{q j k n}\right
 & =-B_{i k j \ell}+B_{i \ell j k} .
 \end{aligned}
 $$
-
 Combining these results gives
-
 $$
 \begin{aligned}
 g^{p q}\left(R\left(\partial_{i}, \partial_{p}\right) R\right. & )\left(\partial_{q}, \partial_{j}, \partial_{k}, \partial_{\ell}\right) \\
 & =g^{p q} R_{p j k \ell} R_{i q}-\left(B_{i j k \ell}-B_{i j \ell k}-B_{i \ell j k}+B_{i k j \ell}\right)
 \end{aligned}
 $$
-
 Finally, by putting (4.4) and (4.5) together we get
-
 $$
 \begin{aligned}
 g^{p q} \nabla_{p} \nabla_{i} R_{q j k \ell}= & \nabla_{i} \nabla_{k} R_{j \ell}-\nabla_{i} \nabla_{\ell} R_{j k} \\
 & -\left(B_{i j k \ell}-B_{i j \ell k}-B_{i \ell j k}+B_{i k j \ell}\right)+g^{p q} R_{p j k \ell} R_{i q} .
 \end{aligned}
 $$
-
 Since $\Delta R_{i j k \ell}=g^{p q} \nabla_{p} \nabla_{i} R_{q j k \ell}-(i \leftrightarrow j)$ the desired formula now follows.
+\end{PROOF}
+
+
+
+\pagebreak
+
 
 \subsection*{Metric Variation Formulas}
+
+
 In this section we establish how one can formally take the time derivative of a metric and the associated Levi-Civita connection. Thereafter we derive various variational equations for the Levi-Civita connection, curvature tensor and various traces thereof.
 
+
+
 \subsubsection*{Interpreting the Time Derivative}
-Consider a one-parameter family of smooth metrics $g=g(t) \in \Gamma\left(\operatorname{Sym}^{2} T^{*} M\right)$ parametrised by 'time' $t$. We define the time derivative $\frac{\partial}{\partial t} g: \mathscr{X}(M) \times$ $\mathscr{X}(M) \rightarrow C^{\infty}(M)$ of the metric $g$ by letting
 
+
+\begin{DEF}{RG-A11-16-01}{Zeitableitung der Metrik}
+Consider a one-parameter family of smooth metrics $g=g(t) \in \Gamma\left(\operatorname{Sym}^{2} T^{*} M\right)$ parametrised by 'time' $t$. We define the time derivative of the metric $g$ by letting
 $$
-\left(\frac{\partial}{\partial t} g\right)(X, Y):=\frac{\partial}{\partial t} g(X, Y)
+\frac{\partial}{\partial t} g: \mathscr{X}(M) \times \mathscr{X}(M) \rightarrow C^{\infty}(M); \left(\frac{\partial}{\partial t} g\right)(X, Y):=\frac{\partial}{\partial t} g(X, Y)
 $$
+for any time independent vector fields $X, Y \in \mathscr{X}(M)$ (where $\frac{\partial}{\partial t} g(X, Y)$ is the time derivative of the smooth function $g(X, Y) \in C^{\infty}(M)$ given by the standard difference quotient).
+\end{DEF}
 
-for any time independent vector fields $X, Y \in \mathscr{X}(M)$ (where $\frac{\partial}{\partial t} g(X, Y)$ is the time derivative of the smooth function $g(X, Y) \in C^{\infty}(M)$ given by the standard difference quotient). The metric in local coordinates can be expressed as $g(t)=g_{i j}(t) d x^{i} \otimes d x^{j}$, in which case (4.6) implies that
-
+\begin{REM}{RG-A11-16-02}{Lokale Darstellung der Zeitableitung der Metrik}
+The metric in local coordinates can be expressed as $g(t)=g_{i j}(t) d x^{i} \otimes d x^{j}$, in which case (4.6) implies that
 $$
 \frac{\partial}{\partial t} g=\dot{g}_{i j}(t) d x^{i} \otimes d x^{j}
 $$
-
 Therefore we regard the time derivative of the metric as the derivative of its the component functions with respect to a fixed basis.
+\end{REM}
 
+
+\begin{DEF}{RG-A11-16-03}{Zeitableitung der Levi-Civita Connection}
 Since the Levi-Civita connection $\nabla$ can be written locally in terms of the metric (2.9), it too will be time dependent. So in a similar fashion, we define the time derivative of $\nabla=\nabla^{(t)}$ by letting
-
 $$
 \left(\frac{\partial}{\partial t} \nabla\right)(X, Y):=\frac{\partial}{\partial t} \nabla_{X} Y
 $$
+for time-independent vector fields $X$ and $Y$. As $\nabla$ satisfies the product rule by definition, it is not tensorial.
+\end{DEF}
 
-for time-independent vector fields $X$ and $Y$. As $\nabla$ satisfies the product rule by definition, it is not tensorial. However, we observe the following special properties of its time derivative:
 
-Lemma 4.3. The time derivative $\frac{\partial}{\partial t} \nabla$ of the Levi-Civita connection $\nabla$ is tensorial.
+However, we observe the following special properties of its time derivative:
 
-Proof. For $f \in C^{\infty}(M)$ and any time independent vector fields $X, Y \in$ $\mathscr{X}(M)$, we see that
+Lemma 4.3. 
 
+\begin{LEM}{RG-A11-16-04}{Zeitableitung der Levi-Civita Connection ist tensoriell}
+The time derivative $\frac{\partial}{\partial t} \nabla$ of the Levi-Civita connection $\nabla$ is tensorial.
+\end{LEM}
+
+
+
+Proof. 
+
+\begin{PROOF}{RG-A11-16-05}{P: Zeitableitung der Levi-Civita Connection ist tensoriell}
+For $f \in C^{\infty}(M)$ and any time independent vector fields $X, Y \in$ $\mathscr{X}(M)$, we see that
 $$
 \left(\frac{\partial}{\partial t} \nabla\right)(X, f Y)=\frac{\partial}{\partial t}\left((X f) Y+f \nabla_{X} Y\right)=f \frac{\partial}{\partial t} \nabla_{X} Y=f\left(\frac{\partial}{\partial t} \nabla\right)(X, Y) .
 $$
+Thus $\frac{\partial}{\partial t} \nabla$ is a tensor by Proposition 2.19.
+\end{PROOF}
 
-Thus $\frac{\partial}{\partial t} \nabla$ is a tensor by Proposition 2.19.\\
-Lemma 4.4. If $X$ is a time independent vector field and $V=V(t)$ is a time dependent vector field, then
 
+Lemma 4.4. 
+
+\begin{LEM}{RG-A11-16-06}{Zeitableitung von Kovarianter Ableitung von zeitabhängigen Vektolfeld längs Vektorfeld}
+If $X$ is a time independent vector field and $V=V(t)$ is a time dependent vector field, then
 $$
 \frac{\partial}{\partial t} \nabla_{X} V=\left(\frac{\partial}{\partial t} \nabla\right)(X, V)+\nabla_{X} \frac{\partial V}{\partial t} .
 $$
+\end{LEM}
 
-Proof. Fix a time independent vector field $X$. As $\nabla_{X}=\nabla_{X}^{(t)}: \mathscr{X}(M) \rightarrow$ $\mathscr{X}(M)$ we see that
+Proof. 
 
+\begin{PROOF}{RG-A11-16-07}{P: Zeitableitung von Kovarianter Ableitung von zeitabhängigen Vektolfeld längs Vektorfeld}
+Fix a time independent vector field $X$. As $\nabla_{X}=\nabla_{X}^{(t)}: \mathscr{X}(M) \rightarrow$ $\mathscr{X}(M)$ we see that
 $$
 \frac{\partial}{\partial t} \nabla_{X} V \lim _{\delta \rightarrow 0} \frac{\nabla^{(t+\delta)}(X, V(t+\delta))-\nabla^{(t)}(X, V(t))}{\delta} .
 $$
-
 Since
-
 $$
 \begin{aligned}
 \nabla^{(t+\delta)}(X, & V(t+\delta))-\nabla^{(t)}(X, V(t)) \\
@@ -2123,9 +2655,7 @@ $$
 = & \nabla^{(t+\delta)}(X, V(t+\delta)-V(t))+\left(\nabla^{(t+\delta)}-\nabla^{(t)}\right)(X, V(t)),
 \end{aligned}
 $$
-
 we conclude that
-
 $$
 \begin{aligned}
 \frac{\partial}{\partial t} \nabla_{X} V= & \lim _{\delta \rightarrow 0} \frac{1}{\delta} \nabla^{(t+\delta)}(X, V(t+\delta)-V(t)) \\
@@ -2133,57 +2663,200 @@ $$
 = & \nabla_{X}^{(t)}\left(\lim _{\delta \rightarrow 0} \frac{V(t+\delta)-V(t)}{\delta}\right)+\left(\frac{\partial}{\partial t} \nabla\right)(X, V)
 \end{aligned}
 $$
+\end{PROOF}
+
+
+\begin{DEF}{RG-A11-16-08}{Zeitableitung der Christoffel-Symbole}
+Sei $\nabla$ die Levi-Civita-Verbindung auf einer glatten Riemannschen Mannigfaltigkeit $(M, g)$, und seien $\Gamma_{ij}^k := dx^k\left(\nabla_{\partial_i} \partial_j\right)$ die zugehörigen Christoffel-Symbole in lokalen Koordinaten.
+
+Dann lässt sich $\Gamma$ auffassen als glatte Abbildung
+\[
+\Gamma: \mathscr{X}(M) \times \mathscr{X}(M) \times \mathscr{T}^{(0,1)}(M) \longrightarrow C^\infty(M), \quad (X,Y,\omega) \mapsto \Gamma(X,Y,\omega) := \omega\left(\nabla_X Y\right).
+\]
+Die zeitliche Ableitung dieser Abbildung ist definiert durch
+\[
+\left( \frac{\partial}{\partial t} \Gamma \right)(X, Y, \omega) := \frac{\partial}{\partial t} \left[ \omega\left( \nabla_X Y \right) \right] = \omega\left( \frac{\partial}{\partial t} \nabla_X Y \right).
+\]
+Dann gilt: Die Abbildung $\frac{\partial}{\partial t} \Gamma$ ist $C^\infty(M)$-multilinear in $X$, $Y$ und $\omega$, also ein glattes Tensorfeld vom Typ $(0,3)$. Insbesondere folgt aus Lemma 4.3, dass $\frac{\partial}{\partial t} \nabla$ ein Tensor ist, woraus die Tensorialität von $\frac{\partial}{\partial t} \Gamma$ unmittelbar folgt.
+\end{DEF}
+
+
 
 Furthermore, we would like to differentiate the Christoffel symbols $\Gamma_{i j}^{k}=$ $d x^{k}\left(\nabla_{\partial_{i}} \partial_{j}\right)$ of the Levi-Civita connection $\nabla$. To do this, we consider them as a map $\Gamma: \mathscr{X}(M) \times \mathscr{X}(M) \times \mathscr{T}_{0}^{1}(M) \rightarrow C^{\infty}(M)$ defined by $\Gamma(X, Y, \omega):=$ $\omega\left(\nabla_{X} Y\right)$. With this we proceed in a similar fashion by defining $\frac{\partial}{\partial t} \Gamma$ to be
-
 $$
 \left(\frac{\partial}{\partial t} \Gamma\right)(X, Y, \omega):=\frac{\partial}{\partial t} \Gamma(X, Y, \omega)
 $$
-
 It is easy so see that $\frac{\partial}{\partial t} \Gamma$ is tensorial since $\left(\frac{\partial}{\partial t} \Gamma\right)(X, Y, \omega)=\frac{\partial}{\partial t} \omega\left(\nabla_{X} Y\right)=$ $\omega\left(\frac{\partial}{\partial t} \nabla_{X} Y\right)$ and $\frac{\partial}{\partial t} \nabla$ is a tensor by Lemma 4.3.
 
+
+
+
+
 \subsubsection*{Variation Formulas of the Curvature}
-We now derive evolution equations for geometric quantities under arbitrary metric variations. Note that $\frac{\partial}{\partial t} T=\left(\delta_{\dot{g}} T\right)(g)=\left(\delta_{h} T\right)(g)$ for a $(k, \ell)$-tensor $T$, whenever the direction $h=\frac{\partial}{\partial t} g$ (where the first variation $\delta_{h}$ is taken in the sense of Appendix A).
 
-Lemma 4.5. Suppose $g(t)$ is a smooth one-parameter family of metrics on a manifold $M$ such that $\frac{\partial}{\partial t} g=h$. Then
 
+
+We now derive evolution equations for geometric quantities under arbitrary metric variations. 
+
+
+Definition A.1. 
+
+\begin{DEF}{RG-A11-16-09}{Gâteaux und Fréchet Ableitung von Funktionen zwischen Banachräumen}
+A function $f$ between Banach spaces $X,Y$ is said to be Gâteaux differentiable at $x$ if there exists a bounded linear operator $T_x \in \mathcal{B}(X, Y)$ such that $\forall v \in X$,
+$
+\lim _{t \rightarrow 0} \frac{f(x+t v)-f(x)}{t}=T_x v
+$
+The operator $T_x$ is called the Gâteaux derivative of $f$ at $x$.
+If for some fixed $v$ the limits
+$
+\delta_v f(x):=\left.\frac{d}{d t}\right|_{t=0} f(x+t v)=\lim _{t \rightarrow 0} \frac{f(x+t v)-f(x)}{t}
+$
+exists, we say $f$ has a directional derivative at $x$ in the direction $v$. Hence $f$ is Gâteaux differentiable at $x$ if and only if all the directional derivatives $\delta_v f(x)$ exist and form a bounded linear operator $D f(x): v \mapsto \delta_v f(x)$.
+
+If the limit (in the sense of the Gâteaux derivative) exists uniformly in $v$ on the unit sphere of $X$, we say $f$ is Fréchet differentiable at $x$ and $T_x$ is the Fréchet derivative of $f$ at $x$. Equivalently, if we set $y=t v$ then $t \rightarrow 0$ if and only if $y \rightarrow 0$. Thus $f$ is Fréchet differentiable at $x$ if for all $y$,
+$
+f(x+y)-f(x)-T_x(y)=o(\|y\|)
+$
+and we call $T_x=D f(x)$ the derivative of $f$ at $x$.
+\end{DEF}
+
+
+\begin{CONC}{RG-A11-16-10}{Zeitableitung von Metrik-abhängigen glatten $(k,l)$-Tensorfeldern}
+Sei
+\[
+\mathcal{M}:=\Bigl\{\,g\in\Gamma\bigl(\operatorname{Sym}^2T^{*}M\bigr)\;\Bigm|\; g\text{ ist eine Riemannsche Metrik}\Bigr\}
+\]
+die unendlich–dimensionale Banach-(manifold-)Umgebung aller glatten Metriken auf der kompakten Mannigfaltigkeit \(M\),
+modelliert z.\,B.\ auf einem Sobolev-Raum \(H^{s}\) mit \(s>\frac{\dim M}{2}+1\).
+
+Betrachte ein glattes, tensorwertiges Funktional
+\[
+T:\mathcal{M}\longrightarrow\Gamma\!\bigl(T^{k}_{\;\ell}M\bigr),
+\qquad g\longmapsto T(g),
+\]
+also ein \((k,\ell)\)-Tensorfeld, das von der Metrik abhängt (etwa Christoffel­symbole, Krümmung, Ricci etc.).
+
+\textbf{Zeitabhängige Metrik.}
+Sei \(g(t)\) eine glatte Kurve in \(\mathcal{M}\) mit
+\[
+\dot g:=\frac{\partial}{\partial t}g(t)\Big|_{t=0}=h
+   \in\Gamma\bigl(\operatorname{Sym}^2T^{*}M\bigr).
+\]
+Die Abbildung
+\[
+f:\;t\longmapsto T\bigl(g(t)\bigr)
+\quad\subset\quad
+\Gamma\!\bigl(T^{k}_{\;\ell}M\bigr)
+\]
+ist dann eine Kurve im Banachraum \(\Gamma(T^{k}_{\;\ell}M)\).
+
+\textbf{Definition der Variation.}
+Gemäß Definition der Gâteaux-Ableitung heißt
+\[
+\delta_{h}T(g)\;:=\;
+\left.\frac{d}{ds}\right|_{s=0}\,T(g+s\,h)
+\]
+die \emph{erste Variation} von $T$ in Richtung $h$ an der Stelle $g$.
+
+\textbf{Äquivalenz zur Zeitableitung.}
+Setze $x:=g$ und $v:=h$ in der Notation der Definition.  Dann ist
+\[
+\delta_{h}T(g)
+=\lim_{s\to0}\frac{T(g+s h)-T(g)}{s}
+=\left.\frac{d}{dt}\right|_{t=0}T\!\bigl(g(t)\bigr)
+=:\frac{\partial}{\partial t}T.
+\]
+Mit anderen Worten
+\[
+\boxed{\;
+\frac{\partial}{\partial t}T
+=
+\bigl(\delta_{\dot g}T\bigr)(g)
+=
+\bigl(\delta_{h}T\bigr)(g)
+\quad\text{für }h=\dot g
+\;}
+\]
+Die zeitliche Ableitung eines tensorwertigen Funktionals entlang einer Kurve $g(t)$ in $\mathcal{M}$ ist also nichts anderes als die Gâteaux-(bzw.\ Fréchet-)Ableitung von $T$ in Richtung der „Geschwindigkeit“ $h=\dot g$ der Metrik.
+
+\textbf{Tensorialität der Variation.}
+Ist $T$ für jedes $g$ ein $C^{\infty}(M)$-multilinearer Tensoroperator, dann ist nach Lemma~4.3 (Variation der Verbindung) auch $\delta_{h}T$ ein Tensorfeld vom selben Typ.  Insbesondere gilt
+\[
+\bigl(\delta_{h}T\bigr)(g)\;\in\;\Gamma\!\bigl(T^{k}_{\;\ell}M\bigr)
+\quad\text{und ist $C^{\infty}(M)$-linear in den Argumenten.}
+\]
+\end{CONC}
+
+
+
+
+Note that $\frac{\partial}{\partial t} T=\left(\delta_{\dot{g}} T\right)(g)=\left(\delta_{h} T\right)(g)$ for a $(k, \ell)$-tensor $T$, whenever the direction $h=\frac{\partial}{\partial t} g$ (where the first variation $\delta_{h}$ is taken in the sense of Appendix A).
+
+
+
+Lemma 4.5. 
+
+
+\begin{LEM}{RG-A11-16-11}{Zeitableitung der inversen Metrik}
+Suppose $g(t)$ is a smooth one-parameter family of metrics on a manifold $M$ such that $\frac{\partial}{\partial t} g=h$. Then
 $$
 \frac{\partial}{\partial t} g^{i j}=-g^{i k} g^{j \ell} h_{k \ell}
 $$
+\end{LEM}
 
-Proof. As $g^{i k} g_{k \ell}=\delta_{\ell}^{i}$ we find that $0=\left(\frac{\partial}{\partial t} g^{i k}\right) g_{k \ell}+g^{i k} h_{k \ell}$. In which case $\frac{\partial}{\partial t} g^{i j}=-g^{i k} g^{j \ell} h_{k \ell}=-h^{i j}$.
+Proof. 
 
-Proposition 4.6. Suppose $g(t)$ is a smooth one-parameter family of metrics on a manifold $M$ such that $\frac{\partial}{\partial t} g=h$. Then the Levi-Civita connection $\Gamma_{i j}^{k}$ of $g$ evolves by
+\begin{PROOF}{RG-A11-16-12}{P: Zeitableitung der inversen Metrik}
+As $g^{i k} g_{k \ell}=\delta_{\ell}^{i}$ we find that $0=\left(\frac{\partial}{\partial t} g^{i k}\right) g_{k \ell}+g^{i k} h_{k \ell}$. In which case $\frac{\partial}{\partial t} g^{i j}=-g^{i k} g^{j \ell} h_{k \ell}=-h^{i j}$.
+\end{PROOF}
 
+
+
+Proposition 4.6. 
+
+\begin{PROP}{RG-A11-16-13}{Zeitableitung der Mertik-abhängigen Christoffelsymbole}
+Suppose $g(t)$ is a smooth one-parameter family of metrics on a manifold $M$ such that $\frac{\partial}{\partial t} g=h$. Then the Levi-Civita connection $\Gamma_{i j}^{k}$ of $g$ evolves by
 $$
 \frac{\partial}{\partial t} \Gamma_{i j}^{k}=\frac{1}{2} g^{k \ell}\left(\left(\nabla_{j} h\right)\left(\partial_{i}, \partial_{\ell}\right)+\left(\nabla_{i} h\right)\left(\partial_{j}, \partial_{\ell}\right)-\left(\nabla_{\ell} h\right)\left(\partial_{i}, \partial_{j}\right)\right)
 $$
+\end{PROP}
 
-Proof. As $\frac{\partial}{\partial t} \Gamma$ and $\nabla h$ are tensorial, we are free to work in any local coordinate chart ( $x^{i}$ ). In particular, by choosing normal coordinates about a point $p$ (and evaluating the computation at that point), (2.9) implies that
 
+
+Proof. 
+
+\begin{PROOF}{RG-A11-16-16}{P: Zeitableitung der Mertik-abhängigen Christoffelsymbole}
+As $\frac{\partial}{\partial t} \Gamma$ and $\nabla h$ are tensorial, we are free to work in any local coordinate chart ( $x^{i}$ ). In particular, by choosing normal coordinates about a point $p$ (and evaluating the computation at that point), (2.9) implies that
 $$
 \frac{\partial}{\partial t} \Gamma_{i j}^{k}=\frac{1}{2}\left(\frac{\partial}{\partial t} g^{k \ell}\right) \bcancel{\left(\partial_{j} g_{i \ell}+\partial_{i} g_{j \ell}-\partial_{\ell} g_{i j}\right)}+\frac{1}{2} g^{k \ell} \frac{\partial}{\partial t}\left(\partial_{j} g_{i \ell}+\partial_{i} g_{j \ell}-\partial_{\ell} g_{i j}\right) .
 $$
-
 Using Proposition 2.29 we observe that
-
 $$
 \frac{\partial}{\partial t} \partial_{j} g_{i \ell}=\partial_{j}\left(h\left(\partial_{i}, \partial_{\ell}\right)\right)
 =\left(\nabla_{j} h\right)\left(\partial_{i}, \partial_{\ell}\right)+h\left(\bcancel{\nabla_{\jmath} \partial_{i}}, \partial_{\ell}\right)+h\left(\partial_{i}, \bcancel{\nabla_{\jmath} \partial_{\ell}}\right),
 $$
+from which the result now follows.
+\end{PROOF}
 
-from which the result now follows.\\
-Proposition 4.7. Suppose $g(t)$ is a smooth one-parameter family of metrics on a manifold $M$ such that $\frac{\partial}{\partial t} g=h$. Then the Riemannian curvature tensor evolves by
 
+
+Proposition 4.7. 
+
+\begin{PROP}{RG-A11-16-17}{Zeitableitung des Metrik-abhängigen Riemannischen $(3,1)$ Krümmungstensors}
+Suppose $g(t)$ is a smooth one-parameter family of metrics on a manifold $M$ such that $\frac{\partial}{\partial t} g=h$. Then the Riemannian curvature tensor evolves by
 $$
 \begin{gathered}
 \frac{\partial}{\partial t} R_{i j k}^{\ell}=\frac{1}{2} g^{\ell p}\left(\nabla_{i} \nabla_{p} h_{j k}+\nabla_{j} \nabla_{k} h_{i p}-\nabla_{i} \nabla_{k} h_{j p}-\nabla_{j} \nabla_{p} h_{i k}\right. \\
 \left.-R_{i j k}{ }^{q} h_{q p}-R_{i j p}{ }^{q} h_{q k}\right) .
 \end{gathered}
 $$
+\end{PROP}
 
-Proof. As the expression is tensorial, we are free to work in normal coordinates in a neighbourhood about a point $p$ (and evaluating the expression at that point). Using Lemma 2.46 in these coordinates, we find that
+Proof. 
 
+
+\begin{PROOF}{RG-A11-16-18}{P: Zeitableitung des Metrik-abhängigen Riemannischen $(3,1)$ Krümmungstensors}
+As the expression is tensorial, we are free to work in normal coordinates in a neighbourhood about a point $p$ (and evaluating the expression at that point). Using Lemma 2.46 in these coordinates, we find that
 $$
 \begin{aligned}
 \frac{\partial}{\partial t} R_{i j k}^{\ell}= & \frac{\partial}{\partial t}\left(\partial_{j} \Gamma_{i k}^{\ell}-\partial_{i} \Gamma_{j k}^{\ell}\right) \\
@@ -2191,9 +2864,7 @@ $$
 = & \partial_{j}\left(\frac{\partial}{\partial t} \Gamma_{i k}^{\ell}\right)-\partial_{i}\left(\frac{\partial}{\partial t} \Gamma_{j k}^{\ell}\right)
 \end{aligned}
 $$
-
 From this, together with Proposition 4.6, we have that
-
 $$
 \begin{aligned}
 \partial_{j}\left(\frac{\partial}{\partial t} \Gamma_{i k}^{\ell}\right)= & \frac{1}{2} \bcancel{\partial_{j} g^{\ell p}}\left(\nabla_{k} h_{i p}+\nabla_{i} h_{k p}-\nabla_{p} h_{i k}\right) \\
@@ -2201,9 +2872,7 @@ $$
 = & \frac{1}{2} g^{\ell p}\left(\nabla_{j} \nabla_{k} h_{i p}+\nabla_{j} \nabla_{i} h_{k p}-\nabla_{j} \nabla_{p} h_{i k}\right),
 \end{aligned}
 $$
-
 where the last equality - using Proposition 2.29 - is due to
-
 $$
 \begin{aligned}
 \partial_{j}\left((\nabla h)\left(\partial_{i}, \partial_{k}, \partial_{\ell}\right)\right)
@@ -2212,9 +2881,7 @@ $$
 = & \left(\nabla_{j} \nabla_{i} h\right)\left(\partial_{k}, \partial_{\ell}\right) .
 \end{aligned}
 $$
-
 Therefore,
-
 $$
 \begin{aligned}
 \frac{\partial}{\partial t} R_{i j k}^{\ell}= & \frac{1}{2} g^{\ell p}\left(\nabla_{j} \nabla_{k} h_{i p}+\nabla_{j} \nabla_{i} h_{k p}-\nabla_{j} \nabla_{p} h_{i k}\right) \\
@@ -2223,80 +2890,107 @@ $$
 & \left.\quad+\left(R\left(\partial_{i}, \partial_{j}\right) h\right)\left(\partial_{k}, \partial_{p}\right)\right)
 \end{aligned}
 $$
-
 since $\nabla_{j} \nabla_{i} h_{k p}-\nabla_{i} \nabla_{j} h_{k p}=\left(R\left(\partial_{i}, \partial_{j}\right) h\right)\left(\partial_{k}, \partial_{p}\right)$ by Proposition 2.44. The desired equation now follows since we find, by Proposition 2.43, that
-
 $$
 \begin{aligned}
 \left(R\left(\partial_{i}, \partial_{j}\right) h\right)\left(\partial_{k}, \partial_{p}\right) & =\bcancel{R\left(\partial_{i}, \partial_{j}\right) h_{k p}}-h\left(R\left(\partial_{i}, \partial_{j}\right) \partial_{k}, \partial_{p}\right)-h\left(\partial_{k}, R\left(\partial_{i}, \partial_{j}\right) \partial_{p}\right) \\
 & =-R_{i j k}{ }^{q} h_{q p}-R_{i j p}{ }^{q} h_{q k}
 \end{aligned}
 $$
+\end{PROOF}
 
-Proposition 4.8. Suppose $g(t)$ is a smooth family of metrics on a manifold $M$ with $\frac{\partial}{\partial t} g=h$. Then the ( 4,0 )-Riemann curvature tensor $R$ evolves by
 
+
+
+Proposition 4.8. 
+
+\begin{PROP}{RG-A11-16-19}{Zeitableitung des Metrik-abhängigen Riemannischen $(4,0)$ Krümmungstensors}
+Suppose $g(t)$ is a smooth family of metrics on a manifold $M$ with $\frac{\partial}{\partial t} g=h$. Then the $(4,0)$-Riemann curvature tensor $R$ evolves by
 $$
 \begin{aligned}
 \frac{\partial}{\partial t} R_{i j k \ell}= & \frac{1}{2}\left(\nabla_{i, \ell}^{2} h_{j k}+\nabla_{j, k}^{2} h_{i \ell}-\nabla_{i, k}^{2} h_{j \ell}-\nabla_{j, \ell}^{2} h_{i k}\right) \\
 & +\frac{1}{2} g^{p q}\left(R_{i j k p} h_{q \ell}+R_{i j p \ell} h_{q k}\right)
 \end{aligned}
 $$
+\end{PROP}
 
-Proof. As $R_{i j k \ell}=R_{i j k}{ }^{m} g_{m \ell}$, we have
 
+
+Proof. 
+
+
+\begin{PROOF}{RG-A11-16-20}{P: Zeitableitung des Metrik-abhängigen Riemannischen $(4,0)$ Krümmungstensors}
+As $R_{i j k \ell}=R_{i j k}{ }^{m} g_{m \ell}$, we have
 $$
 \frac{\partial}{\partial t} R_{i j k \ell}=R_{i j k}{ }^{q} \frac{\partial}{\partial t} g_{q \ell}+g_{a \ell} \frac{\partial}{\partial t} R_{i j k}{ }^{a} .
 $$
-
 Now since
-
 $$
 R_{i j k}{ }^{q} \frac{\partial}{\partial t} g_{q \ell}=g^{p q} R_{i j k p} h_{q \ell}
 $$
-
 and (by Proposition 4.7)
-
 $$
 \begin{aligned}
 g_{a \ell} \frac{\partial}{\partial t} R_{i j k}^{a}= & \frac{1}{2}\left(\nabla_{i, \ell}^{2} h_{j k}+\nabla_{j, k}^{2} h_{i \ell}-\nabla_{i, k}^{2} h_{j \ell}-\nabla_{j, \ell}^{2} h_{i k}\right) \\
 & -\frac{1}{2} g^{p q}\left(R_{i j k p} h_{q \ell}+R_{i j \ell p} h_{q k}\right)
 \end{aligned}
 $$
+the result naturally follows.
+\end{PROOF}
 
-the result naturally follows.\\
-Proposition 4.9. Suppose $g(t)$ is a smooth one-parameter family of metrics on a manifold $M$ such that $\frac{\partial}{\partial t} g=h$. Then the Ricci tensor Ric evolves by
 
+
+
+
+Proposition 4.9. 
+
+
+\begin{PROP}{RG-A11-16-21}{Zeitableitung des Metrik-abhängigen Ricci Krümmungstensor}
+Suppose $g(t)$ is a smooth one-parameter family of metrics on a manifold $M$ such that $\frac{\partial}{\partial t} g=h$. Then the Ricci tensor Ric evolves by
 $$
 \frac{\partial}{\partial t} R_{i k}=\frac{1}{2} g^{p q}\left(\nabla_{q, k}^{2} h_{i p}-\nabla_{i, k}^{2} h_{q p}+\nabla_{q, i}^{2} h_{k p}-\nabla_{q, p}^{2} h_{i k}\right)
 $$
+\end{PROP}
 
-Proof. Recall from (4.10) that
 
+
+Proof. 
+
+
+\begin{PROOF}{RG-A11-16-23}{P: Zeitableitung des Metrik-abhängigen Ricci Krümmungstensor}
+Recall from (4.10) that
 $$
 \begin{aligned}
 \frac{\partial}{\partial t} R_{i j k}^{\ell}=\frac{1}{2} g^{\ell p}( & \nabla_{j, k}^{2} h_{i p}+\nabla_{j, i}^{2} h_{k p}-\nabla_{j, p}^{2} h_{i k} \\
 & \left.-\nabla_{i, k}^{2} h_{j p}-\nabla_{i, j}^{2} h_{k p}+\nabla_{i, p}^{2} h_{j k}\right)
 \end{aligned}
 $$
-
 From which we find that
-
 $$
 \begin{gathered}
 \frac{\partial}{\partial t} R_{i k}=\frac{\partial}{\partial t} R_{i j k}^{j}=\frac{1}{2} g^{j p}\left(\nabla_{j, k}^{2} h_{i p}-\nabla_{i, k}^{2} h_{j p}+\nabla_{j, i}^{2} h_{k p}-\nabla_{j, p}^{2} h_{i k}\right) \\
 +\frac{1}{2} \bcancel{g^{q p}\left(-\nabla_{i, q}^{2} h_{k p}+\nabla_{i, p}^{2} h_{q k}\right)} .
 \end{gathered}
 $$
+\end{PROOF}
 
-Proposition 4.10. Suppose $g(t)$ is a smooth one-parameter family of metrics on a manifold $M$ with $\frac{\partial}{\partial t} g=h$. Then the scalar curvature Scal evolves by
 
+
+Proposition 4.10. 
+
+\begin{PROP}{RG-A11-16-24}{Zeitableitung der Metrik-abhängigen skalaren Krümmung}
+Suppose $g(t)$ is a smooth one-parameter family of metrics on a manifold $M$ with $\frac{\partial}{\partial t} g=h$. Then the scalar curvature Scal evolves by
 $$
 \frac{\partial}{\partial t} \text { Scal }=-\Delta \operatorname{tr}_{g} h+\delta^{2} h-\langle h, \text { Ric }\rangle
 $$
+where $\delta^{2} h=g^{i j} g^{p q} \nabla_{q, j}^{2} h_{p i}$ is the 'divergence term'.
+\end{PROP}
 
-where $\delta^{2} h=g^{i j} g^{p q} \nabla_{q, j}^{2} h_{p i}$ is the 'divergence term'.\\
-Proof. Using (4.9) and Proposition 4.9 we find that
 
+Proof. 
+
+\begin{PROOF}{RG-A11-16-25}{P: Zeitableitung der Metrik-abhängigen skalaren Krümmung}
+Using (4.9) and Proposition 4.9 we find that
 $$
 \begin{aligned}
 \frac{\partial}{\partial t} \text { Scal } & =R_{i k} \frac{\partial}{\partial t} g^{i k}+g^{i k} \frac{\partial}{\partial t} R_{i k} \\
@@ -2305,39 +2999,24 @@ $$
 & =-h_{j q} R^{j q}+g^{i j} g^{p q} \nabla_{q, j}^{2} h_{p i}-\Delta \operatorname{tr}_{g} h
 \end{aligned}
 $$
+\end{PROOF}
 
-Proposition 4.11. Suppose $g(t)$ is a smooth one-parameter family of metrics on a manifold $M$ with $\frac{\partial}{\partial t} g=h$. Then the volume form $d \mu(g(t))$ evolves by
 
+
+Proposition 4.11. 
+
+\begin{PROP}{RG-A11-16-26}{Zeitableitung der Metrik-abhängigen Volumenform}
+Suppose $g(t)$ is a smooth one-parameter family of metrics on a manifold $M$ with $\frac{\partial}{\partial t} g=h$. Then the volume form $d \mu(g(t))$ evolves by
 $$
 \frac{\partial}{\partial t} d \mu=\frac{1}{2} \operatorname{tr} h d \mu .
 $$
+\end{PROP}
 
-To prove this, recall that:\\
-Definition 4.12. The adjunct of a square matrix $A$ is defined as the transpose of the cofactor matrix of $A$, that is
 
-$$
-\operatorname{adj} A=\left(\begin{array}{ccc}
-\operatorname{det} A_{11} & -\operatorname{det} A_{21} & \cdots \\
--\operatorname{det} A_{12} & \operatorname{det} A_{22} & \cdots \\
-\vdots & \vdots & \ddots
-\end{array}\right)
-$$
+Proof (Proposition 4.11). 
 
-where $A_{i j}$ is obtained from $A$ by striking out the $i$-th row and the $j$-th column.
-
-Also recall that:\\
-Lemma 4.13. If $A$ is a square matrix then $A$ adj $A=\operatorname{adj} A A=\operatorname{det} A I_{n \times n}$. Moreover, if $\operatorname{det} A \neq 0$ then $A^{-1}=\frac{1}{\operatorname{det} A} \operatorname{adj} A$.\\
-So if $A$ is a square matrix with $(i, j)$-th entry $a_{i j}$, we can expand $\operatorname{det} A$ along the $i$-th row to get: $\operatorname{det} A=\sum_{k=1}^{n}(-1)^{i+k} \operatorname{det} A_{i k}$. Therefore by Lemma 4.13, the partial derivative of $\operatorname{det} A$ with respect to the $(i, j)$-th entry are
-
-$$
-\begin{aligned}
-\frac{\partial}{\partial a_{i j}} \operatorname{det} A & =(-1)^{i+j} \operatorname{det} A_{i j} \\
-& =(\operatorname{adj} A)_{j i}=\operatorname{det} A\left(A^{-1}\right)_{j i} .
-\end{aligned}
-$$
-
-Proof (Proposition 4.11). In local coordinates ( $x^{i}$ ) the volume form can be written as $d \mu=\sqrt{\operatorname{det} g} d x^{1} \wedge \ldots \wedge x^{n}$. So by (4.12) and the chain rule,
-
+\begin{PROOF}{RG-A11-16-27}{P: Zeitableitung der Metrik-abhängigen Volumenform}
+In local coordinates ( $x^{i}$ ) the volume form can be written as $d \mu=\sqrt{\operatorname{det} g} d x^{1} \wedge \ldots \wedge x^{n}$. So by (4.12) and the chain rule,
 $$
 \begin{aligned}
 \frac{\partial}{\partial t} \sqrt{\operatorname{det} g} & =\frac{1}{2} \frac{1}{\sqrt{\operatorname{det} g}} \frac{\partial}{\partial t} \operatorname{det} g \\
@@ -2346,36 +3025,79 @@ $$
 & =\frac{1}{2} g^{i j} h_{i j} \sqrt{\operatorname{det} g}=\frac{1}{2} \operatorname{tr} h \sqrt{\operatorname{det} g}
 \end{aligned}
 $$
-
 Thus,
-
 $$
 \frac{\partial}{\partial t} d \mu=\frac{\partial \sqrt{\operatorname{det} g}}{\partial t} d x^{1} \wedge \ldots \wedge x^{n}=\frac{1}{2} \operatorname{tr} h d \mu
 $$
+\end{PROOF}
+
+
+To prove this, recall that:
+
+
+Definition 4.12. 
+
+The adjunct of a square matrix $A$ is defined as the transpose of the cofactor matrix of $A$, that is
+$$
+\operatorname{adj} A=\left(\begin{array}{ccc}
+\operatorname{det} A_{11} & -\operatorname{det} A_{21} & \cdots \\
+-\operatorname{det} A_{12} & \operatorname{det} A_{22} & \cdots \\
+\vdots & \vdots & \ddots
+\end{array}\right)
+$$
+where $A_{i j}$ is obtained from $A$ by striking out the $i$-th row and the $j$-th column.
+
+Also recall that:
+
+
+Lemma 4.13. 
+
+If $A$ is a square matrix then $A$ adj $A=\operatorname{adj} A A=\operatorname{det} A I_{n \times n}$. Moreover, if $\operatorname{det} A \neq 0$ then $A^{-1}=\frac{1}{\operatorname{det} A} \operatorname{adj} A$.
+
+So if $A$ is a square matrix with $(i, j)$-th entry $a_{i j}$, we can expand $\operatorname{det} A$ along the $i$-th row to get: $\operatorname{det} A=\sum_{k=1}^{n}(-1)^{i+k} \operatorname{det} A_{i k}$. Therefore by Lemma 4.13, the partial derivative of $\operatorname{det} A$ with respect to the $(i, j)$-th entry are
+$$
+\begin{aligned}
+\frac{\partial}{\partial a_{i j}} \operatorname{det} A & =(-1)^{i+j} \operatorname{det} A_{i j} \\
+& =(\operatorname{adj} A)_{j i}=\operatorname{det} A\left(A^{-1}\right)_{j i} .
+\end{aligned}
+$$
+
+
+
+\pagebreak
+
 
 \subsection*{Evolution of the Curvature Under the Ricci Flow}
+
+
 Using the results of the previous sections, it is now a relatively easy task to derive the evolution equations of the curvature, and its various traces, under the Ricci flow.
 
-Theorem 4.14. Suppose $g(t)$ is a solution of the Ricci flow, the $(4,0)$ Riemannian tensor $R$ evolves by
 
+
+Theorem 4.14. 
+
+\begin{THEO}{RG-A11-16-28}{Evolutionsformel für Riemannischen $(4,0)$ Krümmungstensor abhängig von Lösungen des Ricci-Flusses}
+Suppose $g(t)$ is a solution of the Ricci flow, the $(4,0)$ Riemannian tensor $R$ evolves by
 $$
 \begin{aligned}
 \frac{\partial}{\partial t} R_{i j k \ell}= & \Delta R_{i j k \ell}+2\left(B_{i j k \ell}-B_{i j \ell k}-B_{i \ell j k}+B_{i k j \ell}\right) \\
 & -g^{p q}\left(R_{p j k \ell} R_{q i}+R_{i p k \ell} R_{q j}+R_{i j k p} R_{q \ell}+R_{i j p \ell} R_{q k}\right) .
 \end{aligned}
 $$
+\end{THEO}
 
-Proof. By Proposition 4.8, with $\frac{\partial}{\partial t} g_{i j}=-2 R_{i j}$, the time derivative of $R_{i j k \ell}$ satisfies
 
+Proof. 
+
+\begin{PROOF}{RG-A11-16-30}{P: Evolutionsformel für Riemannischen $(4,0)$ Krümmungstensor abhängig von Lösungen des Ricci-Flusses}
+By Proposition 4.8, with $\frac{\partial}{\partial t} g_{i j}=-2 R_{i j}$, the time derivative of $R_{i j k \ell}$ satisfies
 $$
 \begin{aligned}
 & \nabla_{i, \ell}^{2} R_{j k}+\nabla_{j, k}^{2} R_{i \ell}-\nabla_{i, k}^{2} R_{j \ell}-\nabla_{j, \ell}^{2} R_{i k} \\
 & \quad=-\frac{\partial}{\partial t} R_{i j k \ell}-g^{p q}\left(R_{i j k p} R_{q \ell}+R_{i j p \ell} R_{q k}\right) .
 \end{aligned}
 $$
-
 By Proposition 4.2, with indices $k$ and $\ell$ switched, the Laplacian of $R$ satisfies
-
 $$
 \begin{aligned}
 & \nabla_{i, \ell}^{2} R_{j k}-\nabla_{j, \ell}^{2} R_{i k}+\nabla_{j, k}^{2} R_{i \ell}-\nabla_{i, k}^{2} R_{j \ell} \\
@@ -2383,9 +3105,7 @@ $$
 & \quad-g^{p q}\left(R_{q j \ell k} R_{p i}+R_{i q \ell k} R_{p j}\right) .
 \end{aligned}
 $$
-
 Combining these equations gives
-
 $$
 \begin{aligned}
 -\Delta R_{i j k \ell}=\Delta R_{i j \ell k}= & -\frac{\partial}{\partial t} R_{i j k \ell}-2\left(B_{i j \ell k}-B_{i j k \ell}-B_{i k j \ell}+B_{i \ell j k}\right) \\
@@ -2393,115 +3113,161 @@ $$
 & -g^{p q}\left(R_{i j k p} R_{q \ell}+R_{i j p \ell} R_{q k}\right)
 \end{aligned}
 $$
+\end{PROOF}
+
+
+
 
 We can also derive, without too much effort, the evolution of the following quantities under the Ricci flow.
 
-Corollary 4.15. Under the Ricci flow, the connection coefficients evolve by
 
+
+Corollary 4.15. 
+
+
+\begin{KORO}{RG-A11-16-31}{Evolution von Connection Koeffizienten unter Ricci Flow}
+Under the Ricci flow, the connection coefficients evolve by
 $$
 \frac{\partial}{\partial t} \Gamma_{i j}^{k}=-g^{k \ell}\left(\left(\nabla_{j} \operatorname{Ric}\right)\left(\partial_{i}, \partial_{\ell}\right)+\left(\nabla_{i} \operatorname{Ric}\right)\left(\partial_{j}, \partial_{\ell}\right)-\left(\nabla_{\ell} \operatorname{Ric}\right)\left(\partial_{i}, \partial_{j}\right)\right)
 $$
+\end{KORO}
 
-Corollary 4.16. Under the Ricci flow, the volume form of $g$ evolves by
 
+
+Corollary 4.16. 
+
+\begin{KORO}{RG-A11-16-32}{Evolution der Volumenform unter Ricci Flow}
+Under the Ricci flow, the volume form of $g$ evolves by
 $$
 \frac{\partial}{\partial t} d \mu=-\operatorname{Scal} d \mu
 $$
+\end{KORO}
 
-Corollary 4.17. Under the Ricci flow,
 
+
+Corollary 4.17. 
+
+\begin{KORO}{RG-A11-16-33}{Evolution des Ricci-Krümmungstensors unter Ricci Flow}
+Under the Ricci flow,
 $$
-\begin{aligned}
-\frac{\partial}{\partial t} R_{i k} & =\Delta R_{i k}+\nabla_{i k}^{2} \mathrm{Scal}-g^{p q}\left(\nabla_{q, i}^{2} R_{k p}+\nabla_{q, k}^{2} R_{i p}\right) \\
-\frac{\partial}{\partial t} \mathrm{Scal} & =2 \Delta \mathrm{Scal}-2 g^{i j} g^{p q} \nabla_{q, j}^{2} R_{p i}+2|\mathrm{Ric}|^{2}
-\end{aligned}
+\frac{\partial}{\partial t} R_{i k}  =\Delta R_{i k}+\nabla_{i k}^{2} \mathrm{Scal}-g^{p q}\left(\nabla_{q, i}^{2} R_{k p}+\nabla_{q, k}^{2} R_{i p}\right)
 $$
+\end{KORO}
+
+
+
+\begin{KORO}{RG-A11-16-34}{Evolution des skalaren Krümmung unter Ricci Flow}
+Under the Ricci flow,
+$$\frac{\partial}{\partial t} \mathrm{Scal}  =2 \Delta \mathrm{Scal}-2 g^{i j} g^{p q} \nabla_{q, j}^{2} R_{p i}+2|\mathrm{Ric}|^{2}$$
+\end{KORO}
+
 
 The proof of these corollaries follow easily by substituting $\frac{\partial}{\partial t} g_{i j}=-2 R_{i j}$ into Propositions 4.6, 4.11, 4.9 and 4.10 respectively.
 
-We note that the formulas in the last corollary can be simplified as follows.\\
-Corollary 4.18. Under the Ricci flow,
+We note that the formulas in the last corollary can be simplified as follows.
 
+
+Corollary 4.18. 
+
+\begin{KORO}{RG-A11-16-35}{Evolution des Ricci-Krümmungstensor unter Ricci Flow 2}
+Under the Ricci flow,
 $$
 \frac{\partial}{\partial t} R_{i k}=\Delta R_{i k}+2 g^{p q} g^{r s} R_{p i k r} R_{q s}-2 g^{p q} R_{i p} R_{q k}
 $$
+\end{KORO}
 
-Proof. By (4.9) the time derivative of $R_{i k}=g^{j \ell} R_{i j k \ell}$ is $\frac{\partial}{\partial t} R_{i k}=g^{j \ell} \frac{\partial}{\partial t} R_{i j k \ell}$ $-2 g^{j p} g^{\ell q} R_{p q} R_{i j k \ell}$. Substituting the expression for $\frac{\partial}{\partial t} R_{i j k \ell}$ in Theorem 4.14 (with $g^{j \ell} \Delta R_{i j k \ell}=\Delta R_{i k}$ from (2.15)) results in
 
-$$
-\begin{aligned}
+
+Proof. 
+
+
+\begin{PROOF}{RG-A11-16-38}{P: Evolution des skalaren Krümmung unter Ricci Flow 2}
+By (4.9) the time derivative of $R_{i k}=g^{j \ell} R_{i j k \ell}$ is $\frac{\partial}{\partial t} R_{i k}=g^{j \ell} \frac{\partial}{\partial t} R_{i j k \ell}$ $-2 g^{j p} g^{\ell q} R_{p q} R_{i j k \ell}$. Substituting the expression for $\frac{\partial}{\partial t} R_{i j k \ell}$ in Theorem 4.14 (with $g^{j \ell} \Delta R_{i j k \ell}=\Delta R_{i k}$ from (2.15)) results in
+$$\begin{aligned}
 \frac{\partial}{\partial t} R_{i k}= & \Delta R_{i k}+2 g^{j \ell}\left(B_{i j k \ell}-B_{i j \ell k}-B_{i \ell j k}+B_{i k j \ell}\right) \\
 & -g^{j \ell} g^{p q}\left(R_{p j k \ell} R_{q i}+R_{i p k \ell} R_{q j}+R_{i j p \ell} R_{q k}+R_{i j k p} R_{q \ell}\right)
-\end{aligned}
-$$
-
+\end{aligned}$$
 As we find that
-
-$$
-\begin{aligned}
+$$\begin{aligned}
 & 2 g^{j \ell}\left(B_{i j k \ell}-B_{i j \ell k}-B_{i \ell j k}+B_{i k j \ell}\right) \\
 & \quad=2 g^{j \ell} B_{i j k \ell}-2 g^{j \ell}\left(B_{i \ell j k}+B_{i j \ell k}\right)+2 g^{p r} g^{q s} R_{p i q k} R_{r s} \\
 & \quad=2 g^{j \ell} B_{i j k \ell}-4 g^{j \ell} B_{i j \ell k}+2 g^{p r} g^{q s} R_{p i q k} R_{r s} \\
 & \quad=2 g^{j \ell}\left(B_{i j k \ell}-2 B_{i j \ell k}\right)+2 g^{p r} g^{q s} R_{p i q k} R_{r s}
-\end{aligned}
-$$
-
+\end{aligned}$$
 and
-
-$$
-\begin{aligned}
+$$\begin{aligned}
 & g^{j \ell} g^{p q}\left(R_{p j k \ell} R_{q i}+R_{i p k \ell} R_{q j}+R_{i j p \ell} R_{q k}+R_{i j k p} R_{q \ell}\right) \\
 & \quad=2 g^{p q} R_{p i} R_{q k}+g^{j \ell} g^{p q} R_{i p k \ell} R_{q j}+g^{j \ell} g^{p q} R_{i j k p} R_{q \ell} \\
 & \quad=2 g^{p q} R_{p i} R_{q k}+2 g^{p r} g^{q s} R_{p i q k} R_{r s},
-\end{aligned}
-$$
-
+\end{aligned}$$
 it follows that
+$$\frac{\partial}{\partial t} R_{i k}=\Delta R_{i k}+2 g^{j \ell}\left(B_{i j k \ell}-2 B_{i j \ell k}\right)+2 g^{p r} g^{q s} R_{p i q k} R_{r s}-2 g^{p q} R_{p i} R_{q k}$$
+The desired result now follows from the following claim.
 
-$$
-\frac{\partial}{\partial t} R_{i k}=\Delta R_{i k}+2 g^{j \ell}\left(B_{i j k \ell}-2 B_{i j \ell k}\right)+2 g^{p r} g^{q s} R_{p i q k} R_{r s}-2 g^{p q} R_{p i} R_{q k}
-$$
-
-The desired result now follows from the following claim.\\
 Claim 4.19. For any metric $g_{i j}$, the tensor $B_{i j k \ell}$ satisfies the identity
+$$g^{j \ell}\left(B_{i j k \ell}-2 B_{i j \ell k}\right)=0$$
+Proof of Claim. 
 
-$$
-g^{j \ell}\left(B_{i j k \ell}-2 B_{i j \ell k}\right)=0
-$$
-
-Proof of Claim. Using the Bianchi identities,
-
-$$
-\begin{aligned}
+Using the Bianchi identities,
+$$\begin{aligned}
 g^{j \ell} B_{i j k \ell} & =g^{j \ell} g^{p r} g^{q s} R_{p i q j} R_{r k s \ell} \\
 & =g^{j \ell} g^{p r} g^{q s} R_{p q i j} R_{r s k \ell} \\
 & =g^{j \ell} g^{p r} g^{q s}\left(R_{p i q j}-R_{p j q i}\right)\left(R_{r k s \ell}-R_{r \ell s k}\right) \\
 & =2 g^{j \ell}\left(B_{i j k \ell}-B_{i j \ell k}\right)
-\end{aligned}
+\end{aligned}$$
+\end{PROOF}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Corollary 4.20. 
+
+\begin{KORO}{RG-A11-16-37}{Evolution des skalaren Krümmung unter Ricci Flow 2}
+Under the Ricci flow,
 $$
-
-Corollary 4.20. Under the Ricci flow,
-
+\frac{\partial}{\partial t} \text { Scal }=\Delta \text { Scal }+2  |\text{Ric}|^{2}
 $$
-\frac{\partial}{\partial t} \text { Scal }=\Delta \text { Scal }+2 \mid \text { Ric }\left.\right|^{2}
-$$
+\end{KORO}
 
-Proof. From Corollary 4.17 it suffices to show that
+Proof. 
 
+\begin{PROOF}{RG-A11-16-39}{P: Evolution des skalaren Krümmung unter Ricci Flow 2}
+From Corollary 4.17 it suffices to show that
 $$
 2 g^{i j} g^{p q} \nabla_{q, j}^{2} R_{p i}=g^{p q} \nabla_{q} \nabla_{p} \text { Scal }=\Delta \text { Scal. }
 $$
 
-To do this we claim:\\
+To do this we claim:
+
 Claim 4.21. The identity
 
 $$
 \frac{1}{2} \nabla_{q} \nabla_{p} \text { Scal }=g^{i j} \nabla_{q} \nabla_{j} R_{p i}
 $$
+holds true.
 
-holds true.\\
-Proof of Claim. By the contracted second Bianchi identity (2.16),
+Proof of Claim. 
 
+By the contracted second Bianchi identity (2.16),
 $$
 \begin{aligned}
 \frac{1}{2}(\nabla \mathrm{Scal})\left(\partial_{p}\right)=\frac{1}{2} \nabla_{p} \mathrm{Scal}=g^{i j} \nabla_{j} R_{p i} & =\left(g^{-1} \otimes \nabla \mathrm{Ric}\right)\left(\partial_{i}, \partial_{j}, \partial_{j}, \partial_{p}, \partial_{i}\right) \\
@@ -2509,9 +3275,7 @@ $$
 & =\left(\operatorname{tr} g^{-1} \otimes \nabla \operatorname{Ric}\right)\left(\partial_{p}\right)
 \end{aligned}
 $$
-
 As $\nabla_{q}\left(\operatorname{tr} g^{-1} \otimes \nabla \operatorname{Ric}\right)=\operatorname{tr} g^{-1} \otimes \nabla_{q}(\nabla \operatorname{Ric})$ we find that
-
 $$
 \begin{aligned}
 \frac{1}{2} \nabla_{q} \nabla_{p} \text { Scal } & =\frac{1}{2}\left(\nabla_{q}(\nabla \text { Scal })\right)\left(\partial_{p}\right) \\
@@ -2519,8 +3283,18 @@ $$
 & =g^{i j} \nabla_{q} \nabla_{j} R_{p i}
 \end{aligned}
 $$
+\end{PROOF}
+
+
 
 Remark 4.22. The evolution of the scalar curvature by Corollary 4.20 provides a simple illustration of the fact that the Ricci flow 'prefers' positive curvature. In this case the two components $\Delta \mathrm{Scal}$ and $2|\mathrm{Ric}|^{2}$ can be interpreted in the following way: The dissipative term $\Delta$ Scal reflects the fact that a point in $M$ with a higher average curvature than its neighbours will tend to revert to the mean. The nonlinear term $2 \mid$ Ric $\left.\right|^{2}$ reflects the fact that if one is in a positive curvature region (e.g. a region behaving like a sphere), then the metric will contract, thus increasing the curvature to be even more positive. Conversely, if one is in a negative curvature region (such as a region behaving like a saddle), then the metric will expand, thus weakening the negativity of curvature. In both cases the curvature is trending upwards, consistent with the non-negativity of $2 \mid$ Ric $\left.\right|^{2}$.
+
+
+
+\pagebreak
+
+
+
 
 \subsection*{A Closer Look at the Curvature Tensor}
 So far we have managed to derive, in Theorem 4.14, a heat-type evolution equation for the curvature tensor under the Ricci flow. As we seek to deform the metric so it has constant sectional curvature, we need to look at the\\

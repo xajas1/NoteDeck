@@ -158,11 +158,11 @@
 \newenvironment{EXA}[2]{\begin{unitbox}\CustomHeading{Example}{#1}{#2}}{\end{unitbox}}
 \newenvironment{STUD}[2]{\begin{unitbox}\CustomHeading{Study}{#1}{#2}}{\end{unitbox}}
 \newenvironment{CONC}[2]{\begin{unitbox}\CustomHeading{Concept}{#1}{#2}}{\end{unitbox}}
+\newenvironment{OTH}[2]{\begin{unitbox}\CustomHeading{Other}{#1}{#2}}{\end{unitbox}}
+\newenvironment{EXE}[2]{\begin{unitbox}\CustomHeading{Exercise}{#1}{#2}}{\end{unitbox}}
+\newenvironment{MOT}[2]{\begin{unitbox}\CustomHeading{Motivation}{#1}{#2}}{\end{unitbox}}
+\newenvironment{PROOF}[2]{\begin{unitbox}\CustomHeading{Proof}{#1}{#2}}{\end{unitbox}}
 
-
-\newenvironment{PROOF}
-  {\begin{proof}}%
-{\end{proof}}
 
 % --- Unit Umgebung für Source-Inhalte ---
 \usepackage{mdframed}
@@ -214,7 +214,7 @@ Soweit nichts anderes gesagt ist, sind in dieser Vorlesung Mannigfaltigkeiten un
 
 \subsection*{1.1 Definition}
 
-\begin{DEF}{EFT1-K25a-02-01}{Lokale triviale Faserung mit typischen Fasern auf Mfk}
+\begin{DEF}{BÜN-K25a-02-01}{Lokale triviale Faserung mit typischen Fasern auf Mfk}
 Seien $E, M$ und $F$ differenzierbare Mannigfaltikeiten und $\pi: E \rightarrow M$ eine differenzierbare Abbildung. Dann heißt ( $E, \pi, M$ ) eine lokal triviale Faserung mit typischer Faser $F$, wenn es zu jedem $x \in M$ eine offene Umgebung $U$ gibt und einen Diffeomorphismus $\varphi: \pi^{-1}(U):=E \mid U \rightarrow$ $U \times F$, sodass
 $$
 \begin{array}{lll}
@@ -228,19 +228,19 @@ kommutiert. Man spricht auch von der lokal trivialen Faserung $E \rightarrow M$ 
 
 
 
-\begin{DEF}{EFT1-K25a-02-02}{Vektorraumbündel}
+\begin{DEF}{BÜN-K25a-02-02}{Vektorraumbündel}
 Ist $F=\mathbb{R}^{k}$ und ist $\pi^{-1}(x)$ ein $k$-dimensionaler Vektorraum und $p r_{2} \circ$ $\left.\varphi\right|_{\pi^{-1}(x)}: \pi^{-1}(x) \rightarrow \mathbb{R}^{k}$ ein Isomorphismus, so heißt $E$ ein Vektorraumbündel der Dimension $k$.
 \end{DEF}
 
 \subsection*{1.2 Beispiele}
 
 
-\begin{EXA}{EFT1-K25a-02-03}{Projektion von Kreuzprodukt ist eine lokal triviale Faserung}
+\begin{EXA}{BÜN-K25a-02-03}{Projektion von Kreuzprodukt ist eine lokal triviale Faserung}
 $p r_{1}: U \times F \rightarrow U$ ist eine lokal triviale Faserung.
 \end{EXA}
 
 
-\begin{EXA}{EFT1-K25a-02-04}{Tangentialbündel mit differenzierbarer Struktur ist Vektorraumbündel}
+\begin{EXA}{BÜN-K25a-02-04}{Tangentialbündel mit differenzierbarer Struktur ist Vektorraumbündel}
 $T M:=\bigcup_{x \in M} T_{x} M \rightarrow M$ mit der üblichen differenzierbaren Struktur ist ein $\operatorname{dim} M$-dimensionales Vektorraumbündel. Denn ist ( $U, h$ ) eine Karte für $M$ und $\left(\partial_{1}^{(h)}, \ldots, \partial_{n}^{(h)}\right)$ Koordinatenbasis auf $U$, so ist
 $$
 \bigcup_{x \in U} T_{x} U \rightarrow U \times \mathbb{R}^{n}, \sim \sum_{i=1}^{n} a_{i}(x) \partial_{i}^{(h)}(x) \mapsto\left(x, a_{1}(x), \ldots, a_{n}(x)\right) .
@@ -250,7 +250,7 @@ eine Bündelkarte.
 
 
 
-\begin{EXA}{EFT1-K25a-02-05}{Vektorraumbündel zu $S^1$}
+\begin{EXA}{BÜN-K25a-02-05}{Vektorraumbündel zu $S^1$}
 Sei $U:=[0,1] / 0 \sim 1 \cong S^{1}$. $E:=[0,1] \times \mathbb{R} /(0, t) \sim(1,-t) \neq S^{1} \times \mathbb{R}$. Dann ist $\pi: E \rightarrow U,[(x, t)] \mapsto[x]$ ein Vektorraumbündel:
 
 Ist $x \neq[0]$, so wähle $U=(0,1) \subset M$. Dann ist
@@ -265,27 +265,27 @@ $$
 \end{EXA}
 
 
-\begin{EXA}{EFT1-K25a-02-06}{Lokale triviale Faserung über $S^1$}
+\begin{EXA}{BÜN-K25a-02-06}{Lokale triviale Faserung über $S^1$}
 $S^{1} \rightarrow S^{1}, z \mapsto z^{2}$ ist eine lokal triviale Faserung mit $F=\mathbb{Z}_{2}$. (Übungsaufgabe: Was ist $\varphi$ ?)
 \end{EXA}
 
 \subsection*{1.3 Definition}
 
 
-\begin{DEF}{EFT1-K25a-02-07}{Lokale triviale Faserung als Tripel von Totalraum, Basisraum, Bündelprojektion mit typischen Fasern}
+\begin{DEF}{BÜN-K25a-02-07}{Lokale triviale Faserung als Tripel von Totalraum, Basisraum, Bündelprojektion mit typischen Fasern}
 Sei $(E, \pi, M)$ eine lokal triviale Faserung wie in 1.1. Dann heißt $E$ Totalraum, $M$ Basis, $\pi$ Bündelprojektion und $F$ typische Faser.
 \end{DEF}
 
-\begin{DEF}{EFT1-K25a-02-08}{Reale Fasern in lokal trivialen Faserungen}
+\begin{DEF}{BÜN-K25a-02-08}{Reale Fasern in lokal trivialen Faserungen}
 Für jedes $x \in M$ heißt $E_{x}=\pi^{-1}(x)$ reale Faser an der Stelle $x$.
 \end{DEF}
 
-\begin{DEF}{EFT1-K25a-02-09}{Bündelkarten für offene Teilmengen der Basis}
+\begin{DEF}{BÜN-K25a-02-09}{Bündelkarten für offene Teilmengen der Basis}
 Für $U \subset M$ offen heißt $\varphi: E \mid U \rightarrow U \times F$ Bündelkarte
 \end{DEF}
 
 
-\begin{DEF}{EFT1-K25a-02-10}{Bündelatlas für lokale triviale Faserungen}
+\begin{DEF}{BÜN-K25a-02-10}{Bündelatlas für lokale triviale Faserungen}
 $$
 \left\{\left(U_{\lambda}, \varphi_{\lambda}\right) \mid\left(U_{\lambda}, \varphi_{\lambda}\right) \text { Bündelkarte }, \bigcup_{\lambda \in \Lambda} U_{\lambda}=M\right\}
 $$
@@ -293,11 +293,11 @@ heißt Bündelatlas.
 \end{DEF}
 
 
-\begin{DEF}{EFT1-K25a-02-11}{Faserkarte am Punkt x im Basisraum}
+\begin{DEF}{BÜN-K25a-02-11}{Faserkarte am Punkt x im Basisraum}
 Die Abbildung $\varphi_{x}: E_{x} \rightarrow F, \varphi_{x}:=p r_{2} \circ \varphi \mid E_{x}$ heißt Faserkarte.
 \end{DEF}
 
-\begin{DEF}{EFT1-K25a-02-12}{Bündelkartenwechsel zwischen Bündelkarten}
+\begin{DEF}{BÜN-K25a-02-12}{Bündelkartenwechsel zwischen Bündelkarten}
 Sind $(U, \varphi)$ und $(V, \psi)$ Bündelkarten, so heißt die Abbildung
 $$
 \omega: U \cap V \rightarrow \operatorname{Diffeo}(F), x \mapsto \psi_{x} \circ \varphi_{x}^{-1}
@@ -306,7 +306,7 @@ der Bündelkartenwechsel zwischen $\varphi$ und $\psi$.
 \end{DEF}
 
 
-\begin{DEF}{EFT1-K25a-02-13}{G-Faserbündel mit Liegruppen als Strukturgruppen}
+\begin{DEF}{BÜN-K25a-02-13}{G-Faserbündel mit Liegruppen als Strukturgruppen}
 Ist $G$ eine Liegruppe und $G \times F \rightarrow F$ eine $G$-Aktion, und gibt es zu jedem Bündelkartenwechsel $\omega$ eine differenzierbare Abbildung
 $$
 g: U \cap V \rightarrow G \text { mit } \omega(x)(f)=g(x) f
@@ -316,7 +316,7 @@ so heißt ( $E, \pi, M$ ) ein $G$-Faserbündel mit Strukturgruppe $G$.
 
 
 
-\begin{DEF}{EFT1-K25a-02-14}{Prinzipalbüdel / Hauptfaserbündel}
+\begin{DEF}{BÜN-K25a-02-14}{Prinzipalbüdel / Hauptfaserbündel}
 Ist ( $E, \pi, M$ ) ein $G$-Faserbündel mit typischer Faser $G$ und der durch die Linksmultiplikation mit $G$ gegebenen $G$-Aktion, so heißt ( $E, \pi, M$ ) ein Prinzipalbündel oder Hauptfaserbündel.
 \end{DEF}
 
@@ -325,7 +325,7 @@ Ist ( $E, \pi, M$ ) ein $G$-Faserbündel mit typischer Faser $G$ und der durch d
 \subsection*{1.4 Bemerkung}
 
 
-\begin{REM}{EFT1-K25a-02-15}{Beziehung zwischen Vektorraumbündeln und GL-Faserbündeln}
+\begin{REM}{BÜN-K25a-02-15}{Beziehung zwischen Vektorraumbündeln und GL-Faserbündeln}
 Ist $E \xrightarrow{\pi} M$ ein $k$-dimensionales Vektorraumbündel, so ist der Bündelkartenwechsel zwischen zwei Bündelkarten stets eine differenzierbare Abbildung
 $$
 \omega: U \cap V \rightarrow G L(k, \mathbb{R}) \text { bzw. } G L(k, \mathbb{C}) .
@@ -335,7 +335,7 @@ d.h., $E$ ist ein $G L(k, \mathbb{R})$ - bzw. $G L(k, \mathbb{C})$-Faserbündel.
 
 \subsection*{1.5 Definition}
 
-\begin{DEF}{EFT1-K25a-02-16}{(Differenzierbare) (Lokale) Schnitte in lokal trivialen Faserungen}
+\begin{DEF}{BÜN-K25a-02-16}{(Differenzierbare) (Lokale) Schnitte in lokal trivialen Faserungen}
 Ist $E \xrightarrow{\pi} M$ eine lokal triviale Faserung, $U \subseteq M$, so heißt eine differenzierbare Abbildung $\sigma: U \rightarrow E$ (differenzierbarer) lokaler Schnitt, falls $\pi \circ \sigma=\mathrm{id}_{U}$. $\sigma$ heißt Schnitt, falls zusätzlich $U=M$ gilt. Den Raum der differenzierbaren Schnitte bezeichnet man mit $\Gamma E$.
 \end{DEF}
 
@@ -343,43 +343,54 @@ Ist $E \xrightarrow{\pi} M$ eine lokal triviale Faserung, $U \subseteq M$, so he
 
 \subsection*{1.6 Beispiele}
 
-\begin{DEF}{EFT1-K25a-02-17}{Raum der differenzierbaren lokalen Schnitte}
+\begin{DEF}{BÜN-K25a-02-17}{Raum der differenzierbaren lokalen Schnitte}
 $\Gamma(M \times F)=\left\{\sigma: M \rightarrow M \times F \mid \sigma(x)=(x, f(x)), f \in C^{\infty}(M, F)\right\} \cong$ $C^{\infty}(M, F)$.
 \end{DEF}\\
 
-\begin{EXA}{EFT1-K25a-02-18}{Raum der diff. lokalen Schnitte in Kreuzprodukten}
+\begin{EXA}{BÜN-K25a-02-18}{Raum der diff. lokalen Schnitte in Kreuzprodukten}
 $\Gamma T M=\{$ differenzierbare Vektorfelder auf $M\}$.
 \end{EXA}\\
 
-\begin{EXA}{EFT1-K25a-02-19}{Raum der diff. Lokalen Schnitte im Tangentialbündel}
+\begin{EXA}{BÜN-K25a-02-19}{Raum der diff. Lokalen Schnitte im Tangentialbündel}
 Jedes Vektorraumbündel hat einen Schnitt $\sigma: M \rightarrow E, x \mapsto O_{x} \in E_{x}$.
 \end{EXA}\\
 
 $T M$ hat im Allgemeinen keinen Schnitt, der nirgends verschwindet, z.B. hat jedes Vektorfeld auf $M=S^{2}$ eine Nullstelle. Aber in $T T^{2}$ existieren zwei an jeder Stelle linear unabhängige Schnitte.\\
 
-\begin{EXA}{EFT1-K25a-02-21}{Im Tangentialbündel existiert kein diff. Schnitt, der nirgends verschwindet}
+\begin{EXA}{BÜN-K25a-02-21}{Im Tangentialbündel existiert kein diff. Schnitt, der nirgends verschwindet}
 Für $S^{1} \rightarrow S^{1}, z \mapsto z^{2}$ gibt es keinen Schnitt.
 \end{EXA}
 
 \subsection*{1.7 Bemerkungen}
 
+\begin{REM}{BÜN-K25a-02-23}{Raum der diff Schnitte in Vektorraumbündeln ist der Vektorraum von glatten Abbildungen auf M}
 Ist $E \rightarrow M$ ein Vektorraumbündel, so ist $\Gamma E$ ein $C^{\infty}(M)$ Vektorraum.
+\end{REM}
 
 
+
+\begin{REM}{BÜN-K25a-02-24}{Für Bündelkarten in Vektorraumbündeln existieren k lokale Schnitte, die an jeder Stelle eine Basis der realen Faser bilden}
 Ist $E \rightarrow M$ ein $k$-dimensionales Vektorraumbündel und $\varphi: E \mid U \rightarrow$ $U \times \mathbb{R}^{k}$ eine Bündelkarte, so gibt es $k$ lokale Schnitte auf $U$, die an jeder Stelle $x \in U$ eine Basis von $E_{x}$ bilden, nämlich $\sigma_{j}\left(x^{\prime}\right)=\varphi^{-1}\left(x^{\prime}, e_{j}\right)$ für $x^{\prime} \in U$.
+\end{REM}
+
+
+\begin{REM}{BÜN-K25a-02-25}{k lokale Schnitte, die bei Punkt eine Basis der Faser bilden, induzieren eine Bündelkarte}
 Umgekehrt: Sind auf $U \in M k$ Schnitte gegeben, die an der Stelle eine Basis bilden, so ist auf $U$ eine Bündelkarte durch
 $$
 E \mid U \rightarrow U \times \mathbb{R}^{k}, e=\Sigma a_{i}(x) \sigma_{i}(x) \mapsto\left(x, a_{i}(x), \ldots, a_{k}(x)\right)
 $$
 definiert.
+\end{REM}
 
 
+\begin{REM}{BÜN-K25a-02-26}{Bündelkarten in G-Prinzipalbündeln induzieren lokale Schnitte}
 Sind $P \rightarrow M$ ein $G$-Prinzipalbündel und $\varphi: P \mid U \rightarrow U \times G$ eine Bündelkarte, so ist $\sigma: U \rightarrow P, x \mapsto \varphi^{-1}(x, 1)$ ein lokaler Schnitt.
+\end{REM}
 
 \subsection*{1.8 Definition}
 
 
-\begin{DEF}{EFT1-K25a-02-27}{Präbündel mit Strukturgruppe G zu Liegruppe G, Mfk, (disj) Vereinigung von punktweise Mfk und Projektion}
+\begin{DEF}{BÜN-K25a-02-27}{Präbündel mit Strukturgruppe G zu Liegruppe G, Mfk, (disj) Vereinigung von punktweise Mfk und Projektion}
 Seien $G$ eine Liegruppe, $M$ eine Mannigfaltigkeit, $F$ eine $G$-Mannigfaltigkeit und sei für jedes $x \in M$ eine Mannigfaltigkeit $E_{x} \cong F$ gegeben. Sei $E:=$ $\bigcup_{x \in M} E_{x}$ und $\pi: E \rightarrow M$ die kanonische Projektion. Dann heißt $(E, \pi, M)$ ein Präbündel mit Strukturgruppe $G$, falls es um jedes $x \in M$ eine offene Umgebung $U$ gibt und eine bijektive Abbildung
 $$
 \varphi: E \mid U=\pi^{-1}(U) \rightarrow U \times F
@@ -401,7 +412,7 @@ $$
 Die Definitionen aus 1.3 werden entsprechend übertragen, z.B. heißt $\varphi$ dann Präbündelkarte.
 
 \subsection*{1.9 Satz}
-\begin{PROP}{EFT1-K25a-02-28}{Für Präbündel $(E,\pi,M)$ existiert auf E genau einem Topologie und differenzierbare Struktur, sodass $(E,\pi,M)$ ein Faserbündel mit Strukturgruppe G wird und Präbündelkarten Bündelkarten werden}
+\begin{PROP}{BÜN-K25a-02-28}{Für Präbündel $(E,\pi,M)$ existiert auf E genau einem Topologie und differenzierbare Struktur, sodass $(E,\pi,M)$ ein Faserbündel mit Strukturgruppe G wird und Präbündelkarten Bündelkarten werden}
 Ist $(E, \pi, M)$ ein Präbündel, dann existiert auf $E$ genau eine Topologie und differenzierbare Struktur, sodass ( $E, \pi, M$ ) ein Faserbündel mit Strukturgruppe $G$ wird und die Präbündelkarten Bündelkarten werden.
 \end{PROP}
 
@@ -415,24 +426,24 @@ $$
 Zusammen mit Karten für $F$ erhält man dann eine differenzierbare Struktur auf $E$.
 
 \subsection*{1.10 Beispiele}
-\begin{EXA}{EFT1-K25a-02-29}{Bündelstruktur von Tangentialbündel als Ergebnis der Konstruktion von Präbündeln}
+\begin{EXA}{BÜN-K25a-02-29}{Bündelstruktur von Tangentialbündel als Ergebnis der Konstruktion von Präbündeln}
 Die Bündelstruktur $T M$ wurde wie in Satz 1.9 definiert.
 \end{EXA}
 
 
-\begin{EXA}{EFT1-K25a-02-30}{Präbündel zum GL-Prinzipalbündel}
+\begin{EXA}{BÜN-K25a-02-30}{Präbündel zum GL-Prinzipalbündel}
 Sei $E_{x}:=\left\{\left(v_{1}, \ldots, v_{n}\right) \mid\left(v_{1}, \ldots, v_{n}\right)\right.$ Basis von $\left.T_{x} M\right\}, P_{G L}:=\bigcup_{x \in M} E_{x}$. Dann ist $P_{G L}$ ein Präbündel und wird in kanonischer Weise ein $G L(n, \mathbb{R})$ Prinzipalbündel (Beweis in den Übungen).
 \end{EXA}
 
 
-\begin{EXA}{EFT1-K25a-02-31}{Präbündel zum $O(n)$-Prinzipalbündel für Riemannische Mfk}
+\begin{EXA}{BÜN-K25a-02-31}{Präbündel zum $O(n)$-Prinzipalbündel für Riemannische Mfk}
 Analog, falls ( $M, g$ ) Riemannsch ist und $E_{x}:=\left\{\left(v_{1}, \ldots, v_{n}\right) \mid\left(v_{1}, \ldots, v_{n}\right)\right.$ ist Orthonormalbasis von $\left.T_{x} M\right\}$, so ist $P_{O(n)}:=\bigcup_{x \in M} E_{x}$ in kanonischer Weise ein $O(n)$-Prinzipalbündel.
 \end{EXA}
 
 
 \subsection*{1.11 Korollar}
 
-\begin{KORO}{EFT1-K25a-02-32}{Direkte Summe von Vektorraumbündeln ergeben Prävektorraumbündel}
+\begin{KORO}{BÜN-K25a-02-32}{Direkte Summe von Vektorraumbündeln ergeben Prävektorraumbündel}
 Sind $E \rightarrow M$ und $F \rightarrow M$ zwei Vektorraumbündel der Dimension $k$ und $\ell$, so ist
 $$
 E \oplus F:=\bigcup_{x \in M} E_{x} \oplus F_{x}
@@ -463,21 +474,21 @@ gegeben, also differenzierbar.
 
 \subsection*{1.12 Beispiele}
 
-\begin{EXA}{EFT1-K25a-02-33}{Hom-Raum für Homomorphismen zwischen Vektorraumbündeln sind Vektorraumbündel}
+\begin{EXA}{BÜN-K25a-02-33}{Hom-Raum für Homomorphismen zwischen Vektorraumbündeln sind Vektorraumbündel}
 Sind $E, F$ Vektorraumbündel, so auch
 
 $\operatorname{Hom}(E, F)=\bigcup_{x \in M} \operatorname{Hom}\left(E_{x}, F_{x}\right)$.
 \end{EXA}
 
-\begin{EXA}{EFT1-K25a-02-34}{Mult}
+\begin{EXA}{BÜN-K25a-02-34}{Mult}
 $\operatorname{Mult}^{k}(E, F)$.
 \end{EXA}\\
 
-\begin{EXA}{EFT1-K25a-02-35}{Sym}
+\begin{EXA}{BÜN-K25a-02-35}{Sym}
 $\operatorname{Sym}^{k}(E)$.
 \end{EXA}\\
 
-\begin{EXA}{EFT1-K25a-02-36}{Alt}
+\begin{EXA}{BÜN-K25a-02-36}{Alt}
 $\operatorname{Alt}^{k}(E)$ usw.
 \end{EXA}
 
@@ -486,18 +497,18 @@ Die Präbündelkartenwechsel können als Übungsaufgabe konstruiert werden.
 \subsection*{1.13 Definition}
 
 
-\begin{DEF}{EFT1-K25a-02-37}{Bündelmetrik auf Totalraum ist ein Schnitt in $Sym^2(E)$, sodass g pw. positiv definit }
+\begin{DEF}{BÜN-K25a-02-37}{Bündelmetrik auf Totalraum ist ein Schnitt in $Sym^2(E)$, sodass g pw. positiv definit }
 Eine Bündelmetrik auf $E$ ist ein Schnitt $g$ in $\operatorname{Sym}^{2}(E)$, sodass $g(x)$ positiv definit ist für jedes $x \in M$.
 \end{DEF}
 
 \subsection*{1.14 Bemerkungen}
 
-\begin{EXA}{EFT1-K25a-02-38}{Riemannische Metrik als Bündelmetrik im Tangentialbündel}
+\begin{EXA}{BÜN-K25a-02-38}{Riemannische Metrik als Bündelmetrik im Tangentialbündel}
 Eine Riemannsche Metrik auf $M$ ist eine Bündelmetrik auf $T M$.
 \end{EXA}
 
 
-\begin{EXA}{EFT1-K25a-02-39}{$\Gamma (Alt^k(TM))$}
+\begin{EXA}{BÜN-K25a-02-39}{$\Gamma (Alt^k(TM))$}
 $\Omega^{k} M=\Gamma \operatorname{Alt}^{k}(T M)$.
 \end{EXA}
 
@@ -505,14 +516,14 @@ $\Omega^{k} M=\Gamma \operatorname{Alt}^{k}(T M)$.
 
 \subsection*{1.15 Definition}
 
-\begin{DEF}{EFT1-K25a-02-40}{Vektorraumbündel vom endlichen Typ}
+\begin{DEF}{BÜN-K25a-02-40}{Vektorraumbündel vom endlichen Typ}
 Ein Vektorraumbündel $E \rightarrow M$ heißt von endlichem Typ, wenn es ein Vektorraumbündel $F \rightarrow M$ gibt und ein $N \in \mathbb{N}$, sodass $E \oplus F=M \times \mathbb{R}^{N}$ ist.
 \end{DEF}
 
 
 \subsection*{1.16 Beispiel}
 
-\begin{EXA}{EFT1-K25a-02-41}{Tangentialbündel von $S^n$ ist von endlichem Typ}
+\begin{EXA}{BÜN-K25a-02-41}{Tangentialbündel von $S^n$ ist von endlichem Typ}
 $T S^{n}$ ist von endlichem Typ, denn
 $$
 T S^{n} \oplus\left(S^{n} \times \mathbb{R}\right)=S^{n} \times \mathbb{R}^{n-1},(v,(x, \lambda)) \mapsto v+\lambda x .
@@ -522,7 +533,7 @@ $$
 \subsection*{1.17 Definition}
 
 
-\begin{DEF}{EFT1-K25a-02-43}{Bündelisomorphismus}
+\begin{DEF}{BÜN-K25a-02-43}{Bündelisomorphismus}
 Seien $\pi_{i}: E_{i} \rightarrow B_{i}, i=1,2$ Faserbündel mit Strukturgruppe $G$ und typischer Faser $F, f_{0}: B_{1} \rightarrow B_{2}$ eine differenzierbare Abbildung, dann heißt eine differenzierbare Abbildung $f: E_{1} \rightarrow E_{2}$ eine Bündelabbildung über $f_{0}$, falls $f_{0} \circ \pi_{1}=\pi_{2} \circ f$ gilt und $f$ bezüglich Bündelkarten durch differenzierbare Abbildungen $\gamma: U \rightarrow G$, genauer durch
 $$
 U \times F \rightarrow V \times F,(x, v) \mapsto\left(f_{0}(x), \gamma(x) v\right)
@@ -532,30 +543,30 @@ gegeben ist.
 Ist zusätzlich $f_{0}=\mathrm{id}$, so heißt $f$ ein Bündelisomorphismus.
 \end{DEF}
 
-\begin{DEF}{EFT1-K25a-02-44}{Trivialisierung von Totalraum}
+\begin{DEF}{BÜN-K25a-02-44}{Trivialisierung von Totalraum}
 Ein Bündelisomorphismus $f: E \rightarrow B \times F$ heißt eine Trivialisierung von $E$.
 \end{DEF}
 
 
-\begin{DEF}{EFT1-K25a-02-45}{Vektorraumbündelabbildung über diff. Abbildungen zwischen Vektorraumbündeln}
+\begin{DEF}{BÜN-K25a-02-45}{Vektorraumbündelabbildung über diff. Abbildungen zwischen Vektorraumbündeln}
 Seien jetzt $E_{i} \rightarrow B_{i}$ zwei Vektorraumbündel $f_{0}: B_{1} \rightarrow B_{2}$ eine differenzierbare Abbildung und $f: E_{1} \rightarrow E_{2}$ eine differenzierbare Abbildung über $f_{0}$, so heißt $f$ eine Vektorraumbündelabbildung über $f$, falls $f_{x}:=f \mid E_{1, x}$ linear ist für jedes $x \in M$.
 \end{DEF}\\
 
 
 
-\begin{DEF}{EFT1-K25a-02-46}{Vektorraumbündelisomorphismus}
+\begin{DEF}{BÜN-K25a-02-46}{Vektorraumbündelisomorphismus}
 Ist $f_{0}=\mathrm{id}$, so heißt $f$ ein Vektorraumbündelhomomorphismus, es ist dann $f \in \Gamma \operatorname{Hom}\left(E_{1}, E_{2}\right)$.
 \end{DEF}
 
 \subsection*{1.18 Beispiel}
 
 
-\begin{EXA}{EFT1-K25a-02-47}{Differential von glatten Abbildungen zw. Tangentialbündel von Mfk ist eine Vektorraumbündelabbildung über glatte Abbildung $f$}
+\begin{EXA}{BÜN-K25a-02-47}{Differential von glatten Abbildungen zw. Tangentialbündel von Mfk ist eine Vektorraumbündelabbildung über glatte Abbildung $f$}
 Ist $f: M \rightarrow N$ eine differenzierbare Abbildung, so ist $d f: T M \rightarrow T N$ eine Vektorraumbündelabbildung über $f$.
 \end{EXA}
 
 \subsection*{1.19 Definition und Satz}
-\begin{DEF}{EFT1-K25a-02-48}{Induzierte Bündel durch Abbildungen}
+\begin{DEF}{BÜN-K25a-02-48}{Induzierte Bündel durch Abbildungen}
 Ist $f: N \rightarrow M$ eine differenzierbare Abbildung, $E \rightarrow M$ ein Faserbündel mit Strukturgruppe $G$, so ist
 $$
 p r_{1}: f^{*} E=\left\{(x, e) \mid x \in N, e \in E_{f(x)}\right\} \rightarrow N
@@ -564,7 +575,7 @@ ein Faserbündel mit Strukturgruppe $G$ über $N$, das von $f$ induzierte Bünde
 \end{DEF}
 
 
-\begin{PROP}{EFT1-K25a-02-49}{Schnitte in induzierten Bündeln längs $f$}
+\begin{PROP}{BÜN-K25a-02-49}{Schnitte in induzierten Bündeln längs $f$}
 Ist $f: N \rightarrow M$ eine differenzierbare Abbildung, $E \rightarrow M$ ein Faserbündel mit Strukturgruppe $G$, so ist
 $$
 p r_{1}: f^{*} E=\left\{(x, e) \mid x \in N, e \in E_{f(x)}\right\} \rightarrow N
@@ -587,13 +598,13 @@ eine Präbündelkarte gegeben. Die Kartenwechsel sind dieselben wie die für $E 
 
 
 \subsection*{1.20 Beispiel}
-\begin{EXA}{EFT1-K25a-02-50}{Menge der Vektorfelder längs Kurven}
+\begin{EXA}{BÜN-K25a-02-50}{Menge der Vektorfelder längs Kurven}
 Ist $\gamma: I \rightarrow M$ differenzierbar, so ist $\Gamma\left(\gamma^{*} T M\right)$ die Menge der Vektorfelder längs $\gamma$.
 \end{EXA}
 
 
 \subsection*{1.21 Beispiel}
-\begin{EXA}{EFT1-K25a-02-51}{Vektorraumbündel bzgl Grassmann-Mfk}
+\begin{EXA}{BÜN-K25a-02-51}{Vektorraumbündel bzgl Grassmann-Mfk}
 Sei $G_{k, N}=O(N) /(O(k) \times O(N-k))$ die Grassmann-Mannigfaltigkeit und
 $$
 \gamma_{k, N}=\left\{(E, v) \in G_{k, N} \times \mathbb{R}^{N} \mid v \in E\right\}
@@ -604,7 +615,7 @@ dann ist $\gamma_{k, N} \rightarrow G_{k, N}$ ein $k$-dimensionales Vektorraumb�
 \subsection*{1.22 Bemerkung}
 
 
-\begin{REM}{EFT1-K25a-02-52}{Bündelabbildungen bzgl induzierte Bündel}
+\begin{REM}{BÜN-K25a-02-52}{Bündelabbildungen bzgl induzierte Bündel}
 Die Abbildung $\hat{f}: f^{*} E \rightarrow E,(x, e) \mapsto e$ ist eine Bündelabbildung über $f$, sodass $\hat{f} \mid\left(f^{*} E\right)_{x}:\left(f^{*} E\right)_{x} \rightarrow E_{f(x)}$ ein Isomorphismus ist für jedes $x$. Ist $g$ : $\widetilde{E} \rightarrow E$ eine weitere Bündelabbildung über $f$, so ist
 $$
 \tilde{g}: \widetilde{E} \rightarrow f^{*} E, \tilde{e} \mapsto(\pi(\tilde{e}), g(\tilde{e}))
@@ -613,46 +624,55 @@ ein Bündelisomorphismus mit $\hat{f} \circ \tilde{g}=g$.
 \end{REM}
 
 \subsection*{1.23 Satz}
+
+\begin{PROP}{BÜN-K25a-02-67}{Pullback-Faserbündel längs homotopen Abbildungen sind isomorph}
 Sei $E \rightarrow B$ ein Faserbündel, seien $f_{0}, f_{1}: X \rightarrow B$ homotope Abbildungen, dann ist $f_{0}^{*} E \cong f_{1}^{*} E$.
+\end{PROP}
 
 \subsection*{1.24 Korollar}
+\begin{KORO}{BÜN-K25a-02-68}{Faserbündel über kontrahierbarer Basis sind trivial}
 Ist $B$ zusammenziehbar, also die Identität homotop zur konstanten Abbildung $c: B \rightarrow B, x \mapsto p$, so ist $E \rightarrow B$ trivial, denn $E=\mathrm{id}^{*} E \cong c^{*} E=B \times E_{p}$.
+\end{KORO}
 
 \section*{Beweis des Satzes:}
-Seien $\xi, \xi^{\prime}$ Faserbündel mit Strukturgruppe $G$ und typischer Faser F. Sei
 
+\begin{PROOF}{BÜN-K25a-02-69}{P: Faserbündel über kontrahierbarer Basis sind trivial}
+Seien $\xi, \xi^{\prime}$ Faserbündel mit Strukturgruppe $G$ und typischer Faser F. Sei
 $$
 \operatorname{Iso}_{G}\left(\xi_{x}, \xi_{x}^{\prime}\right):=\left\{f: \xi_{x} \rightarrow \xi_{x}^{\prime} \mid \psi_{x} \circ f \circ \varphi_{x}^{-1}(v)=g \cdot v \text { für ein } g \in G\right\}
 $$
+Dann ist $\bigcup_{x \in B} \operatorname{Iso}_{G}\left(\xi_{x}, \xi_{x}^{\prime}\right)$ in kanonischer Weise ein Faserbündel mit typischer Faser $G$ und Strukturgruppe $G \times G$, die Schnitte in $\operatorname{Iso}_{G}\left(\xi_{x}, \xi_{x}^{\prime}\right)$ sind gerade die Bündelisomorphismen. 
 
-Dann ist $\bigcup_{x \in B} \operatorname{Iso}_{G}\left(\xi_{x}, \xi_{x}^{\prime}\right)$ in kanonischer Weise ein Faserbündel mit typischer Faser $G$ und Strukturgruppe $G \times G$, die Schnitte in $\operatorname{Iso}_{G}\left(\xi_{x}, \xi_{x}^{\prime}\right)$ sind gerade die Bündelisomorphismen. Benutze nun die Homotopiehochhebungseigenschaft: Ist $(X, A)$ ein $C W$-Paar, (z.B. $(M, \partial M)$ ), $Y \rightarrow[0,1] \times X$ eine lokal triviale Faserung, $\sigma_{0}$ ein Schnitt in $Y \mid((0 \times X) \cup([0,1] \times A))$, dann ist $\sigma$ zu einem Schnitt in $Y$ fortsetzbar, vgl. z.B. Husemoller Fiber Bundles oder Hatcher Algebraic Geometry.\\
+Benutze nun die Homotopiehochhebungseigenschaft: Ist $(X, A)$ ein $CW$-Paar, (z.B. $(M, \partial M)$ ), $Y \rightarrow[0,1] \times X$ eine lokal triviale Faserung, $\sigma_{0}$ ein Schnitt in $Y \mid((0 \times X) \cup([0,1] \times A))$, dann ist $\sigma$ zu einem Schnitt in $Y$ fortsetzbar, vgl. z.B. Husemoller Fiber Bundles oder Hatcher Algebraic Geometry.
+
 Wende dies an auf das Bündel $\operatorname{Iso}_{G}\left([0,1] \times f_{0}^{*} E, h^{*} E\right)$, wobei $h:[0,1] \times X \rightarrow B$ die Homotopie zwiswchen $f_{0}$ und $f_{1}$ ist. Dann ist $\sigma(0, x)=\operatorname{id}_{E_{f_{0}(x)}}$ fortsetzbar zu einem Schnitt $\sigma$, und $\sigma$ und $\sigma(1, \cdot)$ ist der gesuchte Bündelisomorphismus.
+\end{PROOF}
 
 \subsection*{1.25 Definition}
 
-\begin{DEF}{EFT1-K25a-02-54}{Induzierte Bündel bei Einbettungen von UnterMfk}
+\begin{DEF}{BÜN-K25a-02-54}{Induzierte Bündel bei Einbettungen von UnterMfk}
 Ist $i: M_{0} \rightarrow M$ die Einbettung einer Untermannigfaltigkeit $M_{0}$ in $M$, so schreibt man statt $i^{*} E$ auch $\left.E\right|_{M_{0}}$.
 \end{DEF}
 
 \subsection*{1.26 Definition}
 
-\begin{DEF}{EFT1-K25a-02-55}{Untervektorraumbündel}
+\begin{DEF}{BÜN-K25a-02-55}{Untervektorraumbündel}
 Sei $(E, \pi, M)$ ein $k$-dimensionales Vektorraumbündel. Eine Teilmenge $E_{0} \subseteq E$ heißt ein $m$-dimensionales Untervektorraumbündel, falls es um jedes $x \in M$ eine Bündelkarte $(U, \varphi)$ gibt, sodass $\varphi\left(\pi^{-1}(U) \cap E_{0}\right)=U \times \mathbb{R}^{m} \times 0$ ist.
 \end{DEF}
 
 \subsection*{1.27 Bemerkungen}
 
 
-\begin{REM}{EFT1-K25a-02-56}{Untervektorraumbündel sind Vektorraumbündel}
+\begin{REM}{BÜN-K25a-02-56}{Untervektorraumbündel sind Vektorraumbündel}
 Ein $m$-dimensionales Untervektorraumbündel ist offenbar ein $m$-dimensionales Vektorraumbündel.
 \end{REM}
 
 
-\begin{REM}{EFT1-K25a-02-57}{Quotienten-Räume bzgl Untervektorraumbündel sind Vektorraumbündel}
+\begin{REM}{BÜN-K25a-02-57}{Quotienten-Räume bzgl Untervektorraumbündel sind Vektorraumbündel}
 Ist $E_{0} \subset E$ ein Untervektorraumbündel, so ist $E / E_{0}$ ein Vektorraumbündel.
 \end{REM}
 
-\begin{REM}{EFT1-K25a-02-58}{Untervektorraumbündel bzgl Bündelmetrik}
+\begin{REM}{BÜN-K25a-02-58}{Untervektorraumbündel bzgl Bündelmetrik}
 Ist $M$ mit einer Bündelmetrik $g$ versehen, so ist
 $$
 E_{0}^{\perp}:=\bigcup_{x \in M} E_{0, x}^{\perp}=\left\{e \in E_{x}: g(\tilde{e}, e)=0 \text { für alle } \tilde{e} \in E_{0, x}\right\}
@@ -663,17 +683,17 @@ ein Untervektorraumbündel und es gilt: $E_{0}^{\perp} \cong E / E_{0}$.
 
 
 
-\begin{REM}{EFT1-K25a-02-59}{Tangentialbündel von UnterMfk sind Untervektorraumbündel}
+\begin{REM}{BÜN-K25a-02-59}{Tangentialbündel von UnterMfk sind Untervektorraumbündel}
 Ist $M_{0}$ eine Untermannigfaltigkeit, dann ist $\left.T M_{0} \subset T M\right|_{M_{0}}:=\bigcup_{x \in M_{0}} T_{x} M$ ein $\operatorname{dim} M_{0}$-dimensionales Untervektorraumbündel von $\left.T M\right|_{M_{0}}$.
 \end{REM}
 
-\begin{REM}{EFT1-K25a-02-60}{Normalenbündel von UnterMfk}
+\begin{REM}{BÜN-K25a-02-60}{Normalenbündel von UnterMfk}
 $N M_{0}:=\left.T M\right|_{M_{0}} / T M_{0}$ heißt das Normalenbündel von $M_{0}$. Ist $M$ eine Riemannsche Mannigfaltigkeit, so ist $N M_{0} \cong T M_{0}^{\perp}$.
 \end{REM}
 
 \subsection*{1.28 Satz}
 
-\begin{PROP}{EFT1-K25a-02-61}{Rang-Satz für Vektorraumhomomorphismen: Konstanter Rang impliziert ker und im sind Untervektorraumbündel}
+\begin{PROP}{BÜN-K25a-02-61}{Rang-Satz für Vektorraumhomomorphismen: Konstanter Rang impliziert ker und im sind Untervektorraumbündel}
 Ist $f: E \rightarrow F$ ein Vektorraumhomomorphismus von einem Vektorraumbündel der Dimension $k$ und $m$ und ist $\operatorname{rg} f_{x}=$ const.\\
 Dann ist $\operatorname{ker} f:=\bigcup_{x \in M} \operatorname{ker} f_{x} \subset E$ ein Untervektorraumbündel von $E$ und Bild $f:=\bigcup_{x \in M}$ Bild $f_{x} \subset F$ ein Untervektorraumbündel von $F$.
 \end{PROP}
@@ -722,7 +742,7 @@ Wende den 1. Fall auf $f: E \rightarrow \operatorname{Bild} f$ an.\\
 
 
 \subsection*{1.29 Korollar}
-\begin{KORO}{EFT1-K25a-02-62}{Charakterisierung von Vektorraumbündeln von endlichem Typ}
+\begin{KORO}{BÜN-K25a-02-62}{Charakterisierung von Vektorraumbündeln von endlichem Typ}
 Ein Vektorraumbündel $E \rightarrow M$ ist genau dann von endlichem Typ, wenn eine der beiden äquivalenten Bedingungen erfüllt ist:
 \begin{enumerate}
   \item Es existiert ein surjektiver Vektorraumbündelhomomorphismus $M \times \mathbb{R}^{N} \rightarrow$ $E$.
@@ -732,12 +752,12 @@ Ein Vektorraumbündel $E \rightarrow M$ ist genau dann von endlichem Typ, wenn e
 
 
 \subsection*{1.30 Definition}
-\begin{DEF}{EFT1-K25a-02-63}{Reduktionen von Faserbündeln mit Strukturgruppe bzgl abgeschlossener Untergruppe}
+\begin{DEF}{BÜN-K25a-02-63}{Reduktionen von Faserbündeln mit Strukturgruppe bzgl abgeschlossener Untergruppe}
 Ist $E \rightarrow M$ ein Faserbündel mit Strukturgruppe $G$ und $G_{0} \subseteq G$ eine abgeschlossene Untergruppe. Dann sagt man: $E$ besitzt eine Reduktion auf $G_{0}$ oder eine $G_{0}$-Bündelstruktur, falls es einen Bündelatlas gibt, dessen Bündelkartenwechsel Werte in $G_{0}$ annehmen.
 \end{DEF}
 
 \subsection*{1.31 Beispiel}
-\begin{EXA}{EFT1-K25a-02-64}{Charakterisierung von orientierten Mfk}
+\begin{EXA}{BÜN-K25a-02-64}{Charakterisierung von orientierten Mfk}
 $M$ ist genau dann orientierbar, wenn $T M$ eine $G L^{+}(n, \mathbb{R})$-Bündelstruktur hat. (Übungsaufgabe)
 \end{EXA}
 
@@ -745,12 +765,17 @@ Die folgenden beiden Sätze geben oft eine einfache Möglichkeit zu entscheiden,
 
 \subsection*{1.32 Satz (Ehresmannscher Faserungssatz)}
 
-\begin{PROP}{EFT1-K25a-02-65}{Ehresmannscher Faserungssatz: Totalräume mit eigentlich regulären Abbildungen in zusammenhängenden Basisraum implizieren eine lokale triviale Faserung}
+\begin{PROP}{BÜN-K25a-02-65}{Ehresmannscher Faserungssatz: Totalräume mit eigentlich regulären Abbildungen in zusammenhängenden Basisraum implizieren eine lokale triviale Faserung}
 Ist $X$ zusammenhängend, $p: E \rightarrow X$ eine eigentliche reguläre Abbildung, so ist $E$ eine lokal triviale Faserung.
 \end{PROP}
 
 \subsection*{1.33 Satz (von Hermann)}
+
+\begin{PROP}{BÜN-K25a-02-66}{Satz von Hermann für vollständige zusammenhängende Riemannische Mannigfaltigkeiten}
 Ist ( $M, g$ ) vollständig und $\tilde{M}$ zusammenhängend, dann ist jede Riemannsche Submersion $\pi: M \rightarrow \tilde{M}$ ein Faserbündel.
+\end{PROP}
+
+
 
 \subsection*{1.34 Übungsaufgaben}
 \begin{enumerate}
