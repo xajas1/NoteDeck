@@ -376,6 +376,23 @@ import React, {
   return () => window.removeEventListener("keydown", listener)
 }, [handleSubmit])
 
+useEffect(() => {
+  const listener = (e) => {
+    if (e.metaKey && e.shiftKey && e.key === ":") {
+      e.preventDefault()
+      if (contentInputRef.current) {
+        contentInputRef.current.focus()
+        contentInputRef.current.select()
+      }
+    }
+  }
+
+  window.addEventListener("keydown", listener)
+  return () => window.removeEventListener("keydown", listener)
+}, [])
+
+
+
 
 
   
