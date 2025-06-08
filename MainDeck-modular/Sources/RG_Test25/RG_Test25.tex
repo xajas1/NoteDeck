@@ -1617,6 +1617,7 @@ Behauptung: Dies ist eine Zusammenhangsform eines $S^{1}$-Zusammenhangs, denn\\
 (b) $R_{g}^{*} \omega=\operatorname{Ad}\left(g^{-1}\right) \omega$ für alle $g \in S^{1}$.
 
 \section*{Beweis:}
+\begin{CTypEnum.PROP}{TEST-T25-01-35}{TESTExample 34024}
 (a) Es ist $T_{p}^{\prime} S^{3}=\mathbb{R} i p$ und $\omega_{p}(i p)=i<i p, i p>=i=d L_{p}^{-1}(i p)$.\\
 (b) $R_{e^{i t}}^{*} \omega_{p}(Y)=\omega_{p e^{i t}}\left(d R_{e^{i t}} Y\right)=i<e^{i t} Y, i e^{i t} p>=i<Y$, ip >= $\left.\omega_{p}(Y)=\operatorname{Ad}\left(e^{i t}\right) \omega_{p}(Y)\right)$.\\
 Also ist $\omega$ eine Zusammenhangsform eines $S^{1}$-Zusammenhangs. Es ist
@@ -1624,8 +1625,10 @@ Also ist $\omega$ eine Zusammenhangsform eines $S^{1}$-Zusammenhangs. Es ist
 $$
 H_{e_{1}}=\left\{y \in 0 \times \mathbb{R}^{3} \mid<y, e_{2}>=0\right\}=0 \times R^{2}
 $$
+\end{CTypEnum.PROP}
 
 \subsection*{6.22 Definition}
+\begin{CTypEnum.LEM}{TEST-T25-01-36}{TESTExample 340248}
 Sei $\omega \in \Omega^{1}(P, \mathfrak{g})$ die $G$-Zusammenhangsform eines $G$-Zusammenhangs, $s \in$ $\Gamma(P \mid U)$, so heißt $s^{*} \omega$ Beschreibung des Zusammenhangs mittels $s$ oder lokale Zusammenhangsform bezüglich $s$.
 
 \subsection*{6.23 Lemma}
@@ -1634,8 +1637,10 @@ Sind $s, \tilde{s} \in \Gamma(P \mid U)$ lokale Schnitte, $\tilde{s}(x)=s(x) g(x
 $$
 \tilde{s}^{*} \omega=\operatorname{Ad}\left(g^{-1}\right) s^{*} \omega+g^{-1} d g
 $$
+\end{CTypEnum.LEM}
 
 \section*{Beweis:}
+\begin{CTypEnum.REM}{TEST-T25-01-37}{TESTExample 3402489}
 Sei $v \in T_{x} M$ und $\gamma$ repräsentierende Kurve, also $\gamma(0)=x, \dot{\gamma}(0)=v$. Sei $g(\gamma(0))=g_{0}$, also $\tilde{s}(x)=s(x) g_{0}$. Dann ist
 
 $$
@@ -1656,8 +1661,10 @@ da
 $$
 d L_{\tilde{s}(x)} d\left(g_{0}^{-1} g\right)_{x}(v) \in T_{\tilde{s}(x)}^{\prime} P \text { für } v \in T_{x} M
 $$
+\end{CTypEnum.REM}
 
 \subsection*{6.24 Bemerkung}
+\begin{CTypEnum.CONC}{TEST-T25-01-38}{TESTExample 34024899}
 Sei $\left\{\left(U_{\alpha}, \varphi_{\alpha}\right) \mid \alpha \in \Lambda\right\}$ ein Bündelatlas für $P$. Seien $s_{\alpha}$ die durch $\varphi_{\alpha}$ gegebenen Schnitte mit $s_{\beta}=: s_{\alpha} g_{\alpha \beta}$ auf $U_{\alpha} \cap U_{\beta}$ und ist für jedes $\alpha \in \Lambda$ eine 1-Form $A_{\alpha} \in \Omega^{1}\left(U_{\alpha}, \mathfrak{g}\right)$ gegeben, sodass auf $U_{\alpha} \cap U_{\beta}$ gilt:
 
 $$
@@ -1665,8 +1672,10 @@ A_{\beta}=\operatorname{Ad}\left(g_{\alpha \beta}\right)^{-1} A_{\alpha}+g_{\alp
 $$
 
 so beschreiben die $A_{\alpha}$ einen $G$-Zusammenhang auf $P$.
+\end{CTypEnum.CONC}
 
 \section*{Beweis:}
+\begin{CTypEnum.EXA}{TEST-T25-01-39}{TESTExample 340248998}
 Sei $X \in T_{s_{\alpha}(x)} P$ Definiere
 
 $$
@@ -1674,8 +1683,10 @@ $$
 $$
 
 Für $X \in T_{s_{\alpha}(x) g} P$ setze $\omega_{s_{\alpha}(x) g}(X)=\operatorname{Ad}\left(g^{-1}\right) \omega_{s_{\alpha}(x)}\left(d R_{g^{-1}}(X)\right)$. Dann ist $s_{\alpha}^{*} \omega=A_{\alpha}$ und $\omega_{\alpha}$ eine $G$-Zusammenhangsform. Wegen Lemma 6.23 ist $\omega \mid \pi^{-1}\left(U_{\alpha}\right)$ unabhängig von der Wahl der Karte ( $U_{\alpha}, \varphi_{\alpha}$ ).
+\end{CTypEnum.EXA}
 
 \subsection*{6.25 Aufgabe}
+\begin{CTypEnum.DEF}{TEST-T25-01-40}{TESTExample 340248998a}
 Es sei $P \xrightarrow{\pi} M$ ein $G$-Prinzipalfaserbündel mit einem $G$-Zusammenhang. Für $u \in P$ bezeichne $P(u) \subset P$ die Menge der Punkte, die man mit $u$ durch eine (stückweise differenzierbare) Horizontalkurve verbinden kann, und es sei
 
 $$
@@ -1686,6 +1697,7 @@ Man zeige, dass $\operatorname{Hol}(u)$ eine Untergruppe von $G$ ist.
 
 \subsection*{6.26 Aufgabe}
 Es werde vorausgesetzt, dass $\operatorname{Hol}(u) \subset G$ abgeschlossen ist (in der Tat ist das immer der Fall). Man zeige, dass $P(u) \subset P$ eine Reduktion der Strukturgruppe von $P$ auf $\operatorname{Hol}(u)$ definiert.
+\end{CTypEnum.DEF}
 
 
 \end{document}

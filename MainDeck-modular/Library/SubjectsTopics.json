@@ -687,6 +687,13 @@
         "litIDs": {
           "B14": "KNO-B14-4"
         }
+      },
+      "Homotopieinvarianz und Homologie": {
+        "index": 5,
+        "parent": null,
+        "litIDs": {
+          "B14": "KNO-B14-5"
+        }
       }
     }
   },
@@ -771,6 +778,13 @@
         "parent": null,
         "litIDs": {
           "H09": "AT-H09-4"
+        }
+      },
+      "Homotopieinvarianz und Homologie": {
+        "index": 5,
+        "parent": null,
+        "litIDs": {
+          "H09": "AT-H09-5"
         }
       }
     }

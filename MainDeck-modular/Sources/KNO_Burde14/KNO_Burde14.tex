@@ -713,7 +713,81 @@ $V=V(\mathfrak{k})$ denotes a tubular neighborhood of the knot $\mathfrak{k}$ an
 3.1 Theorem (Homological properties).
 
 
+\begin{DEF}{KNO-B14-02-33}{Komplement des Knoten}
 $V=V(\mathfrak{k})$ denotes a tubular neighborhood of the knot $\mathfrak{k}$ and $C=\overline{S^{3}-V}$ is called the complement of the knot. $H_{j}$ will denote the (singular) homology with coefficients in $\mathbb{Z}$.
+\end{DEF}
+
+
+
+\begin{PROP}{KNO-B14-04-03}{Homologie des Knotenkomplements}
+Let \( C = \overline{S^3 \setminus V} \) be the complement of the knot. We consider singular homology with integer coefficients, i.e., \( H_j = H_j(-; \mathbb{Z}) \). Then:
+\[
+H_j(C) \cong
+\begin{cases}
+\mathbb{Z} & \text{if } j = 0 \text{ or } j = 1, \\
+0 & \text{otherwise}.
+\end{cases}
+\]
+\end{PROP}
+
+Proof.
+
+\begin{PROOF}{KNO-B14-04-04}{Homologie des Knotenkomplements}
+Here we present one based on homological methods. We use the following well-known results:
+$$
+H_{n}\left(S^{3}\right)= \begin{cases}\mathbb{Z} & \text { for } n=0,3 \\ 0 & \text { otherwise }\end{cases}
+$$
+$$
+\begin{aligned}
+H_{n}(\partial V) & = \begin{cases}\mathbb{Z} & \text { for } n=0,2 \\
+\mathbb{Z} \oplus \mathbb{Z} & \text { for } n=1, \\
+0 & \text { otherwise, }\end{cases} \\
+H_{n}(V)=H_{n}\left(S^{1}\right)= & \begin{cases}\mathbb{Z} & \text { for } n=0,1, \\
+0 & \text { otherwise; }\end{cases}
+\end{aligned}
+$$
+they can be found in standard books on algebraic topology, see Spanier [341], StöckerZieschang [346], Hatcher [157].
+
+Since $C$ is connected, $H_{0}(C)=\mathbb{Z}$. For further calculations we use the MayerVietoris sequence of the pair ( $V, C$ ) where $V \cup C=S^{3}, V \cap C=\partial V$ :
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+H_3(\partial V) \arrow[r] \arrow[d, equal] 
+  & H_3(V) \arrow[r, phantom, "\oplus"] \arrow[d, equal] 
+  & H_3(C) \arrow[r] 
+  & H_3(S^3) \arrow[r] \arrow[d, "\cong", "\mathbb{Z}"']
+  & H_2(\partial V) \arrow[r] \arrow[d, "\cong", "\mathbb{Z}"'] 
+  & {} \\
+0 & 0 & {} & \mathbb{Z} & \mathbb{Z} & {}
+\end{tikzcd}
+\]
+
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+{} \arrow[r]
+  & H_2(V) \arrow[r, phantom, "\oplus"] \arrow[d, equal]
+  & H_2(C) \arrow[r] 
+  & H_2(S^3) \arrow[r] \arrow[d, equal]
+  & H_1(\partial V) \arrow[r] \arrow[d, "\cong"]
+  & {} \\
+{} & 0 & {}& 0 & \mathbb{Z} \oplus \mathbb{Z} & {}
+\end{tikzcd}
+\]
+
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+{} \arrow[r] 
+  & H_1(V) \arrow[r, phantom, "\oplus"] \arrow[d, "\cong"] & H_1(C) \arrow[r]
+  & H_1(S^3) \arrow[d, equal] \\
+{} & \mathbb{Z} & {} & 0
+\end{tikzcd}
+\]
+It follows that $H_{1}(C)=\mathbb{Z}$. Since $\partial V$ is the boundary of the orientable compact 3manifold $C$, the group $H_{2}(\partial V)$ is mapped by the inclusion $\partial V \hookrightarrow C$ to $0 \in H_{2}(C)$. This implies that $H_{2}(C)=0$ and that $H_{3}\left(S^{3}\right) \rightarrow H_{2}(\partial V)$ is surjective; hence, $H_{3}(C)=0$.
+
+
+Since $C$ is a 3-manifold it follows that $H_{n}(C)=0$ for $n>3$; this is also a consequence of the Mayer-Vietoris sequence.
+\end{PROOF}
+
+
 
 
 \begin{PROP}{KNO-B14-04-01}{Homologische Eigenschaften von tabuieren Umgebungen von Knoten}
@@ -754,10 +828,42 @@ H_{n}(V)=H_{n}\left(S^{1}\right)= & \begin{cases}\mathbb{Z} & \text { for } n=0,
 $$
 they can be found in standard books on algebraic topology, see Spanier [341], StöckerZieschang [346], Hatcher [157].
 
-Since $C$ is connected, $H_{0}(C)=\mathbb{Z}$. For further calculations we use the MayerVietoris sequence of the pair ( $V, C$ ) where $V \cup C=S^{3}, V \cap C=\partial V$ :\\
-\includegraphics[scale=0.2, center]{2025_05_21_9c06be8de7a55410f8c1g-045}
+Since $C$ is connected, $H_{0}(C)=\mathbb{Z}$. For further calculations we use the MayerVietoris sequence of the pair ( $V, C$ ) where $V \cup C=S^{3}, V \cap C=\partial V$ :
 
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+H_3(\partial V) \arrow[r] \arrow[d, equal] 
+  & H_3(V) \arrow[r, phantom, "\oplus"] \arrow[d, equal] 
+  & H_3(C) \arrow[r] 
+  & H_3(S^3) \arrow[r] \arrow[d, "\cong", "\mathbb{Z}"']
+  & H_2(\partial V) \arrow[r] \arrow[d, "\cong", "\mathbb{Z}"'] 
+  & {} \\
+0 & 0 & {} & \mathbb{Z} & \mathbb{Z} & {}
+\end{tikzcd}
+\]
+
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+{} \arrow[r]
+  & H_2(V) \arrow[r, phantom, "\oplus"] \arrow[d, equal]
+  & H_2(C) \arrow[r] 
+  & H_2(S^3) \arrow[r] \arrow[d, equal]
+  & H_1(\partial V) \arrow[r] \arrow[d, "\cong"]
+  & {} \\
+{} & 0 & {}& 0 & \mathbb{Z} \oplus \mathbb{Z} & {}
+\end{tikzcd}
+\]
+
+\[
+\begin{tikzcd}[row sep=small, column sep=small]
+{} \arrow[r] 
+  & H_1(V) \arrow[r, phantom, "\oplus"] \arrow[d, "\cong"] & H_1(C) \arrow[r]
+  & H_1(S^3) \arrow[d, equal] \\
+{} & \mathbb{Z} & {} & 0
+\end{tikzcd}
+\]
 It follows that $H_{1}(C)=\mathbb{Z}$. Since $\partial V$ is the boundary of the orientable compact 3manifold $C$, the group $H_{2}(\partial V)$ is mapped by the inclusion $\partial V \hookrightarrow C$ to $0 \in H_{2}(C)$. This implies that $H_{2}(C)=0$ and that $H_{3}\left(S^{3}\right) \rightarrow H_{2}(\partial V)$ is surjective; hence, $H_{3}(C)=0$.
+
 
 Since $C$ is a 3-manifold it follows that $H_{n}(C)=0$ for $n>3$; this is also a consequence of the Mayer-Vietoris sequence.
 
@@ -769,6 +875,9 @@ in the Mayer-Vietoris sequence. The generators of $H_{1}(V) \cong \mathbb{Z}$ an
 
 Since $\ell \sim 0$ in $C, \ell$ bounds a surface, possibly with singularities, in $C$. (As we already know, see Proposition 2.4, $\ell$ even spans a surface without singularities: a Seifert surface.)
 \end{PROOF}
+
+
+
 
 Theorem 3.1 can be generalized to links (E 3.2). The negative aspect of the theorem is that complements of knots cannot be distinguished by their homological properties.\\
 
