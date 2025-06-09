@@ -234,5 +234,35 @@
     "tableMeta": {
       "selectedSource": "AT_Haller09/AT_Haller09.tex"
     }
+  },
+  "QM_G25": {
+    "sourceFile": "QM_Gros25/QM_Gros25.tex",
+    "snipMeta": {
+      "Subject": "QM",
+      "Topic": "",
+      "LitID": "G25",
+      "CTyp": "DEF",
+      "ParentTopic": "",
+      "Content": "",
+      "selectedProject": "QM_Gros25/QM_Gros25.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "QM_Gros25/QM_Gros25.tex"
+    }
+  },
+  "KNO_F12": {
+    "sourceFile": "KNO_Friedl12/KNO_Friedl12.tex",
+    "snipMeta": {
+      "Subject": "KNO",
+      "Topic": "Wirtinger Präsentation",
+      "LitID": "F12",
+      "CTyp": "THEO",
+      "ParentTopic": "",
+      "Content": "Gordon–Luecke Theorem 1989",
+      "selectedProject": "KNO_Friedl12/KNO_Friedl12.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "KNO_Friedl12/KNO_Friedl12.tex"
+    }
   }
 }

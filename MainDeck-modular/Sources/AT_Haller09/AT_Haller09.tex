@@ -2378,7 +2378,7 @@ eine wohldefinierte Abbildung, sie wird der (erste) Hurewicz-Homomorphismus gena
 
 
 
-\begin{CONC}{AT-H09-05-07}{Herleitung der Hurewicz-Abbildung}
+\begin{CONC}{AT-H09-02-04}{Herleitung der Hurewicz-Abbildung}
 Es sei $n \geq 1$. Nach Satz IV.9.5 ist $H_n\left(S^n\right) \cong \mathbb{Z}$, die Gruppe $H_n\left(S^n\right)$ besitzt daher zwei Erzeuger. Wir fixieren einen dieser Erzeuger $\alpha_n \in H_n\left(S^n\right)$, nämlich den aus Proposition IV.9.9, und bezeichnen ihn von nunan als den Standarderzeuger von $H^n\left(S^n\right)$.
 
 Ist $\sigma: S^n \rightarrow X$ eine stetige Abbildung so erhalten wir eine Homologieklasse $\sigma_*\left(\alpha_n\right) \in H_n(X)$. Nach Korollar IV.7.5 hängt diese Homotopieklasse nur von der Homotopieklasse von $\sigma$ ab, die Konstruktion liefert daher eine wohldefinierte Abbildung
@@ -2412,7 +2412,7 @@ In der nachfolgenden Proposition werden wir zeigen, dass dies tatsächlich ein G
 
 IV.11.1. Lemma. 
 
-\begin{LEM}{AT-H09-05-08}{Diagonalabbildung und Inklusionsstruktur in $H_1\left(S^1 \vee S^1\right)$}
+\begin{LEM}{AT-H09-02-05}{Diagonalabbildung und Inklusionsstruktur in $H_1\left(S^1 \vee S^1\right)$}
 Die Abbildung $\mu: S^1 \longrightarrow S^1 \vee S^1$ induzierten den Homomorphismus $\mu_*: H_1(S^1) \longrightarrow H_1(S^1 \vee S^1)$. Für $\alpha \in H_1\left(S^1\right)$ gilt $\mu_*(\alpha)=\left(\iota_1\right)_*(\alpha)+\left(\iota_2\right)_*(\alpha)$, wobei $\iota_1, \iota_2: S^1 \rightarrow S^1 \vee S^1$ die beiden kanonischen Inklusionen bezeichnen. In anderen Worten, das folgende Diagramm kommutiert:
 \[
 \begin{tikzcd}
@@ -2429,7 +2429,7 @@ den von den beiden Inklusionen $\iota_1, \iota_2: S^1 \rightarrow S^1 \vee S^1$ 
 
 Beweis. 
 
-\begin{PROOF}{AT-H09-05-09}{P: Diagonalabbildung und Inklusionsstruktur in $H_1\left(S^1 \vee S^1\right)$}
+\begin{PROOF}{AT-H09-02-06}{P: Diagonalabbildung und Inklusionsstruktur in $H_1\left(S^1 \vee S^1\right)$}
 Wir betrachten die beiden Abbildungen $p_1, p_2: S^1 \vee S^1 \rightarrow S^1$, die durch $p_1 \circ \iota_1=\operatorname{id}_{S^1}=p_2 \circ \iota_2$ und $p_2 \circ \iota_1=c=p_1 \circ \iota_2$ vollständig bestimmt sind. Dabei bezeichnet $c: S^1 \rightarrow S^1, c(z):=1$, die konstante Abbildung. Es gilt daher $\left(p_1\right)_* \circ\left(\iota_1\right)_*=\operatorname{id}_{H_1\left(S^1\right)}=\left(p_2\right)_* \circ\left(\iota_2\right)_*$ sowie $\left(p_2\right)_* \circ\left(\iota_1\right)_*=0=\left(p_1\right)_* \circ\left(\iota_2\right)_*$. Aus diesen Relationen sehen wir, dass
 $$
 \left(\left(p_1\right)_*,\left(p_2\right)_*\right): H_1\left(S^1 \vee S^1\right) \stackrel{\cong}{\rightrightarrows} H_1\left(S^1\right) \oplus H_1\left(S^1\right)
@@ -2443,7 +2443,7 @@ invers zu dem von den Inklusionen induzierten Isomorphismus $\left(\iota_1\right
 IV.11.2. Proposition (Hurewicz-Homomorphismus). 
 
 
-\begin{PROP}{AT-H09-05-10}{Hurewicz-Abbildung ist ein natürlicher Homomorphismus}
+\begin{PROP}{AT-H09-02-07}{Hurewicz-Abbildung ist ein natürlicher Homomorphismus}
 Ist $(X, x_0)$ ein punktierter Raum, dann definiert 
 $$h_1=h_1^{\left(X, x_0\right)}: \pi_1\left(X, x_0\right) \rightarrow H_1(X), \quad h_1([\sigma]):=\sigma_*\left(\alpha_1\right)$$
 einen Gruppenhomomorphismus. Dieser Homomorphismus ist natürlich, dh. das Diagramm
@@ -2467,7 +2467,7 @@ Für jeden Weg $h: I \rightarrow X$ von $h(0)=x_0$ nach $h(1)=x_1$ ist darüber 
 
 Beweis. 
 
-\begin{PROOF}{AT-H09-05-11}{P: Hurewicz-Abbildung ist ein natürlicher Homomorphismus}
+\begin{PROOF}{AT-H09-02-08}{P: Hurewicz-Abbildung ist ein natürlicher Homomorphismus}
 Sind $\sigma_1, \sigma_2: I \rightarrow X$ zwei Schleifen bei $x_0$, dann folgt aus Lemma IV.11.1(iv)
 $$
 h_1\left(\left[\sigma_1\right]\left[\sigma_2\right]\right)=h_1\left(\left[\sigma_1 \sigma_2\right]=\left[\left(\sigma_1 \sigma_2\right)^{\sim}\right]=\left[\tilde{\sigma}_1\right]+\left[\tilde{\sigma}_2\right]=h_1\left(\left[\sigma_1\right]\right)+h_1\left(\left[\sigma_2\right]\right),\right.
@@ -2492,7 +2492,7 @@ wobei wir Lemma IV.11.1(iv) und (v) verwendet haben.
 
 Beweis. 
 
-\begin{PROOF}{AT-H09-01-12}{P: Hurewicz-Abbildung ist ein natürlicher Homomorphismus 2}
+\begin{PROOF}{AT-H09-02-11}{P: Hurewicz-Abbildung ist ein natürlicher Homomorphismus 2}
 Sind $\sigma_1, \sigma_2: I \rightarrow X$ zwei Schleifen bei $x_0$, dann folgt aus Lemma IV.11.1(iv)
 $$
 h_1\left(\left[\sigma_1\right]\left[\sigma_2\right]\right)=h_1\left(\left[\sigma_1 \sigma_2\right]=\left[\left(\sigma_1 \sigma_2\right)^{\sim}\right]=\left[\tilde{\sigma}_1\right]+\left[\tilde{\sigma}_2\right]=h_1\left(\left[\sigma_1\right]\right)+h_1\left(\left[\sigma_2\right]\right),\right.
@@ -2522,7 +2522,7 @@ wobei wir Lemma IV.11.1(iv) und (v) verwendet haben.
 IV.11.3. Satz (Hurewicz-Isomorphismus). 
 
 
-\begin{PROP}{AT-H09-05-12}{Hurewicz-Homomorphismus induziert einen Isomorphismus für abelisierte Fundamentalgruppe für WZSH punktierte Räume}
+\begin{PROP}{AT-H09-02-09}{Hurewicz-Homomorphismus induziert einen Isomorphismus für abelisierte Fundamentalgruppe für WZSH punktierte Räume}
 Es sei $(X, x_0)$ ein wegzusammenhängender punktierter Raum. Dann ist der Hurewicz-Homomorphismus 
 $$\tilde{h}_n=\tilde{h}_n^X:\left[S^n, X\right] \rightarrow H_n(X), \quad \tilde{h}_n([\sigma]):=\sigma_*\left(\alpha_n\right)$$
 surjektiv und sein Kern stimmt mit der Kommutatoruntergruppe von $\pi_1\left(X, x_0\right)$ überein. Er induziert daher einen Isomorphismus $\pi_1\left(X, x_0\right)_{\mathrm{ab}} \cong H_1(X)$.
@@ -2531,7 +2531,7 @@ surjektiv und sein Kern stimmt mit der Kommutatoruntergruppe von $\pi_1\left(X, 
 
 Beweis. 
 
-\begin{PROOF}{AT-H09-05-13}{P: Hurewicz-Homomorphismus induziert einen Isomorphismus für abelisierte Fundamentalgruppe für WZSH punktierte Räume}
+\begin{PROOF}{AT-H09-02-10}{P: Hurewicz-Homomorphismus induziert einen Isomorphismus für abelisierte Fundamentalgruppe für WZSH punktierte Räume}
 Da $H_1(X)$ abelsch ist, induziert (IV.43) einen Homomorphismus
 $$
 h_1: \pi_1\left(X, x_0\right)_{\mathrm{ab}} \rightarrow H_1(X)

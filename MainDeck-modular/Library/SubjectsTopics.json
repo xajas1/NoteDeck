@@ -213,144 +213,6 @@
       }
     }
   },
-  "QM": {
-    "index": 6,
-    "topics": {
-      "Schrödinger Gleichung": {
-        "index": 1,
-        "parent": null,
-        "litIDs": {
-          "G25": "QM-G25-01"
-        }
-      },
-      "Wellenpakete in QM": {
-        "index": 2,
-        "parent": "Schrödinger Gleichung",
-        "litIDs": {
-          "G25": "QM-G25-02"
-        }
-      },
-      "Herleitung für freie Teilchen": {
-        "index": 3,
-        "parent": "Einführung der Schrödinger Gleichung",
-        "litIDs": {
-          "G25": "QM-G25-03"
-        }
-      },
-      "Teilchen in äußeren Potentialen": {
-        "index": 4,
-        "parent": "Einführung der Schrödinger Gleichung",
-        "litIDs": {
-          "G25": "QM-G25-04"
-        }
-      },
-      "Operatoren": {
-        "index": 5,
-        "parent": "Einführung der Schrödinger Gleichung",
-        "litIDs": {
-          "G25": "QM-G25-05"
-        }
-      },
-      "Korrespondenz Prinzip": {
-        "index": 6,
-        "parent": "Einführung der Schrödinger Gleichung",
-        "litIDs": {
-          "G25": "QM-G25-06"
-        }
-      },
-      "Wahrscheinlichkeitsdichte": {
-        "index": 7,
-        "parent": "Interpretation der Wellenfunktion",
-        "litIDs": {
-          "G25": "QM-G25-07"
-        }
-      },
-      "Kontinuitätsgleichung": {
-        "index": 8,
-        "parent": "Interpretation der Wellenfunktion",
-        "litIDs": {
-          "G25": "QM-G25-08"
-        }
-      },
-      "Impulsraum": {
-        "index": 9,
-        "parent": "Interpretation der Wellenfunktion",
-        "litIDs": {
-          "G25": "QM-G25-09"
-        }
-      },
-      "Erwartungswert": {
-        "index": 10,
-        "parent": "Interpretation der Wellenfunktion",
-        "litIDs": {
-          "G25": "QM-G25-10"
-        }
-      },
-      "Beugung und Inferenz": {
-        "index": 11,
-        "parent": "Interpretation der Wellenfunktion",
-        "litIDs": {
-          "G25": "QM-G25-11"
-        }
-      },
-      "Hermitisch konjugierte Operatoren": {
-        "index": 12,
-        "parent": "Ehrenfest Theorem",
-        "litIDs": {
-          "G25": "QM-G25-12"
-        }
-      },
-      "Bewegungsgleichung für Erwartungswert": {
-        "index": 13,
-        "parent": "Ehrenfest Theorem",
-        "litIDs": {
-          "G25": "QM-G25-13"
-        }
-      },
-      "Quasiklassische Bewegung": {
-        "index": 14,
-        "parent": "Ehrenfest Theorem",
-        "litIDs": {
-          "G25": "QM-G25-14"
-        }
-      },
-      "Stationäre Schrödinger Gleichung": {
-        "index": 15,
-        "parent": "Eindimensionale Systeme",
-        "litIDs": {
-          "G25": "QM-G25-15"
-        }
-      },
-      "Eindimensionale Potentialstufe": {
-        "index": 16,
-        "parent": "Eindimensionale Systeme",
-        "litIDs": {
-          "G25": "QM-G25-16"
-        }
-      },
-      "Streuzustände": {
-        "index": 17,
-        "parent": "Eindimensionale Potentialstufe",
-        "litIDs": {
-          "G25": "QM-G25-17"
-        }
-      },
-      "Reflektierte Zustände": {
-        "index": 18,
-        "parent": "Eindimensionale Potentialstufe",
-        "litIDs": {
-          "G25": "QM-G25-18"
-        }
-      },
-      "QM-ÜB-01: Delta-Distribution, Kommutator und W-keit": {
-        "index": 19,
-        "parent": "QM-ÜB",
-        "litIDs": {
-          "G25": "QM-G25-19"
-        }
-      }
-    }
-  },
   "QMS": {
     "index": 7,
     "topics": {
@@ -785,6 +647,137 @@
         "parent": null,
         "litIDs": {
           "H09": "AT-H09-5"
+        }
+      }
+    }
+  },
+  "QM": {
+    "index": 16,
+    "topics": {
+      "Schrödingergleichung Grundlagen": {
+        "index": 1,
+        "parent": null,
+        "litIDs": {
+          "G25": "QM-G25-1"
+        }
+      },
+      "Wellenpakete": {
+        "index": 2,
+        "parent": null,
+        "litIDs": {
+          "G25": "QM-G25-2"
+        }
+      },
+      "Herleitung für freie Teilchen": {
+        "index": 3,
+        "parent": "Schrödinger-Gleichung Grundlagen",
+        "litIDs": {
+          "G25": "QM-G25-3"
+        }
+      },
+      "Teilchen im äußeren Potential": {
+        "index": 4,
+        "parent": "Schrödinger-Gleichung Grundlagen",
+        "litIDs": {
+          "G25": "QM-G25-4"
+        }
+      },
+      "Operatoren in der Quantenmechanik": {
+        "index": 5,
+        "parent": null,
+        "litIDs": {
+          "G25": "QM-G25-5"
+        }
+      },
+      "Ringe Basics": {
+        "index": 6,
+        "parent": "Ringe",
+        "litIDs": {
+          "G25": "QM-G25-6"
+        }
+      },
+      "Korrespondenzprinzip": {
+        "index": 7,
+        "parent": "Schrödinger-Gleichung Grundlagen",
+        "litIDs": {
+          "G25": "QM-G25-7"
+        }
+      },
+      "Wahrscheinlichkeitsdichte": {
+        "index": 8,
+        "parent": "Interpretation der Wellenfunktion",
+        "litIDs": {
+          "G25": "QM-G25-8"
+        }
+      },
+      "Impulsraum": {
+        "index": 9,
+        "parent": "Interpretation der Wellenfunktion",
+        "litIDs": {
+          "G25": "QM-G25-9"
+        }
+      },
+      "Erwartungswerte": {
+        "index": 10,
+        "parent": "Interpretation der Wellenfunktion",
+        "litIDs": {
+          "G25": "QM-G25-10"
+        }
+      },
+      "Beugung und Interferenz": {
+        "index": 11,
+        "parent": "Interpretation der Wellenfunktion",
+        "litIDs": {
+          "G25": "QM-G25-11"
+        }
+      },
+      "Eindimensionale Systeme": {
+        "index": 12,
+        "parent": "Stationäre 1d Schrödinger-Gleichung",
+        "litIDs": {
+          "G25": "QM-G25-12"
+        }
+      },
+      "Eindimensionale Potentialstufe": {
+        "index": 13,
+        "parent": "Stationäre 1d Schrödinger-Gleichung",
+        "litIDs": {
+          "G25": "QM-G25-13"
+        }
+      },
+      "Potentialbarriere": {
+        "index": 14,
+        "parent": "Stationäre 1d Schrödinger-Gleichung",
+        "litIDs": {
+          "G25": "QM-G25-14"
+        }
+      },
+      "Unendlich tiefer Potentialtopf": {
+        "index": 15,
+        "parent": "Stationäre 1d Schrödinger-Gleichung",
+        "litIDs": {
+          "G25": "QM-G25-15"
+        }
+      },
+      "Potentialtopf mit endlicher Tiefe": {
+        "index": 16,
+        "parent": "Stationäre 1d Schrödinger-Gleichung",
+        "litIDs": {
+          "G25": "QM-G25-16"
+        }
+      },
+      "Paritätsoperator": {
+        "index": 17,
+        "parent": "Stationäre 1d Schrödinger-Gleichung",
+        "litIDs": {
+          "G25": "QM-G25-17"
+        }
+      },
+      "Harmonischer Oszillator": {
+        "index": 18,
+        "parent": null,
+        "litIDs": {
+          "G25": "QM-G25-18"
         }
       }
     }

@@ -46,6 +46,7 @@
 
 % --- 5. Diagramme und Grafiken ---
 \usepackage{graphicx}
+\graphicspath{{../../Images/}}
 \usepackage{tikz}
 \usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
 \usepackage{tikz-cd}
@@ -386,7 +387,7 @@ K. Reidemeister [294] gave an elementary introduction into knot theory stressing
 1.9 Definition ($\Delta$-move). 
 
 Let $u$ be a straight segment of a polygonal knot $\mathfrak{k}$ in $\mathbb{R}^{3}$ (or $S^{3}$ ), and $D$ a triangle in $\mathbb{R}^{3}, \partial D=u \cup v \cup w, u, v, w$ 1-faces of $D$. If $D \cap \mathfrak{k}=u$, then $\mathfrak{k}^{\prime}=(\mathfrak{k}-u) \cup v \cup w$ defines another polygonal knot. We say $\mathfrak{k}^{\prime}$ results from $\mathfrak{k}$ by a $\Delta$-process or a $\Delta$-move. If $\mathfrak{k}$ is oriented, $\mathfrak{k}^{\prime}$ has to carry the orientation induced by that of $\mathfrak{k}-u$. The inverse process is denoted by $\Delta^{-1}$ (see Figure 1.5).\\
-\includegraphics[scale=0.2, center]{2025_05_21_9c06be8de7a55410f8c1g-021}
+\includegraphics[scale=0.2]{2025_05_21_9c06be8de7a55410f8c1g-021}
 
 Figure 1.5. A $\Delta$-move.
 
@@ -403,7 +404,7 @@ Let $\mathfrak{k}_{0}$ and $\mathfrak{k}_{1}$ be two polygonal knots in $\mathbb
 Proof. The equivalence (1) $\Longleftrightarrow$ (2) follows from the proof of Proposition 1.8.\\
 Next we prove (1) $\Longrightarrow$ (3): Let $h: S^{3} \rightarrow S^{3}$ be an orientation preserving homeomorphism and $\mathfrak{K}_{1}=h\left(\mathfrak{K}_{0}\right)$. The preceding argument (see the proof of Proposition 1.8) shows that there is another orientation preserving homeomorphism $g: S^{3} \rightarrow S^{3}$, $g\left(\mathfrak{F}_{0}\right)=\mathfrak{F}_{0}$, such that $h g$ leaves fixed some 3 -simplex $\left[s^{3}\right]$ which will have to be chosen outside a regular neighborhood of $\mathfrak{k}_{0}$ and $\mathfrak{k}_{1}$. For an interior point $P$ of $\left[s^{3}\right]$ consider $S^{3}-\{P\}$ as Euclidean 3-space $\mathbb{R}^{3}$. There is a translation $\tau$ of $\mathbb{R}^{3}$, which moves $\mathfrak{K}_{0}$ into $\left[s^{3}\right]-\{P\}$. It is easy to prove that $\mathfrak{K}_{0}$ and $\tau\left(\mathfrak{K}_{0}\right)$ are isotopic by moves (see Figure 1.6). We claim that $\mathfrak{K}_{1}=h g\left(\mathfrak{K}_{0}\right)$ and $h g \tau\left(\mathfrak{K}_{0}\right)=\tau\left(\mathfrak{K}_{0}\right)$ are isotopic by moves also, which would complete the proof. Choose a subdivision of the triangulation of $S^{3}$ such that the triangles used in the isotopy by moves between $\mathfrak{K}_{0}$ and $\tau\left(\mathfrak{K}_{0}\right)$ form a subcomplex of $S^{3}$. There is an isotopy by moves $\mathfrak{F}_{0} \rightarrow \tau\left(\mathfrak{F}_{0}\right)$ which is defined on the triangles of the subdivision. $h g: S^{3} \rightarrow S^{3}$ maps the subcomplex onto another one carrying over the isotopy by moves (see Graeub [139, 140]).\\
 $(3) \Longrightarrow(1)$. It is not difficult to construct a homeomorphism of $S^{3}$ onto itself which realizes a $\Delta^{ \pm 1}$-move and leaves fixed the rest of the knot. Choose a regular neighborhood $U$ of the 2 -simplex which defines the $\Delta^{ \pm 1}$-move whose boundary meets the knot at two points. By linear extension one can obtain a homeomorphism producing the $\Delta^{ \pm 1}$-move in $U$ and leaving $S^{3}-U$ fixed.\\
-\includegraphics[scale=0.2, center]{2025_05_21_9c06be8de7a55410f8c1g-022}
+\includegraphics[scale=0.2,center]{2025_05_21_9c06be8de7a55410f8c1g-022}
 
 Figure 1.6. The knots $\mathfrak{k}$ and $\tau(\mathfrak{k})$ are isotopic by $\Delta$-moves.
 
@@ -893,7 +894,11 @@ With respect to the complement $C$ of a knot, the longitude $\ell$ and the merid
 
 \subsection{Wirtinger presentation}
 
-The most important and effective invariant of a knot $\mathfrak{k}$ (or link) is its group: the fundamental group of its complement $\mathfrak{G}=\pi_{1}\left(S^{3}-\mathfrak{k}\right)$. Frequently $S^{3}-\mathfrak{k}$ is replaced by $\mathbb{R}^{3}-\mathfrak{k}$ or by $\overline{S^{3}-V(\mathfrak{k})}$ or $\overline{\mathbb{R}^{3}-V(\mathfrak{k})}$, respectively. The fundamental groups of these various spaces are obviously isomorphic, the isomorphisms being induced by inclusion. There is a simple procedure, due to Wirtinger, to obtain a presentation of a knot group.\\
+\begin{CONC}{KNO-B14-03-13}{Settings zur Untersuchung der Knotengruppe}
+The most important and effective invariant of a knot $\mathfrak{k}$ (or link) is its group: the fundamental group of its complement $\mathfrak{G}=\pi_{1}\left(S^{3}-\mathfrak{k}\right)$. Frequently $S^{3}-\mathfrak{k}$ is replaced by $\mathbb{R}^{3}-\mathfrak{k}$ or by $\overline{S^{3}-V(\mathfrak{k})}$ or $\overline{\mathbb{R}^{3}-V(\mathfrak{k})}$, respectively. The fundamental groups of these various spaces are obviously isomorphic, the isomorphisms being induced by inclusion.
+\end{CONC}
+
+There is a simple procedure, due to Wirtinger, to obtain a presentation of a knot group.\\
 
 3.3. 
 
@@ -915,9 +920,7 @@ $$
 r_{j}=s_{j} s_{i}^{-\eta_{j}} s_{k}^{-1} s_{i}^{\eta_{j}} .
 $$
 
-\begin{center}
-\includegraphics[scale=0.2]{2025_05_21_9c06be8de7a55410f8c1g-047}
-\end{center}
+\includegraphics[scale=0.2,center]{2025_05_21_9c06be8de7a55410f8c1g-047}
 Figure 3.2. The Wirtinger relations.
 \end{CONC}
 

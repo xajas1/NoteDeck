@@ -1,0 +1,99 @@
+{
+  "projectName": "KNO Primer",
+  "structure": [
+    {
+      "id": "sec-1749487598320",
+      "name": "Vortrag",
+      "subsections": [
+        {
+          "id": "sub-1749487602894",
+          "name": "Freie Gruppen",
+          "unitUIDs": [
+            "4056c2ce-9b6f-4b92-b68c-5956e8602719",
+            "66203066-6312-4d17-839f-e38020ac57a2",
+            "a957de42-7954-4541-bb25-ab49f6ba8cd2",
+            "07d1738e-0839-4f20-9776-dd68dcd9bfc0",
+            "b6d720fc-6358-4c3d-94c8-b649e5cf9840",
+            "8f6c6a11-a593-4f79-93a8-3bfa62cb6819",
+            "af9f4f2e-419f-4a30-b21b-df5f9628547a",
+            "bbc55f41-6ac2-4ed2-bcdc-685c2d8ea64e",
+            "1817d47e-c3e4-499b-93be-b23f42190df4",
+            "d2e7e693-57e1-4bf1-8654-47eccf667036",
+            "4d0099b0-9b6f-42b4-bd63-878aaab0dee4"
+          ]
+        },
+        {
+          "id": "sub-1749487652358",
+          "name": "Knoten Grundlagen",
+          "unitUIDs": []
+        },
+        {
+          "id": "sub-1749487904039",
+          "name": "Knotengruppe und Wirtinger Präsentation",
+          "unitUIDs": [
+            "95ae8ee8-3e46-486c-927b-9a153a820554",
+            "47b1c819-cbc0-474a-8d3b-e754c5f3912d",
+            "161becc3-e8a8-460c-a6de-ca303eedf656",
+            "b48ada7d-16d9-44c4-835a-8dccb1a18559",
+            "ff3b38aa-663e-4716-853d-63f19c5c51d9",
+            "2946880e-c7ce-44da-ba7e-af17181033cf",
+            "3de0c3d5-e400-4f9e-b4b4-38b088964a2e",
+            "12f0ed78-5a7f-418f-91fb-5b5dfb545b14"
+          ]
+        },
+        {
+          "id": "sub-1749487978531",
+          "name": "Hurewicz-Abbildung",
+          "unitUIDs": [
+            "a7823247-bb88-477d-812e-d093168b19dc",
+            "b7b80785-9e1b-4bd9-841d-1fe3f2e47d65",
+            "741eac82-df92-4b23-9cbf-327d4e66b366",
+            "4c9fc1bc-f847-4cc1-9d84-792246649dd6",
+            "983ca88a-31e4-4af9-baa7-5ab241727a89",
+            "bdb4b907-57bd-492a-b740-aa7f23221c4a",
+            "9d74fafd-9cd7-47e0-b67c-4571a08f0b20",
+            "a4fdf283-7ca4-4170-b860-c923a4052883",
+            "5d706ee1-2908-4f7d-91e9-54cca7be0a00"
+          ]
+        },
+        {
+          "id": "sub-1749488045102",
+          "name": "1. Homologiegruppe",
+          "unitUIDs": [
+            "fc269d6a-c03f-48fb-a62f-09f4dd7bf5b7",
+            "e66a6cce-9166-49b8-b015-0f8e7972fe15"
+          ]
+        },
+        {
+          "id": "sub-1749490942258",
+          "name": "Bemerkung zur Reichweite der Knotengruppe",
+          "unitUIDs": [
+            "0a0cbde6-3075-415f-a8e4-fe2738d2af05",
+            "63fc99de-57e1-466d-a99a-0233623046c4",
+            "7b389661-8c7d-474b-b335-e2ef5c7a8e77",
+            "d122cab4-30c7-46a8-96f8-89d36f54d949",
+            "ca29b450-c2d4-4a54-bd24-f03a227596f6",
+            "32c6944d-29c5-4dcf-b17f-49f50df409ad",
+            "0d3ab268-5890-4f8b-9dac-50942f97f1ee",
+            "2ac23d7b-1344-4128-a547-515762441fa0"
+          ]
+        },
+        {
+          "id": "sub-1749491373971",
+          "name": "Äquivalente Charakterisierung der Fundamentalgruppe",
+          "unitUIDs": [
+            "bcc6df06-b979-4f1c-85c2-b8e606086b78",
+            "03ed2d2d-b3e1-4d53-91e7-c35508607f36",
+            "f5ce420c-d60a-45b5-9eb7-7fd6472239f2",
+            "ea487916-244f-496f-9d08-03c3a137463b",
+            "b793f73a-02c0-4428-adfd-9e00cd98d708",
+            "7a564605-519a-4f94-bdc7-3ed7c55c4a33",
+            "483bbfc8-d44a-4205-b8df-64213f89773a",
+            "040668b3-500a-4555-948b-f458535f60ee",
+            "be3b3f69-d00f-43c1-a188-5afee0347e59"
+          ]
+        }
+      ]
+    }
+  ]
+}
