@@ -1209,7 +1209,7 @@ Auch Lemma I.3.4 bleibt sinngemäß für Abbildungen punktierter Räume richtig.
 
 I.3.21. Beispiel. 
 
-\begin{EXA}{AT-H09-04-23}{Homotopieäquivalenz punktierter Räume für Punkt-Deformationsretrakt}
+\begin{EXA}{AT-H09-04-23}{Homotopieäquivalenz zwischen Deformationsretrakt und Ausgangsraum}
 Ist $A$ ein Deformationsretrakt von $X$ und $x_{0} \in A$, dann ist die kanonische Inklusion $\left(A, x_{0}\right) \rightarrow\left(X, x_{0}\right)$ eine Homotopieäquivalenz punktierter Räume.
 \end{EXA}
 
@@ -1877,7 +1877,432 @@ A_\alpha \arrow[dr, "\varphi_\alpha"'] \arrow[r, "\iota_\alpha"] & \bigoplus_{\a
 \end{PROP}
 
 
+
+
 Wir wollen noch kurz auf die universelle Eigenschaft der direkte Summe abelscher Gruppen eingehen. Es seien $A_\alpha, \alpha \in A$, abelsche Gruppen, und es bezeichnen $\iota_\alpha: A_\alpha \rightarrow \bigoplus_{\alpha^{\prime} \in A} A_{\alpha^{\prime}}$ die kanonischen Inklusionen. Ist $B$ eine weitere abelsche Gruppe, und sind $\varphi_\alpha: A_\alpha \rightarrow B$ Homomorphismen, $\alpha \in A$, dann existiert genau ein Gruppenhomomorphismus $\varphi: \bigoplus_{\alpha \in A} A_\alpha \rightarrow B$, sodass $\varphi \circ \iota_\alpha=\varphi_\alpha$, für alle $\alpha \in A$. In Beispiel I.5.3 oben haben wir genau diese Eigenschaft verwendet um (I.8) zu konstruieren.
+
+
+
+
+
+I.5.5. Satz (Seifert van Kampen). 
+
+\begin{THEO}{AT-H09-01-30}{Seifert van Kampen}
+Es sei $X=U \cup V$ wobei $U$ und $V$ offen in $X$ sind. Weiters seien $U, V$ sowie $U \cap V$ wegzusammenhängend und $x_0 \in$ $U \cap V$. Dann ist die Abbildung
+$$\Phi:=\left(\iota_U\right)_* *\left(\iota_V\right)_*: \pi_1\left(U, x_0\right) * \pi_1\left(V, x_0\right) \rightarrow \pi_1\left(X, x_0\right)$$
+surjektiv, und es gilt 
+$$\operatorname{ker}(\Phi)= N:=\mathcal{N}\left(\left\{\left(\left(j_U\right)_* \sigma\right)\left(\left(j_V\right)_* \sigma\right)^{-1}: \sigma \in \pi_1\left(U \cap V, x_0\right)\right\}\right)$$ 
+Insbesondere ist $\pi_1\left(X, x_0\right) \cong\left(\pi_1\left(U, x_0\right) * \pi_1\left(V, x_0\right)\right) / N$.
+\end{THEO}
+
+Beweis. 
+
+\begin{PROOF}{AT-H09-01-31}{P: Seifert van Kampen}
+Um die Notation zu vereinfachen setzen wir $U_1:=U$ und $U_2:=V$. Wir zeigen zunächst die Surjektivität von $\Phi$. Sei dazu $f: I \rightarrow X$ eine Schleife bei $x_0$. Da $\left\{U_1, U_2\right\}$ eine offene Überdeckung von $X$ bildet, ist $\left\{f^{-1}\left(U_1\right), f^{-1}\left(U_2\right)\right\}$ eine offene Überdeckung des Intervalls $I$. Nach Lemma I.1.28 existieren $0=s_0<$ $s_1<\cdots<s_n=1$ und $\alpha_1, \ldots, \alpha_n \in\{1,2\}$, sodass $f\left(\left[s_{i-1}, s_i\right]\right) \subseteq U_{\alpha_i}$, für jedes $i=$ $1, \ldots, n$. Durch Weglassen gewisser Unterteilungspunkte $s_i$ können wir erreichen, dass $f\left(s_i\right) \in U_1 \cap U_2$ für alle $i=0, \ldots, n$, denn wäre etwa $f\left(s_i\right) \in U_1 \backslash U_2$ dann gilt sowohl $f\left(\left[s_{i-1}, s_i\right]\right) \subseteq U_1$ als auch $f\left(\left[s_i, s_{i+1}\right]\right) \subseteq U_1$. Betrachte die reparametrisierten Einschränkungen $f_i: I \rightarrow U_{\alpha_i} \subseteq X, f_i(s):=f\left((1-s) s_{i-1}+s s_i\right), i=1, \ldots, n$. Es gilt $f \simeq f_1 f_2 \cdots f_n$ relativ Endpunkten in $X$, siehe Beispiel I.1.3. Da $U_1 \cap U_2$ wegzusammenhängend ist, finden wir Wege $h_i: I \rightarrow U_1 \cap U_2$ von $h_i(0)=x_0$ nach $h_i(1)=f_i(1)=f\left(s_i\right), i=1, \ldots, n-1$. Weiters seien $h_0:=h_n:=c_{x_0}$ die konstanten Wege. Wir erhalten $f \simeq\left(h_0 f_1 \bar{h}_1\right)\left(h_1 f_2 \bar{h}_2\right)\left(h_2 f_3 \bar{h}_3\right) \cdots\left(h_{n-1} f_n \bar{h}_n\right)$ relativ Endpunkten in $X$, denn $\bar{h}_i h_i \simeq c_{f\left(s_i\right)}$. Jeder der Faktoren $h_{i-1} f_i \bar{h}_i$ ist eine Schleife bei $x_0$ in $U_{\alpha_i}$ und definiert daher ein Element $\sigma_i \in \pi_1\left(U_{\alpha_i}, x_0\right), \sigma_i:=\left[h_{i-1} f_i \bar{h}_i\right]$, $i=1, \ldots, n$. Es folgt $\Phi\left(\sigma_1 \cdots \sigma_n\right)=\Phi\left(\sigma_1\right) \cdots \Phi\left(\sigma_n\right)=\left[\left(h_0 f_1 \bar{h}_1\right) \cdots\left(h_{n-1} f_n \bar{h}_n\right)\right]=$ $[f] \in \pi_1\left(X, x_0\right)$, also ist $\Phi$ surjektiv.
+
+Es bleibt noch zu zeigen $\operatorname{ker}(\Phi) \subseteq N$. Seien also $f_k: I \rightarrow U_{\beta_k}$ Schleifen bei $x_0$, $1 \leq k \leq m, \beta_1, \ldots, \beta_m \in\{1,2\}$, sodass $\Phi\left(\left[f_1\right] \cdots\left[f_m\right]\right)=1 \in \pi_1\left(X, x_0\right)$. Es ist zu zeigen, dass $\left[f_1\right] \cdots\left[f_m\right]=1 \in\left(\pi_1\left(U_1, x_0\right) * \pi_1\left(U_2, x_0\right)\right) / N$. Betrachte die Schleife $f: I \rightarrow X, f:=f_1 f_2 \cdots f_m$. Nach Voraussetzung ist $[f]=\Phi\left(\left[f_1\right]\right) \cdots \Phi\left(\left[f_m\right]\right)=$ $\Phi\left(\left[f_1\right] \cdots\left[f_m\right]\right)=1 \in \pi_1\left(X, x_0\right)$. Daher existiert eine Homotopie von Wegen $H$ : $I \times I \rightarrow X$ von $H_0=c_{x_0}$ nach $H_1=f$. Da $\left\{U_1, U_2\right\}$ eine offene Überdeckung von $X$ ist, muss auch $\left\{H^{-1}\left(U_1\right), H^{-1}\left(U_2\right)\right\}$ eine offene Überdeckung von $I \times I$ sein. Nach Lemma I.1.28 existieren $0=s_0<s_1<\cdots<s_n=1$ und $0=t_0<$ $t_1<\cdots<t_n=1$ sowie $\alpha_i^j \in\{1,2\}$, sodass $H\left(\left[s_{i-1}, s_i\right] \times\left[t_{j-1}, t_j\right]\right) \subseteq U_{\alpha_i^j}$, für alle $1 \leq i, j \leq n$. Betrachte die Wege
+
+$$
+\begin{aligned}
+u_i^j: I \rightarrow U_{\alpha_i^j} \subseteq X & & u_i^j(s):=H\left((1-s) s_{i-1}+s s_i, t_j\right) \\
+b_i^j: I \rightarrow U_{\alpha_i^j} \subseteq X & & b_i^j(s):=H\left((1-s) s_{i-1}+s s_i, t_{j-1}\right) \\
+l_i^j: I \rightarrow U_{\alpha_i^j} \subseteq X & & l_i^j(t):=H\left(s_{j-1},(1-t) t_{j-1}+t t_j\right) \\
+r_i^j: I \rightarrow U_{\alpha_i^j} \subseteq X & & r_i^j(t):=H\left(s_j,(1-t) t_{j-1}+t t_j\right)
+\end{aligned}
+$$
+
+
+Da $H_1=f=f_1 \cdots f_m$ dürfen wir durch Übergang zu einer feineren Zerlegung von $I \times I$ o.B.d.A. annehmen, dass $0=i_0<i_1<\ldots<i_m=n$ existieren mit $\alpha_{i_{k-1}+1}^n=\alpha_{i_{k-1}+2}^n=\cdots=\alpha_{i_k}^n=\beta_k$ und
+
+$$
+u_{i_{k-1}+1}^n u_{i_{k-1}+2}^n \cdots u_{i_k}^n \simeq f_k \quad \text { relativ Endpunkten in } U_{\beta_k}, 1 \leq k \leq m .
+$$
+
+
+Da das Rechteck $\left[s_{i-1}, s_i\right] \times\left[t_{j-1}, t_j\right]$ einfach zusammenhängend ist, und weil $H\left(\left[s_{i-1}, s_i\right] \times\left[t_{j-1}, t_j\right]\right) \subseteq U_{\alpha_i^j}$, folgt
+
+$$
+l_i^j u_i^j \bar{r}_i^j \simeq b_i^j \quad \text { relativ Endpunkten in } U_{\alpha_i^j}, 1 \leq i, j \leq n .
+$$
+
+
+Da $U_1, U_2$ und $U_1 \cap U_2$ wegzusammenhängend sind, existieren Wege $\beta_i^j: I \rightarrow X$, $0 \leq i, j \leq n$, mit folgenden Eigenschaften:
+(i) $\beta_i^j(0)=x_0$ und $\beta_i^j(1)=H\left(s_i, t_j\right)$.
+(ii) $\beta_i^j: I \rightarrow U_{\alpha_i^j} \subseteq X$ falls $H\left(s_i, t_j\right) \in U_{\alpha_i^j}$.
+(iii) $\beta_i^j: I \rightarrow U_1 \cap U_2 \subseteq X$, falls $H\left(s_i, t_j\right) \in U_1 \cap U_2$.
+(iv) $\beta_i^j=c_{x_0}$, falls $H\left(s_i, t_j\right)=x_0$.
+
+Betrachte nun die folgenden Schleifen bei $x_0$, siehe (i) und (ii):
+
+$$
+\begin{aligned}
+\hat{u}_i^j:=\beta_{i-1}^j u_i^j \bar{\beta}_i^j: I \rightarrow U_{\alpha_i^j} \subseteq X, & & \hat{b}_i^j:=\beta_{i-1}^{j-1} b_i^j \bar{\beta}_i^{j-1}: I \rightarrow U_{\alpha_i^j} \subseteq X \\
+\hat{l}_i^j:=\beta_{i-1}^{j-1} l_i^j \bar{\beta}_{i-1}^j: I \rightarrow U_{\alpha_i^j} \subseteq X, & & \hat{r}_i^j:=\beta_i^{j-1} r_i^j \bar{\beta}_i^j: I \rightarrow U_{\alpha_i^j} \subseteq X
+\end{aligned}
+$$
+
+
+Aus (I.12) erhalten wir $\left(\beta_{i-1}^{j-1} l_i^j \bar{\beta}_{i-1}^j\right)\left(\beta_{i-1}^j u_i^j \bar{\beta}_i^j\right)\left(\overline{\beta_i^{j-1} r_i^j \bar{\beta}_i^j}\right) \simeq \beta_{i-1}^{j-1}\left(l_i^j u_i^j \bar{r}_i^j\right) \bar{\beta}_i^{j-1} \simeq$ $\beta_{i-1}^{j-1} b_i^j \bar{\beta}_i^{j-1}$ relativ Endpunkten in $U_{\alpha_i^j}$, und daher
+
+$$
+\left[\hat{l}_i^j\right]\left[\hat{u}_i^j\right]\left[\hat{r}_i^j\right]^{-1}=\left[\hat{b}_i^j\right] \in \pi_1\left(U_{\alpha_i^j}, x_0\right), \quad 1 \leq i, j \leq n .
+$$
+
+
+Da $H$ eine Homotopie relativ Endpunkten ist und wegen (iv) gilt
+
+$$
+\left[\hat{l}_1^j\right]=1 \in \pi_1\left(U_{\alpha_1^j}, x_0\right) \quad \text { und } \quad\left[\hat{r}_n^j\right]=1 \in \pi_1\left(U_{\alpha_n^j}, x_0\right), \quad 1 \leq j \leq n .
+$$
+
+
+Da $H_0=c_{x_0}$ und wegen (iv) gilt auch
+
+$$
+\left[\hat{b}_i^1\right]=1 \in \pi\left(U_{\alpha_i^1}, x_0\right), \quad 1 \leq i \leq n .
+$$
+
+
+Aus (I.11) und (iv) erhalten wir
+
+$$
+\left[\hat{u}_{i_{k-1}+1}^n\right]\left[\hat{u}_{i_{k-1}+2}^n\right] \cdots\left[\hat{u}_{i_k}^n\right]=\left[f_k\right] \in \pi_1\left(U_{\beta_k}, x_0\right), \quad 1 \leq k \leq m
+$$
+
+
+Weiters haben wir die Relationen
+
+$$
+\left[\hat{r}_{i-1}^j\right]=\left[\hat{l}_i^j\right] \in\left(\pi_1\left(U_1, x_0\right) * \pi_1\left(U_2, x_0\right)\right) / N, \quad 1 \leq j \leq n, 2 \leq i \leq n .
+$$
+
+
+Um dies einzusehen unterscheiden wir zwei Fälle. Ist $\alpha_{i-1}^j=\alpha_i^j$, dann gilt offensichtlich $\left[\hat{r}_{i-1}^j\right]=\left[\hat{l}_i^j\right] \in \pi_1\left(U_{\alpha_i^j}, x_0\right)$ und damit auch (I.17). Ist $\alpha_{i-1}^j \neq \alpha_i^j$, dann sind $\hat{r}_{i-1}^j$ und $\hat{l}_i^j$ Wege in $U_1 \cap U_2$, siehe (iii), und $\left[\hat{r}_{i-1}^j\right]=\left[\hat{l}_i^j\right] \in \pi_1\left(U_1 \cap U_2, x_0\right)$, woraus nun (I.17) folgt, vgl. (I.10). Analog lässt sich zeigen
+
+$$
+\left[\hat{u}_i^{j-1}\right]=\left[\hat{b}_i^j\right] \in\left(\pi_1\left(U_1, x_0\right) * \pi_1\left(U_2, x_0\right)\right) / N, \quad 2 \leq j \leq n, 1 \leq i \leq n .
+$$
+
+
+Aus (I.13), (I.14) und (I.17) erhalten wir, in $\left(\pi_1\left(U_1, x_0\right) * \pi_1\left(U_2, x_0\right)\right) / N$,
+
+$$
+\left[\hat{b}_1^j\right] \cdots\left[\hat{b}_n^j\right]=\left[\hat{l}_1^j\right]\left[\hat{u}_1^j\right]\left[\hat{r}_1^j\right]^{-1} \cdots\left[\hat{l}_n^j\right]\left[\hat{u}_n^j\right]\left[\hat{r}_n^j\right]^{-1}=\left[\hat{u}_1^j\right] \cdots\left[\hat{u}_n^j\right] .
+$$
+
+
+Zusammen mit (I.18) und (I.15) folgt, in $\left(\pi_1\left(U_1, x_0\right) * \pi_1\left(U_2, x_0\right)\right) / N$,
+
+$$
+\left[\hat{u}_1^n\right] \cdots\left[\hat{u}_n^n\right]=\left[\hat{b}_1^n\right] \cdots\left[\hat{b}_n^n\right]=\left[\hat{u}_1^{n-1}\right] \cdots\left[\hat{u}_n^{n-1}\right]=\cdots=\left[\hat{b}_1^1\right] \cdots\left[\hat{b}_n^1\right]=1
+$$
+
+
+Verwenden wir noch (I.16) so erhalten wir schließlich die Relation $\left[f_1\right] \cdots\left[f_m\right]=1$ in $\left(\pi_1\left(U_1, x_0\right) * \pi_1\left(U_2, x_0\right)\right) / N$. Damit ist der Beweis vollständig.
+\end{PROOF}
+
+
+
+
+\begin{DEF}{AT-H09-01-26}{Fundamentalklasse von Punktvereinigungen}
+Betrachte Einpunktvereinigung $\bigvee_{\alpha \in A}\left(X_\alpha, x_\alpha\right)$ punktierte Räume ( $X_\alpha, x_\alpha$ ), $\alpha \in A$. Die kanonischen Inklusionen 
+$$\iota_\alpha:\left(X_\alpha, x_\alpha\right) \rightarrow \bigvee_{\alpha^{\prime} \in A}\left(X_{\alpha^{\prime}}, x_{\alpha^{\prime}}\right)$$ 
+induzieren Gruppenhomomorphismen 
+$$\left(\iota_\alpha\right)_*: \pi_1\left(X_\alpha, x_\alpha\right) \rightarrow \pi_1\left(\bigvee_{\alpha^{\prime} \in A}\left(X_{\alpha^{\prime}}, x_{\alpha^{\prime}}\right)\right)$$
+Diese definieren einen Gruppenhomomorphismus, siehe Lemma I.5.1(iv),
+$$
+\underset{\alpha \in A}{*} \pi_1\left(X_\alpha, x_\alpha\right) \rightarrow \pi_1\left(\bigvee_{\alpha \in A}\left(X_\alpha, x_\alpha\right)\right) .
+$$
+\end{DEF}
+
+
+I.5.8. Proposition. 
+
+
+\begin{PROP}{AT-H09-01-27}{Isomorphismus zwischen Freier Gruppe und Einpunktvereinigungen unter Retraktionsbedingungen}
+Es seien $\left(X_\alpha, x_\alpha\right), \alpha \in A$, punktierter Hausdorffräume. Weiters sollen offene Umgebungen $U_\alpha \subseteq X_\alpha$ von $x_\alpha$ existieren, sodass $\left\{x_\alpha\right\}$ Deformationsretrakt von $U_\alpha$ ist. In dieser Situation ist 
+$$
+\underset{\alpha \in A}{*} \pi_1\left(X_\alpha, x_\alpha\right) \rightarrow \pi_1\left(\bigvee_{\alpha \in A}\left(X_\alpha, x_\alpha\right)\right) .
+$$
+ein Gruppenisomorphismus. Insbesondere gilt $\pi_1\left(\left(X, x_0\right) \vee\left(Y, y_0\right)\right) \cong \pi_1\left(X, x_0\right) * \pi_1\left(Y, y_0\right)$.
+\end{PROP}
+
+
+Beweis. 
+
+
+
+\begin{PROOF}{AT-H09-01-28}{P: Isomorphismus zwischen Freier Gruppe und Einpunktvereinigungen unter Retraktionsbedingungen}
+Wir behandeln zunächst die Einpunktvereinigung zweier Räume $\left(X_1 \vee X_2, *\right)=\left(X_1, x_1\right) \vee\left(X_2, x_2\right)$. O.B.d.A. seien $X_1$ und $X_2$ wegzusammenhängend, vgl. Proposition I.1.16. Betrachte die offenen Teilmengen $U:=\left(U_1, x_1\right) \vee$ $\left(X_2, x_2\right)$ und $V:=\left(X_1, x_1\right) \vee\left(U_2, x_2\right)$ von $X_1 \vee X_2=U \cup V$. Eine retrahierende Deformation von $U_1$ auf $\left\{x_1\right\}$ zusammen mit der identischen Abbildung $\operatorname{id}_{X_2}$ liefert eine retrahierende Deformation von $U$ auf $X_2$, vgl. Lemma I.3.17. Also ist die Einbettung $\left(X_2, x_2\right) \rightarrow(U, *)$ eine Homotopieäquivalenz und induziert daher einen Isomorphismus $\pi_1\left(X_2, x_2\right) \cong \pi_1(U, *)$, siehe Proposition I.3.24. Ebenso induziert $\left(X_1, x_1\right) \rightarrow(V, *)$ einen Isomorphismus $\pi_1\left(X_1, x_1\right) \cong \pi_1(V, *)$. Eine retrahierende Deformation von $U_1$ auf $\left\{x_1\right\}$ zusammen mit einer retrahierenden Deformation von $U_2$ auf $\left\{x_2\right\}$ liefern eine retrahierende Deformation von $U \cap V=\left(U_1, x_1\right) \vee\left(U_2, x_2\right)$ auf $\{*\}$. Also ist $U \cap V$ kontrahierbar und damit einfach zusammenhängend, siehe Korollar I.3.29. Aus Satz I.5.5 folgt daher
+$$
+\pi_1\left(\left(X_1, x_1\right) \vee\left(X_2, x_2\right)\right) \cong \pi_1\left(X_1, x_1\right) * \pi_1\left(X_2, x_2\right)
+$$
+Mittels Induktion sehen wir, dass die Aussage der Proposition auch für endliche Indexmengen $A$ richtig bleibt.
+
+Sei nun $A$ beliebig. Ist $F \subseteq A$ eine Teilmenge so erhalten wir das kommutatives Diagram:
+\[
+\begin{tikzcd}
+  \displaystyle\mathop{\ast}_{\alpha\in A} \pi_{1}(X_{\alpha})
+    \arrow[r]
+  & \displaystyle \pi_{1}\!\Bigl(\bigvee_{\alpha\in A} X_{\alpha}\Bigr) \\[1ex]
+  \displaystyle\mathop{\ast}_{\alpha\in F} \pi_{1}(X_{\alpha})
+    \arrow[u]
+    \arrow[r, "\cong"']
+  & \displaystyle \pi_{1}\!\Bigl(\bigvee_{\alpha\in F} X_{\alpha}\Bigr)
+    \arrow[u]
+\end{tikzcd}
+\]
+Beachte, dass die beiden vertikalen Pfeile injektive Homomorphismen bezeichnen. Für den rechten folgt dies aus der Tatsache, dass eine stetige Abbildung $\bigvee_{\alpha \in A} X_\alpha \rightarrow \bigvee_{\alpha \in F} X_\alpha$ existiert die linksinvers zur kanonischen Inklusion $\bigvee_{\alpha \in F} X_\alpha \rightarrow \bigvee_{\alpha \in A} X_\alpha$ ist. Für endliches $F$ ist der untere horizontale Pfeil ein Isomorphismus, siehe oben. Es folgt sofort, dass (I.19) injektiv ist, siehe Lemma I.5.1(ii). Nach Lemma I.5.9 unten muss jede Schleife in $\bigvee_{\alpha \in A} X_\alpha$ schon in einer endlichen Einpunktvereinigung $\bigvee_{\alpha \in F} X_\alpha$ liegen. Aus obigem Diagram folgt nun auch die Surjektivität von (I.19).
+\end{PROOF}
+
+
+
+
+I.5.9. Lemma. Es seien $\left(X_\alpha, x_\alpha\right), \alpha \in A$, punktierte Hausdorffräume und $K \subseteq \bigvee_{\alpha \in A}\left(X_\alpha, x_\alpha\right)$ eine kompakte Teilmenge der Einpunktvereinigung. Dann existiert eine endliche Teilmenge $F \subseteq A$ mit $K \subseteq \bigvee_{\alpha \in F}\left(X_\alpha, x_\alpha\right)$.
+
+Beweis. Es sei $F:=\left\{\alpha \in A: \emptyset \neq K \cap\left(X_\alpha \backslash\left\{x_\alpha\right\}\right)\right\}$. Dann gilt offensichtlich $K \subseteq \bigvee_{\alpha \in F} X_\alpha$. Für jedes $\alpha \in F$ wähle einen Punkt $z_\alpha \in K \cap\left(X_\alpha \backslash\left\{x_\alpha\right\}\right)$. Die Menge $L:=\left\{z_\alpha: \alpha \in F\right\} \subseteq K$ hat dann gleich viele Elemente wie $F$. Es genügt daher zu zeigen, dass $L$ endlich ist. Wegen der Hausdorffeigenschaft von $X_\alpha$ ist $L \cap X_\alpha=\left\{z_\alpha\right\}$ abgeschlossen in $X_\alpha$, also ist $L$ eine abgeschlossene Teilmenge von $\bigvee_{\alpha \in A} X_\alpha$. Folglich ist $L$ abgeschlossen in $K$ und damit eine kompakte Teilmenge. Weiters ist $X_\alpha \backslash\left\{x_\alpha\right\}$ eine offene Teilmenge von $\bigvee_{\alpha \in A} X_\alpha$ mit $\left(X_\alpha \backslash\left\{x_\alpha\right\}\right) \cap L=$ $\left\{z_\alpha\right\}$, daher trägt $L$ die diskrete Topologie. Als diskreter kompakter Raum muss $L$ endlich sein.
+
+
+
+I.5.10. Beispiel. 
+
+
+\begin{EXA}{AT-H09-01-29}{Fundamentalgruppen von Einpunktvereinigungen von $S^1$}
+Für $n_i \geq 2$ ist $S^{n_1} \vee \cdots \vee S^{n_k}$ einfach zusammenhängend, siehe Satz I.1.26 und Proposition I.5.8. 
+
+Mit Hilfe von Satz I.2.1 erhalten wir aber auch $\pi_1\left(S^1 \vee \cdots \vee S^1\right) \cong \mathbb{Z} * \cdots * \mathbb{Z}$. 
+
+Einpunktvereinigungen von Kreisen können also nur dann homotopieäquivalent (homöomorph) sein, wenn sie gleich viele Faktoren besitzen, siehe Beispiel I.5.3 und Satz I.3.27.
+\end{EXA}
+
+
+
+
+
+\pagebreak
+
+\subsection{Darstellung von Gruppen durch Erzeuger und Relationen}
+
+Um die etwas komplizierteren Fundamentalgruppen einigermaßen in den Griff zu bekommen, wiederholen wir kurz die Darstellung von Gruppen durch Erzeuger und Relationen. 
+
+
+\begin{DEF}{AT-H09-01-12}{Freigruppe über einer Menge}
+Sei $S$ eine Menge. Dann bezeichnet
+\[
+F(S) := *_{s \in S} \mathbb{Z}
+\]
+die \emph{freie Gruppe über $S$}. Es gelten die folgenden Eigenschaften:
+
+\begin{enumerate}[label=(\roman*)]
+  \item \textbf{Kanonische Injektionen:}  
+  Zu jedem $s \in S$ existiert ein kanonischer injektiver Gruppenhomomorphismus
+  \[
+  \iota_s : \mathbb{Z} \rightarrow F(S),
+  \]
+  dessen Bild von $1 \in \mathbb{Z}$ wir mit $s$ bezeichnen, also $\iota_s(1) = s$.
+
+  \item \textbf{Wortdarstellung:}  
+  Jedes Element $x \in F(S) \setminus \{1\}$ lässt sich eindeutig schreiben als
+  \[
+  x = s_1^{k_1} s_2^{k_2} \cdots s_n^{k_n},
+  \]
+  wobei $s_i \in S$, $k_i \in \mathbb{Z} \setminus \{0\}$ und $s_i \neq s_{i+1}$ für alle $i = 1, \dots, n-1$.
+
+  \item \textbf{Universelle Eigenschaft:}  
+  Ist $K$ eine Gruppe und für jedes $s \in S$ ein Element $k_s \in K$ gegeben, so existiert ein eindeutig bestimmter Gruppenhomomorphismus
+  \[
+  \varphi : F(S) \longrightarrow K
+  \]
+  mit $\varphi(s) = k_s$ für alle $s \in S$.
+\end{enumerate}
+\end{DEF}
+
+
+
+\begin{DEF}{AT-H09-01-13}{Freie Gruppen von Rang $k$}
+Eine Gruppe $G$ heißt frei falls eine Menge $S$ existiert, sodass $G \cong F(S)$. Die Kardinalzahl $\sharp S$ wird der Rang der freien Gruppe $G$ genannt und mit $\operatorname{rank}(G)$ bezeichnet. Dies ist wohldefiniert, denn aus $F(S) \cong F\left(S^{\prime}\right)$ folgt $\bigoplus_{s \in S} \mathbb{Z} \cong F(S)^{\text {ab }} \cong$ $F\left(S^{\prime}\right)^{\mathrm{ab}} \cong \bigoplus_{s^{\prime} \in S^{\prime}} \mathbb{Z}$ und damit $\sharp S=\sharp S^{\prime}$.
+\end{DEF}
+
+\begin{CONC}{AT-H09-01-14}{Freie Gruppen modulo erzeugter Normalteiler einer Teilmenge der freien Gruppe über Menge }
+Ist $R \subseteq F(S)$ eine Teilmenge so schreiben wir 
+$$\langle S \mid R\rangle:=F(S) / \mathcal{N}(R)$$ 
+wobei $\mathcal{N}(R)$ den von $R$ erzeugten Normalteiler in $F(S)$ bezeichnet.
+\end{CONC}
+
+\begin{DEF}{AT-H09-01-15}{Darstellung einer Gruppe durch Erzeuger und Relationen}
+Ist $G$ eine Gruppe und $G \cong\langle S \mid R\rangle$ dann nennen wir $\langle S \mid R\rangle$ eine Präsentation von $G$ mit Erzeugern $S$ und Relationen $R$.
+\end{DEF}
+
+\begin{PROP}{AT-H09-01-16}{Universelle Eigenschaft der Darstellung einer Gruppe}
+Sei nun $K$ eine weitere Gruppe und für jedes $s \in S$ ein $k_s \in K$ gegeben, sodass der durch $\tilde{\varphi}(s)=k_s$ bestimmte Homomorphismus $\tilde{\varphi}$ : $F(S) \rightarrow K$ auf jedem Element von $R$ verschwindet, dh. $\tilde{\varphi}(r)=1 \in K$ für alle $r \in R$. Dann ist $\mathcal{N}(R) \subseteq \operatorname{ker}(\tilde{\varphi})$, also faktorisiert $\tilde{\varphi}$ zu einem Homomorphismus 
+$$\varphi:\langle R \mid S\rangle=F(S) / \mathcal{N}(R) \rightarrow K$$ 
+mit $\varphi(s)=k_s$.
+\end{PROP}
+
+\begin{DEF}{AT-H09-01-17}{Endlich repräsentierbare Gruppe}
+Eine Gruppe $G$ wird endlich präsentierbar, geannt, falls eine Präsentation $G \cong\langle S \mid R\rangle$ mit endlichen Mengen $S$ und $R$ existiert. Ist $S=\left\{s_1, \ldots, s_n\right\}$ und $R=\left\{r_1, \ldots, r_m\right\}$ dann schreiben wir für $\langle S \mid R\rangle$ auch $\left\langle s_1, \ldots, s_n \mid r_1, \ldots, r_m\right\rangle$ oder $\left\langle s_1, \ldots, s_n \mid r_1=1, \ldots, r_m=1\right\rangle$.
+\end{DEF}
+
+
+
+% Präsentation jeder Gruppe
+
+\begin{LEM}{AT-H09-01-18}{Präsentation jeder Gruppe}
+Jede Gruppe $G$ besitzt die Präsentation
+\[
+G=\langle S \mid R\rangle \quad\text{mit } S := G,\; R := \ker(\varphi),
+\]
+wobei $\varphi: F(S) \rightarrow G$ der durch $\varphi(g)=g$ gegebene Homomorphismus ist.
+Es faktorisiert dann $\varphi$ zu einem (offensichtlich bijektiven) Homomorphismus
+\[
+\langle S \mid R\rangle = F(S)/\mathcal{N}(R) = F(S)/\ker(\varphi) \longrightarrow G.
+\]
+\end{LEM}
+
+
+% Hinzufügen von überflüssigen Relationen
+
+\begin{LEM}{AT-H09-01-19}{Hinzufügen von überflüssigen Relationen}
+Ist $r \in \mathcal{N}(R)$, dann gilt
+\[
+\mathcal{N}(R) = \mathcal{N}(R \cup \{r\}),
+\quad\text{und daher}\quad
+\langle S \mid R \rangle \cong \langle S \mid R \cup \{r\} \rangle.
+\]
+\end{LEM}
+
+
+% Einführen eines neuen Erzeugers
+
+\begin{LEM}{AT-H09-01-20}{Einführen eines neuen Erzeugers}
+Ist $t \notin S$ und $\omega \in F(S)$, dann gilt
+\[
+\langle S \mid R\rangle \cong \left\langle S \cup \{t\} \mid R \cup \{t^{-1} \omega\} \right\rangle.
+\]
+\end{LEM}
+
+
+\begin{PROOF}{AT-H09-01-21}{P: Einführen eines neuen Erzeugers}
+Zum Nachweis der Isomorphie sei
+\[
+\varphi: \langle S \mid R\rangle \to \left\langle S \cup \{t\} \mid R \cup \{t^{-1}\omega\} \right\rangle
+\]
+der durch $\varphi(s) = s$ für $s \in S$ eindeutig bestimmte Homomorphismus.
+
+Weiters sei
+\[
+\psi: \left\langle S \cup \{t\} \mid R \cup \{t^{-1}\omega\} \right\rangle \to \langle S \mid R\rangle
+\]
+definiert durch $\psi(s) = s$ für $s \in S$, sowie $\psi(t) = \omega$.
+
+Dann gilt: $\psi \circ \varphi = \mathrm{id}$ und $\varphi \circ \psi = \mathrm{id}$, denn
+\[
+\varphi(\psi(t)) = \varphi(\omega) = t.
+\]
+\end{PROOF}
+
+
+
+
+
+\begin{DEF}{AT-H09-01-22}{Tietze-Transformationen}
+Sind $\langle S \mid R\rangle$ und $\langle S' \mid R'\rangle$ zwei endliche Präsentationen derselben Gruppe, also
+\[
+\langle S \mid R\rangle \cong \langle S' \mid R'\rangle,
+\]
+so lässt sich jede Präsentation durch endlich viele Schritte der Art
+$$
+\langle S \mid R\rangle \cong\langle S \mid R \cup\{r\}\rangle .
+$$
+und
+$$
+\langle S \mid R\rangle \cong\left\langle S \cup\{t\} \mid R \cup\left\{t^{-1} \omega\right\}\right\rangle .
+$$
+(Tietze-Prozesse) ineinander überführen.
+\end{DEF}
+
+
+
+% Freies Produkt von Präsentationen
+
+\begin{LEM}{AT-H09-01-23}{Freies Produkt von Präsentationen}
+Für zwei präsentierte Gruppen gilt:
+\[
+\langle S \mid R\rangle * \langle S' \mid R'\rangle \cong \langle S \cup S' \mid R \cup R'\rangle.
+\]
+\end{LEM}
+
+
+% Abelsierung durch Kommutatoren
+
+\begin{LEM}{AT-H09-01-24}{Abelsierung von präsentierten Gruppen durch Kommutatoren}
+Die Abelsierung einer präsentierten Gruppe ergibt sich durch Hinzufügen der Kommutatorrelationen:
+\[
+\langle S \mid R\rangle^{\mathrm{ab}} \cong \langle S \mid R \cup K\rangle,
+\]
+wobei $K = \{ sts^{-1}t^{-1} \mid s \neq t \in S \}$.
+
+Der durch $\tilde{\varphi}(s) = s$ definierte Homomorphismus
+\[
+\tilde{\varphi}: \langle S \mid R\rangle \to \langle S \mid R \cup K\rangle
+\]
+faktorisiert zu einem Isomorphismus
+\[
+\varphi: \langle S \mid R\rangle^{\mathrm{ab}} \to \langle S \mid R \cup K\rangle,
+\]
+invers zum Homomorphismus $\psi(s) = s$, mit $\varphi \circ \psi = \mathrm{id}$ und $\psi \circ \varphi = \mathrm{id}$.
+\end{LEM}
+
+
+
+
+
+
+Jede Gruppe $G$ besitzt die Präsentation $G=\langle S \mid R\rangle$ mit $S:=G$ und $R:=\operatorname{ker}(\varphi)$, wobei $\varphi: F(S) \rightarrow G$ den durch $\varphi(g)=g$ gegebenen Homomorphismus bezeichnet. Es faktorisiert nämlich $\varphi$ zu einem, offensichtlich bijektiven, Homomorphimus $\langle S \mid R\rangle=F(S) / \mathcal{N}(R)=F(S) / \operatorname{ker}(\varphi) \rightarrow G$.
+
+Falls $r \in \mathcal{N}(R)$ dann ist $\mathcal{N}(R)=\mathcal{N}(R \cup\{r\})$ und daher
+
+$$
+\langle S \mid R\rangle \cong\langle S \mid R \cup\{r\}\rangle .
+$$
+
+
+Ist $t \notin S$ und $\omega \in F(S)$, dann gilt
+
+$$
+\langle S \mid R\rangle \cong\left\langle S \cup\{t\} \mid R \cup\left\{t^{-1} \omega\right\}\right\rangle .
+$$
+
+
+Um dies einzusehen, sei $\varphi:\langle S \mid R\rangle \rightarrow\left\langle S \cup\{t\} \mid R \cup\left\{t^{-1} \omega\right\}\right\rangle$ der durch $\varphi(s)=$ $s, s \in S$, eindeutig bestimmte Homomorphismus. Betrachte weiters den durch $\psi(s)=s, s \in S$, und $\psi(t)=\omega$ eindeutig bestimmten Homomorphismus $\psi$ : $\left\langle S \cup\{t\} \mid R \cup\left\{t^{-1} \omega\right\}\right\rangle \rightarrow\langle S \mid R\rangle$. Offensichtlich ist $\psi \circ \varphi=\mathrm{id}$. Es gilt aber auch $\varphi \circ \psi=$ id, denn in $\left\langle S \cup\{t\} \mid R \cup\left\{t^{-1} \omega\right\}\right\rangle$ haben wir $\varphi(\psi(t))=\omega=t$.
+
+Sind $\langle S \mid R\rangle$ und $\left\langle S^{\prime} \mid R^{\prime}\right\rangle$ zwei endliche Präsentationen derselben Gruppe, dh. $\langle S \mid R\rangle \cong\left\langle S^{\prime} \mid R^{\prime}\right\rangle$, dann ist es stets möglich durch endlich viele Übergänge der Art (I.22) und (I.21), die sogenannte Tietze-Prozesse, von der Präsentation $\langle S \mid R\rangle$ zu der Präsentation $\left\langle S^{\prime} \mid R\right\rangle$ zu gelangen.
+
+Schließlich seien noch
+$$
+\langle S \mid R\rangle *\left\langle S^{\prime} \mid R^{\prime}\right\rangle \cong\left\langle S \cup S^{\prime} \mid R \cup R^{\prime}\right\rangle
+$$
+und
+$$
+\langle S \mid R\rangle^{\mathrm{ab}} \cong\langle S \mid R \cup K\rangle
+$$
+erwähnt, wobei $K=\left\{s t s^{-1} t^{-1}: s \neq t \in S\right\}$. Der durch $\tilde{\varphi}(s)=s$ bestimmte Homomorphismus $\tilde{\varphi}:\langle S \mid R\rangle \rightarrow\langle S \mid R \cup K\rangle$ faktorisiert nämlich zu einem Homomorphismus $\varphi:\langle S \mid R\rangle^{\mathrm{ab}} \rightarrow\langle S \mid R \cup K\rangle$ der invers zu dem durch $\psi(s)=s$ bestimmten Homomorphismus $\langle S \mid R \cup K\rangle \rightarrow\langle S \mid R\rangle^{\text {ab }}$ ist, $\varphi \circ \psi=$ id, $\psi \circ \varphi=$ id.
+
+Nun zu einigen Beispielen. 
+
+\begin{EXA}{AT-H09-01-25}{Präsentation von Gruppen}
+Für $n \in \mathbb{Z}$ schreiben wir $\mathbb{Z}_n:=\mathbb{Z} / n \mathbb{Z}$. Dies eine endliche zyklische Gruppe falls $n \neq 0$.
+\begin{enumerate}[label=(\roman*)]
+  \item $\langle s \mid - \rangle \;\cong\; \mathbb{Z}.$
+  \item $\langle s, t \mid - \rangle \;\cong\; \mathbb{Z} * \mathbb{Z}.$
+  \item $\langle s, t \mid s t s^{-1} t^{-1} \rangle \;\cong\; \mathbb{Z} \oplus \mathbb{Z}.$
+  \item $\langle s \mid s^{n} \rangle \;\cong\; \mathbb{Z}_{n}, \quad n \in \mathbb{Z}.$
+  \item $\langle s, t \mid s^{m},\, t^{n} \rangle \;\cong\; \mathbb{Z}_{m} * \mathbb{Z}_{n}, \quad m,n \in \mathbb{Z}.$
+  \item $\langle s, t \mid s^{m},\, t^{n},\, s t s^{-1} t^{-1} \rangle 
+        \;\cong\; \mathbb{Z}_{m} \oplus \mathbb{Z}_{n}, \quad m,n \in \mathbb{Z}.$
+  \item $\langle s, t \mid s^{2} t^{3},\, s^{3} t^{4} \rangle \;=\; 0.$
+\end{enumerate}
+\end{EXA}
 
 
 
@@ -1973,7 +2398,11 @@ Ist $\varphi: C \rightarrow C^{\prime}$ eine Kettenhomotopieäquivalenz, dann is
 Beweis. 
 
 Nach Voraussetzung existiert eine Kettenabbildung $\psi: C^{\prime} \rightarrow C$ mit $\psi \circ \varphi \simeq \mathrm{id}_C$ und $\varphi \circ \psi \simeq \mathrm{id}_{C^{\prime}}$. Aus Proposition IV.1.2 und Proposition IV.2.4 erhalten wir $\psi_* \circ \varphi_*=(\psi \circ \varphi)_*=\left(\mathrm{id}_C\right)_*=\mathrm{id}_{H_*(C)}$ sowie $\varphi_* \circ \psi_*=(\varphi \circ \psi)_*=$ $\left(\mathrm{id}_{C^{\prime}}\right)_*=\mathrm{id}_{H_*\left(C^{\prime}\right)}$. Daher sind $\varphi_*: H_*(C) \rightarrow H_*\left(C^{\prime}\right)$ und $\psi_*: H_*\left(C^{\prime}\right) \rightarrow H_*(C)$ zueinander inverse Homomorphismen.
-IV.2.6. Bemerkung. Sind $C$ und $C^{\prime}$ zwei Kettenkomplexe, dann bezeichnen wir mit $\left[C, C^{\prime}\right]$ die Menge der Homotopieklassen von Kettenabbildungen. Ist $\varphi: C \rightarrow C^{\prime}$ eine Kettenabbildung, dann schreiben wir $[\varphi] \in\left[C, C^{\prime}\right]$ für die von $\varphi$ repräsentierte Homotopieklasse. Nach Lemma IV.2.2 erhalten wir eine wohldefinierte Verknüpfung $\left[C, C^{\prime}\right] \times\left[C^{\prime}, C^{\prime \prime}\right] \rightarrow\left[C, C^{\prime \prime}\right],\left([\varphi],\left[\varphi^{\prime}\right]\right) \mapsto\left[\varphi^{\prime} \circ \varphi\right]$. Wir erhalten daher eine Kategorie der Kettenkomplexe und Homotopieklassen von Kettenabbildungen. Die Isomorphismen dieser Kategorie sind genau die Kettenhomotopieäquivalenzen. Nach Proposition IV.2.4 faktorisiert der Homologiefunktor durch Kategorie der Kettenkomplexe und Homotopieklassen von Kettenabbildungen.
+
+
+IV.2.6. Bemerkung. 
+
+Sind $C$ und $C^{\prime}$ zwei Kettenkomplexe, dann bezeichnen wir mit $\left[C, C^{\prime}\right]$ die Menge der Homotopieklassen von Kettenabbildungen. Ist $\varphi: C \rightarrow C^{\prime}$ eine Kettenabbildung, dann schreiben wir $[\varphi] \in\left[C, C^{\prime}\right]$ für die von $\varphi$ repräsentierte Homotopieklasse. Nach Lemma IV.2.2 erhalten wir eine wohldefinierte Verknüpfung $\left[C, C^{\prime}\right] \times\left[C^{\prime}, C^{\prime \prime}\right] \rightarrow\left[C, C^{\prime \prime}\right],\left([\varphi],\left[\varphi^{\prime}\right]\right) \mapsto\left[\varphi^{\prime} \circ \varphi\right]$. Wir erhalten daher eine Kategorie der Kettenkomplexe und Homotopieklassen von Kettenabbildungen. Die Isomorphismen dieser Kategorie sind genau die Kettenhomotopieäquivalenzen. Nach Proposition IV.2.4 faktorisiert der Homologiefunktor durch Kategorie der Kettenkomplexe und Homotopieklassen von Kettenabbildungen.
 
 IV.2.7. Beispiel (Abbildungskegel). Ist $\varphi:(C, \partial) \rightarrow\left(C^{\prime}, \partial^{\prime}\right)$ eine Kettenabbildung, dann definieren wir einen Kettenkomplex ( $C_{\varphi}, \partial^{C_{\varphi}}$ ), den sogenannten Abbildungskegel von $\varphi$, wie folgt:
 
@@ -2003,7 +2432,11 @@ $$
 Dabei bezeichnet $\left(\Sigma C, \partial^{\Sigma C}\right)$ den Kettenkomplex $(\Sigma C)_q:=C_{q-1}, \partial_q^{\Sigma C}:=-\partial_{q-1}$, die sogenannte Suspension von $C$.
 
 Ein Kettenkomplex $C$ heißt kontrahierbar, falls $C \simeq 0$. Dies ist genau dann der Fall, wenn $\operatorname{id}_C \simeq 0$. Kontrahierbare Kettenkomplexe sind azyklisch, siehe Proposition IV.2.5.
+
+
+
 IV.2.8. Proposition. Eine Kettenabbildung $\varphi: C \rightarrow C^{\prime}$ ist genau dann eine Kettenhomotopieäquivalenz, wenn der Abbildungskegel $C_{\varphi}$ kontrahierbar ist.
+
 
 Beweis. Es sei $h:\left(C_{\varphi}\right)_* \rightarrow\left(C_{\varphi}\right)_{*+1}$ ein Homomorphismus vom Grad 1. Bezüglich der Zerlegung $C_*^{\varphi}=C_*^{\prime} \oplus C_{*-1}$ können wir $h$ und $\partial^{C_{\varphi}}$ als Matrizen schreiben,
 

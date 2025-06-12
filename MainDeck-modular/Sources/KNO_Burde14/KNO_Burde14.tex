@@ -811,71 +811,31 @@ These properties determine $m$ and $\ell$ up to isotopy on $\partial V(\mathfrak
 
 Proof. 
 
+
 \begin{PROOF}{KNO-B14-04-02}{P: Homologische Eigenschaften von tabuieren Umgebungen von Knoten}
-For (a) there are several proofs. Here we present one based on homological methods. We use the following well-known results:
-
-$$
-H_{n}\left(S^{3}\right)= \begin{cases}\mathbb{Z} & \text { for } n=0,3 \\ 0 & \text { otherwise }\end{cases}
-$$
-
-$$
-\begin{aligned}
-H_{n}(\partial V) & = \begin{cases}\mathbb{Z} & \text { for } n=0,2 \\
-\mathbb{Z} \oplus \mathbb{Z} & \text { for } n=1, \\
-0 & \text { otherwise, }\end{cases} \\
-H_{n}(V)=H_{n}\left(S^{1}\right)= & \begin{cases}\mathbb{Z} & \text { for } n=0,1, \\
-0 & \text { otherwise; }\end{cases}
-\end{aligned}
-$$
-they can be found in standard books on algebraic topology, see Spanier [341], StöckerZieschang [346], Hatcher [157].
-
-Since $C$ is connected, $H_{0}(C)=\mathbb{Z}$. For further calculations we use the MayerVietoris sequence of the pair ( $V, C$ ) where $V \cup C=S^{3}, V \cap C=\partial V$ :
-
-\[
-\begin{tikzcd}[row sep=small, column sep=small]
-H_3(\partial V) \arrow[r] \arrow[d, equal] 
-  & H_3(V) \arrow[r, phantom, "\oplus"] \arrow[d, equal] 
-  & H_3(C) \arrow[r] 
-  & H_3(S^3) \arrow[r] \arrow[d, "\cong", "\mathbb{Z}"']
-  & H_2(\partial V) \arrow[r] \arrow[d, "\cong", "\mathbb{Z}"'] 
-  & {} \\
-0 & 0 & {} & \mathbb{Z} & \mathbb{Z} & {}
-\end{tikzcd}
-\]
-
-\[
-\begin{tikzcd}[row sep=small, column sep=small]
-{} \arrow[r]
-  & H_2(V) \arrow[r, phantom, "\oplus"] \arrow[d, equal]
-  & H_2(C) \arrow[r] 
-  & H_2(S^3) \arrow[r] \arrow[d, equal]
-  & H_1(\partial V) \arrow[r] \arrow[d, "\cong"]
-  & {} \\
-{} & 0 & {}& 0 & \mathbb{Z} \oplus \mathbb{Z} & {}
-\end{tikzcd}
-\]
-
-\[
-\begin{tikzcd}[row sep=small, column sep=small]
-{} \arrow[r] 
-  & H_1(V) \arrow[r, phantom, "\oplus"] \arrow[d, "\cong"] & H_1(C) \arrow[r]
-  & H_1(S^3) \arrow[d, equal] \\
-{} & \mathbb{Z} & {} & 0
-\end{tikzcd}
-\]
-It follows that $H_{1}(C)=\mathbb{Z}$. Since $\partial V$ is the boundary of the orientable compact 3manifold $C$, the group $H_{2}(\partial V)$ is mapped by the inclusion $\partial V \hookrightarrow C$ to $0 \in H_{2}(C)$. This implies that $H_{2}(C)=0$ and that $H_{3}\left(S^{3}\right) \rightarrow H_{2}(\partial V)$ is surjective; hence, $H_{3}(C)=0$.
-
-
-Since $C$ is a 3-manifold it follows that $H_{n}(C)=0$ for $n>3$; this is also a consequence of the Mayer-Vietoris sequence.
-
 Consider the isomorphism
 $$
 \mathbb{Z} \oplus \mathbb{Z} \cong H_{1}(\partial V) \rightarrow H_{1}(V) \oplus H_{1}(C)
 $$
-in the Mayer-Vietoris sequence. The generators of $H_{1}(V) \cong \mathbb{Z}$ and $H_{1}(C) \cong \mathbb{Z}$ are determined up to their inverses. Choose the homology class of $\mathfrak{k}$ as a generator of $H_{1}(V)$ and represent it by a simple closed curve $\ell$ on $\partial V$ which is homologous to 0 in $H_{1}(C)$. These conditions determine the homology class of $\ell$ in $\partial V$; hence, $\ell$ is unique up to isotopy on $\partial V$. A generator of $H_{1}(C)$ can be represented by a curve $m$ on $\partial V$ that is homologous to 0 in $V$. The curves $\ell$ and $m$ determine a system of generators of $H_{1}(\partial V) \cong \mathbb{Z} \oplus \mathbb{Z}$. By a well-known result, we may assume that $m$ is simple and intersects $\ell$ in one point, see e.g. Stillwell [345, 6.4.3], Zieschang, Vogt and Coldewey [382, E 3.22]. As $m$ is homologous to 0 in $V$ it is null-homotopic in $V$, bounds a disk, and is a meridian of the solid torus $V$. The linking number of $m$ and $\mathfrak{F}$ is 1 or -1. If necessary we reverse the direction of $m$ to get (4). These properties determine $m$ up to an isotopy of $\partial V$. A consequence is that $\ell$ and $\mathfrak{k}$ bound an annulus $A \subset V$.
+in the Mayer-Vietoris sequence. The generators of $H_{1}(V) \cong \mathbb{Z}$ and $H_{1}(C) \cong \mathbb{Z}$ are determined up to their inverses. Choose the homology class of $\mathfrak{k}$ as a generator of $H_{1}(V)$ and represent it by a simple closed curve $\ell$ on $\partial V$ which is homologous to 0 in $H_{1}(C)$. These conditions determine the homology class of $\ell$ in $\partial V$; hence, $\ell$ is unique up to isotopy on $\partial V$. 
+
+A generator of $H_{1}(C)$ can be represented by a curve $m$ on $\partial V$ that is homologous to 0 in $V$. 
+
+The curves $\ell$ and $m$ determine a system of generators of $H_{1}(\partial V) \cong \mathbb{Z} \oplus \mathbb{Z}$. 
+
+By a well-known result, we may assume that $m$ is simple and intersects $\ell$ in one point, see e.g. Stillwell [345, 6.4.3], Zieschang, Vogt and Coldewey [382, E 3.22]. 
+
+As $m$ is homologous to 0 in $V$ it is null-homotopic in $V$, bounds a disk, and is a meridian of the solid torus $V$. 
+
+The linking number of $m$ and $\mathfrak{F}$ is 1 or -1. If necessary we reverse the direction of $m$ to get (4). 
+
+These properties determine $m$ up to an isotopy of $\partial V$. 
+
+A consequence is that $\ell$ and $\mathfrak{k}$ bound an annulus $A \subset V$.
 
 Since $\ell \sim 0$ in $C, \ell$ bounds a surface, possibly with singularities, in $C$. (As we already know, see Proposition 2.4, $\ell$ even spans a surface without singularities: a Seifert surface.)
 \end{PROOF}
+
 
 
 
@@ -893,6 +853,21 @@ With respect to the complement $C$ of a knot, the longitude $\ell$ and the merid
 \pagebreak
 
 \subsection{Wirtinger presentation}
+
+
+\begin{DEF}{KNO-B14-03-14}{Alexandroff Kompaktifizierung}
+Sei $(X, \mathcal{T})$ ein topologischer Raum und $\infty$ ein Element, das nicht aus $X$ stammt. Zudem sei die Menge $X^*:=X \cup\{\infty\}$ mit der Topologie
+$$
+\mathcal{T}^*:=\mathcal{T} \cup\left\{X^* \backslash A \mid A \subseteq X, A \text { ist abgeschlossen und kompakt in }(X, \mathcal{T})\right\}
+$$
+ausgestattet. Dann ist $\left(X^*, \mathcal{T}^*\right)$ ein kompakter Raum, $\operatorname{der}(X, \mathcal{T})=\left(X, \mathcal{T}_{X^*}^*\right)$ als offenen Teilraum enthält. Die Kompaktifizierung ist durch die kanonische Injektion
+$$
+\iota: X \rightarrow X^*, \quad \iota(x):=x
+$$
+gegeben. ${ }^{[3]}$ Oft nennt man anstelle von $\iota$ auch den Raum $\left(X^*, \mathcal{T}^*\right)$ die Alexandroff-Kompaktifizierung von $(X, \mathcal{T})$, vorausgesetzt es handelt sich bei $X$ um eine dichte Teilmenge von $X^*$.
+Der Punkt $\infty$ wird zuweilen auch als unendlich fern bezeichnet.
+\end{DEF}
+
 
 \begin{CONC}{KNO-B14-03-13}{Settings zur Untersuchung der Knotengruppe}
 The most important and effective invariant of a knot $\mathfrak{k}$ (or link) is its group: the fundamental group of its complement $\mathfrak{G}=\pi_{1}\left(S^{3}-\mathfrak{k}\right)$. Frequently $S^{3}-\mathfrak{k}$ is replaced by $\mathbb{R}^{3}-\mathfrak{k}$ or by $\overline{S^{3}-V(\mathfrak{k})}$ or $\overline{\mathbb{R}^{3}-V(\mathfrak{k})}$, respectively. The fundamental groups of these various spaces are obviously isomorphic, the isomorphisms being induced by inclusion.
@@ -1219,6 +1194,36 @@ Theorem 3.16 shows the strength of the peripheral system; unfortunately, its pro
 Proof. Clearly, if $h: S^{3} \rightarrow S^{3}$ is an orientation preserving homeomorphism such that $h\left(\mathfrak{k}_{1}\right)=\mathfrak{k}_{2}$, then the restriction of $h$ to $S^{3}-\mathfrak{k}_{1}$ induces an isomorphism $\varphi: \mathscr{F}_{1} \rightarrow \mathscr{F}_{2}$ satisfying $\varphi\left(m_{1}\right)=m_{2}$ and $\varphi\left(\ell_{1}\right)=\ell_{2}$.
 
 Conversely, assume that $\varphi: \mathfrak{F}_{1} \rightarrow \mathfrak{F}_{2}$ is an isomorphism with the property that $\varphi\left(m_{1}\right)=m_{2}$ and $\varphi\left(\ell_{1}\right)=\ell_{2}$. By the theorem of Waldhausen on sufficiently large irreducible 3-manifolds, see Appendix B. 7 [367, Cor. 6.5], [159, 13.6] the isomorphism $\varphi$ is induced by a homeomorphism $h^{\prime}: C_{1} \rightarrow C_{2}$ mapping representative curves $\mu_{1}, \lambda_{1}$ of $m_{1}, \ell_{1}$ onto representatives $\mu_{2}, \lambda_{2}$ of $m_{2}, \ell_{2}$. The representatives can be taken on the boundaries $\partial C_{i}$. Note that Waldhausen's Theorem B. 7 can be applied in our situation, see Remark B.8.
+
+
+
+
+\pagebreak
+
+
+
+\section{Appendix}
+
+
+
+
+
+B. 5 Theorem (Generalized loop theorem). 
+
+
+\begin{THEO}{KNO-B14-02-34}{Papakyriakopoulos Loop Theorem}
+Let $M$ be a 3-manifold and let $B$ be a component of its boundary. If there are elements in $\operatorname{ker}\left(\pi_1 B \rightarrow \pi_1 M\right)$ which are not contained in a given normal subgroup $\Re$ of $\pi_1(B)$ then there is a simple loop $C$ on $B$ such that $C$ bounds a non-singular disk in $M$ and $[C] \notin \Re$.
+\end{THEO}
+
+\begin{REM}{KNO-B14-02-35}{Anmerkungen zum Papakyriakopoulos Loop Theorem}
+The Papakyriakopoulos Loop Theorem was proved by Papakyriakopoulos [281] and Stallings [342]. Proofs in books are available, see Rolfsen [309], Hempel [159] and Jaco [176]. See also Hatcher's notes [156].
+
+Remark. The proof is given in the second reference. The original version of the loop theorem ( $\Re=1$ ) was first formulated and proved by Papakyriakopoulos. Another generalization analogous to the Shapiro-Whitehead version of Dehn's Lemma was proved by Waldhausen [364].
+\end{REM}
+
+
+
+
 
 
 \end{document}

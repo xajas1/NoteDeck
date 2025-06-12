@@ -1,0 +1,133 @@
+{
+  "projectName": "KNO Vortrag",
+  "structure": [
+    {
+      "id": "sec-1749636569210",
+      "name": "Knoteninvariante und Knotengruppe",
+      "subsections": [
+        {
+          "id": "sub-1749636823309",
+          "name": "",
+          "unitUIDs": [
+            "b603595d-234b-41d5-8486-a5a086d77ba5",
+            "66c8d71a-bcfe-4d7b-b320-7b40fe26949a",
+            "b31aa861-c61f-4f1b-981b-588bb703230a",
+            "58e27a5d-6cb1-47de-b2f1-eb77e920c096",
+            "0b0a4fb5-79df-47d8-84ba-a51f2f8548dd",
+            "d2da22a2-d176-405e-8e1f-507ec32c86cc",
+            "ab63f0c2-13a5-47b5-8900-e928af00cfd0",
+            "7eaa9583-7544-46b8-b1e8-3863d9963606"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-1749636587284",
+      "name": "Wirtinger Darstellung der Knotengruppe",
+      "subsections": [
+        {
+          "id": "sub-1749636605109",
+          "name": "Freie Gruppen und Darstellungstheorie",
+          "unitUIDs": [
+            "4056c2ce-9b6f-4b92-b68c-5956e8602719",
+            "66203066-6312-4d17-839f-e38020ac57a2",
+            "a957de42-7954-4541-bb25-ab49f6ba8cd2",
+            "07d1738e-0839-4f20-9776-dd68dcd9bfc0",
+            "c0554b3e-6cb7-43dc-8a06-ef82006d8685",
+            "7a946d7c-3ac8-44a4-869d-4ca6d9e0d38d",
+            "4534adf0-dc3b-40f1-aec6-e9d08794dda3",
+            "408c8103-bfb2-469f-bdf1-5179fb9c6317",
+            "dcf30146-a913-492f-8d27-5685d127f6ef",
+            "ac2d8aee-2b19-4b3b-913e-62fd665fa929",
+            "daa73a6d-9647-4e14-b116-d7c78fc9e849",
+            "09d4b2af-5a78-403a-a04a-f567c404f6fa",
+            "9e7d7977-dc3e-472a-848d-91aaf685a2f3",
+            "4a7b66ac-470c-4735-b0b9-b501098dbe5e",
+            "fd05382d-edc6-4182-b7b9-b440565c52a0",
+            "ef4e8e4f-624c-4c61-9d6f-3e13bbf5c1df",
+            "2a68800f-ebfc-4c2c-ac4f-fe5f17703ed4"
+          ]
+        },
+        {
+          "id": "sub-1749636671813",
+          "name": "Wirtinger Theorem",
+          "unitUIDs": [
+            "47b1c819-cbc0-474a-8d3b-e754c5f3912d",
+            "4b00620c-0a5b-40d8-92fe-b294337f72b5",
+            "ffae0df6-6ab1-4021-8149-1af6e5bb0948"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-1749636685224",
+      "name": "Knotengruppe als Invariante",
+      "subsections": [
+        {
+          "id": "sub-1749636733378",
+          "name": "Papakyriakopoulos Theorem",
+          "unitUIDs": [
+            "b48ada7d-16d9-44c4-835a-8dccb1a18559",
+            "e25dd568-30e2-45f5-b466-b1fa89d7620b",
+            "4df4cb5a-3701-49f3-82c8-b8713de66649",
+            "f6098c21-35e6-4bd5-b875-41ede12b204b",
+            "ff3b38aa-663e-4716-853d-63f19c5c51d9",
+            "796245df-00a2-4858-9cc0-7401c1de372f",
+            "2350bbf7-12a8-47c6-8388-f6b59a526555"
+          ]
+        },
+        {
+          "id": "sub-1749636787437",
+          "name": "Effektivität der Wirtinger Darstellung",
+          "unitUIDs": [
+            "63fc99de-57e1-466d-a99a-0233623046c4",
+            "ca29b450-c2d4-4a54-bd24-f03a227596f6",
+            "32c6944d-29c5-4dcf-b17f-49f50df409ad",
+            "0d3ab268-5890-4f8b-9dac-50942f97f1ee",
+            "2ac23d7b-1344-4128-a547-515762441fa0",
+            "95ae8ee8-3e46-486c-927b-9a153a820554",
+            "0a0cbde6-3075-415f-a8e4-fe2738d2af05"
+          ]
+        },
+        {
+          "id": "sub-1749636816672",
+          "name": "Abelisierte Knotengruppe als Invariante",
+          "unitUIDs": [
+            "bdb4b907-57bd-492a-b740-aa7f23221c4a",
+            "fc269d6a-c03f-48fb-a62f-09f4dd7bf5b7",
+            "e66a6cce-9166-49b8-b015-0f8e7972fe15"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-1749637324355",
+      "name": "Appendix",
+      "subsections": [
+        {
+          "id": "sub-1749637336053",
+          "name": "Meridian und Longitude",
+          "unitUIDs": [
+            "6aec33a0-7845-4f1c-92a0-51129419599c",
+            "c2975a2f-bd01-4ce7-996b-1e56866486ac",
+            "9b28c91d-e8b7-4f57-b303-bebe9aa99638",
+            "4937e2b9-335e-4554-9bf4-b385b7a79d11"
+          ]
+        },
+        {
+          "id": "sub-1749637544609",
+          "name": "Hilfssätze",
+          "unitUIDs": []
+        },
+        {
+          "id": "sub-1749637647630",
+          "name": "Hurewicz-Isomorphismus",
+          "unitUIDs": [
+            "a7823247-bb88-477d-812e-d093168b19dc",
+            "4c9fc1bc-f847-4cc1-9d84-792246649dd6"
+          ]
+        }
+      ]
+    }
+  ]
+}
