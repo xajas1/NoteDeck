@@ -250,6 +250,13 @@
         "litIDs": {
           "R25": "QMS-R25-5"
         }
+      },
+      "Casimir Operatoren, Multiplets und Schur Lemma": {
+        "index": 6,
+        "parent": null,
+        "litIDs": {
+          "R25": "QMS-R25-6"
+        }
       }
     }
   },
@@ -687,13 +694,6 @@
         "parent": null,
         "litIDs": {
           "G25": "QM-G25-5"
-        }
-      },
-      "Ringe Basics": {
-        "index": 6,
-        "parent": "Ringe",
-        "litIDs": {
-          "G25": "QM-G25-6"
         }
       },
       "Korrespondenzprinzip": {

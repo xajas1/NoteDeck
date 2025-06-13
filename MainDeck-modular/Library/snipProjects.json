@@ -264,5 +264,20 @@
     "tableMeta": {
       "selectedSource": "KNO_Friedl12/KNO_Friedl12.tex"
     }
+  },
+  "A_S23": {
+    "sourceFile": "A_Stix23/A_Stix23.tex",
+    "snipMeta": {
+      "Subject": "A",
+      "Topic": "",
+      "LitID": "S23",
+      "CTyp": "DEF",
+      "ParentTopic": "",
+      "Content": "",
+      "selectedProject": "A_Stix23/A_Stix23.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "A_Stix23/A_Stix23.tex"
+    }
   }
 }

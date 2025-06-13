@@ -1,44 +1,6 @@
 [
   {
-    "UnitID": "A-T12-03-01",
-    "Subject": "A",
-    "Topic": "Ringe Basics",
-    "CTyp": "DEF",
-    "Content": "Ring mit Eins",
-    "LitID": "S23",
-    "Layer": null,
-    "Comp": null,
-    "RelInt": null,
-    "RelId": null,
-    "Cont": null,
-    "Cint": 0.0,
-    "CID": 0.0,
-    "ParentTopic": "Ringe",
-    "TopicPath": "Ringe/Ringe Basics",
-    "Body": "% TODO: Inhalt ergänzen (Tex)",
-    "UID": "5cda9788-1bb2-4802-a889-120c48ba5348"
-  },
-  {
-    "UnitID": "A-T12-03-02",
-    "Subject": "A",
-    "Topic": "Ringe Basics",
-    "CTyp": "DEF",
-    "Content": "Ring ohne Eins",
-    "LitID": "S23",
-    "Layer": null,
-    "Comp": null,
-    "RelInt": null,
-    "RelId": null,
-    "Cont": null,
-    "Cint": 0.0,
-    "CID": 0.0,
-    "ParentTopic": "Ringe",
-    "TopicPath": "Ringe/Ringe Basics",
-    "Body": "% TODO: Inhalt ergänzen (Tex)",
-    "UID": "ac0d1f79-c5d5-4e79-87eb-c1ba2633b045"
-  },
-  {
-    "UnitID": "A-T12-03-03",
+    "UnitID": "A-S23-03-03",
     "Subject": "A",
     "Topic": "Ringe Basics",
     "CTyp": "DEF",
@@ -57,7 +19,7 @@
     "UID": "b89d1950-b6ae-4300-bc4d-6cc0caec4fef"
   },
   {
-    "UnitID": "A-T12-03-04",
+    "UnitID": "A-S23-03-04",
     "Subject": "A",
     "Topic": "Ringe Basics",
     "CTyp": "EXA",
@@ -76,7 +38,7 @@
     "UID": "93ef2182-7e22-4940-9382-94fe1fde3ed7"
   },
   {
-    "UnitID": "A-T12-03-05",
+    "UnitID": "A-S23-03-05",
     "Subject": "A",
     "Topic": "Ringe Basics",
     "CTyp": "EXA",
@@ -95,7 +57,7 @@
     "UID": "752b76b7-db13-4002-bf4d-35cbb1e5e281"
   },
   {
-    "UnitID": "A-T12-03-06",
+    "UnitID": "A-S23-03-06",
     "Subject": "A",
     "Topic": "Ringe Basics",
     "CTyp": "EXA",
@@ -114,7 +76,7 @@
     "UID": "bb342291-b97d-47d7-964c-927d2c940f4f"
   },
   {
-    "UnitID": "A-T12-03-07",
+    "UnitID": "A-S23-03-07",
     "Subject": "A",
     "Topic": "Ringe Basics",
     "CTyp": "EXA",
@@ -133,7 +95,7 @@
     "UID": "8ef5636c-43cb-4287-bd28-6423d28bc5a8"
   },
   {
-    "UnitID": "A-T12-03-08",
+    "UnitID": "A-S23-03-08",
     "Subject": "A",
     "Topic": "Ringe Basics",
     "CTyp": "EXA",
@@ -152,7 +114,7 @@
     "UID": "b1443e8d-7ef5-4eba-ab33-67adfe76ab1e"
   },
   {
-    "UnitID": "A-T12-03-09",
+    "UnitID": "A-S23-03-09",
     "Subject": "A",
     "Topic": "Ringe Basics",
     "CTyp": "EXA",
@@ -171,7 +133,7 @@
     "UID": "bbc33173-9f8e-471e-949c-0a0bdfb1771c"
   },
   {
-    "UnitID": "A-T12-03-10",
+    "UnitID": "A-S23-03-10",
     "Subject": "A",
     "Topic": "Ringe Basics",
     "CTyp": "EXA",
@@ -190,7 +152,7 @@
     "UID": "36363fc1-7f31-4454-96f0-b877249aa8b5"
   },
   {
-    "UnitID": "A-T12-03-11",
+    "UnitID": "A-S23-03-11",
     "Subject": "A",
     "Topic": "Ringe Basics",
     "CTyp": "EXA",
@@ -209,7 +171,7 @@
     "UID": "4a23975b-0880-49e1-8d0f-d1b1048ed77a"
   },
   {
-    "UnitID": "A-T12-03-12",
+    "UnitID": "A-S23-03-12",
     "Subject": "A",
     "Topic": "Ringe Basics",
     "CTyp": "EXA",
@@ -228,7 +190,7 @@
     "UID": "a987370f-8441-49b5-8792-7af476210c93"
   },
   {
-    "UnitID": "A-T12-03-13",
+    "UnitID": "A-S23-03-13",
     "Subject": "A",
     "Topic": "Ringe Basics",
     "CTyp": "REM",
@@ -247,7 +209,7 @@
     "UID": "99d8f6b2-d0f5-4a79-8eb5-22b892bdf6b7"
   },
   {
-    "UnitID": "A-T12-03-14",
+    "UnitID": "A-S23-03-14",
     "Subject": "A",
     "Topic": "Ringe Basics",
     "CTyp": "LEM",
@@ -266,7 +228,7 @@
     "UID": "a01d3ba2-3acc-46d1-9b9e-20fdc13190b2"
   },
   {
-    "UnitID": "A-T12-03-15",
+    "UnitID": "A-S23-03-15",
     "Subject": "A",
     "Topic": "Ringe Basics",
     "CTyp": "LEM",
@@ -285,7 +247,7 @@
     "UID": "7b20b6b6-6d68-42a5-b6a2-ed64e6655b63"
   },
   {
-    "UnitID": "A-T12-03-16",
+    "UnitID": "A-S23-03-16",
     "Subject": "A",
     "Topic": "Ringe Basics",
     "CTyp": "DEF",
@@ -304,7 +266,7 @@
     "UID": "04115f42-a71d-44c1-9da2-7f49d7f9ab2e"
   },
   {
-    "UnitID": "A-T12-03-17",
+    "UnitID": "A-S23-03-17",
     "Subject": "A",
     "Topic": "Ringe Basics",
     "CTyp": "REM",
@@ -323,7 +285,7 @@
     "UID": "941f622f-6838-4e30-92f5-92f4f21fcf0f"
   },
   {
-    "UnitID": "A-T12-03-18",
+    "UnitID": "A-S23-03-18",
     "Subject": "A",
     "Topic": "Ringe Basics",
     "CTyp": "EXA",
@@ -342,7 +304,7 @@
     "UID": "5286cc2c-285f-4fed-b921-ff34332bd2a9"
   },
   {
-    "UnitID": "A-T12-03-19",
+    "UnitID": "A-S23-03-19",
     "Subject": "A",
     "Topic": "Ringe Basics",
     "CTyp": "EXA",
@@ -361,7 +323,7 @@
     "UID": "7f07bf72-03ec-4327-99c9-544716dd15f1"
   },
   {
-    "UnitID": "A-T12-03-20",
+    "UnitID": "A-S23-03-20",
     "Subject": "A",
     "Topic": "Ringe Basics",
     "CTyp": "EXA",
@@ -380,7 +342,7 @@
     "UID": "451f059f-0ff7-43b3-ba32-c1635bce06fa"
   },
   {
-    "UnitID": "A-T12-03-21",
+    "UnitID": "A-S23-03-21",
     "Subject": "A",
     "Topic": "Ringe Basics",
     "CTyp": "DEF",
@@ -399,7 +361,7 @@
     "UID": "f5898268-1947-4921-9396-e41ab48878e9"
   },
   {
-    "UnitID": "A-T12-03-22",
+    "UnitID": "A-S23-03-22",
     "Subject": "A",
     "Topic": "Ringe Basics",
     "CTyp": "DEF",
@@ -418,7 +380,7 @@
     "UID": "3005a44c-d681-4a28-b1e0-3947fd9957f6"
   },
   {
-    "UnitID": "A-T12-03-23",
+    "UnitID": "A-S23-03-23",
     "Subject": "A",
     "Topic": "Ringe Basics",
     "CTyp": "EXA",
@@ -437,7 +399,7 @@
     "UID": "379b88d1-9e84-4069-ba07-3fd88ec10458"
   },
   {
-    "UnitID": "A-T12-03-24",
+    "UnitID": "A-S23-03-24",
     "Subject": "A",
     "Topic": "Ringe Basics",
     "CTyp": "DEF",
@@ -456,7 +418,7 @@
     "UID": "f0e3e3f2-970b-44a2-99c3-edb030d8073d"
   },
   {
-    "UnitID": "A-T12-03-25",
+    "UnitID": "A-S23-03-25",
     "Subject": "A",
     "Topic": "Ringe Basics",
     "CTyp": "PROP",
@@ -475,7 +437,7 @@
     "UID": "efe86ff8-fd98-4556-a9cc-0c74fab4dab6"
   },
   {
-    "UnitID": "A-T12-03-26",
+    "UnitID": "A-S23-03-26",
     "Subject": "A",
     "Topic": "Ringe Basics",
     "CTyp": "EXA",
@@ -494,7 +456,7 @@
     "UID": "edb77d33-c546-402e-b2e7-edffeacb93ca"
   },
   {
-    "UnitID": "A-T12-03-27",
+    "UnitID": "A-S23-03-27",
     "Subject": "A",
     "Topic": "Ringe Basics",
     "CTyp": "EXA",
@@ -513,7 +475,7 @@
     "UID": "f3be17dc-748a-49a4-af1b-4e774cbd9cb8"
   },
   {
-    "UnitID": "A-T12-03-28",
+    "UnitID": "A-S23-03-28",
     "Subject": "A",
     "Topic": "Ringe Basics",
     "CTyp": "EXA",
@@ -532,7 +494,7 @@
     "UID": "a2aa43af-5bab-4bda-84c0-b796e9f68a7e"
   },
   {
-    "UnitID": "A-T12-04-01",
+    "UnitID": "A-S23-04-01",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "REM",
@@ -551,7 +513,7 @@
     "UID": "b244d2bb-8dc2-47b5-8002-85b042425105"
   },
   {
-    "UnitID": "A-T12-04-02",
+    "UnitID": "A-S23-04-02",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "REM",
@@ -570,7 +532,7 @@
     "UID": "dadbba70-0186-48d1-aef1-5c82ddc5f8f0"
   },
   {
-    "UnitID": "A-T12-04-03",
+    "UnitID": "A-S23-04-03",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "REM",
@@ -589,7 +551,7 @@
     "UID": "8973ce6a-6a6c-4a92-b80c-b207229b042a"
   },
   {
-    "UnitID": "A-T12-04-04",
+    "UnitID": "A-S23-04-04",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "REM",
@@ -608,7 +570,7 @@
     "UID": "7920e99d-5e03-45b0-aafb-4b6e7d822746"
   },
   {
-    "UnitID": "A-T12-04-05",
+    "UnitID": "A-S23-04-05",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "PROP",
@@ -627,7 +589,7 @@
     "UID": "a1965a94-e48f-4991-ae96-a4961c036978"
   },
   {
-    "UnitID": "A-T12-04-06",
+    "UnitID": "A-S23-04-06",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "EXA",
@@ -646,7 +608,7 @@
     "UID": "e0fe0361-89bb-41f4-ae1e-0801189b5206"
   },
   {
-    "UnitID": "A-T12-04-07",
+    "UnitID": "A-S23-04-07",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "EXA",
@@ -665,7 +627,7 @@
     "UID": "b4078c94-3d8f-4e93-bd2e-7c464208d7cc"
   },
   {
-    "UnitID": "A-T12-04-08",
+    "UnitID": "A-S23-04-08",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "DEF",
@@ -684,7 +646,7 @@
     "UID": "63b15b6f-08de-4cd5-9474-247801177efa"
   },
   {
-    "UnitID": "A-T12-04-09",
+    "UnitID": "A-S23-04-09",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "LEM",
@@ -703,7 +665,7 @@
     "UID": "863a7377-7aeb-47ec-8785-e2b11620b177"
   },
   {
-    "UnitID": "A-T12-04-10",
+    "UnitID": "A-S23-04-10",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "REM",
@@ -722,7 +684,7 @@
     "UID": "ba4a18a0-224e-4b98-bd1a-0be4be5ecb7b"
   },
   {
-    "UnitID": "A-T12-04-11",
+    "UnitID": "A-S23-04-11",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "REM",
@@ -741,7 +703,7 @@
     "UID": "40a3b2f5-f7b4-423a-b504-b80025cc9ad5"
   },
   {
-    "UnitID": "A-T12-04-12",
+    "UnitID": "A-S23-04-12",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "LEM",
@@ -760,7 +722,7 @@
     "UID": "995dbbbb-418c-4ec1-b92b-64a95955b35c"
   },
   {
-    "UnitID": "A-T12-04-13",
+    "UnitID": "A-S23-04-13",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "DEF",
@@ -779,7 +741,7 @@
     "UID": "a4faa538-df1e-4cb0-8a4e-76601ff05708"
   },
   {
-    "UnitID": "A-T12-04-14",
+    "UnitID": "A-S23-04-14",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "EXA",
@@ -798,7 +760,7 @@
     "UID": "6071a285-3cd3-4c36-8e59-b945fd55737d"
   },
   {
-    "UnitID": "A-T12-04-15",
+    "UnitID": "A-S23-04-15",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "PROP",
@@ -817,7 +779,7 @@
     "UID": "207d1bd1-0a12-44ab-83dc-35088ac00eb6"
   },
   {
-    "UnitID": "A-T12-04-16",
+    "UnitID": "A-S23-04-16",
     "Subject": "A",
     "Topic": "Potenzreihenringe und Polynomringe",
     "CTyp": "PROP",
@@ -836,7 +798,7 @@
     "UID": "400b7ad2-c034-4a61-bbb3-5985add4e88e"
   },
   {
-    "UnitID": "A-T12-05-01",
+    "UnitID": "A-S23-05-01",
     "Subject": "A",
     "Topic": "Ideale und Quotienten",
     "CTyp": "REM",
@@ -855,7 +817,7 @@
     "UID": "9310fbc9-5b9b-4ca8-91db-261393498d2f"
   },
   {
-    "UnitID": "A-T12-05-02",
+    "UnitID": "A-S23-05-02",
     "Subject": "A",
     "Topic": "Ideale und Quotienten",
     "CTyp": "DEF",
@@ -874,7 +836,7 @@
     "UID": "9d9b4b0f-e72c-4a07-80c7-24cc70e9ed10"
   },
   {
-    "UnitID": "A-T12-05-03",
+    "UnitID": "A-S23-05-03",
     "Subject": "A",
     "Topic": "Ideale und Quotienten",
     "CTyp": "LEM",
@@ -893,7 +855,7 @@
     "UID": "529c40d6-b34d-416e-84ad-4d3efd0d67dd"
   },
   {
-    "UnitID": "A-T12-05-04",
+    "UnitID": "A-S23-05-04",
     "Subject": "A",
     "Topic": "Ideale und Quotienten",
     "CTyp": "EXA",
@@ -912,7 +874,7 @@
     "UID": "247c098d-a5eb-4599-9fe7-26ef68733ca4"
   },
   {
-    "UnitID": "A-T12-05-05",
+    "UnitID": "A-S23-05-05",
     "Subject": "A",
     "Topic": "Ideale und Quotienten",
     "CTyp": "PROP",
@@ -931,7 +893,7 @@
     "UID": "af22e020-243e-4952-a4b4-c60543c8f1bd"
   },
   {
-    "UnitID": "A-T12-05-06",
+    "UnitID": "A-S23-05-06",
     "Subject": "A",
     "Topic": "Ideale und Quotienten",
     "CTyp": "PROP",
@@ -950,7 +912,7 @@
     "UID": "591f835d-c889-4bb6-8214-b749ec09e4d3"
   },
   {
-    "UnitID": "A-T12-05-07",
+    "UnitID": "A-S23-05-07",
     "Subject": "A",
     "Topic": "Ideale und Quotienten",
     "CTyp": "DEF",
@@ -969,7 +931,7 @@
     "UID": "34dde64f-0b81-4536-b03c-6a0dfc78dbf0"
   },
   {
-    "UnitID": "A-T12-05-08",
+    "UnitID": "A-S23-05-08",
     "Subject": "A",
     "Topic": "Ideale und Quotienten",
     "CTyp": "REM",
@@ -988,7 +950,7 @@
     "UID": "e558b51b-b651-46de-bb52-71576c157853"
   },
   {
-    "UnitID": "A-T12-05-09",
+    "UnitID": "A-S23-05-09",
     "Subject": "A",
     "Topic": "Ideale und Quotienten",
     "CTyp": "LEM",
@@ -1007,7 +969,7 @@
     "UID": "d438a36c-4755-485d-aec4-c2f339221578"
   },
   {
-    "UnitID": "A-T12-05-10",
+    "UnitID": "A-S23-05-10",
     "Subject": "A",
     "Topic": "Ideale und Quotienten",
     "CTyp": "DEF",
@@ -1026,7 +988,7 @@
     "UID": "ef45941c-f699-48a8-a155-75229d63c30e"
   },
   {
-    "UnitID": "A-T12-05-11",
+    "UnitID": "A-S23-05-11",
     "Subject": "A",
     "Topic": "Ideale und Quotienten",
     "CTyp": "EXA",
@@ -1045,7 +1007,7 @@
     "UID": "aca4f019-edc5-4f27-9e2d-35a19ff37af8"
   },
   {
-    "UnitID": "A-T12-05-12",
+    "UnitID": "A-S23-05-12",
     "Subject": "A",
     "Topic": "Ideale und Quotienten",
     "CTyp": "EXA",
@@ -1064,7 +1026,7 @@
     "UID": "038c9eb9-11d8-49ba-a2ac-238ded939538"
   },
   {
-    "UnitID": "A-T12-05-13",
+    "UnitID": "A-S23-05-13",
     "Subject": "A",
     "Topic": "Ideale und Quotienten",
     "CTyp": "EXA",
@@ -1083,7 +1045,7 @@
     "UID": "0b6ba1b1-d9e8-4ba7-b672-656eb772c581"
   },
   {
-    "UnitID": "A-T12-05-14",
+    "UnitID": "A-S23-05-14",
     "Subject": "A",
     "Topic": "Ideale und Quotienten",
     "CTyp": "LEM",
@@ -1102,7 +1064,7 @@
     "UID": "8e63370d-dde0-47b7-ada4-53969e3027f6"
   },
   {
-    "UnitID": "A-T12-05-15",
+    "UnitID": "A-S23-05-15",
     "Subject": "A",
     "Topic": "Ideale und Quotienten",
     "CTyp": "PROP",
@@ -1121,7 +1083,7 @@
     "UID": "4df1c1db-c8f9-40f7-8125-5ea097b8d522"
   },
   {
-    "UnitID": "A-T12-05-16",
+    "UnitID": "A-S23-05-16",
     "Subject": "A",
     "Topic": "Ideale und Quotienten",
     "CTyp": "KORO",
@@ -1140,7 +1102,7 @@
     "UID": "7b5d232f-1815-4086-83bc-13b93969e20a"
   },
   {
-    "UnitID": "A-T12-05-17",
+    "UnitID": "A-S23-05-17",
     "Subject": "A",
     "Topic": "Ideale und Quotienten",
     "CTyp": "DEF",
@@ -1159,7 +1121,7 @@
     "UID": "10bfb6f4-65c8-47e3-a523-c8dd169e2c0e"
   },
   {
-    "UnitID": "A-T12-05-18",
+    "UnitID": "A-S23-05-18",
     "Subject": "A",
     "Topic": "Ideale und Quotienten",
     "CTyp": "PROP",
@@ -1178,7 +1140,7 @@
     "UID": "a1d1bcf2-7e8a-43b5-8fca-03cb74de9c04"
   },
   {
-    "UnitID": "A-T12-05-19",
+    "UnitID": "A-S23-05-19",
     "Subject": "A",
     "Topic": "Ideale und Quotienten",
     "CTyp": "REM",
@@ -1197,7 +1159,7 @@
     "UID": "3e3ff1a0-701c-43ba-b5b1-d335c0e2ea7c"
   },
   {
-    "UnitID": "A-T12-05-20",
+    "UnitID": "A-S23-05-20",
     "Subject": "A",
     "Topic": "Ideale und Quotienten",
     "CTyp": "PROP",
@@ -1216,7 +1178,7 @@
     "UID": "6114aaa7-7e7a-4ac2-a5f7-ed005901b560"
   },
   {
-    "UnitID": "A-T12-05-21",
+    "UnitID": "A-S23-05-21",
     "Subject": "A",
     "Topic": "Ideale und Quotienten",
     "CTyp": "PROP",
@@ -1235,7 +1197,7 @@
     "UID": "eff93e8d-1099-41e9-b6e8-517015694c83"
   },
   {
-    "UnitID": "A-T12-05-22",
+    "UnitID": "A-S23-05-22",
     "Subject": "A",
     "Topic": "Ideale und Quotienten",
     "CTyp": "PROP",
@@ -1254,7 +1216,7 @@
     "UID": "712b6fa4-4767-4ec1-ac1a-b46c5f5989c1"
   },
   {
-    "UnitID": "A-T12-05-23",
+    "UnitID": "A-S23-05-23",
     "Subject": "A",
     "Topic": "Ideale und Quotienten",
     "CTyp": "REM",
@@ -1273,7 +1235,7 @@
     "UID": "668a375b-eedc-4610-b84b-9d574c9d0e1d"
   },
   {
-    "UnitID": "A-T12-05-24",
+    "UnitID": "A-S23-05-24",
     "Subject": "A",
     "Topic": "Ideale und Quotienten",
     "CTyp": "EXA",
@@ -1292,7 +1254,7 @@
     "UID": "da2a6893-45e6-47b9-96b1-cdf1c1e61f4b"
   },
   {
-    "UnitID": "A-T12-05-25",
+    "UnitID": "A-S23-05-25",
     "Subject": "A",
     "Topic": "Ideale und Quotienten",
     "CTyp": "PROP",
@@ -1311,7 +1273,7 @@
     "UID": "30d2b19b-74b2-4111-a1d1-ff45d225f512"
   },
   {
-    "UnitID": "A-T12-05-26",
+    "UnitID": "A-S23-05-26",
     "Subject": "A",
     "Topic": "Ideale und Quotienten",
     "CTyp": "PROP",
@@ -1330,7 +1292,7 @@
     "UID": "48287041-30d3-4a94-801d-6045b2435789"
   },
   {
-    "UnitID": "A-T12-07-01",
+    "UnitID": "A-S23-07-01",
     "Subject": "A",
     "Topic": "Moduln Grundlagen",
     "CTyp": "DEF",
@@ -1349,7 +1311,7 @@
     "UID": "95f275aa-b834-4825-9010-aa84d052f19e"
   },
   {
-    "UnitID": "A-T12-07-02",
+    "UnitID": "A-S23-07-02",
     "Subject": "A",
     "Topic": "Moduln Grundlagen",
     "CTyp": "DEF",
@@ -1368,7 +1330,7 @@
     "UID": "ff53d6d7-276d-4859-b8ef-7d685d375385"
   },
   {
-    "UnitID": "A-T12-07-03",
+    "UnitID": "A-S23-07-03",
     "Subject": "A",
     "Topic": "Moduln Grundlagen",
     "CTyp": "DEF",
@@ -1387,7 +1349,7 @@
     "UID": "767c001f-ccf7-42b1-8ab0-efad60b4d619"
   },
   {
-    "UnitID": "A-T12-07-04",
+    "UnitID": "A-S23-07-04",
     "Subject": "A",
     "Topic": "Moduln Grundlagen",
     "CTyp": "DEF",
@@ -1406,7 +1368,7 @@
     "UID": "52fa9cf3-4435-442b-9c24-575e262378ec"
   },
   {
-    "UnitID": "A-T12-07-05",
+    "UnitID": "A-S23-07-05",
     "Subject": "A",
     "Topic": "Moduln Grundlagen",
     "CTyp": "DEF",
@@ -1425,7 +1387,7 @@
     "UID": "5d0bd146-4cf4-4cd9-a1fb-97e0e7cc9c45"
   },
   {
-    "UnitID": "A-T12-07-06",
+    "UnitID": "A-S23-07-06",
     "Subject": "A",
     "Topic": "Moduln Grundlagen",
     "CTyp": "DEF",
@@ -1444,7 +1406,7 @@
     "UID": "e9141480-6ba6-4565-ae75-d754abd5c666"
   },
   {
-    "UnitID": "A-T12-07-07",
+    "UnitID": "A-S23-07-07",
     "Subject": "A",
     "Topic": "Moduln Grundlagen",
     "CTyp": "DEF",
@@ -1463,7 +1425,7 @@
     "UID": "795d7655-863d-4390-ad4a-2a4f4aee4b54"
   },
   {
-    "UnitID": "A-T12-07-08",
+    "UnitID": "A-S23-07-08",
     "Subject": "A",
     "Topic": "Moduln Grundlagen",
     "CTyp": "DEF",
@@ -1482,7 +1444,7 @@
     "UID": "555651cc-cac6-4d09-a1a3-982a6271f204"
   },
   {
-    "UnitID": "A-T12-07-09",
+    "UnitID": "A-S23-07-09",
     "Subject": "A",
     "Topic": "Moduln Grundlagen",
     "CTyp": "DEF",
@@ -1501,7 +1463,7 @@
     "UID": "a1a6a103-f57a-4530-a9f2-db55d1a57ae1"
   },
   {
-    "UnitID": "A-T12-07-10",
+    "UnitID": "A-S23-07-10",
     "Subject": "A",
     "Topic": "Moduln Grundlagen",
     "CTyp": "DEF",
@@ -1520,7 +1482,7 @@
     "UID": "7ed2803e-ffd1-4201-b600-5afa83a5c0a0"
   },
   {
-    "UnitID": "A-T12-07-11",
+    "UnitID": "A-S23-07-11",
     "Subject": "A",
     "Topic": "Moduln Grundlagen",
     "CTyp": "EXA",
@@ -1539,7 +1501,7 @@
     "UID": "2e480263-f1cb-40af-aa2b-470f16235ca1"
   },
   {
-    "UnitID": "A-T12-07-12",
+    "UnitID": "A-S23-07-12",
     "Subject": "A",
     "Topic": "Moduln Grundlagen",
     "CTyp": "EXA",
@@ -1558,7 +1520,7 @@
     "UID": "4f95cfb9-0ac2-4e78-acb8-e293c2e93952"
   },
   {
-    "UnitID": "A-T12-07-13",
+    "UnitID": "A-S23-07-13",
     "Subject": "A",
     "Topic": "Moduln Grundlagen",
     "CTyp": "EXA",
@@ -1577,7 +1539,7 @@
     "UID": "e7ae2ccb-57c9-463c-8c4c-a95eca91a91e"
   },
   {
-    "UnitID": "A-T12-07-14",
+    "UnitID": "A-S23-07-14",
     "Subject": "A",
     "Topic": "Moduln Grundlagen",
     "CTyp": "EXA",
@@ -1596,7 +1558,7 @@
     "UID": "59d683a9-1460-44f6-939f-c1a1c1a42a9c"
   },
   {
-    "UnitID": "A-T12-07-15",
+    "UnitID": "A-S23-07-15",
     "Subject": "A",
     "Topic": "Moduln Grundlagen",
     "CTyp": "EXA",
@@ -1615,7 +1577,7 @@
     "UID": "d43e5a29-0c1e-44a0-80fc-b39f59238b5d"
   },
   {
-    "UnitID": "A-T12-07-16",
+    "UnitID": "A-S23-07-16",
     "Subject": "A",
     "Topic": "Moduln Grundlagen",
     "CTyp": "EXA",
@@ -1634,7 +1596,7 @@
     "UID": "bfef75a2-d268-4d6b-9423-1b90c4e8fbf0"
   },
   {
-    "UnitID": "A-T12-07-17",
+    "UnitID": "A-S23-07-17",
     "Subject": "A",
     "Topic": "Moduln Grundlagen",
     "CTyp": "EXA",
@@ -1653,7 +1615,7 @@
     "UID": "c75d4a7e-59e4-4ab4-b9d2-1889844be283"
   },
   {
-    "UnitID": "A-T12-07-18",
+    "UnitID": "A-S23-07-18",
     "Subject": "A",
     "Topic": "Moduln Grundlagen",
     "CTyp": "EXA",
@@ -1672,7 +1634,7 @@
     "UID": "4ae0405f-da8b-4eab-96ba-8d9a47bf6b68"
   },
   {
-    "UnitID": "A-T12-07-19",
+    "UnitID": "A-S23-07-19",
     "Subject": "A",
     "Topic": "Moduln Grundlagen",
     "CTyp": "EXA",
@@ -1691,7 +1653,7 @@
     "UID": "ce0b981e-852e-4f4e-8613-304deb464d7d"
   },
   {
-    "UnitID": "A-T12-07-20",
+    "UnitID": "A-S23-07-20",
     "Subject": "A",
     "Topic": "Moduln Grundlagen",
     "CTyp": "EXA",
@@ -1710,7 +1672,7 @@
     "UID": "63b86bff-feb9-4224-8bd5-4c446351d974"
   },
   {
-    "UnitID": "A-T12-07-21",
+    "UnitID": "A-S23-07-21",
     "Subject": "A",
     "Topic": "Moduln Grundlagen",
     "CTyp": "EXA",
@@ -1729,7 +1691,7 @@
     "UID": "527ecfab-9a4e-4a93-8cf2-b4041fa03a68"
   },
   {
-    "UnitID": "A-T12-07-22",
+    "UnitID": "A-S23-07-22",
     "Subject": "A",
     "Topic": "Moduln Grundlagen",
     "CTyp": "EXA",
@@ -1748,7 +1710,7 @@
     "UID": "fe87ab0b-41aa-4c11-9c73-5eaade7053bc"
   },
   {
-    "UnitID": "A-T12-07-23",
+    "UnitID": "A-S23-07-23",
     "Subject": "A",
     "Topic": "Moduln Grundlagen",
     "CTyp": "EXA",
@@ -8531,7 +8493,7 @@
     "UID": "ddd557f7-7cec-4f6a-9f4a-e809c9165320"
   },
   {
-    "UnitID": "A-T12-Ri-29",
+    "UnitID": "A-S23-Ri-29",
     "Subject": "A",
     "Topic": "Ringe Basics",
     "CTyp": "DEF",
@@ -25287,5 +25249,632 @@
     "ParentTopic": "",
     "TopicPath": "/Freie Gruppen",
     "Body": "Um die Notation zu vereinfachen setzen wir $U_1:=U$ und $U_2:=V$. Wir zeigen zunächst die Surjektivität von $\\Phi$. Sei dazu $f: I \\rightarrow X$ eine Schleife bei $x_0$. Da $\\left\\{U_1, U_2\\right\\}$ eine offene Überdeckung von $X$ bildet, ist $\\left\\{f^{-1}\\left(U_1\\right), f^{-1}\\left(U_2\\right)\\right\\}$ eine offene Überdeckung des Intervalls $I$. Nach Lemma I.1.28 existieren $0=s_0<$ $s_1<\\cdots<s_n=1$ und $\\alpha_1, \\ldots, \\alpha_n \\in\\{1,2\\}$, sodass $f\\left(\\left[s_{i-1}, s_i\\right]\\right) \\subseteq U_{\\alpha_i}$, für jedes $i=$ $1, \\ldots, n$. Durch Weglassen gewisser Unterteilungspunkte $s_i$ können wir erreichen, dass $f\\left(s_i\\right) \\in U_1 \\cap U_2$ für alle $i=0, \\ldots, n$, denn wäre etwa $f\\left(s_i\\right) \\in U_1 \\backslash U_2$ dann gilt sowohl $f\\left(\\left[s_{i-1}, s_i\\right]\\right) \\subseteq U_1$ als auch $f\\left(\\left[s_i, s_{i+1}\\right]\\right) \\subseteq U_1$. Betrachte die reparametrisierten Einschränkungen $f_i: I \\rightarrow U_{\\alpha_i} \\subseteq X, f_i(s):=f\\left((1-s) s_{i-1}+s s_i\\right), i=1, \\ldots, n$. Es gilt $f \\simeq f_1 f_2 \\cdots f_n$ relativ Endpunkten in $X$, siehe Beispiel I.1.3. Da $U_1 \\cap U_2$ wegzusammenhängend ist, finden wir Wege $h_i: I \\rightarrow U_1 \\cap U_2$ von $h_i(0)=x_0$ nach $h_i(1)=f_i(1)=f\\left(s_i\\right), i=1, \\ldots, n-1$. Weiters seien $h_0:=h_n:=c_{x_0}$ die konstanten Wege. Wir erhalten $f \\simeq\\left(h_0 f_1 \\bar{h}_1\\right)\\left(h_1 f_2 \\bar{h}_2\\right)\\left(h_2 f_3 \\bar{h}_3\\right) \\cdots\\left(h_{n-1} f_n \\bar{h}_n\\right)$ relativ Endpunkten in $X$, denn $\\bar{h}_i h_i \\simeq c_{f\\left(s_i\\right)}$. Jeder der Faktoren $h_{i-1} f_i \\bar{h}_i$ ist eine Schleife bei $x_0$ in $U_{\\alpha_i}$ und definiert daher ein Element $\\sigma_i \\in \\pi_1\\left(U_{\\alpha_i}, x_0\\right), \\sigma_i:=\\left[h_{i-1} f_i \\bar{h}_i\\right]$, $i=1, \\ldots, n$. Es folgt $\\Phi\\left(\\sigma_1 \\cdots \\sigma_n\\right)=\\Phi\\left(\\sigma_1\\right) \\cdots \\Phi\\left(\\sigma_n\\right)=\\left[\\left(h_0 f_1 \\bar{h}_1\\right) \\cdots\\left(h_{n-1} f_n \\bar{h}_n\\right)\\right]=$ $[f] \\in \\pi_1\\left(X, x_0\\right)$, also ist $\\Phi$ surjektiv.\n\nEs bleibt noch zu zeigen $\\operatorname{ker}(\\Phi) \\subseteq N$. Seien also $f_k: I \\rightarrow U_{\\beta_k}$ Schleifen bei $x_0$, $1 \\leq k \\leq m, \\beta_1, \\ldots, \\beta_m \\in\\{1,2\\}$, sodass $\\Phi\\left(\\left[f_1\\right] \\cdots\\left[f_m\\right]\\right)=1 \\in \\pi_1\\left(X, x_0\\right)$. Es ist zu zeigen, dass $\\left[f_1\\right] \\cdots\\left[f_m\\right]=1 \\in\\left(\\pi_1\\left(U_1, x_0\\right) * \\pi_1\\left(U_2, x_0\\right)\\right) / N$. Betrachte die Schleife $f: I \\rightarrow X, f:=f_1 f_2 \\cdots f_m$. Nach Voraussetzung ist $[f]=\\Phi\\left(\\left[f_1\\right]\\right) \\cdots \\Phi\\left(\\left[f_m\\right]\\right)=$ $\\Phi\\left(\\left[f_1\\right] \\cdots\\left[f_m\\right]\\right)=1 \\in \\pi_1\\left(X, x_0\\right)$. Daher existiert eine Homotopie von Wegen $H$ : $I \\times I \\rightarrow X$ von $H_0=c_{x_0}$ nach $H_1=f$. Da $\\left\\{U_1, U_2\\right\\}$ eine offene Überdeckung von $X$ ist, muss auch $\\left\\{H^{-1}\\left(U_1\\right), H^{-1}\\left(U_2\\right)\\right\\}$ eine offene Überdeckung von $I \\times I$ sein. Nach Lemma I.1.28 existieren $0=s_0<s_1<\\cdots<s_n=1$ und $0=t_0<$ $t_1<\\cdots<t_n=1$ sowie $\\alpha_i^j \\in\\{1,2\\}$, sodass $H\\left(\\left[s_{i-1}, s_i\\right] \\times\\left[t_{j-1}, t_j\\right]\\right) \\subseteq U_{\\alpha_i^j}$, für alle $1 \\leq i, j \\leq n$. Betrachte die Wege\n\n$$\n\\begin{aligned}\nu_i^j: I \\rightarrow U_{\\alpha_i^j} \\subseteq X & & u_i^j(s):=H\\left((1-s) s_{i-1}+s s_i, t_j\\right) \\\\\nb_i^j: I \\rightarrow U_{\\alpha_i^j} \\subseteq X & & b_i^j(s):=H\\left((1-s) s_{i-1}+s s_i, t_{j-1}\\right) \\\\\nl_i^j: I \\rightarrow U_{\\alpha_i^j} \\subseteq X & & l_i^j(t):=H\\left(s_{j-1},(1-t) t_{j-1}+t t_j\\right) \\\\\nr_i^j: I \\rightarrow U_{\\alpha_i^j} \\subseteq X & & r_i^j(t):=H\\left(s_j,(1-t) t_{j-1}+t t_j\\right)\n\\end{aligned}\n$$\n\n\nDa $H_1=f=f_1 \\cdots f_m$ dürfen wir durch Übergang zu einer feineren Zerlegung von $I \\times I$ o.B.d.A. annehmen, dass $0=i_0<i_1<\\ldots<i_m=n$ existieren mit $\\alpha_{i_{k-1}+1}^n=\\alpha_{i_{k-1}+2}^n=\\cdots=\\alpha_{i_k}^n=\\beta_k$ und\n\n$$\nu_{i_{k-1}+1}^n u_{i_{k-1}+2}^n \\cdots u_{i_k}^n \\simeq f_k \\quad \\text { relativ Endpunkten in } U_{\\beta_k}, 1 \\leq k \\leq m .\n$$\n\n\nDa das Rechteck $\\left[s_{i-1}, s_i\\right] \\times\\left[t_{j-1}, t_j\\right]$ einfach zusammenhängend ist, und weil $H\\left(\\left[s_{i-1}, s_i\\right] \\times\\left[t_{j-1}, t_j\\right]\\right) \\subseteq U_{\\alpha_i^j}$, folgt\n\n$$\nl_i^j u_i^j \\bar{r}_i^j \\simeq b_i^j \\quad \\text { relativ Endpunkten in } U_{\\alpha_i^j}, 1 \\leq i, j \\leq n .\n$$\n\n\nDa $U_1, U_2$ und $U_1 \\cap U_2$ wegzusammenhängend sind, existieren Wege $\\beta_i^j: I \\rightarrow X$, $0 \\leq i, j \\leq n$, mit folgenden Eigenschaften:\n(i) $\\beta_i^j(0)=x_0$ und $\\beta_i^j(1)=H\\left(s_i, t_j\\right)$.\n(ii) $\\beta_i^j: I \\rightarrow U_{\\alpha_i^j} \\subseteq X$ falls $H\\left(s_i, t_j\\right) \\in U_{\\alpha_i^j}$.\n(iii) $\\beta_i^j: I \\rightarrow U_1 \\cap U_2 \\subseteq X$, falls $H\\left(s_i, t_j\\right) \\in U_1 \\cap U_2$.\n(iv) $\\beta_i^j=c_{x_0}$, falls $H\\left(s_i, t_j\\right)=x_0$.\n\nBetrachte nun die folgenden Schleifen bei $x_0$, siehe (i) und (ii):\n\n$$\n\\begin{aligned}\n\\hat{u}_i^j:=\\beta_{i-1}^j u_i^j \\bar{\\beta}_i^j: I \\rightarrow U_{\\alpha_i^j} \\subseteq X, & & \\hat{b}_i^j:=\\beta_{i-1}^{j-1} b_i^j \\bar{\\beta}_i^{j-1}: I \\rightarrow U_{\\alpha_i^j} \\subseteq X \\\\\n\\hat{l}_i^j:=\\beta_{i-1}^{j-1} l_i^j \\bar{\\beta}_{i-1}^j: I \\rightarrow U_{\\alpha_i^j} \\subseteq X, & & \\hat{r}_i^j:=\\beta_i^{j-1} r_i^j \\bar{\\beta}_i^j: I \\rightarrow U_{\\alpha_i^j} \\subseteq X\n\\end{aligned}\n$$\n\n\nAus (I.12) erhalten wir $\\left(\\beta_{i-1}^{j-1} l_i^j \\bar{\\beta}_{i-1}^j\\right)\\left(\\beta_{i-1}^j u_i^j \\bar{\\beta}_i^j\\right)\\left(\\overline{\\beta_i^{j-1} r_i^j \\bar{\\beta}_i^j}\\right) \\simeq \\beta_{i-1}^{j-1}\\left(l_i^j u_i^j \\bar{r}_i^j\\right) \\bar{\\beta}_i^{j-1} \\simeq$ $\\beta_{i-1}^{j-1} b_i^j \\bar{\\beta}_i^{j-1}$ relativ Endpunkten in $U_{\\alpha_i^j}$, und daher\n\n$$\n\\left[\\hat{l}_i^j\\right]\\left[\\hat{u}_i^j\\right]\\left[\\hat{r}_i^j\\right]^{-1}=\\left[\\hat{b}_i^j\\right] \\in \\pi_1\\left(U_{\\alpha_i^j}, x_0\\right), \\quad 1 \\leq i, j \\leq n .\n$$\n\n\nDa $H$ eine Homotopie relativ Endpunkten ist und wegen (iv) gilt\n\n$$\n\\left[\\hat{l}_1^j\\right]=1 \\in \\pi_1\\left(U_{\\alpha_1^j}, x_0\\right) \\quad \\text { und } \\quad\\left[\\hat{r}_n^j\\right]=1 \\in \\pi_1\\left(U_{\\alpha_n^j}, x_0\\right), \\quad 1 \\leq j \\leq n .\n$$\n\n\nDa $H_0=c_{x_0}$ und wegen (iv) gilt auch\n\n$$\n\\left[\\hat{b}_i^1\\right]=1 \\in \\pi\\left(U_{\\alpha_i^1}, x_0\\right), \\quad 1 \\leq i \\leq n .\n$$\n\n\nAus (I.11) und (iv) erhalten wir\n\n$$\n\\left[\\hat{u}_{i_{k-1}+1}^n\\right]\\left[\\hat{u}_{i_{k-1}+2}^n\\right] \\cdots\\left[\\hat{u}_{i_k}^n\\right]=\\left[f_k\\right] \\in \\pi_1\\left(U_{\\beta_k}, x_0\\right), \\quad 1 \\leq k \\leq m\n$$\n\n\nWeiters haben wir die Relationen\n\n$$\n\\left[\\hat{r}_{i-1}^j\\right]=\\left[\\hat{l}_i^j\\right] \\in\\left(\\pi_1\\left(U_1, x_0\\right) * \\pi_1\\left(U_2, x_0\\right)\\right) / N, \\quad 1 \\leq j \\leq n, 2 \\leq i \\leq n .\n$$\n\n\nUm dies einzusehen unterscheiden wir zwei Fälle. Ist $\\alpha_{i-1}^j=\\alpha_i^j$, dann gilt offensichtlich $\\left[\\hat{r}_{i-1}^j\\right]=\\left[\\hat{l}_i^j\\right] \\in \\pi_1\\left(U_{\\alpha_i^j}, x_0\\right)$ und damit auch (I.17). Ist $\\alpha_{i-1}^j \\neq \\alpha_i^j$, dann sind $\\hat{r}_{i-1}^j$ und $\\hat{l}_i^j$ Wege in $U_1 \\cap U_2$, siehe (iii), und $\\left[\\hat{r}_{i-1}^j\\right]=\\left[\\hat{l}_i^j\\right] \\in \\pi_1\\left(U_1 \\cap U_2, x_0\\right)$, woraus nun (I.17) folgt, vgl. (I.10). Analog lässt sich zeigen\n\n$$\n\\left[\\hat{u}_i^{j-1}\\right]=\\left[\\hat{b}_i^j\\right] \\in\\left(\\pi_1\\left(U_1, x_0\\right) * \\pi_1\\left(U_2, x_0\\right)\\right) / N, \\quad 2 \\leq j \\leq n, 1 \\leq i \\leq n .\n$$\n\n\nAus (I.13), (I.14) und (I.17) erhalten wir, in $\\left(\\pi_1\\left(U_1, x_0\\right) * \\pi_1\\left(U_2, x_0\\right)\\right) / N$,\n\n$$\n\\left[\\hat{b}_1^j\\right] \\cdots\\left[\\hat{b}_n^j\\right]=\\left[\\hat{l}_1^j\\right]\\left[\\hat{u}_1^j\\right]\\left[\\hat{r}_1^j\\right]^{-1} \\cdots\\left[\\hat{l}_n^j\\right]\\left[\\hat{u}_n^j\\right]\\left[\\hat{r}_n^j\\right]^{-1}=\\left[\\hat{u}_1^j\\right] \\cdots\\left[\\hat{u}_n^j\\right] .\n$$\n\n\nZusammen mit (I.18) und (I.15) folgt, in $\\left(\\pi_1\\left(U_1, x_0\\right) * \\pi_1\\left(U_2, x_0\\right)\\right) / N$,\n\n$$\n\\left[\\hat{u}_1^n\\right] \\cdots\\left[\\hat{u}_n^n\\right]=\\left[\\hat{b}_1^n\\right] \\cdots\\left[\\hat{b}_n^n\\right]=\\left[\\hat{u}_1^{n-1}\\right] \\cdots\\left[\\hat{u}_n^{n-1}\\right]=\\cdots=\\left[\\hat{b}_1^1\\right] \\cdots\\left[\\hat{b}_n^1\\right]=1\n$$\n\n\nVerwenden wir noch (I.16) so erhalten wir schließlich die Relation $\\left[f_1\\right] \\cdots\\left[f_m\\right]=1$ in $\\left(\\pi_1\\left(U_1, x_0\\right) * \\pi_1\\left(U_2, x_0\\right)\\right) / N$. Damit ist der Beweis vollständig."
+  },
+  {
+    "UID": "623c29fd-e8eb-400e-b97a-152ad917d49a",
+    "UnitID": "QMS-R25-06-01",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "DEF",
+    "Content": "Casimir Operator",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "A Casimir operator $\\hat{C}$ is an operator which is not identical to the unit operator and which commutes with all group elements,\n$$\n[\\hat{C}, g]=0 \\quad \\forall g \\in G\n$$"
+  },
+  {
+    "UID": "69eb8e9a-941f-4df1-83ea-735ddeb50ea7",
+    "UnitID": "QMS-R25-06-02",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "EXA",
+    "Content": "Quadrat des Drehmoment Operators auf $\\left(G_{R}, \\cdot\\right)$ ist ein Casimir Operator",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "Consider the rotation group $\\left(G_{R}, \\cdot\\right)$. The square of the angular momentum operator, \n$$\\hat{\\vec{L}}^{2}=\\sum_{j=1}^{3} \\hat{L}_{j}^{2}$$ \ncommutes with all generators $\\hat{L}^{i}$,\n$$\n\\left[\\hat{\\vec{L}}^{2}, \\hat{L}^{i}\\right]=0, \\quad i=1,2,3\n$$\nand therefore also with all group elements $\\hat{U}_{R}(\\vec{\\phi})=\\exp \\left(-\\frac{i}{\\hbar} \\vec{\\phi} \\cdot \\hat{\\vec{L}}\\right)$ (in their representation as linear operators),\n$$\n\\left[\\hat{\\vec{L}}^{2}, \\hat{U}_{R}(\\vec{\\phi})\\right]=0\n$$\nThus, $\\hat{\\vec{L}}^{2}$ is a Casimir operator of the group ( $G_{R}, \\cdot$ ) (in fact, it is the only one, see below)."
+  },
+  {
+    "UID": "432d819f-d57c-452c-817b-426c564e5add",
+    "UnitID": "QMS-R25-06-03",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "CONC",
+    "Content": "Casimir Operatoren sind Funktionen von Generatoren",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "Casimir operators are usually not generators, but functions of the generators,\n$$\n\\hat{C}=\\hat{C}\\left(\\hat{X}_{1}, \\hat{X}_{2}, \\ldots, \\hat{X}_{N}\\right) .\n$$"
+  },
+  {
+    "UID": "15e7674e-bd91-4329-afc1-c6d7cea2d245",
+    "UnitID": "QMS-R25-06-04",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "PROP",
+    "Content": "Casimir Operatoren für unitäre Gruppen sind hermitesch",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "In general, they are not uniquely determined. However, for unitary groups they can always be chosen as hermitean operators."
+  },
+  {
+    "UID": "5b09c9a8-86a0-4227-b8d9-eba52eb1d888",
+    "UnitID": "QMS-R25-06-05",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "PROOF",
+    "Content": "Casimir Operatoren für unitäre Gruppen sind hermitesch",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "For any given Casimir operator $\\hat{C}$ also $\\hat{C}^{\\dagger}$ is a Casimir operator, since\n$$\n\\left[\\hat{X}_{i}, \\hat{C}^{\\dagger}\\right]=\\left[\\hat{X}_{i}^{\\dagger}, \\hat{C}^{\\dagger}\\right]=\\left[\\hat{C}, \\hat{X}_{i}\\right]^{\\dagger}=0\n$$\nwhere we have used the hermiticity of the generators for unitary groups. Let us then define the new Casimir operator\n$$\n\\hat{\\bar{C}} \\equiv \\hat{C}+\\hat{C}^{\\dagger}\n$$\nwhich is hermitean by definition, $\\hat{\\bar{C}} \\equiv \\hat{\\bar{C}}^{\\dagger}$."
+  },
+  {
+    "UID": "9d1a1a4d-135d-4d4c-bf3a-a425f06042a7",
+    "UnitID": "QMS-R25-06-06",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "THEO",
+    "Content": "Racah Theorem",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "Every semi-simple Lie group ( $G, \\circ$ ) of rank $r$ has $r$ Casimir operators $\\hat{C}_{i}\\left(\\hat{X}_{1}, \\ldots, \\hat{X}_{N}\\right), i=1, \\ldots, r$."
+  },
+  {
+    "UID": "0ab264a0-bb73-4188-a1c3-1d62d1236d05",
+    "UnitID": "QMS-R25-06-07",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "EXA",
+    "Content": "Anwendung Racah Theorem auf $\\left(G_{R}, \\cdot\\right),(S U(2), \\cdot),(S O(3), \\cdot)$",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "$\\operatorname{rank}\\left(G_{R}, \\cdot\\right)=\\operatorname{rank}(S U(2), \\cdot)=\\operatorname{rank}(S O(3), \\cdot)=1$, thus there is exactly one Casimir operator,\n$$\n\\hat{C}_{1}=\\hat{C}_{1}\\left(\\hat{L}^{x}, \\hat{L}^{y}, \\hat{L}^{z}\\right) \\equiv \\sum_{j=1}^{3} \\hat{L}_{j}^{2}=\\hat{\\vec{L}}^{2}\n$$"
+  },
+  {
+    "UID": "9f2237e3-9d93-4acf-897d-6408e0afac6e",
+    "UnitID": "QMS-R25-06-08",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "DEF",
+    "Content": "Multiplets von Casimir Operatoren",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "Multiplets sind durch die gemeinsamen Eigenwerte der Casimir-Operatoren einer Symmetriegruppe charakterisierte Zustände. Für die Drehimpulsgruppe $G_R = \\mathrm{SO}(3)$ bzw. $\\mathrm{SU}(2)$ gilt insbesondere:\n\\[\n\\hat{\\vec{L}}^2|\\ell\\rangle = \\hbar^2 \\ell(\\ell+1)|\\ell\\rangle,\n\\]\nwobei $\\ell$ der Drehimpuls-Quantenzahl entspricht. Zu jedem festen $\\ell$ gehören $2\\ell + 1$ linear unabhängige Zustände — das sogenannte \\textit{Multiplet} der Darstellung. Je nach Wert von $\\ell$ spricht man von:\n\\begin{itemize}\n  \\item einem \\textbf{Singlet} bei $\\ell = 0$,\n  \\item einem \\textbf{Doublet} bei $\\ell = \\frac{1}{2}$,\n  \\item einem \\textbf{Triplet} bei $\\ell = 1$,\n  \\item einem \\textbf{Quadruplet} bei $\\ell = \\frac{3}{2}$, usw.\n\\end{itemize}"
+  },
+  {
+    "UID": "d80db332-3515-4d11-976f-a4f7021efa3d",
+    "UnitID": "QMS-R25-06-09",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "CONC",
+    "Content": "Physikalische Bedeutung der Casimir-Operatoren",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "Casimir-Operatoren sind Invarianten unter den Transformationen der zugrundeliegenden Symmetriegruppe. Ihre Eigenwerte charakterisieren die \\textit{Darstellungen} der Gruppe und damit die möglichen physikalischen Zustände. In der Quantenmechanik spannt der Casimir-Operator $\\hat{\\vec{L}}^2$ die Drehimpuls-Multiplets auf. Diese haben eine fundamentale Bedeutung:\n\\begin{itemize}\n  \\item Die Zustände innerhalb eines Multiplets sind entartet in Bezug auf den Wert von $\\ell$.\n  \\item Die Unterscheidung zwischen ganzzahligem (orbitalem) und halbzahligen (spin) Drehimpuls reflektiert fundamentale Eigenschaften der zugrundeliegenden Quantenobjekte.\n  \\item Multiplets treten in vielen Bereichen auf: z.B. als Energieniveaus im Wasserstoffatom oder bei Spin-Zuständen von Teilchen.\n\\end{itemize}"
+  },
+  {
+    "UID": "1ea3bc14-708d-42c5-a97d-6bc8f716d69b",
+    "UnitID": "QMS-R25-06-10",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "DEF",
+    "Content": "Invariante Unterräume einer Hilbertraumes bzgl. Symmetriegruppen und reduzible Unterräume",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "A subspace $U$ of a Hilbert space $\\mathcal{H}$ which remains invariant under transformations of a symmetry group ( $G, \\circ$ ) is called an invariant subspace. It consists of the set of all states which remains invariant under the action of linear operators $D(g)$, $g \\in G$, i.e.,\n$$\n\\forall|\\psi\\rangle \\in U, \\quad \\forall g \\in G \\quad: \\quad D(g)|\\psi\\rangle=|D(g) \\psi\\rangle \\equiv\\left|\\psi^{\\prime}\\right\\rangle \\in U .\n$$\nIn other words, the linear operators $D(g)$ of a symmetry group transform the states of an invariant subspace only among themselves, but do not lead to states outside of the invariant subspace. In this case one speaks of a reducible subspace and of a reducible representation $D(g)$ of group elements $g \\in G$."
+  },
+  {
+    "UID": "1c636a27-4a61-448a-b1af-b7a8cefe8af8",
+    "UnitID": "QMS-R25-06-11",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "EXA",
+    "Content": "Invariante Unterräume bzgl. $(G_{R}, \\cdot)$",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "Consider eigenstates of angular momentum $\\ell$ and of its $z$ component $m,|\\ell m\\rangle$. An invariant subspace $U$ with respect to the rotation group $(G_{R}, \\cdot)$ is spanned e.g. by\n$$\nU=\\{|00\\rangle,|11\\rangle,|10\\rangle,|1-1\\rangle\\}\n$$\nbecause acting with the operators \n$$\\hat{U}_R(\\vec{\\phi}) \\equiv \\exp \\left(-\\frac{i}{\\hbar} \\vec{\\phi} \\cdot \\hat{\\vec{L}}\\right)$$\non these states does not lead outside of this subspace. It is sufficient to show this for infinitesimal transformations,\n$$\n\\begin{aligned}\n\\hat{U}_{R}(\\delta \\vec{\\phi}) & =\\mathbf{1}-\\frac{i}{\\hbar} \\delta \\vec{\\phi} \\cdot \\hat{\\vec{L}}=\\mathbf{1}-\\frac{i}{\\hbar}\\left(\\delta \\phi^{x} \\hat{L}^{x}+\\delta \\phi^{y} \\hat{L}^{y}+\\delta \\phi^{z} \\hat{L}^{z}\\right) \\\\\n& =\\mathbf{1}-\\frac{i}{\\hbar}\\left(\\delta \\phi^{z} \\hat{L}^{z}+\\frac{\\delta \\phi^{x}-i \\delta \\phi^{y}}{2} \\hat{L}_{+}+\\frac{\\delta \\phi^{x}+i \\delta \\phi^{y}}{2} \\hat{L}_{-}\\right)\n\\end{aligned}\n$$\nwhere we used the ladder operators\n$$\n\\hat{L}_{ \\pm} \\equiv \\hat{L}^{x} \\pm i \\hat{L}^{y}\n$$\nThe operator $\\hat{L}^{z}$ simply measures the value of $m$, while $\\hat{L}_{ \\pm}$raises or lowers the value of $m$ by one unit, respectively. Since\n$$\n\\hat{L}_{ \\pm}|\\ell \\pm \\ell\\rangle=0\n$$\nthe ladder operators do not lead outside of the invariant subspace $U$."
+  },
+  {
+    "UID": "c87dbb4a-768a-4f23-a8e8-4df2391419ef",
+    "UnitID": "QMS-R25-06-12",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "DEF",
+    "Content": "Irreduzible invariante Unterräume bzgl. $(G_{R}, \\cdot)$",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "An invariant subspace $M \\subset \\mathcal{H}$ is irreducible, if it does not contain any further invariant subspaces (except for $M$ itself). In this case the linear operators $D(g)$, which act on states of $M$, are in an irreducible representation of the group elements $g \\in G$."
+  },
+  {
+    "UID": "09ed8bc5-cbe8-4ccb-a586-943cd7757cdf",
+    "UnitID": "QMS-R25-06-13",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "DEF",
+    "Content": "Multiplets als irreduzible Invariante Unterräume",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "A multiplet is an irreducible invariant subspace."
+  },
+  {
+    "UID": "87ebf5da-98f4-4c64-a5f8-d5cc13d1360d",
+    "UnitID": "QMS-R25-06-14",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "EXA",
+    "Content": "$U=\\{|00\\rangle,|11\\rangle,|10\\rangle,|1-1\\rangle\\}$ ist reduzible",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "The invariant subspace $U=\\{|00\\rangle,|11\\rangle,|10\\rangle,|1-1\\rangle\\}$ of the preceding example is reducible, because it contains two irreducible invariant subspaces, the singlet\n$$\nM_{0}=\\{|00\\rangle\\}\n$$\nand the triplet\n$$\nM_{1}=\\{|11\\rangle,|10\\rangle,|1-1\\rangle\\}\n$$\nIt is easy to see that acting with linear operators $\\hat{U}_{R}(\\vec{\\phi})$ onto $M_{0}, M_{1}$ does not lead to states outside of these multiplets."
+  },
+  {
+    "UID": "5938eb82-9287-487d-aa6d-dfe066ee40a5",
+    "UnitID": "QMS-R25-06-15",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "DEF",
+    "Content": "Vollständig reduzible Repräsentationen",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "A representation $D(g)$ is completely reducible, if it can be written in block-diagonal form,\n$$\nD(g)=\\left(\\begin{array}{ccc}\nD_{0}(g) & 0 & \\cdots \\\\\n0 & D_{1}(g) & \\\\\n\\vdots & & \\ddots\n\\end{array}\\right)\n$$\nwhere all $D_{i}(g)$ are irreducible, i.e., they act only onto the $i$ th multiplet $M_{i}$."
+  },
+  {
+    "UID": "7f3c53cc-0c57-4c8f-9540-6fa6f4d9b9e3",
+    "UnitID": "QMS-R25-06-16",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "EXA",
+    "Content": "Repräsentation von $\\hat{\\vec{L}}^{2}$ ist vollständig reduzible",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "$$\n\\hat{\\vec{L}}^{2}=\\left(\\begin{array}{ccccc}\n0 & 0 & \\ldots & & \\\\\n0 & \\hbar^{2} \\frac{3}{4} \\mathbf{1}_{2} & 0 & \\ldots & \\\\\n\\vdots & 0 & \\hbar^{2} 2 \\mathbf{1}_{3} & 0 & \\ldots \\\\\n& \\vdots & 0 & \\hbar^{2} \\frac{15}{4} \\mathbf{1}_{4} & \\\\\n& & \\vdots & & \\ddots\n\\end{array}\\right)\n$$\nis a completely reducible representation of $\\hat{\\vec{L}}^{2}$. The individual block matrices are the irreducible representations of $\\hat{\\vec{L}}^{2}$ for the respective multiplets."
+  },
+  {
+    "UID": "ee884757-0e42-4dda-8369-4cde5d363dff",
+    "UnitID": "QMS-R25-06-17",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "CONC",
+    "Content": "Hamiltonoperator als Funktion der Casimir-Operatoren bei Symmetrien",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "In Chapter 2 we had seen that a system is invariant under space and time translations, as well as under rotations, if the generators of the respective groups $\\left(G_{r}, \\cdot\\right),\\left(G_{t}, \\cdot\\right)$, and $\\left(G_{R}, \\cdot\\right)$ commute with the Hamilton operator of the system. Let us repeat this argument for arbitrary Lie groups and then draw consequences for the Casimir operators of the group.\n\nLet $(G, \\circ)$ be a Lie group and $(D(G), \\cdot)=(\\{D(g), g \\in G\\}, \\cdot)$ a representation of this group, with\n$$\nD(g)=\\hat{U}(\\vec{\\alpha})=\\exp \\left(-\\frac{i}{\\hbar} \\alpha_{j} \\hat{X}_{j}\\right)\n$$\nThe Hilbert-space states of the system obey the time-dependent Schrödinger equation\n$$\ni \\hbar \\frac{\\partial}{\\partial t}|\\psi(t)\\rangle=\\hat{H}|\\psi(t)\\rangle\n$$\nThe state which has been transformed under ( $G, \\circ$ ) is\n$$\n\\left|\\psi^{\\prime}(t)\\right\\rangle=D(g)|\\psi(t)\\rangle=\\hat{U}(\\vec{\\alpha})|\\psi(t)\\rangle\n$$\nWe apply the transformation $\\hat{U}(\\vec{\\alpha})$ to the Schrödinger equation (3.56),\n$$\n\\begin{aligned}\n\\hat{U} i \\hbar \\frac{\\partial}{\\partial t}|\\psi(t)\\rangle & =i \\hbar \\frac{\\partial}{\\partial t} \\hat{U}|\\psi(t)\\rangle \\equiv i \\hbar \\frac{\\partial}{\\partial t}\\left|\\psi^{\\prime}(t)\\right\\rangle \\\\\n& =\\hat{U} \\hat{H}|\\psi(t)\\rangle=\\hat{U} \\hat{H} \\hat{U}^{-1} \\hat{U}|\\psi(t)\\rangle \\equiv \\hat{U} \\hat{H} \\hat{U}^{-1}\\left|\\psi^{\\prime}(t)\\right\\rangle\n\\end{aligned}\n$$\nwhere we have used the definition (3.57) of the transformed Hilbert-space state several times. If the system is invariant under the Lie group ( $G, \\circ$ ), i.e., ( $G, \\circ$ ) is a symmetry group of the system, the transformed state also obeys the Schrödinger equation, with the very same Hamilton operator, $\\hat{H}^{\\prime}=\\hat{H}$, i.e.,\n$$\n\\begin{aligned}\ni \\hbar \\frac{\\partial}{\\partial t}\\left|\\psi^{\\prime}(t)\\right\\rangle & =\\hat{U} \\hat{H} \\hat{U}^{-1}\\left|\\psi^{\\prime}(t)\\right\\rangle \\equiv \\hat{H}\\left|\\psi^{\\prime}(t)\\right\\rangle \\\\\n\\Longleftrightarrow \\hat{U} \\hat{H} \\hat{U}^{-1} & =\\hat{H} \\quad \\Longleftrightarrow \\quad \\hat{U} \\hat{H}=\\hat{H} \\hat{U} \\\\\n\\Longleftrightarrow \\quad[\\hat{U}, \\hat{H}] & =0,\n\\end{aligned}\n$$\nor, for infinitesimal transformations,\n$$\n\\left[\\hat{X}_{j}, \\hat{H}\\right]=0 \\quad \\forall j=1, \\ldots, N\n$$\nSince the Casimir operators are functions of the generators, cf. Eq. 3.51, it is obvious that also these operators commute with the Hamilton operator,\n$$\n\\left[\\hat{C}_{i}, \\hat{H}\\right]=0 \\quad \\forall i=1, \\ldots, r\n$$\nwhere $r$ denotes the total number of Casimir operators (according to Racah's theorem, for semi-simple groups $r$ is identical to the rank of the group). According to their definition, all Casimir operators also mutually commute with each other,\n$$\n\\left[\\hat{C}_{i}, \\hat{C}_{j}\\right]=0 \\quad \\forall i, j=1, \\ldots r\n$$\nFor now, the maximum set of commuting operators (which have the properties of Casimir operators, i.e., they commute with all generators of the group) is then\n$$\n\\left\\{\\hat{C}_{1}, \\ldots, \\hat{C}_{r}, \\hat{H}\\right\\}\n$$\nSince $\\hat{H}$ fulfills all requirements for a Casimir operator of the system, but cannot be a new Casimir operator, i.e., one which is linearly independent from the other $\\hat{C}_{i}$ (since $r$ is already the maximum number of possible Casimir operators), $\\hat{H}$ must be a function of the Casimir operators of the system,\n$$\n\\hat{H}=\\hat{H}\\left(\\hat{C}_{1}, \\ldots, \\hat{C}_{r}\\right)\n$$\nIf this function can be expanded in terms of a Taylor series, $\\hat{H}$ can be simply expressed (to leading order in the Casimir operators) as a linear combination of the Casimir operators of the system, plus the unit matrix 11 , which always commutes with all $D(g) \\in D(G)$,\n$$\n\\hat{H}=c_{0} \\mathbf{1}+\\sum_{i=1}^{r} c_{i} \\hat{C}_{i}+O\\left(\\hat{C}_{i}^{2}\\right)\n$$"
+  },
+  {
+    "UID": "5b3c0562-0a43-4e98-ab7e-a64ff449289a",
+    "UnitID": "QMS-R25-06-18",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "EXA",
+    "Content": "Wasserstoff Atom",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "Because of the central potential the system is invariant under rotations, i.e., under the group $\\left(G_{R}, \\cdot\\right)$. As we know, the only Casimir operator of this group is $\\hat{\\vec{L}}^{2}$. Indeed, in spherical coordinates the Hamilton operator reads\n$$\n\\hat{H}(\\vec{r})=\\left[-\\frac{\\hbar^{2}}{2 m} \\frac{1}{r^{2}} \\frac{\\partial}{\\partial r}\\left(r^{2} \\frac{\\partial}{\\partial r}\\right)+V(r)\\right] \\mathbf{1}+\\frac{1}{2 m r^{2}} \\hat{\\vec{L}}^{2}\n$$\ncf. lectures on quantum mechanics. We thus identify\n$$\n\\begin{aligned}\nc_{0} & \\equiv-\\frac{\\hbar^{2}}{2 m} \\frac{1}{r^{2}} \\frac{\\partial}{\\partial r}\\left(r^{2} \\frac{\\partial}{\\partial r}\\right)+V(r) \\\\\nc_{1} & \\equiv \\frac{1}{2 m r^{2}}\n\\end{aligned}\n$$\nThe coefficients $c_{0}, c_{1}$ are still (operator-valued) functions of radial distance $r$, which, however, is invariant under $G_{R}$."
+  },
+  {
+    "UID": "475832bb-34f2-4568-9c05-be17196a6af9",
+    "UnitID": "QMS-R25-06-19",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "CONC",
+    "Content": "Kommutierende Operatoren und Zustandsbasis",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "For now, the maximum set of linearly independent, mutually commuting operators is then the set of the Casimir operators of the system,\n$$\n\\left\\{\\hat{C}_{1}, \\ldots, \\hat{C}_{r}\\right\\}\n$$\nTherefore, we can choose a system of states which are simultaneously eigenfunctions of all Casimir operators. These states are characterized by quoting the respective eivenvalues,\n$$\n\\left|C_{1}, \\ldots, C_{r}\\right\\rangle\n$$\nThis is, however, not yet a pure state, i.e., a state where all possibly measurable quantum numbers are fixed. Namely, there can be further operators $\\hat{A}_{j}, j=1, \\ldots, s$, which are not Casimir operators, but which still commute with the Hamilton operator and with all Casimir operators of the system."
+  },
+  {
+    "UID": "d19dcf39-a6fe-4221-8430-204b40487d6d",
+    "UnitID": "QMS-R25-06-20",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "EXA",
+    "Content": "Weitere kommutierende Operatoren im Wasserstoffatom",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "In the hydrogen atom the generator $\\hat{L}^{z}$ is such an operator. It commutes with $\\hat{H}$ as well as with $\\hat{\\vec{L}}^{2}$. (We have excluded spin from this consideration. In principle, $\\hat{\\vec{S}}^{2}$ is another Casimir operator, which, however, does not occur in $\\hat{H}$, and $\\hat{S}^{z}$ is a further operator which commutes with $\\hat{H}$.)"
+  },
+  {
+    "UID": "d05d2ab4-5621-4366-bac1-f3a188c1f6d5",
+    "UnitID": "QMS-R25-06-21",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "DEF",
+    "Content": "Reine Zustände und vollständiges Observablen-Set",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "Ein quantenmechanischer Zustand ist dann \\textit{rein}, wenn er durch ein vollständiges System kommutierender Operatoren eindeutig charakterisiert ist. Dazu gehören:\n\\begin{itemize}\n  \\item die Eigenwerte $C_i$ der Casimir-Operatoren $\\hat{C}_i$ $(i = 1, \\dots, r)$,\n  \\item sowie die Eigenwerte $\\alpha_j$ weiterer Operatoren $\\hat{A}_j$ $(j = 1, \\dots, s)$, die mit allen $\\hat{C}_i$ und mit dem Hamiltonoperator $\\hat{H}$ kommutieren.\n\\end{itemize}\nEin reiner Zustand lässt sich dann schreiben als:\n\\[\n|\\psi\\rangle \\equiv \\left|C_{1}, \\ldots, C_{r}, \\alpha_{1}, \\ldots, \\alpha_{s}\\right\\rangle.\n\\]"
+  },
+  {
+    "UID": "7be1397c-9dad-41b2-a2cf-bc91df7139a9",
+    "UnitID": "QMS-R25-06-22",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "THEO",
+    "Content": "Zustände der Multiplets sind degeneriert bzgl. allen Casimir Operatoren",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "The states of a multiplet are degenerate with respect to all Casimir operators."
+  },
+  {
+    "UID": "2edcd184-1c84-475c-a2d2-e7a5638d419c",
+    "UnitID": "QMS-R25-06-23",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "PROOF",
+    "Content": "P: Zustände der Multiplets sind degeneriert bzgl. allen Casimir Operatoren",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "Let us consider a pure state (3.62), which belongs to a certain multiplet. In the following, we will use the abbreviation $\\alpha \\equiv\\left\\{\\alpha_{1}, \\ldots, \\alpha_{s}\\right\\}$ for the set of eigenvalues of the operators $\\hat{A}_{j}$. According to the definition of a multiplet, also\n$$\n\\left|\\psi^{\\prime}\\right\\rangle=\\hat{U}|\\psi\\rangle=\\hat{U}\\left|C_{1}, \\ldots, C_{r}, \\alpha\\right\\rangle \\equiv\\left|C_{1}^{\\prime}, \\ldots C_{r}^{\\prime}, \\alpha^{\\prime}\\right\\rangle\n$$\nis a state of the very same multiplet. It remains to be shown that\n$$\nC_{i}^{\\prime} \\equiv C_{i} \\quad \\forall i=1, \\ldots, r .\n$$\nTo this end we compute using $\\left[\\hat{C}_{i}, \\hat{U}\\right]=0$ that\n$$\n\\begin{aligned}\n\\hat{C}_{i}\\left|C_{1}^{\\prime}, \\ldots, C_{r}^{\\prime}, \\alpha^{\\prime}\\right\\rangle & \\equiv C_{i}^{\\prime}\\left|C_{1}^{\\prime}, \\ldots, C_{r}^{\\prime}, \\alpha^{\\prime}\\right\\rangle \\\\\n& =\\hat{C}_{i} \\hat{U}\\left|C_{1}, \\ldots, C_{r}, \\alpha\\right\\rangle=\\hat{U} \\hat{C}_{i}\\left|C_{1}, \\ldots, C_{r}, \\alpha\\right\\rangle \\\\\n& =\\hat{U} C_{i}\\left|C_{1}, \\ldots, C_{r}, \\alpha\\right\\rangle=C_{i} \\hat{U}\\left|C_{1}, \\ldots, C_{r}, \\alpha\\right\\rangle \\\\\n& =C_{i}\\left|C_{1}^{\\prime}, \\ldots, C_{r}^{\\prime}, \\alpha^{\\prime}\\right\\rangle,\n\\end{aligned}\n$$\ni.e., indeed $C_{i}^{\\prime}=C_{i}$."
+  },
+  {
+    "UID": "e9e63da0-5a7b-427c-9ad3-f0f9964812c4",
+    "UnitID": "QMS-R25-06-24",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "REM",
+    "Content": "Anmerkung zur Zustände der Multiplets sind degeneriert bzgl. allen Casimir Operatoren",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "This theorem means that the various multiplets can be uniquely characterized by the eigenvalues $C_{i}$ of the Casimir operators."
+  },
+  {
+    "UID": "61ca5c66-0116-47f6-9d38-abbbbc2e021f",
+    "UnitID": "QMS-R25-06-25",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "EXA",
+    "Content": "Multiplets von Drehmomenten",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "The various multiplets of different angular momenta are characterized by specifying $\\ell ; \\hbar^{2} \\ell(\\ell+1)$ is the eigenvalue of $\\hat{\\vec{L}}^{2}$ on the multiplet characterized by $\\ell$."
+  },
+  {
+    "UID": "0f3ff178-c88c-43c2-860a-b845f739a03f",
+    "UnitID": "QMS-R25-06-26",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "KORO",
+    "Content": "Alle Zustände von Multiplets sind energetisch degeneriert",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "Since $\\hat{H}=\\hat{H}\\left(\\hat{C}_{1}, \\ldots, \\hat{C}_{r}\\right)$, all states of a multiplet are energetically degenerate."
+  },
+  {
+    "UID": "5f5d6c1b-c6de-4bfa-bf51-3ea541266640",
+    "UnitID": "QMS-R25-06-27",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "LEM",
+    "Content": "Schur Lemma (1)",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "Let ( $G, \\circ$ ) be a semi-simple unitary Lie group and $\\hat{H}$ the Hamilton operator of a given system. If ( $G, \\circ$ ) is a symmetry group of the system, i.e., if the dynamics is invariant under transformations $D(g) \\in D(G)$, i.e.,\n$$\n[D(g), \\hat{H}]=0 \\quad \\forall g \\in G,\n$$\nthen transitions between different multiplets are forbidden."
+  },
+  {
+    "UID": "aa62fb25-77d2-44b4-84ba-701077c3ad9c",
+    "UnitID": "QMS-R25-06-28",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "PROOF",
+    "Content": "P: Schur Lemma (1)",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "Because of Eq. (3.59) we have for states\n$$\n\\left|C_{1}, \\ldots, C_{r}, \\alpha\\right\\rangle \\in M, \\quad\\left|C_{1}^{\\prime}, \\ldots, C_{r}^{\\prime}, \\alpha^{\\prime}\\right\\rangle \\in M^{\\prime}\n$$\nwhich belong to different multiplets $M, M^{\\prime}, M \\neq M^{\\prime}$,\n$$\n\\begin{aligned}\n0 & =\\left\\langle C_{1}^{\\prime}, \\ldots, C_{r}^{\\prime}, \\alpha^{\\prime}\\right|\\left[\\hat{C}_{i}, \\hat{H}\\right]\\left|C_{1}, \\ldots, C_{r}, \\alpha\\right\\rangle \\\\\n& =\\left\\langle C_{1}^{\\prime}, \\ldots, C_{r}^{\\prime}, \\alpha^{\\prime}\\right| \\hat{C}_{i} \\hat{H}-\\hat{H} \\hat{C}_{i}\\left|C_{1}, \\ldots, C_{r}, \\alpha\\right\\rangle \\\\\n& =\\left\\langle C_{1}^{\\prime}, \\ldots, C_{r}^{\\prime}, \\alpha^{\\prime}\\right| \\hat{C}_{i}^{\\dagger} \\hat{H}-\\hat{H} \\hat{C}_{i}\\left|C_{1}, \\ldots, C_{r}, \\alpha\\right\\rangle \\\\\n& =\\left(C_{i}^{\\prime}-C_{i}\\right)\\left\\langle C_{1}^{\\prime}, \\ldots, C_{r}^{\\prime}, \\alpha^{\\prime}\\right| \\hat{H}\\left|C_{1}, \\ldots, C_{r}, \\alpha\\right\\rangle \\\\\n& =\\left(C_{i}^{\\prime}-C_{i}\\right) E\\left(C_{1}, \\ldots, C_{r}\\right)\\left\\langle C_{1}^{\\prime}, \\ldots, C_{r}^{\\prime}, \\alpha^{\\prime} \\mid C_{1}, \\ldots, C_{r}, \\alpha\\right\\rangle,\n\\end{aligned}\n$$\nwhere we used the hermiticity of the Casimir operators in the step from the second to the third line. This equation can only be fulfilled if either (i) $C_{i}^{\\prime}=C_{i}$ or (ii)\n$$\n\\left\\langle C_{1}^{\\prime}, \\ldots, C_{r}^{\\prime}, \\alpha^{\\prime} \\mid C_{1}, \\ldots, C_{r}, \\alpha\\right\\rangle=0\n$$\n(without loss of generality we can assume that the energy $E\\left(C_{1}, \\ldots, C_{r}\\right)$ of the states does not vanish). According to the assumption the two states belong to different multiplets and these are uniquely characterized by the eigenvalues of the Casimir operators. Thus, at least for one Casimir operator, e.g. $\\hat{C}_{j}$, we have must have $C_{j}^{\\prime} \\neq C_{j}$. Then, the equation can only be satisfied if case (ii) applies, i.e., the transition matrix element between the two states must vanish."
+  },
+  {
+    "UID": "d6d49d75-512e-4957-9c97-cc4ca6e608e9",
+    "UnitID": "QMS-R25-06-29",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "REM",
+    "Content": "Anmerkung zum Beweis vom Schur Lemma (1)",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "If we consider the next-to-last line of the preceding proof, we can also formulate this fact in another way. Obviously, the Hamilton operator $\\hat{H}$ does not possess a piece which induces a transition between states of different multiplets. If there were such a piece, then $\\left\\langle C_{1}^{\\prime}, \\ldots, C_{r}^{\\prime}, \\alpha^{\\prime} \\mid C_{1}, \\ldots, C_{r}, \\alpha\\right\\rangle \\neq 0$. This can only happen, if $\\hat{H}$ contains parts which explicitly break the symmetry."
+  },
+  {
+    "UID": "a9051fc4-bbc0-48af-829e-68096d4cfdd3",
+    "UnitID": "QMS-R25-06-30",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "LEM",
+    "Content": "Schur Lemma (2)",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "The irreducible representations of the Casimir operators are proportional to the unit matrix."
+  },
+  {
+    "UID": "4a0ebcdb-5a6a-48c7-b756-17cab3600ae3",
+    "UnitID": "QMS-R25-06-31",
+    "Subject": "QMS",
+    "Topic": "Casimir Operatoren, Multiplets und Schur Lemma",
+    "CTyp": "PROOF",
+    "Content": "P: Schur Lemma (2)",
+    "LitID": "R25",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "",
+    "TopicPath": "/Casimir Operatoren, Multiplets und Schur Lemma",
+    "Body": "Let us consider a multiplet $M$ of $d$ states,\n$$\nM \\equiv\\left\\{\\left|C_{1}, \\ldots, C_{r}, j\\right\\rangle, j=1, \\ldots, d\\right\\}\n$$\nwhere we numbered the states of the multiplet (which differ by the values of the quantum numbers $\\alpha \\equiv\\left\\{\\alpha_{1}, \\ldots, \\alpha_{s}\\right\\}$ ) by the index $j$. Obviously, $\\operatorname{dim} M=d$. An irreducible representation of an operator $D(g)$ has the ( $d \\times d$ ) matrix representation\n$$\n[D(g)]_{j k}=\\left\\langle C_{1}, \\ldots, C_{r}, j\\right| D(g)\\left|C_{1}, \\ldots, C_{r}, k\\right\\rangle\n$$\nThe irreducible representation of the Casimir operator $\\hat{C}_{i}$ is therefore\n$$\n\\begin{aligned}\n{\\left[\\hat{C}_{i}\\right]_{j k} } & =\\left\\langle C_{1}, \\ldots, C_{r}, j\\right| \\hat{C}_{i}\\left|C_{1}, \\ldots, C_{r}, k\\right\\rangle \\\\\n& =C_{i}\\left\\langle C_{1}, \\ldots, C_{r}, j \\mid C_{1}, \\ldots, C_{r}, k\\right\\rangle \\equiv C_{i} \\delta_{j k}\n\\end{aligned}\n$$\nwhere we have used the orthonormality of the states of the multiplet. Thus we have\n$$\n\\left[\\hat{C}_{i}\\right]=C_{i} \\mathbf{1}_{d \\times d}.\n$$"
+  },
+  {
+    "UnitID": "A-S23-01-30",
+    "Subject": "A",
+    "Topic": "Ringe Basics",
+    "CTyp": "DEF",
+    "Content": "Ring mit Eins",
+    "LitID": "S23",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "Ringe",
+    "TopicPath": "Ringe/Ringe Basics",
+    "Body": "% TODO: Inhalt ergänzen (Tex)",
+    "UID": "5cda9788-1bb2-4802-a889-120c48ba5348"
+  },
+  {
+    "UnitID": "A-S23-01-31",
+    "Subject": "A",
+    "Topic": "Ringe Basics",
+    "CTyp": "DEF",
+    "Content": "Ring ohne Eins",
+    "LitID": "S23",
+    "Layer": null,
+    "Comp": null,
+    "RelInt": null,
+    "RelId": null,
+    "Cont": null,
+    "Cint": 0.0,
+    "CID": 0.0,
+    "ParentTopic": "Ringe",
+    "TopicPath": "Ringe/Ringe Basics",
+    "Body": "% TODO: Inhalt ergänzen (Tex)",
+    "UID": "ac0d1f79-c5d5-4e79-87eb-c1ba2633b045"
   }
 ]
