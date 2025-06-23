@@ -29,6 +29,34 @@
         "litIDs": {
           "S23": "A-S23-04"
         }
+      },
+      "Gruppen Grundlagen": {
+        "index": 5,
+        "parent": "Gruppen",
+        "litIDs": {
+          "S23": "A-S23-5"
+        }
+      },
+      "Nebenklassen": {
+        "index": 6,
+        "parent": "Gruppen",
+        "litIDs": {
+          "S23": "A-S23-6"
+        }
+      },
+      "Normalteiler und Faktorgruppen": {
+        "index": 7,
+        "parent": "Gruppen",
+        "litIDs": {
+          "S23": "A-S23-7"
+        }
+      },
+      "Kommentatoren und abellsche Gruppen": {
+        "index": 8,
+        "parent": "Gruppen",
+        "litIDs": {
+          "S23": "A-S23-8"
+        }
       }
     }
   },
@@ -257,6 +285,27 @@
         "litIDs": {
           "R25": "QMS-R25-6"
         }
+      },
+      "Gruppe $(\\operatorname{SU}(N), \\cdot)$": {
+        "index": 7,
+        "parent": null,
+        "litIDs": {
+          "R25": "QMS-R25-7"
+        }
+      },
+      "Multiplets von $(\\operatorname{SU}(N), \\cdot)$": {
+        "index": 8,
+        "parent": "Gruppe $(\\operatorname{SU}(N), \\cdot)$",
+        "litIDs": {
+          "R25": "QMS-R25-8"
+        }
+      },
+      "Konstruktion von Multiplets aus fundamentaler Repräsentation": {
+        "index": 9,
+        "parent": "Gruppe $(\\operatorname{SU}(N), \\cdot)$",
+        "litIDs": {
+          "R25": "QMS-R25-9"
+        }
       }
     }
   },
@@ -401,6 +450,48 @@
         "parent": null,
         "litIDs": {
           "B25": "RG-B25-22"
+        }
+      },
+      "Komplex-projektive Raum": {
+        "index": 23,
+        "parent": null,
+        "litIDs": {
+          "B25": "RG-B25-23"
+        }
+      },
+      "Längen kleiner Kreise": {
+        "index": 24,
+        "parent": null,
+        "litIDs": {
+          "B25": "RG-B25-24"
+        }
+      },
+      "Mannigfaltigkeiten konstanter Schnittkrümmung": {
+        "index": 25,
+        "parent": null,
+        "litIDs": {
+          "B25": "RG-B25-25"
+        }
+      },
+      "Schnittort": {
+        "index": 26,
+        "parent": null,
+        "litIDs": {
+          "B25": "RG-B25-26"
+        }
+      },
+      "Volumenberechnung": {
+        "index": 27,
+        "parent": null,
+        "litIDs": {
+          "B25": "RG-B25-27"
+        }
+      },
+      "Krümmung und Wachstum der Fundamentalgruppe": {
+        "index": 28,
+        "parent": null,
+        "litIDs": {
+          "B25": "RG-B25-28"
         }
       }
     }
@@ -778,6 +869,48 @@
         "parent": null,
         "litIDs": {
           "G25": "QM-G25-18"
+        }
+      },
+      "Eigenschaften der Drehimpulsoperatoren": {
+        "index": 19,
+        "parent": null,
+        "litIDs": {
+          "G25": "QM-G25-19"
+        }
+      },
+      "Schrödinger-Gleichung für rotationssymmetrische Potentiale": {
+        "index": 20,
+        "parent": "Rotationsinvariante Potentiale",
+        "litIDs": {
+          "G25": "QM-G25-20"
+        }
+      },
+      "Bindungszustände des Wasserstoffatoms": {
+        "index": 21,
+        "parent": "Rotationsinvariante Potentiale",
+        "litIDs": {
+          "G25": "QM-G25-21"
+        }
+      },
+      "Radialsymmetrische Lösungen für $V(r)=0$": {
+        "index": 22,
+        "parent": "Rotationsinvariante Potentiale",
+        "litIDs": {
+          "G25": "QM-G25-22"
+        }
+      },
+      "Elastische Potentialstreuung": {
+        "index": 23,
+        "parent": "Rotationsinvariante Potentiale",
+        "litIDs": {
+          "G25": "QM-G25-23"
+        }
+      },
+      "3-dimensionaler Potentialtopf": {
+        "index": 24,
+        "parent": "Rotationsinvariante Potentiale",
+        "litIDs": {
+          "G25": "QM-G25-24"
         }
       }
     }

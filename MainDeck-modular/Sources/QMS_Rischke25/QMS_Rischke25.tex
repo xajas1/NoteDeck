@@ -48,9 +48,13 @@
 
 % --- 5. Diagramme und Grafiken ---
 \usepackage{graphicx}
+\graphicspath{{../../Library/Images/}}
+\usepackage[export]{adjustbox}
 \usepackage{tikz}
 \usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
 \usepackage{tikz-cd}
+\usepackage{youngtab}
+
 
 % --- 6. Tabellen und Aufzählungen ---
 \usepackage{enumitem}
@@ -187,9 +191,7 @@
   {\end{unitbox}}
 
 % --- 17. Graphik ---
-\usepackage{graphicx}
-\graphicspath{ {./images/} }
-\usepackage[export]{adjustbox}
+
 
 % --- 00. Titel und Autor ---
 \title{Mein Titel}
@@ -2216,6 +2218,8 @@ $$
 
 
 \section{The group SU(3)}
+
+
 The group ( $\operatorname{SU}(3), \cdot$ ), i.e., the group of special unitary transformations in three dimensions, is of paramount importance for the theory of the strong interaction, one of the fundamental forces of Nature. Therefore, we discuss this group separately and in more detail in this chapter.
 
 
@@ -2223,29 +2227,34 @@ The group ( $\operatorname{SU}(3), \cdot$ ), i.e., the group of special unitary 
 \subsection{Generators}
 
 
-The group ( $\operatorname{SU}(N), \cdot$ ) of special unitary transformations in $N$ dimensions possesses $N^{2}-1$ generators.\\
-Example: The group $(S U(2), \cdot)$ has $N^{2}-1=3$ generators, the three components $\hat{S}^{a}$ of the spin operator. These read in the fundamental representation
+\begin{LEM}{QMS-R25-07-01}{$(\operatorname{SU}(N), \cdot)$ hat $N^2-1$ Generatoren}
+The group $(\operatorname{SU}(N), \cdot)$ of special unitary transformations in $N$ dimensions possesses $N^{2}-1$ generators.
+\end{LEM}
 
+
+Example: 
+
+
+\begin{EXA}{QMS-R25-07-02}{Generatoren der $(\operatorname{SU}(2), \cdot)$}
+The group $(S U(2), \cdot)$ has $N^{2}-1=3$ generators, the three components $\hat{S}^{a}$ of the spin operator. These read in the fundamental representation
 $$
 \hat{S}^{a}=\frac{\hbar}{2} \hat{\sigma}_{a}, \quad a=1,2,3,
 $$
-
 with the Pauli matrices (3.18). Obviously, the generators in fundamental representation are ( $2 \times 2$ ) matrices, i.e., they act on objects (Hilbert-space states) which are two-dimensional.
+\end{EXA}
 
+
+
+\begin{EXA}{QMS-R25-07-03}{Generatoren der $(\operatorname{SU}(3), \cdot)$ und Gell-Mann Matrizen}
 We now construct the $N^{2}-1=8$ generators of ( $\operatorname{SU}(3), \cdot$ ) in the fundamental representation, i.e., in the representation where they are ( $\mathbf{3} \times \mathbf{3}$ ) matrices, and therefore act on three-dimensional state vectors. To this end we generalize the Pauli matrices to three dimensions. In analogy to ( $S U(2), \cdot$ ), cf. Eq. (4.1), we write for the generators of $(S U(3), \cdot)$
-
 $$
 \hat{T}_{a} \equiv \frac{\hbar}{2} \hat{\lambda}_{a}, \quad a=1, \ldots, 8 .
 $$
-
 Note that $\hat{T}_{a}$ as well as $\hat{\lambda}_{a}$ have to be hermitean,
-
 $$
 \hat{T}_{a}=\hat{T}_{a}^{\dagger}, \quad \hat{\lambda}_{a}=\hat{\lambda}_{a}^{\dagger},
 $$
-
 since $(S U(3), \cdot)$ is a unitary Lie group. The $(3 \times 3)$ matrices $\hat{\lambda}_{a}$ play the same role for $(S U(3), \cdot)$ as the Pauli matrices $\hat{\sigma}_{a}$ for $(S U(2), \cdot)$. The first three $\hat{\lambda}_{a}$ are trivial extensions of the Pauli matrices to three dimensions,
-
 $$
 \hat{\lambda}_{1}=\left(\begin{array}{lll}
 0 & 1 & 0 \\
@@ -2261,11 +2270,9 @@ i & 0 & 0 \\
 0 & 0 & 0
 \end{array}\right) .
 $$
-
-The hermiticity of $\hat{\lambda}_{1}, \hat{\lambda}_{2}, \hat{\lambda}_{3}$ is guaranteed because of the hermiticity of the Pauli matrices,
+The hermiticity of $\hat{\lambda}_{1}, \hat{\lambda}_{2}, \hat{\lambda}_{3}$ is guaranteed because of the hermiticity of the Pauli matrices.
 
 For the next four $\hat{\lambda}_{a}$ we take the structure of the first two Pauli matrices as an example and displace the non-trivial elements by one row and one column, respectively,
-
 $$
 \hat{\lambda}_{4}=\left(\begin{array}{lll}
 0 & 0 & 1 \\
@@ -2285,10 +2292,9 @@ i & 0 & 0
 0 & i & 0
 \end{array}\right) .
 $$
+Also these matrices are obviously hermitean.
 
-Also these matrices are obviously hermitean.\\
 For the last generator we need a matrix with a non-vanishing (33) element, because otherwise we cannot construct all possible $S U(3)$ matrices with the generators, in particular not those which have non-vanishing (33) elements. We make the Ansatz
-
 $$
 \hat{\lambda}_{8}=\left(\begin{array}{ccc}
 \alpha & 0 & 0 \\
@@ -2296,27 +2302,19 @@ $$
 0 & 0 & \beta
 \end{array}\right)
 $$
-
 with real-valued constants $\alpha, \beta$, since $\hat{\lambda}_{8}$ must be hermitean. Elements of the group $(S U(N), \cdot)$ have the property that their determinant assumes the value +1 , therefore
-
 $$
 0=\ln \operatorname{det} \hat{U}=\operatorname{Tr} \ln \hat{U}=-\frac{i}{\hbar} \alpha_{a} \operatorname{Tr} \hat{T}_{a}
 $$
-
 i.e., the generators of $(S U(N), \cdot)$ are trace-free. Since this must also hold for $\hat{T}_{8}=\frac{\hbar}{2} \hat{\lambda}_{8}$, we must have $\beta=-2 \alpha$ in our Ansatz (4.6). The constant $\alpha$ can be determined from the orthogonality (3.41) of the generators,
-
 $$
 \operatorname{Tr}\left(\hat{T}_{a} \hat{T}_{b}\right)=\frac{\hbar^{2}}{2} \delta_{a b}
 $$
-
 or, for $\hat{\lambda}_{a}$,
-
 $$
 \operatorname{Tr}\left(\hat{\lambda}_{a} \hat{\lambda}_{b}\right)=2 \delta_{a b}
 $$
-
 One easily checks that our Ansatz (4.6) fulfills this relation for $a=8$ and $b=1, \ldots, 7$. We determine the constant $\alpha$ from this equation for the choice $a=b=8$,
-
 $$
 \operatorname{Tr}\left(\hat{\lambda}_{8} \hat{\lambda}_{8}\right)=\operatorname{Tr}\left(\begin{array}{ccc}
 \alpha^{2} & 0 & 0 \\
@@ -2324,9 +2322,7 @@ $$
 0 & 0 & 4 \alpha^{2}
 \end{array}\right)=6 \alpha^{2} \equiv 2 \quad \Longrightarrow \quad \alpha=\frac{1}{\sqrt{3}}
 $$
-
 The final result for $\hat{\lambda}_{8}$ thus reads
-
 $$
 \hat{\lambda}_{8}=\frac{1}{\sqrt{3}}\left(\begin{array}{ccc}
 1 & 0 & 0 \\
@@ -2334,30 +2330,33 @@ $$
 0 & 0 & -2
 \end{array}\right)
 $$
-
 The matrices defined through Eqs. (4.4), 4.5), and (4.10) are called Gell-Mann matrices (after their inventor Murray Gell-Mann). Due to their orthogonality they are linearly independent and thus span a basis in the space of trace-free hermitean ( $3 \times 3$ ) matrices.
+\end{EXA}
+
+
+
 
 \subsection{Structure constants}
-The Lie algebra of $(S U(3), \cdot)$ is
 
+
+
+\begin{CONC}{QMS-R25-07-04}{Strukturkonstanten der Lie-Algebra $(S U(3), \cdot)$}
+The Lie algebra of $(S U(3), \cdot)$ is
 $$
 \left[\hat{T}_{a}, \hat{T}_{b}\right]=i \hbar f_{a b c} \hat{T}_{c}
 $$
-
 or in terms of the Gell-Mann matrices, respectively,
-
 $$
 \left[\hat{\lambda}_{a}, \hat{\lambda}_{b}\right]=2 i f_{a b c} \hat{\lambda}_{c}
 $$
-
-One determines the structure constants from Eq. 3.42 using the explicit form of the Gell-Mann matrices,
-
+One determines the structure constants from
+$$-\frac{2 i}{\hbar^3} \operatorname{Tr}\left\{\left[\hat{X}_j, \hat{X}_k\right] \hat{X}_i\right\}=\frac{2}{\hbar^2} f_{j k \ell} \operatorname{Tr}\left(\hat{X}_{\ell} \hat{X}_i\right)=f_{j k \ell} \delta_{\ell i}=f_{j k i}$$
+using the explicit form of the Gell-Mann matrices,
 $$
 f_{a b c}=\frac{2}{i \hbar^{3}} \operatorname{Tr}\left\{\left[\hat{T}_{a}, \hat{T}_{b}\right] \hat{T}_{c}\right\} \equiv \frac{1}{4 i} \operatorname{Tr}\left\{\left[\hat{\lambda}_{a}, \hat{\lambda}_{b}\right] \hat{\lambda}_{c}\right\}
 $$
 
 This relation insures that the structure constants are then completely antisymmetric. They read explicitly:
-
 \begin{center}
 \begin{tabular}{c||c|c|c|c|c|c|c|c|c}
 $a b c$ & 123 & 147 & 156 & 246 & 257 & 345 & 367 & 458 & 678 \\
@@ -2366,28 +2365,29 @@ $f_{a b c}$ & 1 & $\frac{1}{2}$ & $-\frac{1}{2}$ & $\frac{1}{2}$ & $\frac{1}{2}$
 \hline
 \end{tabular}
 \end{center}
+For all other combinations of indices $a b c$ the structure constants vanish.
+\end{CONC}
 
-For all other combinations of indices $a b c$ the structure constants vanish.\\
+
+
+\begin{CONC}{QMS-R25-07-05}{Strukturkonstanten von $(S U(3), \cdot)$ sind vollständig antikommutativ}
 The generators of ( $S U(3), \cdot$ ) (or, more generally, of $(S U(N), \cdot)$ ) also obey anti-commutation relations,
-
 $$
 \left\{\hat{T}_{a}, \hat{T}_{b}\right\}=\frac{\hbar^{2}}{3} \delta_{a b} \mathbf{1}_{3}+\hbar d_{a b c} \hat{T}_{c}
 $$
-
 or in terms of the Gell-Mann matrices, respectively,
-
 $$
 \left\{\hat{\lambda}_{a}, \hat{\lambda}_{b}\right\}=\frac{4}{3} \delta_{a b} \mathbf{1}_{3}+2 d_{a b c} \hat{\lambda}_{c}
 $$
+\end{CONC}
 
+
+\begin{CONC}{QMS-R25-07-06}{Vollständigen symmetrischen Strukturkonstanten von $(S U(3), \cdot)$}
 The completely symmetric structure constants $d_{a b c}$ can be determined from the relation
-
 $$
 d_{a b c}=\frac{2}{\hbar^{3}} \operatorname{Tr}\left(\left\{\hat{T}_{a}, \hat{T}_{b}\right\} \hat{T}_{c}\right) \equiv \frac{1}{4} \operatorname{Tr}\left(\left\{\hat{\lambda}_{a}, \hat{\lambda}_{b}\right\} \hat{\lambda}_{c}\right)
 $$
-
 (We leave the proof of this equation as Exercise 3 (iii).) The non-vanishing symmetric structure constants read explicitly:
-
 \begin{center}
 \begin{tabular}{c||c|c|c|c|c|c|c|c|c|c|c}
 $a b c$ & 118 & 146 & 157 & 228 & 247 & 256 & 338 & 344 & 355 & 366 & 377 \\
@@ -2396,7 +2396,6 @@ $d_{a b c}$ & $\frac{1}{\sqrt{3}}$ & $\frac{1}{2}$ & $\frac{1}{2}$ & $\frac{1}{\
 \hline
 \end{tabular}
 \end{center}
-
 \begin{center}
 \begin{tabular}{c||c|c|c|c|c}
 $a b c$ & 448 & 558 & 668 & 778 & 888 \\
@@ -2405,35 +2404,41 @@ $d_{a b c}$ & $-\frac{1}{2 \sqrt{3}}$ & $-\frac{1}{2 \sqrt{3}}$ & $-\frac{1}{2 \
 \hline
 \end{tabular}
 \end{center}
+\end{CONC}
+
+
 
 \subsection{Subalgebras and subgroups}
-The algebra of ( $S U(3), \cdot$ ) has several subalgebras, which generate subgroups of ( $S U(3), \cdot$ ):\\
-(i) The set
 
+
+
+The algebra of $(S U(3), \cdot)$ has several subalgebras, which generate subgroups of ($S U(3), \cdot$ ):
+(i) 
+
+\begin{CONC}{QMS-R25-07-07}{$(S U(2), \cdot)$ erzeugende Subalgebra von $(S U(3), \cdot)$}
+The set
 $$
 \left\{\hat{T}_{1}, \hat{T}_{2}, \hat{T}_{3}\right\},
 $$
-
 constitutes an ( $\boldsymbol{S U}(\mathbf{2}), \cdot$ ) subalgebra, since $f_{123}=1 \equiv \epsilon_{123}$,
-
 $$
 \left[\hat{T}_{a}, \hat{T}_{b}\right]=i \hbar f_{a b c} \hat{T}_{c} \equiv i \hbar \epsilon_{a b c} \hat{T}_{c}, \quad a, b, c=1,2,3 .
 $$
-
 This subalgebra generates an ( $\boldsymbol{S U}(\mathbf{2}), \cdot$ ) subgroup of ( $S U(3), \cdot$ ),
-
 $$
 S U(2) \subset S U(3) .
 $$
+\end{CONC}
 
-(ii) A second subalgebra consists of the set
+(ii) 
 
+
+\begin{CONC}{QMS-R25-07-08}{$(S O(3), \cdot)$ erzeugende Subalgebra von $(S U(3), \cdot)$}
+A second subalgebra consists of the set
 $$
 \left\{\hat{T}_{2}, \hat{T}_{5}, \hat{T}_{7}\right\} .
 $$
-
 If we consider the explicit form of these generators,
-
 $$
 \begin{aligned}
 & \hat{T}_{2}=\frac{\hbar}{2}\left(\begin{array}{ccc}
@@ -2465,77 +2470,95 @@ i & 0 & 0
 \end{array}\right) \quad \Longrightarrow \quad\left(\hat{T}_{7}\right)_{i j}=\frac{1}{2}\left(-i \hbar \epsilon_{1 i j}\right),
 \end{aligned}
 $$
-
 it becomes obvious that, up to a factor of $1 / 2$ for $\hat{T}_{2}$ and $\hat{T}_{7}$ and a factor of $-1 / 2$ for $\hat{T}_{5}$, respectively, we face the generators of ( $\boldsymbol{S O}(\mathbf{3}), \cdot$ ) in the adjoint representation! If we define
-
 $$
 \hat{J}_{3} \equiv 2 \hat{T}_{2}, \quad \hat{J}_{2} \equiv-2 \hat{T}_{5}, \quad \hat{J}_{1} \equiv 2 \hat{T}_{7},
 $$
-
 we obtain from the commutation relation
-
 $$
 \left[\hat{T}_{a}, \hat{T}_{b}\right]=i \hbar f_{a b c} \hat{T}_{c}, \quad a, b, c=2,5,7,
 $$
-
 with the value of the structure constant $f_{257}=1 / 2$ the following commutation relation for the generators $\hat{J}_{i}$ of $(S O(3), \cdot)$ defined through Eq. (4.17),
-
 $$
 \left[\hat{J}_{i}, \hat{J}_{j}\right]=i \hbar \epsilon_{i j k} \hat{J}_{k}, \quad i, j, k=1,2,3 .
 $$
-
 We thus have identified an ( $\boldsymbol{S O}(\mathbf{3}), \cdot$ ) subalgebra of ( $S U(3), \cdot$ ),
-
 $$
 S O(3) \subset S U(3) .
 $$
+\end{CONC}
 
-(iii) The Cartan subalgebra consists of
 
+
+
+(iii) 
+
+\begin{CONC}{QMS-R25-07-09}{Cartan Unteralgebra von $(S O(3), \cdot)$}
+The Cartan subalgebra consists of
 $$
 \left\{\hat{T}_{3}, \hat{T}_{8}\right\}
 $$
-
 since $\left[\hat{T}_{3}, \hat{T}_{8}\right]=0$. It follows that rank $(\boldsymbol{S U}(\mathbf{3}), \cdot)=\mathbf{2}$. The two Casimir operators are
-
 $$
 \hat{C}_{1}=f_{a b c} \hat{T}_{a} \hat{T}_{b} \hat{T}_{c}, \quad \hat{C}_{2}=d_{a b c} \hat{T}_{a} \hat{T}_{b} \hat{T}_{c}
 $$
+\end{CONC}
 
 We leave the proof as Exercise 4 (v).
 
-\subsection{Multiplets}
-Multiplets are determined by the eigenvalues $C_{1}, C_{2}$ of the two Casimir operators (4.18) of ( $\operatorname{SU}(3), \cdot$ ). The question is, how many states belong to a multiplet of given ( $C_{1}, C_{2}$ ) and how to distinguish them from each other. To this end we need to quantify further quantum numbers, which belong to operators which commute with the Casimir operators (but not with all generators) of ( $\operatorname{SU}(3), \cdot$ ).
 
+\pagebreak
+
+
+
+\subsection{Multiplets}
+
+
+
+
+\begin{MOT}{QMS-R25-08-01}{Beziehung zwischen Multiplets und Zuständen}
+Multiplets are determined by the eigenvalues $C_{1}, C_{2}$ of the two Casimir operators (4.18) of ( $\operatorname{SU}(3), \cdot$ ). The question is, how many states belong to a multiplet of given ( $C_{1}, C_{2}$ ) and how to distinguish them from each other. To this end we need to quantify further quantum numbers, which belong to operators which commute with the Casimir operators (but not with all generators) of ( $\operatorname{SU}(3), \cdot$ ).
+\end{MOT}
+
+
+
+
+\begin{CONC}{QMS-R25-08-02}{Multiplets und Zuständen von $(S U(2), \cdot)$}
 To answer this for $(S U(3), \cdot)$, let us step back one step and consider the group $(S U(2), \cdot)$. The sole Casimir operator is $\hat{C}_{1}=\hat{\vec{J}}^{2}$ and the multiplets are characterized by the eigenvalues of $\hat{\vec{J}}^{2}$, i.e., $\hbar^{2} j(j+1)$, or simply the value of $j$. Furthermore, $\hat{\vec{J}}^{2}$ commutes with $\hat{J}_{z}$, which has eigenvalues $\hbar m$. Thus, the individual states of a multiplets can be uniquely characterized by the value of $j$ (labelling the multiplet) and the value of $m$ (labelling the individual state within the multiplet), $|j m\rangle$. For given $j$ there are $2 j+1$ states which differ by the value of $m, m=-j,-j+1, \ldots, j-1, j$.
 
 Obviously, $\hat{J}_{z}$ is the generator of the Cartan subalgebra of $(S U(2), \cdot)$. In the case of ( $\operatorname{SU}(3), \cdot$ ) it therefore stands to reason that we also use the generators of the Cartan subalgebra, $\hat{T}_{3}$ and $\hat{T}_{8}$, to distinguish between the states of a given multiplet. Since $\hat{T}_{3}, \hat{T}_{8}$ commute with each other and per definition also with the two Casimir operators $\hat{C}_{1}, \hat{C}_{2}$, we have a set of four mutually commuting operators, the eigenvalues of which uniquely determine the states of a given multiplet,
-
 $$
 \left|C_{1}, C_{2}, T_{3}, T_{8}\right\rangle
 $$
-
 For ( $S U(2), \cdot$ ) we had defined ladder operators
-
 $$
 \hat{J}_{ \pm} \equiv \hat{J}_{x} \pm i \hat{J}_{y}
 $$
-
 which allow to jump between adjacent states of a multiplet,
-
 $$
 \hat{J}_{ \pm}|j m\rangle \sim|j m \pm 1\rangle
 $$
+This can be graphically depicted as follows:
 
-This can be graphically depicted as follows:\\
 \includegraphics[scale=0.3, center]{2025_05_20_8618f55a41bfe980b4b2g-43}
+\end{CONC}
 
-For ( $S U(3), \cdot$ ) this is quite analogous, but here the states of a multiplet differ by two quantum numbers, $T_{3}$ and $T_{8}$, and not only by one, $m$. One can therefore raise or lower quantum numbers not only in one direction, but in two, as it is schematically (but, as we shall see, not quite correctly) depicted in Fig. 4.1:\\
+
+
+
+
+\begin{REM}{QMS-R25-08-03}{Multiplets und Zuständen von $(S U(3), \cdot)$}
+For ( $S U(3), \cdot$ ) this is quite analogous, but here the states of a multiplet differ by two quantum numbers, $T_{3}$ and $T_{8}$, and not only by one, $m$. One can therefore raise or lower quantum numbers not only in one direction, but in two, as it is schematically (but, as we shall see, not quite correctly) depicted in Fig. 4.1:
+
 \includegraphics[scale=0.3, center]{2025_05_20_8618f55a41bfe980b4b2g-44}
 
-Figure 4.1: Schematic action of ladder operators on ( $S U(3), \cdot$ ) multiplets.\\
-In order to see how this works precisely, let us first define suitable ladder operators:
+Figure 4.1: Schematic action of ladder operators on ( $S U(3), \cdot$ ) multiplets.
+\end{REM}
 
+
+
+\begin{DEF}{QMS-R25-08-04}{Geeigneter Leiter-Operator für $(S U(3), \cdot)$}
+In order to see how this works precisely, let us first define suitable ladder operators:
 $$
 \begin{aligned}
 \hat{T}_{ \pm} & \equiv \hat{T}_{1} \pm i \hat{T}_{2} \\
@@ -2543,9 +2566,11 @@ $$
 \hat{U}_{ \pm} & \equiv \hat{T}_{6} \pm i \hat{T}_{7}
 \end{aligned}
 $$
+\end{DEF}
 
+
+\begin{DEF}{QMS-R25-08-05}{Hyperladungs-Operator für $(S U(3), \cdot)$}
 In addition, we define the so-called hypercharge operator
-
 $$
 \hat{Y} \equiv \frac{2}{\sqrt{3}} \hat{T}_{8}=\frac{\hbar}{3}\left(\begin{array}{ccc}
 1 & 0 & 0 \\
@@ -2553,18 +2578,28 @@ $$
 0 & 0 & -2
 \end{array}\right)
 $$
+\end{DEF}
 
+
+\begin{LEM}{QMS-R25-08-06}{Kommutatorrelationen der Leiter-Operator für $(S U(3), \cdot)$}
 The commutation relations for the ladder operators read:
-
 $$
 \begin{aligned}
 {\left[\hat{T}_{3}, \hat{T}_{ \pm}\right] } & = \pm \hbar \hat{T}_{ \pm} \\
 {\left[\hat{T}_{+}, \hat{T}_{-}\right] } & =2 \hbar \hat{T}_{3}
 \end{aligned}
 $$
+These relations are the same as in the angular momentum algebra for $\hat{L}^{z}$ and the ladder operators $\hat{L}_{ \pm}$.
+\end{LEM}
 
-These relations are the same as in the angular momentum algebra for $\hat{L}^{z}$ and the ladder operators $\hat{L}_{ \pm}$. This, in turn, has the consequence that the operators $\left\{\hat{T}_{ \pm}, \hat{T}_{3}\right\}$ define an $(S U(2), \cdot)$ subalgebra (which we had already mentioned above). Furthermore we have:
 
+\begin{REM}{QMS-R25-08-07}{$\left\{\hat{T}_{ \pm}, \hat{T}_{3}\right\}$ define an $(S U(2), \cdot)$ Unteralgebra}
+This, in turn, has the consequence that the operators $\left\{\hat{T}_{ \pm}, \hat{T}_{3}\right\}$ define an $(S U(2), \cdot)$ subalgebra (which we had already mentioned above).
+\end{REM}
+
+
+\begin{PROP}{QMS-R25-08-08}{Weitere Kommutatorrelationen (1)}
+Furthermore we have:
 $$
 \begin{aligned}
 {\left[\hat{T}_{3}, \hat{V}_{ \pm}\right] } & = \pm \frac{\hbar}{2} \hat{V}_{ \pm} \\
@@ -2573,9 +2608,7 @@ $$
 {\left[\hat{U}_{+}, \hat{U}_{-}\right] } & =2 \hbar\left(-\frac{1}{2} \hat{T}_{3}+\frac{3}{4} \hat{Y}\right) \equiv 2 \hbar \hat{U}_{3}
 \end{aligned}
 $$
-
 where the right-hand sides of the last two equations represent the definitions of the operators $\hat{V}_{3}$ and $\hat{U}_{3}$. We furthermore compute:
-
 $$
 \begin{aligned}
 {\left[\hat{Y}, \hat{T}_{ \pm}\right] } & =0 \\
@@ -2590,128 +2623,221 @@ $$
 {\left[\hat{T}_{3}, \hat{Y}\right] } & =0
 \end{aligned}
 $$
+The proof of Eqs. (4.22) - 4.37) is left as Exercise 5.
+\end{PROP}
 
-The proof of Eqs. (4.22) - 4.37) is left as Exercise 5.\\
+
+
+\begin{CONC}{QMS-R25-08-09}{Alternative Generation von $(\operatorname{SU}(2), \cdot)$}
 With the help of the relations (4.24), (4.25), (4.29), and (4.30) we also derive
-
 $$
 \begin{aligned}
 {\left[\hat{V}_{3}, \hat{V}_{ \pm}\right] } & =\frac{1}{2}\left[\hat{T}_{3}, \hat{V}_{ \pm}\right]+\frac{3}{4}\left[\hat{Y}, \hat{V}_{ \pm}\right]= \pm \frac{\hbar}{4} \hat{V}_{ \pm} \pm \frac{3}{4} \hbar \hat{V}_{ \pm} \equiv \pm \hbar \hat{V}_{ \pm} \\
 {\left[\hat{U}_{3}, \hat{U}_{ \pm}\right] } & =-\frac{1}{2}\left[\hat{T}_{3}, \hat{U}_{ \pm}\right]+\frac{3}{4}\left[\hat{Y}, \hat{U}_{ \pm}\right]= \pm \frac{\hbar}{4} \hat{U}_{ \pm} \pm \frac{3}{4} \hbar \hat{U}_{ \pm} \equiv \pm \hbar \hat{U}_{ \pm}
 \end{aligned}
 $$
+Together with 
+$$\left[\hat{V}_{+}, \hat{V}_{-}\right]=2 \hbar\left(\frac{1}{2} \hat{T}_3+\frac{3}{4} \hat{Y}\right) \equiv 2 \hbar \hat{V}_3$$
+and 
+$$\left[\hat{U}_{+}, \hat{U}_{-}\right]=2 \hbar\left(-\frac{1}{2} \hat{T}_3+\frac{3}{4} \hat{Y}\right) \equiv 2 \hbar \hat{U}_3$$
+these equations can be interpreted in the way that the operators $\left\{\hat{V}_{ \pm}, \hat{V}_{3}\right\}$ and $\left\{\hat{U}_{ \pm}, \hat{U}_{3}\right\}$ form two additional $(S U(2), \cdot)$ subalgebras. Since $\hat{V}_{3}$ and $\hat{U}_{3}$ both depend on $\hat{T}_{3}$, these are, however, not independent from the ( $\operatorname{SU}(2), \cdot$ ) subalgebra spanned by $\left\{\hat{T}_{ \pm}, \hat{T}_{3}\right\}$. As we have already mentioned, there is only a single $(S U(2), \cdot)$ subalgebra contained in $(S U(3), \cdot)$.
+\end{CONC}
 
-Together with Eqs. (4.26) and (4.27) these equations can be interpreted in the way that the operators $\left\{\hat{V}_{ \pm}, \hat{V}_{3}\right\}$ and $\left\{\hat{U}_{ \pm}, \hat{U}_{3}\right\}$ form two additional $(S U(2), \cdot)$ subalgebras. Since $\hat{V}_{3}$ and $\hat{U}_{3}$ both depend on $\hat{T}_{3}$, these are, however, not independent from the ( $\operatorname{SU}(2), \cdot$ ) subalgebra spanned by $\left\{\hat{T}_{ \pm}, \hat{T}_{3}\right\}$. As we have already mentioned, there is only a single $(S U(2), \cdot)$ subalgebra contained in $(S U(3), \cdot)$.
 
-We now need to clarify how the ladder operators $\hat{T}_{ \pm}, \hat{V}_{ \pm}$, and $\hat{U}_{ \pm}$affect the states of a multiplet. To this end we consider the eigenstates (4.19), or by replacing $T_{8}$ by $Y \equiv$ $\sqrt{3} T_{8} / 2$, the eigenstates
 
+
+\begin{THEO}{QMS-R25-08-10}{Wirkung von Leiter-Operatoren $\hat{T}_{ \pm}, \hat{V}_{ \pm}, \hat{U}_{ \pm}$ auf Zustände des Multiplets}
+We now need to clarify how the ladder operators $\hat{T}_{ \pm}, \hat{V}_{ \pm}$, and $\hat{U}_{ \pm}$ affect the states of a multiplet. To this end we consider the eigenstates
+$$\left|C_1, C_2, T_3, T_8\right\rangle$$
+or by replacing $T_{8}$ by $Y \equiv$ $\sqrt{3} T_{8} / 2$, the eigenstates
 $$
 \left|C_{1}, C_{2}, T_{3}, Y\right\rangle \equiv\left|T_{3} Y\right\rangle
 $$
-
 where we have abbreviated the list of arguments, since $C_{1}, C_{2}$ cannot be changed by the ladder operators for any given multiplet of $(S U(3), \cdot)$. By definition we have
-
 $$
 \begin{aligned}
 \hat{T}_{3}\left|T_{3} Y\right\rangle & =T_{3}\left|T_{3} Y\right\rangle \\
 \hat{Y}\left|T_{3} Y\right\rangle & =Y\left|T_{3} Y\right\rangle
 \end{aligned}
 $$
+We now conclude that
+\begin{itemize}
+    \item[(i)] Because of Eq.~(4.24),
+    \[
+        [\hat T_{3},\hat V_{\pm}]\,|T_3Y\rangle
+        =\hat T_{3}\hat V_{\pm}|T_3Y\rangle-\hat V_{\pm}T_{3}|T_3Y\rangle
+        =\pm\frac{\hbar}{2}\,\hat V_{\pm}|T_3Y\rangle
+        \;\;\Longrightarrow\;\;
+        \hat T_{3}\hat V_{\pm}|T_3Y\rangle
+        =\Bigl(T_{3}\pm\frac{\hbar}{2}\Bigr)\hat V_{\pm}|T_3Y\rangle.
+    \]
+    Hence $\hat V_{\pm}$ raises/lowers the eigenvalue $T_{3}$ by $\hbar/2$.
 
-We now conclude that\\
-(i) because of Eq. (4.24),
+    \item[(ii)] Because of Eq.~(4.25),
+    \[
+        [\hat T_{3},\hat U_{\pm}]|T_3Y\rangle
+        =\hat T_{3}\hat U_{\pm}|T_3Y\rangle-\hat U_{\pm}T_{3}|T_3Y\rangle
+        =\mp\frac{\hbar}{2}\,\hat U_{\pm}|T_3Y\rangle
+        \;\;\Longrightarrow\;\;
+        \hat T_{3}\hat U_{\pm}|T_3Y\rangle
+        =\Bigl(T_{3}\mp\frac{\hbar}{2}\Bigr)\hat U_{\pm}|T_3Y\rangle.
+    \]
+    Hence $\hat U_{\pm}$ lowers/raises the eigenvalue $T_{3}$ by $\hbar/2$.
 
-$$
-\begin{aligned}
-{\left[\hat{T}_{3}, \hat{V}_{ \pm}\right]\left|T_{3} Y\right\rangle } & =\hat{T}_{3} \hat{V}_{ \pm}\left|T_{3} Y\right\rangle-\hat{V}_{ \pm} T_{3}\left|T_{3} Y\right\rangle= \pm \frac{\hbar}{2} \hat{V}_{ \pm}\left|T_{3} Y\right\rangle \\
-\Longleftrightarrow \quad \hat{T}_{3} \hat{V}_{ \pm}\left|T_{3} Y\right\rangle & =\left(T_{3} \pm \frac{\hbar}{2}\right) \hat{V}_{ \pm}\left|T_{3} Y\right\rangle
-\end{aligned}
-$$
+    \item[(iii)] Because of Eq.~(4.29),
+    \[
+        [\hat Y,\hat V_{\pm}]|T_3Y\rangle
+        =\hat Y\hat V_{\pm}|T_3Y\rangle-\hat V_{\pm}Y|T_3Y\rangle
+        =\pm\hbar\,\hat V_{\pm}|T_3Y\rangle
+        \;\;\Longrightarrow\;\;
+        \hat Y\hat V_{\pm}|T_3Y\rangle
+        =(Y\pm\hbar)\hat V_{\pm}|T_3Y\rangle.
+    \]
+    Hence $\hat V_{\pm}$ raises/lowers the eigenvalue $Y$ by $\hbar$.
 
-This equation means that $\hat{V}_{ \pm}$raises/lowers the eigenvalue $T_{3}$ of a state $\left|T_{3} Y\right\rangle$ by $\hbar / 2$.\\
-(ii) because of Eq. 4.25)
+    \item[(iv)] Because of Eq.~(4.30),
+    \[
+        [\hat Y,\hat U_{\pm}]|T_3Y\rangle
+        =\hat Y\hat U_{\pm}|T_3Y\rangle-\hat U_{\pm}Y|T_3Y\rangle
+        =\pm\hbar\,\hat U_{\pm}|T_3Y\rangle
+        \;\;\Longrightarrow\;\;
+        \hat Y\hat U_{\pm}|T_3Y\rangle
+        =(Y\pm\hbar)\hat U_{\pm}|T_3Y\rangle.
+    \]
+    Hence $\hat U_{\pm}$ raises/lowers the eigenvalue $Y$ by $\hbar$.
 
-$$
-\begin{aligned}
-{\left[\hat{T}_{3}, \hat{U}_{ \pm}\right]\left|T_{3} Y\right\rangle } & =\hat{T}_{3} \hat{U}_{ \pm}\left|T_{3} Y\right\rangle-\hat{U}_{ \pm} T_{3}\left|T_{3} Y\right\rangle=\mp \frac{\hbar}{2} \hat{U}_{ \pm}\left|T_{3} Y\right\rangle \\
-\Longleftrightarrow \quad \hat{T}_{3} \hat{U}_{ \pm}\left|T_{3} Y\right\rangle & =\left(T_{3} \mp \frac{\hbar}{2}\right) \hat{U}_{ \pm}\left|T_{3} Y\right\rangle .
-\end{aligned}
-$$
+    \item[(v)] $\hat T_{\pm}$ raises/lowers the eigenvalue $T_{3}$ of a state $|T_{3}Y\rangle$ by $\hbar$.
 
-This equation means that $\hat{U}_{ \pm}$lowers/raises the eigenvalue $T_{3}$ of a state $\left|T_{3} Y\right\rangle$ by $\hbar / 2$.\\
-(iii) because of Eq. 4.29)
+    \item[(vi)] Because of Eq.~(4.28), $\hat T_{\pm}$ does not change the eigenvalue $Y$ of a state $|T_{3}Y\rangle$.
+\end{itemize}
+To summarize,
+\begin{itemize}
+  \item[(i)] $\hat{\boldsymbol{T}}_{\pm}$ raises/lowers the eigenvalue $\boldsymbol{T}_3$ by $\hbar$ and leaves $\boldsymbol{Y}$ unchanged.
+  \item[(ii)] $\hat{V}_{\pm}$ raises/lowers $T_3$ by $\hbar/2$ and simultaneously raises/lowers $Y$ by $\hbar$.
+  \item[(iii)] $\hat{U}_{\pm}$ lowers/raises $T_3$ by $\hbar/2$ and simultaneously raises/lowers $Y$ by $\hbar$.
+\end{itemize}
+\end{THEO}
 
-$$
-\begin{aligned}
-{\left[\hat{Y}, \hat{V}_{ \pm}\right]\left|T_{3} Y\right\rangle } & =\hat{Y} \hat{V}_{ \pm}\left|T_{3} Y\right\rangle-\hat{V}_{ \pm} Y\left|T_{3} Y\right\rangle= \pm \hbar \hat{V}_{ \pm}\left|T_{3} Y\right\rangle \\
-\Longleftrightarrow \hat{Y} \hat{V}_{ \pm}\left|T_{3} Y\right\rangle & =(Y \pm \hbar) \hat{V}_{ \pm}\left|T_{3} Y\right\rangle
-\end{aligned}
-$$
 
-This means that $\hat{\boldsymbol{V}}_{ \pm}$raises/lowers the eigenvalue $\boldsymbol{Y}$ of a state $\left|\boldsymbol{T}_{\mathbf{3}} \boldsymbol{Y}\right\rangle$ by $\hbar$.\\
-(iv) because of Eq. 4.30
+\begin{CONC}{QMS-R25-08-11}{Graphische Darstellung Wirkung von Leiter-Operatoren $\hat{T}_{ \pm}, \hat{V}_{ \pm}, \hat{U}_{ \pm}$ auf Zustände des Multiplets}
+This can be graphically depicted as shown in 
 
-$$
-\begin{aligned}
-{\left[\hat{Y}, \hat{U}_{ \pm}\right]\left|T_{3} Y\right\rangle } & =\hat{Y} \hat{U}_{ \pm}\left|T_{3} Y\right\rangle-\hat{U}_{ \pm} Y\left|T_{3} Y\right\rangle= \pm \hbar \hat{U}_{ \pm}\left|T_{3} Y\right\rangle \\
-\Longleftrightarrow \hat{Y} \hat{U}_{ \pm}\left|T_{3} Y\right\rangle & =(Y \pm \hbar) \hat{U}_{ \pm}\left|T_{3} Y\right\rangle .
-\end{aligned}
-$$
-
-This means that $\hat{U}_{ \pm}$raises/lowers the eigenvalue $\boldsymbol{Y}$ of a state $\left|T_{3} Y\right\rangle$ by $\hbar$.\\
-(v) $\hat{\boldsymbol{T}}_{ \pm}$raises/lowers the eigenvalue $\boldsymbol{T}_{\mathbf{3}}$ of a state $\left|\boldsymbol{T}_{\mathbf{3}} \boldsymbol{Y}\right\rangle$ by $\hbar$.\\
-(vi) because of Eq. (4.28) $\hat{\boldsymbol{T}}_{ \pm}$does not change the eigenvalue $\boldsymbol{Y}$ of a state $\left|\boldsymbol{T}_{\mathbf{3}} \boldsymbol{Y}\right\rangle$.
-
-To summarize,\\
-(i) $\hat{\boldsymbol{T}}_{ \pm}$raises/lowers $\boldsymbol{T}_{\mathbf{3}}$ by $\hbar$ and leaves $\boldsymbol{Y}$ unchanged.\\
-(ii) $\hat{V}_{ \pm}$raises/lowers $T_{3}$ by $\hbar / 2$ and $Y$ by $\hbar$.\\
-(iii) $\hat{U}_{ \pm}$lowers/raises $T_{3}$ by $\hbar / 2$ and raises/lowers $Y$ by $\hbar$.
-
-This can be graphically depicted as shown in Fig. 4.2. The red line is the so-called $\boldsymbol{T}$-line. It defines the direction along which the ladder operators $\hat{T}_{ \pm}$act. These change the value of $T_{3}$ by $\pm \hbar$ and leave the value of $Y$ unchanged. The blue line is the so-called $\boldsymbol{V}$-line. It defines the direction along which the ladder operators $\hat{V}_{ \pm}$act. They change $T_{3}$ by $\pm \hbar / 2$ and simultaneously $Y$ by $\pm \hbar$. Finally, the green line is the so-called $\boldsymbol{U}$-line. It defines the direction along which the ladder operators $\hat{U}_{ \pm}$act. These change the value of $T_{3}$ by $\mp \hbar / 2$ and simultaneously $Y$ by $\pm \hbar$.
-
-The way the ladder operators act has the consequence that the states of an ( $\operatorname{SU}(3), \cdot$ ) multiplets do not form a regular lattice in the ( $T_{3}-Y$ ) plane, as shown in Fig. 4.1, but one where states on a line of fixed $Y$ are shifted in $T_{3}$ direction by $\hbar / 2$ with respect to states on a line with $Y \pm \hbar$, as shown in Fig. 4.2,
-
-This information suffices to determine the shape of ( $\boldsymbol{S} \boldsymbol{U}(\mathbf{3}), \cdot$ ) multiplets in the $\left(T_{3}-Y\right)$ plane. To this end let us first remember that\\
 \includegraphics[scale=0.3, center]{2025_05_20_8618f55a41bfe980b4b2g-47}
 
-Figure 4.2: Action of the ladder operators $\hat{T}_{ \pm}, \hat{V}_{ \pm}$, and $\hat{U}_{ \pm}$on states of an $(S U(3), \cdot)$ multiplet.\\
-(i) $\left\{\hat{T}_{+}, \hat{T}_{-}, \hat{T}_{3}\right\}$ forms an ( $S U(2), \cdot$ ) subalgebra of ( $S U(3), \cdot$ ), which transforms states of $(S U(2), \cdot)$ multiplets (as parts of $(S U(3), \cdot)$ multiplets) among themselves. Graphically, these ( $S U(2), \cdot$ ) multiplets are located along the (red) $T$-lines in Fig. 4.2 and the ladder operators $\hat{T}_{ \pm}$lead from one state on a $T$-line to the next. While the value of $Y$ always remains the same for these $(S U(2), \cdot)$ multiplets, the value of $T_{3}$ runs between $-T_{3}^{\max }$ and $+T_{3}^{\max }$. This, in turn, implies that these ( $\operatorname{SU}(2), \cdot$ ) multiplets must be located mirror-symmetrically with respect to the $Y$ axis (i.e., the line $T_{3}=0$ ).\\
-(ii) $\left\{\hat{V}_{+}, \hat{V}_{-}, \hat{V}_{3}\right\}$ also constitutes an $(S U(2), \cdot)$ subalgebra of $(S U(3), \cdot)$, which transforms the states of ( $S U(2), \cdot$ ) multiplets (as parts of ( $S U(3), \cdot$ ) multiplets) among themselves. However, these ( $S U(2), \cdot$ ) multiplets now lie along the (blue) $V$-lines in Fig. 4.2. When jumping between states with the ladder operators $\hat{V}_{ \pm}$, the value of $V_{3}$ varies between $-V_{3}^{\max }$ and $+V_{3}^{\max }$. This, in turn, implies that these ( $S U(2), \cdot$ ) multiplets must have as many states left as right of the line $V_{3}=0$ or, if we use the definition 4.26) of $\hat{V}_{3}$, of the straight line $Y=-\frac{2}{3} T_{3}$.\\
-(iii) $\left\{\hat{U}_{+}, \hat{U}_{-}, \hat{U}_{3}\right\}$ also constitutes an $(S U(2), \cdot)$ subalgebra of $(S U(3), \cdot)$, which transforms the states of ( $S U(2), \cdot$ ) multiplets (as parts of ( $S U(3), \cdot$ ) multiplets) among themselves. However, these ( $S U(2), \cdot$ ) multiplets now lie along the (green) $U$-lines in Fig. 4.2. When jumping between states with the ladder operators $\hat{U}_{ \pm}$, the value of $U_{3}$ varies betweend $-U_{3}^{\max }$ and $+U_{3}^{\max }$. This, in turn, implies that these ( $S U(2), \cdot$ ) multiplets must have as many states left as right of the line $U_{3}=0$ or, if we use the definition 4.27) of $\hat{U}_{3}$, of the straight line $Y=\frac{2}{3} T_{3}$.
+Figure 4.2: Action of the ladder operators $\hat{T}_{ \pm}, \hat{V}_{ \pm}$, and $\hat{U}_{ \pm}$on states of an $(S U(3), \cdot)$ multiplet.
 
-The symmetry axes thus identified are shown in Fig. 4.3. The three-fold symmetry only allows three possible geometrical shapes for $(S U(3), \cdot)$ multiplets in the $\left(T_{3}-Y\right)$ plane:\\
+The red line is the so-called $\boldsymbol{T}$-line. It defines the direction along which the ladder operators $\hat{T}_{ \pm}$act. These change the value of $T_{3}$ by $\pm \hbar$ and leave the value of $Y$ unchanged. The blue line is the so-called $\boldsymbol{V}$-line. It defines the direction along which the ladder operators $\hat{V}_{ \pm}$act. They change $T_{3}$ by $\pm \hbar / 2$ and simultaneously $Y$ by $\pm \hbar$. Finally, the green line is the so-called $\boldsymbol{U}$-line. It defines the direction along which the ladder operators $\hat{U}_{ \pm}$act. These change the value of $T_{3}$ by $\mp \hbar / 2$ and simultaneously $Y$ by $\pm \hbar$.
+\end{CONC}
+
+\begin{THEO}{QMS-R25-08-12}{Form von $\operatorname{SU}(3),\cdot)$ Multiplets der $\left(T_{3}-Y\right)$ Ebene}
+The way the ladder operators act has the consequence that the states of an ( $\operatorname{SU}(3), \cdot$ ) multiplets do not form a regular lattice in the ( $T_{3}-Y$ ) plane, as shown in Fig. 4.1, but one where states on a line of fixed $Y$ are shifted in $T_{3}$ direction by $\hbar / 2$ with respect to states on a line with $Y \pm \hbar$, as shown in Fig. 4.2,
+
+This information suffices to determine the shape of ( $\boldsymbol{S} \boldsymbol{U}(\mathbf{3}), \cdot$ ) multiplets in the $\left(T_{3}-Y\right)$ plane. 
+
+
+To this end let us first remember that
+\begin{itemize}
+  \item[(i)] $\left\{\hat{T}_{+}, \hat{T}_{-}, \hat{T}_{3}\right\}$ forms an $(SU(2),\cdot)$ subalgebra of $(SU(3),\cdot)$, which transforms the states of $(SU(2),\cdot)$ multiplets (as parts of $(SU(3),\cdot)$ multiplets) among themselves.\\
+  Graphically, these $(SU(2),\cdot)$ multiplets lie along the \textcolor{red}{$T$-lines} in Fig.~4.2. The ladder operators $\hat{T}_{\pm}$ move between neighboring states along a $T$-line.\\
+  The hypercharge $Y$ remains constant within a $T$-multiplet, while $T_3$ varies between $-T_3^{\max}$ and $+T_3^{\max}$.\\
+  This symmetry implies that $(SU(2),\cdot)$ multiplets appear mirror-symmetric with respect to the $T_3 = 0$ axis (i.e., the $Y$-axis).
+
+  \item[(ii)] $\left\{\hat{V}_{+}, \hat{V}_{-}, \hat{V}_{3}\right\}$ also forms an $(SU(2),\cdot)$ subalgebra of $(SU(3),\cdot)$, acting within $(SU(2),\cdot)$ multiplets.\\
+  These multiplets are aligned along the \textcolor{blue}{$V$-lines} in Fig.~4.2. The operators $\hat{V}_{\pm}$ move the state up/down along a $V$-line.\\
+  The eigenvalue $V_3$ varies between $-V_3^{\max}$ and $+V_3^{\max}$; hence, the states lie symmetrically around the line $V_3 = 0$.\\
+  Using Eq.~(4.26), this corresponds to the line $Y = -\frac{2}{3} T_3$.
+
+  \item[(iii)] $\left\{\hat{U}_{+}, \hat{U}_{-}, \hat{U}_{3}\right\}$ also forms an $(SU(2),\cdot)$ subalgebra of $(SU(3),\cdot)$, acting on $(SU(2),\cdot)$ submultiplets.\\
+  These multiplets are distributed along the \textcolor{green}{$U$-lines} in Fig.~4.2. The ladder operators $\hat{U}_{\pm}$ move between states along these lines.\\
+  The quantum number $U_3$ runs from $-U_3^{\max}$ to $+U_3^{\max}$, so the multiplets are symmetric about $U_3 = 0$.\\
+  According to Eq.~(4.27), this symmetry axis corresponds to the line $Y = \frac{2}{3} T_3$.
+\end{itemize}
+The symmetry axes thus identified are shown in Fig. 4.3. The three-fold symmetry only allows three possible geometrical shapes for $(S U(3), \cdot)$ multiplets in the $\left(T_{3}-Y\right)$ plane:
+\begin{itemize}
+  \item[(a)] A single state, the so-called \emph{singlet}, located at the origin of the $(T_{3}\!-\!Y)$ plane, i.e., at $T_{3} = Y = 0$.
+  \item[(b)] Triangles centered at the origin of the $(T_{3}\!-\!Y)$ plane.
+  \item[(c)] Hexagons centered at the origin of the $(T_{3}\!-\!Y)$ plane.
+\end{itemize}
 \includegraphics[scale=0.3, center]{2025_05_20_8618f55a41bfe980b4b2g-48}
-
-Figure 4.3: Symmetry axes of ( $S U(3), \cdot$ ) multiplets in the ( $T_{3}-Y$ ) plane (full lines), as well as $T-, V-$, and $U-$ lines (dashed lines).\\
-(a) a single state, the so-called singlet located at the origin of the $\left(T_{3}-Y\right)$ plane, i.e., for $T_{3}=Y=0$,\\
-(b) triangles centered at the origin of the $\left(T_{3}-Y\right)$ plane,\\
-(c) hexagons centered at the origin of the $\left(T_{3}-Y\right)$ plane.
+Figure 4.3: Symmetry axes of ( $S U(3), \cdot$ ) multiplets in the ( $T_{3}-Y$ ) plane (full lines), as well as $T-, V-$, and $U-$ lines (dashed lines).
 
 The simplest multiplets which fulfill criteria (a) and (b) are shown in Figs. 4.4 (a-g).
-
-\section{Remarks:}
-(i) The number of states of a given multiplet is determined by the following operation: beginning from the upper right (or lower left) corner move with the ladder operators $\hat{T}_{-}\left(\hat{T}_{+}\right)$or $\hat{V}_{-}\left(\hat{V}_{+}\right)$, respectively, to the adjacent state. From there use $\hat{T}_{-}\left(\hat{T}_{+}\right)$, $\hat{V}_{-}\left(\hat{V}_{+}\right)$, or $\hat{U}_{+}\left(\hat{U}_{-}\right)$to move to the next possible state inside a given triangle. One cannot leave the triangle, but in this way one can also reach states inside the triangle. Finally, this prescription defines a lattice of states on the sides and inside the triangle. Counting the states, one obtains the total number of states in a given multiplet.\\
-(ii) Counting along $T$-lines, the triplet [3] contains a $T$-singlet and a $T$-doublet or, counting along $V$-lines, a $V$-singlet and a $V$-doublet or, counting along $U$-lines, a $U$-singlet and a $U$-doublet, respectively. An analogous argument holds for the multiplet which is conjugate to the triplet, the so-called anti-triplet $[\overline{3}]$.\\[0pt]
-(iii) The sextet [6] contains a $T$-singlet, a $T$-doublet, and a $T$-triplet, or a $V$-singlet, a $V$-doublet, and a $V$-triplet, or a $U$-singlet, a $U$-doublet, and a $U$-triplet, respectively. An analogous argument holds for the anti-sextet $[\overline{\mathbf{6}}]$.\\
-\includegraphics[scale=0.3, center]{2025_05_20_8618f55a41bfe980b4b2g-49}
-
 Figure 4.4: (a) Singlet [1], (b) triplet [3], (c) anti-triplet [3], (d) sextet [6], (e) anti-sextet $[\overline{6}]$, (f) decuplet [10], and (g) anti-decuplet [10].\\[0pt]
-(iv) The decuplet [10] contains a $T$-singlet, a $T$-doublet, a $T$-triplet, and a $T$-quadruplet, or a $V$-singlet, a $V$-doublet, a $V$-triplet, and a $V$-quadruplet, or a $U$-singlet, a $U$-doublet, a $U$-triplet, and a $U$-quadruplet, respectively. An analogous argument holds for the anti-decuplet $[\overline{\mathbf{1 0}}]$.\\[0pt]
-(v) The triplet [3] with three possible states corresponds to the fundamental representation of $(S U(3), \cdot)$. We will see in the next section that we can generate the\\
-singlet, the anti-triplet, as well as all higher-dimensional multiplets by coupling a suitable number of triplets together.
+\end{THEO}
 
-The simplest multiplet obeying criterium (c) is the octet [8] shown in Fig. 4.5, This is the adjoint representation of $(S U(3), \cdot)$.\\
+
+Remarks:
+
+
+\begin{REM}{QMS-R25-08-13}{Anmerkung Form von $\operatorname{SU}(3),\cdot)$ Multiplets der $\left(T_{3}-Y\right)$ Ebene}
+\begin{itemize}
+  \item[(i)] The number of states of a given multiplet is determined as follows:  
+  Starting from the upper right (or lower left) corner, move to the adjacent state using the ladder operators  
+  $\hat{T}_{-}$ ($\hat{T}_{+}$) or $\hat{V}_{-}$ ($\hat{V}_{+}$), respectively.  
+  From there, use $\hat{T}_{-}$ ($\hat{T}_{+}$), $\hat{V}_{-}$ ($\hat{V}_{+}$), or $\hat{U}_{+}$ ($\hat{U}_{-}$)  
+  to access the next possible state within the triangle. One cannot leave the triangle, but in this way,  
+  one can reach all internal states. This procedure defines a lattice of states along and inside the triangle.  
+  Counting all these states yields the total number of states in the multiplet.
+
+  \item[(ii)] Counting along $T$-lines, the triplet $[3]$ consists of a $T$-singlet and a $T$-doublet;  
+  counting along $V$-lines, a $V$-singlet and a $V$-doublet;  
+  and along $U$-lines, a $U$-singlet and a $U$-doublet.  
+  The same structure applies to the conjugate representation, the anti-triplet $[\overline{3}]$.
+
+  \item[(iii)] The sextet $[6]$ includes a $T$-singlet, a $T$-doublet, and a $T$-triplet;  
+  likewise, it contains a $V$- and a $U$-singlet, doublet, and triplet, respectively.  
+  The same holds for the anti-sextet $[\overline{6}]$.
+
+  \begin{center}
+    \includegraphics[scale=0.3]{2025_05_20_8618f55a41bfe980b4b2g-49}
+  \end{center}
+
+  \item[(iv)] The decuplet $[10]$ contains a $T$-singlet, doublet, triplet, and quadruplet;  
+  the same applies for $V$- and $U$-multiplets.  
+  An analogous decomposition exists for the anti-decuplet $[\overline{10}]$.
+
+  \item[(v)] The triplet $[3]$ with its three states corresponds to the fundamental representation of $(SU(3),\cdot)$.  
+  In the next section, we will see that all other multiplets—including the singlet, the anti-triplet, and higher-dimensional ones—  
+  can be constructed by successive coupling of triplets.
+\end{itemize}
+\end{REM}
+
+
+\begin{EXA}{QMS-R25-08-14}{Einfachste Multiplet, welches Hexagon-Bedingung erfüllt}
+The simplest multiplet obeying criterium (c): Hexagons centered at the origin of the $(T_{3}\!-\!Y)$ plane - is the octet [8] shown in Fig. 4.5, This is the adjoint representation of $(S U(3), \cdot)$.
 \includegraphics[scale=0.3, center]{2025_05_20_8618f55a41bfe980b4b2g-50}
+\end{EXA}
 
 Figure 4.5: Octet [8].
 
-\section{Remarks:}
-(i) The anti-octet $[\overline{\boldsymbol{8}}]$ has the same shape as the octet. One says that $[\overline{8}]$ and [8] self-conjugate.\\
-(ii) From Fig. 4.5 one observes that the octet contains two $T$-doublets and a $T$-triplet, or two $V$-doublets and a $V$-triplet, or two $U$-doublets and a $U$-triplet, respectively.\\
-(iii) This yields only seven states. So why does one speak of an "octet", i.e., a multiplet with eight states? The reason is that the origin is doubly occupied with two different states, namely with one state of the triplet and an additional singlet. This is indicated by an additional circle around the origin in Fig. 4.5.
 
+
+Remarks:
+
+
+\begin{REM}{QMS-R25-08-15}{Oktett: $SU(2)$-Zerlegung und Ursprungssingularität}
+\begin{itemize}
+  \item[(i)] The anti-octet $[\overline{\mathbf{8}}]$ has the same shape as the octet $[8]$.  
+  One says that $[\overline{8}]$ and $[8]$ are \emph{self-conjugate} representations of $SU(3)$.
+
+  \item[(ii)] As seen in Fig.~4.5, the octet contains:
+  \begin{itemize}
+    \item two $T$-doublets and one $T$-triplet, or
+    \item two $V$-doublets and one $V$-triplet, or
+    \item two $U$-doublets and one $U$-triplet.
+  \end{itemize}
+
+  \item[(iii)] This adds up to only seven states. So why is it called an "octet"?  
+  The reason is that the \emph{origin} in the $(T_3,Y)$-plane is \emph{doubly occupied} — it hosts one state from the triplet  
+  and an additional singlet. This is indicated in Fig.~4.5 by an extra circle around the origin, marking the double occupancy.
+\end{itemize}
+\end{REM}
+
+
+
+
+\begin{REM}{QMS-R25-08-16}{Lineare Abhängigkeit am Ursprung des Oktetts}
 What is the reason for this double occupancy? Starting from the state $\mid T_{3}=1 Y=$ $0\rangle$, one can reach the origin in three different ways:
-
 $$
 \begin{aligned}
 |00\rangle_{\mathrm{I}} & \sim \hat{T}_{-}|10\rangle, \\
@@ -2719,40 +2845,32 @@ $$
 |00\rangle_{\mathrm{III}} & \sim \hat{U}_{+} \hat{V}_{-}|10\rangle \sim \hat{U}_{+}\left|\frac{1}{2}-1\right\rangle .
 \end{aligned}
 $$
-
-These different ways are shown graphically in Fig. 4.6,\\
-However, because of Eq. (4.36) $\hat{U}_{+} \hat{V}_{-}=\hat{V}_{-} \hat{U}_{+}+\hbar \hat{T}_{-}$, way III is not linearly independent of way I and way II,
-
+These different ways are shown graphically in Fig. 4.6. However, because of Eq. (4.36) $\hat{U}_{+} \hat{V}_{-}=\hat{V}_{-} \hat{U}_{+}+\hbar \hat{T}_{-}$, way III is not linearly independent of way I and way II,
 $$
 |00\rangle_{\mathrm{III}} \sim \hat{U}_{+} \hat{V}_{-}|10\rangle=\hat{V}_{-} \hat{U}_{+}|10\rangle+\hbar \hat{T}_{-}|10\rangle=\alpha|00\rangle_{\mathrm{II}}+\beta|00\rangle_{\mathrm{I}} .
 $$
-
 \begin{center}
 \includegraphics[scale=0.3]{2025_05_20_8618f55a41bfe980b4b2g-51}
 \end{center}
-
 Figure 4.6: The three different ways to reach the origin $|00\rangle$ starting from $|10\rangle$.
 
 Thus, the octet has two linearly independent states, $|00\rangle_{\mathrm{I}}$ and $|00\rangle_{\mathrm{II}}$, which are located at the origin.
+\end{REM}
 
+\begin{REM}{QMS-R25-08-17}{Degenerationsstruktur in $\operatorname{SU}(3)$-Multipletts}
 The rule of multiple occupancy or degeneracy of states with the same quantum numbers $T_{3}$ and $Y$ can be generalized to arbitrary multiplets. In general, the degeneracy of states on each inner shell is by one unit larger than those of the states on the adjacent outer shell. The degeneracy of the outermost shell is always equal to one. An example is shown in Fig. 4.7.
 
 This rule holds as long as a shell is not a triangle. Inside a triangle the degeneracy does not increase any more, but stays constant. The reason is that there is now only one linearly independent way to reach a point inside a triangle. To understand this, let us consider the decuplet, Fig. 4.8.
 
 At first glance, one would think that, starting from state $|10\rangle$, there are three different ways to reach the origin $|00\rangle$, just like for the octet. For the same reasons as for the octet, at least two of them should be linearly independent, e.g.
-
 $$
 |00\rangle_{\mathrm{I}} \sim \hat{T}_{-}|10\rangle \quad \text { and } \quad|00\rangle_{\mathrm{II}} \sim \hat{V}_{-} \hat{U}_{+}|10\rangle,
 $$
-
 so that the origin is again doubly occupied. However, it holds
-
 $$
 |10\rangle \sim \hat{V}_{-}\left|\frac{3}{2} 1\right\rangle
 $$
-
 and therefore
-
 $$
 \begin{aligned}
 |00\rangle_{\mathrm{II}} & \sim \hat{V}_{-} \hat{U}_{+} \hat{V}_{-}\left|\frac{3}{2} 1\right\rangle=\hat{V}_{-}\left(\hat{V}_{-} \hat{U}_{+}+\hbar \hat{T}_{-}\right)\left|\frac{3}{2} 1\right\rangle \\
@@ -2761,101 +2879,717 @@ $$
 & \sim \hat{T}_{-}|10\rangle \sim|00\rangle_{\mathrm{I}} .
 \end{aligned}
 $$
-
 \begin{center}
 \includegraphics[scale=0.3]{2025_05_20_8618f55a41bfe980b4b2g-52(1)}
 \end{center}
+Figure 4.7: Starting from the outermost shell, the degeneracy of states increases by one as one moves from one inner shell to the next.
 
-Figure 4.7: Starting from the outermost shell, the degeneracy of states increases by one as one moves from one inner shell to the next.\\
 \includegraphics[scale=0.3, center]{2025_05_20_8618f55a41bfe980b4b2g-52}
-
 Figure 4.8: The three ways to reach the origin $|00\rangle$, starting from state $|10\rangle$.
 
 Here we have made use of Eqs. (4.31) and (4.36), and employed the fact that the state $\left|\frac{3}{2} 1\right\rangle$ is the state with the maximum hypercharge $Y=1$ in the multiplet, such that $\hat{U}_{+}\left|\frac{3}{2} 1\right\rangle \equiv 0$, since this operation would lead outside the multiplet, which is not allowed.
 
 Equation (4.44) thus shows that $|00\rangle_{\mathrm{II}} \sim|00\rangle_{\mathrm{I}}$, i.e., these two states are not linearly independent from each other, thus not different. Another way to see this is, starting from $\left|\frac{3}{2} 1\right\rangle$, to apply either $\hat{T}_{-} \hat{V}_{-}$or $\hat{V}_{-} \hat{T}_{-}$in order to reach $|00\rangle$. Because of Eq. 4.31) this is, however, the same, thus not linearly independent.
+\end{REM}
+
+
+
+
+\pagebreak
+
 
 \subsection{Construction of multiplets from the fundamental representation}
+
+
+
+\begin{MOT}{QMS-R25-09-01}{Kopplung von Drehimpulsen}
 In the theory of coupling of angular momenta, two angular momenta (or spins, respectively) are coupled or "added" to form states with a certain total angular momentum. From the mathematical point of view, one takes the product space of the two angular momenta and decomposes it in terms of multiplets for given total angular momentum (or spin, respectively). This process is called reduction.
+\end{MOT}
 
+
+\begin{EXA}{QMS-R25-09-02}{SU(2): $[2] \otimes [2] = [1] \oplus [3]$}
 It stands to reason that, by coupling together sufficiently many smallest non-trivial angular momenta (or spins, respectively), it should be possible to generate all higherdimensional multiplets. This is indeed the case: by coupling together sufficiently many fundamental representations of ( $S U(2), \cdot$ ), i.e., doublets, all higher multiplets for given angular momentum (or spin, respectively) can be generated. We show this at hand of two examples:
-
 $$
 \text { (i) } \begin{aligned}
 & j_{1}=\frac{1}{2} \text { with } j_{2}=\frac{1}{2} \Longrightarrow j=0 \text { and } j=1 \\
 & \uparrow \quad \otimes \quad \uparrow \quad \Longrightarrow \quad \uparrow \downarrow \text { and } \quad \uparrow
 \end{aligned}
 $$
-
 This relation can be simply written with the notation "doublet $=[2]$ ", "singlet $=[1]$ ", and "triplet $=[3]$ " as
-
 $$
 [2] \otimes[2]=[1] \oplus[3]
 $$
+\end{EXA}
 
-This process can be continued, by coupling the doublet to a triplet:\\
-(ii) $\quad j_{1}=\frac{1}{2} \quad$ with $\quad j_{2}=1 \quad \Longrightarrow \quad j=\frac{1}{2} \quad$ and $\quad j=\frac{3}{2}$\\
-\includegraphics[scale=0.3, center]{2025_05_20_8618f55a41bfe980b4b2g-53}
+\begin{EXA}{QMS-R25-09-03}{SU(2): $[2] \otimes [3] = [2] \oplus [4]$}
+This process can be continued, by coupling the doublet to a triplet:
+\[
+\text{(ii)} \quad j_1 = \tfrac{1}{2} \quad \text{with} \quad j_2 = 1 \quad \Longrightarrow \quad j = \tfrac{1}{2} \quad \text{and} \quad j = \tfrac{3}{2}
+\]
+\includegraphics[scale=0.2, center]{2025_05_20_8618f55a41bfe980b4b2g-53}
 
 With the notation "quadruplet $=[4]$ " this can be succinctly written as
-
 $$
 [2] \otimes[3]=[2] \oplus[4]
 $$
-
 By coupling a doublet or triplet to the quadruplet, one can continue this process and in this way generate all higher-dimensional multiplets.
+\end{EXA}
 
+\begin{CONC}{QMS-R25-09-04}{Grafische Methode: SU(2)-Reduktion}
 There is a graphical method to perform this reduction. To this end, we draw the first doublet onto the $J_{3}$ axis:
+\includegraphics[scale=0.2, center]{2025_05_20_8618f55a41bfe980b4b2g-54(3)}
 
-4 The group ( $\boldsymbol{S U} \mathbf{( 3 ) , ~} \cdot$ )\\
-\includegraphics[scale=0.3, center]{2025_05_20_8618f55a41bfe980b4b2g-54(3)}
-
-Now we put the second doublet with its center ( $J_{3}=0$ ) onto each of the two states $J_{3}=1 / 2$ and $J_{3}=-1 / 2$ (in units of $\hbar$ ) of the first doublet:\\
-\includegraphics[scale=0.3, center]{2025_05_20_8618f55a41bfe980b4b2g-54(1)}
+Now we put the second doublet with its center ( $J_{3}=0$ ) onto each of the two states $J_{3}=1 / 2$ and $J_{3}=-1 / 2$ (in units of $\hbar$ ) of the first doublet:
+\includegraphics[scale=0.2, center]{2025_05_20_8618f55a41bfe980b4b2g-54(1)}
 
 This generates once the states $J_{3}=1$ and $J_{3}=-1$, as well as twice the state $J_{3}=0$. This just corresponds to one singlet, $J=0$ or [1] (red dot), and one triplet, $J=1$ or [3] (black dots).
 
-If one repeats this with another doublet and the triplet, one obtains a doublet, $J=1 / 2$ or [2] (red dots), and a quadruplet, $J=3 / 2$ or [4] (black dots):\\
-\includegraphics[scale=0.3, center]{2025_05_20_8618f55a41bfe980b4b2g-54(2)}
+If one repeats this with another doublet and the triplet, one obtains a doublet, $J=1 / 2$ or [2] (red dots), and a quadruplet, $J=3 / 2$ or [4] (black dots):
+\includegraphics[scale=0.2, center]{2025_05_20_8618f55a41bfe980b4b2g-54(2)}
+\end{CONC}
 
-Analogously, one can generate all ( $S U(3), \cdot$ ) multiplets by coupling, starting from the fundamental representation, the triplet. As a first example, we consider the coupling of two triplets:\\
-\includegraphics[scale=0.3, center]{2025_05_20_8618f55a41bfe980b4b2g-54(4)}\\
-\includegraphics[scale=0.3, center]{2025_05_20_8618f55a41bfe980b4b2g-54(5)}\\
+
+
+\begin{CONC}{QMS-R25-09-05}{Generierung höherer SU(2)- und SU(3)-Darstellungen durch Kopplung}
+Analogously, one can generate all ( $S U(3), \cdot$ ) multiplets by coupling, starting from the fundamental representation, the triplet. As a first example, we consider the coupling of two triplets:
+\includegraphics[scale=0.2, center]{2025_05_20_8618f55a41bfe980b4b2g-54(4)}\\
+\includegraphics[scale=0.2, center]{2025_05_20_8618f55a41bfe980b4b2g-54(5)}\\
 $\oplus$\\
-\includegraphics[scale=0.3, center]{2025_05_20_8618f55a41bfe980b4b2g-54}
+\includegraphics[scale=0.2, center]{2025_05_20_8618f55a41bfe980b4b2g-54}
 
 This yields a sextet and an anti-triplet,
-
 $$
 [3] \otimes[3]=[\overline{3}] \oplus[6] .
 $$
 
-Now we couple the anti-triplet to another triplet:\\
+Now we couple the anti-triplet to another triplet:
+
 \includegraphics[scale=0.3, center]{2025_05_20_8618f55a41bfe980b4b2g-55(2)}
 
 This yields an octet and a singlet,
-
 $$
 [\overline{3}] \otimes[3]=[1] \oplus[8]
 $$
-
 Starting from the sextet, we obtain by coupling it to another triplet:\\
 \includegraphics[scale=0.3, center]{2025_05_20_8618f55a41bfe980b4b2g-55(1)}\\
 \includegraphics[scale=0.3, center]{2025_05_20_8618f55a41bfe980b4b2g-55(3)}\\
 \includegraphics[scale=0.3, center]{2025_05_20_8618f55a41bfe980b4b2g-55}
 
-4 The group ( $\boldsymbol{S U} \mathbf{( 3 ) ,} \cdot$ )
-
 This yields a decuplet and an octet,
-
 $$
 [3] \otimes[6]=[8] \oplus[10] .
 $$
+We can use rules (4.49), 4.50, and 4.51) together with the law of associativity to determine more complex couplings, e.g.
+$$[3] \otimes[3] \otimes[3]=[3] \otimes([\overline{3}] \oplus[6])=([3] \otimes[\overline{3}]) \oplus([3] \otimes[6])=[1] \oplus[8] \oplus[8] \oplus[10]$$
+\end{CONC}
 
-We can use rules (4.49), 4.50, and 4.51) together with the law of associativity to determine more complex couplings, e.g.\\
-$[3] \otimes[3] \otimes[3]=[3] \otimes([\overline{3}] \oplus[6])=([3] \otimes[\overline{3}]) \oplus([3] \otimes[6])=[1] \oplus[8] \oplus[8] \oplus[10]$.
+
+
+
+
+\pagebreak
+
+
 
 \subsection{Young Tableaux}
+
+
+Young Tableaux constitute another powerful method to construct the irreducible multiplets of the group $S U(3)$. In fact, this method can be applied also for $S U(N)$, with arbitrary $N$. The advantage of Young Tableaux is that they also provide information about the symmetry properties of an irreducible multiplet.
+
+\subsubsection*{The permutation group $S_{N}$}
+We start by considering the so-called permutation or symmetric group $S_{N}$. This is the group of permutations of $M$ identical objects (e.g., quantum-mechanical particles), which can assume $N$ distinguishable states. In order to avoid confusion, let us first focus on the case $M=N$, i.e., we consider $N$ objects, which are supposed to be distributed over $N$ states. The permutation group $S_{N}$ consists of all permutations how the objects can be assigned to the states. A permutation is denoted by
+
+$$
+\hat{P}\left(\alpha_{1}, \alpha_{2}, \ldots, \alpha_{N}\right) \equiv\left(\begin{array}{cccc}
+1 & 2 & \cdots & N \\
+\alpha_{1} & \alpha_{2} & \cdots & \alpha_{N}
+\end{array}\right)
+$$
+
+where $\left(\alpha_{1}, \alpha_{2}, \ldots, \alpha_{N}\right)$ is any permutation of $(1,2, \ldots, N)$. In other words, if we keep the order of the distinguishable states fixed, the permutation $\hat{P}\left(\alpha_{1}, \alpha_{2}, \ldots, \alpha_{N}\right)$ re-assigns particle $\alpha_{1}$ to state 1, particle $\alpha_{2}$ to state 2, etc.. Consider for instance the $N$-particle product state (for the definition of such a state, see the lectures on Statistical Mechanics)
+
+$$
+\left|\varphi_{1}^{(1)}, \varphi_{2}^{(2)}, \ldots, \varphi_{N}^{(N)}\right\rangle \equiv\left|\varphi_{1}^{(1)}\right\rangle\left|\varphi_{2}^{(2)}\right\rangle \cdots\left|\varphi_{N}^{(N)}\right\rangle=\prod_{i=1}^{N}\left|\varphi_{i}^{(i)}\right\rangle
+$$
+
+where $\left|\varphi_{i}^{(i)}\right\rangle$ is a quantum-mechanical single-particle state. Here, the superscript in parentheses stands for the particle index, while the subscript labels the state. Then
+
+$$
+\hat{P}\left(\alpha_{1}, \alpha_{2}, \ldots, \alpha_{N}\right)\left|\varphi_{1}^{(1)}, \varphi_{2}^{(2)}, \ldots, \varphi_{N}^{(N)}\right\rangle=\left|\varphi_{1}^{\left(\alpha_{1}\right)}, \varphi_{2}^{\left(\alpha_{2}\right)}, \ldots, \varphi_{N}^{\left(\alpha_{N}\right)}\right\rangle,
+$$
+
+i.e., the permutation assigns particle $\alpha_{1}$ to the state $\varphi_{1}$, particle $\alpha_{2}$ to the state $\varphi_{2}$, etc. Since the particles are supposed to be identical, i.e., indistinguishable, this describes physically the same state. Nevertheless, since the single-particle states are orthonormal, $\left\langle\varphi_{j}^{(i)} \mid \varphi_{i}^{(i)}\right\rangle=\delta_{i j}$, the product states are also orthonormal,
+
+$$
+\left\langle\varphi_{1}^{(1)}, \varphi_{2}^{(2)}, \ldots, \varphi_{N}^{(N)} \mid \varphi_{1}^{\left(\alpha_{1}\right)}, \varphi_{2}^{\left(\alpha_{2}\right)}, \ldots, \varphi_{N}^{\left(\alpha_{N}\right)}\right\rangle=\prod_{i=1}^{N}\left\langle\varphi_{i}^{(i)} \mid \varphi_{\alpha_{i}}^{(i)}\right\rangle=\prod_{i=1}^{N} \delta_{i, \alpha_{i}}
+$$
+
+Here we have used the fact that the scalar product of a product state can be written as the product of scalar products of the single-particle states. However, one has to take into account that the individual scalar products are formed from states in the Hilbert space of the same particle. This means that when computing the scalar product of the product states one first has to put the single-particle states into the correct order,
+
+$$
+\left|\varphi_{1}^{\left(\alpha_{1}\right)}, \varphi_{2}^{\left(\alpha_{2}\right)}, \ldots, \varphi_{N}^{\left(\alpha_{N}\right)}\right\rangle=\prod_{i=1}^{N}\left|\varphi_{i}^{\left(\alpha_{i}\right)}\right\rangle \equiv \prod_{i=1}^{N}\left|\varphi_{\alpha_{i}}^{(i)}\right\rangle .
+$$
+
+Note that any permutation can be written as a sequence of transpositions, i.e., interchange of a pair of particles (see lectures on Statistical Mechanics). Denoting the transposition which interchanges particles $i$ and $j$ by $\hat{P}_{i j}$ and taking $N=3$ as an example, the permutation $\hat{P}(321)$ can be written as
+
+$$
+\hat{P}(312)=\hat{P}_{12} \hat{P}_{13} .
+$$
+
+Indeed,
+
+$$
+\begin{aligned}
+\hat{P}(312)\left|\varphi_{1}^{(1)}, \varphi_{2}^{(2)}, \varphi_{3}^{(3)}\right\rangle & =\hat{P}_{12} \hat{P}_{13}\left|\varphi_{1}^{(1)}, \varphi_{2}^{(2)}, \varphi_{3}^{(3)}\right\rangle \\
+& =\hat{P}_{12}\left|\varphi_{1}^{(3)}, \varphi_{2}^{(2)}, \varphi_{3}^{(1)}\right\rangle \\
+& =\left|\varphi_{1}^{(3)}, \varphi_{2}^{(1)}, \varphi_{3}^{(2)}\right\rangle
+\end{aligned}
+$$
+
+If a permutation $\hat{P}\left(\alpha_{1}, \alpha_{2}, \ldots, \alpha_{N}\right)$ can be written as an even number of transpositions, we call it an even permutation, if it can be written as an odd number of transpositions, we call it an odd permutation.
+
+The transposition operator fulfills
+
+$$
+\hat{P}_{i j} \hat{P}_{i j}=\hat{P}_{i j}^{2} \equiv \mathbb{1},
+$$
+
+because interchanging particles $i$ and $j$ twice reproduces the original assignment of particles to states. Multiplying this equation with $\hat{P}_{i j}^{-1}$ then leads to the identity
+
+$$
+\hat{P}_{i j}^{-1}=\hat{P}_{i j},
+$$
+
+the transposition operator is self-inverse. Since the product states 4.54 are normalized, one also has
+
+$$
+\begin{aligned}
+& \left\langle\ldots, \varphi_{i}^{(i)}, \ldots, \varphi_{j}^{(j)}, \ldots \mid \ldots, \varphi_{i}^{(i)}, \ldots, \varphi_{j}^{(j)}, \ldots\right\rangle=1 \\
+& =\left\langle\ldots, \varphi_{i}^{(j)}, \ldots, \varphi_{j}^{(i)}, \ldots \mid \ldots, \varphi_{i}^{(j)}, \ldots, \varphi_{j}^{(i)}, \ldots\right\rangle \\
+& =\left\langle\ldots, \varphi_{i}^{(i)}, \ldots, \varphi_{j}^{(j)}, \ldots\right| \hat{P}_{i j}^{\dagger} \hat{P}_{i j}\left|\ldots, \varphi_{i}^{(i)}, \ldots, \varphi_{j}^{(j)}, \ldots\right\rangle .
+\end{aligned}
+$$
+
+Comparing left- and right-hand side, we deduce the hermicity of the transposition operator,
+
+$$
+\hat{P}_{i j}^{\dagger} \hat{P}_{i j}=\mathbb{1} \quad \Longrightarrow \quad \hat{P}_{i j}^{\dagger}=\hat{P}_{i j}^{-1}=\hat{P}_{i j},
+$$
+
+where we have used Eq. (4.60) in the last step. The hermiticity implies that the transposition operator $\hat{P}_{i j}$ has real eigenvalues $\lambda_{i j} \in \mathbb{R}$. These eigenvalues can be computed from the eigenvalue equation
+
+$$
+\begin{aligned}
+\hat{P}_{i j}\left|\Phi_{N}\right\rangle & =\lambda_{i j}\left|\Phi_{N}\right\rangle \\
+\Longleftrightarrow \quad\left|\Phi_{N}\right\rangle & =\mathbb{1}\left|\Phi_{N}\right\rangle=\hat{P}_{i j}^{2}\left|\Phi_{N}\right\rangle=\lambda_{i j} \hat{P}_{i j}\left|\Phi_{N}\right\rangle=\lambda_{i j}^{2}\left|\Phi_{N}\right\rangle \\
+\Longrightarrow \quad \lambda_{i j}^{2} & =1 \quad \Longrightarrow \lambda_{i j}= \pm 1
+\end{aligned}
+$$
+
+where we have used Eq. 4.59. Consequently, each transposition operator $\hat{P}_{i j}$ has two eigenstates $\left|\Phi_{N}^{( \pm)}\right\rangle$, corresponding to its two eigenvalues,
+
+$$
+\hat{P}_{i j}\left|\Phi_{N}^{( \pm)}\right\rangle= \pm\left|\Phi_{N}^{( \pm)}\right\rangle
+$$
+
+one of which is symmetric ( $\lambda_{i j}=+1$ ) under interchange of particles $i, j$ and the other is antisymmetric ( $\lambda_{i j}=-1$ ). These states can be formally generated by applying the symmetrization and antisymmetrization operators
+
+$$
+\hat{S}_{i j} \equiv \frac{1}{\sqrt{2}}\left(\mathbb{1}+\hat{P}_{i j}\right), \hat{A}_{i j} \equiv \frac{1}{\sqrt{2}}\left(\mathbb{1}-\hat{P}_{i j}\right)
+$$
+
+to the product state, such that
+
+$$
+\left|\Phi_{N}^{(+)}\right\rangle=\hat{S}_{i j}\left|\ldots, \varphi_{i}^{(i)}, \ldots, \varphi_{j}^{(j)}, \ldots\right\rangle, \quad\left|\Phi_{N}^{(-)}\right\rangle=\hat{A}_{i j}\left|\ldots, \varphi_{i}^{(i)}, \ldots, \varphi_{j}^{(j)}, \ldots\right\rangle
+$$
+
+Since
+
+$$
+\hat{S}_{i j} \hat{A}_{i j}=\frac{1}{2}\left(11+\hat{P}_{i j}-\hat{P}_{i j}-\hat{P}_{i j}^{2}\right)=0
+$$
+
+the two eigenstates are orthogonal,
+
+$$
+\left\langle\Phi_{N}^{(+)} \mid \Phi_{N}^{(-)}\right\rangle=\left\langle\ldots, \varphi_{i}^{(i)}, \ldots, \varphi_{j}^{(j)}, \ldots\right| \hat{S}_{i j} \hat{A}_{i j}\left|\ldots, \varphi_{i}^{(i)}, \ldots, \varphi_{j}^{(j)}, \ldots\right\rangle=0
+$$
+
+where we have used the fact that $\hat{S}_{i j}$ is hermitean (as is $\hat{A}_{i j}$ ), due to the hermiticity of $\hat{P}_{i j}$. Using
+
+$$
+\begin{aligned}
+& \hat{S}_{i j}^{\dagger} \hat{S}_{i j}=\hat{S}_{i j}^{2}=\frac{1}{2}\left(\mathbb{1}+2 \hat{P}_{i j}+\hat{P}_{i j}^{2}\right)=\mathbb{1}+\hat{P}_{i j}=\sqrt{2} \hat{S}_{i j} \\
+& \hat{A}_{i j}^{\dagger} \hat{A}_{i j}=\hat{A}_{i j}^{2}=\frac{1}{2}\left(\mathbb{1}-2 \hat{P}_{i j}+\hat{P}_{i j}^{2}\right)=\mathbb{1}-\hat{P}_{i j}=\sqrt{2} \hat{A}_{i j}
+\end{aligned}
+$$
+
+one shows that the eigenstates are also normalized to one,
+
+$$
+\begin{aligned}
+\left\langle\Phi_{N}^{( \pm)} \mid \Phi_{N}^{( \pm)}\right\rangle & =\left\langle\ldots, \varphi_{i}^{(i)}, \ldots, \varphi_{j}^{(j)}, \ldots \mid \ldots, \varphi_{i}^{(i)}, \ldots, \varphi_{j}^{(j)}, \ldots\right\rangle \\
+& \pm\left\langle\ldots, \varphi_{i}^{(i)}, \ldots, \varphi_{j}^{(j)}, \ldots \mid \ldots, \varphi_{i}^{(j)}, \ldots, \varphi_{j}^{(i)}, \ldots\right\rangle \\
+& =\delta_{i i} \delta_{j j} \pm \delta_{i j} \delta_{j i}=1
+\end{aligned}
+$$
+
+due to the orthogonality (4.56) of the product states.
+
+For instance, for $N=2$ the eigenstates are
+
+$$
+\left|\Phi_{2}^{( \pm)}\right\rangle=\frac{1}{\sqrt{2}}\left(\left|\varphi_{1}^{(1)}, \varphi_{2}^{(2)}\right\rangle \pm\left|\varphi_{1}^{(2)}, \varphi_{2}^{(1)}\right\rangle\right)
+$$
+
+Since $\hat{P}_{12}$ acting on $\left|\Phi_{2}^{(+)}\right\rangle$or $\left|\Phi_{2}^{(-)}\right\rangle$leaves the state invariant (in the second case up to a sign),
+
+$$
+\hat{P}_{12}\left|\Phi_{2}^{( \pm)}\right\rangle= \pm\left|\Phi_{2}^{( \pm)}\right\rangle
+$$
+
+see Eq. (4.63), each of these states constitutes an irreducible multiplet of the permutation group $S_{2}$, in this case a singlet.
+
+\subsubsection*{Young diagrams}
+One can represent the multiplets (4.70) in terms of so-called Young diagrams,
+\[
+\left|\Phi_2^{(+)}\right\rangle =
+\yng(2)
+\quad , \quad
+\left|\Phi_2^{(-)}\right\rangle =
+\yng(1,1)
+\quad .
+\]
+
+Here, each box represents a particle. Boxes in a row represent a symmetric state, boxes in a column an antisymmetric state.
+
+For $N=3$ the situation becomes more interesting. There are six permutations of (123), namely (123) (the trivial one, leaving the order unchanged), (213), (321), (132), (312), and (231), which can be generated by the transpositions $\mathbb{1}, \hat{P}_{12}, \hat{P}_{13}, \hat{P}_{23}, \hat{P}_{12} \hat{P}_{13}$, and $\hat{P}_{13} \hat{P}_{12}$. Consequently, the totally symmetric state is
+
+$$
+\left|\Phi_{3}^{(+)}\right\rangle=\frac{1}{\sqrt{6}}\left(\mathbb{1}+\hat{P}_{12}+\hat{P}_{13}+\hat{P}_{23}+\hat{P}_{12} \hat{P}_{13}+\hat{P}_{13} \hat{P}_{12}\right)\left|\varphi_{1}^{(1)}, \varphi_{2}^{(2)}, \varphi_{3}^{(3)}\right\rangle=\square, \quad \square
+$$
+
+while the totally antisymmetric state is
+
+$$
+\left|\Phi_{3}^{(-)}\right\rangle=\frac{1}{\sqrt{6}}\left(\mathbb{1}-\hat{P}_{12}-\hat{P}_{13}-\hat{P}_{23}+\hat{P}_{12} \hat{P}_{13}+\hat{P}_{13} \hat{P}_{12}\right)\left|\varphi_{1}^{(1)}, \varphi_{2}^{(2)}, \varphi_{3}^{(3)}\right\rangle=
+$$
+
+\begin{center}
+\includegraphics[scale=0.3]{2025_06_19_2efb8d33dc3f0f8fdac1g-059}
+\end{center}
+
+Here, all terms which generate an even/odd permutation carry a plus/minus sign (see lectures on Statistical Mechanics). However, in addition to these states, there are also states with mixed symmetry, which are represented by the Young diagram
+
+$$
+\left|\Phi_{3}^{(m)}\right\rangle=\square
+$$
+
+There are four such linearly independent states, generated by successive application of symmetrization and antisymmetrization operators, which separate into two irreducible\\
+multiplets, i.e., doublets, of the permutation group $S_{3}$,
+
+$$
+\begin{array}{ll}
+\text { Doublet 1: } & \left\{\left|\Phi_{3}^{(m 1)}\right\rangle=\hat{A}_{13} \hat{S}_{12}\left|\varphi_{1}^{(1)}, \varphi_{2}^{(2)}, \varphi_{3}^{(3)}\right\rangle,\left|\Phi_{3}^{(m 2)}\right\rangle=\hat{A}_{23} \hat{S}_{12}\left|\varphi_{1}^{(1)}, \varphi_{2}^{(2)}, \varphi_{3}^{(3)}\right\rangle\right\}, \\
+\text { Doublet 2: } & \left\{\left|\Phi_{3}^{(m 3)}\right\rangle=\hat{A}_{12} \hat{S}_{13}\left|\varphi_{1}^{(1)}, \varphi_{2}^{(2)}, \varphi_{3}^{(3)}\right\rangle,\left|\Phi_{3}^{(m 4)}\right\rangle=\hat{A}_{23} \hat{S}_{13}\left|\varphi_{1}^{(1)}, \varphi_{2}^{(2)}, \varphi_{3}^{(3)}\right\rangle\right\} .
+\end{array}
+$$
+
+For instance, the first mixed state reads explicitly
+
+$$
+\begin{aligned}
+\left|\Phi_{3}^{(m 1)}\right\rangle & =\hat{A}_{13} \hat{S}_{12}\left|\varphi_{1}^{(1)}, \varphi_{2}^{(2)}, \varphi_{3}^{(3)}\right\rangle \\
+& =\hat{A}_{13} \frac{1}{\sqrt{2}}\left(\left|\varphi_{1}^{(1)}, \varphi_{2}^{(2)}, \varphi_{3}^{(3)}\right\rangle+\left|\varphi_{1}^{(2)}, \varphi_{2}^{(1)}, \varphi_{3}^{(3)}\right\rangle\right) \\
+& =\frac{1}{2}\left(\left|\varphi_{1}^{(1)}, \varphi_{2}^{(2)}, \varphi_{3}^{(3)}\right\rangle+\left|\varphi_{1}^{(2)}, \varphi_{2}^{(1)}, \varphi_{3}^{(3)}\right\rangle-\left|\varphi_{1}^{(3)}, \varphi_{2}^{(2)}, \varphi_{3}^{(1)}\right\rangle-\left|\varphi_{1}^{(2)}, \varphi_{2}^{(3)}, \varphi_{3}^{(1)}\right\rangle\right)
+\end{aligned}
+$$
+
+\section*{Remarks:}
+(i) In order to prove that these are two irreducible doublets, one applies all possible permutations of $S_{3}$, i.e., the six operators $11, \hat{P}_{12}, \hat{P}_{13}, \hat{P}_{23}, \hat{P}_{12} \hat{P}_{13}$, and $\hat{P}_{13} \hat{P}_{12}$, to the states of the respective doublet and shows that they only lead to linear combinations of the two states within this doublet. We leave the explicit calculation as a homework exercise. In particular,
+
+$$
+\hat{P}_{12}\left|\Phi_{3}^{(m 1)}\right\rangle=\left|\Phi_{3}^{(m 2)}\right\rangle, \quad \hat{P}_{13}\left|\Phi_{3}^{(m 3)}\right\rangle=\left|\Phi_{3}^{(m 4)}\right\rangle
+$$
+
+(ii) In principle, one could also write down two more states, applying $\hat{S}_{23}$ and then the respective antisymmetrization operators. However, one can show that these states are linear combinations of the four mixed states given above.\\
+(iii) Likewise, one can first antisymmetrize with $\hat{A}_{i j}$ and then symmetrize with $\hat{S}_{i k}$. But the mixed states generated in this way are again linear combinations of the mixed states given above.\\
+(iv) Note that the state 4.76 is antisymmetric under exchange of particles 1 and 3, but apparently no longer symmetric under exchange of 1 and 2 . The reason for this is that the symmetrization in $(1,2)$ is (at least partially) destroyed by the subsequent application of the antisymmetrization operator. The (anti-)symmetrization operator that is applied last determines the overall (anti-)symmetry of the state.
+
+\subsubsection*{Young Tableaux}
+A Young diagram becomes a Young Tableau by labelling the boxes with non-zero integer numbers, or in physical terms, by assigning states to the particles. For instance, considering that the two identical particles (boxes) in the Young diagrams 4.71) can assume two distinct physical states, we arrive at the two Young Tableaux
+
+$$
+\left|\Phi_{2}^{(+)}\right\rangle=\begin{array}{|l|l|}
+\hline 1 & 2 \\
+\hline 2 \\
+\hline
+\end{array}
+$$
+
+These are precisely the two eigenstates (4.69), now with an explicit enumeration of the quantum-mechanical states that the particles occupy. Note that due to the (anti-)symmetrization it is not necessary to consider the following Young Tableaux,
+
+$$
+\begin{array}{|l|l|}
+\hline 2 & 1 \\
+\hline
+\end{array}, \begin{array}{|l|}
+\hline 2 \\
+\hline 1 \\
+\hline
+\end{array}
+$$
+
+these are exactly the same states (in the second case up to an overall sign). It is therefore advantageous to introduce the so-called standard form of the Young Tableaux. Here, the enumeration of boxes in rows and columns strictly increases, just as shown in the Young Tableaux 4.78).
+
+In the case $N=3$, for the totally symmetric and totally antisymmetric singlets (4.72) and (4.73) the standard forms of the Young Tableaux are
+
+$$
+\left|\Phi_{3}^{(+)}\right\rangle=\begin{array}{|l|l|l|}
+\hline 1 & 2 & 3 \\
+\hline
+\end{array},\left|\Phi_{3}^{(-)}\right\rangle=\begin{array}{|l|}
+\hline 1 \\
+\hline 2 \\
+\hline 3 \\
+\hline
+\end{array} .
+$$
+
+For the states with mixed symmetry, Eq. (4.75), only $\left|\Phi_{3}^{(m 1)}\right\rangle$ and $\left|\Phi_{3}^{(m 3)}\right\rangle$ correspond to the standard form of the Young Tableaux,
+
+$$
+\left|\Phi_{3}^{(m 1)}\right\rangle=\begin{array}{|l|l}
+\hline 1 & 2 \\
+\hline 3 &
+\end{array} \quad, \quad\left|\Phi_{3}^{(m 3)}\right\rangle=\begin{array}{|l|l|}
+\hline 1 & 3 \\
+\hline 2 & \\
+\hline
+\end{array} .
+$$
+
+The other two states correspond to the non-standard forms
+
+$$
+\left|\Phi_{3}^{(m 2)}\right\rangle=\begin{array}{|l|l}
+\hline 2 & 1 \\
+\hline 3 &
+\end{array} \quad, \quad\left|\Phi_{3}^{(m 4)}\right\rangle=\begin{array}{|l|l|}
+\hline 3 & 1 \\
+\hline 2 &
+\end{array} .
+$$
+
+\subsubsection*{The relation between $S_{N}$ and $S U(N)$}
+The standard form of the Young Tableaux ignores one important physical situation, which we have so far neglected in our discussion, namely that the two particles in the symmetric state may assume the same quantum-mechanical single-particle state. This cannot happen for the antisymmetric state (because then it would vanish identically), and it cannot happen for fermions, due to the Pauli principle, unless they have some other quantum numbers in which they differ, but it is certainly allowed for bosons (see lectures on Statistical Mechanics). Therefore, the following two symmetric states can occur in addition to $\left|\Phi_{2}^{(+)}\right\rangle$:
+
+$$
+\left|\Phi_{2}^{(1)}\right\rangle \equiv\left|\varphi_{1}^{(1)}, \varphi_{1}^{(2)}\right\rangle=\begin{array}{|l|l|}
+\hline 1 & 1 \\
+\hline
+\end{array} \quad, \quad\left|\Phi_{2}^{(2)}\right\rangle \equiv\left|\varphi_{2}^{(1)}, \varphi_{2}^{(2)}\right\rangle=\begin{array}{|l|l|}
+\hline 2 & 2 \\
+\hline
+\end{array}
+$$
+
+These states are also invariant under $\hat{P}_{12}$, i.e., also form irreducible multiplets of $S_{2}$.
+
+Requiring that the numbers in a row do not decrease, while those in a column strictly increase leads to the so-called semi-standard form of the Young Tableaux. This is the form which is relevant for physical applications. Consider for instance a twoparticle system consisting of particles with spin $j=1 / 2$. The particles are supposed to possess other quantum numbers besides spin, so that, in the case of fermions, the Pauli principle does not prevent them from occupying the same spin state, i.e., either $j_{3}=+1 / 2$ or $j_{3}=-1 / 2$. The fundamental representation of $\operatorname{SU}(2)$, the doublet [2], is represented by the two Young Tableaux
+
+$$
+\begin{array}{|l|l}
+\hline 1 & 2 \\
+\hline
+\end{array}
+$$
+
+The numbers in the boxes enumerate the two spin states $j_{3}=+1 / 2$ and $j_{3}=-1 / 2$.\\
+Then, coupling the spins according to the coupling rules of the group $\operatorname{SU}(2)$, on the one hand we can form a spin singlet [1] with total spin $J=0$, where the two spins occupy different spin states, i.e., one has $j_{3}=+1 / 2$ and the other $j_{3}=-1 / 2$. This $S U(2)$ singlet corresponds to the $S_{2}$ singlet
+
+$$
+\left|\Phi_{2}^{(-)}\right\rangle=\begin{array}{|l|}
+\hline 1 \\
+\hline 2 \\
+\hline
+\end{array}
+$$
+
+We conclude that this singlet is antisymmetric under exchange of the particles.\\[0pt]
+On the other hand, we can form a spin triplet [3] with total spin $J=1$, where the spins either occupy the same spin states, i.e., both have $j_{3}=+1 / 2$, leading to a $z$-component of the total spin of $J_{3}=+1$, or $j_{3}=-1 / 2$, leading to $J_{3}=-1$, or they occupy different spin states, which corresponds to $J_{3}=0$. The $S U(2)$ spin triplet corresponds to the three $S_{2}$ singlets
+
+$$
+\begin{array}{|l|l|}
+\hline 1 & 1 \\
+\hline
+\end{array}, \begin{array}{|l|l|}
+\hline 2 & 2 \\
+\hline
+\end{array}, \begin{array}{|l|l|}
+\hline 1 & 2 \\
+\hline
+\end{array} .
+$$
+
+Obviously, the spin triplet is symmetric under exchange of the particles. On the one hand this elucidates the connection between irreducible representations of the permutation group $S_{2}$ and of the spin group $S U(2)$. On the other hand, it explains why Young Tableaux are such a powerful method, as they allow to extract information about the symmetry properties of the multiplets.
+
+Let us apply these considerations also to the case of a system consisting of three spin$1 / 2$ particles. Now the Young Tableaux consists of three boxes (corresponding to the three particles), while the numbers in the boxes can be either 1 or 2 (corresponding to the two spin states $j_{3}=+1 / 2$ and $j_{3}=-1 / 2$ that the particles can assume). The semi-standard form of the Young Tableaux then gives a quadruplet [4] with total spin $J=3 / 2$, where $J_{3}= \pm 1 / 2, \pm 3 / 2$,
+
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+1 & 1 & 1 \\
+\hline
+\end{tabular}
+\end{center}$\quad$\begin{tabular}{|l|l|l|}
+\hline
+1 & 1 & 2 \\
+\hline
+1 & 2 & 2 \\
+\hline
+2 & 2 & 2 \\
+\hline
+\end{tabular}
+
+Since all boxes form a row the quadruplet is a totally symmetric state. Furthermore, there is a doublet [2] with total spin $J=1 / 2$, where $J_{3}= \pm 1 / 2$,
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+1 & 1 \\
+\hline
+2 &  \\
+\hline
+\end{tabular}
+\end{center} \begin{tabular}{|l|l|}
+\hline
+1 & 2 \\
+\hline
+2 &  \\
+\hline
+\end{tabular}
+
+This doublet has mixed symmetry, but it is overall antisymmetric with respect to the exchange of two particles with opposite spin states.
+
+Note that there is no totally antisymmetric state like $\left|\Phi_{3}^{(-)}\right\rangle$in Eq. 4.79, because we do not have a third single-particle state that allows to make the overall state antisymmetric with respect to exchange of all particles. For two states and three particles, two of the particles always occupy the same state and antisymmetrization is not possible. The semi-standard form of the Young Tableaux naturally excludes this possibility, because it requires that the numbers in a column have to strictly increase, which is not possible for three boxes if we only have two states at our disposal. We conclude that, for $S U(2)$, there are no Young Tableaux with more than two boxes in a column, or in other words, these Young Tableaux have at most two rows.
+
+This result can be easily generalized:
+
+\section*{for $S U(N)$, there are no Young Tableaux with more than $N$ boxes in a column, i.e., they have at most $N$ rows.}
+As an example, let us construct the irreducible multiplets of $S U(3)$. The fundamental triplet [3] is given by
+
+$$
+\begin{array}{|l|l|l}
+\hline 1 & 2 & 3 \\
+\hline
+\end{array}
+$$
+
+where the numbers label the three states in the fundamental triplet. A possible assignment of these states to the states of the triplet shown in Fig. 4.4(b) is
+
+\section*{$Y$ [ $\hbar$ ]}
+\begin{center}
+\includegraphics[scale=0.3]{2025_06_19_2efb8d33dc3f0f8fdac1g-063}
+\end{center}
+
+This means that the states have the following ( $T_{3}, Y$ ) weights (in units of $\hbar$ ):
+
+$$
+1=\left(\frac{1}{2}, \frac{1}{3}\right), \quad 2=\left(-\frac{1}{2}, \frac{1}{3}\right), \quad 3=\left(0,-\frac{2}{3}\right) .
+$$
+
+For two particles who can occupy these three states, we have the following semi-standard form Young Tableaux. There is a totally symmetric sextet [6], cf. Fig. 4.4(d),
+
+$$
+\begin{array}{|l|l|}
+\hline 1 & 1 \\
+\hline 1 & 2 \\
+\hline
+\end{array} \begin{array}{|l|l|}
+\hline 1 & 3 \\
+\hline
+\end{array} \begin{array}{|l|l}
+2 & 2 \\
+\hline
+\end{array} \begin{array}{|l|l}
+2 & 3 \\
+\hline
+\end{array} \begin{array}{|l|l|}
+\hline 3 & 3 \\
+\hline
+\end{array},
+$$
+
+and a totally antisymmetric triplet, which is in fact the antitriplet [ $\overline{3}$ ] shown in Fig. 4.4(c),
+
+$$
+\begin{array}{|l|}
+\hline 1 \\
+\hline 2 \\
+\hline
+\end{array} \begin{array}{|l|}
+\hline 1 \\
+3 \\
+\hline
+\end{array} \begin{array}{|l|}
+\hline 2 \\
+\hline 3 \\
+\hline
+\end{array}
+$$
+
+Following the assignment of the states of the fundamental triplet, the sextet and antitriplet states are assigned as follows,\\
+\includegraphics[scale=0.3, center]{2025_06_19_2efb8d33dc3f0f8fdac1g-064}
+
+The ( $T_{3}, Y$ ) weights of the states in the sextet and the antitriplet follow simply by adding the corresponding weights of the states of the fundamental triplets constituting the sextet and antitriplet states. As one observes, this gives the correct position in the ( $T_{3}, Y$ )-plane and is consistent with the "vector addition" rule explained earlier in the construction of the higher-dimensional multiplets from the fundamental representation.
+
+Finally, we obtain the following multiplets for three particles occupying states of the fundamental triplet of $S U(3)$. There is a totally symmetric decuplet [10], cf. Fig. 4.4(f),
+
+\begin{center}
+\begin{tabular}{|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|l|}
+\hline
+1 & 1 & 1 & 1 & 1 & 2 & 1 & 1 & 3 & 1 & 2 & 2 & 1 & 2 & 3 &  \\
+\hline
+1 & 3 & 3 & 2 & 2 & 2 & 2 & 2 & 3 & 2 & 3 & 3 & 3 & 3 & 3 &  \\
+\hline
+\end{tabular}
+\end{center}
+
+a totally antisymmetric singlet [1], cf. Fig. 4.4(a),
+
+$$
+\begin{array}{|l|}
+\hline 1 \\
+\hline 2 \\
+\hline 3 \\
+\hline
+\end{array},
+$$
+
+and a mixed-symmetry octet [8], cf. Fig. 4.5,
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+1 & 1 \\
+\hline
+2 &  \\
+\hline
+3 &  \\
+\hline
+1 & 1 \\
+\hline
+2 &  \\
+\hline
+\end{tabular}
+\end{center} \begin{tabular}{|l|l|}
+\hline
+1 & 2 \\
+\hline
+2 &  \\
+\hline
+3 &  \\
+\hline
+\end{tabular}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+1 & 3 \\
+\hline
+2 &  \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+1 & 3 \\
+\hline
+3 &  \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+2 & 2 \\
+\hline
+3 &  \\
+\hline
+\end{tabular}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+2 & 3 \\
+\hline
+3 &  \\
+\hline
+\end{tabular}
+\end{center}
+
+The assignment of the singlet to a state in the ( $T_{3}, Y$ )-plane is trivial, it can only be the origin of that plane, which is confirmed by adding the weights of the states of the fundamental triplet, $T_{3}=\frac{1}{2}-\frac{1}{2}+0=0, Y=\frac{1}{3}+\frac{1}{3}-\frac{2}{3}=0$. The assignment of the states for the decuplet and the octet are as follows,\\
+\includegraphics[scale=0.3, center]{2025_06_19_2efb8d33dc3f0f8fdac1g-065}
+
+Again, the correct $\left(T_{3}, Y\right)$ weights follow by adding the corresponding weights of the states of the fundamental triplets constituting these multiplet states.
+
+\subsubsection*{Construction of irreducible multiplets via reduction}
+The construction of irreducible multiplets via reduction of tensor products can also be done using Young diagrams. The rule is simply that, in a tensor product, one stacks the boxes of the second multiplet onto the rows and columns of the first in all possible ways to obtain a valid Young diagram (i.e., a diagram where the length of the rows does not become larger from column to column), and then discards diagrams which contain columns with more than $N$ boxes (as they cannot exist for the $S U(N)$ group). The simplest tensor product is that of two fundamental representations,
+
+$$
+\square \otimes \square=\square \oplus \square
+$$
+
+Interestingly, this works for any $S U(N)$ group. For instance, for $N=2$ we obtain with Eqs. (4.83) and (4.84) the relation $[2] \otimes[2]=[1] \oplus[3]$, cf. Eq. (4.46). For $N=3$, we obtain with Eqs. (4.88) and (4.89) the relation $[3] \otimes[3]=[3] \oplus[6]$, cf. Eq. (4.49).
+
+Further multiplying the totally antisymmetric multiplet with a fundamental representation yields\\
+\includegraphics[scale=0.3, center]{2025_06_19_2efb8d33dc3f0f8fdac1g-066(1)}
+
+For $N=2$, the first diagram on the left-hand side is the totally antisymmetric singlet, cf. Eq. (4.83), while the first diagram on the right-hand side does not exist, as there are only two states and the numbers have to increase from row to row. The second diagram yields a doublet, cf. Eq. (4.86). This gives the (trivial) relation
+
+$$
+[1] \otimes[2]=[2]
+$$
+
+On the other hand, for $N=3$, the first diagram on the left-hand side is the totally antisymmetric antitriplet, cf. Eq. (4.89), while the first diagram on the right-hand side is the totally antisymmetric singlet, cf. Eq. (4.91), and the second an octet with mixed symmetry, cf. Eq. (4.92). This gives the relation
+
+$$
+[\overline{3}] \otimes[3]=[1] \oplus[8]
+$$
+
+cf. Eq. 4.50.\\
+Now multiplying the totally symmetric multiplet from Eq. (4.93) with a fundamental representation, we obtain\\
+\includegraphics[scale=0.3, center]{2025_06_19_2efb8d33dc3f0f8fdac1g-066}
+
+For $N=2$, the first diagram on the left-hand side is the totally symmetric triplet, cf. Eq. (4.84), while the first diagram on the right-hand side is a mixed-symmetry doublet, cf. Eq. (4.86), and the second a totally symmetric quadruplet, cf. Eq. 4.85). This yields
+
+$$
+[3] \otimes[2]=[2] \oplus[4]
+$$
+
+cf. Eq. (4.48). On the other, for $N=3$ the first diagram on the left-hand side is the totally symmetric sextet 4.88), while the first diagram on the right-hand side is a mixedsymmetry octet, cf. Eq. (4.92), and the second the totally symmetric decuplet (4.90), giving rise to the relation
+
+$$
+[6] \otimes[3]=[8] \oplus[10]
+$$
+
+cf. Eq. (4.51). This construction can be continued to arbitrary order in the dimensionality of the multiplets. We refer to the literature 4 for further details.
+
+
+
+
+\pagebreak
+
+
+
+
+
 
 \section{Unitary symmetries of the strong interaction}
 

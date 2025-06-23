@@ -119,11 +119,11 @@
     "sourceFile": "QMS_Rischke25/QMS_Rischke25.tex",
     "snipMeta": {
       "Subject": "QMS",
-      "Topic": "Lie Gruppen",
+      "Topic": "Konstruktion von Multiplets aus fundamentaler Repräsentation",
       "LitID": "R25",
-      "CTyp": "REM",
-      "ParentTopic": "",
-      "Content": "Jacobi-Identität für Rotation und Spin Gruppe",
+      "CTyp": "CONC",
+      "ParentTopic": "Gruppe $(\\operatorname{SU}(N), \\cdot)$",
+      "Content": "Generierung höherer SU(2)- und SU(3)-Darstellungen durch Kopplung",
       "selectedProject": "QMS_Rischke25/QMS_Rischke25.tex"
     },
     "tableMeta": {
@@ -209,11 +209,11 @@
     "sourceFile": "RG_Bernig25/RG_Bernig25.tex",
     "snipMeta": {
       "Subject": "RG",
-      "Topic": "Riemannische Submersionen",
+      "Topic": "Schnittort",
       "LitID": "B25",
-      "CTyp": "PROP",
-      "ParentTopic": "",
-      "Content": "P: Strukturelle Eigenschaften von Lift-Vektorfeldern und Zusammenhang auf Totalräumen Riemannscher Submersionen",
+      "CTyp": "LEM",
+      "ParentTopic": "Volumenberechnung",
+      "Content": "Schnittorte sind Nullmengen",
       "selectedProject": "RG_Bernig25/RG_Bernig25.tex"
     },
     "tableMeta": {
@@ -239,11 +239,11 @@
     "sourceFile": "QM_Gros25/QM_Gros25.tex",
     "snipMeta": {
       "Subject": "QM",
-      "Topic": "",
+      "Topic": "3-dimensionaler Potentialtopf",
       "LitID": "G25",
       "CTyp": "DEF",
-      "ParentTopic": "",
-      "Content": "",
+      "ParentTopic": "Rotationsinvariante Potentiale",
+      "Content": "Resonanzbreite und komplexe Amplitude",
       "selectedProject": "QM_Gros25/QM_Gros25.tex"
     },
     "tableMeta": {
@@ -269,15 +269,30 @@
     "sourceFile": "A_Stix23/A_Stix23.tex",
     "snipMeta": {
       "Subject": "A",
-      "Topic": "",
+      "Topic": "Normalteiler und Faktorgruppen",
       "LitID": "S23",
-      "CTyp": "DEF",
-      "ParentTopic": "",
-      "Content": "",
+      "CTyp": "REM",
+      "ParentTopic": "Gruppen",
+      "Content": "Anmerkung zu Faktorgruppen und Quotienten",
       "selectedProject": "A_Stix23/A_Stix23.tex"
     },
     "tableMeta": {
       "selectedSource": "A_Stix23/A_Stix23.tex"
+    }
+  },
+  "HA_R79": {
+    "sourceFile": "HA_Rotman79/HA_Rotman79.tex",
+    "snipMeta": {
+      "Subject": "A",
+      "Topic": "Ringe Basics",
+      "LitID": "T12",
+      "CTyp": "DEF",
+      "ParentTopic": "Ringe",
+      "Content": "",
+      "selectedProject": "HA_Rotman79/HA_Rotman79.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "HA_Rotman79/HA_Rotman79.tex"
     }
   }
 }

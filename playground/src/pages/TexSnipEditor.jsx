@@ -367,6 +367,18 @@ import React, {
         e.preventDefault()
         handleQuickSnip("EXA")
         break
+      case "T":
+        e.preventDefault()
+        handleQuickSnip("THEO")
+        break
+      case "B":
+        e.preventDefault()
+        handleQuickSnip("PROOF")
+        break
+      case "O":
+        e.preventDefault()
+        handleQuickSnip("KORO")
+        break
       default:
         break
     }

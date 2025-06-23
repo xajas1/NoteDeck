@@ -3273,10 +3273,15 @@ Die Breite ist zeitunabhängig, das Paket zerfließt nicht. Dies motiviert den B
 \section{Eigenschaften der Drehimpulsoperatoren}
 
 \textbf{Concept: Drehimpuls und Rotationsinvarianz}  
+
+
+\begin{CONC}{QM-G25-19-01}{Drehimpuls und Rotationsinvarianz}
 Der Drehimpuls ist inhärent mit räumlichen Rotationen verknüpft. Analog zur Impulserhaltung bei Translationsinvarianz (Noether-Theorem) folgt Drehimpulserhaltung aus Rotationsinvarianz. Zur quantenmechanischen Behandlung rotationsinvarianter Potentiale wie im Wasserstoffatom muss die Struktur der Drehimpulsoperatoren untersucht werden.
+\end{CONC}
 
 
 \textbf{Concept: Quantenmechanisches Zentralpotential}  
+\begin{CONC}{QM-G25-19-02}{Quantenmechanisches Zentralpotential}
 In drei Dimensionen mit rotationssymmetrischem Potential gilt die Schrödingergleichung:  
 $$
 i \hbar \frac{d}{d t} \Psi(\vec{x}, t)=\mathbf{H} \Psi(\vec{x}, t), \quad \mathbf{H}=-\frac{\hbar^{2}}{2 m} \Delta+V(r), \quad r=|\vec{x}|
@@ -3289,9 +3294,12 @@ Der klassische Drehimpuls eines Teilchens ist definiert durch
 $$
 \vec{l} = \vec{x} \times \vec{p}, \quad l_i = \varepsilon_{ijk} x_j p_k, \quad \frac{d\vec{l}}{dt} = 0 \text{ bei Rotationsinvarianz}.
 $$
+\end{CONC}
 
 
 \textbf{Concept: Korrespondenzprinzip für Drehimpuls}  
+
+\begin{CONC}{QM-G25-19-03}{Korrespondenzprinzip für Drehimpuls}
 Nach dem Korrespondenzprinzip werden klassische Observablen durch Operatoren ersetzt:
 $$
 x_j \mapsto \mathbf{Q}_j = x_j, \quad p_j \mapsto \mathbf{P}_j = \frac{\hbar}{i} \partial_j.
@@ -3300,41 +3308,58 @@ Daraus ergibt sich der Drehimpulsoperator:
 $$
 \mathbf{L} = \vec{Q} \times \vec{P} = \frac{\hbar}{i} (x_2 \partial_3 - x_3 \partial_2, \dots)
 $$
+\end{CONC}
 
 
 \textbf{Definition: Bahn-Drehimpulsoperator}  
+
+\begin{DEF}{QM-G25-19-04}{Bahn-Drehimpulsoperator}
 Der Bahn-Drehimpulsoperator in kartesischen Koordinaten lautet:  
 $$
 \overrightarrow{\mathbf{L}} = \frac{\hbar}{i}(x_2 \partial_3 - x_3 \partial_2, x_3 \partial_1 - x_1 \partial_3, x_1 \partial_2 - x_2 \partial_1).
 $$
 Er ist wie Ort und Impuls eine selbstadjungierte Observable.
+\end{DEF}
 
 
 \textbf{Proposition: Kommutatorrelationen der Drehimpulskomponenten}  
+
+
+\begin{PROP}{QM-G25-19-05}{Kommutatorrelationen der Drehimpulskomponenten}
 Die Komponenten $\mathbf{L}_i$ des Drehimpulsoperators erfüllen:
 $$
 [\mathbf{L}_k, \mathbf{L}_n] = i \hbar \varepsilon_{knm} \mathbf{L}_m.
 $$  
 \textit{Beweis:} Ausgehend von $\mathbf{L}_i = \varepsilon_{ijk} x_j p_k$ ergibt eine explizite Kommutatorrechnung (unter Verwendung von $[x_i, p_j] = i \hbar \delta_{ij}$) den obigen Ausdruck.
+\end{PROP}
 
 
-\textbf{Definition: Drehmatrix}  
+\textbf{Definition: Drehmatrix}
+
+
+\begin{DEF}{QM-G25-19-06}{Drehmatrix}
 Eine Drehung im Raum wird durch eine reelle orthogonale $3 \times 3$-Matrix $R$ mit $\det R = 1$ beschrieben. Für $\vec{x} \mapsto R \vec{x}$ gilt:  
 $$
 |R \vec{x}| = |\vec{x}|, \quad R R^T = \mathbf{1}.
 $$
+\end{DEF}
 
 
 \textbf{Concept: Parameterisierung von Drehmatrizen}  
+\begin{CONC}{QM-G25-19-07}{Parameterisierung von Drehmatrizen}
 Jede orthogonale $3\times3$ Matrix mit $\det R = 1$ lässt sich durch drei Winkel parametrisieren, z.B. als Drehungen um die Koordinatenachsen:
 $$
 R(\varphi_1), R(\varphi_2), R(\varphi_3)
 $$
 mit den zugehörigen Matrizen für Drehungen um $x$, $y$, und $z$-Achse.
+\end{CONC}
 
 
 
-\textbf{Definition: Generatoren infinitesimaler Drehungen}  
+\textbf{Definition: Generatoren infinitesimaler Drehungen} 
+
+
+\begin{DEF}{QM-G25-19-08}{Generatoren infinitesimaler Drehungen}
 Die Ableitungen der Drehmatrizen nach einem Winkel am Nullpunkt definieren antisymmetrische Matrizen $A_j$:
 $$
 A_3 = \left.\frac{dR(\varphi_3)}{d\varphi_3}\right|_{\varphi_3=0} =
@@ -3348,10 +3373,12 @@ Die vollständige Drehmatrix ergibt sich als Exponentialreihe:
 $$
 R(\varphi_3) = e^{A_3 \varphi_3} = \mathbf{1} + A_3 \varphi_3 + \frac{1}{2!} A_3^2 \varphi_3^2 + \dots
 $$
+\end{DEF}
 
 
 
 \textbf{Concept: Algebra der Generatoren – Lie-Algebra von SO(3)}  
+\begin{CONC}{QM-G25-19-09}{Algebra der Generatoren – Lie-Algebra von SO(3)}
 Die Generatoren $A_j$ genügen den Vertauschungsrelationen:
 $$
 [A_j, A_k] = -\epsilon_{jkl} A_l,
@@ -3365,56 +3392,80 @@ $$
 \psi(R(\vec{\varphi}) \vec{x}) = e^{-i \vec{L} \cdot \vec{\varphi} / \hbar} \psi(\vec{x})
 $$
 zeigt: die Drehimpulsoperatoren $L_j$ erzeugen im Hilbertraum Drehungen von Wellenfunktionen.
+\end{CONC}
 
 
 
 \textbf{Example: Infinitesimale Drehung um die z-Achse}  
+
+\begin{EXA}{QM-G25-19-10}{Infinitesimale Drehung um die z-Achse}
 Eine kleine Drehung um die $z$-Achse mit $\vec{\varphi} = \varphi_3 \hat{e}_z$ ergibt:
 $$
 \psi(R \vec{x}) \approx \psi(\vec{x}) - \varphi_3 (x_1 \partial_2 - x_2 \partial_1) \psi(\vec{x}) = (1 - \varphi_3 L_3/\hbar) \psi(\vec{x}).
 $$
 Dies stimmt mit der Entwicklung von $e^{-i L_3 \varphi_3 / \hbar}$ überein.
+\end{EXA}
 
 
 
-\textbf{Concept: Gemeinsame Diagonalisierbarkeit kommutierender Operatoren}  
+\textbf{Concept: Gemeinsame Diagonalisierbarkeit kommutierender Operatoren}
+
+
+\begin{CONC}{QM-G25-19-11}{Gemeinsame Diagonalisierbarkeit kommutierender Operatoren}
 Zwei selbstadjungierte Operatoren $A$ und $B$ lassen sich genau dann gemeinsam diagonalisieren, wenn $[A, B] = 0$. Es existieren dann gemeinsame Eigenfunktionen $u_{\alpha \beta}$:
 $$
 A u_{\alpha \beta} = a_\alpha u_{\alpha \beta}, \quad B u_{\alpha \beta} = b_\beta u_{\alpha \beta}.
 $$
+\end{CONC}
 
 
 
 \textbf{Example: Gemeinsame Eigenvektoren von Parität und Hamiltonian}  
+
+
+\begin{EXA}{QM-G25-19-12}{Gemeinsame Eigenvektoren von Parität und Hamiltonian}
 Beim eindimensionalen Potentialtopf gilt: Paritätsoperator $\Pi$ und Hamiltonian $\mathbf{H}$ kommutieren. $\Pi$ hat Eigenwerte $\pm1$, die zugehörigen Unterräume enthalten jeweils viele Eigenfunktionen von $\mathbf{H}$.
+\end{EXA}
 
 
 
 \textbf{Concept: Gesamtdrehimpuls und seine Kommutatoren}  
+\begin{CONC}{QM-G25-19-13}{Gesamtdrehimpuls und seine Kommutatoren}
 Das Quadrat des Gesamtdrehimpulses $\vec{L}^2 = L_1^2 + L_2^2 + L_3^2$ kommutiert mit allen Komponenten:
 $$
 [\vec{L}^2, L_j] = 0, \quad \text{für } j = 1, 2, 3.
 $$
 Man kann also simultane Eigenfunktionen von $\vec{L}^2$ und z.B. $L_3$ wählen.
+\end{CONC}
 
 
 \textbf{Definition: Auf- und Absteigeoperatoren des Drehimpulses}  
+
+
+\begin{DEF}{QM-G25-19-14}{Auf- und Absteigeoperatoren des Drehimpulses}
 Die Operatoren
 $$
 L_+ = L_1 + i L_2, \quad L_- = L_1 - i L_2
 $$
 werden als Auf- bzw. Absteigeoperator bezeichnet. Sie verändern die Eigenwerte von \(L_3\) um \(\pm\hbar\).
+\end{DEF}
 
 
-\textbf{Concept: Vertauschungsrelationen mit Auf-/Absteigeoperatoren}  
+\textbf{Concept: Vertauschungsrelationen mit Auf-/Absteigeoperatoren}
+
+
+\begin{CONC}{QM-G25-19-15}{Vertauschungsrelationen mit Auf-/Absteigeoperatoren}
 Die Operatoren erfüllen:
 $$
 [L_3, L_+] = \hbar L_+, \quad [L_3, L_-] = -\hbar L_-, \\
 L_+ L_- = \vec{L}^2 - L_3^2 + \hbar L_3, \quad L_- L_+ = \vec{L}^2 - L_3^2 - \hbar L_3.
 $$
+\end{CONC}
 
 
 \textbf{Concept: Eigenwerte von \(\vec{L}^2\) und \(L_3\)}  
+
+\begin{CONC}{QM-G25-19-16}{Eigenwerte von \(\vec{L}^2\) und \(L_3\)}
 Ist \(v_\lambda\) Eigenvektor von \(\vec{L}^2\), so ist:
 $$
 \vec{L}^2 v_\lambda = \hbar^2 \lambda(\lambda + 1) v_\lambda, \quad \lambda \geq 0.
@@ -3424,13 +3475,19 @@ $$
 L_3 v_\mu = \hbar \mu v_\mu
 $$
 ist, wobei \(\mu^2 \leq \lambda(\lambda + 1)\).
+\end{CONC}
 
 
 \textbf{Remark: Wahl der Quantisierungsachse}  
+
+\begin{REM}{QM-G25-19-17}{Wahl der Quantisierungsachse}
 Bei der Diagonalisierung der Drehimpulsoperatoren wird eine Achse als "Quantisierungsachse" gewählt, meist die \(z\)-Achse. Dies ist eine willkürliche, aber physikalisch sinnvolle Festlegung, da sich die Eigenwerte und Operatorstruktur auf jede Achse übertragen lassen.
+\end{REM}
 
 
-\textbf{Proposition: Maximaler Eigenwert von \(L_3\) bei gegebenem \(j\)}  
+\textbf{Proposition: Maximaler Eigenwert von \(L_3\) bei gegebenem \(j\)}
+
+\begin{PROP}{QM-G25-19-18}{Maximaler Eigenwert von \(L_3\) bei gegebenem \(j\)}
 Sei \(v_\mu\) ein gemeinsamer Eigenvektor von \(\vec{L}^2\) und \(L_3\). Gilt \(L_+ v_\mu \neq 0\), so hat \(L_+ v_\mu\) den Eigenwert \(\mu + 1\) bzgl. \(L_3\):
 $$
 L_3 (L_+ v_\mu) = [L_3, L_+] v_\mu + L_+ (L_3 v_\mu)
@@ -3449,10 +3506,13 @@ $$
 $$
 
 \(\Rightarrow \mu_{\max} = j\).
+\end{PROP}
 
 
 
-\textbf{Proposition: Minimaler Eigenwert von \(L_3\) bei gegebenem \(j\)}  
+\textbf{Proposition: Minimaler Eigenwert von \(L_3\) bei gegebenem \(j\)}
+
+\begin{PROP}{QM-G25-19-19}{Minimaler Eigenwert von \(L_3\) bei gegebenem \(j\)}
 Analog ergibt sich für die Wirkung von \(L_-\):
 $$
 L_3 (L_- v_\mu) = [L_3, L_-] v_\mu + L_- (L_3 v_\mu)
@@ -3469,10 +3529,13 @@ $$
 $$
 
 \(\Rightarrow \mu_{\min} = -j\).
+\end{PROP}
 
 
 
 \textbf{Concept: Maximale und minimale \(\mu\)-Werte}  
+
+\begin{CONC}{QM-G25-19-20}{Maximale und minimale \(\mu\)-Werte}
 Da \(L_+ v_{\mu_{\text{max}}} = 0\), folgt:
 $$
 \vec{L}^2 v_{\mu_{\text{max}}} = \hbar^2 \mu_{\text{max}} (\mu_{\text{max}} + 1) v_{\mu_{\text{max}}}
@@ -3482,40 +3545,60 @@ Analog gilt:
 $$
 L_- v_{\mu_{\text{min}}} = 0 \Rightarrow \mu_{\text{min}} = -\lambda.
 $$
+\end{CONC}
 
 
-\textbf{Definition: Spektrum von \(\vec{L}^2\) und \(L_3\)}  
+\textbf{Definition: Spektrum von \(\vec{L}^2\) und \(L_3\)}
+
+
+\begin{DEF}{QM-G25-19-21}{Spektrum von \(\vec{L}^2\) und \(L_3\)}
 Die zulässigen Eigenwerte sind:
 $$
 \vec{L}^2: \quad \hbar^2 j(j+1), \quad j = 0, \frac{1}{2}, 1, \frac{3}{2}, \dots \\
 L_3: \quad \hbar m, \quad m = -j, -j+1, \dots, j.
 $$
+\end{DEF}
 
 
 \textbf{Concept: Wirkung der Ladder-Operatoren auf Eigenzustände}  
+
+
+\begin{CONC}{QM-G25-19-22}{Wirkung der Ladder-Operatoren auf Eigenzustände}
 Für normierte Eigenfunktionen \(v_{j m}\) gilt:
 $$
 L_+ v_{j m} = \hbar \sqrt{j(j+1) - m(m+1)} \cdot v_{j, m+1} \\
 L_- v_{j m} = \hbar \sqrt{j(j+1) - m(m-1)} \cdot v_{j, m-1}
 $$
+\end{CONC}
 
 
-\textbf{Definition: Matrixelemente der Drehimpulsoperatoren}  
+\textbf{Definition: Matrixelemente der Drehimpulsoperatoren}
+
+
+\begin{DEF}{QM-G25-19-23}{Matrixelemente der Drehimpulsoperatoren}
 Die Operatoren \(L_1, L_2\) lassen sich über \(L_\pm\) schreiben:
 $$
 L_1 = \frac{1}{2}(L_+ + L_-), \quad L_2 = \frac{1}{2i}(L_+ - L_-)
 $$
 Die Matrixelemente der Operatoren in der Basis \(v_{j m}\) ergeben sich über die obigen Wurzelfaktoren.
+\end{DEF}
 
 
-\textbf{Concept: Spin als Eigendrehimpuls für \(j = \frac{1}{2}\)}  
+\textbf{Concept: Spin als Eigendrehimpuls für \(j = \frac{1}{2}\)}
+
+
+\begin{CONC}{QM-G25-19-24}{Spin als Eigendrehimpuls für \(j = \frac{1}{2}\)}
 Fermionische Elementarteilchen besitzen einen Eigendrehimpuls \( \vec{S} = \frac{\hbar}{2} \vec{\sigma} \). Im einfachsten Fall \(j = \frac{1}{2}\) existieren zwei Eigenzustände zu \(m = \pm \frac{1}{2}\), meist mit
 $$
 v_{m} = v_{\pm \frac{1}{2}}, \quad L_3 v_m = \hbar m \cdot v_m.
 $$
+\end{CONC}
 
 
-\textbf{Definition: Pauli-Matrizen als Darstellung für Spin-\(\frac{1}{2}\)}  
+\textbf{Definition: Pauli-Matrizen als Darstellung für Spin-\(\frac{1}{2}\)}
+
+
+\begin{DEF}{QM-G25-19-25}{Pauli-Matrizen als Darstellung für Spin-\(\frac{1}{2}\)}
 Die Drehimpulsoperatoren für \(j = \frac{1}{2}\) lassen sich durch die Pauli-Matrizen \(\sigma_j\) ausdrücken:
 $$
 \frac{L_j}{\hbar} = \frac{1}{2} \sigma_j, \quad j = 1, 2, 3
@@ -3542,8 +3625,12 @@ $$
 \tilde{S}_2 = \frac{1}{2i}(\tilde{S}_+ - \tilde{S}_-) = \frac{1}{2} \sigma_2, \quad
 \tilde{S}_3 = \frac{1}{2} \sigma_3.
 $$
+\end{DEF}
+
 
 \textbf{Definition: Kartesisch-zu-Kugel-Koordinatentransformation}  
+
+\begin{DEF}{QM-G25-19-26}{Kartesisch-zu-Kugel-Koordinatentransformation}
 Der Übergang von kartesischen Koordinaten \((x_1, x_2, x_3)\) zu Kugelkoordinaten \((r, \vartheta, \varphi)\) erfolgt über:
 $$
 x_1 = r \sin \vartheta \cos \varphi, \quad
@@ -3566,9 +3653,13 @@ r = \sqrt{x_1^2 + x_2^2 + x_3^2}, \quad
 \tan \varphi = \frac{x_2}{x_1}.
 $$
 Diese Transformation ist zentral für die Darstellung der Drehimpulsoperatoren in Kugelkoordinaten und die Konstruktion von Kugelflächenfunktionen.
+\end{DEF}
 
 
-\textbf{Concept: Drehimpulsoperatoren in Kugelkoordinaten}  
+\textbf{Concept: Drehimpulsoperatoren in Kugelkoordinaten}
+
+
+\begin{CONC}{QM-G25-19-27}{Drehimpulsoperatoren in Kugelkoordinaten}
 Setzt man \(\tilde{L}_j = L_j / \hbar\), so ergeben sich in kartesischen Koordinaten:
 $$
 \tilde{L}_1 = \frac{1}{i}(x_2 \partial_3 - x_3 \partial_2), \quad \text{etc.}
@@ -3578,9 +3669,13 @@ $$
 \tilde{L}_3 = \frac{1}{i} \frac{\partial}{\partial \varphi}, \quad
 \tilde{L}_+ = e^{i \varphi} \left( \partial_\vartheta + i \cot \vartheta \partial_\varphi \right), \dots
 $$
+\end{CONC}
 
 
 \textbf{Definition: Kugelfunktionen als Eigenfunktionen von \(\tilde{L}^2\) und \(\tilde{L}_3\)}  
+
+
+\begin{DEF}{QM-G25-19-28}{Kugelfunktionen als Eigenfunktionen von \(\tilde{L}^2\) und \(\tilde{L}_3\)}
 Die Funktionen \(Y_{lm}(\vartheta, \varphi)\) erfüllen:
 $$
 \tilde{L}_3 Y_{lm} = m Y_{lm}, \quad \tilde{L}^2 Y_{lm} = l(l+1) Y_{lm}.
@@ -3589,10 +3684,14 @@ Für \(m = l\) gilt:
 $$
 Y_{ll}(\vartheta, \varphi) = \frac{(-1)^l}{2^l l!} \sqrt{\frac{(2l+1)!}{4\pi}} \cdot e^{i l \varphi} \cdot (\sin \vartheta)^l
 $$
+\end{DEF}
 
 
 
-\textbf{Concept: Rekursive Konstruktion von Kugelfunktionen über \(\tilde{L}_-\)}  
+\textbf{Concept: Rekursive Konstruktion von Kugelfunktionen über \(\tilde{L}_-\)}
+
+
+\begin{CONC}{QM-G25-19-29}{Rekursive Konstruktion von Kugelfunktionen über \(\tilde{L}_-\)}
 Die übrigen \(Y_{lm}\) lassen sich aus \(Y_{ll}\) durch rekursives Anwenden von \(\tilde{L}_-\) konstruieren:
 $$
 Y_{lm}(\vartheta, \varphi) \sim \tilde{L}_-^{l-m} Y_{ll}(\vartheta, \varphi)
@@ -3601,9 +3700,13 @@ Eine explizite Darstellung lautet:
 $$
 Y_{lm}(\vartheta, \varphi) = N_{lm} \cdot \frac{1}{\sin^m \vartheta} \frac{d^{l - m}}{d (\cos \vartheta)^{l - m}} (\sin \vartheta)^{2l} \cdot e^{i m \varphi}
 $$
+\end{CONC}
 
 
 \textbf{Definition: Zuordnete Legendre-Polynome \(P_l^m(z)\)}  
+
+
+\begin{DEF}{QM-G25-19-30}{Zuordnete Legendre-Polynome \(P_l^m(z)\)}
 Die Kugelfunktionen lassen sich schreiben als:
 $$
 Y_{lm}(\vartheta, \varphi) \sim P_l^m(\cos \vartheta) e^{i m \varphi}
@@ -3612,40 +3715,57 @@ mit
 $$
 P_l^m(z) = (-1)^m (1 - z^2)^{m/2} \cdot \frac{d^m P_l(z)}{dz^m}
 $$
+\end{DEF}
 
 
 \textbf{Definition: Legendre-Polynome \(P_l(z)\)}  
+
+
+\begin{DEF}{QM-G25-19-31}{Legendre-Polynome \(P_l(z)\)}
 Für \(m = 0\) gilt:
 $$
 Y_{l0}(\vartheta, \varphi) = \sqrt{\frac{2l+1}{4\pi}} \cdot P_l(\cos \vartheta), \quad
 P_l(z) = \frac{1}{2^l l!} \frac{d^l}{dz^l}(z^2 - 1)^l
 $$
+\end{DEF}
 
 
 
 \textbf{Concept: Erzeugende Funktion der Legendre-Polynome}  
+
+\begin{CONC}{QM-G25-19-32}{Erzeugende Funktion der Legendre-Polynome}
 Für \(|\vec{y}| < |\vec{x}|\) mit \(s = |\vec{y}| / |\vec{x}| < 1\) gilt die Entwicklung:
 $$
 \frac{1}{|\vec{x} - \vec{y}|} = \frac{1}{|\vec{x}|} \sum_{l=0}^{\infty} P_l(\cos \theta) s^l
 $$
-Diese Entwicklung ist zentral für Multipolentwicklungen in der Elektrodynamik.
+\end{CONC}
 
 
-\textbf{Concept: Multipolentwicklung über Kugelfunktionen}  
+
+\textbf{Concept: Multipolentwicklung über Kugelfunktionen} 
+
+\begin{CONC}{QM-G25-19-33}{Multipolentwicklung über Kugelfunktionen}
 Die Funktionen \(Y_{lm}(\vartheta, \varphi)\) bilden ein vollständiges System auf der Einheitskugel. Eine quadratintegrable Funktion \(f(\vartheta, \varphi)\) lässt sich entwickeln als:
 $$
 f(\vartheta, \varphi) = \sum_{l=0}^{\infty} \sum_{m=-l}^{l} f_{lm} Y_{lm}(\vartheta, \varphi)
 $$
+\end{CONC}
 
 
 \textbf{Definition: Skalarprodukt und Koeffizienten der Kugelflächenentwicklung}  
+
+\begin{DEF}{QM-G25-19-34}{Skalarprodukt und Koeffizienten der Kugelflächenentwicklung}
 Die Entwicklungskoeffizienten \(f_{lm}\) sind durch das Skalarprodukt gegeben:
 $$
 f_{lm} = \left(Y_{lm}, f\right) = \int d\Omega \, Y_{lm}^*(\vartheta, \varphi) f(\vartheta, \varphi)
 $$
+\end{DEF}
 
 
-\textbf{Concept: Experimenteller Nachweis von Drehimpulsquantisierung}  
+\textbf{Concept: Experimenteller Nachweis von Drehimpulsquantisierung}
+
+
+\begin{CONC}{QM-G25-19-35}{Experimenteller Nachweis von Drehimpulsquantisierung}
 Der Stern-Gerlach-Versuch liefert einen direkten Nachweis der Quantelung des Drehimpulses. Eine Punktladung mit Bahndrehimpuls \(\vec{l}\) besitzt ein magnetisches Moment
 $$
 \vec{\mu} = \frac{q}{2m_0} \vec{l}
@@ -3654,30 +3774,39 @@ und erfährt im inhomogenen Magnetfeld \(\vec{B}(\vec{x})\) die Kraft:
 $$
 \vec{K} = \nabla (\vec{\mu} \cdot \vec{B}).
 $$
+\end{CONC}
 
 
 \textbf{Example: Aufspaltung im Stern-Gerlach-Versuch}  
+\begin{EXA}{QM-G25-19-36}{Aufspaltung im Stern-Gerlach-Versuch}
 Für Elektronen mit \(\vec{\mu} = -\frac{e_0}{2m_e} \vec{l}\) ergibt sich für die z-Komponente der Kraft:
 $$
 K_3 = \mu_3 \frac{\partial B_3}{\partial x_3}.
 $$
 Da \(\mu_3 = -\frac{e_0 \hbar}{2m_e} m\), spaltet sich ein Strahl mit Bahndrehimpuls \(l\) in \(2l + 1\) diskrete Teilstrahlen auf.
+\end{EXA}
 
 
 
 \textbf{Definition: Bohrsches Magneton}  
+
+\begin{DEF}{QM-G25-19-37}{Bohrsches Magneton}
 Die natürliche Skala für magnetische Momente eines Elektrons ist das Bohrsche Magneton:
 $$
 \mu_B = \frac{e_0 \hbar}{2m_e} \approx 5.788 \cdot 10^{-11} \mathrm{MeV\, T^{-1}}
 $$
+\end{DEF}
 
 
 \textbf{Concept: Spinaufspaltung im Stern-Gerlach-Versuch}  
+
+\begin{CONC}{QM-G25-19-38}{Spinaufspaltung im Stern-Gerlach-Versuch}
 Auch für \(l = 0\) wird eine Aufspaltung beobachtet (z.B. bei Alkalimetallen). Diese rührt vom Eigendrehimpuls (Spin) der Elektronen her:
 $$
 \vec{S} = \frac{\hbar}{2} \vec{\sigma}, \quad \vec{\mu}_e = -\frac{e_0}{2m_e} g \vec{S}, \quad g \approx 2.
 $$
 Damit wird auch für \(l = 0\) eine Zwei-Zweig-Spaltung beobachtet.
+\end{CONC}
 
 
 
@@ -3699,16 +3828,19 @@ Potentiale}
 
 \textbf{Schrödinger-Gleichung für rotationssymmetrisches Potential [Concept]}
 
+\begin{CONC}{QM-G25-20-01}{Schrödinger-Gleichung für rotationssymmetrisches Potential}
 Für ein rotationssymmetrisches Potential $V(\vec{x}) = V(|\vec{x}|)$ ist der Hamilton-Operator gegeben durch:
 \[
 \mathbf{H} = \frac{\vec{p}^{\,2}}{2m} + V(r)
 \]
 Solche Systeme sind rotationsinvariant, was in der Quantenmechanik die Erhaltung des Drehimpulses impliziert.
+\end{CONC}
 
 ---
 
 \textbf{Drehimpulserhaltung bei rotationssymmetrischem Potential [Concept]}
 
+\begin{CONC}{QM-G25-20-02}{Drehimpulserhaltung bei rotationssymmetrischem Potential}
 Für $V(\vec{x}) = V(|\vec{x}|)$ gilt:
 \[
 [\mathbf{L}_j, \mathbf{H}] = 0, \quad j=1,2,3 \quad \Rightarrow \quad [\vec{\mathbf{L}}^2, \mathbf{H}] = 0
@@ -3720,11 +3852,13 @@ Da vertauschende Operatoren gleichzeitig diagonalisierbar sind, kann man gemeins
 \epsilon_{ijk}[x_j p_k, p_l p_l] = i \hbar \epsilon_{ilk}(p_l + p_k) = 0
 \]
 wegen antisymmetrischer Indizes.
+\end{CONC}
 
 ---
 
 \textbf{Hamilton-Operator in Kugelkoordinaten [Concept]}
 
+\begin{CONC}{QM-G25-20-03}{Hamilton-Operator in Kugelkoordinaten}
 Der Laplace-Operator in Kugelkoordinaten lautet:
 \[
 \Delta = \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial}{\partial r} \right) + \frac{1}{r^2 \sin^2 \vartheta} \left( \sin \vartheta \frac{\partial}{\partial \vartheta} \sin \vartheta \frac{\partial}{\partial \vartheta} + \frac{\partial^2}{\partial \varphi^2} \right)
@@ -3737,11 +3871,13 @@ Damit ergibt sich der Hamilton-Operator:
 \[
 H = -\frac{\hbar^2}{2m r} \frac{\partial^2}{\partial r^2} r + \frac{1}{2 m r^2} \vec{L}^2 + V(r)
 \]
+\end{CONC}
 
 ---
 
 \textbf{Entwicklung der Lösung in Kugelfunktionen [Concept]}
 
+\begin{CONC}{QM-G25-20-04}{Entwicklung der Lösung in Kugelfunktionen}
 Die Lösung $u(\vec{x})$ der stationären Schrödinger-Gleichung wird nach Kugelfunktionen entwickelt:
 \[
 u(\vec{x}) = \sum_{l=0}^\infty \sum_{m=-l}^{+l} R_{lm}(r) Y_{lm}(\vartheta, \varphi)
@@ -3750,22 +3886,26 @@ Dies führt auf eine entkoppelte Gleichung für $R_{lm}(r)$:
 \[
 -\frac{\hbar^2}{2 r m} \frac{d^2}{d r^2} (r R_{lm}) + \left( \frac{\hbar^2 l(l+1)}{2mr^2} + V(r) \right) R_{lm} = E R_{lm}
 \]
+\end{CONC}
 
 ---
 
 \textbf{Zentrifugalpotential und Verhalten bei $r \to 0$ [Remark]}
 
+\begin{REM}{QM-G25-20-05}{Zentrifugalpotential und Verhalten bei $r \to 0$}
 Für $l \neq 0$ dominiert das Zentrifugalpotential
 \[
 \frac{\hbar^2 l(l+1)}{2 m r^2}
 \]
 gegenüber $V(r)$, falls $\lim_{r \to 0} r^2 V(r) = 0$.\\
 Daraus folgt, dass $R_{lm}(r=0)$ endlich bleiben muss, um divergierende Wahrscheinlichkeitsdichte im Ursprung zu vermeiden.
+\end{REM}
 
 ---
 
 \textbf{Asymptotisches Verhalten für $r \to 0$ [Concept]}
 
+\begin{CONC}{QM-G25-20-06}{Asymptotisches Verhalten für $r \to 0$}
 Für $r \to 0$ vereinfacht sich die Gleichung:
 \[
 -\frac{d^2}{d r^2}(r R_{lm}) - \frac{l(l+1)}{r^2} R_{lm} \approx 0
@@ -3775,6 +3915,7 @@ mit Lösung:
 R_{lm}(r) \sim r^\nu \quad \text{mit} \quad \nu = l \text{ oder } -l-1
 \]
 Nur $\nu = l$ führt zu einer regulären Lösung am Ursprung.
+\end{CONC}
 
 ---
 
@@ -3786,6 +3927,7 @@ Nur $\nu = l$ führt zu einer regulären Lösung am Ursprung.
 
 \textbf{Schrödinger-Gleichung für das Wasserstoffatom [Concept]}
 
+\begin{CONC}{QM-G25-21-01}{Schrödinger-Gleichung für das Wasserstoffatom}
 Für das Coulombpotential
 \[
 V(r) = -\frac{Z e_0^2}{4\pi \varepsilon_0 r}
@@ -3794,11 +3936,13 @@ ergibt sich:
 \[
 \left( \frac{d^2}{dr^2} + \frac{2}{r} \frac{d}{dr} \right) R + \frac{2m}{\hbar^2} \left[ E + \frac{Z e_0^2}{4\pi \varepsilon_0 r} - \frac{\hbar^2 l(l+1)}{2 m r^2} \right] R = 0
 \]
+\end{CONC}
 
 ---
 
 \textbf{Dimensionslose Form der Radialgleichung [Concept]}
 
+\begin{CONC}{QM-G25-21-02}{Dimensionslose Form der Radialgleichung}
 Einführung der Variablen:
 \[
 \rho = \sqrt{\frac{8 m |E|}{\hbar^2}} r, \quad \lambda = Z \alpha \sqrt{\frac{c^2 m}{2|E|}}, \quad \alpha \approx \frac{1}{137}
@@ -3807,21 +3951,25 @@ liefert:
 \[
 \frac{d^2 R}{d \rho^2} + \frac{2}{\rho} \frac{d R}{d \rho} + \left( \frac{\lambda}{\rho} - \frac{1}{4} - \frac{l(l+1)}{\rho^2} \right) R = 0
 \]
+\end{CONC}
 
 ---
 
 \textbf{Verhalten der Lösung bei $\rho \to \infty$ [Concept]}
 
+\begin{CONC}{QM-G25-21-03}{Verhalten der Lösung bei $\rho \to \infty$}
 Für große $\rho$ dominiert:
 \[
 \frac{d^2 R}{d \rho^2} - \frac{1}{4} R \approx 0 \quad \Rightarrow \quad R(\rho) \sim e^{\pm \rho/2}
 \]
 Nur $e^{-\rho/2}$ ist normierbar.
+\end{CONC}
 
 ---
 
 \textbf{Ansatz mit Gewichtsfunktion für die Lösung [Concept]}
 
+\begin{CONC}{QM-G25-21-04}{Ansatz mit Gewichtsfunktion für die Lösung}
 Da $R(\rho) \sim \rho^l$ für kleine $\rho$ und $e^{-\rho/2}$ für große $\rho$, setzt man:
 \[
 R(\rho) = \rho^l e^{-\rho/2} g(\rho)
@@ -3830,11 +3978,13 @@ Für $g(\rho)$ ergibt sich:
 \[
 g'' + \left( \frac{2l+2}{\rho} - 1 \right) g' + \frac{\lambda - l - 1}{\rho} g = 0
 \]
+\end{CONC}
 
 
 
 \textbf{Taylorentwicklung von $g(\rho)$ für das Wasserstoffatom [Concept]}
 
+\begin{CONC}{QM-G25-21-05}{Taylorentwicklung von $g(\rho)$ für das Wasserstoffatom}
 Wir setzen für $g(\rho)$ eine Potenzreihe an:
 \[
 g(\rho) = \sum_{n=0}^\infty a_n \rho^n
@@ -3847,11 +3997,13 @@ liefert die Rekursionsbedingung:
 \[
 a_{n+1} = \frac{n + l + 1 - \lambda}{(n+1)(n + 2l + 2)} a_n
 \]
+\end{CONC}
 
 ---
 
 \textbf{Normierungsbedingung und Abbruch der Potenzreihe [Concept]}
 
+\begin{CONC}{QM-G25-21-06}{Normierungsbedingung und Abbruch der Potenzreihe}
 Für große $n$ ergibt sich näherungsweise:
 \[
 a_{n+1} \sim \frac{1}{n} a_n \quad \Rightarrow \quad g(\rho) \sim e^{\rho}
@@ -3862,11 +4014,13 @@ Um eine normierbare Lösung zu erhalten, muss die Reihe abbrechen: Es muss ein $
 \[
 a_{n_r + 1} = 0 \quad \Rightarrow \quad \lambda = n_r + l + 1
 \]
+\end{CONC}
 
 ---
 
 \textbf{Hauptquantenzahl und Energieeigenwerte [Definition]}
 
+\begin{DEF}{QM-G25-21-07}{Hauptquantenzahl und Energieeigenwerte}
 Die Bedingung
 \[
 \lambda = n_r + l + 1 \equiv n
@@ -3875,21 +4029,25 @@ definiert die **Hauptquantenzahl** \( n \in \mathbb{N}_{\geq 1} \). Daraus ergib
 \[
 E_n = -\frac{1}{2} m c^2 \cdot \frac{(Z \alpha)^2}{n^2} \qquad \text{(Bohr'sche Formel)}
 \]
+\end{DEF}
 
 ---
 
 \textbf{Erlaubte Werte des Bahndrehimpulses $l$ für gegebenes $n$ [Definition]}
 
+\begin{DEF}{QM-G25-21-08}{Erlaubte Werte des Bahndrehimpulses $l$ für gegebenes $n$}
 Die Abbruchbedingung $n - 1 = n_r + l$ impliziert:
 \[
 l = 0, 1, \dotsc, n-1
 \]
 Diese quantisierten Werte des Drehimpulses ergeben sich aus der Regularitäts- und Normierbarkeitsbedingung der Lösung.
+\end{DEF}
 
 ---
 
 \textbf{Entartungsgrad der Energieniveaus des Wasserstoffatoms [Remark]}
 
+\begin{REM}{QM-G25-21-09}{Entartungsgrad der Energieniveaus des Wasserstoffatoms}
 Zu jedem Wert von $l$ gehören $2l+1$ Zustände mit unterschiedlichem $m$ (magnetische Quantenzahl). Insgesamt ist die Entartung für gegebenes $n$:
 \[
 \sum_{l=0}^{n-1} (2l+1) = n^2
@@ -3898,11 +4056,13 @@ Unter Berücksichtigung von zwei möglichen Spin-Zuständen ergibt sich ein voll
 \[
 d_n = 2n^2
 \]
+\end{REM}
 
 ---
 
 \textbf{Radiale Eigenfunktionen des Wasserstoffatoms [Definition]}
 
+\begin{DEF}{QM-G25-21-10}{Radiale Eigenfunktionen des Wasserstoffatoms}
 Die radialen Eigenfunktionen sind gegeben durch:
 \[
 R_{nl}(\rho) = C_{nl} \cdot e^{-\rho/2} \cdot \rho^l \cdot L_{n-l-1}^{2l+1}(\rho)
@@ -3911,11 +4071,13 @@ wobei $L_k^\alpha(\rho)$ die **zugeordneten Laguerre-Polynome** sind:
 \[
 L_{n_r}^\alpha(\rho) = \sum_{\nu=0}^{n_r} (-1)^\nu \binom{n_r + \alpha}{n_r - \nu} \frac{\rho^\nu}{\nu!}
 \]
+\end{DEF}
 
 ---
 
 \textbf{Normierte Beispiele für $R_{nl}$ [Example]}
 
+\begin{EXA}{QM-G25-21-11}{Normierte Beispiele für $R_{nl}$}
 Setzt man den Bohr-Radius
 \[
 a = \frac{\hbar^2 4 \pi \varepsilon_0}{m_e e^2}
@@ -3929,11 +4091,13 @@ R_{20}(r) &= 2 \left( \frac{Z}{2a} \right)^{3/2} \left(1 - \frac{Zr}{2a} \right)
 R_{21}(r) &= \frac{1}{\sqrt{3}} \left( \frac{Z}{2a} \right)^{3/2} \cdot \frac{Zr}{a} e^{-Zr/(2a)}
 \end{aligned}
 \]
+\end{EXA}
 
 ---
 
 \textbf{Aufenthaltswahrscheinlichkeit des Elektrons im Wasserstoffatom [Concept]}
 
+\begin{CONC}{QM-G25-21-12}{Aufenthaltswahrscheinlichkeit des Elektrons im Wasserstoffatom}
 Die radiale Aufenthaltswahrscheinlichkeit lautet:
 \[
 w_{nl}(r) = r^2 R_{nl}^2(r)
@@ -3944,20 +4108,24 @@ w(\Delta r) = \int_r^{r+\Delta r} dr \, w_{nl}(r)
 \]
 
 Für $w_{10}(r) = C_{10}^2 r^2 e^{-2Zr/a}$ liegt das Maximum bei $r = a/Z$. Allgemein hat $w_{nl}$ genau $n - l$ Maxima.
+\end{CONC}
 
 ---
 
 \textbf{Mittelwerte $\langle r^k \rangle$ für das Wasserstoffatom [Concept]}
 
+\begin{CONC}{QM-G25-21-13}{Mittelwerte $\langle r^k \rangle$ für das Wasserstoffatom}
 Die Erwartungswerte lauten:
 \[
 \langle r \rangle = \frac{a}{2Z}(3n^2 - l(l+1)), \quad \langle r^{-1} \rangle = \frac{Z}{a n^2}
 \]
+\end{CONC}
 
 ---
 
 \textbf{Feinstruktur und weitere Korrekturen zur Bohr'schen Formel [Remark]}
 
+\begin{REM}{QM-G25-21-14}{Feinstruktur und weitere Korrekturen zur Bohr'schen Formel}
 Die Energieniveaus gemäß der Bohr’schen Formel sind Näherungen. Es treten mehrere Korrekturen auf, u.a.:
 
 - Feinstruktur
@@ -3969,44 +4137,48 @@ Die Energieniveaus gemäß der Bohr’schen Formel sind Näherungen. Es treten m
 - relativistische Effekte
 
 Diese führen zu messbaren Abweichungen in der Spektrallinie und erklären feine Aufspaltungen.
+\end{REM}
 
 ---
 
 \textbf{Mitbewegung des Kerns: Reduzierte Masse [Concept]}
 
+\begin{CONC}{QM-G25-21-15}{Mitbewegung des Kerns: Reduzierte Masse}
 Berücksichtigt man die Mitbewegung des Protons (Massen: $m_p c^2 = 938$ MeV, $m_e c^2 = 0.51$ MeV), so ergibt sich für das Zwei-Körper-Problem mit Potential $V(\vec{x}_1 - \vec{x}_2)$ die Schrödingergleichung:
-
 \[
 \left( -\frac{\hbar^2}{2m_1} \Delta_1 - \frac{\hbar^2}{2m_2} \Delta_2 + V(\vec{x}_1 - \vec{x}_2) \right) \tilde{u}(\vec{x}_1, \vec{x}_2) = \tilde{E} \tilde{u}(\vec{x}_1, \vec{x}_2)
 \]
-
 Mit Einführung der Schwerpunktskoordinaten gelangt man zu einer reduzierten Masse $\mu$:
 \[
 \mu = \frac{m_e m_p}{m_e + m_p}
 \]
 Statt $m_e$ tritt dann $\mu$ in der Schrödinger-Gleichung auf, was zu leicht verschobenen Energien führt.
+\end{CONC}
+
+
+
 
 \textbf{Transformation zu Schwerpunktskoordinaten [Concept]}
 
+\begin{CONC}{QM-G25-21-16}{Transformation zu Schwerpunktskoordinaten}
 Für ein Zwei-Körper-System mit Positionen $\vec{x}_1$, $\vec{x}_2$ und Massen $m_1$, $m_2$ definieren wir die Relativ- und Schwerpunktskoordinaten als:
-
 \[
 \begin{aligned}
 \vec{x} &= \vec{x}_1 - \vec{x}_2, \quad & \vec{R} = \frac{m_1 \vec{x}_1 + m_2 \vec{x}_2}{m_1 + m_2} \\
 \vec{x}_1 &= \vec{R} + \frac{\mu}{m_1} \vec{x}, \quad & \vec{x}_2 = \vec{R} - \frac{\mu}{m_2} \vec{x}, \quad \mu = \frac{m_1 m_2}{m_1 + m_2}
 \end{aligned}
 \]
-
 Die stationäre Schrödingergleichung transformiert sich zu:
-
 \[
 \left( -\frac{\hbar^2}{2(m_1 + m_2)} \Delta_R - \frac{\hbar^2}{2\mu} \Delta_x + V(\vec{x}) \right) \tilde{u}(\vec{x}, \vec{R}) = \tilde{E} \tilde{u}(\vec{x}, \vec{R})
 \]
+\end{CONC}
 
 ---
 
 \textbf{Separation der Variablen in Relativ- und Schwerpunktskoordinaten [Concept]}
 
+\begin{CONC}{QM-G25-21-17}{Separation der Variablen in Relativ- und Schwerpunktskoordinaten}
 Wir verwenden einen Produktansatz für die Wellenfunktion:
 \[
 \tilde{u}(\vec{x}, \vec{R}) = u(\vec{x}) u(\vec{R}), \quad u(\vec{R}) = e^{i \vec{K} \cdot \vec{R}}
@@ -4018,11 +4190,13 @@ Dabei beschreibt $\vec{K}$ den Gesamtimpuls des Systems. Die Bewegung im Schwerp
 \]
 
 $E$ beschreibt die Energie der Relativbewegung.
+\end{CONC}
 
 ---
 
 \textbf{Energieeigenwerte mit reduzierter Masse [Definition]}
 
+\begin{DEF}{QM-G25-21-18}{Energieeigenwerte mit reduzierter Masse}
 Für das Wasserstoffatom gilt:
 \[
 E_n = -\frac{1}{2} \mu c^2 \cdot \frac{\alpha^2}{n^2}, \quad \mu = \frac{m_e}{1 + \frac{m_e}{m_p}}
@@ -4035,6 +4209,7 @@ Weitere Korrekturen betreffen:
   \item Relativistische Korrekturen
   \item Das magnetische Moment des Kerns
 \end{itemize}
+\end{DEF}
 
 ---
 
@@ -4047,6 +4222,7 @@ Weitere Korrekturen betreffen:
 
 \textbf{Freie radialsymmetrische Lösungen der Schrödingergleichung [Concept]}
 
+\begin{CONC}{QM-G25-22-01}{Freie radialsymmetrische Lösungen der Schrödingergleichung}
 Für $V(r) = 0$ ergibt sich die radiale Schrödingergleichung:
 \[
 -\frac{\hbar^2}{2m r} \frac{d^2}{dr^2}(r R_l) + \frac{\hbar^2 l(l+1)}{2m r^2} R_l = E R_l
@@ -4055,11 +4231,13 @@ Dies beschreibt freie Teilchen mit kontinuierlichem Spektrum $E \geq 0$. Gesucht
 \[
 \psi(\vec{x}) = R_l(r) Y_{lm}(\vartheta, \varphi)
 \]
+\end{CONC}
 
 ---
 
 \textbf{Dimensionslose Form: Einführung von $\rho = kr$ [Definition]}
 
+\begin{DEF}{QM-G25-22-02}{Dimensionslose Form: Einführung von $\rho = kr$}
 Setzt man:
 \[
 \frac{2mE}{\hbar^2} = k^2, \quad \rho = kr
@@ -4069,11 +4247,13 @@ so wird die Gleichung zu:
 \frac{d^2 R_l}{d\rho^2} + \frac{2}{\rho} \frac{d R_l}{d\rho} + \left(1 - \frac{l(l+1)}{\rho^2} \right) R_l = 0
 \]
 Dies ist eine homogene lineare DGL zweiter Ordnung mit zwei unabhängigen Lösungen: **sphärische Bessel-** und **Neumannfunktionen**.
+\end{DEF}
 
 ---
 
 \textbf{Bessel-Funktionen $J_\nu(\rho)$ [Definition]}
 
+\begin{DEF}{QM-G25-22-03}{Bessel-Funktionen $J_\nu(\rho)$}
 Die gewöhnlichen Bessel-Funktionen erfüllen:
 \[
 \frac{d^2 J_\nu}{d\rho^2} + \frac{1}{\rho} \frac{d J_\nu}{d\rho} + \left(1 - \frac{\nu^2}{\rho^2} \right) J_\nu = 0
@@ -4082,11 +4262,13 @@ Mit der Reihendarstellung:
 \[
 J_\nu(\rho) = \frac{\rho^\nu}{2^\nu} \sum_{k=0}^\infty \frac{(-1)^k}{k! \Gamma(\nu + k + 1)} \left( \frac{\rho}{2} \right)^{2k}
 \]
+\end{DEF}
 
 ---
 
 \textbf{Sphärische Bessel-Funktion $j_l(\rho)$ [Definition]}
 
+\begin{DEF}{QM-G25-22-04}{Sphärische Bessel-Funktion $j_l(\rho)$}
 Die regulären Lösungen bei $\rho = 0$ sind:
 \[
 j_l(\rho) = \sqrt{\frac{\pi}{2\rho}} J_{l + 1/2}(\rho) = (-\rho)^l \left( \frac{1}{\rho} \frac{d}{d\rho} \right)^l \left( \frac{\sin \rho}{\rho} \right)
@@ -4095,11 +4277,13 @@ Beispiele:
 \[
 j_0(\rho) = \frac{\sin \rho}{\rho}, \quad j_1(\rho) = \frac{\sin \rho}{\rho^2} - \frac{\cos \rho}{\rho}
 \]
+\end{DEF}
 
 ---
 
 \textbf{Sphärische Neumann-Funktion $n_l(\rho)$ [Definition]}
 
+\begin{DEF}{QM-G25-22-05}{Sphärische Neumann-Funktion $n_l(\rho)$}
 Die singulären Lösungen bei $\rho = 0$ sind:
 \[
 n_l(\rho) = (-1)^{l+1} \sqrt{\frac{\pi}{2\rho}} J_{-l - 1/2}(\rho) = -(-\rho)^l \left( \frac{1}{\rho} \frac{d}{d\rho} \right)^l \left( \frac{\cos \rho}{\rho} \right)
@@ -4108,11 +4292,13 @@ Beispiele:
 \[
 n_0(\rho) = -\frac{\cos \rho}{\rho}, \quad n_1(\rho) = -\frac{\cos \rho}{\rho^2} - \frac{\sin \rho}{\rho}
 \]
+\end{DEF}
 
 ---
 
 \textbf{Grenzwertverhalten von $j_l$ und $n_l$ [Remark]}
 
+\begin{REM}{QM-G25-22-06}{Grenzwertverhalten von $j_l$ und $n_l$}
 Für $\rho \to 0$:
 \[
 j_l(\rho) \sim \frac{\rho^l}{(2l + 1)!!}, \quad n_l(\rho) \sim -\frac{(2l - 1)!!}{\rho^{l+1}}
@@ -4122,11 +4308,13 @@ Für $\rho \to \infty$:
 \[
 j_l(\rho) \sim \frac{1}{\rho} \sin \left( \rho - \frac{l\pi}{2} \right), \quad n_l(\rho) \sim -\frac{1}{\rho} \cos \left( \rho - \frac{l\pi}{2} \right)
 \]
+\end{REM}
 
 ---
 
 \textbf{Entwicklung ebener Wellen in Kugelwellen [Proposition]}
 
+\begin{PROP}{QM-G25-22-07}{Entwicklung ebener Wellen in Kugelwellen}
 Für eine ebene Welle gilt:
 \[
 e^{i \vec{k} \cdot \vec{x}} = e^{i k r \cos \vartheta} = \sum_{l=0}^\infty (2l + 1) i^l j_l(kr) P_l(\cos \vartheta)
@@ -4137,11 +4325,13 @@ Die Entwicklungskoeffizienten sind:
 \[
 c_l = (2l + 1) i^l
 \]
+\end{PROP}
 
 ---
 
 \textbf{Physikalische Interpretation von $j_l(\rho)$ [Concept]}
 
+\begin{CONC}{QM-G25-22-08}{Physikalische Interpretation von $j_l(\rho)$}
 Für große $\rho$:
 \[
 j_l(\rho) \sim \frac{1}{\rho} \sin \left( \rho - \frac{l\pi}{2} \right)
@@ -4155,82 +4345,83 @@ Interpretation:
 - $e^{i(kr - \omega t)}$: auslaufende Kugelwelle
 
 Der Drehimpuls $l$ geht in eine Phasenverschiebung $\sim l\pi/2$ ein.
+\end{CONC}
 
 ---
 
 
 \textbf{Kugelwellenentwicklung ebener Wellen (Zusammenfassung) [Definition]}
 
+\begin{DEF}{QM-G25-22-09}{Kugelwellenentwicklung ebener Wellen (Zusammenfassung)}
 Die ebene Welle $e^{i \vec{k} \cdot \vec{x}}$ lässt sich in radialen Kugelwellen entwickeln:
-
 \[
 e^{i \vec{k} \cdot \vec{x}} = \sum_{l=0}^\infty (2l+1) i^l j_l(kr) P_l(\cos \vartheta)
 \]
-
 Dabei ist:
 
 - $j_l(kr)$: sphärische Besselfunktion,
 
 - $P_l(\cos \vartheta)$: Legendre-Polynom.
+\end{DEF}
 
-Diese Darstellung ist zentral für die Partialwellenentwicklung in der Streutheorie.
 
 ---
 
 \textbf{Orthogonalitätsrelation und Koeffizientenbestimmung [Proposition]}
 
+\begin{PROP}{QM-G25-22-10}{Orthogonalitätsrelation und Koeffizientenbestimmung}
 Die Legendre-Polynome erfüllen:
 \[
 \int_{-1}^{1} P_{l_1}(z) P_{l_2}(z) \, dz = \frac{2}{2l_1 + 1} \delta_{l_1 l_2}
 \]
-
 Entwicklungskoeffizienten erhält man daher durch Projektion:
 \[
 c_l j_l(\rho) = \frac{2l+1}{2} \int_{-1}^{1} P_l(z) e^{i \rho z} dz
 \]
-
 Mit der Reihenentwicklung von $e^{i \rho z}$ folgt:
 \[
 \int_{-1}^{1} P_l(z) e^{i \rho z} dz = \frac{2}{(2l+1)!!} (i \rho)^l + \mathcal{O}(\rho^{l+1})
 \]
-
 Vergleich mit $j_l(\rho) \approx \rho^l / (2l+1)!!$ ergibt:
 \[
 c_l = (2l+1) i^l
 \]
+\end{PROP}
 
 ---
 
 \textbf{Asymptotisches Verhalten der Kugelwellen [Concept]}
 
+\begin{CONC}{QM-G25-22-11}{Asymptotisches Verhalten der Kugelwellen}
 Für große $\rho = kr$ ergibt sich für die sphärische Besselfunktion:
-
 \[
 j_l(\rho) \sim \frac{1}{\rho} \sin \left( \rho - \frac{l\pi}{2} \right) = -\frac{1}{2ikr} \left[ e^{-i(kr - \frac{l\pi}{2})} - e^{i(kr - \frac{l\pi}{2})} \right]
 \]
-
 Dies beschreibt eine Überlagerung von:
 - einlaufender Kugelwelle: $e^{-i(\omega t + kr)}$
+
 - auslaufender Kugelwelle: $e^{-i(\omega t - kr)}$
 
 Die Phasenverschiebung $l\pi/2$ hängt vom Drehimpuls ab.
+\end{CONC}
 
 ---
 
 \textbf{Drehimpulsabhängigkeit in der Streuphase [Remark]}
 
+\begin{REM}{QM-G25-22-12}{Drehimpulsabhängigkeit in der Streuphase}
 Die asymptotische Phase der Kugelwelle hängt explizit vom Drehimpuls $l$ ab. Die vollständige Streulösung in Partialwellenentwicklung erhält für reale Potentiale durch Phasenverschiebung $\delta_l$ die Form:
-
 \[
 R_l(r) \xrightarrow{r \to \infty} \frac{1}{kr} \sin \left( kr - \frac{l\pi}{2} + \delta_l \right)
 \]
-
 Diese Form ist Grundlage für die Bestimmung des Wirkungsquerschnitts.
+\end{REM}
 
 ---
 
 \textbf{Superposition von ein- und auslaufenden Wellen [Concept]}
 
+\begin{CONC}{QM-G25-22-13}{Superposition von ein- und auslaufenden Wellen}
 Die asymptotische Form:
 \[
 j_l(\rho) \sim \frac{1}{2ikr} \left( e^{i(kr - \frac{l\pi}{2})} - e^{-i(kr - \frac{l\pi}{2})} \right)
@@ -4241,11 +4432,13 @@ Einlaufende Welle: bewegt sich in Richtung Ursprung.
 Auslaufende Welle: entfernt sich vom Ursprung.
 
 Diese Interpretation ist grundlegend für die Beschreibung von Streuprozessen als Interferenz zwischen eingehender Welle und gestreuter Komponente.
+\end{CONC}
 
 ---
 
 \textbf{... [Summary]}
 
+\begin{CONC}{QM-G25-22-14}{Summary}
 Für radial symmetrische, schnell abfallende Potentiale kann man ebene Wellen in Kugelwellen zerlegen. Die Partialwellenentwicklung erlaubt:
 
 - saubere Trennung nach Drehimpuls $l$,
@@ -4253,6 +4446,7 @@ Für radial symmetrische, schnell abfallende Potentiale kann man ebene Wellen in
 - eindeutige Identifikation von Phasenverschiebungen $\delta_l$,
 
 - Berechnung des differentiellen und totalen Wirkungsquerschnitts.
+\end{CONC}
 
 
 
@@ -4265,19 +4459,20 @@ Für radial symmetrische, schnell abfallende Potentiale kann man ebene Wellen in
 
 \textbf{Voraussetzungen für elastische Streuung [Concept]}
 
+\begin{CONC}{QM-G25-23-01}{Voraussetzungen für elastische Streuung}
 Für die Formulierung der Streutheorie benötigen wir, dass sich ungebundene Lösungen der Schrödingergleichung für große $r$ wie ebene Wellen verhalten. Dafür muss das Potential $V(r)$ schnell genug abfallen:
-
 \[
 \lim_{r \to \infty} r V(r) = 0
 \]
-
 Diese Bedingung ist bei kurzreichweitigen Potentialen erfüllt. Das Coulomb-Potential fällt zu langsam ab und muss gesondert behandelt werden.
+\end{CONC}
 
 ---
 
 
 \textbf{Experimenteller Aufbau der Streutheorie [Concept]}
 
+\begin{CONC}{QM-G25-23-02}{Experimenteller Aufbau der Streutheorie}
 Ein Teilchenstrahl trifft entlang der $x_3$-Achse auf ein Streuzentrum bei $\vec{x} = 0$. Die relevanten Größen sind:
 
 \begin{enumerate}
@@ -4288,123 +4483,118 @@ Ein Teilchenstrahl trifft entlang der $x_3$-Achse auf ein Streuzentrum bei $\vec
 \end{enumerate}
 
 Die Zahl gestreuter Teilchen pro Zeiteinheit durch $\Delta S$ ist gegeben durch $s_r \cdot \Delta S$.
+\end{CONC}
 
 ---
 
 \textbf{Definition des Wirkungsquerschnitts [Definition]}
 
+\begin{DEF}{QM-G25-23-03}{Definition des Wirkungsquerschnitts}
 Der differentielle Wirkungsquerschnitt ist definiert durch:
-
 \[
 \Delta \sigma(\vartheta, \varphi) = \frac{s_r \cdot r^2 \cdot \Delta \Omega}{s_3}, \quad
 \frac{d\sigma}{d\Omega}(\vartheta, \varphi) = \frac{s_r(r, \vartheta, \varphi) \cdot r^2}{s_3}
 \]
-
 Dabei gilt $E = \frac{\hbar^2 k^2}{2\mu}$, mit $\mu$ der reduzierten Masse. Für rotationssymmetrische Potentiale hängt $\frac{d\sigma}{d\Omega}$ nicht von $\varphi$ ab.
+\end{DEF}
 
 ---
 
 \textbf{Streuamplitude und Kontinuitätsgleichung [Concept]}
 
+\begin{CONC}{QM-G25-23-04}{Streuamplitude und Kontinuitätsgleichung}
 Die Wellenfunktion bei Streuung setzt sich aus einer einlaufenden und einer auslaufenden Komponente zusammen:
-
 \[
 u(\vec{x}) \sim e^{i \vec{k} \cdot \vec{x}} + f(k, \vartheta) \frac{e^{ikr}}{r}
 \]
-
 Mit Hilfe der Kontinuitätsgleichung ergeben sich:
-
 \[
 s_3 = \frac{\hbar k}{\mu}, \quad
 s_r = \frac{\hbar k |f(k, \vartheta)|^2}{\mu r^2}
 \]
-
 Daraus folgt der Zusammenhang:
-
 \[
 \frac{d\sigma}{d\Omega} = \frac{s_r r^2}{s_3} = |f(k, \vartheta)|^2
 \]
+\end{CONC}
 
 ---
 
 \textbf{Partialwellenentwicklung für ebene Wellen [Proposition]}
 
+\begin{PROP}{QM-G25-23-05}{Partialwellenentwicklung für ebene Wellen}
 Für große $r$ gilt:
-
 \[
 e^{i \vec{k} \cdot \vec{x}} \sim -\frac{1}{2ik} \sum_{l=0}^{\infty} (2l+1) i^l \left[
 \frac{e^{-i(kr - \frac{l\pi}{2})}}{r}
 - \frac{e^{i(kr - \frac{l\pi}{2})}}{r}
 \right] P_l(\cos \vartheta)
 \]
-
 Bei vorhandenem Potential $V(r)$ modifiziert sich nur die auslaufende Wellenkomponente:
-
 \[
 u(\vec{x}) \approx -\frac{1}{2ik} \sum_{l=0}^{\infty} (2l+1) i^l \left[
 \frac{e^{-i(kr - \frac{l\pi}{2})}}{r}
 - S_l(k) \frac{e^{i(kr - \frac{l\pi}{2})}}{r}
 \right] P_l(\cos \vartheta)
 \]
+\end{PROP}
 
 ---
 
 \textbf{Streuphase und Erhaltung der Norm [Definition]}
 
+\begin{DEF}{QM-G25-23-06}{Streuphase und Erhaltung der Norm}
 Bei rein elastischer Streuung bleibt die Teilchenanzahl erhalten: $|S_l(k)| = 1$. Daher gilt:
-
 \[
 S_l(k) = e^{2i\delta_l(k)}, \quad \delta_l(k): \text{Streuphase der $l$-ten Partialwelle}
 \]
-
 Der asymptotische Radialanteil lautet dann:
-
 \[
 R_l(r) \sim e^{i\delta_l(k)} \cdot \frac{\sin(kr - \frac{l\pi}{2} + \delta_l(k))}{kr}
 \]
+\end{DEF}
 
 ---
 
 \textbf{Partialwellenentwicklung der Streuamplitude $f(k, \vartheta)$ [Proposition]}
 
+\begin{PROP}{QM-G25-23-07}{Partialwellenentwicklung der Streuamplitude $f(k, \vartheta)$}
 Man schreibt:
-
 \[
 u(\vec{x}) \sim e^{i \vec{k} \cdot \vec{x}} + \left[
 \sum_{l=0}^{\infty} (2l+1) i^l \frac{S_l(k) - 1}{2ik} P_l(\cos \vartheta) \cdot \frac{e^{i(kr - \frac{l\pi}{2})}}{r}
 \right]
 \]
-
 Dies liefert für $f(k, \vartheta)$:
-
 \[
 f(k, \vartheta) = \sum_{l=0}^\infty (2l+1) \frac{e^{2i\delta_l(k)} - 1}{2ik} P_l(\cos \vartheta)
 \]
+\end{PROP}
 
 ---
 
 \textbf{Totaler elastischer Wirkungsquerschnitt [Definition]}
 
+\begin{DEF}{QM-G25-23-08}{Totaler elastischer Wirkungsquerschnitt}
 Durch Integration über den vollen Raumwinkel ergibt sich:
-
 \[
 \sigma_{\text{el}}(k) = \int d\Omega \, |f(k, \vartheta)|^2 = \frac{4\pi}{k^2} \sum_{l=0}^\infty (2l+1) \sin^2 \delta_l(k)
 \]
-
 Die Streuphase $\delta_l(k)$ kann aus dem asymptotischen Verhalten von $R_l(r)$ extrahiert werden.
+\end{DEF}
 
 ---
 
 \textbf{Optisches Theorem [Proposition]}
 
+\begin{PROP}{QM-G25-23-09}{Optisches Theorem}
 Für $\vartheta = 0$ (Streuung im Vorwärtswinkel) gilt:
-
 \[
 \Im f(k, 0) = \frac{1}{k} \sum_{l=0}^\infty (2l+1) \sin^2 \delta_l(k)
 = \frac{k}{4\pi} \sigma_{\text{el}}(k)
 \]
-
 Dies ist das \emph{optische Theorem}. Es verknüpft die Gesamtstreuung mit dem Imaginärteil der Vorwärtsamplitude.
+\end{PROP}
 
 ---
 
@@ -4416,8 +4606,8 @@ Dies ist das \emph{optische Theorem}. Es verknüpft die Gesamtstreuung mit dem I
 
 \textbf{3D-Potentialtopf: Definition und Einordnung [Definition]}
 
+\begin{DEF}{QM-G25-24-01}{3D-Potentialtopf: Definition und Einordnung}
 Ein rotationssymmetrischer Potentialtopf ist definiert durch:
-
 \[
 V(r) = \begin{cases}
 -V_0 & \text{für } r < a \\
@@ -4425,26 +4615,25 @@ V(r) = \begin{cases}
 \end{cases}
 \quad \text{mit } V_0 > 0
 \]
-
 Die Energieformen:
 \begin{enumerate}
   \item $E < 0$: gebundene Zustände
   \item $E > 0$: Streuzustände
 \end{enumerate}
-
 Definitionen:
 \[
 q = \frac{1}{\hbar} \sqrt{2\mu(V_0 + E)}, \quad
 \kappa = \frac{1}{\hbar} \sqrt{-2\mu E}, \quad
 k = \frac{1}{\hbar} \sqrt{2\mu E}
 \]
+\end{DEF}
 
 ---
 
 \textbf{Gebundene Zustände im Potentialtopf [Concept]}
 
+\begin{CONC}{QM-G25-24-02}{Gebundene Zustände im Potentialtopf}
 Die radiale Gleichung lautet:
-
 \[
 \frac{d^2 R_l}{dr^2} + \frac{2}{r} \frac{dR_l}{dr} - \frac{l(l+1)}{r^2} R_l + 
 \begin{cases}
@@ -4453,13 +4642,14 @@ q^2 R_l & \text{für } r < a \\
 \end{cases}
 = 0
 \]
-
 Für $r \to \infty$ ergibt sich $R_l(r) \sim e^{-\kappa r}$.
+\end{CONC}
 
 ---
 
 \textbf{Lösungen innerhalb und außerhalb des Potentials [Definition]}
 
+\begin{DEF}{QM-G25-24-03}{Lösungen innerhalb und außerhalb des Potentials}
 \begin{enumerate}
   \item Für $r < a$: nur reguläre Lösung möglich $\Rightarrow R_l(r) = A j_l(qr)$
   \item Für $r > a$: exponentiell abfallende Lösung $\Rightarrow R_l(r) = B h_l^{(1)}(i \kappa r)$
@@ -4471,131 +4661,124 @@ Mit:
 h_l^{(1)}(\rho) = j_l(\rho) + i n_l(\rho), \quad
 h_l^{(1)}(i \kappa r) \sim \frac{1}{i \kappa r} e^{-\kappa r}
 \]
+\end{DEF}
 
 ---
 
 \textbf{Randbedingungen und Energieniveaus [Proposition]}
 
+\begin{PROP}{QM-G25-24-04}{Randbedingungen und Energieniveaus}
 Aus Stetigkeit der Wellenfunktion und ihrer Ableitung folgt:
-
 \[
 \begin{aligned}
 A j_l(qa) &= B h_l^{(1)}(i \kappa a) \\
 A j_l'(qa) &= B \frac{d}{dr} h_l^{(1)}(i \kappa r)\big|_{r=a}
 \end{aligned}
 \]
-
 Daraus ergibt sich:
-
 \[
 \frac{j_l'(qa)}{j_l(qa)} = \frac{d}{dr} \log h_l^{(1)}(i \kappa r) \Big|_{r=a}
 \]
-
 Dies ist eine transzendente Gleichung zur Bestimmung der erlaubten Energien.
+\end{PROP}
 
 ---
 
 \textbf{Tiefe Potentialtöpfe und asymptotische Näherung [Remark]}
 
+\begin{REM}{QM-G25-24-05}{Tiefe Potentialtöpfe und asymptotische Näherung}
 Für tiefe Potentialtöpfe ($qa \gg 1$) kann man $j_l$ durch seine asymptotische Form approximieren:
-
 \[
 j_l(rq) \sim \frac{1}{rq} \sin(rq - \frac{l\pi}{2})
 \]
-
 Daraus folgt für die Bedingung:
-
 \[
 qa \approx \left( m + \frac{1}{2} \right) \pi + \frac{l\pi}{2}, \quad m \in \mathbb{N}
 \]
-
 Daraus lässt sich für kleine $|E|$ das Spektrum der gebundenen Zustände abschätzen.
+\end{REM}
 
 
 \textbf{Streuzustände im 3D-Potentialtopf [Concept]}
 
+\begin{CONC}{QM-G25-24-06}{Streuzustände im 3D-Potentialtopf}
 Für $E > 0$ ergibt sich im äußeren Bereich $r > a$:
-
 \[
 R_l(r) = B j_l(kr) + C n_l(kr)
 \]
+Im Inneren ($r < a$) gilt weiterhin $R_l(r) = A j_l(qr)$.
 
-Im Inneren ($r < a$) gilt weiterhin $R_l(r) = A j_l(qr)$.\\
 Aus der Stetigkeit der Funktion und ihrer Ableitung bei $r = a$ ergibt sich:
-
 \[
 \frac{\left. \frac{d}{dr} j_l(qr) \right|_{r=a}}{j_l(qa)} =
 \frac{\left. \frac{d}{dr} (B j_l(kr) + C n_l(kr)) \right|_{r=a}}{B j_l(ka) + C n_l(ka)}
 \]
-
 Dies bestimmt das Verhältnis $C/B$.
+\end{CONC}
 
 ---
 
 \textbf{Asymptotisches Verhalten und Streuphasen [Definition]}
 
+\begin{DEF}{QM-G25-24-07}{Asymptotisches Verhalten und Streuphasen}
 Für $r \rightarrow \infty$ ergibt sich:
-
 \[
 R_l(r) \sim \frac{1}{kr} \left[
 B \sin(kr - \tfrac{l\pi}{2}) - C \cos(kr - \tfrac{l\pi}{2})
 \right]
 \]
-
 Vergleich mit:
 \[
 R_l(r) \sim \frac{e^{i\delta_l}}{kr} \sin(kr - \tfrac{l\pi}{2} + \delta_l)
 \]
-
 liefert:
-
 \[
 B = e^{i\delta_l} \cos(\delta_l), \quad
 C = -e^{i\delta_l} \sin(\delta_l), \quad
 \tan \delta_l(k) = -\frac{C}{B}
 \]
+\end{DEF}
 
 ---
 
 \textbf{Ausdruck für Streuphasen $\delta_l(k)$ [Proposition]}
 
+\begin{PROP}{QM-G25-24-08}{Ausdruck für Streuphasen $\delta_l(k)$}
 Aus der Eliminierung von $C/B$ folgt:
-
 \[
 \tan \delta_l(k) =
 \frac{ \left. \frac{d}{dr} j_l(kr) \cdot j_l(qa) - \frac{d}{dr} j_l(qr) \cdot j_l(ka) \right|_{r=a} }
      { \left. \frac{d}{dr} n_l(kr) \cdot j_l(qa) - \frac{d}{dr} j_l(qr) \cdot n_l(ka) \right|_{r=a} }
 \]
+\end{PROP}
 
 ---
 
 \textbf{Niederenergie-Streuung ($ka \ll l$) [Concept]}
 
+\begin{CONC}{QM-G25-24-09}{Niederenergie-Streuung ($ka \ll l$)}
 Für kleine $k$ verwenden wir:
 \[
 j_l(\rho) \approx \frac{\rho^l}{(2l+1)!!}, \quad
 n_l(\rho) \approx -\frac{(2l-1)!!}{\rho^{l+1}}, \quad \text{für } \rho \to 0
 \]
-
 Daraus ergibt sich:
-
 \[
 \tan \delta_l(k) \approx \frac{2l+1}{[(2l+1)!!]^2} (ka)^{2l+1} \cdot
 \frac{l j_l(qa) - a \left. \frac{d}{dr} j_l(qr) \right|_{r=a}}{(l+1) j_l(qa) + a \left. \frac{d}{dr} j_l(qr) \right|_{r=a}}
 \]
+\end{CONC}
 
 ---
 
 \textbf{Schwellenverhalten des Wirkungsquerschnitts [Proposition]}
 
+\begin{PROP}{QM-G25-24-10}{Schwellenverhalten des Wirkungsquerschnitts}
 Für $k \to 0$ gilt allgemein:
-
 \[
 \tan \delta_l(k) \approx c_l \cdot k^{2l+1}
 \]
-
 Damit folgt für die partielle Streuwirkung:
-
 \[
 \sigma_l(k) = \frac{4\pi(2l+1)}{k^2} \sin^2 \delta_l(k) \approx
 \begin{cases}
@@ -4603,107 +4786,97 @@ Damit folgt für die partielle Streuwirkung:
 0 & \text{für } l > 0
 \end{cases}
 \]
+\end{PROP}
 
 ---
 
 \textbf{Unitärer Limes [Definition]}
 
+\begin{DEF}{QM-G25-24-11}{Unitärer Limes}
 Für bestimmte Energien $E_R = \hbar^2 k_R^2 / (2\mu)$ gilt:
-
 \[
 \tan \delta_l(k_R) = \pm \infty, \quad \delta_l(k_R) = \left( m + \tfrac{1}{2} \right) \pi
 \]
-
 Dies entspricht dem maximal möglichen Streuwirkungsquerschnitt:
-
 \[
 \sigma_l(k_R) = \frac{4\pi(2l+1)}{k_R^2}
 \]
+\end{DEF}
 
 ---
 
 \textbf{Resonanzstreuung als angeregter Zustand [Concept]}
 
+\begin{CONC}{QM-G25-24-12}{Resonanzstreuung als angeregter Zustand}
 In der Niederenergie- und tiefen Topf-Näherung ($qa \gg 1 \gg ka$) ergibt sich bei Resonanzenergie $E_R$ die Bedingung:
-
 \[
 (l+1) j_l(q_R a) + a \left. \frac{d}{dr} j_l(q_R r) \right|_{r=a} = 0
 \]
-
 Mit asymptotischer Näherung für große $\rho$:
 \[
 j_l(\rho) \sim \frac{\sin(\rho - \tfrac{l\pi}{2})}{\rho}
 \Rightarrow \cos(q_R a - \tfrac{l\pi}{2}) \approx 0
 \]
-
 Dies ergibt:
-
 \[
 q_R a = m\pi + \tfrac{(l+1)\pi}{2}, \quad m \in \mathbb{Z}
 \]
-
 Diese Bedingung entspricht formal denen der gebundenen Zustände – jedoch ist hier $E_R > 0$.
+\end{CONC}
 
 ---
 
 \textbf{Instabile Bindungszustände und Resonanzillustration [Remark]}
 
+\begin{REM}{QM-G25-24-13}{Instabile Bindungszustände und Resonanzillustration}
 Resonanzniveaus $E_R > 0$ lassen sich als instabile Bindungszustände interpretieren:
-
 \begin{center}
 \includegraphics[scale=0.2]{2025_05_21_d5590f158a899e385c7cg-21}
 \end{center}
+\end{REM}
 
 ---
 
 \textbf{Breit-Wigner-Formel für Resonanzprofil [Definition]}
 
+\begin{DEF}{QM-G25-24-14}{Breit-Wigner-Formel für Resonanzprofil}
 Nähern wir $\tan \delta_l$ bei $E \approx E_R$ durch:
-
 \[
 \tan \delta_l \approx \gamma_l \frac{(ka)^{2l+1}}{E - E_R}
 \]
-
 Dann gilt:
-
 \[
 \sigma_l(E) = \frac{4\pi(2l+1)}{k^2} \cdot \frac{(\gamma_l(ka)^{2l+1})^2}{(E - E_R)^2 + (\gamma_l(ka)^{2l+1})^2}
 \]
-
 Dies ist die \textbf{Breit-Wigner-Formel} für den Wirkungsquerschnitt in Resonanznähe.
+\end{DEF}
 
 ---
 
 \textbf{Resonanzbreite und komplexe Amplitude [Definition]}
 
+\begin{DEF}{QM-G25-24-15}{Resonanzbreite und komplexe Amplitude}
 Die Partialwellenamplitude:
-
 \[
 f_l(k) = \frac{1}{2ik} (e^{2i\delta_l} - 1) =
 \frac{1}{k} \cdot \frac{\tan \delta_l}{1 - i \tan \delta_l}
 \]
-
 Setzt man $\tan \delta_l$ aus der Breit-Wigner-Näherung ein, erhält man:
-
 \[
 f_l(k) = \frac{1}{k} \cdot \frac{\gamma_l (ka)^{2l+1}}{E - E_R - i \gamma_l (ka)^{2l+1}}
 \]
-
 Die Resonanzbreite ist definiert durch:
-
 \[
 \Gamma_l = 2 \gamma_l (ka)^{2l+1}
 \]
-
 Dann ist:
-
 \[
 \sigma_l(E_R \pm \tfrac{1}{2} \Gamma_l) = \tfrac{1}{2} \sigma_l(E_R)
 \]
-
 \begin{center}
 \includegraphics[scale=0.2]{2025_05_21_d5590f158a899e385c7cg-22}
 \end{center}
+\end{DEF}
 
 
 
