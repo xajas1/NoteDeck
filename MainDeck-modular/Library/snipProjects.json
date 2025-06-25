@@ -294,5 +294,20 @@
     "tableMeta": {
       "selectedSource": "HA_Rotman79/HA_Rotman79.tex"
     }
+  },
+  "CM_K25": {
+    "sourceFile": "CM_Kopietz25/CM_Kopietz25.tex",
+    "snipMeta": {
+      "Subject": "CM",
+      "Topic": "d'Alembert Prinzip",
+      "LitID": "K25c",
+      "CTyp": "CONC",
+      "ParentTopic": "Lagrange'sche Mechanik",
+      "Content": "Herleitung der Lagrange-Gleichungen 2. Art aus der d’Alembert-Gleichung",
+      "selectedProject": "CM_Kopietz25/CM_Kopietz25.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "CM_Kopietz25/CM_Kopietz25.tex"
+    }
   }
 }

@@ -104,6 +104,69 @@
         "litIDs": {
           "T12": "CM-T12-06"
         }
+      },
+      "Reduktion auf effektives 1 Körper Problem": {
+        "index": 7,
+        "parent": "Ungebundene Bewegung in 2 Körper Problem",
+        "litIDs": {
+          "K25c": "CM-K25c-7"
+        }
+      },
+      "Zwangsbedingungen und das d'Alembert-Prinzip": {
+        "index": 8,
+        "parent": "Lagrange'sche Mechanik",
+        "litIDs": {
+          "K25c": "CM-K25c-8"
+        }
+      },
+      "d'Alembert Prinzip": {
+        "index": 9,
+        "parent": "Lagrange'sche Mechanik",
+        "litIDs": {
+          "K25c": "CM-K25c-9"
+        }
+      },
+      "Lagrangegleichungen 2. Art": {
+        "index": 10,
+        "parent": "Lagrange'sche Mechanik",
+        "litIDs": {
+          "K25c": "CM-K25c-10"
+        }
+      },
+      "Lagrangegleichungen 1. Art": {
+        "index": 11,
+        "parent": "Lagrange'sche Mechanik",
+        "litIDs": {
+          "K25c": "CM-K25c-11"
+        }
+      },
+      "Hamilton Prinzip": {
+        "index": 12,
+        "parent": "Lagrange'sche Mechanik",
+        "litIDs": {
+          "K25c": "CM-K25c-12"
+        }
+      },
+      "Kinematik des starren Körpers": {
+        "index": 13,
+        "parent": "Anwendungen der Lagrangeschen Mechanik",
+        "litIDs": {
+          "K25c": "CM-K25c-13"
+        }
+      },
+      "Dynamik des Starren Körpers": {
+        "index": 14,
+        "parent": "Anwendungen der Lagrangeschen Mechanik",
+        "litIDs": {
+          "K25c": "CM-K25c-14"
+        }
+      },
+      "Schwingungen": {
+        "index": 15,
+        "parent": "Anwendungen der Lagrangeschen Mechanik",
+        "litIDs": {
+          "K25c": "CM-K25c-15"
+        }
       }
     }
   },
