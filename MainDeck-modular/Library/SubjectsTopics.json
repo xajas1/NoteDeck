@@ -369,6 +369,13 @@
         "litIDs": {
           "R25": "QMS-R25-9"
         }
+      },
+      "Permutationsgruppe": {
+        "index": 10,
+        "parent": "Young Tableaux",
+        "litIDs": {
+          "R25": "QMS-R25-10"
+        }
       }
     }
   },
@@ -974,6 +981,34 @@
         "parent": "Rotationsinvariante Potentiale",
         "litIDs": {
           "G25": "QM-G25-24"
+        }
+      },
+      "Spin der Elektronen": {
+        "index": 25,
+        "parent": null,
+        "litIDs": {
+          "G25": "QM-G25-25"
+        }
+      },
+      "Struktur der Quantenmechanik": {
+        "index": 26,
+        "parent": null,
+        "litIDs": {
+          "G25": "QM-G25-26"
+        }
+      },
+      "Ohne Entartung der ungestörten Energie-Niveaus": {
+        "index": 27,
+        "parent": "Zeitunabhängige Störungstheorie",
+        "litIDs": {
+          "G25": "QM-G25-27"
+        }
+      },
+      "Entartete Störungstheorie": {
+        "index": 28,
+        "parent": "Zeitunabhängige Störungstheorie",
+        "litIDs": {
+          "G25": "QM-G25-28"
         }
       }
     }

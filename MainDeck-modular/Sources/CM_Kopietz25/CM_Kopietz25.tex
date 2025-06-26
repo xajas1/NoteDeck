@@ -192,6 +192,8 @@
 % --- 18. Extras ---
 \usepackage{stmaryrd}
 \usepackage{bbold}  % falls du athbb{1} nutzen willst
+\usepackage{booktabs}   % \toprule, \midrule, \bottomrule
+\usepackage{makecell} 
 
 % --- 00. Titel und Autor ---
 \title{Mein Titel}
@@ -7882,6 +7884,46 @@ wobei wir wieder $\omega_0^2>\delta^2$ angenommen haben. Dazu muss man noch die 
 
 \subsubsection{Kleine Schwingungen mit mehreren Freiheitsgraden - Allgemeiner Formalismus}
 
+
+
+
+\begin{CONC}{CM-K25c-15-06}{Kleine Schwingungen mit mehreren Freiheitsgraden – allgemeiner Formalismus}
+Konservatives $N$-Teilchen-System mit $k$ holonomen, skleronomen Zwangs­bedingungen.  
+Es verbleiben genau $n=N-k$ unabhängige generalisierte Koordinaten
+\[
+  q=\{q_1,\dots,q_n\},\qquad 
+  \dot q=\{\dot q_1,\dots,\dot q_n\}.
+\]
+
+\textbf{Lagrange-Funktion}  
+\[
+  L(q,\dot q)=T(q,\dot q)-V(q).
+\]
+
+\textbf{Kinetische Energie}  (vgl.\ Skript S.~60)  
+\[
+  T(q,\dot q)=\frac12\sum_{i,j=1}^{n} M_{ij}(q)\,\dot q_i\,\dot q_j,
+  \qquad
+  M_{ij}(q)=\sum_{k=1}^{N}
+            m_k\,
+            \frac{\partial\vec r_k}{\partial q_i}\!\cdot\!
+            \frac{\partial\vec r_k}{\partial q_j}.
+\]
+
+\textbf{Euler–Lagrange‐Gleichungen}  
+\[
+  \frac{\mathrm d}{\mathrm dt}\Bigl(\tfrac{\partial L}{\partial\dot q_i}\Bigr)
+  \;-\;
+  \frac{\partial L}{\partial q_i}
+  \;=\;0,
+  \qquad
+  i=1,\dots,n.
+\]
+\end{CONC}
+
+
+
+
 \noindent\textbf{Ausgangspunkt:} Konservatives N-Teilchensystem, k holonome, skleronom B., unabhängig genau Koordinaten $q_1,\ldots,q_n$=Dof.
 
 Lagrange Funktion $L(q,\dot{q})=T(q,\dot{q})-V(q)$, $q=\{q_1\ldots q_n\}$, $\dot{q}=\{\dot{q}_1,\ldots,\dot{q}_n\}$
@@ -7890,6 +7932,326 @@ Kinetische Energie (siehe S. 60, $q_{ij}\Rightarrow \frac{M_{ij}}{2}$)
 \[T(q,\dot{q})=\frac{1}{2}\sum_{i,j=1}^n M_{ij}(q)\dot{q}_i\dot{q}_j, \quad M_{ij}(q)=\sum_{k=1}^N m_k\frac{\partial\vec{r}_k}{\partial q_i}\cdot\frac{\partial\vec{r}_k}{\partial q_j}\]
 
 Bewegungsgleichungen: \[\frac{d}{dt}\frac{\partial L}{\partial\dot{q}_i}-\frac{\partial L}{\partial q_i}=0, \quad i=1,\ldots,n.\]
+
+
+
+%====================================================================
+\subsubsection{Kleine Schwingungen mit mehreren Freiheitsgraden –
+                 ausführlicher Ablauf}
+
+\begin{CONC}{CM-K25c-15-07}{Bestimmung von Frequenzen und Schwingungsformen der kleinen, linearen Eigen­schwingungen um eine Gleichgewichtslage}
+Ziel: \emph{Bestimme Frequenzen und Schwingungsformen der
+kleinen, linearen Eigen­schwingungen um
+eine Gleichgewichtslage.}
+Wir gliedern den Weg dahin in vier logisch saubere Schritte:
+\begin{enumerate}[label=\textbf{\arabic*.},wide=0pt,leftmargin=*]
+%-----------------------------------------------------------------
+\item \textbf{Gleichgewicht finden}
+
+Ein stationärer Punkt
+\(q^{(0)}=(q^{(0)}_1,\dots,q^{(0)}_n)\) erfüllt
+\[
+  \bigl.\partial_{q_i}V\bigr|_{q^{(0)}} = 0,
+  \qquad i=1,\dots,n ,
+\]
+wobei im Ruhezustand
+\(T(q^{(0)},\dot q=0)=0\).
+%-----------------------------------------------------------------
+\item \textbf{Lagrange‐Funktion um $q^{(0)}$ quadratisch entwickeln}
+
+Schreibe kleine Abweichungen
+\(
+  \eta_i(t) = q_i(t)-q_i^{(0)},\; |\eta_i|\ll 1 .
+\)
+Bis zur zweiten Ordnung gilt
+\begin{align*}
+  T &\simeq \tfrac12
+        \sum_{i,j}M_{ij}^{(0)}\,\dot\eta_i\dot\eta_j, &
+  M_{ij}^{(0)}&:=M_{ij}\bigl(q^{(0)}\bigr), \\[2pt]
+  V &\simeq V^{(0)}+
+        \tfrac12\sum_{i,j}K_{ij}\,\eta_i\eta_j, &
+  K_{ij}&:=\bigl.\partial_{q_i}\partial_{q_j}V\bigr|_{q^{(0)}} .
+\end{align*}
+Damit
+\[
+  L^{(2)}(\eta,\dot\eta)=
+  \tfrac12\!\bigl(\dot{\boldsymbol\eta}^{\mathrm T}
+                 M\,\dot{\boldsymbol\eta}-
+                 \boldsymbol\eta^{\mathrm T}
+                 K\,\boldsymbol\eta\bigr).
+\]
+
+%-----------------------------------------------------------------
+\item \textbf{Linearisierte Bewegungsgleichungen}
+
+Die Euler–Lagrange‐Gleichungen werden linear
+\[
+  M\,\ddot{\boldsymbol\eta}+K\,\boldsymbol\eta=0.
+\]
+Dies ist ein System $n$ gekoppelter, linearer DGLn 2.~Ordnung.
+
+%-----------------------------------------------------------------
+\item \textbf{Diagonalisation \& Normalkoordinaten}
+
+\emph{(a) Wegtransformieren der Massenmatrix:}\\
+Da $M$ symmetrisch (\(M=M^{\mathrm T}\)) und positiv definit ist,
+existiert eine orthogonale Matrix $R_M$ mit
+\(R_M M R_M^{\mathrm T}=D_M=\mathrm{diag}(m_1,\dots,m_n)\).
+Setze
+\[
+  q' := D_M^{-1/2} R_M\,\boldsymbol\eta
+  \quad\Longrightarrow\quad
+  T=\tfrac12\,\dot{q}'^{\mathrm T}\dot{q}' .
+\]
+
+\emph{(b) Diagonalisieren der (transformierten) Kraftmatrix:}\\
+\(K_M:=D_M^{-1/2} R_M K R_M^{\mathrm T}D_M^{-1/2}\)
+ist wieder symmetrisch.
+Orthogonales $R_K$ mit
+\(R_K K_M R_K^{\mathrm T}=D_K=\mathrm{diag}(\lambda_1,\dots,\lambda_n)\).
+
+\emph{(c) Normalkoordinaten}\\
+\[
+  Q := R_K q'
+  =R_K D_M^{-1/2}R_M\,\boldsymbol\eta ,
+\]
+\[
+  L^{(2)}(Q,\dot Q)=
+    \tfrac12\sum_{i=1}^{n}
+      \bigl(\dot Q_i^{\,2}-\lambda_i Q_i^{2}\bigr).
+\]
+Die Bewegung entkoppelt in $n$ unabhängige
+harmonische Oszillatoren
+\[
+  \boxed{\;\ddot Q_i + \lambda_i Q_i = 0,\qquad
+          \omega_i=\sqrt{\lambda_i}\;}
+  \quad (i=1,\dots,n).
+\]
+Die lineare Transformation
+\(
+  N^{-1}=R_K D_M^{-1/2}R_M
+\)
+fasst alle Schritte zusammen:
+\(
+  \boldsymbol\eta = N Q.
+\)
+\end{enumerate}
+\end{CONC}
+
+%-----------------------------------------------------------------
+\subsubsection*{Motivation und Zusammenfassung}
+
+\begin{REM}{CM-K25c-15-08}{Motivation und Zusammenfassung zu Kleine Schwingungen mit mehreren Freiheitsgraden}
+\begin{itemize}[leftmargin=*]
+\item \emph{Warum linearisieren?}\;—
+      In vielen Anwendungen (Molekülschwingungen, Gitterschwingungen,
+      Mechanik starrer Körper) interessiert primär das Verhalten nahe
+      einer stabilen Lage. Dort genügt die quadratische Näherung, weil
+      alle höheren Taylor-Terme in \(\eta\) kleiner sind.
+\item \emph{Was leisten $M$ und $K$?}\;—
+      $M$ kodiert die Massenverteilung,
+      $K$ die gekoppelten effektiven “Feder­konstanten”.
+      Deren gemeinsames Eigenwert­problem bestimmt Frequenzen und
+      Formen der Normalmoden.
+\item \emph{Ergebnis:}\;
+      Jedes konservative System besitzt in der Umgebung eines stabilen
+      Gleichgewichts $n$ \textbf{entkoppelte lineare Schwingungen}
+      \[
+        Q_i(t)=A_i\cos(\omega_i t)+B_i\sin(\omega_i t),
+        \qquad
+        \omega_i=\sqrt{\lambda_i}>0.
+      \]
+      Stabilität erkennt man sofort:
+      Alle Eigenwerte der Kraftmatrix müssen positiv sein
+      (\(\lambda_i>0\)); andernfalls wächst mindestens eine Mode
+      exponentiell – das Gleichgewicht wäre instabil.
+\end{itemize}
+\end{REM}
+
+
+
+%====================================================================
+%   Kleine Schwingungen – Konstruktion der Normalkoordinaten
+%====================================================================
+
+\begin{MOT}{CM-K25c-15-09}{Konstruktion der Normalkoordinaten und Massematrix}
+Die linearisierte Bewegung
+\(M\ddot{\delta q}+K\,\delta q=0\)
+koppelt im Allgemeinen alle $\delta q_i$.
+Ziel ist eine \emph{lineare} Koordinaten­transformation
+\(\delta q=N\,Q\),
+die diese Kopplung entfernt.  Die Spalten
+\(N_j\) liefern die Schwingungsrichtungen,
+die Eigenwerte \(\lambda_j\) ihre Frequenzen
+\(\omega_j=\sqrt{\lambda_j}\).
+Wir konstruieren $N$ in zwei klaren Schritten.
+\end{MOT}
+
+%--------------------------------------------------------------------
+\begin{CONC}{CM-K25c-15-10}{Konstruktion der Massematrix}
+\textbf{1. Wegtransformieren der Massenmatrix}
+
+\begin{enumerate}[label=\textbf{\arabic*.},wide,labelindent=0pt,leftmargin=*]
+\item
+Da $M=M^{\mathrm T}$ positiv definit ist, existiert eine
+orthogonale Matrix
+\(R_M\;(R_M^{-1}=R_M^{\mathrm T})\) mit
+\[
+   R_M M R_M^{\mathrm T}=D_M=\mathrm{diag}(m_1,\dots,m_n),
+   \qquad m_i>0 .
+\]
+
+\item
+Skaliere auf dimension\-slose Koordinaten
+\[
+   q':=D_M^{-1/2}R_M\,\delta q,
+   \qquad
+   \delta q = R_M^{\mathrm T} D_M^{1/2} q'.
+\]
+
+\item
+Kinetische Energie wird »kanonisch«:
+\[
+   T=\tfrac12\delta q^{\mathrm T}M\delta q
+     =\tfrac12 q'^{\mathrm T}q'.
+\]
+
+\item
+Eingesetzt in
+\(L^{(2)}=\tfrac12(\dot{\delta q}^{\mathrm T}M\dot{\delta q}-
+                    \delta q^{\mathrm T}K\delta q)\)
+ergibt
+\[
+   L^{(2)}(q',\dot q')
+   =\tfrac12\bigl(\dot q'^{\mathrm T}\dot q'
+             -q'^{\mathrm T}K_M q'\bigr),
+   \quad
+   K_M:=D_M^{-1/2}R_M K R_M^{\mathrm T} D_M^{-1/2}.
+\]
+$K_M$ ist ebenfalls symmetrisch.
+\end{enumerate}
+
+%--------------------------------------------------------------------
+\textbf{2. Diagonalisieren der transformierten Kraftmatrix}
+
+\begin{enumerate}[label=\textbf{\arabic*.},wide,labelindent=0pt,leftmargin=*]
+\item
+Symmetrie von $K_M$ garantiert eine orthogonale Matrix
+\(R_K\) mit
+\[
+   R_K K_M R_K^{\mathrm T}
+   \;=\;
+   D_K=\mathrm{diag}(\lambda_1,\dots,\lambda_n),
+   \qquad \lambda_i\in\mathbb R .
+\]
+
+\item
+Definiere die \emph{Normalkoordinaten}
+\[
+   Q := R_K\,q'
+        = R_K D_M^{-1/2} R_M\,\delta q
+        = N^{-1}\,\delta q,
+   \quad
+   \boxed{N^{-1}=R_K D_M^{-1/2}R_M}.
+\]
+(\(N\) selbst ist im Allgemeinen \emph{nicht}
+orthogonal.)
+
+\item
+Rückwärts‐Einsetzen liefert
+\[
+   L^{(2)}(Q,\dot Q)=
+   \tfrac12\sum_{i=1}^{n}
+           \bigl(\dot Q_i^{\,2}-\lambda_i Q_i^{\,2}\bigr),
+\]
+und somit entkoppelte Gleichungen
+\[
+   \boxed{\;\ddot Q_i+\lambda_i Q_i = 0\;} ,
+   \qquad
+   \omega_i=\sqrt{\lambda_i}\;.
+\]
+
+\item
+Die allgemeine Lösung jeder Normalmode lautet
+\[
+   \boxed{Q_i(t)=A_i\cos\omega_i t
+             +B_i\sin\omega_i t}.
+\]
+\end{enumerate}
+\end{CONC}
+
+%--------------------------------------------------------------------
+\textbf{3. Physikalische Einordnung der Eigenwerte \(\lambda_i\)}
+
+
+\begin{CONC}{CM-K25c-15-11}{Physikalische Einordnung der Eigenwerte $\lambda_i$ der Massematrix}
+\centering
+  \begin{tabular}{ccl}
+    \toprule
+    $\lambda_i$ & $\omega_i$ & Interpretation \\
+    \midrule
+    $>0$ & reell & \textit{stabile} harmonische Schwingung \\
+    $=0$ & $0$   & \textit{indifferent}: freie Translation \\
+    $<0$ & rein imaginär &
+      \makecell[l]{\textit{instabil}: exponentielles\\
+                   Anwachsen $\sim e^{|\omega_i|t}$} \\
+    \bottomrule
+  \end{tabular}
+\end{CONC}
+
+
+
+
+%--------------------------------------------------------------------
+\subsection*{4. Direkter Zugang via verallgemeinertes Eigenwertproblem}
+
+\begin{CONC}{CM-K25c-15-12}{Massematrix via Eigenwertproblem}
+Aus den Zeilen
+\(N^{\mathrm T}KN=D_K\) und
+\(N^{\mathrm T}MN=\mathbb{1}\)
+folgt für jede Spalte \(N_j\):
+\[
+   \boxed{\;KN_j=\lambda_j\,MN_j\;}
+   \quad\Longleftrightarrow\quad
+   \det(K-\lambda M)=0 .
+\]
+Damit lassen sich Frequenzen (\(\lambda_j\)) und
+Schwingungsrichtungen (\(N_j\)) \emph{ohne} explizites Auffinden von
+\(R_M,R_K\) bestimmen – ein gewöhnliches
+verallgemeinertes Eigenwertproblem.
+\end{CONC}
+
+%--------------------------------------------------------------------
+\subsection*{Motivation \& Zusammenfassung}
+
+\begin{CONC}{CM-K25c-15-13}{Zusammenfassung zur Massematrix}
+\begin{itemize}[leftmargin=*]
+\item Ziel der Transformation ist es,
+      das gekoppelte Gleichungs­system
+      \(M\ddot{\delta q}+K\delta q=0\)
+      in \(n\) \emph{unabhängige} Oszillatoren zu zerlegen.
+\item Schritt 1 »schafft« gleiche effektive Massen
+      (\(T=\tfrac12\dot q'^{\!2}\));
+      Schritt 2 bringt die gekoppelten Federn ebenfalls
+      auf Diagonalform.
+\item Die Spalten \(N_j\) sind die
+      \emph{Hauptschwingungsrichtungen} (Normalmoden);
+      die Eigenwerte \(\lambda_j\) bestimmen,
+      ob die jeweilige Richtung stabil, indifferent
+      oder instabil ist.
+\item Das gesamte Verfahren kondensiert in
+      das verallgemeinerte Eigenwertproblem
+      \(K N_j=\lambda_j M N_j\),
+      welches numerisch direkt lösbar ist.
+\end{itemize}
+\end{CONC}
+
+
+
+
+
+
+
 
 \noindent\textbf{Gleichgewichtspunkte:} Stationäre Lösungen der Bewegungsgleichungen mit Eigenschaft $\dot{q}^{(G)}=0$, i.e. $q^{(G)}=$ konst.
 \[\Rightarrow \left.\frac{\partial L}{\partial q_i}\right|_{q=q^{(G)}}=-\left.\frac{\partial V}{\partial q_i}\right|_{q=q^{(G)}}=0.\]
@@ -7952,6 +8314,8 @@ Wir definieren nun neue generalisierte Koordinaten,
 
 mit \[K_M=D_M^{-\frac{1}{2}}R_M K R_M^T D_M^{-\frac{1}{2}}=K_M^T\]
 
+
+
 2. Schritt: Diagonalisierung der transformierten Kraftmatrix $K_M$:
 
 Da $K_M$ symmetrisch ist, existiert eine weitere orthogonale Matrix $R_K$ die $K_M$ diagonalisiert:
@@ -7974,6 +8338,9 @@ Man beachte dass $N$ i.A. nicht orthogonal ist, d.h. $N^{-1}\neq N^T$ (Ausnahme:
 Da die Bewegungsgleichungen der Normalkoordinaten die von unabhängigen harmonischen Oszillatoren sind, können wir die allgemeine Lösung leicht aufschreiben:
 
 \[\boxed{Q_i(t)=A_i\cos\omega_i t + B_i\sin\omega_i t, \quad \omega_i=\sqrt{\lambda_i}}\]
+
+
+
 
 Dabei sind $A_i$ und $B_i$ frei wählbare Konstanten. Da $K_M$ symmetrisch ist, sind die $\lambda_i$ reell, aber nicht notwendigerweise positiv. 3 Fälle sind daher zu unterscheiden:
 
@@ -8028,6 +8395,135 @@ Eine nicht-triviale Lösung dieser homogenen linearen Gleichung existiert nur da
 Daraus lassen sich die $\lambda_j$ bestimmen. Für jedes $\lambda_j$ können wir dann aus (5) bis auf eine Normierungskonstante $c_j$ die zugehörige Hauptachse $N_j$ im Konfigurationsraum bestimmen. Die Normierungskonstante $c_j$ wird dann durch (4) festgelegt,
 
 \[N_j^T M N_j = 1, \quad j=1,...,n \tag{7}\]
+
+
+
+
+
+%---------------------------------------------------------------
+%  Stabilität kleiner Abweichungen (Kriterium von Dirichlet)
+%---------------------------------------------------------------
+
+\subsubsection*{Motivation}
+
+
+\begin{CONC}{CM-K25c-15-14}{Stabilität kleiner Abweichungen (Kriterium von Dirichlet)}
+Hat ein System einen Gleichgewichtspunkt $q^{(0)}$, stellt sich sofort
+die Frage, wie es sich verhält, wenn wir es \emph{minimal} davon
+abstoßen.  Bleibt die Bahn in der Nähe – also treten kleine Schwingungen
+auf – oder driftet das System dauerhaft weg?
+Das Dirichlet-Kriterium beantwortet genau diese Frage auf Basis der
+Eigenwerte $\lambda_i$ (bzw.\ $\omega_i^2$) der linearisierten
+Gleichungen.
+
+%---------------------------------------------------------------
+\textbf{Gleichgewichtspunkt}
+Ein Punkt $q^{(0)}$ mit $\dot q^{(0)}=0$ ist Gleichgewicht, wenn  
+\[
+  \left.\frac{\partial V}{\partial q_i}\right|_{q^{(0)}} = 0
+  \quad (i=1,\dots,n).
+\]
+
+%---------------------------------------------------------------
+\textbf{Linearisiertes System}
+Setze $q=q^{(0)}+\delta q$ und halte nur Terme bis 2.\ Ordnung:
+\begin{align*}
+  T &\approx \tfrac12 \,\delta\dot q^{\mathrm T}M\,\delta\dot q, \\
+  V &\approx V(q^{(0)})
+        + \tfrac12 \,\delta q^{\mathrm T}K\,\delta q,
+        \qquad
+        K_{ij}= \Bigl.\frac{\partial^2V}{\partial q_i\partial q_j}
+                 \Bigr|_{q^{(0)}} .
+\end{align*}
+Die Bewegungsgleichungen werden
+\[
+  M\,\ddot{\delta q}+K\,\delta q = 0.
+\]
+
+%---------------------------------------------------------------
+\textbf{Normalkoordinaten}
+Mit $\delta q = N Q$ (vgl.\ vorherigen Abschnitt) erhält man
+entkoppelte Modi
+\(
+  \ddot Q_i + \lambda_i Q_i = 0
+  \;\;(\lambda_i = \omega_i^2).
+\)
+\end{CONC}
+
+%---------------------------------------------------------------
+\subsubsection*{Stabilität nach von Dirichlet}
+
+
+\begin{CONC}{CM-K25c-15-15}{Stabilität nach von Dirichlet}
+\begin{enumerate}
+\item
+  \textbf{Alle $\lambda_i>0$ (alle $\omega_i$ reell).}\\[2pt]
+  $\Rightarrow$ \emph{asymptotisch stabiles} Minimum von~$V$.  
+  Kleine Auslenkungen führen zu harmonischen Schwingungen um $q^{(0)}$.
+
+\item
+  \textbf{Mindestens ein $\lambda_k<0$ (reine Imaginär-Frequenz
+  $\omega_k=i\gamma_k$).}\\[2pt]
+  $\Rightarrow$ \emph{instabil}.  
+  Für eine Auslenkung allein in Richtung $N_k$ gilt
+  \[
+     \delta q(t) = N_k\Bigl(A_k\cosh\gamma_k t
+               + B_k\,\tfrac{\sinh\gamma_k t}{\gamma_k}\Bigr)
+       \;\longrightarrow\;
+       \propto e^{\gamma_k t}.
+  \]
+  Der Abstand wächst exponentiell.
+
+\item
+  \textbf{Alle $\lambda_i\ge 0$, aber mindestens ein $\lambda_k=0$.}\\[2pt]
+  Linearisierung entscheidet nicht.  
+  Die Stabilität hängt von den
+  \emph{höheren} Terme im Potential ab.
+
+  \begin{description}[leftmargin=1.8em,labelsep=0.3em]
+  \item[instabil:]
+    $V(x)=\frac{g}{3}x^{3}$, $V''(0)=0$  
+    (Sattelpunkt, System „kippt“).
+    \[
+      \begin{tikzpicture}[baseline=(current bounding box.center),scale=0.7]
+        \draw[->] (-0.8,0)--(1.8,0) node[right]{$x$};
+        \draw[->] (0,-0.5)--(0,1.8) node[above]{$V$};
+        \draw[domain=-0.5:1.4,samples=70,smooth]
+              plot(\x,{0.45*\x*\x*\x});
+      \end{tikzpicture}
+    \]
+  \item[stabil:]
+    $V(x)=\frac{g}{4}x^{4}$,$V''(0)=0$  
+    (flaches Minimum, dennoch rücktreibend).
+    \[
+      \begin{tikzpicture}[baseline=(current bounding box.center),scale=0.7]
+        \draw[->] (-1.2,0)--(1.2,0) node[right]{$x$};
+        \draw[->] (0,-0.5)--(0,1.8) node[above]{$V$};
+        \draw[domain=-1:1,samples=80,smooth]
+              plot(\x,{0.5*\x*\x*\x*\x});
+      \end{tikzpicture}
+    \]
+  \end{description}
+\end{enumerate}
+\end{CONC}
+
+%---------------------------------------------------------------
+\subsubsection*{Kurzfassung}
+
+\begin{CONC}{CM-K25c-15-16}{Kurzfassung Stabilität nach von Dirichlet}
+\begin{itemize}[leftmargin=*]
+\item Dirichlet: Stabil, falls die \emph{quadratische} Energieabweichung
+      (K-Matrix) positiv definit ist $\;\Longleftrightarrow\;\lambda_i>0$.
+\item Negativer Eigenwert $\;\Longrightarrow\;$ exponentielle Flucht
+      (instabil).  
+\item Null-Eigenwert $\;\Longrightarrow\;$ lineare Näherung unentschieden –
+      höhere Potentialterme müssen betrachtet werden (z.\,B.\ $x^4$ vs.\ $x^3$).
+\end{itemize}
+\end{CONC}
+
+
+
+
 
 
 \textbf{Stabilität nach von Dirichlet}

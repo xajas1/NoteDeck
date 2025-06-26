@@ -48,6 +48,7 @@
 \usepackage{tikz}
 \usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
 \usepackage{tikz-cd}
+\usepackage{caption}
 
 % --- 6. Tabellen und Aufzählungen ---
 \usepackage{enumitem}
@@ -148,6 +149,7 @@
   \textbf{#1 #2} \textnormal{(#3)}.\enskip%
 }
 
+\usepackage{braket}
 
 \newenvironment{DEF}[2]{\begin{unitbox}\CustomHeading{Definition}{#1}{#2}}{\end{unitbox}}
 \newenvironment{PROP}[2]{\begin{unitbox}\CustomHeading{Proposition}{#1}{#2}}{\end{unitbox}}
@@ -5913,6 +5915,9 @@ Die Resonanzstreuung spielt eine zentral Rolle in der Atom-, Kern- und Elementar
 
 
 
+
+
+
 \pagebreak
 
 \section{Der Spin der Elektronen}
@@ -5922,12 +5927,15 @@ Die Resonanzstreuung spielt eine zentral Rolle in der Atom-, Kern- und Elementar
 
 \textbf{Spin als innerer Freiheitsgrad [Concept]}
 
+\begin{CONC}{QM-G25-25-01}{Spin als innerer Freiheitsgrad}
 Die Existenz des Spins bedeutet, dass Elektronen – zusätzlich zu Orts- und Impulskoordinate – einen weiteren Freiheitsgrad besitzen: Spin "oben" oder "unten", relativ zu einer gewählten Quantisierungsachse (z.B. \( x_3 \)-Achse), obwohl sie Punktteilchen sind.
+\end{CONC}
 
 ---
 
 \textbf{Definition des Spinors [Definition]}
 
+\begin{DEF}{QM-G25-25-02}{Spinors}
 Die gewöhnliche Wellenfunktion wird zu einem Spinor erweitert:
 
 \[
@@ -5935,73 +5943,68 @@ Die gewöhnliche Wellenfunktion wird zu einem Spinor erweitert:
 \]
 
 Dabei steht \( \psi_+ \) für Spin "oben", \( \psi_- \) für Spin "unten".
+\end{DEF}
 
 ---
 
 \textbf{Spinoperatoren durch Pauli-Matrizen [Definition]}
 
+\begin{DEF}{QM-G25-25-03}{Spinoperatoren durch Pauli-Matrizen}
 Die Spin-Operatoren sind gegeben durch:
-
 \[
 \vec{\mathbf{S}} = \frac{\hbar}{2} (\sigma_1, \sigma_2, \sigma_3)
 \]
-
 mit den Pauli-Matrizen:
-
 \[
 \sigma_1 = \begin{pmatrix}0 & 1 \\ 1 & 0\end{pmatrix},\quad
 \sigma_2 = \begin{pmatrix}0 & -i \\ i & 0\end{pmatrix},\quad
 \sigma_3 = \begin{pmatrix}1 & 0 \\ 0 & -1\end{pmatrix}
 \]
-
 Sie erfüllen:
-
 \[
 [\sigma_k, \sigma_l] = 2i \varepsilon_{klm} \sigma_m,\quad \sigma_j^2 = 1
 \]
+\end{DEF}
 
 ---
 
 \textbf{Eigenbasis für \(\mathbf{S}_3\) [Definition]}
 
+\begin{DEF}{QM-G25-25-04}{Eigenbasis für \(\mathbf{S}_3\)}
 Die Eigenzustände für Spin "oben" und "unten" lauten:
-
 \[
 \tilde{\psi}_+ = \begin{pmatrix}1 \\ 0\end{pmatrix},\quad
 \tilde{\psi}_- = \begin{pmatrix}0 \\ 1\end{pmatrix}
 \]
-
 mit:
-
 \[
 \mathbf{S}_3 \tilde{\psi}_+ = \frac{\hbar}{2} \tilde{\psi}_+,\quad
 \mathbf{S}_3 \tilde{\psi}_- = -\frac{\hbar}{2} \tilde{\psi}_-
 \]
+\end{DEF}
 
 ---
 
 \textbf{Allgemeine Spinoren und Normierung [Concept]}
 
+\begin{DEF}{QM-G25-25-05}{Allgemeine Spinoren und Normierung}
 Allgemeiner Spinor als Linearkombination:
-
 \[
 \tilde{\psi}(\vec{x}, t) = c_+(\vec{x}, t)\tilde{\psi}_+ + c_-(\vec{x}, t)\tilde{\psi}_- = \begin{pmatrix}c_+(\vec{x}, t)\\ c_-(\vec{x}, t)\end{pmatrix}
 \]
-
 Die Norm lautet:
-
 \[
 (\tilde{\psi}, \tilde{\psi}) = |c_+|^2 + |c_-|^2 = 1
 \]
-
 wobei \( |c_\pm|^2 \) die Wahrscheinlichkeit für Spin "oben"/"unten" angeben.
+\end{DEF}
 
 ---
 
 \textbf{Erwartungswerte der Spin-Komponenten [Proposition]}
 
+\begin{PROP}{QM-G25-25-06}{Erwartungswerte der Spin-Komponenten}
 Für konstanten Spinor (Ortsabhängigkeit ignoriert):
-
 \[
 \langle \mathbf{S}_1 \rangle = \frac{\hbar}{2}(c_+^*c_- + c_-^*c_+)
 \]
@@ -6011,25 +6014,26 @@ Für konstanten Spinor (Ortsabhängigkeit ignoriert):
 \[
 \langle \mathbf{S}_3 \rangle = \frac{\hbar}{2}(|c_+|^2 - |c_-|^2)
 \]
-
 Alle Erwartungswerte sind reell.
+\end{PROP}
 
 ---
 
 \textbf{Drehung von Spinoren [Concept]}
 
+\begin{DEF}{QM-G25-25-07}{Drehung von Spinoren}
 Analog zur Drehung von Wellenfunktionen \( \psi(R\vec{x}) = e^{-i\vec{\mathbf{L}}\cdot \vec{\varphi}/\hbar} \psi(\vec{x}) \) gilt für Spin:
-
 \[
 R \tilde{\psi} = e^{-i\vec{\mathbf{S}}\cdot \vec{\varphi}/\hbar} \tilde{\psi}
 \]
+\end{DEF}
 
 ---
 
 \textbf{Drehung um die z-Achse für Spin-\(\frac{1}{2}\) [Example]}
 
+\begin{EXA}{QM-G25-25-08}{Drehung um die z-Achse für Spin-\(\frac{1}{2}\)}
 Für eine Rotation um die z-Achse mit \( \vec{\varphi} = (0,0,\varphi) \) ergibt sich:
-
 \[
 e^{-i \mathbf{S}_3 \varphi / \hbar}
 = \cos (\varphi / 2)\mathbb{I}
@@ -6039,94 +6043,88 @@ e^{-i\varphi/2} & 0 \\
 0 & e^{i\varphi/2}
 \end{pmatrix}
 \]
-
 Die beiden Spin-Komponenten erhalten entgegengesetzte Phasen.
-
 \[
 \text{Eine Drehung um } 2\pi \text{ bewirkt: } \tilde{\psi} \mapsto -\tilde{\psi}
 \Rightarrow \text{erst bei } 4\pi \text{ ist } \tilde{\psi} \text{ wieder identisch.}
 \]
+\end{EXA}
 
 ---
 
 \textbf{Magnetisches Moment eines Elektrons mit Spin [Concept]}
 
+\begin{CONC}{QM-G25-25-09}{Magnetisches Moment eines Elektrons mit Spin}
 Ein Elektron mit Spin wirkt wie ein Ringstrom mit Drehimpuls \( \vec{S} \) und erzeugt ein magnetisches Moment:
-
 \[
 \vec{\mu} = -\frac{e_0 g}{2 m_e} \vec{S}, \quad \text{mit } g \approx 2
 \]
-
 Dabei ist \( g \) der gyromagnetische Faktor. Klassisch wäre \( g = 1 \).
+\end{CONC}
 
 ---
 
 \textbf{Hamiltonoperator für Spin im Magnetfeld [Definition]}
 
+\begin{DEF}{QM-G25-25-10}{Hamiltonoperator für Spin im Magnetfeld}
 Ein magnetisches Moment \( \vec{\mu} \) im äußeren Feld \( \vec{B} \) trägt zur Energie bei durch:
-
 \[
 H = -\vec{\mu} \cdot \vec{B}
 \Rightarrow
 \mathbf{H} = \frac{e_0 g \hbar}{4 m_e} \vec{\sigma} \cdot \vec{B}
 \]
+\end{DEF}
 
 ---
 
 \textbf{Schrödingergleichung für Spin-\(\frac{1}{2}\) im Magnetfeld [Proposition]}
 
+\begin{CONC}{QM-G25-25-11}{Schrödingergleichung für Spin-\(\frac{1}{2}\) im Magnetfeld}
 Für einen zeitabhängigen Spinor
-
 \[
 \tilde{\psi}(t) = \begin{pmatrix}c_+(t) \\ c_-(t)\end{pmatrix}
 \]
-
 ergibt sich die Gleichung:
-
 \[
 i\hbar \frac{d}{dt} \tilde{\psi}(t) = \frac{e_0 g \hbar}{4 m_e} (\vec{\sigma} \cdot \vec{B}) \tilde{\psi}(t)
 \]
+\end{CONC}
 
 
 ---
 
 \textbf{Larmor-Frequenz im Magnetfeld [Proposition]}
 
+\begin{PROP}{QM-G25-25-12}{Larmor-Frequenz im Magnetfeld}
 Für ein konstantes Magnetfeld \( \vec{B} = (0, 0, B_0) \) ergibt sich mittels Ansatz \( \tilde{\psi}(t) = e^{-i \omega t} \begin{pmatrix} c_+ \\ c_- \end{pmatrix} \), mit \( c_\pm = \text{const.} \), aus der Schrödingergleichung:
-
 \[
 \hbar \omega \begin{pmatrix} c_+ \\ c_- \end{pmatrix}
 = \frac{e_0 g \hbar B_0}{4 m_e}
 \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}
 \begin{pmatrix} c_+ \\ c_- \end{pmatrix}
 \]
-
 Die Eigenfrequenzen sind:
-
 \[
 \omega_{\pm} = \pm \omega_L = \pm \frac{e_0 g B_0}{4 m_e}
 \]
-
 und die zugehörigen Eigenvektoren \( (1,0) \) und \( (0,1) \) führen zum allgemeinen Zustand:
-
 \[
 \tilde{\psi}(t) = \begin{pmatrix} a e^{-i \omega_L t} \\ b e^{i \omega_L t} \end{pmatrix},
 \quad |a|^2 + |b|^2 = 1
 \]
+\end{PROP}
 
 ---
 
 \textbf{Spinpräzession im Magnetfeld [Example]}
 
+\begin{EXA}{QM-G25-25-13}{Spinpräzession im Magnetfeld}
 Für Anfangszustand mit Spin entlang der 1-Achse (senkrecht zu \( \vec{B} \)):
-
 \[
 \mathbf{S}_1 \begin{pmatrix} a \\ b \end{pmatrix} = \frac{\hbar}{2} \begin{pmatrix} a \\ b \end{pmatrix}
 \Rightarrow \begin{pmatrix} a \\ b \end{pmatrix} = \frac{1}{\sqrt{2}} \begin{pmatrix} 1 \\ 1 \end{pmatrix}
 \]
-
 Dann ergibt sich für die Erwartungswerte:
-
 \[
 \begin{aligned}
 \langle \mathbf{S}_1 \rangle(t) &= \frac{\hbar}{2} \cos (2 \omega_L t) \\
@@ -6134,53 +6132,50 @@ Dann ergibt sich für die Erwartungswerte:
 \langle \mathbf{S}_3 \rangle(t) &= 0
 \end{aligned}
 \]
-
 Der Spin präzediert mit Frequenz \( 2\omega_L \) um \( \vec{B} \).
+\end{EXA}
 
 ---
 
 \textbf{Paramagnetische Resonanz und g-Faktor [Concept]}
 
+\begin{CONC}{QM-G25-25-14}{Paramagnetische Resonanz und g-Faktor}
 Der gyromagnetische Faktor \( g \) in
-
 \[
 \vec{\mu} = \frac{q g}{2m} \vec{\mathbf{S}}, \quad \vec{\mathbf{S}} = \frac{\hbar}{2} \vec{\sigma}
 \]
-
 ist keine universelle Konstante, sondern hängt z.B. im Festkörper von der chemischen Umgebung ab. Seine Bestimmung erfolgt über die paramagnetische Resonanz.
+\end{CONC}
 
 ---
 
 \textbf{RF-Feld-Induktion zwischen Spin-Zuständen [Definition]}
 
+\begin{DEF}{QM-G25-25-15}{RF-Feld-Induktion zwischen Spin-Zuständen}
 Ein oszillierendes Magnetfeld im RF-Bereich
-
 \[
 \vec{B}(t) = \left( B \cos \omega t, B \sin \omega t, B_0 \right)
 \]
-
 bewirkt über
-
 \[
 \vec{\sigma} \cdot \vec{B}(t)
 = \begin{pmatrix} B_0 & B e^{-i\omega t} \\ B e^{i\omega t} & -B_0 \end{pmatrix}
 \]
-
 eine zeitabhängige Hamiltonmatrix:
-
 \[
 i \hbar \frac{d \tilde{\psi}}{dt}
 = \frac{\hbar q g}{4m}
 \begin{pmatrix} B_0 & B e^{-i\omega t} \\ B e^{i\omega t} & -B_0 \end{pmatrix}
 \tilde{\psi}(t)
 \]
+\end{DEF}
 
 ---
 
 \textbf{Variation der Konstanten im RF-Feld [Concept]}
 
+\begin{CONC}{QM-G25-25-16}{Variation der Konstanten im RF-Feld}
 Mit Ansatz:
-
 \[
 \tilde{\psi}(t) =
 \begin{pmatrix}
@@ -6188,9 +6183,7 @@ a(t) e^{-i\omega_L t} \\
 b(t) e^{i\omega_L t}
 \end{pmatrix}
 \]
-
 folgt:
-
 \[
 \begin{aligned}
 \dot{a} &= -i \omega_g e^{i(2\omega_L - \omega)t} b(t) \\
@@ -6198,27 +6191,24 @@ folgt:
 \omega_g &= \frac{g e_0 B}{4 m}
 \end{aligned}
 \]
-
 Einsetzen ergibt die Differenzialgleichung zweiter Ordnung:
-
 \[
 \ddot{a} - i(2\omega_L - \omega)\dot{a} + \omega_g^2 a = 0
 \]
+\end{CONC}
 
 ---
 
 \textbf{Lösungen und Übergangswahrscheinlichkeiten [Proposition]}
 
+\begin{PROP}{QM-G25-25-17}{Lösungen und Übergangswahrscheinlichkeiten}
 Lösungsansatz:
-
 \[
 a(t) = A e^{i\lambda t}
 \Rightarrow
 \lambda_{1,2} = \omega_L - \frac{\omega}{2} \pm \sqrt{\left(\omega_L - \frac{\omega}{2}\right)^2 + \omega_g^2}
 \]
-
 Für Startzustand \( a(0)=1, b(0)=0 \) ergibt sich:
-
 \[
 \begin{aligned}
 a(t) &= \left[\cos(\widehat{\omega} t) - i \frac{\omega_L - \omega/2}{\widehat{\omega}} \sin(\widehat{\omega} t) \right]
@@ -6228,26 +6218,25 @@ e^{-i(\omega_L - \omega/2)t} \\
 \widehat{\omega} &= \sqrt{(\omega_L - \omega/2)^2 + \omega_g^2}
 \end{aligned}
 \]
-
 Übergangswahrscheinlichkeit am Ende eines RF-Pulses der Dauer \( T \):
-
 \[
 |b(T)|^2 =
 \frac{\omega_g^2}{(\omega_L - \omega/2)^2 + \omega_g^2}
 \sin^2\left(T \sqrt{(\omega_L - \omega/2)^2 + \omega_g^2} \right)
 \]
+\end{PROP}
 
 ---
 
 \textbf{Resonanzbedingung und $\pi$-Puls [Definition]}
 
+\begin{DEF}{QM-G25-25-18}{Resonanzbedingung und $\pi$-Puls}
 Maximale Übergangsrate bei Resonanz:
-
 \[
 \omega = 2 \omega_L \Rightarrow |b(T)|^2 = 1
 \]
-
 Dies tritt bei Pulsdauer \( T = \frac{\pi}{2 \omega_g} \) ein („$\pi$-Puls“). Anwendung in Kernspinresonanz (NMR), Myonspinrotation ($\mu$SR), Medizin und Materialphysik.
+\end{DEF}
 
 
 
@@ -6255,7 +6244,11 @@ Dies tritt bei Pulsdauer \( T = \frac{\pi}{2 \omega_g} \) ein („$\pi$-Puls“)
 \pagebreak
 
 
+
+
 \subsection*{Quantenmechanische Beschreibung}
+
+
 Die Existenz des Spins bedeutet, daß Elektronen, außer der Ortskoordinate $\vec{x}$, oder der Impulskoordinate $\vec{p}$, einen weiteren Freiheitsgrad besitzen: Spin nach "oben" und Spin nach "unten", jeweils bezüglich einer vorgegebenen Richtung (Quantisierungsachse, z.B. die $x_{3}$-Richtung). Und dieses obwohl Elektronen Punktteilchen sind.
 
 \subsubsection*{Spinore}
@@ -6583,7 +6576,559 @@ Die obige "paramagnetische" Resonanzmethode hat viele Anwendungen in der Atomund
 
 \section{Zur Struktur der Quantenmechanik}
 
+\textbf{Superposition von Zuständen [Concept]}
+
+\begin{CONC}{QM-G25-26-01}{Superposition von Zuständen}
+Die quantenmechanischen Zustände bilden einen linearen Raum. Für physikalisch realisierbare Zustände $\psi_1, \psi_2$ gilt:
+\[
+\lambda_1 \psi_1 + \lambda_2 \psi_2 \quad \text{ist wieder ein Zustand}, \quad \lambda_1, \lambda_2 \in \mathbb{C}
+\]
+Dies ist das Superpositionsprinzip.
+\end{CONC}
+
+---
+
+\textbf{Produktzustände und Vielteilchenräume [Concept]}
+
+\begin{CONC}{QM-G25-26-02}{Produktzustände und Vielteilchenräume}
+Für zusammengesetzte Systeme wie das Wasserstoffatom ergibt sich der Gesamtzustand als Produkt:
+\[
+\psi = \psi_p \cdot \psi_e
+\]
+Auch diese Produktzustände gehorchen dem Superpositionsprinzip. Vielteilchenzustände bilden ebenfalls einen linearen Raum mit charakteristischen Symmetrieeigenschaften.
+\end{CONC}
+
+---
+
+\textbf{Skalarprodukt im Hilbertraum [Definition]}
+
+\begin{DEF}{QM-G25-26-03}{Skalarprodukt im Hilbertraum}
+Für Zustände $\psi_1, \psi_2$ ist das Skalarprodukt definiert durch:
+\[
+\left(\psi_2, \psi_1\right) = \int d^3x \, \psi_2^*(\vec{x}, t) \psi_1(\vec{x}, t)
+\]
+Mit Eigenschaften:
+
+- Antilinear im ersten Argument
+
+- Linear im zweiten Argument
+
+- Hermitisch: $(\psi_2, \psi_1) = (\psi_1, \psi_2)^*$
+
+- Positiv definit: $(\psi, \psi) > 0 \Rightarrow \psi \ne 0$
+\end{DEF}
+
+---
+
+\textbf{Norm eines Zustands [Definition]}
+
+\begin{DEF}{QM-G25-26-04}{Norm eines Zustands}
+Die Norm eines Zustands $\psi$ ist definiert durch:
+\[
+\|\psi\| = \sqrt{(\psi, \psi)}
+\]
+Oft auch notiert als $|\psi|$.
+\end{DEF}
+
+---
+
+\textbf{Konvergenz und Cauchy-Folgen [Definition]}
+
+\begin{DEF}{QM-G25-26-05}{Konvergenz und Cauchy-Folgen}
+Eine Folge $\{\psi_n\}$ konvergiert gegen $\psi$, wenn
+\[
+\lim_{n \to \infty} \|\psi_n - \psi\| = 0
+\]
+Sie ist eine Cauchy-Folge, wenn für jedes $\epsilon > 0$ ein $N(\epsilon)$ existiert, sodass
+\[
+\|\psi_{n_1} - \psi_{n_2}\| < \epsilon \quad \forall n_1, n_2 > N(\epsilon)
+\]
+\end{DEF}
+
+---
+
+\textbf{Vollständigkeit und Hilberträume [Definition]}
+
+\begin{DEF}{QM-G25-26-06}{Vollständigkeit und Hilberträume}
+Ein Raum ist vollständig, wenn jede Cauchy-Folge konvergiert. Der Raum der quadratintegrablen Funktionen ist vollständig. Ein vollständiger Vektorraum mit Skalarprodukt ist ein **Hilbert-Raum**.
+\end{DEF}
+
+---
+
+\textbf{Separable Hilberträume [Definition]}
+
+\begin{DEF}{QM-G25-26-07}{Separable Hilberträume}
+Ein Hilbertraum ist separabel, wenn es eine abzählbare dichte Teilmenge gibt. Quantenmechanische Hilberträume sind stets separabel.
+\end{DEF}
+
+---
+
+\textbf{Selbstadjungierte Operatoren [Definition]}
+
+\begin{DEF}{QM-G25-26-08}{Selbstadjungierte Operatoren}
+Ein Operator $\mathbf{a}$ ist selbstadjungiert, wenn
+\[
+\mathbf{a}^\dagger = \mathbf{a}, \quad (\mathbf{a}^\dagger \psi_1, \psi_2) = (\psi_1, \mathbf{a} \psi_2)
+\]
+Selbstadjungierte Operatoren haben reelle Eigenwerte.
+\end{DEF}
+
+---
+
+\textbf{Physikalische Observablen als Operatoren [Postulate]}
+
+\begin{CONC}{QM-G25-26-09}{Physikalische Observablen als Operatoren}
+Observablen wie Ort, Impuls, Energie etc. entsprechen selbstadjungierten Operatoren. Ihre Eigenwerte bilden das Spektrum der möglichen Messergebnisse.
+\end{CONC}
+
+---
+
+\textbf{Diskretes und kontinuierliches Spektrum [Concept]}
+
+
+\begin{CONC}{QM-G25-26-10}{Diskretes und kontinuierliches Spektrum}
+- Diskret: z.B. Drehimpuls, endliche Eigenwertanzahl
+
+- Kontinuierlich: z.B. Impulsoperator
+
+Impulsoperator:
+\[
+\mathbf{P}_j = \frac{\hbar}{i} \frac{d}{dx_j}, \quad e_p(\vec{x}) = \frac{e^{i \vec{p} \cdot \vec{x}/\hbar}}{\sqrt{(2\pi\hbar)^3}}
+\]
+\end{CONC}
+
+---
+
+\textbf{Box-Normalisierung [Technique]}
+
+\begin{CONC}{QM-G25-26-11}{Box-Normalisierung}
+Zur Umgehung des Problems nicht-normierter Eigenfunktionen wird das System in ein endliches Volumen $V$ eingebettet:
+\[
+e_p(\vec{x}) = \frac{e^{i \vec{p} \cdot \vec{x}/\hbar}}{\sqrt{V}} \quad \Rightarrow \quad V \to \infty
+\]
+Diese Methode findet Anwendung z.B. in der Festkörperphysik.
+\end{CONC}
+
+---
+
+\textbf{Entartung und kommutierende Operatoren [Concept]}
+
+
+\begin{CONC}{QM-G25-26-12}{Entartung und kommutierende Operatoren}
+Entartete Eigenwerte eines Operators $A$ erfordern zusätzliche Operatoren $B, C, \dots$ mit:
+\[
+[\mathbf{A}, \mathbf{B}] = 0
+\]
+Ziel: vollständiger Satz kommutierender Operatoren, der jeden Zustand eindeutig über die Eigenwerte $(a_j, b_{jl}, c_{jlk}, \dots)$ identifiziert.
+
+Für das Wasserstoff-Atom ist
+$$
+\mathbf{A}=\mathbf{H}, \quad \mathbf{C}=\overrightarrow{\mathbf{L}}^{2}, \quad \mathbf{D}=\mathbf{L}_{3}, \quad \mathbf{E}=\mathbf{S}_{3}
+$$
+vollständigen Satz kommutierender Variablen.
+\end{CONC}
+
+
+---
+
+\textbf{Zerlegung in Unterräume [Definition]}
+
+\begin{DEF}{QM-G25-26-13}{Zerlegung in Unterräume}
+Für einen Unterraum $M \subset \mathcal{H}$ ist das orthogonale Komplement $M^\perp$ definiert durch:
+\[
+(\psi_M, \psi_{M^\perp}) = 0 \quad \forall \psi_M \in M, \psi_{M^\perp} \in M^\perp
+\]
+Jeder Vektor $\psi$ lässt sich eindeutig schreiben als:
+\[
+\psi = \psi_M + \psi_{M^\perp}
+\]
+\end{DEF}
+
+---
+
+\textbf{Projektionsoperatoren [Definition]}
+
+\begin{DEF}{QM-G25-26-14}{Projektionsoperatoren}
+Der Projektor $\mathbf{P}_M$ auf $M$ erfüllt:
+\[
+\mathbf{P}_M^2 = \mathbf{P}_M, \quad \mathbf{P}_M^\dagger = \mathbf{P}_M, \quad \mathbf{P}_M \psi = \psi_M
+\]
+Eigenschaften:
+
+- Eigenwerte: $0$ und $1$
+
+- $\mathbf{1} - \mathbf{P}_M$ projiziert auf $M^\perp$
+\end{DEF}
+
+---
+
+\textbf{Inneres und äußeres Produkt [Definition]}
+
+\begin{DEF}{QM-G25-26-15}{Inneres und äußeres Produkt}
+Für Eigenvektoren $u_j$ eines Operators $A$ mit $A u_j = a_j u_j$:
+
+- Inneres Produkt: $u_j^\dagger u_k = \delta_{jk}$
+
+- Äußeres Produkt (Projektor): $\mathbf{P}_j = u_j u_j^\dagger$
+
+Im entarteten Fall:
+\[
+\mathbf{P}_j = \sum_{s=1}^{m_j} u_{j,s} u_{j,s}^\dagger
+\]
+\end{DEF}
+
+---
+
+\textbf{Spektraldarstellung eines Operators [Definition]}
+
+\begin{DEF}{QM-G25-26-16}{Spektraldarstellung eines Operators}
+Für selbstadjungierten Operator $\mathbf{A}$ mit Eigenwerten $a_j$ und Projektoren $\mathbf{P}_j$:
+\[
+\mathbf{A} = \sum_j a_j \mathbf{P}_j
+\]
+\[
+f(\mathbf{A}) = \sum_j f(a_j) \mathbf{P}_j
+\]
+Das ist die Spektraldarstellung bzw. funktionale Darstellung von Operatoren.
+\end{DEF}
+
+---
+
+
+
+
+---
+
+\textbf{Dirac-Notation für Spektraldarstellung [Concept]}
+
+\begin{CONC}{QM-G25-26-17}{Dirac-Notation für Spektraldarstellung}
+Die Spektraldarstellung eines selbstadjungierten Operators $\mathbf{A}$ lautet:
+\[
+\mathbf{A} = \sum_j a_j \mathbf{P}_j, \quad \sum_j \mathbf{P}_j = \mathbf{1}, \quad \mathbf{P}_j = u_j u_j^+, \quad u_j^+ u_k = \delta_{jk}
+\]
+Dirac führte dafür die folgende formale Schreibweise ein:
+\[
+u_j \equiv |a_j\rangle, \quad u_j^+ \equiv \langle a_j|, \quad \mathbf{A} = \sum_j a_j |a_j\rangle\langle a_j|, \quad \sum_j |a_j\rangle\langle a_j| = \mathbf{1}
+\]
+\[
+\langle a_j | a_k \rangle = \delta_{jk}, \quad |a\rangle \text{ ist basisunabhängig}
+\]
+\end{CONC}
+
+---
+
+\textbf{Darstellung der Identität für gemischte Spektren [Concept]}
+
+\begin{CONC}{QM-G25-26-18}{Darstellung der Identität für gemischte Spektren}
+Die Identität ergibt sich als Summe bzw. Integral über eine vollständige Basis:
+\[
+\sum_j |a_j\rangle\langle a_j| = \mathbf{1} = \int da\, |a\rangle\langle a|
+\]
+Dies gilt unabhängig davon, ob das Spektrum diskret, kontinuierlich oder gemischt ist.
+\end{CONC}
+
+---
+
+\textbf{Spektraldarstellung für gemischte Spektren [Concept]}
+
+\begin{CONC}{QM-G25-26-19}{Spektraldarstellung für gemischte Spektren}
+Die Orthonormalität und Spektraldarstellung eines Operators mit kontinuierlichem und diskretem Spektrum lautet:
+\[
+\langle a_i | a_j \rangle = \delta_{ij}, \quad \langle a' | a \rangle = \delta(a' - a)
+\]
+\[
+\mathbf{A} = \int da\, a |a\rangle\langle a| + \sum_j a_j |a_j\rangle\langle a_j|
+\]
+Beispiel: Für das Wasserstoffatom gehören $E<0$ zum diskreten, $E \geq 0$ zum kontinuierlichen Spektrum.
+\end{CONC}
+
+---
+
+\textbf{Ortsdarstellung und Eigenzustände des Ortsoperators [Concept]}
+
+\begin{CONC}{QM-G25-26-20}{Ortsdarstellung und Eigenzustände des Ortsoperators}
+Der Ortsoperator in 1D wirkt wie folgt:
+\[
+\mathbf{Q}|x\rangle = x|x\rangle, \quad \mathbf{Q} = \int dx\, x |x\rangle\langle x|, \quad \langle x' | x \rangle = \delta(x'-x)
+\]
+Für Zustände ergibt sich:
+\[
+|\psi\rangle = \int dx\, \psi(x) |x\rangle, \quad \psi(x) = \langle x | \psi \rangle
+\]
+Diese Darstellung wird auch Schrödinger-Darstellung genannt.
+\end{CONC}
+
+---
+
+\textbf{Impulsdarstellung und Ebenen Wellen [Concept]}
+
+\begin{CONC}{QM-G25-26-21}{Impulsdarstellung und Ebenen Wellen}
+Zustände in der Impulsbasis $|p\rangle$ können geschrieben werden als:
+\[
+|p\rangle = \int dx'\, \langle x' | p \rangle |x'\rangle, \quad \langle x | p \rangle = \frac{1}{\sqrt{2\pi\hbar}} e^{ixp/\hbar}
+\]
+Normierung durch:
+\[
+\delta(x - x') = \int dp\, \langle x | p \rangle \langle p | x' \rangle = \frac{1}{2\pi\hbar} \int dp\, e^{ip(x - x')/\hbar}
+\]
+\end{CONC}
+
+---
+
+\textbf{Energiedarstellung und unitäre Transformation [Concept]}
+
+\begin{CONC}{QM-G25-26-22}{Energiedarstellung und unitäre Transformation}
+Die Energiebasis $|E\rangle$ wird dargestellt über:
+\[
+|E\rangle = \int dx\, u_E(x) |x\rangle, \quad u_E(x) = \langle x | E \rangle
+\]
+Die Transformation ist unitär:
+\[
+\langle E' | E \rangle = \int dx\, u_{E'}^*(x) u_E(x) = \delta(E' - E)
+\]
+Der Hamiltonoperator ist in dieser Darstellung diagonal:
+\[
+\langle E' | \mathbf{H} | E \rangle = E \delta(E' - E)
+\]
+\end{CONC}
+
+---
+
+\textbf{Matrixelemente in der Energiedarstellung [Concept]}
+
+\begin{CONC}{QM-G25-26-23}{Matrixelemente in der Energiedarstellung}
+Matrixelemente des Ortsoperators $\mathbf{Q}$:
+\[
+\langle E' | \mathbf{Q} | E \rangle = \int dx\, u_{E'}^*(x)\, x\, u_E(x)
+\]
+Matrixelemente des Impulsoperators $\mathbf{P}$:
+\[
+\langle E' | \mathbf{P} | E \rangle = \int dp\, \tilde{u}_{E'}^*(p)\, p\, \tilde{u}_E(p), \quad \tilde{u}_E(p) = \langle p | E \rangle
+\]
+\end{CONC}
+
+---
+
+\textbf{Dichteoperator für statistische Überlagerungen [Definition]}
+
+\begin{DEF}{QM-G25-26-24}{Dichteoperator für statistische Überlagerungen}
+Bei unvollständiger Kenntnis des quantenmechanischen Zustands:
+\[
+\rho = \sum_j w_j |u_j\rangle\langle u_j|, \quad \sum_j w_j = 1
+\]
+Eigenschaften:
+\[
+\rho^+ = \rho, \quad \rho |u_j\rangle = w_j |u_j\rangle, \quad \text{Sp}(\rho) = 1, \quad \text{Sp}(\rho^2) \leq 1
+\]
+\end{DEF}
+
+---
+
+\textbf{Reine vs. gemischte Zustände [Definition]}
+
+\begin{DEF}{QM-G25-26-25}{Reine vs. gemischte Zustände}
+Ein Zustand ist rein, wenn $\rho^2 = \rho$, andernfalls gemischt. Beispiele:
+
+- Rein: $\rho = |\psi\rangle\langle \psi|$
+
+- Gemischt: $\rho = |\psi\rangle\langle \psi| + |\phi\rangle\langle \phi|$, mit $|\psi\rangle \neq c|\phi\rangle$
+\end{DEF}
+
+---
+
+\textbf{Boltzmann-Dichteoperator bei Temperatur \( T \) [Definition]}
+
+\begin{DEF}{QM-G25-26-26}{Boltzmann-Dichteoperator bei Temperatur \( T \)}
+Für ein System im Wärmebad bei Temperatur $T$:
+\[
+\rho(\mathbf{H}, T) = \frac{e^{-\mathbf{H}/kT}}{\text{Sp}(e^{-\mathbf{H}/kT})} = \sum_j |a_j\rangle \frac{e^{-a_j/kT}}{\sum_i e^{-a_i/kT}} \langle a_j |
+\]
+\end{DEF}
+
+---
+
+\textbf{Erwartungswerte aus Dichtematrix [Concept]}
+
+\begin{CONC}{QM-G25-26-27}{Erwartungswerte aus Dichtematrix}
+Der Erwartungswert eines Operators $\mathbf{A}$ mit Dichtematrix $\rho$:
+\[
+\langle \mathbf{A} \rangle_\rho = \text{Sp}(\rho \mathbf{A}) = \sum_k \langle a_k | \rho \mathbf{A} | a_k \rangle
+\]
+Dies ist unabhängig von der Wahl der Basis.
+\end{CONC}
+
+
+
+---
+
+\textbf{Spin-1/2-Zustände und Dichtematrix [Concept]}
+
+\begin{CONC}{QM-G25-26-28}{Spin-1/2-Zustände und Dichtematrix}
+Ein Strahl von Spin-$\hbar/2$-Teilchen lässt sich durch eine zweikomponentige Wellenfunktion
+\[
+\chi = c_+ \chi_+ + c_- \chi_-
+\]
+oder allgemeiner durch eine Dichtematrix $\rho$ beschreiben. Die allgemeine hermitesche $2\times2$-Matrix mit Spur 1 ist:
+\[
+\rho = \frac{1}{2} \left( \begin{array}{cc}
+1 + P_3 & P_1 - i P_2 \\
+P_1 + i P_2 & 1 - P_3
+\end{array} \right) = \frac{1}{2}(\mathbf{1} + \vec{P} \cdot \vec{\sigma})
+\]
+mit Polarisationsvektor $\vec{P} = (P_1, P_2, P_3)$ und den Pauli-Matrizen
+\[
+\sigma_x = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}, \quad
+\sigma_y = \begin{pmatrix} 0 & -i \\ i & 0 \end{pmatrix}, \quad
+\sigma_z = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}
+\]
+sowie den Antikommutationsrelationen
+\[
+\sigma_i^2 = 1, \quad \sigma_i \sigma_j + \sigma_j \sigma_i = 2 \delta_{ij}
+\]
+und der zyklischen Eigenschaft der Spur: $\operatorname{Sp}(AB) = \operatorname{Sp}(BA)$.
+\end{CONC}
+
+---
+
+\textbf{Reine Zustände und Polarisationsvektor [Concept]}
+
+\begin{CONC}{QM-G25-26-29}{Reine Zustände und Polarisationsvektor}
+Für den Polarisationsvektor ergibt sich:
+\[
+(\vec{P} \cdot \vec{\sigma})^2 = \sum_i P_i^2 \sigma_i^2 + \sum_{i<j} P_i P_j (\sigma_i \sigma_j + \sigma_j \sigma_i) = \sum_i P_i^2 = \|\vec{P}\|^2
+\]
+daraus folgt
+\[
+\rho^2 = \frac{1}{4} \left(1 + \|\vec{P}\|^2 + 2 \vec{P} \cdot \vec{\sigma} \right)
+\quad \text{und} \quad
+\operatorname{Sp}(\rho^2) = \frac{1}{2}(1 + \|\vec{P}\|^2)
+\]
+Ein Zustand ist rein genau dann, wenn $\|\vec{P}\| = 1$, denn dann ist $\rho^2 = \rho$.
+\end{CONC}
+
+---
+
+\textbf{Spin-Erwartungswert entlang Polarisierungsachse [Concept]}
+
+\begin{CONC}{QM-G25-26-30}{Spin-Erwartungswert entlang Polarisierungsachse}
+Für einen Spinoperator $\mathbf{S} = \frac{\hbar}{2} \vec{\sigma}$ ergibt sich entlang einer Richtung $\vec{n}$ der Erwartungswert:
+\[
+\langle \vec{n} \cdot \mathbf{S} \rangle_\rho = \frac{\hbar}{2} \vec{n} \cdot \vec{P}
+\]
+Der Faktor $\vec{n} \cdot \vec{P}$ heißt Polarisationsgrad des Strahls in Richtung $\vec{n}$.
+\end{CONC}
+
+---
+
+\textbf{Beispiele für Polarisationszustände [Example]}
+
+\begin{EXA}{QM-G25-26-31}{Beispiele für Polarisationszustände}
+\begin{enumerate}
+  \item $\vec{P} = 0$: Strahl ist unpolarisiert.
+  \item $\vec{P} = \vec{n}$: Vollständig polarisiert entlang $\vec{n}$ (reiner Zustand).
+  \item $\vec{P} = (0, 0, P_3)$: Polarisierung nur in $z$-Richtung. Für $P_3 = 1$: Spins zeigen alle nach oben (reiner Zustand).
+\end{enumerate}
+
+Zur vollständigen Bestimmung von $\rho$ sind 3 unabhängige Messungen nötig (wegen 3 reeller Parameter $P_i$).
+\end{EXA}
+
+---
+
+\textbf{Mittlere Schwankungen für Observablen [Definition]}
+
+\begin{DEF}{QM-G25-26-32}{Mittlere Schwankungen für Observablen}
+Für eine Dichte-Matrix
+\[
+\rho = \sum_j w_j |u_j\rangle \langle u_j|
+\]
+werden die Schwankungen definiert durch:
+\[
+\Delta A = \sqrt{\langle A^2 \rangle - \langle A \rangle^2}, \quad
+\Delta B = \sqrt{\langle B^2 \rangle - \langle B \rangle^2}
+\]
+für Observablen $A = A^\dagger$, $B = B^\dagger$.
+\end{DEF}
+
+---
+
+\textbf{Symmetrieeigenschaften von Produkten [Remark]}
+
+\begin{REM}{QM-G25-26-33}{Symmetrieeigenschaften von Produkten}
+Für $A, B$ Observablen gilt:
+\begin{enumerate}
+  \item $AB + BA$ ist selbstadjungiert und $\langle u_j | AB + BA | u_j \rangle \in \mathbb{R}$
+  \item $i(AB - BA)$ ist selbstadjungiert und $\langle u_j | i(AB - BA) | u_j \rangle \in \mathbb{R}$
+\end{enumerate}
+\end{REM}
+
+---
+
+\textbf{Unschärferelation für reine Zustände [Proposition]}
+
+\begin{PROP}{QM-G25-26-34}{Unschärferelation für reine Zustände}
+Aus der Schwarzschen Ungleichung folgt für $A, B$ Observablen:
+\[
+(\Delta A)(\Delta B) \geq \frac{1}{2} |\langle [A, B] \rangle|
+\]
+Dies ergibt sich durch Anwendung auf die normierten Zustände $|u_j\rangle$, unter Verwendung der Kommutatorstruktur und der Identitäten
+\[
+|a + i b|^2 \geq b^2 \quad \text{für } a, b \in \mathbb{R}
+\]
+\end{PROP}
+
+---
+
+\textbf{Verallgemeinerte Unschärferelation für gemischte Zustände [Proposition]}
+
+\begin{PROP}{QM-G25-26-35}{Verallgemeinerte Unschärferelation für gemischte Zustände}
+Für gemischte Zustände $\rho = \sum_j w_j |u_j\rangle \langle u_j|$ gilt:
+\[
+(\Delta A)(\Delta B) \geq \frac{1}{2} |\langle [A, B] \rangle|
+\]
+Die Herleitung nutzt eine Schwarz-Ungleichung auf Vektoren $u_j^{(A)}$, $u_j^{(B)}$ der Form
+\[
+u_j^{(A)} = \sqrt{w_j} \sqrt{ \langle u_j | [A - \langle A \rangle]^2 | u_j \rangle }
+\]
+\end{PROP}
+
+---
+
+\textbf{Heisenberg’sche Unschärferelation [Definition]}
+
+\begin{DEF}{QM-G25-26-36}{Heisenberg’sche Unschärferelation}
+Für Ort $Q$ und Impuls $P$ mit $[P, Q] = -i\hbar$ ergibt sich:
+\[
+(\Delta Q)(\Delta P) \geq \frac{\hbar}{2}
+\]
+\end{DEF}
+
+---
+
+\textbf{Zustände minimaler Unschärfe [Example]}
+
+\begin{EXA}{QM-G25-26-37}{Zustände minimaler Unschärfe}
+Wellenfunktionen mit minimaler Unschärfe erfüllen
+\[
+(\Delta Q)(\Delta P) = \frac{\hbar}{2}
+\]
+Ein Beispiel sind Gaußsche Wellenpakete:
+\[
+\psi(x) \sim e^{ip_0 x/\hbar} e^{-\gamma(x - x_0)^2 / (2\hbar)}
+\]
+\end{EXA}
+
+---
+
+
+
+
+
+
+
 \subsection*{Der quantenmechanische Hilbert-Raum}
+
+
+
 
 \subsubsection*{Linearer Zustandsraum}
 Die quantenmechanischen Zustände bilden einen linearen Raum. Beispiel sind die bisher diskutierten 1-Teilchen Zustände $\psi(\vec{x}, t)$.
@@ -6927,6 +7472,12 @@ f(\mathbf{A})=\sum_{j} f\left(a_{j}\right) \mathbf{P}_{j}
 $$
 
 definieren.
+
+
+
+
+
+
 
 \subsubsection*{Dirac Notation}
 Die Spektraldarstellung
@@ -7388,14 +7939,776 @@ $$
 d.h. die Gaußschen Wellenpakete. Sie haben die Eigenschaft $(\Delta Q)(\Delta P)=\hbar / 2$, wie wir in Abschnitt ?? gezeigt haben.
 
 
+
+
+
+
+
+
+
+
+
+
 \pagebreak
 
 
 \section{Zeitunabhängige Störungstheorie}
 
+
+\subsection{Ohne Entartung der ungestörten Energie-Niveaus}
+
+---
+
+\textbf{Zeitunabhängige Störungstheorie [Concept]}
+
+\begin{CONC}{QM-G25-27-01}{Zeitunabhängige Störungstheorie}
+Die Schrödinger-Gleichung lässt sich in den meisten physikalisch interessanten Fällen nicht exakt lösen. Daher sind Näherungsverfahren – wie die zeitunabhängige Störungstheorie – fundamentale Werkzeuge zur Behandlung solcher Probleme.
+\end{CONC}
+
+---
+
+\textbf{Hamiltonoperator mit Störterm [Definition]}
+
+\begin{DEF}{QM-G25-27-02}{Hamiltonoperator mit Störterm}
+Der gestörte Hamiltonoperator sei
+\[
+\mathbf{H} = \mathbf{H}_0 + \lambda \mathbf{H}_1, \quad \lambda \in \mathbb{R},\ |\lambda| \ll 1
+\]
+Dabei ist $\mathbf{H}_0$ der ungestörte Operator, $\mathbf{H}_1$ der Störterm, und $\mathbf{H}, \mathbf{H}_0, \mathbf{H}_1$ sind alle auf demselben Definitionsbereich im Hilbertraum definiert.
+\end{DEF}
+
+---
+
+\textbf{Ziel der Entwicklung [Concept]}
+
+\begin{CONC}{QM-G25-27-03}{Ziel der Entwicklung}
+Die Eigenwerte $E_n(\lambda)$ und Eigenzustände $\left|u_n(\lambda)\right\rangle$ von $\mathbf{H}$ sollen als Potenzreihen in $\lambda$ entwickelt werden:
+\[
+\left( \mathbf{H}_0 + \lambda \mathbf{H}_1 \right) |u_n(\lambda)\rangle = E_n(\lambda) |u_n(\lambda)\rangle
+\]
+\end{CONC}
+
+---
+
+\textbf{Ungestörte Basiszustände [Definition]}
+
+\begin{DEF}{QM-G25-27-04}{Ungestörte Basiszustände}
+Wir nehmen an, die Eigenwerte $E_n$ und Eigenzustände $|u_n\rangle$ von $\mathbf{H}_0$ sind bekannt und bilden ein orthonormales vollständiges System:
+\[
+\mathbf{H}_0 |u_n\rangle = E_n |u_n\rangle, \quad \langle u_n | u_m \rangle = \delta_{nm}
+\]
+\end{DEF}
+
+---
+
+\textbf{Entwicklung des gestörten Zustands [Definition]}
+
+\begin{DEF}{QM-G25-27-05}{Entwicklung des gestörten Zustands}
+Die gestörten Eigenzustände lassen sich in der ungestörten Basis entwickeln:
+\[
+|u_n(\lambda)\rangle = N(\lambda) \left( |u_n\rangle + \sum_{k\neq n} c_{nk}(\lambda) |u_k\rangle \right)
+\quad \text{mit} \quad c_{nk}(0) = 0, \quad N(0) = 1
+\]
+\end{DEF}
+
+---
+
+\textbf{Entwicklung von Energie und Koeffizienten [Definition]}
+
+\begin{DEF}{QM-G25-27-06}{Entwicklung von Energie und Koeffizienten}
+Die Energie und die Koeffizienten werden in Potenzreihen entwickelt:
+\[
+\begin{aligned}
+E_n(\lambda) &= E_n + \lambda E_n^{(1)} + \lambda^2 E_n^{(2)} + \cdots \\
+c_{nk}(\lambda) &= \lambda c_{nk}^{(1)} + \lambda^2 c_{nk}^{(2)} + \cdots
+\end{aligned}
+\]
+\end{DEF}
+
+---
+
+\textbf{Störungsgleichung als Ordnungsgleichung [Derivation]}
+
+\begin{CONC}{QM-G25-27-07}{Störungsgleichung als Ordnungsgleichung}
+Die Schrödinger-Gleichung wird eingesetzt und nach Potenzen von $\lambda$ geordnet:
+\[
+(\mathbf{H}_0 + \lambda \mathbf{H}_1)\left(|u_n\rangle + \lambda \sum_{k\neq n} c_{nk}^{(1)} |u_k\rangle + \cdots\right)
+= \left(E_n + \lambda E_n^{(1)} + \cdots\right)\left(|u_n\rangle + \lambda \sum_{k\neq n} c_{nk}^{(1)} |u_k\rangle + \cdots\right)
+\]
+\end{CONC}
+
+---
+
+\textbf{Korrekturen erster Ordnung [Proposition]}
+
+\begin{LEM}{QM-G25-27-08}{Korrekturen erster Ordnung}
+Aus Vergleich der Terme erster Ordnung folgt:
+\[
+\mathbf{H}_0 \sum_{k\neq n} c_{nk}^{(1)} |u_k\rangle + \mathbf{H}_1 |u_n\rangle = E_n \sum_{k\neq n} c_{nk}^{(1)} |u_k\rangle + E_n^{(1)} |u_n\rangle
+\]
+
+Multiplizieren mit $\langle u_n|$ liefert:
+\[
+E_n^{(1)} = \langle u_n | \mathbf{H}_1 | u_n \rangle
+\]
+\end{LEM}
+
+---
+
+\textbf{Zustandskorrektur erster Ordnung [Proposition]}
+
+\begin{LEM}{QM-G25-27-09}{Zustandskorrektur erster Ordnung}
+Multiplizieren mit $\langle u_k|$, $k \ne n$, ergibt:
+\[
+c_{nk}^{(1)} = \frac{\langle u_k | \mathbf{H}_1 | u_n \rangle}{E_n - E_k}
+\]
+\end{LEM}
+
+---
+
+\textbf{Korrekturen zweiter Ordnung [Proposition]}
+
+\begin{LEM}{QM-G25-27-10}{Korrekturen zweiter Ordnung}
+Vergleich der Terme zweiter Ordnung ergibt:
+\[
+E_n^{(2)} = \sum_{k\ne n} \frac{|\langle u_k | \mathbf{H}_1 | u_n \rangle|^2}{E_n - E_k}
+\]
+
+Da $\mathbf{H}_1$ hermitesch ist, ist der Ausdruck stets reell. Für den Grundzustand ($n=0$) folgt:
+\[
+E_0^{(2)} < 0 \quad \text{(Grundzustandsenergie wird abgesenkt)}
+\]
+\end{LEM}
+
+---
+
+\textbf{Konvergenzverhalten der Störungsreihe [Concept]}
+
+\begin{CONC}{QM-G25-27-11}{Konvergenzverhalten der Störungsreihe}
+Je nach Natur des Problems kann die Potenzreihe in $\lambda$ unterschiedliche Konvergenzeigenschaften haben:
+
+\begin{enumerate}
+  \item \textbf{Analytische Konvergenz}: Es existiert ein $\lambda_0 > 0$ mit Konvergenz für $|\lambda| < \lambda_0$.
+  \item \textbf{Asymptotische Konvergenz}: Die Reihe divergiert, ist aber asymptotisch im Sinne:
+  \[
+  \lim_{\lambda \to 0} \frac{1}{\lambda^j} \left| E_n(\lambda) - \sum_{i=0}^j \lambda^i E_n^{(i)} \right| = 0
+  \]
+  \item \textbf{Keine Konvergenz, keine Asymptotik}: z.B. bei makroskopischen Änderungen (Phasenübergängen).
+  \item \textbf{Essentielle Singularität}: z.B. bei Supraleitung:
+  \[
+  E(\lambda) \sim e^{-1/\lambda}
+  \]
+\end{enumerate}
+\end{CONC}
+
+---
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Zeitunabhängige Störungstheorie – Beispiele und Spezialfälle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{Anharmonischer Oszillator [Concept]}
+
+\begin{CONC}{QM-G25-27-12}{Anharmonischer Oszillator}
+Ungestörter Teil:
+\[
+\mathbf{H}_0 = -\frac{\hbar^{2}}{2m}\,\frac{d^{2}}{dx^{2}} + \frac{b}{2}\,x^{2}
+\]
+Störterm:
+\[
+\lambda \mathbf{H}_1 = \lambda\,x^{4}
+\]
+Für
+\[
+(\mathbf{H}_0 + \lambda \mathbf{H}_1)\,|u_n(\lambda)\rangle = E_n(\lambda)\,|u_n(\lambda)\rangle
+\]
+sind keine exakten Lösungen bekannt. Man weiß \cite{Simon70}, dass $E_n(\lambda)$ bei $\lambda=0$ einen kubischen Verzweigungspunkt besitzt ($E_n \sim \lambda^{1/3}$). Die Störungsreihe ist \emph{divergent}, jedoch \emph{asymptotisch}.
+\end{CONC}
+
+---
+
+\textbf{Erste-Ordnungs-Korrektur $E_n^{(1)}$ [Proposition]}
+
+\begin{PROP}{QM-G25-27-13}{Erste-Ordnungs-Korrektur $E_n^{(1)}$}
+\[
+E_n^{(1)} = \langle u_n | \mathbf{Q}^4 | u_n \rangle,
+\quad
+\mathbf{Q} = \sqrt{\frac{\hbar}{2m\omega}}\,(a^{\dagger}+a),
+\quad
+\omega = \sqrt{\tfrac{b}{m}}
+\]
+
+Auf- und Absteigeoperatoren:
+\[
+a^{\dagger}|u_n\rangle = \sqrt{n+1}\,|u_{n+1}\rangle, \qquad
+a|u_n\rangle          = \sqrt{n}\,  |u_{n-1}\rangle
+\]
+
+Berechnung von $(a^{\dagger}+a)^2|u_n\rangle$:
+\[
+\begin{aligned}
+(a^{\dagger}+a)^2|u_n\rangle &=
+\sqrt{(n+2)(n+1)}\,|u_{n+2}\rangle
++(2n+1)\,|u_{n}\rangle
++\sqrt{n(n-1)}\,|u_{n-2}\rangle
+\end{aligned}
+\]
+
+Summe der Quadrate der Vorfaktoren:
+\[
+(n+2)(n+1) + (2n+1)^2 + n(n-1) = 6n^{2}+6n+3
+\]
+
+Damit
+\[
+E_n^{(1)} =
+\frac{3}{4}\left(\frac{\hbar}{m\omega}\right)^{2}\bigl(2n^{2}+2n+1\bigr).
+\]
+\end{PROP}
+
+---
+
+\textbf{Abhängigkeit von $\omega$ [Remark]}
+
+\begin{REM}{QM-G25-27-14}{Abhängigkeit von $\omega$}
+Je größer die Eigenfrequenz 
+\(
+\omega=\sqrt{b/m},
+\)
+desto steiler ist das harmonische Potential und desto kleiner wird die Störkorrektur.
+\end{REM}
+
+---
+
+\textbf{Helium-Atom: Hamiltonoperator [Concept]}
+
+\begin{CONC}{QM-G25-27-15}{Helium-Atom: Hamiltonoperator}
+\[
+\mathbf{H}_0 =
+-\frac{\hbar^{2}}{2m}\,(\Delta_1+\Delta_2)
+-\frac{Ze^{2}}{4\pi\varepsilon_0}\!\left(\frac{1}{|\vec x_1|} + \frac{1}{|\vec x_2|}\right),
+\qquad
+\lambda\mathbf{H}_1 = \frac{e^{2}}{4\pi\varepsilon_0}\frac{1}{|\vec x_1-\vec x_2|},
+\]
+mit $Z=2$.
+\end{CONC}
+
+---
+
+\textbf{Ungestörter Grundzustand [Definition]}
+
+\begin{DEF}{QM-G25-27-16}{Ungestörter Grundzustand}
+\[
+\psi(\vec x_1,\vec x_2) =
+\psi_{\uparrow}^{(0)}(\vec x_1)\,
+\psi_{\downarrow}^{(0)}(\vec x_2), \qquad
+\psi^{(0)}(\vec x)=
+\frac{1}{\sqrt{\pi}}
+\Bigl(\frac{Z}{a_0}\Bigr)^{\!\!3/2}
+e^{-Z|\vec x|/a_0},
+\]
+mit Bohr-Radius
+\(
+a_0=\dfrac{\hbar^{2}4\pi\varepsilon_0}{m_e e^{2}}
+\)
+und ungestörter Energie
+\(
+E_0=-2Z^{2}E_R,\;\;
+E_R=13.6058\;\text{eV}.
+\)
+\end{DEF}
+
+---
+
+\textbf{Hartree-Term (erste Ordnung) [Proposition]}
+
+\begin{PROP}{QM-G25-27-17}{Hartree-Term (erste Ordnung)}
+\[
+E_0^{(1)} =
+\frac{e^{2}}{4\pi\varepsilon_0}\!
+\int d^{3}x_1 d^{3}x_2\,
+\frac{|\psi(\vec x_1,\vec x_2)|^{2}}
+{|\vec x_1-\vec x_2|}
+=
+\frac{5}{4}\,Z\,E_R.
+\]
+
+Numerische Werte:
+
+\[
+\begin{array}{|c|c|c|c|c|c|}
+\hline
+\text{Ion} & Z &
+E_0\;[\text{eV}] &
+E_0^{(1)}\;[\text{eV}] &
+E_0+E_0^{(1)}\;[\text{eV}] &
+E_{\text{exp}}\;[\text{eV}]\\
+\hline
+\text{He} & 2 & -108.0 & 34.0 & -74.0 & -78.6\\
+\text{Li}^+ & 3 & -245.0 & 51.0 & -194.0 & -197.1\\
+\text{Be}^{2+} & 4 & -435.5 & 68.0 & -367.5 & -370.0\\
+\hline
+\end{array}
+\]
+
+Die Näherung verbessert sich mit wachsendem $Z$.
+\end{PROP}
+
+---
+
+\subsection{Entartete Störungstheorie}
+
+
+
+\textbf{Degenerierte Basis und Erweiterung [Definition]}
+
+\begin{DEF}{QM-G25-28-01}{Degenerierte Basis und Erweiterung}
+Sei $E_n$ $J$-fach entartet mit Basis
+\(
+\{|u_{n,j}\rangle\}_{j=1}^{J},
+\;
+\langle u_{n,i}|u_{m,j}\rangle=\delta_{nm}\delta_{ij}.
+\)
+Gestörter Zustand:
+\[
+|u_n(\lambda)\rangle =
+N(\lambda)\!\left[
+\sum_{j}\alpha_j |u_{n,j}\rangle
++ \lambda\!\!\sum_{k\neq n,j} c_{nkj}^{(1)} |u_{k,j}\rangle + \dots
+\right].
+\]
+\end{DEF}
+
+---
+
+\textbf{Erste Ordnung bei Entartung [Derivation]}
+
+\begin{CONC}{QM-G25-28-02}{Erste Ordnung bei Entartung}
+Einsetzen in die Schrödinger-Gleichung und Vergleich $\mathcal{O}(\lambda)$ liefert
+\[
+\sum_{j}\langle u_{n,i}|\mathbf{H}_1|u_{n,j}\rangle\,\alpha_j
+\;=\;
+E_{n}^{(1)}\,\alpha_i,
+\qquad
+i=1,\dots,J.
+\]
+\end{CONC}
+
+---
+
+\textbf{Diagonalisation im entarteten Untersystem [Proposition]}
+
+\begin{CONC}{QM-G25-28-04}{Diagonalisation im entarteten Untersystem}
+Definiere die hermitesche $J\times J$-Matrix
+\[
+b_{ij} := \langle u_{n,i}|\mathbf{H}_1|u_{n,j}\rangle.
+\]
+Dann ist
+\[
+\hat b\,\vec\alpha = E_{n}^{(1)}\,\vec\alpha
+\]
+ein rein \emph{algebraisches} Eigenwertproblem:
+
+- Eigenwerte $E_{n,j}^{(1)}$ geben die Aufspaltung der Entartung in erster Ordnung.  
+
+- Eigenvektoren $\vec\alpha^{\,(j)}$ liefern die korrekten Linearkombinationen im degenerierten Unterraum.
+\end{CONC}
+
+---
+
+\textbf{Auswahlregeln durch Symmetrie [Remark]}
+
+\begin{REM}{QM-G25-28-05}{Auswahlregeln durch Symmetrie}
+Matrixelemente $\langle u_k|\mathbf{H}_1|u_n\rangle$ können durch Symmetrie (Parität, Drehimpuls, Spin) verschwinden. Dann tritt keine Mischung bzw. Korrektur in der betreffenden Ordnung auf.
+\end{REM}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Störungstheorie bei zweifacher Entartung & Spin–Bahn-Kopplung
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{Zweifach entartete Störung (J = 2) [Concept]}
+
+\begin{CONC}{QM-G25-28-06}{Zweifach entartete Störung (J = 2)}
+Für zweifache Entartung ($J=2$) ergeben sich die Gleichungen
+\[
+\begin{aligned}
+b_{11}\alpha_1 + b_{12}\alpha_2 &= E_n^{(1)}\alpha_1,\\
+b_{21}\alpha_1 + b_{22}\alpha_2 &= E_n^{(1)}\alpha_2,
+\end{aligned}
+\]
+mit
+\(
+b_{ij}=\langle u_{n,i}|\mathbf{H}_1|u_{n,j}\rangle.
+\)
+Eine nicht-triviale Lösung existiert nur, wenn
+\[
+\det\!
+\begin{pmatrix}
+b_{11}-E_n^{(1)} & b_{12}\\
+b_{21} & b_{22}-E_n^{(1)}
+\end{pmatrix}
+= 0,
+\]
+also ergibt sich eine quadratische Gleichung mit den beiden Aufspaltungen
+\(E_{n,1}^{(1)},E_{n,2}^{(1)}\).
+\end{CONC}
+
+---
+
+\textbf{Relativistische Motivation der Spin–Bahn-Kopplung [Concept]}
+
+\begin{CONC}{QM-G25-28-07}{Relativistische Motivation der Spin–Bahn-Kopplung}
+Ein Elektron bewegt sich mit Geschwindigkeit $\vec v$ in einem statischen Kernfeld $\vec E=-\nabla\varphi(r)$.  
+Im Elektron-Ruhesystem erscheint zusätzlich ein Magnetfeld
+\[
+\vec B = -\frac{1}{2c^{2}}\bigl(\vec v \times \vec E\bigr),
+\]
+wobei der Faktor $1/2$ der \emph{Thomas-Präzession} entspringt.
+\end{CONC}
+
+---
+
+\textbf{Spin–Bahn-Hamiltonoperator [Definition]}
+
+\begin{DEF}{QM-G25-28-08}{Spin–Bahn-Hamiltonoperator}
+Mit $\vec\mu=\tfrac{eg}{2m_e}\,\vec{\mathbf S}\;(g\!\simeq\!2)$ gilt
+\[
+\mathbf{H}_{SB} = -\vec\mu\!\cdot\!\vec B
+   = \frac{e}{2m_e^{2}c^{2}}\,
+     \frac{1}{r}\,\frac{d\varphi}{dr}\;
+     \vec{\mathbf S}\!\cdot\!\vec{\mathbf L}
+   \equiv \lambda_{SB}\,\vec{\mathbf S}\!\cdot\!\vec{\mathbf L}.
+\]
+\end{DEF}
+
+---
+
+\textbf{Entartung im Wasserstoffatom [Concept]}
+
+\begin{CONC}{QM-G25-28-09}{Entartung im Wasserstoffatom}
+Für $\mathbf{H}_0$ des Wasserstoffatoms ist jedes Bohr-Niveau $E_n$ (inkl. Spin) $2n^{2}$-fach entartet:
+\[
+n=1,2,\dots,\quad
+l = 0,\dots,n-1,\quad
+m_l = -l,\dots,l,\quad
+m_s = \pm \tfrac12.
+\]
+\end{CONC}
+
+---
+
+\textbf{Ziel der entarteten Störung [Remark]}
+
+\begin{MOT}{QM-G25-28-10}{Ziel der entarteten Störung}
+Finde in jedem $2n^{2}$-dimensionalen Unterraum eine Basis, in der
+\(
+\mathbf{H}_{SB}
+\)
+\emph{diagonal} ist.  
+Dann verschwinden für $i\neq j$
+\(
+b_{ij}=\langle u_{n,i}^{(0)}|\mathbf{H}_{SB}|u_{n,j}^{(0)}\rangle,
+\)
+und die Aufspaltung ist sofort gegeben.
+\end{MOT}
+
+---
+
+\textbf{Spinordarstellung der Basiszustände [Definition]}
+
+\begin{DEF}{QM-G25-28-11}{Spinordarstellung der Basiszustände}
+Verdopple die Wellenfunktionen:
+\[
+\tilde\psi(\vec x)=
+\begin{pmatrix}\psi_{+}(\vec x)\\ \psi_{-}(\vec x)\end{pmatrix},
+\qquad
+\psi_{\pm}(\vec x)=\langle\vec x\,|\,l,m_l;S=\tfrac12,m_s=\pm\tfrac12\rangle.
+\]
+\end{DEF}
+
+---
+
+\textbf{Gesamtdrehimpuls und Kopplungsform [Proposition]}
+
+\begin{PROP}{QM-G25-28-12}{Gesamtdrehimpuls und Kopplungsform}
+\[
+\vec{\mathbf J} = \vec{\mathbf L} + \vec{\mathbf S},\qquad
+\mathbf{H}_{SB}=
+\frac{\lambda_{SB}}{2}
+\bigl(\vec{\mathbf J}^{\,2}-\vec{\mathbf L}^{\,2}-\vec{\mathbf S}^{\,2}\bigr),
+\]
+d.\,h.\ $[\vec{\mathbf J},\mathbf{H}_{SB}]=0$.  
+Die Aufgabe reduziert sich somit auf das \emph{Addieren} zweier Drehimpulse
+$l$ und $S=\tfrac12$.
+\end{PROP}
+
+---
+
+\textbf{Kopplung $l\otimes\tfrac12$ – resultierende $j$-Werte [Result]}
+
+\begin{CONC}{QM-G25-28-13}{Kopplung $l\otimes\tfrac12$ – resultierende $j$-Werte}
+Die erlaubten Gesamtdrehimpulse sind
+\[
+j = l+\tfrac12 \quad (\text{Multipletgröße } 2j+1 = 2l+2),
+\quad\text{und}\quad
+j = l-\tfrac12 \quad (\text{Multipletgröße } 2j+1 = 2l),
+\]
+für $l\ge 1$.  Bei $l=0$ existiert nur $j=\tfrac12$.
+\end{CONC}
+
+---
+
+\textbf{Explizite Konstruktion der Zustände [Derivation]}
+
+
+
+\begin{PROP}{QM-G25-28-14}{Clebsch–Gordan-Konstruktion der $j$-Multiplets für $l\otimes\tfrac12$}
+\begin{enumerate}
+%--------------------------------------------------
+\item \textbf{Ausgangspunkt – höchstes $m_j$:}
+      \[
+      \bigl|\,l+\tfrac12,\;m_j=l+\tfrac12\bigr\rangle 
+      = \bigl|\,l,l;\,{\tfrac12},+\tfrac12\bigr\rangle.
+      \]
+
+%--------------------------------------------------
+\item \textbf{Multiplet mit $j=l+\tfrac12$:}\par
+      Einmaliges Anwenden von 
+      $\mathbf J_{-}=\mathbf L_{-}+\mathbf S_{-}$ ergibt
+      \[
+      \boxed{\;
+      \bigl|\,l+\tfrac12,\;l-\tfrac12\bigr\rangle=
+      \frac{1}{\sqrt{2l+1}}
+      \Bigl(
+        \sqrt{2l}\,\bigl|l,l-1;\tfrac12,+\tfrac12\bigr\rangle
+        +\bigl|l,l;\tfrac12,-\tfrac12\bigr\rangle
+      \Bigr).
+      \;}
+      \]
+      Weitere Zustände des selben Multiplets entstehen durch wiederholtes
+      Wirken von $\mathbf J_{-}$.
+
+%--------------------------------------------------
+\item \textbf{Orthogonale Kombination – Multiplet $j=l-\tfrac12$ ($l>0$):}\par
+      Die zum vorherigen Vektor orthogonale Linearkombination liefert
+      \[
+      \boxed{\;
+      \bigl|\,l-\tfrac12,\;l-\tfrac12\bigr\rangle=
+      \frac{1}{\sqrt{2l+1}}
+      \Bigl(
+        \bigl|l,l-1;\tfrac12,+\tfrac12\bigr\rangle
+        -\sqrt{2l}\,\bigl|l,l;\tfrac12,-\tfrac12\bigr\rangle
+      \Bigr),
+      \;}
+      \]
+      und auch hier wird das vollständige Multiplet durch $\mathbf J_{-}$
+      aufgefächert.
+
+%--------------------------------------------------
+\item \textbf{Vollständigkeit und Zustandszahl:}\par
+      Für die beiden erlaubten Gesamtdrehimpulse
+      \(j=l\pm\tfrac12\) gilt
+      \[
+        \sum_{j}(2j+1)
+        \;=\;
+        \bigl[2(l+\tfrac12)+1\bigr]+\bigl[2(l-\tfrac12)+1\bigr]
+        = 4l+2 \;=\; (2l+1)\,2,
+      \]
+      womit die $2(2l+1)$-dimensionale Basis
+      \(\bigl|l,m_l;\tfrac12,m_s\bigr\rangle\) vollständig ausgeschöpft ist.
+\end{enumerate}
+
+\vspace{0.5em}
+\begin{center}
+  \includegraphics[scale=0.3]{2025_06_07_dbb046f06838039593f3g-09}
+\end{center}
+\captionof{figure}{%
+  Klebsch–Gordan-Aufspaltung für $l=2$ und $S=\tfrac12$:
+  Multiplets mit $j=\tfrac52$ (6 Zustände) und $j=\tfrac32$
+  (4 Zustände).%
+}
+\end{PROP}
+
+
+
+---
+
+\textbf{Matrixelemente der Spin–Bahn-Kopplung [Proposition]}
+
+\begin{PROP}{QM-G25-28-15}{Matrixelemente der Spin–Bahn-Kopplung}
+Da $\mathbf{H}_{SB}\propto\vec{\mathbf J}^{\,2}$ im $2n^{2}$-Unterraum diagonal ist, lautet die Korrektur erster Ordnung:
+\[
+E_{n}(l,j)^{(1)} = 
+\frac{\lambda_{SB}}{2}\,
+\bigl[\,j(j+1)-l(l+1)-\tfrac34\,\bigr].
+\]
+Für $j=l\pm\tfrac12$:
+\[
+E_n^{(1)}(l+\tfrac12) = \tfrac{\lambda_{SB}}{2}\,l,\qquad
+E_n^{(1)}(l-\tfrac12) = -\,\tfrac{\lambda_{SB}}{2}\,(l+1).
+\]
+\end{PROP}
+
+---
+
+\textbf{Aufspaltung der Bohr-Niveaus (Feinstruktur) [Example]}
+
+\begin{EXA}{QM-G25-28-16}{Aufspaltung der Bohr-Niveaus (Feinstruktur)}
+Das vorher $2n^{2}$-fach entartete Niveau teilt sich durch die Spin–Bahn-Kopplung in zwei Gruppen:
+
+\[
+\boxed{j = l+\tfrac12} \quad\Longrightarrow\quad 2(l+1)\ \text{Zustände},
+\qquad
+\boxed{j = l-\tfrac12} \quad\Longrightarrow\quad 2l\ \text{Zustände}.
+\]
+
+Die Energiedifferenz zwischen beiden Gruppen beträgt
+\[
+\Delta E_{l} = \lambda_{SB}\,(l+\tfrac12).
+\]
+\end{EXA}
+
+---
+
+\textbf{Symmetriebedingtes Verschwinden von Matrixelementen [Remark]}
+
+\begin{REM}{QM-G25-28-17}{Symmetriebedingtes Verschwinden von Matrixelementen}
+Matrixelemente $\langle u_{n,i}^{(0)}|\mathbf{H}_{SB}|u_{n,j}^{(0)}\rangle$ sind wegen der Drehimpulssymmetrie nur dann ungleich null, wenn die kombinierten Quantenzahlen $(l,m_l,m_s)$ die Auswahlausdrücke des Operators $\vec{\mathbf S}\!\cdot\!\vec{\mathbf L}$ erfüllen.  Andernfalls erfolgt keine Mischung – daher wird die Basis der $|l,m_l;\,S,m_s\rangle$ gezielt zu Eigenzuständen von $\mathbf{J}^{2}$ umgruppiert.
+\end{REM}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Spin-Bahn‐Kopplung – Aufspaltung & Folgerungen
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{Vollständigkeit der $j$-Multiplets [Remark]}
+
+\begin{REM}{QM-G25-28-18}{Vollständigkeit der $j$-Multiplets}
+Die beiden Gesamtdrehimpulse
+\(j=l+\tfrac12\) und \(j=l-\tfrac12\)
+liefern zusammen
+\[
+\sum_j (2j+1)\;=\;
+\bigl[\,2(l+\tfrac12)+1\bigr]+\bigl[\,2(l-\tfrac12)+1\bigr]
+= 4l+2
+= (2l+1)\,2,
+\]
+und decken damit exakt die Dimension des Produkt-Hilbertraums
+\((2l+1)(2S+1)\) mit \(S=\tfrac12\) ab.  
+\emph{Es gibt also keine weiteren $j$-Werte.}
+\end{REM}
+
+---
+
+\textbf{Spin–Bahn-Aufspaltung der Bohr-Energien [Concept]}
+
+\begin{CONC}{QM-G25-28-19}{Spin–Bahn-Aufspaltung der Bohr-Energien}
+\[
+\vec{\mathbf L}\!\cdot\!\vec{\mathbf S}\;\ket{n;\,j,j_3}=
+\frac{\hbar^2}{2}\,
+\bigl[j(j{+}1)-l(l{+}1)-\tfrac34\bigr]\,\ket{n;\,j,j_3},
+\]
+d.\,h.
+\[
+\vec{\mathbf L}\!\cdot\!\vec{\mathbf S}\;
+\begin{cases}
+\displaystyle =\;\;\;\frac{\hbar^2}{2}l & (j=l+\tfrac12),\\[6pt]
+\displaystyle =-\frac{\hbar^2}{2}(l{+}1) & (j=l-\tfrac12).
+\end{cases}
+\]
+
+Die Korrektur erster Ordnung lautet
+\[
+\boxed{\;
+E_{nlj}^{(1)}=
+-\frac{e}{2m_e^{2}c^{2}}
+\Bigl\langle\frac1r\frac{d\varphi}{dr}\Bigr\rangle_{n l}\!
+\begin{cases}
+\;\;\;l\\
+-(l{+}1)
+\end{cases}}\!,
+\qquad
+\varphi(r)=\dfrac{Ze}{4\pi\varepsilon_0\,r}.
+\]
+\end{CONC}
+
+---
+
+\textbf{Größenordnung der Spin–Bahn-Energie [Estimate]}
+
+\begin{PROP}{QM-G25-28-20}{Größenordnung der Spin–Bahn-Energie}
+Mit
+\(
+\langle r^{-3}\rangle\!_{nl}\!\simeq\!(a_0/Z)^{-3}
+\)
+und
+\(
+E_0\simeq-\dfrac{e^{2}Z}{8\pi\varepsilon_0 a_0}
+\)
+ergibt sich
+\[
+\frac{E_{SB}}{E_0}\;\approx\;
+\frac{1}{2}\left(\frac{e^{2}}{4\pi\varepsilon_0\hbar c}\right)^{2}
+=\frac{\alpha^{2}}{2}\;\approx\;3\times10^{-5},
+\]
+also eine \emph{Feinstruktur-}Korrektur zweiter Ordnung in~$\alpha$.
+\end{PROP}
+
+---
+
+\textbf{Die Natrium-\emph{D}-Linie (Übergang $3p\!\to\!3s$) [Example]}
+
+\begin{EXA}{QM-G25-28-21}{Natrium-\emph{D}-Linie (Übergang $3p\!\to\!3s$)}
+Für das einzige Valenzelektron ($n{=}3,l{=}1$) spaltet die Spin–Bahnkopplung das
+obere Niveau in  
+\(\ket{3p,\;j=\tfrac12}\) und \(\ket{3p,\;j=\tfrac32}\).
+Die beiden resultierenden Photonen haben leicht unterschiedliche
+Wellenlängen (D$_1$, D$_2$) und erklären die beobachtete Doppellinie
+bei \(\lambda\approx\!589.0\;\text{nm}\).
+\end{EXA}
+
+---
+
+\textbf{Weitere Feinstruktur-Beiträge [Concept]}
+
+\begin{CONC}{QM-G25-28-22}{Weitere Feinstruktur-Beiträge}
+\begin{enumerate}
+\item \textbf{Relativistische Kinetik}\\
+      \(\displaystyle
+      T = mc^{2}\!\Bigl(\!\sqrt{1+p^{2}/m^{2}c^{2}}-1\Bigr)
+      = \frac{p^{2}}{2m}-\frac{p^{4}}{8m^{3}c^{2}}+\dots
+      \)
+      liefert $-\dfrac{\langle p^{4}\rangle}{8m^{3}c^{2}}$.
+\item \textbf{Hyperfeinstruktur}\\
+      Kopplung der Elektronenmomente an das Kerndipolmoment.
+\item \textbf{Endliche Kernausdehnung}\\
+      Modifiziert $\psi(\vec x)$ bei $r\!\to\!0$ (insb.\ $s$-Zustände).
+\item \textbf{Vakuumfluktuationen}\\
+      Lamb-Shift und (\(g{-}2\))-Korrektur durch Quantenelektrodynamik.
+\end{enumerate}
+
+Alle Effekte sind additiv – experimentell trennt man sie über ihre
+unterschiedlichen Abhängigkeiten von $n,l,j$ und vom Kernspin.
+\end{CONC}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+
+
 In den meisten Fällen läßt sich die Schrödinger-Gleichung nicht streng lösen. Aus diesem Grund sind viele Näherungs-Verfahren entwickelt worden. Die hier zu behandelnde Störungstheorien sind daher wichtig.
 
-\subsection*{Ohne Entartung der ungestörten Energie-Niveaus}
 Der Hamilton-Operator $\mathbf{H}$ habe die Form
 
 $$
@@ -7544,6 +8857,17 @@ $$
 
 eine essentielle Singularität in der Stöhrung $\lambda$ (die Elektron-Phonon Kopplung für die BCS Supraleitung).
 
+
+
+
+
+
+
+
+
+
+
+
 \subsubsection*{Anharmonischer Oszillator}
 Wir betrachten als Beispiel den anharmonischer Oszillator
 
@@ -7641,7 +8965,11 @@ $\mathrm{Be}^{++}$ & 4 & -435.5 & 68.0 & -367.5 & -370.0 \\
 \end{tabular}
 \end{center}
 
+
+
+
 \subsection*{Entartete Störungstheorie}
+
 Die Energienenner $E_{n}-E_{k}$ könnten verschwinden falls zu den Eigenwerten $E_{n}$ mehrere Eigenfunktionen gehören, wie z.B. beim Wasserstoffatom. In diesem Fall muß das obige Verfahren modifiziert werden
 
 \subsubsection*{Basis}
@@ -7689,6 +9017,14 @@ $$
 $$
 
 zur Bestimmung der Energien $E_{n, j}^{(1)}$ und der Eigenvectoren $\vec{\alpha}=\left(\alpha_{1}, \ldots, \alpha_{J}\right)$. Man diagonalisiert den Störterm $\mathbf{H}_{1}$ also einfach im Unterraum der entarteten Eigenzuständen von $\mathbf{H}_{0}$.
+
+
+
+
+
+
+
+
 
 \subsubsection*{Zweifache Entartung}
 In Falle von $J=2$ hat man
@@ -7892,6 +9228,11 @@ $$
 Für diesen Zustand gilt $j=l-1 / 2$, denn $\mathbf{J}_{+}|l-1 / 2, l-1 / 2\rangle=0$.\\
 Es zeigt sich dass wir $j=l \pm 1 / 2$ nun schon alle möglichen Zustände für den Gesamtdrehimpuls konstruiert haben, wie in Abbildung 4.1 dargestell. Für den allgemeinen Klebsch-Gordan-Fall müsste man iterative weitere Zustände berechnen.
 
+
+
+
+
+
 \subsubsection*{Anzahl der Zustände}
 Um die zu zeigen, dass $j=l \pm 1 / 2$ die beiden einzig möglichen Werte für den Gesamtdrehimpuls sind, berechnen wir die Gesamtzahl der gefundenen Zustände,
 
@@ -7979,10 +9320,1059 @@ Die kleine aber endliche Ausdehnung des Kerns führ zu Modifikationen der Wellen
 Wechselwirkung des Elektrons mit dem "Strahlungsfeld", d.h. dem elektromagnetischen Fluktuationen des Vakuums.\\
 Diese führt zum Lamb-shift (Aufspaltung von auch bei der Dirac-Gleichung noch entarteten Energie-Niveaus) und Korrekturen zu $g=2$. (Quantenelektrodynamik)
 
+
+
+
+
 \pagebreak
 
 
+
+
+
+
+
+
+
+
 \section{Zeitentwicklung und Symmetrien}
+
+
+\subsection{Zeitliche Entwicklung von Zuständen und Operatoren}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Zeitentwicklung & Symmetrien – Heisenberg-Bild
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{Definition der Heisenberg-Operatoren [Concept]}
+
+Für zeitunabhängiges $\mathbf H$ sei  
+\(
+U(t)=\exp\!\bigl(i\mathbf H t/\hbar\bigr)
+\)
+mit $U^\dagger(t)U(t)=\mathbf 1$.  
+Für einen Schrödinger-Operator $\mathbf A\equiv\mathbf A(\vec{\mathbf P},\vec{\mathbf Q},t)$ definiert man
+
+\[
+\boxed{\;
+\tilde{\mathbf A}(t)
+=U(t)\,\mathbf A\,U^\dagger(t)}
+\qquad\bigl(\text{Heisenberg-Bild}\bigr).
+\]
+
+Damit gilt für Erwartungswerte
+\(
+\langle\mathbf A\rangle_{\psi}(t)
+=\langle\psi(0)|\,\tilde{\mathbf A}(t)\,|\psi(0)\rangle,
+\)
+während der Zustand zeitlich \emph{konstant} bleibt.
+
+---
+
+\textbf{Heisenberg-Gleichung [Proposition]}
+
+\[
+i\hbar\,\frac{d}{dt}\tilde{\mathbf A}(t)
+=
+\bigl[\tilde{\mathbf A}(t),\mathbf H\bigr]
+\;+\;i\hbar\,
+\Bigl(\partial_t\mathbf A\Bigr)_{\text{H}}.
+\]
+
+\emph{Herleitung:}
+\(
+\dot{\tilde{\mathbf A}}
+= \tfrac{i}{\hbar}\mathbf H U\,\mathbf A\,U^\dagger
+      -\tfrac{i}{\hbar}U\,\mathbf A\,U^\dagger\mathbf H
+      +U\,(\partial_t\mathbf A)\,U^\dagger
+= \tfrac{i}{\hbar}[\mathbf H,\tilde{\mathbf A}]
+      +U(\partial_t\mathbf A)U^\dagger.
+\)
+
+---
+
+\textbf{Konstanten der Bewegung [Definition]}
+
+\[
+\bigl[\mathbf H,\mathbf C\bigr]=0
+\;\;\Longrightarrow\;\;
+\tilde{\mathbf C}(t)=\mathbf C=\text{const},
+\quad
+\frac{d}{dt}\langle\mathbf C\rangle=0.
+\]
+
+Ein Operator, der mit dem Hamiltonoperator vertauscht, bezeichnet man als \emph{Erhaltungsgröße}.
+
+---
+
+\textbf{Beispiel 1: Freies Teilchen [Example]}
+
+Für 
+\(
+\mathbf H=\frac{\mathbf P^{2}}{2m},\;
+\tilde{\mathbf P}(t)=\mathbf P
+\)
+und
+\(
+\tilde{\mathbf Q}(t)=\mathbf Q+\frac{\mathbf P}{m}\,t.
+\)
+
+Damit:
+\(
+\frac{d}{dt}\tilde{\mathbf Q}= \tilde{\mathbf P}/m,\;
+\frac{d}{dt}\tilde{\mathbf P}=0
+\)
+– das Quantenanalog der klassischen Bewegungsgesetze.
+
+---
+
+\textbf{Beispiel 2: Harmonischer Oszillator [Example]}
+
+\(
+\mathbf H=\tfrac{\mathbf P^{2}}{2m}+\tfrac12 m\omega^{2}\mathbf Q^{2}
+\Rightarrow
+\begin{cases}
+\ddot{\tilde{\mathbf Q}}+\omega^{2}\tilde{\mathbf Q}=0\\
+\ddot{\tilde{\mathbf P}}+\omega^{2}\tilde{\mathbf P}=0
+\end{cases}
+\)
+mit Lösungen
+\(
+\tilde{\mathbf Q}(t)=
+\mathbf Q\cos\omega t+\frac{\mathbf P}{m\omega}\sin\omega t,
+\;
+\tilde{\mathbf P}(t)=
+\mathbf P\cos\omega t-m\omega\mathbf Q\sin\omega t.
+\)
+
+---
+
+\textbf{Schrödinger- vs.\ Heisenberg-Bild [Remark]}
+
+\[
+\langle\psi_S(t)|\mathbf A_S|\psi_S(t)\rangle
+=\langle\psi_H(0)|\tilde{\mathbf A}_H(t)|\psi_H(0)\rangle,
+\]
+beide Bilder sind exakt äquivalent; sie unterscheiden sich nur darin, ob
+die Zeitabhängigkeit auf Zustände (\emph{Schrödinger}) oder auf Operatoren
+(\emph{Heisenberg}) verteilt wird.
+
+---
+
+\textbf{Symmetrien als unitäre Transformationen [Concept]}
+
+Nach Wigner wird jede physikalische Symmetrie durch eine unitäre
+($\mathcal U$) oder antiunitäre Abbildung auf dem Hilbert-Raum realisiert.  
+Für kontinuierliche Symmetrien genügt $\mathcal U(\varepsilon)=
+\exp(-i\varepsilon\mathbf G/\hbar)$ mit Generator $\mathbf G$.
+
+\[
+\bigl[\mathbf H,\mathbf G\bigr]=0
+\;\;\Longrightarrow\;\;
+\text{Invarianz\;von }\mathbf H\;\text{und Erhaltung von }\mathbf G.
+\]
+
+\begin{itemize}
+\item \textbf{Raumtranslation}  
+      $\mathcal U(\vec a)=\exp(-i\vec a\!\cdot\!\vec{\mathbf P}/\hbar)$  
+      $\Rightarrow$ Impuls $\vec{\mathbf P}$ erhalten.
+\item \textbf{Rotation}  
+      $\mathcal U(R)=\exp(-i\vec\theta\!\cdot\!\vec{\mathbf L}/\hbar)$  
+      $\Rightarrow$ Bahndrehimpuls $\vec{\mathbf L}$ erhalten, sofern
+      $V(\vec x)=V(|\vec x|)$.
+\item \textbf{Zeittranslation}  
+      $\mathcal U(t)=\exp(-i\mathbf H t/\hbar)$  
+      $\Rightarrow$ Energieerhaltung trivial.
+\end{itemize}
+
+---
+
+\textbf{Noether-Theorem in der Quantenmechanik [Proposition]}
+
+\[
+\boxed{\;
+\text{Kontinuierliche Symmetrie}\;
+\longleftrightarrow\;
+\text{selbstadjungierter Generator }\mathbf G,\;
+\bigl[\mathbf H,\mathbf G\bigr]=0\;
+\longrightarrow\;
+\frac{d}{dt}\langle\mathbf G\rangle=0.
+}
+\]
+Dies ist die direkte Quantenfassung von Noethers klassischem
+Erhaltungssatz.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Zeitentwicklung & Symmetrien – weitere Konzepte
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection*{Schrödinger-, Heisenberg- und Wechselwirkungsbild [Definition]}
+
+\begin{enumerate}
+\item \textbf{Schrödinger-Bild (S):}  
+      Zustände zeitabhängig, Operatoren Zeit $t$-unabhängig  
+      $$i\hbar\,\partial_t|\psi_S(t)\rangle=\mathbf H\,|\psi_S(t)\rangle$$
+
+\item \textbf{Heisenberg-Bild (H):}  
+      Zustände konstant  
+      $|\psi_H\rangle=|\psi_S(0)\rangle$,  
+      Operatoren $\tilde{\mathbf A}_H(t)=U(t)\mathbf A_SU^\dagger(t)$ erfüllen  
+      $$i\hbar\,\dot{\tilde{\mathbf A}}_H=[\tilde{\mathbf A}_H,\mathbf H]$$
+
+\item \textbf{Wechselwirkungs- (Interaktions-)Bild (I):}  
+      Besonders günstig bei $ \mathbf H(t)=\mathbf H_0+\mathbf V(t)$ mit
+      bekannt lösbarem $\mathbf H_0$ und \emph{kleiner} Störung $\mathbf V(t)$.
+      \[
+      |\psi_I(t)\rangle=U_0^\dagger(t)\,|\psi_S(t)\rangle,
+      \qquad
+      \mathbf A_I(t)=U_0^\dagger(t)\,\mathbf A_S\,U_0(t)
+      \]
+      wobei $U_0(t)=\exp(-i\mathbf H_0 t/\hbar)$.
+      Zustände folgen hier  
+      $i\hbar\,\partial_t|\psi_I\rangle=\mathbf V_I(t)|\psi_I\rangle$
+      mit der \emph{Dyson-Reihe}
+      \[
+      |\psi_I(t)\rangle
+      =\Bigl[\,\mathbf 1
+          -\frac{i}{\hbar}\!\int_{t_0}^t\!\!\mathbf V_I(t_1)\,dt_1
+          +\frac{(-i)^2}{\hbar^2}\!\int_{t_0}^t\!dt_1\!\!\int_{t_0}^{t_1}\!dt_2\,
+              \mathbf V_I(t_1)\mathbf V_I(t_2)+\ldots
+        \Bigr]\!
+        |\psi_I(t_0)\rangle .
+      \]
+\end{enumerate}
+
+Alle drei Bilder liefern identische beobachtbare Vorhersagen:
+\[
+\langle\psi_S(t)|\mathbf A_S|\psi_S(t)\rangle
+= \langle\psi_I(t)|\mathbf A_I(t)|\psi_I(t)\rangle
+= \langle\psi_H|\tilde{\mathbf A}_H(t)|\psi_H\rangle.
+\]
+
+%--------------------------------------------------------------------------
+
+\subsubsection*{Kontinuierliche Symmetrien und Generatoren [Proposition]}
+
+Jede stetige Symmetrietransformation
+\(
+\mathcal U(\varepsilon)=\exp\!\bigl(-\tfrac{i}{\hbar}\varepsilon\,\mathbf G\bigr)
+\)
+wird durch einen selbstadjungierten Generator $\mathbf G$ charakterisiert.
+
+\[
+[\mathbf H,\mathbf G]=0
+\;\Longrightarrow\;
+\frac{d}{dt}\langle\mathbf G\rangle=0,
+\qquad
+\tilde{\mathbf G}(t)=\mathbf G.
+\]
+
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Symmetrie & Generator $\mathbf G$ & Erhaltungsgröße \\
+\hline
+Zeitverschiebung $t\!\to\!t+\tau$       & $\mathbf H$                 & Energie $E$ \\
+Raumtranslation $\vec x\!\to\!\vec x+\vec a$ & $\vec{\mathbf P}$        & Impuls $\vec p$ \\
+Rotation $\vec x\!\to\!R\vec x$         & $\vec{\mathbf L}$           & Bahndrehimpuls $\vec L$ \\
+Phase $\psi\!\to\!e^{i\alpha}\psi$      & Teilchenzahl $\mathbf N$    & Ladung $Q$ \\
+\hline
+\end{tabular}
+\end{center}
+
+Dies ist die quantenmechanische Fassung des \emph{Noether-Satzes}.
+
+%--------------------------------------------------------------------------
+
+\subsubsection*{Raumtranslationsinvarianz [Example]}
+
+Für ein Potential $V(\vec x)=\text{const}$ gilt
+\(
+[\mathbf H,\vec{\mathbf P}]=0.
+\)
+Damit
+\(
+\tilde{\mathbf P}(t)=\vec{\mathbf P},\;
+\tilde{\mathbf Q}(t)=\vec{\mathbf Q}+\vec{\mathbf P}t/m
+\)
+und Impuls ist erhalten.  
+Entsprechend generiert
+\(
+\mathcal U(\vec a)=\exp(-i\vec a\!\cdot\!\vec{\mathbf P}/\hbar)
+\)
+die Verschiebung
+\(
+\mathcal U(\vec a)\,\mathbf Q\,\mathcal U^\dagger(\vec a)
+        =\mathbf Q+\vec a.
+\)
+
+%--------------------------------------------------------------------------
+
+\subsubsection*{Rotationsinvarianz [Example]}
+
+Ist $V(\vec x)=V(r)$, dann
+\(
+[\mathbf H,\vec{\mathbf L}]=0.
+\)
+Die Rotationsoperatoren
+\(
+\mathcal U(R)=\exp(-\tfrac{i}{\hbar}\vec\theta\!\cdot\!\vec{\mathbf L})
+\)
+transformieren
+\(
+\mathbf Q\mapsto R\mathbf Q,\;
+\mathbf P\mapsto R\mathbf P.
+\)
+Daraus folgt Erhaltung des Gesamtdrehimpulses
+\(
+\vec{\mathbf J}=\vec{\mathbf L}+\vec{\mathbf S}
+\)
+bei Anwesenheit von Spin.
+
+%--------------------------------------------------------------------------
+
+\subsubsection*{Parität $\mathcal P$ und Zeitumkehr $\mathcal T$ [Concept]}
+
+\[
+\mathcal P:\;
+\vec x\!\to\!-\vec x,\;
+\vec p\!\to\!-\vec p
+\quad\Longrightarrow\quad
+\mathcal P\,\mathbf Q\,\mathcal P^{-1}=-\mathbf Q,
+\;
+\mathcal P\,\mathbf P\,\mathcal P^{-1}=-\mathbf P.
+\]
+
+\begin{itemize}
+\item $\mathcal P$ ist \emph{unitär} ($\mathcal P^\dagger=\mathcal P^{-1}$).
+\item $\mathcal T$ ist \emph{antiunitär} (komplexe Konjugation $K$ kombiniert
+      mit einer unitären Matrix):  
+      \(
+      \mathcal T\,i\,\mathcal T^{-1}=-i.
+      \)
+\end{itemize}
+
+Ob $\mathcal P$ / $\mathcal T$ Symmetrien sind, entscheidet
+\(
+\mathcal P\mathbf H\mathcal P^{-1}=\mathbf H,\;
+\mathcal T\mathbf H\mathcal T^{-1}=\mathbf H.
+\)
+
+%--------------------------------------------------------------------------
+
+\subsubsection*{Zusammenfassung [Summary]}
+
+\begin{itemize}
+\item Die zeitliche Entwicklung kann wahlweise den Zuständen
+      (Schrödinger-Bild) oder den Operatoren
+      (Heisenberg-Bild) zugeordnet werden – beobachtbare Größen bleiben
+      unverändert.
+\item Die Heisenberg-Bewegungsgleichung
+      \(i\hbar\dot{\tilde{\mathbf A}}=[\tilde{\mathbf A},\mathbf H]\)
+      ist die Operatorform der Newtonschen Gesetze.
+\item Kontinuierliche Symmetrien werden durch unitäre
+      Transformationen mit Generator $\mathbf G$ realisiert;  
+      \([\mathbf H,\mathbf G]=0\) impliziert eine
+      Erhaltungsgröße (Noether).
+\item Praktisch bedeutsam sind Raum- und Zeittranslationen,
+      Rotationen, Phasensymmetrien (Ladung) sowie diskrete
+      Symmetrien wie Parität und Zeitumkehr.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Zeitentwicklung & Symmetrien – Fortsetzung
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection*{Konstanten der Bewegung [Proposition]}
+
+\begin{itemize}
+\item \textbf{Klassisch:}  
+      $\displaystyle \frac{dF(P,Q)}{dt}=0 
+      \;\Longleftrightarrow\;
+      \{F,H\}_{\text{PB}}=0$.
+
+\item \textbf{Quantenmechanisch:}  
+      Für einen (explizit zeitunabhängigen) Operator $\mathbf A$
+      \[
+        \frac{d}{dt}\,\tilde{\mathbf A}(t)=
+        \frac{i}{\hbar}\,[\mathbf H,\tilde{\mathbf A}(t)]
+        \quad\Longrightarrow\quad
+        [\mathbf H,\tilde{\mathbf A}(t\,{=}\,0)]=0
+        \;\Rightarrow\;
+        \frac{d}{dt}\tilde{\mathbf A}(t)=0 .
+      \]
+      $\tilde{\mathbf A}$ (bzw.\ $\mathbf A$ im Schrödinger-Bild) ist dann
+      eine \emph{Erhaltungsgröße}.
+\end{itemize}
+
+Damit geht im Korrespondenzprinzip  
+$\{\,\cdot\,,\,\cdot\,\}_{\text{PB}}\;\mapsto\;
+\frac{1}{i\hbar}[\,,]$ über.
+
+%--------------------------------------------------------------------------
+
+\subsubsection*{Kanonische Heisenberg-Gleichungen [Proposition]}
+
+Für die Heisenberg-Operatoren
+$\tilde{\mathbf Q}_j(t),\ \tilde{\mathbf P}_j(t)$
+gilt (bei $\partial_t\mathbf H=0$):
+\[
+  \boxed{\;
+    \frac{d}{dt}\tilde{\mathbf Q}_j=\frac{\partial\mathbf H}
+                                           {\partial\tilde{\mathbf P}_j},
+    \qquad
+    \frac{d}{dt}\tilde{\mathbf P}_j=-\frac{\partial\mathbf H}
+                                            {\partial\tilde{\mathbf Q}_j}
+  \;}
+  \qquad
+  \bigl[\tilde{\mathbf Q}_j,\tilde{\mathbf P}_k\bigr]
+  =\frac{\hbar}{i}\,\delta_{jk}.
+\]
+Dies ist die Operatorform der Hamiltonschen Gleichungen.
+
+%--------------------------------------------------------------------------
+
+\subsubsection*{Wechselwirkungs- (Interaktions-)Bild [Concept]}
+
+\[
+\mathbf H=\mathbf H_0+\mathbf W(t),
+\quad
+U_0(t)=e^{-i\mathbf H_0t/\hbar}.
+\]
+
+\begin{itemize}
+\item \textbf{Zustände:}\;
+      $|\psi_I(t)\rangle = U_0^\dagger(t)\,|\psi_S(t)\rangle
+      \;\;\Longrightarrow\;\;
+      i\hbar\,\partial_t|\psi_I\rangle=\mathbf W_I(t)|\psi_I\rangle$,
+      mit  $\mathbf W_I(t)=U_0^\dagger(t)\mathbf W(t)U_0(t)$.
+
+\item \textbf{Operatoren:}\;
+      $\mathbf A_I(t)=U_0^\dagger(t)\,\mathbf A_S\,U_0(t)$
+      erfüllen
+      $i\hbar\,\dot{\mathbf A}_I=[\mathbf A_I,\mathbf H_0]$.
+
+\item \textbf{Dyson-Serie:}\;
+      $|\psi_I(t)\rangle=
+       \displaystyle\sum_{n=0}^{\infty}
+       \frac{(-i)^n}{\hbar^n}\!
+       \int_{t_0}^t\!dt_1\!\cdots\!\int_{t_0}^{t_{n-1}}\!dt_n\,
+       \mathbf W_I(t_1)\cdots\mathbf W_I(t_n)|\psi_I(t_0)\rangle$.
+\end{itemize}
+
+Das Wechselwirkungsbild ist Grundlage der \emph{zeitabhängigen
+Störungstheorie}.
+
+%--------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+\subsection{Translationen, Drehungen und Galilei-Invarianz}
+
+\subsubsection*{Translationsoperator [Definition]}
+
+Für eine Verschiebung $\vec a$:
+\[
+  U(\vec a)=\exp\!\Bigl(\frac{i}{\hbar}\vec a\!\cdot\!\vec{\mathbf P}\Bigr),
+  \qquad
+  U(\vec a)\,\psi(\vec x)=\psi(\vec x+\vec a),
+  \qquad
+  \vec{\mathbf P}=\frac{\hbar}{i}\,\vec\nabla .
+\]
+
+\begin{itemize}
+  \item $U(\vec a)$ ist \emph{unitär} $\Rightarrow$ Norm- und Skalarprodukt werden erhalten.
+  
+  \item Für $N$ Teilchen gilt:  
+  $\displaystyle
+    \vec{\mathbf P}_{\text{ges}} = \frac{\hbar}{i} \sum_{n=1}^N \nabla_n$,  
+  und
+  $U(\vec a)\psi(\{\vec x_k\}) =
+   \psi(\vec x_1+\vec a, \ldots, \vec x_N+\vec a)$.
+\end{itemize}
+
+%--------------------------------------------------------------------------
+
+\subsubsection*{Impulserhaltung [Theorem]}
+
+Gilt
+\(
+  U(\vec a)\mathbf H\,U^\dagger(\vec a)=\mathbf H
+\)
+($\mathbf H$ translationsinvariant), so folgt aus
+$U(\vec a)\mathbf H=\mathbf H U(\vec a)$:
+
+\vspace{2pt}
+\[
+  \bigl[\mathbf H,\vec{\mathbf P}\bigr]=\vec 0
+  \quad\Longrightarrow\quad
+  \frac{d}{dt}\,\vec{\mathbf P}_H(t)=0
+  \quad\text{(Gesamtimpuls ist erhalten).}
+\]
+
+\noindent
+\emph{Allgemein:}  
+Ein Operator $\mathbf A$ ist invariant unter einer stetigen
+Symmetrie mit Generator $\mathbf G$
+$\iff$\; $[\mathbf A,\mathbf G]=0$.
+
+%--------------------------------------------------------------------------
+
+\subsection*{Drehungen und Drehimpulserhaltung}
+
+Die Argumente für Translationen übertragen sich eins-zu-eins
+auf Rotationen
+$R(\vec\theta)=\exp(-\tfrac{i}{\hbar}\vec\theta\!\cdot\!\vec{\mathbf L})$.
+Bei Rotationsinvarianz gilt
+\(
+  [\mathbf H,\vec{\mathbf L}]=0
+\)
+$\Rightarrow$ Erhaltung des Bahndrehimpulses
+(beziehungsweise des Gesamtdrehimpulses
+$\vec{\mathbf J}=\vec{\mathbf L}+\vec{\mathbf S}$, falls Spin vorhanden).
+
+%--------------------------------------------------------------------------
+
+\subsection*{Zusammenfassung [Summary]}
+
+\begin{itemize}
+\item Erhaltungsgrößen $\leftrightarrow$ Operatoren, die mit $\mathbf H$
+      vertauschen.
+\item Heisenberg-Gleichungen liefern kanonische Operatorbewegung
+      und verbinden klassische Poisson- mit Quanten-Kommutatoren.
+\item Drei Darstellungen:  
+      Schrödinger (Zeit in Zuständen),  
+      Heisenberg (Zeit in Operatoren)  
+      und Wechselwirkungsbild (gemischt) – alle physikalisch äquivalent.
+\item Kontinuierliche Symmetrien (Translation, Rotation, \dots)
+      führen per Noether-Theorem zu Impuls-, Drehimpuls-, Energie-
+      etc.\ Erhaltung.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%=====================================================================
+%  Rotationen & Drehimpuls – Fortsetzung
+%=====================================================================
+
+\subsubsection*{Kommutatoralgebra der Drehimpulse [Proposition]}
+Die Komponenten der Drehimpulsoperatoren erfüllen
+\[
+  \bigl[\mathbf L_i,\mathbf L_j\bigr] \;=\;
+  i\hbar\,\varepsilon_{ijk}\,\mathbf L_k,
+  \qquad i,j,k\in\{1,2,3\}.
+\]
+Damit bilden sie eine Darstellung der Lie-Algebra $\mathfrak{so}(3)$.
+Analog gilt für die Spinoperatoren
+$\mathbf S_i=\frac{\hbar}{2}\sigma_i$
+\[
+  \bigl[\mathbf S_i,\mathbf S_j\bigr]
+  \;=\;
+  i\hbar\,\varepsilon_{ijk}\,\mathbf S_k .
+\]
+Bahndrehimpuls und Spin vertauschen:
+$\,[\mathbf L_i,\mathbf S_j]=0$.
+
+%---------------------------------------------------------------------
+
+\subsubsection*{Von $\mathrm{SU}(2)$ zu $\mathrm{SO}(3)$ [Concept]}
+\begin{enumerate}
+  \item $\mathrm{SU}(2)$ ist die Gruppe $2{\times}2$-Matrizen
+        $U$ mit $\det U=1$ und $U^\dagger U=\mathbf 1$.
+  \item Der Homomorphismus  
+        $\displaystyle
+          \pi:\;U\;\mapsto\;
+          R_{ij}(U)=\frac12\operatorname{Tr}\bigl(
+                  \sigma_i\,U\,\sigma_j\,U^\dagger\bigr)
+        $
+        liefert eine surjektive Abbildung
+        $\pi:\mathrm{SU}(2)\twoheadrightarrow\mathrm{SO}(3)$.
+  \item $\ker\pi=\{\pm\mathbf 1\}$  $\Rightarrow$
+        $\mathrm{SU}(2)$ ist die \emph{zweifache Überlagerung}
+        (double cover) von $\mathrm{SO}(3)$.
+        Deshalb benötigt ein Spinor eine $4\pi$-Drehung, um in
+        seinen Ausgangszustand zurückzukehren.
+\end{enumerate}
+
+%---------------------------------------------------------------------
+
+\subsubsection*{Eigenzustände von $\mathbf J^2$ und $\mathbf J_3$ [Definition]}
+\[
+  \mathbf J^2|j,m\rangle=\hbar^2 j(j{+}1)|j,m\rangle,
+  \qquad
+  \mathbf J_3|j,m\rangle=\hbar m\,|j,m\rangle,
+\]
+mit
+\(
+  j=0,\tfrac12,1,\tfrac32,\ldots,
+  \;
+  m=-j,-j{+}1,\ldots,j.
+\)
+
+Die Drehoperatoren wirken als
+\[
+  U(\vec n,\varphi)|j,m\rangle
+  \;=\;
+  \sum_{m'}D^{(j)}_{m'm}(\vec n,\varphi)\,|j,m'\rangle ,
+\]
+wobei $D^{(j)}$ die Wigner-D-Matrizen sind.
+
+%---------------------------------------------------------------------
+
+\subsubsection*{Addition zweier Drehimpulse [Sketch]}
+Gegeben $\mathbf J=\mathbf J_1+\mathbf J_2$ mit
+$j_1,j_2$,
+so sind die erlaubten Resultanten
+\[
+  j \;=\; |\,j_1-j_2\,|,\,
+  |\,j_1-j_2\,|{+}1,\ldots,j_1+j_2 .
+\]
+Die zugehörigen Basiswechselkoeffizienten
+$\langle j_1m_1;j_2m_2|j,m\rangle$
+sind die \emph{Clebsch–Gordan-Koeffizienten}.
+Das Beispiel $j_1=l,\ j_2=\tfrac12$ führte oben zu
+$j=l\pm\tfrac12$.
+
+%---------------------------------------------------------------------
+
+\subsubsection*{Kontinuierliche Symmetrien \& Noether [Summary]}
+\begin{enumerate}
+  \item \textbf{Translationen}  
+        Generator $\mathbf P$,
+        $[\mathbf H,\mathbf P]=0 \;\Longrightarrow\;$ Impulserhaltung.
+  \item \textbf{Rotationen}  
+        Generator $\mathbf J$,
+        $[\mathbf H,\mathbf J]=0 \;\Longrightarrow\;$ Drehimpulserhaltung.
+  \item \textbf{Zeitverschiebung}  
+        Generator $\mathbf H$,
+        $[\mathbf H,\mathbf H]=0 \;\Longrightarrow\;$ Energieerhaltung.
+\end{enumerate}
+
+%---------------------------------------------------------------------
+
+\subsubsection*{Galilei-Invarianz [Outline]}
+Für nichtrelativistische Vielteilchensysteme
+($m_i$ konstant) gilt unter einer
+Galilei-Transformation  $(\vec x\,',t')=(\vec x-\vec v t,t)$:
+\[
+  \psi'(\{\vec x_k\},t)
+  =\exp\!\Bigl\{\tfrac{i}{\hbar}
+                 \Bigl(\sum_k m_k\vec v\!\cdot\!\vec x_k
+                       -\tfrac12 M v^{2}t\Bigr)\Bigr\}\,
+    \psi(\{\vec x_k+\vec v t\},t),
+  \quad
+  M=\sum_k m_k .
+\]
+Der Generator des Boosts ist
+\(
+  \mathbf G
+  =\sum_k m_k\,\mathbf x_k
+  -t\,\mathbf P,
+\)
+so dass
+$[\mathbf H,\mathbf G]=\tfrac{i}{\hbar}\,\mathbf P$.
+Die \emph{zentrale Erweiterung} der Galilei-Algebra macht
+die Masse~$M$ zur Erhaltungsgröße und erklärt die
+Phasenfaktoren in der Transformation.
+
+%---------------------------------------------------------------------
+
+\subsubsection*{Schlussbemerkung}
+Drehimpuls-, Impuls- und Energieerhaltung folgen im
+Heisenberg-Bild unmittelbar aus
+\(
+  [\mathbf H,\mathbf J]=[\mathbf H,\mathbf P]=0.
+\)
+Die zugrundeliegenden Symmetrien (Rotation, Translation,
+Zeitverschiebung) werden von den entsprechenden
+unitären Operatorscharen
+$\{\exp(-\tfrac{i}{\hbar}\vec\theta\!\cdot\!\mathbf J)\}$,
+$\{\exp(-\tfrac{i}{\hbar}\vec a\!\cdot\!\mathbf P)\}$
+und
+$\{\exp(-\tfrac{i}{\hbar}t\mathbf H)\}$
+realisiert.
+Alle physikalisch äquivalenten Darstellungen
+(Schrödinger, Heisenberg, Wechselwirkung)
+liefern identische, messbare
+Erwartungswerte.
+
+%=====================================================================
+
+
+
+
+
+
+
+
+%=====================================================================
+%  Zeitumkehr­invarianz (Time-Reversal Symmetry)
+%=====================================================================
+
+\subsection{Zeitumkehrinvarianz}
+
+\subsubsection*{Klassische Definition \texorpdfstring{$\Theta$}{Θ}}
+Unter einer \emph{Zeitumkehr} wird die Bahn eines Punktteilchens
+\(
+  \bigl(\vec x(t),\vec p(t)\bigr)
+\)
+durch
+\[
+  \Theta:\;
+  t\mapsto -t,\qquad
+  \vec x(t)\mapsto\vec x^\Theta(t)=\vec x(-t),\qquad
+  \vec p(t)\mapsto\vec p^\Theta(t)=m\frac{d\vec x^\Theta}{dt}=-\vec p(-t)
+\]
+abgebildet.
+Bei Potentialkräften $\,\vec F=-\nabla V(\vec x)\,$ bleiben die
+Newton-Gleichungen invariant, weil sie nur Even–Funktionen der
+Geschwindigkeit enthalten.\par
+\vspace{0.3em}
+\emph{Merke:}  Zeitumkehr invertiert alle Geschwindigkeiten und Impulse,
+belässt aber die Ortskoordinaten unverändert.
+
+%---------------------------------------------------------------------
+
+\subsubsection*{Quantisierte Zeitumkehr – Antiunitärer Operator \texorpdfstring{$\mathbf T$}{T} [Definition]}
+In der Quantenmechanik wird Zeitumkehr durch einen
+\emph{antiunitären} Operator $\mathbf T$ realisiert –\,d.\,h.
+$\mathbf T$ ist normerhaltend \emph{und} komplex konjugiert
+(Kramers, Wigner):
+\[
+  \bigl\langle\mathbf T\psi,\mathbf T\phi\bigr\rangle
+  \;=\;\langle\phi,\psi\rangle,\qquad
+  \mathbf T\bigl(c_1\psi_1+c_2\psi_2\bigr)
+  \;=\;c_1^{\!*}\mathbf T\psi_1+c_2^{\!*}\mathbf T\psi_2 .
+\]
+Wesentliche Abbildungen
+\[
+  \mathbf T\,\vec x\,\mathbf T^{-1}= \; \vec x, \qquad
+  \mathbf T\,\vec p\,\mathbf T^{-1}= -\vec p, \qquad
+  \mathbf T\,t\,\mathbf T^{-1}= -t, \qquad
+  \mathbf T\,i\,\mathbf T^{-1}= -i .
+\]
+Letzteres erklärt, weshalb $\mathbf T$ nicht unitär sein kann
+($i\mapsto i$ wäre unmöglich).
+
+%---------------------------------------------------------------------
+
+\subsubsection*{Zeitumkehrinvarianz der Schrödingergleichung [Derivation]}
+Für ein spinloses Teilchen mit realem Potential
+$V(\vec x)=V^{\!*}(\vec x)$
+\[
+  i\hbar\,\partial_t\psi(\vec x,t)
+  =\left(-\frac{\hbar^2}{2m}\Delta+V\right)\psi(\vec x,t)
+\]
+komplex konjugieren $\Rightarrow$
+\[
+  -i\hbar\,\partial_t
+  \psi^{\!*}(\vec x,t)
+  =\left(-\frac{\hbar^2}{2m}\Delta+V\right)
+   \psi^{\!*}(\vec x,t).
+\]
+Substituiere $t\mapsto -t$,
+definiere $\psi_T(\vec x,t):=\psi^{\!*}(\vec x,-t)$.
+Dann erfüllt $\psi_T$ wieder die Schrödingergleichung:
+\[
+  i\hbar\,\partial_t\psi_T
+  =\bigl(-\frac{\hbar^2}{2m}\Delta+V\bigr)\psi_T .
+\]
+D.\,h. $\mathbf T$ ist eine Symmetrie eines
+realen Hamiltonoperators.
+
+%---------------------------------------------------------------------
+
+\subsubsection*{Wirkung auf Spin \texorpdfstring{$1/2$}{1/2} [Example]}
+Für Spinoren gilt
+\[
+  \mathbf T= -i\sigma_y\,\mathbf K,
+  \qquad
+  \mathbf K:\text{ komplexe Konjugation}.
+\]
+Damit
+\(
+  \mathbf T\,\boldsymbol\sigma\,\mathbf T^{-1} = -\boldsymbol\sigma.
+\)
+\emph{Wichtig:}  \(
+  \mathbf T^2 = -\mathbf 1
+\)
+für Halbintegerspin — Grundlage des
+\textbf{Kramers-Theorems}.
+
+%---------------------------------------------------------------------
+
+\subsubsection*{Kramers-Entartung [Proposition]}
+Wenn ein Hamiltonoperator $\mathbf H$ zeitumkehrinvariant
+\(
+  [\mathbf H,\mathbf T]=0
+\)
+und das System ungeraden Gesamtdrehimpuls
+(halbes Vielfaches von $\hbar$)
+besitzt, dann ist jedes nichtentartete Eigenpaar verboten:
+\[
+  \mathbf T\,|\psi\rangle
+  \text{ linear unabhängig von }|\psi\rangle
+  \;\Longrightarrow\;
+  E\text{ mindestens doppelt entartet}.
+\]
+
+%---------------------------------------------------------------------
+
+\subsubsection*{Operatoren unter Zeitumkehr [Table]}
+\[
+\begin{array}{|c|c|c|}
+  \hline
+  \text{Observable} & \mathbf T\mathcal O\mathbf T^{-1}
+                    & \text{Even / Odd} \\
+  \hline
+  \vec x    & \phantom{-}\vec x & + \\
+  \vec p    &          -\vec p & - \\
+  \vec L=\vec x\times\vec p & -\vec L & - \\
+  \vec S    &          -\vec S & - \\
+  \vec B    &          \phantom{-}\vec B & + \\
+  \vec E    &          \phantom{-}\vec E & + \\
+  \hline
+\end{array}
+\]
+
+%---------------------------------------------------------------------
+
+\subsubsection*{Zeitumkehrverletzung [Remark]}
+• Elektrische Dipolmomente mit
+$\vec d\parallel\vec S$
+würden unter $\mathbf T$ die Vorzeichen nicht richtig transformieren
+$\Rightarrow$ Nachweis eines dauerhaften EDM wäre direkter Beleg
+für T-Verletzung.\
+• In der schwachen Wechselwirkung (Kaon-, B-Mesonsysteme)
+ist T-Symmetrie experimentell nachgewiesen verletzt;  
+durch CPT-Theorem äquivalent zur CP-Verletzung.
+
+%---------------------------------------------------------------------
+
+\subsubsection*{Zusammenfassung}
+\begin{itemize}
+  \item Zeitumkehr wird in Quantenmechanik von einem
+        \textbf{antiunitären} Operator $\mathbf T$ repräsentiert.
+  \item Für $\mathbf T$-invariante Hamiltonians sind
+        Impuls- und Spinparitäten festgelegt —\,
+        Kramersentartung ist unvermeidlich
+        bei Systemen mit halbzahligem Spin.
+  \item Symmetrieprinzip:
+        Ein Operator ist Erhaltungsgröße, wenn er
+        mit dem Generator der Symmetrie
+        (hier $\mathbf H$, $\mathbf P$, $\mathbf J$, $\mathbf T$)
+        vertauscht.
+\end{itemize}
+
+%=====================================================================
+
+%=====================================================================
+% Zeitumkehr­invarianz – quantenmechanische Details
+%=====================================================================
+
+\subsubsection*{Zeitumkehrabbildung im Schrödinger-Bild}
+
+Wir definieren im Schrödinger-Bild für \emph{Orts-} und
+\emph{Impulsoperatoren} den Zeitumkehr-Transformierten
+\[
+  \boxed{\;
+    \mathbf Q_j^{\Theta} = \mathbf Q_j,
+    \qquad
+    \mathbf P_j^{\Theta} = -\,\mathbf P_j
+  \;}
+\]
+und verlangen, dass die Schrödingergleichung unter
+\(\Theta\) invariant bleibt.  
+Komplexe Konjugation der Gleichung
+\( i\hbar\partial_t\psi=\mathbf H\psi \)
+liefert
+\[
+  -i\hbar\,\partial_t\psi^{*}(\vec x,t)
+  =\mathbf H^{*}\,\psi^{*}(\vec x,t)
+  \quad\Longrightarrow\quad
+  i\hbar\,\partial_{(-t)}
+  \psi^{*}(\vec x,-t)
+  =\mathbf H^{\Theta}\,\psi^{*}(\vec x,-t),
+\]
+wobei
+\(
+  \mathbf H^{\Theta}(\mathbf P,\mathbf Q)
+  :=\mathbf H(-\mathbf P,\mathbf Q).
+\)
+Für Hamiltonoperatoren der Form
+\(
+  \mathbf H
+  =\frac{\mathbf P^{2}}{2m}+V(\mathbf Q)
+\)
+gilt bereits
+\(\mathbf H^{\Theta}=\mathbf H\);
+die Theorie ist also T-invariant.
+
+%---------------------------------------------------------------------
+\subsubsection*{Antiunitarität von $\widehat U (\Theta)$}
+
+Analog zum klassischen Fall bilden wir den
+\emph{Zeitumkehroperator}
+\[
+  \widehat U(\Theta)\,\psi(\vec x,t)
+  =\psi^{\Theta}(\vec x,t)
+  :=\psi^{*}(\vec x,-t),
+\]
+der
+\begin{align*}
+  \widehat U\bigl(\lambda_1\psi_1+\lambda_2\psi_2\bigr)
+    &=\lambda_1^{*}\,\widehat U\psi_1
+      +\lambda_2^{*}\,\widehat U\psi_2,
+\\
+  \bigl\langle\widehat U\psi_1,\widehat U\psi_2\bigr\rangle
+    &=\langle\psi_2,\psi_1\rangle
+    =\langle\psi_1,\psi_2\rangle^{*},
+\end{align*}
+erfüllt – also \emph{antiunitär} ist.
+Für spinlose Teilchen erhält man
+\[
+  \widehat U^{2}(\Theta)=\mathbf 1,\qquad
+  \widehat U(\Theta)=\widehat U^{-1}(\Theta).
+\]
+
+%---------------------------------------------------------------------
+\subsubsection*{Zeitentwicklung unter \texorpdfstring{$\Theta$}{Θ}}
+Da
+\(
+  \widehat U(\Theta)\,\mathbf H\,\widehat U^{-1}(\Theta)
+  =\mathbf H^{\Theta}=\mathbf H,
+\)
+folgt für den Zeitentwicklungsoperator
+\[
+  U^{\Theta}(t)
+  =\bigl(e^{i\mathbf H t/\hbar}\bigr)^{\Theta}
+  =e^{-i\mathbf H t/\hbar}
+  =U(-t).
+\]
+Die Dynamik einer T-invarianten Theorie ist also zeitumkehrsymmetrisch.
+
+%---------------------------------------------------------------------
+\subsubsection*{Elektromagnetische Felder unter Zeitumkehr}
+
+\begin{itemize}
+\item
+Elektrostatisches Potential
+\(
+  \varphi(\vec x)\!=\!\varphi^{\Theta}(\vec x)
+\)
+– \emph{erlaubt} T-Invarianz.
+
+\item
+Vektorpotential
+\(
+  \vec A(\vec x,t)\longrightarrow -\vec A(\vec x,-t)
+\)
+– äußere Magnetfelder \emph{brechen} T-Invarianz:
+\(
+  \widehat U(\Theta)\,\mathbf H(\vec A)\,\widehat U^{-1}(\Theta)
+  =\mathbf H(-\vec A)\neq\mathbf H(\vec A).
+\)
+\end{itemize}
+
+%---------------------------------------------------------------------
+\subsubsection*{Spin–$\frac{1}{2}$ und Zeitumkehr}
+
+Wegen des magnetischen Moments transformiert der Spin wie
+ein axiales Vektor:
+\(
+  \vec S\mapsto -\vec S.
+\)
+Für einen zweikomponentigen Spinor
+\(
+  \tilde\psi
+  =\bigl(\psi_{+},\psi_{-}\bigr)^{\mathsf T}
+\)
+muss daher gelten
+\[
+  \boxed{\;
+    \widehat U(\Theta)\tilde\psi(\vec x,t)
+    =\begin{pmatrix}
+       i\,\psi_{-}^{*}(\vec x,-t)\\[2pt]
+      -i\,\psi_{+}^{*}(\vec x,-t)
+     \end{pmatrix}}
+\]
+Dies erfüllt
+\(
+  \langle\sigma_j\rangle_{\Theta}
+  =-\langle\sigma_j\rangle
+\)
+für $j=1,2,3$.
+
+\textbf{Operatorform.}
+Schreibt man komplexe Konjugation als
+\(\mathbf K\),
+so lautet der T-Operator für ein Elektron
+\[
+  \widehat U(\Theta)
+  =\mathbf K\otimes\sigma_y ,
+  \qquad
+  \widehat U^{2}(\Theta)=-\mathbf 1 .
+\]
+Für $N$ Elektronen
+\(
+  \widehat U^{2}(\Theta)=(-1)^N\mathbf 1
+\)
+
+– Grundlage des folgenden Kramers-Theorems.
+
+%---------------------------------------------------------------------
+\subsubsection*{Kramers-Entartung [Theorem]}
+
+Sei $\mathbf H$ zeitumkehrinvariant (\(\![\mathbf H,\widehat U(\Theta)]=0\!\))
+und umfasse eine \emph{ungerade} Anzahl von Elektronen
+($\widehat U^{2}=-1$).
+Dann ist jeder Eigenwert $E$ mindestens doppelt entartet:
+\[
+  \mathbf H|\psi\rangle =E|\psi\rangle
+  \;\Longrightarrow\;
+  |\psi\rangle,\;
+  \widehat U(\Theta)|\psi\rangle
+  \text{ linear unabhängig, }
+  \mathbf H\widehat U|\psi\rangle =E\widehat U|\psi\rangle.
+\]
+In rein elektrischen Feldern bleibt diese
+\emph{Kramers-Entartung} bestehen;  
+ein magnetisches Feld (\(\vec A\neq0\)) hebt sie auf.
+
+%---------------------------------------------------------------------
+\subsubsection*{Zusammenfassung der Zeitumkehrsymmetrie}
+\begin{itemize}
+  \item $\Theta$ ist klassisch eine Inversion der Zeitrichtung,
+        quantenmechanisch durch einen antiunitären
+        Operator $\widehat U(\Theta)$ realisiert.
+  \item Für spinlose Systeme gilt
+        \(\widehat U^{2}=+1\); für
+        Halbspin ($N$ ungerade) erhält man
+        \(\widehat U^{2}=-1\Rightarrow\) Kramers-Entartung.
+  \item Elektrische Felder respektieren, magnetische Felder verletzen
+        Zeitumkehrinvarianz.
+\end{itemize}
+
+%=====================================================================
+
+
+
+
+
+
+
+
 
 
 
@@ -8112,6 +10502,14 @@ $$
 
 zu definieren.
 
+
+
+
+
+
+
+
+
 \subsubsection*{Bewegungsgleichung von Operatoren}
 Aus $i \hbar \frac{d}{d t} U(t)=-\mathbf{H} U(t)$ folgt mit
 
@@ -8215,6 +10613,15 @@ $$
 $$
 
 die klassische Lösung des harmonischen Oszillators (eine Ellipse im Zustandsraum). Eine alternative Herleitung benutzt kohärente Zustände, welche im Abschnitt ?? diskutiert wurden.
+
+
+
+
+
+
+
+
+
 
 \subsubsection*{Konstanten der Bewegung}
 Aus der klassichen Mechanik wissen wir, dass jede (zeitunabhängige) Funktion auf dem Phasenraum $F(P, Q)$ genau dann eine Konstante der Bewegung ist, also eine Erhaltungsgrösse, wenn die Poisson-Klammer von $F$ und der Hamilton-Funktion verschwindet.
@@ -8415,6 +10822,16 @@ Ein Operator A ist invariant unter einer Symmetrie dann und nur dann wenn er mit
 
 In unserem obrigen Beispiel war $\mathbf{A}=\mathbf{H}$ und $\mathbf{E}=\overrightarrow{\mathbf{P}}$.
 
+
+
+
+
+
+
+
+
+
+
 \subsubsection*{Drehungen}
 Wir errinnern an die Definition der Drehimpuls Operatoren,
 
@@ -8510,6 +10927,15 @@ $$
 $$
 
 Die Gruppe von Drehungen von Spinoren hesst $\mathrm{SU}(2)$, jene für räumliche Drehunen in drei Dimensionen O(3).
+
+
+
+
+
+
+
+
+
 
 \subsubsection*{Die SU(2) Gruppe}
 Aus
@@ -8708,6 +11134,13 @@ $$
 
 ganz in Analogie zu der Transformationseigenschaft einer Wellenfunktion unter Rotationen des Koordiantensystems.
 
+
+
+
+
+
+
+
 \subsection*{Zeitumkehrinvarianz}
 \subsubsection*{Klassisch}
 In der klassischen Mechanik ist die "Zeit"- oder "Bewegungs"-Umkehr durch
@@ -8721,6 +11154,12 @@ t & \rightarrow-t \\
 $$
 
 definiert. Die durch $\vec{x}^{\Theta}, \vec{p}^{\Theta}$ beschriebene Bahn ist geometrisch dieselbe wie die durch $\vec{x}, \vec{p}$ beschriebene, sie wird nur in umgekehrter Richtung durchlaufen. Die Newton'schen (Lagrange'schen) Bewegungsgleichungen sind i.a. invariant gegenüber der Transformation $\Theta$.
+
+
+
+
+
+
 
 \subsubsection*{Quantenmechanisch}
 Quantenmechanisch definieren wir im Schrödinger-Bild
@@ -8902,6 +11341,23 @@ $$
 $$
 
 Das bedeutet: $\widehat{U}(\Theta) \widetilde{\psi}$ ist zu $\widetilde{\psi}$ orthogonal, falls $N$ ungerade, gehört aber zum selben Eigenwert $E$. In einem äußeren elektrischen Feld sind die Energie-Niveaus einer ungeraden Anzahl von Elektronen also immer mindestens 2-fach entartet. Die Entartung kann durch Anlegen eines Magnetfeldes aufgehoben werden.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

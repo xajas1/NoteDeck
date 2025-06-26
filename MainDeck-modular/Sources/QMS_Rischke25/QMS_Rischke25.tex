@@ -191,7 +191,7 @@
   {\end{unitbox}}
 
 % --- 17. Graphik ---
-
+\usepackage{ytableau} % für Young-Tableaux
 
 % --- 00. Titel und Autor ---
 \title{Mein Titel}
@@ -2991,53 +2991,54 @@ $$[3] \otimes[3] \otimes[3]=[3] \otimes([\overline{3}] \oplus[6])=([3] \otimes[\
 
 
 
-\subsection{Young Tableaux}
+\section{Young Tableaux}
 
 
 Young Tableaux constitute another powerful method to construct the irreducible multiplets of the group $S U(3)$. In fact, this method can be applied also for $S U(N)$, with arbitrary $N$. The advantage of Young Tableaux is that they also provide information about the symmetry properties of an irreducible multiplet.
 
-\subsubsection*{The permutation group $S_{N}$}
-We start by considering the so-called permutation or symmetric group $S_{N}$. This is the group of permutations of $M$ identical objects (e.g., quantum-mechanical particles), which can assume $N$ distinguishable states. In order to avoid confusion, let us first focus on the case $M=N$, i.e., we consider $N$ objects, which are supposed to be distributed over $N$ states. The permutation group $S_{N}$ consists of all permutations how the objects can be assigned to the states. A permutation is denoted by
+\subsection{The permutation group $S_{N}$}
 
+
+\begin{DEF}{QMS-R25-10-01}{Permutationsgruppe}
+We start by considering the so-called permutation or symmetric group $S_{N}$. This is the group of permutations of $M$ identical objects (e.g., quantum-mechanical particles), which can assume $N$ distinguishable states. In order to avoid confusion, let us first focus on the case $M=N$, i.e., we consider $N$ objects, which are supposed to be distributed over $N$ states. The permutation group $S_{N}$ consists of all permutations how the objects can be assigned to the states. A permutation is denoted by
 $$
 \hat{P}\left(\alpha_{1}, \alpha_{2}, \ldots, \alpha_{N}\right) \equiv\left(\begin{array}{cccc}
 1 & 2 & \cdots & N \\
 \alpha_{1} & \alpha_{2} & \cdots & \alpha_{N}
 \end{array}\right)
 $$
+where $\left(\alpha_{1}, \alpha_{2}, \ldots, \alpha_{N}\right)$ is any permutation of $(1,2, \ldots, N)$. In other words, if we keep the order of the distinguishable states fixed, the permutation $\hat{P}\left(\alpha_{1}, \alpha_{2}, \ldots, \alpha_{N}\right)$ re-assigns particle $\alpha_{1}$ to state 1, particle $\alpha_{2}$ to state 2, etc..
+\end{DEF}
 
-where $\left(\alpha_{1}, \alpha_{2}, \ldots, \alpha_{N}\right)$ is any permutation of $(1,2, \ldots, N)$. In other words, if we keep the order of the distinguishable states fixed, the permutation $\hat{P}\left(\alpha_{1}, \alpha_{2}, \ldots, \alpha_{N}\right)$ re-assigns particle $\alpha_{1}$ to state 1, particle $\alpha_{2}$ to state 2, etc.. Consider for instance the $N$-particle product state (for the definition of such a state, see the lectures on Statistical Mechanics)
 
+\begin{EXA}{QMS-R25-10-02}{N-Partikel Produkt Zustand}
+Consider for instance the $N$-particle product state (for the definition of such a state, see the lectures on Statistical Mechanics)
 $$
 \left|\varphi_{1}^{(1)}, \varphi_{2}^{(2)}, \ldots, \varphi_{N}^{(N)}\right\rangle \equiv\left|\varphi_{1}^{(1)}\right\rangle\left|\varphi_{2}^{(2)}\right\rangle \cdots\left|\varphi_{N}^{(N)}\right\rangle=\prod_{i=1}^{N}\left|\varphi_{i}^{(i)}\right\rangle
 $$
-
 where $\left|\varphi_{i}^{(i)}\right\rangle$ is a quantum-mechanical single-particle state. Here, the superscript in parentheses stands for the particle index, while the subscript labels the state. Then
-
 $$
 \hat{P}\left(\alpha_{1}, \alpha_{2}, \ldots, \alpha_{N}\right)\left|\varphi_{1}^{(1)}, \varphi_{2}^{(2)}, \ldots, \varphi_{N}^{(N)}\right\rangle=\left|\varphi_{1}^{\left(\alpha_{1}\right)}, \varphi_{2}^{\left(\alpha_{2}\right)}, \ldots, \varphi_{N}^{\left(\alpha_{N}\right)}\right\rangle,
 $$
-
 i.e., the permutation assigns particle $\alpha_{1}$ to the state $\varphi_{1}$, particle $\alpha_{2}$ to the state $\varphi_{2}$, etc. Since the particles are supposed to be identical, i.e., indistinguishable, this describes physically the same state. Nevertheless, since the single-particle states are orthonormal, $\left\langle\varphi_{j}^{(i)} \mid \varphi_{i}^{(i)}\right\rangle=\delta_{i j}$, the product states are also orthonormal,
-
 $$
 \left\langle\varphi_{1}^{(1)}, \varphi_{2}^{(2)}, \ldots, \varphi_{N}^{(N)} \mid \varphi_{1}^{\left(\alpha_{1}\right)}, \varphi_{2}^{\left(\alpha_{2}\right)}, \ldots, \varphi_{N}^{\left(\alpha_{N}\right)}\right\rangle=\prod_{i=1}^{N}\left\langle\varphi_{i}^{(i)} \mid \varphi_{\alpha_{i}}^{(i)}\right\rangle=\prod_{i=1}^{N} \delta_{i, \alpha_{i}}
 $$
+\end{EXA}
 
+\begin{REM}{QMS-R25-10-03}{Darstellung von skalare Produkte von Produktzuständen}
 Here we have used the fact that the scalar product of a product state can be written as the product of scalar products of the single-particle states. However, one has to take into account that the individual scalar products are formed from states in the Hilbert space of the same particle. This means that when computing the scalar product of the product states one first has to put the single-particle states into the correct order,
-
 $$
 \left|\varphi_{1}^{\left(\alpha_{1}\right)}, \varphi_{2}^{\left(\alpha_{2}\right)}, \ldots, \varphi_{N}^{\left(\alpha_{N}\right)}\right\rangle=\prod_{i=1}^{N}\left|\varphi_{i}^{\left(\alpha_{i}\right)}\right\rangle \equiv \prod_{i=1}^{N}\left|\varphi_{\alpha_{i}}^{(i)}\right\rangle .
 $$
+\end{REM}
 
+\begin{CONC}{QMS-R25-10-04}{Permutationen als Sequenz von Transpositionen}
 Note that any permutation can be written as a sequence of transpositions, i.e., interchange of a pair of particles (see lectures on Statistical Mechanics). Denoting the transposition which interchanges particles $i$ and $j$ by $\hat{P}_{i j}$ and taking $N=3$ as an example, the permutation $\hat{P}(321)$ can be written as
-
 $$
 \hat{P}(312)=\hat{P}_{12} \hat{P}_{13} .
 $$
-
 Indeed,
-
 $$
 \begin{aligned}
 \hat{P}(312)\left|\varphi_{1}^{(1)}, \varphi_{2}^{(2)}, \varphi_{3}^{(3)}\right\rangle & =\hat{P}_{12} \hat{P}_{13}\left|\varphi_{1}^{(1)}, \varphi_{2}^{(2)}, \varphi_{3}^{(3)}\right\rangle \\
@@ -3045,23 +3046,28 @@ $$
 & =\left|\varphi_{1}^{(3)}, \varphi_{2}^{(1)}, \varphi_{3}^{(2)}\right\rangle
 \end{aligned}
 $$
+\end{CONC}
 
+\begin{DEF}{QMS-R25-10-05}{Gerade und ungerade Permutationen}
 If a permutation $\hat{P}\left(\alpha_{1}, \alpha_{2}, \ldots, \alpha_{N}\right)$ can be written as an even number of transpositions, we call it an even permutation, if it can be written as an odd number of transpositions, we call it an odd permutation.
+\end{DEF}
 
+\begin{LEM}{QMS-R25-10-06}{Transpositionsoperator ist selbst-invers}
 The transposition operator fulfills
-
 $$
-\hat{P}_{i j} \hat{P}_{i j}=\hat{P}_{i j}^{2} \equiv \mathbb{1},
+\hat{P}_{i j} \hat{P}_{i j}=\hat{P}_{i j}^{2} \equiv \mathbf{1},
 $$
-
 because interchanging particles $i$ and $j$ twice reproduces the original assignment of particles to states. Multiplying this equation with $\hat{P}_{i j}^{-1}$ then leads to the identity
-
 $$
 \hat{P}_{i j}^{-1}=\hat{P}_{i j},
 $$
+the transposition operator is self-inverse.
+\end{LEM}
 
-the transposition operator is self-inverse. Since the product states 4.54 are normalized, one also has
-
+\begin{LEM}{QMS-R25-10-07}{Transpositionsoperator ist hermitesch}
+Since the product states
+$$\left|\varphi_1^{(1)}, \varphi_2^{(2)}, \ldots, \varphi_N^{(N)}\right\rangle \equiv\left|\varphi_1^{(1)}\right\rangle\left|\varphi_2^{(2)}\right\rangle \cdots\left|\varphi_N^{(N)}\right\rangle=\prod_{i=1}^N\left|\varphi_i^{(i)}\right\rangle$$
+are normalized, one also has
 $$
 \begin{aligned}
 & \left\langle\ldots, \varphi_{i}^{(i)}, \ldots, \varphi_{j}^{(j)}, \ldots \mid \ldots, \varphi_{i}^{(i)}, \ldots, \varphi_{j}^{(j)}, \ldots\right\rangle=1 \\
@@ -3069,64 +3075,56 @@ $$
 & =\left\langle\ldots, \varphi_{i}^{(i)}, \ldots, \varphi_{j}^{(j)}, \ldots\right| \hat{P}_{i j}^{\dagger} \hat{P}_{i j}\left|\ldots, \varphi_{i}^{(i)}, \ldots, \varphi_{j}^{(j)}, \ldots\right\rangle .
 \end{aligned}
 $$
-
 Comparing left- and right-hand side, we deduce the hermicity of the transposition operator,
-
 $$
-\hat{P}_{i j}^{\dagger} \hat{P}_{i j}=\mathbb{1} \quad \Longrightarrow \quad \hat{P}_{i j}^{\dagger}=\hat{P}_{i j}^{-1}=\hat{P}_{i j},
+\hat{P}_{i j}^{\dagger} \hat{P}_{i j}=\mathbf{1} \quad \Longrightarrow \quad \hat{P}_{i j}^{\dagger}=\hat{P}_{i j}^{-1}=\hat{P}_{i j},
 $$
+where we have used Eq. $\hat{P}_{i j}^{-1}=\hat{P}_{i j}$ in the last step.
+\end{LEM}
 
-where we have used Eq. (4.60) in the last step. The hermiticity implies that the transposition operator $\hat{P}_{i j}$ has real eigenvalues $\lambda_{i j} \in \mathbb{R}$. These eigenvalues can be computed from the eigenvalue equation
 
+\begin{LEM}{QMS-R25-10-08}{Eigenwerte des Transpositionsoperators}
+The hermiticity implies that the transposition operator $\hat{P}_{i j}$ has real eigenvalues $\lambda_{i j} \in \mathbb{R}$. These eigenvalues can be computed from the eigenvalue equation
 $$
 \begin{aligned}
 \hat{P}_{i j}\left|\Phi_{N}\right\rangle & =\lambda_{i j}\left|\Phi_{N}\right\rangle \\
-\Longleftrightarrow \quad\left|\Phi_{N}\right\rangle & =\mathbb{1}\left|\Phi_{N}\right\rangle=\hat{P}_{i j}^{2}\left|\Phi_{N}\right\rangle=\lambda_{i j} \hat{P}_{i j}\left|\Phi_{N}\right\rangle=\lambda_{i j}^{2}\left|\Phi_{N}\right\rangle \\
+\Longleftrightarrow \quad\left|\Phi_{N}\right\rangle & =\mathbf{1}\left|\Phi_{N}\right\rangle=\hat{P}_{i j}^{2}\left|\Phi_{N}\right\rangle=\lambda_{i j} \hat{P}_{i j}\left|\Phi_{N}\right\rangle=\lambda_{i j}^{2}\left|\Phi_{N}\right\rangle \\
 \Longrightarrow \quad \lambda_{i j}^{2} & =1 \quad \Longrightarrow \lambda_{i j}= \pm 1
 \end{aligned}
 $$
+where we have used Eq. $\hat{P}_{i j} \hat{P}_{i j}=\hat{P}_{i j}^2 \equiv \mathbf{1}$.
+\end{LEM}
 
-where we have used Eq. 4.59. Consequently, each transposition operator $\hat{P}_{i j}$ has two eigenstates $\left|\Phi_{N}^{( \pm)}\right\rangle$, corresponding to its two eigenvalues,
 
+\begin{LEM}{QMS-R25-10-09}{Eigenzustände zu Eigenwerte des Transpositionsoperators}
+Consequently, each transposition operator $\hat{P}_{i j}$ has two eigenstates $\left|\Phi_{N}^{( \pm)}\right\rangle$, corresponding to its two eigenvalues,
 $$
 \hat{P}_{i j}\left|\Phi_{N}^{( \pm)}\right\rangle= \pm\left|\Phi_{N}^{( \pm)}\right\rangle
 $$
-
 one of which is symmetric ( $\lambda_{i j}=+1$ ) under interchange of particles $i, j$ and the other is antisymmetric ( $\lambda_{i j}=-1$ ). These states can be formally generated by applying the symmetrization and antisymmetrization operators
-
 $$
-\hat{S}_{i j} \equiv \frac{1}{\sqrt{2}}\left(\mathbb{1}+\hat{P}_{i j}\right), \hat{A}_{i j} \equiv \frac{1}{\sqrt{2}}\left(\mathbb{1}-\hat{P}_{i j}\right)
+\hat{S}_{i j} \equiv \frac{1}{\sqrt{2}}\left(\mathbf{1}+\hat{P}_{i j}\right), \hat{A}_{i j} \equiv \frac{1}{\sqrt{2}}\left(\mathbf{1}-\hat{P}_{i j}\right)
 $$
-
 to the product state, such that
-
 $$
 \left|\Phi_{N}^{(+)}\right\rangle=\hat{S}_{i j}\left|\ldots, \varphi_{i}^{(i)}, \ldots, \varphi_{j}^{(j)}, \ldots\right\rangle, \quad\left|\Phi_{N}^{(-)}\right\rangle=\hat{A}_{i j}\left|\ldots, \varphi_{i}^{(i)}, \ldots, \varphi_{j}^{(j)}, \ldots\right\rangle
 $$
-
 Since
-
 $$
 \hat{S}_{i j} \hat{A}_{i j}=\frac{1}{2}\left(11+\hat{P}_{i j}-\hat{P}_{i j}-\hat{P}_{i j}^{2}\right)=0
 $$
-
 the two eigenstates are orthogonal,
-
 $$
 \left\langle\Phi_{N}^{(+)} \mid \Phi_{N}^{(-)}\right\rangle=\left\langle\ldots, \varphi_{i}^{(i)}, \ldots, \varphi_{j}^{(j)}, \ldots\right| \hat{S}_{i j} \hat{A}_{i j}\left|\ldots, \varphi_{i}^{(i)}, \ldots, \varphi_{j}^{(j)}, \ldots\right\rangle=0
 $$
-
 where we have used the fact that $\hat{S}_{i j}$ is hermitean (as is $\hat{A}_{i j}$ ), due to the hermiticity of $\hat{P}_{i j}$. Using
-
 $$
 \begin{aligned}
-& \hat{S}_{i j}^{\dagger} \hat{S}_{i j}=\hat{S}_{i j}^{2}=\frac{1}{2}\left(\mathbb{1}+2 \hat{P}_{i j}+\hat{P}_{i j}^{2}\right)=\mathbb{1}+\hat{P}_{i j}=\sqrt{2} \hat{S}_{i j} \\
-& \hat{A}_{i j}^{\dagger} \hat{A}_{i j}=\hat{A}_{i j}^{2}=\frac{1}{2}\left(\mathbb{1}-2 \hat{P}_{i j}+\hat{P}_{i j}^{2}\right)=\mathbb{1}-\hat{P}_{i j}=\sqrt{2} \hat{A}_{i j}
+& \hat{S}_{i j}^{\dagger} \hat{S}_{i j}=\hat{S}_{i j}^{2}=\frac{1}{2}\left(\mathbf{1}+2 \hat{P}_{i j}+\hat{P}_{i j}^{2}\right)=\mathbf{1}+\hat{P}_{i j}=\sqrt{2} \hat{S}_{i j} \\
+& \hat{A}_{i j}^{\dagger} \hat{A}_{i j}=\hat{A}_{i j}^{2}=\frac{1}{2}\left(\mathbf{1}-2 \hat{P}_{i j}+\hat{P}_{i j}^{2}\right)=\mathbf{1}-\hat{P}_{i j}=\sqrt{2} \hat{A}_{i j}
 \end{aligned}
 $$
-
 one shows that the eigenstates are also normalized to one,
-
 $$
 \begin{aligned}
 \left\langle\Phi_{N}^{( \pm)} \mid \Phi_{N}^{( \pm)}\right\rangle & =\left\langle\ldots, \varphi_{i}^{(i)}, \ldots, \varphi_{j}^{(j)}, \ldots \mid \ldots, \varphi_{i}^{(i)}, \ldots, \varphi_{j}^{(j)}, \ldots\right\rangle \\
@@ -3134,24 +3132,26 @@ $$
 & =\delta_{i i} \delta_{j j} \pm \delta_{i j} \delta_{j i}=1
 \end{aligned}
 $$
-
 due to the orthogonality (4.56) of the product states.
+\end{LEM}
 
+\begin{EXA}{QMS-R25-10-10}{N=2 Produktzustände}
 For instance, for $N=2$ the eigenstates are
-
 $$
 \left|\Phi_{2}^{( \pm)}\right\rangle=\frac{1}{\sqrt{2}}\left(\left|\varphi_{1}^{(1)}, \varphi_{2}^{(2)}\right\rangle \pm\left|\varphi_{1}^{(2)}, \varphi_{2}^{(1)}\right\rangle\right)
 $$
-
 Since $\hat{P}_{12}$ acting on $\left|\Phi_{2}^{(+)}\right\rangle$or $\left|\Phi_{2}^{(-)}\right\rangle$leaves the state invariant (in the second case up to a sign),
-
 $$
 \hat{P}_{12}\left|\Phi_{2}^{( \pm)}\right\rangle= \pm\left|\Phi_{2}^{( \pm)}\right\rangle
 $$
-
 see Eq. (4.63), each of these states constitutes an irreducible multiplet of the permutation group $S_{2}$, in this case a singlet.
+\end{EXA}
 
-\subsubsection*{Young diagrams}
+
+\pagebreak
+
+
+\subsection{Young diagrams}
 One can represent the multiplets (4.70) in terms of so-called Young diagrams,
 \[
 \left|\Phi_2^{(+)}\right\rangle =
@@ -3164,27 +3164,47 @@ One can represent the multiplets (4.70) in terms of so-called Young diagrams,
 
 Here, each box represents a particle. Boxes in a row represent a symmetric state, boxes in a column an antisymmetric state.
 
-For $N=3$ the situation becomes more interesting. There are six permutations of (123), namely (123) (the trivial one, leaving the order unchanged), (213), (321), (132), (312), and (231), which can be generated by the transpositions $\mathbb{1}, \hat{P}_{12}, \hat{P}_{13}, \hat{P}_{23}, \hat{P}_{12} \hat{P}_{13}$, and $\hat{P}_{13} \hat{P}_{12}$. Consequently, the totally symmetric state is
-
-$$
-\left|\Phi_{3}^{(+)}\right\rangle=\frac{1}{\sqrt{6}}\left(\mathbb{1}+\hat{P}_{12}+\hat{P}_{13}+\hat{P}_{23}+\hat{P}_{12} \hat{P}_{13}+\hat{P}_{13} \hat{P}_{12}\right)\left|\varphi_{1}^{(1)}, \varphi_{2}^{(2)}, \varphi_{3}^{(3)}\right\rangle=\square, \quad \square
-$$
-
+For $N=3$ the situation becomes more interesting. There are six permutations of (123), namely (123) (the trivial one, leaving the order unchanged), (213), (321), (132), (312), and (231), which can be generated by the transpositions $\mathbf{1}, \hat{P}_{12}, \hat{P}_{13}, \hat{P}_{23}, \hat{P}_{12} \hat{P}_{13}$, and $\hat{P}_{13} \hat{P}_{12}$. Consequently, the totally symmetric state is
+\[
+\left| \Phi^{(+)}_3 \right\rangle
+= \frac{1}{\sqrt{6}} \left(
+\mathbf{1} + \hat{P}_{12} + \hat{P}_{13} + \hat{P}_{23} + \hat{P}_{12} \hat{P}_{13} + \hat{P}_{13} \hat{P}_{12}
+\right)
+\ket{ \varphi^{(1)}_1,\, \varphi^{(2)}_2,\, \varphi^{(3)}_3 }
+= \begin{ytableau}
+\, & \, & \,
+\end{ytableau}
+\]
 while the totally antisymmetric state is
-
-$$
-\left|\Phi_{3}^{(-)}\right\rangle=\frac{1}{\sqrt{6}}\left(\mathbb{1}-\hat{P}_{12}-\hat{P}_{13}-\hat{P}_{23}+\hat{P}_{12} \hat{P}_{13}+\hat{P}_{13} \hat{P}_{12}\right)\left|\varphi_{1}^{(1)}, \varphi_{2}^{(2)}, \varphi_{3}^{(3)}\right\rangle=
-$$
-
-\begin{center}
-\includegraphics[scale=0.3]{2025_06_19_2efb8d33dc3f0f8fdac1g-059}
-\end{center}
-
+\[
+\left| \Phi^{(-)}_3 \right\rangle
+= \frac{1}{\sqrt{6}} \left(
+\mathbf{1}
+- \hat{P}_{12}
+- \hat{P}_{13}
+- \hat{P}_{23}
++ \hat{P}_{12} \hat{P}_{13}
++ \hat{P}_{13} \hat{P}_{12}
+\right)
+\left| \varphi^{(1)}_1, \varphi^{(2)}_2, \varphi^{(3)}_3 \right\rangle
+= 
+\begin{ytableau}
+\, \\
+\, \\
+\,
+\end{ytableau}
+\]
 Here, all terms which generate an even/odd permutation carry a plus/minus sign (see lectures on Statistical Mechanics). However, in addition to these states, there are also states with mixed symmetry, which are represented by the Young diagram
+\[
+\left| \Phi^{(m)}_3 \right\rangle =
+\begin{ytableau}
+\, & \, \\
+\,
+\end{ytableau}
+\]
 
-$$
-\left|\Phi_{3}^{(m)}\right\rangle=\square
-$$
+
+
 
 There are four such linearly independent states, generated by successive application of symmetrization and antisymmetrization operators, which separate into two irreducible\\
 multiplets, i.e., doublets, of the permutation group $S_{3}$,
@@ -3206,83 +3226,110 @@ $$
 \end{aligned}
 $$
 
-\section*{Remarks:}
-(i) In order to prove that these are two irreducible doublets, one applies all possible permutations of $S_{3}$, i.e., the six operators $11, \hat{P}_{12}, \hat{P}_{13}, \hat{P}_{23}, \hat{P}_{12} \hat{P}_{13}$, and $\hat{P}_{13} \hat{P}_{12}$, to the states of the respective doublet and shows that they only lead to linear combinations of the two states within this doublet. We leave the explicit calculation as a homework exercise. In particular,
+\textbf{Remarks:}
 
+
+(i) 
+
+In order to prove that these are two irreducible doublets, one applies all possible permutations of $S_{3}$, i.e., the six operators $11, \hat{P}_{12}, \hat{P}_{13}, \hat{P}_{23}, \hat{P}_{12} \hat{P}_{13}$, and $\hat{P}_{13} \hat{P}_{12}$, to the states of the respective doublet and shows that they only lead to linear combinations of the two states within this doublet. We leave the explicit calculation as a homework exercise. In particular,
 $$
 \hat{P}_{12}\left|\Phi_{3}^{(m 1)}\right\rangle=\left|\Phi_{3}^{(m 2)}\right\rangle, \quad \hat{P}_{13}\left|\Phi_{3}^{(m 3)}\right\rangle=\left|\Phi_{3}^{(m 4)}\right\rangle
 $$
 
-(ii) In principle, one could also write down two more states, applying $\hat{S}_{23}$ and then the respective antisymmetrization operators. However, one can show that these states are linear combinations of the four mixed states given above.\\
-(iii) Likewise, one can first antisymmetrize with $\hat{A}_{i j}$ and then symmetrize with $\hat{S}_{i k}$. But the mixed states generated in this way are again linear combinations of the mixed states given above.\\
-(iv) Note that the state 4.76 is antisymmetric under exchange of particles 1 and 3, but apparently no longer symmetric under exchange of 1 and 2 . The reason for this is that the symmetrization in $(1,2)$ is (at least partially) destroyed by the subsequent application of the antisymmetrization operator. The (anti-)symmetrization operator that is applied last determines the overall (anti-)symmetry of the state.
+(ii) 
 
-\subsubsection*{Young Tableaux}
+In principle, one could also write down two more states, applying $\hat{S}_{23}$ and then the respective antisymmetrization operators. However, one can show that these states are linear combinations of the four mixed states given above.
+
+
+(iii) 
+
+Likewise, one can first antisymmetrize with $\hat{A}_{i j}$ and then symmetrize with $\hat{S}_{i k}$. But the mixed states generated in this way are again linear combinations of the mixed states given above.
+
+(iv) 
+
+Note that the state 4.76 is antisymmetric under exchange of particles 1 and 3, but apparently no longer symmetric under exchange of 1 and 2 . The reason for this is that the symmetrization in $(1,2)$ is (at least partially) destroyed by the subsequent application of the antisymmetrization operator. The (anti-)symmetrization operator that is applied last determines the overall (anti-)symmetry of the state.
+
+
+
+
+\subsection{Young Tableaux}
 A Young diagram becomes a Young Tableau by labelling the boxes with non-zero integer numbers, or in physical terms, by assigning states to the particles. For instance, considering that the two identical particles (boxes) in the Young diagrams 4.71) can assume two distinct physical states, we arrive at the two Young Tableaux
-
-$$
-\left|\Phi_{2}^{(+)}\right\rangle=\begin{array}{|l|l|}
-\hline 1 & 2 \\
-\hline 2 \\
-\hline
-\end{array}
-$$
+\[
+\left| \Phi_2^{(+)} \right\rangle =
+\begin{ytableau}
+1 & 2
+\end{ytableau}
+\qquad , \qquad
+\left| \Phi_2^{(-)} \right\rangle =
+\begin{ytableau}
+1 \\
+2
+\end{ytableau}
+\]
 
 These are precisely the two eigenstates (4.69), now with an explicit enumeration of the quantum-mechanical states that the particles occupy. Note that due to the (anti-)symmetrization it is not necessary to consider the following Young Tableaux,
-
-$$
-\begin{array}{|l|l|}
-\hline 2 & 1 \\
-\hline
-\end{array}, \begin{array}{|l|}
-\hline 2 \\
-\hline 1 \\
-\hline
-\end{array}
-$$
-
+\[
+\begin{ytableau}
+2 & 1
+\end{ytableau}
+\qquad , \qquad
+\begin{ytableau}
+2 \\
+1
+\end{ytableau}
+\qquad ,
+\]
 these are exactly the same states (in the second case up to an overall sign). It is therefore advantageous to introduce the so-called standard form of the Young Tableaux. Here, the enumeration of boxes in rows and columns strictly increases, just as shown in the Young Tableaux 4.78).
 
 In the case $N=3$, for the totally symmetric and totally antisymmetric singlets (4.72) and (4.73) the standard forms of the Young Tableaux are
+\[
+\left| \Phi_3^{(+)} \right\rangle =
+\begin{ytableau}
+1 & 2 & 3
+\end{ytableau}
+\qquad , \qquad
+\left| \Phi_3^{(-)} \right\rangle =
+\begin{ytableau}
+1 \\
+2 \\
+3
+\end{ytableau}
+\]
 
-$$
-\left|\Phi_{3}^{(+)}\right\rangle=\begin{array}{|l|l|l|}
-\hline 1 & 2 & 3 \\
-\hline
-\end{array},\left|\Phi_{3}^{(-)}\right\rangle=\begin{array}{|l|}
-\hline 1 \\
-\hline 2 \\
-\hline 3 \\
-\hline
-\end{array} .
-$$
 
 For the states with mixed symmetry, Eq. (4.75), only $\left|\Phi_{3}^{(m 1)}\right\rangle$ and $\left|\Phi_{3}^{(m 3)}\right\rangle$ correspond to the standard form of the Young Tableaux,
+\[
+\left| \Phi_3^{(m1)} \right\rangle =
+\begin{ytableau}
+1 & 2 \\
+3
+\end{ytableau}
+\qquad , \qquad
+\left| \Phi_3^{(m3)} \right\rangle =
+\begin{ytableau}
+1 & 3 \\
+2
+\end{ytableau}
+\]
 
-$$
-\left|\Phi_{3}^{(m 1)}\right\rangle=\begin{array}{|l|l}
-\hline 1 & 2 \\
-\hline 3 &
-\end{array} \quad, \quad\left|\Phi_{3}^{(m 3)}\right\rangle=\begin{array}{|l|l|}
-\hline 1 & 3 \\
-\hline 2 & \\
-\hline
-\end{array} .
-$$
 
 The other two states correspond to the non-standard forms
+\[
+\left| \Phi_3^{(m2)} \right\rangle =
+\begin{ytableau}
+2 & 1 \\
+3
+\end{ytableau}
+\qquad , \qquad
+\left| \Phi_3^{(m4)} \right\rangle =
+\begin{ytableau}
+3 & 1 \\
+2
+\end{ytableau}
+\]
 
-$$
-\left|\Phi_{3}^{(m 2)}\right\rangle=\begin{array}{|l|l}
-\hline 2 & 1 \\
-\hline 3 &
-\end{array} \quad, \quad\left|\Phi_{3}^{(m 4)}\right\rangle=\begin{array}{|l|l|}
-\hline 3 & 1 \\
-\hline 2 &
-\end{array} .
-$$
 
-\subsubsection*{The relation between $S_{N}$ and $S U(N)$}
+\subsection{The relation between $S_{N}$ and $S U(N)$}
 The standard form of the Young Tableaux ignores one important physical situation, which we have so far neglected in our discussion, namely that the two particles in the symmetric state may assume the same quantum-mechanical single-particle state. This cannot happen for the antisymmetric state (because then it would vanish identically), and it cannot happen for fermions, due to the Pauli principle, unless they have some other quantum numbers in which they differ, but it is certainly allowed for bosons (see lectures on Statistical Mechanics). Therefore, the following two symmetric states can occur in addition to $\left|\Phi_{2}^{(+)}\right\rangle$:
 
 $$
@@ -3377,7 +3424,8 @@ Note that there is no totally antisymmetric state like $\left|\Phi_{3}^{(-)}\rig
 
 This result can be easily generalized:
 
-\section*{for $S U(N)$, there are no Young Tableaux with more than $N$ boxes in a column, i.e., they have at most $N$ rows.}
+For $S U(N)$, there are no Young Tableaux with more than $N$ boxes in a column, i.e., they have at most $N$ rows.
+
 As an example, let us construct the irreducible multiplets of $S U(3)$. The fundamental triplet [3] is given by
 
 $$

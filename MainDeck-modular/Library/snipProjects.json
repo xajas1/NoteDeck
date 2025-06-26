@@ -119,11 +119,11 @@
     "sourceFile": "QMS_Rischke25/QMS_Rischke25.tex",
     "snipMeta": {
       "Subject": "QMS",
-      "Topic": "Konstruktion von Multiplets aus fundamentaler Repräsentation",
+      "Topic": "Young Diagramm",
       "LitID": "R25",
-      "CTyp": "CONC",
-      "ParentTopic": "Gruppe $(\\operatorname{SU}(N), \\cdot)$",
-      "Content": "Generierung höherer SU(2)- und SU(3)-Darstellungen durch Kopplung",
+      "CTyp": "EXA",
+      "ParentTopic": "Young Tableaux",
+      "Content": "N=2 Produktzustände",
       "selectedProject": "QMS_Rischke25/QMS_Rischke25.tex"
     },
     "tableMeta": {
@@ -299,11 +299,11 @@
     "sourceFile": "CM_Kopietz25/CM_Kopietz25.tex",
     "snipMeta": {
       "Subject": "CM",
-      "Topic": "d'Alembert Prinzip",
+      "Topic": "Schwingungen",
       "LitID": "K25c",
       "CTyp": "CONC",
-      "ParentTopic": "Lagrange'sche Mechanik",
-      "Content": "Herleitung der Lagrange-Gleichungen 2. Art aus der d’Alembert-Gleichung",
+      "ParentTopic": "Anwendungen der Lagrangeschen Mechanik",
+      "Content": "Kurzfassung Stabilität nach von Dirichlet",
       "selectedProject": "CM_Kopietz25/CM_Kopietz25.tex"
     },
     "tableMeta": {
