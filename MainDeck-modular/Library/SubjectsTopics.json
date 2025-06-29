@@ -1010,6 +1010,27 @@
         "litIDs": {
           "G25": "QM-G25-28"
         }
+      },
+      "Zeitliche Entwicklung von Zuständen und Operatoren": {
+        "index": 29,
+        "parent": "Zeitentwicklung und Symmetrien",
+        "litIDs": {
+          "G25": "QM-G25-29"
+        }
+      },
+      "Translationen, Drehungen und Galilei-Invarianz": {
+        "index": 30,
+        "parent": "Zeitentwicklung und Symmetrien",
+        "litIDs": {
+          "G25": "QM-G25-30"
+        }
+      },
+      "Zeitumkehrinvarianz": {
+        "index": 31,
+        "parent": "Zeitentwicklung und Symmetrien",
+        "litIDs": {
+          "G25": "QM-G25-31"
+        }
       }
     }
   }

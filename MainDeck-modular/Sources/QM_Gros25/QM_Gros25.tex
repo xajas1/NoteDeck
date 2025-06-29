@@ -9346,6 +9346,7 @@ Diese führt zum Lamb-shift (Aufspaltung von auch bei der Dirac-Gleichung noch e
 
 \textbf{Definition der Heisenberg-Operatoren [Concept]}
 
+\begin{CONC}{QM-G25-29-01}{Definition der Heisenberg-Operatoren}
 Für zeitunabhängiges $\mathbf H$ sei  
 \(
 U(t)=\exp\!\bigl(i\mathbf H t/\hbar\bigr)
@@ -9366,11 +9367,13 @@ Damit gilt für Erwartungswerte
 =\langle\psi(0)|\,\tilde{\mathbf A}(t)\,|\psi(0)\rangle,
 \)
 während der Zustand zeitlich \emph{konstant} bleibt.
+\end{CONC}
 
 ---
 
 \textbf{Heisenberg-Gleichung [Proposition]}
 
+\begin{PROP}{QM-G25-29-02}{Heisenberg-Gleichung}
 \[
 i\hbar\,\frac{d}{dt}\tilde{\mathbf A}(t)
 =
@@ -9388,11 +9391,13 @@ i\hbar\,\frac{d}{dt}\tilde{\mathbf A}(t)
 = \tfrac{i}{\hbar}[\mathbf H,\tilde{\mathbf A}]
       +U(\partial_t\mathbf A)U^\dagger.
 \)
+\end{PROP}
 
 ---
 
 \textbf{Konstanten der Bewegung [Definition]}
 
+\begin{DEF}{QM-G25-29-03}{Konstanten der Bewegung}
 \[
 \bigl[\mathbf H,\mathbf C\bigr]=0
 \;\;\Longrightarrow\;\;
@@ -9402,11 +9407,13 @@ i\hbar\,\frac{d}{dt}\tilde{\mathbf A}(t)
 \]
 
 Ein Operator, der mit dem Hamiltonoperator vertauscht, bezeichnet man als \emph{Erhaltungsgröße}.
+\end{DEF}
 
 ---
 
 \textbf{Beispiel 1: Freies Teilchen [Example]}
 
+\begin{EXA}{QM-G25-29-04}{Freies Teilchen}
 Für 
 \(
 \mathbf H=\frac{\mathbf P^{2}}{2m},\;
@@ -9422,12 +9429,15 @@ Damit:
 \frac{d}{dt}\tilde{\mathbf Q}= \tilde{\mathbf P}/m,\;
 \frac{d}{dt}\tilde{\mathbf P}=0
 \)
+
 – das Quantenanalog der klassischen Bewegungsgesetze.
+\end{EXA}
 
 ---
 
 \textbf{Beispiel 2: Harmonischer Oszillator [Example]}
 
+\begin{EXA}{QM-G25-29-05}{Harmonischer Oszillator}
 \(
 \mathbf H=\tfrac{\mathbf P^{2}}{2m}+\tfrac12 m\omega^{2}\mathbf Q^{2}
 \Rightarrow
@@ -9444,11 +9454,13 @@ mit Lösungen
 \tilde{\mathbf P}(t)=
 \mathbf P\cos\omega t-m\omega\mathbf Q\sin\omega t.
 \)
+\end{EXA}
 
 ---
 
 \textbf{Schrödinger- vs.\ Heisenberg-Bild [Remark]}
 
+\begin{REM}{QM-G25-29-06}{Schrödinger- vs.\ Heisenberg-Bild}
 \[
 \langle\psi_S(t)|\mathbf A_S|\psi_S(t)\rangle
 =\langle\psi_H(0)|\tilde{\mathbf A}_H(t)|\psi_H(0)\rangle,
@@ -9456,11 +9468,13 @@ mit Lösungen
 beide Bilder sind exakt äquivalent; sie unterscheiden sich nur darin, ob
 die Zeitabhängigkeit auf Zustände (\emph{Schrödinger}) oder auf Operatoren
 (\emph{Heisenberg}) verteilt wird.
+\end{REM}
 
 ---
 
 \textbf{Symmetrien als unitäre Transformationen [Concept]}
 
+\begin{CONC}{QM-G25-29-07}{Symmetrien als unitäre Transformationen}
 Nach Wigner wird jede physikalische Symmetrie durch eine unitäre
 ($\mathcal U$) oder antiunitäre Abbildung auf dem Hilbert-Raum realisiert.  
 Für kontinuierliche Symmetrien genügt $\mathcal U(\varepsilon)=
@@ -9484,11 +9498,13 @@ Für kontinuierliche Symmetrien genügt $\mathcal U(\varepsilon)=
       $\mathcal U(t)=\exp(-i\mathbf H t/\hbar)$  
       $\Rightarrow$ Energieerhaltung trivial.
 \end{itemize}
+\end{CONC}
 
 ---
 
 \textbf{Noether-Theorem in der Quantenmechanik [Proposition]}
 
+\begin{THEO}{QM-G25-29-08}{Noether-Theorem in der Quantenmechanik}
 \[
 \boxed{\;
 \text{Kontinuierliche Symmetrie}\;
@@ -9501,6 +9517,7 @@ Für kontinuierliche Symmetrien genügt $\mathcal U(\varepsilon)=
 \]
 Dies ist die direkte Quantenfassung von Noethers klassischem
 Erhaltungssatz.
+\end{THEO}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -9509,6 +9526,7 @@ Erhaltungssatz.
 
 \subsubsection*{Schrödinger-, Heisenberg- und Wechselwirkungsbild [Definition]}
 
+\begin{DEF}{QM-G25-29-09}{Schrödinger-, Heisenberg- und Wechselwirkungsbild}
 \begin{enumerate}
 \item \textbf{Schrödinger-Bild (S):}  
       Zustände zeitabhängig, Operatoren Zeit $t$-unabhängig  
@@ -9549,11 +9567,13 @@ Alle drei Bilder liefern identische beobachtbare Vorhersagen:
 = \langle\psi_I(t)|\mathbf A_I(t)|\psi_I(t)\rangle
 = \langle\psi_H|\tilde{\mathbf A}_H(t)|\psi_H\rangle.
 \]
+\end{DEF}
 
 %--------------------------------------------------------------------------
 
 \subsubsection*{Kontinuierliche Symmetrien und Generatoren [Proposition]}
 
+\begin{PROP}{QM-G25-29-10}{Kontinuierliche Symmetrien und Generatoren}
 Jede stetige Symmetrietransformation
 \(
 \mathcal U(\varepsilon)=\exp\!\bigl(-\tfrac{i}{\hbar}\varepsilon\,\mathbf G\bigr)
@@ -9583,11 +9603,13 @@ Phase $\psi\!\to\!e^{i\alpha}\psi$      & Teilchenzahl $\mathbf N$    & Ladung $
 \end{center}
 
 Dies ist die quantenmechanische Fassung des \emph{Noether-Satzes}.
+\end{PROP}
 
 %--------------------------------------------------------------------------
 
 \subsubsection*{Raumtranslationsinvarianz [Example]}
 
+\begin{EXA}{QM-G25-29-11}{Raumtranslationsinvarianz}
 Für ein Potential $V(\vec x)=\text{const}$ gilt
 \(
 [\mathbf H,\vec{\mathbf P}]=0.
@@ -9607,11 +9629,13 @@ die Verschiebung
 \mathcal U(\vec a)\,\mathbf Q\,\mathcal U^\dagger(\vec a)
         =\mathbf Q+\vec a.
 \)
+\end{EXA}
 
 %--------------------------------------------------------------------------
 
 \subsubsection*{Rotationsinvarianz [Example]}
 
+\begin{EXA}{QM-G25-29-12}{Rotationsinvarianz}
 Ist $V(\vec x)=V(r)$, dann
 \(
 [\mathbf H,\vec{\mathbf L}]=0.
@@ -9630,11 +9654,13 @@ Daraus folgt Erhaltung des Gesamtdrehimpulses
 \vec{\mathbf J}=\vec{\mathbf L}+\vec{\mathbf S}
 \)
 bei Anwesenheit von Spin.
+\end{EXA}
 
 %--------------------------------------------------------------------------
 
 \subsubsection*{Parität $\mathcal P$ und Zeitumkehr $\mathcal T$ [Concept]}
 
+\begin{CONC}{QM-G25-29-13}{Parität $\mathcal P$ und Zeitumkehr $\mathcal T$}
 \[
 \mathcal P:\;
 \vec x\!\to\!-\vec x,\;
@@ -9659,11 +9685,13 @@ Ob $\mathcal P$ / $\mathcal T$ Symmetrien sind, entscheidet
 \mathcal P\mathbf H\mathcal P^{-1}=\mathbf H,\;
 \mathcal T\mathbf H\mathcal T^{-1}=\mathbf H.
 \)
+\end{CONC}
 
 %--------------------------------------------------------------------------
 
 \subsubsection*{Zusammenfassung [Summary]}
 
+\begin{REM}{QM-G25-29-14}{Zusammenfassung}
 \begin{itemize}
 \item Die zeitliche Entwicklung kann wahlweise den Zuständen
       (Schrödinger-Bild) oder den Operatoren
@@ -9680,6 +9708,7 @@ Ob $\mathcal P$ / $\mathcal T$ Symmetrien sind, entscheidet
       Rotationen, Phasensymmetrien (Ladung) sowie diskrete
       Symmetrien wie Parität und Zeitumkehr.
 \end{itemize}
+\end{REM}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -9688,6 +9717,7 @@ Ob $\mathcal P$ / $\mathcal T$ Symmetrien sind, entscheidet
 
 \subsubsection*{Konstanten der Bewegung [Proposition]}
 
+\begin{PROP}{QM-G25-29-15}{Konstanten der Bewegung}
 \begin{itemize}
 \item \textbf{Klassisch:}  
       $\displaystyle \frac{dF(P,Q)}{dt}=0 
@@ -9711,11 +9741,13 @@ Ob $\mathcal P$ / $\mathcal T$ Symmetrien sind, entscheidet
 Damit geht im Korrespondenzprinzip  
 $\{\,\cdot\,,\,\cdot\,\}_{\text{PB}}\;\mapsto\;
 \frac{1}{i\hbar}[\,,]$ über.
+\end{PROP}
 
 %--------------------------------------------------------------------------
 
 \subsubsection*{Kanonische Heisenberg-Gleichungen [Proposition]}
 
+\begin{PROP}{QM-G25-29-16}{Kanonische Heisenberg-Gleichungen}
 Für die Heisenberg-Operatoren
 $\tilde{\mathbf Q}_j(t),\ \tilde{\mathbf P}_j(t)$
 gilt (bei $\partial_t\mathbf H=0$):
@@ -9732,11 +9764,13 @@ gilt (bei $\partial_t\mathbf H=0$):
   =\frac{\hbar}{i}\,\delta_{jk}.
 \]
 Dies ist die Operatorform der Hamiltonschen Gleichungen.
+\end{PROP}
 
 %--------------------------------------------------------------------------
 
 \subsubsection*{Wechselwirkungs- (Interaktions-)Bild [Concept]}
 
+\begin{CONC}{QM-G25-29-17}{Wechselwirkungs- (Interaktions-)Bild}
 \[
 \mathbf H=\mathbf H_0+\mathbf W(t),
 \quad
@@ -9765,6 +9799,7 @@ U_0(t)=e^{-i\mathbf H_0t/\hbar}.
 
 Das Wechselwirkungsbild ist Grundlage der \emph{zeitabhängigen
 Störungstheorie}.
+\end{CONC}
 
 %--------------------------------------------------------------------------
 
@@ -9781,6 +9816,7 @@ Störungstheorie}.
 
 \subsubsection*{Translationsoperator [Definition]}
 
+\begin{DEF}{QM-G25-30-01}{Translationsoperator}
 Für eine Verschiebung $\vec a$:
 \[
   U(\vec a)=\exp\!\Bigl(\frac{i}{\hbar}\vec a\!\cdot\!\vec{\mathbf P}\Bigr),
@@ -9800,11 +9836,13 @@ Für eine Verschiebung $\vec a$:
   $U(\vec a)\psi(\{\vec x_k\}) =
    \psi(\vec x_1+\vec a, \ldots, \vec x_N+\vec a)$.
 \end{itemize}
+\end{DEF}
 
 %--------------------------------------------------------------------------
 
 \subsubsection*{Impulserhaltung [Theorem]}
 
+\begin{THEO}{QM-G25-30-02}{Impulserhaltung}
 Gilt
 \(
   U(\vec a)\mathbf H\,U^\dagger(\vec a)=\mathbf H
@@ -9825,11 +9863,13 @@ $U(\vec a)\mathbf H=\mathbf H U(\vec a)$:
 Ein Operator $\mathbf A$ ist invariant unter einer stetigen
 Symmetrie mit Generator $\mathbf G$
 $\iff$\; $[\mathbf A,\mathbf G]=0$.
+\end{THEO}
 
 %--------------------------------------------------------------------------
 
 \subsection*{Drehungen und Drehimpulserhaltung}
 
+\begin{REM}{QM-G25-30-03}{Drehungen und Drehimpulserhaltung}
 Die Argumente für Translationen übertragen sich eins-zu-eins
 auf Rotationen
 $R(\vec\theta)=\exp(-\tfrac{i}{\hbar}\vec\theta\!\cdot\!\vec{\mathbf L})$.
@@ -9840,11 +9880,13 @@ Bei Rotationsinvarianz gilt
 $\Rightarrow$ Erhaltung des Bahndrehimpulses
 (beziehungsweise des Gesamtdrehimpulses
 $\vec{\mathbf J}=\vec{\mathbf L}+\vec{\mathbf S}$, falls Spin vorhanden).
+\end{REM}
 
 %--------------------------------------------------------------------------
 
 \subsection*{Zusammenfassung [Summary]}
 
+\begin{CONC}{QM-G25-30-04}{Zusammenfassung}
 \begin{itemize}
 \item Erhaltungsgrößen $\leftrightarrow$ Operatoren, die mit $\mathbf H$
       vertauschen.
@@ -9858,6 +9900,7 @@ $\vec{\mathbf J}=\vec{\mathbf L}+\vec{\mathbf S}$, falls Spin vorhanden).
       führen per Noether-Theorem zu Impuls-, Drehimpuls-, Energie-
       etc.\ Erhaltung.
 \end{itemize}
+\end{CONC}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -9867,6 +9910,9 @@ $\vec{\mathbf J}=\vec{\mathbf L}+\vec{\mathbf S}$, falls Spin vorhanden).
 %=====================================================================
 
 \subsubsection*{Kommutatoralgebra der Drehimpulse [Proposition]}
+
+
+\begin{PROP}{QM-G25-30-05}{Kommutatoralgebra der Drehimpulse}
 Die Komponenten der Drehimpulsoperatoren erfüllen
 \[
   \bigl[\mathbf L_i,\mathbf L_j\bigr] \;=\;
@@ -9883,10 +9929,13 @@ $\mathbf S_i=\frac{\hbar}{2}\sigma_i$
 \]
 Bahndrehimpuls und Spin vertauschen:
 $\,[\mathbf L_i,\mathbf S_j]=0$.
+\end{PROP}
 
 %---------------------------------------------------------------------
 
 \subsubsection*{Von $\mathrm{SU}(2)$ zu $\mathrm{SO}(3)$ [Concept]}
+
+\begin{CONC}{QM-G25-30-06}{Von $\mathrm{SU}(2)$ zu $\mathrm{SO}(3)$}
 \begin{enumerate}
   \item $\mathrm{SU}(2)$ ist die Gruppe $2{\times}2$-Matrizen
         $U$ mit $\det U=1$ und $U^\dagger U=\mathbf 1$.
@@ -9904,10 +9953,14 @@ $\,[\mathbf L_i,\mathbf S_j]=0$.
         Deshalb benötigt ein Spinor eine $4\pi$-Drehung, um in
         seinen Ausgangszustand zurückzukehren.
 \end{enumerate}
+\end{CONC}
 
 %---------------------------------------------------------------------
 
 \subsubsection*{Eigenzustände von $\mathbf J^2$ und $\mathbf J_3$ [Definition]}
+
+
+\begin{DEF}{QM-G25-30-07}{Eigenzustände von $\mathbf J^2$ und $\mathbf J_3$}
 \[
   \mathbf J^2|j,m\rangle=\hbar^2 j(j{+}1)|j,m\rangle,
   \qquad
@@ -9927,10 +9980,14 @@ Die Drehoperatoren wirken als
   \sum_{m'}D^{(j)}_{m'm}(\vec n,\varphi)\,|j,m'\rangle ,
 \]
 wobei $D^{(j)}$ die Wigner-D-Matrizen sind.
+\end{DEF}
 
 %---------------------------------------------------------------------
 
 \subsubsection*{Addition zweier Drehimpulse [Sketch]}
+
+
+\begin{PROP}{QM-G25-30-08}{Addition zweier Drehimpulse}
 Gegeben $\mathbf J=\mathbf J_1+\mathbf J_2$ mit
 $j_1,j_2$,
 so sind die erlaubten Resultanten
@@ -9943,10 +10000,14 @@ $\langle j_1m_1;j_2m_2|j,m\rangle$
 sind die \emph{Clebsch–Gordan-Koeffizienten}.
 Das Beispiel $j_1=l,\ j_2=\tfrac12$ führte oben zu
 $j=l\pm\tfrac12$.
+\end{PROP}
 
 %---------------------------------------------------------------------
 
 \subsubsection*{Kontinuierliche Symmetrien \& Noether [Summary]}
+
+
+\begin{CONC}{QM-G25-30-09}{Kontinuierliche Symmetrien \& Noether}
 \begin{enumerate}
   \item \textbf{Translationen}  
         Generator $\mathbf P$,
@@ -9958,10 +10019,16 @@ $j=l\pm\tfrac12$.
         Generator $\mathbf H$,
         $[\mathbf H,\mathbf H]=0 \;\Longrightarrow\;$ Energieerhaltung.
 \end{enumerate}
+\end{CONC}
 
 %---------------------------------------------------------------------
 
+
+
 \subsubsection*{Galilei-Invarianz [Outline]}
+
+
+\begin{CONC}{QM-G25-30-10}{Galilei-Invarianz}
 Für nichtrelativistische Vielteilchensysteme
 ($m_i$ konstant) gilt unter einer
 Galilei-Transformation  $(\vec x\,',t')=(\vec x-\vec v t,t)$:
@@ -9985,10 +10052,14 @@ $[\mathbf H,\mathbf G]=\tfrac{i}{\hbar}\,\mathbf P$.
 Die \emph{zentrale Erweiterung} der Galilei-Algebra macht
 die Masse~$M$ zur Erhaltungsgröße und erklärt die
 Phasenfaktoren in der Transformation.
+\end{CONC}
 
 %---------------------------------------------------------------------
 
 \subsubsection*{Schlussbemerkung}
+
+
+\begin{CONC}{QM-G25-30-11}{Schlussbemerkung zu den Bildern}
 Drehimpuls-, Impuls- und Energieerhaltung folgen im
 Heisenberg-Bild unmittelbar aus
 \(
@@ -10006,6 +10077,7 @@ Alle physikalisch äquivalenten Darstellungen
 (Schrödinger, Heisenberg, Wechselwirkung)
 liefern identische, messbare
 Erwartungswerte.
+\end{CONC}
 
 %=====================================================================
 
@@ -10022,7 +10094,10 @@ Erwartungswerte.
 
 \subsection{Zeitumkehrinvarianz}
 
-\subsubsection*{Klassische Definition \texorpdfstring{$\Theta$}{Θ}}
+\subsubsection*{Klassische Definition $\Theta$}
+
+
+\begin{DEF}{QM-G25-31-01}{Klassische Definition $\Theta$}
 Unter einer \emph{Zeitumkehr} wird die Bahn eines Punktteilchens
 \(
   \bigl(\vec x(t),\vec p(t)\bigr)
@@ -10041,10 +10116,14 @@ Geschwindigkeit enthalten.\par
 \vspace{0.3em}
 \emph{Merke:}  Zeitumkehr invertiert alle Geschwindigkeiten und Impulse,
 belässt aber die Ortskoordinaten unverändert.
+\end{DEF}
 
 %---------------------------------------------------------------------
 
-\subsubsection*{Quantisierte Zeitumkehr – Antiunitärer Operator \texorpdfstring{$\mathbf T$}{T} [Definition]}
+\subsubsection*{Quantisierte Zeitumkehr – Antiunitärer Operator $\mathbf T$ [Definition]}
+
+
+\begin{DEF}{QM-G25-31-02}{Quantisierte Zeitumkehr – Antiunitärer Operator $\mathbf T$}
 In der Quantenmechanik wird Zeitumkehr durch einen
 \emph{antiunitären} Operator $\mathbf T$ realisiert –\,d.\,h.
 $\mathbf T$ ist normerhaltend \emph{und} komplex konjugiert
@@ -10064,10 +10143,14 @@ Wesentliche Abbildungen
 \]
 Letzteres erklärt, weshalb $\mathbf T$ nicht unitär sein kann
 ($i\mapsto i$ wäre unmöglich).
+\end{DEF}
 
 %---------------------------------------------------------------------
 
 \subsubsection*{Zeitumkehrinvarianz der Schrödingergleichung [Derivation]}
+
+
+\begin{PROP}{QM-G25-31-03}{Zeitumkehrinvarianz der Schrödingergleichung}
 Für ein spinloses Teilchen mit realem Potential
 $V(\vec x)=V^{\!*}(\vec x)$
 \[
@@ -10090,10 +10173,13 @@ Dann erfüllt $\psi_T$ wieder die Schrödingergleichung:
 \]
 D.\,h. $\mathbf T$ ist eine Symmetrie eines
 realen Hamiltonoperators.
+\end{PROP}
 
 %---------------------------------------------------------------------
 
-\subsubsection*{Wirkung auf Spin \texorpdfstring{$1/2$}{1/2} [Example]}
+\subsubsection*{Wirkung auf Spin-$1/2$ [Example]}
+
+\begin{EXA}{QM-G25-31-04}{Wirkung auf Spin $1/2$}
 Für Spinoren gilt
 \[
   \mathbf T= -i\sigma_y\,\mathbf K,
@@ -10109,10 +10195,14 @@ Damit
 \)
 für Halbintegerspin — Grundlage des
 \textbf{Kramers-Theorems}.
+\end{EXA}
 
 %---------------------------------------------------------------------
 
 \subsubsection*{Kramers-Entartung [Proposition]}
+
+
+\begin{PROP}{QM-G25-31-05}{Kramers-Entartung}
 Wenn ein Hamiltonoperator $\mathbf H$ zeitumkehrinvariant
 \(
   [\mathbf H,\mathbf T]=0
@@ -10126,10 +10216,13 @@ besitzt, dann ist jedes nichtentartete Eigenpaar verboten:
   \;\Longrightarrow\;
   E\text{ mindestens doppelt entartet}.
 \]
+\end{PROP}
 
 %---------------------------------------------------------------------
 
 \subsubsection*{Operatoren unter Zeitumkehr [Table]}
+
+\begin{CONC}{QM-G25-31-06}{Operatoren unter Zeitumkehr}
 \[
 \begin{array}{|c|c|c|}
   \hline
@@ -10145,22 +10238,29 @@ besitzt, dann ist jedes nichtentartete Eigenpaar verboten:
   \hline
 \end{array}
 \]
+\end{CONC}
 
 %---------------------------------------------------------------------
 
 \subsubsection*{Zeitumkehrverletzung [Remark]}
-• Elektrische Dipolmomente mit
+
+\begin{REM}{QM-G25-31-07}{Zeitumkehrverletzung}
+- Elektrische Dipolmomente mit
 $\vec d\parallel\vec S$
 würden unter $\mathbf T$ die Vorzeichen nicht richtig transformieren
 $\Rightarrow$ Nachweis eines dauerhaften EDM wäre direkter Beleg
-für T-Verletzung.\
-• In der schwachen Wechselwirkung (Kaon-, B-Mesonsysteme)
+für T-Verletzung.
+
+- In der schwachen Wechselwirkung (Kaon-, B-Mesonsysteme)
 ist T-Symmetrie experimentell nachgewiesen verletzt;  
 durch CPT-Theorem äquivalent zur CP-Verletzung.
+\end{REM}
 
 %---------------------------------------------------------------------
 
 \subsubsection*{Zusammenfassung}
+
+\begin{CONC}{QM-G25-31-08}{Zusammenfassung}
 \begin{itemize}
   \item Zeitumkehr wird in Quantenmechanik von einem
         \textbf{antiunitären} Operator $\mathbf T$ repräsentiert.
@@ -10174,6 +10274,7 @@ durch CPT-Theorem äquivalent zur CP-Verletzung.
         (hier $\mathbf H$, $\mathbf P$, $\mathbf J$, $\mathbf T$)
         vertauscht.
 \end{itemize}
+\end{CONC}
 
 %=====================================================================
 
@@ -10183,6 +10284,8 @@ durch CPT-Theorem äquivalent zur CP-Verletzung.
 
 \subsubsection*{Zeitumkehrabbildung im Schrödinger-Bild}
 
+
+\begin{CONC}{QM-G25-31-09}{Zeitumkehrabbildung im Schrödinger-Bild}
 Wir definieren im Schrödinger-Bild für \emph{Orts-} und
 \emph{Impulsoperatoren} den Zeitumkehr-Transformierten
 \[
@@ -10218,10 +10321,12 @@ Für Hamiltonoperatoren der Form
 gilt bereits
 \(\mathbf H^{\Theta}=\mathbf H\);
 die Theorie ist also T-invariant.
+\end{CONC}
 
 %---------------------------------------------------------------------
 \subsubsection*{Antiunitarität von $\widehat U (\Theta)$}
 
+\begin{PROP}{QM-G25-31-10}{Antiunitarität von $\widehat U (\Theta)$}
 Analog zum klassischen Fall bilden wir den
 \emph{Zeitumkehroperator}
 \[
@@ -10245,9 +10350,12 @@ Für spinlose Teilchen erhält man
   \widehat U^{2}(\Theta)=\mathbf 1,\qquad
   \widehat U(\Theta)=\widehat U^{-1}(\Theta).
 \]
+\end{PROP}
 
 %---------------------------------------------------------------------
-\subsubsection*{Zeitentwicklung unter \texorpdfstring{$\Theta$}{Θ}}
+\subsubsection*{Zeitentwicklung unter $\Theta$}
+
+\begin{CONC}{QM-G25-31-11}{Zeitentwicklung unter $\Theta$}
 Da
 \(
   \widehat U(\Theta)\,\mathbf H\,\widehat U^{-1}(\Theta)
@@ -10261,10 +10369,12 @@ folgt für den Zeitentwicklungsoperator
   =U(-t).
 \]
 Die Dynamik einer T-invarianten Theorie ist also zeitumkehrsymmetrisch.
+\end{CONC}
 
 %---------------------------------------------------------------------
 \subsubsection*{Elektromagnetische Felder unter Zeitumkehr}
 
+\begin{CONC}{QM-G25-31-12}{Elektromagnetische Felder unter Zeitumkehr}
 \begin{itemize}
 \item
 Elektrostatisches Potential
@@ -10284,10 +10394,12 @@ Vektorpotential
   =\mathbf H(-\vec A)\neq\mathbf H(\vec A).
 \)
 \end{itemize}
+\end{CONC}
 
 %---------------------------------------------------------------------
 \subsubsection*{Spin–$\frac{1}{2}$ und Zeitumkehr}
 
+\begin{EXA}{QM-G25-31-13}{Spin–$\frac{1}{2}$ und Zeitumkehr}
 Wegen des magnetischen Moments transformiert der Spin wie
 ein axiales Vektor:
 \(
@@ -10330,10 +10442,12 @@ Für $N$ Elektronen
 \)
 
 – Grundlage des folgenden Kramers-Theorems.
+\end{EXA}
 
 %---------------------------------------------------------------------
 \subsubsection*{Kramers-Entartung [Theorem]}
 
+\begin{THEO}{QM-G25-31-14}{Kramers-Entartung}
 Sei $\mathbf H$ zeitumkehrinvariant (\(\![\mathbf H,\widehat U(\Theta)]=0\!\))
 und umfasse eine \emph{ungerade} Anzahl von Elektronen
 ($\widehat U^{2}=-1$).
@@ -10349,9 +10463,13 @@ Dann ist jeder Eigenwert $E$ mindestens doppelt entartet:
 In rein elektrischen Feldern bleibt diese
 \emph{Kramers-Entartung} bestehen;  
 ein magnetisches Feld (\(\vec A\neq0\)) hebt sie auf.
+\end{THEO}
 
 %---------------------------------------------------------------------
 \subsubsection*{Zusammenfassung der Zeitumkehrsymmetrie}
+
+
+\begin{CONC}{QM-G25-31-15}{Zusammenfassung der Zeitumkehrsymmetrie}
 \begin{itemize}
   \item $\Theta$ ist klassisch eine Inversion der Zeitrichtung,
         quantenmechanisch durch einen antiunitären
@@ -10363,6 +10481,7 @@ ein magnetisches Feld (\(\vec A\neq0\)) hebt sie auf.
   \item Elektrische Felder respektieren, magnetische Felder verletzen
         Zeitumkehrinvarianz.
 \end{itemize}
+\end{CONC}
 
 %=====================================================================
 
