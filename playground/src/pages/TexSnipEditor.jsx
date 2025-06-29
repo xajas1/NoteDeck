@@ -6,6 +6,7 @@ import React, {
     useImperativeHandle
   } from "react"
   import AceEditor from "react-ace"
+  import LatexPreview from "../components/LatexPreview"
   
   // Themes & Modes
   import "ace-builds/src-noconflict/theme-twilight"
@@ -24,6 +25,8 @@ import React, {
     const [parentTopic, setParentTopic] = useState("Ringe")
     const [content, setContent] = useState("")
     const [body, setBody] = useState("")
+
+    const [previewMode, setPreviewMode] = useState(false)
   
     const [freezeSubject, setFreezeSubject] = useState(true)
     const [freezeTopic, setFreezeTopic] = useState(true)
@@ -462,19 +465,28 @@ useEffect(() => {
         </div>
    
         {/* ACE Editor */}
+        <div style={{ textAlign: "right", marginBottom: "0.5rem" }}>
+          <button onClick={() => setPreviewMode(p => !p)} style={{ fontSize: "0.7rem", padding: "0.2rem 0.5rem" }}>
+            {previewMode ? "📝 Code" : "👁 Preview"}
+          </button>
+        </div>
         <div style={{ flex: 1 }}>
-          <AceEditor
-            ref={aceRef}
-            mode="latex_custom"
-            theme="twilight"
-            value={body}
-            onChange={setBody}
-            name="editor"
-            width="100%"
-            height="100%"
-            fontSize={12}
-            setOptions={{ useWorker: false, wrap: true }}
-          />
+          {previewMode ? (
+            <LatexPreview code={body} />
+          ) : (
+            <AceEditor
+              ref={aceRef}
+              mode="latex_custom"
+              theme="twilight"
+              value={body}
+              onChange={setBody}
+              name="editor"
+              width="100%"
+              height="100%"
+              fontSize={12}
+              setOptions={{ useWorker: false, wrap: true }}
+            />
+          )}
         </div>
       </div>
     )
