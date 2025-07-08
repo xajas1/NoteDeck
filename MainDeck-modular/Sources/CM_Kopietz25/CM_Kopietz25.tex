@@ -35,6 +35,7 @@
 \DeclareMathOperator{\WF}{WF}
 
 % --- 4. Eigene Makros ---
+\usepackage{cancel}
 \usepackage{xcolor}
 \newcommand{\SKP}{\langle\cdot,\cdot\rangle}
 \newcommand{\R}{\mathbb{R}}
@@ -5449,7 +5450,7 @@ Dies sind die \textbf{Lagrangegleichungen 1. Art}, wobei die $\lambda_j$ die Zwa
 
 
 
-\section{Teil II: Anwendungen der Lagrangeschen Mechanik}
+\section{Teil III: Anwendungen der Lagrangeschen Mechanik}
 
 
 
@@ -8588,5 +8589,1176 @@ $\Rightarrow$ $V''(0)=0$ ist $\lambda=0$, aber je nach Form von $V(x)$ kann $x=0
 
 
 \pagebreak
+
+
+
+
+
+\subsubsection{Die schwere gerade Kette}
+
+\begin{CONC}{CM-K25c-15-17}{System aus n gleichen Massen mit Federn gleicher Stärke}
+Wir betrachten ein System aus n gleichen Massen m die durch Federn gleicher Stärke untereinander und mit den Wänden verbunden sind:
+
+\textbf{Bild}
+
+Gegenschaften:
+\begin{itemize}
+\item Abstand der Massen im Gleichgewicht sei d (Periodizität)
+\item alle Federn sind mit Kraft F vorgespannt, Federkonstante k
+\item Gleichgewichtslage: $x_i^{(0)} = id, \quad i=1,..,n$
+\end{itemize}
+\end{CONC}
+
+Grundsätzlich unterscheidet man 2 verschiedene Schwingungsarten:
+
+\subsection*{a) Longitudinale Schwingungen}
+
+\begin{CONC}{CM-K25c-15-18}{Longitudinale Schwingung}
+Die Auslenkung der Massen ist dann entlang der Kettenrichtung:
+
+\textbf{Bild}
+
+generalisierte Koordinaten: $\delta q_i = x_i - x_i^{(0)}$
+
+Kraft auf Masse an Ort $x_i$: $F_i = F_i^{links} + F_i^{rechts}$
+
+$F_i^{links} = -k(\delta q_i - \delta q_{i-1}), \quad F_i^{rechts} = -k(\delta q_i - \delta q_{i+1})$
+$\Rightarrow F_i = -k(2\delta q_i - \delta q_{i+1} - \delta q_{i-1})$
+
+$\Rightarrow$ Bewegungsgleichungen:
+
+\begin{equation}
+m\ddot{q}_i + k(2\delta q_i - \delta q_{i+1} - \delta q_{i-1}) = 0, \quad i=1,..,n
+\end{equation}
+\end{CONC}
+
+\subsection*{b) Transversale Schwingungen}
+
+\begin{CONC}{CM-K25c-15-19}{Transversale Schwingung}
+Die Auslenkungen sind dann senkrecht zur Kettenrichtung:
+
+\textbf{Bild}
+
+gen. Koordinaten $q_i$: Abstände der Massenpunkte von Kette
+(weg. $q_i^{(0)} = 0$ ist $\delta q_i = q_i$).
+
+Für kleine Auslenkungen sind die eingezeichneten Winkel $\alpha_i$ und
+$\beta_i$ klein, so dass $\cos\alpha_i \approx 1- \frac{\alpha_i^2}{2}$, $\cos\beta_i \approx 1- \frac{\beta_i^2}{2}$.
+In führender, linearer Ordnung ändern sich bei einer transversalen
+Schwingung daher die Längen der Federn nicht, so dass auf
+den Verbindungslinien zwischen den Massen die Kraft F wirkt
+mit der die Federn im Gleichgewicht vorgespannt sind.
+Für kleine Ordnung in den kleinen Winkel $\alpha_i$ ist somit die Gesamtkraft auf die Masse an Ort $x_i^{(0)}$ in y-Richtung:
+
+$F_i = F_i^l + F_i^r = F(\sin \alpha_i + \sin \beta_i) \approx F(\alpha_i + \beta_i)$
+
+Man gibt aber: $\alpha_i \approx \tan \alpha_i = \frac{q_{i-1}-q_i}{d}$
+
+$\beta_i \approx \tan \beta_i = \frac{q_{i+1}-q_i}{d}$
+
+$\Rightarrow F_i = -\frac{F}{d}(2q_i - q_{i+1} - q_{i-1})$
+
+$\Rightarrow$ Bewegungsgleichungen:
+
+\begin{equation}
+m\ddot{q}_i + \frac{F}{d}(2q_i - q_{i+1} - q_{i-1}) = 0, \quad i=1,...,n
+\end{equation}
+
+Formal sieht diese Gleichung genauso aus wie die entsprechende Gleichung für longitudinale Schwingungen. Die Koordinaten haben aber eine andere Bedeutung und an Stelle der Federkonstanten k im longitudinalen Fall erscheint hier das Verhältnis $\frac{F}{d}$ von Spannkraft F zu Gleichgewichtsabstand d.
+\end{CONC}
+
+Im Folgenden betrachten wir nur transversale Schwingungen; die Rechnung für longitudinale Schwingungen ist analog.
+
+
+
+\subsection*{c) Normalschwingungen des transversalen Kettenschwingens}
+
+\begin{CONC}{CM-K25c-15-20}{Normalschwingen des Transversalen Kettenschwingens}
+Um diese zu bestimmen müssen wir das auf S.122 diskutierte verallgemeinerte Eigenwertproblem lösen: (mit $\lambda_j = \omega_j^2$):
+
+\[
+\det(K-\omega_j^2M) = 0, \quad (K-\omega_j^2M)N_j = 0
+\]
+
+Die n×n Matrizen K und M ergeben sich, indem wir die Bewegungsgleichungen für den Kettenschwinger in Matrixform $M\ddot{q}+Kq=0$ schreiben:
+
+\[
+M = m\begin{pmatrix}
+1 & 0 & & \\
+& \ddots & & \\
+& & \ddots & \\
+0 & & & 1
+\end{pmatrix}, \quad
+K = \frac{F}{d}\begin{pmatrix}
+2 & -1 & 0 & & & \\
+-1 & 2 & -1 & 0 & & \\
+0 & -1 & 2 & -1 & & \\
+& & \ddots & \ddots & \ddots & \\
+& & & -1 & 2 & -1 \\
+& & & 0 & -1 & 2
+\end{pmatrix}
+\]
+
+Anstatt das Eigenwertproblem direkt zu lösen, raten wir einen Ansatz für die Eigenvektoren $N_j$ und bestimmen dann die zugehörigen $\omega_j$ so dass der Ansatz aufgeht. Unser Ansatz ist:
+
+\[
+N_j = \begin{pmatrix}
+N_{1j} \\
+\vdots \\
+N_{nj}
+\end{pmatrix}, \quad N_{ij} = C_n \sin(i\alpha_j)
+\]
+
+wobei $C_n$ so gewählt werden muss, dass die Normierung stimmt:
+
+\[
+N_j^T M N_j = 1 \quad \text{(siehe S. 128)}
+\]
+
+Zur Bestimmung von $\alpha_j$ benutzen wir die Randbedingung dass bei $i=n+1$ die Auslenkung verschwinden muss da die Kette an der Wand befestigt ist:
+
+\[
+\sin((n+1)\alpha_j) = 0 \quad \Rightarrow \quad (n+1)\alpha_j = \pi j \quad \Rightarrow \quad \alpha_j = \frac{\pi j}{n+1}
+\]
+
+
+\[
+N_{ij} = C_n \sin\left(\frac{\pi j i}{n+1}\right) \text{ bzw. } N_j = C_n \begin{pmatrix}
+\sin\left(\frac{\pi j}{n+1}\right) \\
+\sin\left(\frac{2\pi j}{n+1}\right) \\
+\vdots \\
+\sin\left(\frac{n\pi j}{n+1}\right)
+\end{pmatrix}
+\]
+
+Zur Berechnung des Normierungsfaktors $C_n$ benutzen wir:
+\[
+\frac{2}{n+1} \sum_{i=1}^n \sin\left(\frac{\pi j}{n+1}i\right)\sin\left(\frac{\pi k}{n+1}i\right) = \delta_{jk}
+\]
+(lässt sich mit Hilfe von $\sin\alpha\sin\beta = \frac{1}{2}[\cos(\alpha-\beta)-\cos(\alpha+\beta)]$ zeigen)
+
+\[\Rightarrow C_n = \sqrt{\frac{2}{m(n+1)}} \text{ d.h. } N_{ij} = \sqrt{\frac{2}{m(n+1)}}\sin\left(\frac{\pi j i}{n+1}\right)\]
+
+Wir zeigen nun, dass unser Ansatz in der Tat konsistent ist:
+Schwingt der Kettenschwinger in der j-ten Normalmode $N_j$, so lautet
+die entsprechende Lösung der Bewegungsgleichung:
+\[
+q^{(j)} = N_j \left(A_j \cos(\omega_j t) + B_j \sin(\omega_j t)\right)
+= N_j C_j \cos(\omega_j t - \varphi_j)
+\]
+d.h. $q_i^{(j)} = N_{ij} C_j \cos(\omega_j t - \varphi_j)$
+\[
+= C_n \sin\left(\frac{\pi i j}{n+1}\right) C_j \cos(\omega_j t - \varphi_j)
+\]
+
+Einsetzen in $m\ddot{q}_i + \frac{F}{d}(2q_i - q_{i+1} - q_{i-1}) = 0$
+
+\[\Rightarrow -m\omega_j^2 \sin\left(\frac{\pi i j}{n+1}\right) + \frac{F}{d}\left[2\sin\left(\frac{\pi i j}{n+1}\right) - \sin\left(\frac{\pi(i+1)j}{n+1}\right) - \sin\left(\frac{\pi(i-1)j}{n+1}\right)\right] = 0\]
+
+(vergleiche: $\sin(x+y)+\sin(x-y) = 2\sin(x)\cos(y)$).
+\[
+\Rightarrow -m\omega_j^2 + 2\frac{F}{d}\left(1-\cos\left(\frac{\pi j}{n+1}\right)\right)\sin\left(\frac{\pi i j}{n+1}\right) = 0 \quad \text{für alle } i
+\]
+
+\[
+\Rightarrow \omega_j^2 = \frac{2F}{dm}\left(1-\cos\left(\frac{\pi j}{n+1}\right)\right) = \frac{4F}{dm}\sin^2\left(\frac{\pi j}{2(n+1)}\right)
+\]
+
+D.h., die Eigenfrequenzen des Kettenschwingers sind:
+
+\[
+\omega_j = 2\sqrt{\frac{F}{dm}}\sin\left(\frac{\pi j}{2(n+1)}\right), \quad j=1,...,n
+\]
+
+Damit haben wir gezeigt, dass unser Ansatz in der Tat konsistent war!
+Die allgemeine Lösung der Bewegungsgleichung für den i-ten Massenpunkt des Kettenschwingers mit n Massen ist somit:
+
+\[
+q_i(t) = \sum_{j=1}^n N_{ij}\left(A_j\cos\omega_jt + B_j\sin\omega_jt\right)
+= \sqrt{\frac{2}{m(n+1)}}\sum_{j=1}^n\sin\left(\frac{\pi ij}{n+1}\right)(A_j\cos\omega_jt + B_j\sin\omega_jt)
+\]
+
+Die 2n Integrationskonstanten $A_j$, $B_j$, $j=1,...,n$, müssen so gewählt werden, dass die Anfangsbedingungen erfüllt sind. Wenn z.B. zur Zeit $t=0$ die Auslenkungen $q_i(0)$ und Geschwindigkeiten $\dot{q}_i(0)$ vorgegeben sind, so gilt:
+
+\[
+q_i(0) = \sqrt{\frac{2}{m(n+1)}}\sum_{j=1}^n\sin\left(\frac{\pi ij}{n+1}\right)A_j
+\]
+
+\[
+\dot{q}_i(0) = \sqrt{\frac{2}{m(n+1)}}\sum_{j=1}^n\sin\left(\frac{\pi ij}{n+1}\right)B_j
+\]
+
+Dies ist ein lineares Gleichungssystem für $A_j$ und $B_j$ das sich leicht explizit nach $A_j$ und $B_j$ als Funktion von
+$q_i(0)$ und $\dot{q}_i(0)$ auflösen lässt. Dazu multiplizieren wir beide Seiten mit $\sqrt{\frac{2m}{n+1}}\sin\left(\frac{\pi ik}{n+1}\right)$ und summieren über i:
+
+\[\Rightarrow \sum_{i=1}^n \sqrt{\frac{2m}{n+1}}\sin\left(\frac{\pi ik}{n+1}\right)q_i(0) = \sum_{j=1}^n A_j \frac{2}{n+1} \underbrace{\sum_{i=1}^n \sin\left(\frac{\pi ik}{n+1}\right)\sin\left(\frac{\pi ij}{n+1}\right)}_{\delta_{j,k}} = A_k\]
+
+\[\sum_{i=1}^n \sqrt{\frac{2m}{n+1}}\sin\left(\frac{\pi ik}{n+1}\right)\dot{q}_i(0) = \sum_{j=1}^n B_j \frac{2}{n+1} \sum_{i=1}^n \sin\left(\frac{\pi ik}{n+1}\right)\sin\left(\frac{\pi ij}{n+1}\right) = B_k\]
+
+Damit ist das Problem vollständig gelöst.
+\end{CONC}
+
+
+
+
+
+
+-------------------------------------------------------------------
+
+
+
+\textbf{Beispiel:} 
+
+
+\begin{EXA}{CM-K25c-15-21}{Beispiel mit 3 Massepunkten}
+n=3 Massenpunkte; Anfangsbedingung: bei t=0 sei mittlere Masse Abstand a ausgelenkt:
+
+\textbf{Bild:} Kettenschwinger mit 3 Massenpunkten
+
+$q_1(0) = q_3(0) = 0, q_2(0) = a$
+
+$\dot{q}_i(0) = 0, \quad i=1,2,3$
+
+Frequenzen der Normalschwingungen: $\omega_j = 2\sqrt{\frac{F}{dm}}\sin\left(\frac{\pi j}{8}\right), j=1,2,3$
+
+Integrationskonstanten:
+
+\[A_k = \sum_{i=1}^3 \sqrt{\frac{m}{2}}\sin\left(\frac{\pi ik}{4}\right)q_i(0) = \sqrt{\frac{m}{2}}a\sin\left(\frac{\pi k}{2}\right), \quad B_k = 0\]
+
+d.h. $A_1 = \sqrt{\frac{m}{2}}a, \quad A_2 = 0, \quad A_3 = -\sqrt{\frac{m}{2}}a$
+
+Die Lösung der Bewegungsgleichung ist somit:
+
+\[q_1(t) = \frac{\sqrt{2}}{4}a(\cos\omega_1t - \cos\omega_3t) = q_3(t)\]
+
+\[q_2(t) = \frac{a}{2}(\cos\omega_1t + \cos\omega_3t)\]
+\end{EXA}
+
+
+
+
+
+\pagebreak
+
+
+\subsubsection{Die schwingende Saite}
+
+
+\begin{CONC}{CM-K25c-15-22}{Schwingende Seite als Limes von schwingenden Ketten}
+Im Limes einer kontinuierlichen Massenverteilung wird aus einer schwingenden Kette eine schwingende Saite. Der Limes wird so durchgeführt dass
+\[
+\begin{aligned}
+&\text{Anzahl der Massenpunkte } n \to \infty \\
+&\text{Abstand der Massenpunkte } d \to 0 
+\end{aligned}
+\} \text{ so dass } (n+1)\cdot d = L = \text{konst.}
+\]
+Masse der Punkte $m \to 0$, mit $\rho = \frac{m}{d} = \text{konstante Dichte}$.
+
+Die diskreten Positionen $x_i = id$ der Massenpunkte der Kettenschwinger werden dann zu einem Kontinuum $x$.
+\end{CONC} 
+
+\begin{CONC}{CM-K25c-15-23}{Herleitung der Wellengleichung}
+Wir betrachten nun den Schicksal der diskreten Bewegungsgleichungen:
+\[
+m\ddot{q}_i + \frac{F}{d}(2q_i - q_{i+1} - q_{i-1}) = 0, \quad i=1,...,n
+\]
+
+\[
+\Rightarrow \ddot{q}_i - \frac{F}{\rho}\left(\frac{\frac{q_{i+1}-q_i}{d} - \frac{q_i-q_{i-1}}{d}}{d}\right) = 0
+\]
+
+Wir nennen nun $q_i(t) = \psi(x_i,t)$ und benutzen dass für $d \to 0$:
+
+\[
+\frac{q_{i+1}-q_i}{d} = \frac{\psi(x_i+d,t) - \psi(x_i,t)}{d} \xrightarrow{d\to 0} \frac{\partial\psi(x_i,t)}{\partial x_i}
+\]
+
+$\Rightarrow$ eine dimensionale Wellengleichung:
+
+\[
+\frac{\partial^2\psi(x,t)}{\partial t^2} - v^2\frac{\partial^2\psi(x,t)}{\partial x^2} = 0
+\]
+
+mit $v = \sqrt{\frac{F}{\rho}} = $ Fortpflanzungs- oder Phasengeschwindigkeit.
+
+Mathematisch ist das eine partielle DGL in 2 Variablen, die mit den Randbedingungen für die schwingende Saite zu lösen ist:
+
+\[
+\psi(0,t) = 0 = \psi(L,t)
+\]
+\end{CONC}
+
+
+\subsection*{Allgemeine Lösung der Wellengleichung für schwingende Saite:}
+
+\begin{CONC}{CM-K25c-15-24}{Allg. Lösung der Wellengleichung durch Kettenschwinger}
+Dies stellen wir indem wir in den entsprechenden Gleichungen für den Kettenschwinger den Kontinuums-Limes durchführen:
+
+\textbf{Normalfrequenzen:}
+
+Kettenschwinger: \[w_j = 2\sqrt{\frac{F}{dm}}\sin\left(\frac{\pi j}{2(n+1)}\right) = 2\sqrt{\frac{F}{\rho}}\frac{1}{L}\sin\left(\frac{\pi j d}{2L}\right)\]
+\[= v\frac{\sin(p_j d/2)}{d/2} \text{ wobei } p_j = \frac{\pi j}{L}\]
+
+Saite: für $d\to 0$ ergibt sich mit $\sin(p_j d/2) = p_j d/2 + \mathcal{O}(d^3)$:
+
+\[w_j = vp_j = v\frac{\pi j}{L}, \quad j=1,..,n=\frac{L}{d}-1\]
+
+\textbf{Auslenkungen:}
+
+Kettenschwinger: \[q_i(t) = \sqrt{\frac{2}{mL}}\sum_{j=1}^n\sin(p_j id)(A_j\cos w_jt + B_j\sin w_jt)\]
+
+wobei die Integrationskonstanten $A_j$ und $B_j$ bei gegebenen Anfangswerten $q_i(0)$, $\dot{q}_i(0)$ so berechnet werden (siehe S. 137):
+
+\[A_j = \sqrt{\frac{2m}{n+1}}\sum_{i=1}^n\sin(p_j id)q_i(0)\]
+\[B_j = \sqrt{\frac{2m}{n+1}}\sum_{i=1}^n\sin(p_j id)\dot{q}_i(0)\]
+
+Saite: Mit $x = id$, $\psi(x,t) = q_i(t)$, $\dot{\psi}(x,t) = \dot{q}_i(t)$ ergibt sich für die allgemeine Lösung der Wellen\-gleichung für die fest eingespannte Saite:
+\[\psi(x,t) = \sqrt{\frac{2}{gL}}\sum_{j=1}^\infty \sin(p_j x)\left(A_j\cos(p_j vt) + \frac{B_j}{p_j v}\sin(p_j vt)\right)\]
+
+Mit $\sqrt{\frac{2m}{n+1}} = \sqrt{\frac{2g}{L}}d$, $d\sum_{i=1}^n f(id) \xrightarrow{d\to 0} \int_0^L dx\, f(x)$
+
+ergibt sich für den Zusammenhang zwischen Integrationskonstanten und Anfangswerten:
+
+\[A_j = \sqrt{\frac{2g}{L}}\int_0^L dx\,\sin(p_j x)\,\psi(x,0)\]
+\[B_j = \sqrt{\frac{2g}{L}}\int_0^L dx\,\sin(p_j x)\,\dot{\psi}(x,0)\]
+\end{CONC}
+
+\textbf{Anmerkung:}
+
+
+\begin{CONC}{CM-K25c-15-25}{Wellengleichung durch Separation der Variablen}
+Die Lösung der eindimensionalen Wellengleichung für die fest eingespannte Saite können wir auch ohne den Umweg über den Kettenschwinger herleiten, indem wir den Produktansatz
+
+\[\psi(x,t) = g(x)h(t)\]
+
+in die Wellengleichung $\frac{\partial^2\psi}{\partial t^2} - v^2\frac{\partial^2\psi}{\partial x^2} = 0$ einsetzen:
+
+\[\Rightarrow \quad g\ddot{h} - v^2\frac{d^2g}{dx^2}h = 0\]
+
+\[\Rightarrow \quad \frac{\ddot{h}}{v^2h} = \frac{d^2g}{dx^2/g} = \text{konstant} = -p^2\]
+
+\[\uparrow \qquad\qquad\qquad\qquad \uparrow\]
+hängt nur von t ab \qquad hängt nur von x ab.
+
+\[
+\Rightarrow \frac{\partial^2 g}{\partial x^2} + \rho^2 g = 0
+\]
+\[
+\Rightarrow \ddot{h} + \sqrt{\rho} h = 0
+\]
+\[
+\Rightarrow g(x) = g_1 \cos \rho x + g_2 \sin \rho x
+\]
+\[
+h(t) = A \cos(\sqrt{\rho}t) + \frac{B}{\sqrt{\rho}} \sin(\sqrt{\rho}t)
+\]
+
+Die separablen Werte von $\rho$ werden nun durch die Randbedingungen $y(0,t) = 0 = y(L,t)$ festgelegt:
+
+\[
+\Rightarrow g(0) = g(L) = 0 \Rightarrow g_1 = 0, \rho = \rho_j = \frac{\pi j}{L}, j=1,2,3,...
+\]
+
+Unser Produktansatz liefert also unendlich viele Lösungen
+
+\[
+y_j(x,t) = \sin(\rho_j x)\left(A_j \cos(\rho_j \sqrt{t}) + \frac{B_j}{\sqrt{\rho_j}} \sin(\rho_j \sqrt{t})\right)
+\]
+
+Die allgemeine Lösung ergibt sich dann durch Überlagerung:
+
+\[
+y(x,t) = \sqrt{\frac{2}{L}} \sum_{j=1}^{\infty} y_j(x,t) \quad \text{(siehe S.140 oben)}
+\]
+\end{CONC}
+
+
+
+
+
+
+
+\pagebreak
+
+
+
+\section{Teil IV: Hamiltonsche Mechanik}
+
+(Nach W.R. Hamilton, 1805-1865, mit 22 Jahren Professor in Dublin).
+
+Die Hamiltonsche Mechanik ist neben der Newtonschen Mechanik und der Lagrangeschen Mechanik eine dritte Form der klassischen Mechanik, die besonders gut geeignet ist, die klassische Mechanik zu verallgemeinern und moderne physikalische Theorien zu entwickeln, z.B. Quantenmechanik, Statistische Mechanik, Chaostheorie.
+
+
+
+\subsection{Die Hamiltonschen Gleichungen}
+
+
+
+\subsubsection*{Hamiltonfunktion und Legendre-Transformation}
+
+\textbf{Ausgangspunkt:} 
+
+
+\begin{CONC}{CM-K25c-16-01}{Setting für Herleitung der Hamiltonfunktion}
+Lagrangefunktion für System mit $n=\mathbb{R}^n$ generalisierten Koordinaten $q_1,...,q_n$:
+\[
+L(q_1,...,q_n,\dot{q}_1,...,\dot{q}_n,t)
+\]
+
+Wie man aus der Lagrangefunktion die entsprechende Hamilton-funktion berechnet haben wir bereits bei der Diskussion der Energieerhaltung in Kapitel 4.3 angedeutet (siehe S. 68):
+Wir berechnen dazu zunächst die Kanonischen Impulse
+\[
+p_i = \frac{\partial L}{\partial \dot{q}_i}, \quad i=1,...,n.
+\]
+
+Aus diesen n Gleichungen können wir durch Auflösen nach $\dot{q}_i$ die generalisierten Geschwindigkeiten $\dot{q}_i$ als Funktionen der generalisierten Koordinaten $q_i$ und Impulse $p_i$ bestimmen:
+\[
+\dot{q}_i = \dot{q}_i(q_1,...,q_n,p_1,...,p_n), \quad i=1,...,n.
+\]
+\end{CONC}
+
+
+\textbf{Def.: Hamiltonfunktion:}
+
+\begin{DEF}{CM-K25c-16-02}{Hamiltonfunktion}
+\[
+H(q_1,...,q_n,p_1,...,p_n,t) = \sum_{i=1}^n \dot{q}_i p_i - L(q_1,...,q_n,\dot{q}_1,...,\dot{q}_n,t)
+\]
+\[
+= \sum_{i=1}^n \dot{q}_i \frac{\partial L}{\partial \dot{q}_i} - L(q_1,...,q_n,\dot{q}_1,...,\dot{q}_n,t)
+\]
+
+wobei auf der rechten Seite $\dot{q}_i = \dot{q}_i(q_1,...,q_n,p_1,...,p_n,t)$ einzusetzen ist, d.h. H ist als Funktion der $2n+1$ Variablen $q_1,...,q_n,p_1,...,p_n,t$ anzusehen.
+
+Mathematisch ist der Übergang von L zu H eine sogenannte Legendre-Transformation bezüglich der Variablenpaare $(\dot{q}_i,p_i)$.
+\end{DEF}
+
+
+Wir wollen die Eigenschaften der Legendre-Transformation kurz zusammenfassen:
+
+\underline{Legendre-Transformation:}
+
+
+\begin{MOT}{CM-K25c-16-03}{Legendre-Transformation}
+Ziel der Legendre-Transformation ist die Änderung der Abhängigkeit einer Funktion f(x) von einer Variablen x zu einer anderen Variablen m für die gilt:
+\[
+m = \frac{df(x)}{dx} = \text{Steigung im Punkt x.}
+\]
+
+Wir betrachten dazu eine beliebige 2-mal stetig differenzierbare Funktion f(x) und nehmen an dass $\frac{d^2f(x)}{dx^2} > 0$. Durch die Gleichung $m(x) = \frac{df(x)}{dx}$ ist dann auch x als Funktion von m eindeutig definiert und wir können (im Prinzip) nach $x = X(m)$ auflösen.
+\end{MOT}
+
+
+
+\begin{DEF}{CM-K25c-16-04}{Legendre-Transformation}
+Die Legendre-Transformierte $g(m)$ von $f(x)$ ist die Funktion
+\[
+g(m) = x(m)m - f(x(m)) = x(m)\left.\frac{df}{dx}\right|_{x=x(m)} - f(x(m)),
+\]
+wobei $x(m)$ durch Auflösen von $m = \frac{df}{dx}$ zu berechnen ist.
+\end{DEF}
+
+
+\textbf{Wichtige Eigenschaften:}
+
+\begin{REM}{CM-K25c-16-05}{Eigenschaften der Legendre-Transformation}
+\[
+\frac{dg}{dm} = x(m) + \underbrace{\frac{dx}{dm}m - \frac{df}{dx}\frac{dx}{dm}}_{0} = x(m)
+\]
+\[
+\frac{d^2g}{dm^2} = \frac{dx}{dm} = \frac{1}{\frac{d^2f}{dx^2}} > 0
+\]
+d.h. $g(m)$ ist eine konvexe Funktion von $m$.
+
+Schreiben wir das Differential von $f(x)$ in der Form
+\[
+df = \frac{df}{dx}dx = m(x)dx
+\]
+so lautet das Differential der Legendre-Transformierten,
+\[
+dg = dxm + xdm - \frac{df}{dx}dx = x(m)dm.
+\]
+$x$ und $m$ haben also gewissermaßen ihre Rollen vertauscht.
+\end{REM}
+
+\textbf{Geometrische Interpretation:}
+
+\begin{CONC}{CM-K25c-16-06}{Geometrische Interpretation der Legendre-Transformation}
+Wegen $\frac{d}{dx}(mx-f(x))=m-\frac{df}{dx}=0$ ist $x(m)$ für festes $m$ derjenige $x$-Wert, für den der Abstand zwischen der Gerade $mx$ und der Funktion $f(x)$ extremal ist. Der Extremwert des Abstands ist die Legendre-Transformierte $g(m)$.
+\end{CONC}
+
+
+
+\subsection*{Anmerkungen:}
+
+1) 
+
+\begin{CONC}{CM-K25c-16-07}{Übergang zwischen Lagrange und Hamilton}
+Beim Übergang zwischen Lagrangefunktion und Hamiltonfunktion entspricht $x \leftrightarrow q$ und $m \leftrightarrow p$, d.h. die generalisierten Geschwindigkeiten $\dot{q}_i$ werden zu Gunsten der Impulse $p_i$ wegtransformiert. Die generalisierten Koordinaten $q_i$ bleiben von der Legendre-Transformation unberührt.
+\end{CONC}
+
+2) 
+
+
+\begin{CONC}{CM-K25c-16-08}{Hamilton in Thermodynamik}
+Legendre-Transformationen spielen auch in der Thermodynamik eine wichtige Rolle, z.B.:
+innere Energie $U(S,V)$, $S = \text{Entropie } (=x)$\\
+$V = \text{Volumen}$
+
+$\Rightarrow \text{Temperatur } T = \left.\frac{\partial U}{\partial S}\right|_V (=m)$
+
+Beim Übergang von der inneren Energie $U(S,V)$ zur freien Energie $F(T,V)$ wird die Entropie zu Gunsten der Temperatur durch eine Legendre-Transformation eliminiert:
+
+freie Energie: $F(T,V) = U(S(T,V)) - TS(T,V)$
+
+d.h.: $-F(T,V) = ST-U = S(T)\underbrace{\frac{\partial U}{\partial S}}_{x(m)} - U(S(T),V)$
+\end{CONC}
+
+
+
+
+
+
+
+\pagebreak
+
+
+\subsubsection*{Herleitung der Hamiltonschen Bewegungsgleichungen}
+
+\textbf{Ausgangspunkt:} 
+
+
+\begin{CONC}{CM-K25c-16-09}{Setting zur Herleitung der Hamiltonschen Bewegungsgleichung}
+N Teilchen, k holonome ZB, n= M-k = DN-k unabhängige generalisierte Koordinaten (=Zahl der Freiheitsgrade).
+
+Aus Kapitel 3 (siehe S. 53) wissen wir, dass dann die Bewegung des Systems durch die Lagrangegleichungen 2. Art bestimmt werden kann:
+
+\[
+\frac{d}{dt} \frac{\partial L(q,\dot{q},t)}{\partial \dot{q}_i} - \frac{\partial L(q,\dot{q},t)}{\partial q_i} = 0, \quad q=(q_1,...,q_n)
+\]
+
+Mathematisch sind das n Differentialgleichungen 2. Ordnung für die n generalisierten Koordinaten $q_1,...,q_n$.
+
+\textbf{Hamilton:} Betrachte stattdessen 2n Differentialgleichungen 1. Ordnung für die n generalisierten Koordinaten $q_1,...,q_n$ sowie die zugehörigen n kanonischen Impulse
+
+\[
+p_i = \frac{\partial L}{\partial \dot{q}_i}, \quad i=1,...,n.
+\]
+
+Die Beschreibung der Bewegung erfolgt dann in einem 2n-dimensionalen Raum der unabhängigen Variablen $q_1,...,q_n,p_1,...,p_n$, dem sogenannten "Phasenraum".
+\end{CONC}
+
+
+
+
+
+\textbf{Herleitung der Hamiltonschen Bewegungsgleichungen aus Lagrange 2}
+
+\begin{CONC}{CM-K25c-16-10}{Herleitung der Hamiltonschen Bewegungsgleichungen aus Lagrange 2}
+Die Hamiltonfunktion ist definiert durch
+
+\[
+H(q,p,t) = \sum_{i=1}^n \dot{q}_i(q,p,t)p_i - L(q,\dot{q}(q,p,t),t)
+\]
+
+wobei $p=(p_1,...,p_n)$.
+
+Die Funktionen $\dot{q_i}(q,p,t)$ sind dabei durch Invertieren der Gleichungen
+\[p_i = \frac{\partial L}{\partial \dot{q_i}}(q,\dot{q},t)\] zu berechnen.
+
+\[\Rightarrow \frac{\partial H}{\partial q_j} = \sum_{i=1}^n \underbrace{\frac{\partial \dot{q_i}}{\partial q_j}}_{} p_i - \frac{\partial L}{\partial q_j} - \sum_{i=1}^n \underbrace{\frac{\partial L}{\partial \dot{q_i}} \frac{\partial \dot{q_i}}{\partial q_j}}_{p_i}\]
+
+\[= -\frac{\partial L}{\partial q_j} = -\frac{d}{dt}\frac{\partial L}{\partial \dot{q_j}} = -\dot{p_j}\]
+
+\[\frac{\partial H}{\partial p_j} = \dot{q_j} + \sum_{i=1}^n \underbrace{\frac{\partial \dot{q_i}}{\partial p_j}}_{} p_i - \sum_{i=1}^n \underbrace{\frac{\partial L}{\partial \dot{q_i}} \frac{\partial \dot{q_i}}{\partial p_j}}_{p_i} = \dot{q_j}\]
+
+\[\Rightarrow \boxed{\text{Hamilton'sche Bewegungsgleichungen:}\quad  \dot{q_i} = \frac{\partial H}{\partial p_i}, \quad \dot{p_i} = -\frac{\partial H}{\partial q_i}, \quad i=1,...,n}\]
+
+Das sind die Differentialgleichungen 1. Ordnung für die 2n Variablen $q_1,...,q_n, p_1,...,p_n$, die äquivalent zu den Lagrangegleichungen 2. Art sind.
+
+Für die Zeitableitung von H ergibt sich somit
+\[\frac{d}{dt}H(q,p,t) = \sum_{i=1}^n \left(\underbrace{\frac{\partial H}{\partial q_i}\dot{q_i} + \frac{\partial H}{\partial p_i}\dot{p_i}}_{=0}\right) + \frac{\partial H}{\partial t} = \frac{\partial H}{\partial t} = -\frac{\partial L}{\partial t}\]
+
+d.h: die totale zeitliche Änderung von H wird nur durch die explizite Zeitabhängigkeit hervorgerufen.
+
+\[\Rightarrow \text{Ist H nicht explizit zeitabhängig, so ist H Erhaltungsgröße.}\]
+\end{CONC}
+
+
+\textbf{Anmerkungen:}
+
+1) 
+
+\begin{REM}{CM-K25c-16-11}{Hamiltonschen Gleichungen als kanonische Gleichungen}
+Wegen ihrer formalen Einfachheit werden die Hamilton'schen Gleichungen oft auch ``Kanonische Gleichungen'' genannt. Das Paar $(q_i, p_i)$ wird als ``Kanonische Variablen-paar'' bezeichnet. Auf Grund der Symmetrie der Hamilton'schen Gleichungen sind alle 2n Variablen $q_1,...,q_n, p_1,...,p_n$ völlig gleichberechtigt.
+\end{REM}
+
+2) 
+
+\begin{CONC}{CM-K25c-16-12}{Hamilton gleich Gesamtenergie}
+In Kapitel 4.3 (Energieerhaltung) haben wir gezeigt (siehe S. 65)
+\[H = T + V = E = \text{Gesamtenergie}\]
+falls folgende Bedingungen erfüllt sind:
+\begin{itemize}
+\item Konservative Kräfte
+\item Skleronom, holonom ZB
+\item Inertiale Bezugsysteme
+\end{itemize}
+\end{CONC}
+
+3) 
+
+\begin{CONC}{CM-K25c-16-13}{Hamiltonisches System}
+In der Mathematik wird jedes System von 2n Differentialgleichungen für Funktionen $x_1(t),...,x_n(t), y_1(t),...,y_n(t)$, welches sich mit einer geeigneten Funktion $H(x_1,...,x_n,y_1,...,y_n,t)$ in der folgenden Form schreiben lässt,
+\[\dot{x_i} = \frac{\partial H}{\partial y_i}, \quad \dot{y_i} = -\frac{\partial H}{\partial x_i}, \quad i=1,...,n\]
+ein ``Hamilton'sches System'' oder ``Kanonisches System'' genannt.
+\end{CONC}
+
+
+\textbf{D) Herleitung der Hamilton'schen Bewegungsgleichungen aus dem Hamilton'schen Prinzip}
+
+\begin{CONC}{CM-K25c-16-14}{Herleitung der Hamilton'schen Bewegungsgleichungen aus dem Hamilton'schen Prinzip}
+In Kapitel 6.2. (S. 82) haben wir gezeigt dass die Lagrangegleichungen äquivalent zum Hamilton'schen Prinzip (= Prinzip der stationären Wirkung) sind:
+
+\[\delta S = 0, \quad S = \int_{t_1}^{t_2} L = \int_{t_1}^{t_2} \left(\sum_{i=1}^n \dot{q_i}p_i - H(q,p,t)\right)dt\]
+
+Wir zeigen nun dass auch daraus die Hamilton'schen Bewegungsgleichungen folgen wenn wir die Variation im 2n-dimensionalen Phasenraum durch unabhängig anzusehenden Variablen $q_1,...,q_n, p_1,...,p_n$ durchführen, wobei die End-Punkte der generalisierten Koordinaten festgehalten werden:
+
+\[\delta q_i(t_1) = 0 = \delta q_i(t_2)\]
+
+Aus der Definition folgt:
+\[\delta S = \int_{t_1}^{t_2} dt \sum_{i=1}^n \left[\dot{q_i}\delta p_i + p_i\delta\dot{q_i} - \frac{\partial H}{\partial q_i}\delta q_i - \frac{\partial H}{\partial p_i}\delta p_i\right]\]
+
+Im 2. Term integrieren wir partiell:
+\[\int_{t_1}^{t_2} dt p_i\delta\dot{q_i} = p_i(t_2)\delta q_i(t_2) - p_i(t_1)\delta q_i(t_1) - \int_{t_1}^{t_2} dt\dot{p_i}\delta q_i\]
+
+\[\Rightarrow \delta S = \int_{t_1}^{t_2} dt \sum_{i=1}^n \left[\left(\dot{q_i} - \frac{\partial H}{\partial p_i}\right)\delta p_i - \left(\dot{p_i} + \frac{\partial H}{\partial q_i}\right)\delta q_i\right]\]
+
+Da $\delta p_i$ und $\delta q_i$ als unabhängig angesehen sind $\Rightarrow$
+
+\[\dot{q_i} - \frac{\partial H}{\partial p_i} = 0, \quad \dot{p_i} + \frac{\partial H}{\partial q_i} = 0\]
+\end{CONC}
+
+
+
+
+\textbf{C) Beispiele}
+
+\textbf{1) Teilchen im konservativen Kraftfeld}
+
+\begin{EXA}{CM-K25c-16-15}{Teilchen im konservativen Kraftfeld}
+\[L(\vec{r}, \dot{\vec{r}}) = \frac{m}{2}\dot{\vec{r}}^2 - V(\vec{r})\]
+
+$q_i = e_i\cdot\vec{r}$ : kartesische Koordinaten des Teilchens.
+
+\[\Rightarrow p_i = \frac{\partial L}{\partial q_i} = mq_i \Leftrightarrow \vec{p} = m\dot{\vec{r}} \text{ oder } \dot{\vec{r}} = \frac{\vec{p}}{m}\]
+
+\[\Rightarrow H = \dot{\vec{r}}\cdot\vec{p} - L = \frac{\vec{p}^2}{m} - \left(\frac{\vec{p}^2}{2m} - V(\vec{r})\right) = \frac{\vec{p}^2}{2m} + V(\vec{r}) = E\]
+
+Die Hamilton'schen Bewegungsgleichungen sind dann
+
+\[\dot{p_i} = -\frac{\partial H}{\partial q_i} = -\frac{\partial V}{\partial q_i} \Leftrightarrow \vec{p} = -\vec{\nabla}_r V = \vec{F} \text{ : Newton!}\]
+
+Die Hamilton'sche Bewegungsgleichung für die $q_i$ ist einfach die Definition der Geschwindigkeit,
+
+\[\dot{q_i} = \frac{\partial H}{\partial p_i} = \frac{p_i}{m} \Leftrightarrow \vec{r} = \frac{\vec{p}}{m}.\]
+\end{EXA}
+
+
+
+
+\textbf{2) Teilchen der Ladung Q im elektromagnetischen Feld (siehe S. 52)}
+
+\begin{EXA}{CM-K25c-16-16}{Teilchen der Ladung Q im elektromagnetischen Feld}
+\[L(\vec{r}, \dot{\vec{r}}, t) = \frac{m}{2}\dot{\vec{r}}^2 - V(\vec{r}, \dot{\vec{r}}, t)\]
+
+\[V(\vec{r}, \dot{\vec{r}}, t) = Q(\phi(\vec{r},t) - \dot{\vec{r}}\cdot\vec{A}(\vec{r},t))\]
+
+wobei elektrisches und magnetisches Feld aus den Potentialen $\phi$ und $\vec{A}$ mittelst folgender Formel gewonnen werden kann: (siehe S. 52)
+
+\[\vec{E}(\vec{r},t) = -\vec{\nabla}\phi(\vec{r},t) - \frac{1}{c}\frac{\partial\vec{A}}{\partial t}, \quad (\vec{B} = \vec{\nabla}\times\vec{A})\]
+Der Kanonische Impuls ist dann
+\[\vec{p} = \vec{\nabla}_{\dot{r}} L = m\vec{r} + \frac{Q}{c}\vec{A} \Rightarrow \vec{r} = \frac{1}{m}\left(\vec{p} - \frac{Q}{c}\vec{A}\right)\]
+
+\[\Rightarrow H(\vec{r},\vec{p},t) = \vec{r}\cdot\vec{p} - L\]
+\[= \frac{\vec{p}^2}{2m} - \frac{Q}{mc}\vec{A}\cdot\vec{p} - \frac{m}{2}\left(\frac{\vec{p}-\frac{Q}{c}\vec{A}}{m}\right)^2 + Q\phi - \frac{Q}{mc}\left(\vec{p}-\frac{Q}{c}\vec{A}\right)\cdot\vec{A}\]
+\[= \frac{\vec{p}^2}{2m} - \frac{Q}{mc}\vec{p}\cdot\vec{A} + \frac{Q^2}{2mc^2}\vec{A}^2 + Q\phi\]
+
+\[\Rightarrow \boxed{H(\vec{r},\vec{p},t) = \frac{\left(\vec{p}-\frac{Q}{c}\vec{A}\right)^2}{2m} + Q\phi}\]
+
+Man beachte dass die Hamilton-funktion immer als Funktion von $\vec{r}$ und $\vec{p}$ geschrieben werden muss!
+
+Die Hamilton'schen Bewegungsgleichungen sind dann:
+
+\[\dot{\vec{r}} = \frac{\partial H}{\partial \vec{p}} = \vec{\nabla}_p H = \frac{1}{m}\left(\vec{p} - \frac{Q}{c}\vec{A}\right)\]
+
+\[\Rightarrow \vec{p} = m\vec{r} + \frac{Q}{c}\vec{A}: \text{ Definition Kanonischer Impuls.}\]
+
+Die andere Hamilton'sche Gleichung bestimmt die Dynamik der Komponenten des Kanonischen Impulses:
+
+\[\dot{p_i} = -\frac{\partial H}{\partial r_i} = -Q\frac{\partial \phi}{\partial r_i} - \frac{1}{m}\left(\vec{p}-\frac{Q}{c}\vec{A}\right)\cdot\left(-\frac{Q}{c}\frac{\partial \vec{A}}{\partial r_i}\right)\]
+\[= -Q\frac{\partial \phi}{\partial r_i} + \frac{Q}{c}\vec{v}\cdot\frac{\partial \vec{A}}{\partial r_i}\]
+Die Gleichungen beschreiben die Bewegung eines Teilchens der Masse m und Ladung Q unter dem Einfluss der Lorentz-Kraft:
+
+\[m\ddot{\vec{r}} = \vec{F_L} = Q\left(\vec{E} + \frac{\vec{v}}{c}\times\vec{B}\right).\]
+
+Um die explizit zu zeigen, leiten wir die Gleichung für den Kanonischen Impuls nochmal nach der Zeit ab:
+
+\[\dot{p_i} = m\ddot{r_i} + \frac{Q}{c}\frac{d}{dt}A_i(\vec{r},t) = m\ddot{r_i} + \frac{Q}{c}\underbrace{(\vec{v}\cdot\vec{\nabla_r})A_i + \frac{\partial A_i}{\partial t}}\]
+
+\[\Rightarrow m\ddot{r_i} + \frac{Q}{c}(\vec{v}\cdot\vec{\nabla_r})A_i + \frac{Q}{c}\frac{\partial A_i}{\partial t} = -Q\frac{\partial \phi}{\partial r_i} + \frac{Q}{c}\vec{v}\cdot\frac{\partial \vec{A}}{\partial r_i}\]
+
+\[\Rightarrow m\ddot{r_i} = Q\left\{-\frac{\partial \phi}{\partial r_i} - \frac{1}{c}\frac{\partial A_i}{\partial t} + \frac{1}{c}\left[\vec{v}\cdot\frac{\partial \vec{A}}{\partial r_i} - (\vec{v}\cdot\vec{\nabla_r})A_i\right]\right\}\]
+
+\[\text{Nebenrechnung:}\]
+\[(\vec{v}\times\vec{B})_i = (\vec{v}\times(\vec{\nabla}\times\vec{A}))_i = \epsilon_{ijk}\epsilon_{k\ell m}v_j\frac{\partial}{\partial r_\ell}A_m\]
+\[= (\delta_{i\ell}\delta_{jm} - \delta_{im}\delta_{j\ell})v_j\frac{\partial}{\partial r_\ell}A_m\]
+\[= v_j\frac{\partial}{\partial r_i}A_j - v_j\frac{\partial}{\partial r_j}A_i = \vec{v}\cdot\frac{\partial \vec{A}}{\partial r_i} - (\vec{v}\cdot\vec{\nabla})A_i\]
+\end{EXA}
+
+
+
+\pagebreak
+
+
+\subsubsection*{Poisson-Klammern}
+
+\begin{CONC}{CM-K25c-16-17}{Totale Zeitableitung von Observablen}
+Die Hamilton'schen Bewegungsgleichungen lassen sich mit sogenannte Poisson-Klammern besonders kompakt schreiben. Ferner spielen Poisson-Klammern für den Übergang von der klassischen Mechanik zur Quantenmechanik eine wichtige Rolle. In Anlehnung an spätere Definitionen in der QM nennen wir differenzierbare Funktionen
+
+\[f(q,p,t) = f(q_1,...,q_n,p_1,...,p_n,t)\]
+
+der gen. Pos. Koordinaten, der Kanonischen Impulse und der Zeit ``Observablen''. Wir betrachten die totale Zeitableitung von $f(q_i,p_i,t)$:
+
+\[\frac{df}{dt} = \sum_{i=1}^n \left(\frac{\partial f}{\partial q_i}\dot{q_i} + \frac{\partial f}{\partial p_i}\dot{p_i}\right) + \frac{\partial f}{\partial t}\]
+
+\[= \sum_{i=1}^n \left(\frac{\partial f}{\partial q_i}\frac{\partial H}{\partial p_i} - \frac{\partial f}{\partial p_i}\frac{\partial H}{\partial q_i}\right) + \frac{\partial f}{\partial t}\]
+\end{CONC}
+
+
+\begin{DEF}{CM-K25c-16-18}{Poisson-Klammer}
+Die Poisson-Klammer zweier Observablen $f$ und $g$ ist
+\[\{f,g\} = \sum_{i=1}^n \left(\frac{\partial f}{\partial q_i}\frac{\partial g}{\partial p_i} - \frac{\partial g}{\partial q_i}\frac{\partial f}{\partial p_i}\right)\]
+\end{DEF}
+
+
+\begin{CONC}{CM-K25c-16-19}{Darstellung totaler Zeitableitung von Observanzen durch Poisson-Klammer}
+\[\Rightarrow \frac{df}{dt} = \{f,H\} + \frac{\partial f}{\partial t}\]
+
+Die zeitliche Änderung einer Observable ist also durch die Poisson-Klammer mit der Hamilton-funktion bestimmt.
+\end{CONC}
+
+\begin{CONC}{CM-K25c-16-20}{Charakterisierung von Erhaltungsgrößen durch Poisson-Klammer}
+Insbesondere gilt für Observablen die nicht explizit von der Zeit abhängen ($\frac{\partial f}{\partial t} = 0$):
+
+\[\{f,H\} = 0 \Leftrightarrow f \text{ ist Erhaltungsgröße}\]
+\end{CONC}
+
+
+\begin{CONC}{CM-K25c-16-21}{Hamiltonische Bewegungsgleichung durch Poisson-Klammer}
+Mit Hilfe von Poisson-Klammern lassen sich die Hamilton'schen Bewegungsgleichungen nun besonders einfach schreiben:
+
+Wählen wir zunächst als Observable $f = p_j$, so folgt aus der Definition
+
+\[\{p_j,g\} = \sum_i \left(\underbrace{\frac{\partial p_j}{\partial q_i}}_{0}\frac{\partial g}{\partial p_i} - \frac{\partial g}{\partial q_i}\underbrace{\frac{\partial p_j}{\partial p_i}}_{\delta_{ij}}\right) = -\frac{\partial g}{\partial q_j}\]
+
+und mit $f = q_j$:
+
+\[\{q_j,g\} = \sum_i \left(\underbrace{\frac{\partial q_j}{\partial q_i}}_{\delta_{ij}}\frac{\partial g}{\partial p_i} - \frac{\partial g}{\partial q_i}\underbrace{\frac{\partial q_j}{\partial p_i}}_{0}\right) = \frac{\partial g}{\partial p_j}\]
+
+Mit $g = H$ folgt damit aus den Hamilton'schen Gleichungen,
+
+\[\boxed{\begin{aligned}
+\dot{q_i} &= \frac{\partial H}{\partial p_i} = \{q_i,H\} & \text{(sollt man auswendig lernen)} \\
+\dot{p_i} &= -\frac{\partial H}{\partial q_i} = \{p_i,H\}
+\end{aligned}}\]
+\end{CONC}
+
+\textbf{Anmerkung:}
+
+
+\begin{CONC}{CM-K25c-16-22}{Unabhängigkeit der Poisson-Klammer von Variablen}
+Auf den ersten Blick hängen Poisson-Klammern von den Variablen $q_i,p_i$ ab, nach denen abgeleitet wird. Dies stimmt jedoch nicht: man kann zeigen (siehe z.B. McCauley S. 377-380) dass Poisson-Klammern ``Kanonische Invarianten'' sind. D.h., benutzt man an Stelle der alten Variablen $q_i,p_i$ neue $q'_i,p'_i$ welche die Form der Hamilton'schen Bewegungsgleichungen erhalten, so gilt:
+
+\[\{f,g\} = \sum_i \left(\frac{\partial f}{\partial q_i}\frac{\partial g}{\partial p_i} - \frac{\partial g}{\partial q_i}\frac{\partial f}{\partial p_i}\right) = \sum_i \left(\frac{\partial f}{\partial q'_i}\frac{\partial g}{\partial p'_i} - \frac{\partial g}{\partial q'_i}\frac{\partial f}{\partial p'_i}\right)\]
+\end{CONC}
+
+
+
+\textbf{Eigenschaften von Poissonklammern:}
+
+
+\begin{CONC}{CM-K25c-16-23}{Eigenschaften der Poisson-Klammer}
+Daraus folgen direkt aus der Definition; einige wichtige sind:
+
+1) Antisymmetrie: 
+\[\{f,g\} = -\{g,f\}\]
+
+2) Produktregel:
+\[\{fg,h\} = f\{g,h\} + \{f,h\}g\]
+
+3) Jacobi-Identität:
+\[\{f,\{g,h\}\} + \{g,\{h,f\}\} + \{h,\{f,g\}\} = 0\]
+
+4) Fundamentale Poissonklammern:
+\[\{q_i,q_j\} = 0, \quad \{p_i,p_j\} = 0, \quad \{q_i,p_j\} = \delta_{ij}\]
+\end{CONC}
+
+\textbf{Übergang zur Quantenmechanik (QM):}
+
+
+\begin{CONC}{CM-K25c-16-24}{Übergang zur Quantenmechanik}
+Die durch die Poissonklammern gegebenen algebraischen Zusammenhänge zwischen Observablen bleiben in der QM erhalten. (Dabei entsprechen Poissonklammern einen Weg zur ``Quantisierung'' eines klassischen Systems - dieser Weg führt zur Heisenberg'schen Matrizenmechanik.)
+
+So wird z.B. aus der klassischen Poissonklammerrelation \{q,p\} = 1 in der QM:
+
+\[\frac{1}{i\hbar}[\hat{Q},\hat{P}] = 1\]
+
+wobei $[\hat{Q},\hat{P}]= \hat{Q}\hat{P}-\hat{P}\hat{Q}$ der sog. Kommutator ist, und $\hat{Q}$ und $\hat{P}$ als Operatoren in einem unendlich-dimensionalen Hilbertraum anzusehen sind. Die allgemeine Quantisierungsvorschrift:
+
+Poissonklammer \[\{f,g\} \rightarrow \frac{1}{i\hbar}[\hat{F},\hat{G}]\]
+\end{CONC}
+
+Mehr dazu in der QM Vorlesung!
+
+
+
+\pagebreak
+
+
+
+
+\subsection{Kanonische Transformationen}
+
+
+\subsubsection*{Definitionen}
+
+
+
+\textbf{a) Punkttransformationen}
+
+\begin{CONC}{CM-K25c-17-01}{Punkttransformationen}
+In der Lagrange-Mechanik kann man beliebige Punkttransformationen ausführen (siehe Kapitel 3.2. Forminvarianz der Lagrangegleichungen, S. 55). Dabei definiert man neue generalisierte Koordinaten
+
+\[Q_i = Q_i(q_1,...,q_n,t), \quad i=1,...n\]
+
+(wir ändern hier die Notation auf S.55: $q \rightarrow Q$).
+Jeder Punkt $q=(q_1,...,q_n)$ des Konfigurationsraumes geht dabei in einen neuen Punkt $Q=(Q_1,...,Q_n)$ über. In Kapitel 3.2. haben wir gezeigt: die Lagrangegleichungen sind forminvariant unter solchen Punkttransformationen:
+
+mit \[L'(Q,\dot{Q},t) = L(q(Q,t),\dot{q}(Q,\dot{Q},t),t)\]
+
+\[\Rightarrow \frac{d}{dt}\frac{\partial L'}{\partial \dot{Q_i}} - \frac{\partial L'}{\partial Q_i} = 0.\]
+
+Da $L'(Q,\dot{Q},t)$ i.A. jedoch eine andere Funktion der neuen Variablen ist als $L(q,\dot{q},t)$ der alten Variablen, ändert sich jedoch der explizite Ausdruck der Lagrangegleichungen bei Punkttransformationen.
+
+Welche Änderungen gibt es bei Punkttransformationen im Hamilton-Formalismus?
+
+Um diese Frage zu beantworten, müssen wir die neuen Kanonischen Impulse $P_i$ berechnen!
+
+
+\begin{align*}
+P_i = \frac{\partial L}{\partial \dot{q}_i} = \sum_{j=1}^n \frac{\partial L}{\partial \dot{q}_j} \frac{\partial \dot{q}_j}{\partial \dot{q}_i} = \sum_{j=1}^n p_j \frac{\partial \dot{q}_j}{\partial \dot{q}_i}
+\end{align*}
+
+$p_j = $ alte kanonische Impulse
+
+wegen $\frac{\partial \dot{q}_j}{\partial \dot{q}_i} = \frac{\partial q_j}{\partial q_i}$ (siehe S. 56)
+
+\begin{equation*}
+\Rightarrow P_i = \sum_{j=1}^n p_j \frac{\partial q_j}{\partial q_i} : \text{ Transformation der kanonischen Impulse bei Punkttransformationen}
+\end{equation*}
+
+Wir definieren nun die neue Hamiltonfunktion
+\begin{equation*}
+H'(Q,P,t) = \sum_{i=1}^n \dot{Q}_i(Q,P,t)P_i - L'(Q,\dot{Q}(Q,P,t),t)
+\end{equation*}
+
+Wegen der Forminvarianz der Lagrangegleichungen bei Punkttransformationen folgt dann analog zur Herleitung der Hamiltonschen Bewegungsgleichungen aus Lagrange'L auf S. 157:
+
+\begin{align*}
+\dot{Q}_i &= \frac{\partial H'}{\partial P_i}, & P_i = -\frac{\partial H'}{\partial Q_i}
+\end{align*}
+
+d.h. Punkttransformationen lassen auch die Hamiltonschen Bewegungsgleichungen forminvariant.
+\end{CONC}
+
+
+
+
+
+\textbf{b) Kanonische Transformationen}
+
+\begin{CONC}{CM-K25c-17-02}{Kanonische Transformationen}
+Da im Hamiltonformalsmus q und p völlig gleichberechtigt sind, können wir auch allgemeinere Transformationen betrachten, die Koordinaten und Impulse durcheinandermischen:
+
+
+Kanonische Transformation:\\
+Eine Transformation der Form
+\begin{align*}
+q_i &\to Q_i = Q_i(q_1 \ldots q_n, p_1 \ldots p_n, t)\\
+p_i &\to P_i = P_i(q_1 \ldots q_n, p_1 \ldots p_n, t)
+\end{align*}
+heißt kanonisch, wenn aus $\dot{q}_i = \frac{\partial H}{\partial p_i}$, $\dot{p}_i = -\frac{\partial H}{\partial q_i}$ folgt, dass mit einer geeigneten neuen Hamilton-Funktion $H'(Q,P,t)$ die Form der Hamilton-Gleichungen invariant bleibt, d.h.
+\begin{align*}
+\dot{Q}_i &= \frac{\partial H'}{\partial P_i}, & \dot{P}_i = -\frac{\partial H'}{\partial Q_i}
+\end{align*}
+\end{CONC}
+
+
+\begin{CONC}{CM-K25c-17-03}{Punkttransformationen sind Kanonische Transformationen}
+Die unter a) diskutierten Punkttransformationen sind z.B. kanonisch. Es gibt aber auch andere kanonische Transformationen die die Koordinaten und Impulse wirklich durcheinander mischen. Nicht jede Transformation $q_i \to Q_i(q,p,t)$, $p_i \to P_i(q,p,t)$ ist jedoch automatisch kanonisch. Im Folgenden suchen wir Kriterien dafür, dass eine Trafo kanonisch ist, und entwickeln dabei auch eine Methode kanonische Trafos explizit zu konstruieren.
+\end{CONC}
+
+
+
+
+\pagebreak
+
+
+
+\subsubsection*{Erzeugung der Kanonischer Transformationen}
+
+\begin{CONC}{CM-K25c-17-04}{Erzeugung von kanonischen Transformationen}
+Wir wissen dass die Hamiltonschen Gleichungen aus dem Prinzip der stationären Wirkung folgen: (siehe S.169)
+
+\begin{align*}
+\delta \left[\int_{t_1}^{t_2} dt\left(\sum_{i=1}^n p_i\dot{q}_i - H\right)\right] &= 0\\
+\text{mit } \delta q_i(t_1) = \delta q_i(t_2) &= 0
+\end{align*}
+\[\Rightarrow \dot{q}_i = \frac{\partial H}{\partial p_i}, \quad \dot{p}_i = -\frac{\partial H}{\partial q_i} \quad (1)\]
+
+Wir führen nun neue Koordinaten und Impulse ein,
+\[Q_i = Q_i(q,p,t), \quad P_i = P_i(q,p,t) \quad (2)\]
+
+Wenn diese Transformation kanonisch ist, dann muss es eine neue Hamiltonfunktion $H'$ geben so dass
+\[\dot{Q}_i = \frac{\partial H'}{\partial P_i}, \quad \dot{P}_i = -\frac{\partial H'}{\partial Q_i} \quad (3)\]
+
+Das ist sicherlich der Fall wenn für die neuen Koordinaten, Impulse und die neue Hamiltonfunktion unter dem Prinzip der stationären Wirkung gilt:
+
+\begin{align*}
+\delta \left[\int_{t_1}^{t_2} dt\left(\sum_{i=1}^n P_i\dot{Q}_i - H'\right)\right] &= 0\\
+\text{mit } \delta Q_i(t_1) = \delta Q_i(t_2) &= 0
+\end{align*}
+\[\Rightarrow \dot{Q}_i = \frac{\partial H'}{\partial P_i}, \quad \dot{P}_i = -\frac{\partial H'}{\partial Q_i}\]
+\end{CONC}
+
+\begin{CONC}{CM-K25c-17-05}{Eindeutige Bestimmung der Beweungungsgleichung durch Transformationsgleichung}
+Andererseits bestimmen die Transformationsgleichungen 
+\[Q_i = Q_i(q,p,t), \quad P_i = P_i(q,p,t) \quad (2)\]
+zusammen mit den ursprünglichen Hamiltongleichungen 
+\[ \dot{p}_i = -\frac{\partial H}{\partial q_i} \quad (1)\]
+eindeutig die Bewegungsgleichungen von $Q_i$ und $P_i$.
+\end{CONC}
+
+\begin{CONC}{CM-K25c-17-06}{Hinreichende Bedingung für Transformationsverhalten von Hamiltonfunktion}
+Ein hinreichende Bedingung dafür dass letztere von der Form
+\[\dot{Q}_i = \frac{\partial H'}{\partial P_i}, \quad \dot{P}_i = -\frac{\partial H'}{\partial Q_i} \quad (3)\]
+sind ist:
+
+\[\sum_{i=1}^n p_i\dot{q}_i - H = \sum_{i=1}^n P_i\dot{Q}_i - H' + \frac{d}{dt}F_1(q,Q,t) \quad (4)\]
+
+wobei $F_1$ eine beliebige Funktion der $q_i, Q_i$ und $t$ ist.Das folgt aus der Tatsache, dass dann die neue Hamiltonfunktion mit den neuen generalisierten Koordinaten das Prinzip der stationären Wirkung erfüllt:
+
+\begin{align*}
+\delta\left[\int_{t_1}^{t_2} dt\left(\sum_{i=1}^n P_i\dot{Q}_i - H'\right)\right] &= \delta\left[\int_{t_1}^{t_2} dt\left(\sum_{i=1}^n p_i\dot{q}_i-H\right)\right] - \delta\left[\int_{t_1}^{t_2} dt\frac{d}{dt}F_1(q,Q,t)\right]\\
+&= -\delta F_1(q(t_2),Q(t_2),t_2) + \delta F_1(q(t_1),Q(t_1),t_1) = 0
+\end{align*}
+\end{CONC}
+
+\begin{DEF}{CM-K25c-17-07}{erzeugende der kanonischen Transformation (differentielle Form)}
+In differenzieller Form ist die Bedingung:
+\[\sum_{i=1}^n p_i\dot{q}_i - H = \sum_{i=1}^n P_i\dot{Q}_i - H' + \frac{d}{dt}F_1(q,Q,t) \quad (4)\]
+gegeben durch 
+\[dF_1(q,Q,t) = \sum_{i=1}^n (p_i dq_i - P_i dQ_i) + (H'-H)dt\]
+
+\[\Rightarrow \frac{\partial F_1(q,Q,t)}{\partial q_i} = p_i, \quad \frac{\partial F_1(q,Q,t)}{\partial Q_i} = -P_i, \quad \frac{\partial F_1(q,Q,t)}{\partial t} = H'-H\]
+
+Man nennt $F_1(q,Q,t)$ die "Erzeugende der Kanonischen Transformation".
+\end{DEF}
+
+\begin{CONC}{CM-K25c-17-08}{Eindeutige Bestimmung der Transformationgleichung aus Erzeugende}
+Wenn $F_1(q,Q,t)$ bekannt ist, lassen sich die Transformationsgleichungen eindeutig bestimmen: Durch Auflösen von $p_i = \frac{\partial F_1(q,Q,t)}{\partial q_i}$ erhält man die neuen Koordinaten $Q_i = Q_i(q,p,t)$, und dann durch Auflösen von $P_i = -\frac{\partial F_1(q,Q,t)}{\partial Q_i}$ die restlichen Gleichungen $P_i = P_i(q,p,t)$. Schließlich erhält man die neue Hamiltonfunktion aus
+\[H'(Q,P,t) = H(q(Q,P,t),p(Q,P,t),t) + \left.\frac{\partial F_1(q,Q,t)}{\partial t}\right|_{q=q(Q,P,t)}\]
+
+Man beachte dass die Hamiltonfunktion nur dann wie ein Skalar transformiert wenn die Erzeugende nicht explizit von der Zeit abhängt. Im Gegensatz dazu transformiert die Lagrangefunktion bei beliebigen Punkttrafos immer wie ein Skalar, siehe S. 55.
+\end{CONC}
+
+
+
+
+
+\textbf{Beispiel:} 
+
+
+\begin{EXA}{CM-K25c-17-09}{Harmonischer Oszillator mit kanonischer Transformation}
+Lösung der Bewegungsgleichung des harmonischen Oszillators durch Kanonische Transformation.
+
+\textbf{Hamiltonfunktion:} $H = \frac{p^2}{2m} + \frac{1}{2}m\omega_0^2q^2$
+
+\textbf{Erzeugende:} $F_1(q,Q) = \frac{m}{2}\omega_0q^2\cot Q$
+
+$\Rightarrow$ Transformationsgleichungen:
+\begin{align*}
+p &= \frac{\partial F_1}{\partial q} = m\omega_0q\cot Q\\
+P &= -\frac{\partial F_1}{\partial Q} = -\frac{m\omega_0q^2}{2\sin^2 Q}
+\end{align*}
+
+(Leicht zu merken: Ableitung nach kleinem q gibt kleines p, Ableitung nach großem Q gibt große P).
+
+Auflösen nach $q = q(Q,P)$, $p = p(Q,P)$: $\Rightarrow$
+\begin{align*}
+q &= \sqrt{\frac{2P}{m\omega_0}}\sin Q\\
+p &= \sqrt{2m\omega_0P}\cos Q
+\end{align*}
+
+$\Rightarrow$ neue Hamilton-funktion:
+\[H'(Q,P) = H(q(Q,P), p(Q,P)) = \omega_0P\]
+
+Q ist offenbar zyklisch $\Rightarrow P = \frac{E}{\omega_0}$ ist erhalten ($E = $ Energie)
+
+neue Hamilton'sche Gleichungen:
+\begin{align*}
+\dot{Q} &= \frac{\partial H'}{\partial P} = \omega_0\\
+\dot{P} &= 0
+\end{align*}
+
+$\Rightarrow Q(t) = \omega_0t + \varphi$, $P(t) = \frac{E}{\omega_0}$
+
+$\Rightarrow$ allgemeine Lösung: $q(t) = \sqrt{\frac{2E}{m\omega_0^2}}\sin(\omega_0t + \varphi)$
+\end{EXA}
+
+
+
+
+\textbf{Übergang zu anderen unabhängigen Variablen}
+
+\begin{CONC}{CM-K25c-17-10}{Alternative unabhängige Variablen}
+Bisher haben wir zur Konstruktion Kanonischer Transformationen benutzt dass die Existenz einer Funktion $F_1(q,Q,t)$ mit
+\[dF_1 = \left(\sum_{i=1}^n p_i dq_i - H dt\right) - \left(\sum_{i=1}^n P_i dQ_i - H' dt\right)\]
+eine hinreichende Bedingung dafür ist dass die entsprechende Transformation $Q_i = Q_i(q,p,t)$, $P_i = P_i(q,p,t)$ Kanonisch ist.
+
+Es gibt jedoch auch andere Möglichkeiten zur Erzeugung Kanonischer Trafos, denn im Hamiltonformalism sind Koordinaten und Impulse gleichberechtigt: An den Variablen $q_1,..,q_n,Q_1,..,Q_n,p_1,..,p_n,P_1,..,P_n$ können wir daher beliebig 2n als unabhängig ansehen, während die anderen 2n auf Grund der Transformationsgleichungen als abhängig betrachtet werden müssen. Der Übergang zu neuen unabhängigen Variablen erfolgt durch Legendre-Trafo. Da die Erzeugenden jeweils von einem alten und einem neuen Variablen-Satz abhängen müssen, gibt es neben $F_1(q,Q)$ noch 3 weitere Möglichkeiten:
+\end{CONC}
+
+\subsection*{a) $(q,P)$ unabhängige Variablen}
+
+\begin{CONC}{CM-K25c-17-11}{$(q,P)$ unabhängige Variablen}
+Erzeugende: $F_2(q,P,t) = F_1(q,Q(q,P,t),t) + \sum_{i=1}^n P_i Q_i(q,P,t)$
+
+$\Rightarrow$ $dF_2 = dF_1 + \sum_i (P_i dQ_i + Q_i dP_i)$
+
+$= \sum_i (p_i dq_i + Q_i dP_i) - (H'-H)dt$
+
+$\Rightarrow \frac{\partial F_2}{\partial q_i} = p_i$, $\frac{\partial F_2}{\partial P_i} = Q_i$, $\frac{\partial F_2}{\partial t} = H'-H$.
+\end{CONC}
+\subsection*{b) $(p,Q)$ unabhängige Variablen:}
+
+\begin{CONC}{CM-K25c-17-12}{$(p,Q)$ unabhängige Variablen}
+$F_3(p,Q,t) = F_1 - \sum_i q_i p_i$
+
+$\Rightarrow dF_3 = \sum_{i=1}^n (-q_i dp_i - P_i dQ_i) + (H'-H)dt$
+
+$\Rightarrow \frac{\partial F_3}{\partial p_i} = -q_i$, $\frac{\partial F_3}{\partial Q_i} = -P_i$, $\frac{\partial F_3}{\partial t} = H'-H$
+\end{CONC}
+
+\subsection*{c) $(p,P)$ unabhängige Variablen:}
+
+\begin{CONC}{CM-K25c-17-13}{$(p,P)$ unabhängige Variablen}
+$F_4(p,P,t) = F_3 + \sum_i P_i Q_i$
+
+$\Rightarrow dF_4 = \sum_{i=1}^n (-q_i dp_i + Q_i dP_i) + (H'-H)dt$
+
+$\Rightarrow \frac{\partial F_4}{\partial p_i} = -q_i$, $\frac{\partial F_4}{\partial P_i} = Q_i$, $\frac{\partial F_4}{\partial t} = H'-H$
+\end{CONC}
+
+\begin{CONC}{CM-K25c-17-14}{Funktionen erzeugen kanonische Transformationen}
+Daß die Funktionen $F_1, F_3, F_4$ Kanonische Transformationen erzeugen folgt wie auf S. 160 aus dem Hamilton'schen Prinzip, wobei man allerdings bei der Behandlung der Randterme beachten muss dass die Variation der Impulse $\delta p_i(t_{1,2})$ und $\delta P_i(t_{1,2})$ an den Rändern nicht verschwindet - dennoch verschwinden die Beiträge aller Randterme nach geeigneter partieller Integration (siehe z.B. Goldstein, Mechanik II, S. 236).
+
+Alternativ kann man auch direkt nachrechnen dass die obigen Trafos in der Tat kanonisch sind:
+
+Ausgangspunkt: $\dot{q}_i = \frac{\partial H}{\partial p_i}$, $\dot{p}_i = -\frac{\partial H}{\partial q_i}$
+
+mit Transformationsgleichungen:
+$Q_i = Q_i(q,p,t)$, $P_i = P_i(q,p,t)$
+Zu zeigen: mit $H' = H + \frac{\partial F}{\partial t}$, wobei $F = F_1, F_2, F_3, F_4$ gilt,
+
+gilt: $\dot{Q}_i = \frac{\partial H'}{\partial P_i}$, $\dot{P}_i = -\frac{\partial H'}{\partial Q_i}$
+\end{CONC}
+
+Einen ausführlichen Beweis findet man z.B. auf S. 377-389 von McCamley. Aus Zeitgründen wollen wir hier auf den Beweis verzichten. Wir weisen aber darauf hin, dass die Invarianz der fundamentalen Poisson-Klammer-Relationen bei Kanonischen Trafos (siehe auch Bemerkung auf S. 154) für den Beweis wichtig ist, d.h.
+
+
+\begin{CONC}{CM-K25c-17-15}{Invarianz der fundamentalen Poisson-Klammer-Relationen bei Kanonischen Trafos}
+Invarianz der fundamentalen Poisson-Klammer-Relationen bei Kanonischen Trafos
+\[
+\{Q_i, P_j\} = \sum_k \left(\frac{\partial Q_i}{\partial q_k}\frac{\partial P_j}{\partial p_k} - \frac{\partial P_j}{\partial q_k}\frac{\partial Q_i}{\partial p_k}\right) = \delta_{ij} = \{q_i, p_j\}
+\]
+\end{CONC}
+
+\textbf{Spezialfall:} 
+
+Zeitunabhängige Kanonische Trafos:
+
+\begin{EXA}{CM-K25c-17-16}{Zeitunabhängige Kanonische Trafos}
+Für alle 4 Typen von Kanonischen Transformationen gilt:
+Sind die Transformationsgleichungen nicht explizit von der Zeit abhängig, so ist $H' = H$. Eine Transformation $Q_i = Q_i(q,p)$, $P_i = P_i(q,p)$ ist genau dann Kanonisch wenn
+
+\[\sum_{i=1}^n (p_i\dot{q}_i - P_i\dot{Q}_i) = \frac{dF}{dt}\]
+
+mit einer geeigneten Funktion F.
+
+\[\sum_{i=1}^n (p_idq_i - P_idQ_i) = dF\]
+\end{EXA}
+
+
+
+
+\pagebreak
+
+\subsubsection*{Beispiele Kanonische Transformationen}
+
+\textbf{1) Identische Trafo}
+
+
+\begin{EXA}{CM-K25c-17-17}{Identische Trafo}
+\[F_2(q,P) = \sum_{i=1}^n q_iP_i \Rightarrow p_i = \frac{\partial F_2}{\partial q_i} = P_i, \quad Q_i = \frac{\partial F_2}{\partial P_i} = q_i\]
+\end{EXA}
+
+\textbf{2) Punkttransformation (siehe S. 156)}
+
+
+\begin{EXA}{CM-K25c-17-18}{Punkttransformation}
+\[F_2(q,P,t) = \sum_{i=1}^n \phi_i(q_1,...,q_n,t)P_i\]
+\[\Rightarrow \quad Q_i = \frac{\partial F_2}{\partial P_i} = \phi_i(q_1...q_n,t)\]
+\[p_i = \frac{\partial F_2}{\partial q_i} = \sum_j \frac{\partial \phi_j}{\partial q_i}P_j = \sum_j \frac{\partial Q_j}{\partial q_i}P_j\]
+\end{EXA}
+
+\textbf{3) Vertauschung von Koordinaten und Impulsen:}
+
+
+\begin{EXA}{CM-K25c-17-19}{Vertauschung von Koordinaten und Impulsen}
+\[F_1(q,Q) = \sum_{i=1}^n q_iQ_i \Rightarrow p_i = \frac{\partial F_1}{\partial q_i} = Q_i, \quad P_i = -\frac{\partial F_1}{\partial Q_i} = -q_i\]
+\end{EXA}
+
+\textbf{4) Bogoliubov-Transformation:}
+
+\begin{EXA}{CM-K25c-17-20}{Bogoliubov-Transformation}
+\[F_2(q,P) = \frac{\tanh\gamma(P^2-q^2)}{2} + \frac{1}{\cosh\gamma}qP, \quad \gamma \text{ beliebig}\]
+
+\[\Rightarrow p = \frac{\partial F_2}{\partial q} = -\tanh\gamma q + \frac{1}{\cosh\gamma}P \Rightarrow P = \cosh\gamma p + \sinh\gamma q\]
+
+\[Q = \frac{\partial F_2}{\partial P} = \tanh\gamma P + \frac{1}{\cosh\gamma}q\]
+\[= \tanh\gamma(\cosh\gamma p + \sinh\gamma q) + \frac{1}{\cosh\gamma}q\]
+\[= \sinh\gamma p + \frac{\sinh^2\gamma}{\cosh\gamma}q\]
+\[= \sinh\gamma p + \cosh\gamma q\]
+\end{EXA}
+
+
+
+
+
+
 \printbibliography
+
 \end{document}

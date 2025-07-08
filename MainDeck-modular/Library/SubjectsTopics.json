@@ -167,6 +167,20 @@
         "litIDs": {
           "K25c": "CM-K25c-15"
         }
+      },
+      "Hamiltonschen Gleichungen": {
+        "index": 16,
+        "parent": "Hamiltonsche Mechanik",
+        "litIDs": {
+          "K25c": "CM-K25c-16"
+        }
+      },
+      "Kanonische Transformationen": {
+        "index": 17,
+        "parent": "Hamiltonsche Mechanik",
+        "litIDs": {
+          "K25c": "CM-K25c-17"
+        }
       }
     }
   },
