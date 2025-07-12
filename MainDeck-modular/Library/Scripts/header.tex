@@ -19,6 +19,10 @@
 % 16. Umgebungen
 % 17. Titel und Autor
 
+% --- 0. Allgemeine Pakete ---
+\usepackage{booktabs}
+\usepackage{makecell}
+
 % --- 1. Seitenlayout und Ränder ---
 \usepackage[margin=3cm]{geometry}
 
@@ -97,6 +101,11 @@
 
 % --- 10. Todos/Notizen ---
 \usepackage{todonotes}
+% Hellblau definieren
+\definecolor{hellblau}{rgb}{0.3,0.6,1}
+
+% Eigene Umgebung »notiz«
+\newenvironment{note}{\par\begingroup\color{hellblau}\itshape}{\par\endgroup}
 
 % --- 11. Rahmen/Box-Umgebungen ---
 \usepackage{mdframed}

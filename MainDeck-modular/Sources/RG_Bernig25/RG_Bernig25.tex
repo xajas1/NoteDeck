@@ -96,6 +96,14 @@
 
 % --- 10. Todos/Notizen ---
 \usepackage{todonotes}
+% Hellblau definieren
+\definecolor{hellblau}{rgb}{0.3,0.6,1}
+
+% Eigene Umgebung »notiz«
+\newenvironment{note}{\par\begingroup\color{hellblau}\itshape}{\par\endgroup}
+
+
+
 
 % --- 11. Rahmen/Box-Umgebungen ---
 \usepackage{mdframed}
@@ -1106,9 +1114,16 @@ Y g(Z, X) & =g\left(D_{Y} Z, X\right)+g\left(Z, D_{Y} X\right) \\
 Z g(X, Y) & =g\left(D_{Z} X, Y\right)+g\left(X, D_{Z} Y\right)
 \end{aligned}
 $$
+\begin{note}
+  Nach der Metrik-Kompatibilität ist die Ableitung der Metrik nach Vektorfeldern gleich der Produktregel, wobei in der Metrik die Ableitungen bzgl. des Zusammenhangs stehen.
+\end{note}
 Addiert man die ersten beiden Gleichungen, subtrahiert die dritte, und benutzt die Torsionsfreiheit, so ergibt sich
 $$2 g\left(D_{X} Y, Z\right)=X g(Y, Z)+Y g(Z, X)-Z g(X, Y)+g([X, Y], Z)-g([X, Z], Y)-g([Y, Z], X)$$
+\begin{note}
+  Die Koszulgleichung entsteht durch Summation der ersten beiden Iterationen der Metrikkompatibilität $(X,Y,Z);(Y,Z,X)$ und Subtraktion der dritten Iteratioen $(Z,X,Y)$.
+\end{note}
 Diese Gleichung heisst Koszulgleichung. Da $g$ nichtdegeneriert ist, folgt die Eindeutigkeit von $D_{X} Y$.
+
 
 
 (2) (Existenz) Durch die Koszulgleichung definieren wir jetzt $D_{X} Y$ und rechnen die Eigenschaften nach.
@@ -1124,8 +1139,14 @@ $$
 = & 2 g\left(f D_{X} Y, Z\right)
 \end{aligned}
 $$
+\begin{note}
+Koszulgleichung anwenden, dann Produktregel und Lie-Klammer Identität anwenden und $Y(f)g(\dots))$ Terme kürzen.
+\end{note}
 
-(c) $D_{X}(f Y)=X(f) Y+f D_{X} Y$ ist ÜA.
+(c) $D_{X}(f Y)=X(f) Y+f D_{X} Y$.
+\begin{note}
+  Analog, Koszulgleichung anwenden, dann Produktregel und Lie-Klammer (mit $[X,fY]=f[X,Y]+X(f)Y$, Vorzeichen aufpassen)
+\end{note}
 
 (d) Vertauscht man in der Koszulgleichung die Rollen von $X$ und $Y$ und subtrahiert die beiden Gleichungen, so ergibt sich
 $$
@@ -1143,7 +1164,6 @@ $$
 \end{aligned}
 $$
 \end{PROOF}
-
 
 
 
