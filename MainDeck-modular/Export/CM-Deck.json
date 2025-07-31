@@ -181,6 +181,149 @@
           ]
         }
       ]
+    },
+    {
+      "id": "sec-1753776674580",
+      "name": "Hamiltonsche Mechanik",
+      "subsections": [
+        {
+          "id": "sub-1753776679542",
+          "name": "Grundlagen",
+          "unitUIDs": [
+            "8226f26c-765b-4427-aa28-a92131845c8c",
+            "f42032be-bbf4-4791-9db7-0cb9ba4e9812",
+            "eec2bbd1-7cec-4b2e-9f84-c1513b1aedaa",
+            "15d02ba4-9514-4603-b8e9-5e61c00a9542",
+            "242deb53-65c7-4141-b733-f1f205b5432c",
+            "2cb88f8d-6e6c-4963-8108-725bd957e723",
+            "b5fca15a-539c-40f0-98bf-99502c4fe32a",
+            "0c6eaa51-a777-47b4-aa2d-8e3f534b4a4a",
+            "f2b3a580-5630-4d47-82d6-1b3b384615f6",
+            "784d99a9-0896-4dc3-854e-3dfb5e255da1",
+            "323d76ca-c5c6-438f-883e-8e01b4a05719",
+            "69b712db-005b-47f6-b1d3-f823f76516d2",
+            "4fdcb5c1-fa56-440c-ad48-a3a8e857f9f0",
+            "150e3cfb-c4dd-4463-804c-37732e965590",
+            "78c22643-4d3a-4e9c-a064-14df1f5065b3",
+            "52f8b77a-1c1e-4c7e-8acf-587fd36ddf54",
+            "94c7eb38-d75c-4137-850c-e72c9a5ff629",
+            "61512606-43aa-42cd-afc2-12e093a25a38",
+            "aff34d98-ca82-44dc-9ff4-3b59624ad336",
+            "bf22926e-54c2-4d2c-85bf-3bea4b846cad",
+            "1cb36b53-f39d-46ae-b938-c9a232fc3d85",
+            "c91aa40a-7e40-43e3-973c-3e267edc44bc",
+            "e33d0ae7-733a-48f3-9013-4d3ca9b3da88",
+            "63f8167e-2605-4f52-ac54-c69c9f624cc9"
+          ]
+        },
+        {
+          "id": "sub-1753776705502",
+          "name": "Kanonische Transformationen",
+          "unitUIDs": [
+            "34f649af-fe3c-4ac9-aeae-26a61f331bb6",
+            "be8f7887-4795-4bbd-8d60-1ea93d97f275",
+            "ee23004c-78b0-4c5a-a1ca-a8982d0c5ac0",
+            "ae5feb0e-8ac7-4958-9fac-abe3e2e236e1",
+            "0f93b277-a562-46ef-b5e0-822613b7122b",
+            "628d8f64-4271-44bf-a0ac-cab3437a6686",
+            "b426b6d6-73db-40b3-b1de-f6ab30835433",
+            "5562ec73-feae-4499-a795-8de51b885257",
+            "58c331b9-a3da-42cb-9c13-4fc4ecb7ed64",
+            "7c512707-04a7-4c84-8481-fa61c06b7925",
+            "6c084e67-9d7d-42a5-aede-21f9ff48a572",
+            "089ef4a7-1963-4e88-ac3e-144b59c6125a",
+            "0e9eae49-0ed8-4a5f-a379-d26f64c05b61",
+            "3c9f57a6-dd8e-4dc7-9a07-206905eceb02",
+            "67851b31-f536-4ba5-8a9f-157828e47a9a",
+            "5b009b28-543c-4571-a2a0-be8e26e789a1",
+            "2790a65b-a867-4ea7-8c92-f5421894c4aa",
+            "c1690534-271d-4a55-bc35-ca9f2a39f6e4",
+            "ba65a0bb-6db6-4c0c-ab6b-4fee64fb191f",
+            "aa06ee8f-5b8e-4880-83fd-f20228e43240",
+            "a97f9437-ebb2-4bc4-93ad-ea2b6c3b6537"
+          ]
+        },
+        {
+          "id": "sub-1753863512938",
+          "name": "Kanonische Invariante",
+          "unitUIDs": [
+            "20e056ce-4d6d-45fe-a115-f9966483e530",
+            "0abbb313-3b5e-485e-aa9d-c69a56a8364f",
+            "e5ee54fe-8ab6-49f1-8db6-57478cf145a5",
+            "f10e5b81-e914-4db4-ba4f-5d51bbc0ab75",
+            "66a69894-9ae3-4c50-9aed-e539b481560d"
+          ]
+        },
+        {
+          "id": "sub-1753863547266",
+          "name": "Hamilton-Jacobi-Theorie",
+          "unitUIDs": [
+            "d99d9ef5-4049-4bf9-8dfa-673f5261ad97",
+            "c055ae30-748d-49d3-a464-79cd549be1ee",
+            "7f962285-f586-4c28-ab41-849db3f09e78",
+            "9e2339ee-8bbf-4140-9e72-1f9d4841c987",
+            "e218d0a5-70a8-4c34-a4e2-bc45cbd02c1d",
+            "dee5c048-6aa8-464e-b9ae-7794b7b70ba0",
+            "14cbd7d8-a185-46ea-bad4-2367d98ae137",
+            "444a1d4e-b8cc-474d-bf87-0181bb4fad95",
+            "2cb3996d-e032-494b-b532-148c1d70c110",
+            "24d9fa10-04e2-426d-b3c7-8c449b891885",
+            "cc8daf36-53cb-4aae-be9e-150ded6dbb0d",
+            "6cbc02bd-5433-4786-9903-fdf66abf66f7",
+            "9f7dc61b-5b10-4549-a09e-7a5a3e1b3160",
+            "6ec0813a-c3a7-42a2-9143-b374a1c8f9a5",
+            "98b3e211-661e-4ecb-a8b4-a9d5996f62c6"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-1753863588543",
+      "name": "Spezielle Themen",
+      "subsections": [
+        {
+          "id": "sub-1753863597317",
+          "name": "Nichtlineare Dynamik",
+          "unitUIDs": [
+            "aacf8f19-8667-46fa-aa96-0ae59268b108",
+            "26bb27f3-1654-4bb7-b057-f243c0111144",
+            "19e9aaf5-8a81-40b3-92fb-145f77a31499",
+            "fd908299-f815-44f3-9725-f38c188b8dde",
+            "c7f624b3-bb4a-4a94-a236-da9717659914",
+            "beeeab48-6808-4d09-a319-044faba786b4",
+            "4064a718-fba7-456b-ab5a-9e4cffc1a2d0",
+            "276cedb8-3757-441c-b5a4-6743d679ea33"
+          ]
+        },
+        {
+          "id": "sub-1753863607120",
+          "name": "SRT und Lorentz-Trafos",
+          "unitUIDs": [
+            "af344463-ebac-4230-b724-b2d855765f9a",
+            "bdca4bfc-990e-470c-84b6-f19118427db9",
+            "26f360e8-f8bd-471a-8188-146eb6212e23",
+            "7ca5043f-5652-418d-8178-5eb399101990",
+            "d4264fa2-c1ab-4f4d-adfa-081496ef3aee",
+            "572227b5-f2b7-490b-96cd-6c6b8a079830",
+            "84294ae3-3c56-4406-bf2d-5d1cf1f06840",
+            "7d8a4108-b79f-4b2e-9d35-f6ff32221d4d",
+            "1f9204e6-7de3-4d1c-b9d4-189c3c28404a",
+            "aeec7ec2-ac04-456c-96c5-e38e8a2043f1",
+            "f89dce58-fd98-40ff-9eb4-845147336324",
+            "09fe9ebb-16e2-452a-b1ea-5fbd61dd78b6",
+            "3ee96d28-ba85-4284-8c4e-2be8edc53641",
+            "cb4cc789-b897-4760-8885-ccf758200e3e",
+            "284e7670-246a-4ae7-a6e4-47e9385b6ecc",
+            "209b07d6-d61f-4443-991d-b06443ebb01d",
+            "7849476a-1a47-4df6-bf8a-44b5837888e5",
+            "9acf787f-3227-4298-b6a7-73aadf515864",
+            "0aff84c4-5248-40e4-ae90-dd598b00d8cc",
+            "88c8dee5-bf72-4ab6-9221-1baba0f2f554",
+            "ac9d8b39-299f-4b7a-a2ef-3d3e14e08533",
+            "a241dd91-a404-47e3-8dec-84357d93a560"
+          ]
+        }
+      ]
     }
   ]
 }

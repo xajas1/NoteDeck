@@ -20,6 +20,9 @@
 % 17  Graphik
 % 00. Titel und Autor
 
+
+\usepackage{slashed}
+
 % --- 1. Seitenlayout und Ränder ---
 \usepackage[margin=3cm]{geometry}
 
@@ -3641,11 +3644,14 @@ cf. Eq. (4.51). This construction can be continued to arbitrary order in the dim
 
 \section{Unitary symmetries of the strong interaction}
 
-\section{U(1) symmetry of quantum electrodynamics}
+
+
+
+\subsection{U(1) symmetry of quantum electrodynamics}
 Symmetries play a prominent role in modern theories of the Forces of Nature. This is especially true for the theory of the strong interaction. Before turning to this theory, however, let us first consider the (simpler) theory of electromagnetism, quantum electrodynamics (QED), which describes the interactions between electrons and photons. The respective Lagrangian reads (in natural units, $\hbar=c=1$ )
 
 $$
-\mathcal{L}_{\mathrm{QED}}=-\frac{1}{4} F^{\mu \nu} F_{\mu \nu}+\bar{\psi}(i \not D-m) \psi
+\mathcal{L}_{\mathrm{QED}}=-\frac{1}{4} F^{\mu \nu} F_{\mu \nu}+\bar{\psi}(i \slashed{D}-m) \psi
 $$
 
 where $F^{\mu \nu}=\partial^{\mu} A^{\nu}-\partial^{\nu} A^{\mu}$ is the field-strength tensor of the electromagnetic field, with the 4 -vector potential $A^{\mu}$, the so-called gauge field, and the covariant derivative
@@ -3698,16 +3704,21 @@ $$
 Therefore, also the matter term in Eq. (5.1) is invariant,
 
 $$
-\bar{\psi}(i \not D-m) \psi \longrightarrow \bar{\psi}^{\prime}\left(i \not D^{\prime}-m\right) \psi^{\prime}=\bar{\psi} e^{-i e \Lambda} e^{i e \Lambda}(i \not D-m) \psi=\bar{\psi}(i \not D-m) \psi .
+\bar{\psi}(i \slashed{D}-m) \psi \longrightarrow \bar{\psi}^{\prime}\left(i \slashed{D}^{\prime}-m\right) \psi^{\prime}=\bar{\psi} e^{-i e \Lambda} e^{i e \Lambda}(i \slashed{D}-m) \psi=\bar{\psi}(i \slashed{D}-m) \psi .
 $$
 
 Gauge transformations are also termed local symmetry transformations and one speaks of local invariance under these transformations or, short, of a local symmetry. The special case $\Lambda(X)=$ const. corresponds to global symmetry transformations or global invariance or global symmetry, respectively.
 
-\section{SU(3) color symmetry of quantum chromodynamics}
+
+
+
+
+
+\subsection{SU(3) color symmetry of quantum chromodynamics}
 The theory of the strong interaction is quantum chromodynamics (QCD) (greek: $\chi \rho \widetilde{\omega} \mu \alpha=$ color). It describes the interaction between quarks and gluons. The Lagrangian of QCD looks quite similar to that of QED, Eq. 5.1,
 
 $$
-\mathcal{L}_{\mathrm{QCD}}=-\frac{1}{2} \operatorname{Tr}\left(\mathcal{F}^{\mu \nu} \mathcal{F}_{\mu \nu}\right)+\bar{\Psi}(i \not D-\hat{m}) \Psi
+\mathcal{L}_{\mathrm{QCD}}=-\frac{1}{2} \operatorname{Tr}\left(\mathcal{F}^{\mu \nu} \mathcal{F}_{\mu \nu}\right)+\bar{\Psi}(i \slashed{D}-\hat{m}) \Psi
 $$
 
 Here,
@@ -3846,7 +3857,7 @@ $$
 and thus
 
 $$
-\bar{\Psi}(i \not D-\hat{m}) \Psi \longrightarrow \bar{\Psi}^{\prime}\left(i \not D^{\prime}-\hat{m}\right) \Psi^{\prime}=\bar{\Psi} \hat{U}^{-1} \hat{U}(i \not D-\hat{m}) \Psi \equiv \bar{\Psi}(i \not D-\hat{m}) \Psi .
+\bar{\Psi}(i \slashed{D}-\hat{m}) \Psi \longrightarrow \bar{\Psi}^{\prime}\left(i \slashed{D}^{\prime}-\hat{m}\right) \Psi^{\prime}=\bar{\Psi} \hat{U}^{-1} \hat{U}(i \slashed{D}-\hat{m}) \Psi \equiv \bar{\Psi}(i \slashed{D}-\hat{m}) \Psi .
 $$
 
 The gauge invariance of QCD, i.e., the symmetry under local ( $S U\left(N_{c}\right), \cdot$ ) transformations implies that quarks as well as gluons can be grouped into multiplets of $\left(S U\left(N_{c}\right), \cdot\right)$. This must be the case, since quarks can also transform amongst each other, but not into gluons or other objects. The same holds for gluons. The $N_{c}=3$ quark colors are states of the fundamental representation, the triplet:\\
@@ -3864,7 +3875,7 @@ $$
 
 Anti-quarks differ from quarks in all charge quantum numbers, and thus also in color. Therefore, anti-quarks occupy states of the anti-triplet,
 
-\section{Yh}
+$$\Upsilon[\hbar]$$
 \begin{center}
 \includegraphics[scale=0.3]{2025_05_20_8618f55a41bfe980b4b2g-62}
 \end{center}
@@ -3886,7 +3897,15 @@ A peculiarity of QCD is the so-called color confinement: particles which are sub
 
 The fact that hadrons are always color-singlets means that they must consist of several quarks and gluons, and in particular of such couplings between these particles which allow a singlet, e.g. as in Eqs. (4.50) and (4.52). Color-singlets which consist of a quark and an anti-quark are called mesons, color-singlets which consist of three (anti-)quarks are called (anti-)baryons. We will discuss concrete examples in the next sections, but first we discuss another symmetry of QCD, the so-called flavor symmetry.
 
-\section{SU(N) flavor symmetry}
+
+
+
+
+
+
+
+\subsection{$SU(N_f)$ flavor symmetry}
+
 In the case of vanishing mass, left- and right-handed Dirac fields,
 
 $$
@@ -3944,6 +3963,9 @@ consequently, the chiral symmetry of QCD is explicitly broken. If all quark mass
 number, one usually considers the group $\left(S U\left(N_{f}\right), \cdot\right)$ of special unitary vector transformations, or short, the ( $\boldsymbol{S U}\left(\boldsymbol{N}_{f}\right), \cdot$ ) flavor symmetry.
 
 This symmetry is broken because the quark masses (5.27) are all of different value. However, for some quark flavors the breaking is less strong than for others. For instance, the mass difference between up and down quark is, in comparison to a typical hadronic mass scale of $M_{h} \sim 1 \mathrm{GeV}$, vanishingly small. This results in an approximate ( $S U(2), \cdot$ ) flavor symmetry, the so-called isospin symmetry of QCD and thus of the strong interaction, which will be discussed in the next section. Moreover, also the mass difference between strange and up or down quark is, on a hadronic mass scale, small, so that one can assume to good approximation also an approximate $(S U(3), \cdot)$ flavor symmetry of the strong interaction. This will be discussed in the next-to-next section. More strongly broken is the $(S U(4), \cdot)$ flavor symmetry, which also takes into account the charm quark. It is nevertheless reasonable to also consider this symmetry in order to classify hadrons with the quantum number charm, which will be done at the end of this chapter.
+
+
+
 
 \subsection{Isospin symmetry}
 The masses of up and down quark are, in comparison to a hadronic mass scale $M_{h} \sim 1$ GeV, almost of equal magnitude (and also vanishingly small),
@@ -4085,6 +4107,9 @@ $$
 \end{aligned}
 $$
 
+In accordance with Eq. (4.85), these are symmetric states.
+
+
 The quantum numbers of the $\Delta$ quadruplet are $I\left(J^{P}\right)=\frac{3}{2}\left(\frac{3}{2}\right)^{+}$and the mass is $m_{\Delta}=1232$ MeV .
 
 In order to compute the electric charge of the baryons, Eq. 5.31 needs to be modified:
@@ -4109,7 +4134,7 @@ so that one can speak of an approximate $(S U(3), \cdot)$ flavor symmetry of the
 
 Then, the three quark flavors form an ( $S U(3), \cdot$ ) triplet:
 
-\section{Yh}
+$$\Upsilon[\hbar]$$
 \begin{center}
 \includegraphics[scale=0.3]{2025_05_20_8618f55a41bfe980b4b2g-67}
 \end{center}
@@ -4621,6 +4646,15 @@ D_{s}^{ \pm}: I\left(J^{P C}\right)=0\left(0^{-+}\right), & m_{D_{s}^{ \pm}}=196
 $$
 
 The vector meson corresponding to the ( $S U(4), \cdot$ ) singlet $\eta_{c}$, the so-called $J / \Psi$ meson $\left(m_{J / \Psi}=3096.916 \pm 0.011 \mathrm{MeV}\right)$ was the first particle carrying charm which was experimentally detected, in the year 1974 by Samuel Ting at the Alternating Gradient Synchrotron (AGS) of Brookhaven National Laboratory (BNL) on Long Island. For this achievement he received (together with Burton Richter of Stanford Linear Accelerator Center, SLAC) the Nobel prize 1976.
+
+
+
+
+
+
+
+\pagebreak
+
 
 \section{The Poincaré group}
 In Chapter 2 we had considered rotations in space. Together with the so-called Lorentz boosts, i.e., transformations between inertial frames encountered in special relativity, they form the so-called Lorentz group $\mathbb{L}$ (or more precisely, the so-called proper orthochronous Lorentz group $\mathbb{L}_{+}^{\uparrow}$, since space-reflection and time-reversal transformations will not be considered). Moreover, we had considered translations in space and time in Chapter 2. Taking these together with the Lorentz group, we obtain the so-called Poincaré group $\mathbb{P}$.

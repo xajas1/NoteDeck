@@ -72,23 +72,24 @@ export default function TreePlaygroundView({
     setExpandedSources(next)
   }
 
-  const toggleSelection = (uid, index, shift = false) => {
-    setSelectedUIDs(prev => {
-      const next = new Set(prev)
-      if (shift && lastSelectedIndex !== null) {
-        const start = Math.min(lastSelectedIndex, index)
-        const end = Math.max(lastSelectedIndex, index)
-        for (let i = start; i <= end; i++) {
-          next.add(playground[i].UID)
-        }
-      } else {
-        if (next.has(uid)) next.delete(uid)
-        else next.add(uid)
-        setLastSelectedIndex(index)
+const toggleSelection = (uid, index, shift = false, visibleUIDs = []) => {
+  setSelectedUIDs(prev => {
+    const next = new Set(prev)
+    if (shift && lastSelectedIndex !== null) {
+      const start = Math.min(lastSelectedIndex, index)
+      const end = Math.max(lastSelectedIndex, index)
+      for (let i = start; i <= end; i++) {
+        next.add(visibleUIDs[i])
       }
-      return next
-    })
-  }
+    } else {
+      if (next.has(uid)) next.delete(uid)
+      else next.add(uid)
+      setLastSelectedIndex(index)
+    }
+    return next
+  })
+}
+
 
   return (
     <div style={{ fontFamily: 'monospace', fontSize: '0.68rem', color: '#eee' }}>
@@ -177,7 +178,7 @@ export default function TreePlaygroundView({
                         {uids.map((uid) => {
                           const unit = getFullUnitByUID(uid)
                           if (!unit) return null
-                          const index = playground.findIndex(p => p.UID === uid)
+                          const index = uids.indexOf(uid)
                           return (
                             <DraggableLine
                               key={uid}
@@ -188,7 +189,7 @@ export default function TreePlaygroundView({
                               isSelected={selectedUIDs.has(uid)}
                               isInEditor={isInEditor(uid)}
                               selectedUIDs={selectedUIDs}
-                              onClick={(e) => toggleSelection(uid, index, e.shiftKey)}
+                              onClick={(e) => toggleSelection(uid, index, e.shiftKey, uids)}
                               setSelectedUIDs={setSelectedUIDs}
                               setPlayground={setPlayground}
                             />

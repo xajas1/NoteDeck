@@ -181,6 +181,34 @@
         "litIDs": {
           "K25c": "CM-K25c-17"
         }
+      },
+      "Kanonische Invarianten": {
+        "index": 18,
+        "parent": "Hamiltonsche Mechanik",
+        "litIDs": {
+          "K25c": "CM-K25c-18"
+        }
+      },
+      "Hamilton-Jacobi-Theorie": {
+        "index": 19,
+        "parent": "Hamiltonsche Mechanik",
+        "litIDs": {
+          "K25c": "CM-K25c-19"
+        }
+      },
+      "Nichtlineare Dynamik und Chaos": {
+        "index": 20,
+        "parent": null,
+        "litIDs": {
+          "K25c": "CM-K25c-20"
+        }
+      },
+      "Lorentz-Transformation": {
+        "index": 21,
+        "parent": "Spezielle Relativitätstheorie",
+        "litIDs": {
+          "K25c": "CM-K25c-21"
+        }
       }
     }
   },

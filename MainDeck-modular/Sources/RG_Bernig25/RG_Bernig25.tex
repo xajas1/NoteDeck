@@ -1187,7 +1187,12 @@ $$
 D_{\frac{\partial}{\partial x_{j}}} \frac{\partial}{\partial x_{k}}=\sum_{i} \Gamma_{j k}^{i} \frac{\partial}{\partial x_{i}}
 $$
 definiert sind und Christoffelsymbole heissen.
-\end{DEF}
+\begin{note}
+  Aus $C^\infty$-Linearität in $X$ und Ableitung in $Y$ des Zusammenhangs folgt
+  $$D_XY=D_{X^i\partial_i}Y^j\partial_j= \cdots = (X^i\partial_iY^k+X^iY^j\Gamma_{ij}^k)\partial_k$$
+  Durch Auswerten von Koszulgleichung für $\partial_i,\partial_j,\partial_l$ und durch anschließende Kontraktion mit invereser Metrik erhält man eine (lokale) Darstellung der Christoffel-Koeffizienten.  
+\end{note}
+\end{DEF} 
 
 
 \begin{REM}{RG-B25-06-08}{Levi-Civita Zusammenhang $D_XY_p$ hängt nur von $X_p$ ab}
@@ -1259,14 +1264,16 @@ alle anderen Christoffelsymbole verschwinden.
 
 Levi-Civita-Zusammenhang einer Untermannigfaltigkeit. 
 
+\begin{REM}{RG-B25-06-13}{Existenz von umgebenden Vektorfeldern}
 Sei $(M, g)$ eine Untermannigfaltigkeit von $(\tilde{M}, \tilde{g})$. Ist $X$ ein Vektorfeld auf $M$, so gibt es eine Umgebung $U$ von $M$ in $\tilde{M}$ und Vektorfeld $\tilde{X}$ auf $U$, dessen Einschränkung auf $M$ genau $X$ ist.
+\end{REM}
 
 
 
 Satz 2.4. 
 
 
-\begin{PROP}{RG-B25-07-11}{Induzierter LC-Zusammenhang auf Untermannigfaltigkeiten von RMfk}
+\begin{PROP}{RG-B25-06-11}{Induzierter LC-Zusammenhang auf Untermannigfaltigkeiten von RMfk}
 Für die Levi-Civita-Zusammenhänge $D$ von $M$ und $\tilde{D}$ von $\tilde{M}$ gilt
 \begin{equation*}
 \left.D_{X} Y\right|_{p}=\left(\tilde{D}_{\tilde{X}} \tilde{Y}\right)^{T} \quad \forall p \in M \tag{1}
@@ -1325,8 +1332,10 @@ $$
 \end{aligned}
 $$
 Die rechte Seite in (1) erfüllt also die Eigenschaften des Levi-CivitaZusammenhangs auf $M$ und stimmt wegen Eindeutigkeit mit ihm überein.
+\begin{note}
+  Man zeigt, dass der rechte Term genau die Eigenschaften des LC-Zusammenhangs erfüllt und verwendet dann Eindeutigkeit. Zuvor zeigt man die triviale Erweiterung bzw. Einschränkung von Ableitung von Funktionen längs Vektorfeldern und Lie-Klammern auf die umgebende Mannigfaltigkeit.
+\end{note}
 \end{PROOF}
-
 
 
 
@@ -1943,6 +1952,7 @@ Bemerkung: da h nicht nur von $v$, sondern auch von $r$ abhängt, handelt es sic
 Beweis. 
 
 
+
 \begin{PROOF}{RG-B25-17-24}{P: Gausslemma}
 Sei $v:\left(-\epsilon^{\prime}, \epsilon^{\prime}\right) \rightarrow S_{r}^{n-1}$ eine glatte Kurve und setze $\alpha(u, t):=\exp _{p}(u v(t))$. Es muss gezeigt werden, dass
 $$
@@ -1970,20 +1980,68 @@ $$
 \left\langle\frac{\partial \alpha}{\partial u}, \frac{\partial \alpha}{\partial u}\right\rangle=\langle v(t), v(t)\rangle=r^{2}
 $$
 und somit
-$$
+\[
 \begin{aligned}
-0 & =\frac{\partial}{\partial t}\left\langle\frac{\partial \alpha}{\partial u}, \frac{\partial \alpha}{\partial u}\right\rangle \\
-& =\frac{\partial}{\partial t}\left(g_{i j}(\alpha(u, t)) \frac{\partial \alpha_{i}}{\partial u} \frac{\partial \alpha_{j}}{\partial u}\right) \\
-& =\left(\Gamma_{k i}^{s} g_{s j}+\Gamma_{k j}^{s} g_{i s}\right) \frac{\partial \alpha_{k}}{\partial u} \frac{\partial \alpha_{i}}{\partial u} \frac{\partial \alpha_{j}}{\partial u}+g_{i j} \frac{\partial^{2} \alpha_{i}}{\partial u \partial t} \frac{\partial \alpha_{j}}{\partial u}+g_{i j} \frac{\partial \alpha_{i}}{\partial u} \frac{\partial^{2} \alpha_{j}}{\partial u \partial t} \\
-& =2 \frac{\partial \alpha_{i}}{\partial u}\left(g_{i j} \frac{\partial^{2} \alpha_{j}}{\partial u \partial t}+\Gamma_{k j}^{s} g_{s i} \frac{\partial \alpha_{k}}{\partial u} \frac{\partial \alpha_{j}}{\partial u}\right) .
+0
+&=\frac{\partial}{\partial t}
+     \Bigl\langle\frac{\partial\alpha}{\partial u},
+                 \frac{\partial\alpha}{\partial u}\Bigr\rangle
+   =\frac{\partial}{\partial t}
+     \Bigl(g_{ij}(\alpha)\,\alpha_{,u}^i\,\alpha_{,u}^j\Bigr)\\[2pt]
+&=\bigl(\Gamma_{ki}^{\,s}g_{sj}+\Gamma_{kj}^{\,s}g_{is}\bigr)\,
+      \alpha_{,t}^k\,\alpha_{,u}^i\,\alpha_{,u}^j
+   +g_{ij}\,\alpha_{,tu}^i\,\alpha_{,u}^j
+   +g_{ij}\,\alpha_{,u}^i\,\alpha_{,tu}^j\\[2pt]
+&=2\,\alpha_{,u}^i\Bigl(
+      g_{ij}\,\alpha_{,tu}^j
+      +\Gamma_{kj}^{\,s}g_{si}\,
+         \alpha_{,t}^k\,\alpha_{,u}^j\Bigr).
 \end{aligned}
-$$
+\]
+
 Also ist auch der zweite Term in $\frac{\partial}{\partial u}\left\langle\frac{\partial \alpha}{\partial u}, \frac{\partial \alpha}{\partial t}\right\rangle$ gleich 0 und es folgt, dass $\left\langle\frac{\partial \alpha}{\partial u}, \frac{\partial \alpha}{\partial t}\right\rangle$ von $u$ unabhängig ist. Wegen $\alpha(0, t)=p$ gilt $\frac{\partial \alpha(0, t)}{\partial t}=0$ und somit
 $$
 \left\langle\frac{\partial \alpha}{\partial u}, \frac{\partial \alpha}{\partial t}\right\rangle=0
 $$
 für alle $(u, t)$.
+
+\begin{note}
+Warum dürfen die Ableitungen \(\alpha_{,t}^k\) und
+\(\alpha_{,u}^j\) vertauscht werden? Setze
+\(G_{kj}:=\Gamma_{kj}^{\,s}g_{si}\)  und
+\(X_{kj}:=\alpha_{,t}^k\,\alpha_{,u}^j\).
+Wegen der Torsionsfreiheit der Levi-Civita-Verbindung gilt
+\(\Gamma_{kj}^{\,s}=\Gamma_{jk}^{\,s}\); somit ist \(G_{kj}=G_{jk}\) **symmetrisch**.
+
+Schreibe \(X_{kj}\) als Summe aus symmetrischem und antisymmetrischem Teil:
+\[
+X_{kj}=S_{kj}+A_{kj},\qquad
+S_{kj}:=\tfrac12\bigl(X_{kj}+X_{jk}\bigr),\quad
+A_{kj}:=\tfrac12\bigl(X_{kj}-X_{jk}\bigr).
+\]
+Dann
+\[
+G_{kj}X_{kj}=G_{kj}S_{kj}+G_{kj}A_{kj}.
+\]
+Der zweite Summand verschwindet, weil ein symmetrischer Tensor
+\(G_{kj}\) mit einem antisymmetrischen Tensor \(A_{kj}=-A_{jk}\)
+kontrahiert immer Null ergibt:
+\(
+G_{kj}A_{kj}=0.
+\)
+Somit
+\[
+G_{kj}\,\alpha_{,t}^k\,\alpha_{,u}^j
+   =\tfrac12G_{kj}\bigl(
+        \alpha_{,t}^k\,\alpha_{,u}^j
+       +\alpha_{,t}^j\,\alpha_{,u}^k\bigr)
+   =G_{kj}\,\alpha_{,t}^j\,\alpha_{,u}^k,
+\]
+d.\,h. die beiden Ableitungen können innerhalb des Produkts beliebig
+vertauscht werden.
+\end{note}
 \end{PROOF}
+
 
 
 
@@ -2679,6 +2737,8 @@ miteinander verknüpft.
 
 Beweis. 
 
+
+
 \begin{PROOF}{RG-B25-18-07}{P: Gaussgleichung}
 Lokal finden wir eine Orthonormalbasis von normalen Vektorfeldern, d.h. Vektorfelder $\nu_{1}, \ldots, \nu_{k}, k=\operatorname{dim} \tilde{M}-\operatorname{dim} M$ längs $M$, welche normal zu $M$ sind und in jedem Punkt eine Orthonormalbasis des Normalenraumes bilden. Seien $X, Y, U, V$ Vektorfelder auf $\tilde{M}$, die in jedem Punkt von $M$ tangential an $M$ sind und im Punkt $p \in M$ die Werte $x, y, u, v$ annehmen. Dann gilt
 $$
@@ -2690,11 +2750,11 @@ $$
 \tilde{D}_{X} \tilde{D}_{Y} U & =\tilde{D}_{X}\left(D_{Y} U+I I(Y, U)\right) \\
 & =\tilde{D}_{X}\left(D_{Y} U+\left\langle I I(Y, U), \nu_{i}\right\rangle \nu_{i}\right) \\
 & =\tilde{D}_{X} D_{Y} U+\tilde{D}_{X}\left(\left\langle I I(Y, U), \nu_{i}\right\rangle \nu_{i}\right) \\
-& =\tilde{D}_{X} D_{Y} U+I I(X, Y) U-X\left(\left\langle I I(Y, U), \nu_{i}\right\rangle\right) \nu_{i}+\left\langle I I(Y, U), \nu_{i}\right\rangle \tilde{D}_{X} \nu_{i}
+& = D_X D_Y U+I I\left(X, D_Y U\right)+X\left(\left\langle I I(Y, U), \nu_i\right\rangle\right) \nu_i+\left\langle I I(Y, U), \nu_i\right\rangle \tilde{D}_X \nu_i
 \end{aligned}
 $$
 und somit
-$\left\langle\tilde{D}_{X} \tilde{D}_{Y} U, V\right\rangle=\left\langle D_{X} D_{Y} U, V\right\rangle+I I(X, Y)\langle U, V\rangle+\left\langle I I(Y, U), \nu_{i}\right\rangle\left\langle\tilde{D}_{X} \nu_{i}, V\right\rangle$\\
+$$\left\langle\tilde{D}_X \tilde{D}_Y U, V\right\rangle=\left\langle D_X D_Y U, V\right\rangle+\left\langle I I(Y, U), \nu_i\right\rangle\left\langle\tilde{D}_X \nu_i, V\right\rangle$$
 Da $\nu_{i}$ normal, $X$ und $V$ tangential zu $M$ sind, gilt
 $$
 0=X\left\langle\nu_{i}, V\right\rangle=\left\langle\tilde{D}_{X} \nu_{i}, V\right\rangle+\left\langle\nu_{i}, \tilde{D}_{X} V\right\rangle=\left\langle\tilde{D}_{X} \nu_{i}, V\right\rangle+\left\langle\nu_{i}, I I(X, V)\right\rangle
@@ -2705,17 +2765,11 @@ $$
 $$
 da $V$ tangential zu $M$ ist. Insgesamt folgt
 $$
-\begin{aligned}
-\tilde{R}(X, Y, U, V)= & \left\langle\tilde{D}_{Y} \tilde{D}_{X} U, V\right\rangle-\left\langle\tilde{D}_{X} \tilde{D}_{Y} U, V\right\rangle+\left\langle\tilde{D}_{[X, Y]} U, V\right\rangle \\
-= & \left\langle D_{Y} D_{X} U, V\right\rangle+I I(X, Y)\langle U, V\rangle-\left\langle I I(X, U), \nu_{i}\right\rangle\left\langle\nu_{i}, I I(Y, V)\right\rangle \\
-& -\left\langle D_{X} D_{Y} U, V\right\rangle-I I(X, Y)\langle U, V\rangle+\left\langle I I(Y, U), \nu_{i}\right\rangle\left\langle\nu_{i}, I I(X, V)\right\rangle \\
-& +\left\langle D_{[X, Y]} U, V\right\rangle \\
-= & R(X, Y, U, W)-\left\langle I I(X, U), \nu_{i}\right\rangle\left\langle\nu_{i}, I I(Y, V)\right\rangle+\left\langle I I(Y, U), \nu_{i}\right\rangle\left\langle\nu_{i}, I I(X, V)\right\rangle \\
-= & R(X, Y, U, W)-\langle I I(X, U), I I(Y, V)\rangle+\langle I I(Y, U), I I(X, V)\rangle
-\end{aligned}
+\begin{aligned} \tilde{R}(X, Y, U, V)= & \left\langle\tilde{D}_Y \tilde{D}_X U, V\right\rangle-\left\langle\tilde{D}_X \tilde{D}_Y U, V\right\rangle+\left\langle\tilde{D}_{[X, Y]} U, V\right\rangle \\ = & \left\langle D_Y D_X U, V\right\rangle+\left\langle I I(X, U), \nu_i\right\rangle\left\langle\nu_i, I I(Y, V)\right\rangle \\ & -\left\langle D_X D_Y U, V\right\rangle-\left\langle I I(Y, U), \nu_i\right\rangle\left\langle\nu_i, I I(X, V)\right\rangle \\ & +\left\langle D_{[X, Y]} U, V\right\rangle \\ = & R(X, Y, U, V)-\left\langle I I(X, U), \nu_i\right\rangle\left\langle\nu_i, I I(Y, V)\right\rangle+\left\langle I I(Y, U), \nu_i\right\rangle\left\langle\nu_i, I I(X, V)\right\rangle \\ = & R(X, Y, U, V)-\langle I I(X, U), I I(Y, V)\rangle+\langle I I(Y, U), I I(X, V)\rangle .\end{aligned}
 $$
 In der letzten Gleichung haben wir verwendet, dass die zweite Fundamentalform immer normal zu $M$ ist und die $\nu_{i}$ eine Orthonormalbasis des Normalenraumes bilden.
 \end{PROOF}
+
 
 
 
@@ -3090,7 +3144,7 @@ Integriert man von 0 bis $L$, so ergibt sich die erste Gleichung.
 (2)
 $$
 \begin{aligned}
-\frac{d}{d t} L\left(c_{t}\right) & =\left.\frac{d}{d t}\right|_{t=0} \int_{0}^{L} g\left(c_{t}^{\prime}(s), c_{t}^{\prime}(s)\right)^{\frac{1}{2}} d s \\
+\frac{d}{d t} L\left(c_{t}\right) & =\frac{d}{d t} \int_{0}^{L} g\left(c_{t}^{\prime}(s), c_{t}^{\prime}(s)\right)^{\frac{1}{2}} d s \\
 & =\left.\int_{0}^{L} \frac{1}{2} g(X, X)^{-\frac{1}{2}} \frac{d}{d t}\right|_{t=0} g(X, X) d s
 \end{aligned}
 $$

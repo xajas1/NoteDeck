@@ -1,0 +1,1269 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17. Titel und Autor
+
+% --- 0. Allgemeine Pakete ---
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{multirow}
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\graphicspath{{../../Images/}}
+\usepackage[export]{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\CustomHeading{Definition}{#1}{#2}}{}
+\newenvironment{PROP}[2]{\CustomHeading{Proposition}{#1}{#2}}{}
+\newenvironment{THEO}[2]{\CustomHeading{Theorem}{#1}{#2}}{}
+\newenvironment{LEM}[2]{\CustomHeading{Lemma}{#1}{#2}}{}
+\newenvironment{KORO}[2]{\CustomHeading{Corollar}{#1}{#2}}{}
+\newenvironment{REM}[2]{\CustomHeading{Remark}{#1}{#2}}{}
+\newenvironment{EXA}[2]{\CustomHeading{Example}{#1}{#2}}{}
+\newenvironment{STUD}[2]{\CustomHeading{Study}{#1}{#2}}{}
+\newenvironment{CONC}[2]{\CustomHeading{Concept}{#1}{#2}}{}
+\newenvironment{OTH}[2]{\CustomHeading{Other}{#1}{#2}}{}
+\newenvironment{EXE}[2]{\CustomHeading{Exercise}{#1}{#2}}{}
+\newenvironment{MOT}[2]{\CustomHeading{Motivation}{#1}{#2}}{}
+\newenvironment{PROOF}[2]{\CustomHeading{Proof}{#1}{#2}}{}
+
+
+
+% --- Unit Umgebung ---
+\usepackage{mdframed}
+\newmdenv[
+  linewidth=1pt,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftmargin=0cm,
+  rightmargin=0cm,
+  skipabove=10pt,
+  skipbelow=10pt,
+  innertopmargin=0.5\baselineskip,
+  innerbottommargin=0.5\baselineskip,
+  backgroundcolor=gray!10,
+  linecolor=gray
+]{unitbox}
+
+\newenvironment{unit}[1]
+  {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
+  {\end{unitbox}}
+
+
+% --- 17. Titel und Autor ---
+\title{Mein Titel}
+\author{Tim Jaschik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+Kurze Beschreibung …
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+
+
+\section{Email}
+Sehr geehrter Herr Gross,
+
+Ich hatte gestern mit Fabian bei Ihnen aus der VL gesprochen, und wir hatten uns kurz über die TDA ausgetauscht. Zwar hatte ich während des Semesters die Veranstaltung selber noch nicht auf dem Schirm, konnte aber über die Topo 1/2 bei Herrn Prof. Kreck die algebraische Topologie kennen lernen, welche es mir sehr angetan hatte. Anschließend zum Gespräch hatte ich mir dann gestern etwas Übersicht über die TDA verschafft, und fand denn Zugang über persistent homology (PH) sehr spannend. 
+
+Da ich momentan darum bemüht bin die Grundlagen zu legen, um die BA Allgemein gehalten im Kontext der Bündel- / Gauge-Theorien (bspw. mathematische Yang-Mills) mit einem Fokus auf Moduli-Spaces und deren Strukturen schreiben zu können, hatte ich heute früh ganz unverbindlich bzw. naiv über Anwendungen / Adaptionen des Konzepts der PH in jenen Kontexten nachgedacht -  u.a. in Anregung durch Verallgemeinerungen wie:
+
+Persistent Stiefel–Whitney Classes of Tangent  Bundles: https://arxiv.org/abs/2503.15854
+Computing persistent Stiefel-Whitney classes  of line bundles: https://arxiv.org/abs/2005.12543
+ 
+
+
+
+Kurz um, ich wollte fragen, ob es möglich wäre, irgendwie noch zumindest in Form einer Prüfung einzusteigen, auch wenn ich während des Semesters nicht dabei war? Zwar muss ich schauen, ob ich das vom Pensum her in den Ferien hinbekomme, aber  
+
+%--------------------------------------------------
+\section{Grundkonstruktion}
+
+\begin{DEF}{}{YM-Setting}
+Sei $\Sigma_g$ eine Riemannfläche des Geschlechts \(g\) und
+\[
+  P \xrightarrow{G} \Sigma_g,
+  \qquad
+  \mathcal A \;=\;\bigl\{\text{glatte Verbindungen auf }P\bigr\},
+  \qquad
+  \mathcal G \;=\;\Gamma\!\bigl(\operatorname{Ad}P\bigr),
+  \qquad
+  \mathcal B \;=\; \mathcal A / \mathcal G .
+\]
+\end{DEF}
+
+
+\begin{DEF}{}{Sublevelmenge des Moduli-Raums}
+Für jedes \(\lambda\ge 0\) definieren wir
+\[
+  \mathcal B_\lambda
+    \;:=\;
+    \bigl\{[A]\in\mathcal B
+      \mid
+      \mathcal{YM}(A)\le\lambda
+    \bigr\}
+  \quad\text{mit}\quad
+  \mathcal{YM}(A)
+  =\int_{\Sigma_g}\!\|F_A\|^2\,\mathrm d\mathrm{vol}.
+\]
+Für \(\lambda\le\mu\) bezeichne
+\[
+  i_{\lambda\mu}\colon
+    \mathcal B_\lambda\hookrightarrow\mathcal B_\mu,
+  \quad
+  [A]\mapsto[A],
+\]
+die natürliche Inklusion.
+\end{DEF}
+
+
+\begin{DEF}{}{Persistenz-Modul}
+Sei $\Bbbk$ ein Körper und \(k\ge 0\) fest.  
+Betrachte die Sublevel-Filtration \(\{\mathcal B_\lambda\}_{\lambda\in\mathbb R_{\ge0}}\) mit den Inklusionen
+\(i_{\lambda\mu}\colon\mathcal B_\lambda\hookrightarrow\mathcal B_\mu\) für \(\lambda\le\mu\). Die Zuordnung
+\[
+  V_k\colon(\mathbb R,\le)\;\longrightarrow\;\mathbf{Vect}_{\Bbbk},
+  \qquad
+  \lambda\longmapsto H_k\!\bigl(\mathcal B_\lambda;\Bbbk\bigr), 
+  \quad
+  i_{\lambda\mu*}\longmapsto V_k(\lambda\le\mu)
+\]
+ist ein (kovarianter) Funktor; d.\,h. es gilt
+\[
+  V_k(\lambda\le\lambda)=\mathrm{id},
+  \qquad
+  V_k(\lambda\le\mu)\circ V_k(\mu\le\nu)=V_k(\lambda\le\nu).
+\]
+Das Objekt \(V_k\) heißt das \emph{Persistenz-Modul} der Filtration im Homologiegrad \(k\).
+
+Das Modul heißt \emph{endlich erzeugt}, wenn es nur endlich viele \emph{Geburts-} und \emph{Todeswerte} gibt, d.\,h. nur endlich viele \(\lambda\) mit nicht-trivialem Imagesprung
+\(\operatorname{im}V_k(\lambda^-)\subsetneq\operatorname{im}V_k(\lambda)\).
+\end{DEF}
+
+
+\begin{DEF}{}{Barcode}
+Ist \(V_k\) endlich erzeugt, so besagt der Struktur­satz
+(Gabriel \(\leftrightarrow\) Krull-Schmidt für Mengen mit Halbordnung), dass
+\[
+  V_k\;\cong\;\bigoplus_{j=1}^N \Bbbk_{[\beta_j,\;\delta_j)},
+  \qquad
+  \Bbbk_{[a,b)}(t)=
+  \begin{cases}
+    \Bbbk,& a\le t<b,\\
+    0,& \text{sonst},
+  \end{cases}
+\]
+wobei jedes Intervall genau eine \emph{Homologieklasse} repräsentiert, die bei
+\(t=\beta_j\) geboren und bei \(t=\delta_j\) stirbt.  
+Die Intervall­multimenge \(\{[\beta_j,\delta_j)\}_{j=1}^N\) heißt der \emph{Barcode} des Persistenz-Moduls.
+\end{DEF}
+%--------------------------------------------------
+
+
+
+%--------------------------------------------------
+\section{Yang--Mills auf Riemannflächen}
+
+\begin{THEO}{}{Atiyah--Bott}{YM\,=\,\(\Vert\mu\Vert^2\)}
+  Die unitäre Eichgruppe \(\mathcal G\) wirkt symplektisch auf \(\mathcal A\);
+  ihre Momentenabbildung
+  \(\mu\colon\mathcal A\to\operatorname{Lie}(\mathcal G)^\ast\)
+  erfüllt
+  \[
+    \mathcal{YM}(A)\;=\;\Vert\mu(A)\Vert_{L^2}^2
+    \quad\text{für alle }A\in\mathcal A.
+  \]
+\end{THEO}
+
+\begin{DEF}{}{Harder--Narasimhan-Typ}
+  Eine \emph{Harder--Narasimhan-Filtration} eines holomorphen
+  \(G\)-Bündels~\((E,\bar\partial)\) ist eine Flagge
+  \(
+    0=E_0\subset E_1\subset\cdots\subset E_s=E
+  \)
+  mit streng absteigenden Steigungen
+  \(\mu_1>\mu_2>\cdots>\mu_s\).  
+  Der dazugehörige \emph{HN-Typ} ist
+  \(
+    \underline\mu=\bigl((r_1,\mu_1),\dots,(r_s,\mu_s)\bigr),
+  \)
+  \(r_i=\operatorname{rk}(E_i/E_{i-1})\).
+\end{DEF}
+
+\begin{PROP}{}{Energie \& Index}
+  Für ein Stratum \(\mathcal C_{\underline\mu}\subset\mathcal B\) des Typs
+  \(\underline\mu\) gilt
+  \[
+    \lambda(\underline\mu)
+      =2\pi^2\,(g-1)\sum_{i=1}^s r_i(\mu_i-\bar\mu)^2,
+    \qquad
+    \operatorname{ind}(\underline\mu)
+      =\sum_{i<j}2\,r_ir_j\bigl(g-1+(\mu_i-\mu_j)\bigr),
+  \]
+  wobei \(\bar\mu=\tfrac1n\sum_i r_i\mu_i\).
+  Die Morse-Spektralsequenz degeneriert bereits in Stufe
+  \(E_1\) (equivariant perfekte Stratifikation).
+\end{PROP}
+
+\begin{REM}{}{Interpretation}
+  Jede neue Energiehöhe \(\lambda(\underline\mu)\) erzeugt \emph{genau} so viele
+  Homologie­klassen, wie der Index vorgibt; in der Persistenzsprache:
+  \emph{Geburt} bei \(\lambda=\lambda(\underline\mu)\), Tod erst bei der
+  nächsten Energie mit demselben Indexparitäts­typ.
+\end{REM}
+
+%--------------------------------------------------
+\section{Explizite Barcode-Berechnungen für \texorpdfstring{$\mathrm{SU}(2)$}{SU(2)}}
+
+\EXA{}{Harder--Narasimhan-Typen für \(\boldsymbol{g=1,2}\)}
+
+\begin{table}[h]
+  \centering\footnotesize
+  \begin{tabular}{@{}cccc@{}}
+    \toprule
+    Geschlecht & HN-Typ \(\underline\mu\)
+               & \(\lambda(\underline\mu)\)
+               & \(\operatorname{ind}(\underline\mu)\) \\
+    \midrule
+    \(g=1\) & – nur stabil – & \(0\) & \(0\) \\
+    \addlinespace
+    \multirow{2}{*}{\(g=2\)}
+      & \((1,\tfrac12),(1,-\tfrac12)\)
+      & \(\displaystyle\pi^2\)
+      & \(4\) \\
+      & Minimum (stabil)
+      & \(0\)
+      & \(0\)\\
+    \bottomrule
+  \end{tabular}
+  \caption{Erste HN-Typen für \(\mathrm{SU}(2)\) bei kleinem \(g\).}
+  \label{tab:HN_SU2}
+\end{table}
+
+\EXA{}{Barcode in Grad~\(k=4\) für \(g=2\)}
+
+\[
+  \overbrace{\;\;\bigl[0,\infty\bigr)\;}^{H_0}
+  \quad
+  \underbrace{\phantom{xxx}
+  \Bigl[\pi^2,\;2\pi^2\Bigr)\phantom{xxx}}_{H_4\text{-Balken}}
+  \hspace*{1em}
+  (\lambda\text{-Achse})
+\]
+Der einzig neue Balken entsteht genau bei \(\lambda=\pi^2\) und stirbt,
+sobald \(\lambda\) den nächsten kritischen Wert \(2\pi^2\) erreicht.
+
+%--------------------------------------------------
+\section{Wall-Crossing – parabolisches Gewicht}
+
+\begin{DEF}{}{Parabolische Stabilität}
+  Fixiere einen Punkt \(p\in\Sigma_g\) und ein Gewicht
+  \(\alpha\in(0,1)\).  
+  Ein \(\mathrm{SU}(2)\)-Bündel \(E\) sei \(\alpha\)-\emph{stabil},
+  falls jedes nicht-triviale Teilbündel \(L\subset E\) die
+  Ungleichung
+  \(
+    \mu(L)+\alpha\cdot\bigl(\operatorname{wt}_p L\bigr)<\bar\mu
+  \)
+  erfüllt.
+\end{DEF}
+
+\REM{}{Gewicht als Kontrollparameter}
+Setze \(t=\alpha\).  
+Für \(t<\tfrac12\) bleibt der HN-Typ stabil; bei
+\(t_\ast=\tfrac12\) spaltet die kurze Sequenz
+\(0\to L^{-1}\to E\to L\to0\).
+  
+\begin{THEO}{}{Barcode-Sprung}
+  Für \(t<\tfrac12\) ist der Barcode in Grad~4 leer.
+  Bei \(t=t_\ast\) wird ein Intervall
+  \([\pi^2,2\pi^2)\subset\mathbb R\) \emph{geboren};
+  seine Länge misst die Lebensdauer des neuen
+  Topologie­merkmals bis zum nächsten kritischen Niveau.
+\end{THEO}
+
+\begin{REM}{}{Metrischer Effekt}
+  Bottleneck-Abstand zwischen den Barcodes
+  \(\mathfrak B(t<\tfrac12)\) und \(\mathfrak B(t>\tfrac12)\)
+  ist genau \(\pi^2\).
+  Damit wird das Wall-Crossing quantitativ \emph{messbar}.
+\end{REM}
+
+
+%--------------------------------------------------
+\section{Wall--Crossing bei zeitabhängiger Metrik}
+
+Wir betrachten eine \emph{zeitabhängige Metrik}
+\(
+  g_t,\;t\in I=[0,1],
+\)
+wobei jede $g_t$ mit einer \emph{komplexen Struktur} $J_t$ kompatibel ist:
+\(g_t(\cdot,\cdot)=g_t(J_t\cdot,J_t\cdot)\).
+
+\subsection{Konforme Skalierung – kein Effekt}
+
+\begin{PROP}{}{Konforme Invarianz}
+  Sei $g_t = e^{2\phi(t)}\,g_0$ eine reine Skalierung.
+  Dann gilt für jede Verbindung $A$
+  \[
+    \mathcal{YM}_{g_t}(A)
+     =\int_{\Sigma_g}\!\|F_A\|_{g_t}^{2}\,d\mathrm{vol}_{g_t}
+     =\mathcal{YM}_{g_0}(A).
+  \]
+  Folglich sind alle Sublevelmengen
+  \(\mathcal B_\lambda^{(t)}\)
+  homöomorph, und das Barcode bleibt \emph{identisch}.
+\end{PROP}
+
+\subsection{Variation der komplexen Struktur}
+
+\DEF{}{Setting}
+Fixiere $P\to\Sigma_g$ mit $G=\mathrm{SU}(2)$, $\deg=0$.
+Wähle einen Pfad
+\(
+  J_t\in\mathrm{Teich}(\Sigma_g),
+\)
+der den Punkt $p$ \emph{nicht} bewegt, aber die komplexe Struktur auf $\Sigma_g$ ändert.
+
+\begin{THEO}{}{Wall bei Wechsel der HN‐Strata}
+  Sei $t_\ast\in I$ so, dass für $t<t_\ast$ jedes rank-1-Teilebenen­bündel
+  $L\subset E$ die parabolische Steigung
+  \(\mu_{J_t}(L)<0\) besitzt, während für $t>t_\ast$
+  ein $L$ mit \(\mu_{J_t}(L)>0\) existiert.  \newline
+  Dann
+  \[
+    \mathfrak B_k(t<t_\ast)=\mathfrak B_k^{\mathrm{\,old}},\qquad
+    \mathfrak B_k(t>t_\ast)=\mathfrak B_k^{\mathrm{\,old}}\;\cup\;
+                               \bigl\{[\lambda_\ast,\lambda_2)\bigr\}_{k=\operatorname{ind}},
+  \]
+  wobei
+  \(
+    \lambda_\ast = 2\pi^{2}(g-1)\,(\tfrac12)^2=\pi^{2}
+  \)
+  (erster nicht-zentr. HN-Typ)  
+  und \(\lambda_2=2\pi^{2}\) das nächste kritische Niveau ist.
+\end{THEO}
+
+\begin{REM}{}{Quantitative Sprunggröße}
+  Der Bottleneck-Abstand zwischen den Barcodes links und rechts der Wand
+  beträgt genau
+  \(\displaystyle d_{\mathrm B}=\pi^{2}\);  
+  die Balkenlänge \(\pi^{2}\) misst die \emph{Energiespanne}, in der das neu
+  entstandene topologische Merkmal (Grad-4-Klasse) präsent bleibt.
+\end{REM}
+
+\subsection{Mini-Beispiel \(g=2\)}
+
+\[
+  \text{Barcode}(t<t_\ast):\;
+    H_0 : [0,\infty)
+  \quad\quad
+  \text{Barcode}(t>t_\ast):\;
+    \begin{cases}
+      H_0 : [0,\infty)\\[2pt]
+      H_4 : [\pi^{2},\,2\pi^{2})
+    \end{cases}
+\]
+
+Damit macht die persistente Homologie den Wall-Crossing-Sprung — klassisch nur eine qualitative Stabilitätsaussage — quantitativ \emph{sicht- und messbar}.
+%--------------------------------------------------
+
+\section{Wall--Crossing durch reine Metrikvariation}
+
+\subsection{Modellraum \(X=S^2\times S^2\)}
+
+\begin{DEF}{}{Bündel \& Metrikpfad}
+  Sei
+  \[
+    X=S^2\times S^2,
+    \qquad
+    E\;\xrightarrow{\;\mathrm{SU}(2)\;} X,
+    \qquad
+    c_2(E)=1 .
+  \]
+  Wir betrachten die Produktmetrik
+  \(
+      g_a \;=\; r^2\,g_{S^2}\;\oplus\;a^2\,g_{S^{2'}}
+      \quad a>0,
+  \)
+  d.\,h. wir „blähen“ den zweiten Faktor um den Skalierungsparameter \(a\).
+\end{DEF}
+
+\REM{}{Anti-selbstduale Gleichung}
+Die Hodge-\(*\)-Operatoren hängen von \(a\); damit auch die
+ASD-Gleichung \(F_A^+=0\).
+Bekanntes Resultat (Fintushel–Stern 1990):
+
+\begin{THEO}{}{Existenzsprung}
+  Für \(a<1\) besitzt \(E\) keinen ASD-Zusammenhang,
+  für \(a=1\) entsteht ein \emph{reduzierbarer} ASD-Orbit
+  (erster Aufspaltungspunkt),
+  und für \(a>1\) existieren zwei irreduzible ASD-Verbindungen,
+  deren Moduli-Raum \(\mathcal M_{a>1}\) eine kompakte
+  0-dimensionale Mannigfaltigkeit (zwei Punkte) ist.
+\end{THEO}
+
+\subsection{Persistente Homologie des Sublevel-Pfades}
+
+\begin{itemize}
+\item Yang-Mills-Energie einer ASD-Lösung ist \(\lambda_\ast=8\pi^2\) (unabhängig von \(a\)).
+\item Für \(a<1\) bleibt das Sublevel
+      \(\mathcal B_\lambda^{(a<1)}\)
+      bis \(\lambda=8\pi^2\) kontraktibel $\Rightarrow$ Barcode nur \(H_0\!:\,[0,\infty)\).
+\item Beim kritischen Wert \(a=1\) betritt ein \emph{reduzierbarer} Punkt die
+      Energieschwelle, aber sein Morse-Index ist \(>0\);
+      er erzeugt keinen neuen Balken (wird sofort von einem negativen Disk
+      wegretrahiert).
+\item Für \(a>1\) liegen zwei
+      \emph{irre­duzible} ASD-Punkte in \(\mathcal B_{\lambda_\ast}\);
+      ihr Index ist \(0\) $\Rightarrow$ es entsteht ein zusätzlicher
+      \(H_0\)-Balken
+      \[
+        [\,\lambda_\ast,\infty)\ \text{ (zweites Komp.)}.
+      \]
+\end{itemize}
+
+\[
+\textit{Barcode }H_0:\qquad
+\begin{cases}
+  [0,\infty) & a<1,\\[2pt]
+  [0,\infty)\;\cup\;[8\pi^2,\infty) & a>1 .
+\end{cases}
+\]
+
+\subsection*{Wall--Crossing‐Effekt}
+
+\begin{itemize}
+\item \textbf{Geburt} neuer Komponente genau bei
+      \(\lambda=8\pi^2\) und \(a=1^{+}\).
+\item \textbf{Sprunggröße} (Bottleneck-Abstand) zwischen den
+      Barcodes links und rechts der Wand:
+      \(\displaystyle d_{\mathrm B}=0\) in Grad \(>0\),
+      aber \(d_{\mathrm B}=8\pi^2\) in Grad 0
+      (zweiter Balken startet dort).
+\item \textbf{Interpretation} –
+      das Wall-Crossing des klassischen Donaldson-Programms
+      (Existenz oder Nicht-Existenz von ASD-Verbindungen)
+      wird durch die persistente Homologie \emph{quantifiziert}:
+      Der neue Balken kodiert • Zeitpunkt (Geburt bei \(8\pi^2\))  
+      • „Gewicht“ (Lebensdauer hier unendlich, da kein höheres
+        kritisches Niveau ihn tötet).
+\end{itemize}
+
+\begin{REM}{}{Rein riemann­geometrisch}
+  In diesem Beispiel ändert sich \emph{nur} die Riemann­
+  metrik; weder komplexe Struktur noch
+  Parabel­daten werden benutzt.
+  Trotzdem erzeugt die Metrik­variation einen klaren
+  Wall-Crossing-Sprung im Barcode.
+\end{REM}
+%--------------------------------------------------
+
+
+%--------------------------------------------------
+\section{Die Geometrie des Barcode-Raums}
+
+\subsection{Definition und Grund­eigenschaften}
+
+\begin{DEF}{}{Barcode-Raum}
+  Ein \emph{Intervall} ist ein Paar $(b,d)$ mit
+  $0\le b<d\le\infty$; wir schreiben $[b,d)$
+  (offen am rechten Rand, wie in der PH-Konvention).
+  Ein \emph{Barcode} $B$ ist eine \emph{endliche Multimenge}
+  von Intervallen
+  \(
+    B=\bigl\{I_1,\dots,I_N\bigr\}.
+  \)
+  Zwei Intervalle können identisch sein (Mehrfach­heiten erlaubt).
+
+  Den \textbf{Barcode-Raum}
+  \[
+    \mathcal{B}
+      :=\bigl\{\,
+            B=\{I_j\}_{j=1}^{N}
+            \ \bigm|\ 
+            N<\infty
+          \bigr\}
+  \]
+  versehen wir mit dem \emph{Bottleneck-Abstand}
+  \[
+    d_{\mathrm B}(B_1,B_2)
+       =\inf_{\varphi}
+          \;\sup_{I\in B_1}
+             \bigl\|I-\varphi(I)\bigr\|_\infty,
+  \]
+  wobei $\varphi$ alle Matchings zwischen $B_1$ und $B_2$
+  (plus Diagonalelementen $[b,b)$) durchläuft und
+  $$\bigl\| [b_1,d_1)-[b_2,d_2)\bigr\|_\infty
+      :=\max\bigl\{|b_1-b_2|,\;|d_1-d_2|\bigr\}$$
+\end{DEF}
+
+\begin{PROP}{}{metrische Struktur}
+  $(\mathcal{B},d_{\mathrm B})$ ist
+  \emph{vollständig}, \emph{separabel}, aber nicht lokal kompakt.
+  Kurvenlänge und geodätische Begriffe sind sinnvoll definiert;
+  insbesondere besitzt jedes Paar $(B_1,B_2)$
+  eine Minimalgeodäte (Turner–Mileyko–Mukherjee–Harer 2014).
+\end{PROP}
+
+\begin{REM}{}{Beziehung zu Persistence-Diagrammen}
+  Identifiziert man jedes Intervall $[b,d)$ mit den beiden Punkten
+  $(b,d)$ und $(d,b)$ oberhalb der Diagonalen,
+  so ist $d_{\mathrm B}$ genau die klassische
+  \emph{Diagramm-Bottleneck-Metrik}.
+\end{REM}
+
+\begin{DEF}{}{Barcode-Pfad}
+  Sei $I=[0,1]$.
+  Eine Abbildung
+  \(
+    \gamma:I\to\bigl(\mathcal{B},d_{\mathrm B}\bigr)
+  \)
+  heißt \emph{Barcode-Pfad}, falls sie hinsichtlich
+  $d_{\mathrm B}$ stetig ist.
+\end{DEF}
+
+
+\begin{DEF}{}{Barcode-Pfad}
+  Sei \(I=[0,1]\).
+  Ein \emph{Barcode-Pfad} ist eine stetige Abbildung
+  \[
+     \gamma:I\longrightarrow\bigl(\mathcal{B},d_{\mathrm B}\bigr),
+     \quad t\longmapsto\gamma(t).
+  \]
+  Den Raum aller solcher Pfade bezeichnen wir mit
+  \(\mathcal P(\mathcal{B})\).
+\end{DEF}
+
+\begin{DEF}{}{Sup- und Längen-Metrik}
+  Für \(\gamma,\eta\in\mathcal P(\mathcal{B})\) setzen wir
+  \[
+    d_\infty(\gamma,\eta)
+      :=\sup_{t\in I}\,d_{\mathrm B}\bigl(\gamma(t),\eta(t)\bigr).
+  \]
+  Die \textbf{geometrische Länge} eines Pfades ist
+  \[
+    L(\gamma)
+      :=\sup_{\Pi}\;\sum_{i}
+           d_{\mathrm B}\bigl(\gamma(t_i),\gamma(t_{i+1})\bigr),
+  \]
+  wobei \(\Pi=\{0=t_0<t_1<\cdots<t_m=1\}\) alle Zerlegungen von \(I\)
+  durchläuft.
+\end{DEF}
+
+\begin{DEF}{}{Energie und Geodätisch}
+  Die (metrische) Energie eines Lipschitz‐Pfades ist
+  \[
+    E(\gamma)=\int_0^1\bigl|\gamma'(t)\bigr|^{2}\,dt
+    \quad\text{mit}\quad
+    |\gamma'|(t)=
+      \lim_{h\to0}\frac{d_{\mathrm B}\bigl(\gamma(t+h),\gamma(t)\bigr)}{|h|}.
+  \]
+  \(\gamma\) heißt \emph{geodätisch}, wenn für alle
+  \(s<t\in I\)
+  \(
+    d_{\mathrm B}\bigl(\gamma(s),\gamma(t)\bigr)=|t-s|\;L(\gamma).
+  \)
+\end{DEF}
+
+\subsection{Beispiele}
+
+\begin{EXA}{}{Konstanter Pfad}
+  $\gamma(t)=\{[0,\infty)\}$ für alle $t$.
+  \[
+    L(\gamma)=0,\qquad
+    E(\gamma)=0.
+  \]
+  Dient als Baseline: keine topologische Veränderung entlang des Pfades.
+\end{EXA}
+
+\begin{EXA}{}{Sprungpfad (Wall‐Crossing auf $S^{2}\!\times\!S^{2}$)}
+  \[
+    \gamma(a)=
+    \begin{cases}
+      \{[0,\infty)\}, & 0<a<1,\\
+      \{[0,\infty),[8\pi^{2},\infty)\}, & a\ge1.
+    \end{cases}
+  \]
+  \[
+    L(\gamma)=8\pi^{2},
+    \quad
+    \gamma \text{ geodätisch mit einmaligem Sprung.}
+  \]
+\end{EXA}
+
+\begin{EXA}{}{Gleitender Tod eines Balkens}
+  Betrachte zwei Punkte $p_1,p_2\in\mathbb R^2$,
+  deren Abstand linear von $2$ auf $0$ schrumpft.
+  Der $H_0$-Barcode der Vietoris–Rips-Filtration enthält
+  einen Balken $[0,\ell(t))$,
+  wobei $\ell(t)=\tfrac12(2-t)$.
+  \[
+    \eta(t)=
+      \bigl\{[0,\infty),\ [0,\ell(t))\bigr\},
+      \qquad
+      0\le t\le2.
+  \]
+  \(
+    d_{\mathrm B}\bigl(\eta(t),\eta(s)\bigr)
+      =\tfrac12|t-s|,
+  \)
+  also $L(\eta)=1$ und $\eta$ ist geodätisch.
+\end{EXA}
+
+\begin{EXA}{}{Quadratischer Wachstums­pfad (freie Schleifen)}
+  Im freien Schleifenraum von $S^{1}$:
+  Barcode in $H_0$ bei Energie $\lambda$
+  enthält die Intervallfamilie
+  \(\{[0,\infty),[\,\pi, \infty),\dots,[\pi n^{2},\infty)\}\),
+  wobei $n=\lfloor\sqrt{\lambda/\pi}\rfloor$.
+  Somit
+  \[
+    \delta\lambda = 2\pi n+1
+    \quad\Longrightarrow\quad
+    d_{\mathrm B} = \pi(2n+1).
+  \]
+  Die Pfadlänge auf $[0,\Lambda]$ ist
+  \(
+    L=\sum_{m=0}^{\lfloor\sqrt{\Lambda/\pi}\rfloor-1}\pi(2m+1)
+    \approx \tfrac{\Lambda^{3/2}}{\sqrt{\pi}}.
+  \)
+  Der Pfad hat \emph{unendliche} Gesamt­arbeit,
+  aber endliche Arbeit auf jedem Kompaktintervall.
+\end{EXA}
+
+\subsection{Schlussbemerkung}
+
+Der metrische Barcode-Raum liefert damit nicht nur „Bilder“
+topologischer Invarianten, sondern eine
+\textbf{intrinsische Geometrie}
+für ganze Deformations­wege.
+Dies eröffnet neue Fragen:
+\begin{itemize}
+  \item Minimale „topologische Energie“ zwischen zwei
+        Flüssen?
+  \item Vergleich von numerisch und analytisch erzeugten Wegen?
+  \item Geodätische Struktur von Stabilitätsräumen?
+\end{itemize}
+Solche Probleme sind mit klassischen invarianten Werkzeugen
+nicht zugänglich, im Barcode-Raum jedoch wohldefiniert.
+%==================================================
+
+
+
+
+
+
+
+%--------------------------------------------------
+\subsection{Beispiel A: Metrikpfad auf \(\boldsymbol{S^{2}\times S^{2}}\)}
+
+\begin{EXA}{}{Sprung bei \(\boldsymbol{a=1}\)}
+  Metrik \(g_a=r^{2}g_{S^{2}}\oplus a^{2}g_{S^{2'}}\).
+  Barcode in \(H_{0}\):
+  \[
+    \gamma(a)=
+    \begin{cases}
+      \{[0,\infty)\}, & 0<a<1,\\
+      \{[0,\infty),[8\pi^{2},\infty)\}, & a\ge1.
+    \end{cases}
+  \]
+  \emph{Pfad-Geometrie}:
+  \[
+    L(\gamma)=8\pi^{2},
+    \quad
+    E(\gamma)=(8\pi^{2})^{2},
+    \quad
+    d_{\infty}\bigl(\gamma|_{[0,1)},\gamma|_{(1,1+\varepsilon]}\bigr)=8\pi^{2}.
+  \]
+  Der Pfad ist Stück für Stück geodätisch und besitzt bei \(a=1\)
+  eine unvermeidbare Sprung­singularität.
+\end{EXA}
+
+%--------------------------------------------------
+\subsection{Beispiel B: Energie-Pfad im freien Schleifenraum}
+
+\begin{EXA}{}{Quadratisches Balkengitter}
+  Schleifenraum \(\mathcal L S^{1}\) mit Energie
+  \(E(\gamma)=\tfrac12\int|\gamma'|^{2}\).
+  Barcode-Pfad
+  \(\lambda\mapsto\mathfrak B(\lambda)\) erzeugt bei jeder Schwelle
+  \(\lambda_n=\pi n^{2}\) zwei neue unendliche Balken.
+  \[
+    L_{\!H_0}=\sum_{n\ge0}\pi(2n+1)=\infty,
+    \quad
+    \text{aber auf jedem Teilausschnitt }[0,\Lambda]\text{ ist }L<\infty.
+  \]
+  Die Barcode-Geometrie codiert die
+  \emph{quadratische Dichte} geschlossener Geodäten.
+\end{EXA}
+
+%--------------------------------------------------
+\subsection{Bemerkungen zur Forschungsperspektive}
+
+\begin{REM}{}{Vergleich von Deformationswegen}
+  Zwei Metrikflüsse (say Ricci vs.\ Yang–Mills) induzieren Pfade
+  \(\gamma,\eta\in\mathcal P(\mathcal{Bar})\).
+  Distanzfunktionen \(d_\infty\) oder Fréchet-Abstand liefern
+  einen \emph{numerischen} Vergleich der „topologischen Arbeit“, die
+  jeder Fluss verrichtet.
+\end{REM}
+
+\begin{REM}{}{Optimale Homotopien}
+  Gibt es in \(\mathcal P(\mathcal{Bar})\) geodätische Verbindungen
+  zwischen zwei Barcode-Pfaden?  
+  Ein positiver Existenzsatz würde ein \emph{Variationsprinzip} für
+  Topologie-Interpolation etablieren – offen für YM-Pfadfamilien.
+\end{REM}
+
+%--------------------------------------------------
+
+%--------------------------------------------------
+\subsection{Vergleich zweier Deformationswege:
+           Ricci‐ vs.\ Yang--Mills‐Fluss}
+
+Wir wählen eine kompakte 4‐Mannigfaltigkeit
+\(M\) (z.\,B.\ \(S^{2}\times S^{2}\)).
+Zu Beginn stehe:
+
+\[
+  g_0 \text{ Riemann‐Metrik}, 
+  \quad
+  A_0 \text{ $\,\mathrm{SU}(2)$–Verbindung auf }P.
+\]
+und Flüsse  
+\begin{itemize}
+  \item \textbf{Ricci‐Fluss}
+    \( \displaystyle\partial_t g(t)=-2\,\operatorname{Ric}(g(t)), 
+       \;g(0)=g_0 \).
+  \item \textbf{Yang--Mills‐Gradientenfluss}
+    \( \displaystyle\partial_t A(t)=-d_{A(t)}^{\ast}F_{A(t)},
+       \;A(0)=A_0. \)
+\end{itemize}
+und Barcode‐Werte pro Zeit \(t\).
+\[
+  \gamma(t)
+   :=\text{Barcode von }
+       H_k\Bigl(\!\bigl\{g\in\mathcal R
+                       \mid \mathcal R\!\mathcal C(g)\le\mathcal R\!\mathcal C\!\bigl(g(t)\bigr)\bigr\}\Bigr),
+\]
+\[
+  \eta(t)
+   :=\text{Barcode von }
+       H_k\Bigl(\!\bigl\{[A]\mid
+                        \mathcal{YM}\!(A)\le\mathcal{YM}\!\bigl(A(t)\bigr)\bigr\}\Bigr),
+\]
+wobei
+\(
+  \mathcal R\!\mathcal C(g)=\int_M \lvert\!\operatorname{Rm}(g)\rvert^2\,d\mathrm{vol}_g
+\)
+die \emph{total curvature energy} ist.
+
+Damit sind
+\(
+  \gamma,\eta:[0,T]\to\mathcal{B}
+\)
+Barcode‐Pfade im Sinne von Abschnitt~\ref{sec:BarcodePfad}.
+
+%--------------------------------------------------
+\begin{DEF}{}{Topologische Distanzen}
+  Für \(0<T<\infty\) setzen wir
+  \[
+    d_\infty^{(T)}(\gamma,\eta)
+      :=\sup_{t\in[0,T]} d_{\mathrm B}\bigl(\gamma(t),\eta(t)\bigr),
+    \qquad
+    d_F^{(T)}(\gamma,\eta)
+      :=\inf_{\substack{\alpha,\beta:[0,1]\to[0,T]\\
+                         \alpha,\beta\text{ increasing}}}
+         \;\sup_{u\in[0,1]}\;
+         d_{\mathrm B}\!\bigl(\gamma(\alpha(u)),\eta(\beta(u))\bigr).
+  \]
+  \emph{Interpretation}:  
+  \(d_\infty^{(T)}\) misst den größten momentanen
+  Topologie­unterschied;
+  \(d_F^{(T)}\) den optimal gereparametrisierten
+  Pfadvergleich (”Fréchet‐Abstand”).
+\end{DEF}
+
+\begin{DEF}{}{Topologische Arbeit}
+  Die \emph{topologische Arbeit} eines Flusses bis Zeit \(T\) ist
+  die Längenfunktion
+  \[
+    \mathcal W(T;\gamma):=
+      L\bigl(\gamma|_{[0,T]}\bigr)
+      =\sup_{\Pi}\;
+         \sum_{i}d_{\mathrm B}\bigl(\gamma(t_i),\gamma(t_{i+1})\bigr),
+  \]
+  wobei \(\Pi\) alle Zerlegungen von \([0,T]\) durchläuft.
+  Anschaulich summiert
+  \(\mathcal W\)
+  \emph{alle} Topologie-Änderungen, die der Fluss bis \(T\)
+  durchlaufen hat.
+\end{DEF}
+
+%--------------------------------------------------
+\begin{EXA}{}{Vergleichsresultat auf $S^{2}\!\times\!S^{2}$}
+  Starte mit einer anisotropen Produktmetrik
+  \(g_0=r^{2}g_{S^{2}}\oplus a^{2}g_{S^{2'}}\)
+  und einer beliebigen Verbindung \(A_0\) mit \(c_2=1\).
+  \begin{itemize}[leftmargin=1.5em]
+    \item \emph{Ricci‐Fluss:}
+      konvergiert (nach Reskalierung) gegen die
+      isotrope Einstein‐Metrik;
+      Barcode‐Pfad \(\gamma\) ändert sich nur
+      bis zur Isotropie‐Zeit \(t_{\mathrm iso}\),  
+      danach bleibt \(\gamma\) konstant.  
+      Resultat:
+      \(L(\gamma)<\infty\).
+    \item \emph{YM‐Fluss:}
+      besitzt einen einmaligen Sprung, sobald
+      \(E\bigl(A(t)\bigr)=8\pi^{2}\) unterschritten wird
+      (Entstehung irreduzibler Instantonen, vgl.\ Beispiel~A).
+      Barcode‐Pfad \(\eta\):
+      \(
+        \mathcal W(\infty;\eta)=8\pi^{2}.
+      \)
+  \end{itemize}
+  \[
+    d_\infty^{(\infty)}(\gamma,\eta)=8\pi^{2},
+    \qquad
+    d_F^{(\infty)}(\gamma,\eta)=8\pi^{2}.
+  \]
+  \emph{Lesart:}  
+  Die Yang–Mills‐Entwicklung vollzieht
+  eine \emph{einzige, aber energetisch teure}
+  Topologie­operation,
+  während der Ricci‐Fluss (hier) deutlich „topologieärmer“
+  wirkt.
+\end{EXA}
+
+%--------------------------------------------------
+\begin{REM}{}{Warum ist das nützlich?}
+  \begin{romanenum}
+  \item $d_\infty^{(T)}$ dient als \emph{diagnostischer Test}:
+        Zwei numerisch erzeugte Flüsse, die denselben
+        physikalischen Endzustand erreichen, können dennoch
+        sehr unterschiedliche „topologische Wege“ beschreiten.
+  \item $\mathcal W(T;\gamma)$ liefert eine
+        \emph{skalare Kennzahl} für die
+        „Topologie­arbeit“ des Flusses –
+        unabhängig von der (oft schwer zugänglichen)
+        analytischen Morse-Komplex­struktur.
+  \item Durch den Stabilitäts­satz der PH
+        bleiben alle Aussagen robust gegen
+        Diskretisierungs­fehler:
+        eine Störung der Daten um $\varepsilon$
+        verschiebt Barcodes höchstens um $\varepsilon$.
+  \end{romanenum}
+\end{REM}
+%--------------------------------------------------
+
+
+\pagebreak
+
+%--------------------------------------------------
+\section{Topologische und geometrisch gewichtete Arbeit}
+
+\begin{DEF}{}{Topologische Arbeit}
+  Sei
+  \(
+    \gamma:[0,T]\to\bigl(\mathcal{B},d_{\mathrm B}\bigr)
+  \)
+  ein Barcode-Pfad.  
+  Die \emph{topologische Arbeit} bis Zeit $T$ ist die
+  metrische Länge
+  \[
+      \mathcal W_{\mathrm{top}}(\gamma;T)
+      :=\sup_{\Pi}
+         \sum_{i}
+           d_{\mathrm B}
+             \bigl(\gamma(t_i),\gamma(t_{i+1})\bigr)
+  \]
+  mit Supremum über alle Zerlegungen
+  \(\Pi=\{0=t_0<\dots<t_m=T\}\).
+
+  Sind nur Sprungzeiten $\tau_j$ vorhanden
+  ($gamma$ stückweise konstant),
+  so reduziert sich das auf die Summenform
+  \[
+    \mathcal W_{\mathrm{top}}
+      =\sum_j
+         d_{\mathrm B}
+           \bigl(\gamma(\tau_j^-),\gamma(\tau_j^+)\bigr).
+  \]
+\end{DEF}
+
+\begin{DEF}{}{Energie\-gewichtete Arbeit}
+  Gegeben sei zusätzlich eine Energieskala
+  \(E(t)\ge0\) (z.\,B.\ Yang–Mills-Energie).
+  Dann definieren wir
+  \[
+      \mathcal W_{\mathrm{geom}}^{(1)}(\gamma;T)
+        :=\sum_{\text{Sprünge }j}
+            \bigl[E(\tau_j^-)-E(\tau_j^+)\bigr]\,
+            d_{\mathrm B}
+              \bigl(\gamma(\tau_j^-),\gamma(\tau_j^+)\bigr)
+  \]
+  sowie
+  \[
+      \mathcal W_{\mathrm{geom}}^{(2)}(\gamma;T)
+        :=\sum_{\substack{\text{Balken }I=[b,d)\\
+                          d\le E(T)}} \text{length}(I)
+  \]
+  (Summe aller Persistenz­längen der Balken, die bereits komplett
+  aktiviert wurden).
+\end{DEF}
+
+%--------------------------------------------------
+\subsection{Beispiel: YM-Fluss vs.\ modifizierter Fluss}
+
+\begin{EXA}{}{Vergleich auf $S^{2}\!\times\!S^{2}$}
+  \begin{itemize}[leftmargin=1.4em]
+    \item \textbf{YM-Fluss}: ein Sprung bei $t=t^\star$,
+          Geburt des Balkens $[8\pi^{2},\infty)$.
+          \[
+            \mathcal W_{\mathrm{top}}^{\mathrm{YM}} = 8\pi^{2},
+            \qquad
+            \mathcal W_{\mathrm{geom}}^{(1)}
+                =\bigl[E(t^{\star -})-E(t^{\star +})\bigr]\cdot 1
+                = 8\pi^{2}.
+          \]
+
+    \item \textbf{Modifizierter Fluss}: umgeht die
+          Schwellenergie $8\pi^{2}$,
+          daher
+          \(
+            \mathcal W_{\mathrm{top}}^{\mathrm{Mod}}=0
+            =\mathcal W_{\mathrm{geom}}^{(1)}.
+          \)
+  \end{itemize}
+  Maximaler Abstand der Pfade:
+  \[
+    d_\infty(\gamma_{\mathrm{YM}},\gamma_{\mathrm{Mod}})=8\pi^{2}.
+  \]
+\end{EXA}
+
+\begin{REM}{}{Lesart der Kenngrößen}
+  \begin{romanenum}
+    \item $\mathcal W_{\mathrm{top}}$: reine „Loch-Zählung“,
+          unabhängig von Energie.
+    \item $\mathcal W_{\mathrm{geom}}^{(1)}$ koppelt
+          Topologieereignisse an Energieverluste:
+          \emph{wie viel Energie pro erzeugtem Topologie­sprung?}
+    \item $\mathcal W_{\mathrm{geom}}^{(2)}$ misst die
+          kumulierte Persistenz der bisher entstandenen Klassen
+          – Betonung auf „lange leben“ statt „große Energie“.
+  \end{romanenum}
+\end{REM}
+%--------------------------------------------------
+
+
+
+
+
+\pagebreak
+
+%--------------------------------------------------
+\section{Topologisch kürzeste Gradientendynamiken}
+
+\begin{DEF}{Pfadraum der Flüsse}{}
+  Sei $\mathcal B=\mathcal A/\mathcal G$ (Konfigurationsraum).
+  Eine \emph{Gradientendynamik} ist ein Lipschitz-Pfad
+  \(
+    A:[0,1]\to\mathcal B
+  \)
+  der Gestalt
+  \(
+    \partial_t A=-\nabla F(A)
+  \)
+  für ein stetig abnehmendes Funktional $F$ (z.\,B.\ Yang–Mills).
+  Zwei Pfade gelten als \emph{zeit-äquivalent},
+  wenn sie sich durch strikte Reparametrisierung
+  $\,\tau:[0,1]\xrightarrow{\text{C}^1,\ \mathrm{inc}}[0,1]\,$
+  unterscheiden.
+  Der Quotientraum bezeichne:
+  \[
+    \mathscr P_F\bigl(A_0,A_1\bigr)\;:=\;
+    \bigl\{A\text{ Gradientenpfad mit }A(0)=A_0,\;A(1)=A_1\bigr\}\bigl/\tau.
+  \]
+\end{DEF}
+
+\begin{DEF}{Barcode-Länge eines Flusses}{}
+  Der \emph{Barcode-Pfad}
+  \(
+    \gamma_A(t):=
+      \text{Barcode}\Bigl(\lambda\mapsto H_k\bigl(\mathcal B_\lambda(A(t))\bigr)\Bigr)
+  \)
+  liefert eine Abbildung
+  $[0,1]\to(\mathcal{Bar},d_{\mathrm B})$.
+  Wir definieren
+  \[
+    L(A):=L(\gamma_A)
+      =\sup_{\Pi}\sum_i
+         d_{\mathrm B}\bigl(\gamma_A(t_i),\gamma_A(t_{i+1})\bigr).
+  \]
+  (Supremum über Zerlegungen $\Pi$.)  
+  $L(A)$ heißt \emph{topologische Länge} des Flusses.
+\end{DEF}
+
+\begin{DEF}{Topologisch kürzester Fluss}{}
+  Ein Äquivalenzklassenelement
+  $\,[A]\in\mathscr P_F(A_0,A_1)\,$
+  heißt \emph{minimal} oder \emph{topologisch kürzester Fluss},
+  wenn
+  \[
+    L(A)\;=\;
+    \inf_{[B]\in\mathscr P_F(A_0,A_1)} L(B).
+  \]
+  Die Minimal­länge selbst notieren wir
+  \(
+    L_{\min}(A_0,A_1).
+  \)
+\end{DEF}
+
+%--------------------------------------------------
+\subsubsection*{Variationsprinzip im Barcode-Raum}
+
+\begin{LEM}{Geodätisches Kriterium}{}
+  \([A]\) ist minimal  $\Longleftrightarrow$
+  sein Barcode-Pfad $\gamma_A$ ist eine \emph{minimal‐geodätische Kurve}
+  in $(\mathcal{Bar},d_{\mathrm B})$,
+  d.\,h.
+  \(
+    d_{\mathrm B}\bigl(\gamma_A(s),\gamma_A(t)\bigr)
+      =|t-s|\,L(A)
+  \)
+  für alle $s,t$.
+\end{LEM}
+
+\begin{REM}{Euler–Lagrange‐Interpretation}{}
+  Heuristisch:  
+  Falls $\gamma_A$ glatt ist,
+  erfüllt sie
+  \(
+    \nabla_{\dot\gamma} \dot\gamma = 0
+  \)
+  im Sinne des metrischen Kalkanaly­sis (Ambrosio–Gigli–Savaré).  
+  Rückübersetzt auf $A(t)$ ergibt sich
+  eine \emph{balanced} PDE
+  \[
+    -\nabla F(A) = \lambda(t)\,\dot A,
+  \quad
+    \lambda(t)=\frac{|\dot A|}{|\gamma'_A|},
+  \]
+  die klassisch nicht mit dem reinen Gradienten übereinstimmen muss,
+  wohl aber dieselben Endpunkte erreicht.
+\end{REM}
+
+%--------------------------------------------------
+\subsubsection*{Existenz erster Minimizer (Konturen)}
+
+\begin{THEO}{Direkte Methode (skizziert)}{}
+  Angenommen
+  \begin{enumerate}[label=\roman*)]
+    \item $\mathcal{Bar}$ ist vollständig (Chazal–Lieutier),
+    \item $F$ ist $\lambda$-Lipschitz entlang $A(t)$,
+    \item $A_n$ Folge in $\mathscr P_F$ mit $L(A_n)\to \inf$,
+    \item $L(A_n)$ ist gleichmäßig beschränkt,
+          $F(A_n(t))$ gleichmäßig Lipschitz.
+  \end{enumerate}
+  Dann besitzt $\mathscr P_F(A_0,A_1)$
+  einen Längen-Minimierer $A^\ast$
+  (nach Wahl geeigneter Reparametrisierungen).
+\end{THEO}
+
+\begin{PROOF}{Idee}{}
+  (i) $d_\infty$-kompakte Teilfolge der Barcode-Pfade  
+      $\gamma_{A_n}\to\gamma_\infty$.  
+  (ii) Liftbarkeit des Grenzpfades
+      (Stabilität + Lipschitz-Bound) liefert
+      einen Grenzfluss $A^\ast$.  
+  (iii) Längensemi­stetigkeit $\Longrightarrow$
+      $L(A^\ast)=\inf L$.
+\end{PROOF}
+
+\begin{REM}{Offene Analysefragen}{}
+  \begin{romanenum}
+    \item \emph{Regularität:} Wann ist $A^\ast$ tatsächlich eine
+          glatte Gradientendynamik?
+    \item \emph{Eindeutigkeit:} Gilt streng konvexes
+          $F$ $\Rightarrow$ eindeutiger Minimalfluss?
+    \item \emph{Relation zur Heat-Schrumpfung:}
+          Für Flächen-YM ist zu erwarten,
+          dass der minimal-topologische Fluss
+          genau dem Atiyah–Bott gradient flow entspricht.
+  \end{romanenum}
+\end{REM}
+
+%--------------------------------------------------
+\subsubsection*{Beispiel: Zwei Instantonen verbinden}
+
+Start- und Endpunkte  
+$A_0$ = trivialer Connection (Energie $0$),  
+$A_1$ = Charge-1-Instanton ($8\pi^{2}$).
+
+\[
+  L_{\min}(A_0,A_1) = 8\pi^{2},
+\]
+da jede Blase mindestens diesen Bottleneck-Sprung bewirkt
+→ YM-Heatflow ist bereits minimal.
+
+Zusatzfluss $A_\varepsilon$
+erzeugt erst zwei kleine Charge-$\tfrac12$ Blasen,
+dann vereinigt sie:  
+Länge $L(A_\varepsilon)=16\pi^{2}>L_{\min}$.
+
+%--------------------------------------------------
+
+
+
+
+\end{document}
