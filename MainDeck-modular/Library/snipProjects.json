@@ -309,5 +309,20 @@
     "tableMeta": {
       "selectedSource": "CM_Kopietz25/CM_Kopietz25.tex"
     }
+  },
+  "STR_J25": {
+    "sourceFile": "STR_Jaschik25/STR_Jaschik25.tex",
+    "snipMeta": {
+      "Subject": "",
+      "Topic": "",
+      "LitID": "T12",
+      "CTyp": "DEF",
+      "ParentTopic": "",
+      "Content": "",
+      "selectedProject": "STR_Jaschik25/STR_Jaschik25.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "STR_Jaschik25/STR_Jaschik25.tex"
+    }
   }
 }
