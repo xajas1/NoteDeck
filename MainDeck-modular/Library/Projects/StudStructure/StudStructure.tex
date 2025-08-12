@@ -20,6 +20,78 @@
 % 17  Graphik
 % 18  Extra
 % 00. Titel und Autor
+\usepackage{xparse,calc}
+
+% --- robuste Defaults als Längenregister ---
+\newlength{\StructureLeftWidth}   \setlength{\StructureLeftWidth}{0.26\textwidth}
+\newlength{\StructureGap}         \setlength{\StructureGap}{1.5em}
+\newlength{\StructureNudge}       \setlength{\StructureNudge}{0pt}
+
+% Intern: Basismakro (nicht direkt aufrufen)
+\NewDocumentCommand{\StructureBase}{ m m m +m }{%
+  \noindent
+  \begin{minipage}[t]{\StructureLeftWidth}
+    \textbf{Structure:}\par\vspace{.5\baselineskip}
+    \ifx\relax#1\relax
+      % kein Bild
+    \else
+      \vspace*{#3}%
+      \centering
+      \includegraphics[width=\linewidth]{#1}\\[0.5ex]
+      {\footnotesize\itshape #2}%
+    \fi
+  \end{minipage}%
+  \hspace{\StructureGap}%
+  \begin{minipage}[t]{\dimexpr\linewidth-\StructureLeftWidth-\StructureGap\relax}
+    #4
+  \end{minipage}\par\medskip
+}
+
+% Öffentliche API (ohne Klammern/Werte):
+% 1) ohne Bild
+\NewDocumentCommand{\Structure}{ +m }{%
+  \StructureBase{}{}{\StructureNudge}{#1}%
+}
+% 2) mit Bild: nur Dateiname + Caption
+\NewDocumentCommand{\StructurePic}{ m m +m }{%
+  \StructureBase{#1}{#2}{\StructureNudge}{#3}%
+}
+
+
+
+
+
+
+
+\usepackage{wrapfig,caption}
+\captionsetup{font=footnotesize, labelformat=empty}
+
+\newcommand{\structureimage}[3][0.15\textwidth]{%
+  \par\noindent\leavevmode% <-- sorgt für Absatz/Horizontalmodus
+  \begin{wrapfigure}[12]{r}{#1}%
+    \vspace{-0.6\baselineskip}\centering
+    \includegraphics[width=\linewidth]{#2}%
+    \caption{\textit{#3}}%
+    \vspace{-0.4\baselineskip}%
+  \end{wrapfigure}%
+}
+
+
+\newcommand{\structureimageblock}[4][0.22\textwidth]{%
+  \noindent
+  \begin{minipage}[t]{\dimexpr\linewidth-#1-1em\relax}
+    #4
+  \end{minipage}\hfill
+  \begin{minipage}[t]{#1}
+    \vspace{-10\baselineskip} % <--- hier Höhe anpassen
+    \centering
+    \includegraphics[width=\linewidth]{#2}\\[0.3ex]
+    {\footnotesize\itshape #3}
+  \end{minipage}\par\medskip
+}
+
+
+
 
 %–– Schrift­kodierung & Sprache ––––––––––––––––––––––––––––––––––––––––––––––––     % deutsche Bezeichnungen
 \usepackage{lmodern}  
@@ -85,7 +157,7 @@
 
 % --- 5. Diagramme und Grafiken ---
 \usepackage{graphicx}
-\graphicspath{{../../Library/Images/}}
+\graphicspath{{../../Images/}}
 \usepackage[export]{adjustbox}
 \usepackage{tikz}
 \usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
@@ -256,32 +328,667 @@ Kurze Beschreibung …
 \pagebreak
 
 
-\begin{itemize}
-    \item Homologische Algebra
-    \begin{itemize}
-        \item Module 
-        \item Tensorprodukte
-    \end{itemize}
-    
-    \item Kategorientheorie
-    
-\end{itemize}
+\section{RG-Bernig25}
 
 
+
+
+\subsection{Levi-Civita Zusammenhang}
+
+
+\textbf{Statement: }{Fundamentaltheorem der Riemannischen Geometrie}.
+Sei $(M, g)$ eine Riemannsche Mannigfaltigkeit. Dann gibt es genau einen Zusammenhang D, der mit $g$ verträglich ist in folgendem Sinne:
+$$
+X(g(Y, Z))=g\left(D_{X} Y, Z\right)+g\left(Y, D_{X} Z\right)
+$$
+
+\StructurePic{Kandinsky-Intersecting Lines 1923.jpg}{Kandinsky, Intersecting Lines, 1923}
+{%
+\begin{outline}
+  Zeige aus der Metrikverträglichkeit die A) Koszul-Gleichung und folgere dann: B) Eindeutigkeit, C) $\R$-Linearität in $X,Y$, D) $C^\infty$-Linearität in $X$, E) Ableitung in $Y$, F) Torsionsfreiheit, G) Metrikkompatibilität: 
+  
+  \1 Koszul-Gleichung
+  \2 Verwende Metrikkompaitibilität auf zyklische Ableitungen von Metriktensor $X g(Y, Z), Y g(Z, X), Z g(X, Y)$
+  \2 $Eq_1+Eq_2-Eq_3$
+  \2 Reduziere durch Torsionsfreiheit
+  \1 Eindeutigkeit
+  \2 Metriktensor nichtdegeneriert, also eindeutig
+  \1 $\R$-Linearität in $X,Y$
+  \2 Rechte Seite der Koszul-Gleichung ist $\R$-Linear
+  \1 $C^\infty$-Linearität in $X$
+  \2 Stelle dar durch Konszul-Gleichung und ziehe Skalarfunktionen raus
+  \2 Expliziere mit $[fX,Y]=f[X,Y]-Y(f)X$ und Produktregel
+  \2 So kürzen, dass Terme mit $f$-Vorfaktor überbleiben 
+  \1 Ableitung in $Y$
+  \2 Analog zu D) und kürzen, sodass $X(f)Y+D_XY$ über bleibt
+  \1 Torsionsfreiheit
+  \2 Koszul-Gleichung $(D_XY,Z) \ - $ Koszul-Gleichung $(D_YX,Z)$
+  \2 $2$ mal $[X,Y]$-Terme überleben   
+  \1 Metrikkompatibilität
+  \2 Koszul-Gleichung $(D_XY,Z) - (Y,D_XZ)$
+\end{outline}
+}
+
+\vspace{0.8cm}
+
+\textbf{Statement: }{Chirstoffelsymbole als Korrekturterme in lokalen Koordinaten}
+$$
+D_{X} Y=\sum_{i}\left(\sum_{j} X_{j} \frac{\partial Y_{i}}{\partial x_{j}}+\sum_{j, k} \Gamma_{j k}^{i} X_{j} Y_{k}\right) \frac{\partial}{\partial x_{i}},
+$$
+wobei die $\Gamma_{j k}^{i}$ durch die Gleichung
+$$
+D_{\frac{\partial}{\partial x_{j}}} \frac{\partial}{\partial x_{k}}=\sum_{i} \Gamma_{j k}^{i} \frac{\partial}{\partial x_{i}}
+$$
+definiert sind.
+
+\StructurePic{}{}
+{%
+\begin{outline}
+  Christoffel-Symbole tretten als Korrekturfaktoren in lokalen Darstellungen der kovarianten Ableitung von Vektorfeldern auf $D_{X^i\partial_i}Y^j\partial_j=X^i\partial_i(Y^j)\partial_j+\cdots$
+  \1 Wähle lokale Darstellung von Vektorfeldern bzgl. Rahmen
+  \1 Expliere aus mit $C^\infty$-Linearität in $X$ und Ableitung in $Y$
+  \1 Identitfiziere $D_{\partial_i}\partial_j$ und stelle durch Rahmen und Christoffelsymbole dar
+\end{outline}
+}
+
+\vspace{0.5cm}
+
+
+\textbf{Statement: } Lokale Darselltung der Christoffelsymbole
+$$
+\Gamma_{j k}^{i}=\frac{1}{2} \sum_{l} g^{i l}\left(\partial_{j} g_{k l}+\partial_{k} g_{l j}-\partial_{l} g_{j k}\right) .
+$$
+
+\StructurePic{}{}
+{%
+\begin{outline}
+  \1 Wähle Rahmen und expliziere Koszul-Gleichung für $(D_{\partial_j}\partial_k,\partial_l)$
+  \2 Hier tauchen schon Christoffelsymbol mit Laufindex $i$ gebunden an Metrik-Komponenten $g_{il}$ auf
+  \1 Kontrahiere mit inverser Metrik $g^{ls}$ bzgl Index des zweiten Basisvektors
+\end{outline}
+}
+
+\vspace{0.8cm}
+
+\textbf{Statement: } {Induzierter LC-Zusammenhang auf Untermannigfaltigkeiten von RMfk}. 
+Für die Levi-Civita-Zusammenhänge $D$ von $M$ und $\tilde{D}$ von $\tilde{M}$ gilt
+\begin{equation*}
+\left.D_{X} Y\right|_{p}=\left(\tilde{D}_{\tilde{X}} \tilde{Y}\right)^{T} \quad \forall p \in M 
+\end{equation*}
+wobei $T$ die Orthogonalprojektion $T_{p} \tilde{M} \rightarrow T_{p} M$ ist.
+
+\StructurePic{Klint15-Altarpiece No. 2.jpg}{Klint, Altarpiece No. 2, 1925}
+{%
+\begin{outline}
+  \1 Übereinstimmung von Einschränkungen von Fortsetungen mit Fortgesetze (Lokaler Nachweis)
+  \2 Geeigenete Wahl von lokalen Koordinaten, sodass ersten $n$ Koordianten lokale Koordinaten von UMfk
+  \2 $\tilde X(\tilde f)|_M= X(f)$ 
+  \3 Erweiterung mit verschwindenden Koeffizienten in Kodimension für $p\in M$
+  \2 $[\tilde X,\tilde Y]|_M= [X,Y]$
+  \3 Anwendung Lie-Klammer auf $\tilde f|_M$
+  \3 Anwendung von A.2: $Y(\tilde f)|_M=\tilde Y(\tilde f)|_M$
+  \1 Auf $M$ gilt: $\left.D_{X} Y\right|_{p}=\left(\tilde{D}_{\tilde{X}} \tilde{Y}\right)^{T}$
+  \2 Punktweiser Nachweis der LC-Eigenschaften bzgl. $\left(\tilde{D}_{\tilde{X}} \tilde{Y}\right)^{T}$
+  \3 Linearität
+  \3 Ableitung
+  \3 Torsionsfreiheit
+  \3 Metrikkompatibilität
+  \2 Eindeutigkeit gibt Existenz
+\end{outline}
+}
+
+\vspace{0.7cm}
+
+
+
+
+
+
+\pagebreak
+
+\subsection{Kovariante Ableitung längs Kurven}
+
+
+\textbf{Statement: }{Kovariante Ableitungs-Operator längs Kurven induziert durch LC-Zusammenhang der RMfk (EE)}
+Ist $M$ eine Riemannsche Mannigfaltigkeit mit Levi-CivitaZusammenhang $D$ und $c: I \rightarrow M$ eine glatte Kurve. Dann gibt es einen eindeutigen Operator $\frac{D}{d t}$ auf dem Raum der Vektorfelder längs $c$ mit folgenden Eigenschaften:
+\begin{enumerate}
+  \item Ist $f \in C^{\infty}(I)$ und $Y$ ein Vektorfeld längs $c$, so gilt
+  \[
+  \frac{D}{dt}(f Y)(t) = f(t) \frac{D}{dt} Y(t) + f'(t)\, Y(t), \quad \forall t \in I.
+  \]
+  
+  \item Ist $t_0 \in I$ und gibt es eine Umgebung von $t_0$ in $I$, so dass $Y$ die Einschränkung eines Vektorfeldes $X$ in einer Umgebung von $c(t_0)$ in $M$ ist, so gilt
+  \[
+  \frac{D}{dt} Y(t_0) = \left. D_{c'(t_0)} X \right|_{c(t_0)}.
+  \]
+\end{enumerate}
+
+
+\StructurePic{Klint15-the-dove-nr-12.jpg}
+  {Hilma af Klint, \emph{The Dove No. 12}, 1915}
+{%
+  \begin{outline}
+  Leite in lokaler Darstellung $Y(t)=y^i(t)\partial_i|_{c(t)}$ eine lokale Darstellung der kovarianten Ableitung längs Kurven her und zeige Eindeutigkeit und Existenz
+  \1 Lokale Darstellung
+  \2 $$\left.\frac{D}{dt}\frac{\partial}{\partial x_j}\right|_{t}
+      =\left.D_{c'(t)}\frac{\partial}{\partial x_j}\right|_{c(t)}$$ mittels Christoffelsymbolen
+  \1 Eindeutigkeit
+  \2 Folgt aus lokaler Darstellung
+  \1 Ableitung
+  \2 Lokale Darstellung, dann umgekehrte Produktregel, sodass 
+  $$f'(t)T_1+f(t)T_2$$
+  \1 Lokale Darstellbarkeit durch kovariante Ableitung in Umgebung
+  \2 $Y$ Einschränkung auf Kurve von lokaler Erweiterung $X$ auf Umgebung 
+  \3 $$y_i(t)=X_i|_{c(t)} \quad y_i'(t)=c'(t)(X_i)$$
+  \2 Rechne zunächst normale kovariante Ableitung $D_{c'(t)} X|_{c(t)}$ 
+  \2 Verwende lokale Darstellung von Vektorfeld längs Kurve bzw Geschwindigkeitsvektorfeld 
+\end{outline}
+}
+
+
+
+
+
+\vspace{0.5cm}
+
+\textbf{Statement: }{Kovariante Ableitung der Riemannischen Metrik längs Kurven}.
+Sind $X,Y$ Vektorfelder längs $c$, so gilt
+$$
+\frac{d}{d t} g(X(t), Y(t))=g\left(\frac{D}{d t} X(t), Y(t)\right)+g\left(X(t), \frac{D}{d t} Y(t)\right)
+$$
+
+\StructurePic{}{}
+{%
+\begin{outline}
+  \1 Lokale Darstellung von Vektorfeldern längs Kurven
+  \1 Metrikkomponenten 
+\end{outline}
+}
+
+\vspace{0.5cm}
+
+
+
+
+
+
+\pagebreak
+
+
+
+\subsection{Paralleltransport}
+
+\textbf{Statement: }{Eindeutige Existenz von Paralleles Vektorfeld längs einer Kurve zu Startvektor}.
+Für jedes $X_{0} \in T_{c(0)} M$ gibt es genau ein paralleles Vektorfeld $X$ längs $c$ mit $X(0)=X_{0}$.
+
+
+\StructurePic{Klint.jpg}
+{Klint}
+{%
+\begin{outline}
+  Für hinreichend kleine kompakte Teilabschnitt der Kurve um Startpunkt, welche von einer Karte überdeckt werden, ist die eindeutige Existenz eines Paralleltransport äquivalent zu einem System linearer DGLs mit Anfangswerten:
+  $$0=\frac{D}{dt}X=(\dot{X}^k+X^i\dot{c}^j\Gamma_{ij}^k)\partial_k$$
+\end{outline}
+}
+
+
+\vspace{0.7cm}
+
+\textbf{Statement: }{Parallelverschiebung ist eine Isometrie zwischen Tangentialräumen}.
+Die Parallelverschiebung ist eine Isometrie zwischen $T_{c(0)}$ und $T_{c(1)}$.
+
+\StructurePic{}{}{%
+  \begin{outline}
+    \1 Zeitableitung und Produktregel von Metrik längs Kurve mit Paralleltransport als Input
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+\pagebreak
+
+\subsection{Geodätische und Exponentialabbildung}
+
+
+\textbf{Statement: }{Lokale Lösbarkeit von ODEs}.
+Sei $F: \mathbb{R}^{n} \times \mathbb{R}^{n} \rightarrow \mathbb{R}^{n}$ eine glatte Funktion. Betrachte Kurve $x: I \rightarrow \mathbb{R}^{n}$ und das Differentialgleichungssystem
+\begin{equation*}
+\frac{d^{2} x}{d t^{2}}=F\left(x, \frac{d x}{d t}\right) \tag{5}
+\end{equation*}
+Dann gilt: für jeden Punkt $\left(x_{0}, v_{0}\right) \in \mathbb{R}^{n} \times \mathbb{R}^{n}$ gibt es eine Umgebung $U \times V$ und $\epsilon>0$, so dass für $(u, v) \in U \times V$ die Gleichung (5) eine eindeutige Lösung $x_{u, v}:(-\epsilon, \epsilon) \rightarrow \mathbb{R}^{n}$ besitzt mit Anfangswerten $x_{u, v}(0)=u, x_{u, v}^{\prime}(0)=v$. Die Abbildung
+$$
+\begin{aligned}
+X: U \times V \times(-\epsilon, \epsilon) & \rightarrow \mathbb{R}^{n} \\
+(u, v, t) & \mapsto x_{u, v}(t)
+\end{aligned}
+$$
+ist glatt.
+
+\StructurePic{}{}{%
+  \begin{outline}
+ 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Eindeutige lokale Lösbarkeit der Geodäten-Gleichung für AW}.
+Sei $p \in$ $M$. Dann gibt es offene Umgebung $U$ von $p$ und $\epsilon>0$, so dass für $q \in$ $U, v \in T_{q} M$ mit $\|v\|<\epsilon$ es genau eine Geodätische $c_{v}:(-1,1) \rightarrow M$ mit $c_{v}(0)=q, c_{v}^{\prime}(0)=v$ gibt. Mit anderen Worten gibt es zu gegebenen Anfangswerten zumindestens lokal eine Lösung.
+
+\StructurePic{}{}{%
+  \begin{outline}
+    
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Basis für den Raum der parallelen Vektorfelder auf 2-dim Mfk}.
+Sei $c$ eine Geodätische auf einer zweidimensionalen Mannigfaltigkeit. Sei $N$ ein Normalenvektorfeld längs $c$, d.h. 
+$$\|N(t)\|=1,\left\langle N(t), c^{\prime}(t)\right\rangle=0$$ 
+für alle $t$. Leitet man diese Gleichungen nach $t$ ab, so ergibt sich, dass auch $N$ ein paralleles Vektorfeld längs $c$ ist. Damit haben wir eine Basis für den Raum der parallelen Vektorfelder längs $c$. Ein beliebiges paralleles Vektorfeld mit Norm 1 lässt sich schreiben als $X(t)=\cos \alpha c^{\prime}(t)+$ $\sin \alpha N(t)$ mit $\alpha$ konstant.
+
+\StructurePic{}{}{%
+  \begin{outline}
+    
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Exponentialabbildung beim Basispunkt}.
+Sei $0_{p}=0 \in T_{p} M$. Dann ist $\exp \left(0_{p}\right)=p$ und
+$$
+\left.d \exp _{p}\right|_{0_{p}}: \underbrace{T_{0_{p}} T_{p} M}_{=T_{p} M} \rightarrow T_{p} M
+$$
+die Identität.
+
+\StructurePic{}{}{%
+  \begin{outline}
+    Zeige, dass $$d\exp_p|_{0_p}(v)=\dot c_v(0)$$ indem man bzgl. $t\mapsto tv$ in $t=0$ ableitet
+    \1 $\exp_p(tv)=c_{tv}(1)=c_v(t)$
+    \2 Für fixes $t$: $c_v(st)=\tilde c(s)=c_{tv}(s)$ aus Eindeutigkeit der Geodätischen bzgl Anfangswerte und verwende dann für $s=1$
+    \1 Differenzial der Exponentialabbildung bestimmen
+    \2 Charakterisiere $v\rightarrow \alpha(t)=tv$
+    \2 Nutze skallierte Darstellung von Geodätischen und leite bei $t=0$ ab
+    $$\exp_p (\alpha(t))=c_{tv}(1)$$
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Exponentialabbildung als lokaler Diffeomorphismus}.
+Die Abbildung exp : $\Omega \rightarrow M$ für $\Omega:=\{v \in$ $\left.T M: 1 \in I_{v}\right\}$ ist differenzierbar. Für $p \in M$ ist die Abbildung
+$$
+\begin{aligned}
+\Phi: \Omega & \rightarrow M \times M \\
+v & \mapsto(\pi(v), \exp (v))
+\end{aligned}
+$$
+ein lokaler Diffeomorphismus von einer offenen Umgebung W von $0_{p}$ in TM auf eine Umgebung von $(p, p)$ in $M \times M$.
+
+\StructurePic{}{}{%
+  \begin{outline}
+    \1 Differenzierbarkeit
+        \2 Differenzierbare Abhängigkeit der Lösung von Geodäten-DGL von Anfangswerten
+    \1 Lokale Isometrie: Zeige, dass lokal 
+    $$d\Phi|_{(p,0)}: W(0_p)\subset T_{(p,0)}TM\to T_{(p,p)}M\times M$$ 
+    invertierbar und wende Satz von invertierbare Umkehrfunktionen an
+        \2 Variation in Tangentialraum: Wähle  
+        $$
+        \gamma_i(t)=(p, u(t))=\left(p, t e_i\right) \in T M, \quad e_i=i \text {-te Standardbasisrichtung in } T_p M .
+        $$
+        Die Geodäte $c_{e_i}(t):=\exp _p\left(t e_i\right)$ erfüllt $c_{e_i}(0)=p$ und $\dot{c}_{e_i}(0)=e_i$. Daher ist
+
+        $$
+        \left.\frac{d}{d t}\right|_{t=0} \Phi\left(\gamma_i(t)\right)=\left(0, \dot{c}_{e_i}(0)\right)=\left(0, e_i\right)=\left.\frac{\partial}{\partial y_i}\right|_{(p, p)} .
+        $$
+        \2 Variation in Basisraum: Wähle mit $x(0)=p$ und $x^{\prime}(0)=\left.\partial_{x_i}\right|_{p,}$
+        $$
+        \eta_i(t)=(x(t), 0) \in T M .
+        $$
+        Differenzieren bei $t=0$ liefert
+        $$
+        \left.\frac{d}{d t}\right|_{t=0} \Phi\left(\eta_i(t)\right)=\left(x^{\prime}(0), x^{\prime}(0)\right)=\left.\frac{\partial}{\partial x_i}\right|_{(p, p)}+\left.\frac{\partial}{\partial y_i}\right|_{(p, p)} .
+        $$
+        Also
+        $$
+        \mathrm{d} \Phi_{(p, 0)}\left(\frac{\partial}{\partial x_i}\right)=\frac{\partial}{\partial x_i}+\frac{\partial}{\partial y_i} .
+        $$
+        \2 Ordnen wir die Basis von $T_{(p, 0)} T M$ als $\left(\partial_{x_1}, \ldots, \partial_{x_n}, \partial_{u_1}, \ldots, \partial_{u_n}\right)$ und die Basis von $T_{(p, p)}(M \times M)$ als $\left(\partial_{x_1}, \ldots, \partial_{x_n}, \partial_{y_1}, \ldots, \partial_{y_n}\right)$, so hat $\mathrm{d} \Phi_{(p, 0)}$ die Blockmatrix
+        $$
+        \mathrm{d} \Phi_{(p, 0)}=\left(\begin{array}{cc}
+        \mathrm{Id} & 0 \\
+        \mathrm{Id} & \mathrm{Id}
+        \end{array}\right),
+        $$
+
+        denn der $x$-Block geht auf $\partial_x+\partial_y$ und der $u$-Block auf $\partial_y$.
+        \2 Damit ist $\mathrm{d} \Phi_{(p, 0)}$ ein Isomorphismus und der Umkehrsatz liefert, dass $\Phi$ ein lokaler Diffeomorphismus in ( $p, 0$ ) ist.
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Lokale Eigenschaften der Exponentialabbildung}.
+Für $p \in M$ gibt es eine Umgebung $U$ von $p$ in $M$ und $\epsilon>0$ so dass
+\begin{enumerate}
+  \item Für $x, y \in U$ gibt es einen eindeutigen Vektor $v \in T_{x} M$ mit $\|v\| < \epsilon$ und $\exp_{x}(v) = y$.
+  
+  \item Die zugehörige Geodätische hängt differenzierbar von den Parametern ab.
+
+  \item Für $q \in U$ ist die Abbildung
+  \[
+  \exp_{q} : B\left(0_{q}, \epsilon\right) \rightarrow M
+  \]
+  ein Diffeomorphismus zwischen der Menge $B\left(0_{q}, \epsilon\right) = \left\{ v \in T_{q} M : \|v\| < \epsilon \right\}$ und ihrem Bild in $M$.
+\end{enumerate}
+
+\StructurePic{}{}{%
+  \begin{outline}
+    \1 Konstruiere aus lokaler Isometrie eine diffeomorph abgebildete Bündeltube mit Radius $\epsilon$, und schrenke Bild auf geeignetes $U\times U$ ein
+        \2 Verwende die lokale Isometrie von $\Phi$ bzgl $W_{0_p}$, um einen offene Bündel-Tube $W'$ um $p$ zu konstruieren, welche Diffeomorph zum Bild unter $\Phi$ ist und $(p,p)\in\Phi(W')$
+        \2 Existiere offene Umgebung $U$ um $p$ sodass 
+        $$U\times U \subset \Phi(W')$$
+        \2 Zu jedem Paar (aus Startpunkt und Endpunkt) in $U\times U$ existiert ein Basispunkt mit Vektor in $W'$
+    \1 Konstruiere die verbindende Geodätische aus Umkehrabbildung (Basispunkt$+$Tangentialvektor) des Paars. Da Umkehrabbildung differenzierbar, hängt 
+    $$t\mapsto \exp_p(t\Phi^{-1}(x,y))$$
+    differenzierbar von $(x,y)$ ab
+    \1 $\Phi|_{W'}$ bildet als Diffeomorphismus Untermannigfaltigkeiten diffeomorph auf Untermannigfaltigkeiten ab
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+
+\subsubsection{Hopf-Rinow}
+
+\textbf{Statement: }{Distanzfunktion auf Riemannischer Mannigfaltigkeit}.
+$d$ ist eine Metrik auf $M$, die die gegebene Topologie von $M$ als Mannigfaltigkeit induziert.
+
+\StructurePic{}{}{%
+  \begin{outline}
+    Prüfe für Metrik A) Wohldefiniertheit, B) Dreiecks-UG, C) Symmetrie, D) $d(x,x)=0$, E) $d(x,y)=0$ dann $x=y$
+    \1 Menge der verbundenen Punkten zu beliebigen Basispunkt ist offen und nicht leer, ebenso das Komplement. Da $M$ ZSH, existiert eine endliche Verbindungsstrecke
+    \1 Klar
+    \1 Klar
+    \1 Klar
+    \1 Zeige äquivalent: $x\neq y$, dann $d(x,y)>0$
+        \2 Hausdorff: Trenne lokal $x$ von $y$ ab mit $\varphi(U)=B(0,1)$
+        \2 Verwende Präkompaktheit von $B(0,\frac{1}{2})$: Existieren $\lambda,\mu>0$ sd.
+        $$\lambda ||u||\leq {\varphi^{-1}}^{*}g(u,u)\leq \mu||u||$$
+        \2 Pullback $\gamma=\varphi^{-1}\circ c|_{[0,t]}$ der Kurve bis zum Zeitpunkt $t$ des ersten Schnitts mit $\varphi^{-1}(S(0,\frac{1}{2}))$
+        \2 $L(c)$ von unten abschätzen durch Länge bzgl Pullback auf Teilintervall und Abschätzung der Metrik aus Präkompaktheit
+
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+\textbf{Statement: }{Gausslemma}.
+Die radialen Geodätischen $r \mapsto \exp _{p}(r v)$ sind normal zu den Hyperflächen $f\left(\{r\} \times S^{n-1}\right)$. Speziell ist die Metrik in Polarkoordinaten durch $g=d r^{2}+h_{(r, v)}$ gegeben, wobei $h_{(r, v)}$ die durch $g$ auf $f\left(\{r\} \times S^{n-1}\right)$ induzierte Metrik ist.
+
+\StructurePic{}{}{%
+  \begin{outline}
+    \1 Wähle $\epsilon>0$ so klein, dass $\exp _{p}: B=B\left(0_{p}, \epsilon\right) \rightarrow B^{\prime} \subset M$ ein Diffeomorphismus ist. 
+    \1 Polarkoordinaten $f:(0, \epsilon) \times S^{n-1} \rightarrow$ $B^{\prime} \backslash\{p\},(r, v) \mapsto \exp _{p}(r v)$
+    \1 Setze $v:\left(-\epsilon^{\prime}, \epsilon^{\prime}\right) \rightarrow S_{r}^{n-1}$ eine glatte Kurve und 
+    $$\alpha(u, t):=\exp _{p}(u v(t))$$ wobei $u$ die Laufweite einer Geodätischen $c_v(u)$ und $v(t)$ die Ausrichtung einer Geodätischen parametrisiert
+    \1 Zeige für alle $(u, t)$
+    $$\left\langle\frac{\partial \alpha}{\partial u}, \frac{\partial \alpha}{\partial t}\right\rangle=0$$
+        \2 Berechne $$\frac{\partial}{\partial u}\left\langle\frac{\partial \alpha}{\partial u}, \frac{\partial \alpha}{\partial t}\right\rangle$$ lokal mit Produktregel, sortieren nach partiellen Ableitungen von $\alpha$ und Metrikkomponenten rauszeihen 
+            \3 $\frac{\partial \alpha}{\partial t}$-Term verschwindet, da lokale Geodäten-Gleichung in Klammer
+            \3 $\frac{\partial \alpha}{\partial u}$-Term verschwindet, da die partielle Ableitung von
+            $$
+            \left\langle\frac{\partial \alpha}{\partial u}, \frac{\partial \alpha}{\partial u}\right\rangle=\langle v(t), v(t)\rangle=r^{2}
+            $$
+            nach $t$ bis auf Vorfaktor den $\frac{\partial \alpha}{\partial u}$-Term ergibt (Achtung: Indizes dürfen getauscht werden)
+        \2 Wir kennen $\alpha_{,t}(0,t)=0$ und damit aufgrund der Unabhängigkeit von $u$ für alle $u,t$
+        $$\langle \alpha_{,u},\alpha_{,t} \rangle(u,t)=\langle \alpha_{,u},\alpha_{,t} \rangle(0,t)=0$$
+
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+\textbf{Statement: }{Lokale eindeutige Existenz einer verbindenden Geodätischen}.
+Für $p \in M$ gibt es Umgebung $U$ in $M$ und $\epsilon>0$ so dass für $x, y \in U$ es eine (bis auf Parametrisierung) eindeutige Kurve $c$ von $x$ nach $y$ mit Länge $L(c)=d(x, y)<\epsilon$ gibt. Diese Kurve ist eine Geodätische und hat minimale Länge.
+
+\StructurePic{}{}{%
+  \begin{outline}
+    \1 Wähle $(U,\epsilon)$ kanonisch (Eindeutige Geodäten-Parametrisierung mit $\epsilon$-Schranke)
+        \2 Geodäten-Länge und damit metrischer Abstand durch $\epsilon$ beschränkt
+    \1 $L(c)\leq L(\gamma)$ mit Gleichheit wenn $c=\gamma$ (bis auf Umparametrisierung) durch Fallunterscheidung bzgl Austritt von $\gamma(t)=\exp_x(r(t)v(t))$ aus $B'=\exp_x(B(0_x,\epsilon))$
+        \2 $\gamma$ tritt (erstes mal) aus bei $t_0$: $L(\gamma)$ von unten abschätzen durch Einschränkung auf Teilabschnitt bis $t_0$ und Radialanteil der Darstellung von Metrik in Polarkoordinaten (Gauß-Lemma)
+        \2 $\gamma$ tritt nicht aus: Gauß-Lemma
+        $$L(\gamma)= \int_{0}^{1} \left(r^{\prime}(t)^{2}+h_{(r(t), v(t))}(v^{\prime}(t), v^{\prime}(t)\right)^{\frac{1}{2}}dt$$
+        \2 Wenn Gleichheit in letzter Rechnung gilt, dann Geodätische $c$ bis auf Umparametrisierung
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+
+\textbf{Statement: }{Lokale Äquivalenzcharakterisierung von bogenparametrisierten Geodätischen}.
+Eine Kurve $c: I \rightarrow M$, die nach Bogenlänge parametrisiert ist, ist eine Geodätische genau dann, wenn es zu jedem $t \in I$ ein $\epsilon>0$ gibt, so dass $c_{[t-\epsilon, t+\epsilon]}$ minimal ist, d.h.
+$$
+L\left(\left.c\right|_{\left[t_{1}, t_{2}\right]}\right)=d\left(c\left(t_{1}\right), c\left(t_{2}\right)\right) \quad \forall t_{1}, t_{2} \in[t-\epsilon, t+\epsilon]
+$$
+
+\StructurePic{}{}{%
+  \begin{outline}
+    \1 $\Rightarrow$: Wähle kanonische $(U,\epsilon)$ Umgebung von $p=c(t)$. Für alle $t_1,t_2\in I$, sodass $c(t_1),c(t_2)\in c\cap U$ ist $c|_{[t_1,t_2]}$ eindeutige Geodätische mit Länge $L(c|_{[t_1,t_2]})=d(c(t_1),c(t_2))<\epsilon$ (Lokale eindeutige Existent von minimalen Geodäten).
+    \1 $\Leftarrow$: Da lokal (kanonisch $(U,\epsilon)$) für entsprechende Abschnitt minimal, ist bereits schon lokal Geodätische. Damit aber global Geodätisch (da Geodätisch sein eine lokale Eigenschaft) 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Energie Charakterisierungen von Geodätischen}.
+Sei $c:[a, b] \rightarrow M$ eine stückweise differenzierbare Kurve.
+\begin{enumerate}
+  \item Ist $c$ minimal, d.\,h.\ $L(c) = d(c(a), c(b))$, und ist $c$ proportional zur Bogenlänge parametrisiert, so ist $c$ eine Geodätische.
+
+  \item Gilt für jede Kurve $\gamma$ von $c(a)$ nach $c(b)$, dass $E(\gamma) \geq E(c)$, dann ist $c$ eine Geodätische, die nach Bogenlänge parametrisiert ist.
+\end{enumerate}
+
+\StructurePic{}{}{%
+  \begin{outline}
+    \1 Lokaler Widerspruch: Angenommen, $c$ ist lokal nicht minimal. Dann existiert Kurve
+    $$
+    \alpha(t):=\left\{\begin{array}{cc}
+    c(t) & t \in[a, b] \backslash\left[t_{1}, t_{2}\right] \\
+    \gamma(t) & t \in\left[t_{1}, t_{2}\right]
+    \end{array}\right.
+    $$
+    global kürzer als $c$
+    \1 ...
+        \2 Cauchy-Schwarz gibt für Energie 
+        $$E(\gamma)\geq L(\gamma)^2\frac{1}{2(t_2-t_1)}\ \Leftrightarrow \ L(\gamma)\leq\sqrt{2E(\gamma)(t_2-t_1)}$$
+        mit Gleichheit, wenn $\gamma$ konstante Geschwindigkeit (prop. zu BLP)
+        \2 $c$ energieminimierend, dann nach (B.1) proportional BLP. 
+        \2 Für andere proportional BLP $c_0$ gilt:
+        $$L(c_0)=\sqrt{2E(c_0)(b-a)}\geq\sqrt{2E(c)(b-a)}=L(c)$$
+        also $c$ minimal und damit Geodätisch (WIESO)
+  \end{outline}
+}
+
+\todo{Prüfe nochmal}
+
+\vspace{0.8cm}
+
+
+
+\textbf{Statement: }{Existenz von minimalen Geodätischen in freien Homotopieklassen auf kompakten Mannigfaltigkeiten}.
+Auf jeder kompakten Riemannschen Mannigfaltigkeit gibt es in jeder nichttrivialen freien Homotopieklasse $\mathcal{C}$ eine Geodätische mit minimaler Länge (Hadamard).
+
+\StructurePic{}{}{%
+  \begin{outline}
+    Finde zunächst untere Schranke für Länge von Repräsentanten einer freien Homotopieklasse sowie eine obere Schranke an Abschnittlängen, sodass Modifikationen von kürzeren Abschnitten homotop sind. Wähle dann geeignete Kurvenfolge in Homotopieklasse, sodass bei hinreichend feiner Segmentierung der Folgenglieder die Stützstellen homotop geodätisch verbunden werden können. Dann muss noch geprüft werden, dass im Grenzwert die Abschnitte, welche durch die Stützstellen laufen, lokal geodätisch sind.
+    \1 Schranke für Gesamtlänge und homotope Änderungen
+    \2 M Kompakt, also existiert global $\epsilon>0$, sodass $\exp$ für jedes $p\in M$ auf $B(0_p,\epsilon)$ Diffeomorph zum Bild ist
+    \3 $\gamma \in \mathcal{C}$ müssen mindestens Länge $\geq \epsilon$ haben, da sonst kontrahierbar
+    $$\ell:= \inf\{ L(c): c\in\mathcal{C}\}$$
+    \3 Verkürzende stetige Änderungen von Kurven in Abschnitten mit Länge kleiner $\epsilon$ sind Homotopien
+    \1 Wähle $(c_k)_k\subset \mathcal{C}$ mit konstanter Geschwindigkeit, Konvergenz der Länge gegen $\ell$ und Länge $\leq 2\ell$   
+    \1 Wähle Anzahl der Stützpunkte $m$, sodass $\epsilon>\frac{4\ell}{m}$ und damit ist Länge von $c_k$ auf Abschnitten $[\frac{j}{m},\frac{j+1}{m}]$ kleiner gleich $\frac{\epsilon}{2}$
+    \1 Verbinde Stützstellen minimal eindeutig geodätisch und wegen der oberen Schranke an Länge der Abschnitte homotop: $(c_k)_k\to (\tilde c_k)_k\subset \mathcal{C}$
+    \1 Da M kompakt, $\tilde c_k (\frac{j}{m})\to p_j$ geodätisch verbunden auf Teilabschnitten
+    \1 Pürfe $\tilde c$ noch lokal um Stützstellen $[\frac{j}{m}-\delta,\frac{j}{m}+\delta]$: Da $L(\tilde c)$ bereits minimal, verändert lokale geodätische Verbindung nichts, d.h. ist schon geodätisch
+
+
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Birkhoff, Lusternik-Fet}.
+Sei M kompakt und einfach zusammenhängend. Dann gibt es eine geschlossene Geodätische positiver Länge.
+
+\vspace{0.8cm}
+
+
+
+\textbf{Statement: }{Auf kompakten Riemannischen Mannigfaltigkeiten existiert eine geschlossene Geodätische}.
+Auf jeder kompakten Mannigfaltigkeit gibt es (mindestens) eine geschlossene Geodätische.
+
+\vspace{0.8cm}
+
+
+
+\textbf{Statement: }{Existenz von Durchlaufpunkten durch geodätische Sphären}.
+Seien $p, q \in M, p \neq q$. Setze
+$$
+S=S(p, \delta):=\{r \in M \mid d(p, r)=\delta\}
+$$
+Für genügend kleines $\delta$ gibt es ein $r \in S$ mit
+$$
+d(p, q)=d(p, r)+d(r, q)
+$$
+
+\StructurePic{}{}{%
+  \begin{outline}
+    \1 Existiert $\delta>0$ klein genug, sodass $\exp$ auf $S(0_p,\delta)$ definiert und Bild kompakt
+    \2 Da $S$ kompakt ist, existiert einen $r$ im Bild, sodass $d(r,q)=d(S,q)$
+    \1 $\gamma$ Kurve von $p$ nach $q$ mit Durchlaufpunkt bei $\gamma(t_0)$
+    \2 Splite Längenintegral für inneren und äußeren Abschnitt auf und schätze $d(p,q)$ von unten bzgl $r$ ab
+    \2 Verwende Dreiecksungleichung bzgl $r$ als Stützpunkt und schätze $d(p,q)$ von oben ab
+    \1 Ungleichungen ergeben $d(p,q)=d(p,r)+d(r,q)$
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+\textbf{Statement: }{Hopf-Rinow}.
+Wenn für einen Punkt $p \in M$ auf einer Riemannschen Mannigfaltigkeit die Exponentialabbildung $\exp _{p}$ auf ganz $T_{p} M$ definiert ist, dann kann jeder Punkt auf $M$ mit $p$ durch eine minimale Geodätische verbunden werden.
+
+\StructurePic{}{}{%
+  \begin{outline}
+    \1 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+
+\textbf{Statement: }{In geodätisch vollständigen Riemannischen Mannigfaltigkeiten lassen sich zwei Punkte durch minimale Geodätische verbinden}.
+Ist $(M, g)$ geodätisch vollständig, so lassen sich je zwei Punkte auf $M$ durch eine minimale Geodätische verbinden.
+
+\StructurePic{}{}{%
+  \begin{outline}
+    \1 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+
+\textbf{Statement: }{Äquivalenzcharakterisierungen von geodätischer Vollständigkeit}
+Sei $(M, g)$ eine Riemannsche Mannigfaltigkeit. Dann sind folgende Aussagen äquivalent:
+\begin{enumerate}
+  \item $(M, g)$ ist geodätisch vollständig.
+  \item Für jedes $p \in M$ ist $\exp_{p}$ auf ganz $T_p M$ definiert.
+  \item Es gibt ein $p \in M$, für das $\exp_{p}$ auf ganz $T_p M$ definiert ist.
+  \item Jede beschränkte und abgeschlossene Menge in $(M, d)$ ist kompakt.
+  \item Der metrische Raum $(M, d)$ ist vollständig, d.\,h.\ jede Cauchy-Folge konvergiert.
+\end{enumerate}
+
+\StructurePic{}{}{%
+  \begin{outline}
+    \1 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+
+\pagebreak
+
+\subsection{Jacobi-Felder}
+
+
+\textbf{Statement: }{Indexform einer Geodätischen ist eine quadratische Form}.
+$I$ ist eine quadratische Form.
+
+\textbf{Structure:}     
 
 \begin{outline}
-  \1 Hauptpunkt
-  \2 Unterpunkt (2. Ebene)
-  \3 Detail (3. Ebene)
-  \1 Zweiter Hauptpunkt
-  \2 Noch ein Unterpunkt
-  \0   % zurück zu normalem Absatztxt
-  Ein Zwischentext ohne Aufzählung.
-  \1 Dritter Hauptpunkt
-  \2 Noch ein Unterpunkt
-  \2 Noch ein Unterpunkt
-  \3 Noch ein Detail
+  \1 
 \end{outline}
+
+
+\vspace{0.5cm}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\pagebreak
+
+
+\section{Algebraic Topology}
+
+
+
+
+\subsection{Hatcher Problems}
+
+
+(H2.1.1.) What familiar space is the quotient $\Delta$-complex of a 2 -simplex $\left[v_0, v_1, v_2\right]$ obtained by identifying the edges $\left[v_0, v_1\right]$ and $\left[v_1, v_2\right]$, preserving the ordering of vertices?
+
 
 
 \pagebreak

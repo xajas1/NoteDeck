@@ -858,6 +858,13 @@
         "litIDs": {
           "H09": "AT-H09-5"
         }
+      },
+      "Zellulärer Räume": {
+        "index": 6,
+        "parent": null,
+        "litIDs": {
+          "D72": "AT-D72-6"
+        }
       }
     }
   },

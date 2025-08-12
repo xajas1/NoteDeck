@@ -123,7 +123,8 @@ const toggleSelection = (uid, index, shift = false, visibleUIDs = []) => {
             ["STUD", "Studienfragen"],
             ["CONC", "Konzepte"],
             ["EXE", "Übungen"],
-            ["MOT", "Motivation"]
+            ["MOT", "Motivation"],
+            ["STR", "Structure"]
           ].map(([val, label]) => (
             <option key={val} value={val}>{label}</option>
           ))}

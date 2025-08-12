@@ -324,5 +324,35 @@
     "tableMeta": {
       "selectedSource": "STR_Jaschik25/STR_Jaschik25.tex"
     }
+  },
+  "AT_D08": {
+    "sourceFile": "AT_Dieck08/AT_Dieck08.tex",
+    "snipMeta": {
+      "Subject": "A",
+      "Topic": "Ringe Basics",
+      "LitID": "T12",
+      "CTyp": "DEF",
+      "ParentTopic": "Ringe",
+      "Content": "",
+      "selectedProject": "AT_Dieck08/AT_Dieck08.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "AT_Dieck08/AT_Dieck08.tex"
+    }
+  },
+  "AT_D72": {
+    "sourceFile": "AT_Dold72/AT_Dold72.tex",
+    "snipMeta": {
+      "Subject": "AT",
+      "Topic": "",
+      "LitID": "D72",
+      "CTyp": "DEF",
+      "ParentTopic": "",
+      "Content": "",
+      "selectedProject": "AT_Dold72/AT_Dold72.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "AT_Dold72/AT_Dold72.tex"
+    }
   }
 }

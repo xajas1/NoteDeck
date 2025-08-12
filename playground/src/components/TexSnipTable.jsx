@@ -272,7 +272,7 @@ const filteredUnits = localUnits.filter(u =>
                   {f === "CTyp"
                     ? [
                         "DEF", "PROP", "THEO", "LEM", "KORO", "REM",
-                        "OTH", "PROOF", "EXA", "STUD", "CONC", "EXE", "MOT"
+                        "OTH", "PROOF", "EXA", "STUD", "CONC", "EXE", "MOT", "STR"
                         ].map(v => <option key={v} value={v}>{v}</option>)
                     : getUniqueValues(f).map(v => <option key={v} value={v}>{v}</option>)
                     }
@@ -399,7 +399,7 @@ const filteredUnits = localUnits.filter(u =>
                         <option value="">–</option>
                         {[
                         "DEF", "PROP", "THEO", "LEM", "KORO", "REM",
-                        "OTH", "PROOF", "EXA", "STUD", "CONC", "EXE", "MOT"
+                        "OTH", "PROOF", "EXA", "STUD", "CONC", "EXE", "MOT", "STR"
                         ].map(ct => <option key={ct} value={ct}>{ct}</option>)}
                     </select>
                 </td>
