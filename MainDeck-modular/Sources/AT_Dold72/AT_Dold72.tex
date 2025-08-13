@@ -2309,31 +2309,69 @@ vanishes. Therefore $W X=\left\{W_{n} X, \partial_{n}\right\}_{n \in \boldsymbol
 
 
 
-1.3 Proposition. For cellular spaces $X$ there is a natural isomorphism
+1.3 Proposition. 
 
+\begin{PROP}{AT-D72-06-04}{Natürlicher Isomorphismus für Homologiegruppen von zelluläre Räumen }
+For cellular spaces $X$ there is a natural isomorphism
 $$
 \Theta: H W X \cong H\left(X, X^{-1}\right) .
 $$
+\end{PROP}
 
-1.4 Remarks. It looks as if $X^{-1}$ played a very special role in 1.3. But $H\left(X, X^{-1}\right) \cong H\left(X, X^{-2}\right) \cong H\left(X, X^{-3}\right) \cong \cdots$, as follows from the homology sequence of the appropriate triples because $H\left(X^{n}, X^{n-1}\right)=0$ for $n<0$. In many examples $X^{-1}$ will be empty.-\\
+1.4 Remarks. 
+
+
+\begin{REM}{AT-D72-06-05}{Definition von Zellulären Komplexen und Allgemeinheit}
+It looks as if $X^{-1}$ played a very special role in 1.3. But $H\left(X, X^{-1}\right) \cong H\left(X, X^{-2}\right) \cong H\left(X, X^{-3}\right) \cong \cdots$, as follows from the homology sequence of the appropriate triples because $H\left(X^{n}, X^{n-1}\right)=0$ for $n<0$. In many examples $X^{-1}$ will be empty.-
+
+
 The definition of $W X$ applies to arbitrary filtered spaces (not only cellular ones) but, in general, $H W X \nsupseteq H\left(X, X^{-1}\right)$. Certain relations between the groups $\left\{H_{p}\left(X^{q}, X^{q-1}\right)\right\}$ and $H X$, however, always exist and are usually expressed by the spectral sequence associated with the exact couple $\left\{H_{p}\left(X^{q}, X^{q-1}\right), H_{p} X^{q}\right\}$, or the filtered complex $\left\{S X^{p}\right\}$; cf. Hu 1959. The assumption of cellularity implies that the spectral sequence both converges and degenerates, and the following proof of 1.3 is an extract of a standard spectral sequence argument (compare, for instance, Godement, I.4.4).
+\end{REM}
 
-\subsection*{Lemma. $H_{n}\left(X^{p}, X^{q}\right)=0$ for $p \geq q \geq n$ or $n>p \geq q$.}
+\subsection*{Lemma.} 
+
+
+\begin{LEM}{AT-D72-06-06}{Triviale Relative Homologie für zelluläre Räume }
+Es gilt $H_{n}\left(X^{p}, X^{q}\right)=0$ for $p \geq q \geq n$ or $n>p \geq q$.
+\end{LEM}
+
+\begin{PROOF}{AT-D72-06-09}{P: Triviale Relative Homologie für zelluläre Räume }
 Proof by induction on $p-q$. For $p-q=0$ the assertion is trivial. For $p-q>0$ the homology sequence of the triple $\left(X^{p}, X^{q+1}, X^{q}\right)$ contains the following portion
-
 $$
 H_{n}\left(X^{q+1}, X^{q}\right) \rightarrow H_{n}\left(X^{p}, X^{q}\right) \rightarrow H_{n}\left(X^{p}, X^{q+1}\right) .
 $$
+The left term is zero by 1.1 (i), the right term by induction, hence also the middle term, as asserted.
+\end{PROOF}
 
-The left term is zero by 1.1 (i), the right term by induction, hence also the middle term, as asserted.\\
-1.6 Lemma. $H_{n}\left(X, X^{q}\right)=0$ for $q \geq n$.\\
-1.7 Corollary. $H_{n}\left(X^{q}, X^{r}\right) \cong H_{n}\left(X, X^{r}\right)$ provided $q>n$ and $q \geq r$.
 
+1.6 Lemma. 
+
+\begin{LEM}{AT-D72-06-10}{Triviale Relative Homologie für zelluläre Räume 2}
+$H_{n}\left(X, X^{q}\right)=0$ for $q \geq n$.
+\end{LEM}
+
+
+1.7 Corollary. 
+
+\begin{KORO}{AT-D72-06-12}{Isomorphie für Relative Homologie für zelluläre Räume}
+$H_{n}\left(X^{q}, X^{r}\right) \cong H_{n}\left(X, X^{r}\right)$ provided $q>n$ and $q \geq r$.
+\end{KORO}
+
+\begin{PROOF}{AT-D72-06-13}{P: Isomorphie für Relative Homologie für zelluläre Räume}
 The corollary follows from 1.6 and the homology sequence of the triple $\left(X, X^{q}, X^{r}\right)$.
+\end{PROOF}
 
-Proof of 1.6. Let $[z] \in H_{n}\left(X, X^{q}\right)$ where $z \in S_{n} X$ is a representative (relative) cycle. Because $S X=\bigcup_{p} S X^{p}$ there exists $p \geq q$ such that $z \in S_{n} X^{p}$, hence $[z] \in \operatorname{im}\left[H_{n}\left(X^{p}, X^{q}\right) \rightarrow H_{n}\left(X, X^{q}\right)\right]$, and this group is zero by 1.5.
+Proof of 1.6. 
 
-Proof of 1.3. Let $k \leq n-2$, and consider the diagram\\
+\begin{PROOF}{AT-D72-06-11}{P: Triviale Relative Homologie für zelluläre Räume 2}
+Let $[z] \in H_{n}\left(X, X^{q}\right)$ where $z \in S_{n} X$ is a representative (relative) cycle. Because $S X=\bigcup_{p} S X^{p}$ there exists $p \geq q$ such that $z \in S_{n} X^{p}$, hence $[z] \in \operatorname{im}\left[H_{n}\left(X^{p}, X^{q}\right) \rightarrow H_{n}\left(X, X^{q}\right)\right]$, and this group is zero by 1.5.
+\end{PROOF}
+
+Proof of 1.3. 
+
+
+\begin{PROOF}{AT-D72-06-14}{P: Natürlicher Isomorphismus für Homologiegruppen von zelluläre Räumen}
+Let $k \leq n-2$, and consider the diagram\\
 \includegraphics[scale=0.3,center]{2025_08_12_9d8b5b8a6f64e138b105g-091}\\
 where the two columns and the middle row are portions of the exact homology sequence of the appropriate triples; the zeros which appear are justified by Lemma 1.5. The two triangles are commutative by naturality of $\partial_{*}$. Now
 
@@ -2349,166 +2387,317 @@ H_{n}\left(X, X^{k}\right) & \cong H_{n}\left(X^{n+1}, X^{k}\right) & & \text { 
 $$
 
 Thus $H_{n} W X \cong H_{n}\left(X, X^{-1}\right)$ if $n>0, H_{0} W X \cong H_{0}\left(X, X^{-2}\right) \cong H_{0}\left(X, X^{-1}\right)$, and $H_{n} W X=0=H_{n}\left(X, X^{-1}\right)$ for $n<0$ because then $W_{n} X=0$.
+\end{PROOF}
 
-It is sometimes useful to have a description of the isomorphism $\Theta$ : $H_{n} W X \cong H\left(X, X^{-1}\right)$ in terms of representative chains. This is easily extracted from the proof of 1.3 ; reading the sequence of isomorphisms there from bottom to top one finds\\
-1.9 Proposition. If $y \in H_{n} W X, n \geq 0$, is represented by
 
+1.9 Proposition. 
+
+
+\begin{PROP}{AT-D72-06-15}{Beschreibung des natürlichen Isomorphismus durch Ketten-Representanten}
+If $y \in H_{n} W X, n \geq 0$, is represented by
 $$
 z \in Z_{n} W X \subset H_{n}\left(X^{n}, X^{n-1}\right)
 $$
+then $z \in H_{n}\left(X^{n}, X^{n-1}\right)$ has a representative $\zeta \in S_{n} X^{n}$ with $\partial \zeta \in S_{n}\left(X^{-1}\right)$ (this uses exactness of the row 1.8) hence $\zeta$ is an $n$-cycle of $X \bmod X^{-1}$. Its homology class $[\zeta] \in H_{n}\left(X, X^{-1}\right)$ agrees with $\Theta(y)$.
+\end{PROP}
 
-then $z \in H_{n}\left(X^{n}, X^{n-1}\right)$ has a representative $\zeta \in S_{n} X^{n}$ with $\partial \zeta \in S_{n}\left(X^{-1}\right)$ (this uses exactness of the row 1.8) hence $\zeta$ is an $n$-cycle of $X \bmod X^{-1}$. Its homology class $[\zeta] \in H_{n}\left(X, X^{-1}\right)$ agrees with $\Theta(y)$.\\
-1.10 Exercises. 1. For every cellular space $X$ and integer $m$ one defines a new cellular space $(X, m)$, the $m$-skeleton of $X$, by $(X, m)^{n}=X^{n}$ for $n \leq m$, and $(X, m)^{n}=X^{m}$ for $n \geq m$. As a space $(X, m)$ coincides with $X^{m}$. Therefore one often writes $X^{m}$ instead of ( $X, m$ ).-Dually, one can define the $m$-coskeleton ( $m, X$ ) by ( $m, X)^{n}=X^{m}$ for $n \leq m,(m, X)^{n}=X^{n}$ for $n \geq m$.\\
+\begin{PROOF}{AT-D72-06-16}{P: Beschreibung des natürlichen Isomorphismus durch Ketten-Representanten}
+It is sometimes useful to have a description of the isomorphism $\Theta$ : $H_{n} W X \cong H\left(X, X^{-1}\right)$ in terms of representative chains. This is easily extracted from the proof of 1.3 ; reading the sequence of isomorphisms there from bottom to top one finds the description.
+\end{PROOF}
+
+
+
+1.10 Exercises. 
+
+
+
+\begin{EXE}{AT-D72-06-17}{Skelett als zellulärer Raum}
+1. For every cellular space $X$ and integer $m$ one defines a new cellular space $(X, m)$, the $m$-skeleton of $X$, by $(X, m)^{n}=X^{n}$ for $n \leq m$, and $(X, m)^{n}=X^{m}$ for $n \geq m$. As a space $(X, m)$ coincides with $X^{m}$. Therefore one often writes $X^{m}$ instead of ( $X, m$ ).-Dually, one can define the $m$-coskeleton ( $m, X$ ) by ( $m, X)^{n}=X^{m}$ for $n \leq m,(m, X)^{n}=X^{n}$ for $n \geq m$.
+\end{EXE}
+
+
+\begin{EXE}{AT-D72-06-18}{Zelluläre Filtrationen der $n$-Sphäre}
 2. Let $X=\mathbb{S}^{k}, P \in X, k>0$; show that the following filtrations are cellular.\\
 (a) $\quad X^{n}= \begin{cases}P & \text { if } n<k \\ \mathbb{S}^{k} & \text { if } n \geq k,\end{cases}$\\
 (c) $\quad X^{n}= \begin{cases}\emptyset & \text { if } n<0 \\ \mathbb{S}^{k}-P & \text { if } 0 \leq n<k \\ \mathbb{S}^{k} & \text { if } n \geq k,\end{cases}$\\
 (b) $\quad X^{n}= \begin{cases}\emptyset & \text { if } n<0 \\ P & \text { if } 0 \leq n<k \\ \mathbb{S}^{k} & \text { if } n \geq k,\end{cases}$\\
 (d) $\quad X^{n}= \begin{cases}\emptyset & \text { if } n<0 \\ \mathbb{S}^{n} & \text { if } 0 \leq n \leq k \\ \mathbb{S}^{k} & \text { if } k \geq n,\end{cases}$\\
 where $\mathbb{S}^{n}=\left\{x \in \mathbb{S}^{k} \mid x_{i}=0\right.$ for $\left.n<i \leq k\right\}$.\\
-3. If $X$ is a cellular space, define $V_{n} X=\left\{\xi \in S_{n} X^{n} \mid \partial \xi \in S X^{n-1}\right\}$. Show that $V X=\left\{V_{n} X\right\}$ is a subcomplex of $S X$ containing $S X^{-1}$ and that
+\end{EXE}
 
+
+
+3. If $X$ is a cellular space, define $V_{n} X=\left\{\xi \in S_{n} X^{n} \mid \partial \xi \in S X^{n-1}\right\}$. Show that $V X=\left\{V_{n} X\right\}$ is a subcomplex of $S X$ containing $S X^{-1}$ and that
 $$
 i_{*}: H\left(V X / S X^{-1}\right) \cong H\left(S X / S X^{-1}\right)=H\left(X, X^{-1}\right) .
 $$
-
 Define $p: V_{n} X / S_{n} X^{-1} \rightarrow W_{n} X=H\left(X^{n}, X^{n-1}\right)$ by passage to homology classes. Show that $p$ is a chain map and $p_{*}: H\left(V X / S X^{-1}\right) \cong H W X$. Prove that the isomorphism $\Theta$ of 1.3 coincides with $i_{*} p_{*}^{-1}$ (compare Schubert; IV, 3.4).
+
 
 Corollary. If $W X$ is a free complex then there exists a homotopy equivalence $\vartheta: W X \simeq S\left(X, X^{-1}\right)$ which is natural up to homotopy.
 
+
+
+\pagebreak
+
+
 \section*{CW-Spaces}
+
+
 In homology theory the most useful cellular decompositions are $C W$ decompositions, as introduced by J. H. C. Whitehead 1949. Their role here is essentially that of a tool for computation; they are much more basic for other parts of topology, in particular for homotopy theory. In this § we discuss CW-spaces from the point of view of general topology; their homological properties will be studied in § 3 .\\
-2.1 Definition. Let $X$ be a Hausdorff space. A $C W$-decomposition of $X$ is a set $\mathscr{E}$ of subspaces of $X$ with the following properties (i)-(v).\\
+
+
+2.1 Definition. 
+
+
+\begin{DEF}{AT-D72-07-01}{CW-Dekomposition}
+Let $X$ be a Hausdorff space. A $C W$-decomposition of $X$ is a set $\mathscr{E}$ of subspaces of $X$ with the following properties (i)-(v).
+
 (i) $X=\bigcup_{e \in \mathscr{E}} e, \quad e \neq e^{\prime} \Rightarrow e \cap e^{\prime}=\emptyset$,\\
-i.e., $\mathscr{E}$ is a covering of $X$ by pairwise disjoint sets.\\
+i.e., $\mathscr{E}$ is a covering of $X$ by pairwise disjoint sets.
+
 (ii) Every e $\in \mathscr{E}$ is homeomorphic to some euclidean space $\mathbb{R}^{|e|}$.
 
-The number $|e|$ is well determined (by invariance of dimension IV, 2.3); it is called the dimension of $e$. The sets $e \in \mathscr{E}$ which are homeomorphic with $\mathbb{R}^{n}$ are the $n$-cells, and the union $X^{n}=\bigcup_{|e| \leq n} e$ is the $n$-skeleton of the $C W$-decomposition.\\
-(iii) For every $n$-cell $e \in \mathscr{E}$ there exists a continuous map $\Phi_{e}:\left(\mathbb{B}^{n}, \mathbb{S}^{n-1}\right) \rightarrow$ ( $X^{n-1} \cup e, X^{n-1}$ ) such that $\Phi_{e}: \mathbb{B}^{n}-\mathbb{S}^{n-1} \approx e$. As usual $\mathbb{B}^{n}=\left\{x \in \mathbb{R}^{n} \mid\|x\| \leq 1\right\}$ $=n$-ball and $\mathbb{S}^{n-1}=\left\{x \in \mathbb{B}^{n} \mid\|x\|=1\right\}=(n-1)$-sphere.\\
-This condition refines (ii): not only is $e$ homeomorphic with $\mathbb{R}^{n} \approx$ $\mathbb{B}^{n}-\mathbb{S}^{n-1}$ but a homeomorphism can be chosen which extends to the boundary $\mathbb{S}^{n-1}$. On $\mathbb{S}^{n-1}, \Phi_{e}$ need not be homeomorphic but
+The number $|e|$ is well determined (by invariance of dimension IV, 2.3); it is called the dimension of $e$. The sets $e \in \mathscr{E}$ which are homeomorphic with $\mathbb{R}^{n}$ are the $n$-cells, and the union $X^{n}=\bigcup_{|e| \leq n} e$ is the $n$-skeleton of the $C W$-decomposition.
 
+(iii) For every $n$-cell $e \in \mathscr{E}$ there exists a continuous map $\Phi_{e}:\left(\mathbb{B}^{n}, \mathbb{S}^{n-1}\right) \rightarrow$ ( $X^{n-1} \cup e, X^{n-1}$ ) such that $\Phi_{e}: \mathbb{B}^{n}-\mathbb{S}^{n-1} \approx e$. As usual $\mathbb{B}^{n}=\left\{x \in \mathbb{R}^{n} \mid\|x\| \leq 1\right\}$ $=n$-ball and $\mathbb{S}^{n-1}=\left\{x \in \mathbb{B}^{n} \mid\|x\|=1\right\}=(n-1)$-sphere.
+
+This condition refines (ii): not only is $e$ homeomorphic with $\mathbb{R}^{n} \approx$ $\mathbb{B}^{n}-\mathbb{S}^{n-1}$ but a homeomorphism can be chosen which extends to the boundary $\mathbb{S}^{n-1}$. On $\mathbb{S}^{n-1}, \Phi_{e}$ need not be homeomorphic but
 $$
 \Phi_{e}\left(\mathbb{S}^{n-1}\right) \subset X^{n-1} .
 $$
+$\Phi_{e}$ is called a characteristic map for $e$, and $\varphi_{e}=\Phi_{e} \mid \mathbb{S}^{n-1}: \mathbb{S}^{n-1} \rightarrow X^{n-1}$ an attaching map for $e$ (this name is explained by 2.9 ).
 
-$\Phi_{e}$ is called a characteristic map for $e$, and $\varphi_{e}=\Phi_{e} \mid \mathbb{S}^{n-1}: \mathbb{S}^{n-1} \rightarrow X^{n-1}$ an attaching map for $e$ (this name is explained by 2.9 ).\\
-In many important examples the set $\mathscr{E}$ is finite (finite $C W$-decomposition) and then (i)-(iii) is all we require. In general, there are two more conditions.\\
+In many important examples the set $\mathscr{E}$ is finite (finite $C W$-decomposition) and then (i)-(iii) is all we require. In general, there are two more conditions.
+
 (iv) The closure $\bar{e}$ of every cell is contained in a finite union of cells (Closure finiteness).\\
-(v) $A$ subset $A \subset X$ is closed (in $X$ ) if and only if $A \cap \bar{e}$ is closed in $\bar{e}$ for every cell $e \in \mathscr{E}$ (Weak topology). Equivalently: A map $f: X \rightarrow Y$ is continuous if every $f \mid \bar{e}$ is continuous.\\
-It is conditions (iv)-(v) to which the notation $C W$ refers.-A Hausdorff space $X$ together with a $C W$-decomposition $\mathscr{E}$ is called a $C W$-space (originally " $C W$-complex"). The dimension of a $C W$-space, $\operatorname{dim} X$, is the least integer $n$ such that $X^{n}=X$; if no such $n$ exists then $\operatorname{dim} X=\infty$."\\
+
+(v) $A$ subset $A \subset X$ is closed (in $X$ ) if and only if $A \cap \bar{e}$ is closed in $\bar{e}$ for every cell $e \in \mathscr{E}$ (Weak topology). Equivalently: A map $f: X \rightarrow Y$ is continuous if every $f \mid \bar{e}$ is continuous.
+
+It is conditions (iv)-(v) to which the notation $C W$ refers.-A Hausdorff space $X$ together with a $C W$-decomposition $\mathscr{E}$ is called a $C W$-space (originally " $C W$-complex"). The dimension of a $C W$-space, $\operatorname{dim} X$, is the least integer $n$ such that $X^{n}=X$; if no such $n$ exists then $\operatorname{dim} X=\infty$."
+\end{DEF}
+
+\begin{DEF}{AT-D72-07-02}{CW-Unterraum}
 Given a subset $\mathscr{E}^{\prime} \subset \mathscr{E}$, put $X^{\prime}=\bigcup_{e \in \mathscr{E}^{\prime}} e$. If $\mathscr{E}^{\prime}$ is a $C W$-decomposition of $X^{\prime}$ then ( $X^{\prime}, \mathscr{E}^{\prime}$ ) is called a $C W$-subspace of ( $X, \mathscr{E}$ ); often, we shall simply say " $X^{\prime}$ is a $C W$-subspace of $X^{\prime \prime}$.
+\end{DEF}
 
-We now deduce a few basic properties of $C W$-spaces.\\
-2.2 Let $\Phi=\Phi_{e}: \mathbb{B}^{n} \rightarrow X$ be a characteristic map for $e \in \mathscr{E}$. Then $\bar{e}=$ $\boldsymbol{\Phi}\left(\mathbf{B}^{n}\right)$. (Note: the proof will not use (iv) or (v).)
+We now deduce a few basic properties of $C W$-spaces.
 
-Proof. By continuity $\Phi(\mathbb{B})=\Phi(\overline{\mathbb{B}-\mathbb{S}}) \subset \overline{\Phi(\mathbb{B}-\mathbb{S})}=\bar{e}$. Conversely, $\mathbb{B}$ is compact, hence $\Phi(\mathbb{B})$ is compact and therefore closed ( $X$ being hausdorff), hence $\bar{e} \subset \Phi(\mathbb{B})$.\\
-2.3 Let $\mathscr{E}^{\prime} \subset \mathscr{E}$ be a finite set of cells. Then $X^{\prime}=\bigcup_{e \in \mathscr{E}^{\prime}} e$ is a CW-subspace if and only if $X^{\prime}$ is closed. Consequence: Finite unions and arbitrary intersections of finite CW-subspaces (i.e. having finitely many cells) are again CW-subspaces. (We shall see in 2.7 that this generalizes to arbitrary $C W$-subspaces.)
 
-Proof. If $X^{\prime}$ is a $C W$-subspace then every cell $e$ of $X^{\prime}$ has a characteristic map $\Phi: \mathbb{B} \rightarrow X^{\prime}$ and $\bar{e}=\Phi(\mathbb{B}) \subset X^{\prime}$, hence $X^{\prime}=\bigcup_{e \in \mathscr{E}^{\prime}} \bar{e}$ is closed. Conversely, if $X^{\prime}$ is closed and $\Phi: \mathbb{B} \rightarrow X$ is a characteristic map for $e \subset X^{\prime}$ then $\Phi(\mathbb{B})=\bar{e} \subset X^{\prime}$, so $\Phi: \mathbb{B} \rightarrow X^{\prime}$. This proves condition (iii), whereas (i) and (ii) are obvious.\\
-2.4 The closure $\bar{e}$ of every cell is contained in a finite $C W$-subspace.
+2.2 
 
-Proof by induction on $n=|e|$. From (iii) and 2.2 we see that $\bar{e}-\dot{e} \subset X^{n-1}$, i.e. $\bar{e}-e$ meets only cells of dimension $<n$, say $e_{1}, \ldots, e_{r}$; their number is finite by (iv). By induction, every $\bar{e}_{i}$ lies in a finite $C W$-subspace $X_{i}$; hence $\bar{e} \subset e \cup X_{1} \cup X_{2} \ldots \cup X_{r}$ which is a $C W$-subspace by 2.3.\\
-2.5 $A$ subset $A \subset X$ is closed if and only if $A$ intersects every finite $C W$ subspace in a closed set, i.e., $X$ has the weak topology with respect to finite CW-subspaces.\\
-This follows from (v) because every $\bar{e}$ lies in a finite $C W$-subspace.\\
-2.6 Every compact set $K \subset X$ is contained in a finite $C W$-subspace. In particular, $X$ is compact if and only if it consists of finitely many cells.
+\begin{LEM}{AT-D72-07-03}{Abschluss von Zellen durch Charakteristische Abbildung}
+Let $\Phi=\Phi_{e}: \mathbb{B}^{n} \rightarrow X$ be a characteristic map for $e \in \mathscr{E}$. Then $\bar{e}=$ $\boldsymbol{\Phi}\left(\mathbf{B}^{n}\right)$. (Note: the proof will not use (iv) or (v).)
+\end{LEM}
 
-Proof. In every cell $e$ which meets $K$ pick a point $k_{e} \in e \cap K$. The set $k$, consisting of all $k_{e}$, is closed because its intersection with every finite $C W$-subspace is finite (hence closed). Similarly, every subset of $k$ is closed, hence $k$ is discrete. But it is also compact, being a closed subset of a compact set $K$. Therefore $k$ is finite, i.e., $K$ meets only finitely many cells, hence the result by 2.4 and 2.3 .\\
-2.7 Proposition. Let $\mathscr{E}^{\prime} \subset \mathscr{E}$ be a set of cells and put $X^{\prime}=\bigcup_{e \in \mathscr{E}^{\prime}}$ e. The following are equivalent.\\
+Proof. 
+
+\begin{PROOF}{AT-D72-07-04}{P: Abschluss von Zellen durch Charakteristische Abbildung}
+By continuity $\Phi(\mathbb{B})=\Phi(\overline{\mathbb{B}-\mathbb{S}}) \subset \overline{\Phi(\mathbb{B}-\mathbb{S})}=\bar{e}$. Conversely, $\mathbb{B}$ is compact, hence $\Phi(\mathbb{B})$ is compact and therefore closed ( $X$ being hausdorff), hence $\bar{e} \subset \Phi(\mathbb{B})$.
+\end{PROOF}
+
+
+2.3 
+
+\begin{LEM}{AT-D72-07-05}{Charakterisierung von CW-Unterräumen}
+Let $\mathscr{E}^{\prime} \subset \mathscr{E}$ be a finite set of cells. Then $X^{\prime}=\bigcup_{e \in \mathscr{E}^{\prime}} e$ is a CW-subspace if and only if $X^{\prime}$ is closed. Consequence: Finite unions and arbitrary intersections of finite CW-subspaces (i.e. having finitely many cells) are again CW-subspaces. (We shall see in 2.7 that this generalizes to arbitrary $C W$-subspaces.)
+\end{LEM}
+
+Proof. 
+
+\begin{PROOF}{AT-D72-07-06}{P: Charakterisierung von CW-Unterräumen}
+If $X^{\prime}$ is a $C W$-subspace then every cell $e$ of $X^{\prime}$ has a characteristic map $\Phi: \mathbb{B} \rightarrow X^{\prime}$ and $\bar{e}=\Phi(\mathbb{B}) \subset X^{\prime}$, hence $X^{\prime}=\bigcup_{e \in \mathscr{E}^{\prime}} \bar{e}$ is closed. Conversely, if $X^{\prime}$ is closed and $\Phi: \mathbb{B} \rightarrow X$ is a characteristic map for $e \subset X^{\prime}$ then $\Phi(\mathbb{B})=\bar{e} \subset X^{\prime}$, so $\Phi: \mathbb{B} \rightarrow X^{\prime}$. This proves condition (iii), whereas (i) and (ii) are obvious.
+\end{PROOF}
+
+
+2.4 
+
+\begin{LEM}{AT-D72-07-07}{Abschluss von Zelle ist in endlichem CW-Unterraum enthalten}
+The closure $\bar{e}$ of every cell is contained in a finite $C W$-subspace.
+\end{LEM}
+
+\begin{PROOF}{AT-D72-07-08}{P: Abschluss von Zelle ist in endlichem CW-Unterraum enthalten}
+Proof by induction on $n=|e|$. From (iii) and 2.2 we see that $\bar{e}-\dot{e} \subset X^{n-1}$, i.e. $\bar{e}-e$ meets only cells of dimension $<n$, say $e_{1}, \ldots, e_{r}$; their number is finite by (iv). By induction, every $\bar{e}_{i}$ lies in a finite $C W$-subspace $X_{i}$; hence $\bar{e} \subset e \cup X_{1} \cup X_{2} \ldots \cup X_{r}$ which is a $C W$-subspace by 2.3.
+\end{PROOF}
+
+
+2.5 
+
+\begin{LEM}{AT-D72-07-09}{Charakterisierung von abgeschlossenen Teilmengen}
+$A$ subset $A \subset X$ is closed if and only if $A$ intersects every finite $C W$ subspace in a closed set, i.e., $X$ has the weak topology with respect to finite CW-subspaces.
+\end{LEM}
+
+\begin{PROOF}{AT-D72-07-10}{P: Charakterisierung von abgeschlossenen Teilmengen}
+This follows from weak topology because every $\bar{e}$ lies in a finite $C W$-subspace.
+\end{PROOF}
+
+
+2.6 
+
+\begin{LEM}{AT-D72-07-11}{Kompakte Teilmengen sind in endlichen CW-Unterräumen enthalten}
+Every compact set $K \subset X$ is contained in a finite $C W$-subspace. In particular, $X$ is compact if and only if it consists of finitely many cells.
+\end{LEM}
+
+Proof. 
+
+\begin{PROOF}{AT-D72-07-12}{P: Kompakte Teilmengen sind in endlichen CW-Unterräumen enthalten}
+In every cell $e$ which meets $K$ pick a point $k_{e} \in e \cap K$. The set $k$, consisting of all $k_{e}$, is closed because its intersection with every finite $C W$-subspace is finite (hence closed). Similarly, every subset of $k$ is closed, hence $k$ is discrete. But it is also compact, being a closed subset of a compact set $K$. Therefore $k$ is finite, i.e., $K$ meets only finitely many cells, hence the result by 2.4 and 2.3 .
+\end{PROOF}
+
+
+2.7 Proposition. 
+
+\begin{PROP}{AT-D72-07-13}{Charakterisierung von CW-Unterräumen}
+Let $\mathscr{E}^{\prime} \subset \mathscr{E}$ be a set of cells and put $X^{\prime}=\bigcup_{e \in \mathscr{E}^{\prime}}$ e. The following are equivalent.\\
+
 (a) $X^{\prime}$ is a $C W$-subspace,\\
+
 (b) $X^{\prime}$ is closed,\\
+
 (c) $e \subset X^{\prime} \Rightarrow \bar{e} \subset X^{\prime}$.
 
-Consequence: Arbitrary unions or intersections of CW-subspaces are again CW-subspaces.\\
-(For unions one uses $(a) \Leftrightarrow(c)$, for intersections $(a) \Leftrightarrow(b)$.)\\
-Proof of 2.7. The implication (b) $\Rightarrow$ (c) is obvious, and (a) $\Rightarrow$ (c) follows from 2.2. Assuming (c), we now prove\\
+Consequence: Arbitrary unions or intersections of CW-subspaces are again CW-subspaces.
+
+(For unions one uses $(a) \Leftrightarrow(c)$, for intersections $(a) \Leftrightarrow(b)$.)
+\end{PROP}
+
+Proof of 2.7. 
+
+\begin{PROOF}{AT-D72-07-14}{P: Charakterisierung von CW-Unterräumen}
+The implication (b) $\Rightarrow$ (c) is obvious, and (a) $\Rightarrow$ (c) follows from 2.2. Assuming (c), we now prove\\
 (d) If $A \subset X^{\prime}$ is such that $\bar{e} \cap A$ is closed in $\bar{e}$, for every cell e of $X^{\prime}$, then $A$ is closed in $X$.\\
 Letting $A=X^{\prime}$ this shows (c) $\Rightarrow$ (b). Letting $A \subset X^{\prime}$ be arbitrary again it shows that ( $X^{\prime}, \mathscr{E}^{\prime}$ ) satisfies condition (2.1(v)). Because (2.1 (i), (ii), (iv)) are obvious and (iii) follows from 2.2 we get (c) $\Rightarrow$ (a).\\
 In order to prove (d) let $X_{\alpha}$ be any finite $C W$-subspace of $X$. Then $X_{\alpha} \cap X^{\prime}$ consists of finitely many cells, say $e_{1}, \ldots, e_{r}$, and $\bar{e}_{i} \subset X_{\alpha} \cap X^{\prime}$ because $X_{\alpha}$ is closed and (c) holds. Hence
-
 $$
 X_{\alpha} \cap A=\left(X_{\alpha} \cap X^{\prime}\right) \cap A=\left(\bigcup_{i=1}^{r} \bar{e}_{i}\right) \cap A=\bigcup_{i=1}^{r}\left(\bar{e}_{i} \cap A\right)
 $$
+is closed, and therefore $A$ is closed in $X$ by 2.5.
+\end{PROOF}
 
-is closed, and therefore $A$ is closed in $X$ by 2.5.\\
-2.8 Let $\mathscr{E}^{\prime} \subset \mathscr{E}$ be a set of $n$-cells. Then $X^{\prime}=X^{n-1} \cup \bigcup_{e \in \mathscr{E}^{\prime}}$ e is closed, i.e. is a $C W$-subspace. In particular, the skeletons $X^{n-1}$ are $C W$-subspaces (put $\mathscr{E}^{\prime}=\emptyset$ ) and the $n$-cells $e$ are open in $X^{n}$ (put $\mathscr{E}^{\prime}=$ set of $n$-cells $\neq e$ ). This follows from 2.7 because $X^{\prime}$ satisfies condition (c) (use 2.2 and 2.1 (iii)).\\
-2.9 Proposition. Let $\mathscr{E}^{i} \subset \mathscr{E}$ be the set of $i$-cells, and consider $\oplus_{i=0}^{\infty} \mathscr{E}^{i} \times \mathbb{B}^{i}$ where $\oplus$ denotes the topological sum and $\mathscr{E}^{i}$ has the discrete topology (this space is then the topological sum of as many standard balls as there are cells in $X$ ). For every cell $e \in \mathscr{E}$ choose a characteristic map $\Phi_{e}: \mathbb{B}^{|e|} \rightarrow X$, and define\\
-(a) $\Phi: \oplus_{i=0}^{\infty} \mathscr{E}^{i} \times \mathbb{B}^{i}>X, \Phi(e, y)=\Phi_{e}(y)$ for $(e, y) \in\{e\} \times \mathbb{B}^{|e|}$;\\
-(b) $\Phi^{n}: \oplus_{i=0}^{n} \mathscr{E}^{i} \times \mathbb{B}^{i} \rightarrow X^{n}, \Phi^{n}=\Phi \mid \oplus_{i=0}^{n} \mathscr{E}^{i} \times \mathbb{B}^{i}$;\\
-(c) $\Phi^{(n)}: \quad X^{n-1} \oplus\left(\mathscr{E}^{n} \times \mathbb{B}^{n}\right) \rightarrow X^{n}, \quad \Phi^{(n)} \mid X^{n-1}=$ inclusion, $\quad \Phi^{(n)} \mid \mathscr{E}^{n} \times \mathbb{B}^{n}=$ $\Phi \mid \mathscr{E}^{\boldsymbol{n}} \times \mathbb{B}^{\boldsymbol{n}}$.\\
+
+2.8 
+
+\begin{LEM}{AT-D72-07-15}{Vereinigung von Teilmengen von $n$-Zellen mit $n-1$-Skelett sind CW-Unterräume}
+Let $\mathscr{E}^{\prime} \subset \mathscr{E}$ be a set of $n$-cells. Then $X^{\prime}=X^{n-1} \cup \bigcup_{e \in \mathscr{E}^{\prime}}$ e is closed, i.e. is a $C W$-subspace. In particular, the skeletons $X^{n-1}$ are $C W$-subspaces (put $\mathscr{E}^{\prime}=\emptyset$ ) and the $n$-cells $e$ are open in $X^{n}$ (put $\mathscr{E}^{\prime}=$ set of $n$-cells $\neq e$ ). This follows from 2.7 because $X^{\prime}$ satisfies condition (c) (use 2.2 and 2.1 (iii)).
+\end{LEM}
+
+
+2.9 Proposition. 
+
+\begin{PROP}{AT-D72-07-16}{(Iterative) Konstruktion von n-Skeletten}
+Let $\mathscr{E}^{i} \subset \mathscr{E}$ be the set of $i$-cells, and consider $\oplus_{i=0}^{\infty} \mathscr{E}^{i} \times \mathbb{B}^{i}$ where $\oplus$ denotes the topological sum and $\mathscr{E}^{i}$ has the discrete topology (this space is then the topological sum of as many standard balls as there are cells in $X$ ). For every cell $e \in \mathscr{E}$ choose a characteristic map $\Phi_{e}: \mathbb{B}^{|e|} \rightarrow X$, and define
+
+(a) $\Phi: \oplus_{i=0}^{\infty} \mathscr{E}^{i} \times \mathbb{B}^{i}\to X, \Phi(e, y)=\Phi_{e}(y)$ for $(e, y) \in\{e\} \times \mathbb{B}^{|e|}$;
+
+(b) $\Phi^{n}: \oplus_{i=0}^{n} \mathscr{E}^{i} \times \mathbb{B}^{i} \rightarrow X^{n}, \Phi^{n}=\Phi \mid \oplus_{i=0}^{n} \mathscr{E}^{i} \times \mathbb{B}^{i}$;
+
+(c) $\Phi^{(n)}: \quad X^{n-1} \oplus\left(\mathscr{E}^{n} \times \mathbb{B}^{n}\right) \rightarrow X^{n}, \quad \Phi^{(n)} \mid X^{n-1}=$ inclusion, $\quad \Phi^{(n)} \mid \mathscr{E}^{n} \times \mathbb{B}^{n}=$ $\Phi \mid \mathscr{E}^{\boldsymbol{n}} \times \mathbb{B}^{\boldsymbol{n}}$.
+
 Claim: These maps are identification maps. Thus, $X$ can be obtained by suitably pasting standard balls, and $X^{n}$ can be obtained from $X^{n-1}$ by attaching standard $n$-balls $\{e\} \times \mathbb{B}^{n} \approx \mathbb{B}^{n}$ via the attaching maps $\varphi_{e}=$ $\Phi_{e} \mid \mathbb{S}^{n-1}$.
+\end{PROP}
 
-Proof. By condition (2.1(v)), a map $f: X \rightarrow Y$ is continuous if $f \mid \bar{e}$ is continuous for all cells $e$. Since $\Phi_{e}: \mathbb{B}^{|e|} \rightarrow \bar{e}$ is an identification map (2.2), $f$ is continuous if $f \Phi_{e}$ is continuous for all $e$, i.e., if $f \Phi$ is continuous.
+Proof. 
+
+\begin{PROOF}{AT-D72-07-17}{P: (Iterative) Konstruktion von n-Skeletten}
+By condition (2.1(v)), a map $f: X \rightarrow Y$ is continuous if $f \mid \bar{e}$ is continuous for all cells $e$. Since $\Phi_{e}: \mathbb{B}^{|e|} \rightarrow \bar{e}$ is an identification map (2.2), $f$ is continuous if $f \Phi_{e}$ is continuous for all $e$, i.e., if $f \Phi$ is continuous.
 
 This just says that $\Phi$ is an identification map. Similarly for $\Phi^{n}$, replacing $X$ by $X^{n}$. Furthermore, we can factor $\Phi^{n}$ as follows,
-
 $$
 \Phi^{n}: \oplus_{i=0}^{n} \mathscr{E}^{i} \times \mathbb{B}^{i} \xrightarrow{\Phi^{n-1} \oplus \mathrm{id}} X^{n-1} \oplus\left(\mathscr{E}^{n} \times \mathbb{B}^{n}\right) \xrightarrow{\Phi^{(n)}} X^{n},
 $$
-
 hence $\Phi^{(n)}$ is an identification map (being the second factor of an identification map).
+\end{PROOF}
 
-Conversely,\\
-2.10 Proposition. Let ( $X^{\prime}, \mathscr{E}^{\prime}$ ) a $C W$-space with $\operatorname{dim} X^{\prime}<n$, let $\left\{\varphi_{\lambda}\right.$ : $\left.\mathbb{S}^{n-1} \rightarrow X^{\prime}\right\}_{\lambda \in \Lambda}$ a family of continuous maps, form $\mathscr{X}=X^{\prime} \oplus\left(\Lambda \times \mathbb{B}^{n}\right)$, where $\Lambda$ has the discrete topology, and identify each $(\lambda, y) \in \Lambda \times \mathbb{S}^{n-1} \subset \mathscr{X}$ with $\varphi_{\lambda}(y) \in X^{\prime} \subset \mathscr{X}$. Let $X$ denote the resulting space and $\Phi: \mathscr{X} \rightarrow X$ the identification map. The sets $\Phi(e)$ with $e \in \mathscr{E}^{\prime \prime}$, and $e_{\lambda}=\Phi\left(\{\lambda\} \times \mathbb{B}^{n}\right)$ with $\lambda \in \Lambda$, then form a $C W$-decomposition of $X, \operatorname{dim} X \leq n, X^{n-1}=\Phi\left(X^{\prime}\right) \approx X^{\prime}$, and the map $\mathbb{B}^{n} \approx\{\lambda\} \times \mathbb{B}^{n} \rightarrow X$ is characteristic for the $n$-cell $e_{\lambda}$.
+
+Conversely,
+
+
+2.10 Proposition. 
+
+
+\begin{PROP}{AT-D72-07-18}{Rekursive Konstruktion von CW-Räumen}
+Let ( $X^{\prime}, \mathscr{E}^{\prime}$ ) a $C W$-space with $\operatorname{dim} X^{\prime}<n$, let $\left\{\varphi_{\lambda}\right.$ : $\left.\mathbb{S}^{n-1} \rightarrow X^{\prime}\right\}_{\lambda \in \Lambda}$ a family of continuous maps, form $\mathscr{X}=X^{\prime} \oplus\left(\Lambda \times \mathbb{B}^{n}\right)$, where $\Lambda$ has the discrete topology, and identify each $(\lambda, y) \in \Lambda \times \mathbb{S}^{n-1} \subset \mathscr{X}$ with $\varphi_{\lambda}(y) \in X^{\prime} \subset \mathscr{X}$. Let $X$ denote the resulting space and $\Phi: \mathscr{X} \rightarrow X$ the identification map. The sets $\Phi(e)$ with $e \in \mathscr{E}^{\prime \prime}$, and $e_{\lambda}=\Phi\left(\{\lambda\} \times \mathbb{B}^{n}\right)$ with $\lambda \in \Lambda$, then form a $C W$-decomposition of $X, \operatorname{dim} X \leq n, X^{n-1}=\Phi\left(X^{\prime}\right) \approx X^{\prime}$, and the map $\mathbb{B}^{n} \approx\{\lambda\} \times \mathbb{B}^{n} \rightarrow X$ is characteristic for the $n$-cell $e_{\lambda}$.
+
 
 This, of course, provides a convenient recursive method for constructing $C W$-spaces, starting with a discrete space $X^{0}$.
+\end{PROP}
 
-Proof. If $A \subset X^{\prime}$ is closed then
+Proof. 
 
+\begin{PROOF}{AT-D72-07-19}{P: Rekursive Konstruktion von CW-Räumen}
+If $A \subset X^{\prime}$ is closed then
 $$
 \begin{aligned}
 \Phi^{-1} \Phi(A) & =\left(X^{\prime} \cap \Phi^{-1} \Phi(A)\right) \cup\left(\Lambda \times \mathbb{B}^{n} \cap \Phi^{-1} \Phi(A)\right) \\
 & =A \cup\left(\Phi \mid \Lambda \times \mathbb{S}^{n-1}\right)^{-1} \Phi A=A \cup\left(\bigcup_{\lambda}\{\lambda\} \times \varphi_{\lambda}^{-1} A\right)
 \end{aligned}
 $$
+is also closed, hence $\boldsymbol{\Phi} A$ is closed (by definition of the identification topology), hence $\Phi \mid X^{\prime}: X^{\prime} \rightarrow \Phi X^{\prime}$ is a closed map. Since it is also continuous and bijective we have $\Phi: X^{\prime} \approx \Phi\left(X^{\prime}\right)$. Similarly, if $O \subset \Lambda \times \mathbb{B}^{n}$ is open then $\Phi^{-1} \Phi(O)=O$, hence $\Phi(O)$ is open, hence $\Phi: \Lambda \times \mathbb{I}^{n} \approx$ $\Phi\left(\Lambda \times \mathbb{B}^{n}\right)$. This proves condition (2.1(ii)). Moreover, it shows that characteristic maps of $X^{\prime}$ followed by $\Phi$ give characteristic maps for cells of dimension less than $n$, and $\mathbb{B}^{n} \approx\{\lambda\} \times \mathbb{B}^{n} \rightarrow X$ is characteristic for the $n$-cell $e_{\lambda}$, hence condition (2.1 (iii)) holds.
 
-is also closed, hence $\boldsymbol{\Phi} A$ is closed (by definition of the identification topology), hence $\Phi \mid X^{\prime}: X^{\prime} \rightarrow \Phi X^{\prime}$ is a closed map. Since it is also continuous and bijective we have $\Phi: X^{\prime} \approx \Phi\left(X^{\prime}\right)$. Similarly, if $O \subset \Lambda \times \mathbb{B}^{n}$ is open then $\Phi^{-1} \Phi(O)=O$, hence $\Phi(O)$ is open, hence $\Phi: \Lambda \times \mathbb{I}^{n} \approx$ $\Phi\left(\Lambda \times \mathbb{B}^{n}\right)$. This proves condition (2.1(ii)). Moreover, it shows that characteristic maps of $X^{\prime}$ followed by $\Phi$ give characteristic maps for cells of dimension less than $n$, and $\mathbb{B}^{n} \approx\{\lambda\} \times \mathbb{B}^{n} \rightarrow X$ is characteristic for the $n$-cell $e_{\lambda}$, hence condition (2.1 (iii)) holds.\\
 Next we show that $X$ is hausdorff. For every pair $P, Q \in \mathscr{X}$ such that $\Phi(P) \neq \Phi(Q)$ we have to find disjoint open neighborhoods $U, V \subset \mathscr{X}$ such that $\Phi^{-1} \Phi U=U, \Phi^{-1} \Phi V=V$; then $\Phi U, \Phi V$ will be disjoint neighborhoods of $\Phi(P), \Phi(Q)$. If $P, Q \in X^{\prime}$ then they have disjoint open neighborhoods $U^{\prime}, V^{\prime}$ in $X^{\prime}$, and we put
-
 $$
 \begin{aligned}
 & U=U^{\prime} \cup\left\{(\lambda, x) \in \Lambda \times \mathbb{B}^{n} \mid\|x\|>0, \varphi_{\lambda}\left(\frac{x}{\|x\|}\right) \in U^{\prime}\right\} \\
 & V=V^{\prime} \cup\left\{(\lambda, x) \in \Lambda \times \mathbb{B}^{n} \mid\|x\|>0, \varphi_{\lambda}\left(\frac{x}{\|x\|}\right) \in V^{\prime}\right\}
 \end{aligned}
 $$
-
 If $P \in X^{\prime}, Q=\left(\lambda_{0}, x_{0}\right) \in \Lambda \times \mathbb{B}^{n}$ we put
-
 $$
 \begin{aligned}
 & U=X^{\prime} \cup\left\{(\lambda, x) \in \Lambda \times \mathbb{B}^{n} \left\lvert\,\|x\|>\frac{1}{2}\left(1+\left\|x_{0}\right\|\right)\right.\right\}, \\
 & V=\left\{(\lambda, x) \in \Lambda \times \mathbb{B}^{n} \left\lvert\,\|x\|<\frac{1}{2}\left(1+\left\|x_{0}\right\|\right)\right.\right\} .
 \end{aligned}
 $$
-
 If both $P, Q \in A \times \mathbb{B}^{n}$ let $U, V$ be arbitrary disjoint open neighborhoods contained in $\Lambda \times \mathbb{B}^{n}$.
 
 Now to condition (iv). It is clear for cells of dimension $<n$. For $n$-cells $e_{\lambda}$ we have (2.2).
-
 $$
 \bar{e}_{\lambda}=\Phi\left(\{\lambda\} \times \mathbb{B}^{n}\right)=\Phi\left(\{\lambda\} \times \mathbb{B}^{n}\right) \cup \varphi_{\lambda}\left(\mathbb{S}^{n-1}\right)=e_{\lambda} \cup \varphi_{\lambda}\left(\mathbb{S}^{n-1}\right) .
 $$
-
 Since $\varphi_{\lambda}\left(\mathbb{S}^{n-1}\right) \subset X^{\prime}$ is compact it meets only finitely many cells (2.6), and $\bar{e}_{\lambda}$ meets only one more. In order to prove (v), assume $A \subset X$ intersects the closure of every cell in a closed set. Then $\Phi^{-1}(A) \cap X^{\prime} \approx A \cap \Phi\left(X^{\prime}\right)$ is closed because $\Phi\left(X^{\prime}\right)$ is a $C W$-space. Further,
-
 $$
 \left(\Phi^{-1} A\right) \cap\left(\{\lambda\} \times \mathbb{B}^{n}\right)=\Phi^{-1}\left[A \cap \Phi\left(\{\lambda\} \times \mathbb{B}^{n}\right)\right] \cap\left(\{\lambda\} \times \mathbb{B}^{n}\right)
 $$
+is closed, for every $\lambda \in \Lambda$, because $A \cap \Phi\left(\{\lambda\} \times \mathbb{B}^{n}\right)=A \cap \bar{e}_{\lambda}$ is closed by assumption, and $\Phi$ is continuous. Since $\mathscr{X}$ is the topological sum of $X^{\prime}$ and the $\{\lambda\} \times \mathbb{B}^{n}$ it follows that $\Phi^{-1} A$ is closed, hence $A$ is closed in the identification topology.
+\end{PROOF}
 
-is closed, for every $\lambda \in \Lambda$, because $A \cap \Phi\left(\{\lambda\} \times \mathbb{B}^{n}\right)=A \cap \bar{e}_{\lambda}$ is closed by assumption, and $\Phi$ is continuous. Since $\mathscr{X}$ is the topological sum of $X^{\prime}$ and the $\{\lambda\} \times \mathbb{B}^{n}$ it follows that $\Phi^{-1} A$ is closed, hence $A$ is closed in the identification topology.\\
-2.11 Proposition. CW-spaces are normal spaces. (In fact, they are even paracompact; cf. Miyazaki, or Mather.)
 
-Proof. Let $A, B$ be disjoint closed sets in a $C W$-space $X$; we must find a function $\rho: X \rightarrow[0,1]$ such that $\rho|A=0, \rho| B=1$. By induction, we shall construct functions $\rho_{n}: X^{n} \rightarrow[0,1], n=0,1, \ldots$, such that $\rho_{n}\left|A \cap X^{n}=0, \quad \rho_{n}\right| B \cap X^{n}=1, \quad \rho_{n} \mid X^{n-1}=\rho_{n-1}$; and we define $\rho$ by $\rho \mid X^{n}=\rho_{n}$.\\
+2.11 Proposition. 
+
+
+\begin{PROP}{AT-D72-07-20}{CW-Räume sind Normal}
+CW-spaces are normal spaces. (In fact, they are even paracompact; cf. Miyazaki, or Mather.)
+\end{PROP}
+
+Proof. 
+
+\begin{PROOF}{AT-D72-07-21}{P: CW-Räume sind Normal}
+Let $A, B$ be disjoint closed sets in a $C W$-space $X$; we must find a function $\rho: X \rightarrow[0,1]$ such that $\rho|A=0, \rho| B=1$. By induction, we shall construct functions $\rho_{n}: X^{n} \rightarrow[0,1], n=0,1, \ldots$, such that $\rho_{n}\left|A \cap X^{n}=0, \quad \rho_{n}\right| B \cap X^{n}=1, \quad \rho_{n} \mid X^{n-1}=\rho_{n-1}$; and we define $\rho$ by $\rho \mid X^{n}=\rho_{n}$.
+
 Suppose then we already have $\rho_{n-1}, n>0$; the start, $\rho_{0}$, being obvious. For every $n$-cell $e$ take a characteristic map $\Phi_{e}:\left(\mathbb{B}^{n}, \mathbb{S}^{n-1}\right) \rightarrow\left(X^{n}, X^{n-1}\right)$ and choose a function $\rho_{e}: \mathbb{B}^{n} \rightarrow[0,1]$ with
-
 $$
 \rho_{e}\left|\mathbb{S}^{n-1}=\rho_{n-1} \Phi_{e}\right| \mathbb{S}^{n-1}, \quad \rho_{e}\left|\Phi_{e}^{-1} A=0, \quad \rho_{e}\right| \Phi_{e}^{-1} B=1
 $$
-
 such a function $\rho_{e}$ exists by Tietze's extension lemma. Now define $\rho_{n}$ by $\rho_{n} \mid X^{n-1}=\rho_{n-1}, \rho_{n} \Phi_{e}=\rho_{e}$.
+\end{PROOF}
 
-We conclude this § with a technical result which is needed in V, 4.\\
-2.12 Proposition. Let $X$ be a $C W$-space, $Y \subset X$ a $C W$-subspace, and $M \subset X^{n}-\left(X^{n-1} \cup Y\right)$ a set which meets every $n$-cell of $X-Y$ in exactly one point. Then $X^{n-1} \cup Y$ is a strong deformation retract of $X^{n} \cup Y-M$.
 
-Proof. For each $n$-cell $e \subset X-Y$ choose a characteristic map $\Phi_{e}: \mathbb{B}^{n} \rightarrow X^{n}$ such that $\Phi_{e}(0)=M \cap e$. A deformation $D: I \times\left(X^{n} \cup Y-M\right) \rightarrow X^{n} \cup Y-M$ as required is then given by
+
+We conclude this § with a technical result which is needed in V, 4.
+
+
+2.12 Proposition. 
+
+
+\begin{PROP}{AT-D72-07-22}{$X^{n-1} \cup Y$ als starker Deformationsretrakt von $X^{n} \cup Y-M$}
+Let $X$ be a $C W$-space, $Y \subset X$ a $C W$-subspace, and $M \subset X^{n}-\left(X^{n-1} \cup Y\right)$ a set which meets every $n$-cell of $X-Y$ in exactly one point. Then $X^{n-1} \cup Y$ is a strong deformation retract of $X^{n} \cup Y-M$.
+\end{PROP}
+
+Proof. 
+
+
+\begin{PROOF}{AT-D72-07-23}{P: $X^{n-1} \cup Y$ als starker Deformationsretrakt von $X^{n} \cup Y-M$}
+For each $n$-cell $e \subset X-Y$ choose a characteristic map $\Phi_{e}: \mathbb{B}^{n} \rightarrow X^{n}$ such that $\Phi_{e}(0)=M \cap e$. A deformation $D: I \times\left(X^{n} \cup Y-M\right) \rightarrow X^{n} \cup Y-M$ as required is then given by
 
 $$
 D(t, x)= \begin{cases}x & \text { if } x \in X^{n-1} \cup Y \\ \Phi_{e}\left[(1-t) \zeta+t \frac{\zeta}{\|\zeta\|}\right] & \text { if } x=\Phi_{e}(\zeta), \zeta \in \mathbb{B}^{n}-\{0\}, e \not \subset Y\end{cases}
@@ -2522,92 +2711,181 @@ $$
 $$
 
 is continuous, and $D \mid I \times\left(X^{n}-M\right)$ is obtained from $\mathscr{D}$ by passing to quotients.\\
-2.13 Lemma. If $\Phi: A \rightarrow B$ is an identification map and $C$ is a locally compact (Hausdorff-)space then id $\times \Phi: C \times A \rightarrow C \times B$ is an identification map.
+\end{PROOF}
 
-Proof (D. Epstein). If $U \subset C \times B$ is such that $V=(\mathrm{id} \times \Phi)^{-1} U$ is open then we must show that $U$ is open. Let $(c, b) \in U$, and pick $(c, a) \in V$ such that $\Phi a=b$. Every neighborhood of $c$ contains a compact neighborhood (cf. Schubert; I, 7.5); in particular, $c$ has a compact neighborhood $K$ such that $K \times\{a\} \subset V$. Let $W=\{x \in A \mid K \times\{x\} \subset V\}=\{x \mid K \times\{\Phi x\} \subset U\}$. Then $W$ is an open set, and $\Phi^{-1}(\Phi W)=W$, hence $\Phi W$ is open ( $\Phi$ being an identification). It follows that $U$ contains a neighborhood of ( $c, b$ ), namely $K \times \Phi W$; hence $U$ is open.\\
-2.14 Exercises. 1. If $X \supset Y$ is a pair of Hausdorff-spaces then a $C W$ decomposition of $X \bmod Y$ is a set $\mathscr{E}$ of disjoint cells in $X$ whose union is $X-Y$ and such that: (iii) Every $n$-cell $e \in \mathscr{E}$ admits a characteristic map $\left(\mathbb{B}^{n}, \mathbb{S}^{n-1}\right) \rightarrow\left(X^{n-1} \cup e, X^{n-1}\right)$ where $X^{n-1}=Y \cup \bigcup_{|e|<n} e$. (iv) The\\
-closure $\bar{e}$ of every cell lies in a finite union of cells with $Y$. (v) A subset $A \subset X$ is closed if and only if each of $\{A \cap \bar{e}\}_{e \in \mathscr{E}}$ and $A \cap Y$ is closed. The triple ( $X, Y ; \mathscr{E}$ ) is called a relative $C W$-space. Generalize the preceding results to relative $C W$-spaces.\\
-2. Let ( $X, \mathscr{E}$ ) be a $C W$-space, and consider the identification map
 
+
+2.13 Lemma. 
+
+\begin{LEM}{AT-D72-07-24}{Identifikationsabbildung id $\times \Phi: C \times A \rightarrow C \times B$}
+If $\Phi: A \rightarrow B$ is an identification map and $C$ is a locally compact (Hausdorff-)space then id $\times \Phi: C \times A \rightarrow C \times B$ is an identification map.
+\end{LEM}
+
+Proof 
+
+\begin{PROOF}{AT-D72-07-25}{P: Identifikationsabbildung id $\times \Phi: C \times A \rightarrow C \times B$}
+(D. Epstein). If $U \subset C \times B$ is such that $V=(\mathrm{id} \times \Phi)^{-1} U$ is open then we must show that $U$ is open. Let $(c, b) \in U$, and pick $(c, a) \in V$ such that $\Phi a=b$. Every neighborhood of $c$ contains a compact neighborhood (cf. Schubert; I, 7.5); in particular, $c$ has a compact neighborhood $K$ such that $K \times\{a\} \subset V$. Let $W=\{x \in A \mid K \times\{x\} \subset V\}=\{x \mid K \times\{\Phi x\} \subset U\}$. Then $W$ is an open set, and $\Phi^{-1}(\Phi W)=W$, hence $\Phi W$ is open ( $\Phi$ being an identification). It follows that $U$ contains a neighborhood of ( $c, b$ ), namely $K \times \Phi W$; hence $U$ is open.
+\end{PROOF}
+
+
+
+2.14 Exercises. 
+
+
+\begin{EXE}{AT-D72-07-26}{Exercise 1}
+If $X \supset Y$ is a pair of Hausdorff-spaces then a $C W$ decomposition of $X \bmod Y$ is a set $\mathscr{E}$ of disjoint cells in $X$ whose union is $X-Y$ and such that: (iii) Every $n$-cell $e \in \mathscr{E}$ admits a characteristic map $\left(\mathbb{B}^{n}, \mathbb{S}^{n-1}\right) \rightarrow\left(X^{n-1} \cup e, X^{n-1}\right)$ where $X^{n-1}=Y \cup \bigcup_{|e|<n} e$. (iv) The closure $\bar{e}$ of every cell lies in a finite union of cells with $Y$. (v) A subset $A \subset X$ is closed if and only if each of $\{A \cap \bar{e}\}_{e \in \mathscr{E}}$ and $A \cap Y$ is closed. The triple ( $X, Y ; \mathscr{E}$ ) is called a relative $C W$-space. Generalize the preceding results to relative $C W$-spaces.
+\end{EXE}
+
+2. 
+
+\begin{EXE}{AT-D72-07-27}{Exercise 2}
+Let ( $X, \mathscr{E}$ ) be a $C W$-space, and consider the identification map
 $$
 \Phi: \oplus_{i=0}^{\infty} \mathscr{E}^{i} \times \mathbb{B}^{i} \rightarrow X
 $$
+of 2.9 (a). Show that the following are equivalent. (i) $\Phi$ is a proper map (i.e. $\Phi$ is closed, and $\Phi^{-1}(x)$ is compact for all $x \in X$ ), (ii) $X$ is locally compact, (iii) every point of $X$ has a neighborhood which is a finite $C W$-space.
+\end{EXE}
 
-of 2.9 (a). Show that the following are equivalent. (i) $\Phi$ is a proper map (i.e. $\Phi$ is closed, and $\Phi^{-1}(x)$ is compact for all $x \in X$ ), (ii) $X$ is locally compact, (iii) every point of $X$ has a neighborhood which is a finite $C W$-space.\\
-3. Show that every $C W$-subspace $Y$ of a $C W$-space $X$ has an open neighborhood in $X$ of which it is a strong deformation retract. This follows by iterating 2.12: We know that $X^{n-1} \cup Y$ is a strong deformation retract of $X^{n} \cup Y-M^{n}$ where $M=M^{n}$, as in 2.12, is the set of centers of $n$-cells in $X-Y$. Let $r_{n}: X^{n} \cup Y-M^{n} \rightarrow X^{n-1} \cup Y$ denote the retraction. Define $V_{0}=Y$, and $V_{n}=r_{n}^{-1}\left(V_{n-1}\right)$ for $n>0$. Then $V=\bigcup_{n=0}^{\infty} V_{n}$ is open in $X$, and $r: V \rightarrow X, r \mid V_{n}=r_{1} r_{2} \ldots r_{n}$, is a strong deformation retraction (in order to prove the last assertion it is convenient to use [ $0, \infty$ ] as parameter-interval for the deformation, and to place the given deformation $V_{n} \simeq V_{n-1}$ in $[n-1, n]$; continuity has only to be checked on finite skeletons, i.e., on $V_{n} \times[0, \infty]$ ).\\
+3. 
+
+
+\begin{EXE}{AT-D72-07-28}{Exercise 3}
+Show that every $C W$-subspace $Y$ of a $C W$-space $X$ has an open neighborhood in $X$ of which it is a strong deformation retract. This follows by iterating 2.12: We know that $X^{n-1} \cup Y$ is a strong deformation retract of $X^{n} \cup Y-M^{n}$ where $M=M^{n}$, as in 2.12, is the set of centers of $n$-cells in $X-Y$. Let $r_{n}: X^{n} \cup Y-M^{n} \rightarrow X^{n-1} \cup Y$ denote the retraction. Define $V_{0}=Y$, and $V_{n}=r_{n}^{-1}\left(V_{n-1}\right)$ for $n>0$. Then $V=\bigcup_{n=0}^{\infty} V_{n}$ is open in $X$, and $r: V \rightarrow X, r \mid V_{n}=r_{1} r_{2} \ldots r_{n}$, is a strong deformation retraction (in order to prove the last assertion it is convenient to use [ $0, \infty$ ] as parameter-interval for the deformation, and to place the given deformation $V_{n} \simeq V_{n-1}$ in $[n-1, n]$; continuity has only to be checked on finite skeletons, i.e., on $V_{n} \times[0, \infty]$ ).
+
 In fact, this construction proves more: If $W \subset Y$ then $r \mid r^{-1} W: r^{-1} W \rightarrow W$ is a strong deformation retract (and if $W$ is relatively open in $Y$ then $r^{-1} W$ is open in $X$ ). Also: If $W$ is relatively open in $Y$ then every neighborhood $U$ of $W$ in $X$ contains an open neighborhood $V_{U}$ of $W$, of which $W$ is a strong deformation retract. Indeed, one can take $V_{U}=\left\{v \in r^{-1} W \mid\right.$ the deformation path of $v$ lies in $\dot{U}\}$.
+\end{EXE}
 
-Corollary 1. In a CW-space $X$ every cell has an open neighborhood in $X$ of which it is a strong deformation retract-because every cell is relatively open in some $C W$-subspace $Y$. Since every point lies in a cell this implies
 
-Corollary 2. In a CW-space every point has an open neighborhood of which it is a strong deformation retract.
+
+Corollary 1. 
+
+\begin{KORO}{AT-D72-07-29}{Zellen in CW-Räumen sind starke Deformationsretrakte von offene Umgebungen}
+In a CW-space $X$ every cell has an open neighborhood in $X$ of which it is a strong deformation retract-because every cell is relatively open in some $C W$-subspace $Y$. Since every point lies in a cell this implies
+\end{KORO}
+
+Corollary 2. 
+
+In a CW-space every point has an open neighborhood of which it is a strong deformation retract.
+
+
+
 
 \section*{Examples}
-3.1 A zerodimensional $C W$-space is the same as a discrete space. A onedimensional $C W$-space $X$ is often called a graph.\\
-3.2 The $n$-sphere $\mathbb{S}^{n}=\left\{x \in \mathbb{R}^{n+1} \mid\|x\|=1\right\}$ admits a $C W$-decomposition into one zero-cell $e^{0}=(0,0, \ldots, 0,1)$ and one $n$-cell $e^{n}=\mathbb{S}^{n}-e^{0}$. The standard map $\pi:\left(\mathbb{B}^{n}, \mathbb{S}^{n-1}\right) \rightarrow\left(\mathbb{S}^{n}, e^{0}\right)$ of IV, 1.1 is characteristic for $e^{n}$.\\
-Another $C W$-decomposition of $\mathbb{S}^{n}$ has two $i$-cells $e_{+}^{i}, e_{-}^{i}$ for every $i$ with $0 \leq i \leq n$, namely
 
+
+3.1 
+
+\begin{EXA}{AT-D72-07-30}{1-/2-dimensionale CW-Räume}
+A zerodimensional $C W$-space is the same as a discrete space. A onedimensional $C W$-space $X$ is often called a graph.
+\end{EXA}
+
+
+3.2 
+
+\begin{EXA}{AT-D72-07-31}{CW-Dekomposition der $n$-Sphäre}
+The $n$-sphere $\mathbb{S}^{n}=\left\{x \in \mathbb{R}^{n+1} \mid\|x\|=1\right\}$ admits a $C W$-decomposition into one zero-cell $e^{0}=(0,0, \ldots, 0,1)$ and one $n$-cell $e^{n}=\mathbb{S}^{n}-e^{0}$. The standard map $\pi:\left(\mathbb{B}^{n}, \mathbb{S}^{n-1}\right) \rightarrow\left(\mathbb{S}^{n}, e^{0}\right)$ of IV, 1.1 is characteristic for $e^{n}$.
+
+Another $C W$-decomposition of $\mathbb{S}^{n}$ has two $i$-cells $e_{+}^{i}, e_{-}^{i}$ for every $i$ with $0 \leq i \leq n$, namely
 $$
 \begin{aligned}
 & e_{+}^{i}=\left\{x \in \mathbb{S}^{n} \mid x_{n}=x_{n-1}=\cdots=x_{i+1}=0, x_{i}>0\right\}, \\
 & e_{-}^{i}=\left\{x \in \mathbb{S}^{n} \mid x_{n}=x_{n-1}=\cdots=x_{i+1}=0, x_{i}<0\right\} .
 \end{aligned}
 $$
-
 This decomposition has the advantage of being invariant under the antipodal map $A: x \mapsto-x$. In fact, $A\left(e_{+}^{i}\right)=e_{-}^{i}, A\left(e_{-}^{i}\right)=e_{+}^{i}$. A characteristic map $\Phi_{+}^{i}: \mathbb{B}^{i} \rightarrow \mathbb{S}^{n}$ for $e_{+}^{i}$ is given by
-
 $$
 \Phi_{+}^{i}\left(y_{0}, y_{1}, \ldots, y_{i-1}\right)=\left(y_{0}, \ldots, y_{i-1},+\sqrt{1-\sum y_{j}^{2}}, 0,0, \ldots, 0\right),
 $$
+for $e_{-}^{i}$ by $\Phi_{-}^{i}=A \circ \Phi_{+}^{i}$.
+\end{EXA}
 
-for $e_{-}^{i}$ by $\Phi_{-}^{i}=A \circ \Phi_{+}^{i}$.\\
-3.3 A $C W$-decomposition of the $n$-ball $\mathbb{B}^{n}$ is obtained by decomposing first the boundary sphere $\mathbb{S}^{n-1}$ and then adding one $n$-cell $e^{n}=\mathbb{B}^{n}=$ $\mathbb{B}^{n}-\mathbb{S}^{n-1}$. The identity map of $\mathbb{B}^{n}$ is characteristic for $e^{n}$. In particular, we can decompose $\mathbb{B}^{n}$ into three cells $e^{0}, e^{n-1}, e^{n}$.\\
+
+3.3 
+
+\begin{EXA}{AT-D72-07-32}{CW-Dekomposition des $n$-Balls}
+A $C W$-decomposition of the $n$-ball $\mathbb{B}^{n}$ is obtained by decomposing first the boundary sphere $\mathbb{S}^{n-1}$ and then adding one $n$-cell $e^{n}=\mathbb{B}^{n}=$ $\mathbb{B}^{n}-\mathbb{S}^{n-1}$. The identity map of $\mathbb{B}^{n}$ is characteristic for $e^{n}$. In particular, we can decompose $\mathbb{B}^{n}$ into three cells $e^{0}, e^{n-1}, e^{n}$.
+\end{EXA}
+
+
+\begin{EXA}{AT-D72-07-33}{CW-Dekomposition des $n$-Simplex}
 The $n$-simplex $\Delta_{n}$, which is homeomorphic with $\mathbb{B}^{n}$, decomposes into cells $e^{i_{0} i_{1} \ldots i_{k}}, 0 \leq i_{0}<i_{1}<\cdots i_{k} \leq n$, as follows:
 
 $$
 e^{i_{0} \ldots i_{k}}=\left\{x \in \Delta_{n} \mid x_{i_{0}} x_{i_{1}} \ldots x_{i_{k}}>0, x_{i_{0}}+x_{i_{1}}+\cdots+x_{i_{k}}=1\right\} .
 $$
 
-If we identify $\Delta_{k} \approx \mathbb{B}^{k}$ then the linear map $\Phi^{i_{0} \ldots i_{k}}: \Delta_{k} \rightarrow \Delta_{n}$ which takes the $v$-th vertex $e_{v} \in \Delta_{k}$ into $e_{i_{v}} \in \Delta_{n}$ is characteristic for $e^{i_{0} \ldots i_{k}}$. This $C W$ decomposition of $\Delta_{n}$ is invariant under linear maps $\Delta_{n} \rightarrow \Delta_{n}$ which permute the vertices.-The closed sets $\bar{e}^{i_{0} \ldots i_{k}}=\operatorname{im}\left(\Phi^{i_{0} \ldots i_{k}}\right)$ are called the $k$-faces of $\Delta_{n}$; there are $\binom{n+1}{k+1}$ of them.\\
-3.4 Every base $b_{1}, b_{2}, \ldots, b_{n}$ of the vector space $\mathbb{R}^{n}$ defines a $C W$-subdivision (lattice) of $\mathbb{R}^{n}$ as follows: The $k$-cells are the sets
+If we identify $\Delta_{k} \approx \mathbb{B}^{k}$ then the linear map $\Phi^{i_{0} \ldots i_{k}}: \Delta_{k} \rightarrow \Delta_{n}$ which takes the $v$-th vertex $e_{v} \in \Delta_{k}$ into $e_{i_{v}} \in \Delta_{n}$ is characteristic for $e^{i_{0} \ldots i_{k}}$. This $C W$ decomposition of $\Delta_{n}$ is invariant under linear maps $\Delta_{n} \rightarrow \Delta_{n}$ which permute the vertices.-The closed sets $\bar{e}^{i_{0} \ldots i_{k}}=\operatorname{im}\left(\Phi^{i_{0} \ldots i_{k}}\right)$ are called the $k$-faces of $\Delta_{n}$; there are $\binom{n+1}{k+1}$ of them.
+\end{EXA}
+
+
+\begin{EXA}{AT-D72-07-34}{CW-Gitter}
+Every base $b_{1}, b_{2}, \ldots, b_{n}$ of the vector space $\mathbb{R}^{n}$ defines a $C W$-subdivision (lattice) of $\mathbb{R}^{n}$ as follows: The $k$-cells are the sets
 
 $$
 e_{j_{1} \ldots j_{n}}^{i_{1} \ldots i_{k}}=\left\{\sum_{\mu=1}^{n} j_{\mu} b_{\mu}+\sum_{v=1}^{k} t_{v} b_{i_{v}} \mid 0<t_{v}<1\right\}
 $$
 
-where $j_{\mu} \in \mathbb{Z}$ are arbitrary integers, and $i_{\nu}$ are integers such that $1 \leq i_{1}<i_{2} \cdots<i_{k} \leq n$. The map $[0,1]^{k} \rightarrow \mathbb{R}^{n},\left(t_{1} \ldots t_{k}\right) \mapsto \sum j_{\mu} b_{\mu}+\sum t_{v} b_{i_{v}}$ is characteristic for $e_{j_{1} \ldots j_{n}}^{i_{1} \ldots i_{k}}$ (using $[0,1]^{k} \approx \mathbb{B}^{k}$ ). If the basic vectors $b_{\mu}$ are mutually orthogonal and of equal length then all cells are cubes (cubical lattice).\\
-3.5 If $F$ is a (not necessarily commutative) field then the projective $n$-space $P_{n} F, n \geq 0$, is the set of all 1-dimensional linear subspaces of the (left) vector space $F^{n+1}$. Any non-zero vector $\left(\xi_{0}, \ldots, \xi_{n}\right) \in F^{n+1}$ generates a 1 -dimensional subspace which we denote by $\left[\xi_{0}, \ldots, \xi_{n}\right]$. The scalars $\xi_{i}$ are called the homogeneous coordinates of $\left[\xi_{0}, \ldots, \xi_{n}\right] \in P_{n} F$; they are only determined up to a common (left) factor $\lambda \in F^{*}=F-\{0\}=$ multiplicative group of $F$. We can therefore think of $P_{n} F$ as being obtained from $F^{n+1}-\{0\}$ by identifying vectors which are proportional: $P_{n} F=\left(F^{n+1}-\{0\}\right) / F^{*}=$ set of orbits of $F^{*}$ in $F^{n+1}-\{0\}$.\\
-If $F$ is the field of real numbers $\mathbb{R}$, complex numbers $\mathbb{C}$, or quaternions $\mathbb{I}\left[\right.$ then $F^{n+1}-\{0\}$ is a topological space and we can equip $P_{n} F=$ $\left(F^{n+1}-\{0\}\right) / F^{*}$ with the identification topology; let $\pi: F^{n+1}-\{0\} \rightarrow P_{n} F$ be the identification map. We show that $P_{n} F$ is a Hausdorff space: If $\xi=\left[\xi_{0}, \ldots, \xi_{n}\right], \eta=\left[\eta_{0}, \ldots, \eta_{n}\right]$ are two different points then there are indices $i, j$ such that $\left(\xi_{i}, \xi_{j}\right)$ and $\left(\eta_{i}, \eta_{j}\right)$ are not proportional. We can assume that $\xi_{i}, \eta_{i}$ are real numbers; then $\xi_{i} \eta_{j}-\xi_{j} \eta_{i} \neq 0$ (this is a determinant if $F=\mathbb{R}$ or $\mathbb{C}$; if $F=\mathbb{H}$ it still has the same properties because $\xi_{i}, \eta_{i}$ are in the center of $\mathbb{H}$ ). Let $V$ (resp. $W$ ) consist of all points $\zeta=\left[\zeta_{0}, \ldots, \zeta_{n}\right] \in P_{n} F$ such that $\left\|\zeta_{j} \xi_{i}-\zeta_{i} \xi_{j}\right\|$ is smaller (resp. greater) than $\left\|\zeta_{j} \eta_{i}-\zeta_{i} \eta_{j}\right\|$; then $\pi^{-1} V, \pi^{-1} W$ are disjoint open sets, hence $V, W$ are disjoint neighborhood of $\xi, \eta$.\\
-Every 1-dimensional subspace of $F^{n+1}$ meets the sphere $\mathbb{S}^{(n+1) d-1}=$ $\left\{x \in F^{n+1} \mid\|x\|=1\right\}$ where $d=\operatorname{dim}(F)=1,2$, or 4 . Therefore $\rho_{n}=\pi \mid \mathbb{S}^{(n+1) d-1}$ is a surjective map $\mathbb{S}^{(n+1) d-1} \rightarrow P_{n} F$, and because spheres are compact $\rho_{n}$ is even an identification map (called Hopf-map). Thus $P_{n} F$ can be obtained from $\mathbb{S}^{(n+1) d-1}$ by identifying points which differ only by a (left) factor $\lambda \in F^{*}$; this factor must have absolute value $\|\lambda\|=1$, i.e., $\lambda \in \mathbb{S}^{d-1}$, hence $P_{n} F \approx \mathbb{S}^{(n+1) d-1} / \mathbb{S}^{d-1}=$ space of orbits of $\mathbb{S}^{d-1}$ in $\mathbb{S}^{(n+1) d-1}$. In particular, $P_{n} F$ is compact.-In the real case, $F=\mathbb{R}$, the sphere $\mathbb{S}^{d-1}=\mathbb{S}^{0}$ consists of the numbers $+1,-1$ only; thus $P_{n} \mathbb{R}$ is obtained from $\mathbb{S}^{n}$ by identifying antipodal points.\\
-A $C W$-decomposition of $P_{n} F$ is as follows: Put
+where $j_{\mu} \in \mathbb{Z}$ are arbitrary integers, and $i_{\nu}$ are integers such that $1 \leq i_{1}<i_{2} \cdots<i_{k} \leq n$. The map $[0,1]^{k} \rightarrow \mathbb{R}^{n},\left(t_{1} \ldots t_{k}\right) \mapsto \sum j_{\mu} b_{\mu}+\sum t_{v} b_{i_{v}}$ is characteristic for $e_{j_{1} \ldots j_{n}}^{i_{1} \ldots i_{k}}$ (using $[0,1]^{k} \approx \mathbb{B}^{k}$ ). If the basic vectors $b_{\mu}$ are mutually orthogonal and of equal length then all cells are cubes (cubical lattice).
+\end{EXA}
 
+
+3.5 
+
+\begin{EXA}{AT-D72-07-35}{CW-Dekomposition von Projektiven Räumen}
+If $F$ is a (not necessarily commutative) field then the projective $n$-space $P_{n} F, n \geq 0$, is the set of all 1-dimensional linear subspaces of the (left) vector space $F^{n+1}$. Any non-zero vector $\left(\xi_{0}, \ldots, \xi_{n}\right) \in F^{n+1}$ generates a 1 -dimensional subspace which we denote by $\left[\xi_{0}, \ldots, \xi_{n}\right]$. The scalars $\xi_{i}$ are called the homogeneous coordinates of $\left[\xi_{0}, \ldots, \xi_{n}\right] \in P_{n} F$; they are only determined up to a common (left) factor $\lambda \in F^{*}=F-\{0\}=$ multiplicative group of $F$. We can therefore think of $P_{n} F$ as being obtained from $F^{n+1}-\{0\}$ by identifying vectors which are proportional: $P_{n} F=\left(F^{n+1}-\{0\}\right) / F^{*}=$ set of orbits of $F^{*}$ in $F^{n+1}-\{0\}$.\\
+If $F$ is the field of real numbers $\mathbb{R}$, complex numbers $\mathbb{C}$, or quaternions $\mathbb{I}\left[\right.$ then $F^{n+1}-\{0\}$ is a topological space and we can equip $P_{n} F=$ $\left(F^{n+1}-\{0\}\right) / F^{*}$ with the identification topology; let $\pi: F^{n+1}-\{0\} \rightarrow P_{n} F$ be the identification map. We show that $P_{n} F$ is a Hausdorff space: If $\xi=\left[\xi_{0}, \ldots, \xi_{n}\right], \eta=\left[\eta_{0}, \ldots, \eta_{n}\right]$ are two different points then there are indices $i, j$ such that $\left(\xi_{i}, \xi_{j}\right)$ and $\left(\eta_{i}, \eta_{j}\right)$ are not proportional. We can assume that $\xi_{i}, \eta_{i}$ are real numbers; then $\xi_{i} \eta_{j}-\xi_{j} \eta_{i} \neq 0$ (this is a determinant if $F=\mathbb{R}$ or $\mathbb{C}$; if $F=\mathbb{H}$ it still has the same properties because $\xi_{i}, \eta_{i}$ are in the center of $\mathbb{H}$ ). Let $V$ (resp. $W$ ) consist of all points $\zeta=\left[\zeta_{0}, \ldots, \zeta_{n}\right] \in P_{n} F$ such that $\left\|\zeta_{j} \xi_{i}-\zeta_{i} \xi_{j}\right\|$ is smaller (resp. greater) than $\left\|\zeta_{j} \eta_{i}-\zeta_{i} \eta_{j}\right\|$; then $\pi^{-1} V, \pi^{-1} W$ are disjoint open sets, hence $V, W$ are disjoint neighborhood of $\xi, \eta$.
+
+Every 1-dimensional subspace of $F^{n+1}$ meets the sphere $\mathbb{S}^{(n+1) d-1}=$ $\left\{x \in F^{n+1} \mid\|x\|=1\right\}$ where $d=\operatorname{dim}(F)=1,2$, or 4 . Therefore $\rho_{n}=\pi \mid \mathbb{S}^{(n+1) d-1}$ is a surjective map $\mathbb{S}^{(n+1) d-1} \rightarrow P_{n} F$, and because spheres are compact $\rho_{n}$ is even an identification map (called Hopf-map). Thus $P_{n} F$ can be obtained from $\mathbb{S}^{(n+1) d-1}$ by identifying points which differ only by a (left) factor $\lambda \in F^{*}$; this factor must have absolute value $\|\lambda\|=1$, i.e., $\lambda \in \mathbb{S}^{d-1}$, hence $P_{n} F \approx \mathbb{S}^{(n+1) d-1} / \mathbb{S}^{d-1}=$ space of orbits of $\mathbb{S}^{d-1}$ in $\mathbb{S}^{(n+1) d-1}$. In particular, $P_{n} F$ is compact.-In the real case, $F=\mathbb{R}$, the sphere $\mathbb{S}^{d-1}=\mathbb{S}^{0}$ consists of the numbers $+1,-1$ only; thus $P_{n} \mathbb{R}$ is obtained from $\mathbb{S}^{n}$ by identifying antipodal points.
+
+A $C W$-decomposition of $P_{n} F$ is as follows: Put
 $$
 e^{k}=\left\{\left[\xi_{0}, \ldots, \xi_{n}\right] \in P_{n} F \mid \xi_{k} \neq 0, \xi_{j}=0 \text { for } j>k\right\}, \quad k=0,1, \ldots, n ;
 $$
-
 i.e., $e^{k}$ is obtained from $P_{k} F=\left\{\xi \mid \xi_{j}=0\right.$ for $\left.j>k\right\}$ by removing the hyperplane at infinity ( $\xi_{k}=0$ ). Thus, $e^{k}$ is homeomorphic with affine space $F^{k} \approx \mathbb{R}^{d k}$; a homeomorphism is given by
-
 $$
 \left[\xi_{0}, \ldots, \xi_{n}\right] \mapsto\left(\xi_{k}^{-1} \xi_{0}, \ldots, \xi_{k}^{-1} \xi_{k-1}\right) .
 $$
-
 Clearly $P_{n} F=e^{0} \cup e^{1} \cup \cdots \cup e^{n}$ is a decomposition of $P_{n} F$ into disjoint cells of dimension $0, d, 2 d \ldots n d$; it remains to find a characteristic map\\
 $\Phi^{k}: \mathbb{B}^{d k} \rightarrow P_{n} F$ for $e^{k}$. Let $\mathbb{B}^{d k}=\left\{z \in F^{k} \mid\|z\| \leq 1\right\}$, and define
-
 $$
 \Phi^{k}: \mathbb{B}^{d k} \rightarrow P_{n} F, \Phi^{k}\left(z_{0}, \ldots, z_{k-1}\right)=\left[z_{0}, z_{1}, \ldots, z_{k-1}, 1-\|z\|, 0, \ldots, 0\right] .
 $$
-
 The composition ( $\mathbb{B}^{d k}-\mathbb{S}^{d k-1}$ ) $\xrightarrow{\Phi^{k}} e^{k} \approx F^{k}$ takes ( $z_{0}, \ldots, z_{k-1}$ ) into $\left(z_{0} /(1-\|z\|), \ldots, z_{k-1} /(1-\|z\|)\right)$, and is clearly a homeomorphism (IV, 1.2); therefore $\Phi^{k}$ is a characteristic map.
 
-It is interesting to note that the characteristic map $\Phi^{n}: \mathbb{B}^{d n} \rightarrow P_{n} F$ is surjective and hence an identification map. The attaching map $\Phi^{n} \mid \mathbb{S}^{d n-1}$ agrees with the Hopf-map $\rho_{n-1}:\left(z_{0}, \ldots, z_{n-1}\right) \mapsto\left[z_{0}, \ldots, z_{n-1}\right]$. Thus $P_{n} F$ can be obtained from $\mathrm{IB}^{d n}$ by identifying points on the boundary $\mathbb{S}^{d n-1}$ which differ only by a factor $\dot{\lambda} \in \mathbb{S}^{d-1} \subset F^{*}$. In particular, $P_{n} \mathbb{R}$ is obtained from $\mathbb{B}^{n}$ by identifying antipodal points on the boundary $\mathbb{S}^{n-1}$.\\
-3.7 If $X$ is a $C W$-space and $X^{\prime} \subset X$ a $C W$-subspace then the quotient $X^{\prime \prime}=X / X^{\prime}$ (which is obtained by identifying all of $X^{\prime}$ to a single point) inherits a CW-structure from $X$, and the identification map $\rho: X \rightarrow X^{\prime \prime}$ maps cells onto cells. In fact, if $\mathscr{E}^{\prime} \subset \mathscr{E}$ denotes the set of all cells in $X^{\prime}$ then $\mathscr{E}^{\prime \prime}=\left\{X^{\prime}\right\} \cup\left\{\rho(e) \mid e \in \mathscr{E}-\mathscr{E}^{\prime}\right\}$ is a $C W$-decomposition of $X^{\prime \prime}$.
+It is interesting to note that the characteristic map $\Phi^{n}: \mathbb{B}^{d n} \rightarrow P_{n} F$ is surjective and hence an identification map. The attaching map $\Phi^{n} \mid \mathbb{S}^{d n-1}$ agrees with the Hopf-map $\rho_{n-1}:\left(z_{0}, \ldots, z_{n-1}\right) \mapsto\left[z_{0}, \ldots, z_{n-1}\right]$. Thus $P_{n} F$ can be obtained from $\mathrm{IB}^{d n}$ by identifying points on the boundary $\mathbb{S}^{d n-1}$ which differ only by a factor $\dot{\lambda} \in \mathbb{S}^{d-1} \subset F^{*}$. In particular, $P_{n} \mathbb{R}$ is obtained from $\mathbb{B}^{n}$ by identifying antipodal points on the boundary $\mathbb{S}^{n-1}$.
+\end{EXA}
 
-Proof. $X^{\prime \prime}$ is hausdorff: If $P \in X^{\prime \prime}-\left\{X^{\prime}\right\}$ then, by normality 2.11, there is a function $\tau: X \rightarrow[0,1]$ such that $\tau\left(\rho^{-1} P\right)=0, \tau \mid X^{\prime}=1$; passing to quotients it induces a function $\tau^{\prime \prime}: X^{\prime \prime} \rightarrow[0,1]$ which separates $P$ and $\left\{X^{\prime}\right\}$. If $P, Q$ are different points in $X^{\prime \prime}-\left\{X^{\prime}\right\}$ then $\rho^{-1} P, \rho^{-1} Q$ have disjoint neighborhoods $V, W$ in $X-X^{\prime}$, hence $\rho V, \rho W$ are disjoint neighborhoods of $P, Q$.-If $\Phi: \mathbb{B}^{n} \rightarrow X$ is a characteristic map for $e \in \mathscr{E}-\mathscr{E}^{\prime}$ then $\rho \Phi$ is characteristic for $\rho(e)$, proving 2.1 (iii). Clearly, closurefiniteness passes from $X$ to $X^{\prime \prime}$. Finally, if $A \subset X^{\prime \prime}$ meets every $\overline{\rho(e)}=\rho \Phi_{e}\left(\mathbb{B}^{n}\right), \quad e \in \mathscr{E}-\mathscr{E}^{\prime}$, in a closed set then $\rho^{-1} A$ meets every $X^{\prime} \cup \Phi_{e}\left(\mathbb{B}^{n}\right)$ in a closed set, hence $\rho^{-1} A$ is closed, hence $A$ is closed, proving $2.1(\mathrm{v})$.
 
-For instance, $P_{k} F=\left\{\left[\xi_{0}, \ldots, \xi_{n}\right] \in P_{n} F \mid \xi_{j}=0\right.$ for $\left.j>k\right\}, k \leq n$, is a $C W$ subspace of $P_{n} F$ (see 3.5); the quotient $P_{n} F / P_{k} F$ is known as stunted projective space; it decomposes into cells $e^{0}, e^{k+1}, \ldots, e^{n}$ of dimension 0 , $d(k+1), \ldots, d n$ where $d=1,2,4$ as $F=\mathbb{R}, \mathbb{C}, \mathbb{H}$. If $k=n-1$ then $P_{n} F / P_{n-1} F \approx \mathbb{S}^{d n}$ (compare 3.2).\\
-3.8 If $\left\{X_{\lambda}\right\}_{\lambda \in A}$ is a family of $C W$-spaces then the topological sum $X=\oplus_{\lambda \in \Lambda} X_{\lambda}$ is also a $C W$-space; this is quite obvious from the definitions. If $e_{\lambda}^{0}$ is a zero-cell of $X_{\lambda}$ then $X^{\prime}=\bigcup_{\lambda} e_{\lambda}^{0}$ is a (discrete) $C W$ subspace of $X$. The quotient $X / X^{\prime}$ is the wedge (compare III, 7 ; Exerc. 2) of the spaces $X_{\lambda}$ (with base points $e_{\lambda}^{0}$ ), $X / X^{\prime}=\vee_{\lambda} X_{\lambda}$. In\\
-particular, any wedge of CW-spaces (with zero-cells as base points) is again a CW-space.\\
-3.9 If $X, Y$ are spaces with $C W$-decomposition $\mathscr{A}=\{a\}, \mathscr{B}=\{b\}$ then $\mathscr{A} \times \mathscr{B}=\{a \times b\}$ is a decomposition of $X \times Y$ into disjoint cells. Is it a CW-decomposition? Axioms 2.1 (i)-(iv) are easily verified; one finds that $(X \times Y)^{n}=\bigcup_{i+j=n} X^{i} \times Y^{j}$, and that products of characteristic maps are characteristic (using $\mathbb{B}^{i} \times \mathbb{B}^{j} \approx \mathbb{B}^{i+j}$ ). In particular, the answer is affirmative if $X, Y$ are compact. Axiom $2.1(\mathrm{v})$, however, fails to hold, in general (Exerc. 4). It is satisfied if one of $X, Y$ is locally compact, i.e., $\mathscr{A} \times \mathscr{B}$ is a $C W$-decomposition if one of $X, Y$ is locally compact.
+3.7 
+
+\begin{EXA}{AT-D72-07-36}{Quotientenraum als CW-Raum}
+If $X$ is a $C W$-space and $X^{\prime} \subset X$ a $C W$-subspace then the quotient $X^{\prime \prime}=X / X^{\prime}$ (which is obtained by identifying all of $X^{\prime}$ to a single point) inherits a CW-structure from $X$, and the identification map $\rho: X \rightarrow X^{\prime \prime}$ maps cells onto cells. In fact, if $\mathscr{E}^{\prime} \subset \mathscr{E}$ denotes the set of all cells in $X^{\prime}$ then $\mathscr{E}^{\prime \prime}=\left\{X^{\prime}\right\} \cup\left\{\rho(e) \mid e \in \mathscr{E}-\mathscr{E}^{\prime}\right\}$ is a $C W$-decomposition of $X^{\prime \prime}$.
+\end{EXA}
+
+Proof. 
+
+\begin{PROOF}{AT-D72-07-37}{P: Quotientenraum als CW-Raum}
+$X^{\prime \prime}$ is hausdorff: If $P \in X^{\prime \prime}-\left\{X^{\prime}\right\}$ then, by normality 2.11, there is a function $\tau: X \rightarrow[0,1]$ such that $\tau\left(\rho^{-1} P\right)=0, \tau \mid X^{\prime}=1$; passing to quotients it induces a function $\tau^{\prime \prime}: X^{\prime \prime} \rightarrow[0,1]$ which separates $P$ and $\left\{X^{\prime}\right\}$. If $P, Q$ are different points in $X^{\prime \prime}-\left\{X^{\prime}\right\}$ then $\rho^{-1} P, \rho^{-1} Q$ have disjoint neighborhoods $V, W$ in $X-X^{\prime}$, hence $\rho V, \rho W$ are disjoint neighborhoods of $P, Q$.-If $\Phi: \mathbb{B}^{n} \rightarrow X$ is a characteristic map for $e \in \mathscr{E}-\mathscr{E}^{\prime}$ then $\rho \Phi$ is characteristic for $\rho(e)$, proving 2.1 (iii). Clearly, closurefiniteness passes from $X$ to $X^{\prime \prime}$. Finally, if $A \subset X^{\prime \prime}$ meets every $\overline{\rho(e)}=\rho \Phi_{e}\left(\mathbb{B}^{n}\right), \quad e \in \mathscr{E}-\mathscr{E}^{\prime}$, in a closed set then $\rho^{-1} A$ meets every $X^{\prime} \cup \Phi_{e}\left(\mathbb{B}^{n}\right)$ in a closed set, hence $\rho^{-1} A$ is closed, hence $A$ is closed, proving $2.1(\mathrm{v})$.
+\end{PROOF}
+
+\begin{EXA}{AT-D72-07-38}{Stunted Projective Space}
+For instance, $P_{k} F=\left\{\left[\xi_{0}, \ldots, \xi_{n}\right] \in P_{n} F \mid \xi_{j}=0\right.$ for $\left.j>k\right\}, k \leq n$, is a $C W$ subspace of $P_{n} F$ (see 3.5); the quotient $P_{n} F / P_{k} F$ is known as stunted projective space; it decomposes into cells $e^{0}, e^{k+1}, \ldots, e^{n}$ of dimension 0 , $d(k+1), \ldots, d n$ where $d=1,2,4$ as $F=\mathbb{R}, \mathbb{C}, \mathbb{H}$. If $k=n-1$ then $P_{n} F / P_{n-1} F \approx \mathbb{S}^{d n}$ (compare 3.2).
+\end{EXA}
+
+
+3.8 
+
+
+\begin{EXA}{AT-D72-07-39}{Topologische Summen und Keil Produkte sind wieder CW-Räume}
+If $\left\{X_{\lambda}\right\}_{\lambda \in A}$ is a family of $C W$-spaces then the topological sum $X=\oplus_{\lambda \in \Lambda} X_{\lambda}$ is also a $C W$-space; this is quite obvious from the definitions. If $e_{\lambda}^{0}$ is a zero-cell of $X_{\lambda}$ then $X^{\prime}=\bigcup_{\lambda} e_{\lambda}^{0}$ is a (discrete) $C W$ subspace of $X$. The quotient $X / X^{\prime}$ is the wedge (compare III, 7 ; Exerc. 2) of the spaces $X_{\lambda}$ (with base points $e_{\lambda}^{0}$ ), $X / X^{\prime}=\vee_{\lambda} X_{\lambda}$. In particular, any wedge of CW-spaces (with zero-cells as base points) is again a CW-space.
+\end{EXA}
+
+
+
+3.9 
+
+\begin{EXA}{AT-D72-07-40}{Kreuzprodukte als CW-Räume}
+If $X, Y$ are spaces with $C W$-decomposition $\mathscr{A}=\{a\}, \mathscr{B}=\{b\}$ then $\mathscr{A} \times \mathscr{B}=\{a \times b\}$ is a decomposition of $X \times Y$ into disjoint cells. Is it a CW-decomposition? Axioms 2.1 (i)-(iv) are easily verified; one finds that $(X \times Y)^{n}=\bigcup_{i+j=n} X^{i} \times Y^{j}$, and that products of characteristic maps are characteristic (using $\mathbb{B}^{i} \times \mathbb{B}^{j} \approx \mathbb{B}^{i+j}$ ). In particular, the answer is affirmative if $X, Y$ are compact. Axiom $2.1(\mathrm{v})$, however, fails to hold, in general (Exerc. 4). It is satisfied if one of $X, Y$ is locally compact, i.e., $\mathscr{A} \times \mathscr{B}$ is a $C W$-decomposition if one of $X, Y$ is locally compact.
 
 Proof. Let $\Phi_{a}: \mathbb{B}^{|a|} \rightarrow X, \Phi_{b}: \mathbb{B}^{|b|} \rightarrow Y$ be characteristic maps for $a \in \mathscr{A}$, $b \in \mathscr{B}$. We have to show that
 
@@ -2621,26 +2899,43 @@ $$
 \oplus \mathbb{B}^{|a|} \times \mathbb{B}^{|b|}=\left(\oplus \mathbb{B}^{|a|}\right) \times\left(\oplus \mathbb{B}^{|b|}\right) \xrightarrow{\left\{\Phi_{a}\right\} \times \mathrm{id}} X \times\left(\oplus \mathbb{B}^{|b|}\right) \xrightarrow{\mathrm{id} \times\left\{\Phi_{b}\right\}} X \times Y .
 $$
 
-The first arrow is an identification map because $\oplus \mathbb{B}^{|h|}$ is locally compact (and $\left\{\Phi_{a}\right\}$ is an identification map), the second arrow is an identification map if $X$ is locally compact (cf. 2.13). Hence the result, because identification maps compose.\\
-3.10 The unit interval $[0,1]$ is compact and has the $C W$-decomposition $[0,1]=\{0\} \cup\{1\} \cup(0,1)$. If $X$ is any $C W$-space then, by $3.9,[0,1] \times X$ is a $C W$-space with cells $\{0\} \times e,\{1\} \times e,(0,1) \times e$ where $e$ ranges over all cells of $X$. The suspension $\Sigma X$ of $X$ is obtained from $[0,1] \times X$ by shrinking each of the $C W$-subspaces $\{0\} \times \mathrm{X},\{1\} \times X$ to a point. By 3.7 is has a $C W$-decomposition into cells $(0,1) \times e$, plus the two zero-cells $\{0\} \times X,\{1\} \times X$.\\
-3.11 Exercises. 1. As in IV, 2, Exerc. 4, let $D_{h}$ be the space which is obtained from the 2 -sphere by removing the interiors of $h+1$ disjoint discs, i.e., by puncturing $h+1$ holes. Take two copies of $D_{h}$ and identify corresponding points on the boundary circles. The resulting space $S_{h}$ is called orientable surface of genus $h$. Show (say by induction on $h$ ) that $S_{h}$ admits a $C W$-decomposition consisting of one 0 -cell, $2 h$ 1-cells $a_{1}, \ldots, a_{h}, b_{1}, \ldots, b_{h}$, and one 2-cell $e^{2}$ whose attaching map $\varphi: \mathbb{S}^{1} \rightarrow S_{h}^{1}$ is as follows: Subdivide $\mathbb{S}^{1}$ into $4 h$ equal consecutive segments\\
-$\alpha_{1}, \beta_{1}, \alpha_{1}^{-}, \beta_{1}^{-}, \ldots, \alpha_{h}, \beta_{h}, \alpha_{h}^{-}, \beta_{h}^{-}$, map $\alpha_{i}, \alpha_{i}^{-}$linearly (but with opposite orientation) onto $a_{i}$; similarly for $\beta_{i}, \beta_{i}^{-}, b_{i}$.\\
+The first arrow is an identification map because $\oplus \mathbb{B}^{|h|}$ is locally compact (and $\left\{\Phi_{a}\right\}$ is an identification map), the second arrow is an identification map if $X$ is locally compact (cf. 2.13). Hence the result, because identification maps compose.
+\end{EXA}
+
+
+3.10 
+
+\begin{EXA}{AT-D72-07-41}{Kreuzprodukt mit kompakten Intervall als CW-Raum}
+The unit interval $[0,1]$ is compact and has the $C W$-decomposition $[0,1]=\{0\} \cup\{1\} \cup(0,1)$. If $X$ is any $C W$-space then, by $3.9,[0,1] \times X$ is a $C W$-space with cells $\{0\} \times e,\{1\} \times e,(0,1) \times e$ where $e$ ranges over all cells of $X$. The suspension $\Sigma X$ of $X$ is obtained from $[0,1] \times X$ by shrinking each of the $C W$-subspaces $\{0\} \times \mathrm{X},\{1\} \times X$ to a point. By 3.7 is has a $C W$-decomposition into cells $(0,1) \times e$, plus the two zero-cells $\{0\} \times X,\{1\} \times X$.\\
+\end{EXA}
+
+
+
+3.11 Exercises. 1. 
+
+
+\begin{EXE}{AT-D72-07-42}{Exercise (orientierte Flächen)}
+As in IV, 2, Exerc. 4, let $D_{h}$ be the space which is obtained from the 2 -sphere by removing the interiors of $h+1$ disjoint discs, i.e., by puncturing $h+1$ holes. Take two copies of $D_{h}$ and identify corresponding points on the boundary circles. The resulting space $S_{h}$ is called orientable surface of genus $h$. Show (say by induction on $h$ ) that $S_{h}$ admits a $C W$-decomposition consisting of one 0 -cell, $2 h$ 1-cells $a_{1}, \ldots, a_{h}, b_{1}, \ldots, b_{h}$, and one 2-cell $e^{2}$ whose attaching map $\varphi: \mathbb{S}^{1} \rightarrow S_{h}^{1}$ is as follows: Subdivide $\mathbb{S}^{1}$ into $4 h$ equal consecutive segments $\alpha_{1}, \beta_{1}, \alpha_{1}^{-}, \beta_{1}^{-}, \ldots, \alpha_{h}, \beta_{h}, \alpha_{h}^{-}, \beta_{h}^{-}$, map $\alpha_{i}, \alpha_{i}^{-}$linearly (but with opposite orientation) onto $a_{i}$; similarly for $\beta_{i}, \beta_{i}^{-}, b_{i}$.
+
 Clearly $\varphi$ is surjective, hence $S_{h}$ is obtained from $\mathbb{B}^{2}$ by identifying points on the boundary $\mathbb{S}^{1}$ which have the same $\varphi$-image (see Fig.8). Show that $S_{0} \approx \mathbb{S}^{2}, S_{1} \approx \mathbb{S}^{1} \times \mathbb{S}^{1}$. Compare this and the next exercise with Seifert-Threlfall §§37-38.
 
-\begin{figure}[h]
-  \includegraphics[scale=0.3,center]{2025_08_12_9d8b5b8a6f64e138b105g-104}
-\end{figure}
 
-\begin{figure}[h]
-  \includegraphics[scale=0.3,center]{2025_08_12_9d8b5b8a6f64e138b105g-104(1)}
-\end{figure}
+\includegraphics[scale=0.3,center]{2025_08_12_9d8b5b8a6f64e138b105g-104}
 
-\begin{enumerate}
-  \setcounter{enumi}{1}
-  \item As in 1 . let $D_{k-1}$ be the 2 -sphere with $k$ holes, $k>0$. On the boundary circle of each hole identify antipodal points. The resulting space $P_{k}$ is called non-orientable surface of genus $k$. Show that $P_{k}$ admits a $C W$ decomposition consisting of one 0 -cell, $k 1$-cells $a_{1}, \ldots, a_{k}$, and one 2-cell $e^{2}$ whose attaching map is described by the symbol $\alpha_{1} \alpha_{1} \alpha_{2} \alpha_{2} \ldots \alpha_{k} \alpha_{k}$ (analogous to Exerc. 1), hence $P_{k}$ is obtained from $\mathbb{B}^{2}$ by identifying points on the boundary as indicated in Fig.9. Show that $P_{1} \approx P_{2} \mathbb{R}$.
-  \item Let $\pi_{q}$ be the group of complex numbers $\zeta \in \mathbb{C}$ such that $\zeta^{q}=1$ (it is cyclic of order $q$ with generator $t=e^{2 \pi i / q}$ ). This group $\pi_{q}$ operates on $\mathbb{S}^{2 n-1}=\left\{z \in \mathbb{C}^{n} \mid\|z\|=1\right\}$ by ordinary scalar multiplication. The orbit space $L_{q}^{2 n-1}=\mathbb{S}^{2 n-1} / \pi_{q}$ (obtained by identifying $z$ with $t z$ ) is called lens space. Show that the following cells form a $C W$-decomposition of $\mathbb{S}^{2 n-1}$ which is compatible with the operation of $\pi_{q}$ and which (by projection) induces a $C W$-decomposition of $L_{q}^{2 n-1}$.
-\end{enumerate}
 
+\includegraphics[scale=0.3,center]{2025_08_12_9d8b5b8a6f64e138b105g-104(1)}
+
+
+\end{EXE}
+
+
+\begin{EXE}{AT-D72-07-43}{Exercise (nicht-orientierbare Flächen)}
+As in 1 . let $D_{k-1}$ be the 2 -sphere with $k$ holes, $k>0$. On the boundary circle of each hole identify antipodal points. The resulting space $P_{k}$ is called non-orientable surface of genus $k$. Show that $P_{k}$ admits a $C W$ decomposition consisting of one 0 -cell, $k 1$-cells $a_{1}, \ldots, a_{k}$, and one 2-cell $e^{2}$ whose attaching map is described by the symbol $\alpha_{1} \alpha_{1} \alpha_{2} \alpha_{2} \ldots \alpha_{k} \alpha_{k}$ (analogous to Exerc. 1), hence $P_{k}$ is obtained from $\mathbb{B}^{2}$ by identifying points on the boundary as indicated in Fig.9. Show that $P_{1} \approx P_{2} \mathbb{R}$.
+\end{EXE}
+  
+  
+\begin{EXE}{AT-D72-07-44}{Exercise (Linsen-Raum)}
+Let $\pi_{q}$ be the group of complex numbers $\zeta \in \mathbb{C}$ such that $\zeta^{q}=1$ (it is cyclic of order $q$ with generator $t=e^{2 \pi i / q}$ ). This group $\pi_{q}$ operates on $\mathbb{S}^{2 n-1}=\left\{z \in \mathbb{C}^{n} \mid\|z\|=1\right\}$ by ordinary scalar multiplication. The orbit space $L_{q}^{2 n-1}=\mathbb{S}^{2 n-1} / \pi_{q}$ (obtained by identifying $z$ with $t z$ ) is called lens space. Show that the following cells form a $C W$-decomposition of $\mathbb{S}^{2 n-1}$ which is compatible with the operation of $\pi_{q}$ and which (by projection) induces a $C W$-decomposition of $L_{q}^{2 n-1}$.
 $$
 \begin{aligned}
 e_{r}^{2 k} & =\left\{\left(z_{0}, z_{1}, \ldots, z_{n-1}\right) \in \mathbb{S}^{2 n-1} \mid z_{j}=0 \text { for } j>k, \arg \left(z_{k}\right)=r \frac{2 \pi}{q}\right\}, \\
@@ -2648,14 +2943,29 @@ e_{r}^{2 k+1} & =\left\{\left(z_{0}, \ldots, z_{n-1}\right) \in \mathbb{S}^{2 n-
 r & =0,1, \ldots, q-1, \quad k=0,1, \ldots, n-1 .
 \end{aligned}
 $$
-
 More generally, let ( $l_{1}, \ldots, l_{n-1}$ ) be integers prime to $q$ and let $\pi_{q}$ operate on $\mathbb{S}^{2 n-1}$ by $t\left(z_{0}, \ldots, z_{n-1}\right)=\left(t z_{0}, t^{l_{1}} z_{1}, \ldots, t^{l_{n-1}} z_{n-1}\right)$. The orbit space\\
-$L_{q}^{2 n-1}\left(l_{1}, \ldots, l_{n-1}\right)$ is still called lens space. Construct $C W$-decompositions as above.\\
+$L_{q}^{2 n-1}\left(l_{1}, \ldots, l_{n-1}\right)$ is still called lens space. Construct $C W$-decompositions as above.
+\end{EXE}
+
+
 $4^{*}$. The product $\mathscr{A} \times \mathscr{B}$ of two countable $C W$-decompositions is again a $C W$-decomposition (Milnor 1956, Lemma 2.1). If $X=\vee[0,1]$ is a wedge of uncountably many unit segments (base point 0 ) then $X \times X$ is not a CW-space (Dowker §5).
 
+
+
+\pagebreak
+
+
 \section*{Homology Properties of CW-Spaces}
-We show that the filtration of a $C W$-space $X$ by skeletons $X^{n}$ is cellular, determine the cellular chain groups $W_{n} X$, and deduce consequences for $H X$.\\
-4.1 Proposition. Let $X$ be a $C W$-space, $Y \subset X$ a $C W$-subspace (e.g., $Y=\emptyset$ ), and put $X_{Y}^{n}=X^{n} \cup Y$ (in particular, $X_{Y}^{n}=Y$ for $n<0$ ). Let $M_{Y}^{n} \subset\left(X_{Y}^{n}-X_{Y}^{n-1}\right)$ be a set which meets every $n$-cell of $X-Y$ in exactly one point. Then
+
+
+We show that the filtration of a $C W$-space $X$ by skeletons $X^{n}$ is cellular, determine the cellular chain groups $W_{n} X$, and deduce consequences for $H X$.
+
+
+4.1 Proposition. 
+
+
+\begin{PROP}{AT-D72-07-45}{CW-Räume im Zellulären Setting}
+Let $X$ be a $C W$-space, $Y \subset X$ a $C W$-subspace (e.g., $Y=\emptyset$ ), and put $X_{Y}^{n}=X^{n} \cup Y$ (in particular, $X_{Y}^{n}=Y$ for $n<0$ ). Let $M_{Y}^{n} \subset\left(X_{Y}^{n}-X_{Y}^{n-1}\right)$ be a set which meets every $n$-cell of $X-Y$ in exactly one point. Then
 
 $$
 \begin{aligned}
@@ -2669,32 +2979,82 @@ $$
 
 where the sum $\oplus$ ranges over all $n$-cells $e$ in $\mathscr{E}^{n}(X-Y)=$ set of $n$-cells in $X-Y$, and $\mathbb{Z} \mathscr{E}^{n}(X-Y)$ is the free abelian group generated by $\mathscr{E}^{n}(X-Y)$.\\
 In particular, $\left\{X_{Y}^{n}\right\}$ is a cellular filtration of $X$ (cf. 2.6 for condition 1.1 (ii)), and the homology $H(X, Y)=H\left(X, X_{Y}^{-1}\right)$ is naturally isomorphic (1.3) to the homology of the cellular complex $W(X, Y)$, where $W_{n}(X, Y)=$ $H_{n}\left(X_{Y}^{n}, X_{Y}^{n-1}\right) \cong \mathbb{Z} \mathscr{E}^{n}(X-Y)$.
+\end{PROP}
 
-Proof. The first isomorphism follows because $X_{Y}^{n-1}$ is a deformation retract of $X_{Y}^{n}-M_{Y}^{n}$ (see 2.12), the second by excision (III, 7.4), the third because $X_{Y}^{n}-X_{Y}^{n-1}$ is the disjoint union of the open $n$-cells $e \in \mathscr{E}^{n}(X-Y)$, and the fourth because $H\left(e, e-M_{Y}^{n}\right) \cong H\left(\mathbb{R}^{n}, \mathbb{R}^{n}-0\right) \cong(\mathbb{Z}, n)$.\\
-4.3 Corollary. If $X$ is a compact $C W$-space then $H_{i} X$ is finitely generated for all $i$, and $H_{i} X=0$ for $i>\operatorname{dim} X$. More generally, if $Y \subset X$ is a $C W$ subspace such that $X-Y$ contains only finitely many $n$-cells (resp. no $n$-cells) then $H_{n}(X, Y)$ is finitely generated (resp. $H_{n}(X, Y)=0$ ).\\
-Indeed, already $W_{n}(X, Y)$ is finitely generated (resp. zero), and $H_{n}(X, Y)=$ $H_{n} W(X, Y)$.\\
-4.4 Corollary. If ( $X, Y$ ) is a pair of $C W$-spaces then the identification map $\rho:(X, Y) \rightarrow(X / Y,\{Y\})$ induces isomorphisms
+Proof. 
 
+\begin{PROOF}{AT-D72-07-46}{P: CW-Räume im Zellulären Setting}
+The first isomorphism follows because $X_{Y}^{n-1}$ is a deformation retract of $X_{Y}^{n}-M_{Y}^{n}$ (see 2.12), the second by excision (III, 7.4), the third because $X_{Y}^{n}-X_{Y}^{n-1}$ is the disjoint union of the open $n$-cells $e \in \mathscr{E}^{n}(X-Y)$, and the fourth because $H\left(e, e-M_{Y}^{n}\right) \cong H\left(\mathbb{R}^{n}, \mathbb{R}^{n}-0\right) \cong(\mathbb{Z}, n)$.
+\end{PROOF}
+
+
+4.3 Corollary. 
+
+
+\begin{KORO}{AT-D72-07-47}{Homologie-Eigenschaften von kompakten CW-Räumen}
+If $X$ is a compact $C W$-space then $H_{i} X$ is finitely generated for all $i$, and $H_{i} X=0$ for $i>\operatorname{dim} X$. More generally, if $Y \subset X$ is a $C W$ subspace such that $X-Y$ contains only finitely many $n$-cells (resp. no $n$-cells) then $H_{n}(X, Y)$ is finitely generated (resp. $H_{n}(X, Y)=0$ ).
+
+Indeed, already $W_{n}(X, Y)$ is finitely generated (resp. zero), and $H_{n}(X, Y)=$ $H_{n} W(X, Y)$.
+\end{KORO}
+
+4.4 Corollary. 
+
+\begin{KORO}{AT-D72-07-48}{Induzierte Abbildung für Identifikationsabbildung von CW-Raumpaaren }
+If ( $X, Y$ ) is a pair of $C W$-spaces then the identification map $\rho:(X, Y) \rightarrow(X / Y,\{Y\})$ induces isomorphisms
 $$
 \rho_{*}: H(X, Y) \cong H(X / Y,\{Y\})=\tilde{H}(X / Y) .
 $$
+\end{KORO}
 
-Indeed, by $3.7, X / Y$ is a $C W$-space and $\rho$ is a cellular map which maps the cells of $X-Y$ homeomorphically onto the corresponding cells of $X / Y-\{Y\}$; since $W(X, Y)$ depends only on the cells in $X-Y$ (cf. 3rd terms in 4.2) we get $W \rho: W(X, Y) \cong W(X / Y,\{Y\})$.\\
-4.5 Corollary. If $(X, Y),\left(X^{\prime}, Y^{\prime}\right)$ are pairs of $C W$-spaces and $f:(X, Y) \rightarrow$ ( $X^{\prime}, Y^{\prime}$ ) is a continuous (not necessarily cellular) map which, by passing to quotients, induces a homeomorphism $\bar{f}: X / Y \approx X^{\prime} / Y^{\prime}$ then $f_{*}: H(X, Y) \cong$ $H\left(X^{\prime}, Y^{\prime}\right)$.
+\begin{PROOF}{AT-D72-07-49}{P: Induzierte Abbildung für Identifikationsabbildung von CW-Raumpaaren }
+Indeed, by $3.7, X / Y$ is a $C W$-space and $\rho$ is a cellular map which maps the cells of $X-Y$ homeomorphically onto the corresponding cells of $X / Y-\{Y\}$; since $W(X, Y)$ depends only on the cells in $X-Y$ (cf. 3rd terms in 4.2) we get $W \rho: W(X, Y) \cong W(X / Y,\{Y\})$.
+\end{PROOF}
 
-This is a strong excision theorem. It follows immediately from 4.4.\\
-4.6 Corollary. If $X$ is a $C W$-space and $X_{1}, X_{2} \subset X$ are $C W$-subspaces then ( $X ; X_{1}, X_{2}$ ) is an excisive triad (see III, 8.1).\\
-Indeed, the inclusion $\left(X_{1}, X_{1} \cap X_{2}\right) \rightarrow\left(X_{1} \cup X_{2}, X_{2}\right)$ fulfils the hypothesis of 4.5 and is therefore a homology isomorphism.\\
-4.7 Proposition. If $Z \subset Y \subset X$ are $C W$-spaces and subspaces then the inclusions $(Y, Z) \rightarrow(X, Z) \rightarrow(X, Y)$ induce an exact sequence
+
+4.5 Corollary. 
+
+\begin{KORO}{AT-D72-07-50}{Starkes Ausscheidung Theorem für CW-Räume}
+If $(X, Y),\left(X^{\prime}, Y^{\prime}\right)$ are pairs of $C W$-spaces and $f:(X, Y) \rightarrow$ ( $X^{\prime}, Y^{\prime}$ ) is a continuous (not necessarily cellular) map which, by passing to quotients, induces a homeomorphism $\bar{f}: X / Y \approx X^{\prime} / Y^{\prime}$ then $f_{*}: H(X, Y) \cong$ $H\left(X^{\prime}, Y^{\prime}\right)$.
+\end{KORO}
+
+This is a strong excision theorem. It follows immediately from 4.4.
+
+
+4.6 Corollary. 
+
+\begin{KORO}{AT-D72-07-51}{Ausscheidung-Triade für CW-Räume}
+If $X$ is a $C W$-space and $X_{1}, X_{2} \subset X$ are $C W$-subspaces then ( $X ; X_{1}, X_{2}$ ) is an excisive triad (see III, 8.1).
+\end{KORO}
+
+\begin{PROOF}{AT-D72-07-52}{P: Ausscheidung-Triade für CW-Räume}
+Indeed, the inclusion $\left(X_{1}, X_{1} \cap X_{2}\right) \rightarrow\left(X_{1} \cup X_{2}, X_{2}\right)$ fulfils the hypothesis of 4.5 and is therefore a homology isomorphism.
+\end{PROOF}
+
+
+4.7 Proposition. 
+
+\begin{PROP}{AT-D72-07-53}{Induzierte exakte Sequenz für CW-Teilräume}
+If $Z \subset Y \subset X$ are $C W$-spaces and subspaces then the inclusions $(Y, Z) \rightarrow(X, Z) \rightarrow(X, Y)$ induce an exact sequence
 
 $$
 0 \rightarrow W(Y, Z) \rightarrow W(X, Z) \rightarrow W(X, Y) \rightarrow 0
 $$
 
 of chain maps. Under the isomorphisms $\Theta: H W(X, Y) \cong H(X, Y)$ of 1.3 the connecting homomorphism $d_{*}$ of this sequence transforms into the ordinary connecting homomorphism $\partial_{*}$ of the triple ( $X, Y, Z$ ) (cf. III, 3.4).
+\end{PROP}
 
-Proof. Exactness follows from third terms in 4.2 because ( $X_{Z}^{n}-X_{Z}^{n-1}$ )= $\left(Y_{Z}^{n}-Y_{Z}^{n-1}\right) \oplus\left(X_{Y}^{n}-X_{Y}^{n-1}\right)$, a disjoint union. In order to prove $\partial_{*} \Theta=\Theta d_{*}$ we use 1.9. This implies that every $y \in H_{n} W(X, Y)$ has a representative $\zeta \in S_{n} X_{Y}^{n}$ with $\partial \zeta \in S_{n-1} Y$ and that $\Theta y=[\zeta]$ for any such $\zeta$. It follows that $d_{*} y$ is represented by $\partial \zeta$, hence $\Theta\left(d_{*} y\right)=[\partial \zeta] \in H_{n-1}(Y, Z)$. But also, $[\partial \zeta]=\partial_{*}[\zeta]$ by the very definition of $\partial_{*}$; hence $\partial_{*} \Theta=\Theta d_{*}$.\\
-4.8 Example (cf. 3.5). The projective spaces $P_{n} F, n \geq 0$, over the fields $F=\mathbb{R}, \mathbb{C}, \mathbb{H}$ admit $C W$-decompositions $P_{n} F=e^{0} \cup e^{1} \cup \cdots \cup e^{n}$ into cells of dimension $0, d, 2 d, \ldots, n d$ where $d=\operatorname{dim}(F)=1,2,4$. In case $F=\mathbb{C}, \mathbb{H}$ there are no cells of odd dimensions, hence $W_{2 i+1}\left(P_{n} F\right)=0$, hence the boundary $\partial$ of $W\left(P_{n} F\right)$ vanishes, hence $H P_{n} F=W P_{n} F$, i.e., if $F=\mathbb{C}$ or $\mathbb{H}$\\
+Proof. 
+
+\begin{PROOF}{AT-D72-07-54}{P: Induzierte exakte Sequenz für CW-Teilräume}
+Exactness follows from third terms in 4.2 because ( $X_{Z}^{n}-X_{Z}^{n-1}$ )= $\left(Y_{Z}^{n}-Y_{Z}^{n-1}\right) \oplus\left(X_{Y}^{n}-X_{Y}^{n-1}\right)$, a disjoint union. In order to prove $\partial_{*} \Theta=\Theta d_{*}$ we use 1.9. This implies that every $y \in H_{n} W(X, Y)$ has a representative $\zeta \in S_{n} X_{Y}^{n}$ with $\partial \zeta \in S_{n-1} Y$ and that $\Theta y=[\zeta]$ for any such $\zeta$. It follows that $d_{*} y$ is represented by $\partial \zeta$, hence $\Theta\left(d_{*} y\right)=[\partial \zeta] \in H_{n-1}(Y, Z)$. But also, $[\partial \zeta]=\partial_{*}[\zeta]$ by the very definition of $\partial_{*}$; hence $\partial_{*} \Theta=\Theta d_{*}$.\\
+\end{PROOF}
+
+
+4.8 Example (cf. 3.5). 
+
+
+\begin{EXA}{AT-D72-07-55}{Homologie von Projektive Räume als CW-Räume}
+The projective spaces $P_{n} F, n \geq 0$, over the fields $F=\mathbb{R}, \mathbb{C}, \mathbb{H}$ admit $C W$-decompositions $P_{n} F=e^{0} \cup e^{1} \cup \cdots \cup e^{n}$ into cells of dimension $0, d, 2 d, \ldots, n d$ where $d=\operatorname{dim}(F)=1,2,4$. In case $F=\mathbb{C}, \mathbb{H}$ there are no cells of odd dimensions, hence $W_{2 i+1}\left(P_{n} F\right)=0$, hence the boundary $\partial$ of $W\left(P_{n} F\right)$ vanishes, hence $H P_{n} F=W P_{n} F$, i.e., if $F=\mathbb{C}$ or $\mathbb{H}$\\
 then
 
 $$
@@ -2710,32 +3070,97 @@ i_{*}: H_{j} P_{n} F \cong H_{j} P_{m} F \quad \text { for } j<(n+1) d-1, n \leq
 $$
 
 Analogous results hold for stunted projective spaces (3.7); we leave it to the reader to formulate and prove them, as exercises.
+\end{EXA}
 
 Spaces which are retracts of $C W$-spaces inherit some of their homology properties. As an example we show\\
-4.11 Proposition. If $Y$ is a compact ENR (euclidean neighborhood retract, cf. IV, 8) then $H_{i} Y$ is finitely generated for all $i$, and $H_{i} Y=0$ for sufficiently large $i$.
 
-Proof. We can assume $Y \subset \mathbb{R}^{n}$. Let $Y \xrightarrow{i} O \xrightarrow{r} Y$ be a neighborhood retraction, $r i=\mathrm{id}$. Choose a lattice decomposition (3.4) of $\mathbb{R}^{n}$ which is so fine that every closed cell which meets $Y$ lies in $O$. Let $X \subset O$ be the union of all closed cells which meet $Y$. Then $X$ is a compact $C W$-space, $Y \subset X$, and $r \mid X: X \rightarrow Y$ is a retraction. Hence $H Y$ is a direct summand of $H X$ (cf. III, 4.15), and the assertion follows from 4.3.\\
-4.12 Exercises. 1. If $\left\{X_{\lambda}\right\}_{\lambda \in \Lambda}$ is a family of $C W$-spaces with base points $e_{\lambda}^{0} \in X_{\lambda}^{0}$ then the wedge $X=\vee_{\lambda \in A} X_{\lambda}$ is also a $C W$-space by 3.8. Show that $W\left(X, e^{0}\right) \cong \oplus_{\lambda} W\left(X_{\lambda}, e_{\lambda}^{0}\right)$ where $e^{0} \in X^{0}$ is the base point of the wedge. This implies $\tilde{H} X \cong \oplus_{\lambda} \tilde{H} X_{\lambda}$.\\
-2. A connected graph $Y \neq \emptyset$ is called a tree if $Y-e$ is disconnected for every 1 -cell $e \subset Y$. Show that every tree is contractible. Show that every graph $X$ contains a tree $Y$ with $Y^{0}=X^{0}$ (construct $Y$ starting at one zero-cell and letting $Y$ branch out). Using $\tilde{H} Y=0$, prove $H X \cong H(X / Y)$. Because $X / Y$ is a wedge of circles this gives $H X$ by Exerc. 1.\\
-3. Let $C \subset \mathbb{R}^{2}$ be the union of all circles $C_{n}, n=1,2, \ldots$, with radius $1 / n$ and center $(0,1 / n)$. Then $C$ is compact but $H C$ is not finitely generated (hint: $C$ retracts onto arbitrarily large finite wedges of circles), hence $C$ admits no $C W$-decomposition (and is not an ENR).
+
+4.11 Proposition. 
+
+\begin{PROP}{AT-D72-07-56}{Homologie von kompakten euklidischen Nachbarschaftsretrakten}
+If $Y$ is a compact ENR (euclidean neighborhood retract, cf. IV, 8) then $H_{i} Y$ is finitely generated for all $i$, and $H_{i} Y=0$ for sufficiently large $i$.
+\end{PROP}
+
+Proof. 
+
+\begin{PROOF}{AT-D72-07-57}{P: Homologie von kompakten euklidischen Nachbarschaftsretrakten}
+We can assume $Y \subset \mathbb{R}^{n}$. Let $Y \xrightarrow{i} O \xrightarrow{r} Y$ be a neighborhood retraction, $r i=\mathrm{id}$. Choose a lattice decomposition (3.4) of $\mathbb{R}^{n}$ which is so fine that every closed cell which meets $Y$ lies in $O$. Let $X \subset O$ be the union of all closed cells which meet $Y$. Then $X$ is a compact $C W$-space, $Y \subset X$, and $r \mid X: X \rightarrow Y$ is a retraction. Hence $H Y$ is a direct summand of $H X$ (cf. III, 4.15), and the assertion follows from 4.3.
+\end{PROOF}
+
+
+4.12 Exercises. 
+
+1. 
+
+\begin{EXE}{AT-D72-07-58}{Exercise 1 (Keil Produkt)}
+If $\left\{X_{\lambda}\right\}_{\lambda \in \Lambda}$ is a family of $C W$-spaces with base points $e_{\lambda}^{0} \in X_{\lambda}^{0}$ then the wedge $X=\vee_{\lambda \in A} X_{\lambda}$ is also a $C W$-space by 3.8. Show that $W\left(X, e^{0}\right) \cong \oplus_{\lambda} W\left(X_{\lambda}, e_{\lambda}^{0}\right)$ where $e^{0} \in X^{0}$ is the base point of the wedge. This implies $\tilde{H} X \cong \oplus_{\lambda} \tilde{H} X_{\lambda}$.\\
+\end{EXE}
+
+2. 
+
+\begin{EXE}{AT-D72-07-59}{Exercise 2 (Baum)}
+A connected graph $Y \neq \emptyset$ is called a tree if $Y-e$ is disconnected for every 1 -cell $e \subset Y$. Show that every tree is contractible. Show that every graph $X$ contains a tree $Y$ with $Y^{0}=X^{0}$ (construct $Y$ starting at one zero-cell and letting $Y$ branch out). Using $\tilde{H} Y=0$, prove $H X \cong H(X / Y)$. Because $X / Y$ is a wedge of circles this gives $H X$ by Exerc. 1.
+\end{EXE}
+
+3. 
+
+\begin{EXE}{AT-D72-07-60}{Exercise 2 (Kreise)}
+Let $C \subset \mathbb{R}^{2}$ be the union of all circles $C_{n}, n=1,2, \ldots$, with radius $1 / n$ and center $(0,1 / n)$. Then $C$ is compact but $H C$ is not finitely generated (hint: $C$ retracts onto arbitrarily large finite wedges of circles), hence $C$ admits no $C W$-decomposition (and is not an ENR).
+\end{EXE}
+
+
+\pagebreak
+
 
 \section*{The Euler-Poincaré Characteristic}
-Euler's polyhedron formula is perhaps easier to explain to a nonmathematician than any other non-trivial result of algebraic topology. Roughly speaking it asserts that $\alpha_{0}-\alpha_{1}+\alpha_{2}=2$ for every decomposition of $\mathbb{S}^{2}$ into disjoint cells where $\alpha_{i}$ is the number of $i$-cells. More generally, we shall see that for any finite $C W$-space the number $\sum(-1)^{i} \alpha_{i}$ is independent of the decomposition.\\
-5.1 Definition. If $G=\left\{G_{i}\right\}_{i \in \mathbb{Z}}$ is a graded abelian group such that $\operatorname{rank}\left(G_{i}\right)$ is finite for all $i$ and equals zero for almost all $i$ then
 
+
+Euler's polyhedron formula is perhaps easier to explain to a nonmathematician than any other non-trivial result of algebraic topology. Roughly speaking it asserts that $\alpha_{0}-\alpha_{1}+\alpha_{2}=2$ for every decomposition of $\mathbb{S}^{2}$ into disjoint cells where $\alpha_{i}$ is the number of $i$-cells. More generally, we shall see that for any finite $C W$-space the number $\sum(-1)^{i} \alpha_{i}$ is independent of the decomposition.\\
+
+
+5.1 Definition. 
+
+
+\begin{DEF}{AT-D72-07-61}{Euler-Poincare Characteristic von graduierten abelschen Gruppen}
+If $G=\left\{G_{i}\right\}_{i \in \mathbb{Z}}$ is a graded abelian group such that $\operatorname{rank}\left(G_{i}\right)$ is finite for all $i$ and equals zero for almost all $i$ then
 $$
 \chi(G)=\sum_{i \in \mathbf{Z}}(-1)^{i} \operatorname{rank}\left(G_{i}\right)
 $$
+is defined and is called the Euler-Poincaré-characteristic of $G$ (recall that $\operatorname{rank}(A)=$ maximal number of linearly independent elements in $A$; see I, 2.29). If $K$ is a complex then we define $\chi(K)$ to be the Euler-Poincarécharacteristic of the underlying graded group (i.e. we ignore $\partial^{K}$ ).
+\end{DEF}
 
-is defined and is called the Euler-Poincaré-characteristic of $G$ (recall that $\operatorname{rank}(A)=$ maximal number of linearly independent elements in $A$; see I, 2.29). If $K$ is a complex then we define $\chi(K)$ to be the Euler-Poincarécharacteristic of the underlying graded group (i.e. we ignore $\partial^{K}$ ).\\
-5.2 Proposition. If $K$ is a complex such that $\chi(K)$ is defined then $\chi(H K)$ is also defined, and $\chi(H K)=\chi(K)$.
 
-Proof. For every abelian group $G$ and subgroup $G^{\prime} \subset G$ we have $\operatorname{rank}(G)=$ $\operatorname{rank}\left(G^{\prime}\right)+\operatorname{rank}\left(G / G^{\prime}\right)$ (see I, 2.28-2.29); in particular, $\operatorname{rank}\left(H_{i} K\right) \leq$ $\operatorname{rank}\left(Z_{i} K\right) \leq \operatorname{rank}\left(K_{i}\right)$, hence $\chi(H K)$ is defined. Moreover, $\operatorname{rank}\left(K_{i}\right)=$ $\operatorname{rank}\left(Z_{i} K\right)+\operatorname{rank}\left(B_{i-1} K\right), \operatorname{rank}\left(Z_{i} K\right)=\operatorname{rank}\left(B_{i} K\right)+\operatorname{rank}\left(H_{i} K\right)$. Multiply both equations with $(-1)^{i}$, sum over $i$, and get $\chi(K)=\chi(Z K)-$ $\chi(B K), \chi(Z K)=\chi(B K)+\chi(H K)$. Substitute and get $\chi(K)=\chi(H K)$.\\
-5.3 Corollary. If $\cdots \leftarrow G_{i-1} \leftarrow G_{i} \leftarrow G_{i+1} \leftarrow \cdots$ is an exact sequence then $\chi\left\{G_{i}\right\}=0$-provided it is defined.
+5.2 Proposition. 
 
-Proof. View the sequence as a complex $G$. Then $H G=0$, hence $\chi(G)=$ $\chi(H G)=0$.\\
-5.4 Corollary. Let $G^{\prime}, G, G^{\prime \prime}$ be graded abelian groups which admit an exact sequence
+\begin{PROP}{AT-D72-07-62}{Euler-Poincare Characteristic definiert auf Komplexen ist auch auf graduierter Homologiegruppen definiert und stimmen überein}
+If $K$ is a complex such that $\chi(K)$ is defined then $\chi(H K)$ is also defined, and $\chi(H K)=\chi(K)$.
+\end{PROP}
 
+Proof. 
+
+
+\begin{PROOF}{AT-D72-07-63}{P: Euler-Poincare Characteristic definiert auf Komplexen ist auch auf graduierter Homologiegruppen definiert und stimmen überein}
+For every abelian group $G$ and subgroup $G^{\prime} \subset G$ we have $\operatorname{rank}(G)=$ $\operatorname{rank}\left(G^{\prime}\right)+\operatorname{rank}\left(G / G^{\prime}\right)$ (see I, 2.28-2.29); in particular, $\operatorname{rank}\left(H_{i} K\right) \leq$ $\operatorname{rank}\left(Z_{i} K\right) \leq \operatorname{rank}\left(K_{i}\right)$, hence $\chi(H K)$ is defined. Moreover, $\operatorname{rank}\left(K_{i}\right)=$ $\operatorname{rank}\left(Z_{i} K\right)+\operatorname{rank}\left(B_{i-1} K\right), \operatorname{rank}\left(Z_{i} K\right)=\operatorname{rank}\left(B_{i} K\right)+\operatorname{rank}\left(H_{i} K\right)$. Multiply both equations with $(-1)^{i}$, sum over $i$, and get $\chi(K)=\chi(Z K)-$ $\chi(B K), \chi(Z K)=\chi(B K)+\chi(H K)$. Substitute and get $\chi(K)=\chi(H K)$.
+\end{PROOF}
+
+5.3 Corollary. 
+
+\begin{KORO}{AT-D72-07-64}{Lange exakte Sequenzen haben verschwindende Euler-Poincare-Charakteristik}
+If $\cdots \leftarrow G_{i-1} \leftarrow G_{i} \leftarrow G_{i+1} \leftarrow \cdots$ is an exact sequence then $\chi\left\{G_{i}\right\}=0$-provided it is defined.
+\end{KORO}
+
+Proof. 
+
+\begin{PROOF}{AT-D72-07-65}{P: Lange exakte Sequenzen haben verschwindende Euler-Poincare-Charakteristik}
+View the sequence as a complex $G$. Then $H G=0$, hence $\chi(G)=$ $\chi(H G)=0$.
+\end{PROOF}
+
+5.4 Corollary. 
+
+
+
+\begin{KORO}{AT-D72-07-66}{EP-Charakteristiken für Tripel von graduierten abelschen Gruppen}
+Let $G^{\prime}, G, G^{\prime \prime}$ be graded abelian groups which admit an exact sequence
 $$
 \cdots \leftarrow G_{i-1} \leftarrow G_{i-1}^{\prime} \leftarrow G_{i}^{\prime \prime} \leftarrow G_{i} \leftarrow G_{i}^{\prime} \leftarrow G_{i+1}^{\prime \prime} \leftarrow \cdots .
 $$
@@ -2747,42 +3172,84 @@ $$
 $$
 
 (In most examples, 5.5 is the homology sequence of an exact sequence $0 \rightarrow K^{\prime} \rightarrow K \rightarrow K^{\prime \prime} \rightarrow 0$ of complexes.)
+\end{KORO}
 
-Proof. Suppose, for instance, $\chi\left(G^{\prime}\right), \chi(G)$ are defined. Because 5.5 is exact, we get $\operatorname{rank}\left(G_{i}^{\prime \prime}\right) \leq \operatorname{rank}\left(G_{i}\right)+\operatorname{rank}\left(G_{i-1}^{\prime}\right)$, hence $\chi\left(G^{\prime \prime}\right)$ is defined. We can then apply 5.3 to the exact sequence 5.5 and get
+Proof. 
+
+
+\begin{PROOF}{AT-D72-07-67}{P: EP-Charakteristiken für Tripel von graduierten abelschen Gruppen}
+Suppose, for instance, $\chi\left(G^{\prime}\right), \chi(G)$ are defined. Because 5.5 is exact, we get $\operatorname{rank}\left(G_{i}^{\prime \prime}\right) \leq \operatorname{rank}\left(G_{i}\right)+\operatorname{rank}\left(G_{i-1}^{\prime}\right)$, hence $\chi\left(G^{\prime \prime}\right)$ is defined. We can then apply 5.3 to the exact sequence 5.5 and get
 
 $$
 \sum(-1)^{3 i} \operatorname{rank}\left(G_{i}\right)+\sum(-1)^{3 i-1} \operatorname{rank}\left(G_{i}^{\prime \prime}\right)+\sum(-1)^{3 i+1} \operatorname{rank}\left(G_{i}^{\prime}\right)=0 .
 $$
 
-But this is just the assertion, $\chi G-\chi G^{\prime \prime}-\chi G^{\prime}=0$.\\
-5.6 Definition. The Euler-Poincaré characteristic of a space $Y$ or a pair of spaces ( $Y, A$ ) is, by definition, the Euler-Poincaré characteristic of its homology, $\chi(Y, A)=\chi H(Y, A)$-provided the latter is defined, i.e. if $\operatorname{rank}\left(\oplus_{i} H_{i}(Y, A)\right)<\infty$.
 
-Applying 5.4 to the homology sequence of ( $Y, A$ ) shows\\
-5.7 Proposition. If ( $Y, A$ ) is a pair of spaces such that two of the numbers $\chi(A), \chi(Y), \chi(Y, A)$ are defined then so is the third, and
+But this is just the assertion, $\chi G-\chi G^{\prime \prime}-\chi G^{\prime}=0$.
+\end{PROOF}
+
+
+5.6 Definition. 
+
+\begin{DEF}{AT-D72-07-68}{Euler-Poincare Charakteristik von Räumen}
+The Euler-Poincaré characteristic of a space $Y$ or a pair of spaces ( $Y, A$ ) is, by definition, the Euler-Poincaré characteristic of its homology, $\chi(Y, A)=\chi H(Y, A)$-provided the latter is defined, i.e. if $\operatorname{rank}\left(\oplus_{i} H_{i}(Y, A)\right)<\infty$.
+\end{DEF}
+
+Applying 5.4 to the homology sequence of ( $Y, A$ ) shows
+
+
+5.7 Proposition. 
+
+\begin{PROP}{AT-D72-07-69}{Euler-Poincare Charakteristik für Raumpaare}
+If ( $Y, A$ ) is a pair of spaces such that two of the numbers $\chi(A), \chi(Y), \chi(Y, A)$ are defined then so is the third, and
 
 $$
 \chi(Y)=\chi(A)+\chi(Y, A) .
 $$
+\end{PROP}
 
-Similarly, 5.4 applies to Mayer-Vietoris sequences:\\
-5.8 Proposition. If $\left(Y: Y_{1}, Y_{2}\right)$ is an excisive triad and if two of the numbers $\chi\left(Y_{1} \cup Y_{2}\right), \chi\left(Y_{1} \cap Y_{2}\right), \chi\left(Y_{1}\right)+\chi\left(Y_{2}\right)$ are defined then so is the third, and
+Similarly, 5.4 applies to Mayer-Vietoris sequences:
+
+
+5.8 Proposition. 
+
+\begin{PROP}{AT-D72-07-70}{Euler-Poincare Charakteristik für Ausscheidung-Triaden}
+If $\left(Y: Y_{1}, Y_{2}\right)$ is an excisive triad and if two of the numbers $\chi\left(Y_{1} \cup Y_{2}\right), \chi\left(Y_{1} \cap Y_{2}\right), \chi\left(Y_{1}\right)+\chi\left(Y_{2}\right)$ are defined then so is the third, and
 
 $$
 \chi\left(Y_{1}\right)+\chi\left(Y_{2}\right)=\chi\left(Y_{1} \cup Y_{2}\right)+\chi\left(Y_{1} \cap Y_{2}\right) .
 $$
+\end{PROP}
 
-For instance, $Y$ could be a $C W$-space and $Y_{1}, Y_{2}$ two $C W$-subspaces; such a triad is always excisive by 4.6. If $Y_{1} \cup Y_{2}$ has only a finite number of cells then 5.8 is also clear from the following generalization of Euler's polyhedron formula.\\
-5.9 Proposition. If $(Y, A)$ is a pair of $C W$-subspaces such that $Y-A$ contains only finitely many cells then $\chi(Y, A)$ is defined and
+\begin{REM}{AT-D72-07-71}{CW-Anwendung Euler-Poincare Charakteristik für Ausscheidung-Triaden}
+For instance, $Y$ could be a $C W$-space and $Y_{1}, Y_{2}$ two $C W$-subspaces; such a triad is always excisive by 4.6.
+\end{REM}
 
+If $Y_{1} \cup Y_{2}$ has only a finite number of cells then 5.8 is also clear from the following generalization of Euler's polyhedron formula.\\
+
+5.9 Proposition. 
+
+
+\begin{PROP}{AT-D72-07-72}{Verallgemeinerte Euler-Polyhedron-Formel für CW-Unterraum-Paare}
+If $(Y, A)$ is a pair of $C W$-subspaces such that $Y-A$ contains only finitely many cells then $\chi(Y, A)$ is defined and
 $$
 \chi(Y, A)=\sum_{i=0}^{\infty}(-1)^{i} \alpha_{i}
 $$
-
 where $\alpha_{i}$ is the number of $i$-cells in $Y-A$. In particular, this number $\sum(-1)^{i} \alpha_{i}$ depends only on $H(Y, A)$, not on the $C W$-decomposition.
+\end{PROP}
 
-Proof. The cellular chain group $W_{i}(Y, A)$ is free on $\alpha_{i}$ generators (4.2) hence $\operatorname{rank}\left(W_{i}(Y, A)\right)=\alpha_{i}$, hence $\sum(-1)^{i} \alpha_{i}=\chi W(Y, A)=\chi H W(Y, A)=$ $\chi(Y, A)$, by 5.2 and 4.1.\\
-5.10 Exercises. 1. Verify the formulas
+Proof. 
 
+\begin{PROOF}{AT-D72-07-73}{P: Verallgemeinerte Euler-Polyhedron-Formel für CW-Unterraum-Paare}
+The cellular chain group $W_{i}(Y, A)$ is free on $\alpha_{i}$ generators (4.2) hence $\operatorname{rank}\left(W_{i}(Y, A)\right)=\alpha_{i}$, hence $\sum(-1)^{i} \alpha_{i}=\chi W(Y, A)=\chi H W(Y, A)=$ $\chi(Y, A)$, by 5.2 and 4.1.
+\end{PROOF}
+
+
+5.10 Exercises. 1. 
+
+
+\begin{EXE}{AT-D72-07-74}{Exercise (Berechne EPC)}
+Verify the formulas
 $$
 \begin{gathered}
 \chi\left(\mathbb{B}^{n}\right)=1, \quad \chi\left(\mathbb{S}^{n}\right)=1+(-1)^{n}, \quad \chi\left(P_{n} \mathbb{R}\right)=\frac{1}{2}\left(1+(-1)^{n}\right), \\
@@ -2790,12 +3257,31 @@ $$
 \chi\left(P_{k}\right)=2-k, \quad \chi\left(L_{q}^{2 n-1}\right)=0
 \end{gathered}
 $$
+where $S_{h}, P_{k}$ are the surfaces of 3.11, Exerc. 1, 2, and $L_{q}^{2 n-1}$ the lens space of 3.11 Exerc. 3.
+\end{EXE}
 
-where $S_{h}, P_{k}$ are the surfaces of 3.11, Exerc. 1, 2, and $L_{q}^{2 n-1}$ the lens space of 3.11 Exerc. 3.\\
-2. If $Y$ is a finite $C W$-space and $\pi: \tilde{Y} \rightarrow Y$ is a $q$-sheeted covering then $\tilde{Y}$ is also a $C W$-space (cf. Schubert, III 6.9), and $\chi(\tilde{Y})=q \cdot \chi(Y)$, provided $q<\infty$.\\
-3. Let $\mathscr{W}$ be the set of homeomorphism classes of compact $C W$-spaces. Define $\Phi: \mathscr{W} \rightarrow \mathbb{Z}, \Phi Y=\chi Y-1$, and verify that $\Phi Y=\Phi A+\Phi(Y / A)$ for every pair ( $Y, A$ ) in $\mathscr{W}$. Conversely, if $G$ is an abelian group and $\Psi: \mathscr{W} \rightarrow G$ is a map such that $\Psi Y=\Psi A+\Psi(Y / A)$ for every pair ( $Y, A$ ) in $\mathscr{W}$ show that $\Psi Y=(\Phi Y) \cdot\left(\Psi S^{0}\right)$ for all $Y \in \mathscr{W}$. Hint: Take $Y=\mathbb{B}^{n}$ and $A=\mathbb{S}^{n-1}$ or $A=\left\{x \in \mathbb{B}^{n} \left\lvert\,\|x\| \geq \frac{1}{2}\right.\right\}$; comparing gives $\Psi \mathbb{S}^{n-1}=\Psi\left(\mathbb{S}^{n-1} \times[0,1]\right)$. Next, take $Y=\mathbb{S}^{n-1} \times[0,1], A=\mathbb{S}^{n-1} \times\{0\}$, and get $\Psi \Psi \mathbb{B}^{n}=0$ for $n>0$; prove $\Psi \mathbf{B}^{0}=0$ separately. Now proceed by induction on the number of cells in $Y \in \mathscr{W}$. Cf. Watts 1962.
+
+2. 
+
+\begin{EXE}{AT-D72-07-75}{Exercise (Cover)}
+If $Y$ is a finite $C W$-space and $\pi: \tilde{Y} \rightarrow Y$ is a $q$-sheeted covering then $\tilde{Y}$ is also a $C W$-space (cf. Schubert, III 6.9), and $\chi(\tilde{Y})=q \cdot \chi(Y)$, provided $q<\infty$.
+\end{EXE}
+
+
+3. 
+
+\begin{EXE}{AT-D72-07-76}{Exercise}
+Let $\mathscr{W}$ be the set of homeomorphism classes of compact $C W$-spaces. Define $\Phi: \mathscr{W} \rightarrow \mathbb{Z}, \Phi Y=\chi Y-1$, and verify that $\Phi Y=\Phi A+\Phi(Y / A)$ for every pair ( $Y, A$ ) in $\mathscr{W}$. Conversely, if $G$ is an abelian group and $\Psi: \mathscr{W} \rightarrow G$ is a map such that $\Psi Y=\Psi A+\Psi(Y / A)$ for every pair ( $Y, A$ ) in $\mathscr{W}$ show that $\Psi Y=(\Phi Y) \cdot\left(\Psi S^{0}\right)$ for all $Y \in \mathscr{W}$. Hint: Take $Y=\mathbb{B}^{n}$ and $A=\mathbb{S}^{n-1}$ or $A=\left\{x \in \mathbb{B}^{n} \left\lvert\,\|x\| \geq \frac{1}{2}\right.\right\}$; comparing gives $\Psi \mathbb{S}^{n-1}=\Psi\left(\mathbb{S}^{n-1} \times[0,1]\right)$. Next, take $Y=\mathbb{S}^{n-1} \times[0,1], A=\mathbb{S}^{n-1} \times\{0\}$, and get $\Psi \Psi \mathbb{B}^{n}=0$ for $n>0$; prove $\Psi \mathbf{B}^{0}=0$ separately. Now proceed by induction on the number of cells in $Y \in \mathscr{W}$. Cf. Watts 1962.
+\end{EXE}
+
+
+
+\pagebreak
+
 
 \section*{Description of Cellular Chain Maps and of the Cellular Boundary Homomorphism}
+
+
 We give simple geometric interpretations for the matrices of $W f$ : $W X \rightarrow W Y$ and $\partial: W_{n} X \rightarrow W_{n-1} X$; this can be used for actual computation.\\
 6.1 If $X$ is a $C W$-space then $X^{n}$ and $X^{n} / X^{n-1}$ are also $C W$-spaces (3.7), and the natural maps $X \supset X^{n} \rightarrow X^{n} / X^{n-1}$ induce isomorphisms $W_{n} X \cong$ $W_{n} X^{n} \cong W_{n}\left(X^{n} / X^{n-1}\right)=\tilde{H}^{n}\left(X^{n} / X^{n-1}\right)$ because all $n$-cells are mapped homeomorphically (cf. fourth term in 4.2). If $Y$ is also a $C W$-space then every continuous map $f:\left(X^{n}, X^{n-1}\right) \rightarrow\left(Y^{n}, Y^{n-1}\right)$ (such a map will be called $n$-cellular) induces a cellular map $\bar{f}: X^{n} / X^{n-1} \rightarrow Y^{n} / Y^{n-1}$ and homomorphisms $W_{n} f, W_{n} \bar{f}$ such that the diagram\\
 \includegraphics[scale=0.3,center]{2025_08_12_9d8b5b8a6f64e138b105g-110}\\
@@ -2955,28 +3441,85 @@ $$
 
 if the cells are suitably oriented, and $e_{q}^{2 k}=e_{0}^{2 k}$. The projection $\rho: \mathbb{S}^{2 n-1} \rightarrow$ $L_{q}^{2 n-1}$ onto the lens space is cellular; applying $\rho$ to the above formula yields the following boundaries in $L_{q}^{2 n-1}: \partial\left(e^{2 k}\right)=q \cdot e^{2 k-1}, \partial\left(e^{2 k+1}\right)=0$. Compute $H\left(L_{q}^{2 n-1}\right)$.
 
+
+
+
+
+\pagebreak
+
+
+
+
 \section*{Simplicial Spaces}
+
+
 A simplicial structure is a $C W$-structure with additional features: The characteristic maps form part of the structure, they are injective and they are inter-related by linear changes of coordinates. Historically, homology theory started with simplicial spaces and simplicial homology (see §8).\\
-7.1 Definition. Let $X$ be a Hausdorff space. For every $n=0,1, \ldots$ let $\mathscr{S}_{n}$ be a set of continuous maps $s$ : $\Delta_{n} \rightarrow X$. Then $\left\{\mathscr{S}_{n}\right\}$ or $\mathscr{S}=\bigcup_{n=0}^{\infty} \mathscr{S}_{n}$ is called a simplicial atlas if the following conditions (i)-(iv) hold.\\
-(i) $X=\bigcup_{s \in \mathscr{P}}$ im(s).\\
+
+
+7.1 Definition. 
+
+
+\begin{DEF}{AT-D72-08-01}{Simplizialer Atlas}
+Let $X$ be a Hausdorff space. For every $n=0,1, \ldots$ let $\mathscr{S}_{n}$ be a set of continuous maps $s$ : $\Delta_{n} \rightarrow X$. Then $\left\{\mathscr{S}_{n}\right\}$ or $\mathscr{S}=\bigcup_{n=0}^{\infty} \mathscr{S}_{n}$ is called a simplicial atlas if the following conditions (i)-(iv) hold.
+
+(i) $X=\bigcup_{s \in \mathscr{P}}$ im(s).
+
 (ii) Every $s \in \mathscr{S}$ is injective. Since $X$ is hausdorff and $\Delta_{n}$ compact, $s\left(\Delta_{n}\right)$ is closed and homeomorphic with $\Delta_{n}, s: \Delta_{n} \approx s\left(\Delta_{n}\right)=\mathrm{im}(s)$.\\
-(iii) Any two $s, t \in \mathscr{S}$ are linearly related. By this we mean the following: If $s: \Delta_{m} \rightarrow X, t: \Delta_{n} \rightarrow X$ then $\Delta_{m}^{s t}=s^{-1} t\left(\Delta_{n}\right)$ resp. $\Delta_{n}^{t s}=t^{-1} s\left(\Delta_{m}\right)$ is a face (3.3) of $\Delta_{m}$ resp. $\Delta_{n}$ and $t^{-1} s: \Delta_{m}^{s t} \rightarrow \Delta_{n}$ resp. $s^{-1} t$ is a linear map; since $s, t$ are injective we have in fact a linear isomorphism $t^{-1} s: \Delta_{m}^{s t} \approx \Delta_{n}^{t s}$.\\
+
+(iii) Any two $s, t \in \mathscr{S}$ are linearly related. By this we mean the following: If $s: \Delta_{m} \rightarrow X, t: \Delta_{n} \rightarrow X$ then $\Delta_{m}^{s t}=s^{-1} t\left(\Delta_{n}\right)$ resp. $\Delta_{n}^{t s}=t^{-1} s\left(\Delta_{m}\right)$ is a face (3.3) of $\Delta_{m}$ resp. $\Delta_{n}$ and $t^{-1} s: \Delta_{m}^{s t} \rightarrow \Delta_{n}$ resp. $s^{-1} t$ is a linear map; since $s, t$ are injective we have in fact a linear isomorphism $t^{-1} s: \Delta_{m}^{s t} \approx \Delta_{n}^{t s}$.
+
 If $t^{-1} s, s^{-1} t$ also preserve the order of the vertices then $s, t$ are said to be order-linearly related, and if this holds for all $s, t$ of an atlas $\mathscr{S}$ then $\mathscr{S}$ is called an ordered simplicial atlas.\\
-If $s, t \in \mathscr{S}$ and $\operatorname{im}(s) \subset \operatorname{im}(t)$ (equivalently: $\Delta_{m}^{s t}=\Delta_{m}$ ) then $s$ is called a face of $t$.\\
+If $s, t \in \mathscr{S}$ and $\operatorname{im}(s) \subset \operatorname{im}(t)$ (equivalently: $\Delta_{m}^{s t}=\Delta_{m}$ ) then $s$ is called a face of $t$.
+
 (iv) $A$ set $A \subset X$ is closed if and only if $A \cap \operatorname{im}(s)$ is closed for all $s \in \mathscr{S}$, i.e., $X$ has the weak topology with respect to $\{\operatorname{im}(s)\}_{s \in \mathscr{S}}$. Equivalently, $f: X \rightarrow Z$ is continuous if and only if $f$ 's is continuous for all $s \in \mathscr{S}$. (Note: There is also a strong topology which is used in some connections; see 7.14.)
+\end{DEF}
 
-An example is provided in 3.3 ; there we described a $C W$-decomposition of $\Delta_{n}$ and characteristic maps which form an ordered simplicial atlas. But the identity map id: $\Delta_{n} \rightarrow \Delta_{n}$ alone is also an ordered simplicial atlas on $\Delta_{n}$.\\
-7.2 Proposition. Every (ordered) simplicial atlas $\mathscr{S}$ is contained in a unique maximal (ordered) simplicial atlas $\mathscr{T}$. In fact, $\mathscr{T}_{n}, n=0,1, \ldots$, is the set of all injective maps $t: \Delta_{n} \rightarrow X$ which are (order-) linearly related (as in (iii)) to all $s \in \mathscr{Y}$.
 
-Proof. Take $\mathscr{T}_{n}$ as described. By (iii) we have $\mathscr{S} \subset \mathscr{T}$, and every atlas containing $\mathscr{S}$ is contained in $\mathscr{T}$. It suffices, therefore, to show that $\mathscr{T}$ is an atlas. Conditions (i), (ii) and (iv) are obvious; for (iii), let $t: \Delta_{n} \rightarrow X$ be in $\mathscr{T}$, pick $P \in \dot{\Delta}_{n}=\Delta_{n}-\dot{\Delta}_{n}=\left\{x \in \Delta_{n} \mid x_{i}>0\right.$ for all $\left.i\right\}$, and choose $s$ : $\Delta_{k} \rightarrow X$ in $\mathscr{S}$ such that $t P \in \operatorname{im}(s)$. Then $P \in t^{-1} s\left(\Delta_{k}\right)$, hence $t^{-1} s\left(\Delta_{k}\right)=\Delta_{n}$ (because it is a face of $\Delta_{n}$ ), hence $t \Delta_{n} \subset s \Delta_{k}$. If also $t^{\prime}: \Delta_{m} \rightarrow X$ is in $\mathscr{T}$ then $t^{-1} t^{\prime}\left(\Delta_{m}\right)=\left(t^{-1} s\right)\left(s^{-1} t^{\prime}\right) \Delta_{m}$ is a face of $\Delta_{n}$ because ( $s, t$ ), ( $s, t^{\prime}$ ) are linearly related, and $t^{-1} t^{\prime}=\left(t^{-1} s\right)\left(s^{-1} t^{\prime}\right)$ is a linear map. This proves (iii) for $\mathscr{T}$.\\
-7.3 Definition. An (ordered) simplicial structure on $X$ (also: a triangulation of $X$ ) is a maximal (ordered) simplicial atlas $\mathscr{T}$. By 7.2, every (ordered) simplicial atlas $\mathscr{S}$ defines a unique (ordered) simplicial structure $\mathscr{T}$, and two atlasses $\mathscr{S}, \mathscr{S}^{\prime}$ define the same structure if and only if $\mathscr{S} \cup \mathscr{S}^{\prime}$ is again an atlas. A Hausdorff space $X$ together with an (ordered) simplicial structure $\mathscr{T}$ on $X$ is called an (ordered) simplicial space. If $X^{\prime} \subset X$ and\\
+
+An example is provided in 3.3 ; there we described a $C W$-decomposition of $\Delta_{n}$ and characteristic maps which form an ordered simplicial atlas. But the identity map id: $\Delta_{n} \rightarrow \Delta_{n}$ alone is also an ordered simplicial atlas on $\Delta_{n}$.
+
+
+7.2 Proposition. 
+
+
+\begin{PROP}{AT-D72-08-02}{Simplizialer Atlanten sind in maximalen simplizialen Atlanten enthalten}
+Every (ordered) simplicial atlas $\mathscr{S}$ is contained in a unique maximal (ordered) simplicial atlas $\mathscr{T}$. In fact, $\mathscr{T}_{n}, n=0,1, \ldots$, is the set of all injective maps $t: \Delta_{n} \rightarrow X$ which are (order-) linearly related (as in (iii)) to all $s \in \mathscr{Y}$.
+\end{PROP}
+
+Proof. 
+
+\begin{PROOF}{AT-D72-08-03}{P: Simplizialer Atlanten sind in maximalen simplizialen Atlanten enthalten}
+Take $\mathscr{T}_{n}$ as described. By (iii) we have $\mathscr{S} \subset \mathscr{T}$, and every atlas containing $\mathscr{S}$ is contained in $\mathscr{T}$. It suffices, therefore, to show that $\mathscr{T}$ is an atlas. Conditions (i), (ii) and (iv) are obvious; for (iii), let $t: \Delta_{n} \rightarrow X$ be in $\mathscr{T}$, pick $P \in \dot{\Delta}_{n}=\Delta_{n}-\dot{\Delta}_{n}=\left\{x \in \Delta_{n} \mid x_{i}>0\right.$ for all $\left.i\right\}$, and choose $s$ : $\Delta_{k} \rightarrow X$ in $\mathscr{S}$ such that $t P \in \operatorname{im}(s)$. Then $P \in t^{-1} s\left(\Delta_{k}\right)$, hence $t^{-1} s\left(\Delta_{k}\right)=\Delta_{n}$ (because it is a face of $\Delta_{n}$ ), hence $t \Delta_{n} \subset s \Delta_{k}$. If also $t^{\prime}: \Delta_{m} \rightarrow X$ is in $\mathscr{T}$ then $t^{-1} t^{\prime}\left(\Delta_{m}\right)=\left(t^{-1} s\right)\left(s^{-1} t^{\prime}\right) \Delta_{m}$ is a face of $\Delta_{n}$ because ( $s, t$ ), ( $s, t^{\prime}$ ) are linearly related, and $t^{-1} t^{\prime}=\left(t^{-1} s\right)\left(s^{-1} t^{\prime}\right)$ is a linear map. This proves (iii) for $\mathscr{T}$.
+\end{PROOF}
+
+
+7.3 Definition. 
+
+
+\begin{DEF}{AT-D72-08-04}{Triangulierung / Simpliziale Struktur}
+An (ordered) simplicial structure on $X$ (also: a triangulation of $X$ ) is a maximal (ordered) simplicial atlas $\mathscr{T}$. By 7.2, every (ordered) simplicial atlas $\mathscr{S}$ defines a unique (ordered) simplicial structure $\mathscr{T}$, and two atlasses $\mathscr{S}, \mathscr{S}^{\prime}$ define the same structure if and only if $\mathscr{S} \cup \mathscr{S}^{\prime}$ is again an atlas. A Hausdorff space $X$ together with an (ordered) simplicial structure $\mathscr{T}$ on $X$ is called an (ordered) simplicial space. If $X^{\prime} \subset X$ and\\
 $\mathscr{T}^{\prime} \subset \mathscr{T}$ is a triangulation of $X^{\prime}$ then ( $X^{\prime}, \mathscr{T}^{\prime}$ ) is called a simplicial subspace of ( $X, \mathscr{T}$ ).
+\end{DEF}
 
-The elements $v \in \mathscr{T}_{0}$, and also their images $v\left(\Delta_{0}\right) \in X$, are called vertices (of $\mathscr{T}$, or of $X$ ); in general, $t \in \mathscr{T}_{n}$, or $\operatorname{im}(t) \subset X$, is called a simplex of dimension $n$, of $\mathscr{T}$ or of $X$. If $t \in \mathscr{T}_{n}, v \in \mathscr{T}_{0}$ and $v\left(\Delta_{0}\right) \in t\left(\Delta_{n}\right)$ then $v$ is called a vertex of $t$. Every $t \in \mathscr{T}_{n}$ has exactly $(n+1)$-vertices, namely $t\left(e^{i}\right), i=0, \ldots, n$, where $e^{i}$ is the $i$-th vertex of $\Delta_{n}$. If $\mathscr{T}$ is ordered, and $t, t^{\prime} \in \mathscr{T}_{n}$ have the same vertices then $t=t^{\prime}$ (because $t^{-1} t^{\prime}\left(\Delta_{n}\right)$ contains all vertices, hence $t^{-1} t^{\prime}\left(\Delta_{n}\right)=\Delta_{n}$, and $t^{-1} t^{\prime}: \Delta_{n} \rightarrow \Delta_{n}$ is order preserving, hence $\left.t^{-1} t^{\prime}=\mathrm{id}\right)$. If $\mathscr{T}$ is not ordered and $t \in \mathscr{T}_{n}$ then there are exactly $(n+1)!$ simplices $\tau \in \mathscr{T}_{n}$ with the same set of vertices as $t$, namely all $\tau=t \circ \pi$, where $\pi$ denotes a permutation of ( $0,1, \ldots, n$ ) and also the linear isomorphism $\Delta_{n} \rightarrow \Delta_{n}$ which permutes the vertices of $\Delta_{n}$ accordingly.\\
+\begin{DEF}{AT-D72-08-05}{Simplex und Knoten}
+The elements $v \in \mathscr{T}_{0}$, and also their images $v\left(\Delta_{0}\right) \in X$, are called vertices (of $\mathscr{T}$, or of $X$ ); in general, $t \in \mathscr{T}_{n}$, or $\operatorname{im}(t) \subset X$, is called a simplex of dimension $n$, of $\mathscr{T}$ or of $X$. If $t \in \mathscr{T}_{n}, v \in \mathscr{T}_{0}$ and $v\left(\Delta_{0}\right) \in t\left(\Delta_{n}\right)$ then $v$ is called a vertex of $t$. Every $t \in \mathscr{T}_{n}$ has exactly $(n+1)$-vertices, namely $t\left(e^{i}\right), i=0, \ldots, n$, where $e^{i}$ is the $i$-th vertex of $\Delta_{n}$. If $\mathscr{T}$ is ordered, and $t, t^{\prime} \in \mathscr{T}_{n}$ have the same vertices then $t=t^{\prime}$ (because $t^{-1} t^{\prime}\left(\Delta_{n}\right)$ contains all vertices, hence $t^{-1} t^{\prime}\left(\Delta_{n}\right)=\Delta_{n}$, and $t^{-1} t^{\prime}: \Delta_{n} \rightarrow \Delta_{n}$ is order preserving, hence $\left.t^{-1} t^{\prime}=\mathrm{id}\right)$. If $\mathscr{T}$ is not ordered and $t \in \mathscr{T}_{n}$ then there are exactly $(n+1)!$ simplices $\tau \in \mathscr{T}_{n}$ with the same set of vertices as $t$, namely all $\tau=t \circ \pi$, where $\pi$ denotes a permutation of ( $0,1, \ldots, n$ ) and also the linear isomorphism $\Delta_{n} \rightarrow \Delta_{n}$ which permutes the vertices of $\Delta_{n}$ accordingly.
+\end{DEF}
+
+
 For example, the set $\mathscr{T}$ of maps $\Phi^{i_{0} \ldots i_{k}}: \Delta_{k} \rightarrow \Delta_{n}$ of 3.3 is an ordered triangulation of $\Delta_{n}$ called standard triangulation of $\Delta_{n}$. If we remove $\Phi^{01 \ldots n}=\mathrm{id}_{d_{n}}$ from $\mathscr{T}$ then the rest, $\mathscr{T}$, is an ordered triangulation of $\dot{\Delta}_{n}$, hence ( $\dot{\Delta}_{n}, \dot{\mathscr{T}}$ ) is a simplicial subspace of ( $\Delta_{n}, \mathscr{T}$ ). Since $\dot{\Delta}_{n} \approx \mathbb{S}^{n-1}$ this provides triangulations of spheres.\\
-7.4 Proposition. Every maximal simplicial atlas $\mathscr{T}$ contains an ordered maximal atlas $\mathscr{S}$.
 
-Proof. Choose a complete order on $\mathscr{T}_{0}$, put
+
+7.4 Proposition. 
+
+\begin{PROP}{AT-D72-08-06}{Maximale simpliziale Atlanten enthalten geordnete maximale Atlanten}
+Every maximal simplicial atlas $\mathscr{T}$ contains an ordered maximal atlas $\mathscr{S}$.
+\end{PROP}
+
+Proof. 
+
+
+\begin{PROOF}{AT-D72-08-07}{P: Maximale simpliziale Atlanten enthalten geordnete maximale Atlanten}
+Choose a complete order on $\mathscr{T}_{0}$, put
 
 $$
 \mathscr{S}_{n}=\left\{t \in \mathscr{T}_{n} \mid t\left(e^{0}\right)<t\left(e^{1}\right)<\cdots<t\left(e^{n}\right)\right\},
@@ -2987,65 +3530,195 @@ and verify that $\left\{\mathscr{S}_{n}\right\}$ is a maximal ordered atlas. ( C
 $$
 \mathscr{T}_{n}=\left\{s \circ \pi \mid s \in \mathscr{S}_{n}, \text { and } \pi: \Delta_{n} \approx \Delta_{n} \text { a linear isomorphism }\right\} .
 $$
+\end{PROOF}
 
-7.5 Proposition. Let $\mathscr{S}$ be an ordered simplicial atlas on $X$. Then the following are equivalent\\
-(a) $\mathscr{S}$ is maximal.\\
-(b) $s \in \mathscr{S}_{n} \Rightarrow s \varepsilon_{n}^{i} \in \mathscr{S}_{n-1}$ for $i=0,1, \ldots, n$, where $\varepsilon_{n}^{i}: \Delta_{n-1} \rightarrow \Delta_{n}$ is defined as in III, 1.3.\\
+7.5 Proposition. 
+
+
+\begin{PROP}{AT-D72-08-08}{Charakterisierung von maximalen geordneten simplizialen Atlanten}
+Let $\mathscr{S}$ be an ordered simplicial atlas on $X$. Then the following are equivalent\\
+
+(a) $\mathscr{S}$ is maximal.
+
+(b) $s \in \mathscr{S}_{n} \Rightarrow s \varepsilon_{n}^{i} \in \mathscr{S}_{n-1}$ for $i=0,1, \ldots, n$, where $\varepsilon_{n}^{i}: \Delta_{n-1} \rightarrow \Delta_{n}$ is defined as in III, 1.3.
+
 (c) Given $P \in X$ there is a unique $s \in \mathscr{S}$, say $s \in \mathscr{S}_{n}$, such that $P \in s\left(\dot{\Delta}_{n}\right)$. This $s$ is called the carrier of $P$.
+\end{PROP}
 
-Proof. (a) $\Rightarrow$ (b): Given $s \in \mathscr{S}_{n}$, let $\mathscr{S}^{\prime}=\mathscr{S} \cup\left\{s \varepsilon_{n}^{i}\right\}=$ union of $\mathscr{S}$ with $s \varepsilon_{n}^{i}$. For every $t \in \mathscr{S}$ we know that $t^{-1} s$ is order preserving, hence also $t^{-1} s \varepsilon_{n}^{i}$, hence $\mathscr{S}^{\prime}$ is an ordered atlas. But $\mathscr{S}$ is maximal, hence $\mathscr{S}^{\prime}=\mathscr{S}$, i.e., $s \varepsilon_{n}^{i} \in \mathscr{S}$.\\
+Proof. 
+
+\begin{PROOF}{AT-D72-08-09}{P: Charakterisierung von maximalen geordneten simplizialen Atlanten}
+(a) $\Rightarrow$ (b): Given $s \in \mathscr{S}_{n}$, let $\mathscr{S}^{\prime}=\mathscr{S} \cup\left\{s \varepsilon_{n}^{i}\right\}=$ union of $\mathscr{S}$ with $s \varepsilon_{n}^{i}$. For every $t \in \mathscr{S}$ we know that $t^{-1} s$ is order preserving, hence also $t^{-1} s \varepsilon_{n}^{i}$, hence $\mathscr{S}^{\prime}$ is an ordered atlas. But $\mathscr{S}$ is maximal, hence $\mathscr{S}^{\prime}=\mathscr{S}$, i.e., $s \varepsilon_{n}^{i} \in \mathscr{S}$.
+
 (b) $\Rightarrow$ (c): Given $P \in X$, choose $t: \Delta_{m} \rightarrow X$ in $\mathscr{S}$ such that $P \in \operatorname{im}(t)$, say $P=t(x)$ where $x=\sum_{i=0}^{m} x_{i} e^{i}, x_{i} \geq 0, \sum x_{i}=1$. Let $0 \leq i_{1}<i_{2}<\cdots i_{m-n} \leq m$ be all indices such that $x_{i_{v}}=0$, i.e., $i \neq i_{1}, \ldots, i_{m-n} \Rightarrow x_{i}>0$. Then $x=$ $\varepsilon^{i_{m-n}} \ldots \varepsilon^{i_{1}}(y)$ for some $y \in \dot{\Delta}_{n}$, hence $P \in\left(t \varepsilon^{i_{m-n}} \ldots \varepsilon^{i_{1}}\right)\left(\dot{\Delta}_{n}\right)$, and $s=$ $t \varepsilon^{i_{m-n}} \ldots \varepsilon^{i_{1}} \in \mathscr{S}$ by assumption (b). If also $r: \Delta_{l} \rightarrow X$ is in $\mathscr{S}$ and $\operatorname{Per}\left(\dot{\Delta}_{l}\right)$ then $y \in s^{-1} r\left(\Delta_{l}\right)$ hence $s^{-1} r\left(\Delta_{l}\right)=\Delta_{n}$ (because it is a face of $\Delta_{n}$ ); similarly $\Delta_{l}=r^{-1} s\left(\Delta_{n}\right)$, hence $l=n$. Because $r^{-1} s$ is order preserving, $r^{-1} s=\mathrm{id}$, hence $r=s$.\\
-(Remark: We did not use (b) to show uniqueness, i.e the uniqueness part of $c$ holds for arbitrary ordered atlasses.)\\
-(c) $\Rightarrow$ (a): Let $\mathscr{T}$ an ordered atlas containing $\mathscr{S}$, pick $t: \Delta_{m} \rightarrow X$ in $\mathscr{T}$, $x \in \dot{\Delta}_{m}$, and choose $s: \Delta_{n} \rightarrow X$ in $\mathscr{S}$ such that $t(x) \in s\left(\dot{\Delta}_{n}\right)$; this is possible by assumption (c). By the remark above (in parenthesis) this implies $t=s$, hence $\mathscr{T} \subset \mathscr{S}$.\\
-7.6 Proposition. Let $\mathscr{T}$ be a triangulation of $X$, and let $\mathscr{E}^{n}$ be the set of all subsets of $X$ of the form $t\left(\dot{\Delta}_{n}\right)$ where $t \in \mathscr{T}_{n}$. Then $\mathscr{E}=\bigcup_{n} \mathscr{E}^{n}$ is a CWdecomposition of $X$, and $t \in \mathscr{T}_{n}$ is a characteristic map for $t\left(\dot{\Delta}_{n}\right) \in \mathscr{E}^{n}$ (using $\Delta_{n} \approx \mathbb{B}^{n}$ ). If $\mathscr{S} \subset \mathscr{T}$ is an ordered triangulation then the correspondence $\mathscr{S}_{n} \rightarrow \mathscr{E}^{n}, s \mapsto s\left(\dot{\Delta}_{n}\right)$ is bijective.
+(Remark: We did not use (b) to show uniqueness, i.e the uniqueness part of $c$ holds for arbitrary ordered atlasses.)
 
-Proof. By 7.5(c), the sets $t\left(\dot{\Delta}_{n}\right)$ cover $X$, and the correspondence $s \mapsto s\left(\dot{\Delta}_{n}\right)$ is bijective. If $t\left(\stackrel{\circ}{\Delta}_{n}\right) \cap t^{\prime}\left(\stackrel{\circ}{\Delta}_{n^{\prime}}\right) \neq \emptyset$ then $n=n^{\prime}$ and $t$ differs from $t^{\prime}$ only by a permutation of the vertices (compare proof of $7.5(\mathrm{~b}) \Rightarrow$ (c), $2^{\text {nd }}$ part) hence $t\left(\stackrel{\circ}{\Delta}_{n}\right)=t^{\prime}\left(\stackrel{\circ}{\Delta}_{n}\right)$. This proves condition 2.1 (i). The remaining conditions 2.1 (ii)-(v) are obvious.
+(c) $\Rightarrow$ (a): Let $\mathscr{T}$ an ordered atlas containing $\mathscr{S}$, pick $t: \Delta_{m} \rightarrow X$ in $\mathscr{T}$, $x \in \dot{\Delta}_{m}$, and choose $s: \Delta_{n} \rightarrow X$ in $\mathscr{S}$ such that $t(x) \in s\left(\dot{\Delta}_{n}\right)$; this is possible by assumption (c). By the remark above (in parenthesis) this implies $t=s$, hence $\mathscr{T} \subset \mathscr{S}$.
+\end{PROOF}
 
-We now discuss maps between simplicial spaces.\\
-7.7 Definition. If $(X, \mathscr{S}),(Y, \mathscr{T})$ are simplicial spaces, and $s \in \mathscr{S}_{m}$ then a map $f: \operatorname{im}(s) \rightarrow Y$ is called linear if some $t \in \mathscr{T}$ exists (say $t \in \mathscr{T}_{n}$ ) such that $\operatorname{im}(f) \subset \operatorname{im}(t)$ and $t^{-1} f s: \Delta_{m} \rightarrow \Delta_{n}$ is linear. This definition does not depend on the choice of $s$ and $t$ : If $\operatorname{im}\left(s^{\prime}\right)=\operatorname{im}(s)$, and $\operatorname{im}(f) \subset \operatorname{im}\left(t^{\prime}\right)$ then $t^{-1} f s^{\prime}=\left(t^{-1} t\right)\left(t^{-1} f s\right)\left(s^{-1} s^{\prime}\right)$ is also linear because ( $s, s^{\prime}$ ) and ( $t, t^{\prime}$ ) are linearly related. By the same argument, if $f: \operatorname{im}(s) \rightarrow Y$ is linear and $\operatorname{im}\left(s^{\prime}\right) \subset \operatorname{im}(s)$ then $f \mid \operatorname{im}\left(s^{\prime}\right): \operatorname{im}\left(s^{\prime}\right) \rightarrow Y$ is also linear.\\
-7.8 Proposition. If $(X, \mathscr{S}),(Y, \mathscr{T})$ are simplicial spaces, $s \in \mathscr{S}_{m}, t \in \mathscr{T}_{n}$, and $y^{0}, y^{1}, \ldots, y^{m}$ are arbitrary points in $\operatorname{im}(t)$ then there is a unique linear map $f: \operatorname{im}(s) \rightarrow Y$ such that $f s\left(e^{i}\right)=y^{i}$. I.e., a linear map of $\operatorname{im}(s)$ is determined by its values on the vertices of $s$, and these values can be prescribed with the sole restriction that they must lie in some simplex $\operatorname{im}(t)$.
 
-Proof. There is a unique linear map $g: \Delta_{m} \rightarrow \Delta_{n}$ such that $g\left(e^{i}\right)=t^{-1}\left(y^{i}\right)$, and $f=t g s^{-1}$.\\
-7.9 Proposition and Definition. Let $(X, \mathscr{S}),(Y, \mathscr{T})$ be simplicial spaces. The following properties of a map $f: X \rightarrow Y$ are equivalent.\\
-(a) $f$ maps every simplex $\operatorname{im}(s) \subset X$, linearly onto some simplex $\operatorname{im}(t) \subset Y$.\\
+
+7.6 Proposition. 
+
+
+\begin{PROP}{AT-D72-08-10}{Simpliziale Räume als CW-Räume}
+Let $\mathscr{T}$ be a triangulation of $X$, and let $\mathscr{E}^{n}$ be the set of all subsets of $X$ of the form $t\left(\dot{\Delta}_{n}\right)$ where $t \in \mathscr{T}_{n}$. Then $\mathscr{E}=\bigcup_{n} \mathscr{E}^{n}$ is a CWdecomposition of $X$, and $t \in \mathscr{T}_{n}$ is a characteristic map for $t\left(\dot{\Delta}_{n}\right) \in \mathscr{E}^{n}$ (using $\Delta_{n} \approx \mathbb{B}^{n}$ ). If $\mathscr{S} \subset \mathscr{T}$ is an ordered triangulation then the correspondence $\mathscr{S}_{n} \rightarrow \mathscr{E}^{n}, s \mapsto s\left(\dot{\Delta}_{n}\right)$ is bijective.
+\end{PROP}
+
+Proof. 
+
+\begin{PROOF}{AT-D72-08-11}{P: Simpliziale Räume als CW-Räume}
+By 7.5(c), the sets $t\left(\dot{\Delta}_{n}\right)$ cover $X$, and the correspondence $s \mapsto s\left(\dot{\Delta}_{n}\right)$ is bijective. If $t\left(\stackrel{\circ}{\Delta}_{n}\right) \cap t^{\prime}\left(\stackrel{\circ}{\Delta}_{n^{\prime}}\right) \neq \emptyset$ then $n=n^{\prime}$ and $t$ differs from $t^{\prime}$ only by a permutation of the vertices (compare proof of $7.5(\mathrm{~b}) \Rightarrow$ (c), $2^{\text {nd }}$ part) hence $t\left(\stackrel{\circ}{\Delta}_{n}\right)=t^{\prime}\left(\stackrel{\circ}{\Delta}_{n}\right)$. This proves condition 2.1 (i). The remaining conditions 2.1 (ii)-(v) are obvious.
+\end{PROOF}
+
+
+
+We now discuss maps between simplicial spaces.
+
+
+7.7 Definition. 
+
+
+\begin{DEF}{AT-D72-08-12}{Abbildung zwischen Simplizialen Räumen}
+If $(X, \mathscr{S}),(Y, \mathscr{T})$ are simplicial spaces, and $s \in \mathscr{S}_{m}$ then a map $f: \operatorname{im}(s) \rightarrow Y$ is called linear if some $t \in \mathscr{T}$ exists (say $t \in \mathscr{T}_{n}$ ) such that $\operatorname{im}(f) \subset \operatorname{im}(t)$ and $t^{-1} f s: \Delta_{m} \rightarrow \Delta_{n}$ is linear. This definition does not depend on the choice of $s$ and $t$ : If $\operatorname{im}\left(s^{\prime}\right)=\operatorname{im}(s)$, and $\operatorname{im}(f) \subset \operatorname{im}\left(t^{\prime}\right)$ then $t^{-1} f s^{\prime}=\left(t^{-1} t\right)\left(t^{-1} f s\right)\left(s^{-1} s^{\prime}\right)$ is also linear because ( $s, s^{\prime}$ ) and ( $t, t^{\prime}$ ) are linearly related. By the same argument, if $f: \operatorname{im}(s) \rightarrow Y$ is linear and $\operatorname{im}\left(s^{\prime}\right) \subset \operatorname{im}(s)$ then $f \mid \operatorname{im}\left(s^{\prime}\right): \operatorname{im}\left(s^{\prime}\right) \rightarrow Y$ is also linear.\\
+\end{DEF}
+
+
+7.8 Proposition. 
+
+\begin{PROP}{AT-D72-08-13}{Lineare Abbildung zwischen Bildern von Simplize in simplizialen Räumen}
+If $(X, \mathscr{S}),(Y, \mathscr{T})$ are simplicial spaces, $s \in \mathscr{S}_{m}, t \in \mathscr{T}_{n}$, and $y^{0}, y^{1}, \ldots, y^{m}$ are arbitrary points in $\operatorname{im}(t)$ then there is a unique linear map $f: \operatorname{im}(s) \rightarrow Y$ such that $f s\left(e^{i}\right)=y^{i}$. I.e., a linear map of $\operatorname{im}(s)$ is determined by its values on the vertices of $s$, and these values can be prescribed with the sole restriction that they must lie in some simplex $\operatorname{im}(t)$.
+\end{PROP}
+
+Proof. 
+
+\begin{PROOF}{AT-D72-08-14}{P: Lineare Abbildung zwischen Bildern von Simplize in simplizialen Räumen}
+There is a unique linear map $g: \Delta_{m} \rightarrow \Delta_{n}$ such that $g\left(e^{i}\right)=t^{-1}\left(y^{i}\right)$, and $f=t g s^{-1}$.
+\end{PROOF}
+
+
+7.9 Proposition and Definition. 
+
+
+\begin{DEF}{AT-D72-08-15}{Simpliziale Abbildung zwischen simplizialen Räumen}
+Let $(X, \mathscr{S}),(Y, \mathscr{T})$ be simplicial spaces. The following properties of a map $f: X \rightarrow Y$ are equivalent.
+
+(a) $f$ maps every simplex $\operatorname{im}(s) \subset X$, linearly onto some simplex $\operatorname{im}(t) \subset Y$.
+
 (b) $f$ maps vertices into vertices and is linear on each simplex $\operatorname{im}(s)$ of $X$.
 
 Such a map is called simplicial. If $\mathscr{S}, \mathscr{T}$ are ordered and all $t^{-1} f s$ preserve the order of the vertices then $f$ is an ordered simplicial map. Composites of simplicial maps are again simplicial, and identy maps are simplicial. Simplicial spaces and maps then form a category which we denote by $\mathscr{S} \mu \ell$.
+\end{DEF}
 
-Proof. (a) $\Rightarrow$ (b) is clear: $f$ maps every vertex $v \in X$ onto a simplex, $f(v)=t\left(\Delta_{n}\right)$, hence $n=0$ and $f(v)$ is a vertex.\\
-Conversely, if (b) holds and $s \in \mathscr{S}_{m}$ then $f$ maps im(s) linearly into some simplex $\tau\left(\Delta_{n}\right), \tau \in \mathscr{T}_{n}$, and maps vertices of $s$ into vertices of $\tau$. Therefore $\tau^{-1} f s\left(\Delta_{m}\right)$ is a face of $\Delta_{n}$, and $f s\left(\Delta_{m}\right)=\tau\left[\tau^{-1} f s\left(\Delta_{m}\right)\right]$ is a simplex of $Y$.\\
-7.10 Proposition. Simplicial maps $f: X \rightarrow Y$ are cellular maps with respect to the $C W$-decomposition $\mathscr{E}^{n}=\left\{t\left(\dot{\Delta}_{n}\right) \mid t \in \mathscr{T}_{n}\right\}$ of 7.6 .
+Proof. 
 
-Proof. Surjective linear maps never raise dimensions. Therefore $f$ maps $X^{n}=\bigcup_{|s| \leq n} \operatorname{im}(s)$ (where $s$ denotes simplices of $X$, and $\|=$ dimension) into $Y^{n}$.\\
-7.11 Proposition. Given simplicial spaces $(X, \mathscr{S}),(Y, \mathscr{T})$ and a map $\varphi: \mathscr{S}_{0} \rightarrow \mathscr{T}_{0}$ such that $\left\{\varphi v^{0}, \varphi v^{1}, \ldots, \varphi v^{m}\right\}$ are vertices of a simplex in $Y$ whenever $\left\{v^{0}, \ldots, v^{m}\right\}$ are vertices of a simplex in $X$. Then there exists a unique simplicial map $f: X \rightarrow Y$ such that $f(v)=\varphi(v)$ for $v \in \mathscr{S}_{0}$. I.e., simplicial maps are determined by their values on vertices and these values can be prescribed with the only restriction that vertices of a simplex go into vertices of a simplex.
+\begin{PROOF}{AT-D72-08-16}{P: Simpliziale Abbildung zwischen simplizialen Räumen}
+(a) $\Rightarrow$ (b) is clear: $f$ maps every vertex $v \in X$ onto a simplex, $f(v)=t\left(\Delta_{n}\right)$, hence $n=0$ and $f(v)$ is a vertex.
 
-Proof. For every $s \in \mathscr{S}$ there is, by 7.8 , a unique linear map $f^{s}: \operatorname{im}(s) \rightarrow Y$ such that $f^{s}(v)=\varphi(v)$ for all vertices $v$ of $s$. Uniqueness insures that $f^{s}, f^{s^{\prime}}$ agree on $\operatorname{im}(s) \cap \operatorname{im}\left(s^{\prime}\right)$ (note that $\operatorname{im}(s) \cap \operatorname{im}\left(s^{\prime}\right)=\operatorname{im}\left(s^{\prime \prime}\right)$ for some $s^{\prime \prime} \in \mathscr{S}$ ), hence (by 7.1 (iv)) there is a unique map $f: X \rightarrow Y$ such that $f \mid \mathrm{im}(s)=f^{s}$, and this $f$ is simplicial by 7.9 (b).\\
-7.12 Example and Definition. Let $Y=[0,1]$ be the unit interval with the obvious simplicial structure (the linear map $\Delta_{1} \rightarrow[0,1], e^{0} \mapsto 0, e^{1} \mapsto 1$\\
-is an atlas). For every simplicial space ( $X, \mathscr{S}$ ) and every vertex $v \in \mathscr{S}_{0}$ there is, by 7.11 , a unique simplicial map $\hat{v}: X \rightarrow[0,1]$ such that $\hat{v}(v)=1$, and $\hat{v}(w)=0$ if $w \neq v, w \in \mathscr{S}_{0}$. This map is called the barycentric $v$-coordinate. For every $x \in X$ the numbers $\left\{x_{v}=\hat{v}(x)\right\}, v \in \mathscr{S}_{0}$, are called the barycentric coordinates of $x$. They have the following properties:
+Conversely, if (b) holds and $s \in \mathscr{S}_{m}$ then $f$ maps im(s) linearly into some simplex $\tau\left(\Delta_{n}\right), \tau \in \mathscr{T}_{n}$, and maps vertices of $s$ into vertices of $\tau$. Therefore $\tau^{-1} f s\left(\Delta_{m}\right)$ is a face of $\Delta_{n}$, and $f s\left(\Delta_{m}\right)=\tau\left[\tau^{-1} f s\left(\Delta_{m}\right)\right]$ is a simplex of $Y$.
+\end{PROOF}
 
+
+7.10 Proposition. 
+
+
+\begin{PROP}{AT-D72-08-17}{Simpliziale Abbildungen sind CW-Abbildungen}
+Simplicial maps $f: X \rightarrow Y$ are cellular maps with respect to the $C W$-decomposition $\mathscr{E}^{n}=\left\{t\left(\dot{\Delta}_{n}\right) \mid t \in \mathscr{T}_{n}\right\}$ of 7.6 .
+\end{PROP}
+
+Proof. 
+
+\begin{PROOF}{AT-D72-08-18}{P: Simpliziale Abbildungen sind CW-Abbildungen}
+Surjective linear maps never raise dimensions. Therefore $f$ maps $X^{n}=\bigcup_{|s| \leq n} \operatorname{im}(s)$ (where $s$ denotes simplices of $X$, and $\|=$ dimension) into $Y^{n}$.
+\end{PROOF}
+
+
+7.11 Proposition. 
+
+
+\begin{PROP}{AT-D72-08-19}{Charakterisierung von simplizialen Abbildungen durch Knoten-Zuweisungen}
+Given simplicial spaces $(X, \mathscr{S}),(Y, \mathscr{T})$ and a map $\varphi: \mathscr{S}_{0} \rightarrow \mathscr{T}_{0}$ such that $\left\{\varphi v^{0}, \varphi v^{1}, \ldots, \varphi v^{m}\right\}$ are vertices of a simplex in $Y$ whenever $\left\{v^{0}, \ldots, v^{m}\right\}$ are vertices of a simplex in $X$. Then there exists a unique simplicial map $f: X \rightarrow Y$ such that $f(v)=\varphi(v)$ for $v \in \mathscr{S}_{0}$. I.e., simplicial maps are determined by their values on vertices and these values can be prescribed with the only restriction that vertices of a simplex go into vertices of a simplex.
+\end{PROP}
+
+Proof. 
+
+\begin{PROOF}{AT-D72-08-20}{P: Charakterisierung von simplizialen Abbildungen durch Knoten-Zuweisungen}
+For every $s \in \mathscr{S}$ there is, by 7.8 , a unique linear map $f^{s}: \operatorname{im}(s) \rightarrow Y$ such that $f^{s}(v)=\varphi(v)$ for all vertices $v$ of $s$. Uniqueness insures that $f^{s}, f^{s^{\prime}}$ agree on $\operatorname{im}(s) \cap \operatorname{im}\left(s^{\prime}\right)$ (note that $\operatorname{im}(s) \cap \operatorname{im}\left(s^{\prime}\right)=\operatorname{im}\left(s^{\prime \prime}\right)$ for some $s^{\prime \prime} \in \mathscr{S}$ ), hence (by 7.1 (iv)) there is a unique map $f: X \rightarrow Y$ such that $f \mid \mathrm{im}(s)=f^{s}$, and this $f$ is simplicial by 7.9 (b).
+\end{PROOF}
+
+
+7.12 Example and Definition. 
+
+\begin{DEF}{AT-D72-08-21}{Baryzentrum-Koordinaten}
+Let $Y=[0,1]$ be the unit interval with the obvious simplicial structure (the linear map $\Delta_{1} \rightarrow[0,1], e^{0} \mapsto 0, e^{1} \mapsto 1$ is an atlas). For every simplicial space ( $X, \mathscr{S}$ ) and every vertex $v \in \mathscr{S}_{0}$ there is, by 7.11 , a unique simplicial map $\hat{v}: X \rightarrow[0,1]$ such that $\hat{v}(v)=1$, and $\hat{v}(w)=0$ if $w \neq v, w \in \mathscr{S}_{0}$. This map is called the barycentric $v$-coordinate. For every $x \in X$ the numbers $\left\{x_{v}=\hat{v}(x)\right\}, v \in \mathscr{S}_{0}$, are called the barycentric coordinates of $x$. 
+
+They have the following properties:
 $$
 x_{v} \geq 0 ; \text { for fixed } x \in X \text { almost all } x_{v} \text { are zero } ; \sum_{v} x_{v}=1 .
 $$
+To see the second and third property choose $s \in \mathscr{S}_{n}$ such that $x \in \operatorname{im}(s)$. Then $x_{v}=0$ if $v$ is not a vertex of $s$, and $s^{-1}(x)=\sum_{i=0}^{n} x_{v_{i}} \cdot e^{i}$, where $v^{i}=s\left(e^{i}\right)$ are the vertices of $s$. This also justifies the notation "barycentric coordinate" and shows that $x$ is determined by its barycentric coordinates.
+\end{DEF}
 
-To see the second and third property choose $s \in \mathscr{S}_{n}$ such that $x \in \operatorname{im}(s)$. Then $x_{v}=0$ if $v$ is not a vertex of $s$, and $s^{-1}(x)=\sum_{i=0}^{n} x_{v_{i}} \cdot e^{i}$, where $v^{i}=s\left(e^{i}\right)$ are the vertices of $s$. This also justifies the notation "barycentric coordinate" and shows that $x$ is determined by its barycentric coordinates.\\
-7.14 Remark. In some situations it is advantageous to introduce the strong topology in a simplicial space $X$. By this is meant the coarsest topology under which all barycentric coordinates $\hat{v}: X \rightarrow[0,1]$ are continuous. Then a map $g: Z \rightarrow X$ ( $Z$ any topological space) is continuous if and only if all composites $\hat{v} \circ g$ are continuous. If $X$ is locally finite, i.e. if every vertex occurs in a finite number of simplices only, then the weak and strong topology coincide. Otherwise they don't, but in any case the two topologies define homotopy equivalent spaces (cf. A. 2.9).
 
-\section*{Proposition 7.11 suggests the following}
-7.15 Definition. A vertex schema is a set $V$ together with a set $\mathscr{D}$ of finite subsets of $V$, called the distinguished subsets, such that\\
+7.14 Remark. 
+
+\begin{REM}{AT-D72-08-22}{Starke Topologie in simplizialen Räumen}
+In some situations it is advantageous to introduce the strong topology in a simplicial space $X$. By this is meant the coarsest topology under which all barycentric coordinates $\hat{v}: X \rightarrow[0,1]$ are continuous. Then a map $g: Z \rightarrow X$ ( $Z$ any topological space) is continuous if and only if all composites $\hat{v} \circ g$ are continuous. If $X$ is locally finite, i.e. if every vertex occurs in a finite number of simplices only, then the weak and strong topology coincide. Otherwise they don't, but in any case the two topologies define homotopy equivalent spaces (cf. A. 2.9).
+\end{REM}
+
+
+
+Proposition 7.11 suggests the following
+
+
+7.15 Definition. 
+
+\begin{DEF}{AT-D72-08-23}{Vertex-Schema}
+A vertex schema is a set $V$ together with a set $\mathscr{D}$ of finite subsets of $V$, called the distinguished subsets, such that\\
+(a) for every $v \in V,\{v\} \in \mathscr{D}$, i.e., all singletons are distinguished,\\
+(b) $D \in \mathscr{D}, D^{\prime} \subset D \Rightarrow D^{\prime} \in \mathscr{D}$, i.e., subsets of distinguished sets are distinguished.
+\end{DEF}
+
+\begin{EXA}{AT-D72-08-25}{Vertex-Schema Beispiel}
+For example, if $\mathscr{S}$ is a triangulation of $X$, let $V=\mathscr{S}_{0}$ and call $D \subset \mathscr{S}_{0}$ distinguished, if the points in $D$ form the vertices of a simplex $s \in \mathscr{S}$. We denote this vertex schema by $S(X, \mathscr{S})$.
+\end{EXA}
+
+\begin{DEF}{AT-D72-08-24}{Abbildung von Vertex-Schema}
+A map $(V, \mathscr{D}) \rightarrow\left(V^{\prime}, \mathscr{D}^{\prime}\right)$ of vertex schemata is a set theoretic map $\varphi$ : $V \rightarrow V^{\prime}$ which takes distinguished sets into distinguished sets, i.e., $D \in \mathscr{D} \Rightarrow \varphi(D) \in \mathscr{D}^{\prime}$.
+\end{DEF}
+
+\begin{DEF}{AT-D72-08-26}{Kategorie der Vertex-Schema}
+A vertex schema is a set $V$ together with a set $\mathscr{D}$ of finite subsets of $V$, called the distinguished subsets, such that\\
 (a) for every $v \in V,\{v\} \in \mathscr{D}$, i.e., all singletons are distinguished,\\
 (b) $D \in \mathscr{D}, D^{\prime} \subset D \Rightarrow D^{\prime} \in \mathscr{D}$, i.e., subsets of distinguished sets are distinguished.
 
-For example, if $\mathscr{S}$ is a triangulation of $X$, let $V=\mathscr{S}_{0}$ and call $D \subset \mathscr{S}_{0}$ distinguished, if the points in $D$ form the vertices of a simplex $s \in \mathscr{S}$. We denote this vertex schema by $S(X, \mathscr{S})$.
-
 A map $(V, \mathscr{D}) \rightarrow\left(V^{\prime}, \mathscr{D}^{\prime}\right)$ of vertex schemata is a set theoretic map $\varphi$ : $V \rightarrow V^{\prime}$ which takes distinguished sets into distinguished sets, i.e., $D \in \mathscr{D} \Rightarrow \varphi(D) \in \mathscr{D}^{\prime}$.
 
-Under ordinary composition these maps form a category, denoted by $\mathscr{V} \mathscr{S}$.\\
+Under ordinary composition these maps form a category, denoted by $\mathscr{V} \mathscr{S}$.
+\end{DEF}
+
+\begin{EXA}{AT-D72-08-27}{Induzierte Abbildung von Vertex-Schema}
 For example, if $f:(X, \mathscr{S}) \rightarrow(Y, \mathscr{T})$ is a simplicial map then the induced map $\mathscr{S}_{0} \rightarrow \mathscr{T}_{0}$ is a map of vertex schemata which we denote by $S f$ : $S(X, \mathscr{S}) \rightarrow S(Y, \mathscr{T})$.
+\end{EXA}
 
-If we associate with every simplicial space ( $X, \mathscr{S}$ ) its vertex schema $S(X, \mathscr{S})$, and with every simplicial map $f:(X, \mathscr{S}) \rightarrow(Y, \mathscr{T})$ the induced map $S f$ of vertex schemata then $S: \mathscr{S} \mu \mathscr{L} \rightarrow \mathscr{V} \mathscr{S}$ is a covariant functor, and in fact,\\
-7.16 Proposition. $S: \mathscr{S} p t \rightarrow \mathscr{V} \mathscr{S}$ is an equivalence of categories, i.e., there exists a functor $R: \mathscr{V} \mathscr{S} \rightarrow \mathscr{S}_{\text {ht }}$ such that $R S \sim \operatorname{Id}_{\text {she }}, S R \sim \operatorname{Id}_{x y}$.
 
-Proof. The proof is suggested by 7.12-7.13. Given a vertex schema ( $V, \mathscr{D}$ ), let $X$ denote the set of all functions $x: V \rightarrow \mathbb{R}$ such that\\
+\begin{DEF}{AT-D72-08-28}{Covarianter Funktor von SIMP nach VS}
+If we associate with every simplicial space ( $X, \mathscr{S}$ ) its vertex schema $S(X, \mathscr{S})$, and with every simplicial map $f:(X, \mathscr{S}) \rightarrow(Y, \mathscr{T})$ the induced map $S f$ of vertex schemata then $S: \mathscr{S} \mu \mathscr{L} \rightarrow \mathscr{V} \mathscr{S}$ is a covariant functor.
+\end{DEF}
+
+
+
+7.16 Proposition. 
+
+
+\begin{PROP}{AT-D72-08-29}{SIMP und VS sind äquivalent}
+$S: \mathscr{S} p t \rightarrow \mathscr{V} \mathscr{S}$ is an equivalence of categories, i.e., there exists a functor $R: \mathscr{V} \mathscr{S} \rightarrow \mathscr{S}_{\text {ht }}$ such that $R S \sim \operatorname{Id}_{\text {she }}, S R \sim \operatorname{Id}_{x y}$.
+\end{PROP}
+
+Proof. 
+
+\begin{PROOF}{AT-D72-08-30}{P: SIMP und VS sind äquivalent}
+The proof is suggested by 7.12-7.13. Given a vertex schema ( $V, \mathscr{D}$ ), let $X$ denote the set of all functions $x: V \rightarrow \mathbb{R}$ such that\\
 (a) $\{v \in V \mid x(v) \neq 0\} \in \mathscr{D}$, i.e., the set of points where $x$ does not vanish is distinguished, in particular finite;\\
 (b) $x(v) \geq 0, \sum_{v \in V} x(v)=1$.
 
@@ -3080,9 +3753,22 @@ is a natural equivalence of vertex schemata; and on the other side, in $\mathscr
 $$
 (X, \mathscr{S}) \rightarrow R S(X, \mathscr{S}), \quad v \mapsto \hat{v}, \quad v \in \mathscr{S}_{0} .
 $$
+\end{PROOF}
 
-7.17 Remark. In order to establish the preceding homeomorphism $(X, \mathscr{S}) \approx R S(X, \mathscr{S})$ we never really used that $X$ is hausdorff. But $R S(X, \mathscr{S})$ was shown to be hausdorff, hence $X$ is, i.e., if a space $X$ admits a simplicial atlas with Properties (i)-(iv) of 7.1 then $X$ is hausdorff.\\
-7.18 Exercises. 1*. Let $b_{1}, b_{2}, \ldots, b_{n}$ be a base of the vector space $\mathbb{R}^{n}$. For every permutation $\pi$ of $(1,2, \ldots, n)$ consider the linear simplex $s^{\pi}: \Delta_{n} \rightarrow \mathbb{R}^{n}$ with vertices $0, b_{\pi(1)}, b_{\pi(1)}+b_{\pi(2)}, b_{\pi(1)}+b_{\pi(2)}+b_{\pi(3)}, \ldots$, $\sum_{i} b_{\pi(i)}$. Show that these simplices form a simplicial atlas of the basic parallelepiped $P=\left\{\sum_{i=1}^{n} t_{i} b_{i} \mid 0 \leq t_{i} \leq 1\right\}$. By parallel translation with $v \in \mathbb{R}^{n}$ one gets a simplicial atlas for $v+P$, and if $v$ varies over all integral linear combinations of ( $b_{1}, \ldots, b_{n}$ ) one gets a simplicial atlas on $\mathbb{R}^{n}$ which is invariant under translation with $b_{i}$.\\
+
+
+7.17 Remark. 
+
+\begin{REM}{AT-D72-08-31}{Raum mit simplizialen Atlant sind Hausdorff}
+In order to establish the preceding homeomorphism $(X, \mathscr{S}) \approx R S(X, \mathscr{S})$ we never really used that $X$ is hausdorff. But $R S(X, \mathscr{S})$ was shown to be hausdorff, hence $X$ is, i.e., if a space $X$ admits a simplicial atlas with Properties (i)-(iv) of 7.1 then $X$ is hausdorff.
+\end{REM}
+
+
+7.18 Exercises. 
+
+1*. Let $b_{1}, b_{2}, \ldots, b_{n}$ be a base of the vector space $\mathbb{R}^{n}$. For every permutation $\pi$ of $(1,2, \ldots, n)$ consider the linear simplex $s^{\pi}: \Delta_{n} \rightarrow \mathbb{R}^{n}$ with vertices $0, b_{\pi(1)}, b_{\pi(1)}+b_{\pi(2)}, b_{\pi(1)}+b_{\pi(2)}+b_{\pi(3)}, \ldots$, $\sum_{i} b_{\pi(i)}$. Show that these simplices form a simplicial atlas of the basic parallelepiped $P=\left\{\sum_{i=1}^{n} t_{i} b_{i} \mid 0 \leq t_{i} \leq 1\right\}$. By parallel translation with $v \in \mathbb{R}^{n}$ one gets a simplicial atlas for $v+P$, and if $v$ varies over all integral linear combinations of ( $b_{1}, \ldots, b_{n}$ ) one gets a simplicial atlas on $\mathbb{R}^{n}$ which is invariant under translation with $b_{i}$.\\
+
+
 2. For each $m=0,1,2, \ldots$ let $\mathscr{W}^{m}$ be a simplicial atlas on $\Delta_{m}$. Let $\mathscr{I}^{n}$ denote the standard simplicial atlas on $\Delta_{n}$ (which consists of all injective linear maps $\Lambda_{m} \rightarrow \Lambda_{n}$ taking vertices into vertices). We say $\mathscr{K}=\left\{\mathbb{K}^{m}\right\}$ is $\mathscr{I}$-compatible if $(\varphi \circ u) \in \mathscr{U}^{n}$ for all $\left(u: \Delta_{h} \rightarrow \Delta_{m}\right) \in \mathscr{Y}^{m},\left(\varphi: \Delta_{m} \rightarrow \Delta_{n}\right) \in \mathscr{I}^{n}$, and all $k, m, n$. Show: If $\mathscr{U}$ is $\mathscr{F}$-compatible and $\mathscr{S}$ is any simplicial atlas on $X$ then the union of the sets
 
 $$
@@ -3091,65 +3777,148 @@ $$
 
 is also a simplicial atlas on $X$. If $f:\left(X, \mathscr{Y}^{\prime}\right) \rightarrow\left(X^{\prime}, \mathscr{S}^{\prime}\right)$ is an injective simplicial map then $f^{\prime}:(X, \mathscr{S} \mathscr{U}) \rightarrow\left(X^{\prime}, \mathscr{L}^{\prime} \mathscr{U}\right)$ is also simplicial.\\
 For instance, the barycentric subdivision $\beta_{n} l_{n}$ of the identity map $l_{n}$ of $\Delta_{n}$, as defined in III,6.2, is a linear combination of linear simplices $A_{n}>A_{n}$ which form a simplicial atlas on $\Delta_{n}$; let $\mathscr{B} \bar{B}^{n}$ denote the corresponding triangulation ( $=$ maximal simplicial atlas) of $\Delta_{n}$. Then the sequence $\mathscr{B}=\left\{\mathscr{B}^{n}\right\}$ is $\mathscr{Y}$-compatible, and $\mathscr{H}^{\prime} \mathscr{B}$ is called the barycentric subdivion of $\%$\\
+
+
 3. Let ( $X, \mathscr{S}$ ) be a simplicial space such that the set $\mathscr{S}_{0}$ of vertices is finite, say $\mathscr{U}_{0}=\left\{v_{0}, v_{1}, \ldots, v_{N}\right\}$.\\
 (i) Define a simplicial map $I: X \rightarrow \Delta_{N}$ by $I\left(v_{k}\right)=e^{k}$ and show that $I$ maps $X$ isomorphically onto a simplicial subspace of $\Delta_{N}$.\\
 (ii) If $\mathscr{S}_{j}=\emptyset$ for $j>n$, i.e., if $\operatorname{dim}(X) \leq n$, choose points $w_{0}, w_{1}, \ldots, w_{N}$ in $\Delta_{2 n+1}$ such that any $r$ of them are linearly independent (in $\mathbb{R}^{2 n+2}$ ), for $r \leq 2 n+2$. There is a unique map $J: X \rightarrow \Delta_{2 n+1}$ which is linear on each simplex of $X$ and takes $v_{i}$ into $w_{i}$. Show that $J$ is injective. In particular, any $X$ of dim $\leq n$ embeds "rectilinearly" into $\Delta_{2 n+1}$.\\
-4. Let $(X, \mathscr{S}),(Y, \mathscr{T})$ be simplicial spaces. A map $f: X \rightarrow Y$ is called direct if for every vertex $v \in X$ there exists a vertex $v^{\prime} \in Y$ such that $\hat{v}(x)>0 \Rightarrow \hat{v}^{\prime}(f(x))>0$. (Note: The set $\{x \in X \mid \hat{v}(x)>0\}$ is called the open star of $v$; thus, $f$ is direct if it maps open stars into open stars.) If $f$ is direct and $v_{0}, v_{1}, \ldots, v_{n}$ are vertices of a simplex of $X$ then, for some $x \in X$, all $\hat{l}_{i}(x)$ are positive, hence all $\hat{v}_{i}^{\prime}(f(x))>0$, hence $\left\{c_{i}^{\prime}\right\}$ are vertices of a simplex of $Y$ (e.g. the carrier of $f(x)$ ). One can then define a simplicial map $f^{\prime}: X \rightarrow Y$ by $f^{\prime}(v)=v^{\prime}$. This is called a direct simplicial approximation of $f$. There is a unique deformation $\vartheta: f \simeq f^{\prime}$ such that $\hat{w} \vartheta(x, t)=$ $(1-t) \hat{w}(f(x))+t \hat{w}\left(f^{\prime}(x)\right)$ for all vertices $w \in Y$.\\
-If $f: X \rightarrow Y$ is any map and $\mathscr{S}$ is finite (equivalently: $X$ compact) then $f$ is direct with respect to a triangulation $\mathscr{S} \mathscr{U}$ where $\mathscr{U}=\mathscr{B} \mathscr{B} \ldots \mathscr{B}$ is an iterated barycentric subdivision in the sense of Exerc. 2 (hint: use III, 6.4 which implies that open stars become arbitrarily small under iterated barycentric subdivision). The resulting simplicial map $f^{\prime}:(X, \mathscr{S} \mathscr{U}) \rightarrow$ ( $Y, \mathscr{T}$ ) is called a simplicial approximation of $f$. Compare S pan ie r, 3.4-3.5.\\
-5. If $Y$ is any set and $\left\{Y_{v}\right\}_{v \in V}$ any family of non-empty subsets of $Y$, define a vertex schema ( $V, \mathscr{D}$ ) as follows: A finite subset $D \subset V$ is in $\mathscr{D}$ if and only if $\bigcap_{v \in D} Y_{v} \neq \emptyset$. The corresponding (7.16) simplicial space $R(V, \mathscr{D})$ is called the nerve of $\left\{Y_{v}\right\}$. Nerves of open coverings $\left\{Y_{v}\right\}$ of topological spaces $Y$ are used in Čech (co-)homology theory (cf. 8.8 Exerc. 3 and A. 3.5).\\
+
+
+4. 
+
+\begin{EXE}{AT-D72-08-32}{Exercise (Simpliziale Approximation)}
+Let $(X, \mathscr{S}),(Y, \mathscr{T})$ be simplicial spaces. A map $f: X \rightarrow Y$ is called direct if for every vertex $v \in X$ there exists a vertex $v^{\prime} \in Y$ such that $\hat{v}(x)>0 \Rightarrow \hat{v}^{\prime}(f(x))>0$. (Note: The set $\{x \in X \mid \hat{v}(x)>0\}$ is called the open star of $v$; thus, $f$ is direct if it maps open stars into open stars.) If $f$ is direct and $v_{0}, v_{1}, \ldots, v_{n}$ are vertices of a simplex of $X$ then, for some $x \in X$, all $\hat{l}_{i}(x)$ are positive, hence all $\hat{v}_{i}^{\prime}(f(x))>0$, hence $\left\{c_{i}^{\prime}\right\}$ are vertices of a simplex of $Y$ (e.g. the carrier of $f(x)$ ). One can then define a simplicial map $f^{\prime}: X \rightarrow Y$ by $f^{\prime}(v)=v^{\prime}$. This is called a direct simplicial approximation of $f$. There is a unique deformation $\vartheta: f \simeq f^{\prime}$ such that $\hat{w} \vartheta(x, t)=$ $(1-t) \hat{w}(f(x))+t \hat{w}\left(f^{\prime}(x)\right)$ for all vertices $w \in Y$.\\
+If $f: X \rightarrow Y$ is any map and $\mathscr{S}$ is finite (equivalently: $X$ compact) then $f$ is direct with respect to a triangulation $\mathscr{S} \mathscr{U}$ where $\mathscr{U}=\mathscr{B} \mathscr{B} \ldots \mathscr{B}$ is an iterated barycentric subdivision in the sense of Exerc. 2 (hint: use III, 6.4 which implies that open stars become arbitrarily small under iterated barycentric subdivision). The resulting simplicial map $f^{\prime}:(X, \mathscr{S} \mathscr{U}) \rightarrow$ ( $Y, \mathscr{T}$ ) is called a simplicial approximation of $f$. Compare S pan ie r, 3.4-3.5.
+\end{EXE}
+
+
+5. If $Y$ is any set and $\left\{Y_{v}\right\}_{v \in V}$ any family of non-empty subsets of $Y$, define a vertex schema ( $V, \mathscr{D}$ ) as follows: A finite subset $D \subset V$ is in $\mathscr{D}$ if and only if $\bigcap_{v \in D} Y_{v} \neq \emptyset$. The corresponding (7.16) simplicial space $R(V, \mathscr{D})$ is called the nerve of $\left\{Y_{v}\right\}$. Nerves of open coverings $\left\{Y_{v}\right\}$ of topological spaces $Y$ are used in Čech (co-)homology theory (cf. 8.8 Exerc. 3 and A. 3.5).
+
 6. An ordered vertex schema is a vertex $\operatorname{schema}(V, \mathscr{D})$ together with a (partial) order on $V$ such that $v, w \in V$ are comparable whenever $\{v, w\} \in \mathscr{I}$. Show (as in 7.16) that ordered simplicial maps and maps of ordered vertex schemata which preserve the order on distinguished subsets form equivalent categories.
 
 \section*{Simplicial Homology}
 Simplicial homology is closer to intuition than others: simplicial chains can be thought of as chunks of spaces (counted with multiplicities), and cycles are chunks without boundaries. However, for actual computation, $C W$-decompositions (or other means) are more adequate: a triangulation is too rich a structure (for this purpose), and it is often hard to find one. Computing homology with simplicial chains is like computing integrals $\int_{a}^{b} f(x) d x$ with approximating Riemann-sums.\\
-8.1 Definition. Let ( $X, \mathscr{S}$ ) be a simplicial space. If $\sigma: \Delta_{n} \rightarrow X$ is a simplicial map (with respect to the standard triangulation of $\Delta_{n}$ ) then every composite $\Delta_{n-1} \xrightarrow{\varepsilon^{i}} \Delta_{n} \xrightarrow{\sigma} X$ is also simplicial. Simplicial maps $\sigma: \Delta_{n} \rightarrow X, n=0,1, \ldots$, therefore generate a subcomplex $\operatorname{Sp}(X)$ of the singular complex $S(X)$. Clearly Sp is functorial with respect to simplicial maps $X \rightarrow Y$, and the inclusion $\operatorname{Sp} X \subset S X$ is natural.\\
-If $\sigma: \Delta_{n} \rightarrow X$ is simplicial then $\sigma\left(\Delta_{n}\right) \subset X^{n}=n$-skeleton of $X$ (cf. 7.6), hence $\sigma \in S\left(X^{n}\right)$, and $(\partial \sigma) \in S\left(X^{n-1}\right)$. We can therefore form the homology class $[\sigma] \in H_{n}\left(X^{n}, X^{n-1}\right)=W_{n} X$, and we can define a chain map
 
+
+
+8.1 Definition. 
+
+
+\begin{DEF}{AT-D72-08-33}{Subkomplex von singulären Komplex}
+Let ( $X, \mathscr{S}$ ) be a simplicial space. If $\sigma: \Delta_{n} \rightarrow X$ is a simplicial map (with respect to the standard triangulation of $\Delta_{n}$ ) then every composite $\Delta_{n-1} \xrightarrow{\varepsilon^{i}} \Delta_{n} \xrightarrow{\sigma} X$ is also simplicial. Simplicial maps $\sigma: \Delta_{n} \rightarrow X, n=0,1, \ldots$, therefore generate a subcomplex $\operatorname{Sp}(X)$ of the singular complex $S(X)$. Clearly Sp is functorial with respect to simplicial maps $X \rightarrow Y$, and the inclusion $\operatorname{Sp} X \subset S X$ is natural.
+\end{DEF}
+
+
+\begin{DEF}{AT-D72-08-34}{Kettenabbildung von Sp(X) nach WX}
+If $\sigma: \Delta_{n} \rightarrow X$ is simplicial then $\sigma\left(\Delta_{n}\right) \subset X^{n}=n$-skeleton of $X$ (cf. 7.6), hence $\sigma \in S\left(X^{n}\right)$, and $(\partial \sigma) \in S\left(X^{n-1}\right)$. We can therefore form the homology class $[\sigma] \in H_{n}\left(X^{n}, X^{n-1}\right)=W_{n} X$, and we can define a chain map
 $$
 \gamma: \operatorname{Sp} X \rightarrow W X \text { by } \gamma(\sigma)=[\sigma] .
 $$
+From the Definition 1.2 of the boundary operator in $W X$ it is clear, indeed, that $\gamma \hat{v}=\hat{c} \gamma$.
+\end{DEF}
 
-From the Definition 1.2 of the boundary operator in $W X$ it is clear, indeed, that $\gamma \hat{v}=\hat{c} \gamma$.\\
-8.3 Proposition. The chain map $\gamma: \operatorname{Sp} X \rightarrow W X$ is epimorphic, and the kernel of ${ }_{\gamma_{n}}: \mathrm{Sp}_{n} X \rightarrow W_{n} X$ is generated by all elements of the following two types:\\
-(a) non-injective maps $\tau: \Delta_{n} \rightarrow X$,\\
-(b) $[\sigma \pi-\operatorname{sign}(\pi) \sigma]$,\\
-where $\sigma: \Delta_{n} \rightarrow X$ is simplicial, and $\pi$ is a permutation of $(0,1, \ldots, n)$; as before, we use the same letter $\pi$ to denote the linear isomorphism $\Delta_{n} \rightarrow \Delta_{n}$ which takes $e^{i}$ into $e^{\pi(i)}$. In other words degenerate simplices are annihilated, and simplices which differ only by a permutation $\pi$ (of coordinates) are identified up to $\operatorname{sign}(\pi)$.\\
-In particular, the elements (a), (b) generate a subcomplex of $\operatorname{Sp} X$ (namely $\{(a),(b)\}=\operatorname{ker}(j))$, and $\operatorname{Sp} X /\{(a),(b)\} \cong W X$.\\
-8.4 Definition. The complex $\operatorname{SP}(X)=\operatorname{Sp} X /\{(a),(b)\}=\operatorname{Sp} X / \operatorname{ker}(\gamma)$ is called the simplicial complex of ( $X, \mathscr{S}$ ). If $X^{\prime} \subset X$ is a simplicial subspace then the inclusion $\operatorname{Sp} X^{\prime} \subset \operatorname{Sp} X$ induces an inclusion $S P\left(X^{\prime}\right) \subset S P(X)$, and the quotient $S P\left(X, X^{\prime}\right)=S P(X) / S P\left(X^{\prime}\right)$ is the simplicial complex of the pair ( $X, X^{\prime}$ ). A simplicial map $f: X \rightarrow Y$ induces $\operatorname{Sp}(f): \operatorname{Sp}(X) \rightarrow$ $\operatorname{Sp}(Y)$, and by passage to quotients, $S P(f): S P(X) \rightarrow S P(Y)$; similarly for maps of pairs. Thus $S P: \mathscr{S}_{h} \ell \rightarrow \partial \mathscr{A} \mathscr{G}$ is a functor from simplicial spaces to complexes. By 8.3, it depends only on the underlying $C W$ structure: $\gamma^{\prime}$ induces a natural isomorphism $S P(X) \cong W(X)$.\\
-Since non-injective simplicial maps $\Delta_{n} \rightarrow X$ can be neglected, $S P(X)$ can also be described as follows: $S P_{n}(X)$ is generated by $\mathscr{S}_{n}$ (these are precisely the injective simplicial maps $\Delta_{n} \rightarrow X$ ) with defining relations $\{s \pi=\operatorname{sign}(\pi) s\}, s \in \mathscr{S}_{n}, \pi$ a permutation of $(0,1, \ldots, n)$. The boundary\\
-$\partial: S P_{n} X \rightarrow S P_{n-1} X$ is induced by the usual boundary of singular simplices. If $f:(X, \mathscr{S}) \rightarrow(Y, \mathscr{T})$ is simplicial and $s \in \mathscr{S}_{n}$ then
+8.3 Proposition. 
+
+\begin{PROP}{AT-D72-08-35}{Eigenschaften der Kettenabbildung von Sp(X) nach WX}
+The chain map $\gamma: \operatorname{Sp} X \rightarrow W X$ is epimorphic, and the kernel of ${ }_{\gamma_{n}}: \mathrm{Sp}_{n} X \rightarrow W_{n} X$ is generated by all elements of the following two types:\\
+(a) non-injective maps $\tau: \Delta_{n} \rightarrow X$,
+
+(b) $[\sigma \pi-\operatorname{sign}(\pi) \sigma]$,
+
+where $\sigma: \Delta_{n} \rightarrow X$ is simplicial, and $\pi$ is a permutation of $(0,1, \ldots, n)$; as before, we use the same letter $\pi$ to denote the linear isomorphism $\Delta_{n} \rightarrow \Delta_{n}$ which takes $e^{i}$ into $e^{\pi(i)}$. In other words degenerate simplices are annihilated, and simplices which differ only by a permutation $\pi$ (of coordinates) are identified up to $\operatorname{sign}(\pi)$.
+
+In particular, the elements (a), (b) generate a subcomplex of $\operatorname{Sp} X$ (namely $\{(a),(b)\}=\operatorname{ker}(j))$, and $\operatorname{Sp} X /\{(a),(b)\} \cong W X$.
+\end{PROP}
+
+
+8.4 Definition. 
+
+\begin{DEF}{AT-D72-08-36}{Simpliziale Komplexe und SP-Funktor}
+The complex $\operatorname{SP}(X)=\operatorname{Sp} X /\{(a),(b)\}=\operatorname{Sp} X / \operatorname{ker}(\gamma)$ is called the simplicial complex of ( $X, \mathscr{S}$ ). If $X^{\prime} \subset X$ is a simplicial subspace then the inclusion $\operatorname{Sp} X^{\prime} \subset \operatorname{Sp} X$ induces an inclusion $S P\left(X^{\prime}\right) \subset S P(X)$, and the quotient $S P\left(X, X^{\prime}\right)=S P(X) / S P\left(X^{\prime}\right)$ is the simplicial complex of the pair ( $X, X^{\prime}$ ). A simplicial map $f: X \rightarrow Y$ induces $\operatorname{Sp}(f): \operatorname{Sp}(X) \rightarrow$ $\operatorname{Sp}(Y)$, and by passage to quotients, $S P(f): S P(X) \rightarrow S P(Y)$; similarly for maps of pairs. Thus $S P: \mathscr{S}_{h} \ell \rightarrow \partial \mathscr{A} \mathscr{G}$ is a functor from simplicial spaces to complexes. By 8.3, it depends only on the underlying $C W$ structure: $\gamma^{\prime}$ induces a natural isomorphism $S P(X) \cong W(X)$.
+\end{DEF}
+
+
+\begin{REM}{AT-D72-08-37}{SP_n(X) wird durch n-Simplizes(Abb)}
+Since non-injective simplicial maps $\Delta_{n} \rightarrow X$ can be neglected, $S P(X)$ can also be described as follows: $S P_{n}(X)$ is generated by $\mathscr{S}_{n}$ (these are precisely the injective simplicial maps $\Delta_{n} \rightarrow X$ ) with defining relations $\{s \pi=\operatorname{sign}(\pi) s\}, s \in \mathscr{S}_{n}, \pi$ a permutation of $(0,1, \ldots, n)$. The boundary $\partial: S P_{n} X \rightarrow S P_{n-1} X$ is induced by the usual boundary of singular simplices. If $f:(X, \mathscr{S}) \rightarrow(Y, \mathscr{T})$ is simplicial and $s \in \mathscr{S}_{n}$ then
 
 $$
 \left(S P_{n} f\right)(s)= \begin{cases}f s & \text { if } f s \text { is injective, i.e., }(f s) \in \mathscr{T}_{n} \\ 0 & \text { otherwise }\end{cases}
 $$
+\end{REM}
 
-8.5 Corollary to 8.3 (Invariance of simplicial homology). In the category of simplicial pairs ( $X, X^{\prime}$ ) and maps there is a natural isomorphism $H S P\left(X, X^{\prime}\right) \cong H\left(X, X^{\prime}\right)$. In particular, $H S P\left(X, X^{\prime}\right)$ is independent of the triangulation.
+8.5 Corollary to 8.3 (Invariance of simplicial homology). 
 
-Proof. By 8.3 we have $S P X \cong W X, S P X^{\prime} \cong W X^{\prime}$, hence (4.7) $S P\left(X, X^{\prime}\right) \cong$ $W\left(X, X^{\prime}\right)$, hence $H S P\left(X, X^{\prime}\right) \cong H W\left(X, X^{\prime}\right) \cong H\left(X, X^{\prime}\right)$ by 4.1.
 
-Proof of 8.3. We know that the homology class [ $l_{n}$ ] of $l_{n}=\mathrm{id}: \Delta_{n} \rightarrow \Delta_{n}$ generates $H_{n}\left(\Delta_{n}, \dot{\Delta}_{n}\right) \cong \mathbb{Z}$ (cf. IV, 2.7), and that $[\pi]=\operatorname{sign}(\pi)\left[l_{n}\right]$ (cf. IV, 4.3). Further, if we choose one characteristic map $\Phi^{e}:\left(\Delta_{n}, \dot{\Delta}_{n}\right) \rightarrow$ $\left(X^{n}, X^{n-1}\right)$ for every $n$-cell $e$ of $X$ then $\left\{\Phi_{*}^{e}\left[\iota_{n}\right]\right\}$ is a base for $W_{n} X=H_{n}\left(X^{n}, X^{n-1}\right)$ (cf. fourth terms in 4.2). But $s \in \mathscr{S}_{n}$ is characteristic for $e=s\left(\dot{\Delta}_{n}\right)$, and $s_{*}\left[l_{n}\right]=[s]=\gamma(s)$. Therefore $\gamma$ maps every $s \in \mathscr{P}_{n}$ onto an element of this base (up to sign), and
+\begin{THEO}{AT-D72-08-38}{Invarinaz der simplizialen Homologie und natürliche Isomorphie zu singulären Homologie in Kategorie der simplizialen Räume}
+In the category of simplicial pairs ( $X, X^{\prime}$ ) and maps there is a natural isomorphism $H S P\left(X, X^{\prime}\right) \cong H\left(X, X^{\prime}\right)$. In particular, $H S P\left(X, X^{\prime}\right)$ is independent of the triangulation.
+\end{THEO}
 
+Proof. 
+
+\begin{PROOF}{AT-D72-08-39}{P: Invarinaz der simplizialen Homologie und natürliche Isomorphie zu singulären Homologie in Kategorie der simplizialen Räume}
+By the properties of the chain map $\gamma:Sp X\to WX$ we have $S P X \cong W X, S P X^{\prime} \cong W X^{\prime}$, hence (4.7) $S P\left(X, X^{\prime}\right) \cong$ $W\left(X, X^{\prime}\right)$, hence $H S P\left(X, X^{\prime}\right) \cong H W\left(X, X^{\prime}\right) \cong H\left(X, X^{\prime}\right)$ by 4.1.
+\end{PROOF}
+
+Proof of 8.3. 
+
+
+\begin{PROOF}{AT-D72-08-40}{P: Eigenschaften der Kettenabbildung von Sp(X) nach WX}
+We know that the homology class [ $l_{n}$ ] of $l_{n}=\mathrm{id}: \Delta_{n} \rightarrow \Delta_{n}$ generates $H_{n}\left(\Delta_{n}, \dot{\Delta}_{n}\right) \cong \mathbb{Z}$ (cf. IV, 2.7), and that $[\pi]=\operatorname{sign}(\pi)\left[l_{n}\right]$ (cf. IV, 4.3). Further, if we choose one characteristic map $\Phi^{e}:\left(\Delta_{n}, \dot{\Delta}_{n}\right) \rightarrow$ $\left(X^{n}, X^{n-1}\right)$ for every $n$-cell $e$ of $X$ then $\left\{\Phi_{*}^{e}\left[\iota_{n}\right]\right\}$ is a base for $W_{n} X=H_{n}\left(X^{n}, X^{n-1}\right)$ (cf. fourth terms in 4.2). But $s \in \mathscr{S}_{n}$ is characteristic for $e=s\left(\dot{\Delta}_{n}\right)$, and $s_{*}\left[l_{n}\right]=[s]=\gamma(s)$. Therefore $\gamma$ maps every $s \in \mathscr{P}_{n}$ onto an element of this base (up to sign), and
 $$
 \gamma(s \pi)=s_{*} \pi_{*}\left[\iota_{n}\right]=s_{*}\left(\operatorname{sign}(\pi)\left[\iota_{n}\right]\right)=\operatorname{sign}(\pi) \gamma(s) .
 $$
-
 All non-injective $\tau: \Delta_{n} \rightarrow X$ map into zero under $\gamma$ because $\tau\left(\Delta_{n}\right) \subset X^{n-1}$. The result now follows because $\mathrm{Sp}_{n} X$ has a base consisting of (i) all non-injective simplicial maps $\Delta_{n} \rightarrow X$, and (ii) all $s \in \mathscr{S}_{n}$.
+\end{PROOF}
 
+
+8.7 Proposition. 
+
+\begin{KORO}{AT-D72-08-41}{Invarianz für geordnete simpliziale Räume}
+For ordered simplical spaces $(X,\mathscr{S})$: 
+$(i) $S P^{\prime} X \cong \stackrel{\text { " }}{\cong} S P X \stackrel{\bar{\gamma}}{\cong} W X$. In particular, $S P^{\prime} X$ depends only on the $C W$-decomposition of $X$; not on the triangulation, or even on the ordering of the triangulation.
+
+(ii) $j_{*}: H S P^{\prime} X \cong H S X=H X$.
+
+Similar results hold for pairs ( $X, X^{\prime}$ ); they follow from the absolute case by the five lemma.
+\end{KORO}
+
+
+\begin{PROOF}{AT-D72-08-42}{P: Invarianz für geordnete simpliziale Räume}
 In the case of an ordered simplicial space ( $X, \mathscr{S}$ ) the connection between simplicial and singular homology is even more direct: Let $S P_{n}^{\prime} X$ be the free abelian group generated by $\mathscr{S}_{n}$; clearly, $S P_{n}^{\prime} X \subset S_{n} X$. Since $s \in \mathscr{S}_{n}$ implies $s \varepsilon^{i} \in \mathscr{S}_{n-1}$, by 7.5, these groups form a subcomplex of the singular complex $S X$. Consider then the chain maps
 
 $$
 S X \stackrel{j}{\longleftarrow} S P^{\prime} X \underset{\cong}{\nu} S P X \underset{\cong}{\check{\gamma}} W X
 $$
 
-where $j=$ inclusion, $\bar{\gamma}$ is induced by $\gamma$, and $v$ is the composite $S P^{\prime} X \subset \operatorname{Sp} X \rightarrow \operatorname{Sp} X /\{(a),(b)\}=S P X$. Clearly $v$ is isomorphic (just recall the definition of $\{(a),(b)\})$. The chain map $\mu=j v^{-1} \bar{\gamma}^{-1}: W X \rightarrow S X$ takes every $z \in W_{n} X=H_{n}\left(X^{n}, X^{n-1}\right)$ into a representative $\zeta \in S\left(X^{n}\right)$. The induced homology homomorphism $\mu_{*}$ therefore takes $[z] \in H W X$ into $[\zeta] \in H X$, hence $\mu_{*}$ coincides with the isomorphism $\Theta: H W X \cong H X$ (cf. 1.9). In particular, $j_{*}$ is isomorphic. We record these facts as\\
-8.7 Proposition. (i) $S P^{\prime} X \cong \stackrel{\text { " }}{\cong} S P X \stackrel{\bar{\gamma}}{\cong} W X$. In particular, $S P^{\prime} X$ depends only on the $C W$-decomposition of $X$; not on the triangulation, or even on the ordering of the triangulation.\\
-(ii) $j_{*}: H S P^{\prime} X \cong H S X=H X$.
+where $j=$ inclusion, $\bar{\gamma}$ is induced by $\gamma$, and $v$ is the composite $S P^{\prime} X \subset \operatorname{Sp} X \rightarrow \operatorname{Sp} X /\{(a),(b)\}=S P X$. Clearly $v$ is isomorphic (just recall the definition of $\{(a),(b)\})$. The chain map $\mu=j v^{-1} \bar{\gamma}^{-1}: W X \rightarrow S X$ takes every $z \in W_{n} X=H_{n}\left(X^{n}, X^{n-1}\right)$ into a representative $\zeta \in S\left(X^{n}\right)$. The induced homology homomorphism $\mu_{*}$ therefore takes $[z] \in H W X$ into $[\zeta] \in H X$, hence $\mu_{*}$ coincides with the isomorphism $\Theta: H W X \cong H X$ (cf. 1.9). In particular, $j_{*}$ is isomorphic.
+\end{PROOF}
 
-Similar results hold for pairs ( $X, X^{\prime}$ ); they follow from the absolute case by the five lemma.
 
+
+\begin{REM}{AT-D72-08-43}{Verallgemeinerung der Invarianz für geordnete simpliziale Räume}
 It should be noted that this can be used to realize the isomorphism $H S P X \cong H X$ of 8.5 (for non-ordered triangulations $\mathscr{T}$ of $X$ ) by a chain map $j^{\prime}: S P X \rightarrow S X$-just choose an ordered triangulation $\mathscr{S}$ in $\mathscr{T}$ (see 7.4), and put $j^{\prime}=j v^{-1}$.\\
-8.8 Exercises. 1. Triangulate the projective plane $X=P_{2} \mathbb{R}$ and compute HSPX.\\
-2. Prove $H(\operatorname{Sp} X) \cong H(S P X)$. (Hint: Generalize to pairs. Treat $\left(\Delta_{n}, \dot{\Delta}_{n}\right)$ first, then ( $X^{n}, X^{n-1}$ ), then proceed by induction on dimension and use the five lemma.)\\
-3*. If $Y$ is a topological space and $\mathscr{U}, \mathscr{V}$ are open coverings of $Y$ then $\mathscr{U}$ is said to refine $\mathscr{V}$, in symbols $\mathscr{U}<\mathscr{V}$, if every $U \in \mathscr{U}$ is contained in some $V \in \mathscr{V}$. Choose a function $\psi: \mathscr{U} \rightarrow \mathscr{V}$ such that $U \subset \psi(U)$ for all $U \in \mathscr{U}$, and define a simplicial map $\Psi:$ nerv $\mathscr{U} \rightarrow$ nerv $\mathscr{V}$ (cf. 7.18, Exerc. 5) which on vertices agrees with $\psi$ (cf. 7.11). Show that, up to homotopy, $\Psi$ is independent of the choice of $\psi$. Let $\Omega$ be the set of all open coverings of $Y$. A Cech homology class $y$ of $Y$ is a family $\left\{y_{\mathscr{U}} \in H(\operatorname{nerv} \mathscr{U})\right\}_{\mathscr{U} \in \Omega}$ such that $\mathscr{U}<\mathscr{V} \Rightarrow y_{\mathscr{V}^{\prime}}=\Psi_{*}\left(y_{\mathscr{U}}\right)$. Under the addition $\left(y+y^{\prime}\right)_{\mathscr{U}}=y_{\mathscr{U}}+y_{\mathscr{U}}^{\prime}$, Čech classes form a graded group, called the Čech homology of Y. Turn Čech homology into a functor and study its properties [cf. EilenbergSteenrod, Chap. IX].
+\end{REM}
+
+
+
+
+8.8 Exercises. 
+
+
+1. 
+
+\begin{EXE}{AT-D72-08-44}{Exercise (Projektive Fläche)}
+Triangulate the projective plane $X=P_{2} \mathbb{R}$ and compute HSPX.\\
+\end{EXE}
+
+
+2. Prove $H(\operatorname{Sp} X) \cong H(S P X)$. (Hint: Generalize to pairs. Treat $\left(\Delta_{n}, \dot{\Delta}_{n}\right)$ first, then ( $X^{n}, X^{n-1}$ ), then proceed by induction on dimension and use the five lemma.)
+
+3*. 
+
+\begin{EXE}{AT-D72-08-45}{Exercise (Cech Homologie)}
+If $Y$ is a topological space and $\mathscr{U}, \mathscr{V}$ are open coverings of $Y$ then $\mathscr{U}$ is said to refine $\mathscr{V}$, in symbols $\mathscr{U}<\mathscr{V}$, if every $U \in \mathscr{U}$ is contained in some $V \in \mathscr{V}$. Choose a function $\psi: \mathscr{U} \rightarrow \mathscr{V}$ such that $U \subset \psi(U)$ for all $U \in \mathscr{U}$, and define a simplicial map $\Psi:$ nerv $\mathscr{U} \rightarrow$ nerv $\mathscr{V}$ (cf. 7.18, Exerc. 5) which on vertices agrees with $\psi$ (cf. 7.11). Show that, up to homotopy, $\Psi$ is independent of the choice of $\psi$. Let $\Omega$ be the set of all open coverings of $Y$. A Cech homology class $y$ of $Y$ is a family $\left\{y_{\mathscr{U}} \in H(\operatorname{nerv} \mathscr{U})\right\}_{\mathscr{U} \in \Omega}$ such that $\mathscr{U}<\mathscr{V} \Rightarrow y_{\mathscr{V}^{\prime}}=\Psi_{*}\left(y_{\mathscr{U}}\right)$. Under the addition $\left(y+y^{\prime}\right)_{\mathscr{U}}=y_{\mathscr{U}}+y_{\mathscr{U}}^{\prime}$, Čech classes form a graded group, called the Čech homology of Y. Turn Čech homology into a functor and study its properties [cf. EilenbergSteenrod, Chap. IX].
+\end{EXE}
 
 
 

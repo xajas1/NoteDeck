@@ -865,6 +865,20 @@
         "litIDs": {
           "D72": "AT-D72-6"
         }
+      },
+      "CW-Komplex": {
+        "index": 7,
+        "parent": null,
+        "litIDs": {
+          "D72": "AT-D72-7"
+        }
+      },
+      "Simpliziale Räume": {
+        "index": 8,
+        "parent": null,
+        "litIDs": {
+          "D72": "AT-D72-8"
+        }
       }
     }
   },

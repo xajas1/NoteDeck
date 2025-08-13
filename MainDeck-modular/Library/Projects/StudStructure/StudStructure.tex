@@ -903,7 +903,21 @@ Wenn für einen Punkt $p \in M$ auf einer Riemannschen Mannigfaltigkeit die Expo
 
 \StructurePic{}{}{%
   \begin{outline}
-    \1 
+    Verwende die Existenz eines Durchlaufpunktes mit Distanz-Relation, um eine BLP Geodätische $c(t)$ zu konstruieren, und zeige, dass eingeschränkt auf $[0,d(p,q)]$ der maximale Zeitpunkt, bis welchen die (minimale) Distanz $d(p,q)$ durch $d(q,c(t))+t$ bestimmt wird, gerade $d(p,q)$ ist, d.h. nach dem Durchlaufpunkt minimiert die Geodätische fortschreitend die riemannische Distanz optimal.
+    \1 Existiert $\delta>0$, sodass $$d(p,q)=d(p,r)+d(r,q)$$
+    mit $d(p,r)=\delta$ und wähle BLP Geodätische $c(t)=\exp_p(tv)$ sodass $\exp_p(\delta v)=r$
+    \1 $$I=\{t\in \R: d(q,c(t))+t=d(p,q)\}$$
+    der Bereich, in welchem die Länge der Geoätischen bis zum Zeitpunkt $t$ plus die Rest-Distanz bis $q$ geradae die Distanz zwischen $p$ und $q$ beschreibt
+    \2 $\delta\in I$
+    \2 $$T:= I\cap [0,d(p,q)]$$
+    wobei das Maximmum in $I$ angenommen wird
+    \1 WSP: Ang. $T<d(p,q)$
+    \2 Anwendung von Durchlaufpunkt-Lemma auf $c(T)$: $\delta^\prime>0$, sd. $\exists r^\prime\in S_{\delta^\prime}c(T)$ mit $d(C(T),q)=\delta^\prime+d(r^\prime, q)$
+    \2 $d(C(T),q)=d(p,q)-T$
+    \2 $$d(p,r^\prime)\geq d(p,q) - d(r^\prime,q)= T + \delta^\prime$$
+    \2 $\gamma$ minimale Geodätische von $r^\prime$ nach $q$ als geodätische Erweiterung von $c$
+    $$d(p,r^\prime)= L(c|_{[0,T]})+L(\gamma) \text{ und } c(T+\delta^\prime)=r^\prime$$
+    \2 $$d(q,c(T+\delta^\prime))+T+\delta^\prime=d(q,r^\prime)+ T+\delta^\prime = d(p,q) \Rightarrow T+\delta^\prime\in I$$
   \end{outline}
 }
 
@@ -915,11 +929,6 @@ Wenn für einen Punkt $p \in M$ auf einer Riemannschen Mannigfaltigkeit die Expo
 \textbf{Statement: }{In geodätisch vollständigen Riemannischen Mannigfaltigkeiten lassen sich zwei Punkte durch minimale Geodätische verbinden}.
 Ist $(M, g)$ geodätisch vollständig, so lassen sich je zwei Punkte auf $M$ durch eine minimale Geodätische verbinden.
 
-\StructurePic{}{}{%
-  \begin{outline}
-    \1 
-  \end{outline}
-}
 
 \vspace{0.8cm}
 
@@ -938,7 +947,22 @@ Sei $(M, g)$ eine Riemannsche Mannigfaltigkeit. Dann sind folgende Aussagen äqu
 
 \StructurePic{}{}{%
   \begin{outline}
-    \1 
+    $A\Rightarrow B$: Geodätisch Vollständig ist per definition Definition von $\exp$ auf ganz $TM$, $B\Rightarrow C$: Dann existiert offensichtlich auch ein Punkt, wo $\exp$ auf dem ganzen Tangentialraum definiert ist, $C \Rightarrow D$: $K^\prime=(\exp_p^{-1}K)\cap\overline{B_R(0_p)}$ kompakt in $T_pM$ und wird durch $\exp$ stetig auf kompakt abgebildet, D $\Rightarrow$ E: Cauchyfolge beschränkt in $M$, daher existiert Häufungspunkt und Cauchy-Bedingung gibt konvergenz, E $\Rightarrow$ A: 
+    \1 Definition
+    \1 Trivial
+    \1 $K$ liegt in beschränkten geodätischen Ball um $p$ und ist im Bild von $\exp_p|_{B_R(0_p)}$ wegen Hopf-Rinow. Das Urbild geschnitten mit $\overline{B_R(0_p)}$ ist abgeschlossen und damit im Tangentialraum kompakt. $\exp$ sttetig bildet kompakt auf kompakt ab
+    \1 Cauchyfolge beschränkt in $M$, daher existiert Häufungspunkt und Cauchy-Bedingung gibt Konvergenz
+    \1 Vollständigkeit des metrischen Raumes impliziert geodätische Vollständigkeit 
+    \2 Sei $c$ BLP Geodätische mit maximalen Def-Intervall $I=(a,b)$ (Lokale Existenz von Lösung der Geodätengleichung)
+    \2 WSP: Ang $b<\infty$ 
+    \3 Dann existiert eine Folge $(t_k)_k\subset I$, $t_k\to b$ sodass Cauchyfolge in $M$ induziert wird
+    $$d(c(t_k),c(t_\ell))\leq |t_k-t_\ell|$$
+    und damit existeirt aus Vollständigkeit ein Grenzwert $p\in M$. 
+    \3 Wähle Umgebung um $p$ klein genug, sodass alles Geodäten durch $q\in U$ auf $(-\epsilon, \epsilon)$
+    \3 Wähle $\epsilon^\prime$ klein genug, sodass $c(t-\epsilon^\prime)\in U$, dann setzt die entsprechende lokale Geodätische $c^\prime$ bzgl $q=c(t)$ die Geodätische $c$ geodätische fort auf $(a,b+(\epsilon-\epsilon^\prime))$(Eindeutigkeit)
+
+
+
   \end{outline}
 }
 
@@ -987,7 +1011,8 @@ $I$ ist eine quadratische Form.
 \subsection{Hatcher Problems}
 
 
-(H2.1.1.) What familiar space is the quotient $\Delta$-complex of a 2 -simplex $\left[v_0, v_1, v_2\right]$ obtained by identifying the edges $\left[v_0, v_1\right]$ and $\left[v_1, v_2\right]$, preserving the ordering of vertices?
+(H2.1.1.) What
+ familiar space is the quotient $\Delta$-complex of a 2 -simplex $\left[v_0, v_1, v_2\right]$ obtained by identifying the edges $\left[v_0, v_1\right]$ and $\left[v_1, v_2\right]$, preserving the ordering of vertices?
 
 
 
