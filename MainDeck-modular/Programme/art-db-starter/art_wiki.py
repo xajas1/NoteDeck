@@ -2,27 +2,16 @@
 # -*- coding: utf-8 -*-
 """
 Wikidata → Commons Fetcher für Künstler / Werk + flacher Galerie-Builder.
-
-Speichert Bilder FLACH unter:
-  <IMAGES_ROOT>/Art/ART####__Artist__Title__Year.<ext>
-
-Pflegt:
-  - art_index.csv
-  - art_gallery.tex
-
-Beispiele:
-  python3 wikidata_artist_fetch.py --artist "Wassily Kandinsky" --limit 200
-  python3 wikidata_artist_fetch.py --rebuild-only
-  python3 wikidata_artist_fetch.py --rebuild-only --per-page 9 --sort year
-  python3 wikidata_artist_fetch.py --artist "Paul Klee" --limit 12 --standalone
-  # NEU:
-  python3 wikidata_artist_fetch.py --work "Intersecting Lines" --work-artist "Wassily Kandinsky" --limit 3
-  python3 wikidata_artist_fetch.py --commons-file "Intersecting_Lines_by_Wassily_Kandinsky.jpg" --work-artist "Wassily Kandinsky"
+Jetzt zusätzlich:
+- --commons-category <CategoryName>
+- Qualitätsfilter: --min-width/--min-height (Default 2000)
+- Dublettencheck via perceptual hash (imagehash, Hamming-Distanz ≤ 5 => skip)
 """
-import os, re, csv, time, argparse, urllib.parse, itertools
+import os, re, csv, time, argparse, urllib.parse, itertools, json
 from pathlib import Path
 import requests
-from PIL import Image  # ← NEU
+from PIL import Image
+import imagehash
 
 # ---------- config ----------
 DEFAULT_IMAGES_ROOT = "/Users/tim/NoteDeck/MainDeck-modular/Library/Images"
@@ -31,8 +20,23 @@ ALLOWED_LIC = ("public domain","cc","cc0","cc-by","cc-by-sa","pdm")
 
 CSV_NAME = "art_index.csv"
 GALLERY_TEX = "art_gallery.tex"
+HASH_INDEX = "hash_index.json"
+PHASH_DISTANCE_MAX = 3  # <=5 gilt als Dublette/zu ähnlich
 
 # ---------- utils ----------
+import re
+
+def artist_from_category(cat: str) -> str:
+    """Leite aus einer Commons-Kategorie den Künstlernamen ab."""
+    # z.B. "Paintings_by_Hilma_af_Klint" -> "Hilma af Klint"
+    m = re.match(r"^(?:Paintings|Works|Artworks|Drawings|Photographs|Sculptures)_by_(.+)$", cat)
+    if m:
+        return m.group(1).replace("_", " ")
+    # z.B. "Hilma_af_Klint" -> "Hilma af Klint"
+    return cat.replace("_", " ")
+
+
+
 def resolve_images_root(cli_root: str|None) -> Path:
     if cli_root: return Path(cli_root).expanduser().resolve()
     env = os.environ.get("ART_IMAGES_ROOT")
@@ -103,9 +107,8 @@ def sort_rows(rows, mode: str):
         return int(m.group(1)) if m else 0
     return sorted(rows, key=uid_num)
 
-# --- NEU: TIFF→JPG Helper ---
+# ---------- image helpers ----------
 def convert_tiff_to_jpg(src_path: Path) -> Path:
-    """Konvertiert eine TIFF-Datei zu JPG (RGB, quality=90, progressive) und löscht das Original."""
     dst_path = src_path.with_suffix(".jpg")
     with Image.open(src_path) as im:
         if im.mode not in ("RGB", "L"):
@@ -115,16 +118,35 @@ def convert_tiff_to_jpg(src_path: Path) -> Path:
     except: pass
     return dst_path
 
+def compute_phash(path: Path) -> imagehash.ImageHash:
+    with Image.open(path) as im:
+        return imagehash.phash(im)
+
+def load_hash_index(art_dir: Path) -> dict:
+    hp = art_dir / HASH_INDEX
+    if hp.exists():
+        try:
+            return json.loads(hp.read_text(encoding="utf-8"))
+        except Exception:
+            return {}
+    return {}
+
+def save_hash_index(art_dir: Path, idx: dict):
+    (art_dir / HASH_INDEX).write_text(json.dumps(idx, ensure_ascii=False, indent=2), encoding="utf-8")
+
+def is_similar_hash(new_hash: imagehash.ImageHash, existing_hex_list: list[str], max_dist: int = PHASH_DISTANCE_MAX) -> bool:
+    for hx in existing_hex_list:
+        try:
+            if new_hash - imagehash.hex_to_hash(hx) <= max_dist:
+                return True
+        except Exception:
+            continue
+    return False
+
 # ---------- gallery ----------
 def regenerate_gallery(gallery_tex: Path, rows, per_page: int = 6, sort_mode: str = "uid",
                        title: str = "Art Gallery", standalone: bool = False,
                        images_root_texpath: str = "/Users/tim/NoteDeck/MainDeck-modular/Library/Images/"):
-    """
-    Galerie: nach Künstlern gruppiert. 2 Bilder pro Zeile; LaTeX bricht selbst um.
-    Kachel: Bild + Caption + EINZEILIGE Dateicode-Zeile (nur Dateiname, monospace).
-    Robust bei ungerader Bildzahl (keine leere rechte Kachel mit Fehlern).
-    """
-    # --- Gruppen nach Artist ---
     groups = {}
     for r in rows:
         groups.setdefault(r["artist"], []).append(r)
@@ -150,7 +172,6 @@ def regenerate_gallery(gallery_tex: Path, rows, per_page: int = 6, sort_mode: st
             ""
         ]
 
-    # --- Makros & Layout ---
     lines += [
         r"% Auto-generated — DO NOT EDIT.",
         "",
@@ -191,7 +212,6 @@ def regenerate_gallery(gallery_tex: Path, rows, per_page: int = 6, sort_mode: st
         (p1, c1) = esc_pair(left); (p2, c2) = esc_pair(right)
         return fr"\ArtRow{{{p1}}}{{{c1}}}{{{p2}}}{{{c2}}}"
 
-    # --- Inhalt je Artist ---
     for artist in artists:
         group = sort_rows(groups[artist], sort_mode)
         lines.append(fr"\section*{{{_tex_esc(artist)}}}")
@@ -262,9 +282,6 @@ LIMIT {limit}
     return rows
 
 def wikidata_fetch_work_items(title_query: str, artist_qid: str | None = None, limit: int = 10):
-    """
-    Robustere Werk-Suche …
-    """
     def wbsearch_ids(title: str, lang: str, n: int = 50):
         r = retry_get("https://www.wikidata.org/w/api.php", {
             "action":"wbsearchentities","format":"json","language":lang,
@@ -356,8 +373,9 @@ LIMIT {max(50, limit*5)}
         if len(out) >= limit: break
     return out
 
+# ---------- Commons helpers ----------
 def commons_license_and_direct_url(file_title_no_prefix: str):
-    # Gibt (lic, url, mime) zurück
+    """Returns (license, url, mime, width, height)."""
     title = "File:" + file_title_no_prefix
     r = retry_get("https://commons.wikimedia.org/w/api.php", {
         "action":"query","format":"json","formatversion":2,
@@ -368,22 +386,26 @@ def commons_license_and_direct_url(file_title_no_prefix: str):
         "iiurlwidth":4096
     }, UA, timeout=40).json()
     pages = (r.get("query") or {}).get("pages") or []
-    if not pages: return ("", "", "")
+    if not pages: return ("", "", "", 0, 0)
     ii = (pages[0].get("imageinfo") or [{}])[0]
     meta = ii.get("extmetadata") or {}
     lic = (meta.get("LicenseShortName",{}).get("value","") or "").lower()
     mime = (ii.get("mime") or "").lower()
     url = ii.get("url") or ii.get("thumburl") or ""
-    return lic, url, mime
+    width = int(ii.get("width") or 0)
+    height = int(ii.get("height") or 0)
+    return lic, url, mime, width, height
 
 # ---------- core ----------
 def fetch_artist(name: str, limit: int, images_root: Path,
                  per_page: int, sort_mode: str,
-                 standalone: bool, images_root_texpath: str):
+                 standalone: bool, images_root_texpath: str,
+                 min_width: int, min_height: int):
     art_dir = images_root / "Art"
     art_dir.mkdir(parents=True, exist_ok=True)
     csv_path = art_dir / CSV_NAME
     gallery_path = art_dir / GALLERY_TEX
+    hash_idx = load_hash_index(art_dir)
 
     ensure_index(csv_path)
     rows = read_rows(csv_path)
@@ -397,11 +419,11 @@ def fetch_artist(name: str, limit: int, images_root: Path,
     saved = 0
     for title, img_iri, year in items:
         if saved >= limit: break
-
-        file_part = img_iri.split("/Special:FilePath/")[-1]
-        file_part = urllib.parse.unquote(file_part)
-        lic, direct, mime = commons_license_and_direct_url(file_part)
+        file_part = urllib.parse.unquote(img_iri.split("/Special:FilePath/")[-1])
+        lic, direct, mime, width, height = commons_license_and_direct_url(file_part)
         if not direct or not any(k in lic for k in ALLOWED_LIC):
+            continue
+        if width < min_width or height < min_height:
             continue
 
         sig = make_sig(name, title, year)
@@ -411,17 +433,25 @@ def fetch_artist(name: str, limit: int, images_root: Path,
         uid = next_uid(rows)
         ext = Path(urllib.parse.urlparse(direct).path).suffix or ".jpg"
         fn = f"{uid}__{slug(name)[:60]}__{slug(title)[:90]}{('__'+slug(year)) if year else ''}{ext}"
-        path = art_dir / fn
+        path = (images_root / "Art" / fn)
 
         try:
             with retry_get(direct, headers=UA, timeout=90, retries=3, stream=True) as rr:
                 with open(path, "wb") as f:
                     for chunk in rr.iter_content(8192):
                         if chunk: f.write(chunk)
-            # --- NEU: ggf. TIFF nach JPG wandeln ---
             if mime in ("image/tif", "image/tiff"):
                 print("[convert] TIFF → JPG:", path.name)
                 path = convert_tiff_to_jpg(path)
+
+            # Dublettencheck via perceptual hash
+            ph = compute_phash(path)
+            if is_similar_hash(ph, list(hash_idx.values())):
+                print("[skip] duplicate (phash):", path.name)
+                try: path.unlink()
+                except: pass
+                continue
+
         except Exception as e:
             print("[warn] download/convert failed:", e)
             try: path.unlink()
@@ -435,28 +465,28 @@ def fetch_artist(name: str, limit: int, images_root: Path,
             "movement": "", "keywords": ""
         })
         write_rows(csv_path, rows)
-        regenerate_gallery(
-            gallery_path, rows, per_page=per_page, sort_mode=sort_mode, title="Art Gallery",
-            standalone=standalone, images_root_texpath=images_root_texpath
-        )
+        hash_idx[uid] = ph.__str__()  # hex
+        save_hash_index(art_dir, hash_idx)
 
+        regenerate_gallery(gallery_path, rows, per_page=per_page, sort_mode=sort_mode,
+                           title="Art Gallery", standalone=standalone, images_root_texpath=images_root_texpath)
         seen.add(sig); saved += 1
         print(f"[saved] {uid} — {name} — {title} ({year})")
-        time.sleep(0.15)
+        time.sleep(0.1)
 
-    regenerate_gallery(
-        gallery_path, rows, per_page=per_page, sort_mode=sort_mode, title="Art Gallery",
-        standalone=standalone, images_root_texpath=images_root_texpath
-    )
+    regenerate_gallery(gallery_path, rows, per_page=per_page, sort_mode=sort_mode,
+                       title="Art Gallery", standalone=standalone, images_root_texpath=images_root_texpath)
     print(f"\nDone. Saved {saved} files."
           f"\nCSV: {csv_path}\nGALLERY: {gallery_path}\nDir: {art_dir}")
 
 def fetch_work(work_title: str, work_artist_name: str | None, limit: int, images_root: Path,
-               per_page: int, sort_mode: str, standalone: bool, images_root_texpath: str):
+               per_page: int, sort_mode: str, standalone: bool, images_root_texpath: str,
+               min_width: int, min_height: int):
     art_dir = images_root / "Art"
     art_dir.mkdir(parents=True, exist_ok=True)
     csv_path = art_dir / CSV_NAME
     gallery_path = art_dir / GALLERY_TEX
+    hash_idx = load_hash_index(art_dir)
 
     ensure_index(csv_path)
     rows = read_rows(csv_path)
@@ -474,11 +504,11 @@ def fetch_work(work_title: str, work_artist_name: str | None, limit: int, images
     saved = 0
     for title, img_iri, year in items:
         if saved >= limit: break
-
-        file_part = img_iri.split("/Special:FilePath/")[-1]
-        file_part = urllib.parse.unquote(file_part)
-        lic, direct, mime = commons_license_and_direct_url(file_part)
+        file_part = urllib.parse.unquote(img_iri.split("/Special:FilePath/")[-1])
+        lic, direct, mime, width, height = commons_license_and_direct_url(file_part)
         if not direct or not any(k in lic for k in ALLOWED_LIC):
+            continue
+        if width < min_width or height < min_height:
             continue
 
         artist_for_sig = work_artist_name or artist_label or ""
@@ -490,17 +520,24 @@ def fetch_work(work_title: str, work_artist_name: str | None, limit: int, images
         ext = Path(urllib.parse.urlparse(direct).path).suffix or ".jpg"
         artist_slug = slug(artist_for_sig)[:60] if artist_for_sig else "unknown_artist"
         fn = f"{uid}__{artist_slug}__{slug(title)[:90]}{('__'+slug(year)) if year else ''}{ext}"
-        path = art_dir / fn
+        path = (images_root / "Art" / fn)
 
         try:
             with retry_get(direct, headers=UA, timeout=90, retries=3, stream=True) as rr:
                 with open(path, "wb") as f:
                     for chunk in rr.iter_content(8192):
                         if chunk: f.write(chunk)
-            # --- NEU: ggf. TIFF nach JPG wandeln ---
             if mime in ("image/tif", "image/tiff"):
                 print("[convert] TIFF → JPG:", path.name)
                 path = convert_tiff_to_jpg(path)
+
+            ph = compute_phash(path)
+            if is_similar_hash(ph, list(hash_idx.values())):
+                print("[skip] duplicate (phash):", path.name)
+                try: path.unlink()
+                except: pass
+                continue
+
         except Exception as e:
             print("[warn] download/convert failed:", e)
             try: path.unlink()
@@ -515,41 +552,40 @@ def fetch_work(work_title: str, work_artist_name: str | None, limit: int, images
             "movement": "", "keywords": ""
         })
         write_rows(csv_path, rows)
-        regenerate_gallery(
-            gallery_path, rows, per_page=per_page, sort_mode=sort_mode, title="Art Gallery",
-            standalone=standalone, images_root_texpath=images_root_texpath
-        )
+        hash_idx[uid] = ph.__str__()
+        save_hash_index(art_dir, hash_idx)
 
+        regenerate_gallery(gallery_path, rows, per_page=per_page, sort_mode=sort_mode,
+                           title="Art Gallery", standalone=standalone, images_root_texpath=images_root_texpath)
         seen.add(sig); saved += 1
         print(f"[saved] {uid} — {artist_for_sig} — {title} ({year})")
-        time.sleep(0.15)
+        time.sleep(0.1)
 
-    regenerate_gallery(
-        gallery_path, rows, per_page=per_page, sort_mode=sort_mode, title="Art Gallery",
-        standalone=standalone, images_root_texpath=images_root_texpath
-    )
+    regenerate_gallery(gallery_path, rows, per_page=per_page, sort_mode=sort_mode,
+                       title="Art Gallery", standalone=standalone, images_root_texpath=images_root_texpath)
     print(f"\nDone (work mode). Saved {saved} files."
           f"\nCSV: {csv_path}\nGALLERY: {gallery_path}\nDir: {art_dir}")
 
 def fetch_commons_file(file_title_no_prefix: str, artist_hint: str | None, images_root: Path,
-                       per_page: int, sort_mode: str, standalone: bool, images_root_texpath: str):
-    """
-    Lade genau eine Datei von Commons (Lizenz-geprüft), z.B. "Intersecting_Lines_by_Wassily_Kandinsky.jpg".
-    """
+                       per_page: int, sort_mode: str, standalone: bool, images_root_texpath: str,
+                       min_width: int, min_height: int):
     art_dir = images_root / "Art"
     art_dir.mkdir(parents=True, exist_ok=True)
     csv_path = art_dir / CSV_NAME
     gallery_path = art_dir / GALLERY_TEX
+    hash_idx = load_hash_index(art_dir)
 
     ensure_index(csv_path)
     rows = read_rows(csv_path)
     seen = load_seen(csv_path)
 
-    lic, direct, mime = commons_license_and_direct_url(file_title_no_prefix)
+    lic, direct, mime, width, height = commons_license_and_direct_url(file_title_no_prefix)
     if not direct:
         raise SystemExit(f"Commons-Datei nicht gefunden: {file_title_no_prefix}")
     if not any(k in lic for k in ALLOWED_LIC):
         raise SystemExit(f"Nicht erlaubte Lizenz: {lic}")
+    if width < min_width or height < min_height:
+        raise SystemExit(f"Zu geringe Auflösung: {width}x{height} (min {min_width}x{min_height})")
 
     base = Path(file_title_no_prefix).stem.replace("_"," ").strip()
     title_guess = base
@@ -564,17 +600,24 @@ def fetch_commons_file(file_title_no_prefix: str, artist_hint: str | None, image
         ext = Path(urllib.parse.urlparse(direct).path).suffix or ".jpg"
         artist_slug = slug(artist_hint)[:60] if artist_hint else "unknown_artist"
         fn = f"{uid}__{artist_slug}__{slug(title_guess)[:90]}{ext}"
-        path = art_dir / fn
+        path = (images_root / "Art" / fn)
 
         try:
             with retry_get(direct, headers=UA, timeout=90, retries=3, stream=True) as rr:
                 with open(path, "wb") as f:
                     for chunk in rr.iter_content(8192):
                         if chunk: f.write(chunk)
-            # --- NEU: ggf. TIFF nach JPG wandeln ---
             if mime in ("image/tif", "image/tiff"):
                 print("[convert] TIFF → JPG:", path.name)
                 path = convert_tiff_to_jpg(path)
+
+            ph = compute_phash(path)
+            if is_similar_hash(ph, list(hash_idx.values())):
+                print("[skip] duplicate (phash):", path.name)
+                try: path.unlink()
+                except: pass
+                return
+
         except Exception as e:
             print("[warn] download/convert failed:", e)
             try: path.unlink()
@@ -589,12 +632,120 @@ def fetch_commons_file(file_title_no_prefix: str, artist_hint: str | None, image
             "movement": "", "keywords": ""
         })
         write_rows(csv_path, rows)
+        hash_idx[uid] = ph.__str__()
+        save_hash_index(art_dir, hash_idx)
 
-    regenerate_gallery(
-        gallery_path, read_rows(csv_path), per_page=per_page, sort_mode=sort_mode, title="Art Gallery",
-        standalone=standalone, images_root_texpath=images_root_texpath
-    )
+    regenerate_gallery(gallery_path, read_rows(csv_path), per_page=per_page, sort_mode=sort_mode,
+                       title="Art Gallery", standalone=standalone, images_root_texpath=images_root_texpath)
     print("Done (commons file).")
+
+def fetch_commons_category(category: str, limit: int, images_root: Path,
+                           per_page: int, sort_mode: str, standalone: bool, images_root_texpath: str,
+                           min_width: int, min_height: int):
+    """
+    Ziehe Dateien direkt aus einer Commons-Kategorie (ohne Wikidata-Zwang).
+    Kategorie OHNE 'Category:'-Präfix übergeben, z. B. 'Hilma_af_Klint' oder 'Paintings_by_Hilma_af_Klint'.
+    """
+    art_dir = images_root / "Art"
+    art_dir.mkdir(parents=True, exist_ok=True)
+    csv_path = art_dir / CSV_NAME
+    gallery_path = art_dir / GALLERY_TEX
+    hash_idx = load_hash_index(art_dir)
+
+    ensure_index(csv_path)
+    rows = read_rows(csv_path)
+    seen = load_seen(csv_path)
+
+    saved = 0
+    cmcontinue = None
+    while saved < limit:
+        params = {
+            "action": "query", "format": "json",
+            "list": "categorymembers",
+            "cmtitle": f"Category:{category}",
+            "cmtype": "file",
+            "cmlimit": 50,
+        }
+        if cmcontinue: params["cmcontinue"] = cmcontinue
+
+        r = retry_get("https://commons.wikimedia.org/w/api.php", params, UA, timeout=40).json()
+        members = (r.get("query", {}).get("categorymembers") or [])
+        if not members:
+            break
+
+        for m in members:
+            if saved >= limit: break
+            title = m.get("title","")
+            if not title.startswith("File:"): continue
+            file_title_no_prefix = title.split("File:",1)[1]
+
+            lic, direct, mime, width, height = commons_license_and_direct_url(file_title_no_prefix)
+            if not direct or not any(k in lic for k in ALLOWED_LIC):
+                continue
+            if width < min_width or height < min_height:
+                continue
+
+            # 'artist' notfalls aus Kategorienamen ableiten
+            artist_name = artist_from_category(category)
+            base = Path(file_title_no_prefix).stem.replace("_"," ").strip()
+            title_guess = base
+            year_guess = ""
+
+            sig = make_sig(artist_name, title_guess, year_guess)
+            if sig in seen:
+                continue
+
+            uid = next_uid(rows)
+            ext = Path(urllib.parse.urlparse(direct).path).suffix or ".jpg"
+            fn = f"{uid}__{slug(artist_name)[:60]}__{slug(title_guess)[:90]}{ext}"
+            path = (images_root / "Art" / fn)
+
+            try:
+                with retry_get(direct, headers=UA, timeout=90, retries=3, stream=True) as rr:
+                    with open(path, "wb") as f:
+                        for chunk in rr.iter_content(8192):
+                            if chunk: f.write(chunk)
+                if mime in ("image/tif", "image/tiff"):
+                    print("[convert] TIFF → JPG:", path.name)
+                    path = convert_tiff_to_jpg(path)
+
+                ph = compute_phash(path)
+                if is_similar_hash(ph, list(hash_idx.values())):
+                    print("[skip] duplicate (phash):", path.name)
+                    try: path.unlink()
+                    except: pass
+                    continue
+
+            except Exception as e:
+                print("[warn] download/convert failed:", e)
+                try: path.unlink()
+                except: pass
+                continue
+
+            rel = path.relative_to(images_root).as_posix()
+            rows.append({
+                "uid": uid, "filename": rel,
+                "artist": artist_name, "title": title_guess, "year": year_guess,
+                "source": "COMMONS_CATEGORY", "license": lic,
+                "movement": "", "keywords": ""
+            })
+            write_rows(csv_path, rows)
+            hash_idx[uid] = ph.__str__()
+            save_hash_index(art_dir, hash_idx)
+
+            regenerate_gallery(gallery_path, rows, per_page=per_page, sort_mode=sort_mode,
+                               title="Art Gallery", standalone=standalone, images_root_texpath=images_root_texpath)
+            seen.add(sig); saved += 1
+            print(f"[saved] {uid} — {artist_name} — {title_guess}")
+
+        cmcontinue = (r.get("continue") or {}).get("cmcontinue")
+        if not cmcontinue:
+            break
+
+    regenerate_gallery(gallery_path, rows, per_page=per_page, sort_mode=sort_mode,
+                       title="Art Gallery", standalone=standalone, images_root_texpath=images_root_texpath)
+    print(f"\nDone (commons category). Saved {saved} files."
+          f"\nCSV: {csv_path}\nGALLERY: {gallery_path}\nDir: {art_dir}")
 
 # ---------- CLI ----------
 def main():
@@ -603,6 +754,7 @@ def main():
     ap.add_argument("--work", type=str, help='Werk-/Titel-Suche, z.B. "Intersecting Lines"')
     ap.add_argument("--work-artist", type=str, help='(Optional) Künstlername zur Eingrenzung, z.B. "Wassily Kandinsky"')
     ap.add_argument("--commons-file", type=str, help='Direkter Commons-Dateiname, z.B. "Intersecting_Lines_by_Wassily_Kandinsky.jpg"')
+    ap.add_argument("--commons-category", type=str, help='Commons-Kategorie (ohne "Category:"), z. B. "Hilma_af_Klint"')
 
     ap.add_argument("--limit", type=int, default=300)
     ap.add_argument("--images-root", type=str, default=None)
@@ -613,6 +765,8 @@ def main():
     ap.add_argument("--image-root-texpath", type=str,
                     default="/Users/tim/NoteDeck/MainDeck-modular/Library/Images/",
                     help="Pfad für \\graphicspath im Standalone-Modus")
+    ap.add_argument("--min-width", type=int, default=2000, help="Mindestbreite für Bilder")
+    ap.add_argument("--min-height", type=int, default=2000, help="Mindesthöhe für Bilder")
     args = ap.parse_args()
 
     images_root = resolve_images_root(args.images_root)
@@ -629,12 +783,21 @@ def main():
         print(f"Gallery rebuilt.\nCSV: {csv_path}\nGALLERY: {gallery_path}")
         return
 
-    # Routing: 1) direkte Commons-Datei, 2) Werk-Suche, 3) Künstler-Suche
+    if args.commons_category:
+        fetch_commons_category(
+            args.commons_category, args.limit, images_root,
+            per_page=args.per_page, sort_mode=args.sort, standalone=args.standalone,
+            images_root_texpath=args.image_root_texpath,
+            min_width=args.min_width, min_height=args.min_height
+        )
+        return
+
     if args.commons_file:
         fetch_commons_file(
             args.commons_file, args.work_artist, images_root,
             per_page=args.per_page, sort_mode=args.sort,
-            standalone=args.standalone, images_root_texpath=args.image_root_texpath
+            standalone=args.standalone, images_root_texpath=args.image_root_texpath,
+            min_width=args.min_width, min_height=args.min_height
         )
         return
 
@@ -642,17 +805,19 @@ def main():
         fetch_work(
             args.work, args.work_artist, args.limit, images_root,
             per_page=args.per_page, sort_mode=args.sort,
-            standalone=args.standalone, images_root_texpath=args.image_root_texpath
+            standalone=args.standalone, images_root_texpath=args.image_root_texpath,
+            min_width=args.min_width, min_height=args.min_height
         )
         return
 
     if not args.artist:
-        raise SystemExit("Fehler: --artist ist erforderlich (oder --work / --commons-file / --rebuild-only verwenden).")
+        raise SystemExit("Fehler: --artist ist erforderlich (oder --work / --commons-file / --commons-category / --rebuild-only verwenden).")
 
     fetch_artist(
         args.artist, args.limit, images_root,
         per_page=args.per_page, sort_mode=args.sort,
-        standalone=args.standalone, images_root_texpath=args.image_root_texpath
+        standalone=args.standalone, images_root_texpath=args.image_root_texpath,
+        min_width=args.min_width, min_height=args.min_height
     )
 
 if __name__ == "__main__":
