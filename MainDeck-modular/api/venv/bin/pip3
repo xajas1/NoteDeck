@@ -1,4 +1,4 @@
-#!/Users/tim/NoteDeck/MainDeck-modular/api/venv/bin/python3.12
+#!/Users/tim/NoteDeck/MainDeck-modular/api/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

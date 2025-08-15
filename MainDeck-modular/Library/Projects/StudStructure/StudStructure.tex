@@ -20,21 +20,187 @@
 % 17  Graphik
 % 18  Extra
 % 00. Titel und Autor
-\usepackage{xparse,calc}
+\usepackage{xparse,calc,xstring}
 
 
-% --- robuste Defaults als Längenregister ---
+% --- Bruchfähige Structure-Box -----------------------------------------------
+\usepackage[most]{tcolorbox}
+
+
+% Basis: bruchfähige Side-by-Side-Box ohne sichtbaren Rahmen
+\newenvironment{StructureBoxB}[1][]{%
+  \begin{tcolorbox}[
+    enhanced, breakable,
+    boxrule=0pt, colback=white, sharp corners,
+    sidebyside, sidebyside align=top seam,
+    lefthand width=\StructureLeftWidth,
+    sidebyside gap=\StructureGap,
+    before skip=.6\baselineskip, after skip=.6\baselineskip,
+    #1
+  ]%
+}{%
+  \end{tcolorbox}%
+}
+
+% Bruchfähige Version MIT Bild/Caption links
+\newcommand{\StructurePicAutoB}[2]{%
+  \begingroup
+    % ---- Auto-Caption-Parsing (deine funktionierende Logik) ----
+    \def\fn{#1}%
+    \StrSubstitute{\fn}{ }{}[\fnnospace]%
+    \IfStrEq{\fnnospace}{}{%
+      % kein Bild: auf Bildlose Variante ausweichen
+      \StructureB{#2}%
+    }{%
+      \IfBeginWith{\fn}{Art/}{%
+        \StrBehind[1]{\fn}{/}[\base]%
+        \def\fullpath{\fn}%
+      }{%
+        \def\base{\fn}%
+        \edef\fullpath{Art/\fn}%
+      }%
+      \def\artist{}\def\title{}\def\year{}%
+      \StrCount{\base}{__}[\dbl]%
+      \ifnum\dbl>0
+        \StrBehind[1]{\base}{__}[\restA]%
+        \StrBefore [1]{\restA}{__}[\artistraw]%
+        \StrBehind [1]{\restA}{__}[\restB]%
+        \StrBefore [1]{\restB}{__}[\titleraw]%
+        \StrBehind [1]{\restB}{__}[\yearExt]%
+        \StrBefore [1]{\yearExt}{.}[\yearraw]%
+        \StrSubstitute{\artistraw}{_}{ }[\artist]%
+        \StrSubstitute{\titleraw}{_}{ }[\title]%
+        \edef\year{\yearraw}%
+      \else
+        \StrBefore[1]{\base}{.}[\title]%
+      \fi
+      \def\caption{}%
+      \IfStrEq{\artist}{}{\def\caption{\title}}{\def\caption{\artist, \title}}%
+      \IfStrEq{\year}{}{}{\edef\caption{\caption\space(\year)}}%
+
+      % ---- Ausgabe: bruchfähige Box ----
+      \StructureComputeRestspace 
+      \begin{StructureBoxB}
+        % linke Seite (Bild)
+        \textbf{Structure:}\par\vspace{.4\baselineskip}
+        \vspace*{\StructureNudge}%
+        \centering
+        \StructureIncludeAuto{\fullpath}\\[.4ex]
+        {\footnotesize\itshape \caption}
+      \tcblower
+        % rechte Seite (Text, darf umbrechen)
+        #2
+      \end{StructureBoxB}
+    }%
+  \endgroup
+}
+
+% Bruchfähige Version OHNE Bild (nur rechter Text, Box behält Look)
+\newcommand{\StructureB}[1]{%
+  \begin{StructureBoxB}[lefthand width=0pt]
+    % linke Seite leer
+  \tcblower
+    #1
+  \end{StructureBoxB}
+}
+
+
+
+
+
+
+
+
+% Benötigt: \usepackage{xstring}
+
+% Eingabe:
+%   {}                                  → ohne Bild (fällt auf \Structure zurück)
+%   ART0000__Artist__Title__Year.EXT    → Bild + Auto-Caption
+%   Art/ART0000__Artist__Title__Year... → dito (Pfad wird nicht verdoppelt)
+\newcommand{\StructurePicAuto}[2]{%
+  \begingroup
+    % 0) Eingabe prüfen: leere Eingabe oder nur Leerzeichen? → \Structure
+    \def\fn{#1}%
+    \StrSubstitute{\fn}{ }{}[\fnnospace]%
+    \IfStrEq{\fnnospace}{}{%
+      \Structure{#2}%
+    }{%
+      % 1) Pfad/Basisname
+      \IfBeginWith{\fn}{Art/}{%
+        \StrBehind[1]{\fn}{/}[\base]%
+        \def\fullpath{\fn}%
+      }{%
+        \def\base{\fn}%
+        \edef\fullpath{Art/\fn}%
+      }%
+
+      % 2) Defaults
+      \def\artist{}%
+      \def\title{}%
+      \def\year{}%
+
+      % 3) Versuche Muster „…__Artist__Title__Year.ext“ zu parsen
+      \StrCount{\base}{__}[\dbl]%
+      \ifnum\dbl>0
+        \StrBehind[1]{\base}{__}[\restA]%  Artist__Title__Year.ext
+        \StrBefore [1]{\restA}{__}[\artistraw]%
+        \StrBehind [1]{\restA}{__}[\restB]%  Title__Year.ext
+        \StrBefore [1]{\restB}{__}[\titleraw]%
+        \StrBehind [1]{\restB}{__}[\yearExt]% Year.ext
+        \StrBefore [1]{\yearExt}{.}[\yearraw]%
+        % Unterstriche hübsch machen (verhindert Missing-$)
+        \StrSubstitute{\artistraw}{_}{ }[\artist]%
+        \StrSubstitute{\titleraw}{_}{ }[\title]%
+        \edef\year{\yearraw}%
+      \else
+        % Fallback: nutze Basisname ohne Endung als Titel
+        \StrBefore[1]{\base}{.}[\title]%
+      \fi
+
+      % 4) Caption bauen
+      \def\caption{}%
+      \IfStrEq{\artist}{}{\def\caption{\title}}{\def\caption{\artist, \title}}%
+      \IfStrEq{\year}{}{}{\edef\caption{\caption\space(\year)}}%
+
+      % 5) Rendern
+      \StructurePic{\fullpath}{\caption}{#2}%
+    }%
+  \endgroup
+}
+
+% Resthöhe MESSEN (muss VOR der tcolorbox passieren!)
+\newdimen\StructureAvail
+\newcommand{\StructureComputeRestspace}{%
+  \global\StructureAvail=\dimexpr\pagegoal-\pagetotal-2\baselineskip\relax
+  \ifdim\StructureAvail<0pt \global\StructureAvail=0pt\fi
+}
+
+% Bild anhand der VORHER gemessenen Resthöhe setzen
+\newcommand{\StructureIncludeAuto}[1]{%
+  \ifdim\StructureAvail>6cm
+    \includegraphics[width=\linewidth]{#1}%
+  \else
+    \ifdim\StructureAvail>2cm
+      \includegraphics[width=\linewidth,height=\StructureAvail,keepaspectratio]{#1}%
+    \else
+      \pagebreak
+      \includegraphics[width=\linewidth]{#1}%
+    \fi
+  \fi
+}
+
+
+
+% --- Rest wie gehabt ---
 \newlength{\StructureLeftWidth}   \setlength{\StructureLeftWidth}{0.26\textwidth}
 \newlength{\StructureGap}         \setlength{\StructureGap}{1.5em}
 \newlength{\StructureNudge}       \setlength{\StructureNudge}{0pt}
 
-% Intern: Basismakro (nicht direkt aufrufen)
 \NewDocumentCommand{\StructureBase}{ m m m +m }{%
   \noindent
   \begin{minipage}[t]{\StructureLeftWidth}
     \textbf{Structure:}\par\vspace{.5\baselineskip}
     \ifx\relax#1\relax
-      % kein Bild
     \else
       \vspace*{#3}%
       \centering
@@ -48,12 +214,10 @@
   \end{minipage}\par\medskip
 }
 
-% Öffentliche API (ohne Klammern/Werte):
-% 1) ohne Bild
 \NewDocumentCommand{\Structure}{ +m }{%
   \StructureBase{}{}{\StructureNudge}{#1}%
 }
-% 2) mit Bild: nur Dateiname + Caption
+
 \NewDocumentCommand{\StructurePic}{ m m +m }{%
   \StructureBase{#1}{#2}{\StructureNudge}{#3}%
 }
@@ -64,32 +228,6 @@
 
 
 
-\usepackage{wrapfig,caption}
-\captionsetup{font=footnotesize, labelformat=empty}
-
-\newcommand{\structureimage}[3][0.15\textwidth]{%
-  \par\noindent\leavevmode% <-- sorgt für Absatz/Horizontalmodus
-  \begin{wrapfigure}[12]{r}{#1}%
-    \vspace{-0.6\baselineskip}\centering
-    \includegraphics[width=\linewidth]{#2}%
-    \caption{\textit{#3}}%
-    \vspace{-0.4\baselineskip}%
-  \end{wrapfigure}%
-}
-
-
-\newcommand{\structureimageblock}[4][0.22\textwidth]{%
-  \noindent
-  \begin{minipage}[t]{\dimexpr\linewidth-#1-1em\relax}
-    #4
-  \end{minipage}\hfill
-  \begin{minipage}[t]{#1}
-    \vspace{-10\baselineskip} % <--- hier Höhe anpassen
-    \centering
-    \includegraphics[width=\linewidth]{#2}\\[0.3ex]
-    {\footnotesize\itshape #3}
-  \end{minipage}\par\medskip
-}
 
 
 
@@ -158,11 +296,17 @@
 
 % --- 5. Diagramme und Grafiken ---
 \usepackage{graphicx}
-\graphicspath{{../../Images/}}
+
+\graphicspath{{/Users/tim/NoteDeck/MainDeck-modular/Library/Images/}
+              {/Users/tim/NoteDeck/MainDeck-modular/Library/Images/Art/}}
+
+
 \usepackage[export]{adjustbox}
 \usepackage{tikz}
 \usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
 \usepackage{tikz-cd}
+
+
 
 % --- 6. Tabellen und Aufzählungen ---
 \usepackage{enumitem}
@@ -333,7 +477,6 @@ Kurze Beschreibung …
 
 
 
-
 \subsection{Levi-Civita Zusammenhang}
 
 
@@ -343,7 +486,7 @@ $$
 X(g(Y, Z))=g\left(D_{X} Y, Z\right)+g\left(Y, D_{X} Z\right)
 $$
 
-\StructurePic{Kandinsky-Intersecting Lines 1923.jpg}{Kandinsky, Intersecting Lines, 1923}
+\StructurePicAutoB{ART0050__Paul_Klee__Hoffmannesque_Scene__1921.jpg}
 {%
 \begin{outline}
   Zeige aus der Metrikverträglichkeit die A) Koszul-Gleichung und folgere dann: B) Eindeutigkeit, C) $\R$-Linearität in $X,Y$, D) $C^\infty$-Linearität in $X$, E) Ableitung in $Y$, F) Torsionsfreiheit, G) Metrikkompatibilität: 
@@ -382,7 +525,7 @@ D_{\frac{\partial}{\partial x_{j}}} \frac{\partial}{\partial x_{k}}=\sum_{i} \Ga
 $$
 definiert sind.
 
-\StructurePic{}{}
+\StructurePicAutoB{ART0011__Paul_Klee__Dittlsam__1918.JPG}
 {%
 \begin{outline}
   Christoffel-Symbole tretten als Korrekturfaktoren in lokalen Darstellungen der kovarianten Ableitung von Vektorfeldern auf $D_{X^i\partial_i}Y^j\partial_j=X^i\partial_i(Y^j)\partial_j+\cdots$
@@ -400,7 +543,7 @@ $$
 \Gamma_{j k}^{i}=\frac{1}{2} \sum_{l} g^{i l}\left(\partial_{j} g_{k l}+\partial_{k} g_{l j}-\partial_{l} g_{j k}\right) .
 $$
 
-\StructurePic{}{}
+\StructurePicAutoB{}
 {%
 \begin{outline}
   \1 Wähle Rahmen und expliziere Koszul-Gleichung für $(D_{\partial_j}\partial_k,\partial_l)$
@@ -634,7 +777,7 @@ v & \mapsto(\pi(v), \exp (v))
 $$
 ein lokaler Diffeomorphismus von einer offenen Umgebung W von $0_{p}$ in TM auf eine Umgebung von $(p, p)$ in $M \times M$.
 
-\StructurePic{}{}{%
+\StructurePicAutoB{}{%
   \begin{outline}
     \1 Differenzierbarkeit
         \2 Differenzierbare Abhängigkeit der Lösung von Geodäten-DGL von Anfangswerten
