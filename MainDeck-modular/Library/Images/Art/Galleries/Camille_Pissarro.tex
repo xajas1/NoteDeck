@@ -1,0 +1,90 @@
+\documentclass[11pt]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage[ngerman]{babel}
+\graphicspath{{/Users/tim/NoteDeck/MainDeck-modular/Library/Images/}}
+\setlength{\parindent}{0pt}
+\raggedbottom
+\title{Art Gallery — Camille Pissarro}
+\date{}
+\begin{document}
+\maketitle
+
+% Auto-generated — DO NOT EDIT.
+
+% Nur Dateiname (ohne Pfad) aus einem Pfad ziehen
+\makeatletter
+\newcommand{\basename}[1]{\begingroup\filename@parse{#1}\filename@base\filename@ext\endgroup}
+\makeatother
+
+% Einzeilige Codezeile (monospace), skaliert auf \linewidth
+\newcommand{\ArtCodeLine}[1]{\par\noindent{\scriptsize\ttfamily \resizebox{\linewidth}{!}{#1}}}
+
+% Robuste Kachel: rendert nichts, wenn Pfad leer ist
+\newcommand{\ArtTile}[2]{% #1=path, #2=caption
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \if\relax\detokenize{#1}\relax
+      % leer
+    \else
+      \includegraphics[width=\linewidth,height=0.28\textheight,keepaspectratio]{#1}\\[0.6ex]
+      {\footnotesize\itshape #2}\\[-0.2ex]
+      \ArtCodeLine{\basename{#1}}
+    \fi
+  \end{minipage}}
+
+\newcommand{\ArtRow}[4]{% #1..#4 = (path,caption) links/rechts
+  \noindent\ArtTile{#1}{#2}\hfill\ArtTile{#3}{#4}\par\vspace{1.0em}}
+
+\section*{Camille Pissarro}
+
+\ArtRow{Art\_TeX/ART0258\_\_Camille\_Pissarro\_\_Self\_Portrait\_with\_Palette\_\_1896.jpg}{Camille Pissarro, Self\_Portrait with Palette (1896)}{Art\_TeX/ART0259\_\_Camille\_Pissarro\_\_Felix\_Pissarro\_Wearing\_a\_Red\_Beret\_\_1881.jpg}{Camille Pissarro, Felix Pissarro Wearing a Red Beret (1881)}
+
+\ArtRow{Art\_TeX/ART0260\_\_Camille\_Pissarro\_\_Peasant\_Woman\_Carrying\_Two\_Bundles\_of\_Hay\_\_1883.jpg}{Camille Pissarro, Peasant Woman Carrying Two Bundles of Hay (1883)}{Art\_TeX/ART0261\_\_Camille\_Pissarro\_\_The\_Busagny\_Farm\_and\_the\_Viosne\_at\_Osny\_\_1883.jpg}{Camille Pissarro, The Busagny Farm and the Viosne at Osny (1883)}
+
+\ArtRow{Art\_TeX/ART0262\_\_Camille\_Pissarro\_\_The\_Garden\_at\_Maubuisson\_Pontoise\_and\_Mother\_Bellette\_\_1882.jpg}{Camille Pissarro, The Garden at Maubuisson, Pontoise, and Mother Bellette (1882)}{Art\_TeX/ART0263\_\_Camille\_Pissarro\_\_The\_Young\_Country\_Servant\_\_1882.jpg}{Camille Pissarro, The Young Country Servant (1882)}
+
+\ArtRow{Art\_TeX/ART0264\_\_Camille\_Pissarro\_\_The\_Poultry\_market\_Pontoise\_\_1882.jpg}{Camille Pissarro, The Poultry market, Pontoise (1882)}{Art\_TeX/ART0265\_\_Camille\_Pissarro\_\_Cliffs\_at\_Les\_Petites\_Dalles\_\_1883.jpg}{Camille Pissarro, Cliffs at Les Petites-Dalles (1883)}
+
+\ArtRow{Art\_TeX/ART0266\_\_Camille\_Pissarro\_\_View\_of\_the\_village\_of\_Osny\_\_1883.jpg}{Camille Pissarro, View of the village of Osny (1883)}{Art\_TeX/ART0267\_\_Camille\_Pissarro\_\_View\_of\_the\_Town\_of\_Pontoise\_\_1884.jpg}{Camille Pissarro, View of the Town of Pontoise (1884)}
+
+\ArtRow{Art\_TeX/ART0268\_\_Camille\_Pissarro\_\_Street\_in\_Pontoise\_Rue\_de\_Gisors\_\_1868.jpg}{Camille Pissarro, Street in Pontoise (Rue de Gisors) (1868)}{Art\_TeX/ART0269\_\_Camille\_Pissarro\_\_Rue\_L\_Hermitage\_\_1866.jpg}{Camille Pissarro, Rue L´Hermitage (1866)}
+
+\ArtRow{Art\_TeX/ART0270\_\_Camille\_Pissarro\_\_Rue\_de\_l\_Hermitage\_Pontoise\_\_1866.jpg}{Camille Pissarro, Rue de l'Hermitage, Pontoise (1866)}{Art\_TeX/ART0271\_\_Camille\_Pissarro\_\_View\_of\_L\_Hermitage\_C\_te\_des\_Gratte\_Coqs\_Pontoise\_\_1867.jpg}{Camille Pissarro, View of L'Hermitage, Côte des Gratte-Coqs, Pontoise (1867)}
+
+\ArtRow{Art\_TeX/ART0272\_\_Camille\_Pissarro\_\_Banks\_of\_the\_Oise\_Pontoise\_\_1872.jpg}{Camille Pissarro, Banks of the Oise, Pontoise (1872)}{Art\_TeX/ART0273\_\_Camille\_Pissarro\_\_Uphill\_Road\_in\_the\_Countryside\_near\_Pontoise\_\_1876.jpg}{Camille Pissarro, Uphill Road in the Countryside near Pontoise (1876)}
+
+\ArtRow{Art\_TeX/ART0274\_\_Camille\_Pissarro\_\_View\_of\_Saint\_Ouen\_l\_Aum\_ne\_\_1876.jpeg}{Camille Pissarro, View of Saint-Ouen-l’Aumône (1876)}{Art\_TeX/ART0275\_\_Camille\_Pissarro\_\_L\_Hermitage\_in\_Summer\_Pontoise\_\_1877.jpg}{Camille Pissarro, L'Hermitage in Summer, Pontoise (1877)}
+
+\ArtRow{Art\_TeX/ART0276\_\_Camille\_Pissarro\_\_Flower\_Bouquet\_Peonies\_and\_Mock\_Orange\_\_1878.jpg}{Camille Pissarro, Flower Bouquet: Peonies and Mock-Orange (1878)}{Art\_TeX/ART0277\_\_Camille\_Pissarro\_\_Banks\_of\_the\_Oise\_the\_Countryside\_near\_Pontoise\_\_1877.jpg}{Camille Pissarro, Banks of the Oise, the Countryside near Pontoise (1877)}
+
+\ArtRow{Art\_TeX/ART0278\_\_Camille\_Pissarro\_\_The\_Fond\_de\_L\_Hermitage\_Pontoise\_\_1877.jpg}{Camille Pissarro, The Fond-de-L'Hermitage, Pontoise (1877)}{Art\_TeX/ART0279\_\_Camille\_Pissarro\_\_Ploughed\_Field\_in\_Winter\_with\_a\_Man\_Carrying\_a\_Bundle\_of\_Sticks\_\_1877.jpg}{Camille Pissarro, Ploughed Field in Winter with a Man Carrying a Bundle of Sticks (1877)}
+
+\ArtRow{Art\_TeX/ART0280\_\_Camille\_Pissarro\_\_Rue\_de\_L\_Hermitage\_Pontoise\_\_1875.jpg}{Camille Pissarro, Rue de L´Hermitage, Pontoise (1875)}{Art\_TeX/ART0281\_\_Camille\_Pissarro\_\_In\_the\_Garden\_at\_Les\_Mathurins\_Pontoise\_\_1877.jpg}{Camille Pissarro, In the Garden at Les Mathurins, Pontoise (1877)}
+
+\ArtRow{Art\_TeX/ART0282\_\_Camille\_Pissarro\_\_Garden\_at\_L\_Hermitage\_the\_Red\_House\_Pontoise\_\_1877.JPG}{Camille Pissarro, Garden at L'Hermitage, the 'Red House', Pontoise (1877)}{Art\_TeX/ART0283\_\_Camille\_Pissarro\_\_The\_Path\_to\_Le\_Chou\_Pontoise\_\_1878.jpg}{Camille Pissarro, The Path to Le Chou, Pontoise (1878)}
+
+\ArtRow{Art\_TeX/ART0284\_\_Camille\_Pissarro\_\_The\_Parc\_aux\_Charrettes\_Pontoise\_\_1878.jpg}{Camille Pissarro, The Parc-aux-Charrettes, Pontoise (1878)}{Art\_TeX/ART0285\_\_Camille\_Pissarro\_\_Portrait\_of\_Eugene\_Murer\_\_1878.JPG}{Camille Pissarro, Portrait of Eugene Murer (1878)}
+
+\ArtRow{Art\_TeX/ART0286\_\_Camille\_Pissarro\_\_Banks\_of\_the\_Oise\_at\_Pontoise\_Effect\_of\_Snow\_\_1879.jpg}{Camille Pissarro, Banks of the Oise at Pontoise, Effect of Snow (1879)}{Art\_TeX/ART0287\_\_Camille\_Pissarro\_\_The\_Hay\_Cart\_Montfoucault\_\_1879.jpg}{Camille Pissarro, The Hay Cart, Montfoucault (1879)}
+
+\ArtRow{Art\_TeX/ART0288\_\_Camille\_Pissarro\_\_Hunter\_in\_a\_Landscape\_near\_Pontoise\_\_1879.jpg}{Camille Pissarro, Hunter in a Landscape near Pontoise (1879)}{Art\_TeX/ART0289\_\_Camille\_Pissarro\_\_Edge\_of\_the\_Woods\_Near\_L\_Hermitage\_Pontoise\_\_1879.jpg}{Camille Pissarro, Edge of the Woods Near L'Hermitage, Pontoise (1879)}
+
+\ArtRow{Art\_TeX/ART0290\_\_Camille\_Pissarro\_\_Rue\_de\_l\_Hermitage\_Pontoise\_1879\_\_1879.jpg}{Camille Pissarro, Rue de l'Hermitage, Pontoise (1879) (1879)}{Art\_TeX/ART0291\_\_Camille\_Pissarro\_\_View\_of\_l\_Hermitage\_through\_Trees\_Pontoise\_\_1879.JPG}{Camille Pissarro, View of l'Hermitage through Trees, Pontoise (1879)}
+
+\ArtRow{Art\_TeX/ART0292\_\_Camille\_Pissarro\_\_Cottages\_at\_Le\_Valhermeil\_Auvers\_sur\_Oise\_\_1880.jpg}{Camille Pissarro, Cottages at Le Valhermeil, Auvers-sur-Oise (1880)}{Art\_TeX/ART0293\_\_Camille\_Pissarro\_\_The\_Harvest\_\_1882.jpg}{Camille Pissarro, The Harvest (1882)}
+
+\ArtRow{Art\_TeX/ART0294\_\_Camille\_Pissarro\_\_Farm\_at\_Montfoucault\_\_1874.jpg}{Camille Pissarro, Farm at Montfoucault (1874)}{Art\_TeX/ART0295\_\_Camille\_Pissarro\_\_The\_Louvre\_Morning\_Sunlight\_\_1901.jpg}{Camille Pissarro, The Louvre: Morning, Sunlight (1901)}
+
+\ArtRow{Art\_TeX/ART0296\_\_Camille\_Pissarro\_\_View\_from\_the\_Harbour\_in\_Dieppe\_\_1902.jpg}{Camille Pissarro, View from the Harbour in Dieppe (1902)}{Art\_TeX/ART0297\_\_Camille\_Pissarro\_\_The\_Steeple\_at\_Bazincourt\_\_1885.jpg}{Camille Pissarro, The Steeple at Bazincourt (1885)}
+
+\ArtRow{Art\_TeX/ART0298\_\_Camille\_Pissarro\_\_The\_Delafolie\_House\_ragny\_\_1885.jpg}{Camille Pissarro, The Delafolie House, Éragny (1885)}{Art\_TeX/ART0299\_\_Camille\_Pissarro\_\_Apple\_Picking\_\_1886.jpg}{Camille Pissarro, Apple-Picking (1886)}
+
+\ArtRow{Art\_TeX/ART0300\_\_Camille\_Pissarro\_\_Heumahd\_\_1885.jpeg}{Camille Pissarro, Heumahd (1885)}{Art\_TeX/ART0301\_\_Camille\_Pissarro\_\_Sunset\_at\_ragny\_\_1890.jpg}{Camille Pissarro, Sunset at Éragny (1890)}
+
+\noindent\ArtTile{Art\_TeX/ART0302\_\_Camille\_Pissarro\_\_Landscape\_with\_Houses\_and\_a\_Wall\_Mist\_and\_Frost\_ragny\_\_1892.jpg}{Camille Pissarro, Landscape with Houses and a Wall, Mist and Frost, Éragny (1892)}\par\vspace{1.0em}
+
+\end{document}

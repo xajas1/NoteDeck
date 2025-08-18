@@ -1,0 +1,62 @@
+\documentclass[11pt]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage[ngerman]{babel}
+\graphicspath{{/Users/tim/NoteDeck/MainDeck-modular/Library/Images/}}
+\setlength{\parindent}{0pt}
+\raggedbottom
+\title{Art Gallery — Hilma af Klint}
+\date{}
+\begin{document}
+\maketitle
+
+% Auto-generated — DO NOT EDIT.
+
+% Nur Dateiname (ohne Pfad) aus einem Pfad ziehen
+\makeatletter
+\newcommand{\basename}[1]{\begingroup\filename@parse{#1}\filename@base\filename@ext\endgroup}
+\makeatother
+
+% Einzeilige Codezeile (monospace), skaliert auf \linewidth
+\newcommand{\ArtCodeLine}[1]{\par\noindent{\scriptsize\ttfamily \resizebox{\linewidth}{!}{#1}}}
+
+% Robuste Kachel: rendert nichts, wenn Pfad leer ist
+\newcommand{\ArtTile}[2]{% #1=path, #2=caption
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \if\relax\detokenize{#1}\relax
+      % leer
+    \else
+      \includegraphics[width=\linewidth,height=0.28\textheight,keepaspectratio]{#1}\\[0.6ex]
+      {\footnotesize\itshape #2}\\[-0.2ex]
+      \ArtCodeLine{\basename{#1}}
+    \fi
+  \end{minipage}}
+
+\newcommand{\ArtRow}[4]{% #1..#4 = (path,caption) links/rechts
+  \noindent\ArtTile{#1}{#2}\hfill\ArtTile{#3}{#4}\par\vspace{1.0em}}
+
+\section*{Hilma af Klint}
+
+\ArtRow{Art\_TeX/ART0149\_\_Hilma\_af\_Klint\_\_The\_Ten\_Largest\_\_1907.jpg}{Hilma af Klint, The Ten Largest (1907)}{Art\_TeX/ART0150\_\_Hilma\_af\_Klint\_\_The\_Ten\_Largest\_No\_9\_Old\_Age\_\_1907.jpg}{Hilma af Klint, The Ten Largest, No. 9, Old Age (1907)}
+
+\ArtRow{Art\_TeX/ART0151\_\_Hilma\_af\_Klint\_\_The\_Ten\_Largest\_No\_2\_Childhood\_\_1907.jpg}{Hilma af Klint, The Ten Largest, No. 2, Childhood (1907)}{Art\_TeX/ART0152\_\_Hilma\_af\_Klint\_\_The\_Ten\_Largest\_No\_1\_Childhood\_\_1907.jpg}{Hilma af Klint, The Ten Largest, No. 1, Childhood (1907)}
+
+\ArtRow{Art\_TeX/ART0153\_\_Hilma\_af\_Klint\_\_The\_Ten\_Largest\_No\_3\_Youth\_\_1907.jpg}{Hilma af Klint, The Ten Largest, No. 3, Youth (1907)}{Art\_TeX/ART0154\_\_Hilma\_af\_Klint\_\_The\_Ten\_Largest\_No\_4\_Youth\_\_1907.jpg}{Hilma af Klint, The Ten Largest, No. 4, Youth (1907)}
+
+\ArtRow{Art\_TeX/ART0155\_\_Hilma\_af\_Klint\_\_The\_Ten\_Largest\_No\_5\_Adulthood\_\_1907.jpg}{Hilma af Klint, The Ten Largest, No. 5, Adulthood (1907)}{Art\_TeX/ART0156\_\_Hilma\_af\_Klint\_\_The\_Ten\_Largest\_No\_6\_\_1907.jpg}{Hilma af Klint, The Ten Largest, No. 6 (1907)}
+
+\ArtRow{Art\_TeX/ART0157\_\_Hilma\_af\_Klint\_\_The\_Ten\_Largest\_No\_7\_Adulthood\_\_1907.jpg}{Hilma af Klint, The Ten Largest, No. 7, Adulthood (1907)}{Art\_TeX/ART0158\_\_Hilma\_af\_Klint\_\_The\_Ten\_Largest\_No\_8\_Adulthood\_\_1907.jpg}{Hilma af Klint, The Ten Largest, No. 8, Adulthood (1907)}
+
+\ArtRow{Art\_TeX/ART0159\_\_Hilma\_af\_Klint\_\_The\_Ten\_Largest\_No\_10\_Old\_Age\_\_1907.jpg}{Hilma af Klint, The Ten Largest, No. 10, Old Age (1907)}{Art\_TeX/ART0160\_\_Hilma\_af\_Klint\_\_The\_Swan\_\_1910.jpg}{Hilma af Klint, The Swan (1910)}
+
+\ArtRow{Art\_TeX/ART0161\_\_Hilma\_af\_Klint\_\_Late\_Summer\_\_1903.jpeg}{Hilma af Klint, Late Summer (1903)}{Art\_TeX/ART0162\_\_Hilma\_af\_Klint\_\_Tree\_of\_Knowledge\_No\_1\_\_1915.jpg}{Hilma af Klint, Tree of Knowledge, No. 1 (1915)}
+
+\ArtRow{Art\_TeX/ART0163\_\_Hilma\_af\_Klint\_\_Tree\_of\_Knowledge\_No\_2\_\_1915.jpg}{Hilma af Klint, Tree of Knowledge, No. 2 (1915)}{Art\_TeX/ART0164\_\_Hilma\_af\_Klint\_\_Portrait.jpg}{Hilma af Klint, Portrait}
+
+\noindent\ArtTile{Art\_TeX/ART0165\_\_Hilma\_af\_Klint\_\_John\_Schamyl\_Bjoerling.jpg}{Hilma af Klint, John Schamyl Björling}\par\vspace{1.0em}
+
+\end{document}
