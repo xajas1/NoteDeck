@@ -1,0 +1,419 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17. Titel und Autor
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\CustomHeading{Definition}{#1}{#2}}{}
+\newenvironment{PROP}[2]{\CustomHeading{Proposition}{#1}{#2}}{}
+\newenvironment{THEO}[2]{\CustomHeading{Theorem}{#1}{#2}}{}
+\newenvironment{LEM}[2]{\CustomHeading{Lemma}{#1}{#2}}{}
+\newenvironment{KORO}[2]{\CustomHeading{Corollar}{#1}{#2}}{}
+\newenvironment{REM}[2]{\CustomHeading{Remark}{#1}{#2}}{}
+\newenvironment{EXA}[2]{\CustomHeading{Example}{#1}{#2}}{}
+\newenvironment{STUD}[2]{\CustomHeading{Study}{#1}{#2}}{}
+\newenvironment{CONC}[2]{\CustomHeading{Concept}{#1}{#2}}{}
+\newenvironment{OTH}[2]{\CustomHeading{Other}{#1}{#2}}{}
+\newenvironment{EXE}[2]{\CustomHeading{Exercise}{#1}{#2}}{}
+\newenvironment{MOT}[2]{\CustomHeading{Motivation}{#1}{#2}}{}
+\newenvironment{PROOF}[2]{\CustomHeading{Proof}{#1}{#2}}{}
+
+
+
+% --- Unit Umgebung ---
+\usepackage{mdframed}
+\newmdenv[
+  linewidth=1pt,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftmargin=0cm,
+  rightmargin=0cm,
+  skipabove=10pt,
+  skipbelow=10pt,
+  innertopmargin=0.5\baselineskip,
+  innerbottommargin=0.5\baselineskip,
+  backgroundcolor=gray!10,
+  linecolor=gray
+]{unitbox}
+
+\newenvironment{unit}[1]
+  {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
+  {\end{unitbox}}
+
+
+% --- 17. Titel und Autor ---
+\title{Mein Titel}
+\author{Tim Jaschik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+Kurze Beschreibung …
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\tableofcontents
+
+\pagebreak
+
+\section{TESTSection}
+
+\subsection{TESTSubsection}
+
+\begin{PROP}{RG-A11-16-26}{Zeitableitung der Metrik-abhängigen Volumenform}
+Suppose $g(t)$ is a smooth one-parameter family of metrics on a manifold $M$ with $\frac{\partial}{\partial t} g=h$. Then the volume form $d \mu(g(t))$ evolves by
+$$
+\frac{\partial}{\partial t} d \mu=\frac{1}{2} \operatorname{tr} h d \mu .
+$$
+\end{PROP}
+
+\begin{PROOF}{RG-A11-16-27}{P: Zeitableitung der Metrik-abhängigen Volumenform}
+In local coordinates ( $x^{i}$ ) the volume form can be written as $d \mu=\sqrt{\operatorname{det} g} d x^{1} \wedge \ldots \wedge x^{n}$. So by (4.12) and the chain rule,
+$$
+\begin{aligned}
+\frac{\partial}{\partial t} \sqrt{\operatorname{det} g} & =\frac{1}{2} \frac{1}{\sqrt{\operatorname{det} g}} \frac{\partial}{\partial t} \operatorname{det} g \\
+& =\frac{1}{2} \frac{1}{\sqrt{\operatorname{det} g}} \frac{\partial \operatorname{det} g}{\partial g_{i j}} \frac{\partial g_{i j}}{\partial t} \\
+& =\frac{1}{2} \sqrt{\operatorname{det} g}\left(g^{-1}\right)_{j i} h_{i j} \\
+& =\frac{1}{2} g^{i j} h_{i j} \sqrt{\operatorname{det} g}=\frac{1}{2} \operatorname{tr} h \sqrt{\operatorname{det} g}
+\end{aligned}
+$$
+Thus,
+$$
+\frac{\partial}{\partial t} d \mu=\frac{\partial \sqrt{\operatorname{det} g}}{\partial t} d x^{1} \wedge \ldots \wedge x^{n}=\frac{1}{2} \operatorname{tr} h d \mu
+$$
+\end{PROOF}
+
+\begin{THEO}{RG-A11-16-28}{Evolutionsformel für Riemannischen $(4,0)$ Krümmungstensor abhängig von Lösungen des Ricci-Flusses}
+Suppose $g(t)$ is a solution of the Ricci flow, the $(4,0)$ Riemannian tensor $R$ evolves by
+$$
+\begin{aligned}
+\frac{\partial}{\partial t} R_{i j k \ell}= & \Delta R_{i j k \ell}+2\left(B_{i j k \ell}-B_{i j \ell k}-B_{i \ell j k}+B_{i k j \ell}\right) \\
+& -g^{p q}\left(R_{p j k \ell} R_{q i}+R_{i p k \ell} R_{q j}+R_{i j k p} R_{q \ell}+R_{i j p \ell} R_{q k}\right) .
+\end{aligned}
+$$
+\end{THEO}
+
+\begin{PROOF}{RG-A11-16-29}{P: Evolutionsformel für Riemannischen $(4,0)$ Krümmungstensor abhängig von Lösungen des Ricci-Flusses}
+By Proposition 4.8, with $\frac{\partial}{\partial t} g_{i j}=-2 R_{i j}$, the time derivative of $R_{i j k \ell}$ satisfies
+$$
+\begin{aligned}
+& \nabla_{i, \ell}^{2} R_{j k}+\nabla_{j, k}^{2} R_{i \ell}-\nabla_{i, k}^{2} R_{j \ell}-\nabla_{j, \ell}^{2} R_{i k} \\
+& \quad=-\frac{\partial}{\partial t} R_{i j k \ell}-g^{p q}\left(R_{i j k p} R_{q \ell}+R_{i j p \ell} R_{q k}\right) .
+\end{aligned}
+$$
+By Proposition 4.2, with indices $k$ and $\ell$ switched, the Laplacian of $R$ satisfies
+$$
+\begin{aligned}
+& \nabla_{i, \ell}^{2} R_{j k}-\nabla_{j, \ell}^{2} R_{i k}+\nabla_{j, k}^{2} R_{i \ell}-\nabla_{i, k}^{2} R_{j \ell} \\
+& \quad=\Delta R_{i j \ell k}+2\left(B_{i j \ell k}-B_{i j k \ell}-B_{i k j \ell}+B_{i \ell j k}\right) \\
+& \quad-g^{p q}\left(R_{q j \ell k} R_{p i}+R_{i q \ell k} R_{p j}\right) .
+\end{aligned}
+$$
+Combining these equations gives
+$$
+\begin{aligned}
+-\Delta R_{i j k \ell}=\Delta R_{i j \ell k}= & -\frac{\partial}{\partial t} R_{i j k \ell}-2\left(B_{i j \ell k}-B_{i j k \ell}-B_{i k j \ell}+B_{i \ell j k}\right) \\
+& +g^{p q}\left(R_{q j \ell k} R_{p i}+R_{i q \ell k} R_{p j}\right) \\
+& -g^{p q}\left(R_{i j k p} R_{q \ell}+R_{i j p \ell} R_{q k}\right)
+\end{aligned}
+$$
+\end{PROOF}
+
+\begin{PROOF}{RG-A11-16-30}{P: Evolutionsformel für Riemannischen $(4,0)$ Krümmungstensor abhängig von Lösungen des Ricci-Flusses}
+By Proposition 4.8, with $\frac{\partial}{\partial t} g_{i j}=-2 R_{i j}$, the time derivative of $R_{i j k \ell}$ satisfies
+$$
+\begin{aligned}
+& \nabla_{i, \ell}^{2} R_{j k}+\nabla_{j, k}^{2} R_{i \ell}-\nabla_{i, k}^{2} R_{j \ell}-\nabla_{j, \ell}^{2} R_{i k} \\
+& \quad=-\frac{\partial}{\partial t} R_{i j k \ell}-g^{p q}\left(R_{i j k p} R_{q \ell}+R_{i j p \ell} R_{q k}\right) .
+\end{aligned}
+$$
+By Proposition 4.2, with indices $k$ and $\ell$ switched, the Laplacian of $R$ satisfies
+$$
+\begin{aligned}
+& \nabla_{i, \ell}^{2} R_{j k}-\nabla_{j, \ell}^{2} R_{i k}+\nabla_{j, k}^{2} R_{i \ell}-\nabla_{i, k}^{2} R_{j \ell} \\
+& \quad=\Delta R_{i j \ell k}+2\left(B_{i j \ell k}-B_{i j k \ell}-B_{i k j \ell}+B_{i \ell j k}\right) \\
+& \quad-g^{p q}\left(R_{q j \ell k} R_{p i}+R_{i q \ell k} R_{p j}\right) .
+\end{aligned}
+$$
+Combining these equations gives
+$$
+\begin{aligned}
+-\Delta R_{i j k \ell}=\Delta R_{i j \ell k}= & -\frac{\partial}{\partial t} R_{i j k \ell}-2\left(B_{i j \ell k}-B_{i j k \ell}-B_{i k j \ell}+B_{i \ell j k}\right) \\
+& +g^{p q}\left(R_{q j \ell k} R_{p i}+R_{i q \ell k} R_{p j}\right) \\
+& -g^{p q}\left(R_{i j k p} R_{q \ell}+R_{i j p \ell} R_{q k}\right)
+\end{aligned}
+$$
+\end{PROOF}
+
+\begin{KORO}{RG-A11-16-31}{Evolution von Connection Koeffizienten unter Ricci Flow}
+Under the Ricci flow, the connection coefficients evolve by
+$$
+\frac{\partial}{\partial t} \Gamma_{i j}^{k}=-g^{k \ell}\left(\left(\nabla_{j} \operatorname{Ric}\right)\left(\partial_{i}, \partial_{\ell}\right)+\left(\nabla_{i} \operatorname{Ric}\right)\left(\partial_{j}, \partial_{\ell}\right)-\left(\nabla_{\ell} \operatorname{Ric}\right)\left(\partial_{i}, \partial_{j}\right)\right)
+$$
+\end{KORO}
+
+\begin{KORO}{RG-A11-16-32}{Evolution der Volumenform unter Ricci Flow}
+Under the Ricci flow, the volume form of $g$ evolves by
+$$
+\frac{\partial}{\partial t} d \mu=-\operatorname{Scal} d \mu
+$$
+\end{KORO}
+
+\begin{KORO}{RG-A11-16-33}{Evolution des Ricci-Krümmungstensors unter Ricci Flow}
+Under the Ricci flow,
+$$
+\begin{aligned}
+\frac{\partial}{\partial t} R_{i k} & =\Delta R_{i k}+\nabla_{i k}^{2} \mathrm{Scal}-g^{p q}\left(\nabla_{q, i}^{2} R_{k p}+\nabla_{q, k}^{2} R_{i p}\right)
+\end{KORO}
+
+\begin{KORO}{RG-A11-16-34}{Evolution des skalaren Krümmung unter Ricci Flow}
+Under the Ricci flow,
+\frac{\partial}{\partial t} \mathrm{Scal} & =2 \Delta \mathrm{Scal}-2 g^{i j} g^{p q} \nabla_{q, j}^{2} R_{p i}+2|\mathrm{Ric}|^{2}
+\end{aligned}
+$$
+\end{KORO}
+
+\begin{KORO}{RG-A11-16-35}{Evolution des Ricci-Krümmungstensor unter Ricci Flow 2}
+Under the Ricci flow,
+$$
+\frac{\partial}{\partial t} R_{i k}=\Delta R_{i k}+2 g^{p q} g^{r s} R_{p i k r} R_{q s}-2 g^{p q} R_{i p} R_{q k}
+$$
+\end{KORO}
+
+\begin{PROOF}{RG-A11-16-36}{P: Evolution des Ricci-Krümmungstensor unter Ricci Flow 2}
+By (4.9) the time derivative of $R_{i k}=g^{j \ell} R_{i j k \ell}$ is $\frac{\partial}{\partial t} R_{i k}=g^{j \ell} \frac{\partial}{\partial t} R_{i j k \ell}$ $-2 g^{j p} g^{\ell q} R_{p q} R_{i j k \ell}$. Substituting the expression for $\frac{\partial}{\partial t} R_{i j k \ell}$ in Theorem 4.14 (with $g^{j \ell} \Delta R_{i j k \ell}=\Delta R_{i k}$ from (2.15)) results in
+
+$$\begin{aligned}
+\frac{\partial}{\partial t} R_{i k}= & \Delta R_{i k}+2 g^{j \ell}\left(B_{i j k \ell}-B_{i j \ell k}-B_{i \ell j k}+B_{i k j \ell}\right) \\
+& -g^{j \ell} g^{p q}\left(R_{p j k \ell} R_{q i}+R_{i p k \ell} R_{q j}+R_{i j p \ell} R_{q k}+R_{i j k p} R_{q \ell}\right)
+\end{aligned}$$
+
+As we find that
+
+$$\begin{aligned}
+& 2 g^{j \ell}\left(B_{i j k \ell}-B_{i j \ell k}-B_{i \ell j k}+B_{i k j \ell}\right) \\
+& \quad=2 g^{j \ell} B_{i j k \ell}-2 g^{j \ell}\left(B_{i \ell j k}+B_{i j \ell k}\right)+2 g^{p r} g^{q s} R_{p i q k} R_{r s} \\
+& \quad=2 g^{j \ell} B_{i j k \ell}-4 g^{j \ell} B_{i j \ell k}+2 g^{p r} g^{q s} R_{p i q k} R_{r s} \\
+& \quad=2 g^{j \ell}\left(B_{i j k \ell}-2 B_{i j \ell k}\right)+2 g^{p r} g^{q s} R_{p i q k} R_{r s}
+\end{aligned}$$
+and
+
+$$\begin{aligned}
+& g^{j \ell} g^{p q}\left(R_{p j k \ell} R_{q i}+R_{i p k \ell} R_{q j}+R_{i j p \ell} R_{q k}+R_{i j k p} R_{q \ell}\right) \\
+& \quad=2 g^{p q} R_{p i} R_{q k}+g^{j \ell} g^{p q} R_{i p k \ell} R_{q j}+g^{j \ell} g^{p q} R_{i j k p} R_{q \ell} \\
+& \quad=2 g^{p q} R_{p i} R_{q k}+2 g^{p r} g^{q s} R_{p i q k} R_{r s},
+\end{aligned}$$
+it follows that
+$$\frac{\partial}{\partial t} R_{i k}=\Delta R_{i k}+2 g^{j \ell}\left(B_{i j k \ell}-2 B_{i j \ell k}\right)+2 g^{p r} g^{q s} R_{p i q k} R_{r s}-2 g^{p q} R_{p i} R_{q k}$$
+The desired result now follows from the following claim.
+
+Claim 4.19. For any metric $g_{i j}$, the tensor $B_{i j k \ell}$ satisfies the identity
+$$g^{j \ell}\left(B_{i j k \ell}-2 B_{i j \ell k}\right)=0$$
+
+Proof of Claim. 
+
+Using the Bianchi identities,
+
+$$\begin{aligned}
+g^{j \ell} B_{i j k \ell} & =g^{j \ell} g^{p r} g^{q s} R_{p i q j} R_{r k s \ell} \\
+& =g^{j \ell} g^{p r} g^{q s} R_{p q i j} R_{r s k \ell} \\
+& =g^{j \ell} g^{p r} g^{q s}\left(R_{p i q j}-R_{p j q i}\right)\left(R_{r k s \ell}-R_{r \ell s k}\right) \\
+& =2 g^{j \ell}\left(B_{i j k \ell}-B_{i j \ell k}\right)
+\end{aligned}$$
+\end{PROOF}
+
+\begin{KORO}{RG-A11-16-37}{Evolution des skalaren Krümmung unter Ricci Flow 2}
+Under the Ricci flow,
+$$
+\frac{\partial}{\partial t} \text { Scal }=\Delta \text { Scal }+2  |\text{Ric}|^{2}
+$$
+\end{KORO}
+
+\begin{PROOF}{RG-A11-16-38}{P: Evolution des skalaren Krümmung unter Ricci Flow 2}
+By (4.9) the time derivative of $R_{i k}=g^{j \ell} R_{i j k \ell}$ is $\frac{\partial}{\partial t} R_{i k}=g^{j \ell} \frac{\partial}{\partial t} R_{i j k \ell}$ $-2 g^{j p} g^{\ell q} R_{p q} R_{i j k \ell}$. Substituting the expression for $\frac{\partial}{\partial t} R_{i j k \ell}$ in Theorem 4.14 (with $g^{j \ell} \Delta R_{i j k \ell}=\Delta R_{i k}$ from (2.15)) results in
+$$\begin{aligned}
+\frac{\partial}{\partial t} R_{i k}= & \Delta R_{i k}+2 g^{j \ell}\left(B_{i j k \ell}-B_{i j \ell k}-B_{i \ell j k}+B_{i k j \ell}\right) \\
+& -g^{j \ell} g^{p q}\left(R_{p j k \ell} R_{q i}+R_{i p k \ell} R_{q j}+R_{i j p \ell} R_{q k}+R_{i j k p} R_{q \ell}\right)
+\end{aligned}$$
+As we find that
+$$\begin{aligned}
+& 2 g^{j \ell}\left(B_{i j k \ell}-B_{i j \ell k}-B_{i \ell j k}+B_{i k j \ell}\right) \\
+& \quad=2 g^{j \ell} B_{i j k \ell}-2 g^{j \ell}\left(B_{i \ell j k}+B_{i j \ell k}\right)+2 g^{p r} g^{q s} R_{p i q k} R_{r s} \\
+& \quad=2 g^{j \ell} B_{i j k \ell}-4 g^{j \ell} B_{i j \ell k}+2 g^{p r} g^{q s} R_{p i q k} R_{r s} \\
+& \quad=2 g^{j \ell}\left(B_{i j k \ell}-2 B_{i j \ell k}\right)+2 g^{p r} g^{q s} R_{p i q k} R_{r s}
+\end{aligned}$$
+and
+$$\begin{aligned}
+& g^{j \ell} g^{p q}\left(R_{p j k \ell} R_{q i}+R_{i p k \ell} R_{q j}+R_{i j p \ell} R_{q k}+R_{i j k p} R_{q \ell}\right) \\
+& \quad=2 g^{p q} R_{p i} R_{q k}+g^{j \ell} g^{p q} R_{i p k \ell} R_{q j}+g^{j \ell} g^{p q} R_{i j k p} R_{q \ell} \\
+& \quad=2 g^{p q} R_{p i} R_{q k}+2 g^{p r} g^{q s} R_{p i q k} R_{r s},
+\end{aligned}$$
+it follows that
+$$\frac{\partial}{\partial t} R_{i k}=\Delta R_{i k}+2 g^{j \ell}\left(B_{i j k \ell}-2 B_{i j \ell k}\right)+2 g^{p r} g^{q s} R_{p i q k} R_{r s}-2 g^{p q} R_{p i} R_{q k}$$
+The desired result now follows from the following claim.
+
+Claim 4.19. For any metric $g_{i j}$, the tensor $B_{i j k \ell}$ satisfies the identity
+$$g^{j \ell}\left(B_{i j k \ell}-2 B_{i j \ell k}\right)=0$$
+Proof of Claim. 
+
+Using the Bianchi identities,
+$$\begin{aligned}
+g^{j \ell} B_{i j k \ell} & =g^{j \ell} g^{p r} g^{q s} R_{p i q j} R_{r k s \ell} \\
+& =g^{j \ell} g^{p r} g^{q s} R_{p q i j} R_{r s k \ell} \\
+& =g^{j \ell} g^{p r} g^{q s}\left(R_{p i q j}-R_{p j q i}\right)\left(R_{r k s \ell}-R_{r \ell s k}\right) \\
+& =2 g^{j \ell}\left(B_{i j k \ell}-B_{i j \ell k}\right)
+\end{aligned}$$
+Note
+\end{PROOF}
+
+\subsection{TESTSubsection2}
+
+\end{document}
