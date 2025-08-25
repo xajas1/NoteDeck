@@ -20,15 +20,38 @@
 % 17  Graphik
 % 18  Extra
 % 00. Titel und Autor
-\usepackage{xparse,calc,xstring}
+% --- Pakete (nur was wirklich gebraucht wird) ---
+\usepackage{xstring}          % Dateinamen-Parsing
+\usepackage{graphicx}         % \includegraphics
+\usepackage[most]{tcolorbox}  % bruchfähige Side-by-Side-Box
+\usepackage{needspace}        % stabiler Vorab-Umbruch (empfohlen)
 
+% --- Parameter ---
+\newlength{\StructureLeftWidth}   \setlength{\StructureLeftWidth}{0.26\textwidth}
+\newlength{\StructureGap}         \setlength{\StructureGap}{1.5em}
+\newlength{\StructureNudge}       \setlength{\StructureNudge}{0pt}
 
-% --- Bruchfähige Structure-Box -----------------------------------------------
-\usepackage[most]{tcolorbox}
-\usepackage{needspace}
+% --- Resthöhe messen (vor der Box ausführen) ---
+\newdimen\StructureAvail
+\newcommand{\StructureComputeRestspace}{%
+  \global\StructureAvail=\dimexpr\pagegoal-\pagetotal-2\baselineskip\relax
+  \ifdim\StructureAvail<0pt \global\StructureAvail=0pt\fi
+}
 
+% --- Bild dynamisch einpassen (ohne späten pagebreak!) ---
+\newcommand{\StructureIncludeAuto}[1]{%
+  \ifdim\StructureAvail>6cm
+    \includegraphics[width=\linewidth]{#1}%
+  \else
+    \ifdim\StructureAvail>2cm
+      \includegraphics[width=\linewidth,height=\StructureAvail,keepaspectratio]{#1}%
+    \else
+      \includegraphics[width=\linewidth]{#1}%
+    \fi
+  \fi
+}
 
-% Basis: bruchfähige Side-by-Side-Box ohne sichtbaren Rahmen
+% --- Box-Umgebung (Side-by-Side, bruchfähig) ---
 \newenvironment{StructureBoxB}[1][]{%
   \begin{tcolorbox}[
     enhanced, breakable,
@@ -43,14 +66,20 @@
   \end{tcolorbox}%
 }
 
-% Bruchfähige Version MIT Bild/Caption links
+% --- Fallback ohne Bild ---
+\newcommand{\StructureB}[1]{%
+  \begin{StructureBoxB}[lefthand width=0pt]
+  \tcblower
+    #1
+  \end{StructureBoxB}
+}
+
+% --- Hauptbefehl: \StructurePicAutoB{<Datei oder leer>}{<rechter Text>} ---
 \newcommand{\StructurePicAutoB}[2]{%
   \begingroup
-    % ---- Auto-Caption-Parsing (deine funktionierende Logik) ----
     \def\fn{#1}%
     \StrSubstitute{\fn}{ }{}[\fnnospace]%
     \IfStrEq{\fnnospace}{}{%
-      % kein Bild: auf Bildlose Variante ausweichen
       \StructureB{#2}%
     }{%
       \IfBeginWith{\fn}{Art/}{%
@@ -79,154 +108,21 @@
       \IfStrEq{\artist}{}{\def\caption{\title}}{\def\caption{\artist, \title}}%
       \IfStrEq{\year}{}{}{\edef\caption{\caption\space(\year)}}%
 
-      % ---- Ausgabe: bruchfähige Box ----
-      \StructureComputeRestspace 
+      % Vorab-Entscheidung stabilisiert die Paginierung
+      \StructureComputeRestspace
+      \Needspace{0.35\textheight} % bei Bedarf auf 0.40 erhöhen
+
       \begin{StructureBoxB}
-        % linke Seite (Bild)
         \textbf{Structure:}\par\vspace{.4\baselineskip}
-        \vspace*{\StructureNudge}%
-        \centering
+        \vspace*{\StructureNudge}\centering
         \StructureIncludeAuto{\fullpath}\\[.4ex]
         {\footnotesize\itshape \caption}
       \tcblower
-        % rechte Seite (Text, darf umbrechen)
         #2
       \end{StructureBoxB}
     }%
   \endgroup
 }
-
-% Bruchfähige Version OHNE Bild (nur rechter Text, Box behält Look)
-\newcommand{\StructureB}[1]{%
-  \begin{StructureBoxB}[lefthand width=0pt]
-    % linke Seite leer
-  \tcblower
-    #1
-  \end{StructureBoxB}
-}
-
-
-
-
-
-
-
-
-% Benötigt: \usepackage{xstring}
-
-% Eingabe:
-%   {}                                  → ohne Bild (fällt auf \Structure zurück)
-%   ART0000__Artist__Title__Year.EXT    → Bild + Auto-Caption
-%   Art/ART0000__Artist__Title__Year... → dito (Pfad wird nicht verdoppelt)
-\newcommand{\StructurePicAuto}[2]{%
-  \begingroup
-    % 0) Eingabe prüfen: leere Eingabe oder nur Leerzeichen? → \Structure
-    \def\fn{#1}%
-    \StrSubstitute{\fn}{ }{}[\fnnospace]%
-    \IfStrEq{\fnnospace}{}{%
-      \Structure{#2}%
-    }{%
-      % 1) Pfad/Basisname
-      \IfBeginWith{\fn}{Art/}{%
-        \StrBehind[1]{\fn}{/}[\base]%
-        \def\fullpath{\fn}%
-      }{%
-        \def\base{\fn}%
-        \edef\fullpath{Art/\fn}%
-      }%
-
-      % 2) Defaults
-      \def\artist{}%
-      \def\title{}%
-      \def\year{}%
-
-      % 3) Versuche Muster „…__Artist__Title__Year.ext“ zu parsen
-      \StrCount{\base}{__}[\dbl]%
-      \ifnum\dbl>0
-        \StrBehind[1]{\base}{__}[\restA]%  Artist__Title__Year.ext
-        \StrBefore [1]{\restA}{__}[\artistraw]%
-        \StrBehind [1]{\restA}{__}[\restB]%  Title__Year.ext
-        \StrBefore [1]{\restB}{__}[\titleraw]%
-        \StrBehind [1]{\restB}{__}[\yearExt]% Year.ext
-        \StrBefore [1]{\yearExt}{.}[\yearraw]%
-        % Unterstriche hübsch machen (verhindert Missing-$)
-        \StrSubstitute{\artistraw}{_}{ }[\artist]%
-        \StrSubstitute{\titleraw}{_}{ }[\title]%
-        \edef\year{\yearraw}%
-      \else
-        % Fallback: nutze Basisname ohne Endung als Titel
-        \StrBefore[1]{\base}{.}[\title]%
-      \fi
-
-      % 4) Caption bauen
-      \def\caption{}%
-      \IfStrEq{\artist}{}{\def\caption{\title}}{\def\caption{\artist, \title}}%
-      \IfStrEq{\year}{}{}{\edef\caption{\caption\space(\year)}}%
-
-      % 5) Rendern
-      \StructurePic{\fullpath}{\caption}{#2}%
-    }%
-  \endgroup
-}
-
-% Resthöhe MESSEN (muss VOR der tcolorbox passieren!)
-\newdimen\StructureAvail
-\newcommand{\StructureComputeRestspace}{%
-  \global\StructureAvail=\dimexpr\pagegoal-\pagetotal-2\baselineskip\relax
-  \ifdim\StructureAvail<0pt \global\StructureAvail=0pt\fi
-}
-
-% Bild anhand der VORHER gemessenen Resthöhe setzen
-\newcommand{\StructureIncludeAuto}[1]{%
-  \ifdim\StructureAvail>6cm
-    \includegraphics[width=\linewidth]{#1}%
-  \else
-    \ifdim\StructureAvail>2cm
-      \includegraphics[width=\linewidth,height=\StructureAvail,keepaspectratio]{#1}%
-    \else
-      \pagebreak
-      \includegraphics[width=\linewidth]{#1}%
-    \fi
-  \fi
-}
-
-
-
-% --- Rest wie gehabt ---
-\newlength{\StructureLeftWidth}   \setlength{\StructureLeftWidth}{0.26\textwidth}
-\newlength{\StructureGap}         \setlength{\StructureGap}{1.5em}
-\newlength{\StructureNudge}       \setlength{\StructureNudge}{0pt}
-
-\NewDocumentCommand{\StructureBase}{ m m m +m }{%
-  \noindent
-  \begin{minipage}[t]{\StructureLeftWidth}
-    \textbf{Structure:}\par\vspace{.5\baselineskip}
-    \ifx\relax#1\relax
-    \else
-      \vspace*{#3}%
-      \centering
-      \includegraphics[width=\linewidth]{#1}\\[0.5ex]
-      {\footnotesize\itshape #2}%
-    \fi
-  \end{minipage}%
-  \hspace{\StructureGap}%
-  \begin{minipage}[t]{\dimexpr\linewidth-\StructureLeftWidth-\StructureGap\relax}
-    #4
-  \end{minipage}\par\medskip
-}
-
-\NewDocumentCommand{\Structure}{ +m }{%
-  \StructureBase{}{}{\StructureNudge}{#1}%
-}
-
-\NewDocumentCommand{\StructurePic}{ m m +m }{%
-  \StructureBase{#1}{#2}{\StructureNudge}{#3}%
-}
-
-
-
-
-
 
 
 
@@ -562,7 +458,7 @@ Für die Levi-Civita-Zusammenhänge $D$ von $M$ und $\tilde{D}$ von $\tilde{M}$ 
 \end{equation*}
 wobei $T$ die Orthogonalprojektion $T_{p} \tilde{M} \rightarrow T_{p} M$ ist.
 
-\StructurePic{Klint15-Altarpiece No. 2.jpg}{Klint, Altarpiece No. 2, 1925}
+\StructurePicAutoB{ART0173__Paintings_by_Hilma_af_Klint__Hilma_af_Klint_Altarpiece_No_2_13916.jpg}
 {%
 \begin{outline}
   \1 Übereinstimmung von Einschränkungen von Fortsetungen mit Fortgesetze (Lokaler Nachweis)
@@ -609,8 +505,7 @@ Ist $M$ eine Riemannsche Mannigfaltigkeit mit Levi-CivitaZusammenhang $D$ und $c
 \end{enumerate}
 
 
-\StructurePic{Klint15-the-dove-nr-12.jpg}
-  {Hilma af Klint, \emph{The Dove No. 12}, 1915}
+\StructurePicAutoB{}
 {%
   \begin{outline}
   Leite in lokaler Darstellung $Y(t)=y^i(t)\partial_i|_{c(t)}$ eine lokale Darstellung der kovarianten Ableitung längs Kurven her und zeige Eindeutigkeit und Existenz
@@ -642,7 +537,7 @@ $$
 \frac{d}{d t} g(X(t), Y(t))=g\left(\frac{D}{d t} X(t), Y(t)\right)+g\left(X(t), \frac{D}{d t} Y(t)\right)
 $$
 
-\StructurePic{}{}
+\StructurePicAutoB{}
 {%
 \begin{outline}
   \1 Lokale Darstellung von Vektorfeldern längs Kurven
@@ -681,7 +576,7 @@ Für jedes $X_{0} \in T_{c(0)} M$ gibt es genau ein paralleles Vektorfeld $X$ l�
 \textbf{Statement: }{Parallelverschiebung ist eine Isometrie zwischen Tangentialräumen}.
 Die Parallelverschiebung ist eine Isometrie zwischen $T_{c(0)}$ und $T_{c(1)}$.
 
-\StructurePic{}{}{%
+\StructurePicAutoB{}{%
   \begin{outline}
     \1 Zeitableitung und Produktregel von Metrik längs Kurve mit Paralleltransport als Input
   \end{outline}
@@ -710,7 +605,7 @@ X: U \times V \times(-\epsilon, \epsilon) & \rightarrow \mathbb{R}^{n} \\
 $$
 ist glatt.
 
-\StructurePic{}{}{%
+\StructurePicAutoB{}{%
   \begin{outline}
  
   \end{outline}
@@ -722,7 +617,7 @@ ist glatt.
 \textbf{Statement: }{Eindeutige lokale Lösbarkeit der Geodäten-Gleichung für AW}.
 Sei $p \in$ $M$. Dann gibt es offene Umgebung $U$ von $p$ und $\epsilon>0$, so dass für $q \in$ $U, v \in T_{q} M$ mit $\|v\|<\epsilon$ es genau eine Geodätische $c_{v}:(-1,1) \rightarrow M$ mit $c_{v}(0)=q, c_{v}^{\prime}(0)=v$ gibt. Mit anderen Worten gibt es zu gegebenen Anfangswerten zumindestens lokal eine Lösung.
 
-\StructurePic{}{}{%
+\StructurePicAutoB{}{%
   \begin{outline}
     
   \end{outline}
@@ -736,7 +631,7 @@ Sei $c$ eine Geodätische auf einer zweidimensionalen Mannigfaltigkeit. Sei $N$ 
 $$\|N(t)\|=1,\left\langle N(t), c^{\prime}(t)\right\rangle=0$$ 
 für alle $t$. Leitet man diese Gleichungen nach $t$ ab, so ergibt sich, dass auch $N$ ein paralleles Vektorfeld längs $c$ ist. Damit haben wir eine Basis für den Raum der parallelen Vektorfelder längs $c$. Ein beliebiges paralleles Vektorfeld mit Norm 1 lässt sich schreiben als $X(t)=\cos \alpha c^{\prime}(t)+$ $\sin \alpha N(t)$ mit $\alpha$ konstant.
 
-\StructurePic{}{}{%
+\StructurePicAutoB{}{%
   \begin{outline}
     
   \end{outline}
@@ -752,7 +647,7 @@ $$
 $$
 die Identität.
 
-\StructurePic{}{}{%
+\StructurePicAutoB{}{%
   \begin{outline}
     Zeige, dass $$d\exp_p|_{0_p}(v)=\dot c_v(0)$$ indem man bzgl. $t\mapsto tv$ in $t=0$ ableitet
     \1 $\exp_p(tv)=c_{tv}(1)=c_v(t)$
@@ -835,7 +730,7 @@ Für $p \in M$ gibt es eine Umgebung $U$ von $p$ in $M$ und $\epsilon>0$ so dass
   ein Diffeomorphismus zwischen der Menge $B\left(0_{q}, \epsilon\right) = \left\{ v \in T_{q} M : \|v\| < \epsilon \right\}$ und ihrem Bild in $M$.
 \end{enumerate}
 
-\StructurePic{}{}{%
+\StructurePicAutoB{}{%
   \begin{outline}
     \1 Konstruiere aus lokaler Isometrie eine diffeomorph abgebildete Bündeltube mit Radius $\epsilon$, und schrenke Bild auf geeignetes $U\times U$ ein
         \2 Verwende die lokale Isometrie von $\Phi$ bzgl $W_{0_p}$, um einen offene Bündel-Tube $W'$ um $p$ zu konstruieren, welche Diffeomorph zum Bild unter $\Phi$ ist und $(p,p)\in\Phi(W')$
@@ -859,7 +754,7 @@ Für $p \in M$ gibt es eine Umgebung $U$ von $p$ in $M$ und $\epsilon>0$ so dass
 \textbf{Statement: }{Distanzfunktion auf Riemannischer Mannigfaltigkeit}.
 $d$ ist eine Metrik auf $M$, die die gegebene Topologie von $M$ als Mannigfaltigkeit induziert.
 
-\StructurePic{}{}{%
+\StructurePicAutoB{}{%
   \begin{outline}
     Prüfe für Metrik A) Wohldefiniertheit, B) Dreiecks-UG, C) Symmetrie, D) $d(x,x)=0$, E) $d(x,y)=0$ dann $x=y$
     \1 Menge der verbundenen Punkten zu beliebigen Basispunkt ist offen und nicht leer, ebenso das Komplement. Da $M$ ZSH, existiert eine endliche Verbindungsstrecke
@@ -883,7 +778,7 @@ $d$ ist eine Metrik auf $M$, die die gegebene Topologie von $M$ als Mannigfaltig
 \textbf{Statement: }{Gausslemma}.
 Die radialen Geodätischen $r \mapsto \exp _{p}(r v)$ sind normal zu den Hyperflächen $f\left(\{r\} \times S^{n-1}\right)$. Speziell ist die Metrik in Polarkoordinaten durch $g=d r^{2}+h_{(r, v)}$ gegeben, wobei $h_{(r, v)}$ die durch $g$ auf $f\left(\{r\} \times S^{n-1}\right)$ induzierte Metrik ist.
 
-\StructurePic{}{}{%
+\StructurePicAutoB{}{%
   \begin{outline}
     \1 Wähle $\epsilon>0$ so klein, dass $\exp _{p}: B=B\left(0_{p}, \epsilon\right) \rightarrow B^{\prime} \subset M$ ein Diffeomorphismus ist. 
     \1 Polarkoordinaten $f:(0, \epsilon) \times S^{n-1} \rightarrow$ $B^{\prime} \backslash\{p\},(r, v) \mapsto \exp _{p}(r v)$
@@ -911,7 +806,7 @@ Die radialen Geodätischen $r \mapsto \exp _{p}(r v)$ sind normal zu den Hyperfl
 \textbf{Statement: }{Lokale eindeutige Existenz einer verbindenden Geodätischen}.
 Für $p \in M$ gibt es Umgebung $U$ in $M$ und $\epsilon>0$ so dass für $x, y \in U$ es eine (bis auf Parametrisierung) eindeutige Kurve $c$ von $x$ nach $y$ mit Länge $L(c)=d(x, y)<\epsilon$ gibt. Diese Kurve ist eine Geodätische und hat minimale Länge.
 
-\StructurePic{}{}{%
+\StructurePicAutoB{}{%
   \begin{outline}
     \1 Wähle $(U,\epsilon)$ kanonisch (Eindeutige Geodäten-Parametrisierung mit $\epsilon$-Schranke)
         \2 Geodäten-Länge und damit metrischer Abstand durch $\epsilon$ beschränkt
@@ -934,7 +829,7 @@ $$
 L\left(\left.c\right|_{\left[t_{1}, t_{2}\right]}\right)=d\left(c\left(t_{1}\right), c\left(t_{2}\right)\right) \quad \forall t_{1}, t_{2} \in[t-\epsilon, t+\epsilon]
 $$
 
-\StructurePic{}{}{%
+\StructurePicAutoB{}{%
   \begin{outline}
     \1 $\Rightarrow$: Wähle kanonische $(U,\epsilon)$ Umgebung von $p=c(t)$. Für alle $t_1,t_2\in I$, sodass $c(t_1),c(t_2)\in c\cap U$ ist $c|_{[t_1,t_2]}$ eindeutige Geodätische mit Länge $L(c|_{[t_1,t_2]})=d(c(t_1),c(t_2))<\epsilon$ (Lokale eindeutige Existent von minimalen Geodäten).
     \1 $\Leftarrow$: Da lokal (kanonisch $(U,\epsilon)$) für entsprechende Abschnitt minimal, ist bereits schon lokal Geodätische. Damit aber global Geodätisch (da Geodätisch sein eine lokale Eigenschaft) 
@@ -952,7 +847,7 @@ Sei $c:[a, b] \rightarrow M$ eine stückweise differenzierbare Kurve.
   \item Gilt für jede Kurve $\gamma$ von $c(a)$ nach $c(b)$, dass $E(\gamma) \geq E(c)$, dann ist $c$ eine Geodätische, die nach Bogenlänge parametrisiert ist.
 \end{enumerate}
 
-\StructurePic{}{}{%
+\StructurePicAutoB{}{%
   \begin{outline}
     \1 Lokaler Widerspruch: Angenommen, $c$ ist lokal nicht minimal. Dann existiert Kurve
     $$
@@ -982,7 +877,7 @@ Sei $c:[a, b] \rightarrow M$ eine stückweise differenzierbare Kurve.
 \textbf{Statement: }{Existenz von minimalen Geodätischen in freien Homotopieklassen auf kompakten Mannigfaltigkeiten}.
 Auf jeder kompakten Riemannschen Mannigfaltigkeit gibt es in jeder nichttrivialen freien Homotopieklasse $\mathcal{C}$ eine Geodätische mit minimaler Länge (Hadamard).
 
-\StructurePic{}{}{%
+\StructurePicAutoB{}{%
   \begin{outline}
     Finde zunächst untere Schranke für Länge von Repräsentanten einer freien Homotopieklasse sowie eine obere Schranke an Abschnittlängen, sodass Modifikationen von kürzeren Abschnitten homotop sind. Wähle dann geeignete Kurvenfolge in Homotopieklasse, sodass bei hinreichend feiner Segmentierung der Folgenglieder die Stützstellen homotop geodätisch verbunden werden können. Dann muss noch geprüft werden, dass im Grenzwert die Abschnitte, welche durch die Stützstellen laufen, lokal geodätisch sind.
     \1 Schranke für Gesamtlänge und homotope Änderungen
@@ -1027,7 +922,7 @@ $$
 d(p, q)=d(p, r)+d(r, q)
 $$
 
-\StructurePic{}{}{%
+\StructurePicAutoB{}{%
   \begin{outline}
     \1 Existiert $\delta>0$ klein genug, sodass $\exp$ auf $S(0_p,\delta)$ definiert und Bild kompakt
     \2 Da $S$ kompakt ist, existiert einen $r$ im Bild, sodass $d(r,q)=d(S,q)$
@@ -1045,7 +940,7 @@ $$
 \textbf{Statement: }{Hopf-Rinow}.
 Wenn für einen Punkt $p \in M$ auf einer Riemannschen Mannigfaltigkeit die Exponentialabbildung $\exp _{p}$ auf ganz $T_{p} M$ definiert ist, dann kann jeder Punkt auf $M$ mit $p$ durch eine minimale Geodätische verbunden werden.
 
-\StructurePic{}{}{%
+\StructurePicAutoB{}{%
   \begin{outline}
     Verwende die Existenz eines Durchlaufpunktes mit Distanz-Relation, um eine BLP Geodätische $c(t)$ zu konstruieren, und zeige, dass eingeschränkt auf $[0,d(p,q)]$ der maximale Zeitpunkt, bis welchen die (minimale) Distanz $d(p,q)$ durch $d(q,c(t))+t$ bestimmt wird, gerade $d(p,q)$ ist, d.h. nach dem Durchlaufpunkt minimiert die Geodätische fortschreitend die riemannische Distanz optimal.
     \1 Existiert $\delta>0$, sodass $$d(p,q)=d(p,r)+d(r,q)$$
@@ -1089,7 +984,7 @@ Sei $(M, g)$ eine Riemannsche Mannigfaltigkeit. Dann sind folgende Aussagen äqu
   \item Der metrische Raum $(M, d)$ ist vollständig, d.\,h.\ jede Cauchy-Folge konvergiert.
 \end{enumerate}
 
-\StructurePic{}{}{%
+\StructurePicAutoB{}{%
   \begin{outline}
     $A\Rightarrow B$: Geodätisch Vollständig ist per definition Definition von $\exp$ auf ganz $TM$, $B\Rightarrow C$: Dann existiert offensichtlich auch ein Punkt, wo $\exp$ auf dem ganzen Tangentialraum definiert ist, $C \Rightarrow D$: $K^\prime=(\exp_p^{-1}K)\cap\overline{B_R(0_p)}$ kompakt in $T_pM$ und wird durch $\exp$ stetig auf kompakt abgebildet, D $\Rightarrow$ E: Cauchyfolge beschränkt in $M$, daher existiert Häufungspunkt und Cauchy-Bedingung gibt konvergenz, E $\Rightarrow$ A: 
     \1 Definition
@@ -1127,13 +1022,397 @@ $R$ ist $C^{\infty}(M)$-linear in allen Komponenten. Speziell hängt $\left.(R(X
   \begin{outline}
     \1 $R$ ist $C^\infty$-Linear in allen Komponenten
     \2 Wegen $R(X,Y)Z=-R(Y,X)Z$ reicht für ersten beiden Einträge ein Fall aus
-    \2 
+    \3 Ausrechnen: $C^\infty$-Linearität von LC, und $D_{[fX,Y]}Z$ berechnen
+    \3 Abschließend kürzen sich $Y(f)$-Terme
+    \2 $R(X,Y)f$
+    \3 Ableitung in $Z$-Komponente, $X(f)$ ist Sklarfunktion
+    \3 Abschließend kürzen bzgl $Y(f),Y(X(f)),X(f),X(Y(F))$-Terme
+    \1 $(R(X,Y)Z)|_p$ hängt nur von Vektorfeldern punktweise ab 
   \end{outline}
 }
 
 \vspace{0.8cm}
 
 
+\textbf{Statement: }{Symmetrieeigenschaften der Riemannischen Krümmungstensors}.
+\begin{enumerate}
+  \item 
+  \begin{equation}
+  R(X, Y, Z, T) = -R(Y, X, Z, T) = -R(X, Y, T, Z)
+  \end{equation}
+
+  \item erste Bianchi-Identität: $$R(X, Y, Z, T) + R(Y, Z, X, T) + R(Z, X, Y, T) = 0$$
+
+  \item $$R(X, Y, Z, T) = R(Z, T, X, Y)$$
+\end{enumerate}
+
+\StructurePicAutoB{ART0269__Camille_Pissarro__Rue_L_Hermitage__1866.jpg}{%
+  \begin{outline}
+    \1 Antisymmetrie in ersten beiden Komponenten
+    \1 Antisymmetrie in zweiten beiden Komponenten
+    \2 Berechne $[X,Y]\langle Z,T\rangle$
+    \1 1. Bianchi-Identität: Beweise einfach für $(1,3)$-Tensor
+    \2 Summiere über Krümmung bzgl. Permutation
+    \2 Fasse zusammen in zweiter kov. Ableitung
+    \2 Vereinfache Klammern durch Torsionsfreiheit
+    \2 Zweite Torsionsfreiheit
+    \2 Jacobi-Identität 
+    \1 ……
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Schnittkrümmung bestimmt die Riemannische Krümmung}
+Die Schnittkrümmung $K$ bestimmt $R$.
+
+\StructurePicAutoB{ART0073__Wassily_Kandinsky__Cold__1929.jpg}{%
+  \begin{outline}
+    $(0,4)$-Krümmung wird bestimmt durch partieller Ableitung des Terms 
+    $$ R(X+\alpha Z, Y+\beta T, X+\alpha Z, Y+\beta T)  -R(X+\alpha T, Y+\beta Z, X+\alpha T, Y+\beta Z)$$
+    \1 Bei Ableitungen bleiben nur Terme über mit genau einmal $\alpha$ und $\beta$ (4-4 Terme)
+    \1 1. Bianchi-Identität und Antisymmetrie verwenden um auf $6 R(X,Y,Z,T)$ zu kommen
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+\textbf{Statement: }{Kontrollierbarkeit von Ricci durch Schnittkrümmung und Skalare durch Ricci}.
+Ist $K \geq \kappa$, so gilt  $\operatorname {Ric}(X,X)\geq(n-1) \kappa|X|^2$, analog mit $>, \leq,<$. Ist Ric $\geq \kappa$, so ist $s \geq n \kappa$.
+
+\StructurePicAutoB{ART0330__Claude_Monet__Poppy_Field_in_a_Hollow_near_Giverny__1885.jpg}{%
+  \begin{outline}
+    \1 Ricci über Schnittkrümmung von unten abschätzen
+    \2 Schätze punktweise Schnitt, also $(0,4)$ für $x,x$ und $e_i,e_i$ ab
+    \2 Summiere auf und schätze Ricci von unten ab
+    \1 Skalare Krümmung durch Ricci von unten abschätzen
+    \2 Skalare ist Spur von Ricci
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Darstellungen von Krümmungsgrößen}. Es gelten folgende Darstellungen
+\begin{enumerate}
+  \item $$
+  R(x, y, x, y)=K(P)\left(\langle x, x\rangle\langle y, y\rangle-\langle x, y\rangle^{2}\right)
+  $$
+  \item Ist $K$ konstant, d.h. $K(P)=k$ für alle $P \subset T_{p} M, p \in M$, so gilt
+  $$
+  R(X, Y, Z, T)=k(\langle X, Z\rangle\langle Y, T\rangle-\langle X, T\rangle\langle Y, Z\rangle)
+  $$
+  \item Hat $M$ konstante Schnittkrümmung $K \equiv \kappa$, so ist die Riccikrümmung gleich $(n-1) \kappa$ und die Skalarkrümmung gleich $n(n-1) \kappa$.
+  \item Ist $\operatorname{dim} M=2$, so gilt $s=2 K$, wobei $K$ die Gausskrümmung ist. Die Schnittkrümmung ist trivialerweise durch $s$ festgelegt (da es in $T_{p} M$ nur einen zweidimensionalen Unterraum gibt).
+  \item Ist $\operatorname{dim} M=3$, so ist $R$ durch Ric bestimmt. Dies gilt nicht mehr für $\operatorname{dim} M \geq 4$.
+\end{enumerate}
+
+\StructurePicAutoB{ART0341__Claude_Monet__Railroad_Bridge_Argenteuil__1873.jpg}{%
+  \begin{outline}
+    \1 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+\textbf{Statement: }{Wohldefiniertheit und Symmetrie der Zweite Fundamentalform}.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 Definition von Zweiter Fundamentalform hängt nicht von Wahl der Erweiterungen der Vektorfelder ab: Auswertung bei Punkt $p$ hängt nur von $U|_p, V|_p$ ab.
+    \1 $II(u,v)-II(v,u)$ und Lie-Klammer ist wieder Tangential
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Gaussgleichung}.
+Die Riemannschen Krümmungstensoren $\tilde{R}, R$ von $\tilde{M}, M$ sind durch die Gaussgleichung
+$$
+R(x, y, u, v)=\tilde{R}(x, y, u, v)+\langle I I(x, u), I I(y, v)\rangle-\langle I I(x, v), I I(y, u)\rangle
+$$
+miteinander verknüpft.
+
+\StructurePicAutoB{ART0356__Claude_Monet__La_Corniche_near_Monaco__1884.jpg}{%
+  \begin{outline}
+    Berechne die einzelnen Komponenten von $\tilde R$ für Tangentialvektorfelder $X,Y,U,V$ bzgl. Orthonormalrahmen von Normalbündel $\nu_i$.  
+    \1 $\tilde D_X\tilde D _Y U$ berechnen 
+    \2 Zerlegung von umgebende LC in intrinsische LC und 2. Fundamentalform, dann Darstellung in Narmalenbündel und abschließend in Metrik mit Tangentialvektorfeld, es bleibt u.a. ein Produkt aus umgebende Ableitung von Normalenfeld und Tangentialfeld über
+    \2 Darstellung für Produkt durch $$0=X \langle \nu_i,V \rangle$$ (Vorzeichen beachten)
+    \1 Umgebende kov. Ableitung bzgl Lie-Klammer intrinsisch
+    \1 Darstellungen einsetzen und ausrechnen (Vorzeichen beachten)
+    \1 Normalenrahmen pw als ONB, daher können Metrikprodukte zusammengezogen werden
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+\textbf{Statement: }{Theorema Egregium}.
+Die Gausskrümmung einer Fläche $M \subset \mathbb{R}^{3}$ hängt nur von der inneren Geometrie ab.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    Gauß-Gleichung in $\R^3$ reduziert bzgl. 
+    $$l(u,v)=\langle S(u),v\rangle = \langle \tilde D_u \nu,v\rangle= -\langle \nu, \tilde D_uv\rangle$$
+    und
+    $$\langle II(1,3),\nu_i\rangle =- \langle \tilde D_1\nu_i, 3 \rangle=\ell(1,3)$$
+    die Determinante von $S$, also die Gaußkrümmung auf $R(x,y,x,y)$  
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+\pagebreak
+
+
+\subsection{Variationsformeln}
+
+\textbf{Statement: }{Induzierter Zusammenhang entlang einer parametrierten Untermannigfaltigkeit}.
+Sei $H: N \rightarrow(M, g)$ eine parametrisierte Untermannigfaltigkeit. Dann gibt es eindeutige bilineare Abbildung $(X, Y) \mapsto \bar{D}_{X} Y$, wobei $X$ ein Vektorfeld auf $N$ ist und $Y$ sowie $\bar{D}_{X} Y$ Vektorfelder längs $H$ sind, so dass folgende Bedingungen gelten:
+\begin{enumerate}
+  \item $\bar{D}_{f X} Y = f\, \bar{D}_{X} Y,\quad \bar{D}_{X}(f Y) = X(f)\, Y + f\, \bar{D}_{X} Y$ \quad für $f \in C^{\infty}(N)$.
+  
+  \item Ist $Y$ in einer Umgebung von $H(p)$ die Einschränkung eines Vektorfeldes $\tilde{Y}$ auf $M$, dann gilt
+  \[
+  \left.\bar{D}_{X} Y\right|_{H(p)} = \left. \left(D_{d H_{p}(X_{p})} \tilde{Y} \right) \right|_{H(p)}.
+  \]
+\end{enumerate}
+
+Sei $H: N \rightarrow (M,g)$ eine parametrisierte Untermannigfaltigkeit.
+Dann gibt es genau eine Abbildung
+$$
+\bar{D}: \mathfrak{X}(N) \times \Gamma\left(H^* T M\right) \rightarrow \Gamma\left(H^* T M\right),
+$$
+sodass für jedes $p \in N$, jedes $X \in \mathfrak{X}(N)$, $Y \in \Gamma\left(H^* T M\right)$ und jede Fortsetzung $\tilde{Y} \in \mathcal{X}(M)$ von $Y$ gilt:
+$$
+\left(\bar{D}_X Y\right)(p)=\left.\left(D_{d H_p\left(X_p\right)} \tilde{Y}\right)\right|_{H(p)} .
+$$
+Diese Abbildung heißt der induzierte Zusammenhang längs $H$. Er erbt alle Leibniz- und Linearitätseigenschaften von $D$.
+
+\StructurePicAutoB{ART0031__Paul_Klee__Before_the_Festivity__1920.jpg}{%
+  \begin{outline}
+    Nehme die Existenz an, und berechne eine lokale Darstellung. Verwende diese und zeige damit lokal Linearität, Leibniz-Regel und Verträglichkeit
+    \1 Lokale Darstellunge berechnen (Beachte, wo Rahmen und Koeffizienten leben)
+    \1 Linearität und Leibniz-Regel in lokaler Darstellung
+    \1 Verträglichkeit (Kettenregel beachten)
+    $$\left(\tilde{Y}^\alpha \circ H\right)_{, i}(p)=\frac{\partial \tilde{Y}^\alpha}{\partial y^l}(H(p)) \frac{\partial H^l}{\partial x^i}(p)$$
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Eigenschaften der induzierten Zusammenhangs längs parametrisierten Untermannigfaltigkeiten}.
+Seien $X, Y$ Vektorfelder auf $N$ und $U, V$ Vektorfelder längs H. Dann gilt
+\begin{enumerate}
+  \item $\bar{D}_{X} \bar{Y} - \bar{D}_{Y} \bar{X} = \overline{[X, Y]}$.
+  
+  \item $X\, g(U, V) = g\left( \bar{D}_{X} U, V \right) + g\left( U, \bar{D}_{X} V \right)$.
+
+  \item $\bar{D}_{Y} \bar{D}_{X} U - \bar{D}_{X} \bar{D}_{Y} U + \bar{D}_{[X, Y]} U = R(\bar{X}, \bar{Y}) U$.
+\end{enumerate}
+
+\StructurePicAutoB{ART0351__Claude_Monet__Fishing_Boats_in_tretat__1885.JPG}{%
+  \begin{outline}
+    Alle Gleichungen sind auf beiden Seiten $C^\infty(N)$-Linear, daher in Koordiantenvektorfeldern rechnen
+    \1 'Torsionsfreiheit'
+    \2 Lokale Basis für $N$ und $M$ und entsprechende Koordinatenvektorfelder auf $N$ wählen
+    \2 Pushforward berechnen
+    \2 $\bar D_X\bar Y$ lokal berechnen
+    \2 $$\bar{[X,Y]}=dH(X(Y))-dH(Y(X))$$
+    \1 'Metrik-Verträglichkeit'
+    \2 Lokale Basis für $N$ und $M$ und entsprechende Koordinatenvektorfelder auf $N$ und $M$ wählen
+    \2 Ableitung durch $X$ bzgl. Pushforward berechnen und Metrik-Verträglichkeit von $(M,g,D)$ sowie lokale Verträglichkeit von induziertem Zusammenhang mit $D$ verwenden
+    \1 $(1,3)$-Krümmung-Verträglichkeit
+    \2 Mit lokaler Verträglichkeit (Pushforward) $\bar D _X \bar D_Y U$ ausrechnen (nicht in Christoffelsymbole)
+    \2 Für Koordniantenvektorfelder verschwindet Lie-Klammer
+    \2 Indizes auf $H$ angleichen
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Erste Variationsformel für parametrisierte Untermannigfaltigkeiten}.
+Sei $H:[a, b] \times(-\epsilon, \epsilon) \rightarrow$ $(M, g)$ eine parametrisierte Untermannigfaltigkeit. Sei $c(s):=H(s, 0)$. $H$ heisst Variation von $c$. Für jedes $t$ ist $c_{t}(s):=H(s, t)$ eine Kurve in M. Sei $Y(s)$ das durch
+$$
+Y(s):=\left.\frac{d}{d t}\right|_{t=0} H(s, t)=\left.\overline{\frac{\partial}{\partial t}}\right|_{t=0}
+$$
+definierte Vektorfeld längs c. Dann gilt
+\begin{enumerate}
+  \item
+  \[
+  \left.\frac{d}{d t}\right|_{t=0} E\left(c_{t}\right) =
+  g\left(Y(b), c^{\prime}(b)\right) - g\left(Y(a), c^{\prime}(a)\right)
+  - \int_{a}^{b} g\left(Y(s), \frac{D}{d s} c^{\prime}(s)\right) d s
+  \]
+
+  \item Genau dann ist $c$ kritisch bezüglich $E$, d.\,h.\ $\left.\frac{d}{d t}\right|_{t=0} E(c_t) = 0$ für jede Variation mit festen Endpunkten, wenn $c$ eine Geodätische ist.
+
+  \item Ist $c$ nach Bogenlänge parametrisiert, so gilt für jede Variation:
+  \[
+  \left.\frac{d}{d t}\right|_{t=0} E(c_t) = \left.\frac{d}{d t}\right|_{t=0} L(c_t)
+  \]
+
+  \item $c$ ist genau dann kritisch bezüglich $L$, wenn eine Umparametrisierung von $c$ eine Geodätische ist.
+\end{enumerate}
+
+\StructurePicAutoB{ART0071__Wassily_Kandinsky__On_the_Points__1928.jpg}{%
+  \begin{outline}
+    Definiere für Notation folgende Vektorfelder
+    \begin{align*}
+      Y(s,t) &= dH(\partial_t) = \bar{\partial}_t &
+      X(s,t) &= dH(\partial_s) = \bar{\partial}_s \\
+      \tilde Y(s) &= Y(s,0) &
+      \tilde X(s) &= X(s,0)\\
+      Y'(s) &= \bar D_{\partial_s}\bar Y|_{t=0} \\
+      \hat Y(s,t) &= Y-\langle X,Y \rangle X\\
+      \hat Y'(s) &= Y'-\langle \tilde X,Y' \rangle^2 X
+    \end{align*}
+    \1 1. Variation der Energie
+    \2 $\partial_t$-Ableitung des Integranden, Metrikverträglichkeit, Torsionsfreiheit, Partielle Metrikverträglichkeit bzgl $s$ (für Integration)
+    \2 Integral ausrechnen
+    \1 Äquivalenz von $E$-Kritisch und Geodätisch
+    \2 Geodätisch: Integral in 1. Variation verschwindet, Randterme verschwinden (fixierte Endpunkt)
+    \2 $E$-Kritisch: Wähle Variation, so dass $$\tilde Y(s)=f(s)\frac{D}{ds}\tilde X$$ und Endpunkte fix, dann Fundamentallemma der Variation für beliebige $f$
+    \1 1. Variation von $E$-Energie und $L$-Energie stimmen überein bei BLP
+    \2 Ableitung von $L$-Integrand (BLP) ist Integrand von 1. Variation von $E$-Energie
+    \1 Äquivalenz von $L$-Kritisch und geodätische Umparametrisierbarkeit von $c$
+    \2 $L$-Kritisch: Wähle BLP, dann kritisch bzgl $E$-Energie und damit Geodätisch
+    \2 Geod. Umparametrisierbar: Parametrisiere geodätisch, dann kritisch bzgl $E$ und $L$ (BLP), damit ist $c$ $L$-Kritisch ($L$-Invariant)
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Zweite Variationsformel für parametrisierte Untermannigfaltigkeiten}.
+Sei c : $[0, L] \rightarrow M$ eine nach Bogenlänge parametrisierte Geodätische, $H$ eine Variation von $c$ und
+$$
+Y(s, t):=\left.d H\right|_{(s, t)}\left(\frac{\partial}{\partial t}\right)=\frac{\bar{\partial}}{\partial t},
+$$
+ein Vektorfeld längs $H$. Setze
+$$
+Y^{\prime}(s):=\bar{D}_{\frac{\partial}{\partial s}} Y(s, 0)
+$$
+ein Vektorfeld längs c. Dann gilt
+\begin{enumerate}
+  \item
+  \begin{align}
+  \left.\frac{d^{2}}{d t^{2}}\right|_{t=0} E(c_t)
+  &= g\left(\bar{D}_{\frac{\partial}{\partial t}} Y(L, 0), c'(L)\right)
+  - g\left(\bar{D}_{\frac{\partial}{\partial t}} Y(0, 0), c'(0)\right) \notag \\
+  &\quad + \int_0^L \left( \left\| Y'(s) \right\|^2
+  - R\left(Y(s), c'(s), Y(s), c'(s)\right) \right) ds \tag{1}
+  \end{align}
+
+  \item
+  \begin{align*}
+  \left.\frac{d^{2}}{d t^{2}}\right|_{t=0} L(c_t)
+  &= g\left(\bar{D}_{\frac{\partial}{\partial t}} Y(L, 0), c'(L)\right)
+  - g\left(\bar{D}_{\frac{\partial}{\partial t}} Y(0, 0), c'(0)\right) \\
+  &\quad + \int_0^L \Big( \left\| Y'(s) \right\|^2
+  - R\left(Y(s), c'(s), Y(s), c'(s)\right)
+  - \left\langle c'(s), Y'(s) \right\rangle^2 \Big) ds
+  \end{align*}
+
+  \item Ist $\tilde{Y} := Y - \left\langle c', Y \right\rangle c'$ die normale Komponente von $Y$, so gilt
+  \begin{align*}
+  \left.\frac{d^{2}}{d t^{2}}\right|_{t=0} L(c_t)
+  &= g\left(\bar{D}_{\frac{\partial}{\partial t}} Y(L, 0), c'(L)\right)
+  - g\left(\bar{D}_{\frac{\partial}{\partial t}} Y(0, 0), c'(0)\right) \\
+  &\quad + \int_0^L \left( \left\| \tilde{Y}'(s) \right\|^2
+  - R\left(\tilde{Y}(s), c'(s), \tilde{Y}(s), c'(s)\right) \right) ds
+  \end{align*}
+\end{enumerate}
+
+\StructurePicAutoB{ART0071__Wassily_Kandinsky__On_the_Points__1928.jpg}{%
+  \begin{outline}
+    Definiere für Notation folgende Vektorfelder
+    \begin{align*}
+      Y(s,t) &= dH(\partial_t) = \bar{\partial}_t &
+      X(s,t) &= dH(\partial_s) = \bar{\partial}_s \\
+      \tilde Y(s) &= Y(s,0) &
+      \tilde X(s) &= X(s,0)\\
+      Y'(s) &= \bar D_{\partial_s}\bar Y|_{t=0} \\
+      \hat Y(s,t) &= Y-\langle X,Y \rangle X\\
+      \hat Y'(s) &= Y'-\langle \tilde X,Y' \rangle^2 X
+    \end{align*}
+    \1 2. Variation der $E$-Energie
+    \2 Erste Ableitung des Integranden, Metrikverträglichkeit, Torsionsfreheit
+    \2 Zweite Ableitung des Integranden, Metrikverträglichkeit, Partielle Darstellung durch $(1,3)$-Krümmung, Torsionsfreiheit (für Integral)
+    \2 $(0,4)$-Krümmung und partielle Ableitung nach $s$, dann Auswertung bei $t=0$ (BLP)
+    \2 Integriere von $0$ bis $L$
+    \1 2. Variation der $L$-Energie
+    \2 Erste Ableitung des $L$-Integranden
+    \2 Zweite Ableitung des $L$-Integranden
+    \2 2. Variation darstellen und BLP verwenden
+    \3 2. Variation von $E$-Energie identifizieren
+    \3 Quadrierte erste Ableitung von Metrik durch Torsionsfreiheit bei $t=0$ berechnen
+    \1 Reduzierte Darstellung der 2. Variation der $L$-Energie (bzgl Normalanteil von $Y$)
+    \2 $\hat Y '$ berechnen und quadrierte Norm berechnen
+    \2 Antisymmetrie $(0,4)$-Krümmung 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\pagebreak
+
+
+
+\subsection{Geometrie und Topologie}
+
+\textbf{Statement: }{Synge}.
+Sei ( $M, g$ ) eine kompakte, orientierbare Mannigfaltigkeit mit gerader Dimension $n$ und mit strikt positiver Schnittkrümmung. Dann ist $M$ einfach zusammenhängend.
+
+\StructurePicAutoB{ART0246__Vincent_van_Gogh__Houses_at_Auvers__1890.jpg}{%
+  \begin{outline}
+    Widerspruch: Hadamard gibt geschlossene, $L$-minimale nicht triviale Geodätische, die wir bzgl eines geeigneten Vektorfeldes variieren, welches aus dem Paralleltransport konstruiert wird, und nutzen dann positive Schnittkrümmung, um lokales $L$-Maximum zu folgern
+    \1 Konstruiere Vektorfeld aus Fixpunkt von $SO(n-1)$ auf $c(0)^{orth}$ (Rolle von Orientiert)
+    \1 Variation, sodass Pushforward von $\partial_t$ bei $t=0$ das Vektorfeld
+    \1 Lokales $L$-Maximum
+    \2 1. Variation verschwindet, da Geodätisch
+    \2 2. Variation strikt negativ
+    \3 Randterme: verschwinden, da $\bar D_{\partial t}Y|$ und Endpunkte der Geschwindigkeit der Geodätischen übereinstimmen
+    \3 Integral: Schnittkrümmung wird strikt negativ gewichtet, $Y'$ verschwindet als Paralleltransport  
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Myers}
+Sei $(M, g)$ eine vollständige Riemannsche Mannigfaltigkeit mit $Ric \geq(n-1) \kappa g$, wobei $\kappa>0$. Dann ist $\operatorname{diam}(M, g) \leq$ $\operatorname{diam} S^{n}(\kappa)=\frac{\pi}{\sqrt{\kappa}}$. Ausserdem ist $M$ kompakt und hat endliche Fundamentalgruppe.
+
+\StructurePicAutoB{ART0244__Vincent_van_Gogh__Wheat_Field_with_Cypresses__1889.jpg}{%
+  \begin{outline}
+    Es existieren 2. Variationen der $E-Energie$ zu verbinden Geodätischen, wo die Aufsummierung zu einem nicht negativen Integral führt, wo punktweise über die negative Ricci-Krümmung bzgl. $(c',c')$ integriert wird plus eine kosntante in Abhängigkeit von $L$. Diese Differenz muss nicht negativ sein. Man erhält damit eine Abschätzung für jeden möglichen Abstand auf $M$ und damit den Diameter.    
+    \1 Für beliebige Abstände kleiner als der Durchmesser existieren Punkte und BLP minimal verbindende Geodätische (Hopf-Rinow)
+    \1 Geodätische auch $E$-Minimierend bzgl Variationsvektorfelder konstruiert aus Paralleltransport $X_i$ von Orthonormalbasis bei $T_pM$
+    $$Y_i(s)=\sin(\frac{\pi s}{L})X_i(s)$$
+    \2 $$E(c_t^i)=\frac{1}{2}L(c_t^i) \quad \frac{d^2}{dt^2}E\geq 0$$
+    \1 Nutze Nicht Negativität der 2. Variation der $E$-Energie
+    \2 Vereinfache Variation
+    \3 Randterme verschwinden nach Berechnung der Ableitung bei $s=0,L$
+    \3 Berechnung der Norm von $Y_i'$
+    \3 Umformen: Vorfaktor $\sin …$ rausziehen
+    \2 Aufsummieren von $2,…,n$ und Ricci berechnen (Metrik bzgl Geodätische $=1$), abschließend Abschätzen
+    \1 Beschränkt und abgeschlossen, also Kompakt (Hopf Rinow)
+    \1 Endliche freie Fundamentalgruppe: Universelle Überlageerung, lokal isometrisch, Übertragung der Abschätzung. Damit ist Überlagerung kompakt und daher $\pi_1(M)$ endlich 
+  \end{outline}
+}
+
+\vspace{0.8cm}
 
 
 
@@ -1144,17 +1423,6 @@ $R$ ist $C^{\infty}(M)$-linear in allen Komponenten. Speziell hängt $\left.(R(X
 \subsection{Jacobi-Felder}
 
 
-\textbf{Statement: }{Indexform einer Geodätischen ist eine quadratische Form}.
-$I$ ist eine quadratische Form.
-
-\textbf{Structure:}     
-
-\begin{outline}
-  \1 
-\end{outline}
-
-
-\vspace{0.5cm}
 
 
 
@@ -1391,6 +1659,108 @@ Bemerkungen
 (H2.1.1.) What
  familiar space is the quotient $\Delta$-complex of a 2 -simplex $\left[v_0, v_1, v_2\right]$ obtained by identifying the edges $\left[v_0, v_1\right]$ and $\left[v_1, v_2\right]$, preserving the ordering of vertices?
 
+
+
+\pagebreak
+
+
+\section{Commutative Algebra}
+
+
+
+
+
+
+
+\subsection{Küronya}
+
+Hilbert Function and Grothendieck Group
+
+Let $S=k\left[x_1, \ldots, x_r\right]$, where $x_i$ is an indeterminate of degree $d_i$. Set $q(t)=\Pi_{i=1}^r\left(1-t^{d_i}\right)$. Recall from Exercises 10.11-10.13 that the Hilbert series of $M$ is the formal power series in one variable $t$ given by $h_M(t):= \sum_{n \geq 0} H_M(n) t^n$.
+
+Let $k$ be a field, let $S$ be a polynomial ring over $k$, and let $M$ be a finitely generated graded $S$-module. In the Introduction we saw that if the variables of $S$ all have degree 1, then the Hilbert function $H_M(n)=\operatorname{dim}_k M_n$ agrees with a polynomial function of $n$ for large $n$. This is not true when the variables have different degrees, as the following exercises show. In this case $H_M(n)$ still agrees with a "periodic polynomial," but it is often more convenient to use the Hilbert series instead.
+
+Exercise 10.11: Let $S$ be the graded polynomial ring $k\left[x_1, x_2\right]$, where we give $x_i$ degree $i$.
+
+a. Show that $H_S(n)=\lfloor n / 2\rfloor+1$. Show that this does not agree with a polynomial function in $n$, even for $n \gg 0$.
+
+b. Show that $H_S(2 n)$ and $H_S(2 n+1)$ are both polynomial functions of $n$ for $n \geq 0$. Show also that the Hilbert series $\sum_{n \geq 0} H_A(n) t^n$ is a rational function in $t$ with denominator $(1-t)\left(1-t^2\right)$.
+
+Exercise 10.12: Let $S=k\left[x_1, \ldots, x_r\right]$, where $x_i$ is an indeterminate of degree $d_i$. Set $q(t)=\Pi_{i=1}^r\left(1-t^{d_i}\right)$. The Hilbert series of $M$ is defined to be the formal power series in one variable $t$ given by $h_M(t):=\sum_{n \geq 0} H_M(n) t^n$.
+
+a. Show that $h_M(t)$ is a rational function of $t$, and that in fact $h_M(t)$ may be written as a polynomial divided by $\Pi_{i=1}^u\left(1-t^{d_i}\right)$; that is, it is a rational function with poles only at roots of unity.
+
+b. Show that there is a number $d$ (which may be taken to be the least common multiple of the degrees of the $\left.d_i\right)$ such that for each $s, H_M(d n+ s$ ) agrees with a polynomial in $n$ for all $n \gg 0$; that is, $H_M(n)$ is a "polynomial with periodic coefficients."
+c. Imitating the proof that the Hilbert function agrees with a polynomial for large $n$ in the classical case, show that the Hilbert series of $M$ is a rational function.
+
+Exercise 10.13: Continuing with the notation in Exercise 10.12:
+
+a. Now suppose that $M$ has a system of parameters $y_1, \ldots, y_m$, where $y_i$ is a homogeneous element of degree $e_i>0$. Suppose further that $y_1, \ldots, y_m$ is a regular sequence on $M$ (that is, $y_i$ is a nonzerodivisor on $M /\left(y_1, \ldots, y_{i-1}\right) M$ for $i=1, \ldots, m$; because of the grading the condition $\left(y_1, \ldots, y_m\right) M \neq M$ is automatic). Show that $h_M(t)=u(t) / s(t)$, where $s(t)=\Pi_{i=1}^m\left(1-t^{e_i}\right)$ and $u(t)=\sum u_i t^i$, where $u_i=H_{\left[M /\left(y_1, \ldots, y_m\right) M\right]}(i)$ gives the Hilbert function of the module $M /\left(y_1, \ldots, y_m\right) M$. Note that this is a module of finite length, so that $u(t)$ really is a polynomial, and that the coefficients of $u(t)$ are nonnegative integers.
+
+b. Let $S=k\left[x_1, x_2\right]$, where both variables have degree 1 . Compute the Hilbert series of the $S$-module $S /\left(x_1^2, x_1 x_2\right)$. Since $x_2$ is a system of parameters, the Hilbert series of $S$ can be written with denominator ( $1-t$ ); note that the numerator does not have positive coefficients.
+
+c. Since the Hilbert series of $M$ is a rational function defined over the integers by Exercise 10.12c, it makes sense to speak of the order of its pole at any number. Show that the dimension of $M$ is the order of the pole of $h_M(t)$ at $t=1$. (Hint: Use a system of parameters for $M$ ).
+
+Exercise 19.14:
+a. Show that the Hilbert series of $S$ is given by $h_S(t)=1 / q(t)$, and thus that the Hilbert series of $S(-a)$ is $h_{S(-a)}(t)=t^a / \Pi\left(1-t^{d_i}\right)$.
+b. Let $M$ be a finitely generated graded $S$-module. 
+
+Lemma 19.18. If $M$ is a module such that $M \oplus R^{n-1} \cong R^n$, then $M \cong R$.
+Proof. If $M \oplus R^{n-1} \cong R^n$, then by Proposition A2.2c,
+$$
+\begin{aligned}
+R & \cong \wedge^n R^n \\
+& \cong \wedge^n\left(M \oplus R^{n-1}\right) \\
+& \cong \sum_{i+j=n} \wedge^i M \otimes \wedge^j R^{n-1} \\
+& \cong M \oplus \wedge^2 M \otimes \wedge^{n-2} R^{n-1} \oplus \cdots
+\end{aligned}
+$$
+If now $P$ is any maximal ideal of $R$, then $M_P$ is free of $\operatorname{rank} 1$, so $\wedge^i M_P=0$ for all $i \geq 2$. It follows that $\wedge^i M=0$ for all $i \geq 2$, and we are done.
+
+From Corollary 19.8 we know that $M$ has free resolution of the form
+
+$$
+0 \rightarrow F_m \rightarrow \cdots \rightarrow F_1 \rightarrow F_0 \rightarrow M \rightarrow 0
+$$
+
+with $F_i=\oplus S\left(-a_{i j}\right)$. Let $p(t)=\sum_{i, j}(-1)^i t^{a_{i j}}$. Show that $h_M(t)= p(t) / q(t)$.
+
+Exercise 19.15 (The Hilbert series is universal on graded modūlēs): ${ }^{-}$Let ${ }^{-} S^{-}=\bar{k}\left[x_1, \ldots, x_r\right]$, where $k$ is a field and (for simplicity) all the indeterminates have degree 1 . Let $\mathcal{C}$ be the category of finitely generated graded $S$-modules. The Hilbert series is an "additive function on $\mathcal{C}$ " with values in the (additive group of) formal power series $\mathbf{Z}[[t]]$ in the sense that for each module $M \in \mathcal{C}$ we have the power series $h_M(t)=\sum_{d=0}^{\infty} \operatorname{dim}_k\left(M_d\right) \in \mathbf{Z}[[t]]$, and for each short exact sequence $0 \rightarrow M^{\prime} \rightarrow M \rightarrow M^{\prime \prime} \rightarrow 0$ in $\mathcal{C}$ we have $h_{M^{\prime \prime}}-h_M+h_{M^{\prime}}=0$ in $\mathbf{Z}[[t]]$. In fact, it is the universal additive function, in a certain sense. We prove this now:
+
+We define the Grothendieck group $G_0(\mathcal{C})$ to be the additive group with a generator $[M]$ for each graded module $M$ in $\mathcal{C}$, and a relation $\left[M^{\prime \prime}\right]- [M]+\left[M^{\prime}\right]$ for each short exact sequence $0 \rightarrow M^{\prime} \rightarrow M \rightarrow M^{\prime \prime} \rightarrow 0$ in C .
+
+Show that the map $M \mapsto[M]$ is the universal additive function on $\mathcal{C}$ in the sense that given any other additive function $h$ with values in a group $A$, there is a unique group homomorphism $h^{\prime}: G_0(\mathcal{C}) \rightarrow A$ such that $h(M)=h^{\prime}([M])$. In particular, the Hilbert series induces a function on $G_0(\mathcal{C})$. Show that this function is a monomorphism on $G_0(\mathcal{C})$, and maps $G_0(\mathcal{C})$ isomorphically to $(1-t)^{-r}\left(\mathbf{Z}\left[t, t^{-1}\right]\right) \subset \mathbf{Z}[[t]]$, using the following steps:
+a. Define $K_0(\mathcal{C})$ to be the additive group with a generator $[F]$ for each graded free module $F$, and a relation $\left[F^{\prime \prime}\right]-[F]+\left[F^{\prime}\right]$ for each short exact sequence $0 \rightarrow F^{\prime} \rightarrow F \rightarrow F^{\prime \prime} \rightarrow 0$ in $\mathcal{C}$. (Since every short exact sequence of free modules splits, we could instead have taken a relation $\left[F^{\prime \prime}\right]-[F]+\left[F^{\prime}\right]$ whenever $F \cong F^{\prime} \oplus F^{\prime \prime}$ as graded modules.) Show that regarding a free module as a module gives a map of groups $K_0(\mathcal{C}) \rightarrow G_0(\mathcal{C})$. Because of the existence of finite free resolutions of a graded module by graded free modules, this map has an inverse. Construct it.
+b. Use part a to show that $G_0(\mathcal{C})=K_0(\mathcal{C})$ is the free group on the classes of modules $S(d)$ for $d \in \mathbf{Z}$. Now use Ex. 19.14a.
+
+Exercise 19.16 (The Hilbert polynomial is universal on sheaves): The Hilbert polynomial has a universal description too: The map taking each graded module $M$ to its Hilbert polynomial is the universal additive function on modules that is zero on modules of finite length. Prove this as follows:
+
+a. With notation as in Exercise 19.15, let $\bar{G}_0(\mathcal{C})=G_0(\mathcal{C}) / \mathcal{F}$, where $\mathcal{F}$ is the subgroup generated by the classes of modules of finite length. (If you like that language, you might think of $\bar{G}_0(\mathcal{C})$ as the Grothendieck group of coherent sheaves on $\mathbf{P}^{r-1}$, and $P_M(n)$ as the Euler characteristic of the sheaf associated to $M$.) Show that the map of sets $M \mapsto P_M(n)$ taking each graded module to its Hilbert polynomial is a group homomorphism from $\bar{G}_0(\mathcal{C})$ to the additive group of $\mathbf{Q}[n]$.
+
+b. Show that the Koszul complex of $x_1, \ldots, x_r$ leads to a relation
+$$
+\sum_{n=0}^r(-1)^n\binom{r}{n}[S(-n)]=0 \quad \text { in } \bar{G}_0(\mathcal{C})
+$$
+c. Show that $\bar{G}_0(\mathcal{C})$ is generated by the classes $[S(-a)]$ for $a=0, \ldots, r-$ 1.
+
+d. Show from Exercise 19.14a that the Hilbert series of $M$ may be written in the form $h_M(t)=f_M(t) /(1-t)^r+g_M(t)$, where $f_M(t)$ is a polynomial of degree $<r$, and $g_M(t)$ is a polynomial, uniquely determined by this relation. Show that $f_{S(-a)}=t^a$ for $0 \leq a \leq r-1$. Deduce that $\bar{G}_0(\mathcal{C})$ is the free abelian group on the classes $[S(-a)]$ for $a=0, \ldots, r-1$.
+
+e. Now prove that the map $[M] \mapsto P_M(n) \in \mathbf{Q}[n]$ induces an isomorphism from $\bar{G}_0(\mathrm{C})$ onto its image.
+
+Exercise 19.17: In terms of the basis for $\bar{G}_0(\mathcal{C})$ constructed in Exercise 19.16, compute the class $\left[S /\left(x_1, \ldots, x_t\right)\right]$ for each $t<r$. Do these classes form a basis for $\bar{G}_0(\mathcal{C})$ ?
+
+
+The Chern Polynomial
+
+Exercise 19.18:* Let $S$ be the graded polynomial ring $k\left[x_1, \ldots, x_{r+1}\right]$, where each $x_i$ has degree 1 , the homogeneous coordinate ring of $\mathbf{P}^r$ over the field $k$. Suppose the degrees of the $x_i$ are all equal to 1 , so that the graded ring $S$ corresponds to projective space $\mathbf{P}_k^r$. Let $M$ be a finitely generated graded $S$-module. In geometry the coefficients of the Hilbert polynomial are usually coded in a different way, as Chern classes (or Chern numbers). These may be defined as the coefficients of the Chern polynomial $c_t(M)$ of $M$ (or actually of the sheaf associated to $M$ on projective space), which we shall now describe.
+
+The Chern polynomial $c_t(M)$ is an element of $\mathbf{Z}[t] /\left(t^{r+1}\right)$ defined by the following two properties. (See Fulton [1984, Chapter 3]; Chern classes are defined there initially only for vector bundles, but for nonsingular varieties such as $\mathbf{P}^{r-1}$ one may extend the definition to all sheaves by using free resolutions.)
+i. The Chern polynomial of $S(-a)$ is defined to be $c_t(S(-a))=1-a t$.
+ii. The Chern polynomial is multiplicative in exact sequences, in the sense that if $0 \rightarrow M^{\prime} \rightarrow M \rightarrow M^{\prime \prime} \rightarrow 0$ is a short exact sequence, then $c_t(M)=c_t\left(M^{\prime}\right) c_t\left(M^{\prime \prime}\right)$.
+
+Prove that there exists one and only one polynomial satisfying conditions i and ii.
+
+The Hirzebruch-Riemann-Roch formula for sheaves on projective space (see Fulton [1984, Chapter 15]) provides a way of computing the Chern and Hilbert polynomials from one another. It seems plausible that there is a simple combinatorial expression of this relationship, but I do not know of one.
 
 
 \pagebreak
