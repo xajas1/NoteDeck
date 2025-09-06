@@ -1,0 +1,94 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{braket}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.},leftmargin=*,itemsep=.7em}
+\setlist[enumerate,2]{label=(\alph*),leftmargin=1.4em,itemsep=.3em}
+
+\title{Klausur — Quantenmechanik}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\noindent\textbf{Name:} \rule{0.6\linewidth}{0.4pt}\hfill\textbf{Matr.-Nr.:} \rule{0.25\linewidth}{0.4pt}
+
+\vspace{1em}
+
+\begin{enumerate}
+
+%---------------------- 1 ----------------------
+\item \textbf{Geladenes Teilchen im Magnetfeld}\\
+Ein Teilchen der Masse \(m\) und Ladung \(q\) bewege sich in einem magnetischen Vektorpotential \(\mathbf A(\mathbf r)\).
+\begin{enumerate}
+  \item Zeigen Sie, dass dieses System (in geeigneten Koordinaten/Eichungen) durch einen harmonischen Oszillator beschrieben werden kann.
+  \item Bestimmen Sie die Energieeigenwerte des Systems.
+\end{enumerate}
+
+%---------------------- 2 ----------------------
+\item \textbf{Komplexes \(\delta\)-Potential}\\
+Betrachten Sie das eindimensionale Potential
+\[
+V(x) = \bigl(\alpha + \mathrm i\,\gamma\bigr)\,\delta(x)\,,
+\]
+wobei \(\alpha,\gamma\in\mathbb R\).
+\begin{enumerate}
+  \item Begründen Sie physikalisch, wie der Ansatz der Wellenfunktion für die Streuung an \(x=0\) aussehen muss.
+  \item Bestimmen Sie Reflexions- und Transmissionskoeffizient \(R\) und \(T\).
+  \item Gilt \(R+T=1\)? Falls nein, warum nicht?
+\end{enumerate}
+
+%---------------------- 3 ----------------------
+\item \textbf{Zeitentwicklung im unendlichen Potentialkasten}\\
+Ein Teilchen befinde sich im unendlichen Potentialkasten mit \(V(x)=0\) für \(0<x<L\) und \(V(x)=\infty\) sonst. Der Anfangszustand sei
+\[
+\psi(x,0) \;=\; \Bigl[\sin\!\Bigl(\tfrac{2\pi x}{L}\Bigr) + \cos\!\Bigl(\tfrac{3\pi x}{L}\Bigr)\Bigr]\,
+\sin\!\Bigl(\tfrac{\pi x}{L}\Bigr).
+\]
+\begin{enumerate}
+  \item Bestimmen Sie die zum Zeitpunkt \(t=0\) sowie zum Zeitpunkt \(t>0\) möglichen messbaren Energien (Eigenwerte) und die zugehörigen Wahrscheinlichkeiten.
+  \item Berechnen Sie den Erwartungswert der Energie \(\langle H\rangle(t)\) sowie die Energieunschärfe \(\Delta E(t)\) zum Zeitpunkt \(t\).
+  \item Wie müssen die Erwartungswerte \(\langle x\rangle(t)\) und \(\langle p\rangle(t)\) qualitativ aussehen?
+\end{enumerate}
+
+%---------------------- 4 ----------------------
+\item \textbf{Endlich-dimensionaler Operator}\\
+Es sei
+\[
+H \;=\; \varepsilon\,\mathbb I \;+\; \lambda\,(A + A^\dagger),\qquad
+A \;=\; \ket{2}\!\bra{1} + \ket{1}\!\bra{2} + \ket{2}\!\bra{3}.
+\]
+% Hinweis: So wie definiert ist A nicht unitär (AA^\dagger \neq \mathbb I). Die Teilaufgabe (a) ist in dieser Form widersprüchlich.
+\begin{enumerate}
+  \item Zeigen Sie, dass \(A\) unitär ist und dass \(A\) mit \(H\) kommutiert.
+  \item Bestimmen Sie die Eigenwerte und Eigenvektoren von \(H\).
+\end{enumerate}
+
+%---------------------- 5 ----------------------
+\item \textbf{Drehimpuls mit Querfeld}\\
+Gegeben sei
+\[
+H \;=\; H_0 + H_1,\qquad
+H_0 \;=\; a\,\mathbf L^2 + b\,L_z,\qquad
+H_1 \;=\; c\,L_x,
+\]
+mit Konstanten \(a,b,c\in\mathbb R\) und den üblichen Drehimpulsoperatoren \(\mathbf L^2, L_x, L_z\).
+\begin{enumerate}
+  \item Bestimmen Sie die Energieeigenwerte und Eigenzustände von \(H_0\).
+  \item Berechnen Sie die Störung der Energie zur führenden Ordnung in \(c\).
+  \item Definieren Sie einen geeigneten neuen Operator \(J\) und berechnen Sie den exakten Wert der Energiekorrektur.
+\end{enumerate}
+
+\end{enumerate}
+
+\vfill
+\noindent\textit{Hinweis:} Sofern nicht anders angegeben, dürfen Sie \(\hbar\) explizit mitführen (keine natürlichen Einheiten).
+
+\end{document}

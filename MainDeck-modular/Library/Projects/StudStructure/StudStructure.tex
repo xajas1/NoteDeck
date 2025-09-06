@@ -26,6 +26,12 @@
 \usepackage[most]{tcolorbox}  % bruchfähige Side-by-Side-Box
 \usepackage{needspace}        % stabiler Vorab-Umbruch (empfohlen)
 
+
+
+
+
+
+
 % --- Parameter ---
 \newlength{\StructureLeftWidth}   \setlength{\StructureLeftWidth}{0.26\textwidth}
 \newlength{\StructureGap}         \setlength{\StructureGap}{1.5em}
@@ -128,7 +134,6 @@
 
 
 
-
 %–– Schrift­kodierung & Sprache ––––––––––––––––––––––––––––––––––––––––––––––––     % deutsche Bezeichnungen
 \usepackage{lmodern}  
             % Latin-Modern-Schrift
@@ -172,7 +177,14 @@
 \usepackage[margin=3cm]{geometry}
 
 % --- 2. Sprache und Zeichensatz ---
-\usepackage[german]{babel}  
+\usepackage[ngerman,shorthands=off]{babel}  
+
+
+
+
+
+
+\AtBeginDocument{\shorthandoff{"}}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 
@@ -196,7 +208,6 @@
 
 \graphicspath{{/Users/tim/NoteDeck/MainDeck-modular/Library/Images/}
               {/Users/tim/NoteDeck/MainDeck-modular/Library/Images/Art/}}
-
 
 \usepackage[export]{adjustbox}
 \usepackage{tikz}
@@ -1422,16 +1433,553 @@ Sei $(M, g)$ eine vollständige Riemannsche Mannigfaltigkeit mit $Ric \geq(n-1) 
 
 \subsection{Jacobi-Felder}
 
+\textbf{Statement: }{Indexform einer Geodätischen ist eine quadratische Form}.
+$I$ ist eine quadratische Form und kann dargestellt werden durch 
+$$
+I(X, Y)=-\int_{0}^{L}\left\langle X(s), Y^{\prime \prime}(s)+R\left(c^{\prime}(s), Y(s)\right) c^{\prime}(s)\right\rangle d s
+$$
+\StructurePicAutoB{}{%
+  \begin{outline}
+    Folgt aus Symmetrie von Metrik und Paar-Symmetrien des Krümmungstensors:
+    \begin{equation*}
+    I(X, Y):=\int_{0}^{L}\left[\left\langle X^{\prime}(s), Y^{\prime}(s)\right\rangle-R\left(X(s), c^{\prime}(s), Y(s), c^{\prime}(s)\right)\right] d s 
+    \end{equation*}
+    Die Darstellung folgt mittels partieller Integration
+
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Eigenschaften von Jacobifeldern längs Geodätischen}
+\begin{enumerate}
+  \item Für $v, w \in T_{c(0)} M$ gibt es genau ein Jacobifeld $Y$ längs $c$ mit $Y(0) = v$, $Y'(0) = w$. Der Vektorraum der Jacobifelder längs $c$ hat also Dimension $2n$.
+
+  \item Ist $Y(0) = 0$, $Y'(0) = k\, c'(0)$, so gilt $Y(s) = k s\, c'(s)$ für alle $s$.
+
+  \item Sind $Y(0)$ und $Y'(0)$ orthogonal zu $c'(0)$, so ist auch $Y(s)$ orthogonal zu $c'(s)$ für alle $s$.
+\end{enumerate}
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 
+    \2 Vektorfelder aus Paralleltransport von Orthonormalbasis (Pw Orthonormalbasis längs $c$)
+    \2 Darstellung beliebiger Vektorfelder in speziellem ON-Rahmen längs $c$
+    \2 Jacobi-Bedinung berechnen und ODE-System 2. Ordnung herleiten
+    \2 $2n$-Dimensionalität des Vektorraums der Jacobifelder
+    \1 Jacobifelder mit Startgeschwindigkeit parallel zu geodätischer Geschwindigkeit skalieren linear
+    \2 $$Y(s)=ksc'(s)$$
+    \1 Zu geodätischer Startgeschwindigkeit orthogonale Anfangswerte bleiben orthogonal
+    \2 Auswertung der Jacobifeld-gleichung bei $s=0$ gibt $Y_{,ss}^1(0)=0$, damit konstant $0$
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Geodätische Charakterisierung von Jacobifeldern}.
+Sei $H$ eine Variation von $c$, so dass alle $c_{t}$ ebenfalls Geodätische sind. Dann ist 
+$$Y(s)=\left.\overline{\frac{\partial}{\partial t}}\right|_{s, 0}$$ 
+ein Jacobifeld längs c. Umgekehrt entsteht jedes Jacobifeld auf diese Art.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    Jacobi-Felder als Pushforward von $\partial_t$ längs geodätische Variation bei $t=0$ 
+    \1 Einfach $Y''$ ausrechnen bei $t=0$
+    \2 Torsionsfreiheit, Definition von Krümmungstensor, Geodätische und triviale Lie-Klammer (brauchen $t,s,t$)
+    \1 Sei $Y$ ein Jacobi-Feld längs $c$. Konstruiere folgende Variation $H$ 
+    \2 Geodätische $\gamma$ mit Startwerten $c(0), Y(0)$
+    \2 Vektorfeld $X=X_0+tX_1$ längs $\gamma$ aus Parallelen Vektorfeldern mit Startwerten $c(0),Y(0),Y'(0)$
+    \2 Definiere Variation durch $$H(s,t)=\exp_{\gamma(t)}(sX(t))$$
+    mit $H(s,0)=\exp_{c(0)}(sc'(0))=c'(s)$
+    \2 Definiere als Anwärter für zu konstruierende Jacobi-Feld das Jacobi-Feld aus (A) als Pushforward
+    \1 Zeige, dass Anfangswerte mit $Y$ übereinstimmen
+    \2 $Z(0)$
+    \2 $Z'(0)=$ mit Torsionsfreiheit und $\partial _s$ Ableitung von Variation bei $(0,0)$ gleich $X'(0)=X_1(0)$
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Jacobi-Feld als Ableitung der Exponentialabbildung}.
+Seien $p \in M$ und $u, v \in T_{p} M$. Sei $c(s):=\exp _{p}(s v)$ (eine Geodätische) und $Y$ das Jacobifeld längs c mit $Y(0)=0, Y^{\prime}(0)=$ u. Dann ist
+$$
+Y(s)=d_{s v} \exp _{p} s u=\left.\left(d \exp _{p}\right)\right|_{s v} s u
+$$
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 
+  \end{outline}
+}
+
+\todo{ToDo}
+
+\vspace{0.8cm}
+
+
+
+
+\pagebreak
+
+
+\subsection{Überlagerungen und Faserbündel}
+
+
+\textbf{Statement: }{Charakterisierung eigentlicher Wirkungen durch Umgebungen}.
+Ist $G$ eine lokal kompakte, Hausdorffsche topologische Gruppe (z.B. eine Liegruppe), die auf $\tilde{M}$ operiert, so ist die Operation eigentlich genau dann, wenn es zu jedem Paar $p, q \in \tilde{M}$ offene Umgebungen $U_{p}, U_{q}$ gibt derart, dass $\left\{g \in G: g U_{p} \cap U_{q} \neq \emptyset\right\}$ relativ kompakt in $G$ ist.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+\textbf{Statement: }{Quotientenmannigfaltigkeit durch freie und eigentliche Wirkung}.
+Wenn eine diskrete Gruppe $G$ von Diffeomorphismen frei und eigentlich auf einer Mannigfaltigkeit $\tilde{M}$ operiert, dann besitzt $M:=$ $\tilde{M} / G$ eine eindeutige differenzierbare Struktur, so dass die Projektion $\pi: \tilde{M} \rightarrow M$ eine Überlagerung ist.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Induzierte Riemannsche Struktur auf Quotienten durch freie, eigentliche Isometriewirkungen}.
+Operiert $G$ frei, eigentlich und durch Isometrien auf $\tilde{M}$, so gibt es eine eindeutige Riemannsche Metrik auf M, so dass $\pi$ eine lokale Isometrie ist ( $\pi$ wird dann auch als Riemannsche Überlagerung bezeichnet).
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+\textbf{Statement: }{$G$-Prinzipalbündel durch freie und eigentliche Gruppenwirkung}.
+Sei $G$ eine Liegruppe, die auf einer differenzierbaren Mannigfaltigkeit M frei und eigentlich operiert. Dann trägt der Quotientenraum $M / G$ die Struktur einer Mannigfaltigkeit, so dass $\pi: M \rightarrow$ $M / G$ eine Submersion ist. Die Abbildung $\pi: M \rightarrow M / G$ ist dann ein Faserbündel mit $G$ sowohl als Faser als auch als Strukturgruppe. Man spricht von einem G-Prinzipalbündel.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+\pagebreak
+
+\subsection{Riemannische Submersionen}
+
+
+\textbf{Statement: }{Induzierte Riemannsche Struktur auf dem Quotienten einer freien, eigentlichen Isometriewirkung}.
+Sei $(\tilde{M}, \tilde{g})$ eine Riemannsche Mannigfaltigkeit und $G$ eine Liegruppe von Isometrien, die eigentlich und frei auf $M$ operiert. Dann ist $M:=\tilde{M} / G$ eine Mannigfaltigkeit, $\pi: \tilde{M} \rightarrow M$ eine Submersion und es gibt genau eine Riemannsche Metrik auf M, so dass $\pi$ eine Riemannsche Submersion ist.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 Glatte Struktur: Quotientenmannigfaltigkeit  
+    \1 Eindeutigkeit der riemannischen Struktur
+    \2 Für riemannische Submersionen ist das Differential bei Lift eingeschränkt auf den Horizontalraum eine Isometrie zu $T_pM$, damit eindeutig festgelegt
+    \1 Wohldefiniertheit von $g(v,v)=\tilde g(\tilde v,\tilde v)$ für einen Lift $\tilde v= (d\pi|_{H_{\tilde p}})^{-1}v \in H_{\tilde p}$
+    \2 Sei $\hat p$ ein anderer Faserpunkt
+    \2 Es gibt durch die Isometriewirkung eine Isometrie, die $\tilde p$ und $\bar p$ isometrisch verbindet
+    \3 $\pi\circ\gamma=\pi$
+    \3 $V_{\hat p}=d\gamma (V_{\tilde p})$ analog für Horizontalraum
+    \3 $d\gamma(\tilde v)\in H_{\hat p}\tilde M$ ein horizontaler Lift von $v$
+    \2 $$
+        \tilde{g}(d \gamma(\tilde{v}), d \gamma(\tilde{v}))=\tilde{g}(\tilde{v}, \tilde{v})
+       $$
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+\textbf{Statement: }{Geodätenverhalten unter Riemannschen Submersionen}.
+Sei $\pi : (\tilde{M}, \tilde{g}) \rightarrow (M, g)$ eine Riemannsche Submersion. Dann gelten folgende Aussagen:
+
+\begin{enumerate}
+  \item Ist $\tilde{c} : I \rightarrow \tilde{M}$ eine Geodätische mit $\tilde{c}'(0)$ horizontal (d.\,h.\ $\tilde{c}'(0) \in H_{\tilde{c}(0)} \tilde{M}$), so ist $\tilde{c}'(t)$ für alle $t$ horizontal und $c(t) := \pi(\tilde{c}(t))$ eine Geodätische auf $M$.
+
+  \item Ist $c : I \rightarrow M$ eine Geodätische auf $M$ und gilt $\pi(\tilde{p}) = c(0)$, so existiert genau ein lokaler horizontaler Lift $\tilde{\gamma} : I \rightarrow \tilde{M}$ mit $\tilde{\gamma}(0) = \tilde{p}$, der eine Geodätische ist und für den $\tilde{\gamma}'(t) \in H_{\tilde{\gamma}(t)} \tilde{M}$ gilt.
+
+  \item Ist $\tilde{M}$ vollständig, so ist auch $M$ vollständig.
+\end{enumerate}
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 Kurven im Überlagerungsraum sind länger oder gleichlang zu projizierte Kurven im Basisraum; Damit sind auch Riemannische Abstände im Überlagerugnsraum länge/gleich zu den Abständen in der Projektion
+    \2 Zerlegung von Tangentialvektpr in Horizontal und Vertikal Anteil
+    \2 Norm des Vertikalanteils geht bei Pushforward verloren
+    \1 Geodätische zu $(p,v)$ in $M$ induzieren eindeutige lokale geodätische horizontale Lifts zu Urbildern $\tilde p$ in Faser
+    \2 Lokal $c(I')$ 1-d UMfk von $M$ und Urbilde 1-d UMfk von $\tilde M$
+    \2 Horizontaler Lift von $c'$ auf $I'$ bzgl $\tilde p \in \pi^{-1}(c(0))$ gibt Vektorfeld auf ZSH-Komponente von 1-d UMfk
+    $$
+    \left.X\right|_{\tilde{p}}:=\left(\left.d \pi\right|_{H_{\tilde{p}}}\right)^{-1}\left(c^{\prime}(t)\right)
+    $$
+    \2 Definiere Integralkurve: $\tilde \gamma'(t)=X|_{\gamma(t)}$ von X durch $\tilde p$ 
+    \3 Horizontal in $\tilde M$
+    \3 $c=\pi\circ \tilde \gamma$
+    \2 $\tilde \gamma$ lokal $L$-minimierend und damit geodätisch
+    \3 $c$ lokal $L$-minimierend
+    \3 Länge von $\tilde \gamma$ und $c$ auf Teilintervallen in $I'$ sind gleich (Isometrie auf Horizontalraum)
+    \3 lokaler Länge gleich Abstand (Geodätisch) in $M$ schätzt Abstand im Lift von unten ab 
+    \1 Geodätische mit horizontaler Startgeschwindigkeit bleiben horizontal und Projektion sind auch Geodätisch
+    \2 Teilintervall, wo lokaler horizontaler Lift für Geodätische zu projizierten Startwerten mit Geodätischer übereinstimmt
+    $$J=\{t\in I: \tilde c'(t)\in H_{\tilde c(t)} , \pi(\tilde c(t))=c(t)\}$$
+    \3 ist offen: Der lokale horizontale Kurvenlift der Geodätischen zu projizierten Startwerten um $\pi(\tilde c(0))$ ist gleich der ursprünglichen Kurve auf $I'$ (nach (B)). Startpunkt willkürlich gewählt
+    \3 ist abgeschlossen: geodätische auf abgeschlossenen Intervallen definiert
+    \1 Vollständigkeit des Überlagerungsraumes impliziert Vollständigkeit des Basisraums
+    \2 Lokale horizontaler geodätischer Lift (B) ist auf $\R$ definiert, und nach (A) ist die Projektion $c=\pi\circ \tilde\gamma$ auf ganz $\R$ definiert
+    \2 Hopf Rinow gibt Vollständigkeit
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Strukturelle Eigenschaften von Lift-Vektorfeldern und Zusammenhang auf Totalräumen Riemannscher Submersionen}.
+\begin{enumerate}
+  \item Ein Vektorfeld $U$ auf $\tilde{M}$ ist genau dann \emph{vertikal}, wenn für alle glatten Funktionen $f$ auf $M$ gilt:
+  \[
+  U(f \circ \pi) = 0.
+  \]
+
+  \item Sind $\tilde{X}, \tilde{Y}$ horizontale Lifts von Vektorfeldern $X, Y$ auf $M$, dann ist
+  \[
+  [\tilde{X}, \tilde{Y}] - \widetilde{[X, Y]}
+  \]
+  ein vertikales Vektorfeld.
+
+  \item Ist $U$ vertikal, so ist auch $[\tilde{X}, U]$ vertikal für jedes horizontale Vektorfeld $\tilde{X}$.
+
+  \item Für die Levi-Civita-Zusammenhänge $\tilde{D}$ auf $\tilde{M}$ und $D$ auf $M$ gilt:
+  \[
+  \tilde{D}_{\tilde{X}} \tilde{Y} = \widetilde{D_X Y} + \frac{1}{2} [\tilde{X}, \tilde{Y}]^{v},
+  \]
+  wobei $[\tilde{X}, \tilde{Y}]^{v}$ die vertikale Komponente des Lie-Klammerausdrucks ist.
+\end{enumerate}
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    Vorbereitung für (D): Ziege (A) Charakterisierung für Vertikalität, (B)  Vertikalität von $[\tilde{X}, \tilde{Y}] - \widetilde{[X, Y]}$ und (C) Vertikalität von $[\tilde X,U]$, um die Bzeiehung zwischen den Zusammenhängen zu zeigen
+    \1 Charakterisierung von Vertikalität
+    \2 Vertikal, wenn im kern von Differential und $U(f\circ\pi)=d\pi(U)(f)$
+    \1 Vertiakalität für Lie-Bracket Term
+    \2 $\tilde X \tilde f=\tilde{Xf}, \tilde f= f \circ pi$
+    \2 $[\tilde X, \tilde Y]f$ berechnen und $\tilde{[X,Y]}\tilde f$ berechnen und (A) anwenden
+    \1 Charakterisierung von Vertikalität für $[\tilde X, U]$
+    \1 Beziehung für Zusammenhang
+    \2 $\tilde{D}_{\tilde{X}} \tilde{Y} - \widetilde{D_X Y}$ hat keinen horizontalen Anteil
+    \3 Koszul für $\tilde D_{\tilde X}\tilde Y$ und horizontalen Lift ausrechnen, dabei Lie-Bracket-Id (B) anwenden 
+    \2 Koszul für $\tilde D_{\tilde X}\tilde Y$ und vertikales Vektorfeld ausrechnen, dabei (C) verwenden und $\tilde g$ bzgl. horizontale Lifts konstant auf Fasern
+    \2 In Metrik mit vertikale VF: $\tilde{D}_{\tilde{X}} \tilde{Y}$ um $\widetilde{D_X Y}$ erweitern und Beziehung zu $[\tilde X, \tilde Y]=2\frac{1}{2}[\tilde X, \tilde Y]^v$ in Metrik mit Vertikal nutzen
+    \2 $$\tilde{D}_{\tilde{X}} \tilde{Y}-\widetilde{D_{X} Y}-\frac{1}{2}[\tilde{X}, \tilde{Y}]^{v}$$ ist horizontal und damit gleich $0$
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+
+\pagebreak
+
+\subsection{Komplex-projektiver Raum}
+
+
+\textbf{Statement: }{Submersion von $S^{2n+1}$ in komplex-projektiven Raum und Horizontal- / Vertikalräume}.
+Die Projektionsabbildung $\pi: S^{2 n+1} \rightarrow \mathbb{C P}^{n}$ ist eine Submersion. Horizontal- und Vertikalraum sind gegeben durch
+$$
+\begin{aligned}
+H_{z} & =(\mathbb{C} z)^{\perp} \\
+V_{z} & =\mathbb{R} i z, \quad z \in S^{2 n+1}
+\end{aligned}
+$$
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 Zerlegung des Tangentialraumes bei $s\in S^{2n+1}$
+    $$\C^{n+1}\simeq T_z\C^{n+1}=\R z\oplus \R iz\oplus H_z$$
+    \1 $H_{gz}=g(H_z)$
+    \2 $g\in U(n+1)$: $$g(\R z)=\R g(z)\quad g(\R iz)=\R (ig(z))$$
+    \2 $$
+    \langle g h, g z\rangle=\langle h, z\rangle=0, \quad\langle g h, i(g z)\rangle=\langle g h, g(i z)\rangle=\langle h, i z\rangle=0 .
+    $$
+    Also $g h \in(\mathbb{C}(g z))^{\perp}=H_{g z}$. Damit $g\left(H_z\right) \subseteq H_{g z}$
+    \1 Differential von $\pi$ ist surjektiv
+    \2 $T_zS^{2n+1}=\R iz\oplus H_z$ mit Tangentialraum am Orbit $S^1z$, Differential verschwindet
+    \2 Differential eingeschränkt auf $H_z$ iso
+    \3 Lokal um Nordpol: 
+    $$\left[z^{0}: z^{1}: \ldots: z^{n}\right] \mapsto\left(\frac{z^{1}}{z^{0}}, \ldots, \frac{z^{n}}{z^{0}}\right) \in \mathbb{C}^{n}=\mathbb{R}^{2 n}$$
+
+    \3 $T_zS^{2n+1}=z^{\perp}=\left\{\left(i \eta^{0}, \xi^{1}, \ldots, \xi^{n}\right), \eta^{0} \in \mathbb{R}, \xi^{j} \in \mathbb{C}\right\}$
+
+    \2 $\left(i \eta^{0}, \xi^{1}, \ldots, \xi^{n}\right) \mapsto\left(\xi^{1}, \ldots, \xi^{n}\right)$
+    $\left.d \pi\right|_{z_{0}}: H_{z_{0}} \rightarrow T_{\pi\left(z_{0}\right)} \mathbb{C} \mathbb{P}^{n}$
+    \2 $$V_{z_{0}}=\operatorname{ker} d \pi=\left\{\left(i \eta^{0}, 0, \ldots, 0\right), \eta^{0} \in \mathbb{R}\right\}=\mathbb{R} i z_{0}$$
+    $$H_{z_{0}}=(\operatorname{ker} d \pi)^{\perp}=\left\{\left(0, \xi^{1}, \ldots, \xi^{n}\right), \xi^{j} \in \mathbb{C}\right\}=\left(\mathbb{C} z_{0}\right)^{\perp}$$
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Schnittkrümmung von Ebenen in $\mathbb{C P}^{n}$}.
+Sei $m \in \mathbb{C P}^{n}$ und $E \subset T_{m} \mathbb{C P}^{n}$ eine zweidimensionale Ebene mit Orthonormalbasis $u, v$. Dann gilt für die Schnittkrümmung
+$$
+K(E)=1+3 \cos ^{2}(\theta)
+$$
+wobei $\theta$ der Winkel zwischen $u$ und Jv ist. Insbesondere variiert die Schnittkrümmung zwischen +1 und +4 .
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 Setting: Für orthogonale $\tilde{u}, \tilde{v} \in H_{\tilde{m}}$ : 
+    $$\tilde{c}_t(s)=\cos s \tilde{m}+\sin s(\cos t \tilde{v}+\sin t \tilde{u})$$
+    ist horizontal-geodätisch; $c_t=\pi \circ \tilde{c}_t$ sind Geodäten in $\mathbb{C} P^n$
+    \2 Startgeschwindikgeit horizontal bleibt horizontal
+    \2 Projektion ist Geodätisch
+    \1 $\tilde U(s)=\tilde u$ paralleles Vektorfeld längs $\tilde c$
+    \2 Umgebende kovariante Ableitung minus Normalanteil
+    \1 Horizontale geodätische Variation bzgl Geodäten-Schar auf $S^{2n+1}$ und geodätische Variation auf $\C P^n$ mit induzierten Jacobi-Feldern als Pushforward von $\partial_t$ bei $t=0$
+    $$\tilde Y(s)= \sin(s)\tilde U(s)$$
+    \1 Für Linearkombination Argument, prüfe Fälle $\tilde u\perp i\tilde v$ und $\tilde u= i\tilde v$
+    \2 Für $\tilde u \perp i\tilde v$: $R(v,u)v=u$
+    \3 $\tilde U(s)\in (\C\tilde c)^{\perp}=H_{\tilde c(s)}$
+    \3 $\tilde c'$ horizontaler Lift von $c'$
+    \3 $U$ parallel längs $c$ durch Levi-Civita-Formel bei Submersionen
+    \3 Jacobi-Feld auf $\C P^n$ und Jacobi-Eigenschaft verwenden mit $Y''=-Y$
+    \3 Durch $\sin$ teilen und $s\to 0$
+    \2 Für $\tilde u = i\tilde v$: $R(v,u)v=4u$
+    \3 $\tilde U(s)=i\tilde v$
+    \3 $\tilde D_{\tilde c'}i\tilde c'=i\tilde c$ (tangentiale Projektion der umgebenden kov. Ableitung) ist vertikal
+    \3 $Jc'$ parallel längs $c$ durch LC-Formel bei Submersionen
+    \3 Horizontaler Anteil $\tilde U^h=\cos(s)i\tilde c'(s)$
+    \3 Jacobi-Felder (bzgl horizontal Anteil von $\tilde U$) auf $\C P^n$ kovariant Ableiten (Parallel) und Jacobi-Eigenschaft verwenden mit $Y''=-4Y$
+    \3 Durch $\sin\cos$ teilen und $s\to 0$
+    \1 $$K(E)=1+3\cos^2(\theta)$$
+    \2 Für $u_0\perp Jv$ sei 
+    $$u=\sin\theta u_0+\cos\theta Jv$$
+    \2 Linearität von $R(v,u)v$ nutzen und in Metrik mit $u$ nehmen 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\pagebreak
+
+\subsection{Längen kleiner Kreise}
+
+
+\textbf{Statement: }{Darstellung von Vektorfeldern längs Kurven durch parallele Vektorfelder}.
+Sei $Y$ ein Vektorfeld längs einer Kurve c. Seien $Y_{i}$ parallele Vektorfelder längs c mit $Y_{i}(0)=\frac{D^{i}}{d t^{i}} Y(0)$. Dann gilt für alle $k$
+$$
+Y(t)=\sum_{i=0}^{k} \frac{t^{i}}{i!} Y_{i}(t)+o\left(t^{k}\right)
+$$
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    Taylor-Entwicklung von Vektorfeldern bzgl. Paralleltransport von i-ten Ableitungen von $Y$ bei $s=0$
+    \1 $Y_i$ Paralleltransport mit $Y_i(0)=\frac{D^i}{dt^i}Y(0)$
+    \1 Darstellung von $Y$ und $Y_i$ durch Paralleltransport-Rahmen $(E_i)$
+    \1 Taylorentwicklung von $a^j(t)$ bei $t=0$
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Längen kleiner Kreise}.
+Sei $m \in M$ und $u, v$ eine Orthonormalbasis eines zweidimensionalen Unterraums $P \subset T_{m} M$. Setze
+$$
+H(r, \theta):=\exp _{m} r(\cos (\theta) u+\sin (\theta) v)
+$$
+Sei $C_{r}$ der Kreis $\theta \mapsto H(r, \theta)$. Dann gilt für seine Länge
+$$
+L\left(C_{r}\right)=2 \pi r\left(1-\frac{K(P)}{6} r^{2}+o\left(r^{2}\right)\right)
+$$
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    Länge von $C_r$ durch Integral über Norm von Pushforward von $\partial_\theta$ längs geodätische Variation $H$ für fixen Radius berechnen, welche für fixes $\tilde \theta$ und variierendes $t$ Jacobifelder sind. Dabei $Y_{\tilde\theta}(r)$ geeigente Taylorn mit Eigenschaften der Jacobifelder 
+    \1 $Y_{\tilde\theta}(0), Y'_{\tilde\theta}(0),Y''_{\tilde\theta}(0),Y'''_{\tilde\theta}(0)$ bestimmen mittels Jacobifeld, Torsionsfreiheit, Jacobigleichung 
+    \1 Metrik von $Y''', Y'$ berechnen gleich $-K(P)$
+    \1 $Y_{\tilde\theta}(r)$ Taylorn
+    \1 Integrieren
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Abschätzung für Schnittkrümmung unter Submersion}.
+Sei $\pi:(\tilde{M}, \tilde{g}) \rightarrow(M, g)$ eine Riemannsche Submersion, $\tilde{m} \in \tilde{M}, m:=\pi(\tilde{m})$. Seien $u, v \in T_{m} M$ eine Orthonormalbasis mit horizontalen Lifts $\tilde{u}, \tilde{v}$. Seien $P \subset T_{m} M, \tilde{P} \subset T_{\tilde{m}} \tilde{M}$ die aufgespannten Ebenen. Dann gilt
+$$
+K(P) \geq K(\tilde{P})
+$$
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 Horizontal Geodätische aus geodätische Variation für fixen Winkel im Überlagerungsraum induzieren Geodätische im Basisraum
+    \2 Projektion des kleinen Kreises in Überlagerung gleich kleiner Kreis im Basisraum für alle Radien
+    \1 Projektion verkleinert Längen: $L(C_r)\leq L(\tilde C_r)$
+    \1 Verwende Taylor-Abschätzung und erhalte inverse Ungleichung für Schnittkrümmung
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+\pagebreak
+
+\subsection{Konjugierte Punkte}
+
+
+\textbf{Statement: }{Optimalität von geraden Strecken unter Exponentialabbildung}.
+Sei $v \in T_{m} M, \phi(t):=t v, t \in[0,1]$ und $\psi$ eine stückweise differenzierbare Kurve in $T_{m} M$ mit $\psi(0)=0, \psi(1)=v$. Dann gilt
+$$
+L\left(\exp _{m} \circ \psi\right) \geq L\left(\exp _{m} \circ \phi\right)=\|v\|
+$$
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 
+  \end{outline}
+}
+\todo{Checke Beweis}
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Charakterisierung von konjungierten Punkten durch singuläre Differentiale}.
+Sei $c(s)=\exp _{p}(s v)$ und $q=\exp _{p}(r v)$. Genau dann sind $p$ und $q$ konjugiert längs $c$, wenn das Differential
+$$
+d_{r v} \exp _{p}: T_{p} M \rightarrow T_{q} M
+$$
+singulär ist (d.h. nicht bijektiv).
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 $p,q$ sind konjungiert
+    \2 Für Jacobifelder zu konjungierten Punkte verschwindet die kovariante Ableitung nicht 
+    \2 Darstellung von Jacobifeldern mit verschwindender Startgeschwindigkeit
+    $$0=Y(r)=d_{r v} \exp _p r v=\left(d \exp _p\right) rY'(0)$$
+    \2 Differential ist singulär
+    \1 Differential ist singulär: Wähle Jacobifeld zu Tangentialvektor im Kern
+    \2 Existiert nicht-trivialer Tangentialvektor, welcher im Kern liegt
+    \2 Wähle Jacobifeld $$Y(r)=d_{rv}\exp_pu=0$$ zu $Y(0), Y'(0)=\frac{u}{r}$
+  \end{outline}
+}
+\todo{Warum existiert so ein Feld}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Charakterisierung von lokal minimierenden Geodätischen durch konjugierte Punkte}.
+Sei $c:[a, b] \rightarrow M$ eine Geodätische mit $c(a)=$ $p, c(b)=q$.
+
+(1) Gibt es auf c keine zu p konjugierten Punkte, dann ist c lokal minimierend in folgendem Sinne: es gibt ein $\epsilon>0$ so dass für jede Kurve $\gamma$ mit $\gamma(a)=p, \gamma(b)=q$ und $d(\gamma(s), c(s))<\epsilon$ gilt dass
+$$
+L(\gamma) \geq L(c)
+$$
+Dabei gilt Gleichheit nur, wenn $\gamma$ eine Umparametrisierung von c ist.
+
+(2) Gibt es ein $s_{0} \in(a, b)$ so dass $p$ und $c\left(s_{0}\right)$ konjugiert sind, dann gibt es eine Variation $c_{t}$ von $c$ mit festen Enden und
+$$
+L\left(c_{t}\right)<L(c)
+$$
+für kleine $t$.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 Kein konjungierter Punkt auf Weg, dann existiert keine lokal kürzende Verbindungskurve
+    \2 $\phi(s)=sv, v=c'(0)$ auf o.B.d.A. $[0,1]$ ist lokal diffeomorph (Kein konjungierter Punkt auf Weg)
+    \2 Endliche Überdeckung von Verbindungsgerade im Tangentialraum (Lokal Diffeomorph)
+    \2 Unterteile den Definitionsbereich, sodass im Bild die Verbindungsgerade stückweise in Überdeckungsmengen liegt
+    \2 Schränke beliebige Variation stückweise ein auf $[s_{i-1},s_i]\times (-\epsilon_i,\epsilon_i)$ sodass die Bilder in $U_i=\exp_p W_i$ liegen, also für $t$ klein genug
+    $$c_t([0,1])\subset \cup_i U_i$$
+    \2 Lifte sukzessiv die Kurve $c_t$ von $M$ zu einer Kurve $\psi_t$ in den Tangentialraum $T_pM$ von $0$ nach $p$
+    \3 Bis $s_{i-1}$ definiert, dann auf $[s_{i-1},s_i]$ durch 
+    $$\psi_t(s)=(\exp_p|_{W_i})^{-1}(c_t(s))$$ 
+    \2 Längen von radialen Geodätischen sind kleiner gleich Längen von exponential abgebildeten Kurven mit gleichem Anfangs und Endpunkt sowie Definitionsbereich(damit auch den Lifts) und Gleichheit falls $c_t=c$
+    \1 Existiert ein konjugierter Punkt auf Weg, dann existiert lokal kürzende Variation
+    \2 Existenz eines nicht-trivialen Jacobifelds $Y$ bis konjugierten Punkt mit nicht verschwindender Endgeschwindigkeit
+    \2 Konstruktion von Vektorfeld
+    \3 $Z_1$ paralleles Vektorfeld längs $c$ mit $Z_1(s_0)=-Y'(s_0)$
+    \3 $\theta$ glatte Funktion, die bei $0$ und $1$ verschwindet und bei $s_0$ gleich $1$
+    \3 $Z(s)=\theta(s)Z_1(s)$
+    \3 $$
+      Y_{\alpha}(s):=\left\{\begin{array}{cl}
+      Y(s)+\alpha Z(s) & s \in\left[0, s_{0}\right] \\
+      \alpha Z(s) & s \in\left[s_{0}, 1\right]
+      \end{array}\right.
+      $$
+    \2 Indexform für $Y_\alpha$ (Bilinear) berechnen $I_1+I_2+I_3=-2 \alpha g\left(Y^{\prime}\left(s_{0}\right), Y^{\prime}\left(s_{0}\right)\right)+\alpha^{2} I(Z, Z)$
+    \3 $I_1$ bzgl Jacobifeld berechnen durch Symmetrie, Jacobigleichung und partielle Ableitung
+    \3 $I_2$ analog berechnen
+    \2 Für $\alpha$ klein genug, ist Indexformwert negativ
+    \2 Zughörige Variation wird bei $c$ $L$-maximiert, also $L(c_t)<L(c)$ 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\pagebreak
+
+
+\subsection{Mannigfaltigkeiten konstanter Schnittkrümmung}
+
+\textbf{Statement: }{Lokale Isometrie von geodätisch vollständigem Raum ist eine Überlagerung}.
+Sei $\pi:(\tilde{M}, \tilde{g}) \rightarrow(M, g)$ eine (surjektive) lokale Isometrie. Ist $(\tilde{M}, \tilde{g})$ geodätisch vollständig, so ist $\pi$ eine Überlagerungsabbildung.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    Zeige Inklusion $\cup\tilde U_i\subset \pi^-1(U)$, dann lokale Diffeomorphie von $\pi: \tilde U_i\to U$ dann umgekehrte Inklusion. Starte mit $r$ klein genug sodass
+    $\exp_m: B(0_m,r)\to U=B(m,r)$ Diffeomorphismus und $\tilde U_i=B(\tilde m_i,r)$
+    \1 1. Inklusion
+    \2 Hopf-Rinow auf $\tilde M$: $\exp_{\tilde m_i}(B(0_{\tilde m_i},r))=\tilde U_i$
+    \2 Alle Elemente in $\tilde U_i$ können durch Kurven von Länge kleiner $r$ mit $\tilde m_i$ verbunden werden und projezierte Kuve hat gleiche Länge, also liegt der Punkt auch in $U$
+    \1 Lokale Diffeomorphie
+    \2 Für beliege Startgeschwindigkeiten $v, \tilde v$ gilt $\pi \circ \exp _{\tilde{m}_{i}} \tilde{v}=\exp _{m} \circ d \pi(\tilde{v})$ (lokale Isometrie gibt Geodätische $\pi\circ\tilde \gamma$)
+    \2 Diagramm kommutiert 
+  \end{outline}
+}
+
+\[
+\begin{tikzcd}
+B(0_{\tilde{m}_i}, r) \arrow[r, "{\exp_{\tilde{m}_i}}"] \arrow[d, "{d\pi}"']
+  & B(\tilde{m}_i, r) = U_i \arrow[d, "{\pi}"] \\
+B(0_m, r) \arrow[r, "{\exp_m}"']
+  & B(m, r) = U
+\end{tikzcd}
+\]
+
+\vspace{0.8cm}
 
 
 
 
 
 
+\textbf{Statement: }{Überlagerung von ZSH Raum in EZSH Raum ist ein Diffeomorphismus}.
+Sei $\pi: \tilde{M} \rightarrow M$ eine Überlagerungsabbildung. Ist $\tilde{M}$ zusammenhängend und $M$ einfach zusammenhängend, so ist $\pi$ ein Diffeomorphismus zwischen $\tilde{M}$ und $M$.
 
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 
+  \end{outline}
+}
 
-
-
+\vspace{0.8cm}
 
 
 
