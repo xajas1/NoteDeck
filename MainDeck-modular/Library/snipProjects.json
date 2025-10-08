@@ -354,5 +354,20 @@
     "tableMeta": {
       "selectedSource": "AT_Dold72/AT_Dold72.tex"
     }
+  },
+  "LIE_H15": {
+    "sourceFile": "LIE_Hall15/LIE_Hall15.tex",
+    "snipMeta": {
+      "Subject": "LIE",
+      "Topic": "Lie Algebra",
+      "LitID": "H15",
+      "CTyp": "PROOF",
+      "ParentTopic": "",
+      "Content": "P: Identität-Komponenten von Matrix Lie Gruppen in $M_n(\\C)$ sind Matrix Lie Gruppen mit übereinstimmenden Lie Algebren",
+      "selectedProject": "LIE_Hall15/LIE_Hall15.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "LIE_Hall15/LIE_Hall15.tex"
+    }
   }
 }

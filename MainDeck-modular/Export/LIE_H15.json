@@ -1,0 +1,244 @@
+{
+  "projectName": "LIE_H15",
+  "structure": [
+    {
+      "id": "sec-1759914517129",
+      "name": "Definitionen",
+      "subsections": [
+        {
+          "id": "sub-1759914522068",
+          "name": "Matrix Lie Gruppen",
+          "unitUIDs": [
+            "91b18a66-5e14-4182-a7cd-095a89115a3b",
+            "45b1fe8c-45e0-434c-a8a8-a7cd246306b0",
+            "1a35acae-5c7e-4a08-8013-01587d484d89",
+            "ec012be8-7632-4b11-b592-506da43f5e06",
+            "2f09c402-fdd8-4d36-89c8-2a0f005547e8",
+            "e9ccf83e-f353-48ea-86ee-ffd43e004864",
+            "7cd53dcd-4856-4cfc-9a45-f929364e65f2",
+            "cc6034ed-241d-4c80-9546-8cdcfd849607",
+            "d80b92b1-fab6-446c-b1eb-9628d5af7e7f",
+            "325bfacb-3917-4b49-ae78-9f51e179b309",
+            "f8b7dba7-f404-4008-8d6c-0e4f5c99d15d",
+            "49b6d5e2-6850-420a-904f-f0225c87a0cc",
+            "affb5839-ff48-4df6-89d0-b2851d109ca5",
+            "c628724e-4789-48ff-a2fd-325806655d8c",
+            "1dba8d2a-0e0d-4f17-8e11-77589b92ac7f",
+            "f3153428-650a-4527-b0cb-bed30e4a9703",
+            "d4815dce-bae4-4956-a8b9-1e6febef6386",
+            "24488333-dafe-4a3c-9845-7bc1d1e3322c",
+            "1981ae8a-779f-467e-ba90-b808e4f86edb",
+            "e705e3cb-e6fb-40b6-a703-632880e9a26a",
+            "1745e093-7ce4-499e-8fa0-f2bb542ce266",
+            "8deb8c9b-34d8-4e40-9e0e-1debe7582075",
+            "12846934-66ce-4e13-a575-9dedfb97a1cf",
+            "c88ee506-135d-4afd-94c8-f102c56ec9c9"
+          ]
+        },
+        {
+          "id": "sub-1759914535633",
+          "name": "Exponentiale",
+          "unitUIDs": [
+            "a9e39662-0345-4bf2-99f2-8bdb4b1b1b44",
+            "319ca436-5f8d-40fc-923b-2cfa23eaf950",
+            "29a3c89a-af2c-4eb9-9a19-aaaeccd24593",
+            "aa66f1da-5382-4142-ac0e-e8fa7d95e36a",
+            "a5783ecd-be4b-46d6-9dc8-58120935ee3a",
+            "13fe4726-5f17-4384-84dc-5406d1a6e801"
+          ]
+        },
+        {
+          "id": "sub-1759914543098",
+          "name": "Lie Algebren",
+          "unitUIDs": [
+            "49240ded-501e-4e3f-b08d-2e84e92ded77",
+            "a3e39c37-c381-4a73-a4ff-93ab23b7f57b",
+            "f757d177-7c47-49be-a792-47b4581aa491",
+            "9aece8b7-e3fb-4d52-879c-959a758daf67",
+            "ceca2005-b6c2-4ab1-9bf9-367eab24f1b2",
+            "e116bac2-9425-4206-bc03-b474b1a336fc",
+            "a2713569-7e68-4daf-aac7-dc6ef7718cdc",
+            "4e9c45e3-8791-4677-9402-970e710b4d22",
+            "fadb34c7-74db-41b6-9236-9c9a5524ed6e",
+            "b6abb4e2-c4a8-4219-b4e8-057d6a9e5604",
+            "c6818e0a-7966-4dff-b8b0-08ae7d6fe23b",
+            "8fc07b52-e61b-4a8a-a0dd-598ca986f11a",
+            "de760397-ce65-40cf-ae46-47dfcd2aa9c1",
+            "d2172a7e-2fb8-4798-b582-348de122fca5",
+            "85f0afc5-ab7c-4d9f-a2f8-004e52297217",
+            "2f2d4ec0-4910-4cb4-9352-328c85b8b0bc",
+            "e6b3ac10-efcf-4a61-97fd-3227438327e2",
+            "1bcf2d08-8819-4a7b-ae64-4854d8d62b44",
+            "af13aeb7-9e96-4b81-a3cd-f9dacbfb3bbf",
+            "b9ed040e-b7f3-460f-acf8-ae97cdbe1bc4",
+            "ff8e87bb-44b8-4894-848e-52c63b688b59",
+            "bccd9573-5cfb-41ec-be8b-8a75cbc18d9d",
+            "b4a1bf26-d624-47a9-b61d-94f1489369c8"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-1759914554748",
+      "name": "Exampel",
+      "subsections": [
+        {
+          "id": "sub-1759914567697",
+          "name": "Matrix Lie Gruppen",
+          "unitUIDs": [
+            "a10d939f-0f54-4891-885f-40df449aa1a4",
+            "8f55ad18-9011-4b33-8020-602d3c43d70e",
+            "1329238d-eb74-4787-a27a-0da9f3cfd774",
+            "15b8037e-f085-4d71-92a0-745023d5adfa",
+            "415d6528-a5a5-4285-9f3b-2f1a1ba84e71",
+            "73bd8b53-8b78-44d8-aecb-84d2fe1552b2",
+            "cac11e8c-fae4-4653-bce6-790d30f4bceb",
+            "0e4d9c40-a212-43c2-a8cd-fc2da6775cf0",
+            "4847a8f3-da38-405d-8273-1326c36425e7",
+            "5643db38-1b13-42c9-9c10-bc86c3ca0bdf",
+            "759ef540-6c77-4b79-a580-104a101ab62a",
+            "f3d6c44c-c021-42eb-ac38-1b3db87fca42",
+            "20ea44cf-1be0-447d-9dc4-98faefdce45b",
+            "af8c5d84-ef79-4c77-84ae-28255088ac9c",
+            "9e2d59f3-3120-494b-8590-f53c25a49b31",
+            "434b5024-5da2-41fe-b99e-8f20162a8186",
+            "4e8fa6f7-67ca-4257-b59d-0d3d67915189",
+            "cd0c7458-c29e-4fc4-9f76-0d670d5365a2",
+            "8503e561-675e-48b5-bdc5-1c33a76da687",
+            "0dab2fbb-6f5a-4ad2-8263-3d23da7012d0",
+            "b7c46630-c794-4db6-b2be-3cb39b8c116b",
+            "dfad9bbe-9c23-4f6e-908d-f27fb8a20cf1"
+          ]
+        },
+        {
+          "id": "sub-1759914572384",
+          "name": "Exponentiale",
+          "unitUIDs": [
+            "108205ee-de02-4d84-986f-ac5f5d3b0969"
+          ]
+        },
+        {
+          "id": "sub-1759914581177",
+          "name": "Lie Algebren",
+          "unitUIDs": [
+            "3f91022a-f488-4e57-a8c6-5ecb2ce53ad0",
+            "5f0991d3-469b-4239-ab41-e5f750a19962",
+            "29d0e60d-1a2a-431d-a749-a6ea247a6b69",
+            "e4e9a304-dac7-4126-9553-418c3639fed3",
+            "214d26f9-3bec-4c9c-9f43-de7105a5cb1f",
+            "72d7126c-f765-4509-89dc-320f87c645ce",
+            "8b41a6db-a2f5-4421-8a57-00d70b42877e",
+            "1e0fa9a5-0046-4f56-8a3d-a44513f55317",
+            "c6889b77-2ea8-452e-a262-307bf6c9ad24",
+            "b3cb5b0f-1775-4aec-b39d-454e0f790547",
+            "58c7eb8f-020d-4325-a2dc-45ce176d51d6",
+            "b6f8cc39-e45c-4f17-bc2a-5addcd2e2074",
+            "6fa85d57-90e9-4d14-90a6-3e94ebfe2293",
+            "2919f04a-0481-4f8e-bbab-1ba46085a0ea",
+            "db8b28af-5ef3-4b03-8acd-2cac8f5914e8",
+            "c83d999a-1163-4d19-bff7-1330fcc1b9cf",
+            "19dfeeb1-aa3c-4f3c-8992-c28ab762f50b"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-1759914561809",
+      "name": "Propositionen",
+      "subsections": [
+        {
+          "id": "sub-1759914569145",
+          "name": "Matrix Lie Gruppen",
+          "unitUIDs": [
+            "f965d383-4f04-417e-8944-958950462d54",
+            "f3957fab-0188-417c-9b58-d0a89ccb520f",
+            "5e59cf70-5006-4220-ad2e-dd9a9ea1a51d",
+            "8170312e-5e9b-42b4-b1b1-bb4898b1f9c0",
+            "24b4361a-8cc4-4905-8af9-e44003d88429",
+            "24cd5574-466d-42fe-9704-d97f6a133d08",
+            "06149074-806c-4e5e-aee3-6efaa8b90a6d",
+            "3add915f-f4ea-4ebe-810b-d3b7d50064e3",
+            "b5687326-6620-40ff-853c-eed4fd648108",
+            "23d07434-8335-4279-8397-11863a1d28cd",
+            "7294e75d-d9c9-4cbd-b502-b437d722ea50",
+            "a735bfed-5a94-430c-b110-dac785991aa6",
+            "dc17a183-0510-45fe-bad8-805392dc1315",
+            "6609d36d-980e-411d-b33a-26969d9b0f7d",
+            "260c52a9-4ba1-4f67-8c75-2d0cd7d4c50b",
+            "10bc69ff-e732-4fa0-99d3-0ee257e3f7fd",
+            "3c3af2cf-e05a-414f-8142-5f2e899750ff",
+            "f273e562-c254-40a7-90d1-d2a4efddbd10",
+            "669f5495-4ece-450f-b1ac-c0a8452ba014",
+            "0fd9aa6e-e99f-4a38-84b1-810576a70078",
+            "2a8496a7-8203-4e58-a9ec-b26063ea5c5c",
+            "13156e15-0df9-420d-b223-26c1accb4181",
+            "b1243cc9-c8cc-4f58-9d99-7df7ef352ef0",
+            "e2cc1589-cb84-44c1-9f30-f49dbc0296d0",
+            "a273e542-22ff-455a-b804-99c707db42a9"
+          ]
+        },
+        {
+          "id": "sub-1759914574400",
+          "name": "Exponentiale",
+          "unitUIDs": [
+            "dbed2843-239b-4287-9f56-11d3cda61749",
+            "e25c9390-717f-430e-8fb5-7c5463fcd3a1",
+            "a60420ac-bd43-4b77-b9e8-d54ca7c36264",
+            "a7f80e0e-cf3b-4bf0-9fe4-84f22c272e93",
+            "bdeb43c8-8a9a-4eee-b47e-ef9f259cc264",
+            "8aab3879-d633-496b-8970-129489eb03d0",
+            "43835ac4-4e24-4226-aec9-fc89c39db866",
+            "771f6d42-2b2b-469a-8182-4cc41d47694f",
+            "0db4b743-004b-457a-8922-f6e27fb5d663",
+            "f235528d-96d9-46c2-a07b-f08b3bdaaec9",
+            "21567040-4122-4b0d-82e5-68344dd3997d",
+            "0282590a-df87-40d0-a65f-1a3e367c3e5e",
+            "ff147eb4-3658-425c-a2e9-08e761ea6e77",
+            "61e0fb54-0561-4c99-8888-c7e443b9a1cc",
+            "b7fddd65-ab31-46fc-92a6-2c459000702d",
+            "c2259556-8c87-4600-9dd3-063eee058c7d",
+            "cf4328b5-473d-45b8-813f-44f2a30f6daf"
+          ]
+        },
+        {
+          "id": "sub-1759914582667",
+          "name": "Lie Algebren",
+          "unitUIDs": [
+            "1395f02f-dbbf-48f8-ae0c-f5f7dbb8655b",
+            "3081193e-beab-4cbe-bcf8-68c458ac07af",
+            "73b47341-2516-4632-911b-2462cd88b74b",
+            "baca9495-e43b-419a-b10c-2737f15c4d25",
+            "c1d47167-25a4-4812-957e-0368262e6920",
+            "b0a11429-1fb8-4dae-916f-7b0e5d858205",
+            "bc9c1a09-92bc-4c0f-b608-d6c15cd45688",
+            "6f19955b-8af2-4d93-bf9c-e76a36b0c28e",
+            "eb68ee41-5dd6-4be5-9eb0-73f826dadb68",
+            "92b4b82d-cd0f-471e-8ae1-3e613a155444",
+            "d7c5fbe4-74ac-4c4f-9225-0ba105a84128",
+            "97f46c81-aeef-4e4f-b875-ba69cec3ae19",
+            "9de3bde8-ba1e-4817-9f2c-405270c3c3fb",
+            "99ae636c-9795-4dee-ba3f-ba23d6feb780",
+            "b5ce2ad7-e18b-4d6b-97ec-225545bd39cc",
+            "089d3804-63a2-491f-9e6d-6f35a28bdf33",
+            "ae0bce19-ee6c-45f3-8433-95ac88bc87ed",
+            "4516f776-d07c-4926-840f-e13ce0f26534",
+            "b70ab61c-81b0-4d8e-a411-638f2391c3d2",
+            "2b975331-ac80-42af-8799-b0e14af457e8",
+            "e89f0696-57d3-4def-83dc-28ef161f2812",
+            "3913fab4-983e-4b2c-b2de-4cb95d9251fd",
+            "be2164fe-d207-4434-86bf-9739cbfe1965",
+            "0dd75547-98a7-484d-8830-f16eaacdccc1",
+            "ce44a3ff-997e-4c55-b27d-41af96fd4c29",
+            "10d79352-bc64-4a8e-9c83-6dca307be6d4",
+            "887f15c0-a4d9-4d1f-b192-df7bc8fe4a06",
+            "1a0e0980-6174-47ad-b321-767e1820e6f4",
+            "a0354171-5743-442b-a2e0-6a9cb5ae8888",
+            "318a2554-a809-464f-93bc-282095c176bd",
+            "1c08f0aa-ebea-40c0-a70a-a7ad22acf2a7",
+            "3d73660a-cf24-4cb0-8865-08494cf2a4f4"
+          ]
+        }
+      ]
+    }
+  ]
+}

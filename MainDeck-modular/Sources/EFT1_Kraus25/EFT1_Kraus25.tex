@@ -345,15 +345,15 @@ Ist $E \xrightarrow{\pi} M$ eine lokal triviale Faserung, $U \subseteq M$, so he
 
 \begin{DEF}{BÜN-K25a-02-17}{Raum der differenzierbaren lokalen Schnitte}
 $\Gamma(M \times F)=\left\{\sigma: M \rightarrow M \times F \mid \sigma(x)=(x, f(x)), f \in C^{\infty}(M, F)\right\} \cong$ $C^{\infty}(M, F)$.
-\end{DEF}\\
+\end{DEF}
 
 \begin{EXA}{BÜN-K25a-02-18}{Raum der diff. lokalen Schnitte in Kreuzprodukten}
 $\Gamma T M=\{$ differenzierbare Vektorfelder auf $M\}$.
-\end{EXA}\\
+\end{EXA}
 
 \begin{EXA}{BÜN-K25a-02-19}{Raum der diff. Lokalen Schnitte im Tangentialbündel}
 Jedes Vektorraumbündel hat einen Schnitt $\sigma: M \rightarrow E, x \mapsto O_{x} \in E_{x}$.
-\end{EXA}\\
+\end{EXA}
 
 $T M$ hat im Allgemeinen keinen Schnitt, der nirgends verschwindet, z.B. hat jedes Vektorfeld auf $M=S^{2}$ eine Nullstelle. Aber in $T T^{2}$ existieren zwei an jeder Stelle linear unabhängige Schnitte.\\
 
@@ -482,11 +482,11 @@ $\operatorname{Hom}(E, F)=\bigcup_{x \in M} \operatorname{Hom}\left(E_{x}, F_{x}
 
 \begin{EXA}{BÜN-K25a-02-34}{Mult}
 $\operatorname{Mult}^{k}(E, F)$.
-\end{EXA}\\
+\end{EXA}
 
 \begin{EXA}{BÜN-K25a-02-35}{Sym}
 $\operatorname{Sym}^{k}(E)$.
-\end{EXA}\\
+\end{EXA}
 
 \begin{EXA}{BÜN-K25a-02-36}{Alt}
 $\operatorname{Alt}^{k}(E)$ usw.
@@ -550,8 +550,7 @@ Ein Bündelisomorphismus $f: E \rightarrow B \times F$ heißt eine Trivialisieru
 
 \begin{DEF}{BÜN-K25a-02-45}{Vektorraumbündelabbildung über diff. Abbildungen zwischen Vektorraumbündeln}
 Seien jetzt $E_{i} \rightarrow B_{i}$ zwei Vektorraumbündel $f_{0}: B_{1} \rightarrow B_{2}$ eine differenzierbare Abbildung und $f: E_{1} \rightarrow E_{2}$ eine differenzierbare Abbildung über $f_{0}$, so heißt $f$ eine Vektorraumbündelabbildung über $f$, falls $f_{x}:=f \mid E_{1, x}$ linear ist für jedes $x \in M$.
-\end{DEF}\\
-
+\end{DEF}
 
 
 \begin{DEF}{BÜN-K25a-02-46}{Vektorraumbündelisomorphismus}
@@ -1831,6 +1830,2237 @@ Man zeige, dass $\operatorname{Hol}(u)$ eine Untergruppe von $G$ ist.
 
 \subsection*{6.26 Aufgabe}
 Es werde vorausgesetzt, dass $\operatorname{Hol}(u) \subset G$ abgeschlossen ist (in der Tat ist das immer der Fall). Man zeige, dass $P(u) \subset P$ eine Reduktion der Strukturgruppe von $P$ auf $\operatorname{Hol}(u)$ definiert.
+
+
+
+
+
+\section*{Lineare Zusammenhänge}
+\subsection*{Bemerkung}
+Ist $E \rightarrow M$ ein Vektorraumbündel, so ist $T_{e} E_{x}=E_{x}$, also $T^{\prime} E=\pi^{*} E$, d.h., die kurze exakte Sequenz, deren Spaltung ein Zusammenhang definiert, ist durch $0 \rightarrow \pi^{*} E \rightarrow T E \rightarrow \pi^{*} T M \rightarrow 0$ gegeben.
+
+\subsection*{Definition}
+Ein $G L(n, \mathbb{R})$-Zusammenhang auf einem Vektorraumbündel heißt ein linearer Zusammenhang.
+
+\subsection*{Lemma}
+Ein Zusammenhang für die lokal triviale Faserung eines Vektorraumbündels ist genau dann linear, wenn für jeweils zwei Horizontalkurven $\alpha_{1}, \alpha_{2}$ über $\alpha$ auch $\lambda \alpha_{1}+\mu \alpha_{2}$ eine Horizontalkurve ist.
+
+\section*{Beweis:}
+Ein Zusammenhang ist nach Definition genau dann linear, wenn er vollständig ist und die zugehörige Parallelverschiebung linear ist. Damit folgt die Behauptung, da die Horizontalkurven $\alpha_{i}$ über $\alpha$ durch
+
+$$
+\alpha_{i}(t)=\left[\tau_{\alpha_{[0, t]}}^{P}(p), v_{i}\right]=\tau_{\alpha_{[0, t]}}\left(\alpha_{i}(0)\right) \text { mit } \alpha_{i}(0)=\left[p, v_{i}\right]
+$$
+
+gegeben sind. Dabei ist $\tau^{P}$ die Parallelverschiebung im zugrundeliegenden Prinzipalbündel.
+
+\subsection*{Bemerkung}
+Ist $E \rightarrow M$ ein Vektorraumbündel, $\operatorname{dim} M=m, \operatorname{dim} E=m+k$, so ist $J^{1} E \rightarrow M$ ein Vektorraumbündel der Faserdimension $k(m+1)$.\\
+Ein durch einen Schnitt $\sigma: E \rightarrow J^{1}(\pi)$ gegebener Zusammenhang ist genau dann ein linearer Zusammenhang, wenn er linear über $M$ ist, d.h., wenn er einen Vektorraumbündelhomomorphismus $E \rightarrow J^{1}(\pi)$ beschreibt, denn sind $s_{1}$ und $s_{2}$ horizontale Schnitte an der Stelle $x$, dann ist $H$ nach Lemma 7.3 linear, wenn $\lambda s_{1}+\mu s_{2}$ ein horizontaler Schnitt ist und umgekehrt.
+
+\subsection*{Satz}
+Die kovariante Ableitung eines Zusammenhangs ist genau dann linear, wenn der Zusammenhang linear ist.
+
+\section*{Beweis:}
+Seien $s_{i} \in \Gamma E, v \in T_{x} M, d s_{i}(v)=: \bar{v}_{i}+v_{i}^{\prime}$ die Zerlegung in horizontalen und vertikalen Anteil, also $\nabla_{v} s_{i}=v_{i}^{\prime}$. Es ist
+
+$$
+d\left(\lambda s_{1}(v)+\mu s_{2}(v)\right)=d L_{\lambda}\left(\bar{v}_{1}\right)+d L_{\mu}\left(\bar{v}_{2}\right)+\lambda v_{1}^{\prime}+\mu v_{2}^{\prime}
+$$
+
+Nach Lemma 8.3 ist der Zusammenhang genau dann linear, wenn die ersten beiden Summanden stets wieder horizontal sind, also wenn
+
+$$
+\nabla\left(\lambda s_{1}+\mu s_{2}\right)=\lambda \nabla s_{1}+\mu \nabla s_{2}
+$$
+
+gilt
+
+\subsection*{Bemerkung}
+Ist $\nabla$ die kovariante Ableitung eines linearen Zusammenhangs, $f \in C^{\infty}(M)$ und $s \in \Gamma E$, dann gilt
+
+$$
+\nabla(f s)=f \nabla s+d f s(*)
+$$
+
+denn ist $\beta$ eine $v$ repräsentierende Kurve, so ist nach 5.14 und 5.16
+
+$$
+\nabla_{v} s=\left.\frac{d}{d t}\right|_{t=0} \tau_{\beta_{[t, 0]}}(s \circ \beta)
+$$
+
+also
+
+$$
+\begin{aligned}
+\nabla_{v}(f s) & =\left.\frac{d}{d t}\right|_{t=0} \tau_{\beta_{[t, 0]}}((f \circ \beta) \cdot s \circ \beta) \\
+& =\left.\frac{d}{d t}\right|_{t=0}\left((f \circ \beta) \cdot \tau_{\beta_{[t, 0]}}(s \circ \beta)\right) \\
+& =d f(v) \cdot s(x)+f(x) \nabla_{v} s
+\end{aligned}
+$$
+
+\subsection*{Lemma}
+Ist $\nabla: J^{1} E \rightarrow \operatorname{Hom}(T M, E)$ eine lineare Abbildung, die die Produktformel (*) erfüllt, so ist $\nabla$ die kovariante Ableitung eines linearen Zusammenhangs.
+
+\section*{Beweis:}
+Definiere einen Schnitt $\sigma$ in $J^{1} E \rightarrow E$ durch $\sigma(e)=[s]_{x}^{1}-\nabla[s]_{x}^{1}$. Dies ist unabhängig von der Wahl des Schnittes $s$ mit $s(x)=e$ : Aufgrund der Linearität genügt es dazu zu zeigen: für $s$ mit $s(x)=0$ ist $\nabla[s]_{x}^{1}=[s]_{x}^{1}$. Sei $\left(s_{1}, \ldots, s_{n}\right)$ eine lokale Familie lokaler Schnitte, die in einer Umgebung von $x$ eine Basis bilden.\\
+Sei $s=\sum \lambda_{i} s_{i}$, also $\lambda_{i}(x)=0$ für $i=1, \ldots n$. Dann ist $d s_{x}=\sum d \lambda_{i}{ }_{x} s_{i}(x)$ und $(\nabla s)_{x}=\sum d \lambda_{i} \times s_{i}(x)$, also $\nabla[s]_{x}^{1}=[s]_{x}^{1}$.
+
+\subsection*{Definition}
+Seien $E_{i} \rightarrow M$ Vektorraumbündel. Eine Abbildung $\mathcal{D}: \Gamma E_{1} \rightarrow \Gamma E_{2}$ heißt Differentialoperator $k$-ter Ordung, wenn eine differenzierbare Abbildung über $M$ existiert $D^{k}: J^{k} E_{1} \rightarrow E_{2}$ mit $(\mathcal{D} s)(x)=D^{k}[s]_{x}^{k}$ für alle $x \in M$. Ein Differentialoperator $\mathcal{D}$ heißt linear, wenn es ein $k$ gibt, sodass $D^{k}$ ein Vektorraumbündelhomomorphismus ist.
+
+\subsection*{Satz}
+Ein linearer Differenzialoperator $\mathcal{D}: \Gamma E \rightarrow \Omega^{1}(M, E)$ ist genau dann kovariante Ableitung eines Zusammenhangs, wenn die Produktformel
+
+$$
+\nabla f s=d f s+f \nabla s
+$$
+
+gilt für alle $f \in C^{\infty}(M), s \in \Gamma E$.
+
+\section*{Beweis:}
+Wir haben schon gezeigt, dass lineare kovariante Ableitungen in Vektorraumbündeln die Produktformeln erfüllen. Ist die Produktformel erfüllt, so ist $\mathcal{D}$ ein Differenzialoperator 1. Ordnung, denn ist $[s]_{p}^{1}=0$, also lokal $s=\sum \lambda_{i} e_{i}$ mit $\left.d \lambda_{i}\right|_{p}=0$ und $\lambda_{i}(p)=0$, so folgt $\mathcal{D} s(p)=0$, also folgt aus der Linearität, dass
+
+$$
+\mathcal{D}: J^{1}(E) \rightarrow T^{*} M \otimes E,[s]_{x}^{1} \mapsto(\mathcal{D} s)(x)
+$$
+
+wohldefiniert ist. Der Zusammenhang ist dann durch
+
+$$
+\sigma: E \rightarrow J^{1} E, \sigma(e)=[s]_{x}^{1}-\mathcal{D}[s]_{x}^{1}
+$$
+
+für $s$ mit $s(x)=e$ wohldefiniert und linear.
+
+\subsection*{Lemma}
+Ist $P$ das $E \rightarrow M$ zugrundeliegende Prinzipalbündel, $\omega$ eine $G$-Zusammenhangsform auf $P$, dann gilt für die zugehörige kovariante Ableitung in $E$
+
+$$
+\nabla_{X}[s, v]=\left[s, d v(X)+s^{*} \omega(X) v\right]
+$$
+
+\section*{Beweis:}
+Ist $s$ ein horizontaler Schnitt bei $p$ und $v$ konstant und $X \in T_{p} M$, so sind beide Seiten null.\\
+Sei jetzt $\left(v_{1}, \ldots, v_{n}\right)$ eine Basis von $\mathbb{R}^{n}, s$ bei $p$ horizontal und $v=\sum \lambda_{i} v_{i}$. Dann ist die linke Seite für $X \in T_{\pi(p)} M$
+
+$$
+\nabla_{X}[s, v]=\sum_{i} d \lambda_{i}(X)\left[s, v_{i}\right]
+$$
+
+und die rechte Seite
+
+$$
+\sum_{i}\left[s, d\left(\lambda_{i} v_{i}\right)(X)+\lambda_{i}\left(s^{*} \omega\right)(X) v_{i}\right]=\sum_{i} d \lambda_{i}(X)\left[s, v_{i}\right]+0
+$$
+
+\subsection*{Bemerkung}
+\begin{enumerate}
+  \item Sind $v_{j}$ für $j=1, \ldots, n$ lokale Schnitte in $T M \mid U$, sodass $\left(v_{1}(x), \ldots, v_{n}(x)\right)$ für jedes $x \in U$ eine Basis von $T_{x} M$ ist, so ist $s:=\left(v_{1}, \ldots, v_{n}\right) \in \left.\Gamma P_{G L}(M)\right|_{U}$. Dann ist $v_{j}=\left[s, e_{j}\right]$, also
+\end{enumerate}
+
+$$
+\nabla_{X} v_{j}=\left[s, s^{*} \omega(X) e_{j}\right]=\left[s, \sum_{i}\left(s^{*} \omega\right)(X)_{i j} e_{i}\right]=: \sum_{i}\left(s^{*} \omega(X)\right)_{i j} v_{i} .
+$$
+
+\begin{enumerate}
+  \setcounter{enumi}{1}
+  \item Sind $\omega, \tilde{\omega}$ zwei Zusammenhangsformen, so ist $\omega-\tilde{\omega} \in \Omega^{1}\left(M, P \times_{\mathrm{Ad}} \mathfrak{g}\right)$. Ist $E=P \times_{G} V$, so kann man $P \times_{\text {Ad }} \mathfrak{g}$ auffassen als Teilmenge von $\operatorname{End}(E)$ via
+\end{enumerate}
+
+$$
+\left(P \times_{\text {Ad }} \mathfrak{g}\right) \times\left(P \times_{G} V\right) \rightarrow\left(P \times_{G} V\right), \quad([p, X],[p, v]) \mapsto[p, X \cdot v]
+$$
+
+Dies ist wohldefiniert.\\
+Ist $\tilde{\nabla}$ die kovariante Ableitung zu $\nabla+A$ mit $A \in \Omega^{1}(M, \operatorname{End}(E))$, so ist also
+
+$$
+\tilde{\nabla}_{X}(v)=\nabla_{X} v+A(X) v
+$$
+
+\subsection*{Korollar}
+Es gilt $\nabla=d^{H}: \Omega^{0}(M, E) \rightarrow \Omega^{1}(M, E)=\Gamma(\operatorname{Hom}(T M, E))$, denn
+
+$$
+\begin{aligned}
+\nabla_{X}[s, v] & =\left[s, d v(X)+s^{*} \omega(X)(v)\right] \\
+d^{H}[s, \hat{v}] & =\left[s, d \hat{v}(d s(X))+\left(s^{*} \omega\right)(X)(\hat{v})\right]
+\end{aligned}
+$$
+
+wobei $\hat{v} \in C_{\text {inv }}^{\infty}(P, V), v \circ \pi=\hat{v}$.\\
+Erinnere: Ist $\alpha: H \rightarrow G$ ein Liegruppenhomomorphismus, so ist eine $\alpha$ Version von $P \rightarrow M$ ein Paar ( $Q, f$ ) bestehend aus einem $H$-Prinzipalbündel $Q$ und einem Prinzipalbündelhomomorphismus $f: Q \rightarrow P$. Ist $\alpha$ die Inklusion, so nennt man die Äquivalenzklasse von $Q$ eine Reduktion. Wir fassen $Q \subseteq P$ auf. Es ist $Q \times_{H} V=P \times_{G} V$ und $P=Q \times_{H} G$.
+
+\subsection*{Definition}
+Ein $G$-Zusammenhang auf $P$ (bzw. $P \times_{\rho} V$ ) heißt reduzibel auf $H$, falls es eine $H$-Version $Q$ von $P$ und einen $H$-Zusammenhang $\omega^{H}$ auf $Q$ gibt, sodass der durch $\omega^{H}$ auf $Q \times_{H} G=P$ induzierte Zusammenhang mit $\omega^{G}$ übereinstimmt. $\omega^{G}$ heißt dann die $G$-Erweiterung von $\omega^{H}$.
+
+\subsection*{Korollar}
+Ist $H \subseteq G$ eine abgeschlossene Untergruppe, $Q \subseteq P$ eine Reduktion auf $H$, so ist ein $G$-Zusammenhang genau dann reduzibel auf $H$, falls die Einschränkung der $G$-Zusammenhangsform $\omega^{G}$ auf $T Q$ Werte in $\mathfrak{h}$ annimmt.
+
+\subsection*{Korollar}
+Ist $P \rightarrow M$ ein $O(n)$-Prinzipalbündel, $E=P \times_{O(n)} V$ mit der durch $O(n)$ induzierten Bündelmetrik, so gilt für jede kovariante Ableitung auf $E$, die auf $O(n)$ reduzibel ist:
+
+$$
+X<v, w>_{E}=<\nabla_{X} v, w>_{E}+<v, \nabla_{X} w>_{E}
+$$
+
+\section*{Beweis:}
+Sei $v=[s, \hat{v}], w=[s, \hat{w}]$. Dann ist $\langle v, w\rangle_{E}=\langle\hat{v}, \hat{w}\rangle_{\mathbb{R}^{n}}$, also
+
+$$
+\begin{aligned}
+X<v, w>_{E} & =<d \hat{v}(X), \hat{w}>_{\mathbb{R}^{n}}+<\hat{v}, d \hat{w}(X)>_{R^{n}} \\
+<\nabla_{X} v, w>_{E} & =<d \hat{v}(X)+\left(s^{*} \omega\right)(X) \hat{v}, \hat{w}>_{\mathbb{R}^{n}} \\
+<v, \nabla_{X} w>_{E} & =<\hat{v}, d \hat{w}(X)+\left(s^{*} \omega\right)(X) \hat{w}>
+\end{aligned}
+$$
+
+$\operatorname{Da}\left(s^{*} w\right)(X) \in o(n)$, ist also $\left\langle\nabla_{X} v, w\right\rangle+\left\langle v, \nabla_{X} w\right\rangle=\langle d \hat{v}(X), \hat{w}\rangle_{\mathbb{R}^{n}} +<\hat{v}, d \hat{w}(X)>_{\mathbb{R}^{n}}$.
+
+\section*{Die Aktion der Eichtransformationsgruppe auf dem Raum der Zusammenhänge und Rechnen in Bündelkarten}
+\subsection*{Notation}
+Die Gruppe $\mathcal{G}=\Gamma \operatorname{Aut}(P)=\Gamma\left(P \times_{\text {konj }} G\right)$ heißt Eichtransformationsgruppe. Ein Element $\varepsilon \in \mathcal{G}$ definiert durch $[p, g]=\varepsilon: P \rightarrow P, p \mapsto p g$ einen Bündelautomorphismus auf $P$ und einen Bündelautomorphismus auf $P \times_{G} V$ durch $\varepsilon([p, v])=[\varepsilon(p), v]$.
+
+\subsection*{Definition und Bemerkung}
+Ist $H$ ein $G$-Zusammenhang, $\varepsilon \in \Gamma(\operatorname{Aut}(P))$, so ist der eichtransformierte Zusammenhang $\varepsilon_{H}$ durch
+
+$$
+{ }^{\varepsilon} H_{\varepsilon(p)}=\left.d \varepsilon\right|_{p}\left(H_{p}\right)
+$$
+
+definiert. Durch ${ }^{\varepsilon} H$ ist offenbar wiederum ein $G$-Zusammenhang wohldefiniert.
+
+\subsection*{Notiz}
+Für die Parallelverschiebung zu ${ }^{\varepsilon} H$ gilt: ${ }^{\varepsilon} \tau_{\gamma}=\varepsilon \circ \tau_{\gamma} \circ \varepsilon^{-1}$, denn ist $\gamma_{e}$ eine Horizontalkurve zu $H$, so ist $\varepsilon \circ \gamma_{e}$ eine Horizontalkurve $\mathrm{zu}^{\varepsilon} H$, also ${ }^{\varepsilon} \tau_{\gamma}(\varepsilon(p))= \varepsilon \circ \tau_{\gamma}(p)$.
+
+\subsection*{Notiz}
+Ist $\omega^{\prime}$ die Vertikalprojektion zu $H,{ }^{\varepsilon} \omega^{\prime}$ die Vertikalprojektion zu ${ }^{\varepsilon} H$, so ist
+
+$$
+\varepsilon \omega^{\prime}=d \varepsilon \circ \omega^{\prime} \circ d \varepsilon^{-1}
+$$
+
+denn
+
+$$
+{ }^{\varepsilon} \omega^{\prime}(d \varepsilon(v))=^{\varepsilon} \omega^{\prime}\left(d \varepsilon(\bar{v})+d \varepsilon\left(v^{\prime}\right)\right)={ }^{\varepsilon} \omega^{\prime}\left(d \varepsilon\left(v^{\prime}\right)\right)=d \varepsilon\left(v^{\prime}\right)=d \varepsilon(\omega(v))
+$$
+
+wobei $v=\bar{v}+v^{\prime}, \bar{v} \in H_{e}, v^{\prime} \in T_{e}^{\prime} E$.\\
+Damit folgt für eine $G$-Zusammenhangsform $\omega$ auch sofort ${ }^{\varepsilon} \omega_{\varepsilon(p)} \circ d R_{\varepsilon(p)}=\omega_{p}$, also
+
+$$
+\varepsilon \omega=\left(\varepsilon^{-1}\right)^{*} \omega
+$$
+
+\subsection*{Notiz}
+Für die kovariante Ableitung in Vektorraumbündeln gilt
+
+$$
+{ }^{\varepsilon} \nabla=\varepsilon \circ \nabla \circ \varepsilon^{-1}
+$$
+
+wobei ${ }^{\varepsilon} \nabla$ die kovariante Ableitung zu ${ }^{\varepsilon} H$ ist, denn ${ }^{\varepsilon} \nabla s={ }^{\varepsilon} \omega^{\prime} \circ d s=d \varepsilon \circ \omega^{\prime} d\left(\varepsilon^{-1} s\right)$.\\
+Identifiziert man $T_{[p, v]}^{\prime} E=E_{\pi(p)}$, so ist
+
+$$
+\begin{aligned}
+d \varepsilon_{[p, v]}([p, X]) & =\left.\frac{d}{d t}\right|_{t=0} \varepsilon([p, v+t X]) \\
+& \left.=\left.\frac{d}{d t}\right|_{t=0}[\varepsilon(p), v+t X]\right) \\
+& =[\varepsilon(p), X] \\
+& =\varepsilon([p, X])
+\end{aligned}
+$$
+
+Für Vektorraumbündel $E=P \times_{G} V$ ist $\Gamma(\operatorname{Aut}(P)) \subseteq \Gamma \operatorname{End}(E)$, ein $G$ Zusammenhang in $P$ induziert sowohl in $E$ also auch in $\operatorname{End}(E)$ einen Zusammenhang.
+
+\subsection*{Lemma}
+Ist $\nabla$ ein $G$-Zusammenhang auf $E=P \times_{G} V$ und $\nabla^{\text {End }}$ der vom selben $G$ Zusammenhang induzierte Zusammenhang in $\operatorname{End}(E)=P \times_{\rho} \operatorname{End}(V)$, dann gilt
+
+$$
+\nabla^{\text {End }} \phi=\nabla \circ \phi-\phi \circ \nabla
+$$
+
+denn $\tau_{\gamma}(\phi) \tau_{\gamma}(e)=\tau_{\gamma}(\phi(e))$ für $\pi(\phi)=\pi(e)$. Damit folgt mit 5.16 für Schnitte $\phi$ und $e$ in End $E$ und $E$ längs einer Kurve $\gamma$
+
+$$
+\frac{\nabla}{d t}(\phi(e))=\left(\frac{\nabla}{d t} \phi\right) e+\phi\left(\frac{\nabla}{d t} e\right)
+$$
+
+\subsection*{Korollar}
+Sei $A \in \Omega^{1}(M, \operatorname{End} E)$ wie in 7.11.2. Dann gilt:
+
+$$
+(\nabla+A)^{\text {End }} \phi=\nabla^{\text {End }} \phi+A \circ \phi-\phi \circ A=: \nabla^{\text {End }} \phi+[A, \phi] .
+$$
+
+Wir können jetzt also 8.6 auf Eichtransformationen anwenden.
+
+\subsection*{Korollar}
+Es gilt
+
+$$
+\begin{array}{r}
+{ }^{\varepsilon} \nabla-\nabla=-(\nabla \varepsilon) \circ \varepsilon^{-1}=\varepsilon \circ\left(\nabla \varepsilon^{-1}\right), \\
+\operatorname{denn}^{\varepsilon} \nabla=\varepsilon \circ \nabla \circ \varepsilon^{-1}=\nabla+\varepsilon \circ\left(\nabla \varepsilon^{-1}\right)=\nabla-(\nabla \varepsilon) \circ \varepsilon^{-1} .
+\end{array}
+$$
+
+\subsection*{Korollar und Notation}
+Es gilt
+
+$$
+\varepsilon(\nabla+A)=: \nabla+{ }^{\varepsilon} A \text { mit }^{\varepsilon} A=\varepsilon \circ A \circ \varepsilon^{-1}+\varepsilon \circ \nabla \varepsilon^{-1}
+$$
+
+$\operatorname{denn}{ }^{\varepsilon}(\nabla+A)=^{\varepsilon} \nabla+\varepsilon \circ A \circ \varepsilon^{-1}$.\\
+Ist $s$ ein Schnitt in $P$, so induziert $s$ eine Karte für jedes induzierte Bündel:
+
+$$
+\begin{aligned}
+P \times_{G} V & \rightarrow M \times V \\
+{[s(x), v] } & \mapsto(x, v)
+\end{aligned}
+$$
+
+Ist $\sigma \in \Gamma\left(P \times_{G} V\right)$, so wird $\sigma$ bezüglich $s$ durch $\sigma^{(s)} \in C^{\infty}(M, V)$ beschrieben, mit $\sigma(x)=\left[s(x), \sigma^{(s)}(x)\right]$. Ist $\tilde{s}=s \tilde{g}$, so ist $\sigma^{(\tilde{s})}=\tilde{g}^{-1} \sigma^{(x)}$, d.h. der Kartenwechsel bewirkt einen Bündelautomorphismus des trivialen Bündels $M \times V \rightarrow M \times V,(x, v) \mapsto\left(x, \tilde{g}^{-1} v\right)$.\\
+Ist $\varepsilon \in \Gamma(P \times$ konj $G)$ eine Eichtransformation, die bezüglich $s$ durch $\varepsilon^{(s)}$ beschrieben wird, so wird sie bezüglich $\tilde{s}$ durch
+
+$$
+\tilde{g}^{-1} \varepsilon^{(s)} \tilde{g}=\varepsilon^{(\tilde{s})}
+$$
+
+beschrieben.
+
+\subsection*{Satz}
+Bezüglich Karten, die durch $s$ gegeben sind, ist $\nabla$ durch $d+s^{*} \omega$ gegeben.\\
+Genauer gilt:
+
+$$
+\left(\nabla_{X} \sigma\right)^{(s)}=d \sigma^{(s)}(X)+s^{*} \omega(X) \sigma^{(s)}(X)
+$$
+
+Bezüglich $\tilde{s}=s g$ ist sie dann durch $d+\tilde{s}^{*} \omega$ gegeben und es gilt
+
+$$
+\tilde{s}^{*} \omega=g^{-1} A g+g^{-1} d g
+$$
+
+für $A=s^{*} \omega(\operatorname{vgl} .6 .25)$.
+
+\section*{Die Krümmung eines Zusammenhangs}
+\subsection*{Notation}
+Ist $H$ ein Zusammenhang auf $E, v \in T_{e} E$, so schreiben wir $v=\bar{v}+v^{\prime}$, mit $\bar{v} \in H_{e}$ und $v^{\prime} \in T_{e}^{\prime} E$.\\
+Ist $v \in T_{\pi(p)} M$, so bezeichnet $\tilde{v} \in T_{p} E$ einen Vektor mit $d \pi(\tilde{v})=v$ und $\overline{\tilde{v}}=: \bar{v}, \tilde{v}^{\prime}=: v^{\prime}$ den horizontalen und vertikalen Anteil. Vertikale Vektoren werden (auf Prinzipalbündeln durch $d L_{p}(\hat{v}), \hat{v} \in \mathfrak{g}$ ) zu vertikalen Vektorfeldern fortgesetzt, horizontale Vektoren (auf Prinzipalbündeln) werden zu (rechtsinvarianten) horizontalen Vektorfeldern fortgesetzt.
+
+\subsection*{Definition}
+Sei $\omega \in \Omega_{\mathrm{inv}}^{1}(P, \mathfrak{g})$ die Zusammenhangsform eines $G$-Zusammenhangs, so ist die Krümmungsform durch $\Omega^{\omega} \in \Omega_{\text {inv }, \text { hor }}^{2}(P, \mathfrak{g})$
+
+$$
+\Omega^{\omega}=D^{\omega} \omega
+$$
+
+definiert. Die dadurch definierte 2 -Form $F^{\omega} \in \Omega^{2}\left(M, P \times_{\text {Ad }} \mathfrak{g}\right)$ heißt die Krümmung von $\omega$.
+
+\subsection*{Bemerkung}
+Ist $E=P \times{ }_{\rho} V$, so ist $F^{\omega} \in \Omega^{2}(M, \operatorname{End}(E))$. Ist der Zusammenhang $\omega$ durch $\nabla$ beschrieben, dann schreibt man auch $F^{\nabla}$.
+
+\subsection*{Lemma}
+Sei $\Omega^{\omega}$ Krümmung eines $G$-Zusammenhangs in $P \rightarrow M$. Es gilt
+
+$$
+d L_{p} \Omega_{p}^{\omega}(X, Y)=\overline{[X, Y]}-[\bar{X}, \bar{Y}] .
+$$
+
+\section*{Beweis:}
+$$
+\begin{aligned}
+d L_{p} \Omega^{\omega}(X, Y) & =d L_{p}(d \omega(\bar{X}, \bar{Y}))=d L_{p}(\bar{X} \omega(\bar{Y})-\bar{Y} \omega(\bar{X})-\omega([\bar{X}, \bar{Y}])) \\
+& =-\omega^{\prime}([\bar{X}, \bar{Y}]) \stackrel{*}{=} \overline{[X, Y]}-[\bar{X}, \bar{Y}]
+\end{aligned}
+$$
+
+(*) gilt, denn
+
+$$
+[X, Y]=[\bar{X}, \bar{Y}]+\left[X^{\prime}, \bar{Y}\right]+\left[\bar{X}, Y^{\prime}\right]+\left[X^{\prime}, Y^{\prime}\right]=[\bar{X}, \bar{Y}]+\left[X^{\prime}, Y^{\prime}\right]
+$$
+
+also ist $\overline{[X, Y]}=\overline{[\bar{X}, \bar{Y}]}$, denn für $X^{\prime}, Y^{\prime}$ mit
+
+$$
+\begin{aligned}
+X^{\prime}(p) & =d L_{p}(\hat{X}), \hat{X} \in \mathfrak{g} \\
+Y^{\prime}(p) & =d L_{p}(\hat{Y}), \hat{Y} \in \mathfrak{g}
+\end{aligned}
+$$
+
+ist $\left[X^{\prime}, Y^{\prime}\right]=d L_{p}[\hat{X}, \hat{Y}]$, also vertikal.
+
+\subsection*{Bemerkung}
+Auf lokal trivialen Faserungen mit Zusammenhangsform $\omega^{\prime} \in \Omega^{1}\left(E, T^{\prime} E\right)$ ist die Krümmung durch $\Omega^{\omega}(X, Y)=\overline{[X, Y]}-[\bar{X}, \bar{Y}]=-\omega^{\prime}([\bar{X}, \bar{Y}]) \in T^{\prime} E$ definiert.
+
+\subsection*{Korollar}
+Es gilt für $\psi \in \Gamma\left(P x_{\rho} V\right)$
+
+$$
+F^{\nabla}(X, Y) \psi=\nabla_{X} \nabla_{Y} \psi-\nabla_{Y} \nabla_{X} \psi-\nabla_{[X, Y]} \psi
+$$
+
+\section*{Beweis:}
+Nach 6.17 gilt:
+
+$$
+\begin{aligned}
+F^{\nabla}(X, Y)[s, \tilde{\psi}] & =\left[s, \rho_{*}\left(\Omega^{\omega}(\tilde{X}, \tilde{Y})\right) \psi\right] \stackrel{(* *)}{=}-\left[s, \Omega^{\omega}(\tilde{X}, \tilde{Y}) \tilde{\psi}\right] \\
+& =[s,-\overline{[X, Y]} \tilde{\psi}+[\bar{X}, \bar{Y}] \tilde{\psi}] \\
+& =\nabla_{X} \nabla_{Y} \psi-\nabla_{Y} \nabla_{X} \psi-\nabla_{[X, Y]} \psi
+\end{aligned}
+$$
+
+wobei (**) gilt, denn
+
+$$
+(\xi \tilde{\psi})_{(p)}=\frac{d}{d t}(p \exp (t \xi))=\frac{d}{d t}(\rho(\exp (-t \xi)) \tilde{\psi}(p))=-\rho_{*}(\xi) \tilde{\psi}(p)
+$$
+
+Einmal wird $\xi \in \mathfrak{g}$ als Vektor und einmal als Endomorphismus aufgefasst.
+
+\subsection*{Satz (Strukturgleichung für die Krümmung)}
+Es gilt
+
+$$
+\Omega_{p}^{\omega}(\tilde{X}, \tilde{Y})=d \omega_{p}(\tilde{X}, \tilde{Y})+\left[\omega_{p}(\tilde{X}), \omega_{p}(\tilde{Y})\right]
+$$
+
+\section*{Beweis:}
+Beide Seiten sind in $\Omega^{2}(P, \mathfrak{g})$. Sei $\tilde{X}=\bar{X}+X^{\prime}$. Aufgrund der Linearität genügt es, die drei folgenden Fälle zu betrachten:
+
+\begin{enumerate}
+  \item Fall: $X^{\prime}=Y^{\prime}=0$.
+\end{enumerate}
+
+Dann ist $\Omega(\tilde{X}, \tilde{Y})=d \omega(\bar{X}, \bar{Y})$ und stimmt mit der rechten Seite übrein, da $\omega(\bar{X})=\omega(\bar{Y})=0$.\\
+2. Fall: $\bar{X}=\bar{Y}=0$.
+
+Dann ist $\Omega_{p}^{\omega}(\tilde{X}, \tilde{Y})=0$ und
+
+$$
+\begin{aligned}
+d \omega_{p}(\tilde{X}, \tilde{Y})+\left[\omega_{p}(\tilde{X}), \omega_{p}(\tilde{Y})\right] & =d \omega\left(X^{\prime}, Y^{\prime}\right)+\left[d L_{p}^{-1} X^{\prime}, d L_{p}^{-1} Y^{\prime}\right] \\
+& =X^{\prime} \omega\left(Y^{\prime}\right)-Y^{\prime} \omega\left(X^{\prime}\right)-\omega\left(\left[X^{\prime}, Y^{\prime}\right]\right)+\omega\left(\left[X^{\prime}, Y^{\prime}\right]\right)=0
+\end{aligned}
+$$
+
+nach Wahl von $X^{\prime}$ und $Y^{\prime}$ wie in 9.1.\\
+3. Fall: $X^{\prime}=0, \bar{Y}=0$.
+
+Dann ist $\Omega^{\omega}(\tilde{X}, \tilde{Y})=0$ und
+
+$$
+d \omega(\tilde{X}, \tilde{Y})+[\omega(\tilde{X}), \omega(\tilde{Y})]=\bar{X} \omega\left(Y^{\prime}\right)-Y^{\prime} \omega(\bar{X})-\omega\left(\left[\bar{X}, Y^{\prime}\right]\right)=0
+$$
+
+nach Wahl von $\bar{X}$ und $Y^{\prime}$ wie in 9.1.
+
+\subsection*{Bemerkung}
+Dies ist kein Widerspruch zu 6.18, denn 6.18 ist nicht anwendbar, denn dort ist $\eta \in \Omega_{\text {inv }, \text { hor }}$.
+
+\subsection*{Notation}
+Ist $\alpha \in \Omega^{r}(M, \mathfrak{g}), \beta \in \Omega^{s}(M, \mathfrak{g})$, so schreibt man $[\alpha \wedge \beta] \in \Omega^{r+s}(M, \mathfrak{g})$ für
+
+$$
+[\alpha \wedge \beta]\left(v_{1}, \ldots, v_{r+s}\right)=\frac{1}{r!s!} \sum \operatorname{sign}(\tau)\left[\alpha\left(v_{\tau(1)}, \ldots, v_{\tau(r)}\right), \beta\left(v_{\tau(r+1)}, \ldots, v_{\tau(r+s)}\right)\right]
+$$
+
+\subsection*{Bemerkung}
+Ist $\alpha \in \Omega^{1}(M, \mathfrak{g})$, so ist
+
+$$
+[\alpha \wedge \alpha](X, Y)=[\alpha(X), \alpha(Y)]-[\alpha(Y), \alpha(X)]=2[\alpha(X), \alpha(Y)] .
+$$
+
+Also kann man die Strukturformel schreiben als
+
+$$
+\Omega^{\omega}=d \omega+\frac{1}{2}[\omega \wedge \omega]
+$$
+
+\subsection*{Beispiel}
+Sei $G / H$ ein reduktiver homogener Raum, also existiert ein $\mathfrak{m} \subseteq \mathfrak{g}$, sodass $\mathfrak{g}=\mathfrak{h} \oplus \mathfrak{m}$ mit
+
+$$
+[\mathfrak{h}, \mathfrak{h}] \subseteq \mathfrak{h} \text { und }[\mathfrak{h}, \mathfrak{m}] \subseteq \mathfrak{m} .
+$$
+
+Es ist
+
+$$
+\begin{aligned}
+T G & =G \times \mathfrak{g}=G \times(\mathfrak{h} \oplus \mathfrak{m}) \\
+T(G / H) & =G \times_{\mathrm{Ad}} \mathfrak{m}
+\end{aligned}
+$$
+
+Das $H$-Prinzipalbündel $G$ trägt den kanonischen Zusammenhang: $\omega=\operatorname{pr}_{\mathfrak{h}}(\theta)$, wobei $\theta \in \Omega^{1}(G, \mathfrak{g})$ die Maurer-Cartan-Form ist $\theta=\left(\left.d L_{g}\right|_{1}\right)^{-1}$. Für linksinvariante Vektorfelder $X, Y$ gilt dann $\nabla_{X} Y=0$, also ist der kanonische Zusammenhang nicht notwendig torsionsfrei.\\
+Für die Maurer Cartan Form gilt $d \theta=-\frac{1}{2}[\theta \wedge \theta]$, denn
+
+$$
+\begin{aligned}
+d \theta(X, Y) & =X \theta(Y)-Y \theta(X)-\theta([X, Y])=-\left(\left.d L_{g}\right|_{1}\right)^{-1}[X, Y] \\
+& =-\frac{1}{2}[\theta \wedge \theta](X, Y)
+\end{aligned}
+$$
+
+also
+
+$$
+\begin{aligned}
+\Omega^{\omega} & \left.=d\left(\operatorname{pr}_{\mathfrak{h}} \theta\right)+\frac{1}{2}\left[\operatorname{pr}_{\mathfrak{h}} \theta \wedge \operatorname{pr}_{\mathfrak{h}} \theta\right]\right) \\
+& =-\frac{1}{2} \operatorname{pr}_{\mathfrak{h}}[\theta \wedge \theta]+\frac{1}{2}\left[\operatorname{pr}_{\mathfrak{h}} \theta \wedge \operatorname{pr}_{\mathfrak{h}} \theta\right] \\
+& =\frac{1}{2}\left(\left[\operatorname{pr}_{\mathfrak{h}} \theta \wedge \operatorname{pr}_{\mathfrak{h}} \theta\right]-\operatorname{pr}_{\mathfrak{h}}[\theta \wedge \theta]\right)
+\end{aligned}
+$$
+
+Ist $G / H$ symmetrisch, also $[\mathfrak{m}, \mathfrak{m}] \subseteq \mathfrak{h}$, so ist
+
+$$
+\operatorname{pr}_{\mathfrak{h}}[X, Y]=\left[\operatorname{pr}_{\mathfrak{h}} X, \operatorname{pr}_{\mathfrak{h}} Y\right]+\left[\operatorname{pr}_{\mathfrak{m}} X, \operatorname{pr}_{\mathfrak{m}} Y\right]
+$$
+
+also
+
+$$
+\Omega^{\omega}=-\frac{1}{2}\left[\operatorname{pr}_{\mathfrak{m}} \theta \wedge \operatorname{pr}_{\mathfrak{m}} \theta\right]
+$$
+
+Beispiel: $S^{n}=S O(n+1) / S O(n)$ (vgl. 8.11 im Skript Liegruppen). Dann ist\\
+$\mathfrak{g}=s o(n+1), \mathfrak{h}=s o(n) \subseteq s o(n+1), \mathfrak{m}=\mathbb{R}^{n} \rightarrow s o(n+1), v \mapsto\left(\begin{array}{cc}0 & -v^{T} \\ v & 0\end{array}\right)$.\\
+Es ist
+
+$$
+[v, w]=\left(\begin{array}{cc}
+0 & 0 \\
+0 & \left(-v_{i} w_{j}+v_{j} w_{i}\right)_{i j}
+\end{array}\right)
+$$
+
+also ist $S^{n}$ symmetrisch, also ist\\
+$\Omega(v, w)=\left(v_{i} w_{j}-v_{j} w_{i}\right)_{i, j}$ und $\left\langle\Omega^{\omega}\left(e_{i}, e_{j}\right) e_{k}, e_{l}\right\rangle= \begin{cases}1 & i=k, j=l, i \neq j \\ -1 & i=l, j=k, i \neq j \\ 0 & \text { sonst }\end{cases}$
+
+\subsection*{Bianchi-Identität}
+Es gilt:
+
+$$
+D^{\omega} \Omega^{\omega}=0, \text { also } d^{\nabla} F^{\nabla}=0 .
+$$
+
+\section*{Beweis:}
+$$
+d \Omega^{\omega}=d d \omega+\frac{1}{2} d[\omega \wedge \omega]=\frac{1}{2}([d \omega \wedge \omega]-[\omega \wedge d \omega])=[d \omega \wedge \omega]
+$$
+
+Also ist nach 6.18
+
+$$
+D^{\omega} \Omega^{\omega}=d \Omega^{\omega}+\left[\omega \wedge \Omega^{\omega}\right]=[d \omega \wedge \omega]+[\omega \wedge d \omega]+\frac{1}{2}[\omega \wedge[\omega \wedge \omega]]=0
+$$
+
+\subsection*{Lemma}
+Ist $\rho: G \rightarrow \operatorname{End}(V)$ und $\eta \in \Omega_{\text {inv }, \text { hor }}^{k}(P, V)$, so ist
+
+$$
+D^{\omega} D^{\omega} \eta=\rho_{*} \Omega^{\omega} \wedge \eta
+$$
+
+\section*{Beweis:}
+Es gilt
+
+$$
+\begin{aligned}
+D^{\omega}\left(d \eta+\rho_{*} \omega \wedge \eta\right) & =d\left(\rho_{*} \omega \wedge \eta\right)+\rho_{*} \omega \wedge d \eta+\rho_{*} \omega \wedge \rho_{*} \omega \wedge \eta \\
+& =\rho_{*} d \omega \wedge \eta+\left(\rho_{*} \omega \wedge \rho_{*} \omega\right) \wedge \eta \\
+& =\rho_{*} d \omega \wedge \eta+\frac{1}{2} \rho_{*}[\omega \wedge \omega] \wedge \eta \\
+& =\rho_{*} \Omega^{\omega} \wedge \eta
+\end{aligned}
+$$
+
+\subsection*{Aufgabe:}
+Zeigen Sie:
+
+$$
+F^{\nabla+A}=F^{\nabla}+d^{\nabla} A+[A \wedge A] .
+$$
+
+\section*{Das Utiyama-Lemma}
+In diesem Kapitel behandeln wir die Frage, welche Information in $\Omega^{\omega}$ über $\omega$ enthalten ist.
+
+\subsection*{Lemma}
+Sei $\omega$ ein $G$-Zusammenhang, $\varepsilon \in \mathcal{G}$. Es gilt:
+
+$$
+\Omega^{\varepsilon \omega}=\operatorname{Ad}(\varepsilon) \Omega^{\omega} .
+$$
+
+Insbesondere gilt: Ist $U \subseteq M$ offen, so gilt: $\Omega^{\omega}=\left.0\right|_{U}$ genau dann, wenn $s^{*} \Omega^{\omega}=0$ bezüglich eines (dann jedes) lokalen Schnittes auf $U$.
+
+\section*{Beweis:}
+Wir bezeichnen horizontale Vektoren bezüglich ${ }^{\varepsilon} \omega$ mit $\bar{X}^{\varepsilon}$ und die Krümmung von ${ }^{\varepsilon} \omega$ mit $\Omega^{\varepsilon}$. Nach 9.4 und 8.4 gilt:
+
+$$
+\begin{aligned}
+d L_{\varepsilon(p)} \Omega_{\varepsilon(p)}^{\varepsilon}\left(d \varepsilon_{p}(X), d \varepsilon_{p}(Y)\right) & =-{ }^{\varepsilon} \omega_{\varepsilon(p)}^{\prime}\left(\left[\overline{d \varepsilon_{p}(X)}{ }^{\varepsilon}, \overline{d \varepsilon_{p}(Y)}{ }^{\varepsilon}\right]\right. \\
+& =-{ }^{\varepsilon} \omega_{\varepsilon(p)}^{\prime}\left(\left[d \varepsilon_{p}(\bar{X}), d \varepsilon_{p}(\bar{Y})\right]\right] \\
+& =-d \varepsilon_{p} \omega_{p}^{\prime}([\bar{X}, \bar{Y}]) \\
+& =d L_{\varepsilon(p)} \Omega_{p}([X, Y])
+\end{aligned}
+$$
+
+Dabei gilt das letzte Gleichzeitszeichen, da $\varepsilon \circ L_{p}=L_{\varepsilon(p)}$. Also gilt
+
+$$
+\varepsilon^{*} \Omega^{\varepsilon}=\Omega
+$$
+
+Ist $\tilde{\varepsilon}: P \rightarrow G$ durch $\varepsilon(p)=p \tilde{\varepsilon}(p)$ definiert, so ist
+
+$$
+\Omega_{p}=\left(\varepsilon^{*} \Omega^{\varepsilon}\right)_{p}=R(\tilde{\varepsilon}(p))^{*} \Omega_{p}^{\varepsilon}=\operatorname{Ad}\left((\tilde{\varepsilon}(p))^{-1}\right) \Omega_{p}^{\varepsilon}=:\left(\operatorname{Ad}\left(\varepsilon^{-1}\right) \Omega^{\varepsilon}\right)_{p} .
+$$
+
+\subsection*{Korollar}
+Für die Krümmung $F^{\varepsilon}$ zu ${ }^{\varepsilon} \omega$ gilt damit
+
+$$
+F^{\varepsilon}=\varepsilon \circ F^{\omega}
+$$
+
+denn für $p \in P_{x}$ ist
+
+$$
+F_{x}^{\varepsilon}=\left[\varepsilon(p), \Omega_{\varepsilon(p)}^{\varepsilon}\right]=\left[\varepsilon(p), \Omega_{p}\right]=\varepsilon \circ F_{x}^{\omega}
+$$
+
+\subsection*{Definition}
+Eine Zusammenhang heißt flach, wenn $\Omega^{\omega}=0$ gilt.
+
+\subsection*{Definition}
+Ein Zusammenhang heißt lokal trivial, wenn es einen Bündelatlas gibt, in dessen Karten $\nabla$ durch $d$ beschrieben wird.
+
+\subsection*{Bemerkung}
+Ist $A=s^{*} \omega$, so ist $s^{*} \Omega^{\omega}=d A+\frac{1}{2}[A \wedge A]$. Also folgt mit 10.1, dass jeder lokal triviale Zusammenhang flach ist.
+
+\subsection*{Definition}
+Sei $M$ eine differenzierbare Mannigfaltigkeit. Dann versteht man unter einer Distribution auf $M$ ein Untervektorraumbündel von $T M$. Eine Distribution $D$ heißt lokal integrierbar, falls es es zu jedem $x \in M$ eine offene Umgebung $U$ und eine Familie von Untermannigfaltigkeiten $\left(N_{\lambda}\right)$ von $U$ gibt, sodass für alle $x^{\prime} \in U$ gilt $x^{\prime} \in N_{\lambda}$ für genau ein $\lambda \in \Lambda$ und $T_{x^{\prime}} N_{\lambda}=D_{x^{\prime}}$.
+
+\subsection*{Bemerkung}
+Eindimensionale Distributionen sind stets lokal integrierbar, da Vektorfelder integrierbar sind.
+
+\subsection*{Satz von Frobenius}
+Eine Distribution ist genau dann lokal integrierbar, wenn sie involutiv ist, d.h., falls für $X, Y \in D$ stets auch $[X, Y] \in D$ ist (Beweis z.B. in Lee, Differenzierbare Mannigfaltigkeiten).
+
+\subsection*{Satz}
+$H$ ist genau dann lokal integrierbar, wenn $\Omega^{H}=0$.
+
+\section*{Beweis:}
+Da $\Omega^{\omega}$ horizontal ist, gilt nach 9.4 gilt: $\Omega^{\omega}=0$ genau dann, wenn für horizontale Vektorfelder $X, Y$ auch $[X, Y]$ horizontal ist.
+
+\subsection*{Satz}
+Für einen Zusammenhang $\omega$ ein einem $G$-Prinzipalbündel $E \rightarrow M$ sind äquivalent:
+
+\begin{enumerate}
+  \item $\omega$ ist flach.
+  \item $\omega$ ist lokal trivial.
+  \item Für jedes $x \in M$ existiert eine offene Umgebung $U$ und ein $s \in \Gamma U$, sodass $\nabla s=0$ auf $U$ gilt.
+  \item Für jedes $x \in M$ gibt es eine offene Umgebung $U$, sodass die Parallelverschiebung $\tau_{\gamma}: E_{x} \rightarrow E_{y}$ unabhängig von der Wahl von $\gamma$ von $x$ nach $y$ ist.
+\end{enumerate}
+
+\section*{Beweis:}
+Es gilt offenbar $2 . \Rightarrow 3$. und $2 \Rightarrow 4,2 \Rightarrow 1$. wurde bereits in 10.5 gezeigt.\\
+$1 \Rightarrow 2$ Ist $\Omega^{\omega}=0$, so gibt es nach dem Satz von Frobenius zu jedem $e \in E$ eine Integralmannigfaltigkeit $\tilde{M}$. Die Einschränkung der Bündelprojektion $\pi \mid \tilde{M} \rightarrow M$ ist ein lokaler Diffeomorphismus bei $x$, da $T_{x^{\prime}} \tilde{M}=H_{x^{\prime}}$ für alle $x^{\prime} \in \tilde{M}$, also ist $s=(\pi \mid U)^{-1}$ ein lokaler horizontaler Schnitt. Ist $s$ ein horizontaler Schnitt, so ist $H$ bezüglich der durch $s$ gegebenen Karte trivial, denn $s^{*} \omega=0$.\\
+$4 \Rightarrow 3$ Sei $x \in U, e \in E_{x}, \gamma$ ein Weg von $x$ nach $y$. Dann ist ein Schnitt $s$ durch $s(y)=\tau_{\gamma}(e)$ wohldefiniert. Damit ist $s$ ein Schnitt mit $\nabla s=0$.\\
+$3 \Rightarrow 1$ Ist $s$ ein flacher Schnitt, so ist $s(U) \subseteq E$ eine Integralmannigfaltigkeit für $H$, also $s^{*} \Omega^{\omega}=0$ und 1 . folgt mit 10.1.
+
+\subsection*{Bemerkung}
+Ist in einem Prinzipalbündel ein flacher lokaler Schnitt $s \in \Gamma P \mid U$, d.h. ein lokaler Schnitt mit $\nabla s=0$ gegeben, so ist natürlich auch für jedes $g \in G$ durch $\tilde{s}=s g$ ein Schnitt mit $\nabla \tilde{s}=0$ gegeben. Für flache Zusammenhänge folgt also in Prinzipalbündeln sofort, dass zu jedem $x \in P$ und $p \in P_{x}$ ein lokaler Schnit $s$ mit $s(x)=p$ und $\nabla s=0$ existiert.\\
+Für $G$-Faserbündel folgt aus Satz 11.10 ebenfalls, dass $\omega$ genau dann flach ist, wenn $\omega$ lokal trivial ist, denn die Trivialisierung des Prinzipalbündels liefert eine des assoziierten Faserbündels. Da die Parallelverschiebungen eines $G$-Faserbündels denen im zugrunde liegenden Faserbündel entsprechen, ist die Äquivalenz aus 1. und 4. aus 10.10 für Faserbündel ebenso gültig. Damit folgt natürlich auch die Existenz flacher Schnitte. Umgekehrt folgt nicht aus der Existenz eines flachen Schnitts in einem Faserbündel, dass der Zusammenhang flach ist, denn z.B. der Nullschnitt ist stets flach. Es gilt aber
+
+\subsection*{Korollar}
+Ist $E \rightarrow M$ ein $n$-dimensionales Vektorraumbündel mit einem linearen Zusammenhang $\nabla$. Dann ist $\nabla$ genau dann flach, wenn es zu jedem $x \in M$ eine offene Umgebung $U \subseteq M$ gibt und $n$ flache Schnitte $s_{1}, \ldots, s_{n} \in \Gamma E \mid U$, sodass $\left(s_{1}(x), \ldots, s_{n}(x)\right)$ eine Basis von $E_{x}$ ist.
+
+\subsection*{Korollar}
+Ist $M$ einfach zusammenhängend, so ist ein $G$-Faserbündel $E \rightarrow M$ mit Zusammenhang $\nabla$ genau dann isomorph zu ( $M \times F, d$ ), wenn seine Krümmung null ist.
+
+\subsection*{Definition}
+\begin{enumerate}
+  \item Eine Eichtransformation $\varepsilon \in \Gamma \operatorname{Aut}(P)$ heißt $x$-basiert, wenn $\varepsilon(x)=\operatorname{id}_{P_{x}}$.
+  \item Sei $Z(P)=R(d \pi)$ das affine Bündel, dessen Schnitte die Zusammenhänge sind. Zwei 1-Jets $[\omega]_{x}^{1}$ und $[\tilde{\omega}]_{x}^{1}$ heißen strikt eichäquivalent, wenn für eine, dann für jede Wahl von Repräsentanten eine $x$-basierte Eichtransformation existiert mit $[\tilde{\omega}]_{x}^{1}=\left[{ }^{\varepsilon} \omega\right]_{x}^{1}$. Wir notieren die Äquivalenzklassen mit $[[\omega]]_{x}^{1}$.
+\end{enumerate}
+
+\subsection*{Utiyama-Lemma}
+Es gilt:
+
+$$
+F_{x}^{\omega}=F_{x}^{\tilde{\omega}} \Leftrightarrow[[\omega]]_{x}^{1}=[[\tilde{\omega}]]_{x}^{1}
+$$
+
+\section*{Beweis:}
+,, ${ }^{*}$ Ist $[[\omega]]_{x}^{1}=[[\tilde{\omega}]]_{x}^{1}$, so existiert eine Eichtransformation mit $\varepsilon(x)=1$, mit $\tilde{\omega}={ }^{\varepsilon} \omega$, also $\Omega^{\tilde{\omega}}=\operatorname{Ad}(\varepsilon) \Omega^{\omega}$ und folglich $\Omega_{x}^{\tilde{\omega}}=\Omega_{x}^{\omega}$.\\
+," $\Rightarrow$ " Sei o.B.d.A. $U=\stackrel{\circ}{D}$ der offene Ball $\operatorname{im} \mathbb{R}^{n}, x=0$. Sei $e \in E_{0}$. Definiere $s$ und $\tilde{s}$ auf $U$ durch $s(y)=\tau_{\gamma_{y}}^{\omega}(e)$, bzw. $\tilde{s}(y)=\tau_{\gamma_{y}}^{\tilde{\omega}}(e)$, wobei $\gamma_{y}(t)=t y$. Die Schnitte $s$ und $\tilde{s}$ sind nicht notwendigerweise horizontal, aber $\nabla_{v} s=$ 0 und $\nabla_{v} \tilde{s}=0$ für radiale Vektoren $v$.\\
+Sei $\varepsilon$ durch $\varepsilon(s)=\tilde{s}$ definiert. Dann ist $\varepsilon$ eine $x$-basierte Eichtransformation.\\
+Beh: $[\tilde{\omega}]_{x}^{1}=\left[{ }^{\varepsilon} \omega\right]_{x}^{1}$. Da ${ }^{\varepsilon} \omega$ und $\tilde{\omega}$ offenbar denselben radialen Paralleltransport haben, genügt es noch zu zeigen:\\
+Lemma: Seien $A_{j} \in \Omega^{1}(\stackrel{\circ}{D}, \mathfrak{g}), j=1,2$. und $F_{j}=d A_{j}+\frac{1}{2}\left[A_{j} \wedge A_{j}\right]$. Ist $F_{1,0}=F_{2,0}$ und haben $A_{1}$ und $A_{2}$ triviale radiale Parallelverschiebung, dann haben $A_{1}$ und $A_{2}$ denselben 1-Jet bei 0, d.h. ist
+
+$$
+A_{1}=\sum a_{\mu} d x_{\mu}, A_{2}=\sum \tilde{a}_{\mu} d x_{\mu} \text { mit } \tilde{a}_{\mu}, a_{\mu} \in C^{\infty}(\stackrel{\circ}{D}, \mathfrak{g})
+$$
+
+so ist $a_{\mu}(0)=\tilde{a}_{\mu}(0)$ und $\partial_{\nu} a_{\mu}(0)=\partial_{\nu} \tilde{a}_{\mu}(0)$ für alle $\nu, \mu$.
+
+\section*{Beweis:}
+Hat $A$ einen trivialen radialen Paralleltransport, so ist $A_{t v}(v)=0$, also
+
+$$
+\sum_{\mu} a_{\mu}(t v) d x_{\mu}(v)=\sum_{\mu} a_{\mu}(t v) v_{\mu}=0
+$$
+
+für alle $v$ und $t \neq 0$, also $a_{\mu}(0)=0$ aus Stetigkeitsgründen. Ebenso folgt $\tilde{a}_{\mu}(0)=0$. Ableiten von (*) nach $t$ ergibt,
+
+$$
+\sum_{\mu, \nu} \partial_{\nu} a_{\mu}(t v) v_{\nu} v_{\mu}=0
+$$
+
+also ist ( $\partial a_{\mu}$ ) schiefsymmetrisch und ebenso ( $\partial_{\nu} \tilde{a}_{\mu}$ ). Da $a_{\mu}(0)=0$ für alle $\mu$ ist also
+
+$$
+2 \partial_{\mu} a_{\nu}(0)=\frac{\partial}{\partial x_{\mu}} a_{\nu}(0)-\frac{\partial}{\partial x_{\nu}} a_{\mu}(0)=\left(F_{1,0}\right)_{\mu \nu}=\left(F_{2,0}\right)_{\mu, \nu}=2 \partial_{\mu} \tilde{a}_{\nu}(0)
+$$
+
+\subsection*{Korollar}
+Durch
+
+$$
+J_{x}^{1}(Z(p)) / J_{x}^{2}(\operatorname{Aut} P) \rightarrow \Lambda^{2} T_{x}^{*} M \otimes \hat{\mathfrak{g}}, \quad[[\omega]]_{x}^{1} \mapsto F_{x}^{\omega}
+$$
+
+ist ein Isomorphismus gegeben.
+
+\section*{Beweis:}
+Die Abbildung ist wohldefiniert, da ${ }^{g} A=g A g^{-1}+g d g^{-1}$. Also ist die Wirkung von $\mathcal{G}=\Gamma$ Aut $P$ auf $J^{1} Z(P)$ durch $J^{2}$ Aut $P$ gegeben und die Abbildung ist injektiv nach dem Utiyama-Lemma.\\
+Es genügt, die Surjektivität lokal zu zeigen.\\
+Sei lokal $F=\sum b_{\mu \nu} d x_{\mu} \wedge d x_{\nu} \in \Omega^{2}(M, \mathfrak{g})$. Sei $A:=\sum x_{\mu} b_{\mu \nu} d x_{\mu} \in \Omega^{1}(M, \mathfrak{g})$. Dann ist $F_{0}=F_{0}^{A}=d A_{0}+\frac{1}{2}\left[A_{0} \wedge A_{0}\right]=d A_{0}$.
+
+\section*{$11 U(1)$-Prinzipalbündel}
+\subsection*{Bemerkung}
+Sei $P$ ein $U(1)$-Prinzipalbündel. Dann vereinfachen sich viele Objekte, da $U(1)$ abelsch ist.
+
+\begin{enumerate}
+  \item $\operatorname{Aut}(P)=P \times_{\text {konj }} U(1)=M \times U(1),[p, g] \mapsto(\pi(p), g)$ und $\Gamma \operatorname{Aut} P= C^{\infty}(M, U(1))$.
+  \item $\mathfrak{g}=i \mathbb{R}$. Sind $\omega, \tilde{\omega}$ Zusammenhangsformen, so ist $\omega-\tilde{\omega} \in \Omega^{1}(M, P \times \operatorname{Ad} \mathfrak{g})=\Omega^{1}(M, i \mathbb{R})$.
+  \item Ist $\omega$ eine Zusammenhangsform, so ist die Krümmung $F^{\omega} \in \Omega^{2}(M, i \mathbb{R})$. Nach der Bianchi-Identität ist $d F^{\omega}=0$.\\
+Ist $\tilde{\omega}=\omega+\eta$, so ist $F^{\tilde{\omega}}=F^{\omega}+d \eta$.
+  \item $\Omega_{\text {inv }}^{k}(P, i \mathbb{R}) \ni \omega \Leftrightarrow R_{g}^{*} \omega=\operatorname{Ad}\left(g^{-1}\right) \omega=\omega$.
+  \item $\Omega_{\text {inv }, \text { hor }}^{k}(P, i \mathbb{R}) \cong \Omega^{k}\left(M, P \times{ }_{\text {Ad }} i \mathbb{R}\right)=\Omega^{k}(M, i \mathbb{R})$.
+\end{enumerate}
+
+Der Isomorphismus $\Omega_{\text {inv }, \text { hor }}^{k}(P, i \mathbb{R}) \rightarrow \Omega^{k}(M, i \mathbb{R})$ ist durch $\eta \mapsto s^{*} \eta$ für einen beliebigen Schnitt $s \in \Gamma P$ gegeben, mit Inversem $\eta \mapsto \pi^{*} \eta$.
+
+\subsection*{Notation}
+$$
+\begin{aligned}
+\bar{\omega} & :=\frac{1}{2 \pi i} \omega \in \Omega_{\mathrm{inv}}^{1}(P) \\
+\overline{F^{\omega}} & :=\frac{1}{2 \pi i} F^{\omega} \in \Omega^{2}(M)
+\end{aligned}
+$$
+
+\subsection*{Definition und Satz}
+$\operatorname{Durch}\left[\overline{F^{\omega}}\right] \in H_{d R}^{2}(M)=\operatorname{ker} d^{(2)} / \operatorname{bild} d^{(1)}$ ist eine wohldefinierte Kohomologieklasse unabhängig von der Wahl von $\omega$ gegeben und $c_{1}(P)=\left[\overline{F^{\omega}}\right]$ heißt die 1 . Chernklasse von $P$.
+
+\subsection*{Korollar}
+\begin{enumerate}
+  \item Sind $P \cong \tilde{P}$ isomorphe $U(1)$-Prinzipalbündel, so ist $c_{1}(P)=c_{1}(\tilde{P})$.
+  \item Ist $f: N \rightarrow M$, so ist $c_{1}\left(f^{*} P\right)=f^{*} c_{1}(P)$.
+  \item Ist $P$ trivial, so ist $c_{1}(P)=0$.
+  \item $P$ besitzt genau dann einen flachen Zusammenhang. wenn $c_{1}(P)=0$ gilt.
+\end{enumerate}
+
+\subsection*{Notation}
+$$
+\mathcal{F}(P):=\left\{\eta \in \Omega^{2}(M) \mid d \eta=0,[\eta]=c_{1}(P)\right\}
+$$
+
+\subsection*{Lemma}
+Bezeichne $\mathcal{C}(P)$ den Raum der $U(1)$-Zusammenhänge auf $P$.\\
+Die Abbildung $\psi: \mathcal{C}(P) / \mathcal{G} \rightarrow \mathcal{F}(P),[\omega] \mapsto \overline{\Omega^{\omega}}=d \bar{\omega} \in \Omega^{2}(M)$ ist wohldefiniert und surjektiv.
+
+\section*{Beweis:}
+Sei $\omega \in \mathcal{C}(P), \varepsilon \in \mathcal{G}, \Omega^{\omega}=d \omega$ und $\Omega^{\varepsilon}:=\Omega^{\varepsilon} \omega$.
+
+\begin{enumerate}
+  \item Die Abbildung $\psi$ ist wohldefiniert, denn $\Omega^{\varepsilon}=\operatorname{konj}(\varepsilon) \Omega=\Omega$.
+  \item Sei $\eta \in \Omega^{2} M$ mit $\left[\overline{\Omega^{\omega}}\right]=[\eta]$ für ein $\omega \in \mathcal{C}(P)$. Dann ist $\overline{\Omega^{\omega}}-\eta=-d \alpha$ für ein $\alpha \in \Omega^{1}(M)$, also $\eta=\overline{\Omega^{\omega+2 \pi i \alpha}}$, also $[\eta]=\psi(\omega+2 \pi i \alpha)$.
+\end{enumerate}
+
+\subsection*{Notation}
+$$
+\begin{array}{ll}
+Z^{1}(M, \mathbb{Z}) & :=\left\{\omega \in \Omega^{1}(M, i \mathbb{R}), d \omega=0, \int_{\gamma} \bar{\omega} \in \mathbb{Z} \text { für alle geschlossenen Wege }\right\} . \\
+H_{d R}^{1}(M, \mathbb{Z}) & :=Z^{1}(M, \mathbb{Z}) / d \Omega^{0}(M) \\
+H_{d R}^{1}(M) & :=\operatorname{ker} d^{(1)} / d \Omega^{0}(M) \\
+\operatorname{Pic}(M) & :=H_{d R}^{1}(M) / H_{d R}^{1}(M, \mathbb{Z}) \\
+C_{\eta}(P) & :=\left\{\omega \in \mathcal{C}(P) \mid \Omega^{\omega}=\eta\right\}
+\end{array}
+$$
+
+\subsection*{Satz}
+Für jedes $\eta \in \mathcal{F}(P)$ gilt:
+
+$$
+C_{\eta}(P) / \mathcal{G} \cong \operatorname{Pic}(M)
+$$
+
+\subsection*{Korollar (Satz von Weyl)}
+Die Abbildung $\psi: \mathcal{C}(P) / \mathcal{G} \rightarrow \mathcal{F}(P)$ ist surjektiv und $\psi^{-1}(\eta) \cong \operatorname{Pic}(M)$. Ist insbesondere $H_{\mathrm{dR}}^{1}(M)=0$, so ist $\psi$ bijektiv.
+
+\section*{Beweis:}
+Sei $\eta \in \mathcal{F}(P)$. Für $\omega, \tilde{\omega} \in \mathcal{C}_{\eta}(P)$ ist also $d \omega=d \tilde{\omega}=2 \pi i \eta$ und $\omega-\tilde{\omega}=2 \pi i \alpha$, für ein $\alpha \in \Omega^{1}(M)$, mit $d \alpha=0$. Sei $\omega \in \mathcal{C}_{\eta}(P)$ fest gewählt.\\
+Setze
+
+$$
+\varphi_{\omega}: \mathcal{C}_{\eta}(P) \rightarrow H_{d R}^{1}(M), \tilde{\omega} \mapsto\left[\frac{1}{2 \pi i}(\omega-\tilde{\omega})\right]
+$$
+
+Die Abbildung $\varphi_{\omega}$ ist surjektiv, denn für $\beta \in \operatorname{ker} d^{(1)}$ ist $\omega+2 \pi i \beta \in \mathcal{C}_{\eta}$ und $\varphi_{\omega}(\omega+2 \pi i \beta)=\beta$.\\
+Behauptung Ist $\tilde{\omega}_{2}={ }^{\varepsilon} \tilde{\omega}_{1}$, so ist $\overline{\tilde{\omega}_{1}}-\overline{\tilde{\omega}_{2}} \in H^{1}(M, \mathbb{Z})$.\\
+Beweis der Behauptung: Sei $\tilde{\omega}_{2}=g \tilde{\omega}_{1} g^{-1}+g^{-1} d g=\tilde{\omega}_{1}+g^{-1} d g$, für $g \in C^{\infty}(M, U(1))$ und $\gamma:[0,1] \rightarrow M$ ein geschlossener Weg. Sei $f:[0,1] \rightarrow \mathbb{R}$ mit $f(0)=f(1)-k$, mit $k \in \mathbb{Z}$ durch $g(\gamma(t))=e^{2 \pi i f(t)}$ definiert. Dann ist $g d g^{-1}=-2 \pi i f^{\prime}$ und $\int_{\gamma} g d g^{-1}=2 \pi i k$.\\
+Also ist
+
+$$
+\bar{\varphi}_{\omega}: \mathcal{C}_{\eta}(P) / \mathcal{G} \rightarrow \operatorname{Pic}(M)
+$$
+
+wohldefiniert.\\
+Behauptung: Die Abbildung $\bar{\varphi}_{\omega}$ ist injektiv: Seien $\left[\omega_{1}\right],\left[\omega_{2}\right] \in \mathcal{C}_{\eta}(P) / \mathcal{G}$ mit $\left[\bar{\omega}_{1}-\bar{\omega}_{2}\right] \in H_{d R}^{1}(M, \mathbb{Z})$. Zu zeigen ist:\\
+Es existiert ein $g \in C^{\infty}(M, U(1))$, mit $\omega_{1}=\omega_{2}+g d g^{-1}$.\\
+Sei $\alpha=\frac{1}{2 \pi i}\left(\omega_{1}-\omega_{2}\right), \psi_{\alpha}: \pi_{1}(M) \rightarrow \mathbb{Z},[\gamma] \mapsto \int_{\gamma} \alpha$. Dann existiert eine Abbildung
+
+$$
+\mu: M \rightarrow S^{1}, \text { mit } \psi_{\alpha}([\gamma])=[\mu \circ \gamma], \text { also } \oint_{\gamma} \alpha=[\mu \circ \gamma]=\frac{1}{2 \pi i} \int_{\gamma} \mu^{-1} d \mu
+$$
+
+da $S^{1}$ ein $K(\mathbb{Z}, 1)$-Raum ist, (vgl. z.B. Hatcher, Algebraic Topology, 1B, S. 90, Prop. 1B9).\\
+Definiere $f \in C^{\infty}(M)$ durch
+
+$$
+f(x)=\int_{x_{0}}^{x}\left(\alpha-\frac{1}{2 \pi i} \mu^{*} \theta\right)
+$$
+
+wobei $\theta$ die Maurer-Cartanform auf $U(1)$ ist, also $\mu^{*} \theta=\mu^{-1} d \mu$. Dies ist unabhängig von der Wahl des Weges von $x_{0}$ nach $x$, da für geschlossene Wege gilt: $\int_{\gamma} \alpha=[\mu \circ \gamma]=\frac{1}{2 \pi i} \int_{\gamma} \mu^{*} \theta$. Setze also
+
+$$
+g(x)=\mu(x) e^{2 \pi i f(x)}
+$$
+
+Damit ist\\
+$g^{-1} d g=\mu^{-1} e^{-2 \pi i f}\left(d \mu e^{2 \pi i f}+2 \pi i \mu d f e^{2 \pi i f}\right)=\mu^{-1} d \mu+2 \pi i d f=2 \pi i \alpha=\omega_{1}-\omega_{2}$.
+
+\subsection*{Beispiel}
+\begin{enumerate}
+  \item Sei $\pi: S^{3} \rightarrow S^{2} ;\left(z_{1}, z_{2}\right) \mapsto\left[z_{1}: z_{2}\right]$ die Hopffaserung mit Zusammenhang
+\end{enumerate}
+
+$$
+\begin{aligned}
+\omega_{p}(Q) & =i<Q, i p>=i\left(-p_{2} q_{1}+q_{2} p_{1}-q_{3} p_{4}+q_{4} p_{3}\right)(\text { vgl. }(6.21)), \text { also } \\
+\omega & =i\left(-y_{1} d x_{1}+x_{1} d y_{1}-y_{2} d x_{2}+x_{2} d y_{2}\right) \text { mit } z_{j}=x_{j}+i y_{j} \text { und } \\
+\Omega^{\omega} & =d \omega=2 i\left(d x_{1} \wedge d y_{1}+d x_{2} \wedge d y_{2}\right)=-\left(d z_{1} \wedge d \bar{z}_{1}+d z_{2} \wedge d \bar{z}_{2}\right)
+\end{aligned}
+$$
+
+mit $d z_{1}=d x_{1}+i d y_{1}, d \bar{z}_{1}=d x_{1}-i d y_{1}, d z_{2}=d x_{2}+i d y_{2}, d \bar{z}_{2}=d x_{2}-i d y_{2}$.\\
+Sei $U=\left\{\left[z_{1}: z_{2}\right] \in \mathbb{C} P^{1} \mid z_{2} \neq 0\right\} \cong \mathbb{C},\left[z_{1}: z_{2}\right] \mapsto \frac{z_{1}}{z_{2}}$, dann ist auf $U$ ein Schnitt, $s: U \rightarrow S^{3}$ durch $\mathbb{C} \rightarrow S^{3}$
+
+$$
+s(z)=\frac{1}{1+|z|^{2}}(z, 1)
+$$
+
+gegeben und
+
+$$
+\int_{S^{2}} s^{*} \bar{\Omega}_{\omega}=-\frac{1}{2 \pi i} \int_{\mathbb{C}} \frac{1}{\left(1+|z|^{2}\right)^{2}} d z \wedge d \bar{z}=-\frac{1}{\pi} \int_{\mathbb{R}^{2}} \frac{1}{\left(1+x^{2}+y^{2}\right)^{2}} d x d y=-1
+$$
+
+(Übungsaufgabe!)\\
+2. $P_{S O}\left(S^{2}\right) \rightarrow S^{2}$ ist ebenfalls $U(1)=S O(2)$-Prinzipalbündel. Es stellt sich die Frage, ob $P_{S O}\left(S^{2}\right)=S^{3}$ das Hopfbündel ist.\\
+Ist $\omega$ der Levi-Civita-Zusammenhang und $\omega_{S^{2}}$ die kanonische Volumenform auf $S^{2}$, so ist $\Omega^{\omega}=i \omega_{S^{2}}$ und $\int_{S^{2}} \Omega^{\omega}=4 \pi i$, also $\frac{1}{2 \pi i} \int_{S^{2}} \Omega^{\omega}=2$, also ist $P_{S O}\left(S^{2}\right) \rightarrow S^{2}$ nicht isomorph zum Hopfbündel.
+
+\subsection*{Satz}
+Ist $M$ eine geschlossene, orientierte, 2-dimensionale Mannigfaltigkeit, so ist
+
+$$
+\int_{M} c_{1}(P) \in \mathbb{Z}
+$$
+
+Ist $\operatorname{dim} M>2$, so gilt für jede 2 -dimensionale, geschlossene, orientierte Untermannigfaltigkeit $T$ :
+
+$$
+\int_{T} c_{1}(P) \in \mathbb{Z}
+$$
+
+\section*{Beweis:}
+Sei $\operatorname{dim} M=2$. Sei $P \rightarrow M$ ein $U(1)$-Prinzipalbündel, $E=P \times_{U(1)} \mathbb{C}, \sigma: M \rightarrow E$ ein Schnitt. OBdA habe $\sigma$ nur isolierte Nullstellen $N_{1}, \ldots, N_{n}$ (Transversalitätssätze aus der Differentialtopologie, Satz von Sard). Seien $D_{j}$ Koordinatenkugeln um $N_{j}$, sodass $D_{i} \cap D_{j}=\emptyset$ und $P \mid D_{j}$ trivial ist. Dann definiert $\sigma$ einen Schnitt in $P \mid\left(M \backslash\left(\cup \stackrel{\circ}{D}_{j}\right)\right)$. Seien $\sigma_{j}$ Schnitte in $P \mid D_{j}$. Dann folgt mit dem Satz von Stokes aus $\Omega^{\omega}=d^{\omega} \omega$
+
+$$
+\begin{aligned}
+\int_{M} c_{1}(P) & =\int_{M \backslash D_{j}} \sigma^{*} \Omega^{\omega}+\sum \int_{D_{j}} \sigma_{j}^{*} \Omega^{\omega} \\
+& =\sum_{j} \int_{\partial D_{j}}\left(\sigma_{j}^{*} \omega-\sigma^{*} \omega\right)
+\end{aligned}
+$$
+
+Sei $g_{j}: \partial D_{j}=S^{1} \rightarrow S^{1}$ durch $\sigma_{j}=\sigma g_{j}$ definiert. Dann ist
+
+$$
+\begin{gathered}
+\sigma_{j}^{*} \omega-\sigma^{*} \omega=g_{j}^{-1} d g_{j}=g_{j}^{*} \theta \\
+2 \pi i \int_{M} c_{1}(P)=\sum_{j} \int_{\partial D_{j}} g_{j}^{*} \theta \in 2 \pi \mathbb{Z}(*)
+\end{gathered}
+$$
+
+\subsection*{Satz}
+Die $S^{1}$-Prinzipalbündel über $S^{2}$ sind durch $k \in \mathbb{Z}$ klassifiziert; genauer: Zu jedem $k \in \mathbb{Z}$ gibt es genau eine Isomorphieklasse von $S^{1}$-Prinzipalbündeln mit $c_{1}(P)=k$.
+
+\section*{Beweis:}
+Wir betrachten $S^{2}$ als topologischen Raum $S^{2}=D_{1} \cup D_{2} /\left(\partial D_{1} \sim \partial D_{2}\right)$ mit $D_{j} \cong D^{2}$. Sei $g: S^{1} \rightarrow S^{1}$ eine differenzierbare Abbildung und $P_{g}:= \left(D_{1} \times S^{1}\right) \sqcup\left(D_{2} \times S^{1}\right) /\left(x, e^{i \vartheta}\right) \sim\left(x, g(x) e^{i \vartheta}\right)$.\\
+Behauptung: Die Isomorphieklasse von $P_{g}$ hängt nur von der Homotopieklasse von $g$ ab.\\
+Seien $g \simeq \tilde{g}$, dann existiert eine differenzierbare Abbildung $H:[0,1] \times S^{1} \rightarrow S^{1}$ mit $H(0, x)=g(x), H(1, x)=\tilde{g}(x)$. Sei $Q=\left(D_{1} \times[0,1] \times S^{1}\right) \sqcup\left(D_{2} \times[0,1] \times\right.$\\
+$\left.S^{1}\right) /\left(x, t, e^{i \vartheta}\right) \sim\left(x, t, H(t, x) e^{i \vartheta}\right)$. Dann ist $Q \rightarrow S^{2} \times[0,1]$ ein (berandetes) $S^{1}$-Prinzipalbündel.\\
+Sei $i_{j}: S^{2} \rightarrow S^{2} \times[0,1], x \mapsto(x, j)$. Dann ist $i_{0}^{*} Q=P_{g}$, und $i_{1}^{*} Q=P_{\tilde{g}}$, also ist $P_{g} \cong P_{\tilde{g}}$, da $i_{0}$ und $i_{1}$ homotop sind (vgl. 1.23).\\
+Sei $P(k)$ das $S^{1}$-Prinzipalbündel über $S^{2}$ zu $z \rightarrow z^{k}$, so ist $\int_{S^{2}} c_{1}(P(k))=k$ nach (*).
+
+\subsection*{Beispiel}
+$$
+\int_{S^{2}} c_{1}\left(P_{S O}\left(S^{1}\right)\right)=2
+$$
+
+(vgl. Quantisierung von Dirac-Monopolen (1975) von Wu, Yang. Gesucht: $\nabla$ mit $F^{\nabla}=c \cdot \operatorname{vol}(M), A_{ \pm}=i c(1 \mp \cos \vartheta) d \varphi$, auf $S^{2}$.)
+
+\section*{Charakteristische Klassen für Prinzipalbündel (Chern-Weil-Theorie)}
+Wir wollen nun die Ergebnisse aus Kapitel 11 auf beliebige $G$-Prinzipalbündel verallgemeinern. Dazu betrachten wir geeignete Abbildunge $\mathfrak{g} \rightarrow \mathbb{C}$. Wir betrachten in diesem Abschnitt stets $\mathbb{C}$-wertige lineare Abbildungen und Differentialformen.
+
+\subsection*{Definitionen und Notationen}
+\begin{enumerate}
+  \item Ein homogenes Polynom vom Grad $k$ auf $\mathfrak{g}$ ist eine Abbildung $p: \mathfrak{g} \rightarrow \mathbb{C}$ mit $p(X)=\sum_{i_{1} \leq \ldots \leq i_{k}} p_{i_{1} \ldots i_{k}} x_{i_{1}} \cdots x_{i_{k}}$, wobei $X=\sum x_{j} e_{j}$ bezüglich einer Basis $e_{1}, \ldots, e_{n}$ von $\mathfrak{g}$. Es bezeichne $P^{k}(\mathfrak{g})$ den Vektorraum der homogenen Polynome vom Grad $k$. Ein homogenes Polynom $p$ heißt invariant, $p \in P_{\text {inv }}^{k}(\mathfrak{g})$, falls $p(\operatorname{Ad}(g) X)=p(X)$ gilt.
+  \item $\operatorname{Sym}_{\text {inv }}^{k}(\mathfrak{g}):=\left\{f \in \operatorname{Sym}^{k}(\mathfrak{g}) \mid f\left(\operatorname{Ad}(g) X_{1}, \ldots, \operatorname{Ad}(g) X_{k}\right)=f\left(X_{1}, \ldots, X_{k}\right)\right\}$. $\operatorname{Sym}_{\text {inv }}(\mathfrak{g})=\oplus \operatorname{Sym}_{\text {inv }}^{k} \mathfrak{g}$ ist in kanonischer Weise ein Ring:
+\end{enumerate}
+
+$$
+\left.\left.(g h)\left(X_{1}, \ldots, X_{k+r}\right)=\frac{1}{(k+r)!} \sum_{r \in S} g\left(X_{\tau(1)}, \ldots, X_{\tau(k)}\right)\right) \cdot h\left(X_{\tau(k+1)}, \ldots, X_{\tau(k+r)}\right)\right)
+$$
+
+\subsection*{Lemma}
+\begin{enumerate}
+  \item Durch $\operatorname{Sym}(\mathfrak{g}) \rightarrow P(\mathfrak{g}), f \mapsto \varphi(f): X \mapsto f(X, \ldots, X)$ ist ein graduierter Algebrenisomorphismus gegeben. Die Umkehrung $P^{k} \mathfrak{g} \rightarrow \operatorname{Sym}^{k}(\mathfrak{g})$ ist durch $f \mapsto f_{(1,1,1, \ldots, 1)}$ gegeben, wobei $f_{(1 \ldots 1)}$ durch
+\end{enumerate}
+
+$$
+\frac{1}{k!} f\left(t_{1} X_{1}+\ldots+t_{k} X_{k}\right)=\sum_{\alpha \in \mathbb{N}_{0}^{k}} t^{\alpha} f_{\alpha}\left(X_{1}, \ldots, X_{k}\right)
+$$
+
+definiert ist (Polarisationsformel).\\
+2. Offenbar induziert die Abbildung in 1. einen Isomorphismus
+
+$$
+\operatorname{Sym}_{\text {inv }}^{k} \mathfrak{g} \rightarrow P_{\text {inv }}^{k} \mathfrak{g} .
+$$
+
+\subsection*{Beispiel}
+Sei $F(x)=\operatorname{tr}\left(X^{3}\right)$, so ist die zugehörige symmetrische Abbildung durch
+
+$$
+f\left(X_{1}, X_{2}, X_{3}\right)=\frac{1}{2} \operatorname{tr}\left(X_{1} X_{2} X_{3}+X_{2} X_{1} X_{3}\right)
+$$
+
+gegeben, denn $\operatorname{tr}\left(\left(t_{1} X_{1}+t_{2} X_{2}+t_{3} X_{3}\right)^{3}\right)=t_{1} t_{2} t_{3} \operatorname{tr}\left(X_{1} X_{2} X_{3}+X_{1} X_{3} X_{2}+\right.$ zykl. Perm. $)+\sum_{\alpha \neq(1, \ldots, 1)} t^{\alpha} \ldots$
+
+\subsection*{Bemerkung}
+Ist $\mathfrak{g} \subseteq M(n \times n, k)$, so ist $\operatorname{Ad}(g) X=g X g^{-1}$ und $p \in P_{\text {inv }}(\mathfrak{g})$ genau dann, wenn $p(X Y)=p(Y X)$ für alle $X \in G, Y \in \mathfrak{g}$. Für $\mathfrak{g}=M(n \times n, k)$ gilt dies aus Stetigkeitsgründen dann für alle $X, Y \in \mathfrak{g}$.
+
+\subsection*{Definition}
+Ist $\eta_{j} \in \Omega_{\text {inv }}^{l_{j}}(P, \mathfrak{g}), f \in \operatorname{Sym}_{\text {inv }}^{k}(\mathfrak{g})$, so ist
+
+$$
+f\left(\eta_{1} \wedge \ldots \wedge \eta_{k}\right):=f\left(\eta_{1}, \ldots, \eta_{k}\right) \in \Omega_{\mathrm{inv}}^{l k}(P, \mathbb{C})
+$$
+
+mit $l_{1}+\ldots+l_{k}=: l$ durch
+
+$$
+\begin{gathered}
+f\left(\eta_{1} \wedge \ldots \wedge \eta_{k}\right)\left(X_{1}, \ldots, X_{l k}\right)= \\
+=\frac{1}{l_{1}!\ldots l_{k}!} \sum_{\tau} \operatorname{sign}(\tau) f\left(\eta_{1}\left(X_{\tau(1)}, \ldots, X_{\tau(l)}\right), \ldots, \eta_{k}\left(X_{\tau(k(l-1)+1)}, \ldots, X_{\tau(k l)}\right)\right)
+\end{gathered}
+$$
+
+gegeben. Ist $\eta_{j} \in \Omega_{\text {inv }, \text { hor }}^{l}(P, \mathfrak{g})$, so ist $f\left(\eta_{1} \wedge \ldots \wedge \eta_{k}\right) \in \Omega^{l k}(M, \mathbb{C}), \operatorname{denn} f\left(\sigma^{*} \eta_{1} \wedge\right. \left.\ldots \wedge \sigma^{*} \eta_{k}\right)$ ist unabhängig von der Wahl des Schnittes $\sigma$ wohldefiniert.
+
+\subsection*{Beispiel}
+Sei $\operatorname{det}\left(t 11-\frac{1}{2 \pi i} X\right)=: \sum_{k=0}^{n} c_{k}(X) t^{n-k}$. Dann sind $c_{k}$ invariante Polynome
+
+$$
+\begin{aligned}
+& c_{1}(X)=\operatorname{tr}(X)\left(-\frac{1}{2 \pi i}\right) \\
+& c_{n}(X)=\operatorname{det}(X)\left(-\frac{1}{2 \pi i}\right)^{n}
+\end{aligned}
+$$
+
+Ist $X$ diagonalisierbar, so ist $c_{k}(X)=\left(-\frac{1}{2 \pi i}\right)^{k} \sigma_{k}\left(\lambda_{1}, \ldots, \lambda_{n}\right)$, wobei $\lambda_{j}$ die Eigenwerte und $\sigma_{k}$ die elementarsymmetrischen Polynome vom Grad $k$ sind.
+
+\subsection*{Bemerkung}
+Die Polynome $\sigma_{k}$ sind durch $\left(t+X_{1}\right) \ldots\left(t+X_{n}\right)=\sum_{k=0}^{n} t^{k} \sigma_{n-k}\left(x_{1}, \ldots, x_{n}\right)$ definiert.
+
+\subsection*{Bemerkung}
+Ist $\Omega=:\left(\Omega_{i j}\right)_{i j} \in \Omega_{\text {inv }, \text { hor }}^{2}(P, \mathfrak{g}), \mathfrak{g} \subseteq g l(n, \mathbb{C})$, so ist\\
+$c_{1}(\Omega)=-\frac{1}{2 \pi i} \operatorname{tr}(\Omega)=-\frac{1}{2 \pi i}\left(\Omega_{11}+\ldots+\Omega_{n n}\right) \in \Omega_{\mathrm{inv}, \mathrm{hor}}^{2}(P)=\Omega^{2}(M, \mathbb{C})$\\
+$c_{n}(\Omega)=\left(-\frac{1}{2 \pi i}\right)^{n} \operatorname{det} \Omega=\left(-\frac{1}{2 \pi i}\right)^{n} \sum_{\sigma \in(n)} \operatorname{sign}(\sigma) \Omega_{1 \sigma(1)} \wedge \ldots \wedge \Omega_{n \sigma(n)} \in \Omega^{2 n}(M, \mathbb{C})$
+
+\subsection*{Bemerkung}
+Ist $f \in P_{\mathrm{inv}}^{k}(\mathfrak{g}), \eta_{j} \in \Omega_{\mathrm{inv}}^{l_{j}}(P)$, so ist
+
+$$
+d\left(f\left(\eta_{1} \wedge \ldots \wedge \eta_{k}\right)\right)=\sum_{j=1}^{k}(-1)^{l_{1}+\ldots+l_{j-1}} f\left(\eta_{1} \wedge \ldots \wedge d \eta_{j} \wedge \ldots \wedge \eta_{k}\right)
+$$
+
+Ist $\eta_{j} \in \Omega_{\text {inv }, \text { hor }}^{l_{j}}(P)$ und also
+
+$$
+f\left(\eta_{1} \wedge \ldots \wedge \eta_{k}\right):=f\left(\sigma^{*} \eta_{1} \wedge \ldots \wedge \sigma^{*} \eta_{k}\right) \in \Omega(M, \mathbb{C})
+$$
+
+wohldefiniert, so ist nach 6.19
+
+$$
+d\left(f\left(\eta_{1} \wedge \ldots \wedge \eta_{k}\right)\right)=\sum_{j=1}^{k}(-1)^{l_{1}+\ldots+l_{j-1}} f\left(\eta_{1} \wedge \ldots \wedge D^{H} \eta_{j} \wedge \ldots \wedge \eta_{k}\right)
+$$
+
+für einen beliebigen Zusammenhang $H$ in $P$.
+
+\subsection*{Lemma}
+Ist $\Omega^{\omega}$ die Krümmung eines $G$-Zusammenhangs auf $P, f \in P_{\text {inv }}^{k}(\mathfrak{g})$, so gilt
+
+\begin{enumerate}
+  \item $f\left(\Omega^{\omega}\right) \in \Omega^{2 k}(M, \mathbb{C})$.
+  \item $d\left(f\left(\Omega^{\omega}\right)\right)=0$
+  \item Ist $\omega^{\prime}$ ein weiterer Zusamenhang, so existiert ein $\eta \in \Omega^{1} M$ mit
+\end{enumerate}
+
+$$
+f\left(\Omega^{\omega}\right)-f\left(\Omega^{\omega^{\prime}}\right)=d \eta
+$$
+
+\section*{Beweis:}
+\begin{enumerate}
+  \item $\sqrt{ }$
+  \item Es gilt
+\end{enumerate}
+
+$$
+\begin{aligned}
+d f\left(\Omega^{\omega}\right) & =d\left(f\left(\Omega^{\omega} \wedge \ldots \wedge \Omega^{\omega}\right)\right. \\
+& =f\left(d^{\omega} \Omega^{\omega} \wedge \ldots \wedge \Omega^{\omega}\right)+\ldots+f\left(\Omega^{\omega} \wedge \ldots \wedge d^{\omega} \Omega^{\omega}\right)=0
+\end{aligned}
+$$
+
+\begin{enumerate}
+  \setcounter{enumi}{2}
+  \item Seien $\omega_{0}$ und $\omega_{1}$ Zusammenhangsformen, $\alpha=\omega_{1}-\omega_{0}$ und $\omega_{t}=\omega_{0}+t \alpha$. Sei $\Omega^{t}:=\Omega^{\omega_{t}}$, also $\Omega^{t}=\Omega^{0}+t d \alpha+t\left[\omega_{0} \wedge \alpha\right]+\frac{1}{2} t^{2}[\alpha \wedge \alpha]$. Dann ist
+\end{enumerate}
+
+$$
+\frac{d}{d t} \Omega^{t}=d \alpha+\left[\omega_{0} \wedge \alpha\right]+t[\alpha \wedge \alpha]=d^{\omega_{t}} \alpha
+$$
+
+Sei $\hat{f}:[0,1] \rightarrow \Omega^{2 k}(M), \hat{f}(t)=f\left(\Omega^{t}\right)$. Dann ist
+
+$$
+\begin{aligned}
+f\left(\Omega^{1}\right)-f\left(\Omega^{0}\right)=\int_{0}^{1} \frac{d}{d t} \hat{f}(t) & =k \int_{0}^{1} f\left(\frac{d}{d t} \Omega^{t} \wedge \ldots \wedge \Omega^{t}\right) d t \\
+& =k \int_{0}^{1} f\left(d^{\omega_{t}} \alpha \wedge \Omega^{t} \wedge \ldots \wedge \Omega^{t}\right) d t \\
+& =k \int_{0}^{1} d f\left(\alpha \wedge \ldots \wedge \Omega^{t}\right) d t
+\end{aligned}
+$$
+
+da $d^{\omega_{t}} \Omega^{t}=0$ gilt nach der Bianchi-Indentität und $\alpha \in \Omega_{\text {inv }, \text { hor }}^{1}(P, \mathfrak{g})$ und $\Omega^{t} \in \Omega_{\text {inv }, \text { hor }}^{2}(P, \mathfrak{g})$. Sei
+
+$$
+\eta=k \int_{0}^{1} f\left(\alpha \wedge \Omega^{t} \wedge \ldots \wedge \Omega^{t}\right) d t
+$$
+
+Dann ist $d \eta=f\left(\Omega^{1}\right)-f\left(\Omega^{0}\right)$.
+
+\subsection*{Korollar und Definition}
+Sei $P \rightarrow M$ ein $G$-Prinzipalbündel
+
+$$
+\begin{aligned}
+\mathcal{W}^{P}: \operatorname{Sym}_{\text {inv }}(\mathfrak{g}) & \rightarrow H_{d R}(M, \mathbb{C}) \\
+f & \mapsto\left[f\left(\Omega^{\omega}\right)\right]
+\end{aligned}
+$$
+
+ist ein wohldefinierter Algebrenhomomorphismus. $\mathcal{W}^{P}$ heißt Weil-Homomorphismus.
+
+\section*{Beweis:}
+Es ist nur
+
+$$
+(f \cdot g)\left(\Omega^{\omega}\right)=f\left(\Omega^{\omega}\right) \wedge g\left(\Omega^{\omega}\right)
+$$
+
+nachzurechnen.
+
+\subsection*{Beispiel}
+\begin{enumerate}
+  \item $\mathcal{W}^{M \times G}(f)=0$ für jedes $f \in \operatorname{Sym}_{\text {inv }}(\mathfrak{g})$.
+  \item Ist $G=S^{1}$ und $f(X)=X$, so ist $\mathcal{W}^{P}(f)=c_{1}(P)$.
+\end{enumerate}
+
+\subsection*{Lemma}
+\begin{enumerate}
+  \item Ist $P \cong \tilde{P}$, so ist $\mathcal{W}^{P}=\mathcal{W}^{\tilde{P}}$.
+  \item Ist $\varphi: N \rightarrow M$ ein Diffeomorphismus, so ist $\mathcal{W}^{\varphi^{*}} P(f)=\varphi^{*} \mathcal{W}^{P}(f)$ für $f \in \operatorname{Sym}_{\text {inv }}(\mathfrak{g})$.
+\end{enumerate}
+
+\section*{Beweis:}
+\begin{enumerate}
+  \item Ist $\varphi: \tilde{P} \rightarrow P$ ein $G$-Prinzipalbündelisomorphismus, $\omega$ ein Zusammenhang auf $P$, so ist $\varphi^{*} \omega$ ein Zusammenhang auf $\tilde{P}$ mit Krümmung $\varphi^{*} \Omega^{\omega}$. Ist $\tilde{\sigma}$ ein Schnitt in $\tilde{P}$, so ist $\varphi \circ \tilde{\sigma}=: \sigma$ einer in $P$ und $\sigma^{*} \Omega^{\omega}=\tilde{\sigma}^{*} \varphi^{*} \Omega^{\omega}$.
+  \item Ist $P \rightarrow M$ ein $G$-Prinzipalbündel mit Zusammenhang $\omega$ und $\hat{\varphi}: \varphi^{*} P \rightarrow P$ die kanonische Abbildung über $\varphi$, so ist $\hat{\varphi}^{*} \omega$ ein Zusammenhang in $\varphi^{*} P$ mit Krümmung $\hat{\varphi}^{*} \Omega^{\omega}$. Ein lokaler Schnitt $s: U \rightarrow P$ definiert einen lokalen Schnitt $\tilde{s}: \varphi^{-1}(U) \rightarrow \varphi^{*} P$ für den $\hat{\varphi} \circ \tilde{s}=s \circ \varphi$ gilt, also $\tilde{s}^{*} \hat{\varphi}^{*} \Omega^{\omega}=\varphi^{*} s^{*} \Omega^{\omega}$.
+\end{enumerate}
+
+\subsection*{Lemma}
+Ist $\lambda: H \rightarrow G$ ein Liegruppenhomomorphismus, $P \rightarrow M$ ein $G$-Prinzipalbündel und $\tilde{\lambda}: Q \rightarrow P$ eine $H$-Struktur von $P$, so ist $\mathcal{W}^{Q}\left(\lambda^{*} f\right)=\mathcal{W}^{P}(f)$, mit $\lambda^{*} f=\left.f \circ d \lambda\right|_{1}$. Ist $Q \rightarrow P$ eine Reduktion, so ist $\omega^{Q}(f \mid \mathfrak{h})=\omega^{p}(f)$.
+
+\section*{Beweis:}
+Ein $H$-Zusammenhang $\omega$ auf $Q$ definiert einen $G$-Zusammenhang $\tilde{\omega}$ auf $P= Q \times_{\lambda} G$, für den $\tilde{\lambda}^{*} \tilde{\omega}=\left.d \lambda\right|_{1} \circ \omega$ gilt, also
+
+$$
+d \lambda_{1} \circ \Omega^{\omega}=\tilde{\lambda}^{*} \Omega^{\tilde{\omega}}
+$$
+
+Ein Schnitt $s$ in $Q$ induziert einen Schnitt $\tilde{s}=\tilde{\lambda} \circ s$ in $P$ und es gilt
+
+$$
+\tilde{s}^{*} \Omega^{\tilde{\omega}}=s^{*} d \lambda_{1} \circ \Omega^{\omega}=d \lambda_{1} \circ s^{*} \Omega^{\omega}
+$$
+
+Für $f \in \operatorname{Sym}_{\text {inv }}(\mathfrak{g})$ ist also\\
+$f\left(\tilde{s}^{*} \Omega^{\tilde{\omega}} \wedge \ldots \wedge \tilde{s}^{*} \Omega^{\tilde{\omega}}\right)=f\left(d \lambda_{1} \circ s^{*} \Omega^{\omega} \wedge \ldots \wedge d \lambda_{1} \circ s^{*} \Omega^{\omega}\right)=\lambda^{*} f\left(s^{*} \Omega^{\omega} \wedge \ldots \wedge s^{*} \Omega^{\omega}\right)$.
+
+\subsection*{Definition}
+Sei $c_{j}$ wie in 12.6. Dann heißt $\mathcal{W}^{P}\left(c_{j}\right)$ die $j$-te Chern-Klasse von $P$. Man schreibt $\mathcal{W}^{P}\left(c_{j}\right)=: c_{j}(P)$.
+
+\section*{Chern-Klassen für komplexe Vektorraumbündel}
+Jedes komplexe Vektorraumbündel besitzt eine komplexe Bündelmetrik und damit eine Reduktion auf $U(n)$. Nach 12.13 gilt für jede Reduktion $Q$ von $P$
+
+$$
+\mathcal{W}^{Q}\left(\left.f\right|_{\mathfrak{h}}\right)=\mathcal{W}^{P}(f)
+$$
+
+Damit können wir die Chern-Klasse von komplexen Vektorraumbündeln definieren.
+
+\subsection*{Definition und Satz}
+Sei $E$ ein komplexes Vektorraumbündel, $P$ das zugrundeliegende $\operatorname{GL}(n, \mathbb{C})$ Prinzipalbündel oder eine $U(n)$-Reduktion, so ist die $k$-te Chern-Klasse von $E$ durch
+
+$$
+c_{k}(E)=c_{k}(P) \in H^{2 k}(M, \mathbb{R})
+$$
+
+wohldefiniert. $c(E)=c_{0}(E)+c_{1}(E)+\ldots+c_{n}(E)=\operatorname{det}\left(\mathbb{l}-\frac{1}{2 \pi i} \Omega\right)$ heißt totale Chern-Klasse.\\
+Ist $M$ eine $n$-dimensionale, geschlossene, orientierte Mannigfaltigkeit, $2\left(i_{1}+\right. \left.{ }_{\ldots}+i_{k}\right)=n$ und $\left[\alpha_{j}\right] \in c_{i_{j}}(E)$, so heißt
+
+$$
+\int_{M} \alpha_{1} \wedge \ldots \wedge \alpha_{k}
+$$
+
+die $\left(i_{1}, \ldots, i_{k}\right)$-te Chernzahl (oder topologische Quantenzahl) von $E$.\\
+Ist $M$ eine komplexe Mannigfaltigkeit, so bezeichnet man als $\left(i_{1}, \ldots, i_{k}\right)$-te Chernzahl von $M$ die $\left(i_{1}, . ., i_{k}\right)$-te Chernzahl von $T M$.
+
+\section*{Beweis:}
+Ist $A \in u(n)$, also $\bar{A}=-A^{t}$, also
+
+$$
+\begin{aligned}
+\sum_{k=0}^{n} \overline{c_{k}(A)} t^{n-k} & =\operatorname{det} \overline{\left(t \cdot 11-\frac{1}{2 \pi i} A\right)} \\
+& =\operatorname{det}\left(t \cdot 11+\frac{1}{2 \pi i} \bar{A}\right) \\
+& =\operatorname{det}\left(t \cdot 11-\frac{1}{2 \pi i} A^{t}\right) \\
+& =\operatorname{det}\left(t \cdot 11-\frac{1}{2 \pi i} A\right) \\
+& =\sum_{k=0}^{n} c_{k}(A) t^{n-1}
+\end{aligned}
+$$
+
+also ist $c_{k}(A) \in \mathbb{R}$.
+
+\subsection*{Beispiel}
+$$
+\begin{aligned}
+c_{k}(E) & =\frac{(-1)^{k}}{(2 \pi i)^{k}} \sum_{i_{1}<\ldots<i_{k}} \sum_{\sigma \in S(k)} \operatorname{sign}(\sigma) \Omega_{i_{1} i_{\sigma(1)}} \wedge \ldots \wedge \Omega_{i_{k} i_{\sigma(k)}} \\
+c_{0}(E) & =1 \\
+c_{1}(E) & =-\frac{1}{2 \pi i} \operatorname{tr} \Omega \\
+c_{2}(E) & =-\frac{1}{4 \pi^{2}}\left(\sum_{i<j} \Omega_{i i} \wedge \Omega_{j j}-\Omega_{i j} \wedge \Omega_{j i}\right)=\frac{1}{8 \pi^{2}}(\operatorname{tr}(\Omega \wedge \Omega)-\operatorname{tr} \Omega \wedge \operatorname{tr} \Omega) \\
+c_{n}(E) & =\left(-\frac{1}{2 \pi i}\right)^{n} \operatorname{det} \Omega
+\end{aligned}
+$$
+
+\subsection*{Korollar}
+Besitzt $E$ eine Reduktion auf $S U(n)$, so ist $c_{1}(E)=0$ und $c_{2}(E)=\frac{1}{8 \pi^{2}}\left[\operatorname{tr}\left(F^{\nabla} \wedge\right.\right. \left.\left.F^{\nabla}\right)\right]$, denn für $A \in s u(2)$ ist $\operatorname{Spur} A=0$.
+
+\subsection*{Lemma}
+\begin{enumerate}
+  \item Ist $E \rightarrow M$ ein $k$-dimensionales Vektorraumbündel $c_{k}(E) \in H_{d R}^{2 k}(M)$, so ist
+\end{enumerate}
+
+$$
+\begin{aligned}
+c_{0}(E) & =1 \\
+c_{l}(E) & =0 \text { für } l>k
+\end{aligned}
+$$
+
+\begin{enumerate}
+  \setcounter{enumi}{1}
+  \item Ist $f: N \rightarrow M$ differenzierbar, so ist $f^{*} c(E)=c\left(f^{*} E\right)$.
+  \item $c\left(E_{1} \oplus E_{2}\right)=c\left(E_{1}\right) \cdot c\left(E_{2}\right)$, genauer
+\end{enumerate}
+
+$$
+\sum_{j=0}^{k} c_{j}\left(E_{1}\right) c_{k-j}\left(E_{2}\right)=c_{k}\left(E_{1} \oplus E_{2}\right)
+$$
+
+\begin{enumerate}
+  \setcounter{enumi}{3}
+  \item Sei $l_{1}=\left\{(L, \xi) \in \mathbb{C} P^{1} \times \mathbb{C}^{2} \mid \xi \in L\right\} \rightarrow \mathbb{C} P^{1}$ das kanonische Linienbündel, $S^{3} \rightarrow S^{2}$ das Hopfbündel, so ist
+\end{enumerate}
+
+$$
+S^{3} \times_{S^{1}} \mathbb{C} \cong l_{1},\left[\left(\omega_{1}, \omega_{2}\right), z\right] \mapsto\left(\left[\omega_{1}, \omega_{2}\right],\left(\omega_{1} z, \omega_{2} z\right)\right)
+$$
+
+also ist $c_{1}\left(l_{1}\right)=-1$.
+
+\section*{Beweis:}
+(von 3.) Sei $\omega_{j}$ ein Zusammenhang auf $E_{j}$ mit Krümmung $\Omega^{j}$, dann ist kanonisch $\omega_{1} \oplus \omega_{2}$ ein Zusammenhang auf $E_{1} \oplus E_{2}$ mit Krümmung $\Omega^{1} \oplus \Omega^{2}$, also\\
+ist
+
+$$
+\begin{aligned}
+\sum_{k=1}^{n} c_{k}(E) t^{n-k} & =\left(\sum_{k_{1}=1}^{n_{1}} c_{k_{1}}\left(E_{1}\right) t^{n_{1}-k_{1}}\right)\left(\sum_{k_{2}=1}^{n_{2}} c_{k_{2}}\left(E_{2}\right) t^{n_{2}-k_{2}}\right) \\
+& =\sum_{k=1}^{n}\left(\sum_{j=1}^{k} c_{j}\left(E_{1}\right) c_{k-j}\left(E_{2}\right)\right) t^{n-k}
+\end{aligned}
+$$
+
+wobei $E_{j}$ ein $n_{j}$-dimensionales Vektorraumbündel und $n_{1}+n_{2}=n$ ist.
+
+\subsection*{Bemerkung}
+Es gilt sogar, dass die Chernklassen im Bild von
+
+$$
+H_{\mathrm{sing}}^{*}(M, \mathbb{Z}) \rightarrow H_{d R}(M, \mathbb{R})
+$$
+
+liegen, d.h., es gilt
+
+$$
+\int_{\sigma} c_{k}(E) \in \mathbb{Z}
+$$
+
+für alle glatten $k$-dimensionalen geschlossenen Untermannigfaltigkeiten von $M$.\\
+Durch 1.-4. im Lemma wird axiomatisch eine Klasse $c^{*}(E) \in H_{\text {sing }}(M, \mathbb{Z})$ definiert (ersetze $(4)$ durch $\left(4^{\prime}\right): c_{1}\left(l_{1}\right)$ erzeugt $H_{\text {sing }}^{2}\left(\mathbb{C} P^{1}, \mathbb{Z}\right)$.\\
+Weitere Eigenschaften der Chern-Klassen:
+
+\subsection*{Satz}
+\begin{enumerate}
+  \item Ist $E_{1} \cong E_{2}$, so gilt $c\left(E_{1}\right)=c\left(E_{2}\right)$.
+  \item Ist $E$ trivial, so ist $c(E)=1$, also $c_{k}(E)=0$ für $k>0$.
+  \item Ist $E$ ein komplexes Vektorraumbündel der Dimension $n$, das $k$ überall linear unabhängige Schnitte besitzt, so ist $c_{j}(E)=0$ für $j>n-k$.
+  \item Es gilt
+\end{enumerate}
+
+$$
+c_{k}\left(E^{*}\right)=(-1)^{k} c_{k}(E)
+$$
+
+\section*{Beweis:}
+\begin{enumerate}
+  \item $\sqrt{ }$ 2. $\sqrt{ }$
+  \item Existieren $k$ überall linear unabhängige Schnitte, so ist $E \cong\left(M \times \mathbb{R}^{k}\right) \oplus F$, wobei $F \rightarrow M$ ein $(n-k)$-dimensionales Vektorraumbündel ist, also ist $c(E)= 1 \cdot c(F)$.
+  \item Für $\eta \in \Gamma E^{*}$ gilt $\left(\nabla_{X}^{*} \eta\right)(e)=X \eta(e)-\eta\left(\nabla_{X} e\right)(Y)$ und folglich
+\end{enumerate}
+
+$$
+F^{\nabla^{*}}(X, Y) \eta=-\eta\left(F^{\nabla}(X, Y) \cdot\right)
+$$
+
+also $\Omega^{*}=-\Omega$.
+
+\subsection*{Beispiele}
+\begin{enumerate}
+  \item Sei $\nu=S^{n} \times \mathbb{R}$ das Normalenbündel, dann ist $T S^{n} \oplus \nu=S^{n} \times \mathbb{R}^{n+1}$. Sei für ein reelles Bünde $E$ das komplexifizierte durch $E^{\mathbb{C}}=E \otimes \mathbb{C}$ gegeben. Dann ist $T^{\mathbb{C}} S^{n} \oplus \nu^{\mathbb{C}}=S^{n} \times \mathbb{C}^{n+1}$, also ist $c\left(T^{\mathbb{C}} S^{n}\right)=1$.
+  \item Sei $E \rightarrow M$ ein komplexes Vektorraumbündel der Dimension $n$, dann ist $c_{1}\left(\Lambda^{n} E\right)=c_{1}(E)$, denn für die kovariante Ableitung $\hat{\nabla}$ auf $\Lambda^{1} E$ gilt $\hat{\nabla}\left(e_{1} \wedge \ldots \wedge e_{n}\right):=\sum e_{1} \wedge \ldots \wedge \nabla e_{j} \wedge \ldots \wedge e_{j}$, also
+\end{enumerate}
+
+$$
+\begin{aligned}
+F^{\hat{\nabla}}\left(e_{1} \wedge \ldots \wedge e_{n}\right) & =\sum_{j} e_{1} \wedge \ldots F^{\nabla} e_{j} \wedge e_{n} \\
+& =\sum_{j, k} e_{1} \wedge \ldots<F^{\nabla} e_{j}, e_{k}>e_{k} \wedge \ldots \wedge e_{n} \\
+& =\sum_{j}<F^{\nabla} e_{j}, e_{j}>e_{1} \wedge \ldots \wedge e_{n} \\
+& =\operatorname{Spur}\left(F^{\nabla}\right) e_{1} \wedge \ldots \wedge e_{n}
+\end{aligned}
+$$
+
+also ist $c_{1}\left(\Lambda^{n} E\right)=-\frac{1}{2 \pi i} \operatorname{tr}\left(F^{\hat{\nabla}}\right)=c_{1}(E)$.\\
+3. Als letztes Beispiel berechnen wir die Chern-Klassen für $\mathbb{C} P^{n}$. Der projektive Raum $\mathbb{C} P^{n}$ ist eine komplexe Mannigfaltigkeit, also ist das Tangentialbündel ein komplexes Vektorraumbündel. Dazu betrachten wir zuerst $\pi: S^{2 n+1} \rightarrow \mathbb{C} P^{n}$ die verallgemeinerte Hopffaserung. Sei ( $\cdot, \cdot$ ) das kanonische hermitsche Skalarprodukt auf $\mathbb{C}^{n+1}$. Dann ist
+
+$$
+\begin{aligned}
+T_{z} S^{2 n+1} & =\left\{x \in \mathbb{C}^{n+1} \mid \operatorname{Re}(x, z)=0\right\} \\
+T_{z}^{\prime} S^{2 n+1} & =\left\{X \in \mathbb{C}^{n+1} \mid X \in \mathbb{R} i z\right\}
+\end{aligned}
+$$
+
+Also ist durch $\pi^{*} l_{n}^{\perp}=: \tilde{l}_{n}^{\perp} \subseteq T_{z} S^{2 n+1}$ mit
+
+$$
+l_{n,[z]}^{\perp}=\left\{x \in \mathbb{C}^{n+1} \mid(x, z)=0\right\}
+$$
+
+ein $S^{1}$-Zusammenhang auf $S^{2 n+1} \rightarrow \mathbb{C} P^{n}$ gegeben.\\
+Sei $l_{n}=\left\{(w, L) \in \mathbb{C} P^{n} \times \mathbb{C}^{n+1} \mid L \in w\right\}$ das kanonische Geradenbündel über $\mathbb{C} P^{n}$ und $\tilde{l}_{n}=\pi^{*} l_{n}$. Dann ist für $z \in S^{2 n+1}$ ein Isomorphismus
+
+$$
+\operatorname{Hom}\left(\tilde{l}_{n}, \tilde{l}_{n}^{\perp}\right)_{z} \rightarrow T_{[z]} \mathbb{C} P^{n}, \psi \mapsto d \pi_{z}((\psi(\mathbb{C} z))
+$$
+
+wohldefiniert.\\
+Damit ist
+
+$$
+\begin{aligned}
+T \mathbb{C} P^{n} \oplus\left(\mathbb{C} P^{n} \times \mathbb{C}\right) & \cong \operatorname{Hom}\left(l_{n}, l_{n}^{\perp}\right) \oplus \operatorname{Hom}\left(l_{n}, l_{n}\right) \\
+& \cong \operatorname{Hom}\left(l_{n}, \mathbb{C} P^{n} \times \mathbb{C}^{n+1}\right) \\
+& \cong l_{n}^{*} \oplus \ldots \oplus l_{n}^{*}
+\end{aligned}
+$$
+
+also
+
+$$
+c\left(T \mathbb{C} P^{n}\right)=\left(1-c_{1}\left(l_{n}\right)\right)^{n+1}
+$$
+
+Wir kommen jetzt noch zu den Chern-Klassen reeller Mannigfaltigkeiten, deren Tangentialbündel fast komplex ist.
+
+\subsection*{Definition}
+\begin{enumerate}
+  \item Sei $M$ eine reelle Mannigfaltigkeit. Ein Vektorraumbündelhomomorphismus heißt fast komplexe Struktur auf $M$, wenn $J^{2}=-J d_{T M}$ gilt. $(M, J)$ heißt eine fast komplexe Mannigfaltigkeit.
+  \item Ist ( $M, g$ ) eine Riemannsche Mannigfaltigkeit und $J$ eine orthogonale, fast komplexe Struktur auf $M$, so heißt ( $M, g, J$ ) fast hermitsche Mannigfaltigkeit.
+\end{enumerate}
+
+\subsection*{Bemerkung}
+\begin{enumerate}
+  \item Eine fast hermitsche Mannigfaltigkeit hat immer gerade Dimension $2 m$, und das Tangentialbündel hat eine Reduktion auf $U(m)$, wobei $U(m) \subseteq S O(2 m)$ durch $f: A+i B \rightarrow\left(\begin{array}{cc}A & -B \\ B & A\end{array}\right)$ aufgefasst wird. Umgekehrt besitzt eine geradedimensionale Mannigfaltigkeit genau dann eine orthogonale fast komplexe Struktur, wenn das Tangentialbündel auf $U(m)$ reduziert werden kann.
+  \item Eine fast komplexe Mannigfaltigkeit ist eine komplexe Mannigfaltigkeit, falls
+\end{enumerate}
+
+$$
+[X, Y]=[J X, J Y]-J([J X, Y]-J[X, J Y]) .
+$$
+
+\begin{enumerate}
+  \setcounter{enumi}{2}
+  \item Ist ( $M^{2 k}, J$ ) eine fast komplexe Mannigfaltigkeit, so ist durch $J_{x}^{*}$ eine lineare Abbildung auf $\Lambda^{k} T^{*} M$ gegeben, mit $\left(J^{*}\right)^{2}=-1$. Die Eigenräume dieser Abbildung auf $T^{*} M \otimes_{\mathbb{R}} \mathbb{C}$ mit $\left(T^{*} M\right)^{(1,0)}$ und $\left(T^{*} M\right)^{(0,1)}$ und mit
+\end{enumerate}
+
+$$
+\begin{gathered}
+\Lambda^{(p, q)}\left(T^{-} M\right)^{\mathbb{C}}:=\operatorname{Span}\left\{u \wedge v \mid u \in \Lambda^{p}\left(T^{*} M\right)^{(1,0)}, v \in \Lambda^{q}\left(T^{*} M\right)^{(0,1)}\right\} \text { und } \\
+\Omega^{(p, q)}(M):=\Gamma \Lambda^{(p, q)}\left(T^{*} M\right)^{\mathbb{C}}
+\end{gathered}
+$$
+
+\subsection*{Definition}
+Eine fast hermitsche Mannigfaltigkeit ( $M, g, J$ ) heißt kählersch, falls $\nabla^{g} J=0$ gilt.
+
+\subsection*{Bemerkung}
+\begin{enumerate}
+  \item Jede Kähler-Mannigfaltigkeit ist eine komplexe Mannigfaltigkeit (vgl. [Ko-No]).
+  \item Auf einer Kähler-Mannigfaltigkeit ist die Kähler-Form durch $\Omega(X, Y):= g(J X, Y)$ definiert. Diese ist geschlossen, und $(M, \Omega)$ wird damit zu einer symplektischen Mannigfaltigkeit.
+\end{enumerate}
+
+\subsection*{Bemerkung}
+Wegen $\left(\nabla_{X} J\right)(Y)=X(J(Y))-J\left(\nabla_{X} Y\right)$ ist ( $M, g, J$ ) genau dann kählersch, wenn für die Parallelverschiebung des Levi-Civita-Zusammenhangs gilt
+
+$$
+\tau_{\gamma}(J v)=J\left(\tau_{\gamma}(v)\right)
+$$
+
+also wenn der Levi-Civita-Zusammenhang eine $U(m)$-Reduktion besitzt.\\
+Für $X=A+i B \in u(m)$ ist $\operatorname{Spur} X=i \operatorname{Spur}(B)=-\frac{i}{2} \operatorname{Spur}\left(J_{0} f(X)\right)$, mit $J_{0}=\left(\begin{array}{cc}0 & -1 l \\ 1 l & 0\end{array}\right)$.\\
+Damit gilt also für die Krümmung des Levi-Civita-Zusammenhangs $R^{g}$ aufgefasst als Krümmung $F$ im $U(m)$-Bündel $\Omega$
+
+$$
+-\frac{1}{2 \pi i} \operatorname{Spur}(F)=\frac{1}{4 \pi} \operatorname{Spur}\left(J R^{g}\right) .
+$$
+
+Um dies noch besser zu verstehen, berechnen wir die Ricci-Krümmung einer Kähler-Mannigfaltigkeit.
+
+\subsection*{Lemma}
+Ist ( $M, g, J$ ) eine Kähler-Mannigfaltigkeit, so gilt:
+
+$$
+\operatorname{ric}(X, Y)=\operatorname{ric}(J X, J Y)=\frac{1}{2} \operatorname{Spur}\left(J \circ R^{g}(X, J Y)\right)
+$$
+
+\section*{Beweis:}
+Da $J$ parallel und orthogonal ist, ist
+
+$$
+\begin{aligned}
+g\left(R^{g}(X, Y) Z, J V\right) & =-g\left(J R^{g}(X, Y) Z, V\right) \\
+& =-g\left(R^{g}(X, Y) J Z, V\right)
+\end{aligned}
+$$
+
+also wegen der Blocksymmetrie des Krümmungstensors auch
+
+$$
+R^{g}(J X, Y)=-R^{g}(X, J Y)
+$$
+
+und folglich wegen $J^{2}=-$ id auch $R^{g}(X, Y)=R^{g}(J X, J Y)$ und
+
+$$
+g\left(R^{g}(X, Y) Z, V\right)=g\left(R^{g}(X, Y) J Z, J V\right)
+$$
+
+Betrachtet man die Spur mittels der einer orthonormalen Basis
+
+$$
+\left(e_{1}, \ldots, e_{m}, J e_{1}, \ldots, J e_{m}\right)=:\left(e_{1}, \ldots, e_{2 m}\right)
+$$
+
+so rechnet man sofort nach:
+
+$$
+\operatorname{ric}(X, Y)=\operatorname{ric}(J X, J Y)
+$$
+
+und
+
+$$
+\begin{aligned}
+\operatorname{ric}(X, Y) & =\sum_{i=1}^{2 m} g\left(R^{g}\left(X, e_{i}\right) J e_{i} J Y\right) \\
+& =-\sum_{i=1}^{2 m}\left(g\left(R^{g}\left(e_{i}, J e_{i}\right) X, J Y\right)-g\left(R^{g}\left(J e_{i}, X\right) e_{i}, J Y\right)\right. \\
+& =\sum_{i=1}^{2 m}\left(g\left(R^{g}(X, J Y) J e_{i}, e_{i}\right)-\operatorname{ric}(J X, J Y)\right)
+\end{aligned}
+$$
+
+also
+
+$$
+\begin{aligned}
+2 \operatorname{ric}(X, Y) & =\sum_{i=1}^{2 m} g\left(J R^{g}(X, J Y) e_{i}, e_{i}\right) \\
+& =\operatorname{Spur}\left(J \circ R^{g}(X, J Y)\right)
+\end{aligned}
+$$
+
+\subsection*{Korollar und Definition}
+Sei $(M, g, J)$ eine Kähler-Mannigfaltigkeit, $\rho=\operatorname{ric}(J \cdot, \cdot) \in \Omega^{2}(M)$, so ist $d \rho=$ 0 und
+
+$$
+c_{1}(M)=\left[\frac{1}{2 \pi} \rho\right],
+$$
+
+insbesondere gilt für die 1. Chern-Klasse eine Ricci-flachen Kähler-Mannigfaltigkeit $c_{1}(M)=0$. Die 2-Form $\rho$ hießt die Ricci-Form.
+
+\section*{Pontrjagin-Klassen}
+Betrachtet man reelle Vektorraumbündel, so kann man diese komplexifizieren und ihre Chern-Klassen betrachten (vgl. 13.7,1). Pontrjagin-Klassen entstehen auf diese Weise.
+
+\subsection*{Notationen und Bemerkungen}
+Seien $V$ ein reeller und $W$ ein komplexer Vektorraum. Dann heißt
+
+\begin{enumerate}
+  \item $V^{\mathbb{C}}=V \otimes \mathbb{C}$ die Komplexifizierung von $V$.
+  \item Der $W$ zugrunde liegende reelle Vektorraum $W^{\mathbb{R}}$ die Reellifizierung von $W$, d.h. $W^{\mathbb{R}}$ entsteht durch Einschränkung der skalaren Multiplikation in $W$ auf $\mathbb{R}$.
+\end{enumerate}
+
+Es gilt:
+
+\begin{enumerate}
+  \item $V^{*} \cong V, W^{*} \cong \bar{W}$.
+  \item $\left(V^{\mathbb{C}}\right)^{\mathbb{R}}=V \oplus V$.\\
+$\left(W^{\mathbb{R}}\right)^{\mathbb{C}}=W \oplus \bar{W}$.
+  \item $\left(V^{*}\right)^{\mathbb{C}}=\left(V^{\mathbb{C}}\right)^{*}$.
+\end{enumerate}
+
+Analoge Schreibweisen und Sachverhalte gelten auch für Vektorraumbündel.
+
+\subsection*{Bemerkung}
+Ist $V$ ein reeller Vektorraum, so ist
+
+$$
+V^{\mathbb{C}}=V \otimes \mathbb{C} \cong V \oplus V,
+$$
+
+wobei die Multiplikation mit $i$ auf $V \oplus V$ durch $i(u, v)=(-v, u)$ gegeben ist. Ist also $V=W^{\mathbb{R}}$, so ist
+
+$$
+V^{\mathbb{C}}=\left(W^{\mathbb{R}}\right)^{\mathbb{C}} \cong W \oplus W .
+$$
+
+Dabei ist die Abbildung
+
+$$
+\left(W^{\mathbb{R}}\right)^{\mathbb{C}} \rightarrow W \oplus W
+$$
+
+durch $f(u, v)=(u, i v, u-i v)$ gegeben und $\mathbb{C}$ linear mit der Multiplikation $i(u, v)=(i u,-i v)$, denn
+
+$$
+\begin{aligned}
+f(i(v, v)) & =f(-v, u)=(i u-v,-v-i u) \\
+& =i(u+i v, u-i v) \\
+& =i f(u, v)
+\end{aligned}
+$$
+
+Man schreibt daher $\left(W^{\mathbb{R}}\right)^{\mathbb{C}}=W \oplus \bar{W}$.
+
+\subsection*{Korollar}
+Ist $E \rightarrow M$ ein reelles Vektorraumbündel, so ist $c_{k}\left(E^{\mathbb{C}}\right)=0$ für $k$ ungerade, da
+
+$$
+c_{k}\left(E^{\mathbb{C}}\right)=c_{k}\left(\left(E^{*}\right)^{\mathbb{C}}\right)=c_{k}\left(\left(E^{\mathbb{C}}\right)^{*}\right)=(-1)^{k} c_{k}\left(E^{\mathbb{C}}\right)
+$$
+
+\subsection*{Definition}
+Sei $E$ ein reelles $n$-dimensionales Vektorraumbündel, dann heißt
+
+$$
+p_{k}(E)=(-1)^{k} c_{2 k}\left(E^{\mathbb{C}}\right) \in H_{d R}^{4 k}(M, \mathbb{R})
+$$
+
+die $k$-te reelle Pontrjagin-Klasse von $E$,
+
+$$
+p(E):=p_{0}(E)+p_{1}(E)+\ldots+p_{\left[\frac{n}{2}\right]}(E)
+$$
+
+die totale Pontrjagin-Klasse von $E$.
+
+\subsection*{Korollar}
+\begin{enumerate}
+  \item Ist $E_{1} \cong E_{2}$, so gilt
+\end{enumerate}
+
+$$
+p\left(E_{1}\right)=p\left(E_{2}\right)
+$$
+
+\begin{enumerate}
+  \setcounter{enumi}{1}
+  \item Ist $\varphi: N \rightarrow M$ differenzierbar, so ist
+\end{enumerate}
+
+$$
+p\left(\varphi^{*} E\right)=\varphi^{*} p(E)
+$$
+
+\begin{enumerate}
+  \setcounter{enumi}{2}
+  \item Es gilt
+\end{enumerate}
+
+$$
+p\left(E_{1} \oplus E_{2}\right)=p\left(E_{1}\right) p\left(E_{2}\right)
+$$
+
+\section*{Beweis:}
+\begin{enumerate}
+  \item und 2 . folgen aus 13.4 und 13.6 .\\
+zu 3. Es ist
+\end{enumerate}
+
+$$
+\begin{aligned}
+(-1)^{k} \sum_{j=0}^{2 k} c_{j}\left(E_{1}^{\mathbb{C}}\right) c_{2 k-j}\left(E_{2}^{\mathbb{C}}\right) & \left.=\sum_{r=0}^{k}(-1]\right)^{r} c_{2 r}\left(E_{1}^{\mathbb{C}}\right) \cdot(-1)^{k-r} c_{2 k-2 r}\left(E_{2}^{\mathbb{C}}\right) \\
+& =\sum_{r=0}^{k} p_{1}\left(E_{1}\right) p_{k-r}\left(E_{2}\right)
+\end{aligned}
+$$
+
+\subsection*{Bemerkung}
+Ist $E \oplus F=M \times \mathbb{R}^{N}$, so ist $p(E)$ invertierbar, also $p(E) p(F)=1$, für
+
+$$
+p(E) \in \bigoplus_{k=0}^{\left[\frac{n}{2}\right]} H^{4 k}(M), p(F) \in \bigoplus_{k=0}^{\left[\frac{N-n}{2}\right]} H^{4 k}(M)
+$$
+
+\subsection*{Lemma}
+Seien $g_{k}: g l(n, \mathbb{R}) \rightarrow \mathbb{R}$ definiert durch
+
+$$
+\operatorname{det}\left(t 11-\frac{1}{2 \pi} X\right)=: \sum_{k=0}^{n} g_{k}(X) t^{n-k}
+$$
+
+Dann ist
+
+$$
+p_{k}(E)=\mathcal{W}^{p}\left(g_{2 k}\right)
+$$
+
+\section*{Beweis:}
+Ist $E=P \times_{G L(n, \mathbb{R})} \mathbb{R}^{n}$, so ist $E^{\mathbb{C}}=P \times_{G L(n, \mathbb{R})} \mathbb{C}^{n}$, also ist $P$ eine $G L(n, \mathbb{R})$ Reduktion des $E^{\mathbb{C}}$ zugrunde liegenden Prinzipalbündels. Also ist (vgl. 12.6 und 12.14)
+
+$$
+c_{2 k}\left(E^{\mathbb{C}}\right)=\mathcal{W}^{P}\left(\left.c_{2 k}\right|_{g l(n, \mathbb{R})}\right)
+$$
+
+Wegen
+
+$$
+\operatorname{det}\left(t 1 l-\frac{1}{2 \pi i} X\right)=(-i)^{n} \operatorname{det}\left(i t 1 l-\frac{1}{2 \pi} X\right)
+$$
+
+ist $c_{k}(i X)=i^{k} c_{k}(X)$ und folglich gilt für $X \in g l(n, \mathbb{R})$
+
+$$
+(-1)^{k} c_{2 k}(X)=c_{2 k}(i X)=g_{k}(X)
+$$
+
+und damit
+
+$$
+p_{k}(E)=(-1)^{k} c_{2 k}\left(E^{\mathbb{C}}\right)=\left[g_{2 k}\left(F^{\nabla}\right)\right]
+$$
+
+\subsection*{Beispiel}
+Wir haben gesehen, dass $c\left(T \mathbb{C} P^{n}\right)=(1-a)^{n+1}$, für $a=c_{1}\left(l_{n}\right)$ gilt. Also ist
+
+$$
+\begin{aligned}
+c\left(T \mathbb{C} P^{n} \otimes \mathbb{C}\right)= & =c\left(T \mathbb{C} P^{n} \oplus \overline{T \mathbb{C} P^{n}}\right) \\
+& =(1-a)^{n+1}(1+a)^{n+1} \\
+& =\left(1-a^{2}\right)^{n+1}
+\end{aligned}
+$$
+
+Also ist
+
+$$
+\begin{aligned}
+p\left(T \mathbb{C} P^{1}\right) & =\left(1+a^{2}\right)^{2}=1 \\
+p\left(T \mathbb{C} P^{2}\right) & =\left(1+a^{2}\right)^{3}=1+3 a^{2} \\
+p\left(T \mathbb{C} P^{3}\right) & =\left(1+a^{2}\right)^{4}=1+4 a^{2}
+\end{aligned}
+$$
+
+\subsection*{Anwendung}
+Die Pontrjagin-Klasse kann oft helfen, zu entscheiden, ob eine Mannigfaltigkeit $M$ in $\mathbb{R}^{N}$ einzubetten ist. Ist nämlich $M \subseteq \mathbb{R}^{N}$, so ist $T M \oplus T^{\perp} M=M \times \mathbb{R}^{n}$, also $p_{1}(T M) p\left(T^{\perp} M\right)=1$.\\
+Jede $n$-dimensionale Manigkfaltigkeit lässt sich in den $\mathbb{R}^{2 n}$ einbetten, jede nicht kompakte sogar in den $\mathbb{R}^{2 n-1}$, jedoch stellt sich oft die Frage, ob es auch in niedriger Kodimension möglich ist, so existiert z.B. eine Einbettung des $\mathbb{R} P^{1}$ in $\mathbb{R}^{2}$, aber keine von $\mathbb{R} P^{2}$ in den $\mathbb{R}^{3}$ (nur eine Immersion).\\
+Wir zeigen hier: $\mathbb{C} P^{4}$ kann nicht in den $\mathbb{R}^{9}$ eingebettet werden. Angenommen doch, dann wäre $T^{\perp} \mathbb{C} P^{4}$ ein 1-dimensionales Vektorraumbündel mit Pontrjagin-Klasse
+
+$$
+\left(1+a^{2}\right)^{-5}=\left(1+5 a^{2}+15 a^{4}\right)^{-1}=1-5 a^{2}+10 a^{4}
+$$
+
+Dies ist aber nicht die Pontrjagin-Klasse eines 1-dimensionalen Vektorraumbündels. Genauer sieht man, dass, falls $\mathbb{C} P^{4} \subseteq \mathbb{R}^{n}$ ist, mindestens $n \geq 8+4=12$ gelten muss.
+
+Für die $k$-te Pontrjagin-Klasse $p(T M)$ einer Riemannschen Mannigfaltigkeit $M$ gilt damit für eine Orthonormalbasis $\left(e_{1}, \ldots, e_{n}\right)$ von $T M$
+
+$$
+p_{k}\left(\mathcal{R}^{g}\right)=\left(\frac{1}{2 \pi}\right)^{2 k} \sum_{i_{1}<\ldots<i_{2 k}} \operatorname{sign}(\tau) \mathcal{R}^{g}\left(e_{i_{1}} \wedge e_{i_{\tau(1)}}\right) \wedge \ldots \wedge \mathcal{R}^{g}\left(e_{i_{2 k}} \wedge e_{i_{\tau(2 k)}}\right)
+$$
+
+wobei $\mathcal{R}: \Lambda^{2} T^{*} M \rightarrow \Lambda^{2} T^{*} M$ der durch den Riemannschen Krümmungstensor gegebene Endomorphismus ist, also
+
+$$
+\mathcal{R}\left(e_{i} \wedge e_{j}\right)=\sum_{k<l} g\left(R\left(e_{i}, e_{j}\right) e_{k}, e_{l}\right) e_{k} \wedge e_{l}
+$$
+
+Dabei haben wir $T^{*} M=T M$ auf Riemannschen Mannigfaltigkeiten benutzt. Da Spur $\left(\mathcal{R}\left(e_{i} \wedge e_{j}\right)\right)=0$ gilt, ist also
+
+$$
+p_{1}\left(R^{g}\right)=\frac{1}{2 \pi^{2}} \sum_{i<j} \mathcal{R}\left(e_{i} \wedge e_{j}\right) \wedge \mathcal{R}\left(e_{j} \wedge e_{i}\right)
+$$
+
+Wir wollen jetzt in einem Spezialfall eine nähere Beziehung zur Differentialgeometrie zeigen. Dazu betrachten wir eine Zerlegung des Krümmungstensors. Sei $s$ die Skalarkrümmung und ric die Ricci-Krümmung einer Riemannschen Mannigfaltigkeit, dann betrachte man die Zerlegung des Krümmungstensors
+
+$$
+R^{g}=\frac{s}{2 n(n-1)} g \oplus g+\frac{1}{(n-2)}\left(\text { ric }-\frac{s}{n} g\right) \otimes g+W^{g} .
+$$
+
+Dabei ist ( $\triangle$ das Kulkarni-Normizu-Produkt\\
+$(a \circlearrowleft b)(x, y, u, v)=a(x, u) b(y, v)-a(x, v) b(y, u)+a(y, v) b(x, u)-a(y, u) b(x, v)$.\\
+Sind $a, b \in S^{2} V^{*}$, so hat $a \otimes b$ dieselben Symmetrieeigenschaften wie der Krümmungstensor. Fassen wir also die Summanden als Schnitte in End $\left(\Lambda^{2} T M\right)$ auf, so ist $g\left(\triangle g=2 \cdot \operatorname{Id}_{\Lambda^{2} T M}\right.$ und da Spur(ric $\left.-\frac{s}{n} g\right)=0$, ist auch die Spur des Schoutentensors Spur(ric $-\frac{s}{n} g$ ) $\triangle g=0$. $W^{g}$ heißt der Weyl-Tensor. Seine Bedeutung liegt darin, dass er eine konforme Invariante ist. Er hat dieselben Symmetrieeigenschaften wie der Krümmungstensor und ist spurfrei, also $\sum_{i=1}^{n} e_{i} W\left(u, e_{i}, e_{i}, v\right)=0$ (vgl. Besse, Einstein manifolds, S. 59 ff).\\
+In Dimension 4 liefert nun der Sternoperator eine Aufspaltung von $\Lambda^{2} T M= \Lambda^{2} T_{+} M \oplus \Lambda^{2} T_{-} M$. Bezüglich dieser Aufspaltung ist $\mathcal{R}$ durch
+
+$$
+\mathcal{R}=\left(\begin{array}{cc}
+W_{+} & 0 \\
+0 & W_{-}
+\end{array}\right)+\frac{s}{12} 11+\left(\begin{array}{cc}
+0 & B \\
+B^{*} & 0
+\end{array}\right)
+$$
+
+wobei $W=\left(\begin{array}{cc}W_{+} & 0 \\ 0 & W_{-}\end{array}\right)$der Weyl-Tensor ist, beschrieben wird. Es gilt $\operatorname{Spur} W_{+}=\operatorname{Spur} W_{-}=0$. Um dies zu erläutern, erinnern wir an die Definition des *-Operators.
+
+\subsection*{Exkurs: *-Operator}
+Die Metrik $g$ auf $T M$ induziert ein Skalarprodukt $<,>$ auf $\Lambda^{2} T_{x} M$ folgendermaßen. ist ( $e_{1}, \ldots, e_{n}$ ) eine Sylvesterbasis in $T_{x} M$ mit $\varepsilon_{i}=g\left(e_{i}, e_{i}\right)$, so definieren wir
+
+$$
+<e_{i_{1}} \wedge \ldots \wedge e_{i_{k}}, e_{j_{1}} \wedge \ldots \wedge e_{j_{k}}>=\operatorname{sign}\left(\begin{array}{ccc}
+i_{1} & \ldots & i_{k} \\
+j_{1} & \ldots & j_{k}
+\end{array}\right) \cdot \varepsilon_{i_{1}} \ldots \varepsilon_{i_{k}}
+$$
+
+für
+
+$$
+\left\{i_{1}, \ldots, i_{k}\right\}=\left\{j_{1}, \ldots, j_{k}\right\} \text { und }<e_{i_{1}} \wedge \ldots \wedge e_{i_{k}} e_{j_{1}} \wedge \ldots \wedge e_{j_{k}}>=0
+$$
+
+falls $\left\{i_{1}, \ldots, i_{k}\right\} \neq\left\{j_{1}, \ldots, j_{k}\right\}$.\\
+Aufgrund der Blocksymmetrie des Riemannschen Krümmungstensors $R^{g}$ ist $\mathcal{R}^{g}$ selbstadjungiert bezüglich dieses Skalarprodukts.\\
+Der Hodge-Operator
+
+$$
+*: \Omega^{k}(M) \rightarrow \Omega^{n-k}(M)
+$$
+
+auf einer orientierbaren Riemannschen Mannigfaltigkeit ist durch
+
+$$
+<* \omega, \eta>\operatorname{det}=\omega \wedge \eta
+$$
+
+gegeben. In Dimension 4 erhält man dadurch eine Abbildung
+
+$$
+*: \Lambda^{2} T^{*} M \rightarrow \Lambda^{2} T^{*} M
+$$
+
+und auf Riemannschen Mannigfaltigkeiten gilt für 2-Formen stets ** = id. Wir bezeichnen mit $\Lambda_{ \pm}^{2} T^{*} M$ die Eigenräume zu 1 und -1 .\\
+Wir untersuchen nun die Zerlegung des Krümmungstensors $\mathcal{R} \in \operatorname{End}\left(\Lambda^{2} T M\right)$ bezüglich der Zerlegung $\Lambda^{2} T M=\Lambda_{+}^{2} T M \oplus \Lambda_{-}^{2} T M, \mathcal{R}=\left(\begin{array}{cc}A_{+} & S_{-} \\ S_{+} & A_{-}\end{array}\right)$. Aufgrund der Blocksymmetrie folgt sofort, dass $S_{+}=S_{-}^{T}$ gilt. Außerdem rechnet man leicht nach, dass der Schouten-Tensor nur zu $S_{+}$und $S_{-}$beiträgt. Für die Rechnungen wählt man dazu eine Orthonormalbasis aus Eigenvektoren des Ricci-Tensors $\left(e_{1}, e_{2}, e_{3}, e_{4}\right)$ und damit eine Orthonormalbasis von $\Lambda_{ \pm}^{2} T M$ durch
+
+$$
+\begin{aligned}
+\alpha_{1}^{ \pm} & =\frac{1}{\sqrt{2}}\left(e_{1} \wedge e_{2} \pm e_{3} \wedge e_{4}\right) \\
+\alpha_{2}^{ \pm} & =\frac{1}{\sqrt{2}}\left(e_{2} \wedge e_{3} \pm e_{4} \wedge e_{1}\right) \\
+\alpha_{3}^{ \pm} & =\frac{1}{\sqrt{2}}\left(e_{3} \wedge e_{1} \pm e_{2} \wedge e_{4}\right)
+\end{aligned}
+$$
+
+Ist $\left(e_{1}, e_{2}, e_{3}, e_{4}\right)$ eine Orthonormalbasis von Eigenvektoren von $\alpha$ zum Eigenwert $\lambda_{j}$, so ist
+
+$$
+(\alpha \bigoplus g)\left(e_{i} \wedge e_{j}, e_{i} \wedge e_{j}\right)=\lambda_{i}+\lambda_{j}
+$$
+
+$$
+(\alpha \oplus g)\left(e_{i} \wedge e_{j}, e_{r} \wedge e_{s}\right)=0 \text { falls }\{i, j\} \neq\{r, s\} .
+$$
+
+Nutzt man nun aus, dass die Spur von $Z=2\left(\right.$ ric $\left.-\frac{s}{4} s g\right)$ verschwindet, so ist
+
+$$
+g(Z \oslash g)\left(\alpha_{i}^{ \pm}, \alpha_{j}^{ \pm}\right)=0
+$$
+
+für alle $i, j$.\\
+Mithilfe der Spurfreiheit des Weyl-Tensors führt eine ähnliche Rechnung zu dem Ergebnis, dass $W^{g}$ die Zerlegung von $\Lambda^{2} T M$ respektiert also $A_{ \pm}=\left(W^{g}+\right. \left.\frac{s}{12} \mathbb{1}\right)\left.\right|_{\Lambda_{ \pm}^{2} T M}=: W_{ \pm}+\frac{s}{12}$ und $Z \oplus g=\left(\begin{array}{cc}0 & S_{-} \\ S_{+} & 0\end{array}\right)$ gilt.\\
+Nutzt man die Biancchi-Identität aus, so folgt, dass
+
+$$
+\operatorname{Spur} A_{+}=\sum_{i=1}^{3} g\left(\mathcal{R}\left(\alpha_{i}^{+}\right), \alpha_{i}^{+}\right)=-\frac{1}{4} s=\operatorname{Spur} A_{-}
+$$
+
+gilt, also ist
+
+$$
+\operatorname{Spur}\left(A_{ \pm}-\frac{s}{12} \mathbb{1}\right)=\operatorname{Spur}\left(A_{ \pm}+\frac{1}{3} \operatorname{Spur} A \mathbb{1}\right)=0
+$$
+
+und damit Spur $W_{+}=\operatorname{Spur} W_{-}=0$.
+
+\subsection*{Satz}
+Auf einer 4-dimensionalen orientierten Mannigfaltigkeit ist
+
+$$
+p_{1}(T M)=\frac{1}{4 \pi^{2}}\left(\left\|W_{+}\right\|^{2}-\left\|W_{-}\right\|^{2}\right) \omega_{M}
+$$
+
+bezüglich einer beliebigen Riemannschen Metrik auf $M$.
+
+\subsection*{Korollar}
+Ist $p_{1}(T M) \neq 0$, so ist $M$ nicht konform flach.
+
+\section*{Beweis:}
+Es gilt
+
+$$
+4 \pi^{2} p_{1}\left(R^{g}\right)=\sum_{i=1}^{3}\left(\mathcal{R}\left(\alpha_{i}^{+}\right) \wedge \mathcal{R}\left(\alpha_{i}^{+}\right)+\mathcal{R}\left(\alpha_{i}^{-}\right) \wedge \mathcal{R}\left(\alpha_{i}^{-}\right)\right)
+$$
+
+Es ist
+
+$$
+\sum_{i=1}^{3}\left(\mathcal{R}\left(\alpha_{i}^{ \pm}\right) \wedge \mathcal{R}\left(\alpha_{i}^{ \pm}\right)\right)=
+$$
+
+$=\sum_{i=1}^{3} W_{ \pm}\left(\alpha_{i}^{ \pm}\right) \wedge W_{ \pm}\left(\alpha_{i}^{ \pm}\right)-\frac{s}{6} W_{ \pm}\left(\alpha_{i}^{ \pm}\right) \wedge \alpha_{i}^{ \pm}+S_{ \pm}\left(\alpha_{i}^{ \pm}\right) \wedge S_{ \pm}\left(\alpha_{i}^{ \pm}\right)+\frac{s^{2}}{144} \alpha_{i}^{ \pm} \wedge \alpha_{i}^{ \pm}$,\\
+denn
+
+$$
+\left(W_{ \pm}\left(\alpha_{i}^{ \pm}\right)+\frac{s}{12} \alpha_{i}^{ \pm}\right) \wedge S_{ \pm}\left(a_{i}^{ \pm}\right)=0
+$$
+
+da $\alpha_{i}^{ \pm} \wedge \alpha_{j}^{\mp}=0$.\\
+Wegen $\alpha_{i}^{ \pm} \wedge \alpha_{i}^{ \pm}= \pm \omega_{M}$ und $\alpha_{i}^{ \pm} \wedge \alpha_{j}^{ \pm}=0$ für $i \neq j$, ist
+
+$$
+\begin{aligned}
+\sum_{i=1}^{3} W_{ \pm}\left(\alpha_{i}^{ \pm}\right) \wedge \alpha_{i}^{ \pm} & =\sum_{i, j=1}^{3} g\left(W_{ \pm}\left(\alpha_{i}^{ \pm}\right), \alpha_{j}^{ \pm}\right) \alpha_{j}^{ \pm} \wedge \alpha_{i}^{ \pm} \\
+& = \pm \sum_{i=1}^{3} g\left(W_{ \pm}\left(\alpha_{i}^{ \pm}\right), \alpha_{i}^{ \pm}\right) \omega_{M} \\
+& = \pm \operatorname{Spur} W_{ \pm} \omega_{M}=0
+\end{aligned}
+$$
+
+und die Terme $\frac{s^{2}}{144} \alpha_{i}^{ \pm} \wedge \alpha_{i}^{ \pm}$heben sich gegenseitig auf.\\
+Weiter ist
+
+$$
+\begin{aligned}
+\sum_{i=1}^{3} W_{ \pm}\left(\alpha_{i}^{ \pm}\right) \wedge W_{ \pm}\left(\alpha_{i}^{ \pm}\right) & = \pm \sum_{i=1}^{3}<W_{+}\left(\alpha_{i}^{ \pm}\right), W_{+}\left(\alpha_{i}^{ \pm}\right)>\omega_{m} \\
+& = \pm\left\|W_{ \pm}\right\|^{2} \omega_{m}
+\end{aligned}
+$$
+
+Schließlich nutzt man noch
+
+$$
+S_{ \pm}\left(\alpha_{i}^{ \pm}\right)=g\left(\mathcal{R}\left(\alpha_{i}^{ \pm}\right), \alpha_{i}^{\mp}\right) \alpha_{i}^{\mp}
+$$
+
+und folglich
+
+$$
+S_{+}\left(\alpha_{i}^{+}\right) \wedge S_{+}\left(\alpha_{i}^{+}\right)=-S_{-}\left(\alpha_{i}^{-}\right) \wedge S_{-}\left(\alpha_{i}^{-}\right)
+$$
+
+um das Ergebnis zu erhalten.
+
+\section*{Die Euler-Klasse}
+\subsection*{Notation}
+Ist $A \in s o(n)$, so fassen wir im Folgenden $A \in \Lambda^{2} \mathbb{R}^{n}$ auf, also $A=\left(a_{i j}\right)_{i, j}$ lesen wir auch als
+
+$$
+A=\sum_{i<j} a_{i j} e_{i} \wedge e_{j}
+$$
+
+\subsection*{Definition}
+Für $A \in s o(2 m)$ ist die Pfaffsche Zahl $\operatorname{Pf}_{2 m}(A)$ durch
+
+$$
+A \wedge \ldots \wedge A=m!\mathrm{Pf}_{2 m}(A) \operatorname{det}
+$$
+
+wohldefiniert.
+
+\subsection*{Bemerkung}
+Es gilt $\operatorname{Pf}\left(X^{T} A X\right)=\operatorname{Pf}(A) \operatorname{det} X$, also ist $\operatorname{Pf} S O(2 m)$-invariant (aber nicht $G L(n, \mathbb{R})$-invariant!).
+
+\subsection*{Lemma}
+\begin{enumerate}
+  \item Die Abbildung
+\end{enumerate}
+
+$$
+\mathrm{Pf}_{2 m}: \operatorname{so}(2 m) \rightarrow \mathbb{R}
+$$
+
+ist ein $S O(2 m)$-invariantes, homogenes Polynom vom Grad $m$. Es gilt:
+
+$$
+2^{m} m!\operatorname{Pf}_{2 m}(A)=\sum_{\tau} \operatorname{sign}(\tau) a_{\tau(1) \tau(2)} \ldots a_{\tau(2 m-1) \tau(m)}
+$$
+
+Insbesondere gilt
+
+$$
+\begin{aligned}
+\operatorname{Pf}_{2}(A) & =a_{12} \\
+\operatorname{Pf}_{4}(A) & =a_{12} a_{34}-a_{13} a_{24}+a_{14} a_{23}
+\end{aligned}
+$$
+
+\begin{enumerate}
+  \setcounter{enumi}{1}
+  \item $\left(\mathrm{Pf}_{2 m}(A)\right)^{2}=\operatorname{det} A$
+  \item Bezeichnet $j: u(m) \rightarrow s o(2 m)$ die übliche Inklusion, so gilt
+\end{enumerate}
+
+$$
+\operatorname{Pf}_{2 m}(j(X))=(-1)^{m(m-1) / 2} i^{m} \operatorname{det}(X)
+$$
+
+\section*{Beweis:}
+\begin{enumerate}
+  \item Folgt direkt aus der Definition des Dachprodukts.
+  \item Schiefsymmetrische Matrizen können in gerader Dimension durch Konjugation mit einer orthogonalen Matrix in Standardform $\left(a_{i j}\right)$ mit $a_{2 i-1,2 i}= a_{2 i, 2 i-1}=\lambda_{i}$ für $i=1, \ldots, m$ und $a_{i j}=0$ sonst überführt werden.\\
+In dieser Basis ( $v_{1}, \ldots, v_{2 m}$ ) gilt dann
+\end{enumerate}
+
+$$
+A=\sum_{i=1}^{m} \lambda_{i} v_{2 i-1} \wedge v_{2 i}
+$$
+
+und folglich
+
+$$
+A \wedge \ldots \wedge A=m!\lambda_{1} \ldots \lambda_{m} \operatorname{det}
+$$
+
+also
+
+$$
+\operatorname{Pf}_{m}(A)=\lambda_{1} \cdot \ldots \cdot \lambda_{m} \text { und } \operatorname{det}(A)=\lambda_{1}^{2} \ldots \lambda_{m}^{2} .
+$$
+
+\begin{enumerate}
+  \setcounter{enumi}{2}
+  \item Ist $X=A+i B$, so ist
+\end{enumerate}
+
+$$
+\begin{aligned}
+\left(\mathrm{Pf}_{2 m}(j(X))^{2}\right. & =\operatorname{det}\left(\begin{array}{cc}
+A & -B \\
+B & A
+\end{array}\right)=\operatorname{det}\left(\begin{array}{cc}
+A+i B & -B \\
+0 & A-i B
+\end{array}\right) \\
+& =\operatorname{det}(A+i B) \operatorname{det}(A-i B)=|\operatorname{det} X|^{2}
+\end{aligned}
+$$
+
+Also ist $\operatorname{Pf}_{2 m}(j(X))=f(X) \operatorname{det}(X)$ für $f: u(n) \rightarrow S^{1}$ eine Abbildung $f: u(n) \rightarrow S^{1}$.\\
+Wegen $\bar{X}=-X^{T}$ ist $\overline{\operatorname{det} X}=(-1)^{m} \operatorname{det} X$, also $f(X)= \pm i^{m}$, also ist $f$ konstant und für $X=i 11$ ergibt sich der gesuchte Vorfaktor.
+
+\subsection*{Definition}
+Sei $E$ ein orientiertes $2 m$-dimensionales Riemannsches Vektorraumbündel, dann heißt
+
+$$
+e(E)=\frac{1}{(2 \pi)^{m}} \mathcal{W}^{P}\left(\operatorname{Pf}_{2 m}\right) \in H_{d R}^{2 m}(M)
+$$
+
+die Euler-Klasse von $(E, g)$.\\
+Dabei ist $P$ die Reduktion von $E$ auf $S O(2 m)$.\\
+Ist $E=T M$, so heißt
+
+$$
+e(M)=e(T M)
+$$
+
+auch die Euler-Klasse von M
+
+\subsection*{Bemerkung}
+Beachte. dass zur Berechnung der Euler-Klasse eine Riemannsche Metrik und Orientierung nötig ist!\\
+Ist $\Omega$ die Krümmung eines isometrischen Zusammenhangs, so gilt
+
+$$
+e(E)=\left(\frac{1}{4 \pi}\right)^{m} \frac{1}{(2 m)!} \sum \operatorname{sign}(\tau) \Omega_{\tau(1) \tau(2)} \ldots \Omega_{\tau(2 m-1) \tau(2 m)}
+$$
+
+\subsection*{Satz}
+Es gilt für ein $2 m$-dimensionales orientiertes Riemannsches Vektorraumbündel
+
+\begin{enumerate}
+  \item $e(E) e(E)=p_{m}(E)$,
+  \item $e(E \oplus F)=e(E) e(F)$
+\end{enumerate}
+
+\section*{Beweis:}
+\begin{enumerate}
+  \item $\left.\mathrm{Pf}_{2 m}(X)\right)^{2}=\operatorname{det}(X)$.
+  \item Betrachtet man Pf für Bockdiagonalmatrizen, so folgt die Behauptung.
+\end{enumerate}
+
+\subsection*{Bemerkung}
+Ist $E$ ein komplexes Vektorraumbündel, so ist
+
+$$
+e\left(E^{\mathbb{R}}\right)=(-1)^{m(m-1) / 2} c_{m}(E) .
+$$
+
+Die $n$-te Chernklasse eines komplexen Vektorraumbündels hängt also nicht von der komplexen Struktur ab. Um dies zu zeigen, benutzt man zur Berechnung der Euler-Klasse den Realteil einer hermitschen Bündelmetrik
+
+Chern-, Pointrjagin- und Euler-Klassen erzeugen invariante Polynomringe. Es gilt
+
+\subsection*{Lemma}
+Sei $P$ ein Polynom mit $P\left(T A T^{-1}\right)=P(A)$ für alle $A \in s o(k), T \in S O(k)$.
+
+\begin{enumerate}
+  \item Ist $k$ ungerade, so ist $P O(k)$-invariant und kann in Pontrjagin-Klassen geschrieben werden.
+  \item Ist $k$ gerade, so ist $P=P_{0}+e \cdot P_{1}$, wobei $e$ die Euler-Klasse und $P_{i} O(k)$-invariant sind.
+\end{enumerate}
+
+\section*{Beweis:}
+Gilkey, Invariance theory
+
+\subsection*{Satz}
+\begin{enumerate}
+  \item Sei $\operatorname{dim} M=2, G$ die Gaussche Krümmung, so ist
+\end{enumerate}
+
+$$
+\operatorname{Pf}_{2}\left(R^{g}\right)=G \omega_{M}
+$$
+
+\begin{enumerate}
+  \setcounter{enumi}{1}
+  \item Ist $M$ eine 4-dimensionale orientierte Riemannsche Mannigfaltigkeit, so ist
+\end{enumerate}
+
+$$
+\mathrm{Pf}_{2}\left(R^{g}\right)=\frac{1}{8}\left(\|R\|^{2}-4\|\mathrm{ric}\|^{2}+\mathrm{scal}^{2}\right) \omega_{M} .
+$$
+
+\section*{Beweis:}
+Es ist $\operatorname{Pf}_{2 m}\left(R^{g}\right)=\frac{(-1)^{m}}{2^{m} m!} \sum_{\tau} \operatorname{sign}(\tau) \mathcal{R}\left(e_{\tau(1)}\right) \wedge e_{\tau(2)} \wedge \ldots \mathcal{R}\left(e_{\tau(2 m-1)} \wedge e_{\tau(2 m)}\right)$.\\
+1.
+
+$$
+\mathrm{Pf}_{2}\left(R^{g}\right)\left(e_{1}, e_{2}\right)=g\left(R\left(e_{1}, e_{2}\right) e_{1}, e_{2}\right)=G .
+$$
+
+\begin{enumerate}
+  \setcounter{enumi}{1}
+  \item Folgt aus einer längeren Rechnung.
+\end{enumerate}
+
+\subsection*{Satz (Chern-Gauß-Bonnet)}
+Für eine $2 m$-dimensionale kompakte orientierte Mannigfaltigkeit gilt
+
+$$
+\int_{M^{2 m}} e\left(M^{2 m}\right)=\chi(M)=\sum_{j=1}^{2 m}(-1)^{j} \operatorname{dim} H_{d R}^{j}\left(M^{2 m}\right)
+$$
+
+\section*{Beweis:}
+Siehe Alfred Gray: Tubes, oder Peter Gilkey: Invariance Theory
+
+\subsection*{Beispiel}
+$M=S^{2}$. Es bezeichnen $\theta, \varphi$ die Kugelkoordinaten. Dann ist
+
+$$
+R^{g}\left(\partial_{\theta}, \partial_{\varphi}\right)=\sin \theta d \theta \wedge d \varphi
+$$
+
+Also ist $e(M)=\frac{1}{2 \pi} \sin \theta d \theta \wedge d \varphi$.
+
+\section*{Multiplikative und additive Klassen}
+Ist $E \rightarrow M$ ein komplexes Vektorraumbündel, $E=L_{1} \oplus \ldots \oplus L_{n}$ mit komplexen Linienbündeln $L_{i}$, so ist
+
+$$
+c(E)=\prod_{i=1}^{n}\left(1+c_{1}\left(L_{i}\right)\right)
+$$
+
+also ist
+
+$$
+c_{k}(E)=\sigma_{k}\left(x_{1}, \ldots x_{n}\right)
+$$
+
+wobei $x_{j}=c_{1}\left(L_{j}\right) \in H^{2}(M)$. Analog ist
+
+$$
+p_{k}\left(E^{\mathbb{R}}\right)=\sigma_{k}\left(x_{1}^{2}, \ldots, x_{n}^{2}\right)
+$$
+
+da
+
+$$
+\left.() L_{i}^{\mathbb{R}}\right)^{\mathbb{C}} \cong L_{i} \oplus \bar{L}_{i},
+$$
+
+also $c_{2}\left(\left(L_{i}^{\mathbb{R}}\right)^{\mathbb{C}}\right)=-x_{i}^{2}$. Natürlich können wir nicht jedes Vektorraumbündel in Linearbündel zerlegen. Wir können aber ein anschauliches Verfahren finden, um neue charakteristische Klassen zu definieren.
+
+\subsection*{Satz}
+Es bezeichne $\sigma_{k}$ die elementarsymmetrischen Polynome vom Grad $k$, also
+
+$$
+\sigma_{k}\left(x_{1}, \ldots, x_{n}\right):=\sum_{i_{1}<\ldots i_{k}} x_{i_{1}} \ldots x_{i_{k}} \text { und } \sigma_{k}=0 \text { für } k>n \text {, }
+$$
+
+$Q$ eine formale Potenzreihe mir rationalen Koeffizienten und konstantem Summanden 1, dann existieren Potenzreihen $S_{Q}$ und $P_{Q}$ in $n$ Variablen, sodass
+
+$$
+\begin{aligned}
+\sum_{i=1}^{n} Q\left(x_{i}\right) & =S_{Q}\left(\sigma_{1}\left(x_{1}, \ldots, x_{n}\right), \ldots, \sigma_{n}\left(x_{1}, \ldots, x_{n}\right)\right) \\
+& =: n+S_{1}\left(\sigma_{1}\left(x_{1}, \ldots, x_{n}\right)\right)+S_{2}\left(\sigma_{1}\left(x_{1}, \ldots, x_{n}\right),\left(\sigma_{2}\left(x_{1}, \ldots, x_{n}\right)\right)+\ldots\right. \\
+\prod_{i=1}^{n} Q\left(x_{i}\right) & =P_{Q}\left(\sigma_{1}\left(x_{1}, \ldots, x_{n}\right), \ldots, \sigma_{n}\left(x_{1}, \ldots, x_{n}\right)\right) \\
+& =1+P_{1}\left(\sigma_{1}\left(x_{1}, \ldots, x_{n}\right)\right)+\ldots+
+\end{aligned}
+$$
+
+für Polynome $S_{j}, P_{j}$ vom Grad $j$.\\
+Es gilt für $Q=1+a_{1} x+\ldots$
+
+$$
+\begin{aligned}
+S_{1}\left(\sigma_{1}\right) & =a_{1} \sigma_{1} \\
+S_{2}\left(\sigma_{1}, \sigma_{2}\right) & =a_{2}\left(\sigma_{1}^{2}-2 \sigma_{2}\right) \\
+S_{3}\left(\sigma_{1}, \sigma_{2}, \sigma_{2}\right) & =a_{3} \sigma_{1}^{3}-3 a_{3} \sigma_{1} \sigma_{2}+3 a_{3} \sigma_{3} \\
+P_{1}\left(\sigma_{1}\right) & =a_{1} \sigma_{1} \\
+P_{2}\left(\sigma_{2}\right) & =a_{2}\left(\sigma_{1}^{2}-2 \sigma_{2}\right)+a_{1}^{2} \sigma_{2} \\
+P_{3}\left(\sigma_{1}, \sigma_{2}\right) & =a_{3} \sigma_{1}^{3}+\left(a_{1} a_{2}-3 a_{3}\right) \sigma_{1} \sigma_{2}+\left(3 a_{3}-3 a_{1} a_{2}+a_{1}^{3}\right) \sigma_{3}
+\end{aligned}
+$$
+
+Auf diese Weise können neue charakteristische Klassen aus Chern- und PontrjaginKlassen gebildet werden. Wir führen dies nur für die Chern-Klassen vor:
+
+$$
+\begin{aligned}
+Q_{+}(E) & =S_{Q}\left(c_{1}(E), \ldots, c_{n}(E)\right) \\
+Q_{\bullet}(E) & =P_{Q}\left(c_{1}(E), \ldots, c_{n}(E)\right)
+\end{aligned}
+$$
+
+und analog für die Pontrjagin-Klassen. Charakteristische Klassen der Form $Q_{+}(E)$ heißen additive charakteristische Klassen, der Form $Q_{\bullet}$ multiplikative charakteristische Klassen. Aus $c\left(E_{1} \oplus E_{2}\right)=c\left(E_{1}\right) c\left(E_{2}\right)$ folgt für additive charakteristische Klassen:
+
+$$
+Q_{+}\left(E_{1} \oplus E_{2}\right)=Q_{+}\left(E_{1}\right)+Q_{+}\left(E_{2}\right)
+$$
+
+Für multiplikative charakteristische Klassen gilt
+
+$$
+Q_{\bullet}\left(E_{1} \oplus K_{2}\right)=Q_{\bullet}\left(E_{1}\right) Q_{\bullet}\left(E_{2}\right)
+$$
+
+\subsection*{Beispiele}
+\begin{enumerate}
+  \item Der Chern-Charakter
+\end{enumerate}
+
+$$
+Q(x)=e^{x}=1+x+\frac{x^{2}}{2}+\ldots
+$$
+
+Die zugehörige additive charakteristische Klasse ist der Chern-Charakter
+
+$$
+\begin{gathered}
+\operatorname{ch}(E)=n+c_{1}(E)+\frac{1}{2}\left(c_{1}^{2}(E)-2 c_{2}(E)\right)+\frac{1}{6}\left(c_{1}^{3}(E)-3 c_{1}(E) c_{2}(E)+3 c_{3}(E)\right)+\ldots \\
+=\operatorname{Spure}^{c(E)}
+\end{gathered}
+$$
+
+Ist $P \rightarrow S^{4}$ ein $S U(2)$-Bündel, so ist
+
+$$
+\operatorname{ch}(\Omega)=2+\operatorname{Spur}\left(\frac{i \Omega}{2 \pi}\right)+\frac{1}{2} \operatorname{Spur}\left(\frac{-\Omega}{2 \pi}\right)^{2} .
+$$
+
+$\int_{S^{4}} \mathrm{ch}_{2}(\Omega)$ heißt Instanton-Zahl.\\
+Der Vorteil des Chern-Charakters gegenüber den Chern-Klassen ist, dass er sich bei Addition eines trivialen Bündels ändert. Es gilt\\
+(a) $\operatorname{ch}\left(f^{*} E\right)=f^{*} \operatorname{ch}(E)$\\
+(b) $\operatorname{ch}(E \oplus F)=\operatorname{ch}(E)+\operatorname{ch}(F)$\\
+(c) $\operatorname{ch}(E \otimes F)=\operatorname{ch}(E) \operatorname{ch}(F)$.\\
+(direkter Beweis: Nakahara, Differentialgeometrie, Topologie und Phy$s i k)$.\\
+2. Die Todd-Klasse ist die multiplikative Klasse, die zu $\frac{x}{1-e^{-x}}=1+\frac{x}{2}+ \frac{x^{2}}{12}-\frac{x^{4}}{720} \pm \ldots$ gebildet wird.\\
+3. Das $L$ Polynom ist die multiplikative charakteristische Klasse, die aus den Pontrjagin-Klassen für reelle Vektorraumbündel zu
+
+$$
+L(x)=\frac{x}{\tanh x}
+$$
+
+gebildet wird, also
+
+$$
+L(x)=\prod\left(1+\sum_{n \geq 1}(-1)^{n-1} \frac{2^{2 n}}{(2 n)!} B_{n} x_{j}^{2 n}\right),
+$$
+
+wobei $B_{n}$ die Bernoulli-Zahlen sind, also
+
+$$
+L(E)=1+\frac{1}{3} p_{1}(E)+\frac{1}{45}\left(-p_{1}^{2}+7 p_{2}\right)+\ldots
+$$
+
+\begin{enumerate}
+  \setcounter{enumi}{3}
+  \item Ist $E$ ein reelles Vektorraumbündel, so ist das $\hat{A}$-Geschlecht die multiplikative charakteristische Klasse, die zu
+\end{enumerate}
+
+$$
+\hat{A}(x)=\frac{x / 2}{\sinh (x / 2)}=1-\frac{x}{24}+\frac{7 x^{2}}{45 \cdot 2^{7}}-\ldots
+$$
+
+aus den Pontrjagin-Klassen gebildet wird. Für kompakte 4-dimensionale reelle Mannigfaltigkeiten heißt
+
+$$
+\int_{M} \hat{A}_{m}(T M)
+$$
+
+das $\hat{A}$-Geschlecht von $M$. Also
+
+$$
+\hat{A}(E)=1-\frac{1}{24} p_{1}+\frac{1}{5760}\left(7 p_{1}^{3}-4 p_{2}\right)+\ldots
+$$
+
+Additive und multiplikative charakteristische Klassen sind in der Indextheorie wichtig. Sie setzen den analytischen Index eines Differentialoperators in Beziehung zu topologischen Invarianten, z.B. der Satz von Chern-Gauß-Bonnet für den Index von $d+d^{*}$
+
+$$
+\chi(M)=\sum_{j=1}^{2 m}(-1)^{j} \operatorname{dim} H_{d R}^{j}(M)=\int_{M} e(M)
+$$
+
+Atiyah-Singer für den Index des Dirac-Operators $D$
+
+$$
+\operatorname{Ind}\left(D^{+}\right)=\int_{M} \operatorname{ch}(E) \cdot \hat{A}(T M)
+$$
+
+Hirzebruchscher Signatursatz
+
+$$
+\operatorname{sign}(M)=\int_{M} L(M)
+$$
+
+Riemann-Roch-Hirzebruch für die Dimension der Dolbeault-Kohomologiegruppen $h^{q}=h^{0, q}$
+
+$$
+\sum_{q}(-1)^{q} h_{q}=\int_{M} \operatorname{ch}(E) \operatorname{Tod}(T M) \text { mit } h_{q}=\operatorname{dim}_{\mathbb{C}} H_{i}(M, E)
+$$
+
+\subsection*{Bemerkung}
+Die Signatur einer $4 n$-dimensionalen kompakten orientierten Mannigfaltigkeit ist die Signatur der Bilinearform
+
+$$
+\Lambda: H^{2 n} M \times H^{2 n} M \rightarrow \mathbb{R},([\omega],[\eta]) \mapsto \int_{M} \omega \wedge \eta
+$$
+
+Die Hirzebruchsche Signaturformel sagt, dass diese durch
+
+$$
+\int_{M} L\left(p_{1}(M), \ldots, p_{n}(M)\right)
+$$
+
+mit $L(x)=\prod_{i=1}^{n} \frac{x_{i}}{\tanh x_{i}}$ gegeben ist.
+
+
+
 
 
 \end{document}

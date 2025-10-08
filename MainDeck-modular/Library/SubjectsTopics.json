@@ -1096,5 +1096,31 @@
         }
       }
     }
+  },
+  "LIE": {
+    "index": 17,
+    "topics": {
+      "Matrix Lie Gruppen": {
+        "index": 1,
+        "parent": null,
+        "litIDs": {
+          "H15": "LIE-H15-1"
+        }
+      },
+      "Exponentialabbildung": {
+        "index": 2,
+        "parent": null,
+        "litIDs": {
+          "H15": "LIE-H15-2"
+        }
+      },
+      "Lie Algebra": {
+        "index": 3,
+        "parent": null,
+        "litIDs": {
+          "H15": "LIE-H15-3"
+        }
+      }
+    }
   }
 }

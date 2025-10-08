@@ -4922,6 +4922,120 @@ Man beachte, dass $\lim _{t \rightarrow 0} J(u, t)=1$ für alle $u$.
 \end{CONC}
 
 
+% ——————————————————————————————————————————————————————————
+% Volumen über geodätische Polarkoordinaten (Erklärung + Beispiele)
+% ——————————————————————————————————————————————————————————
+
+% (A) Begriffe / Notation
+\paragraph*{Begriffe und Notation.}
+Sei $(M,g)$ eine vollständige Riemannsche Mannigfaltigkeit, $m\in M$ fest.
+\begin{itemize}
+  \item \emph{Exponentialabbildung:} $\exp_m:T_mM\to M$, $v\mapsto c_v(1)$, wobei $c_v$ die Geodätische mit $c_v(0)=m$, $c_v'(0)=v$ ist (Bogenlänge als Zeit).
+  \item \emph{Schnittort / Cut locus:} $Cut(m)\subset M$ ist die Menge der Endpunkte, an denen die minimierende Geodätische von $m$ aus \emph{aufhört} eindeutig minimierend zu sein. Klassisch: $Cut(m)$ hat Maß $0$.
+  \item \emph{Geodätische Polarkoordinaten:} Schreibe $v=tu$ mit $t\ge 0$ und $u\in S^{n-1}\subset T_mM$ (Einheitssphäre bzgl.\ $g_m$). Setze $c(t)=\exp_m(tu)$.
+  \item \emph{Jacobi-Felder:} Für $i=2,\dots,n$ seien $Y_i$ Jacobi-Felder längs $c$ mit $Y_i(0)=0$ und $Y'_i(0)=e_i$, wobei $\{u,e_2,\dots,e_n\}$ ONB in $T_mM$ ist.
+  \item \emph{Volumenform:} $v_g$ ist die Riemannsche Volumenform; $\exp_m^*v_g$ ist ihr Pullback auf $T_mM$.
+  \item \emph{Jacobianfaktor:}
+  \[
+    J(u,t)\;:=\;t^{-(n-1)}\sqrt{\det\big(g(Y_i(t),Y_j(t))_{i,j=2}^{n}\big)}.
+  \]
+  Man beachte $J(u,t)\to 1$ für $t\to 0$.
+\end{itemize}
+
+% (B) Schritt-für-Schritt-Herleitung
+\paragraph*{Schritt-für-Schritt-Herleitung.}
+\begin{enumerate}
+  \item \textbf{Hopf–Rinow \& Zerlegung.}
+  Vollständigkeit $\Rightarrow$ jedes $x\in M$ ist durch eine \emph{minimierende} Geodätische mit $m$ verbunden. Außerhalb der $Cut(m)$ ist diese minimierende Geodätische eindeutig.
+  Daher ist $M=\exp_m(U_m)\,\cup\,Cut(m)$ mit einem sternförmigen $U_m\subset T_mM$ und $vol(Cut(m))=0$.
+  \[
+    vol(M,g)=\int_{U_m}\exp_m^*v_g.
+  \]
+
+  \item \textbf{Geodätische Polarkoordinaten in $T_mM$.}
+  Schreibe $v=tu$ (mit $u\in S^{n-1}$, $t\ge 0$). Das euklidische Maß in $T_mM\simeq\mathbb{R}^n$ zerfällt als
+  \[
+     dx_1\cdots dx_n \;=\; t^{\,n-1}\,dt\,du,
+  \]
+  wobei $du$ das kanonische Maß auf $S^{n-1}$ ist.
+
+  \item \textbf{Differential der Exponentialabbildung.}
+  Für die Richtung $u$ gilt $\big(d\exp_m\big)_{tu}(u)=c'(t)$ (Tangentenabbildung entlang der Geodätischen).
+  Variiere $u$ in Richtung $e_i$ via $\sigma_i(s,t):=\exp_m\big(t(u+se_i)\big)$;
+  das Jacobi-Feld $Y_i(t):=\partial_s|_{s=0}\sigma_i(s,t)$ erfüllt
+  \[
+     \big(d\exp_m\big)_{tu}(e_i)=\frac{1}{t}\,Y_i(t),\qquad i=2,\dots,n.
+  \]
+
+  \item \textbf{Jacobian von $\exp_m$ in der Basis $(u,e_2,\dots,e_n)$.}
+  Das Bild der Basis ist $\big(c'(t),\,t^{-1}Y_2(t),\dots,t^{-1}Y_n(t)\big)$.
+  Da $|c'(t)|=1$ (Bogenlänge), ergibt sich für den Betrag der Jacobimatrix
+  \[
+     \big|\det d\exp_m\big|_{tu}
+     \;=\;t^{-(n-1)}\sqrt{\det\big(g(Y_i(t),Y_j(t))\big)} \;=\; J(u,t).
+  \]
+
+  \item \textbf{Pullback der Volumenform.}
+  Damit gilt lokal (in Polarkoordinaten) die „Wechsel-der-Variablen“-Formel
+  \[
+     \exp_m^*v_g \;=\; J(u,t)\,dx_1\cdots dx_n \;=\; J(u,t)\,t^{n-1}\,dt\,du.
+  \]
+
+  \item \textbf{Integrationsgrenzen.}
+  In Richtung $u$ kann man längs $c(t)$ genau bis zum (ersten) Schnittpunkt gehen; setze dafür
+  $\rho(u)\in(0,\infty]$ als die Entfernung von $m$ zum Schnittort in Richtung $u$.
+  Integriert man Radien $t\in[0,\rho(u)]$ und alle Richtungen $u\in S^{n-1}$, folgt
+  \[
+     vol(M,g)\;=\;\int_{S^{n-1}}\!\int_{0}^{\rho(u)} J(u,t)\;t^{\,n-1}\,dt\,du.
+  \]
+
+  \item \textbf{Verhalten bei $t\to 0$.}
+  Aus der Jacobi-Gleichung erhält man $Y_i(t)=t\,e_i+O(t^3)$, also
+  $\det(g(Y_i,Y_j))=t^{2(n-1)}\big(1+O(t^2)\big)$ und damit $J(u,t)\to 1$.
+\end{enumerate}
+
+% (C) Beispiele
+\paragraph*{Beispiele.}
+
+\textbf{(1) Euklidischer Raum $(\mathbb{R}^n, g_{\mathrm{eucl}})$.}
+Hier sind Geodätische Geraden, $Y_i(t)=t\,e_i$, also $g(Y_i,Y_j)=t^2\delta_{ij}$ und $J(u,t)=1$.
+Für die Volumenformel eines \emph{Geodätischen Balls} $B_R(m)$ erhält man
+\[
+  vol\big(B_R(m)\big)
+   \;=\;\int_{S^{n-1}}\!\int_{0}^{R} 1\cdot t^{n-1}\,dt\,du
+   \;=\;\big|S^{n-1}\big|\cdot \frac{R^n}{n},
+\]
+mit $\lvert S^{n-1}\rvert=\dfrac{2\pi^{\frac{n}{2}}}{\Gamma(\frac{n}{2})}$.
+
+\medskip
+\textbf{(2) Runde $2$-Sphäre $(S^2,g_{\mathrm{rd}})$.}
+Wähle $m$ als Nordpol. Jede Geodätische ist ein Großkreis; der Schnittort ist der Antipode, also $\rho(u)=\pi$.
+Orthogonale Jacobi-Felder erfüllen $Y''+Y=0$ mit $Y(0)=0$, $Y'(0)=e_i$, d.\,h.\ $Y_i(t)=\sin(t)\,E_i(t)$.
+Damit $g(Y_i,Y_j)=\sin^2(t)\,\delta_{ij}$ und
+\[
+  J(u,t)
+  \;=\;\frac{\sin t}{t}.
+\]
+Somit
+\[
+  \mathrm{Area}(S^2)
+  \;=\;\int_{S^{1}}\!\int_{0}^{\pi} \frac{\sin t}{t}\,t\,dt\,du
+  \;=\;|S^{1}|\int_{0}^{\pi}\sin t\,dt
+  \;=\;2\pi\,[\,{-}\cos t\,]_{0}^{\pi}
+  \;=\;4\pi,
+\]
+wie erwartet.
+\medskip
+
+% (D) Bemerkung: Klein-t-Entwicklung
+\paragraph*{Bemerkung (Klein-$t$-Entwicklung).}
+Man erhält die klassische Expansion
+\[
+  J(u,t)\;=\;1-\frac{1}{6}\,\mathrm{Ric}_m(u,u)\,t^2+O(t^3),
+\]
+die den Einfluss der Krümmung auf das „Volumenmaß in Polarkoordinaten“ beschreibt.
+
+
 Beispiele:
 
 

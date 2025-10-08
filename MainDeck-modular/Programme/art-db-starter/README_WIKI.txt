@@ -1,3 +1,16 @@
+
+
+
+Snip
+
+
+
+
+
+
+
+
+
 # 🎨 Art-DB Starter — Quick Commands
 
 ## 1. Neues Setup (z. B. nach Code-Änderungen oder Datenbank-Reset)
