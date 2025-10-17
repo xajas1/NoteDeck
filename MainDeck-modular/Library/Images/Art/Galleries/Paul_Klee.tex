@@ -1,0 +1,94 @@
+\documentclass[11pt]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage[ngerman]{babel}
+\graphicspath{{/Users/tim/NoteDeck/MainDeck-modular/Library/Images/}}
+\setlength{\parindent}{0pt}
+\raggedbottom
+\title{Art Gallery — Paul Klee}
+\date{}
+\begin{document}
+\maketitle
+
+% Auto-generated — DO NOT EDIT.
+
+% Nur Dateiname (ohne Pfad) aus einem Pfad ziehen
+\makeatletter
+\newcommand{\basename}[1]{\begingroup\filename@parse{#1}\filename@base\filename@ext\endgroup}
+\makeatother
+
+% Einzeilige Codezeile (monospace), skaliert auf \linewidth
+\newcommand{\ArtCodeLine}[1]{\par\noindent{\scriptsize\ttfamily \resizebox{\linewidth}{!}{#1}}}
+
+% Robuste Kachel: rendert nichts, wenn Pfad leer ist
+\newcommand{\ArtTile}[2]{% #1=path, #2=caption
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \if\relax\detokenize{#1}\relax
+      % leer
+    \else
+      \includegraphics[width=\linewidth,height=0.28\textheight,keepaspectratio]{#1}\\[0.6ex]
+      {\footnotesize\itshape #2}\\[-0.2ex]
+      \ArtCodeLine{\basename{#1}}
+    \fi
+  \end{minipage}}
+
+\newcommand{\ArtRow}[4]{% #1..#4 = (path,caption) links/rechts
+  \noindent\ArtTile{#1}{#2}\hfill\ArtTile{#3}{#4}\par\vspace{1.0em}}
+
+\section*{Paul Klee}
+
+\ArtRow{Art\_TeX/ART0001\_\_Paul\_Klee\_\_Angelus\_Novus\_\_1920.jpg}{Paul Klee, Angelus Novus (1920)}{Art\_TeX/ART0002\_\_Paul\_Klee\_\_Highway\_and\_Byways\_\_1929.jpg}{Paul Klee, Highway and Byways (1929)}
+
+\ArtRow{Art\_TeX/ART0003\_\_Paul\_Klee\_\_Sumpflegende\_\_1919.jpg}{Paul Klee, Sumpflegende (1919)}{Art\_TeX/ART0004\_\_Paul\_Klee\_\_Twittering\_Machine\_\_1922.jpg}{Paul Klee, Twittering Machine (1922)}
+
+\ArtRow{Art\_TeX/ART0005\_\_Paul\_Klee\_\_The\_Light\_and\_So\_Much\_Else\_\_1931.jpg}{Paul Klee, The Light and So Much Else (1931)}{Art\_TeX/ART0006\_\_Paul\_Klee\_\_Ab\_ovo\_\_1917.jpg}{Paul Klee, Ab ovo (1917)}
+
+\ArtRow{Art\_TeX/ART0007\_\_Paul\_Klee\_\_Ad\_Parnassum\_\_1932.jpg}{Paul Klee, Ad Parnassum (1932)}{Art\_TeX/ART0008\_\_Paul\_Klee\_\_Death\_and\_Fire\_\_1940.jpg}{Paul Klee, Death and Fire (1940)}
+
+\ArtRow{Art\_TeX/ART0009\_\_Paul\_Klee\_\_Love\_at\_First\_Sight\_\_1924.jpg}{Paul Klee, Love at First Sight (1924)}{Art\_TeX/ART0010\_\_Paul\_Klee\_\_Ghost\_of\_a\_Genius\_\_1922.jpg}{Paul Klee, Ghost of a Genius (1922)}
+
+\ArtRow{Art\_TeX/ART0011\_\_Paul\_Klee\_\_Dittlsam\_\_1918.JPG}{Paul Klee, Dittlsam (1918)}{Art\_TeX/ART0012\_\_Paul\_Klee\_\_Der\_Mensch\_ist\_der\_Mund\_des\_Herrn\_\_1918.JPG}{Paul Klee, Der Mensch ist der Mund des Herrn (1918)}
+
+\ArtRow{Art\_TeX/ART0013\_\_Paul\_Klee\_\_Hafenbild\_Nachts\_\_1917.JPG}{Paul Klee, Hafenbild Nachts (1917)}{Art\_TeX/ART0014\_\_Paul\_Klee\_\_Miniatur\_mit\_dem\_E\_Emma\_\_1916.JPG}{Paul Klee, Miniatur mit dem E (Emma) (1916)}
+
+\ArtRow{Art\_TeX/ART0015\_\_Paul\_Klee\_\_Mit\_der\_Treppe\_\_1918.JPG}{Paul Klee, Mit der Treppe (1918)}{Art\_TeX/ART0016\_\_Paul\_Klee\_\_Night\_Feast\_\_1921.jpg}{Paul Klee, Night Feast (1921)}
+
+\ArtRow{Art\_TeX/ART0017\_\_Paul\_Klee\_\_Red\_Balloon\_\_1922.jpg}{Paul Klee, Red Balloon (1922)}{Art\_TeX/ART0018\_\_Paul\_Klee\_\_Curtain\_\_1924.jpg}{Paul Klee, Curtain (1924)}
+
+\ArtRow{Art\_TeX/ART0019\_\_Paul\_Klee\_\_Magic\_Garden\_\_1926.jpg}{Paul Klee, Magic Garden (1926)}{Art\_TeX/ART0020\_\_Paul\_Klee\_\_In\_the\_Current\_Six\_Thresholds\_\_1929.jpg}{Paul Klee, In the Current Six Thresholds (1929)}
+
+\ArtRow{Art\_TeX/ART0021\_\_Paul\_Klee\_\_Open\_Book\_\_1930.jpg}{Paul Klee, Open Book (1930)}{Art\_TeX/ART0022\_\_Paul\_Klee\_\_Hat\_Lady\_and\_Little\_Table\_\_1932.jpg}{Paul Klee, Hat, Lady and Little Table (1932)}
+
+\ArtRow{Art\_TeX/ART0023\_\_Paul\_Klee\_\_Gemmi\_Pass\_Valais\_Alps\_\_1895.jpg}{Paul Klee, Gemmi Pass, Valais Alps (1895)}{Art\_TeX/ART0024\_\_Paul\_Klee\_\_Hilterfingen\_\_1895.jpg}{Paul Klee, Hilterfingen (1895)}
+
+\ArtRow{Art\_TeX/ART0025\_\_Paul\_Klee\_\_Thunersee\_near\_Schadau\_\_1895.jpg}{Paul Klee, Thunersee near Schadau (1895)}{Art\_TeX/ART0026\_\_Paul\_Klee\_\_Comedian\_Invention\_4\_\_1904.jpg}{Paul Klee, Comedian (Invention 4) (1904)}
+
+\ArtRow{Art\_TeX/ART0027\_\_Paul\_Klee\_\_Aged\_Phoenix\_Invention\_9\_\_1905.jpg}{Paul Klee, Aged Phoenix (Invention 9) (1905)}{Art\_TeX/ART0028\_\_Paul\_Klee\_\_Acrobats\_\_1915.jpg}{Paul Klee, Acrobats (1915)}
+
+\ArtRow{Art\_TeX/ART0029\_\_Paul\_Klee\_\_The\_Idea\_of\_Firs\_\_1917.jpg}{Paul Klee, The Idea of Firs (1917)}{Art\_TeX/ART0030\_\_Paul\_Klee\_\_Jumping\_Jack\_\_1919.jpg}{Paul Klee, Jumping Jack (1919)}
+
+\ArtRow{Art\_TeX/ART0031\_\_Paul\_Klee\_\_Before\_the\_Festivity\_\_1920.jpg}{Paul Klee, Before the Festivity (1920)}{Art\_TeX/ART0032\_\_Paul\_Klee\_\_White\_Blossom\_in\_the\_Garden\_\_1920.jpg}{Paul Klee, White Blossom in the Garden (1920)}
+
+\ArtRow{Art\_TeX/ART0033\_\_Paul\_Klee\_\_From\_the\_Song\_of\_Songs\_Version\_II\_\_1921.jpg}{Paul Klee, (From the Song of Songs) Version II (1921)}{Art\_TeX/ART0034\_\_Paul\_Klee\_\_Fright\_of\_a\_Girl\_\_1922.jpg}{Paul Klee, Fright of a Girl (1922)}
+
+\ArtRow{Art\_TeX/ART0035\_\_Paul\_Klee\_\_Flower\_Family\_V\_\_1922.jpg}{Paul Klee, Flower Family V (1922)}{Art\_TeX/ART0036\_\_Paul\_Klee\_\_Tropical\_Gardening\_\_1923.jpg}{Paul Klee, Tropical Gardening (1923)}
+
+\ArtRow{Art\_TeX/ART0037\_\_Paul\_Klee\_\_Singer\_of\_the\_Comic\_Opera\_\_1923.jpg}{Paul Klee, Singer of the Comic Opera (1923)}{Art\_TeX/ART0038\_\_Paul\_Klee\_\_Tree\_Culture\_\_1924.jpg}{Paul Klee, Tree Culture (1924)}
+
+\ArtRow{Art\_TeX/ART0039\_\_Paul\_Klee\_\_Introducing\_the\_Miracle\_\_1916.jpg}{Paul Klee, Introducing the Miracle (1916)}{Art\_TeX/ART0040\_\_Paul\_Klee\_\_Cat\_and\_Bird\_\_1928.JPG}{Paul Klee, Cat and Bird (1928)}
+
+\ArtRow{Art\_TeX/ART0041\_\_Paul\_Klee\_\_Fire\_in\_the\_Evening\_\_1929.jpg}{Paul Klee, Fire in the Evening (1929)}{Art\_TeX/ART0042\_\_Paul\_Klee\_\_Equals\_Infinity\_\_1932.png}{Paul Klee, Equals Infinity (1932)}
+
+\ArtRow{Art\_TeX/ART0043\_\_Paul\_Klee\_\_Horizon\_Zenith\_and\_Atmosphere\_\_1925.jpg}{Paul Klee, Horizon, Zenith and Atmosphere (1925)}{Art\_TeX/ART0044\_\_Paul\_Klee\_\_Public\_Duel\_\_1932.jpg}{Paul Klee, Public Duel (1932)}
+
+\ArtRow{Art\_TeX/ART0045\_\_Paul\_Klee\_\_Two\_Ways\_\_1932.jpg}{Paul Klee, Two Ways (1932)}{Art\_TeX/ART0046\_\_Paul\_Klee\_\_Rocks\_at\_Night\_\_1939.jpg}{Paul Klee, Rocks at Night (1939)}
+
+\ArtRow{Art\_TeX/ART0047\_\_Paul\_Klee\_\_Inscription\_\_1926.jpg}{Paul Klee, Inscription (1926)}{Art\_TeX/ART0048\_\_Paul\_Klee\_\_Owl\_Comedy\_\_1926.jpg}{Paul Klee, Owl Comedy (1926)}
+
+\ArtRow{Art\_TeX/ART0049\_\_Paul\_Klee\_\_In\_Angel\_s\_Care\_\_1931.jpg}{Paul Klee, In Angel's Care (1931)}{Art\_TeX/ART0050\_\_Paul\_Klee\_\_Hoffmannesque\_Scene\_\_1921.jpg}{Paul Klee, Hoffmannesque Scene (1921)}
+
+\end{document}

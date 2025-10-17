@@ -1,0 +1,884 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17. Titel und Autor
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\CustomHeading{Definition}{#1}{#2}}{}
+\newenvironment{PROP}[2]{\CustomHeading{Proposition}{#1}{#2}}{}
+\newenvironment{THEO}[2]{\CustomHeading{Theorem}{#1}{#2}}{}
+\newenvironment{LEM}[2]{\CustomHeading{Lemma}{#1}{#2}}{}
+\newenvironment{KORO}[2]{\CustomHeading{Corollar}{#1}{#2}}{}
+\newenvironment{REM}[2]{\CustomHeading{Remark}{#1}{#2}}{}
+\newenvironment{EXA}[2]{\CustomHeading{Example}{#1}{#2}}{}
+\newenvironment{STUD}[2]{\CustomHeading{Study}{#1}{#2}}{}
+\newenvironment{CONC}[2]{\CustomHeading{Concept}{#1}{#2}}{}
+
+\newenvironment{PROOF}
+  {\begin{proof}}%
+{\end{proof}}
+
+% --- 17. Titel und Autor ---
+\title{Algebra}
+\author{Tim Jaschik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+…
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\tableofcontents
+
+\pagebreak
+
+
+
+
+
+
+\section{Ringe}
+
+
+
+
+\section{Ringe Basics}
+
+\subsection{Definition}
+
+\begin{DEF}{A-1-03-16}{Ringhomomorphismus}
+
+\end{DEF}
+
+\begin{DEF}{A-1-03-2}{Ring ohne Eins}
+
+\end{DEF}
+
+\begin{DEF}{A-1-03-21}{R-Linearkombination in Ringen}
+
+\end{DEF}
+
+\begin{DEF}{A-1-03-22}{Unterring eines Ringes}
+
+\end{DEF}
+
+\begin{DEF}{A-1-03-24}{Einheiten in Ringen}
+
+\end{DEF}
+
+\begin{DEF}{A-1-03-3}{Kommutativer Ring}
+
+\end{DEF}
+
+\begin{DEF}{A-1-03-30}{Schiefkörper als Ring mit Einheitsgruppe R ohne $0$}
+
+\end{DEF}
+
+\begin{DEF}{A-1-03-31}{Körper als abelscher Schiefkörper}
+
+\end{DEF}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Example}
+
+\begin{EXA}{A-1-03-18}{Pullback-Ringhomomorphismus}
+
+\end{EXA}
+
+\begin{EXA}{A-1-03-19}{Einschränkung als Pullback der Inklusion}
+
+\end{EXA}
+
+\begin{EXA}{A-1-03-20}{Auswertungshomomorphismus für Punkt-Inklusion}
+
+\end{EXA}
+
+\begin{EXA}{A-1-03-23}{Bild von Ringhomomorphismen ist ein Unterring}
+
+\end{EXA}
+
+\begin{EXA}{A-1-03-26}{Einheitengruppe von ganzen Zahlen}
+
+\end{EXA}
+
+\begin{EXA}{A-1-03-27}{Einheitengruppe von Gruppenringe}
+
+\end{EXA}
+
+\begin{EXA}{A-1-03-28}{Einheiten von Matrizenringe mit Koeffizienten in Körper}
+
+\end{EXA}
+
+\begin{EXA}{A-1-03-32}{Quaternionen als nichtkommutativer Schiefkörper}
+
+\end{EXA}
+
+\begin{EXA}{A-1-03-4}{Körper sind Ringe}
+
+\end{EXA}
+
+\begin{EXA}{A-1-03-5}{$(\mathbb{Z},+,*)$ kommutaiver Ring}
+
+\end{EXA}
+
+\begin{EXA}{A-1-03-6}{Ring der Funktionen}
+
+\end{EXA}
+
+\begin{EXA}{A-1-03-7}{Matrizenringe über Körper}
+
+\end{EXA}
+
+\begin{EXA}{A-1-03-8}{$(End_k(V),+,\circ)$ Ring}
+
+\end{EXA}
+
+\begin{EXA}{A-1-03-9}{Matrizenring über Ring}
+
+\end{EXA}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Proposition}
+
+
+
+\begin{PROP}{A-1-03-25}{Einheitsgruppe: Menge der Einheiten in Ringen sind Gruppe bzgl. Multiplikation in R}
+
+\end{PROP}
+
+\begin{PROP}{A-1-03-29}{Ringhomomorphismen bilden Einheiten auf Einheiten ab und induzieren G-Hom auf Einheitsgruppen}
+
+\end{PROP}
+
+
+
+\subsection{Lemma}
+
+
+
+\begin{LEM}{A-1-03-14}{Rechenregeln für Ringe mit Eins}
+
+\end{LEM}
+
+\begin{LEM}{A-1-03-15}{Wenn Ring mit $0=1$, dann Nullring}
+
+\end{LEM}
+
+
+
+\subsection{Remark}
+
+
+
+\begin{REM}{A-1-03-13}{Eins eines Ringes mit Eins ist eindeutig}
+
+\end{REM}
+
+\begin{REM}{A-1-03-17}{Ringhomomorphismen induzieren Gruppenhomomorphismen zwischen abelschen Gruppen}
+
+\end{REM}
+
+
+
+
+
+
+
+\begin{EXA}{A-1-03-10}{Nullring}
+
+\end{EXA}
+
+\begin{EXA}{A-1-03-11}{Produktring}
+
+\end{EXA}
+
+\begin{EXA}{A-1-03-12}{Gruppenring mit Koeffizienten aus Körper}
+
+\end{EXA}
+
+
+
+
+
+
+
+
+
+\begin{DEF}{A-1-03-1}{Ring mit Eins}
+
+\end{DEF}
+
+
+
+
+
+
+\section{Potenzreihenringe und Polynomringe}
+
+\subsection{Definition}
+
+\begin{DEF}{A-1-04-15}{Symmetrisches Polynom}
+
+\end{DEF}
+
+\begin{DEF}{A-1-04-2}{Polynomring mit Koeffizienten in Ring als Unterring von Potenzreihenring}
+
+\end{DEF}
+
+
+
+
+
+
+
+\subsection{Example}
+
+
+
+\begin{EXA}{A-1-04-16}{Elementarsymmetrische Polynom in n-Variablen}
+
+\end{EXA}
+
+\begin{EXA}{A-1-04-8}{Auswertungshomomorphismus für Abbildung von Körper in Matrzenring }
+
+\end{EXA}
+
+\begin{EXA}{A-1-04-9}{Auswertungshomomorphismus für Abbildung von Körper in Abbildungsring der $End_V$ }
+
+\end{EXA}
+
+
+
+
+
+
+
+\subsection{Proposition}
+
+
+
+\begin{PROP}{A-1-04-17}{Vieta-Formel}
+
+\end{PROP}
+
+\begin{PROP}{A-1-04-18}{Jedes symmetrische Polynom ist ein Polynom in den elementarsymmetrischen Polynomen}
+
+\end{PROP}
+
+\begin{PROP}{A-1-04-7}{Universelle Eigenschaft des Polynomringes: Auswertungs-Ringhomomorphismus}
+
+\end{PROP}
+
+
+
+
+
+\subsection{Lemma}
+
+\begin{LEM}{A-1-04-14}{Gruppenhomomorphismus zwischen Symmetrische Gruppe und Gruppe der Ring-Automorphismen des Polynomringes in n-Variablen}
+
+\end{LEM}
+
+
+
+\subsection{Remark}
+
+
+
+\begin{REM}{A-1-04-12}{Multiindex-Schreibweise}
+
+\end{REM}
+
+\begin{REM}{A-1-04-13}{Induzierter Ringautomorphismus auf Polynomring durch Permutation}
+
+\end{REM}
+
+\begin{REM}{A-1-04-3}{Eindeutige Darstellung in Polynomringen}
+
+\end{REM}
+
+\begin{REM}{A-1-04-4}{Polynomring als Unterring der R-Linearkombinationen}
+
+\end{REM}
+
+\begin{REM}{A-1-04-5}{Eigenschaften der Gradfunktion von Leitkoeffizienten}
+
+\end{REM}
+
+\begin{REM}{A-1-04-6}{Identifikation von R als Unterring von Polynomring mit Koeff in R}
+
+\end{REM}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{LEM}{A-1-04-11}{Eindeutige Darstellung in Polynomringen in n-Variablen}
+
+\end{LEM}
+
+
+
+
+
+\begin{DEF}{A-1-04-1}{Potenzreihenring mit Koeffizienten in Ring}
+
+\end{DEF}
+
+\begin{DEF}{A-1-04-10}{Polynomring in n-Variablen mit Koeffizienten aus Ring}
+
+\end{DEF}
+
+
+
+
+
+
+
+\section{Ideale und Quotienten}
+
+
+
+\subsection{Definition}
+
+
+
+\begin{DEF}{A-1-05-10}{Erzeugendensysteme von Ideale}
+
+\end{DEF}
+
+\begin{DEF}{A-1-05-17}{Quotienten für Ideale in Ringen mit Quotientenabbildung}
+
+\end{DEF}
+
+\begin{DEF}{A-1-05-2}{Ideal eines Ringes}
+
+\end{DEF}
+
+\begin{DEF}{A-1-05-7}{Von Teilmengen erzeugte Ideale}
+
+\end{DEF}
+
+
+
+
+
+
+
+
+
+\subsection{Example}
+
+
+
+\begin{EXA}{A-1-05-11}{nZ}
+
+\end{EXA}
+
+\begin{EXA}{A-1-05-12}{$\{0\}$ und $\{1\}$ in jedem Ring sind Ideale}
+
+\end{EXA}
+
+\begin{EXA}{A-1-05-13}{$(2,X)$ im Polynomring $\mathbb{Z}(X)$}
+
+\end{EXA}
+
+\begin{EXA}{A-1-05-24}{Komplexen Zahlen isomorph zu Faktorring des Polynomringes in reellen Zahlen Mod $(X^2+1)$}
+
+\end{EXA}
+
+\begin{EXA}{A-1-05-4}{$Rx$ sind Ideale von $R$}
+
+\end{EXA}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Proposition}
+
+
+
+\begin{PROP}{A-1-05-15}{Faktorring als Quotientenring bzgl. Ideale}
+
+\end{PROP}
+
+\begin{PROP}{A-1-05-18}{Faktorringe für Ideale mit kanonischer Projektion sind Quotienten}
+
+\end{PROP}
+
+\begin{PROP}{A-1-05-20}{Urbild von Idealen längs R-Homs ist Ideal}
+
+\end{PROP}
+
+\begin{PROP}{A-1-05-21}{Bilder von Idealen längs surjektiven R-Homs sind Ideale}
+
+\end{PROP}
+
+\begin{PROP}{A-1-05-22}{Homomorphisatz}
+
+\end{PROP}
+
+\begin{PROP}{A-1-05-25}{Erster Isomorphiesatz}
+
+\end{PROP}
+
+\begin{PROP}{A-1-05-26}{Zweiter Isomorphiesatz}
+
+\end{PROP}
+
+\begin{PROP}{A-1-05-5}{Kern eines R-Homs ist ein Ideal}
+
+\end{PROP}
+
+\begin{PROP}{A-1-05-6}{R-Hom ist injektiv gdw Kern $= 0$}
+
+\end{PROP}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Corollar}
+
+
+
+\begin{KORO}{A-1-05-16}{Jedes Ideal ist Kern eines geeigneten R-Homs}
+
+\end{KORO}
+
+\subsection{Lemma}
+
+
+
+\begin{LEM}{A-1-05-14}{Vereinigung von aufsteigend inkludierten Idealen sind Ideale}
+
+\end{LEM}
+
+\begin{LEM}{A-1-05-3}{Charakterisierung von Idealen}
+
+\end{LEM}
+
+\begin{LEM}{A-1-05-9}{Schnitte von Idealen sind Ideale}
+
+\end{LEM}
+
+
+
+
+
+\subsection{Remark}
+
+
+
+\begin{REM}{A-1-05-1}{Kern von Ringhomomorphismen nicht i.A. Unterring}
+
+\end{REM}
+
+\begin{REM}{A-1-05-19}{Quotientenabbildung ist surjektiv}
+
+\end{REM}
+
+\begin{REM}{A-1-05-23}{Struktur von Faktorring bestimmen durch raten eines Isomorphismus zw S und R/I und $I=ker(f)$}
+
+\end{REM}
+
+\begin{REM}{A-1-05-8}{Warum ist die Menge der erzeugten R-Linearkombinationen eine Ideal?}
+
+\end{REM}
+
+
+
+
+
+
+
+
+\section{Moduln}
+
+
+
+
+
+\section{Moduln Grundlagen}
+
+\subsection{Definition}
+
+\subsection{Example}
+
+
+
+\begin{EXA}{A-1-07-11}{K-Vektorräume sind K-Moduln}
+
+\end{EXA}
+
+\begin{EXA}{A-1-07-12}{Abelsche Gruppen sind Z-Moduln}
+
+\end{EXA}
+
+\begin{EXA}{A-1-07-13}{Moduln bzgl Polynomringe in Körpern sind ein K-Vektorraum mit einem K-linearen Endo}
+
+\end{EXA}
+
+\begin{EXA}{A-1-07-14}{Menge der Spaltentupel mit Elementen aus einem Ring ist mit komp. Add und diagonale R-Multip ein R-Moduln}
+
+\end{EXA}
+
+\begin{EXA}{A-1-07-15}{Für Körper sind K-Modulnhomomorphismen K-lineare Abbildungen}
+
+\end{EXA}
+
+\begin{EXA}{A-1-07-16}{Für Z sind Z-Modulnhomomorphismen Gruppenhomomorphismen}
+
+\end{EXA}
+
+\begin{EXA}{A-1-07-17}{Für Polynomringe in Körpern sind Modulnhomomorphismen K-lineare Abbildungen, die mit X* Polynom kommutieren}
+
+\end{EXA}
+
+\begin{EXA}{A-1-07-18}{Freie Moduln vom Rang n als isomorphe R-Moduln zu R^n}
+
+\end{EXA}
+
+\begin{EXA}{A-1-07-19}{Für Körper sind Untermoduln Untervektorräume}
+
+\end{EXA}
+
+\begin{EXA}{A-1-07-20}{Für Z sind Untermoduln Untergruppen}
+
+\end{EXA}
+
+\begin{EXA}{A-1-07-21}{Für Polynomringe in Körpern sind Untermoduln Endo-Stabile Untervektorräume}
+
+\end{EXA}
+
+\begin{EXA}{A-1-07-22}{Untermoduln eines Ringes sind Ideale}
+
+\end{EXA}
+
+\begin{EXA}{A-1-07-23}{R-Modulhomomorphismus von Koeffizienten aus R^n in M für fixiertes Elemente-Tupel in R-Moduln: Surjektiv gdw Endlich erzeugt}
+
+\end{EXA}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{DEF}{A-1-07-1}{Modul zu einem Ring}
+
+\end{DEF}
+
+\begin{DEF}{A-1-07-10}{Zyklischer R-Modul}
+
+\end{DEF}
+
+\begin{DEF}{A-1-07-2}{R-Modulhomomorphismus}
+
+\end{DEF}
+
+\begin{DEF}{A-1-07-3}{Untermodul eines Moduls}
+
+\end{DEF}
+
+\begin{DEF}{A-1-07-4}{Durch Teilmengen eines R-Moduls erzeugte Untermoduln}
+
+\end{DEF}
+
+\begin{DEF}{A-1-07-5}{Kern und Bild eines R-Modulhomomorphismus}
+
+\end{DEF}
+
+\begin{DEF}{A-1-07-6}{Innere Direkte Summe von Untermoduln}
+
+\end{DEF}
+
+\begin{DEF}{A-1-07-7}{Direkte Summe von Moduln}
+
+\end{DEF}
+
+\begin{DEF}{A-1-07-8}{Direkte Produkt von Moduln}
+
+\end{DEF}
+
+\begin{DEF}{A-1-07-9}{Annulatorideal von R-Moduln}
+
+\end{DEF}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\pagebreak
+\printbibliography
+\end{document}

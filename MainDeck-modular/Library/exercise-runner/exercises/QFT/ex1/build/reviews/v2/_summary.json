@@ -1,0 +1,57 @@
+{
+  "tasks": {
+    "1.1": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist größtenteils korrekt und vollständig, aber es gibt kleinere Ungenauigkeiten.",
+      "weaknesses": [
+        {
+          "code": "unit_conversion",
+          "msg": "Die Umrechnung von Sekunden in GeV^-1 ist nicht korrekt erklärt. Die Beziehung zwischen Zeit und Energie in natürlichen Einheiten sollte klarer dargestellt werden."
+        }
+      ],
+      "fix_suggestions": [
+        "Korrigiere die Erklärung zur Umrechnung von Sekunden in GeV^-1, indem du die Beziehung zwischen Zeit und Energie in natürlichen Einheiten deutlicher machst.",
+        "Überprüfe die Berechnung der Gravitationskonstante in natürlichen Einheiten auf mögliche Rundungsfehler."
+      ]
+    },
+    "2.1": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist größtenteils korrekt und vollständig.",
+      "weaknesses": [
+        {
+          "code": "H-derivative-x",
+          "msg": "Die Ableitung von H nach x sollte die Kettenregel für L berücksichtigen, was nicht explizit gezeigt wird."
+        }
+      ],
+      "fix_suggestions": [
+        "Erkläre die Anwendung der Kettenregel bei der Ableitung von H nach x genauer."
+      ]
+    },
+    "3.1": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist größtenteils korrekt und vollständig, zeigt aber kleinere Schwächen in der Begründung.",
+      "weaknesses": [
+        {
+          "code": "incomplete_explanation",
+          "msg": "Die Umformung zur Divergenzform könnte detaillierter erklärt werden, insbesondere die Anwendung der Produktregel."
+        }
+      ],
+      "fix_suggestions": [
+        "Erkläre die Umformung zur Divergenzform detaillierter, insbesondere die Anwendung der Produktregel."
+      ]
+    },
+    "4.1": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist größtenteils korrekt und vollständig, jedoch gibt es kleinere Unklarheiten.",
+      "weaknesses": [
+        {
+          "code": "time_dependence",
+          "msg": "Die Lösung erwähnt die Zeitabhängigkeit des Hamiltonoperators, aber die Anpassung der Herleitung für einen zeitabhängigen Hamiltonoperator wird nicht detailliert ausgeführt."
+        }
+      ],
+      "fix_suggestions": [
+        "Erkläre genauer, wie die Herleitung angepasst werden muss, wenn der Hamiltonoperator zeitabhängig ist."
+      ]
+    }
+  }
+}

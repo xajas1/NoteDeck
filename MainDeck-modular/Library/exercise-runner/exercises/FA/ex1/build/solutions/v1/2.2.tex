@@ -1,0 +1,11 @@
+Um die Aussage zu zeigen, dass ein Unterraum $F$ eines normierten Raumes $E$ mit Kodimension 1 entweder abgeschlossen oder dicht in $E$ ist, betrachten wir die Dimension des Quotientenraums $E/F$. Da $\operatorname{dim} E / F = 1$, existiert ein linearer Funktional $f: E \to \mathbb{K}$ (wobei $\mathbb{K}$ entweder $\mathbb{R}$ oder $\mathbb{C}$ ist), dessen Kern genau $F$ ist. 
+
+Das Funktional $f$ ist nichttrivial, da $F$ eine echte Untermenge von $E$ ist. Nach dem Satz von Hahn-Banach kann $f$ zu einem stetigen linearen Funktional auf dem gesamten Raum $E$ fortgesetzt werden. 
+
+Betrachten wir nun zwei Fälle:
+
+1. **Fall 1: $f$ ist stetig.** In diesem Fall ist der Kern von $f$, also $F$, ein abgeschlossener Unterraum von $E$. Dies folgt direkt aus der Stetigkeit von $f$, da der Kern eines stetigen linearen Funktionals immer abgeschlossen ist.
+
+2. **Fall 2: $f$ ist nicht stetig.** In diesem Fall ist $F$ nicht abgeschlossen. Da $F$ eine Kodimension von 1 hat, ist $E/F$ eindimensional. Ein nicht abgeschlossener Unterraum mit Kodimension 1 muss dicht in $E$ sein, da sonst ein Punkt außerhalb des Abschlusses von $F$ existieren würde, der nicht durch Elemente von $F$ approximiert werden könnte, was im Widerspruch zur Annahme der Kodimension 1 stehen würde.
+
+Daher ist $F$ entweder abgeschlossen oder dicht in $E$.

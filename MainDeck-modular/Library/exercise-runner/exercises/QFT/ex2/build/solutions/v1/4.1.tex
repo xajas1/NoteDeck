@@ -1,0 +1,73 @@
+Um zu zeigen, dass $\epsilon^{\prime \alpha \beta} = - \epsilon^{\alpha \beta}$, betrachten wir die Bedingung für die Inverse der Lorentztransformation. Die Transformationen sind gegeben durch:
+
+\[
+x^{\prime \alpha} = \left(g^{\alpha \beta} + \epsilon^{\alpha \beta}\right) x_\beta
+\]
+
+und
+
+\[
+x^\alpha = \left(g^{\alpha \beta} + \epsilon^{\prime \alpha \beta}\right) x_\beta^{\prime}.
+\]
+
+Setzen wir die erste Gleichung in die zweite ein, erhalten wir:
+
+\[
+x^\alpha = \left(g^{\alpha \beta} + \epsilon^{\prime \alpha \beta}\right) \left(g_{\beta \gamma} + \epsilon_{\beta \gamma}\right) x^\gamma.
+\]
+
+Da die Transformationen invers zueinander sind, muss gelten:
+
+\[
+x^\alpha = \delta^\alpha_\gamma x^\gamma = x^\alpha.
+\]
+
+Dies führt zu:
+
+\[
+\left(g^{\alpha \beta} + \epsilon^{\prime \alpha \beta}\right) \left(g_{\beta \gamma} + \epsilon_{\beta \gamma}\right) = \delta^\alpha_\gamma.
+\]
+
+Für infinitesimale $\epsilon^{\alpha \beta}$ und $\epsilon^{\prime \alpha \beta}$ können wir die Terme erster Ordnung betrachten:
+
+\[
+g^{\alpha \beta} g_{\beta \gamma} + g^{\alpha \beta} \epsilon_{\beta \gamma} + \epsilon^{\prime \alpha \beta} g_{\beta \gamma} = \delta^\alpha_\gamma.
+\]
+
+Da $g^{\alpha \beta} g_{\beta \gamma} = \delta^\alpha_\gamma$, folgt:
+
+\[
+g^{\alpha \beta} \epsilon_{\beta \gamma} + \epsilon^{\prime \alpha \beta} g_{\beta \gamma} = 0.
+\]
+
+Dies impliziert, dass $\epsilon^{\prime \alpha \beta} = - \epsilon^{\alpha \beta}$.
+
+Um zu zeigen, dass $\epsilon^{\alpha \beta} = -\epsilon^{\beta \alpha}$, betrachten wir die Erhaltung der Norm:
+
+\[
+x^{\prime \alpha} x^{\prime}_\alpha = x^\alpha x_\alpha.
+\]
+
+Einsetzen der Transformation ergibt:
+
+\[
+\left(g^{\alpha \beta} + \epsilon^{\alpha \beta}\right) x_\beta \left(g_{\alpha \gamma} + \epsilon_{\alpha \gamma}\right) x^\gamma = g^{\alpha \beta} x_\beta x_\alpha.
+\]
+
+Die Terme erster Ordnung in $\epsilon$ führen zu:
+
+\[
+g^{\alpha \beta} x_\beta \epsilon_{\alpha \gamma} x^\gamma + \epsilon^{\alpha \beta} x_\beta g_{\alpha \gamma} x^\gamma = 0.
+\]
+
+Dies vereinfacht sich zu:
+
+\[
+\epsilon^{\alpha \beta} x_\beta x_\alpha + \epsilon_{\alpha \beta} x^\alpha x^\beta = 0.
+\]
+
+Da dies für beliebige $x^\alpha$ gelten muss, folgt:
+
+\[
+\epsilon^{\alpha \beta} = -\epsilon^{\beta \alpha}.
+\]

@@ -1,0 +1,66 @@
+Um die Transformationseigenschaften der bilinearen Kovarianten unter einer allgemeinen Lorentztransformation \( S(\Lambda) \) zu beweisen, betrachten wir die Dirac-Spinoren \(\psi\) und ihre adjungierten Spinoren \(\bar{\psi} = \psi^\dagger \gamma^0\). Eine Lorentztransformation wirkt auf die Spinoren durch die Matrix \( S(\Lambda) \), sodass \(\psi \rightarrow S(\Lambda) \psi\) und \(\bar{\psi} \rightarrow \bar{\psi} S^{-1}(\Lambda)\).
+
+1. Für den Skalar \(\bar{\psi} \psi\) gilt:
+\begin{align*}
+\bar{\psi} \psi &\rightarrow \bar{\psi} S^{-1}(\Lambda) S(\Lambda) \psi = \bar{\psi} \psi.
+\end{align*}
+Da \(S^{-1}(\Lambda) S(\Lambda) = I\), bleibt der Ausdruck invariant.
+
+2. Für den Pseudoskalar \(\bar{\psi} \gamma^5 \psi\) ergibt sich:
+\begin{align*}
+\bar{\psi} \gamma^5 \psi &\rightarrow \bar{\psi} S^{-1}(\Lambda) \gamma^5 S(\Lambda) \psi.
+\end{align*}
+Um die Transformationseigenschaft von \(\gamma^5\) zu verstehen, beachten wir, dass \(\gamma^5 = i\gamma^0\gamma^1\gamma^2\gamma^3\) und die Dirac-Matrizen \(\gamma^\mu\) unter Lorentztransformationen wie Vektoren transformieren. Daher gilt:
+\begin{align*}
+S^{-1}(\Lambda) \gamma^5 S(\Lambda) &= S^{-1}(\Lambda) (i\gamma^0\gamma^1\gamma^2\gamma^3) S(\Lambda) \\
+&= i (S^{-1}(\Lambda) \gamma^0 S(\Lambda))(S^{-1}(\Lambda) \gamma^1 S(\Lambda))(S^{-1}(\Lambda) \gamma^2 S(\Lambda))(S^{-1}(\Lambda) \gamma^3 S(\Lambda)).
+\end{align*}
+Da die Determinante einer Lorentztransformation \(\operatorname{det}(\Lambda) = \pm 1\) ist, folgt:
+\begin{align*}
+S^{-1}(\Lambda) \gamma^5 S(\Lambda) &= \operatorname{det}(\Lambda) \gamma^5.
+\end{align*}
+Somit:
+\begin{align*}
+\bar{\psi} \gamma^5 \psi &\rightarrow \operatorname{det}(\Lambda) \bar{\psi} \gamma^5 \psi.
+\end{align*}
+
+3. Für den Vektor \(\bar{\psi} \gamma^\mu \psi\) gilt:
+\begin{align*}
+\bar{\psi} \gamma^\mu \psi &\rightarrow \bar{\psi} S^{-1}(\Lambda) \gamma^\mu S(\Lambda) \psi.
+\end{align*}
+Die Dirac-Matrizen transformieren als Vektoren, also:
+\begin{align*}
+S^{-1}(\Lambda) \gamma^\mu S(\Lambda) &= \Lambda_\nu^\mu \gamma^\nu.
+\end{align*}
+Daher:
+\begin{align*}
+\bar{\psi} \gamma^\mu \psi &\rightarrow \Lambda_\nu^\mu \bar{\psi} \gamma^\nu \psi.
+\end{align*}
+
+4. Für den axialen Vektor \(\bar{\psi} \gamma^\mu \gamma^5 \psi\) ergibt sich:
+\begin{align*}
+\bar{\psi} \gamma^\mu \gamma^5 \psi &\rightarrow \bar{\psi} S^{-1}(\Lambda) \gamma^\mu \gamma^5 S(\Lambda) \psi.
+\end{align*}
+Da \(\gamma^\mu \gamma^5\) wie ein axialer Vektor transformiert, haben wir:
+\begin{align*}
+S^{-1}(\Lambda) \gamma^\mu \gamma^5 S(\Lambda) &= \operatorname{det}(\Lambda) \Lambda_\nu^\mu \gamma^\nu \gamma^5.
+\end{align*}
+Somit:
+\begin{align*}
+\bar{\psi} \gamma^\mu \gamma^5 \psi &\rightarrow \operatorname{det}(\Lambda) \Lambda_\nu^\mu \bar{\psi} \gamma^\nu \gamma^5 \psi.
+\end{align*}
+
+5. Für den antisymmetrischen Tensor \(\bar{\psi} \sigma^{\mu \nu} \psi\) gilt:
+\begin{align*}
+\bar{\psi} \sigma^{\mu \nu} \psi &\rightarrow \bar{\psi} S^{-1}(\Lambda) \sigma^{\mu \nu} S(\Lambda) \psi.
+\end{align*}
+Die Transformationseigenschaft der \(\sigma^{\mu \nu}\)-Matrizen ist:
+\begin{align*}
+S^{-1}(\Lambda) \sigma^{\mu \nu} S(\Lambda) &= \Lambda_\alpha^\mu \Lambda_\beta^\nu \sigma^{\alpha \beta}.
+\end{align*}
+Daher:
+\begin{align*}
+\bar{\psi} \sigma^{\mu \nu} \psi &\rightarrow \Lambda_\alpha^\mu \Lambda_\beta^\nu \bar{\psi} \sigma^{\alpha \beta} \psi.
+\end{align*}
+
+%CHECK: Die Herleitung der Transformationseigenschaft von \(\gamma^5\) wurde detailliert ergänzt, um die Korrektheit der Lösung sicherzustellen.

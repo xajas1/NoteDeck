@@ -1,0 +1,591 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17  Graphik
+% 18  Extra
+% 00. Titel und Autor
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\graphicspath{{../../Library/Images/}}
+\usepackage[export]{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\begin{unitbox}\CustomHeading{Definition}{#1}{#2}}{\end{unitbox}}
+\newenvironment{PROP}[2]{\begin{unitbox}\CustomHeading{Proposition}{#1}{#2}}{\end{unitbox}}
+\newenvironment{THEO}[2]{\begin{unitbox}\CustomHeading{Theorem}{#1}{#2}}{\end{unitbox}}
+\newenvironment{LEM}[2]{\begin{unitbox}\CustomHeading{Lemma}{#1}{#2}}{\end{unitbox}}
+\newenvironment{KORO}[2]{\begin{unitbox}\CustomHeading{Corollar}{#1}{#2}}{\end{unitbox}}
+\newenvironment{REM}[2]{\begin{unitbox}\CustomHeading{Remark}{#1}{#2}}{\end{unitbox}}
+\newenvironment{EXA}[2]{\begin{unitbox}\CustomHeading{Example}{#1}{#2}}{\end{unitbox}}
+\newenvironment{STUD}[2]{\begin{unitbox}\CustomHeading{Study}{#1}{#2}}{\end{unitbox}}
+\newenvironment{CONC}[2]{\begin{unitbox}\CustomHeading{Concept}{#1}{#2}}{\end{unitbox}}
+\newenvironment{OTH}[2]{\begin{unitbox}\CustomHeading{Other}{#1}{#2}}{\end{unitbox}}
+\newenvironment{EXE}[2]{\begin{unitbox}\CustomHeading{Exercise}{#1}{#2}}{\end{unitbox}}
+\newenvironment{MOT}[2]{\begin{unitbox}\CustomHeading{Motivation}{#1}{#2}}{\end{unitbox}}
+\newenvironment{PROOF}[2]{\begin{unitbox}\CustomHeading{Proof}{#1}{#2}}{\end{unitbox}}
+
+% --- Unit Umgebung für Source-Inhalte ---
+\usepackage{mdframed}
+\newmdenv[
+  linewidth=1pt,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftmargin=0cm,
+  rightmargin=0cm,
+  skipabove=10pt,
+  skipbelow=10pt,
+  innertopmargin=0.5\baselineskip,
+  innerbottommargin=0.5\baselineskip,
+  backgroundcolor=gray!10,
+  linecolor=gray
+]{unitbox}
+
+\newenvironment{unit}[1]
+  {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
+  {\end{unitbox}}
+
+% --- 17. ... ---
+
+% --- 18. Extras ---
+\usepackage{stmaryrd}
+\usepackage{bbold}  % falls du \mathbb{1} nutzen willst
+
+% --- 00. Titel und Autor ---
+\title{Mein Titel}
+\author{Tim Jaschik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+Kurze Beschreibung …
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\tableofcontents
+
+\pagebreak
+
+
+
+
+\section{Tutorial: Tensor-Calaculations}
+
+\section*{Prolog: Warum Tensorfelder?}
+
+\subsection*{Die 2-Sphäre als Mannigfaltigkeit}
+Sei
+\[
+  S^{2}_{r} \;=\; \bigl\{ (x,y,z)\in\mathbb R^{3}\mid x^{2}+y^{2}+z^{2}=r^{2} \bigr\}.
+\]
+$S^{2}_{r}$ ist eine kompakte, orientierbare, zweidimensionale, glatte Mannigfaltigkeit
+ohne Rand.  Der Tangentialraum in $p\in S^{2}_{r}$ ist
+\[
+  T_{p}S^{2}_{r} \;=\; \bigl\{\,v\in\mathbb R^{3}\bigm| v\cdot p = 0\bigr\}.
+\]
+
+\subsection*{Tensorfelder (global)}
+Ein \((k,\ell)\)\mbox{-}Tensorfeld auf $S^{2}_{r}$ ist eine glatte Abbildung
+\[
+  T\colon p \longmapsto T(p)\in \underbrace{T_{p}S^{2}{}^{\otimes k}}_{k\text{-mal}}
+  \otimes \underbrace{T_{p}^{*}S^{2}{}^{\otimes \ell}}_{\ell\text{-mal}} .
+\]
+Seine Definition kommt **ohne** Koordinaten aus.
+
+\subsection*{Von der globalen Definition zu Komponenten}
+
+Sei $T$ ein $(k,\ell)$–Tensorfeld auf einer $n$–dimensionalen Mannigfaltigkeit $M$.
+Wähle eine Karte $\phi\colon U\to\R^{n}$ mit lokalen Koordinaten $(x^{1},\dots,x^{n})$.
+Dann bilden die Vektorfelder
+\[
+  \partial_{i}\;=\;\frac{\partial}{\partial x^{i}}
+\qquad(i=1,\dots,n)
+\]
+sowie die 1-Formen
+\[
+  dx^{j}\bigl(\partial_{i}\bigr)=\delta^{j}_{i}
+\]
+punktweise duale Basen von $T_{p}M$ bzw.\ $T_{p}^{*}M$.
+Somit kann man
+\[
+  T(p)=
+  T^{i_{1}\dots i_{k}}{}_{j_{1}\dots j_{\ell}}(p)\;
+  \partial_{i_{1}}\!\otimes\!\dots\!\otimes\!\partial_{i_{k}}
+  \otimes
+  dx^{j_{1}}\!\otimes\!\dots\!\otimes\!dx^{j_{\ell}}
+\]
+schreiben.  
+Die Funktionen $T^{i_{1}\dots i_{k}}{}_{j_{1}\dots j_{\ell}}\colon\phi(U)\to\R$
+heißen die \emph{Komponenten von $T$ in der Karte $\phi$}.
+
+Wechselt man zu einer Karte $\tilde\phi$, so gelten wegen
+\(
+\tilde\partial_{a}
+=\tfrac{\partial x^{i}}{\partial\tilde x^{a}}\partial_{i}
+\)
+und
+\(
+d\tilde x^{b}
+=\tfrac{\partial\tilde x^{b}}{\partial x^{j}}dx^{j}
+\)
+die Transformationsgesetze
+\[
+  \tilde T^{a_{1}\dots a_{k}}{}_{b_{1}\dots b_{\ell}}
+  =
+   \frac{\partial \tilde x^{a_{1}}}{\partial x^{i_{1}}}\!\dots
+   \frac{\partial \tilde x^{a_{k}}}{\partial x^{i_{k}}}
+   \frac{\partial x^{j_{1}}}{\partial \tilde x^{b_{1}}}\!\dots
+   \frac{\partial x^{j_{\ell}}}{\partial \tilde x^{b_{\ell}}}\,
+   T^{i_{1}\dots i_{k}}{}_{j_{1}\dots j_{\ell}}.
+\]
+Damit ist $T$ unabhängig von der Koordinatenwahl.
+
+
+
+\subsection*{Zwei Karten und der Metriktensor}
+
+\paragraph{Karte (I): Kugelkoordinaten.}
+\[
+\Phi(\theta,\varphi)=\bigl(\sin\theta\cos\varphi,
+                           \sin\theta\sin\varphi,
+                           \cos\theta\bigr),\quad
+0<\theta<\pi.
+\]
+Lokaler Rahmen: $\partial_\theta,\partial_\varphi$;
+Korahmen: $d\theta,d\varphi$.
+
+\paragraph{Karte (II): stereographisch (Nordpol).}
+\[
+\Psi(u,v)=\left(\frac{2u}{1+\rho^{2}},\;
+                \frac{2v}{1+\rho^{2}},\;
+                \frac{\rho^{2}-1}{1+\rho^{2}}\right),
+\qquad \rho^{2}=u^{2}+v^{2}.
+\]
+Lokaler Rahmen: $\partial_{u},\partial_{v}$;
+Korahmen: $du,dv$.
+
+\paragraph{Metrik-Komponenten.}
+\[
+\begin{aligned}
+g_{\theta\theta}&=1,& g_{\theta\varphi}&=0,&
+g_{\varphi\varphi}&=\sin^{2}\theta,\\[4pt]
+g_{uu}&=g_{vv}=\frac{4}{(1+\rho^{2})^{2}},&
+g_{uv}&=0.
+\end{aligned}
+\]
+
+\paragraph{Transformationstest.}
+Mit
+$\partial_u\theta=\dfrac{2u}{\rho(1+\rho^{2})}$,
+$\partial_u\varphi=-\dfrac{v}{\rho^{2}}$
+und
+$\sin\theta=\dfrac{2\rho}{1+\rho^{2}}$
+folgt
+\[
+g_{uu}
+=(\partial_u\theta)^{2}
+  +\sin^{2}\theta\,(\partial_u\varphi)^{2}
+=\frac{4}{(1+\rho^{2})^{2}}.
+\]
+Die übrigen Komponenten ergeben sich analog – die
+Transformationsregel ist erfüllt.
+
+
+
+
+
+
+\pagebreak
+
+% UNIT 1D — Vom abstrakten Tensorfeld zu Komponenten
+
+CONCEPT: (r,s)-Tensorfeld als multilineare Abbildung  
+Ein (r,s)-Tensorfeld \(T\) ordnet jedem Punkt \(p\in M\) eine multilineare
+Abbildung  
+\[
+T_p : \underbrace{T_p^*M \times \dotsm \times T_p^*M}_{r\text{-mal}}
+      \times
+      \underbrace{T_p M \times \dotsm \times T_p M}_{s\text{-mal}}
+      \;\longrightarrow\; \mathbb{R}
+\]
+zu.  Abstrakte Indizes \(T^{ab}{}_{cd}\) identifizieren dabei lediglich
+die Slots (erste zwei „oben“ = kontravariant, letzte zwei „unten“ =
+kovariant); sie sind \emph{keine Zahlen}.
+
+DEFINITION: Komponentendarstellung \(T^{\mu\nu}{}_{\kappa\lambda}\)  
+Wählt man eine lokale Kartenbasis \(\{\partial_\mu\}\) für \(TM\) und
+die duale Basis \(\{dx^\mu\}\) für \(T^*M\), so definiert man  
+\[
+T^{\mu\nu}{}_{\kappa\lambda}(x)
+\;:=\;
+T_x\!\bigl(dx^\mu,dx^\nu,\partial_\kappa,\partial_\lambda\bigr).
+\]
+Damit wird jeder Slot durch Einsetzen eines Basis- (bzw. Dualbasis-)
+vektors „gesättigt“ – das liefert eine \emph{Zahl} und damit die
+Komponente des Tensors an der Stelle \(x\).
+
+EXAMPLE: Bedeutung von \(T^{ij}{}_{kl}\)  
+Schreibt man \(T^{ij}{}_{kl}\) ohne konkrete Zahlenwerte, meint man:
+
+• \(i,j\) belegen die beiden kontravarianten Slots (Vektorargumente),  
+
+• \(k,l\) belegen die beiden kovarianten Slots (1-Form-Argumente).  
+Ersetzt man \(i,j,k,l\) durch Karte-Indizes \(\mu,\nu,\kappa,\lambda\),
+erhält man die tatsächlich rechenbare Komponente
+\(T^{\mu\nu}{}_{\kappa\lambda}\).
+
+PROPOSITION: Transformationsgesetz der Komponenten  
+Unter einem Kartenwechsel \(x^\mu \mapsto x^{\mu'}\) transformieren die
+Komponenten gemäß  
+\[
+T^{\mu'\nu'}{}_{\kappa'\lambda'}
+=
+\frac{\partial x^{\mu'}}{\partial x^{\mu}}
+\frac{\partial x^{\nu'}}{\partial x^{\nu}}
+\frac{\partial x^{\kappa}}{\partial x^{\kappa'}}
+\frac{\partial x^{\lambda}}{\partial x^{\lambda'}}
+\,
+T^{\mu\nu}{}_{\kappa\lambda},
+\]
+was genau die Bedingung ist, dass das gesamte Objekt
+kartenunabhängig (also ein Tensorfeld) bleibt.
+
+
+
+---------------------------------------------------------------------
+
+% UNIT 1E — Indexposition und Rollen der Metrik
+
+CONCEPT: Slot-Typ Indexposition  
+
+• Ein \emph{oben} gesetzter Index steht für einen Vektor-Slot
+  (Element aus \(TM\)).  
+
+• Ein \emph{unten} gesetzter Index steht für einen 1-Form-Slot
+  (Element aus \(T^*M\)).  
+Die Position zeigt also, welchen „Argumenttyp“ der Slot verlangt.
+
+DEFINITION: Heben/Senken mittels Metrik  
+Existiert eine Riemannsche Metrik \(g\), so liefert  
+\(g^\sharp:T^*M\!\to\!TM,\;\alpha\mapsto g^{\sharp}(\alpha)\)
+und \(g^\flat:TM\!\to\!T^*M,\;v\mapsto g^\flat(v)\).
+Damit kann man Komponenten umschreiben, z.\,B.  
+\(v_i := g_{ij}v^j\)  und  \(T_{ij} := g_{ip}g_{jq}T^{pq}\).
+
+EXAMPLE: Ricci-Tensor als Kontraktion  
+Der Riemann-Tensor \(R_{ijk\ell}\) hat Typ (0,4).  Mit der Metrik hebt
+man zwei Indizes:  
+\(R^i{}_{k} := g^{j\ell}R_{jk\ell}{}^{i}\).  Diese gemischten
+Komponenten bilden den Ricci-Tensor, Typ (1,1).
+
+PROPOSITION: Slot-Konstanz beim Heben/Senken  
+Heben oder Senken ändert \emph{nicht} die Anzahl der Slots, sondern nur
+deren Typ. Die algebraischen Symmetrien des Ursprungstensors bleiben
+erhalten, da \(g_{ij}=g_{(ij)}\) symmetrisch ist.
+
+
+
+% UNIT 1F — Transformationsverhalten kontravariant vs. kovariant
+
+CONCEPT: Jacobimatrix und ihre Inverse  
+Sei \(x^\mu\) ein Koordinatensystem, \(x^{\mu'}=x^{\mu'}(x^1,\dots,x^n)\)
+ein neues.  Die \emph{Jacobimatrix} ist  
+\(J^{\mu'}{}_{\mu}:=\partial x^{\mu'}/\partial x^{\mu}\);  
+ihre Inverse nennen wir \(J^{\mu}{}_{\mu'}\).
+
+DEFINITION: Kontravariantes Transformationsgesetz  
+Die Komponenten eines Vektorfeldes \(V^ \mu\) transformieren mit der
+Jacobimatrix:
+\[
+V^{\mu'} \;=\; J^{\mu'}{}_{\mu}\,V^{\mu}.
+\]
+
+DEFINITION: Kovariantes Transformationsgesetz  
+Die Komponenten einer 1-Form \(\omega_\mu\) benutzen die inverse
+(transponierte) Jacobimatrix:
+\[
+\omega_{\mu'} \;=\; J^{\mu}{}_{\mu'}\,\omega_{\mu}.
+\]
+Damit gilt \(\omega_{\mu'}V^{\mu'}=\omega_{\mu}V^{\mu}\), d.\,h.\ das
+natürliche Paarungsprodukt ist koordinateninvariant.
+
+EXAMPLE: 2-D Kartentransformation (kartesisch → polar)  
+\(x^1=r\cos\varphi,\; x^2=r\sin\varphi\).  
+Jacobimatrix  
+\(J^{\mu'}{}_{\mu}= \begin{pmatrix}\cos\varphi & \sin\varphi \\ -\tfrac{\sin\varphi}{r} & \tfrac{\cos\varphi}{r}\end{pmatrix}\).  
+Für einen rein radialen Vektor \((V^x,V^y)=(1,0)\) erhält man  
+\(V^{r}=1,\; V^{\varphi}=0\);  
+für die Gradienten-1-Form \(d r = (\cos\varphi,\sin\varphi)\) ergibt
+sich \((d r)_{r}=1,\;(d r)_{\varphi}=0\).
+Dies illustriert: kontravariantes vs. kovariantes Gesetz benutzen
+Jacobi bzw. deren Inverse.
+
+PROPOSITION: Allgemeines Transformationsgesetz für (r,s)-Tensoren  
+\[
+T^{\mu'_1\dots\mu'_r}{}_{\nu'_1\dots\nu'_s}
+=
+J^{\mu'_1}{}_{\mu_1}\cdots J^{\mu'_r}{}_{\mu_r}
+J^{\nu_1}{}_{\nu'_1}\cdots J^{\nu_s}{}_{\nu'_s}
+\,
+T^{\mu_1\dots\mu_r}{}_{\nu_1\dots\nu_s}.
+\]
+Kontravariante Indizes nehmen die Jacobis (\(\partial x'/\partial x\)),
+kovariante Indizes die inversen Jacobis.
+
+PROOF: Ableitung aus Push-/Pullback  
+• Vektorfelder sind Pushforwards von Kurven und nutzen die direkte
+Ableitung \(dx^{\mu'}/dx^{\mu}\).  
+• 1-Formen sind Pullbacks von Funktionendifferentialen und ziehen via
+Kettenregel mit der inversen Matrix zurück.  
+Ersetzt man alle Slots eines Tensors entsprechend, erhält man die oben
+angegebene Regel.
+
+
+
+
+% UNIT 1A — Abstrakte vs. Koordinaten-Indizes
+
+CONCEPT: Zwei Ebenen der Schreibweise  
+Eine \emph{abstrakte} Indexnotation (z.\,B.\ $T^{ab}{}_c$) verwendet
+Indizes ausschließlich als Platzhalter für Tensor-Slots; sie tragen
+keine numerischen Werte.  
+Die \emph{koordinatenbehaftete} Schreibweise
+$\bigl(T^{\mu\nu}{}_{\rho}\bigr)(x)$ fixiert eine Karte $(x^\mu)$ und
+liefert konkrete Komponentenfunktionen.
+
+
+
+
+
+DEFINITION: Abstrakter Index  
+Ein Symbol wie $a,b,c,\dots$ ohne Bezug auf ein Koordinatensystem heißt
+\emph{abstrakter Index}. Gleiche Buchstaben an verschiedenen Stellen
+bezeichnen unterschiedliche Slots; es findet \emph{keine} Summation
+statt.
+
+EXAMPLE: Koordinatorfreie vs. Komponentenform  
+Für $v\in\Gamma(TM)$ und $\alpha\in\Gamma(T^*M)$ gilt  
+\[
+\alpha_a v^a \quad\text{(abstrakt)}, \qquad
+\alpha_\mu v^\mu \;=\;\sum_{\mu=1}^n \alpha_\mu v^\mu
+\quad\text{(in einer Karte $(x^\mu)$).}
+\]
+
+PROPOSITION: Basisunabhängigkeit  
+Tensorgleichungen in abstrakter Indexnotation sind \textbf{basis-}
+unabhängig. Ersetzt man jeden abstrakten Index durch einen konkreten
+Koordinatenindex, erhält man automatisch eine Komponentengleichung,
+die in jeder Karte gilt.
+
+---------------------------------------------------------------------
+
+% UNIT 1B — Summationskonvention & freie/gebundene Indizes
+
+DEFINITION: Einstein-Summationskonvention  
+In Komponentenform wird über jedes Indexpaar, das einmal \emph{unten}
+und einmal \emph{oben} erscheint, stillschweigend von $1$ bis
+$n=\dim M$ summiert:  
+\[
+T^\mu{}_\mu \;=\;\sum_{\mu=1}^n T^\mu{}_\mu .
+\]
+
+CONCEPT: Frei vs. gebunden  
+• \emph{Gebundene} (dummy) Indizes erscheinen genau zweimal, einmal
+unten, einmal oben – sie werden summiert und dürfen beliebig
+umbenannt werden.  
+• \emph{Freie} Indizes bestimmen den Typ des resultierenden Tensors und
+müssen auf beiden Seiten einer Gleichung identisch auftreten.
+
+EXAMPLE: Typische Fehlerquelle  
+Im Ausdruck $A^\mu B_\nu$ sind $\mu$ und $\nu$ frei. Vertauscht man
+versehentlich den Index zu $A^\mu B^\nu$, verschwindet die Summation
+über $\nu$: Der Ausdruck ändert Typ und Bedeutung.
+
+---------------------------------------------------------------------
+
+% UNIT 1C — Signatur, (Anti)Symmetrisierung
+
+DEFINITION: Signatur der Metrik  
+Sei $(M,g)$ pseudo-Riemannsch. Die \emph{Signatur} von $g$ ist
+$(s,n\!-\!s)$, wenn lokal die Diagonalform
+$\operatorname{diag}(-1,\dots,-1,\;1,\dots,1)$ mit $s$ negativen
+Einträgen existiert. Für reine Riemannsche Geometrie gilt meist
+$(0,n)$.
+
+DEFINITION: Symmetrisierung / Antisymmetrisierung  
+Für einen Tensor $T_{i_1\dots i_k}$:  
+\[
+T_{(i_1\dots i_k)}
+=\frac{1}{k!}\sum_{\sigma\in S_k}T_{i_{\sigma(1)}\dots i_{\sigma(k)}},
+\qquad
+T_{[i_1\dots i_k]}
+=\frac{1}{k!}\sum_{\sigma\in S_k}
+\operatorname{sgn}(\sigma)\,
+T_{i_{\sigma(1)}\dots i_{\sigma(k)}}.
+\]
+
+EXAMPLE: Krümmungssymmetrien in Kurzschreibweise  
+\[
+R_{ijkl}=R_{[ij][kl]},\qquad
+R_{[ijk]l}=0
+\quad\Rightarrow\quad
+R_{ijkl}+R_{jkil}+R_{kijl}=0.
+\]
+
+PROOF: Kontraktion mit Metrik erhält Symmetrie  
+Da $g_{pq}=g_{(pq)}$ symmetrisch ist, bleibt eine (Anti)Symmetrie beim
+Heben/Senken erhalten: $R^{p}{}_{qrs}=g^{pt}R_{tqrs}$ besitzt exakt
+dieselben Schalt-Symmetrien wie $R_{tqrs}$.
+
+
+
+
+
+\pagebreak
+\printbibliography
+\end{document}

@@ -1,0 +1,269 @@
+\documentclass[11pt]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{babel}
+\graphicspath{{/Users/tim/NoteDeck/MainDeck-modular/Library/Images/}}
+\setlength{\parindent}{0pt}
+\raggedbottom
+\title{Art Gallery}
+\date{}
+\begin{document}
+\maketitle
+
+% Auto-generated — DO NOT EDIT.
+
+% Nur Dateiname (ohne Pfad) aus einem Pfad ziehen
+\makeatletter
+\newcommand{\basename}[1]{\begingroup\filename@parse{#1}\filename@base\filename@ext\endgroup}
+\makeatother
+
+% Einzeilige Codezeile (monospace), skaliert auf \linewidth
+\newcommand{\ArtCodeLine}[1]{\par\noindent{\scriptsize\ttfamily \resizebox{\linewidth}{!}{#1}}}
+
+% Robuste Kachel: rendert nichts, wenn Pfad leer ist
+\newcommand{\ArtTile}[2]{% #1=path, #2=caption
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \if\relax\detokenize{#1}\relax
+      % leer
+    \else
+      \includegraphics[width=\linewidth,height=0.28\textheight,keepaspectratio]{#1}\\[0.6ex]
+      {\footnotesize\itshape #2}\\[-0.2ex]
+      \ArtCodeLine{\basename{#1}}
+    \fi
+  \end{minipage}}
+
+\newcommand{\ArtRow}[4]{% #1..#4 = (path,caption) links/rechts
+  \noindent\ArtTile{#1}{#2}\hfill\ArtTile{#3}{#4}\par\vspace{1.0em}}
+
+\section*{Art Gallery}
+
+\section*{Ernst Ludwig Kirchner}
+\ArtRow{Art/ART0189\_\_Ernst\_Ludwig\_Kirchner\_\_Ernst\_Ludwig\_Kirchner\_Der\_Einradfahrer\_MB\_0033\_Kunsthaus\_Zuerich.jpg}{Ernst Ludwig Kirchner, Ernst Ludwig Kirchner - Der Einradfahrer - MB-0033 - Kunsthaus Zürich}{Art/ART0190\_\_Ernst\_Ludwig\_Kirchner\_\_Ernst\_Ludwig\_Kirchner\_Figurenbild\_Bundesfeuer.jpg}{Ernst Ludwig Kirchner, Ernst Ludwig Kirchner - Figurenbild (Bundesfeuer)}
+
+\ArtRow{Art/ART0191\_\_Ernst\_Ludwig\_Kirchner\_\_Ernst\_Ludwig\_Kirchner\_Garten\_Graef\_in\_Jena.jpg}{Ernst Ludwig Kirchner, Ernst Ludwig Kirchner - Garten Graef in Jena}{Art/ART0192\_\_Ernst\_Ludwig\_Kirchner\_\_Ernst\_Ludwig\_Kirchner\_Schneeschmelze\_Berglandschaft\_mit\_Alphuette\_1953\_0012\_Kunsthaus\_Zuer.jpg}{Ernst Ludwig Kirchner, Ernst Ludwig Kirchner - Schneeschmelze. Berglandschaft mit Alphütte - 1953-0012 - Kunsthaus Zürich}
+
+\ArtRow{Art/ART0193\_\_Ernst\_Ludwig\_Kirchner\_\_Ernst\_Ludwig\_Kirchner\_Sertigtal\_1950\_0010\_Kunsthaus\_Zuerich.jpg}{Ernst Ludwig Kirchner, Ernst Ludwig Kirchner - Sertigtal - 1950-0010 - Kunsthaus Zürich}{Art/ART0194\_\_Ernst\_Ludwig\_Kirchner\_\_Ernst\_Ludwig\_Kirchner\_Sonntag\_am\_Zuerichsee\_2378\_Kunsthaus\_Zuerich.jpg}{Ernst Ludwig Kirchner, Ernst Ludwig Kirchner - Sonntag am Zürichsee - 2378 - Kunsthaus Zürich}
+
+\ArtRow{Art/ART0195\_\_Ernst\_Ludwig\_Kirchner\_\_Ernst\_Ludwig\_Kirchner\_Stilleben\_mit\_Kalla.jpg}{Ernst Ludwig Kirchner, Ernst Ludwig Kirchner Stilleben mit Kalla}{Art/ART0196\_\_Ernst\_Ludwig\_Kirchner\_\_Ernst\_Ludwig\_Kirchner\_2er\_Gruppe\_der\_Badeszenen\_auf\_Fehmarn\_Wandgemaelde\_Sanatorium\_Dr\_Koh.JPG}{Ernst Ludwig Kirchner, Ernst Ludwig Kirchner, 2er Gruppe der Badeszenen auf Fehmarn, Wandgemaelde Sanatorium Dr. Kohnstamm}
+
+\ArtRow{Art/ART0197\_\_Ernst\_Ludwig\_Kirchner\_\_Ernst\_Ludwig\_Kirchner\_3er\_Gruppe\_der\_Badeszenen\_auf\_Fehmarn\_Wandgemaelde\_Sanatorium\_Dr\_Koh.JPG}{Ernst Ludwig Kirchner, Ernst Ludwig Kirchner, 3er Gruppe der Badeszenen auf Fehmarn, Wandgemaelde Sanatorium Dr. Kohnstamm}{Art/ART0198\_\_Ernst\_Ludwig\_Kirchner\_\_Gedenktafel\_beim\_Leuchtturm\_Staberhuk.JPG}{Ernst Ludwig Kirchner, Gedenktafel beim Leuchtturm Staberhuk}
+
+\ArtRow{Art/ART0199\_\_Ernst\_Ludwig\_Kirchner\_\_Five\_Women\_on\_the\_Street\_\_1914.jpg}{Ernst Ludwig Kirchner, Five Women on the Street (1914)}{Art/ART0200\_\_Ernst\_Ludwig\_Kirchner\_\_Street\_Corner\_in\_Dresden\_Strassenecke\_Dresden\_\_1909.jpg}{Ernst Ludwig Kirchner, Street Corner in Dresden (Strassenecke Dresden) (1909)}
+
+\ArtRow{Art/ART0201\_\_Ernst\_Ludwig\_Kirchner\_\_Bridge\_on\_Crown\_Prince\_Embankment\_Brucke\_am\_Kronprinzenufer\_\_1909.jpg}{Ernst Ludwig Kirchner, Bridge on Crown Prince Embankment (Brucke am Kronprinzenufer) (1909)}{Art/ART0202\_\_Ernst\_Ludwig\_Kirchner\_\_Reclining\_Nude\_\_1907.jpg}{Ernst Ludwig Kirchner, Reclining Nude (1907)}
+
+\ArtRow{Art/ART0203\_\_Ernst\_Ludwig\_Kirchner\_\_Dancing\_Couple\_\_1909.jpg}{Ernst Ludwig Kirchner, Dancing Couple (1909)}{Art/ART0204\_\_Ernst\_Ludwig\_Kirchner\_\_Russian\_Dancers\_\_1909.jpg}{Ernst Ludwig Kirchner, Russian Dancers (1909)}
+
+\ArtRow{Art/ART0205\_\_Ernst\_Ludwig\_Kirchner\_\_Three\_Bathers\_by\_Stones\_\_1913.jpg}{Ernst Ludwig Kirchner, Three Bathers by Stones (1913)}{Art/ART0206\_\_Ernst\_Ludwig\_Kirchner\_\_Acrobat\_on\_a\_Horse\_Voltigeuse\_zu\_Pferd\_\_1913.jpg}{Ernst Ludwig Kirchner, Acrobat on a Horse (Voltigeuse zu Pferd) (1913)}
+
+\ArtRow{Art/ART0207\_\_Ernst\_Ludwig\_Kirchner\_\_Female\_Nude\_\_1908.jpg}{Ernst Ludwig Kirchner, Female Nude (1908)}{Art/ART0208\_\_Ernst\_Ludwig\_Kirchner\_\_Harmonica\_Player\_\_1919.jpg}{Ernst Ludwig Kirchner, Harmonica Player (1919)}
+
+\ArtRow{Art/ART0209\_\_Ernst\_Ludwig\_Kirchner\_\_Mountains\_Berge\_\_1920.jpg}{Ernst Ludwig Kirchner, Mountains (Berge) (1920)}{Art/ART0210\_\_Ernst\_Ludwig\_Kirchner\_\_The\_Large\_Cow\_Lying\_Down\_Grosse\_Liegende\_Kuh\_\_1929.jpg}{Ernst Ludwig Kirchner, The Large Cow Lying Down (Grosse Liegende Kuh) (1929)}
+
+\ArtRow{Art/ART0211\_\_Ernst\_Ludwig\_Kirchner\_\_Windmill\_near\_Burg\_on\_Fehmarn\_\_1908.jpg}{Ernst Ludwig Kirchner, Windmill near Burg on Fehmarn (1908)}{Art/ART0212\_\_Ernst\_Ludwig\_Kirchner\_\_Fehmarn\_Girls\_\_1913.jpg}{Ernst Ludwig Kirchner, Fehmarn Girls (1913)}
+
+\ArtRow{Art/ART0213\_\_Ernst\_Ludwig\_Kirchner\_\_Fanny\_Wocke\_\_1916.jpg}{Ernst Ludwig Kirchner, Fanny Wocke (1916)}{Art/ART0214\_\_Ernst\_Ludwig\_Kirchner\_\_The\_Wife\_of\_Professor\_Goldstein\_\_1916.jpg}{Ernst Ludwig Kirchner, The Wife of Professor Goldstein (1916)}
+
+\ArtRow{Art/ART0215\_\_Ernst\_Ludwig\_Kirchner\_\_Mountains\_with\_a\_Mountain\_Hut\_\_1921.jpg}{Ernst Ludwig Kirchner, Mountains with a Mountain Hut (1921)}{Art/ART0216\_\_Ernst\_Ludwig\_Kirchner\_\_Portrait\_of\_a\_Girl\_\_1921.jpg}{Ernst Ludwig Kirchner, Portrait of a Girl (1921)}
+
+\ArtRow{Art/ART0217\_\_Ernst\_Ludwig\_Kirchner\_\_Pianist\_and\_Singer\_\_1928.jpg}{Ernst Ludwig Kirchner, Pianist and Singer (1928)}{Art/ART0218\_\_Ernst\_Ludwig\_Kirchner\_\_Mary\_Wigman\_s\_Dance\_\_1933.jpg}{Ernst Ludwig Kirchner, Mary Wigman's Dance (1933)}
+
+\section*{Hilma af Klint}
+\ArtRow{Art/ART0149\_\_Hilma\_af\_Klint\_\_The\_Ten\_Largest\_\_1907.jpg}{Hilma af Klint, The Ten Largest (1907)}{Art/ART0150\_\_Hilma\_af\_Klint\_\_The\_Ten\_Largest\_No\_9\_Old\_Age\_\_1907.jpg}{Hilma af Klint, The Ten Largest, No. 9, Old Age (1907)}
+
+\ArtRow{Art/ART0151\_\_Hilma\_af\_Klint\_\_The\_Ten\_Largest\_No\_2\_Childhood\_\_1907.jpg}{Hilma af Klint, The Ten Largest, No. 2, Childhood (1907)}{Art/ART0152\_\_Hilma\_af\_Klint\_\_The\_Ten\_Largest\_No\_1\_Childhood\_\_1907.jpg}{Hilma af Klint, The Ten Largest, No. 1, Childhood (1907)}
+
+\ArtRow{Art/ART0153\_\_Hilma\_af\_Klint\_\_The\_Ten\_Largest\_No\_3\_Youth\_\_1907.jpg}{Hilma af Klint, The Ten Largest, No. 3, Youth (1907)}{Art/ART0154\_\_Hilma\_af\_Klint\_\_The\_Ten\_Largest\_No\_4\_Youth\_\_1907.jpg}{Hilma af Klint, The Ten Largest, No. 4, Youth (1907)}
+
+\ArtRow{Art/ART0155\_\_Hilma\_af\_Klint\_\_The\_Ten\_Largest\_No\_5\_Adulthood\_\_1907.jpg}{Hilma af Klint, The Ten Largest, No. 5, Adulthood (1907)}{Art/ART0156\_\_Hilma\_af\_Klint\_\_The\_Ten\_Largest\_No\_6\_\_1907.jpg}{Hilma af Klint, The Ten Largest, No. 6 (1907)}
+
+\ArtRow{Art/ART0157\_\_Hilma\_af\_Klint\_\_The\_Ten\_Largest\_No\_7\_Adulthood\_\_1907.jpg}{Hilma af Klint, The Ten Largest, No. 7, Adulthood (1907)}{Art/ART0158\_\_Hilma\_af\_Klint\_\_The\_Ten\_Largest\_No\_8\_Adulthood\_\_1907.jpg}{Hilma af Klint, The Ten Largest, No. 8, Adulthood (1907)}
+
+\ArtRow{Art/ART0159\_\_Hilma\_af\_Klint\_\_The\_Ten\_Largest\_No\_10\_Old\_Age\_\_1907.jpg}{Hilma af Klint, The Ten Largest, No. 10, Old Age (1907)}{Art/ART0160\_\_Hilma\_af\_Klint\_\_The\_Swan\_\_1910.jpg}{Hilma af Klint, The Swan (1910)}
+
+\ArtRow{Art/ART0161\_\_Hilma\_af\_Klint\_\_Late\_Summer\_\_1903.jpeg}{Hilma af Klint, Late Summer (1903)}{Art/ART0162\_\_Hilma\_af\_Klint\_\_Tree\_of\_Knowledge\_No\_1\_\_1915.jpg}{Hilma af Klint, Tree of Knowledge, No. 1 (1915)}
+
+\ArtRow{Art/ART0163\_\_Hilma\_af\_Klint\_\_Tree\_of\_Knowledge\_No\_2\_\_1915.jpg}{Hilma af Klint, Tree of Knowledge, No. 2 (1915)}{Art/ART0164\_\_Hilma\_af\_Klint\_\_Portrait.jpg}{Hilma af Klint, Portrait}
+
+\noindent\ArtTile{Art/ART0165\_\_Hilma\_af\_Klint\_\_John\_Schamyl\_Bjoerling.jpg}{Hilma af Klint, John Schamyl Björling}\par\vspace{1.0em}
+
+\section*{Paintings by Hilma af Klint}
+\ArtRow{Art/ART0166\_\_Paintings\_by\_Hilma\_af\_Klint\_\_10\_hilma\_af\_klint\_no\_98\_group\_III\_1916.jpg}{Paintings by Hilma af Klint, 10 hilma af klint, no 98 group III, 1916}{Art/ART0167\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_1907\_Altarpiece\_No\_1\_Group\_X\_Altarpieces.jpg}{Paintings by Hilma af Klint, Hilma af Klint - 1907 - Altarpiece - No 1 - Group X - Altarpieces}
+
+\ArtRow{Art/ART0168\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_1916\_No\_1\_From\_The\_Parsifal\_Series.jpg}{Paintings by Hilma af Klint, Hilma af Klint - 1916 - No 1 From The Parsifal Series}{Art/ART0169\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_1920\_Buddha\_s\_Standpoint\_in\_the\_Earthly\_Life\_No\_3a.jpg}{Paintings by Hilma af Klint, Hilma af Klint - 1920 - Buddha's Standpoint in the Earthly Life - No 3a}
+
+\ArtRow{Art/ART0170\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_1922\_Birch.jpg}{Paintings by Hilma af Klint, Hilma af Klint - 1922 - Birch}{Art/ART0171\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_1922\_Wheat\_and\_Wormwood.jpg}{Paintings by Hilma af Klint, Hilma af Klint - 1922 - Wheat and Wormwood}
+
+\ArtRow{Art/ART0172\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_Altarpiece\_No\_1\_Group\_X\_13919.jpg}{Paintings by Hilma af Klint, Hilma af Klint - Altarpiece No. 1 Group X (13919)}{Art/ART0173\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_Altarpiece\_No\_2\_13916.jpg}{Paintings by Hilma af Klint, Hilma af Klint - Altarpiece No. 2 (13916)}
+
+\ArtRow{Art/ART0174\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_Group\_IX\_UW\_No\_25\_The\_Dove\_No\_1\_13912.jpg}{Paintings by Hilma af Klint, Hilma af Klint - Group IX UW No. 25, The Dove, No. 1 (13912)}{Art/ART0175\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_Group\_VI\_Evolution\_No\_13\_13949.jpg}{Paintings by Hilma af Klint, Hilma af Klint - Group VI, Evolution No. 13 (13949)}
+
+\ArtRow{Art/ART0176\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_no\_date\_Untitled\_02.jpg}{Paintings by Hilma af Klint, Hilma af Klint - no date - Untitled 02}{Art/ART0177\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_no\_date\_Untitled\_05.jpg}{Paintings by Hilma af Klint, Hilma af Klint - no date - Untitled 05}
+
+\ArtRow{Art/ART0178\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_no\_date\_Untitled.jpg}{Paintings by Hilma af Klint, Hilma af Klint - no date - Untitled}{Art/ART0179\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_Self\_portrait.jpg}{Paintings by Hilma af Klint, Hilma af Klint - Self-portrait}
+
+\ArtRow{Art/ART0180\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_1906\_07\_Primordial\_Chaos\_No\_16.jpg}{Paintings by Hilma af Klint, Hilma af Klint, 1906-07, Primordial Chaos - No 16}{Art/ART0181\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Portraett\_Sjoehistoriska\_museet\_O\_04249.jpg}{Paintings by Hilma af Klint, Porträtt - Sjöhistoriska museet - O 04249}
+
+\ArtRow{Art/ART0182\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Portraett\_Sjoehistoriska\_museet\_O\_11963.jpg}{Paintings by Hilma af Klint, Porträtt - Sjöhistoriska museet - O 11963}{Art/ART0183\_\_Paintings\_by\_Hilma\_af\_Klint\_\_The\_US\_Series\_Group\_VIII\_No\_1\_by\_Hilma\_af\_Klint.jpg}{Paintings by Hilma af Klint, The US Series, Group VIII, No. 1 by Hilma af Klint}
+
+\ArtRow{Art/ART0184\_\_Paintings\_by\_Hilma\_af\_Klint\_\_The\_US\_Series\_Group\_VIII\_No\_5\_by\_Hilma\_af\_Klint.jpg}{Paintings by Hilma af Klint, The US Series, Group VIII, No. 5 by Hilma af Klint}{Art/ART0185\_\_Paintings\_by\_Hilma\_af\_Klint\_\_The\_US\_Series\_Group\_VIII\_No\_6\_by\_Hilma\_af\_Klint.jpg}{Paintings by Hilma af Klint, The US Series, Group VIII, No. 6 by Hilma af Klint}
+
+\ArtRow{Art/ART0186\_\_Paintings\_by\_Hilma\_af\_Klint\_\_The\_US\_Series\_Group\_VIII\_No\_7\_by\_Hilma\_af\_Klint.jpg}{Paintings by Hilma af Klint, The US Series, Group VIII, No. 7 by Hilma af Klint}{Art/ART0187\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Tree\_of\_Knowledge\_No\_1\_Hilma\_af\_Klint\_1913\_1915\_Glenstone\_2023.jpg}{Paintings by Hilma af Klint, Tree of Knowledge No. 1, Hilma af Klint, 1913-1915, Glenstone 2023}
+
+\noindent\ArtTile{Art/ART0188\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Tree\_of\_Knowledge\_No\_2\_Hilma\_af\_Klint\_1913\_1915\_Glenstone\_2023.jpg}{Paintings by Hilma af Klint, Tree of Knowledge No. 2, Hilma af Klint, 1913-1915, Glenstone 2023}\par\vspace{1.0em}
+
+\section*{Paul Klee}
+\ArtRow{Art/ART0001\_\_Paul\_Klee\_\_Angelus\_Novus\_\_1920.jpg}{Paul Klee, Angelus Novus (1920)}{Art/ART0002\_\_Paul\_Klee\_\_Highway\_and\_Byways\_\_1929.jpg}{Paul Klee, Highway and Byways (1929)}
+
+\ArtRow{Art/ART0003\_\_Paul\_Klee\_\_Sumpflegende\_\_1919.jpg}{Paul Klee, Sumpflegende (1919)}{Art/ART0004\_\_Paul\_Klee\_\_Twittering\_Machine\_\_1922.jpg}{Paul Klee, Twittering Machine (1922)}
+
+\ArtRow{Art/ART0005\_\_Paul\_Klee\_\_The\_Light\_and\_So\_Much\_Else\_\_1931.jpg}{Paul Klee, The Light and So Much Else (1931)}{Art/ART0006\_\_Paul\_Klee\_\_Ab\_ovo\_\_1917.jpg}{Paul Klee, Ab ovo (1917)}
+
+\ArtRow{Art/ART0007\_\_Paul\_Klee\_\_Ad\_Parnassum\_\_1932.jpg}{Paul Klee, Ad Parnassum (1932)}{Art/ART0008\_\_Paul\_Klee\_\_Death\_and\_Fire\_\_1940.jpg}{Paul Klee, Death and Fire (1940)}
+
+\ArtRow{Art/ART0009\_\_Paul\_Klee\_\_Love\_at\_First\_Sight\_\_1924.jpg}{Paul Klee, Love at First Sight (1924)}{Art/ART0010\_\_Paul\_Klee\_\_Ghost\_of\_a\_Genius\_\_1922.jpg}{Paul Klee, Ghost of a Genius (1922)}
+
+\ArtRow{Art/ART0011\_\_Paul\_Klee\_\_Dittlsam\_\_1918.JPG}{Paul Klee, Dittlsam (1918)}{Art/ART0012\_\_Paul\_Klee\_\_Der\_Mensch\_ist\_der\_Mund\_des\_Herrn\_\_1918.JPG}{Paul Klee, Der Mensch ist der Mund des Herrn (1918)}
+
+\ArtRow{Art/ART0013\_\_Paul\_Klee\_\_Hafenbild\_Nachts\_\_1917.JPG}{Paul Klee, Hafenbild Nachts (1917)}{Art/ART0014\_\_Paul\_Klee\_\_Miniatur\_mit\_dem\_E\_Emma\_\_1916.JPG}{Paul Klee, Miniatur mit dem E (Emma) (1916)}
+
+\ArtRow{Art/ART0015\_\_Paul\_Klee\_\_Mit\_der\_Treppe\_\_1918.JPG}{Paul Klee, Mit der Treppe (1918)}{Art/ART0016\_\_Paul\_Klee\_\_Night\_Feast\_\_1921.jpg}{Paul Klee, Night Feast (1921)}
+
+\ArtRow{Art/ART0017\_\_Paul\_Klee\_\_Red\_Balloon\_\_1922.jpg}{Paul Klee, Red Balloon (1922)}{Art/ART0018\_\_Paul\_Klee\_\_Curtain\_\_1924.jpg}{Paul Klee, Curtain (1924)}
+
+\ArtRow{Art/ART0019\_\_Paul\_Klee\_\_Magic\_Garden\_\_1926.jpg}{Paul Klee, Magic Garden (1926)}{Art/ART0020\_\_Paul\_Klee\_\_In\_the\_Current\_Six\_Thresholds\_\_1929.jpg}{Paul Klee, In the Current Six Thresholds (1929)}
+
+\ArtRow{Art/ART0021\_\_Paul\_Klee\_\_Open\_Book\_\_1930.jpg}{Paul Klee, Open Book (1930)}{Art/ART0022\_\_Paul\_Klee\_\_Hat\_Lady\_and\_Little\_Table\_\_1932.jpg}{Paul Klee, Hat, Lady and Little Table (1932)}
+
+\ArtRow{Art/ART0023\_\_Paul\_Klee\_\_Gemmi\_Pass\_Valais\_Alps\_\_1895.jpg}{Paul Klee, Gemmi Pass, Valais Alps (1895)}{Art/ART0024\_\_Paul\_Klee\_\_Hilterfingen\_\_1895.jpg}{Paul Klee, Hilterfingen (1895)}
+
+\ArtRow{Art/ART0025\_\_Paul\_Klee\_\_Thunersee\_near\_Schadau\_\_1895.jpg}{Paul Klee, Thunersee near Schadau (1895)}{Art/ART0026\_\_Paul\_Klee\_\_Comedian\_Invention\_4\_\_1904.jpg}{Paul Klee, Comedian (Invention 4) (1904)}
+
+\ArtRow{Art/ART0027\_\_Paul\_Klee\_\_Aged\_Phoenix\_Invention\_9\_\_1905.jpg}{Paul Klee, Aged Phoenix (Invention 9) (1905)}{Art/ART0028\_\_Paul\_Klee\_\_Acrobats\_\_1915.jpg}{Paul Klee, Acrobats (1915)}
+
+\ArtRow{Art/ART0029\_\_Paul\_Klee\_\_The\_Idea\_of\_Firs\_\_1917.jpg}{Paul Klee, The Idea of Firs (1917)}{Art/ART0030\_\_Paul\_Klee\_\_Jumping\_Jack\_\_1919.jpg}{Paul Klee, Jumping Jack (1919)}
+
+\ArtRow{Art/ART0031\_\_Paul\_Klee\_\_Before\_the\_Festivity\_\_1920.jpg}{Paul Klee, Before the Festivity (1920)}{Art/ART0032\_\_Paul\_Klee\_\_White\_Blossom\_in\_the\_Garden\_\_1920.jpg}{Paul Klee, White Blossom in the Garden (1920)}
+
+\ArtRow{Art/ART0033\_\_Paul\_Klee\_\_From\_the\_Song\_of\_Songs\_Version\_II\_\_1921.jpg}{Paul Klee, (From the Song of Songs) Version II (1921)}{Art/ART0034\_\_Paul\_Klee\_\_Fright\_of\_a\_Girl\_\_1922.jpg}{Paul Klee, Fright of a Girl (1922)}
+
+\ArtRow{Art/ART0035\_\_Paul\_Klee\_\_Flower\_Family\_V\_\_1922.jpg}{Paul Klee, Flower Family V (1922)}{Art/ART0036\_\_Paul\_Klee\_\_Tropical\_Gardening\_\_1923.jpg}{Paul Klee, Tropical Gardening (1923)}
+
+\ArtRow{Art/ART0037\_\_Paul\_Klee\_\_Singer\_of\_the\_Comic\_Opera\_\_1923.jpg}{Paul Klee, Singer of the Comic Opera (1923)}{Art/ART0038\_\_Paul\_Klee\_\_Tree\_Culture\_\_1924.jpg}{Paul Klee, Tree Culture (1924)}
+
+\ArtRow{Art/ART0039\_\_Paul\_Klee\_\_Introducing\_the\_Miracle\_\_1916.jpg}{Paul Klee, Introducing the Miracle (1916)}{Art/ART0040\_\_Paul\_Klee\_\_Cat\_and\_Bird\_\_1928.JPG}{Paul Klee, Cat and Bird (1928)}
+
+\ArtRow{Art/ART0041\_\_Paul\_Klee\_\_Fire\_in\_the\_Evening\_\_1929.jpg}{Paul Klee, Fire in the Evening (1929)}{Art/ART0042\_\_Paul\_Klee\_\_Equals\_Infinity\_\_1932.png}{Paul Klee, Equals Infinity (1932)}
+
+\ArtRow{Art/ART0043\_\_Paul\_Klee\_\_Horizon\_Zenith\_and\_Atmosphere\_\_1925.jpg}{Paul Klee, Horizon, Zenith and Atmosphere (1925)}{Art/ART0044\_\_Paul\_Klee\_\_Public\_Duel\_\_1932.jpg}{Paul Klee, Public Duel (1932)}
+
+\ArtRow{Art/ART0045\_\_Paul\_Klee\_\_Two\_Ways\_\_1932.jpg}{Paul Klee, Two Ways (1932)}{Art/ART0046\_\_Paul\_Klee\_\_Rocks\_at\_Night\_\_1939.jpg}{Paul Klee, Rocks at Night (1939)}
+
+\ArtRow{Art/ART0047\_\_Paul\_Klee\_\_Inscription\_\_1926.jpg}{Paul Klee, Inscription (1926)}{Art/ART0048\_\_Paul\_Klee\_\_Owl\_Comedy\_\_1926.jpg}{Paul Klee, Owl Comedy (1926)}
+
+\ArtRow{Art/ART0049\_\_Paul\_Klee\_\_In\_Angel\_s\_Care\_\_1931.jpg}{Paul Klee, In Angel's Care (1931)}{Art/ART0050\_\_Paul\_Klee\_\_Hoffmannesque\_Scene\_\_1921.jpg}{Paul Klee, Hoffmannesque Scene (1921)}
+
+\section*{Wassily Kandinsky}
+\ArtRow{Art/ART0051\_\_Wassily\_Kandinsky\_\_Picture\_with\_a\_Horserider\_\_1912.jpg}{Wassily Kandinsky, Picture with a Horserider (1912)}{Art/ART0052\_\_Wassily\_Kandinsky\_\_Picture\_with\_Pince\_nez\_\_1912.jpg}{Wassily Kandinsky, Picture with Pince-nez (1912)}
+
+\ArtRow{Art/ART0053\_\_Wassily\_Kandinsky\_\_Judgement\_Day\_\_1912.jpg}{Wassily Kandinsky, Judgement Day (1912)}{Art/ART0054\_\_Wassily\_Kandinsky\_\_Painting\_with\_a\_Red\_Stain\_\_1914.jpg}{Wassily Kandinsky, Painting with a Red Stain (1914)}
+
+\ArtRow{Art/ART0055\_\_Wassily\_Kandinsky\_\_Akhtyrka\_Framework\_for\_a\_Pile\_of\_Hay\_and\_Farm\_\_1917.jpg}{Wassily Kandinsky, Akhtyrka, Framework for a Pile of Hay and Farm (1917)}{Art/ART0056\_\_Wassily\_Kandinsky\_\_Akhtyrka\_Main\_Entry\_to\_the\_Dacha\_\_1917.jpg}{Wassily Kandinsky, Akhtyrka, Main Entry to the Dacha (1917)}
+
+\ArtRow{Art/ART0057\_\_Wassily\_Kandinsky\_\_Akhtyrka\_Pond\_in\_the\_Park\_\_1917.jpg}{Wassily Kandinsky, Akhtyrka, Pond in the Park (1917)}{Art/ART0058\_\_Wassily\_Kandinsky\_\_Akhtyrka\_Nina\_and\_Tatiana\_in\_the\_Veranda\_\_1917.jpg}{Wassily Kandinsky, Akhtyrka, Nina and Tatiana in the Veranda (1917)}
+
+\ArtRow{Art/ART0059\_\_Wassily\_Kandinsky\_\_Akhtyrka\_Landscape\_with\_Red\_Church\_\_1917.jpg}{Wassily Kandinsky, Akhtyrka, Landscape with Red Church (1917)}{Art/ART0060\_\_Wassily\_Kandinsky\_\_Akhtyrka\_Nearby\_Dacha\_at\_the\_Pond\_s\_Edge\_\_1917.jpg}{Wassily Kandinsky, Akhtyrka, Nearby Dacha at the Pond's Edge (1917)}
+
+\ArtRow{Art/ART0061\_\_Wassily\_Kandinsky\_\_Black\_Grid\_\_1922.jpg}{Wassily Kandinsky, Black Grid (1922)}{Art/ART0062\_\_Wassily\_Kandinsky\_\_On\_White\_II\_\_1923.jpg}{Wassily Kandinsky, On White II (1923)}
+
+\ArtRow{Art/ART0063\_\_Wassily\_Kandinsky\_\_Contrasting\_Sounds\_\_1924.jpg}{Wassily Kandinsky, Contrasting Sounds (1924)}{Art/ART0064\_\_Wassily\_Kandinsky\_\_Yellow\_Red\_Blue\_\_1925.jpg}{Wassily Kandinsky, Yellow-Red-Blue (1925)}
+
+\ArtRow{Art/ART0065\_\_Wassily\_Kandinsky\_\_Oval\_2\_\_1925.jpg}{Wassily Kandinsky, Oval \#2 (1925)}{Art/ART0066\_\_Wassily\_Kandinsky\_\_To\_Nina\_for\_Christmas\_\_1926.jpg}{Wassily Kandinsky, To Nina for Christmas (1926)}
+
+\ArtRow{Art/ART0067\_\_Wassily\_Kandinsky\_\_Development\_\_1926.jpg}{Wassily Kandinsky, Development (1926)}{Art/ART0068\_\_Wassily\_Kandinsky\_\_Easter\_Egg\_\_1926.jpg}{Wassily Kandinsky, Easter Egg (1926)}
+
+\ArtRow{Art/ART0069\_\_Wassily\_Kandinsky\_\_Isolated\_Sounds\_\_1927.jpg}{Wassily Kandinsky, Isolated Sounds (1927)}{Art/ART0070\_\_Wassily\_Kandinsky\_\_Gentle\_Event\_\_1928.jpg}{Wassily Kandinsky, Gentle Event (1928)}
+
+\ArtRow{Art/ART0071\_\_Wassily\_Kandinsky\_\_On\_the\_Points\_\_1928.jpg}{Wassily Kandinsky, On the Points (1928)}{Art/ART0072\_\_Wassily\_Kandinsky\_\_A\_Circle\_A\_\_1928.jpg}{Wassily Kandinsky, A Circle (A) (1928)}
+
+\ArtRow{Art/ART0073\_\_Wassily\_Kandinsky\_\_Cold\_\_1929.jpg}{Wassily Kandinsky, Cold (1929)}{Art/ART0074\_\_Wassily\_Kandinsky\_\_Eight\_Times\_\_1929.jpg}{Wassily Kandinsky, Eight Times (1929)}
+
+\ArtRow{Art/ART0075\_\_Wassily\_Kandinsky\_\_Untitled\_\_1929.jpg}{Wassily Kandinsky, Untitled (1929)}{Art/ART0076\_\_Wassily\_Kandinsky\_\_Two\_Squares\_\_1930.jpg}{Wassily Kandinsky, Two Squares (1930)}
+
+\ArtRow{Art/ART0077\_\_Wassily\_Kandinsky\_\_Leichtes\_\_1930.JPG}{Wassily Kandinsky, Leichtes (1930)}{Art/ART0078\_\_Wassily\_Kandinsky\_\_Thirteen\_Rectangles\_\_1930.jpg}{Wassily Kandinsky, Thirteen Rectangles (1930)}
+
+\ArtRow{Art/ART0079\_\_Wassily\_Kandinsky\_\_Green\_Void\_\_1930.jpg}{Wassily Kandinsky, Green Void (1930)}{Art/ART0080\_\_Wassily\_Kandinsky\_\_Slowed\_Release\_\_1931.jpg}{Wassily Kandinsky, Slowed Release (1931)}
+
+\ArtRow{Art/ART0081\_\_Wassily\_Kandinsky\_\_Cold\_Remoteness\_\_1932.jpg}{Wassily Kandinsky, Cold Remoteness (1932)}{Art/ART0082\_\_Wassily\_Kandinsky\_\_Pink\_Compensation\_\_1933.jpg}{Wassily Kandinsky, Pink Compensation (1933)}
+
+\ArtRow{Art/ART0083\_\_Wassily\_Kandinsky\_\_Development\_in\_Brown\_\_1933.jpg}{Wassily Kandinsky, Development in Brown (1933)}{Art/ART0084\_\_Wassily\_Kandinsky\_\_Two\_Green\_Points\_\_1935.jpg}{Wassily Kandinsky, Two Green Points (1935)}
+
+\ArtRow{Art/ART0085\_\_Wassily\_Kandinsky\_\_Composition\_9\_\_1936.jpg}{Wassily Kandinsky, Composition 9 (1936)}{Art/ART0086\_\_Wassily\_Kandinsky\_\_Shapes\_in\_Tension\_\_1936.jpg}{Wassily Kandinsky, Shapes in Tension (1936)}
+
+\ArtRow{Art/ART0087\_\_Wassily\_Kandinsky\_\_Thirty\_\_1937.jpg}{Wassily Kandinsky, Thirty (1937)}{Art/ART0088\_\_Wassily\_Kandinsky\_\_Complex\_Simple\_\_1939.jpg}{Wassily Kandinsky, Complex-Simple (1939)}
+
+\ArtRow{Art/ART0089\_\_Wassily\_Kandinsky\_\_To\_the\_Blue\_\_1939.jpg}{Wassily Kandinsky, To the Blue (1939)}{Art/ART0090\_\_Wassily\_Kandinsky\_\_Reciprocal\_Accords\_\_1942.jpg}{Wassily Kandinsky, Reciprocal Accords (1942)}
+
+\ArtRow{Art/ART0091\_\_Wassily\_Kandinsky\_\_Circle\_and\_Square\_\_1943.JPG}{Wassily Kandinsky, Circle and Square (1943)}{Art/ART0092\_\_Wassily\_Kandinsky\_\_Conglomerate\_\_1943.jpg}{Wassily Kandinsky, Conglomerate (1943)}
+
+\ArtRow{Art/ART0093\_\_Wassily\_Kandinsky\_\_Untitled\_\_1944.jpg}{Wassily Kandinsky, Untitled (1944)}{Art/ART0094\_\_Wassily\_Kandinsky\_\_The\_Red\_Little\_Circle\_\_1944.jpg}{Wassily Kandinsky, The Red Little Circle (1944)}
+
+\ArtRow{Art/ART0095\_\_Wassily\_Kandinsky\_\_Grey\_Oval\_\_1917.jpg}{Wassily Kandinsky, Grey Oval (1917)}{Art/ART0096\_\_Wassily\_Kandinsky\_\_Autumn\_Landscape\_with\_Boats\_\_1908.jpg}{Wassily Kandinsky, Autumn Landscape with Boats (1908)}
+
+\ArtRow{Art/ART0097\_\_Wassily\_Kandinsky\_\_Around\_the\_Circle\_\_1940.jpg}{Wassily Kandinsky, Around the Circle (1940)}{Art/ART0098\_\_Wassily\_Kandinsky\_\_Circles\_in\_a\_Circle\_\_1923.jpg}{Wassily Kandinsky, Circles in a Circle (1923)}
+
+\ArtRow{Art/ART0099\_\_Wassily\_Kandinsky\_\_Bedroom\_in\_Aintmillerstrasse\_\_1909.jpg}{Wassily Kandinsky, Bedroom in Aintmillerstrasse (1909)}{Art/ART0100\_\_Wassily\_Kandinsky\_\_Dominant\_Curve\_\_1936.jpg}{Wassily Kandinsky, Dominant Curve (1936)}
+
+\ArtRow{Art/ART0101\_\_Wassily\_Kandinsky\_\_White\_Cross\_\_1922.jpg}{Wassily Kandinsky, White Cross (1922)}{Art/ART0102\_\_Wassily\_Kandinsky\_\_In\_Blue\_\_1925.jpg}{Wassily Kandinsky, In Blue (1925)}
+
+\ArtRow{Art/ART0103\_\_Wassily\_Kandinsky\_\_In\_the\_Black\_Square\_\_1923.jpg}{Wassily Kandinsky, In the Black Square (1923)}{Art/ART0104\_\_Wassily\_Kandinsky\_\_Moscow\_Environs\_\_1908.jpg}{Wassily Kandinsky, Moscow Environs (1908)}
+
+\ArtRow{Art/ART0105\_\_Wassily\_Kandinsky\_\_Fugue\_\_1914.jpg}{Wassily Kandinsky, Fugue (1914)}{Art/ART0106\_\_Wassily\_Kandinsky\_\_Bright\_Picture\_\_1913.jpg}{Wassily Kandinsky, Bright Picture (1913)}
+
+\ArtRow{Art/ART0107\_\_Wassily\_Kandinsky\_\_Improvisation\_9\_\_1910.jpg}{Wassily Kandinsky, Improvisation 9 (1910)}{Art/ART0108\_\_Wassily\_Kandinsky\_\_Lake\_\_1910.jpg}{Wassily Kandinsky, Lake (1910)}
+
+\ArtRow{Art/ART0109\_\_Wassily\_Kandinsky\_\_Moscow\_Zubovskaya\_Square\_Study\_\_1916.jpg}{Wassily Kandinsky, Moscow, Zubovskaya Square, Study (1916)}{Art/ART0110\_\_Wassily\_Kandinsky\_\_Odessa\_Port\_\_1898.jpg}{Wassily Kandinsky, Odessa, Port (1898)}
+
+\ArtRow{Art/ART0111\_\_Wassily\_Kandinsky\_\_Orange\_Violet\_\_1935.jpg}{Wassily Kandinsky, Orange Violet (1935)}{Art/ART0112\_\_Wassily\_Kandinsky\_\_Oriental\_\_1909.jpg}{Wassily Kandinsky, Oriental (1909)}
+
+\ArtRow{Art/ART0113\_\_Wassily\_Kandinsky\_\_Landscape\_with\_Red\_Spots\_\_1913.jpg}{Wassily Kandinsky, Landscape with Red Spots (1913)}{Art/ART0114\_\_Wassily\_Kandinsky\_\_Landscape\_near\_Murnau\_with\_a\_Locomotive\_\_1909.jpg}{Wassily Kandinsky, Landscape near Murnau with a Locomotive (1909)}
+
+\ArtRow{Art/ART0115\_\_Wassily\_Kandinsky\_\_Romantic\_Landscape\_\_1911.jpg}{Wassily Kandinsky, Romantic Landscape (1911)}{Art/ART0116\_\_Wassily\_Kandinsky\_\_Riegsee\_the\_Village\_Church\_\_1908.jpg}{Wassily Kandinsky, Riegsee, the Village Church (1908)}
+
+\ArtRow{Art/ART0117\_\_Wassily\_Kandinsky\_\_Eastern\_Suite\_Arabs\_III\_\_1911.jpg}{Wassily Kandinsky, Eastern Suite (Arabs III) (1911)}{Art/ART0118\_\_Wassily\_Kandinsky\_\_Painting\_with\_Three\_Spots\_\_1914.jpg}{Wassily Kandinsky, Painting with Three Spots (1914)}
+
+\ArtRow{Art/ART0119\_\_Wassily\_Kandinsky\_\_All\_Saints\_Day\_l\_\_1911.jpg}{Wassily Kandinsky, All Saints Day l (1911)}{Art/ART0120\_\_Wassily\_Kandinsky\_\_Arabian\_Cemetery\_\_1909.jpg}{Wassily Kandinsky, Arabian Cemetery (1909)}
+
+\ArtRow{Art/ART0121\_\_Wassily\_Kandinsky\_\_White\_Figure\_\_1943.jpg}{Wassily Kandinsky, White Figure (1943)}{Art/ART0122\_\_Wassily\_Kandinsky\_\_Murnau\_Gruengasse\_\_1909.jpg}{Wassily Kandinsky, Murnau – Grüngasse (1909)}
+
+\ArtRow{Art/ART0123\_\_Wassily\_Kandinsky\_\_Houses\_in\_Munich\_\_1908.jpg}{Wassily Kandinsky, Houses in Munich (1908)}{Art/ART0124\_\_Wassily\_Kandinsky\_\_Houses\_in\_Murnau\_on\_Obermarkt\_\_1908.jpg}{Wassily Kandinsky, Houses in Murnau on Obermarkt (1908)}
+
+\ArtRow{Art/ART0125\_\_Wassily\_Kandinsky\_\_Murnau\_A\_Village\_Street\_\_1908.jpg}{Wassily Kandinsky, Murnau, A Village Street (1908)}{Art/ART0126\_\_Wassily\_Kandinsky\_\_Murnau\_Top\_of\_the\_Johannisstrasse\_\_1908.jpg}{Wassily Kandinsky, Murnau, Top of the Johannisstrasse (1908)}
+
+\ArtRow{Art/ART0127\_\_Wassily\_Kandinsky\_\_Sharp\_Quiet\_Pink\_\_1924.jpg}{Wassily Kandinsky, Sharp-Quiet Pink (1924)}{Art/ART0128\_\_Wassily\_Kandinsky\_\_A\_Riding\_Amazon\_\_1911.jpg}{Wassily Kandinsky, A Riding Amazon (1911)}
+
+\ArtRow{Art/ART0129\_\_Wassily\_Kandinsky\_\_To\_the\_Unknown\_Voice\_\_1916.JPG}{Wassily Kandinsky, To the Unknown Voice (1916)}{Art/ART0130\_\_Wassily\_Kandinsky\_\_293\_\_1913.jpg}{Wassily Kandinsky, 293 (1913)}
+
+\ArtRow{Art/ART0131\_\_Wassily\_Kandinsky\_\_316\_\_1940.jpg}{Wassily Kandinsky, 316 (1940)}{Art/ART0132\_\_Wassily\_Kandinsky\_\_Akhtyrka\_Autumn\_\_1901.jpg}{Wassily Kandinsky, Akhtyrka, Autumn (1901)}
+
+\ArtRow{Art/ART0133\_\_Wassily\_Kandinsky\_\_Amazon\_in\_Mountains\_\_1917.jpg}{Wassily Kandinsky, Amazon in Mountains (1917)}{Art/ART0134\_\_Wassily\_Kandinsky\_\_At\_Rest\_\_1942.jpg}{Wassily Kandinsky, At Rest (1942)}
+
+\ArtRow{Art/ART0135\_\_Wassily\_Kandinsky\_\_Autumn\_in\_Murnau\_\_1908.jpg}{Wassily Kandinsky, Autumn in Murnau (1908)}{Art/ART0136\_\_Wassily\_Kandinsky\_\_Brown\_with\_Supplement\_\_1935.jpg}{Wassily Kandinsky, Brown with Supplement (1935)}
+
+\ArtRow{Art/ART0137\_\_Wassily\_Kandinsky\_\_Heavy\_Circles\_\_1927.jpg}{Wassily Kandinsky, Heavy Circles (1927)}{Art/ART0138\_\_Wassily\_Kandinsky\_\_Composition\_1944\_\_1944.jpg}{Wassily Kandinsky, Composition (1944) (1944)}
+
+\ArtRow{Art/ART0139\_\_Wassily\_Kandinsky\_\_Color\_Study\_Squares\_with\_Concentric\_Circles\_\_1914.jpg}{Wassily Kandinsky, Color Study, Squares with Concentric Circles (1914)}{Art/ART0140\_\_Wassily\_Kandinsky\_\_Study\_for\_Circles\_on\_Black\_\_1921.jpg}{Wassily Kandinsky, Study for Circles on Black (1921)}
+
+\ArtRow{Art/ART0141\_\_Wassily\_Kandinsky\_\_Study\_for\_Improvisation\_3\_\_1909.jpg}{Wassily Kandinsky, Study for Improvisation 3 (1909)}{Art/ART0142\_\_Wassily\_Kandinsky\_\_Improvisation\_209\_\_1917.jpg}{Wassily Kandinsky, Improvisation 209 (1917)}
+
+\ArtRow{Art/ART0143\_\_Wassily\_Kandinsky\_\_Unequal\_\_1932.jpg}{Wassily Kandinsky, Unequal (1932)}{Art/ART0144\_\_Wassily\_Kandinsky\_\_The\_Cow\_\_1910.jpg}{Wassily Kandinsky, The Cow (1910)}
+
+\ArtRow{Art/ART0145\_\_Wassily\_Kandinsky\_\_Delicate\_Tension\_\_1923.jpg}{Wassily Kandinsky, Delicate Tension (1923)}{Art/ART0146\_\_Wassily\_Kandinsky\_\_The\_Elephant\_\_1908.jpg}{Wassily Kandinsky, The Elephant (1908)}
+
+\noindent\ArtTile{Art/ART0147\_\_Wassily\_Kandinsky\_\_Line\_Spot\_\_1927.jpg}{Wassily Kandinsky, Line Spot (1927)}\par\vspace{1.0em}
+
+\end{document}

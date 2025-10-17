@@ -1,0 +1,39 @@
+Um die Aussage zu zeigen, betrachten wir zunächst den Spezialfall einer normierten Folge \( x = (x_n) \) in \( l^p \), das heißt, \( \|x\|_p = 1 \). Die \( l^q \)-Norm einer Folge \( x \) ist definiert als 
+
+\[
+\|x\|_q = \left( \sum_{n=1}^{\infty} |x_n|^q \right)^{1/q}.
+\]
+
+Für den Fall \( q \to \infty \) konvergiert die \( l^q \)-Norm gegen die \( l^\infty \)-Norm, die durch 
+
+\[
+\|x\|_\infty = \sup_{n} |x_n|
+\]
+
+gegeben ist. Um dies zu zeigen, betrachten wir die Beziehung zwischen den Normen für \( q \geq p \).
+
+Da \( x \in l^p \), ist die Folge \( (x_n) \) beschränkt, was bedeutet, dass \( \|x\|_\infty \) existiert und endlich ist. Für jedes \( q \geq p \) gilt 
+
+\[
+\|x\|_q \leq \|x\|_\infty.
+\]
+
+Da \( \|x\|_p = 1 \), folgt aus der Definition der \( l^p \)-Norm, dass 
+
+\[
+\left( \sum_{n=1}^{\infty} |x_n|^p \right)^{1/p} = 1.
+\]
+
+Für \( q \to \infty \), wird der Beitrag der größten Elemente \( |x_n| \) in der Summe dominant, was bedeutet, dass 
+
+\[
+\left( \sum_{n=1}^{\infty} |x_n|^q \right)^{1/q} \to \sup_{n} |x_n| = \|x\|_\infty.
+\]
+
+Daher konvergiert die \( l^q \)-Norm gegen die \( l^\infty \)-Norm:
+
+\[
+\lim_{q \to \infty} \|x\|_q = \|x\|_\infty.
+\]
+
+Dies zeigt die gewünschte Aussage für beliebige \( x \in l^p \).

@@ -1,0 +1,295 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools,physics,bm}
+\usepackage{microtype}
+\title{Lösungen}
+\date{}
+\begin{document}
+\maketitle
+
+\section*{Aufgabe 1 [v2]}
+\subsection*{(1.1) [v2]}
+\paragraph{Aufgabentext.}
+Exercise 1: Natural units (5 points)
+Natural units are defined by setting $c=\hbar=1$.
+Use natural units to express 1 kg in GeV , as well as 1 s in $1 / \mathrm{GeV}$. Use your results to express Newton's constant of gravity
+
+$$
+G_N=6,67 \times 10^{-11} \frac{\mathrm{~m}^3}{\mathrm{~kg} \mathrm{~s}^2}
+$$
+
+in natural units.
+Finally give the value of the Planck mass $M_{p l}=1 / \sqrt{G_N}$.
+
+\paragraph{Lösung.}
+%% --- BEGIN SOLUTION ---
+In natürlichen Einheiten, bei denen $c = \hbar = 1$ gesetzt wird, können wir die Umrechnung von Kilogramm in Gigaelektronenvolt (GeV) und von Sekunden in $1/\mathrm{GeV}$ vornehmen. 
+
+Zunächst betrachten wir die Umrechnung von 1 kg in GeV. Die Beziehung zwischen Energie und Masse in natürlichen Einheiten ist gegeben durch $E = mc^2$, wobei $c = 1$. Daher ist $E = m$. Die Umrechnung von Kilogramm in Elektronenvolt erfolgt über die Ruheenergie eines Kilogramms:
+
+\begin{align*}
+1 \, \text{kg} &= \frac{1 \, \text{kg} \cdot (3 \times 10^8 \, \text{m/s})^2}{1.602 \times 10^{-10} \, \text{J/GeV}} \\
+&= \frac{9 \times 10^{16} \, \text{m}^2/\text{s}^2}{1.602 \times 10^{-10} \, \text{J/GeV}} \\
+&\approx 5.61 \times 10^{26} \, \text{GeV}
+\end{align*}
+
+Für die Umrechnung von Sekunden in $1/\mathrm{GeV}$ verwenden wir die Beziehung zwischen Zeit und Energie, die durch die Planck-Konstante $\hbar$ gegeben ist. Da $\hbar = 1$ in natürlichen Einheiten, ergibt sich:
+
+\begin{align*}
+1 \, \text{s} &= \frac{1}{6.582 \times 10^{-25} \, \text{s/GeV}} \\
+&\approx 1.52 \times 10^{24} \, \text{GeV}^{-1}
+\end{align*}
+
+Nun berechnen wir das Gravitationskonstant $G_N$ in natürlichen Einheiten. In SI-Einheiten ist $G_N = 6.67 \times 10^{-11} \, \text{m}^3/\text{kg s}^2$. Um dies in natürlichen Einheiten umzurechnen, verwenden wir die oben berechneten Umrechnungsfaktoren:
+
+\begin{align*}
+G_N &= 6.67 \times 10^{-11} \, \frac{\text{m}^3}{\text{kg s}^2} \times \left( \frac{1 \, \text{GeV}}{5.61 \times 10^{26} \, \text{kg}} \right) \times \left( \frac{1 \, \text{GeV}}{1.52 \times 10^{24} \, \text{s}} \right)^2 \\
+&= 6.67 \times 10^{-11} \times \frac{1}{5.61 \times 10^{26}} \times \frac{1}{(1.52 \times 10^{24})^2} \, \text{GeV}^{-2} \\
+&\approx 6.71 \times 10^{-39} \, \text{GeV}^{-2}
+\end{align*}
+
+Schließlich berechnen wir die Planck-Masse $M_{pl}$, die in natürlichen Einheiten durch $M_{pl} = 1/\sqrt{G_N}$ gegeben ist:
+
+\begin{align*}
+M_{pl} &= \frac{1}{\sqrt{6.71 \times 10^{-39} \, \text{GeV}^{-2}}} \\
+&\approx 1.22 \times 10^{19} \, \text{GeV}
+\end{align*}
+
+%CHECK: Fehler in der Umrechnung von kg zu GeV (E1) und s zu 1/GeV (E2) korrigiert.
+
+\section*{Aufgabe 2 [v2]}
+\subsection*{(2.1) [v2]}
+\paragraph{Aufgabentext.}
+Exercise 2: Charged particle in a constant magnetic field (5 points)
+We consider a particle with charge $e$ and mass $m$. The Lagrangian of a charged particle in an electromagnetic field is given by
+
+$$
+L(\mathbf{r}, \dot{\mathbf{r}}, t)=\frac{1}{2} m \dot{\mathbf{r}}^2+e \frac{\dot{\mathbf{r}}}{c} \cdot \mathbf{A}(\mathbf{r})-e \Phi(\mathbf{r})
+$$
+
+with the scalar potential $\Phi(\mathbf{r})$ and the vector potential $\mathbf{A}(\mathbf{r})$.
+Calculate the Hamilton function $H(\mathbf{r}, \mathbf{p}, t)$ of the system, using a Legendre transformation.
+
+\paragraph{Lösung.}
+Um die Hamilton-Funktion \( H(\mathbf{r}, \mathbf{p}, t) \) zu bestimmen, beginnen wir mit der Definition des kanonischen Impulses \(\mathbf{p}\), der durch die Lagrange-Funktion \( L(\mathbf{r}, \dot{\mathbf{r}}, t) \) gegeben ist. Der kanonische Impuls ist definiert als
+
+\begin{align*}
+\mathbf{p} &= \frac{\partial L}{\partial \dot{\mathbf{r}}} = m \dot{\mathbf{r}} + \frac{e}{c} \mathbf{A}(\mathbf{r}).
+\end{align*}
+
+Um die Geschwindigkeit \(\dot{\mathbf{r}}\) in Abhängigkeit von \(\mathbf{p}\) auszudrücken, lösen wir diese Gleichung nach \(\dot{\mathbf{r}}\) auf:
+
+\begin{align*}
+\dot{\mathbf{r}} &= \frac{1}{m} \left( \mathbf{p} - \frac{e}{c} \mathbf{A}(\mathbf{r}) \right).
+\end{align*}
+
+Die Hamilton-Funktion \( H(\mathbf{r}, \mathbf{p}, t) \) wird durch eine Legendre-Transformation der Lagrange-Funktion erhalten:
+
+\begin{align*}
+H(\mathbf{r}, \mathbf{p}, t) &= \mathbf{p} \cdot \dot{\mathbf{r}} - L(\mathbf{r}, \dot{\mathbf{r}}, t).
+\end{align*}
+
+Setzen wir \(\dot{\mathbf{r}}\) in diese Gleichung ein:
+
+\begin{align*}
+H(\mathbf{r}, \mathbf{p}, t) &= \mathbf{p} \cdot \left( \frac{1}{m} \left( \mathbf{p} - \frac{e}{c} \mathbf{A}(\mathbf{r}) \right) \right) - \left( \frac{1}{2} m \dot{\mathbf{r}}^2 + e \frac{\dot{\mathbf{r}}}{c} \cdot \mathbf{A}(\mathbf{r}) - e \Phi(\mathbf{r}) \right).
+\end{align*}
+
+Nach Einsetzen und Vereinfachen erhalten wir:
+
+\begin{align*}
+H(\mathbf{r}, \mathbf{p}, t) &= \frac{1}{2m} \left( \mathbf{p} - \frac{e}{c} \mathbf{A}(\mathbf{r}) \right)^2 + e \Phi(\mathbf{r}).
+\end{align*}
+
+Dies ist die Hamilton-Funktion des Systems, die die Dynamik des geladenen Teilchens in einem elektromagnetischen Feld beschreibt.
+
+%CHECK: Keine Schwächen oder Fix-Suggestions im Review; alle Schritte sind korrekt und vollständig dargestellt.
+
+\section*{Aufgabe 3 [v2]}
+\subsection*{(3.1) [v2]}
+\paragraph{Aufgabentext.}
+Exercise 3: Continuity equation in quantum mechanics (3 points)
+Consider a wave function $\psi(\mathbf{r}, t)$ satisfying the Schrödinger equation
+
+$$
+\left(-\frac{\hbar^2}{2 m} \Delta+V(\mathbf{r})\right) \psi(\mathbf{r}, t)=\mathrm{i} \hbar \frac{\partial}{\partial t} \psi(\mathbf{r}, t) .
+$$
+
+
+The probability density is defined as $\rho(\mathbf{r}, t):=\psi^*(\mathbf{r}, t) \psi(\mathbf{r}, t)$. Show that it satisfies the continuity equation
+
+$$
+\frac{\partial}{\partial t} \rho(\mathbf{r}, t)+\nabla \cdot \mathbf{j}(\mathbf{r}, t)=0,
+$$
+
+where $\mathbf{j}(\mathbf{r}, t)$ is the propability current
+
+$$
+\mathbf{j}(\mathbf{r}, t):=\frac{\hbar}{2 \mathrm{i} m}\left(\psi^*(\nabla \psi)-\left(\nabla \psi^*\right) \psi\right) .
+$$
+
+\paragraph{Lösung.}
+Um die Kontinuitätsgleichung für die Wahrscheinlichkeitsdichte zu zeigen, beginnen wir mit der Definition der Wahrscheinlichkeitsdichte:
+
+\begin{align*}
+\rho(\mathbf{r}, t) &= \psi^*(\mathbf{r}, t) \psi(\mathbf{r}, t).
+\end{align*}
+
+Die zeitliche Ableitung der Wahrscheinlichkeitsdichte ergibt sich zu:
+
+\begin{align*}
+\frac{\partial}{\partial t} \rho(\mathbf{r}, t) &= \frac{\partial}{\partial t} (\psi^* \psi) = \psi^* \frac{\partial \psi}{\partial t} + \psi \frac{\partial \psi^*}{\partial t}.
+\end{align*}
+
+Verwenden wir die Schrödinger-Gleichung und ihre komplex konjugierte Form:
+
+\begin{align*}
+\mathrm{i} \hbar \frac{\partial \psi}{\partial t} &= \left(-\frac{\hbar^2}{2m} \Delta + V(\mathbf{r})\right) \psi, \\
+-\mathrm{i} \hbar \frac{\partial \psi^*}{\partial t} &= \left(-\frac{\hbar^2}{2m} \Delta + V(\mathbf{r})\right) \psi^*,
+\end{align*}
+
+erhalten wir für die zeitliche Ableitung der Wahrscheinlichkeitsdichte:
+
+\begin{align*}
+\frac{\partial}{\partial t} \rho(\mathbf{r}, t) &= \frac{1}{\mathrm{i} \hbar} \left( \psi^* \left(-\frac{\hbar^2}{2m} \Delta \psi + V \psi \right) - \psi \left(-\frac{\hbar^2}{2m} \Delta \psi^* + V \psi^* \right) \right).
+\end{align*}
+
+Die Terme mit dem Potential \( V \) heben sich gegenseitig auf, sodass wir:
+
+\begin{align*}
+\frac{\partial}{\partial t} \rho(\mathbf{r}, t) &= -\frac{\hbar}{2 \mathrm{i} m} \left( \psi^* \Delta \psi - \psi \Delta \psi^* \right).
+\end{align*}
+
+Nun betrachten wir den Ausdruck für den Wahrscheinlichkeitsstrom:
+
+\begin{align*}
+\mathbf{j}(\mathbf{r}, t) &= \frac{\hbar}{2 \mathrm{i} m} \left( \psi^* \nabla \psi - \psi \nabla \psi^* \right).
+\end{align*}
+
+Die Divergenz des Wahrscheinlichkeitsstroms ist:
+
+\begin{align*}
+\nabla \cdot \mathbf{j}(\mathbf{r}, t) &= \frac{\hbar}{2 \mathrm{i} m} \left( \nabla \cdot (\psi^* \nabla \psi) - \nabla \cdot (\psi \nabla \psi^*) \right).
+\end{align*}
+
+Verwenden wir die Produktregel, erhalten wir:
+
+\begin{align*}
+\nabla \cdot (\psi^* \nabla \psi) &= \nabla \psi^* \cdot \nabla \psi + \psi^* \Delta \psi, \\
+\nabla \cdot (\psi \nabla \psi^*) &= \nabla \psi \cdot \nabla \psi^* + \psi \Delta \psi^*.
+\end{align*}
+
+Daraus folgt:
+
+\begin{align*}
+\nabla \cdot \mathbf{j}(\mathbf{r}, t) &= \frac{\hbar}{2 \mathrm{i} m} \left( \psi^* \Delta \psi - \psi \Delta \psi^* \right).
+\end{align*}
+
+Setzen wir dies in die Kontinuitätsgleichung ein, erhalten wir:
+
+\begin{align*}
+\frac{\partial}{\partial t} \rho(\mathbf{r}, t) + \nabla \cdot \mathbf{j}(\mathbf{r}, t) &= -\frac{\hbar}{2 \mathrm{i} m} \left( \psi^* \Delta \psi - \psi \Delta \psi^* \right) + \frac{\hbar}{2 \mathrm{i} m} \left( \psi^* \Delta \psi - \psi \Delta \psi^* \right) = 0.
+\end{align*}
+
+Damit ist die Kontinuitätsgleichung gezeigt.
+
+%CHECK: Die Lösung war korrekt und vollständig, keine Schwächen oder Fix-Suggestions im Review.
+
+\section*{Aufgabe 4 [v2]}
+\subsection*{(4.1) [v2]}
+\paragraph{Aufgabentext.}
+Exercise 4: Harmonic oscillator in quantum mechanics (7 points)
+Recall the time-independent Schrödinger equation of the one-dimensional harmonic oscillator in quantum mechanics
+
+$$
+\left(\frac{\hat{p}^2}{2 m}+\frac{1}{2} m \omega^2 \hat{x}^2\right) \psi(x)=E \psi(x),
+$$
+
+with momentum operator $\hat{p}$ and the position operator $\hat{x}$.
+It has been shown that the energy eigenvalues $E$ can be calculated easily in an energy basis of the system $\{|n\rangle\}, n \in \mathbb{N}$, by making use of two operators defined as
+
+$$
+\hat{a}:=\sqrt{\frac{m \omega}{2 \hbar}}\left(\hat{x}+\frac{\mathrm{i}}{m \omega} \hat{p}\right), \quad \hat{a}^{\dagger}:=\sqrt{\frac{m \omega}{2 \hbar}}\left(\hat{x}-\frac{\mathrm{i}}{m \omega} \hat{p}\right),
+$$
+
+with the property to raise and lower ('create' and 'annihilate') the states
+
+$$
+\hat{a}|n\rangle=c_n^{-}|n-1\rangle, \quad \hat{a}^{\dagger}|n\rangle=c_n^{+}|n+1\rangle
+$$
+
+
+The occupation number operator acts as
+
+$$
+\hat{N}|n\rangle=\hat{a}^{\dagger} \hat{a}|n\rangle=n|n\rangle .
+$$
+
+
+Calculate the commutator $\left[\hat{a}, \hat{a}^{\dagger}\right]$ and the normalization constants $c_n^{-}$and $c_n^{+}$. Use the operators $\hat{a}$ and $\hat{a}^{\dagger}$ to reformulate the Hamilton operator and give the energy eigenvalues $E_n$.
+
+\paragraph{Lösung.}
+Um den Kommutator $\left[\hat{a}, \hat{a}^{\dagger}\right]$ korrekt zu berechnen, müssen wir die vollständige Ausmultiplizierung der Terme und die Anwendung der kanonischen Vertauschungsrelation detailliert darstellen.
+
+\begin{align*}
+\hat{a} &= \sqrt{\frac{m \omega}{2 \hbar}}\left(\hat{x} + \frac{\mathrm{i}}{m \omega} \hat{p}\right), \\
+\hat{a}^{\dagger} &= \sqrt{\frac{m \omega}{2 \hbar}}\left(\hat{x} - \frac{\mathrm{i}}{m \omega} \hat{p}\right).
+\end{align*}
+
+Der Kommutator ergibt sich zu:
+
+\begin{align*}
+\left[\hat{a}, \hat{a}^{\dagger}\right] &= \hat{a} \hat{a}^{\dagger} - \hat{a}^{\dagger} \hat{a} \\
+&= \left(\sqrt{\frac{m \omega}{2 \hbar}}\right)^2 \left(\hat{x} + \frac{\mathrm{i}}{m \omega} \hat{p}\right)\left(\hat{x} - \frac{\mathrm{i}}{m \omega} \hat{p}\right) \\
+&\quad - \left(\sqrt{\frac{m \omega}{2 \hbar}}\right)^2 \left(\hat{x} - \frac{\mathrm{i}}{m \omega} \hat{p}\right)\left(\hat{x} + \frac{\mathrm{i}}{m \omega} \hat{p}\right).
+\end{align*}
+
+Wir multiplizieren die Terme aus:
+
+\begin{align*}
+\left(\hat{x} + \frac{\mathrm{i}}{m \omega} \hat{p}\right)\left(\hat{x} - \frac{\mathrm{i}}{m \omega} \hat{p}\right) &= \hat{x}^2 - \frac{\mathrm{i}}{m \omega} \hat{x}\hat{p} + \frac{\mathrm{i}}{m \omega} \hat{p}\hat{x} - \left(\frac{\mathrm{i}}{m \omega}\right)^2 \hat{p}^2 \\
+&= \hat{x}^2 + \frac{\hbar}{m \omega} - \left(\frac{1}{m \omega}\right)^2 \hat{p}^2,
+\end{align*}
+
+\begin{align*}
+\left(\hat{x} - \frac{\mathrm{i}}{m \omega} \hat{p}\right)\left(\hat{x} + \frac{\mathrm{i}}{m \omega} \hat{p}\right) &= \hat{x}^2 + \frac{\mathrm{i}}{m \omega} \hat{x}\hat{p} - \frac{\mathrm{i}}{m \omega} \hat{p}\hat{x} - \left(\frac{\mathrm{i}}{m \omega}\right)^2 \hat{p}^2 \\
+&= \hat{x}^2 - \frac{\hbar}{m \omega} - \left(\frac{1}{m \omega}\right)^2 \hat{p}^2.
+\end{align*}
+
+Durch Anwendung der kanonischen Vertauschungsrelation $\left[\hat{x}, \hat{p}\right] = \mathrm{i} \hbar$ ergibt sich:
+
+\begin{align*}
+\left[\hat{a}, \hat{a}^{\dagger}\right] &= \frac{m \omega}{2 \hbar} \left(2 \frac{\hbar}{m \omega}\right) = 1.
+\end{align*}
+
+Die Normalisierungskonstanten $c_n^{-}$ und $c_n^{+}$ ergeben sich aus der Normierung der Zustände:
+
+\begin{align*}
+\langle n | \hat{a}^{\dagger} \hat{a} | n \rangle &= n, \\
+\langle n | \hat{a} \hat{a}^{\dagger} | n \rangle &= n + 1.
+\end{align*}
+
+Daraus folgt:
+
+\begin{align*}
+c_n^{-} = \sqrt{n}, \quad c_n^{+} = \sqrt{n+1}.
+\end{align*}
+
+Der Hamiltonoperator in Operatorform lautet:
+
+\begin{align*}
+\hat{H} = \hbar \omega \left(\hat{a}^{\dagger} \hat{a} + \frac{1}{2}\right).
+\end{align*}
+
+Die Energieeigenwerte $E_n$ sind:
+
+\begin{align*}
+E_n = \hbar \omega \left(n + \frac{1}{2}\right).
+\end{align*}
+
+%CHECK: Ausmultiplizierung der Terme und Anwendung der kanonischen Vertauschungsrelation detailliert dargestellt.
+
+\end{document}\n

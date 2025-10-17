@@ -1,0 +1,29 @@
+Um die Cauchy-Schwarz-Ungleichung für eine Funktion \( h \) zu zeigen, die auf einer Menge \( E \) definiert ist, nehmen wir an, dass \( h \) eine bilineare oder sesquilineare Form ist. Insbesondere nehmen wir an, dass \( h \) symmetrisch ist, falls es reell ist, d.h. \( h(x, y) = h(y, x) \) für alle \( x, y \in E \).
+
+Wir definieren die Funktion \( f(t) = h(x + ty, x + ty) \) für \( t \in \mathbb{R} \). Diese Funktion ist nicht-negativ, da sie die Form eines quadratischen Ausdrucks in Bezug auf \( t \) hat:
+
+\[
+f(t) = h(x, x) + 2t h(x, y) + t^2 h(y, y).
+\]
+
+Da \( f(t) \geq 0 \) für alle \( t \), muss das Diskriminante der quadratischen Funktion nicht positiv sein, um sicherzustellen, dass die Parabel nicht die \( t \)-Achse schneidet. Das Diskriminante ist gegeben durch:
+
+\[
+(2h(x, y))^2 - 4h(x, x)h(y, y) \leq 0.
+\]
+
+Dies vereinfacht sich zu:
+
+\[
+4|h(x, y)|^2 \leq 4h(x, x)h(y, y).
+\]
+
+Durch Division durch 4 erhalten wir die gewünschte Ungleichung:
+
+\[
+|h(x, y)|^2 \leq h(x, x)h(y, y).
+\]
+
+Damit ist die Cauchy-Schwarz-Ungleichung für die Funktion \( h \) bewiesen.
+
+%CHECK: Annahme der Symmetrie für reelle \( h \) ergänzt; Diskriminante klarer erklärt.

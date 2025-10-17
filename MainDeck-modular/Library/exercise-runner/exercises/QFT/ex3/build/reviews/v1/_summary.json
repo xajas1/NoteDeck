@@ -1,0 +1,78 @@
+{
+  "tasks": {
+    "1.1": {
+      "score": 1,
+      "verdict": "Die Lösung ist korrekt.",
+      "weaknesses": [],
+      "fix_suggestions": []
+    },
+    "2.1": {
+      "score": 0.7,
+      "verdict": "Die Lösung enthält einige korrekte Schritte, aber es fehlen wichtige Details und Klarstellungen.",
+      "weaknesses": [
+        {
+          "code": "MISSING_STEPS",
+          "msg": "Die Herleitung der Gleichung \\(\\gamma^{\\mu \\dagger} = \\gamma^0 \\gamma^\\mu \\gamma^0\\) ist unvollständig.",
+          "math_hint": "Es fehlt eine explizite Anwendung der Hermitesch-Eigenschaften der Dirac-Matrizen auf die Gleichung \\((\\gamma^0 \\gamma^\\mu \\gamma^0)^\\dagger\\)."
+        },
+        {
+          "code": "TRANSFORMATION_RULES",
+          "msg": "Die Transformation des adjungierten Spinors ist unklar.",
+          "math_hint": "Die Transformation \\(\\bar{\\psi}'(x') = \\bar{\\psi}(x) S^{-1}(\\Lambda)\\) sollte detaillierter hergeleitet werden."
+        },
+        {
+          "code": "BILINEAR_REALITY",
+          "msg": "Die Bedingung für die Realität der Bilineare ist nicht vollständig hergeleitet.",
+          "math_hint": "Die Bedingung \\(\\Gamma = \\gamma^0 \\Gamma^\\dagger \\gamma^0\\) sollte klarer mit den Eigenschaften der Dirac-Matrizen verknüpft werden."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Füge die vollständige Herleitung der Gleichung } \\gamma^{\\mu \\dagger} = \\gamma^0 \\gamma^\\mu \\gamma^0 \\text{ hinzu, indem du die Hermitesch-Eigenschaften der Dirac-Matrizen verwendest.}",
+        "\\text{Erkläre die Transformation des adjungierten Spinors detaillierter, insbesondere die Rolle von } S(\\Lambda) \\text{ und } S^{-1}(\\Lambda).",
+        "\\text{Kläre die Bedingung für die Realität der Bilineare, indem du die Beziehung } \\Gamma = \\gamma^0 \\Gamma^\\dagger \\gamma^0 \\text{ explizit herleitest.}"
+      ]
+    },
+    "3.1": {
+      "score": 0.9,
+      "verdict": "Die Herleitung ist fast korrekt, aber es fehlt eine explizite Darstellung der Subtraktion der Gleichungen.",
+      "weaknesses": [
+        {
+          "code": "MISSING_SUBTRACTION_STEP",
+          "msg": "Der Schritt, der die Subtraktion der beiden Gleichungen explizit zeigt, fehlt.",
+          "math_hint": "Zeige explizit: \\( \\bar{\\psi} (i \\gamma^\\mu \\partial_\\mu \\psi - i \\gamma^\\mu \\overleftarrow{\\partial}_\\mu \\psi) = 0 \\)"
+        }
+      ],
+      "fix_suggestions": [
+        "\\[ \\bar{\\psi} (i \\gamma^\\mu \\partial_\\mu \\psi - i \\gamma^\\mu \\overleftarrow{\\partial}_\\mu \\psi) = 0 \\]"
+      ]
+    },
+    "4.1": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es gibt kleinere Lücken.",
+      "weaknesses": [
+        {
+          "code": "missing_explanation",
+          "msg": "Die Herleitung der Transformationseigenschaft von \\(\\gamma^5\\) ist unvollständig.",
+          "math_hint": "Es fehlt eine detaillierte Herleitung oder Begründung, warum \\(S^{-1}(\\Lambda) \\gamma^5 S(\\Lambda) = \\operatorname{det}(\\Lambda) \\gamma^5\\) gilt."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Füge eine detaillierte Herleitung für die Transformationseigenschaft von } \\gamma^5 \\text{ hinzu:} \\\\ S^{-1}(\\Lambda) \\gamma^5 S(\\Lambda) = \\operatorname{det}(\\Lambda) \\gamma^5 \\text{, wobei } \\operatorname{det}(\\Lambda) = \\pm 1 \\text{ für Lorentztransformationen.}"
+      ]
+    },
+    "5.1": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es gibt kleinere Lücken.",
+      "weaknesses": [
+        {
+          "code": "missing_proof_massive_case",
+          "msg": "Der Beweis für den massiven Fall ist unvollständig.",
+          "math_hint": "Es fehlt eine detaillierte Herleitung, warum die Helizität für massive Teilchen nicht wohldefiniert ist."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Für massive Teilchen sollte gezeigt werden, dass } P_{L,R} u_s(p) \\text{ keine festen Eigenwerte von } \\mathfrak{h} \\text{ haben, indem man die Transformationseigenschaften unter Lorentztransformationen analysiert.}"
+      ]
+    }
+  }
+}

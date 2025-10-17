@@ -1,0 +1,55 @@
+Um die Kontinuitätsgleichung aus der Klein-Gordon-Gleichung abzuleiten, beginnen wir mit der gegebenen Gleichung:
+
+\[
+-\frac{\partial^2}{\partial t^2} \phi = -\nabla^2 \phi + m^2 \phi.
+\]
+
+Wir multiplizieren die gesamte Gleichung mit der komplex konjugierten Funktion \(\phi^*\) und erhalten:
+
+\[
+\phi^* \left(-\frac{\partial^2}{\partial t^2} \phi + \nabla^2 \phi - m^2 \phi \right) = 0.
+\]
+
+Analog multiplizieren wir die komplex konjugierte Gleichung
+
+\[
+-\frac{\partial^2}{\partial t^2} \phi^* = -\nabla^2 \phi^* + m^2 \phi^*
+\]
+
+mit \(\phi\) und erhalten:
+
+\[
+\phi \left(-\frac{\partial^2}{\partial t^2} \phi^* + \nabla^2 \phi^* - m^2 \phi^* \right) = 0.
+\]
+
+Subtrahieren wir diese beiden Gleichungen, ergibt sich:
+
+\[
+\phi^* \frac{\partial^2 \phi}{\partial t^2} - \phi \frac{\partial^2 \phi^*}{\partial t^2} = \phi^* \nabla^2 \phi - \phi \nabla^2 \phi^*.
+\]
+
+Dies kann umgeschrieben werden als:
+
+\[
+\frac{\partial}{\partial t} \left(\phi^* \frac{\partial \phi}{\partial t} - \phi \frac{\partial \phi^*}{\partial t}\right) = \nabla \cdot \left(\phi^* \nabla \phi - \phi \nabla \phi^*\right).
+\]
+
+Dies ist die Kontinuitätsgleichung in der Form \(\partial_\mu j^\mu = 0\), wobei der Vierer-Strom \(j^\mu\) gegeben ist durch:
+
+\[
+j_\mu = i\left(\phi^* \left(\partial_\mu \phi\right) - \left(\partial_\mu \phi^*\right) \phi\right).
+\]
+
+Für eine Lösung der Form \(\phi \sim \exp(i p x)\), die eine negative Energie repräsentiert, ist der zeitliche Anteil des Vierer-Stroms \(j_0 = \rho\) gegeben durch:
+
+\[
+\rho = i\left(\phi^* \frac{\partial \phi}{\partial t} - \phi \frac{\partial \phi^*}{\partial t}\right).
+\]
+
+Setzen wir \(\phi = e^{i p x}\), dann ist \(\frac{\partial \phi}{\partial t} = i E \phi\), und somit ergibt sich:
+
+\[
+\rho = i\left(e^{-i p x} (i E e^{i p x}) - e^{i p x} (-i E e^{-i p x})\right) = 2 E |e^{i p x}|^2.
+\]
+
+Da \(E\) negativ ist, wird \(\rho\) negativ. Dies impliziert, dass \(\rho\) nicht als Wahrscheinlichkeitsdichte interpretiert werden kann, da Wahrscheinlichkeiten nicht negativ sein können. Dies führt zu der Notwendigkeit, die Interpretation von \(\rho\) im Kontext der Klein-Gordon-Gleichung zu überdenken, insbesondere im Hinblick auf die Quantisierung des Feldes.

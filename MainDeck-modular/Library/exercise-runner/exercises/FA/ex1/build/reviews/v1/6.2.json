@@ -1,0 +1,20 @@
+{
+  "score": 0.9,
+  "verdict": "Die Lösung ist fast korrekt, aber es gibt kleinere Lücken in der Argumentation.",
+  "weaknesses": [
+    {
+      "code": "W1",
+      "msg": "Die Argumentation zur positiven Definitheit ist nicht vollständig klar.",
+      "math_hint": "Es fehlt die explizite Erwähnung, dass die Norm nur dann null ist, wenn der Vektor selbst null ist."
+    },
+    {
+      "code": "W2",
+      "msg": "Die Subadditivität ist nicht vollständig bewiesen.",
+      "math_hint": "Es fehlt die explizite Anwendung der Dreiecksungleichung auf die Norm."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Füge hinzu: Wenn } h_V(x) = 0, \\text{ dann ist } x \\in V \\text{, da die Norm nur für den Nullvektor null ist.}",
+    "\\text{Füge hinzu: Verwende die Dreiecksungleichung: } \\|x + z - y\\| \\leq \\|x - y_1\\| + \\|z - y_2\\| \\text{ für } y = y_1 + y_2."
+  ]
+}

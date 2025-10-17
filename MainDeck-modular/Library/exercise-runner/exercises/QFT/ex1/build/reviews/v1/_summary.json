@@ -1,0 +1,73 @@
+{
+  "tasks": {
+    "1.1": {
+      "score": 0.8,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es gibt einige Ungenauigkeiten und fehlende Begründungen.",
+      "weaknesses": [
+        {
+          "code": "unit_conversion",
+          "msg": "Die Umrechnung von kg in GeV ist nicht korrekt erklärt. Die Beziehung zwischen kg und GeV sollte über die Ruheenergie $E=mc^2$ erfolgen, wobei $c^2$ in GeV umgerechnet wird."
+        },
+        {
+          "code": "natural_units",
+          "msg": "Die Erklärung, dass $1 \text{s} = 1 \text{m}$ in natürlichen Einheiten ist, ist ungenau. Es sollte klarer erklärt werden, dass dies aus der Definition von natürlichen Einheiten folgt."
+        },
+        {
+          "code": "calculation_error",
+          "msg": "Die Berechnung von $G_N$ in natürlichen Einheiten enthält einen Fehler in der Umrechnung."
+        }
+      ],
+      "fix_suggestions": [
+        "Korrigiere die Umrechnung von kg in GeV durch die korrekte Anwendung von $E=mc^2$.",
+        "Erkläre die Beziehung zwischen Zeit und Länge in natürlichen Einheiten klarer.",
+        "Überprüfe die Berechnung von $G_N$ und korrigiere die Umrechnungsschritte."
+      ]
+    },
+    "2.1": {
+      "score": 0.6,
+      "verdict": "Teilweise korrekt, aber unvollständig und fehlerhaft.",
+      "weaknesses": [
+        {
+          "code": "incorrect_hamiltonian",
+          "msg": "Die Definition des Hamiltonians ist falsch. Der korrekte Ausdruck ist H(x, p) = p \\\\dot{x} - L(x, \\\\dot{x}) mit \\\\dot{x} als Funktion von x und p."
+        },
+        {
+          "code": "missing_derivation",
+          "msg": "Die Herleitung der Hamiltonschen Gleichungen ist unvollständig und fehlerhaft. Die korrekten Gleichungen sind \\\\dot{x} = \\\\frac{\\\\partial H}{\\\\partial p} und \\\\dot{p} = -\\\\frac{\\\\partial H}{\\\\partial x}."
+        }
+      ],
+      "fix_suggestions": [
+        "Korrigiere die Definition des Hamiltonians.",
+        "Führe die korrekte Herleitung der Hamiltonschen Gleichungen durch.",
+        "Verwende die korrekten Ausdrücke für die Ableitungen von H."
+      ]
+    },
+    "3.1": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist größtenteils korrekt und vollständig.",
+      "weaknesses": [
+        {
+          "code": "missing_explanation",
+          "msg": "Es fehlt eine explizite Erklärung, warum die Umformung der linken Seite zur Divergenzform korrekt ist."
+        }
+      ],
+      "fix_suggestions": [
+        "Füge eine Erklärung hinzu, warum die Umformung der linken Seite zur Divergenzform korrekt ist."
+      ]
+    },
+    "4.1": {
+      "score": 0.9,
+      "verdict": "Fast korrekt, aber kleine Ungenauigkeiten.",
+      "weaknesses": [
+        {
+          "code": "time_dependence",
+          "msg": "Die Lösung geht nicht auf den Fall ein, dass der Hamiltonoperator zeitabhängig sein könnte."
+        }
+      ],
+      "fix_suggestions": [
+        "Erwähne, dass die Herleitung für zeitunabhängige Hamiltonoperatoren gilt.",
+        "Diskutiere den Fall eines zeitabhängigen Hamiltonoperators."
+      ]
+    }
+  }
+}

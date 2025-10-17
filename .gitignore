@@ -1,0 +1,10 @@
+
+# generated galleries
+MainDeck-modular/Library/Images/**/art_gallery.pdf
+MainDeck-modular/Library/Scripts/**.pdf
+MainDeck-modular/Sources/**.pdf
+MainDeck/**.pdf
+MainDeck-modular/Library/Library.pdf
+MainDeck-modular/Library/Images/Art/Galleries/*.pdf
+MainDeck-modular/api/venv/
+Overleaf/

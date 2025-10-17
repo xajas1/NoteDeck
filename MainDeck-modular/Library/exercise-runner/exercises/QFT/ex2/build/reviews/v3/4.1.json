@@ -1,0 +1,20 @@
+{
+  "score": 0.8,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details und Klarstellungen.",
+  "weaknesses": [
+    {
+      "code": "MISSING_STEP",
+      "msg": "Die Herleitung der Inversenbedingung ist nicht vollständig ausgeführt.",
+      "math_hint": "Es fehlt eine explizite Darstellung der Inversenbedingung: $\\left(g^{\\alpha \\beta} + \\epsilon^{\\prime \\alpha \\beta}\\right) \\left(g_{\\beta \\gamma} + \\epsilon_{\\beta \\gamma}\\right) = \\delta^\\alpha_\\gamma$ sollte explizit auf die Terme erster Ordnung reduziert werden."
+    },
+    {
+      "code": "UNCLEAR_TRANSFORMATION",
+      "msg": "Die Transformation der Normerhaltung ist nicht vollständig klar.",
+      "math_hint": "Die Schritte zur Vereinfachung der Normerhaltung sollten explizit die Terme erster Ordnung isolieren: $\\left(g^{\\alpha \\beta} + \\epsilon^{\\alpha \\beta}\\right) x_\\beta \\left(g_{\\alpha \\gamma} + \\epsilon_{\\alpha \\gamma}\\right) x^\\gamma$ sollte explizit auf die Terme erster Ordnung reduziert werden."
+    }
+  ],
+  "fix_suggestions": [
+    "\\left(g^{\\alpha \\beta} + \\epsilon^{\\prime \\alpha \\beta}\\right) \\left(g_{\\beta \\gamma} + \\epsilon_{\\beta \\gamma}\\right) = \\delta^\\alpha_\\gamma \\Rightarrow g^{\\alpha \\beta} \\epsilon_{\\beta \\gamma} + \\epsilon^{\\prime \\alpha \\beta} g_{\\beta \\gamma} = 0",
+    "\\left(g^{\\alpha \\beta} + \\epsilon^{\\alpha \\beta}\\right) x_\\beta \\left(g_{\\alpha \\gamma} + \\epsilon_{\\alpha \\gamma}\\right) x^\\gamma = g^{\\alpha \\beta} x_\\beta x_\\alpha + g^{\\alpha \\beta} x_\\beta \\epsilon_{\\alpha \\gamma} x^\\gamma + \\epsilon^{\\alpha \\beta} x_\\beta g_{\\alpha \\gamma} x^\\gamma = 0"
+  ]
+}

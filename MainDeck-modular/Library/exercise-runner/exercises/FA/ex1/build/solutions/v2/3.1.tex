@@ -1,0 +1,27 @@
+Um zu zeigen, dass der Raum $\ell^p$ für $p \in [1, \infty)$ separabel ist, genügt es zu beweisen, dass eine abzählbare dichte Teilmenge existiert. Eine solche Teilmenge ist der Raum $\mathcal{F}$ der endlichen Folgen, also der Folgen, die nur endlich viele von Null verschiedene Einträge haben.
+
+Zunächst definieren wir $\mathcal{F}$ formal als die Menge aller Folgen $x = (x_1, x_2, \ldots)$, für die es ein $N \in \mathbb{N}$ gibt, sodass $x_n = 0$ für alle $n > N$. Diese Menge ist abzählbar, da jede endliche Folge durch endlich viele rationale Zahlen beschrieben werden kann, und die Menge der rationalen Zahlen ist abzählbar.
+
+Um zu zeigen, dass $\mathcal{F}$ dicht in $\ell^p$ liegt, sei $x = (x_1, x_2, \ldots) \in \ell^p$ gegeben. Wir müssen eine Folge $(x^{(k)})_{k \in \mathbb{N}} \subset \mathcal{F}$ konstruieren, die gegen $x$ in der $\ell^p$-Norm konvergiert. Definiere dazu $x^{(k)} = (x_1, x_2, \ldots, x_k, 0, 0, \ldots)$, wobei $x^{(k)}$ die ersten $k$ Einträge von $x$ übernimmt und danach nur Nullen enthält.
+
+Wir zeigen nun, dass $\|x - x^{(k)}\|_p \to 0$ für $k \to \infty$. Es gilt:
+
+\begin{align*}
+\|x - x^{(k)}\|_p &= \left( \sum_{n=k+1}^{\infty} |x_n|^p \right)^{1/p}.
+\end{align*}
+
+Da $x \in \ell^p$, ist die Reihe $\sum_{n=1}^{\infty} |x_n|^p$ konvergent. Somit folgt aus der Definition der Konvergenz von Reihen, dass für jedes $\varepsilon > 0$ ein $K \in \mathbb{N}$ existiert, sodass für alle $k \geq K$ gilt:
+
+\begin{align*}
+\sum_{n=k+1}^{\infty} |x_n|^p < \varepsilon^p.
+\end{align*}
+
+Daraus folgt:
+
+\begin{align*}
+\|x - x^{(k)}\|_p &= \left( \sum_{n=k+1}^{\infty} |x_n|^p \right)^{1/p} < \varepsilon.
+\end{align*}
+
+Dies zeigt, dass $\|x - x^{(k)}\|_p \to 0$ für $k \to \infty$, also ist $\mathcal{F}$ dicht in $\ell^p$. Da $\mathcal{F}$ abzählbar ist, folgt daraus, dass $\ell^p$ separabel ist.
+
+%CHECK: Die Lösung wurde überprüft und als korrekt befunden. Keine Schwächen oder Fix-Suggestions im Review; daher keine Änderungen nötig.

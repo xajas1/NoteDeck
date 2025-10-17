@@ -1,0 +1,184 @@
+{
+  "tasks": {
+    "1.1": {
+      "score": 0.7,
+      "verdict": "Die Lösung enthält einige korrekte Ansätze, aber auch mathematische Ungenauigkeiten.",
+      "weaknesses": [
+        {
+          "code": "M1",
+          "msg": "Fehlerhafte Anwendung der Hölder-Ungleichung",
+          "math_hint": "Die Hölder-Ungleichung wurde nicht korrekt angewendet, da sie nicht direkt auf die Exponenten von |x_n| angewendet werden kann."
+        },
+        {
+          "code": "M2",
+          "msg": "Unklare Argumentation bei der Konvergenz von Reihen",
+          "math_hint": "Die Argumentation, dass |x_n|^{q-p} <= 1 und |x_n|^{q-p} -> 0 für |x_n| > 1, ist nicht ausreichend, um die Konvergenz von \\sum |x_n|^q zu zeigen."
+        },
+        {
+          "code": "M3",
+          "msg": "Fehlende Begründung für die Ungleichung der Normen",
+          "math_hint": "Die Ungleichung \\|x\\|_q \\leq \\|x\\|_p wurde nicht korrekt hergeleitet, da die Voraussetzung |x_n|^q \\leq |x_n|^p für q \\geq p nicht allgemein gilt."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Verwende die Hölder-Ungleichung korrekt:} \\left(\\sum_{n=1}^{\\infty} |x_n|^q\\right)^{1/q} \\leq \\left(\\sum_{n=1}^{\\infty} |x_n|^p\\right)^{1/p} \\cdot \\left(\\sum_{n=1}^{\\infty} 1\\right)^{1/q - 1/p}",
+        "\\text{Zeige die Konvergenz von } \\sum_{n=1}^{\\infty} |x_n|^q \\text{ durch eine geeignete Majorante.}",
+        "\\text{Korrigiere die Herleitung der Normungleichung:} \\|x\\|_q \\leq \\|x\\|_p \\text{ ist nicht korrekt ohne weitere Annahmen.}"
+      ]
+    },
+    "1.2": {
+      "score": 0.7,
+      "verdict": "Die Lösung ist im Wesentlichen korrekt, aber es fehlen einige Details und Klarstellungen.",
+      "weaknesses": [
+        {
+          "code": "missing_limit_argument",
+          "msg": "Der Übergang von der l^q-Norm zur l^∞-Norm für q → ∞ ist nicht vollständig hergeleitet.",
+          "math_hint": "Es fehlt eine detaillierte Argumentation, warum der Beitrag der größten Elemente |x_n| in der Summe dominant wird."
+        },
+        {
+          "code": "incomplete_inequality_justification",
+          "msg": "Die Ungleichung \\( \\|x\\|_q \\leq \\|x\\|_\\infty \\) wird nicht ausreichend begründet.",
+          "math_hint": "Es sollte gezeigt werden, dass für alle q ≥ p die Ungleichung durch die Hölder-Ungleichung oder eine ähnliche Argumentation gilt."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Zeige, dass } \\lim_{q \\to \\infty} \\left( \\sum_{n=1}^{\\infty} |x_n|^q \\right)^{1/q} = \\sup_{n} |x_n| \\text{ durch Anwendung der Definition des Supremums.}",
+        "\\text{Verwende die Hölder-Ungleichung, um zu zeigen, dass } \\|x\\|_q \\leq \\|x\\|_\\infty \\text{ für alle } q \\geq p."
+      ]
+    },
+    "2.1": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist fast korrekt, aber es fehlt eine explizite Erwähnung der Definition des Abschlusses.",
+      "weaknesses": [
+        {
+          "code": "missing_definition",
+          "msg": "Die Definition des Abschlusses eines Unterraums wird nicht explizit erwähnt.",
+          "math_hint": "Erkläre, dass der Abschluss alle Grenzwerte von Cauchy-Folgen in F enthält."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Ergänze die Definition des Abschlusses:} \\bar{F} = \\{ x \\in E \\mid \\exists (x_n)_{n \\in \\mathbb{N}} \\subseteq F, x_n \\to x \\}"
+      ]
+    },
+    "2.2": {
+      "score": 0.8,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+      "weaknesses": [
+        {
+          "code": "missing_proof_detail",
+          "msg": "Die Argumentation im zweiten Fall ist nicht vollständig ausgeführt.",
+          "math_hint": "Es fehlt eine detaillierte Herleitung, warum ein nicht abgeschlossener Unterraum mit Kodimension 1 dicht sein muss."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Füge eine detaillierte Herleitung hinzu, warum ein nicht abgeschlossener Unterraum mit Kodimension 1 dicht sein muss.}"
+      ]
+    },
+    "3.1": {
+      "score": 1,
+      "verdict": "Die Lösung ist korrekt und vollständig.",
+      "weaknesses": [],
+      "fix_suggestions": []
+    },
+    "3.2": {
+      "score": 0.8,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+      "weaknesses": [
+        {
+          "code": "missing_explicit_contradiction",
+          "msg": "Der Widerspruch wird nicht explizit durch eine formale Gleichung oder Ungleichung gezeigt.",
+          "math_hint": "Es fehlt eine explizite Darstellung des Widerspruchs, z.B. durch eine Ungleichung, die die Abzählbarkeit von D und die Überabzählbarkeit von A formal vergleicht."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Füge eine explizite Ungleichung hinzu, die den Widerspruch verdeutlicht: } |D| < |A|."
+      ]
+    },
+    "3.3": {
+      "score": 1,
+      "verdict": "Die Lösung ist korrekt und vollständig.",
+      "weaknesses": [],
+      "fix_suggestions": []
+    },
+    "4.1": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist fast korrekt, aber es gibt kleinere Lücken in der Herleitung.",
+      "weaknesses": [
+        {
+          "code": "M1",
+          "msg": "Die Herleitung der zweiten Ableitung von u(x) ist nicht vollständig klar.",
+          "math_hint": "Die Berechnung der zweiten Ableitung sollte expliziter sein, insbesondere die Schritte zur Vereinfachung der ersten Ableitung."
+        }
+      ],
+      "fix_suggestions": [
+        "\\frac{d^2}{dx^2} u(x) = \\frac{d}{dx} \\left(-\\int_0^x y f(y) \\, dy + \\int_x^1 (1-y) f(y) \\, dy\\right) = -f(x)"
+      ]
+    },
+    "5.1": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist fast korrekt, aber es gibt kleinere Lücken in der Herleitung.",
+      "weaknesses": [
+        {
+          "code": "missing_assumption",
+          "msg": "Die Annahme, dass h eine bilineare oder sesquilineare Form ist, sollte expliziter gemacht werden.",
+          "math_hint": "h(x, y) = h(y, x) für alle x, y in E, falls h reell ist."
+        },
+        {
+          "code": "discriminant_explanation",
+          "msg": "Die Erklärung, warum das Diskriminante nicht positiv sein darf, könnte klarer sein.",
+          "math_hint": "Diskriminante: b^2 - 4ac ≤ 0 für ax^2 + bx + c ≥ 0."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Angabe, dass } h \\text{ symmetrisch ist, falls reell: } h(x, y) = h(y, x) \\text{ für alle } x, y \\in E.",
+        "f(t) \\geq 0 \\Rightarrow \\text{Diskriminante } (2h(x, y))^2 - 4h(x, x)h(y, y) \\leq 0 \\text{ für alle } t."
+      ]
+    },
+    "5.2": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist fast korrekt, aber es gibt kleinere Lücken in der Herleitung der Dreiecksungleichung.",
+      "weaknesses": [
+        {
+          "code": "triangle_inequality",
+          "msg": "Die Herleitung der Dreiecksungleichung ist unvollständig.",
+          "math_hint": "Es fehlt der Schritt, der die Anwendung der Cauchy-Schwarz-Ungleichung auf die Re(h(x, y)) explizit zeigt."
+        }
+      ],
+      "fix_suggestions": [
+        "\\|x+y\\| = \\sqrt{h(x+y, x+y)} = \\sqrt{h(x, x) + h(y, y) + 2 \\operatorname{Re}(h(x, y))} \\leq \\sqrt{h(x, x)} + \\sqrt{h(y, y)} = \\|x\\| + \\|y\\|"
+      ]
+    },
+    "5.3": {
+      "score": 1,
+      "verdict": "Korrekt",
+      "weaknesses": [],
+      "fix_suggestions": []
+    },
+    "6.1": {
+      "score": 1,
+      "verdict": "Die Lösung ist korrekt und vollständig.",
+      "weaknesses": [],
+      "fix_suggestions": []
+    },
+    "6.2": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist fast korrekt, aber es gibt kleinere Lücken in der Argumentation.",
+      "weaknesses": [
+        {
+          "code": "W1",
+          "msg": "Die Argumentation zur positiven Definitheit ist nicht vollständig klar.",
+          "math_hint": "Es fehlt die explizite Erwähnung, dass die Norm nur dann null ist, wenn der Vektor selbst null ist."
+        },
+        {
+          "code": "W2",
+          "msg": "Die Subadditivität ist nicht vollständig bewiesen.",
+          "math_hint": "Es fehlt die explizite Anwendung der Dreiecksungleichung auf die Norm."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Füge hinzu: Wenn } h_V(x) = 0, \\text{ dann ist } x \\in V \\text{, da die Norm nur für den Nullvektor null ist.}",
+        "\\text{Füge hinzu: Verwende die Dreiecksungleichung: } \\|x + z - y\\| \\leq \\|x - y_1\\| + \\|z - y_2\\| \\text{ für } y = y_1 + y_2."
+      ]
+    }
+  }
+}

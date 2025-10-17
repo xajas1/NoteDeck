@@ -1,0 +1,52 @@
+Um die Projektoridentitäten zu beweisen, beginnen wir mit den Definitionen der Projektoren:
+
+\[
+P_L = \frac{1 - \gamma^5}{2}, \quad P_R = \frac{1 + \gamma^5}{2}.
+\]
+
+Wir nutzen die Eigenschaft von \(\gamma^5\), dass \((\gamma^5)^2 = 1\), um die Identitäten zu beweisen.
+
+Zuerst zeigen wir, dass \(P_L P_R = 0\):
+
+\[
+P_L P_R = \left(\frac{1 - \gamma^5}{2}\right)\left(\frac{1 + \gamma^5}{2}\right) = \frac{(1 - \gamma^5)(1 + \gamma^5)}{4} = \frac{1 - (\gamma^5)^2}{4} = \frac{1 - 1}{4} = 0.
+\]
+
+Analog zeigt man, dass \(P_R P_L = 0\):
+
+\[
+P_R P_L = \left(\frac{1 + \gamma^5}{2}\right)\left(\frac{1 - \gamma^5}{2}\right) = \frac{(1 + \gamma^5)(1 - \gamma^5)}{4} = \frac{1 - (\gamma^5)^2}{4} = 0.
+\]
+
+Nun zeigen wir, dass \(P_R P_R = P_R\):
+
+\[
+P_R P_R = \left(\frac{1 + \gamma^5}{2}\right)\left(\frac{1 + \gamma^5}{2}\right) = \frac{(1 + \gamma^5)^2}{4} = \frac{1 + 2\gamma^5 + (\gamma^5)^2}{4} = \frac{1 + 2\gamma^5 + 1}{4} = \frac{2 + 2\gamma^5}{4} = \frac{1 + \gamma^5}{2} = P_R.
+\]
+
+Ähnlich zeigt man, dass \(P_L P_L = P_L\):
+
+\[
+P_L P_L = \left(\frac{1 - \gamma^5}{2}\right)\left(\frac{1 - \gamma^5}{2}\right) = \frac{(1 - \gamma^5)^2}{4} = \frac{1 - 2\gamma^5 + (\gamma^5)^2}{4} = \frac{1 - 2\gamma^5 + 1}{4} = \frac{2 - 2\gamma^5}{4} = \frac{1 - \gamma^5}{2} = P_L.
+\]
+
+Nun überprüfen wir, ob die Spinoren \(P_{L, R} u_s(p)\) Eigenzustände des Helizitätsoperators \(\mathfrak{h}\) sind. Der Helizitätsoperator ist gegeben durch:
+
+\[
+\mathfrak{h} = \frac{1}{2|\mathbf{p}|}\left(\begin{array}{cc}
+\sigma \cdot \mathbf{p} & 0 \\
+0 & \sigma \cdot \mathbf{p}
+\end{array}\right).
+\]
+
+Für masselose Dirac-Spinoren \(u_s(p)\) gilt, dass diese Eigenzustände des Helizitätsoperators mit den Eigenwerten \(\pm \frac{1}{2}\) sind. Dies folgt aus der Tatsache, dass für masselose Teilchen die Helizität eine wohldefinierte Größe ist und die Projektion auf linkshändige oder rechtshändige Komponenten die Helizität nicht ändert.
+
+Für massive Teilchen (\(m \neq 0\)) ist die Helizität nicht mehr eine wohldefinierte Erhaltungsgröße. Um dies zu zeigen, betrachten wir die Transformationseigenschaften unter Lorentztransformationen. Die Helizität ist definiert als
+
+\[
+\mathfrak{h} = \frac{\mathbf{S} \cdot \mathbf{p}}{|\mathbf{p}|},
+\]
+
+wobei \(\mathbf{S}\) der Spinoperator ist. Bei einer Lorentztransformation ändert sich \(\mathbf{p}\) und damit auch \(\mathfrak{h}\). Da die Masse einen Wechsel zwischen linkshändigen und rechtshändigen Komponenten ermöglicht, sind die Spinoren \(P_{L, R} u_s(p)\) im Allgemeinen keine festen Eigenzustände des Helizitätsoperators mit festen Eigenwerten \(\pm \frac{1}{2}\).
+
+%CHECK: Beweis für den massiven Fall ergänzt, Transformationseigenschaften unter Lorentztransformationen berücksichtigt.

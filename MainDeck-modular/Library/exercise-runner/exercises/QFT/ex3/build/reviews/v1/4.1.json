@@ -1,0 +1,14 @@
+{
+  "score": 0.9,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es gibt kleinere Lücken.",
+  "weaknesses": [
+    {
+      "code": "missing_explanation",
+      "msg": "Die Herleitung der Transformationseigenschaft von \\(\\gamma^5\\) ist unvollständig.",
+      "math_hint": "Es fehlt eine detaillierte Herleitung oder Begründung, warum \\(S^{-1}(\\Lambda) \\gamma^5 S(\\Lambda) = \\operatorname{det}(\\Lambda) \\gamma^5\\) gilt."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Füge eine detaillierte Herleitung für die Transformationseigenschaft von } \\gamma^5 \\text{ hinzu:} \\\\ S^{-1}(\\Lambda) \\gamma^5 S(\\Lambda) = \\operatorname{det}(\\Lambda) \\gamma^5 \\text{, wobei } \\operatorname{det}(\\Lambda) = \\pm 1 \\text{ für Lorentztransformationen.}"
+  ]
+}

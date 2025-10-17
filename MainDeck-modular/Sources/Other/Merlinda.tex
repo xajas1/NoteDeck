@@ -1,0 +1,534 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17  Graphik
+% 18  Extra
+% 00. Titel und Autor
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\begin{unitbox}\CustomHeading{Definition}{#1}{#2}}{\end{unitbox}}
+\newenvironment{PROP}[2]{\begin{unitbox}\CustomHeading{Proposition}{#1}{#2}}{\end{unitbox}}
+\newenvironment{THEO}[2]{\begin{unitbox}\CustomHeading{Theorem}{#1}{#2}}{\end{unitbox}}
+\newenvironment{LEM}[2]{\begin{unitbox}\CustomHeading{Lemma}{#1}{#2}}{\end{unitbox}}
+\newenvironment{KORO}[2]{\begin{unitbox}\CustomHeading{Corollar}{#1}{#2}}{\end{unitbox}}
+\newenvironment{REM}[2]{\begin{unitbox}\CustomHeading{Remark}{#1}{#2}}{\end{unitbox}}
+\newenvironment{EXA}[2]{\begin{unitbox}\CustomHeading{Example}{#1}{#2}}{\end{unitbox}}
+\newenvironment{STUD}[2]{\begin{unitbox}\CustomHeading{Study}{#1}{#2}}{\end{unitbox}}
+\newenvironment{CONC}[2]{\begin{unitbox}\CustomHeading{Concept}{#1}{#2}}{\end{unitbox}}
+\newenvironment{OTH}[2]{\begin{unitbox}\CustomHeading{Other}{#1}{#2}}{\end{unitbox}}
+\newenvironment{EXE}[2]{\begin{unitbox}\CustomHeading{Exercise}{#1}{#2}}{\end{unitbox}}
+\newenvironment{MOT}[2]{\begin{unitbox}\CustomHeading{Motivation}{#1}{#2}}{\end{unitbox}}
+\newenvironment{PROOF}[2]{\begin{unitbox}\CustomHeading{Proof}{#1}{#2}}{\end{unitbox}}
+
+% --- Unit Umgebung für Source-Inhalte ---
+\usepackage{mdframed}
+\newmdenv[
+  linewidth=1pt,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftmargin=0cm,
+  rightmargin=0cm,
+  skipabove=10pt,
+  skipbelow=10pt,
+  innertopmargin=0.5\baselineskip,
+  innerbottommargin=0.5\baselineskip,
+  backgroundcolor=gray!10,
+  linecolor=gray
+]{unitbox}
+
+\newenvironment{unit}[1]
+  {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
+  {\end{unitbox}}
+
+% --- 17. Graphik ---
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage[export]{adjustbox}
+
+% --- 18. Extras ---
+\usepackage{stmaryrd}
+\usepackage{bbold}  % falls du athbb{1} nutzen willst
+
+% --- 00. Titel und Autor ---
+
+\begin{document}
+
+\section*{Cheatsheet: Statistische Methoden}
+
+\textbf{Inhaltliche Bedeutsamkeit}
+
+
+Signifikante Ergebnisse (z. B. sign. von 0 verschiedener Mittelwert bei sehr großer Stichprobe) sind nicht notwendigerweise inhaltlich bedeutsam.
+
+Zur Einschätzung der inhaltlichen Bedeutsamkeit standardisierte Effektstärken nützlich
+
+Effektstärke der Abweichung des Mittelwerts $\bar{x}$ vom fixen Wert $\mu$
+$$
+d=\frac{\bar{x}-\mu}{\sigma_X}
+$$
+Effektstärke der Differenz der Mittelwerte $\bar{x}_1$ und $\bar{x}_2$ aus unabhängigen Stichproben
+$$
+d^{\prime}=\frac{\bar{x}_2-\bar{x}_1}{\sigma_{\mathrm{inn}}}
+$$
+wobei: $\sigma_X=$ Standardabweichung von $X$ in der Population; $\sigma_{\text {inn }}=$ Standardabweichung innerhalb der beiden Teilpopulationen
+
+\vspace{0.4cm}
+
+\textbf{Effektstärke - Daumenregel}
+
+Grundsätzlich: Ob eine Effektstärke inhaltlich bedeutsam ist oder nicht hängt maßgeblich vom Untersuchungsgegenstand ab.
+
+Orientierungshilfe liefern Daumenregeln nach Cohen (1988)
+
+\begin{itemize}
+    \item  $|d|=0,14 \rightarrow$ klein
+
+\item $|d|=0,35 \rightarrow$ mittel
+
+\item $|d|=0,57 \rightarrow$ groß
+
+\item $\left|d^{\prime}\right|=0,20 \rightarrow$ klein
+
+\item $\left|d^{\prime}\right|=0,50 \rightarrow$ mittel
+
+\item $\left|d^{\prime}\right|=0,80 \rightarrow$ groß
+\end{itemize}
+\vspace{0.4cm}
+
+\textbf{Reliable Change Index (RCI)}
+
+Zur Berechnung benötigt werden die Standardabweichungen $s_1$ und $s_2$ zu den Messzeitpunkten 1 und 2 und die Reliabilität $r_{x x}$ des Messinstruments.
+$$
+R C I_i=\frac{x_{2 i}-x_{1 i}}{S E_{\text {diff }}}
+$$
+wobei
+$$
+\begin{gathered}
+S E_1=s_1 \sqrt{1-r_{x x}}, S E_2=s_2 \sqrt{1-r_{x x}} \\
+S E_{\text {diff }}=\sqrt{S E_1^2+S E_2^2}
+\end{gathered}
+$$
+Unter Annahme von $S E_{d i f f} \sim N(0,1)$ kann z-Verteilung für inferenzstatistischen Test oder zur Bestimmung von Konfidenzintervallen genutzt werden: 1.04 ( $70 \%$ CI), 1.28 ( $80 \%$ CI), 1.64, (90\% CI), 1.96 (95\% CI).
+\vspace{0.4cm}
+
+
+\pagebreak
+
+\textbf{Differenz auf Gruppenebene}
+
+Auch Veränderungen auf Gruppenebene können standardisiert werden. Hier die standardisierte Differenz $d^{\prime \prime}$ zwischen zwei Mittelwerten $\bar{x}_1$ und $\bar{x}_2$ sowie der Streuung der Differenzen:
+$$
+d^{\prime \prime}=\frac{\bar{x}_2-\bar{x}_1}{\sigma_D}=\frac{\bar{x}_2-\bar{x}_1}{\sigma_{\left(x_2-x_1\right)}}
+$$
+Für diese standardisierten Differenzen schlägt Cohen (1988) folgende Klassifikation vor:
+
+$\left|d^{\prime \prime}\right|=0.14 \rightarrow$ „klein"
+
+$\left|d^{\prime \prime}\right|=0.35 \rightarrow$ „mittel"
+
+$\left|d^{\prime \prime}\right|=0.57 \rightarrow{ }^{\prime \prime}$ groß $^{\prime \prime}$
+
+Inferenzstatistische Absicherung mit $t$-Test
+\vspace{0.4cm}
+
+\textbf{Quantifizierung des Nutzens}
+
+Der monetäre Nutzen einer Maßnahme wird ermittelt, indem die Wirksamkeit mit einem Geldwert gewichtet wird.
+$$
+\text { Nutzen }=\text { Wirksamkeit } \cdot \text { Wert }
+$$
+
+
+
+\textbf{Modell 1: Kosten-Nutzen-Analyse (KNA)}
+
+Basierend auf Nutzen $N$ (=Wirksamkeit * Wert) und Kosten $K$ lassen sich verschiedene Kennwerte bilden.
+
+Nettonutzen: $N N=N-K$
+
+Nutzenquotient: $N Q=\frac{N}{K}$
+
+Im wirtschaftlichen Bereich auch Return on Investment (ROI)
+
+$N Q>1 \rightarrow$ Maßnahme ist effizient; über Maßnahmen hinweg vergleichbar
+
+Profitrate: $P R=\frac{N N}{N}=\frac{N-K}{N}$
+
+Nettonutzen in Relation zum Gesamtnutzen
+\vspace{0.4cm}
+
+\textbf{Klassische Testtheorie}
+
+KTT geht davon aus, dass das interessierende Merkmal kontinuierlich ist, und dass sich die mit einem Test ermittelte Merkmalsausprägung $X_i$ von Individuum $i$ aus dem wahren Wert $T_i$ des Individuums und einem zufälligen Messfehler $E_i$ zusammensetzt.
+$$
+X_i=T_i+E_i
+$$
+KTT fokussiert vor allem auf Bestimmung des Anteils des Messfehlers
+
+Reliabilität definiert als Anteil der „wahren Varianz" an der beobachteten Varianz:
+$$
+\operatorname{Rel}=\frac{\sigma_T^2}{\sigma_X^2}
+$$
+
+
+\textbf{Verknüpfungsfunktion} 
+
+In Modellen mit latenten Variablen wird die Beziehung zwischen beobachteten Indikatoren und latenten Variablen mit einer mathematischen Verknüpfungsfunktion (link function) definiert.
+- Bei Modellen mit kontinuierlichen Indikatoren bspw. eine lineare Funktion (z. B. bei konfirmatorischer Faktorenanalyse).
+$$
+x=\alpha+\lambda \theta+\varepsilon
+$$
+$\alpha=$ Konstante (Intercept)
+$\lambda=$ Gewicht (Faktorladung)
+$\varepsilon=$ Messfehler 
+
+\vspace{0.4cm}
+
+\textbf{IC-Funktion}
+
+IC-Funktion im Raschmodell enthält 2 Parameter.
+
+Wahrscheinlichkeit, dass Person $j$ mit Fähigkeit $\theta$ Aufgabe $i$ mit Schwierigkeit $b$ richtig beantwortet, ist gegeben durch:
+$$
+P\left(x_{i j}=1 \mid \theta_j, b_i\right)=\frac{\exp \left(\theta_j-b_i\right)}{1+\exp \left(\theta_j-b_i\right)}
+$$
+Entscheidend für Lösungswahrscheinlichkeit ist Differenz zwischen individueller Merkmalsausprägung und Itemschwierigkeit
+\vspace{0.4cm}
+
+\textbf{Logistische IC-Funktion}
+
+IC-Funktion des Raschmodells ist eine logistische Funktion
+
+Wird auch in der logistischen Regression verwendet
+
+Differenz zwischen Merkmalsausprägung $\theta_j$ und Itemschwierigkeit $b_i$ entspricht den logarithmierten Odds („Wettquotient") einer richtigen zu einer falschen Antwort.
+$$
+\log \left(\frac{P\left(x_{i j}=1\right)}{P\left(x_{i j}=0\right)}\right)=\theta_j-b_i
+$$
+Mit der logistischen Funktion wird die Antwortwahrscheinlichkeit $P\left(x_{i j}=1\right)$ von 0 bis 1 auf den Wertebereich von $-\infty$ bis $+\infty$ projiziert:
+
+Der nicht logarithmierte Wettquotient hat Wertebereich von 0 bis $+\infty$.
+$$
+\log \left(\frac{P\left(x_{i j}=1\right)}{P\left(x_{i j}=0\right)}\right)
+$$
+
+\textbf{IC-Funktion Raschmodell}
+$$
+P\left(x_{i j}=1 \mid \theta_j, b_i\right)=\frac{\exp \left(\theta_j-b_i\right)}{1+\exp \left(\theta_j-b_i\right)}
+$$
+Beziehung zwischen Merkmal und Antwortwahrscheinlichkeit streng monoton
+
+Itemschwierigkeit $b_i$ ist Punkt auf dem Merkmalskontinuum, an dem Lösungswahrscheinlichkeit 50\% beträgt (=Wendepunkt)
+
+
+\textbf{Unterschied 1PL / Raschmodell}
+
+1PL kann auch notiert werden als:
+$$
+P\left(x_{i j}=1 \mid \theta_j, b_i, a_i\right)=\frac{\exp \left(a\left(\theta_j-b_i\right)\right)}{1+\exp \left(a\left(\theta_j-b_i\right)\right)}
+$$
+1PL: $a=$ const für alle $i \in I$
+
+Rasch-Modell: $a=1$ für alle $i \in I$
+
+1PL und Rasch-Modell sind mathematisch äquivalent.
+
+
+\textbf{ML-Schätzung von $\hat{\theta}$}
+
+Exemplarisch für $\theta=-3$ :
+
+
+Schritt 1:
+
+$$
+\begin{aligned}
+& p\left(x_1=1 \mid \theta=-3, b_1=-1.90\right)=\frac{\exp \left(\theta_j-b_i\right)}{1+\exp \left(\theta_j-b_i\right)}=\frac{\exp (-3+1.9)}{1+\exp (-3+1.9)}=0.2497 \\
+& p\left(x_2=1 \mid \theta=-3, b_1=-0.60\right)=0.0832 \\
+& p\left(x_3=0 \mid \theta=-3, b_1=-0.25\right)=1-p\left(x_3=1 \mid \theta=-3, b_1=-0.25\right)=0.9399 \\
+& p\left(x_4=0 \mid \theta=-3, b_1=-0.25\right)=1-p\left(x_4=1 \mid \theta=-3, b_1=-0.25\right)=0.9644 \\
+& p\left(x_5=0 \mid \theta=-3, b_1=-0.25\right)=1-p\left(x_5=1 \mid \theta=-3, b_1=-0.25\right)=0.9692
+\end{aligned}
+$$
+
+Schritt 2:
+$$
+\begin{aligned}
+& p\left(x_1=1\right) * p\left(x_2=1\right) * p\left(x_3=0\right) * p\left(x_4=0\right) * p\left(x_5=0\right)= \\
+& 0.2497 * 0.0832 * 0.9399 * 0.9644 * 0.9692=0.0182
+\end{aligned}
+$$
+
+
+
+
+\textbf{Likelihoodfunktion}
+
+Betrachtet man den Vektor $\boldsymbol{x}_{\boldsymbol{j}}$ der Antworten von $\boldsymbol{j}=1,2, \ldots$, J Personen sowie den Vektor $\boldsymbol{b}_i$ der Itemschwierigkeiten von $i=1,2, \ldots$, I Items gemeinsam, so lässt sich dies notieren als:
+$$
+L\left(\boldsymbol{x}_j \mid \theta, \boldsymbol{b}\right)=\prod_{i=1}^I p_i^{x_{i j}}\left(1-p_i\right)^{\left(1-x_{i j}\right)}
+$$
+wobei:
+$x_{i j}=$ beobachtete Antwort von Person $j$ auf Item $i$
+$p_i=$ Wahrscheinlichkeit von $x_{i j}=1 ; p\left(x_{i j}=1 \mid \theta_j, b_i\right)$
+
+\vspace{0.4cm}
+\textbf{Log-Likelihood}
+
+Umfasst ein Test viele Items, wird die Likelihood sehr klein.
+
+Dies erschwert die Verarbeitung durch den Computer.
+
+Daher wird bei ML-Schätzungen der natürliche Logarithmus (ln) der Likelihood verwendet, die Log-Likelihood:
+$$
+\ln L\left(\boldsymbol{x}_j \mid \theta, \boldsymbol{b}\right)=\sum_{i=1}^I x_{i j} \ln \left(p_i\right)+\left(1-x_{i j}\right) \ln \left(1-p_i\right)
+$$
+Log-Likelihood ist eine streng monotone Transformation der Likelihood aber in der Handhabung deutlich einfacher.
+
+Eine Optimierung der Log-Likelihood optimiert zugleich die Likelihood.
+
+\vspace{0.4cm}
+\textbf{Standardfehler von $\theta$}
+
+Wie für die meisten statistischen Parameter lässt sich auch für die geschätzte Merkmalsausprägung $\hat{\theta}_j$ ein Standardfehler berechnen.
+
+In diesen Standardfehler $\operatorname{SE}(\theta)\left(\sigma_e(\theta)\right.$ in de Ayala) gehen im Raschmodell/1PL die individuellen Antwortwahrscheinlichkeiten $p_i=p\left(x_{i j}=1 \mid \theta_j, b_i\right)$ für alle beantworteten Items ein:
+$$
+S E(\theta)=\sqrt{\frac{1}{\sum_{i=1}^I p_i\left(1-p_i\right)}}
+$$
+An dieser Formel sind unmittelbar zwei Eigenschaften des Standardfehlers zu erkennen:
+
+1. $S E(\theta)$ fällt für verschiedene Personen und Items unterschiedlich aus, da die individuellen Antwortwahrscheinlichkeiten eingehen.
+
+2. $S E(\theta)$ wird aufgrund der Summe über / Items im Nenner kleiner, je mehr Items beantwortet wurden.
+
+\vspace{0.4cm}
+
+\textbf{Testinformation}
+
+Die Gesamtinformation eines Tests ergibt sich aus der Summe aller Iteminformationen.
+
+Ergebnis ist die Testinformationsfunktion (Engl.: Test Information Curve [TIC]; de Ayala: total information)
+
+Testinformationsfunktion gibt Messgenauigkeit der Merkmalsschätzung in Abhängigkeit von $\theta$ an.
+
+Zusammenhang zwischen Testinformation $I$ für einen speziellen $\theta$-Wert und Standardfehler:
+$$
+S E(\hat{\theta} \mid I)=1 / \sqrt{I(\hat{\theta} \mid I)}
+$$
+
+
+\textbf{2PL}
+
+Vorherrschendes Modell in den USA
+
+Bei groß angelegten Vergleichsstudien wie IGLU, TIMSS und PISA (seit 2015) genutzt
+
+Eingeführt von Birnbaum (1968)
+
+Ein Personenparameter $\theta$ und zwei Itemparameter $a$ und $b$ ( $\alpha$ and $\delta$ in de Ayala, 2022)
+$$
+P\left(x_{i j}=1 \mid \theta_j, a_i, b_i\right)=\frac{\exp \left(a_i\left(\theta_j-b_i\right)\right)}{1+\exp \left(a_i\left(\theta_j-b_i\right)\right)}
+$$
+
+
+
+
+\textbf{Iteminformation im 2PL}
+
+Die Itemdiskrimination geht im 2PL mit in die Iteminformation ein:
+$$
+I_i(\theta)=\alpha_i^2 p_i\left(1-p_i\right)
+$$
+Items mit höherer Diskrimination sind dementsprechend informativer bei der Erfassung des interessierenden Merkmals.
+\vspace{0.4cm}
+
+\textbf{3PL}
+
+Seltener genutzt als 1PL und 2PL
+
+Einsatz bspw. beim National Assessment of Educational Progress (NAEP) in den USA
+
+Ein Personenparameter $\theta$, zwei Itemparameter $a, b$ und zusätzlich der Pseudo-Rateparameter $c(\alpha, \delta, \chi$ in de Ayala, 2022)
+$$
+P\left(x_{i j}=1 \mid \theta_j, a_i, b_i, c_i\right)=c_i+\left(1-c_i\right) \frac{\exp \left(a_i\left(\theta_j-b_i\right)\right)}{1+\exp \left(a_i\left(\theta_j-b_i\right)\right)}
+$$
+
+\pagebreak
+
+\textbf{Iteminformation im 3PL}
+
+
+Beim 3PL gehen Itemdiskrimination und Pseudo-Rateparameter mit in die Iteminformation ein:
+$$
+I_i(\theta)=a_i^2\left(\frac{p_i(\theta)-c_i}{1-c_i}\right)^2 \frac{q_i(\theta)}{p_i(\theta)}
+$$
+
+
+\textbf{Formale Definition von uniformem DIF}
+
+Im Rahmen von IRT-Modells für dichotome Daten lässt sich DIF durch gruppenspezifische Itemparameter darstellen, im Rahmen das dichotomen Raschmodells z. B. wie folgt:
+$$
+P\left(x_{i j}=1\right)=\frac{\exp \left(\theta_j-b_{g i}\right)}{1+\exp \left(\theta_j-b_{g i}\right)}
+$$
+$b_{g i}$ ist hier eine gruppenspezifische Itemschwierigkeit.
+
+Ein Item $i$ weist DIF auf, wenn sich die Itemschwierigkeiten der Referenzgruppe ( $g=R$ ) oder der Fokalgruppe ( $g=F$ ) unterscheiden ( $b_{\text {Ri }} \neq$ $\left.b_{F i}\right)$.
+\vspace{0.4cm}
+
+\textbf{Formale Definition von non-uniformem DIF}
+
+Im Rahmen von IRT-Modellen für dichotome Daten lässt sich DIF durch gruppenspezifische Itemparameter darstellen, im Rahmen des 2PL z. B. wie folgt:
+$$
+P\left(x_{i j}=1\right)=\frac{\exp \left(\alpha_{g i}\left(\theta_j-b_{g i}\right)\right)}{1+\exp \left(\alpha_{g i}\left(\theta_j-b_{g i}\right)\right)}
+$$
+$b_{g i}$ ist hier wieder die gruppenspezifische Itemschwierigkeit, $\alpha_{g i}$ eine gruppenspezifische Itemdiskrimination. Ein Item $i$ weist non-uniformen DIF auf, wenn sich die Itemdiskriminationen der Referenzgruppe ( $g=R$ ) oder der Fokalgruppe $(g=F)$ unterscheiden $\left(\alpha_{R i} \neq \alpha_{F i}\right)$.
+
+
+
+
+\end{document}

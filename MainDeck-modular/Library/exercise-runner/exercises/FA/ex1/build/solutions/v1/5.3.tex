@@ -1,0 +1,45 @@
+Um die gegebene Identität zu zeigen, betrachten wir zunächst den Ausdruck für den Fall, dass der Vektorraum über dem Körper der reellen Zahlen $\mathbb{R}$ definiert ist. Für $x, y \in E$ gilt:
+
+\[
+\|x+y\|^2 = \langle x+y, x+y \rangle = \langle x, x \rangle + 2 \langle x, y \rangle + \langle y, y \rangle = \|x\|^2 + 2 \langle x, y \rangle + \|y\|^2
+\]
+
+und
+
+\[
+\|x-y\|^2 = \langle x-y, x-y \rangle = \langle x, x \rangle - 2 \langle x, y \rangle + \langle y, y \rangle = \|x\|^2 - 2 \langle x, y \rangle + \|y\|^2.
+\]
+
+Addiert man diese beiden Ausdrücke, erhält man:
+
+\[
+\|x+y\|^2 + \|x-y\|^2 = (\|x\|^2 + 2 \langle x, y \rangle + \|y\|^2) + (\|x\|^2 - 2 \langle x, y \rangle + \|y\|^2) = 2\|x\|^2 + 2\|y\|^2.
+\]
+
+Dies zeigt die geforderte Identität für den reellen Fall.
+
+Für den Fall, dass der Vektorraum über dem Körper der komplexen Zahlen $\mathbb{C}$ definiert ist, betrachten wir zusätzlich den Ausdruck $\|x+iy\|^2$:
+
+\[
+\|x+iy\|^2 = \langle x+iy, x+iy \rangle = \langle x, x \rangle + i \langle x, y \rangle - i \langle y, x \rangle + \langle y, y \rangle = \|x\|^2 + \|y\|^2 + i(\langle x, y \rangle - \langle y, x \rangle).
+\]
+
+Da $\langle x, y \rangle = \overline{\langle y, x \rangle}$ für komplexe Skalarprodukte gilt, ist $\langle x, y \rangle - \langle y, x \rangle = 2i \operatorname{Im}(\langle x, y \rangle)$. Somit ergibt sich:
+
+\[
+\|x+iy\|^2 = \|x\|^2 + \|y\|^2 + 2i \operatorname{Im}(\langle x, y \rangle).
+\]
+
+Der Ausdruck für $h(x, y)$ im komplexen Fall lautet dann:
+
+\[
+h(x, y) = \frac{1}{2}(\|x+y\|^2 - \|x\|^2 - \|y\|^2) + \frac{i}{2}(\|x+iy\|^2 - \|x\|^2 - \|y\|^2).
+\]
+
+Setzt man die zuvor berechneten Ausdrücke ein, erhält man:
+
+\[
+h(x, y) = \frac{1}{2}(2 \langle x, y \rangle) + \frac{i}{2}(2i \operatorname{Im}(\langle x, y \rangle)) = \langle x, y \rangle.
+\]
+
+Dies zeigt, dass $h(x, y) = \langle x, y \rangle$ sowohl im reellen als auch im komplexen Fall gilt.

@@ -1,0 +1,13 @@
+{
+  "score": 0.9,
+  "verdict": "Die Lösung ist größtenteils korrekt und vollständig.",
+  "weaknesses": [
+    {
+      "code": "precision",
+      "msg": "Die Näherung für γ im Fall eines ruhenden Positrons könnte präziser erklärt werden."
+    }
+  ],
+  "fix_suggestions": [
+    "Erkläre die Näherung für γ im Fall eines ruhenden Positrons detaillierter."
+  ]
+}

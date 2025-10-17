@@ -1,0 +1,33 @@
+Um die Konvergenz der \( l^q \)-Norm gegen die \( l^\infty \)-Norm zu zeigen, betrachten wir eine normierte Folge \( x = (x_n) \) in \( l^p \) mit \( \|x\|_p = 1 \). Die \( l^q \)-Norm ist definiert als 
+
+\[
+\|x\|_q = \left( \sum_{n=1}^{\infty} |x_n|^q \right)^{1/q}.
+\]
+
+Wir zeigen zunächst, dass für \( q \geq p \) die Ungleichung \( \|x\|_q \leq \|x\|_\infty \) gilt. Dies folgt direkt aus der Definition der \( l^q \)-Norm:
+
+\[
+\|x\|_q = \left( \sum_{n=1}^{\infty} |x_n|^q \right)^{1/q} \leq \left( \sum_{n=1}^{\infty} \|x\|_\infty^q \right)^{1/q} = \|x\|_\infty.
+\]
+
+Da \( x \in l^p \), ist die Folge \( (x_n) \) beschränkt, und somit existiert \( \|x\|_\infty \) und ist endlich. Für \( q \to \infty \), betrachten wir die Grenzbetrachtung:
+
+\[
+\lim_{q \to \infty} \left( \sum_{n=1}^{\infty} |x_n|^q \right)^{1/q} = \lim_{q \to \infty} \left( \sum_{n=1}^{\infty} \left( \frac{|x_n|}{\|x\|_\infty} \right)^q \|x\|_\infty^q \right)^{1/q}.
+\]
+
+Da \( \frac{|x_n|}{\|x\|_\infty} \leq 1 \) für alle \( n \), wird der Beitrag der größten Elemente \( |x_n| \) dominant, und wir erhalten:
+
+\[
+\lim_{q \to \infty} \left( \sum_{n=1}^{\infty} \left( \frac{|x_n|}{\|x\|_\infty} \right)^q \right)^{1/q} = 1.
+\]
+
+Daraus folgt:
+
+\[
+\lim_{q \to \infty} \|x\|_q = \|x\|_\infty.
+\]
+
+Dies zeigt die gewünschte Aussage für beliebige \( x \in l^p \).
+
+%CHECK: Adressiert die fehlende Herleitung der Dominanz der größten Elemente und die Begründung der Ungleichung \|x\|_q \leq \|x\|_\infty durch direkte Anwendung der Definitionen.

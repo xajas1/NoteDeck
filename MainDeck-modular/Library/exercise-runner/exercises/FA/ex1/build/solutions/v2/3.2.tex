@@ -1,0 +1,13 @@
+Um zu zeigen, dass der metrische Raum \(X\) nicht separabel ist, müssen wir zeigen, dass es keine abzählbare dichte Teilmenge in \(X\) gibt. Sei \(A \subseteq X\) eine überabzählbare diskrete Teilmenge. Da \(A\) diskret ist, gilt für jedes \(x \in A\), dass \(\operatorname{dist}(x, A \setminus \{x\}) > 0\). Dies bedeutet, dass es für jedes \(x \in A\) eine Umgebung gibt, die keine anderen Punkte aus \(A\) enthält.
+
+Angenommen, \(X\) wäre separabel. Dann gäbe es eine abzählbare dichte Teilmenge \(D \subseteq X\). Da \(D\) dicht in \(X\) ist, müsste für jedes \(x \in A\) und jede Umgebung \(U\) von \(x\) ein Punkt \(d \in D\) existieren, der in \(U\) liegt. Insbesondere müsste es für jeden Punkt \(x \in A\) einen Punkt \(d \in D\) geben, der in der Umgebung \(B(x, \varepsilon)\) liegt, wobei \(\varepsilon = \operatorname{dist}(x, A \setminus \{x\})\).
+
+Da \(A\) überabzählbar ist und \(D\) abzählbar, gilt formal:
+
+\[
+|D| < |A|
+\]
+
+Dies führt zu einem Widerspruch, da \(D\) nicht für jeden Punkt in \(A\) einen unterschiedlichen Punkt in der Umgebung bereitstellen kann, was im Widerspruch zur Dichtheit von \(D\) steht. Daher kann \(X\) keine abzählbare dichte Teilmenge besitzen und ist somit nicht separabel.
+
+%CHECK: Explizite Ungleichung |D| < |A| hinzugefügt, um den Widerspruch zu verdeutlichen.

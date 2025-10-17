@@ -1,0 +1,14 @@
+{
+  "score": 0.8,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+  "weaknesses": [
+    {
+      "code": "missing_proof_detail",
+      "msg": "Die Argumentation im zweiten Fall ist nicht vollständig ausgeführt.",
+      "math_hint": "Es fehlt eine detaillierte Herleitung, warum ein nicht abgeschlossener Unterraum mit Kodimension 1 dicht sein muss."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Füge eine detaillierte Herleitung hinzu, warum ein nicht abgeschlossener Unterraum mit Kodimension 1 dicht sein muss.}"
+  ]
+}

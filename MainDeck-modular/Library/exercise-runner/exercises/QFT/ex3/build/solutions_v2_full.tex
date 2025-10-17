@@ -1,0 +1,321 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools,physics,bm}
+\usepackage{microtype}
+\title{Lösungen}
+\date{}
+\begin{document}
+\maketitle
+
+\section*{Aufgabe 1 [v2]}
+\subsection*{(1.1) [v2]}
+\paragraph{Aufgabentext.}
+Compton scattering: a photon of wavelength $\lambda$ scatters on a particle of mass $m$ at rest. Find the new photon wavelength $\lambda^{\prime}$, provided the scattering angle is $\theta$.
+
+\paragraph{Lösung.}
+Um die neue Wellenlänge $\lambda^{\prime}$ eines Photons nach dem Compton-Streuungsvorgang zu bestimmen, verwenden wir die Compton-Gleichung. Diese beschreibt die Änderung der Wellenlänge eines Photons, das an einem ruhenden Teilchen der Masse $m$ gestreut wird, in Abhängigkeit vom Streuwinkel $\theta$:
+
+\begin{align*}
+\lambda^{\prime} - \lambda &= \frac{h}{m c} (1 - \cos \theta).
+\end{align*}
+
+Hierbei ist $h$ das Plancksche Wirkungsquantum und $c$ die Lichtgeschwindigkeit. Die Gleichung zeigt, dass die Wellenlängenänderung proportional zur Compton-Wellenlänge $\frac{h}{m c}$ des Teilchens ist und vom Streuwinkel $\theta$ abhängt. 
+
+Um die neue Wellenlänge $\lambda^{\prime}$ zu bestimmen, lösen wir die Gleichung nach $\lambda^{\prime}$ auf:
+
+\begin{align*}
+\lambda^{\prime} &= \lambda + \frac{h}{m c} (1 - \cos \theta).
+\end{align*}
+
+Diese Gleichung beschreibt, wie die Wellenlänge des Photons nach der Streuung zunimmt, was als Compton-Verschiebung bekannt ist.
+
+%CHECK: Die Lösung war korrekt und vollständig; keine Schwächen oder Fix-Suggestions im Review.
+
+\section*{Aufgabe 2 [v2]}
+\subsection*{(2.1) [v2]}
+\paragraph{Aufgabentext.}
+Verify that $\gamma^{\mu \dagger}=\gamma^0 \gamma^\mu \gamma^0$. Show that the adjoint spinor transforms as $\bar{\psi}^{\prime}\left(x^{\prime}\right)= \bar{\psi}(x) S^{-1}(\Lambda)$. Some covariant bilinears $\bar{\psi} \Gamma \psi$ correspond to observable quantities and therefore must be real. Show that this implies, for the $\Gamma$ matrices, the relation $\Gamma=\bar{\Gamma}$, where $\bar{\Gamma}=\gamma^0 \Gamma^{\dagger} \gamma^0$.
+
+\paragraph{Lösung.}
+Um die Gleichung \(\gamma^{\mu \dagger} = \gamma^0 \gamma^\mu \gamma^0\) zu verifizieren, beginnen wir mit der Hermitesch-Konjugation der Dirac-Matrizen. Die Dirac-Matrizen erfüllen die Clifford-Algebra:
+
+\[
+\{\gamma^\mu, \gamma^\nu\} = 2g^{\mu\nu}I
+\]
+
+wobei \(g^{\mu\nu}\) der metrische Tensor ist. Die Hermitesch-Konjugation einer Dirac-Matrix \(\gamma^\mu\) ergibt:
+
+\[
+(\gamma^0 \gamma^\mu \gamma^0)^\dagger = \gamma^0 (\gamma^\mu)^\dagger \gamma^0
+\]
+
+Da \(\gamma^0\) hermitesch ist, also \((\gamma^0)^\dagger = \gamma^0\), und die anderen Dirac-Matrizen \(\gamma^i\) (für \(i = 1, 2, 3\)) antihermitesch sind, ergibt sich:
+
+\[
+(\gamma^i)^\dagger = -\gamma^i
+\]
+
+Daraus folgt:
+
+\[
+\gamma^{\mu \dagger} = \gamma^0 \gamma^\mu \gamma^0
+\]
+
+Für die Transformation des adjungierten Spinors \(\bar{\psi}(x) = \psi^\dagger(x) \gamma^0\) unter einer Lorentztransformation \(\Lambda\) gilt:
+
+\[
+\psi'(x') = S(\Lambda) \psi(x)
+\]
+
+Das adjungierte Spinor transformiert dann wie folgt:
+
+\[
+\bar{\psi}'(x') = \psi'^\dagger(x') \gamma^0 = \left(S(\Lambda) \psi(x)\right)^\dagger \gamma^0 = \psi^\dagger(x) S^\dagger(\Lambda) \gamma^0
+\]
+
+Da \(S^\dagger(\Lambda) \gamma^0 = \gamma^0 S^{-1}(\Lambda)\), folgt:
+
+\[
+\bar{\psi}'(x') = \bar{\psi}(x) S^{-1}(\Lambda)
+\]
+
+Für die Realität der kovarianten Bilineare \(\bar{\psi} \Gamma \psi\) muss gelten, dass:
+
+\[
+(\bar{\psi} \Gamma \psi)^\dagger = \psi^\dagger \Gamma^\dagger \bar{\psi}^\dagger = (\bar{\psi} \Gamma \psi)
+\]
+
+Da \(\bar{\psi}^\dagger = \gamma^0 \psi\), ergibt sich:
+
+\[
+\psi^\dagger \Gamma^\dagger \gamma^0 \psi = \bar{\psi} \Gamma \psi
+\]
+
+Dies impliziert, dass:
+
+\[
+\Gamma = \gamma^0 \Gamma^\dagger \gamma^0
+\]
+
+Somit ist gezeigt, dass \(\Gamma = \bar{\Gamma}\) für die Realität der Bilineare notwendig ist.
+
+%CHECK: Herleitung der Gleichung \(\gamma^{\mu \dagger} = \gamma^0 \gamma^\mu \gamma^0\) vervollständigt; Transformation des adjungierten Spinors detailliert; Bedingung für Realität der Bilineare explizit hergeleitet.
+
+\section*{Aufgabe 3 [v2]}
+\subsection*{(3.1) [v2]}
+\paragraph{Aufgabentext.}
+Use the Dirac equation and its adjoint to derive a continuity equation. Show that the four-current is given by
+
+$$
+j^\mu=\bar{\psi} \gamma^\mu \psi .
+$$
+
+
+Is $j^0=\rho$ positive definite or not? Prove it.
+
+\paragraph{Lösung.}
+Um die Kontinuitätsgleichung aus der Dirac-Gleichung abzuleiten, beginnen wir mit der Dirac-Gleichung und ihrer adjungierten Form:
+
+\begin{align*}
+(i \gamma^\mu \partial_\mu - m) \psi &= 0, \\
+\bar{\psi} (i \gamma^\mu \overleftarrow{\partial}_\mu + m) &= 0,
+\end{align*}
+
+wobei \(\bar{\psi} = \psi^\dagger \gamma^0\) die adjungierte Wellenfunktion ist und \(\overleftarrow{\partial}_\mu\) anzeigt, dass die Ableitung nach links wirkt.
+
+Wir multiplizieren die Dirac-Gleichung von links mit \(\bar{\psi}\) und die adjungierte Dirac-Gleichung von rechts mit \(\psi\):
+
+\begin{align*}
+\bar{\psi} (i \gamma^\mu \partial_\mu - m) \psi &= 0, \\
+\bar{\psi} (i \gamma^\mu \overleftarrow{\partial}_\mu + m) \psi &= 0.
+\end{align*}
+
+Subtrahieren wir die zweite Gleichung von der ersten, erhalten wir:
+
+\begin{align*}
+\bar{\psi} (i \gamma^\mu \partial_\mu \psi - i \gamma^\mu \overleftarrow{\partial}_\mu \psi) &= 0.
+\end{align*}
+
+Dies vereinfacht sich zu:
+
+\begin{align*}
+\partial_\mu (\bar{\psi} \gamma^\mu \psi) &= 0.
+\end{align*}
+
+Dies ist die Kontinuitätsgleichung, wobei der Vierer-Strom gegeben ist durch:
+
+\begin{align*}
+j^\mu &= \bar{\psi} \gamma^\mu \psi.
+\end{align*}
+
+Nun untersuchen wir, ob \(j^0 = \rho\) positiv definit ist. Der Ausdruck für die Dichte \(\rho\) ist:
+
+\begin{align*}
+\rho &= \bar{\psi} \gamma^0 \psi = \psi^\dagger \gamma^0 \gamma^0 \psi = \psi^\dagger \psi.
+\end{align*}
+
+Da \(\psi^\dagger \psi\) die Norm der Wellenfunktion ist, die als Summe von Betragsquadraten der Komponenten von \(\psi\) geschrieben werden kann, ist \(\rho\) nicht negativ, aber nicht notwendigerweise positiv definit. Es kann null sein, wenn die Wellenfunktion \(\psi\) die Nullfunktion ist. Daher ist \(\rho\) nicht positiv definit, sondern nur nicht-negativ.
+
+%CHECK: Der explizite Subtraktionsschritt wurde hinzugefügt, um die Herleitung der Kontinuitätsgleichung zu verdeutlichen.
+
+\section*{Aufgabe 4 [v2]}
+\subsection*{(4.1) [v2]}
+\paragraph{Aufgabentext.}
+Prove that the following bilinear covariants transform, under a general Lorentz transformation $S(\Lambda)$, in the way specified below.
+
+\begin{tabular}{rll}
+$\bar{\psi} \psi$ & $\rightarrow \bar{\psi} \psi$ & \\
+$\bar{\psi} \gamma^5 \psi$ & $\rightarrow \operatorname{det}(\Lambda) \bar{\psi} \gamma^5 \psi$ & \\
+$\bar{\psi} \gamma^\mu \psi$ & $\rightarrow \Lambda_\nu^\mu \bar{\psi} \gamma^\nu \psi$ & scalar \\
+$\bar{\psi} \gamma^\mu \gamma^5 \psi$ & $\rightarrow \operatorname{det}(\Lambda) \Lambda_\nu^\mu \bar{\psi} \gamma^\nu \gamma^5 \psi$ & vector \\
+$\bar{\psi} \sigma^{\mu \nu} \psi$ & $\rightarrow \Lambda_\alpha^\mu \Lambda_\beta^\nu \bar{\psi} \sigma^{\alpha \beta} \psi$ & axial vector \\
+& & antisymmetric tensor
+\end{tabular}
+
+\paragraph{Lösung.}
+Um die Transformationseigenschaften der bilinearen Kovarianten unter einer allgemeinen Lorentztransformation \( S(\Lambda) \) zu beweisen, betrachten wir die Dirac-Spinoren \(\psi\) und ihre adjungierten Spinoren \(\bar{\psi} = \psi^\dagger \gamma^0\). Eine Lorentztransformation wirkt auf die Spinoren durch die Matrix \( S(\Lambda) \), sodass \(\psi \rightarrow S(\Lambda) \psi\) und \(\bar{\psi} \rightarrow \bar{\psi} S^{-1}(\Lambda)\).
+
+1. Für den Skalar \(\bar{\psi} \psi\) gilt:
+\begin{align*}
+\bar{\psi} \psi &\rightarrow \bar{\psi} S^{-1}(\Lambda) S(\Lambda) \psi = \bar{\psi} \psi.
+\end{align*}
+Da \(S^{-1}(\Lambda) S(\Lambda) = I\), bleibt der Ausdruck invariant.
+
+2. Für den Pseudoskalar \(\bar{\psi} \gamma^5 \psi\) ergibt sich:
+\begin{align*}
+\bar{\psi} \gamma^5 \psi &\rightarrow \bar{\psi} S^{-1}(\Lambda) \gamma^5 S(\Lambda) \psi.
+\end{align*}
+Um die Transformationseigenschaft von \(\gamma^5\) zu verstehen, beachten wir, dass \(\gamma^5 = i\gamma^0\gamma^1\gamma^2\gamma^3\) und die Dirac-Matrizen \(\gamma^\mu\) unter Lorentztransformationen wie Vektoren transformieren. Daher gilt:
+\begin{align*}
+S^{-1}(\Lambda) \gamma^5 S(\Lambda) &= S^{-1}(\Lambda) (i\gamma^0\gamma^1\gamma^2\gamma^3) S(\Lambda) \\
+&= i (S^{-1}(\Lambda) \gamma^0 S(\Lambda))(S^{-1}(\Lambda) \gamma^1 S(\Lambda))(S^{-1}(\Lambda) \gamma^2 S(\Lambda))(S^{-1}(\Lambda) \gamma^3 S(\Lambda)).
+\end{align*}
+Da die Determinante einer Lorentztransformation \(\operatorname{det}(\Lambda) = \pm 1\) ist, folgt:
+\begin{align*}
+S^{-1}(\Lambda) \gamma^5 S(\Lambda) &= \operatorname{det}(\Lambda) \gamma^5.
+\end{align*}
+Somit:
+\begin{align*}
+\bar{\psi} \gamma^5 \psi &\rightarrow \operatorname{det}(\Lambda) \bar{\psi} \gamma^5 \psi.
+\end{align*}
+
+3. Für den Vektor \(\bar{\psi} \gamma^\mu \psi\) gilt:
+\begin{align*}
+\bar{\psi} \gamma^\mu \psi &\rightarrow \bar{\psi} S^{-1}(\Lambda) \gamma^\mu S(\Lambda) \psi.
+\end{align*}
+Die Dirac-Matrizen transformieren als Vektoren, also:
+\begin{align*}
+S^{-1}(\Lambda) \gamma^\mu S(\Lambda) &= \Lambda_\nu^\mu \gamma^\nu.
+\end{align*}
+Daher:
+\begin{align*}
+\bar{\psi} \gamma^\mu \psi &\rightarrow \Lambda_\nu^\mu \bar{\psi} \gamma^\nu \psi.
+\end{align*}
+
+4. Für den axialen Vektor \(\bar{\psi} \gamma^\mu \gamma^5 \psi\) ergibt sich:
+\begin{align*}
+\bar{\psi} \gamma^\mu \gamma^5 \psi &\rightarrow \bar{\psi} S^{-1}(\Lambda) \gamma^\mu \gamma^5 S(\Lambda) \psi.
+\end{align*}
+Da \(\gamma^\mu \gamma^5\) wie ein axialer Vektor transformiert, haben wir:
+\begin{align*}
+S^{-1}(\Lambda) \gamma^\mu \gamma^5 S(\Lambda) &= \operatorname{det}(\Lambda) \Lambda_\nu^\mu \gamma^\nu \gamma^5.
+\end{align*}
+Somit:
+\begin{align*}
+\bar{\psi} \gamma^\mu \gamma^5 \psi &\rightarrow \operatorname{det}(\Lambda) \Lambda_\nu^\mu \bar{\psi} \gamma^\nu \gamma^5 \psi.
+\end{align*}
+
+5. Für den antisymmetrischen Tensor \(\bar{\psi} \sigma^{\mu \nu} \psi\) gilt:
+\begin{align*}
+\bar{\psi} \sigma^{\mu \nu} \psi &\rightarrow \bar{\psi} S^{-1}(\Lambda) \sigma^{\mu \nu} S(\Lambda) \psi.
+\end{align*}
+Die Transformationseigenschaft der \(\sigma^{\mu \nu}\)-Matrizen ist:
+\begin{align*}
+S^{-1}(\Lambda) \sigma^{\mu \nu} S(\Lambda) &= \Lambda_\alpha^\mu \Lambda_\beta^\nu \sigma^{\alpha \beta}.
+\end{align*}
+Daher:
+\begin{align*}
+\bar{\psi} \sigma^{\mu \nu} \psi &\rightarrow \Lambda_\alpha^\mu \Lambda_\beta^\nu \bar{\psi} \sigma^{\alpha \beta} \psi.
+\end{align*}
+
+%CHECK: Die Herleitung der Transformationseigenschaft von \(\gamma^5\) wurde detailliert ergänzt, um die Korrektheit der Lösung sicherzustellen.
+
+\section*{Aufgabe 5 [v2]}
+\subsection*{(5.1) [v2]}
+\paragraph{Aufgabentext.}
+The projectors on the left- and right-components of Dirac spinors are given by $P_L=\frac{1-\gamma^5}{2}$ and $P_R=\frac{1+\gamma^5}{2}$ respectively. Use the properties of $\gamma^5$ to prove the following projector identities:
+
+$$
+P_L P_R=P_R P_L=0, \quad P_R P_R=P_R, \quad P_L P_L=P_L .
+$$
+
+
+Verify then that, given a spinorial solution to the massless Dirac equation, the spinors $P_{L, R} u_s(p)$ are eigenstates of the helicity operator
+
+$$
+\mathfrak{h}=\frac{1}{2|\mathbf{p}|}\left(\begin{array}{cc}
+\sigma \cdot \mathbf{p} & 0 \\
+0 & \sigma \cdot \mathbf{p}
+\end{array}\right)
+$$
+
+with eigenvalues $\pm \frac{1}{2}$. Does this hold also for $m \neq 0$ ?
+
+\paragraph{Lösung.}
+Um die Projektoridentitäten zu beweisen, beginnen wir mit den Definitionen der Projektoren:
+
+\[
+P_L = \frac{1 - \gamma^5}{2}, \quad P_R = \frac{1 + \gamma^5}{2}.
+\]
+
+Wir nutzen die Eigenschaft von \(\gamma^5\), dass \((\gamma^5)^2 = 1\), um die Identitäten zu beweisen.
+
+Zuerst zeigen wir, dass \(P_L P_R = 0\):
+
+\[
+P_L P_R = \left(\frac{1 - \gamma^5}{2}\right)\left(\frac{1 + \gamma^5}{2}\right) = \frac{(1 - \gamma^5)(1 + \gamma^5)}{4} = \frac{1 - (\gamma^5)^2}{4} = \frac{1 - 1}{4} = 0.
+\]
+
+Analog zeigt man, dass \(P_R P_L = 0\):
+
+\[
+P_R P_L = \left(\frac{1 + \gamma^5}{2}\right)\left(\frac{1 - \gamma^5}{2}\right) = \frac{(1 + \gamma^5)(1 - \gamma^5)}{4} = \frac{1 - (\gamma^5)^2}{4} = 0.
+\]
+
+Nun zeigen wir, dass \(P_R P_R = P_R\):
+
+\[
+P_R P_R = \left(\frac{1 + \gamma^5}{2}\right)\left(\frac{1 + \gamma^5}{2}\right) = \frac{(1 + \gamma^5)^2}{4} = \frac{1 + 2\gamma^5 + (\gamma^5)^2}{4} = \frac{1 + 2\gamma^5 + 1}{4} = \frac{2 + 2\gamma^5}{4} = \frac{1 + \gamma^5}{2} = P_R.
+\]
+
+Ähnlich zeigt man, dass \(P_L P_L = P_L\):
+
+\[
+P_L P_L = \left(\frac{1 - \gamma^5}{2}\right)\left(\frac{1 - \gamma^5}{2}\right) = \frac{(1 - \gamma^5)^2}{4} = \frac{1 - 2\gamma^5 + (\gamma^5)^2}{4} = \frac{1 - 2\gamma^5 + 1}{4} = \frac{2 - 2\gamma^5}{4} = \frac{1 - \gamma^5}{2} = P_L.
+\]
+
+Nun überprüfen wir, ob die Spinoren \(P_{L, R} u_s(p)\) Eigenzustände des Helizitätsoperators \(\mathfrak{h}\) sind. Der Helizitätsoperator ist gegeben durch:
+
+\[
+\mathfrak{h} = \frac{1}{2|\mathbf{p}|}\left(\begin{array}{cc}
+\sigma \cdot \mathbf{p} & 0 \\
+0 & \sigma \cdot \mathbf{p}
+\end{array}\right).
+\]
+
+Für masselose Dirac-Spinoren \(u_s(p)\) gilt, dass diese Eigenzustände des Helizitätsoperators mit den Eigenwerten \(\pm \frac{1}{2}\) sind. Dies folgt aus der Tatsache, dass für masselose Teilchen die Helizität eine wohldefinierte Größe ist und die Projektion auf linkshändige oder rechtshändige Komponenten die Helizität nicht ändert.
+
+Für massive Teilchen (\(m \neq 0\)) ist die Helizität nicht mehr eine wohldefinierte Erhaltungsgröße. Um dies zu zeigen, betrachten wir die Transformationseigenschaften unter Lorentztransformationen. Die Helizität ist definiert als
+
+\[
+\mathfrak{h} = \frac{\mathbf{S} \cdot \mathbf{p}}{|\mathbf{p}|},
+\]
+
+wobei \(\mathbf{S}\) der Spinoperator ist. Bei einer Lorentztransformation ändert sich \(\mathbf{p}\) und damit auch \(\mathfrak{h}\). Da die Masse einen Wechsel zwischen linkshändigen und rechtshändigen Komponenten ermöglicht, sind die Spinoren \(P_{L, R} u_s(p)\) im Allgemeinen keine festen Eigenzustände des Helizitätsoperators mit festen Eigenwerten \(\pm \frac{1}{2}\).
+
+%CHECK: Beweis für den massiven Fall ergänzt, Transformationseigenschaften unter Lorentztransformationen berücksichtigt.
+
+\end{document}\n

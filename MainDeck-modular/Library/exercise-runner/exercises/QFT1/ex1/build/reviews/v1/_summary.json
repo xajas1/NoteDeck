@@ -1,0 +1,55 @@
+{
+  "tasks": {
+    "1.1": {
+      "score": 0.8,
+      "verdict": "Gute Lösung mit kleineren Mängeln",
+      "weaknesses": [
+        {
+          "code": "E1",
+          "msg": "Fehler in der Umrechnung von kg zu GeV",
+          "math_hint": "Die Umrechnung von kg zu GeV sollte die korrekte Umrechnung von Joule zu GeV berücksichtigen: $1 \text{ J} = 6.242 \times 10^{9} \text{ GeV}$."
+        },
+        {
+          "code": "E2",
+          "msg": "Fehler in der Umrechnung von s zu 1/GeV",
+          "math_hint": "Die Umrechnung von s zu 1/GeV sollte die korrekte Umrechnung von s zu GeV^{-1} berücksichtigen: $1 \text{ s} = 1.519 \times 10^{24} \text{ GeV}^{-1}$."
+        }
+      ],
+      "fix_suggestions": [
+        "1 \\, \\text{kg} = \\frac{1 \\, \\text{kg} \\cdot (3 \\times 10^8 \\, \\text{m/s})^2}{1.602 \\times 10^{-10} \\, \\text{J/GeV}} \\approx 5.61 \\times 10^{26} \\, \\text{GeV}",
+        "1 \\, \\text{s} = \\frac{1}{6.582 \\times 10^{-25} \\, \\text{s/GeV}} \\approx 1.52 \\times 10^{24} \\, \\text{GeV}^{-1}"
+      ]
+    },
+    "2.1": {
+      "score": 1,
+      "verdict": "korrekt",
+      "weaknesses": [],
+      "fix_suggestions": []
+    },
+    "3.1": {
+      "score": 1,
+      "verdict": "Die Lösung ist korrekt und vollständig.",
+      "weaknesses": [],
+      "fix_suggestions": []
+    },
+    "4.1": {
+      "score": 0.8,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es gibt einige Lücken in der Herleitung.",
+      "weaknesses": [
+        {
+          "code": "MISSING_EXPANSION",
+          "msg": "Die Ausmultiplizierung der Terme im Kommutator ist nicht explizit gezeigt.",
+          "math_hint": "Zeige die vollständige Ausmultiplizierung: $(\frac{m \\\\omega}{2 \\\\hbar})(\\\\\\\\hat{x} + \\\\\\\\frac{\\\\\\\\mathrm{i}}{m \\\\omega} \\\\\\\\hat{p})(\\\\\\\\hat{x} - \\\\\\\\frac{\\\\\\\\mathrm{i}}{m \\\\omega} \\\\\\\\hat{p})$ und $(\frac{m \\\\omega}{2 \\\\hbar})(\\\\\\\\hat{x} - \\\\\\\\frac{\\\\\\\\mathrm{i}}{m \\\\omega} \\\\\\\\hat{p})(\\\\\\\\hat{x} + \\\\\\\\frac{\\\\\\\\mathrm{i}}{m \\\\omega} \\\\\\\\hat{p})$."
+        },
+        {
+          "code": "MISSING_COMMUTATION_STEP",
+          "msg": "Die Anwendung der kanonischen Vertauschungsrelation ist nicht detailliert genug.",
+          "math_hint": "Zeige, wie $[\\\\\\\\hat{x}, \\\\\\\\hat{p}] = \\\\\\\\mathrm{i} \\\\hbar$ in die Berechnung des Kommutators eingeht."
+        }
+      ],
+      "fix_suggestions": [
+        "\\begin{align*} \\left(\\hat{x} + \\frac{\\mathrm{i}}{m \\omega} \\hat{p}\\right)\\left(\\hat{x} - \\frac{\\mathrm{i}}{m \\omega} \\hat{p}\\right) &= \\hat{x}^2 - \\frac{\\mathrm{i}}{m \\omega} \\hat{x}\\hat{p} + \\frac{\\mathrm{i}}{m \\omega} \\hat{p}\\hat{x} - \\left(\\frac{\\mathrm{i}}{m \\omega}\\right)^2 \\hat{p}^2 \\\\ &= \\hat{x}^2 + \\frac{\\hbar}{m \\omega} - \\left(\\frac{1}{m \\omega}\\right)^2 \\hat{p}^2 \\end{align*}"
+      ]
+    }
+  }
+}

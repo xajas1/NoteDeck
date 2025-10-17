@@ -1,0 +1,62 @@
+{
+  "tasks": {
+    "1.1": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist größtenteils korrekt und vollständig, jedoch gibt es kleinere Ungenauigkeiten.",
+      "weaknesses": [
+        {
+          "code": "unit_conversion",
+          "msg": "Die Umrechnung von kg in GeV ist korrekt, aber die Erklärung könnte klarer sein, insbesondere die Umrechnung von c^2 in GeV."
+        },
+        {
+          "code": "explanation_clarity",
+          "msg": "Die Erklärung zur Umrechnung von s in GeV^{-1} könnte präziser sein, insbesondere die Rolle von c=1 in natürlichen Einheiten."
+        }
+      ],
+      "fix_suggestions": [
+        "Klarere Erklärung der Umrechnung von c^2 in GeV.",
+        "Präzisere Darstellung der Umrechnung von s in GeV^{-1} unter Berücksichtigung von c=1."
+      ]
+    },
+    "2.1": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist größtenteils korrekt und vollständig.",
+      "weaknesses": [
+        {
+          "code": "derivative_misinterpretation",
+          "msg": "Die Ableitung von H nach x wurde nicht korrekt hergeleitet, da die Annahme, dass der Term mit \\( \\frac{\\partial \\dot{x}}{\\partial x} \\) verschwindet, nicht ausreichend begründet ist."
+        }
+      ],
+      "fix_suggestions": [
+        "Erkläre genauer, warum \\( \\frac{\\partial \\dot{x}}{\\partial x} \\) in diesem Kontext verschwindet oder berücksichtige diesen Term korrekt."
+      ]
+    },
+    "3.1": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist größtenteils korrekt und vollständig.",
+      "weaknesses": [
+        {
+          "code": "missing_explanation",
+          "msg": "Die Herleitung der Divergenzform könnte detaillierter erklärt werden."
+        }
+      ],
+      "fix_suggestions": [
+        "Fügen Sie eine detailliertere Erklärung zur Umformung in die Divergenzform hinzu, insbesondere zur Anwendung der Produktregel."
+      ]
+    },
+    "4.1": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist größtenteils korrekt und vollständig, aber es gibt kleinere Unklarheiten.",
+      "weaknesses": [
+        {
+          "code": "time_dependence",
+          "msg": "Die Behandlung des zeitabhängigen Hamiltonoperators ist nicht vollständig klar und könnte präziser formuliert werden."
+        }
+      ],
+      "fix_suggestions": [
+        "Klarere Erklärung der Unterschiede bei zeitabhängigem Hamiltonoperator.",
+        "Präzisierung der Annahmen und Bedingungen für die Herleitung."
+      ]
+    }
+  }
+}

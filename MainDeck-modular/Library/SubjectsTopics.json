@@ -1,0 +1,1182 @@
+{
+  "A": {
+    "index": 1,
+    "topics": {
+      "Ringe Basics": {
+        "index": 1,
+        "parent": "Ringe",
+        "litIDs": {
+          "S23": "A-S23-01"
+        }
+      },
+      "Potenzreihenringe und Polynomringe": {
+        "index": 2,
+        "parent": "Ringe",
+        "litIDs": {
+          "S23": "A-S23-02"
+        }
+      },
+      "Ideale und Quotienten": {
+        "index": 3,
+        "parent": "Ringe",
+        "litIDs": {
+          "S23": "A-S23-03"
+        }
+      },
+      "Moduln Grundlagen": {
+        "index": 4,
+        "parent": "Moduln",
+        "litIDs": {
+          "S23": "A-S23-04"
+        }
+      },
+      "Gruppen Grundlagen": {
+        "index": 5,
+        "parent": "Gruppen",
+        "litIDs": {
+          "S23": "A-S23-5"
+        }
+      },
+      "Nebenklassen": {
+        "index": 6,
+        "parent": "Gruppen",
+        "litIDs": {
+          "S23": "A-S23-6"
+        }
+      },
+      "Normalteiler und Faktorgruppen": {
+        "index": 7,
+        "parent": "Gruppen",
+        "litIDs": {
+          "S23": "A-S23-7"
+        }
+      },
+      "Kommentatoren und abellsche Gruppen": {
+        "index": 8,
+        "parent": "Gruppen",
+        "litIDs": {
+          "S23": "A-S23-8"
+        }
+      }
+    }
+  },
+  "CM": {
+    "index": 2,
+    "topics": {
+      "Klassische Streutheorie": {
+        "index": 1,
+        "parent": null,
+        "litIDs": {
+          "T12": "CM-T12-01"
+        }
+      },
+      "Wirkungsquerschnitt": {
+        "index": 2,
+        "parent": "Klassische Streutheorie",
+        "litIDs": {
+          "T12": "CM-T12-02"
+        }
+      },
+      "Berechnung des Wirkungsquerschnitts für elastische Streuung am Zentralpotential": {
+        "index": 3,
+        "parent": "Klassische Streutheorie",
+        "litIDs": {
+          "T12": "CM-T12-03"
+        }
+      },
+      "Rücktransformation ins Laborsystem": {
+        "index": 4,
+        "parent": "Klassische Streutheorie",
+        "litIDs": {
+          "T12": "CM-T12-04"
+        }
+      },
+      "2-Körper und effektives 1-Körper Problem": {
+        "index": 5,
+        "parent": null,
+        "litIDs": {
+          "T12": "CM-T12-05"
+        }
+      },
+      "CM-ÜB-01: Streutheorie": {
+        "index": 6,
+        "parent": "CM-ÜB",
+        "litIDs": {
+          "T12": "CM-T12-06"
+        }
+      },
+      "Reduktion auf effektives 1 Körper Problem": {
+        "index": 7,
+        "parent": "Ungebundene Bewegung in 2 Körper Problem",
+        "litIDs": {
+          "K25c": "CM-K25c-7"
+        }
+      },
+      "Zwangsbedingungen und das d'Alembert-Prinzip": {
+        "index": 8,
+        "parent": "Lagrange'sche Mechanik",
+        "litIDs": {
+          "K25c": "CM-K25c-8"
+        }
+      },
+      "d'Alembert Prinzip": {
+        "index": 9,
+        "parent": "Lagrange'sche Mechanik",
+        "litIDs": {
+          "K25c": "CM-K25c-9"
+        }
+      },
+      "Lagrangegleichungen 2. Art": {
+        "index": 10,
+        "parent": "Lagrange'sche Mechanik",
+        "litIDs": {
+          "K25c": "CM-K25c-10"
+        }
+      },
+      "Lagrangegleichungen 1. Art": {
+        "index": 11,
+        "parent": "Lagrange'sche Mechanik",
+        "litIDs": {
+          "K25c": "CM-K25c-11"
+        }
+      },
+      "Hamilton Prinzip": {
+        "index": 12,
+        "parent": "Lagrange'sche Mechanik",
+        "litIDs": {
+          "K25c": "CM-K25c-12"
+        }
+      },
+      "Kinematik des starren Körpers": {
+        "index": 13,
+        "parent": "Anwendungen der Lagrangeschen Mechanik",
+        "litIDs": {
+          "K25c": "CM-K25c-13"
+        }
+      },
+      "Dynamik des Starren Körpers": {
+        "index": 14,
+        "parent": "Anwendungen der Lagrangeschen Mechanik",
+        "litIDs": {
+          "K25c": "CM-K25c-14"
+        }
+      },
+      "Schwingungen": {
+        "index": 15,
+        "parent": "Anwendungen der Lagrangeschen Mechanik",
+        "litIDs": {
+          "K25c": "CM-K25c-15"
+        }
+      },
+      "Hamiltonschen Gleichungen": {
+        "index": 16,
+        "parent": "Hamiltonsche Mechanik",
+        "litIDs": {
+          "K25c": "CM-K25c-16"
+        }
+      },
+      "Kanonische Transformationen": {
+        "index": 17,
+        "parent": "Hamiltonsche Mechanik",
+        "litIDs": {
+          "K25c": "CM-K25c-17"
+        }
+      },
+      "Kanonische Invarianten": {
+        "index": 18,
+        "parent": "Hamiltonsche Mechanik",
+        "litIDs": {
+          "K25c": "CM-K25c-18"
+        }
+      },
+      "Hamilton-Jacobi-Theorie": {
+        "index": 19,
+        "parent": "Hamiltonsche Mechanik",
+        "litIDs": {
+          "K25c": "CM-K25c-19"
+        }
+      },
+      "Nichtlineare Dynamik und Chaos": {
+        "index": 20,
+        "parent": null,
+        "litIDs": {
+          "K25c": "CM-K25c-20"
+        }
+      },
+      "Lorentz-Transformation": {
+        "index": 21,
+        "parent": "Spezielle Relativitätstheorie",
+        "litIDs": {
+          "K25c": "CM-K25c-21"
+        }
+      }
+    }
+  },
+  "BÜN": {
+    "index": 3,
+    "topics": {
+      "Faserbündel": {
+        "index": 2,
+        "parent": null,
+        "litIDs": {
+          "K25a": "BÜN-K25a-02"
+        }
+      },
+      "Vektorbündel": {
+        "index": 3,
+        "parent": null,
+        "litIDs": {
+          "L09": "BÜN-L09-3"
+        }
+      }
+    }
+  },
+  "GPDE": {
+    "index": 4,
+    "topics": {
+      "Differentialoperatoren": {
+        "index": 1,
+        "parent": "GPDE Basics",
+        "litIDs": {
+          "S25": "GPDE-S25-01"
+        }
+      },
+      "Regularitätsklassen": {
+        "index": 2,
+        "parent": "GPDE Basics",
+        "litIDs": {
+          "S25": "GPDE-S25-02"
+        }
+      },
+      "Schwache Maximum Prinzipien": {
+        "index": 3,
+        "parent": "Maximum Prinzipien",
+        "litIDs": {
+          "S25": "GPDE-S25-03"
+        }
+      },
+      "Starke Maximum Prinzipien": {
+        "index": 4,
+        "parent": "Maximum Prinzipien",
+        "litIDs": {
+          "S25": "GPDE-S25-04"
+        }
+      },
+      "Hopf Lemma": {
+        "index": 5,
+        "parent": "Maximum Prinzipien",
+        "litIDs": {
+          "S25": "GPDE-S25-05"
+        }
+      },
+      "Vergleichsprinzipien für voll nicht-lineare Differentialoperatoren": {
+        "index": 6,
+        "parent": "Maximum Prinzipien",
+        "litIDs": {
+          "S25": "GPDE-S25-06"
+        }
+      },
+      "Maximum Prinzip": {
+        "index": 7,
+        "parent": "Tensorielle Maximum Prinzipien",
+        "litIDs": {
+          "C04": "GPDE-C04-7"
+        }
+      },
+      "Globale Analysis Grundlagen": {
+        "index": 8,
+        "parent": null,
+        "litIDs": {
+          "A11": "GPDE-A11-8"
+        }
+      }
+    }
+  },
+  "HA": {
+    "index": 5,
+    "topics": {
+      "Kategorien und Funktoren in HA": {
+        "index": 1,
+        "parent": null,
+        "litIDs": {
+          "R79": "HA-R79-01"
+        }
+      },
+      "Moduln in HA": {
+        "index": 2,
+        "parent": null,
+        "litIDs": {
+          "R79": "HA-R79-02"
+        }
+      },
+      "Abelsche Kategorien": {
+        "index": 3,
+        "parent": null,
+        "litIDs": {
+          "R79": "HA-R79-03"
+        }
+      },
+      "Homologie Funktor in HA": {
+        "index": 4,
+        "parent": null,
+        "litIDs": {
+          "R79": "HA-R79-04"
+        }
+      },
+      "Komplexe in HA": {
+        "index": 5,
+        "parent": null,
+        "litIDs": {
+          "R79": "HA-R79-05"
+        }
+      },
+      "Hilftslemma für Diagramme der HA": {
+        "index": 6,
+        "parent": null,
+        "litIDs": {
+          "R79": "HA-R79-06"
+        }
+      },
+      "Splitting": {
+        "index": 7,
+        "parent": null,
+        "litIDs": {
+          "R79": "HA-R79-07"
+        }
+      },
+      "Kategorische Formulierung der Homologietheorie": {
+        "index": 8,
+        "parent": null,
+        "litIDs": {
+          "R79": "HA-R79-08"
+        }
+      }
+    }
+  },
+  "QMS": {
+    "index": 7,
+    "topics": {
+      "Raum Translation": {
+        "index": 2,
+        "parent": "Symmetrie in Quantenmechanik",
+        "litIDs": {
+          "R25": "QMS-R25-02"
+        }
+      },
+      "Gruppen Grundlagen": {
+        "index": 1,
+        "parent": null,
+        "litIDs": {
+          "R25": "QMS-R25-1"
+        }
+      },
+      "Repräsentationen von Gruppen": {
+        "index": 3,
+        "parent": null,
+        "litIDs": {
+          "R25": "QMS-R25-3"
+        }
+      },
+      "Lie Gruppen": {
+        "index": 4,
+        "parent": null,
+        "litIDs": {
+          "R25": "QMS-R25-4"
+        }
+      },
+      "Einfache und Semi-Einfache Lie Gruppen": {
+        "index": 5,
+        "parent": null,
+        "litIDs": {
+          "R25": "QMS-R25-5"
+        }
+      },
+      "Casimir Operatoren, Multiplets und Schur Lemma": {
+        "index": 6,
+        "parent": null,
+        "litIDs": {
+          "R25": "QMS-R25-6"
+        }
+      },
+      "Gruppe $(\\operatorname{SU}(N), \\cdot)$": {
+        "index": 7,
+        "parent": null,
+        "litIDs": {
+          "R25": "QMS-R25-7"
+        }
+      },
+      "Multiplets von $(\\operatorname{SU}(N), \\cdot)$": {
+        "index": 8,
+        "parent": "Gruppe $(\\operatorname{SU}(N), \\cdot)$",
+        "litIDs": {
+          "R25": "QMS-R25-8"
+        }
+      },
+      "Konstruktion von Multiplets aus fundamentaler Repräsentation": {
+        "index": 9,
+        "parent": "Gruppe $(\\operatorname{SU}(N), \\cdot)$",
+        "litIDs": {
+          "R25": "QMS-R25-9"
+        }
+      },
+      "Permutationsgruppe": {
+        "index": 10,
+        "parent": "Young Tableaux",
+        "litIDs": {
+          "R25": "QMS-R25-10"
+        }
+      }
+    }
+  },
+  "RG": {
+    "index": 8,
+    "topics": {
+      "Untermannigfaltigkeiten im euklidischen Raum": {
+        "index": 2,
+        "parent": "Differenzierbare Mannigfaltigkeiten",
+        "litIDs": {
+          "B25": "RG-B25-02"
+        }
+      },
+      "Glatte Mannigfaltigkeiten": {
+        "index": 3,
+        "parent": "Differenzierbare Mannigfaltigkeiten",
+        "litIDs": {
+          "B25": "RG-B25-03"
+        }
+      },
+      "Glatte Abbildungen und Vektorfelder": {
+        "index": 4,
+        "parent": "Differenzierbare Mannigfaltigkeiten",
+        "litIDs": {
+          "B25": "RG-B25-04"
+        }
+      },
+      "Riemannische Mannigfaltigkeiten": {
+        "index": 5,
+        "parent": null,
+        "litIDs": {
+          "B25": "RG-B25-05"
+        }
+      },
+      "Levi-Civita Zusammenhang": {
+        "index": 6,
+        "parent": "null",
+        "litIDs": {
+          "B25": "RG-B25-06"
+        }
+      },
+      "Kovariante Ableitung längs einer Kurve": {
+        "index": 7,
+        "parent": "null",
+        "litIDs": {
+          "B25": "RG-B25-07"
+        }
+      },
+      "Paralleltransport": {
+        "index": 8,
+        "parent": "null",
+        "litIDs": {
+          "B25": "RG-B25-08"
+        }
+      },
+      "Tensor-Techniken": {
+        "index": 10,
+        "parent": null,
+        "litIDs": {
+          "A11": "RG-A11-10"
+        }
+      },
+      "Riemannischer Krümmungstensor": {
+        "index": 11,
+        "parent": "Krümmungen in Riemannischer Geometrie",
+        "litIDs": {
+          "A11": "RG-A11-11"
+        }
+      },
+      "Ricci-Krümmungstensor": {
+        "index": 12,
+        "parent": "Krümmungen in Riemannischer Geometrie",
+        "litIDs": {
+          "A11": "RG-A11-12"
+        }
+      },
+      "Skalare Krümmung": {
+        "index": 13,
+        "parent": "Krümmungen in Riemannischer Geometrie",
+        "litIDs": {
+          "A11": "RG-A11-13"
+        }
+      },
+      "Krümmungen in Riemannischer Geometrie": {
+        "index": 14,
+        "parent": null,
+        "litIDs": {
+          "A11": "RG-A11-14"
+        }
+      },
+      "Schnittkrümmung": {
+        "index": 15,
+        "parent": "Krümmungen in Riemannischer Geometrie",
+        "litIDs": {
+          "A11": "RG-A11-15"
+        }
+      },
+      "Variationsformeln der Riemannischen Geometrie": {
+        "index": 16,
+        "parent": null,
+        "litIDs": {
+          "A11": "RG-A11-16"
+        }
+      },
+      "Geodätische und Exponentialabbildung": {
+        "index": 17,
+        "parent": null,
+        "litIDs": {
+          "B25": "RG-B25-17"
+        }
+      },
+      "Krümmung von Untermannigfaltigkeiten": {
+        "index": 18,
+        "parent": "Krümmungen in Riemannischer Geometrie",
+        "litIDs": {
+          "B25": "RG-B25-18"
+        }
+      },
+      "Geometrie und Topologie": {
+        "index": 19,
+        "parent": null,
+        "litIDs": {
+          "B25": "RG-B25-19"
+        }
+      },
+      "Jacobifelder": {
+        "index": 20,
+        "parent": null,
+        "litIDs": {
+          "B25": "RG-B25-20"
+        }
+      },
+      "Überlagerung und Faserbündel": {
+        "index": 21,
+        "parent": null,
+        "litIDs": {
+          "B25": "RG-B25-21"
+        }
+      },
+      "Riemannische Submersionen": {
+        "index": 22,
+        "parent": null,
+        "litIDs": {
+          "B25": "RG-B25-22"
+        }
+      },
+      "Komplex-projektive Raum": {
+        "index": 23,
+        "parent": null,
+        "litIDs": {
+          "B25": "RG-B25-23"
+        }
+      },
+      "Längen kleiner Kreise": {
+        "index": 24,
+        "parent": null,
+        "litIDs": {
+          "B25": "RG-B25-24"
+        }
+      },
+      "Mannigfaltigkeiten konstanter Schnittkrümmung": {
+        "index": 25,
+        "parent": null,
+        "litIDs": {
+          "B25": "RG-B25-25"
+        }
+      },
+      "Schnittort": {
+        "index": 26,
+        "parent": null,
+        "litIDs": {
+          "B25": "RG-B25-26"
+        }
+      },
+      "Volumenberechnung": {
+        "index": 27,
+        "parent": null,
+        "litIDs": {
+          "B25": "RG-B25-27"
+        }
+      },
+      "Krümmung und Wachstum der Fundamentalgruppe": {
+        "index": 28,
+        "parent": null,
+        "litIDs": {
+          "B25": "RG-B25-28"
+        }
+      }
+    }
+  },
+  "TOP1": {
+    "index": 9,
+    "topics": {
+      "Basics der SHT": {
+        "index": 1,
+        "parent": "Singuläre Homologie (SHT)",
+        "litIDs": {
+          "T12": "TOP1-T12-01"
+        }
+      },
+      "Unterteilung  und Ausschneidung in SHT": {
+        "index": 2,
+        "parent": "Singuläre Homologie (SHT)",
+        "litIDs": {
+          "T12": "TOP1-T12-02"
+        }
+      },
+      "Absolute und Relative Homologie": {
+        "index": 3,
+        "parent": null,
+        "litIDs": {
+          "T12": "TOP1-T12-03"
+        }
+      },
+      "Reduzierte Homologie": {
+        "index": 4,
+        "parent": null,
+        "litIDs": {
+          "T12": "TOP1-T12-04"
+        }
+      }
+    }
+  },
+  "TEST": {
+    "index": 10,
+    "topics": {
+      "TEST": {
+        "index": 1,
+        "parent": null,
+        "litIDs": {
+          "T25": "TEST-T25-01"
+        }
+      },
+      "": {
+        "index": 2,
+        "parent": null
+      },
+      "TEST2": {
+        "index": 3,
+        "parent": "TEST",
+        "litIDs": {
+          "T25": "TEST-T25-03"
+        }
+      },
+      "TEST3": {
+        "index": 4,
+        "parent": null,
+        "litIDs": {
+          "T25": "TEST-T25-04"
+        }
+      },
+      "TEST4": {
+        "index": 5,
+        "parent": null,
+        "litIDs": {
+          "T25": "TEST-T25-05"
+        }
+      },
+      "TEST5": {
+        "index": 6,
+        "parent": null,
+        "litIDs": {
+          "T25": "TEST-T25-06"
+        }
+      },
+      "TEST 6": {
+        "index": 7,
+        "parent": null,
+        "litIDs": {
+          "T25": "TEST-T25-07"
+        }
+      },
+      "TEST 7": {
+        "index": 8,
+        "parent": null,
+        "litIDs": {
+          "T25": "TEST-T25-08"
+        }
+      },
+      "TEST 8": {
+        "index": 9,
+        "parent": null,
+        "litIDs": {
+          "T25": "TEST-T25-09"
+        }
+      },
+      "TEST 9": {
+        "index": 10,
+        "parent": null,
+        "litIDs": {
+          "T25": "TEST-T25-10"
+        }
+      },
+      "TEST 10": {
+        "index": 11,
+        "parent": null,
+        "litIDs": {
+          "T25": "TEST-T25-11"
+        }
+      }
+    }
+  },
+  "": {
+    "index": 11,
+    "topics": {
+      "Ringe Basics": {
+        "index": 1,
+        "parent": "Ringe"
+      }
+    }
+  },
+  "KNO": {
+    "index": 12,
+    "topics": {
+      "Glatte Knoten": {
+        "index": 1,
+        "parent": null,
+        "litIDs": {
+          "S92": "KNO-S92-1"
+        }
+      },
+      "Knoten": {
+        "index": 2,
+        "parent": null,
+        "litIDs": {
+          "B14": "KNO-B14-2"
+        }
+      },
+      "Wirtinger Präsentation": {
+        "index": 3,
+        "parent": "null",
+        "litIDs": {
+          "B14": "KNO-B14-3"
+        }
+      },
+      "Homologie von Knoten": {
+        "index": 4,
+        "parent": null,
+        "litIDs": {
+          "B14": "KNO-B14-4"
+        }
+      },
+      "Homotopieinvarianz und Homologie": {
+        "index": 5,
+        "parent": null,
+        "litIDs": {
+          "B14": "KNO-B14-5"
+        }
+      }
+    }
+  },
+  "DT": {
+    "index": 13,
+    "topics": {
+      "Theorem von Sard und Brown": {
+        "index": 1,
+        "parent": null,
+        "litIDs": {
+          "M65": "DT-M65-1"
+        }
+      }
+    }
+  },
+  "GA": {
+    "index": 14,
+    "topics": {
+      "Globale Analysis Grundlagen": {
+        "index": 1,
+        "parent": null,
+        "litIDs": {
+          "A11": "GA-A11-1"
+        }
+      },
+      "Multilineare Algebra": {
+        "index": 2,
+        "parent": null,
+        "litIDs": {
+          "L13": "GA-L13-2"
+        }
+      },
+      "Tensoren": {
+        "index": 3,
+        "parent": "Multilineare Algebra",
+        "litIDs": {
+          "L13": "GA-L13-3"
+        }
+      },
+      "Tensorfelder": {
+        "index": 4,
+        "parent": "Multilineare Algebra",
+        "litIDs": {
+          "L13": "GA-L13-4"
+        }
+      },
+      "Vektorbündel": {
+        "index": 5,
+        "parent": null,
+        "litIDs": {
+          "L13": "GA-L13-5"
+        }
+      },
+      "Differentialform": {
+        "index": 6,
+        "parent": null,
+        "litIDs": {
+          "L09": "GA-L09-6"
+        }
+      },
+      "De Rham Kohomologie": {
+        "index": 7,
+        "parent": null,
+        "litIDs": {
+          "L09": "GA-L09-7"
+        }
+      }
+    }
+  },
+  "AT": {
+    "index": 15,
+    "topics": {
+      "Freie Gruppen": {
+        "index": 1,
+        "parent": null,
+        "litIDs": {
+          "H09": "AT-H09-1"
+        }
+      },
+      "Hurewicz Homomorphismus": {
+        "index": 2,
+        "parent": null,
+        "litIDs": {
+          "H09": "AT-H09-2"
+        }
+      },
+      "Fundamentalgruppen Grundlagen": {
+        "index": 3,
+        "parent": null,
+        "litIDs": {
+          "H09": "AT-H09-3"
+        }
+      },
+      "Homotopieinvarianz": {
+        "index": 4,
+        "parent": null,
+        "litIDs": {
+          "H09": "AT-H09-4"
+        }
+      },
+      "Homotopieinvarianz und Homologie": {
+        "index": 5,
+        "parent": null,
+        "litIDs": {
+          "H09": "AT-H09-5"
+        }
+      },
+      "Zellulärer Räume": {
+        "index": 6,
+        "parent": null,
+        "litIDs": {
+          "D72": "AT-D72-6"
+        }
+      },
+      "CW-Komplex": {
+        "index": 7,
+        "parent": null,
+        "litIDs": {
+          "D72": "AT-D72-7"
+        }
+      },
+      "Simpliziale Räume": {
+        "index": 8,
+        "parent": null,
+        "litIDs": {
+          "D72": "AT-D72-8"
+        }
+      }
+    }
+  },
+  "QM": {
+    "index": 16,
+    "topics": {
+      "Schrödingergleichung Grundlagen": {
+        "index": 1,
+        "parent": null,
+        "litIDs": {
+          "G25": "QM-G25-1"
+        }
+      },
+      "Wellenpakete": {
+        "index": 2,
+        "parent": null,
+        "litIDs": {
+          "G25": "QM-G25-2"
+        }
+      },
+      "Herleitung für freie Teilchen": {
+        "index": 3,
+        "parent": "Schrödinger-Gleichung Grundlagen",
+        "litIDs": {
+          "G25": "QM-G25-3"
+        }
+      },
+      "Teilchen im äußeren Potential": {
+        "index": 4,
+        "parent": "Schrödinger-Gleichung Grundlagen",
+        "litIDs": {
+          "G25": "QM-G25-4"
+        }
+      },
+      "Operatoren in der Quantenmechanik": {
+        "index": 5,
+        "parent": null,
+        "litIDs": {
+          "G25": "QM-G25-5"
+        }
+      },
+      "Korrespondenzprinzip": {
+        "index": 7,
+        "parent": "Schrödinger-Gleichung Grundlagen",
+        "litIDs": {
+          "G25": "QM-G25-7"
+        }
+      },
+      "Wahrscheinlichkeitsdichte": {
+        "index": 8,
+        "parent": "Interpretation der Wellenfunktion",
+        "litIDs": {
+          "G25": "QM-G25-8"
+        }
+      },
+      "Impulsraum": {
+        "index": 9,
+        "parent": "Interpretation der Wellenfunktion",
+        "litIDs": {
+          "G25": "QM-G25-9"
+        }
+      },
+      "Erwartungswerte": {
+        "index": 10,
+        "parent": "Interpretation der Wellenfunktion",
+        "litIDs": {
+          "G25": "QM-G25-10"
+        }
+      },
+      "Beugung und Interferenz": {
+        "index": 11,
+        "parent": "Interpretation der Wellenfunktion",
+        "litIDs": {
+          "G25": "QM-G25-11"
+        }
+      },
+      "Eindimensionale Systeme": {
+        "index": 12,
+        "parent": "Stationäre 1d Schrödinger-Gleichung",
+        "litIDs": {
+          "G25": "QM-G25-12"
+        }
+      },
+      "Eindimensionale Potentialstufe": {
+        "index": 13,
+        "parent": "Stationäre 1d Schrödinger-Gleichung",
+        "litIDs": {
+          "G25": "QM-G25-13"
+        }
+      },
+      "Potentialbarriere": {
+        "index": 14,
+        "parent": "Stationäre 1d Schrödinger-Gleichung",
+        "litIDs": {
+          "G25": "QM-G25-14"
+        }
+      },
+      "Unendlich tiefer Potentialtopf": {
+        "index": 15,
+        "parent": "Stationäre 1d Schrödinger-Gleichung",
+        "litIDs": {
+          "G25": "QM-G25-15"
+        }
+      },
+      "Potentialtopf mit endlicher Tiefe": {
+        "index": 16,
+        "parent": "Stationäre 1d Schrödinger-Gleichung",
+        "litIDs": {
+          "G25": "QM-G25-16"
+        }
+      },
+      "Paritätsoperator": {
+        "index": 17,
+        "parent": "Stationäre 1d Schrödinger-Gleichung",
+        "litIDs": {
+          "G25": "QM-G25-17"
+        }
+      },
+      "Harmonischer Oszillator": {
+        "index": 18,
+        "parent": null,
+        "litIDs": {
+          "G25": "QM-G25-18"
+        }
+      },
+      "Eigenschaften der Drehimpulsoperatoren": {
+        "index": 19,
+        "parent": null,
+        "litIDs": {
+          "G25": "QM-G25-19"
+        }
+      },
+      "Schrödinger-Gleichung für rotationssymmetrische Potentiale": {
+        "index": 20,
+        "parent": "Rotationsinvariante Potentiale",
+        "litIDs": {
+          "G25": "QM-G25-20"
+        }
+      },
+      "Bindungszustände des Wasserstoffatoms": {
+        "index": 21,
+        "parent": "Rotationsinvariante Potentiale",
+        "litIDs": {
+          "G25": "QM-G25-21"
+        }
+      },
+      "Radialsymmetrische Lösungen für $V(r)=0$": {
+        "index": 22,
+        "parent": "Rotationsinvariante Potentiale",
+        "litIDs": {
+          "G25": "QM-G25-22"
+        }
+      },
+      "Elastische Potentialstreuung": {
+        "index": 23,
+        "parent": "Rotationsinvariante Potentiale",
+        "litIDs": {
+          "G25": "QM-G25-23"
+        }
+      },
+      "3-dimensionaler Potentialtopf": {
+        "index": 24,
+        "parent": "Rotationsinvariante Potentiale",
+        "litIDs": {
+          "G25": "QM-G25-24"
+        }
+      },
+      "Spin der Elektronen": {
+        "index": 25,
+        "parent": null,
+        "litIDs": {
+          "G25": "QM-G25-25"
+        }
+      },
+      "Struktur der Quantenmechanik": {
+        "index": 26,
+        "parent": null,
+        "litIDs": {
+          "G25": "QM-G25-26"
+        }
+      },
+      "Ohne Entartung der ungestörten Energie-Niveaus": {
+        "index": 27,
+        "parent": "Zeitunabhängige Störungstheorie",
+        "litIDs": {
+          "G25": "QM-G25-27"
+        }
+      },
+      "Entartete Störungstheorie": {
+        "index": 28,
+        "parent": "Zeitunabhängige Störungstheorie",
+        "litIDs": {
+          "G25": "QM-G25-28"
+        }
+      },
+      "Zeitliche Entwicklung von Zuständen und Operatoren": {
+        "index": 29,
+        "parent": "Zeitentwicklung und Symmetrien",
+        "litIDs": {
+          "G25": "QM-G25-29"
+        }
+      },
+      "Translationen, Drehungen und Galilei-Invarianz": {
+        "index": 30,
+        "parent": "Zeitentwicklung und Symmetrien",
+        "litIDs": {
+          "G25": "QM-G25-30"
+        }
+      },
+      "Zeitumkehrinvarianz": {
+        "index": 31,
+        "parent": "Zeitentwicklung und Symmetrien",
+        "litIDs": {
+          "G25": "QM-G25-31"
+        }
+      }
+    }
+  },
+  "LIE": {
+    "index": 17,
+    "topics": {
+      "Matrix Lie Gruppen": {
+        "index": 1,
+        "parent": null,
+        "litIDs": {
+          "H15": "LIE-H15-1"
+        }
+      },
+      "Exponentialabbildung": {
+        "index": 2,
+        "parent": null,
+        "litIDs": {
+          "H15": "LIE-H15-2"
+        }
+      },
+      "Lie Algebra": {
+        "index": 3,
+        "parent": null,
+        "litIDs": {
+          "H15": "LIE-H15-3"
+        }
+      },
+      "Lie Gruppen": {
+        "index": 4,
+        "parent": null,
+        "litIDs": {
+          "L09": "LIE-L09-4"
+        }
+      },
+      "Adjungierte Darstellung von Lie Gruppen": {
+        "index": 5,
+        "parent": null,
+        "litIDs": {
+          "L09": "LIE-L09-5"
+        }
+      },
+      "Maurer-Cartan Form": {
+        "index": 6,
+        "parent": null,
+        "litIDs": {
+          "L09": "LIE-L09-6"
+        }
+      },
+      "Lie Gruppen Wirkung": {
+        "index": 7,
+        "parent": null,
+        "litIDs": {
+          "L09": "LIE-L09-7"
+        }
+      },
+      "Lie-Theorie in mathematischer Physik": {
+        "index": 8,
+        "parent": null,
+        "litIDs": {
+          "L09": "LIE-L09-8"
+        }
+      }
+    }
+  }
+}

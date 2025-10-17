@@ -1,0 +1,14 @@
+{
+  "score": 0.9,
+  "verdict": "Die Lösung ist größtenteils korrekt und vollständig, aber es gibt kleinere Ungenauigkeiten.",
+  "weaknesses": [
+    {
+      "code": "approximation_error",
+      "msg": "Die Näherung für γ im Fall eines ruhenden Positrons ist nicht korrekt begründet."
+    }
+  ],
+  "fix_suggestions": [
+    "Überprüfe die Herleitung der Näherung für γ im Fall eines ruhenden Positrons.",
+    "Stelle sicher, dass alle Annahmen klar und korrekt begründet sind."
+  ]
+}

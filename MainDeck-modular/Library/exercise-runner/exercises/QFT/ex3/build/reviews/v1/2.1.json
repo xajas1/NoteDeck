@@ -1,0 +1,26 @@
+{
+  "score": 0.7,
+  "verdict": "Die Lösung enthält einige korrekte Schritte, aber es fehlen wichtige Details und Klarstellungen.",
+  "weaknesses": [
+    {
+      "code": "MISSING_STEPS",
+      "msg": "Die Herleitung der Gleichung \\(\\gamma^{\\mu \\dagger} = \\gamma^0 \\gamma^\\mu \\gamma^0\\) ist unvollständig.",
+      "math_hint": "Es fehlt eine explizite Anwendung der Hermitesch-Eigenschaften der Dirac-Matrizen auf die Gleichung \\((\\gamma^0 \\gamma^\\mu \\gamma^0)^\\dagger\\)."
+    },
+    {
+      "code": "TRANSFORMATION_RULES",
+      "msg": "Die Transformation des adjungierten Spinors ist unklar.",
+      "math_hint": "Die Transformation \\(\\bar{\\psi}'(x') = \\bar{\\psi}(x) S^{-1}(\\Lambda)\\) sollte detaillierter hergeleitet werden."
+    },
+    {
+      "code": "BILINEAR_REALITY",
+      "msg": "Die Bedingung für die Realität der Bilineare ist nicht vollständig hergeleitet.",
+      "math_hint": "Die Bedingung \\(\\Gamma = \\gamma^0 \\Gamma^\\dagger \\gamma^0\\) sollte klarer mit den Eigenschaften der Dirac-Matrizen verknüpft werden."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Füge die vollständige Herleitung der Gleichung } \\gamma^{\\mu \\dagger} = \\gamma^0 \\gamma^\\mu \\gamma^0 \\text{ hinzu, indem du die Hermitesch-Eigenschaften der Dirac-Matrizen verwendest.}",
+    "\\text{Erkläre die Transformation des adjungierten Spinors detaillierter, insbesondere die Rolle von } S(\\Lambda) \\text{ und } S^{-1}(\\Lambda).",
+    "\\text{Kläre die Bedingung für die Realität der Bilineare, indem du die Beziehung } \\Gamma = \\gamma^0 \\Gamma^\\dagger \\gamma^0 \\text{ explizit herleitest.}"
+  ]
+}

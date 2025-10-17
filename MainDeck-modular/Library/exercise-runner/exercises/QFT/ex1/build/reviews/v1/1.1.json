@@ -1,0 +1,23 @@
+{
+  "score": 0.8,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es gibt einige Ungenauigkeiten und fehlende Begründungen.",
+  "weaknesses": [
+    {
+      "code": "unit_conversion",
+      "msg": "Die Umrechnung von kg in GeV ist nicht korrekt erklärt. Die Beziehung zwischen kg und GeV sollte über die Ruheenergie $E=mc^2$ erfolgen, wobei $c^2$ in GeV umgerechnet wird."
+    },
+    {
+      "code": "natural_units",
+      "msg": "Die Erklärung, dass $1 \text{s} = 1 \text{m}$ in natürlichen Einheiten ist, ist ungenau. Es sollte klarer erklärt werden, dass dies aus der Definition von natürlichen Einheiten folgt."
+    },
+    {
+      "code": "calculation_error",
+      "msg": "Die Berechnung von $G_N$ in natürlichen Einheiten enthält einen Fehler in der Umrechnung."
+    }
+  ],
+  "fix_suggestions": [
+    "Korrigiere die Umrechnung von kg in GeV durch die korrekte Anwendung von $E=mc^2$.",
+    "Erkläre die Beziehung zwischen Zeit und Länge in natürlichen Einheiten klarer.",
+    "Überprüfe die Berechnung von $G_N$ und korrigiere die Umrechnungsschritte."
+  ]
+}

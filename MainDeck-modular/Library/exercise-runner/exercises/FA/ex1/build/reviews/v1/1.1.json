@@ -1,0 +1,26 @@
+{
+  "score": 0.7,
+  "verdict": "Die Lösung enthält einige korrekte Ansätze, aber auch mathematische Ungenauigkeiten.",
+  "weaknesses": [
+    {
+      "code": "M1",
+      "msg": "Fehlerhafte Anwendung der Hölder-Ungleichung",
+      "math_hint": "Die Hölder-Ungleichung wurde nicht korrekt angewendet, da sie nicht direkt auf die Exponenten von |x_n| angewendet werden kann."
+    },
+    {
+      "code": "M2",
+      "msg": "Unklare Argumentation bei der Konvergenz von Reihen",
+      "math_hint": "Die Argumentation, dass |x_n|^{q-p} <= 1 und |x_n|^{q-p} -> 0 für |x_n| > 1, ist nicht ausreichend, um die Konvergenz von \\sum |x_n|^q zu zeigen."
+    },
+    {
+      "code": "M3",
+      "msg": "Fehlende Begründung für die Ungleichung der Normen",
+      "math_hint": "Die Ungleichung \\|x\\|_q \\leq \\|x\\|_p wurde nicht korrekt hergeleitet, da die Voraussetzung |x_n|^q \\leq |x_n|^p für q \\geq p nicht allgemein gilt."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Verwende die Hölder-Ungleichung korrekt:} \\left(\\sum_{n=1}^{\\infty} |x_n|^q\\right)^{1/q} \\leq \\left(\\sum_{n=1}^{\\infty} |x_n|^p\\right)^{1/p} \\cdot \\left(\\sum_{n=1}^{\\infty} 1\\right)^{1/q - 1/p}",
+    "\\text{Zeige die Konvergenz von } \\sum_{n=1}^{\\infty} |x_n|^q \\text{ durch eine geeignete Majorante.}",
+    "\\text{Korrigiere die Herleitung der Normungleichung:} \\|x\\|_q \\leq \\|x\\|_p \\text{ ist nicht korrekt ohne weitere Annahmen.}"
+  ]
+}

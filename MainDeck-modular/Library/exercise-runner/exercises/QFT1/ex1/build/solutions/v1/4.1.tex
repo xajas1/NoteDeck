@@ -1,0 +1,48 @@
+Um den Kommutator $\left[\hat{a}, \hat{a}^{\dagger}\right]$ zu berechnen, setzen wir die Definitionen der Operatoren $\hat{a}$ und $\hat{a}^{\dagger}$ ein:
+
+\[
+\hat{a} = \sqrt{\frac{m \omega}{2 \hbar}}\left(\hat{x} + \frac{\mathrm{i}}{m \omega} \hat{p}\right), \quad \hat{a}^{\dagger} = \sqrt{\frac{m \omega}{2 \hbar}}\left(\hat{x} - \frac{\mathrm{i}}{m \omega} \hat{p}\right).
+\]
+
+Der Kommutator ergibt sich zu:
+
+\[
+\begin{align*}
+\left[\hat{a}, \hat{a}^{\dagger}\right] &= \hat{a} \hat{a}^{\dagger} - \hat{a}^{\dagger} \hat{a} \\
+&= \left(\sqrt{\frac{m \omega}{2 \hbar}}\right)^2 \left(\hat{x} + \frac{\mathrm{i}}{m \omega} \hat{p}\right)\left(\hat{x} - \frac{\mathrm{i}}{m \omega} \hat{p}\right) \\
+&\quad - \left(\sqrt{\frac{m \omega}{2 \hbar}}\right)^2 \left(\hat{x} - \frac{\mathrm{i}}{m \omega} \hat{p}\right)\left(\hat{x} + \frac{\mathrm{i}}{m \omega} \hat{p}\right).
+\end{align*}
+\]
+
+Durch Ausmultiplizieren und Anwendung der kanonischen Vertauschungsrelation $\left[\hat{x}, \hat{p}\right] = \mathrm{i} \hbar$ erhalten wir:
+
+\[
+\left[\hat{a}, \hat{a}^{\dagger}\right] = \frac{m \omega}{2 \hbar} \left(2 \mathrm{i} \frac{\hbar}{m \omega}\right) = 1.
+\]
+
+Für die Normalisierungskonstanten $c_n^{-}$ und $c_n^{+}$ verwenden wir die Tatsache, dass die Zustände normiert sind:
+
+\[
+\begin{align*}
+\langle n | \hat{a}^{\dagger} \hat{a} | n \rangle &= \langle n | n \rangle = n, \\
+\langle n | \hat{a} \hat{a}^{\dagger} | n \rangle &= \langle n | (1 + \hat{a}^{\dagger} \hat{a}) | n \rangle = n + 1.
+\end{align*}
+\]
+
+Daraus folgt:
+
+\[
+c_n^{-} = \sqrt{n}, \quad c_n^{+} = \sqrt{n+1}.
+\]
+
+Der Hamiltonoperator kann mit den Operatoren $\hat{a}$ und $\hat{a}^{\dagger}$ umformuliert werden:
+
+\[
+\hat{H} = \hbar \omega \left(\hat{a}^{\dagger} \hat{a} + \frac{1}{2}\right).
+\]
+
+Die Energieeigenwerte $E_n$ ergeben sich zu:
+
+\[
+E_n = \hbar \omega \left(n + \frac{1}{2}\right).
+\]

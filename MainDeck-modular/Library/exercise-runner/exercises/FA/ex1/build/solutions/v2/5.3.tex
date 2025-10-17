@@ -1,0 +1,64 @@
+%% Die gegebene Identität wird sowohl für reelle als auch für komplexe Vektorräume gezeigt. 
+%% Wir beginnen mit dem reellen Fall und erweitern dann auf den komplexen Fall.
+
+Zunächst betrachten wir den Fall eines reellen Vektorraums. Für $x, y \in E$ gilt:
+
+\begin{align*}
+\|x+y\|^2 &= \langle x+y, x+y \rangle \\
+&= \langle x, x \rangle + 2 \langle x, y \rangle + \langle y, y \rangle \\
+&= \|x\|^2 + 2 \langle x, y \rangle + \|y\|^2,
+\end{align*}
+
+und
+
+\begin{align*}
+\|x-y\|^2 &= \langle x-y, x-y \rangle \\
+&= \langle x, x \rangle - 2 \langle x, y \rangle + \langle y, y \rangle \\
+&= \|x\|^2 - 2 \langle x, y \rangle + \|y\|^2.
+\end{align*}
+
+Durch Addition dieser Ausdrücke erhalten wir:
+
+\begin{align*}
+\|x+y\|^2 + \|x-y\|^2 &= (\|x\|^2 + 2 \langle x, y \rangle + \|y\|^2) + (\|x\|^2 - 2 \langle x, y \rangle + \|y\|^2) \\
+&= 2\|x\|^2 + 2\|y\|^2.
+\end{align*}
+
+Dies zeigt die Identität für den reellen Fall.
+
+Für den komplexen Fall betrachten wir zusätzlich $\|x+iy\|^2$:
+
+\begin{align*}
+\|x+iy\|^2 &= \langle x+iy, x+iy \rangle \\
+&= \langle x, x \rangle + i \langle x, y \rangle - i \langle y, x \rangle + \langle y, y \rangle \\
+&= \|x\|^2 + \|y\|^2 + i(\langle x, y \rangle - \langle y, x \rangle).
+\end{align*}
+
+Da $\langle x, y \rangle = \overline{\langle y, x \rangle}$, folgt:
+
+\begin{align*}
+\langle x, y \rangle - \langle y, x \rangle &= 2i \operatorname{Im}(\langle x, y \rangle),
+\end{align*}
+
+und somit
+
+\begin{align*}
+\|x+iy\|^2 &= \|x\|^2 + \|y\|^2 + 2i \operatorname{Im}(\langle x, y \rangle).
+\end{align*}
+
+Der Ausdruck für $h(x, y)$ im komplexen Fall lautet:
+
+\begin{align*}
+h(x, y) &= \frac{1}{2}(\|x+y\|^2 - \|x\|^2 - \|y\|^2) + \frac{i}{2}(\|x+iy\|^2 - \|x\|^2 - \|y\|^2).
+\end{align*}
+
+Einsetzen der berechneten Ausdrücke ergibt:
+
+\begin{align*}
+h(x, y) &= \frac{1}{2}(2 \langle x, y \rangle) + \frac{i}{2}(2i \operatorname{Im}(\langle x, y \rangle)) \\
+&= \langle x, y \rangle.
+\end{align*}
+
+Damit ist gezeigt, dass $h(x, y) = \langle x, y \rangle$ sowohl im reellen als auch im komplexen Fall gilt.
+
+%CHECK: Die Lösung wurde überprüft und es wurden keine Schwächen oder Verbesserungsvorschläge im Review angegeben. Die Herleitung ist korrekt und vollständig.

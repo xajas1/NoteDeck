@@ -1,0 +1,53 @@
+Um zu zeigen, dass das Maß 
+
+\[
+\frac{d^3 k}{(2 \pi)^3 2 E(\mathbf{k})}
+\]
+
+Lorentz-invariant ist, beginnen wir mit dem Lorentz-invarianten Ausdruck 
+
+\[
+\frac{d^4 k}{(2 \pi)^3} \delta\left(k^2 - m^2\right) \theta\left(k_0\right).
+\]
+
+Hierbei ist $d^4 k = dk_0 \, d^3 k$ das vierdimensionale Volumenelement im Impulsraum, $\delta\left(k^2 - m^2\right)$ stellt sicher, dass wir nur über die Massenschale integrieren, und $\theta\left(k_0\right)$ stellt sicher, dass wir nur positive Energien berücksichtigen.
+
+Die Dirac-Delta-Funktion $\delta\left(k^2 - m^2\right)$ kann umgeschrieben werden als 
+
+\[
+\delta\left(k^2 - m^2\right) = \delta\left(k_0^2 - \mathbf{k}^2 - m^2\right).
+\]
+
+Verwenden wir die gegebene Identität für die Delta-Funktion:
+
+\[
+\delta\left(x^2 - x_0^2\right) = \frac{1}{2|x|}\left[\delta\left(x - x_0\right) + \delta\left(x + x_0\right)\right],
+\]
+
+so erhalten wir
+
+\[
+\delta\left(k_0^2 - \mathbf{k}^2 - m^2\right) = \frac{1}{2|k_0|} \left[\delta\left(k_0 - E(\mathbf{k})\right) + \delta\left(k_0 + E(\mathbf{k})\right)\right].
+\]
+
+Da $\theta(k_0)$ nur positive Energien berücksichtigt, bleibt nur der Term $\delta\left(k_0 - E(\mathbf{k})\right)$ übrig. Daher haben wir
+
+\[
+\delta\left(k^2 - m^2\right) \theta\left(k_0\right) = \frac{1}{2E(\mathbf{k})} \delta\left(k_0 - E(\mathbf{k})\right).
+\]
+
+Setzen wir dies in das ursprüngliche Maß ein, erhalten wir
+
+\[
+\frac{d^4 k}{(2 \pi)^3} \delta\left(k^2 - m^2\right) \theta\left(k_0\right) = \frac{dk_0 \, d^3 k}{(2 \pi)^3} \frac{1}{2E(\mathbf{k})} \delta\left(k_0 - E(\mathbf{k})\right).
+\]
+
+Integration über $k_0$ führt zu
+
+\[
+\frac{d^3 k}{(2 \pi)^3 2E(\mathbf{k})},
+\]
+
+was zeigt, dass dieses Maß Lorentz-invariant ist.
+
+Um zu argumentieren, dass $2 E(\mathbf{k}) \delta^3\left(\mathbf{k} - \mathbf{k}^{\prime}\right)$ eine Lorentz-invariante Verteilung ist, beachten wir, dass die Delta-Funktion $\delta^3\left(\mathbf{k} - \mathbf{k}^{\prime}\right)$ unter Lorentz-Transformationen invariant ist, da sie nur von den räumlichen Komponenten abhängt. Die Invarianz der Delta-Funktion folgt aus der Tatsache, dass sie die Eigenschaft hat, unter Koordinatentransformationen, die das Volumenelement invariant lassen, selbst invariant zu bleiben. Insbesondere bei Lorentz-Transformationen, die die räumlichen Komponenten betreffen, bleibt das Volumenelement $d^3 k$ unverändert, was die Invarianz der Delta-Funktion sicherstellt. Da das Maß $\frac{d^3 k}{(2 \pi)^3 2 E(\mathbf{k})}$ Lorentz-invariant ist, bleibt auch das Produkt $2 E(\mathbf{k}) \delta^3\left(\mathbf{k} - \mathbf{k}^{\prime}\right)$ invariant.

@@ -1,0 +1,309 @@
+{
+  "projectName": "QM-Base",
+  "structure": [
+    {
+      "id": "sec-1756200085551",
+      "name": "Schrödinger Gleichung",
+      "subsections": [
+        {
+          "id": "sub-1756200133852",
+          "name": "Schrödinger Gleichung",
+          "unitUIDs": [
+            "b4194674-c709-4685-9992-f3f879e9ea0b",
+            "09bcedef-6f0d-457c-91f8-22dc4992fed3",
+            "381c17f0-688b-4d4c-a820-4ce4ac09f717",
+            "32c0c2c3-9eb6-40db-a784-d7f2d249e17c"
+          ]
+        },
+        {
+          "id": "sub-1756200137364",
+          "name": "Wellenpakete",
+          "unitUIDs": [
+            "88ea06b6-ab6c-48ca-b269-696d14eb9eb0",
+            "2837a084-7a97-43cc-8595-0052d3217b34",
+            "9054552b-47da-4782-928a-1ed9611a6eac",
+            "729e603f-978e-4627-a4d2-52a0ce5c52dc",
+            "dfac00c1-95e2-4a05-9d59-041dd699dde0",
+            "9b2e9f74-03bc-4679-ba0a-97290ef17102",
+            "3256b21c-17f7-4817-8980-645af52ae88d",
+            "2ec52e70-3408-43d8-b53c-10771b0c41e7",
+            "88d0a5cd-0753-471a-b579-4d00c07e7045",
+            "4edba9cb-d9df-4739-8b45-de1e6f8f86bf",
+            "527d4a05-a7ce-4813-a77a-6a490ff445a0"
+          ]
+        },
+        {
+          "id": "sub-1756200146126",
+          "name": "Herleitung freie Teilchen",
+          "unitUIDs": [
+            "72b78525-9b55-4e36-9b6a-b23daf222ed9",
+            "411339ed-ec30-4b1a-a9ed-19b1d8dc754a",
+            "9608e907-640d-4ed2-86bd-3be13c0e944f"
+          ]
+        },
+        {
+          "id": "sub-1756200153377",
+          "name": "Äußere Potential",
+          "unitUIDs": [
+            "8eb4ea11-e142-4960-8215-496bc40829e0",
+            "3cc6f279-9624-4673-9e35-00535b3bc46f"
+          ]
+        },
+        {
+          "id": "sub-1756200162639",
+          "name": "Operatoren",
+          "unitUIDs": [
+            "1f7665ab-6335-4983-ac30-ef557fa48431",
+            "ee6151ef-39f0-44ee-8550-81412f766441",
+            "0e076cf3-b0b5-4a9f-85c5-579c385a7cbe",
+            "c22ad802-b95a-4b33-a2b6-4d619da8d6af",
+            "610f8881-bd0b-44c4-8f98-4f7cc0cda10f",
+            "485acc72-8ef1-4d93-9a73-ebb342d9a7b0",
+            "308dd5ff-28e1-4e10-943b-bf090277e71e",
+            "6e43a581-ca23-4683-b300-b92da10ad927",
+            "54da2f78-9bb3-46ea-9d93-2ea40801c471",
+            "352d8c45-0911-4fd3-9dcd-805f6265e556",
+            "bd60ad11-f4ae-412a-bb39-62d80fe9069c"
+          ]
+        },
+        {
+          "id": "sub-1756200170594",
+          "name": "Korrespondenzprinzip",
+          "unitUIDs": [
+            "0d91a181-7e49-4772-a4b2-efcec0e97fcd",
+            "0043278c-5a75-41e1-8a57-8e624d4b03e7",
+            "def179d3-014e-4a7c-8953-be73b8022741",
+            "f6a0d5ff-069c-4833-a68a-d9e28f7c113c",
+            "ef7f99af-14e0-488e-be96-059cefcffc4f",
+            "df3d44c5-be6c-4097-b159-3a4bb20871e5",
+            "7fdcf22b-b801-4670-97aa-c621562f970a"
+          ]
+        },
+        {
+          "id": "sub-1756200191151",
+          "name": "Interpretation der Wellenfunktion",
+          "unitUIDs": [
+            "0b8df599-ee6a-42aa-ba07-ce15cfb94a68",
+            "d5de9896-dcd9-4d75-92ca-ddef3e67e620",
+            "119fa33d-0020-4f08-9af5-f741a473f702",
+            "5eb81760-6627-45f1-a1df-d7ac00f66359",
+            "80c77a74-3bda-4805-bd18-269d941128e7",
+            "776a39f0-8b7a-481f-afbf-ff8f81ed8b49",
+            "807aca23-a748-42ff-afd2-1a1de4226414",
+            "a72ac0d5-c61b-485a-be96-a07deb770d97",
+            "c85f9d0a-a97e-488d-bc18-4b10de7e6f25",
+            "2633fc80-1b20-4ab1-acf4-b2427ea26be8",
+            "9348173d-4d38-4149-9818-07bf685630a4",
+            "905daa12-7db9-4056-8bde-9200a14239e3",
+            "5b64c245-ef62-4466-a38c-46f1d26592d0",
+            "6bf09f06-eb25-421c-a7eb-d32db0a6db49",
+            "1576947b-5af7-4930-a9d9-0335e2d477af",
+            "2b4b6106-5fa8-476e-871c-d3995f6f5674",
+            "694ddb4d-cee1-4c78-8d84-cb3a634454bd",
+            "2d18fa13-ea1b-489c-b4c0-eb8b7a0380d2",
+            "35b6d100-a45f-4c26-9bf4-c6d6dbc302ba",
+            "a01c7753-b984-4c87-bc8c-d924b02bee0f",
+            "8b22f749-c56f-4553-9dbe-a9e246f653d8",
+            "0f0c503b-9078-412f-856d-66c430cd28b3",
+            "ee076e55-478b-467a-89c7-d784e68f68af"
+          ]
+        },
+        {
+          "id": "sub-1756288859979",
+          "name": "Beugung und Interferenz",
+          "unitUIDs": [
+            "124be8a6-c3b1-406f-9e29-6c69b5f138f4",
+            "a9d01dbd-6f9f-49c7-bab4-19166c27a53f",
+            "4449cdd8-ed51-446b-a6eb-b82000925ac4"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-1756288876432",
+      "name": "Eindimensionale Systeme",
+      "subsections": [
+        {
+          "id": "sub-1756288911536",
+          "name": "Grundlagen",
+          "unitUIDs": [
+            "b8b54ed7-a6f9-4e02-a954-bd103030f129",
+            "ce68b984-38ca-4809-85fd-5bcf02632d51",
+            "a518da21-8498-44d0-b564-9dd0ed1d0058",
+            "be2d7527-e38a-4a04-9892-2a199c5f4708",
+            "d28a0db8-70c9-4d8a-b9a8-b8bd22fe7c4e",
+            "7a653461-c469-40f9-b31c-67928327fee8",
+            "4ede946d-1f3c-48f7-b394-361c51c16fe2"
+          ]
+        },
+        {
+          "id": "sub-1756288930453",
+          "name": "Eindimensionale Potentialstufe",
+          "unitUIDs": [
+            "72d1ec74-631a-46df-a2b5-fa483791b82f",
+            "2cd0e470-329d-4937-a16b-75d442e44a3a",
+            "0ac37587-1c7d-4f38-9f5a-6058a61ef4d6",
+            "f7885132-5ccb-4617-8bf4-cbf260961bcd",
+            "69fa018f-a04d-418f-9639-b1b28ffc746c",
+            "27769030-8136-4ef1-b687-4311c9acd710",
+            "00be04a6-9220-497b-b05c-1b81797e26b9",
+            "4f1b496d-3f32-423a-8a05-30187e4d90f6",
+            "502d3f2b-429a-4f88-bdbe-783bb136fd52",
+            "12731c84-6df1-4181-a56b-0428e568dc2a",
+            "592f6e2a-4005-434f-b63c-30479e37d157",
+            "89dc590c-a9a5-4f28-ade0-9ed8e102af01"
+          ]
+        },
+        {
+          "id": "sub-1756288944412",
+          "name": "Potentialbarriere",
+          "unitUIDs": [
+            "dc2851f3-5bf5-4c0c-aa68-a91782c3629a",
+            "7cfd13ad-5cc5-44f3-9c87-54725882c3fd",
+            "be1774b5-b9a8-456e-a7a1-6c6d85751569",
+            "51892c98-0766-48d1-94ba-7c73e64f230f",
+            "c3c70eae-2345-48d7-998a-607cdb7d38a1",
+            "f5a158f7-5857-49ed-aef0-c2a17868a376"
+          ]
+        },
+        {
+          "id": "sub-1756288956818",
+          "name": "Unendlich tiefer Potentialtopf",
+          "unitUIDs": [
+            "52136493-789d-4870-90e2-c25e0628314d",
+            "8421520b-2e97-4859-ae6c-d4a5c4cd6945",
+            "17ec3ad0-e87d-40d5-afa0-143c5888615b",
+            "e80406d4-bebe-4b25-ac9c-71aedc22e6bd",
+            "781afed9-a21c-474b-8852-ce10d7b503c9",
+            "ffdf17f4-dd73-4180-b543-e4139b9fd308",
+            "a658846f-10a8-4a55-b974-a9235964796b",
+            "62a351cf-3170-4ad9-9818-39e195e1022b",
+            "616281a6-d3a4-4008-bf54-b7a2d6077803",
+            "62bf19af-10a7-49cf-8032-179cf75572b3",
+            "82e8e5a0-6416-4f6d-8c63-ec722158496e",
+            "4e0b4748-c5ee-4644-a9c8-f2e18dfac7aa",
+            "1cac0b73-e3c4-41c2-8a3c-ceebe34f9b48",
+            "fb34d888-3dc0-4df2-88a1-00880f273c0a",
+            "c416d8aa-6dd3-4540-ade9-be24eb1e2171"
+          ]
+        },
+        {
+          "id": "sub-1756288969786",
+          "name": "Endlich tiefer Potentialtopf",
+          "unitUIDs": [
+            "077d36ee-fb9e-46f7-b17d-cd71db932354",
+            "005fed97-287f-4d6b-a860-f2ab6eccff59",
+            "c27b6d5a-77fe-4fdf-bb25-0507263f3634",
+            "94b6fe3b-35fb-491a-807e-ecc031b2edbe",
+            "cd570676-b6cd-417e-9b1d-273bb69757a9",
+            "6d601e22-8471-4d42-89da-bdf5dce2f80a",
+            "00b795d7-e30c-4b34-ae2e-cda183ec7539",
+            "686bf56f-8fff-46cc-b0e7-47b27b08df61"
+          ]
+        },
+        {
+          "id": "sub-1756288983411",
+          "name": "Paritätsoperator",
+          "unitUIDs": [
+            "8d72015b-6b89-4627-8a30-b78fb593120c",
+            "57c1cd6b-4519-4ef6-9029-cbdd72412476",
+            "108e2979-6f23-4ff6-a8b7-da00e3a99c86",
+            "730e89dc-699e-463e-aa5d-8986273d4f0b",
+            "edc287c0-39c6-4879-ab06-7a5d7160b867",
+            "e7e486e8-263b-47f9-8995-0e775fb05960",
+            "1d166059-5700-42b3-87aa-11a1c61816b3",
+            "79dbed8d-e38c-44f6-99fb-824a012f4ad9",
+            "21142b45-596a-4139-8614-e4ae07e517a7",
+            "bf19667f-f213-4fb9-af05-ca5b0fec4014",
+            "c2c3d37f-78cc-4796-894c-e0bd236a5c5e",
+            "d6b2cf9f-8ccc-4dd5-ab2f-d5cd0f6e48d8"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-1756364674183",
+      "name": "Harmonischer Oszillator",
+      "subsections": [
+        {
+          "id": "sub-1756364713840",
+          "name": "Grundlagen",
+          "unitUIDs": [
+            "d61cae90-7e9a-4538-a765-37d7d5ad9c32",
+            "3c28bf81-7005-4da1-8d9f-58e19a4aa642",
+            "ca4ebce8-3921-4aee-bc2a-68208690288e",
+            "d4e59ad3-1539-4c41-8b19-96cafeb27521",
+            "5f4548dc-0678-49e2-a007-e02637e90aef",
+            "ac03ba3d-07ff-4ed6-9d89-c15acde051b6",
+            "7f330764-0b84-46be-91bc-dd8786377d92",
+            "6b42652f-19ce-4987-b5ed-d9f057201c83",
+            "ae46eb79-221b-4402-ac8b-8ea285b22340",
+            "8d49395b-ff35-4d07-87b1-a8bd1d1060e2",
+            "d0050862-8eeb-4e1c-8b69-0360243b0bc0",
+            "9a30d3a4-9700-4f74-a54c-67ec4b1f6da9",
+            "3ebcd3cd-ad8c-49b7-9dda-5d1b85993d08",
+            "77376446-a840-43b3-908c-878eb670be6d",
+            "9c31457a-cac2-42b9-b670-3fa36d562be4",
+            "f7675ce1-4001-431c-b1bc-911f27b58481",
+            "f255e05c-5496-45be-b459-cc9909e2ae8d",
+            "0e1d6706-e76b-444b-b7a3-779a073670ad",
+            "25e329f1-9d09-457b-a4cc-842749c0e21f",
+            "2bc3589d-2d3f-442c-bf2d-d53cb30d0772",
+            "75bd7b69-d463-4216-b78e-f692eda7db77",
+            "4f99371b-2a80-47ca-bb7d-700d08c043e5"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-1756461270660",
+      "name": "Drehimpulsoperator",
+      "subsections": [
+        {
+          "id": "sub-1756461283942",
+          "name": "Grundlagen",
+          "unitUIDs": [
+            "1a15561b-c052-452a-8bb8-fbd568fe4281",
+            "82c6a70c-13f1-4e5f-a3e1-f64b2d254bca",
+            "2bd8ea87-ca0c-46ff-83b0-ffa74c14f850",
+            "7d4f6cca-f37e-44cd-bfff-634155f3baf0",
+            "2d9cf56c-0891-4a5e-9b74-673bbb8119b6",
+            "cd0d9f3a-4525-4e82-bfba-77559dfd26ff",
+            "a89335b3-aa9f-4268-bd71-aa89135a292e",
+            "b5363f3b-0587-4c5a-a60f-585013b2929b",
+            "e40234ae-82b2-4655-864e-218e35d34e55",
+            "3f81dc92-2077-4143-922a-3f895af26082",
+            "8005f64c-9366-49bd-9bf0-73261d1aebc8",
+            "b262088d-edc8-43c6-85db-b3cc88a12537",
+            "e6b58fbf-703e-419f-ba34-2c9f6ff46216",
+            "cb414387-16a0-4ef5-b96c-5080550bafef",
+            "55ce0e67-59b5-412f-a2ab-94fae85c25fb",
+            "73ec2ddd-7c89-4e53-91ba-c7469b61cefe",
+            "117f8d9a-e578-4f48-b9e8-59d8e368cefd",
+            "296a7c0c-72de-4d51-90ce-bf30968a045a",
+            "e6b7ddb8-f398-4f12-9ec9-5fc62fdeb1ae",
+            "1bd12fc3-b185-4200-bce3-2cc699ca5272",
+            "52995d55-22c1-496b-965d-b2d0cb189406",
+            "020e1b92-1ce1-4ead-98cb-fbc83516ef49",
+            "5ab375cd-819e-4e7a-ad75-47fa4e9a934e",
+            "0e17b36d-efdd-4a4b-8bd5-baacce79e4b1",
+            "68e55613-d871-4446-898e-47d0a9b9f8e4",
+            "e6999c73-c480-4e30-808f-cb66a2b0900b",
+            "55c1f5b4-aeb7-49a9-9be2-b380dae259e3",
+            "9882b8b5-f9be-46a4-8705-5ba6887b1238",
+            "7832588d-118d-4ec3-8cd7-e915837c4717",
+            "da43fb81-2f99-43ab-bdce-018b0b54dce3",
+            "260cdfdb-1ae2-4dbe-a5ed-5b28dbeab787",
+            "9f13b42b-620d-4698-a70d-50fe4860444e",
+            "b3bb4976-d73c-4ca2-99f5-62be0978d42a",
+            "bb35b400-fa4c-49dc-b33f-0d2aa6d760f3",
+            "22b23621-0563-4904-95a3-a1e3b4f21712",
+            "ee8f7527-dd46-4fee-82b4-ff42b64dde54",
+            "96ecb613-f5ed-4e89-89c1-14622036e5ec",
+            "ffe408cc-1d01-461a-a73a-c09237f8420b"
+          ]
+        }
+      ]
+    }
+  ]
+}

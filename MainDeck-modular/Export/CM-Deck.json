@@ -1,0 +1,329 @@
+{
+  "projectName": "CM-Deck",
+  "structure": [
+    {
+      "id": "sec-1751977706028",
+      "name": "Grundlagen",
+      "subsections": [
+        {
+          "id": "sub-1751977830996",
+          "name": "Zwangsbedingungen und Alembert",
+          "unitUIDs": [
+            "96925746-5b81-4ed3-81e8-8099899577f4",
+            "dadf51fd-8e5b-4d16-a12b-48c17aa51da0",
+            "c62b3b6d-c585-4a8a-ae4a-a9185c2e7665",
+            "9d59ba54-1f80-408f-992e-fc1d3818ea74",
+            "92fb9f86-abb5-437e-a155-857fc523f434",
+            "e721effb-3ecd-446e-bd4d-692569db7057",
+            "96de2ba7-2fb4-4d50-b460-e5980fe064b5",
+            "73e87f98-a10f-4e8a-9cb0-e74c3f9b1dcf",
+            "6de09319-586e-4092-9f16-3a3e98d466eb",
+            "3ebb8e7f-e20b-4df8-910f-1ab5f00e4845",
+            "745652ce-7aed-4b9f-b813-4054d7554baa",
+            "03c283ac-041d-4905-a38f-fb03b18af51f",
+            "fd847da7-6896-4300-a941-d30a639b236d",
+            "19c801b7-201d-4439-8d71-3253d0deac2d",
+            "9f6a6d81-37cd-4813-af6d-a5aa317f4ef7",
+            "e3546d1e-6008-4db4-9bd6-d35e51f8c883",
+            "0dfe96b0-fcc9-4626-9ed2-3be76a5a66ea",
+            "0f130797-055b-4009-b77e-9868dd1e565b",
+            "6f2ee0bc-2752-4cea-8073-1ad77e042465",
+            "3f0472a5-9731-479b-812b-5c7e9bcadd9a",
+            "9ea5fe83-e4e7-4ec1-a13e-e83bfdff5efb",
+            "f7f46031-d15a-4c95-9eff-60996fc92c7c",
+            "a33d3369-4e0e-4fed-898e-3e4ad0d654db",
+            "25bcb231-7503-4829-a965-6593d107df56",
+            "961f8536-bdf4-4b46-b02c-51a99715a632",
+            "748b5475-134f-4e06-83d7-fd58486a423a",
+            "66842e8b-8575-4fcb-942b-4d527e008bd3",
+            "ad42af1c-81c3-4c1a-bfbd-e3edc52eae8d",
+            "88f82a4f-595b-4f63-b6fe-ae11313016a1",
+            "0b3be4b8-037c-4d86-928d-346e1fddca84",
+            "17e0c714-0cbf-4577-9041-a10ffb7095d8"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-1751977860362",
+      "name": "Lagrange",
+      "subsections": [
+        {
+          "id": "sub-1751977878414",
+          "name": "Lagrange 2",
+          "unitUIDs": [
+            "274ca2ca-aee5-48c4-83dd-e58a7a004c1a",
+            "d5292bd7-6d96-4633-9ddd-4731ffa0d814",
+            "7edc4af1-f315-41e4-8581-ffff5658f860",
+            "6e46742a-46dd-45f7-8c96-532dad97709a",
+            "efe058ab-1ccf-463f-9d6b-05e5434df1a4",
+            "6414e46d-bfa5-4e4d-b103-df662f51e10c",
+            "6f29b304-8732-44f0-9a3e-3814f6193633",
+            "594f34c6-4ef6-48cf-9fe6-3dc74b560c27",
+            "9c83e951-d52b-43d4-bec9-095595c7ed80",
+            "df12d7a9-2ac8-4c18-8a2c-9fd7d3d05ac0",
+            "2227d6f8-9d5e-4bba-8b1c-80cfe8848989",
+            "bc8ece6e-4ec4-4a6c-a83d-64d5c6f0cd9e",
+            "9461491e-57ff-4f23-9840-dd0b5ef4342a",
+            "fb440230-0cc8-48f0-ae73-c5ebc79e96b3",
+            "be2e93e2-a410-4f64-b83a-9752ac9b270d"
+          ]
+        },
+        {
+          "id": "sub-1751977895002",
+          "name": "Lagrange 1",
+          "unitUIDs": [
+            "a5bf99bb-18c4-412a-81c6-7ea62ca2fa2e",
+            "c201cb6f-c93e-41b6-bc42-c80218facaf5",
+            "795a5ac4-e122-4ee5-9652-2584fa730634",
+            "06b664a4-34df-477e-a36f-08d2b2dd19c0",
+            "6726548d-8952-4310-8819-b31f8c8403ed"
+          ]
+        },
+        {
+          "id": "sub-1751977986759",
+          "name": "Hamilton Prinzip",
+          "unitUIDs": [
+            "ca9c4e70-8163-4066-a56e-126d68ad4c6d",
+            "835caff1-82d9-4dbd-85ca-9196dc344597",
+            "8509f8e4-1656-48fe-b3ce-8fc61d88819b",
+            "8dadd721-935c-4a0b-8cef-59716ca013a8",
+            "69f53d31-06c3-47fd-918a-4964de8c86c3",
+            "3492e94d-780b-4810-87b5-165faefa467f",
+            "bc87d015-ecfa-4315-8778-c41fec4d5e6b",
+            "198fe012-d9ef-4a87-ba5a-13f41ba3b992"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-1751978013358",
+      "name": "Starre Körper",
+      "subsections": [
+        {
+          "id": "sub-1751978025303",
+          "name": "Kinematik starrer Körper",
+          "unitUIDs": [
+            "8581faca-8569-4472-93a4-5e05bc5f0cf8",
+            "00614c50-08ea-419a-8313-41c3afc71442",
+            "26b19d74-71f7-43a4-b691-166ba401d0a2",
+            "c4815a0d-8140-4ff5-9a26-ac80a242bbca",
+            "bb62feb7-51c3-4604-9b96-124222927fed",
+            "7f9470dd-9693-4641-b5f2-5bb1951fb82d",
+            "d1c2c4ac-bde8-4bbd-ad97-81995c00f03b",
+            "ab781447-d70f-4951-aadc-09d833782af1",
+            "cbeb5ab6-1bf7-40f5-a4ec-b7cff2fa5e4d",
+            "0edbd14c-f73e-443e-be14-22efa28aa105",
+            "2822431b-a89b-412a-98a5-3762865febc8"
+          ]
+        },
+        {
+          "id": "sub-1751978041631",
+          "name": "Dynamik starrer Körper",
+          "unitUIDs": [
+            "80359806-9396-434b-8355-6fbff1be28f8",
+            "44a2a817-586c-4917-a5ee-156e633412f7",
+            "82f9d2af-7d13-4ed7-886d-f74d413696ed",
+            "72c16196-a8b6-43da-ac14-755396fe97dd",
+            "5bc28ced-0d9f-4236-8d35-58a266a03ed0",
+            "de7e47a3-ddea-4110-a48b-cfe669b4d5d3",
+            "98b69c04-48d5-4a23-ac13-b986d1e07f93",
+            "1a1423fa-1a3f-42b7-98b0-f41e855f0686",
+            "b7a7ce4e-045f-4556-9216-a9c2f06530ad",
+            "d78dc5b0-5653-41cc-8ca7-c303bd29b37c",
+            "926922ea-ca63-4b90-aa8f-43ecbeb3953b",
+            "10786879-149c-49ee-9509-bee2beff0783",
+            "472e956c-cc02-4937-b288-9008ac8b828b",
+            "02b2abfe-9249-41a4-b5a1-7e9244a956d5",
+            "a83bfcde-844b-4159-acd2-32545fc5ed12",
+            "215cbef8-215b-4353-a2e8-bed5f4ae6917",
+            "be16eefe-1aa8-4ba6-a04f-f1cda605fcf6",
+            "df763a1c-7f31-48f3-a5fe-33148d08d7c7",
+            "aa22a481-599d-441d-abd5-ee0ab242d9fd",
+            "785b404f-a2cf-431e-8f00-d58d3360aff4"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-1751978059111",
+      "name": "Schwingungen",
+      "subsections": [
+        {
+          "id": "sub-1751978141227",
+          "name": "Grundlagen",
+          "unitUIDs": [
+            "f854989d-ed6d-475a-9a4e-230958f3c073",
+            "dc0aefbe-e183-4508-b7b7-12b8a09fa1f0",
+            "1cf1c2a1-6163-43ce-9dd3-ab79b1d194b4",
+            "5de973e8-ff81-474c-adad-92118252e870",
+            "76ea9655-2ca8-4586-b41a-e42e5ce2f671",
+            "3d1c7cf5-3740-41a7-9f72-b343901c48ee",
+            "8578020d-3aa9-4112-b59f-099aac5ea019",
+            "2c46fded-0165-4fb9-ad59-8a1ef02c4f25",
+            "787efeea-bffc-4db4-a0cc-ef9cc50f0262",
+            "e4ad1d9c-be1e-4db8-8123-81d008283e7d",
+            "f52d4cc4-c855-411f-b265-a2cc55e42172",
+            "ca3e3222-7c84-45d1-a401-3b4382da489b",
+            "ef37df17-2990-4bb5-a68a-00bb13feadcc",
+            "3c3f3f7b-f210-47d9-bc8e-ab9f63d4d828",
+            "38a708f7-d39a-4149-9b8d-519c58553743",
+            "4d43a8fc-5875-4950-aa48-54e03e1865bb",
+            "406b200b-37c3-4e7f-b3ad-20daaf756b07",
+            "46337d42-09e8-4f89-8d86-106cb289c406",
+            "032ac3e1-ec19-419a-88dc-6980bab180e9",
+            "16f38372-ec44-4ca6-ba39-b32070b5d6b6",
+            "bbe1f76f-ef5d-443c-b9b2-2fac7bfe91ca",
+            "49a1c908-d298-47da-bd31-97f989f45970",
+            "92e01059-a0f8-4972-8494-f224c4beca02",
+            "a44d95af-239c-4d24-8d43-74f2364042a3",
+            "31fec01a-54a7-42d6-afe8-e7f53a6ea423"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-1753776674580",
+      "name": "Hamiltonsche Mechanik",
+      "subsections": [
+        {
+          "id": "sub-1753776679542",
+          "name": "Grundlagen",
+          "unitUIDs": [
+            "8226f26c-765b-4427-aa28-a92131845c8c",
+            "f42032be-bbf4-4791-9db7-0cb9ba4e9812",
+            "eec2bbd1-7cec-4b2e-9f84-c1513b1aedaa",
+            "15d02ba4-9514-4603-b8e9-5e61c00a9542",
+            "242deb53-65c7-4141-b733-f1f205b5432c",
+            "2cb88f8d-6e6c-4963-8108-725bd957e723",
+            "b5fca15a-539c-40f0-98bf-99502c4fe32a",
+            "0c6eaa51-a777-47b4-aa2d-8e3f534b4a4a",
+            "f2b3a580-5630-4d47-82d6-1b3b384615f6",
+            "784d99a9-0896-4dc3-854e-3dfb5e255da1",
+            "323d76ca-c5c6-438f-883e-8e01b4a05719",
+            "69b712db-005b-47f6-b1d3-f823f76516d2",
+            "4fdcb5c1-fa56-440c-ad48-a3a8e857f9f0",
+            "150e3cfb-c4dd-4463-804c-37732e965590",
+            "78c22643-4d3a-4e9c-a064-14df1f5065b3",
+            "52f8b77a-1c1e-4c7e-8acf-587fd36ddf54",
+            "94c7eb38-d75c-4137-850c-e72c9a5ff629",
+            "61512606-43aa-42cd-afc2-12e093a25a38",
+            "aff34d98-ca82-44dc-9ff4-3b59624ad336",
+            "bf22926e-54c2-4d2c-85bf-3bea4b846cad",
+            "1cb36b53-f39d-46ae-b938-c9a232fc3d85",
+            "c91aa40a-7e40-43e3-973c-3e267edc44bc",
+            "e33d0ae7-733a-48f3-9013-4d3ca9b3da88",
+            "63f8167e-2605-4f52-ac54-c69c9f624cc9"
+          ]
+        },
+        {
+          "id": "sub-1753776705502",
+          "name": "Kanonische Transformationen",
+          "unitUIDs": [
+            "34f649af-fe3c-4ac9-aeae-26a61f331bb6",
+            "be8f7887-4795-4bbd-8d60-1ea93d97f275",
+            "ee23004c-78b0-4c5a-a1ca-a8982d0c5ac0",
+            "ae5feb0e-8ac7-4958-9fac-abe3e2e236e1",
+            "0f93b277-a562-46ef-b5e0-822613b7122b",
+            "628d8f64-4271-44bf-a0ac-cab3437a6686",
+            "b426b6d6-73db-40b3-b1de-f6ab30835433",
+            "5562ec73-feae-4499-a795-8de51b885257",
+            "58c331b9-a3da-42cb-9c13-4fc4ecb7ed64",
+            "7c512707-04a7-4c84-8481-fa61c06b7925",
+            "6c084e67-9d7d-42a5-aede-21f9ff48a572",
+            "089ef4a7-1963-4e88-ac3e-144b59c6125a",
+            "0e9eae49-0ed8-4a5f-a379-d26f64c05b61",
+            "3c9f57a6-dd8e-4dc7-9a07-206905eceb02",
+            "67851b31-f536-4ba5-8a9f-157828e47a9a",
+            "5b009b28-543c-4571-a2a0-be8e26e789a1",
+            "2790a65b-a867-4ea7-8c92-f5421894c4aa",
+            "c1690534-271d-4a55-bc35-ca9f2a39f6e4",
+            "ba65a0bb-6db6-4c0c-ab6b-4fee64fb191f",
+            "aa06ee8f-5b8e-4880-83fd-f20228e43240",
+            "a97f9437-ebb2-4bc4-93ad-ea2b6c3b6537"
+          ]
+        },
+        {
+          "id": "sub-1753863512938",
+          "name": "Kanonische Invariante",
+          "unitUIDs": [
+            "20e056ce-4d6d-45fe-a115-f9966483e530",
+            "0abbb313-3b5e-485e-aa9d-c69a56a8364f",
+            "e5ee54fe-8ab6-49f1-8db6-57478cf145a5",
+            "f10e5b81-e914-4db4-ba4f-5d51bbc0ab75",
+            "66a69894-9ae3-4c50-9aed-e539b481560d"
+          ]
+        },
+        {
+          "id": "sub-1753863547266",
+          "name": "Hamilton-Jacobi-Theorie",
+          "unitUIDs": [
+            "d99d9ef5-4049-4bf9-8dfa-673f5261ad97",
+            "c055ae30-748d-49d3-a464-79cd549be1ee",
+            "7f962285-f586-4c28-ab41-849db3f09e78",
+            "9e2339ee-8bbf-4140-9e72-1f9d4841c987",
+            "e218d0a5-70a8-4c34-a4e2-bc45cbd02c1d",
+            "dee5c048-6aa8-464e-b9ae-7794b7b70ba0",
+            "14cbd7d8-a185-46ea-bad4-2367d98ae137",
+            "444a1d4e-b8cc-474d-bf87-0181bb4fad95",
+            "2cb3996d-e032-494b-b532-148c1d70c110",
+            "24d9fa10-04e2-426d-b3c7-8c449b891885",
+            "cc8daf36-53cb-4aae-be9e-150ded6dbb0d",
+            "6cbc02bd-5433-4786-9903-fdf66abf66f7",
+            "9f7dc61b-5b10-4549-a09e-7a5a3e1b3160",
+            "6ec0813a-c3a7-42a2-9143-b374a1c8f9a5",
+            "98b3e211-661e-4ecb-a8b4-a9d5996f62c6"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-1753863588543",
+      "name": "Spezielle Themen",
+      "subsections": [
+        {
+          "id": "sub-1753863597317",
+          "name": "Nichtlineare Dynamik",
+          "unitUIDs": [
+            "aacf8f19-8667-46fa-aa96-0ae59268b108",
+            "26bb27f3-1654-4bb7-b057-f243c0111144",
+            "19e9aaf5-8a81-40b3-92fb-145f77a31499",
+            "fd908299-f815-44f3-9725-f38c188b8dde",
+            "c7f624b3-bb4a-4a94-a236-da9717659914",
+            "beeeab48-6808-4d09-a319-044faba786b4",
+            "4064a718-fba7-456b-ab5a-9e4cffc1a2d0",
+            "276cedb8-3757-441c-b5a4-6743d679ea33"
+          ]
+        },
+        {
+          "id": "sub-1753863607120",
+          "name": "SRT und Lorentz-Trafos",
+          "unitUIDs": [
+            "af344463-ebac-4230-b724-b2d855765f9a",
+            "bdca4bfc-990e-470c-84b6-f19118427db9",
+            "26f360e8-f8bd-471a-8188-146eb6212e23",
+            "7ca5043f-5652-418d-8178-5eb399101990",
+            "d4264fa2-c1ab-4f4d-adfa-081496ef3aee",
+            "572227b5-f2b7-490b-96cd-6c6b8a079830",
+            "84294ae3-3c56-4406-bf2d-5d1cf1f06840",
+            "7d8a4108-b79f-4b2e-9d35-f6ff32221d4d",
+            "1f9204e6-7de3-4d1c-b9d4-189c3c28404a",
+            "aeec7ec2-ac04-456c-96c5-e38e8a2043f1",
+            "f89dce58-fd98-40ff-9eb4-845147336324",
+            "09fe9ebb-16e2-452a-b1ea-5fbd61dd78b6",
+            "3ee96d28-ba85-4284-8c4e-2be8edc53641",
+            "cb4cc789-b897-4760-8885-ccf758200e3e",
+            "284e7670-246a-4ae7-a6e4-47e9385b6ecc",
+            "209b07d6-d61f-4443-991d-b06443ebb01d",
+            "7849476a-1a47-4df6-bf8a-44b5837888e5",
+            "9acf787f-3227-4298-b6a7-73aadf515864",
+            "0aff84c4-5248-40e4-ae90-dd598b00d8cc",
+            "88c8dee5-bf72-4ab6-9221-1baba0f2f554",
+            "ac9d8b39-299f-4b7a-a2ef-3d3e14e08533",
+            "a241dd91-a404-47e3-8dec-84357d93a560"
+          ]
+        }
+      ]
+    }
+  ]
+}

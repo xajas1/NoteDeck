@@ -1,0 +1,20 @@
+{
+  "score": 0.8,
+  "verdict": "Gute Lösung mit kleineren Mängeln",
+  "weaknesses": [
+    {
+      "code": "E1",
+      "msg": "Fehler in der Umrechnung von kg zu GeV",
+      "math_hint": "Die Umrechnung von kg zu GeV sollte die korrekte Umrechnung von Joule zu GeV berücksichtigen: $1 \text{ J} = 6.242 \times 10^{9} \text{ GeV}$."
+    },
+    {
+      "code": "E2",
+      "msg": "Fehler in der Umrechnung von s zu 1/GeV",
+      "math_hint": "Die Umrechnung von s zu 1/GeV sollte die korrekte Umrechnung von s zu GeV^{-1} berücksichtigen: $1 \text{ s} = 1.519 \times 10^{24} \text{ GeV}^{-1}$."
+    }
+  ],
+  "fix_suggestions": [
+    "1 \\, \\text{kg} = \\frac{1 \\, \\text{kg} \\cdot (3 \\times 10^8 \\, \\text{m/s})^2}{1.602 \\times 10^{-10} \\, \\text{J/GeV}} \\approx 5.61 \\times 10^{26} \\, \\text{GeV}",
+    "1 \\, \\text{s} = \\frac{1}{6.582 \\times 10^{-25} \\, \\text{s/GeV}} \\approx 1.52 \\times 10^{24} \\, \\text{GeV}^{-1}"
+  ]
+}

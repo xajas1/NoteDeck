@@ -1,0 +1,19 @@
+Um zu zeigen, dass $\|x\| = \sqrt{h(x, x)}$ eine Norm ist, wenn $h$ ein Skalarprodukt ist, müssen wir die Eigenschaften einer Norm überprüfen: Definitheit, Homogenität und Dreiecksungleichung.
+
+Zunächst zur Definitheit: Eine Halbnorm $\|x\|$ ist genau dann eine Norm, wenn $\|x\| = 0$ nur für $x = 0$ gilt. Da $h$ ein Skalarprodukt ist, gilt $h(x, x) = 0$ genau dann, wenn $x = 0$. Somit ist $\|x\| = \sqrt{h(x, x)} = 0$ nur für $x = 0$, was die Definitheit zeigt.
+
+Für die Homogenität muss gelten, dass $\|\lambda x\| = |\lambda| \|x\|$ für alle $\lambda \in \mathbb{K}$ und $x \in E$. Da $h$ ein Skalarprodukt ist, gilt $h(\lambda x, \lambda x) = \lambda \overline{\lambda} h(x, x) = |\lambda|^2 h(x, x)$. Daher ist $\|\lambda x\| = \sqrt{h(\lambda x, \lambda x)} = \sqrt{|\lambda|^2 h(x, x)} = |\lambda| \sqrt{h(x, x)} = |\lambda| \|x\|$, was die Homogenität bestätigt.
+
+Schließlich zur Dreiecksungleichung: Für alle $x, y \in E$ muss $\|x + y\| \leq \|x\| + \|y\|$ gelten. Da $h$ ein Skalarprodukt ist, erfüllt es die Cauchy-Schwarz-Ungleichung: $|h(x, y)| \leq \sqrt{h(x, x)} \sqrt{h(y, y)}$. Daher gilt:
+
+\[
+h(x+y, x+y) = h(x, x) + h(y, y) + 2 \operatorname{Re}(h(x, y))
+\]
+
+und somit
+
+\[
+\|x+y\| = \sqrt{h(x+y, x+y)} \leq \sqrt{h(x, x)} + \sqrt{h(y, y)} = \|x\| + \|y\|.
+\]
+
+Dies zeigt die Dreiecksungleichung. Daher ist $\|\cdot\|$ eine Norm genau dann, wenn $h$ ein Skalarprodukt ist.

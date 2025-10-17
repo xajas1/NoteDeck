@@ -1,0 +1,44 @@
+{
+  "tasks": [
+    {
+      "task_id": "1",
+      "body_tex": "",
+      "subtasks": [
+        {
+          "sub_id": "1.1",
+          "body_tex": "Exercise 1: Natural units (5 points)\nNatural units are defined by setting $c=\\hbar=1$.\nUse natural units to express 1 kg in GeV , as well as 1 s in $1 / \\mathrm{GeV}$. Use your results to express Newton's constant of gravity\n\n$$\nG_N=6,67 \\times 10^{-11} \\frac{\\mathrm{~m}^3}{\\mathrm{~kg} \\mathrm{~s}^2}\n$$\n\nin natural units.\nFinally give the value of the Planck mass $M_{p l}=1 / \\sqrt{G_N}$."
+        }
+      ]
+    },
+    {
+      "task_id": "2",
+      "body_tex": "",
+      "subtasks": [
+        {
+          "sub_id": "2.1",
+          "body_tex": "Exercise 2: Charged particle in a constant magnetic field (5 points)\nWe consider a particle with charge $e$ and mass $m$. The Lagrangian of a charged particle in an electromagnetic field is given by\n\n$$\nL(\\mathbf{r}, \\dot{\\mathbf{r}}, t)=\\frac{1}{2} m \\dot{\\mathbf{r}}^2+e \\frac{\\dot{\\mathbf{r}}}{c} \\cdot \\mathbf{A}(\\mathbf{r})-e \\Phi(\\mathbf{r})\n$$\n\nwith the scalar potential $\\Phi(\\mathbf{r})$ and the vector potential $\\mathbf{A}(\\mathbf{r})$.\nCalculate the Hamilton function $H(\\mathbf{r}, \\mathbf{p}, t)$ of the system, using a Legendre transformation."
+        }
+      ]
+    },
+    {
+      "task_id": "3",
+      "body_tex": "",
+      "subtasks": [
+        {
+          "sub_id": "3.1",
+          "body_tex": "Exercise 3: Continuity equation in quantum mechanics (3 points)\nConsider a wave function $\\psi(\\mathbf{r}, t)$ satisfying the Schrödinger equation\n\n$$\n\\left(-\\frac{\\hbar^2}{2 m} \\Delta+V(\\mathbf{r})\\right) \\psi(\\mathbf{r}, t)=\\mathrm{i} \\hbar \\frac{\\partial}{\\partial t} \\psi(\\mathbf{r}, t) .\n$$\n\n\nThe probability density is defined as $\\rho(\\mathbf{r}, t):=\\psi^*(\\mathbf{r}, t) \\psi(\\mathbf{r}, t)$. Show that it satisfies the continuity equation\n\n$$\n\\frac{\\partial}{\\partial t} \\rho(\\mathbf{r}, t)+\\nabla \\cdot \\mathbf{j}(\\mathbf{r}, t)=0,\n$$\n\nwhere $\\mathbf{j}(\\mathbf{r}, t)$ is the propability current\n\n$$\n\\mathbf{j}(\\mathbf{r}, t):=\\frac{\\hbar}{2 \\mathrm{i} m}\\left(\\psi^*(\\nabla \\psi)-\\left(\\nabla \\psi^*\\right) \\psi\\right) .\n$$"
+        }
+      ]
+    },
+    {
+      "task_id": "4",
+      "body_tex": "",
+      "subtasks": [
+        {
+          "sub_id": "4.1",
+          "body_tex": "Exercise 4: Harmonic oscillator in quantum mechanics (7 points)\nRecall the time-independent Schrödinger equation of the one-dimensional harmonic oscillator in quantum mechanics\n\n$$\n\\left(\\frac{\\hat{p}^2}{2 m}+\\frac{1}{2} m \\omega^2 \\hat{x}^2\\right) \\psi(x)=E \\psi(x),\n$$\n\nwith momentum operator $\\hat{p}$ and the position operator $\\hat{x}$.\nIt has been shown that the energy eigenvalues $E$ can be calculated easily in an energy basis of the system $\\{|n\\rangle\\}, n \\in \\mathbb{N}$, by making use of two operators defined as\n\n$$\n\\hat{a}:=\\sqrt{\\frac{m \\omega}{2 \\hbar}}\\left(\\hat{x}+\\frac{\\mathrm{i}}{m \\omega} \\hat{p}\\right), \\quad \\hat{a}^{\\dagger}:=\\sqrt{\\frac{m \\omega}{2 \\hbar}}\\left(\\hat{x}-\\frac{\\mathrm{i}}{m \\omega} \\hat{p}\\right),\n$$\n\nwith the property to raise and lower ('create' and 'annihilate') the states\n\n$$\n\\hat{a}|n\\rangle=c_n^{-}|n-1\\rangle, \\quad \\hat{a}^{\\dagger}|n\\rangle=c_n^{+}|n+1\\rangle\n$$\n\n\nThe occupation number operator acts as\n\n$$\n\\hat{N}|n\\rangle=\\hat{a}^{\\dagger} \\hat{a}|n\\rangle=n|n\\rangle .\n$$\n\n\nCalculate the commutator $\\left[\\hat{a}, \\hat{a}^{\\dagger}\\right]$ and the normalization constants $c_n^{-}$and $c_n^{+}$. Use the operators $\\hat{a}$ and $\\hat{a}^{\\dagger}$ to reformulate the Hamilton operator and give the energy eigenvalues $E_n$."
+        }
+      ]
+    }
+  ]
+}

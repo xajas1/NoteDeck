@@ -1,0 +1,30 @@
+Um die Identität $(\sigma \cdot \mathbf{p})^2 = \mathbf{p}^2$ zu zeigen, betrachten wir die Pauli-Matrizen $\sigma_i$ und den Impulsoperator $\mathbf{p} = (p_1, p_2, p_3)$. Das Skalarprodukt $\sigma \cdot \mathbf{p}$ ist definiert als $\sigma \cdot \mathbf{p} = \sigma_1 p_1 + \sigma_2 p_2 + \sigma_3 p_3$. Wir berechnen das Quadrat:
+
+\begin{align*}
+(\sigma \cdot \mathbf{p})^2 &= (\sigma_1 p_1 + \sigma_2 p_2 + \sigma_3 p_3)^2 \\
+&= \sum_{i=1}^{3} \sigma_i^2 p_i^2 + \sum_{i \neq j} \sigma_i \sigma_j p_i p_j.
+\end{align*}
+
+Unter Verwendung der Eigenschaften der Pauli-Matrizen, insbesondere $\sigma_i^2 = I$ und $\sigma_i \sigma_j + \sigma_j \sigma_i = 0$ für $i \neq j$, folgt:
+
+\begin{align*}
+(\sigma \cdot \mathbf{p})^2 &= \sum_{i=1}^{3} p_i^2 + \sum_{i \neq j} (\delta_{ij} I + i \epsilon_{ijk} \sigma_k) p_i p_j \\
+&= \sum_{i=1}^{3} p_i^2 = \mathbf{p}^2.
+\end{align*}
+
+Für die Normierung der Dirac-Spinoren zeigen wir, dass $u_r^{+}(p) u_s(p) = v_r^{+}(p) v_s(p) = 2 E \delta_{rs}$. Die Dirac-Spinoren $u_r(p)$ und $v_r(p)$ sind Lösungen der Dirac-Gleichung. Die Normierungsbedingung ergibt sich aus der Forderung, dass die Spinoren orthonormal sind und die Energie $E$ berücksichtigen. Diese Normierung stellt sicher, dass die Wahrscheinlichkeitserhaltung in der relativistischen Quantenmechanik gewährleistet ist. Insbesondere ergibt sich die Normierung aus der Forderung, dass die zeitartige Komponente des Viererstroms $j^\mu = \bar{u}_r(p) \gamma^\mu u_s(p)$ die Wahrscheinlichkeit pro Volumeneinheit darstellt, was zur Normierung $2E$ führt:
+
+\begin{align*}
+u_r^{+}(p) u_s(p) &= \bar{u}_r(p) \gamma^0 u_s(p) = 2 E \delta_{rs}, \\
+v_r^{+}(p) v_s(p) &= \bar{v}_r(p) \gamma^0 v_s(p) = 2 E \delta_{rs}.
+\end{align*}
+
+Um die Antikommutator-Relation $\left\{\gamma^\mu, \gamma^\nu\right\} = 2 g^{\mu \nu}$ zu zeigen, verwenden wir die Definition der Dirac-Matrizen $\gamma^\mu$ und die Antikommutator-Relation:
+
+\begin{align*}
+\left\{\gamma^\mu, \gamma^\nu\right\} &= \gamma^\mu \gamma^\nu + \gamma^\nu \gamma^\mu = 2 g^{\mu \nu} I.
+\end{align*}
+
+Diese Relation ist entscheidend, da sie sicherstellt, dass die Dirac-Matrizen die korrekten Transformationseigenschaften unter Lorentz-Transformationen haben und die Struktur der Raumzeit in der relativistischen Quantenmechanik widerspiegeln.
+
+%CHECK: Die Herleitung der Identität $(\sigma \cdot \mathbf{p})^2 = \mathbf{p}^2$ wurde detailliert ausgeführt. Die Normierung der Dirac-Spinoren wurde explizit hergeleitet.

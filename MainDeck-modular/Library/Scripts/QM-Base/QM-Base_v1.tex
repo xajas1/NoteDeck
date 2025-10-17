@@ -1,0 +1,1172 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17. Titel und Autor
+
+% --- 0. Allgemeine Pakete ---
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{slashed}
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\graphicspath{{../../Images/}}
+\usepackage[export]{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+% Hellblau definieren
+\definecolor{hellblau}{rgb}{0.3,0.6,1}
+
+% Eigene Umgebung »notiz«
+\newenvironment{note}{\par\begingroup\color{hellblau}\itshape}{\par\endgroup}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\CustomHeading{Definition}{#1}{#2}}{}
+\newenvironment{PROP}[2]{\CustomHeading{Proposition}{#1}{#2}}{}
+\newenvironment{THEO}[2]{\CustomHeading{Theorem}{#1}{#2}}{}
+\newenvironment{LEM}[2]{\CustomHeading{Lemma}{#1}{#2}}{}
+\newenvironment{KORO}[2]{\CustomHeading{Corollar}{#1}{#2}}{}
+\newenvironment{REM}[2]{\CustomHeading{Remark}{#1}{#2}}{}
+\newenvironment{EXA}[2]{\CustomHeading{Example}{#1}{#2}}{}
+\newenvironment{STUD}[2]{\CustomHeading{Study}{#1}{#2}}{}
+\newenvironment{CONC}[2]{\CustomHeading{Concept}{#1}{#2}}{}
+\newenvironment{OTH}[2]{\CustomHeading{Other}{#1}{#2}}{}
+\newenvironment{EXE}[2]{\CustomHeading{Exercise}{#1}{#2}}{}
+\newenvironment{MOT}[2]{\CustomHeading{Motivation}{#1}{#2}}{}
+\newenvironment{PROOF}[2]{\CustomHeading{Proof}{#1}{#2}}{}
+\newenvironment{STR}[2]{\CustomHeading{Structure}{#1}{#2}}{}
+
+
+% --- Unit Umgebung ---
+\usepackage{mdframed}
+\newmdenv[
+  linewidth=1pt,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftmargin=0cm,
+  rightmargin=0cm,
+  skipabove=10pt,
+  skipbelow=10pt,
+  innertopmargin=0.5\baselineskip,
+  innerbottommargin=0.5\baselineskip,
+  backgroundcolor=gray!10,
+  linecolor=gray
+]{unitbox}
+
+\newenvironment{unit}[1]
+  {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
+  {\end{unitbox}}
+
+
+% --- 17. Titel und Autor ---
+\title{Mein Titel}
+\author{Tim Jaschik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+Kurze Beschreibung …
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\tableofcontents
+
+\pagebreak
+
+\section{Schrödinger Gleichung}
+
+\subsection{Schrödinger Gleichung}
+
+\begin{DEF}{QM-G25-01-01}{Wellen-Teilchen Dualität und Plansche Wirkungsquantum}
+Die in A2 Quantenphysik diskutierten Phänomene zeigen, daß Wellen Teilcheneigenschaften haben, und umgekehrt. Dabei sind für freie Teilchen, bzw. Wellen, die Größen Energie $E(\vec{p})$ und Impuls $\vec{p}$ auf der Teilchenseite mit den Größen Kreisfrequenz $\omega(\vec{k})$ und Wellenvektor $\vec{k}$ auf der Wellenseite durch die fundamentalen Beziehungen
+$$
+E=\hbar \omega, \quad \vec{p}=\hbar \vec{k}
+$$
+verknüpft. Dabei ist
+$$
+\hbar=1.054572 \ldots \cdot 10^{-34} \mathrm{~J} \mathrm{~s}=6.582 \ldots \cdot 10^{-22} \mathrm{MeV} \mathrm{~s} .
+$$
+das Planck'sche Wirkungsquantum (Energie mal Zeit, mit $\hbar=h /(2 \pi))$.
+\begin{enumerate}
+  \item $E = \hbar \omega$: Dass Licht aus Energiequanten (Photonen) besteht, folgt u.\,a. aus den Eigenschaften der Hohlraumstrahlung sowie aus dem photoelektrischen Effekt.
+  \item $\vec{p} = \hbar \vec{k}$: Die Verknüpfung von Impuls mit dem Wellenvektor kann aus dem Compton-Effekt abgeleitet werden.
+\end{enumerate}
+\end{DEF}
+
+\begin{CONC}{QM-G25-01-02}{Hermetisch konjugierte Schrödinger-Gleichung}
+Angewandt auf die Schrödinger-Gleichung folgt
+$$
+i \hbar \dot{\psi}=H \psi, \quad-i \hbar \dot{\psi}^{*}=\psi^{*} H^{\dagger}=\psi^{*} H
+$$
+letzteres da der Hamilton-Operator symmetrisch und reel is, und damit selbst-adjungiert, d.h. es gilt $H=H^{\dagger}$.
+\end{CONC}
+
+\begin{CONC}{QM-G25-01-03}{Ehrenfest Theorem für die Bewegungsgleichung des Erwartungswertes}
+Die zeitliche Entwicklung von eines Erwartungwerts $\langle A\rangle$ is durch
+$$
+i \hbar \frac{d}{d t}\langle A\rangle=i \hbar \frac{d}{d t} \int d^{3} x \psi^{*} A \psi=\int d^{3} x \psi^{*} A(H \psi)-\int d^{3} x\left(\psi^{*} H\right) A \psi
+$$
+gegeben. Für den ersten Term haben wir die Schrödinger Gleichung $i \hbar \dot{\psi}=H \psi$ verwendet, und im zweiten Term die komplex-konjungierte Schrödinger Gleichung $-i \hbar \dot{\psi}^{*}=\psi^{*} H$. Hier haben wir angenommen, dass der Operator $A$ selber nicht explizit von der Zeit abhängt. Sollte das der Fall sein, ergibt sich insgesamt
+$$
+i \hbar \frac{d}{d t}\langle A\rangle=\langle[A, H]\rangle+i \hbar\left\langle\frac{\partial A}{\partial t}\right\rangle
+$$
+was man als Ehrenfest Theorem bezeichnet. Den Kommutator $[A, H]=A H-H A$ hatten wir bereits eingeführt.
+\end{CONC}
+
+\begin{CONC}{QM-G25-01-04}{Quasiklassische von Teilchen in zeitunabhängigen Potentialen}
+Wir wenden das Ehrenfest Theorem auf den Impuls- und den Orts-Operator an. Für ein Teilchen in einem Zeit-unabhängignen Potential $V(x)$ gilt
+$$
+H=\frac{p^{2}}{2 m}+V(x), \quad[p, H]=[p, V(x)], \quad[x, H]=\left[x, p^{2}\right] / 2 m
+$$
+da Operatoren mit sich selber vertauschen. Der erste Term ergibt
+$$
+[p, H]=\frac{\hbar}{i}\left(\nabla_{x} V(x)-V(x) \nabla_{x}\right)=\frac{\hbar}{i} V^{\prime}
+$$
+während wir den zweiten Term mit Hilfe von $[x, p]=i \hbar$ zu
+$$
+\left[x, p^{2}\right]=x p^{2}-p^{2} x=(x p-p x+p x) p-p^{2} x=i \hbar p+p[x, p]=2 i \hbar p
+$$
+umformen. In das Ehrenfest Theorem eingesetzt finden wir
+$$
+i \hbar \frac{d}{d t}\langle p\rangle=\frac{\hbar}{i}\left\langle V^{\prime}\right\rangle, \quad i \hbar \frac{d}{d t}\langle x\rangle=\frac{i \hbar}{m}\langle p\rangle
+$$
+was zusammen
+$$
+m \frac{d}{d t}\langle x\rangle=\langle p\rangle \quad \frac{d}{d t}\langle p\rangle=-\left\langle V^{\prime}\right\rangle
+$$
+ergibt. Die Erwartungswerte von Operatoren gehorchen also den klassischen Bewegungsgleichungen. Dieses ist allerding nicht verwunderlich, da die Schrödinger-Gleichung dem Korrespondenzprinzip genügt.
+\end{CONC}
+
+\subsection{Wellenpakete}
+
+\begin{DEF}{QM-G25-02-01}{Ebene Wellen}
+Ebene Wellen $\psi_{\mathbf{k}}(\vec{x}, t)$ sind wie in der Elektrodynamik durch
+$$
+\begin{aligned}
+\psi_{\mathbf{k}}(\vec{x}, t) & =A(\vec{k}) e^{-i(\omega(\vec{k}) t-\vec{k} \cdot \vec{x})} \\
+A(\vec{k}) & : \text { Amplitude } \\
+\omega t-\vec{k} \cdot \vec{x} & : \text { Phase }
+\end{aligned}
+$$
+definiert. Falls $|A|=\left[(\Re e A)^{2}+(\Im m A)^{2}\right]^{\frac{1}{2}} \neq 0$, so ist die Welle überall im Raum vorhanden.
+\end{DEF}
+
+\begin{DEF}{QM-G25-02-02}{Wellenpakete}
+Räumlich begrenzte Wellenzüge, sog. Wellenpakete, entstehen durch Überlagerung von ebenen Wellen mit verschiedenen $\vec{k}$ und $\omega(\vec{k})$.
+\end{DEF}
+
+\begin{EXA}{QM-G25-02-03}{Überlagerung von zwei Wellen}
+Seien $\psi_{\mathbf{k}_{\mathbf{1}}}(\vec{x}, t)$ und $\psi_{\mathbf{k}_{\mathbf{2}}}(\vec{x}, t)$ zwei ebene Wellen mit nur wenig verschiedenen Wellenvektoren $\vec{k}_{i}$. Wir nehmen an, daß $\vec{k}_{i}=\left(k_{i}, 0,0\right)$, die Ausbreitung also in $x_{1}$-Richtung stattfinde. Die Überlagerung (Superposition) der beiden Wellen ist
+$$
+\psi_{\bar{k}}(\vec{x}, t)=A_{1} e^{-i\left(\omega_{1} t-k_{1} x\right)}+A_{2} e^{-i\left(\omega_{2} t-k_{2} x\right)}
+$$
+wobei wir $\vec{x}=\left(x_{1}, x_{2}, x_{3}\right)=(x, y, z)$ verwendet haben. Es sei $A_{1}=A_{2}=A$. Ferner setzen wir:
+$$
+\begin{array}{cc}
+\omega_{1}=\bar{\omega}+\Delta \omega \quad, & \omega_{2}=\bar{\omega}-\Delta \omega \\
+k_{1}=\bar{k}+\Delta k & , \quad k_{2}=\bar{k}-\Delta k
+\end{array}
+$$
+und erhalten
+$$
+\begin{aligned}
+\psi_{\bar{k}}(\vec{x}, t) & =A\left[e^{-i[(\bar{\omega}+\Delta \omega) t-(\bar{k}+\Delta k) x]}+e^{-i[(\bar{\omega}-\Delta \omega) t-(\bar{k}-\Delta k) x]}\right] \\
+& =A\left[e^{-i(t \Delta \omega-x \Delta k)}+e^{+i(t \Delta \omega-x \Delta k)}\right] \cdot e^{-i(\bar{\omega} t-\bar{k} x)} \\
+& =2 A \cos (t \Delta \omega-x \Delta k) e^{-i(\bar{\omega} t-\bar{k} x)}
+\end{aligned}
+$$
+Durch Superposition der ebenen Wellen $\psi_{\mathbf{k}_{\mathbf{1}}}, \psi_{\mathbf{k}_{\mathbf{2}}}$ ensteht ein Wellenzug mit der mittleren Frequenz $\bar{\omega}$, dem Wellenvektor $\bar{k}$ und der "modulierten" Amplitude $\tilde{A}=2 A \cos (t \Delta \omega-$ $x \Delta k$ ). Die neue Amplitude $\tilde{A}$ ist eine Funktion von $\vec{x}$ und $t$. Sie ist maximal für
+$$
+t \Delta \omega-x \Delta k=n \pi, \quad n=0, \pm 1, \cdots
+$$
+und verschwindet für
+$$
+t \Delta \omega-x \Delta k=(2 n+1) \frac{\pi}{2}, \quad n=0, \pm 1 \cdots
+$$
+\end{EXA}
+
+\begin{CONC}{QM-G25-02-04}{$E(\vec{p})=\vec{p}^{2} /(2 m)$}
+Man betrachte z.B. 
+$$E(\vec{p})=\vec{p}^{2} /(2 m)$$ 
+Dies ist ein wichtiger Zusammenhang zwischen Wellen- und Teilcheneigenschaften.
+\end{CONC}
+
+\begin{EXA}{QM-G25-02-05}{Gruppengeschwindigkeit von Überlagerung zweier Wellen}
+Die "Bewegung" des durch $t \Delta \omega-x \Delta k=0$ gegebenen Maximums von $\tilde{A}$ ist durch
+$$
+\tilde{x}(t)=\frac{\Delta \omega}{\Delta k} t
+$$
+charakterisiert. Im Limes $\Delta k \rightarrow 0$ wird daraus
+$$
+\tilde{x}(t)=\frac{\partial \omega}{\partial k} t,
+$$
+oder, im 3 - dimensionalen Fall,
+$$
+\overline{\vec{x}}=\left(\operatorname{grad}_{\mathbf{k}} \omega(\vec{k})\right) t
+$$
+Das Maximum der superponierten Welle wandert also mit der Geschwindigkeit
+$$
+\vec{v}_{g}:=\operatorname{grad}_{\mathrm{k}} \omega(\vec{k})
+$$
+durch den Raum. Man bezeichnet diese Geschwindigkeit als Gruppengeschwindigkeit des Wellenzuges (Wellenpaketes).
+Wegen $E=\hbar \omega, \vec{p}=\hbar \vec{k}$ gilt
+$$
+\vec{v}_{g}=\operatorname{grad}_{\mathbf{p}} E(\vec{p})=\vec{v}
+$$
+Die Gruppengeschwindigkeit eines Wellenpaketes ist gleich der "mechanischen" Geschwindigkeit der zugeordneten Teilchen.
+\end{EXA}
+
+\begin{DEF}{QM-G25-02-06}{Phasengeschwindigkeit eine Wellenphase}
+Die Ausbreitung der Wellenphase $\bar{\omega} t-\bar{k} x$ ist durch $\bar{\omega} t-\bar{k} x=$ const. charakterisiert und durch 
+$$v_{\text {phase }}=\bar{\omega} / \bar{k}$$ 
+gegeben. Man bezeichnet sie mit Phasengeschwindigkeit. Wie wir von den Radiowellen wissen, findet die Übertragung der "Information" via der Modulation der Amplitude statt, die Information breitet sich also mit der Gruppengeschwindigkeit $\vec{v}_{g}$ aus.
+\end{DEF}
+
+\begin{DEF}{QM-G25-02-07}{Allgemeines Wellenpaket}
+Im allgemeinen enthält ein Wellenzug (Wellenpaket) unendlich viele Frequenzen,
+$$
+\psi(\vec{x}, t)=\int_{-\infty}^{+\infty} \int_{-\infty}^{+\infty} \int_{-\infty}^{+\infty} d^{3} k g(\vec{k}) e^{-i(\omega(\vec{k}) t-\vec{k} \cdot \vec{x})}
+$$
+was einer Fourier-Zerlegung mit (komplexen) Fourier-Komponenten $g(\vec{k})$ entspricht. Letzter bestimmen, mit welchem Gewicht einzelne ebenen Wellen $\psi_{\mathbf{k}}(\vec{x}, t)$ an dem Wellenpaket beteiligt sind.
+\end{DEF}
+
+\begin{EXA}{QM-G25-02-08}{Gauß'sches Wellenpaket für den eindimensionalen Fall}
+Die Funktion
+$$
+g(k)=e^{-\alpha\left(k-k_{o}\right)^{2}}, \quad \alpha>0
+$$
+beschreibt eine Gauß'sche Verteilung, die bei $k=k_{0}$ konzentriert ist. Die Breite $\sigma$ der Verteilung ist durch den Parameter $\alpha=1 /\left(2 \sigma^{2}\right)$ charakterisiert. Das Wellenpaket lautet
+$$
+\psi(x, t)=\int_{-\infty}^{+\infty} d k e^{-\alpha\left(k-k_{0}\right)^{2}} e^{-i(\omega(k) t-k x)}
+$$
+Die klasssiche $E=p^{2} /(2 m)$ und die relativistische $E^{2}=c^{2} p^{2}+m^{2} c^{4}$ Energie-Impuls Beziehungen für freie Teilchen führen jeweils zu
+$$
+\begin{aligned}
+\omega & =\frac{1}{\hbar} \frac{1}{2 m}(\hbar k)^{2}=\frac{\hbar}{2 m} k^{2} \\
+\omega & =\frac{1}{\hbar} c \sqrt{\left.(\hbar k)^{2}+m^{2} c^{2}\right)}=c\left(k^{2}+\left(\frac{m c}{\hbar}\right)^{2}\right)^{\frac{1}{2}}
+\end{aligned}
+$$
+wobei wir $E=\hbar \omega$ und $p=\hbar k$ verwendet haben. Allgemein ist Entwicklung von $\omega(k)$ um $k=k_{0}$
+$$
+\omega(k)=\omega\left(k_{0}\right)+\left.\frac{d \omega}{d k}\right|_{k=k_{0}}\left(k-k_{0}\right)+\left.\frac{1}{2} \frac{d^{2} \omega}{d k^{2}}\right|_{k=k_{0}}\left(k-k_{0}\right)^{2}+\cdots
+$$
+Für das Gauß'sche Wellenpaket ist die Verteilung $\omega(k)$ um $k=k_{0}$ konzentriert, wir können also die Entwicklung nach dem zweiten Glied abbrechen (für $\omega=\frac{\hbar}{2 m} k^{2}$ wäre dies exakt).
+$$
+\begin{array}{rlrl}
+\left.\frac{d \omega}{d k}\right|_{k=k_{0}} & =v_{g} & & \text { (Gruppengeschwindigkeit) } \\
+\left.\frac{1}{2} \frac{d^{2} \omega}{d k^{2}}\right|_{k=k_{0}} & \equiv \beta & \left(\rightarrow \frac{\hbar}{2 m} \quad \text { für } \quad \omega=\frac{\hbar}{2 m} k^{2}\right)
+\end{array}
+$$
+Für das Wellenpaket ergibt sich damit
+$$
+\psi(x, t)=\int_{-\infty}^{+\infty} d k e^{-\alpha\left(k-k_{0}\right)^{2}} e^{-i\left[\omega\left(k_{0}\right) t+v_{g}\left(k-k_{0}\right) t+\beta\left(k-k_{0}\right)^{2} t-k x\right]}
+$$
+Wir führen die Variablen-Substitution $\tilde{k}=k-k_{0}$ durch:
+$$
+\psi(x, t)=e^{-i\left(\omega\left(k_{0}\right) t-k_{0} x\right)} \int_{-\infty}^{+\infty} d \tilde{k} e^{-\alpha \tilde{k}^{2}-i \beta t \tilde{k}^{2}} e^{i \tilde{k}\left(x-v_{g} t\right)}
+$$
+Das Gauss'sche Integral ergibt (Übungen)
+$$
+\int_{-\infty}^{+\infty} d y e^{-\gamma y^{2}} e^{-i u y}=\sqrt{\frac{\pi}{\gamma}} \exp \left(-\frac{1}{4 \gamma} u^{2}\right)
+$$
+
+Diese Formel gilt auch für komplexe $\gamma$, falls $\Re e \gamma>0$, so daß wir insgesamt zu folgendem Resultat gelangen:
+$$
+\psi(x, t)=\left(\frac{\pi}{\alpha+i \beta t}\right)^{\frac{1}{2}} e^{-\frac{1}{4(\alpha+i \beta t)}\left(x-v_{g} t\right)^{2}} e^{-i\left(\omega\left(k_{0}\right) t-k_{0} x\right)}
+$$
+Das Wellenpaket $\psi(x, t)$ ist eine Welle mit der Phase $\omega\left(k_{0}\right) t-k_{0} x$ und der ortsabhängigen Amplitude
+$$
+\begin{aligned}
+A_{G}(x, t) & =\left(\frac{\pi}{\alpha+i \beta t}\right)^{\frac{1}{2}} e^{-\frac{1}{4(\alpha+i \beta t)}\left(x-v_{g} t\right)^{2}} \\
+\left|A_{G}(x, t)\right|^{2}=A_{G} A_{G}^{*} & =\left(\frac{\pi^{2}}{\alpha^{2}+\beta^{2} t^{2}}\right)^{\frac{1}{2}} e^{-\frac{\alpha\left(x-v_{g} t\right)^{2}}{2\left(\alpha^{2}+\beta^{2} t^{2}\right)}}
+\end{aligned}
+$$
+Die Intensität $|\psi(x, t)|^{2}=\left|A_{G}\right|^{2}$ ist also wieder eine Gauß'sche Verteilung. Mit $\sigma^{2}=$ $\left(\alpha^{2}+\beta^{2} t^{2}\right)$ wächst die Varianz $\sigma$ mit der Zeit.
+\end{EXA}
+
+\begin{CONC}{QM-G25-02-09}{Rolle der Gruppengeschwindigkeit}
+Bei festem $t$ ist $|\psi(x, t)|^{2}$ maximal, falls $x=v_{g} t$, d.h. dort, wo sich nach der klassischen Mechanik $(x(t)=v t)$ das Teilchen befinden sollte. Das Maximum wandert mit der Geschwindigkeit $v_{g}$.
+\end{CONC}
+
+\begin{CONC}{QM-G25-02-10}{Herleitung der Unschärferelation für Gauß'sche Wellenpaket}
+Für $t=0$ ist
+$$
+|\psi(x, 0)|^{2}=\frac{\pi}{\alpha} e^{-\frac{x^{2}}{2 \alpha}} \equiv \frac{\pi}{\alpha} e^{-\frac{x^{2}}{2 \sigma_{x}^{2}}}
+$$
+was wir mit
+$$
+|g(k)|^{2}=e^{-2 \alpha\left(k-k_{0}\right)^{2}} \equiv e^{-\frac{\left(k-k_{0}\right)^{2}}{2 \sigma_{k}^{2}}}
+$$
+in Verbindung setzten können. Wir definieren
+$$
+\begin{aligned}
+& \delta x(0)=\sqrt{2 \alpha}: \begin{array}{l}
+\text { Breite des Wellenpaketes im Ortsraum zur } \\
+\text { Zeit } \mathrm{t}=0
+\end{array} \\
+& \delta k:=1 / \sqrt{2 \alpha}: \begin{array}{l}
+\text { Breite des Gauß'schen Wellenpaketes } \\
+\text { im } k \text {-Raum }
+\end{array}
+\end{aligned}
+$$
+denn, z.B. falls $k-k_{0}=\delta k$, so ist $|g(k)|^{2}$ auf den $e$ - ten Teil abgefallen. Zwischen $\delta x(0)$ und $\delta k$ gilt die Beziehung
+$$
+\delta k \delta x(0)=1
+$$
+Je schmaler also ein Wellenpaket im $k$ - Raum ist (d.h. je schmaler die Spektrallinie ist), um so breiter ist das Wellenpaket im Ortsraum und umgekehrt (Der Wert on der rechten Seite hängt von der Definition der Unschärfe ab. Verwendet man die Standardabweisungen $\sigma_x=\sqrt{\alpha}$ und $\sigma_k=1 /(2 \sqrt{\alpha})$, so erhält man $\sigma_x \sigma_k=1 / 2$.). Mit $p=\hbar k$ folgt schlussendlich
+$$
+\delta p \delta x(0)=\hbar
+$$
+Je genauer man also den Impuls eines Teilchens kennt ("Unschärfe" $\delta p$ ), desto weniger genau kann man seinen Ort $x$ angeben ("Unschärfe" $\delta x$ ). Das Produkt der Unschärfen ist durch $\hbar$ gegeben was die Heisenberg'sche Unschärferelation definiert.
+\end{CONC}
+
+\begin{CONC}{QM-G25-02-11}{Born'sche Interpretation der Unschärferelation}
+Die Unschärferelation gilt - wie wir sehen werden - für beliebige Wellenpakete. Sie bedeutet, daß die Wellenfunktion nicht die Materieverteilung eines Teilchens beschreiben kann, denn erfahrungsgemäß zerfließen Elektronen, Protonen und Atome nicht.
+
+Nach Born ist $|\psi(x, t)|^{2}$ vielmehr als Wahrscheinlichkeitsdichte zu interpretieren, wie wir weiter unten noch ausführlicher diskutieren werden.
+\end{CONC}
+
+\subsection{Herleitung freie Teilchen}
+
+\begin{CONC}{QM-G25-03-01}{Herleitung der Schrödinger-Gleichung für freie Teilchen für ebene Welle}
+Mit $E=\hbar \omega$ und $\vec{p}=\hbar \vec{k}$ nimmt die ebene Welle $\psi_{\mathbf{k}}(\vec{x}, t)=A e^{-i(\omega t-\vec{k} \cdot \vec{x})}$ die Form
+$$
+\psi_{\mathbf{p}}(\vec{x}, t)=A e^{-\frac{i}{\hbar}(E t-\vec{p} \cdot \vec{x})}
+$$
+an. Für ein nichtrelativistisches Teilchen hat man $E=\frac{1}{2 m} \vec{p}^{2}$. Mit
+$$
+\partial_{t} \psi_{\mathbf{p}}(\vec{x}, t)=-\frac{i}{\hbar} E \psi_{\mathbf{p}}(\vec{x}, t)
+$$
+und
+$$
+\frac{\partial}{\partial x_{j}} \psi_{\mathbf{p}}(\vec{x}, t) \equiv \partial_{j} \psi_{\mathbf{p}}(\vec{x}, t)=\frac{i}{\hbar} p_{j} \psi_{\mathbf{p}}(\vec{x}, t)
+$$
+folgt
+$$
+\begin{aligned}
+\Delta \psi_{\mathbf{p}}(\vec{x}, t) \equiv\left(\partial_{1}^{2}+\partial_{2}^{2}+\partial_{3}^{2}\right) \psi_{\mathbf{p}}(\vec{x}, t) & =-\frac{1}{\hbar^{2}} \vec{p}^{2} \psi_{\mathbf{p}}(\vec{x}, t) \\
+& =-\frac{2 m}{\hbar^{2}} E \psi_{\mathbf{p}}(\vec{x}, t)
+\end{aligned}
+$$
+Also genügt $\psi_{\mathbf{p}}(\vec{x}, t)$ der (partiellen) Differentialgleichung
+$$
+i \hbar \partial_{t} \psi_{\mathbf{p}}(\vec{x}, t)=-\frac{\hbar^{2}}{2 m_{e}} \Delta \psi_{\mathbf{p}}(\vec{x}, t)
+$$
+Analog gilt für das Integral
+$$
+\psi(\vec{x}, t)=(2 \pi \hbar)^{-\frac{3}{2}} \int_{-\infty}^{+\infty} \widetilde{\psi}(\vec{p}) e^{-\frac{i}{\hbar}\left(\frac{\vec{p}^{2}}{2 m} t-\vec{p} \cdot \vec{x}\right)} d^{3} p
+$$
+die Schrödinger-Gleichung für freie Teilchen:
+$$
+i \hbar \partial_{t} \psi(\vec{x}, t)=-\frac{\hbar^{2}}{2 m_{e}} \Delta \psi(\vec{x}, t)
+$$
+\end{CONC}
+
+\begin{CONC}{QM-G25-03-02}{Schrödinger-Gleichung erfüllt Superpositionsprinzip}
+Die Schrödinger-Gleichung ist eine lineare partielle Differentialgleichung in den Zeit- und Orts-koordinaten. Die Linearität trägt dem für die Quantentheorie fundamentalen Superpositionsprinzip Rechnung:
+
+Beschreiben $\psi_{1}$ und $\psi_{2}$ zwei quantentheoretisch mögliche physikalische Zustände, so beschreibt auch die lineare Superpostion
+$$
+c_{1} \psi_{1}+c_{2} \psi_{2}, \quad c_{i} \in \mathcal{C}
+$$
+einen möglichen physikalischen Zustand.
+\end{CONC}
+
+\begin{CONC}{QM-G25-03-03}{Korrespondenzprinzip mit Operatorzuweisung}
+Man erhält die freie Schrödinger-Gleichung formal, indem man in der Beziehung $E=\frac{1}{2 m} \vec{p}^{2}$ folgende Zuordnungen macht:
+$$
+E \rightarrow i \hbar \partial_{t}, \quad p_{j} \rightarrow \mathbf{P}_{j}:=\frac{\hbar}{i} \partial_{j}
+$$
+sowie
+$$
+\frac{1}{2 m} \vec{p}^{2} \quad \rightarrow \quad \frac{1}{2 m} \overrightarrow{\mathbf{P}}^{2}=-\frac{\hbar^{2}}{2 m_{e}} \Delta \equiv \mathbf{H}_{0}
+$$
+Die Differential-Operatoren $i \hbar \partial_{t}$ und $\mathbf{H}_{0}$ sind auf die Wellenfunktion $\psi(\vec{x}, t)$ anzuwenden. Aus $E=\frac{1}{2 m} \vec{p}^{2}$ folgt dann die freie Schrödinger-Gleichung:
+$$
+i \hbar \partial_{t} \psi(\vec{x}, t)=\mathbf{H}_{0} \psi(\vec{x}, t)=-\frac{\hbar^{2}}{2 m_{e}} \Delta \psi(\vec{x}, t)
+$$
+\end{CONC}
+
+\subsection{Äußere Potential}
+
+\begin{CONC}{QM-G25-04-01}{Korrespondenzprinzip mit Operatorzuweisung für ortsabhängiges Potential}
+Ein klassisches Teilchen, das sich in einem Potential $V(\vec{x})$ (unabhängig von $t$ und $\vec{p}$) befindet, besitzt die Gesamtenergie $E=\frac{1}{2 m} \vec{p}^{2}+V(\vec{x})$. Die Verallgemeinerung des obigen freien Falles ist dann
+$$
+E \rightarrow \mathbf{H}:=\mathbf{H}_{0}+V(\vec{x})=-\frac{\hbar^{2}}{2 m_{e}} \Delta+V(\vec{x})
+$$
+mit dem Konventionsfaktor $(2 \pi \hbar)^{-3/2}$ erhält man schließlich die zugehörige Schrödinger-Gleichung:
+$$
+i \hbar \partial_{t} \psi(\vec{x}, t)=\mathbf{H} \psi(\vec{x}, t)=-\frac{\hbar^{2}}{2 m_{e}} \Delta \psi(\vec{x}, t)+V(\vec{x}) \psi(\vec{x}, t)
+$$
+Die Schrödinger-Gleichung mit Potential ist eine lineare Differentialgleichung, also gilt auch hier das Superpositionsprinzip. Umgekehrt folgt die Linearität der SchrödingerGleichung für ein Teilchen mit Wechselwirkung aus der Forderung nach Gültigkeit des Superpositionsprinzipes für Wellenfunktionen.
+\end{CONC}
+
+\begin{REM}{QM-G25-04-02}{Superposition nicht i.A. für Hamilton'sche Bewegungsgleichung}
+Man beachte, daß das Superpositionsprinzip in der Mechanik i.allg. nicht gilt, da die (Hamilton'schen) Bewegungsgleichungen i.allg. nicht linear sind.
+\end{REM}
+
+\subsection{Operatoren}
+
+\begin{REM}{QM-G25-05-01}{Charakterisierung von Operatoren}
+Operatoren sind nichts anderes als Vorschriften, wie Elemente einer vorgegebenen Menge bestimmte Elemente einer anderen Menge (die gleich der ursprünglichen sein kann) zugeordnet werden. Ein anderer Name für derartige Vorschriften ist Abbildung.
+\end{REM}
+
+\begin{DEF}{QM-G25-05-02}{Multiplikations-,Differential-,Konjugation-Operator auf $L^2(\R,\C)$}
+Sei
+\[
+\mathcal{F} := \left\{ f_1(x), \dotsc, f_n(x) \,\middle|\, f_\nu : \mathbb{R} \to \mathbb{C}, \; \int_{\mathbb{R}} |f_\nu(x)|^2 \, dx < \infty \right\}
+\]
+eine Menge quadratintegrierbarer komplexwertiger Funktionen auf der reellen Achse. Auf diesem Raum können verschiedene Operatoren definiert werden:
+
+\begin{enumerate}
+  \item \textbf{Multiplikationsoperator:}
+
+  Die Vorschrift
+  \[
+  f_\nu(x) \mapsto x^2 f_\nu(x)
+  \]
+  definiert den Multiplikationsoperator $M_{x^2}$ durch
+  \[
+  M_{x^2} f_\nu(x) := x^2 f_\nu(x).
+  \]
+  Beachte: Im Allgemeinen gilt $x^2 f_\nu(x) \notin \mathcal{F}$, da die Multiplikation mit $x^2$ die Quadratintegrabilität verletzen kann. Der Operator $M_{x^2}$ ist also nur auf einem geeigneten Definitionsbereich $\mathcal{D}(M_{x^2}) \subset \mathcal{F}$ wohldefiniert.
+
+  \item \textbf{Differentialoperator:}
+
+  Die Vorschrift
+  \[
+  f_\nu(x) \mapsto \frac{d}{dx} f_\nu(x)
+  \]
+  definiert den Differentialoperator $D$ durch
+  \[
+  D f_\nu(x) := \frac{d}{dx} f_\nu(x).
+  \]
+  Voraussetzung ist $f_\nu \in C^1(\mathbb{R})$. Auch hier ist $D f_\nu(x)$ nicht notwendigerweise wieder in $\mathcal{F}$, sodass auch hier der Operator nur auf einem Teilraum $\mathcal{D}(D) \subset \mathcal{F} \cap C^1(\mathbb{R})$ wohldefiniert ist.
+
+  \item \textbf{Komplexe Konjugation:}
+
+  Die Vorschrift
+  \[
+  f_\nu(x) \mapsto f_\nu^*(x)
+  \]
+  definiert den (antilinearen) Operator $K$ durch
+  \[
+  K f_\nu(x) := f_\nu^*(x).
+  \]
+  Dieser ist auf ganz $\mathcal{F}$ wohldefiniert, da
+  \[
+  \int_{\mathbb{R}} |f_\nu^*(x)|^2 \, dx = \int_{\mathbb{R}} |f_\nu(x)|^2 \, dx < \infty.
+  \]
+  Der Operator $K$ ist involutiv ($K^2 = \operatorname{id}$) und normerhaltend bezüglich des Skalarprodukts im Hilbertraum $L^2(\mathbb{R})$:
+  \[
+  \langle Kf, Kg \rangle = \langle g, f \rangle.
+  \]
+  
+\end{enumerate}
+\end{DEF}
+
+\begin{DEF}{QM-G25-05-03}{Lineare Operatoren}
+Ein Operator $A$ heißt \emph{linear}, wenn für alle skalaren Kombinationen seiner Argumente gilt:
+\[
+A(\lambda_1 f_1 + \lambda_2 f_2) = \lambda_1 A(f_1) + \lambda_2 A(f_2)
+\]
+Dies gilt etwa für den Matrixoperator $\mathbf{A}$ auf $\mathbb{R}^2$:
+\[
+\mathbf{x}^{(1)}, \mathbf{x}^{(2)} \in \mathbb{R}^{2}, \quad \lambda_1, \lambda_2 \in \mathbb{R} \Rightarrow
+\]
+\[
+\mathbf{A}(\lambda_1 \mathbf{x}^{(1)} + \lambda_2 \mathbf{x}^{(2)}) = \lambda_1 \mathbf{A} \mathbf{x}^{(1)} + \lambda_2 \mathbf{A} \mathbf{x}^{(2)}
+\]
+
+Auch der Differentialoperator ist linear:
+\[
+f_1, f_2 \in C^1(\mathbb{R}), \quad \lambda_1, \lambda_2 \in \mathbb{C}
+\Rightarrow
+\frac{d}{dx}(\lambda_1 f_1 + \lambda_2 f_2)
+= \lambda_1 \frac{d}{dx} f_1 + \lambda_2 \frac{d}{dx} f_2
+\]
+\end{DEF}
+
+\begin{DEF}{QM-G25-05-04}{Antilineare Operatoren}
+Ein Operator $K$ heißt \emph{antilinear}, wenn für alle komplexen Skalare gilt:
+\[
+K(\lambda_1 f_1 + \lambda_2 f_2) = \lambda_1^* K(f_1) + \lambda_2^* K(f_2)
+\]
+Dies ist z.B. der Fall für den Operator der \emph{komplexen Konjugation}:
+\[
+K f(x) := f^*(x)
+\]
+\end{DEF}
+
+\begin{CONC}{QM-G25-05-05}{Vertauschungsrelation von Operatoren}
+Operatoren \emph{vertauschen im Allgemeinen nicht}. Seien $\mathbf{A}_1$, $\mathbf{A}_2$ zwei Matrizen, so gilt im Allgemeinen:
+\[
+\mathbf{A}_1 \mathbf{A}_2 \neq \mathbf{A}_2 \mathbf{A}_1
+\]
+Man definiert den \emph{Kommutator}:
+\[
+[\mathbf{A}_1, \mathbf{A}_2] := \mathbf{A}_1 \mathbf{A}_2 - \mathbf{A}_2 \mathbf{A}_1
+\]
+Ein anschauliches Beispiel:
+\[
+\frac{d}{dx}(x f(x)) = f(x) + x \frac{d}{dx} f(x)
+\]
+\[
+\Rightarrow \left[ \frac{d}{dx}, x \right] := \frac{d}{dx} x - x \frac{d}{dx} = \mathbf{1}
+\]
+Dabei ist $\mathbf{1}$ der \emph{Identitätsoperator}.
+\end{CONC}
+
+\begin{DEF}{QM-G25-05-06}{Skalarprodukt und Norm in komplexwertigen Vektorraum}
+In einem komplexwertigen Vektorraum $\mathbb{C}^N$ mit Vektoren
+\[
+\mathbf{x} = (x_1, \dots, x_N), \quad \mathbf{y} = (y_1, \dots, y_N)
+\]
+ist das \emph{Skalarprodukt} definiert durch:
+\[
+(\mathbf{x}, \mathbf{y}) := \sum_{i=1}^N x_i^* y_i
+\]
+Die zugehörige \emph{Norm} ist:
+\[
+\|\mathbf{x}\| = \sqrt{(\mathbf{x}, \mathbf{x})} = \sqrt{\sum_i |x_i|^2}
+\]
+
+Für eine Matrix $A \in \mathbb{C}^{N \times N}$ gilt:
+\[
+(\mathbf{x}, A \mathbf{y}) = \sum_{i,j} x_i^* A_{ij} y_j
+\]
+\end{DEF}
+
+\begin{DEF}{QM-G25-05-07}{Hermetisch konjugierter Operator}
+Mit $A^{\dagger}$ bezeichnet man den zu $A$ hermitisch konjungierten Operator. In Matrix Notation transponiert man die Matrix und nimmt dann die komplex-konjungierte Werte
+$$
+A \hat{=} A_{i j}, \quad\left(A^{\dagger}\right)_{i j}=A_{j i}^{*}
+$$
+Es folgt
+$$
+(A \psi)^{*}=\psi^{*} A^{\dagger}
+$$
+was sich in Matrix-Notation mit $\psi=\left(\psi_{1}, \psi_{2}, \ldots\right)$ einfach nachvollziehen lässt:
+$$
+(A \psi)_{i}=\sum_{k} A_{i k} \psi_{k}, \quad\left((A \psi)^{*}\right)_{i}=\sum_{k} A_{i k}^{*} \psi_{k}^{*}=\sum_{k}\left(A^{\dagger}\right)_{k i} \psi_{k}^{*}=\left(\psi^{*} A^{\dagger}\right)_{i}
+$$
+\end{DEF}
+
+\begin{DEF}{QM-G25-05-08}{Adjungierter Operator im Hilbertraum}
+Ein Operator $A$ besitzt einen Adjungierten $A^+$, falls gilt:
+\[
+(u, A \varphi) = (A^+ u, \varphi) \quad \text{für alle } \varphi \text{ im Definitionsbereich}.
+\]
+In Matrixnotation:
+\[
+(A^+)_{\mu\nu} = (A \varphi_\mu, \varphi_\nu)^* = A^*_{\nu\mu}.
+\]
+\end{DEF}
+
+\begin{DEF}{QM-G25-05-09}{Selbstadjungierter Operator}
+Ein Operator $A$ heißt selbstadjungiert, wenn
+\[
+(\varphi_\nu, A \varphi_\mu) = (A \varphi_\nu, \varphi_\mu),
+\]
+d.h. $A = A^+$. Selbstadjungierte Operatoren besitzen reelle Eigenwerte und hermitesche Matrixdarstellungen.
+\end{DEF}
+
+\begin{CONC}{QM-G25-05-10}{Physikalische Bedeutung selbstadjungierter Operatoren}
+In der Quantenmechanik entsprechen alle Observablen selbstadjungierten Operatoren, insbesondere:
+- Hamilton-Operator $\mathbf{H}$
+
+- Ortsoperator $\mathbf{x}$
+
+- Impulsoperator $\mathbf{p}$
+
+Dies garantiert reale Messwerte.
+\end{CONC}
+
+\begin{DEF}{QM-G25-05-11}{Unitärer Operator}
+Ein Operator $U$ heißt unitär, wenn
+\[
+U^+ = U^{-1}, \quad \Rightarrow \quad U^+ U = UU^+ = \mathbb{I}.
+\]
+Unitäre Operatoren erhalten das Skalarprodukt:
+\[
+(U u_1, U u_2) = (u_1, u_2).
+\]
+Beispiele: Orthogonale Transformationen, Zeitentwicklungsoperator.
+\end{DEF}
+
+\subsection{Korrespondenzprinzip}
+
+\begin{DEF}{QM-G25-07-01}{Ortsoperator als linearer Multiplikation-Operator}
+Der lineare Multiplikations-Operatore
+$$
+\mathbf{Q}_{j}: \quad \mathbf{Q}_{j} \psi=x_{j} \psi, \quad j=1,2,3
+$$
+wird Ortsoperator genannt.
+\end{DEF}
+
+\begin{DEF}{QM-G25-07-02}{Ortsoperator als linearer Multiplikation-Operator}
+Der lineare Multiplikations-Operatore
+$$
+\mathbf{Q}_{j}: \quad \mathbf{Q}_{j} \psi=x_{j} \psi, \quad j=1,2,3
+$$
+wird Ortsoperator genannt.
+\end{DEF}
+
+\begin{DEF}{QM-G25-07-03}{Impulsoperator als linearer Differential-Operator}
+Der linearen Differential-Operator
+$$
+\mathbf{P}_{j}: \quad \mathbf{P}_{j} \psi=\frac{\hbar}{i} \partial_{j} \psi, \quad j=1,2,3
+$$
+wird Impulsoperator genannt.
+\end{DEF}
+
+\begin{CONC}{QM-G25-07-04}{Schrödinger-Operator als Funktion von Orts- und Impulsoperator}
+Der Schrödinger-Operator
+$$
+\mathbf{H}=-\frac{\hbar^{2}}{2 m_{e}} \Delta+V(\vec{x})
+$$
+ist ein linearer Operator im Raum der Wellenfunktionen $\psi(\vec{x}, t)$. Er ist mit
+$$
+\mathbf{H}=\mathbf{H}(\overrightarrow{\mathbf{P}}, \overrightarrow{\mathbf{Q}})=\frac{1}{2 m} \overrightarrow{\mathbf{P}}^{2}+V(\overrightarrow{\mathbf{Q}})
+$$
+eine Funktion des Orts- und des Impulsoperators.
+\end{CONC}
+
+\begin{CONC}{QM-G25-07-05}{Vertauschungsrelationen von Komponenten der Orts- und Impuls-Operatoren}
+Die Operatoren $\mathbf{P}_{j}$ und $\mathbf{Q}_{k}$ genügen den Vertauschungs-Relationen:
+$$
+\begin{aligned}
+\mathbf{P}_{j} \mathbf{Q}_{k}-\mathbf{Q}_{k} \mathbf{P}_{j} & =\frac{\hbar}{i} \delta_{j k} \\
+\mathbf{P}_{j}\left(\mathbf{Q}_{k} \psi\right)-\mathbf{Q}_{k}\left(\mathbf{P}_{j} \psi\right) & =\left\{\begin{array}{rll}
+\frac{\hbar}{i} \psi & \text { für } & j=k \\
+0 & \text { für } & j \neq k
+\end{array}\right.
+\end{aligned}
+$$
+\end{CONC}
+
+\begin{CONC}{QM-G25-07-06}{Schrödinger-Operator als Hamilton-Operator}
+Der Schrödinger Operator ist eine Funktion von Impuls und Ort, genau wie die HamiltonFunktion der klassischen Mechanik. Daher wird er auch Hamilton-Operator genannt.
+\end{CONC}
+
+\begin{CONC}{QM-G25-07-07}{Quantisierung der Hamilton-Mechanik und das Korrespondenzprinzip}
+Der Übergang von der Hamilton-Mechanik zur Quantenmechanik bezeichnet man auch als Quantisierung. Dabei geht man von den "kanonisch konjungierten" Variablen $q_{i}$ und $p_{i}$ (Ort und Impuls) der Hamilton-Mechanik aus. Es gelten die folgende Äquivalenzen:
+\[
+\begin{array}{rlrl}
+ &\textbf{Mechanik} & &\textbf{Quantenmechanik} \\
+1. & \text{Phasenraum} & & \text{Hilbertraum} \\
+2. & A(q_i, p_i) & & \text{Operator } \hat{A} \\
+4. & \text{Hamiltonfunktion } H & & \text{Hamiltonoperator } \hat{H} \\
+5. & q_i, p_i & & \text{Operatoren } \hat{q}_i, \hat{p}_i \\
+6. & \{A, B\} & & [\hat{A}, \hat{B}] = \hat{A} \hat{B} - \hat{B} \hat{A} \\
+7. & \{q_i, p_j\} = \delta_{ij} & & [\hat{q}_i, \hat{p}_j] = i\hbar \delta_{ij} \\
+8. & \dfrac{dA}{dt} = \dfrac{\partial A}{\partial t} + \{A, H\}
+   & & i\hbar \dfrac{d \hat{A}}{dt} = i\hbar \dfrac{\partial \hat{A}}{\partial t} + [\hat{A}, \hat{H}]
+\end{array}
+\]
+Dabei bezeichnet
+$$
+\{\varphi, \psi\}=\sum_{i}\left(\frac{\partial \varphi}{\partial q_{i}} \frac{\partial \psi}{\partial p_{i}}-\frac{\partial \varphi}{\partial p_{i}} \frac{\partial \psi}{\partial q_{i}}\right)
+$$
+die Poisson-Klammer $\{\varphi, \psi\}$. Die obrige Tabelle beschreibt das sogenannte "Korrespondenzprinzip". Insbesondere sieht man aus Punkt 7. und 8., dass der klassische Grenzfall $\hbar \rightarrow 0$ erfüllt ist.
+\end{CONC}
+
+\subsection{Interpretation der Wellenfunktion}
+
+\begin{REM}{QM-G25-08-01}{Setting $E=\frac{1}{2} \vec{p}^{2}+V_{0}$}
+Es sei klassisch $E=\frac{1}{2} \vec{p}^{2}+V_{0}$, mit $V_{0}=$ const. Da die Normierung der Energie (d.h. $V_{0}$ ) willkürlich ist, kann die Frequenz $\omega=E / \hbar$ selbst keine physikalische Bedeutung haben, wohl aber Differenzen, wie $\omega_{12}=\left(E_{2}-E_{1}\right) / \hbar$.
+\end{REM}
+
+\begin{DEF}{QM-G25-08-02}{Wahrscheinlichkeitsdichte zu einer Wellenfunktion}
+Die Wellenfunkion $\psi(\vec{x}, t)$ ist folgendermaßen zu verstehen
+Die Größe
+$$
+w(\vec{x}, t)=|\psi(\vec{x}, t)|^{2}=\psi^{*}(\vec{x}, t) \psi(\vec{x}, t)
+$$
+ist eine Wahrscheinlichkeitsdichte. Die Wahrscheinlichkeit $w(G, t)$ ein Teilchen zur Zeit $t$ im Gebiet $G \subset \mathbb{R}^{3}$ zu finden, ist entsprechend durch
+$$
+w(G, t)=\int_{G} d^{3} x w(\vec{x}, t)
+$$
+gegeben.
+\end{DEF}
+
+\begin{CONC}{QM-G25-08-03}{Normierung-Forderungen an Wellenfunktionen}
+Da das Teilchen irgendwo sein muß, muss die Wellenfunktion normiert sein:
+$$
+w\left(\mathbb{R}^{3}, t\right)=1
+$$
+Dies ist eine zusätzliche Bedingung an die Lösungen der Schrödinger-Gleichung: Es sind nur quadrat-integrable Lösungen zugelassen,
+$$
+\int_{\mathbb{R}^{3}} d^{3} x|\psi|^{2}<\infty
+$$
+Diese Normierung läßt sich i.A. durch eine einfache Reskalierung der Wellenfunktion erreichen. Falls
+$$
+\int_{\mathbb{R}^{3}} d^{3} x|\psi|^{2}=N^{2}<\infty
+$$
+so ist mit $\psi(\vec{x}, t)$ auch
+$$
+\frac{1}{|N|} \psi(\vec{x}, t)
+$$
+eine Lösung der Schrödinger - Gleichung, da diese linear ist. Also läßt sich durch Umnormierung immer $\int_{\mathbb{R}^{3}} d^{3} x|\psi|^{2}=1$ erreichen.
+\end{CONC}
+
+\begin{CONC}{QM-G25-08-04}{Normierung-Forderungen an Wellenfunktionen}
+Da das Teilchen irgendwo sein muß, muss die Wellenfunktion normiert sein:
+$$
+w\left(\mathbb{R}^{3}, t\right)=1
+$$
+Dies ist eine zusätzliche Bedingung an die Lösungen der Schrödinger-Gleichung: Es sind nur quadrat-integrable Lösungen zugelassen,
+$$
+\int_{\mathbb{R}^{3}} d^{3} x|\psi|^{2}<\infty
+$$
+Diese Normierung läßt sich i.A. durch eine einfache Reskalierung der Wellenfunktion erreichen. Falls
+$$
+\int_{\mathbb{R}^{3}} d^{3} x|\psi|^{2}=N^{2}<\infty
+$$
+so ist mit $\psi(\vec{x}, t)$ auch
+$$
+\frac{1}{|N|} \psi(\vec{x}, t)
+$$
+eine Lösung der Schrödinger - Gleichung, da diese linear ist. Also läßt sich durch Umnormierung immer $\int_{\mathbb{R}^{3}} d^{3} x|\psi|^{2}=1$ erreichen.
+\end{CONC}
+
+\begin{EXA}{QM-G25-08-05}{Normierungsfaktor des 1d Gauß'schen Wellenpakets}
+In Abschnitt 1.1.1 haben wir eindimensionale Gauß'sche Wellenpakte behandelt. In drei Dimensionen gilt analog:
+$$
+\psi_{G}(\vec{x}, t) \approx A_{G}(\vec{x}, t) e^{-i(\omega t-\vec{x} \cdot \vec{k})}, \quad\left|A_{G}(\vec{x}, t=0)\right|^{2}=\left(\frac{\pi}{\alpha}\right)^{3} e^{-\vec{x}^{2} /(2 \alpha)}
+$$
+wenn wir uns für die Normierung zunächst auf $t=0$ beschränken. Aus $\int d y e^{-y^{2} /(2 \alpha)}=$ $\sqrt{2 \pi \alpha}$ folgt
+$$
+\int d^{3} x\left|A_{G}(\vec{x}, t=0)\right|^{2}=\left(\frac{\pi}{\alpha}\right)^{3}(2 \pi \alpha)^{\frac{3}{2}}=N^{2}
+$$
+für die Norm. Demnach erhält man
+$$
+\begin{aligned}
+\psi_{G}(\vec{x}, t=0) & =(2 \pi \alpha)^{-3 / 4} e^{-\vec{x}^{2} /(4 \alpha)} e^{i \vec{k} \cdot \vec{x}} \\
+w(\vec{x}, t=0) & =(2 \pi \alpha)^{-3 / 2} e^{-\vec{x}^{2} /(2 \alpha)}
+\end{aligned}
+$$
+für das normierte Wellenpaket, mit
+$$
+\int_{\mathbb{R}^{3}} d^{3} x w(\vec{x}, t=0)=1
+$$
+\end{EXA}
+
+\begin{CONC}{QM-G25-08-06}{Kontinuierliche Normierungsforderung}
+Falls die Schrödinger-Gleichung physikalisch sinnvoll sein soll, dann muss die Normierung der Wellenfunktion eine Konstante der Bewegung sein. Aus
+$$
+\int_{\mathbb{R}^{3}} d^{3} x w(\vec{x}, t=0)=1
+$$
+muss
+$$
+\int_{\mathbb{R}^{3}} d^{3} x w(\vec{x}, t)=1
+$$
+für alle Zeiten folgern.
+\end{CONC}
+
+\begin{DEF}{QM-G25-08-07}{Wahrscheinlichkeit-Strom-Dichte}
+Die Wahrscheinlichkeits-Strom-Dichte $\vec{s}$ einer Wellenfunktion ist gegeben durch:
+$$
+\vec{s}:=\frac{\hbar}{2 m i}\left(\psi^{*} \operatorname{grad} \psi-\psi \operatorname{grad} \psi^{*}\right)
+$$
+\end{DEF}
+
+\begin{CONC}{QM-G25-08-08}{Herleitung der Kontinuitätsgleichung für reelle Potentiale}
+Zunächst gilt
+$$
+\partial_{t} w(\vec{x}, t)=\partial_{t}\left(\psi^{*}(\vec{x}, t) \psi(\vec{x}, t)\right)=\left(\partial_{t} \psi^{*}\right) \psi+\psi^{*}\left(\partial_{t} \psi\right)
+$$
+Die Schrödinger-Gleichung für $\psi$ und für $\psi^{*}$ ergibt:
+$$
+\partial_{t} \psi=\frac{1}{i \hbar}\left(-\frac{\hbar^{2}}{2 m_{e}} \Delta+V\right) \psi, \quad \partial_{t} \psi^{*}=-\frac{1}{i \hbar}\left(-\frac{\hbar^{2}}{2 m_{e}} \Delta+V\right) \psi^{*}
+$$
+da das Potential $V$ reell ist. Hieraus folgt
+$$
+\partial_{t} w(\vec{x}, t)=-\frac{\hbar}{2 m i}\left(\psi^{*} \Delta \psi-\left(\Delta \psi^{*}\right) \psi\right)
+$$
+Nun gilt allgemein
+$$
+f_{1} \Delta f_{2}-f_{2} \Delta f_{1}=\operatorname{div}\left(f_{1} \operatorname{grad} f_{2}-f_{2} \operatorname{grad} f_{1}\right)
+$$
+so daß wir mit mit der Definition
+$$
+\vec{s}:=\frac{\hbar}{2 m i}\left(\psi^{*} \operatorname{grad} \psi-\psi \operatorname{grad} \psi^{*}\right)
+$$
+für die Wahrscheinlichkeits-Strome-Dichte $\vec{s}$ die Kontinuitätsgleichung
+$$
+\partial_{t} w(\vec{x}, t)+\operatorname{div} \vec{s}(\vec{x}, t)=0
+$$
+erhalten, mit
+$$
+\begin{aligned}
+w(\vec{x}, t) & =|\psi(\vec{x}, t)|^{2} \\
+\vec{s}(\vec{x}, t) & =\frac{\hbar}{2 m i}\left(\psi^{*} \operatorname{grad} \psi-\psi \operatorname{grad} \psi^{*}\right)(\vec{x}, t)
+\end{aligned}
+$$
+\end{CONC}
+
+\begin{CONC}{QM-G25-08-09}{Reelle Wellenfunktionen transportieren keinen Strom}
+Reelle Wellenfunktionen können keinen Strom transportieren. Kontinuitätsgleichungen gibt es überall dann in der Physik, wenn es dynamische Erhaltungsgrössen gibt, wie die Anzahl Teilen oder, wie hier, die Normierung.
+\end{CONC}
+
+\begin{PROP}{QM-G25-08-10}{Lösungen der Kontinuitätsgleichung erhalten Normierung}
+Aus der Kontinuitätgleichung folgt die Erhaltung der Normierung.
+\end{PROP}
+
+\begin{PROOF}{QM-G25-08-11}{P: Lösungen der Kontinuitätsgleichung erhalten Normierung}
+Bezeichnen wir mit $K(a)$ eine Vollkugel vom Radius $a$ und mit $\partial K(a)$ ihre Oberfläche, so erhalten wir unter Verwendung der Kontinuitätgleichung und des Gauß'schen Satzes: 
+$$
+\begin{aligned}
+\partial_{t} \int_{\mathbb{R}^{3}} d^{3} x w(\vec{x}, t)=\int_{\mathbb{R}^{3}} d^{3} x \partial_{t} w(\vec{x}, t) & =-\int_{\mathbb{R}^{3}} d^{3} x \operatorname{div} \vec{s}(\vec{x}, t) \\
+& =-\lim _{a \rightarrow \infty} \int_{\partial K(a)} d^{2} \vec{f} \cdot \vec{s}(\vec{x}, t)
+\end{aligned}
+$$
+wobei $d^{2} \vec{f}$ das gerichtete Oberflächenelement ist. Wir transformieren auf Kugelkoordinaten:
+$$
+\int_{\mathbb{R}^{3}} d^{3} x w(\vec{x}, t)=\int_{0}^{\infty} r^{2} d r \int d \Omega w(\vec{x}, t), \quad r=|\vec{x}|
+$$
+Die Normierbarkeit $\int_{\mathbb{R}^{3}} d^{3} x w(\vec{x}, t)<\infty$ ist gewährleistet, falls
+$$
+\lim _{r \rightarrow \infty} \int d \Omega w(\vec{x}, t) \sim \frac{1}{|\vec{x}|^{3+\epsilon}}, \quad \epsilon>0
+$$
+bzw.
+$$
+\lim _{r \rightarrow \infty}|\psi(\vec{x}, t)| \sim \frac{1}{|\vec{x}|^{3 / 2+\epsilon}}
+$$
+Hieraus folgt (Für den rotations-symmetrischen Fall hat man $\psi=1 /|\vec{x}|^\alpha$, mit $\operatorname{grad} \psi=-\vec{x} /|\vec{x}|^{\alpha+1}$, also $|\operatorname{grad} \psi|=$ $1 /|\vec{x}|^\alpha$, was aus $|\vec{x}|=\sqrt{x^2+y^2+z^2}$ folgt.):
+$$
+|\operatorname{grad} \psi| \sim \frac{1}{|\vec{x}|^{3 / 2+\epsilon}}, \quad \quad|\vec{s}(\vec{x}, t)| \sim \frac{1}{r^{3+\epsilon}}
+$$
+Das heißt wiederum
+$$
+\lim _{a \rightarrow \infty} \int_{\partial K(a)} d^{2} \vec{f} \cdot \vec{s}(\vec{x}, t)=0
+$$
+und somit
+$$
+\partial_{t} \int_{\mathbb{R}^{3}} d^{3} x w(\vec{x}, t)=0
+$$
+was es zu beweisen galt.
+\end{PROOF}
+
+\begin{EXA}{QM-G25-08-12}{Wahrscheinlichkeits-Strom-Dichte des 1d Gauß'schen Wellenpakets}
+Für ein Gauß'sches Wellenpaket mit der normierte Normalverteilung
+$$f(x)=\frac{1}{\sqrt{2 \pi \sigma^{2}}} e^{-\frac{(x-\mu)^{2}}{2 \sigma^{2}}}$$
+folgt, dass man aus
+$$
+\psi_{G}(\vec{x}, t=0)=(2 \pi \alpha)^{-3 / 4} e^{-\vec{x}^{2} /(4 \alpha)} e^{i \vec{p}_{0} \cdot \vec{x} / \hbar}
+$$
+erhält
+$$
+\vec{s}(\vec{x}, t=0)=\frac{\vec{p}_{0}}{m} w(\vec{x}, t=0)=\vec{v}_{g} w(\vec{x}, t=0)
+$$
+für die Wahrscheinlichkeits-Stromdichte $\vec{s}=\left(\psi^{*} \nabla \psi-\psi \nabla \psi^{*}\right) \hbar /(2 m i)$. Die Wahrscheinlichkeitsdichte wird also mit der Gruppengeschwindigkeit $\vec{v}_{g}$ transportiert.
+
+\begin{itemize}
+  \item Reele Faktoren, wie $\exp \left(-\vec{x}^{2} /(4 \alpha)\right)$, tragen nicht zur Stromdichte bei.
+  \item Der Zusammenhang\\
+-Stromdichte ist gleich Geschwindigkeit mal Teilchendichtegilt allgemein. ${ }^{7}$
+\end{itemize}
+\end{EXA}
+
+\begin{EXA}{QM-G25-09-01}{Ebene Wellen erfüllen Kontinuitätsgleichung, sind aber nicht normierbar}
+Für eine ebene Welle
+$$
+\psi_{\mathbf{p}}(\vec{x}, t)=A e^{-i(E t-\vec{p} \cdot \vec{x}) / \hbar}, \quad A=\mathrm{const} .
+$$
+hat die Wahrscheinlichkeitsdichte $w(\vec{x}, t)$ und die Stromdichte $\vec{s}(\vec{x}, t)$ die Form
+$$
+\begin{aligned}
+w(\vec{x}, t) & =|A|^{2}=\text { const. } \\
+\vec{s}(\vec{x}, t) & =\frac{\vec{p}}{m}|A|^{2}
+\end{aligned}
+$$
+d.h. die Kontinuitätsgleichung $\partial_{t} w+\operatorname{div} \vec{s}=0$ ist erfüllt, die Wellenfunktion aber nicht normierbar:
+$$
+\int_{\mathbb{R}^{3}} d^{3} x w(\vec{x}, t)=|A|^{2} \int_{\mathbb{R}^{3}} d^{3} x \rightarrow \infty
+$$
+Ebene Wellen erstrecken sich bis ins Unendliche. Mehr hierzu später.
+\end{EXA}
+
+\begin{EXA}{QM-G25-09-02}{Ebene Wellen erfüllen Kontinuitätsgleichung, sind aber nicht normierbar}
+Für eine ebene Welle
+$$
+\psi_{\mathbf{p}}(\vec{x}, t)=A e^{-i(E t-\vec{p} \cdot \vec{x}) / \hbar}, \quad A=\mathrm{const} .
+$$
+hat die Wahrscheinlichkeitsdichte $w(\vec{x}, t)$ und die Stromdichte $\vec{s}(\vec{x}, t)$ die Form
+$$
+\begin{aligned}
+w(\vec{x}, t) & =|A|^{2}=\text { const. } \\
+\vec{s}(\vec{x}, t) & =\frac{\vec{p}}{m}|A|^{2}
+\end{aligned}
+$$
+d.h. die Kontinuitätsgleichung $\partial_{t} w+\operatorname{div} \vec{s}=0$ ist erfüllt, die Wellenfunktion aber nicht normierbar:
+$$
+\int_{\mathbb{R}^{3}} d^{3} x w(\vec{x}, t)=|A|^{2} \int_{\mathbb{R}^{3}} d^{3} x \rightarrow \infty
+$$
+Ebene Wellen erstrecken sich bis ins Unendliche. Mehr hierzu später.
+\end{EXA}
+
+\begin{DEF}{QM-G25-09-03}{Fouriertransformation von Lösungen der Schrödinger-Gleichung in Ort-Koordinate}
+Ist $\psi(\vec{x}, t)$ eine Lösung der Schrödinger-Gleichung (allgemine, d.h. mit Potential $V(\vec{x})$ ), so können wir bezüglich $\vec{x}$ Fourier-transformieren:
+$$
+\psi(\vec{x}, t)=\int \frac{d^{3} k}{(2 \pi)^{3}} \tilde{\psi}(\vec{k}, t) e^{i \vec{k} \cdot \vec{x}}, \quad \vec{p}=\hbar \vec{k}
+$$
+Die Umkehr-Funktion ist
+$$
+\tilde{\psi}(\vec{k}, t):=\int d^{3} x \psi(\vec{x}, t) e^{-i \vec{k} \cdot \vec{x}}
+$$
+denn
+$$
+\begin{aligned}
+\tilde{\psi}(\vec{k}, t) & =\int d^{3} x e^{-i \vec{k} \cdot \vec{x}} \int \frac{d^{3} k^{\prime}}{(2 \pi)^{3}} \tilde{\psi}\left(\overrightarrow{k^{\prime}}, t\right) e^{i \overrightarrow{k^{\prime}} \cdot \vec{x}} \\
+& =\int \frac{d^{3} k^{\prime}}{(2 \pi)^{3}} \underbrace{\int d^{3} x e^{-i\left(\vec{k}-\vec{k}^{\prime}\right) \cdot} \vec{x}}_{(2 \pi)^{3} \delta\left(\vec{k}-\vec{k}^{\prime}\right)} \tilde{\psi}\left(\overrightarrow{k^{\prime}}, t\right)
+\end{aligned}
+$$
+wobei sich $\int d x e^{-i q x}=(2 \pi) \delta(q)$ durch einen Grenzübergang beweisen lässt. Man betrachte den Limes $\epsilon \rightarrow 0$ von $\int_{-\infty}^{\infty} d x e^{-i q x-\epsilon|x|}=2 \epsilon /\left(q^{2}+\epsilon^{2}\right)$, welches zu $2 \pi \delta(q)$ wird.
+\end{DEF}
+
+\begin{DEF}{QM-G25-09-04}{Wahrscheinlichkeitsdichte im Impulsraum}
+Setzen wir die Fourierdarstellung für $\psi(\vec{x}, t)$ in die Normierungsbedingung
+$$
+\int d^{3} x \psi^{*}(\vec{x}, t) \psi(\vec{x}, t)=1
+$$
+ein, so erhalten wir
+$$
+\begin{aligned}
+1 & =\int d^{3} x \psi^{*}(\vec{x}, t) \int \frac{d^{3} k}{(2 \pi)^{3}} \tilde{\psi}(\vec{k}, t) e^{i \vec{k} \cdot \vec{x}} \\
+& =\int \frac{d^{3} k}{(2 \pi)^{3}} \tilde{\psi}(\vec{k}, t) \int d^{3} x\left(\psi(\vec{x}, t) e^{-i \vec{k} \cdot \vec{x}}\right)^{*}
+\end{aligned}
+$$
+also
+$$
+1=\int \frac{d^{3} k}{(2 \pi)^{3}} \tilde{\psi}(\vec{k}, t) \tilde{\psi}^{*}(\vec{k}, t)
+$$
+
+Damit kann man, analog zu $w(\vec{x}, t)$, die Grösse
+$$
+\tilde{w}(\vec{k}, t)=|\tilde{\psi}(\vec{k}, t)|^{2}
+$$
+als Wahrscheinlichkeitsdichte im Impulsraum interpretieren.
+
+Bemerkung: $\tilde{w}(\vec{k}, t)$ ist nicht die Fourier-Transformierte von $w(\vec{x}, t)$.
+\end{DEF}
+
+\begin{DEF}{QM-G25-10-01}{Erwartungswert}
+Es seien $a_{1}, a_{2}, \ldots$ die möglichen Meßwerte einer Größe $A$. Die Wahrscheinlichkeit, bei einer Messung den Wert $a_{\nu}$ zu finden, sei $w_{\nu}$, wobei $\sum_{\nu} w_{\nu}=1$. Dann definiert man als Mittel- bzw. Erwartungswert von A die Zahl
+$$
+\bar{A} \equiv\langle A\rangle=\sum_{\nu=1} a_{\nu} w_{\nu}
+$$
+\end{DEF}
+
+\begin{DEF}{QM-G25-10-02}{Erwartungswert des Ortsoperators zur Zeit $t$}
+Analog definiert man als Erwartungswert (zur Zeit $t$ ) der Ortskoordinate $x_{j}, j=1,2,3$ :
+$$
+\left\langle\mathbf{Q}_{j}\right\rangle(t)=\int d^{3} x x_{j} w(\vec{x}, t)
+$$
+\end{DEF}
+
+\begin{DEF}{QM-G25-10-03}{Erwartungswert des Impulsoperators im Impuls und Ortsraum}
+Der Erwartungswerte des Impulsopertors ist via
+$$
+\langle\overrightarrow{\mathbf{P}}\rangle=\int \frac{d^{3} k}{(2 \pi)^{3}} \hbar \vec{k} \tilde{w}(\vec{k}, t)=\int d^{3} x \psi^{*}(\vec{x}, t)\left(\frac{\hbar \nabla_{x}}{i}\right) \psi(\vec{x}, t)
+$$
+sowohl im Impuls- wie im Ortsraum definiert, denn
+$$
+\begin{aligned}
+\langle\overrightarrow{\mathbf{P}}\rangle & =\int d^{3} x \int \frac{d^{3} k^{\prime}}{(2 \pi)^{3}} \tilde{\psi}^{*}\left(\overrightarrow{k^{\prime}}, t\right) e^{-i \overrightarrow{k^{\prime}} \cdot \vec{x}\left(\frac{\hbar \nabla_{x}}{i}\right)} \int \frac{d^{3} k}{(2 \pi)^{3}} \tilde{\psi}(\vec{k}, t) e^{i \vec{k} \cdot \vec{x}} \\
+& =\int \frac{d^{3} k^{\prime}}{(2 \pi)^{3}} \int \frac{d^{3} k}{(2 \pi)^{3}} \hbar \vec{k} \underbrace{\int d^{3} x e^{i\left(\vec{k}-\vec{k}^{\prime}\right)} \cdot \vec{x}}_{(2 \pi)^{3} \delta\left(\vec{k}-\vec{k}^{\prime}\right)} \tilde{\psi}^{*}\left(\vec{k}^{\prime}, t\right) \tilde{\psi}(\vec{k}, t)
+\end{aligned}
+$$
+\end{DEF}
+
+\begin{REM}{QM-G25-10-04}{Erwartungswert in Basisdarstellung}
+Allgemein können wir im Funktionenraum eine orthogonal Basis $\varphi_{\nu}(\vec{x})$ wählen, so dass
+
+$$
+\psi(\vec{x})=\sum_{n} c_{n} \varphi_{n}(\vec{x}), \quad \int d^{3} x \varphi_{n}^{*}(\vec{x}) \varphi_{m}(\vec{x})=\delta_{n, m}
+$$
+
+Beispiele für die $\varphi_{n}(\vec{x})$ sind ebene Wellen und Kugelfunktionen, später Näheres hierzu. Der Erwartungswert $\bar{A}$ lässt sich dann als
+
+$$
+\bar{A}=\sum_{\nu} a_{\nu} w_{n}=\sum_{\nu} a_{\nu}\left|c_{\nu}\right|^{2}
+$$
+
+schreiben, denn $c_{\nu}^{2}$ enspricht der Wahrscheinlichkeit das Teilchen $\psi(\vec{x})$ im Zustand $\varphi_{\nu}(\vec{x})$ zu finden. Die Vorraussetzung für diese Beziehung ist allerdings, dass die nicht-diagonalen Matrixelemente $\int d^{3} x \varphi_{n}^{*}(\vec{x}) A \varphi_{m}(\vec{x})$ verschwinden, also für $n \neq m$. Auch hierzu Nähers später.
+\end{REM}
+
+\begin{DEF}{QM-G25-10-05}{Varianz eines Operators}
+Hat $A$ die Meßwerte $a_{1}, a_{2}, \ldots$ und den Mittelwert $\langle A\rangle$, so definiert man als mittleres Schwankungsquadrat $(\Delta A)^{2}, \Delta A=\sqrt{(\Delta A)^{2}}$ die Größe
+$$
+\begin{aligned}
+(\Delta A)^{2} & =\sum_{\nu=1}^{n}\left(a_{\nu}-\langle A\rangle\right)^{2} w_{\nu} \\
+& =\sum_{\nu=1}^{n}\left(a_{\nu}^{2}-2\langle A\rangle a_{\nu}+\langle A\rangle^{2}\right) w_{\nu} \\
+& =\sum_{\nu=1}^{n} a_{\nu}^{2} w_{\nu}-\langle A\rangle^{2}=\left\langle A^{2}\right\rangle-\langle A\rangle^{2} \geq 0
+\end{aligned}
+$$
+\end{DEF}
+
+\begin{DEF}{QM-G25-10-06}{Varianz eines Operators}
+Hat $A$ die Meßwerte $a_{1}, a_{2}, \ldots$ und den Mittelwert $\langle A\rangle$, so definiert man als mittleres Schwankungsquadrat $(\Delta A)^{2}, \Delta A=\sqrt{(\Delta A)^{2}}$ die Größe
+$$
+\begin{aligned}
+(\Delta A)^{2} & =\sum_{\nu=1}^{n}\left(a_{\nu}-\langle A\rangle\right)^{2} w_{\nu} \\
+& =\sum_{\nu=1}^{n}\left(a_{\nu}^{2}-2\langle A\rangle a_{\nu}+\langle A\rangle^{2}\right) w_{\nu} \\
+& =\sum_{\nu=1}^{n} a_{\nu}^{2} w_{\nu}-\langle A\rangle^{2}=\left\langle A^{2}\right\rangle-\langle A\rangle^{2} \geq 0
+\end{aligned}
+$$
+\end{DEF}
+
+\begin{CONC}{QM-G25-10-07}{Heisenberg'sche Unschärferelation in Varianz von Ort und Impuls-Operator}
+Zwischen der Varianz des Impulses und des Ortes, $\Delta p_{j}$ und $\Delta x_{j}$, besteht die Heisenberg'sche Unschärfe-Relation,
+$$
+\left(\Delta x_{j}\right) \cdot\left(\Delta p_{j}\right) \geq \frac{1}{2} \hbar
+$$
+welche wir später allg. beweisen werden. Bei einem quantenmechanischen System lassen sich Orts- und Impulsvariable also nie gleichzeitig beliebig scharf messen. Dem Produkt der Unschärfen ist durch die Relation $\left(\Delta x_{j}\right) \cdot\left(\Delta p_{j}\right) \geq \hbar / 2$ eine untere Schranke gesetzt.
+\end{CONC}
+
+\end{document}

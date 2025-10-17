@@ -1,0 +1,19 @@
+{
+  "score": 0.6,
+  "verdict": "Teilweise korrekt, aber unvollständig und fehlerhaft.",
+  "weaknesses": [
+    {
+      "code": "incorrect_hamiltonian",
+      "msg": "Die Definition des Hamiltonians ist falsch. Der korrekte Ausdruck ist H(x, p) = p \\\\dot{x} - L(x, \\\\dot{x}) mit \\\\dot{x} als Funktion von x und p."
+    },
+    {
+      "code": "missing_derivation",
+      "msg": "Die Herleitung der Hamiltonschen Gleichungen ist unvollständig und fehlerhaft. Die korrekten Gleichungen sind \\\\dot{x} = \\\\frac{\\\\partial H}{\\\\partial p} und \\\\dot{p} = -\\\\frac{\\\\partial H}{\\\\partial x}."
+    }
+  ],
+  "fix_suggestions": [
+    "Korrigiere die Definition des Hamiltonians.",
+    "Führe die korrekte Herleitung der Hamiltonschen Gleichungen durch.",
+    "Verwende die korrekten Ausdrücke für die Ableitungen von H."
+  ]
+}

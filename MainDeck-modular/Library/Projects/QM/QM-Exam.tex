@@ -1,0 +1,559 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{braket}
+\usepackage{enumitem}
+\setlist[enumerate,1]{label=\textbf{\arabic*.},leftmargin=*,itemsep=.7em}
+\setlist[enumerate,2]{label=(\alph*),leftmargin=1.4em,itemsep=.3em}
+
+\title{Klausur — Quantenmechanik}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\noindent\textbf{Name:} \rule{0.6\linewidth}{0.4pt}\hfill\textbf{Matr.-Nr.:} \rule{0.25\linewidth}{0.4pt}
+
+\vspace{1em}
+
+\begin{enumerate}
+
+%---------------------- 1 ----------------------
+\item \textbf{Geladenes Teilchen im Magnetfeld}\\
+Ein Teilchen der Masse \(m\) und Ladung \(q\) bewege sich in einem magnetischen Vektorpotential \(\mathbf A(\mathbf r)\).
+\begin{enumerate}
+  \item Zeigen Sie, dass dieses System (in geeigneten Koordinaten/Eichungen) durch einen harmonischen Oszillator beschrieben werden kann.
+  \item Bestimmen Sie die Energieeigenwerte des Systems.
+\end{enumerate}
+
+%---------------------- 2 ----------------------
+\item \textbf{Komplexes \(\delta\)-Potential}\\
+Betrachten Sie das eindimensionale Potential
+\[
+V(x) = \bigl(\alpha + \mathrm i\,\gamma\bigr)\,\delta(x)\,,
+\]
+wobei \(\alpha,\gamma\in\mathbb R\).
+\begin{enumerate}
+  \item Begründen Sie physikalisch, wie der Ansatz der Wellenfunktion für die Streuung an \(x=0\) aussehen muss.
+  \item Bestimmen Sie Reflexions- und Transmissionskoeffizient \(R\) und \(T\).
+  \item Gilt \(R+T=1\)? Falls nein, warum nicht?
+\end{enumerate}
+
+%---------------------- 3 ----------------------
+\item \textbf{Zeitentwicklung im unendlichen Potentialkasten}\\
+Ein Teilchen befinde sich im unendlichen Potentialkasten mit \(V(x)=0\) für \(0<x<L\) und \(V(x)=\infty\) sonst. Der Anfangszustand sei
+\[
+\psi(x,0) \;=\; \Bigl[\sin\!\Bigl(\tfrac{2\pi x}{L}\Bigr) + \cos\!\Bigl(\tfrac{3\pi x}{L}\Bigr)\Bigr]\,
+\sin\!\Bigl(\tfrac{\pi x}{L}\Bigr).
+\]
+\begin{enumerate}
+  \item Bestimmen Sie die zum Zeitpunkt \(t=0\) sowie zum Zeitpunkt \(t>0\) möglichen messbaren Energien (Eigenwerte) und die zugehörigen Wahrscheinlichkeiten.
+  \item Berechnen Sie den Erwartungswert der Energie \(\langle H\rangle(t)\) sowie die Energieunschärfe \(\Delta E(t)\) zum Zeitpunkt \(t\).
+  \item Wie müssen die Erwartungswerte \(\langle x\rangle(t)\) und \(\langle p\rangle(t)\) qualitativ aussehen?
+\end{enumerate}
+
+%---------------------- 4 ----------------------
+\item \textbf{Endlich-dimensionaler Operator}\\
+Es sei
+\[
+H \;=\; \varepsilon\,\mathbb I \;+\; \lambda\,(A + A^\dagger),\qquad
+A \;=\; \ket{2}\!\bra{1} + \ket{1}\!\bra{2} + \ket{2}\!\bra{3}.
+\]
+% Hinweis: So wie definiert ist A nicht unitär (AA^\dagger \neq \mathbb I). Die Teilaufgabe (a) ist in dieser Form widersprüchlich.
+\begin{enumerate}
+  \item Zeigen Sie, dass \(A\) unitär ist und dass \(A\) mit \(H\) kommutiert.
+  \item Bestimmen Sie die Eigenwerte und Eigenvektoren von \(H\).
+\end{enumerate}
+
+%---------------------- 5 ----------------------
+\item \textbf{Drehimpuls mit Querfeld}\\
+Gegeben sei
+\[
+H \;=\; H_0 + H_1,\qquad
+H_0 \;=\; a\,\mathbf L^2 + b\,L_z,\qquad
+H_1 \;=\; c\,L_x,
+\]
+mit Konstanten \(a,b,c\in\mathbb R\) und den üblichen Drehimpulsoperatoren \(\mathbf L^2, L_x, L_z\).
+\begin{enumerate}
+  \item Bestimmen Sie die Energieeigenwerte und Eigenzustände von \(H_0\).
+  \item Berechnen Sie die Störung der Energie zur führenden Ordnung in \(c\).
+  \item Definieren Sie einen geeigneten neuen Operator \(J\) und berechnen Sie den exakten Wert der Energiekorrektur.
+\end{enumerate}
+
+\end{enumerate}
+
+\vfill
+\noindent\textit{Hinweis:} Sofern nicht anders angegeben, dürfen Sie \(\hbar\) explizit mitführen (keine natürlichen Einheiten).
+
+
+
+
+\pagebreak
+
+
+\title{Klausur — Quantenmechanik (Variante A)}\author{}\date{}
+
+\noindent\textbf{Name:} \rule{0.6\linewidth}{0.4pt}\hfill\textbf{Matr.-Nr.:} \rule{0.25\linewidth}{0.4pt}
+\vspace{1em}
+\begin{enumerate}
+
+\item \textbf{Landau-Niveaus, Eichfreiheit}\\
+Ein geladenes Teilchen (\(q,m\)) bewege sich in homog. \(\mathbf B=B\,\mathbf e_z\).
+\begin{enumerate}
+  \item Zeigen Sie in der Landau-Eichung \(\mathbf A=(0,Bx,0)\), dass \(H\) einem 1D-Oszillator in \(x\) mit Frequenz \(\omega_c=|q|B/m\) entspricht (bis auf freie Bewegung in \(y\)).
+  \item Bestimmen Sie die Energieeigenwerte und die Entartung pro Flächeninhalt.
+  \item Skizzieren Sie kurz, warum das Ergebnis eichinvariant ist (Vergleich zur symmetrischen Eichung).
+\end{enumerate}
+
+\item \textbf{PT-symmetrisches Doppeldelta}\\
+Betrachten Sie
+\[
+V(x)=\alpha\bigl[\delta(x-a)+\delta(x+a)\bigr]+ i\gamma\bigl[\delta(x-a)-\delta(x+a)\bigr],\quad \alpha,\gamma\in\mathbb R.
+\]
+\begin{enumerate}
+  \item Geben Sie den allgemeinen Streuansatz für \(x< -a\), \(-a<x<a\), \(x>a\) an.
+  \item Bestimmen Sie die linearen Matching-Bedingungen an \(x=\pm a\).
+  \item Diskutieren Sie qualitativ, wann \(R+T\neq1\) wird, und wie sich dies im Wahrscheinlichkeitsstrom äußert.
+\end{enumerate}
+
+\item \textbf{Zeitentwicklung im endlichen Kasten \([0,L]\)}\\
+Der Anfangszustand sei
+\(\displaystyle \psi(x,0)=\mathcal N\,x(L-x)\).
+\begin{enumerate}
+  \item Bestimmen Sie die Fourier-Koeffizienten \(c_n=\braket{n|\psi(0)}\) der Kasten-Eigenzustände \(\phi_n(x)=\sqrt{\tfrac{2}{L}}\sin(\tfrac{n\pi x}{L})\).
+  \item Geben Sie \(\psi(x,t)\), die Wahrscheinlichkeiten \(p_n=|c_n|^2\) und \(\langle H\rangle,\Delta E\) an.
+  \item Diskutieren Sie qualitativ den zeitlichen Verlauf von \(\langle x\rangle(t)\) (Revival-Phänomene).
+\end{enumerate}
+
+\item \textbf{Dreistufiges System, entartete Störung}\\
+Es sei
+\[
+H=E_0\ket1\!\bra1+E_0\ket2\!\bra2+(E_0+\Delta)\ket3\!\bra3
++\lambda\bigl(\ket1\!\bra2+\ket2\!\bra1\bigr),
+\]
+mit \(\Delta>0\).
+\begin{enumerate}
+  \item Diagonalisieren Sie den entarteten Unterraum \(\mathrm{span}\{\ket1,\ket2\}\) und geben Sie Eigenwerte/-zustände von \(H\) an.
+  \item Fügen Sie eine schwache Kopplung \(\mu(\ket2\!\bra3+\ket3\!\bra2)\) hinzu. Bestimmen Sie die Energieverschiebungen bis zur führenden nichtverschwindenden Ordnung in \(\mu\) (Rayleigh-Schrödinger).
+\end{enumerate}
+
+\item \textbf{Spin-\(\tfrac12\) im schiefen Feld (exakt)}\\
+\[
+H=\frac{\hbar\Omega}{2}\bigl(\alpha\,\sigma_z+\beta\,\sigma_x\bigr),\quad \alpha^2+\beta^2=1.
+\]
+\begin{enumerate}
+  \item Bestimmen Sie Eigenwerte und normierte Eigenzustände von \(H\).
+  \item Für \(\rho(0)=\tfrac12(\mathbf1+m_0\sigma_z)\): Bestimmen Sie \(M^z(t)=\mathrm{Tr}\bigl[\rho(t)\tfrac{\hbar}{2}\sigma_z\bigr]\).
+  \item Geben Sie die Resonanzbedingung für maximale Präzession an und interpretieren Sie geometrisch auf der Bloch-Kugel.
+\end{enumerate}
+
+\end{enumerate}
+\vfill
+\noindent\textit{Hinweis:} \(\hbar\) nicht setzen, sofern nicht ausdrücklich erlaubt.
+
+
+\pagebreak
+
+\title{Klausur — Quantenmechanik (Variante B)}\author{}\date{}
+
+\noindent\textbf{Name:} \rule{0.6\linewidth}{0.4pt}\hfill\textbf{Matr.-Nr.:} \rule{0.25\linewidth}{0.4pt}
+\vspace{1em}
+\begin{enumerate}
+
+\item \textbf{Aharonov–Bohm-Ring}\\
+Teilchen auf einem Ring \(x\in[0,2\pi R)\) mit vektorieller Eichung \(\mathbf A\) so, dass der magnetische Fluss \(\Phi\) durch die Ringfläche geht.
+\begin{enumerate}
+  \item Zeigen Sie, dass die Eigenenergien \(E_n=\frac{\hbar^2}{2mR^2}\bigl(n-\Phi/\Phi_0\bigr)^2\) lauten (\(\Phi_0=h/q\)).
+  \item Diskutieren Sie die \(\Phi\)-Periodizität und Verschiebung der Niveaus.
+\end{enumerate}
+
+\item \textbf{Endliche Barriere, schwach absorptiv}\\
+Potential \(V(x)=V_0\,\Theta(x)\Theta(a-x)+ i\eta\,\Theta(x)\Theta(a-x)\), \(V_0>0\), \(0<\eta\ll V_0\).
+\begin{enumerate}
+  \item Stellen Sie \(R,T\) für \(\eta=0\) (Standardbarriere) dar.
+  \item Leiten Sie zu erster Ordnung in \(\eta\) die Korrektur an \(R+T\) her und interpretieren Sie sie über den Strom.
+\end{enumerate}
+
+\item \textbf{Zeitabhängige Störung (Dipol-Anregung)}\\
+1D-HO \(H_0=\hbar\omega(a^\dagger a+\tfrac12)\), Störung \(V(t)=-q E_0 x\, e^{-t^2/\tau^2}\cos(\Omega t)\).
+\begin{enumerate}
+  \item Bestimmen Sie \(c_{1}^{(1)}(+\infty)\) ausgehend von \(\ket{0}\) (erste Ordnung, Fermi’s golden rule im Puls-Limit).
+  \item Diskutieren Sie das Verhalten für \(\tau\to 0^+\) und \(\tau\to\infty\).
+\end{enumerate}
+
+\item \textbf{3×3-Hamiltonoperator (klar gestellt)}\\
+\[
+H=\varepsilon\,\mathbb I+\lambda\bigl(A+A^\dagger\bigr),\qquad
+A=\ket1\!\bra2+\ket2\!\bra1+\ket2\!\bra3+\ket3\!\bra2.
+\]
+\begin{enumerate}
+  \item Zeigen Sie, dass \(A\) hermitesch ist. Bestimmen Sie die Eigenwerte/Eigenvektoren von \(A\).
+  \item Geben Sie daraus das Spektrum von \(H\) an und skizzieren Sie die entstehenden Level-Abstände in Abhängigkeit von \(\lambda\).
+\end{enumerate}
+
+\item \textbf{Drehimpuls in schrägem Feld (exakt über Rotation)}\\
+\[
+H=a\,\mathbf L^2+b\,L_z+c\,L_x,\qquad a,b,c\in\mathbb R,\; \ell\in\mathbb N_0.
+\]
+\begin{enumerate}
+  \item Diagonalisieren Sie \(H\) exakt durch eine Rotation um die \(y\)-Achse (\(L_z\to L_{\hat n}\)).
+  \item Geben Sie die exakten Eigenwerte \(E_{\ell m}=a\,\ell(\ell+1)\hbar^2+\hbar\,m\sqrt{b^2+c^2}\) und die entsprechenden Eigenzustände an.
+\end{enumerate}
+
+\end{enumerate}
+\vfill
+\noindent\textit{Hinweis:} \(\hbar\) explizit mitführen.
+
+
+\pagebreak
+
+
+\title{Klausur — Quantenmechanik (Variante C)}
+\author{}\date{}
+
+\noindent\textbf{Name:} \rule{0.6\linewidth}{0.4pt}\hfill\textbf{Matr.-Nr.:} \rule{0.25\linewidth}{0.4pt}
+
+\vspace{1em}
+
+\begin{enumerate}
+
+%---------------------- 1 ----------------------
+\item \textbf{Ehrenfest-Theorem}\\
+Ein Teilchen bewege sich im Potential \(V(x)=\tfrac12 m \omega^2 x^2+\lambda x^3\).
+\begin{enumerate}
+  \item Formulieren Sie das Ehrenfest-Theorem für \(\langle x\rangle\) und \(\langle p\rangle\).
+  \item Leiten Sie die Bewegungsgleichung für \(\langle x\rangle(t)\) her. Diskutieren Sie den Unterschied zur klassischen Bewegungsgleichung.
+  \item Geben Sie an, in welchem Grenzfall die klassische Gleichung wiedergewonnen wird.
+\end{enumerate}
+
+%---------------------- 2 ----------------------
+\item \textbf{Heisenberg-Bild}\\
+Betrachten Sie den 1D-HO mit \(H=\hbar\omega\,(a^\dagger a+\tfrac12)\).
+\begin{enumerate}
+  \item Bestimmen Sie die Zeitentwicklung der Operatoren \(a(t),a^\dagger(t)\) im Heisenberg-Bild.
+  \item Berechnen Sie \(\hat x_H(t), \hat p_H(t)\) und den Kommutator \([\hat x_H(t),\hat x_H(t')]\).
+  \item Diskutieren Sie kurz, warum dieses Resultat die Unschärferelation reflektiert.
+\end{enumerate}
+
+%---------------------- 3 ----------------------
+\item \textbf{Variationsprinzip}\\
+Ein Teilchen im Potential \(V(x)=\tfrac12 m \omega^2 x^2\) werde mit dem Variationsansatz
+\[
+\psi_\alpha(x)=\bigl(\tfrac{\alpha}{\pi}\bigr)^{1/4}\exp\!\left(-\tfrac12\alpha x^2\right),\qquad \alpha>0,
+\]
+approximiert.
+\begin{enumerate}
+  \item Berechnen Sie den Erwartungswert \(\langle H\rangle(\alpha)\).
+  \item Bestimmen Sie das optimale \(\alpha\) und den zugehörigen Energie-Approximation.
+  \item Vergleichen Sie das Ergebnis mit der exakten Grundzustandsenergie.
+\end{enumerate}
+
+%---------------------- 4 ----------------------
+\item \textbf{Dichtematrix und gemischte Zustände}\\
+Eine Zweizustandsdichte­matrix sei gegeben durch
+\[
+\rho=\tfrac12\begin{pmatrix}1 & \eta \\ \eta^* & 1\end{pmatrix},\qquad |\eta|\leq 1.
+\]
+\begin{enumerate}
+  \item Bestimmen Sie die Eigenwerte von \(\rho\).
+  \item Unter welcher Bedingung beschreibt \(\rho\) einen reinen Zustand?
+  \item Berechnen Sie die Erwartungswerte \(\langle\sigma_x\rangle,\langle\sigma_y\rangle,\langle\sigma_z\rangle\) und interpretieren Sie diese geometrisch auf der Bloch-Kugel.
+\end{enumerate}
+
+%---------------------- 5 ----------------------
+\item \textbf{Zeitabhängige Störung, Übergangswahrscheinlichkeiten}\\
+Ein System mit Energieniveaus \(|0\rangle, |1\rangle\) (Abstand \(\hbar\omega_0\)) wird mit
+\[
+V(t)=\hbar\Omega\cos(\omega t)\,\bigl(\,|1\rangle\langle 0|+|0\rangle\langle 1|\,\bigr)
+\]
+gestört.
+\begin{enumerate}
+  \item Leiten Sie im Rahmen der zeitabhängigen Störungstheorie (1. Ordnung) den Ausdruck für die Übergangswahrscheinlichkeit \(P_{0\to 1}(t)\) her.
+  \item Diskutieren Sie die Resonanzbedingung \(\omega\approx\omega_0\) und die Rabi-Oszillationen.
+  \item Was passiert im Limes \(\omega\to 0\)?
+\end{enumerate}
+
+\end{enumerate}
+
+\vfill
+\noindent\textit{Hinweis:} \(\hbar\) explizit mitführen.
+
+
+
+\pagebreak
+
+
+\title{1. Klausur — Theoretische Physik IV}
+\author{SS 2006 — Prof. Dr. C. Gros}
+\date{26. Juni 2006}
+
+
+\noindent\textbf{Vorname:} \rule{0.4\linewidth}{0.4pt}\quad
+\textbf{Name:} \rule{0.4\linewidth}{0.4pt}\\[0.5em]
+\textbf{Geburtsdatum:} \rule{0.3\linewidth}{0.4pt}\quad
+\textbf{Geburtsort:} \rule{0.4\linewidth}{0.4pt}\\[0.5em]
+\textbf{Matrikelnummer:} \rule{0.5\linewidth}{0.4pt}
+
+\vspace{1em}
+\noindent pro Aufgabe 10 Punkte
+
+\begin{enumerate}
+
+\item \textbf{Wissensfragen}
+\begin{enumerate}
+  \item Was definiert einen linearen Operator?
+  \item Wie lautet die freie Schrödingergleichung im Impulsraum?
+  \item Welche Eigenwerte kann ein Projektionsoperator $P^2=P$ besitzen? Warum? (Beweis)
+  \item Was ist ein Hilbert-Raum?
+  \item Wie ist der Dichte-Operator definiert und wie lauten seine Eigenwerte?
+  \item Was ist die Spur des Dichteoperators und welchen Wert hat sie?
+  \item Worin unterscheidet sich ein reiner von einem gemischten Zustand?
+  \item Auf welche Weise verknüpft die Kontinuitätsgleichung Wahrscheinlichkeitsstrom und Wahrscheinlichkeitsdichte?
+  \item Wie ist ein unitärer Operator definiert?
+  \item Wie lauten die Eigenwerte eines ungestörten harmonischen Oszillators?
+\end{enumerate}
+
+\item \textbf{Potentialtopf}\\
+Ein Teilchen der Masse $m$ sei in einer Dimension in folgendem Potential gebunden:
+\[
+V(x)=\begin{cases}
+W\,\theta(x-a)-G\,\delta(x-a), & x\geq 0,\\
++\infty, & x<0.
+\end{cases}
+\]
+\begin{enumerate}
+  \item Setzen Sie die Lösung der Schrödingergleichung an und benutzen Sie die Rand- und Stetigkeitsbedingungen, um eine transzendente Gleichung für die Parameter dieser Lösung herzuleiten.
+  \item Nehmen Sie an, dass die Ableitung $\psi'(a^-)=0$ ist. Wann ist das der Fall? Zeigen Sie, dass dann
+  \[
+  \sqrt{\tfrac{2m}{\hbar^2}W - \tfrac{\pi^2}{4a^2}} = \tfrac{2m}{\hbar^2}G
+  \]
+  gilt, und bestimmen Sie die zugehörige Energie.
+\end{enumerate}
+
+\item \textbf{Mischung von Eigenzuständen}\\
+\begin{enumerate}
+  \item Konstruieren Sie eine Linearkombination von $u_n(x)$ und $u_{n+1}(x)$ (Eigenzustände des 1D-HO), so dass $\langle x\rangle$ minimal wird.
+  \item Berechnen Sie für diesen Zustand $\psi(t)$ und $\langle p(t)\rangle$.
+  \item Hinweis: verwenden Sie $Q=\alpha(a+a^\dagger)$, $P=i\gamma(a-a^\dagger)$.
+\end{enumerate}
+
+\item \textbf{Darstellungen der Wellenfunktion}\\
+\(\Psi(\mathbf x,t)=u+iv=Ae^{iS}\).
+\begin{enumerate}
+  \item Leiten Sie die Gleichungen für $u,v$ bzw. $A,S$ aus der Schrödingergleichung her.
+  \item Drücken Sie Wahrscheinlichkeitsdichte und -strom durch diese Größen aus.
+\end{enumerate}
+
+\item \textbf{Drehimpuls, Unsicherheit, Matrizen}\\
+\begin{enumerate}
+  \item Berechnen Sie $\langle L_x\rangle,\langle L_y\rangle,\langle L_x^2\rangle,\langle L_y^2\rangle$ im Zustand $Y_{j,m}$. Bestimmen Sie $\Delta L_x, \Delta L_y$.
+  \item Geben Sie die Matrizen $L_\pm,L_x,L_y,L_z,L^2$ im Unterraum $l=1$ an.
+\end{enumerate}
+
+\item \textbf{Vertauschungsrelationen}\\
+Mit $[Q,P]=i\hbar$:
+\begin{enumerate}
+  \item Zeigen Sie $[Q^n,P]=i\hbar n Q^{n-1}$ und $[P^n,Q]=-i\hbar n P^{n-1}$.
+  \item Zeigen Sie: Für analytisches $f(Q)$ gilt $[f(Q),P]=i\hbar \tfrac{\partial f}{\partial Q}$, $[f(Q),Q]=0$.
+\end{enumerate}
+
+\end{enumerate}
+
+
+\pagebreak
+
+
+\title{2. Klausur — Theoretische Physik VI}
+\author{SS 2006 — Prof. Dr. C. Gros}
+\date{21. Juli 2006}
+
+
+\noindent\textbf{Vorname:} \rule{0.4\linewidth}{0.4pt}\quad
+\textbf{Name:} \rule{0.4\linewidth}{0.4pt}\\[0.5em]
+\textbf{Geburtsdatum:} \rule{0.3\linewidth}{0.4pt}\quad
+\textbf{Geburtsort:} \rule{0.4\linewidth}{0.4pt}\\[0.5em]
+\textbf{Matrikelnummer:} \rule{0.5\linewidth}{0.4pt}
+
+\vspace{1em}
+\noindent pro Aufgabe 10 Punkte
+
+\begin{enumerate}
+
+\item \textbf{Messprozess (Photonpolarisation)}\\
+Zustand in Basis $\{\ket{e_1},\ket{e_2}\}$.
+\begin{enumerate}
+  \item Bestimmen Sie die Projektoren für lineare Polarisation $\ket{f_\theta}=\cos\theta\ket{e_1}+\sin\theta\ket{e_2}$ und für zirkulare Polarisation $\ket{f_\pm}=\tfrac{1}{\sqrt{2}}(\ket{e_1}\pm i\ket{e_2})$. Geben Sie Matrizen und Eigenwerte an.
+  \item Nach Messung $\theta=0$: In welchem Zustand ist das System? Bestimmen Sie Wahrscheinlichkeiten für $\ket{f_0},\ket{f_{\pi/6}},\ket{f_{\pi/4}},\ket{f_{\pi/2}},\ket{f_\pm}$.
+\end{enumerate}
+
+\item \textbf{3D-Potentialtopf}\\
+Bestimmen Sie die Eigenenergien für
+\[
+V(x_1,x_2,x_3)=\begin{cases}
+0, & -a_k<x_k<a_k,\\
++\infty, & \text{sonst}.
+\end{cases}
+\]
+
+\item \textbf{Streuphase am harten Kugelpotential}\\
+\[
+V(r)=\begin{cases}
+0,& r>a,\\
+\infty,& r<a.
+\end{cases}
+\]
+\begin{enumerate}
+  \item Bestimmen Sie das Verhältnis $C/B$ für $R_l(\rho)=B j_l(\rho)+C n_l(\rho)$.
+  \item Zeigen Sie: $\tan\delta_l(k)=-C/B$. Bestimmen Sie $\delta_l$ für $ka\ll1$ und daraus $\sigma_{\text{el}}(k)$.
+\end{enumerate}
+
+\item \textbf{Galilei-Transformation}\\
+Zeigen Sie: Für Lösung $\psi(\mathbf x,t)$ der freien Schrödingergleichung transformiert
+\[
+\psi(\mathbf x,t)\to \tilde\psi(\mathbf x,t)=\exp\!\Bigl[\tfrac{im}{2\hbar}(2\mathbf u\cdot\mathbf x-\mathbf u^2 t)\Bigr]\psi(\mathbf x-\mathbf u t,t).
+\]
+
+\item \textbf{Gestörter harmonischer Oszillator}\\
+Potential $V(Q)=\gamma Q^3$.
+\begin{enumerate}
+  \item Drücken Sie $V$ durch $a,a^\dagger$ aus.
+  \item Bestimmen Sie Grundzustandsenergie-Korrekturen 1. und 2. Ordnung.
+\end{enumerate}
+
+\item \textbf{Resonanz im 2-Niveau-System}\\
+Unperturbiertes System: $H^{(0)}=E_n^{(0)}\ket{n}\!\bra{n}+E_m^{(0)}\ket{m}\!\bra{m}$, $E_n^{(0)}-E_m^{(0)}=\hbar\omega_{nm}$. Störung
+\[
+V=\ket{n}\!\bra{m}\,F e^{-i\omega t}+\ket{m}\!\bra{n}\,F^* e^{i\omega t}.
+\]
+\begin{enumerate}
+  \item Setzen Sie $\ket{\psi(t)}=a_n(t)\ket{n(t)}+a_m(t)\ket{m(t)}$ in die Schrödingergleichung ein.
+  \item Bestimmen Sie die Gleichungen für $a_n(t),a_m(t)$ und diskutieren Sie das Verhalten bei Resonanz.
+\end{enumerate}
+
+\end{enumerate}
+
+
+
+
+
+
+
+\pagebreak
+
+
+\noindent pro Aufgabe 10 Punkte
+
+\begin{enumerate}
+
+\item \textbf{Kommutatoren und Erwartungswerte}\\
+\begin{enumerate}
+  \item Zeigen Sie, dass für den 1D-HO mit $H=\tfrac{p^2}{2m}+\tfrac12 m\omega^2x^2$ gilt:
+  \([x,H]=\tfrac{i\hbar}{m}p\).
+  \item Verwenden Sie das Ehrenfest-Theorem, um die Bewegungsgleichung für $\langle x(t)\rangle$ herzuleiten.
+  \item Diskutieren Sie, wann diese mit der klassischen Oszillatorgleichung identisch ist.
+\end{enumerate}
+
+\item \textbf{Potentialtopf mit Delta-Störung}\\
+Ein Teilchen sei im 1D-Kasten $[0,L]$ mit $V(x)=0$, Randbedingungen $\psi(0)=\psi(L)=0$.  
+Zusätzlich wirkt eine Störung $V'(x)=\lambda \delta(x-L/2)$.
+\begin{enumerate}
+  \item Stellen Sie die ungestörten Eigenfunktionen und Energien auf.
+  \item Berechnen Sie die Energiekorrektur 1. Ordnung für den Zustand $n$.
+  \item Diskutieren Sie, welche Zustände besonders stark beeinflusst werden.
+\end{enumerate}
+
+\item \textbf{Linearkombination im HO}\\
+\begin{enumerate}
+  \item Konstruieren Sie $\psi(0)=\tfrac{1}{\sqrt2}(\ket{n}+\ket{n+1})$. Berechnen Sie $\langle x\rangle(t)$.
+  \item Zeigen Sie, dass $\langle p\rangle(t)$ eine zeitliche Oszillation zeigt.
+\end{enumerate}
+
+\item \textbf{Hydrogenähnliches System}\\
+Ein Wasserstoff-ähnliches Atom mit $Z$ und Bohr-Radius $a_0$.
+\begin{enumerate}
+  \item Schreiben Sie den normierten Grundzustand $\psi_{100}(r)$ auf.
+  \item Berechnen Sie $\langle r\rangle$ und $\langle 1/r\rangle$.
+  \item Diskutieren Sie, wie diese Größen mit $Z$ skalieren.
+\end{enumerate}
+
+\item \textbf{Drehimpulsoperatoren}\\
+\begin{enumerate}
+  \item Geben Sie die Matrixdarstellung von $L_x,L_y,L_z$ für $l=1/2$ an (Pauli-Matrizen).
+  \item Berechnen Sie $\Delta L_x\Delta L_y$ im Zustand $\ket{l=1/2,m=+1/2}$.
+  \item Zeigen Sie, dass die Heisenberg-Ungleichung erfüllt ist.
+\end{enumerate}
+
+\item \textbf{Funktionale Vertauschungsrelationen}\\
+\begin{enumerate}
+  \item Zeigen Sie, dass $[f(x),p]=i\hbar f'(x)$ für glattes $f$.
+  \item Bestimmen Sie explizit $[e^{ikx},p]$.
+  \item Interpretieren Sie das Resultat physikalisch.
+\end{enumerate}
+
+\end{enumerate}
+
+
+
+\pagebreak
+
+
+
+\noindent pro Aufgabe 10 Punkte
+
+\begin{enumerate}
+
+\item \textbf{Spin und Messprozesse}\\
+Ein Spin-$\tfrac12$ System mit Zustand $\ket{\psi}=\cos(\tfrac{\theta}{2})\ket{\uparrow}+\sin(\tfrac{\theta}{2})e^{i\phi}\ket{\downarrow}$.
+\begin{enumerate}
+  \item Berechnen Sie $\langle \sigma_x\rangle,\langle \sigma_y\rangle,\langle \sigma_z\rangle$.
+  \item Skizzieren Sie den Bloch-Vektor für $\theta=\pi/2,\phi=0$ und $\theta=\pi/2,\phi=\pi/2$.
+  \item Bestimmen Sie die Wahrscheinlichkeit, Spin entlang einer Achse $\mathbf n$ zu messen.
+\end{enumerate}
+
+\item \textbf{3D-Kasten}\\
+Ein Potentialtopf $-a<x<a$, $-b<y<b$, $-c<z<c$.
+\begin{enumerate}
+  \item Bestimmen Sie die Energie-Eigenwerte.
+  \item Diskutieren Sie Entartungen.
+\end{enumerate}
+
+\item \textbf{Streuung am Yukawa-Potential}\\
+$V(r)=-\frac{g^2}{r}e^{-\mu r}$.
+\begin{enumerate}
+  \item Leiten Sie im Born-Näherungsverfahren die Streuamplitude $f(\theta)$ ab.
+  \item Diskutieren Sie den Limes $\mu\to 0$ (Coulomb).
+\end{enumerate}
+
+\item \textbf{Lorentz-Invarianz}\\
+Zeigen Sie, dass die Klein–Gordon-Gleichung
+\[
+(\Box+m^2)\phi(x)=0
+\]
+unter Lorentz-Transformationen invariant ist.
+
+\item \textbf{Gestörter Oszillator}\\
+$V(x)=\lambda x^4$ als Störung des 1D-HO.
+\begin{enumerate}
+  \item Berechnen Sie die Grundzustandsenergie-Korrektur 1. Ordnung.
+  \item Geben Sie die Formel für die 2. Ordnung an.
+\end{enumerate}
+
+\item \textbf{2-Niveau-System unter periodischer Störung}\\
+\[
+H_0=\frac{\hbar\omega_0}{2}\sigma_z,\quad V(t)=\hbar\Omega\cos(\omega t)\sigma_x.
+\]
+\begin{enumerate}
+  \item Leiten Sie die zeitabhängigen Koeffizienten $c_\uparrow(t),c_\downarrow(t)$ her.
+  \item Diskutieren Sie Resonanzbedingung und Rabi-Frequenz.
+\end{enumerate}
+
+\end{enumerate}
+
+
+\end{document}

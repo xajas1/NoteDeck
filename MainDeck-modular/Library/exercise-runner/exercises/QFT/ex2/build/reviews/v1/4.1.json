@@ -1,0 +1,18 @@
+{
+  "score": 0.9,
+  "verdict": "Die Lösung ist größtenteils korrekt und vollständig.",
+  "weaknesses": [
+    {
+      "code": "notation",
+      "msg": "Die Notation der Indizes ist nicht konsistent, insbesondere bei der Verwendung von hoch- und tiefgestellten Indizes."
+    },
+    {
+      "code": "clarity",
+      "msg": "Die Herleitung der Antisymmetrie von ε ist nicht vollständig klar, insbesondere der Übergang von den Terme erster Ordnung zur Schlussfolgerung."
+    }
+  ],
+  "fix_suggestions": [
+    "Konsistente Verwendung von hoch- und tiefgestellten Indizes sicherstellen.",
+    "Den Übergang von den Terme erster Ordnung zur Schlussfolgerung der Antisymmetrie von ε klarer darstellen."
+  ]
+}

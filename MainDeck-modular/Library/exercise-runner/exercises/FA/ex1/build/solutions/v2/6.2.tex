@@ -1,0 +1,43 @@
+Um zu zeigen, dass \( h_V \) eine Halbnorm auf \( E \) ist, überprüfen wir die Eigenschaften: positive Definitheit, Subadditivität und absolute Homogenität.
+
+Zunächst die positive Definitheit. Für jedes \( x \in E \) gilt:
+
+\[
+h_V(x) = \inf_{y \in V} \|x - y\| \geq 0
+\]
+
+Da die Norm \(\|\cdot\|\) nicht-negativ ist. Wenn \( x \in V \), dann ist \( h_V(x) = \inf_{y \in V} \|x - y\| = 0 \), da \( x - x = 0 \) und \(\|0\| = 0\). Umgekehrt, wenn \( h_V(x) = 0 \), dann existiert eine Folge \((y_n) \subseteq V\) mit \(\|x - y_n\| \to 0\). Da die Norm nur dann null ist, wenn der Vektor selbst null ist, folgt \( x = y_n \) für alle \( n \) und somit \( x \in V \).
+
+Nun zur Subadditivität. Für \( x, z \in E \) gilt:
+
+\[
+h_V(x + z) = \inf_{y \in V} \|x + z - y\|
+\]
+
+Wir wählen \( y = y_1 + y_2 \) mit \( y_1, y_2 \in V \). Dann gilt:
+
+\[
+\|x + z - (y_1 + y_2)\| = \|x - y_1 + z - y_2\| \leq \|x - y_1\| + \|z - y_2\|
+\]
+
+unter Anwendung der Dreiecksungleichung. Daher:
+
+\[
+h_V(x + z) \leq \inf_{y_1, y_2 \in V} (\|x - y_1\| + \|z - y_2\|) = h_V(x) + h_V(z)
+\]
+
+Schließlich die absolute Homogenität. Für \( \lambda \in \mathbb{R} \) und \( x \in E \) gilt:
+
+\[
+h_V(\lambda x) = \inf_{y \in V} \|\lambda x - y\| = \inf_{y \in V} |\lambda|\|x - \frac{y}{\lambda}\|
+\]
+
+Da \( V \) ein Unterraum ist, ist \(\frac{y}{\lambda} \in V\), falls \(\lambda \neq 0\). Daher:
+
+\[
+h_V(\lambda x) = |\lambda| \inf_{y \in V} \|x - y\| = |\lambda| h_V(x)
+\]
+
+Damit sind alle Eigenschaften einer Halbnorm erfüllt, und somit ist \( h_V \) tatsächlich eine Halbnorm auf \( E \).
+
+%CHECK: Positive Definitheit durch Norm-Eigenschaft ergänzt; Subadditivität mit Dreiecksungleichung präzisiert.

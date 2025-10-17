@@ -1,0 +1,84 @@
+Um die Eindeutigkeit und Existenz der Lösung des gegebenen Randwertproblems zu zeigen, betrachten wir zunächst die Eindeutigkeit. Seien \( u_1 \) und \( u_2 \) zwei Lösungen des Problems. Dann gilt:
+
+\begin{align*}
+-u_1''(x) &= f(x) = -u_2''(x) \quad \text{für } x \in (0,1),
+\end{align*}
+
+und
+
+\begin{align*}
+u_1(0) = u_1(1) = 0, \quad u_2(0) = u_2(1) = 0.
+\end{align*}
+
+Setzen wir \( v = u_1 - u_2 \), so folgt:
+
+\begin{align*}
+-v''(x) &= 0 \quad \text{für } x \in (0,1),
+\end{align*}
+
+mit den Randbedingungen
+
+\begin{align*}
+v(0) = v(1) = 0.
+\end{align*}
+
+Die Differentialgleichung \( v''(x) = 0 \) impliziert, dass \( v(x) = ax + b \) für Konstanten \( a \) und \( b \) ist. Die Randbedingungen führen zu
+
+\begin{align*}
+v(0) = b = 0 \quad \text{und} \quad v(1) = a + b = 0.
+\end{align*}
+
+Daraus folgt \( a = 0 \) und somit \( v(x) = 0 \) für alle \( x \in [0,1] \). Daher ist \( u_1 = u_2 \), was die Eindeutigkeit zeigt.
+
+Für die Existenz der Lösung betrachten wir die Funktion
+
+\begin{align*}
+u(x) = \int_0^1 G(x, y) f(y) \, dy,
+\end{align*}
+
+wobei \( G(x, y) \) wie folgt definiert ist:
+
+\begin{align*}
+G(x, y) = 
+\begin{cases} 
+y(1-x), & y \leq x, \\ 
+(1-y)x, & y > x.
+\end{cases}
+\end{align*}
+
+Um zu zeigen, dass \( u(x) \) eine Lösung ist, berechnen wir die Ableitungen von \( u(x) \). Zunächst schreiben wir
+
+\begin{align*}
+u(x) = (1-x) \int_0^x y f(y) \, dy + x \int_x^1 (1-y) f(y) \, dy.
+\end{align*}
+
+Die Ableitung von \( u(x) \) nach \( x \) ergibt
+
+\begin{align*}
+\frac{d}{dx} u(x) &= -\int_0^x y f(y) \, dy + (1-x) x f(x) + \int_x^1 (1-y) f(y) \, dy - x(1-x) f(x) \\
+&= -\int_0^x y f(y) \, dy + \int_x^1 (1-y) f(y) \, dy.
+\end{align*}
+
+Die zweite Ableitung ist dann
+
+\begin{align*}
+\frac{d^2}{dx^2} u(x) &= \frac{d}{dx} \left(-\int_0^x y f(y) \, dy + \int_x^1 (1-y) f(y) \, dy\right) \\
+&= -x f(x) - (1-x) f(x) \\
+&= -f(x).
+\end{align*}
+
+Somit erfüllt \( u(x) \) die Differentialgleichung \( -u''(x) = f(x) \). Die Randbedingungen \( u(0) = u(1) = 0 \) sind ebenfalls erfüllt, da
+
+\begin{align*}
+u(0) &= \int_0^1 y f(y) \, dy = 0,
+\end{align*}
+
+und
+
+\begin{align*}
+u(1) &= \int_0^1 (1-y) f(y) \, dy = 0.
+\end{align*}
+
+Daher ist \( u(x) \) eine Lösung des Randwertproblems. Da die Lösung eindeutig ist, ist \( u(x) \) die gesuchte Funktion in \( C^2([0,1], \mathbb{C}) \).
+
+%CHECK: Die Herleitung der zweiten Ableitung wurde explizit ausgeführt, um die Klarheit zu verbessern.

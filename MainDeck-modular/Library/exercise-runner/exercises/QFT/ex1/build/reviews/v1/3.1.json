@@ -1,0 +1,13 @@
+{
+  "score": 0.9,
+  "verdict": "Die Lösung ist größtenteils korrekt und vollständig.",
+  "weaknesses": [
+    {
+      "code": "missing_explanation",
+      "msg": "Es fehlt eine explizite Erklärung, warum die Umformung der linken Seite zur Divergenzform korrekt ist."
+    }
+  ],
+  "fix_suggestions": [
+    "Füge eine Erklärung hinzu, warum die Umformung der linken Seite zur Divergenzform korrekt ist."
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "tasks": [
+    {
+      "task_id": "1",
+      "body_tex": "",
+      "subtasks": [
+        {
+          "sub_id": "1.1",
+          "body_tex": "Natural units, $\\hbar=c=1$ : how much is 1 kg in GeV and $1 s$ in $\\mathrm{GeV}^{-1}$ ? Use your result to express Newton's gravitational constant $G_N=6.67 \\times 10^{-11} \\mathrm{~m}^3 \\mathrm{~kg}^{-1} \\mathrm{~s}^{-2}$ in natural units, and give the value of the Planck mass $M_{P l}=G_N^{-1 / 2}$."
+        }
+      ]
+    },
+    {
+      "task_id": "2",
+      "body_tex": "",
+      "subtasks": [
+        {
+          "sub_id": "2.1",
+          "body_tex": "Starting from the definition of the Hamiltonian\n\n$$\nH(x, p) \\equiv p \\dot{x}-L(x, \\dot{x})\n$$\n\nderive Hamilton's equations\n\n$$\n\\frac{\\partial H}{\\partial x}=-\\dot{p}, \\quad \\frac{\\partial H}{\\partial p}=\\dot{x}\n$$\n\n[Hint: Be careful about what the independent variables of a function are.]"
+        }
+      ]
+    },
+    {
+      "task_id": "3",
+      "body_tex": "",
+      "subtasks": [
+        {
+          "sub_id": "3.1",
+          "body_tex": "Using the Schrödinger equation for the wavefunction $\\Psi(\\mathbf{x}, t)$\n\n$$\n\\left\\{-\\frac{\\hbar^2 \\nabla^2}{2 m}+V(\\mathbf{x})\\right\\} \\Psi(\\mathbf{x}, t)=i \\hbar \\frac{\\partial}{\\partial t} \\Psi(\\mathbf{x}, t)\n$$\n\nshow that the probability density $\\rho=\\Psi^* \\Psi$ satisfies the continuity equation\n\n$$\n\\frac{\\partial}{\\partial t} \\rho+\\nabla \\cdot \\mathbf{j}=0\n$$\n\nwhere\n\n$$\n\\mathbf{j}=\\frac{\\hbar}{2 i m}\\left\\{\\Psi^* \\nabla \\Psi-\\left(\\nabla \\Psi^*\\right) \\Psi\\right\\} .\n$$\n\n[Hint: Consider $\\Psi^* \\times$ (Schr.Eq.) $-\\Psi \\times$ (Schr.Eq.)*]"
+        }
+      ]
+    },
+    {
+      "task_id": "4",
+      "body_tex": "",
+      "subtasks": [
+        {
+          "sub_id": "4.1",
+          "body_tex": "Let $\\hat{O}$ be a time-independent operator in the Schrödinger picture, and $\\hat{H}$ the timeindependent Hamiltonian of the system. Starting from the definition of a Heisenberg operator,\n\n$$\n\\hat{O}_H(t)=e^{\\frac{i}{\\hbar} \\hat{H}\\left(t-t_0\\right)} \\hat{O} e^{-\\frac{i}{\\hbar} \\hat{H}\\left(t-t_0\\right)}\n$$\n\nderive the Heisenberg equation of motion\n\n$$\ni \\hbar \\frac{d \\hat{O}_H}{d t}=\\left[\\hat{O}_H, \\hat{H}_H\\right]\n$$"
+        }
+      ]
+    }
+  ]
+}

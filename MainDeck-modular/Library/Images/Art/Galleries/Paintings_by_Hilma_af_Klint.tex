@@ -1,0 +1,68 @@
+\documentclass[11pt]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage[ngerman]{babel}
+\graphicspath{{/Users/tim/NoteDeck/MainDeck-modular/Library/Images/}}
+\setlength{\parindent}{0pt}
+\raggedbottom
+\title{Art Gallery — Paintings by Hilma af Klint}
+\date{}
+\begin{document}
+\maketitle
+
+% Auto-generated — DO NOT EDIT.
+
+% Nur Dateiname (ohne Pfad) aus einem Pfad ziehen
+\makeatletter
+\newcommand{\basename}[1]{\begingroup\filename@parse{#1}\filename@base\filename@ext\endgroup}
+\makeatother
+
+% Einzeilige Codezeile (monospace), skaliert auf \linewidth
+\newcommand{\ArtCodeLine}[1]{\par\noindent{\scriptsize\ttfamily \resizebox{\linewidth}{!}{#1}}}
+
+% Robuste Kachel: rendert nichts, wenn Pfad leer ist
+\newcommand{\ArtTile}[2]{% #1=path, #2=caption
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \if\relax\detokenize{#1}\relax
+      % leer
+    \else
+      \includegraphics[width=\linewidth,height=0.28\textheight,keepaspectratio]{#1}\\[0.6ex]
+      {\footnotesize\itshape #2}\\[-0.2ex]
+      \ArtCodeLine{\basename{#1}}
+    \fi
+  \end{minipage}}
+
+\newcommand{\ArtRow}[4]{% #1..#4 = (path,caption) links/rechts
+  \noindent\ArtTile{#1}{#2}\hfill\ArtTile{#3}{#4}\par\vspace{1.0em}}
+
+\section*{Paintings by Hilma af Klint}
+
+\ArtRow{Art\_TeX/ART0166\_\_Paintings\_by\_Hilma\_af\_Klint\_\_10\_hilma\_af\_klint\_no\_98\_group\_III\_1916.jpg}{Paintings by Hilma af Klint, 10 hilma af klint, no 98 group III, 1916}{Art\_TeX/ART0167\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_1907\_Altarpiece\_No\_1\_Group\_X\_Altarpieces.jpg}{Paintings by Hilma af Klint, Hilma af Klint - 1907 - Altarpiece - No 1 - Group X - Altarpieces}
+
+\ArtRow{Art\_TeX/ART0168\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_1916\_No\_1\_From\_The\_Parsifal\_Series.jpg}{Paintings by Hilma af Klint, Hilma af Klint - 1916 - No 1 From The Parsifal Series}{Art\_TeX/ART0169\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_1920\_Buddha\_s\_Standpoint\_in\_the\_Earthly\_Life\_No\_3a.jpg}{Paintings by Hilma af Klint, Hilma af Klint - 1920 - Buddha's Standpoint in the Earthly Life - No 3a}
+
+\ArtRow{Art\_TeX/ART0170\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_1922\_Birch.jpg}{Paintings by Hilma af Klint, Hilma af Klint - 1922 - Birch}{Art\_TeX/ART0171\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_1922\_Wheat\_and\_Wormwood.jpg}{Paintings by Hilma af Klint, Hilma af Klint - 1922 - Wheat and Wormwood}
+
+\ArtRow{Art\_TeX/ART0172\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_Altarpiece\_No\_1\_Group\_X\_13919.jpg}{Paintings by Hilma af Klint, Hilma af Klint - Altarpiece No. 1 Group X (13919)}{Art\_TeX/ART0173\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_Altarpiece\_No\_2\_13916.jpg}{Paintings by Hilma af Klint, Hilma af Klint - Altarpiece No. 2 (13916)}
+
+\ArtRow{Art\_TeX/ART0174\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_Group\_IX\_UW\_No\_25\_The\_Dove\_No\_1\_13912.jpg}{Paintings by Hilma af Klint, Hilma af Klint - Group IX UW No. 25, The Dove, No. 1 (13912)}{Art\_TeX/ART0175\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_Group\_VI\_Evolution\_No\_13\_13949.jpg}{Paintings by Hilma af Klint, Hilma af Klint - Group VI, Evolution No. 13 (13949)}
+
+\ArtRow{Art\_TeX/ART0176\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_no\_date\_Untitled\_02.jpg}{Paintings by Hilma af Klint, Hilma af Klint - no date - Untitled 02}{Art\_TeX/ART0177\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_no\_date\_Untitled\_05.jpg}{Paintings by Hilma af Klint, Hilma af Klint - no date - Untitled 05}
+
+\ArtRow{Art\_TeX/ART0178\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_no\_date\_Untitled.jpg}{Paintings by Hilma af Klint, Hilma af Klint - no date - Untitled}{Art\_TeX/ART0179\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_Self\_portrait.jpg}{Paintings by Hilma af Klint, Hilma af Klint - Self-portrait}
+
+\ArtRow{Art\_TeX/ART0180\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Hilma\_af\_Klint\_1906\_07\_Primordial\_Chaos\_No\_16.jpg}{Paintings by Hilma af Klint, Hilma af Klint, 1906-07, Primordial Chaos - No 16}{Art\_TeX/ART0181\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Portraett\_Sjoehistoriska\_museet\_O\_04249.jpg}{Paintings by Hilma af Klint, Porträtt - Sjöhistoriska museet - O 04249}
+
+\ArtRow{Art\_TeX/ART0182\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Portraett\_Sjoehistoriska\_museet\_O\_11963.jpg}{Paintings by Hilma af Klint, Porträtt - Sjöhistoriska museet - O 11963}{Art\_TeX/ART0183\_\_Paintings\_by\_Hilma\_af\_Klint\_\_The\_US\_Series\_Group\_VIII\_No\_1\_by\_Hilma\_af\_Klint.jpg}{Paintings by Hilma af Klint, The US Series, Group VIII, No. 1 by Hilma af Klint}
+
+\ArtRow{Art\_TeX/ART0184\_\_Paintings\_by\_Hilma\_af\_Klint\_\_The\_US\_Series\_Group\_VIII\_No\_5\_by\_Hilma\_af\_Klint.jpg}{Paintings by Hilma af Klint, The US Series, Group VIII, No. 5 by Hilma af Klint}{Art\_TeX/ART0185\_\_Paintings\_by\_Hilma\_af\_Klint\_\_The\_US\_Series\_Group\_VIII\_No\_6\_by\_Hilma\_af\_Klint.jpg}{Paintings by Hilma af Klint, The US Series, Group VIII, No. 6 by Hilma af Klint}
+
+\ArtRow{Art\_TeX/ART0186\_\_Paintings\_by\_Hilma\_af\_Klint\_\_The\_US\_Series\_Group\_VIII\_No\_7\_by\_Hilma\_af\_Klint.jpg}{Paintings by Hilma af Klint, The US Series, Group VIII, No. 7 by Hilma af Klint}{Art\_TeX/ART0187\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Tree\_of\_Knowledge\_No\_1\_Hilma\_af\_Klint\_1913\_1915\_Glenstone\_2023.jpg}{Paintings by Hilma af Klint, Tree of Knowledge No. 1, Hilma af Klint, 1913-1915, Glenstone 2023}
+
+\noindent\ArtTile{Art\_TeX/ART0188\_\_Paintings\_by\_Hilma\_af\_Klint\_\_Tree\_of\_Knowledge\_No\_2\_Hilma\_af\_Klint\_1913\_1915\_Glenstone\_2023.jpg}{Paintings by Hilma af Klint, Tree of Knowledge No. 2, Hilma af Klint, 1913-1915, Glenstone 2023}\par\vspace{1.0em}
+
+\end{document}

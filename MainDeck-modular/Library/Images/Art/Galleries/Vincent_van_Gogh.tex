@@ -1,0 +1,84 @@
+\documentclass[11pt]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage[ngerman]{babel}
+\graphicspath{{/Users/tim/NoteDeck/MainDeck-modular/Library/Images/}}
+\setlength{\parindent}{0pt}
+\raggedbottom
+\title{Art Gallery — Vincent van Gogh}
+\date{}
+\begin{document}
+\maketitle
+
+% Auto-generated — DO NOT EDIT.
+
+% Nur Dateiname (ohne Pfad) aus einem Pfad ziehen
+\makeatletter
+\newcommand{\basename}[1]{\begingroup\filename@parse{#1}\filename@base\filename@ext\endgroup}
+\makeatother
+
+% Einzeilige Codezeile (monospace), skaliert auf \linewidth
+\newcommand{\ArtCodeLine}[1]{\par\noindent{\scriptsize\ttfamily \resizebox{\linewidth}{!}{#1}}}
+
+% Robuste Kachel: rendert nichts, wenn Pfad leer ist
+\newcommand{\ArtTile}[2]{% #1=path, #2=caption
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \if\relax\detokenize{#1}\relax
+      % leer
+    \else
+      \includegraphics[width=\linewidth,height=0.28\textheight,keepaspectratio]{#1}\\[0.6ex]
+      {\footnotesize\itshape #2}\\[-0.2ex]
+      \ArtCodeLine{\basename{#1}}
+    \fi
+  \end{minipage}}
+
+\newcommand{\ArtRow}[4]{% #1..#4 = (path,caption) links/rechts
+  \noindent\ArtTile{#1}{#2}\hfill\ArtTile{#3}{#4}\par\vspace{1.0em}}
+
+\section*{Vincent van Gogh}
+
+\ArtRow{Art\_TeX/ART0219\_\_Vincent\_van\_Gogh\_\_The\_Potato\_Eaters\_\_1888.jpg}{Vincent van Gogh, The Potato Eaters (1888)}{Art\_TeX/ART0220\_\_Vincent\_van\_Gogh\_\_Sunflowers\_\_1888.jpg}{Vincent van Gogh, Sunflowers (1888)}
+
+\ArtRow{Art\_TeX/ART0221\_\_Vincent\_van\_Gogh\_\_L\_Arl\_sienne.jpg}{Vincent van Gogh, L'Arlésienne}{Art\_TeX/ART0222\_\_Vincent\_van\_Gogh\_\_Wheatfield\_with\_Crows\_\_1890.jpg}{Vincent van Gogh, Wheatfield with Crows (1890)}
+
+\ArtRow{Art\_TeX/ART0223\_\_Vincent\_van\_Gogh\_\_Landscape\_with\_a\_Carriage\_and\_a\_Train\_\_1890.jpg}{Vincent van Gogh, Landscape with a Carriage and a Train (1890)}{Art\_TeX/ART0224\_\_Vincent\_van\_Gogh\_\_The\_Night\_Caf\_\_1888.jpg}{Vincent van Gogh, The Night Café (1888)}
+
+\ArtRow{Art\_TeX/ART0225\_\_Vincent\_van\_Gogh\_\_Portrait\_of\_Dr\_Gachet\_\_1890.jpg}{Vincent van Gogh, Portrait of Dr. Gachet (1890)}{Art\_TeX/ART0226\_\_Vincent\_van\_Gogh\_\_Irises\_\_1889.jpg}{Vincent van Gogh, Irises (1889)}
+
+\ArtRow{Art\_TeX/ART0227\_\_Vincent\_van\_Gogh\_\_Portrait\_of\_Adeline\_Ravoux\_\_1890.jpg}{Vincent van Gogh, Portrait of Adeline Ravoux (1890)}{Art\_TeX/ART0228\_\_Vincent\_van\_Gogh\_\_Portrait\_of\_Paul\_Eug\_ne\_Milliet\_Second\_Lieutenant\_of\_the\_Zouaves\_\_1888.jpg}{Vincent van Gogh, Portrait of Paul-Eugène Milliet, Second Lieutenant of the Zouaves (1888)}
+
+\ArtRow{Art\_TeX/ART0229\_\_Vincent\_van\_Gogh\_\_Self\_portrait\_dedicated\_to\_Paul\_Gauguin\_\_1888.jpg}{Vincent van Gogh, Self-portrait, dedicated to Paul Gauguin (1888)}{Art\_TeX/ART0230\_\_Vincent\_van\_Gogh\_\_Rocks\_\_1888.jpg}{Vincent van Gogh, Rocks (1888)}
+
+\ArtRow{Art\_TeX/ART0231\_\_Vincent\_van\_Gogh\_\_Road\_with\_Cypress\_and\_Star\_\_1890.jpg}{Vincent van Gogh, Road with Cypress and Star (1890)}{Art\_TeX/ART0232\_\_Vincent\_van\_Gogh\_\_Farming\_Village\_at\_Twilight\_\_1884.jpeg}{Vincent van Gogh, Farming Village at Twilight (1884)}
+
+\ArtRow{Art\_TeX/ART0233\_\_Vincent\_van\_Gogh\_\_The\_Good\_Samaritan\_\_1890.jpeg}{Vincent van Gogh, The Good Samaritan (1890)}{Art\_TeX/ART0234\_\_Vincent\_van\_Gogh\_\_Sunflowers\_\_1887.jpg}{Vincent van Gogh, Sunflowers (1887)}
+
+\ArtRow{Art\_TeX/ART0235\_\_Vincent\_van\_Gogh\_\_Green\_Wheat\_Field\_with\_Cypress\_\_1889.jpg}{Vincent van Gogh, Green Wheat Field with Cypress (1889)}{Art\_TeX/ART0236\_\_Vincent\_van\_Gogh\_\_First\_Steps\_after\_Millet\_\_1890.JPG}{Vincent van Gogh, First Steps, after Millet (1890)}
+
+\ArtRow{Art\_TeX/ART0237\_\_Vincent\_van\_Gogh\_\_First\_Steps\_after\_Millet\_\_1890.jpg}{Vincent van Gogh, First Steps, after Millet (1890)}{Art\_TeX/ART0238\_\_Vincent\_van\_Gogh\_\_Portrait\_of\_Dr\_Gachet\_\_1890.jpeg}{Vincent van Gogh, Portrait of Dr. Gachet (1890)}
+
+\ArtRow{Art\_TeX/ART0239\_\_Vincent\_van\_Gogh\_\_Madame\_Augustine\_Roulin\_with\_Baby\_\_1888.jpg}{Vincent van Gogh, Madame Augustine Roulin with Baby (1888)}{Art\_TeX/ART0240\_\_Vincent\_van\_Gogh\_\_Self\_portrait\_\_1887.jpeg}{Vincent van Gogh, Self-portrait (1887)}
+
+\ArtRow{Art\_TeX/ART0241\_\_Vincent\_van\_Gogh\_\_L\_Arl\_sienne\_\_1888.jpg}{Vincent van Gogh, L'Arlésienne (1888)}{Art\_TeX/ART0242\_\_Vincent\_van\_Gogh\_\_Bedroom\_in\_Arles\_\_1889.jpg}{Vincent van Gogh, Bedroom in Arles (1889)}
+
+\ArtRow{Art\_TeX/ART0243\_\_Vincent\_van\_Gogh\_\_Still\_Life\_with\_Quinces\_\_1887.jpg}{Vincent van Gogh, Still Life with Quinces (1887)}{Art\_TeX/ART0244\_\_Vincent\_van\_Gogh\_\_Wheat\_Field\_with\_Cypresses\_\_1889.jpg}{Vincent van Gogh, Wheat Field with Cypresses (1889)}
+
+\ArtRow{Art\_TeX/ART0245\_\_Vincent\_van\_Gogh\_\_Self\_Portrait\_with\_Bandaged\_Ear\_\_1889.jpg}{Vincent van Gogh, Self-Portrait with Bandaged Ear (1889)}{Art\_TeX/ART0246\_\_Vincent\_van\_Gogh\_\_Houses\_at\_Auvers\_\_1890.jpg}{Vincent van Gogh, Houses at Auvers (1890)}
+
+\ArtRow{Art\_TeX/ART0247\_\_Vincent\_van\_Gogh\_\_Peasant\_Woman\_Cooking\_by\_a\_Fireplace\_\_1885.jpeg}{Vincent van Gogh, Peasant Woman Cooking by a Fireplace (1885)}{Art\_TeX/ART0248\_\_Vincent\_van\_Gogh\_\_La\_Berceuse\_Woman\_Rocking\_a\_Cradle\_Augustine\_Alix\_Pellicot\_Roulin\_1851\_1930\_\_1889.jpg}{Vincent van Gogh, La Berceuse (Woman Rocking a Cradle; Augustine-Alix Pellicot Roulin, 1851–1930) (1889)}
+
+\ArtRow{Art\_TeX/ART0249\_\_Vincent\_van\_Gogh\_\_Self\_Portrait\_with\_a\_Straw\_Hat\_\_1887.jpg}{Vincent van Gogh, Self-Portrait with a Straw Hat (1887)}{Art\_TeX/ART0250\_\_Vincent\_van\_Gogh\_\_Women\_Picking\_Olives\_\_1889.jpg}{Vincent van Gogh, Women Picking Olives (1889)}
+
+\ArtRow{Art\_TeX/ART0251\_\_Vincent\_van\_Gogh\_\_The\_Potato\_Peeler\_\_1885.jpg}{Vincent van Gogh, The Potato Peeler (1885)}{Art\_TeX/ART0252\_\_Vincent\_van\_Gogh\_\_A\_Peasant\_Woman\_Digging\_in\_Front\_of\_Her\_Cottage\_\_1885.jpg}{Vincent van Gogh, A Peasant Woman Digging in Front of Her Cottage (1885)}
+
+\ArtRow{Art\_TeX/ART0253\_\_Vincent\_van\_Gogh\_\_Sunflowers\_\_1888.jpg}{Vincent van Gogh, Sunflowers (1888)}{Art\_TeX/ART0254\_\_Vincent\_van\_Gogh\_\_The\_Potato\_Eaters\_\_1885.jpg}{Vincent van Gogh, The Potato Eaters (1885)}
+
+\ArtRow{Art\_TeX/ART0255\_\_Vincent\_van\_Gogh\_\_Poppy\_field\_\_1890.jpg}{Vincent van Gogh, Poppy field (1890)}{Art\_TeX/ART0256\_\_Vincent\_van\_Gogh\_\_The\_Lovers\_The\_Poet\_s\_Garden\_IV\_\_1888.jpg}{Vincent van Gogh, The Lovers: The Poet's Garden IV (1888)}
+
+\noindent\ArtTile{Art\_TeX/ART0257\_\_Vincent\_van\_Gogh\_\_Adeline\_Ravoux\_\_1890.jpg}{Vincent van Gogh, Adeline Ravoux (1890)}\par\vspace{1.0em}
+
+\end{document}

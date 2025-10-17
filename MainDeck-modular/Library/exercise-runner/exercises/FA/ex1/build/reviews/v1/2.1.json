@@ -1,0 +1,14 @@
+{
+  "score": 0.9,
+  "verdict": "Die Lösung ist fast korrekt, aber es fehlt eine explizite Erwähnung der Definition des Abschlusses.",
+  "weaknesses": [
+    {
+      "code": "missing_definition",
+      "msg": "Die Definition des Abschlusses eines Unterraums wird nicht explizit erwähnt.",
+      "math_hint": "Erkläre, dass der Abschluss alle Grenzwerte von Cauchy-Folgen in F enthält."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Ergänze die Definition des Abschlusses:} \\bar{F} = \\{ x \\in E \\mid \\exists (x_n)_{n \\in \\mathbb{N}} \\subseteq F, x_n \\to x \\}"
+  ]
+}

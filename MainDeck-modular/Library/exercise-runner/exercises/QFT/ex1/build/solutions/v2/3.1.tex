@@ -1,0 +1,51 @@
+Um zu zeigen, dass die Wahrscheinlichkeitsdichte \(\rho = \Psi^* \Psi\) die Kontinuitätsgleichung erfüllt, beginnen wir mit der Schrödinger-Gleichung und ihrer komplex konjugierten Form:
+
+\[
+\left\{-\frac{\hbar^2 \nabla^2}{2 m} + V(\mathbf{x})\right\} \Psi = i \hbar \frac{\partial \Psi}{\partial t}
+\]
+
+\[
+\left\{-\frac{\hbar^2 \nabla^2}{2 m} + V(\mathbf{x})\right\} \Psi^* = -i \hbar \frac{\partial \Psi^*}{\partial t}
+\]
+
+Multiplizieren wir die Schrödinger-Gleichung mit \(\Psi^*\) und die konjugierte Schrödinger-Gleichung mit \(\Psi\):
+
+\[
+\Psi^* \left\{-\frac{\hbar^2 \nabla^2}{2 m} \Psi + V(\mathbf{x}) \Psi\right\} = \Psi^* i \hbar \frac{\partial \Psi}{\partial t}
+\]
+
+\[
+\Psi \left\{-\frac{\hbar^2 \nabla^2}{2 m} \Psi^* + V(\mathbf{x}) \Psi^*\right\} = -\Psi i \hbar \frac{\partial \Psi^*}{\partial t}
+\]
+
+Subtrahieren wir die zweite Gleichung von der ersten:
+
+\[
+\Psi^* \left(-\frac{\hbar^2 \nabla^2}{2 m} \Psi\right) - \Psi \left(-\frac{\hbar^2 \nabla^2}{2 m} \Psi^*\right) = \Psi^* i \hbar \frac{\partial \Psi}{\partial t} + \Psi i \hbar \frac{\partial \Psi^*}{\partial t}
+\]
+
+Vereinfachen wir die linke Seite:
+
+\[
+-\frac{\hbar^2}{2 m} \left(\Psi^* \nabla^2 \Psi - \Psi \nabla^2 \Psi^*\right) = i \hbar \left(\Psi^* \frac{\partial \Psi}{\partial t} + \Psi \frac{\partial \Psi^*}{\partial t}\right)
+\]
+
+Die linke Seite kann umgeschrieben werden als:
+
+\[
+\nabla \cdot \left(\frac{\hbar}{2 i m} \left(\Psi^* \nabla \Psi - \Psi \nabla \Psi^*\right)\right)
+\]
+
+Diese Umformung zur Divergenzform ist korrekt, da der Ausdruck \(\Psi^* \nabla^2 \Psi - \Psi \nabla^2 \Psi^*\) durch Anwendung der Produktregel und der Definition der Divergenz in die Form \(\nabla \cdot (\Psi^* \nabla \Psi - \Psi \nabla \Psi^*)\) umgeschrieben werden kann. Dies entspricht der Divergenz eines Vektorfeldes, was die Formulierung der Kontinuitätsgleichung ermöglicht.
+
+Setzen wir dies in die Kontinuitätsgleichung ein:
+
+\[
+\frac{\partial}{\partial t} (\Psi^* \Psi) + \nabla \cdot \left(\frac{\hbar}{2 i m} \left(\Psi^* \nabla \Psi - \Psi \nabla \Psi^*\right)\right) = 0
+\]
+
+Dies zeigt, dass die Wahrscheinlichkeitsdichte \(\rho = \Psi^* \Psi\) die Kontinuitätsgleichung erfüllt, wobei der Stromdichtevektor \(\mathbf{j}\) gegeben ist durch:
+
+\[
+\mathbf{j} = \frac{\hbar}{2 i m} \left(\Psi^* \nabla \Psi - \Psi \nabla \Psi^*\right)
+\]

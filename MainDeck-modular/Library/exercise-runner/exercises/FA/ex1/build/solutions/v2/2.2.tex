@@ -1,0 +1,19 @@
+Um die Aussage zu zeigen, dass ein Unterraum $F$ eines normierten Raumes $E$ mit Kodimension 1 entweder abgeschlossen oder dicht in $E$ ist, betrachten wir die Dimension des Quotientenraums $E/F$. Da $\operatorname{dim} E / F = 1$, existiert ein linearer Funktional $f: E \to \mathbb{K}$ (wobei $\mathbb{K}$ entweder $\mathbb{R}$ oder $\mathbb{C}$ ist), dessen Kern genau $F$ ist. 
+
+Das Funktional $f$ ist nichttrivial, da $F$ eine echte Untermenge von $E$ ist. Nach dem Satz von Hahn-Banach kann $f$ zu einem stetigen linearen Funktional auf dem gesamten Raum $E$ fortgesetzt werden. 
+
+Betrachten wir nun zwei Fälle:
+
+1. **Fall 1: $f$ ist stetig.** In diesem Fall ist der Kern von $f$, also $F$, ein abgeschlossener Unterraum von $E$. Dies folgt direkt aus der Stetigkeit von $f$, da der Kern eines stetigen linearen Funktionals immer abgeschlossen ist.
+
+2. **Fall 2: $f$ ist nicht stetig.** In diesem Fall ist $F$ nicht abgeschlossen. Wir zeigen nun, dass $F$ dicht in $E$ ist. Da $E/F$ eindimensional ist, existiert ein $x_0 \in E \setminus F$ und für jedes $x \in E$ gibt es ein $\lambda \in \mathbb{K}$, sodass $x - \lambda x_0 \in F$. Sei $\epsilon > 0$ beliebig. Da $f$ nicht stetig ist, existiert eine Folge $(x_n) \subset E$ mit $f(x_n) \to 0$, aber $\|x_n\| \not\to 0$. Für jedes $x \in E$ wählen wir $\lambda_n = f(x)/f(x_n)$, sodass $x - \lambda_n x_n \in F$. Dann gilt:
+
+\begin{align*}
+\|x - (x - \lambda_n x_n)\| &= \|\lambda_n x_n\| = \left|\frac{f(x)}{f(x_n)}\right| \|x_n\| \to 0 \quad \text{für } n \to \infty.
+\end{align*}
+
+Da $\epsilon$ beliebig war, folgt, dass $x$ als Grenzwert von Elementen aus $F$ dargestellt werden kann, was zeigt, dass $F$ dicht in $E$ ist.
+
+Daher ist $F$ entweder abgeschlossen oder dicht in $E$.
+
+%CHECK: Die detaillierte Herleitung im zweiten Fall wurde ergänzt, um zu zeigen, warum ein nicht abgeschlossener Unterraum mit Kodimension 1 dicht sein muss.

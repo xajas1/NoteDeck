@@ -1,0 +1,20 @@
+{
+  "score": 0.8,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details und Klarstellungen.",
+  "weaknesses": [
+    {
+      "code": "MISSING_EXPLANATION",
+      "msg": "Die Herleitung der Identität $(\boldsymbol{\nabla} \times \boldsymbol{A})^2 = \boldsymbol{A}^2$ ist unvollständig.",
+      "math_hint": "Es fehlt eine explizite Darstellung der Summation über die Indizes $i$ und $j$ in der Expansion von $(\boldsymbol{\nabla} \times \boldsymbol{A})^2$."
+    },
+    {
+      "code": "INCOMPLETE_PROOF",
+      "msg": "Die Normierung der Dirac-Spinoren wird nicht vollständig hergeleitet.",
+      "math_hint": "Es fehlt eine detaillierte Herleitung der Normierungsbedingung $u_r^{+}(p) u_s(p) = 2 E \\\\delta_{rs}$."
+    }
+  ],
+  "fix_suggestions": [
+    "\\sum_{i=1}^{3} \\sigma_i^2 p_i^2 + \\sum_{i \\neq j} \\sigma_i \\sigma_j p_i p_j = \\sum_{i=1}^{3} p_i^2",
+    "u_r^{+}(p) u_s(p) = 2 E \\\\delta_{rs} \\text{ durch explizite Berechnung der Normierung herleiten}"
+  ]
+}

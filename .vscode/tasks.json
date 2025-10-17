@@ -1,0 +1,18 @@
+// .vscode/tasks.json
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "insert_unit_environment",   // <-- Name angepasst
+        "type": "shell",
+        "command": "python3",
+        "args": [
+          "/Users/tim/NoteDeck/MainDeck-modular/Programme/wrap_selection_with_unit.py",
+          "${file}",
+          "/tmp/selection.txt"
+        ],
+        ...
+      }
+    ]
+  }
+  

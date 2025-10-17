@@ -1,0 +1,349 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17  Graphik
+% 18  Extra
+% 00. Titel und Autor
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\begin{unitbox}\CustomHeading{Definition}{#1}{#2}}{\end{unitbox}}
+\newenvironment{PROP}[2]{\begin{unitbox}\CustomHeading{Proposition}{#1}{#2}}{\end{unitbox}}
+\newenvironment{THEO}[2]{\begin{unitbox}\CustomHeading{Theorem}{#1}{#2}}{\end{unitbox}}
+\newenvironment{LEM}[2]{\begin{unitbox}\CustomHeading{Lemma}{#1}{#2}}{\end{unitbox}}
+\newenvironment{KORO}[2]{\begin{unitbox}\CustomHeading{Corollar}{#1}{#2}}{\end{unitbox}}
+\newenvironment{REM}[2]{\begin{unitbox}\CustomHeading{Remark}{#1}{#2}}{\end{unitbox}}
+\newenvironment{EXA}[2]{\begin{unitbox}\CustomHeading{Example}{#1}{#2}}{\end{unitbox}}
+\newenvironment{STUD}[2]{\begin{unitbox}\CustomHeading{Study}{#1}{#2}}{\end{unitbox}}
+\newenvironment{CONC}[2]{\begin{unitbox}\CustomHeading{Concept}{#1}{#2}}{\end{unitbox}}
+\newenvironment{OTH}[2]{\begin{unitbox}\CustomHeading{Other}{#1}{#2}}{\end{unitbox}}
+\newenvironment{EXE}[2]{\begin{unitbox}\CustomHeading{Exercise}{#1}{#2}}{\end{unitbox}}
+\newenvironment{MOT}[2]{\begin{unitbox}\CustomHeading{Motivation}{#1}{#2}}{\end{unitbox}}
+\newenvironment{PROOF}[2]{\begin{unitbox}\CustomHeading{Proof}{#1}{#2}}{\end{unitbox}}
+
+% --- Unit Umgebung für Source-Inhalte ---
+\usepackage{mdframed}
+\newmdenv[
+  linewidth=1pt,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftmargin=0cm,
+  rightmargin=0cm,
+  skipabove=10pt,
+  skipbelow=10pt,
+  innertopmargin=0.5\baselineskip,
+  innerbottommargin=0.5\baselineskip,
+  backgroundcolor=gray!10,
+  linecolor=gray
+]{unitbox}
+
+\newenvironment{unit}[1]
+  {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
+  {\end{unitbox}}
+
+% --- 17. Graphik ---
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage[export]{adjustbox}
+
+% --- 18. Extras ---
+\usepackage{stmaryrd}
+\usepackage{bbold}  % falls du athbb{1} nutzen willst
+
+% --- 00. Titel und Autor ---
+\title{Mein Titel}
+\author{Tim Jaschik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+Kurze Beschreibung …
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\tableofcontents
+
+\pagebreak
+
+
+Gordon–Luecke Theorem 1989
+
+\begin{THEO}{KNO-F12-03-08}{Gordon–Luecke Theorem 1989}
+If the complements of two tame knots are homeomorphic, then the knots are equivalent.
+\end{THEO}
+
+
+
+\begin{MOT}{KNO-F12-03-01}{Reichweite der Knotengruppe als Knoten Invariante}
+Wir haben jetzt also eine Präsentation für $\pi_1\left(\mathbb{R}^3 \backslash K\right)$ gefunden. Aber was bringt uns das? Wir möchten gerne zeigen, dass $K$ nicht der triviale Knoten $T$ ist, d.h. das $\pi_1\left(\mathbb{R}^3 \backslash K\right) \neq \pi_1\left(\mathbb{R}^3 \backslash T\right)=\mathbb{Z}$. Die Präsentation von $\pi:=\pi_1\left(\mathbb{R}^3 \backslash K\right)$ schaut zwar kompliziert aus, aber vielleicht ist die Gruppe trotz allem isomorph zu $\mathbb{Z}$?
+\end{MOT}
+
+
+In den Übungen beispielsweise werden wir sehen, dass wir die Präsentation vereinfachen können:
+$$
+\left.\pi=\pi_1\left(\mathbb{R}^3 \backslash K\right) \cong\left\langle x_1, x_2, x_3\right| x_2=x_3 x_1 x_3^{-1} \text { und } x_3=x_1 x_2 x_1^{-1}\right\rangle
+$$
+
+Können wir die Präsentation vielleicht noch mehr vereinfachen?
+
+
+Wir haben früher gesehen, dass die Abelianisierung einer Fundamentalgruppe manchmal schon genügend Informationen enthält, um topologische Räume zu unterscheiden. Wie schaut's also jetzt mit der Abelianisierung aus? Es folgt aus den Relationen, dass die Bilder von $x_2$ und $x_1$, sowie auch von $x_3$ und $x_2$ in der Abelianisierung identisch sind. Andererseits definiert $x_i \mapsto 1, i=1,2,3$ einen Homomorphismus $\pi /[\pi, \pi] \rightarrow \mathbb{Z}$. Wir sehen also, dass die Abelianisierung von $\pi$ isomorph zu $\mathbb{Z}$ ist. (Wir werden dies in de Übungsblatt 13 noch etwas formaler beweisen.)
+
+In der Tat gilt sogar folgender Satz:
+
+
+Satz 13.3. 
+
+\begin{PROP}{KNO-F12-03-02}{Abelisierte Knotengruppe ist isomorph zu $\mathbb{Z}$}
+Es sei $K \subset \mathbb{R}^3$ ein Knoten. Dann ist die Abelianisierung von $\pi_1\left(\mathbb{R}^3 \backslash K\right)$ isomorph zu $\mathbb{Z}$.
+\end{PROP}
+
+Die Abelianisierung kann uns also nicht helfen, den Kleeblattknoten vom trivialen Knoten zu unterscheiden. Das folgende Lemma kommt also vielleicht etwas überraschend.
+
+Lemma 13.4. 
+
+Die Gruppe
+$$
+\left.\pi=\pi_1\left(\mathbb{R}^3 \backslash K\right) \cong\left\langle x_1, x_2, x_3\right| x_2=x_3 x_1 x_3^{-1} \text { und } x_3=x_1 x_2 x_1^{-1}\right\rangle
+$$
+ist nicht abelsch, insbesondere nicht isomorph zu $\mathbb{Z}$. Der Kleeblattknoten ist also nicht der triviale Knoten.
+
+Beweis. Wir bezeichnen mit $S_3$ die Gruppe der Permutationen der dreielementigen Menge $\{1,2,3\}$. Wir betrachten
+$$
+P_1:=\left(\begin{array}{lll}
+1 & 2 & 3 \\
+2 & 1 & 3
+\end{array}\right), P_2:=\left(\begin{array}{lll}
+1 & 2 & 3 \\
+1 & 3 & 2
+\end{array}\right) \text { und } P_3:=\left(\begin{array}{lll}
+1 & 2 & 3 \\
+3 & 2 & 1
+\end{array}\right) .
+$$
+Für $i=1,2,3$ ordnen wir $x_i$ die Permutation $P_i$ zu. Man kann leicht nachrechnen, dass
+$$
+P_2=P_3 P_1 P_3^{-1} \text { und } P_3=P_1 P_2 P_1^{-1}
+$$
+Es folgt also aus Lemma 12.1, dass es einen Homomorphismus $\varphi: \pi \rightarrow$ $S_3$ mit $\varphi\left(x_i\right)=P_i, i=1,2,3$ gibt. Dieser Homomorphismus ist surjektiv ${ }^{89}$, nachdem $S_3$ nicht abelsch ist, folgt auch, dass $\pi$ nicht abelsch ist.
+
+
+
+
+Man kann sich nun fragen, wie hilfreich die Fundamentalgruppe des Knotenkomplements ist, um zu zeigen, dass ein Knoten nicht-trivial ist. Folgender Satz wurde von Papakyriakopoulos ${ }^{90}$ bewiesen:
+
+
+Satz 13.5. (Papakyriakopoulos 1957) 
+
+\begin{THEO}{KNO-F12-03-03}{Papakyriakopoulos 1975}
+Ein Knoten $K \subset \mathbb{R}^3$ ist trivial, genau dann, wenn $\pi_1\left(\mathbb{R}^3 \backslash K\right) \cong \mathbb{Z}$.
+\end{THEO}
+
+
+Der Beweis führt weit über die Möglichkeiten dieser Vorlesung hinaus. 
+
+
+Es stellt sich dann die Frage, wie man den nun für einen gegebenen nicht-trivialen Knoten zeigen kann, dass $\pi_1\left(\mathbb{R}^3 \backslash K\right) \neq \mathbb{Z}$.
+
+
+Nachdem wir für einen Knoten immer eine Präsentation finden können, stellt sich folgende allgemeine Frage:
+Frage. 
+
+\begin{CONC}{KNO-F12-03-04}{Word Problem für Präsentationen von Knotengruppen}
+Es sei
+$$
+\pi=\left\langle g_1, \ldots, g_k \mid r_1, \ldots, r_l\right\rangle
+$$
+eine Präsentation einer Gruppe. Gibt es einen Algorithmus, welcher entscheiden kann, ob $\pi$ trivial ist oder isomorph zu $\mathbb{Z}$ ist?
+
+Diese Frage ist als das 'word problem' bekannt, und wurde von Adyan und Rabin 1955 beantwort: Sie haben unabhängig von einander bewiesen, dass es solch einen Algorithmus nicht geben kann. Im Allgemeinen können wir also nicht entscheiden, ob eine gegebene Präsentation die Präsentation der trivialen Gruppe ist oder nicht.
+
+Diese negative Aussage raubt uns erstmal alle Hoffnung, dass wir Fundamentalgruppen von Knotenkomplement verwenden können, um festzustellen, ob ein gegebener Knoten trivial ist oder nicht. Zum Glück ist unser Leben aber etwas einfacher: nicht jede Präsentation taucht als Präsentation der Fundamentalgruppe eines Knotenkomplements auf.
+\end{CONC}
+
+In Lemma 13.4 haben wir gezeigt, dass es im Falle des Kleeblattknotens einen Epimorphismus $\pi_1\left(\mathbb{R}^3 \backslash K\right) \rightarrow S_3$ gibt. Der folgende Satz von Thurston besagt, dass diese Methode für jeden nicht-trivialen Knoten funktioniert.
+
+Satz 13.6. (Thurston 1982) 
+
+\begin{THEO}{KNO-F12-03-05}{Thurston 1982}
+Es sei $K \subset \mathbb{R}^3$ ein nicht-trivialer Knoten, dann gibt es einen Epimorphismus $\pi_1\left(\mathbb{R}^3 \backslash K\right) \rightarrow G$ auf eine endliche nicht-kommutative Gruppe.
+\end{THEO}
+
+Dieser Satz beruht auf den Arbeiten für welche Thurston 1982 die Fields-Medaille bekommen hat. Auch dieser Beweis geht weit jenseits dessen, was in dieser Vorlesung machbar ist.
+
+\begin{CONC}{KNO-F12-03-06}{Äquivalenz von Knoten bis auf Spiegelung}
+Man kann sich nun auch fragen, ob zwei Knoten $K$ und $L$ genau dann äquivalent sind, wenn $\pi_1\left(\mathbb{R}^3 \backslash K\right) \cong \pi_1\left(\mathbb{R}^3 \backslash L\right)$. Dies ist im Allgemeinen jedoch nicht der Fall. Für einen Knoten $K$ bezeichnen wir mit $K^s$ das Spiegelbild von $K$ in der Ebene $(x, y, 0) \subset \mathbb{R}^3$, d.h.
+$$
+(x, y, z) \in K^s: \Leftrightarrow(x, y,-z) \in K .
+$$
+Dann sind $\mathbb{R}^3 \backslash K^s$ und $\mathbb{R}^3 \backslash K$ offensichtlich homöomorph, also besitzen sie die gleiche Fundamentalgruppe. Andererseits sind im Allgemeinen ein Knoten und sein Spiegelbild nicht äquivalent.
+
+Wir können also jetzt etwas vorsichtiger fragen ob zwei Knoten $K$ und $L$ genau dann (bis auf Spiegelung) äquivalent sind, wenn $\pi_1\left(\mathbb{R}^3 \right.$ $K) \cong \pi_1\left(\mathbb{R}^3 \backslash L\right)$.
+
+Um diese Frage zu diskutieren brauchen wir den Begriff der zusammenhängenden Summe $K \# L$ von orientierten Knoten $K$ und $L$, welcher in Abbildung 44 eingeführt wird. Wenn $K$ ein orientierter Knoten ist, dann bezeichnen wir mit $\bar{K}$ den gleichen Knoten mit umgekehrter Orientierung. Mithilfe des Satzes von Seifert-van Kampen kann man relativ leicht zeigen, dass für alle orientierten Knoten $K$ und $L$ gilt
+$$
+\pi_1\left(\mathbb{R}^3 \backslash K \# L\right) \cong \pi_1\left(\mathbb{R}^3 \backslash \bar{K} \# L\right),
+$$
+andererseits gibt es Knoten $K$ und $L$, so dass $\bar{K} \# L$ weder mit $K \# L$ noch mit dem Spiegelbild von $K \# L$ übereinstimmt.
+
+Wir sagen nun, dass ein Knoten $K$ ein Primknoten ist, wenn $K$ nicht die zusammenhängende Summe von zwei nicht-trivialen Knoten ist. Folgender Satz wurde von Culler-Gordon-Luecke-Shalen-Witten ${ }^{96}$ bewiesen:
+\end{CONC}
+
+Satz 13.7. (Culler-Gordon-Luecke-Shalen-Witten 1989) 
+
+\begin{THEO}{KNO-F12-03-07}{Culler-Gordon-Luecke-Shalen-Witten 1989}
+Es seien $K, J \subset \mathbb{R}^3$ zwei Primknoten mit $\pi_1\left(\mathbb{R}^3 \backslash K\right) \cong \pi_1\left(\mathbb{R}^3 \backslash J\right)$, dann gilt $K=J$ oder $K=J^s$.
+\end{THEO}
+
+Dieser Beweis geht natürlich auch weit über diese Vorlesung hinaus.
+
+\pagebreak
+\printbibliography
+\end{document}

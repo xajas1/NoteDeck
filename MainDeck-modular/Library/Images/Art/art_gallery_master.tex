@@ -1,0 +1,59 @@
+\documentclass[11pt]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{babel}
+\graphicspath{{/Users/tim/NoteDeck/MainDeck-modular/Library/Images/}}
+\setlength{\parindent}{0pt}
+\raggedbottom
+\title{Art Gallery — Master}
+\date{}
+\begin{document}
+\maketitle
+
+% Auto-generated — DO NOT EDIT.
+
+% Nur Dateiname (ohne Pfad) aus einem Pfad ziehen
+\makeatletter
+\newcommand{\basename}[1]{\begingroup\filename@parse{#1}\filename@base\filename@ext\endgroup}
+\makeatother
+
+% Einzeilige Codezeile (monospace), skaliert auf \linewidth
+\newcommand{\ArtCodeLine}[1]{\par\noindent{\scriptsize\ttfamily \resizebox{\linewidth}{!}{#1}}}
+
+% Robuste Kachel: rendert nichts, wenn Pfad leer ist
+\newcommand{\ArtTile}[2]{% #1=path, #2=caption
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \if\relax\detokenize{#1}\relax
+      % leer
+    \else
+      \includegraphics[width=\linewidth,height=0.28\textheight,keepaspectratio]{#1}\\[0.6ex]
+      {\footnotesize\itshape #2}\\[-0.2ex]
+      \ArtCodeLine{\basename{#1}}
+    \fi
+  \end{minipage}}
+
+\newcommand{\ArtRow}[4]{% #1..#4 = (path,caption) links/rechts
+  \noindent\ArtTile{#1}{#2}\hfill\ArtTile{#3}{#4}\par\vspace{1.0em}}
+
+\section*{Artists}
+
+\subsection*{Ernst Ludwig Kirchner}
+\input{/Users/tim/NoteDeck/MainDeck-modular/Library/Images/Art/Galleries/Ernst_Ludwig_Kirchner.tex}
+
+\subsection*{Hilma af Klint}
+\input{/Users/tim/NoteDeck/MainDeck-modular/Library/Images/Art/Galleries/Hilma_af_Klint.tex}
+
+\subsection*{Paintings by Hilma af Klint}
+\input{/Users/tim/NoteDeck/MainDeck-modular/Library/Images/Art/Galleries/Paintings_by_Hilma_af_Klint.tex}
+
+\subsection*{Paul Klee}
+\input{/Users/tim/NoteDeck/MainDeck-modular/Library/Images/Art/Galleries/Paul_Klee.tex}
+
+\subsection*{Wassily Kandinsky}
+\input{/Users/tim/NoteDeck/MainDeck-modular/Library/Images/Art/Galleries/Wassily_Kandinsky.tex}
+
+\end{document}

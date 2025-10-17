@@ -1,0 +1,14 @@
+{
+  "score": 0.9,
+  "verdict": "Die Herleitung ist fast korrekt, aber es fehlt eine explizite Darstellung der Subtraktion der Gleichungen.",
+  "weaknesses": [
+    {
+      "code": "MISSING_SUBTRACTION_STEP",
+      "msg": "Der Schritt, der die Subtraktion der beiden Gleichungen explizit zeigt, fehlt.",
+      "math_hint": "Zeige explizit: \\( \\bar{\\psi} (i \\gamma^\\mu \\partial_\\mu \\psi - i \\gamma^\\mu \\overleftarrow{\\partial}_\\mu \\psi) = 0 \\)"
+    }
+  ],
+  "fix_suggestions": [
+    "\\[ \\bar{\\psi} (i \\gamma^\\mu \\partial_\\mu \\psi - i \\gamma^\\mu \\overleftarrow{\\partial}_\\mu \\psi) = 0 \\]"
+  ]
+}

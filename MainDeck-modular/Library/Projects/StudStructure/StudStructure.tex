@@ -1,0 +1,2678 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17  Graphik
+% 18  Extra
+% 00. Titel und Autor
+% --- Pakete (nur was wirklich gebraucht wird) ---
+\usepackage{xstring}          % Dateinamen-Parsing
+\usepackage{graphicx}         % \includegraphics
+\usepackage[most]{tcolorbox}  % bruchfähige Side-by-Side-Box
+\usepackage{needspace}        % stabiler Vorab-Umbruch (empfohlen)
+
+
+% 1) Kurzbefehl: \td{...}  (optional mit Farbwunsch)
+\newcommand{\td}[2][blue]{{\color{#1}#2}}
+% Nutzung:
+% \td{dieser Text ist blau}
+% \td[red]{dieser Text ist rot}
+% \td[HTML]{dieser Text ist DodgerBlue}  % vorher Farbe definieren: \definecolor{HTML}{HTML}{1E90FF}
+
+
+
+
+
+% --- Parameter ---
+\newlength{\StructureLeftWidth}   \setlength{\StructureLeftWidth}{0.26\textwidth}
+\newlength{\StructureGap}         \setlength{\StructureGap}{1.5em}
+\newlength{\StructureNudge}       \setlength{\StructureNudge}{0pt}
+
+% --- Resthöhe messen (vor der Box ausführen) ---
+\newdimen\StructureAvail
+\newcommand{\StructureComputeRestspace}{%
+  \global\StructureAvail=\dimexpr\pagegoal-\pagetotal-2\baselineskip\relax
+  \ifdim\StructureAvail<0pt \global\StructureAvail=0pt\fi
+}
+
+% --- Bild dynamisch einpassen (ohne späten pagebreak!) ---
+\newcommand{\StructureIncludeAuto}[1]{%
+  \ifdim\StructureAvail>6cm
+    \includegraphics[width=\linewidth]{#1}%
+  \else
+    \ifdim\StructureAvail>2cm
+      \includegraphics[width=\linewidth,height=\StructureAvail,keepaspectratio]{#1}%
+    \else
+      \includegraphics[width=\linewidth]{#1}%
+    \fi
+  \fi
+}
+
+% --- Box-Umgebung (Side-by-Side, bruchfähig) ---
+\newenvironment{StructureBoxB}[1][]{%
+  \begin{tcolorbox}[
+    enhanced, breakable,
+    boxrule=0pt, colback=white, sharp corners,
+    sidebyside, sidebyside align=top seam,
+    lefthand width=\StructureLeftWidth,
+    sidebyside gap=\StructureGap,
+    before skip=.6\baselineskip, after skip=.6\baselineskip,
+    #1
+  ]%
+}{%
+  \end{tcolorbox}%
+  \par
+}
+
+% --- Fallback ohne Bild ---
+\newcommand{\StructureB}[1]{%
+  \begin{StructureBoxB}[lefthand width=0pt]
+  \tcblower
+    #1
+  \end{StructureBoxB}
+}
+
+% --- Hauptbefehl: \StructurePicAutoB{<Datei oder leer>}{<rechter Text>} ---
+\newcommand{\StructurePicAutoB}[2]{%
+  \begingroup
+    \def\fn{#1}%
+    \StrSubstitute{\fn}{ }{}[\fnnospace]%
+    \IfStrEq{\fnnospace}{}{%
+      \StructureB{#2}%
+    }{%
+      \IfBeginWith{\fn}{Art/}{%
+        \StrBehind[1]{\fn}{/}[\base]%
+        \def\fullpath{\fn}%
+      }{%
+        \def\base{\fn}%
+        \edef\fullpath{Art/\fn}%
+      }%
+      \def\artist{}\def\title{}\def\year{}%
+      \StrCount{\base}{__}[\dbl]%
+      \ifnum\dbl>0
+        \StrBehind[1]{\base}{__}[\restA]%
+        \StrBefore [1]{\restA}{__}[\artistraw]%
+        \StrBehind [1]{\restA}{__}[\restB]%
+        \StrBefore [1]{\restB}{__}[\titleraw]%
+        \StrBehind [1]{\restB}{__}[\yearExt]%
+        \StrBefore [1]{\yearExt}{.}[\yearraw]%
+        \StrSubstitute{\artistraw}{_}{ }[\artist]%
+        \StrSubstitute{\titleraw}{_}{ }[\title]%
+        \edef\year{\yearraw}%
+      \else
+        \StrBefore[1]{\base}{.}[\title]%
+      \fi
+      \def\caption{}%
+      \IfStrEq{\artist}{}{\def\caption{\title}}{\def\caption{\artist, \title}}%
+      \IfStrEq{\year}{}{}{\edef\caption{\caption\space(\year)}}%
+
+      % Vorab-Entscheidung stabilisiert die Paginierung
+      \StructureComputeRestspace
+      \Needspace{0.35\textheight} % bei Bedarf auf 0.40 erhöhen
+
+      \begin{StructureBoxB}
+        \textbf{Structure:}\par\vspace{.4\baselineskip}
+        \vspace*{\StructureNudge}\centering
+        \StructureIncludeAuto{\fullpath}\\[.4ex]
+        {\footnotesize\itshape \caption}
+      \tcblower
+        #2
+      \end{StructureBoxB}
+    }%
+  \endgroup
+}
+
+
+
+
+
+%–– Schrift­kodierung & Sprache ––––––––––––––––––––––––––––––––––––––––––––––––     % deutsche Bezeichnungen
+\usepackage{lmodern}  
+            % Latin-Modern-Schrift
+\usepackage{enumitem}
+\setlist{                % wirkt auf *alle* enumerate/itemize/description
+  itemsep = .1\baselineskip,
+  topsep  = 0.3\baselineskip
+}
+
+%–– Listenpakete –––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+\usepackage{outlines}             % kompakte Outline-Syntax
+\usepackage{enumitem}             % Feintuning aller Listen
+
+% 1. Ebene (outlinei)   → enumerate
+% 2. Ebene (outlineii)  → enumerate
+% 3. Ebene (outlineiii) → enumerate
+\renewcommand{\outlinei  }{enumerate}
+\renewcommand{\outlineii }{enumerate}
+\renewcommand{\outlineiii}{enumerate}
+
+%–– Nummerierung einmalig definieren –––––––––––––––––––––––––––––––––––––––––––
+\setlist[enumerate,1]{%
+  label=\Alph*.,                 % A.
+  ref=\Alph*,                    % für \ref{}
+  leftmargin=*, nosep            % Einzug & kompakte Abstände
+}
+
+\setlist[enumerate,2]{%
+  label=\Alph{enumi}.\arabic*.,  % A.1.
+  ref=\Alph{enumi}.\arabic*
+}
+
+\setlist[enumerate,3]{%
+  label=\Alph{enumi}.\arabic{enumii}.\arabic*.,  % A.1.1.
+  ref=\Alph{enumi}.\arabic{enumii}.\arabic*
+}
+
+\usepackage{slashed}
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[ngerman,shorthands=off]{babel}  
+
+
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\Sp}{\mathrm{Sp}}
+\newcommand{\Ogroup}{\mathrm{O}} % \O ist schon für skandinavisches Ø reserviert
+\newcommand{\U}{\mathrm{U}}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+
+\graphicspath{{/Users/tim/NoteDeck/MainDeck-modular/Library/Images/}
+              {/Users/tim/NoteDeck/MainDeck-modular/Library/Images/Art/}}
+
+\usepackage[export]{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing,arrows.meta,positioning,babel}
+\usepackage{tikz-cd}
+
+
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+% Hellblau definieren
+\definecolor{hellblau}{rgb}{0.3,0.6,1}
+\newenvironment{note}{\par\begingroup\color{hellblau}\itshape}{\par\endgroup}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\begin{unitbox}\CustomHeading{Definition}{#1}{#2}}{\end{unitbox}}
+\newenvironment{PROP}[2]{\begin{unitbox}\CustomHeading{Proposition}{#1}{#2}}{\end{unitbox}}
+\newenvironment{THEO}[2]{\begin{unitbox}\CustomHeading{Theorem}{#1}{#2}}{\end{unitbox}}
+\newenvironment{LEM}[2]{\begin{unitbox}\CustomHeading{Lemma}{#1}{#2}}{\end{unitbox}}
+\newenvironment{KORO}[2]{\begin{unitbox}\CustomHeading{Corollar}{#1}{#2}}{\end{unitbox}}
+\newenvironment{REM}[2]{\begin{unitbox}\CustomHeading{Remark}{#1}{#2}}{\end{unitbox}}
+\newenvironment{EXA}[2]{\begin{unitbox}\CustomHeading{Example}{#1}{#2}}{\end{unitbox}}
+\newenvironment{STUD}[2]{\begin{unitbox}\CustomHeading{Study}{#1}{#2}}{\end{unitbox}}
+\newenvironment{CONC}[2]{\begin{unitbox}\CustomHeading{Concept}{#1}{#2}}{\end{unitbox}}
+\newenvironment{OTH}[2]{\begin{unitbox}\CustomHeading{Other}{#1}{#2}}{\end{unitbox}}
+\newenvironment{EXE}[2]{\begin{unitbox}\CustomHeading{Exercise}{#1}{#2}}{\end{unitbox}}
+\newenvironment{MOT}[2]{\begin{unitbox}\CustomHeading{Motivation}{#1}{#2}}{\end{unitbox}}
+\newenvironment{PROOF}[2]{\begin{unitbox}\CustomHeading{Proof}{#1}{#2}}{\end{unitbox}}
+
+% --- Unit Umgebung für Source-Inhalte ---
+\usepackage{mdframed}
+\newmdenv[
+  linewidth=1pt,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftmargin=0cm,
+  rightmargin=0cm,
+  skipabove=10pt,
+  skipbelow=10pt,
+  innertopmargin=0.5\baselineskip,
+  innerbottommargin=0.5\baselineskip,
+  backgroundcolor=gray!10,
+  linecolor=gray
+]{unitbox}
+
+\newenvironment{unit}[1]
+  {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
+  {\end{unitbox}}
+
+% --- 17. ... ---
+
+% --- 18. Extras ---
+\usepackage{stmaryrd}
+\usepackage{bbold}  % falls du \mathbb{1} nutzen willst
+
+% --- 00. Titel und Autor ---
+\title{Proof Structures}
+\author{Tim Jaschik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+Kurze Beschreibung …
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+
+
+
+\tableofcontents
+\pagebreak
+
+
+\section{RG-Bernig25}
+
+
+
+\subsection{Levi-Civita Zusammenhang}
+
+
+\textbf{Statement: }{Fundamentaltheorem der Riemannischen Geometrie}.
+Sei $(M, g)$ eine Riemannsche Mannigfaltigkeit. Dann gibt es genau einen Zusammenhang D, der mit $g$ verträglich ist in folgendem Sinne:
+$$
+X(g(Y, Z))=g\left(D_{X} Y, Z\right)+g\left(Y, D_{X} Z\right)
+$$
+
+\StructurePicAutoB{ART0145__Wassily_Kandinsky__Delicate_Tension__1923.jpg}
+{%
+\begin{outline}
+  Zeige aus der Metrikverträglichkeit die A) Koszul-Gleichung und folgere dann: B) Eindeutigkeit, C) $\R$-Linearität in $X,Y$, D) $C^\infty$-Linearität in $X$, E) Ableitung in $Y$, F) Torsionsfreiheit, G) Metrikkompatibilität: 
+  
+  \1 Koszul-Gleichung
+  \2 Verwende Metrikkompaitibilität auf zyklische Ableitungen von Metriktensor $X g(Y, Z), Y g(Z, X), Z g(X, Y)$
+  \2 $Eq_1+Eq_2-Eq_3$
+  \2 Reduziere durch Torsionsfreiheit
+  \1 Eindeutigkeit
+  \2 Metriktensor nichtdegeneriert, also eindeutig
+  \1 $\R$-Linearität in $X,Y$
+  \2 Rechte Seite der Koszul-Gleichung ist $\R$-Linear
+  \1 $C^\infty$-Linearität in $X$
+  \2 Stelle dar durch Konszul-Gleichung und ziehe Skalarfunktionen raus
+  \2 Expliziere mit $[fX,Y]=f[X,Y]-Y(f)X$ und Produktregel
+  \2 So kürzen, dass Terme mit $f$-Vorfaktor überbleiben 
+  \1 Ableitung in $Y$
+  \2 Analog zu D) und kürzen, sodass $X(f)Y+D_XY$ über bleibt
+  \1 Torsionsfreiheit
+  \2 Koszul-Gleichung $(D_XY,Z) \ - $ Koszul-Gleichung $(D_YX,Z)$
+  \2 $2$ mal $[X,Y]$-Terme überleben   
+  \1 Metrikkompatibilität
+  \2 Koszul-Gleichung $(D_XY,Z) - (Y,D_XZ)$
+\end{outline}
+}
+
+\vspace{0.8cm}
+
+\textbf{Statement: }{Chirstoffelsymbole als Korrekturterme in lokalen Koordinaten}
+$$
+D_{X} Y=\sum_{i}\left(\sum_{j} X_{j} \frac{\partial Y_{i}}{\partial x_{j}}+\sum_{j, k} \Gamma_{j k}^{i} X_{j} Y_{k}\right) \frac{\partial}{\partial x_{i}},
+$$
+wobei die $\Gamma_{j k}^{i}$ durch die Gleichung
+$$
+D_{\frac{\partial}{\partial x_{j}}} \frac{\partial}{\partial x_{k}}=\sum_{i} \Gamma_{j k}^{i} \frac{\partial}{\partial x_{i}}
+$$
+definiert sind.
+
+\StructurePicAutoB{ART0011__Paul_Klee__Dittlsam__1918.JPG}
+{%
+\begin{outline}
+  Christoffel-Symbole tretten als Korrekturfaktoren in lokalen Darstellungen der kovarianten Ableitung von Vektorfeldern auf $D_{X^i\partial_i}Y^j\partial_j=X^i\partial_i(Y^j)\partial_j+\cdots$
+  \1 Wähle lokale Darstellung von Vektorfeldern bzgl. Rahmen
+  \1 Expliere aus mit $C^\infty$-Linearität in $X$ und Ableitung in $Y$
+  \1 Identitfiziere $D_{\partial_i}\partial_j$ und stelle durch Rahmen und Christoffelsymbole dar
+\end{outline}
+}
+
+\vspace{0.5cm}
+
+
+\textbf{Statement: } Lokale Darselltung der Christoffelsymbole
+$$
+\Gamma_{j k}^{i}=\frac{1}{2} \sum_{l} g^{i l}\left(\partial_{j} g_{k l}+\partial_{k} g_{l j}-\partial_{l} g_{j k}\right) .
+$$
+
+\StructurePicAutoB{}
+{%
+\begin{outline}
+  \1 Wähle Rahmen und expliziere Koszul-Gleichung für $(D_{\partial_j}\partial_k,\partial_l)$
+  \2 Hier tauchen schon Christoffelsymbol mit Laufindex $i$ gebunden an Metrik-Komponenten $g_{il}$ auf
+  \1 Kontrahiere mit inverser Metrik $g^{ls}$ bzgl Index des zweiten Basisvektors
+\end{outline}
+}
+
+\vspace{0.8cm}
+
+\textbf{Statement: } {Induzierter LC-Zusammenhang auf Untermannigfaltigkeiten von RMfk}. 
+Für die Levi-Civita-Zusammenhänge $D$ von $M$ und $\tilde{D}$ von $\tilde{M}$ gilt
+\begin{equation*}
+\left.D_{X} Y\right|_{p}=\left(\tilde{D}_{\tilde{X}} \tilde{Y}\right)^{T} \quad \forall p \in M 
+\end{equation*}
+wobei $T$ die Orthogonalprojektion $T_{p} \tilde{M} \rightarrow T_{p} M$ ist.
+
+\StructurePicAutoB{ART0173__Paintings_by_Hilma_af_Klint__Hilma_af_Klint_Altarpiece_No_2_13916.jpg}
+{%
+\begin{outline}
+  \1 Übereinstimmung von Einschränkungen von Fortsetungen mit Fortgesetze (Lokaler Nachweis)
+  \2 Geeigenete Wahl von lokalen Koordinaten, sodass ersten $n$ Koordianten lokale Koordinaten von UMfk
+  \2 $\tilde X(\tilde f)|_M= X(f)$ 
+  \3 Erweiterung mit verschwindenden Koeffizienten in Kodimension für $p\in M$
+  \2 $[\tilde X,\tilde Y]|_M= [X,Y]$
+  \3 Anwendung Lie-Klammer auf $\tilde f|_M$
+  \3 Anwendung von A.2: $Y(\tilde f)|_M=\tilde Y(\tilde f)|_M$
+  \1 Auf $M$ gilt: $\left.D_{X} Y\right|_{p}=\left(\tilde{D}_{\tilde{X}} \tilde{Y}\right)^{T}$
+  \2 Punktweiser Nachweis der LC-Eigenschaften bzgl. $\left(\tilde{D}_{\tilde{X}} \tilde{Y}\right)^{T}$
+  \3 Linearität
+  \3 Ableitung
+  \3 Torsionsfreiheit
+  \3 Metrikkompatibilität
+  \2 Eindeutigkeit gibt Existenz
+\end{outline}
+}
+
+\vspace{0.7cm}
+
+
+
+
+
+
+\pagebreak
+
+\subsection{Kovariante Ableitung längs Kurven}
+
+
+\textbf{Statement: }{Kovariante Ableitungs-Operator längs Kurven induziert durch LC-Zusammenhang der RMfk (EE)}
+Ist $M$ eine Riemannsche Mannigfaltigkeit mit Levi-CivitaZusammenhang $D$ und $c: I \rightarrow M$ eine glatte Kurve. Dann gibt es einen eindeutigen Operator $\frac{D}{d t}$ auf dem Raum der Vektorfelder längs $c$ mit folgenden Eigenschaften:
+\begin{enumerate}
+  \item Ist $f \in C^{\infty}(I)$ und $Y$ ein Vektorfeld längs $c$, so gilt
+  \[
+  \frac{D}{dt}(f Y)(t) = f(t) \frac{D}{dt} Y(t) + f'(t)\, Y(t), \quad \forall t \in I.
+  \]
+  
+  \item Ist $t_0 \in I$ und gibt es eine Umgebung von $t_0$ in $I$, so dass $Y$ die Einschränkung eines Vektorfeldes $X$ in einer Umgebung von $c(t_0)$ in $M$ ist, so gilt
+  \[
+  \frac{D}{dt} Y(t_0) = \left. D_{c'(t_0)} X \right|_{c(t_0)}.
+  \]
+\end{enumerate}
+
+
+\StructurePicAutoB{}
+{%
+  \begin{outline}
+  Leite in lokaler Darstellung $Y(t)=y^i(t)\partial_i|_{c(t)}$ eine lokale Darstellung der kovarianten Ableitung längs Kurven her und zeige Eindeutigkeit und Existenz
+  \1 Lokale Darstellung
+  \2 $$\left.\frac{D}{dt}\frac{\partial}{\partial x_j}\right|_{t}
+      =\left.D_{c'(t)}\frac{\partial}{\partial x_j}\right|_{c(t)}$$ mittels Christoffelsymbolen
+  \1 Eindeutigkeit
+  \2 Folgt aus lokaler Darstellung
+  \1 Ableitung
+  \2 Lokale Darstellung, dann umgekehrte Produktregel, sodass 
+  $$f'(t)T_1+f(t)T_2$$
+  \1 Lokale Darstellbarkeit durch kovariante Ableitung in Umgebung
+  \2 $Y$ Einschränkung auf Kurve von lokaler Erweiterung $X$ auf Umgebung 
+  \3 $$y_i(t)=X_i|_{c(t)} \quad y_i'(t)=c'(t)(X_i)$$
+  \2 Rechne zunächst normale kovariante Ableitung $D_{c'(t)} X|_{c(t)}$ 
+  \2 Verwende lokale Darstellung von Vektorfeld längs Kurve bzw Geschwindigkeitsvektorfeld 
+\end{outline}
+}
+
+
+
+
+
+\vspace{0.5cm}
+
+\textbf{Statement: }{Kovariante Ableitung der Riemannischen Metrik längs Kurven}.
+Sind $X,Y$ Vektorfelder längs $c$, so gilt
+$$
+\frac{d}{d t} g(X(t), Y(t))=g\left(\frac{D}{d t} X(t), Y(t)\right)+g\left(X(t), \frac{D}{d t} Y(t)\right)
+$$
+
+\StructurePicAutoB{}
+{%
+\begin{outline}
+  \1 Lokale Darstellung von Vektorfeldern längs Kurven
+  \1 Metrikkomponenten 
+\end{outline}
+}
+
+\vspace{0.5cm}
+
+
+
+
+
+
+\pagebreak
+
+
+
+\subsection{Paralleltransport}
+
+\textbf{Statement: }{Eindeutige Existenz von Paralleles Vektorfeld längs einer Kurve zu Startvektor}.
+Für jedes $X_{0} \in T_{c(0)} M$ gibt es genau ein paralleles Vektorfeld $X$ längs $c$ mit $X(0)=X_{0}$.
+
+
+\StructurePicAutoB{ART0153__Hilma_af_Klint__The_Ten_Largest_No_3_Youth__1907.jpg}
+{%
+\begin{outline}
+  Für hinreichend kleine kompakte Teilabschnitt der Kurve um Startpunkt, welche von einer Karte überdeckt werden, ist die eindeutige Existenz eines Paralleltransport äquivalent zu einem System linearer DGLs mit Anfangswerten:
+  $$0=\frac{D}{dt}X=(\dot{X}^k+X^i\dot{c}^j\Gamma_{ij}^k)\partial_k$$
+\end{outline}
+}
+
+
+\vspace{0.7cm}
+
+\textbf{Statement: }{Parallelverschiebung ist eine Isometrie zwischen Tangentialräumen}.
+Die Parallelverschiebung ist eine Isometrie zwischen $T_{c(0)}$ und $T_{c(1)}$.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 Zeitableitung und Produktregel von Metrik längs Kurve mit Paralleltransport als Input
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+\pagebreak
+
+\subsection{Geodätische und Exponentialabbildung}
+
+
+\textbf{Statement: }{Lokale Lösbarkeit von ODEs}.
+Sei $F: \mathbb{R}^{n} \times \mathbb{R}^{n} \rightarrow \mathbb{R}^{n}$ eine glatte Funktion. Betrachte Kurve $x: I \rightarrow \mathbb{R}^{n}$ und das Differentialgleichungssystem
+\begin{equation*}
+\frac{d^{2} x}{d t^{2}}=F\left(x, \frac{d x}{d t}\right) \tag{5}
+\end{equation*}
+Dann gilt: für jeden Punkt $\left(x_{0}, v_{0}\right) \in \mathbb{R}^{n} \times \mathbb{R}^{n}$ gibt es eine Umgebung $U \times V$ und $\epsilon>0$, so dass für $(u, v) \in U \times V$ die Gleichung (5) eine eindeutige Lösung $x_{u, v}:(-\epsilon, \epsilon) \rightarrow \mathbb{R}^{n}$ besitzt mit Anfangswerten $x_{u, v}(0)=u, x_{u, v}^{\prime}(0)=v$. Die Abbildung
+$$
+\begin{aligned}
+X: U \times V \times(-\epsilon, \epsilon) & \rightarrow \mathbb{R}^{n} \\
+(u, v, t) & \mapsto x_{u, v}(t)
+\end{aligned}
+$$
+ist glatt.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+ 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Eindeutige lokale Lösbarkeit der Geodäten-Gleichung für AW}.
+Sei $p \in$ $M$. Dann gibt es offene Umgebung $U$ von $p$ und $\epsilon>0$, so dass für $q \in$ $U, v \in T_{q} M$ mit $\|v\|<\epsilon$ es genau eine Geodätische $c_{v}:(-1,1) \rightarrow M$ mit $c_{v}(0)=q, c_{v}^{\prime}(0)=v$ gibt. Mit anderen Worten gibt es zu gegebenen Anfangswerten zumindestens lokal eine Lösung.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Basis für den Raum der parallelen Vektorfelder auf 2-dim Mfk}.
+Sei $c$ eine Geodätische auf einer zweidimensionalen Mannigfaltigkeit. Sei $N$ ein Normalenvektorfeld längs $c$, d.h. 
+$$\|N(t)\|=1,\left\langle N(t), c^{\prime}(t)\right\rangle=0$$ 
+für alle $t$. Leitet man diese Gleichungen nach $t$ ab, so ergibt sich, dass auch $N$ ein paralleles Vektorfeld längs $c$ ist. Damit haben wir eine Basis für den Raum der parallelen Vektorfelder längs $c$. Ein beliebiges paralleles Vektorfeld mit Norm 1 lässt sich schreiben als $X(t)=\cos \alpha c^{\prime}(t)+$ $\sin \alpha N(t)$ mit $\alpha$ konstant.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Exponentialabbildung beim Basispunkt}.
+Sei $0_{p}=0 \in T_{p} M$. Dann ist $\exp \left(0_{p}\right)=p$ und
+$$
+\left.d \exp _{p}\right|_{0_{p}}: \underbrace{T_{0_{p}} T_{p} M}_{=T_{p} M} \rightarrow T_{p} M
+$$
+die Identität.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    Zeige, dass $$d\exp_p|_{0_p}(v)=\dot c_v(0)$$ indem man bzgl. $t\mapsto tv$ in $t=0$ ableitet
+    \1 $\exp_p(tv)=c_{tv}(1)=c_v(t)$
+    \2 Für fixes $t$: $c_v(st)=\tilde c(s)=c_{tv}(s)$ aus Eindeutigkeit der Geodätischen bzgl Anfangswerte und verwende dann für $s=1$
+    \1 Differenzial der Exponentialabbildung bestimmen
+    \2 Charakterisiere $v\rightarrow \alpha(t)=tv$
+    \2 Nutze skallierte Darstellung von Geodätischen und leite bei $t=0$ ab
+    $$\exp_p (\alpha(t))=c_{tv}(1)$$
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Exponentialabbildung als lokaler Diffeomorphismus}.
+Die Abbildung exp : $\Omega \rightarrow M$ für $\Omega:=\{v \in$ $\left.T M: 1 \in I_{v}\right\}$ ist differenzierbar. Für $p \in M$ ist die Abbildung
+$$
+\begin{aligned}
+\Phi: \Omega & \rightarrow M \times M \\
+v & \mapsto(\pi(v), \exp (v))
+\end{aligned}
+$$
+ein lokaler Diffeomorphismus von einer offenen Umgebung W von $0_{p}$ in TM auf eine Umgebung von $(p, p)$ in $M \times M$.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 Differenzierbarkeit
+        \2 Differenzierbare Abhängigkeit der Lösung von Geodäten-DGL von Anfangswerten
+    \1 Lokale Isometrie: Zeige, dass lokal 
+    $$d\Phi|_{(p,0)}: W(0_p)\subset T_{(p,0)}TM\to T_{(p,p)}M\times M$$ 
+    invertierbar und wende Satz von invertierbare Umkehrfunktionen an
+        \2 Variation in Tangentialraum: Wähle  
+        $$
+        \gamma_i(t)=(p, u(t))=\left(p, t e_i\right) \in T M, \quad e_i=i \text {-te Standardbasisrichtung in } T_p M .
+        $$
+        Die Geodäte $c_{e_i}(t):=\exp _p\left(t e_i\right)$ erfüllt $c_{e_i}(0)=p$ und $\dot{c}_{e_i}(0)=e_i$. Daher ist
+
+        $$
+        \left.\frac{d}{d t}\right|_{t=0} \Phi\left(\gamma_i(t)\right)=\left(0, \dot{c}_{e_i}(0)\right)=\left(0, e_i\right)=\left.\frac{\partial}{\partial y_i}\right|_{(p, p)} .
+        $$
+        \2 Variation in Basisraum: Wähle mit $x(0)=p$ und $x^{\prime}(0)=\left.\partial_{x_i}\right|_{p,}$
+        $$
+        \eta_i(t)=(x(t), 0) \in T M .
+        $$
+        Differenzieren bei $t=0$ liefert
+        $$
+        \left.\frac{d}{d t}\right|_{t=0} \Phi\left(\eta_i(t)\right)=\left(x^{\prime}(0), x^{\prime}(0)\right)=\left.\frac{\partial}{\partial x_i}\right|_{(p, p)}+\left.\frac{\partial}{\partial y_i}\right|_{(p, p)} .
+        $$
+        Also
+        $$
+        \mathrm{d} \Phi_{(p, 0)}\left(\frac{\partial}{\partial x_i}\right)=\frac{\partial}{\partial x_i}+\frac{\partial}{\partial y_i} .
+        $$
+        \2 Ordnen wir die Basis von $T_{(p, 0)} T M$ als $\left(\partial_{x_1}, \ldots, \partial_{x_n}, \partial_{u_1}, \ldots, \partial_{u_n}\right)$ und die Basis von $T_{(p, p)}(M \times M)$ als $\left(\partial_{x_1}, \ldots, \partial_{x_n}, \partial_{y_1}, \ldots, \partial_{y_n}\right)$, so hat $\mathrm{d} \Phi_{(p, 0)}$ die Blockmatrix
+        $$
+        \mathrm{d} \Phi_{(p, 0)}=\left(\begin{array}{cc}
+        \mathrm{Id} & 0 \\
+        \mathrm{Id} & \mathrm{Id}
+        \end{array}\right),
+        $$
+
+        denn der $x$-Block geht auf $\partial_x+\partial_y$ und der $u$-Block auf $\partial_y$.
+        \2 Damit ist $\mathrm{d} \Phi_{(p, 0)}$ ein Isomorphismus und der Umkehrsatz liefert, dass $\Phi$ ein lokaler Diffeomorphismus in ( $p, 0$ ) ist.
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Lokale Eigenschaften der Exponentialabbildung}.
+Für $p \in M$ gibt es eine Umgebung $U$ von $p$ in $M$ und $\epsilon>0$ so dass
+\begin{enumerate}
+  \item Für $x, y \in U$ gibt es einen eindeutigen Vektor $v \in T_{x} M$ mit $\|v\| < \epsilon$ und $\exp_{x}(v) = y$.
+  
+  \item Die zugehörige Geodätische hängt differenzierbar von den Parametern ab.
+
+  \item Für $q \in U$ ist die Abbildung
+  \[
+  \exp_{q} : B\left(0_{q}, \epsilon\right) \rightarrow M
+  \]
+  ein Diffeomorphismus zwischen der Menge $B\left(0_{q}, \epsilon\right) = \left\{ v \in T_{q} M : \|v\| < \epsilon \right\}$ und ihrem Bild in $M$.
+\end{enumerate}
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 Konstruiere aus lokaler Isometrie eine diffeomorph abgebildete Bündeltube mit Radius $\epsilon$, und schrenke Bild auf geeignetes $U\times U$ ein
+        \2 Verwende die lokale Isometrie von $\Phi$ bzgl $W_{0_p}$, um einen offene Bündel-Tube $W'$ um $p$ zu konstruieren, welche Diffeomorph zum Bild unter $\Phi$ ist und $(p,p)\in\Phi(W')$
+        \2 Existiere offene Umgebung $U$ um $p$ sodass 
+        $$U\times U \subset \Phi(W')$$
+        \2 Zu jedem Paar (aus Startpunkt und Endpunkt) in $U\times U$ existiert ein Basispunkt mit Vektor in $W'$
+    \1 Konstruiere die verbindende Geodätische aus Umkehrabbildung (Basispunkt$+$Tangentialvektor) des Paars. Da Umkehrabbildung differenzierbar, hängt 
+    $$t\mapsto \exp_p(t\Phi^{-1}(x,y))$$
+    differenzierbar von $(x,y)$ ab
+    \1 $\Phi|_{W'}$ bildet als Diffeomorphismus Untermannigfaltigkeiten diffeomorph auf Untermannigfaltigkeiten ab
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+
+\subsubsection{Hopf-Rinow}
+
+\textbf{Statement: }{Distanzfunktion auf Riemannischer Mannigfaltigkeit}.
+$d$ ist eine Metrik auf $M$, die die gegebene Topologie von $M$ als Mannigfaltigkeit induziert.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    Prüfe für Metrik A) Wohldefiniertheit, B) Dreiecks-UG, C) Symmetrie, D) $d(x,x)=0$, E) $d(x,y)=0$ dann $x=y$
+    \1 Menge der verbundenen Punkten zu beliebigen Basispunkt ist offen und nicht leer, ebenso das Komplement. Da $M$ ZSH, existiert eine endliche Verbindungsstrecke
+    \1 Klar
+    \1 Klar
+    \1 Klar
+    \1 Zeige äquivalent: $x\neq y$, dann $d(x,y)>0$
+        \2 Hausdorff: Trenne lokal $x$ von $y$ ab mit $\varphi(U)=B(0,1)$
+        \2 Verwende Präkompaktheit von $B(0,\frac{1}{2})$: Existieren $\lambda,\mu>0$ sd.
+        $$\lambda ||u||\leq {\varphi^{-1}}^{*}g(u,u)\leq \mu||u||$$
+        \2 Pullback $\gamma=\varphi^{-1}\circ c|_{[0,t]}$ der Kurve bis zum Zeitpunkt $t$ des ersten Schnitts mit $\varphi^{-1}(S(0,\frac{1}{2}))$
+        \2 $L(c)$ von unten abschätzen durch Länge bzgl Pullback auf Teilintervall und Abschätzung der Metrik aus Präkompaktheit
+
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+\textbf{Statement: }{Gausslemma}.
+Die radialen Geodätischen $r \mapsto \exp _{p}(r v)$ sind normal zu den Hyperflächen $f\left(\{r\} \times S^{n-1}\right)$. Speziell ist die Metrik in Polarkoordinaten durch $g=d r^{2}+h_{(r, v)}$ gegeben, wobei $h_{(r, v)}$ die durch $g$ auf $f\left(\{r\} \times S^{n-1}\right)$ induzierte Metrik ist.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 Wähle $\epsilon>0$ so klein, dass $\exp _{p}: B=B\left(0_{p}, \epsilon\right) \rightarrow B^{\prime} \subset M$ ein Diffeomorphismus ist. 
+    \1 Polarkoordinaten $f:(0, \epsilon) \times S^{n-1} \rightarrow$ $B^{\prime} \backslash\{p\},(r, v) \mapsto \exp _{p}(r v)$
+    \1 Setze $v:\left(-\epsilon^{\prime}, \epsilon^{\prime}\right) \rightarrow S_{r}^{n-1}$ eine glatte Kurve und 
+    $$\alpha(u, t):=\exp _{p}(u v(t))$$ wobei $u$ die Laufweite einer Geodätischen $c_v(u)$ und $v(t)$ die Ausrichtung einer Geodätischen parametrisiert
+    \1 Zeige für alle $(u, t)$
+    $$\left\langle\frac{\partial \alpha}{\partial u}, \frac{\partial \alpha}{\partial t}\right\rangle=0$$
+        \2 Berechne $$\frac{\partial}{\partial u}\left\langle\frac{\partial \alpha}{\partial u}, \frac{\partial \alpha}{\partial t}\right\rangle$$ lokal mit Produktregel, sortieren nach partiellen Ableitungen von $\alpha$ und Metrikkomponenten rauszeihen 
+            \3 $\frac{\partial \alpha}{\partial t}$-Term verschwindet, da lokale Geodäten-Gleichung in Klammer
+            \3 $\frac{\partial \alpha}{\partial u}$-Term verschwindet, da die partielle Ableitung von
+            $$
+            \left\langle\frac{\partial \alpha}{\partial u}, \frac{\partial \alpha}{\partial u}\right\rangle=\langle v(t), v(t)\rangle=r^{2}
+            $$
+            nach $t$ bis auf Vorfaktor den $\frac{\partial \alpha}{\partial u}$-Term ergibt (Achtung: Indizes dürfen getauscht werden)
+        \2 Wir kennen $\alpha_{,t}(0,t)=0$ und damit aufgrund der Unabhängigkeit von $u$ für alle $u,t$
+        $$\langle \alpha_{,u},\alpha_{,t} \rangle(u,t)=\langle \alpha_{,u},\alpha_{,t} \rangle(0,t)=0$$
+
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+\textbf{Statement: }{Lokale eindeutige Existenz einer verbindenden Geodätischen}.
+Für $p \in M$ gibt es Umgebung $U$ in $M$ und $\epsilon>0$ so dass für $x, y \in U$ es eine (bis auf Parametrisierung) eindeutige Kurve $c$ von $x$ nach $y$ mit Länge $L(c)=d(x, y)<\epsilon$ gibt. Diese Kurve ist eine Geodätische und hat minimale Länge.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 Wähle $(U,\epsilon)$ kanonisch (Eindeutige Geodäten-Parametrisierung mit $\epsilon$-Schranke)
+        \2 Geodäten-Länge und damit metrischer Abstand durch $\epsilon$ beschränkt
+    \1 $L(c)\leq L(\gamma)$ mit Gleichheit wenn $c=\gamma$ (bis auf Umparametrisierung) durch Fallunterscheidung bzgl Austritt von $\gamma(t)=\exp_x(r(t)v(t))$ aus $B'=\exp_x(B(0_x,\epsilon))$
+        \2 $\gamma$ tritt (erstes mal) aus bei $t_0$: $L(\gamma)$ von unten abschätzen durch Einschränkung auf Teilabschnitt bis $t_0$ und Radialanteil der Darstellung von Metrik in Polarkoordinaten (Gauß-Lemma)
+        \2 $\gamma$ tritt nicht aus: Gauß-Lemma
+        $$L(\gamma)= \int_{0}^{1} \left(r^{\prime}(t)^{2}+h_{(r(t), v(t))}(v^{\prime}(t), v^{\prime}(t)\right)^{\frac{1}{2}}dt$$
+        \2 Wenn Gleichheit in letzter Rechnung gilt, dann Geodätische $c$ bis auf Umparametrisierung
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+
+\textbf{Statement: }{Lokale Äquivalenzcharakterisierung von bogenparametrisierten Geodätischen}.
+Eine Kurve $c: I \rightarrow M$, die nach Bogenlänge parametrisiert ist, ist eine Geodätische genau dann, wenn es zu jedem $t \in I$ ein $\epsilon>0$ gibt, so dass $c_{[t-\epsilon, t+\epsilon]}$ minimal ist, d.h.
+$$
+L\left(\left.c\right|_{\left[t_{1}, t_{2}\right]}\right)=d\left(c\left(t_{1}\right), c\left(t_{2}\right)\right) \quad \forall t_{1}, t_{2} \in[t-\epsilon, t+\epsilon]
+$$
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 $\Rightarrow$: Wähle kanonische $(U,\epsilon)$ Umgebung von $p=c(t)$. Für alle $t_1,t_2\in I$, sodass $c(t_1),c(t_2)\in c\cap U$ ist $c|_{[t_1,t_2]}$ eindeutige Geodätische mit Länge $L(c|_{[t_1,t_2]})=d(c(t_1),c(t_2))<\epsilon$ (Lokale eindeutige Existent von minimalen Geodäten).
+    \1 $\Leftarrow$: Da lokal (kanonisch $(U,\epsilon)$) für entsprechende Abschnitt minimal, ist bereits schon lokal Geodätische. Damit aber global Geodätisch (da Geodätisch sein eine lokale Eigenschaft) 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Energie Charakterisierungen von Geodätischen}.
+Sei $c:[a, b] \rightarrow M$ eine stückweise differenzierbare Kurve.
+\begin{enumerate}
+  \item Ist $c$ minimal, d.\,h.\ $L(c) = d(c(a), c(b))$, und ist $c$ proportional zur Bogenlänge parametrisiert, so ist $c$ eine Geodätische.
+
+  \item Gilt für jede Kurve $\gamma$ von $c(a)$ nach $c(b)$, dass $E(\gamma) \geq E(c)$, dann ist $c$ eine Geodätische, die nach Bogenlänge parametrisiert ist.
+\end{enumerate}
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 Lokaler Widerspruch: Angenommen, $c$ ist lokal nicht minimal. Dann existiert Kurve
+    $$
+    \alpha(t):=\left\{\begin{array}{cc}
+    c(t) & t \in[a, b] \backslash\left[t_{1}, t_{2}\right] \\
+    \gamma(t) & t \in\left[t_{1}, t_{2}\right]
+    \end{array}\right.
+    $$
+    global kürzer als $c$
+    \1 ...
+        \2 Cauchy-Schwarz gibt für Energie 
+        $$E(\gamma)\geq L(\gamma)^2\frac{1}{2(t_2-t_1)}\ \Leftrightarrow \ L(\gamma)\leq\sqrt{2E(\gamma)(t_2-t_1)}$$
+        mit Gleichheit, wenn $\gamma$ konstante Geschwindigkeit (prop. zu BLP)
+        \2 $c$ energieminimierend, dann nach (B.1) proportional BLP. 
+        \2 Für andere proportional BLP $c_0$ gilt:
+        $$L(c_0)=\sqrt{2E(c_0)(b-a)}\geq\sqrt{2E(c)(b-a)}=L(c)$$
+        also $c$ minimal und damit Geodätisch (WIESO)
+  \end{outline}
+}
+
+\todo{Prüfe nochmal}
+
+\vspace{0.8cm}
+
+
+
+\textbf{Statement: }{Existenz von minimalen Geodätischen in freien Homotopieklassen auf kompakten Mannigfaltigkeiten}.
+Auf jeder kompakten Riemannschen Mannigfaltigkeit gibt es in jeder nichttrivialen freien Homotopieklasse $\mathcal{C}$ eine Geodätische mit minimaler Länge (Hadamard).
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    Finde zunächst untere Schranke für Länge von Repräsentanten einer freien Homotopieklasse sowie eine obere Schranke an Abschnittlängen, sodass Modifikationen von kürzeren Abschnitten homotop sind. Wähle dann geeignete Kurvenfolge in Homotopieklasse, sodass bei hinreichend feiner Segmentierung der Folgenglieder die Stützstellen homotop geodätisch verbunden werden können. Dann muss noch geprüft werden, dass im Grenzwert die Abschnitte, welche durch die Stützstellen laufen, lokal geodätisch sind.
+    \1 Schranke für Gesamtlänge und homotope Änderungen
+    \2 M Kompakt, also existiert global $\epsilon>0$, sodass $\exp$ für jedes $p\in M$ auf $B(0_p,\epsilon)$ Diffeomorph zum Bild ist
+    \3 $\gamma \in \mathcal{C}$ müssen mindestens Länge $\geq \epsilon$ haben, da sonst kontrahierbar
+    $$\ell:= \inf\{ L(c): c\in\mathcal{C}\}$$
+    \3 Verkürzende stetige Änderungen von Kurven in Abschnitten mit Länge kleiner $\epsilon$ sind Homotopien
+    \1 Wähle $(c_k)_k\subset \mathcal{C}$ mit konstanter Geschwindigkeit, Konvergenz der Länge gegen $\ell$ und Länge $\leq 2\ell$   
+    \1 Wähle Anzahl der Stützpunkte $m$, sodass $\epsilon>\frac{4\ell}{m}$ und damit ist Länge von $c_k$ auf Abschnitten $[\frac{j}{m},\frac{j+1}{m}]$ kleiner gleich $\frac{\epsilon}{2}$
+    \1 Verbinde Stützstellen minimal eindeutig geodätisch und wegen der oberen Schranke an Länge der Abschnitte homotop: $(c_k)_k\to (\tilde c_k)_k\subset \mathcal{C}$
+    \1 Da M kompakt, $\tilde c_k (\frac{j}{m})\to p_j$ geodätisch verbunden auf Teilabschnitten
+    \1 Pürfe $\tilde c$ noch lokal um Stützstellen $[\frac{j}{m}-\delta,\frac{j}{m}+\delta]$: Da $L(\tilde c)$ bereits minimal, verändert lokale geodätische Verbindung nichts, d.h. ist schon geodätisch
+
+
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Birkhoff, Lusternik-Fet}.
+Sei M kompakt und einfach zusammenhängend. Dann gibt es eine geschlossene Geodätische positiver Länge.
+
+\vspace{0.8cm}
+
+
+
+\textbf{Statement: }{Auf kompakten Riemannischen Mannigfaltigkeiten existiert eine geschlossene Geodätische}.
+Auf jeder kompakten Mannigfaltigkeit gibt es (mindestens) eine geschlossene Geodätische.
+
+\vspace{0.8cm}
+
+
+
+\textbf{Statement: }{Existenz von Durchlaufpunkten durch geodätische Sphären}.
+Seien $p, q \in M, p \neq q$. Setze
+$$
+S=S(p, \delta):=\{r \in M \mid d(p, r)=\delta\}
+$$
+Für genügend kleines $\delta$ gibt es ein $r \in S$ mit
+$$
+d(p, q)=d(p, r)+d(r, q)
+$$
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 Existiert $\delta>0$ klein genug, sodass $\exp$ auf $S(0_p,\delta)$ definiert und Bild kompakt
+    \2 Da $S$ kompakt ist, existiert einen $r$ im Bild, sodass $d(r,q)=d(S,q)$
+    \1 $\gamma$ Kurve von $p$ nach $q$ mit Durchlaufpunkt bei $\gamma(t_0)$
+    \2 Splite Längenintegral für inneren und äußeren Abschnitt auf und schätze $d(p,q)$ von unten bzgl $r$ ab
+    \2 Verwende Dreiecksungleichung bzgl $r$ als Stützpunkt und schätze $d(p,q)$ von oben ab
+    \1 Ungleichungen ergeben $d(p,q)=d(p,r)+d(r,q)$
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+\textbf{Statement: }{Hopf-Rinow}.
+Wenn für einen Punkt $p \in M$ auf einer Riemannschen Mannigfaltigkeit die Exponentialabbildung $\exp _{p}$ auf ganz $T_{p} M$ definiert ist, dann kann jeder Punkt auf $M$ mit $p$ durch eine minimale Geodätische verbunden werden.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    Verwende die Existenz eines Durchlaufpunktes mit Distanz-Relation, um eine BLP Geodätische $c(t)$ zu konstruieren, und zeige, dass eingeschränkt auf $[0,d(p,q)]$ der maximale Zeitpunkt, bis welchen die (minimale) Distanz $d(p,q)$ durch $d(q,c(t))+t$ bestimmt wird, gerade $d(p,q)$ ist, d.h. nach dem Durchlaufpunkt minimiert die Geodätische fortschreitend die riemannische Distanz optimal.
+    \1 Existiert $\delta>0$, sodass $$d(p,q)=d(p,r)+d(r,q)$$
+    mit $d(p,r)=\delta$ und wähle BLP Geodätische $c(t)=\exp_p(tv)$ sodass $\exp_p(\delta v)=r$
+    \1 $$I=\{t\in \R: d(q,c(t))+t=d(p,q)\}$$
+    der Bereich, in welchem die Länge der Geoätischen bis zum Zeitpunkt $t$ plus die Rest-Distanz bis $q$ geradae die Distanz zwischen $p$ und $q$ beschreibt
+    \2 $\delta\in I$
+    \2 $$T:= I\cap [0,d(p,q)]$$
+    wobei das Maximmum in $I$ angenommen wird
+    \1 WSP: Ang. $T<d(p,q)$
+    \2 Anwendung von Durchlaufpunkt-Lemma auf $c(T)$: $\delta^\prime>0$, sd. $\exists r^\prime\in S_{\delta^\prime}c(T)$ mit $d(C(T),q)=\delta^\prime+d(r^\prime, q)$
+    \2 $d(C(T),q)=d(p,q)-T$
+    \2 $$d(p,r^\prime)\geq d(p,q) - d(r^\prime,q)= T + \delta^\prime$$
+    \2 $\gamma$ minimale Geodätische von $r^\prime$ nach $q$ als geodätische Erweiterung von $c$
+    $$d(p,r^\prime)= L(c|_{[0,T]})+L(\gamma) \text{ und } c(T+\delta^\prime)=r^\prime$$
+    \2 $$d(q,c(T+\delta^\prime))+T+\delta^\prime=d(q,r^\prime)+ T+\delta^\prime = d(p,q) \Rightarrow T+\delta^\prime\in I$$
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+
+\textbf{Statement: }{In geodätisch vollständigen Riemannischen Mannigfaltigkeiten lassen sich zwei Punkte durch minimale Geodätische verbinden}.
+Ist $(M, g)$ geodätisch vollständig, so lassen sich je zwei Punkte auf $M$ durch eine minimale Geodätische verbinden.
+
+
+\vspace{0.8cm}
+
+
+
+
+\textbf{Statement: }{Äquivalenzcharakterisierungen von geodätischer Vollständigkeit}
+Sei $(M, g)$ eine Riemannsche Mannigfaltigkeit. Dann sind folgende Aussagen äquivalent:
+\begin{enumerate}
+  \item $(M, g)$ ist geodätisch vollständig.
+  \item Für jedes $p \in M$ ist $\exp_{p}$ auf ganz $T_p M$ definiert.
+  \item Es gibt ein $p \in M$, für das $\exp_{p}$ auf ganz $T_p M$ definiert ist.
+  \item Jede beschränkte und abgeschlossene Menge in $(M, d)$ ist kompakt.
+  \item Der metrische Raum $(M, d)$ ist vollständig, d.\,h.\ jede Cauchy-Folge konvergiert.
+\end{enumerate}
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    $A\Rightarrow B$: Geodätisch Vollständig ist per definition Definition von $\exp$ auf ganz $TM$, $B\Rightarrow C$: Dann existiert offensichtlich auch ein Punkt, wo $\exp$ auf dem ganzen Tangentialraum definiert ist, $C \Rightarrow D$: $K^\prime=(\exp_p^{-1}K)\cap\overline{B_R(0_p)}$ kompakt in $T_pM$ und wird durch $\exp$ stetig auf kompakt abgebildet, D $\Rightarrow$ E: Cauchyfolge beschränkt in $M$, daher existiert Häufungspunkt und Cauchy-Bedingung gibt konvergenz, E $\Rightarrow$ A: 
+    \1 Definition
+    \1 Trivial
+    \1 $K$ liegt in beschränkten geodätischen Ball um $p$ und ist im Bild von $\exp_p|_{B_R(0_p)}$ wegen Hopf-Rinow. Das Urbild geschnitten mit $\overline{B_R(0_p)}$ ist abgeschlossen und damit im Tangentialraum kompakt. $\exp$ sttetig bildet kompakt auf kompakt ab
+    \1 Cauchyfolge beschränkt in $M$, daher existiert Häufungspunkt und Cauchy-Bedingung gibt Konvergenz
+    \1 Vollständigkeit des metrischen Raumes impliziert geodätische Vollständigkeit 
+    \2 Sei $c$ BLP Geodätische mit maximalen Def-Intervall $I=(a,b)$ (Lokale Existenz von Lösung der Geodätengleichung)
+    \2 WSP: Ang $b<\infty$ 
+    \3 Dann existiert eine Folge $(t_k)_k\subset I$, $t_k\to b$ sodass Cauchyfolge in $M$ induziert wird
+    $$d(c(t_k),c(t_\ell))\leq |t_k-t_\ell|$$
+    und damit existeirt aus Vollständigkeit ein Grenzwert $p\in M$. 
+    \3 Wähle Umgebung um $p$ klein genug, sodass alles Geodäten durch $q\in U$ auf $(-\epsilon, \epsilon)$
+    \3 Wähle $\epsilon^\prime$ klein genug, sodass $c(t-\epsilon^\prime)\in U$, dann setzt die entsprechende lokale Geodätische $c^\prime$ bzgl $q=c(t)$ die Geodätische $c$ geodätische fort auf $(a,b+(\epsilon-\epsilon^\prime))$(Eindeutigkeit)
+
+
+
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+\pagebreak
+
+\subsection{Krümmung}
+
+
+
+\textbf{Statement: }{Riemannischer Krümmungstensor ist $C^\infty(M)$-linear in allen Komponenten und hängt von den Vektorfeldern nur pw ab}.
+$R$ ist $C^{\infty}(M)$-linear in allen Komponenten. Speziell hängt $\left.(R(X, Y) Z)\right|_{p}$ nur von $\left.X\right|_{p},\left.Y\right|_{p},\left.Z\right|_{p}$ ab.
+
+\StructurePicAutoB{ART0312__Claude_Monet__Waterloo_Bridge_Gray_Weather__1900.jpg}{%
+  \begin{outline}
+    \1 $R$ ist $C^\infty$-Linear in allen Komponenten
+    \2 Wegen $R(X,Y)Z=-R(Y,X)Z$ reicht für ersten beiden Einträge ein Fall aus
+    \3 Ausrechnen: $C^\infty$-Linearität von LC, und $D_{[fX,Y]}Z$ berechnen
+    \3 Abschließend kürzen sich $Y(f)$-Terme
+    \2 $R(X,Y)f$
+    \3 Ableitung in $Z$-Komponente, $X(f)$ ist Sklarfunktion
+    \3 Abschließend kürzen bzgl $Y(f),Y(X(f)),X(f),X(Y(F))$-Terme
+    \1 $(R(X,Y)Z)|_p$ hängt nur von Vektorfeldern punktweise ab 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Symmetrieeigenschaften der Riemannischen Krümmungstensors}.
+\begin{enumerate}
+  \item 
+  \begin{equation}
+  R(X, Y, Z, T) = -R(Y, X, Z, T) = -R(X, Y, T, Z)
+  \end{equation}
+
+  \item erste Bianchi-Identität: $$R(X, Y, Z, T) + R(Y, Z, X, T) + R(Z, X, Y, T) = 0$$
+
+  \item $$R(X, Y, Z, T) = R(Z, T, X, Y)$$
+\end{enumerate}
+
+\StructurePicAutoB{ART0269__Camille_Pissarro__Rue_L_Hermitage__1866.jpg}{%
+  \begin{outline}
+    \1 Antisymmetrie in ersten beiden Komponenten
+    \1 Antisymmetrie in zweiten beiden Komponenten
+    \2 Berechne $[X,Y]\langle Z,T\rangle$
+    \1 1. Bianchi-Identität: Beweise einfach für $(1,3)$-Tensor
+    \2 Summiere über Krümmung bzgl. Permutation
+    \2 Fasse zusammen in zweiter kov. Ableitung
+    \2 Vereinfache Klammern durch Torsionsfreiheit
+    \2 Zweite Torsionsfreiheit
+    \2 Jacobi-Identität 
+    \1 ……
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Schnittkrümmung bestimmt die Riemannische Krümmung}
+Die Schnittkrümmung $K$ bestimmt $R$.
+
+\StructurePicAutoB{ART0073__Wassily_Kandinsky__Cold__1929.jpg}{%
+  \begin{outline}
+    $(0,4)$-Krümmung wird bestimmt durch partieller Ableitung des Terms 
+    $$ R(X+\alpha Z, Y+\beta T, X+\alpha Z, Y+\beta T)  -R(X+\alpha T, Y+\beta Z, X+\alpha T, Y+\beta Z)$$
+    \1 Bei Ableitungen bleiben nur Terme über mit genau einmal $\alpha$ und $\beta$ (4-4 Terme)
+    \1 1. Bianchi-Identität und Antisymmetrie verwenden um auf $6 R(X,Y,Z,T)$ zu kommen
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+\textbf{Statement: }{Kontrollierbarkeit von Ricci durch Schnittkrümmung und Skalare durch Ricci}.
+Ist $K \geq \kappa$, so gilt  $\operatorname {Ric}(X,X)\geq(n-1) \kappa|X|^2$, analog mit $>, \leq,<$. Ist Ric $\geq \kappa$, so ist $s \geq n \kappa$.
+
+\StructurePicAutoB{ART0330__Claude_Monet__Poppy_Field_in_a_Hollow_near_Giverny__1885.jpg}{%
+  \begin{outline}
+    \1 Ricci über Schnittkrümmung von unten abschätzen
+    \2 Schätze punktweise Schnitt, also $(0,4)$ für $x,x$ und $e_i,e_i$ ab
+    \2 Summiere auf und schätze Ricci von unten ab
+    \1 Skalare Krümmung durch Ricci von unten abschätzen
+    \2 Skalare ist Spur von Ricci
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Darstellungen von Krümmungsgrößen}. Es gelten folgende Darstellungen
+\begin{enumerate}
+  \item $$
+  R(x, y, x, y)=K(P)\left(\langle x, x\rangle\langle y, y\rangle-\langle x, y\rangle^{2}\right)
+  $$
+  \item Ist $K$ konstant, d.h. $K(P)=k$ für alle $P \subset T_{p} M, p \in M$, so gilt
+  $$
+  R(X, Y, Z, T)=k(\langle X, Z\rangle\langle Y, T\rangle-\langle X, T\rangle\langle Y, Z\rangle)
+  $$
+  \item Hat $M$ konstante Schnittkrümmung $K \equiv \kappa$, so ist die Riccikrümmung gleich $(n-1) \kappa$ und die Skalarkrümmung gleich $n(n-1) \kappa$.
+  \item Ist $\operatorname{dim} M=2$, so gilt $s=2 K$, wobei $K$ die Gausskrümmung ist. Die Schnittkrümmung ist trivialerweise durch $s$ festgelegt (da es in $T_{p} M$ nur einen zweidimensionalen Unterraum gibt).
+  \item Ist $\operatorname{dim} M=3$, so ist $R$ durch Ric bestimmt. Dies gilt nicht mehr für $\operatorname{dim} M \geq 4$.
+\end{enumerate}
+
+\StructurePicAutoB{ART0341__Claude_Monet__Railroad_Bridge_Argenteuil__1873.jpg}{%
+  \begin{outline}
+    \1 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+\textbf{Statement: }{Wohldefiniertheit und Symmetrie der Zweite Fundamentalform}.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 Definition von Zweiter Fundamentalform hängt nicht von Wahl der Erweiterungen der Vektorfelder ab: Auswertung bei Punkt $p$ hängt nur von $U|_p, V|_p$ ab.
+    \1 $II(u,v)-II(v,u)$ und Lie-Klammer ist wieder Tangential
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Gaussgleichung}.
+Die Riemannschen Krümmungstensoren $\tilde{R}, R$ von $\tilde{M}, M$ sind durch die Gaussgleichung
+$$
+R(x, y, u, v)=\tilde{R}(x, y, u, v)+\langle I I(x, u), I I(y, v)\rangle-\langle I I(x, v), I I(y, u)\rangle
+$$
+miteinander verknüpft.
+
+\StructurePicAutoB{ART0356__Claude_Monet__La_Corniche_near_Monaco__1884.jpg}{%
+  \begin{outline}
+    Berechne die einzelnen Komponenten von $\tilde R$ für Tangentialvektorfelder $X,Y,U,V$ bzgl. Orthonormalrahmen von Normalbündel $\nu_i$.  
+    \1 $\tilde D_X\tilde D _Y U$ berechnen 
+    \2 Zerlegung von umgebende LC in intrinsische LC und 2. Fundamentalform, dann Darstellung in Narmalenbündel und abschließend in Metrik mit Tangentialvektorfeld, es bleibt u.a. ein Produkt aus umgebende Ableitung von Normalenfeld und Tangentialfeld über
+    \2 Darstellung für Produkt durch $$0=X \langle \nu_i,V \rangle$$ (Vorzeichen beachten)
+    \1 Umgebende kov. Ableitung bzgl Lie-Klammer intrinsisch
+    \1 Darstellungen einsetzen und ausrechnen (Vorzeichen beachten)
+    \1 Normalenrahmen pw als ONB, daher können Metrikprodukte zusammengezogen werden
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+\textbf{Statement: }{Theorema Egregium}.
+Die Gausskrümmung einer Fläche $M \subset \mathbb{R}^{3}$ hängt nur von der inneren Geometrie ab.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    Gauß-Gleichung in $\R^3$ reduziert bzgl. 
+    $$l(u,v)=\langle S(u),v\rangle = \langle \tilde D_u \nu,v\rangle= -\langle \nu, \tilde D_uv\rangle$$
+    und
+    $$\langle II(1,3),\nu_i\rangle =- \langle \tilde D_1\nu_i, 3 \rangle=\ell(1,3)$$
+    die Determinante von $S$, also die Gaußkrümmung auf $R(x,y,x,y)$  
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+\pagebreak
+
+
+\subsection{Variationsformeln}
+
+\textbf{Statement: }{Induzierter Zusammenhang entlang einer parametrierten Untermannigfaltigkeit}.
+Sei $H: N \rightarrow(M, g)$ eine parametrisierte Untermannigfaltigkeit. Dann gibt es eindeutige bilineare Abbildung $(X, Y) \mapsto \bar{D}_{X} Y$, wobei $X$ ein Vektorfeld auf $N$ ist und $Y$ sowie $\bar{D}_{X} Y$ Vektorfelder längs $H$ sind, so dass folgende Bedingungen gelten:
+\begin{enumerate}
+  \item $\bar{D}_{f X} Y = f\, \bar{D}_{X} Y,\quad \bar{D}_{X}(f Y) = X(f)\, Y + f\, \bar{D}_{X} Y$ \quad für $f \in C^{\infty}(N)$.
+  
+  \item Ist $Y$ in einer Umgebung von $H(p)$ die Einschränkung eines Vektorfeldes $\tilde{Y}$ auf $M$, dann gilt
+  \[
+  \left.\bar{D}_{X} Y\right|_{H(p)} = \left. \left(D_{d H_{p}(X_{p})} \tilde{Y} \right) \right|_{H(p)}.
+  \]
+\end{enumerate}
+
+Sei $H: N \rightarrow (M,g)$ eine parametrisierte Untermannigfaltigkeit.
+Dann gibt es genau eine Abbildung
+$$
+\bar{D}: \mathfrak{X}(N) \times \Gamma\left(H^* T M\right) \rightarrow \Gamma\left(H^* T M\right),
+$$
+sodass für jedes $p \in N$, jedes $X \in \mathfrak{X}(N)$, $Y \in \Gamma\left(H^* T M\right)$ und jede Fortsetzung $\tilde{Y} \in \mathcal{X}(M)$ von $Y$ gilt:
+$$
+\left(\bar{D}_X Y\right)(p)=\left.\left(D_{d H_p\left(X_p\right)} \tilde{Y}\right)\right|_{H(p)} .
+$$
+Diese Abbildung heißt der induzierte Zusammenhang längs $H$. Er erbt alle Leibniz- und Linearitätseigenschaften von $D$.
+
+\StructurePicAutoB{ART0031__Paul_Klee__Before_the_Festivity__1920.jpg}{%
+  \begin{outline}
+    Nehme die Existenz an, und berechne eine lokale Darstellung. Verwende diese und zeige damit lokal Linearität, Leibniz-Regel und Verträglichkeit
+    \1 Lokale Darstellunge berechnen (Beachte, wo Rahmen und Koeffizienten leben)
+    \1 Linearität und Leibniz-Regel in lokaler Darstellung
+    \1 Verträglichkeit (Kettenregel beachten)
+    $$\left(\tilde{Y}^\alpha \circ H\right)_{, i}(p)=\frac{\partial \tilde{Y}^\alpha}{\partial y^l}(H(p)) \frac{\partial H^l}{\partial x^i}(p)$$
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Eigenschaften der induzierten Zusammenhangs längs parametrisierten Untermannigfaltigkeiten}.
+Seien $X, Y$ Vektorfelder auf $N$ und $U, V$ Vektorfelder längs H. Dann gilt
+\begin{enumerate}
+  \item $\bar{D}_{X} \bar{Y} - \bar{D}_{Y} \bar{X} = \overline{[X, Y]}$.
+  
+  \item $X\, g(U, V) = g\left( \bar{D}_{X} U, V \right) + g\left( U, \bar{D}_{X} V \right)$.
+
+  \item $\bar{D}_{Y} \bar{D}_{X} U - \bar{D}_{X} \bar{D}_{Y} U + \bar{D}_{[X, Y]} U = R(\bar{X}, \bar{Y}) U$.
+\end{enumerate}
+
+\StructurePicAutoB{ART0351__Claude_Monet__Fishing_Boats_in_tretat__1885.JPG}{%
+  \begin{outline}
+    Alle Gleichungen sind auf beiden Seiten $C^\infty(N)$-Linear, daher in Koordiantenvektorfeldern rechnen
+    \1 'Torsionsfreiheit'
+    \2 Lokale Basis für $N$ und $M$ und entsprechende Koordinatenvektorfelder auf $N$ wählen
+    \2 Pushforward berechnen
+    \2 $\bar D_X\bar Y$ lokal berechnen
+    \2 $$\bar{[X,Y]}=dH(X(Y))-dH(Y(X))$$
+    \1 'Metrik-Verträglichkeit'
+    \2 Lokale Basis für $N$ und $M$ und entsprechende Koordinatenvektorfelder auf $N$ und $M$ wählen
+    \2 Ableitung durch $X$ bzgl. Pushforward berechnen und Metrik-Verträglichkeit von $(M,g,D)$ sowie lokale Verträglichkeit von induziertem Zusammenhang mit $D$ verwenden
+    \1 $(1,3)$-Krümmung-Verträglichkeit
+    \2 Mit lokaler Verträglichkeit (Pushforward) $\bar D _X \bar D_Y U$ ausrechnen (nicht in Christoffelsymbole)
+    \2 Für Koordniantenvektorfelder verschwindet Lie-Klammer
+    \2 Indizes auf $H$ angleichen
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Erste Variationsformel für parametrisierte Untermannigfaltigkeiten}.
+Sei $H:[a, b] \times(-\epsilon, \epsilon) \rightarrow$ $(M, g)$ eine parametrisierte Untermannigfaltigkeit. Sei $c(s):=H(s, 0)$. $H$ heisst Variation von $c$. Für jedes $t$ ist $c_{t}(s):=H(s, t)$ eine Kurve in M. Sei $Y(s)$ das durch
+$$
+Y(s):=\left.\frac{d}{d t}\right|_{t=0} H(s, t)=\left.\overline{\frac{\partial}{\partial t}}\right|_{t=0}
+$$
+definierte Vektorfeld längs c. Dann gilt
+\begin{enumerate}
+  \item
+  \[
+  \left.\frac{d}{d t}\right|_{t=0} E\left(c_{t}\right) =
+  g\left(Y(b), c^{\prime}(b)\right) - g\left(Y(a), c^{\prime}(a)\right)
+  - \int_{a}^{b} g\left(Y(s), \frac{D}{d s} c^{\prime}(s)\right) d s
+  \]
+
+  \item Genau dann ist $c$ kritisch bezüglich $E$, d.\,h.\ $\left.\frac{d}{d t}\right|_{t=0} E(c_t) = 0$ für jede Variation mit festen Endpunkten, wenn $c$ eine Geodätische ist.
+
+  \item Ist $c$ nach Bogenlänge parametrisiert, so gilt für jede Variation:
+  \[
+  \left.\frac{d}{d t}\right|_{t=0} E(c_t) = \left.\frac{d}{d t}\right|_{t=0} L(c_t)
+  \]
+
+  \item $c$ ist genau dann kritisch bezüglich $L$, wenn eine Umparametrisierung von $c$ eine Geodätische ist.
+\end{enumerate}
+
+\StructurePicAutoB{ART0071__Wassily_Kandinsky__On_the_Points__1928.jpg}{%
+  \begin{outline}
+    Definiere für Notation folgende Vektorfelder
+    \begin{align*}
+      Y(s,t) &= dH(\partial_t) = \bar{\partial}_t &
+      X(s,t) &= dH(\partial_s) = \bar{\partial}_s \\
+      \tilde Y(s) &= Y(s,0) &
+      \tilde X(s) &= X(s,0)\\
+      Y'(s) &= \bar D_{\partial_s}\bar Y|_{t=0} \\
+      \hat Y(s,t) &= Y-\langle X,Y \rangle X\\
+      \hat Y'(s) &= Y'-\langle \tilde X,Y' \rangle^2 X
+    \end{align*}
+    \1 1. Variation der Energie
+    \2 $\partial_t$-Ableitung des Integranden, Metrikverträglichkeit, Torsionsfreiheit, Partielle Metrikverträglichkeit bzgl $s$ (für Integration)
+    \2 Integral ausrechnen
+    \1 Äquivalenz von $E$-Kritisch und Geodätisch
+    \2 Geodätisch: Integral in 1. Variation verschwindet, Randterme verschwinden (fixierte Endpunkt)
+    \2 $E$-Kritisch: Wähle Variation, so dass $$\tilde Y(s)=f(s)\frac{D}{ds}\tilde X$$ und Endpunkte fix, dann Fundamentallemma der Variation für beliebige $f$
+    \1 1. Variation von $E$-Energie und $L$-Energie stimmen überein bei BLP
+    \2 Ableitung von $L$-Integrand (BLP) ist Integrand von 1. Variation von $E$-Energie
+    \1 Äquivalenz von $L$-Kritisch und geodätische Umparametrisierbarkeit von $c$
+    \2 $L$-Kritisch: Wähle BLP, dann kritisch bzgl $E$-Energie und damit Geodätisch
+    \2 Geod. Umparametrisierbar: Parametrisiere geodätisch, dann kritisch bzgl $E$ und $L$ (BLP), damit ist $c$ $L$-Kritisch ($L$-Invariant)
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Zweite Variationsformel für parametrisierte Untermannigfaltigkeiten}.
+Sei c : $[0, L] \rightarrow M$ eine nach Bogenlänge parametrisierte Geodätische, $H$ eine Variation von $c$ und
+$$
+Y(s, t):=\left.d H\right|_{(s, t)}\left(\frac{\partial}{\partial t}\right)=\frac{\bar{\partial}}{\partial t},
+$$
+ein Vektorfeld längs $H$. Setze
+$$
+Y^{\prime}(s):=\bar{D}_{\frac{\partial}{\partial s}} Y(s, 0)
+$$
+ein Vektorfeld längs c. Dann gilt
+\begin{enumerate}
+  \item
+  \begin{align}
+  \left.\frac{d^{2}}{d t^{2}}\right|_{t=0} E(c_t)
+  &= g\left(\bar{D}_{\frac{\partial}{\partial t}} Y(L, 0), c'(L)\right)
+  - g\left(\bar{D}_{\frac{\partial}{\partial t}} Y(0, 0), c'(0)\right) \notag \\
+  &\quad + \int_0^L \left( \left\| Y'(s) \right\|^2
+  - R\left(Y(s), c'(s), Y(s), c'(s)\right) \right) ds \tag{1}
+  \end{align}
+
+  \item
+  \begin{align*}
+  \left.\frac{d^{2}}{d t^{2}}\right|_{t=0} L(c_t)
+  &= g\left(\bar{D}_{\frac{\partial}{\partial t}} Y(L, 0), c'(L)\right)
+  - g\left(\bar{D}_{\frac{\partial}{\partial t}} Y(0, 0), c'(0)\right) \\
+  &\quad + \int_0^L \Big( \left\| Y'(s) \right\|^2
+  - R\left(Y(s), c'(s), Y(s), c'(s)\right)
+  - \left\langle c'(s), Y'(s) \right\rangle^2 \Big) ds
+  \end{align*}
+
+  \item Ist $\tilde{Y} := Y - \left\langle c', Y \right\rangle c'$ die normale Komponente von $Y$, so gilt
+  \begin{align*}
+  \left.\frac{d^{2}}{d t^{2}}\right|_{t=0} L(c_t)
+  &= g\left(\bar{D}_{\frac{\partial}{\partial t}} Y(L, 0), c'(L)\right)
+  - g\left(\bar{D}_{\frac{\partial}{\partial t}} Y(0, 0), c'(0)\right) \\
+  &\quad + \int_0^L \left( \left\| \tilde{Y}'(s) \right\|^2
+  - R\left(\tilde{Y}(s), c'(s), \tilde{Y}(s), c'(s)\right) \right) ds
+  \end{align*}
+\end{enumerate}
+
+\StructurePicAutoB{ART0071__Wassily_Kandinsky__On_the_Points__1928.jpg}{%
+  \begin{outline}
+    Definiere für Notation folgende Vektorfelder
+    \begin{align*}
+      Y(s,t) &= dH(\partial_t) = \bar{\partial}_t &
+      X(s,t) &= dH(\partial_s) = \bar{\partial}_s \\
+      \tilde Y(s) &= Y(s,0) &
+      \tilde X(s) &= X(s,0)\\
+      Y'(s) &= \bar D_{\partial_s}\bar Y|_{t=0} \\
+      \hat Y(s,t) &= Y-\langle X,Y \rangle X\\
+      \hat Y'(s) &= Y'-\langle \tilde X,Y' \rangle^2 X
+    \end{align*}
+    \1 2. Variation der $E$-Energie
+    \2 Erste Ableitung des Integranden, Metrikverträglichkeit, Torsionsfreheit
+    \2 Zweite Ableitung des Integranden, Metrikverträglichkeit, Partielle Darstellung durch $(1,3)$-Krümmung, Torsionsfreiheit (für Integral)
+    \2 $(0,4)$-Krümmung und partielle Ableitung nach $s$, dann Auswertung bei $t=0$ (BLP)
+    \2 Integriere von $0$ bis $L$
+    \1 2. Variation der $L$-Energie
+    \2 Erste Ableitung des $L$-Integranden
+    \2 Zweite Ableitung des $L$-Integranden
+    \2 2. Variation darstellen und BLP verwenden
+    \3 2. Variation von $E$-Energie identifizieren
+    \3 Quadrierte erste Ableitung von Metrik durch Torsionsfreiheit bei $t=0$ berechnen
+    \1 Reduzierte Darstellung der 2. Variation der $L$-Energie (bzgl Normalanteil von $Y$)
+    \2 $\hat Y '$ berechnen und quadrierte Norm berechnen
+    \2 Antisymmetrie $(0,4)$-Krümmung 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\pagebreak
+
+
+
+\subsection{Geometrie und Topologie}
+
+\textbf{Statement: }{Synge}.
+Sei ( $M, g$ ) eine kompakte, orientierbare Mannigfaltigkeit mit gerader Dimension $n$ und mit strikt positiver Schnittkrümmung. Dann ist $M$ einfach zusammenhängend.
+
+\StructurePicAutoB{ART0246__Vincent_van_Gogh__Houses_at_Auvers__1890.jpg}{%
+  \begin{outline}
+    Widerspruch: Hadamard gibt geschlossene, $L$-minimale nicht triviale Geodätische, die wir bzgl eines geeigneten Vektorfeldes variieren, welches aus dem Paralleltransport konstruiert wird, und nutzen dann positive Schnittkrümmung, um lokales $L$-Maximum zu folgern
+    \1 Konstruiere Vektorfeld aus Fixpunkt von $SO(n-1)$ auf $c(0)^{orth}$ (Rolle von Orientiert)
+    \1 Variation, sodass Pushforward von $\partial_t$ bei $t=0$ das Vektorfeld
+    \1 Lokales $L$-Maximum
+    \2 1. Variation verschwindet, da Geodätisch
+    \2 2. Variation strikt negativ
+    \3 Randterme: verschwinden, da $\bar D_{\partial t}Y|$ und Endpunkte der Geschwindigkeit der Geodätischen übereinstimmen
+    \3 Integral: Schnittkrümmung wird strikt negativ gewichtet, $Y'$ verschwindet als Paralleltransport  
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Myers}
+Sei $(M, g)$ eine vollständige Riemannsche Mannigfaltigkeit mit $Ric \geq(n-1) \kappa g$, wobei $\kappa>0$. Dann ist $\operatorname{diam}(M, g) \leq$ $\operatorname{diam} S^{n}(\kappa)=\frac{\pi}{\sqrt{\kappa}}$. Ausserdem ist $M$ kompakt und hat endliche Fundamentalgruppe.
+
+\StructurePicAutoB{ART0244__Vincent_van_Gogh__Wheat_Field_with_Cypresses__1889.jpg}{%
+  \begin{outline}
+    Es existieren 2. Variationen der $E-Energie$ zu verbinden Geodätischen, wo die Aufsummierung zu einem nicht negativen Integral führt, wo punktweise über die negative Ricci-Krümmung bzgl. $(c',c')$ integriert wird plus eine kosntante in Abhängigkeit von $L$. Diese Differenz muss nicht negativ sein. Man erhält damit eine Abschätzung für jeden möglichen Abstand auf $M$ und damit den Diameter.    
+    \1 Für beliebige Abstände kleiner als der Durchmesser existieren Punkte und BLP minimal verbindende Geodätische (Hopf-Rinow)
+    \1 Geodätische auch $E$-Minimierend bzgl Variationsvektorfelder konstruiert aus Paralleltransport $X_i$ von Orthonormalbasis bei $T_pM$
+    $$Y_i(s)=\sin(\frac{\pi s}{L})X_i(s)$$
+    \2 $$E(c_t^i)=\frac{1}{2}L(c_t^i) \quad \frac{d^2}{dt^2}E\geq 0$$
+    \1 Nutze Nicht Negativität der 2. Variation der $E$-Energie
+    \2 Vereinfache Variation
+    \3 Randterme verschwinden nach Berechnung der Ableitung bei $s=0,L$
+    \3 Berechnung der Norm von $Y_i'$
+    \3 Umformen: Vorfaktor $\sin …$ rausziehen
+    \2 Aufsummieren von $2,…,n$ und Ricci berechnen (Metrik bzgl Geodätische $=1$), abschließend Abschätzen
+    \1 Beschränkt und abgeschlossen, also Kompakt (Hopf Rinow)
+    \1 Endliche freie Fundamentalgruppe: Universelle Überlageerung, lokal isometrisch, Übertragung der Abschätzung. Damit ist Überlagerung kompakt und daher $\pi_1(M)$ endlich 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+
+\pagebreak
+
+
+\subsection{Jacobi-Felder}
+
+\textbf{Statement: }{Indexform einer Geodätischen ist eine quadratische Form}.
+$I$ ist eine quadratische Form und kann dargestellt werden durch 
+$$
+I(X, Y)=-\int_{0}^{L}\left\langle X(s), Y^{\prime \prime}(s)+R\left(c^{\prime}(s), Y(s)\right) c^{\prime}(s)\right\rangle d s
+$$
+\StructurePicAutoB{}{%
+  \begin{outline}
+    Folgt aus Symmetrie von Metrik und Paar-Symmetrien des Krümmungstensors:
+    \begin{equation*}
+    I(X, Y):=\int_{0}^{L}\left[\left\langle X^{\prime}(s), Y^{\prime}(s)\right\rangle-R\left(X(s), c^{\prime}(s), Y(s), c^{\prime}(s)\right)\right] d s 
+    \end{equation*}
+    Die Darstellung folgt mittels partieller Integration
+
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Eigenschaften von Jacobifeldern längs Geodätischen}
+\begin{enumerate}
+  \item Für $v, w \in T_{c(0)} M$ gibt es genau ein Jacobifeld $Y$ längs $c$ mit $Y(0) = v$, $Y'(0) = w$. Der Vektorraum der Jacobifelder längs $c$ hat also Dimension $2n$.
+
+  \item Ist $Y(0) = 0$, $Y'(0) = k\, c'(0)$, so gilt $Y(s) = k s\, c'(s)$ für alle $s$.
+
+  \item Sind $Y(0)$ und $Y'(0)$ orthogonal zu $c'(0)$, so ist auch $Y(s)$ orthogonal zu $c'(s)$ für alle $s$.
+\end{enumerate}
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 
+    \2 Vektorfelder aus Paralleltransport von Orthonormalbasis (Pw Orthonormalbasis längs $c$)
+    \2 Darstellung beliebiger Vektorfelder in speziellem ON-Rahmen längs $c$
+    \2 Jacobi-Bedinung berechnen und ODE-System 2. Ordnung herleiten
+    \2 $2n$-Dimensionalität des Vektorraums der Jacobifelder
+    \1 Jacobifelder mit Startgeschwindigkeit parallel zu geodätischer Geschwindigkeit skalieren linear
+    \2 $$Y(s)=ksc'(s)$$
+    \1 Zu geodätischer Startgeschwindigkeit orthogonale Anfangswerte bleiben orthogonal
+    \2 Auswertung der Jacobifeld-gleichung bei $s=0$ gibt $Y_{,ss}^1(0)=0$, damit konstant $0$
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Geodätische Charakterisierung von Jacobifeldern}.
+Sei $H$ eine Variation von $c$, so dass alle $c_{t}$ ebenfalls Geodätische sind. Dann ist 
+$$Y(s)=\left.\overline{\frac{\partial}{\partial t}}\right|_{s, 0}$$ 
+ein Jacobifeld längs c. Umgekehrt entsteht jedes Jacobifeld auf diese Art.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    Jacobi-Felder als Pushforward von $\partial_t$ längs geodätische Variation bei $t=0$ 
+    \1 Einfach $Y''$ ausrechnen bei $t=0$
+    \2 Torsionsfreiheit, Definition von Krümmungstensor, Geodätische und triviale Lie-Klammer (brauchen $t,s,t$)
+    \1 Sei $Y$ ein Jacobi-Feld längs $c$. Konstruiere folgende Variation $H$ 
+    \2 Geodätische $\gamma$ mit Startwerten $c(0), Y(0)$
+    \2 Vektorfeld $X=X_0+tX_1$ längs $\gamma$ aus Parallelen Vektorfeldern mit Startwerten $c(0),Y(0),Y'(0)$
+    \2 Definiere Variation durch $$H(s,t)=\exp_{\gamma(t)}(sX(t))$$
+    mit $H(s,0)=\exp_{c(0)}(sc'(0))=c'(s)$
+    \2 Definiere als Anwärter für zu konstruierende Jacobi-Feld das Jacobi-Feld aus (A) als Pushforward
+    \1 Zeige, dass Anfangswerte mit $Y$ übereinstimmen
+    \2 $Z(0)$
+    \2 $Z'(0)=$ mit Torsionsfreiheit und $\partial _s$ Ableitung von Variation bei $(0,0)$ gleich $X'(0)=X_1(0)$
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Jacobi-Feld als Ableitung der Exponentialabbildung}.
+Seien $p \in M$ und $u, v \in T_{p} M$. Sei $c(s):=\exp _{p}(s v)$ (eine Geodätische) und $Y$ das Jacobifeld längs c mit $Y(0)=0, Y^{\prime}(0)=$ u. Dann ist
+$$
+Y(s)=d_{s v} \exp _{p} s u=\left.\left(d \exp _{p}\right)\right|_{s v} s u
+$$
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 
+  \end{outline}
+}
+
+\todo{ToDo}
+
+\vspace{0.8cm}
+
+
+
+
+\pagebreak
+
+
+\subsection{Überlagerungen und Faserbündel}
+
+
+\textbf{Statement: }{Charakterisierung eigentlicher Wirkungen durch Umgebungen}.
+Ist $G$ eine lokal kompakte, Hausdorffsche topologische Gruppe (z.B. eine Liegruppe), die auf $\tilde{M}$ operiert, so ist die Operation eigentlich genau dann, wenn es zu jedem Paar $p, q \in \tilde{M}$ offene Umgebungen $U_{p}, U_{q}$ gibt derart, dass $\left\{g \in G: g U_{p} \cap U_{q} \neq \emptyset\right\}$ relativ kompakt in $G$ ist.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+\textbf{Statement: }{Quotientenmannigfaltigkeit durch freie und eigentliche Wirkung}.
+Wenn eine diskrete Gruppe $G$ von Diffeomorphismen frei und eigentlich auf einer Mannigfaltigkeit $\tilde{M}$ operiert, dann besitzt $M:=$ $\tilde{M} / G$ eine eindeutige differenzierbare Struktur, so dass die Projektion $\pi: \tilde{M} \rightarrow M$ eine Überlagerung ist.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Induzierte Riemannsche Struktur auf Quotienten durch freie, eigentliche Isometriewirkungen}.
+Operiert $G$ frei, eigentlich und durch Isometrien auf $\tilde{M}$, so gibt es eine eindeutige Riemannsche Metrik auf M, so dass $\pi$ eine lokale Isometrie ist ( $\pi$ wird dann auch als Riemannsche Überlagerung bezeichnet).
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+\textbf{Statement: }{$G$-Prinzipalbündel durch freie und eigentliche Gruppenwirkung}.
+Sei $G$ eine Liegruppe, die auf einer differenzierbaren Mannigfaltigkeit M frei und eigentlich operiert. Dann trägt der Quotientenraum $M / G$ die Struktur einer Mannigfaltigkeit, so dass $\pi: M \rightarrow$ $M / G$ eine Submersion ist. Die Abbildung $\pi: M \rightarrow M / G$ ist dann ein Faserbündel mit $G$ sowohl als Faser als auch als Strukturgruppe. Man spricht von einem G-Prinzipalbündel.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+\pagebreak
+
+\subsection{Riemannische Submersionen}
+
+
+\textbf{Statement: }{Induzierte Riemannsche Struktur auf dem Quotienten einer freien, eigentlichen Isometriewirkung}.
+Sei $(\tilde{M}, \tilde{g})$ eine Riemannsche Mannigfaltigkeit und $G$ eine Liegruppe von Isometrien, die eigentlich und frei auf $M$ operiert. Dann ist $M:=\tilde{M} / G$ eine Mannigfaltigkeit, $\pi: \tilde{M} \rightarrow M$ eine Submersion und es gibt genau eine Riemannsche Metrik auf M, so dass $\pi$ eine Riemannsche Submersion ist.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 Glatte Struktur: Quotientenmannigfaltigkeit  
+    \1 Eindeutigkeit der riemannischen Struktur
+    \2 Für riemannische Submersionen ist das Differential bei Lift eingeschränkt auf den Horizontalraum eine Isometrie zu $T_pM$, damit eindeutig festgelegt
+    \1 Wohldefiniertheit von $g(v,v)=\tilde g(\tilde v,\tilde v)$ für einen Lift $\tilde v= (d\pi|_{H_{\tilde p}})^{-1}v \in H_{\tilde p}$
+    \2 Sei $\hat p$ ein anderer Faserpunkt
+    \2 Es gibt durch die Isometriewirkung eine Isometrie, die $\tilde p$ und $\bar p$ isometrisch verbindet
+    \3 $\pi\circ\gamma=\pi$
+    \3 $V_{\hat p}=d\gamma (V_{\tilde p})$ analog für Horizontalraum
+    \3 $d\gamma(\tilde v)\in H_{\hat p}\tilde M$ ein horizontaler Lift von $v$
+    \2 $$
+        \tilde{g}(d \gamma(\tilde{v}), d \gamma(\tilde{v}))=\tilde{g}(\tilde{v}, \tilde{v})
+       $$
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+\textbf{Statement: }{Geodätenverhalten unter Riemannschen Submersionen}.
+Sei $\pi : (\tilde{M}, \tilde{g}) \rightarrow (M, g)$ eine Riemannsche Submersion. Dann gelten folgende Aussagen:
+
+\begin{enumerate}
+  \item Ist $\tilde{c} : I \rightarrow \tilde{M}$ eine Geodätische mit $\tilde{c}'(0)$ horizontal (d.\,h.\ $\tilde{c}'(0) \in H_{\tilde{c}(0)} \tilde{M}$), so ist $\tilde{c}'(t)$ für alle $t$ horizontal und $c(t) := \pi(\tilde{c}(t))$ eine Geodätische auf $M$.
+
+  \item Ist $c : I \rightarrow M$ eine Geodätische auf $M$ und gilt $\pi(\tilde{p}) = c(0)$, so existiert genau ein lokaler horizontaler Lift $\tilde{\gamma} : I \rightarrow \tilde{M}$ mit $\tilde{\gamma}(0) = \tilde{p}$, der eine Geodätische ist und für den $\tilde{\gamma}'(t) \in H_{\tilde{\gamma}(t)} \tilde{M}$ gilt.
+
+  \item Ist $\tilde{M}$ vollständig, so ist auch $M$ vollständig.
+\end{enumerate}
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 Kurven im Überlagerungsraum sind länger oder gleichlang zu projizierte Kurven im Basisraum; Damit sind auch Riemannische Abstände im Überlagerugnsraum länge/gleich zu den Abständen in der Projektion
+    \2 Zerlegung von Tangentialvektpr in Horizontal und Vertikal Anteil
+    \2 Norm des Vertikalanteils geht bei Pushforward verloren
+    \1 Geodätische zu $(p,v)$ in $M$ induzieren eindeutige lokale geodätische horizontale Lifts zu Urbildern $\tilde p$ in Faser
+    \2 Lokal $c(I')$ 1-d UMfk von $M$ und Urbilde 1-d UMfk von $\tilde M$
+    \2 Horizontaler Lift von $c'$ auf $I'$ bzgl $\tilde p \in \pi^{-1}(c(0))$ gibt Vektorfeld auf ZSH-Komponente von 1-d UMfk
+    $$
+    \left.X\right|_{\tilde{p}}:=\left(\left.d \pi\right|_{H_{\tilde{p}}}\right)^{-1}\left(c^{\prime}(t)\right)
+    $$
+    \2 Definiere Integralkurve: $\tilde \gamma'(t)=X|_{\gamma(t)}$ von X durch $\tilde p$ 
+    \3 Horizontal in $\tilde M$
+    \3 $c=\pi\circ \tilde \gamma$
+    \2 $\tilde \gamma$ lokal $L$-minimierend und damit geodätisch
+    \3 $c$ lokal $L$-minimierend
+    \3 Länge von $\tilde \gamma$ und $c$ auf Teilintervallen in $I'$ sind gleich (Isometrie auf Horizontalraum)
+    \3 lokaler Länge gleich Abstand (Geodätisch) in $M$ schätzt Abstand im Lift von unten ab 
+    \1 Geodätische mit horizontaler Startgeschwindigkeit bleiben horizontal und Projektion sind auch Geodätisch
+    \2 Teilintervall, wo lokaler horizontaler Lift für Geodätische zu projizierten Startwerten mit Geodätischer übereinstimmt
+    $$J=\{t\in I: \tilde c'(t)\in H_{\tilde c(t)} , \pi(\tilde c(t))=c(t)\}$$
+    \3 ist offen: Der lokale horizontale Kurvenlift der Geodätischen zu projizierten Startwerten um $\pi(\tilde c(0))$ ist gleich der ursprünglichen Kurve auf $I'$ (nach (B)). Startpunkt willkürlich gewählt
+    \3 ist abgeschlossen: geodätische auf abgeschlossenen Intervallen definiert
+    \1 Vollständigkeit des Überlagerungsraumes impliziert Vollständigkeit des Basisraums
+    \2 Lokale horizontaler geodätischer Lift (B) ist auf $\R$ definiert, und nach (A) ist die Projektion $c=\pi\circ \tilde\gamma$ auf ganz $\R$ definiert
+    \2 Hopf Rinow gibt Vollständigkeit
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Strukturelle Eigenschaften von Lift-Vektorfeldern und Zusammenhang auf Totalräumen Riemannscher Submersionen}.
+\begin{enumerate}
+  \item Ein Vektorfeld $U$ auf $\tilde{M}$ ist genau dann \emph{vertikal}, wenn für alle glatten Funktionen $f$ auf $M$ gilt:
+  \[
+  U(f \circ \pi) = 0.
+  \]
+
+  \item Sind $\tilde{X}, \tilde{Y}$ horizontale Lifts von Vektorfeldern $X, Y$ auf $M$, dann ist
+  \[
+  [\tilde{X}, \tilde{Y}] - \widetilde{[X, Y]}
+  \]
+  ein vertikales Vektorfeld.
+
+  \item Ist $U$ vertikal, so ist auch $[\tilde{X}, U]$ vertikal für jedes horizontale Vektorfeld $\tilde{X}$.
+
+  \item Für die Levi-Civita-Zusammenhänge $\tilde{D}$ auf $\tilde{M}$ und $D$ auf $M$ gilt:
+  \[
+  \tilde{D}_{\tilde{X}} \tilde{Y} = \widetilde{D_X Y} + \frac{1}{2} [\tilde{X}, \tilde{Y}]^{v},
+  \]
+  wobei $[\tilde{X}, \tilde{Y}]^{v}$ die vertikale Komponente des Lie-Klammerausdrucks ist.
+\end{enumerate}
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    Vorbereitung für (D): Ziege (A) Charakterisierung für Vertikalität, (B)  Vertikalität von $[\tilde{X}, \tilde{Y}] - \widetilde{[X, Y]}$ und (C) Vertikalität von $[\tilde X,U]$, um die Bzeiehung zwischen den Zusammenhängen zu zeigen
+    \1 Charakterisierung von Vertikalität
+    \2 Vertikal, wenn im kern von Differential und $U(f\circ\pi)=d\pi(U)(f)$
+    \1 Vertiakalität für Lie-Bracket Term
+    \2 $\tilde X \tilde f=\tilde{Xf}, \tilde f= f \circ pi$
+    \2 $[\tilde X, \tilde Y]f$ berechnen und $\tilde{[X,Y]}\tilde f$ berechnen und (A) anwenden
+    \1 Charakterisierung von Vertikalität für $[\tilde X, U]$
+    \1 Beziehung für Zusammenhang
+    \2 $\tilde{D}_{\tilde{X}} \tilde{Y} - \widetilde{D_X Y}$ hat keinen horizontalen Anteil
+    \3 Koszul für $\tilde D_{\tilde X}\tilde Y$ und horizontalen Lift ausrechnen, dabei Lie-Bracket-Id (B) anwenden 
+    \2 Koszul für $\tilde D_{\tilde X}\tilde Y$ und vertikales Vektorfeld ausrechnen, dabei (C) verwenden und $\tilde g$ bzgl. horizontale Lifts konstant auf Fasern
+    \2 In Metrik mit vertikale VF: $\tilde{D}_{\tilde{X}} \tilde{Y}$ um $\widetilde{D_X Y}$ erweitern und Beziehung zu $[\tilde X, \tilde Y]=2\frac{1}{2}[\tilde X, \tilde Y]^v$ in Metrik mit Vertikal nutzen
+    \2 $$\tilde{D}_{\tilde{X}} \tilde{Y}-\widetilde{D_{X} Y}-\frac{1}{2}[\tilde{X}, \tilde{Y}]^{v}$$ ist horizontal und damit gleich $0$
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+
+\pagebreak
+
+\subsection{Komplex-projektiver Raum}
+
+
+\textbf{Statement: }{Submersion von $S^{2n+1}$ in komplex-projektiven Raum und Horizontal- / Vertikalräume}.
+Die Projektionsabbildung $\pi: S^{2 n+1} \rightarrow \mathbb{C P}^{n}$ ist eine Submersion. Horizontal- und Vertikalraum sind gegeben durch
+$$
+\begin{aligned}
+H_{z} & =(\mathbb{C} z)^{\perp} \\
+V_{z} & =\mathbb{R} i z, \quad z \in S^{2 n+1}
+\end{aligned}
+$$
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 Zerlegung des Tangentialraumes bei $s\in S^{2n+1}$
+    $$\C^{n+1}\simeq T_z\C^{n+1}=\R z\oplus \R iz\oplus H_z$$
+    \1 $H_{gz}=g(H_z)$
+    \2 $g\in U(n+1)$: $$g(\R z)=\R g(z)\quad g(\R iz)=\R (ig(z))$$
+    \2 $$
+    \langle g h, g z\rangle=\langle h, z\rangle=0, \quad\langle g h, i(g z)\rangle=\langle g h, g(i z)\rangle=\langle h, i z\rangle=0 .
+    $$
+    Also $g h \in(\mathbb{C}(g z))^{\perp}=H_{g z}$. Damit $g\left(H_z\right) \subseteq H_{g z}$
+    \1 Differential von $\pi$ ist surjektiv
+    \2 $T_zS^{2n+1}=\R iz\oplus H_z$ mit Tangentialraum am Orbit $S^1z$, Differential verschwindet
+    \2 Differential eingeschränkt auf $H_z$ iso
+    \3 Lokal um Nordpol: 
+    $$\left[z^{0}: z^{1}: \ldots: z^{n}\right] \mapsto\left(\frac{z^{1}}{z^{0}}, \ldots, \frac{z^{n}}{z^{0}}\right) \in \mathbb{C}^{n}=\mathbb{R}^{2 n}$$
+
+    \3 $T_zS^{2n+1}=z^{\perp}=\left\{\left(i \eta^{0}, \xi^{1}, \ldots, \xi^{n}\right), \eta^{0} \in \mathbb{R}, \xi^{j} \in \mathbb{C}\right\}$
+
+    \2 $\left(i \eta^{0}, \xi^{1}, \ldots, \xi^{n}\right) \mapsto\left(\xi^{1}, \ldots, \xi^{n}\right)$
+    $\left.d \pi\right|_{z_{0}}: H_{z_{0}} \rightarrow T_{\pi\left(z_{0}\right)} \mathbb{C} \mathbb{P}^{n}$
+    \2 $$V_{z_{0}}=\operatorname{ker} d \pi=\left\{\left(i \eta^{0}, 0, \ldots, 0\right), \eta^{0} \in \mathbb{R}\right\}=\mathbb{R} i z_{0}$$
+    $$H_{z_{0}}=(\operatorname{ker} d \pi)^{\perp}=\left\{\left(0, \xi^{1}, \ldots, \xi^{n}\right), \xi^{j} \in \mathbb{C}\right\}=\left(\mathbb{C} z_{0}\right)^{\perp}$$
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Schnittkrümmung von Ebenen in $\mathbb{C P}^{n}$}.
+Sei $m \in \mathbb{C P}^{n}$ und $E \subset T_{m} \mathbb{C P}^{n}$ eine zweidimensionale Ebene mit Orthonormalbasis $u, v$. Dann gilt für die Schnittkrümmung
+$$
+K(E)=1+3 \cos ^{2}(\theta)
+$$
+wobei $\theta$ der Winkel zwischen $u$ und Jv ist. Insbesondere variiert die Schnittkrümmung zwischen +1 und +4 .
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 Setting: Für orthogonale $\tilde{u}, \tilde{v} \in H_{\tilde{m}}$ : 
+    $$\tilde{c}_t(s)=\cos s \tilde{m}+\sin s(\cos t \tilde{v}+\sin t \tilde{u})$$
+    ist horizontal-geodätisch; $c_t=\pi \circ \tilde{c}_t$ sind Geodäten in $\mathbb{C} P^n$
+    \2 Startgeschwindikgeit horizontal bleibt horizontal
+    \2 Projektion ist Geodätisch
+    \1 $\tilde U(s)=\tilde u$ paralleles Vektorfeld längs $\tilde c$
+    \2 Umgebende kovariante Ableitung minus Normalanteil
+    \1 Horizontale geodätische Variation bzgl Geodäten-Schar auf $S^{2n+1}$ und geodätische Variation auf $\C P^n$ mit induzierten Jacobi-Feldern als Pushforward von $\partial_t$ bei $t=0$
+    $$\tilde Y(s)= \sin(s)\tilde U(s)$$
+    \1 Für Linearkombination Argument, prüfe Fälle $\tilde u\perp i\tilde v$ und $\tilde u= i\tilde v$
+    \2 Für $\tilde u \perp i\tilde v$: $R(v,u)v=u$
+    \3 $\tilde U(s)\in (\C\tilde c)^{\perp}=H_{\tilde c(s)}$
+    \3 $\tilde c'$ horizontaler Lift von $c'$
+    \3 $U$ parallel längs $c$ durch Levi-Civita-Formel bei Submersionen
+    \3 Jacobi-Feld auf $\C P^n$ und Jacobi-Eigenschaft verwenden mit $Y''=-Y$
+    \3 Durch $\sin$ teilen und $s\to 0$
+    \2 Für $\tilde u = i\tilde v$: $R(v,u)v=4u$
+    \3 $\tilde U(s)=i\tilde v$
+    \3 $\tilde D_{\tilde c'}i\tilde c'=i\tilde c$ (tangentiale Projektion der umgebenden kov. Ableitung) ist vertikal
+    \3 $Jc'$ parallel längs $c$ durch LC-Formel bei Submersionen
+    \3 Horizontaler Anteil $\tilde U^h=\cos(s)i\tilde c'(s)$
+    \3 Jacobi-Felder (bzgl horizontal Anteil von $\tilde U$) auf $\C P^n$ kovariant Ableiten (Parallel) und Jacobi-Eigenschaft verwenden mit $Y''=-4Y$
+    \3 Durch $\sin\cos$ teilen und $s\to 0$
+    \1 $$K(E)=1+3\cos^2(\theta)$$
+    \2 Für $u_0\perp Jv$ sei 
+    $$u=\sin\theta u_0+\cos\theta Jv$$
+    \2 Linearität von $R(v,u)v$ nutzen und in Metrik mit $u$ nehmen 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\pagebreak
+
+\subsection{Längen kleiner Kreise}
+
+
+\textbf{Statement: }{Darstellung von Vektorfeldern längs Kurven durch parallele Vektorfelder}.
+Sei $Y$ ein Vektorfeld längs einer Kurve c. Seien $Y_{i}$ parallele Vektorfelder längs c mit $Y_{i}(0)=\frac{D^{i}}{d t^{i}} Y(0)$. Dann gilt für alle $k$
+$$
+Y(t)=\sum_{i=0}^{k} \frac{t^{i}}{i!} Y_{i}(t)+o\left(t^{k}\right)
+$$
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    Taylor-Entwicklung von Vektorfeldern bzgl. Paralleltransport von i-ten Ableitungen von $Y$ bei $s=0$
+    \1 $Y_i$ Paralleltransport mit $Y_i(0)=\frac{D^i}{dt^i}Y(0)$
+    \1 Darstellung von $Y$ und $Y_i$ durch Paralleltransport-Rahmen $(E_i)$
+    \1 Taylorentwicklung von $a^j(t)$ bei $t=0$
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Längen kleiner Kreise}.
+Sei $m \in M$ und $u, v$ eine Orthonormalbasis eines zweidimensionalen Unterraums $P \subset T_{m} M$. Setze
+$$
+H(r, \theta):=\exp _{m} r(\cos (\theta) u+\sin (\theta) v)
+$$
+Sei $C_{r}$ der Kreis $\theta \mapsto H(r, \theta)$. Dann gilt für seine Länge
+$$
+L\left(C_{r}\right)=2 \pi r\left(1-\frac{K(P)}{6} r^{2}+o\left(r^{2}\right)\right)
+$$
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    Länge von $C_r$ durch Integral über Norm von Pushforward von $\partial_\theta$ längs geodätische Variation $H$ für fixen Radius berechnen, welche für fixes $\tilde \theta$ und variierendes $t$ Jacobifelder sind. Dabei $Y_{\tilde\theta}(r)$ geeigente Taylorn mit Eigenschaften der Jacobifelder 
+    \1 $Y_{\tilde\theta}(0), Y'_{\tilde\theta}(0),Y''_{\tilde\theta}(0),Y'''_{\tilde\theta}(0)$ bestimmen mittels Jacobifeld, Torsionsfreiheit, Jacobigleichung 
+    \1 Metrik von $Y''', Y'$ berechnen gleich $-K(P)$
+    \1 $Y_{\tilde\theta}(r)$ Taylorn
+    \1 Integrieren
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Abschätzung für Schnittkrümmung unter Submersion}.
+Sei $\pi:(\tilde{M}, \tilde{g}) \rightarrow(M, g)$ eine Riemannsche Submersion, $\tilde{m} \in \tilde{M}, m:=\pi(\tilde{m})$. Seien $u, v \in T_{m} M$ eine Orthonormalbasis mit horizontalen Lifts $\tilde{u}, \tilde{v}$. Seien $P \subset T_{m} M, \tilde{P} \subset T_{\tilde{m}} \tilde{M}$ die aufgespannten Ebenen. Dann gilt
+$$
+K(P) \geq K(\tilde{P})
+$$
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 Horizontal Geodätische aus geodätische Variation für fixen Winkel im Überlagerungsraum induzieren Geodätische im Basisraum
+    \2 Projektion des kleinen Kreises in Überlagerung gleich kleiner Kreis im Basisraum für alle Radien
+    \1 Projektion verkleinert Längen: $L(C_r)\leq L(\tilde C_r)$
+    \1 Verwende Taylor-Abschätzung und erhalte inverse Ungleichung für Schnittkrümmung
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+\pagebreak
+
+\subsection{Konjugierte Punkte}
+
+
+\textbf{Statement: }{Optimalität von geraden Strecken unter Exponentialabbildung}.
+Sei $v \in T_{m} M, \phi(t):=t v, t \in[0,1]$ und $\psi$ eine stückweise differenzierbare Kurve in $T_{m} M$ mit $\psi(0)=0, \psi(1)=v$. Dann gilt
+$$
+L\left(\exp _{m} \circ \psi\right) \geq L\left(\exp _{m} \circ \phi\right)=\|v\|
+$$
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 
+  \end{outline}
+}
+\todo{Checke Beweis}
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Charakterisierung von konjungierten Punkten durch singuläre Differentiale}.
+Sei $c(s)=\exp _{p}(s v)$ und $q=\exp _{p}(r v)$. Genau dann sind $p$ und $q$ konjugiert längs $c$, wenn das Differential
+$$
+d_{r v} \exp _{p}: T_{p} M \rightarrow T_{q} M
+$$
+singulär ist (d.h. nicht bijektiv).
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 $p,q$ sind konjungiert
+    \2 Für Jacobifelder zu konjungierten Punkte verschwindet die kovariante Ableitung nicht 
+    \2 Darstellung von Jacobifeldern mit verschwindender Startgeschwindigkeit
+    $$0=Y(r)=d_{r v} \exp _p r v=\left(d \exp _p\right) rY'(0)$$
+    \2 Differential ist singulär
+    \1 Differential ist singulär: Wähle Jacobifeld zu Tangentialvektor im Kern
+    \2 Existiert nicht-trivialer Tangentialvektor, welcher im Kern liegt
+    \2 Wähle Jacobifeld $$Y(r)=d_{rv}\exp_pu=0$$ zu $Y(0), Y'(0)=\frac{u}{r}$
+  \end{outline}
+}
+\todo{Warum existiert so ein Feld}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Charakterisierung von lokal minimierenden Geodätischen durch konjugierte Punkte}.
+Sei $c:[a, b] \rightarrow M$ eine Geodätische mit $c(a)=$ $p, c(b)=q$.
+
+(1) Gibt es auf c keine zu p konjugierten Punkte, dann ist c lokal minimierend in folgendem Sinne: es gibt ein $\epsilon>0$ so dass für jede Kurve $\gamma$ mit $\gamma(a)=p, \gamma(b)=q$ und $d(\gamma(s), c(s))<\epsilon$ gilt dass
+$$
+L(\gamma) \geq L(c)
+$$
+Dabei gilt Gleichheit nur, wenn $\gamma$ eine Umparametrisierung von c ist.
+
+(2) Gibt es ein $s_{0} \in(a, b)$ so dass $p$ und $c\left(s_{0}\right)$ konjugiert sind, dann gibt es eine Variation $c_{t}$ von $c$ mit festen Enden und
+$$
+L\left(c_{t}\right)<L(c)
+$$
+für kleine $t$.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 Kein konjungierter Punkt auf Weg, dann existiert keine lokal kürzende Verbindungskurve
+    \2 $\phi(s)=sv, v=c'(0)$ auf o.B.d.A. $[0,1]$ ist lokal diffeomorph (Kein konjungierter Punkt auf Weg)
+    \2 Endliche Überdeckung von Verbindungsgerade im Tangentialraum (Lokal Diffeomorph)
+    \2 Unterteile den Definitionsbereich, sodass im Bild die Verbindungsgerade stückweise in Überdeckungsmengen liegt
+    \2 Schränke beliebige Variation stückweise ein auf $[s_{i-1},s_i]\times (-\epsilon_i,\epsilon_i)$ sodass die Bilder in $U_i=\exp_p W_i$ liegen, also für $t$ klein genug
+    $$c_t([0,1])\subset \cup_i U_i$$
+    \2 Lifte sukzessiv die Kurve $c_t$ von $M$ zu einer Kurve $\psi_t$ in den Tangentialraum $T_pM$ von $0$ nach $p$
+    \3 Bis $s_{i-1}$ definiert, dann auf $[s_{i-1},s_i]$ durch 
+    $$\psi_t(s)=(\exp_p|_{W_i})^{-1}(c_t(s))$$ 
+    \2 Längen von radialen Geodätischen sind kleiner gleich Längen von exponential abgebildeten Kurven mit gleichem Anfangs und Endpunkt sowie Definitionsbereich(damit auch den Lifts) und Gleichheit falls $c_t=c$
+    \1 Existiert ein konjugierter Punkt auf Weg, dann existiert lokal kürzende Variation
+    \2 Existenz eines nicht-trivialen Jacobifelds $Y$ bis konjugierten Punkt mit nicht verschwindender Endgeschwindigkeit
+    \2 Konstruktion von Vektorfeld
+    \3 $Z_1$ paralleles Vektorfeld längs $c$ mit $Z_1(s_0)=-Y'(s_0)$
+    \3 $\theta$ glatte Funktion, die bei $0$ und $1$ verschwindet und bei $s_0$ gleich $1$
+    \3 $Z(s)=\theta(s)Z_1(s)$
+    \3 $$
+      Y_{\alpha}(s):=\left\{\begin{array}{cl}
+      Y(s)+\alpha Z(s) & s \in\left[0, s_{0}\right] \\
+      \alpha Z(s) & s \in\left[s_{0}, 1\right]
+      \end{array}\right.
+      $$
+    \2 Indexform für $Y_\alpha$ (Bilinear) berechnen $I_1+I_2+I_3=-2 \alpha g\left(Y^{\prime}\left(s_{0}\right), Y^{\prime}\left(s_{0}\right)\right)+\alpha^{2} I(Z, Z)$
+    \3 $I_1$ bzgl Jacobifeld berechnen durch Symmetrie, Jacobigleichung und partielle Ableitung
+    \3 $I_2$ analog berechnen
+    \2 Für $\alpha$ klein genug, ist Indexformwert negativ
+    \2 Zughörige Variation wird bei $c$ $L$-maximiert, also $L(c_t)<L(c)$ 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\pagebreak
+
+
+\subsection{Mannigfaltigkeiten konstanter Schnittkrümmung}
+
+\textbf{Statement: }{Lokale Isometrie von geodätisch vollständigem Raum ist eine Überlagerung}.
+Sei $\pi:(\tilde{M}, \tilde{g}) \rightarrow(M, g)$ eine (surjektive) lokale Isometrie. Ist $(\tilde{M}, \tilde{g})$ geodätisch vollständig, so ist $\pi$ eine Überlagerungsabbildung.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    Zeige Inklusion $\cup\tilde U_i\subset \pi^{-1}(U)$, dann lokale Diffeomorphie von $\pi: \tilde U_i\to U$ dann umgekehrte Inklusion. Starte mit $r$ klein genug sodass
+    $\exp_m: B(0_m,r)\to U=B(m,r)$ Diffeomorphismus und $\tilde U_i=B(\tilde m_i,r)$
+    \1 1. Inklusion von Vereinigung in Urbild
+    \2 \td{Hopf-Rinow} auf $\tilde M$: $\exp_{\tilde m_i}(B(0_{\tilde m_i},r))=\tilde U_i$
+    \2 Alle Elemente in Komponenten $\tilde U_i$ können durch Kurven von Länge kleiner $r$ mit Faserpunkten $\tilde m_i$ verbunden werden und projizierte Kurve hat gleiche Länge kleiner $r$, also liegt der Punkt auch in $U$; damit liegen jene Punkte im Urbild der Projektion von $U$
+    \1 Lokale Diffeomorphie
+    \2 Für beliege Startgeschwindigkeiten $v, \tilde v$ gilt $\pi \circ \exp _{\tilde{m}_{i}} \tilde{v}=\exp _{m} \circ d \pi(\tilde{v})$ (\td{lokale Isometrie} gibt korrespondierende Geodätische $\pi\circ\tilde \gamma$)
+    \2 Diagramm kommutiert 
+    $${\shorthandoff{"}
+    \begin{tikzcd}[ampersand replacement=\&]
+      B(0_{\tilde{m}_i}, r) \arrow[r, "{\exp_{\tilde{m}_i}}"] \arrow[d, "{d\pi}"']
+        \& B(\tilde{m}_i, r) = \tilde U_i \arrow[d, "{\pi}"] \\
+      B(0_m, r) \arrow[r, "{\exp_m}"']
+        \& B(m, r) = U
+    \end{tikzcd}
+    }$$ 
+    Damit sind $\pi|_{\tilde U_i}$ sind diffeomorph
+    \1 Umgekehrte Inklusion von Urbild in Vereinigung
+    \2 Wähle $\tilde q$ im Urbild und $q=\pi(\tilde q)\in U$
+    \2 Existiert eine eindeutige minimale BLP Geodätische von $q$ nach $m$ mit Länge $s<r$
+    \2 Existiert \td{korrespondierende} Geodätische $\tilde \gamma$ in Komponente $\tilde U_i$ von $\tilde q$, die wegen geodätischer Vollständigkeit auf $\R$ definiert ist
+    \2 Da $\pi\circ \tilde\gamma=\gamma$ folgt $\tilde \gamma(s)=\tilde m$ und damit $\tilde q\in \tilde U_i$
+
+  \end{outline}
+}
+
+
+
+\vspace{0.8cm}
+
+
+
+
+
+
+\textbf{Statement: }{Überlagerung von ZSH Raum in EZSH Raum ist ein Diffeomorphismus}.
+Sei $\pi: \tilde{M} \rightarrow M$ eine Überlagerungsabbildung. Ist $\tilde{M}$ zusammenhängend und $M$ einfach zusammenhängend, so ist $\pi$ ein Diffeomorphismus zwischen $\tilde{M}$ und $M$.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 Widerspruch: Verbinde Faserpunkte in Überlagerung (ZSH) und definiere eindeutige existierende geschlossene Kurve bzgl Basispunkt, zu welchem Verbindungskurve der eindeutige Lift ist. 
+    \1 Geschlossene Kurve ist homotop zu konstante Basispunkt-Kurve (EZSH)
+    \1 Homotopie-Abbildung gibt in $t$ parametrisiert gecshlossene Kurven im Basisraum bzgl Basispunkt
+    \1 Lifte bzgl Parameter $t$ die Kurven $c_t$ in Überlagerungsraum
+    \2 Alle gelifteten Kurven haben Startpunkt gleich erster Faserpunkt
+    \1 Definiere Kurve im Überlagerungsraum für $s=1$ durch induzierten Lift $t\mapsto \tilde c_t(1)$ (Untersuche: Wo landen die Endpunkte der Lifts?)
+    \2 $\tilde c_t(1)$ ist konstant (Kurve ist stetig und Faser als Wertebereich von $\tilde c_t(1)$ ist diskret)
+    \2 $\tilde c_0(1)=\tilde\gamma(1)=q_1$ und $\tilde c_1(1)=q_0$
+    \1 Widerspruch
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+\textbf{Statement: }{Klassifikation von EZSH vollständigen Mannigfaltigkeiten mit konstanter Schnittkrümmung}.
+Sei ( $M, g$ ) eine vollständige, einfach zusammenhängende Riemannsche Mannigfaltigkeit mit konstanter Schnittkrümmung. Dann ist ( $M, g$ ) isometrisch zu $\mathbb{R}^{n}$, falls $K \equiv 0$; zu ( $\mathbb{H}^{n}$, can), falls $K \equiv-1$ und zu ( $S^{n}$, can), falls $K \equiv 1$.
+
+Bemerkung: falls $K \equiv c \neq 0$, so kann man die Krümmung durch Skalieren der Metrik zu $\pm 1$ machen.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 Setting: Basispunkt und Geodätische zu Tangentialvektor in $M$ sowie parallele Vektorfelder zu Startvektoren und entsprechende Jacobifelder \td{mit Darstellung $Y_i(t)= d_{tv}\exp _m(tu_i)$}
+    \1 Fall: $K=0$
+    \2 Krümmung verschwindet und Jacobigleichung vereinfacht sich, sodass explizit Darstellung von Jacobifelder durch parallele Vektorfelder bestimmt werden kann
+    \2 $\exp:T_m M \to M$ ist \td{lokale} Isometrie
+    \3 Differential von $\exp$ kann durch Jacobifelder und in diesem Fall durch parallele Vektorfelder dargestellt werden $$Y_i(t)=tU_i(t)$$, wodurch die Isometrie zwischen Tangentialräumen (Eigenschaft der parallelen Vektorfelder) nachgewiesen werden kann
+    \2 $\exp$ ist damit eine Überlagerung (lok. Iso und Tangentialraum geodätisch vollständig)
+    \2 $\exp$ ist Isometrie (Tangentialraum ZSH und $M$ EZSH)
+    \1 Fall $K=-1$
+    \2 Analog zu $K=0$ vereinfach sich Jacobigleichung, sodass $$Y_i(t)=\sinh(t)U_i(t)$$
+    \2 Konstruiere lokale Isometrie $\mathbb{H}\to M$ via Isometrie von Tangentialräumen und vollständigkeit von $\mathbb{H}$
+    \3 $$F=\exp_m\circ f^{-1}\circ \exp_{\tilde m}^{-1}$$
+    mit $f:T_m M\to T_{\tilde m}\mathbb{H}$ Isometrie und Übertragung der Geodätischen, parallelen Vektorfelder und Jacobifelder von $M$ mit $$\tilde Y_i=\sinh(t)\tilde U_i(t)$$
+    \3 \td{Nachweis lokale Isometrie durch Berechnung der Metrik unter Differential}
+    \1 Fall $K=1$
+    \2 Konstruiere lokale Isometrien $F: S^n\backslash \{-\tilde m\}\to M$ und $F_1:S^n\backslash \{-\tilde m'\}\to M$ für einen Punkt $\tilde m'=\tilde m,-\tilde m$, die miteinander verträglich sind
+    \3 $F$ analog zu $K=-1$
+    \3 $$
+    F_{1}=\left.\exp _{m^{\prime}} \circ d F\right|_{\tilde{m}^{\prime}} \circ \exp _{\tilde{m}^{\prime}}^{-1}
+    $$
+    ist lokale Isometrie, dass $dF$ und damit die Inverse bei $\tilde m'$ isometrisch ist, 
+    \3 Abbildungen und deren Differentiale stimmen bei $\tilde m'$ überein
+    \2 Geodätische (nicht durch $\tilde m$) werden von beiden Abbildungen auf gleiche Geodätische in $M$ abgebildet (Lokale Isometrie und Übereinstimmung der Anfangsdaten)
+    \2 Damit stimmen $F$ und $F_1$ auf Punkten außerhalb der verbindenden Geodätischen zwischen $\tilde m, -\tilde m'$ überein, und können stetig fortgesetzt werden bis auf $-\tilde m'$ bzw. $ -\tilde m$
+    \2 Zusammenkleben zu einer lokalen Isometrie zwischen $S^n$ und $M$
+    \2 Standardargument via \td{Überlagerung}
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+\pagebreak
+
+
+\subsection{Volumen Riemannischer Mannigfaltigkeiten}
+
+
+
+\textbf{Statement: }{Disjunkte Zerlegung von Mannigfaltigkeit bzgl Schnittort}.
+Die Mannigfaltigkeit $M$ lässt sich disjunkt zerlegen in
+$$
+M=\exp _{m}\left(U_{m}\right) \cup \operatorname{Cut}(m) .
+$$
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 Verinigung ergibt $M$
+    \2 Klar aus Vollständigkeit, da alle Punkte durch minimale Geodätische verbunden werden können
+    \1 Disjunkt durch Widerspruch
+    \2 Punkt $\exp$ von $U_m$ und im Schnittort
+    \3 Minimale Geodätische $c$ bis $x$ und etwas darüber hinaus
+    \3 Minimale Geodätische $\gamma$ bis $x$, aber nicht weiter
+    \2 Da $\gamma\neq c$ muss insbesondere die Geschwindigkeit bei $m$ verschwieden sein
+    \2 Konstruiere Geodätische $\tau$, welche bis $1$ mit $\gamma$ und ab $1$ mit $c$ übereinstimmt. Dann hat die Geodätische minimal, aber hat einen Knick  
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Schnittorte sind Nullmengen}.
+Für jedes $m \in M$ ist der Schnittort Cut $(m)$ eine Nullmenge.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    $\partial U_m$ ist Nullmenge in $T_mM$ und wird durch $\exp$ stetig auf Nullmenge abgebildet
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }Berechnung des Volumens ausgehend von Punkt.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 ONB $\{u,e_2,…,e_n\}$ von $T_mM$ und Jacobifelder $Y_i$ längs $c$ zu $e_i$ mit 
+    $$\left(d \exp _{m}\right)_{t u} e_{i}=\frac{1}{t} Y_{i}(t)$$
+    \1 Pullback Volumenform längs Exponentialabbildung berechnen $$\left(\exp _m^* v_g\right)_{t u}\left(u, e_2, \ldots, e_n\right)=t^{-(n-1)} \sqrt{\operatorname{det}\left(g\left(Y_i(t), Y_j(t)\right)\right)}$$
+    \1 Trafo von $dx_1…dx_n$ zu $t^{n-1}dt\ du$
+    $$\exp _m^* v_g=J(u, t) d x_1 \cdots d x_n=J(u, t) t^{n-1} d t d u$$
+    \1 Schnittort ist Nullmenge
+    \1  \[
+    vol(M,g)=\int_{U_m}\exp_m^*v_g.
+    \]
+    \1 $$\operatorname{vol}(M, g)=\int_{S^{n-1}} \int_0^{\rho(u)} J(u, t) t^{n-1} d t d u$$
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }Volumenberechnung von Sphäre
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 $Y_i(t)=\sin(t)E_i(t)$ mit $E_i$ parallele Vektorfelder mit $\rho(u)=\pi$
+    \1 $$\begin{aligned}
+    \operatorname{vol}\left(S^{n}, c a n\right) & =\int_{S^{n-1}} \int_{0}^{\pi}\left(\frac{\sin t}{t}\right)^{n-1} t^{n-1} d u d t \\
+    & =\operatorname{vol}\left(S^{n-1}, c a n\right) \int_{0}^{\pi} \sin ^{n-1}(t) d t
+    \end{aligned}
+    $$
+    \1 Induktiv kann man zeigen, dass
+    $$
+    \operatorname{vol}\left(S^{2 m}, c a n\right)=\frac{2(4 \pi)^{m} m!}{(2 m)!}, \quad \operatorname{vol}\left(S^{2 m+1}, c a n\right)=\frac{2 \pi^{m+1}}{m!}
+    $$
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }Volumenberechnung des hyperbolischen Raumes
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 $$
+    \operatorname{vol}\left(B_{m}(R)\right)=\operatorname{vol}\left(S^{n-1}, \text { can }\right) \int_{0}^{R} \td{\sinh ^{n-1}(r)} d r
+    $$
+    Dieser Ausdruck wächst exponentiell schnell (von der Ordnung $\exp ((n-1) R))$.
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: } Volumenberechnung komplex-projektiver Raum
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 Wähle orthonormale Basis $\left\{u, e_{2}, \ldots\right\}$ von $T_{m} \mathbb{C}^{n}$ mit $e_{2}=J u$. 
+    \1 $$Y(s)=d \pi(\tilde{Y}(s))=\sin (s) \underbrace{d \pi(\tilde{U}(s)}_{=: U(s)})$$
+    $$Y(s)=d \pi(\tilde{Y}(s))=\sin (s) d \pi(\tilde{U}(s))=\cos (s) \sin (s) J c^{\prime}(s)$$
+    \1 Damit sind Jacobifelder gegeben durch
+    $$
+    \begin{aligned}
+    & Y_{2}(t)=\sin (t) \cos (t) E_{2}(t) \\
+    & Y_{i}(t)=\sin (t) E_{i}(t), i \geq 3
+    \end{aligned}
+    $$
+    \1 Schnittort Abstand ist $\pi\backslash 2$
+    \1 $$
+    \operatorname{vol}\left(\mathbb{C P}^{n}, c a n\right)=\int_{S^{2 n-1}} \int_{0}^{\frac{\pi}{2}} \sin ^{2 n-1} t \cos t d u d t=\frac{\pi^{n}}{n!}
+    $$
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }\td{{Variation der Determinante}.
+Sei $A(t)$ eine glatte Kurve von $n \times n$-Matrizen mit $A(0)=$ Id. Dann gilt
+$$
+\left.\frac{d}{d t}\right|_{t=0} \operatorname{det} A(t)=\operatorname{tr} A^{\prime}(0)
+$$}
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Volumen Darstellung von Integral über symmetrische Bilinearform auf $\R^n$}.
+Sei $\phi$ eine symmetrische Bilinearform auf $\mathbb{R}^{n}$. Dann gilt
+$$
+\int_{S^{n-1}} \phi(v, v) d v=\frac{1}{n} \operatorname{vol}\left(S^{n-1}\right) \operatorname{tr}(\phi)
+$$
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+
+\textbf{Statement: }{Darstellung des Volumen kleiner Bälle durch Skalarkrümmung}.
+Sei $m$ ein Punkt von $(M, g)$. Dann gilt
+$$
+\operatorname{vol} B_{m}(r)=r^{n} \operatorname{vol}\left(B^{n}\right)\left(1-\frac{s}{6(n+2)} r^{2}+o\left(r^{2}\right)\right),
+$$
+wobei $s$ die Skalarkrümmung in $m$ ist, $n$ die Dimension von $M$ und $r \rightarrow 0$.
+
+In erster und zweiter Ordnung ist das Volumen also wie im Euklidschen Fall, und der nächste Term wird durch die Skalarkrümmung festgelegt. Insbesondere ist das Vorzeichen von $s$ dafür ausschlaggebend, ob kleine Bälle in ( $M, g$ ) kleineres oder größeres Volumen als im Euklidschen Raum haben.
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 Radius kleiner Abstand zum Schnittort kann Volumen berechnet werden durch
+    $$
+    \operatorname{vol} B_{m}(r)=\int_{S^{n-1}} \int_{0}^{r} J(u, t) t^{n-1} d t d u
+    $$
+    \1 Taylorn von $J(u,t)$ bis 2. Ordnung
+    $$
+    J(u, t)=t^{-(n-1)} \sqrt{\operatorname{det}\left(g\left(Y_{i}(t), Y_{j}(t)\right)\right)}=1-\frac{t^{2}}{6} \operatorname{Ric}(u, u)+o\left(t^{2}\right)
+    $$
+    \2 Geodätische mit ONB in $T_m M$ und entsprechende Jacobifelder
+    \2 Jacobigleichung nach $s$ bei $s=0$ ableiten, effektiv nur Terme mit $Y_i$, rest verschwindet
+    $$
+    Y_{i}^{\prime \prime \prime}(0)=-R\left(c^{\prime}(0), Y_{i}^{\prime}(0)\right) c^{\prime}(0)=-R\left(u, e_{i}\right) u=-\sum_{j} R\left(u, e_{i}, u, e_{j}\right) e_{j}
+    $$
+    \2 Taylorn 2. Ordnung von $Y_i$ bei $s=0$ liefert ($Y_i'(0)=Y_i''=0$)
+    $$
+    Y_{i}(t)=t E_{i}(t)-\sum_{j} \frac{t^{3}}{6} R\left(u, e_{i}, u, e_{j}\right) E_{j}(t)+o\left(t^{3}\right)
+    $$
+    \3 Mit $Y_i$ parallele Vektorfelder längs c, $Y_i(0)=\frac{D^i}{d t^i} Y(0)$. Dann gilt für alle $k$
+    $$
+    Y(t)=\sum_{i=0}^k \frac{t^i}{i!} Y_i(t)+o\left(t^k\right)
+    $$ 
+    \2 Metrikkomponenten berechnen
+    $$g\left(Y_{i}(t), Y_{j}(t)\right)=t^{2} \delta_{i j}-\frac{t^{4}}{3} R\left(u, e_{i}, u, e_{j}\right)+o\left(t^{4}\right)$$
+    \2 Determinante berechnen
+    $$
+    \operatorname{det}\left(g\left(Y_{i}(t), Y_{j}(t)\right)\right)=t^{2(n-1)}\left(1-\frac{t^{2}}{3} \operatorname{Ric}(u, u)+o\left(t^{2}\right)\right)
+    $$
+    \3 Als Matrix aufgefasst $$\det (M(t))=t^{(n-1)2}\det (1-\frac{t^2}{3}R(u,e_i,u,e_i)+o(t^2))$$
+    und 1. Orndung Taylorn der restlichen Determinante ergibt $tr R(u,e_i,u,e_i)=Ric(u,u)$ 
+    \1 Näherung einsetzen
+    $$
+    \begin{aligned}
+    \operatorname{vol} B_{m}(r) & =\int_{S^{n-1}} \int_{0}^{r} t^{n-1}\left(1-\frac{t^{2}}{6} \operatorname{Ric}(u, u)+o\left(t^{2}\right)\right) d t d u \\
+    & =\int_{S^{n-1}}\left(\frac{r^{n}}{n}-\frac{r^{n+2}}{6(n+2)} \operatorname{Ric}(u, u)+o\left(r^{n+2}\right)\right) d u \\
+    & =\operatorname{vol}\left(S^{n-1}\right) \frac{r^{n}}{n}-\frac{r^{n+2}}{6(n+2)} \frac{\operatorname{vol}\left(S^{n-1}\right)}{n} \operatorname{tr} \operatorname{Ric}+o\left(r^{n+2}\right) \\
+    & =\frac{r^{n} \operatorname{vol}\left(S^{n-1}\right)}{n}\left(1-\frac{r^{2}}{6(n+2)} s(m)+o\left(r^{2}\right)\right)
+    \end{aligned}
+    $$
+    Dabei Formel für Integral von Ricci als symmetrischer BLF über $S^{n-1}$ verwenden
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Bishop-Gunther Theorem}.
+Sei ( $M, g$ ) eine vollständige Riemannsche Mannigfaltigkeit und $B_{m}(r)$ ein Ball, der den Schnittort von $m$ nicht trifft.
+
+(1) Ist Ric $\geq(n-1)ag$ für eine Konstante $a \in \mathbb{R}$, dann gilt
+$$
+\operatorname{vol}\left(B_{m}(r)\right) \leq V^{a}(r)
+$$
+
+(2) Ist $K \leq b$ für eine Konstante $b \in \mathbb{R}$, dann gilt
+$$
+\operatorname{vol}\left(B_{m}(r)\right) \geq V^{b}(r)
+$$
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 Trafo zwischen Radial Jacobian für allgemeine Jacobifeld Basis und Jacobifeld ONB längs Geodätische durch $C\in GL(n)$
+    $$
+    \begin{aligned}
+    J(u, t) = t^{-(n-1)} \frac{\sqrt{\operatorname{det} g\left(Y_{i}(t), Y_{j}(t)\right)}}{\sqrt{\operatorname{det} g\left(Y_{i}^{\prime}(0), Y_{j}^{\prime}(0)\right)}}
+    \end{aligned}
+    $$
+    mit $\det C^2=\det g(Y_i',Y_j')(0)$
+    \2 Definiere für fixe Radialrichtung $u$  
+    $$f(t)=J(u,t)$$
+    und $D(t)=\det (Y_i(t),Y_j(t))$
+    \1 Zu parallel transportierter ONB längs Geodätische existiert für $r$ kleiner als der Abstand zum Schnittort ein Jacobifelder $Y^r_i$ mit $Y_i^r(0)=0, Y_i^r(r)=E_i(0)$
+    \2 $$Y^r_i(t)=d\exp _m|_{tu}(tv)$$ als Variationsfeld einer geodätischen Variation
+    \1 Hilfsmittel für abschließende Abschätzung
+    \2 \begin{equation*}
+    \frac{f^{\prime}(r)}{f(r)}=\sum_{i=2}^{n} I\left(Y_{i}^{r}, Y_{i}^{r}\right)-\frac{n-1}{r} \tag{12}
+    \end{equation*}
+    \3 \td{TD}
+    \2 Für Jacobifelder $Y$ und Vektorfelder $X$ längs minimaler Geodätischer mit übereinstimmenden Endwerten gilt:
+    $$I(Y,Y)\leq I(X,X)$$
+    Daraus ergibt sich 
+    $$
+    \sum_{i=2}^{n} I\left(Y_{i}^{r}, Y_{i}^{r}\right) \leq \sum_{i=2}^{n} I\left(X_{i}^{r}, X_{i}^{r}\right)
+    $$
+    im Fall 1 und im Fall 2 auf der Modelmannigfaltigkeit ($\tilde X$ Jacobifeld)
+    $$
+    \sum I\left(\tilde{Y}_{i}^{r}, \tilde{Y}_{i}^{r}\right) \geq \sum I\left(\tilde{X}_{i}^{r}, \tilde{X}_{i}^{r}\right)
+    $$
+    \3 \td{TD}
+    \2 Für Modelmannigfaltigkeiten mit konstanter Krümmung $a$ wird die Jacobigleichung mit Anfangsdaten $Y_i'(0)=E_i(0)$ gelöst durch
+    $$Y_i^r(t)=Y_i(t)=\frac{s_a(t)}{s_a'(t)}E_i(t)$$
+    $$
+    s_a(t):= \begin{cases}\sin \sqrt{a} t & a>0 \\ t & a=0 \\ \sinh \sqrt{-a} t & a<0\end{cases}
+    $$
+    Man vergleicht anschließend mit Vektorfeldern 
+    $$X_i^r(t)=\frac{s(t)}{s'(t)}E_i(t)$$
+  \end{outline}
+}
+\StructurePicAutoB{}{%
+\begin{outline}
+    \1 Abschätzung $f(s)\leq f_a(s)$ für $Ric \geq (n-1)ag$ und Herleitung des Volumen-Vergleichs
+    \2 $$
+    \frac{f^{\prime}(r)}{f(r)} \leq \frac{f_{a}^{\prime}(r)}{f_{a}(r)}
+    $$
+    \3 $I(X_i^r,X_i^r)$ partiell integrieren, aufsummieren von $i=2$ bis $n$ und von oben Abschätzen durch negatives Integral (Vorraussetzung an Ricci) gibt
+    $$\sum I(X_i^r,X_i^r)\leq (n-1)\frac{s'(r)}{s(r)}$$
+    \3 C.1 vereinfachen durch C.2 und A.1.1. ergibt durch C.3 die Differentialgleichung mit Gleichheit für Modellraum
+    \2 Integrieren bis $s$ kleiner als der Abstand zum Schnittort liefert $$\log f(s)\leq \log f_a(s)$$ und damit $$f(s)\leq f_a(s)$$
+    \2 Abschließende Volumenberechnung via Radialjacobian liefert $$vol (B_m(r))\leq V^a(r)$$
+    \1 Abschätzung $f(s)\geq f_b(s)$ und Herleitung des Volumenvergleichs für $K\leq b$
+    \2 Für eines der eindeutigen Jacobifelder $Y(t)=Y^r_i(t)=\sum y_i(t)E_i(t)$ gilt
+    $$g\left(Y(r), Y^{\prime}(r)\right)=\int_{0}^{r}\left(g\left(Y^{\prime}, Y^{\prime}\right)-R\left(Y, c^{\prime}, Y, c^{\prime}\right)\right) d s \geq \int_{0}^{r}\left(g\left(Y^{\prime}, Y^{\prime}\right)-b g(Y, Y)\right) d s$$
+    \2 Definiere auf EZSH Mannigfaltigkeit mit konstanter Schnittkrümmung $b$ 
+    $$\tilde Y(t)=\sum y_i(t)\tilde E_i(t)\quad \tilde X_i^r(t)=\frac{s(t)}{s(r)}\tilde E_i(t)$$ 
+    längs einer Geodätischen $\tilde c$ der Länge $r$ und $\tilde E_i$ PVF und ONB ($\tilde X$ ist ein Jacobifeld mit übereinstimmenden Endwerten zu $\tilde Y$) es gilt 
+    $$
+    \left.I(\tilde{Y}, \tilde{Y})=\int_{0}^{r} g\left(\tilde{Y}^{\prime}, \tilde{Y}^{\prime}\right)-b g(\tilde{Y}, \tilde{Y})\right) d t=\int_{0}^{r}\left(g\left(Y^{\prime}, Y^{\prime}\right)-b g(Y, Y)\right) d t
+    $$
+    \2 C.1 vereinfacht durch Übergang auf Modelmannigfaltigkeit (B.1 und B.2) und C.2 ergibt die Abschätzung
+
+\end{outline}
+}
+\vspace{0.8cm}
+
+
+\textbf{Statement: }{Milnor-Wolf Theorem}.
+Sei ( $M, g$ ) eine vollständige Riemannsche Mannigfaltigkeit mit nichtnegativer Riccikrümmung. Dann hat jede endlich erzeugte Untergruppe $\Gamma$ von $\pi_{1}(M)$ polynomielles Wachstum vom Grad $\leq n$ (Ist $M$ kompakt, so ist $\pi_{1}(M)$ bereits endlich erzeugt).
+
+\StructurePicAutoB{}{%
+  \begin{outline}
+    \1 
+  \end{outline}
+}
+
+\vspace{0.8cm}
+
+
+\pagebreak
+
+\section{Algebraic Topology}
+
+
+
+\subsection{Singuläre Homologie und MV-/EE-Aximatik}
+
+
+\section{Der Kegel über einem Raum}\label{sec:cone}
+
+\subsection{Definition und Grundnotation}
+Sei $Y$ ein topologischer Raum. Der \emph{(reduzierte) Kegel} über $Y$ ist der Quotientenraum
+\[
+  C(Y)\ :=\ \frac{Y\times[0,1]}{\sim}\,,
+  \qquad 
+  (y,1)\sim(y',1)\ \ \text{für alle }y,y'\in Y.
+\]
+Wir bezeichnen das Bild von $Y\times\{1\}$ in $C(Y)$ als die \emph{Spitze} und schreiben dafür $v=v_Y$.
+Die Quotientenabbildung notieren wir mit
+\[
+  q_Y:\ Y\times[0,1]\ \longrightarrow\ C(Y),\qquad (y,t)\longmapsto [y,t].
+\]
+Die \emph{Basis-Einbettung} $i_Y:Y\hookrightarrow C(Y)$ ist gegeben durch $i_Y(y)=q_Y(y,0)=[y,0]$.
+Über $Y\times(0,1]$ ist $q_Y$ eine Einbettung; wir identifizieren $Y\times(0,1]$ mit seinem Bild in $C(Y)$.
+Der Kegel trägt die Quotiententopologie; insbesondere ist $F:C(Y)\to Z$ stetig genau dann, wenn $F\circ q_Y$ stetig ist.
+
+\subsection{Universalität als Pushout}
+Schreibe $j:Y\cong Y\times\{0\}\hookrightarrow Y\times[0,1]$ für die kanonische Inklusion. Dann ist $C(Y)$ der Pushout des Diagramms
+\begin{center}
+\begingroup\shorthandoff{"}
+\begin{tikzcd}
+Y \arrow[r, "{j}"] \arrow[d, "{i_Y}"'] & Y\times[0,1] \arrow[d, "{q_Y}"] \\
+C(Y) \arrow[r, hook] & C(Y)
+\end{tikzcd}
+\endgroup
+\end{center}
+
+Praktisch: $C(Y)$ entsteht aus dem Zylinder $Y\times[0,1]$ durch \emph{Zusammenziehen} der Deckelschicht $Y\times\{1\}$ zu \emph{einem} Punkt.
+
+\subsection{Funktorialität des Kegels}
+Sei $h:Y\to Y'$ stetig. Dann ist
+\[
+  C(h):\ C(Y)\longrightarrow C(Y'),\qquad C(h)([y,t])\ :=\ [\,h(y),\,t\,]
+\]
+wohldefiniert und stetig (die Relation $(y,1)\sim(y',1)$ wird respektiert, da $(h(y),1)\sim(h(y'),1)$).
+Damit wird $Y\mapsto C(Y)$ zu einem kovarianten Funktor $C:\mathbf{Top}\to\mathbf{Top}$ mit
+$C(\mathrm{id}_Y)=\mathrm{id}_{C(Y)}$ und $C(h\circ g)=C(h)\circ C(g)$.
+
+
+\subsection{Basiseigenschaften}
+
+[Kontrahierbarkeit]
+Der Kegel $C(Y)$ ist kontrahierbar. Insbesondere ist $\widetilde H_k(C(Y);A)=0$ für alle $k$ und alle Koeffizienten $A$.
+
+
+
+Definiere $H:C(Y)\times[0,1]\to C(Y)$ durch
+$H\big([y,t],s\big)=[\,y,(1-s)t+s\,]$.
+Dann ist $H(-,0)=\mathrm{id}_{C(Y)}$ und $H(-,1)\equiv v$.
+
+
+[Basis und Kegel ohne Spitze]
+Die Inklusion $i_Y:Y\to C(Y)$ ist eine geschlossene Einbettung. Außerdem ist $C(Y)\setminus\{v\}$ homotopieäquivalent zu $Y$; explizit
+$r:C(Y)\setminus\{v\}\to Y$, $r([y,t])=y$
+ist eine Deformationsretraktion mit Homotopie $([y,t],s)\mapsto [y,(1-s)t]$.
+
+
+[Beziehung zur Suspension]
+Die reduzierte Suspension entsteht als Quotient der Basis:
+$\Sigma Y\cong C(Y)/i_Y(Y)$, d.\,h. man kollabiert zusätzlich $Y\times\{0\}$ zu einem Punkt.
+
+
+Abbildungskegel (Mapping cone)
+
+Für eine stetige Abbildung $f:Y\to X$ definieren wir den \emph{Abbildungskegel}
+\[
+  C_f\ :=\ C(Y)\ \cup_f\ X\ =\ \frac{X\ \sqcup\ (Y\times[0,1])}{\ (y,0)\sim f(y),\ \ (y,1)\sim (y',1)}.
+\]
+Im Spezialfall der Inklusion $f=i:Y\hookrightarrow X$ schreiben wir $C_i=C(Y)\cup_i X$.
+Diese Klebekonstruktion ist funktoriell in Paaren $(X,Y)$ und realisiert eine Kofaser $Y\hookrightarrow X\to C_i$.
+Sie ist zentral für
+$H_k(X,Y;A):=\widetilde H_k(C_i;A)$
+und liefert (über geeignete offene Zerlegungen) die lange exakte Sequenz des Paares sowie Exzision.
+
+
+Der Abbildungskegel zur Inklusion
+
+Definition
+
+Sei $(X,Y)$ ein Raumpaar und $i:Y\hookrightarrow X$ die Inklusion. Der \emph{Abbildungskegel} (mapping cone) von $i$ ist der verklebte Raum
+\[
+  C_i \;:=\; C(Y)\ \cup_i\ X
+  \;=\;
+  \frac{X\ \sqcup\ (Y\times[0,1])}{\ (y,0)\sim i(y),\;\ (y,1)\sim(y',1)\ \forall\,y,y'\in Y }.
+\]
+Wir schreiben $v$ für die Kegelspitze (das Bild von $Y\times\{1\}$). Die kanonische Inklusion $X\hookrightarrow C_i$ identifiziert $X$ mit seinem Bild in $C_i$.
+
+Grundfakten und Identifikation mit dem Quotienten
+
+Prop: 
+
+Es gibt eine natürliche Homotopieäquivalenz
+\[
+  C_i \ \simeq\ X/Y,
+\]
+wobei $X/Y$ der Quotient ist, der $Y$ zu einem Punkt zusammenzieht. Insbesondere gilt für jede Koeffizientenstruktur $A$:
+\[
+  \widetilde H_k(C_i;A)\ \cong\ \widetilde H_k(X/Y;A).
+\]
+
+Definiere $\pi:C_i\to X/Y$ durch
+\[
+  \pi(x)=[x]\quad (x\in X),\qquad \pi([y,t])=[Y]\quad (y\in Y,\ t\in[0,1].
+\]
+Dies ist stetig und wohldefiniert. Umgekehrt definiert eine stetige Abbildung
+\[
+  s:X/Y\to C_i,\qquad s([x])=
+  \begin{cases}
+    x\in X & (x\notin Y),\\
+    v\in C(Y) & ([x]=[Y])
+  \end{cases}
+\]
+einen Abschnitt: $\pi\circ s=\mathrm{id}_{X/Y}$. Schließlich liefert die Homotopie
+\[
+  H:C_i\times[0,1]\to C_i,\qquad
+  H(x,u)=x,\quad H([y,t],u)=[y,(1-u)t+u],
+\]
+eine Deformation von $\mathrm{id}_{C_i}$ nach $s\circ \pi$: Für $u=1$ werden alle Kegelpunkte zur Spitze $v$ geschoben; Punkte aus $Y\subset X$ wandern entlang ihres Kegelsegments ebenfalls zu $v$. Also $C_i\simeq X/Y$.
+
+
+[Relative Homologie via Mapping Cone]
+
+Mit $H_k(X,Y;A):=\widetilde H_k(C_i;A)$ erhält man die üblichen relativen Gruppen, äquivalent zur Quotientenbeschreibung
+\(\ H_k(X,Y;A)\cong \widetilde H_k(X/Y;A).\)
+
+
+Lange exakte Sequenz und Verknüpfung
+
+Die offene Zerlegung $C_i=U\cup V$ mit $U\simeq *$, $V\simeq X$ und $U\cap V\simeq Y$ (siehe Konstruktion in \S\ref{sec:cone}) liefert per Mayer–Vietoris die lange exakte Sequenz
+\[
+\cdots\to \widetilde H_k(Y)\ \xrightarrow{i_*}\ \widetilde H_k(X)\ \to\ \widetilde H_k(C_i)\ \xrightarrow{\ \partial\ }\ \widetilde H_{k-1}(Y)\to\cdots,
+\]
+also in unseren Bezeichnungen
+\[
+\cdots\to \widetilde H_k(Y)\ \xrightarrow{i_*}\ \widetilde H_k(X)\ \to\ H_k(X,Y)\ \xrightarrow{\ \partial\ }\ \widetilde H_{k-1}(Y)\to\cdots.
+\]
+Hier ist $\partial$ die übliche \emph{Paar-Verknüpfungsabbildung}.
+
+Kettenmodell (optional, für Rechenpraxis)
+Schreibt man $C_*(X)$, $C_*(Y)$ für singuläre Kettenkomplexe, so ist
+\[
+  C_*(X,Y)\ :=\ C_*(X)/C_*(Y)
+\]
+kettenhomotopieäquivalent zu einem (verschobenen) Mapping-Cone-Komplex der Kettenabbildung $C_*(Y)\to C_*(X)$. Damit erhält man unmittelbar $H_*(X,Y)\cong H_*(C_*(X)/C_*(Y))$.
+
+Beispiele
+\begin{enumerate}
+  \item \textbf{$(D^n,S^{n-1})$.} \quad
+  $C_i\simeq D^n/S^{n-1}\cong S^n$. Also
+  \[
+    H_k(D^n,S^{n-1})\cong \widetilde H_k(S^n)=
+    \begin{cases}\mathbb Z,&k=n,\\ 0,&k\neq n.\end{cases}
+  \]
+  \item \textbf{$(X,X)$.}\quad
+  $C_i=C(X)$ ist kontrahierbar (Lemma \ref{lem:cone-contractible} in \S\ref{sec:cone}), daher $H_k(X,X)=0$ für alle $k$.
+  \item \textbf{$(S^n,S^{n-1})$ (Äquator).}\quad
+  $C_i\simeq S^n/S^{n-1}\ \simeq\ S^n\vee S^n$. Also $\widetilde H_n\cong \mathbb Z^2$, sonst $0$.
+  \item \textbf{Torus mit kollabiertem Meridian.}\quad
+  $(X,Y)=(T^2,a)$ mit einer Kreisunterlage $a\simeq S^1$:
+  $C_i\simeq T^2/a\ \simeq\ S^1\vee S^2$, also
+  \(\ H_1\cong\mathbb Z,\ H_2\cong\mathbb Z.\)
+
+  Sei $T^2$ der Torus mit 1-Skelett $T^2{}^{(1)}=a\vee b$ (zwei Kreise) und einer 2-Zelle, deren Anheftung $S^1\to a\vee b$ dem Wort $[a,b]=aba^{-1}b^{-1}$ entspricht. Sei $Y=a\subset T^2$ (ein Meridian). Dann gilt
+  \[
+    T^2 / Y\ \simeq\ S^1\ \vee\ S^2.
+  \]
+
+  Betrachte die CW-Struktur $T^2 \cong (a\vee b)\cup_\varphi e^2$ mit Anheftung $\varphi$ entlang $[a,b]$.
+  Da $Y=a$ ein Subkomplex ist, ist der Quotient $T^2/Y$ wieder ein CW-Komplex, entstanden aus dem Quotienten des 1-Skeletts und derselben 2-Zelle, deren Anheftung durch die Projektion fortgesetzt wird:
+  \[
+    T^2/Y\ \cong\ \big((a\vee b)/a\big)\ \cup_{\ \bar\varphi\ } e^2.
+  \]
+  Nun ist $(a\vee b)/a \cong S^1$ (die $a$-Schleife wird zum Basispunkt kollabiert, $b$ bleibt ein Kreis). Das fortgesetzte Anheftungswort ist
+  \[
+    \bar\varphi\ \sim\ [1,b]=1
+  \]
+  in $\pi_1(S^1)\cong\mathbb Z$, also \emph{nullhomotop}. Damit wird die 2-Zelle trivial angeheftet und liefert eine Keilsumme mit einer Sphäre:
+  \[
+    \big(S^1\big)\ \cup_{\text{trivial}} e^2\ \cong\ S^1\ \vee\ S^2.
+  \]
+  \item \textbf{Intervall mit beiden Endpunkten.}\quad
+  $(X,Y)=([0,1],\{0,1\})$: $C_i\simeq [0,1]/\{0,1\}\cong S^1$, also
+  \(\ H_1([0,1],\{0,1\})\cong \mathbb Z,\) sonst $0$.
+\end{enumerate}
+
+Bemerkungen
+\begin{itemize}
+  \item Die Identifikation $C_i\simeq X/Y$ ist natürlich in Paaren und verträglich mit Morphismen $(X,Y)\to (X',Y')$; daraus folgt die Naturtreue der langen exakten Sequenz.
+  \item Konzeptuell ist $Y\hookrightarrow X\to C_i$ eine \emph{Kofaserungssequenz}; der Abbildungskegel realisiert also die \emph{Kofaser} von $i$.
+\end{itemize}
+
+
+
+\subsection{Absolute singuläre Homologie}
+
+
+
+
+
+
+
+\pagebreak
+
+\subsection{Hatcher Problems}
+
+
+
+
+(H2.1.1.) What
+ familiar space is the quotient $\Delta$-complex of a 2 -simplex $\left[v_0, v_1, v_2\right]$ obtained by identifying the edges $\left[v_0, v_1\right]$ and $\left[v_1, v_2\right]$, preserving the ordering of vertices?
+
+
+
+\pagebreak
+
+
+\section{Commutative Algebra}
+
+
+
+
+
+
+
+\subsection{Küronya}
+
+Hilbert Function and Grothendieck Group
+
+Let $S=k\left[x_1, \ldots, x_r\right]$, where $x_i$ is an indeterminate of degree $d_i$. Set $q(t)=\Pi_{i=1}^r\left(1-t^{d_i}\right)$. Recall from Exercises 10.11-10.13 that the Hilbert series of $M$ is the formal power series in one variable $t$ given by $h_M(t):= \sum_{n \geq 0} H_M(n) t^n$.
+
+Let $k$ be a field, let $S$ be a polynomial ring over $k$, and let $M$ be a finitely generated graded $S$-module. In the Introduction we saw that if the variables of $S$ all have degree 1, then the Hilbert function $H_M(n)=\operatorname{dim}_k M_n$ agrees with a polynomial function of $n$ for large $n$. This is not true when the variables have different degrees, as the following exercises show. In this case $H_M(n)$ still agrees with a "periodic polynomial," but it is often more convenient to use the Hilbert series instead.
+
+Exercise 10.11: Let $S$ be the graded polynomial ring $k\left[x_1, x_2\right]$, where we give $x_i$ degree $i$.
+
+a. Show that $H_S(n)=\lfloor n / 2\rfloor+1$. Show that this does not agree with a polynomial function in $n$, even for $n \gg 0$.
+
+b. Show that $H_S(2 n)$ and $H_S(2 n+1)$ are both polynomial functions of $n$ for $n \geq 0$. Show also that the Hilbert series $\sum_{n \geq 0} H_A(n) t^n$ is a rational function in $t$ with denominator $(1-t)\left(1-t^2\right)$.
+
+Exercise 10.12: Let $S=k\left[x_1, \ldots, x_r\right]$, where $x_i$ is an indeterminate of degree $d_i$. Set $q(t)=\Pi_{i=1}^r\left(1-t^{d_i}\right)$. The Hilbert series of $M$ is defined to be the formal power series in one variable $t$ given by $h_M(t):=\sum_{n \geq 0} H_M(n) t^n$.
+
+a. Show that $h_M(t)$ is a rational function of $t$, and that in fact $h_M(t)$ may be written as a polynomial divided by $\Pi_{i=1}^u\left(1-t^{d_i}\right)$; that is, it is a rational function with poles only at roots of unity.
+
+b. Show that there is a number $d$ (which may be taken to be the least common multiple of the degrees of the $\left.d_i\right)$ such that for each $s, H_M(d n+ s$ ) agrees with a polynomial in $n$ for all $n \gg 0$; that is, $H_M(n)$ is a "polynomial with periodic coefficients."
+c. Imitating the proof that the Hilbert function agrees with a polynomial for large $n$ in the classical case, show that the Hilbert series of $M$ is a rational function.
+
+Exercise 10.13: Continuing with the notation in Exercise 10.12:
+
+a. Now suppose that $M$ has a system of parameters $y_1, \ldots, y_m$, where $y_i$ is a homogeneous element of degree $e_i>0$. Suppose further that $y_1, \ldots, y_m$ is a regular sequence on $M$ (that is, $y_i$ is a nonzerodivisor on $M /\left(y_1, \ldots, y_{i-1}\right) M$ for $i=1, \ldots, m$; because of the grading the condition $\left(y_1, \ldots, y_m\right) M \neq M$ is automatic). Show that $h_M(t)=u(t) / s(t)$, where $s(t)=\Pi_{i=1}^m\left(1-t^{e_i}\right)$ and $u(t)=\sum u_i t^i$, where $u_i=H_{\left[M /\left(y_1, \ldots, y_m\right) M\right]}(i)$ gives the Hilbert function of the module $M /\left(y_1, \ldots, y_m\right) M$. Note that this is a module of finite length, so that $u(t)$ really is a polynomial, and that the coefficients of $u(t)$ are nonnegative integers.
+
+b. Let $S=k\left[x_1, x_2\right]$, where both variables have degree 1 . Compute the Hilbert series of the $S$-module $S /\left(x_1^2, x_1 x_2\right)$. Since $x_2$ is a system of parameters, the Hilbert series of $S$ can be written with denominator ( $1-t$ ); note that the numerator does not have positive coefficients.
+
+c. Since the Hilbert series of $M$ is a rational function defined over the integers by Exercise 10.12c, it makes sense to speak of the order of its pole at any number. Show that the dimension of $M$ is the order of the pole of $h_M(t)$ at $t=1$. (Hint: Use a system of parameters for $M$ ).
+
+Exercise 19.14:
+a. Show that the Hilbert series of $S$ is given by $h_S(t)=1 / q(t)$, and thus that the Hilbert series of $S(-a)$ is $h_{S(-a)}(t)=t^a / \Pi\left(1-t^{d_i}\right)$.
+b. Let $M$ be a finitely generated graded $S$-module. 
+
+Lemma 19.18. If $M$ is a module such that $M \oplus R^{n-1} \cong R^n$, then $M \cong R$.
+Proof. If $M \oplus R^{n-1} \cong R^n$, then by Proposition A2.2c,
+$$
+\begin{aligned}
+R & \cong \wedge^n R^n \\
+& \cong \wedge^n\left(M \oplus R^{n-1}\right) \\
+& \cong \sum_{i+j=n} \wedge^i M \otimes \wedge^j R^{n-1} \\
+& \cong M \oplus \wedge^2 M \otimes \wedge^{n-2} R^{n-1} \oplus \cdots
+\end{aligned}
+$$
+If now $P$ is any maximal ideal of $R$, then $M_P$ is free of $\operatorname{rank} 1$, so $\wedge^i M_P=0$ for all $i \geq 2$. It follows that $\wedge^i M=0$ for all $i \geq 2$, and we are done.
+
+From Corollary 19.8 we know that $M$ has free resolution of the form
+
+$$
+0 \rightarrow F_m \rightarrow \cdots \rightarrow F_1 \rightarrow F_0 \rightarrow M \rightarrow 0
+$$
+
+with $F_i=\oplus S\left(-a_{i j}\right)$. Let $p(t)=\sum_{i, j}(-1)^i t^{a_{i j}}$. Show that $h_M(t)= p(t) / q(t)$.
+
+Exercise 19.15 (The Hilbert series is universal on graded modūlēs): ${ }^{-}$Let ${ }^{-} S^{-}=\bar{k}\left[x_1, \ldots, x_r\right]$, where $k$ is a field and (for simplicity) all the indeterminates have degree 1 . Let $\mathcal{C}$ be the category of finitely generated graded $S$-modules. The Hilbert series is an "additive function on $\mathcal{C}$ " with values in the (additive group of) formal power series $\mathbf{Z}[[t]]$ in the sense that for each module $M \in \mathcal{C}$ we have the power series $h_M(t)=\sum_{d=0}^{\infty} \operatorname{dim}_k\left(M_d\right) \in \mathbf{Z}[[t]]$, and for each short exact sequence $0 \rightarrow M^{\prime} \rightarrow M \rightarrow M^{\prime \prime} \rightarrow 0$ in $\mathcal{C}$ we have $h_{M^{\prime \prime}}-h_M+h_{M^{\prime}}=0$ in $\mathbf{Z}[[t]]$. In fact, it is the universal additive function, in a certain sense. We prove this now:
+
+We define the Grothendieck group $G_0(\mathcal{C})$ to be the additive group with a generator $[M]$ for each graded module $M$ in $\mathcal{C}$, and a relation $\left[M^{\prime \prime}\right]- [M]+\left[M^{\prime}\right]$ for each short exact sequence $0 \rightarrow M^{\prime} \rightarrow M \rightarrow M^{\prime \prime} \rightarrow 0$ in C .
+
+Show that the map $M \mapsto[M]$ is the universal additive function on $\mathcal{C}$ in the sense that given any other additive function $h$ with values in a group $A$, there is a unique group homomorphism $h^{\prime}: G_0(\mathcal{C}) \rightarrow A$ such that $h(M)=h^{\prime}([M])$. In particular, the Hilbert series induces a function on $G_0(\mathcal{C})$. Show that this function is a monomorphism on $G_0(\mathcal{C})$, and maps $G_0(\mathcal{C})$ isomorphically to $(1-t)^{-r}\left(\mathbf{Z}\left[t, t^{-1}\right]\right) \subset \mathbf{Z}[[t]]$, using the following steps:
+a. Define $K_0(\mathcal{C})$ to be the additive group with a generator $[F]$ for each graded free module $F$, and a relation $\left[F^{\prime \prime}\right]-[F]+\left[F^{\prime}\right]$ for each short exact sequence $0 \rightarrow F^{\prime} \rightarrow F \rightarrow F^{\prime \prime} \rightarrow 0$ in $\mathcal{C}$. (Since every short exact sequence of free modules splits, we could instead have taken a relation $\left[F^{\prime \prime}\right]-[F]+\left[F^{\prime}\right]$ whenever $F \cong F^{\prime} \oplus F^{\prime \prime}$ as graded modules.) Show that regarding a free module as a module gives a map of groups $K_0(\mathcal{C}) \rightarrow G_0(\mathcal{C})$. Because of the existence of finite free resolutions of a graded module by graded free modules, this map has an inverse. Construct it.
+b. Use part a to show that $G_0(\mathcal{C})=K_0(\mathcal{C})$ is the free group on the classes of modules $S(d)$ for $d \in \mathbf{Z}$. Now use Ex. 19.14a.
+
+Exercise 19.16 (The Hilbert polynomial is universal on sheaves): The Hilbert polynomial has a universal description too: The map taking each graded module $M$ to its Hilbert polynomial is the universal additive function on modules that is zero on modules of finite length. Prove this as follows:
+
+a. With notation as in Exercise 19.15, let $\bar{G}_0(\mathcal{C})=G_0(\mathcal{C}) / \mathcal{F}$, where $\mathcal{F}$ is the subgroup generated by the classes of modules of finite length. (If you like that language, you might think of $\bar{G}_0(\mathcal{C})$ as the Grothendieck group of coherent sheaves on $\mathbf{P}^{r-1}$, and $P_M(n)$ as the Euler characteristic of the sheaf associated to $M$.) Show that the map of sets $M \mapsto P_M(n)$ taking each graded module to its Hilbert polynomial is a group homomorphism from $\bar{G}_0(\mathcal{C})$ to the additive group of $\mathbf{Q}[n]$.
+
+b. Show that the Koszul complex of $x_1, \ldots, x_r$ leads to a relation
+$$
+\sum_{n=0}^r(-1)^n\binom{r}{n}[S(-n)]=0 \quad \text { in } \bar{G}_0(\mathcal{C})
+$$
+c. Show that $\bar{G}_0(\mathcal{C})$ is generated by the classes $[S(-a)]$ for $a=0, \ldots, r-$ 1.
+
+d. Show from Exercise 19.14a that the Hilbert series of $M$ may be written in the form $h_M(t)=f_M(t) /(1-t)^r+g_M(t)$, where $f_M(t)$ is a polynomial of degree $<r$, and $g_M(t)$ is a polynomial, uniquely determined by this relation. Show that $f_{S(-a)}=t^a$ for $0 \leq a \leq r-1$. Deduce that $\bar{G}_0(\mathcal{C})$ is the free abelian group on the classes $[S(-a)]$ for $a=0, \ldots, r-1$.
+
+e. Now prove that the map $[M] \mapsto P_M(n) \in \mathbf{Q}[n]$ induces an isomorphism from $\bar{G}_0(\mathrm{C})$ onto its image.
+
+Exercise 19.17: In terms of the basis for $\bar{G}_0(\mathcal{C})$ constructed in Exercise 19.16, compute the class $\left[S /\left(x_1, \ldots, x_t\right)\right]$ for each $t<r$. Do these classes form a basis for $\bar{G}_0(\mathcal{C})$ ?
+
+
+The Chern Polynomial
+
+Exercise 19.18:* Let $S$ be the graded polynomial ring $k\left[x_1, \ldots, x_{r+1}\right]$, where each $x_i$ has degree 1 , the homogeneous coordinate ring of $\mathbf{P}^r$ over the field $k$. Suppose the degrees of the $x_i$ are all equal to 1 , so that the graded ring $S$ corresponds to projective space $\mathbf{P}_k^r$. Let $M$ be a finitely generated graded $S$-module. In geometry the coefficients of the Hilbert polynomial are usually coded in a different way, as Chern classes (or Chern numbers). These may be defined as the coefficients of the Chern polynomial $c_t(M)$ of $M$ (or actually of the sheaf associated to $M$ on projective space), which we shall now describe.
+
+The Chern polynomial $c_t(M)$ is an element of $\mathbf{Z}[t] /\left(t^{r+1}\right)$ defined by the following two properties. (See Fulton [1984, Chapter 3]; Chern classes are defined there initially only for vector bundles, but for nonsingular varieties such as $\mathbf{P}^{r-1}$ one may extend the definition to all sheaves by using free resolutions.)
+i. The Chern polynomial of $S(-a)$ is defined to be $c_t(S(-a))=1-a t$.
+ii. The Chern polynomial is multiplicative in exact sequences, in the sense that if $0 \rightarrow M^{\prime} \rightarrow M \rightarrow M^{\prime \prime} \rightarrow 0$ is a short exact sequence, then $c_t(M)=c_t\left(M^{\prime}\right) c_t\left(M^{\prime \prime}\right)$.
+
+Prove that there exists one and only one polynomial satisfying conditions i and ii.
+
+The Hirzebruch-Riemann-Roch formula for sheaves on projective space (see Fulton [1984, Chapter 15]) provides a way of computing the Chern and Hilbert polynomials from one another. It seems plausible that there is a simple combinatorial expression of this relationship, but I do not know of one.
+
+
+\pagebreak
+\printbibliography
+
+
+\end{document}

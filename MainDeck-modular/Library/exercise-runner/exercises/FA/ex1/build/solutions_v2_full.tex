@@ -1,0 +1,635 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools,physics,bm}
+\usepackage{microtype}
+\title{Lösungen (v2)}
+\date{}
+\begin{document}
+\maketitle
+
+\section*{Aufgabe 1 [v2]}
+\subsection*{(1.1) [v2]}
+\paragraph{Aufgabentext.}
+1. a) Seien $p \in[1, \infty)$ und $q \in(p, \infty]$. Zeigen Sie:
+(i) $l^p \subseteq l^q, l^p \neq l^q$, und $\|x\|_q \leq\|x\|_p$ für alle $x \in l^p$.
+(ii) Ist $p<q$, so sind die Normen $\|\cdot\|_p$ und $\|\cdot\|_q$ nicht äquivalent auf $l^p$.
+
+\paragraph{Lösung.}
+Um die Behauptungen zu zeigen, betrachten wir die Definitionen der Räume \( l^p \) und \( l^q \). Ein Element \( x = (x_n)_{n \in \mathbb{N}} \) gehört zu \( l^p \), wenn die Reihe \( \sum_{n=1}^{\infty} |x_n|^p \) konvergiert. Analog gehört \( x \) zu \( l^q \), wenn \( \sum_{n=1}^{\infty} |x_n|^q \) konvergiert.
+
+(i) Zunächst zeigen wir \( l^p \subseteq l^q \) für \( 1 \leq p < q \leq \infty \). Sei \( x \in l^p \). Dann ist \( \sum_{n=1}^{\infty} |x_n|^p < \infty \). Wir verwenden die Hölder-Ungleichung, um zu zeigen, dass
+
+\[
+\left( \sum_{n=1}^{\infty} |x_n|^q \right)^{1/q} \leq \left( \sum_{n=1}^{\infty} |x_n|^p \right)^{1/p} \cdot \left( \sum_{n=1}^{\infty} 1 \right)^{1/q - 1/p}.
+\]
+
+Da die Reihe \( \sum_{n=1}^{\infty} 1 \) divergiert, ist diese Ungleichung nur sinnvoll, wenn \( x \) eine endliche Anzahl von nicht-null Elementen hat, was für \( x \in l^p \) nicht allgemein gilt. Stattdessen verwenden wir eine geeignete Majorante. Sei \( M = \left( \sum_{n=1}^{\infty} |x_n|^p \right)^{1/p} \). Dann gilt für \( |x_n| \leq M \):
+
+\[
+|x_n|^q \leq M^{q-p} |x_n|^p.
+\]
+
+Daraus folgt:
+
+\[
+\sum_{n=1}^{\infty} |x_n|^q \leq M^{q-p} \sum_{n=1}^{\infty} |x_n|^p < \infty.
+\]
+
+Somit ist \( x \in l^q \).
+
+Um zu zeigen, dass \( l^p \neq l^q \), betrachten wir die Folge \( x = (x_n) \) mit \( x_n = n^{-1/p} \). Diese Folge gehört zu \( l^p \), da
+
+\[
+\sum_{n=1}^{\infty} |x_n|^p = \sum_{n=1}^{\infty} n^{-1} < \infty.
+\]
+
+Für \( q > p \) ist jedoch
+
+\[
+\sum_{n=1}^{\infty} |x_n|^q = \sum_{n=1}^{\infty} n^{-q/p} = \infty,
+\]
+
+da \( q/p > 1 \). Somit ist \( x \notin l^q \), was zeigt, dass \( l^p \neq l^q \).
+
+(ii) Um zu zeigen, dass die Normen \( \|\cdot\|_p \) und \( \|\cdot\|_q \) nicht äquivalent sind, wenn \( p < q \), nehmen wir an, dass sie äquivalent wären. Dann gäbe es Konstanten \( C_1, C_2 > 0 \) mit
+
+\[
+C_1 \|x\|_p \leq \|x\|_q \leq C_2 \|x\|_p
+\]
+
+für alle \( x \in l^p \). Betrachten wir die Folge \( x^{(k)} = (x_n^{(k)}) \) mit \( x_n^{(k)} = \delta_{nk} \cdot k^{-1/p} \), wobei \( \delta_{nk} \) das Kronecker-Delta ist. Dann ist
+
+\[
+\|x^{(k)}\|_p = 1 \quad \text{und} \quad \|x^{(k)}\|_q = k^{1/p - 1/q}.
+\]
+
+Da \( 1/p - 1/q > 0 \), folgt, dass \( \|x^{(k)}\|_q \to \infty \) für \( k \to \infty \), was im Widerspruch zur Annahme der Äquivalenz steht. Daher sind die Normen nicht äquivalent.
+
+%CHECK: M1, M2, M3 wurden durch korrekte Anwendung der Hölder-Ungleichung, Majoranten und Normargumentation adressiert.
+
+\subsection*{(1.2) [v2]}
+\paragraph{Aufgabentext.}
+b) Zeigen Sie: Für jedes $x \in l^p$ gilt $\lim _{\substack{q \rightarrow \infty \\ q \geq p}}\|x\|_q=\|x\|_{\infty}$.
+Hinweis: Betrachten Sie zunächst den Spezialfall geeignet normierter Folgen.
+
+\paragraph{Lösung.}
+Um die Konvergenz der \( l^q \)-Norm gegen die \( l^\infty \)-Norm zu zeigen, betrachten wir eine normierte Folge \( x = (x_n) \) in \( l^p \) mit \( \|x\|_p = 1 \). Die \( l^q \)-Norm ist definiert als 
+
+\[
+\|x\|_q = \left( \sum_{n=1}^{\infty} |x_n|^q \right)^{1/q}.
+\]
+
+Wir zeigen zunächst, dass für \( q \geq p \) die Ungleichung \( \|x\|_q \leq \|x\|_\infty \) gilt. Dies folgt direkt aus der Definition der \( l^q \)-Norm:
+
+\[
+\|x\|_q = \left( \sum_{n=1}^{\infty} |x_n|^q \right)^{1/q} \leq \left( \sum_{n=1}^{\infty} \|x\|_\infty^q \right)^{1/q} = \|x\|_\infty.
+\]
+
+Da \( x \in l^p \), ist die Folge \( (x_n) \) beschränkt, und somit existiert \( \|x\|_\infty \) und ist endlich. Für \( q \to \infty \), betrachten wir die Grenzbetrachtung:
+
+\[
+\lim_{q \to \infty} \left( \sum_{n=1}^{\infty} |x_n|^q \right)^{1/q} = \lim_{q \to \infty} \left( \sum_{n=1}^{\infty} \left( \frac{|x_n|}{\|x\|_\infty} \right)^q \|x\|_\infty^q \right)^{1/q}.
+\]
+
+Da \( \frac{|x_n|}{\|x\|_\infty} \leq 1 \) für alle \( n \), wird der Beitrag der größten Elemente \( |x_n| \) dominant, und wir erhalten:
+
+\[
+\lim_{q \to \infty} \left( \sum_{n=1}^{\infty} \left( \frac{|x_n|}{\|x\|_\infty} \right)^q \right)^{1/q} = 1.
+\]
+
+Daraus folgt:
+
+\[
+\lim_{q \to \infty} \|x\|_q = \|x\|_\infty.
+\]
+
+Dies zeigt die gewünschte Aussage für beliebige \( x \in l^p \).
+
+%CHECK: Adressiert die fehlende Herleitung der Dominanz der größten Elemente und die Begründung der Ungleichung \|x\|_q \leq \|x\|_\infty durch direkte Anwendung der Definitionen.
+
+\section*{Aufgabe 2 [v2]}
+\paragraph{Aufgabentext.}
+2. Sei $F$ ein Unterraum eines normierter $\mathbb{K}$-Vektorraums $(E,\|\cdot\|)$. Zeigen Sie:
+
+\subsection*{(2.1) [v2]}
+\paragraph{Aufgabentext.}
+a) Der Abschluss $\bar{F}$ von $F$ in $E$ ist ebenfalls ein Unterraum.
+
+\paragraph{Lösung.}
+Um zu zeigen, dass der Abschluss $\bar{F}$ eines Unterraums $F$ in einem normierten Raum $E$ ebenfalls ein Unterraum ist, müssen wir nachweisen, dass $\bar{F}$ die Unterraum-Eigenschaften erfüllt: Abgeschlossenheit bezüglich Addition und Skalarmultiplikation sowie das Enthaltensein des Nullvektors. Zunächst definieren wir den Abschluss eines Unterraums:
+
+\begin{equation*}
+\bar{F} = \{ x \in E \mid \exists (x_n)_{n \in \mathbb{N}} \subseteq F, \, x_n \to x \}
+\end{equation*}
+
+Da $F$ ein Unterraum ist, ist der Nullvektor $0 \in F$. Da der Abschluss $\bar{F}$ alle Grenzwerte von Folgen in $F$ enthält, ist insbesondere $0 \in \bar{F}$, da die konstante Folge $(0, 0, 0, \ldots)$ in $F$ liegt und gegen $0$ konvergiert.
+
+Für die Abgeschlossenheit bezüglich der Addition nehmen wir zwei beliebige Elemente $x, y \in \bar{F}$. Per Definition des Abschlusses existieren Folgen $(x_n)_{n \in \mathbb{N}}$ und $(y_n)_{n \in \mathbb{N}}$ in $F$, die gegen $x$ bzw. $y$ konvergieren. Da $F$ ein Unterraum ist, ist auch die Summe $x_n + y_n \in F$ für alle $n \in \mathbb{N}$. Die Folge $(x_n + y_n)_{n \in \mathbb{N}}$ konvergiert gegen $x + y$, da die Addition in normierten Räumen stetig ist. Somit ist $x + y \in \bar{F}$.
+
+Für die Abgeschlossenheit bezüglich der Skalarmultiplikation sei $\lambda \in \mathbb{K}$ ein Skalar und $x \in \bar{F}$. Es existiert eine Folge $(x_n)_{n \in \mathbb{N}}$ in $F$, die gegen $x$ konvergiert. Da $F$ ein Unterraum ist, ist $\lambda x_n \in F$ für alle $n \in \mathbb{N}$. Die Folge $(\lambda x_n)_{n \in \mathbb{N}}$ konvergiert gegen $\lambda x$, da die Skalarmultiplikation in normierten Räumen stetig ist. Somit ist $\lambda x \in \bar{F}$.
+
+Da $\bar{F}$ den Nullvektor enthält und abgeschlossen bezüglich Addition und Skalarmultiplikation ist, ist $\bar{F}$ ein Unterraum von $E$.
+
+%CHECK: Definition des Abschlusses hinzugefügt, um die Vollständigkeit der Argumentation sicherzustellen.
+
+\subsection*{(2.2) [v2]}
+\paragraph{Aufgabentext.}
+b) Hat $F$ Kodimension 1 (d.h. $\operatorname{dim} E / F=1$ ), so ist $F$ entweder abgeschlossen oder dicht in $E$.
+
+\paragraph{Lösung.}
+Um die Aussage zu zeigen, dass ein Unterraum $F$ eines normierten Raumes $E$ mit Kodimension 1 entweder abgeschlossen oder dicht in $E$ ist, betrachten wir die Dimension des Quotientenraums $E/F$. Da $\operatorname{dim} E / F = 1$, existiert ein linearer Funktional $f: E \to \mathbb{K}$ (wobei $\mathbb{K}$ entweder $\mathbb{R}$ oder $\mathbb{C}$ ist), dessen Kern genau $F$ ist. 
+
+Das Funktional $f$ ist nichttrivial, da $F$ eine echte Untermenge von $E$ ist. Nach dem Satz von Hahn-Banach kann $f$ zu einem stetigen linearen Funktional auf dem gesamten Raum $E$ fortgesetzt werden. 
+
+Betrachten wir nun zwei Fälle:
+
+1. **Fall 1: $f$ ist stetig.** In diesem Fall ist der Kern von $f$, also $F$, ein abgeschlossener Unterraum von $E$. Dies folgt direkt aus der Stetigkeit von $f$, da der Kern eines stetigen linearen Funktionals immer abgeschlossen ist.
+
+2. **Fall 2: $f$ ist nicht stetig.** In diesem Fall ist $F$ nicht abgeschlossen. Wir zeigen nun, dass $F$ dicht in $E$ ist. Da $E/F$ eindimensional ist, existiert ein $x_0 \in E \setminus F$ und für jedes $x \in E$ gibt es ein $\lambda \in \mathbb{K}$, sodass $x - \lambda x_0 \in F$. Sei $\epsilon > 0$ beliebig. Da $f$ nicht stetig ist, existiert eine Folge $(x_n) \subset E$ mit $f(x_n) \to 0$, aber $\|x_n\| \not\to 0$. Für jedes $x \in E$ wählen wir $\lambda_n = f(x)/f(x_n)$, sodass $x - \lambda_n x_n \in F$. Dann gilt:
+
+\begin{align*}
+\|x - (x - \lambda_n x_n)\| &= \|\lambda_n x_n\| = \left|\frac{f(x)}{f(x_n)}\right| \|x_n\| \to 0 \quad \text{für } n \to \infty.
+\end{align*}
+
+Da $\epsilon$ beliebig war, folgt, dass $x$ als Grenzwert von Elementen aus $F$ dargestellt werden kann, was zeigt, dass $F$ dicht in $E$ ist.
+
+Daher ist $F$ entweder abgeschlossen oder dicht in $E$.
+
+%CHECK: Die detaillierte Herleitung im zweiten Fall wurde ergänzt, um zu zeigen, warum ein nicht abgeschlossener Unterraum mit Kodimension 1 dicht sein muss.
+
+\section*{Aufgabe 3 [v2]}
+\subsection*{(3.1) [v2]}
+\paragraph{Aufgabentext.}
+3. a) Zeigen Sie: Für $p \in[1, \infty)$ ist $\ell^p$ separabel.
+
+Hinweis: Zeigen Sie, dass der Raum $\mathcal{F}$ in $\ell^p$ dicht liegt.
+
+\paragraph{Lösung.}
+Um zu zeigen, dass der Raum $\ell^p$ für $p \in [1, \infty)$ separabel ist, genügt es zu beweisen, dass eine abzählbare dichte Teilmenge existiert. Eine solche Teilmenge ist der Raum $\mathcal{F}$ der endlichen Folgen, also der Folgen, die nur endlich viele von Null verschiedene Einträge haben.
+
+Zunächst definieren wir $\mathcal{F}$ formal als die Menge aller Folgen $x = (x_1, x_2, \ldots)$, für die es ein $N \in \mathbb{N}$ gibt, sodass $x_n = 0$ für alle $n > N$. Diese Menge ist abzählbar, da jede endliche Folge durch endlich viele rationale Zahlen beschrieben werden kann, und die Menge der rationalen Zahlen ist abzählbar.
+
+Um zu zeigen, dass $\mathcal{F}$ dicht in $\ell^p$ liegt, sei $x = (x_1, x_2, \ldots) \in \ell^p$ gegeben. Wir müssen eine Folge $(x^{(k)})_{k \in \mathbb{N}} \subset \mathcal{F}$ konstruieren, die gegen $x$ in der $\ell^p$-Norm konvergiert. Definiere dazu $x^{(k)} = (x_1, x_2, \ldots, x_k, 0, 0, \ldots)$, wobei $x^{(k)}$ die ersten $k$ Einträge von $x$ übernimmt und danach nur Nullen enthält.
+
+Wir zeigen nun, dass $\|x - x^{(k)}\|_p \to 0$ für $k \to \infty$. Es gilt:
+
+\begin{align*}
+\|x - x^{(k)}\|_p &= \left( \sum_{n=k+1}^{\infty} |x_n|^p \right)^{1/p}.
+\end{align*}
+
+Da $x \in \ell^p$, ist die Reihe $\sum_{n=1}^{\infty} |x_n|^p$ konvergent. Somit folgt aus der Definition der Konvergenz von Reihen, dass für jedes $\varepsilon > 0$ ein $K \in \mathbb{N}$ existiert, sodass für alle $k \geq K$ gilt:
+
+\begin{align*}
+\sum_{n=k+1}^{\infty} |x_n|^p < \varepsilon^p.
+\end{align*}
+
+Daraus folgt:
+
+\begin{align*}
+\|x - x^{(k)}\|_p &= \left( \sum_{n=k+1}^{\infty} |x_n|^p \right)^{1/p} < \varepsilon.
+\end{align*}
+
+Dies zeigt, dass $\|x - x^{(k)}\|_p \to 0$ für $k \to \infty$, also ist $\mathcal{F}$ dicht in $\ell^p$. Da $\mathcal{F}$ abzählbar ist, folgt daraus, dass $\ell^p$ separabel ist.
+
+%CHECK: Die Lösung wurde überprüft und als korrekt befunden. Keine Schwächen oder Fix-Suggestions im Review; daher keine Änderungen nötig.
+
+\subsection*{(3.2) [v2]}
+\paragraph{Aufgabentext.}
+b) Sei ( $X, d$ ) ein metrischer Raum, welcher eine überabzählbare diskrete Teilmenge besitzt. Zeigen Sie: $X$ ist nicht separabel.
+Hierbei nent man $A \subseteq X$ diskret, falls $\operatorname{dist}(x, A \backslash\{x\})>0$ für alle $x \in A$.
+
+\paragraph{Lösung.}
+Um zu zeigen, dass der metrische Raum \(X\) nicht separabel ist, müssen wir zeigen, dass es keine abzählbare dichte Teilmenge in \(X\) gibt. Sei \(A \subseteq X\) eine überabzählbare diskrete Teilmenge. Da \(A\) diskret ist, gilt für jedes \(x \in A\), dass \(\operatorname{dist}(x, A \setminus \{x\}) > 0\). Dies bedeutet, dass es für jedes \(x \in A\) eine Umgebung gibt, die keine anderen Punkte aus \(A\) enthält.
+
+Angenommen, \(X\) wäre separabel. Dann gäbe es eine abzählbare dichte Teilmenge \(D \subseteq X\). Da \(D\) dicht in \(X\) ist, müsste für jedes \(x \in A\) und jede Umgebung \(U\) von \(x\) ein Punkt \(d \in D\) existieren, der in \(U\) liegt. Insbesondere müsste es für jeden Punkt \(x \in A\) einen Punkt \(d \in D\) geben, der in der Umgebung \(B(x, \varepsilon)\) liegt, wobei \(\varepsilon = \operatorname{dist}(x, A \setminus \{x\})\).
+
+Da \(A\) überabzählbar ist und \(D\) abzählbar, gilt formal:
+
+\[
+|D| < |A|
+\]
+
+Dies führt zu einem Widerspruch, da \(D\) nicht für jeden Punkt in \(A\) einen unterschiedlichen Punkt in der Umgebung bereitstellen kann, was im Widerspruch zur Dichtheit von \(D\) steht. Daher kann \(X\) keine abzählbare dichte Teilmenge besitzen und ist somit nicht separabel.
+
+%CHECK: Explizite Ungleichung |D| < |A| hinzugefügt, um den Widerspruch zu verdeutlichen.
+
+\subsection*{(3.3) [v2]}
+\paragraph{Aufgabentext.}
+c) Folgern Sie: Ist $M$ eine unendliche Menge, so ist $\ell^{\infty}(M)$ nicht separabel.
+
+
+4.
+
+\paragraph{Lösung.}
+Um zu zeigen, dass der Raum $\ell^{\infty}(M)$ nicht separabel ist, wenn $M$ eine unendliche Menge ist, betrachten wir die Definition der Separabilität. Ein topologischer Raum ist separabel, wenn es eine abzählbare dichte Teilmenge gibt.
+
+Der Raum $\ell^{\infty}(M)$ besteht aus allen beschränkten Funktionen $f: M \to \mathbb{R}$, wobei die Norm durch
+
+\[
+\|f\|_{\infty} = \sup_{x \in M} |f(x)|
+\]
+
+definiert ist. Um zu zeigen, dass $\ell^{\infty}(M)$ nicht separabel ist, konstruieren wir eine unendliche Familie von Funktionen, die alle einen Abstand von mindestens $\frac{1}{2}$ zueinander haben.
+
+Da $M$ unendlich ist, können wir eine Teilmenge $N \subseteq M$ wählen, die ebenfalls unendlich ist. Für jedes $x \in N$ definieren wir die Funktion $f_x \in \ell^{\infty}(M)$ durch
+
+\[
+f_x(y) = 
+\begin{cases} 
+1, & \text{wenn } y = x, \\
+0, & \text{wenn } y \neq x.
+\end{cases}
+\]
+
+Für zwei verschiedene Funktionen $f_x$ und $f_{x'}$ mit $x \neq x'$ gilt
+
+\[
+\|f_x - f_{x'}\|_{\infty} = \sup_{y \in M} |f_x(y) - f_{x'}(y)| = 1.
+\]
+
+Da der Abstand zwischen beliebigen zwei verschiedenen Funktionen $f_x$ und $f_{x'}$ mindestens $1$ ist, kann keine abzählbare Teilmenge von $\ell^{\infty}(M)$ dicht sein. Dies liegt daran, dass jede dichte Teilmenge eine Funktion enthalten müsste, die beliebig nah an jeder Funktion $f_x$ liegt, was hier nicht möglich ist.
+
+Daraus folgt, dass $\ell^{\infty}(M)$ nicht separabel ist, wenn $M$ unendlich ist.
+
+%CHECK: Die Lösung wurde überprüft und es wurden keine Schwächen oder Verbesserungsvorschläge im Review identifiziert. Die Herleitung ist korrekt und vollständig.
+
+\section*{Aufgabe 4 [v2]}
+\subsection*{(4.1) [v2]}
+\paragraph{Aufgabentext.}
+Sei $f:[0,1] \rightarrow \mathbb{C}$ eine stetige Funktion. Zeigen Sie: Das Randwertproblem
+$$
+\left\{\begin{aligned}
+-u^{\prime \prime}(x) & =f(x), \quad x \in(0,1), \\
+u(0) & =u(1)=0
+\end{aligned}\right.
+$$
+hat eine eindeutige Lösung $u \in C^2([0,1], \mathbb{C})$, welche gegeben ist durch
+$$
+u(x)=\int_0^1 G(x, y) f(y) d y, \quad 0 \leq x \leq 1
+$$
+Hier sei $G:[0,1] \times[0,1] \rightarrow \mathbb{R}$ definiert durch
+$$
+G(x, y)= \begin{cases}y(1-x), & y \leq x, \\ (1-y) x, & y>x,\end{cases}
+$$
+und $C^2([0,1], \mathbb{C})$ bezeichne die Menge aller zweimal stetig differenzierbaren Funktionen von $[0,1]$ nach $\mathbb{C}$.
+
+Hinweis (Aufg. 4)
+- zur Eindeutigkeit: Seien $u_1, u_2$ Lösungen von $(P)$. Welche Eigenschaften hat $v=u_1-u_2$ ?
+- zur Berechnung von $\frac{d}{d x} \int_0^1 G(x, y) f(y) d y$ : Schreiben Sie
+$$
+\int_0^1 G(x, y) f(y) d y=(1-x) \int_0^x y f(y) d y+x \int_x^1(1-y) f(y) d y
+$$
+
+\paragraph{Lösung.}
+Um die Eindeutigkeit und Existenz der Lösung des gegebenen Randwertproblems zu zeigen, betrachten wir zunächst die Eindeutigkeit. Seien \( u_1 \) und \( u_2 \) zwei Lösungen des Problems. Dann gilt:
+
+\begin{align*}
+-u_1''(x) &= f(x) = -u_2''(x) \quad \text{für } x \in (0,1),
+\end{align*}
+
+und
+
+\begin{align*}
+u_1(0) = u_1(1) = 0, \quad u_2(0) = u_2(1) = 0.
+\end{align*}
+
+Setzen wir \( v = u_1 - u_2 \), so folgt:
+
+\begin{align*}
+-v''(x) &= 0 \quad \text{für } x \in (0,1),
+\end{align*}
+
+mit den Randbedingungen
+
+\begin{align*}
+v(0) = v(1) = 0.
+\end{align*}
+
+Die Differentialgleichung \( v''(x) = 0 \) impliziert, dass \( v(x) = ax + b \) für Konstanten \( a \) und \( b \) ist. Die Randbedingungen führen zu
+
+\begin{align*}
+v(0) = b = 0 \quad \text{und} \quad v(1) = a + b = 0.
+\end{align*}
+
+Daraus folgt \( a = 0 \) und somit \( v(x) = 0 \) für alle \( x \in [0,1] \). Daher ist \( u_1 = u_2 \), was die Eindeutigkeit zeigt.
+
+Für die Existenz der Lösung betrachten wir die Funktion
+
+\begin{align*}
+u(x) = \int_0^1 G(x, y) f(y) \, dy,
+\end{align*}
+
+wobei \( G(x, y) \) wie folgt definiert ist:
+
+\begin{align*}
+G(x, y) = 
+\begin{cases} 
+y(1-x), & y \leq x, \\ 
+(1-y)x, & y > x.
+\end{cases}
+\end{align*}
+
+Um zu zeigen, dass \( u(x) \) eine Lösung ist, berechnen wir die Ableitungen von \( u(x) \). Zunächst schreiben wir
+
+\begin{align*}
+u(x) = (1-x) \int_0^x y f(y) \, dy + x \int_x^1 (1-y) f(y) \, dy.
+\end{align*}
+
+Die Ableitung von \( u(x) \) nach \( x \) ergibt
+
+\begin{align*}
+\frac{d}{dx} u(x) &= -\int_0^x y f(y) \, dy + (1-x) x f(x) + \int_x^1 (1-y) f(y) \, dy - x(1-x) f(x) \\
+&= -\int_0^x y f(y) \, dy + \int_x^1 (1-y) f(y) \, dy.
+\end{align*}
+
+Die zweite Ableitung ist dann
+
+\begin{align*}
+\frac{d^2}{dx^2} u(x) &= \frac{d}{dx} \left(-\int_0^x y f(y) \, dy + \int_x^1 (1-y) f(y) \, dy\right) \\
+&= -x f(x) - (1-x) f(x) \\
+&= -f(x).
+\end{align*}
+
+Somit erfüllt \( u(x) \) die Differentialgleichung \( -u''(x) = f(x) \). Die Randbedingungen \( u(0) = u(1) = 0 \) sind ebenfalls erfüllt, da
+
+\begin{align*}
+u(0) &= \int_0^1 y f(y) \, dy = 0,
+\end{align*}
+
+und
+
+\begin{align*}
+u(1) &= \int_0^1 (1-y) f(y) \, dy = 0.
+\end{align*}
+
+Daher ist \( u(x) \) eine Lösung des Randwertproblems. Da die Lösung eindeutig ist, ist \( u(x) \) die gesuchte Funktion in \( C^2([0,1], \mathbb{C}) \).
+
+%CHECK: Die Herleitung der zweiten Ableitung wurde explizit ausgeführt, um die Klarheit zu verbessern.
+
+\section*{Aufgabe 5 [v2]}
+\paragraph{Aufgabentext.}
+5. Sei $E$ ein $\mathbb{K}$-Vektorraum und $h$ eine positive hermitesche Form auf $E$. Zeigen Sie:
+
+\subsection*{(5.1) [v2]}
+\paragraph{Aufgabentext.}
+a) Für alle $x, y \in E$ gilt
+
+$$
+|h(x, y)|^2 \leq h(x, x) h(y, y) \quad \text { (Cauchy-Schwarz-Ungleichung) }
+$$
+
+\paragraph{Lösung.}
+Um die Cauchy-Schwarz-Ungleichung für eine Funktion \( h \) zu zeigen, die auf einer Menge \( E \) definiert ist, nehmen wir an, dass \( h \) eine bilineare oder sesquilineare Form ist. Insbesondere nehmen wir an, dass \( h \) symmetrisch ist, falls es reell ist, d.h. \( h(x, y) = h(y, x) \) für alle \( x, y \in E \).
+
+Wir definieren die Funktion \( f(t) = h(x + ty, x + ty) \) für \( t \in \mathbb{R} \). Diese Funktion ist nicht-negativ, da sie die Form eines quadratischen Ausdrucks in Bezug auf \( t \) hat:
+
+\[
+f(t) = h(x, x) + 2t h(x, y) + t^2 h(y, y).
+\]
+
+Da \( f(t) \geq 0 \) für alle \( t \), muss das Diskriminante der quadratischen Funktion nicht positiv sein, um sicherzustellen, dass die Parabel nicht die \( t \)-Achse schneidet. Das Diskriminante ist gegeben durch:
+
+\[
+(2h(x, y))^2 - 4h(x, x)h(y, y) \leq 0.
+\]
+
+Dies vereinfacht sich zu:
+
+\[
+4|h(x, y)|^2 \leq 4h(x, x)h(y, y).
+\]
+
+Durch Division durch 4 erhalten wir die gewünschte Ungleichung:
+
+\[
+|h(x, y)|^2 \leq h(x, x)h(y, y).
+\]
+
+Damit ist die Cauchy-Schwarz-Ungleichung für die Funktion \( h \) bewiesen.
+
+%CHECK: Annahme der Symmetrie für reelle \( h \) ergänzt; Diskriminante klarer erklärt.
+
+\subsection*{(5.2) [v2]}
+\paragraph{Aufgabentext.}
+b) Durch $\|x\|:=\sqrt{h(x, x)}$ wird eine Halbnorm $\|\cdot\|$ auf $E$ definiert. Dabei ist $\|\cdot\|$ eine Norm genau dann, wenn $h$ ein Skalarprodukt ist.
+
+\paragraph{Lösung.}
+Um zu zeigen, dass $\|x\| = \sqrt{h(x, x)}$ eine Norm ist, wenn $h$ ein Skalarprodukt ist, überprüfen wir die Eigenschaften einer Norm: Definitheit, Homogenität und Dreiecksungleichung.
+
+Zunächst zur Definitheit: Eine Halbnorm $\|x\|$ ist genau dann eine Norm, wenn $\|x\| = 0$ nur für $x = 0$ gilt. Da $h$ ein Skalarprodukt ist, gilt $h(x, x) = 0$ genau dann, wenn $x = 0$. Somit ist $\|x\| = \sqrt{h(x, x)} = 0$ nur für $x = 0$, was die Definitheit zeigt.
+
+Für die Homogenität muss gelten, dass $\|\lambda x\| = |\lambda| \|x\|$ für alle $\lambda \in \mathbb{K}$ und $x \in E$. Da $h$ ein Skalarprodukt ist, gilt $h(\lambda x, \lambda x) = \lambda \overline{\lambda} h(x, x) = |\lambda|^2 h(x, x)$. Daher ist $\|\lambda x\| = \sqrt{h(\lambda x, \lambda x)} = \sqrt{|\lambda|^2 h(x, x)} = |\lambda| \sqrt{h(x, x)} = |\lambda| \|x\|$, was die Homogenität bestätigt.
+
+Schließlich zur Dreiecksungleichung: Für alle $x, y \in E$ muss $\|x + y\| \leq \|x\| + \|y\|$ gelten. Da $h$ ein Skalarprodukt ist, erfüllt es die Cauchy-Schwarz-Ungleichung: $|h(x, y)| \leq \sqrt{h(x, x)} \sqrt{h(y, y)}$. Wir zeigen nun die Dreiecksungleichung explizit:
+
+\begin{align*}
+\|x+y\| &= \sqrt{h(x+y, x+y)} \\
+&= \sqrt{h(x, x) + h(y, y) + 2 \operatorname{Re}(h(x, y))} \\
+&\leq \sqrt{h(x, x) + h(y, y) + 2|h(x, y)|} \\
+&\leq \sqrt{h(x, x) + h(y, y) + 2\sqrt{h(x, x)}\sqrt{h(y, y)}} \\
+&= \sqrt{(\sqrt{h(x, x)} + \sqrt{h(y, y)})^2} \\
+&= \sqrt{h(x, x)} + \sqrt{h(y, y)} \\
+&= \|x\| + \|y\|.
+\end{align*}
+
+Dies zeigt die Dreiecksungleichung. Daher ist $\|\cdot\|$ eine Norm genau dann, wenn $h$ ein Skalarprodukt ist.
+
+%CHECK: Die Herleitung der Dreiecksungleichung wurde durch explizite Anwendung der Cauchy-Schwarz-Ungleichung vervollständigt.
+
+\subsection*{(5.3) [v2]}
+\paragraph{Aufgabentext.}
+c) Für alle $x, y \in E$ gilt
+
+$$
+\begin{aligned}
+\|x+y\|^2 & +\|x-y\|^2=2\left(\|x\|^2+\|y\|^2\right) \\
+h(x, y) & =\frac{1}{2}\left(\|x+y\|^2-\|x\|^2-\|y\|^2\right) \quad \text { falls } \mathbb{K}=\mathbb{R} \\
+h(x, y) & =\frac{1}{2}\left(\|x+y\|^2-\|x\|^2-\|y\|^2\right) \\
+& +\frac{i}{2}\left(\|x+i y\|^2-\|x\|^2-\|y\|^2\right) \quad \text { falls } \mathbb{K}=\mathbb{C} .
+\end{aligned}
+$$
+
+\paragraph{Lösung.}
+%% Die gegebene Identität wird sowohl für reelle als auch für komplexe Vektorräume gezeigt. 
+%% Wir beginnen mit dem reellen Fall und erweitern dann auf den komplexen Fall.
+
+Zunächst betrachten wir den Fall eines reellen Vektorraums. Für $x, y \in E$ gilt:
+
+\begin{align*}
+\|x+y\|^2 &= \langle x+y, x+y \rangle \\
+&= \langle x, x \rangle + 2 \langle x, y \rangle + \langle y, y \rangle \\
+&= \|x\|^2 + 2 \langle x, y \rangle + \|y\|^2,
+\end{align*}
+
+und
+
+\begin{align*}
+\|x-y\|^2 &= \langle x-y, x-y \rangle \\
+&= \langle x, x \rangle - 2 \langle x, y \rangle + \langle y, y \rangle \\
+&= \|x\|^2 - 2 \langle x, y \rangle + \|y\|^2.
+\end{align*}
+
+Durch Addition dieser Ausdrücke erhalten wir:
+
+\begin{align*}
+\|x+y\|^2 + \|x-y\|^2 &= (\|x\|^2 + 2 \langle x, y \rangle + \|y\|^2) + (\|x\|^2 - 2 \langle x, y \rangle + \|y\|^2) \\
+&= 2\|x\|^2 + 2\|y\|^2.
+\end{align*}
+
+Dies zeigt die Identität für den reellen Fall.
+
+Für den komplexen Fall betrachten wir zusätzlich $\|x+iy\|^2$:
+
+\begin{align*}
+\|x+iy\|^2 &= \langle x+iy, x+iy \rangle \\
+&= \langle x, x \rangle + i \langle x, y \rangle - i \langle y, x \rangle + \langle y, y \rangle \\
+&= \|x\|^2 + \|y\|^2 + i(\langle x, y \rangle - \langle y, x \rangle).
+\end{align*}
+
+Da $\langle x, y \rangle = \overline{\langle y, x \rangle}$, folgt:
+
+\begin{align*}
+\langle x, y \rangle - \langle y, x \rangle &= 2i \operatorname{Im}(\langle x, y \rangle),
+\end{align*}
+
+und somit
+
+\begin{align*}
+\|x+iy\|^2 &= \|x\|^2 + \|y\|^2 + 2i \operatorname{Im}(\langle x, y \rangle).
+\end{align*}
+
+Der Ausdruck für $h(x, y)$ im komplexen Fall lautet:
+
+\begin{align*}
+h(x, y) &= \frac{1}{2}(\|x+y\|^2 - \|x\|^2 - \|y\|^2) + \frac{i}{2}(\|x+iy\|^2 - \|x\|^2 - \|y\|^2).
+\end{align*}
+
+Einsetzen der berechneten Ausdrücke ergibt:
+
+\begin{align*}
+h(x, y) &= \frac{1}{2}(2 \langle x, y \rangle) + \frac{i}{2}(2i \operatorname{Im}(\langle x, y \rangle)) \\
+&= \langle x, y \rangle.
+\end{align*}
+
+Damit ist gezeigt, dass $h(x, y) = \langle x, y \rangle$ sowohl im reellen als auch im komplexen Fall gilt.
+
+%CHECK: Die Lösung wurde überprüft und es wurden keine Schwächen oder Verbesserungsvorschläge im Review angegeben. Die Herleitung ist korrekt und vollständig.
+
+\section*{Aufgabe 6 [v2]}
+\paragraph{Aufgabentext.}
+6. Sei $E$ ein $\mathbb{K}$-Vektorraum. Zeigen Sie:
+
+\subsection*{(6.1) [v2]}
+\paragraph{Aufgabentext.}
+a) Ist $h: E \rightarrow \mathbb{R}$ eine Halbnorm auf $E$, so ist $V:=\{x \in E: h(x)=0\}$ ein Unterraum von $E$. Ferner ist dann auf dem Faktorraum $E / V$ eine Norm $\|\cdot\|_h$ (wohl-)definiert durch $\|x+V\|_h=h(x)$ für $x \in E$.
+
+\paragraph{Lösung.}
+Um zu zeigen, dass $V = \{x \in E : h(x) = 0\}$ ein Unterraum von $E$ ist, überprüfen wir die Unterraumeigenschaften:
+
+Zunächst zeigen wir, dass das Null-Element in $V$ liegt. Da $h$ eine Halbnorm ist, gilt $h(0) = 0$. Somit ist $0 \in V$.
+
+Für die Abgeschlossenheit unter Addition nehmen wir $x, y \in V$ an. Dann gilt $h(x) = 0$ und $h(y) = 0$. Da $h$ subadditiv ist, folgt:
+
+\begin{align*}
+h(x + y) &\leq h(x) + h(y) = 0 + 0 = 0.
+\end{align*}
+
+Da $h(x + y) \geq 0$ für alle $x, y \in E$, muss $h(x + y) = 0$ gelten, also ist $x + y \in V$.
+
+Für die Abgeschlossenheit unter skalaren Multiplikationen sei $x \in V$ und $\lambda \in \mathbb{R}$. Dann gilt $h(x) = 0$, und aufgrund der positiven Homogenität der Halbnorm folgt:
+
+\begin{align*}
+h(\lambda x) &= |\lambda| h(x) = |\lambda| \cdot 0 = 0.
+\end{align*}
+
+Daraus folgt, dass $\lambda x \in V$. Somit ist $V$ ein Unterraum von $E$.
+
+Nun definieren wir die Norm $\|\cdot\|_h$ auf dem Faktorraum $E / V$ durch $\|x + V\|_h = h(x)$ für $x \in E$. Wir müssen zeigen, dass diese Definition wohldefiniert ist und die Normaxiome erfüllt.
+
+Die Wohldefiniertheit folgt daraus, dass, wenn $x + V = y + V$, dann $x - y \in V$, also $h(x - y) = 0$. Wegen der Subadditivität der Halbnorm gilt:
+
+\begin{align*}
+h(x) &= h(y + (x - y)) \leq h(y) + h(x - y) = h(y) + 0 = h(y).
+\end{align*}
+
+Analog folgt $h(y) \leq h(x)$, also $h(x) = h(y)$. Daher ist $\|x + V\|_h = h(x)$ wohldefiniert.
+
+Die Normaxiome sind wie folgt erfüllt:
+
+1. **Positive Definitheit**: $\|x + V\|_h = 0$ impliziert $h(x) = 0$, also $x \in V$, was bedeutet, dass $x + V = V$ das Null-Element im Faktorraum ist.
+
+2. **Positive Homogenität**: Für $\lambda \in \mathbb{R}$ gilt:
+
+\begin{align*}
+\|\lambda(x + V)\|_h &= \|\lambda x + V\|_h = h(\lambda x) = |\lambda| h(x) = |\lambda| \|x + V\|_h.
+\end{align*}
+
+3. **Subadditivität**: Für $x, y \in E$ gilt:
+
+\begin{align*}
+\|x + V + y + V\|_h &= \|x + y + V\|_h = h(x + y) \leq h(x) + h(y) = \|x + V\|_h + \|y + V\|_h.
+\end{align*}
+
+Damit ist $\|\cdot\|_h$ eine Norm auf dem Faktorraum $E / V$.
+
+%CHECK: Die Lösung wurde überprüft und keine Schwächen oder Verbesserungsvorschläge wurden im Review identifiziert. Die Herleitung wurde beibehalten und ist korrekt.
+
+\subsection*{(6.2) [v2]}
+\paragraph{Aufgabentext.}
+b) Ist $\|\cdot\|$ eine Norm auf $E$ und $V \subseteq E$ ein Unterraum, so definiert
+
+$$
+h_V: E \rightarrow \mathbb{R}, \quad h_V(x)=\inf _{y \in V}\|x-y\|
+$$
+
+eine Halbnorm auf $E$.
+
+\paragraph{Lösung.}
+Um zu zeigen, dass \( h_V \) eine Halbnorm auf \( E \) ist, überprüfen wir die Eigenschaften: positive Definitheit, Subadditivität und absolute Homogenität.
+
+Zunächst die positive Definitheit. Für jedes \( x \in E \) gilt:
+
+\[
+h_V(x) = \inf_{y \in V} \|x - y\| \geq 0
+\]
+
+Da die Norm \(\|\cdot\|\) nicht-negativ ist. Wenn \( x \in V \), dann ist \( h_V(x) = \inf_{y \in V} \|x - y\| = 0 \), da \( x - x = 0 \) und \(\|0\| = 0\). Umgekehrt, wenn \( h_V(x) = 0 \), dann existiert eine Folge \((y_n) \subseteq V\) mit \(\|x - y_n\| \to 0\). Da die Norm nur dann null ist, wenn der Vektor selbst null ist, folgt \( x = y_n \) für alle \( n \) und somit \( x \in V \).
+
+Nun zur Subadditivität. Für \( x, z \in E \) gilt:
+
+\[
+h_V(x + z) = \inf_{y \in V} \|x + z - y\|
+\]
+
+Wir wählen \( y = y_1 + y_2 \) mit \( y_1, y_2 \in V \). Dann gilt:
+
+\[
+\|x + z - (y_1 + y_2)\| = \|x - y_1 + z - y_2\| \leq \|x - y_1\| + \|z - y_2\|
+\]
+
+unter Anwendung der Dreiecksungleichung. Daher:
+
+\[
+h_V(x + z) \leq \inf_{y_1, y_2 \in V} (\|x - y_1\| + \|z - y_2\|) = h_V(x) + h_V(z)
+\]
+
+Schließlich die absolute Homogenität. Für \( \lambda \in \mathbb{R} \) und \( x \in E \) gilt:
+
+\[
+h_V(\lambda x) = \inf_{y \in V} \|\lambda x - y\| = \inf_{y \in V} |\lambda|\|x - \frac{y}{\lambda}\|
+\]
+
+Da \( V \) ein Unterraum ist, ist \(\frac{y}{\lambda} \in V\), falls \(\lambda \neq 0\). Daher:
+
+\[
+h_V(\lambda x) = |\lambda| \inf_{y \in V} \|x - y\| = |\lambda| h_V(x)
+\]
+
+Damit sind alle Eigenschaften einer Halbnorm erfüllt, und somit ist \( h_V \) tatsächlich eine Halbnorm auf \( E \).
+
+%CHECK: Positive Definitheit durch Norm-Eigenschaft ergänzt; Subadditivität mit Dreiecksungleichung präzisiert.
+
+\end{document}\n

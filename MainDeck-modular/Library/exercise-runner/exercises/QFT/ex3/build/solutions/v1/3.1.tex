@@ -1,0 +1,49 @@
+Um die Kontinuitätsgleichung aus der Dirac-Gleichung abzuleiten, beginnen wir mit der Dirac-Gleichung selbst:
+
+\[
+(i \gamma^\mu \partial_\mu - m) \psi = 0.
+\]
+
+Die adjungierte Dirac-Gleichung lautet:
+
+\[
+\bar{\psi} (i \gamma^\mu \overleftarrow{\partial}_\mu + m) = 0,
+\]
+
+wobei \(\bar{\psi} = \psi^\dagger \gamma^0\) die adjungierte Wellenfunktion ist und \(\overleftarrow{\partial}_\mu\) anzeigt, dass die Ableitung nach links wirkt.
+
+Um die Kontinuitätsgleichung zu erhalten, multiplizieren wir die Dirac-Gleichung von links mit \(\bar{\psi}\) und die adjungierte Dirac-Gleichung von rechts mit \(\psi\):
+
+\[
+\bar{\psi} (i \gamma^\mu \partial_\mu - m) \psi = 0,
+\]
+
+\[
+\bar{\psi} (i \gamma^\mu \overleftarrow{\partial}_\mu + m) \psi = 0.
+\]
+
+Subtrahieren wir die zweite Gleichung von der ersten, erhalten wir:
+
+\[
+\bar{\psi} i \gamma^\mu \partial_\mu \psi - \bar{\psi} i \gamma^\mu \overleftarrow{\partial}_\mu \psi = 0.
+\]
+
+Dies vereinfacht sich zu:
+
+\[
+\partial_\mu (\bar{\psi} \gamma^\mu \psi) = 0.
+\]
+
+Dies ist die Kontinuitätsgleichung, wobei der Vierer-Strom gegeben ist durch:
+
+\[
+j^\mu = \bar{\psi} \gamma^\mu \psi.
+\]
+
+Nun untersuchen wir, ob \(j^0 = \rho\) positiv definit ist. Der Ausdruck für die Dichte \(\rho\) ist:
+
+\[
+\rho = \bar{\psi} \gamma^0 \psi = \psi^\dagger \gamma^0 \gamma^0 \psi = \psi^\dagger \psi.
+\]
+
+Da \(\psi^\dagger \psi\) die Norm der Wellenfunktion ist, die als Summe von Betragsquadraten der Komponenten von \(\psi\) geschrieben werden kann, ist \(\rho\) nicht negativ, aber nicht notwendigerweise positiv definit. Es kann null sein, wenn die Wellenfunktion \(\psi\) die Nullfunktion ist. Daher ist \(\rho\) nicht positiv definit, sondern nur nicht-negativ.

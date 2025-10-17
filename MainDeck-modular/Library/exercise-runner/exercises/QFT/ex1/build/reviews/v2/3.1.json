@@ -1,0 +1,13 @@
+{
+  "score": 0.9,
+  "verdict": "Die Lösung ist größtenteils korrekt und vollständig, zeigt aber kleinere Schwächen in der Begründung.",
+  "weaknesses": [
+    {
+      "code": "incomplete_explanation",
+      "msg": "Die Umformung zur Divergenzform könnte detaillierter erklärt werden, insbesondere die Anwendung der Produktregel."
+    }
+  ],
+  "fix_suggestions": [
+    "Erkläre die Umformung zur Divergenzform detaillierter, insbesondere die Anwendung der Produktregel."
+  ]
+}

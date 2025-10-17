@@ -1,0 +1,15 @@
+Um zu zeigen, dass der Abschluss $\bar{F}$ eines Unterraums $F$ in einem normierten Raum $E$ ebenfalls ein Unterraum ist, müssen wir nachweisen, dass $\bar{F}$ die Unterraum-Eigenschaften erfüllt: Abgeschlossenheit bezüglich Addition und Skalarmultiplikation sowie das Enthaltensein des Nullvektors. Zunächst definieren wir den Abschluss eines Unterraums:
+
+\begin{equation*}
+\bar{F} = \{ x \in E \mid \exists (x_n)_{n \in \mathbb{N}} \subseteq F, \, x_n \to x \}
+\end{equation*}
+
+Da $F$ ein Unterraum ist, ist der Nullvektor $0 \in F$. Da der Abschluss $\bar{F}$ alle Grenzwerte von Folgen in $F$ enthält, ist insbesondere $0 \in \bar{F}$, da die konstante Folge $(0, 0, 0, \ldots)$ in $F$ liegt und gegen $0$ konvergiert.
+
+Für die Abgeschlossenheit bezüglich der Addition nehmen wir zwei beliebige Elemente $x, y \in \bar{F}$. Per Definition des Abschlusses existieren Folgen $(x_n)_{n \in \mathbb{N}}$ und $(y_n)_{n \in \mathbb{N}}$ in $F$, die gegen $x$ bzw. $y$ konvergieren. Da $F$ ein Unterraum ist, ist auch die Summe $x_n + y_n \in F$ für alle $n \in \mathbb{N}$. Die Folge $(x_n + y_n)_{n \in \mathbb{N}}$ konvergiert gegen $x + y$, da die Addition in normierten Räumen stetig ist. Somit ist $x + y \in \bar{F}$.
+
+Für die Abgeschlossenheit bezüglich der Skalarmultiplikation sei $\lambda \in \mathbb{K}$ ein Skalar und $x \in \bar{F}$. Es existiert eine Folge $(x_n)_{n \in \mathbb{N}}$ in $F$, die gegen $x$ konvergiert. Da $F$ ein Unterraum ist, ist $\lambda x_n \in F$ für alle $n \in \mathbb{N}$. Die Folge $(\lambda x_n)_{n \in \mathbb{N}}$ konvergiert gegen $\lambda x$, da die Skalarmultiplikation in normierten Räumen stetig ist. Somit ist $\lambda x \in \bar{F}$.
+
+Da $\bar{F}$ den Nullvektor enthält und abgeschlossen bezüglich Addition und Skalarmultiplikation ist, ist $\bar{F}$ ein Unterraum von $E$.
+
+%CHECK: Definition des Abschlusses hinzugefügt, um die Vollständigkeit der Argumentation sicherzustellen.

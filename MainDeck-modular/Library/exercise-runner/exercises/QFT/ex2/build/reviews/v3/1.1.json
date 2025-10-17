@@ -1,0 +1,20 @@
+{
+  "score": 0.8,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es gibt einige Unklarheiten und kleinere Fehler.",
+  "weaknesses": [
+    {
+      "code": "E1",
+      "msg": "Unklare Herleitung der Näherung für \\( \\gamma \\) im zweiten Fall.",
+      "math_hint": "Die Näherung \\( \\gamma \\approx \\frac{m_Z}{m_e} \\) sollte klarer hergeleitet werden."
+    },
+    {
+      "code": "E2",
+      "msg": "Fehlende Erklärung zur Transformation der Energiegleichung im zweiten Fall.",
+      "math_hint": "Die Transformation von \\( m_Z^2 c^4 = 2 \\gamma m_e^2 c^4 + 2 \\gamma m_e^2 c^4 \\left(1 - \\frac{v^2}{c^2}\\right) \\) sollte detaillierter erklärt werden."
+    }
+  ],
+  "fix_suggestions": [
+    "Führe die Näherung \\( \\gamma \\approx \\frac{m_Z}{m_e} \\) detaillierter her, indem du die Dominanz des quadratischen Terms \\( m_Z^2 \\) gegenüber \\( 2 m_e^2 \\) erklärst.",
+    "Erkläre die Transformation der Energiegleichung im zweiten Fall detaillierter, um die Herleitung der Näherung zu verdeutlichen."
+  ]
+}

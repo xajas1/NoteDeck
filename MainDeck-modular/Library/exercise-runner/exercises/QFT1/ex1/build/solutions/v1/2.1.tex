@@ -1,0 +1,31 @@
+Um die Hamilton-Funktion \( H(\mathbf{r}, \mathbf{p}, t) \) zu berechnen, beginnen wir mit der Definition des kanonischen Impulses \(\mathbf{p}\), der durch die Lagrange-Funktion \( L(\mathbf{r}, \dot{\mathbf{r}}, t) \) gegeben ist. Der kanonische Impuls ist definiert als
+
+\[
+\mathbf{p} = \frac{\partial L}{\partial \dot{\mathbf{r}}} = m \dot{\mathbf{r}} + \frac{e}{c} \mathbf{A}(\mathbf{r}).
+\]
+
+Um die Geschwindigkeit \(\dot{\mathbf{r}}\) in Abhängigkeit von \(\mathbf{p}\) auszudrücken, lösen wir diese Gleichung nach \(\dot{\mathbf{r}}\) auf:
+
+\[
+\dot{\mathbf{r}} = \frac{1}{m} \left( \mathbf{p} - \frac{e}{c} \mathbf{A}(\mathbf{r}) \right).
+\]
+
+Die Hamilton-Funktion \( H(\mathbf{r}, \mathbf{p}, t) \) wird durch eine Legendre-Transformation der Lagrange-Funktion erhalten:
+
+\[
+H(\mathbf{r}, \mathbf{p}, t) = \mathbf{p} \cdot \dot{\mathbf{r}} - L(\mathbf{r}, \dot{\mathbf{r}}, t).
+\]
+
+Setzen wir \(\dot{\mathbf{r}}\) in diese Gleichung ein:
+
+\[
+H(\mathbf{r}, \mathbf{p}, t) = \mathbf{p} \cdot \left( \frac{1}{m} \left( \mathbf{p} - \frac{e}{c} \mathbf{A}(\mathbf{r}) \right) \right) - \left( \frac{1}{2} m \dot{\mathbf{r}}^2 + e \frac{\dot{\mathbf{r}}}{c} \cdot \mathbf{A}(\mathbf{r}) - e \Phi(\mathbf{r}) \right).
+\]
+
+Nach Einsetzen und Vereinfachen erhalten wir:
+
+\[
+H(\mathbf{r}, \mathbf{p}, t) = \frac{1}{2m} \left( \mathbf{p} - \frac{e}{c} \mathbf{A}(\mathbf{r}) \right)^2 + e \Phi(\mathbf{r}).
+\]
+
+Dies ist die Hamilton-Funktion des Systems, die die Dynamik des geladenen Teilchens in einem elektromagnetischen Feld beschreibt.

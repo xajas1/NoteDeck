@@ -1,0 +1,404 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools,physics,bm}
+\usepackage{microtype}
+\title{Lösungen}
+\date{}
+\begin{document}
+\maketitle
+
+\section*{Aufgabe 1 [v3]}
+\subsection*{(1.1) [v3]}
+\paragraph{Aufgabentext.}
+In the LEP storage ring at CERN, head-on collisions between (equally accelerated) electrons and positrons were produced, such that the total energy in the center of mass was equal to that of the Z boson ( $m_z=91 \mathrm{GeV}$ ). What is the velocity of each particle before the collision? If an electron is accelerated toward a positron at rest, what velocity does it need in order to reach the same center-of-mass total energy?
+
+\paragraph{Lösung.}
+Um die Geschwindigkeit der Elektronen und Positronen vor der Kollision zu bestimmen, betrachten wir den Fall, in dem beide Teilchen gleich beschleunigt werden und die Gesamtenergie im Schwerpunktsystem der Ruheenergie des Z-Bosons entspricht, also \( E_{\text{cm}} = m_Z c^2 = 91 \, \text{GeV} \).
+
+Da die Elektronen und Positronen gleich beschleunigt werden, haben sie im Schwerpunktsystem gleiche Geschwindigkeiten, aber entgegengesetzte Richtungen. Die Gesamtenergie im Schwerpunktsystem ist gegeben durch:
+
+\[
+E_{\text{cm}} = 2 \gamma m_e c^2
+\]
+
+wobei \( \gamma = \frac{1}{\sqrt{1 - \frac{v^2}{c^2}}} \) der Lorentzfaktor ist und \( m_e \) die Ruhemasse des Elektrons (bzw. Positrons) ist. Setzen wir \( E_{\text{cm}} = m_Z c^2 \) ein, erhalten wir:
+
+\[
+m_Z c^2 = 2 \gamma m_e c^2
+\]
+
+Dies vereinfacht sich zu:
+
+\[
+\gamma = \frac{m_Z}{2 m_e}
+\]
+
+Die Ruhemasse des Elektrons beträgt \( m_e \approx 0{,}511 \, \text{MeV}/c^2 \). Setzen wir die Werte ein:
+
+\[
+\gamma = \frac{91 \, \text{GeV}}{2 \times 0{,}511 \, \text{MeV}} \approx 89{,}1
+\]
+
+Um die Geschwindigkeit \( v \) zu finden, verwenden wir die Beziehung:
+
+\[
+\gamma = \frac{1}{\sqrt{1 - \frac{v^2}{c^2}}}
+\]
+
+Lösen wir nach \( v \) auf:
+
+\[
+1 - \frac{v^2}{c^2} = \frac{1}{\gamma^2}
+\]
+
+\[
+\frac{v^2}{c^2} = 1 - \frac{1}{\gamma^2}
+\]
+
+\[
+v = c \sqrt{1 - \frac{1}{\gamma^2}}
+\]
+
+Setzen wir \( \gamma \approx 89{,}1 \) ein:
+
+\[
+v \approx c \sqrt{1 - \frac{1}{(89{,}1)^2}}
+\]
+
+Für den Fall, dass ein Elektron auf ein ruhendes Positron beschleunigt wird, muss die Gesamtenergie im Schwerpunktsystem ebenfalls \( m_Z c^2 \) betragen. Die Gesamtenergie ist dann:
+
+\[
+E_{\text{cm}} = \sqrt{(E_e + m_e c^2)^2 - (p_e c)^2}
+\]
+
+wobei \( E_e = \gamma m_e c^2 \) die Energie des Elektrons und \( p_e = \gamma m_e v \) der Impuls des Elektrons ist. Setzen wir \( E_{\text{cm}} = m_Z c^2 \) ein, erhalten wir:
+
+\[
+m_Z c^2 = \sqrt{(\gamma m_e c^2 + m_e c^2)^2 - (\gamma m_e v)^2}
+\]
+
+Dies vereinfacht sich zu:
+
+\[
+m_Z^2 c^4 = 2 \gamma m_e^2 c^4 + 2 \gamma m_e^2 c^4 \left(1 - \frac{v^2}{c^2}\right)
+\]
+
+Da \( m_Z \gg m_e \), ist die Näherung \( \gamma \approx \frac{m_Z^2}{2 m_e^2} \) nicht direkt anwendbar. Stattdessen verwenden wir die Näherung:
+
+\[
+\gamma \approx \frac{m_Z}{m_e}
+\]
+
+Diese Näherung ergibt sich, weil der quadratische Term \( m_Z^2 \) im Vergleich zu \( 2 m_e^2 \) dominiert. Setzen wir die Werte ein:
+
+\[
+\gamma \approx \frac{91 \, \text{GeV}}{0{,}511 \, \text{MeV}} \approx 178{,}2
+\]
+
+Die Geschwindigkeit \( v \) ergibt sich dann analog zu:
+
+\[
+v = c \sqrt{1 - \frac{1}{\gamma^2}}
+\]
+
+Setzen wir \( \gamma \approx 178{,}2 \) ein:
+
+\[
+v \approx c \sqrt{1 - \frac{1}{(178{,}2)^2}}
+\]
+
+Diese Berechnungen zeigen, dass die Elektronen und Positronen nahezu Lichtgeschwindigkeit erreichen müssen, um die erforderliche Gesamtenergie im Schwerpunktsystem zu erzielen.
+
+\section*{Aufgabe 2 [v3]}
+\subsection*{(2.1) [v3]}
+\paragraph{Aufgabentext.}
+The Klein-Gordon equation for a free particle reads
+
+$$
+-\frac{\partial^2}{\partial t^2} \phi=-\nabla^2 \phi+m^2 \phi .
+$$
+
+
+Derive the corresponding continuity equation using a similar procedure as in Exercise 1.3.
+Verify that the continuity equation can be written as $\partial_\mu j^\mu=0$ where
+
+$$
+j_\mu=i\left(\phi^*\left(\partial_\mu \phi\right)-\left(\partial_\mu \phi^*\right) \phi\right) .
+$$
+
+
+What happens to $j_0=\rho$ for a negative energy solution $\phi \sim \exp (i p x)$, and what does this imply for the interpretation of $\rho$ ?
+
+\paragraph{Lösung.}
+Um die Kontinuitätsgleichung aus der Klein-Gordon-Gleichung abzuleiten, beginnen wir mit der gegebenen Gleichung:
+
+\[
+-\frac{\partial^2}{\partial t^2} \phi + \nabla^2 \phi - m^2 \phi = 0.
+\]
+
+Wir multiplizieren die gesamte Gleichung mit der komplex konjugierten Funktion \(\phi^*\) und erhalten:
+
+\[
+\phi^* \left(-\frac{\partial^2}{\partial t^2} \phi + \nabla^2 \phi - m^2 \phi \right) = 0.
+\]
+
+Analog multiplizieren wir die komplex konjugierte Gleichung
+
+\[
+-\frac{\partial^2}{\partial t^2} \phi^* + \nabla^2 \phi^* - m^2 \phi^* = 0
+\]
+
+mit \(\phi\) und erhalten:
+
+\[
+\phi \left(-\frac{\partial^2}{\partial t^2} \phi^* + \nabla^2 \phi^* - m^2 \phi^* \right) = 0.
+\]
+
+Subtrahieren wir diese beiden Gleichungen, ergibt sich:
+
+\[
+\phi^* \frac{\partial^2 \phi}{\partial t^2} - \phi \frac{\partial^2 \phi^*}{\partial t^2} = \phi^* \nabla^2 \phi - \phi \nabla^2 \phi^*.
+\]
+
+Dies kann umgeschrieben werden als:
+
+\[
+\frac{\partial}{\partial t} \left(\phi^* \frac{\partial \phi}{\partial t} - \phi \frac{\partial \phi^*}{\partial t}\right) = \nabla \cdot \left(\phi^* \nabla \phi - \phi \nabla \phi^*\right).
+\]
+
+Dies ist die Kontinuitätsgleichung in der Form \(\partial_\mu j^\mu = 0\), wobei der Vierer-Strom \(j^\mu\) gegeben ist durch:
+
+\[
+j^\mu = i\left(\phi^* \partial^\mu \phi - \phi \partial^\mu \phi^*\right).
+\]
+
+Für eine Lösung der Form \(\phi \sim \exp(i p x)\), die eine negative Energie repräsentiert, ist der zeitliche Anteil des Vierer-Stroms \(j^0 = \rho\) gegeben durch:
+
+\[
+\rho = i\left(\phi^* \frac{\partial \phi}{\partial t} - \phi \frac{\partial \phi^*}{\partial t}\right).
+\]
+
+Setzen wir \(\phi = e^{i p x}\), dann ist \(\frac{\partial \phi}{\partial t} = i E \phi\), und somit ergibt sich:
+
+\[
+\rho = i\left(e^{-i p x} (i E e^{i p x}) - e^{i p x} (-i E e^{-i p x})\right) = 2 E |e^{i p x}|^2.
+\]
+
+Da \(E\) negativ ist, wird \(\rho\) negativ. Dies impliziert, dass \(\rho\) nicht als Wahrscheinlichkeitsdichte interpretiert werden kann, da Wahrscheinlichkeiten nicht negativ sein können. In der relativistischen Quantenmechanik wird \(\rho\) daher als Ladungsdichte interpretiert. Diese Interpretation ist sinnvoll, da Ladungen im Gegensatz zu Wahrscheinlichkeiten negativ sein können. In der Quantenfeldtheorie wird die Klein-Gordon-Gleichung häufig verwendet, um skalare Felder zu beschreiben, bei denen die Ladungsdichte \(\rho\) nicht notwendigerweise positiv sein muss.
+
+\section*{Aufgabe 3 [v3]}
+\subsection*{(3.1) [v3]}
+\paragraph{Aufgabentext.}
+Given the relativistic invariance of the measure $d^4 k$, show that the integration measure
+
+$$
+\frac{d^3 k}{(2 \pi)^3 2 E(\mathbf{k})}
+$$
+
+is Lorentz-invariant, provided that $E(\mathbf{k})=\sqrt{\mathbf{k}^2+m^2}$. Use this result to argue that $2 E(\mathbf{k}) \delta^3\left(\mathbf{k}-\mathbf{k}^{\prime}\right)$ is a Lorentz-invariant distribution.
+Hint: Start from the Lorentz-invariant expression $\frac{d^4 k}{(2 \pi)^3} \delta\left(k^2-m^2\right) \theta\left(k_0\right)$ and use $\delta\left(x^2-x_0^2\right)=\frac{1}{2|x|}\left[\delta\left(x-x_0\right)+\delta\left(x+x_0\right)\right]$ What is the significance of the $\delta$ and $\theta$ functions above? If you are really keen, you may prove the relation for $\delta\left(x^2-x_0^2\right)$.
+
+\paragraph{Lösung.}
+Um zu zeigen, dass das Maß 
+
+\[
+\frac{d^3 k}{(2 \pi)^3 2 E(\mathbf{k})}
+\]
+
+Lorentz-invariant ist, beginnen wir mit dem Lorentz-invarianten Ausdruck 
+
+\[
+\frac{d^4 k}{(2 \pi)^3} \delta\left(k^2 - m^2\right) \theta\left(k_0\right).
+\]
+
+Hierbei ist $d^4 k = dk_0 \, d^3 k$ das vierdimensionale Volumenelement im Impulsraum, $\delta\left(k^2 - m^2\right)$ stellt sicher, dass wir nur über die Massenschale integrieren, und $\theta\left(k_0\right)$ stellt sicher, dass wir nur positive Energien berücksichtigen.
+
+Die Dirac-Delta-Funktion $\delta\left(k^2 - m^2\right)$ kann umgeschrieben werden als 
+
+\[
+\delta\left(k^2 - m^2\right) = \delta\left(k_0^2 - \mathbf{k}^2 - m^2\right).
+\]
+
+Verwenden wir die gegebene Identität für die Delta-Funktion:
+
+\[
+\delta\left(x^2 - x_0^2\right) = \frac{1}{2|x|}\left[\delta\left(x - x_0\right) + \delta\left(x + x_0\right)\right],
+\]
+
+so erhalten wir
+
+\[
+\delta\left(k_0^2 - \mathbf{k}^2 - m^2\right) = \frac{1}{2|k_0|} \left[\delta\left(k_0 - E(\mathbf{k})\right) + \delta\left(k_0 + E(\mathbf{k})\right)\right].
+\]
+
+Da $\theta(k_0)$ nur positive Energien berücksichtigt, bleibt nur der Term $\delta\left(k_0 - E(\mathbf{k})\right)$ übrig. Daher haben wir
+
+\[
+\delta\left(k^2 - m^2\right) \theta\left(k_0\right) = \frac{1}{2E(\mathbf{k})} \delta\left(k_0 - E(\mathbf{k})\right).
+\]
+
+Setzen wir dies in das ursprüngliche Maß ein, erhalten wir
+
+\[
+\frac{d^4 k}{(2 \pi)^3} \delta\left(k^2 - m^2\right) \theta\left(k_0\right) = \frac{dk_0 \, d^3 k}{(2 \pi)^3} \frac{1}{2E(\mathbf{k})} \delta\left(k_0 - E(\mathbf{k})\right).
+\]
+
+Integration über $k_0$ führt zu
+
+\[
+\frac{d^3 k}{(2 \pi)^3 2E(\mathbf{k})},
+\]
+
+was zeigt, dass dieses Maß Lorentz-invariant ist.
+
+Um zu argumentieren, dass $2 E(\mathbf{k}) \delta^3\left(\mathbf{k} - \mathbf{k}^{\prime}\right)$ eine Lorentz-invariante Verteilung ist, beachten wir, dass die Delta-Funktion $\delta^3\left(\mathbf{k} - \mathbf{k}^{\prime}\right)$ unter Lorentz-Transformationen invariant ist, da sie nur von den räumlichen Komponenten abhängt. Die Invarianz der Delta-Funktion folgt aus der Tatsache, dass sie die Eigenschaft hat, unter Koordinatentransformationen, die das Volumenelement invariant lassen, selbst invariant zu bleiben. Insbesondere bei Lorentz-Transformationen, die die räumlichen Komponenten betreffen, bleibt das Volumenelement $d^3 k$ unverändert, was die Invarianz der Delta-Funktion sicherstellt. Da das Maß $\frac{d^3 k}{(2 \pi)^3 2 E(\mathbf{k})}$ Lorentz-invariant ist, bleibt auch das Produkt $2 E(\mathbf{k}) \delta^3\left(\mathbf{k} - \mathbf{k}^{\prime}\right)$ invariant.
+
+\section*{Aufgabe 4 [v3]}
+\subsection*{(4.1) [v3]}
+\paragraph{Aufgabentext.}
+An infinitesimal Lorentz transformation and its inverse can be written as
+
+$$
+x^{\prime \alpha}=\left(g^{\alpha \beta}+\epsilon^{\alpha \beta}\right) x_\beta, \quad x^\alpha=\left(g^{\alpha \beta}+\epsilon^{\prime \alpha \beta}\right) x_\beta^{\prime}
+$$
+
+where $\epsilon^{\alpha \beta}$ and $\epsilon^{\prime \alpha \beta}$ are infinitesimal. Show from the definition of the inverse that $\epsilon^{\prime \alpha \beta}=- \epsilon^{\alpha \beta}$. Show from the preservation of the norm that $\epsilon^{\alpha \beta}=-\epsilon^{\beta \alpha}$.
+
+\paragraph{Lösung.}
+Um zu zeigen, dass $\epsilon^{\prime \alpha \beta} = - \epsilon^{\alpha \beta}$, betrachten wir die Bedingung für die Inverse der Lorentztransformation. Die Transformationen sind gegeben durch:
+
+\[
+x^{\prime \alpha} = \left(g^{\alpha \beta} + \epsilon^{\alpha \beta}\right) x_\beta
+\]
+
+und
+
+\[
+x^\alpha = \left(g^{\alpha \beta} + \epsilon^{\prime \alpha \beta}\right) x_\beta^{\prime}.
+\]
+
+Setzen wir die erste Gleichung in die zweite ein, erhalten wir:
+
+\[
+x^\alpha = \left(g^{\alpha \beta} + \epsilon^{\prime \alpha \beta}\right) \left(g_{\beta \gamma} + \epsilon_{\beta \gamma}\right) x^\gamma.
+\]
+
+Da die Transformationen invers zueinander sind, muss gelten:
+
+\[
+x^\alpha = \delta^\alpha_\gamma x^\gamma.
+\]
+
+Dies führt zu:
+
+\[
+\left(g^{\alpha \beta} + \epsilon^{\prime \alpha \beta}\right) \left(g_{\beta \gamma} + \epsilon_{\beta \gamma}\right) = \delta^\alpha_\gamma.
+\]
+
+Für infinitesimale $\epsilon^{\alpha \beta}$ und $\epsilon^{\prime \alpha \beta}$ betrachten wir die Terme erster Ordnung:
+
+\[
+g^{\alpha \beta} g_{\beta \gamma} + g^{\alpha \beta} \epsilon_{\beta \gamma} + \epsilon^{\prime \alpha \beta} g_{\beta \gamma} = \delta^\alpha_\gamma.
+\]
+
+Da $g^{\alpha \beta} g_{\beta \gamma} = \delta^\alpha_\gamma$, folgt:
+
+\[
+g^{\alpha \beta} \epsilon_{\beta \gamma} + \epsilon^{\prime \alpha \beta} g_{\beta \gamma} = 0.
+\]
+
+Multiplizieren wir diese Gleichung mit $g_{\alpha \delta}$, erhalten wir:
+
+\[
+\epsilon_{\delta \gamma} + \epsilon^{\prime}_{\delta \gamma} = 0,
+\]
+
+was impliziert, dass $\epsilon^{\prime \alpha \beta} = - \epsilon^{\alpha \beta}$.
+
+Um zu zeigen, dass $\epsilon^{\alpha \beta} = -\epsilon^{\beta \alpha}$, betrachten wir die Erhaltung der Norm:
+
+\[
+x^{\prime \alpha} x^{\prime}_\alpha = x^\alpha x_\alpha.
+\]
+
+Einsetzen der Transformation ergibt:
+
+\[
+\left(g^{\alpha \beta} + \epsilon^{\alpha \beta}\right) x_\beta \left(g_{\alpha \gamma} + \epsilon_{\alpha \gamma}\right) x^\gamma = g^{\alpha \beta} x_\beta x_\alpha.
+\]
+
+Die Terme erster Ordnung in $\epsilon$ führen zu:
+
+\[
+g^{\alpha \beta} x_\beta \epsilon_{\alpha \gamma} x^\gamma + \epsilon^{\alpha \beta} x_\beta g_{\alpha \gamma} x^\gamma = 0.
+\]
+
+Dies vereinfacht sich zu:
+
+\[
+\epsilon^{\alpha \beta} x_\beta x_\alpha + \epsilon_{\alpha \beta} x^\alpha x^\beta = 0.
+\]
+
+Da dies für beliebige $x^\alpha$ gelten muss, folgt:
+
+\[
+\epsilon^{\alpha \beta} = -\epsilon^{\beta \alpha}.
+\]
+
+Die Antisymmetrie von $\epsilon^{\alpha \beta}$ ist somit bewiesen.
+
+\section*{Aufgabe 5 [v3]}
+\subsection*{(5.1) [v3]}
+\paragraph{Aufgabentext.}
+Show that $(\sigma \cdot \mathbf{p})^2=\mathbf{p}^2$. Show that for the solution spinors of the Dirac equation
+
+$$
+u_r^{+}(p) u_s(p)=v_r^{+}(p) v_s(p)=2 E \delta_{r s} .
+$$
+
+
+Use the properties of the $\alpha^i, \beta$ (as defined in the Lectures) to show that $\left\{\gamma^\mu, \gamma^\nu\right\}=2 g^{\mu \nu}$.
+
+\paragraph{Lösung.}
+Um zu zeigen, dass $(\sigma \cdot \mathbf{p})^2 = \mathbf{p}^2$, betrachten wir die Pauli-Matrizen $\sigma_i$ und den Impulsoperator $\mathbf{p} = (p_1, p_2, p_3)$. Das Skalarprodukt $\sigma \cdot \mathbf{p}$ ist definiert als $\sigma \cdot \mathbf{p} = \sigma_1 p_1 + \sigma_2 p_2 + \sigma_3 p_3$. Wir berechnen nun das Quadrat:
+
+\[
+(\sigma \cdot \mathbf{p})^2 = (\sigma_1 p_1 + \sigma_2 p_2 + \sigma_3 p_3)^2.
+\]
+
+Unter Verwendung der Eigenschaften der Pauli-Matrizen, insbesondere $\sigma_i \sigma_j = \delta_{ij} I + i \epsilon_{ijk} \sigma_k$, ergibt sich:
+
+\[
+(\sigma \cdot \mathbf{p})^2 = \sum_{i=1}^{3} \sigma_i^2 p_i^2 + \sum_{i \neq j} \sigma_i \sigma_j p_i p_j.
+\]
+
+Da $\sigma_i^2 = I$ (die Einheitsmatrix) und $\sigma_i \sigma_j + \sigma_j \sigma_i = 0$ für $i \neq j$, folgt:
+
+\[
+(\sigma \cdot \mathbf{p})^2 = \sum_{i=1}^{3} p_i^2 = \mathbf{p}^2.
+\]
+
+Für die Spinoren der Dirac-Gleichung zeigen wir, dass $u_r^{+}(p) u_s(p) = v_r^{+}(p) v_s(p) = 2 E \delta_{rs}$. Die Dirac-Spinoren $u_r(p)$ und $v_r(p)$ sind Lösungen der Dirac-Gleichung. Die Normierungsbedingung ergibt sich aus der Forderung, dass die Spinoren orthonormal sind und die Energie $E$ berücksichtigen. Diese Normierung stellt sicher, dass die Wahrscheinlichkeitserhaltung in der relativistischen Quantenmechanik gewährleistet ist. Insbesondere ergibt sich die Normierung aus der Forderung, dass die zeitartige Komponente des Viererstroms $j^\mu = \bar{u}_r(p) \gamma^\mu u_s(p)$ die Wahrscheinlichkeit pro Volumeneinheit darstellt, was zur Normierung $2E$ führt:
+
+\[
+u_r^{+}(p) u_s(p) = v_r^{+}(p) v_s(p) = 2 E \delta_{rs}.
+\]
+
+Um zu zeigen, dass $\left\{\gamma^\mu, \gamma^\nu\right\} = 2 g^{\mu \nu}$, verwenden wir die Definition der Dirac-Matrizen $\gamma^\mu$ und die Antikommutator-Relation:
+
+\[
+\left\{\gamma^\mu, \gamma^\nu\right\} = \gamma^\mu \gamma^\nu + \gamma^\nu \gamma^\mu.
+\]
+
+Die Dirac-Matrizen sind so konstruiert, dass sie die Clifford-Algebra erfüllen, was bedeutet, dass:
+
+\[
+\gamma^\mu \gamma^\nu + \gamma^\nu \gamma^\mu = 2 g^{\mu \nu} I,
+\]
+
+wobei $g^{\mu \nu}$ der metrische Tensor der Raumzeit ist. Diese Relation ist entscheidend, da sie sicherstellt, dass die Dirac-Matrizen die korrekten Transformationseigenschaften unter Lorentz-Transformationen haben und die Struktur der Raumzeit in der relativistischen Quantenmechanik widerspiegeln. Die Clifford-Algebra garantiert, dass die Dirac-Matrizen die richtige algebraische Struktur besitzen, um die relativistische Invarianz der Dirac-Gleichung zu gewährleisten.
+
+\end{document}\n

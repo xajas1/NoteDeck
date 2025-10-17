@@ -1,0 +1,18 @@
+{
+  "score": 0.9,
+  "verdict": "Die Lösung ist größtenteils korrekt und vollständig, jedoch gibt es kleinere Ungenauigkeiten.",
+  "weaknesses": [
+    {
+      "code": "unit_conversion",
+      "msg": "Die Umrechnung von kg in GeV ist korrekt, aber die Erklärung könnte klarer sein, insbesondere die Umrechnung von c^2 in GeV."
+    },
+    {
+      "code": "explanation_clarity",
+      "msg": "Die Erklärung zur Umrechnung von s in GeV^{-1} könnte präziser sein, insbesondere die Rolle von c=1 in natürlichen Einheiten."
+    }
+  ],
+  "fix_suggestions": [
+    "Klarere Erklärung der Umrechnung von c^2 in GeV.",
+    "Präzisere Darstellung der Umrechnung von s in GeV^{-1} unter Berücksichtigung von c=1."
+  ]
+}

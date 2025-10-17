@@ -1,0 +1,14 @@
+{
+  "score": 0.9,
+  "verdict": "Die Lösung ist größtenteils korrekt und vollständig, aber es gibt kleinere Unklarheiten.",
+  "weaknesses": [
+    {
+      "code": "interpretation",
+      "msg": "Die Interpretation von \u001crho\u001d als Ladungsdichte wird nicht ausreichend begründet."
+    }
+  ],
+  "fix_suggestions": [
+    "Erkläre genauer, warum \u001crho\u001d als Ladungsdichte interpretiert wird und nicht als Wahrscheinlichkeitsdichte.",
+    "Füge eine kurze Erklärung hinzu, warum die negative Energie zu einer negativen \u001crho\u001d führt."
+  ]
+}

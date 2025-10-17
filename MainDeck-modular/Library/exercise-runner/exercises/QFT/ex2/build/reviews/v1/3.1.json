@@ -1,0 +1,13 @@
+{
+  "score": 0.9,
+  "verdict": "Die Lösung ist größtenteils korrekt und gut begründet, aber es gibt kleinere Unklarheiten.",
+  "weaknesses": [
+    {
+      "code": "incomplete_argument",
+      "msg": "Die Invarianz der Delta-Funktion unter Lorentz-Transformationen wird nicht vollständig begründet."
+    }
+  ],
+  "fix_suggestions": [
+    "Erkläre genauer, warum die Delta-Funktion $\u0003delta^3(\u0003mathbf{k} - \u0003mathbf{k}^{\u0003prime})$ unter Lorentz-Transformationen invariant ist."
+  ]
+}

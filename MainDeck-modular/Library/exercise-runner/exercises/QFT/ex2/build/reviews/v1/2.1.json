@@ -1,0 +1,18 @@
+{
+  "score": 0.8,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es gibt einige Unklarheiten und kleinere Fehler.",
+  "weaknesses": [
+    {
+      "code": "incorrect_sign",
+      "msg": "Das Vorzeichen von E in der Berechnung von \\(\\rho\\) ist nicht korrekt behandelt."
+    },
+    {
+      "code": "incomplete_explanation",
+      "msg": "Die Begründung, warum \\(\\rho\\) nicht als Wahrscheinlichkeitsdichte interpretiert werden kann, ist unvollständig."
+    }
+  ],
+  "fix_suggestions": [
+    "Überprüfen und korrigieren Sie das Vorzeichen von E in der Berechnung von \\(\\rho\\).",
+    "Erklären Sie ausführlicher, warum \\(\\rho\\) nicht als Wahrscheinlichkeitsdichte interpretiert werden kann, insbesondere im Kontext der relativistischen Quantenmechanik."
+  ]
+}

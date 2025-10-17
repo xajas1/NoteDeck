@@ -1,0 +1,14 @@
+{
+  "score": 0.9,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es gibt kleinere Lücken.",
+  "weaknesses": [
+    {
+      "code": "missing_proof_massive_case",
+      "msg": "Der Beweis für den massiven Fall ist unvollständig.",
+      "math_hint": "Es fehlt eine detaillierte Herleitung, warum die Helizität für massive Teilchen nicht wohldefiniert ist."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Für massive Teilchen sollte gezeigt werden, dass } P_{L,R} u_s(p) \\text{ keine festen Eigenwerte von } \\mathfrak{h} \\text{ haben, indem man die Transformationseigenschaften unter Lorentztransformationen analysiert.}"
+  ]
+}

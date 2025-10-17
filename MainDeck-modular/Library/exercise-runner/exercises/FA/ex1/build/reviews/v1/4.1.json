@@ -1,0 +1,14 @@
+{
+  "score": 0.9,
+  "verdict": "Die Lösung ist fast korrekt, aber es gibt kleinere Lücken in der Herleitung.",
+  "weaknesses": [
+    {
+      "code": "M1",
+      "msg": "Die Herleitung der zweiten Ableitung von u(x) ist nicht vollständig klar.",
+      "math_hint": "Die Berechnung der zweiten Ableitung sollte expliziter sein, insbesondere die Schritte zur Vereinfachung der ersten Ableitung."
+    }
+  ],
+  "fix_suggestions": [
+    "\\frac{d^2}{dx^2} u(x) = \\frac{d}{dx} \\left(-\\int_0^x y f(y) \\, dy + \\int_x^1 (1-y) f(y) \\, dy\\right) = -f(x)"
+  ]
+}

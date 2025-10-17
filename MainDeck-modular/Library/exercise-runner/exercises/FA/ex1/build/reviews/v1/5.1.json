@@ -1,0 +1,20 @@
+{
+  "score": 0.9,
+  "verdict": "Die Lösung ist fast korrekt, aber es gibt kleinere Lücken in der Herleitung.",
+  "weaknesses": [
+    {
+      "code": "missing_assumption",
+      "msg": "Die Annahme, dass h eine bilineare oder sesquilineare Form ist, sollte expliziter gemacht werden.",
+      "math_hint": "h(x, y) = h(y, x) für alle x, y in E, falls h reell ist."
+    },
+    {
+      "code": "discriminant_explanation",
+      "msg": "Die Erklärung, warum das Diskriminante nicht positiv sein darf, könnte klarer sein.",
+      "math_hint": "Diskriminante: b^2 - 4ac ≤ 0 für ax^2 + bx + c ≥ 0."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Angabe, dass } h \\text{ symmetrisch ist, falls reell: } h(x, y) = h(y, x) \\text{ für alle } x, y \\in E.",
+    "f(t) \\geq 0 \\Rightarrow \\text{Diskriminante } (2h(x, y))^2 - 4h(x, x)h(y, y) \\leq 0 \\text{ für alle } t."
+  ]
+}

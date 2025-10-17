@@ -1,0 +1,388 @@
+{
+  "Testprojekt": {
+    "sourceFile": "RG_Test25",
+    "snipMeta": {
+      "Subject": "A",
+      "Topic": "Ringe Basics",
+      "LitID": "T12",
+      "CTyp": "DEF",
+      "ParentTopic": "Ringe",
+      "Content": "",
+      "selectedProject": "RG_Test25"
+    },
+    "tableMeta": {}
+  },
+  "Neues Testprojekt": {
+    "sourceFile": "KNO_Burde14",
+    "snipMeta": {
+      "Subject": "A",
+      "Topic": "Ringe Basics",
+      "LitID": "T12",
+      "CTyp": "DEF",
+      "ParentTopic": "Ringe",
+      "Content": "",
+      "selectedProject": "KNO_Burde14"
+    },
+    "tableMeta": {}
+  },
+  "P10": {
+    "sourceFile": "RG_Bernig25",
+    "snipMeta": {
+      "Subject": "A",
+      "Topic": "Ringe Basics",
+      "LitID": "T12",
+      "CTyp": "DEF",
+      "ParentTopic": "Ringe",
+      "Content": "",
+      "selectedProject": "RG_Bernig25"
+    },
+    "tableMeta": {
+      "SelectedSource": "RG_Bernig25/RG_Bernig25.tex"
+    }
+  },
+  "P15": {
+    "sourceFile": "RG_Test25/RG_Test25.tex",
+    "snipMeta": {
+      "Subject": "TEST",
+      "Topic": "TEST",
+      "LitID": "T25",
+      "CTyp": "EXA",
+      "ParentTopic": "",
+      "Content": "TESTExample 3402",
+      "selectedProject": "RG_Test25/RG_Test25.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "RG_Test25/RG_Test25.tex"
+    }
+  },
+  "TEST3": {
+    "sourceFile": "RG_Test25/RG_Test25.tex",
+    "snipMeta": {
+      "Subject": "A",
+      "Topic": "Ringe Basics",
+      "LitID": "T12",
+      "CTyp": "DEF",
+      "ParentTopic": "Ringe",
+      "Content": "",
+      "selectedProject": "RG_Test25/RG_Test25.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "RG_Test25/RG_Test25.tex"
+    }
+  },
+  "KNO_S92": {
+    "sourceFile": "KNO_Scharlemann92/KNO_Scharlemann92.tex",
+    "snipMeta": {
+      "Subject": "KNO",
+      "Topic": "Glatte Knoten",
+      "LitID": "S92",
+      "CTyp": "DEF",
+      "ParentTopic": "",
+      "Content": "Link in $S^3$",
+      "selectedProject": "KNO_Scharlemann92/KNO_Scharlemann92.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "KNO_Scharlemann92/KNO_Scharlemann92.tex"
+    }
+  },
+  "KNO_B14": {
+    "sourceFile": "KNO_Burde14/KNO_Burde14.tex",
+    "snipMeta": {
+      "Subject": "KNO",
+      "Topic": "",
+      "LitID": "B14",
+      "CTyp": "DEF",
+      "ParentTopic": "",
+      "Content": "",
+      "selectedProject": "KNO_Burde14/KNO_Burde14.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "KNO_Burde14/KNO_Burde14.tex"
+    }
+  },
+  "DT_M65": {
+    "sourceFile": "DT_Milnor65/DT_Milnor65.tex",
+    "snipMeta": {
+      "Subject": "DT",
+      "Topic": "",
+      "LitID": "M65",
+      "CTyp": "DEF",
+      "ParentTopic": "",
+      "Content": "",
+      "selectedProject": "DT_Milnor65/DT_Milnor65.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "DT_Milnor65/DT_Milnor65.tex"
+    }
+  },
+  "QMS_R25": {
+    "sourceFile": "QMS_Rischke25/QMS_Rischke25.tex",
+    "snipMeta": {
+      "Subject": "QMS",
+      "Topic": "Young Diagramm",
+      "LitID": "R25",
+      "CTyp": "EXA",
+      "ParentTopic": "Young Tableaux",
+      "Content": "N=2 Produktzustände",
+      "selectedProject": "QMS_Rischke25/QMS_Rischke25.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "QMS_Rischke25/QMS_Rischke25.tex"
+    }
+  },
+  "GPDE_C04": {
+    "sourceFile": "GPDE_Chow04/GPDE_Chow04.tex",
+    "snipMeta": {
+      "Subject": "GPDE",
+      "Topic": "Maximum Prinzip",
+      "LitID": "C04",
+      "CTyp": "PROOF",
+      "ParentTopic": "Tensorielle Maximum Prinzipien",
+      "Content": "P: Tensor Maximum Prinzip (Nicht-Negativität wird erhalten)",
+      "selectedProject": "GPDE_Chow04/GPDE_Chow04.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "GPDE_Chow04/GPDE_Chow04.tex"
+    }
+  },
+  "GPDE_A11": {
+    "sourceFile": "GPDE_Andrews11/GPDE_Andrews11.tex",
+    "snipMeta": {
+      "Subject": "RG",
+      "Topic": "Variationsformeln der Riemannischen Geometrie",
+      "LitID": "A11",
+      "CTyp": "PROOF",
+      "ParentTopic": "",
+      "Content": "P: Evolution des skalaren Krümmung unter Ricci Flow 2",
+      "selectedProject": "GPDE_Andrews11/GPDE_Andrews11.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "GPDE_Andrews11/GPDE_Andrews11.tex"
+    }
+  },
+  "EFT1_K25": {
+    "sourceFile": "EFT1_Kraus25/EFT1_Kraus25.tex",
+    "snipMeta": {
+      "Subject": "BÜN",
+      "Topic": "Faserbündel Grundlagen",
+      "LitID": "K25",
+      "CTyp": "DEF",
+      "ParentTopic": "",
+      "Content": "",
+      "selectedProject": "EFT1_Kraus25/EFT1_Kraus25.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "EFT1_Kraus25/EFT1_Kraus25.tex"
+    }
+  },
+  "EFT1_K25a": {
+    "sourceFile": "EFT1_Kraus25/EFT1_Kraus25.tex",
+    "snipMeta": {
+      "Subject": "BÜN",
+      "Topic": "Faserbündel",
+      "LitID": "K25a",
+      "CTyp": "PROOF",
+      "ParentTopic": "",
+      "Content": "P: Faserbündel über kontrahierbarer Basis sind trivial",
+      "selectedProject": "EFT1_Kraus25/EFT1_Kraus25.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "EFT1_Kraus25/EFT1_Kraus25.tex"
+    }
+  },
+  "GA_L13": {
+    "sourceFile": "GA_Lee13/GA_Lee13.tex",
+    "snipMeta": {
+      "Subject": "GA",
+      "Topic": "Vektorbündel",
+      "LitID": "L13",
+      "CTyp": "REM",
+      "ParentTopic": "",
+      "Content": "Kriterium für Trivialität von Tangentialbündel",
+      "selectedProject": "GA_Lee13/GA_Lee13.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "GA_Lee13/GA_Lee13.tex"
+    }
+  },
+  "RG_B25": {
+    "sourceFile": "RG_Bernig25/RG_Bernig25.tex",
+    "snipMeta": {
+      "Subject": "RG",
+      "Topic": "Schnittort",
+      "LitID": "B25",
+      "CTyp": "LEM",
+      "ParentTopic": "Volumenberechnung",
+      "Content": "Schnittorte sind Nullmengen",
+      "selectedProject": "RG_Bernig25/RG_Bernig25.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "RG_Bernig25/RG_Bernig25.tex"
+    }
+  },
+  "AT_H09": {
+    "sourceFile": "AT_Haller09/AT_Haller09.tex",
+    "snipMeta": {
+      "Subject": "AT",
+      "Topic": "Freie Gruppen",
+      "LitID": "H09",
+      "CTyp": "EXA",
+      "ParentTopic": "",
+      "Content": "Präsentation von Gruppen",
+      "selectedProject": "AT_Haller09/AT_Haller09.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "AT_Haller09/AT_Haller09.tex"
+    }
+  },
+  "QM_G25": {
+    "sourceFile": "QM_Gros25/QM_Gros25.tex",
+    "snipMeta": {
+      "Subject": "QM",
+      "Topic": "3-dimensionaler Potentialtopf",
+      "LitID": "G25",
+      "CTyp": "DEF",
+      "ParentTopic": "Rotationsinvariante Potentiale",
+      "Content": "Resonanzbreite und komplexe Amplitude",
+      "selectedProject": "QM_Gros25/QM_Gros25.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "QM_Gros25/QM_Gros25.tex"
+    }
+  },
+  "KNO_F12": {
+    "sourceFile": "KNO_Friedl12/KNO_Friedl12.tex",
+    "snipMeta": {
+      "Subject": "KNO",
+      "Topic": "Wirtinger Präsentation",
+      "LitID": "F12",
+      "CTyp": "THEO",
+      "ParentTopic": "",
+      "Content": "Gordon–Luecke Theorem 1989",
+      "selectedProject": "KNO_Friedl12/KNO_Friedl12.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "KNO_Friedl12/KNO_Friedl12.tex"
+    }
+  },
+  "A_S23": {
+    "sourceFile": "A_Stix23/A_Stix23.tex",
+    "snipMeta": {
+      "Subject": "A",
+      "Topic": "Normalteiler und Faktorgruppen",
+      "LitID": "S23",
+      "CTyp": "REM",
+      "ParentTopic": "Gruppen",
+      "Content": "Anmerkung zu Faktorgruppen und Quotienten",
+      "selectedProject": "A_Stix23/A_Stix23.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "A_Stix23/A_Stix23.tex"
+    }
+  },
+  "HA_R79": {
+    "sourceFile": "HA_Rotman79/HA_Rotman79.tex",
+    "snipMeta": {
+      "Subject": "A",
+      "Topic": "Ringe Basics",
+      "LitID": "T12",
+      "CTyp": "DEF",
+      "ParentTopic": "Ringe",
+      "Content": "",
+      "selectedProject": "HA_Rotman79/HA_Rotman79.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "HA_Rotman79/HA_Rotman79.tex"
+    }
+  },
+  "CM_K25": {
+    "sourceFile": "CM_Kopietz25/CM_Kopietz25.tex",
+    "snipMeta": {
+      "Subject": "CM",
+      "Topic": "Schwingungen",
+      "LitID": "K25c",
+      "CTyp": "CONC",
+      "ParentTopic": "Anwendungen der Lagrangeschen Mechanik",
+      "Content": "Kurzfassung Stabilität nach von Dirichlet",
+      "selectedProject": "CM_Kopietz25/CM_Kopietz25.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "CM_Kopietz25/CM_Kopietz25.tex"
+    }
+  },
+  "STR_J25": {
+    "sourceFile": "STR_Jaschik25/STR_Jaschik25.tex",
+    "snipMeta": {
+      "Subject": "",
+      "Topic": "",
+      "LitID": "T12",
+      "CTyp": "DEF",
+      "ParentTopic": "",
+      "Content": "",
+      "selectedProject": "STR_Jaschik25/STR_Jaschik25.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "STR_Jaschik25/STR_Jaschik25.tex"
+    }
+  },
+  "AT_D08": {
+    "sourceFile": "AT_Dieck08/AT_Dieck08.tex",
+    "snipMeta": {
+      "Subject": "A",
+      "Topic": "Ringe Basics",
+      "LitID": "T12",
+      "CTyp": "DEF",
+      "ParentTopic": "Ringe",
+      "Content": "",
+      "selectedProject": "AT_Dieck08/AT_Dieck08.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "AT_Dieck08/AT_Dieck08.tex"
+    }
+  },
+  "AT_D72": {
+    "sourceFile": "AT_Dold72/AT_Dold72.tex",
+    "snipMeta": {
+      "Subject": "AT",
+      "Topic": "Zellulärer Räume",
+      "LitID": "D72",
+      "CTyp": "REM",
+      "ParentTopic": "",
+      "Content": "Triviale Relative Homologie für zelluläre Räume ",
+      "selectedProject": "AT_Dold72/AT_Dold72.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "AT_Dold72/AT_Dold72.tex"
+    }
+  },
+  "LIE_H15": {
+    "sourceFile": "LIE_Hall15/LIE_Hall15.tex",
+    "snipMeta": {
+      "Subject": "LIE",
+      "Topic": "Lie Algebra",
+      "LitID": "H15",
+      "CTyp": "PROOF",
+      "ParentTopic": "Ringe",
+      "Content": "P: Identität-Komponenten von Matrix Lie Gruppen in $M_n(\\C)$ sind Matrix Lie Gruppen mit übereinstimmenden Lie Algebren",
+      "selectedProject": "LIE_Hall15/LIE_Hall15.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "LIE_Hall15/LIE_Hall15.tex"
+    }
+  },
+  "GA_L09": {
+    "sourceFile": "GA_Lee09/GA_Lee09.tex",
+    "snipMeta": {
+      "Subject": "LIE",
+      "Topic": "Lie Algebra",
+      "LitID": "L09",
+      "CTyp": "EXE",
+      "ParentTopic": "",
+      "Content": "Lie Algebra Homomorphismus",
+      "selectedProject": "GA_Lee09/GA_Lee09.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "GA_Lee09/GA_Lee09.tex"
+    }
+  }
+}

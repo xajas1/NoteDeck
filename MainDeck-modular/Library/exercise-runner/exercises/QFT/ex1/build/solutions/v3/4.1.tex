@@ -1,0 +1,63 @@
+Um die Heisenberg-Gleichung der Bewegung herzuleiten, beginnen wir mit der Definition des Heisenberg-Operators:
+
+\[
+\hat{O}_H(t) = e^{\frac{i}{\hbar} \hat{H}(t-t_0)} \hat{O} e^{-\frac{i}{\hbar} \hat{H}(t-t_0)}
+\]
+
+Wir berechnen die zeitliche Ableitung von \(\hat{O}_H(t)\):
+
+\[
+\frac{d \hat{O}_H}{d t} = \frac{d}{d t} \left( e^{\frac{i}{\hbar} \hat{H}(t-t_0)} \hat{O} e^{-\frac{i}{\hbar} \hat{H}(t-t_0)} \right)
+\]
+
+Verwenden der Produktregel ergibt:
+
+\[
+\frac{d \hat{O}_H}{d t} = \left( \frac{d}{d t} e^{\frac{i}{\hbar} \hat{H}(t-t_0)} \right) \hat{O} e^{-\frac{i}{\hbar} \hat{H}(t-t_0)} + e^{\frac{i}{\hbar} \hat{H}(t-t_0)} \hat{O} \left( \frac{d}{d t} e^{-\frac{i}{\hbar} \hat{H}(t-t_0)} \right)
+\]
+
+Die Ableitungen der Exponentialoperatoren sind:
+
+\[
+\frac{d}{d t} e^{\frac{i}{\hbar} \hat{H}(t-t_0)} = \frac{i}{\hbar} \hat{H} e^{\frac{i}{\hbar} \hat{H}(t-t_0)}
+\]
+
+\[
+\frac{d}{d t} e^{-\frac{i}{\hbar} \hat{H}(t-t_0)} = -\frac{i}{\hbar} \hat{H} e^{-\frac{i}{\hbar} \hat{H}(t-t_0)}
+\]
+
+Einsetzen dieser Ausdrücke in die Produktregel ergibt:
+
+\[
+\frac{d \hat{O}_H}{d t} = \frac{i}{\hbar} \hat{H} e^{\frac{i}{\hbar} \hat{H}(t-t_0)} \hat{O} e^{-\frac{i}{\hbar} \hat{H}(t-t_0)} - e^{\frac{i}{\hbar} \hat{H}(t-t_0)} \hat{O} \frac{i}{\hbar} \hat{H} e^{-\frac{i}{\hbar} \hat{H}(t-t_0)}
+\]
+
+Dies kann umgeschrieben werden als:
+
+\[
+\frac{d \hat{O}_H}{d t} = \frac{i}{\hbar} \left( \hat{H} \hat{O}_H(t) - \hat{O}_H(t) \hat{H} \right)
+\]
+
+Dies ist der Kommutator:
+
+\[
+\frac{d \hat{O}_H}{d t} = \frac{i}{\hbar} [\hat{H}, \hat{O}_H(t)]
+\]
+
+Multiplizieren mit \(i \hbar\) ergibt die Heisenberg-Gleichung der Bewegung:
+
+\[
+i \hbar \frac{d \hat{O}_H}{d t} = [\hat{O}_H, \hat{H}]
+\]
+
+Diese Herleitung gilt unter der Annahme, dass der Hamiltonoperator \(\hat{H}\) zeitunabhängig ist. Falls der Hamiltonoperator zeitabhängig ist, muss die Herleitung angepasst werden. In diesem Fall ist der Hamiltonoperator selbst eine Funktion der Zeit, \(\hat{H}(t)\), und die Ableitung der Exponentialoperatoren enthält zusätzliche Terme:
+
+\[
+\frac{d}{d t} e^{\frac{i}{\hbar} \int_{t_0}^{t} \hat{H}(t') dt'} = \frac{i}{\hbar} \hat{H}(t) e^{\frac{i}{\hbar} \int_{t_0}^{t} \hat{H}(t') dt'}
+\]
+
+\[
+\frac{d}{d t} e^{-\frac{i}{\hbar} \int_{t_0}^{t} \hat{H}(t') dt'} = -\frac{i}{\hbar} \hat{H}(t) e^{-\frac{i}{\hbar} \int_{t_0}^{t} \hat{H}(t') dt'}
+\]
+
+Diese zusätzlichen Terme müssen in die Herleitung einbezogen werden, was zu einer modifizierten Form der Heisenberg-Gleichung führt. Im Heisenberg-Bild bleibt der Hamiltonoperator \(\hat{H}_H = \hat{H}(t)\) konstant, wenn er zeitunabhängig ist, andernfalls ist er explizit zeitabhängig.

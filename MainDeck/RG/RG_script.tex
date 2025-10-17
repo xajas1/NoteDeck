@@ -1,0 +1,868 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17. Titel und Autor
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}[runin]{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\CustomHeading{Definition}{#1}{#2}}{}
+\newenvironment{PROP}[2]{\CustomHeading{Proposition}{#1}{#2}}{}
+\newenvironment{THEO}[2]{\CustomHeading{Theorem}{#1}{#2}}{}
+\newenvironment{LEM}[2]{\CustomHeading{Lemma}{#1}{#2}}{}
+\newenvironment{KORO}[2]{\CustomHeading{Corollar}{#1}{#2}}{}
+\newenvironment{REM}[2]{\CustomHeading{Remark}{#1}{#2}}{}
+\newenvironment{EXA}[2]{\CustomHeading{Example}{#1}{#2}}{}
+\newenvironment{STUD}[2]{\CustomHeading{Study}{#1}{#2}}{}
+\newenvironment{CONC}[2]{\CustomHeading{Concept}{#1}{#2}}{}
+
+\newenvironment{PROOF}
+  {\begin{proof}}%
+{\end{proof}}
+
+% --- 17. Titel und Autor ---
+\title{Riemannische Geometrie}
+\author{Tim Jaschik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+Kurze Beschreibung …
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\tableofcontents
+
+\pagebreak
+
+
+\section{Untermannigfaltigkeiten im euklidischen Raum}
+
+Test, ein weiterer Test, und noch einer oben drauf
+
+
+
+\subsection{Definition}
+
+\begin{DEF}{RG-1-02-1}{n-dimensionale Untermannigfaltigkeit des euklidischen Raumes}
+
+\end{DEF}
+
+
+
+
+\subsection{Example}
+
+\begin{EXA}{RG-1-02-2}{n-Sphäre}
+
+\end{EXA}
+
+\begin{EXA}{RG-1-02-3}{Hyperboloid}
+
+\end{EXA}
+
+\begin{EXA}{RG-1-02-4}{n-Torus}
+
+\end{EXA}
+
+\begin{EXA}{RG-1-02-5}{SO(n)}
+
+\end{EXA}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Proposition}
+
+\begin{PROP}{RG-1-02-6}{Charakterisierungen von Untermannigfaltigkeiten im euklidischen Raum}
+
+\end{PROP}
+
+
+
+
+
+
+
+
+\subsection{Corollar}
+
+
+
+
+
+
+
+\subsection{Remark}
+
+\begin{REM}{RG-1-02-7}{Anmerkungen}
+
+\end{REM}
+
+
+
+
+\section{Glatte Mannigfaltigkeiten}
+
+\subsection{Definition}
+
+\begin{DEF}{RG-1-03-2}{Äquivalente Atlanten}
+
+\end{DEF}
+
+\begin{DEF}{RG-1-03-4}{Glatte Mannigfaltigkeit}
+
+\end{DEF}
+
+\begin{DEF}{RG-1-03-5}{Orientierte Mannigfaltigkeiten}
+
+\end{DEF}
+
+\begin{DEF}{RG-1-03-6}{Untermannigfaltigkeit einer Mannigfaltigkeit}
+
+\end{DEF}
+
+\begin{DEF}{RG-1-03-14}{TEST}
+
+\end{DEF}
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Example}
+
+\begin{EXA}{RG-1-03-7}{n-Torus als Mfk}
+
+\end{EXA}
+
+\begin{EXA}{RG-1-03-8}{n-Sphäre als Mfk}
+
+\end{EXA}
+
+\begin{EXA}{RG-1-03-9}{Hyperboloid als Mfk}
+
+\end{EXA}
+
+
+
+
+
+
+
+\subsection{Remark}
+
+
+
+\begin{REM}{RG-1-03-13}{Quotienten-Räume als Mfk als Motivation für verallg. Mfk-Begriff}
+
+\end{REM}
+
+\begin{REM}{RG-1-03-3}{Beispiel für nicht äquivalente Atlanten}
+
+\end{REM}
+
+
+
+
+
+
+
+\begin{EXA}{RG-1-03-10}{Reelle projektiver Raum als Mfk}
+
+\end{EXA}
+
+\begin{EXA}{RG-1-03-11}{Komplexe projektive Raum als Mfk}
+
+\end{EXA}
+
+\begin{EXA}{RG-1-03-12}{Möbiusband als Mfk}
+
+\end{EXA}
+
+
+
+
+
+
+
+
+
+\begin{DEF}{RG-1-03-1}{Atlas auf topologischen Hausdorff-Räumen}
+
+\end{DEF}
+
+
+
+
+\section{Differenzierbare Mannigfaltigkeiten}
+
+
+
+
+
+\section{Untermannigfaltigkeiten im euklidischen Raum}
+
+
+
+
+
+\section{Glatte Mannigfaltigkeiten}
+
+
+
+
+
+\section{Glatte Abbildungen und Vektorfelder}
+
+\subsection{Definition}
+
+\begin{DEF}{RG-1-04-11}{Vektorfeld als glatter Schnitt in Tangentialbündel}
+
+\end{DEF}
+
+\begin{DEF}{RG-1-04-13}{Vektorfeld als Abbildung von glatten Funktionen auf Mfk}
+
+\end{DEF}
+
+\begin{DEF}{RG-1-04-14}{Lieklammer von Vektorfeldern (ergibt Vektorfelder)}
+
+\end{DEF}
+
+\begin{DEF}{RG-1-04-16}{Differential von glatten Abbildungen}
+
+\end{DEF}
+
+\begin{DEF}{RG-1-04-2}{Immersion / Submersion von Mfk}
+
+\end{DEF}
+
+\begin{DEF}{RG-1-04-3}{Einbettung von Mfk}
+
+\end{DEF}
+
+\begin{DEF}{RG-1-04-4}{Diffeomorphismus von Mfk}
+
+\end{DEF}
+
+\begin{DEF}{RG-1-04-5}{Tangentialvektor: Äquivalenzklassen von Kurven}
+
+\end{DEF}
+
+\begin{DEF}{RG-1-04-6}{Tangentenvektoren: Keime}
+
+\end{DEF}
+
+\begin{DEF}{RG-1-04-7}{Tangentenvektoren: Paare von Koordinatensysteme um p und Vektor}
+
+\end{DEF}
+
+\begin{DEF}{RG-1-04-9}{Tangentialbündel}
+
+\end{DEF}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Proposition}
+
+\subsection{Remark}
+
+
+
+\begin{REM}{RG-1-04-12}{Darstellung von Vektorfeldern durch partielle Abbleitungen (Tangentenvektoren)}
+
+\end{REM}
+
+\begin{REM}{RG-1-04-15}{Lieklammer:
+Jacobi-Identität
+Schiefsymmetrisch
+Nicht linear über R}
+
+\end{REM}
+
+\begin{REM}{RG-1-04-8}{Konstruktion des Tangentialraums}
+
+\end{REM}
+
+
+
+
+
+
+
+
+
+\begin{PROP}{RG-1-04-10}{Tangentialbündel ist 2n-dimensional Mfk}
+
+\end{PROP}
+
+
+
+
+
+\begin{DEF}{RG-1-04-1}{Glatte Abbildung zwischen Mfk}
+
+\end{DEF}
+
+
+
+
+
+
+
+\section{Riemannische Mannigfaltigkeiten Definitionen und Beispiele}
+
+\subsection{Definition}
+
+\begin{DEF}{RG-1-05-18}{Riemannisches Produkt}
+
+\end{DEF}
+
+\begin{DEF}{RG-1-05-2}{Länge von Kurven auf Mfk}
+
+\end{DEF}
+
+\begin{DEF}{RG-1-05-3}{Riemannische Metrik auf Mfk}
+
+\end{DEF}
+
+\begin{DEF}{RG-1-05-6}{Abzählbare Mfk im Unendlichen}
+
+\end{DEF}
+
+
+
+
+
+
+
+
+
+\subsection{Example}
+
+\begin{EXA}{RG-1-05-15}{Rotationsfläche}
+
+\end{EXA}
+
+\begin{EXA}{RG-1-05-16}{Hyperbolischer Raum}
+
+\end{EXA}
+
+\begin{EXA}{RG-1-05-17}{Poincaremodell des hyperbolischen Raumes}
+
+\end{EXA}
+
+\begin{EXA}{RG-1-05-19}{RxSn}
+
+\end{EXA}
+
+\begin{EXA}{RG-1-05-20}{Flacher Torus}
+
+\end{EXA}
+
+\begin{EXA}{RG-1-05-22}{Kleinsche Flasche}
+
+\end{EXA}
+
+\begin{EXA}{RG-1-05-9}{R2 in Polarkoordinaten}
+
+\end{EXA}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Proposition}
+
+
+
+\begin{PROP}{RG-1-05-21}{Charakterisierung der Isometrien von flachen Tori}
+
+\end{PROP}
+
+\begin{PROP}{RG-1-05-8}{Jede Mfk besitzt eine Riemannische Metrik}
+
+\end{PROP}
+
+
+
+\subsection{Remark}
+
+
+
+\begin{REM}{RG-1-05-13}{Kompakte Mfk lassen sich in Euklidischen Raum einbetten}
+
+\end{REM}
+
+\begin{REM}{RG-1-05-14}{Unterscheidung zw. Innerer und äußerer Geometrie: Eigenschaften der Mfk vs der Einbettung}
+
+\end{REM}
+
+\begin{REM}{RG-1-05-4}{Pseudo-Riemannische Metrik auf Mfk}
+
+\end{REM}
+
+\begin{REM}{RG-1-05-5}{Lokale Beschreibung von Riemannischer Metrik}
+
+\end{REM}
+
+\begin{REM}{RG-1-05-7}{Relevanz der Abzählbarkeit im Unendlichen
+1) Existenz von Verfeinerungen (lokal endlich) für offene Überdeckungen
+2) Zerlegung der Eins}
+
+\end{REM}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{EXA}{RG-1-05-12}{Untermannigfaltigkeit mit induzierter Metrik}
+
+\end{EXA}
+
+
+
+
+
+\begin{DEF}{RG-1-05-1}{Finsler-Metrik auf Mfk}
+
+\end{DEF}
+
+\begin{DEF}{RG-1-05-10}{(Lokale) Isometrie von RMfk}
+
+\end{DEF}
+
+\begin{DEF}{RG-1-05-11}{Isometrische Einbettung von RMfk}
+
+\end{DEF}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Levi-Civita Zusammenhang}
+
+
+
+\subsection{Definition}
+
+
+
+\begin{DEF}{RG-1-07-2}{Zusammenhang auf Mfk}
+
+\end{DEF}
+
+\begin{DEF}{RG-1-07-4}{Koszulgleichung für Zusammenhänge}
+
+\end{DEF}
+
+\begin{DEF}{RG-1-07-5}{Chirstoffelsymbole als Korrekturterme in lokalen Koordinaten}
+
+\end{DEF}
+
+
+
+
+
+
+
+\subsection{Example}
+
+
+
+\begin{EXA}{RG-1-07-8}{Christoffelsymbole für $R^n$ für euklidische Metrik}
+
+\end{EXA}
+
+\begin{EXA}{RG-1-07-9}{Christoffelsymbole für $R^2\backslash 0$ und lokale Darstellung der Metrik zur Polarkoordianten }
+
+\end{EXA}
+
+
+
+\subsection{Proposition}
+
+
+
+\subsection{Lemma}
+
+
+
+\begin{LEM}{RG-1-07-7}{Formel für Christoffelsymbole aus Koszulgleichung}
+
+\end{LEM}
+
+\subsection{Theorem}
+
+\subsection{Remark}
+
+
+
+\begin{REM}{RG-1-07-6}{Levi-Civita Zusammenhang $D_XY_p$ hängt nur von $X_p$ ab}
+
+\end{REM}
+
+
+
+
+
+\begin{THEO}{RG-1-07-3}{Fundamentaltheorem der Riemannischen Geometrie}
+
+\end{THEO}
+
+
+
+
+
+\begin{PROP}{RG-1-07-10}{Induzierter LC-Zusammenhang auf Untermannigfaltigkeiten von RMfk}
+
+\end{PROP}
+
+
+
+
+
+
+
+
+\section{Kovariante Ableitung längs einer Kurve}
+
+\subsection{Definition}
+
+\subsection{Proposition}
+
+
+
+\begin{PROP}{RG-1-08-2}{Kovariante Ableitungs-Operator längs Kurven induziert durch LC-Zusammenhang der RMfk (EE)}
+
+\end{PROP}
+
+\begin{PROP}{RG-1-08-3}{Kovariante Ableitung der Riemannischen Metrik längs Kurven}
+
+\end{PROP}
+
+
+
+
+
+
+
+\begin{DEF}{RG-1-08-1}{Vektorfelder längs Kurven}
+
+\end{DEF}
+
+
+
+
+
+
+
+
+\section{Paralleltransport}
+
+\subsection{Definition}
+
+\begin{DEF}{RG-1-09-3}{Parallelverschiebung von Tangentialvektoren bzgl parallelen Vektorfeldern längs Kurven}
+
+\end{DEF}
+
+
+
+
+
+\subsection{Example}
+
+
+
+\begin{EXA}{RG-1-09-6}{Parallelverschiebung im euklidischen Raum}
+
+\end{EXA}
+
+\begin{EXA}{RG-1-09-7}{Parallelverschiebung auf Sn}
+
+\end{EXA}
+
+
+
+\subsection{Proposition}
+
+\begin{PROP}{RG-1-09-5}{Parallelverschiebung ist Isometrie zwischen Tangentialräumen}
+
+\end{PROP}
+
+
+
+\subsection{Remark}
+
+
+
+\begin{REM}{RG-1-09-4}{Abhängigkeit der Parallelverschiebung von Kurve}
+
+\end{REM}
+
+
+
+
+
+\begin{PROP}{RG-1-09-2}{Eind. Existenz von parallelen Vektorfelder für Anfangswert (Punkt,Tangentialvektor)}
+
+\end{PROP}
+
+
+
+
+
+\begin{DEF}{RG-1-09-1}{Parallele Vektorfelder längs Kurven}
+
+\end{DEF}
+
+
+
+
+
+
+
+
+\section{Geodätische und Exponentialabbildung}
+
+
+
+
+
+
+\section{Geodätische}
+
+
+
+
+
+
+\section{Exponentialabbildung}
+
+
+
+
+
+
+\section{Satz von Hopf-Rinow}
+
+
+
+
+
+
+\section{Riemannische Geometrie}
+
+
+
+
+\pagebreak
+\printbibliography
+\end{document}

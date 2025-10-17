@@ -1,0 +1,13 @@
+{
+  "score": 0.9,
+  "verdict": "Die Lösung ist größtenteils korrekt und vollständig.",
+  "weaknesses": [
+    {
+      "code": "H-derivative-x",
+      "msg": "Die Ableitung von H nach x sollte die Kettenregel für L berücksichtigen, was nicht explizit gezeigt wird."
+    }
+  ],
+  "fix_suggestions": [
+    "Erkläre die Anwendung der Kettenregel bei der Ableitung von H nach x genauer."
+  ]
+}

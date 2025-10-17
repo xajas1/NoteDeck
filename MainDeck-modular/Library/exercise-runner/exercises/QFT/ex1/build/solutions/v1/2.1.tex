@@ -1,0 +1,55 @@
+To derive Hamilton's equations from the given Hamiltonian, we start by considering the Hamiltonian function:
+
+$$
+H(x, p) = p \dot{x} - L(x, \dot{x}).
+$$
+
+Here, \( H \) is a function of the independent variables \( x \) and \( p \), while \( L \) is a function of \( x \) and \( \dot{x} \). The relationship between \( \dot{x} \) and \( p \) is given by the Legendre transformation, where
+
+$$
+p = \frac{\partial L}{\partial \dot{x}}.
+$$
+
+To find Hamilton's equations, we need to compute the partial derivatives of \( H \) with respect to \( x \) and \( p \).
+
+**1. Derivative of \( H \) with respect to \( x \):**
+
+Using the chain rule, we have:
+
+$$
+\frac{\partial H}{\partial x} = \frac{\partial}{\partial x} (p \dot{x} - L) = -\frac{\partial L}{\partial x}.
+$$
+
+Since the Euler-Lagrange equation gives:
+
+$$
+\frac{d}{dt} \left( \frac{\partial L}{\partial \dot{x}} \right) = \frac{\partial L}{\partial x},
+$$
+
+we substitute \( \frac{\partial L}{\partial \dot{x}} = p \) to get:
+
+$$
+\frac{d}{dt}(p) = \frac{\partial L}{\partial x}.
+$$
+
+Thus,
+
+$$
+\frac{\partial H}{\partial x} = -\dot{p}.
+$$
+
+**2. Derivative of \( H \) with respect to \( p \):**
+
+For the partial derivative with respect to \( p \), we have:
+
+$$
+\frac{\partial H}{\partial p} = \frac{\partial}{\partial p} (p \dot{x} - L) = \dot{x},
+$$
+
+since \( \dot{x} \) is treated as a constant with respect to \( p \).
+
+Therefore, Hamilton's equations are:
+
+$$
+\frac{\partial H}{\partial x} = -\dot{p}, \quad \frac{\partial H}{\partial p} = \dot{x}.
+$$

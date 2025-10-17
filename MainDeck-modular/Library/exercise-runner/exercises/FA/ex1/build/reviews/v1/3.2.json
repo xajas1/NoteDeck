@@ -1,0 +1,14 @@
+{
+  "score": 0.8,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+  "weaknesses": [
+    {
+      "code": "missing_explicit_contradiction",
+      "msg": "Der Widerspruch wird nicht explizit durch eine formale Gleichung oder Ungleichung gezeigt.",
+      "math_hint": "Es fehlt eine explizite Darstellung des Widerspruchs, z.B. durch eine Ungleichung, die die Abzählbarkeit von D und die Überabzählbarkeit von A formal vergleicht."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Füge eine explizite Ungleichung hinzu, die den Widerspruch verdeutlicht: } |D| < |A|."
+  ]
+}

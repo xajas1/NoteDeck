@@ -1,0 +1,69 @@
+Um die Kontinuitätsgleichung für die Wahrscheinlichkeitsdichte zu zeigen, beginnen wir mit der Definition der Wahrscheinlichkeitsdichte 
+
+\[
+\rho(\mathbf{r}, t) = \psi^*(\mathbf{r}, t) \psi(\mathbf{r}, t).
+\]
+
+Die zeitliche Ableitung der Wahrscheinlichkeitsdichte ist gegeben durch
+
+\[
+\frac{\partial}{\partial t} \rho(\mathbf{r}, t) = \frac{\partial}{\partial t} (\psi^* \psi) = \psi^* \frac{\partial \psi}{\partial t} + \psi \frac{\partial \psi^*}{\partial t}.
+\]
+
+Verwenden wir die Schrödinger-Gleichung und ihre komplex konjugierte Form:
+
+\[
+\mathrm{i} \hbar \frac{\partial \psi}{\partial t} = \left(-\frac{\hbar^2}{2m} \Delta + V(\mathbf{r})\right) \psi,
+\]
+
+\[
+-\mathrm{i} \hbar \frac{\partial \psi^*}{\partial t} = \left(-\frac{\hbar^2}{2m} \Delta + V(\mathbf{r})\right) \psi^*,
+\]
+
+erhalten wir für die zeitliche Ableitung der Wahrscheinlichkeitsdichte
+
+\[
+\frac{\partial}{\partial t} \rho(\mathbf{r}, t) = \frac{1}{\mathrm{i} \hbar} \left( \psi^* \left(-\frac{\hbar^2}{2m} \Delta \psi + V \psi \right) - \psi \left(-\frac{\hbar^2}{2m} \Delta \psi^* + V \psi^* \right) \right).
+\]
+
+Die Terme mit dem Potential \( V \) heben sich gegenseitig auf, sodass wir
+
+\[
+\frac{\partial}{\partial t} \rho(\mathbf{r}, t) = -\frac{\hbar}{2 \mathrm{i} m} \left( \psi^* \Delta \psi - \psi \Delta \psi^* \right).
+\]
+
+Nun betrachten wir den Ausdruck für den Wahrscheinlichkeitsstrom
+
+\[
+\mathbf{j}(\mathbf{r}, t) = \frac{\hbar}{2 \mathrm{i} m} \left( \psi^* \nabla \psi - \psi \nabla \psi^* \right).
+\]
+
+Die Divergenz des Wahrscheinlichkeitsstroms ist
+
+\[
+\nabla \cdot \mathbf{j}(\mathbf{r}, t) = \frac{\hbar}{2 \mathrm{i} m} \left( \nabla \cdot (\psi^* \nabla \psi) - \nabla \cdot (\psi \nabla \psi^*) \right).
+\]
+
+Verwenden wir die Produktregel, erhalten wir
+
+\[
+\nabla \cdot (\psi^* \nabla \psi) = \nabla \psi^* \cdot \nabla \psi + \psi^* \Delta \psi,
+\]
+
+\[
+\nabla \cdot (\psi \nabla \psi^*) = \nabla \psi \cdot \nabla \psi^* + \psi \Delta \psi^*.
+\]
+
+Daraus folgt
+
+\[
+\nabla \cdot \mathbf{j}(\mathbf{r}, t) = \frac{\hbar}{2 \mathrm{i} m} \left( \psi^* \Delta \psi - \psi \Delta \psi^* \right).
+\]
+
+Setzen wir dies in die Kontinuitätsgleichung ein, erhalten wir
+
+\[
+\frac{\partial}{\partial t} \rho(\mathbf{r}, t) + \nabla \cdot \mathbf{j}(\mathbf{r}, t) = -\frac{\hbar}{2 \mathrm{i} m} \left( \psi^* \Delta \psi - \psi \Delta \psi^* \right) + \frac{\hbar}{2 \mathrm{i} m} \left( \psi^* \Delta \psi - \psi \Delta \psi^* \right) = 0.
+\]
+
+Damit ist die Kontinuitätsgleichung gezeigt.

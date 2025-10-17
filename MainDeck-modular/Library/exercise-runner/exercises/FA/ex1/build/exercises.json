@@ -1,0 +1,92 @@
+{
+  "tasks": [
+    {
+      "task_id": "1",
+      "body_tex": "",
+      "subtasks": [
+        {
+          "sub_id": "1.1",
+          "body_tex": "1. a) Seien $p \\in[1, \\infty)$ und $q \\in(p, \\infty]$. Zeigen Sie:\n(i) $l^p \\subseteq l^q, l^p \\neq l^q$, und $\\|x\\|_q \\leq\\|x\\|_p$ für alle $x \\in l^p$.\n(ii) Ist $p<q$, so sind die Normen $\\|\\cdot\\|_p$ und $\\|\\cdot\\|_q$ nicht äquivalent auf $l^p$."
+        },
+        {
+          "sub_id": "1.2",
+          "body_tex": "b) Zeigen Sie: Für jedes $x \\in l^p$ gilt $\\lim _{\\substack{q \\rightarrow \\infty \\\\ q \\geq p}}\\|x\\|_q=\\|x\\|_{\\infty}$.\nHinweis: Betrachten Sie zunächst den Spezialfall geeignet normierter Folgen."
+        }
+      ]
+    },
+    {
+      "task_id": "2",
+      "body_tex": "2. Sei $F$ ein Unterraum eines normierter $\\mathbb{K}$-Vektorraums $(E,\\|\\cdot\\|)$. Zeigen Sie:",
+      "subtasks": [
+        {
+          "sub_id": "2.1",
+          "body_tex": "a) Der Abschluss $\\bar{F}$ von $F$ in $E$ ist ebenfalls ein Unterraum."
+        },
+        {
+          "sub_id": "2.2",
+          "body_tex": "b) Hat $F$ Kodimension 1 (d.h. $\\operatorname{dim} E / F=1$ ), so ist $F$ entweder abgeschlossen oder dicht in $E$."
+        }
+      ]
+    },
+    {
+      "task_id": "3",
+      "body_tex": "",
+      "subtasks": [
+        {
+          "sub_id": "3.1",
+          "body_tex": "3. a) Zeigen Sie: Für $p \\in[1, \\infty)$ ist $\\ell^p$ separabel.\n\nHinweis: Zeigen Sie, dass der Raum $\\mathcal{F}$ in $\\ell^p$ dicht liegt."
+        },
+        {
+          "sub_id": "3.2",
+          "body_tex": "b) Sei ( $X, d$ ) ein metrischer Raum, welcher eine überabzählbare diskrete Teilmenge besitzt. Zeigen Sie: $X$ ist nicht separabel.\nHierbei nent man $A \\subseteq X$ diskret, falls $\\operatorname{dist}(x, A \\backslash\\{x\\})>0$ für alle $x \\in A$."
+        },
+        {
+          "sub_id": "3.3",
+          "body_tex": "c) Folgern Sie: Ist $M$ eine unendliche Menge, so ist $\\ell^{\\infty}(M)$ nicht separabel.\n\n\n4."
+        }
+      ]
+    },
+    {
+      "task_id": "4",
+      "body_tex": "",
+      "subtasks": [
+        {
+          "sub_id": "4.1",
+          "body_tex": "Sei $f:[0,1] \\rightarrow \\mathbb{C}$ eine stetige Funktion. Zeigen Sie: Das Randwertproblem\n$$\n\\left\\{\\begin{aligned}\n-u^{\\prime \\prime}(x) & =f(x), \\quad x \\in(0,1), \\\\\nu(0) & =u(1)=0\n\\end{aligned}\\right.\n$$\nhat eine eindeutige Lösung $u \\in C^2([0,1], \\mathbb{C})$, welche gegeben ist durch\n$$\nu(x)=\\int_0^1 G(x, y) f(y) d y, \\quad 0 \\leq x \\leq 1\n$$\nHier sei $G:[0,1] \\times[0,1] \\rightarrow \\mathbb{R}$ definiert durch\n$$\nG(x, y)= \\begin{cases}y(1-x), & y \\leq x, \\\\ (1-y) x, & y>x,\\end{cases}\n$$\nund $C^2([0,1], \\mathbb{C})$ bezeichne die Menge aller zweimal stetig differenzierbaren Funktionen von $[0,1]$ nach $\\mathbb{C}$.\n\nHinweis (Aufg. 4)\n- zur Eindeutigkeit: Seien $u_1, u_2$ Lösungen von $(P)$. Welche Eigenschaften hat $v=u_1-u_2$ ?\n- zur Berechnung von $\\frac{d}{d x} \\int_0^1 G(x, y) f(y) d y$ : Schreiben Sie\n$$\n\\int_0^1 G(x, y) f(y) d y=(1-x) \\int_0^x y f(y) d y+x \\int_x^1(1-y) f(y) d y\n$$"
+        }
+      ]
+    },
+    {
+      "task_id": "5",
+      "body_tex": "5. Sei $E$ ein $\\mathbb{K}$-Vektorraum und $h$ eine positive hermitesche Form auf $E$. Zeigen Sie:",
+      "subtasks": [
+        {
+          "sub_id": "5.1",
+          "body_tex": "a) Für alle $x, y \\in E$ gilt\n\n$$\n|h(x, y)|^2 \\leq h(x, x) h(y, y) \\quad \\text { (Cauchy-Schwarz-Ungleichung) }\n$$"
+        },
+        {
+          "sub_id": "5.2",
+          "body_tex": "b) Durch $\\|x\\|:=\\sqrt{h(x, x)}$ wird eine Halbnorm $\\|\\cdot\\|$ auf $E$ definiert. Dabei ist $\\|\\cdot\\|$ eine Norm genau dann, wenn $h$ ein Skalarprodukt ist."
+        },
+        {
+          "sub_id": "5.3",
+          "body_tex": "c) Für alle $x, y \\in E$ gilt\n\n$$\n\\begin{aligned}\n\\|x+y\\|^2 & +\\|x-y\\|^2=2\\left(\\|x\\|^2+\\|y\\|^2\\right) \\\\\nh(x, y) & =\\frac{1}{2}\\left(\\|x+y\\|^2-\\|x\\|^2-\\|y\\|^2\\right) \\quad \\text { falls } \\mathbb{K}=\\mathbb{R} \\\\\nh(x, y) & =\\frac{1}{2}\\left(\\|x+y\\|^2-\\|x\\|^2-\\|y\\|^2\\right) \\\\\n& +\\frac{i}{2}\\left(\\|x+i y\\|^2-\\|x\\|^2-\\|y\\|^2\\right) \\quad \\text { falls } \\mathbb{K}=\\mathbb{C} .\n\\end{aligned}\n$$"
+        }
+      ]
+    },
+    {
+      "task_id": "6",
+      "body_tex": "6. Sei $E$ ein $\\mathbb{K}$-Vektorraum. Zeigen Sie:",
+      "subtasks": [
+        {
+          "sub_id": "6.1",
+          "body_tex": "a) Ist $h: E \\rightarrow \\mathbb{R}$ eine Halbnorm auf $E$, so ist $V:=\\{x \\in E: h(x)=0\\}$ ein Unterraum von $E$. Ferner ist dann auf dem Faktorraum $E / V$ eine Norm $\\|\\cdot\\|_h$ (wohl-)definiert durch $\\|x+V\\|_h=h(x)$ für $x \\in E$."
+        },
+        {
+          "sub_id": "6.2",
+          "body_tex": "b) Ist $\\|\\cdot\\|$ eine Norm auf $E$ und $V \\subseteq E$ ein Unterraum, so definiert\n\n$$\nh_V: E \\rightarrow \\mathbb{R}, \\quad h_V(x)=\\inf _{y \\in V}\\|x-y\\|\n$$\n\neine Halbnorm auf $E$."
+        }
+      ]
+    }
+  ]
+}

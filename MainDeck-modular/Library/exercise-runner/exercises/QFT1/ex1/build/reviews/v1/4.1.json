@@ -1,0 +1,19 @@
+{
+  "score": 0.8,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es gibt einige Lücken in der Herleitung.",
+  "weaknesses": [
+    {
+      "code": "MISSING_EXPANSION",
+      "msg": "Die Ausmultiplizierung der Terme im Kommutator ist nicht explizit gezeigt.",
+      "math_hint": "Zeige die vollständige Ausmultiplizierung: $(\frac{m \\\\omega}{2 \\\\hbar})(\\\\\\\\hat{x} + \\\\\\\\frac{\\\\\\\\mathrm{i}}{m \\\\omega} \\\\\\\\hat{p})(\\\\\\\\hat{x} - \\\\\\\\frac{\\\\\\\\mathrm{i}}{m \\\\omega} \\\\\\\\hat{p})$ und $(\frac{m \\\\omega}{2 \\\\hbar})(\\\\\\\\hat{x} - \\\\\\\\frac{\\\\\\\\mathrm{i}}{m \\\\omega} \\\\\\\\hat{p})(\\\\\\\\hat{x} + \\\\\\\\frac{\\\\\\\\mathrm{i}}{m \\\\omega} \\\\\\\\hat{p})$."
+    },
+    {
+      "code": "MISSING_COMMUTATION_STEP",
+      "msg": "Die Anwendung der kanonischen Vertauschungsrelation ist nicht detailliert genug.",
+      "math_hint": "Zeige, wie $[\\\\\\\\hat{x}, \\\\\\\\hat{p}] = \\\\\\\\mathrm{i} \\\\hbar$ in die Berechnung des Kommutators eingeht."
+    }
+  ],
+  "fix_suggestions": [
+    "\\begin{align*} \\left(\\hat{x} + \\frac{\\mathrm{i}}{m \\omega} \\hat{p}\\right)\\left(\\hat{x} - \\frac{\\mathrm{i}}{m \\omega} \\hat{p}\\right) &= \\hat{x}^2 - \\frac{\\mathrm{i}}{m \\omega} \\hat{x}\\hat{p} + \\frac{\\mathrm{i}}{m \\omega} \\hat{p}\\hat{x} - \\left(\\frac{\\mathrm{i}}{m \\omega}\\right)^2 \\hat{p}^2 \\\\ &= \\hat{x}^2 + \\frac{\\hbar}{m \\omega} - \\left(\\frac{1}{m \\omega}\\right)^2 \\hat{p}^2 \\end{align*}"
+  ]
+}

@@ -1,0 +1,29 @@
+Um zu zeigen, dass der Raum $\ell^{\infty}(M)$ nicht separabel ist, wenn $M$ eine unendliche Menge ist, betrachten wir die Definition der Separabilität. Ein topologischer Raum ist separabel, wenn es eine abzählbare dichte Teilmenge gibt.
+
+Der Raum $\ell^{\infty}(M)$ besteht aus allen beschränkten Funktionen $f: M \to \mathbb{R}$, wobei die Norm durch
+
+\[
+\|f\|_{\infty} = \sup_{x \in M} |f(x)|
+\]
+
+definiert ist. Um zu zeigen, dass $\ell^{\infty}(M)$ nicht separabel ist, konstruieren wir eine unendliche Familie von Funktionen, die alle einen Abstand von mindestens $\frac{1}{2}$ zueinander haben.
+
+Da $M$ unendlich ist, können wir eine Teilmenge $N \subseteq M$ wählen, die ebenfalls unendlich ist. Für jedes $x \in N$ definieren wir die Funktion $f_x \in \ell^{\infty}(M)$ durch
+
+\[
+f_x(y) = 
+\begin{cases} 
+1, & \text{wenn } y = x, \\
+0, & \text{wenn } y \neq x.
+\end{cases}
+\]
+
+Für zwei verschiedene Funktionen $f_x$ und $f_{x'}$ mit $x \neq x'$ gilt
+
+\[
+\|f_x - f_{x'}\|_{\infty} = \sup_{y \in M} |f_x(y) - f_{x'}(y)| = 1.
+\]
+
+Da der Abstand zwischen beliebigen zwei verschiedenen Funktionen $f_x$ und $f_{x'}$ mindestens $1$ ist, kann keine abzählbare Teilmenge von $\ell^{\infty}(M)$ dicht sein. Dies liegt daran, dass jede dichte Teilmenge eine Funktion enthalten müsste, die beliebig nah an jeder Funktion $f_x$ liegt, was hier nicht möglich ist.
+
+Daraus folgt, dass $\ell^{\infty}(M)$ nicht separabel ist, wenn $M$ unendlich ist.

@@ -1,0 +1,51 @@
+Um zu zeigen, dass $V = \{x \in E : h(x) = 0\}$ ein Unterraum von $E$ ist, müssen wir nachweisen, dass $V$ die folgenden Eigenschaften erfüllt:
+
+1. Das Null-Element von $E$ gehört zu $V$.
+2. $V$ ist abgeschlossen unter Addition.
+3. $V$ ist abgeschlossen unter skalaren Multiplikationen.
+
+Zunächst zeigen wir, dass das Null-Element in $V$ liegt. Da $h$ eine Halbnorm ist, gilt $h(0) = 0$. Somit ist $0 \in V$.
+
+Für die Abgeschlossenheit unter Addition nehmen wir $x, y \in V$ an. Dann gilt $h(x) = 0$ und $h(y) = 0$. Da $h$ subadditiv ist, folgt:
+
+\[
+h(x + y) \leq h(x) + h(y) = 0 + 0 = 0.
+\]
+
+Da $h(x + y) \geq 0$ für alle $x, y \in E$, muss $h(x + y) = 0$ gelten, also ist $x + y \in V$.
+
+Für die Abgeschlossenheit unter skalaren Multiplikationen sei $x \in V$ und $\lambda \in \mathbb{R}$. Dann gilt $h(x) = 0$, und aufgrund der positiven Homogenität der Halbnorm folgt:
+
+\[
+h(\lambda x) = |\lambda| h(x) = |\lambda| \cdot 0 = 0.
+\]
+
+Daraus folgt, dass $\lambda x \in V$. Somit ist $V$ ein Unterraum von $E$.
+
+Nun definieren wir die Norm $\|\cdot\|_h$ auf dem Faktorraum $E / V$ durch $\|x + V\|_h = h(x)$ für $x \in E$. Wir müssen zeigen, dass diese Definition wohldefiniert ist und die Normaxiome erfüllt.
+
+Die Wohldefiniertheit folgt daraus, dass, wenn $x + V = y + V$, dann $x - y \in V$, also $h(x - y) = 0$. Wegen der Subadditivität der Halbnorm gilt:
+
+\[
+h(x) = h(y + (x - y)) \leq h(y) + h(x - y) = h(y) + 0 = h(y).
+\]
+
+Analog folgt $h(y) \leq h(x)$, also $h(x) = h(y)$. Daher ist $\|x + V\|_h = h(x)$ wohldefiniert.
+
+Die Normaxiome sind wie folgt erfüllt:
+
+1. **Positive Definitheit**: $\|x + V\|_h = 0$ impliziert $h(x) = 0$, also $x \in V$, was bedeutet, dass $x + V = V$ das Null-Element im Faktorraum ist.
+
+2. **Positive Homogenität**: Für $\lambda \in \mathbb{R}$ gilt:
+
+\[
+\|\lambda(x + V)\|_h = \|\lambda x + V\|_h = h(\lambda x) = |\lambda| h(x) = |\lambda| \|x + V\|_h.
+\]
+
+3. **Subadditivität**: Für $x, y \in E$ gilt:
+
+\[
+\|x + V + y + V\|_h = \|x + y + V\|_h = h(x + y) \leq h(x) + h(y) = \|x + V\|_h + \|y + V\|_h.
+\]
+
+Damit ist $\|\cdot\|_h$ eine Norm auf dem Faktorraum $E / V$.

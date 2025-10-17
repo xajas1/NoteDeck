@@ -1,0 +1,81 @@
+{
+  "tasks": {
+    "1.1": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist größtenteils korrekt und vollständig, aber es gibt kleinere Ungenauigkeiten.",
+      "weaknesses": [
+        {
+          "code": "approximation_error",
+          "msg": "Die Näherung für γ im Fall eines ruhenden Positrons ist nicht korrekt begründet."
+        }
+      ],
+      "fix_suggestions": [
+        "Überprüfe die Herleitung der Näherung für γ im Fall eines ruhenden Positrons.",
+        "Stelle sicher, dass alle Annahmen klar und korrekt begründet sind."
+      ]
+    },
+    "2.1": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist größtenteils korrekt und vollständig, aber es gibt kleinere Unklarheiten.",
+      "weaknesses": [
+        {
+          "code": "interpretation",
+          "msg": "Die Interpretation von \u001crho\u001d als Ladungsdichte wird nicht ausreichend begründet."
+        }
+      ],
+      "fix_suggestions": [
+        "Erkläre genauer, warum \u001crho\u001d als Ladungsdichte interpretiert wird und nicht als Wahrscheinlichkeitsdichte.",
+        "Füge eine kurze Erklärung hinzu, warum die negative Energie zu einer negativen \u001crho\u001d führt."
+      ]
+    },
+    "3.1": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist größtenteils korrekt und gut begründet.",
+      "weaknesses": [
+        {
+          "code": "incomplete_argument",
+          "msg": "Die Invarianz der Delta-Funktion wird nicht vollständig erklärt, insbesondere die Rolle der Lorentz-Transformationen auf die räumlichen Komponenten."
+        }
+      ],
+      "fix_suggestions": [
+        "Erkläre genauer, warum die Delta-Funktion unter Lorentz-Transformationen invariant bleibt, insbesondere im Kontext der räumlichen Komponenten."
+      ]
+    },
+    "4.1": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist größtenteils korrekt und vollständig, aber es gibt kleinere Unklarheiten.",
+      "weaknesses": [
+        {
+          "code": "notation",
+          "msg": "Die Notation ist nicht konsistent, insbesondere bei der Verwendung von Indizes."
+        },
+        {
+          "code": "clarity",
+          "msg": "Einige Schritte könnten klarer erklärt werden, insbesondere die Ableitung der Antisymmetrie."
+        }
+      ],
+      "fix_suggestions": [
+        "Konsistenz der Indizes sicherstellen, z.B. bei der Verwendung von 'x_β' und 'x^β'.",
+        "Klarere Erklärung der Schritte zur Ableitung der Antisymmetrie von ε^αβ."
+      ]
+    },
+    "5.1": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist größtenteils korrekt und vollständig.",
+      "weaknesses": [
+        {
+          "code": "incomplete_explanation",
+          "msg": "Die Herleitung der Normierungsbedingung für die Dirac-Spinoren könnte detaillierter sein."
+        },
+        {
+          "code": "missing_justification",
+          "msg": "Die Begründung für die Antikommutator-Relation der Dirac-Matrizen könnte präziser sein."
+        }
+      ],
+      "fix_suggestions": [
+        "Erkläre die Normierungsbedingung der Dirac-Spinoren ausführlicher, insbesondere wie die Energie E in die Normierung eingeht.",
+        "Füge eine detailliertere Begründung für die Antikommutator-Relation der Dirac-Matrizen hinzu, um die Bedeutung der Clifford-Algebra zu verdeutlichen."
+      ]
+    }
+  }
+}

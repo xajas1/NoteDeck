@@ -1,0 +1,96 @@
+
+[[1.1]]
+1. a) Seien $p \in[1, \infty)$ und $q \in(p, \infty]$. Zeigen Sie:
+(i) $l^p \subseteq l^q, l^p \neq l^q$, und $\|x\|_q \leq\|x\|_p$ für alle $x \in l^p$.
+(ii) Ist $p<q$, so sind die Normen $\|\cdot\|_p$ und $\|\cdot\|_q$ nicht äquivalent auf $l^p$.
+[[1.2]]
+b) Zeigen Sie: Für jedes $x \in l^p$ gilt $\lim _{\substack{q \rightarrow \infty \\ q \geq p}}\|x\|_q=\|x\|_{\infty}$.
+Hinweis: Betrachten Sie zunächst den Spezialfall geeignet normierter Folgen.
+[[2]]
+2. Sei $F$ ein Unterraum eines normierter $\mathbb{K}$-Vektorraums $(E,\|\cdot\|)$. Zeigen Sie:
+
+[[2.1]]
+a) Der Abschluss $\bar{F}$ von $F$ in $E$ ist ebenfalls ein Unterraum.
+[[2.2]]
+b) Hat $F$ Kodimension 1 (d.h. $\operatorname{dim} E / F=1$ ), so ist $F$ entweder abgeschlossen oder dicht in $E$.
+
+[[3.1]]
+3. a) Zeigen Sie: Für $p \in[1, \infty)$ ist $\ell^p$ separabel.
+
+Hinweis: Zeigen Sie, dass der Raum $\mathcal{F}$ in $\ell^p$ dicht liegt.
+
+[[3.2]]
+b) Sei ( $X, d$ ) ein metrischer Raum, welcher eine überabzählbare diskrete Teilmenge besitzt. Zeigen Sie: $X$ ist nicht separabel.
+Hierbei nent man $A \subseteq X$ diskret, falls $\operatorname{dist}(x, A \backslash\{x\})>0$ für alle $x \in A$.
+
+[[3.3]]
+c) Folgern Sie: Ist $M$ eine unendliche Menge, so ist $\ell^{\infty}(M)$ nicht separabel.
+
+
+4. 
+[[4.1]]
+Sei $f:[0,1] \rightarrow \mathbb{C}$ eine stetige Funktion. Zeigen Sie: Das Randwertproblem
+$$
+\left\{\begin{aligned}
+-u^{\prime \prime}(x) & =f(x), \quad x \in(0,1), \\
+u(0) & =u(1)=0
+\end{aligned}\right.
+$$
+hat eine eindeutige Lösung $u \in C^2([0,1], \mathbb{C})$, welche gegeben ist durch
+$$
+u(x)=\int_0^1 G(x, y) f(y) d y, \quad 0 \leq x \leq 1
+$$
+Hier sei $G:[0,1] \times[0,1] \rightarrow \mathbb{R}$ definiert durch
+$$
+G(x, y)= \begin{cases}y(1-x), & y \leq x, \\ (1-y) x, & y>x,\end{cases}
+$$
+und $C^2([0,1], \mathbb{C})$ bezeichne die Menge aller zweimal stetig differenzierbaren Funktionen von $[0,1]$ nach $\mathbb{C}$.
+
+Hinweis (Aufg. 4)
+- zur Eindeutigkeit: Seien $u_1, u_2$ Lösungen von $(P)$. Welche Eigenschaften hat $v=u_1-u_2$ ?
+- zur Berechnung von $\frac{d}{d x} \int_0^1 G(x, y) f(y) d y$ : Schreiben Sie
+$$
+\int_0^1 G(x, y) f(y) d y=(1-x) \int_0^x y f(y) d y+x \int_x^1(1-y) f(y) d y
+$$
+
+[[5]]
+
+5. Sei $E$ ein $\mathbb{K}$-Vektorraum und $h$ eine positive hermitesche Form auf $E$. Zeigen Sie:
+
+[[5.1]]
+a) Für alle $x, y \in E$ gilt
+
+$$
+|h(x, y)|^2 \leq h(x, x) h(y, y) \quad \text { (Cauchy-Schwarz-Ungleichung) }
+$$
+
+[[5.2]]
+b) Durch $\|x\|:=\sqrt{h(x, x)}$ wird eine Halbnorm $\|\cdot\|$ auf $E$ definiert. Dabei ist $\|\cdot\|$ eine Norm genau dann, wenn $h$ ein Skalarprodukt ist.
+
+[[5.3]]
+c) Für alle $x, y \in E$ gilt
+
+$$
+\begin{aligned}
+\|x+y\|^2 & +\|x-y\|^2=2\left(\|x\|^2+\|y\|^2\right) \\
+h(x, y) & =\frac{1}{2}\left(\|x+y\|^2-\|x\|^2-\|y\|^2\right) \quad \text { falls } \mathbb{K}=\mathbb{R} \\
+h(x, y) & =\frac{1}{2}\left(\|x+y\|^2-\|x\|^2-\|y\|^2\right) \\
+& +\frac{i}{2}\left(\|x+i y\|^2-\|x\|^2-\|y\|^2\right) \quad \text { falls } \mathbb{K}=\mathbb{C} .
+\end{aligned}
+$$
+
+
+[[6]]
+6. Sei $E$ ein $\mathbb{K}$-Vektorraum. Zeigen Sie:
+
+[[6.1]]
+a) Ist $h: E \rightarrow \mathbb{R}$ eine Halbnorm auf $E$, so ist $V:=\{x \in E: h(x)=0\}$ ein Unterraum von $E$. Ferner ist dann auf dem Faktorraum $E / V$ eine Norm $\|\cdot\|_h$ (wohl-)definiert durch $\|x+V\|_h=h(x)$ für $x \in E$.
+
+[[6.2]]
+b) Ist $\|\cdot\|$ eine Norm auf $E$ und $V \subseteq E$ ein Unterraum, so definiert
+
+$$
+h_V: E \rightarrow \mathbb{R}, \quad h_V(x)=\inf _{y \in V}\|x-y\|
+$$
+
+eine Halbnorm auf $E$.

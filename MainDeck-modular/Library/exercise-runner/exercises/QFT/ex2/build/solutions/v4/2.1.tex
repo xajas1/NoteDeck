@@ -1,0 +1,73 @@
+Um die Kontinuitätsgleichung aus der Klein-Gordon-Gleichung herzuleiten, beginnen wir mit der gegebenen Gleichung:
+
+\[
+-\frac{\partial^2}{\partial t^2} \phi + \nabla^2 \phi - m^2 \phi = 0.
+\]
+
+Wir multiplizieren die gesamte Gleichung mit der komplex konjugierten Funktion \(\phi^*\) und erhalten:
+
+\[
+\phi^* \left(-\frac{\partial^2}{\partial t^2} \phi + \nabla^2 \phi - m^2 \phi \right) = 0.
+\]
+
+Analog multiplizieren wir die komplex konjugierte Gleichung
+
+\[
+-\frac{\partial^2}{\partial t^2} \phi^* + \nabla^2 \phi^* - m^2 \phi^* = 0
+\]
+
+mit \(\phi\) und erhalten:
+
+\[
+\phi \left(-\frac{\partial^2}{\partial t^2} \phi^* + \nabla^2 \phi^* - m^2 \phi^* \right) = 0.
+\]
+
+Subtrahieren wir diese beiden Gleichungen, ergibt sich:
+
+\[
+\phi^* \frac{\partial^2 \phi}{\partial t^2} - \phi \frac{\partial^2 \phi^*}{\partial t^2} = \phi^* \nabla^2 \phi - \phi \nabla^2 \phi^*.
+\]
+
+Wir wenden die Produktregel an, um die linke Seite umzuformen:
+
+\[
+\frac{\partial}{\partial t} \left(\phi^* \frac{\partial \phi}{\partial t} - \phi \frac{\partial \phi^*}{\partial t}\right) = \phi^* \frac{\partial^2 \phi}{\partial t^2} + \frac{\partial \phi^*}{\partial t} \frac{\partial \phi}{\partial t} - \phi \frac{\partial^2 \phi^*}{\partial t^2} - \frac{\partial \phi}{\partial t} \frac{\partial \phi^*}{\partial t}.
+\]
+
+Die rechte Seite kann als Divergenz eines Vektorfeldes geschrieben werden:
+
+\[
+\nabla \cdot \left(\phi^* \nabla \phi - \phi \nabla \phi^*\right).
+\]
+
+Dies führt zur Kontinuitätsgleichung:
+
+\[
+\frac{\partial}{\partial t} \left(\phi^* \frac{\partial \phi}{\partial t} - \phi \frac{\partial \phi^*}{\partial t}\right) = \nabla \cdot \left(\phi^* \nabla \phi - \phi \nabla \phi^*\right).
+\]
+
+Der Vierer-Strom \(j^\mu\) ist gegeben durch:
+
+\[
+j^\mu = i\left(\phi^* \partial^\mu \phi - \phi \partial^\mu \phi^*\right).
+\]
+
+Für eine Lösung der Form \(\phi = e^{i p x}\), die eine negative Energie repräsentiert, ist der zeitliche Anteil des Vierer-Stroms \(j^0 = \rho\) gegeben durch:
+
+\[
+\rho = i\left(\phi^* \frac{\partial \phi}{\partial t} - \phi \frac{\partial \phi^*}{\partial t}\right).
+\]
+
+Setzen wir \(\phi = e^{i p x}\), dann ist \(\frac{\partial \phi}{\partial t} = i E \phi\), und somit ergibt sich:
+
+\[
+\begin{align*}
+\rho &= i\left(e^{-i p x} (i E e^{i p x}) - e^{i p x} (-i E e^{-i p x})\right) \\
+&= i\left(i E - (-i E)\right) \\
+&= 2 E |e^{i p x}|^2.
+\end{align*}
+\]
+
+Da \(E\) negativ ist, wird \(\rho\) negativ. Dies impliziert, dass \(\rho\) nicht als Wahrscheinlichkeitsdichte interpretiert werden kann, da Wahrscheinlichkeiten nicht negativ sein können. In der relativistischen Quantenmechanik wird \(\rho\) daher als Ladungsdichte interpretiert. Diese Interpretation ist sinnvoll, da Ladungen im Gegensatz zu Wahrscheinlichkeiten negativ sein können.
+
+%CHECK: Produktregel explizit angewendet; Transformation von \(\rho\) detailliert gezeigt.

@@ -1,0 +1,59 @@
+Um den Kommutator $\left[\hat{a}, \hat{a}^{\dagger}\right]$ korrekt zu berechnen, müssen wir die vollständige Ausmultiplizierung der Terme und die Anwendung der kanonischen Vertauschungsrelation detailliert darstellen.
+
+\begin{align*}
+\hat{a} &= \sqrt{\frac{m \omega}{2 \hbar}}\left(\hat{x} + \frac{\mathrm{i}}{m \omega} \hat{p}\right), \\
+\hat{a}^{\dagger} &= \sqrt{\frac{m \omega}{2 \hbar}}\left(\hat{x} - \frac{\mathrm{i}}{m \omega} \hat{p}\right).
+\end{align*}
+
+Der Kommutator ergibt sich zu:
+
+\begin{align*}
+\left[\hat{a}, \hat{a}^{\dagger}\right] &= \hat{a} \hat{a}^{\dagger} - \hat{a}^{\dagger} \hat{a} \\
+&= \left(\sqrt{\frac{m \omega}{2 \hbar}}\right)^2 \left(\hat{x} + \frac{\mathrm{i}}{m \omega} \hat{p}\right)\left(\hat{x} - \frac{\mathrm{i}}{m \omega} \hat{p}\right) \\
+&\quad - \left(\sqrt{\frac{m \omega}{2 \hbar}}\right)^2 \left(\hat{x} - \frac{\mathrm{i}}{m \omega} \hat{p}\right)\left(\hat{x} + \frac{\mathrm{i}}{m \omega} \hat{p}\right).
+\end{align*}
+
+Wir multiplizieren die Terme aus:
+
+\begin{align*}
+\left(\hat{x} + \frac{\mathrm{i}}{m \omega} \hat{p}\right)\left(\hat{x} - \frac{\mathrm{i}}{m \omega} \hat{p}\right) &= \hat{x}^2 - \frac{\mathrm{i}}{m \omega} \hat{x}\hat{p} + \frac{\mathrm{i}}{m \omega} \hat{p}\hat{x} - \left(\frac{\mathrm{i}}{m \omega}\right)^2 \hat{p}^2 \\
+&= \hat{x}^2 + \frac{\hbar}{m \omega} - \left(\frac{1}{m \omega}\right)^2 \hat{p}^2,
+\end{align*}
+
+\begin{align*}
+\left(\hat{x} - \frac{\mathrm{i}}{m \omega} \hat{p}\right)\left(\hat{x} + \frac{\mathrm{i}}{m \omega} \hat{p}\right) &= \hat{x}^2 + \frac{\mathrm{i}}{m \omega} \hat{x}\hat{p} - \frac{\mathrm{i}}{m \omega} \hat{p}\hat{x} - \left(\frac{\mathrm{i}}{m \omega}\right)^2 \hat{p}^2 \\
+&= \hat{x}^2 - \frac{\hbar}{m \omega} - \left(\frac{1}{m \omega}\right)^2 \hat{p}^2.
+\end{align*}
+
+Durch Anwendung der kanonischen Vertauschungsrelation $\left[\hat{x}, \hat{p}\right] = \mathrm{i} \hbar$ ergibt sich:
+
+\begin{align*}
+\left[\hat{a}, \hat{a}^{\dagger}\right] &= \frac{m \omega}{2 \hbar} \left(2 \frac{\hbar}{m \omega}\right) = 1.
+\end{align*}
+
+Die Normalisierungskonstanten $c_n^{-}$ und $c_n^{+}$ ergeben sich aus der Normierung der Zustände:
+
+\begin{align*}
+\langle n | \hat{a}^{\dagger} \hat{a} | n \rangle &= n, \\
+\langle n | \hat{a} \hat{a}^{\dagger} | n \rangle &= n + 1.
+\end{align*}
+
+Daraus folgt:
+
+\begin{align*}
+c_n^{-} = \sqrt{n}, \quad c_n^{+} = \sqrt{n+1}.
+\end{align*}
+
+Der Hamiltonoperator in Operatorform lautet:
+
+\begin{align*}
+\hat{H} = \hbar \omega \left(\hat{a}^{\dagger} \hat{a} + \frac{1}{2}\right).
+\end{align*}
+
+Die Energieeigenwerte $E_n$ sind:
+
+\begin{align*}
+E_n = \hbar \omega \left(n + \frac{1}{2}\right).
+\end{align*}
+
+%CHECK: Ausmultiplizierung der Terme und Anwendung der kanonischen Vertauschungsrelation detailliert dargestellt.

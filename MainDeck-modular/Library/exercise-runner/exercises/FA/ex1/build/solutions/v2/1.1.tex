@@ -1,0 +1,51 @@
+Um die Behauptungen zu zeigen, betrachten wir die Definitionen der Räume \( l^p \) und \( l^q \). Ein Element \( x = (x_n)_{n \in \mathbb{N}} \) gehört zu \( l^p \), wenn die Reihe \( \sum_{n=1}^{\infty} |x_n|^p \) konvergiert. Analog gehört \( x \) zu \( l^q \), wenn \( \sum_{n=1}^{\infty} |x_n|^q \) konvergiert.
+
+(i) Zunächst zeigen wir \( l^p \subseteq l^q \) für \( 1 \leq p < q \leq \infty \). Sei \( x \in l^p \). Dann ist \( \sum_{n=1}^{\infty} |x_n|^p < \infty \). Wir verwenden die Hölder-Ungleichung, um zu zeigen, dass
+
+\[
+\left( \sum_{n=1}^{\infty} |x_n|^q \right)^{1/q} \leq \left( \sum_{n=1}^{\infty} |x_n|^p \right)^{1/p} \cdot \left( \sum_{n=1}^{\infty} 1 \right)^{1/q - 1/p}.
+\]
+
+Da die Reihe \( \sum_{n=1}^{\infty} 1 \) divergiert, ist diese Ungleichung nur sinnvoll, wenn \( x \) eine endliche Anzahl von nicht-null Elementen hat, was für \( x \in l^p \) nicht allgemein gilt. Stattdessen verwenden wir eine geeignete Majorante. Sei \( M = \left( \sum_{n=1}^{\infty} |x_n|^p \right)^{1/p} \). Dann gilt für \( |x_n| \leq M \):
+
+\[
+|x_n|^q \leq M^{q-p} |x_n|^p.
+\]
+
+Daraus folgt:
+
+\[
+\sum_{n=1}^{\infty} |x_n|^q \leq M^{q-p} \sum_{n=1}^{\infty} |x_n|^p < \infty.
+\]
+
+Somit ist \( x \in l^q \).
+
+Um zu zeigen, dass \( l^p \neq l^q \), betrachten wir die Folge \( x = (x_n) \) mit \( x_n = n^{-1/p} \). Diese Folge gehört zu \( l^p \), da
+
+\[
+\sum_{n=1}^{\infty} |x_n|^p = \sum_{n=1}^{\infty} n^{-1} < \infty.
+\]
+
+Für \( q > p \) ist jedoch
+
+\[
+\sum_{n=1}^{\infty} |x_n|^q = \sum_{n=1}^{\infty} n^{-q/p} = \infty,
+\]
+
+da \( q/p > 1 \). Somit ist \( x \notin l^q \), was zeigt, dass \( l^p \neq l^q \).
+
+(ii) Um zu zeigen, dass die Normen \( \|\cdot\|_p \) und \( \|\cdot\|_q \) nicht äquivalent sind, wenn \( p < q \), nehmen wir an, dass sie äquivalent wären. Dann gäbe es Konstanten \( C_1, C_2 > 0 \) mit
+
+\[
+C_1 \|x\|_p \leq \|x\|_q \leq C_2 \|x\|_p
+\]
+
+für alle \( x \in l^p \). Betrachten wir die Folge \( x^{(k)} = (x_n^{(k)}) \) mit \( x_n^{(k)} = \delta_{nk} \cdot k^{-1/p} \), wobei \( \delta_{nk} \) das Kronecker-Delta ist. Dann ist
+
+\[
+\|x^{(k)}\|_p = 1 \quad \text{und} \quad \|x^{(k)}\|_q = k^{1/p - 1/q}.
+\]
+
+Da \( 1/p - 1/q > 0 \), folgt, dass \( \|x^{(k)}\|_q \to \infty \) für \( k \to \infty \), was im Widerspruch zur Annahme der Äquivalenz steht. Daher sind die Normen nicht äquivalent.
+
+%CHECK: M1, M2, M3 wurden durch korrekte Anwendung der Hölder-Ungleichung, Majoranten und Normargumentation adressiert.

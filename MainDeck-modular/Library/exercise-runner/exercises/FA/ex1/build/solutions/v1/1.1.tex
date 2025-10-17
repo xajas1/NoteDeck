@@ -1,0 +1,43 @@
+Um die Behauptungen zu zeigen, betrachten wir die Definitionen der Räume \( l^p \) und \( l^q \). Ein Element \( x = (x_n)_{n \in \mathbb{N}} \) gehört zu \( l^p \), wenn die Reihe \( \sum_{n=1}^{\infty} |x_n|^p \) konvergiert. Analog gehört \( x \) zu \( l^q \), wenn \( \sum_{n=1}^{\infty} |x_n|^q \) konvergiert.
+
+(i) Zunächst zeigen wir \( l^p \subseteq l^q \). Sei \( x \in l^p \). Dann ist \( \sum_{n=1}^{\infty} |x_n|^p < \infty \). Da \( q > p \), folgt aus der Hölder-Ungleichung, dass
+
+\[
+|x_n|^q \leq |x_n|^p \cdot |x_n|^{q-p}.
+\]
+
+Da \( |x_n|^{q-p} \leq 1 \) für \( |x_n| \leq 1 \) und \( |x_n|^{q-p} \to 0 \) für \( |x_n| > 1 \), folgt, dass \( \sum_{n=1}^{\infty} |x_n|^q \) ebenfalls konvergiert. Daher ist \( x \in l^q \).
+
+Um zu zeigen, dass \( l^p \neq l^q \), betrachten wir die Folge \( x = (x_n) \) mit \( x_n = n^{-1/p} \). Diese Folge gehört zu \( l^p \), da
+
+\[
+\sum_{n=1}^{\infty} |x_n|^p = \sum_{n=1}^{\infty} n^{-1} < \infty.
+\]
+
+Für \( q > p \) ist jedoch
+
+\[
+\sum_{n=1}^{\infty} |x_n|^q = \sum_{n=1}^{\infty} n^{-q/p} = \infty,
+\]
+
+da \( q/p > 1 \). Somit ist \( x \notin l^q \), was zeigt, dass \( l^p \neq l^q \).
+
+Für die Ungleichung \( \|x\|_q \leq \|x\|_p \) für alle \( x \in l^p \), verwenden wir die Tatsache, dass \( |x_n|^q \leq |x_n|^p \) für \( q \geq p \). Daher gilt
+
+\[
+\|x\|_q = \left( \sum_{n=1}^{\infty} |x_n|^q \right)^{1/q} \leq \left( \sum_{n=1}^{\infty} |x_n|^p \right)^{1/p} = \|x\|_p.
+\]
+
+(ii) Um zu zeigen, dass die Normen \( \|\cdot\|_p \) und \( \|\cdot\|_q \) nicht äquivalent sind, wenn \( p < q \), nehmen wir an, dass sie äquivalent wären. Dann gäbe es Konstanten \( C_1, C_2 > 0 \) mit
+
+\[
+C_1 \|x\|_p \leq \|x\|_q \leq C_2 \|x\|_p
+\]
+
+für alle \( x \in l^p \). Betrachten wir die Folge \( x^{(k)} = (x_n^{(k)}) \) mit \( x_n^{(k)} = \delta_{nk} \cdot k^{-1/p} \), wobei \( \delta_{nk} \) das Kronecker-Delta ist. Dann ist
+
+\[
+\|x^{(k)}\|_p = 1 \quad \text{und} \quad \|x^{(k)}\|_q = k^{1/p - 1/q}.
+\]
+
+Da \( 1/p - 1/q > 0 \), folgt, dass \( \|x^{(k)}\|_q \to \infty \) für \( k \to \infty \), was im Widerspruch zur Annahme der Äquivalenz steht. Daher sind die Normen nicht äquivalent.

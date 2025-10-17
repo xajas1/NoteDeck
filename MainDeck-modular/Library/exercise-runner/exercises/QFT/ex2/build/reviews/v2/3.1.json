@@ -1,0 +1,13 @@
+{
+  "score": 0.9,
+  "verdict": "Die Lösung ist größtenteils korrekt und gut begründet.",
+  "weaknesses": [
+    {
+      "code": "incomplete_argument",
+      "msg": "Die Invarianz der Delta-Funktion wird nicht vollständig erklärt, insbesondere die Rolle der Lorentz-Transformationen auf die räumlichen Komponenten."
+    }
+  ],
+  "fix_suggestions": [
+    "Erkläre genauer, warum die Delta-Funktion unter Lorentz-Transformationen invariant bleibt, insbesondere im Kontext der räumlichen Komponenten."
+  ]
+}

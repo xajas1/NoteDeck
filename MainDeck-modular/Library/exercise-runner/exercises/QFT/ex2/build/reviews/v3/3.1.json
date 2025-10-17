@@ -1,0 +1,14 @@
+{
+  "score": 0.9,
+  "verdict": "Die Lösung ist weitgehend korrekt, aber es gibt kleinere Lücken in der Herleitung.",
+  "weaknesses": [
+    {
+      "code": "missing_step",
+      "msg": "Die Herleitung der Invarianz von $2 E(\textbf{k}) \\, \\delta^3(\\textbf{k} - \\textbf{k}^{\\prime})$ ist nicht vollständig ausgeführt.",
+      "math_hint": "Es fehlt eine explizite Darstellung, wie die Invarianz von $2 E(\textbf{k})$ unter Lorentz-Transformationen gezeigt wird."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Füge eine detaillierte Herleitung hinzu, die zeigt, dass } 2 E(\\mathbf{k}) \\text{ unter Lorentz-Transformationen invariant ist.}"
+  ]
+}

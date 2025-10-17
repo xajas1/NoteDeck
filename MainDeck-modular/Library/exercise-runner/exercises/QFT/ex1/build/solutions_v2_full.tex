@@ -1,0 +1,277 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools,physics,bm}
+\usepackage{microtype}
+\title{Lösungen}
+\date{}
+\begin{document}
+\maketitle
+
+\section*{Aufgabe 1 [v2]}
+\subsection*{(1.1) [v2]}
+\paragraph{Aufgabentext.}
+Natural units, $\hbar=c=1$ : how much is 1 kg in GeV and $1 s$ in $\mathrm{GeV}^{-1}$ ? Use your result to express Newton's gravitational constant $G_N=6.67 \times 10^{-11} \mathrm{~m}^3 \mathrm{~kg}^{-1} \mathrm{~s}^{-2}$ in natural units, and give the value of the Planck mass $M_{P l}=G_N^{-1 / 2}$.
+
+\paragraph{Lösung.}
+Zunächst konvertieren wir 1 kg in GeV. In natürlichen Einheiten gilt $\hbar = c = 1$, was bedeutet, dass Energie, Masse und Impuls dieselben Einheiten haben. Die Umrechnung von kg in GeV erfolgt über die Ruheenergie eines Kilogramms, $E = mc^2$, wobei $c^2$ in GeV umgerechnet wird:
+
+\[
+1 \, \text{kg} = \frac{1 \, \text{kg} \cdot (3 \times 10^8 \, \text{m/s})^2}{1.60218 \times 10^{-10} \, \text{J/GeV}}
+\]
+
+Da $1 \, \text{J} = 1 \, \text{kg} \cdot \text{m}^2/\text{s}^2$, erhalten wir:
+
+\[
+1 \, \text{kg} \approx 5.61 \times 10^{26} \, \text{GeV}
+\]
+
+Nun konvertieren wir 1 s in $\mathrm{GeV}^{-1}$. In natürlichen Einheiten, wo $c = 1$, ist die Lichtgeschwindigkeit gleich 1, was bedeutet, dass Zeit und Länge dieselben Einheiten haben. Daher entspricht 1 Sekunde einer Länge von 1 Meter. Die Umrechnung erfolgt über die Beziehung:
+
+\[
+1 \, \text{s} = \frac{1}{1.519 \times 10^{24} \, \text{GeV}}
+\]
+
+Jetzt berechnen wir die Gravitationskonstante $G_N$ in natürlichen Einheiten. In SI-Einheiten hat $G_N$ die Dimension $\mathrm{m}^3 \, \mathrm{kg}^{-1} \, \mathrm{s}^{-2}$. Um dies in natürlichen Einheiten umzurechnen, verwenden wir:
+
+\[
+G_N = 6.67 \times 10^{-11} \, \mathrm{m}^3 \, \mathrm{kg}^{-1} \, \mathrm{s}^{-2} \times \left( \frac{1.519 \times 10^{24} \, \text{GeV}}{1} \right)^2 \times \left( \frac{1}{5.61 \times 10^{26} \, \text{GeV}} \right)
+\]
+
+Dies ergibt:
+
+\[
+G_N \approx 6.71 \times 10^{-39} \, \text{GeV}^{-2}
+\]
+
+Schließlich berechnen wir die Planck-Masse $M_{Pl}$:
+
+\[
+M_{Pl} = G_N^{-1/2} \approx (6.71 \times 10^{-39} \, \text{GeV}^{-2})^{-1/2} \approx 1.22 \times 10^{19} \, \text{GeV}
+\]
+
+\section*{Aufgabe 2 [v2]}
+\subsection*{(2.1) [v2]}
+\paragraph{Aufgabentext.}
+Starting from the definition of the Hamiltonian
+
+$$
+H(x, p) \equiv p \dot{x}-L(x, \dot{x})
+$$
+
+derive Hamilton's equations
+
+$$
+\frac{\partial H}{\partial x}=-\dot{p}, \quad \frac{\partial H}{\partial p}=\dot{x}
+$$
+
+[Hint: Be careful about what the independent variables of a function are.]
+
+\paragraph{Lösung.}
+To derive Hamilton's equations from the given Hamiltonian, we start by considering the Hamiltonian function:
+
+$$
+H(x, p) = p \dot{x} - L(x, \dot{x}),
+$$
+
+where \( \dot{x} \) is expressed as a function of \( x \) and \( p \) through the Legendre transformation. The relationship between \( \dot{x} \) and \( p \) is given by:
+
+$$
+p = \frac{\partial L}{\partial \dot{x}}.
+$$
+
+To find Hamilton's equations, we need to compute the partial derivatives of \( H \) with respect to \( x \) and \( p \).
+
+**1. Derivative of \( H \) with respect to \( x \):**
+
+Using the chain rule, we have:
+
+$$
+\frac{\partial H}{\partial x} = \frac{\partial}{\partial x} (p \dot{x} - L) = -\frac{\partial L}{\partial x}.
+$$
+
+The Euler-Lagrange equation gives:
+
+$$
+\frac{d}{dt} \left( \frac{\partial L}{\partial \dot{x}} \right) = \frac{\partial L}{\partial x}.
+$$
+
+Substituting \( \frac{\partial L}{\partial \dot{x}} = p \), we obtain:
+
+$$
+\frac{d}{dt}(p) = \frac{\partial L}{\partial x}.
+$$
+
+Thus, the correct expression for the time derivative of \( p \) is:
+
+$$
+\dot{p} = -\frac{\partial H}{\partial x}.
+$$
+
+**2. Derivative of \( H \) with respect to \( p \):**
+
+For the partial derivative with respect to \( p \), we have:
+
+$$
+\frac{\partial H}{\partial p} = \frac{\partial}{\partial p} (p \dot{x} - L) = \dot{x},
+$$
+
+since \( \dot{x} \) is treated as a function of \( p \) and \( x \).
+
+Therefore, Hamilton's equations are:
+
+$$
+\dot{x} = \frac{\partial H}{\partial p}, \quad \dot{p} = -\frac{\partial H}{\partial x}.
+$$
+
+These equations describe the time evolution of the system in terms of the Hamiltonian function.
+
+\section*{Aufgabe 3 [v2]}
+\subsection*{(3.1) [v2]}
+\paragraph{Aufgabentext.}
+Using the Schrödinger equation for the wavefunction $\Psi(\mathbf{x}, t)$
+
+$$
+\left\{-\frac{\hbar^2 \nabla^2}{2 m}+V(\mathbf{x})\right\} \Psi(\mathbf{x}, t)=i \hbar \frac{\partial}{\partial t} \Psi(\mathbf{x}, t)
+$$
+
+show that the probability density $\rho=\Psi^* \Psi$ satisfies the continuity equation
+
+$$
+\frac{\partial}{\partial t} \rho+\nabla \cdot \mathbf{j}=0
+$$
+
+where
+
+$$
+\mathbf{j}=\frac{\hbar}{2 i m}\left\{\Psi^* \nabla \Psi-\left(\nabla \Psi^*\right) \Psi\right\} .
+$$
+
+[Hint: Consider $\Psi^* \times$ (Schr.Eq.) $-\Psi \times$ (Schr.Eq.)*]
+
+\paragraph{Lösung.}
+Um zu zeigen, dass die Wahrscheinlichkeitsdichte \(\rho = \Psi^* \Psi\) die Kontinuitätsgleichung erfüllt, beginnen wir mit der Schrödinger-Gleichung und ihrer komplex konjugierten Form:
+
+\[
+\left\{-\frac{\hbar^2 \nabla^2}{2 m} + V(\mathbf{x})\right\} \Psi = i \hbar \frac{\partial \Psi}{\partial t}
+\]
+
+\[
+\left\{-\frac{\hbar^2 \nabla^2}{2 m} + V(\mathbf{x})\right\} \Psi^* = -i \hbar \frac{\partial \Psi^*}{\partial t}
+\]
+
+Multiplizieren wir die Schrödinger-Gleichung mit \(\Psi^*\) und die konjugierte Schrödinger-Gleichung mit \(\Psi\):
+
+\[
+\Psi^* \left\{-\frac{\hbar^2 \nabla^2}{2 m} \Psi + V(\mathbf{x}) \Psi\right\} = \Psi^* i \hbar \frac{\partial \Psi}{\partial t}
+\]
+
+\[
+\Psi \left\{-\frac{\hbar^2 \nabla^2}{2 m} \Psi^* + V(\mathbf{x}) \Psi^*\right\} = -\Psi i \hbar \frac{\partial \Psi^*}{\partial t}
+\]
+
+Subtrahieren wir die zweite Gleichung von der ersten:
+
+\[
+\Psi^* \left(-\frac{\hbar^2 \nabla^2}{2 m} \Psi\right) - \Psi \left(-\frac{\hbar^2 \nabla^2}{2 m} \Psi^*\right) = \Psi^* i \hbar \frac{\partial \Psi}{\partial t} + \Psi i \hbar \frac{\partial \Psi^*}{\partial t}
+\]
+
+Vereinfachen wir die linke Seite:
+
+\[
+-\frac{\hbar^2}{2 m} \left(\Psi^* \nabla^2 \Psi - \Psi \nabla^2 \Psi^*\right) = i \hbar \left(\Psi^* \frac{\partial \Psi}{\partial t} + \Psi \frac{\partial \Psi^*}{\partial t}\right)
+\]
+
+Die linke Seite kann umgeschrieben werden als:
+
+\[
+\nabla \cdot \left(\frac{\hbar}{2 i m} \left(\Psi^* \nabla \Psi - \Psi \nabla \Psi^*\right)\right)
+\]
+
+Diese Umformung zur Divergenzform ist korrekt, da der Ausdruck \(\Psi^* \nabla^2 \Psi - \Psi \nabla^2 \Psi^*\) durch Anwendung der Produktregel und der Definition der Divergenz in die Form \(\nabla \cdot (\Psi^* \nabla \Psi - \Psi \nabla \Psi^*)\) umgeschrieben werden kann. Dies entspricht der Divergenz eines Vektorfeldes, was die Formulierung der Kontinuitätsgleichung ermöglicht.
+
+Setzen wir dies in die Kontinuitätsgleichung ein:
+
+\[
+\frac{\partial}{\partial t} (\Psi^* \Psi) + \nabla \cdot \left(\frac{\hbar}{2 i m} \left(\Psi^* \nabla \Psi - \Psi \nabla \Psi^*\right)\right) = 0
+\]
+
+Dies zeigt, dass die Wahrscheinlichkeitsdichte \(\rho = \Psi^* \Psi\) die Kontinuitätsgleichung erfüllt, wobei der Stromdichtevektor \(\mathbf{j}\) gegeben ist durch:
+
+\[
+\mathbf{j} = \frac{\hbar}{2 i m} \left(\Psi^* \nabla \Psi - \Psi \nabla \Psi^*\right)
+\]
+
+\section*{Aufgabe 4 [v2]}
+\subsection*{(4.1) [v2]}
+\paragraph{Aufgabentext.}
+Let $\hat{O}$ be a time-independent operator in the Schrödinger picture, and $\hat{H}$ the timeindependent Hamiltonian of the system. Starting from the definition of a Heisenberg operator,
+
+$$
+\hat{O}_H(t)=e^{\frac{i}{\hbar} \hat{H}\left(t-t_0\right)} \hat{O} e^{-\frac{i}{\hbar} \hat{H}\left(t-t_0\right)}
+$$
+
+derive the Heisenberg equation of motion
+
+$$
+i \hbar \frac{d \hat{O}_H}{d t}=\left[\hat{O}_H, \hat{H}_H\right]
+$$
+
+\paragraph{Lösung.}
+Um die Heisenberg-Gleichung der Bewegung herzuleiten, beginnen wir mit der Definition des Heisenberg-Operators:
+
+\[
+\hat{O}_H(t) = e^{\frac{i}{\hbar} \hat{H}(t-t_0)} \hat{O} e^{-\frac{i}{\hbar} \hat{H}(t-t_0)}
+\]
+
+Wir berechnen die zeitliche Ableitung von \(\hat{O}_H(t)\):
+
+\[
+\frac{d \hat{O}_H}{d t} = \frac{d}{d t} \left( e^{\frac{i}{\hbar} \hat{H}(t-t_0)} \hat{O} e^{-\frac{i}{\hbar} \hat{H}(t-t_0)} \right)
+\]
+
+Verwenden der Produktregel ergibt:
+
+\[
+\frac{d \hat{O}_H}{d t} = \left( \frac{d}{d t} e^{\frac{i}{\hbar} \hat{H}(t-t_0)} \right) \hat{O} e^{-\frac{i}{\hbar} \hat{H}(t-t_0)} + e^{\frac{i}{\hbar} \hat{H}(t-t_0)} \hat{O} \left( \frac{d}{d t} e^{-\frac{i}{\hbar} \hat{H}(t-t_0)} \right)
+\]
+
+Die Ableitungen der Exponentialoperatoren sind:
+
+\[
+\frac{d}{d t} e^{\frac{i}{\hbar} \hat{H}(t-t_0)} = \frac{i}{\hbar} \hat{H} e^{\frac{i}{\hbar} \hat{H}(t-t_0)}
+\]
+
+\[
+\frac{d}{d t} e^{-\frac{i}{\hbar} \hat{H}(t-t_0)} = -\frac{i}{\hbar} \hat{H} e^{-\frac{i}{\hbar} \hat{H}(t-t_0)}
+\]
+
+Einsetzen dieser Ausdrücke in die Produktregel ergibt:
+
+\[
+\frac{d \hat{O}_H}{d t} = \frac{i}{\hbar} \hat{H} e^{\frac{i}{\hbar} \hat{H}(t-t_0)} \hat{O} e^{-\frac{i}{\hbar} \hat{H}(t-t_0)} - e^{\frac{i}{\hbar} \hat{H}(t-t_0)} \hat{O} \frac{i}{\hbar} \hat{H} e^{-\frac{i}{\hbar} \hat{H}(t-t_0)}
+\]
+
+Dies kann umgeschrieben werden als:
+
+\[
+\frac{d \hat{O}_H}{d t} = \frac{i}{\hbar} \left( \hat{H} \hat{O}_H(t) - \hat{O}_H(t) \hat{H} \right)
+\]
+
+Dies ist der Kommutator:
+
+\[
+\frac{d \hat{O}_H}{d t} = \frac{i}{\hbar} [\hat{H}, \hat{O}_H(t)]
+\]
+
+Multiplizieren mit \(i \hbar\) ergibt die Heisenberg-Gleichung der Bewegung:
+
+\[
+i \hbar \frac{d \hat{O}_H}{d t} = [\hat{O}_H, \hat{H}]
+\]
+
+Diese Herleitung gilt unter der Annahme, dass der Hamiltonoperator \(\hat{H}\) zeitunabhängig ist. Falls der Hamiltonoperator zeitabhängig ist, muss die Herleitung angepasst werden, da dann zusätzliche Terme in der Ableitung der Exponentialoperatoren auftreten. Im Heisenberg-Bild bleibt der Hamiltonoperator \(\hat{H}_H = \hat{H}\) konstant, wenn er zeitunabhängig ist.
+
+\end{document}\n

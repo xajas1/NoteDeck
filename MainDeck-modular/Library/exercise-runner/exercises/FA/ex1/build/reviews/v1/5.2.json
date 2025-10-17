@@ -1,0 +1,14 @@
+{
+  "score": 0.9,
+  "verdict": "Die Lösung ist fast korrekt, aber es gibt kleinere Lücken in der Herleitung der Dreiecksungleichung.",
+  "weaknesses": [
+    {
+      "code": "triangle_inequality",
+      "msg": "Die Herleitung der Dreiecksungleichung ist unvollständig.",
+      "math_hint": "Es fehlt der Schritt, der die Anwendung der Cauchy-Schwarz-Ungleichung auf die Re(h(x, y)) explizit zeigt."
+    }
+  ],
+  "fix_suggestions": [
+    "\\|x+y\\| = \\sqrt{h(x+y, x+y)} = \\sqrt{h(x, x) + h(y, y) + 2 \\operatorname{Re}(h(x, y))} \\leq \\sqrt{h(x, x)} + \\sqrt{h(y, y)} = \\|x\\| + \\|y\\|"
+  ]
+}

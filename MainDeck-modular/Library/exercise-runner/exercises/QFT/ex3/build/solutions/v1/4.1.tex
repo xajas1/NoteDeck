@@ -1,0 +1,53 @@
+Um die Transformationseigenschaften der bilinearen Kovarianten unter einer allgemeinen Lorentztransformation \( S(\Lambda) \) zu beweisen, betrachten wir die Dirac-Spinoren \(\psi\) und ihre adjungierten Spinoren \(\bar{\psi} = \psi^\dagger \gamma^0\). Eine Lorentztransformation wirkt auf die Spinoren durch die Matrix \( S(\Lambda) \), sodass \(\psi \rightarrow S(\Lambda) \psi\) und \(\bar{\psi} \rightarrow \bar{\psi} S^{-1}(\Lambda)\).
+
+1. Für den Skalar \(\bar{\psi} \psi\) gilt:
+\[
+\bar{\psi} \psi \rightarrow \bar{\psi} S^{-1}(\Lambda) S(\Lambda) \psi = \bar{\psi} \psi.
+\]
+Da \(S^{-1}(\Lambda) S(\Lambda) = I\), bleibt der Ausdruck invariant.
+
+2. Für den Pseudoskalar \(\bar{\psi} \gamma^5 \psi\) ergibt sich:
+\[
+\bar{\psi} \gamma^5 \psi \rightarrow \bar{\psi} S^{-1}(\Lambda) \gamma^5 S(\Lambda) \psi.
+\]
+Da \(\gamma^5\) unter einer Lorentztransformation wie ein Pseudoskalar transformiert, haben wir \(S^{-1}(\Lambda) \gamma^5 S(\Lambda) = \operatorname{det}(\Lambda) \gamma^5\). Somit:
+\[
+\bar{\psi} \gamma^5 \psi \rightarrow \operatorname{det}(\Lambda) \bar{\psi} \gamma^5 \psi.
+\]
+
+3. Für den Vektor \(\bar{\psi} \gamma^\mu \psi\) gilt:
+\[
+\bar{\psi} \gamma^\mu \psi \rightarrow \bar{\psi} S^{-1}(\Lambda) \gamma^\mu S(\Lambda) \psi.
+\]
+Die Dirac-Matrizen transformieren als Vektoren, also \(S^{-1}(\Lambda) \gamma^\mu S(\Lambda) = \Lambda_\nu^\mu \gamma^\nu\). Daher:
+\[
+\bar{\psi} \gamma^\mu \psi \rightarrow \Lambda_\nu^\mu \bar{\psi} \gamma^\nu \psi.
+\]
+
+4. Für den axialen Vektor \(\bar{\psi} \gamma^\mu \gamma^5 \psi\) ergibt sich:
+\[
+\bar{\psi} \gamma^\mu \gamma^5 \psi \rightarrow \bar{\psi} S^{-1}(\Lambda) \gamma^\mu \gamma^5 S(\Lambda) \psi.
+\]
+Da \(\gamma^\mu \gamma^5\) wie ein axialer Vektor transformiert, haben wir:
+\[
+S^{-1}(\Lambda) \gamma^\mu \gamma^5 S(\Lambda) = \operatorname{det}(\Lambda) \Lambda_\nu^\mu \gamma^\nu \gamma^5.
+\]
+Somit:
+\[
+\bar{\psi} \gamma^\mu \gamma^5 \psi \rightarrow \operatorname{det}(\Lambda) \Lambda_\nu^\mu \bar{\psi} \gamma^\nu \gamma^5 \psi.
+\]
+
+5. Für den antisymmetrischen Tensor \(\bar{\psi} \sigma^{\mu \nu} \psi\) gilt:
+\[
+\bar{\psi} \sigma^{\mu \nu} \psi \rightarrow \bar{\psi} S^{-1}(\Lambda) \sigma^{\mu \nu} S(\Lambda) \psi.
+\]
+Die Transformationseigenschaft der \(\sigma^{\mu \nu}\)-Matrizen ist:
+\[
+S^{-1}(\Lambda) \sigma^{\mu \nu} S(\Lambda) = \Lambda_\alpha^\mu \Lambda_\beta^\nu \sigma^{\alpha \beta}.
+\]
+Daher:
+\[
+\bar{\psi} \sigma^{\mu \nu} \psi \rightarrow \Lambda_\alpha^\mu \Lambda_\beta^\nu \bar{\psi} \sigma^{\alpha \beta} \psi.
+\]
+
+Diese Transformationseigenschaften zeigen, dass die bilinearen Kovarianten die erwarteten Transformationseigenschaften unter Lorentztransformationen aufweisen.

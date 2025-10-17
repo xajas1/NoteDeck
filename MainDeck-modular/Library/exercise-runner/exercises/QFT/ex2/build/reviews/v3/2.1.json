@@ -1,0 +1,20 @@
+{
+  "score": 0.8,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details und Klarstellungen.",
+  "weaknesses": [
+    {
+      "code": "missing_derivation",
+      "msg": "Die Herleitung der Kontinuitätsgleichung ist nicht vollständig ausgeführt.",
+      "math_hint": "Es fehlt die explizite Anwendung der Produktregel bei der Ableitung der Terme."
+    },
+    {
+      "code": "unclear_transformation",
+      "msg": "Die Transformation von \\\\(\\rho\\\\) ist nicht vollständig klar.",
+      "math_hint": "Die Schritte zur Ableitung von \\\\(\\rho = 2 E |e^{i p x}|^2\\\\) sollten detaillierter sein."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Verwende die Produktregel explizit: } \\frac{\\partial}{\\partial t} (\\phi^* \\frac{\\partial \\phi}{\\partial t} - \\phi \\frac{\\partial \\phi^*}{\\partial t}) = \\phi^* \\frac{\\partial^2 \\phi}{\\partial t^2} + \\frac{\\partial \\phi^*}{\\partial t} \\frac{\\partial \\phi}{\\partial t} - \\phi \\frac{\\partial^2 \\phi^*}{\\partial t^2} - \\frac{\\partial \\phi}{\\partial t} \\frac{\\partial \\phi^*}{\\partial t}.",
+    "\\text{Zeige die Schritte zur Berechnung von } \\rho = i(e^{-i p x} (i E e^{i p x}) - e^{i p x} (-i E e^{-i p x})) = 2 E |e^{i p x}|^2 \\text{ explizit.}"
+  ]
+}
