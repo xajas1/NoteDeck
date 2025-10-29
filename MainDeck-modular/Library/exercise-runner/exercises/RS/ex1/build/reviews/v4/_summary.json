@@ -1,0 +1,82 @@
+{
+  "tasks": {
+    "1.1": {
+      "score": 0.9,
+      "verdict": "Fast korrekt, aber kleine Lücken.",
+      "weaknesses": [
+        {
+          "code": "missing_holomorphy_proof",
+          "msg": "Die Holomorphie der Übergangsabbildung $\frac{1}{z}$ wurde nicht für den Punkt $z=0$ diskutiert.",
+          "math_hint": "Die Funktion $f(z) = \frac{1}{z}$ ist nicht auf ganz $\bar{\nabla}$ holomorph, da sie bei $z=0$ eine Polstelle hat."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Die Funktion } f(z) = \\frac{1}{z} \\text{ ist auf } \\mathbb{C} \\setminus \\{0\\} \\text{ holomorph, aber nicht auf ganz } \\mathbb{C} \\text{, da sie bei } z=0 \\text{ eine Polstelle hat.}"
+      ]
+    },
+    "2.1": {
+      "score": 0.7,
+      "verdict": "Die Lösung ist im Wesentlichen korrekt, aber es fehlen einige präzise mathematische Details.",
+      "weaknesses": [
+        {
+          "code": "MISSING_INVERSE_DETAIL",
+          "msg": "Die Beschreibung der Inversenabbildung \u0003c0^{-1} ist nicht präzise genug.",
+          "math_hint": "Die genaue Definition der Inversenabbildung \u0003c0^{-1} sollte spezifiziert werden, insbesondere wie die Wahl von k und l erfolgt."
+        },
+        {
+          "code": "TRANSITION_FUNCTION_DETAIL",
+          "msg": "Die Glattheit der Übergangsfunktionen wird nicht ausreichend begründet.",
+          "math_hint": "Es sollte gezeigt werden, dass die Übergangsfunktionen zwischen Karten tatsächlich glatt sind, indem die explizite Form der Translationen und deren Glattheit detailliert beschrieben wird."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Präzisiere die Inversenabbildung:} \\quad \\pi^{-1}(x,y) = (x+k, y+l) \\text{ mit } k, l \\in \\mathbb{Z} \\text{ so gewählt, dass } (x+k, y+l) \\in U.",
+        "\\text{Zeige die Glattheit der Übergangsfunktionen:} \\quad f(x,y) = (x+a, y+b) \\text{ ist glatt, da alle Ableitungen konstant sind.}"
+      ]
+    },
+    "2.2": {
+      "score": 0.7,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es gibt einige Lücken und Ungenauigkeiten.",
+      "weaknesses": [
+        {
+          "code": "MISSING_INVERSION",
+          "msg": "Die Herleitung der Umkehrfunktion ist unvollständig und fehlerhaft.",
+          "math_hint": "Die Umkehrfunktion \\\\(\frac{1}{2\\pi} \\\\arctan2(\\sin(2\\pi x), \\cos(2\\pi x))\\\\) ist nicht korrekt hergeleitet."
+        },
+        {
+          "code": "DOMAIN_ISSUE",
+          "msg": "Der Definitionsbereich der Umkehrfunktion ist nicht korrekt spezifiziert.",
+          "math_hint": "Der Definitionsbereich von \\\\(\\\\varphi_1 \\\\circ \\\\varphi_2^{-1}\\\\) muss klarer definiert werden."
+        }
+      ],
+      "fix_suggestions": [
+        "\\varphi_1 \\circ \\varphi_2^{-1}(\\cos(2\\pi x), \\sin(2\\pi x), y) = (\\frac{\\arctan2(\\sin(2\\pi x), \\cos(2\\pi x))}{2\\pi}, y) \\text{ für } x \\in (0,1)"
+      ]
+    },
+    "2.3": {
+      "score": 0.4,
+      "verdict": "Die Lösung ist unvollständig und enthält mathematische Ungenauigkeiten.",
+      "weaknesses": [
+        {
+          "code": "missing_equations",
+          "msg": "Die Verklebung der Ränder ist nicht korrekt beschrieben.",
+          "math_hint": "Die Verklebung $(0, y) \to (2, 1-y)$ ist nicht ausreichend für eine Fläche vom Geschlecht 2."
+        },
+        {
+          "code": "incomplete_transitions",
+          "msg": "Übergangsfunktionen sind nicht vollständig spezifiziert.",
+          "math_hint": "Es fehlen die genauen Formeln für die Übergangsfunktionen, die die Verklebung berücksichtigen."
+        },
+        {
+          "code": "incorrect_topology",
+          "msg": "Die topologische Struktur ist nicht korrekt beschrieben.",
+          "math_hint": "Die Verklebung führt nicht zu einer Fläche vom Geschlecht 2 ohne zusätzliche Identifikationen."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Verklebung der Ränder: } (x, 0) \\sim (x, 1), (0, y) \\sim (2, 1-y), \\text{ und weitere Identifikationen für Geschlecht 2.}",
+        "\\text{Übergangsfunktionen: } \\varphi_2 \\circ \\varphi_2^{-1} \\text{ muss die Verklebung korrekt abbilden.}"
+      ]
+    }
+  }
+}

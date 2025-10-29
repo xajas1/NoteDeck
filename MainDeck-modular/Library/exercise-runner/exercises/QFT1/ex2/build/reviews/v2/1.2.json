@@ -1,0 +1,20 @@
+{
+  "score": 0.8,
+  "verdict": "Gute Herleitung mit kleineren Lücken.",
+  "weaknesses": [
+    {
+      "code": "missing_expansion",
+      "msg": "Fehlende vollständige Entwicklung der quadratischen Terme.",
+      "math_hint": "Die Terme $\\epsilon^{\\alpha \\beta} x_\\beta x_\\alpha$ und $\\epsilon_{\\alpha \\gamma} x^\\alpha x^\\gamma$ sollten explizit als $\\epsilon^{\\alpha \\beta} x_\\beta x_\\alpha + \\epsilon_{\\alpha \\gamma} x^\\alpha x^\\gamma$ entwickelt werden."
+    },
+    {
+      "code": "symmetry_argument",
+      "msg": "Unklarer Übergang zur Symmetriebedingung.",
+      "math_hint": "Der Übergang von $2 \\epsilon^{\\alpha \\beta} x_\\beta x_\\alpha = 0$ zu $\\epsilon^{(\\alpha \\beta)} = 0$ sollte klarer begründet werden."
+    }
+  ],
+  "fix_suggestions": [
+    "\\begin{align*} x'^\\alpha x'_\\alpha &= x^\\alpha x_\\alpha + \\epsilon^{\\alpha \\beta} x_\\beta x_\\alpha + \\epsilon_{\\alpha \\gamma} x^\\alpha x^\\gamma + \\mathcal{O}(\\epsilon^2) \\end{align*}",
+    "\\text{Da } 2 \\epsilon^{\\alpha \\beta} x_\\beta x_\\alpha = 0 \\text{ für beliebige } x^\\alpha, \\text{ folgt } \\epsilon^{(\\alpha \\beta)} = 0 \\text{, da der symmetrische Teil sonst nicht für alle } x^\\alpha \\text{ verschwindet.}"
+  ]
+}

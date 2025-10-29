@@ -1,0 +1,126 @@
+{
+  "tasks": {
+    "1.1": {
+      "score": 0.8,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+      "weaknesses": [
+        {
+          "code": "missing_details",
+          "msg": "Die Herleitung der Beschränktheit ist nicht vollständig klar.",
+          "math_hint": "Die Argumentation zur Beschränktheit sollte die Definition der Frobenius-Norm explizit verwenden und die Beziehung zu den Singulärwerten klarer darstellen."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Die Frobenius-Norm einer Matrix } A \\text{ ist definiert als } \\|A\\|_F = \\sqrt{\\sum_{i,j} a_{ij}^2}. \\text{ Da } A \\text{ orthogonal ist, sind die Singulärwerte von } A \\text{ alle 1, was bedeutet, dass } \\|A\\|_F = \\sqrt{n}."
+      ]
+    },
+    "1.2": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist weitgehend korrekt, aber es fehlt eine explizite Herleitung der Norm.",
+      "weaknesses": [
+        {
+          "code": "MISSING_NORM_DERIVATION",
+          "msg": "Die Herleitung der Norm \\(\\|A_t\\|\\) wurde nicht explizit gezeigt.",
+          "math_hint": "Zeige explizit, wie \\(\\|A_t\\| = \\sqrt{t^2 + t^{-2} + (n-2)}\\) hergeleitet wird."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Füge die Herleitung der Norm hinzu:} \\\\ \\|A_t\\| = \\sqrt{\\sum_{i=1}^{n} \\sigma_i^2} = \\sqrt{t^2 + t^{-2} + 1 + \\cdots + 1} = \\sqrt{t^2 + t^{-2} + (n-2)}"
+      ]
+    },
+    "2.1": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist fast korrekt, aber es gibt einen kleinen Fehler in der Schlussfolgerung.",
+      "weaknesses": [
+        {
+          "code": "E1",
+          "msg": "Die Schlussfolgerung, dass \\(\\|A\\|^2 = \\lambda_{\\max}(A^* A)\\) ist, ist korrekt, aber es fehlt die Klarstellung, dass \\(\\|A\\| = \\sqrt{\\lambda_{\\max}(A^* A)}\\).",
+          "math_hint": "\\|A\\| = \\sqrt{\\lambda_{\\max}(A^* A)}"
+        }
+      ],
+      "fix_suggestions": [
+        "\\|A\\| = \\sqrt{\\lambda_{\\max}(A^* A)}"
+      ]
+    },
+    "3.1": {
+      "score": 0.7,
+      "verdict": "Die Lösung ist teilweise korrekt, aber es gibt einige Unklarheiten und fehlende Details.",
+      "weaknesses": [
+        {
+          "code": "MISSING_DEFINITION",
+          "msg": "Die Definition von \\mathrm{O}(2n) wurde nicht korrekt spezifiziert.",
+          "math_hint": "\\mathrm{O}(2n) sollte als Gruppe von 2n \\times 2n orthogonalen Matrizen definiert werden."
+        },
+        {
+          "code": "INCOMPLETE_PROOF",
+          "msg": "Die Herleitung der Gleichheit \\mathrm{GL}_n(\\mathbb{C}) \\cap \\mathrm{O}(2n) = \\mathrm{U}(n) ist unvollständig.",
+          "math_hint": "Es fehlt die explizite Herleitung, warum eine Matrix in \\mathrm{GL}_n(\\mathbb{C}) und \\mathrm{O}(2n) gleichzeitig in \\mathrm{U}(n) liegt."
+        }
+      ],
+      "fix_suggestions": [
+        "\\mathrm{O}(2n) = \\{ A \\in \\mathbb{R}^{2n \\times 2n} \\mid A^T A = I_{2n} \\}",
+        "Zeige explizit: Wenn A \\in \\mathrm{GL}_n(\\mathbb{C}) \\cap \\mathrm{O}(2n), dann A^* A = I_n, was A \\in \\mathrm{U}(n) impliziert."
+      ]
+    },
+    "3.2": {
+      "score": 0.8,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+      "weaknesses": [
+        {
+          "code": "MISSING_REALITY_CONDITION",
+          "msg": "Die Herleitung, dass $C$ reell ist, könnte klarer sein.",
+          "math_hint": "Es sollte explizit gezeigt werden, dass $C = \bar{C}$ aus $C^T = \bar{C^T}$ folgt."
+        },
+        {
+          "code": "MISSING_DETERMINANT_CONDITION",
+          "msg": "Die Bedingung $\text{det}(C) = 1$ wird nicht ausreichend hergeleitet.",
+          "math_hint": "Es sollte gezeigt werden, dass $\text{det}(C) = 1$ aus den gegebenen Bedingungen folgt."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Zeige explizit: } C = \\bar{C} \\Rightarrow C \\text{ ist reell.}",
+        "\\text{Zeige: } \\text{det}(C) = 1 \\text{ folgt aus } C \\in \\mathrm{SO}(n, \\mathbb{C}) \\cap \\mathrm{SU}(n)."
+      ]
+    },
+    "4.1": {
+      "score": 0.8,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+      "weaknesses": [
+        {
+          "code": "missing_associativity_proof",
+          "msg": "Die Lösung zeigt nicht explizit, dass die semidirekte Produktstruktur erhalten bleibt.",
+          "math_hint": "Es fehlt der Nachweis, dass die Operation im semidirekten Produkt die Gruppenstruktur respektiert."
+        },
+        {
+          "code": "missing_identity_proof",
+          "msg": "Die Identitätselemente der Gruppen werden nicht explizit behandelt.",
+          "math_hint": "Es fehlt die Überprüfung, dass $\theta$ das Identitätselement korrekt abbildet."
+        }
+      ],
+      "fix_suggestions": [
+        "Zeige, dass $(b_1, A_1) \\cdot (b_2, A_2) = (A_1 b_2 + b_1, A_1 A_2)$ die Gruppenstruktur respektiert: \\( (b, A) \\cdot (0, I) = (b, A) \\) und \\( (0, I) \\cdot (b, A) = (b, A) \\).",
+        "Überprüfe, dass \\( \\theta(f) = (0, I) \\) genau dann, wenn \\( f(x) = x \\)."
+      ]
+    },
+    "4.2": {
+      "score": 0.8,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+      "weaknesses": [
+        {
+          "code": "missing_proof_details",
+          "msg": "Die Eindeutigkeit der Darstellung wird nicht vollständig bewiesen.",
+          "math_hint": "Es fehlt eine detaillierte Herleitung, warum $S = UD^{-1}$ eindeutig ist."
+        },
+        {
+          "code": "incomplete_normality_proof",
+          "msg": "Die Normalität wird nicht vollständig gezeigt.",
+          "math_hint": "Es fehlt die Überprüfung, dass $DAD^{-1}$ für alle $A \\in \\operatorname{SUT}_n(\\mathbb{K})$ und $D \\in \\operatorname{Diag}_n(\\mathbb{K})$ in $\\operatorname{SUT}_n(\\mathbb{K})$ bleibt."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Füge eine detaillierte Herleitung hinzu, warum } S = UD^{-1} \\text{ eindeutig ist.}",
+        "\\text{Zeige explizit, dass } DAD^{-1} \\in \\operatorname{SUT}_n(\\mathbb{K}) \\text{ für alle } A \\in \\operatorname{SUT}_n(\\mathbb{K}) \\text{ und } D \\in \\operatorname{Diag}_n(\\mathbb{K})."
+      ]
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "score": 0.7,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es gibt einige Lücken und Unklarheiten.",
+  "weaknesses": [
+    {
+      "code": "missing_inverse_derivation",
+      "msg": "Die Herleitung der Umkehrfunktion \u001f1 \u001f2^{-1} ist unklar.",
+      "math_hint": "Die Umkehrung der trigonometrischen Funktionen sollte explizit hergeleitet werden."
+    },
+    {
+      "code": "holomorphy_misinterpretation",
+      "msg": "Die Diskussion zur Holomorphie ist unklar und nicht korrekt im Kontext der reellen Mannigfaltigkeit.",
+      "math_hint": "Holomorphie erfordert komplexe Karten, die hier nicht spezifiziert sind."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Führe die Umkehrung der trigonometrischen Funktionen explizit her: } x = \\frac{1}{2\\pi} \\arctan2(\\sin(2\\pi x), \\cos(2\\pi x))",
+    "\\text{Diskutiere die Holomorphie im Kontext einer komplexen Struktur, falls relevant, oder entferne die Diskussion.}"
+  ]
+}

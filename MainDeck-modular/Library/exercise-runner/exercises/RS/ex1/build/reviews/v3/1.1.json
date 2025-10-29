@@ -1,0 +1,20 @@
+{
+  "score": 0.7,
+  "verdict": "Die Lösung ist teilweise korrekt, aber es gibt einige mathematische Ungenauigkeiten.",
+  "weaknesses": [
+    {
+      "code": "CR_equations",
+      "msg": "Die Cauchy-Riemannschen Gleichungen sind nicht korrekt angewendet.",
+      "math_hint": "\\frac{\\partial u}{\\partial x} = \\frac{\\partial v}{\\partial y} und \\frac{\\partial u}{\\partial y} = -\\frac{\\partial v}{\\partial x} sollten explizit überprüft werden."
+    },
+    {
+      "code": "transition_map",
+      "msg": "Die Übergangsabbildung ist nicht korrekt definiert.",
+      "math_hint": "\\phi_S \\circ \\phi_N^{-1}(z) sollte korrekt als \\frac{1}{z} definiert werden."
+    }
+  ],
+  "fix_suggestions": [
+    "\\phi_S \\circ \\phi_N^{-1}(z) = \\frac{1}{z}",
+    "\\frac{\\partial u}{\\partial x} = \\frac{\\partial v}{\\partial y} und \\frac{\\partial u}{\\partial y} = -\\frac{\\partial v}{\\partial x} explizit überprüfen"
+  ]
+}

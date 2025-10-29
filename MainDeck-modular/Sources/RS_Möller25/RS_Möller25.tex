@@ -341,6 +341,10 @@ schnitt 4 voraus. Die beiden Zugänge zum Satz von Riemann-Roch werden in Abschn
 
 Der Abschnitt 8 greift das zweite motivierende Beispiel auf und führt systematisch Riemannsche Flächen mit einer Zusatzstruktur ein, wie sie obige Entfaltungsflächen automatisch haben.
 
+
+\pagebreak
+
+
 \section {Riemannsche Flächen}
 Im folgenden Abschnitt werden wir genau erklären, was der in der Einleitung benutzte Begriff des Verklebens formal bedeutet.
 
@@ -366,7 +370,76 @@ die Kartenwechselabbildung. Der Atlas A heißt komplexer Atlas, falls für alle 
 
 Eine Äquivalenzklasse von Atlanten heißt komplexe Struktur auf $X$. 
 
+
+
+\begin{DEF}{RS-M25-01-01}{Komplexe Struktur auf einem topologischen Raum}
+Sei $X$ ein topologischer Raum.
+\begin{enumerate}
+\item Eine \textbf{Karte} von $X$ ist ein Homöomorphismus 
+\[
+h:U\longrightarrow h(U)\subseteq\mathbb{C},
+\]
+wobei $U\subseteq X$ offen ist. Das Paar $(U,h)$ heißt dann \textbf{lokale Karte} von $X$.
+
+\item Eine \textbf{Überdeckung} $A=\{(U_i,h_i)\}_{i\in I}$ von $X$ durch Karten heißt \textbf{Atlas}, falls
+\[
+X=\bigcup_{i\in I}U_i.
+\]
+Für zwei Karten $(U_i,h_i)$ und $(U_j,h_j)$ heißt die Abbildung
+\[
+h_j\circ h_i^{-1}: h_i(U_i\cap U_j)\longrightarrow h_j(U_i\cap U_j)
+\]
+\textbf{Kartenwechselabbildung}.
+
+\item Der Atlas $A$ heißt \textbf{komplexer Atlas}, falls für alle $i,j\in I$ die Kartenwechselabbildungen
+\[
+h_j\circ h_i^{-1}
+\]
+\emph{biholomorph} sind (d.\,h. holomorph mit holomorpher Inversen).
+
+\item Zwei Atlanten 
+\[
+A=\{(U_i,h_i)\}_{i\in I}
+\quad\text{und}\quad 
+B=\{(V_j,g_j)\}_{j\in J}
+\]
+heißen \textbf{äquivalent}, falls jede Kartenwechselabbildung zwischen einer Karte aus $A$ und einer Karte aus $B$
+\[
+g_j\circ h_i^{-1}: h_i(U_i\cap V_j)\longrightarrow g_j(U_i\cap V_j)
+\]
+biholomorph ist.
+
+\item Eine \textbf{komplexe Struktur} auf $X$ ist eine Äquivalenzklasse komplexer Atlanten unter dieser Äquivalenzrelation. 
+
+Ein Paar $(X,\mathcal{A})$, bestehend aus einem topologischen Raum $X$ und einer komplexen Struktur $\mathcal{A}$, heißt \textbf{komplexe Mannigfaltigkeit (der Dimension 1)}.
+\end{enumerate}
+\end{DEF}
+
+
+
 Zu einem gegebenen Atlas $A=\left\{\left(U_{i}, h_{i}\right)\right\}$ von $X$ und $x \in X$ sei $(U, h)$ eine Karte einer Umgebung von $x$. Dann ist auch $(U, \widetilde{h})$ mit $\widetilde{h}(z)=h(z)-h(x)$ eine Karte bei $x$. Der Atlas $A \cup(U, \widetilde{h})$ ist offenbar zu $A$ äquivalent, da die Verschiebung um $h(x)$ eine holomorphe Abbildung ist. Führt man dies für alle $x \in X$ durch, so sieht man, dass in einer komplexe Struktur stets eine Karte enthalten ist, die einen gegebenen Punkt auf Null abbildet. Dies ist für lokale Rechnung mit Potenzreihen sehr nützlich.
+
+
+
+\begin{LEM}{RS-M25-01-02}{Lokale Nullkarten in einer komplexen Struktur}
+Sei $A=\{(U_i,h_i)\}$ ein (komplexer) Atlas auf einem topologischen Raum $X$, und sei $x\in X$. 
+\begin{enumerate}
+\item Ist $(U,h)$ eine Karte mit $x\in U$, so definiert
+\[
+\widetilde{h}:U\longrightarrow\mathbb{C},\qquad \widetilde{h}(z):=h(z)-h(x)
+\]
+ebenfalls eine Karte bei $x$. Dabei gilt $\widetilde{h}(x)=0$.
+\item Der erweiterte Atlas $A\cup\{(U,\widetilde{h})\}$ ist zum ursprünglichen Atlas $A$ äquivalent, da die Abbildung
+\[
+\phi:\mathbb{C}\longrightarrow\mathbb{C},\qquad \phi(w)=w-h(x)
+\]
+biholomorph ist und somit auch die Kartenwechselabbildung $h\circ \widetilde{h}^{-1}=\phi^{-1}$ biholomorph bleibt.
+\end{enumerate}
+\textbf{Folgerung.}  
+Zu jedem Punkt $x\in X$ existiert in jeder komplexen Struktur eine Karte $(U,\widetilde{h})$, die $x$ auf $0$ abbildet.  
+Solche „Nullkarten“ sind insbesondere für lokale Rechnungen mittels Potenzreihen oder Taylorentwicklungen äußerst nützlich.
+\end{LEM}
+
 
 
 Definition 2.2 (Riemannsche Fläche) 
@@ -374,14 +447,122 @@ Definition 2.2 (Riemannsche Fläche)
 Eine Riemannsche Fläche ist ein hausdorffscher topologischer Raum mit einer komplexen Struktur. Eine Riemannsche Fläche heißt kompakt, wenn der zugrundeliegende topologische Raum kompakt ist.
 
 
+\begin{DEF}{RS-M25-01-03}{Riemannsche Fläche}
+Eine \textbf{Riemannsche Fläche} ist ein \textit{hausdorffscher topologischer Raum} $X$, der mit einer \textbf{komplexen Struktur} versehen ist, d.\,h. mit einer Äquivalenzklasse komplexer Atlanten $\mathcal{A}$, deren Karten lokale Homöomorphismen auf offene Teilmengen von $\mathbb{C}$ sind und deren Kartenwechselabbildungen biholomorph sind.  
+Das Paar $(X,\mathcal{A})$ heißt dann komplexe Mannigfaltigkeit der komplexen Dimension~$1$.  
+
+Eine Riemannsche Fläche heißt \textbf{kompakt}, wenn der zugrunde liegende topologische Raum $X$ kompakt ist.
+\end{DEF}
+
+
+
 >> Riemannische Fläche durch komplex konjugierter Atlant
+
+
+\begin{DEF}{RS-M25-01-04}{Komplex konjugierte Riemannsche Fläche}
+Sei $(X,\mathcal{A})$ eine Riemannsche Fläche mit komplexem Atlas 
+$\mathcal{A}=\{(U_i,h_i)\}_{i\in I}$, wobei jede Kartenabbildung 
+$h_i:U_i\to h_i(U_i)\subset\mathbb{C}$ holomorph ist.  
+
+\textbf{(a)} Die \emph{komplex konjugierte Riemannsche Fläche} 
+$\overline{X}$ ist definiert als derselbe topologische Raum $X$, versehen 
+mit dem \emph{komplex konjugierten Atlas} 
+\[
+\overline{\mathcal{A}}:=\{(U_i,\overline{h_i})\}_{i\in I},
+\]
+wobei $\overline{h_i}(p):=\overline{h_i(p)}$ für $p\in U_i$ gilt.  
+
+\textbf{(b)} Die Kartenwechselabbildungen von $\overline{\mathcal{A}}$ 
+sind genau die komplex konjugierten derjenigen von $\mathcal{A}$ und 
+damit antiholomorph. Somit trägt $\overline{X}$ eine wohldefinierte 
+komplexe Struktur, die als „konjugierte Struktur“ zu der von $X$ gilt.
+
+\textbf{(c)} Zwischen $X$ und $\overline{X}$ existiert die 
+\emph{kanonische Identität} 
+\[
+\operatorname{id}_X : X \longrightarrow \overline{X},
+\]
+die eine \emph{antiholomorphe Abbildung} ist.
+\end{DEF}
+
+
 
 Beispiele 2.3 
 
 
-Die komplexe Ebene $\mathbb{C}$, die obere Halbebene $\mathbb{H}=\{z \in \mathbb{C}$ : $\operatorname{Im}(z)>0\}$ und die Einheitskreisscheibe $\triangle=\{z:|z|<1\}$ sind Riemannsche Flächen, gegeben durch eine Karte, ebenso $\mathbb{C}^{*}=\mathbb{C} \backslash\{0\}$ und $\triangle^{*}=\triangle \backslash\{0\}$ die punktierte Ebene (bzw. punktierte Einheitskreisscheibe).
+Die komplexe Ebene $\mathbb{C}$, die obere Halbebene $\mathbb{H}=\{z \in \mathbb{C}$ : $\operatorname{Im}(z)>0\}$ und die Einheitskreisscheibe $\triangle=\{z:|z|<1\}$ sind Riemannsche Flächen, gegeben durch eine Karte, 
+
+ebenso $\mathbb{C}^{*}=\mathbb{C} \backslash\{0\}$ und $\triangle^{*}=\triangle \backslash\{0\}$ die punktierte Ebene (bzw. punktierte Einheitskreisscheibe).
+
+
+\begin{EXA}{RS-M25-01-05}{Grundlegende Beispiele Riemannscher Flächen}
+\begin{enumerate}
+\item \textbf{Komplexe Ebene.}  
+Die komplexe Ebene $\mathbb{C}$ trägt die natürliche komplexe Struktur, die durch die \emph{globale Karte}
+\[
+(\mathbb{C}, \operatorname{id}_{\mathbb{C}})
+\]
+gegeben ist. Damit ist $\mathbb{C}$ eine Riemannsche Fläche (sogar eine komplexe Mannigfaltigkeit der Dimension $1$).
+
+\item \textbf{Obere Halbebene.}  
+Die Menge
+\[
+\mathbb{H} := \{ z \in \mathbb{C} \mid \operatorname{Im}(z) > 0 \}
+\]
+ist eine offene Teilmenge von $\mathbb{C}$ und wird mit der \emph{restriktierten Karte}
+\[
+(\mathbb{H}, \operatorname{id}_{\mathbb{C}}|_{\mathbb{H}})
+\]
+zu einer Riemannschen Fläche. Die komplexe Struktur ist somit diejenige, die von der Standardstruktur auf $\mathbb{C}$ induziert wird.
+
+\item \textbf{Einheitskreisscheibe.}  
+Ebenso ist
+\[
+\triangle := \{ z \in \mathbb{C} \mid |z| < 1 \}
+\]
+eine offene Teilmenge von $\mathbb{C}$ und trägt über die Karte
+\[
+(\triangle, \operatorname{id}_{\mathbb{C}}|_{\triangle})
+\]
+die induzierte komplexe Struktur. Auch $\triangle$ ist daher eine Riemannsche Fläche.
+\end{enumerate}
+\textbf{Bemerkung.}  
+Diese drei Beispiele sind lokal biholomorph zueinander — insbesondere sind $\mathbb{H}$ und $\triangle$ durch eine Möbiustransformation biholomorph, also komplex-äquivalente Modelle derselben lokalen Geometrie.
+\end{EXA}
+
+
 
 >> Unverträglichkeit von $\mapsto x+iy$ und $\mapsto x-iy$ bei $\triangle$
+
+
+\begin{CONC}{RS-M25-01-06}{Unverträglichkeit konjugierter Kartenabbildungen}
+Betrachten wir die Einheitskreisscheibe 
+\[
+\triangle = \{ z \in \mathbb{C} \mid |z| < 1 \}
+\]
+mit der Standardkarte 
+\[
+h : \triangle \to \mathbb{C}, \quad h(x + i y) = x + i y.
+\]
+Ersetzt man $h$ durch die „spiegelbildliche“ Karte
+\[
+\tilde{h}(x + i y) = x - i y = \overline{z},
+\]
+so beschreibt $\tilde{h}$ denselben topologischen Raum, aber mit \emph{komplex konjugierter Orientierung}.  
+
+Die beiden Karten $(\triangle, h)$ und $(\triangle, \tilde{h})$ sind \emph{nicht kompatibel} im Sinne der Definition einer komplexen Struktur, denn die Kartenwechselabbildung
+\[
+\tilde{h} \circ h^{-1} : h(\triangle) \to \tilde{h}(\triangle), 
+\quad z \longmapsto \overline{z}
+\]
+ist \emph{nicht holomorph}, sondern \emph{antiholomorph}.  
+
+\textbf{Folge.}  
+Die Strukturen, die durch $h$ und $\tilde{h}$ definiert werden, sind zueinander \emph{komplex konjugiert}, aber nicht äquivalent als komplexe Atlanten.  
+Sie definieren also zwei verschiedene komplexe Strukturen auf demselben topologischen Raum~$\triangle$ — die eine mit der „gewöhnlichen“ Orientierung, die andere mit der entgegengesetzten.
+\end{CONC}
+
+
 
 Beispiel 2.4 (Der Torus) 
 
@@ -401,7 +582,96 @@ $$
 
 
 
+\begin{EXA}{RS-M25-01-08}{$2$-Torus als Riemannsche Fläche mit Perioden}
+Als zugrundeliegender topologischer Raum betrachten wir das Produkt
+\[
+X := S^{1} \times S^{1}, \qquad \text{wobei } S^{1} = \{ z \in \mathbb{C} \mid |z| = 1 \}.
+\]
+Seien nun $w_{1}, w_{2} \in \mathbb{C}^{*}$ so gewählt, dass $\frac{w_{2}}{w_{1}} \notin \mathbb{R}$ gilt — das heißt, $w_{1}$ und $w_{2}$ spannen ein \emph{Gitter}
+\[
+\Lambda := \mathbb{Z} w_{1} + \mathbb{Z} w_{2}
+\]
+in der komplexen Ebene $\mathbb{C}$ auf.
+
+\textbf{(a) Definition der Quotientenabbildung.}  
+Wir definieren eine surjektive Abbildung
+\[
+q : \mathbb{C} \longrightarrow S^{1} \times S^{1}, \qquad 
+q(t_{1} w_{1} + t_{2} w_{2}) := \left( e^{2\pi i t_{1}}, \, e^{2\pi i t_{2}} \right)
+\quad \text{für } t_{1}, t_{2} \in \mathbb{R}.
+\]
+Zwei Punkte $z, z' \in \mathbb{C}$ werden genau dann auf denselben Punkt in $S^{1} \times S^{1}$ abgebildet, wenn $z - z' \in \Lambda$ gilt.
+
+\textbf{(b) Lokale Eigenschaften.}  
+Für jedes $z \in \mathbb{C}$ existiert eine offene Umgebung $U_{z} \subset \mathbb{C}$, sodass
+\[
+U_{z} \cap (w + U_{z}) = \varnothing
+\quad \text{für alle } w \in \Lambda \setminus \{0\}.
+\]
+Damit ist $\left.q\right|_{U_{z}} : U_{z} \to q(U_{z})$ ein Homöomorphismus.  
+Die inversen Abbildungen $\bigl( \left.q\right|_{U_{z}} \bigr)^{-1}$ bilden einen Atlas von Karten auf $X = S^{1} \times S^{1}$.
+
+\textbf{(c) Kartenwechselabbildungen.}  
+Falls $q(U_{1}) \cap q(U_{2}) \neq \varnothing$, dann gibt es $w \in \Lambda$ mit
+\[
+\left( \left.q\right|_{U_{1}} \right)^{-1} \circ \left( \left.q\right|_{U_{2}} \right)(z)
+= z + w.
+\]
+Dies ist eine holomorphe Abbildung, da Translationen in $\mathbb{C}$ biholomorph sind.  
+Somit sind alle Kartenwechselabbildungen biholomorph, und der Atlas definiert eine komplexe Struktur auf $S^{1} \times S^{1}$.
+
+\textbf{(d) Ergebnis.}  
+Die so erhaltene Riemannsche Fläche
+\[
+X \cong \mathbb{C} / \Lambda
+\]
+heißt \emph{Torus mit Perioden $w_{1}$ und $w_{2}$}.  
+Jede Wahl linear unabhängiger Perioden $w_{1}, w_{2}$ mit $\frac{w_{2}}{w_{1}} \notin \mathbb{R}$ liefert eine komplexe Struktur auf dem topologischen Torus~$S^{1} \times S^{1}$.
+
+\begin{center}
+  \includegraphics[scale=0.2]{2025_10_06_374d4cfa8b1948eb4c41g-010}
+\end{center}
+
+\textbf{Bemerkung.}  
+Die entstehende Fläche $\mathbb{C}/\Lambda$ kann äquivalent als Quotient mit der \emph{Quotiententopologie} beschrieben werden, wobei offene Mengen $U \subseteq \mathbb{C}/\Lambda$ genau diejenigen sind, deren Urbilder $\pi^{-1}(U)$ offen in $\mathbb{C}$ sind. Diese Struktur macht den Torus zu einer kompakten Riemannschen Fläche vom Geschlecht~$1$.
+\end{EXA}
+
+
 >> Quotiententopologie auf Torus
+
+
+\begin{DEF}{RS-M25-01-07}{Quotiententopologie auf dem Torus}
+Sei $\pi : \mathbb{R}^2 \to \mathbb{R}^2 / \mathbb{Z}^2$ die kanonische Projektion, welche Punkte identifiziert, die sich um ganzzahlige Gitterverschiebungen unterscheiden:
+\[
+(x, y) \sim (x', y') \quad \Longleftrightarrow \quad (x - x', y - y') \in \mathbb{Z}^2 .
+\]
+\textbf{(a) Definition der Topologie.}  
+Auf dem Quotientenraum
+\[
+\mathbb{T}^2 := \mathbb{R}^2 / \mathbb{Z}^2
+\]
+wird die \emph{Quotiententopologie} definiert durch:
+\[
+U \subseteq \mathbb{T}^2 \text{ ist offen } \; \Longleftrightarrow \; 
+\pi^{-1}(U) \subseteq \mathbb{R}^2 \text{ ist offen.}
+\]
+Damit wird $\pi$ eine stetige und offene Abbildung, und $\mathbb{T}^2$ ein kompakter, hausdorffscher topologischer Raum.
+
+\textbf{(b) Interpretation.}  
+Anschaulich entsteht $\mathbb{T}^2$ durch Identifikation der gegenüberliegenden Ränder des Einheitsquadrats:
+\[
+[0,1] \times [0,1] \; \text{mit den Randpunkten identifiziert gemäß} \;
+(x,0) \sim (x,1), \quad (0,y) \sim (1,y).
+\]
+\textbf{(c) Komplexe Struktur.}  
+Die Projektion $\pi$ ist lokal ein Homöomorphismus, sodass $\mathbb{T}^2$ mit der von $\mathbb{R}^2 \simeq \mathbb{C}$ induzierten Kartenstruktur eine \emph{Riemannsche Fläche} wird.  
+In komplexer Schreibweise kann man auch $\mathbb{T}^2 \cong \mathbb{C}/\Lambda$ betrachten, wobei $\Lambda \subset \mathbb{C}$ ein Gitter ist (etwa $\Lambda = \mathbb{Z} + i \mathbb{Z}$).
+
+\textbf{Bemerkung.}  
+Die Quotiententopologie ist hierbei entscheidend, da sie sicherstellt, dass lokale Eigenschaften (z.\,B. Offenheit, Stetigkeit, Holomorphie) über die Projektion $\pi$ mit der Struktur auf $\mathbb{C}$ kompatibel bleiben.
+\end{DEF}
+
+
 
 >> Alternative Konstruktion von Karten durch Bild gleich Torus minus parametrisierten Meridian $e^{2\pi it_1}$ und Longitude $e^{2\pi it_2}$
 
@@ -409,7 +679,105 @@ $$
 >> Translationsatlas
 
 
+\begin{DEF}{RS-M25-01-09}{Translationsatlas}
+Sei $\Lambda = \mathbb{Z} w_{1} + \mathbb{Z} w_{2} \subset \mathbb{C}$ ein Gitter, erzeugt von zwei linear unabhängigen Perioden $w_{1}, w_{2} \in \mathbb{C}$ mit $\frac{w_{2}}{w_{1}} \notin \mathbb{R}$.  
+Dann definiert die kanonische Projektion
+\[
+\pi : \mathbb{C} \longrightarrow \mathbb{C}/\Lambda, \qquad \pi(z) = z + \Lambda
+\]
+eine Riemannsche Fläche, deren Karten durch lokale Inverse von $\pi$ gegeben sind.
+
+\textbf{(a) Lokale Karten.}  
+Für jedes $z \in \mathbb{C}$ existiert eine Umgebung $U_{z}$, so dass
+\[
+U_{z} \cap (U_{z} + w) = \varnothing \quad \text{für alle } w \in \Lambda \setminus \{0\}.
+\]
+Die Einschränkung $\pi|_{U_{z}}$ ist ein Homöomorphismus auf ihr Bild, und die Inversen
+\[
+\phi_{z} := \left(\pi|_{U_{z}}\right)^{-1} : \pi(U_{z}) \longrightarrow U_{z}
+\]
+bilden zusammen einen Atlas
+\[
+\mathcal{A} = \{ (\pi(U_{z}), \phi_{z}) \mid z \in \mathbb{C} \},
+\]
+der die komplexe Struktur auf $\mathbb{C}/\Lambda$ bestimmt.
+
+\textbf{(b) Kartenwechsel.}  
+Für zwei überlappende Karten $(\pi(U_{z_{1}}), \phi_{z_{1}})$ und $(\pi(U_{z_{2}}), \phi_{z_{2}})$ gilt:
+\[
+\phi_{z_{1}} \circ \phi_{z_{2}}^{-1}(w) = w + (z_{1} - z_{2}),
+\]
+also eine \emph{Translation} in $\mathbb{C}$.
+
+\textbf{(c) Bezeichnung.}  
+Ein Atlas, dessen Kartenwechselabbildungen durch komplexe Translationen gegeben sind,
+\[
+z \longmapsto z + c, \quad c \in \mathbb{C},
+\]
+heißt \emph{Translationsatlas}.  
+Er ist automatisch ein komplexer Atlas, da Translationen biholomorph sind.
+
+\textbf{(d) Beispiel.}  
+Der Torus $\mathbb{C}/\Lambda$ trägt den kanonischen Translationsatlas, der direkt von der komplexen Ebene $\mathbb{C}$ induziert wird.  
+Alle kompakten Riemannschen Flächen vom Geschlecht~$1$ können auf diese Weise beschrieben werden.
+\end{DEF}
+
+
+
 >> Universelle Abbildungs Eigenschaft
+
+
+\begin{DEF}{RS-M25-01-10}{Universelle Abbildungseigenschaft der Quotientenabbildung}
+Sei $X$ ein topologischer Raum, $\sim$ eine Äquivalenzrelation auf $X$ und 
+\[
+\pi : X \longrightarrow X/{\sim}, \qquad x \longmapsto [x]
+\]
+die kanonische Quotientenabbildung.  
+Dann erfüllt $\pi$ die folgende \textbf{universelle Abbildungseigenschaft (UAE)}:
+
+\textbf{(a) Aussage.}  
+Sei $Y$ ein topologischer Raum und $f : X \to Y$ eine \emph{stetige} Abbildung, die \emph{äquivalenzverträglich} ist, d.\,h.
+\[
+x \sim x' \quad \Longrightarrow \quad f(x) = f(x').
+\]
+Dann existiert genau eine stetige Abbildung
+\[
+\tilde{f} : X/{\sim} \longrightarrow Y
+\]
+so dass das folgende Diagramm kommutiert:
+\[
+\begin{tikzcd}
+X \arrow[rr, "f"] \arrow[d, "\pi"'] & & Y \\
+X/{\sim} \arrow[urr, "\tilde{f}"', dashed]
+\end{tikzcd}
+\]
+d.h.
+\[
+f = \tilde{f} \circ \pi.
+\]
+
+\textbf{(b) Charakterisierung der Quotiententopologie.}  
+Die Topologie auf $X/{\sim}$ ist durch die Forderung eindeutig bestimmt, dass $\pi$ \emph{stetig} und \emph{universell initial} bezüglich dieser Eigenschaft ist.  
+Konkret heißt das:
+\[
+U \subseteq X/{\sim} \text{ ist offen } 
+\;\Longleftrightarrow\; 
+\pi^{-1}(U) \subseteq X \text{ ist offen}.
+\]
+
+\textbf{(c) Anwendung.}  
+Diese Eigenschaft erlaubt es, stetige Abbildungen $f : X \to Y$, die auf Äquivalenzklassen konstant sind, eindeutig zu „faktorisieren“ über den Quotientenraum $X/{\sim}$.  
+In geometrischen Situationen — etwa bei der Konstruktion des Tori $\mathbb{C}/\Lambda$ oder anderer Riemannscher Flächen durch Identifikation — garantiert die UAE, dass der Quotient die „richtige“ (d.h. stetigste mögliche) Topologie trägt.
+
+\textbf{(d) Beispiel.}  
+Für das Gitter $\Lambda = \mathbb{Z}w_{1} + \mathbb{Z}w_{2} \subset \mathbb{C}$ sei $\pi : \mathbb{C} \to \mathbb{C}/\Lambda$ die Projektion.  
+Ist $f : \mathbb{C} \to Y$ $\Lambda$-periodisch (d.\,h. $f(z+w) = f(z)$ für alle $w \in \Lambda$), so existiert nach der UAE genau eine stetige Abbildung
+\[
+\tilde{f} : \mathbb{C}/\Lambda \longrightarrow Y
+\quad \text{mit} \quad f = \tilde{f} \circ \pi.
+\]
+\end{DEF}
+
 
 Definition: Vekleben von topologischen Räumen
 
@@ -423,11 +791,129 @@ $$
 das Verkleben von $X_{i}$ längs der $U_{j}$. Wir versehen $X$ vermöge der Abbildung $\coprod_{i \in I} X_{i} \longrightarrow X$ mit der Quotiententopologie. 
 
 
+
+\begin{DEF}{RS-M25-01-11}{Verkleben von topologischen Räumen}
+Sei $I$ eine Indexmenge und seien für jedes $i \in I$ topologische Räume $X_{i}$ gegeben.  
+Ferner sei $J \subseteq \mathbb{N}$ eine (endliche oder abzählbare) Indexmenge und für jedes $j \in J$ sei ein topologischer Raum $U_{j}$ zusammen mit zwei stetigen Abbildungen
+\[
+\varphi_{1}^{(j)} : U_{j} \longrightarrow X_{i_{1}(j)}, 
+\qquad
+\varphi_{2}^{(j)} : U_{j} \longrightarrow X_{i_{2}(j)},
+\]
+gegeben, wobei $i_{1}(j), i_{2}(j) \in I$ von $j$ abhängen dürfen.
+
+\textbf{(a) Voraussetzungen.}  
+Wir fordern:
+\begin{itemize}
+  \item Die Bilder $\varphi_{1}^{(j)}(U_{j}) \subset X_{i_{1}(j)}$ und $\varphi_{2}^{(j)}(U_{j}) \subset X_{i_{2}(j)}$ seien offen.
+  \item Die Abbildungen $\varphi_{1}^{(j)}$ und $\varphi_{2}^{(j)}$ seien Homöomorphismen auf ihr jeweiliges Bild.
+\end{itemize}
+
+\textbf{(b) Konstruktion der Äquivalenzrelation.}  
+Betrachte die disjunkte Vereinigung
+\[
+\bigsqcup_{i \in I} X_{i}
+\]
+und definiere eine Äquivalenzrelation $\sim$ durch
+\[
+x_{1} \sim x_{2}
+\quad \Longleftrightarrow \quad
+\exists j \in J \; \exists y \in U_{j} :
+\bigl( x_{1} = \varphi_{1}^{(j)}(y),\, x_{2} = \varphi_{2}^{(j)}(y) \bigr)
+\;\text{ oder }\;
+\bigl( x_{2} = \varphi_{1}^{(j)}(y),\, x_{1} = \varphi_{2}^{(j)}(y) \bigr).
+\]
+
+\textbf{(c) Definition des Verklebungsraums.}  
+Der \emph{verklebte Raum} wird definiert als der Quotient
+\[
+X := \left( \bigsqcup_{i \in I} X_{i} \right) \Big/ \sim
+\]
+versehen mit der \emph{Quotiententopologie}, d.\,h. eine Menge $U \subseteq X$ ist offen genau dann, wenn ihr Urbild unter der kanonischen Projektion
+\[
+\pi : \bigsqcup_{i \in I} X_{i} \longrightarrow X
+\]
+offen ist.
+
+\textbf{(d) Bedeutung.}  
+Man sagt, $X$ entsteht durch \emph{Verkleben der Räume $X_{i}$ entlang der Übergangsabbildungen $\varphi_{1}^{(j)}$ und $\varphi_{2}^{(j)}$}.  
+Intuitiv werden dabei offene Teilmengen $\varphi_{1}^{(j)}(U_{j}) \subset X_{i_{1}(j)}$ und $\varphi_{2}^{(j)}(U_{j}) \subset X_{i_{2}(j)}$ mittels der Homöomorphismen $\varphi_{2}^{(j)} \circ (\varphi_{1}^{(j)})^{-1}$ identifiziert.
+
+\textbf{(e) Beispiel.}  
+Die Riemannsche Fläche des Torus kann als Verkleben der Kanten eines Einheitsquadrats $[0,1] \times [0,1] \subset \mathbb{C}$ konstruiert werden, indem man die gegenüberliegenden Seiten durch die Identifikationen
+\[
+(x,0) \sim (x,1), \qquad (0,y) \sim (1,y)
+\]
+verklebt.  
+Die Quotiententopologie macht den entstehenden Raum homöomorph zu $\mathbb{C}/(\mathbb{Z} + i\mathbb{Z})$.
+\end{DEF}
+
 Die folgende Aussage ist unmittelbare Konsequenz der Definitionen.
 
 Proposition 2.5 
 
 Sind die $X_{i}$ und $U_{j}$ offene Teilmengen von $\mathbb{C}$, die Inklusionsabbildungen $\varphi_{1}$ und $\varphi_{2}$ für alle $j \in J$ biholomorph auf ihr Bild und der durch Verkleben entstehende Raum $X$ hausdorffsch, so ist $X$ eine Riemannsche Fläche.
+
+
+
+\begin{EXA}{RS-M25-01-12}{Verkleben offener Teilmengen der Ebene liefert eine Riemannsche Fläche}
+Seien $\{X_i\}_{i\in I}$ und $\{U_j\}_{j\in J}$ offene Teilmengen von $\C$. Für jedes $j\in J$ gebe es Indizes
+$i_1(j),i_2(j)\in I$ und Inklusionen
+\[
+\varphi^{(j)}_1:U_j\hookrightarrow X_{i_1(j)},\qquad
+\varphi^{(j)}_2:U_j\hookrightarrow X_{i_2(j)},
+\]
+so dass $\varphi^{(j)}_1$ und $\varphi^{(j)}_2$ Homöomorphismen auf ihre (offenen) Bilder sind und die \emph{Übergangskarten}
+\[
+\varphi^{(j)}_2\circ\bigl(\varphi^{(j)}_1\bigr)^{-1}:
+\varphi^{(j)}_1(U_j)\longrightarrow \varphi^{(j)}_2(U_j)
+\]
+biholomorph sind. Sei $X$ der durch Verkleben entstehende Quotientraum
+\(
+X=\bigl(\bigsqcup_{i\in I}X_i\bigr)\big/\!\sim
+\)
+mit der Quotiententopologie, und sei $X$ hausdorffsch. Dann trägt $X$ eine komplexe Struktur; insbesondere ist $X$ eine Riemannsche Fläche.
+
+
+\begin{proof}
+Bezeichne die kanonische Quotientenabbildung mit
+\(
+\pi:\bigsqcup_{i\in I}X_i\to X.
+\)
+Für $x\in X_i$ wählen wir eine offene Umgebung $V\subset X_i$, die entweder disjunkt zu allen verklebten Teilmengen ist
+oder über genau eine Verklebung $\varphi^{(j)}_1,\varphi^{(j)}_2$ mit einem offenen Teil von $X_{i_2(j)}$ identifiziert wird.
+Nach der Definition des Verklebens ist dann die Einschränkung
+\[
+\pi|_V:V\longrightarrow \pi(V)
+\]
+ein Homöomorphismus. Definiere eine Karte bei $\pi(x)$ durch
+\[
+h_V := (\pi|_V)^{-1}:\ \pi(V)\longrightarrow V\subset\C.
+\]
+Die durch alle solchen $(\pi(V),h_V)$ gebildeten Karten überdecken $X$, denn jedes $x\in\bigsqcup X_i$ besitzt eine solche Umgebung
+$V$.
+
+Es bleibt zu zeigen, dass die Kartenwechselabbildungen biholomorph sind. Seien dazu $(\pi(V_1),h_{V_1})$ und
+$(\pi(V_2),h_{V_2})$ zwei Karten mit nichtleerem Überlapp. Ist $V_1,V_2\subset X_i$ für denselben Index $i$, so ist
+\[
+h_{V_2}\circ h_{V_1}^{-1}
+=\bigl(\pi|_{V_2}\bigr)^{-1}\circ \pi|_{V_1}
+= \operatorname{id}_{V_1\cap V_2},
+\]
+also holomorph. Liegen $V_1\subset X_{i_1}$ und $V_2\subset X_{i_2}$ mit $i_1\neq i_2$, so kann der Überlapp nur aus Identifikationen
+über die vorgegebenen Verklebungen stammen; auf einem geeigneten offenen Teil $W\subset V_1$ ist
+\[
+h_{V_2}\circ h_{V_1}^{-1}
+=\bigl(\pi|_{V_2}\bigr)^{-1}\circ \pi|_{V_1}
+= \varphi^{(j)}_2\circ\bigl(\varphi^{(j)}_1\bigr)^{-1}\big|_{W},
+\]
+also biholomorph nach Voraussetzung. Damit ist die Gesamtheit der Karten ein komplexer Atlas auf $X$.
+
+Da $X$ per Annahme hausdorffsch ist, erhält $X$ damit die Struktur einer Riemannschen Fläche (im hier verwendeten Sinn:
+hausdorffscher topologischer Raum mit komplexer Struktur).
+\end{proof}
+\end{EXA}
+
 
 
 Beispiel 2.6  Riemannsche Zahlenkugel / Projektive Grade
@@ -445,10 +931,108 @@ $$
 Die Voraussetzungen der Proposition 2.5 sind in diesem Beispiel erfüllt. Die Fläche $X$ heißt Riemannsche Zahlenkugel oder Projektive Gerade $\mathbb{P}_{\mathbb{C}}^{1}$. Die Menge $\mathbb{P}_{\mathbb{C}}^{1} \backslash X_{1}$ ist einpunktig. Diesen Punkt werden wir mit $\infty \in \mathbb{P}_{\mathbb{C}}^{1}$ bezeichnen.
 
 
+
+\begin{EXA}{RS-M25-01-14}{Riemannsche Zahlenkugel / Projektive Gerade}
+Wir nehmen zwei Kopien der Ebene $X_1=\C$ und $X_2=\C$ und kleben sie über
+$U:=\C^\times$ mittels
+\[
+\varphi_1:U\to X_1,\ z\mapsto z,
+\qquad
+\varphi_2:U\to X_2,\ z\mapsto \frac{1}{z}.
+\]
+Die Übergangsfunktion auf dem Überlapp ist damit
+\[
+\varphi_2\circ\varphi_1^{-1}: \C^\times\longrightarrow \C^\times,\quad
+z\longmapsto \frac{1}{z},
+\]
+also biholomorph. Nach Prop.~2.5 entsteht so ein hausdorffscher
+topologischer Raum $X$ mit komplexer Struktur; wir schreiben
+\[
+\mathbb{P}^1_\C \;=\; X \;=\; (\C \sqcup \C)/\!\sim
+\quad\text{(Riemannsche Zahlenkugel, komplexe projektive Gerade).}
+\]
+
+\textbf{Atlas und der Punkt $\infty$.}
+Wir erhalten einen komplexen Atlas aus zwei Karten:
+\[
+(U_0,\; z_0:=\mathrm{id}_\C),\qquad (U_\infty,\; z_\infty:=\mathrm{id}_\C),
+\]
+wobei $U_0$ die erste Kopie $X_1\simeq\C$ und $U_\infty$ die zweite Kopie $X_2\simeq\C$
+bezeichnet. Die Kartenwechselabbildung ist $z_\infty=\frac{1}{z_0}$ auf
+$U_0\cap U_\infty\simeq\C^\times$.
+Die Menge $\mathbb{P}^1_\C\setminus U_0$ besteht aus genau einem Punkt; wir nennen ihn
+$\infty\in\mathbb{P}^1_\C$. Analog ist $\mathbb{P}^1_\C\setminus U_\infty=\{0\}$ in der $z_0$-Karte.
+
+\textbf{Nachbarschaften von $\infty$.}
+Eine Basis von Umgebungen von $\infty$ sind die Mengen
+\[
+\{\,p\in\mathbb{P}^1_\C \mid |z_\infty(p)|<R\,\}\quad (R>0),
+\]
+d.\,h. Urbilder beschränkter Mengen in der $z_\infty$-Koordinate; äquivalent:
+$\{\,p\in\mathbb{P}^1_\C \mid |z_0(p)|>1/R\,\}\cup\{\infty\}$.
+
+\textbf{Identifikation mit der Sphäre.}
+Über die stereographische Projektion erhält man einen Homöomorphismus
+\[
+S^2 \;\xrightarrow{\ \cong\ }\; \mathbb{P}^1_\C,
+\]
+der $S^2$ mit der einen Zusatzstelle $\infty$ zur \emph{Einpunktkompaktifizierung}
+der Ebene identifiziert. Damit ist $\mathbb{P}^1_\C$ kompakt, zusammenhängend und orientierbar.
+
+\textbf{Holomorphe/meromorphe Funktionen.}
+Jede holomorphe Funktion $\mathbb{P}^1_\C\to\C$ ist konstant (Kompaktheit $\Rightarrow$
+großer Satz von Liouville). Meromorphe Funktionen auf $\mathbb{P}^1_\C$ sind genau die
+rationalen Funktionen $R(z)=\frac{P(z)}{Q(z)}$ auf der $z_0$-Karte (inkl.~einer
+Polstelle/Nullstelle an $\infty$ entsprechend dem Grad).
+
+\textbf{Zusammenfassung.}
+Die projektive Gerade $\mathbb{P}^1_\C$ ist die aus zwei Kopien von $\C$ über
+$z\mapsto 1/z$ verklebte Riemannsche Fläche; sie besteht aus $\C$ plus einem
+Punkt $\infty$ und ist (als topologischer Raum) mit $S^2$ homöomorph.
+\end{EXA}
+
+
+
+
 Beispiel 2.7 
 
 
 Wir wählen $X_{1}, X_{2}$ und $U_{1,2}$ wie in Beispiel 2.4, aber $\varphi_{2}(z)=z$. Der resultierende topologische Raum ist nicht hausdorffsch, also keine Riemannsche Fläche.
+
+
+
+\begin{EXA}{RS-M25-01-15}{Nicht‐Hausdorff durch triviales Verkleben}
+Wir nehmen zwei Kopien der Ebene $X_1=\C$ und $X_2=\C$ und kleben sie wie in Bsp.~2.6
+über $U=\C^\times$, aber diesmal mit \emph{identischer} Übergangsfunktion
+\[
+\varphi_1:U\to X_1,\ z\mapsto z,\qquad
+\varphi_2:U\to X_2,\ z\mapsto z.
+\]
+Bezeichne den verklebten Raum mit $X:=(\C\sqcup\C)/\!\sim$. Es gibt zwei verschiedene Punkte
+\[
+p:=[0\in X_1],\qquad q:=[0\in X_2]\in X,
+\]
+die nicht identifiziert werden.
+
+\textbf{Behauptung.} $X$ ist nicht hausdorffsch (also keine Riemannsche Fläche).
+
+\textit{Beweis.}
+Seien $U_p,U_q\subset X$ offene Umgebungen von $p$ bzw.\ $q$.
+Dann existieren offene Kreisscheiben $D_r\subset X_1$ und $D_s'\subset X_2$ um $0$
+mit $D_r\subset \pi^{-1}(U_p)$ und $D_s'\subset \pi^{-1}(U_q)$, wobei
+$\pi:\C\sqcup\C\to X$ die Quotientenabbildung ist.
+Für $0<\rho<\min\{r,s\}$ enthalten $D_r\setminus\{0\}$ und $D_s'\setminus\{0\}$ je
+eine punktierte Kreisscheibe um $0$, und auf $U=\C^\times$ werden die Punkte via
+$\varphi_1=\varphi_2=\mathrm{id}$ identifiziert. Also gilt
+\[
+\pi\big(D_r\setminus\{0\}\big)=\pi\big(D_s'\setminus\{0\}\big)\subset U_p\cap U_q.
+\]
+Insbesondere $U_p\cap U_q\neq\emptyset$. Damit lassen sich $p$ und $q$ nicht durch disjunkte
+offene Umgebungen trennen; $X$ ist nicht hausdorffsch.
+\qed
+\end{EXA}
+
+
 
 
 Beispiel 2.8  (Punktierter) Torus durch Verklebung
@@ -498,6 +1082,102 @@ und $\varphi_{2}: U_{1} \longrightarrow \Delta$ die Inklusionsabbildung ist.
 
 
 
+
+\begin{EXA}{RS-M25-01-16}{(Punktierter) Torus via Verkleben}
+Wir konstruieren den Torus mit Perioden $1$ und $i$ durch Verkleben von planaren
+Gebieten mittels \emph{Translationskarten}.
+
+\textbf{Schritt 1: Der punktierte Torus $T^*$.}
+Sei
+\[
+\begin{aligned}
+X_1&=\{x+iy\in\C: x\in(0,1),\,y\in(0,1)\},\\
+X_2&=\{x+iy\in\C: x\in(0,1),\,y\in(-\varepsilon,\varepsilon)\},\\
+X_3&=\{x+iy\in\C: x\in(-\varepsilon,\varepsilon),\,y\in(0,1)\},
+\end{aligned}
+\]
+und definiere die offenen Teilmengen
+\[
+\begin{array}{lll}
+U_2^+=X_2\cap\mathbb{H}, & \varphi_1:U_2^+\to X_1,\ z\mapsto z, & \varphi_2:U_2^+\hookrightarrow X_2,\\
+U_2^-=X_2\cap\{\Im z<0\}, & \varphi_1:U_2^-\to X_1,\ z\mapsto i+z, & \varphi_2:U_2^-\hookrightarrow X_2,\\
+U_3^+=X_3\cap\{\Re z>0\}, & \varphi_1:U_3^+\to X_1,\ z\mapsto z, & \varphi_2:U_3^+\hookrightarrow X_3,\\
+U_3^-=X_3\cap\{\Re z<0\}, & \varphi_1:U_3^-\to X_1,\ z\mapsto 1+z, & \varphi_2:U_3^-\hookrightarrow X_3.
+\end{array}
+\]
+Die jeweils angegebenen $\varphi_1$ sind Translationen (also biholomorph), die $\varphi_2$
+sind Inklusionen. Wir verkleben die disjunkte Vereinigung $X_1\sqcup X_2\sqcup X_3$
+entlang der Paare $(\varphi_1,\varphi_2)$ und versehen das Quotient
+$T^*:=\bigl(\coprod_{i=1}^3 X_i\bigr)/\!\sim$ mit der Quotiententopologie.
+
+\textit{Behauptung.} $T^*$ ist eine Riemannsche Fläche (hausdorffsch, mit
+Translationsatlas) und nicht kompakt.
+
+\textit{Begründung.} (i) \emph{Kompatibilität:} Alle Übergänge sind durch
+Translationen $z\mapsto z+\omega$ mit $\omega\in\{0,1,i,1+i\}$ gegeben, also
+biholomorph. Damit liefern die inversen Karten lokale Koordinaten und die
+Kartenwechsel sind holomorph. (ii) \emph{Hausdorff:} Die Verklebungen erfolgen
+entlang offener Teilmengen, und es werden nur Randpunkte mittels Translationen
+identifiziert; die entstehende Äquivalenzrelation ist abgeschlossen in der disjunkten
+Vereinigung, also ist der Quotient hausdorffsch (Standardargument aus der
+Gluing‐Proposition). (iii) \emph{Nichtkompaktheit:} Es bleibt in der „Ecke”
+(entspricht dem Gitterpunkt $0$ im Fundamentalparallelogramm) ein Loch; daher ist
+$T^*$ topologisch ein Torus ohne einen Punkt und somit nicht kompakt.
+
+\medskip
+\textbf{Schritt 2: Auffüllen der Spitze — der (kompakte) Torus $T$.}
+Wir füllen das Loch, indem wir die Einheitskreisscheibe $\Delta$ entlang des
+Randes $\Delta^*=\Delta\setminus\{0\}$ ankleben.
+Zerlege $\Delta^*$ in die vier offenen Quadranten
+\[
+U_{1,k}=\{z\in\Delta:\ \arg z\in((k-1)\tfrac{\pi}{2},k\tfrac{\pi}{2})\},\quad k=1,\dots,4,
+\]
+und definiere die Verklebung auf den Quadranten durch Translationen
+\[
+\begin{array}{ll}
+\varphi_1:U_{1,1}\to X_1,\ z\mapsto z,&
+\varphi_1:U_{1,2}\to X_1,\ z\mapsto z+1,\\[2pt]
+\varphi_1:U_{1,3}\to X_1,\ z\mapsto z+1+i,&
+\varphi_1:U_{1,4}\to X_1,\ z\mapsto z+i,
+\end{array}
+\]
+sowie auf den Achsen (zur Kompatibilität mit $X_2,X_3$)
+\[
+\begin{array}{ll}
+\varphi_1:(0,1)\to X_2,\ z\mapsto z, & \varphi_1:(0,1)i\to X_3,\ z\mapsto z,\\
+\varphi_1:(-1,0)\to X_2,\ z\mapsto z+1, & \varphi_1:(-1,0)i\to X_3,\ z\mapsto z+i,
+\end{array}
+\]
+und setze $\varphi_2:U_1=\Delta^*\hookrightarrow\Delta$ als Inklusion.
+Die so entstandene Verklebung
+\[
+T:=\bigl(T^*\sqcup\Delta\bigr)\big/\!\sim
+\]
+ist wieder durch Translationen definiert, also liefert ein komplexes Atlas.
+
+\textit{Behauptung.} $T$ ist eine kompakte Riemannsche Fläche und (biholomorph)
+gleich dem Quotienten $\C/(\Z\oplus i\Z)$.
+
+\textit{Begründung.} (i) \emph{Atlas:} Auch hier sind alle Übergangsfunktionen
+Translationen und damit biholomorph, also ist $T$ eine Riemannsche Fläche.
+(ii) \emph{Kompakt:} Topologisch erhält man ein Fundamentalviereck mit gegenüberliegenden
+Rändern identifiziert—also den Torus. Das Auffüllen des fehlenden Punktes macht
+den Raum kompakt. (iii) \emph{Identifikation mit einem Gitterquotienten:}
+Die Karten stimmen mit dem Translationsatlas für $\C/(\Z+i\Z)$ überein; die natürliche
+Quotientenabbildung $\C\to \C/(\Z+i\Z)$ ist lokal ein Holomorphismus und induziert
+einen Bihomöomorphismus auf $T$.
+
+\medskip
+\textbf{Fazit.}
+\begin{itemize}
+\item $T^*$ ist der \emph{punktierte Torus}, eine nicht‐kompakte Riemannsche Fläche,
+erhalten durch Verkleben von $X_1,X_2,X_3$ mittels Translationen.
+\item $T$ entsteht aus $T^*$ durch Ankleben der Scheibe $\Delta$ am Rand $\Delta^*$;
+$T$ ist kompakt und biholomorph zu $\C/(\Z\oplus i\Z)$.
+\end{itemize}
+\end{EXA}
+
+
 Das ist auf den ersten Blick ziemlich umständlich. Wir werden diese Art von Verkleben im Abschnitt 8 über flache Flächen nochmal formalisieren und das Einkleben der 'Eckpunkte' automatisieren.
 
 Wir haben nun zwei Arten gesehen Riemannsche Flächen zu konstruieren, durch eine Quotientabbildung, bei der das Objekt 'oben' bereits eine Riemannsche Fläche ist, und synthetische durch Verkleben. Die dritte wichtige Art beschreibt Riemannsche Flächen als Unterobjekte.
@@ -514,10 +1194,73 @@ Für $x \notin B=\left\{x_{1}, x_{2}, x_{3}\right\}$ sei wählen wir eine Umgebu
 Eine so definierte Riemannsche Fläche wird (punktierte) elliptische Kurve genannt.
 
 
+
+\begin{DEF}{RS-M25-01-17}{(Punktierte) elliptische Kurve}
+Wir betrachten den Raum $Z=\C^2\cong\R^4$ mit der üblichen reellen Topologie.
+Seien drei paarweise verschiedene Punkte $x_1,x_2,x_3\in\C$ gegeben und definiere
+\[
+X=\{(x,y)\in Z:\ y^2=f(x)\},\qquad f(x)=(x-x_1)(x-x_2)(x-x_3).
+\]
+Dann ist $X$ eine reelle zweidimensionale (also komplex eindimensionale)
+Untermannigfaltigkeit von $\C^2$.
+
+\textbf{Lokale Karten.}
+\begin{enumerate}
+\item Für $x\notin B:=\{x_1,x_2,x_3\}$ wählen wir eine Umgebung $V(x)\subset\C$, die $B$ nicht schneidet.
+Definiere
+\[
+U(x)=\{(x',y')\in X:\ x'\in V(x)\}.
+\]
+Die Zusammenhangskomponente von $U(x)$, die $(x,y)$ enthält, sei $U_{(x,y)}$.
+Dann ist die Projektion
+\[
+\pi_1:U_{(x,y)}\to V(x),\quad (x',y')\mapsto x'
+\]
+ein Homöomorphismus auf ihr Bild. Sie definiert eine Karte
+\[
+h_1:(U_{(x,y)},\C),\quad h_1(x',y')=x'.
+\]
+\item Für $x=x_i$ wollen wir die Projektion auf die zweite Koordinate verwenden.
+Da $f'(x_i)\neq 0$, folgt aus dem Satz über implizite Funktionen, dass es eine
+Umgebung $U_i\subset X$ von $(x_i,0)$ gibt, auf der
+\[
+\pi_2:U_i\to\C,\quad (x,y)\mapsto y
+\]
+ein Homöomorphismus auf ihr Bild ist.
+Damit erhalten wir Karten
+\[
+h_2:(U_i,\C),\quad h_2(x,y)=y,\qquad i=1,2,3.
+\]
+\end{enumerate}
+
+\textbf{Kartenwechsel.}
+In den Überlappungsbereichen der obigen Karten gelten Übergangsfunktionen der Form
+\[
+h_1\circ h_2^{-1}: y\mapsto x_i+\frac{y^2}{f'(x_i)}+\dots,
+\]
+die holomorph sind. Somit ist der Atlas aus den obigen Karten ein komplexer Atlas.
+
+\textbf{Fazit.}
+Der Raum $X$ mit dieser komplexen Struktur ist eine Riemannsche Fläche. Entfernt man den Punkt
+„im Unendlichen“, erhält man die \emph{punktierte elliptische Kurve}, während die kompakte
+Ergänzung durch den Punkt $\infty$ die (vollständige) \emph{elliptische Kurve}
+\[
+E=\{(x,y)\in\mathbb{P}^1\times\mathbb{P}^1: y^2z=f(x,z)\}\subset\mathbb{P}^2
+\]
+liefert.
+\end{DEF}
+
+
+
+
 \pagebreak
 
 
+
+
 \subsection {Holomorphe Abbildungen}
+
+
 Nachdem wir nun die Objekte definiert haben, mit denen wir umgehen, folgt nun die Definition der Morphismen zwischen Riemannschen Flächen und damit auch, wann wir Riemannsche Flächen als gleich ansehen.
 
 Definition 2.9 Holomorphe Abbildung
@@ -525,10 +1268,62 @@ Definition 2.9 Holomorphe Abbildung
 Eine Abbildung $f: X \rightarrow Y$ zwischen zwei Riemannschen Flächen heißt holomorph, falls $f: X \rightarrow Y$ stetig ist und für jede Karte $(U, g)$ von $X$ und jede Karte $(V, h)$ von $Y$ die Verkettung $h \circ f \circ g^{-1}$ : $g\left(U \cap f^{-1}(V)\right) \rightarrow \mathbb{C}$ holomorph ist. $f$ heißt biholomorph oder Isomorphismus; falls $f$ zudem bijektiv ist.
 
 
+\begin{DEF}{RS-M25-02-01}{Holomorphe Abbildung zwischen Riemannschen Flächen}
+Seien $X$ und $Y$ Riemannsche Flächen.  
+Eine Abbildung
+\[
+f:X\longrightarrow Y
+\]
+heißt \emph{holomorph}, falls
+\begin{enumerate}
+\item $f$ stetig ist, und
+\item für jede Karte $(U,g)$ von $X$ und jede Karte $(V,h)$ von $Y$ die verkettete Abbildung
+\[
+h\circ f\circ g^{-1}:\ g\bigl(U\cap f^{-1}(V)\bigr)\longrightarrow \C
+\]
+eine holomorphe Abbildung zwischen offenen Teilmengen der komplexen Ebene ist.
+\end{enumerate}
+
+Ist $f$ zusätzlich bijektiv und $f^{-1}$ ebenfalls holomorph, so heißt $f$ \emph{biholomorph}  
+(oder \emph{Isomorphismus} der Riemannschen Flächen). In diesem Fall sind $X$ und $Y$ \emph{biholomorph äquivalent}.
+\end{DEF}
+
 
 Beispiel: Isomorphie zwischen Torus ($1,i$) und Torus ($1,i'$)
 
 Es ist eine einfache Übung zu prüfen, dass der Torus mit Perioden $1, i$ aus Beispiel 2.4 zum Torus mit Perioden 1, $i$ aus Beispiel 2.8 isomorph ist. Dieser ist wiederum zum Torus mit Perioden $1, i+1$ isomorph.
+
+
+\begin{EXA}{RS-M25-02-02}{Isomorphie zwischen Tori mit äquivalenten Perioden}
+Wir betrachten die Riemannschen Flächen, die durch Gitterquotienten der komplexen Ebene
+\[
+T_{\tau}=\C/(\Z+\tau\Z)
+\]
+gegeben sind, wobei $\tau\in\C$ mit $\Im(\tau)>0$ eine Periode bezeichnet.
+
+\textbf{Behauptung.}
+Die Tori $T_i=\C/(\Z+i\Z)$ und $T_{i+1}=\C/(\Z+(i+1)\Z)$ sind biholomorph.
+
+\textbf{Beweisidee.}
+Die Abbildung
+\[
+f:\C\longrightarrow\C,\qquad f(z)=e^{\pi i/4}\,z
+\]
+ist linear und holomorph. Sie erfüllt
+\[
+f(\Z+i\Z)=e^{\pi i/4}(\Z+i\Z)=\Z+(i+1)\Z,
+\]
+da Multiplikation mit $e^{\pi i/4}$ das Gitter $\Z+i\Z$ in das Gitter $\Z+(i+1)\Z$ überführt. Somit induziert $f$ eine wohldefinierte Abbildung
+\[
+\tilde{f}:T_i\longrightarrow T_{i+1},\qquad \tilde{f}([z])=[f(z)].
+\]
+Da $f$ biholomorph ist und die Gitterabbildung respektiert, ist auch $\tilde{f}$ biholomorph.
+
+\textbf{Folgerung.}
+Insbesondere sind die in Beispiel~2.4 und Beispiel~2.8 konstruierten Tori mit Perioden $(1,i)$ und $(1,i+1)$ biholomorph isomorph.  
+Beide beschreiben somit dieselbe komplexe Struktur auf dem Torus.
+\end{EXA}
+
 
 
 Definition: Automorphismen-Gruppe von Riemannischen Flächen
@@ -536,9 +1331,55 @@ Definition: Automorphismen-Gruppe von Riemannischen Flächen
 Biholomorphe Selbstabbildungen einer Riemannschen Fläche $X$ (auch Biholomorphismen oder Automorphismen von $X$ genannt) bilden eine Gruppe, die wir mit $\operatorname{Aut}(X)$ bezeichnen. 
 
 
+
+
+\begin{DEF}{RS-M25-02-03}{Automorphismengruppe einer Riemannschen Fläche}
+Sei $X$ eine Riemannsche Fläche.  
+Eine \emph{biholomorphe Selbstabbildung} von $X$, d.\,h. eine bijektive Abbildung
+\[
+f:X\longrightarrow X
+\]
+mit $f$ und $f^{-1}$ holomorph, heißt \emph{Automorphismus} (oder \emph{Biholomorphismus}) von $X$.
+
+Die Menge aller solchen Abbildungen
+\[
+\operatorname{Aut}(X):=\{\,f:X\to X\mid f\text{ biholomorph}\,\}
+\]
+bildet bezüglich der Komposition eine Gruppe, die \emph{Automorphismengruppe} der Riemannschen Fläche $X$ genannt wird.
+\end{DEF}
+
+
+
 Beispiel: Elliptische Involution
 
 Im Beispiel der elliptischen Kurve am Ende von Abschnitt 2.1 ist $(x, y) \mapsto(x,-y)$ ein Automorphismus von $X$, der elliptische Involution genannt wird.
+
+
+
+\begin{EXA}{RS-M25-02-04}{Elliptische Involution}
+Betrachte die in Abschnitt~2.1 eingeführte elliptische Kurve
+\[
+X=\{(x,y)\in\C^2 \mid y^2=(x-x_1)(x-x_2)(x-x_3)\},
+\]
+wobei $x_1,x_2,x_3\in\C$ paarweise verschieden sind.  
+
+Die Abbildung
+\[
+\iota:X\longrightarrow X,\qquad (x,y)\longmapsto(x,-y),
+\]
+ist offensichtlich bijektiv, stetig und erfüllt
+\[
+(-y)^2 = y^2 = (x-x_1)(x-x_2)(x-x_3),
+\]
+also $\iota(X)=X$.  
+
+Da $\iota$ in lokalen Koordinaten durch $y\mapsto -y$ gegeben ist, ist sie holomorph und ihre Inverse ist $\iota$ selbst. Somit gilt $\iota\in\operatorname{Aut}(X)$.
+
+\textbf{Definition.}
+Diese Abbildung $\iota$ heißt \emph{elliptische Involution} der Kurve $X$.  
+Sie ist ein nichttrivialer Automorphismus der elliptischen Kurve und erfüllt $\iota^2=\mathrm{id}_X$.
+\end{EXA}
+
 
 Es ist eine Konsequenz aus der Definition oben, dass die Umkehrabbildung einer biholomorphen Abbildung ebenfalls wieder holomorph ist. Das wird am Ende des Abschnitts klar sein, wenn wir die lokale Struktur von holomorphen Abbildungen beschrieben haben. Wesentliches Hilfsmittel dazu ist, dass holomorphe Funktionen stets in Potenzreihen entwickelbar sind (siehe FTDGL, Satz 7.7]).
 
@@ -557,9 +1398,71 @@ und ist $b_{n}=0$ für $n=1, \ldots, k$, so ist auch $\widetilde{b}_{n}=0$ für 
 
 Nach dem Identitätssatz ist $e_{a}(f)<\infty$, falls $f$ nicht in einer Umgebung von $a$ konstant ist. Aus diesem Satz folgt auch, dass falls $f$ in einer Umgebung von $a$ konstant ist, so ist $f$ auf der ganzen Zusammenhangskomponente von $X$, welche $a$ enthält konstant. 
 
+
+
+\begin{DEF}{RS-M25-02-05}{Verzweigungsindex einer holomorphen Abbildung in Punkt}
+Seien $f:X\to Y$ eine holomorphe Abbildung zwischen Riemannschen Flächen und $a\in X$.  
+Wähle Karten $(U,g)$ um $a$ und $(V,h)$ um $f(a)$ mit $g(a)=0$ und $h(f(a))=0$.  
+In diesen lokalen Koordinaten hat $f$ die Darstellung
+\[
+(h\circ f\circ g^{-1})(z)=\sum_{n\ge1} b_n z^n.
+\]
+Der \emph{Verzweigungsindex} von $f$ in $a$ ist definiert durch
+\[
+e_a(f):=\min\{\,n\in\mathbb{N}\mid b_n\neq0\,\}.
+\]
+
+\textbf{Bemerkungen.}
+\begin{enumerate}
+\item Diese Definition ist wohldefiniert, d.\,h. unabhängig von der Wahl der Karten:
+Ist $(\widetilde{U},\widetilde{h})$ eine andere Karte um $f(a)$ mit $\widetilde{h}(f(a))=0$, so gilt
+\[
+\widetilde{h}\circ h^{-1}(z)=\sum_{n\ge1} c_n z^n,\quad c_1\neq0,
+\]
+und damit
+\[
+(\widetilde{h}\circ f\circ g^{-1})(z)
+=(\widetilde{h}\circ h^{-1})\bigl(h\circ f\circ g^{-1}(z)\bigr)
+=\sum_{n\ge1}\widetilde{b}_n z^n.
+\]
+Sind $b_1=\dots=b_k=0$, so gilt auch $\widetilde{b}_1=\dots=\widetilde{b}_k=0$, und umgekehrt.
+Dasselbe gilt bei einem Kartenwechsel auf $X$.
+
+\item Nach dem Identitätssatz der Funktionentheorie ist $e_a(f)<\infty$, falls $f$ nicht in einer Umgebung von $a$ konstant ist.  
+
+\item Ist $f$ in einer Umgebung von $a$ konstant, so ist $f$ auf der gesamten Zusammenhangskomponente von $X$, die $a$ enthält, konstant.
+\end{enumerate}
+\end{DEF}
+
+
+
+\begin{THEO}{RS-M25-02-06}{Identitätssatz der Funktionentheorie}
+Sei $D\subseteq\C$ ein Gebiet (d.\,h.\ eine offene und zusammenhängende Menge) und  
+$f,g:D\to\C$ zwei holomorphe Funktionen.  
+
+Falls die Menge
+\[
+M:=\{\,z\in D\mid f(z)=g(z)\,\}
+\]
+einen Häufungspunkt in $D$ besitzt, so gilt
+\[
+f\equiv g \quad\text{auf } D.
+\]
+
+\textbf{Spezialfall:}
+Ist $f:D\to\C$ holomorph und verschwindet auf einer Menge mit Häufungspunkt in $D$, so folgt $f\equiv0$ auf $D$.
+\end{THEO}
+
+
+
+
+
+
 Definition: Nicht verschwindende holomorphe Abbildungen
 
+\begin{DEF}{RS-M25-02-07}{Nicht verschwindende holomorphe Abbildungen}
 Eine holomorphe Abbildung $f: X \longrightarrow Y$ heißt nirgends konstant, falls $e_{a}(f)<\infty$ für alle $a \in X$ ist.
+\end{DEF}
 
 
 
@@ -569,10 +1472,17 @@ Wir benutzen Begriff der Ordnung, um eine Normalform für holomorphe Abbildungen
 
 Proposition 2.11 
 
+\begin{PROP}{RS-M25-02-08}{Normalform von holomorphen Abbildungen}
 Sei $f: X \rightarrow Y$ holomorph und $a \in X$ mit $n=e_{a}(f)<\infty$. Dann gibt es Karten $(U, g)$ von $X$ und $(V, h)$ von $Y$, so dass $h \circ f \circ g^{-1}=z^{n}$ ist.
+\end{PROP}
+
+>> $f$ nicht konstant
+
 
 Beweis: 
 
+
+\begin{PROOF}{RS-M25-02-09}{P: Normalform von holomorphen Abbildungen}
 Wähle zunächst $\operatorname{Karten}(\widetilde{U}, \widetilde{g})$ und $(V, h)$ mit $\widetilde{g}(a)=0, h(f(a))=0$ und $f(\widetilde{U}) \subset V$ ). Wir wollen aus der Potenzreihe
 $$
 \left(h \circ f \circ \widetilde{g}^{-1}\right)(z)=\sum_{j \geq n} b_{j} z^{j}
@@ -585,48 +1495,155 @@ dass $c_{0}$ eine $n$-te Wurzel von $b_{n}$ sein muss und dass sich die folgende
 $$
 h \circ f \circ g^{-1}(z)=\left(h \circ f \circ \widetilde{g}^{-1} \circ \varphi^{-1}\right)(z)=\left(\varphi^{-1}(z) \sum_{j \geq 0} c_{j}\left(\varphi^{-1}(z)\right)^{j}\right)^{n}=z^{n}
 $$
-folgt die Behauptung. 
+folgt die Behauptung.
 
 Es verbleibt noch zu zeigen, dass diese $n$-te Wurzel nicht nur eine formale Potenzreihe sondern in der Tat eine holomorphe Funktion auf einer Umgebung von Null ist (Übung).
+\end{PROOF}
+
+>> Koeffizienten Vergleich für $c_j$ für $u(z)=1+\sum_{j\geq 1}b_jz^j=(\sum_{j\geq 0}c_jz^j)^n$
+
+>> $v(z)=c_j$-Potenzreihe hat positiven Konvergenzradius um $0$: $v(z)=\exp(1/n\log(u(z)))$
 
 
-Korollar 2.12 (Offenheitssatz) Eine nirgends konstante, holomorphe Abbildung ist offen.
 
-Beweis: Für alle $n \in \mathbb{N}$ ist das Bild der offenen Kreisscheibe $\triangle_{r}$ unter $z \longmapsto z^{n}$ eine offene Kreisscheibe mit Radius $r^{n}$.
+
+Korollar 2.12 (Offenheitssatz) 
+
+\begin{KORO}{RS-M25-02-10}{Offenheitssatz}
+Eine nirgends konstante, holomorphe Abbildung ist offen.
+\end{KORO}
+
+Beweis: 
+
+\begin{PROOF}{RS-M25-02-11}{P: Offenheitssatz}
+Für alle $n \in \mathbb{N}$ ist das Bild der offenen Kreisscheibe $\triangle_{r}$ unter $z \longmapsto z^{n}$ eine offene Kreisscheibe mit Radius $r^{n}$.
+\end{PROOF}
 
 Eine abgeschlossene Menge $A \subseteq X$ heißt analytisch, wenn jeder Punkt in $A$ eine Umgebung $U$ besitzt, sodass $U \cap A$ Nullstellenmenge einer holomorphen Abbildung $U \longrightarrow \mathbb{C}$ ist.\\
 Eine Menge $M \subset X$ heißt lokal endlich, wenn für alle kompakten Mengen $K \subset X$ der Schnitt $K \cap M$ endlich ist. Wir verwenden oft, dass in einer lokal endlichen Menge $M$ jeder Punkt $m \in M$ eine offene Umgebung $U$ besitzt, sodass $U \cap M=\{m\}$ ist.
 
-Satz 2.13 Sei $X$ zusammenhängend und $A$ analytisch. Dann ist $A=X$ oder $A$ ist lokal endlich in $X$.
 
-Lemma 2.14 Sei $U \subseteq \mathbb{C}$ ein Gebiet und $f: U \longrightarrow \mathbb{C}$ holomorph und $a \in U$ ein Häufungspunkt der Nullstellenmenge von $f$. Dann gibt es eine Umgebung von a, auf der $f$ identisch verschwindet.
 
-Beweis: Wir leiten die Aussage aus dem bekannten Satz, dass holomorphe Funktionen lokal in Potenzreihen entwickelbar sind, her. Sei also
+\begin{DEF}{RS-M25-02-12}{Analytische und lokal endliche Mengen}
+Sei $X$ eine Riemannsche Fläche.
+\begin{enumerate}[label=(\alph*)]
+\item Eine abgeschlossene Teilmenge $A\subseteq X$ heißt \emph{analytisch},  
+wenn zu jedem Punkt $p\in A$ eine Umgebung $U\subseteq X$ existiert,  
+so dass
+\[
+U\cap A = \{\, z\in U \mid f(z)=0 \,\}
+\]
+für eine holomorphe Funktion $f:U\to\C$ gilt.  
+Mit anderen Worten: lokal ist $A$ die Nullstellenmenge einer holomorphen Funktion.
 
+\item Eine Teilmenge $M\subseteq X$ heißt \emph{lokal endlich},  
+wenn für jede kompakte Teilmenge $K\subseteq X$ der Schnitt $K\cap M$ endlich ist.
+
+\item Für lokal endliche Mengen gilt insbesondere:  
+Zu jedem Punkt $m\in M$ existiert eine offene Umgebung $U\subseteq X$,  
+so dass
+\[
+U\cap M=\{m\}.
+\]
+\end{enumerate}
+\end{DEF}
+
+
+
+Satz 2.13 
+
+Sei $X$ zusammenhängend und $A$ analytisch. Dann ist $A=X$ oder $A$ ist lokal endlich in $X$.
+
+
+\begin{PROP}{RS-M25-02-15}{Struktur analytischer Mengen auf Riemannschen Flächen}
+Sei $X$ eine zusammenhängende Riemannsche Fläche und $A\subseteq X$ eine analytische Menge.  
+Dann gilt:
+\[
+A = X \quad \text{oder} \quad A \text{ ist lokal endlich in } X.
+\]
+\end{PROP}
+
+Beweis des Satzes 2.13. 
+
+\begin{PROOF}{RS-M25-02-16}{P: Struktur analytischer Mengen auf Riemannschen Flächen}
+Sei $M$ die Menge der Häufungspunkte von $A$. Diese ist abgeschlossen und $M \subset A$. Anwenden des Lemmas auf einen Punkt $a \in M$ ergibt, dass es eine offene Umgebung von $a$ gibt, die ganz in $M$ liegt. Also ist $M$ offen. Folglich ist $M=X$ oder $M=\emptyset$. Damit hat jeder Punkt in $a \in A$ eine offene Umgebung $U_{A}$ mit $A \cap U_{A}=\{a\}$ und damit ist $A$ lokal endlich.
+\end{PROOF}
+
+
+Lemma 2.14 
+
+\begin{LEM}{RS-M25-02-13}{Lokales Verschwinden um Häufungspunkte der Nullstellenmenge}
+Sei $U \subseteq \mathbb{C}$ ein Gebiet und $f: U \longrightarrow \mathbb{C}$ holomorph und $a \in U$ ein Häufungspunkt der Nullstellenmenge von $f$. Dann gibt es eine Umgebung von a, auf der $f$ identisch verschwindet.
+\end{LEM}
+
+Beweis: 
+
+\begin{PROOF}{RS-M25-02-14}{P: Lokales Verschwinden um Häufungspunkte der Nullstellenmenge}
+Wir leiten die Aussage aus dem bekannten Satz, dass holomorphe Funktionen lokal in Potenzreihen entwickelbar sind, her. Sei also
 $$
 f(z)=\sum_{n \geq 0} b_{n}(z-a)^{n}
 $$
-
 Wegen der Stetigkeit ist $f(a)=b_{0}=0$. Der Punkt $a \in U$ ist auch Häufungspunkt der Nullstellenmenge von
-
 $$
 \frac{f(z)}{z-a}=\sum_{n \geq 1} b_{n}(z-a)^{n-1}
 $$
+Folglich ist $b_{1}=0$ und induktiv folgt, dass alle $b_{n}$ verschwinden.
+\end{PROOF}
 
-Folglich ist $b_{1}=0$ und induktiv folgt, dass alle $b_{n}$ verschwinden.\\
-Beweis des Satzes 2.13. Sei $M$ die Menge der Häufungspunkte von $A$. Diese ist abgeschlossen und $M \subset A$. Anwenden des Lemmas auf einen Punkt $a \in M$ ergibt, dass es eine offene Umgebung von $a$ gibt, die ganz in $M$ liegt. Also ist $M$ offen. Folglich ist $M=X$ oder $M=\emptyset$. Damit hat jeder Punkt in $a \in A$ eine offene Umgebung $U_{A}$ mit $A \cap U_{A}=\{a\}$ und damit ist $A$ lokal endlich.
 
-Korollar 2.15 Seien $f_{1}, f_{2}: X \longrightarrow Y$ zwei holomorphe Abbildungen und $X$ zusammenhängend. Wenn $A=\left\{a \in X: f_{1}(a)=f_{2}(a)\right\}$ einen Häufungspunkt besitzt, so ist $f_{1}=f_{2}$. Insbesondere ist jede nicht-konstante holomorphe Abbildung offen.
+Korollar 2.15 
+
+Seien $f_{1}, f_{2}: X \longrightarrow Y$ zwei holomorphe Abbildungen und $X$ zusammenhängend. Wenn $A=\left\{a \in X: f_{1}(a)=f_{2}(a)\right\}$ einen Häufungspunkt besitzt, so ist $f_{1}=f_{2}$. Insbesondere ist jede nicht-konstante holomorphe Abbildung offen.
 
 Beweis: Die Menge $A$ ist abgeschlossen und analytisch, die Behauptungen folgen unmittelbar aus dem Satz.
 
+
+
+\begin{THEO}{RS-M25-02-17}{Identitätssatz und Offenheit holomorpher Abbildungen (Riemannsche Flächen)}
+Seien $X,Y$ Riemannsche Flächen, $X$ zusammenhängend, und $f_1,f_2:X\to Y$ holomorph. Setze
+\[
+A:=\{\,a\in X \mid f_1(a)=f_2(a)\,\}.
+\]
+\begin{enumerate}
+\item[(i)] Besitzt $A$ einen Häufungspunkt in $X$, so gilt $f_1\equiv f_2$ auf $X$.
+\item[(ii)] Insbesondere ist jede nichtkonstante holomorphe Abbildung $f:X\to Y$ eine offene Abbildung.
+\end{enumerate}
+\end{THEO}
+
+\begin{PROOF}{RS-M25-02-18}{P: Identitätssatz und Offenheit holomorpher Abbildungen (Riemannsche Flächen)}
+\emph{Zu (i).} Für $p\in X$ wähle Karten $(U,g)$ bei $p$ und $(V,h)$ bei $f_1(p)=f_2(p)$ mit $g(p)=0$ und $h(f_i(p))=0$. Dann ist
+\[
+F:=h\circ f_1\circ g^{-1}-h\circ f_2\circ g^{-1}
+\]
+eine holomorphe Funktion auf $g(U)\subset\C$, und es gilt
+\[
+A\cap U \;=\;\{x\in U \mid F(g(x))=0\}.
+\]
+Also ist $A$ lokal die Nullstellenmenge einer holomorphen Funktion, somit analytisch und (da Gleichheitsmenge stetiger Abbildungen) abgeschlossen.  
+Besitzt $A$ einen Häufungspunkt, so ist $A$ nach Proposition~2.16 gleich $X$ (denn eine analytische, abgeschlossene Teilmenge mit Häufungspunkt kann auf einer zusammenhängenden Riemannschen Fläche nicht lokal endlich sein, ohne ganz $X$ zu sein). Folglich $f_1=f_2$.
+
+\smallskip
+\emph{Zu (ii) (Offenheit).} Sei $f:X\to Y$ holomorph und nicht konstant. Für $p\in X$ wähle Karten $(U,g)$ bei $p$ und $(V,h)$ bei $f(p)$, $g(p)=0$, $h(f(p))=0$. Dann ist $F:=h\circ f\circ g^{-1}$ eine nichtkonstante holomorphe Funktion in einer Umgebung von $0\in\C$. Nach dem klassischen Offenheitssatz (bzw. dem lokalen Weierstraßschen Vorbereitungssatz/der lokalen Normalform $F(z)=z^m\cdot u(z)$ mit $u(0)\neq 0$) ist $F$ in $0$ offen. Also bildet $f$ $U$ offen auf $V$ ab. Da $p$ beliebig war, ist $f$ offen.
+\end{PROOF}
+
+
+
+
+
+\pagebreak
+
+
 \section {3 Überlagerungen und Fundamentalgruppen}
+
+
 Das erste Beispiel einer Überlagerung steckt implizit in der Einleitung. Ist $X$ die Riemannsche Fläche des Logarithmus, so definiert die Abbildung, die jeder Karte (bestehend aus einer geschlitzten Ebene) in die Ebene abbildet, eine wohldefinierte surjektive Abbildung $X \rightarrow \mathbb{C}^{*}$. Abbildungen, die so aussehen, werden wir als unverzweigte Überlagerungen bezeichnen. Der allgemeine Begriff der Überlagerung lässt lokal noch etwas mehr Flexibilität zu.
 
 Fundamentalgruppen beschreiben, welche unverzweigten Überlagerungen eine Riemannsche Fläche zulässt. Sie sind die erste Invariante, die uns erlaubt, Riemannsche Flächen zu unterscheiden. Allerdings ist diese Invariante rein topologischer Natur und daher recht grob.
 
 \section {1 Überlagerungen}
-Seien $X$ und $Y$ Riemannsche Flächen. Wir setzen in diesem Abschnitt generall $X$ und $Y$ als nichtleer und zusammenhängend voraus. In Proposition 2.11haben wir jede nicht-konstante holomorphe Abbildung $f: X \rightarrow Y$ lokal in $X$ in geeigneten Karten als $z \mapsto z^{n}$ beschrieben. Der im folgenden definierte Begriff der Überlagerung beschreibt holomorphe Abbildungen lokal aus der Sichtweise von $Y$. In manchen Quellen wird dieser verzweigte Überlagerung genannt. Der Begriff der Überlagerung aus der Topologie korrespondiert zu dem unten definierten Begriff einer unverzweigten Überlagerung.
+Seien $X$ und $Y$ Riemannsche Flächen. Wir setzen in diesem Abschnitt generall $X$ und $Y$ als nichtleer und zusammenhängend voraus. In Proposition 2.11 haben wir jede nicht-konstante holomorphe Abbildung $f: X \rightarrow Y$ lokal in $X$ in geeigneten Karten als $z \mapsto z^{n}$ beschrieben. 
+
+Der im folgenden definierte Begriff der Überlagerung beschreibt holomorphe Abbildungen lokal aus der Sichtweise von $Y$. In manchen Quellen wird dieser verzweigte Überlagerung genannt. Der Begriff der Überlagerung aus der Topologie korrespondiert zu dem unten definierten Begriff einer unverzweigten Überlagerung.
 
 \begin{figure}[h]
 \begin{center}
@@ -636,7 +1653,8 @@ Seien $X$ und $Y$ Riemannsche Flächen. Wir setzen in diesem Abschnitt generall 
 \end{center}
 \end{figure}
 
-\section {Definition 3.1 (Eigentliche und endliche Abbildungen, Überlagerungen)}
+Definition 3.1 (Eigentliche und endliche Abbildungen, Überlagerungen)
+
 i) Eine holomorphe Abbildung $f: X \rightarrow Y$ heißt eigentlich, falls das Urbild jedes Kompaktums in $Y$ kompakt in $X$ ist.\\
 ii) Eine holomorphe Abbildung $f$ heißt endlich, falls $f$ eigentlich ist und für jeden Punkt $y \in Y$ die Faser $f^{-1}(y)$ endlich ist.\\
 iii) Eine holomorphe Abbildung $f$ heißt Überlagerung, wenn für alle $y \in Y$ ein $r=r(y)$ sowie Kartenumgebungen $\left(V, h: V \rightarrow \Delta_{r}\right)$ von $y$ und Kartenumgebungen ( $U_{i}, g_{i}$ ) von allen Punkten $x_{i} \in f^{-1}(y)$ existieren, sodass $h(y)=0$ und $g_{i}\left(x_{i}\right)=0$ ist, sodass $f\left(U_{i}\right)=V$ gilt und $f^{-1}(V)=\bigcup_{i \in I} U_{i}$ die disjunkte Vereinigung der $U_{i}$ ist, und $f$ in den Karten die Darstellung
@@ -645,10 +1663,50 @@ $$
 h \circ f \circ g_{i}^{-1}: \Delta_{r^{1 / n_{i}}} \rightarrow \Delta_{r}, \quad z \mapsto z^{n_{i}}
 $$
 
-mit einem $n_{i} \in \mathbb{N}$ hat.\\
+mit einem $n_{i} \in \mathbb{N}$ hat.
+
 Die Mengen $U_{i}$ und $V$ aus der Definition einer Überlagerung werden Standardkarten genannt.
 
 In der Definition einer Überlagerung darf $n_{i}$ von $i$ und $y$ abhängen und $I$ ist dabei nicht notwendig endlich.
+
+
+\begin{DEF}{COMPL-03-01}{Eigentliche, endliche und Überlagerungsabbildungen}
+Seien $X$ und $Y$ Riemannsche Flächen und $f:X\to Y$ eine holomorphe Abbildung.
+\begin{enumerate}\itemsep0.3em
+
+\item \textbf{Eigentliche Abbildungen.}  
+$f$ heißt \emph{eigentlich}, falls für jedes kompakte $K\subset Y$ das Urbild $f^{-1}(K)$ kompakt in $X$ ist.
+
+\item \textbf{Endliche Abbildungen.}  
+$f$ heißt \emph{endlich}, falls $f$ eigentlich ist und zusätzlich jede Faser
+\[
+f^{-1}(y)=\{x\in X:\ f(x)=y\}
+\]
+für alle $y\in Y$ endlich ist.
+
+\item \textbf{Überlagerungen.}  
+$f$ heißt \emph{Überlagerung}, wenn für jedes $y\in Y$ ein Radius $r=r(y)>0$ und lokale Kartenumgebungen
+\[
+(V,h:V\to\Delta_r)\quad\text{um }y,\qquad (U_i,g_i)\text{ um }x_i\in f^{-1}(y)
+\]
+existieren, so dass gilt:
+\begin{itemize}
+  \item $h(y)=0$ und $g_i(x_i)=0$ für alle $i$;
+  \item $f(U_i)=V$ und $f^{-1}(V)=\bigsqcup_{i\in I}U_i$ ist die disjunkte Vereinigung der $U_i$;
+  \item In diesen Karten gilt die Normalform
+  \[
+  h\circ f\circ g_i^{-1}:\ \Delta_{r^{1/n_i}}\to \Delta_r,\qquad z\mapsto z^{n_i},
+  \]
+  wobei $n_i\in\mathbb{N}$ von $i$ und $y$ abhängen darf.
+\end{itemize}
+
+\end{enumerate}
+Die Mengen $U_i$ und $V$ heißen \emph{Standardkarten} der Überlagerung.
+\end{DEF}
+
+
+>> Beispiel für nicht eigentlich Abbildung: $L$-Fläche aus ÜB1 auf punktierten Torus
+
 
 Die Nützlichkeit des Begriffs "eigentlich" zeigt sich an folgender Beobachtung. Ist $f: X \rightarrow Y$ eine holomorphe Abbildung und $X$ kompakt, so ist $f$ insbesondere eigentlich. Aber auch die Einschränkung einer solchen Abbildung $f: X \backslash f^{-1}(A) \rightarrow Y \backslash A$ für eine abgeschlossene Teilmenge $A \subset Y$ ist noch immer eigentlich, obwohl der Definitionsbereich nun nicht mehr kompakt ist.
 

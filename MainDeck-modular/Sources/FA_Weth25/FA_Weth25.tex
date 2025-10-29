@@ -277,44 +277,86 @@ iv). Wie behandelt man eine mehrdimensionale Version des Problems (Eingespannte 
 
 Wir werden auf Probleme der Form (1) in systematischer Weise zurückkommen. Zuvor müssen wir aber grundlegende Eigenschaften von unendlich-dimensionalen normierten Räumen und stetigen linearen Abbildungen verstehen.
 
+
+
+\pagebreak
+
+
 \section*{§ 1 Normierte Räume und Prähilberträume}
 Bezeichnungen: Stets sei $\mathbb{K}=\mathbb{R}$ oder $\mathbb{K}=\mathbb{C}$ und $E$ ein $\mathbb{K}$-Vektorraum.
 
-\subsection*{Definition}
-i) Eine Abbildung $\|\cdot\|: E \rightarrow \mathbb{R}$ heißt Halbnorm auf $E$, falls für alle $x, y \in E$ und $\lambda \in \mathbb{K}$ gilt:
 
+\subsection*{Definition}
+i) Eine Abbildung $\|\cdot\|: E \rightarrow \mathbb{R}$ heißt Halbnorm auf einem $\mathbb{K}$-Vektorraum $E$, falls für alle $x, y \in E$ und $\lambda \in \mathbb{K}$ gilt:
 $$
 \begin{array}{ll}
 (N 1) & \|\lambda x\|=|\lambda|\|x\| \quad \text { (Homogenität) } \\
 (N 2) & \|x+y\| \leq\|x\|+\|y\| \quad \text { (Dreiecksungleichung) }
 \end{array}
 $$
-
 Es folgt dann: $\left\|0_{E}\right\|=\left\|0_{\mathbb{K}} \cdot 0_{E}\right\| \stackrel{(N 1)}{=}\left|0_{\mathbb{K}}\right|\left\|0_{E}\right\|=0$ und damit $0=\|x+(-x)\| \stackrel{(N 2)}{\leq} \|x\|+\|-x\| \stackrel{(N 1)}{=} 2\|x\|$, also
-
 $$
 (N 3) \quad\|x\| \geq 0 \text { für alle } x \in E \text {. }
 $$
 
 ii) Eine Halbnorm $\|\cdot\|$ auf $E$ heißt Norm, falls zusätzlich für alle $x \in E$ gilt:
-
 $$
 \text { (N4) } \quad\|x\|=0 \Rightarrow x=0 \text { (Definitheit) }
 $$
-
 In diesem Fall heißt das Paar $(E,\|\cdot\|)$ normierter Raum.
 
-\subsection*{Definition}
-Zwei Halbnormen $\|\cdot\|_{1},\|\cdot\|_{2}$ auf $E$ heißen äquivalent, falls $a, b>0$ existieren mit
 
+
+\begin{DEF}{FA-W25-01-01}{Halbnorm, Norm und normierter Raum}
+Sei $E$ ein $\mathbb{K}$-Vektorraum, wobei $\mathbb{K}\in\{\mathbb{R},\mathbb{C}\}$.
+
+\begin{enumerate}
+\item[(i)] Eine Abbildung 
+\[
+\|\cdot\|:E\longrightarrow\mathbb{R}
+\]
+heißt \textbf{Halbnorm} auf $E$, falls für alle $x,y\in E$ und $\lambda\in\mathbb{K}$ gilt:
+\[
+\begin{array}{ll}
+\text{(N1)} & \|\lambda x\|=|\lambda|\,\|x\| \quad\text{(Homogenität)}\\[0.4em]
+\text{(N2)} & \|x+y\|\le\|x\|+\|y\| \quad\text{(Dreiecksungleichung)}.
+\end{array}
+\]
+Aus diesen Axiomen folgt unmittelbar:
+\[
+\|0_E\|=0
+\quad\text{und damit}\quad
+\|x\|\ge0\ \text{für alle }x\in E.
+\tag{N3}
+\]
+
+\item[(ii)] Eine Halbnorm $\|\cdot\|$ auf $E$ heißt \textbf{Norm}, wenn zusätzlich gilt:
+\[
+\text{(N4)} \quad
+\|x\|=0\ \Longrightarrow\ x=0.
+\quad\text{(Definitheit)}
+\]
+\item[(iii)] Das Paar $(E,\|\cdot\|)$ heißt \textbf{normierter Raum}.
+\end{enumerate}
+\end{DEF}
+
+
+
+\subsection*{Definition}
+
+\begin{DEF}{FA-W25-01-02}{Äquivalenzrelation zwischen Halbnormen}
+Zwei Halbnormen $\|\cdot\|_{1},\|\cdot\|_{2}$ auf $E$ heißen äquivalent, falls $a, b>0$ existieren mit
 $$
 a\|x\|_{1} \leq\|x\|_{2} \leq b\|x\|_{1} \text { für alle } x \in E \text {. }
 $$
+Wir schreiben dann: $\|\cdot\|_{1} \sim\|\cdot\|_{2}$.
 
-Wir schreiben dann: $\|\cdot\|_{1} \sim\|\cdot\|_{2}$.\\
 Bemerkung: „\~{}" definiert Äquivalenzrelationen auf der Menge der Halbnormen und auf der Menge der Normen auf $E$.
+\end{DEF}
 
 \subsection*{Bemerkung und Beispiel}
+
+
 i) $\operatorname{dim} E<\infty \Rightarrow$ Alle Normen auf $E$ sind äquivalent (bekannt aus dem Grundstudium).\\
 ii) $E=\mathbb{K}^{N}$. Für $x \in \mathbb{K}^{N}$ und $p \in[1, \infty]$ sei
 
@@ -331,6 +373,88 @@ Der Beweis der Normeigenschaften ist sehr einfach.\\
 Ist $M=\mathbb{N}$, so notiert man die Funktionswerte von $u \in \ell^{\infty}(\mathbb{N}, \mathbb{K})$ als Folge, d. h. man schreibt $u=\left(u_{k}\right)_{k}$ mit $u_{k}=u(k)$. Dann ist $\|u\|_{\infty}=\sup _{k \in \mathbb{N}}\left|u_{k}\right|$.
 
 Kurzschreibweisen: $\ell^{\infty}(M)$ statt $\ell^{\infty}(M, \mathbb{K})$, $\ell^{\infty}$ statt $\ell^{\infty}(\mathbb{N})=\ell^{\infty}(\mathbb{N}, \mathbb{K})$.
+
+
+
+
+
+
+\begin{EXA}{FA-W25-01-03}{Äquivalenz von Normen in endlichdimensionalen Räumen}
+Ist $E$ ein endlichdimensionaler $\mathbb{K}$-Vektorraum, d.\,h.\ $\dim E<\infty$, so sind alle Normen auf $E$ \emph{äquivalent}.  
+Das heißt: Für zwei beliebige Normen $\|\cdot\|_1$, $\|\cdot\|_2$ auf $E$ existieren Konstanten $c,C>0$ mit
+\[
+c\,\|x\|_1 \le \|x\|_2 \le C\,\|x\|_1
+\quad\text{für alle }x\in E.
+\]
+Insbesondere induzieren alle Normen auf $E$ dieselbe Topologie.
+\end{EXA}
+
+
+\begin{EXA}{FA-W25-01-04}{$p$-Normen auf $\mathbb{K}^N$}
+Für $E=\mathbb{K}^N$ und $p\in[1,\infty]$ sei für $x=(x_1,\dots,x_N)\in\mathbb{K}^N$ definiert:
+\[
+|x|_p :=
+\begin{cases}
+\displaystyle \Bigl(\sum_{i=1}^N |x_i|^p\Bigr)^{1/p}, & p<\infty,\\[1em]
+\displaystyle \max_{1\le i\le N} |x_i|, & p=\infty.
+\end{cases}
+\]
+Dann ist $|\cdot|_p$ eine Norm auf $\mathbb{K}^N$.
+
+\smallskip
+Dabei gilt die \textbf{Hölder’sche Ungleichung:}
+\[
+\sum_{i=1}^N |x_i y_i|
+\;\le\;
+|x|_p\,|y|_{p'},
+\quad
+x,y\in\mathbb{K}^N,
+\]
+wobei $p'$ der zu $p$ \emph{konjugierte Exponent} ist, definiert durch
+\[
+p' :=
+\begin{cases}
+\frac{p}{p-1}, & 1<p<\infty,\\
+\infty, & p=1,\\
+1, & p=\infty,
+\end{cases}
+\qquad\text{so daß}\qquad
+\frac{1}{p}+\frac{1}{p'}=1.
+\]
+\end{EXA}
+
+
+\begin{EXA}{FA-W25-01-05}{$\ell^\infty(M,\mathbb{K})$ mit Supremumsnorm}
+Sei $M$ eine beliebige Menge.  
+Dann ist
+\[
+\ell^{\infty}(M,\mathbb{K})
+:=\bigl\{u:M\to\mathbb{K}\mid u\text{ ist beschränkt}\bigr\}
+\]
+ein $\mathbb{K}$-Vektorraum (mit punktweiser Addition und Skalarmultiplikation).
+
+Auf $\ell^{\infty}(M,\mathbb{K})$ definieren wir die \textbf{Supremumsnorm}
+\[
+\|u\|_{\infty} := \sup_{z\in M}|u(z)|.
+\]
+Dann ist $(\ell^{\infty}(M,\mathbb{K}),\|\cdot\|_\infty)$ ein normierter Raum.
+
+\smallskip
+Für $M=\mathbb{N}$ schreiben wir $u=(u_k)_{k\in\mathbb{N}}$ mit $u_k=u(k)$ und
+\[
+\|u\|_{\infty} = \sup_{k\in\mathbb{N}}|u_k|.
+\]
+Kurzschreibweise:
+\[
+\ell^{\infty}(M):=\ell^{\infty}(M,\mathbb{K}),
+\qquad
+\ell^{\infty}:=\ell^{\infty}(\mathbb{N}).
+\]
+\end{EXA}
+
+
+
+
 
 Wir wollen im Folgenden weitere unendlich-dimensionale normierte Räume durch ein allgemeines Prinzip konstruieren. Dieses Prinzip liefert auch einen (alternativen) Beweis der Halbnormeigenschaften von $|\cdot|_{p}$ aus $1.3($ ii $)$.
 
@@ -349,6 +473,49 @@ $$
 heißt konvex, wenn $f((1-\lambda) x+\lambda y) \leq(1-\lambda) f(x)+\lambda f(y)$ für alle $x, y \in A$, $\lambda \in[0,1]$ gilt.\\
 Ist $A$ absolut konvex, so heißt $f$ absolut konvex, wenn $f$ konvex und gerade ist. Dabei heißt $f$ gerade, wenn $f(\theta x)=f(x)$ für alle $x \in A$ und $\theta \in \mathbb{K}$ mit $|\theta|=1$ gilt.
 
+
+\begin{DEF}{FA-W25-01-06}{Konvexität, Symmetrie und absolute Konvexität}
+Sei $E$ ein $\mathbb{K}$-Vektorraum, wobei $\mathbb{K}\in\{\mathbb{R},\mathbb{C}\}$.
+
+\begin{enumerate}
+\item[(a)] Eine Teilmenge $A\subset E$ heißt
+\begin{enumerate}
+\item[(i)] \textbf{konvex}, falls für alle $x,y\in A$ und alle $\lambda\in[0,1]$ gilt:
+\[
+(1-\lambda)x+\lambda y \in A.
+\]
+
+\item[(ii)] \textbf{symmetrisch}, falls für alle $\theta\in\mathbb{K}$ mit $|\theta|=1$ gilt:
+\[
+x\in A \ \Longrightarrow\ \theta x\in A.
+\]
+
+\item[(iii)] \textbf{absolut konvex}, falls $A$ sowohl konvex als auch symmetrisch ist.
+
+\item[(iv)] \textbf{absorbierend}, falls für jedes $x\in E$ ein $s>0$ existiert mit
+\[
+s x \in A.
+\]
+\end{enumerate}
+
+\item[(b)] Sei $A\subset E$ konvex und
+\[
+f:A\longrightarrow\mathbb{R}\cup\{\infty\}.
+\]
+Dann heißt $f$ \textbf{konvex}, wenn für alle $x,y\in A$ und $\lambda\in[0,1]$ gilt:
+\[
+f\bigl((1-\lambda)x+\lambda y\bigr)\le (1-\lambda)f(x)+\lambda f(y).
+\]
+
+Ist $A$ \emph{absolut konvex}, so heißt $f$ \textbf{absolut konvex}, wenn $f$ konvex und zusätzlich \textbf{gerade} ist, d.\,h.
+\[
+f(\theta x)=f(x)\quad\text{für alle }x\in A\text{ und }\theta\in\mathbb{K}\text{ mit }|\theta|=1.
+\]
+\end{enumerate}
+\end{DEF}
+
+
+
 \subsection*{Bemerkung und Beispiel}
 i). Ist $\|\cdot\|$ eine Halbnorm auf $E$ und $r>0$, so sind die Mengen $U_{r}(0):=\{x \in E$ : $\|x\|<r\}$ und $B_{r}(0):=\{x \in E:\|x\| \leq r\}$ absolut konvex und absorbierend.\\
 ii). $A \subset E$ ist absolut konvex genau dann, wenn $\lambda x+\mu y \in A$ für alle $x, y \in A$, $\lambda, \mu \in \mathbb{K}$ mit $|\lambda|+|\mu| \leq 1$ gilt.\\
@@ -358,80 +525,168 @@ v). Sei $I \subset \mathbb{R}$ ein Intervall. Dann ist $f \in C^{1}(I)$ genau da
 
 Die Beweise von i)-v) sind allesamt recht einfach.
 
-\subsection*{Satz}
-Sei $A \subset E$ absolut konvex und absorbierend. Dann wird durch
 
+
+Grundfakten zu (absolut) konvexen Mengen und konvexen Funktionen
+
+\begin{PROP}{FA-W25-01-07}{Elementare Eigenschaften zu (absolut) konvexen Mengen und konvexen Funktionen}
+Sei $E$ ein Vektorraum über $\mathbb{K}\in\{\mathbb{R},\mathbb{C}\}$.
+\begin{enumerate}
+\item Ist $\|\cdot\|$ eine Halbnorm auf $E$ und $r>0$, so sind
+\[
+U_{r}(0):=\{x\in E:\|x\|<r\}
+\quad\text{und}\quad
+B_{r}(0):=\{x\in E:\|x\|\le r\}
+\]
+absolut konvex und absorbierend.
+\item Eine Menge $A\subset E$ ist genau dann absolut konvex, wenn
+\[
+\lambda x+\mu y\in A \quad\text{für alle }x,y\in A,\ \lambda,\mu\in\mathbb{K}\text{ mit }|\lambda|+|\mu|\le 1.
+\]
+\item Ist $A\subset E$ konvex, so gilt
+\[
+\sum_{i=1}^{n}\lambda_i x_i\in A
+\quad\text{für alle }n\in\mathbb{N},\ x_i\in A,\ \lambda_i\ge 0,\ \sum_{i=1}^{n}\lambda_i=1.
+\]
+\item Ist $A\subset E$ absolut konvex, so gilt
+\[
+\sum_{i=1}^{n}\lambda_i x_i\in A
+\quad\text{für alle }n,\ x_i\in A,\ \lambda_i\in\mathbb{K},\ \sum_{i=1}^{n}|\lambda_i|\le 1.
+\]
+\item Sei $I\subset\mathbb{R}$ ein Intervall und $f\in C^{1}(I)$. 
+Dann ist $f$ konvex genau dann, wenn $f'$ monoton wachsend ist.
+\end{enumerate}
+\end{PROP}
+
+
+
+\begin{PROOF}{FA-W25-01-08}{P: Elementare Eigenschaften zu (absolut) konvexen Mengen und konvexen Funktionen}
+\textbf{(i)} (Absolut konvex) Sei $x,y$ in $U_r(0)$ (bzw.\ $B_r(0)$) und $|\lambda|+|\mu|\le 1$.
+Dann
+\[
+\|\lambda x+\mu y\|\le |\lambda|\,\|x\|+|\mu|\,\|y\| < (|\lambda|+|\mu|)\,r \le r
+\]
+(bzw.\ $\le r$), also $\lambda x+\mu y\in U_r(0)$ (bzw.\ $B_r(0)$). Damit ist die Menge absolut konvex.
+(Absorbierend) Für beliebiges $x\in E$ und $r>0$ wähle $t:=\max\{1,\|x\|/r\}>0$. Dann
+$\|x\| \le rt$ und somit $x\in t B_r(0)$; ebenso mit strikt $<$ für $U_r(0)$.
+\medskip
+
+\textbf{(ii)} „$\Rightarrow$“: Ist $A$ absolut konvex (konvex und balanciert), so ist für $|\lambda|,|\mu|\le 1$
+die Kombination $\lambda x+\mu y\in A$ eine Folge von Balanciertheit (Skalierung) und Konvexität:
+$\lambda x,\,\mu y\in A$ und für $t:=\frac{|\lambda|}{|\lambda|+|\mu|}$ gilt
+$\lambda x+\mu y=(|\lambda|+|\mu|)\big(t\,\operatorname{sgn}(\lambda)x+(1-t)\,\operatorname{sgn}(\mu)y\big)\in A$.
+„$\Leftarrow$“: Setze in der Bedingung $(\lambda,\mu)=(t,1-t)$ mit $t\in[0,1]$; dann ist $A$ konvex.
+Setze ferner $y=0$ und $\mu=0$, $|\lambda|\le 1$; dann folgt balanciert: $\lambda x\in A$ für $x\in A$. 
+
+\medskip
+\textbf{(iii)} Induktion nach $n$. Für $n=2$ ist es die Definition. 
+Sei die Aussage für $n$ richtig. Für $n+1$ setze
+$t:=\sum_{i=1}^{n}\lambda_i\in[0,1]$ und $y:=\frac{1}{t}\sum_{i=1}^{n}\lambda_i x_i\in A$ (Induktionsannahme).
+Dann ist $\sum_{i=1}^{n+1}\lambda_i x_i=t\,y+(1-t)\,x_{n+1}\in A$ (Konvexität). 
+
+\medskip
+\textbf{(iv)} Schreibe
+\[
+\sum_{i=1}^{n}\lambda_i x_i=\Big(\sum_{i=1}^{n}|\lambda_i|\Big)\,
+\sum_{i=1}^{n}\frac{|\lambda_i|}{\sum_{j}|\lambda_j|}\,\operatorname{sgn}(\lambda_i)\,x_i.
+\]
+Da $A$ balanciert ist, liegen $\operatorname{sgn}(\lambda_i)\,x_i\in A$. 
+Da $A$ konvex ist, liegt die konvexe Kombination in $A$. Schließlich skaliert man 
+mit dem Faktor $\sum_i|\lambda_i|\le 1$ erneut per Balanciertheit. 
+
+\medskip
+\textbf{(v)} „$\Rightarrow$“: Für $x<y<z$ gilt bei Konvexität die Sekantensteigungs-Monotonie
+\[
+\frac{f(y)-f(x)}{y-x}\le \frac{f(z)-f(y)}{z-y}.
+\]
+Mit dem Mittelwertsatz existieren $\xi\in(x,y)$ und $\eta\in(y,z)$ mit
+$f'(\xi)=\frac{f(y)-f(x)}{y-x}$ und $f'(\eta)=\frac{f(z)-f(y)}{z-y}$; also $f'(\xi)\le f'(\eta)$.
+Daraus folgt, dass $f'$ monoton wächst.
+
+„$\Leftarrow$“: Sei $f'$ monoton wachsend. Dann sind die Sekantensteigungen 
+$x<y<z\Rightarrow \frac{f(y)-f(x)}{y-x}\le \frac{f(z)-f(y)}{z-y}$.
+Dies ist äquivalent zur Konvexität (z.\,B.\ per Integralformel
+$f(y)=f(x)+\int_{x}^{y}f'(t)\,dt$ und Monotonie von $f'$).
+\end{PROOF}
+
+
+
+
+
+
+\subsection*{Satz}
+
+
+\begin{EXA}{FA-W25-01-09}{Induzierte Halbnorm auf Vektorraum durch absorbierende und absolut konvexe Menge}
+Sei $A \subset E$ absolut konvex und absorbierend. Dann wird durch
 $$
 \|x\|_{A}:=\inf \left\{t>0: \frac{x}{t} \in A\right\}=\inf \{t>0: x \in t A\} \quad \text { für } x \in E
 $$
-
 eine Halbnorm auf $E$ definiert.
+
 
 Beweis. Da $A$ absorbierend ist, erhält man $\|x\|_{A}<\infty$ für alle $x \in E$.\\
 Zur Homogenität: Für $x \in E$ und $\lambda \in \mathbb{K}$ gilt
-
 $$
 \begin{aligned}
 \|\lambda x\|_{A} & =\inf \{t>0: \lambda x \in t A\}=\inf \{t>0:|\lambda| x \in t A\} \\
 & =\inf \{|\lambda| s: s>0, x \in s A\}=|\lambda|\|x\|_{A} .
 \end{aligned}
 $$
-
 Zur Dreiecksungleichung: Seien $x, y \in E$, und seien $s, t>0$ mit $\frac{x}{s}, \frac{y}{t} \in A$. Mit $\lambda=\frac{t}{t+s}$ (also $1-\lambda=\frac{s}{t+s}$ ) ist dann
-
 $$
 \frac{x+y}{s+t}=(1-\lambda) \frac{x}{s}+\lambda \frac{y}{t} \in A
 $$
-
 aufgrund der Konvexität von $A$, und somit folgt $\|x+y\|_{A} \leq s+t$. Durch Infimumbildung in $s$ und $t$ folgt $\|x+y\|_{A} \leq\|x\|_{A}+\|y\|_{A}$. \(\square\)
+\end{EXA}
+
+
 
 \subsection*{Definition und Satz}
-Für $p \in[1, \infty)$ sei $\ell^{p}(\mathbb{N}, \mathbb{K})$ die Menge aller Folgen $x=\left(x_{k}\right)_{k}$ in $\mathbb{K}$ mit $\sum_{k \in \mathbb{N}}\left|x_{k}\right|^{p}<\infty$. $\ell^{p}(\mathbb{N}, \mathbb{K}$ ) ist ein normierter $\mathbb{K}$-Vektorraum (bzgl. komponentenweiser Addition und Skalarmultiplikation) mit der Norm $\|\cdot\|_{p}$ definiert durch
 
+
+\begin{EXA}{FA-W25-01-10}{$\ell^{p}(\mathbb{N}, \mathbb{K}$ als normierter Vektorraum bzgl $p$-Norm}
+Für $p \in[1, \infty)$ sei $\ell^{p}(\mathbb{N}, \mathbb{K})$ die Menge aller Folgen $x=\left(x_{k}\right)_{k}$ in $\mathbb{K}$ mit $\sum_{k \in \mathbb{N}}\left|x_{k}\right|^{p}<\infty$. $\ell^{p}(\mathbb{N}, \mathbb{K}$ ) ist ein normierter $\mathbb{K}$-Vektorraum (bzgl. komponentenweiser Addition und Skalarmultiplikation) mit der Norm $\|\cdot\|_{p}$ definiert durch
 $$
 \|x\|_{p}=\left(\sum_{k \in \mathbb{N}}\left|x_{k}\right|^{p}\right)^{\frac{1}{p}} \quad \text { für } x=\left(x_{k}\right)_{k} \in \ell^{p}(\mathbb{N}, \mathbb{K}) .
 $$
 
-Beweis. Offensichtlich ist die Nullfolge $0 \in \ell^{p}(\mathbb{N}, \mathbb{K})$. Seien $x=\left(x_{k}\right)_{k}, y=\left(y_{k}\right)_{k} \in \ell^{p}(\mathbb{N}, \mathbb{K})$ und $\lambda \in \mathbb{K}$. Dann ist
 
+Beweis. Offensichtlich ist die Nullfolge $0 \in \ell^{p}(\mathbb{N}, \mathbb{K})$. Seien $x=\left(x_{k}\right)_{k}, y=\left(y_{k}\right)_{k} \in \ell^{p}(\mathbb{N}, \mathbb{K})$ und $\lambda \in \mathbb{K}$. Dann ist
 $$
 \sum_{k \in \mathbb{N}}\left|\lambda x_{k}\right|^{p}=|\lambda|^{p} \sum_{k}\left|x_{k}\right|^{p}<\infty,
 $$
-
 und somit $\lambda x=\left(\lambda x_{k}\right)_{k} \in \ell^{p}(\mathbb{N}, \mathbb{K})$. Da die Funktion $(0, \infty) \rightarrow \mathbb{R}, t \mapsto t^{p}$ gemäß 1.5 v ) konvex ist, gilt ferner
-
 $$
 \sum_{k \in \mathbb{N}}\left|x_{k}+y_{k}\right|^{p} \leq \sum_{k \in \mathbb{N}} 2^{p}\left(\frac{\left|x_{k}\right|}{2}+\frac{\left|y_{k}\right|}{2}\right)^{p} \leq 2^{p-1} \sum_{k \in \mathbb{N}}\left(\left|x_{k}\right|^{p}+\left|y_{k}\right|^{p}\right)<\infty
 $$
-
 und somit $x+y=\left(x_{k}+y_{k}\right)_{k} \in \ell^{p}(\mathbb{N}, \mathbb{K})$. Also ist $\ell^{p}(\mathbb{N}, \mathbb{K})$ ein $\mathbb{K}$-Vektorraum. Zudem ist
-
 $$
 A:=\left\{x \in \ell^{p}(\mathbb{N}, \mathbb{K}): \sum_{k \in \mathbb{N}}\left|x_{k}\right|^{p} \leq 1\right\}
 $$
-
 offensichtlich eine absorbierende Teilmenge von $\ell^{p}(\mathbb{N}, \mathbb{K})$, und aufgrund der Konvexität der Funktion $t \mapsto t^{p}$ ist $A$ auch absolut konvex. Somit definiert
-
 $$
 \|x\|_{A}=\inf \left\{t>0: \sum_{k \in \mathbb{N}}\left|\frac{x_{k}}{t}\right|^{p} \leq 1\right\}=\inf \left\{t>0: \sum_{k \in \mathbb{N}}\left|x_{k}\right|^{p} \leq t^{p}\right\}=\left(\sum_{k \in \mathbb{N}}\left|x_{k}\right|^{p}\right)^{\frac{1}{p}}=\|x\|_{p} .
 $$
+eine Halbnorm auf $\ell^{p}(\mathbb{N}, \mathbb{K})$ gemäß 1.6.
 
-eine Halbnorm auf $\ell^{p}(\mathbb{N}, \mathbb{K})$ gemäß 1.6.\\
 Zum Beweis der Definitheit (N4) beachte man:
-
 $$
 \|x\|_{p}=0 \Longrightarrow \sum_{k \in \mathbb{N}}\left|x_{k}\right|^{p}=0 \Longrightarrow x_{k}=0 \text { für alle } k \in \mathbb{N} \Longrightarrow x=0 \text {. }
 $$ \(\square\)
+\end{EXA}
+
 
 \subsection*{Bemerkung}
-i). Analog definiert man $\ell^{p}(I, \mathbb{K})$ für eine beliebige höchstens abzählbare Indexmenge $I$ anstelle von $\mathbb{N}$, z. B. $I=\mathbb{Z}$.\\
-Kurzschreibweisen: $\ell^{p}(I)$ statt $\ell^{p}(I, \mathbb{K})$
 
+
+Analog definiert man $\ell^{p}(I, \mathbb{K})$ für eine beliebige höchstens abzählbare Indexmenge $I$ anstelle von $\mathbb{N}$, z. B. $I=\mathbb{Z}$. Kurzschreibweisen: $\ell^{p}(I)$ statt $\ell^{p}(I, \mathbb{K})$
 $$
 \ell^{p} \text { statt } \ell^{p}(\mathbb{N})=\ell^{p}(\mathbb{N}, \mathbb{K})
 $$
+Man beachte: Der Fall $I=\{1, \ldots, N\}$ führt wieder zurück auf $\mathbb{K}^{N}$.
 
-Man beachte: Der Fall $I=\{1, \ldots, N\}$ führt wieder zurück auf $\mathbb{K}^{N}$.\\
+
 ii). Sind $p, q \in[1, \infty]$ konjugierte Exponenten, so gilt die Höldersche Ungleichung
 
 $$

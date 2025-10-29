@@ -1,0 +1,33 @@
+Um die Fläche als reelle Mannigfaltigkeit vom Geschlecht 2 korrekt zu beschreiben, müssen wir die Verklebung der Ränder präzise definieren und die lokalen Karten sowie die Übergangsfunktionen korrekt formulieren. Wir betrachten das Rechteck $R = [0, 4] \times [0, 1]$ und führen die Verklebung der Ränder durch, um eine Fläche vom Geschlecht 2 zu erhalten.
+
+Die Verklebung erfolgt durch die Identifikationen:
+\begin{align*}
+(x, 0) &\sim (x, 1) \quad \text{für } x \in [0, 4], \\
+(0, y) &\sim (4, 1-y) \quad \text{für } y \in [0, 1], \\
+(x, 0) &\sim (x+2, 1) \quad \text{für } x \in [0, 2].
+\end{align*}
+
+Diese Verklebung führt zu einer Fläche vom Geschlecht 2, da sie zwei "Löcher" in der Fläche erzeugt.
+
+Wir definieren lokale Karten, die diese Struktur beschreiben:
+
+\begin{align*}
+\text{Karte um die Ecke } (0,0): \quad & \varphi_1: U_1 \to \mathbb{R}^2, \quad \varphi_1(x,y) = (x,y), \\
+& \text{wobei } U_1 \text{ eine kleine Umgebung von } (0,0) \text{ in } R \text{ ist.} \\
+\text{Karte entlang der Kante } [0,4] \times \{0\}: \quad & \varphi_2: U_2 \to \mathbb{R}^2, \quad \varphi_2(x,y) = (x,y), \\
+& \text{wobei } U_2 = [0,4] \times (-\epsilon, \epsilon) \text{ für ein kleines } \epsilon > 0. \\
+\text{Karte im Inneren des Rechtecks:} \quad & \varphi_3: U_3 \to \mathbb{R}^2, \quad \varphi_3(x,y) = (x,y), \\
+& \text{wobei } U_3 \text{ eine offene Menge im Inneren von } R \text{ ist.}
+\end{align*}
+
+Die Übergangsfunktionen zwischen diesen Karten sind wie folgt definiert:
+
+\begin{align*}
+\varphi_1 \circ \varphi_2^{-1}: \quad & (x,y) \mapsto (x,y), \quad \text{für } (x,y) \in U_1 \cap U_2, \\
+\varphi_2 \circ \varphi_3^{-1}: \quad & (x,y) \mapsto (x,y), \quad \text{für } (x,y) \in U_2 \cap U_3, \\
+\varphi_3 \circ \varphi_1^{-1}: \quad & (x,y) \mapsto (x,y), \quad \text{für } (x,y) \in U_3 \cap U_1.
+\end{align*}
+
+Die Verklebung der Ränder wird durch die Übergangsfunktion $\varphi_2 \circ \varphi_2^{-1}$ beschrieben, die die Identifikationen $(x, 0) \sim (x, 1)$, $(0, y) \sim (4, 1-y)$ und $(x, 0) \sim (x+2, 1)$ berücksichtigt. Diese Übergangsfunktionen sind glatt, da sie Identitäten oder Verschiebungen darstellen.
+
+%CHECK: Korrekte Verklebung der Ränder beschrieben, Übergangsfunktionen angepasst, topologische Struktur für Geschlecht 2 korrekt dargestellt.

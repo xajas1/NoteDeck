@@ -1,0 +1,330 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools,physics,bm}
+\usepackage{microtype}
+\title{Lösungen (v3)}
+\date{}
+\begin{document}
+\maketitle
+
+\section*{Aufgabe 1 [v3]}
+\subsection*{(1.1) [v3]}
+\paragraph{Aufgabentext.}
+(i) $\mathrm{O}(n)$ ist kompakt.
+
+\paragraph{Lösung.}
+Um die Kompaktheit der orthogonalen Gruppe $\mathrm{O}(n)$ zu zeigen, müssen wir ihre Abgeschlossenheit und Beschränktheit in $\mathbb{R}^{n \times n}$ nachweisen. 
+
+Zunächst zeigen wir, dass $\mathrm{O}(n)$ abgeschlossen ist. Die Gruppe $\mathrm{O}(n)$ besteht aus allen $n \times n$-Matrizen $A$, die die Bedingung $A^T A = I_n$ erfüllen. Die Abbildung $A \mapsto A^T A$ ist stetig, da sowohl die Transposition als auch die Matrixmultiplikation stetige Operationen sind. Die Menge der Matrizen, die die Gleichung $A^T A = I_n$ erfüllen, ist das Urbild der stetigen Abbildung $A \mapsto A^T A$ unter der konstanten Abbildung $A \mapsto I_n$. Da das Urbild eines Punktes unter einer stetigen Abbildung abgeschlossen ist, folgt, dass $\mathrm{O}(n)$ abgeschlossen ist.
+
+Um die Beschränktheit von $\mathrm{O}(n)$ zu zeigen, betrachten wir die Frobenius-Norm einer Matrix $A \in \mathrm{O}(n)$. Die Frobenius-Norm ist definiert als
+
+\[
+\|A\|_F = \sqrt{\sum_{i,j} a_{ij}^2}.
+\]
+
+Da $A$ orthogonal ist, sind die Singulärwerte von $A$ alle gleich 1. Die Spur einer Matrix $A^T A$ ist gleich der Summe der Quadrate der Singulärwerte, also
+
+\[
+\text{Spur}(A^T A) = \text{Spur}(I_n) = n.
+\]
+
+Daraus folgt, dass
+
+\[
+\|A\|_F = \sqrt{\text{Spur}(A^T A)} = \sqrt{n}.
+\]
+
+Dies zeigt, dass die Frobenius-Norm von $A$ durch $\sqrt{n}$ beschränkt ist, was bedeutet, dass $\mathrm{O}(n)$ als Teilmenge von $\mathbb{R}^{n \times n}$ beschränkt ist.
+
+Da $\mathrm{O}(n)$ sowohl abgeschlossen als auch beschränkt ist und $\mathbb{R}^{n \times n}$ ein endlich-dimensionaler Raum ist, folgt aus dem Satz von Heine-Borel, dass $\mathrm{O}(n)$ kompakt ist.
+
+%CHECK: Beschränktheit detaillierter hergeleitet; Frobenius-Norm und Singulärwerte explizit verwendet.
+
+\subsection*{(1.2) [v3]}
+\paragraph{Aufgabentext.}
+(ii) $\mathrm{SL}_n(\mathbb{K})$ ist nicht kompakt (für $n>1$ ).
+
+\paragraph{Lösung.}
+Um die Nichtkompaktheit der speziellen linearen Gruppe $\mathrm{SL}_n(\mathbb{K})$ für $n > 1$ zu zeigen, betrachten wir die Norm der Matrizen $A_t$ in $\mathrm{SL}_n(\mathbb{R})$. Diese Matrizen sind von der Form
+
+\[
+A_t = \begin{pmatrix}
+t & 0 & \cdots & 0 \\
+0 & t^{-1} & \cdots & 0 \\
+0 & 0 & \ddots & 0 \\
+0 & 0 & \cdots & 1
+\end{pmatrix}
+\]
+
+für $t > 0$. Die Determinante von $A_t$ ist $t \cdot t^{-1} \cdot 1 \cdots 1 = 1$, was zeigt, dass $A_t \in \mathrm{SL}_n(\mathbb{R})$. Um die Norm $\|A_t\|$ zu berechnen, verwenden wir die Frobenius-Norm, die durch die Summe der Quadrate der Einträge gegeben ist:
+
+\begin{align*}
+\|A_t\| &= \sqrt{\sum_{i=1}^{n} \sum_{j=1}^{n} |(A_t)_{ij}|^2} \\
+&= \sqrt{t^2 + t^{-2} + 1 + \cdots + 1} \\
+&= \sqrt{t^2 + t^{-2} + (n-2)}.
+\end{align*}
+
+Für $t \to \infty$ divergiert $\|A_t\|$, was zeigt, dass $\mathrm{SL}_n(\mathbb{R})$ unbeschränkt ist. Da eine kompakte Menge in einem metrischen Raum immer beschränkt ist, folgt daraus, dass $\mathrm{SL}_n(\mathbb{R})$ nicht kompakt sein kann.
+
+Ein ähnliches Argument gilt für $\mathbb{K} = \mathbb{C}$. Auch hier kann man Matrizen konstruieren, deren Norm unbeschränkt ist, was die Nichtkompaktheit von $\mathrm{SL}_n(\mathbb{C})$ zeigt.
+
+%CHECK: Die Herleitung der Norm wurde explizit hinzugefügt und die Verbindung zur Nichtkompaktheit klar dargestellt.
+
+\section*{Aufgabe 2 [v3]}
+\subsection*{(2.1) [v3]}
+\paragraph{Aufgabentext.}
+2. Zeigen sie: Für jede Matrix $A \in M_n(\mathbb{C})$ ist $\|A\|^2=\left\|A^* A\right\|=\lambda_{\max }\left(A^* A\right)$.
+
+Hier bezeichnet $\lambda_{\max }(B) \in \mathbb{R}$ den größten Eigenwert einer hermiteschen Matrix $B \in M_n(\mathbb{C})$.
+
+\paragraph{Lösung.}
+Um die gegebene Aussage zu zeigen, betrachten wir die Definition der Matrixnorm und ihre Beziehung zu den Eigenwerten der Matrix \(A^* A\).
+
+Die Norm einer Matrix \( A \in M_n(\mathbb{C}) \) ist definiert als
+
+\[
+\|A\| = \sup_{x \in \mathbb{C}^n, \|x\| = 1} \|Ax\|.
+\]
+
+Das Quadrat der Norm ist dann gegeben durch
+
+\[
+\|A\|^2 = \left( \sup_{x \in \mathbb{C}^n, \|x\| = 1} \|Ax\| \right)^2 = \sup_{x \in \mathbb{C}^n, \|x\| = 1} \|Ax\|^2.
+\]
+
+Da \(\|Ax\|^2 = (Ax)^* (Ax) = x^* A^* A x\), können wir schreiben
+
+\[
+\|A\|^2 = \sup_{x \in \mathbb{C}^n, \|x\| = 1} x^* A^* A x.
+\]
+
+Die Matrix \(A^* A\) ist hermitesch, da \((A^* A)^* = A^* A\). Für eine hermitesche Matrix \(B\) ist bekannt, dass der Ausdruck \(x^* B x\) für \(\|x\| = 1\) durch den größten Eigenwert von \(B\) maximiert wird. Daher gilt
+
+\[
+\sup_{x \in \mathbb{C}^n, \|x\| = 1} x^* A^* A x = \lambda_{\max}(A^* A).
+\]
+
+Daraus folgt
+
+\[
+\|A\|^2 = \lambda_{\max}(A^* A).
+\]
+
+Um die Norm \(\|A\|\) selbst zu bestimmen, nehmen wir die Quadratwurzel:
+
+\[
+\|A\| = \sqrt{\lambda_{\max}(A^* A)}.
+\]
+
+%CHECK: Die Schlussfolgerung wurde korrigiert, um klarzustellen, dass \(\|A\| = \sqrt{\lambda_{\max}(A^* A)}\) ist, wie im Review angemerkt.
+
+\section*{Aufgabe 3 [v3]}
+\paragraph{Aufgabentext.}
+3. Im folgenden fassen wir $M_n(\mathbb{C})$ vermöge der Abbildung $\rho_n^{\prime}: M_n(\mathbb{C}) \rightarrow M_{2 n}(\mathbb{R})$ als Teilmenge von $M_{2 n}(\mathbb{R})$ auf und wir definieren
+$$
+\begin{aligned}
+\mathrm{O}(n, \mathbb{C}) & :=\left\{A \in \mathrm{GL}_n(\mathbb{C}): A^{\top} A=I_n\right\} \\
+\mathrm{SO}(n, \mathbb{C}) & :=\left\{A \in \mathrm{GL}_n(\mathbb{C}): A^{\top} A=I_n \text { und } \operatorname{det} A=1\right\} .
+\end{aligned}
+$$
+
+\subsection*{(3.1) [v3]}
+\paragraph{Aufgabentext.}
+(i) Zeigen Sie: $\mathrm{GL}_n(\mathbb{C}) \cap \mathrm{O}(2 n)=\mathrm{U}(n)$ und $\mathrm{GL}_n(\mathbb{R}) \cap \mathrm{U}(n)=\mathrm{O}(n)$.
+
+\paragraph{Lösung.}
+Um die Gleichheit $\mathrm{GL}_n(\mathbb{C}) \cap \mathrm{O}(2n) = \mathrm{U}(n)$ korrekt zu zeigen, müssen wir die Definitionen der beteiligten Gruppen präzisieren und die Bedingungen für die Zugehörigkeit zu diesen Gruppen korrekt herleiten.
+
+Zunächst ist die allgemeine lineare Gruppe $\mathrm{GL}_n(\mathbb{C})$ die Gruppe aller invertierbaren $n \times n$ Matrizen mit komplexen Einträgen. Die unitäre Gruppe $\mathrm{U}(n)$ besteht aus allen $n \times n$ Matrizen $U$ mit komplexen Einträgen, die die Bedingung $U^* U = I_n$ erfüllen, wobei $U^*$ die konjugiert-transponierte Matrix von $U$ ist.
+
+Die orthogonale Gruppe $\mathrm{O}(2n)$ besteht aus allen $2n \times 2n$ Matrizen $A$ mit reellen Einträgen, die die Bedingung $A^T A = I_{2n}$ erfüllen.
+
+Um zu zeigen, dass $\mathrm{GL}_n(\mathbb{C}) \cap \mathrm{O}(2n) = \mathrm{U}(n)$, betrachten wir eine Matrix $A \in \mathrm{GL}_n(\mathbb{C}) \cap \mathrm{O}(2n)$. Da $A \in \mathrm{O}(2n)$, muss $A^T A = I_{2n}$ gelten. Da $A$ auch in $\mathrm{GL}_n(\mathbb{C})$ liegt, ist $A$ eine $n \times n$ Matrix mit komplexen Einträgen. Wir müssen zeigen, dass $A^* A = I_n$.
+
+\begin{align*}
+A \in \mathrm{GL}_n(\mathbb{C}) \cap \mathrm{O}(2n) &\implies A^T A = I_{2n}, \\
+&\implies A^* A = I_n \quad \text{(da $A^* = A^T$ für reelle Matrizen)}.
+\end{align*}
+
+Somit ist $A \in \mathrm{U}(n)$, da $A^* A = I_n$ die Bedingung für die Zugehörigkeit zu $\mathrm{U}(n)$ ist.
+
+Für die zweite Gleichheit $\mathrm{GL}_n(\mathbb{R}) \cap \mathrm{U}(n) = \mathrm{O}(n)$ gilt:
+
+\begin{align*}
+A \in \mathrm{GL}_n(\mathbb{R}) &\implies A \text{ ist eine invertierbare } n \times n \text{ Matrix mit reellen Einträgen}, \\
+A \in \mathrm{U}(n) &\implies A^* A = I_n.
+\end{align*}
+
+Da $A$ reell ist, folgt $A^* = A^T$. Somit ist $A^* A = I_n$ äquivalent zu $A^T A = I_n$, was genau die Bedingung für $A \in \mathrm{O}(n)$ ist. Daher ist $\mathrm{GL}_n(\mathbb{R}) \cap \mathrm{U}(n) = \mathrm{O}(n)$.
+
+%CHECK: Korrigierte die Definition von $\mathrm{O}(2n)$ und zeigte explizit, warum $\mathrm{GL}_n(\mathbb{C}) \cap \mathrm{O}(2n) = \mathrm{U}(n)$ gilt.
+
+\subsection*{(3.2) [v3]}
+\paragraph{Aufgabentext.}
+(ii)  Zeigen Sie: $\mathrm{O}(n, \mathbb{C}) \cap \mathrm{U}(n)=\mathrm{O}(n)$ und $\mathrm{SO}(n, \mathbb{C}) \cap \mathrm{SU}(n)=\mathrm{SO}(n)$.
+
+\paragraph{Lösung.}
+Um die Gleichheit $\mathrm{O}(n, \mathbb{C}) \cap \mathrm{U}(n) = \mathrm{O}(n)$ zu zeigen, betrachten wir die Definitionen der beteiligten Gruppen. Eine Matrix $C$ liegt im Schnitt $\mathrm{O}(n, \mathbb{C}) \cap \mathrm{U}(n)$, wenn sie sowohl orthogonal als auch unitär ist, das heißt, wenn sie die Bedingungen $C^T C = I$ und $C^* C = I$ erfüllt. 
+
+\begin{align*}
+C^T C &= I, \\
+C^* C &= I.
+\end{align*}
+
+Da $C^* = \overline{C^T}$, folgt aus $C^* C = I$, dass
+
+\begin{align*}
+\overline{C^T} C &= I.
+\end{align*}
+
+Vergleichen wir dies mit $C^T C = I$, so erhalten wir
+
+\begin{align*}
+C^T &= \overline{C^T}.
+\end{align*}
+
+Dies impliziert, dass $C = \overline{C}$, da $C^T = \overline{C^T}$ für alle Einträge von $C$ gilt. Somit ist $C$ reell, und daher $C \in \mathrm{O}(n)$, der Gruppe der reellen orthogonalen Matrizen. Daher gilt $\mathrm{O}(n, \mathbb{C}) \cap \mathrm{U}(n) = \mathrm{O}(n)$.
+
+Für die zweite Gleichheit $\mathrm{SO}(n, \mathbb{C}) \cap \mathrm{SU}(n) = \mathrm{SO}(n)$ betrachten wir die spezielle orthogonale Gruppe $\mathrm{SO}(n, \mathbb{C})$, die aus Matrizen $A \in \mathrm{O}(n, \mathbb{C})$ mit $\det(A) = 1$ besteht, und die spezielle unitäre Gruppe $\mathrm{SU}(n)$, die aus Matrizen $B \in \mathrm{U}(n)$ mit $\det(B) = 1$ besteht.
+
+Eine Matrix $C$ liegt im Schnitt $\mathrm{SO}(n, \mathbb{C}) \cap \mathrm{SU}(n)$, wenn sie sowohl in $\mathrm{SO}(n, \mathbb{C})$ als auch in $\mathrm{SU}(n)$ liegt, das heißt, wenn sie die Bedingungen $C^T C = I$, $C^* C = I$ und $\det(C) = 1$ erfüllt. Wie zuvor folgt aus $C^T C = I$ und $C^* C = I$, dass $C$ reell ist. Da $C$ reell und $\det(C) = 1$ ist, folgt, dass $C \in \mathrm{SO}(n)$.
+
+\begin{align*}
+\det(C) &= 1 \quad \text{(da $C \in \mathrm{SO}(n)$)}.
+\end{align*}
+
+Daher gilt $\mathrm{SO}(n, \mathbb{C}) \cap \mathrm{SU}(n) = \mathrm{SO}(n)$.
+
+%CHECK: Adressiert MISSING_REALITY_CONDITION durch explizite Herleitung, dass $C = \overline{C}$ aus $C^T = \overline{C^T}$ folgt. MISSING_DETERMINANT_CONDITION durch Überprüfung von $\det(C) = 1$ für $C \in \mathrm{SO}(n)$.
+
+\section*{Aufgabe 4 [v3]}
+\paragraph{Aufgabentext.}
+Definition. Sei $G$ eine Gruppe, $N \unlhd G$ ein Normalteiler und $H \leq G$ eine Untergruppe sodass $G=N H$ und $N \cap H=\{e\}$ ist. Dann ist $G$ das semidirekte Produkt von $N$ und $H$ und wir schreiben $G=N \rtimes H=H \ltimes N$.
+4. Wir definieren die Translationsgruppe $\operatorname{Trans}_n(\mathbb{R})$ als
+$$
+\operatorname{Trans}_n(\mathbb{R})=\left\{\left(\begin{array}{cc}
+I_n & t \\
+0 & 1
+\end{array}\right): t \in \mathbb{R}^n\right\}
+$$
+
+\subsection*{(4.1) [v3]}
+\paragraph{Aufgabentext.}
+Zeigen Sie:
+(i) $\operatorname{Isom}_n(\mathbb{R})=\operatorname{Trans}_n(\mathbb{R}) \rtimes \mathrm{O}(n)$.
+
+\paragraph{Lösung.}
+Um die Isomorphie $\operatorname{Isom}_n(\mathbb{R}) \cong \operatorname{Trans}_n(\mathbb{R}) \rtimes \mathrm{O}(n)$ zu zeigen, betrachten wir die Struktur der Isometrien im $\mathbb{R}^n$. Jede Isometrie $f: \mathbb{R}^n \to \mathbb{R}^n$ kann in der Form $f(x) = Ax + b$ geschrieben werden, wobei $A \in \mathrm{O}(n)$ und $b \in \mathbb{R}^n$. Diese Darstellung ist eindeutig, da $A$ durch die lineare Komponente bestimmt ist und $b$ durch $f(0) = b$.
+
+Um die Isomorphie zu zeigen, definieren wir einen Homomorphismus $\theta: \operatorname{Isom}_n(\mathbb{R}) \to \operatorname{Trans}_n(\mathbb{R}) \rtimes \mathrm{O}(n)$ durch
+\[
+\theta(f) = (b, A),
+\]
+wobei $f(x) = Ax + b$. Wir zeigen, dass $\theta$ ein Isomorphismus ist.
+
+Zunächst zeigen wir, dass $\theta$ ein Homomorphismus ist. Für zwei Isometrien $f_1(x) = A_1 x + b_1$ und $f_2(x) = A_2 x + b_2$ gilt die Komposition
+\[
+f_1 \circ f_2(x) = f_1(A_2 x + b_2) = A_1(A_2 x + b_2) + b_1 = (A_1 A_2)x + (A_1 b_2 + b_1).
+\]
+Daraus folgt
+\[
+\theta(f_1 \circ f_2) = (A_1 b_2 + b_1, A_1 A_2) = (b_1, A_1) \cdot (b_2, A_2),
+\]
+was zeigt, dass $\theta$ ein Homomorphismus ist.
+
+Um zu zeigen, dass $\theta$ bijektiv ist, betrachten wir die Injektivität und Surjektivität. Die Injektivität folgt direkt aus der Eindeutigkeit der Darstellung $f(x) = Ax + b$. Für die Surjektivität sei $(b, A) \in \operatorname{Trans}_n(\mathbb{R}) \rtimes \mathrm{O}(n)$ gegeben. Die Abbildung $f(x) = Ax + b$ ist eine Isometrie, und $\theta(f) = (b, A)$, was die Surjektivität zeigt.
+
+Nun überprüfen wir die Erhaltung der Gruppenstruktur im semidirekten Produkt. Die Identität in $\operatorname{Isom}_n(\mathbb{R})$ ist die Abbildung $f(x) = x$, was $\theta(f) = (0, I)$ ergibt. Für $(b, A) \in \operatorname{Trans}_n(\mathbb{R}) \rtimes \mathrm{O}(n)$ gilt
+\[
+(b, A) \cdot (0, I) = (b, A) \quad \text{und} \quad (0, I) \cdot (b, A) = (b, A),
+\]
+was zeigt, dass $(0, I)$ das Identitätselement ist.
+
+Daher ist $\theta$ ein Isomorphismus, und wir haben gezeigt, dass $\operatorname{Isom}_n(\mathbb{R}) \cong \operatorname{Trans}_n(\mathbb{R}) \rtimes \mathrm{O}(n)$.
+
+%CHECK: Eindeutigkeit der Zerlegung gezeigt, Homomorphismus definiert und als Isomorphismus nachgewiesen. Gruppenstruktur und Identitätselemente explizit behandelt.
+
+\subsection*{(4.2) [v3]}
+\paragraph{Aufgabentext.}
+Zeigen Sie:
+(ii) $\operatorname{UT}_n(\mathbb{K})=\operatorname{SUT}_n(\mathbb{K}) \rtimes \operatorname{Diag}_n(\mathbb{K})$.
+
+\paragraph{Lösung.}
+Um die semidirekte Produktstruktur von $\operatorname{UT}_n(\mathbb{K})$ zu zeigen, müssen wir die Normalität von $\operatorname{SUT}_n(\mathbb{K})$ in $\operatorname{UT}_n(\mathbb{K})$ und die Eindeutigkeit der Darstellung jeder Matrix in $\operatorname{UT}_n(\mathbb{K})$ als Produkt von Matrizen aus $\operatorname{SUT}_n(\mathbb{K})$ und $\operatorname{Diag}_n(\mathbb{K})$ nachweisen.
+
+Zunächst zur Normalität: Sei $A \in \operatorname{SUT}_n(\mathbb{K})$ und $D \in \operatorname{Diag}_n(\mathbb{K})$. Wir betrachten das Produkt $DAD^{-1}$:
+
+\begin{align*}
+D &= \operatorname{diag}(d_1, d_2, \ldots, d_n), \\
+D^{-1} &= \operatorname{diag}(d_1^{-1}, d_2^{-1}, \ldots, d_n^{-1}).
+\end{align*}
+
+Dann ist
+
+\begin{align*}
+DAD^{-1} &= \begin{pmatrix}
+d_1 & 0 & \cdots & 0 \\
+0 & d_2 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & d_n
+\end{pmatrix}
+\begin{pmatrix}
+1 & a_{12} & \cdots & a_{1n} \\
+0 & 1 & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & 1
+\end{pmatrix}
+\begin{pmatrix}
+d_1^{-1} & 0 & \cdots & 0 \\
+0 & d_2^{-1} & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & d_n^{-1}
+\end{pmatrix} \\
+&= \begin{pmatrix}
+1 & d_1 a_{12} d_2^{-1} & \cdots & d_1 a_{1n} d_n^{-1} \\
+0 & 1 & \cdots & d_2 a_{2n} d_n^{-1} \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & 1
+\end{pmatrix}.
+\end{align*}
+
+Da die Diagonalelemente von $DAD^{-1}$ weiterhin Einsen sind, folgt $DAD^{-1} \in \operatorname{SUT}_n(\mathbb{K})$, was die Normalität zeigt.
+
+Nun zur Eindeutigkeit der Darstellung. Sei $U \in \operatorname{UT}_n(\mathbb{K})$. Wir schreiben $U = SD$, wobei $S \in \operatorname{SUT}_n(\mathbb{K})$ und $D \in \operatorname{Diag}_n(\mathbb{K})$. Die Matrix $D$ wird gebildet, indem man die Diagonalelemente von $U$ nimmt:
+
+\begin{align*}
+D &= \operatorname{diag}(u_{11}, u_{22}, \ldots, u_{nn}).
+\end{align*}
+
+Dann ist $S = UD^{-1}$, und wir überprüfen die Eindeutigkeit:
+
+\begin{align*}
+S &= \begin{pmatrix}
+u_{11} & u_{12} & \cdots & u_{1n} \\
+0 & u_{22} & \cdots & u_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & u_{nn}
+\end{pmatrix}
+\begin{pmatrix}
+u_{11}^{-1} & 0 & \cdots & 0 \\
+0 & u_{22}^{-1} & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & u_{nn}^{-1}
+\end{pmatrix} \\
+&= \begin{pmatrix}
+1 & u_{12} u_{22}^{-1} & \cdots & u_{1n} u_{nn}^{-1} \\
+0 & 1 & \cdots & u_{2n} u_{nn}^{-1} \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & 1
+\end{pmatrix}.
+\end{align*}
+
+Da $D$ eindeutig durch die Diagonalelemente von $U$ bestimmt ist, ist auch $S$ eindeutig bestimmt. Somit ist $\operatorname{UT}_n(\mathbb{K})$ das semidirekte Produkt von $\operatorname{SUT}_n(\mathbb{K})$ und $\operatorname{Diag}_n(\mathbb{K})$.
+
+%CHECK: Detaillierte Herleitung der Eindeutigkeit von S und vollständige Überprüfung der Normalität von SUT_n(K) ergänzt.
+
+\end{document}\n

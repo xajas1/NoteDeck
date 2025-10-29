@@ -1,0 +1,37 @@
+Um zu zeigen, dass die Karten $\left(S^2 \backslash N, \phi_N\right)$ und $\left(S^2 \backslash S, \phi_S\right)$ einen komplexen Atlas von $S^2$ bilden, definieren wir die Umkehrabbildungen und zeigen die Holomorphie der Übergangsabbildungen.
+
+Die Umkehrabbildung $\phi_N^{-1}: \mathbb{C} \to S^2 \backslash \{N\}$ ist gegeben durch:
+
+\[
+\phi_N^{-1}(u, v) = \left( \frac{2u}{1 + u^2 + v^2}, \frac{2v}{1 + u^2 + v^2}, \frac{-1 + u^2 + v^2}{1 + u^2 + v^2} \right).
+\]
+
+Analog ist die Umkehrabbildung $\phi_S^{-1}: \mathbb{C} \to S^2 \backslash \{S\}$ gegeben durch:
+
+\[
+\phi_S^{-1}(u, v) = \left( \frac{2u}{1 + u^2 + v^2}, \frac{2v}{1 + u^2 + v^2}, \frac{1 - u^2 - v^2}{1 + u^2 + v^2} \right).
+\]
+
+Die Übergangsabbildung $\phi_S \circ \phi_N^{-1}: \mathbb{C} \to \mathbb{C}$ ist dann:
+
+\[
+\phi_S \circ \phi_N^{-1}(u, v) = \left( \frac{u}{u^2 + v^2}, \frac{v}{u^2 + v^2} \right).
+\]
+
+Um die Holomorphie zu zeigen, betrachten wir die komplexe Funktion $f(u, v) = \frac{u}{u^2 + v^2} + i\frac{v}{u^2 + v^2}$. Die Ableitungen von $f$ bezüglich $u$ und $v$ sind:
+
+\[
+\frac{\partial f}{\partial u} = \frac{1}{u^2 + v^2} - \frac{2u^2}{(u^2 + v^2)^2} + i\left(-\frac{2uv}{(u^2 + v^2)^2}\right),
+\]
+
+\[
+\frac{\partial f}{\partial v} = -\frac{2uv}{(u^2 + v^2)^2} + i\left(\frac{1}{u^2 + v^2} - \frac{2v^2}{(u^2 + v^2)^2}\right).
+\]
+
+Da diese Ableitungen existieren und stetig sind, ist $f$ holomorph auf $\mathbb{C} \setminus \{0\}$.
+
+Analog zeigt man die Holomorphie der Übergangsabbildung $\phi_N \circ \phi_S^{-1}$ durch ähnliche Berechnungen.
+
+Da beide Übergangsabbildungen holomorph sind, bilden die Karten $\left(S^2 \backslash N, \phi_N\right)$ und $\left(S^2 \backslash S, \phi_S\right)$ einen komplexen Atlas für die 2-Sphäre $S^2$.
+
+%CHECK: Umkehrabbildungen definiert; Holomorphie durch Ableitungen und Stetigkeit gezeigt.

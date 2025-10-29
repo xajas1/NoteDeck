@@ -1,0 +1,27 @@
+Um die Kompaktheit der orthogonalen Gruppe $\mathrm{O}(n)$ zu zeigen, müssen wir ihre Abgeschlossenheit und Beschränktheit in $\mathbb{R}^{n \times n}$ nachweisen. 
+
+Zunächst zeigen wir, dass $\mathrm{O}(n)$ abgeschlossen ist. Die Gruppe $\mathrm{O}(n)$ besteht aus allen $n \times n$-Matrizen $A$, die die Bedingung $A^T A = I_n$ erfüllen. Die Abbildung $A \mapsto A^T A$ ist stetig, da sowohl die Transposition als auch die Matrixmultiplikation stetige Operationen sind. Die Menge der Matrizen, die die Gleichung $A^T A = I_n$ erfüllen, ist das Urbild der stetigen Abbildung $A \mapsto A^T A$ unter der konstanten Abbildung $A \mapsto I_n$. Da das Urbild eines Punktes unter einer stetigen Abbildung abgeschlossen ist, folgt, dass $\mathrm{O}(n)$ abgeschlossen ist.
+
+Um die Beschränktheit von $\mathrm{O}(n)$ zu zeigen, betrachten wir die Frobenius-Norm einer Matrix $A \in \mathrm{O}(n)$. Die Frobenius-Norm ist definiert als
+
+\[
+\|A\|_F = \sqrt{\sum_{i,j} a_{ij}^2}.
+\]
+
+Da $A$ orthogonal ist, sind die Singulärwerte von $A$ alle gleich 1. Die Spur einer Matrix $A^T A$ ist gleich der Summe der Quadrate der Singulärwerte, also
+
+\[
+\text{Spur}(A^T A) = \text{Spur}(I_n) = n.
+\]
+
+Daraus folgt, dass
+
+\[
+\|A\|_F = \sqrt{\text{Spur}(A^T A)} = \sqrt{n}.
+\]
+
+Dies zeigt, dass die Frobenius-Norm von $A$ durch $\sqrt{n}$ beschränkt ist, was bedeutet, dass $\mathrm{O}(n)$ als Teilmenge von $\mathbb{R}^{n \times n}$ beschränkt ist.
+
+Da $\mathrm{O}(n)$ sowohl abgeschlossen als auch beschränkt ist und $\mathbb{R}^{n \times n}$ ein endlich-dimensionaler Raum ist, folgt aus dem Satz von Heine-Borel, dass $\mathrm{O}(n)$ kompakt ist.
+
+%CHECK: Beschränktheit detaillierter hergeleitet; Frobenius-Norm und Singulärwerte explizit verwendet.

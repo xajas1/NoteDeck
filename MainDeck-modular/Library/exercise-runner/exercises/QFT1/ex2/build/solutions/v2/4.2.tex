@@ -1,0 +1,41 @@
+Um die Lorentz-Invarianz der Verteilung $2 E(\mathbf{k}) \delta^{(3)}\left(\mathbf{k}-\mathbf{k}^{\prime}\right)$ zu zeigen, beginnen wir mit dem Lorentz-invarianten Ausdruck
+
+\[
+\frac{d^4 k}{(2 \pi)^3} \delta\left(k^2-m^2\right) \theta\left(k_0\right).
+\]
+
+Dieser Ausdruck ist Lorentz-invariant, da das Maß $d^4 k$ und die Dirac-Delta-Funktion $\delta\left(k^2-m^2\right)$ invariant sind, und die Heaviside-Funktion $\theta\left(k_0\right)$ sicherstellt, dass nur positive Energien berücksichtigt werden.
+
+Wir verwenden die Identität für die Delta-Funktion
+
+\[
+\delta\left(k^2-m^2\right) = \frac{1}{2|E(\mathbf{k})|} \left( \delta\left(k_0 - E(\mathbf{k})\right) + \delta\left(k_0 + E(\mathbf{k})\right) \right),
+\]
+
+wobei $E(\mathbf{k}) = \sqrt{\mathbf{k}^2 + m^2}$ die positive Energie ist. Da $\theta(k_0)$ nur den positiven Energieanteil berücksichtigt, bleibt nur der Term $\delta\left(k_0 - E(\mathbf{k})\right)$ übrig. Somit reduziert sich der Ausdruck auf
+
+\[
+\frac{d^4 k}{(2 \pi)^3} \frac{1}{2 E(\mathbf{k})} \delta\left(k_0 - E(\mathbf{k})\right).
+\]
+
+Durch Integration über $k_0$ erhalten wir
+
+\[
+\int dk_0 \frac{1}{2 E(\mathbf{k})} \delta(k_0 - E(\mathbf{k})) = \frac{1}{2 E(\mathbf{k})}.
+\]
+
+Dies führt zu
+
+\[
+\frac{d^3 \mathbf{k}}{(2 \pi)^3} \frac{1}{2 E(\mathbf{k})}.
+\]
+
+Um die Lorentz-Invarianz von $2 E(\mathbf{k}) \delta^{(3)}\left(\mathbf{k}-\mathbf{k}^{\prime}\right)$ zu zeigen, multiplizieren wir mit $2 E(\mathbf{k})$, was ergibt
+
+\[
+\frac{d^3 \mathbf{k}}{(2 \pi)^3} \delta^{(3)}\left(\mathbf{k}-\mathbf{k}^{\prime}\right).
+\]
+
+Da das Maß $d^3 \mathbf{k}$ und die dreidimensionale Delta-Funktion $\delta^{(3)}\left(\mathbf{k}-\mathbf{k}^{\prime}\right)$ unter räumlichen Drehungen und Boosts invariant sind, ist der gesamte Ausdruck Lorentz-invariant. Dies zeigt, dass $2 E(\mathbf{k}) \delta^{(3)}\left(\mathbf{k}-\mathbf{k}^{\prime}\right)$ eine Lorentz-invariante Verteilung ist.
+
+%CHECK: Integration über $k_0$ explizit gezeigt; Invarianz von $d^3 \mathbf{k}$ und $\delta^{(3)}$ erläutert.

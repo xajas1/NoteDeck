@@ -1,0 +1,24 @@
+{
+  "score": 0.5,
+  "verdict": "Die Lösung ist unvollständig und enthält mathematische Ungenauigkeiten.",
+  "weaknesses": [
+    {
+      "code": "missing_equations",
+      "msg": "Die Verklebung der Ränder ist nicht korrekt beschrieben.",
+      "math_hint": "Die Verklebung $(x, 0) \to (x, 1)$ und $(0, y) \to (2, y)$ führt nicht zu einer Fläche vom Geschlecht 2."
+    },
+    {
+      "code": "incorrect_transformation",
+      "msg": "Die Übergangsfunktionen sind nicht korrekt definiert.",
+      "math_hint": "Die Übergangsfunktion $\\\\varphi_2 \\\\circ \\\\varphi_2^{-1}$ ist nicht korrekt, da sie die Verklebung nicht beschreibt."
+    },
+    {
+      "code": "missing_complex_structure",
+      "msg": "Die Überprüfung der komplexen Struktur ist unzureichend.",
+      "math_hint": "Die Cauchy-Riemann-Gleichungen sind nicht relevant für die reelle Mannigfaltigkeit."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Korrekte Verklebung: } (x, 0) \\sim (x, 1) \\text{ und } (0, y) \\sim (2, 1-y) \\text{ für eine Fläche vom Geschlecht 2."
+  ]
+}

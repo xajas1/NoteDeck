@@ -1,0 +1,20 @@
+{
+  "score": 0.7,
+  "verdict": "Teilweise korrekt, aber unvollständig",
+  "weaknesses": [
+    {
+      "code": "missing_inverse",
+      "msg": "Die Umkehrabbildung $\text{phi}_N^{-1}$ wurde nicht explizit definiert.",
+      "math_hint": "Definiere $\text{phi}_N^{-1}(u, v)$ explizit."
+    },
+    {
+      "code": "holomorphic_justification",
+      "msg": "Die Holomorphie der Übergangsabbildungen wurde nicht vollständig begründet.",
+      "math_hint": "Zeige explizit, dass die Ableitungen existieren und stetig sind."
+    }
+  ],
+  "fix_suggestions": [
+    "Definiere die Umkehrabbildung: \\( \\phi_N^{-1}(u, v) = \\left( \\frac{2u}{1 + u^2 + v^2}, \\frac{2v}{1 + u^2 + v^2}, \\frac{-1 + u^2 + v^2}{1 + u^2 + v^2} \\right) \\)",
+    "Zeige die Holomorphie: Berechne die Ableitungen der Übergangsabbildungen und zeige deren Stetigkeit."
+  ]
+}

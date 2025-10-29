@@ -1,0 +1,14 @@
+{
+  "score": 0.9,
+  "verdict": "Fast korrekt, aber kleine Lücken.",
+  "weaknesses": [
+    {
+      "code": "missing_holomorphy_proof",
+      "msg": "Die Holomorphie der Übergangsabbildung $\frac{1}{z}$ wurde nicht für den Punkt $z=0$ diskutiert.",
+      "math_hint": "Die Funktion $f(z) = \frac{1}{z}$ ist nicht auf ganz $\bar{\nabla}$ holomorph, da sie bei $z=0$ eine Polstelle hat."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Die Funktion } f(z) = \\frac{1}{z} \\text{ ist auf } \\mathbb{C} \\setminus \\{0\\} \\text{ holomorph, aber nicht auf ganz } \\mathbb{C} \\text{, da sie bei } z=0 \\text{ eine Polstelle hat.}"
+  ]
+}

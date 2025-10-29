@@ -1,0 +1,14 @@
+{
+  "score": 0.9,
+  "verdict": "Die Lösung ist fast korrekt, aber es fehlt eine explizite Erklärung, warum der symmetrische Teil verschwindet.",
+  "weaknesses": [
+    {
+      "code": "missing_symmetry_argument",
+      "msg": "Es fehlt eine explizite Erklärung, warum der symmetrische Teil von \\( \\\\epsilon^{\\alpha \\beta} \\) verschwindet.",
+      "math_hint": "Erkläre, warum \\( \\\\epsilon^{\\alpha \\beta} x_\\beta x_\\alpha = 0 \\) für beliebige \\( x^\\alpha \\) den symmetrischen Teil von \\( \\\\epsilon^{\\alpha \\beta} \\) eliminiert."
+    }
+  ],
+  "fix_suggestions": [
+    "Füge eine Erklärung hinzu, dass \\( \\\\epsilon^{\\alpha \\beta} x_\\beta x_\\alpha = 0 \\) für beliebige \\( x^\\alpha \\) nur erfüllt ist, wenn \\( \\\\epsilon^{\\alpha \\beta} = -\\\\epsilon^{\\beta \\alpha} \\), da der symmetrische Teil sonst nicht verschwindet."
+  ]
+}

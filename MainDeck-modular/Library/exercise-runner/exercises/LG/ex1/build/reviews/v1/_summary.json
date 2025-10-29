@@ -1,0 +1,126 @@
+{
+  "tasks": {
+    "1.1": {
+      "score": 0.8,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+      "weaknesses": [
+        {
+          "code": "missing_details",
+          "msg": "Die Lösung erwähnt nicht explizit, dass die Menge der orthogonalen Matrizen eine Mannigfaltigkeit ist.",
+          "math_hint": "Erwähne, dass $\text{O}(n)$ eine Mannigfaltigkeit ist, um die Kompaktheit zu untermauern."
+        },
+        {
+          "code": "incomplete_argument",
+          "msg": "Die Beschränktheit wird nicht vollständig hergeleitet.",
+          "math_hint": "Zeige, dass die Norm von $A$ als Matrix durch $\text{Spur}(A^T A) = n$ beschränkt ist."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Ergänze: Da $A^T A = I_n$, ist die Spur von $A^T A$ gleich $n$, was die Norm von $A$ beschränkt.}",
+        "\\text{Füge hinzu: Da $\text{O}(n)$ eine Mannigfaltigkeit ist, folgt aus der Abgeschlossenheit und Beschränktheit die Kompaktheit.}"
+      ]
+    },
+    "1.2": {
+      "score": 0.8,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+      "weaknesses": [
+        {
+          "code": "missing_compactness_argument",
+          "msg": "Die Lösung erwähnt nicht explizit, warum die Unbeschränktheit der Norm die Nichtkompaktheit impliziert.",
+          "math_hint": "Es fehlt die explizite Verbindung zwischen unbeschränkter Norm und Nichtkompaktheit."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Füge eine Erklärung hinzu, dass eine unbeschränkte Menge in einem metrischen Raum nicht kompakt sein kann, da eine kompakte Menge beschränkt sein muss.}"
+      ]
+    },
+    "2.1": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist fast korrekt, aber es gibt einen kleinen Fehler in der Schlussfolgerung.",
+      "weaknesses": [
+        {
+          "code": "incorrect_conclusion",
+          "msg": "Die Schlussfolgerung, dass \\( \\|A\\|^2 = \\left\\|A^* A\\right\\| \\) ist nicht korrekt.",
+          "math_hint": "Die Norm \\( \\|A^* A\\| \\) ist nicht gleich \\( \\lambda_{\\max}(A^* A) \\), sondern \\( \\|A\\|^2 = \\lambda_{\\max}(A^* A) \\)."
+        }
+      ],
+      "fix_suggestions": [
+        "\\[ \\|A\\|^2 = \\lambda_{\\max}(A^* A) \\]"
+      ]
+    },
+    "3.1": {
+      "score": 0.7,
+      "verdict": "Die Lösung enthält einige konzeptionelle Fehler und Unklarheiten.",
+      "weaknesses": [
+        {
+          "code": "incorrect_group_intersection",
+          "msg": "Die Definition von $\text{O}(2n)$ ist falsch, da sie nicht auf $n \times n$ Matrizen angewendet werden kann.",
+          "math_hint": "Die Bedingung $A^T A = I_{2n}$ ist nicht korrekt für $n \times n$ Matrizen."
+        },
+        {
+          "code": "incorrect_intersection_argument",
+          "msg": "Die Argumentation für die Gleichheit $\text{GL}_n(\text{C}) \\\\cap \text{O}(2n) = \text{U}(n)$ ist unklar und fehlerhaft.",
+          "math_hint": "Es fehlt eine klare Herleitung, warum $A^T A = I_{2n}$ für $n \times n$ Matrizen gelten soll."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Korrigiere die Definition von } \\text{O}(2n) \\text{ und erkläre, warum die Bedingung } A^T A = I_{2n} \\text{ für } n \\times n \\text{ Matrizen nicht zutrifft.}",
+        "\\text{Zeige, dass eine Matrix } A \\in \\text{GL}_n(\\mathbb{C}) \\text{ in } \\text{U}(n) \\text{ liegt, indem du die Bedingung } A^* A = I_n \\text{ korrekt herleitest.}"
+      ]
+    },
+    "3.2": {
+      "score": 0.7,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details und Klarstellungen.",
+      "weaknesses": [
+        {
+          "code": "MISSING_REALITY_CONDITION",
+          "msg": "Die Schlussfolgerung, dass $C$ reell sein muss, ist nicht ausreichend begründet.",
+          "math_hint": "Es fehlt eine explizite Herleitung, warum $C^T C = I$ und $C^* C = I$ implizieren, dass $C$ reell ist."
+        },
+        {
+          "code": "MISSING_DETERMINANT_CONDITION",
+          "msg": "Die Bedingung für die Determinante wird nicht ausreichend diskutiert.",
+          "math_hint": "Es fehlt eine explizite Überprüfung, dass $\text{det}(C) = 1$ für $C \to \text{SO}(n)$ gilt."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Zeige, dass } C^T C = I \\text{ und } C^* C = I \\Rightarrow C \\text{ ist reell: } C^* = \\overline{C^T} \\Rightarrow C = \\overline{C} \\text{ (reell)}.",
+        "\\text{Überprüfe, dass } \\det(C) = 1 \\text{ für } C \\in \\text{SO}(n) \\text{ gilt.}"
+      ]
+    },
+    "4.1": {
+      "score": 0.7,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+      "weaknesses": [
+        {
+          "code": "missing_proof_details",
+          "msg": "Die Lösung zeigt nicht explizit, dass jede Isometrie eindeutig als Paar $(a, A)$ dargestellt werden kann.",
+          "math_hint": "Zeige, dass die Zerlegung $f(x) = Ax + b$ eindeutig ist."
+        },
+        {
+          "code": "missing_group_homomorphism",
+          "msg": "Es fehlt die explizite Definition des Homomorphismus, der die Isomorphie zeigt.",
+          "math_hint": "Definiere den Homomorphismus $\theta: \text{Isom}_n(\text{R}) \to \text{Trans}_n(\text{R}) \rtimes \text{O}(n)$."
+        }
+      ],
+      "fix_suggestions": [
+        "Füge die Eindeutigkeit der Zerlegung hinzu: $f(x) = Ax + b$ ist eindeutig, da $A$ durch die lineare Komponente bestimmt ist und $b$ durch $f(0) = b$.",
+        "Definiere den Homomorphismus $\theta(f) = (b, A)$, wobei $f(x) = Ax + b$, und zeige, dass $\theta$ ein Isomorphismus ist."
+      ]
+    },
+    "4.2": {
+      "score": 0.8,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+      "weaknesses": [
+        {
+          "code": "missing_normality_proof",
+          "msg": "Die Normalität von \\(\\operatorname{SUT}_n(\\mathbb{K})\\) in \\(\\operatorname{UT}_n(\\mathbb{K})\\) wird nicht vollständig bewiesen.",
+          "math_hint": "Es fehlt die explizite Überprüfung, dass \\(DAD^{-1} \\in \\operatorname{SUT}_n(\\mathbb{K})\\) für alle \\(A \\in \\operatorname{SUT}_n(\\mathbb{K})\\) und \\(D \\in \\operatorname{Diag}_n(\\mathbb{K})\\)."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Zeige explizit, dass } DAD^{-1} \\text{ die Form einer Matrix in } \\operatorname{SUT}_n(\\mathbb{K}) \\text{ hat, indem die Diagonalelemente von } D \\text{ und } D^{-1} \\text{ sich aufheben.}"
+      ]
+    }
+  }
+}

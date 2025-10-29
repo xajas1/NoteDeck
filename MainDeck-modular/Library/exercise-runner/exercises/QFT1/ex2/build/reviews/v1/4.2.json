@@ -1,0 +1,20 @@
+{
+  "score": 0.8,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+  "weaknesses": [
+    {
+      "code": "missing_step",
+      "msg": "Der Übergang von der Integration über $k_0$ zu $d^3 \\mathbf{k}$ ist nicht vollständig erklärt.",
+      "math_hint": "Es fehlt die explizite Darstellung der Integration über $k_0$ mit der Delta-Funktion."
+    },
+    {
+      "code": "incomplete_argument",
+      "msg": "Die Argumentation zur Lorentz-Invarianz des Endausdrucks ist nicht vollständig.",
+      "math_hint": "Es fehlt eine detaillierte Erklärung, warum $d^3 \\mathbf{k}$ und $\\delta^{(3)}(\\mathbf{k}-\\mathbf{k}^{\\prime})$ Lorentz-invariant sind."
+    }
+  ],
+  "fix_suggestions": [
+    "\\int dk_0 \\frac{1}{2 E(\\mathbf{k})} \\delta(k_0 - E(\\mathbf{k})) = \\frac{1}{2 E(\\mathbf{k})}",
+    "Erkläre, dass $d^3 \\mathbf{k}$ und $\\delta^{(3)}(\\mathbf{k}-\\mathbf{k}^{\\prime})$ unter Lorentz-Transformationen invariant sind, da sie nur räumliche Komponenten betreffen."
+  ]
+}

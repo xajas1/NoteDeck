@@ -1,0 +1,57 @@
+Um zu zeigen, dass die Karten $\left(S^2 \backslash N, \phi_N\right)$ und $\left(S^2 \backslash S, \phi_S\right)$ einen komplexen Atlas von $S^2$ bilden, definieren wir die Umkehrabbildungen in Bezug auf die stereographische Projektion und zeigen die Holomorphie der Übergangsabbildungen durch Anwendung der Cauchy-Riemannschen Gleichungen.
+
+Die Umkehrabbildung $\phi_N^{-1}: \mathbb{C} \to S^2 \backslash \{N\}$ ist gegeben durch:
+
+\[
+\phi_N^{-1}(z) = \left( \frac{2\text{Re}(z)}{1 + |z|^2}, \frac{2\text{Im}(z)}{1 + |z|^2}, \frac{-1 + |z|^2}{1 + |z|^2} \right).
+\]
+
+Analog ist die Umkehrabbildung $\phi_S^{-1}: \mathbb{C} \to S^2 \backslash \{S\}$ gegeben durch:
+
+\[
+\phi_S^{-1}(z) = \left( \frac{2\text{Re}(z)}{1 + |z|^2}, \frac{2\text{Im}(z)}{1 + |z|^2}, \frac{1 - |z|^2}{1 + |z|^2} \right).
+\]
+
+Die Übergangsabbildung $\phi_S \circ \phi_N^{-1}: \mathbb{C} \to \mathbb{C}$ ist dann:
+
+\[
+\phi_S \circ \phi_N^{-1}(z) = \left( \frac{\text{Re}(z)}{|z|^2}, \frac{\text{Im}(z)}{|z|^2} \right).
+\]
+
+Um die Holomorphie zu zeigen, betrachten wir die komplexe Funktion $f(z) = \frac{\text{Re}(z)}{|z|^2} + i\frac{\text{Im}(z)}{|z|^2}$. Die Cauchy-Riemannschen Gleichungen lauten:
+
+\[
+\frac{\partial f}{\partial x} = \frac{\partial f}{\partial y} = 0,
+\]
+
+wobei $z = x + iy$. Berechnen wir die Ableitungen:
+
+\[
+\frac{\partial f}{\partial x} = \frac{1}{|z|^2} - \frac{2x^2}{|z|^4} + i\left(-\frac{2xy}{|z|^4}\right),
+\]
+
+\[
+\frac{\partial f}{\partial y} = -\frac{2xy}{|z|^4} + i\left(\frac{1}{|z|^2} - \frac{2y^2}{|z|^4}\right).
+\]
+
+Für die Holomorphie muss gelten:
+
+\[
+\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}, \quad \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}.
+\]
+
+Setzen wir $u = \frac{x}{|z|^2}$ und $v = \frac{y}{|z|^2}$, so erhalten wir:
+
+\[
+\frac{\partial u}{\partial x} = \frac{1}{|z|^2} - \frac{2x^2}{|z|^4}, \quad \frac{\partial v}{\partial y} = \frac{1}{|z|^2} - \frac{2y^2}{|z|^4},
+\]
+
+\[
+\frac{\partial u}{\partial y} = -\frac{2xy}{|z|^4}, \quad \frac{\partial v}{\partial x} = -\frac{2xy}{|z|^4}.
+\]
+
+Da die Cauchy-Riemannschen Gleichungen erfüllt sind, ist $f$ holomorph auf $\mathbb{C} \setminus \{0\}$.
+
+Analog zeigt man die Holomorphie der Übergangsabbildung $\phi_N \circ \phi_S^{-1}$ durch ähnliche Berechnungen.
+
+%CHECK: Umkehrabbildungen in Bezug auf stereographische Projektion definiert; Holomorphie durch Cauchy-Riemann gezeigt.

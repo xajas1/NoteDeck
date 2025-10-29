@@ -1,0 +1,14 @@
+{
+  "score": 0.9,
+  "verdict": "Die Lösung ist fast korrekt, aber es gibt einen kleinen Fehler in der Schlussfolgerung.",
+  "weaknesses": [
+    {
+      "code": "E1",
+      "msg": "Die Schlussfolgerung, dass \\(\\|A\\|^2 = \\lambda_{\\max}(A^* A)\\) ist, ist korrekt, aber es fehlt die Klarstellung, dass \\(\\|A\\| = \\sqrt{\\lambda_{\\max}(A^* A)}\\).",
+      "math_hint": "\\|A\\| = \\sqrt{\\lambda_{\\max}(A^* A)}"
+    }
+  ],
+  "fix_suggestions": [
+    "\\|A\\| = \\sqrt{\\lambda_{\\max}(A^* A)}"
+  ]
+}

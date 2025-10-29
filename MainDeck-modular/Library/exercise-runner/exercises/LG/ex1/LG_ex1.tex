@@ -1,44 +1,46 @@
-[[1.1]] Natural units, $\hbar=c=1$ : how much is 1 kg in GeV and $1 s$ in $\mathrm{GeV}^{-1}$ ? Use your result to express Newton's gravitational constant $G_N=6.67 \times 10^{-11} \mathrm{~m}^3 \mathrm{~kg}^{-1} \mathrm{~s}^{-2}$ in natural units, and give the value of the Planck mass $M_{P l}=G_N^{-1 / 2}$.
-[[2.1]] Starting from the definition of the Hamiltonian
 
-$$
-H(x, p) \equiv p \dot{x}-L(x, \dot{x})
-$$
+[[1.1]]
+(i) $\mathrm{O}(n)$ ist kompakt.
+[[1.2]]
+(ii) $\mathrm{SL}_n(\mathbb{K})$ ist nicht kompakt (für $n>1$ ).
 
-derive Hamilton's equations
+[[2.1]]
+2. Zeigen sie: Für jede Matrix $A \in M_n(\mathbb{C})$ ist $\|A\|^2=\left\|A^* A\right\|=\lambda_{\max }\left(A^* A\right)$.
 
-$$
-\frac{\partial H}{\partial x}=-\dot{p}, \quad \frac{\partial H}{\partial p}=\dot{x}
-$$
+Hier bezeichnet $\lambda_{\max }(B) \in \mathbb{R}$ den größten Eigenwert einer hermiteschen Matrix $B \in M_n(\mathbb{C})$.
 
-[Hint: Be careful about what the independent variables of a function are.]
-[[3.1]] Using the Schrödinger equation for the wavefunction $\Psi(\mathbf{x}, t)$
-
+[[3]]
+3. Im folgenden fassen wir $M_n(\mathbb{C})$ vermöge der Abbildung $\rho_n^{\prime}: M_n(\mathbb{C}) \rightarrow M_{2 n}(\mathbb{R})$ als Teilmenge von $M_{2 n}(\mathbb{R})$ auf und wir definieren
 $$
-\left\{-\frac{\hbar^2 \nabla^2}{2 m}+V(\mathbf{x})\right\} \Psi(\mathbf{x}, t)=i \hbar \frac{\partial}{\partial t} \Psi(\mathbf{x}, t)
-$$
-
-show that the probability density $\rho=\Psi^* \Psi$ satisfies the continuity equation
-
-$$
-\frac{\partial}{\partial t} \rho+\nabla \cdot \mathbf{j}=0
+\begin{aligned}
+\mathrm{O}(n, \mathbb{C}) & :=\left\{A \in \mathrm{GL}_n(\mathbb{C}): A^{\top} A=I_n\right\} \\
+\mathrm{SO}(n, \mathbb{C}) & :=\left\{A \in \mathrm{GL}_n(\mathbb{C}): A^{\top} A=I_n \text { und } \operatorname{det} A=1\right\} .
+\end{aligned}
 $$
 
-where
 
+
+
+[[3.1]]
+(i) Zeigen Sie: $\mathrm{GL}_n(\mathbb{C}) \cap \mathrm{O}(2 n)=\mathrm{U}(n)$ und $\mathrm{GL}_n(\mathbb{R}) \cap \mathrm{U}(n)=\mathrm{O}(n)$.
+
+[[3.2]]
+(ii)  Zeigen Sie: $\mathrm{O}(n, \mathbb{C}) \cap \mathrm{U}(n)=\mathrm{O}(n)$ und $\mathrm{SO}(n, \mathbb{C}) \cap \mathrm{SU}(n)=\mathrm{SO}(n)$.
+
+[[4]]
+
+Definition. Sei $G$ eine Gruppe, $N \unlhd G$ ein Normalteiler und $H \leq G$ eine Untergruppe sodass $G=N H$ und $N \cap H=\{e\}$ ist. Dann ist $G$ das semidirekte Produkt von $N$ und $H$ und wir schreiben $G=N \rtimes H=H \ltimes N$.
+4. Wir definieren die Translationsgruppe $\operatorname{Trans}_n(\mathbb{R})$ als
 $$
-\mathbf{j}=\frac{\hbar}{2 i m}\left\{\Psi^* \nabla \Psi-\left(\nabla \Psi^*\right) \Psi\right\} .
+\operatorname{Trans}_n(\mathbb{R})=\left\{\left(\begin{array}{cc}
+I_n & t \\
+0 & 1
+\end{array}\right): t \in \mathbb{R}^n\right\}
 $$
 
-[Hint: Consider $\Psi^* \times$ (Schr.Eq.) $-\Psi \times$ (Schr.Eq.)*]
-[[4.1]] Let $\hat{O}$ be a time-independent operator in the Schrödinger picture, and $\hat{H}$ the timeindependent Hamiltonian of the system. Starting from the definition of a Heisenberg operator,
+[[4.1]]
+Zeigen Sie:
+(i) $\operatorname{Isom}_n(\mathbb{R})=\operatorname{Trans}_n(\mathbb{R}) \rtimes \mathrm{O}(n)$.
 
-$$
-\hat{O}_H(t)=e^{\frac{i}{\hbar} \hat{H}\left(t-t_0\right)} \hat{O} e^{-\frac{i}{\hbar} \hat{H}\left(t-t_0\right)}
-$$
-
-derive the Heisenberg equation of motion
-
-$$
-i \hbar \frac{d \hat{O}_H}{d t}=\left[\hat{O}_H, \hat{H}_H\right]
-$$
+[[4.2]] Zeigen Sie:
+(ii) $\operatorname{UT}_n(\mathbb{K})=\operatorname{SUT}_n(\mathbb{K}) \rtimes \operatorname{Diag}_n(\mathbb{K})$.

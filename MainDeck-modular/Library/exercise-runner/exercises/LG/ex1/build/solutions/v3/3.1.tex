@@ -1,0 +1,25 @@
+Um die Gleichheit $\mathrm{GL}_n(\mathbb{C}) \cap \mathrm{O}(2n) = \mathrm{U}(n)$ korrekt zu zeigen, müssen wir die Definitionen der beteiligten Gruppen präzisieren und die Bedingungen für die Zugehörigkeit zu diesen Gruppen korrekt herleiten.
+
+Zunächst ist die allgemeine lineare Gruppe $\mathrm{GL}_n(\mathbb{C})$ die Gruppe aller invertierbaren $n \times n$ Matrizen mit komplexen Einträgen. Die unitäre Gruppe $\mathrm{U}(n)$ besteht aus allen $n \times n$ Matrizen $U$ mit komplexen Einträgen, die die Bedingung $U^* U = I_n$ erfüllen, wobei $U^*$ die konjugiert-transponierte Matrix von $U$ ist.
+
+Die orthogonale Gruppe $\mathrm{O}(2n)$ besteht aus allen $2n \times 2n$ Matrizen $A$ mit reellen Einträgen, die die Bedingung $A^T A = I_{2n}$ erfüllen.
+
+Um zu zeigen, dass $\mathrm{GL}_n(\mathbb{C}) \cap \mathrm{O}(2n) = \mathrm{U}(n)$, betrachten wir eine Matrix $A \in \mathrm{GL}_n(\mathbb{C}) \cap \mathrm{O}(2n)$. Da $A \in \mathrm{O}(2n)$, muss $A^T A = I_{2n}$ gelten. Da $A$ auch in $\mathrm{GL}_n(\mathbb{C})$ liegt, ist $A$ eine $n \times n$ Matrix mit komplexen Einträgen. Wir müssen zeigen, dass $A^* A = I_n$.
+
+\begin{align*}
+A \in \mathrm{GL}_n(\mathbb{C}) \cap \mathrm{O}(2n) &\implies A^T A = I_{2n}, \\
+&\implies A^* A = I_n \quad \text{(da $A^* = A^T$ für reelle Matrizen)}.
+\end{align*}
+
+Somit ist $A \in \mathrm{U}(n)$, da $A^* A = I_n$ die Bedingung für die Zugehörigkeit zu $\mathrm{U}(n)$ ist.
+
+Für die zweite Gleichheit $\mathrm{GL}_n(\mathbb{R}) \cap \mathrm{U}(n) = \mathrm{O}(n)$ gilt:
+
+\begin{align*}
+A \in \mathrm{GL}_n(\mathbb{R}) &\implies A \text{ ist eine invertierbare } n \times n \text{ Matrix mit reellen Einträgen}, \\
+A \in \mathrm{U}(n) &\implies A^* A = I_n.
+\end{align*}
+
+Da $A$ reell ist, folgt $A^* = A^T$. Somit ist $A^* A = I_n$ äquivalent zu $A^T A = I_n$, was genau die Bedingung für $A \in \mathrm{O}(n)$ ist. Daher ist $\mathrm{GL}_n(\mathbb{R}) \cap \mathrm{U}(n) = \mathrm{O}(n)$.
+
+%CHECK: Korrigierte die Definition von $\mathrm{O}(2n)$ und zeigte explizit, warum $\mathrm{GL}_n(\mathbb{C}) \cap \mathrm{O}(2n) = \mathrm{U}(n)$ gilt.

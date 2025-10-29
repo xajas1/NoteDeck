@@ -1,0 +1,20 @@
+{
+  "score": 0.7,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+  "weaknesses": [
+    {
+      "code": "missing_proof_details",
+      "msg": "Die Lösung zeigt nicht explizit, dass jede Isometrie eindeutig als Paar $(a, A)$ dargestellt werden kann.",
+      "math_hint": "Zeige, dass die Zerlegung $f(x) = Ax + b$ eindeutig ist."
+    },
+    {
+      "code": "missing_group_homomorphism",
+      "msg": "Es fehlt die explizite Definition des Homomorphismus, der die Isomorphie zeigt.",
+      "math_hint": "Definiere den Homomorphismus $\theta: \text{Isom}_n(\text{R}) \to \text{Trans}_n(\text{R}) \rtimes \text{O}(n)$."
+    }
+  ],
+  "fix_suggestions": [
+    "Füge die Eindeutigkeit der Zerlegung hinzu: $f(x) = Ax + b$ ist eindeutig, da $A$ durch die lineare Komponente bestimmt ist und $b$ durch $f(0) = b$.",
+    "Definiere den Homomorphismus $\theta(f) = (b, A)$, wobei $f(x) = Ax + b$, und zeige, dass $\theta$ ein Isomorphismus ist."
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "score": 0.8,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+  "weaknesses": [
+    {
+      "code": "missing_delta_function_step",
+      "msg": "Die Rolle der Delta-Funktion bei der Integration über k_0 ist nicht vollständig erklärt.",
+      "math_hint": "Die genaue Anwendung der Delta-Funktion bei der Integration über k_0 sollte detaillierter beschrieben werden."
+    },
+    {
+      "code": "missing_jacobian_step",
+      "msg": "Der Übergang von dE zu dk_0 erfordert eine genauere Betrachtung des Jacobians.",
+      "math_hint": "Der Schritt von dE = \\frac{\\mathbf{k} \\cdot d\\mathbf{k}}{E} zu dk_0 sollte den Jacobian berücksichtigen."
+    }
+  ],
+  "fix_suggestions": [
+    "\\int d^4 k \\, \\delta(k_0 - E(\\mathbf{k})) = \\int dk_0 \\, d^3 k \\, \\delta(k_0 - E(\\mathbf{k})) \\Rightarrow \\int dk_0 \\, \\delta(k_0 - E(\\mathbf{k})) = 1",
+    "dE = \\frac{\\mathbf{k} \\cdot d\\mathbf{k}}{E} \\Rightarrow dk_0 = dE = \\frac{\\mathbf{k} \\cdot d\\mathbf{k}}{E}"
+  ]
+}

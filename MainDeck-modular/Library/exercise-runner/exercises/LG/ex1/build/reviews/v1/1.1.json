@@ -1,0 +1,20 @@
+{
+  "score": 0.8,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+  "weaknesses": [
+    {
+      "code": "missing_details",
+      "msg": "Die Lösung erwähnt nicht explizit, dass die Menge der orthogonalen Matrizen eine Mannigfaltigkeit ist.",
+      "math_hint": "Erwähne, dass $\text{O}(n)$ eine Mannigfaltigkeit ist, um die Kompaktheit zu untermauern."
+    },
+    {
+      "code": "incomplete_argument",
+      "msg": "Die Beschränktheit wird nicht vollständig hergeleitet.",
+      "math_hint": "Zeige, dass die Norm von $A$ als Matrix durch $\text{Spur}(A^T A) = n$ beschränkt ist."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Ergänze: Da $A^T A = I_n$, ist die Spur von $A^T A$ gleich $n$, was die Norm von $A$ beschränkt.}",
+    "\\text{Füge hinzu: Da $\text{O}(n)$ eine Mannigfaltigkeit ist, folgt aus der Abgeschlossenheit und Beschränktheit die Kompaktheit.}"
+  ]
+}

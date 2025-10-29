@@ -1,0 +1,504 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17  Graphik
+% 18  Extra
+% 00. Titel und Autor
+
+\usepackage{slashed}
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\Sp}{\mathrm{Sp}}
+\newcommand{\Ogroup}{\mathrm{O}}
+\newcommand{\U}{\mathrm{U}}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\graphicspath{{../../Library/Images/}}
+\usepackage[export]{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+% Hellblau definieren
+\definecolor{hellblau}{rgb}{0.3,0.6,1}
+\newenvironment{note}{\par\begingroup\color{hellblau}\itshape}{\par\endgroup}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\begin{unitbox}\CustomHeading{Definition}{#1}{#2}}{\end{unitbox}}
+\newenvironment{PROP}[2]{\begin{unitbox}\CustomHeading{Proposition}{#1}{#2}}{\end{unitbox}}
+\newenvironment{THEO}[2]{\begin{unitbox}\CustomHeading{Theorem}{#1}{#2}}{\end{unitbox}}
+\newenvironment{LEM}[2]{\begin{unitbox}\CustomHeading{Lemma}{#1}{#2}}{\end{unitbox}}
+\newenvironment{KORO}[2]{\begin{unitbox}\CustomHeading{Corollar}{#1}{#2}}{\end{unitbox}}
+\newenvironment{REM}[2]{\begin{unitbox}\CustomHeading{Remark}{#1}{#2}}{\end{unitbox}}
+\newenvironment{EXA}[2]{\begin{unitbox}\CustomHeading{Example}{#1}{#2}}{\end{unitbox}}
+\newenvironment{STUD}[2]{\begin{unitbox}\CustomHeading{Study}{#1}{#2}}{\end{unitbox}}
+\newenvironment{CONC}[2]{\begin{unitbox}\CustomHeading{Concept}{#1}{#2}}{\end{unitbox}}
+\newenvironment{OTH}[2]{\begin{unitbox}\CustomHeading{Other}{#1}{#2}}{\end{unitbox}}
+\newenvironment{EXE}[2]{\begin{unitbox}\CustomHeading{Exercise}{#1}{#2}}{\end{unitbox}}
+\newenvironment{MOT}[2]{\begin{unitbox}\CustomHeading{Motivation}{#1}{#2}}{\end{unitbox}}
+\newenvironment{PROOF}[2]{\begin{unitbox}\CustomHeading{Proof}{#1}{#2}}{\end{unitbox}}
+
+% --- Unit Umgebung für Source-Inhalte ---
+\usepackage{mdframed}
+\newmdenv[
+  linewidth=1pt,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftmargin=0cm,
+  rightmargin=0cm,
+  skipabove=10pt,
+  skipbelow=10pt,
+  innertopmargin=0.5\baselineskip,
+  innerbottommargin=0.5\baselineskip,
+  backgroundcolor=gray!10,
+  linecolor=gray
+]{unitbox}
+
+\newenvironment{unit}[1]
+  {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
+  {\end{unitbox}}
+
+% --- 17. ... ---
+
+% --- 18. Extras ---
+\usepackage{stmaryrd}
+\usepackage{bbold}  % falls du \mathbb{1} nutzen willst
+
+% --- 00. Titel und Autor ---
+\title{Mein Titel}
+\author{Tim Jaschik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+Kurze Beschreibung …
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\tableofcontents
+
+\pagebreak
+
+
+\section{Zeitabhängige Gauge-Gruppen}
+
+
+\subsection{(Ko-)Homologische Struktur zeitabhängiger Eichgruppen}
+
+\paragraph{(a) Ausgangspunkt: dynamische Eichstruktur.}
+Sei $M$ eine glatte Raumzeitmannigfaltigkeit und
+$G_\mathrm{gauge}(t)\subseteq G$ eine glatte Familie von Lie-Untergruppen.
+Die zeitabhängige Eichgruppe definiert eine Familie von
+Prinzipalbündeln $(P_t,\pi_t,M,G_\mathrm{gauge}(t))$
+mit lokalen Verbindungen
+\[
+A_t(t)\in\Omega^1(M,\mathfrak g_\mathrm{gauge}(t)).
+\]
+Diese Verbindungen beschreiben lokale Zuordnungen
+\[
+A_t(t)\colon T_xM\to\mathfrak g_\mathrm{gauge}(t)
+\]
+und koppeln die innere Symmetrie an die Raumzeitstruktur.
+Die Gesamtheit der glatten Verbindungen
+\[
+\mathcal A:=\{\,A\in\Omega^1(M,\mathfrak g)\,\}
+\]
+bildet eine affine Mannigfaltigkeit, auf der die Eichgruppe
+\[
+\mathcal G:=C^\infty(M,G)
+\]
+durch
+\[
+A\mapsto A^g:=g^{-1}Ag+g^{-1}dg
+\]
+wirkt.
+
+\paragraph{(b) Kohomologische Beschreibung.}
+Die Eichtransformationen $g\in\mathcal G$ sind
+\emph{nichtlineare $0$-Kozyle} in einer nichtabelschen Kohomologie.
+Der Zusammenhang $A$ definiert einen \emph{1-Kozyklus}
+\[
+A\in Z^1(M,\mathfrak g),
+\qquad
+dA+\tfrac12[A,A]=F\in Z^2(M,\mathfrak g),
+\]
+wobei $F$ die Krümmung des Zusammenhangs ist.
+Zwei Verbindungen, die durch eine Eichtransformation verknüpft sind,
+gehören zur selben Kohomologieklasse
+\[
+[A]\in H^1(M,G),
+\]
+der Menge der Isomorphieklassen flacher $G$-Prinzipalbündel.
+
+\paragraph{(c) Zeitabhängige Familie von Kohomologieklassen.}
+Für eine dynamische Eichgruppe $G_\mathrm{gauge}(t)$
+entsteht eine glatte Familie von Klassen
+\[
+[A_t(t)]\in H^1(M,G_\mathrm{gauge}(t)).
+\]
+Ihre zeitliche Variation wird durch die zusätzliche
+Verbindungskomponente $A_t(t)\,dt$
+auf dem Produkt $M\times\mathbb R_t$ beschrieben.
+Die Gesamtverbindung lautet
+\[
+\mathbb A = A(x,t) + A_t(x,t)\,dt
+\;\in\;
+\Omega^1(M\times\mathbb R_t,\mathfrak g),
+\]
+und die zugehörige Krümmung
+\[
+\mathbb F = d_{M\times\mathbb R}\mathbb A + \tfrac12[\mathbb A,\mathbb A]
+= F_M + (D_MA_t-\partial_tA)\wedge dt.
+\]
+Das $dt$-Glied misst die zeitliche Veränderung der Kohomologieklasse:
+\[
+D_MA_t-\partial_tA=0
+\quad\Leftrightarrow\quad
+[A_t(t)]\text{ konstant in }H^1(M,G).
+\]
+Bei Nichtverschwindung definiert es ein nichttriviales
+Element in $H^2(M\times\mathbb R_t,\mathfrak g)$
+— die topologische Signatur einer zeitabhängigen
+Verformung der Eichstruktur.
+
+\paragraph{(d) Homologische Perspektive.}
+Homologisch interpretiert beschreibt der Pfad
+$t\mapsto [A_t(t)]$ einen Zyklus in der Kohomologiemenge $H^1(M,G)$.
+Ein nichttrivialer Rand
+\[
+\frac{d}{dt}[A_t]\neq0
+\]
+entspricht einer \emph{topologischen Transition}:
+das System wechselt zwischen nichtisomorphen
+Bündelklassen. In der klassischen Feldtheorie entspricht dies
+z.\,B.\ der Entstehung oder Auslöschung von Monopolstrukturen,
+in der Quantenmechanik der Akkumulation geometrischer Phasen.
+
+\paragraph{(e) Physikalische Interpretation.}
+\begin{itemize}
+\item \textbf{Statische Kohomologie:}
+  $[A_t]$ bleibt konstant $\Rightarrow$ topologische Stabilität der Symmetrie.
+\item \textbf{Zeitabhängige Kohomologie:}
+  $[A_t]$ variiert $\Rightarrow$ topologische oder anomale Entwicklung.
+\item \textbf{Berry-Krümmung:}
+  Für einen Parameterraum $\mathcal P$ ist die $U(1)$-Verbindung
+  $A=i\langle n|\mathrm d n\rangle$
+  eine $1$-Form auf $\mathcal P$ mit Krümmung
+  $F=\mathrm dA\in H^2(\mathcal P,U(1))$.
+  Ihre Kohomologieklasse ist die erste Chern-Klasse des
+  Eigenraum-Bündels.
+\item \textbf{Chern–Simons- und Wess–Zumino-Terme:}
+  In $3$- bzw. $4$-Dimensionen definiert $\mathrm{Tr}(A\,dA+\tfrac23A^3)$
+  eine Klasse in $H^3(M,\mathbb R)$, die globale Anomalien charakterisiert.
+\end{itemize}
+
+\paragraph{(f) Übersicht der ko-/homologischen Ebenen.}
+\[
+\boxed{
+\begin{array}{lll}
+\textbf{Kohomologieebene} & \textbf{Repräsentanten} & \textbf{Physikalische Bedeutung}\\[3pt]
+\hline
+H^0(M,G) & g(x) & \text{Eichtransformationen (0-Kozyle)}\\[3pt]
+H^1(M,G) & [A] & \text{Bündel- bzw. Eichklassen}\\[3pt]
+H^2(M,\mathfrak g) & [F] & \text{Feldstärken, Krümmungen}\\[3pt]
+H^2(M,U(1)) & [F_B] & \text{Berry-Phase, Chern-Klasse}\\[3pt]
+H^3(M,\mathbb Z) & [\mathrm{CS}] & \text{Anomalien, topologische Invarianz}\\[3pt]
+\end{array}
+}
+\]
+
+\paragraph{(g) Geometrisches Diagramm.}
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+  & \Omega^1(M,\mathfrak g)
+      \arrow[d, shift left=.4ex, "{\,d+\tfrac12[\ ,\ ]\,}"]
+      \arrow[d, shift right=.4ex, swap, "{F}"]
+      \arrow[r, "{\pi}"]
+    & H^1(M,G)
+      \arrow[d, "{\partial_t}"] \\
+  & \Omega^2(M,\mathfrak g)
+      \arrow[r, "{\mathrm{cl}}"]
+    & H^2(M,\mathfrak g)
+\end{tikzcd}
+\]
+Zeitabhängige Eichgruppen führen zu einem Fluss
+$t\mapsto[A_t(t)]$ in $H^1(M,G)$.
+Ein nichttrivialer Rand $\partial_t[A_t]\neq0$
+projiziert auf eine Klasse $[F_{Mt}]\in H^2(M\times\mathbb R_t,\mathfrak g)$,
+die die zeitliche Krümmung der Symmetriestruktur beschreibt.
+
+\paragraph{(h) Zusammenfassung.}
+\[
+\boxed{
+\begin{aligned}
+&A\in\Omega^1(M,\mathfrak g)\;\Rightarrow\;[A]\in H^1(M,G),\\[3pt]
+&F=dA+\tfrac12[A,A]\;\Rightarrow\;[F]\in H^2(M,\mathfrak g),\\[3pt]
+&A_t(t)\Rightarrow [A_t(t)]\in H^1(M,G_\mathrm{gauge}(t)),\\[3pt]
+&\partial_t [A_t]=0 \;\Leftrightarrow\;\text{Topologische Stabilität},\\[3pt]
+&\partial_t [A_t]\neq0 \;\Leftrightarrow\;\text{Anomalie, Phasenübergang oder geometrische Phase.}
+\end{aligned}
+}
+\]
+
+\paragraph{(i) Interpretationshinweis.}
+Kohomologisch beschreibt die Zeitentwicklung in einem System mit dynamischer Eichgruppe
+nicht nur die Bewegung innerhalb eines Orbits, sondern auch
+die \emph{zeitliche Veränderung der Orbitstruktur selbst}.
+Der Zeitfluss $t\mapsto [A_t(t)]$ ist eine Kurve in der nichtabelschen
+Kohomologie $H^1(M,G)$;
+sein Rand in $H^2(M,\mathfrak g)$ misst, ob die
+Eichstruktur topologisch invariant (flach) oder deformiert (anomale Entwicklung)
+ist.
+Die (ko-)homologischen Invarianten sind somit die
+\emph{integralen Erhaltungssätze der Symmetriegeometrie}.
+
+
+\subsection{Integrale und kohomologische Erhaltungssätze}
+
+\paragraph{(a) Von der lokalen Krümmung zur globalen Invarianz.}
+Die Krümmung $F=dA+\tfrac12[A,A]\in\Omega^2(M,\mathfrak g)$
+ist lokal eine Differentialform, global jedoch
+nur bis auf Eichtransformation bestimmt.
+Ihre Invarianz zeigt sich in der Kohomologieklasse $[F]\in H^2(M,\mathfrak g)$.
+
+Ist $M$ orientiert und kompakt, so liefert das Integral über
+geschlossene 2-Zyklen $C_2\subset M$
+\[
+\int_{C_2} \mathrm{Tr}(F)
+\]
+eine homologische Invariante:
+das Integral hängt nur von der Kohomologieklasse $[F]$ und der Homologieklasse $[C_2]$
+ab, nicht von der konkreten Wahl von $A$.
+Dies ist die geometrische Form eines \emph{Erhaltungssatzes}.
+
+\paragraph{(b) Chern-Klassen und quantisierte Flüsse.}
+Für eine unitäre Darstellung $G\subset U(N)$
+definiert $\mathrm{Tr}(F\wedge F)$ die \emph{zweite Chern-Klasse}
+\[
+c_2(A)=\frac{1}{8\pi^2}\mathrm{Tr}(F\wedge F)\in H^4(M,\mathbb Z),
+\]
+deren Integrale über geschlossene 4-Zyklen ganzzahlig sind:
+\[
+\int_{C_4} c_2(A)\in\mathbb Z.
+\]
+Diese Ganzzahligkeit entspricht der \emph{Quantisierung topologischer Ladungen}
+(z.\,B.\ instanton number in Yang–Mills-Theorie).
+
+\paragraph{(c) Chern–Simons-Invarianten und Randterme.}
+Auf einer 3-dimensionalen Mannigfaltigkeit $M^3$
+ist der Chern–Simons-Term
+\[
+\mathrm{CS}(A)=\mathrm{Tr}\!\left(A\wedge dA+\tfrac23A\wedge A\wedge A\right)
+\]
+eine $3$-Form mit
+\[
+d\,\mathrm{CS}(A)=\mathrm{Tr}(F\wedge F).
+\]
+Damit gilt:
+\[
+\int_{M^3}\mathrm{CS}(A)
+\]
+ist modulo $2\pi\mathbb Z$ wohldefiniert
+und beschreibt eine \emph{topologische Phase} des Systems (z.\,B.\ Berry-Phase oder WZ-Term).
+
+\paragraph{(d) Zeitentwicklung und integrale Erhaltung.}
+Auf $M\times\mathbb R_t$ kann man
+\[
+\frac{d}{dt}\int_{C_2}\mathrm{Tr}(F)=\int_{\partial(C_2\times[0,t])}\mathrm{Tr}(F_{Mt})\,dt
+\]
+als Differentialform der Erhaltungssätze interpretieren.
+Verschwindet $[F_{Mt}]$ in $H^2(M,\mathfrak g)$,
+so ist der Fluss topologisch konservativ.
+
+\paragraph{(e) Zusammenfassung.}
+\[
+\boxed{
+\begin{aligned}
+F\in Z^2(M,\mathfrak g)
+&\Rightarrow [F]\in H^2(M,\mathfrak g),\\[3pt]
+d\,\mathrm{CS}(A)&=\mathrm{Tr}(F\wedge F),\\[3pt]
+\int_{C_4}\mathrm{Tr}(F\wedge F)\in 8\pi^2\mathbb Z,\\[3pt]
+\partial_t[F]=0 &\;\Rightarrow\; \text{Erhaltung topologischer Ladung},\\[3pt]
+\partial_t[F]\neq0 &\;\Rightarrow\; \text{Phasenübergang oder Anomalie.}
+\end{aligned}
+}
+\]
+
+\paragraph{(f) Interpretationshinweis.}
+Diese integralen Größen sind die \emph{ko\-homologischen Schatten}
+der dynamischen Symmetriestruktur:
+\begin{itemize}
+\item $H^2(M,\mathfrak g)$ misst die interne Krümmung (Feldstärke).
+\item $H^3(M,\mathbb Z)$ klassifiziert topologische Phasen und Anomalien.
+\item $H^4(M,\mathbb Z)$ kodiert quantisierte Instanton-Zahlen.
+\end{itemize}
+Physikalische Erhaltungssätze werden dadurch als
+\emph{Integralklassen} verstanden, die sich aus der geschlossenen Struktur
+der Krümmungsformen ergeben.
+
+
+
+
+
+
+
+
+\pagebreak
+
+
+
+
+
+
+
+
+
+
+
+\pagebreak
+\printbibliography
+\end{document}

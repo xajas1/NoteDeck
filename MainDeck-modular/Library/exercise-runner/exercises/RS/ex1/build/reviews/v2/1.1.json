@@ -1,0 +1,20 @@
+{
+  "score": 0.7,
+  "verdict": "Die Lösung ist teilweise korrekt, aber es fehlen einige wichtige Details.",
+  "weaknesses": [
+    {
+      "code": "missing_holomorphic_proof",
+      "msg": "Die Holomorphie der Übergangsabbildung wurde nicht vollständig gezeigt.",
+      "math_hint": "Es fehlt die Anwendung der Cauchy-Riemannschen Differentialgleichungen zur Bestätigung der Holomorphie."
+    },
+    {
+      "code": "incomplete_inverse_definition",
+      "msg": "Die Definition der Umkehrabbildungen ist unvollständig.",
+      "math_hint": "Die Umkehrabbildungen sollten in Bezug auf die stereographische Projektion definiert werden."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Zeige die Holomorphie durch Anwendung der Cauchy-Riemannschen Gleichungen:} \\\\ \\frac{\\partial f}{\\partial u} = \\frac{\\partial f}{\\partial v} = 0 \\text{ für } f(u,v) = \\frac{u}{u^2 + v^2} + i\\frac{v}{u^2 + v^2}",
+    "\\text{Definiere die Umkehrabbildungen explizit in Bezug auf die stereographische Projektion:} \\\\ \\phi_N^{-1}(z) = \\left( \\frac{2\\text{Re}(z)}{1 + |z|^2}, \\frac{2\\text{Im}(z)}{1 + |z|^2}, \\frac{-1 + |z|^2}{1 + |z|^2} \\right)"
+  ]
+}

@@ -1,0 +1,9 @@
+Um die Kompaktheit der orthogonalen Gruppe $\mathrm{O}(n)$ zu zeigen, müssen wir ihre Abgeschlossenheit und Beschränktheit in $\mathbb{R}^{n \times n}$ nachweisen. Zusätzlich ist es hilfreich zu erwähnen, dass $\mathrm{O}(n)$ eine Mannigfaltigkeit ist.
+
+Zunächst zeigen wir, dass $\mathrm{O}(n)$ abgeschlossen ist. Die Gruppe $\mathrm{O}(n)$ besteht aus allen $n \times n$-Matrizen $A$, die die Bedingung $A^T A = I_n$ erfüllen. Die Abbildung $A \mapsto A^T A$ ist stetig, da sowohl die Transposition als auch die Matrixmultiplikation stetige Operationen sind. Die Menge der Matrizen, die die Gleichung $A^T A = I_n$ erfüllen, ist das Urbild der stetigen Abbildung $A \mapsto A^T A$ unter der konstanten Abbildung $A \mapsto I_n$. Da das Urbild eines Punktes unter einer stetigen Abbildung abgeschlossen ist, folgt, dass $\mathrm{O}(n)$ abgeschlossen ist.
+
+Um die Beschränktheit von $\mathrm{O}(n)$ zu zeigen, betrachten wir die Norm einer Matrix $A \in \mathrm{O}(n)$. Da $A^T A = I_n$, gilt für die Spur $\text{Spur}(A^T A) = \text{Spur}(I_n) = n$. Die Spur einer Matrix ist gleich der Summe der Quadrate der Singulärwerte, die gleich 1 sind, da $A$ orthogonal ist. Somit ist die Frobenius-Norm von $A$, definiert als $\|A\|_F = \sqrt{\text{Spur}(A^T A)}$, gleich $\sqrt{n}$. Dies zeigt, dass die Norm von $A$ als Matrix durch $\sqrt{n}$ beschränkt ist, was bedeutet, dass $\mathrm{O}(n)$ als Teilmenge von $\mathbb{R}^{n \times n}$ beschränkt ist.
+
+Da $\mathrm{O}(n)$ sowohl abgeschlossen als auch beschränkt ist und $\mathbb{R}^{n \times n}$ ein endlich-dimensionaler Raum ist, folgt aus dem Satz von Heine-Borel, dass $\mathrm{O}(n)$ kompakt ist. Zusätzlich ist $\mathrm{O}(n)$ eine Mannigfaltigkeit, was die Anwendung des Satzes von Heine-Borel rechtfertigt.
+
+%CHECK: Abgeschlossenheit und Beschränktheit detailliert hergeleitet; Mannigfaltigkeit erwähnt.

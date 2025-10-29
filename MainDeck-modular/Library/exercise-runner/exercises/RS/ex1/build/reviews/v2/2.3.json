@@ -1,0 +1,26 @@
+{
+  "score": 0.6,
+  "verdict": "Die Lösung ist teilweise korrekt, aber es fehlen wesentliche Details.",
+  "weaknesses": [
+    {
+      "code": "MISSING_TRANSITION_DETAILS",
+      "msg": "Die Übergangsfunktionen sind nicht ausreichend detailliert beschrieben.",
+      "math_hint": "Es fehlt eine explizite Darstellung der Übergangsfunktionen zwischen den Karten, insbesondere wie die Verklebung der Ränder die Karten beeinflusst."
+    },
+    {
+      "code": "INCOMPLETE_MANIFOLD_PROOF",
+      "msg": "Die Begründung für die Mannigfaltigkeitsstruktur ist unvollständig.",
+      "math_hint": "Es fehlt eine detaillierte Erklärung, wie die Verklebung der Ränder zu einer Fläche vom Geschlecht 2 führt."
+    },
+    {
+      "code": "LACK_OF_HOLOMORPHICITY_PROOF",
+      "msg": "Die Argumentation zur Holomorphie ist unzureichend.",
+      "math_hint": "Es fehlt eine explizite Überprüfung der Cauchy-Riemann-Gleichungen für die Übergangsfunktionen."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Füge eine detaillierte Beschreibung der Übergangsfunktionen hinzu, insbesondere wie die Verklebung der Ränder die Karten beeinflusst.}",
+    "\\text{Erkläre explizit, wie die Verklebung der Ränder zu einer Fläche vom Geschlecht 2 führt.}",
+    "\\text{Überprüfe die Cauchy-Riemann-Gleichungen für die Übergangsfunktionen, um die Holomorphie zu widerlegen.}"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "score": 0.4,
+  "verdict": "Die Lösung ist unvollständig und enthält mathematische Ungenauigkeiten.",
+  "weaknesses": [
+    {
+      "code": "missing_equations",
+      "msg": "Die Verklebung der Ränder ist nicht korrekt beschrieben.",
+      "math_hint": "Die Verklebung $(0, y) \to (2, 1-y)$ ist nicht ausreichend für eine Fläche vom Geschlecht 2."
+    },
+    {
+      "code": "incomplete_transitions",
+      "msg": "Übergangsfunktionen sind nicht vollständig spezifiziert.",
+      "math_hint": "Es fehlen die genauen Formeln für die Übergangsfunktionen, die die Verklebung berücksichtigen."
+    },
+    {
+      "code": "incorrect_topology",
+      "msg": "Die topologische Struktur ist nicht korrekt beschrieben.",
+      "math_hint": "Die Verklebung führt nicht zu einer Fläche vom Geschlecht 2 ohne zusätzliche Identifikationen."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Verklebung der Ränder: } (x, 0) \\sim (x, 1), (0, y) \\sim (2, 1-y), \\text{ und weitere Identifikationen für Geschlecht 2.}",
+    "\\text{Übergangsfunktionen: } \\varphi_2 \\circ \\varphi_2^{-1} \\text{ muss die Verklebung korrekt abbilden.}"
+  ]
+}

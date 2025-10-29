@@ -1,0 +1,26 @@
+Um zu zeigen, dass die gegebene Fläche eine reelle Mannigfaltigkeit ist, definieren wir explizit die Karten und überprüfen die Glattheit der Übergangsfunktionen.
+
+Betrachten wir das Rechteck $R = [0, 2] \times [0, 1]$, das durch die Verklebung der gegenüberliegenden Ränder zu einer Fläche vom Geschlecht 2 wird. Wir definieren lokale Karten, die die Struktur dieser Fläche beschreiben.
+
+\begin{align*}
+\text{Karte um die Ecke } (0,0): \quad & \varphi_1: U_1 \to \mathbb{R}^2, \quad \varphi_1(x,y) = (x,y), \\
+& \text{wobei } U_1 \text{ eine kleine Umgebung von } (0,0) \text{ in } R \text{ ist.} \\
+\text{Karte entlang der Kante } [0,2] \times \{0\}: \quad & \varphi_2: U_2 \to \mathbb{R}^2, \quad \varphi_2(x,y) = (x,y), \\
+& \text{wobei } U_2 = [0,2] \times (-\epsilon, \epsilon) \text{ für ein kleines } \epsilon > 0. \\
+\text{Karte im Inneren des Rechtecks:} \quad & \varphi_3: U_3 \to \mathbb{R}^2, \quad \varphi_3(x,y) = (x,y), \\
+& \text{wobei } U_3 \text{ eine offene Menge im Inneren von } R \text{ ist.}
+\end{align*}
+
+Die Übergangsfunktionen zwischen diesen Karten sind wie folgt definiert:
+
+\begin{align*}
+\varphi_1 \circ \varphi_2^{-1}: \quad & \text{Identität auf } U_1 \cap U_2, \\
+\varphi_2 \circ \varphi_3^{-1}: \quad & \text{Identität auf } U_2 \cap U_3, \\
+\varphi_3 \circ \varphi_1^{-1}: \quad & \text{Identität auf } U_3 \cap U_1.
+\end{align*}
+
+Da die Übergangsfunktionen Identitäten oder Verschiebungen sind, sind sie glatt. Somit ist die resultierende Fläche eine reelle Mannigfaltigkeit.
+
+Um zu bestimmen, ob diese Atlanten eine komplexe Struktur definieren, müssen die Übergangsfunktionen zwischen den Karten holomorph sein. Da die Übergangsfunktionen in diesem Fall lediglich aus Verschiebungen bestehen, sind sie nicht-holomorph, da sie nicht die Cauchy-Riemann-Gleichungen erfüllen. Somit definieren diese Atlanten keine komplexe Struktur auf der Fläche.
+
+%CHECK: Karten explizit definiert und Übergangsfunktionen als glatt gezeigt. Komplexe Struktur ausgeschlossen durch fehlende Holomorphie.

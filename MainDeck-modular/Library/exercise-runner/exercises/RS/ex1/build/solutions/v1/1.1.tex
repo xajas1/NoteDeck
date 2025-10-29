@@ -1,0 +1,25 @@
+Um zu zeigen, dass die Karten $\left(S^2 \backslash N, \phi_N\right)$ und $\left(S^2 \backslash S, \phi_S\right)$ einen komplexen Atlas von $S^2$ bilden, müssen wir zunächst die Kartenabbildungen $\phi_N$ und $\phi_S$ definieren und dann zeigen, dass die Übergangsabbildungen zwischen diesen Karten holomorph sind.
+
+Betrachten wir die Stereografische Projektion von der Nord- und Südpolkarte. Sei $S^2 = \{ (x, y, z) \in \mathbb{R}^3 \mid x^2 + y^2 + z^2 = 1 \}$ die 2-Sphäre. Die Nordpolkarte $\phi_N: S^2 \backslash \{N\} \to \mathbb{C}$ ist gegeben durch die stereografische Projektion vom Nordpol $N = (0, 0, 1)$:
+
+\[
+\phi_N(x, y, z) = \left( \frac{x}{1 - z}, \frac{y}{1 - z} \right).
+\]
+
+Analog ist die Südpolkarte $\phi_S: S^2 \backslash \{S\} \to \mathbb{C}$ durch die stereografische Projektion vom Südpol $S = (0, 0, -1)$ definiert:
+
+\[
+\phi_S(x, y, z) = \left( \frac{x}{1 + z}, \frac{y}{1 + z} \right).
+\]
+
+Um zu zeigen, dass diese Karten einen komplexen Atlas bilden, müssen wir die Übergangsabbildungen zwischen den Karten $\phi_N$ und $\phi_S$ betrachten. Die Übergangsabbildung $\phi_S \circ \phi_N^{-1}: \mathbb{C} \to \mathbb{C}$ ist gegeben durch:
+
+\[
+\phi_S \circ \phi_N^{-1}(u, v) = \left( \frac{u}{u^2 + v^2}, \frac{v}{u^2 + v^2} \right).
+\]
+
+Diese Abbildung ist holomorph, da sie sich als eine rationale Funktion in den komplexen Variablen $u$ und $v$ ausdrücken lässt, die überall außer im Ursprung definiert ist. Da der Ursprung nicht im Bild von $\phi_N$ liegt, ist die Übergangsabbildung auf ihrem gesamten Definitionsbereich holomorph.
+
+Analog ist die Übergangsabbildung $\phi_N \circ \phi_S^{-1}$ ebenfalls holomorph, da sie die Umkehrung der zuvor betrachteten Abbildung ist und somit ebenfalls durch rationale Funktionen beschrieben werden kann.
+
+Da beide Übergangsabbildungen holomorph sind, bilden die Karten $\left(S^2 \backslash N, \phi_N\right)$ und $\left(S^2 \backslash S, \phi_S\right)$ einen komplexen Atlas für die 2-Sphäre $S^2$.

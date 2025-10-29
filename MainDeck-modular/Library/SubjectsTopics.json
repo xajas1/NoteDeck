@@ -1178,5 +1178,43 @@
         }
       }
     }
+  },
+  "FA": {
+    "index": 18,
+    "topics": {
+      "Normtopologie": {
+        "index": 1,
+        "parent": null,
+        "litIDs": {
+          "W25": "FA-W25-1"
+        }
+      },
+      "Vollständige Räume": {
+        "index": 2,
+        "parent": null,
+        "litIDs": {
+          "A25": "FA-A25-2"
+        }
+      }
+    }
+  },
+  "RS": {
+    "index": 19,
+    "topics": {
+      "Riemannsche Flächen": {
+        "index": 1,
+        "parent": null,
+        "litIDs": {
+          "M25": "RS-M25-1"
+        }
+      },
+      "Holomorphe Abbildungen zwischen Riemannschen Flächen": {
+        "index": 2,
+        "parent": null,
+        "litIDs": {
+          "M25": "RS-M25-2"
+        }
+      }
+    }
   }
 }

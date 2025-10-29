@@ -1,0 +1,20 @@
+{
+  "score": 0.5,
+  "verdict": "Unvollständige Herleitung",
+  "weaknesses": [
+    {
+      "code": "missing_equations",
+      "msg": "Fehlende explizite Definition der Karten und Übergangsfunktionen",
+      "math_hint": "Definiere explizit die Karten $\\\\varphi_1, \\\\varphi_2, \\\\varphi_3$ und die Übergangsfunktionen zwischen ihnen."
+    },
+    {
+      "code": "incomplete_proof",
+      "msg": "Unvollständige Begründung der Mannigfaltigkeitsstruktur",
+      "math_hint": "Zeige explizit, dass die Karten die Fläche vollständig abdecken und die Übergangsfunktionen glatt sind."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Definiere die Karten explizit:} \\\\varphi_1(x,y) = (x,y), \\\\varphi_2(x,y) = (x,y), \\\\varphi_3(x,y) = (x,y) \\text{ auf den jeweiligen Bereichen.}",
+    "\\text{Zeige, dass die Übergangsfunktionen glatt sind:} \\\\text{Für } \\\\varphi_1 \\\\circ \\\\varphi_2^{-1}, \\\\varphi_2 \\\\circ \\\\varphi_3^{-1}, \\\\varphi_3 \\\\circ \\\\varphi_1^{-1} \\text{ sind die Übergangsfunktionen Identitäten oder Verschiebungen.}"
+  ]
+}

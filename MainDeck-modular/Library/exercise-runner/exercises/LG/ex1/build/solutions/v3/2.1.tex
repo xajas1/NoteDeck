@@ -1,0 +1,39 @@
+Um die gegebene Aussage zu zeigen, betrachten wir die Definition der Matrixnorm und ihre Beziehung zu den Eigenwerten der Matrix \(A^* A\).
+
+Die Norm einer Matrix \( A \in M_n(\mathbb{C}) \) ist definiert als
+
+\[
+\|A\| = \sup_{x \in \mathbb{C}^n, \|x\| = 1} \|Ax\|.
+\]
+
+Das Quadrat der Norm ist dann gegeben durch
+
+\[
+\|A\|^2 = \left( \sup_{x \in \mathbb{C}^n, \|x\| = 1} \|Ax\| \right)^2 = \sup_{x \in \mathbb{C}^n, \|x\| = 1} \|Ax\|^2.
+\]
+
+Da \(\|Ax\|^2 = (Ax)^* (Ax) = x^* A^* A x\), können wir schreiben
+
+\[
+\|A\|^2 = \sup_{x \in \mathbb{C}^n, \|x\| = 1} x^* A^* A x.
+\]
+
+Die Matrix \(A^* A\) ist hermitesch, da \((A^* A)^* = A^* A\). Für eine hermitesche Matrix \(B\) ist bekannt, dass der Ausdruck \(x^* B x\) für \(\|x\| = 1\) durch den größten Eigenwert von \(B\) maximiert wird. Daher gilt
+
+\[
+\sup_{x \in \mathbb{C}^n, \|x\| = 1} x^* A^* A x = \lambda_{\max}(A^* A).
+\]
+
+Daraus folgt
+
+\[
+\|A\|^2 = \lambda_{\max}(A^* A).
+\]
+
+Um die Norm \(\|A\|\) selbst zu bestimmen, nehmen wir die Quadratwurzel:
+
+\[
+\|A\| = \sqrt{\lambda_{\max}(A^* A)}.
+\]
+
+%CHECK: Die Schlussfolgerung wurde korrigiert, um klarzustellen, dass \(\|A\| = \sqrt{\lambda_{\max}(A^* A)}\) ist, wie im Review angemerkt.

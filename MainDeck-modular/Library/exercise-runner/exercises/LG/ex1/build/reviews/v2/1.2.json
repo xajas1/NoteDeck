@@ -1,0 +1,14 @@
+{
+  "score": 0.9,
+  "verdict": "Die Lösung ist weitgehend korrekt, aber es fehlt eine explizite Herleitung der Norm.",
+  "weaknesses": [
+    {
+      "code": "MISSING_NORM_DERIVATION",
+      "msg": "Die Herleitung der Norm \\(\\|A_t\\|\\) wurde nicht explizit gezeigt.",
+      "math_hint": "Zeige explizit, wie \\(\\|A_t\\| = \\sqrt{t^2 + t^{-2} + (n-2)}\\) hergeleitet wird."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Füge die Herleitung der Norm hinzu:} \\\\ \\|A_t\\| = \\sqrt{\\sum_{i=1}^{n} \\sigma_i^2} = \\sqrt{t^2 + t^{-2} + 1 + \\cdots + 1} = \\sqrt{t^2 + t^{-2} + (n-2)}"
+  ]
+}

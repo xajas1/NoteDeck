@@ -1,0 +1,22 @@
+Um die Holomorphie der Übergangsabbildung $\phi_S \circ \phi_N^{-1}$ zu diskutieren, müssen wir die explizite Form dieser Abbildung bestimmen und ihre Eigenschaften analysieren. Wir wissen, dass die stereographische Projektion von der Nordhalbkugel auf die komplexe Ebene durch $\phi_N(z) = \frac{1}{z}$ gegeben ist. Die Umkehrabbildung ist dann $\phi_N^{-1}(z) = \frac{1}{z}$. Für die Südhalbkugel ist die stereographische Projektion $\phi_S(z) = z$. Die Übergangsabbildung $\phi_S \circ \phi_N^{-1}$ ergibt sich somit zu:
+
+\begin{align*}
+\phi_S \circ \phi_N^{-1}(z) &= \phi_S\left(\frac{1}{z}\right) = \frac{1}{z}.
+\end{align*}
+
+Diese Funktion ist identisch mit $f(z) = \frac{1}{z}$, die auf $\mathbb{C} \setminus \{0\}$ holomorph ist, da sie dort differenzierbar ist und die Cauchy-Riemannschen Gleichungen erfüllt. Wir überprüfen dies durch Berechnung der Ableitungen.
+
+Sei $z = x + iy$, dann ist $f(z) = u(x, y) + iv(x, y)$ mit $u(x, y) = \frac{x}{x^2 + y^2}$ und $v(x, y) = -\frac{y}{x^2 + y^2}$. Die Ableitungen sind:
+
+\begin{align*}
+\frac{\partial u}{\partial x} &= \frac{y^2 - x^2}{(x^2 + y^2)^2}, \\
+\frac{\partial v}{\partial y} &= \frac{y^2 - x^2}{(x^2 + y^2)^2}, \\
+\frac{\partial u}{\partial y} &= -\frac{2xy}{(x^2 + y^2)^2}, \\
+\frac{\partial v}{\partial x} &= \frac{2xy}{(x^2 + y^2)^2}.
+\end{align*}
+
+Da $\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}$ und $\frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}$, sind die Cauchy-Riemannschen Gleichungen erfüllt, und $f$ ist holomorph auf $\mathbb{C} \setminus \{0\}$.
+
+Jedoch ist $f(z) = \frac{1}{z}$ nicht auf ganz $\mathbb{C}$ holomorph, da sie bei $z=0$ eine Polstelle hat. Dies zeigt, dass die Übergangsabbildung $\phi_S \circ \phi_N^{-1}$ nicht auf ganz $\mathbb{C}$ holomorph ist, sondern nur auf $\mathbb{C} \setminus \{0\}$.
+
+%CHECK: Explizite Form der Übergangsabbildung $\phi_S \circ \phi_N^{-1}$ angegeben; Holomorphie durch Vergleich mit $f(z) = \frac{1}{z}$ gezeigt; Polstelle bei $z=0$ diskutiert.

@@ -1,0 +1,14 @@
+{
+  "score": 0.9,
+  "verdict": "Die Lösung ist fast korrekt, aber es gibt einen kleinen Fehler in der Schlussfolgerung.",
+  "weaknesses": [
+    {
+      "code": "incorrect_conclusion",
+      "msg": "Die Schlussfolgerung, dass \\( \\|A\\|^2 = \\left\\|A^* A\\right\\| \\) ist nicht korrekt.",
+      "math_hint": "Die Norm \\( \\|A^* A\\| \\) ist nicht gleich \\( \\lambda_{\\max}(A^* A) \\), sondern \\( \\|A\\|^2 = \\lambda_{\\max}(A^* A) \\)."
+    }
+  ],
+  "fix_suggestions": [
+    "\\[ \\|A\\|^2 = \\lambda_{\\max}(A^* A) \\]"
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "tasks": {
+    "1.1": {
+      "score": 0.7,
+      "verdict": "Die Lösung ist teilweise korrekt, aber es fehlen einige wichtige Details.",
+      "weaknesses": [
+        {
+          "code": "missing_holomorphic_proof",
+          "msg": "Die Holomorphie der Übergangsabbildung wurde nicht vollständig gezeigt.",
+          "math_hint": "Es fehlt die Anwendung der Cauchy-Riemannschen Differentialgleichungen zur Bestätigung der Holomorphie."
+        },
+        {
+          "code": "incomplete_inverse_definition",
+          "msg": "Die Definition der Umkehrabbildungen ist unvollständig.",
+          "math_hint": "Die Umkehrabbildungen sollten in Bezug auf die stereographische Projektion definiert werden."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Zeige die Holomorphie durch Anwendung der Cauchy-Riemannschen Gleichungen:} \\\\ \\frac{\\partial f}{\\partial u} = \\frac{\\partial f}{\\partial v} = 0 \\text{ für } f(u,v) = \\frac{u}{u^2 + v^2} + i\\frac{v}{u^2 + v^2}",
+        "\\text{Definiere die Umkehrabbildungen explizit in Bezug auf die stereographische Projektion:} \\\\ \\phi_N^{-1}(z) = \\left( \\frac{2\\text{Re}(z)}{1 + |z|^2}, \\frac{2\\text{Im}(z)}{1 + |z|^2}, \\frac{-1 + |z|^2}{1 + |z|^2} \\right)"
+      ]
+    },
+    "2.1": {
+      "score": 0.8,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+      "weaknesses": [
+        {
+          "code": "MISSING_HOMEO_PROOF",
+          "msg": "Die lokale Homöomorphie von \\(\\pi\\) wird nicht vollständig gezeigt.",
+          "math_hint": "Es fehlt eine explizite Darstellung der Umkehrabbildung \\(\\pi^{-1}\\) auf einer Karte."
+        },
+        {
+          "code": "INCOMPLETE_ATLAS",
+          "msg": "Die Konstruktion des Atlas ist nicht vollständig ausgeführt.",
+          "math_hint": "Es fehlt eine detaillierte Beschreibung der offenen Mengen \\(U\\) und deren Wahl."
+        },
+        {
+          "code": "HOLOMORPHIC_TRANSITION",
+          "msg": "Die Holomorphie der Übergangsfunktionen wird nicht ausreichend begründet.",
+          "math_hint": "Es fehlt eine Erklärung, warum Translationen in \\(\\mathbb{R}^2\\) holomorph sind."
+        }
+      ],
+      "fix_suggestions": [
+        "Füge eine explizite Darstellung der Umkehrabbildung \\(\\pi^{-1}\\) hinzu: \\(\\pi^{-1}(x,y) = (x+k, y+l)\\) für geeignete \\(k, l \\in \\mathbb{Z}\\).",
+        "Beschreibe die Wahl der offenen Mengen \\(U\\) genauer, z.B. durch Angabe von Beispielen oder Bedingungen, die \\(U\\) erfüllen muss.",
+        "Erkläre, warum Translationen in \\(\\mathbb{R}^2\\) als holomorph betrachtet werden können, z.B. durch Bezugnahme auf die Definition von Holomorphie in \\(\\mathbb{C}\\)."
+      ]
+    },
+    "2.2": {
+      "score": 0.6,
+      "verdict": "Teilweise korrekt, aber unvollständig.",
+      "weaknesses": [
+        {
+          "code": "MISSING_TRANSITION",
+          "msg": "Die Glattheit der Übergangsfunktion \u001fvarphi_1 \u001fvarphi_2^{-1} wurde nicht explizit gezeigt.",
+          "math_hint": "\u001fvarphi_1 \u001fvarphi_2^{-1}(x,y) = (x,y) sollte explizit berechnet werden."
+        },
+        {
+          "code": "HOLOMORPHY_MISCONCEPTION",
+          "msg": "Holomorphie wurde falsch interpretiert.",
+          "math_hint": "Holomorphie erfordert komplexe Differenzierbarkeit, nicht nur Glattheit."
+        }
+      ],
+      "fix_suggestions": [
+        "\\varphi_1 \\circ \\varphi_2^{-1}(x,y) = (x,y) \\text{ explizit zeigen}",
+        "\\text{Holomorphie korrekt definieren: komplexe Struktur erfordert komplexe Karten}"
+      ]
+    },
+    "2.3": {
+      "score": 0.6,
+      "verdict": "Die Lösung ist teilweise korrekt, aber es fehlen wesentliche Details.",
+      "weaknesses": [
+        {
+          "code": "MISSING_TRANSITION_DETAILS",
+          "msg": "Die Übergangsfunktionen sind nicht ausreichend detailliert beschrieben.",
+          "math_hint": "Es fehlt eine explizite Darstellung der Übergangsfunktionen zwischen den Karten, insbesondere wie die Verklebung der Ränder die Karten beeinflusst."
+        },
+        {
+          "code": "INCOMPLETE_MANIFOLD_PROOF",
+          "msg": "Die Begründung für die Mannigfaltigkeitsstruktur ist unvollständig.",
+          "math_hint": "Es fehlt eine detaillierte Erklärung, wie die Verklebung der Ränder zu einer Fläche vom Geschlecht 2 führt."
+        },
+        {
+          "code": "LACK_OF_HOLOMORPHICITY_PROOF",
+          "msg": "Die Argumentation zur Holomorphie ist unzureichend.",
+          "math_hint": "Es fehlt eine explizite Überprüfung der Cauchy-Riemann-Gleichungen für die Übergangsfunktionen."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Füge eine detaillierte Beschreibung der Übergangsfunktionen hinzu, insbesondere wie die Verklebung der Ränder die Karten beeinflusst.}",
+        "\\text{Erkläre explizit, wie die Verklebung der Ränder zu einer Fläche vom Geschlecht 2 führt.}",
+        "\\text{Überprüfe die Cauchy-Riemann-Gleichungen für die Übergangsfunktionen, um die Holomorphie zu widerlegen.}"
+      ]
+    }
+  }
+}

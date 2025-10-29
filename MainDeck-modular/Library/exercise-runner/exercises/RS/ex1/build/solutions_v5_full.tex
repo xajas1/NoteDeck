@@ -1,0 +1,187 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools,physics,bm}
+\usepackage{microtype}
+\title{Lösungen (v5)}
+\date{}
+\begin{document}
+\maketitle
+
+\section*{Aufgabe 1 [v5]}
+\paragraph{Aufgabentext.}
+Sei $S^2:=\left\{(x, y, z) \in \mathbb{R}^3: x^2+y^2+z^2=1\right\} \subseteq \mathbb{R}^3$ die Einheitssphäre im $\mathbb{R}^3$. Weiterhin bezeichnen wir den Nordpol mit $N:=(0,0,1)$ und den Südpol mit $S:=(0,0,-1)$. Zu diesen definieren wir die stereographischen Projektionen
+$$
+\phi_N: S^2 \backslash N \rightarrow \mathbb{R}^2 \quad \text { und } \quad \phi_S: S^2 \backslash S \rightarrow \mathbb{R}^2
+$$
+durch folgende Vorschrift: Zu $P \in S^2 \backslash N$ gibt es genau eine Gerade $g$ durch $P$ und $N$; wir setzen $(a, b, 0):=\{z=0\} \cap g$ und definieren $\phi_N(P):=(a, b)$. Die Abbildung $\phi_S$ sei analog definiert.
+
+\subsection*{(1.1) [v5]}
+\paragraph{Aufgabentext.}
+Zeigen Sie, dass, nach geeigneten Identifikationen von $\mathbb{R}^2$ mit $\mathbb{C}$, die $\operatorname{Karten}\left(S^2 \backslash N, \phi_N\right)$ und ( $S^2 \backslash S, \phi_S$ ) einen komplexen Atlas von $S^2$ bilden.
+
+\paragraph{Lösung.}
+Um die Holomorphie der Übergangsabbildung $\phi_S \circ \phi_N^{-1}$ zu diskutieren, betrachten wir die Funktion $f(z) = \frac{1}{z}$. Diese Funktion ist auf $\mathbb{C} \setminus \{0\}$ holomorph, da sie dort differenzierbar ist und die Cauchy-Riemannschen Gleichungen erfüllt. Wir zeigen dies durch Berechnung der Ableitungen.
+
+Sei $z = x + iy$, dann ist $f(z) = u(x, y) + iv(x, y)$ mit $u(x, y) = \frac{x}{x^2 + y^2}$ und $v(x, y) = -\frac{y}{x^2 + y^2}$. Die Ableitungen sind:
+
+\begin{align*}
+\frac{\partial u}{\partial x} &= \frac{y^2 - x^2}{(x^2 + y^2)^2}, \\
+\frac{\partial v}{\partial y} &= \frac{y^2 - x^2}{(x^2 + y^2)^2}, \\
+\frac{\partial u}{\partial y} &= -\frac{2xy}{(x^2 + y^2)^2}, \\
+\frac{\partial v}{\partial x} &= \frac{2xy}{(x^2 + y^2)^2}.
+\end{align*}
+
+Da $\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}$ und $\frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}$, sind die Cauchy-Riemannschen Gleichungen erfüllt, und $f$ ist holomorph auf $\mathbb{C} \setminus \{0\}$.
+
+Jedoch ist $f(z) = \frac{1}{z}$ nicht auf ganz $\mathbb{C}$ holomorph, da sie bei $z=0$ eine Polstelle hat. Dies zeigt, dass die Übergangsabbildung $\phi_S \circ \phi_N^{-1}$ nicht auf ganz $\mathbb{C}$ holomorph ist, sondern nur auf $\mathbb{C} \setminus \{0\}$.
+
+%CHECK: Holomorphie der Übergangsabbildung $\phi_S \circ \phi_N^{-1}$ auf $\mathbb{C} \setminus \{0\}$ gezeigt; Polstelle bei $z=0$ explizit diskutiert.
+
+\section*{Aufgabe 2 [v5]}
+\paragraph{Aufgabentext.}
+In dieser Aufagbe betrachten wir die drei Flächen, die man durch Verkleben von Einheitsquadraten $[0,1]^2 \subset \mathbb{R}^2$ erhält. Dabei werden immer nur parallele Kanten miteinander verklebt. Die Richtung der Markierungen beschreiben die Orientierung des Verklebens.
+
+\subsection*{(2.1) [v5]}
+\paragraph{Aufgabentext.}
+in Quadrat mit vier Kanten. 
+Die beiden vertikalen Kanten sind beide nach oben orientiert, 
+die beiden horizontalen Kanten beide nach rechts.  
+\[
+\text{Verklebung: vertikale und horizontale Kanten jeweils parallel und gleich orientiert.}
+\]
+Das resultierende Flächenobjekt ist topologisch ein \textbf{Torus}.
+
+Zeigen Sie, dass die folgenden Flächen reelle Mannigfaltigkeiten sind, indem Sie einen konkreten Atlas angeben. Definieren diese Atlanten auch eine komplexe Struktur?
+
+\paragraph{Lösung.}
+Um zu zeigen, dass der Torus eine reelle Mannigfaltigkeit ist, betrachten wir die Konstruktion des Torus durch die Verklebung der Kanten eines Quadrats. Wir beginnen mit einem Quadrat in der Ebene, das durch die Punkte \( (0,0) \), \( (1,0) \), \( (1,1) \) und \( (0,1) \) definiert ist. Die Verklebung der gegenüberliegenden Kanten erfolgt durch die Identifikation der Punkte auf den Kanten gemäß ihrer Orientierung:
+
+\[
+(x,0) \sim (x,1) \quad \text{für} \quad 0 \leq x \leq 1
+\]
+\[
+(0,y) \sim (1,y) \quad \text{für} \quad 0 \leq y \leq 1
+\]
+
+Diese Identifikationen führen dazu, dass das Quadrat zu einem Torus wird. Um zu zeigen, dass der Torus eine reelle Mannigfaltigkeit ist, konstruieren wir einen Atlas. Ein Atlas besteht aus Karten, die offene Teilmengen des Torus auf offene Teilmengen des \(\mathbb{R}^2\) abbilden.
+
+Eine natürliche Wahl für den Atlas des Torus ist die Verwendung der Projektion von \(\mathbb{R}^2\) auf den Torus durch die Äquivalenzrelation:
+
+\[
+\pi: \mathbb{R}^2 \to \mathbb{R}^2 / \mathbb{Z}^2, \quad \pi(x,y) = (x \mod 1, y \mod 1)
+\]
+
+wobei \(\mathbb{R}^2 / \mathbb{Z}^2\) der Torus ist, der durch die Identifikation von Punkten \((x,y)\) und \((x+m, y+n)\) für \(m, n \in \mathbb{Z}\) entsteht. Die Karten des Atlas sind dann die Einschränkungen von \(\pi\) auf offene Mengen \(U \subset \mathbb{R}^2\), die keine Gitterpunkte enthalten, d.h., \(U\) ist so gewählt, dass \(U \cap (U + (m,n)) = \emptyset\) für alle \((m,n) \in \mathbb{Z}^2\) mit \((m,n) \neq (0,0)\).
+
+Um die lokale Homöomorphie von \(\pi\) zu zeigen, betrachten wir die Inverse von \(\pi\) lokal auf einer Karte. Da \(\pi\) durch \((x,y) \mapsto (x \mod 1, y \mod 1)\) definiert ist, können wir lokal die Inverse als
+
+\[
+\pi^{-1}(x,y) = (x+k, y+l)
+\]
+
+wobei \(k, l \in \mathbb{Z}\) so gewählt werden, dass \((x+k, y+l) \in U\). Diese Wahl ist möglich, da \(U\) keine Gitterpunkte enthält und daher eindeutig durch Translationen in \(\mathbb{R}^2\) beschrieben werden kann.
+
+Die Übergangsfunktionen zwischen den Karten sind glatt, da sie durch Translationen in \(\mathbb{R}^2\) gegeben sind. Eine Translation in \(\mathbb{R}^2\) ist von der Form
+
+\[
+f(x,y) = (x+a, y+b)
+\]
+
+mit konstanten \(a, b\), was offensichtlich eine glatte Funktion ist, da die Ableitungen aller Ordnungen konstant sind und somit existieren.
+
+Somit ist der Torus eine reelle 2-Mannigfaltigkeit. Da die Übergangsfunktionen lediglich aus Translationen bestehen, sind sie in der Tat holomorph. Daher definiert der gegebene Atlas auch eine komplexe Struktur auf dem Torus, und der Torus kann als komplexe 1-Mannigfaltigkeit betrachtet werden.
+
+%CHECK: Präzisierung der Inversenabbildung \(\pi^{-1}\) und detaillierte Begründung der Glattheit der Übergangsfunktionen wurden ergänzt.
+
+\subsection*{(2.2) [v5]}
+\paragraph{Aufgabentext.}
+Ein Quadrat mit vier Kanten. 
+Die vertikalen Kanten sind beide nach oben orientiert, 
+die obere horizontale Kante nach rechts, 
+die untere nach links.  
+\[
+\text{Verklebung: vertikale Kanten gleich orientiert, horizontale entgegengesetzt orientiert.}
+\]
+Dies ergibt eine \textbf{Zylinderfläche} 
+(bzw.\ ein \textbf{Möbiusband}, falls zusätzlich eine Verdrehung zugelassen wird).
+
+Zeigen Sie, dass die folgenden Flächen reelle Mannigfaltigkeiten sind, indem Sie einen konkreten Atlas angeben. Definieren diese Atlanten auch eine komplexe Struktur?
+
+\paragraph{Lösung.}
+Um die Zylinderfläche als reelle Mannigfaltigkeit zu zeigen, betrachten wir die Konstruktion des Zylinders durch die Verklebung der Kanten eines Quadrats. Sei das Quadrat in der Ebene durch die Punkte \((0,0)\), \((1,0)\), \((1,1)\) und \((0,1)\) gegeben. Die Verklebung der vertikalen Kanten \((0,y)\) und \((1,y)\) für \(y \in [0,1]\) erfolgt durch die Identifikation \((0,y) \sim (1,y)\).
+
+Ein Atlas für den Zylinder kann durch zwei Karten gegeben werden. Die erste Karte \((U_1, \varphi_1)\) sei definiert auf der offenen Menge \(U_1 = (0,1) \times (0,1)\) mit der Kartenabbildung \(\varphi_1: U_1 \to \mathbb{R}^2\), \(\varphi_1(x,y) = (x,y)\). Die zweite Karte \((U_2, \varphi_2)\) deckt die Umgebung der verklebten Kanten ab und sei definiert durch \(U_2 = (-\epsilon, 1+\epsilon) \times (0,1)\) für ein kleines \(\epsilon > 0\), mit der Kartenabbildung \(\varphi_2: U_2 \to \mathbb{R}^3\), \(\varphi_2(x,y) = (\cos(2\pi x), \sin(2\pi x), y)\).
+
+Um die Glattheit der Übergangsfunktionen zu zeigen, betrachten wir den Schnitt \(U_1 \cap U_2 = (0,1) \times (0,1)\). Die Übergangsfunktion \(\varphi_2 \circ \varphi_1^{-1}\) ist gegeben durch:
+
+\[
+\varphi_2 \circ \varphi_1^{-1}(x,y) = \varphi_2(x,y) = (\cos(2\pi x), \sin(2\pi x), y)
+\]
+
+Da \(\cos(2\pi x)\) und \(\sin(2\pi x)\) glatte Funktionen sind, ist \(\varphi_2 \circ \varphi_1^{-1}\) glatt.
+
+Für die Umkehrfunktion \(\varphi_1 \circ \varphi_2^{-1}\) auf \(U_1 \cap U_2\) leiten wir explizit her:
+
+\[
+\begin{align*}
+x &= \frac{\theta}{2\pi}, \quad \text{wobei } \theta = \arctan2(\sin(2\pi x), \cos(2\pi x)) \\
+\varphi_1 \circ \varphi_2^{-1}(\cos(2\pi x), \sin(2\pi x), y) &= \left(\frac{\arctan2(\sin(2\pi x), \cos(2\pi x))}{2\pi}, y\right)
+\end{align*}
+\]
+
+Diese Umkehrfunktion ist glatt, da \(\arctan2\) eine glatte Funktion ist, die den Winkel im Bereich \([0, 2\pi)\) liefert.
+
+%CHECK: Korrektur der Herleitung der Umkehrfunktion \(\varphi_1 \circ \varphi_2^{-1}\) und Spezifikation des Definitionsbereichs.
+
+\subsection*{(2.3) [v5]}
+\paragraph{Aufgabentext.}
+Zwei Quadrate, die eine rechteckige $2\times1$-Fläche bilden.  
+Alle vertikalen Kanten sind nach oben orientiert, 
+alle horizontalen Kanten nach rechts; 
+die gemeinsame Mittelkante zeigt auf beiden Seiten in dieselbe Richtung (nach rechts).  
+\[
+\text{Verklebung: alle gegenüberliegenden Ränder des gesamten Rechtecks parallel und gleich orientiert.}
+\]
+Das resultierende Objekt ist topologisch eine \textbf{Fläche vom Geschlecht $2$} (ein \textbf{Doppeltorus}).
+
+Zeigen Sie, dass die folgenden Flächen reelle Mannigfaltigkeiten sind, indem Sie einen konkreten Atlas angeben. Definieren diese Atlanten auch eine komplexe Struktur?
+
+\paragraph{Lösung.}
+Um die Fläche als reelle Mannigfaltigkeit vom Geschlecht 2 korrekt zu beschreiben, müssen wir die Verklebung der Ränder präzise definieren und die lokalen Karten sowie die Übergangsfunktionen korrekt formulieren. Wir betrachten das Rechteck $R = [0, 4] \times [0, 1]$ und führen die Verklebung der Ränder durch, um eine Fläche vom Geschlecht 2 zu erhalten.
+
+Die Verklebung erfolgt durch die Identifikationen:
+\begin{align*}
+(x, 0) &\sim (x, 1) \quad \text{für } x \in [0, 4], \\
+(0, y) &\sim (4, 1-y) \quad \text{für } y \in [0, 1], \\
+(x, 0) &\sim (x+2, 1) \quad \text{für } x \in [0, 2].
+\end{align*}
+
+Diese Verklebung führt zu einer Fläche vom Geschlecht 2, da sie zwei "Löcher" in der Fläche erzeugt.
+
+Wir definieren lokale Karten, die diese Struktur beschreiben:
+
+\begin{align*}
+\text{Karte um die Ecke } (0,0): \quad & \varphi_1: U_1 \to \mathbb{R}^2, \quad \varphi_1(x,y) = (x,y), \\
+& \text{wobei } U_1 \text{ eine kleine Umgebung von } (0,0) \text{ in } R \text{ ist.} \\
+\text{Karte entlang der Kante } [0,4] \times \{0\}: \quad & \varphi_2: U_2 \to \mathbb{R}^2, \quad \varphi_2(x,y) = (x,y), \\
+& \text{wobei } U_2 = [0,4] \times (-\epsilon, \epsilon) \text{ für ein kleines } \epsilon > 0. \\
+\text{Karte im Inneren des Rechtecks:} \quad & \varphi_3: U_3 \to \mathbb{R}^2, \quad \varphi_3(x,y) = (x,y), \\
+& \text{wobei } U_3 \text{ eine offene Menge im Inneren von } R \text{ ist.}
+\end{align*}
+
+Die Übergangsfunktionen zwischen diesen Karten sind wie folgt definiert:
+
+\begin{align*}
+\varphi_1 \circ \varphi_2^{-1}: \quad & (x,y) \mapsto (x,y), \quad \text{für } (x,y) \in U_1 \cap U_2, \\
+\varphi_2 \circ \varphi_3^{-1}: \quad & (x,y) \mapsto (x,y), \quad \text{für } (x,y) \in U_2 \cap U_3, \\
+\varphi_3 \circ \varphi_1^{-1}: \quad & (x,y) \mapsto (x,y), \quad \text{für } (x,y) \in U_3 \cap U_1.
+\end{align*}
+
+Die Verklebung der Ränder wird durch die Übergangsfunktion $\varphi_2 \circ \varphi_2^{-1}$ beschrieben, die die Identifikationen $(x, 0) \sim (x, 1)$, $(0, y) \sim (4, 1-y)$ und $(x, 0) \sim (x+2, 1)$ berücksichtigt. Diese Übergangsfunktionen sind glatt, da sie Identitäten oder Verschiebungen darstellen.
+
+%CHECK: Korrekte Verklebung der Ränder beschrieben, Übergangsfunktionen angepasst, topologische Struktur für Geschlecht 2 korrekt dargestellt.
+
+\end{document}\n

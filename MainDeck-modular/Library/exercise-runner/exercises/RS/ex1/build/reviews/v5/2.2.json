@@ -1,0 +1,19 @@
+{
+  "score": 0.7,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es gibt einige Lücken und Unklarheiten in der Herleitung der Umkehrfunktion.",
+  "weaknesses": [
+    {
+      "code": "MISSING_INVERSION",
+      "msg": "Die Herleitung der Umkehrfunktion \u001b[31m\\varphi_1 \\circ \\varphi_2^{-1}\u001b[0m ist unvollständig und unklar.",
+      "math_hint": "Die Umkehrfunktion sollte explizit die Transformation von \u001b[31m(\\cos(2\\pi x), \\sin(2\\pi x), y)\u001b[0m zu \u001b[31m(x, y)\u001b[0m zeigen."
+    },
+    {
+      "code": "DOMAIN_SPECIFICATION",
+      "msg": "Der Definitionsbereich der Umkehrfunktion ist nicht spezifiziert.",
+      "math_hint": "Der Definitionsbereich sollte klar angegeben werden, insbesondere für die Funktion \u001b[31m\\arctan2\u001b[0m."
+    }
+  ],
+  "fix_suggestions": [
+    "\\varphi_1 \\circ \\varphi_2^{-1}(\\cos(2\\pi x), \\sin(2\\pi x), y) = \\left(\\frac{\\arctan2(\\sin(2\\pi x), \\cos(2\\pi x))}{2\\pi}, y\\right) \\text{ auf } (0,1) \\times (0,1)"
+  ]
+}

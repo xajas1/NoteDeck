@@ -1,0 +1,104 @@
+{
+  "tasks": {
+    "1.1": {
+      "score": 0.9,
+      "verdict": "Die Herleitung ist fast korrekt, aber es fehlt eine explizite Darstellung der Vorzeichenänderung.",
+      "weaknesses": [
+        {
+          "code": "MISSING_EXPLICIT_SIGN_CHANGE",
+          "msg": "Die explizite Herleitung der Vorzeichenänderung bei Spiegelung ist nicht vollständig ausgeführt.",
+          "math_hint": "Es fehlt die explizite Darstellung, dass bei einer Spiegelung die Determinante -1 ist und dies zu einer Vorzeichenänderung führt."
+        }
+      ],
+      "fix_suggestions": [
+        "\\epsilon^{\\prime \\alpha \\beta} = \\det(A) A^\\alpha_{\\ \\gamma} A^\\beta_{\\ \\delta} \\epsilon^{\\gamma \\delta} = - A^\\alpha_{\\ \\gamma} A^\\beta_{\\ \\delta} \\epsilon^{\\gamma \\delta} \\text{ für eine Spiegelung, da } \\det(A) = -1."
+      ]
+    },
+    "1.2": {
+      "score": 0.8,
+      "verdict": "Gute Herleitung mit kleineren Lücken.",
+      "weaknesses": [
+        {
+          "code": "missing_expansion",
+          "msg": "Fehlende vollständige Entwicklung der quadratischen Terme.",
+          "math_hint": "Die Terme $\\epsilon^{\\alpha \\beta} x_\\beta x_\\alpha$ und $\\epsilon_{\\alpha \\gamma} x^\\alpha x^\\gamma$ sollten explizit als $\\epsilon^{\\alpha \\beta} x_\\beta x_\\alpha + \\epsilon_{\\alpha \\gamma} x^\\alpha x^\\gamma$ entwickelt werden."
+        },
+        {
+          "code": "symmetry_argument",
+          "msg": "Unklarer Übergang zur Symmetriebedingung.",
+          "math_hint": "Der Übergang von $2 \\epsilon^{\\alpha \\beta} x_\\beta x_\\alpha = 0$ zu $\\epsilon^{(\\alpha \\beta)} = 0$ sollte klarer begründet werden."
+        }
+      ],
+      "fix_suggestions": [
+        "\\begin{align*} x'^\\alpha x'_\\alpha &= x^\\alpha x_\\alpha + \\epsilon^{\\alpha \\beta} x_\\beta x_\\alpha + \\epsilon_{\\alpha \\gamma} x^\\alpha x^\\gamma + \\mathcal{O}(\\epsilon^2) \\end{align*}",
+        "\\text{Da } 2 \\epsilon^{\\alpha \\beta} x_\\beta x_\\alpha = 0 \\text{ für beliebige } x^\\alpha, \\text{ folgt } \\epsilon^{(\\alpha \\beta)} = 0 \\text{, da der symmetrische Teil sonst nicht für alle } x^\\alpha \\text{ verschwindet.}"
+      ]
+    },
+    "2.1": {
+      "score": 0.8,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es gibt einige Unklarheiten und Fehler in der Herleitung.",
+      "weaknesses": [
+        {
+          "code": "E1",
+          "msg": "Fehlerhafte Umformung der Gleichung für \\(\\gamma\\).",
+          "math_hint": "\\gamma = \\frac{m_Z}{m_e} - 1 ist falsch, sollte \\gamma = \\frac{m_Z}{m_e} - 1 sein."
+        },
+        {
+          "code": "E2",
+          "msg": "Unklare Transformation der Energiegleichung.",
+          "math_hint": "Die Umformung von \\gamma = \\frac{m_Z c^2 - m_e c^2}{m_e c^2} zu \\gamma = \\frac{m_Z + m_e}{m_e} ist nicht korrekt."
+        }
+      ],
+      "fix_suggestions": [
+        "\\gamma = \\frac{m_Z}{m_e} - 1 \\rightarrow \\gamma = \\frac{m_Z}{m_e} - 1",
+        "\\gamma = \\frac{m_Z c^2 - m_e c^2}{m_e c^2} \\rightarrow \\gamma = \\frac{m_Z}{m_e} - 1"
+      ]
+    },
+    "3.1": {
+      "score": 1,
+      "verdict": "korrekt",
+      "weaknesses": [],
+      "fix_suggestions": []
+    },
+    "3.2": {
+      "score": 1,
+      "verdict": "korrekt",
+      "weaknesses": [],
+      "fix_suggestions": []
+    },
+    "4.1": {
+      "score": 0.7,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details zur Transformation und zum Jacobian.",
+      "weaknesses": [
+        {
+          "code": "missing_jacobian",
+          "msg": "Der Jacobian bei der Transformation von $dE$ zu $dk_0$ ist nicht korrekt behandelt.",
+          "math_hint": "Es fehlt die korrekte Anwendung des Jacobians: $dk_0 = dE = \\frac{\\partial E}{\\partial k_i} dk_i$."
+        },
+        {
+          "code": "delta_function_integration",
+          "msg": "Die Rolle der Delta-Funktion bei der Integration über $k_0$ ist nicht vollständig erklärt.",
+          "math_hint": "Die Integration über $k_0$ sollte explizit die Delta-Funktion verwenden: $\\int dk_0 \\, \\delta(k_0 - E(\\mathbf{k})) f(k_0) = f(E(\\mathbf{k}))$."
+        }
+      ],
+      "fix_suggestions": [
+        "\\int dk_0 \\, \\delta(k_0 - E(\\mathbf{k})) = 1",
+        "dk_0 = \\frac{\\partial E}{\\partial k_i} dk_i = \\frac{k_i}{E} dk_i"
+      ]
+    },
+    "4.2": {
+      "score": 0.8,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details zur vollständigen Herleitung der Lorentz-Invarianz.",
+      "weaknesses": [
+        {
+          "code": "missing_invariance_proof",
+          "msg": "Die Herleitung der Invarianz von $d^3 \\mathbf{k}$ und $\\delta^{(3)}(\\mathbf{k}-\\mathbf{k}^{\\prime})$ ist unvollständig.",
+          "math_hint": "Es fehlt eine explizite Darstellung, warum $d^3 \\mathbf{k}$ und $\\delta^{(3)}(\\mathbf{k}-\\mathbf{k}^{\\prime})$ unter Lorentz-Transformationen invariant sind."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Füge eine detaillierte Erklärung hinzu, warum } d^3 \\mathbf{k} \\text{ und } \\delta^{(3)}(\\mathbf{k}-\\mathbf{k}^{\\prime}) \\text{ unter Lorentz-Transformationen invariant sind.}"
+      ]
+    }
+  }
+}

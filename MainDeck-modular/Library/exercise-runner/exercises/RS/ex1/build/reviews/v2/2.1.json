@@ -1,0 +1,26 @@
+{
+  "score": 0.8,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+  "weaknesses": [
+    {
+      "code": "MISSING_HOMEO_PROOF",
+      "msg": "Die lokale Homöomorphie von \\(\\pi\\) wird nicht vollständig gezeigt.",
+      "math_hint": "Es fehlt eine explizite Darstellung der Umkehrabbildung \\(\\pi^{-1}\\) auf einer Karte."
+    },
+    {
+      "code": "INCOMPLETE_ATLAS",
+      "msg": "Die Konstruktion des Atlas ist nicht vollständig ausgeführt.",
+      "math_hint": "Es fehlt eine detaillierte Beschreibung der offenen Mengen \\(U\\) und deren Wahl."
+    },
+    {
+      "code": "HOLOMORPHIC_TRANSITION",
+      "msg": "Die Holomorphie der Übergangsfunktionen wird nicht ausreichend begründet.",
+      "math_hint": "Es fehlt eine Erklärung, warum Translationen in \\(\\mathbb{R}^2\\) holomorph sind."
+    }
+  ],
+  "fix_suggestions": [
+    "Füge eine explizite Darstellung der Umkehrabbildung \\(\\pi^{-1}\\) hinzu: \\(\\pi^{-1}(x,y) = (x+k, y+l)\\) für geeignete \\(k, l \\in \\mathbb{Z}\\).",
+    "Beschreibe die Wahl der offenen Mengen \\(U\\) genauer, z.B. durch Angabe von Beispielen oder Bedingungen, die \\(U\\) erfüllen muss.",
+    "Erkläre, warum Translationen in \\(\\mathbb{R}^2\\) als holomorph betrachtet werden können, z.B. durch Bezugnahme auf die Definition von Holomorphie in \\(\\mathbb{C}\\)."
+  ]
+}

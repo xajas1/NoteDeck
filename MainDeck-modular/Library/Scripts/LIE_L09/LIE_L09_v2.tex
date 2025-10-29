@@ -1,0 +1,2755 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17. Titel und Autor
+
+% --- 0. Allgemeine Pakete ---
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{slashed}
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\Sp}{\mathrm{Sp}}
+\newcommand{\Ogroup}{\mathrm{O}} % \O ist schon für skandinavisches Ø reserviert
+\newcommand{\U}{\mathrm{U}}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\graphicspath{{../../Images/}}
+\usepackage[export]{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+% Hellblau definieren
+\definecolor{hellblau}{rgb}{0.3,0.6,1}
+
+% Eigene Umgebung »notiz«
+\newenvironment{note}{\par\begingroup\color{hellblau}\itshape}{\par\endgroup}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\CustomHeading{Definition}{#1}{#2}}{}
+\newenvironment{PROP}[2]{\CustomHeading{Proposition}{#1}{#2}}{}
+\newenvironment{THEO}[2]{\CustomHeading{Theorem}{#1}{#2}}{}
+\newenvironment{LEM}[2]{\CustomHeading{Lemma}{#1}{#2}}{}
+\newenvironment{KORO}[2]{\CustomHeading{Corollar}{#1}{#2}}{}
+\newenvironment{REM}[2]{\CustomHeading{Remark}{#1}{#2}}{}
+\newenvironment{EXA}[2]{\CustomHeading{Example}{#1}{#2}}{}
+\newenvironment{STUD}[2]{\CustomHeading{Study}{#1}{#2}}{}
+\newenvironment{CONC}[2]{\CustomHeading{Concept}{#1}{#2}}{}
+\newenvironment{OTH}[2]{\CustomHeading{Other}{#1}{#2}}{}
+\newenvironment{EXE}[2]{\CustomHeading{Exercise}{#1}{#2}}{}
+\newenvironment{MOT}[2]{\CustomHeading{Motivation}{#1}{#2}}{}
+\newenvironment{PROOF}[2]{\CustomHeading{Proof}{#1}{#2}}{}
+\newenvironment{STR}[2]{\CustomHeading{Structure}{#1}{#2}}{}
+
+
+% --- Unit Umgebung ---
+\usepackage{mdframed}
+\newmdenv[
+  linewidth=1pt,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftmargin=0cm,
+  rightmargin=0cm,
+  skipabove=10pt,
+  skipbelow=10pt,
+  innertopmargin=0.5\baselineskip,
+  innerbottommargin=0.5\baselineskip,
+  backgroundcolor=gray!10,
+  linecolor=gray
+]{unitbox}
+
+\newenvironment{unit}[1]
+  {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
+  {\end{unitbox}}
+
+
+% --- 17. Titel und Autor ---
+\title{Mein Titel}
+\author{Tim Jaschik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+Kurze Beschreibung …
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\tableofcontents
+
+\pagebreak
+
+\section{Lie Gruppen}
+
+\subsection{Definitionen}
+
+\begin{DEF}{LIE-L09-04-01}{Lie Gruppe}
+A smooth manifold $G$ is called a Lie group if it is a group (abstract group) such that the multiplication map $\mu: G \times G \rightarrow G$ and the inverse map inv : $G \rightarrow G$, given respectively by $\mu(g, h)=g h$ and $\operatorname{inv}(g)=g^{-1}$, are $C^{\infty}$ maps. If the group is abelian, we sometimes opt to use the additive notation $g+h$ for the group operation.
+
+We will usually denote the identity element of any Lie group by the same letter $e$. Exceptions include the case of matrix or linear groups where we use the letter $I$ or id. The map inv : $G \rightarrow G$ given by $g \mapsto g^{-1}$ is called inversion and is easily seen to be a diffeomorphism.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-04-08}{Links / Rechts Translation}
+For a Lie group $G$ and a fixed element $g \in G$, the maps $L_{g}: G \rightarrow G$ and $R_{g}: G \rightarrow G$ are defined by
+$$
+\begin{aligned}
+L_{g} x & =g x \text { for } x \in G, \\
+R_{g} x & =x g \text { for } x \in G,
+\end{aligned}
+$$
+and are called left translation and right translation (by $g$ ) respectively.
+
+It is easy to see that $L_{g}$ and $R_{g}$ are diffeomorphisms with $L_{g}^{-1}=L_{g^{-1}}$ and $R_{g}^{-1}=R_{g^{-1}}$.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-04-11}{Lie Untergruppe}
+Let $H$ be an abstract subgroup of a Lie group $G$. If $H$ is a Lie group such that the inclusion map $H \hookrightarrow G$ is an immersion, then we say that $H$ is a Lie subgroup of $G$.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-04-14}{Abgeschlossene Lie Gruppe}
+By a closed Lie subgroup we shall always mean one that is a regular submanifold as in the previous theorem. It is a nontrivial fact that an abstract subgroup of a Lie group that is also a closed subset is automatically a closed Lie subgroup in this sense (see Theorem 5.81).
+\end{DEF}
+
+\begin{DEF}{LIE-L09-04-21}{Allgemeine lineare Gruppe}
+The Lie group $\mathrm{GL}(\mathrm{V})$ is called the general linear group of V and is also denoted $\mathrm{GL}(\mathrm{V}, \mathbb{F})$ when we want to make the field apparent. The matrix group $\operatorname{GL}(n, \mathbb{F})$ is also referred to as a general linear (matrix) group and is often identified with $\operatorname{GL}\left(\mathbb{F}^{n}\right)$.
+
+
+More specifically, $\operatorname{GL}(n, \mathbb{R})$ is called the real general linear group, and $\operatorname{GL}(n, \mathbb{C})$ is called the complex general linear group. Lie groups that are subgroups of GL(V) for some vector space V are referred to as linear Lie groups and are often realized as matrix subgroups of $\operatorname{GL}(n, \mathbb{F})$ for some $n$.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-04-22}{Spezielle Lineare Gruppe $\SL(V)$}
+Let V be an $n$-dimensional vector space over the field $\mathbb{F}$ which we take to be either $\mathbb{R}$ or $\mathbb{C}$. Then the group SL(V) defined by
+$$
+\mathrm{SL}(\mathrm{~V})=\mathrm{SL}(\mathrm{~V}, \mathbb{F}):=\{A \in \mathrm{GL}(\mathrm{~V}): \operatorname{det}(A)=1\}
+$$
+is called the special linear group for V.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-04-23}{Nicht degenerierte Bilinearformen}
+A bilinear form $\beta: \mathrm{V} \times \mathrm{V} \rightarrow \mathbb{F}$ on an $\mathbb{F}$-vector space V is called nondegenerate if the maps $\mathrm{V} \rightarrow \mathrm{V}^{*}$ given by $\beta_{R}: v \mapsto \beta(v, \cdot)$ and $\beta_{L}: v \mapsto \beta(\cdot, v)$, are both linear isomorphisms. If V is finite-dimensional, then $\beta_{R}$ is an isomorphism if and only if $\beta_{L}$ is an isomorphism and then $\beta$ is nondegenerate provided it has the property that if $\beta(v, w)=0$ for all $w \in V$, then $v=0$.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-04-24}{Reelles Skalarprodukt als symmetrische nicht-degenerierte BLF}
+A (real) scalar product on a (real) finite-dimensional vector space V is a nondegenerate symmetric bilinear form $\beta: \mathrm{V} \times \mathrm{V} \rightarrow \mathbb{R}$. A (real) scalar product space is a pair ( $\mathrm{V}, \beta$ ) where V is a real vector space and $\beta$ is a scalar product. (As usual we refer to V itself as the scalar product space when $\beta$ is given)
+\end{DEF}
+
+\begin{DEF}{LIE-L09-04-25}{Sesquilineare und Hermitische Form}
+Let V be a complex vector space. An $\mathbb{R}$-bilinear map $\beta$ : $\mathrm{V} \times \mathrm{V} \rightarrow \mathbb{C}$ that satisfies $\beta(a v, w)=\bar{a} \beta(v, w)$ and $\beta(v, a w)=a \beta(v, w)$ for all $a \in \mathbb{C}$ and $v, w \in \mathrm{~V}$ is called a sesquilinear form. If also $\beta(v, w)=\overline{\beta(w, v)}$, we call $\beta$ a Hermitian form.
+
+The sesquilinear conditions imposed are described by saying that $\beta$ is to be conjugate linear in the first slot and linear in the second slot.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-04-26}{Hermitisches Skalarprodukt als nicht degenerierte hermitische Form}
+If a Hermitian form is nondegenerate, we call it a Hermitian scalar product, and then ( $\mathrm{V}, \beta$ ) a Hermitian scalar product space.
+
+Nondegeneracy for a sesquilinear form is defined as for bilinear forms. Many authors define sesquilinear and Hermitian forms to be conjugate linear in the second slot and linear in the first. Obviously, $\beta(v, v)$ is always real for a Hermitian form.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-04-27}{(Semi) Positiv/Negativ definiete Skalarprodukt}
+Let $\beta$ be a (real) scalar product or Hermitian scalar product on a vector space V . Then
+\begin{enumerate}
+\item $\beta$ is positive (resp. negative) definite if $\beta(v, v) \geq 0$ (resp. $\beta(v, v) \leq 0)$ for all $v \in \mathrm{~V}$ and $\beta(v, v)=0 \Longrightarrow v=0$;
+
+\item $\beta$ is positive (resp. negative) semidefinite if $\beta(v, v) \geq 0$ (resp. $\beta(v, v) \leq 0)$ for all $v \in \mathrm{~V}$.
+\end{enumerate}
+\end{DEF}
+
+\begin{DEF}{LIE-L09-04-28}{Innere Produkt}
+What is called an inner product (a term we have already used) is a positive definite scalar product (or positive definite Hermitian scalar product in the complex case). In this book the term "inner product" always implies positive definiteness.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-04-29}{Orthonormale Basis für indefinite Skalarprodukte}
+Let us generalize the notion of orthonormal basis for an inner product space to include indefinite scalar product spaces. A basis $\left(e_{1}, \ldots, e_{n}\right)$ for a scalar product space $(\mathrm{V}, \beta)$ is called an orthonormal basis if $\beta\left(e_{i}, e_{j}\right)=0$ when $i \neq j$, and $\beta\left(e_{i}, e_{i}\right)= \pm 1$ for all $i$. An orthonormal basis always exists for a finite-dimensional scalar product space.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-04-30}{$\operatorname{Aut}(V,\beta)$ Automorphismenuntergruppe bzgl bilinear / sesquilinear Formen}
+Let V be an $n$-dimensional vector space over the field $\mathbb{F}$ which we take to be either $\mathbb{R}$ or $\mathbb{C}$. If $\beta$ is a bilinear form or sesquilinear form on V, then $\operatorname{Aut}(\mathrm{V}, \beta)$ is the subgroup of $\operatorname{GL}(\mathrm{V})$ defined by
+$$
+\operatorname{Aut}(\mathrm{V}, \beta):=\{A \in \mathrm{GL}(\mathrm{~V}): \beta(A v, A w)=\beta(v, w) \text { for all } v, w \in \mathrm{~V}\}
+$$
+If $\beta$ is a scalar product, then the elements of $\operatorname{Aut}(\mathrm{V}, \beta)$ are called isometries of V.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-04-35}{Komplexe Orthogonale Gruppe}
+There are also complex orthogonal groups (not to be confused with unitary groups). In matrix representation, we have $\mathrm{O}(n, \mathbb{C}):= \left\{Q \in \mathrm{GL}(n, \mathbb{C}): Q^{t} Q=I\right\}$.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-04-42}{Lie Gruppen Homomorphismus}
+Let $G$ and $H$ be Lie groups. A smooth map $f: G \rightarrow H$ that is a group homomorphism is called a Lie group homomorphism. A Lie group homomorphism is called a Lie group isomorphism in case it has an inverse that is also a Lie group homomorphism. A Lie group isomorphism $G \rightarrow G$ is called a Lie group automorphism of $G$.
+
+If $f: G \rightarrow H$ is a Lie group homomorphism, then by definition $f\left(g_{1} g_{2}\right)= f\left(g_{1}\right) f\left(g_{2}\right)$ for all $g_{1}, g_{2} \in G$, and it follows that $f(e)=e$ and also that $f\left(g^{-1}\right)=f(g)^{-1}$ for all $g \in G$.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-04-52}{1-parameter Untergruppe}
+A Lie group homomorphism from the additive group $\mathbb{R}$ into a Lie group is called a one-parameter subgroup. (Note that despite the use of the word "subgroup", a one-parameter subgroup is actually a map.)
+\end{DEF}
+
+\begin{DEF}{LIE-L09-04-56}{(Universelle) Überdeckungsgruppe}
+If a Lie group homomorphism $\wp: \widetilde{G} \rightarrow G$ is also a covering map then we say that $\widetilde{G}$ is a covering group and $\wp$ is a covering homomorphism. If $\widetilde{G}$ is simply connected, then $\widetilde{G}$ (resp. $\wp$ ) is called the universal covering group (resp. universal covering homomorphism) of $G$.
+\end{DEF}
+
+\subsection{Exampel}
+
+\begin{EXA}{LIE-L09-04-02}{Vektorräume als Lie Gruppen}
+$\mathbb{R}$ is a one-dimensional (abelian) Lie group, where the group multiplication is the usual addition + . Similarly, any real or complex vector space is a Lie group under vector addition.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-04-03}{$S^1$ als Lie Gruppen}
+The circle $S^{1}=\left\{z \in \mathbb{C}:|z|^{2}=1\right\}$ is a 1 -dimensional (abelian) Lie group under complex multiplication. It is also traditional to denote this group by $U(1)$.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-04-04}{$\R^*$ als Lie Gruppen}
+Let $\mathbb{R}^{*}=\mathbb{R} \backslash\{0\}, \mathbb{C}^{*}=\mathbb{C} \backslash\{0\}$ and $\mathbb{H}^{*}=\mathbb{H} \backslash\{0\}$ (here $\mathbb{H}$ is the quaternion division ring discussed in detail later). Then, using multiplication, $\mathbb{R}^{*}, \mathbb{C}^{*}$, and $\mathbb{H}^{*}$ are Lie groups. The Lie group $\mathbb{H}^{*}$ is not abelian.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-04-05}{$\GL(n,\R \C)$ als Lie Gruppen}
+The group of all invertible real $n \times n$ matrices is a Lie group denoted $\mathrm{GL}(n, \mathbb{R})$. A global chart on $\mathrm{GL}(n, \mathbb{R})$ is given by the $n^{2}$ functions $x_{j}^{i}$, where if $A \in \operatorname{GL}(n, \mathbb{R})$ then $x_{j}^{i}(A)$ is the $i j$-th entry of $A$. Showing that $\operatorname{GL}(n, \mathbb{R})$ is a Lie group is straightforward. Multiplication is clearly smooth. For the inversion map one appeals to the usual formula for the inverse of a matrix, $A^{-1}= \operatorname{adj}(A) / \operatorname{det}(A)$. Here $\operatorname{adj}(A)$ is the adjoint matrix (whose entries are the cofactors). This shows that $A^{-1}$ depends smoothly on the entries of $A$. Similarly, the group $\operatorname{GL}(n, \mathbb{C})$ of invertible $n \times n$ complex matrices is a Lie group.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-04-09}{Produkt Lie Gruppe}
+If $G$ and $H$ are Lie groups, then so is the product manifold $G \times H$, where multiplication is $\left(g_{1}, h_{1}\right) \cdot\left(g_{2}, h_{2}\right)=\left(g_{1} g_{2}, h_{1} h_{2}\right)$. The Lie group $G \times H$ is called the product Lie group.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-04-10}{$n$-Torus Gruppe}
+For example, the product group $S^{1} \times S^{1}$ is called the 2 -torus group. More generally, the higher torus groups are defined by $T^{n}=S^{1} \times \cdots \times S^{1}$ ( $n$ factors).
+\end{EXA}
+
+\begin{EXA}{LIE-L09-04-15}{$S^1$ als Einbettung in $2$-Torus ist abgeschlossene Lie Gruppe}
+$S^{1}$ embedded as $S^{1} \times\{1\}$ in the torus $S^{1} \times S^{1}$ is a closed subgroup.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-04-16}{$S^1$ als Einbettung oder dicht in $2$-Torus ist abgeschlossene Lie Gruppe}
+Let $S^{1}$ be considered as the set of unit modulus complex numbers. The image in the torus $T^{2}=S^{1} \times S^{1}$ of the map $\mathbb{R}^{1} \rightarrow S^{1} \times S^{1}$ given by $t \mapsto\left(e^{i 2 \pi t}, e^{i 2 \pi a t}\right)$ is a Lie subgroup. This map is a homomorphism. If $a$ is a rational number, then the image is an embedded copy of $S^{1}$ wrapped around the torus several times depending on $a$. If $a$ is irrational, then the image is still a Lie subgroup but is now dense in $T^{2}$.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-04-17}{Raum der Endomorphismen von Vektorräumen als glatte Mannigfaltigkeit}
+Let V be an $n$-dimensional vector space over $\mathbb{F}$, where $\mathbb{F}=\mathbb{R}$ or $\mathbb{C}$. The space $L(\mathrm{~V}, \mathrm{~V})$ of linear maps from V to V is a vector space and therefore a smooth manifold. A global chart for $L(\mathrm{~V}, \mathrm{~V})$ may be obtained by first choosing a basis for V and then defining $n^{2}$ functions $\left\{x_{j}^{i}\right\}_{1 \leq i . j \leq n}$ by the rule that if $A \in L(\mathrm{~V}, \mathrm{~V})$, then $x_{j}^{i}(A)$ is the $i j$-th entry of the matrix that represents $A$ with respect to the chosen basis. If the field is $\mathbb{R}$, then these are the coordinate functions of a global chart. If the field is $\mathbb{C}$, then we simply take the real and imaginary parts of the $x_{j}^{i}$ and thereby obtain $2 n^{2}$ coordinate functions. The various choices of basis give compatible charts, and the reader may check that these are charts from the smooth structure that $L(\mathrm{~V}, \mathrm{~V})$ has by virtue of being a finite-dimensional vector space.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-04-18}{$\GL(V)$ als glatte offene Untermannigfaltigkeit von $E(V,V)$E}
+The group $\mathrm{GL}(\mathrm{V})$ of all linear automorphisms of V is an open submanifold of $L(\mathrm{~V}, \mathrm{~V})$ given by the condition of nonvanishing determinant, and the restrictions of the coordinate functions just introduced provide a global chart for $\mathrm{GL}(\mathrm{V})$.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-04-19}{$\GL(n,\mathbb{F})$ als Gruppe der invertierbaren Matrizen}
+Let $\operatorname{GL}(n, \mathbb{F})$ denote the group of invertible matrices with entries from $\mathbb{F}$.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-04-33}{$\Ogroup(V;\beta)$, $\Ogroup(p,q)$ als Semiorthogonale Gruppe assoziiert zu reellem Skalarprodukt $\beta$}
+Let ($\mathrm{V},\beta$) be a real scalar product space. In this case we write $\operatorname{Aut}(\mathrm{V}, \beta)$ as $\mathrm{O}(\mathrm{V}, \beta)$ and refer to it as the semiorthogonal group associated to $\beta$. With respect to an appropriately ordered orthonormal basis, $\beta$ is represented by a diagonal matrix of the form
+$$
+\eta_{p, q}=\left[\begin{array}{cccccc}
+1 & 0 & \cdots & & \cdots & 0 \\
+0 & \ddots & 0 & & & \vdots \\
+\vdots & 0 & 1 & \ddots & & \\
+& & \ddots & -1 & 0 & \vdots \\
+\vdots & & & 0 & \ddots & 0 \\
+0 & \cdots & & \cdots & 0 & -1
+\end{array}\right],
+$$
+where there are $p$ ones and $q$ minus ones down the diagonal. The group of matrices arising from $\mathrm{O}(\mathrm{V}, \beta)$ with such a choice of basis is denoted $\mathrm{O}(p, q)$ and consists exactly of the real matrices $Q$ satisfying $Q \eta_{p, q} Q^{t}=\eta_{p, q}$. These groups are called the semiorthogonal matrix groups. With such an orthonormal choice of basis as above, the bilinear form (scalar product) is given as a canonical form on $\mathbb{R}^{n}$ where $(p+q=n)$ :
+$$
+\langle x, y\rangle:=\sum_{i=1}^{p} x^{i} y^{i}-\sum_{i=p+1}^{n} x^{i} y^{i},
+$$
+and we have the alternative description
+$$
+\mathrm{O}(p, q)=\left\{Q \in \mathrm{GL}(n):\langle Q x, Q y\rangle=\langle x, y\rangle \text { for all } x, y \in \mathbb{R}^{n}\right\} .
+$$
+\end{EXA}
+
+\begin{EXA}{LIE-L09-04-34}{$\Ogroup(V;\beta)$, $\Ogroup(n)$ als Orthogonale Gruppe assoziiert zu reellem positiv definit Skalarprodukt $\beta$}
+If $\beta$ is positive definite, we then have $q=0$, and $\mathrm{O}(\mathrm{V}, \beta)$ is referred to as a real orthogonal group. We write $\mathrm{O}(n, 0)$ as $\mathrm{O}(n)$ and refer to it as the real orthogonal (matrix) group; $Q \in \mathrm{O}(n) \Longleftrightarrow Q^{t} Q=I$.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-04-36}{$\U(V;\beta)$, $\U(p,q)$ als Semiunitäre Gruppe assoziiert zu hermitischen Skalarprodukt $\beta$}
+Let $(\mathrm{V}, \beta)$ be a Hermitian scalar product space. In this case, we write $\operatorname{Aut}(\mathrm{V},\beta,\mathbb{C})$ as $U(\mathrm{~V},\beta)$ and refer to it as the semiunitary group associated to $\beta$. If $\beta$ is positive definite, then we call it a unitary group. Again we may choose a basis for V such that $\beta$ is represented by the Hermitian form on $\mathbb{C}^{n}$ given by
+$$
+\langle x, y\rangle:=\sum_{i=1}^{p} \bar{x}^{i} y^{i}-\sum_{i=p+1}^{p+q=n} \bar{x}^{i} y^{i}
+$$
+We then obtain the semiunitary matrix group
+$$
+\mathrm{U}(p, q)=\left\{A \in \mathrm{GL}(n, \mathbb{C}):\langle A x, A y\rangle=\langle x, y\rangle \text { for all } x, y \in \mathbb{R}^{n}\right\}
+$$
+We write $\mathrm{U}(n, 0)$ as $\mathrm{U}(n)$ and refer to it as the unitary (matrix) group. In particular, $U(1)=S^{1}=\{z \in \mathbb{C}:|z|=1\}$.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-04-37}{Spezielle Orthogonale Gruppe $\SO(V,\beta)$ zu reellem Skalarprodukt}
+For $(\mathrm{V},\beta)$ a real scalar product space, we have the special orthogonal group of ($\mathrm{V},\beta$) given by
+$$
+\mathrm{SO}(\mathrm{~V}, \beta)=\mathrm{O}(\mathrm{~V}, \beta) \cap \mathrm{SL}(\mathrm{~V}, \mathbb{R})
+$$
+\end{EXA}
+
+\begin{EXA}{LIE-L09-04-38}{Spezielle Unitäre Gruppe $\SU(V,\beta)$ zu hermitischen Skalarprodukt}
+For ($\mathrm{V},\beta$) a Hermitian scalar product space, we have the special unitary group of ($\mathrm{V},\beta$) given by
+$$
+\mathrm{SU}(\mathrm{~V}, \beta)=\mathrm{U}(\mathrm{~V}, \beta) \cap \mathrm{SL}(\mathrm{~V}, \mathbb{C})
+$$
+\end{EXA}
+
+\begin{EXA}{LIE-L09-04-39}{Spezielle Orthogonale / Unitäre Matrixgruppe in $\R,\C$}
+The group of $n \times n$ complex matrices of determinant one is the complex special linear matrix group $\operatorname{SL}(n, \mathbb{C})$. We also have the similarly defined real special linear group $\operatorname{SL}(n, \mathbb{R})$. The special orthogonal and special semiorthogonal matrix groups, $\mathrm{SO}(n)$ and $\mathrm{SO}(p, q)$, are the matrix groups defined by $\mathrm{SO}(n)=\mathrm{O}(n) \cap \mathrm{SL}(n, \mathbb{R})$ and $\mathrm{SO}(p, q)=\mathrm{O}(p, q) \cap \mathrm{SL}(n, \mathbb{R})$. The special unitary and special semiunitary matrix groups $\mathrm{SU}(n)$ and $\mathrm{SU}(p, q)$ are defined similarly.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-04-41}{Symplektische Gruppe $\operatorname{Sp}(\mathrm{V}, \mathbb{F})$ assoziert zu nichtdegenerierte, schrägsymmetrische $\mathbb{F}$-bilineare Form auf $2n$-dim Vektorraum}
+We will describe both the real and the complex symplectic groups. Suppose that $\beta$ is a nondegenerate skewsymmetric $\mathbb{C}$-bilinear (resp. $\mathbb{R}$-bilinear) form on a $2 n$-dimensional complex (resp. real) vector space $V$. The group $\operatorname{Aut}(V, \beta)$ is called the complex (resp. real) symplectic group and is denoted by $\operatorname{Sp}(\mathrm{V}, \mathbb{C})$ (resp. $\operatorname{Sp}(\mathrm{V}, \mathbb{R})$ ). There exists a basis $\left\{f_{i}\right\}$ for V such that $\beta$ is represented in the canonical form by
+$$
+(v, w)=\sum_{i=1}^{n} v^{i} w^{n+i}-\sum_{j=1}^{n} v^{n+j} w^{j} .
+$$
+The symplectic matrix groups are given by
+$$
+\begin{aligned}
+& \operatorname{Sp}(2 n, \mathbb{C}):=\left\{A \in M_{2 n \times 2 n}(\mathbb{C}):(A v, A w)=(v, w)\right\}, \\
+& \operatorname{Sp}(2 n, \mathbb{R}):=\left\{A \in M_{2 n \times 2 n}(\mathbb{R}):(A v, A w)=(v, w)\right\},
+\end{aligned}
+$$
+where ($v,w$) is given as above.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-04-43}{$\mathrm{SO}(n, \mathbb{R}) \hookrightarrow \operatorname{GL}(n, \mathbb{R})$ ist ein LG Homomorphismus}
+The inclusion $\mathrm{SO}(n, \mathbb{R}) \hookrightarrow \operatorname{GL}(n, \mathbb{R})$ is a Lie group homomorphism.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-04-44}{$S^1 \mathrm{SO}(n)$ ist ein LG Homomorphismus}
+The circle $S^{1} \subset \mathbb{C}$ is a Lie group under complex multiplication and the map
+$$
+z=e^{i \theta} \mapsto\left[\begin{array}{ccc}
+\cos (\theta) & \sin (\theta) & 0 \\
+-\sin (\theta) & \cos (\theta) & 0 \\
+0 & 0 & I_{n-2}
+\end{array}\right]
+$$
+is a Lie group homomorphism of $S^{1}$ into $\operatorname{SO}(n)$.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-04-45}{$U(1, \mathbb{H}) \rightarrow \mathrm{SU}(2)$ ist ein LG Homomorphismus}
+The map $U(1, \mathbb{H}) \rightarrow \mathrm{SU}(2)$ of Proposition 5.30 is a Lie group isomorphism.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-04-46}{Konjugationsabbildung ist Lie Gruppen Automorphismus}
+The conjugation map $C_{g}: G \rightarrow G$ given by $x \mapsto g x g^{-1}$ is a Lie group automorphism. Note that $C_{g}=L_{g} \circ R_{g^{-1}}$.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-04-51}{LG Homomorphismus zwischen $\R$ und $S^1$}
+The map $t \mapsto e^{i t}$ is a Lie group homomorphism from $\mathbb{R}$ to $S^{1} \subset \mathbb{C}$.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-04-53}{1-parameter Untergruppe von $2$-Torus}
+We have seen that the torus $S^{1} \times S^{1}$ is a Lie group under multiplication given by 
+$$\left(e^{i \tau_{1}}, e^{i \theta_{1}}\right)\left(e^{i \tau_{2}}, e^{i \theta_{2}}\right)=\left(e^{i\left(\tau_{1}+\tau_{2}\right)}, e^{i\left(\theta_{1}+\theta_{2}\right)}\right)$$ 
+Every homomorphism of $\mathbb{R}$ into $S^{1} \times S^{1}$, that is, every one-parameter subgroup of $S^{1} \times S^{1}$, is of the form $t \mapsto\left(e^{t a i}, e^{t b i}\right)$ for some pair of real numbers $a, b \in \mathbb{R}$.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-04-54}{1-parameter Untergruppe von $\GL(3)$ und $\SO(3)$}
+The map $R: \mathbb{R} \rightarrow \mathrm{SO}(3)$ given by
+$$
+t \mapsto\left(\begin{array}{ccc}
+\cos t & -\sin t & 0 \\
+\sin t & \cos t & 0 \\
+0 & 0 & 1
+\end{array}\right)
+$$
+is a one-parameter subgroup. Also, the map
+$$
+t \mapsto\left(\begin{array}{ccc}
+\cos t & -\sin t & 0 \\
+\sin t & \cos t & 0 \\
+0 & 0 & e^{t}
+\end{array}\right)
+$$
+is a one-parameter subgroup of GL(3).
+\end{EXA}
+
+\begin{EXA}{LIE-L09-04-55}{$Ad_g$ wirkt auf $\SO(3)$}
+Recall that an $n \times n$ complex matrix $A$ is called Hermitian (resp. skewHermitian) if $\bar{A}^{t}=A$ (resp. $\bar{A}^{t}=-A$ ). Let $\mathfrak{s u}(2)$ denote the vector space of skew-Hermitian matrices with zero trace. Given $g \in \mathrm{SU}(2)$, we define the map $\operatorname{Ad}_{g}: \mathfrak{s u}(2) \rightarrow \mathfrak{s u}(2)$ by $\operatorname{Ad}_{g}: x \mapsto g x g^{-1}$. The skew-Hermitian matrices of zero trace can be identified with $\mathbb{R}^{3}$ by using the following matrices as a basis:
+$$
+\left(\begin{array}{cc}
+0 & -i \\
+-i & 0
+\end{array}\right),\left(\begin{array}{cc}
+0 & -1 \\
+1 & 0
+\end{array}\right),\left(\begin{array}{cc}
+-i & 0 \\
+0 & i
+\end{array}\right) .
+$$
+These are just $-i$ times the Pauli matrices $\sigma_{1}, \sigma_{2}, \sigma_{3}$, and so the correspondence $\mathfrak{s u}(2) \rightarrow \mathbb{R}^{3}$ is given by $-x i \sigma_{1}-y i \sigma_{2}-i z \sigma_{3} \mapsto(x, y, z)$. Under this correspondence, the inner product on $\mathbb{R}^{3}$ becomes the inner product $(A, B)=\frac{1}{2} \operatorname{trace}\left(A \bar{B}^{t}\right)=-\frac{1}{2} \operatorname{trace}(A B)$. But then
+$$
+\begin{aligned}
+\left(\operatorname{Ad}_{g} A, \operatorname{Ad}_{g} B\right) & =-\frac{1}{2} \operatorname{trace}\left(g A g^{-1} g B g^{-1}\right) \\
+& =-\frac{1}{2} \operatorname{trace}(A B)=(A, B)
+\end{aligned}
+$$
+So, $\operatorname{Ad}_{g}$ can be thought of as an element of $\mathrm{O}(3)$. More is true; $\operatorname{Ad}_{g}$ acts as an element of $\mathrm{SO}(3)$, and the map $g \mapsto \mathrm{Ad}_{g}$ is then a homomorphism from $\mathrm{SU}(2)$ to $\mathrm{SO}(\mathfrak{s u}(2)) \cong \mathrm{SO}(3)$. This is a special case of the adjoint map studied later. (This example is related to the notion of "spin". For more, see the online supplement.)
+\end{EXA}
+
+\begin{EXA}{LIE-L09-04-58}{Möbiustransformationen}
+The group Mob of Möbius transformations of the complex plane given by $T_{A}: z \mapsto \frac{a z+b}{c z+d}$ for $A=\left(\begin{array}{ll}a & b \\ c & d\end{array}\right) \in \mathrm{SL}(2, \mathbb{C})$ can be given the structure of a Lie group. The map $\wp: \mathrm{SL}(2, \mathbb{C}) \rightarrow$ Mob given by $\wp: A \mapsto T_{A}$ is onto but not injective. In fact, it is a (two fold) covering homomorphism. When do two elements of $\operatorname{SL}(2, \mathbb{C})$ map to the same element of Mob?
+\end{EXA}
+
+\subsection{Propositionen}
+
+\begin{THEO}{LIE-L09-04-06}{Lokale Umgebung um Einheitselement von ZSH Lie Gruppe generiert die Lie Gruppe}
+If $G$ is a connected Lie group and $U$ is a neighborhood of the identity element $e$, then $U$ generates the group. In other words, every element of $g$ is a product of elements of $U$.
+\end{THEO}
+
+\begin{PROOF}{LIE-L09-04-07}{P: Lokale Umgebung um Einheitselement von ZSH Lie Gruppe generiert die Lie Gruppe}
+First note that $V=\operatorname{inv}(U) \cap U$ is an open neighborhood of the identity with the property that $\operatorname{inv}(V)=V$. We say that $V$ is symmetric. We show that $V$ generates $G$. For any open $W_{1}$ and $W_{2}$ in $G$, the set $W_{1} W_{2}=\left\{w_{1} w_{2}: w_{1} \in W_{1}\right.$ and $\left.w_{2} \in W_{2}\right\}$ is an open set being a union of the open sets $\bigcup_{g \in W_{1}} g W_{2}$. Thus, in particular, the inductively defined sets
+$$
+V^{n}=V V^{n-1}, \quad n=1,2,3, \ldots
+$$
+are open. We have
+$$
+e \in V \subset V^{2} \subset \cdots V^{n} \subset \cdots
+$$
+It is easy to check that each $V^{n}$ is symmetric and so also is the union
+$$
+V^{\infty}:=\bigcup_{n=1}^{\infty} V^{n}
+$$
+Moreover, $V^{\infty}$ is not only closed under inversion, but also obviously closed under multiplication. Thus $V^{\infty}$ is an open subgroup. From Exercise 5.5, $V^{\infty}$ is also closed, and since $G$ is connected, we obtain $V^{\infty}=G$.
+\end{PROOF}
+
+\begin{PROP}{LIE-L09-04-12}{Charakterisierung von Lie Untergruppen durch reguläre Untermannigfaltigkeiit}
+If $H$ is an abstract subgroup of a Lie group $G$ that is also a regular submanifold, then $H$ is a closed Lie subgroup.
+\end{PROP}
+
+\begin{PROOF}{LIE-L09-04-13}{P: Charakterisierung von Lie Untergruppen durch reguläre Untermannigfaltigkeiit}
+The multiplication and inversion maps, $H \times H \rightarrow H$ and $H \rightarrow H$, are the restrictions of the multiplication and inversion maps on $G$, and since $H$ is a regular submanifold, we obtain the needed smoothness of these maps. The harder part is to show that $H$ is closed. So let $x_{0} \in \bar{H}$ be arbitrary. Let ( $U, \mathrm{x}$ ) be a single-slice chart adapted to $H$ whose domain contains $e$. Let $\delta: G \times G \rightarrow G$ be the map $\delta\left(g_{1}, g_{2}\right)=g_{1}^{-1} g_{2}$, and choose an open set $V$ such that $e \in V \subset \bar{V} \subset U$. By continuity of the map $\delta$ we can find an open neighborhood $O$ of the identity element such that $O \times O \subset \delta^{-1}(V)$. Now if $\left\{h_{i}\right\}$ is a sequence in $H$ converging to $x_{0} \in \bar{H}$, then $x_{0}^{-1} h_{i} \rightarrow e$ and $x_{0}^{-1} h_{i} \in O$ for all sufficiently large $i$. Since $h_{j}^{-1} h_{i}=\left(x_{0}^{-1} h_{j}\right)^{-1} x_{0}^{-1} h_{i}$, we have that $h_{j}^{-1} h_{i} \in V$ for sufficiently large $i, j$. For any sufficiently large fixed $j$, we have
+$$
+\lim _{i \rightarrow \infty} h_{j}^{-1} h_{i}=h_{j}^{-1} x_{0} \in \bar{V} \subset U
+$$
+Since $U$ is the domain of a single-slice chart, $U \cap H$ is closed in $U$. Thus since each $h_{j}^{-1} h_{i}$ is in $U \cap H$, we see that $h_{j}^{-1} x_{0} \in U \cap H \subset H$ for all sufficiently large $j$. This shows that $x_{0} \in H$, and since $x_{0}$ was arbitrary, we are done.
+\end{PROOF}
+
+\begin{PROP}{LIE-L09-04-20}{$\GL(V)$ ist Lie Gruppe}
+We obtain an isomorphism of $\operatorname{GL}(\mathrm{V})$ with the matrix group $\operatorname{GL}(n, \mathbb{F})$ by choosing a basis and then simply sending each element of $\mathrm{GL}(\mathrm{V})$ to its matrix representative with respect to that basis. If we write $\operatorname{mat}(A)$ for the matrix that represents $A \in \mathrm{GL}(\mathrm{V})$ with respect to a fixed basis, then $A \rightarrow \operatorname{mat}(A)$ is a group isomorphism and is clearly smooth. It follows that $\mathrm{GL}(\mathrm{V})$ is a Lie group, and for each choice of basis we have an isomorphism of Lie groups $\mathrm{GL}(\mathrm{V}) \cong \mathrm{GL}(n, \mathbb{F})$. In practice it is common to work with the matrix group $\mathrm{GL}(n, \mathbb{F})$ and its subgroups.
+\end{PROP}
+
+\begin{THEO}{LIE-L09-04-31}{$\operatorname{Aut}(V,\beta)$ und $\operatorname{SAut}(V,\beta)$ als abgeschlossene Lie Untergruppen von $\GL(V)$}
+$\mathrm{SL}(\mathrm{V})$ is a closed Lie subgroup of $\mathrm{GL}(\mathrm{V})$. If $\beta$ is a bilinear or sesquilinear form as above, then $\operatorname{Aut}(\mathrm{V}, \beta)$ and $\operatorname{SAut}(\mathrm{V}, \beta):= \operatorname{Aut}(\mathrm{V}, \beta) \cap \mathrm{SL}(\mathrm{V})$ are closed Lie subgroups of $\mathrm{GL}(\mathrm{V})$. (The form $\beta$ is most often taken to be nondegenerate.)
+\end{THEO}
+
+\begin{PROOF}{LIE-L09-04-32}{P: $\operatorname{Aut}(V,\beta)$ und $\operatorname{SAut}(V,\beta)$ als abgeschlossene Lie Untergruppen von $\GL(V)$}
+It is easy to check that the sets in question are subgroups. They are clearly closed. For example, $\operatorname{Aut}(\mathrm{V}, \beta)=\bigcap_{v, w} F_{v, w}$, where
+$$
+F_{v, w}:=\{A \in \mathrm{GL}(\mathrm{~V}): \beta(A v, A w)=\beta(v, w)\}
+$$
+The fact that they are Lie subgroups follows from Theorem 5.81 below. However, as we shall see, most of the specific cases arising from various choices of $\beta$ can be proved to be Lie groups by other means. That they are Lie subgroups follows from Proposition 5.9 once we show that they are regular submanifolds of the appropriate group $\mathrm{GL}(\mathrm{V}, \mathbb{F})$.
+\end{PROOF}
+
+\begin{PROP}{LIE-L09-04-47}{Identität von LG Homomorphismen für Übereinstimmung lokal um Einheitselement für Definitionsbereich ZSH}
+Let $f_{1}: G \rightarrow H$ and $f_{2}: G \rightarrow H$ be Lie group homomorphisms that agree in a neighborhood of the identity. If $G$ is connected, then $f_{1}=f_{2}$.
+\end{PROP}
+
+\begin{PROOF}{LIE-L09-04-48}{P: Identität von LG Homomorphismen für Übereinstimmung lokal um Einheitselement für Definitionsbereich ZSH}
+By Theorem 5.6, any $g \in G$ is a product of elements in the set on which $f_{1}$ and $f_{2}$ agree, so the homomorphism property forces $f_{1}=f_{2}$.
+\end{PROOF}
+
+\begin{EXE}{LIE-L09-04-49}{Tagentenabbildung für Multiplikationsabbildung}
+Show that the multiplication map $\mu: G \times G \rightarrow G$ has tangent map at $(e, e) \in G \times G$ given as $T_{(e, e)} \mu(v, w)=v+w$. Recall that we identify $T_{(e, e)}(G \times G)$ with $T_{e} G \times T_{e} G$.
+\end{EXE}
+
+\begin{EXE}{LIE-L09-04-50}{Tagentenabbildung für Konjugationsabbildung}
+$\operatorname{GL}(n, \mathbb{R})$ is an open subset of the vector space of all $n \times n$ matrices $M_{n \times n}(\mathbb{R})$. Using the natural identification of $T_{e} \mathrm{GL}(n, \mathbb{R})$ with $M_{n \times n}(\mathbb{R})$, show that
+$$
+T_{e} C_{g}(x)=g x g^{-1}
+$$
+where $g \in \mathrm{GL}(n, \mathbb{R})$ and $x \in M_{n \times n}(\mathbb{R})$.
+\end{EXE}
+
+\section{Lie Algebren}
+
+\subsection{Definitionen}
+
+\begin{DEF}{LIE-L09-03-01}{Links / Rechts Invariante Vektorfelder}
+A vector field $X \in \mathfrak{X}(G)$ is called left invariant if and only if 
+$$\left(L_{g}\right)_{*} X=X$$ 
+for all $g \in G$. A vector field $X \in \mathfrak{X}(G)$ is called right invariant if and only if 
+$$\left(R_{g}\right)_{*} X=X$$ 
+for all $g \in G$. The set of left invariant (resp. right invariant) vector fields is denoted $\mathfrak{X}^{L}(G)$ (resp. $\mathfrak{X}^{R}(G)$).
+
+Recall that by definition 
+$$\left(L_{g}\right)_{*} X=T L_{g} \circ X \circ L_{g}^{-1}$$ 
+and so left invariance means that 
+$$T L_{g} \circ X \circ L_{g}^{-1}=X$$ 
+or that given any $x \in G$ we have 
+$$T_{x} L_{g} \cdot X(x)= X(g x)$$ for all $g \in G$. 
+
+Thus $X \in \mathfrak{X}(G)$ is left invariant if and only if the following diagram commutes for every $g \in G$ :\\
+\includegraphics[scale=0.25, center]{2025_10_09_265d7e1a22c89f79c21eg-219}
+There is a similar diagram for right invariance.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-03-04}{Assoziierte Links/Rechts Invariante Felder $L^v,R^v$ zu Tangentialvektoren in $T_e G$}
+Given a vector $v \in T_{e} G$, we can define a smooth left (resp. right) invariant vector field $L^{v}$ (resp. $R^{v}$) such that $L^{v}(e)=v$ (resp. $\left.R^{v}(e)=v\right)$ by the simple prescription
+$$
+L^{v}(g)=T L_{g} \cdot v \quad\left(\text { resp. } R^{v}(g)=T R_{g} \cdot v\right) .
+$$
+A bit more precisely, $L^{v}(g)=T_{e}\left(L_{g}\right) \cdot v$. The proof that this prescription gives smooth invariant vector fields is left to the reader (see Problem 7). Given a vector in $T_{e} G$ there are various notations for denoting the corresponding left (or right) invariant vector field, and we shall have occasion to use some different notation later on. We will also write $L(v)$ for $L^{v}$ and $R(v)$ for $R^{v}$. 
+
+The map $v \mapsto L(v)$ (resp. $v \mapsto R(v)$) is a linear isomorphism from $T_{e} G$ onto $\mathfrak{X}^{L}(G)$ (resp. $\left.\mathfrak{X}^{R}(G)\right)$.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-03-05}{Lie Algebra}
+A vector space $\mathfrak{a}$ (over a field $\mathbb{F}$ ) is called a Lie algebra if it is equipped with a bilinear map $\mathfrak{a} \times \mathfrak{a} \rightarrow \mathfrak{a}$ (a multiplication) denoted $(v, w) \mapsto[v, w]$ such that
+$$
+[v, w]=-[w, v]
+$$
+and such that we have the Jacobi identity
+$$
+[x,[y, z]]+[y,[z, x]]+[z,[x, y]]=0
+$$
+for all $x, y, z \in \mathfrak{a}$.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-03-06}{Abelsche Lie Algebra}
+A Lie algebra $\mathfrak{a}$ is called abelian (or commutative) if $[v, w]=0$ for all $v, w \in \mathfrak{a}$.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-03-07}{Lie Unteralgebra}
+A subspace $\mathfrak{h}$ of $\mathfrak{a}$ is called a Lie subalgebra if it is closed under the bracket operation, and it is called an ideal if $[v, w] \in \mathfrak{h}$ for any $v \in \mathfrak{a}$ and $w \in \mathfrak{h}$. (We indicate this by writing $[\mathfrak{a}, \mathfrak{h}] \subset \mathfrak{h}$.)
+\end{DEF}
+
+\begin{DEF}{LIE-L09-03-10}{$T_eG$ von Lie gruppe als Lie Algebra}
+For a Lie group $G$, define the bracket of any two elements $v, w \in T_{e} G$ by
+$$
+[v, w]:=\left[L^{v}, L^{w}\right](e) .
+$$
+With this bracket, the vector space $T_{e} G$ becomes a Lie algebra
+\end{DEF}
+
+\begin{DEF}{LIE-L09-03-11}{Lie Algebra einer Lie Gruppe}
+We have two Lie algebras, $\mathfrak{X}^{L}(G)$ and $T_{e} G$, which are isomorphic by construction. The abstract Lie algebra isomorphic to either/both of them is often referred to as the Lie algebra of the Lie group $G$ and denoted variously by $\mathfrak{L}(G)$ or $\mathfrak{g}$. Of course, we are implying that $\mathfrak{L}(H)$ is denoted $\mathfrak{h}$ and $\mathfrak{L}(K)$ by $\mathfrak{k}$, etc. In some computations we will have to use a specific realization of $\mathfrak{g}$. Our default convention will be that $\mathfrak{g}=\mathfrak{L}(G):=T_{e} G$ with the bracket defined above.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-03-12}{Strukturkonstanten der Lie Algebra}
+Given a Lie algebra $\mathfrak{g}$, we can associate to every basis $v_{1}, \ldots, v_{n}$ for $\mathfrak{g}$, the structure constants $c_{i j}^{k}$ which are defined by
+$$
+\left[v_{i}, v_{j}\right]=\sum_{k} c_{i j}^{k} v_{k} \text { for } 1 \leq i, j, k \leq n .
+$$
+It follows from the skew symmetry of the Lie bracket and the Jacobi identity that the structure constants satisfy
+\begin{enumerate}
+\item $$c_{i j}^{k}=-c_{j i}^{k}$$
+\item $$\sum_{k} c_{r s}^{k} c_{k t}^{i}+c_{s t}^{k} c_{k r}^{i}+c_{t r}^{k} c_{k s}^{i}=0$$
+\end{enumerate}
+The structure constants characterize the Lie algebra, and structure constants are sometimes used to actually define a Lie algebra once a basis is chosen.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-03-13}{Produkt Lie Algebra}
+Let $\mathfrak{a}$ and $\mathfrak{b}$ be Lie algebras. For ($a_{1}, b_{1}$) and ($a_{2}, b_{2}$) elements of the vector space $\mathfrak{a} \times \mathfrak{b}$, define
+$$
+\left[\left(a_{1}, b_{1}\right),\left(a_{2}, b_{2}\right)\right]:=\left(\left[a_{1}, a_{2}\right],\left[b_{1}, b_{2}\right]\right) .
+$$
+With this bracket, $\mathfrak{a} \times \mathfrak{b}$ is a Lie algebra called the Lie algebra product of $\mathfrak{a}$ and $\mathfrak{b}$. Recall the definition of an ideal in a Lie algebra (Definition 2.79). The subspaces $\mathfrak{a} \times\{0\}$ and $\{0\} \times \mathfrak{b}$ are ideals in $\mathfrak{a} \times \mathfrak{b}$ that are clearly isomorphic to $\mathfrak{a}$ and $\mathfrak{b}$ respectively. We often identify $\mathfrak{a}$ with $\mathfrak{a} \times\{0\}$ and $\mathfrak{b}$ with $\{0\} \times \mathfrak{b}$.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-03-15}{Lie Algebra Homomorphismus}
+Given two Lie algebras over a field $\mathbb{F}$, say ($\mathfrak{a},[,]_{\mathfrak{a}}$) and $\left(\mathfrak{b},[,]_{\mathfrak{b}}\right)$, an $\mathbb{F}$-linear map $\sigma$ is called a Lie algebra homomorphism if and only if
+$$
+\sigma\left([v, w]_{\mathfrak{a}}\right)=[\sigma v, \sigma w]_{\mathfrak{b}}
+$$
+for all $v, w \in \mathfrak{a}$. A Lie algebra isomorphism is defined in the obvious way. A Lie algebra isomorphism $\mathfrak{g} \rightarrow \mathfrak{g}$ is called an automorphism of $\mathfrak{g}$.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-03-16}{Automorphismengruppe eine Lie Algebra ist Lie Untergruppe von $\GL(\mathfrak{g})$}
+It is not hard to show that the set of all automorphisms of $\mathfrak{g}$, denoted $\operatorname{Aut}(\mathfrak{g})$, forms a Lie group (actually a Lie subgroup of $\operatorname{GL}(\mathfrak{g})$).
+\end{DEF}
+
+\begin{DEF}{LIE-L09-03-17}{Lie-Algebra von $\mathrm{GL}(V)$}
+Sei $V$ ein endlichdimensionaler reeller Vektorraum.
+\begin{enumerate}
+\item Die allgemeine lineare Gruppe $\mathrm{GL}(V)$ ist die offene Teilmenge
+\[
+\mathrm{GL}(V)=\{A\in L(V,V)\mid \det A\neq 0\}
+\]
+des Vektorraums $L(V,V)$ aller linearen Endomorphismen von $V$.
+\item Das Tangentialbündel von $\mathrm{GL}(V)$ kann mit
+\[
+T\mathrm{GL}(V)\cong \mathrm{GL}(V)\times L(V,V)
+\]
+identifiziert werden. Insbesondere gilt
+\[
+T_A\mathrm{GL}(V)=\{A\}\times L(V,V),
+\qquad
+T_I\mathrm{GL}(V)\cong L(V,V).
+\]
+\item Die Lie-Algebra von $\mathrm{GL}(V)$ ist definiert als
+\[
+\mathfrak{gl}(V):=T_I\mathrm{GL}(V)\cong L(V,V),
+\]
+versehen mit der Lie-Klammer, die aus der Lie-Algebra der linksinvarianten
+Vektorfelder auf $\mathrm{GL}(V)$ induziert wird.
+\end{enumerate}
+\end{DEF}
+
+\begin{DEF}{LIE-L09-03-22}{Lineare Funktionale auf $GL(V)$ via Restriktion}
+Sei $V$ endlichdimensional reell, $L(V,V)$ der Raum der Endomorphismen und $GL(V)\subset L(V,V)$ offen.
+Eine \emph{lineare Funktion} $f$ auf $GL(V)$ sei stets die Restriktion eines linearen Funktionals
+$f\in (L(V,V))^*$.
+Für $X\in L(V,V)$ definieren wir
+\[
+f_{,X}:GL(V)\to\mathbb R,\qquad f_{,X}(A):=f(A\circ X).
+\]
+\end{DEF}
+
+\begin{DEF}{LIE-L09-03-29}{Globale Koordinaten und Trennung von Punkten}
+Fixiere eine Basis von $V$. Die Koordinatenfunktionen $x^i_j(A)$ (Matrixeinträge von $A$) sind
+Restriktionen linearer Funktionale auf $L(V,V)$. Gilt $f_{,X}=f_{,Y}$ für alle linearen $f$, so folgt
+aus der Auswertung bei $I$:
+\[
+f(X)=f_{,X}(I)=f_{,Y}(I)=f(Y)\quad\text{für alle linearen }f,
+\]
+also $X=Y$ (lineare Funktionale trennen Punkte in $L(V,V)$).
+\end{DEF}
+
+\begin{DEF}{LIE-L09-03-38}{Identifikation von Lie-Algebren mit Kommutatorräumen}
+Von nun an identifizieren wir die Lie-Algebra
+\[
+\mathfrak{gl}(V)\;=\;T_I \mathrm{GL}(V)
+\]
+mit dem Vektorraum $L(V,V)$ versehen mit der Kommutator-Klammer
+\[
+[A,B]=A\circ B - B\circ A.
+\]
+Analog identifizieren wir für den Matrixfall
+\[
+\mathfrak{gl}(n,\mathbb{R})\;=\;T_I \mathrm{GL}(n,\mathbb{R})
+\]
+mit $M_{n\times n}(\mathbb{R})$ und derselben Kommutatorstruktur.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-03-40}{Notation $v^G$}
+For a Lie group $G$, we have the alternative notation $v^{G}$ for the left invariant vector field whose value at $e$ is $v$. If $H$ is a closed Lie subgroup of $G$ and $v \in T_{e} H$, then $v^{G} \in \mathfrak{X}^{L}(G)$ while $v^{H} \in \mathfrak{X}^{L}(H)$.
+\end{DEF}
+
+\subsection{Exampel}
+
+\begin{EXA}{LIE-L09-03-46}{Lie Algebra von $\Ogroup(n)$}
+Consider the orthogonal group $\mathrm{O}(n) \subset \operatorname{GL}(n)$. Given a curve of orthogonal matrices $Q(t)$ with $Q(0)=I$ and $\left.\frac{d}{d t}\right|_{t=0} Q(0)=A$, we compute by differentiating the defining equation $I=Q^{t} Q$ :
+$$
+\begin{aligned}
+0 & =\left.\frac{d}{d t}\right|_{t=0} Q^{t} Q \\
+& =\left(\left.\frac{d}{d t}\right|_{t=0} Q\right)^{t} Q(0)+Q^{t}(0)\left(\left.\frac{d}{d t}\right|_{t=0} Q\right) \\
+& =A^{t}+A
+\end{aligned}
+$$
+so that the space of skew-symmetric matrices is contained in the tangent space $T_{I} \mathrm{O}(n)$. But both $T_{I} \mathrm{O}(n)$ and the space of skew-symmetric matrices have dimension $n(n-1) / 2$, so they are equal. This means that we can identify the Lie algebra $\mathfrak{o}(n)=\mathfrak{L}(\mathrm{O}(n))$ with the space of skew-symmetric matrices with the commutator bracket. One can easily check that the commutator bracket of two such matrices is skew-symmetric, as expected.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-03-48}{Lie Algebra von $\U(n)$}
+Consider the unitary group $\mathrm{U}(n) \subset \mathrm{GL}(n, \mathbb{C})$. Given a curve of unitary matrices $Q(t)$ with $Q(0)=I$ and $\left.\frac{d}{d t}\right|_{t=0} Q(0)=A$, we compute by differentiating the defining equation $I=\bar{Q}^{t} Q$. We have
+$$
+\begin{aligned}
+0 & =\left.\frac{d}{d t}\right|_{t=0} \bar{Q}^{t} Q \\
+& =\left(\left.\frac{d}{d t}\right|_{t=0} \bar{Q}\right)^{t} Q(0)+\bar{Q}^{t}(0)\left(\left.\frac{d}{d t}\right|_{t=0} Q\right) \\
+& =\bar{A}^{t}+A
+\end{aligned}
+$$
+Examining dimensions as before, we see that we can identify $\mathfrak{u}(n)$ with the space of skew-Hermitian matrices $\left(\bar{A}^{t}=-A\right)$ under the commutator bracket.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-03-49}{Lie Algebren zu kanonischen Lie Untergruppen von $\GL(n,\C)$}
+Along the lines of the above examples, each of the familiar matrix Lie groups has a Lie algebra presented as a matrix Lie algebra with commutator bracket. This subalgebra is defined in terms of simple conditions as in the examples above, and the chart below lists some of the more common examples.
+\begin{center}
+\begin{tabular}{lll}
+Group & Lie algebra & \begin{tabular}{l}
+Conditions defining \\
+the Lie algebra \\
+\end{tabular} \\
+$\mathrm{SL}(n, \mathbb{R})$ & $\mathfrak{s l}(n, \mathbb{R})$ & Trace $(A)=0$ \\
+$\mathrm{O}(n)$ & $\mathfrak{o}(n)$ & $A^{t}=-A$ \\
+$S \mathrm{O}(n)$ & $\mathfrak{s o}(n)$ & $A^{t}=-A$ \\
+$\mathrm{U}(n)$ & $\mathfrak{u}(n)$ & $\bar{A}^{t}=-A$ \\
+$S \mathrm{U}(n)$ & $\mathfrak{s u}(n)$ & $\bar{A}^{t}=-A, \operatorname{Trace}(A)=0$ \\
+$\mathrm{Sp}(2 n, \mathbb{F})$ & $\mathfrak{s p}(2 n, \mathbb{F})$ & $J A^{t} J=A$ \\
+\end{tabular}
+\end{center}
+In the chart above the matrix $J$ is given by
+$$
+J=\left(\begin{array}{cc}
+0 & I \\
+-I & 0
+\end{array}\right) .
+$$
+\end{EXA}
+
+\subsection{Propositionen}
+
+\begin{LEM}{LIE-L09-03-02}{Raum der links Invarianten Vektorfelder ist abgeschlossen unter Lie-Klammer}
+$\mathfrak{X}^{L}(G)$ is closed under the Lie bracket operation.
+\end{LEM}
+
+\begin{PROOF}{LIE-L09-03-03}{P: Raum der links Invarianten Vektorfelder ist abgeschlossen unter Lie-Klammer}
+Suppose that $X, Y \in \mathfrak{X}^{L}(G)$. Then by Proposition 2.84 we have
+$$
+\left(L_{g}\right)_{*}[X, Y]=\left[L_{g *} X, L_{g *} Y\right]=[X, Y] .
+$$
+\end{PROOF}
+
+\begin{PROP}{LIE-L09-03-08}{Raum der Linksinvarianten Vektorfelder über Lie Gruppe ist $n$-dim Lie Algebra}
+If $G$ is a Lie group of dimension $n$, then $\mathfrak{X}^{L}(G)$ is an $n$-dimensional Lie algebra under the bracket of vector fields (see Definition 2.75).
+\end{PROP}
+
+\begin{PROOF}{LIE-L09-03-09}{P: Raum der Linksinvarianten Vektorfelder über Lie Gruppe ist $n$-dim Lie Algebra}
+The linear isomorphism $T_{e} G \cong \mathfrak{X}^{L}(G)$ just discovered shows that $\mathfrak{X}^{L}(G)$ is, in fact, a vector space of finite dimension equal to the dimension of $G$. From this and Lemma 5.52 we immediately obtain the result.
+\end{PROOF}
+
+\begin{EXE}{LIE-L09-03-14}{Lie Algebra von Produkt Lie Gruppe}
+Show that if $G$ and $H$ are Lie groups, then the Lie algebra $\mathfrak{g} \times \mathfrak{h}$ is (up to identifications) the Lie algebra of $G \times H$.
+\end{EXE}
+
+\begin{PROP}{LIE-L09-03-18}{Kommutatorstruktur auf $\mathfrak{gl}(V)$}
+Unter der natürlichen Identifikation $T_I\mathrm{GL}(V)\cong L(V,V)$
+entspricht die Lie-Klammer der zugehörigen linksinvarianten
+Vektorfelder dem \emph{Kommutator} von Endomorphismen:
+\[
+[A,B]:=A\circ B - B\circ A,
+\qquad
+A,B\in L(V,V).
+\]
+\end{PROP}
+
+\begin{PROOF}{LIE-L09-03-19}{P: Kommutatorstruktur auf $\mathfrak{gl}(V)$}
+Sei für $X\in L(V,V)$ das linksinvariante Vektorfeld
+$\widetilde{X}$ auf $\mathrm{GL}(V)$ definiert durch
+\[
+\widetilde{X}(A)=A\circ X,\qquad A\in\mathrm{GL}(V).
+\]
+Dann gilt für $A,B\in L(V,V)$:
+\[
+[\widetilde{A},\widetilde{B}](C)
+=
+\widetilde{A}(\widetilde{B}(C))-\widetilde{B}(\widetilde{A}(C))
+=
+C\circ(A\circ B-B\circ A)
+=
+\widetilde{[A,B]}(C).
+\]
+Somit induziert die Lie-Klammer auf den linksinvarianten Vektorfeldern
+den Kommutator $[A,B]=A\circ B-B\circ A$ auf $L(V,V)$.
+\end{PROOF}
+
+\begin{PROP}{LIE-L09-03-20}{Formel für linksinvariante Vektorfelder auf $\mathrm{GL}(V)$}
+Sei $V$ endlichdimensional reell und identifiziere $T\mathrm{GL}(V)\cong \mathrm{GL}(V)\times L(V,V)$.
+Für festes $A\in \mathrm{GL}(V)$ sei $L_A:\mathrm{GL}(V)\to \mathrm{GL}(V)$ die Linksmultiplikation $L_A(B)=A\circ B$.
+Dann gilt für $X\in L(V,V)\cong T_I\mathrm{GL}(V)$ und das zu $X$ gehörige linksinvariante Vektorfeld $\widetilde X$:
+\[
+\widetilde X(A)\;=\; d(L_A)_I(X)\;=\;(A,\,A\circ X)\;\in T_A\mathrm{GL}(V)\cong \{A\}\times L(V,V).
+\]
+\end{PROP}
+
+\begin{PROOF}{LIE-L09-03-21}{P: Formel für linksinvariante Vektorfelder auf $\mathrm{GL}(V)$}
+Unter der Identifikation $T\mathrm{GL}(V)\cong \mathrm{GL}(V)\times L(V,V)$ ist die totale Ableitung von $L_A$ an $(B,Y)$ gegeben durch
+\[
+d(L_A)_{(B,Y)}\;:\;(B,Y)\longmapsto (A\circ B,\,A\circ Y).
+\]
+Insbesondere am Einselement $I\in \mathrm{GL}(V)$ liefert dies
+\[
+d(L_A)_I \;:\; T_I\mathrm{GL}(V)\cong L(V,V)\longrightarrow T_A\mathrm{GL}(V)\cong \{A\}\times L(V,V),\quad
+X\longmapsto (A,\,A\circ X).
+\]
+Per Definition des linksinvarianten Vektorfeldes zu $X$ gilt
+\[
+\widetilde X(A)\;=\; d(L_A)_I(X).
+\]
+Kombiniert mit der obigen Formel ergibt sich
+\[
+\widetilde X(A)=(A,\,A\circ X),
+\]
+wie behauptet.
+\end{PROOF}
+
+\begin{LEM}{LIE-L09-03-23}{Kompositionsregel für $f_{,X}$}
+Für lineares $f$ und $X,Y\in L(V,V)$ gilt
+\[
+\bigl(f_{,X}\bigr)_{,Y}=f_{,\,Y\circ X}.
+\]
+\end{LEM}
+
+\begin{PROOF}{LIE-L09-03-24}{P: Kompositionsregel für $f_{,X}$}
+Für $A\in GL(V)$:
+\[
+\bigl(f_{,X}\bigr)_{,Y}(A)=f_{,X}(A\circ Y)=f\bigl((A\circ Y)\circ X\bigr)=f\bigl(A\circ (Y\circ X)\bigr)=f_{,\,Y\circ X}(A).
+\]
+\end{PROOF}
+
+\begin{LEM}{LIE-L09-03-25}{Linearität von $X\mapsto f_{,X}$}
+Die Abbildung
+\[
+T_f:L(V,V)\longrightarrow (L(V,V))^*,\qquad X\longmapsto f_{,X},
+\]
+ist $\mathbb R$-linear.
+\end{LEM}
+
+\begin{PROOF}{LIE-L09-03-26}{P: Linearität von $X\mapsto f_{,X}$}
+Seien $X_1,X_2\in L(V,V)$ und $\alpha,\beta\in\mathbb R$. Für $A\in GL(V)$ gilt
+\[
+\bigl(\alpha f_{,X_1}+\beta f_{,X_2}\bigr)(A)=\alpha\,f(A\circ X_1)+\beta\,f(A\circ X_2)
+=f\bigl(A\circ(\alpha X_1+\beta X_2)\bigr)=f_{,\,\alpha X_1+\beta X_2}(A).
+\]
+Also $T_f(\alpha X_1+\beta X_2)=\alpha T_f(X_1)+\beta T_f(X_2)$.
+\end{PROOF}
+
+\begin{PROP}{LIE-L09-03-27}{Linksinvariante Ableitung auf Restriktionen}
+Sei $\widetilde X$ das linksinvariante Vektorfeld zu $X\in L(V,V)\cong T_I GL(V)$.
+Für jedes lineare $f$ (als Restriktion) gilt
+\[
+\widetilde X f \;=\; f_{,X}.
+\]
+\end{PROP}
+
+\begin{PROOF}{LIE-L09-03-28}{P: Linksinvariante Ableitung auf Restriktionen}
+Mit der Identifikation $T GL(V)\cong GL(V)\times L(V,V)$ ist (vgl. Linksmultiplikation $L_A$)
+\[
+\widetilde X(A)=d(L_A)_I(X)=(A,\,A\circ X).
+\]
+Damit erhält man
+\[
+(\widetilde X f)(A)=\bigl.df\bigr|_A\bigl(\widetilde X(A)\bigr)=\bigl.df\bigr|_A(A\circ X)=f(A\circ X)=f_{,X}(A).
+\]
+\end{PROOF}
+
+\begin{PROP}{LIE-L09-03-30}{Induzierte Lie Algebra Klammer auf $L(\mathrm{V},\mathrm{V})$}
+The Lie algebra bracket on $L(\mathrm{V},\mathrm{V})$ induced by the isomorphisms 
+$$\mathfrak{X}_{L}(G L(\mathrm{V})) \cong T_{I} G L(\mathrm{V}) \cong L(\mathrm{V}, \mathrm{V})$$ is the commutator bracket
+$$
+[X, Y]:=X \circ Y-Y \circ X .
+$$
+\end{PROP}
+
+\begin{PROOF}{LIE-L09-03-31}{P: Induzierte Lie Algebra Klammer auf $L(\mathrm{V},\mathrm{V})$}
+Let $X, Y \in L(\mathrm{~V}, \mathrm{~V})$ and let $[X, Y]$ denote the bracket induced on $L(\mathrm{~V}, \mathrm{~V})$. Then for any linear $f$ we have
+$$
+\begin{aligned}
+f_{,[X, Y]} & =\widetilde{[X, Y]} f=[\widetilde{X}, \widetilde{Y}] f=\widetilde{X} \widetilde{Y} f-\widetilde{Y} \widetilde{X} f=\widetilde{X}\left(f_{, Y}\right)-\widetilde{Y}\left(f_{, X}\right) \\
+& =\left(f_{, Y}\right)_{, X}-\left(f_{, X}\right)_{, Y}=f_{, X \circ Y}-f_{, Y \circ X}=f_{,(X \circ Y-Y \circ X)}
+\end{aligned}
+$$
+Since $f$ was an arbitrary linear functional, we conclude that $[X, Y]= X \circ Y-Y \circ X$.
+\end{PROOF}
+
+\begin{PROP}{LIE-L09-03-32}{Koordinatendarstellung von $\mathrm{GL}(V)$ und $\mathfrak{gl}(V)$}
+Sei $V$ ein endlichdimensionaler reeller Vektorraum der Dimension $n$ und
+$(\mathbf e_1,\ldots,\mathbf e_n)$ eine feste Basis von $V$.
+\begin{enumerate}
+\item Die Wahl dieser Basis definiert einen kanonischen Isomorphismus von
+Vektorräumen
+\[
+L(V,V)\;\cong\; M_{n\times n}(\mathbb R),
+\qquad
+A\longmapsto [A]_{\mathbf e},
+\]
+wobei $[A]_{\mathbf e}$ die darstellende Matrix von $A$ bezüglich der gewählten Basis ist.
+\item Dieser Isomorphismus ist ein \emph{Algebraisomorphismus}, d.\,h.
+\[
+[A\circ B]_{\mathbf e}=[A]_{\mathbf e}\,[B]_{\mathbf e},
+\qquad
+[A,B]_{\mathbf e}=[A]_{\mathbf e}[B]_{\mathbf e}-[B]_{\mathbf e}[A]_{\mathbf e}.
+\]
+Somit überträgt sich die Lie-Algebra‐Struktur
+\[
+\mathfrak{gl}(V)\;\cong\;\mathfrak{gl}(n,\mathbb R).
+\]
+\item Einschränkung auf die invertierbaren Endomorphismen liefert einen
+Gruppenisomorphismus
+\[
+\mathrm{GL}(V)\;\cong\;\mathrm{GL}(n,\mathbb R),
+\qquad
+A\longmapsto [A]_{\mathbf e},
+\]
+der mit der Matrizenmultiplikation verträglich ist.
+\end{enumerate}
+\end{PROP}
+
+\begin{PROOF}{LIE-L09-03-33}{P: Koordinatendarstellung von $\mathrm{GL}(V)$ und $\mathfrak{gl}(V)$}
+Die Abbildung $A\mapsto [A]_{\mathbf e}$ ordnet jedem Endomorphismus seine
+darstellende Matrix zu. Diese Abbildung ist linear und erfüllt
+$[A\circ B]_{\mathbf e}=[A]_{\mathbf e}[B]_{\mathbf e}$, also ist sie ein
+Algebraisomorphismus zwischen $L(V,V)$ und $M_{n\times n}(\mathbb R)$.
+Damit wird der Kommutator $[A,B]=A\circ B-B\circ A$ auf
+$\mathfrak{gl}(V)$ zum Matrizenkommutator in $M_{n\times n}(\mathbb R)$.
+Für die invertierbaren Endomorphismen gilt
+$A\in \mathrm{GL}(V)\iff [A]_{\mathbf e}\in \mathrm{GL}(n,\mathbb R)$,
+und die Multiplikationsstruktur bleibt erhalten.
+\end{PROOF}
+
+\begin{PROP}{LIE-L09-03-34}{Lie-Algebra von $\mathrm{GL}(n,\mathbb{R})$}
+Die kanonische lineare Identifikation
+\[
+\mathfrak{gl}(n,\mathbb{R}) \;=\; T_I \mathrm{GL}(n,\mathbb{R}) 
+\;\cong\; M_{n\times n}(\mathbb{R})
+\]
+induziert auf $M_{n\times n}(\mathbb{R})$ eine Lie-Algebra-Struktur,
+deren Lie-Klammer durch den \emph{Matrizenkommutator}
+\[
+[A,B]\;:=\;AB-BA
+\qquad
+\text{für }A,B\in M_{n\times n}(\mathbb{R})
+\]
+gegeben ist.
+\end{PROP}
+
+\begin{PROOF}{LIE-L09-03-35}{P: Lie-Algebra von $\mathrm{GL}(n,\mathbb{R})$}
+Das Tangentialbündel von $\mathrm{GL}(n,\mathbb{R})$ lässt sich als
+$\mathrm{GL}(n,\mathbb{R})\times M_{n\times n}(\mathbb{R})$ identifizieren.
+Für $X\in M_{n\times n}(\mathbb{R})$ ist das linksinvariante Vektorfeld
+$\widetilde X(A)=A\,X$. Für $A,B\in M_{n\times n}(\mathbb{R})$ gilt daher
+\[
+[\widetilde A,\widetilde B](C)
+=\widetilde A(\widetilde B(C))-\widetilde B(\widetilde A(C))
+=C(AB-BA)
+=\widetilde{[A,B]}(C).
+\]
+Damit entspricht die Lie-Klammer der linksinvarianten Vektorfelder auf
+$\mathrm{GL}(n,\mathbb{R})$ genau dem Kommutator der Matrizen.
+\end{PROOF}
+
+\begin{PROP}{LIE-L09-03-36}{Lie-Algebra einer Matrixuntergruppe}
+Sei $G\subset \mathrm{GL}(n,\mathbb{R})$ eine Matrixgruppe (d.\,h. ein Lie‐Untergruppe der allgemeinen linearen Gruppe).
+Dann gilt:
+\begin{enumerate}
+\item Der Tangentialraum im Einselement,
+\[
+\mathfrak g\;:=\;T_I G,
+\]
+kann als linearer Unterraum von $M_{n\times n}(\mathbb{R})$ aufgefasst werden.
+\item Dieser Unterraum ist unter der Kommutator‐Klammer abgeschlossen, d.\,h.
+\[
+[A,B]\in \mathfrak g \quad \text{für alle }A,B\in \mathfrak g,
+\]
+und somit ist $\mathfrak g$ eine Lie‐Unteralgebra von $\mathfrak{gl}(n,\mathbb{R})$.
+\end{enumerate}
+\end{PROP}
+
+\begin{PROOF}{LIE-L09-03-37}{P: Lie-Algebra einer Matrixuntergruppe}
+Da $G$ eine Lie‐Untergruppe von $\mathrm{GL}(n,\mathbb{R})$ ist, ist $G$ eine eingebettete Untermannigfaltigkeit
+mit Inklusion $\iota:G\hookrightarrow \mathrm{GL}(n,\mathbb{R})$.
+Der Tangentialraum im Einselement ist daher $T_I G=\mathrm{im}(T_I\iota)$, und wir identifizieren ihn
+mit einem linearen Unterraum von $T_I\mathrm{GL}(n,\mathbb{R})\cong M_{n\times n}(\mathbb{R})$.
+
+Seien $A,B\in \mathfrak g=T_I G$ und $\widetilde A,\widetilde B$ die zugehörigen linksinvarianten
+Vektorfelder auf $G$. Ihr Lie‐Klammerfeld $[\widetilde A,\widetilde B]$ ist wieder linksinvariant und tangential an $G$,
+da $G$ als Untergruppe unter der Gruppenmultiplikation abgeschlossen ist.
+Daher gehört der Wert dieses Feldes im Einselement $I$ ebenfalls zu $T_I G$.
+Somit ist $\mathfrak g$ unter der Kommutator‐Klammer abgeschlossen und daher eine Lie‐Unteralgebra.
+\end{PROOF}
+
+\begin{CONC}{LIE-L09-03-39}{Lie-Algebra als Ableitung von Gruppengleichungen}
+Ist $G\subset \mathrm{GL}(n,\mathbb{R})$ durch eine oder mehrere glatte Gleichungen
+\[
+F_i(A)=0,\qquad F_i:\mathrm{GL}(n,\mathbb{R})\to \mathbb R,
+\]
+definiert, so erhält man die definierenden Gleichungen der Lie‐Algebra
+$\mathfrak g=T_I G$ durch linearisieren:
+\[
+(dF_i)_I(X)=0,\qquad X\in \mathfrak g\subset M_{n\times n}(\mathbb{R}).
+\]
+Dies erlaubt die explizite Berechnung von $\mathfrak g$ für viele klassische Matrixgruppen
+(z.\,B. $\mathrm{O}(n)$, $\mathrm{SO}(n)$, $\mathrm{SL}(n)$, $\mathrm{U}(n)$).
+\end{CONC}
+
+\begin{PROP}{LIE-L09-03-41}{Linksinvariante Felder: Restriktion auf eine abgeschlossene Untergruppe}
+Let $H$ be a closed Lie subgroup of a Lie group $G$. Let
+$$
+\widetilde{\mathfrak{X}^{L}}(H):=\left\{X \in \mathfrak{X}^{L}(G): X(e) \in T_{e} H\right\} .
+$$
+Then the restrictions of elements of $\widetilde{\mathfrak{X}^{L}}(H)$ to the submanifold $H$ are the elements of $\mathfrak{X}^{L}(H)$. This induces an isomorphism of Lie algebras of vector fields $\widetilde{\mathfrak{X}^{L}}(H) \cong \mathfrak{X}^{L}(H)$. For $v, w \in \mathfrak{h}$, we have
+$$
+[v, w]_{\mathfrak{h}}=\left[v^{H}, w^{H}\right]_{e}=\left[v^{G}, w^{G}\right]_{e}=[v, w]_{\mathfrak{g}}
+$$
+and so $\mathfrak{h}$ is a Lie subalgebra of $\mathfrak{g}$; the bracket on $\mathfrak{h}$ is the same as that inherited from $\mathfrak{g}$.
+\end{PROP}
+
+\begin{PROOF}{LIE-L09-03-42}{P: Linksinvariante Felder: Restriktion auf eine abgeschlossene Untergruppe}
+The Lie bracket on $\mathfrak{h}=T_{e} H$ is given by $[v, w]:=\left[v^{H}, w^{H}\right](e)$. Notice that if $H$ is a closed Lie subgroup of a Lie group $G$, then for $h \in H$ we have left translation by $h$ as a map $G \rightarrow G$ and also as a map $H \rightarrow H$. The latter is the restriction of the former. To avoid notational clutter, let us denote\\
+$\left.L_{h}\right|_{H}$ by $l_{h}$. If $\iota: H \hookrightarrow G$ is the inclusion, then we have $\iota \circ l_{h}=L_{h} \circ \iota$, and so $T \iota \circ T l_{h}=T L_{h} \circ T \iota$. If $v^{H} \in \mathfrak{X}^{L}(H)$, then we have
+$$
+\begin{aligned}
+T_{h} \iota\left(v^{H}(h)\right) & =T_{h} \iota\left(T_{e} l_{h}(v)\right)=T \iota \circ T l_{h}(v) \\
+& =T L_{h} \circ T \iota(v)=T_{e} L_{h}\left(T_{e} \iota(v)\right) \\
+& =T_{e} L_{h}(v)=v^{G}(h)=\left(v^{G} \circ \iota\right)(h),
+\end{aligned}
+$$
+so that $v^{H}$ and $v^{G}$ are $\iota$-related for any $v \in T_{e} H \subset T_{e} G$. Thus for $v, w \in T_{e} H$ we have
+$$
+[v, w]_{\mathfrak{h}}=\left[v^{H}, w^{H}\right]_{e}=\left[v^{G}, w^{G}\right]_{e}=[v, w]_{\mathfrak{g}},
+$$
+the formula we wanted. Next, notice that if we take $T_{h} \iota$ as an inclusion so that $T_{h} \iota\left(v^{H}(h)\right)=v^{H}(h)$ for all $h$, then we have really shown that if $v \in T_{e} H$, then $v^{H}$ is the restriction of $v^{G}$ to $H$. Also it is easy to see that
+$$
+\widetilde{\mathfrak{X}^{L}}(H)=\left\{v^{G}: v \in T_{e} H\right\},
+$$
+and so the restrictions of elements of $\widetilde{\mathfrak{X}^{L}}(H)$ are none other than the elements of $\mathfrak{X}^{L}(H)$. From what we have shown, the restriction map $\widetilde{\mathfrak{X}^{L}}(H) \rightarrow \mathfrak{X}^{L}(H)$ is given by $v^{G} \longmapsto v^{H}$ and is a surjective Lie algebra homomorphism. It also has kernel zero since if $v^{H}$ is the zero vector field, then $v=0$, which implies that $v^{G}$ is the zero vector field.
+\end{PROOF}
+
+\begin{THEO}{LIE-L09-03-43}{Assoziierte eindeutige ZSH Lie Untergruppe zu Lie Unteralgebra}
+Let $G$ be a Lie group with Lie algebra $\mathfrak{g}$. If $\mathfrak{h}$ is a Lie subalgebra of $\mathfrak{g}$, then there is a unique connected Lie subgroup $H$ of $G$ whose Lie algebra is $\mathfrak{h}$.
+\end{THEO}
+
+\begin{PROP}{LIE-L09-03-44}{Assoziierte Lie Unteralgebra in $\operatorname{End}(V)$ zu linearer Lie Untergruppe von $\GL(V)$}
+If $G \subset \mathrm{GL}(\mathrm{V})$ is a linear Lie group, then the Lie algebra of $G$ may be identified with a subalgebra of $\operatorname{End}(\mathrm{V})$ with the commutator bracket. A similar statement holds for matrix Lie algebras.
+\end{PROP}
+
+\begin{PROOF}{LIE-L09-03-45}{P: Assoziierte Lie Unteralgebra in $\operatorname{End}(V)$ zu linearer Lie Untergruppe von $\GL(V)$}
+Da $G\subset \GL(V)$ eine lineare Lie‐Gruppe ist, ist die Inklusion
+$\iota:G\hookrightarrow \GL(V)$ eine glatte Einbettung. Folglich ist die
+Tangentialabbildung im Einselement $T_I\iota:\,T_I G\to T_I\GL(V)$ injektiv,
+und wir identifizieren
+\[
+\mathfrak g:=T_I G \;\subset\; T_I\GL(V)\cong \operatorname{End}(V).
+\]
+Es bleibt zu zeigen, dass $\mathfrak g$ unter dem Kommutator abgeschlossen ist
+und dass die induzierte Lie‐Klammer mit dem Kommutator $[A,B]=AB-BA$
+auf $\operatorname{End}(V)$ übereinstimmt.
+
+Für $X\in \operatorname{End}(V)\cong T_I\GL(V)$ bezeichne $\widetilde X$ das durch Linksmultiplikation
+linksinvariante Vektorfeld auf $\GL(V)$, d.\,h.
+\[
+\widetilde X(A)=A\,X\in T_A\GL(V)\cong \{A\}\times \operatorname{End}(V).
+\]
+Ist $X\in \mathfrak g=T_I G$, so ist die Restriktion $\widetilde X|_{G}$ ein glattes
+Vektorfeld auf $G$, das linksinvariant bzgl.\ der Gruppenstruktur von $G$ ist;
+insbesondere ist $\widetilde X|_{G}$ tangential an $G$.
+
+Für $A,B\in \mathfrak g$ betrachten wir die linksinvarianten Felder
+$\widetilde A,\widetilde B$ auf $\GL(V)$. Dann gilt auf $\GL(V)$ (Standardrechnung)
+\[
+[\widetilde A,\widetilde B](C)=C\,(AB-BA)
+= \widetilde{[A,B]}(C),
+\]
+also entspricht die Lie‐Klammer der linksinvarianten Felder dem Kommutator
+in $\operatorname{End}(V)$. Da $G$ Untergruppe ist, ist $[\widetilde A|_G,\widetilde B|_G]$
+wieder tangential an $G$; insbesondere liegt sein Wert im Einselement in $T_I G$.
+Damit folgt $[A,B]\in \mathfrak g$ und die von $G$ induzierte Klammer auf
+$\mathfrak g$ stimmt mit dem Kommutator in $\operatorname{End}(V)$ überein. Somit ist
+$\mathfrak g$ eine Lie‐Unteralgebra von $(\operatorname{End}(V),[\cdot,\cdot])$.
+
+Im Matrixfall liefert die kanonische Identifikation
+$T_I\GL(n,\R)\cong M_{n\times n}(\R)$ die analoge Aussage: Für eine
+Matrix‐Lie‐Untergruppe $G\subset \GL(n,\R)$ ist $\mathfrak g=T_I G$ ein
+linearer Unterraum von $M_{n\times n}(\R)$, der unter dem Matrizenkommutator
+abgeschlossen ist, also eine Lie‐Unteralgebra von $\mathfrak{gl}(n,\R)$.
+\end{PROOF}
+
+\begin{CONC}{LIE-L09-03-47}{Berechnung von Lie Algebren in $\operatorname{GL}(n, \mathbb{C})$}
+We have considered matrix groups as subgroups of $\mathrm{GL}(n)$, but it is often more convenient to consider subgroups of $\operatorname{GL}(n, \mathbb{C})$. Since $\operatorname{GL}(n, \mathbb{C})$ can be identified with a subgroup of $\operatorname{GL}(2 n)$, this is only a slight change in viewpoint. The essential parts of our discussion go through for $\operatorname{GL}(n, \mathbb{C})$ without any significant change.
+\end{CONC}
+
+\begin{PROP}{LIE-L09-03-50}{Lie Differential zu einem Lie Gruppen Homomorphismus}
+Let $f: G_{1} \rightarrow G_{2}$ be a Lie group homomorphism. The map $T_{e} f: \mathfrak{g}_{1} \rightarrow \mathfrak{g}_{2}$ is a Lie algebra homomorphism called the Lie differential, which is denoted in this context by $d f: \mathfrak{g}_{1} \rightarrow \mathfrak{g}_{2}$.
+\end{PROP}
+
+\begin{PROOF}{LIE-L09-03-51}{P: Lie Differential zu einem Lie Gruppen Homomorphismus}
+For $v \in \mathfrak{g}_{1}$ and $x \in G$, we have
+$$
+\begin{aligned}
+T_{x} f \cdot L^{v}(x) & =T_{x} f \cdot\left(T_{e} L_{x} \cdot v\right) \\
+& =T_{e}\left(f \circ L_{x}\right) \cdot v=T_{e}\left(L_{f(x)} \circ f\right) \cdot v \\
+& =T_{e} L_{f(x)}\left(T_{e} f \cdot v\right)=T_{e} L_{f(x)}\left(T_{e} f \cdot v\right) \\
+& =L^{d f(v)}(f(x)),
+\end{aligned}
+$$
+so $L^{v} \sim_{f} L^{d f(v)}$. Thus by Proposition 2.84 we have that for any $v, w \in \mathfrak{g}_{1}$,
+$$
+L^{[v, w]} \sim_{f}\left[L^{d f(v)}, L^{d f(w)}\right] .
+$$
+In other words, $\left[L^{d f(v)}, L^{d f(w)}\right] \circ f=T f \circ L^{[v, w]}$, which at $e$ gives
+$$
+[d f(v), d f(w)]=[v, w]
+$$
+\end{PROOF}
+
+\begin{THEO}{LIE-L09-03-52}{Vollständigkeit der Invarianten Vektorfelder und Integralkurven als 1-Parameter Untergruppen}
+Invariant vector fields are complete. The integral curves through the identity element are the one-parameter subgroups.
+\end{THEO}
+
+\begin{PROOF}{LIE-L09-03-53}{P: Vollständigkeit der Invarianten Vektorfelder und Integralkurven als 1-Parameter Untergruppen}
+We prove the left invariant case since the right invariant case is similar. Let $X$ be a left invariant vector field and $c:(a, b) \rightarrow G$ be an integral curve of $X$ with $\dot{c}(0)=X(p)$. Let $a<t_{1}<t_{2}<b$ and choose an element $g \in G$ such that $g c\left(t_{1}\right)=c\left(t_{2}\right)$. Let $\Delta t=t_{2}-t_{1}$, and define $\bar{c}:(a+\Delta t, b+\Delta t) \rightarrow G$ by $\bar{c}(t)=g c(t-\Delta t)$. Then we have
+$$
+\begin{aligned}
+\left.\frac{d}{d t}\right|_{t=0} \bar{c}(t) & =T L_{g} \cdot \dot{c}(t-\Delta t)=T L_{g} \cdot X(c(t-\Delta t)) \\
+& =X(g c(t-\Delta t))=X(\bar{c}(t))
+\end{aligned}
+$$
+and so $\bar{c}$ is also an integral curve of $X$. On the intersection ( $a+\Delta t, b$ ) of their domains, $c$ and $\bar{c}$ are equal since they are both integral curves of the same field and since $\bar{c}\left(t_{2}\right)=g c\left(t_{1}\right)=c\left(t_{2}\right)$. Thus we can concatenate the curves to get a new integral curve defined on the larger domain ( $a, b+\Delta t$ ). Since this extension can be done again for the same fixed $\Delta t$, we see that $c$ can be extended to $(a, \infty)$. A similar argument shows that we can extend in the negative direction to get the needed extension of $c$ to $(-\infty, \infty)$.
+
+Next assume that $c$ is the integral curve with $c(0)=e$. The proof that $c(s+t)=c(s) c(t)$ proceeds by considering $\gamma(t)=c(s)^{-1} c(s+t)$. Then $\gamma(0)=e$ and also
+$$
+\begin{aligned}
+\dot{\gamma}(t) & =T L_{c(s)^{-1}} \cdot \dot{c}(s+t)=T L_{c(s)^{-1}} \cdot X(c(s+t)) \\
+& =X\left(c(s)^{-1} c(s+t)\right)=X(\gamma(t))
+\end{aligned}
+$$
+By the uniqueness of integral curves we must have $c(s)^{-1} c(s+t)=c(t)$, which implies the result. Conversely, suppose $c: \mathbb{R} \rightarrow G$ is a one-parameter subgroup, and let $X_{e}=\dot{c}(0)$. There is a left invariant vector field $X$ such that $X(e)=X_{e}$, namely $X=L^{X_{e}}$. We must show that the integral curve through $e$ of the field $X$ is exactly $c$. But for this we only need that $\dot{c}(t)=X(c(t))$ for all $t$. We have $c(t+s)=c(t) c(s)$ or $c(t+s)=L_{c(t)} c(s)$. Thus
+$$
+\dot{c}(t)=\left.\frac{d}{d s}\right|_{0} c(t+s)=\left(T_{c(t)} L\right) \cdot \dot{c}(0)=X(c(t))
+$$
+\end{PROOF}
+
+\begin{PROP}{LIE-L09-03-54}{Skalierungseigenschaft der Flüsse links-/rechtsinvarianter Felder}
+Sei $G$ eine Lie-Gruppe und $v\in\mathfrak g=T_eG$. Bezeichne mit $L^{v}$ (resp.\ $R^{v}$)
+das linksinvariante (resp.\ rechtsinvariante) Vektorfeld mit $L^{v}(e)=v$ (resp.\ $R^{v}(e)=v$),
+und mit $\varphi_t^{L^{v}}$ (resp.\ $\varphi_t^{R^{v}}$) den zugehörigen Fluss.
+Setze
+\[
+\varphi^{v}(t):=\varphi_t^{L^{v}}(e)\quad\text{(resp.\ }\psi^{v}(t):=\varphi_t^{R^{v}}(e)\text{)}.
+\]
+Dann gilt für alle $s,t\in\mathbb R$:
+\[
+\varphi^{v}(s t)=\varphi^{s v}(t)
+\qquad\text{(resp.\ }\psi^{v}(s t)=\psi^{s v}(t)\text{)}.
+\]
+\end{PROP}
+
+\begin{PROOF}{LIE-L09-03-55}{P: Skalierungseigenschaft der Flüsse links-/rechtsinvarianter Felder}
+Wir zeigen die Aussage für das linksinvariante Feld; der rechtsinvariante Fall ist analog.
+Fixiere $s\in\mathbb R$ und betrachte die Kurve
+\[
+\gamma(t):=\varphi^{v}(s t)=\varphi_{s t}^{L^{v}}(e).
+\]
+Dann gilt $\gamma(0)=e$ und nach der Kettenregel
+\[
+\dot\gamma(0)=\left.\frac{d}{dt}\right|_{t=0}\varphi^{v}(s t)
+=\left.\frac{d}{du}\right|_{u=0}\varphi^{v}(u)\cdot \frac{du}{dt}(0)
+=s\,\left.\frac{d}{du}\right|_{u=0}\varphi^{v}(u)=s\,v.
+\]
+Da $L^{v}$ linear in $v$ ist (d.\,h.\ $L^{s v}=s\,L^{v}$), erfüllt $\gamma$ die Anfangswertaufgabe
+\[
+\dot\gamma(t)=L^{s v}(\gamma(t)),\qquad \gamma(0)=e.
+\]
+Die eindeutige Lösung dieser ODE ist per Definition $t\mapsto \varphi_t^{L^{s v}}(e)=\varphi^{s v}(t)$.
+Also $\varphi^{v}(s t)=\varphi^{s v}(t)$ für alle $t$. Der rechtsinvariante Fall folgt identisch
+mit $R^{v}$ anstelle von $L^{v}$.
+\end{PROOF}
+
+\begin{THEO}{LIE-L09-03-56}{Charakterisierung von 1-Parameter Untergruppen durch Flüsse}
+Let $G$ be a Lie group. For a smooth curve $c: \mathbb{R} \rightarrow G$ with $c(0)=e$ and $\dot{c}(0)=v$, the following are all equivalent:
+\begin{enumerate}
+\item $c$ is a one-parameter subgroup with $\dot{c}(0)=v$.
+\item $c(t)=\varphi_{t}^{L^{v}}(e)$ for all $t$.
+\item $c(t)=\varphi_{t}^{R^{v}}(e)$ for all $t$.
+\item $\varphi_{t}^{L^{v}}=R_{c(t)}$ for all $t$.
+\item $\varphi_{t}^{R^{v}}=L_{c(t)}$ for all $t$.
+\end{enumerate}
+\end{THEO}
+
+\begin{PROOF}{LIE-L09-03-57}{P: Charakterisierung von 1-Parameter Untergruppen durch Flüsse}
+From Theorem 5.72 we already know that (ii) is equivalent to (i). The proof that (i) is equivalent to (iii) is analogous. Also, (iv) implies (i) since then $\varphi_{t}^{L^{v}}(e)=R_{c(t)}(e)=c(t)$. Now assuming (ii) we show (iv). We have $\dot{c}(t)=L^{v}(e)=v$ and
+$$
+\begin{aligned}
+\left.\frac{d}{d t}\right|_{t=0} g c(t) & =\left.\frac{d}{d t}\right|_{t=0} L_{g}(c(t)) \\
+& =T L_{g} v=L^{v}(g) \text { for any } g .
+\end{aligned}
+$$
+In other words,
+$$
+\left.\frac{d}{d t}\right|_{t=0} R_{c(t)} g=L^{v}(g)
+$$
+for any $g$. But also, $R_{c(0)} g=e g=g$ and $\varphi_{0}^{L^{v}}(g)=g$ so by uniqueness we have $R_{c(t)} g=\varphi_{t}^{L^{v}}(g)$ for all $g$. We leave the remainder to the reader.
+
+It follows from (iv) and (v) of the previous theorem that the bracket of any left invariant vector field with any right invariant vector field is zero since their flows commute (see Theorem 2.109).
+\end{PROOF}
+
+\section{Exponentialabbildung}
+
+\subsection{Definitionen}
+
+\begin{DEF}{LIE-L09-02-01}{Exponential Abbildung von Lie Gruppen}
+For any $v \in \mathfrak{g}=T_{e} G$, we have the corresponding left invariant field $L^{v}$ which has an integral curve $t \mapsto \varphi^{v}(t):= \varphi_{t}^{L^{v}}(e)$ through $e$. The map exp : $\mathfrak{g} \rightarrow G$ defined by exp : $v \mapsto \varphi^{v}(1)$ is referred to as the exponential map.
+
+Thus for $s, t \in \mathbb{R}$ and $v \in \mathfrak{g}$ we have
+$$
+\begin{aligned}
+\exp ((s+t) v) & =\exp (s v) \exp (t v) \\
+\exp (-t v) & =(\exp (t v))^{-1}
+\end{aligned}
+$$
+Note that we usually use the same symbol "exp" for the exponential map of any Lie group, but we may also write $\exp ^{G}$ to indicate that the group is $G$. By Proposition 5.73 we have
+$$
+\exp (t v)=\varphi^{t v}(1)=\varphi^{v}(t)=\varphi_{t}^{L^{v}}(e)
+$$
+\end{DEF}
+
+\subsection{Exampel}
+
+\subsection{Propositionen}
+
+\begin{PROP}{LIE-L09-02-02}{Exponentialkurve als Integralkurve linksinvarianter Felder}
+Sei $G$ eine Lie-Gruppe und $v\in\mathfrak g=T_eG$.
+Dann ist die Kurve
+\[
+\gamma_v:\mathbb R\to G,\qquad \gamma_v(t):=\exp(t\,v),
+\]
+eine \emph{eindimensionale Untergruppe} (ein Einparameteruntergruppe) von $G$
+und zugleich die Integralkurve des linksinvarianten Vektorfeldes $L^{v}$
+durch $e$:
+\[
+\gamma_v(0)=e,\qquad \dot{\gamma}_v(t)=L^{v}(\gamma_v(t))\ \ \text{für alle }t.
+\]
+\end{PROP}
+
+\begin{PROOF}{LIE-L09-02-03}{P: Exponentialkurve als Integralkurve linksinvarianter Felder}
+\emph{(1) Einparameteruntergruppe.)}
+Die Exponentialabbildung $\exp:\mathfrak g\to G$ erfüllt $\exp(0)=e$ und
+\[
+\exp(t v)\,\exp(s v)=\exp((t+s)v)\quad\text{für alle }s,t\in\mathbb R,
+\]
+also ist $t\mapsto \exp(tv)$ ein Gruppenhomomorphismus $\mathbb R\to G$.
+Damit ist $\gamma_v$ eine Einparameteruntergruppe.
+
+\medskip
+\emph{(2) Integralkurve von $L^v$.)}
+Für $t\in\mathbb R$ gilt mit $L_g$ der Linksmultiplikation:
+\[
+\dot{\gamma}_v(t)
+=\left.\frac{d}{ds}\right|_{s=0}\exp\bigl((t+s)v\bigr)
+=\left.\frac{d}{ds}\right|_{s=0}\bigl(\exp(tv)\,\exp(sv)\bigr)
+= T_e L_{\exp(tv)}\!\left(\left.\frac{d}{ds}\right|_{s=0}\exp(sv)\right).
+\]
+Da $\left.\frac{d}{ds}\right|_{s=0}\exp(sv)=v$ und $L^v$ durch
+$L^v(g)=T_e L_g(v)$ definiert ist, folgt
+\[
+\dot{\gamma}_v(t)=T_e L_{\exp(tv)}(v)=L^v(\gamma_v(t)).
+\]
+Zudem ist $\gamma_v(0)=\exp(0)=e$. Damit ist $\gamma_v$ die eindeutige
+Integralkurve von $L^v$ durch $e$.
+\end{PROOF}
+
+\begin{LEM}{LIE-L09-02-04}{Exponentialabbildung ist glatt}
+The map $\exp : \mathfrak{g} \rightarrow G$ is smooth.
+\end{LEM}
+
+\begin{PROOF}{LIE-L09-02-05}{P: Exponentialabbildung ist glatt}
+Consider the map $\mathbb{R} \times G \times \mathfrak{g} \rightarrow G \times \mathfrak{g}$ given by
+$$
+(t, g, v) \mapsto(g \cdot \exp (t v), v)
+$$
+This map is easily seen to be the flow on $G \times \mathfrak{g}$ of the vector field $\widetilde{X}$ : $(g,v) \mapsto\left(L^{v}(g), 0\right)$ and so is smooth. The restriction of this smooth flow to the submanifold $\{1\} \times\{e\} \times \mathfrak{g}$ is $(1, e, v) \mapsto(\exp (v), v)$ and is also smooth. This clearly implies that exp is smooth also.
+\end{PROOF}
+
+\begin{THEO}{LIE-L09-02-06}{Differenzierbarkeit und Tangentialabbildung der Exponentialabbildung}
+Sei $G$ eine Lie‐Gruppe mit Lie‐Algebra $\mathfrak g=T_eG$.
+Dann gilt:
+\begin{enumerate}
+\item Die Exponentialabbildung
+\[
+\exp:\mathfrak g\longrightarrow G
+\]
+ist glatt.
+\item Der Tangentialoperator im Ursprung ist die Identität:
+\[
+T_0\exp=\operatorname{id}_{\mathfrak g}:T_0\mathfrak g\longrightarrow T_eG.
+\]
+\item Es existiert eine Umgebung $U\subset\mathfrak g$ von $0$, sodass
+$\exp|_U:U\to \exp(U)\subset G$ ein Diffeomorphismus auf sein Bild ist.
+\end{enumerate}
+\end{THEO}
+
+\begin{PROOF}{LIE-L09-02-07}{P: Differenzierbarkeit und Tangentialabbildung der Exponentialabbildung}
+Nach Lemma~5.77 ist $\exp$ eine glatte Abbildung.
+Für $v\in\mathfrak g$ gilt
+\[
+\left.\frac{d}{dt}\right|_{t=0}\exp(tv)=v,
+\]
+wobei $\mathfrak g$ kanonisch mit $T_0\mathfrak g$ identifiziert wird.
+Daraus folgt unmittelbar
+\[
+T_0\exp(v)=v,\qquad \text{also }T_0\exp=\operatorname{id}_{\mathfrak g}.
+\]
+Die Existenz einer Umgebung $U$ von $0$, auf der $\exp$ ein lokaler Diffeomorphismus
+ist, folgt aus dem Satz über den Umkehrsatz für glatte Abbildungen, da
+$T_0\exp=\operatorname{id}$ invertierbar ist.
+\end{PROOF}
+
+\begin{PROP}{LIE-L09-02-08}{Verhalten der Exponentialabbildung unter Lie-Gruppenhomomorphismen}
+Seien $f:G_1\to G_2$ ein Lie‐Gruppenhomomorphismus und
+$\mathfrak g_1=T_{e_1}G_1$, $\mathfrak g_2=T_{e_2}G_2$ die zugehörigen Lie‐Algebren.
+Dann kommutiert das folgende Diagramm:
+\[
+\begin{array}{ccc}
+\mathfrak g_1 & \xrightarrow{\quad df\quad} & \mathfrak g_2 \\[6pt]
+\exp_{G_1}\!\!\downarrow &  & \downarrow\!\!\exp_{G_2}\\[6pt]
+G_1 & \xrightarrow{\quad f\quad} & G_2
+\end{array}
+\]
+d.\,h.
+\[
+f\bigl(\exp_{G_1}(v)\bigr)=\exp_{G_2}\bigl(df(v)\bigr)
+\qquad\text{für alle }v\in\mathfrak g_1.
+\]
+\end{PROP}
+
+\begin{PROOF}{LIE-L09-02-09}{P: Verhalten der Exponentialabbildung unter Lie-Gruppenhomomorphismen}
+Für $v\in\mathfrak g_1$ ist die Kurve
+$t\mapsto f\bigl(\exp_{G_1}(t v)\bigr)$ eine glatte Einparameteruntergruppe von $G_2$,
+da $f$ ein Gruppenhomomorphismus ist.
+Wir haben
+\[
+\left.\frac{d}{dt}\right|_{t=0}f\bigl(\exp_{G_1}(t v)\bigr)
+=df(v)\in T_{e_2}G_2=\mathfrak g_2.
+\]
+Nach der Eindeutigkeit der Integralkurven linksinvarianter Felder folgt daher
+\[
+f\bigl(\exp_{G_1}(t v)\bigr)=\exp_{G_2}(t\,df(v))
+\quad\text{für alle }t\in\mathbb R,
+\]
+und damit insbesondere für $t=1$ die behauptete Kommutativität.
+\end{PROOF}
+
+\begin{KORO}{LIE-L09-02-10}{Erzeugung eines zusammenhängenden Lie‐Gruppe durch die Exponentialabbildung}
+Ist $G$ eine zusammenhängende Lie‐Gruppe und $V\subset\mathfrak g$ eine offene Umgebung von $0$,
+so erzeugt die Teilmenge $\exp(V)\subset G$ die gesamte Gruppe $G$, d.\,h.
+\[
+\langle\exp(V)\rangle = G.
+\]
+\end{KORO}
+
+\begin{PROOF}{LIE-L09-02-11}{P: Erzeugung eines zusammenhängenden Lie‐Gruppe durch die Exponentialabbildung}
+Nach Theorem~5.6 ist eine zusammenhängende Lie‐Gruppe durch die Exponentialbilder
+einer beliebigen Umgebung des Nullvektors in $\mathfrak g$ erzeugt.
+\end{PROOF}
+
+\begin{THEO}{LIE-L09-02-12}{Exponentialabbildung für lineare Lie‐Gruppen}
+Sei $V$ ein endlichdimensionaler (reeller oder komplexer) Vektorraum mit Skalarprodukt
+$\langle\cdot,\cdot\rangle$ und induzierter Norm $\|v\|=\sqrt{\langle v,v\rangle}$.
+Wir identifizieren $\mathfrak{gl}(V)\cong L(V,V)$ und versehen diesen Raum mit der Operatornorm
+\[
+\|A\|:=\sup_{\|v\|\neq 0}\frac{\|Av\|}{\|v\|}.
+\]
+Dann gilt:
+\begin{enumerate}
+\item Die Reihe
+\[
+\exp(A):=\sum_{k=0}^{\infty}\frac{1}{k!}A^k
+\]
+konvergiert für jedes $A\in L(V,V)$ (absolut und gleichmäßig auf beschränkten Mengen)
+und definiert die \emph{Exponentialabbildung}
+\[
+\exp:\mathfrak{gl}(V)\to \GL(V).
+\]
+\item Für festes $A$ ist die Kurve $\alpha(t)=\exp(tA)$ die eindeutige Lösung der Anfangswertaufgabe
+\[
+\alpha'(t)=A\,\alpha(t),\qquad \alpha(0)=I,
+\]
+d.\,h.\ $\alpha$ ist die Integralkurve des linksinvarianten Vektorfeldes, das durch $A$ bestimmt ist.
+\item Für alle $s,t\in\mathbb R$ gilt
+\[
+\exp((s+t)A)=\exp(sA)\exp(tA),
+\qquad
+\exp(-tA)=(\exp(tA))^{-1}.
+\]
+\item Kommutieren $A,B\in L(V,V)$, so gilt
+\[
+\exp(A+B)=\exp(A)\exp(B).
+\]
+\end{enumerate}
+\end{THEO}
+
+\begin{PROOF}{LIE-L09-02-13}{P: Exponentialabbildung für lineare Lie‐Gruppen}
+\emph{Zu (1).}
+Zunächst gilt aus der Submultiplikativität der Norm $\|AB\|\le \|A\|\|B\|$
+durch Induktion $\|A^k\|\le \|A\|^k$ für alle $k\ge 0$.  
+Betrachten wir die Partialsummen
+\[
+s_N:=\sum_{k=0}^{N}\frac{1}{k!}A^k.
+\]
+Für $N>M$ folgt
+\[
+\|s_N-s_M\|
+=\Bigl\|\sum_{k=M+1}^{N}\frac{1}{k!}A^k\Bigr\|
+\le \sum_{k=M+1}^{N}\frac{1}{k!}\|A\|^k.
+\]
+Da die Reihe $\sum_{k=0}^{\infty}\frac{1}{k!}\|A\|^k$ konvergiert (Exponentialreihe in $\mathbb R$),
+ist $\{s_N\}$ eine Cauchy-Folge in dem vollständigen normierten Raum $(L(V,V),\|\cdot\|)$.
+Also existiert der Grenzwert $\exp(A):=\lim_{N\to\infty}s_N$.
+
+\smallskip
+\emph{Zu (2).}
+Für $t\in\mathbb R$ definieren wir
+\[
+\exp(tA)=\sum_{k=0}^{\infty}\frac{t^k}{k!}A^k.
+\]
+Die Reihe konvergiert gleichmäßig für $t$ in kompakten Intervallen, also dürfen wir
+termweise differenzieren:
+\[
+\frac{d}{dt}\exp(tA)
+=\sum_{k=1}^{\infty}\frac{k\,t^{k-1}}{k!}A^k
+=\sum_{k=1}^{\infty}\frac{t^{k-1}}{(k-1)!}A^k
+=A\sum_{k=1}^{\infty}\frac{t^{k-1}}{(k-1)!}A^{k-1}
+=A\,\exp(tA).
+\]
+Offensichtlich ist $\exp(0A)=I$. Somit löst $\alpha(t)=\exp(tA)$ die Anfangswertaufgabe
+$\alpha'(t)=A\alpha(t)$, $\alpha(0)=I$.
+Die Eindeutigkeit folgt aus der Standardtheorie linearer Differentialgleichungen in Banachräumen.
+
+\smallskip
+\emph{Zu (3).}
+Seien $s,t\in\mathbb R$. Die Kurve $\alpha(t)=\exp(tA)$ erfüllt $\alpha'(t)=A\alpha(t)$ und $\alpha(0)=I$.
+Da $A$ konstant ist, gilt
+\[
+\exp((s+t)A)=\exp(sA)\exp(tA),
+\]
+was sich direkt aus der Integralkurven-Eigenschaft ergibt:
+$\exp((s+t)A)=\exp(sA)\alpha(t)$, und $\alpha(t)=\exp(tA)$ erfüllt dieselbe DGL.
+Daraus folgt auch $\exp(-tA)=(\exp(tA))^{-1}$, da $\exp(-tA)\exp(tA)=\exp(0)=I$.
+
+\smallskip
+\emph{Zu (4).}
+Falls $A$ und $B$ kommutieren, gilt $(A+B)^m=\sum_{j+k=m}\frac{m!}{j!\,k!}A^jB^k$.
+Damit folgt
+\[
+\exp(A+B)
+=\sum_{m=0}^{\infty}\frac{1}{m!}(A+B)^m
+=\sum_{j,k=0}^{\infty}\frac{1}{j!\,k!}A^jB^k
+=\Bigl(\sum_{j=0}^{\infty}\frac{1}{j!}A^j\Bigr)\Bigl(\sum_{k=0}^{\infty}\frac{1}{k!}B^k\Bigr)
+=\exp(A)\exp(B).
+\]
+\end{PROOF}
+
+\begin{KORO}{LIE-L09-02-14}{Logarithmusabbildung in der Nähe der Identität}
+Mit der gleichen Norm sei
+\[
+U:=\{B\in\GL(V)\mid \|B-I\|<1\}.
+\]
+Dann ist die Potenzreihe
+\[
+\log(B):=\sum_{k=1}^{\infty}\frac{(-1)^{k+1}}{k}(B-I)^k
+\]
+konvergent und definiert eine glatte Abbildung
+\[
+\log:U\to \mathfrak{gl}(V).
+\]
+\end{KORO}
+
+\begin{PROP}{LIE-L09-02-15}{Wechselseitigkeit von $\exp$ und $\log$ in der Normumgebung}
+Für $\|A\|<\log 2$ gilt $\|\exp(A)-I\|\le e^{\|A\|}-1<1$ und somit $\exp(A)\in U$.
+In diesem Fall ist
+\[
+\log(\exp A)=A.
+\]
+Umgekehrt gilt für $\|B-I\|<1$:
+\[
+\exp(\log B)=B.
+\]
+\end{PROP}
+
+\begin{PROOF}{LIE-L09-02-16}{P: Wechselseitigkeit von $\exp$ und $\log$ in der Normumgebung}
+\emph{Zu (1).}
+Aus der Exponentialreihe folgt
+\[
+\|\exp(A)-I\|
+=\Bigl\|\sum_{k=1}^{\infty}\frac{1}{k!}A^k\Bigr\|
+\le \sum_{k=1}^{\infty}\frac{1}{k!}\|A\|^k
+=e^{\|A\|}-1.
+\]
+Falls $\|A\|<\log 2$, so ist $e^{\|A\|}-1<1$, d.h. $\exp(A)\in U$.
+Da sowohl $\exp(A)$ als auch $\log(\exp(A))$ durch absolut konvergente Reihen definiert sind,
+dürfen die Summen umgeordnet werden. Wie im komplexen Fall gilt für $|z|<\log 2$ die Identität
+$\log(e^z)=z$; die identische formale Berechnung überträgt sich auf $A\in L(V,V)$
+durch Funktorreihenentwicklung:
+\[
+\log(\exp A)=A+\Bigl(\frac{1}{2!}-\frac{1}{2}\Bigr)A^2
++\Bigl(\frac{1}{3!}-\frac{1}{2}+\frac{1}{3}\Bigr)A^3+\cdots=A.
+\]
+
+\smallskip
+\emph{Zu (2).}
+Für $\|B-I\|<1$ konvergieren sowohl $\log(B)$ als auch $\exp(\log(B))$ absolut.
+Da $\log$ die Inverse der Exponentialreihe auf dieser Normkugel ist (vgl. Potenzreihen in Banachalgebren),
+folgt durch Substitution
+\[
+\exp(\log B)=B.
+\]
+Formal ergibt sich dies durch dieselbe Reihe von Umordnungen wie im reellen bzw.\ komplexen Fall
+$\exp(\log(1+z))=1+z$ für $|z|<1$.
+\end{PROOF}
+
+\begin{PROOF}{LIE-L09-02-17}{P: Logarithmusabbildung in der Nähe der Identität}
+Für $\|B-I\|<1$ gilt wegen $\|(B-I)^k\|\le \|B-I\|^k$ und $\frac{1}{k}\le 1$:
+\[
+\sum_{k=1}^{\infty}\Bigl\|\frac{(-1)^{k+1}}{k}(B-I)^k\Bigr\|
+\le \sum_{k=1}^{\infty}\|B-I\|^k
+=\frac{\|B-I\|}{1-\|B-I\|}<\infty.
+\]
+Also konvergiert die Reihe absolut und gleichmäßig auf $\|B-I\|\le r<1$.
+Termweise Differenzierbarkeit liefert die Glattheit von $\log$.
+\end{PROOF}
+
+\begin{CONC}{LIE-L09-02-18}{ Beziehung zur abstrakten Exponentialabbildung}
+Ist $H\subset G$ eine Lie‐Untergruppe, so ist die Inklusion $\iota:H\hookrightarrow G$
+ein injektiver Lie‐Gruppenhomomorphismus. Nach Proposition~5.79 ist dann
+\[
+\exp_H(v)=\exp_G(v)\qquad\text{für alle }v\in\mathfrak h=T_eH.
+\]
+Somit ist die Exponentialabbildung einer linearen Lie‐Gruppe $G\subset\GL(V)$
+die Einschränkung der in (1) definierten Abbildung
+\[
+\exp:\mathfrak{gl}(V)\to\GL(V),
+\qquad
+A\mapsto\sum_{k=0}^{\infty}\frac{1}{k!}A^k.
+\]
+\end{CONC}
+
+\begin{THEO}{LIE-L09-02-19}{Charakterisierung von abgeschlossenen Lie Untergruppen über Untergruppen}
+An abstract subgroup $H$ of a Lie group $G$ is a (regular) submanifold and hence a closed Lie subgroup if and only if $H$ is a closed set in $G$.
+\end{THEO}
+
+\begin{PROOF}{LIE-L09-02-20}{P: Charakterisierung von abgeschlossenen Lie Untergruppen über Untergruppen}
+First suppose that $H$ is a (regular) submanifold. Then $H$ is locally closed. That is, every point $x \in H$ has an open neighborhood $U$ such that $U \cap H$ is a relatively closed set in $H$. Let $U$ be such a neighborhood of the identity element $e$. We seek to show that $H$ is closed in $G$. Let $y \in \bar{H}$ and $x \in y U^{-1} \cap H$. Thus $x \in H$ and $y \in x U$. This means that $y \in \bar{H} \cap x U$, and hence $x^{-1} y \in \bar{H} \cap U=H \cap U$. So $y \in H$, and we have shown that $H$ is closed.
+
+Conversely, suppose that $H$ is a closed abstract subgroup of $G$. Since we can always use left/right translation to translate any point to the identity, it suffices to find a single-slice chart at $e$. This will show that $H$ is a regular submanifold. The strategy is to first find $\mathfrak{L}(H)=\mathfrak{h}$ and then to exponentiate a neighborhood of $0 \in \mathfrak{h}$.
+
+First choose any inner product on $T_{e} G$ so we may take norms of vectors in $T_{e} G$. Choose a small neighborhood $\widetilde{U}$ of $0 \in T_{e} G=\mathfrak{g}$ on which $\exp$ is a diffeomorphism, say $\exp : \widetilde{U} \rightarrow U$, and denote the inverse by $\log _{U}: U \rightarrow \widetilde{U}$. Define the set $\widetilde{H}$ in $\widetilde{U}$ by $\widetilde{H}=\log _{U}(H \cap U)$.
+
+Claim. If $h_{n}$ is a sequence in $\widetilde{H}$ converging to zero and such that $u_{n}=h_{n} /\left\|h_{n}\right\|$ converges to $v \in \mathfrak{g}$, then $\exp (t v) \in H$ for all $t \in \mathbb{R}$.
+
+Proof of the claim: Note that $t h_{n} /\left\|h_{n}\right\| \rightarrow t v$ while $\left\|h_{n}\right\|$ converges to zero. But since $\left\|h_{n}\right\| \rightarrow 0$, we must be able to find a sequence $k(n) \in \mathbb{Z}$ such that $k(n)\left\|h_{n}\right\| \rightarrow t$. From this we have $\exp \left(k(n) h_{n}\right)=\exp \left(k(n)\left\|h_{n}\right\| \frac{h_{n}}{\left\|h_{n}\right\|}\right) \rightarrow \exp (t v)$. But by the properties of $\exp$ proved previously, we have that $\exp \left(k(n) h_{n}\right)=\left(\exp \left(h_{n}\right)\right)^{k(n)}$. But also $\exp \left(h_{n}\right) \in H \cap U \subset H$ and so $\left(\exp \left(h_{n}\right)\right)^{k(n)} \in H$. Since $H$ is closed, we have
+$$
+\exp (t v)=\lim _{n \rightarrow \infty}\left(\exp \left(h_{n}\right)\right)^{k(n)} \in H
+$$
+
+Claim. If $W$ is the set of all $s v$ where $s \in \mathbb{R}$ and $v$ can be obtained as a limit $h_{n} /\left\|h_{n}\right\| \rightarrow v$ with $h_{n} \in \widetilde{H}$ and $h_{n} \rightarrow 0$, then $W$ is a vector space.
+
+Proof of the claim: We just need to show that if $h_{n} /\left\|h_{n}\right\| \rightarrow v$ and $h_{n}^{\prime} /\left\|h_{n}^{\prime}\right\| \rightarrow w$ with $h_{n}^{\prime}, h_{n} \in \widetilde{H}$, then there is a sequence of elements $h_{n}^{\prime \prime}$ from $\widetilde{H}$ with $h_{n}^{\prime \prime} \rightarrow 0$ such that
+$$
+h_{n}^{\prime \prime} /\left\|h_{n}^{\prime \prime}\right\| \rightarrow \frac{v+w}{\|v+w\|}
+$$
+Using the previous claim, observe that
+$$
+h(t):=\log _{U}(\exp (t v) \exp (t w))=\left(\log _{U} \circ \mu\right)(\exp (t v), \exp (t w)) .
+$$
+Here $\mu$ is the group multiplication map. But, by the first claim, $\exp (t v)$ and $\exp (t w)$ are in $H$ for all $t$, and so $h(t)$ is in $\widetilde{H}$ for small $t$. By Exercise 5.41 and the fact that $T_{e} \log =\mathrm{id}$, we have that
+$$
+\lim _{t \downarrow 0} h(t) / t=h^{\prime}(0)=v+w .
+$$
+Thus,
+$$
+\frac{h(t)}{\|h(t)\|}=\frac{h(t) / t}{\|h(t) / t\|} \rightarrow \frac{v+w}{\|v+w\|} .
+$$
+Now just let $t_{n} \downarrow 0$ and let $h_{n}^{\prime \prime}:=h\left(t_{n}\right)$. Notice that by the first claim, $\exp (W) \subset H$.
+
+Claim. Let $W$ be the set from the last claim. Then $\exp (W)$ contains an open neighborhood of $e$ in $H$.
+
+Proof of the claim: Let $W^{\perp}$ be the orthogonal complement of $W$ with respect to the inner product chosen above. Then we have $T_{e} G=W^{\perp} \oplus W$. It is not difficult to show that the map $\Sigma: W \oplus W^{\perp} \rightarrow G$ defined by
+$$
+w+x \mapsto \exp (w) \exp (x)
+$$
+is a diffeomorphism in a neighborhood of the origin in $T_{e} G$. Denote this diffeomorphism by $\psi$. Now suppose that $\exp (W)$ does not contain an open neighborhood of $e$ in $H$. Then we may choose a sequence $h_{n} \rightarrow e$ such that $h_{n}$ is in $H$ but not in $\exp (W)$. But this means that we can choose a corresponding sequence $\left(w_{n}, x_{n}\right) \in W \oplus W^{\perp}$ with $\left(w_{n}, x_{n}\right) \rightarrow 0$ and $\exp \left(w_{n}\right) \exp \left(x_{n}\right) \in H$ and yet, $x_{n} \neq 0$. The space $W^{\perp}$ is closed and the unit sphere in $W^{\perp}$ is compact. After passing to a subsequence, we may assume that $x_{n} /\left\|x_{n}\right\| \rightarrow x \in W^{\perp}$, and of course $\|x\|=1$. Now $\exp \left(w_{n}\right) \in H$ since $\exp (W) \subset H$ and $H$ is at least an algebraic subgroup, so we see that $\exp \left(w_{n}\right) \exp \left(x_{n}\right) \in H$. Thus it must be that $\exp \left(x_{n}\right) \in H$ also and so $x_{n} \in \widetilde{H}$. But $x_{n} \rightarrow 0$ and $x_{n} /\left\|x_{n}\right\| \rightarrow 0$, and so, since we now know that $x_{n} \in \widetilde{H}$, we have that $x \in W$ by definition. This contradicts the fact that $\|x\|=1$ and $x \in W^{\perp}$. Thus $\exp (W)$ must contain a neighborhood of $e$ in $H$.
+
+Finally, we let $O \subset \exp (W)$ be a neighborhood of $e$ in $H$. The set $O$ must be of the form $O=H \cap V$ for some open $V$ in $T_{e} G$ containing 0 . By shrinking $V$ further we obtain a diffeomorphism $\left.\psi\right|_{V}$. The inverse of this diffeomorphism, $\phi: U \rightarrow V$, has the required properties by construction: $\phi(H \cap U)=O \cap W$. We have actually constructed a chart with values in $T_{e} G$, but this is clearly good enough since we can choose a basis of $T_{e} G$ adapted to $W$.
+\end{PROOF}
+
+\section{Adjungierte Darstellung}
+
+\subsection{Definitionen}
+
+\begin{DEF}{LIE-L09-05-01}{Konjugierte und Adjungierte Abbildung zu Elementen einer Lie Gruppe}
+Fix an element $g \in G$. The map $C_{g}: G \rightarrow G$ defined by $C_{g}(x)=g x g^{-1}$ is a Lie group automorphism called the conjugation map, and the tangent map $T_{e} C_{g}: \mathfrak{g} \rightarrow \mathfrak{g}$, denoted $\mathrm{Ad}_{g}$, is called the adjoint map.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-05-10}{Adjungierte Darstellung von Lie Gruppe}
+The map $\mathrm{Ad}: g \mapsto \mathrm{Ad}_{g}$ is a Lie group homomorphism $G \rightarrow \mathrm{GL}(\mathfrak{g})$, which is called the adjoint representation of $G$.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-05-13}{Adjungierte Abbildung von Lie Algebren zu Lie Gruppen}
+For a Lie group $G$ with Lie algebra $\mathfrak{g}$, define the adjoint representation of $\mathfrak{g}$ as the map ad: $\mathfrak{g} \rightarrow \mathfrak{g} \mathfrak{l}(\mathfrak{g})$ given by
+$$
+\mathrm{ad}=T_{e} \mathrm{Ad}=d(\mathrm{Ad})
+$$
+\end{DEF}
+
+\subsection{Exampel}
+
+\subsection{Propositionen}
+
+\begin{PROP}{LIE-L09-05-02}{Konjugierte Abbildung (bzgl $g\in G$ ist Lie Gruppen Homomorphismus}
+The map $C_{g}: G \rightarrow G$ is a Lie group homomorphism. The map $C: g \mapsto C_{g}$ is a Lie group homomorphism $G \rightarrow \operatorname{Aut}(G)$.
+\end{PROP}
+
+\begin{PROOF}{LIE-L09-05-03}{P: Konjugierte Abbildung (bzgl $g\in G$ ist Lie Gruppen Homomorphismus}
+See Problem 4.
+\end{PROOF}
+
+\begin{KORO}{LIE-L09-05-04}{Adjungierte Abbildung bzgl. $g\in G$ ist Lie Algebren Homomorphismus}
+The map $\operatorname{Ad}_{g}: \mathfrak{g} \rightarrow \mathfrak{g}$ is a Lie algebra homomorphism.
+\end{KORO}
+
+\begin{PROOF}{LIE-L09-05-05}{P: Adjungierte Abbildung bzgl. $g\in G$ ist Lie Algebren Homomorphismus}
+Using Proposition 5.71.
+\end{PROOF}
+
+\begin{LEM}{LIE-L09-05-06}{Induzierte glatte Abbildung von $M$ nach $\GL(T_{y_0}N)$}
+Let $f: M \times N \rightarrow N$ be a smooth map and define the partial map at $x \in M$ by $f_{x}(y)=f(x, y)$. Suppose that for every $x \in M$ the point $y_{0}$ is fixed by $f_{x}$ :
+$$
+f_{x}\left(y_{0}\right)=y_{0} \text { for all } x
+$$
+Then the map $A_{y_{0}}: x \mapsto T_{y_{0}} f_{x}$ is a smooth map from $M$ to $\operatorname{GL}\left(T_{y_{0}} N\right)$.
+\end{LEM}
+
+\begin{PROOF}{LIE-L09-05-07}{P: Induzierte glatte Abbildung von $M$ nach $\GL(T_{y_0}N)$}
+It suffices to show that $A_{y_{0}}$ composed with an arbitrary coordinate function from an atlas of charts on $\operatorname{GL}\left(T_{y_{0}} N\right)$ is smooth. But GL $\left(T_{y_{0}} N\right)$ has an atlas consisting of a single chart. Namely, choose a basis $v_{1}, v_{2}, \ldots, v_{n}$ of $T_{y_{0}} N$ and let $v^{1}, v^{2}, \ldots, v^{n}$ be the dual basis of $T_{y_{0}}^{*} N$. Then $\chi_{j}^{i}: A \mapsto v^{i}\left(A v_{j}\right)$ is a typical coordinate function. Now we compose:
+$$
+\chi_{j}^{i} \circ A_{y_{0}}(x)=v^{i}\left(A_{y_{0}}(x) v_{j}\right)=v^{i}\left(T_{y_{0}} f_{x} \cdot v_{j}\right) .
+$$
+It is enough to show that $T_{y_{0}} f_{x} \cdot v_{j}$ is smooth in $x$. But this is just the composition of the smooth maps $M \rightarrow T M \times T N \cong T(M \times N) \rightarrow T N$ given by
+$$
+x \mapsto\left(0_{x}, v_{j}\right) \mapsto\left(\partial_{1} f\right)\left(x, y_{0}\right) \cdot 0_{x}+\left(\partial_{2} f\right)\left(x, y_{0}\right) \cdot v_{j}=T_{y_{0}} f_{x} \cdot v_{j}
+$$
+(Recall the discussion leading up to Lemma 2.28.)
+\end{PROOF}
+
+\begin{PROP}{LIE-L09-05-08}{Adjungierte Darstellung von Lie Gruppe}
+The map $\mathrm{Ad}: g \mapsto \mathrm{Ad}_{g}$ is a Lie group homomorphism $G \rightarrow \mathrm{GL}(\mathfrak{g})$, which is called the adjoint representation of $G$.
+\end{PROP}
+
+\begin{PROOF}{LIE-L09-05-09}{P: Adjungierte Darstellung von Lie Gruppe}
+We have
+$$
+\begin{aligned}
+\operatorname{Ad}\left(g_{1} g_{2}\right) & =T_{e} C_{g_{1} g_{2}}=T_{e}\left(C_{g_{1}} \circ C_{g_{2}}\right) \\
+& =T_{e} C_{g_{1}} \circ T_{e} C_{g_{2}}=\operatorname{Ad}_{g_{1}} \circ \operatorname{Ad}_{g_{2}},
+\end{aligned}
+$$
+which shows that Ad is a group homomorphism. The smoothness follows from the previous lemma applied to the map $C:(g, x) \mapsto C_{g}(x)$.
+\end{PROOF}
+
+\begin{LEM}{LIE-L09-05-11}{Beziehung zwischen Linksinvarainten und Rechtsinvarianten Vektorfeldern zu $g\in\mathfrak{g}$ via Adjungierte Abbildung}
+Let $v \in \mathfrak{g}$. Then $L^{v}(x)=R^{\operatorname{Ad}_{x} v}$.
+\end{LEM}
+
+\begin{PROOF}{LIE-L09-05-12}{P: Beziehung zwischen Linksinvarainten und Rechtsinvarianten Vektorfeldern zu $g\in\mathfrak{g}$ via Adjungierte Abbildung}
+We calculate as follows:
+$$
+\begin{aligned}
+L^{v}(x) & =T_{e}\left(L_{x}\right) \cdot v=T\left(R_{x}\right) T\left(R_{x^{-1}}\right) T_{e}\left(L_{x}\right) \cdot v \\
+& =T\left(R_{x}\right) T\left(R_{x^{-1}} \circ L_{x}\right) \cdot v=R^{\operatorname{Ad}(x) v} .
+\end{aligned}
+$$
+\end{PROOF}
+
+\begin{PROP}{LIE-L09-05-14}{Lie-Klammer Darstellung von Adjungierter Abbildung zu Lie Algebren}
+$\operatorname{ad}(v) w=[v, w]$ for all $v, w \in \mathfrak{g}$.
+\end{PROP}
+
+\begin{PROOF}{LIE-L09-05-15}{P: Lie-Klammer Darstellung von Adjungierter Abbildung zu Lie Algebren}
+Let $v^{1}, \ldots, v^{n}$ be a basis for $\mathfrak{g}$ so that $\operatorname{Ad}(x) w=\sum a_{i}(x) v^{i}$ for some functions $a_{i}$. Let $c$ be a curve with $\dot{c}(0)=v$. Then we have
+$$
+\begin{aligned}
+\operatorname{ad}(v) w & =\left.\frac{d}{d t}\right|_{t=0} \operatorname{Ad}(c(t)) w=\left.\sum \frac{d}{d t}\right|_{t=0} a_{i}(c(t)) v^{i} \\
+& =\sum\left(v a_{i}\right) v^{i}
+\end{aligned}
+$$
+On the other hand, by Lemma 5.87 we have
+$$
+\begin{aligned}
+L^{w}(x) & =R^{\operatorname{Ad}(x) w}=R\left(\sum a_{i}(x) v^{i}\right) \\
+& =\sum a_{i}(x) R^{v^{i}}(x)
+\end{aligned}
+$$
+From the fact that the bracket of any left invariant vector field with any right invariant vector field is zero, we have
+$$
+\left[L^{v}, L^{w}\right]=\left[L^{v}, \sum a_{i} R^{v^{i}}\right]=0+\sum L^{v}\left(a_{i}\right) R^{v^{i}}
+$$
+Finally, using the equation for $\operatorname{ad}(v) w$ derived above, we have
+$$
+\begin{aligned}
+{[v, w] } & =\left[L^{v}, L^{w}\right](e) \\
+& =\sum L^{v}\left(a_{i}\right)(e) R^{v^{i}}(e)=\sum L^{v}\left(a_{i}\right)(e) v^{i} \\
+& =\sum\left(v a_{i}\right) v^{i}=\operatorname{ad}(v) w
+\end{aligned}
+$$
+\end{PROOF}
+
+\begin{PROP}{LIE-L09-05-16}{Adjungierte Abbildung zur Lie Algebra ist Lie Algebra Homomorphismus}
+ad: $\mathfrak{g} \rightarrow \mathfrak{g} \mathfrak{l}(\mathfrak{g})$ is a Lie algebra homomorphism.
+\end{PROP}
+
+\begin{PROP}{LIE-L09-05-17}{Zusammenhang zwischen $\operatorname{Ad}$, $\operatorname{ad}$ und der Exponentialabbildung}
+Da $\operatorname{ad}$ als das Lie-Differential von $\operatorname{Ad}$ definiert ist, kommutiert für jede Lie-Gruppe $G$
+das folgende Diagramm:
+
+\includegraphics[scale=0.25, center]{2025_10_09_265d7e1a22c89f79c21eg-237(1)}
+
+Das heißt:
+\[
+\operatorname{Ad}_{\exp X} = \exp(\operatorname{ad}_X)
+\qquad\text{für alle } X\in\mathfrak g.
+\]
+\end{PROP}
+
+\begin{PROOF}{LIE-L09-05-18}{P: Zusammenhang zwischen $\operatorname{Ad}$, $\operatorname{ad}$ und der Exponentialabbildung}
+Nach Proposition~5.79 ist $\operatorname{Ad}:G\to\GL(\mathfrak g)$ ein Lie-Gruppenhomomorphismus.
+Für ein solches Homomorphismus $f:G_1\to G_2$ gilt allgemein:
+\[
+f(\exp^{G_1}X)=\exp^{G_2}\bigl((T_ef)(X)\bigr).
+\]
+Wenden wir dies auf $f=\operatorname{Ad}$ an, erhalten wir
+\[
+\operatorname{Ad}(\exp X)=\exp(\operatorname{ad}_X),
+\]
+wobei $\operatorname{ad}=T_e\operatorname{Ad}$. Dies zeigt die Kommutativität des Diagramms.
+
+\smallskip
+Ferner ist für jedes $g\in G$ auch
+\[
+C_g:G\to G,\qquad C_g(x)=g\,x\,g^{-1},
+\]
+ein Lie-Gruppenhomomorphismus. Da $\operatorname{Ad}_g=T_eC_g$, kommutiert ebenfalls
+\[
+\includegraphics[scale=0.25, center]{2025_10_09_265d7e1a22c89f79c21eg-237}
+\]
+und damit gilt für alle $g\in G$, $v\in\mathfrak g$ und $t\in\mathbb R$:
+\[
+\exp\!\bigl(t,\operatorname{Ad}_gv\bigr)
+= g\,\exp(tv)\,g^{-1}.
+\]
+
+\smallskip
+\emph{Spezialfall linearer Lie-Gruppen.}
+Sei $G\subset\GL(V)$ eine lineare Lie-Gruppe mit Lie-Algebra
+$\mathfrak g\subset\mathfrak{gl}(V)=L(V,V)$.
+Dann gilt für $A\in\mathfrak{gl}(V)$ und $B\in\GL(V)$:
+\[
+B\exp(tA)B^{-1}=\exp\bigl(t(BAB^{-1})\bigr),
+\quad\text{also}\quad
+\operatorname{Ad}_BA=BAB^{-1}.
+\]
+Dies folgt durch Differentiation bei $t=0$:
+\[
+\operatorname{Ad}_BA=\left.\frac{d}{dt}\right|_{t=0}B\exp(tA)B^{-1}
+=\left.\frac{d}{dt}\right|_{t=0}\exp(tBAB^{-1})=BAB^{-1}.
+\]
+
+\smallskip
+Schließlich erhält man im Kontext linearer Lie-Gruppen die explizite Reihenentwicklung
+\[
+\exp(A)\,B\,\exp(-A)
+=\sum_{k=0}^\infty\frac{1}{k!}\bigl(\operatorname{ad}(A)\bigr)^k(B),
+\qquad A\in\mathfrak{gl}(V),\ B\in\GL(V),
+\]
+wobei $\operatorname{ad}(A)(B)=[A,B]=AB-BA$. Diese Reihe entspricht der Darstellung
+\(\operatorname{Ad}_{\exp A}=e^{\operatorname{ad}_A}\).
+\end{PROOF}
+
+\begin{THEO}{LIE-L09-05-19}{Campbell--Baker--Hausdorff-Formel (CBH)}
+Sei $G$ eine Lie-Gruppe mit Lie-Algebra $\mathfrak g$. Für jedes $X\in\mathfrak g$
+sei $\operatorname{ad} X\in L(\mathfrak g,\mathfrak g)$ gegeben durch $\operatorname{ad}_X(Y)=[X,Y]$.
+Wähle eine Norm auf $\mathfrak g$, sodass auf $L(\mathfrak g,\mathfrak g)$
+die induzierte Operatornorm und eine Konvergenzstruktur definiert sind.
+
+Die analytische Funktion
+\[
+f(z)=\frac{\ln z}{z-1}=\sum_{n=0}^\infty\frac{(-1)^n}{n+1}(z-1)^n
+\]
+konvergiert in einer Umgebung von $z=1$. Damit ist auch
+\[
+(\ln A)(A-I)^{-1}
+\]
+für $A\in L(\mathfrak g,\mathfrak g)$ in einer kleinen Umgebung der Identität wohldefiniert.
+
+Dann gilt für hinreichend kleine $x,y\in\mathfrak g$ die \emph{Campbell--Baker--Hausdorff-Formel}
+\[
+\exp(x)\exp(y)=\exp(C(x,y)),
+\]
+wobei
+\[
+\begin{aligned}
+C(x,y)
+&=y+\int_0^1 f\!\left(e^{t\operatorname{ad} x}\,e^{t\operatorname{ad} y}\right)\cdot x\,dt\\
+&=x+y+\sum_{n=1}^\infty\frac{(-1)^n}{n+1}\int_0^1
+\left(\sum_{\substack{k,l>0\\k+l\ge1}}\frac{t^k}{k!\,l!}(\operatorname{ad} x)^k(\operatorname{ad} y)^l\right)^{\!n}\!x\,dt.
+\end{aligned}
+\]
+Es folgt daraus die formale Reihenentwicklung
+\[
+C(x,y)=\sum_{n=1}^\infty C_n(x,y),
+\]
+mit den Anfangsgliedern
+\[
+C_1(x,y)=x+y,\qquad
+C_2(x,y)=\tfrac{1}{2}[x,y],\qquad
+C_3(x,y)=\tfrac{1}{12}\bigl([[x,y],y]+[[y,x],x]\bigr).
+\]
+
+Insbesondere gilt für kleines $t\in\mathbb R$:
+\[
+\exp(tx)\exp(ty)=\exp\!\left(t(x+y)+O(t^2)\right).
+\]
+\end{THEO}
+
+\begin{KORO}{LIE-L09-05-20}{Abelsche Lie-Gruppen und Lie-Algebren}
+Eine Lie-Gruppe $G$ ist genau dann abelsch, wenn ihre Lie-Algebra $\mathfrak g$
+abelsch ist, d.\,h.
+\[
+[x,y]=0\quad\text{für alle }x,y\in\mathfrak g.
+\]
+\end{KORO}
+
+\begin{CONC}{LIE-L09-05-21}{Interpretation der CBH-Formel}
+Die Campbell--Baker--Hausdorff-Formel zeigt, dass die Lie-Algebra-Struktur
+$\mathfrak g$ lokal die Multiplikationsstruktur auf $G$ bestimmt.
+\end{CONC}
+
+\section{Lie Gruppen Wirkung}
+
+\subsection{Definitionen}
+
+\begin{DEF}{LIE-L09-07-01}{Glatte Lie Gruppen Wirkung auf Mannigfaltigkeit}
+Let $l: G \times M \rightarrow M$ be a left action, where $G$ is a Lie group and $M$ is a smooth manifold. If $l$ is a smooth map, then we say that $l$ is a (smooth) Lie group action.
+
+As before, we also use any of the notations $g p, g \cdot p$ or $l_{g}(p)$ for $l(g, p)$.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-07-02}{Lie-Gruppenwirkung, Orbits und Effektivität}
+Sei $G$ eine Lie-Gruppe und $M$ eine glatte Mannigfaltigkeit.
+Eine \emph{(linke) glatte Aktion} von $G$ auf $M$ ist eine glatte Abbildung
+\[
+l : G\times M \longrightarrow M,\qquad (g,p)\longmapsto l_g(p)=g\cdot p,
+\]
+die folgenden Eigenschaften genügt:
+\begin{enumerate}[label=(\roman*)]
+\item $e\cdot p=p$ für alle $p\in M$, wobei $e$ das neutrale Element von $G$ ist;
+\item $(g_1g_2)\cdot p = g_1\cdot(g_2\cdot p)$ für alle $g_1,g_2\in G$ und $p\in M$.
+\end{enumerate}
+\end{DEF}
+
+\begin{DEF}{LIE-L09-07-03}{Orbits, Transitivität und Effektivität}
+Für $p\in M$ heißt
+\[
+G\cdot p := \{g\cdot p \mid g\in G\}
+\]
+die \emph{Orbit} von $p$ unter der Aktion.
+Eine Aktion heißt \emph{transitiv}, wenn
+\[
+G\cdot p = M
+\quad\text{für jedes (oder ein) }p\in M.
+\]
+Sie heißt \emph{effektiv} (oder treu), wenn gilt:
+\[
+g\cdot p = p\text{ für alle }p\in M
+\quad\Longrightarrow\quad g=e.
+\]
+\end{DEF}
+
+\begin{DEF}{LIE-L09-07-04}{Rechte Wirkung und Zusammenhang zu linken Wirkung}
+Eine \emph{(rechte) glatte Aktion} von $G$ auf $M$ ist eine glatte Abbildung
+\[
+r : M\times G \longrightarrow M,\qquad (p,g)\longmapsto r_g(p)=p\cdot g,
+\]
+mit den Eigenschaften:
+\begin{enumerate}[label=(\roman*)]
+\item $p\cdot e = p$ für alle $p\in M$;
+\item $(p\cdot g_1)\cdot g_2 = p\cdot(g_1g_2)$ für alle $g_1,g_2\in G$ und $p\in M$.
+\end{enumerate}
+Zwischen linken und rechten Aktionen besteht die eindeutige Beziehung
+\[
+g\cdot p := p\cdot g^{-1},
+\]
+die eine rechte Aktion in eine linke überführt (und umgekehrt).
+\end{DEF}
+
+\begin{DEF}{LIE-L09-07-05}{Isotropiegruppe / Stabilisator von $p$ bzgl Lie gruppenwirkung}
+Let $l$ be a Lie group action as above. For a fixed $p \in M$, the isotropy group of $p$ is defined to be
+$$
+G_{p}:=\{g \in G: g p=p\} .
+$$
+The isotropy group of $p$ is also called the stabilizer of $p$.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-07-07}{Freie Lie Gruppenwirkung und Isotropiegruppe}
+Sei $l:G\times M\to M$, $(g,p)\mapsto g\cdot p$, eine glatte (linke) Aktion
+einer Lie-Gruppe $G$ auf einer Mannigfaltigkeit $M$. Eine Aktion heißt \emph{frei}, wenn die Isotropiegruppe jedes Punktes trivial ist, d.\,h.
+\[
+G_p = \{e\}
+\quad\text{für alle }p\in M.
+\]
+Äquivalent gilt:
+\[
+g\cdot p = p \text{ für ein }p\in M
+\quad\Longrightarrow\quad g=e.
+\]
+\end{DEF}
+
+\begin{DEF}{LIE-L09-07-08}{Invariante Teilmengen bzgl Lie Gruppenwirkung}
+Suppose that we have a Lie group action of $G$ on $M$. If $N$ is a subset of $M$ and $G x \subset N$ for all $x \in N$, then we say that $N$ is an invariant subset. If $N$ is also a submanifold, then it is called an invariant submanifold.
+
+In this definition, we include the possibility that $N$ is an open submanifold. If $N$ is an invariant subset of $M$, then it is easy to see that $g N=N$, where $g N=l_{g}(N)$ for any $g$. Furthermore, if $N$ is a submanifold, then the action restricts to a Lie group action $G \times N \rightarrow N$.
+
+If $G$ is zero-dimensional, then by definition it is just a group with discrete topology, and we recover the definition of a discrete group action.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-07-15}{Normale Untergruppe}
+Recall that a subgroup $H$ of a group $G$ is called a normal subgroup if $g k g^{-1} \in K$ for any $k \in H$ and all $g \in G$. In other words, $H$ is normal if $g H g^{-1} \subset H$ for all $g \in G$, and it is easy to see that in this case we always have $g H g^{-1}=H$.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-07-27}{Eigentliche Gruppenwirkung}
+Let $l: G \times M \rightarrow M$ be a smooth (or merely continuous) group action. If the map $P: G \times M \rightarrow M \times M$ given by $(g, p) \mapsto\left(l_{g} p, p\right)$ is proper, we say that the action is a proper action.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-07-35}{Orbitabbildung einer Lie-Gruppenwirkung}
+Sei $l:G\times M\to M$ eine glatte Aktion einer Lie-Gruppe $G$ auf einer Mannigfaltigkeit $M$.
+Für $p\in M$ heißt
+\[
+\theta_p:G\longrightarrow M,\qquad
+\theta_p(g)=g\cdot p,
+\]
+die \emph{Orbitabbildung} in $p$.
+Ihr Bild ist der Orbit $G\cdot p=\{\;g\cdot p\mid g\in G\;\}$.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-07-38}{Lie Gruppenwirkung angepasste lokale Karte von Mannigfaltigkeiten}
+Let $M$ be an $n$-manifold and $G$ a Lie group of dimension $k$. If $l: G \times M \rightarrow M$ is a Lie group action, then an action-adapted chart on $M$ is a chart ( $U, \mathrm{x}$ ) such that\\
+\begin{enumerate}
+\item $\mathrm{x}(U)$ is a product open set $V_{1} \times V_{2} \subset \mathbb{R}^{k} \times \mathbb{R}^{n-k}=\mathbb{R}^{n}$
+\item If an orbit has nonempty intersection with $U$, then that intersection has the form
+$$
+\left\{x^{k+1}=c^{1}, \ldots, x^{n}=c^{n-k}\right\}
+$$
+for some constants $c^{1}, \ldots, c^{n-k}$
+\end{enumerate}
+\end{DEF}
+
+\begin{DEF}{LIE-L09-07-43}{Orbitraum und Quotiententopologie einer Lie-Gruppenwirkung}
+Sei $l:G\times M\to M$ eine glatte Aktion einer Lie-Gruppe $G$ auf einer Mannigfaltigkeit $M$.
+Die durch die Aktion induzierte Äquivalenzrelation auf $M$ lautet:
+\[
+p\sim q
+\quad:\Longleftrightarrow\quad
+\exists g\in G\text{ mit } q=g\cdot p.
+\]
+Die Äquivalenzklassen dieser Relation sind genau die \emph{Orbits}
+\[
+G\cdot p=\{g\cdot p\mid g\in G\}.
+\]
+Der resultierende Quotientenraum heißt \emph{Orbitraum} oder \emph{Quotientraum der Aktion} und wird geschrieben als
+\[
+G\backslash M := M/\!\sim,
+\]
+mit der kanonischen Projektion
+\[
+\pi:M\longrightarrow G\backslash M,\qquad p\longmapsto G\cdot p.
+\]
+\end{DEF}
+
+\begin{DEF}{LIE-L09-07-44}{Quotiententopologie auf $G\backslash M$}
+Der Orbitraum $G\backslash M$ erhält die \emph{Quotiententopologie}, definiert durch:
+\[
+A\subset G\backslash M\text{ ist offen }
+\iff
+\pi^{-1}(A)\subset M\text{ ist offen.}
+\]
+\end{DEF}
+
+\subsection{Exampel}
+
+\begin{EXA}{LIE-L09-07-09}{$L_g,R_g$ als Lie Gruppenwirkung}
+The maps $G \times G \rightarrow G$ given by $(g, x) \mapsto L_{g} x$ and $(g, x) \mapsto R_{g} x$ are Lie group actions.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-07-10}{$\GL(V)$ als Lie Gruppenwirkung auf $V$}
+In case $M=\mathbb{R}^{n}$, the Lie group $\operatorname{GL}(n, \mathbb{R})$ acts on $\mathbb{R}^{n}$ by matrix multiplication. Similarly, $\operatorname{GL}(n, \mathbb{C})$ acts on $\mathbb{C}^{n}$. More abstractly, $\mathrm{GL}(\mathrm{V})$ acts on the vector space V . This action is smooth since $A x$ depends smoothly (polynomially) on the components of $A$ and on the components of $x \in \mathbb{R}^{n}$.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-07-11}{Lie Untergruppen von $\GL(n,\R)$ als Lie Gruppenwirkung}
+Any Lie subgroup of $\operatorname{GL}(n, \mathbb{R})$ acts on $\mathbb{R}^{n}$ also by matrix multiplication.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-07-12}{$\Ogroup(n,\R)$ als Lie Gruppenwirkung}
+For example, $\mathrm{O}(n, \mathbb{R})$ acts on $\mathbb{R}^{n}$. For every $x \in \mathbb{R}^{n}$, the orbit of $x$ is the sphere of radius $\|x\|$. This is trivially true if $x=0$. In general, if $\|x\| \neq 0$, then $\|g x\|=\|x\|$ for any $g \in \mathrm{O}(n, \mathbb{R})$. On the other hand, if $x, y \in \mathbb{R}^{n}$ and $\|x\|=\|y\|=r$, then let $\widehat{x}:=x / r$ and $\widehat{y}:=y / r$. Let $\widehat{x}:=e_{1}$ and $\widehat{y}=f_{1}$ and then extend to orthonormal bases $\left(e_{1}, \ldots, e_{n}\right)$ and $\left(f_{1}, \ldots, f_{n}\right)$. Then there exists an orthogonal matrix $S$ such that $S e_{i}=f_{i}$ for $i=1, \ldots, n$. In particular, $S \widehat{x}=\widehat{y}$, and so $S x=y$.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-07-14}{$L_h$ als Lie Gruppenwirkung von Lie Untergruppe auf Lie Gruppe}
+If $H$ is a Lie subgroup of a Lie group $G$, then we can consider $L_{h}$ for any $h \in H$ and thereby obtain a Lie group action of $H$ on $G$.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-07-16}{Lie Gruppe wirkt durch konjugierte Abbildung bzgl $g$ auf Lie Untergruppe}
+If $H$ is a normal Lie subgroup of $G$, then $G$ acts on $H$ by conjugation:
+$$
+g \cdot h:=C_{g} h=g h g^{-1}
+$$
+Notice that the notation $g \cdot h$ cannot reasonably be abbreviated to $g h$ in this example.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-07-17}{Äquivariante Abbildungen zwischen Mannigfaltigkeiten bzgl Gruppenwirkung und Lie Gruppen Wirkung}
+Suppose that a Lie group $G$ acts on smooth manifolds $M$ and $N$. For simplicity, we take both actions to be left actions, which we denote by $l$ and $\lambda$, respectively. A map $f: M \rightarrow N$ such that 
+$$f \circ l_{g}=\lambda_{g} \circ f$$ 
+for all $g \in G$, is said to be an equivariant map (equivariant with respect to the given actions). This means that for all $g$ the following diagram commutes:
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+M \arrow[r, "f"] \arrow[d, "l_g"'] & N \arrow[d, "\lambda_g"] \\
+M \arrow[r, "f"] & N
+\end{tikzcd}
+\]
+If $f$ is also a diffeomorphism, then $f$ is an equivalence of Lie group actions.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-07-18}{Induzierte Lie Gruppenwirkung durch Lie Gruppen Homomorphismus}
+If $\phi: G \rightarrow H$ is a Lie group homomorphism, then we can define an action of $G$ on $H$ by $\lambda(g, h)=\lambda_{g}(h)=L_{\phi(g)} h$. In this situation, $\phi$ is equivariant with respect to the actions $\lambda$ and $L$ (left translation).
+\end{EXA}
+
+\begin{EXA}{LIE-L09-07-19}{Äquivariante Wirkungen zwischen $\R^n$ und $T^n$}
+Let $T^{n}=S^{1} \times \cdots \times S^{1}$ be the $n$-torus, where we identify $S^{1}$ with the complex numbers of unit modulus. Fix $k=\left(k_{1}, \ldots, k_{n}\right) \in \mathbb{R}^{n}$. Then $\mathbb{R}$ acts on $\mathbb{R}^{n}$ by 
+$$\tau^{k}(t, x)=t \cdot x:=x+t k$$ 
+On the other hand, $\mathbb{R}$ acts on $T^{n}$ by 
+$$t \cdot\left(z^{1}, \ldots, z^{n}\right)=\left(e^{i t k_{1}} z^{1}, \ldots, e^{i t k_{n}} z^{n}\right)$$ 
+The map $\mathbb{R}^{n} \rightarrow T^{n}$ given by $\left(x^{1}, \ldots, x^{n}\right) \mapsto\left(e^{i x^{1}}, \ldots, e^{i x^{n}}\right)$ is equivariant with respect to these actions.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-07-22}{$\Ogroup(n)$ als Levelset einer äquivarianten Abbildung von $\GL(n,\R)$ nach $\mathfrak{gl}(n,\R)$}
+For example, we know that $\mathrm{O}(n, \mathbb{R})$ is the level set $f^{-1}(I)$, where $f: \mathrm{GL}(n, \mathbb{R}) \rightarrow \mathfrak{g} \mathfrak{l}(n, \mathbb{R})=M_{n \times n}$ is given by $f(A)=A^{T} A$. 
+
+The group $\mathrm{O}(n, \mathbb{R})$ acts on itself via left translation, and we also let $\mathrm{O}(n, \mathbb{R})$ act on $\mathfrak{g} \mathfrak{l}(n, \mathbb{R})$ by $Q \cdot A:=Q^{T} A Q$ (adjoint\\
+action). One checks easily that $f$ is equivariant with respect to these actions, and since the first action (left translation) is certainly transitive, we see that $\mathrm{O}(n, \mathbb{R})$ is a closed regular submanifold of $\mathrm{GL}(n, \mathbb{R})$.
+
+It follows from Proposition 5.9 that $\mathrm{O}(n, \mathbb{R})$ is a closed Lie subgroup of $\operatorname{GL}(n, \mathbb{R})$.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-07-55}{Hopf Abbildung für $\mathbb{C}P^{n-1}$}
+Consider $S^{2 n-1}$ as the subset of $\mathbb{C}^{n}$ given by $S^{2 n-1}= \left\{\xi \in \mathbb{C}^{n}:|\xi|=1\right\}$. Here $\xi=\left(z^{1}, \ldots, z^{n}\right)$ and $|\xi|=\sum \bar{z}^{i} z^{i}$. Let $S^{1}$ act on $S^{2 n-1}$ by $(a, \xi) \mapsto a \xi=\left(a z^{1}, \ldots, a z^{n}\right)$. This action is free and proper. The quotient is the complex projective space $\mathbb{C} P^{n-1}$,
+\[
+\begin{tikzcd}
+S^{2n-1} \arrow[d] \\
+\mathbb{C}P^{\,n-1}
+\end{tikzcd}
+\]
+These maps (one for each $n$ ) are called the Hopf maps. In this context, $S^{1}$ is usually denoted by $U(1)$.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-07-56}{Quaternionischer Projektiveer Raum $\mathbb{H}P^{n-1}$}
+The quaternionic projective space $\mathbb{H} P^{n-1}$ is defined by analogy with $\mathbb{C} P^{n-1}$. The elements of $\mathbb{H} P^{n-1}$ are 1 -dimensional subspaces of the right $\mathbb{H}$-vector space $\mathbb{H}^{n}$. Let us refer to these as $\mathbb{H}$-lines. Each of these are of real dimension 4. Each element of $\mathbb{H}^{n} \backslash\{0\}$ determines an $\mathbb{H}$-line and the $\mathbb{H}$-line determined by $\left(\xi^{1}, \ldots, \xi^{n}\right)^{t}$ will be the same as that determined by $\left(\widetilde{\xi}^{1}, \ldots, \widetilde{\xi}^{n}\right)^{t}$ if and only if there is a nonzero element $a \in \mathbb{H}$ such that 
+$$\left(\widetilde{\xi}^{1}, \ldots, \widetilde{\xi}^{n}\right)^{t}=\left(\xi^{1}, \ldots, \xi^{n}\right)^{t} a=\left(\xi^{1} a, \ldots, \xi^{n} a\right)^{t}$$ 
+This defines an equivalence relation $\sim$ on $\mathbb{H}^{n} \backslash\{0\}$, and thus we may also think of $\mathbb{H} P^{n-1}$ as $\left(\mathbb{H}^{n} \backslash\{0\}\right) / \sim$. 
+
+The element of $\mathbb{H} P^{n-1}$ determined by $\left(\xi^{1}, \ldots, \xi^{n}\right)^{t}$ is denoted by $\left[\xi^{1}, \ldots, \xi^{n}\right]$. 
+
+Notice that the subset $\left\{\xi \in \mathbb{H}^{n}:|\xi|=1\right\}$ is $S^{4 n-1}$. Just as for the complex projective spaces, we observe that all such $\mathbb{H}$-lines contain points of $S^{4 n-1}$, and two points $\xi, \zeta \in S^{4 n-1}$ determine the same $\mathbb{H}$-line if and only if $\xi=\zeta a$ for some $a$ with $|a|=1$. Thus we can think of $\mathbb{H} P^{n-1}$ as a quotient of $S^{4 n-1}$. When viewed in this way, we also denote the equivalence class of $\xi=\left(\xi^{1}, \ldots, \xi^{n}\right)^{t} \in S^{4 n-1}$ by $[\xi]=\left[\xi^{1}, \ldots, \xi^{n}\right]$. The equivalence classes are clearly the orbits of an action as described in the following example.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-07-57}{Hopf Abbildung für $\mathbb{H}P^{n-1}$}
+Consider $S^{4 n-1}$ regarded as the subset of $\mathbb{H}^{n}$ given by $S^{4 n-1}=\left\{\xi \in \mathbb{H}^{n}:|\xi|=1\right\}$. Here $\xi=\left(\xi^{1}, \ldots, \xi^{n}\right)^{t}$ and $|\xi|=\sum \bar{\xi}^{i} \xi^{i}$. Now we define a right action of $U(1, \mathbb{H})$ on $S^{4 n-1}$ by $(\xi, a) \mapsto \xi a=\left(\xi^{1} a, \ldots, \xi^{n} a\right)^{t}$. This action is free and proper. The quotient is the quaternionic projective space $\mathbb{H} P^{n-1}$, and we have the quotient map denoted by $\wp$,
+\[
+\begin{tikzcd}
+S^{4n-1} \arrow[d, "\varphi"] \\
+\mathbb{H}P^{n-1}
+\end{tikzcd}
+\]
+This map is also referred to as a Hopf map. Recall that $\mathbb{Z}_{2}=\{1,-1\}$ acts on $S^{n-1}=\mathbb{R}^{n}$ on the right (or left) by multiplication, and the action is a (discrete) proper and free action with quotient $\mathbb{R} P^{n-1}$, and the examples above generalize this.
+\end{EXA}
+
+\begin{EXA}{LIE-L09-07-58}{Glatte Struktur auf $\mathbb{H}P^{n-1}$}
+For completeness, we describe an atlas for $\mathbb{H} P^{n-1}$. View $\mathbb{H} P^{n-1}$ as the quotient $S^{4 n-1} / \sim$ described above. Let
+$$
+U_{k}:=\left\{[\xi] \in S^{4 n-1} \subset \mathbb{H}^{n}: \xi^{k} \neq 0\right\},
+$$
+and define $\varphi_{k}: U_{k} \rightarrow \mathbb{H}^{n-1} \cong \mathbb{R}^{4 n-1}$ by
+$$
+\varphi_{k}([\xi])=\left(\xi_{1} \xi_{k}^{-1}, \ldots, \widehat{1}, \ldots, \xi_{n} \xi_{k}^{-1}\right),
+$$
+where as before, the caret symbol ${ }^{\wedge}$ indicates that we have omitted the 1 in the $k$-th slot to obtain an element of $\mathbb{H}^{n-1}$. Notice that we insist that the $\xi_{k}^{-1}$ in this expression multiply from the right. The general pattern for the overlap maps become clear from the example $\varphi_{3} \circ \varphi_{2}^{-1}$. Here we have
+$$
+\begin{aligned}
+\varphi_{3} \circ \varphi_{2}^{-1}\left(y_{1}, y_{3}, \ldots, y_{n}\right) & =\varphi_{3}\left(\left[y_{1}, 1, y_{3}, \ldots, y_{n}\right]\right) \\
+& =\left(y_{1} y_{3}^{-1}, y_{3}^{-1}, y_{4} y_{3}^{-1}, \ldots, y_{n} y_{3}^{-1}\right)
+\end{aligned}
+$$
+In the case $n=1$, we have an atlas of just two charts $\left\{\left(U_{1}, \varphi_{1}\right),\left(U_{2}, \varphi_{2}\right)\right\}$. In close analogy with the complex case we have $U_{1} \cap U_{2}=\mathbb{H} \backslash\{0\}$ and $\varphi_{1} \circ \varphi_{2}^{-1}(y)=\bar{y}^{-1}=\varphi_{2} \circ \varphi_{1}^{-1}(y)$ for $y \in \mathbb{H} \backslash\{0\}$.
+\end{EXA}
+
+\subsection{Propositionen}
+
+\begin{EXE}{LIE-L09-07-06}{Stabilisator ist abgeschlossene Lie Untergruppe}
+Show that $G_{p}$ is a closed subset and an abstract subgroup of $G$. This means that $G_{p}$ is a closed Lie subgroup.
+\end{EXE}
+
+\begin{EXE}{LIE-L09-07-13}{$\SO(n,\R)$ als transitive Lie Gruppenwirkung}
+From the last example we can restrict the action of $\mathrm{O}(n, \mathbb{R})$ to a transitive action on $S^{n-1}$. Now $\operatorname{SO}(n, \mathbb{R})$ also acts on $S^{n-1}$ by restriction. Show that this action on $S^{n-1}$ is transitive as long as $n>1$.
+\end{EXE}
+
+\begin{THEO}{LIE-L09-07-20}{Äquivariante Rang Theorem}
+Suppose that $f: M \rightarrow N$ is smooth and that a Lie group $G$ acts on both $M$ and $N$ with the action on $M$ being transitive. If $f$ is equivariant, then it has constant rank. In particular, each level set of $f$ is a closed regular submanifold.
+\end{THEO}
+
+\begin{PROOF}{LIE-L09-07-21}{P: Äquivariante Rang Theorem}
+Let the actions on $M$ and $N$ be denoted by $l$ and $\lambda$ respectively as before. Pick any two points $p_{1}, p_{2} \in M$. Since $G$ acts transitively on $M$, there is a $g$ with $l_{g} p_{1}=p_{2}$. By hypothesis, we have $f \circ l_{g}=\lambda_{g} \circ f$, which corresponds to the commutative diagram (5.3). Upon application of the tangent functor we have the commutative diagram
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+T_{p_1} M \arrow[r, "T_{p_1} f"] \arrow[d, "T_{p_1} l_g"'] & T_{f(p_1)} N \arrow[d, "T_{f(p_1)} \lambda_g"] \\
+T_{p_2} M \arrow[r, "T_{p_2} f"] & T_{f(p_2)} N
+\end{tikzcd}
+\]
+Since the maps $T_{p_{1}} l_{g}$ and $T_{f\left(p_{1}\right)} \lambda_{g}$ are linear isomorphisms, we see that $T_{p_{1}} f$ must have the same rank as $T_{p_{2}} f$. Since $p_{1}$ and $p_{2}$ were arbitrary, we see that the rank of $f$ is constant on $M$. Apply Theorem C.5.
+\end{PROOF}
+
+\begin{THEO}{LIE-L09-07-23}{Kern von Lie Gruppen Homomorphismus ist eine abgeschlossene Lie Untergruppe}
+If $\phi: G \rightarrow H$ is a Lie group homomorphism, then the kernel $\operatorname{Ker}(h)$ is a closed Lie subgroup of $G$.
+\end{THEO}
+
+\begin{PROOF}{LIE-L09-07-24}{P: Kern von Lie Gruppen Homomorphismus ist eine abgeschlossene Lie Untergruppe}
+Let $G$ act on itself and on $H$ as in Example 5.105. Then $\phi$ is equivariant, and $\phi^{-1}(e)=\operatorname{Ker}(h)$ is a closed Lie subgroup by Theorem 5.107 and Proposition 5.9.
+\end{PROOF}
+
+\begin{KORO}{LIE-L09-07-25}{Isotriopiegruppe bzgl $g$ und Lie Gruppenwirkung ist abgeschlossene Lie Untergruppe}
+Let $l: G \times M \rightarrow M$ be a Lie group action, and let $G_{p}$ be the isotropy subgroup of some $p \in M$. Then $G_{p}$ is a closed Lie subgroup of $G$.
+\end{KORO}
+
+\begin{PROOF}{LIE-L09-07-26}{P: Isotriopiegruppe bzgl $g$ und Lie Gruppenwirkung ist abgeschlossene Lie Untergruppe}
+The orbit map $\theta_{p}: G \rightarrow M$ given by $\theta_{p}(g)=g p$ is equivariant with respect to left translation on $G$ and the given action on $M$. Thus by the equivariant rank theorem, $G_{p}$ is a regular submanifold of $G$, and then by Proposition 5.9 it is a closed Lie subgroup.
+\end{PROOF}
+
+\begin{PROP}{LIE-L09-07-28}{Charakterisierung eigentlicher Gruppenwirkungen}
+Let $l: G \times M \rightarrow M$ be a smooth (or merely continuous) group action. Then $l$ is a proper action if and only if the set
+$$
+G_{K}:=\{g \in G:(g \cdot K) \cap K \neq \emptyset\}
+$$
+is compact whenever $K$ is compact.
+\end{PROP}
+
+\begin{PROOF}{LIE-L09-07-29}{P: Charakterisierung eigentlicher Gruppenwirkungen}
+Suppose that $l$ is proper so that the map $P$ is a proper map. Let $\pi_{G}$ be the first factor projection $G \times M \rightarrow G$. Then
+$$
+\begin{aligned}
+G_{K} & =\{g: \text { there exists an } x \in K \text { such that } g x \in K\} \\
+& =\{g: \text { there exists an } x \in M \text { such that } P(g, x) \in K \times K\} \\
+& =\pi_{G}\left(P^{-1}(K \times K)\right)
+\end{aligned}
+$$
+and so $G_{K}$ is compact.
+
+Next we assume that $G_{K}$ is compact for all compact $K$. If $C \subset M \times M$ is compact, then letting $K=\pi_{1}(C) \cup \pi_{2}(C)$, where $\pi_{1}$ and $\pi_{2}$ are the first and second factor projections $M \times M \rightarrow M$ respectively, we have
+$$
+\begin{aligned}
+P^{-1}(C) & \subset P^{-1}(K \times K) \subset\{(g, x): g x \in K \text { and } x \in K\} \\
+& \subset G_{K} \times K
+\end{aligned}
+$$
+Since $P^{-1}(C)$ is a closed subset of the compact set $G_{K} \times K$, it is compact. This means that $P$ is proper since $C$ was an arbitrary compact subset of $M \times M$.
+\end{PROOF}
+
+\begin{PROP}{LIE-L09-07-30}{Glatte Gruppenwirkungen mit kompaktem Definitionsbereich sind eigentlich}
+If $G$ is compact, then any smooth action $l: G \times M \rightarrow M$ is proper.
+\end{PROP}
+
+\begin{PROOF}{LIE-L09-07-31}{P: Glatte Gruppenwirkungen mit kompaktem Definitionsbereich sind eigentlich}
+Let $B \subset M \times M$ be compact. We find a compact subset $K \subset M$ such that $B \subset K \times K$ as in the proof of Proposition 5.111.
+
+Claim: $P^{-1}(B)$ is compact. Indeed,
+$$
+\begin{aligned}
+P^{-1}(B) & \subset P^{-1}(K \times K)=\bigcup_{k \in K} P^{-1}(K \times\{k\}) \\
+& =\bigcup_{k \in K}\{(g, p):(g p, p) \in K \times\{k\}\} \\
+& =\bigcup_{k \in K}\{(g, k): g p \in K\} \\
+& \subset \bigcup_{k \in K}(G \times\{k\})=G \times K
+\end{aligned}
+$$
+Thus $P^{-1}(B)$ is a closed subset of the compact set $G \times K$ and hence is compact.
+\end{PROOF}
+
+\begin{EXE}{LIE-L09-07-32}{Eigenschaften von eigentlichen Gruppenwirkungen}
+Prove the following:
+
+(i) If $l: G \times M \rightarrow M$ is a proper action and $H \subset G$ is a closed subgroup, then the restricted action $H \times M \rightarrow M$ is proper.\\
+
+(ii) If $N$ is an invariant submanifold for a proper action $l: G \times M \rightarrow M$, then the restricted action $G \times N \rightarrow N$ is also proper.
+\end{EXE}
+
+\begin{PROP}{LIE-L09-07-36}{Eigenschaften der Orbitabbildung bei freien und properen Aktionen}
+Sei $l:G\times M\to M$ eine \emph{freie} und \emph{propre} Aktion einer Lie-Gruppe $G$ auf einer Mannigfaltigkeit $M$.
+Dann gilt für jedes $p\in M$:
+\begin{enumerate}[label=(\roman*)]
+\item Die Abbildung $\theta_p:G\to M$, $\theta_p(g)=g\cdot p$, ist glatt und $G$-äquivariant:
+\[
+\theta_p(gx)=(gx)\cdot p=g\cdot(x\cdot p)=g\cdot\theta_p(x)
+\quad\text{für alle }g,x\in G.
+\]
+\item Da die Aktion frei ist, ist $\theta_p$ injektiv.
+\item Nach dem äquivarianten Rangtheorem besitzt $\theta_p$ konstanten Rang; da sie injektiv ist, ist sie eine \emph{Immersion}.
+\item Die Abbildung $\theta_p$ ist \emph{proper}:  
+Ist $K\subset M$ kompakt, so ist
+\[
+\theta_p^{-1}(K)\subset G_{K\cup\{p\}}
+\]
+eine abgeschlossene Teilmenge der nach Theorem~5.111 kompakten Menge $G_{K\cup\{p\}}$; somit ist $\theta_p^{-1}(K)$ kompakt.
+\item Nach Aufgabe~3.9 folgt aus (iii) und (iv), dass $\theta_p$ eine \emph{Einbettung} ist.
+\end{enumerate}
+Daraus folgt, dass jeder Orbit $G\cdot p$ eine eingebettete reguläre Untermannigfaltigkeit von $M$ ist.
+
+$$\includegraphics[scale=0.25]{2025_10_09_265d7e1a22c89f79c21eg-248}$$
+\end{PROP}
+
+\begin{CONC}{LIE-L09-07-37}{Orbits als eingebettete Untermannigfaltigkeiten}
+Die Eigenschaft, dass die Orbits eingebettete Untermannigfaltigkeiten sind,
+ist eine der zentralen Konsequenzen freier und properer Aktionen.
+Sie erlaubt es, lokale Karten auf $M$ zu wählen, die „an die Gruppenwirkung angepasst“ sind.
+\end{CONC}
+
+\begin{THEO}{LIE-L09-07-39}{Für freie eigentliche Lie Gruppenwirkungen existieren angepasste Karten}
+If $l: G \times M \rightarrow M$ is a free and proper Lie group action, then for every $p \in M$ there is an action-adapted chart centered at $p$.
+\end{THEO}
+
+\begin{PROOF}{LIE-L09-07-40}{P: Für freie eigentliche Lie Gruppenwirkungen existieren angepasste Karten}
+Let $p \in M$ be given. Since $G \cdot p$ is a regular submanifold, we may choose a regular submanifold chart ( $W, \mathrm{y}$ ) centered at $p$ so that ( $G \cdot p$ ) $\cap W$ is exactly given by $y^{k+1}=\cdots=y^{n}=0$ in $W$. Let $S$ be the complementary slice in $W$ given by $y^{1}=\cdots=y^{k}=0$. Note that $S$ is a regular submanifold. The tangent space $T_{p} M$ decomposes as
+$$
+T_{p} M=T_{p}(G \cdot p) \oplus T_{p} S .
+$$
+Let $\varphi: G \times S \rightarrow M$ be the restriction of the action $l$ to the set $G \times S$. Also, let $i_{p}: G \rightarrow G \times S$ be the insertion map $g \mapsto(g, p)$ and let $j_{e}: S \rightarrow G \times S$ be the insertion map $s \mapsto(e, s)$. (See Figure 5.2.) These insertion maps are embeddings, and we have $\theta_{p}=\varphi \circ i_{p}$ and also $\varphi \circ j_{e}=\iota$, where $\iota$ is the inclusion $S \hookrightarrow M$. Now $T_{e} \theta_{p}\left(T_{e} G\right)=T_{p}(G \cdot p)$ since $\theta_{p}$ is an embedding. On the other hand, $T \theta_{p}=T \varphi \circ T i_{p}$, and so the image of $T_{(e, p)} \varphi$ must contain $T_{p}(G \cdot p)$. Similarly, from the composition $\varphi \circ j_{e}=\iota$ we see that the image of $T_{(e, p)} \varphi$ must contain $T_{p} S$. It follows that $T_{(e, p)} \varphi: T_{(e, p)}(G \times S) \rightarrow T_{p} M$ is surjective, and since $T_{(e, p)}(G \times S)$ and $T_{p} M$ have the same dimension, it is also injective.
+
+By the inverse mapping theorem, there is a neighborhood $O$ of $(e, p)$ such that $\left.\varphi\right|_{O}$ is a diffeomorphism. By shrinking $O$ further if necessary we may assume that $\varphi(O) \subset W$. We may also arrange that $O$ has the form of a product $O=A \times B$ for $A$ open in $G$ and $B$ open in $S$. In fact, we can assume that there are diffeomorphisms $\alpha: I^{k} \rightarrow A$ and $\beta: I^{n-k} \rightarrow B$, where $I^{k}$ and $I^{n-k}$ are the open cubes in $\mathbb{R}^{k}$ and $\mathbb{R}^{n-k}$ given respectively by $I^{k}=(-1,1)^{k}$ and $I^{n-k}=(-1,1)^{n-k}$ and where $\alpha^{-1}(e)=0 \in \mathbb{R}^{k}$ and $\beta^{-1}(p)=0 \in \mathbb{R}^{n-k}$. Let $U:=\varphi(A \times B)$. The map $\varphi \circ(\alpha \times \beta)$ : $I^{k} \times I^{n-k} \rightarrow U$ is a diffeomorphism, and so its inverse is a chart. We now show that $B$ can be chosen small enough that the intersection of each orbit with $B$ is either empty or a single point. If this were not true, then there would be a sequence of open sets $\left\{B_{i}\right\}$ with compact closure and $\bar{B}_{i+1} \subset B_{i}$ (and with corresponding diffeomorphisms $\beta_{i}: I^{k} \rightarrow B_{i}$ as above), such that for every $i$ there is a pair of distinct points $p_{i}, p_{i}^{\prime} \in B_{i}$ with $g_{i} p_{i}=p_{i}^{\prime}$ for some sequence $\left\{g_{i}\right\} \subset G$. (We have used the fact that manifolds are first countable and normal.) This forces both $p_{i}$ and $p_{i}^{\prime}=g_{i} p_{i}$ to converge to $p$. From this we see that the set $K=\left\{\left(g_{i} p_{i}, p_{i}\right),(p, p)\right\} \subset M \times M$ is compact. Recall that by definition, the map $P:(g, x) \mapsto(g x, x)$ is proper. Since $\left(g_{i}, p_{i}\right)=P^{-1}\left(g_{i} p_{i}, p_{i}\right)$, we see that $\left\{\left(g_{i}, p_{i}\right)\right\}$ is a subset of the compact set $P^{-1}(K)$. Thus after passing to a subsequence, we have that $\left(g_{i}, p_{i}\right)$ converges to $(g, p)$ for some $g$ and hence $g_{i} \rightarrow g$ and $g_{i} p_{i} \rightarrow g p$. But this means that we have
+$$
+g p=\lim _{i \rightarrow \infty} g_{i} p_{i}=\lim _{i \rightarrow \infty} p_{i}^{\prime}=p
+$$
+and since the action is free, we conclude that $g=e$. However, this is impossible since it would mean that for large enough $i$ we would have $g_{i} \in A$, and this in turn would imply that
+$$
+\varphi\left(g_{i}, p_{i}\right)=l_{g_{i}}\left(p_{i}\right)=p_{i}^{\prime}=l_{e}\left(p_{i}^{\prime}\right)=\varphi\left(e, p_{i}^{\prime}\right)
+$$
+contradicting the injectivity of $\varphi$ on $A \times B$. Thus after shrinking $B$ we may assume that the intersection of each orbit with $B$ is either empty or a single point. One may now check that with $\mathrm{x}:=(\varphi \circ(\alpha \times \beta))^{-1}: U \rightarrow I^{k} \times I^{n-k} \subset \mathbb{R}^{n}$, we obtain a chart ($U,\mathrm{x}$) with the desired properties. Write $\mathrm{x}=(x, y)$, where $y$ takes values in $I^{n-k} \subset \mathbb{R}^{n-k}$ and $x$ takes values in $I^{k} \subset \mathbb{R}^{k}$. Each $y=c$ slice is of the form $\varphi(A \times\{q\}) \subset G q$ for $q \in B$ and so is contained in a single orbit. We see that the intersection of an orbit with $U$ must be
+$$
+\includegraphics[scale=0.25]{2025_10_09_265d7e1a22c89f79c21eg-250}
+$$
+a union of such slices. But each orbit can only intersect $B$ in at most one point, and so it is clear that each orbit intersects $U$ in one slice or does not intersect $U$ at all.
+\end{PROOF}
+
+\begin{LEM}{LIE-L09-07-41}{Konstruktion von angepassten Karten}
+Let $\mathrm{x}:=(\varphi \circ(\alpha \times \beta))^{-1}: U \rightarrow I^{k} \times I^{n-k}=I^{n} \subset \mathbb{R}^{n}$ be an action-adapted chart map obtained as in the proof of Theorem 5.115 above. Then given any $p_{1} \in U$, there exists a diffeomorphism $\psi: I^{n} \rightarrow I^{n}$ such that $\psi \circ \mathrm{x}$ is an action-adapted chart centered at $p_{1}$ and with image $I^{n}$. Furthermore $\psi$ can be decomposed as $(a, b) \mapsto\left(\psi_{1}(a), \psi_{2}(b)\right)$, where $\psi_{1}: I^{k} \rightarrow I^{k}$ and $\psi_{2}: I^{n-k} \rightarrow I^{n-k}$ are diffeomorphisms.
+\end{LEM}
+
+\begin{PROOF}{LIE-L09-07-42}{P: Konstruktion von angepassten Karten}
+We need to show that for any $a \in I^{n}$, there is a diffeomorphism $\psi: I^{n} \rightarrow I^{n}$ such that $\psi(a)=0$. Let $a^{i}$ be the $i$-th component of $a$. Let $\psi_{i}: I \rightarrow I$ be defined by
+$$
+\psi_{i}:=\phi^{-1} \circ t_{-\phi\left(a_{i}\right)} \circ \phi,
+$$
+where $t_{-c}(x):=x-c$ and $\phi:(-1,1) \rightarrow \mathbb{R}$ is the diffeomorphism $\phi: x \mapsto \tan \left(\frac{\pi}{2} x\right)$. The diffeomorphism we want is $\psi(x)=\left(\psi_{1}\left(x^{1}\right), \ldots, \psi_{1}\left(x^{n}\right)\right)$. The last part is obvious from the construction.
+\end{PROOF}
+
+\begin{LEM}{LIE-L09-07-45}{Offenheit der Quotientenabbildung}
+Die Projektion $\pi:M\to G\backslash M$ ist eine offene Abbildung.
+\end{LEM}
+
+\begin{PROOF}{LIE-L09-07-46}{P: Offenheit der Quotientenabbildung}
+Sei $U\subset M$ offen.  
+Wir zeigen, dass $\pi(U)$ offen in $G\backslash M$ ist.  
+Dazu genügt es zu zeigen, dass $\pi^{-1}(\pi(U))$ offen in $M$ ist.
+
+Für $U\subset M$ gilt
+\[
+\pi^{-1}(\pi(U))
+=\bigcup_{g\in G}l_g(U),
+\]
+wobei $l_g:M\to M$, $p\mapsto g\cdot p$, die Linksoperation bezeichnet.
+Da jede Abbildung $l_g$ ein Diffeomorphismus ist, ist $l_g(U)$ offen,
+und somit auch die Vereinigung $\bigcup_g l_g(U)$.  
+Damit ist $\pi^{-1}(\pi(U))$ offen, und folglich ist $\pi(U)$ offen in $G\backslash M$.
+\end{PROOF}
+
+\begin{PROP}{LIE-L09-07-47}{Induzierte Hausdorff / 2. Abzählbarkeit für Orbitraum}
+Let $G$ act smoothly on $M$. Then $G \backslash M$ is a Hausdorff space if the set $\Gamma:=\{(g p, p): g \in G, p \in M\}$ is a closed subset of $M \times M$. If $M$ is second countable then $G \backslash M$ is also.
+\end{PROP}
+
+\begin{PROOF}{LIE-L09-07-48}{P: Induzierte Hausdorff / 2. Abzählbarkeit für Orbitraum}
+Let $\underline{p}, \underline{q} \in G \backslash M$ with $\pi(p)=\underline{p}$ and $\pi(q)=\underline{q}$. If $\underline{p} \neq \underline{q}$, then $p$ and $q$ are not in the same orbit. This means that $(p, q) \notin \Gamma$, and so there must be a product open set $U \times V$ such that $(p, q) \in U \times V$ and $U \times V$ is disjoint from $\Gamma$. This means that $\pi(U)$ and $\pi(V)$ are disjoint neighborhoods of $\underline{p}$ and $\underline{q}$ respectively. Finally, if $\left\{U_{i}\right\}$ is a countable basis for the topology on $M$, then $\left\{\pi\left(U_{i}\right)\right\}$ is a countable basis for the topology on $G \backslash M$.
+\end{PROOF}
+
+\begin{PROP}{LIE-L09-07-49}{Freie und eigentliche Lie Gruppenwirkung induziert Hausdorff Orbitraum}
+If $l: G \times M \rightarrow M$ is a free and proper action, then $G \backslash M$ is Hausdorff.
+\end{PROP}
+
+\begin{PROOF}{LIE-L09-07-50}{P: Freie und eigentliche Lie Gruppenwirkung induziert Hausdorff Orbitraum}
+To show that $G \backslash M$ is Hausdorff, we use the previous lemma. We must show that $\Gamma$ is closed. By Problem 2, proper continuous maps are closed. Thus $\Gamma=P(G \times M)$ is closed since $P$ is proper.
+\end{PROOF}
+
+\begin{PROP}{LIE-L09-07-51}{Eindeutigkeit der glatten Struktur auf dem Orbitraum}
+Sei $l:G\times M\to M$ eine glatte Aktion einer Lie-Gruppe $G$ auf einer glatten Mannigfaltigkeit $M$.
+Angenommen, es existiert eine glatte Struktur auf dem Quotientenraum $G\backslash M$,
+die die Projektion
+\[
+\pi:M\longrightarrow G\backslash M,\qquad p\longmapsto G\cdot p,
+\]
+zu einer glatten Submersion macht.
+Dann ist diese glatte Struktur \emph{eindeutig} durch die glatte Struktur von $M$ bestimmt.
+\end{PROP}
+
+\begin{PROOF}{LIE-L09-07-52}{P: Eindeutigkeit der glatten Struktur auf dem Orbitraum}
+Seien $(G\backslash M)_{\mathcal A}$ und $(G\backslash M)_{\mathcal B}$
+zwei mögliche glatte Strukturen auf $G\backslash M$
+mit zugehörigen maximalen Atlanten $\mathcal A$ bzw.\ $\mathcal B$.
+In beiden Fällen ist die Projektion
+\[
+\pi: M \longrightarrow (G\backslash M)_{\mathcal A}
+\quad\text{bzw.}\quad
+\pi: M \longrightarrow (G\backslash M)_{\mathcal B}
+\]
+eine glatte surjektive Submersion.
+Damit erhalten wir das kommutative Diagramm:
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+& M \arrow[dl, "\pi"'] \arrow[dr, "\pi"] & \\
+(G\backslash M)_{\mathcal A} \arrow[rr, "\mathrm{id}"] & & (G\backslash M)_{\mathcal B}
+\end{tikzcd}
+\]
+
+Da $\pi$ in beiden Fällen eine surjektive Submersion ist,
+kann Proposition~3.26 angewendet werden:
+Sie besagt, dass eine Abbildung $f$ zwischen Mannigfaltigkeiten genau dann glatt ist,
+wenn $f\circ\pi$ glatt ist.
+Hieraus folgt, dass die Identität
+\[
+\mathrm{id}:(G\backslash M)_{\mathcal A}\longrightarrow (G\backslash M)_{\mathcal B}
+\]
+glatt ist, ebenso wie ihr Inverses.
+Somit sind die beiden glatten Strukturen äquivalent, d.\,h.\ $\mathcal A=\mathcal B$.
+\end{PROOF}
+
+\begin{THEO}{LIE-L09-07-53}{Eindeutig induzierte glatte Struktur auf Orbitraum}
+If $l: G \times M \rightarrow M$ is a free and proper Lie group action, then there is a unique smooth structure on the quotient $G \backslash M$ such that
+\begin{enumerate}
+\item The induced topology is the quotient topology, and $G \backslash M$ is a smooth manifold
+\item The projection $\pi: M \rightarrow G \backslash M$ is a submersion
+\item $\operatorname{dim}(G \backslash M)=\operatorname{dim}(M)-\operatorname{dim}(G)$
+\end{enumerate}
+\end{THEO}
+
+\begin{PROOF}{LIE-L09-07-54}{P: Eindeutig induzierte glatte Struktur auf Orbitraum}
+Let $\operatorname{dim}(M)=n$ and $\operatorname{dim}(G)=k$. We have already shown that $G \backslash M$ is a Hausdorff space. All that is left is to exhibit an atlas such that the charts are homeomorphisms with respect to this quotient topology. Let $q \in G \backslash M$ and choose $p$ with $\pi(p)=q$. Let ( $U, \mathrm{x}$ ) be an action-adapted chart centered at $p$ and constructed exactly as in Theorem 5.115. Let $\pi(U)=V \subset G \backslash M$ and let $B$ be the slice $x^{1}=\cdots=x^{k}=0$. By construction $\left.\pi\right|_{B}: B \rightarrow V$ is a bijection. In fact, it is easy to check that $\left.\pi\right|_{B}$ is a homeomorphism, and $\sigma:=\left(\left.\pi\right|_{B}\right)^{-1}$ is the corresponding local section. Consider the map $\mathrm{y}=\pi_{2} \circ \mathrm{x} \circ \sigma$, where $\pi_{2}$ is the second factor projection $\pi_{2}: \mathbb{R}^{k} \times \mathbb{R}^{n-k} \rightarrow \mathbb{R}^{n-k}$. This is a homeomorphism since $\left.\left(\pi_{2} \circ \mathrm{x}\right)\right|_{B}$ is a homeomorphism and $\pi_{2} \circ \mathrm{x} \circ \sigma=\left.\left(\pi_{2} \circ \mathrm{x}\right)\right|_{B} \circ \sigma$. We now have a chart ($V, \mathrm{y}$).
+
+Given two such charts ( $V, \mathrm{y}$ ) and ( $\bar{V}, \overline{\mathrm{y}}$ ), we must show that $\overline{\mathrm{y}} \circ \mathrm{y}^{-1}$ is smooth. The ( $V, \mathrm{y}$ ) and ( $\bar{V}, \overline{\mathrm{y}}$ ) are constructed from associated actionadapted charts ( $U, \mathrm{x}$ ) and ( $\bar{U}, \overline{\mathrm{x}}$ ) on $M$. Let $q \in V \cap \bar{V}$. As in the proof of Lemma 5.116, we may find diffeomorphisms $\psi$ and $\bar{\psi}$ such that ( $U, \psi \circ \mathrm{x}$ ) and $(\bar{U}, \bar{\psi} \circ \overline{\mathrm{x}})$ are action-adapted charts centered at points $p_{1} \in \pi^{-1}(q)$ and $p_{2} \in \pi^{-1}(q)$ respectively. Correspondingly, the charts ( $V, \mathrm{y}$ ) and ( $\bar{V}, \overline{\mathrm{y}}$ ) are modified to charts $\left(V, \mathrm{y}_{\psi}\right)$ and $\left(\bar{V}, \overline{\mathrm{y}}_{\bar{\psi}}\right)$ centered at $q$, where
+$$
+\begin{aligned}
+& \mathrm{y}_{\psi}:=\pi_{2} \circ \mathrm{x}_{\psi} \circ \sigma^{\prime} \\
+& \overline{\mathrm{y}}_{\bar{\psi}}:=\pi_{2} \circ \overline{\mathrm{x}}_{\psi} \circ \bar{\sigma}^{\prime}
+\end{aligned}
+$$
+with $\mathrm{x}_{\psi}:=\psi \circ \mathrm{x}$ and similarly for $\overline{\mathrm{x}}_{\psi}$. Also, the sections $\sigma^{\prime}$ and $\bar{\sigma}^{\prime}$ are constructed to map into the zero slices of $\mathrm{x}_{\psi}$ and $\overline{\mathrm{x}}_{\psi}$. However, it is not hard to see that $\mathrm{y}_{\psi}$ and $\overline{\mathrm{y}}_{\bar{\psi}}$ are unchanged if we replace $\sigma^{\prime}$ and $\bar{\sigma}^{\prime}$ by the sections $\sigma$ and $\bar{\sigma}$ corresponding to the zero slices of x and y . Now, recall that $\psi$ was chosen to have the form $(a, b) \mapsto\left(\psi_{1}(a), \psi_{2}(b)\right)$. Using the above observations, one checks that $\mathrm{y}_{\psi} \circ \mathrm{y}^{-1}=\psi_{2}$ and similarly for $\overline{\mathrm{y}}_{\bar{\psi}} \circ \overline{\mathrm{y}}^{-1}$. From this it follows that the overlap map $\overline{\mathrm{y}}_{\bar{\psi}}^{-1} \circ \mathrm{y}_{\psi}$ will be smooth if and only if $\overline{\mathrm{y}}^{-1} \circ \mathrm{y}^{-1}$ is smooth. Thus we have reduced to the case where ( $U, \mathrm{x}$ ) and $(\bar{U}, \overline{\mathrm{x}})$ are centered at $p_{1} \in \pi^{-1}(q)$ and $p_{2} \in \pi^{-1}(q)$ respectively. This entails that both ( $V, \mathrm{y}$ ) and ( $\bar{V}, \overline{\mathrm{y}}$ ) are centered at $q \in V \cap \bar{V}$. If we choose a $g \in G$ such that $l_{g}\left(p_{1}\right)=p_{2}$, then by composing with the diffeomorphism $l_{g}$ we can reduce further to the case where $p_{1}=p_{2}$. Here we use the fact that $l_{g}$ takes the set of orbits to the set of orbits in a bijective manner and the special nature of our action-adapted charts with respect to these orbits. In this case, the overlap map $\overline{\mathrm{x}} \circ \mathrm{x}^{-1}$ must have the form $(a, b) \mapsto(f(a, b), g(b))$ for some smooth functions $f$ and $g$. It follows that $\overline{\mathrm{y}} \circ \mathrm{y}^{-1}$ has the form $b \mapsto g(b)$.
+
+Finally, we give an argument that $G \backslash M$ is paracompact. Since $G \backslash M$ is Hausdorff and locally Euclidean, we will be done once we show that every connected component of $G \backslash M$ is second countable (see Proposition B.5). Let $Q_{0}$ be any such connected component of $G \backslash M$. Let $X_{0}$ be a connected component of $\pi^{-1}\left(Q_{0}\right)$. Then $X_{0}$ is a second countable manifold and open in $M$. We now argue that $\pi\left(X_{0}\right)=Q_{0}$. To this end we show that the connected set $\pi\left(X_{0}\right)$ is open and closed in $Q_{0}$. It is open since $\pi$ is an open map. Let $\bar{x}$ be in the closure of $\pi\left(X_{0}\right)$ and choose $x \in M$ with $\pi(x)=\bar{x}$. Let $U$ be the domain of an action-adapted chart centered at $x$ and let $S$ be the slice of $U$ that maps diffeomorphically onto an open neighborhood $O$ of $\bar{x}$. Now we may find $\bar{y} \in O \cap \pi\left(X_{0}\right)$ and a corresponding $y \in S$ such that $\pi(y)=\bar{y}$. Since $\bar{y}$ is in the image of $X_{0}$, there is a $y^{\prime} \in X_{0}$ such that $\pi\left(y^{\prime}\right)=\bar{y}$. But then there exists $g \in G$ such that $g y=y^{\prime}$. The open set $g U$ is diffeomorphic to $U$ under $l_{g}$ and hence is path connected. It contains $y^{\prime}$ and $g x$. Since $X_{0}$ is a path component, $g U \subset X_{0}$ and so $g x \in X_{0}$. But $\bar{x}=\pi(g x)$ so $\bar{x} \in \pi\left(X_{0}\right)$. We conclude that $\pi\left(X_{0}\right)$ is closed (and open) and connected. Hence $\pi\left(X_{0}\right)=Q_{0}$. Now since $X_{0}$ is a second countable manifold, we argue as in Proposition 5.117 that $Q_{0}$ is second countable. Conclusion: $G \backslash M$ is paracompact.
+\end{PROOF}
+
+\begin{EXE}{LIE-L09-07-59}{$\mathbb{H}P^{n-1}\cong S^3, \mathbb{R} P^{1} \cong S^{1}, \mathbb{C} P^{1} \cong S^{2}, \mathbb{H} P^{1} \cong S^{3}$}
+Show that by identifying $\mathbb{H}$ with $\mathbb{R}^{4}$ and modifying the stereographic charts on $S^{3} \subset \mathbb{R}^{4}$ we can obtain an atlas for $S^{3}$ with overlap maps of the same form as for $\mathbb{H} P^{1}$ given above. Use this to show that $\mathbb{H} P^{1} \cong S^{3}$.
+
+Combining the last exercise with previous results we have
+$$
+\mathbb{R} P^{1} \cong S^{1}, \quad \mathbb{C} P^{1} \cong S^{2}, \quad \mathbb{H} P^{1} \cong S^{3}
+$$
+\end{EXE}
+
+\section{Maurer-Cartan Form}
+
+\subsection{Definitionen}
+
+\begin{DEF}{LIE-L09-06-01}{Linke und rechte Maurer--Cartan-Form}
+Sei $G$ eine Lie-Gruppe mit Lie-Algebra $\mathfrak g=T_eG$.
+Für jedes $g\in G$ definieren wir lineare Abbildungen
+\[
+\omega_G(g):T_gG\longrightarrow\mathfrak g,
+\qquad
+\omega_G^{\mathrm{right}}(g):T_gG\longrightarrow\mathfrak g
+\]
+durch
+\[
+\omega_G(g)(X_g):=T_gL_{g^{-1}}\cdot X_g,
+\qquad
+\omega_G^{\mathrm{right}}(g)(X_g):=T_gR_{g^{-1}}\cdot X_g.
+\]
+Die Abbildungen
+\[
+\omega_G:T G\longrightarrow\mathfrak g,\qquad
+\omega_G^{\mathrm{right}}:T G\longrightarrow\mathfrak g
+\]
+sind $\mathfrak g$-wertige 1-Formen auf $G$ und heißen
+\emph{linke} bzw. \emph{rechte Maurer--Cartan-Form}.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-06-02}{Maurer--Cartan-Trivialisierungen des Tangentialbündels}
+Mit Hilfe der Maurer--Cartan-Formen erhalten wir zwei kanonische
+Trivialisierungen des Tangentialbündels $T G$:
+\[
+\begin{aligned}
+\operatorname{triv}_L:T G&\longrightarrow G\times\mathfrak g,&
+v_g&\longmapsto\bigl(g,\omega_G(v_g)\bigr),\\
+\operatorname{triv}_R:T G&\longrightarrow G\times\mathfrak g,&
+v_g&\longmapsto\bigl(g,\omega_G^{\mathrm{right}}(v_g)\bigr).
+\end{aligned}
+\]
+Ihre Inversen sind gegeben durch
+\[
+\operatorname{triv}_L^{-1}(g,v)=L^v(g),\qquad
+\operatorname{triv}_R^{-1}(g,v)=R^v(g),
+\]
+wobei $L^v$ (resp.\ $R^v$) das links- (resp.\ rechts-)invariante
+Vektorfeld mit $L^v(e)=v$ (resp.\ $R^v(e)=v$) bezeichnet.
+\end{DEF}
+
+\begin{DEF}{LIE-L09-06-07}{Linke Identifikation des Tangentialbündels durch linke Maurer-Cartan Trivialisierung}
+Im Folgenden identifizieren wir $T G$ mittels der \emph{linken
+Maurer--Cartan-Trivialisierung}
+\[
+v_g\longmapsto(g,\omega_G(v_g))=(g,\,T L_g^{-1}v_g)
+\]
+mit $G\times\mathfrak g$, sofern nichts anderes angegeben ist.
+\end{DEF}
+
+\subsection{Exampel}
+
+\begin{EXA}{LIE-L09-06-12}{Beispiel: $\mathrm{SO}(2)$}
+Für $G=\SO(2)$ mit
+\[
+g=
+\begin{bmatrix}
+x^1_1 & x^1_2\\
+x^2_1 & x^2_2
+\end{bmatrix},
+\qquad
+(x^1_1)^2+(x^2_1)^2=1,\quad x^1_1=x^2_2,\quad x^2_1=-x^1_2,
+\]
+ergibt sich
+$$
+\begin{aligned}
+{\left[\begin{array}{cc}
+x_{2}^{2} & -x_{2}^{1} \\
+-x_{1}^{2} & x_{1}^{1}
+\end{array}\right]\left[\begin{array}{cc}
+d x_{1}^{1} & d x_{2}^{1} \\
+d x_{1}^{2} & d x_{2}^{2}
+\end{array}\right] } & =\left[\begin{array}{cc}
+x_{2}^{2} d x_{1}^{1}-x_{2}^{1} d x_{1}^{2} & x_{2}^{2} d x_{2}^{1}-x_{2}^{1} d x_{2}^{2} \\
+-x_{1}^{2} d x_{1}^{1}+x_{1}^{1} d x_{1}^{2} & -x_{1}^{2} d x_{2}^{1}+x_{1}^{1} d x_{2}^{2}
+\end{array}\right] \\
+& =\left[\begin{array}{cc}
+x_{1}^{1} d x_{1}^{1}-x_{2}^{1} d x_{1}^{2} & x_{1}^{1} d x_{2}^{1}-x_{2}^{1} d x_{2}^{2} \\
+x_{2}^{1} d x_{1}^{1}+x_{1}^{1} d x_{1}^{2} & x_{2}^{1} d x_{2}^{1}+x_{1}^{1} d x_{2}^{2}
+\end{array}\right]
+\end{aligned}
+$$
+Da $\mathfrak{so}(2)$ antisymmetrisch ist, folgt
+\[
+\omega_{\SO(2)}=
+\begin{bmatrix}
+0 & x^1_1dx^1_2-x^2_1dx^2_2\\[4pt]
+-(x^1_1dx^1_2-x^2_1dx^2_2) & 0
+\end{bmatrix}.
+\]
+\end{EXA}
+
+\subsection{Propositionen}
+
+\begin{PROP}{LIE-L09-06-03}{Trivialität des Tangentialbündels einer Lie-Gruppe}
+Das Tangentialbündel einer Lie-Gruppe $G$ ist trivial:
+\[
+T G \cong G\times\mathfrak g.
+\]
+Die Abbildungen $\operatorname{triv}_L$ und $\operatorname{triv}_R$
+sind Bündelisomorphismen und heißen die \emph{linke} bzw. \emph{rechte
+Maurer--Cartan-Trivialisierung}.
+\end{PROP}
+
+\begin{LEM}{LIE-L09-06-04}{Links-Rechts Lemma für Trivialisierung}
+For any $v \in \mathfrak{g}$, and $g \in G$ we have
+$$
+\operatorname{triv}_{R} \circ \operatorname{triv}_{L}^{-1}(g, v)=\left(g, \operatorname{Ad}_{g}(v)\right)
+$$
+\end{LEM}
+
+\begin{PROOF}{LIE-L09-06-05}{P: Links-Rechts Lemma für Trivialisierung}
+We compute:
+$$
+\begin{aligned}
+& \operatorname{triv}_{R} \circ \operatorname{triv}_{L}^{-1}(g, v) \\
+& =\left(g, T R_{g^{-1}} T L_{g} v\right)=\left(g, T\left(R_{g^{-1}} L_{g}\right) \cdot v\right) \\
+& =\left(g, T C_{g} \cdot v\right)=\left(g, \operatorname{Ad}_{g}(v)\right)
+\end{aligned}
+$$
+\end{PROOF}
+
+\begin{CONC}{LIE-L09-06-06}{Prinzipielle Äquivalenz der Trivialisierungen}
+Es besteht kein prinzipieller Grund, zwischen linker und rechter
+Trivialisierung zu unterscheiden; beide liefern äquivalente Beschreibungen.
+So könnte man die Lie-Algebra auch über rechtsinvariante Vektorfelder
+definieren. Das obige Lemma zeigt, dass die Adjoint-Abbildung
+die Brücke zwischen beiden Darstellungen bildet.
+\end{CONC}
+
+\begin{CONC}{LIE-L09-06-08}{3 Trivialisierungen des Tangentialbündels von $\GL$}
+Für die allgemeine lineare Gruppe existieren drei natürliche
+Trivialisierungen des Tangentialbündels:
+die Standardtrivialisierung von $T\GL(n)$
+sowie die linken und rechten Maurer--Cartan-Trivialisierungen.
+Die Standardtrivialisierung ist in der Tat die Beschränkung
+der Maurer--Cartan-Trivialisierung der abelschen Lie-Gruppe
+$(M_{n\times n},+)$ auf $T\GL(n)$.
+\end{CONC}
+
+\begin{PROP}{LIE-L09-06-09}{Darstellung grundlegender Operationen unter der linken MC-Trivialisierung}
+Sei $T G\cong G\times\mathfrak g$ durch die linke Maurer--Cartan-Form
+identifiziert. Dann nehmen die folgenden Standardabbildungen
+die nachstehenden Formen an:
+
+(1) \textbf{Tangentialabbildung der Linkstranslation.} The tangent map of the left translation $T L_{g}: T G \rightarrow T G$ takes the form " $T L_{g}$ " : $(x, v) \mapsto(g x, v)$. Indeed, the following diagram commutes:
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+T G \arrow[r, "T L_g"] \arrow[d] & T G \arrow[d] \\
+G \times \mathfrak{g} \arrow[r, "{\text{``}T L_g\text{''}}"] & G \times \mathfrak{g}
+\end{tikzcd}
+\]
+where elementwise we have
+\[
+\begin{tikzcd}
+v_x \arrow[r, "TL_g"] \arrow[d] & TL_g \cdot v_x \arrow[d] \\
+(x,\, TL_x^{-1} v_x) = (x,\, v) \arrow[r] & (gx,\, TL_{gx}^{-1} TL_g v_x) = (gx,\, v)
+\end{tikzcd}
+\]
+
+
+(2) \textbf{Tangentialabbildung der Gruppenmultiplikation.} The tangent map of multiplication: This time we will invoke two identifications. First, group multiplication is a map $\mu: G \times G \rightarrow G$, and so on the tangent level we have a map $T(G \times G) \rightarrow T G$. Recall that we have a natural isomorphism $T(G \times G) \cong T G \times T G$ given by $T \pi_{1} \times T \pi_{2}:\left(v_{(x, y)}\right) \mapsto\left(T \pi_{1} \cdot v_{(x, y)}, T \pi_{2} \cdot v_{(x, y)}\right)$. If we also identify $T G$ with $G \times \mathfrak{g}$, then $T G \times T G \cong(G \times \mathfrak{g}) \times(G \times \mathfrak{g})$, and we end up with the following "version" of $T \mu$ :
+$$
+\begin{aligned}
+& \text { " } T \mu \text { " }:(G \times \mathfrak{g}) \times(G \times \mathfrak{g}) \rightarrow G \times \mathfrak{g}, \\
+& \text { " } T \mu \text { " }:((x, v),(y, w)) \mapsto\left(x y, T R_{y} v+T L_{x} w\right)
+\end{aligned}
+$$
+
+(3) \textbf{Linke Maurer--Cartan-Form.} The (left) Maurer-Cartan form is a map $\omega_{G}: T G \rightarrow T_{e} G=\mathfrak{g}$, and so there must be a "version", " $\omega_{G}$ ", that uses the identification $T G \cong G \times \mathfrak{g}$. In fact, the map we seek is just projection:
+$$
+\text { " } \omega_{G} \text { " : }(x, v) \mapsto v .
+$$
+
+(4) \textbf{Rechte Maurer--Cartan-Form.} The right Maurer-Cartan form is a little more complicated since we are currently using the isomorphism $T G \cong G \times \mathfrak{g}$ obtained from the left Maurer-Cartan form. From Lemma 5.93 we obtain:
+$$
+\text { " } \omega_{G}^{\text {right }} \text { " }:(x, v) \mapsto \operatorname{Ad}_{g}(v) .
+$$
+The adjoint map is nearly the same thing as the right MaurerCartan form if we decide to use the left trivialization $T G \cong G \times \mathfrak{g}$ as an identification.
+
+
+(5) \textbf{Vektorfelder.} A vector field $X \in \mathfrak{X}(G)$ should correspond to a section of the projection $G \times \mathfrak{g} \rightarrow G$ which must have the form $\overleftrightarrow{X}: x \mapsto\left(x, F^{X}(x)\right)$ for some smooth $\mathfrak{g}$-valued function $F^{X} \in C^{\infty}(G ; \mathfrak{g})$. It is an easy consequence of the definitions that $F^{X}(x)=\omega_{G}(X(x))= T L_{x}^{-1} \cdot X(x)$. Under this identification, a left invariant vector field becomes a constant section of $G \times \mathfrak{g}$. For example, if $X$ is left invariant, then the corresponding constant section is $x \mapsto(x, X(e))$.
+\end{PROP}
+
+\begin{PROP}{LIE-L09-06-10}{Maurer--Cartan-Form für Matrixgruppen}
+Sei $G$ eine Lie-Untergruppe von $\GL(n)$.  
+Bezeichne durch $x^i_j:\GL(n)\to\mathbb R$ die Koordinatenfunktionen
+\[
+x^i_j(A)=a^i_j,\qquad A=[a^i_j],
+\]
+und durch $dx^i_j$ die zugehörigen Differentialformen.  
+Sowohl $x^i_j$ als auch $dx^i_j$ schränken sich auf $G$ ein;  
+diese Einschränkungen bezeichnen wir mit denselben Symbolen.  
+
+Dann kann die (linke) Maurer--Cartan-Form von $G$ geschrieben werden als
+\[
+\omega_G = [x^i_j]^{-1}[dx^i_j].
+\]
+In Kurzschreibweise wird dies häufig notiert als
+\[
+\omega_G = g^{-1}dg.
+\]
+\end{PROP}
+
+\begin{PROOF}{LIE-L09-06-11}{P: Maurer--Cartan-Form für Matrixgruppen}
+Ein Tangentialvektor $v_g\in T_gG$ kann in Koordinaten der Umgebung
+in $\GL(n)$ dargestellt werden als
+\[
+v_g=\sum v^i_j\,
+\left.\frac{\partial}{\partial x^i_j}\right|_g.
+\]
+Dann ergibt die Auswertung der Maurer--Cartan-Form
+\[
+\omega_G(v_g)
+=[x^i_j]^{-1}[dx^i_j](v_g)
+=[g^i_j]^{-1}[v^i_j],
+\]
+wobei die Matrix $[g^i_j]^{-1}[v^i_j]$ als Element der Lie-Algebra
+$\mathfrak g$ zu interpretieren ist.
+\end{PROOF}
+
+\begin{PROP}{LIE-L09-06-13}{Herleitung über die Einbettung in den Matrizenraum}
+Sei $G\subset\GL(n)$ mit Inklusion $j:G\hookrightarrow M_{n\times n}$.
+Dann gilt für die zugehörigen Ableitungen
+\[
+dj:T G\longrightarrow T M_{n\times n}\cong M_{n\times n}.
+\]
+Für $g\in G$ betrachten wir die Linksabbildungen
+\[
+L_g:G\to G,\qquad \mathcal L_g:M_{n\times n}\to M_{n\times n},
+\quad \mathcal L_g(A)=gA.
+\]
+Da $\mathcal L_g$ linear ist, gilt $D\mathcal L_g(A)=\mathcal L_g$ für alle $A$.
+Somit kommutieren die Diagramme
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+M_{n\times n}\arrow[r,"\mathcal L_g"] & M_{n\times n}\\
+G\arrow[u,"j"]\arrow[r,"L_g"] & G\arrow[u,"j"]
+\end{tikzcd}
+\qquad
+\begin{tikzcd}[row sep=large, column sep=large]
+M_{n\times n}\arrow[r,"\mathcal L_g"] & M_{n\times n}\\
+T_hG\arrow[u,"dj|_h"]\arrow[r,"T_hL_g"] & T_{gh}G\arrow[u,"dj|_{gh}"]
+\end{tikzcd}
+\]
+für jedes $h\in G$.
+
+Für $v_g\in T_gG$ erhalten wir daher
+\[
+\begin{aligned}
+dj|_e\bigl(\omega_G(v_g)\bigr)
+&=dj|_e(T L_{g^{-1}}v_g)
+=\mathcal L_{g^{-1}}(dj|_g v_g)
+=g^{-1}\,dj|_g(v_g)\\
+&=(j\circ\pi(v_g))^{-1}dj(v_g),
+\end{aligned}
+\]
+wobei $\pi:T G\to G$ die Bündelprojektion ist.  
+Da $dj|_e$ lediglich die Identifikation von $T_eG$ mit $\mathfrak g$
+bewirkt, können wir sie im Symbol unterdrücken und schreiben schließlich:
+\[
+\boxed{\;\omega_G = j^{-1}dj.\;}
+\]
+Da für Matrixgruppen $j(A)=[x^i_j(A)]=[a^i_j]$ gilt, folgt
+\[
+\omega_G = [x^i_j]^{-1}[dx^i_j]
+= g^{-1}dg.
+\]
+Dies erklärt die Bedeutung des häufig verwendeten Ausdrucks
+$g^{-1}dg$ für die Maurer--Cartan-Form in Matrixgruppen.
+\end{PROP}
+
+\end{document}

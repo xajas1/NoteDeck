@@ -1,0 +1,20 @@
+{
+  "score": 0.6,
+  "verdict": "Teilweise korrekt, aber unvollständig.",
+  "weaknesses": [
+    {
+      "code": "MISSING_TRANSITION",
+      "msg": "Die Glattheit der Übergangsfunktion \u001fvarphi_1 \u001fvarphi_2^{-1} wurde nicht explizit gezeigt.",
+      "math_hint": "\u001fvarphi_1 \u001fvarphi_2^{-1}(x,y) = (x,y) sollte explizit berechnet werden."
+    },
+    {
+      "code": "HOLOMORPHY_MISCONCEPTION",
+      "msg": "Holomorphie wurde falsch interpretiert.",
+      "math_hint": "Holomorphie erfordert komplexe Differenzierbarkeit, nicht nur Glattheit."
+    }
+  ],
+  "fix_suggestions": [
+    "\\varphi_1 \\circ \\varphi_2^{-1}(x,y) = (x,y) \\text{ explizit zeigen}",
+    "\\text{Holomorphie korrekt definieren: komplexe Struktur erfordert komplexe Karten}"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "score": 0.7,
+  "verdict": "Die Lösung ist teilweise korrekt, aber es gibt einige Unklarheiten und fehlende Details.",
+  "weaknesses": [
+    {
+      "code": "MISSING_DEFINITION",
+      "msg": "Die Definition von \\mathrm{O}(2n) wurde nicht korrekt spezifiziert.",
+      "math_hint": "\\mathrm{O}(2n) sollte als Gruppe von 2n \\times 2n orthogonalen Matrizen definiert werden."
+    },
+    {
+      "code": "INCOMPLETE_PROOF",
+      "msg": "Die Herleitung der Gleichheit \\mathrm{GL}_n(\\mathbb{C}) \\cap \\mathrm{O}(2n) = \\mathrm{U}(n) ist unvollständig.",
+      "math_hint": "Es fehlt die explizite Herleitung, warum eine Matrix in \\mathrm{GL}_n(\\mathbb{C}) und \\mathrm{O}(2n) gleichzeitig in \\mathrm{U}(n) liegt."
+    }
+  ],
+  "fix_suggestions": [
+    "\\mathrm{O}(2n) = \\{ A \\in \\mathbb{R}^{2n \\times 2n} \\mid A^T A = I_{2n} \\}",
+    "Zeige explizit: Wenn A \\in \\mathrm{GL}_n(\\mathbb{C}) \\cap \\mathrm{O}(2n), dann A^* A = I_n, was A \\in \\mathrm{U}(n) impliziert."
+  ]
+}

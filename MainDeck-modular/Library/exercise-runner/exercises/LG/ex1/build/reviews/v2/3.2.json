@@ -1,0 +1,20 @@
+{
+  "score": 0.8,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+  "weaknesses": [
+    {
+      "code": "MISSING_REALITY_CONDITION",
+      "msg": "Die Herleitung, dass $C$ reell ist, könnte klarer sein.",
+      "math_hint": "Es sollte explizit gezeigt werden, dass $C = \bar{C}$ aus $C^T = \bar{C^T}$ folgt."
+    },
+    {
+      "code": "MISSING_DETERMINANT_CONDITION",
+      "msg": "Die Bedingung $\text{det}(C) = 1$ wird nicht ausreichend hergeleitet.",
+      "math_hint": "Es sollte gezeigt werden, dass $\text{det}(C) = 1$ aus den gegebenen Bedingungen folgt."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Zeige explizit: } C = \\bar{C} \\Rightarrow C \\text{ ist reell.}",
+    "\\text{Zeige: } \\text{det}(C) = 1 \\text{ folgt aus } C \\in \\mathrm{SO}(n, \\mathbb{C}) \\cap \\mathrm{SU}(n)."
+  ]
+}

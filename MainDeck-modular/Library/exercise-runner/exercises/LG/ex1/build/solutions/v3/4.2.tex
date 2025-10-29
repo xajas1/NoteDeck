@@ -1,0 +1,72 @@
+Um die semidirekte Produktstruktur von $\operatorname{UT}_n(\mathbb{K})$ zu zeigen, müssen wir die Normalität von $\operatorname{SUT}_n(\mathbb{K})$ in $\operatorname{UT}_n(\mathbb{K})$ und die Eindeutigkeit der Darstellung jeder Matrix in $\operatorname{UT}_n(\mathbb{K})$ als Produkt von Matrizen aus $\operatorname{SUT}_n(\mathbb{K})$ und $\operatorname{Diag}_n(\mathbb{K})$ nachweisen.
+
+Zunächst zur Normalität: Sei $A \in \operatorname{SUT}_n(\mathbb{K})$ und $D \in \operatorname{Diag}_n(\mathbb{K})$. Wir betrachten das Produkt $DAD^{-1}$:
+
+\begin{align*}
+D &= \operatorname{diag}(d_1, d_2, \ldots, d_n), \\
+D^{-1} &= \operatorname{diag}(d_1^{-1}, d_2^{-1}, \ldots, d_n^{-1}).
+\end{align*}
+
+Dann ist
+
+\begin{align*}
+DAD^{-1} &= \begin{pmatrix}
+d_1 & 0 & \cdots & 0 \\
+0 & d_2 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & d_n
+\end{pmatrix}
+\begin{pmatrix}
+1 & a_{12} & \cdots & a_{1n} \\
+0 & 1 & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & 1
+\end{pmatrix}
+\begin{pmatrix}
+d_1^{-1} & 0 & \cdots & 0 \\
+0 & d_2^{-1} & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & d_n^{-1}
+\end{pmatrix} \\
+&= \begin{pmatrix}
+1 & d_1 a_{12} d_2^{-1} & \cdots & d_1 a_{1n} d_n^{-1} \\
+0 & 1 & \cdots & d_2 a_{2n} d_n^{-1} \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & 1
+\end{pmatrix}.
+\end{align*}
+
+Da die Diagonalelemente von $DAD^{-1}$ weiterhin Einsen sind, folgt $DAD^{-1} \in \operatorname{SUT}_n(\mathbb{K})$, was die Normalität zeigt.
+
+Nun zur Eindeutigkeit der Darstellung. Sei $U \in \operatorname{UT}_n(\mathbb{K})$. Wir schreiben $U = SD$, wobei $S \in \operatorname{SUT}_n(\mathbb{K})$ und $D \in \operatorname{Diag}_n(\mathbb{K})$. Die Matrix $D$ wird gebildet, indem man die Diagonalelemente von $U$ nimmt:
+
+\begin{align*}
+D &= \operatorname{diag}(u_{11}, u_{22}, \ldots, u_{nn}).
+\end{align*}
+
+Dann ist $S = UD^{-1}$, und wir überprüfen die Eindeutigkeit:
+
+\begin{align*}
+S &= \begin{pmatrix}
+u_{11} & u_{12} & \cdots & u_{1n} \\
+0 & u_{22} & \cdots & u_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & u_{nn}
+\end{pmatrix}
+\begin{pmatrix}
+u_{11}^{-1} & 0 & \cdots & 0 \\
+0 & u_{22}^{-1} & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & u_{nn}^{-1}
+\end{pmatrix} \\
+&= \begin{pmatrix}
+1 & u_{12} u_{22}^{-1} & \cdots & u_{1n} u_{nn}^{-1} \\
+0 & 1 & \cdots & u_{2n} u_{nn}^{-1} \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & 1
+\end{pmatrix}.
+\end{align*}
+
+Da $D$ eindeutig durch die Diagonalelemente von $U$ bestimmt ist, ist auch $S$ eindeutig bestimmt. Somit ist $\operatorname{UT}_n(\mathbb{K})$ das semidirekte Produkt von $\operatorname{SUT}_n(\mathbb{K})$ und $\operatorname{Diag}_n(\mathbb{K})$.
+
+%CHECK: Detaillierte Herleitung der Eindeutigkeit von S und vollständige Überprüfung der Normalität von SUT_n(K) ergänzt.

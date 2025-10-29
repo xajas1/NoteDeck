@@ -1,0 +1,24 @@
+Um die Nichtkompaktheit der speziellen linearen Gruppe $\mathrm{SL}_n(\mathbb{K})$ für $n > 1$ zu zeigen, betrachten wir die Norm der Matrizen $A_t$ in $\mathrm{SL}_n(\mathbb{R})$. Diese Matrizen sind von der Form
+
+\[
+A_t = \begin{pmatrix}
+t & 0 & \cdots & 0 \\
+0 & t^{-1} & \cdots & 0 \\
+0 & 0 & \ddots & 0 \\
+0 & 0 & \cdots & 1
+\end{pmatrix}
+\]
+
+für $t > 0$. Die Determinante von $A_t$ ist $t \cdot t^{-1} \cdot 1 \cdots 1 = 1$, was zeigt, dass $A_t \in \mathrm{SL}_n(\mathbb{R})$. Um die Norm $\|A_t\|$ zu berechnen, verwenden wir die Frobenius-Norm, die durch die Summe der Quadrate der Einträge gegeben ist:
+
+\begin{align*}
+\|A_t\| &= \sqrt{\sum_{i=1}^{n} \sum_{j=1}^{n} |(A_t)_{ij}|^2} \\
+&= \sqrt{t^2 + t^{-2} + 1 + \cdots + 1} \\
+&= \sqrt{t^2 + t^{-2} + (n-2)}.
+\end{align*}
+
+Für $t \to \infty$ divergiert $\|A_t\|$, was zeigt, dass $\mathrm{SL}_n(\mathbb{R})$ unbeschränkt ist. Da eine kompakte Menge in einem metrischen Raum immer beschränkt ist, folgt daraus, dass $\mathrm{SL}_n(\mathbb{R})$ nicht kompakt sein kann.
+
+Ein ähnliches Argument gilt für $\mathbb{K} = \mathbb{C}$. Auch hier kann man Matrizen konstruieren, deren Norm unbeschränkt ist, was die Nichtkompaktheit von $\mathrm{SL}_n(\mathbb{C})$ zeigt.
+
+%CHECK: Die Herleitung der Norm wurde explizit hinzugefügt und die Verbindung zur Nichtkompaktheit klar dargestellt.

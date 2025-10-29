@@ -1,0 +1,3003 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17  Graphik
+% 18  Extra
+% 00. Titel und Autor
+
+\usepackage{slashed}
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\Sp}{\mathrm{Sp}}
+\newcommand{\Ogroup}{\mathrm{O}}
+\newcommand{\U}{\mathrm{U}}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\graphicspath{{../../Library/Images/}}
+\usepackage[export]{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+% Hellblau definieren
+\definecolor{hellblau}{rgb}{0.3,0.6,1}
+\newenvironment{note}{\par\begingroup\color{hellblau}\itshape}{\par\endgroup}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\begin{unitbox}\CustomHeading{Definition}{#1}{#2}}{\end{unitbox}}
+\newenvironment{PROP}[2]{\begin{unitbox}\CustomHeading{Proposition}{#1}{#2}}{\end{unitbox}}
+\newenvironment{THEO}[2]{\begin{unitbox}\CustomHeading{Theorem}{#1}{#2}}{\end{unitbox}}
+\newenvironment{LEM}[2]{\begin{unitbox}\CustomHeading{Lemma}{#1}{#2}}{\end{unitbox}}
+\newenvironment{KORO}[2]{\begin{unitbox}\CustomHeading{Corollar}{#1}{#2}}{\end{unitbox}}
+\newenvironment{REM}[2]{\begin{unitbox}\CustomHeading{Remark}{#1}{#2}}{\end{unitbox}}
+\newenvironment{EXA}[2]{\begin{unitbox}\CustomHeading{Example}{#1}{#2}}{\end{unitbox}}
+\newenvironment{STUD}[2]{\begin{unitbox}\CustomHeading{Study}{#1}{#2}}{\end{unitbox}}
+\newenvironment{CONC}[2]{\begin{unitbox}\CustomHeading{Concept}{#1}{#2}}{\end{unitbox}}
+\newenvironment{OTH}[2]{\begin{unitbox}\CustomHeading{Other}{#1}{#2}}{\end{unitbox}}
+\newenvironment{EXE}[2]{\begin{unitbox}\CustomHeading{Exercise}{#1}{#2}}{\end{unitbox}}
+\newenvironment{MOT}[2]{\begin{unitbox}\CustomHeading{Motivation}{#1}{#2}}{\end{unitbox}}
+\newenvironment{PROOF}[2]{\begin{unitbox}\CustomHeading{Proof}{#1}{#2}}{\end{unitbox}}
+
+% --- Unit Umgebung für Source-Inhalte ---
+\usepackage{mdframed}
+\newmdenv[
+  linewidth=1pt,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftmargin=0cm,
+  rightmargin=0cm,
+  skipabove=10pt,
+  skipbelow=10pt,
+  innertopmargin=0.5\baselineskip,
+  innerbottommargin=0.5\baselineskip,
+  backgroundcolor=gray!10,
+  linecolor=gray
+]{unitbox}
+
+\newenvironment{unit}[1]
+  {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
+  {\end{unitbox}}
+
+% --- 17. ... ---
+
+% --- 18. Extras ---
+\usepackage{stmaryrd}
+\usepackage{bbold}  % falls du \mathbb{1} nutzen willst
+
+% --- 00. Titel und Autor ---
+\title{Mein Titel}
+\author{Tim Jaschik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+Kurze Beschreibung …
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\tableofcontents
+
+\pagebreak
+
+\section*{Spinors and the classical Dirac operator}
+\subsection*{Clifford algebras}
+Definition 2.1.1. Let $\mathbb{K}=\mathbb{R}$ or $\mathbb{C}$ and let $V$ be a finite-dimensional $\mathbb{K}$-vector space equipped with a symmetric bilinear form $\beta$.\\
+A Clifford algebra for ( $V, \beta$ ) is a unital $\mathbb{K}$-algebra $A$ together with a linear map $\imath: V \rightarrow A$ such that the following properties hold:\\
+i) $\imath(v)^{2}=-\beta(v, v) \cdot 1, \quad$ for all $v \in V$,\\
+ii) ( $A, \imath$ ) is universal with respect to i), i.e.:
+
+Whenever $A^{\prime}$ is a unital $\mathbb{K}$-algebra with a linear map $\imath^{\prime}: V \rightarrow A^{\prime}$ satisfying i) then there exists a unique algebra homomorphism $\phi: A \rightarrow A^{\prime}$ such that the diagram\\
+\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-071}\\
+commutes. In other words: $A$ is the smallest algebra that satisfies property i ).
+
+Remark 2.1.2. By a polarization argument, one immediately sees that property i) above is equivalent to the Clifford relation
+
+$$
+\left.\mathrm{i}^{\prime}\right) \quad \imath(v) \cdot \imath(w)+\imath(w) \cdot \imath(v)=-2 \beta(v, w) \cdot 1, \quad \text { for all } v, w \in V .
+$$
+
+Remark 2.1.3. Let ( $M, g$ ) be a Riemannian manifold and let $D \in$ Diff $_{1}(E, E)$ be a formally self-adjoint Dirac-type operator. By equation (1.18), property i) holds for $(V, \beta)=\left(T_{x}^{*} M,\left.g\right|_{x}\right), A=\operatorname{End}\left(E_{x}\right)$, and $\imath=\sigma_{1}(D, \cdot)$. However, ii), does not hold in general.
+
+Example 2.1.4. Let $\beta=0$. The Clifford relation (2.1) yields $\imath(v) \cdot \imath(w)=-\imath(w) \cdot \imath(v)$ for all $v, w \in V$. Let $n=\operatorname{dim}(V)$ and let $A:=\Lambda^{\bullet} V=\bigoplus_{k=0}^{n} \Lambda^{k} V$ be the exterior algebra\\
+of $V$. The map $\imath: V \xrightarrow{\cong} \Lambda^{1} V \hookrightarrow \Lambda^{\bullet} V=A$ obviously satisfies property i).\\
+Now let $\imath^{\prime}: V \rightarrow A^{\prime}$ be any map from $V$ to a $\mathbb{K}$-algebra $A^{\prime}$ satisfying property i). A morphism $\phi: A=\Lambda^{k} V \rightarrow A^{\prime}$ as in property ii) necessarily satisfies
+
+$$
+\begin{aligned}
+\phi\left(v_{1} \wedge \ldots \wedge v_{k}\right) & =\phi\left(\imath\left(v_{1}\right) \wedge \ldots \wedge \imath\left(v_{k}\right)\right) \\
+& =\phi\left(\imath\left(v_{1}\right)\right) \cdot \ldots \cdot \phi\left(\imath\left(v_{k}\right)\right) \\
+& =\imath^{\prime}\left(v_{1}\right) \cdot \ldots \cdot \imath^{\prime}\left(v_{k}\right)
+\end{aligned}
+$$
+
+Hence $\phi$ is uniquely determined. Clearly, $\phi: \Lambda^{k} V \rightarrow A^{\prime}$ defined by this formula yields a homomorphism with $\phi \circ \imath=\imath^{\prime}$.
+
+Proposition 2.1.5. Let $V$ be a finite-dimensional $\mathbb{K}$-vector space and let $\beta$ be a symmetric bilinear form on $V$.\\
+Then there exists a Clifford algebra ( $A, \imath$ ) for ( $V, \beta$ ). The pair ( $A, \imath$ ) is unique up to isomorphism.
+
+Proof.\\
+Uniqueness: Let ( $A, \imath$ ) and ( $A^{\prime}, \imath^{\prime}$ ) be two Clifford algebras for ( $V, \beta$ ).\\
+By the universal property for $A$, there exists an algebra homomorphism
+
+$$
+\phi: A \rightarrow A^{\prime},
+$$
+
+such that diagram 1 commutes.
+
+\begin{figure}[h]
+\begin{center}
+  \includegraphics[scale=0.3]{2025_10_29_567e9a909b434280ddc6g-072(1)}
+\end{center}
+\end{figure}
+
+Similarly, by the universal property for $A^{\prime}$, there exists an algebra homomorphism
+
+$$
+\psi: A^{\prime} \rightarrow A,
+$$
+
+such that diagram 2 commutes.
+
+\begin{figure}[h]
+\begin{center}
+  \includegraphics[scale=0.3]{2025_10_29_567e9a909b434280ddc6g-072}
+\end{center}
+\end{figure}
+
+We now combine both diagrams to the alongside commutative diagram. The uniqueness in the universal property of ( $A, \imath$ ) yields
+
+$$
+\psi \circ \phi=\operatorname{id}_{A}
+$$
+
+\begin{center}
+\includegraphics[scale=0.3]{2025_10_29_567e9a909b434280ddc6g-073(2)}
+\end{center}
+
+Analogously, we combine the first two diagrams to the alongside commutative diagram. Then the uniqueness in the universal property of ( $A^{\prime}, \imath^{\prime}$ ) yields
+
+$$
+\phi \circ \psi=\operatorname{id}_{A^{\prime}}
+$$
+
+\begin{center}
+\includegraphics[scale=0.3]{2025_10_29_567e9a909b434280ddc6g-073}
+\end{center}
+
+Thus $\phi$ is an isomorphism with inverse $\psi$.
+
+Existence: We consider the tensor algebra $\mathcal{T}(V):=\bigoplus_{k=0}^{\infty} \otimes^{k} V$ and define the inclusion $\imath_{0}: V \xrightarrow{\cong} \otimes^{1} V \hookrightarrow \mathcal{T}(V)$. Let $I \subset \mathcal{T}(V)$ be the two-sided ideal generated by all elements of the form
+
+$$
+v \otimes w+w \otimes v+2 \beta(v, w) \cdot 1, \quad v, w \in V
+$$
+
+Put $A:=\mathcal{T}(V) / I$ and denote by $\pi: \mathcal{T}(V) \rightarrow A$ the quotient homomorphism. Then define $\imath$ by the alongside commutative diagram, i.e., $\imath=\pi \circ \imath_{0}$.\\
+\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-073(1)}
+
+We check that the Clifford relation 2.1 (property i') in Definition 2.1.1) holds:
+
+$$
+\begin{aligned}
+\imath(v) \cdot \imath(w)+\imath(w) \cdot \imath(v) & =\pi\left(\imath_{0}(v)\right) \cdot \pi\left(\imath_{0}(w)\right)+\pi\left(\imath_{0}(w)\right) \cdot \pi\left(\imath_{0}(v)\right) \\
+& =\pi\left(\imath_{0}(v) \otimes \imath_{0}(w)+\imath_{0}(w) \otimes \imath_{0}(v)\right) \\
+& =\pi(v \otimes w+w \otimes v) \\
+& =\pi(-2 \beta(v, w) \cdot 1) \\
+& =-2 \beta(v, w) \cdot 1
+\end{aligned}
+$$
+
+We check that property ii) of Definition 2.1.1 holds: Let $A^{\prime}$ be any unital $\mathbb{K}$-algebra, together with a linear map $\imath^{\prime}: V \rightarrow A^{\prime}$ satisfying property i) of Definition 2.1.1.\\
+a) Uniqueness of $\phi$ : Let $\phi: A=\mathcal{T}(V) / I \rightarrow A^{\prime}$ be a homomorphism satisfying $\phi \circ \imath=\imath^{\prime}$. Then we have:
+
+$$
+\begin{aligned}
+\phi\left(\pi\left(v_{1} \otimes \ldots \otimes v_{k}\right)\right) & =\phi\left(\pi\left(\imath_{0}\left(v_{1}\right)\right)\right) \cdot \ldots \cdot \phi\left(\pi\left(\imath_{0}\left(v_{k}\right)\right)\right) \\
+& =\phi\left(\imath\left(v_{1}\right)\right) \cdot \ldots \cdot \phi\left(\imath\left(v_{k}\right)\right) \\
+& =\imath^{\prime}\left(v_{1}\right) \cdot \ldots \cdot \imath^{\prime}\left(v_{k}\right) .
+\end{aligned}
+$$
+
+Thus $\phi$ is uniquely determined.\\
+b) Existence of $\phi$ : Consider the unique homomorphism $\psi: \mathcal{T}(V) \rightarrow A^{\prime}$, such that the following diagram commutes. Then we have:\\
+\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-074(2)}
+
+$$
+\psi\left(v_{1} \otimes \ldots \otimes v_{k}\right)=\imath^{\prime}\left(v_{1}\right) \cdot \ldots \cdot \imath^{\prime}\left(v_{k}\right) .
+$$
+
+We need to check that the diagram factorizes through $A$, i.e., $\psi$ vanishes on the ideal $I$ and hence descends to the quotient $A=\mathcal{T}(V) / I$. For $v, w \in V$, we compute:
+
+$$
+\begin{aligned}
+& \psi(v \otimes w+w \otimes v+2 \beta(v, w) 1) \\
+& \quad=\psi\left(\imath_{0}(v) \otimes \imath_{0}(w)+\imath_{0}(w) \otimes \imath_{0}(v)+2 \beta(v, w) 1\right) \\
+& \quad=\psi\left(\imath_{0}(v)\right) \cdot \psi\left(\imath_{0}(w)\right)+\psi\left(\imath_{0}(w)\right) \cdot \psi\left(\imath_{0}(v)\right)+2 \beta(v, w) 1 \\
+& \quad=\imath^{\prime}(v) \cdot \imath^{\prime}(w)+\imath^{\prime}(w) \cdot \imath^{\prime}(v)+2 \beta(v, w) \cdot 1 \\
+& \quad=0
+\end{aligned}
+$$
+
+In the last equality we have used property i) from Definition 2.1.1 for $\imath^{\prime}: V \rightarrow A^{\prime}$.\\
+Thus $\psi: \mathcal{T}(V) \rightarrow A^{\prime}$ descends to a homomorphism
+
+$$
+\phi: A=\mathcal{T}(V) / I \rightarrow A^{\prime},
+$$
+
+such that the alongside diagram commutes. Clearly, the homomorphism $\phi$ is uniquely determined by the homomorphism $\psi$.\\
+\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-074(1)}
+
+Moreover, the alongside diagram commutes. We have thus constructed a homomorphism $\phi: A \rightarrow A^{\prime}$ satisfying $\phi \circ \imath=\imath^{\prime}$.\\
+\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-074}
+
+Definition 2.1.6. Let $V$ be a finite-dimensional $\mathbb{K}$-vector space, equipped with a symmetric bilinear form $\beta$. We denote the Clifford algebra for ( $V, \beta$ ) by $\mathbf{C l}(\boldsymbol{V}, \boldsymbol{\beta})$.
+
+Remark 2.1.7. Let $V$ be a finite-dimensional $\mathbb{K}$-vector space, and let $\beta$ be a symmetric bilinear form on $V$. For any Clifford algebra ( $A, \imath$ ) the map $\imath: V \rightarrow A$ is injective:
+
+If the symmetric form $\beta$ is definite then this is clear from i ) of Definition 2.1.1:
+
+$$
+\imath(v)^{2}=-\beta(v, v) \cdot 1
+$$
+
+In the general case, we have the alongside commutative diagram. Since $\imath_{1}(v)=v \notin I$, the map $\imath_{1}$ is injective. Hence so\\
+\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-075}\\
+is $\imath$.
+
+Remark 2.1.8. Let $V$ be a $\mathbb{K}$-vector space, and let $b_{1}, \ldots, b_{n} \in V$ be a basis of $V$. Then
+
+$$
+\left\{b_{i_{1}} \otimes \ldots \otimes b_{i_{k}}\right\} \underset{\substack{k \in \mathbb{N}_{0} \\ 1 \leq i_{1}, \ldots, i_{k} \leq n}}{ }
+$$
+
+is a basis of the vector space $\mathcal{T}(V)$. Thus the elements
+
+$$
+\left\{b_{i_{1}} \cdot \ldots \cdot b_{i_{k}}\right\} \underset{\substack{k \in \mathbb{N}_{0} \\ 1 \leq i_{1}, \ldots, i_{k} \leq n}}{ }
+$$
+
+generate the Clifford algebra $\mathcal{T}(V) / I$ as a vector space. We use the Clifford relations $b_{i} \cdot b_{j}=-b_{j} \cdot b_{i}-2 \beta\left(b_{i}, b_{j}\right) \cdot 1$ to express all elements of $\mathcal{T}(V) / I$ as linear combinations of
+
+$$
+\left\{b_{i_{1}} \cdot \ldots \cdot b_{i_{k}}\right\} \underset{1 \leq i_{1} \leq i_{2} \leq \ldots \leq i_{k} \leq n}{ }
+$$
+
+Moreover, we use the relation $b_{i} \cdot b_{i}=-\beta\left(b_{i}, b_{i}\right) \cdot 1$ to express all elements of $\mathcal{T}(V) / I$ as linear combinations of
+
+$$
+\left\{b_{i_{1}} \cdot \ldots \cdot b_{i_{k}}\right\}_{\substack{k=0,1, \ldots n \\ 1 \leq i_{1}<i_{2}<\ldots<i_{k} \leq n}}
+$$
+
+In particular, $\operatorname{dim} A \leq 2^{n}<\infty$. We will see later that $\operatorname{dim} A=2^{n}$, hence this generating system is a basis of the Clifford algebra $\operatorname{Cl}(V, \beta)$.
+
+Example 2.1.9. Consider $V=\mathbb{R}$ with the symmetric bilinear form $\beta(x, y):=x \cdot y$. Let $e_{1}$ be the standard basis of $\mathbb{R}$.
+
+\begin{itemize}
+  \item The elements 1 and $e_{1}$ generate $\operatorname{Cl}(\mathbb{R}, \beta)$ as a vector space. If $1, e_{1} \in \operatorname{Cl}(\mathbb{R}, \beta)$ were linearly dependent, i.e., $e_{1}=\alpha \cdot 1$ for some $\alpha \in \mathbb{R}$ then it would follow
+\end{itemize}
+
+$$
+\alpha^{2} \cdot 1=e_{1}^{2}=-\beta\left(e_{1}, e_{1}\right) \cdot 1=-1 .
+$$
+
+\begin{itemize}
+  \item The vector space isomorphism $\phi: \operatorname{Cl}(\mathbb{R}, \beta) \rightarrow \mathbb{C}$, defined by
+\end{itemize}
+
+$$
+\phi\left(\alpha 1+\beta e_{1}\right)=\alpha \cdot 1+\beta \cdot i,
+$$
+
+is also an algebra homomorphism. Hence, $\operatorname{Cl}(\mathbb{R}, \beta) \cong \mathbb{C}$.
+
+Example 2.1.10. Consider $V=\mathbb{R}$ with the symmetric bilinear form $\gamma(x, y):=-x \cdot y$. Let $e_{1}$ be the standard basis of $\mathbb{R}$. Then $e_{1}^{2}=-\gamma\left(e_{1}, e_{1}\right) 1=1$.
+
+\begin{itemize}
+  \item Again, 1 and $e_{1}$ generate $\mathrm{Cl}(\mathbb{R}, \gamma)$ as a vector space. If $1, e_{1} \in \mathrm{Cl}(\mathbb{R}, \gamma)$ were linearly dependent, i.e., $e_{1}=\alpha \cdot 1$ for some $\alpha \in \mathbb{R}$ then it would follow that
+\end{itemize}
+
+$$
+e_{1}-\alpha \cdot 1 \text { as an element of } \mathcal{T}(\mathbb{R}) \text { was contained in } I,
+$$
+
+in other words,
+
+$$
+e_{1}-\alpha \cdot 1=x \otimes\left(e_{1} \otimes e_{1}-1\right) \otimes y, \quad \text { for some } x, y \in \mathcal{T}(\mathbb{R}) .
+$$
+
+We write
+
+$$
+x=x_{\max }+x_{\text {lower }} \quad \text { and } \quad y=y_{\max }+y_{\text {lower }},
+$$
+
+where $x_{\text {max }} \neq 0$ and $y_{\text {max }} \neq 0$ are homogeneous of maximal degree. Then
+
+$$
+\underbrace{e_{1}-\alpha \cdot 1}_{\text {degree } \leq 1}=\underbrace{x_{\max } \otimes e_{1} \otimes e_{1} \otimes y_{\max }}_{\text {degree }=\operatorname{deg}\left(x_{\max }\right)+2+\operatorname{deg}\left(y_{\max }\right) \geq 2}+\underbrace{\text { l.o.t. }}_{\text {lower degree }}
+$$
+
+Thus,
+
+$$
+x_{\max } \otimes e_{1} \otimes e_{1} \otimes y_{\max }=0 \quad \downarrow \text { to } x_{\max } \neq 0, y_{\max } \neq 0
+$$
+
+Hence, $1, e_{1}$ form a vector space basis of $\operatorname{Cl}(\mathbb{R}, \gamma)$. Thus, $\frac{1}{2}\left(1+e_{1}\right), \frac{1}{2}\left(1-e_{1}\right)$ is also a vector space basis. Moreover, we have:
+
+$$
+\begin{aligned}
+& \frac{1}{2}\left(1 \pm e_{1}\right) \cdot \frac{1}{2}\left(1 \pm e_{1}\right)=\frac{1}{4}\left(1 \pm e_{1} \pm e_{1}+e_{1}^{2}\right)=\frac{1}{2}\left(1 \pm e_{1}\right) \\
+& \frac{1}{2}\left(1+e_{1}\right) \cdot \frac{1}{2}\left(1-e_{1}\right)=\frac{1}{4}\left(1-e_{1}+e_{1}-e_{1}^{2}\right)=0
+\end{aligned}
+$$
+
+\begin{itemize}
+  \item Consider the vector space isomorphism $\phi: \operatorname{Cl}(\mathbb{R}, \gamma) \rightarrow \mathbb{R} \oplus \mathbb{R}$,
+\end{itemize}
+
+$$
+\alpha \cdot \frac{1}{2}\left(1+e_{1}\right)+\beta \cdot \frac{1}{2}\left(1-e_{1}\right) \longmapsto(\alpha, \beta) .
+$$
+
+We check that $\phi$ is also an algebra homomorphism, where the multiplication in $\mathbb{R} \oplus \mathbb{R}$ is defined componentwise:
+
+$$
+\begin{aligned}
+& \phi\left(\left(\alpha \cdot \frac{1}{2}\left(1+e_{1}\right)+\beta \cdot \frac{1}{2}\left(1-e_{1}\right)\right) \cdot\left(\alpha^{\prime} \cdot \frac{1}{2}\left(1+e_{1}\right)+\beta^{\prime} \cdot \frac{1}{2}\left(1-e_{1}\right)\right)\right) \\
+& \stackrel{(2.2)}{=} \phi\left(\frac{\alpha \alpha^{\prime}}{2}\left(1+e_{1}\right)+\frac{\beta \beta^{\prime}}{2}\left(1-e_{1}\right)\right) \\
+& \quad=\left(\alpha \alpha^{\prime}, \beta \beta^{\prime}\right) \\
+& \quad=(\alpha, \beta) \cdot\left(\alpha^{\prime}, \beta^{\prime}\right) \\
+& \quad=\phi\left(\alpha \cdot \frac{1}{2}\left(1+e_{1}\right)+\beta \cdot \frac{1}{2}\left(1-e_{1}\right)\right) \cdot \phi\left(\alpha^{\prime} \cdot \frac{1}{2}\left(1+e_{1}\right)+\beta^{\prime} \cdot \frac{1}{2}\left(1-e_{1}\right)\right) .
+\end{aligned}
+$$
+
+The tensor algebra $\mathcal{T}(V)$ is $\mathbb{Z}$-graded, i.e., it admits a decomposition
+
+$$
+\mathcal{T}(V)=\bigoplus_{i \in \mathbb{Z}} \mathcal{T}^{i}(V)
+$$
+
+such that the multiplication of the homogeneous components corresponds to the addition of the degrees:
+
+$$
+\mathcal{T}^{i}(V) \cdot \mathcal{T}^{j}(V) \subset \mathcal{T}^{i+j}(V)
+$$
+
+where
+
+$$
+\mathcal{T}^{i}(V)= \begin{cases}\otimes^{i} V, & i \geq 0 \\ 0 & i<0\end{cases}
+$$
+
+This $\mathbb{Z}$-grading does not descend to a $\mathbb{Z}$-grading of $\mathrm{Cl}(V, \beta)$, unless $\beta=0$, because the ideal $I$ is not generated by homogeneous elements. In the generating elements $v \otimes w+w \otimes v+2 \beta(v, w) 1$ of the ideal $I$, the part $v \otimes w+w \otimes v$ has degree 2 , whereas $\beta(v, w) \cdot 1$ has degree 0.\\
+Instead of the $\mathbb{Z}$-grading of the tensor algebra, consider the $\mathbb{Z}_{2}$-grading
+
+$$
+\mathcal{T}(V)=\mathcal{T}^{\text {even }}(V) \bigoplus \mathcal{T}^{\text {odd }}(V)
+$$
+
+where
+
+$$
+\mathcal{T}^{\text {even }}(V)=\bigoplus_{i \text { even }} \mathcal{T}^{i}(V), \quad \mathcal{T}^{\text {odd }}(V)=\bigoplus_{i \text { odd }} \mathcal{T}^{i}(V)
+$$
+
+This grading descends to the Clifford algebra $\mathrm{Cl}(V, \beta)$, since the ideal $I$ is generated by elements in the even part.\\
+A more intrinsic definition of the $\mathbb{Z}_{2}$-grading is given as follows: Let $\imath: V \rightarrow \mathrm{Cl}(V, \beta)$ be the standard embedding. Consider $\imath^{\prime}: V \rightarrow \mathrm{Cl}(V, \beta)$, defined by
+
+$$
+\imath^{\prime}(v)=-\imath(v), \quad \forall v \in V
+$$
+
+Then $\imath^{\prime}$ satisfies
+
+$$
+\imath^{\prime}(v)^{2}=\imath(v)^{2}=-\beta(v, v) \cdot 1
+$$
+
+Thus, there exists an algebra homomorphism $\phi: \mathrm{Cl}(V, \beta) \rightarrow \mathrm{Cl}(V, \beta)$, such that the alongside diagram commutes.\\
+Upon identification of $\imath(V) \subset \mathrm{Cl}(V, \beta)$ with $V$ we have $\left.\phi\right|_{V}=-\mathrm{id}$.\\
+\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-077}
+
+This yields a decomposition
+
+$$
+\mathrm{Cl}(V, \beta)=\mathrm{Cl}^{0}(V, \beta) \oplus \mathrm{Cl}^{1}(V, \beta)
+$$
+
+where
+
+$$
+\begin{aligned}
+& \mathrm{Cl}^{0}(V, \beta)=+1-\text { eigenspace of } \phi \\
+& \mathrm{Cl}^{1}(V, \beta)=-1-\text { eigenspace of } \phi .
+\end{aligned}
+$$
+
+Definition 2.1.11. Let $A=A^{0} \oplus A^{1}$ and $B=B^{0} \oplus B^{1}$ be $\mathbb{Z}_{2}$-graded $\mathbb{K}$-algebras, where $\mathbb{K}=\mathbb{R}, \mathbb{C}$, i.e.
+
+$$
+A^{0} A^{0}+A^{1} A^{1} \subset A^{0}, \quad A^{0} A^{1}+A^{1} A^{0} \subset A^{1}
+$$
+
+Then the $\mathbb{Z}_{2}$-graded tensor product $A \hat{\otimes} B$ of $\mathbb{Z}_{2}$-graded algebras is given by
+
+$$
+A \hat{\otimes} B=A \otimes B \text { as a vector space, }
+$$
+
+where
+
+$$
+\begin{aligned}
+& (A \hat{\otimes} B)^{0}=A^{0} \otimes B^{0} \oplus A^{1} \otimes B^{1} \\
+& (A \hat{\otimes} B)^{1}=A^{0} \otimes B^{1} \oplus A^{1} \otimes B^{0}
+\end{aligned}
+$$
+
+with the multiplication
+
+$$
+(a \otimes b)\left(a^{\prime} \otimes b^{\prime}\right)=(-1)^{i j} a a^{\prime} \otimes b b^{\prime}, \quad a \in A, a^{\prime} \in A^{i}, b \in B^{j}, b^{\prime} \in B
+$$
+
+Let $\left(V_{i}, \beta_{i}\right), i=1,2$, be finite dimensional $\mathbb{K}$-vector spaces, equipped with symmetric bilinear forms. By $\beta_{1} \oplus \beta_{2}$, we denote the uniquely determined symmetric bilinear form on $V_{1} \oplus V_{2}$ which restricts to $\beta_{i}$ on $V_{i}$ and for which the subspaces $V_{i} \subset V_{1} \oplus V_{2}, i=1,2$, are mutually orthogonal.
+
+Proposition 2.1.12. Let $V_{i}, i=1,2$, be finite-dimensional $\mathbb{K}$-vector spaces, and let $\beta_{i}$ be symmetric bilinear forms on $V_{i}$. Then we have:
+
+$$
+\mathrm{Cl}\left(V_{1} \oplus V_{2}, \beta_{1} \oplus \beta_{2}\right) \cong \mathrm{Cl}\left(V_{1}, \beta_{1}\right) \hat{\otimes} \mathrm{Cl}\left(V_{2}, \beta_{2}\right)
+$$
+
+Proof.\\
+a) Consider the linear map
+
+$$
+\begin{aligned}
+j: V_{1} \oplus V_{2} & \rightarrow \mathrm{Cl}\left(V_{1}, \beta_{1}\right) \hat{\otimes} \mathrm{Cl}\left(V_{2}, \beta_{2}\right) \\
+v_{1}+v_{2} & \mapsto \imath_{1}\left(v_{1}\right) \otimes 1+1 \otimes \imath_{2}\left(v_{2}\right) .
+\end{aligned}
+$$
+
+By Definition 2.1.11, we have:
+
+$$
+\begin{aligned}
+j\left(v_{1}+v_{2}\right)^{2}= & \left(\imath_{1}\left(v_{1}\right) \otimes 1+1 \otimes \imath_{2}\left(v_{2}\right)\right)^{2} \\
+= & \left(\imath_{1}\left(v_{1}\right) \otimes 1\right)\left(\imath_{1}\left(v_{1}\right) \otimes 1\right)+\left(\imath_{1}\left(v_{1}\right) \otimes 1\right)\left(1 \otimes \imath_{2}\left(v_{2}\right)\right) \\
+& +\left(1 \otimes \imath_{2}\left(v_{2}\right)\right)\left(\imath_{1}\left(v_{1}\right) \otimes 1\right)+\left(1 \oplus \imath_{2}\left(v_{2}\right)\right)\left(1 \otimes \imath_{2}\left(v_{2}\right)\right) \\
+= & \imath_{1}\left(v_{1}\right)^{2} \otimes 1+\imath_{1}\left(v_{1}\right) \otimes \imath_{2}\left(v_{2}\right)-\imath_{1}\left(v_{1}\right) \otimes \imath_{2}\left(v_{2}\right)+1 \otimes \imath_{2}\left(v_{2}\right)^{2} \\
+= & -\beta_{1}\left(v_{1}, v_{1}\right) 1 \otimes 1+1 \otimes\left(-\beta_{2}\left(v_{2}, v_{2}\right) 1\right) \\
+= & -\left(\beta_{1}\left(v_{1}, v_{1}\right)+\beta_{2}\left(v_{2}, v_{2}\right)\right) 1 \otimes 1 \\
+= & -\left(\beta_{1} \oplus \beta_{2}\right)\left(v_{1}+v_{2}, v_{1}+v_{2}\right) 1 \otimes 1 .
+\end{aligned}
+$$
+
+In the last step we used the fact that the mixed terms in $\beta_{1} \oplus \beta_{2}\left(v_{1}+v_{2}, v_{1}+v_{2}\right)$ cancel, since $V_{1}, V_{2} \subset V_{1} \oplus V_{2}$ are mutually perpendicular with respect to $\beta_{1} \oplus \beta_{2}$.\\
+Thus, by the universal property for $\operatorname{Cl}\left(V_{1} \oplus V_{2}, \beta_{1} \oplus \beta_{2}\right)$ there exists an algebra homomorphism
+
+$$
+\phi: \operatorname{Cl}\left(V_{1} \oplus V_{2}, \beta_{1} \oplus \beta_{2}\right) \rightarrow \operatorname{Cl}\left(V_{1}, \beta_{1}\right) \hat{\otimes} \operatorname{Cl}\left(V_{2}, \beta_{2}\right)
+$$
+
+such that the diagram\\
+\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-079(1)}\\
+commutes.\\
+b) To show that $\phi$ is an isomorphism, we construct its inverse:
+
+By the universal property for $\operatorname{Cl}\left(V_{i}, \beta_{i}\right), i=1,2$, there exist unique algebra homomorphisms $\psi_{i}$ such that the diagrams\\
+\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-079}\\
+commute for $i=1,2$.\\
+We define the map $\psi: \operatorname{Cl}\left(V_{1}, \beta_{1}\right) \hat{\otimes} \operatorname{Cl}\left(V_{2}, \beta_{2}\right) \rightarrow \operatorname{Cl}\left(V_{1} \oplus V_{2}, \beta_{1} \oplus \beta_{2}\right)$ by
+
+$$
+\psi(a \otimes b):=\psi_{1}(a) \cdot \psi_{2}(b), \quad \text { for all } a \in \operatorname{Cl}\left(V_{1}, \beta_{1}\right), b \in \operatorname{Cl}\left(V_{2}, \beta_{2}\right) .
+$$
+
+The map $\psi$ is linear and also multiplicative: By Definition 2.1.11, we have for all $a \in \mathrm{Cl}\left(V_{1}, \beta_{1}\right), a^{\prime} \in \mathrm{Cl}\left(V_{1}, \beta_{1}\right)^{i}, b \in \mathrm{Cl}\left(V_{2}, \beta_{2}\right)^{j}, b^{\prime} \in \mathrm{Cl}\left(V_{2}, \beta_{2}\right):$
+
+$$
+\begin{aligned}
+\psi\left((a \otimes b)\left(a^{\prime} \otimes b^{\prime}\right)\right) & =\psi\left((-1)^{i j} a a^{\prime} \otimes b b^{\prime}\right) \\
+& =(-1)^{i j} \psi_{1}\left(a a^{\prime}\right) \cdot \psi_{2}\left(b b^{\prime}\right) \\
+& =(-1)^{i j} \psi_{1}(a) \cdot \psi_{1}\left(a^{\prime}\right) \cdot \psi_{2}(b) \cdot \psi_{2}\left(b^{\prime}\right) \\
+& =\psi_{1}(a) \cdot \psi_{2}(b) \cdot \psi_{1}\left(a^{\prime}\right) \cdot \psi_{2}\left(b^{\prime}\right) \\
+& =\psi(a \otimes b) \cdot \psi\left(a^{\prime} \otimes b^{\prime}\right) .
+\end{aligned}
+$$
+
+Hence, $\psi: \operatorname{Cl}\left(V_{1}, \beta_{1}\right) \hat{\otimes} \operatorname{Cl}\left(V_{2}, \beta_{2}\right) \rightarrow \operatorname{Cl}\left(V_{1} \oplus V_{2}, \beta_{1} \oplus \beta_{2}\right)$ is an algebra homomorphism.\\
+c) We check that $\psi$ is the inverse to $\phi$. We have the following commutative diagram:\\
+\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-080}
+
+The uniqueness in the universal property for $\operatorname{Cl}\left(V_{1} \oplus V_{2}\right)$ yields $\psi \circ \phi=\mathrm{id}$.\\
+To show that $\phi \circ \psi=\mathrm{id}$, we compute:
+
+$$
+\begin{aligned}
+\phi\left(\psi\left(\imath_{1}\left(v_{1}\right) \otimes \imath_{2}\left(v_{2}\right)\right)\right) & =\phi\left(\psi_{1}\left(\imath_{1}\left(v_{1}\right)\right) \cdot \psi_{2}\left(\imath_{2}\left(v_{2}\right)\right)\right) \\
+& =\phi\left(\left.\left.\imath\right|_{V_{1}}\left(v_{1}\right) \cdot \imath\right|_{V_{2}}\left(v_{2}\right)\right) \\
+& =\phi\left(\imath\left(v_{1}\right)\right) \cdot \phi\left(\imath\left(v_{2}\right)\right) \\
+& =j\left(v_{1}\right) \cdot j\left(v_{2}\right) \\
+& =\left(\imath_{1}\left(v_{1}\right) \otimes 1\right)\left(1 \otimes \imath_{2}\left(v_{2}\right)\right) \\
+& =\imath_{1}\left(v_{1}\right) \otimes \imath_{2}\left(v_{2}\right) .
+\end{aligned}
+$$ \(\square\)
+
+Corollary 2.1.13. Let $(V, \beta)$ be a finite dimensional $\mathbb{K}$-vector space, equipped with a symmetric bilinear form $\beta$. Then we have $\operatorname{dim}_{\mathbb{K}} \operatorname{Cl}(V, \beta)=2^{\operatorname{dim}_{\mathbb{K}} V}$.
+
+Proof. a) If $\left(V_{i}, \beta_{i}\right), i=1,2$, are $\mathbb{K}$-vector spaces with symmetric bilinear forms $\beta_{i}$ and if $f: V_{1} \rightarrow V_{2}$ is a $\mathbb{K}$-linear isomorphism such that for all $v, w \in V_{1}$ we have $\beta_{2}(f(v), f(w))=\beta_{1}(v, w)$, then the Clifford algebras $\mathrm{Cl}\left(V_{1}, \beta_{1}\right)$ and $\mathrm{Cl}\left(V_{2}, \beta_{2}\right)$ are isomorphic. The proof of this statement is an exercise.\\
+b) We prove the statement of the corollary by induction on $n:=\operatorname{dim}_{\mathbb{K}} V$.
+
+Let $n=1$. By part a) we may assume that $V=\mathbb{K}$ and that there exists $a \in \mathbb{K}$ such that for all $v, w \in \mathbb{K}$ we have $\beta(v, w)=a \cdot v \cdot w$.\\
+For $\mathbb{K}=\mathbb{R}$ and $a \neq 0$ the map $f: \mathbb{R} \rightarrow \mathbb{R}, f(x):=\sqrt{|a|} \cdot x$ is an isomorphism such that $\beta(v, w)= \pm f(v) \cdot f(w)$ for all $v, w \in V$. By part a) it is thus sufficient to consider $\beta(x, y)= \pm x \cdot y$ and $\beta=0$. We have already computed these Clifford algebras $\mathrm{Cl}(V, \beta)$ in Examples 2.1.4, 2.1.9 and 2.1.10. In either case, we obtained $\operatorname{dim}_{\mathbb{R}} \mathrm{Cl}(V, \beta)=2=2^{1}$.\\
+For $\mathbb{K}=\mathbb{C}$ it is by part a) sufficient to consider $\beta(x, y)=-x \cdot y$ and $\beta=0$. For $\beta(x, y)=-x \cdot y$ an argument as in Example 2.1.10 shows that $\operatorname{Cl}(\mathbb{C}, \beta) \cong \mathbb{C} \oplus \mathbb{C}$, for $\beta=0$ we have the result from Example 2.1.4. Again, we have $\operatorname{dim}_{\mathbb{C}} \operatorname{Cl}(V, \beta)=2^{1}$.\\
+Now let $n \in \mathbb{N}$ be arbitrary. Assume that $\operatorname{dim}_{\mathbb{K}} \mathrm{Cl}\left(W, \beta^{\prime}\right)=2^{n-1}$ for any $\left(W, \beta^{\prime}\right)$ with $\operatorname{dim}_{\mathbb{K}} W=n-1$. Let $b_{1}, \ldots, b_{n} \in V$ be a basis such that the $b_{i}$ are mutually perpendicular with respect to $\beta$. Consider the splitting
+
+$$
+V=\underbrace{\mathbb{K} \cdot b_{1}}_{=: V_{1}} \oplus \underbrace{\left(\mathbb{K} \cdot b_{2} \oplus \ldots \oplus \mathbb{K} \cdot b_{n}\right)}_{=: V_{2}}
+$$
+
+By Proposition 2.1.12, we have:
+
+$$
+\mathrm{Cl}(V, \beta) \cong \mathrm{Cl}\left(V_{1},\left.\beta\right|_{V_{1} \times V_{1}}\right) \hat{\otimes} \mathrm{Cl}\left(V_{2},\left.\beta\right|_{V_{2} \times V_{2}}\right)
+$$
+
+In particular, we have:
+
+$$
+\begin{aligned}
+\operatorname{dim} \mathrm{Cl}(V, \beta) & =\operatorname{dim}\left(\mathrm{Cl}\left(V_{1},\left.\beta\right|_{V_{1} \times V_{1}}\right) \hat{\otimes} \mathrm{Cl}\left(V_{2},\left.\beta\right|_{V_{2} \times V_{2}}\right)\right) \\
+& =\operatorname{dim} \mathrm{Cl}\left(V_{1},\left.\beta\right|_{V_{1} \times V_{1}}\right) \cdot \operatorname{dim} \mathrm{Cl}\left(V_{2},\left.\beta\right|_{V_{2} \times V_{2}}\right) \\
+& =2 \cdot 2^{n-1} \\
+& =2^{n}
+\end{aligned}
+$$
+
+Example 2.1.14. Let $\beta_{\text {eucl }}$ denote the standard Euclidean scalar product on $\mathbb{R}^{n}$ for any $n \in \mathbb{N}$. Consider $\operatorname{Cl}\left(\mathbb{R}^{2}, \beta_{\text {eucl }}\right)$. By Proposition 2.1.12, we have:
+
+$$
+\mathrm{Cl}\left(\mathbb{R}^{2}, \beta_{\text {eucl }}\right) \cong \mathrm{Cl}\left(\mathbb{R}, \beta_{\text {eucl }}\right) \hat{\otimes} \mathrm{Cl}\left(\mathbb{R}, \beta_{\text {eucl }}\right) \cong \mathbb{C} \otimes \mathbb{C}
+$$
+
+Let $e_{1}, e_{2}$ be the standard othonormal basis of $\mathbb{R}^{2}$. Then a vector space basis of $\operatorname{Cl}\left(\mathbb{R}^{2}, \beta_{\text {eucl }}\right)$ is given by $1, e_{1}, e_{2}, e_{1} \cdot e_{2}$. We then have the following identities for the\\
+basis elements:
+
+$$
+\begin{aligned}
+e_{1}^{2} & =-1 \\
+e_{2}^{2} & =-1 \\
+\left(e_{1} \cdot e_{2}\right)^{2} & =e_{1} \cdot e_{2} \cdot e_{1} \cdot e_{2}=-e_{1}^{2} \cdot e_{2}^{2}=-1
+\end{aligned}
+$$
+
+Hence there is an algebra isomorphism $\operatorname{Cl}\left(\mathbb{R}^{2}, \beta_{\text {eucl }}\right) \rightarrow \mathbb{H}$, given by
+
+$$
+\begin{aligned}
+1 & \mapsto 1 \\
+e_{1} & \mapsto i \\
+e_{2} & \mapsto j \\
+e_{1} \cdot e_{2} & \mapsto k .
+\end{aligned}
+$$
+
+Here $\mathbb{H}$ denotes the quaternions. Hence $\operatorname{Cl}\left(\mathbb{R}^{2}, \beta_{\text {eucl }}\right) \cong \mathbb{H}$.
+
+Remark 2.1.15. Let $V$ be a $\mathbb{K}$-vector space with a symmetric bilinear form $\beta$ and let $\Lambda^{\bullet} V:=\oplus_{k=0}^{n} \Lambda^{k} V$ be the exterior algebra of $V$. If $v_{1}, \ldots, v_{n}$ is a basis of $V$ then the vectors
+
+$$
+v_{i_{1}} \wedge \ldots \wedge v_{i_{k}} \in \Lambda^{\bullet} V, \quad v_{i_{1}} \cdot \ldots \cdot v_{i_{k}} \in \operatorname{Cl}(V, \beta),
+$$
+
+$1 \leq i_{1}<\ldots<i_{k} \leq n, 0 \leq k \leq n$, form a basis of $\Lambda^{\bullet} V$ and $\mathrm{Cl}(V, \beta)$ respectively. One shows easily by induction on $n=\operatorname{dim} V$ that there exists a $\beta$-orthogonal basis $v_{1}, \ldots, v_{n}$ of $V$, i.e., $\beta\left(v_{i}, v_{j}\right)=0$ for $i \neq j$. For such a basis $v_{1}, \ldots, v_{n}$ of $V$ the map
+
+$$
+\Phi: \quad \Lambda^{\bullet} V \rightarrow \mathrm{Cl}(V, \beta) \quad \text { given by } \quad v_{i_{1}} \wedge \ldots \wedge v_{i_{k}} \mapsto v_{i_{1}} \cdot \ldots \cdot v_{i_{k}}
+$$
+
+and linear extension is independent of the choice of $\beta$-orthogonal basis. $\Phi$ is an isomorphism of vector spaces but not an isomorphism of algebras.
+
+\subsection*{The Spin Group}
+Notation 2.2.1. In the following, we denote the Clifford algebra of $\mathbb{R}^{n}$ with the standard Euclidean scalar product by $\mathbf{C l}_{n}:=\mathrm{Cl}\left(\mathbb{R}^{n}, \beta_{\text {eucl }}\right)$.
+
+Remark 2.2.2. Upon identifying $\mathbb{R}^{n}$ with $\imath\left(\mathbb{R}^{n}\right) \subset \mathrm{Cl}_{n}$, for every $v \in \mathbb{R}^{n} \backslash\{0\}$, we have $v^{2}=-|v|^{2} \cdot 1$ and thus
+
+$$
+-\frac{v}{|v|^{2}} \cdot v=v \cdot\left(-\frac{v}{|v|^{2}}\right)=1 .
+$$
+
+Thus, $\mathbb{R}^{n} \backslash\{0\}$ is contained in the subgroup of (multiplicatively) invertible elements of $\mathrm{Cl}_{n}$.
+
+Definition 2.2.3. We define the Pin group Pin(n) by
+
+$$
+\operatorname{Pin}(n):=\left\{v_{1} \cdot \ldots \cdot v_{m} \in \mathrm{Cl}_{n} \mid v_{j} \in S^{n-1} \subset \mathbb{R}^{n}, m \in \mathbb{N}_{0}\right\} .
+$$
+
+Remark 2.2.4. The subset $\operatorname{Pin}(n) \subset \mathrm{Cl}_{n}$ is a group with respect to the multiplication in $\mathrm{Cl}_{n}$. The inverse element to $v_{1} \cdot \ldots \cdot v_{m}$ is given by
+
+$$
+\left(v_{1} \cdot \ldots \cdot v_{m}\right)^{-1}=\left(-v_{m}\right) \cdot \ldots \cdot\left(-v_{1}\right) \in \operatorname{Pin}(n) .
+$$
+
+Definition 2.2.5. We define the Spin group Spin(n) by
+
+$$
+\begin{aligned}
+\operatorname{Spin}(n) & :=\operatorname{Pin}(n) \cap \mathrm{Cl}_{n}^{0} \\
+& =\left\{v_{1} \cdot \ldots \cdot v_{m} \in \mathrm{Cl}_{n} \mid v_{j} \in S^{n-1}, m \in 2 \mathbb{N}_{0}\right\} .
+\end{aligned}
+$$
+
+Remark 2.2.6. By the argument from Remark 2.2.4, $\operatorname{Spin}(n)$ is a $\operatorname{subgroup}$ of $\operatorname{Pin}(n)$.
+
+For a fixed $v \in S^{n-1} \subset \mathbb{R}^{n}$ and any $x \in \mathbb{R}^{n}$, we have:
+
+$$
+v \cdot x \cdot v^{-1}=-v \cdot x \cdot v=-(-x \cdot v-2\langle x, v\rangle 1) \cdot v=-(x-2\langle x, v\rangle v) .
+$$
+
+The map $x \mapsto(x-2\langle x, v\rangle v)$ is the reflection about the hyperplane $v^{\perp}$ perpendicular to $v$. In particular, $\left(x \mapsto v \cdot x \cdot v^{-1}\right) \in \mathrm{O}(n)$. For any $a:=v_{1} \cdot \ldots \cdot v_{m} \in \operatorname{Spin}(n)$, the map
+
+$$
+x \mapsto a \cdot x \cdot a^{-1}=v_{1} \cdot \ldots \cdot v_{m} \cdot x \cdot v_{m}^{-1} \cdot \ldots \cdot v_{1}^{-1}
+$$
+
+consists of an even number of hyperplane reflections and is thus contained in $\mathrm{SO}(n)$. We have thus defined a group homomorphism $\varrho: \operatorname{Spin}(n) \rightarrow \operatorname{SO}(n)$ by
+
+$$
+\varrho(a) x:=a \cdot x \cdot a^{-1}
+$$
+
+Example 2.2.7. Let $n=1$. Then we have $\mathrm{SO}(1)=\{1\}$ and
+
+$$
+\begin{aligned}
+\operatorname{Spin}(1) & =\left\{v_{1} \cdot \ldots \cdot v_{m} \mid v_{j} \in S^{0}, m \in 2 \mathbb{N}_{0}\right\} \\
+& =\left\{\varepsilon_{1} e_{1} \cdot \ldots \cdot \varepsilon_{m} e_{m} \mid \varepsilon_{j}= \pm 1, m \in 2 \mathbb{N}_{0}\right\} \\
+& =\{-1,1\} \\
+& \cong \mathbb{Z}_{2}
+\end{aligned}
+$$
+
+Example 2.2.8. Let $n=2$. Then $\mathrm{SO}(2) \cong \mathrm{U}(1) \cong S^{1} \subset \mathbb{C}$ and we have:\\
+$\operatorname{Spin}(2)=\left\{\left(\cos \theta_{1} e_{1}+\sin \theta_{1} e_{2}\right) \cdot \ldots \cdot\left(\cos \theta_{m} e_{1}+\sin \theta_{m} e_{2}\right) \mid \theta_{j} \in \mathbb{R}, j=1, \ldots, m, m \in 2 \mathbb{N}_{0}\right\}$.
+
+Now we compute:
+
+$$
+\begin{aligned}
+& \left(\cos \theta e_{1}+\sin \theta e_{2}\right)\left(\cos \varphi e_{1}+\sin \varphi e_{2}\right) \\
+& \quad=-\cos \theta \cos \varphi-\sin \theta \sin \varphi+(\cos \theta \sin \varphi-\sin \theta \cos \varphi) e_{1} \cdot e_{2} \\
+& \quad=-\left(\cos (\theta-\varphi)+\sin (\theta-\varphi) e_{1} \cdot e_{2}\right)
+\end{aligned}
+$$
+
+and
+
+$$
+\begin{aligned}
+& \left(\cos (\alpha)+\sin (\alpha) e_{1} \cdot e_{2}\right) \cdot\left(\cos (\beta)+\sin (\beta) e_{1} \cdot e_{2}\right) \\
+& \quad=\cos (\alpha) \cos (\beta)-\sin (\alpha) \sin (\beta)+(\cos (\alpha) \sin (\beta)+\sin (\alpha) \cos (\beta)) e_{1} \cdot e_{2} \\
+& \quad=\cos (\alpha+\beta)+\sin (\alpha+\beta) e_{1} \cdot e_{2}
+\end{aligned}
+$$
+
+We thus obtain:
+
+$$
+\begin{aligned}
+\operatorname{Spin}(2)= & \left\{(-1)^{\frac{m}{2}}\left(\cos \left(\theta_{1}-\theta_{2}\right)+\sin \left(\theta_{1}-\theta_{2}\right) e_{1} \cdot e_{2}\right) \cdot \ldots\right. \\
+& \left.\quad\left(\cos \left(\theta_{m-1}-\theta_{m}\right)+\sin \left(\theta_{m-1}-\theta_{m}\right) e_{1} \cdot e_{2}\right) \mid \theta_{j} \in \mathbb{R}, m \in 2 \mathbb{N}_{0}\right\} \\
+= & \left\{( - 1 ) ^ { \frac { m } { 2 } } \left(\cos \left(\theta_{1}-\theta_{2}+\theta_{3}-\theta_{4}+\ldots+\theta_{m-1}-\theta_{m}\right)\right.\right. \\
+& \left.\left.\quad+\sin \left(\theta_{1}-\theta_{2}+\theta_{3}-\theta_{4}+\ldots+\theta_{m-1}-\theta_{m}\right) e_{1} \cdot e_{2}\right) \mid \theta_{j} \in \mathbb{R}, m \in 2 \mathbb{N}_{0}\right\} \\
+= & \left\{ \pm\left(\cos \alpha+\sin \alpha e_{1} \cdot e_{2}\right) \mid \alpha \in \mathbb{R}\right\} \\
+= & \left\{\cos \alpha+\sin \alpha e_{1} \cdot e_{2} \mid \alpha \in \mathbb{R}\right\} \\
+\cong & \mathrm{U}(1) \\
+\cong & \mathrm{SO}(2) .
+\end{aligned}
+$$
+
+We compute the group homomorphism $\varrho: \operatorname{Spin}(2) \rightarrow \mathrm{SO}(2)$ : For $j=1,2$, we have:
+
+$$
+\begin{aligned}
+& \varrho\left(\cos \alpha+\sin \alpha e_{1} \cdot e_{2}\right)\left(e_{j}\right) \\
+& \quad=\left(\cos \alpha+\sin \alpha e_{1} \cdot e_{2}\right) \cdot e_{j} \cdot\left(\cos \alpha+\sin \alpha e_{1} \cdot e_{2}\right)^{-1} \\
+& \quad=\left(\cos \alpha+\sin \alpha e_{1} \cdot e_{2}\right) \cdot e_{j} \cdot\left(\cos (-\alpha)+\sin (-\alpha) e_{1} \cdot e_{2}\right) \\
+& \quad=\cos ^{2} \alpha e_{j}-\cos \alpha \sin \alpha e_{j} \cdot e_{1} \cdot e_{2}+\cos \alpha \sin \alpha e_{1} \cdot e_{2} \cdot e_{j}-\sin ^{2} \alpha e_{1} \cdot e_{2} \cdot e_{j} \cdot e_{1} \cdot e_{2} \\
+& \quad=\left(\cos ^{2} \alpha-\sin ^{2} \alpha\right) e_{j}+ \begin{cases}2 \cos \alpha \sin \alpha e_{2} & j=1, \\
+-2 \cos \alpha \sin \alpha e_{1} & j=2\end{cases} \\
+& \quad=\cos (2 \alpha) e_{j}+ \begin{cases}\sin (2 \alpha) e_{2} & j=1, \\
+-\sin (2 \alpha) e_{1} & j=2\end{cases}
+\end{aligned}
+$$
+
+Thus,
+
+$$
+\varrho\left(\cos \alpha+\sin \alpha e_{1} \cdot e_{2}\right)=\left(\begin{array}{cc}
+\cos 2 \alpha & -\sin 2 \alpha \\
+\sin 2 \alpha & \cos 2 \alpha
+\end{array}\right) .
+$$
+
+In summary, we have the commutative diagram:\\
+\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-084}
+
+Remark 2.2.9. Recall from Remark 2.1.15 that there is a canonical isomorphism of vector spaces $\Phi: \Lambda^{\bullet} \mathbb{R}^{n} \cong \mathrm{Cl}_{n}$. We equip the Clifford algebra $\mathrm{Cl}_{n}$ with the unique scalar product such that $\Phi$ is an isometry. If $v_{1}, \ldots, v_{n}$ is any orthonormal basis of $\mathbb{R}^{n}$, then the elements $v_{i_{1}} \cdot \ldots \cdot v_{i_{k}}, 1 \leq i_{1}<\ldots<i_{k} \leq n, 0 \leq k \leq n$, form an orthonormal basis of $\mathrm{Cl}_{n}$ with respect to this scalar product. Moreover, for any unit vector $v \in S^{n-1}$ the map $\mu_{v}: \mathrm{Cl}_{n} \rightarrow \mathrm{Cl}_{n}, X \mapsto X \cdot v$ is an isometry. In order to see this extend $v$ to an orthonormal basis of $\mathbb{R}^{n}$ and use that the map $\mu_{v}$ acts by permuting the corresponding basis vectors of $\mathrm{Cl}_{n}$.
+
+Proposition 2.2.10. For any $n \in \mathbb{N}$, the sequence
+
+$$
+1 \rightarrow \mathbb{Z}_{2} \rightarrow \operatorname{Spin}(n) \xrightarrow{\varrho} \mathrm{SO}(n) \rightarrow 1
+$$
+
+is exact.
+
+Proof. a) The map $\varrho: \operatorname{Spin}(n) \rightarrow \mathrm{SO}(n)$ is surjective:\\
+By a classical result of Elie Cartan, every $A \in \mathrm{O}(n)$ is the composition of at most $n$ hyperplane reflections. Thus, any given $A \in \mathrm{SO}(n)$ is the product of an even number of hyperplane reflections. Let the $i$-th hyperplane be the orthogonal complement to $v_{i} \in S^{n-1}$. Then we have $v_{1} \cdot \ldots \cdot v_{2 k} \in \operatorname{Spin}(n)$ and $\varrho\left(v_{1} \cdot \ldots \cdot v_{2 k}\right)=A$.\\
+b) It remains to show that $\operatorname{ker}(\varrho)=\mathbb{Z}_{2}=\{1,-1\}$ :
+
+Writing $-1=e_{1} \cdot e_{1} \in \operatorname{Spin}(n)$ and applying $\varrho$, we obtain:
+
+$$
+\varrho(-1)(x)=(-1) \cdot x \cdot(-1)^{-1}=x .
+$$
+
+Thus, $\{1,-1\} \subset \operatorname{ker}(\varrho)$.\\
+Conversely, let $a \in \operatorname{ker}(\varrho)$. Then for all $x \in \mathbb{R}^{n}$, we have:
+
+$$
+x=\varrho(a)(x)=a \cdot x \cdot a^{-1}
+$$
+
+Equivalently, we have $x \cdot a=a \cdot x$ for all $x \in \mathbb{R}^{n}$ and in particular, $x \cdot a=a \cdot x$ for all $x \in \mathrm{Cl}_{n}$. Hence, $a$ is contained in the center $\mathcal{Z}\left(\mathrm{Cl}_{n}\right)$ of $\mathrm{Cl}_{n}$. Moreover, we have $a \in \operatorname{Spin}(n) \subset \mathrm{Cl}_{n}^{0}$. Now for any $n \in \mathbb{N}_{0}$ we have
+
+$$
+\mathcal{Z}\left(\mathrm{Cl}_{n}\right) \cap \mathrm{Cl}_{n}^{0}=\mathbb{R} \cdot 1, \quad(\text { exercise }!)
+$$
+
+hence $a=\alpha 1$ for some $\alpha \in \mathbb{R}$. Since $a \in \operatorname{Spin}(n)$, we can write $a=v_{1} \cdot \ldots \cdot v_{m}$ for some $v_{j} \in S^{n-1}$ and $m \in 2 \mathbb{N}_{0}$. We denote by $|\cdot|$ the norm induced by the scalar product on $\mathrm{Cl}_{n}$ constructed in Remark 2.2.9. Using that Clifford multiplication by $v_{m}$ is an isometry we get:
+
+$$
+|\alpha|=\left|v_{1} \cdot \ldots \cdot v_{m-1} \cdot v_{m}\right|=\left|v_{1} \cdot \ldots \cdot v_{m-1}\right| .
+$$
+
+Now we proceed inductively and obtain $|\alpha|=\left|v_{1}\right|=1$. Hence, $\alpha= \pm 1$ and thus $a \in\{1,-1\}$. Therefore, $\operatorname{ker}(\varrho) \subset\{1,-1\}$.
+
+\section*{Remark 2.2.11.}
+Let $\mathrm{Cl}_{n}^{\times}:=\left\{x \in \mathrm{Cl}_{n} \mid \exists y \in \mathrm{Cl}_{n}\right.$ s.t. $\left.x \cdot y=1\right\}$ be the group of invertible elements in the Clifford algebra $\mathrm{Cl}_{n}$. Then we have:\\
+i) The map
+
+$$
+\begin{aligned}
+\mathrm{Cl}_{n} \times \mathrm{Cl}_{n} & \rightarrow \mathrm{Cl}_{n} \\
+(a, b) & \mapsto a \cdot b
+\end{aligned}
+$$
+
+is a bilinear map on a finite-dimensional $\mathbb{R}$-vector space, hence it is smooth.\\
+ii) The map
+
+$$
+\begin{aligned}
+\mathrm{Cl}_{n}^{\times} & \rightarrow \mathrm{Cl}_{n}^{\times} \\
+a & \mapsto a^{-1}
+\end{aligned}
+$$
+
+is also smooth.\\
+Thus $\mathrm{Cl}_{n}^{\times}$is a Lie group.
+
+Remark 2.2.12. Part a) of the proof of Proposition 2.2.10 shows that every element $a \in \operatorname{Spin}(n)$ is of the form
+
+$$
+a= \pm v_{1} \cdot \ldots \cdot v_{m} \quad \text { with } m=2 k \leq n, v_{j} \in S^{n-1} \text {. }
+$$
+
+We may drop the minus sign by replacing $v_{1}$ by $-v_{1}$ if necessary, to obtain
+
+$$
+a=v_{1} \cdot \ldots \cdot v_{m} \quad \text { with } m=2 k \leq n \text {. }
+$$
+
+By multiplying with $1=e_{1} \cdot\left(-e_{1}\right)$, we can increase the number of factors by 2 . Thus, we can assume w.l.o.g. that
+
+$$
+a=v_{1} \cdot \ldots \cdot v_{m} \quad \text { with } \quad m=2 k=\left\{\begin{array}{ll}
+n & n \text { even } \\
+n+1 & n \text { odd }
+\end{array} .\right.
+$$
+
+Hence, we have a surjective continuous map
+
+$$
+\begin{aligned}
+\overbrace{S^{n-1} \times \ldots \times S^{n-1}}^{m \text { times }} & \rightarrow \operatorname{Spin}(n) \\
+\left(v_{1}, \ldots, v_{m}\right) & \mapsto v_{1} \cdot \ldots \cdot v_{m}
+\end{aligned}
+$$
+
+It follows that $\operatorname{Spin}(n)$ is compact. In particular, $\operatorname{Spin}(n) \subset \mathrm{Cl}_{n}^{\times}$is a closed subgroup. Thus, $\operatorname{Spin}(n)$ is a Lie group and the homomorphism
+
+$$
+\varrho: \operatorname{Spin}(n) \rightarrow \operatorname{SO}(n)
+$$
+
+is a 2 -fold covering.
+
+Proposition 2.2.13. The Spin group $\operatorname{Spin}(n)$ is connected, if $n \geq 2$ and simplyconnected, if $n \geq 3$.
+
+Proof. Assume $n \geq 2$.\\
+a) From the exact sequence in Proposition 2.2.10 we get the long exact homotopy sequence (base point $=1$ ):
+
+$$
+\rightarrow \underbrace{\pi_{1}\left(\mathbb{Z}_{2}\right)}_{=\{1\}} \rightarrow \pi_{1}(\operatorname{Spin}(n)) \rightarrow \pi_{1}(\operatorname{SO}(n)) \rightarrow \underbrace{\pi_{0}\left(\mathbb{Z}_{2}\right)}_{=\mathbb{Z}_{2}} \rightarrow \pi_{0}(\operatorname{Spin}(n)) \rightarrow \underbrace{\pi_{0}(\operatorname{SO}(n))}_{=\{1\}} .
+$$
+
+Claim: The map $\pi_{0}\left(\mathbb{Z}_{2}\right) \xrightarrow{\psi} \pi_{0}(\operatorname{Spin}(n))$ is trivial, that is, the image of $\psi$ is $\{1\}$.\\
+In fact, 1 and -1 can be connected by a continuous path in $\operatorname{Spin}(n)$ : Since $n \geq 2$, we have at least two orthonormal vectors $e_{1}, e_{2} \in S^{n-1}$ and we can define the smooth curve $c: \mathbb{R} \rightarrow \operatorname{Spin}(n)$,
+
+$$
+t \mapsto\left(\cos (t) e_{1}+\sin (t) e_{2}\right) \cdot e_{1},
+$$
+
+satisfying $c(0)=-1$ and $c(\pi)=1$.\\
+b) By exactness at $\pi_{0}(\operatorname{Spin}(n))$ and the claim, the map
+
+$$
+\pi_{0}(\operatorname{Spin}(n)) \rightarrow \pi_{0}(\operatorname{SO}(n))=\{1\}
+$$
+
+is injective. Hence, $\pi_{0}(\operatorname{Spin}(n))=\{1\}$, that is, $\operatorname{Spin}(n)$ is connected.\\
+c) We have $\pi_{1}(\mathrm{SO}(n))=\mathbb{Z}_{2}$ for $n \geq 3$. Namely, the long exact homotopy sequence for the fiber bundle $\mathrm{SO}(n) \rightarrow \mathrm{SO}(n+1) \rightarrow S^{n}$ for $n \geq 3$ yields isomorphisms $\pi_{1}(\mathrm{SO}(n)) \xrightarrow{\cong} \pi_{1}(\mathrm{SO}(n+1))$. The long exact homotopy sequence of the fiber bundle $\mathbb{Z}_{2} \rightarrow S^{3} \rightarrow \mathbb{R} P^{3}$ yields the isomorphism $\pi_{1}\left(\mathbb{R} P^{3}\right) \stackrel{\cong}{\rightarrow} \pi_{0}\left(\mathbb{Z}_{2}\right)=\mathbb{Z}_{2}$. Finally, we have the identification $\mathbb{R} P^{3} \cong \mathrm{SO}(3)$ as follows: We identify $\mathbb{R} P^{3}$ with the quotient of the upper hemisphere $S_{+}^{3}$ obtained by identifying antipodal points on the equator. Now, $S_{+}^{3}$ is homeomorphic to a closed unit ball $\bar{B}^{3}(0) \subset \mathbb{R}^{3}$ and thus $\mathbb{R} P^{3}$ is homeomorphic to $\bar{B}^{3}(0)$ with antipodal boundary points identified. The map sending the equivalence class of a point $x \in \bar{B}^{3}(0) \backslash\{0\}$ to the rotation with axis $x$ and angle $\|x\| \pi$ is then a homeomorphism.\\
+d) Now assume that $n \geq 3$. By exactness at $\pi_{0}\left(\mathbb{Z}_{2}\right)$ and the claim in a), the map $\pi_{1}(\mathrm{SO}(n)) \rightarrow \pi_{0}\left(\mathbb{Z}_{2}\right)$ is surjective. Exactness at $\pi_{1}(\mathrm{SO}(n))$, together with the fact that $\pi_{1}(\mathrm{SO}(n))=\mathbb{Z}_{2}$ for $n \geq 3$ implies that the map $\pi_{1}(\operatorname{Spin}(n)) \rightarrow \pi_{1}(\mathrm{SO}(n))$ is trivial. By exactness at $\pi_{1}(\operatorname{Spin}(n))$, the map $\pi_{1}(\operatorname{Spin}(n)) \rightarrow \pi_{1}(\operatorname{SO}(n))$ is also injective. Hence $\pi_{1}(\operatorname{Spin}(n))=\{1\}$, that is, $\operatorname{Spin}(n)$ is simply-connected. \(\square\)
+
+The Lie algebra of $\operatorname{SO}(n)$ is given by
+
+$$
+\mathfrak{s o}(n)=\left\{A \in \operatorname{Mat}(n \times n ; \mathbb{R}) \mid A^{\top}=-A\right\}
+$$
+
+and $\operatorname{dimSO}(n)=\operatorname{dimso}(n)=\frac{1}{2} n(n-1)$.
+
+For the Lie algebra of the Spin group, we have $\operatorname{dim} \mathfrak{s p i n}(n)=\operatorname{dimSpin}(n)=\operatorname{dimSO}(n)= \frac{1}{2} n(n-1)$. We want to identify the Lie algebra $\mathfrak{s p i n}(n)$ of $\operatorname{Spin}(n)$ as a vector subspace of $\mathrm{Cl}_{n}$ :
+
+For $i \neq j$ consider the smooth curve $c: \mathbb{R} \rightarrow \operatorname{Spin}(n)$, defined by
+
+$$
+t \mapsto\left(\cos (t) e_{i}+\sin (t) e_{j}\right) \cdot\left(-e_{i}\right)
+$$
+
+Then $c(0)=e_{i} \cdot\left(-e_{i}\right)=1$ and $\dot{c}(0)=e_{j} \cdot\left(-e_{i}\right)=e_{i} \cdot e_{j}$. We thus have $e_{i} \cdot e_{j} \in T_{1} \operatorname{Spin}(n) \cong \mathfrak{s p i n}(n)$ for all $i \neq j$.\\
+The products $\left\{e_{i} \cdot e_{j}\right\}, 1 \leq i<j \leq n$ are linearly independent and there are $\frac{1}{2} n(n-1)$ of them. Since $\operatorname{dim}(\mathfrak{s p i n}(n))=\frac{1}{2} n(n-1)$, we conclude that $\left\{e_{i} \cdot e_{j}\right\}_{i<j}$ is a basis of $\mathfrak{s p i n}(n)$.
+
+We compute the Lie algebra homomorphism $\varrho_{*}: \mathfrak{s p i n}(n) \rightarrow \mathfrak{s o}(n)$ :
+
+$$
+\begin{aligned}
+\varrho_{*}\left(e_{i} \cdot e_{j}\right)\left(e_{k}\right)= & \left.\frac{d}{d t}\right|_{t=0} \varrho\left(\left(\cos (t) e_{i}+\sin (t) e_{j}\right) \cdot\left(-e_{i}\right)\right)\left(e_{k}\right) \\
+= & \left.\frac{d}{d t}\right|_{t=0}\left(\left(\cos (t) e_{i}+\sin (t) e_{j}\right) \cdot\left(-e_{i}\right) \cdot e_{k} \cdot e_{i} \cdot\left(-\cos (t) e_{i}-\sin (t) e_{j}\right)\right) \\
+= & \left.\frac{d}{d t}\right|_{t=0}\left(\cos ^{2}(t) e_{i} \cdot e_{i} \cdot e_{k} \cdot e_{i} \cdot e_{i}+\cos (t) \sin (t) e_{i} \cdot e_{i} \cdot e_{k} \cdot e_{i} \cdot e_{j}\right. \\
+& \left.\quad \quad+\sin (t) \cos (t) e_{j} \cdot e_{i} \cdot e_{k} \cdot e_{i} \cdot e_{i}+\sin ^{2}(t) e_{j} \cdot e_{i} \cdot e_{k} \cdot e_{i} \cdot e_{j}\right) \\
+= & e_{i} \cdot e_{i} \cdot e_{k} \cdot e_{i} \cdot e_{j}+e_{j} \cdot e_{i} \cdot e_{k} \cdot e_{i} \cdot e_{i} \\
+= & -e_{k} \cdot e_{i} \cdot e_{j}-e_{j} \cdot e_{i} \cdot e_{k} \cdot \\
+= & \begin{cases}0 & \text { for } k \notin\{i, j\} \\
+2 e_{j} & \text { for } k=i \\
+-2 e_{i} & \text { for } k=j\end{cases}
+\end{aligned}
+$$
+
+We thus have for $i<j$
+
+$$
+\varrho_{*}\left(e_{i} \cdot e_{j}\right)=\left(\begin{array}{ccccc} 
+& \vdots & & \vdots & \\
+\ldots & & \ldots & -2 & \ldots \\
+& \vdots & & \vdots & \\
+\ldots & 2 & \ldots & \ldots & \ldots \\
+& \vdots & & \vdots &
+\end{array}\right) .
+$$
+
+\subsection*{Spinors}
+Definition 2.3.1. A representation of a group $G$ on a vector space $V$ is a group homomorphism $\lambda: G \rightarrow \mathrm{GL}(V)$.\\
+A representation $\lambda: G \rightarrow \mathrm{GL}(V)$ on a Euclidean or Hermitian vector space $(V, \beta)$ is called orthogonal or unitary, if $\lambda(G) \subset \mathrm{O}(V, \beta)$ or $\lambda(G) \subset \mathrm{U}(V, \beta)$, respectively.
+
+We will only consider real or complex finite-dimensional representations, i.e., representations, where $V$ is a $\mathbb{K}$-vector space, $\mathbb{K}=\mathbb{R}$ or $\mathbb{C}$, and $\operatorname{dim}_{\mathbb{K}} V<\infty$.
+
+Example 2.3.2. Let $G$ be any group.\\
+a) The trivial representation is the trivial group homomorphism:
+
+$$
+\begin{aligned}
+\lambda: G & \rightarrow \mathrm{GL}(V) \\
+g & \mapsto \operatorname{id}_{V} .
+\end{aligned}
+$$
+
+b) Let $\lambda: G \rightarrow \mathrm{GL}(V)$ be a representation. The dual representation $\lambda^{*}$ is defined by:
+
+$$
+\begin{aligned}
+\lambda^{*}: G & \rightarrow \mathrm{GL}\left(V^{*}\right) \\
+g & \mapsto \lambda\left(g^{-1}\right)^{*}
+\end{aligned}
+$$
+
+c) Let $\lambda: G \rightarrow \mathrm{GL}(V)$ be a representation. There is an induced representation $\Lambda^{k} \lambda$ of $G$ on $\Lambda^{k} V$, defined by:
+
+$$
+\begin{aligned}
+\Lambda^{k} \lambda: G & \rightarrow \operatorname{GL}\left(\Lambda^{k} V\right) \\
+g & \mapsto\left(\Lambda^{k} \lambda\right)(g)
+\end{aligned}
+$$
+
+where
+
+$$
+\left(\Lambda^{k} \lambda\right)(g)\left(v_{1} \wedge \ldots \wedge v_{k}\right):=\lambda(g) v_{1} \wedge \ldots \wedge \lambda(g) v_{k} .
+$$
+
+The representation $\Lambda^{k} \lambda$ is called the $\mathbf{k}^{\text {th }}$ exterior power of the representation $\lambda$.\\
+d) Let $\lambda_{1}: G \rightarrow \mathrm{GL}\left(V_{1}\right)$ and $\lambda_{2}: G \rightarrow \mathrm{GL}\left(V_{2}\right)$ be representations of $G$ on $V_{1}$ and $V_{2}$, respectively. There is an induced representation of $G$ on $V_{1} \oplus V_{2}$, defined by:
+
+$$
+\begin{aligned}
+\lambda_{1} \oplus \lambda_{2}: G & \rightarrow \mathrm{GL}\left(V_{1} \oplus V_{2}\right) \\
+g & \mapsto\left(\lambda_{1} \oplus \lambda_{2}\right)(g),
+\end{aligned}
+$$
+
+where
+
+$$
+\left(\lambda_{1} \oplus \lambda_{2}\right)(g)\left(v_{1} \oplus v_{2}\right):=\lambda_{1}(g) v_{1} \oplus \lambda_{2}(g) v_{2} .
+$$
+
+The representation $\lambda_{1} \oplus \lambda_{2}$ is called the direct sum of the representations $\lambda_{1}$ and $\lambda_{2}$.\\
+e) Let $\lambda_{1}: G \rightarrow \mathrm{GL}\left(V_{1}\right)$ and $\lambda_{2}: G \rightarrow \mathrm{GL}\left(V_{2}\right)$ be representations of $G$ on $V_{1}$ and $V_{2}$, respectively. There is an induced representation of $G$ on $V_{1} \otimes V_{2}$, defined by:
+
+$$
+\begin{aligned}
+\lambda_{1} \otimes \lambda_{2}: G & \rightarrow \mathrm{GL}\left(V_{1} \otimes V_{2}\right) \\
+g & \mapsto\left(\lambda_{1} \otimes \lambda_{2}\right)(g),
+\end{aligned}
+$$
+
+where
+
+$$
+\left(\lambda_{1} \otimes \lambda_{2}\right)(g)\left(v_{1} \otimes v_{2}\right):=\lambda_{1}(g) v_{1} \otimes \lambda_{2}(g) v_{2} .
+$$
+
+The representation $\lambda_{1} \otimes \lambda_{2}$ is called the tensor product of the representations $\lambda_{1}$ and $\lambda_{2}$.
+
+Example 2.3.3. Let $G=\mathrm{SO}(n)$.\\
+a) We have the standard representation
+
+$$
+\lambda_{\text {st }}: \mathrm{O}(n) \hookrightarrow \mathrm{GL}(n, \mathbb{R})=\mathrm{GL}\left(\mathbb{R}^{n}\right) .
+$$
+
+b) Then
+
+$$
+\begin{aligned}
+\Lambda^{n} \lambda_{\mathrm{st}}: \mathrm{O}(n) & \rightarrow \mathrm{GL}\left(\Lambda^{n} \mathbb{R}^{n}\right)=\mathrm{GL}(1)=\mathbb{R} \backslash\{0\}, \\
+g & \mapsto\left(\Lambda^{n} \lambda_{\mathrm{st}}\right)(g),
+\end{aligned}
+$$
+
+is given by
+
+$$
+\left(\Lambda^{n} \lambda_{\mathrm{st}}\right)(g)=\operatorname{det} g= \pm 1 .
+$$
+
+If we restrict $\Lambda^{n} \lambda_{\text {st }}$ to $\mathrm{SO}(n)$ then $\Lambda^{n} \lambda_{\text {st }}: \mathrm{SO}(n) \rightarrow \mathrm{GL}\left(\Lambda^{n} \mathbb{R}^{n}\right)$ is given by $g \mapsto 1$, i.e., $\Lambda^{n} \lambda_{\text {st }}: \operatorname{SO}(n) \rightarrow \operatorname{GL}\left(\Lambda^{n} \mathbb{R}^{n}\right)$ is the trivial representation.
+
+Remark 2.3.4. Given a representation $\lambda^{\prime}: \mathrm{SO}(n) \rightarrow \mathrm{GL}(V)$ then
+
+$$
+\lambda:=\lambda^{\prime} \circ \varrho: \operatorname{Spin}(n) \rightarrow \operatorname{GL}(V)
+$$
+
+yields a representation of $\operatorname{Spin}(n)$ on $V$. Here, $\varrho: \operatorname{Spin}(n) \rightarrow \mathrm{SO}(n)$ denotes the Lie group homomorphism defined by equation (2.3).
+
+One may wonder whether every representation $\lambda$ of $\operatorname{Spin}(n)$ on $V$ is of the form $\lambda=\lambda^{\prime} \circ \varrho$, where $\lambda^{\prime}$ is a representation of $\mathrm{SO}(n)$ on $V$.\\
+Now, if $\lambda=\lambda^{\prime} \circ \varrho: \operatorname{Spin}(n) \rightarrow \operatorname{GL}(V)$, we have:
+
+$$
+\lambda(-1)=\lambda^{\prime}(\varrho(-1))=\lambda^{\prime}(1)=\mathrm{id}_{V} .
+$$
+
+Hence a representation $\lambda: \operatorname{Spin}(n) \rightarrow \mathrm{GL}(V)$ that is induced by a representation of $\mathrm{SO}(n)$ on $V$ necessarily satisfies $\lambda(-1)=\mathrm{id}_{V}$.
+
+Consider the representation
+
+$$
+\begin{aligned}
+\lambda: \operatorname{Spin}(n) & \rightarrow \mathrm{GL}\left(\mathrm{Cl}_{n}\right) \\
+a & \mapsto \lambda(a),
+\end{aligned}
+$$
+
+given by the multiplication in $\mathrm{Cl}_{n}$, i.e., for any $a \in \operatorname{Spin}(n)$ and $x \in \mathrm{Cl}_{n}$, we have
+
+$$
+\lambda(a)(x):=a \cdot x .
+$$
+
+Then we compute
+
+$$
+\lambda(-1)(x)=-1 \cdot x=-x,
+$$
+
+i.e., $\lambda(-1)=-\mathrm{id}_{\mathrm{Cl}_{n}}$. Thus, this representation cannot be induced by a representation of $\mathrm{SO}(n)$ on $\mathrm{Cl}_{n}$.
+
+Remark 2.3.5. If $\lambda: \operatorname{Spin}(n) \rightarrow \mathrm{GL}(V)$ is a representation of $\operatorname{Spin}(n)$ on $V$ such that $\lambda(-1)=\operatorname{id}_{V}$ then $\operatorname{ker}(\varrho)=\{-1,1\} \subset \operatorname{ker}(\lambda)$.
+
+Since $\varrho$ is surjective, there is a map $\lambda^{\prime}: \mathrm{SO}(n) \rightarrow \mathrm{GL}(V)$ such that the alongside diagram commutes.\\
+\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-091}
+
+\section*{The even dimensional case}
+In the following, let $n=2 m$. Let $\mathrm{Cl}_{n}$ be the Clifford algebra of $\mathbb{R}^{n}$ with the standard Euclidean scalar product and let $\mathbb{C l}_{n}:=\mathrm{Cl}_{n} \otimes_{\mathbb{R}} \mathbb{C}$ be its complexification. Let $e_{1}, \ldots, e_{2 m}$ be the standard basis of $\mathbb{R}^{n}$. For $j=1, \ldots, m$ define
+
+$$
+z_{j}:=\frac{1}{2}\left(e_{2 j-1}-i e_{2 j}\right) \in \mathbb{C l}_{n}, \quad \bar{z}_{j}:=\frac{1}{2}\left(e_{2 j-1}+i e_{2 j}\right) \in \mathbb{C l}_{n} .
+$$
+
+Then products of the form
+
+$$
+\begin{aligned}
+z_{j_{1}} \cdot \ldots \cdot z_{j_{k}} \cdot \bar{z}_{i_{1}} \cdot \ldots \cdot \bar{z}_{i_{l}}, & k, l=0, \ldots, m \\
+& 1 \leq j_{1}<\ldots<j_{k} \leq m, 1 \leq i_{1}<\ldots<i_{l} \leq m
+\end{aligned}
+$$
+
+form a vector space basis of $\mathbb{C l}_{n}$. Put
+
+$$
+z\left(j_{1}, \ldots, j_{k}\right):=z_{j_{1}} \cdot \ldots \cdot z_{j_{k}} \cdot \bar{z}_{1} \cdot \ldots \cdot \bar{z}_{m}
+$$
+
+Then
+
+$$
+\Sigma_{n}:=\operatorname{span}\left\{z\left(j_{1}, \ldots, j_{k}\right) \mid k=0, \ldots, m, 1 \leq j_{1}<\ldots<j_{k} \leq m\right\} \subseteq \mathbb{C l}_{n}
+$$
+
+is a complex vector subspace of $\mathbb{C l}_{n}$ of dimension $2^{m}$. We call $\boldsymbol{\Sigma}_{\boldsymbol{n}}$ the spinor space in dimension $n$. Elements of $\Sigma_{n}$ are called spinors.
+
+For later purposes we want to compute $e_{2 l} \cdot z\left(j_{1}, \ldots, j_{k}\right)$ and $e_{2 l-1} \cdot z\left(j_{1}, \ldots, j_{k}\right)$. We have to distinguish two cases: $e_{2 l}$ and $e_{2 l-1}$ can be contained in $z_{j_{1}} \cdot \ldots \cdot z_{j_{k}}$ or not.
+
+\begin{enumerate}
+  \item Let $e_{2 l}$ and $e_{2 l-1}$ not be contained in $z_{j_{1}} \cdot \ldots \cdot z_{j_{k}}$.
+\end{enumerate}
+
+$$
+\begin{aligned}
+e_{2 l} \cdot z\left(j_{1}, \ldots, j_{k}\right) & =e_{2 l} \cdot z_{j_{1}} \cdot \ldots \cdot z_{j_{k}} \cdot \bar{z}_{1} \cdot \ldots \cdot \bar{z}_{m} \\
+& =(-1)^{k+(l-1)} z_{j_{1}} \cdot \ldots \cdot z_{j_{k}} \cdot \bar{z}_{1} \cdot \ldots \cdot \bar{z}_{l-1} \cdot e_{2 l} \cdot \bar{z}_{l} \cdot \bar{z}_{l+1} \cdot \ldots \cdots \bar{z}_{m}
+\end{aligned}
+$$
+
+Because of
+
+$$
+\begin{aligned}
+e_{2 l} \cdot \bar{z}_{l} & =\frac{1}{2} e_{2 l} \cdot\left(e_{2 l-1}+i e_{2 l}\right) \\
+& =\frac{1}{2}\left(e_{2 l} \cdot e_{2 l-1}-i\right) \\
+& =\frac{1}{2}\left(-e_{2 l-1} \cdot e_{2 l}+i e_{2 l-1} \cdot e_{2 l-1}\right) \\
+& =i e_{2 l-1} \cdot \frac{1}{2}\left(e_{2 l-1}+i e_{2 l}\right) \\
+& =i e_{2 l-1} \cdot \bar{z}_{l}
+\end{aligned}
+$$
+
+it follows that
+
+$$
+\begin{aligned}
+e_{2 l} \cdot z\left(j_{1}, \ldots, j_{k}\right) & =(-1)^{k+l-1} i z_{j_{1}} \cdot \ldots \cdot z_{j_{k}} \cdot \bar{z}_{1} \cdot \ldots \cdot \bar{z}_{l-1} \cdot e_{2 l-1} \cdot \bar{z}_{l} \cdot \bar{z}_{l+1} \cdot \ldots \cdot \bar{z}_{m} \\
+& =(-1)^{k+l-1} i(-1)^{k+l-1} e_{2 l-1} \cdot z_{j_{1}} \cdot \ldots \cdot z_{j_{k}} \cdot \bar{z}_{1} \cdot \ldots \cdot \bar{z}_{m} \\
+& =i e_{2 l-1} \cdot z\left(j_{1}, \ldots, j_{k}\right)
+\end{aligned}
+$$
+
+Let $\nu$ such that $j_{\nu}<l<j_{\nu+1}$. Then we have:
+
+$$
+\begin{aligned}
+e_{2 l} \cdot z\left(j_{1}, \ldots, j_{k}\right) & =\frac{1}{2} e_{2 l} \cdot z\left(j_{1}, \ldots, j_{k}\right)+\frac{1}{2} e_{2 l} \cdot z\left(j_{1}, \ldots, j_{k}\right) \\
+& \stackrel{(2.4)}{=} \frac{1}{2} e_{2 l} \cdot z\left(j_{1}, \ldots, j_{k}\right)+\frac{i}{2} e_{2 l-1} \cdot z\left(j_{1}, \ldots, j_{k}\right) \\
+& =i \underbrace{\frac{1}{2}\left(e_{2 l-1}-i e_{2 l}\right)}_{=z_{l}} \cdot z\left(j_{1}, \ldots, j_{k}\right) \\
+& =i(-1)^{\nu} z\left(j_{1}, \ldots, j_{\nu}, l, j_{\nu+1}, \ldots, j_{k}\right)
+\end{aligned}
+$$
+
+Moreover, it follows from equations (2.4) and (2.5) that
+
+$$
+\begin{aligned}
+e_{2 l-1} \cdot z\left(j_{1}, \ldots, j_{k}\right) & \stackrel{(2.4)}{=}-i e_{2 l} \cdot z\left(j_{1}, \ldots, j_{k}\right) \\
+& \stackrel{(2.5)}{=}(-1)^{\nu} z\left(j_{1}, \ldots, j_{\nu}, l, j_{\nu+1}, \ldots, j_{k}\right)
+\end{aligned}
+$$
+
+\begin{enumerate}
+  \setcounter{enumi}{1}
+  \item Now let $e_{2 l}$ and $e_{2 l-1}$ be contained in $z_{j_{1}} \cdot \ldots \cdot z_{j_{k}}$.
+\end{enumerate}
+
+Multiplying equation (2.5) with $e_{2 l}$ we obtain:
+
+$$
+e_{2 l} \cdot z\left(j_{1}, \ldots, j_{\nu}, l, j_{\nu+1}, \ldots, j_{k}\right)=(-1)^{\nu} i z\left(j_{1}, \ldots, j_{\nu}, j_{\nu+1}, \ldots, j_{k}\right)
+$$
+
+Multiplying equation (2.6) with $e_{2 l-1}$ we obtain:
+
+$$
+e_{2 l-1} \cdot z\left(j_{1}, \ldots, j_{\nu}, l, j_{\nu+1}, \ldots, j_{k}\right)=(-1)^{\nu+1} z\left(j_{1}, \ldots, j_{\nu}, j_{\nu+1}, \ldots, j_{k}\right)
+$$
+
+Hence the spinor space $\Sigma_{n} \subset \mathbb{C l}_{n}$ is invariant under Clifford multiplication by vectors in $\mathbb{R}^{n}$. Since the Clifford algebra $\mathbb{C l}_{n}$ is generated by $\mathbb{R}^{n}$, the same holds for Clifford multiplication by elements of $\mathbb{C l}_{n}$, thus $\Sigma_{n} \subset \mathbb{C l}_{n}$ is a left ideal. In particular, $\Sigma_{n}$ is invariant under multiplication by elements of $\operatorname{Spin}(n)$.\\
+We define:
+
+$$
+\begin{aligned}
+& \Sigma_{n}^{+}:=\operatorname{span}\left\{z\left(j_{1}, \ldots, j_{k}\right) \mid k=0, \ldots, m \text { even }\right\} \\
+& \Sigma_{n}^{-}:=\operatorname{span}\left\{z\left(j_{1}, \ldots, j_{k}\right) \mid k=0, \ldots, m \text { odd }\right\} .
+\end{aligned}
+$$
+
+The spinor space $\Sigma_{n}$ has the decomposition $\Sigma_{n}=\Sigma_{n}^{+} \oplus \Sigma_{n}^{-}$. Elements in $\Sigma_{n}^{ \pm}$are called spinors of positive and negative chirality respectively.\\
+The equations (2.5)-(2.8) show that the Clifford multiplication by elements of $\mathbb{R}^{n}$ satisfies:
+
+$$
+\mathbb{R}^{n} \cdot \Sigma_{n}^{+} \subset \Sigma_{n}^{-}, \quad \mathbb{R}^{n} \cdot \Sigma_{n}^{-} \subset \Sigma_{n}^{+}
+$$
+
+However, Clifford multiplication by elements of $\mathrm{Cl}_{n}^{0}$ satisfies:
+
+$$
+\mathbb{C l}_{n}^{0} \cdot \Sigma_{n}^{+} \subset \Sigma_{n}^{+}, \quad \mathbb{C l}_{n}^{0} \cdot \Sigma_{n}^{-} \subset \Sigma_{n}^{-}
+$$
+
+Thus, the restriction to $\operatorname{Spin}(n) \subset \mathrm{Cl}_{n}^{0} \subset \mathbb{C l}_{n}^{0}$ yields representations of $\operatorname{Spin}(n)$ on $\Sigma_{n}^{+}$ and $\Sigma_{n}^{-}$and thus on $\Sigma_{n}$.
+
+Definition 2.3.6. The representation $\sigma_{n}: \operatorname{Spin}(n) \rightarrow \mathrm{GL}\left(\Sigma_{n}\right)$ is called the spinor representation.\\
+The representations $\sigma_{n}^{ \pm}: \operatorname{Spin}(n) \rightarrow \mathrm{GL}\left(\Sigma_{n}^{ \pm}\right)$are called the positive and negative spinor representation, respectively.
+
+Remark 2.3.7. The element
+
+$$
+\omega:=e_{1} \cdot \ldots \cdot e_{n} \in \mathrm{Cl}_{n} \subset \mathbb{C l}_{n}
+$$
+
+is called the volume element. The equations (2.5)-(2.8) show that\\
+$e_{2 l-1} \cdot e_{2 l} \cdot z\left(j_{1}, \ldots, j_{k}\right)= \begin{cases}-i z\left(j_{1}, \ldots, j_{k}\right) & \text { if } e_{2 l}, e_{2 l-1} \text { are not contained in } z_{j_{1}} \cdot \ldots \cdot z_{j_{k}} \\ i z\left(j_{1}, \ldots, j_{k}\right) & \text { if } e_{2 l}, e_{2 l-1} \text { are contained in } z_{j_{1}} \cdot \ldots \cdot z_{j_{k}} \cdot\end{cases}$
+
+Thus we get
+
+$$
+\omega \cdot z\left(j_{1}, \ldots, j_{k}\right)=(-1)^{m-k} i^{m} z\left(j_{1}, \ldots, j_{k}\right)
+$$
+
+and therefore
+
+$$
+i^{m} \omega \cdot z\left(j_{1}, \ldots, j_{k}\right)=(-1)^{k} z\left(j_{1}, \ldots, j_{k}\right) .
+$$
+
+It follows that
+
+$$
+\Sigma_{n}^{ \pm}=\left\{z \in \Sigma_{n} \mid i^{m} \omega \cdot z= \pm z\right\} .
+$$
+
+Example 2.3.8. Let $n=2$, i.e., $m=1$. Then we have:
+
+$$
+\Sigma_{2}^{+}=\mathbb{C} \cdot z() \quad \text { and } \quad \Sigma_{2}^{-}=\mathbb{C} \cdot z(1)
+$$
+
+By the equations (2.6) and (2.8), we have
+
+$$
+\left.\begin{array}{rl}
+e_{1} \cdot z() & =z(1) \\
+e_{1} \cdot z(1) & =-z(),
+\end{array}\right\} \quad \text { thus } e_{1} \text { acts on } \Sigma_{2} \cong \mathbb{C}^{2} \text { as }\left(\begin{array}{cc}
+0 & -1 \\
+1 & 0
+\end{array}\right)
+$$
+
+By the equations (2.5) and (2.7), we have
+
+$$
+\left.\begin{array}{r}
+e_{2} \cdot z()=i z(1) \\
+e_{2} \cdot z(1)=i z(),
+\end{array}\right\} \quad \text { thus } e_{2} \text { acts on } \Sigma_{2} \cong \mathbb{C}^{2} \text { as }\left(\begin{array}{cc}
+0 & i \\
+i & 0
+\end{array}\right)
+$$
+
+Furthermore, from Example 2.2.8, we have the isomorphism
+
+$$
+\begin{aligned}
+\operatorname{Spin}(2) & \rightarrow \mathrm{U}(1) \\
+\cos \psi+\sin \psi e_{1} \cdot e_{2} & \mapsto \cos \psi+i \sin \psi=e^{i \psi}
+\end{aligned}
+$$
+
+The element $\cos \psi+\sin \psi e_{1} \cdot e_{2} \in \operatorname{Spin}(2)$ acts on $\Sigma_{2}$ as
+
+$$
+\begin{aligned}
+\cos \psi\left(\begin{array}{ll}
+1 & 0 \\
+0 & 1
+\end{array}\right) & +\sin \psi\left(\begin{array}{cc}
+0 & -1 \\
+1 & 0
+\end{array}\right)\left(\begin{array}{ll}
+0 & i \\
+i & 0
+\end{array}\right) \\
+& =\left(\begin{array}{cc}
+\cos \psi & 0 \\
+0 & \cos \psi
+\end{array}\right)+\sin \psi\left(\begin{array}{cc}
+-i & 0 \\
+0 & i
+\end{array}\right) \\
+& =\left(\begin{array}{cc}
+\cos \psi-i \sin \psi & 0 \\
+0 & \cos \psi+i \sin \psi
+\end{array}\right) \\
+& =\left(\begin{array}{cc}
+e^{-i \psi} & 0 \\
+0 & e^{i \psi}
+\end{array}\right)
+\end{aligned}
+$$
+
+Thus, the action of the Spin group Spin(2) on $\Sigma_{2}^{-}$is given by the standard representation of $\mathrm{U}(1)$ on $\mathbb{C}$ whereas the action of $\operatorname{Spin}(2)$ on $\Sigma_{2}^{+}$is given by the dual of the standard representation of $\mathrm{U}(1)$ on $\mathbb{C}$. In particular, the action of $\operatorname{Spin}(2)$ on $\Sigma_{2}^{+} \otimes \Sigma_{2}^{-}$is the trivial representation.
+
+We equip the spinor space $\Sigma_{n}$ with the Hermitian scalar product $\langle\cdot, \cdot\rangle$, for which the vectors $z\left(j_{1}, \ldots, j_{k}\right), k=0, \ldots, m$, form an orthonormal basis. Then the decomposition $\Sigma_{n}=\Sigma_{n}^{+} \oplus \Sigma_{n}^{-}$is orthogonal. By our convention $\langle\cdot, \cdot\rangle$ is complex linear in the first argument and complex antilinear in the second argument.
+
+Lemma 2.3.9. Let $n=2 m$ be even. Then the Clifford multiplication of spinors by vectors is skew-symmetric, i.e., for any $X \in \mathbb{R}^{n}$ and any $\phi, \psi \in \Sigma_{n}$, we have:
+
+$$
+\langle X \cdot \phi, \psi\rangle=-\langle\phi, X \cdot \psi\rangle
+$$
+
+Proof. It suffices to prove this for any basis vector $X=e_{j}$ in $\mathbb{R}^{n}$ and any two basis elements $\phi=z\left(j_{1}, \ldots, j_{k}\right), \psi=z\left(i_{1}, \ldots, i_{l}\right)$ in $\Sigma_{n}$. For $X=e_{2 l}$ and $\phi=z\left(j_{1}, \ldots, j_{k}\right)$ with $l=j_{\nu+1}$, the scalar products are non-zero only if $\psi=z\left(j_{1}, \ldots, j_{\nu}, \widehat{l}, j_{\nu+2}, \ldots, j_{k}\right)$. If $\psi$ is any other basis vector of $\Sigma_{n}$ then both sides in (2.10) vanish.\\
+We then have:
+
+$$
+\begin{aligned}
+\langle X \cdot \phi, \psi\rangle & =\left\langle e_{2 l} \cdot z\left(j_{1}, \ldots, j_{\nu}, l, j_{\nu+2}, \ldots, j_{k}\right), z\left(j_{1}, \ldots, j_{\nu}, \widehat{l}, j_{\nu+2}, \ldots, j_{k}\right)\right\rangle \\
+& \stackrel{(2.7)}{=}\left\langle(-1)^{\nu} i z\left(j_{1}, \ldots, j_{\nu}, j_{\nu+2}, \ldots, j_{k}\right), z\left(j_{1}, \ldots, j_{\nu}, j_{\nu+2}, \ldots, j_{k}\right)\right\rangle \\
+& =(-1)^{\nu} i
+\end{aligned}
+$$
+
+and
+
+$$
+\begin{aligned}
+\langle\phi, X \cdot \psi\rangle & =\left\langle z\left(j_{1}, \ldots, j_{\nu}, l, j_{\nu+2}, \ldots, j_{k}\right), e_{2 l} \cdot z\left(j_{1}, \ldots, j_{\nu}, \widehat{l}, j_{\nu+2}, \ldots, j_{k}\right)\right\rangle \\
+& \stackrel{(2.5)}{=}\left\langle z\left(j_{1}, \ldots, j_{\nu}, l, j_{\nu+2}, \ldots, j_{k}\right),(-1)^{\nu} i z\left(j_{1}, \ldots, j_{\nu}, l, j_{\nu+2}, \ldots, j_{k}\right)\right\rangle \\
+& =(-1)^{\nu+1} i
+\end{aligned}
+$$
+
+Thus, we have
+
+$$
+\langle X \cdot \phi, \psi\rangle=-\langle\phi, X \cdot \psi\rangle
+$$
+
+The computations for the remaining basis vectors $X \in \mathbb{R}^{n}$ and $\phi \in \Sigma_{n}$ are entirely analogous.
+
+Remark 2.3.10. For any unit vector $X \in S^{n-1} \subset \mathbb{R}^{n}$ and any two spinors $\phi, \psi \in \Sigma_{n}$ we have:
+
+$$
+\left.\langle X \cdot \phi, X \cdot \psi\rangle=-\langle X \cdot X \cdot \phi, \psi\rangle=-\left.\langle-| X\right|^{2} \phi, \psi\right\rangle=\langle\phi, \psi\rangle .
+$$
+
+Hence the Clifford multiplication by unit vectors $X \in S^{n-1}$ is an isometry on the spinor space. The action of $\operatorname{Spin}(n)$ on $\Sigma_{n}$ is thus a unitary representation.
+
+Proposition 2.3.11. Let $n=2 m$ be even. Then the map
+
+$$
+\Phi: \quad \mathbb{C l}_{n} \rightarrow \operatorname{End}\left(\Sigma_{n}\right), \quad \Phi(X)(z):=X \cdot z
+$$
+
+is an isomorphism of complex algebras.
+
+Proof. Obviously $\Phi$ is a homomorphism of complex algebras. We prove that $\Phi$ is surjective. Note first that for all $\ell \in\{1, \ldots, m\}$ we have
+
+$$
+\begin{aligned}
+z_{\ell} \cdot \bar{z}_{\ell}+\bar{z}_{\ell} \cdot z_{\ell} & =-1 \\
+\bar{z}_{\ell} \cdot \bar{z}_{\ell} & =0 \\
+z_{\ell} \cdot z_{\ell} & =0
+\end{aligned}
+$$
+
+Let $i, \ell \in\{1, \ldots, m\}$ and let $z\left(j_{1}, \ldots, j_{k}\right) \in \Sigma_{n}$.\\
+a) Assume $\ell \in\left\{j_{1}, \ldots, j_{k}\right\}$. From the equations (2.11) and (2.12) we get
+
+$$
+\begin{aligned}
+\Phi\left(\bar{z}_{\ell}\right)\left(z\left(j_{1}, \ldots, j_{k}\right)\right) & =\bar{z}_{\ell} \cdot z_{j_{1}} \cdot \ldots \cdot z_{\ell} \cdot \ldots \cdot z_{j_{k}} \cdot \bar{z}_{1} \cdot \ldots \cdot \bar{z}_{\ell} \cdot \ldots \cdot \bar{z}_{m} \\
+& = \pm \bar{z}_{\ell} \cdot z_{\ell} \cdot \bar{z}_{\ell} \cdot z_{j_{1}} \cdot \ldots \cdot \widehat{z_{\ell}} \cdot \ldots \cdot z_{j_{k}} \cdot \bar{z}_{1} \cdot \ldots \cdot \widehat{\bar{z}}_{\ell} \cdot \ldots \cdot \bar{z}_{m} \\
+& = \pm\left(-1-z_{\ell} \cdot \bar{z}_{\ell}\right) \cdot \bar{z}_{\ell} \cdot z_{j_{1}} \cdot \ldots \cdot \widehat{z_{\ell}} \cdot \ldots \cdot z_{j_{k}} \cdot \bar{z}_{1} \cdot \ldots \cdot \widehat{\bar{z}_{\ell}} \cdot \ldots \cdot \bar{z}_{m} \\
+& = \pm \bar{z}_{\ell} \cdot z_{j_{1}} \cdot \ldots \cdot \widehat{z_{\ell}} \cdot \ldots \cdot z_{j_{k}} \cdot \bar{z}_{1} \cdot \ldots \cdot \widehat{\bar{z}_{\ell}} \cdot \ldots \cdot \bar{z}_{m}+0 \\
+& = \pm z\left(j_{1}, \ldots, \widehat{\ell}, \ldots, j_{k}\right)
+\end{aligned}
+$$
+
+where the signs $\pm$ may change in every line.\\
+b) Assume $\ell \notin\left\{j_{1}, \ldots, j_{k}\right\}$. Then by the equation (2.12) we get
+
+$$
+\begin{aligned}
+\Phi\left(\bar{z}_{\ell}\right)\left(z\left(j_{1}, \ldots, j_{k}\right)\right) & =\bar{z}_{\ell} \cdot z_{j_{1}} \cdot \ldots \cdot z_{j_{k}} \cdot \bar{z}_{1} \cdot \ldots \cdot \bar{z}_{\ell} \cdot \ldots \cdot \bar{z}_{m} \\
+& = \pm \bar{z}_{\ell} \cdot \bar{z}_{\ell} \cdot z_{j_{1}} \cdot \ldots \cdot z_{j_{k}} \cdot \bar{z}_{1} \cdot \ldots \cdot \widehat{\bar{z}}_{\ell} \cdot \ldots \cdot \bar{z}_{m} \\
+& =0
+\end{aligned}
+$$
+
+c) Assume $i \in\left\{j_{1}, \ldots, j_{k}\right\}$. By the equation (2.13) we get
+
+$$
+\begin{aligned}
+\Phi\left(z_{i}\right)\left(z\left(j_{1}, \ldots, j_{k}\right)\right) & =z_{i} \cdot z_{j_{1}} \cdot \ldots \cdot z_{i} \cdot \ldots \cdot z_{j_{k}} \cdot \bar{z}_{1} \cdot \ldots \cdot \bar{z}_{m} \\
+& = \pm z_{i} \cdot z_{i} \cdot z_{j_{1}} \cdot \ldots \cdot \widehat{z_{i}} \cdot \ldots \cdot z_{j_{k}} \cdot \bar{z}_{1} \cdot \ldots \cdot \bar{z}_{m} \\
+& =0
+\end{aligned}
+$$
+
+d) If $i \notin\left\{j_{1}, \ldots, j_{k}\right\}$ then we get
+
+$$
+\Phi\left(z_{i}\right)\left(z\left(j_{1}, \ldots, j_{k}\right)\right)=z_{i} \cdot z_{j_{1}} \cdot \ldots \cdot z_{j_{k}} \cdot \bar{z}_{1} \cdot \ldots \cdot \bar{z}_{m}= \pm z\left(j_{1}, \ldots, i, \ldots, j_{k}\right)
+$$
+
+For any multi-index $I=\left\{i_{1}, \ldots, i_{s}\right\}$ we write
+
+$$
+z_{I}:=z_{i_{1}} \cdot \ldots \cdot z_{i_{s}}, \quad \bar{z}_{I}:=\bar{z}_{i_{1}} \cdot \ldots \cdot \bar{z}_{i_{s}}, \quad z(I):=z\left(i_{1}, \ldots, i_{s}\right)
+$$
+
+and we denote by $I^{c}$ the complementary multi-index of $I$. Let now $I$ and $K$ be multiindices. The calculations in a) - d) show that for all multi-indices $J$ we have
+
+$$
+z_{1} \cdot \ldots \cdot z_{m} \cdot z(J)= \begin{cases}0 & \text { if } J \neq \emptyset \\ \pm z_{1} \cdot \ldots \cdot z_{m} & \text { if } J=\emptyset\end{cases}
+$$
+
+and thus
+
+$$
+z_{1} \cdot \ldots \cdot z_{m} \cdot \bar{z}_{I} \cdot z(J)= \begin{cases}0 & \text { if } J \neq I \\ \pm z_{1} \cdot \ldots \cdot z_{m} & \text { if } J=I\end{cases}
+$$
+
+and therefore
+
+$$
+\bar{z}_{K^{c}} \cdot z_{1} \cdot \ldots \cdot z_{m} \cdot \bar{z}_{I} \cdot z(J)= \begin{cases}0 & \text { if } J \neq I \\ \pm z(K) & \text { if } J=I\end{cases}
+$$
+
+Thus every endomorphism of $\Sigma_{n}$ can be obtained by composing endomorphisms of the form $\Phi\left(\bar{z}_{K^{c}} \cdot z_{1} \cdot \ldots \cdot z_{m} \cdot \bar{z}_{I}\right)$. This shows that $\Phi$ is surjective. Since $\mathbb{C l}_{n}$ and $\operatorname{End}\left(\Sigma_{n}\right)$ have the same dimension we conclude that $\Phi$ is an isomorphism. \(\square\)
+
+\section*{The odd dimensional case}
+In the following, let $n=2 m-1$. To construct the spinor space $\Sigma_{n}$, we make the following observation:
+
+Lemma 2.3.12. Let $n \in \mathbb{N}$. The linear map $j: \mathbb{R}^{n} \rightarrow \mathrm{Cl}_{n+1}^{0}$,
+
+$$
+X \mapsto j(X):=X \cdot e_{n+1},
+$$
+
+induces an algebra isomorphism $\mathrm{Cl}_{n} \rightarrow \mathrm{Cl}_{n+1}^{0}$.
+
+Remark 2.3.13. Lemma 2.3.12 also holds for $\mathbb{C l}_{n}$ instead of $\mathrm{Cl}_{n}$.
+
+Proof. We see immediately that the map $j$ satisfies
+
+$$
+j(X)^{2}=X \cdot e_{n+1} \cdot X \cdot e_{n+1}=-X \cdot X \cdot e_{n+1} \cdot e_{n+1}=-|X|^{2} .
+$$
+
+Thus, the universal property for $\mathrm{Cl}_{n}$ yields an algebra homomorphism $\alpha: \mathrm{Cl}_{n} \rightarrow \mathrm{Cl}_{n+1}^{0}$ such that the alongside diagram commutes.\\
+\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-097}
+
+We first show that $\alpha$ is surjective. The elements
+
+$$
+e_{i_{1}} \cdot \ldots \cdot e_{i_{2 k}}, \quad 1 \leq i_{1}<\ldots<i_{2 k} \leq n+1
+$$
+
+form a vector space basis of $\mathrm{Cl}_{n+1}^{0}$.\\
+a) First we assume that $i_{2 k} \leq n$. Then we have $e_{i_{1}} \cdot \ldots \cdot e_{i_{2 k}} \in \mathrm{Cl}_{n}$ and
+
+$$
+\begin{aligned}
+\alpha\left(e_{i_{1}} \cdot e_{i_{2}} \cdot \ldots \cdot e_{i_{2 k-1}} \cdot e_{i_{2 k}}\right) & =\alpha\left(e_{i_{1}}\right) \cdot \alpha\left(e_{i_{2}}\right) \cdot \ldots \cdot \alpha\left(e_{i_{2 k-1}}\right) \cdot \alpha\left(e_{i_{2 k}}\right) \\
+& =j\left(e_{i_{1}}\right) \cdot j\left(e_{i_{2}}\right) \cdot \ldots \cdot j\left(e_{i_{2 k-1}}\right) \cdot j\left(e_{i_{2 k}}\right) \\
+& =\underbrace{e_{i_{1}} \cdot e_{n+1} \cdot e_{i_{2}} \cdot e_{n+1}}_{=e_{i_{1}} \cdot e_{i_{2}}} \cdot \cdots \cdot \underbrace{e_{i_{2 k-1}} \cdot e_{n+1} \cdot e_{i_{2 k}} \cdot e_{n+1}}_{=e_{i_{2 k-1}} \cdot e_{i_{2 k}}} \\
+& =e_{i_{1}} \cdot \ldots \cdot e_{i_{2 k}}
+\end{aligned}
+$$
+
+b) Now we assume that $i_{2 k}=n+1$. Then we have $e_{i_{1}} \cdot \ldots \cdot e_{i_{2 k-1}} \in \mathrm{Cl}_{n}$ and
+
+$$
+\begin{aligned}
+\alpha\left(e_{i_{1}} \cdot \ldots \cdot e_{i_{2 k-1}}\right) & =\alpha\left(e_{i_{1}}\right) \cdot \ldots \cdot \alpha\left(e_{i_{2 k-1}}\right) \\
+& =j\left(e_{i_{1}}\right) \cdot \ldots \cdot j\left(e_{i_{2 k-1}}\right) \\
+& =\left(e_{i_{1}} \cdot e_{n+1} \cdot \ldots \cdot e_{i_{2 k-2}} \cdot e_{n+1}\right) \cdot e_{i_{2 k-1}} \cdot e_{n+1} \\
+& \stackrel{(2.14)}{=}\left(e_{i_{1}} \cdot \ldots \cdot e_{i_{2 k-2}}\right) \cdot e_{i_{2 k-1}} \cdot e_{n+1} \\
+& =e_{i_{1}} \cdot \ldots \cdot e_{i_{2 k-1}} \cdot e_{n+1} \\
+& =e_{i_{1}} \cdot \ldots \cdot e_{i_{2 k}}
+\end{aligned}
+$$
+
+Thus, the map $\alpha$ is surjective.\\
+Since $\operatorname{dim} \mathrm{Cl}_{n+1}^{0}=\frac{2^{n+1}}{2}=2^{n}=\operatorname{dim} \mathrm{Cl}_{n}$, the map $\alpha$ is an isomorphism.
+
+For $n$ odd we define the spinor space $\Sigma_{n}$ by:
+
+$$
+\Sigma_{n}:=\Sigma_{n+1}^{+}
+$$
+
+In particular, we have $\operatorname{dim} \Sigma_{n}=2^{\left\lfloor\frac{n}{2}\right\rfloor}$ for both even and odd $n$. The Clifford algebra $\mathrm{Cl}_{n}$ acts on the spinor space $\Sigma_{n}$ via the map $\alpha$ : For $X \in \mathrm{Cl}_{n}$ and $\phi \in \Sigma_{n}$ put
+
+$$
+X \bullet \phi:=\alpha(X) \cdot \phi \in \Sigma_{n+1}^{+}=\Sigma_{n} \text {. }
+$$
+
+The restriction of this action to $\operatorname{Spin}(n) \subset \mathrm{Cl}_{n} \subset \mathbb{C l}_{n}$ defines the spinor representation $\sigma_{n}: \operatorname{Spin}(n) \rightarrow \mathrm{GL}\left(\Sigma_{n}\right)$ in odd dimensions.
+
+Lemma 2.3.14. Let $n$ be odd. Then the Clifford multiplication of spinors by vectors is skew-symmetric, i.e., for any vector $X \in \mathbb{R}^{n}$ and any two spinors $\phi, \psi \in \Sigma_{n}$, we have:
+
+$$
+\langle X \bullet \phi, \psi\rangle=-\langle\phi, X \bullet \psi\rangle
+$$
+
+Proof. We compute:
+
+$$
+\begin{aligned}
+\langle X \bullet \phi, \psi\rangle & =\langle\alpha(X) \cdot \phi, \psi\rangle \\
+& =\left\langle X \cdot e_{n+1} \cdot \phi, \psi\right\rangle \\
+& \stackrel{(2.10)}{=}-\left\langle e_{n+1} \cdot \phi, X \cdot \psi\right\rangle \\
+& \stackrel{(2.10)}{=}-\left\langle\phi, X \cdot e_{n+1} \cdot \psi\right\rangle \\
+& =-\langle\phi, \alpha(X) \cdot \psi\rangle \\
+& =-\langle\phi, X \bullet \psi\rangle
+\end{aligned}
+$$
+
+Remark 2.3.15. As in Remark 2.3.10 one concludes that in odd dimensions Clifford multiplication by unit vectors is an isometry and thus the spinor representation is unitary.
+
+Example 2.3.16. Let $n=1$. Then we have
+
+$$
+\Sigma_{1}=\Sigma_{2}^{+}=\mathbb{C} \cdot z() \cong \mathbb{C}
+$$
+
+and
+
+$$
+e_{1} \bullet z()=e_{1} \cdot e_{2} \cdot z()=e_{1} \cdot i z(1)=-i z()
+$$
+
+Example 2.3.17. Let $n=3$. Then we have
+
+$$
+\Sigma_{3}=\Sigma_{4}^{+}=\mathbb{C} \cdot z() \oplus \mathbb{C} \cdot z(1,2) \cong \mathbb{C}^{2}
+$$
+
+By the equations (2.5) and (2.6), we have
+
+$$
+\begin{array}{ll} 
+& e_{1} \bullet z()=e_{1} \cdot e_{4} \cdot z() \stackrel{(2.5)}{=} e_{1} \cdot i z(2) \stackrel{(2.6)}{=} i z(1,2) \\
+\text { and } & e_{1} \bullet z(1,2)=e_{1} \bullet(-i) e_{1} \bullet z()=i z()
+\end{array}
+$$
+
+From this (and similar computations for $e_{2}, e_{3}$ ), we thus have:
+
+$$
+\begin{aligned}
+& e_{1} \text { acts on } \Sigma_{3} \cong \mathbb{C}^{2} \text { as }\left(\begin{array}{cc}
+0 & i \\
+i & 0
+\end{array}\right) \\
+& e_{2} \text { acts on } \Sigma_{3} \cong \mathbb{C}^{2} \text { as }\left(\begin{array}{cc}
+0 & 1 \\
+-1 & 0
+\end{array}\right) \\
+& e_{3} \text { acts on } \Sigma_{3} \cong \mathbb{C}^{2} \text { as }\left(\begin{array}{cc}
+-i & 0 \\
+0 & i
+\end{array}\right)
+\end{aligned}
+$$
+
+\subsection*{Spin Structures}
+Let $M$ be an $n$-dimensional oriented Riemannian manifold. For $x \in M$ put
+
+$$
+P_{x}^{\mathrm{SO}}(M):=\left\{h: \mathbb{R}^{n} \rightarrow T_{x} M \mid h \text { orientation preserving isometry }\right\} .
+$$
+
+Each element $h \in P_{x}^{\mathrm{SO}}(M)$ induces an oriented orthonormal basis $h\left(e_{1}\right), \ldots, h\left(e_{n}\right)$ of $T_{x} M$. Conversely, for any oriented orthonormal basis $b_{1}, \ldots, b_{n}$ of $T_{x} M$, there is a unique $h \in P_{x}^{S O}(M)$ such that $b_{1}=h\left(e_{1}\right), \ldots, b_{n}=h\left(e_{n}\right)$.\\
+The special orthogonal group $\mathrm{SO}(n)$ acts on $P_{x}^{\mathrm{SO}}(M)$ from the right:
+
+$$
+\begin{aligned}
+P_{x}^{\mathrm{SO}}(M) \times \mathrm{SO}(n) & \rightarrow P_{x}^{\mathrm{SO}}(M) \\
+(h, A) & \mapsto h \circ A .
+\end{aligned}
+$$
+
+This action is simply transitive, i.e., for any two elements $h_{1}, h_{2} \in P_{x}^{\mathrm{SO}}(M)$, there is a unique $A \in \mathrm{SO}(n)$ such that $h_{2}=h_{1} \circ A$ (namely, $A=h_{1}^{-1} \circ h_{2}$ ).\\
+Thus, for a fixed $h_{0} \in P_{x}^{\mathrm{SO}}(M)$, the map
+
+$$
+\begin{aligned}
+\mathrm{SO}(n) & \rightarrow P_{x}^{\mathrm{SO}}(M) \\
+A & \mapsto h_{0} \circ A
+\end{aligned}
+$$
+
+is bijective.\\
+Now put
+
+$$
+P^{\mathrm{SO}}(M):=\bigsqcup_{x \in M} P_{x}^{\mathrm{SO}}(M)
+$$
+
+Let $\pi: P^{\mathrm{SO}}(M) \rightarrow M$ be such that $\pi^{-1}(x)=P_{x}^{\mathrm{SO}}(M)$, thus $\pi(h)=x$, where $h: \mathbb{R}^{n} \rightarrow T_{x} M$. There is a canonical smooth structure on $P^{\mathrm{SO}}(M)$ such that the projection map $\pi: P^{\mathrm{SO}}(M) \rightarrow M$ and the group action $P^{\mathrm{SO}}(M) \times \mathrm{SO}(n) \rightarrow P^{\mathrm{SO}}(M)$ are smooth maps. In other words: ( $P^{\mathrm{SO}}(M), \pi, M ; \mathrm{SO}(n)$ ) is an $\mathrm{SO}(n)$-principal bundle over $M$.
+
+Definition 2.4.1. Let $M$ be an $n$-dimensional oriented Riemannian manifold. The $\mathrm{SO}(n)$-principal bundle $P^{\mathrm{SO}}(M)$ is called the (oriented orthonormal) frame bundle of $M$.
+
+Using a representation $\lambda: \mathrm{SO}(n) \rightarrow \mathrm{GL}(V)$, we can construct a vector bundle by glueing the vector space $V$ onto the fibers of the frame bundle:
+
+Definition 2.4.2. Let $\lambda: \mathrm{SO}(n) \rightarrow \mathrm{GL}(V)$ be a representation of $\mathrm{SO}(n)$ on a $\mathbb{K}$-vector space $V$, where $\mathbb{K}=\mathbb{R}$ or $\mathbb{C}$. The associated vector bundle to $P^{\mathrm{SO}}(M)$ is defined as:
+
+$$
+P^{\mathrm{SO}}(M) \times_{\lambda} V:=P^{\mathrm{SO}}(M) \times V / \sim
+$$
+
+Here, the equivalence relation $\sim$ is defined as:
+
+$$
+\left(h_{1}, v_{1}\right) \sim\left(h_{2}, v_{2}\right): \Longleftrightarrow \exists A \in \mathrm{SO}(n): h_{2}=h_{1} \circ A \text { and } v_{2}=\lambda\left(A^{-1}\right) v_{1} .
+$$
+
+We denote the equivalence class of $(h, v)$ in $P^{\mathrm{SO}}(M) \times_{\lambda} V$ by $\llbracket h, v \rrbracket$.
+
+The induced projection $\widetilde{\pi}: P^{\mathrm{SO}}(M) \times_{\lambda} V \rightarrow M$, given as
+
+$$
+\widetilde{\pi}(\llbracket h, v \rrbracket):=\pi(h),
+$$
+
+is well-defined: If $(\bar{h}, \bar{v}) \sim(h, v)$, that is, $\bar{h}=h \circ A$ and $\bar{v}=\lambda\left(A^{-1}\right) v$ for some $A \in \mathrm{SO}(n)$ then we have:
+
+$$
+\widetilde{\pi}(\llbracket \bar{h}, \bar{v} \rrbracket)=\widetilde{\pi}\left(\llbracket h \circ A, \lambda\left(A^{-1}\right) v \rrbracket\right)=\pi(h \circ A)=\pi(h) .
+$$
+
+The vector space structure on the fibers of $P^{S O}(M) \times{ }_{\lambda} V$ is defined by:
+
+$$
+\alpha \cdot \llbracket h, v_{1} \rrbracket+\beta \cdot \llbracket h, v_{2} \rrbracket:=\llbracket h, \alpha v_{1}+\beta v_{2} \rrbracket,
+$$
+
+where $\llbracket h, v_{1} \rrbracket, \llbracket h, v_{2} \rrbracket \in \widetilde{\pi}^{-1}(x)$ and $\alpha, \beta \in \mathbb{K}$. This operation is well-defined:
+
+$$
+\begin{aligned}
+\alpha \cdot \llbracket h \circ A, & \left(A^{-1}\right) v_{1} \rrbracket+\beta \cdot \llbracket h \circ A, \lambda\left(A^{-1}\right) v_{2} \rrbracket \\
+& =\llbracket h \circ A, \lambda\left(A^{-1}\right) v_{1}+\beta \lambda\left(A^{-1}\right) v_{2} \rrbracket \\
+& =\llbracket h \circ A, \lambda\left(A^{-1}\right)\left(\alpha v_{1}+\beta v_{2}\right) \rrbracket \\
+& =\llbracket h, \alpha v_{1}+\beta v_{2} \rrbracket \\
+& =\alpha \cdot \llbracket h, v_{1} \rrbracket+\beta \cdot \llbracket h, v_{2} \rrbracket .
+\end{aligned}
+$$
+
+For the standard representation $\lambda: \mathrm{SO}(n) \hookrightarrow \mathrm{GL}(n, \mathbb{R})$, the map
+
+$$
+\begin{aligned}
+P^{\mathrm{SO}}(M) \times{ }_{\lambda} \mathbb{R}^{n} & \cong T M \\
+\llbracket h, v \rrbracket & \mapsto h(v)
+\end{aligned}
+$$
+
+is an isomorphism of vector bundles.
+
+Similarly, we have the following canonical isomorphisms of vector bundles, associated to representations of $\operatorname{SO}(n)$ :
+
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+vector space $V$ & representation $\lambda$ of $\mathrm{SO}(n)$ on $V$ & $P^{\mathrm{SO}}(M) \times{ }_{\lambda} V$ \\
+\hline
+$\mathbb{R}$ & $\mathrm{id}_{V}$ & $M \times \mathbb{R}$ \\
+\hline
+$\mathbb{R}^{n}$ & standard representation & TM \\
+\hline
+$\left(\mathbb{R}^{n}\right)^{*}$ & dual of standard representation & $T^{*} M$ \\
+\hline
+$\left(\otimes^{k} \mathbb{R}^{n}\right) \otimes\left(\otimes^{l}\left(\mathbb{R}^{n}\right)^{*}\right)$ & $\left(\otimes^{k}(\right.$ std rep. $\left.)\right) \otimes\left(\otimes^{l}\right.$ (dual of std rep.) $)$ & $\left(\otimes^{k} T M\right) \otimes\left(\otimes^{l} T^{*} M\right)$ \\
+\hline
+\end{tabular}
+\end{center}
+
+Now we want to construct a $\operatorname{Spin}(n)$-principal bundle $P^{\operatorname{Spin}}(M)$ such that for any representation $\lambda: \operatorname{Spin}(n) \rightarrow \mathrm{GL}(V)$ of the form $\lambda=\lambda^{\prime} \circ \varrho$, with $\lambda^{\prime}: \mathrm{SO}(n) \rightarrow \mathrm{GL}(V)$, the associated vector bundles $P^{\mathrm{Spin}}(M) \times_{\lambda} V$ and $P^{\mathrm{SO}}(M) \times_{\lambda^{\prime}} V$ coincide.
+
+Definition 2.4.3. Let $M$ be an oriented Riemannian manifold. A spin structure on $M$ is a pair ( $P^{\operatorname{Spin}}(M), \bar{\varrho}$ ), consisting of\\
+a) a $\operatorname{Spin}(n)$-principal bundle $P^{\operatorname{Spin}}(M)$ over $M$ and\\
+b) a twofold covering $\bar{\varrho}: P^{\mathrm{Spin}}(M) \rightarrow P^{\mathrm{SO}}(M)$ such that the diagram\\
+\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-102}\\
+commutes. Here $\varrho: \operatorname{Spin}(n) \rightarrow \mathrm{SO}(n)$ is the twofold covering of $\mathrm{SO}(n)$ defined in equation (2.3). The horizontal maps are the group operations on the principal bundles.
+
+If $\lambda=\lambda^{\prime} \circ \varrho: \operatorname{Spin}(n) \rightarrow \mathrm{GL}(V)$ is a representation induced by $\lambda^{\prime}: \mathrm{SO}(n) \rightarrow \mathrm{GL}(V)$ then
+
+$$
+\begin{aligned}
+P^{\mathrm{Spin}}(M) \times_{\lambda} V & \simeq P^{\mathrm{SO}}(M) \times_{\lambda^{\prime}} V \\
+\llbracket H, v \rrbracket & \longmapsto \llbracket \bar{\varrho}(H), v \rrbracket
+\end{aligned}
+$$
+
+is well-defined: For any $a \in \operatorname{Spin}(n)$, we have:
+
+$$
+\llbracket H \cdot a, \lambda\left(a^{-1}\right) v \rrbracket \longmapsto \llbracket \bar{\varrho}(H a), \lambda\left(a^{-1}\right) v \rrbracket=\llbracket \bar{\varrho}(H) \varrho(a), \lambda^{\prime}\left(\varrho(a)^{-1}\right) v \rrbracket=\llbracket \bar{\varrho}(H), v \rrbracket .
+$$
+
+Obviously, this map is an isomorphism of vector bundles.
+
+Definition 2.4.4. An oriented Riemannian manifold equipped with a spin structure is called a Riemannian spin manifold.\\
+An oriented Riemannian manifold is called spinnable if it admits a spin structure.
+
+A detailed discussion of existence and uniqueness of spin structures on oriented Riemannian manifolds can be found in Chapter II of the book [7] by Lawson and Michelsohn.
+
+Definition 2.4.5. Two spin structures $P_{1}^{\text {Spin }}(M)$ and $P_{2}^{\text {Spin }}(M)$ are called equiva-\\
+lent, if there exists a diffeomorphism
+
+$$
+\phi: P_{1}^{\operatorname{Spin}}(M) \longrightarrow P_{2}^{\operatorname{Spin}}(M),
+$$
+
+such that the diagram\\
+\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-103}\\
+commutes.
+
+Example 2.4.6. For $M=S^{1}$, we have $\operatorname{SO}(1)=\{1\}$, thus $\operatorname{Spin}(1)=\mathbb{Z}_{2}$ and $P^{\mathrm{SO}}\left(S^{1}\right)=S^{1}$. A spin structure on $S^{1}$ is thus a two-fold covering of $S^{1}$. There are two possibilites:
+
+\begin{enumerate}
+  \item The trivial spin structure on $S^{1}$ is the trivial covering
+\end{enumerate}
+
+$$
+P_{\text {triv }}^{\text {Spin }}\left(S^{1}\right)=S^{1} \sqcup S^{1}=S^{1} \times \mathbb{Z}_{2} .
+$$
+
+Let $\bar{\varrho}: P^{\operatorname{Spin}}\left(S^{1}\right)=S^{1} \times \mathbb{Z}_{2} \rightarrow P^{\mathrm{SO}}\left(S^{1}\right)=S^{1}$ be the projection on the first factor. To see that this defines a spin structure on $S^{1}$, we need to check that the diagram\\
+\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-103(1)}\\
+as in Definition 2.4.3 commutes. But this is obvious.\\
+2) The non-trivial spin structure on $S^{1}$ is the non-trivial covering $P_{\text {non-triv }}^{\text {Spin }}\left(S^{1}\right)=S^{1}$ with $\bar{\varrho}: S^{1} \rightarrow S^{1}, z \mapsto z^{2}$. The action of $\operatorname{Spin}(1)=\mathbb{Z}_{2}$ on $P_{\text {non-triv }}^{\operatorname{Spin}}\left(S^{1}\right)$ is given by $z \mapsto-z$.
+
+This defines a spin structure on $S^{1}$, since the diagram\\
+\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-104}\\
+commutes.\\
+Obviously, the spin structures $P_{\text {triv }}^{\text {Spin }}\left(S^{1}\right)$ and $P_{\text {non-triv }}^{\text {Spin }}\left(S^{1}\right)$ are not equivalent, since the total spaces are not even diffeomorphic: $P_{\text {non-triv }}^{\text {Spin }}\left(S^{1}\right)$ is connected whereas $P_{\text {triv }}^{\text {Spin }}\left(S^{1}\right)$ is not.
+
+Definition 2.4.7. Let $\sigma_{n}: \operatorname{Spin}(n) \rightarrow \operatorname{GL}\left(\Sigma_{n}\right)$ be the spinor representation. Let $M$ be a Riemannian spin manifold of dimension $n$ with a spin structure $P^{\operatorname{Spin}}(M)$. The spinor bundle of $M$ for the spin structure $P^{\operatorname{Spin}}(M)$ is the associated vector bundle
+
+$$
+\boldsymbol{\Sigma} \boldsymbol{M}:=P^{\operatorname{Spin}}(M) \times_{\sigma_{n}} \Sigma_{n} .
+$$
+
+Sections of $\Sigma M$ are called spinor fields on $M$.\\
+If $n$ is even and $\sigma_{n}^{ \pm}: \operatorname{Spin}(n) \rightarrow \operatorname{GL}\left(\Sigma_{n}^{ \pm}\right)$are the positive and negative spinor representation respectively, then the vector bundles
+
+$$
+\boldsymbol{\Sigma}^{ \pm} \boldsymbol{M}:=P^{\operatorname{Spin}}(M) \times_{\sigma_{n}^{ \pm}} \Sigma_{n}^{ \pm}
+$$
+
+are called the positive and the negative spinor bundle of $M$ for the spin structure $P^{\text {Spin }}(M)$ respectively.
+
+If $n$ is even we have the decomposition $\Sigma M=\Sigma^{+} M \oplus \Sigma^{-} M$.
+
+\section*{Example 2.4.8}
+\begin{enumerate}
+  \item For the trivial spin structure $P_{\text {triv }}^{\text {Spin }}\left(S^{1}\right)$ of $S^{1}$ we get
+\end{enumerate}
+
+$$
+\Sigma_{\text {triv }} S^{1}=P_{\text {triv }}^{\operatorname{Spin}}\left(S^{1}\right) \times_{\sigma_{1}} \Sigma_{1}=\left(S^{1} \sqcup S^{1}\right) \times \Sigma_{1} / \sim \cong S^{1} \times \Sigma_{1} .
+$$
+
+The action of $\operatorname{Spin}(1)=\mathbb{Z}_{2}$ identifies the two copies of $S^{1} \times \Sigma_{1}$. Thus the identification of $\left(S^{1} \sqcup S^{1}\right) \times \Sigma_{1} / \sim \cong S^{1} \times \Sigma_{1}$ is by projection onto the first factor, or by the embedding
+
+$$
+S^{1} \times \Sigma_{1} \hookrightarrow\left(S^{1} \times \Sigma_{1}\right) \sqcup\left(S^{1} \times \Sigma_{1}\right)=\left(S^{1} \times \mathbb{Z}_{2}\right) \times \Sigma_{1},
+$$
+
+into the first factor, respectively.
+
+Since the spinor bundle is trivial, spinor fields correspond to $\Sigma_{1}=\mathbb{C}$-valued functions on $S^{1}$ or periodic $\mathbb{C}$-valued functions on $\mathbb{R}$. As a convention, we choose the period 1, i.e. , we use $\exp : \mathbb{R} \rightarrow S^{1}, \exp (t)=e^{2 \pi i t}$ for the identification.\\
+2) For the non-trivial spin structure $P_{\text {non-triv }}^{\text {Spin }}\left(S^{1}\right)$ of $S^{1}$ we have the diagram\\
+\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-105}\\
+where $\exp (t)=e^{2 \pi i t}$ and $\operatorname{EXP}(t, \varphi)=\llbracket e^{\pi i t}, \varphi \rrbracket$.\\
+Spinor fields correspond to functions $f: \mathbb{R} \rightarrow \mathbb{C}=\Sigma_{1}$, satisfying
+
+$$
+f(t+k)=(-1)^{k} f(t), \quad \text { for all } t \in \mathbb{R}, k \in \mathbb{Z} .
+$$
+
+Functions satisfying (2.16) will be called $\mathbb{Z}$-anti-periodic.\\
+The spinor field corresponding to the function $f$ is defined as
+
+$$
+t \mapsto \operatorname{EXP}(t, f(t))=\llbracket e^{\pi i t}, f(t) \rrbracket .
+$$
+
+The periodicity condition (2.16) guarantees that this mapping descends to $S^{1}$ : for any $e^{\pi i k} \in \operatorname{Spin}(1)$, we have
+
+$$
+\begin{aligned}
+\llbracket e^{\pi i(t+k)}, f(t+k) \rrbracket & =\llbracket e^{\pi i t} \cdot e^{\pi i k},(-1)^{k} f(t) \rrbracket \\
+& =\llbracket e^{\pi i t} \cdot e^{\pi i k}, \sigma_{1}\left(e^{-\pi i k}\right) f(t) \rrbracket \\
+& =\llbracket e^{\pi i t}, f(t) \rrbracket
+\end{aligned}
+$$
+
+Now let $M$ be a Riemannian spin manifold with spin structure $P^{\operatorname{Spin}}(M)$. The spinor bundle $\Sigma M$ carries a canonical Hermitian bundle metric defined as
+
+$$
+\langle\llbracket H, \varphi \rrbracket, \llbracket H, \psi \rrbracket\rangle:=\langle\varphi, \psi\rangle, \quad \text { for } H \in P^{\operatorname{Spin}}(M), \varphi, \psi \in \Sigma_{n} .
+$$
+
+This assignment is well-defined, since for any $a \in \operatorname{Spin}(n)$, we have:
+
+$$
+\left\langle\llbracket H \cdot a, \sigma_{n}\left(a^{-1}\right) \varphi \rrbracket, \llbracket H \cdot a, \sigma_{n}\left(a^{-1}\right) \psi \rrbracket\right\rangle=\left\langle\sigma_{n}\left(a^{-1}\right) \varphi, \sigma_{n}\left(a^{-1}\right) \psi\right\rangle=\langle\varphi, \psi\rangle .
+$$
+
+\section*{Clifford multiplication}
+In the following definition of the Clifford multiplication, we use the fact that for an oriented Riemannian manifold, the tangent bundle $T M$ is isomorphic to the vector bundle associated to $P^{\mathrm{SO}}(M)$ via the standard representation $\lambda_{\text {st }}$ of $\mathrm{SO}(n)$ on $\mathbb{R}^{n}$.
+
+Definition 2.4.9. Let $M$ be a Riemannian spin manifold with spinor bundle $\Sigma M$, and let $x \in M$. The map
+
+$$
+\begin{aligned}
+\cdot T_{x} M \times \Sigma_{x} M & \longrightarrow \Sigma_{x} M \\
+(\llbracket \bar{\varrho}(H), X \rrbracket, \llbracket H, \varphi \rrbracket) & \longmapsto \llbracket H, X \cdot \varphi \rrbracket
+\end{aligned}
+$$
+
+is called Clifford multiplication.
+
+Remark 2.4.10. (i) The Clifford multiplication is well defined: for any $a \in \operatorname{Spin}(n)$, we have by equation (2.3):
+
+$$
+\begin{aligned}
+\llbracket \bar{\varrho}(H \cdot a), \lambda_{\mathrm{st}}\left(\varrho\left(a^{-1}\right)\right) X \rrbracket \cdot \llbracket H \cdot a, \sigma_{n}\left(a^{-1}\right) \varphi \rrbracket & =\llbracket H \cdot a, \lambda_{\mathrm{st}}\left(\varrho\left(a^{-1}\right)\right) X \cdot \sigma_{n}\left(a^{-1}\right) \varphi \rrbracket \\
+& =\llbracket H \cdot a, a^{-1} \cdot X \cdot a \cdot a^{-1} \cdot \varphi \rrbracket \\
+& =\llbracket H \cdot a, \sigma_{n}\left(a^{-1}\right)(X \cdot \varphi) \rrbracket \\
+& =\llbracket H, X \cdot \varphi \rrbracket
+\end{aligned}
+$$
+
+(ii) The Clifford multiplication satisfies the Clifford relation:
+
+$$
+\begin{aligned}
+\llbracket \bar{\varrho}(H), X \rrbracket \cdot(\llbracket \bar{\varrho}(H), Y \rrbracket & \cdot \llbracket H, \varphi \rrbracket)+\llbracket \bar{\varrho}(H), Y \rrbracket \cdot(\llbracket \bar{\varrho}(H), X \rrbracket \cdot \llbracket H, \varphi \rrbracket) \\
+& =\llbracket H, X \cdot Y \cdot \varphi+Y \cdot X \cdot \varphi \rrbracket \\
+& =\llbracket H,-2\langle X, Y\rangle \varphi \rrbracket \\
+& =-2\langle X, Y\rangle \llbracket H, \varphi \rrbracket \\
+& =-2\langle\llbracket \bar{\varrho}(H), X \rrbracket, \llbracket \bar{\varrho}(H), Y \rrbracket\rangle \llbracket H, \varphi \rrbracket
+\end{aligned}
+$$
+
+Upon writing $X^{\prime}:=\llbracket \bar{\varrho}(H), X \rrbracket, Y^{\prime}:=\llbracket \bar{\varrho}(H), Y \rrbracket$ and $\phi:=\llbracket H, \varphi \rrbracket$, the Clifford relation reads
+
+$$
+X^{\prime} \cdot Y^{\prime} \cdot \phi+Y^{\prime} \cdot X^{\prime} \cdot \phi=-2\left\langle X^{\prime}, Y^{\prime}\right\rangle \phi
+$$
+
+(iii) The Clifford multiplication is bilinear.\\
+(iv) The Clifford multiplication is skew-symmetric: for any tangent vectors $X^{\prime} \in T_{x} M$ and spinors $\phi, \psi \in \Sigma_{x} M$, we have
+
+$$
+\left\langle X^{\prime} \cdot \phi, \psi\right\rangle=-\left\langle\phi, X^{\prime} \cdot \psi\right\rangle .
+$$
+
+\section*{The spinor connection}
+As above, let $M$ be a Riemannian spin manifold. The Levi-Civita connection $\nabla$ on $T M$ induces a connection 1 -form $\omega^{\mathrm{LC}} \in \Omega^{1}\left(P^{\mathrm{SO}}(M), \mathfrak{s o}(n)\right)$. By pull-back with $\bar{\varrho}$, we obtain an $\mathfrak{s o}(n)$-valued 1-form $\bar{\varrho}^{*} \omega^{\mathrm{LC}} \in \Omega^{1}\left(P^{\operatorname{Spin}}(M), \mathfrak{s o}(n)\right)$. Applying the isomorphism $\varrho_{*}^{-1}: \mathfrak{s o}(n) \rightarrow \mathfrak{s p i n}(n)$ yields the connection 1-form
+
+$$
+\widetilde{\omega}^{\mathrm{LC}}:=\varrho_{*}^{-1} \bar{\varrho}^{*} \omega^{\mathrm{LC}} \in \Omega^{1}\left(P^{\mathrm{Spin}}(M), \mathfrak{s p i n}(n)\right)
+$$
+
+and a corresponding spinor connection $\nabla^{\Sigma}$ on $\Sigma M$. The covariant derivative with respect to $\nabla^{\Sigma}$ of a local section $\llbracket H, \varphi \rrbracket \in C^{\infty}(U, \Sigma M)$ is given by:
+
+$$
+\nabla_{X}^{\Sigma} \llbracket H, \varphi \rrbracket=\llbracket H, \partial_{X} \varphi+\left(\sigma_{n}\right)_{*}\left(\widetilde{\omega}^{\mathrm{LC}}(d H(X))\right) \cdot \varphi \rrbracket .
+$$
+
+Here $U \subset M$ is an open subset, $x \in U, X \in T_{x} M$, and $H: U \rightarrow P^{\text {Spin }}(M)$ is a local smooth section, and $\varphi: U \rightarrow \Sigma_{n}$ a smooth function.\\
+In order to write the spinor connection in terms of Christoffel symbols, we fix a local smooth section $H: U \rightarrow P^{\mathrm{Spin}}(M)$. Then $h:=\bar{\varrho} \circ H: U \rightarrow P^{\mathrm{SO}}(M)$ is a smooth local oriented orthonormal tangent frame and the vector fields
+
+$$
+b_{1}:=h\left(e_{1}\right), \ldots, b_{n}:=h\left(e_{n}\right)
+$$
+
+form an oriented orthonormal basis of $T_{x} M$ at each $x \in U$, where $e_{1}, \ldots, e_{n}$ is the standard basis of $\mathbb{R}^{n}$. The Christoffel symbols $\Gamma_{i j}^{k}: U \rightarrow \mathbb{R}$ of this orthonormal frame are defined by the equation
+
+$$
+\nabla_{b_{i}}^{\mathrm{LC}} b_{j}=\sum_{k=1}^{n} \Gamma_{i j}^{k} b_{k} \quad \text { for all } i, j \in\{1, \ldots, n\}
+$$
+
+Note that unlike the Christoffel symbols of a local coordinate system the $\Gamma_{i j}^{k}$ are in general not symmetric in $i, j$. Instead we have $\Gamma_{i j}^{k}=-\Gamma_{i k}^{j}$ for all $i, j, k$. We compute the covariant derivative of $b_{j}=\llbracket h, e_{j} \rrbracket$ in terms of the connection 1 -form $\omega^{\mathrm{LC}}$ :
+
+$$
+\begin{aligned}
+\llbracket h, \sum_{k=1}^{n} \Gamma_{i j}^{k} e_{k} \rrbracket & =\nabla_{b_{i}}^{\mathrm{LC}} b_{j} \\
+& =\nabla_{b_{i}}^{\mathrm{LC}} \llbracket h, e_{j} \rrbracket \\
+& =\llbracket h, \underbrace{\partial_{b_{i}} e_{j}}_{=0}+\lambda_{*}\left(\omega^{\mathrm{LC}}\left(d h\left(b_{i}\right)\right)\right) e_{j} \rrbracket \\
+& =\llbracket h, \sum_{k=1}^{n} \omega_{k j}^{\mathrm{LC}}\left(d h\left(b_{i}\right)\right) e_{k} \rrbracket .
+\end{aligned}
+$$
+
+Hence
+
+$$
+\Gamma_{i j}^{k}=\omega_{k j}^{\mathrm{LC}}\left(d h\left(b_{i}\right)\right)
+$$
+
+For the local section $H: U \rightarrow P^{\operatorname{Spin}}(M)$ with $\bar{\varrho} \circ H=h$, we then have:
+
+$$
+\bar{\varrho}^{*} \omega^{\mathrm{LC}}\left(d H\left(b_{i}\right)\right)=\omega^{\mathrm{LC}}\left(d \bar{\varrho} \circ d H\left(b_{i}\right)\right)=\omega^{\mathrm{LC}}\left(d(\bar{\varrho} \circ H)\left(b_{i}\right)\right)=\omega^{\mathrm{LC}}\left(d h\left(b_{i}\right)\right)
+$$
+
+Upon writing
+
+$$
+\varrho_{*}^{-1}\left(\bar{\varrho}^{*} \omega^{\mathrm{LC}}\left(d H\left(b_{i}\right)\right)\right)=\sum_{\mu<\nu} \gamma_{\mu \nu i} e_{\mu} \cdot e_{\nu} \in \mathfrak{s p i n}(n)
+$$
+
+we obtain
+
+$$
+\omega^{\mathrm{LC}}\left(d h\left(b_{i}\right)\right)=\bar{\varrho}^{*} \omega^{\mathrm{LC}}\left(d H\left(b_{i}\right)\right)=\sum_{\mu<\nu} \gamma_{\mu \nu i} \varrho_{*}\left(e_{\mu} \cdot e_{\nu}\right)
+$$
+
+We apply this to $e_{j} \in \mathbb{R}^{n}$ and obtain
+
+$$
+\begin{aligned}
+\omega^{\mathrm{LC}}\left(d h\left(b_{i}\right)\right)\left(e_{j}\right) & =\sum_{\mu<\nu} \gamma_{\mu \nu i} \varrho_{*}\left(e_{\mu} \cdot e_{\nu}\right)\left(e_{j}\right) \\
+& =\sum_{\mu<\nu} \gamma_{\mu \nu i} \begin{cases}2 e_{\nu}, & j=\mu \\
+-2 e_{\mu}, & j=\nu \\
+0 & \text { otherwise }\end{cases} \\
+& =2 \sum_{\nu>j} \gamma_{j \nu i} e_{\nu}-2 \sum_{\mu<j} \gamma_{\mu j i} e_{\mu}
+\end{aligned}
+$$
+
+Comparing the coefficients with equation (2.19) yields
+
+$$
+\Gamma_{i j}^{k}= \begin{cases}2 \gamma_{j k i} & k>j \\ -2 \gamma_{k j i} & k<j \\ 0 & k=j\end{cases}
+$$
+
+Thus, we can replace the coefficients in (2.20) by Christoffel symbols and obtain:
+
+$$
+\widetilde{\omega}^{\mathrm{LC}}\left(d H\left(b_{i}\right)\right)=\sum_{\mu<\nu} \gamma_{\mu \nu i} e_{\mu} \cdot e_{\nu}=\frac{1}{2} \sum_{\mu<\nu} \Gamma_{i \mu}^{\nu} e_{\mu} \cdot e_{\nu}=\frac{1}{4} \sum_{\mu, \nu=1}^{n} \Gamma_{i \mu}^{\nu} e_{\mu} \cdot e_{\nu}
+$$
+
+The covariant derivative of a local section $\llbracket H, \varphi \rrbracket \in C^{\infty}(U, \Sigma M)$ can be written in terms of Christoffel symbols:
+
+$$
+\begin{aligned}
+\nabla_{b_{i}}^{\Sigma} \llbracket H, \varphi \rrbracket & =\llbracket H, \partial_{b_{i}} \varphi+\left(\sigma_{n}\right)_{*}\left(\widetilde{\omega}^{\mathrm{LC}}\left(d H\left(b_{i}\right)\right)\right) \cdot \varphi \rrbracket \\
+& =\llbracket H, \partial_{b_{i}} \varphi+\frac{1}{4} \sum_{j, k=1}^{n} \Gamma_{i j}^{k} e_{j} \cdot e_{k} \cdot \varphi \rrbracket
+\end{aligned}
+$$
+
+\section*{Remark 2.4.11}
+a) The spinor connection $\nabla^{\Sigma}$ is a metric connection on the spinor bundle $\Sigma M$. Hence for all smooth spinor fields $\phi, \psi$ and every tangent vector $X$, we have
+
+$$
+\partial_{X}\langle\phi, \psi\rangle=\left\langle\nabla_{X}^{\Sigma} \phi, \psi\right\rangle+\left\langle\phi, \nabla_{X}^{\Sigma} \psi\right\rangle .
+$$
+
+This is a general fact: for a $G$-principal bundle $P \rightarrow M$ with connection 1-form $\widetilde{\omega}$ and a unitary representation $\lambda: G \rightarrow \mathrm{U}(V)$, the induced connection on $P \times_{\lambda} V$ preserves the induced metric: the covariant derivative of a local section $\llbracket H, \phi \rrbracket$ reads
+
+$$
+\nabla_{X} \llbracket H, \phi \rrbracket=\llbracket H, \partial_{X} \phi+\underbrace{\lambda_{*}(\widetilde{\omega}(d H(X)))}_{\in \mathfrak{u}(V)} \cdot \phi \rrbracket
+$$
+
+and thus
+
+$$
+\begin{aligned}
+& \left\langle\nabla_{X} \llbracket H, \phi \rrbracket, \llbracket H, \psi \rrbracket\right\rangle+\left\langle\llbracket H, \phi \rrbracket, \nabla_{X} \llbracket H, \psi \rrbracket\right\rangle \\
+& =\left\langle\partial_{X} \phi+\lambda_{*}(\widetilde{\omega}(d H(X))) \cdot \phi, \psi\right\rangle+\left\langle\phi, \partial_{X} \psi+\lambda_{*}(\widetilde{\omega}(d H(X))) \cdot \psi\right\rangle \\
+& =\left\langle\partial_{X} \phi, \psi\right\rangle+\left\langle\phi, \partial_{X} \psi\right\rangle \\
+& =\partial_{X}\langle\phi, \psi\rangle \\
+& =\partial_{X}\langle\llbracket H, \phi \rrbracket, \llbracket H, \psi \rrbracket\rangle .
+\end{aligned}
+$$
+
+b) On an even dimensional Riemannian spin manifold $M$, the spinor connection $\nabla^{\Sigma}$ preserves the chirality: for every vector field $X \in C^{\infty}(M, T M)$ and every spinor field $\phi \in C^{\infty}\left(M, \Sigma^{ \pm} M\right)$, we have $\nabla_{X}^{\Sigma} \phi \in C^{\infty}\left(M, \Sigma^{ \pm} M\right)$. This follows immediately from equation (2.21).
+
+Now we prove a Leibniz rule for the Clifford multiplication:
+
+Lemma 2.4.12. Let $M$ be a Riemannian spin manifold with spinor bundle $\Sigma M$ and spinor connection $\nabla^{\Sigma}$. Then for all vector fields $X, Y \in C^{\infty}(M, T M)$ and all spinor fields $\phi \in C^{\infty}(M, \Sigma M)$, we have
+
+$$
+\nabla_{X}^{\Sigma}(Y \cdot \phi)=\left(\nabla_{X}^{\mathrm{LC}} Y\right) \cdot \phi+Y \cdot \nabla_{X}^{\Sigma} \phi
+$$
+
+Proof. Fix $x \in M$ and let $U$ be a neighborhood of $x$. Let $H: U \rightarrow P^{\text {Spin }}(M)$ be a local section and $h=\bar{\varrho} \circ H: U \rightarrow P^{\mathrm{SO}}(M)$ be the corresponding local section of $P^{\mathrm{SO}}(M)$. Then the vector fields $b_{1}:=h\left(e_{1}\right), \ldots, b_{n}:=h\left(e_{n}\right)$ form an oriented orthonormal local frame of $T M$.\\
+Since the spinor connection is tensorial in the vector fields, it suffices to prove (2.23) for $X=b_{i}$. We thus write $Y=\llbracket h, Y^{\prime} \rrbracket$ and $\phi=\llbracket H, \varphi \rrbracket$ on $U$, where $Y^{\prime}: U \rightarrow \mathbb{R}^{n}$ and $\varphi: U \rightarrow \Sigma_{n}$. Now we compute:
+
+$$
+\begin{aligned}
+\nabla_{b_{i}}^{\Sigma}(Y \cdot \phi) & =\nabla_{b_{i}}^{\Sigma} \llbracket H, Y^{\prime} \cdot \varphi \rrbracket \\
+& \stackrel{(2.21)}{=} \llbracket H, \partial_{b_{i}}\left(Y^{\prime} \cdot \varphi\right)+\frac{1}{4} \sum_{j, k=1}^{n} \Gamma_{i j}^{k} e_{j} \cdot e_{k} \cdot Y^{\prime} \cdot \varphi \rrbracket \\
+= & \llbracket H,\left(\partial_{b_{i}} Y^{\prime}\right) \cdot \varphi+Y^{\prime} \cdot \partial_{b_{i}} \varphi-\frac{1}{4} \sum_{j, k=1}^{n} \Gamma_{i j}^{k} e_{j} \cdot Y^{\prime} \cdot e_{k} \cdot \varphi-\frac{1}{2} \sum_{j, k=1}^{n} \Gamma_{i j}^{k} e_{j}\left\langle e_{k}, Y^{\prime}\right\rangle \cdot \varphi \rrbracket \\
+= & \llbracket H,\left(\partial_{b_{i}} Y^{\prime}\right) \cdot \varphi+Y^{\prime} \cdot \partial_{b_{i}} \varphi+\frac{1}{4} \sum_{j, k=1}^{n} \Gamma_{i j}^{k} Y^{\prime} \cdot e_{j} \cdot e_{k} \cdot \varphi+\frac{1}{2} \sum_{j, k=1}^{n} \Gamma_{i j}^{k}\left\langle e_{j}, Y^{\prime}\right\rangle e_{k} \cdot \varphi \\
+& \quad-\frac{1}{2} \sum_{j, k=1}^{n} \Gamma_{i j}^{k} e_{j}\left\langle e_{k}, Y^{\prime}\right\rangle \cdot \varphi \rrbracket
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+& =\llbracket H, Y^{\prime} \cdot\left(\partial_{b_{i}} \varphi+\frac{1}{4} \sum_{j, k=1}^{n} \Gamma_{i j}^{k} e_{j} \cdot e_{k} \cdot \varphi\right) \rrbracket \\
+& \quad+\llbracket H,\left(\partial_{b_{i}} Y^{\prime}+\sum_{j, k=1}^{n}\left\langle Y^{\prime}, e_{j}\right\rangle \Gamma_{i j}^{k} e_{k}\right) \cdot \varphi \rrbracket \\
+& =Y \cdot \nabla_{b_{i}}^{\Sigma} \phi+\nabla_{b_{i}}^{\mathrm{LC}} Y \cdot \phi .
+\end{aligned}
+$$ \(\square\)
+
+In (2.21) we gave an expression of the spinor connection $\nabla^{\Sigma}$ in terms of the Christoffel symbols of the Levi-Civita connection $\nabla^{\mathrm{LC}}$. Now we want to do the same for the corresponding curvatures.
+
+Let $R^{\Sigma}$ be the curvature for $\nabla^{\Sigma}$, i.e. the endomorphism field on $\Sigma M$, defined by
+
+$$
+R^{\Sigma}(X, Y) \phi:=\nabla_{X}^{\Sigma} \nabla_{Y}^{\Sigma} \phi-\nabla_{Y}^{\Sigma} \nabla_{X}^{\Sigma} \phi-\nabla_{[X, Y]}^{\Sigma} \phi .
+$$
+
+Lemma 2.4.13. Let $M$ be a Riemannian spin manifold with spinor bundle $\Sigma M$, and let $\nabla^{\mathrm{LC}}$ and $\nabla^{\Sigma}$ be the Levi-Civita connection and the corresponding spinor connection, respectively. Then the curvatures $R^{\Sigma}$ of $\nabla^{\Sigma}$ and $R$ of $\nabla^{\mathrm{LC}}$ are related by
+
+$$
+R^{\Sigma}(X, Y) \phi=-\frac{1}{4} \sum_{i=1}^{n}\left(R(X, Y) b_{i}\right) \cdot b_{i} \cdot \phi .
+$$
+
+Here $b_{1}, \ldots, b_{n}$ denotes an orthonormal basis of $T_{x} M$.
+
+Proof. Fix $x \in M$ and let $U$ be a neighborhood of $x$. Let $H: U \rightarrow P^{\text {Spin }}(M)$ be a local section and $h=\bar{\varrho} \circ H: U \rightarrow P^{\mathrm{SO}}(M)$ be the corresponding local section of $P^{\mathrm{SO}}(M)$. The vector fields $b_{1}:=h\left(e_{1}\right), \ldots, b_{n}:=h\left(e_{n}\right)$ form an oriented orthonormal local frame of $T M$, which we assume to be synchronous in $x$, i.e. $\left(\nabla_{b_{i}}^{\mathrm{LC}} b_{j}\right)(x)=0$ for $i, j=1, \ldots, n$. In particular, $\Gamma_{i j}^{k}(x)=0$ and $\left[b_{i}, b_{j}\right](x)=0$ for $i, j, k=1, \ldots, n$.\\
+For a local section $\llbracket H, \varphi \rrbracket \in C^{\infty}(U, \Sigma M)$, we compute:
+
+$$
+\begin{aligned}
+\left(\nabla_{b_{i}}^{\Sigma} \nabla_{b_{j}}^{\Sigma} \llbracket H, \varphi \rrbracket\right)_{(x)} & =\left(\nabla_{b_{i}}^{\Sigma} \llbracket H, \partial_{b_{j}} \varphi+\frac{1}{4} \sum_{\alpha, \beta} \Gamma_{j \alpha}^{\beta} e_{\alpha} \cdot e_{\beta} \cdot \varphi \rrbracket\right)_{(x)} \\
+& =\llbracket H, \partial_{b_{i}}\left(\partial_{b_{j}} \varphi+\frac{1}{4} \sum_{\alpha, \beta} \Gamma_{j \alpha}^{\beta} e_{\alpha} \cdot e_{\beta} \cdot \varphi\right) \rrbracket_{(x)} \\
+& =\llbracket H, \partial_{b_{i}} \partial_{b_{j}} \varphi+\frac{1}{4} \sum_{\alpha, \beta}\left(\partial_{b_{i}} \Gamma_{j \alpha}^{\beta}\right) e_{\alpha} \cdot e_{\beta} \cdot \varphi \rrbracket_{(x)}
+\end{aligned}
+$$
+
+This yields for the curvature at $x$ :
+
+$$
+\begin{aligned}
+\left(R^{\Sigma}\left(b_{i}, b_{j}\right) \phi\right)_{(x)}= & \llbracket H, \partial_{b_{i}} \partial_{b_{j}} \varphi+\frac{1}{4} \sum_{\alpha, \beta}\left(\partial_{b_{i}} \Gamma_{j \alpha}^{\beta}\right) e_{\alpha} \cdot e_{\beta} \cdot \varphi \rrbracket_{(x)} \\
+& \quad-\llbracket H, \partial_{b_{j}} \partial_{b_{i}} \varphi+\frac{1}{4} \sum_{\alpha, \beta}\left(\partial_{b_{j}} \Gamma_{i \alpha}^{\beta}\right) e_{\alpha} \cdot e_{\beta} \cdot \varphi \rrbracket_{(x)} \\
+= & \llbracket H, \underbrace{\left(\partial_{b_{i}} \partial_{b_{j}}-\partial_{b_{j}} \partial_{b_{i}}\right) \varphi}_{=\partial_{\left[b_{i}, b_{j}\right](x)} \varphi=0}+\frac{1}{4} \sum_{\alpha, \beta}\left(\partial_{b_{i}} \Gamma_{j \alpha}^{\beta}-\partial_{b_{j}} \Gamma_{i \alpha}^{\beta}\right) e_{\alpha} \cdot e_{\beta} \cdot \varphi \rrbracket_{(x)} \\
+= & -\frac{1}{4} \llbracket H, \sum_{\alpha, \beta}\left(\partial_{b_{i}} \Gamma_{j \alpha}^{\beta}-\partial_{b_{j}} \Gamma_{i \alpha}^{\beta}\right) e_{\beta} \cdot e_{\alpha} \cdot \varphi \rrbracket_{(x)}
+\end{aligned}
+$$
+
+On the other hand we have $\nabla_{b_{j}}^{\mathrm{LC}} b_{\alpha}=\sum_{\beta} \Gamma_{j \alpha}^{\beta} b_{\beta}$ and thus at $x$ :
+
+$$
+R\left(b_{i}, b_{j}\right) b_{\alpha}=\sum_{\beta}\left(\partial_{b_{i}} \Gamma_{j \alpha}^{\beta}-\partial_{b_{j}} \Gamma_{i \alpha}^{\beta}\right) b_{\beta}
+$$
+
+We conclude that $\left(R^{\Sigma}\left(b_{i}, b_{j}\right) \phi\right)(x)=-\frac{1}{4} \sum_{\alpha}\left(R\left(b_{i}, b_{j}\right) b_{\alpha}\right) \cdot b_{\alpha} \cdot \phi(x)$.
+
+\subsection*{The classical Dirac operator on spinors}
+Let $M$ be an $n$-dimensional Riemannian spin manifold. Clifford multiplication in the spinor bundle $\Sigma M$ defines a smooth section $A \in C^{\infty}\left(M, \operatorname{Hom}\left(T^{*} M \otimes \Sigma M, \Sigma M\right)\right)$ by $A(\xi \otimes \phi)=\xi^{\sharp} \cdot \phi$.
+
+Definition 2.5.1. Let $M$ be a Riemannian spin manifold with spinor bundle $\Sigma M$. The classical Dirac operator is the first order operator
+
+$$
+D:=D_{A, \nabla^{\Sigma}} \in \mathscr{D}_{i} f_{1}(\Sigma M, \Sigma M)
+$$
+
+as defined in (1.28) for $E=F=\Sigma M$ and $A$ given by Clifford multiplication.
+
+Recall from equation (1.28) that for a local orthonormal frame $b_{1}, \ldots, b_{n} \in T_{x} M$, the operator $D_{A, \nabla^{\Sigma}}$ is defined as
+
+$$
+D_{A, \nabla^{\Sigma}}=\sum_{i} A\left(b_{i}^{*} \otimes \nabla_{b_{i}}^{\Sigma} \phi\right)
+$$
+
+Thus, for the classical Dirac operator, we have:
+
+$$
+D=D_{A, \nabla^{\Sigma}}=\sum_{i}\left(b_{i}^{*}\right)^{\sharp} \cdot \nabla_{b_{i}}^{\Sigma} \phi=\sum_{i} b_{i} \cdot \nabla_{b_{i}}^{\Sigma} \phi .
+$$
+
+Remark 2.5.2. The classical Dirac operator is an operator of Dirac-type, as defined in Definition 1.3.7. Its principal symbol is given by
+
+$$
+\sigma(D, \xi) \phi=\sigma\left(D_{A, \nabla^{\Sigma}}, \xi\right) \phi \stackrel{(1.31)}{=} A(\xi \otimes \phi)=\xi^{\sharp} \cdot \phi
+$$
+
+By Lemmas 2.3.9 and 2.3.14, Clifford multiplication by tangent vectors is a skewsymmetric endomorphism of $\Sigma M$. Together with the Clifford relation (2.1), we conclude that $D$ satisfies Definition 1.3.7.
+
+Remark 2.5.3. On an even dimensional Riemannian spin manifold, the classical Dirac operator $D$ interchanges chirality. With respect to the splitting $\Sigma M=\Sigma^{+} M \oplus \Sigma^{-} M$, the operator takes the form
+
+$$
+D=\left(\begin{array}{cc}
+0 & D^{-} \\
+D^{+} & 0
+\end{array}\right)
+$$
+
+where $D^{+} \in \operatorname{Diff}_{1}\left(\Sigma^{+} M, \Sigma^{-} M\right)$ and $D^{-} \in \operatorname{Diff}_{1}\left(\Sigma^{-} M, \Sigma^{+} M\right)$.
+
+Definition 2.5.4. Let $M$ be a Riemannian spin manifold, let $D$ be the classical Dirac operator, and let $C$ be a vector bundle on $M$ with connection $\nabla^{C}$. The operator
+
+$$
+D^{\nabla^{C}} \in \mathscr{D}_{i} f_{1}(\Sigma M \otimes C, \Sigma M \otimes C) .
+$$
+
+as in Definition 1.3.21 is called twisted Dirac operator.
+
+Lemma 2.5.5. The classical Dirac operator is formally self-adjoint.
+
+Proof. Let $\phi, \psi \in C_{c}^{\infty}(M, \Sigma M)$ be compactly supported spinor fields. Define $X \in C_{c}^{\infty}(M, T M \otimes \mathbb{C})$ by
+
+$$
+\langle X, Y\rangle=\langle Y \cdot \phi, \psi\rangle \quad \text { for all } Y \in T M
+$$
+
+Let $b_{1}, \ldots, b_{n}$ be a local orthonormal frame. Then we have:
+
+$$
+\begin{aligned}
+\operatorname{div} X & =\sum_{i=1}^{n}\left\langle\nabla_{b_{i}} X, b_{i}\right\rangle \\
+& =\sum_{i=1}^{n} \partial_{b_{i}}\left\langle X, b_{i}\right\rangle-\sum_{i}\left\langle X, \nabla_{b_{i}} b_{i}\right\rangle \\
+& =\sum_{i=1}^{n} \partial_{b_{i}}\left\langle b_{i} \cdot \phi, \psi\right\rangle-\left\langle\nabla_{b_{i}} b_{i} \cdot \phi, \psi\right\rangle \\
+& \stackrel{(2.22)}{=} \sum_{i=1}^{n}\left\langle\nabla_{b_{i}}^{\Sigma}\left(b_{i} \cdot \phi\right), \psi\right\rangle+\left\langle b_{i} \cdot \phi, \nabla_{b_{i}}^{\Sigma} \psi\right\rangle-\left\langle\nabla_{b_{i}} b_{i} \cdot \phi, \psi\right\rangle
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+& \stackrel{(2.23)}{=} \sum_{i=1}^{n}\left\langle\nabla_{b_{i}} b_{i} \cdot \phi+b_{i} \cdot \nabla_{b_{i}}^{\Sigma} \phi, \psi\right\rangle-\left\langle\phi, b_{i} \cdot \nabla_{b_{i}}^{\Sigma} \psi\right\rangle-\left\langle\nabla_{b_{i}} b_{i} \cdot \phi, \psi\right\rangle \\
+& \stackrel{(2.25)}{=}\langle D \phi, \psi\rangle-\langle\phi, D \psi\rangle
+\end{aligned}
+$$
+
+Integration over $M$ yields
+
+$$
+(D \phi, \psi)_{L^{2}}-(\phi, D \psi)_{L^{2}}=\int_{M} \operatorname{div}(X) d v o l=0
+$$
+
+Corollary 2.5.6. Let $D^{\nabla^{C}}$ be a twisted Dirac operator. If $\nabla^{C}$ is a metric connection for a Hermitian metric on the vector bundle $C$ then $D^{\nabla^{C}}$ is formally self-adjoint with respect to the induced metric on $\Sigma M \otimes C$.
+
+Proof. This follows from Lemma 2.5.5 together with Corollary 1.3.25.
+
+Remark 2.5.7. The proof of the Lemma 2.5.5 shows more than the formal selfadjointness of $D$ : if $M$ is a Riemannian spin manifold with boundary then for all compactly supported $\phi, \psi \in C_{c}^{\infty}(M, \Sigma M)$ we have
+
+$$
+(D \phi, \psi)_{L^{2}}-(\phi, D \psi)_{L^{2}}=\int_{\partial M}\langle X, \nu\rangle d A
+$$
+
+Here $\nu$ denotes the exterior unit normal vector field on $\partial M$.
+
+\section*{Example 2.5.8}
+(i) Consider $M=S^{1}$ with the trivial spin structure. Let $b_{1}=\frac{\partial}{\partial t}$. Then we have
+
+$$
+\nabla_{b_{1}}^{\Sigma} \llbracket H, \varphi \rrbracket=\llbracket H, \frac{d \varphi}{d t} \rrbracket
+$$
+
+and
+
+$$
+D \llbracket H, \varphi \rrbracket=b_{1} \cdot \nabla_{b_{1}}^{\Sigma} \llbracket H, \varphi \rrbracket=\llbracket H,-i \frac{d \varphi}{d t} \rrbracket
+$$
+
+By Example 2.4.8, spinor fields $\llbracket H, \varphi \rrbracket$ correspond to $\mathbb{Z}$-periodic complex valued functions on $\mathbb{R}$. Under this identification, the Dirac operator $D$ corresponds to the operator $-i \frac{d}{d t}$. Using the Fourier expansion
+
+$$
+\varphi(t)=\sum_{k=-\infty}^{\infty} \alpha_{k} \cdot e^{2 \pi i k t}
+$$
+
+of $\mathbb{Z}$-periodic complex functions, we find $-i \frac{d}{d t} e^{2 \pi i k t}=2 \pi k e^{2 \pi i k t}$.\\
+Hence the spectrum of the Dirac operator $D$ on $S^{1}$ for the trivial spin structure is $2 \pi \mathbb{Z}$, and all eigenvalues of $D$ have the multiplicity 1 .\\
+(ii) Consider $M=S^{1}$ with the non-trivial spin structure. As above, the Dirac operator $D$ corresponds to the operator $-i \frac{d}{d t}$, acting on $\mathbb{Z}$-anti-periodic complex functions this time, see Example 2.4.8. Since a function $\varphi: \mathbb{R} \rightarrow \mathbb{C}$ is $\mathbb{Z}$-anti-periodic if and only if $e^{i \pi t} \varphi(t)$ is $\mathbb{Z}$-periodic, we have the Fourier expansion
+
+$$
+e^{i \pi t} \varphi(t)=\sum_{k=-\infty}^{\infty} \alpha_{k} e^{i 2 \pi k t}
+$$
+
+which yields
+
+$$
+\varphi(t)=\sum_{k=-\infty}^{\infty} \alpha_{k} e^{2 \pi i\left(k-\frac{1}{2}\right) t}
+$$
+
+We thus find $-i \frac{d}{d t} e^{2 \pi i\left(k-\frac{1}{2}\right) t}=2 \pi\left(k-\frac{1}{2}\right) e^{2 \pi i\left(k-\frac{1}{2}\right) t}$. Hence the spectrum of the Dirac operator $D$ on $S^{1}$ for the non-trivial spin structure is $2 \pi\left(\mathbb{Z}-\frac{1}{2}\right)$, and all multiplicities are 1.\\
+In particular, 0 is an eigenvalue for the trivial spin structure on $S^{1}$, but not for the non-trivial spin structure.
+
+By Remark 2.5.2, the classical Dirac operator $D$ is of Dirac-type, and by Lemma 2.5.5 it is formally self-adjoint. By Lemma 1.3.5, we have
+
+$$
+D^{2}=\widetilde{\nabla}^{*} \widetilde{\nabla}+B
+$$
+
+for a connection $\widetilde{\nabla}$ on $\Sigma M$ and an endomorphism field $B \in C^{\infty}(M, \operatorname{End}(\Sigma M))$. We now want to determine $\widetilde{\nabla}$ and $B$.
+
+Lemma 2.5.9. Let $M$ be a $n$-dimensional Riemannian spin manifold with spinor bundle $\Sigma M$. For any orthonormal basis $b_{1}, \ldots, b_{n}$ of $T_{p} M$ and any $X \in T_{p} M$, we have
+
+$$
+\sum_{j=1}^{n} b_{j} \cdot R^{\Sigma}\left(b_{j}, X\right) \phi=\frac{1}{2} \operatorname{Ric}(X) \cdot \phi
+$$
+
+Proof. a) By the first Bianchi identity, we have
+
+$$
+\begin{aligned}
+T B C:=\sum_{j=1}^{n} b_{j} \cdot R^{\Sigma}\left(b_{j}, X\right) \phi & \stackrel{(2.24)}{=}-\frac{1}{4} \sum_{i, j} b_{j} \cdot R\left(b_{j}, X\right) b_{i} \cdot b_{i} \cdot \phi \\
+& =\frac{1}{4} \sum_{i, j} b_{j} \cdot\left(R\left(b_{i}, b_{j}\right) X+R\left(X, b_{i}\right) b_{j}\right) \cdot b_{i} \cdot \phi
+\end{aligned}
+$$
+
+Now we compute the two contributing terms separately:\\
+b) For the first term on the right hand side of (2.30), we obtain
+
+$$
+\begin{aligned}
+& \sum_{i, j=1}^{n} b_{j} \cdot R\left(b_{i}, b_{j}\right) X \cdot b_{i} \cdot \phi \\
+& \quad=\sum_{i, j, k=1}^{n} b_{j} \cdot\left\langle R\left(b_{i}, b_{j}\right) X, b_{k}\right\rangle b_{k} \cdot b_{i} \cdot \phi \\
+& \quad=\sum_{i, j, k=1}^{n} b_{j} \cdot\left\langle R\left(X, b_{k}\right) b_{i}, b_{j}\right\rangle b_{k} \cdot b_{i} \cdot \phi \\
+& \quad=\sum_{i, k=1}^{n} R\left(X, b_{k}\right) b_{i} \cdot b_{k} \cdot b_{i} \cdot \phi \\
+& \quad=-\sum_{i, k=1}^{n} R\left(b_{k}, X\right) b_{i} \cdot b_{k} \cdot b_{i} \cdot \phi \\
+& \quad \stackrel{(2.1)}{=} \sum_{i, k=1}^{n} b_{k} \cdot R\left(b_{k}, X\right) b_{i} \cdot b_{i} \cdot \phi+2 \sum_{i, k=1}^{n}\left\langle R\left(b_{k}, X\right) b_{i}, b_{k}\right\rangle b_{i} \cdot \phi \\
+& \quad \stackrel{(2.29)}{=}-4 T B C+2 \operatorname{Ric}(X) \cdot \phi .
+\end{aligned}
+$$
+
+c) For the second term on the right hand side of (2.30), we obtain
+
+$$
+\begin{aligned}
+& \sum_{i, j=1}^{n} b_{j} \cdot R\left(X, b_{i}\right) b_{j} \cdot b_{i} \cdot \phi \\
+& \quad \stackrel{(2.1)}{=}-\sum_{i, j=1}^{n} R\left(X, b_{i}\right) b_{j} \cdot b_{j} \cdot b_{i} \cdot \phi-2 \sum_{i, j=1}^{n} \underbrace{\left\langle b_{j}, R\left(X, b_{i}\right) b_{j}\right\rangle}_{=0} b_{i} \cdot \phi \\
+& \quad=\sum_{i, j=1}^{n} R\left(X, b_{i}\right) b_{j} \cdot b_{i} \cdot b_{j} \cdot \phi+2 \underbrace{\sum_{i=1}^{n} R\left(X, b_{i}\right) b_{i}}_{=\operatorname{Ric}(X)} \cdot \phi \\
+& \quad=-\sum_{i, j=1}^{n} b_{i} \cdot R\left(X, b_{i}\right) b_{j} \cdot b_{j} \cdot \phi+2 \underbrace{\sum_{i, j=1}^{n}\left\langle R\left(b_{i}, X\right) b_{j}, b_{i}\right\rangle}_{=\operatorname{Ric}(X)} b_{j} \cdot \phi+2 \operatorname{Ric}(X) \cdot \phi
+\end{aligned}
+$$
+
+$$
+\stackrel{(2.29)}{=}-4 T B C+4 \operatorname{Ric}(X) \cdot \phi
+$$
+
+d) Inserting (2.31) and (2.32) into (2.30) yields
+
+$$
+\mathrm{TBC}=-\mathrm{TBC}+\frac{1}{2} \operatorname{Ric}(X) \cdot \phi-\mathrm{TBC}+\operatorname{Ric}(X) \cdot \phi
+$$
+
+and hence
+
+$$
+\mathrm{TBC}=\frac{1}{2} \operatorname{Ric}(X) \cdot \phi
+$$
+
+Lemma 2.5.10. Let $E$ be a Riemannian or Hermitian vector bundle over a Riemannian manifold $M$, and let $\nabla$ be a metric connection on $E$.\\
+Then for any local orthonormal tangent frame $b_{1}, \ldots, b_{n}$ we have
+
+$$
+\nabla^{*} \nabla=-\sum_{i=1}^{n}\left(\nabla_{b_{i}} \nabla_{b_{i}}-\nabla_{\nabla_{b_{i}}^{\mathrm{LC}} b_{i}}\right)
+$$
+
+Proof. Let $\phi, \psi \in C_{c}^{\infty}(M, E)$ be sections in $E$ with support in the domain of definition of $b_{1}, \ldots, b_{n}$. Let $X \in C_{c}^{\infty}(M, T M \otimes \mathbb{C})$ be the vector field defined by
+
+$$
+\langle X, Y\rangle=\left\langle\phi, \nabla_{Y} \psi\right\rangle, \quad \text { for all } Y \in T M
+$$
+
+Since the Levi-Civita connection $\nabla^{\mathrm{LC}}$ and the connection $\nabla$ on $E$ are metric, we get
+
+$$
+\begin{aligned}
+\operatorname{div} X & =\sum_{i}\left\langle\nabla_{b_{i}}^{\mathrm{LC}} X, b_{i}\right\rangle \\
+& =\sum_{i}\left(\partial_{b_{i}}\left\langle X, b_{i}\right\rangle-\left\langle X, \nabla_{b_{i}}^{\mathrm{LC}} b_{i}\right\rangle\right) \\
+& =\sum_{i}\left(\partial_{b_{i}}\left\langle\phi, \nabla_{b_{i}} \psi\right\rangle-\left\langle\phi, \nabla_{\nabla_{b_{i}}^{\mathrm{LC}} b_{i}} \psi\right\rangle\right) \\
+& =\sum_{i}\left(\left\langle\nabla_{b_{i}} \phi, \nabla_{b_{i}} \psi\right\rangle+\left\langle\phi, \nabla_{b_{i}} \nabla_{b_{i}} \psi\right\rangle-\left\langle\phi, \nabla_{\nabla_{b_{i}}^{\mathrm{LC}} b_{i}} \psi\right\rangle\right) \\
+& =\langle\nabla \phi, \nabla \psi\rangle+\left\langle\phi, \sum_{i}\left(\nabla_{b_{i}} \nabla_{b_{i}}-\nabla_{\nabla_{b_{i}}^{\mathrm{LC}} b_{i}}\right) \psi\right\rangle
+\end{aligned}
+$$
+
+By Gauß' divergence theorem, we obtain
+
+$$
+\begin{aligned}
+0 & =\int_{M} \operatorname{div}(X) d v o l \\
+& =(\nabla \phi, \nabla \psi)_{L^{2}}+\left(\phi, \sum_{i}\left(\nabla_{b_{i}} \nabla_{b_{i}}-\nabla_{\nabla_{b_{i}}^{\mathrm{LC}} b_{i}}\right) \psi\right)_{L^{2}}
+\end{aligned}
+$$
+
+and thus
+
+$$
+\left(\phi, \nabla^{*} \nabla \psi\right)_{L^{2}}=-\left(\phi, \sum_{i}\left(\nabla_{b_{i}} \nabla_{b_{i}}-\nabla_{\nabla_{b_{i}}^{\mathrm{LC}} b_{i}}\right) \psi\right)_{L^{2}}
+$$
+
+for any $\phi, \psi \in C_{c}^{\infty}(M, E)$ as above and hence (2.33) holds at any point $p \in M$.
+
+Theorem 2.5.11 (Lichnerowicz (1963)). Let $M$ be a Riemannian spin manifold, and let $D$ be the classical Dirac operator. Then we have
+
+$$
+D^{2}=\left(\nabla^{\Sigma}\right)^{*} \nabla^{\Sigma}+\frac{\text { scal }}{4} \cdot \operatorname{id}_{\Sigma M}
+$$
+
+Proof. Let $x \in M$, and $b_{1}, \ldots, b_{n}$ be a local orthonormal tangent frame, defined in a neighborhood of $x$ such that $\nabla_{b_{i}}^{\mathrm{LC}} b_{j}(x)=0$ and $\operatorname{Ric}\left(b_{i}\right)(x)=\lambda_{i} b_{i}(x)$ for all $i, j$. Now for any spinor field $\phi \in C^{\infty}(M, \Sigma)$, we have:
+
+$$
+\begin{aligned}
+\left(D^{2} \phi\right)_{(x)} & \stackrel{(2.25)}{=}\left(\sum_{i, j=1}^{n} b_{j} \cdot \nabla_{b_{j}}^{\Sigma}\left(b_{i} \cdot \nabla_{b_{i}}^{\Sigma} \phi\right)\right)_{(x)} \\
+& \stackrel{(2.23)}{=}(\sum_{i, j=1}^{n} b_{j} \cdot(\underbrace{\nabla_{b_{j}}^{\mathrm{LC}} b_{i}}_{=0} \cdot \nabla_{b_{i}}^{\Sigma} \phi+b_{i} \cdot \nabla_{b_{j}}^{\Sigma} \nabla_{b_{i}}^{\Sigma} \phi))_{(x)} \\
+& \stackrel{(2.1)}{=}-\left(\sum_{i=1}^{n} \nabla_{b_{i}}^{\Sigma} \nabla_{b_{i}}^{\Sigma} \phi+\sum_{i<j} b_{j} \cdot b_{i} \cdot\left(\nabla_{b_{j}}^{\Sigma} \nabla_{b_{i}}^{\Sigma}-\nabla_{b_{i}}^{\Sigma} \nabla_{b_{j}}^{\Sigma}\right) \phi\right)_{(x)} \\
+& \stackrel{(2.33)}{=}\left(\left(\nabla^{\Sigma}\right)^{*} \nabla^{\Sigma} \phi+\sum_{i<j} b_{j} \cdot b_{i} \cdot R^{\Sigma}\left(b_{j}, b_{i}\right) \phi\right)_{(x)}
+\end{aligned}
+$$
+
+By Lemma 2.5.9, we have:
+
+$$
+\begin{aligned}
+\sum_{i<j} b_{j} \cdot b_{i} \cdot R^{\Sigma}\left(b_{j}, b_{i}\right) \phi & \stackrel{(2.1)}{=} \frac{1}{2} \sum_{i, j=1}^{n} b_{j} \cdot b_{i} \cdot R^{\Sigma}\left(b_{j}, b_{i}\right) \phi \stackrel{(2.28)}{=}-\frac{1}{4} \sum_{j=1}^{n} b_{j} \cdot \operatorname{Ric}\left(b_{j}\right) \cdot \phi \\
+& =-\frac{1}{4} \sum_{j=1}^{n} b_{j} \cdot \lambda_{j} b_{j} \cdot \phi=\frac{1}{4} \sum_{j=1}^{n} \lambda_{j} \cdot \phi \\
+& =\frac{1}{4} \operatorname{tr}(\text { Ric }) \cdot \phi=\frac{1}{4} \text { scal } \cdot \phi
+\end{aligned}
+$$
+
+Corollary 2.5.12. Let $M$ be an $n$-dimensional connected compact Riemannian spin manifold with scal $\geq 0$. Then the multiplicity of 0 in $\operatorname{spec}(D)$ is bounded by
+
+$$
+\operatorname{mult}(0) \leq \operatorname{dim} \Sigma_{n}=2^{\left[\frac{n}{2}\right]}
+$$
+
+Moreover, any harmonic spinor field (i.e. eigenspinor of $D$ for the eigenvalue 0 ) is $\nabla^{\Sigma}$-parallel.
+
+Proof. Let $\phi \in \operatorname{ker}(D)$. Then we have:
+
+$$
+\begin{aligned}
+0 & =\left(D^{2} \phi, \phi\right)_{L^{2}} \\
+& \stackrel{(2.34)}{=}\left(\left(\nabla^{\Sigma}\right)^{*} \nabla^{\Sigma} \phi, \phi\right)_{L^{2}}+\left(\frac{\text { scal }}{4} \cdot \phi, \phi\right)_{L^{2}} \\
+& =\left\|\nabla^{\Sigma} \phi\right\|_{L^{2}}^{2}+\underbrace{\int_{M} \underbrace{\text { scal }}_{\geq 0}|\phi|^{2} d \text { vol }}_{\geq 0} \\
+& \geq\left\|\nabla^{\Sigma} \phi\right\|_{L^{2}}^{2} \geq 0
+\end{aligned}
+$$
+
+Thus, $\left\|\nabla^{\Sigma} \phi\right\|_{L^{2}}=0$ and hence $\nabla^{\Sigma} \phi=0$.\\
+Let $x_{0} \in M$. Since $M$ is connected and $\nabla^{\Sigma} \phi=0$, the value of $\phi$ at any point $x \in M$ is determined by $\phi\left(x_{0}\right)$. As in the proof of the Bochner Theorem 1.5.16 we conclude
+
+$$
+\operatorname{dim} \operatorname{ker}(D) \leq \operatorname{dim} \Sigma_{x_{0}} M=\operatorname{dim} \Sigma_{n} .
+$$ \(\square\)
+
+Corollary 2.5.13. Let $M$ be a connected compact Riemannian spin manifold with scal $\geq 0$ and scal $>0$ somewhere.\\
+Then there are no non-trivial harmonic spinor fields, i.e., $0 \notin \operatorname{spec}(D)$.
+
+Proof. Let $\phi \in \operatorname{ker}(D)$. By Corollary 2.5.12 we have $\nabla^{\Sigma} \phi=0$, which yields
+
+$$
+\partial_{X}|\phi|^{2}=\left\langle\nabla_{X}^{\Sigma} \phi, \phi\right\rangle+\left\langle\phi, \nabla_{X}^{\Sigma} \phi\right\rangle=0 .
+$$
+
+Since $M$ is connected, we conclude that $|\phi|$ is constant. Inserting back into equation (2.35), we obtain
+
+$$
+\int_{M} \frac{\mathrm{scal}}{4} \cdot|\phi|^{2} d v o l=|\phi| \cdot \int_{M} \frac{\mathrm{scal}}{4} d v o l=0 .
+$$
+
+Now let $x$ be a point with $\operatorname{scal}(x)>0$. By continuity, this also holds in a neighborhood of $x$. We thus have $\int_{M} \frac{\text { scal }}{4} d v o l>0$, hence $|\phi|=0$. \(\square\)
+
+Remark 2.5.14. Let $M$ be a compact Riemannian spin manifold with scal $\geq s_{0}>0$. Let $\lambda \in \operatorname{spec}(D)$ and let $\phi$ be an eigenspinor. Then we have:
+
+$$
+\lambda^{2}\|\phi\|_{L^{2}}^{2}=\left(D^{2} \phi, \phi\right)_{L^{2}} \geq\left\|\nabla^{\Sigma} \phi\right\|_{L^{2}}^{2}+\frac{s_{0}}{4}\|\phi\|_{L^{2}}^{2} \geq \frac{s_{0}}{4}\|\phi\|_{L^{2}}^{2}
+$$
+
+Hence
+
+$$
+|\lambda| \geq \sqrt{\frac{s_{0}}{4}}
+$$
+
+That is, there is a spectral gap around 0 .
+
+But this estimate is not sharp. More precisely, equality can never be achieved in (2.36), as we will see in the following:
+
+Theorem 2.5.15 (Friedrich's inequality, 1980). Let $M$ be a compact $n$ dimensional Riemannian spin manifold with scal $\geq s_{0}>0$. Then for any $\lambda \in \operatorname{spec}(D)$, we have
+
+$$
+|\lambda| \geq \sqrt{\frac{n}{n-1} \frac{s_{0}}{4}}
+$$
+
+Proof. By Lemmas 2.3.9 and 2.3.14, Clifford multiplication is skew-symmetric. Thus for any $X \in T_{x} M$ and any $\phi \in \Sigma_{x} M$, we have
+
+$$
+\left.|X \cdot \phi|^{2}=\langle X \cdot \phi, X \cdot \phi\rangle=-\langle\phi, X \cdot X \cdot \phi\rangle \stackrel{(2.1)}{=}-\left.\langle\phi,-| X\right|^{2} \phi\right\rangle=|X|^{2}|\phi|^{2}
+$$
+
+Hence
+
+$$
+|X \cdot \phi|=|X| \cdot|\phi|
+$$
+
+Now let $\phi \in C^{\infty}(M, \Sigma M)$. Fix $x \in M$ and let $b_{1}, \ldots, b_{n}$ be an orthonormal tangent frame in a neighborhood of $x$. Using equation (2.38) and the Cauchy-Schwarz inequality, we find:
+
+$$
+\begin{aligned}
+\left(|D \phi|^{2}\right)_{(x)} & =\left|\sum_{i} b_{i} \cdot \nabla_{b_{i}}^{\Sigma} \phi\right|_{(x)}^{2} \leq\left(\sum_{i=1}^{n}\left|b_{i} \cdot \nabla_{b_{i}}^{\Sigma} \phi\right|\right)_{(x)}^{2}=\left(\sum_{i=1}^{n}\left|b_{i}\right| \cdot\left|\nabla_{b_{i}}^{\Sigma} \phi\right|\right)_{(x)}^{2} \\
+& \leq \sum_{i=1}^{n} \underbrace{\left|b_{i}\right|_{(x)}^{2}}_{=1} \cdot \sum_{i=1}^{n}\left|\nabla_{b_{i}}^{\Sigma} \phi\right|_{(x)}^{2}=n \cdot\left|\nabla^{\Sigma} \phi\right|_{(x)}^{2}
+\end{aligned}
+$$
+
+Thus for any $x \in M$, we have the estimate:
+
+$$
+\left|\nabla^{\Sigma} \phi\right|_{(x)}^{2} \geq \frac{1}{n}|D \phi|_{(x)}^{2}
+$$
+
+By Lichnerowicz' Theorem 2.5.11 and equation (2.39), we find:
+
+$$
+\begin{aligned}
+\|D \phi\|_{L^{2}}^{2} & =\left(D^{2} \phi, \phi\right)_{L^{2}} \\
+& =\left(\left(\nabla^{\Sigma}\right)^{*} \nabla^{\Sigma} \phi, \phi\right)_{L^{2}}+\left(\frac{\text { scal }}{4} \cdot \phi, \phi\right)_{L^{2}} \\
+& \geq\left\|\nabla^{\Sigma} \phi\right\|_{L^{2}}^{2}+\frac{s_{0}}{4}\left\|\phi^{2}\right\|_{L^{2}} \\
+& \stackrel{(2.39)}{\geq} \frac{1}{n}\|D \phi\|_{L^{2}}^{2}+\frac{s_{0}}{4}\left\|\phi^{2}\right\|_{L^{2}} .
+\end{aligned}
+$$
+
+Thus
+
+$$
+\|D \phi\|_{L^{2}}^{2} \geq \frac{n}{n-1} \frac{s_{0}}{4} \cdot\|\phi\|_{L^{2}}^{2}
+$$
+
+Now if $D \phi=\lambda \phi$ then we obtain
+
+$$
+\lambda^{2} \cdot\|\phi\|_{L^{2}}^{2} \geq \frac{n}{n-1} \frac{s_{0}}{4} \cdot\|\phi\|_{L^{2}}^{2} .
+$$
+
+Thus any eigenvalue $\lambda$ of the classical Dirac operator $D$ satisfies
+
+$$
+\lambda^{2} \geq \frac{n}{n-1} \frac{s_{0}}{4} .
+$$
+
+Remark 2.5.16. Friedrich's estimate (2.37) is sharp: equality is achieved e.g. for $S^{n}$ with metrics of constant curvature.
+
+Theorem 2.5.17 (Bär, 1991). Let $M=S^{2}$ with any Riemannian metric. Then all eigenvalues of the classical Dirac operator $D$ satisfy
+
+$$
+\lambda^{2} \geq \frac{4 \pi}{\operatorname{area}(M)}
+$$
+
+In particular, by the estimate (2.40), 0 can not be an eigenvalue of $D$ for any metric on $S^{2}$.
+
+\section*{Remark 2.5.18}
+\begin{enumerate}
+  \item Equality in (2.40) (for the eigenvalue with the smallest absolute value) is achieved iff the curvature of $M$ is constant.
+  \item Lott (1986) proved with different methods the estimate:
+\end{enumerate}
+
+$$
+\exists C>0: \quad \lambda^{2} \geq \frac{C}{\operatorname{area}(M)} .
+$$
+
+Lott already conjectured that $C=4 \pi$ was the optimal constant.\\
+3) Hersch (1970) has proved that for the first positive eigenvalue $\lambda_{1}(\Delta)$ of the LaplaceBeltrami operator on a manifold $M$ diffeomorphic to $S^{2}$, the following estimate holds:
+
+$$
+\lambda_{1}(\Delta) \leq \frac{8 \pi}{\operatorname{area}(M)}
+$$
+
+\begin{enumerate}
+  \setcounter{enumi}{3}
+  \item Every compact orientable surface of genus $\geq 1$ admits a spin structure and a Riemannian metric such that $0 \in \operatorname{spec}(D)$. Also, on $S^{3}$ there are Riemannian metrics with harmonic spinors, i.e. with $0 \in \operatorname{spec}(D)$. Thus, for these manifolds, there are no estimates like (2.40).
+  \item It is conjectured that every compact spin manifold of dimension $n \geq 3$ admits a Riemannian metric with harmonic spinor, i.e. with $0 \in \operatorname{spec}(D)$. If the conjecture holds then there are no estimates like (2.40) for $n \geq 3$. The conjecture has been proved for the cases $n=0,1,7 \bmod 8$ by Hitchin (1974) and for the cases $n=3 \bmod 4$ by Bär (1996).
+  \item Up to today, Theorem 2.5.17 is the only estimate for Dirac eigenvalues not involving any curvature assumptions.
+\end{enumerate}
+
+Proof. [of Theorem 2.5.17]\\
+a) Let $M$ be an arbitrary 2-dimensional Riemannian manifold. Let $\lambda \in \mathbb{R}$ and $f \in C^{\infty}(M)$. Define a new connection $\tilde{\nabla}$ on $\Sigma M$ by
+
+$$
+\widetilde{\nabla}_{X} \phi:=\nabla_{X}^{\Sigma} \phi+\frac{\lambda}{2} X \cdot \phi+X \cdot \operatorname{grad} f \cdot \phi .
+$$
+
+Claim:
+
+$$
+\begin{gathered}
+\tilde{\nabla}^{*}\left(e^{-2 f} \tilde{\nabla} \phi\right)=e^{-2 f}\left\{D^{2}-\lambda D-2 \operatorname{grad} f \cdot D-2\left[\nabla_{\operatorname{grad} f}^{\Sigma}+\left(\nabla_{\operatorname{grad} f}^{\Sigma}\right)^{*}\right]\right. \\
+\left.-\frac{\text { scal }}{4}+\frac{\lambda^{2}}{2}+\Delta f+\lambda \cdot \operatorname{grad} f \cdot\right\} \phi
+\end{gathered}
+$$
+
+The proof of the claim is an elementary but tedious computation. Notice that (2.42) is only valid for 2-dimensional manifolds.\\
+b) We compute:
+
+$$
+\begin{aligned}
+\int_{M} e^{-2 f}\left\langle\left[\nabla_{\operatorname{grad} f}^{\Sigma}+\left(\nabla_{\operatorname{grad} f}^{\Sigma}\right)^{*}\right] \phi, \phi\right\rangle d A & \\
+& =\left(\nabla_{\operatorname{grad} f}^{\Sigma} \phi, e^{-2 f} \phi\right)_{L^{2}}+\left(\phi, \nabla_{\operatorname{grad} f}^{\Sigma}\left(e^{-2 f} \phi\right)\right)_{L^{2}} \\
+& =\int_{M} \partial_{\operatorname{grad} f}\left\langle\phi, e^{-2 f} \phi\right\rangle d A \\
+& =\int_{M}\left\langle\operatorname{grad} f, \operatorname{grad}\left\langle\phi, e^{-2 f} \phi\right\rangle\right\rangle d A \\
+& =\int_{M} \Delta f \cdot\left\langle\phi, e^{-2 f} \phi\right\rangle d A \\
+& =\int_{M} e^{-2 f} \Delta f|\phi|^{2} d A
+\end{aligned}
+$$
+
+c) Now let $\phi \in C^{\infty}(M, \Sigma M)$ be an eigenspinor for the eigenvalue $\lambda$. Using a) and b), we find:
+
+$$
+\begin{aligned}
+0 & \leq \int_{M} e^{-2 f}|\widetilde{\nabla} \phi|^{2} d A \\
+& =\left(\widetilde{\nabla}^{*}\left(e^{-2 f} \tilde{\nabla} \phi\right), \phi\right) \\
+& \leq \int_{M} e^{-2 f}\left\langle\left\{\lambda^{2}-\lambda^{2}-2 \lambda \operatorname{grad} f-2 \Delta f-\frac{\mathrm{scal}}{4}+\frac{\lambda^{2}}{2}+\Delta f+\lambda \operatorname{grad} f\right\} \cdot \phi, \phi\right\rangle d A \\
+& =\int_{M} e^{-2 f}\left\langle\left\{\frac{\lambda^{2}}{2}-\frac{\mathrm{scal}}{4}-\Delta f\right\} \phi, \phi\right\rangle d A-\int_{M} e^{-2 f} \lambda\langle\operatorname{grad} f \cdot \phi, \phi\rangle d A
+\end{aligned}
+$$
+
+By Lemmas 2.3.9 and 2.3.14, Clifford multiplication is skew symmetric, i.e.
+
+$$
+\langle\operatorname{grad} f \cdot \phi, \phi\rangle=-\langle\phi, \operatorname{grad} f \cdot \phi\rangle=-\overline{\langle\operatorname{grad} f \cdot \phi, \phi\rangle},
+$$
+
+and hence $\langle\operatorname{grad} f \cdot \phi, \phi\rangle \in i \mathbb{R}$. Since all the other terms in (2.43) are real, we conclude
+
+$$
+\int_{M} e^{-2 f} \lambda\langle\operatorname{grad} f \cdot \phi, \phi\rangle d A=0
+$$
+
+This yields the estimate
+
+$$
+0 \leq \int_{M} e^{-2 f}\left(\frac{\lambda^{2}}{2}-\frac{\text { scal }}{4}-\Delta f\right) \cdot|\phi|^{2} d A
+$$
+
+d) Since the Laplace-Beltrami operator is self-adjoint, any $h \in C^{\infty}(M)$ perpendicular to ker $\Delta$ is of the form $h=\Delta f$ for some $f \in C^{\infty}(M)$.\\
+Choose $-h:=\frac{\mathrm{scal}}{4}-\frac{1}{4 \operatorname{area}(M)} \int_{M} \operatorname{scal}(y) d A(y) \in C^{\infty}$. Then we have
+
+$$
+0=\int_{M} h(y) d A(y)=(h, 1)_{L^{2}}
+$$
+
+and thus $h \perp \operatorname{ker}(\Delta)$. So let $f \in C^{\infty}(M)$ with $\Delta f=h$. Inserting this particular choice of $f$ into (2.44) yields:
+
+$$
+\begin{aligned}
+0 & \leq \int_{M} e^{-2 f}\left(\frac{\lambda^{2}}{2}-\frac{\mathrm{scal}}{4}-h\right) \cdot|\phi|^{2} d A \\
+& \leq \int_{M} e^{-2 f}\left(\frac{\lambda^{2}}{2}-\frac{1}{4 \operatorname{area}(M)} \int_{M} \operatorname{scal}(y) d A(y)\right) \cdot|\phi|^{2} d A \\
+& =\left(\frac{\lambda^{2}}{2}-\frac{1}{4 \operatorname{area}(M)} \int_{M} \operatorname{scal}(y) d A(y)\right) \cdot \underbrace{\int_{M} e^{-2 f}|\phi|^{2} d A}_{\geq 0}
+\end{aligned}
+$$
+
+We thus have the estimate
+
+$$
+\frac{\lambda^{2}}{2} \geq \frac{1}{4 \operatorname{area}(M)} \int_{M} \underbrace{\operatorname{scal}(y)}_{=2 K} d A(y)
+$$
+
+where $K$ denotes the Gauß curvature. By the Gauß-Bonnet Theorem, we end up with
+
+$$
+\frac{\lambda^{2}}{2} \geq \frac{1}{4 \operatorname{area}(M)} \cdot 4 \pi \cdot \chi(M)=\frac{2 \pi}{\operatorname{area}(M)}
+$$
+
+Observe that only in this last step, we used the fact that $M=S^{2}$.
+
+\subsection*{Hypersurfaces}
+Let $M$ be an ( $n+1$ )-dimensional Riemannian spin manifold, and let $N \subset M$ be an oriented hypersurface. We want to construct a spin structure on $N$ and relate the spinor bundles $\Sigma M$ and $\Sigma N$ and the Dirac operators $D^{M}$ and $D^{N}$.
+
+Let $\nu$ be the unit normal vector field along $N$ such that ( $b_{1}, \ldots, b_{n}$ ) is a positively oriented basis of $T_{x} N$ if and only if ( $b_{1}, \ldots, b_{n}, \nu(x)$ ) is a positively oriented basis of $T_{x} M$. Using the canonical embedding
+
+$$
+\begin{aligned}
+\mathrm{SO}(n) & \hookrightarrow \mathrm{SO}(n+1) \\
+A & \mapsto\left(\begin{array}{cc}
+A & 0 \\
+0 & 1
+\end{array}\right),
+\end{aligned}
+$$
+
+the action of $\mathrm{SO}(n)$ on $\left(b_{1}, \ldots, b_{n}, \nu(x)\right)$ preserves the normal $\nu(x)$.\\
+Consider the map $\mathbb{C l}_{n}^{0} \subset \mathbb{C l}_{n} \xrightarrow{\cong} \mathbb{C l}_{n+1}^{0}$, induced by $\mathbb{R}^{n} \ni X \mapsto X \cdot e_{n+1}$. Since $\operatorname{Spin}(n) \subset \mathbb{C l}_{n}^{0}$ and $\operatorname{Spin}(n+1) \subset \mathbb{C l}_{n+1}^{0}$, we obtain a map
+
+$$
+\begin{aligned}
+\operatorname{Spin}(n) & \hookrightarrow \operatorname{Spin}(n+1) \\
+a=v_{1} \cdot v_{2} \cdot \ldots \cdot v_{2 m} & \mapsto v_{1} \cdot e_{n+1} \cdot \ldots \cdot v_{2 m} \cdot e_{n+1}=v_{1} \cdot \ldots \cdot v_{2 m} \cdot
+\end{aligned}
+$$
+
+With this embedding we have the following commutative diagram:\\
+\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-124(1)}
+
+Moreover, we have a canonical embedding of frame bundles
+
+$$
+\begin{aligned}
+P^{\mathrm{SO}}(N) & \hookrightarrow P^{\mathrm{SO}}(M), \\
+\left(h: \mathbb{R}^{n} \rightarrow T_{p} N\right) & \mapsto\left(h^{\prime}: \mathbb{R}^{n+1} \rightarrow T_{p} M\right),
+\end{aligned}
+$$
+
+where $h^{\prime}\left(x_{1}, \ldots, x_{n}, 0\right)=h\left(x_{1}, \ldots, x_{n}\right)$ and $h^{\prime}(0, \ldots, 0,1):=\nu(p)$. This embedding is compatible with the embedding $\mathrm{SO}(n) \hookrightarrow \mathrm{SO}(n+1)$ defined above. Thus, the diagram\\
+\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-124}\\
+commutes.
+
+Now let $\bar{\varrho}: P^{\operatorname{Spin}}(M) \rightarrow P^{\mathrm{SO}}(M)$ be a spin structure on $M$. We set
+
+$$
+P^{\operatorname{Spin}}(N):=\bar{\varrho}^{-1}\left(P^{\mathrm{SO}}(N)\right)
+$$
+
+This defines a spin structure on $N$ :
+
+\begin{itemize}
+  \item The action of $\operatorname{Spin}(n+1)$ on $P^{\operatorname{Spin}}(M)$ restricts to an action of $\operatorname{Spin}(n)$ on $P^{\operatorname{Spin}}(N)$ : For $H \in P^{\operatorname{Spin}}(N)$ and $a \in \operatorname{Spin}(n)$ we have $H \cdot a \in P^{\operatorname{Spin}}(M)$ and
+\end{itemize}
+
+$$
+\bar{\varrho}(H \cdot a)=\underbrace{\bar{\varrho}(H)}_{\in P^{\mathrm{SO}}(N)} \cdot \underbrace{\varrho(a)}_{\in \mathrm{SO}(n)} \in P^{\mathrm{SO}}(N) .
+$$
+
+Thus $H \cdot a \in P^{\operatorname{Spin}}(N)$.
+
+\begin{itemize}
+  \item Obviously, the action of $\operatorname{Spin}(n)$ on $P^{\operatorname{Spin}}(N)$ is compatible with the action of $\mathrm{SO}(n)$ on $P^{\mathrm{SO}}(N)$, hence $\bar{\varrho}: P^{\mathrm{Spin}}(N) \rightarrow P^{\mathrm{SO}}(N)$ is a spin structure on $N$.
+\end{itemize}
+
+In particular, orientable hypersurfaces of spinnable manifolds are again spinnable.
+
+\section*{Spinor bundles}
+We study how the spinor bundles of $N$ and $M$ are related to one another.
+
+Case 1: $\mathbf{n}+\mathbf{1}$ is even\\
+In this case, $\Sigma_{n}=\Sigma_{n+1}^{+}$. For any $x \in N$, we have ${ }^{1}$
+
+$$
+\Sigma_{x} N=P_{x}^{\operatorname{Spin}}(N) \times_{\sigma_{n}} \Sigma_{n}=P_{x}^{\operatorname{Spin}}(N) \times_{\left.\sigma_{n+1}^{+}\right|_{\operatorname{Spin}(n)}} \Sigma_{n+1}^{+} \cong P_{x}^{\operatorname{Spin}}(M) \times_{\sigma_{n+1}^{+}} \Sigma_{n+1}^{+}
+$$
+
+Thus, $\Sigma N=\left.\Sigma^{+} M\right|_{N}$.\\
+The Clifford multiplication of $\mathbb{R}^{n}$ on $\Sigma_{n}=\Sigma_{n+1}^{+}$is given by
+
+$$
+X \cdot \varphi=X \cdot e_{n+1} \cdot \varphi,
+$$
+
+where the $\cdot$ on the left hand side is the Clifford multiplication in $\mathbb{C l}_{n}$, while the $\cdot$ on the right hand side is the Clifford multiplication in $\mathbb{C l}_{n+1}$. Thus, the Clifford multiplication in $\Sigma N$ is given by
+
+$$
+X \cdot \varphi=X \cdot \nu \cdot \varphi
+$$
+
+where $X \in T_{x} N$ and $\varphi \in \Sigma_{x} N$.\\
+Case 2: $\mathbf{n}+\mathbf{1}$ is odd
+
+The inclusion of Clifford algebras
+
+$$
+\mathbb{C l}_{n} \cong \mathbb{C l}_{n+1}^{0} \hookrightarrow \mathbb{C l}_{n+1} \cong \mathbb{C l}_{n+2}^{0} \hookrightarrow \mathbb{C l}_{n+2}
+$$
+
+\footnotetext{${ }^{1}$ Let $X \subset Y$ be sets and $H \subset G$ be groups. Let $G$ act simply transitively from the right on $Y$ such that the action restricts to a simply transitive right action of $H$ on $X$. Then for any representation of $G$ on $\Sigma$ the inclusions induce a bijection $X \times_{H} \Sigma \cong Y \times_{G} \Sigma$.
+}
+together with the inclusions $\Sigma_{n} \subset \mathbb{C l}_{n}$ and $\Sigma_{n+1} \cong \Sigma_{n+2}^{+} \subset \mathbb{C l}_{n+2}$ induces an isomorphism $\Xi_{n}: \Sigma_{n} \rightarrow \Sigma_{n+1}$ such that the diagram\\
+\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-126}\\
+of Clifford multiplications with $X \in \mathbb{R}^{n}$ commutes.\\
+As in case 1 we obtain the canonical isomorphism $\left.\Sigma N \cong \Sigma M\right|_{N}$ such that again
+$$
+X \cdot \varphi=X \cdot \nu \cdot \varphi .
+$$
+for $X \in T_{x} N, \varphi \in \Sigma_{x} N$.\\
+In the following we treat both cases simultaneously using the notation
+$$
+\Sigma^{(+)} M:= \begin{cases}\Sigma^{+} M & \text { if } n+1 \text { is even }, \\ \Sigma M & \text { if } n+1 \text { is odd } .\end{cases}
+$$
+
+\section*{Spinor connections}
+The Levi-Civita connections on $T M$ and $T N$ are related by the Gauß equation
+
+$$
+\underbrace{\nabla_{X}^{M} Y}_{\in T_{x} M}=\underbrace{\nabla_{X}^{N} Y}_{\in T_{x} N}+\underbrace{\mathrm{I}(X, Y)}_{\in\left(T_{x} N\right)^{\perp}},
+$$
+
+where $X \in T_{x} N$ and $Y \in C^{\infty}(N, T N)$. The second fundamental form is a symmetric bilinear map II : $T_{x} N \times T_{x} N \rightarrow\left(T_{x} N\right)^{\perp}$, given by the orthogonal projection of $\nabla_{X}^{M} Y$ to $\left(T_{x} N\right)^{\perp}$. The Weingarten map is the corresponding symmetric endomorphism $B: T_{x} N \rightarrow T_{x} N$ such that for all $X, Y \in T_{x} N$
+
+$$
+\mathrm{II}(X, Y)=g(B(X), Y) \nu=:\langle B(X), Y\rangle \nu .
+$$
+
+The mean curvature field $\mathcal{H} \in C^{\infty}\left(N, T N^{\perp}\right)$ is defined by
+
+$$
+\mathcal{H}=\frac{1}{n} \sum_{i=1}^{n}\left\langle B\left(b_{i}\right), b_{i}\right\rangle \nu=\frac{1}{n} \operatorname{tr}(B) \nu=H \nu,
+$$
+
+where $b_{1}, \ldots, b_{n}$ is a local orthonormal tangent frame for $N$ and $H: N \rightarrow \mathbb{R}$ is the mean curvature of the hypersurface $N \subset M$.
+
+The spinor connections of $M$ and $N$ are related by the Weingarten map. Let ( $b_{1}, \ldots, b_{n}$ ) be a local oriented orthonormal tangent frame for $N$. Then ( $b_{1}, \ldots, b_{n}, b_{n+1}=\nu$ ) is\\
+a local orthonormal tangent frame for $M$ along $N$. The Christoffel symbols for the Levi-Civita connections $\nabla^{M}$ and $\nabla^{N}$ are defined by
+
+$$
+\nabla_{b_{i}}^{M} b_{j}=\sum_{k=1}^{n+1}{ }^{M} \Gamma_{i j}^{k} b_{k} \quad \text { and } \quad \nabla_{b_{i}}^{N} b_{j}=\sum_{k=1}^{n}{ }^{N} \Gamma_{i j}^{k} b_{k}
+$$
+
+By the Gauß equation (2.46), we have for $i, j \in\{1, \ldots, n\}$ :
+
+$$
+\nabla_{b_{i}}^{M} b_{j}=\nabla_{b_{i}}^{N} b_{j}+\left\langle B\left(b_{i}\right), b_{j}\right\rangle \nu=\sum_{k=1}^{n}{ }^{N} \Gamma_{i j}^{k} b_{k}+\left\langle B\left(b_{i}\right), b_{j}\right\rangle b_{n+1}
+$$
+
+Comparing coefficients yields
+
+$$
+\begin{array}{llrl}
+{ }^{M} \Gamma_{i j}^{k} & ={ }^{N} \Gamma_{i j}^{k} & \forall i, j, k & =\{1, \ldots, n\}, \\
+{ }^{M} \Gamma_{i j}^{n+1} & =-{ }^{M} \Gamma_{i, n+1}^{j}=\left\langle B\left(b_{i}\right), b_{j}\right\rangle & \forall i, j & =\{1, \ldots, n\} .
+\end{array}
+$$
+
+For the covariant derivative a section of $\Sigma^{(+)} M$, we compute for $i \in\{1, \ldots, n\}$ :
+
+$$
+\begin{aligned}
+\stackrel{M^{M} \nabla_{b_{i}}^{\Sigma} \llbracket H, \varphi \rrbracket}{=} \stackrel{(2.21)}{=} \llbracket H, \partial_{b_{i}} \varphi+\frac{1}{4} \sum_{j, k=1}^{n+1}{ }^{M} \Gamma_{i j}^{k} e_{j} \cdot e_{k} \cdot \varphi \rrbracket & \\
+= & \llbracket H, \partial_{b_{i}} \varphi+\frac{1}{4} \sum_{j, k=1}^{n}{ }^{N} \Gamma_{i j}^{k} e_{j} \cdot e_{k} \cdot \varphi+\frac{1}{4} \sum_{j=1}^{n}\left\langle B\left(b_{i}\right), b_{j}\right\rangle e_{j} \cdot e_{n+1} \cdot \varphi \\
+& \quad-\frac{1}{4} \sum_{k=1}^{n}\left\langle B\left(b_{i}\right), b_{k}\right\rangle e_{n+1} \cdot e_{k} \cdot \varphi \rrbracket \\
+= & { }^{N} \nabla_{b_{i}}^{\Sigma} \llbracket H, \varphi \rrbracket+\frac{1}{2} \sum_{j=1}^{n}\left\langle B\left(b_{i}\right), b_{j}\right\rangle b_{j} \cdot b_{n+1} \cdot \llbracket H, \varphi \rrbracket \\
+= & { }^{N} \nabla_{b_{i}}^{\Sigma} \llbracket H, \varphi \rrbracket+\frac{1}{2} B\left(b_{i}\right) \cdot \nu \cdot \llbracket H, \varphi \rrbracket .
+\end{aligned}
+$$
+
+Hence for all $\phi \in C^{\infty}\left(M, \Sigma^{(+)} M\right)$ and for all $X \in T N$, we have along $N$ :
+
+$$
+{ }^{M} \nabla_{X}^{\Sigma} \phi={ }^{N} \nabla_{X}^{\Sigma} \phi+\frac{1}{2} B(X) \cdot \nu \cdot \phi
+$$
+
+\section*{Dirac operators}
+For a spinor field $\phi \in C^{\infty}\left(M, \Sigma^{(+)} M\right)$ we have along the hypersurface $N$ :
+
+$$
+\begin{aligned}
+D^{M} \phi & =\sum_{j=1}^{n} b_{j} \cdot{ }^{M} \nabla_{b_{j}}^{\Sigma} \phi+\nu \cdot{ }^{M} \nabla_{\nu}^{\Sigma} \phi \\
+& \stackrel{(2.1)}{=} \sum_{j=1}^{n} \nu \cdot b_{j} \cdot \nu \cdot\left({ }^{N} \nabla_{b_{j}}^{\Sigma} \phi+\frac{1}{2} B\left(b_{j}\right) \cdot \nu \cdot \phi\right)+\nu \cdot{ }^{M} \nabla_{\nu}^{\Sigma} \phi
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+& =\nu \cdot\left(D^{N} \phi+\frac{1}{2} \sum_{j=1}^{n} b_{j} \cdot \nu \cdot B\left(b_{j}\right) \cdot \nu \cdot \phi\right)+\nu \cdot{ }^{M} \nabla_{\nu}^{\Sigma} \phi \\
+& =\nu \cdot D^{N} \phi+\frac{1}{2} \nu \cdot \sum_{j=1}^{n} b_{j} \cdot B\left(b_{j}\right) \cdot \phi+\nu \cdot{ }^{M} \nabla_{\nu}^{\Sigma} \phi .
+\end{aligned}
+$$
+
+Since $B$ is a symmetric endomorphism, we may choose $b_{1}, \ldots, b_{n}$ as an eigenbasis at $x \in M$, thus $B\left(b_{j}\right)=\kappa_{j} \cdot b_{j}$ for $j=1, \ldots, n$. Then we have
+
+$$
+\begin{aligned}
+D^{M} \phi & =\nu \cdot D^{N} \phi-\frac{1}{2} \nu \cdot \operatorname{tr}(B) \phi+\nu \cdot{ }^{M} \nabla_{\nu}^{\Sigma} \phi \\
+& =\nu \cdot D^{N} \phi-\frac{n}{2} \nu \cdot H \phi+\nu \cdot{ }^{M} \nabla_{\nu}^{\Sigma} \phi .
+\end{aligned}
+$$
+
+Hence
+
+$$
+-\nu \cdot D^{M} \phi=D^{N} \phi-\frac{n}{2} H \phi+{ }^{M} \nabla_{\nu}^{\Sigma} \phi
+$$
+
+Theorem 2.6.1 (Bär, 1998). Let $N \subset \mathbb{R}^{n+1}$ be an oriented compact hypersurface with induced spin structure.\\
+Then there are at least $2^{\left[\frac{n}{2}\right]}$ eigenvalues $\lambda$ of $D^{N}$ (counted with multiplicity) satisfying
+
+$$
+\lambda^{2} \leq \frac{n^{2}}{4} \frac{1}{\operatorname{vol}(N)} \int_{N} H^{2} d v o l
+$$
+
+Here $H: N \rightarrow \mathbb{R}$ is the mean curvature of $N \subset \mathbb{R}^{n+1}$.
+
+For the proof of this theorem we need the following variational characterization of eigenvalues:
+
+Lemma 2.6.2 (minimax principle). Let $\mathscr{H}$ be a Hilbert space, let $A$ be a selfadjoint operator on $\mathscr{H}$. Assume that $\mathscr{H}$ has an orthonormal basis consisting of eigenvectors of $A$ and let $\mu_{1} \leq \mu_{2} \leq \mu_{3} \leq \ldots$ be the eigenvalues, each one repeated according to its multiplicity. Then the eigenvalues are characterized as:
+
+$$
+\mu_{k}=\min _{\substack{V \subset \operatorname{dom}(A) \\ \operatorname{dim} V=k}} \max _{f \in V \backslash\{0\}} \frac{(A f, f)}{\|f\|^{2}}
+$$
+
+Proof. Let $V \subset \operatorname{dom}(A)$ be a vector subspace of dimension $k$. Let $f_{1}, f_{2}, \ldots$ be an orthonormal basis of $\mathscr{H}$ with $A f_{j}=\mu_{j} f_{j}$. Let $l_{j}: V \rightarrow \mathbb{C}$ be the linear functional\\
+defined by
+
+$$
+l_{j}(f)=\left(f, f_{j}\right)
+$$
+
+Since $\operatorname{dim} V=k$, there is an $f \in V \backslash\{0\}$ such that $l_{1}(f)=\ldots=l_{k-1}(f)=0$ and hence $f=\sum_{j=k}^{\infty} \alpha_{j} f_{j}$. This yields the estimate
+
+$$
+(A f, f)=\left(\sum_{j=k}^{\infty} \alpha_{j} \mu_{j} f_{j}, \sum_{i=k}^{\infty} \alpha_{i} f_{i}\right)=\sum_{j=k}^{\infty} \mu_{j}\left|\alpha_{j}\right|^{2} \geq \mu_{k} \sum_{j=k}^{\infty}\left|\alpha_{j}\right|^{2}=\mu_{k}\|f\|^{2}
+$$
+
+that is, $\frac{(A f, f)}{\|f\|^{2}} \geq \mu_{k}$ and in particular, $\max _{f \in V \backslash\{0\}} \frac{(A f, f)}{\|f\|^{2}} \geq \mu_{k}$. Hence
+
+$$
+\inf _{\substack{V \subset \operatorname{dom}(A) \\ \operatorname{dim} V=k}} \max _{f \in V \backslash\{0\}} \frac{(A f, f)}{\|f\|^{2}} \geq \mu_{k}
+$$
+
+Equality is attained for $V=\mathbb{C} f_{1} \oplus \ldots \oplus \mathbb{C} f_{k}$ and $f=f_{k}$.
+
+Proof. [of Theorem 2.6.1] The spinor bundle of the hypersurface $\Sigma N=\left.\Sigma^{(+)} \mathbb{R}^{n+1}\right|_{N}$ has rank $2^{\left[\frac{n}{2}\right]}$. The spinor bundle $\Sigma^{(+)} \mathbb{R}^{n+1}$ of $\mathbb{R}^{n+1}$ can be trivialized by parallel sections $\psi_{1}, \ldots, \psi_{2^{\left[\frac{n}{2}\right]}}$. In particular, $\psi_{1}, \ldots, \psi_{2^{\left[\frac{n}{2}\right]}}$ are linearly independent at each point. Thus $\left.\psi_{1}\right|_{N}, \ldots, \psi_{\left.2^{\left[\frac{n}{2}\right]}\right|_{N}}$ are still linearly independent. We define
+
+$$
+V:=\left.\left.\mathbb{C} \cdot \psi_{1}\right|_{N} \oplus \ldots \oplus \mathbb{C} \cdot \psi_{2^{\left[\frac{n}{2}\right]}}\right|_{N} \subset C^{\infty}(N, \Sigma N) \subset \operatorname{dom}\left(\left(D^{N}\right)^{2}\right)
+$$
+
+Since any $\psi \in V$ is parallel with respect to the connection $\mathbb{R}^{n+1} \nabla^{\Sigma}$, we have:
+
+$$
+\begin{aligned}
+\left(\left(D^{N}\right)^{2} \psi, \psi\right)_{L^{2}(N)} & =\left\|D^{N} \psi\right\|_{L^{2}(N)}^{2} \\
+& \stackrel{(2.47)}{=}\|-\nu \cdot \underbrace{D^{\mathbb{R}^{n+1}} \psi}_{=0}+\frac{n}{2} H \psi-\underbrace{\mathbb{R}^{n+1} \nabla_{\nu}^{\Sigma} \psi}_{=0}\|_{L^{2}(N)}^{2} \\
+& =\left\|\frac{n}{2} H \psi\right\|_{L^{2}(N)}^{2} \\
+& =\frac{n^{2}}{4} \int_{N} H^{2} \cdot|\psi|^{2} d v o l .
+\end{aligned}
+$$
+
+Since $\nabla^{\Sigma}$ is metric, $\nabla^{\Sigma}$-parallel sections have constant length. Thus, $|\psi(x)|=\left|\psi\left(x_{0}\right)\right|$ for an arbitrary $x_{0} \in N$ and we obtain
+
+$$
+\begin{aligned}
+\left(\left(D^{N}\right)^{2} \psi, \psi\right)_{L^{2}(N)} & =\frac{n^{2}}{4}\left|\psi\left(x_{0}\right)\right|^{2} \int_{N} H^{2} d v o l \\
+& =\frac{n^{2}}{4} \frac{\|\psi\|_{L^{2}(N)}^{2}}{\operatorname{vol}(N)} \int_{N} H^{2} d v o l
+\end{aligned}
+$$
+
+Hence
+
+$$
+\frac{\left(\left(D^{N}\right)^{2} \psi, \psi\right)_{L^{2}(N)}}{\|\psi\|_{L^{2}(N)}^{2}}=\frac{n^{2}}{4} \frac{1}{\operatorname{vol}(N)} \int_{N} H^{2} d v o l
+$$
+
+The statement now follows from Lemma 2.6.2.
+
+Example 2.6.3. We consider the $n$-sphere $S^{n} \subset \mathbb{R}^{n+1}$ of radius 1 . Then $H^{2} \equiv 1$ and by Theorem 2.6.1, the first $2^{\left[\frac{n}{2}\right]}$ Dirac eigenvalues of $S^{n}$ satisfy $\lambda^{2} \leq \frac{n^{2}}{4}$.\\
+The scalar curvature of $S^{n}$ is $n(n-1)$. Thus, by Friedrich's inequality (2.37), we have
+
+$$
+\lambda^{2} \geq \frac{n}{n-1} \frac{n(n-1)}{4}=\frac{n^{2}}{4}
+$$
+
+Hence, for the sphere $S^{n}$, the first $2^{\left[\frac{n}{2}\right]}$ Dirac eigenvalues of $S^{n}$ satisfy $\lambda^{2}=\frac{n^{2}}{4}$. In particular, Friedrich's inequality cannot be improved in general.
+
+Remark 2.6.4. For $n=2$, the integral $\int_{N} H^{2} d v o l$ is called Willmore energy.
+
+\begin{itemize}
+  \item If $N \cong S^{2}$, Theorem 2.5.17 and 2.6.1 yield
+\end{itemize}
+
+$$
+\frac{4 \pi}{\operatorname{area}(N)} \leq \lambda^{2} \leq \frac{1}{\operatorname{area}(N)} \int_{N} H^{2} d A
+$$
+
+Hence, the Willmore energy is bounded from below by $4 \pi$. Equality is attained if and only if the curvature of $N$ is constant.
+
+\begin{itemize}
+  \item For a torus $N \cong T^{2}$, the Willmore conjecture states that the Willmore energy is bounded from below by $2 \pi^{2}$. This famous conjecture was open for a long time and finally proved by Marques and Neves in 2014, see [8].
+\end{itemize}
+
+
+
+
+\pagebreak
+\printbibliography
+\end{document}

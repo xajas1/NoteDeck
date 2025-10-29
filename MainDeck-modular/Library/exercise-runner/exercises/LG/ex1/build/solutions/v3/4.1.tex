@@ -1,0 +1,29 @@
+Um die Isomorphie $\operatorname{Isom}_n(\mathbb{R}) \cong \operatorname{Trans}_n(\mathbb{R}) \rtimes \mathrm{O}(n)$ zu zeigen, betrachten wir die Struktur der Isometrien im $\mathbb{R}^n$. Jede Isometrie $f: \mathbb{R}^n \to \mathbb{R}^n$ kann in der Form $f(x) = Ax + b$ geschrieben werden, wobei $A \in \mathrm{O}(n)$ und $b \in \mathbb{R}^n$. Diese Darstellung ist eindeutig, da $A$ durch die lineare Komponente bestimmt ist und $b$ durch $f(0) = b$.
+
+Um die Isomorphie zu zeigen, definieren wir einen Homomorphismus $\theta: \operatorname{Isom}_n(\mathbb{R}) \to \operatorname{Trans}_n(\mathbb{R}) \rtimes \mathrm{O}(n)$ durch
+\[
+\theta(f) = (b, A),
+\]
+wobei $f(x) = Ax + b$. Wir zeigen, dass $\theta$ ein Isomorphismus ist.
+
+Zunächst zeigen wir, dass $\theta$ ein Homomorphismus ist. Für zwei Isometrien $f_1(x) = A_1 x + b_1$ und $f_2(x) = A_2 x + b_2$ gilt die Komposition
+\[
+f_1 \circ f_2(x) = f_1(A_2 x + b_2) = A_1(A_2 x + b_2) + b_1 = (A_1 A_2)x + (A_1 b_2 + b_1).
+\]
+Daraus folgt
+\[
+\theta(f_1 \circ f_2) = (A_1 b_2 + b_1, A_1 A_2) = (b_1, A_1) \cdot (b_2, A_2),
+\]
+was zeigt, dass $\theta$ ein Homomorphismus ist.
+
+Um zu zeigen, dass $\theta$ bijektiv ist, betrachten wir die Injektivität und Surjektivität. Die Injektivität folgt direkt aus der Eindeutigkeit der Darstellung $f(x) = Ax + b$. Für die Surjektivität sei $(b, A) \in \operatorname{Trans}_n(\mathbb{R}) \rtimes \mathrm{O}(n)$ gegeben. Die Abbildung $f(x) = Ax + b$ ist eine Isometrie, und $\theta(f) = (b, A)$, was die Surjektivität zeigt.
+
+Nun überprüfen wir die Erhaltung der Gruppenstruktur im semidirekten Produkt. Die Identität in $\operatorname{Isom}_n(\mathbb{R})$ ist die Abbildung $f(x) = x$, was $\theta(f) = (0, I)$ ergibt. Für $(b, A) \in \operatorname{Trans}_n(\mathbb{R}) \rtimes \mathrm{O}(n)$ gilt
+\[
+(b, A) \cdot (0, I) = (b, A) \quad \text{und} \quad (0, I) \cdot (b, A) = (b, A),
+\]
+was zeigt, dass $(0, I)$ das Identitätselement ist.
+
+Daher ist $\theta$ ein Isomorphismus, und wir haben gezeigt, dass $\operatorname{Isom}_n(\mathbb{R}) \cong \operatorname{Trans}_n(\mathbb{R}) \rtimes \mathrm{O}(n)$.
+
+%CHECK: Eindeutigkeit der Zerlegung gezeigt, Homomorphismus definiert und als Isomorphismus nachgewiesen. Gruppenstruktur und Identitätselemente explizit behandelt.

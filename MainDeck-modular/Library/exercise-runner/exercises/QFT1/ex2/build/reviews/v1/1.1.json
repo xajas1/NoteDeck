@@ -1,0 +1,19 @@
+{
+  "score": 0.5,
+  "verdict": "Unvollständige Herleitung",
+  "weaknesses": [
+    {
+      "code": "missing_proof_step",
+      "msg": "Die Herleitung der Beziehung $\\epsilon^{\\prime \\alpha \\beta} = -\\epsilon^{\\alpha \\beta}$ ist unvollständig.",
+      "math_hint": "Es fehlt die explizite Verwendung der Determinante der Transformation, um die Beziehung zu zeigen."
+    },
+    {
+      "code": "incorrect_conclusion",
+      "msg": "Die Schlussfolgerung $\\epsilon^{\\prime \\alpha \\beta} = -\\epsilon^{\\alpha \\beta}$ ist nicht korrekt hergeleitet.",
+      "math_hint": "Die Determinante der Transformation sollte berücksichtigt werden, um die Vorzeichenänderung zu rechtfertigen."
+    }
+  ],
+  "fix_suggestions": [
+    "\\epsilon^{\\prime \\alpha \\beta} = \\det(A) A^\\alpha_{\\ \\gamma} A^\\beta_{\\ \\delta} \\epsilon^{\\gamma \\delta}"
+  ]
+}

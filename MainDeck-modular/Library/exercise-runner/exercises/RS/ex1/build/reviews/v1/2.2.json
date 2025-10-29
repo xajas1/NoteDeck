@@ -1,0 +1,26 @@
+{
+  "score": 0.6,
+  "verdict": "Die Lösung ist teilweise korrekt, aber es fehlen wichtige Details und Klarstellungen.",
+  "weaknesses": [
+    {
+      "code": "missing_equation",
+      "msg": "Die Definition der Kartenabbildungen ist unvollständig.",
+      "math_hint": "\\varphi_2(x,y) = (\\cos(2\\pi x), \\sin(2\\pi x), y) sollte klarer spezifiziert werden, insbesondere die Dimensionen der Zielräume."
+    },
+    {
+      "code": "incomplete_derivation",
+      "msg": "Die Glattheit der Übergangsfunktionen wird nicht ausreichend begründet.",
+      "math_hint": "Es fehlt eine detaillierte Herleitung der Glattheit der Übergangsfunktionen \\varphi_2 \\circ \\varphi_1^{-1}."
+    },
+    {
+      "code": "unclear_transformation",
+      "msg": "Die Holomorphie der Übergangsfunktionen wird nicht ausreichend erklärt.",
+      "math_hint": "Die Holomorphie sollte durch die explizite Form der Übergangsfunktionen gezeigt werden."
+    }
+  ],
+  "fix_suggestions": [
+    "\\varphi_2(x,y) = (\\cos(2\\pi x), \\sin(2\\pi x), y) \\text{ mit } \\varphi_2: U_2 \\to \\mathbb{R}^3",
+    "\\text{Zeige, dass } \\varphi_2 \\circ \\varphi_1^{-1} \\text{ glatt ist durch explizite Berechnung}",
+    "\\text{Zeige, dass die Übergangsfunktionen holomorph sind durch explizite Berechnung}"
+  ]
+}

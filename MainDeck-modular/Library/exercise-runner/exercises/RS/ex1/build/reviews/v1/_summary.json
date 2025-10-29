@@ -1,0 +1,96 @@
+{
+  "tasks": {
+    "1.1": {
+      "score": 0.7,
+      "verdict": "Teilweise korrekt, aber unvollständig",
+      "weaknesses": [
+        {
+          "code": "missing_inverse",
+          "msg": "Die Umkehrabbildung $\text{phi}_N^{-1}$ wurde nicht explizit definiert.",
+          "math_hint": "Definiere $\text{phi}_N^{-1}(u, v)$ explizit."
+        },
+        {
+          "code": "holomorphic_justification",
+          "msg": "Die Holomorphie der Übergangsabbildungen wurde nicht vollständig begründet.",
+          "math_hint": "Zeige explizit, dass die Ableitungen existieren und stetig sind."
+        }
+      ],
+      "fix_suggestions": [
+        "Definiere die Umkehrabbildung: \\( \\phi_N^{-1}(u, v) = \\left( \\frac{2u}{1 + u^2 + v^2}, \\frac{2v}{1 + u^2 + v^2}, \\frac{-1 + u^2 + v^2}{1 + u^2 + v^2} \\right) \\)",
+        "Zeige die Holomorphie: Berechne die Ableitungen der Übergangsabbildungen und zeige deren Stetigkeit."
+      ]
+    },
+    "2.1": {
+      "score": 0.8,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+      "weaknesses": [
+        {
+          "code": "missing_equation",
+          "msg": "Die Definition der Projektion \\(\\pi\\) ist nicht vollständig erklärt.",
+          "math_hint": "\\(\\pi(x,y) = (x \\mod 1, y \\mod 1)\\)"
+        },
+        {
+          "code": "incomplete_proof",
+          "msg": "Die Erklärung, warum die Karten Homöomorphismen sind, ist unvollständig.",
+          "math_hint": "Zeige explizit, dass \\(\\pi\\) lokal ein Homöomorphismus ist."
+        },
+        {
+          "code": "missing_step",
+          "msg": "Die Begründung für die Glattheit der Übergangsfunktionen ist zu knapp.",
+          "math_hint": "Erkläre, warum Translationen in \\(\\mathbb{R}^2\\) glatt sind."
+        }
+      ],
+      "fix_suggestions": [
+        "\\pi(x,y) = (x \\mod 1, y \\mod 1)",
+        "Zeige, dass \\pi lokal ein Homöomorphismus ist, indem du die Inverse lokal angibst.",
+        "Translationen in \\mathbb{R}^2 sind glatt, da sie durch \\(f(x,y) = (x+a, y+b)\\) mit konstanten \\(a, b\\) gegeben sind."
+      ]
+    },
+    "2.2": {
+      "score": 0.6,
+      "verdict": "Die Lösung ist teilweise korrekt, aber es fehlen wichtige Details und Klarstellungen.",
+      "weaknesses": [
+        {
+          "code": "missing_equation",
+          "msg": "Die Definition der Kartenabbildungen ist unvollständig.",
+          "math_hint": "\\varphi_2(x,y) = (\\cos(2\\pi x), \\sin(2\\pi x), y) sollte klarer spezifiziert werden, insbesondere die Dimensionen der Zielräume."
+        },
+        {
+          "code": "incomplete_derivation",
+          "msg": "Die Glattheit der Übergangsfunktionen wird nicht ausreichend begründet.",
+          "math_hint": "Es fehlt eine detaillierte Herleitung der Glattheit der Übergangsfunktionen \\varphi_2 \\circ \\varphi_1^{-1}."
+        },
+        {
+          "code": "unclear_transformation",
+          "msg": "Die Holomorphie der Übergangsfunktionen wird nicht ausreichend erklärt.",
+          "math_hint": "Die Holomorphie sollte durch die explizite Form der Übergangsfunktionen gezeigt werden."
+        }
+      ],
+      "fix_suggestions": [
+        "\\varphi_2(x,y) = (\\cos(2\\pi x), \\sin(2\\pi x), y) \\text{ mit } \\varphi_2: U_2 \\to \\mathbb{R}^3",
+        "\\text{Zeige, dass } \\varphi_2 \\circ \\varphi_1^{-1} \\text{ glatt ist durch explizite Berechnung}",
+        "\\text{Zeige, dass die Übergangsfunktionen holomorph sind durch explizite Berechnung}"
+      ]
+    },
+    "2.3": {
+      "score": 0.5,
+      "verdict": "Unvollständige Herleitung",
+      "weaknesses": [
+        {
+          "code": "missing_equations",
+          "msg": "Fehlende explizite Definition der Karten und Übergangsfunktionen",
+          "math_hint": "Definiere explizit die Karten $\\\\varphi_1, \\\\varphi_2, \\\\varphi_3$ und die Übergangsfunktionen zwischen ihnen."
+        },
+        {
+          "code": "incomplete_proof",
+          "msg": "Unvollständige Begründung der Mannigfaltigkeitsstruktur",
+          "math_hint": "Zeige explizit, dass die Karten die Fläche vollständig abdecken und die Übergangsfunktionen glatt sind."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Definiere die Karten explizit:} \\\\varphi_1(x,y) = (x,y), \\\\varphi_2(x,y) = (x,y), \\\\varphi_3(x,y) = (x,y) \\text{ auf den jeweiligen Bereichen.}",
+        "\\text{Zeige, dass die Übergangsfunktionen glatt sind:} \\\\text{Für } \\\\varphi_1 \\\\circ \\\\varphi_2^{-1}, \\\\varphi_2 \\\\circ \\\\varphi_3^{-1}, \\\\varphi_3 \\\\circ \\\\varphi_1^{-1} \\text{ sind die Übergangsfunktionen Identitäten oder Verschiebungen.}"
+      ]
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "tasks": [
+    {
+      "task_id": "1",
+      "body_tex": "Sei $S^2:=\\left\\{(x, y, z) \\in \\mathbb{R}^3: x^2+y^2+z^2=1\\right\\} \\subseteq \\mathbb{R}^3$ die Einheitssphäre im $\\mathbb{R}^3$. Weiterhin bezeichnen wir den Nordpol mit $N:=(0,0,1)$ und den Südpol mit $S:=(0,0,-1)$. Zu diesen definieren wir die stereographischen Projektionen\n$$\n\\phi_N: S^2 \\backslash N \\rightarrow \\mathbb{R}^2 \\quad \\text { und } \\quad \\phi_S: S^2 \\backslash S \\rightarrow \\mathbb{R}^2\n$$\ndurch folgende Vorschrift: Zu $P \\in S^2 \\backslash N$ gibt es genau eine Gerade $g$ durch $P$ und $N$; wir setzen $(a, b, 0):=\\{z=0\\} \\cap g$ und definieren $\\phi_N(P):=(a, b)$. Die Abbildung $\\phi_S$ sei analog definiert.",
+      "subtasks": [
+        {
+          "sub_id": "1.1",
+          "body_tex": "Zeigen Sie, dass, nach geeigneten Identifikationen von $\\mathbb{R}^2$ mit $\\mathbb{C}$, die $\\operatorname{Karten}\\left(S^2 \\backslash N, \\phi_N\\right)$ und ( $S^2 \\backslash S, \\phi_S$ ) einen komplexen Atlas von $S^2$ bilden."
+        }
+      ]
+    },
+    {
+      "task_id": "2",
+      "body_tex": "In dieser Aufagbe betrachten wir die drei Flächen, die man durch Verkleben von Einheitsquadraten $[0,1]^2 \\subset \\mathbb{R}^2$ erhält. Dabei werden immer nur parallele Kanten miteinander verklebt. Die Richtung der Markierungen beschreiben die Orientierung des Verklebens.",
+      "subtasks": [
+        {
+          "sub_id": "2.1",
+          "body_tex": "in Quadrat mit vier Kanten. \nDie beiden vertikalen Kanten sind beide nach oben orientiert, \ndie beiden horizontalen Kanten beide nach rechts.  \n\\[\n\\text{Verklebung: vertikale und horizontale Kanten jeweils parallel und gleich orientiert.}\n\\]\nDas resultierende Flächenobjekt ist topologisch ein \\textbf{Torus}.\n\nZeigen Sie, dass die folgenden Flächen reelle Mannigfaltigkeiten sind, indem Sie einen konkreten Atlas angeben. Definieren diese Atlanten auch eine komplexe Struktur?"
+        },
+        {
+          "sub_id": "2.2",
+          "body_tex": "Ein Quadrat mit vier Kanten. \nDie vertikalen Kanten sind beide nach oben orientiert, \ndie obere horizontale Kante nach rechts, \ndie untere nach links.  \n\\[\n\\text{Verklebung: vertikale Kanten gleich orientiert, horizontale entgegengesetzt orientiert.}\n\\]\nDies ergibt eine \\textbf{Zylinderfläche} \n(bzw.\\ ein \\textbf{Möbiusband}, falls zusätzlich eine Verdrehung zugelassen wird).\n\nZeigen Sie, dass die folgenden Flächen reelle Mannigfaltigkeiten sind, indem Sie einen konkreten Atlas angeben. Definieren diese Atlanten auch eine komplexe Struktur?"
+        },
+        {
+          "sub_id": "2.3",
+          "body_tex": "Zwei Quadrate, die eine rechteckige $2\\times1$-Fläche bilden.  \nAlle vertikalen Kanten sind nach oben orientiert, \nalle horizontalen Kanten nach rechts; \ndie gemeinsame Mittelkante zeigt auf beiden Seiten in dieselbe Richtung (nach rechts).  \n\\[\n\\text{Verklebung: alle gegenüberliegenden Ränder des gesamten Rechtecks parallel und gleich orientiert.}\n\\]\nDas resultierende Objekt ist topologisch eine \\textbf{Fläche vom Geschlecht $2$} (ein \\textbf{Doppeltorus}).\n\nZeigen Sie, dass die folgenden Flächen reelle Mannigfaltigkeiten sind, indem Sie einen konkreten Atlas angeben. Definieren diese Atlanten auch eine komplexe Struktur?"
+        }
+      ]
+    }
+  ]
+}

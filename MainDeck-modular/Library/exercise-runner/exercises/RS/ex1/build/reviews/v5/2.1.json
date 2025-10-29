@@ -1,0 +1,20 @@
+{
+  "score": 0.7,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige präzise mathematische Details.",
+  "weaknesses": [
+    {
+      "code": "MISSING_INVERSE_DETAIL",
+      "msg": "Die Beschreibung der Inversenabbildung \u0003c0^{-1} ist nicht präzise genug.",
+      "math_hint": "Die genaue Definition der Inversenabbildung \u0003c0^{-1} sollte spezifiziert werden, insbesondere wie die Wahl von k und l erfolgt."
+    },
+    {
+      "code": "TRANSITION_FUNCTIONS",
+      "msg": "Die Glattheit der Übergangsfunktionen wird nicht ausreichend begründet.",
+      "math_hint": "Es sollte gezeigt werden, dass die Übergangsfunktionen zwischen den Karten tatsächlich glatt sind, nicht nur durch Translationen."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Präzisiere die Inverse: } \\pi^{-1}(x,y) = (x+k, y+l) \\text{ mit } k, l \\text{ so gewählt, dass } (x+k, y+l) \\in U.",
+    "\\text{Zeige, dass die Übergangsfunktionen zwischen den Karten glatt sind, indem du die explizite Form der Translationen angibst.}"
+  ]
+}

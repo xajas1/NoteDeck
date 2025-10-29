@@ -1,0 +1,29 @@
+Um die Zylinderfläche als reelle Mannigfaltigkeit zu zeigen, betrachten wir die Konstruktion des Zylinders durch die Verklebung der Kanten eines Quadrats. Sei das Quadrat in der Ebene durch die Punkte \((0,0)\), \((1,0)\), \((1,1)\) und \((0,1)\) gegeben. Die Verklebung der vertikalen Kanten \((0,y)\) und \((1,y)\) für \(y \in [0,1]\) erfolgt durch die Identifikation \((0,y) \sim (1,y)\).
+
+Ein Atlas für den Zylinder kann durch zwei Karten gegeben werden. Die erste Karte \((U_1, \varphi_1)\) sei definiert auf der offenen Menge \(U_1 = (0,1) \times (0,1)\) mit der Kartenabbildung \(\varphi_1: U_1 \to \mathbb{R}^2\), \(\varphi_1(x,y) = (x,y)\). Die zweite Karte \((U_2, \varphi_2)\) deckt die Umgebung der verklebten Kanten ab und sei definiert durch \(U_2 = (-\epsilon, 1+\epsilon) \times (0,1)\) für ein kleines \(\epsilon > 0\), mit der Kartenabbildung \(\varphi_2: U_2 \to \mathbb{R}^3\), \(\varphi_2(x,y) = (\cos(2\pi x), \sin(2\pi x), y)\).
+
+Um die Glattheit der Übergangsfunktionen zu zeigen, betrachten wir den Schnitt \(U_1 \cap U_2 = (0,1) \times (0,1)\). Die Übergangsfunktion \(\varphi_2 \circ \varphi_1^{-1}\) ist gegeben durch:
+
+\[
+\varphi_2 \circ \varphi_1^{-1}(x,y) = \varphi_2(x,y) = (\cos(2\pi x), \sin(2\pi x), y)
+\]
+
+Da \(\cos(2\pi x)\) und \(\sin(2\pi x)\) glatte Funktionen sind, ist \(\varphi_2 \circ \varphi_1^{-1}\) glatt.
+
+Für die Umkehrfunktion \(\varphi_1 \circ \varphi_2^{-1}\) auf \(U_1 \cap U_2\) leiten wir explizit her:
+
+\[
+x = \frac{1}{2\pi} \arctan2(\sin(2\pi x), \cos(2\pi x))
+\]
+
+wobei \(\arctan2\) die zweidimensionale Umkehrfunktion der trigonometrischen Funktionen darstellt, die den Winkel im Bereich \([0, 2\pi)\) liefert. Somit ist:
+
+\[
+\varphi_1 \circ \varphi_2^{-1}(\cos(2\pi x), \sin(2\pi x), y) = (x, y)
+\]
+
+Dies zeigt, dass \(\varphi_1 \circ \varphi_2^{-1}\) ebenfalls glatt ist.
+
+Die Diskussion zur Holomorphie ist im Kontext einer reellen Mannigfaltigkeit nicht relevant, da eine komplexe Struktur komplexe Karten erfordert, die hier nicht spezifiziert sind.
+
+%CHECK: Herleitung der Umkehrfunktion \(\varphi_1 \circ \varphi_2^{-1}\) explizit ergänzt; Diskussion zur Holomorphie entfernt.

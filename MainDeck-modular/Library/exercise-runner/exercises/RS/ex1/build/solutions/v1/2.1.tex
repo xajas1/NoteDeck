@@ -1,0 +1,22 @@
+Um zu zeigen, dass der Torus eine reelle Mannigfaltigkeit ist, betrachten wir zunächst die Konstruktion des Torus durch die Verklebung der Kanten eines Quadrats. Wir beginnen mit einem Quadrat in der Ebene, das durch die Punkte \( (0,0) \), \( (1,0) \), \( (1,1) \) und \( (0,1) \) definiert ist. Die Verklebung der gegenüberliegenden Kanten erfolgt durch die Identifikation der Punkte auf den Kanten gemäß ihrer Orientierung: 
+
+\[
+(x,0) \sim (x,1) \quad \text{für} \quad 0 \leq x \leq 1
+\]
+\[
+(0,y) \sim (1,y) \quad \text{für} \quad 0 \leq y \leq 1
+\]
+
+Diese Identifikationen führen dazu, dass das Quadrat zu einem Torus wird. Um zu zeigen, dass der Torus eine reelle Mannigfaltigkeit ist, konstruieren wir einen Atlas. Ein Atlas besteht aus Karten, die offene Teilmengen des Torus auf offene Teilmengen des \(\mathbb{R}^2\) abbilden.
+
+Eine natürliche Wahl für den Atlas des Torus ist die Verwendung der Projektion von \(\mathbb{R}^2\) auf den Torus durch die Äquivalenzrelation:
+
+\[
+\pi: \mathbb{R}^2 \to \mathbb{R}^2 / \mathbb{Z}^2
+\]
+
+wobei \(\mathbb{R}^2 / \mathbb{Z}^2\) der Torus ist, der durch die Identifikation von Punkten \((x,y)\) und \((x+m, y+n)\) für \(m, n \in \mathbb{Z}\) entsteht. Die Karten des Atlas sind dann die Einschränkungen von \(\pi\) auf offene Mengen \(U \subset \mathbb{R}^2\), die keine Gitterpunkte enthalten, d.h., \(U\) ist so gewählt, dass \(U \cap (U + (m,n)) = \emptyset\) für alle \((m,n) \in \mathbb{Z}^2\) mit \((m,n) \neq (0,0)\).
+
+Diese Karten sind Homöomorphismen auf ihre Bilder im Torus, und die Übergangsfunktionen zwischen den Karten sind glatt, da sie durch Translationen in \(\mathbb{R}^2\) gegeben sind. Somit ist der Torus eine reelle 2-Mannigfaltigkeit.
+
+Um zu prüfen, ob dieser Atlas eine komplexe Struktur definiert, müssen wir untersuchen, ob die Übergangsfunktionen holomorph sind. Da die Übergangsfunktionen lediglich aus Translationen bestehen, sind sie in der Tat holomorph. Daher definiert der gegebene Atlas auch eine komplexe Struktur auf dem Torus, und der Torus kann als komplexe 1-Mannigfaltigkeit betrachtet werden.

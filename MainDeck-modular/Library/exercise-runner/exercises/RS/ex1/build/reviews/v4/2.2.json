@@ -1,0 +1,19 @@
+{
+  "score": 0.7,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es gibt einige Lücken und Ungenauigkeiten.",
+  "weaknesses": [
+    {
+      "code": "MISSING_INVERSION",
+      "msg": "Die Herleitung der Umkehrfunktion ist unvollständig und fehlerhaft.",
+      "math_hint": "Die Umkehrfunktion \\\\(\frac{1}{2\\pi} \\\\arctan2(\\sin(2\\pi x), \\cos(2\\pi x))\\\\) ist nicht korrekt hergeleitet."
+    },
+    {
+      "code": "DOMAIN_ISSUE",
+      "msg": "Der Definitionsbereich der Umkehrfunktion ist nicht korrekt spezifiziert.",
+      "math_hint": "Der Definitionsbereich von \\\\(\\\\varphi_1 \\\\circ \\\\varphi_2^{-1}\\\\) muss klarer definiert werden."
+    }
+  ],
+  "fix_suggestions": [
+    "\\varphi_1 \\circ \\varphi_2^{-1}(\\cos(2\\pi x), \\sin(2\\pi x), y) = (\\frac{\\arctan2(\\sin(2\\pi x), \\cos(2\\pi x))}{2\\pi}, y) \\text{ für } x \\in (0,1)"
+  ]
+}

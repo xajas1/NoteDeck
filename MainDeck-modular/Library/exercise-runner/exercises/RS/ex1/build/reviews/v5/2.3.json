@@ -1,0 +1,25 @@
+{
+  "score": 0.4,
+  "verdict": "Die Lösung ist unvollständig und enthält Fehler in der Verklebung und den Übergangsfunktionen.",
+  "weaknesses": [
+    {
+      "code": "M1",
+      "msg": "Fehlerhafte Verklebung der Ränder",
+      "math_hint": "Die Verklebung $(x, 0) \\sim (x+2, 1)$ ist nicht korrekt für ein Geschlecht 2."
+    },
+    {
+      "code": "M2",
+      "msg": "Fehlende Herleitung der Übergangsfunktionen",
+      "math_hint": "Die Übergangsfunktionen sollten die Verklebungen korrekt widerspiegeln, nicht nur Identitäten sein."
+    },
+    {
+      "code": "M3",
+      "msg": "Unklare Definition der Karten",
+      "math_hint": "Die Karten sollten die topologische Struktur der Fläche korrekt abbilden."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Korrigiere die Verklebung:} \\begin{align*} (x, 0) &\\sim (x, 1) \\quad \\text{für } x \\in [0, 4], \\\\ (0, y) &\\sim (4, y) \\quad \\text{für } y \\in [0, 1], \\\\ (x, 0) &\\sim (x+2, 1) \\quad \\text{für } x \\in [0, 2]. \\end{align*}",
+    "\\text{Definiere die Übergangsfunktionen korrekt:} \\begin{align*} \\varphi_1 \\circ \\varphi_2^{-1}: \\quad & (x,y) \\mapsto (x,y), \\quad \\text{für } (x,y) \\in U_1 \\cap U_2, \\\\ \\varphi_2 \\circ \\varphi_3^{-1}: \\quad & (x,y) \\mapsto (x,y), \\quad \\text{für } (x,y) \\in U_2 \\cap U_3, \\\\ \\varphi_3 \\circ \\varphi_1^{-1}: \\quad & (x,y) \\mapsto (x,y), \\quad \\text{für } (x,y) \\in U_3 \\cap U_1. \\end{align*}"
+  ]
+}

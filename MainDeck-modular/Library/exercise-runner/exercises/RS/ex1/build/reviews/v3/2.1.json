@@ -1,0 +1,20 @@
+{
+  "score": 0.7,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+  "weaknesses": [
+    {
+      "code": "missing_inverse_details",
+      "msg": "Die Inverse von \\(\\pi\\) ist nicht korrekt spezifiziert.",
+      "math_hint": "Die Inverse \\(\\pi^{-1}(x,y)\\) sollte präziser definiert werden, insbesondere wie \\(k\\) und \\(l\\) gewählt werden."
+    },
+    {
+      "code": "transition_function_smoothness",
+      "msg": "Die Glattheit der Übergangsfunktionen ist nicht ausreichend begründet.",
+      "math_hint": "Es fehlt eine detaillierte Herleitung, warum die Übergangsfunktionen glatt sind."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Präzisiere die Inverse: } \\pi^{-1}(x,y) = (x+k, y+l) \\text{ mit } k, l \\text{ so gewählt, dass } (x+k, y+l) \\in U.",
+    "\\text{Zeige explizit, dass die Übergangsfunktionen glatt sind: } f(x,y) = (x+a, y+b) \\text{ ist glatt, da } a, b \\text{ konstant sind.}"
+  ]
+}

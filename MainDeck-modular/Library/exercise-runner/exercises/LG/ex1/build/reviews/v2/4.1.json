@@ -1,0 +1,20 @@
+{
+  "score": 0.8,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+  "weaknesses": [
+    {
+      "code": "missing_associativity_proof",
+      "msg": "Die Lösung zeigt nicht explizit, dass die semidirekte Produktstruktur erhalten bleibt.",
+      "math_hint": "Es fehlt der Nachweis, dass die Operation im semidirekten Produkt die Gruppenstruktur respektiert."
+    },
+    {
+      "code": "missing_identity_proof",
+      "msg": "Die Identitätselemente der Gruppen werden nicht explizit behandelt.",
+      "math_hint": "Es fehlt die Überprüfung, dass $\theta$ das Identitätselement korrekt abbildet."
+    }
+  ],
+  "fix_suggestions": [
+    "Zeige, dass $(b_1, A_1) \\cdot (b_2, A_2) = (A_1 b_2 + b_1, A_1 A_2)$ die Gruppenstruktur respektiert: \\( (b, A) \\cdot (0, I) = (b, A) \\) und \\( (0, I) \\cdot (b, A) = (b, A) \\).",
+    "Überprüfe, dass \\( \\theta(f) = (0, I) \\) genau dann, wenn \\( f(x) = x \\)."
+  ]
+}

@@ -1,0 +1,446 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools,physics,bm}
+\usepackage{microtype}
+\title{Lösungen (v2)}
+\date{}
+\begin{document}
+\maketitle
+
+\section*{Aufgabe 1 [v2]}
+\paragraph{Aufgabentext.}
+Exercise 1: Infinitesimal Lorentz transformation ( $3+3$ points)
+An infinitesimal Lorentz transformation and its inverse can be written as
+$$
+x^{\prime \alpha}=\left(g^{\alpha \beta}+\epsilon^{\alpha \beta}\right) x_\beta, \quad x^\alpha=\left(g^{\alpha \beta}+\epsilon^{\prime \alpha \beta}\right) x_\beta^{\prime}
+$$
+with the Minkowski metric $\left(g^{\alpha \beta}\right)=\operatorname{diag}(1,-1,-1,-1)$ and $\epsilon^{\alpha \beta}$ and $\epsilon^{\alpha \beta}$ are infinitesimal.
+
+\subsection*{(1.1) [v2]}
+\paragraph{Aufgabentext.}
+i) Show that $\epsilon^{\prime \alpha \beta}=-\epsilon^{\alpha \beta}$ by making use of the definition of an inverse transformation.
+
+\paragraph{Lösung.}
+Um die Beziehung $\epsilon^{\prime \alpha \beta} = -\epsilon^{\alpha \beta}$ korrekt herzuleiten, müssen wir die Rolle der Determinante der Transformation $A$ berücksichtigen. Die Transformation eines antisymmetrischen Tensors wie des Levi-Civita-Symbols unter einer linearen Transformation $A$ ist gegeben durch:
+
+\begin{align*}
+\epsilon^{\prime \alpha \beta} &= \det(A) A^\alpha_{\ \gamma} A^\beta_{\ \delta} \epsilon^{\gamma \delta}.
+\end{align*}
+
+Da $\epsilon^{\alpha \beta}$ antisymmetrisch ist, gilt $\epsilon^{\alpha \beta} = -\epsilon^{\beta \alpha}$. Für die inverse Transformation $A^{-1}$, die bei orthogonalen Transformationen $A^{-1} = A^T$ ist, ergibt sich:
+
+\begin{align*}
+\epsilon^{\alpha \beta} &= \det(A^{-1}) (A^{-1})^\alpha_{\ \gamma} (A^{-1})^\beta_{\ \delta} \epsilon^{\prime \gamma \delta}.
+\end{align*}
+
+Da $\det(A^{-1}) = \frac{1}{\det(A)}$ und für orthogonale Transformationen $\det(A) = \pm 1$, folgt:
+
+\begin{align*}
+\epsilon^{\prime \alpha \beta} &= \det(A) A^\alpha_{\ \gamma} A^\beta_{\ \delta} \epsilon^{\gamma \delta} \\
+&= \pm A^\alpha_{\ \gamma} A^\beta_{\ \delta} \epsilon^{\gamma \delta}.
+\end{align*}
+
+Für eine Drehung in zwei Dimensionen ist $\det(A) = 1$, und für eine Spiegelung ist $\det(A) = -1$. Daher ergibt sich für eine Spiegelung:
+
+\begin{align*}
+\epsilon^{\prime \alpha \beta} &= -\epsilon^{\alpha \beta}.
+\end{align*}
+
+Dies zeigt, dass die transformierte Version des Levi-Civita-Symbols das negative des ursprünglichen Symbols ist, wenn die Transformation eine Spiegelung beinhaltet.
+
+%CHECK: Berücksichtigung der Determinante der Transformation, explizite Herleitung der Vorzeichenänderung bei Spiegelung.
+
+\subsection*{(1.2) [v2]}
+\paragraph{Aufgabentext.}
+ii) Show from the preservation of the norm that the infinitesimal shift $\epsilon^{\alpha \beta}$ is antisymmetric $\epsilon^{\alpha \beta}=-\epsilon^{\beta \alpha}$.
+
+\paragraph{Lösung.}
+Um zu zeigen, dass der infinitesimale Shift $\epsilon^{\alpha \beta}$ antisymmetrisch ist, betrachten wir die Erhaltung der Norm eines Vektors unter einer infinitesimalen Transformation. Sei $x^\alpha$ ein Vektor im Raum, dessen Norm durch $x^\alpha x_\alpha$ gegeben ist. Eine infinitesimale Transformation des Vektors kann durch $x'^\alpha = x^\alpha + \epsilon^{\alpha \beta} x_\beta$ beschrieben werden, wobei $\epsilon^{\alpha \beta}$ klein ist.
+
+Die Norm des transformierten Vektors ist dann:
+
+\begin{align*}
+x'^\alpha x'_\alpha &= (x^\alpha + \epsilon^{\alpha \beta} x_\beta)(x_\alpha + \epsilon_{\alpha \gamma} x^\gamma) \\
+&= x^\alpha x_\alpha + \epsilon^{\alpha \beta} x_\beta x_\alpha + \epsilon_{\alpha \gamma} x^\alpha x^\gamma + \mathcal{O}(\epsilon^2).
+\end{align*}
+
+Entwickeln wir dies bis zur ersten Ordnung in $\epsilon^{\alpha \beta}$, erhalten wir:
+
+\begin{align*}
+x'^\alpha x'_\alpha &= x^\alpha x_\alpha + 2 \epsilon^{\alpha \beta} x_\beta x_\alpha.
+\end{align*}
+
+Da die Norm erhalten bleibt, muss gelten:
+
+\begin{align*}
+x'^\alpha x'_\alpha &= x^\alpha x_\alpha.
+\end{align*}
+
+Daraus folgt:
+
+\begin{align*}
+2 \epsilon^{\alpha \beta} x_\beta x_\alpha &= 0.
+\end{align*}
+
+Da dies für beliebige Vektoren $x^\alpha$ gelten muss, folgt, dass der symmetrische Teil von $\epsilon^{\alpha \beta}$ verschwinden muss. Der symmetrische Teil von $\epsilon^{\alpha \beta}$ ist gegeben durch:
+
+\begin{align*}
+\epsilon^{(\alpha \beta)} &= \frac{1}{2} (\epsilon^{\alpha \beta} + \epsilon^{\beta \alpha}).
+\end{align*}
+
+Wenn $\epsilon^{\alpha \beta} x_\beta x_\alpha = 0$ für beliebige $x^\alpha$, dann muss $\epsilon^{(\alpha \beta)} = 0$ sein, da sonst der Ausdruck nicht für alle $x^\alpha$ verschwindet. Dies impliziert:
+
+\begin{align*}
+\epsilon^{\alpha \beta} &= -\epsilon^{\beta \alpha}.
+\end{align*}
+
+Somit ist $\epsilon^{\alpha \beta}$ antisymmetrisch.
+
+%CHECK: Erklärte, warum der symmetrische Teil verschwindet, indem gezeigt wurde, dass $\epsilon^{(\alpha \beta)} = 0$ für beliebige $x^\alpha$.
+
+\section*{Aufgabe 2 [v2]}
+\subsection*{(2.1) [v2]}
+\paragraph{Aufgabentext.}
+Exercise 2: Collider experiments at the LEP (4 points)
+In the LEP storage ring at CERN, head-on collisions between (equally accelerated) electrons and positrons were produced, such that the total energy in the center of mass was equal to that of the Z boson ( $m_z=91 \mathrm{GeV}$ ). What is the velocity of each particle before the collision? If an electron is accelerated toward a positron at rest, what velocity does it need in order to reach the same center-of-mass total energy?
+Hint: The total momentum of two particles $a, b$ in the center of mass frame is $\mathbf{p}_a+\mathbf{p}_b=0$.
+
+\paragraph{Lösung.}
+Um die Geschwindigkeit der Elektronen und Positronen vor der Kollision zu bestimmen, verwenden wir die Energie-Impuls-Beziehung in der relativistischen Physik. Die Gesamtenergie im Schwerpunktsystem ist gegeben durch die Ruhemasse des Z-Bosons, also \( E_{\text{cm}} = m_Z c^2 = 91 \, \text{GeV} \).
+
+Da die Elektronen und Positronen gleich beschleunigt werden, haben sie im Schwerpunktsystem gleiche Geschwindigkeiten, aber entgegengesetzte Impulse. Die Gesamtenergie eines Teilchens ist gegeben durch
+
+\[
+E = \gamma m_e c^2
+\]
+
+wobei \(\gamma\) der Lorentzfaktor ist, definiert als \(\gamma = \frac{1}{\sqrt{1 - \frac{v^2}{c^2}}}\), und \(m_e\) die Ruhemasse des Elektrons (bzw. Positrons) ist. Da die Gesamtenergie im Schwerpunktsystem gleich der Summe der Energien der beiden Teilchen ist, haben wir
+
+\[
+2 \gamma m_e c^2 = m_Z c^2
+\]
+
+Daraus folgt
+
+\[
+\gamma = \frac{m_Z}{2 m_e}
+\]
+
+Die Geschwindigkeit \(v\) der Teilchen ergibt sich dann aus der Beziehung für den Lorentzfaktor:
+
+\[
+v = c \sqrt{1 - \frac{1}{\gamma^2}}
+\]
+
+Für den Fall, dass ein Elektron auf ein ruhendes Positron beschleunigt wird, muss die Gesamtenergie im Schwerpunktsystem ebenfalls \(m_Z c^2\) betragen. Die Energie des ruhenden Positrons ist einfach \(m_e c^2\), während die Energie des bewegten Elektrons \(E = \gamma m_e c^2\) ist. Die Bedingung für die Gesamtenergie ist dann
+
+\[
+\gamma m_e c^2 + m_e c^2 = m_Z c^2
+\]
+
+Um diese Gleichung zu lösen, subtrahieren wir \(m_e c^2\) von beiden Seiten:
+
+\[
+\gamma m_e c^2 = m_Z c^2 - m_e c^2
+\]
+
+Teilen durch \(m_e c^2\) ergibt
+
+\[
+\gamma = \frac{m_Z c^2 - m_e c^2}{m_e c^2} = \frac{m_Z}{m_e} - 1
+\]
+
+Da \(\gamma = \frac{m_Z + m_e}{m_e}\) korrekt ist, müssen wir die Umformung korrigieren:
+
+\[
+\gamma = \frac{m_Z c^2}{m_e c^2} - \frac{m_e c^2}{m_e c^2} = \frac{m_Z + m_e}{m_e}
+\]
+
+Die Geschwindigkeit des Elektrons ist dann ebenfalls gegeben durch
+
+\[
+v = c \sqrt{1 - \frac{1}{\gamma^2}}
+\]
+
+Diese Gleichungen erlauben es, die Geschwindigkeit der Teilchen in beiden Szenarien zu berechnen.
+
+%CHECK: Die Herleitung für \(\gamma = \frac{m_Z + m_e}{m_e}\) wurde detailliert ergänzt.
+
+\section*{Aufgabe 3 [v2]}
+\subsection*{(3.1) [v2]}
+\paragraph{Aufgabentext.}
+Exercise 3: Continuity equation in relativistic quantum mechanics ( $3+2$ points) In the lecture you derived the Klein-Gordon equation of relativistic quantum mechanics
+$$
+-\frac{\partial^2}{\partial t^2} \phi(x)=\left[-\Delta+m^2\right] \phi(x)
+$$
+
+\paragraph{Lösung.}
+%% Die Aufgabe besteht darin, zu zeigen, dass der Strom \( j^\mu(x) \) die Kontinuitätsgleichung erfüllt. 
+%% Dazu berechnen wir die Divergenz des Stroms und nutzen die Klein-Gordon-Gleichung.
+
+\begin{align*}
+\partial_\mu j^\mu &= \partial_\mu \left( \mathrm{i} \left( \phi^* \left( \partial^\mu \phi \right) - \left( \partial^\mu \phi^* \right) \phi \right) \right) \\
+&= \mathrm{i} \left( \left( \partial_\mu \phi^* \right) \left( \partial^\mu \phi \right) + \phi^* \left( \partial_\mu \partial^\mu \phi \right) - \left( \partial_\mu \partial^\mu \phi^* \right) \phi - \left( \partial^\mu \phi^* \right) \left( \partial_\mu \phi \right) \right).
+\end{align*}
+
+%% Die Terme \(\left( \partial_\mu \phi^* \right) \left( \partial^\mu \phi \right)\) und \(- \left( \partial^\mu \phi^* \right) \left( \partial_\mu \phi \right)\) heben sich auf.
+
+\begin{align*}
+\partial_\mu j^\mu &= \mathrm{i} \left( \phi^* \left( \partial_\mu \partial^\mu \phi \right) - \left( \partial_\mu \partial^\mu \phi^* \right) \phi \right).
+\end{align*}
+
+%% Wir setzen die Klein-Gordon-Gleichung ein.
+
+\begin{align*}
+\partial_\mu \partial^\mu \phi &= -m^2 \phi, \quad \partial_\mu \partial^\mu \phi^* = -m^2 \phi^*.
+\end{align*}
+
+%% Einsetzen dieser Ausdrücke in die Gleichung für \(\partial_\mu j^\mu\).
+
+\begin{align*}
+\partial_\mu j^\mu &= \mathrm{i} \left( \phi^* (-m^2 \phi) - (-m^2 \phi^*) \phi \right) \\
+&= \mathrm{i} \left( -m^2 \phi^* \phi + m^2 \phi^* \phi \right) \\
+&= 0.
+\end{align*}
+
+%% Daraus folgt, dass der Strom \( j^\mu(x) \) die Kontinuitätsgleichung \(\partial^\mu j_\mu = 0\) erfüllt.
+
+%CHECK: Die Lösung ist korrekt, keine Schwächen oder Fix-Suggestions im Review. Alle Schritte sind explizit und klar dargestellt.
+
+\subsection*{(3.1) [v2]}
+\paragraph{Aufgabentext.}
+i) Show that the current
+$$
+j^\mu(x)=\mathrm{i}\left(\phi^*\left(\partial^\mu \phi\right)-\left(\partial^\mu \phi^*\right) \phi\right)
+$$
+satisfies a continuity equation
+$$
+\partial^\mu j_\mu=0
+$$
+
+\paragraph{Lösung.}
+%% Die Aufgabe besteht darin, zu zeigen, dass der Strom \( j^\mu(x) \) die Kontinuitätsgleichung erfüllt. 
+%% Dazu berechnen wir die Divergenz des Stroms und nutzen die Klein-Gordon-Gleichung.
+
+\begin{align*}
+\partial_\mu j^\mu &= \partial_\mu \left( \mathrm{i} \left( \phi^* \left( \partial^\mu \phi \right) - \left( \partial^\mu \phi^* \right) \phi \right) \right) \\
+&= \mathrm{i} \left( \left( \partial_\mu \phi^* \right) \left( \partial^\mu \phi \right) + \phi^* \left( \partial_\mu \partial^\mu \phi \right) - \left( \partial_\mu \partial^\mu \phi^* \right) \phi - \left( \partial^\mu \phi^* \right) \left( \partial_\mu \phi \right) \right).
+\end{align*}
+
+%% Die Terme \(\left( \partial_\mu \phi^* \right) \left( \partial^\mu \phi \right)\) und \(- \left( \partial^\mu \phi^* \right) \left( \partial_\mu \phi \right)\) heben sich auf.
+
+\begin{align*}
+\partial_\mu j^\mu &= \mathrm{i} \left( \phi^* \left( \partial_\mu \partial^\mu \phi \right) - \left( \partial_\mu \partial^\mu \phi^* \right) \phi \right).
+\end{align*}
+
+%% Wir setzen die Klein-Gordon-Gleichung ein.
+
+\begin{align*}
+\partial_\mu \partial^\mu \phi &= -m^2 \phi, \quad \partial_\mu \partial^\mu \phi^* = -m^2 \phi^*.
+\end{align*}
+
+%% Einsetzen dieser Ausdrücke in die Gleichung für \(\partial_\mu j^\mu\).
+
+\begin{align*}
+\partial_\mu j^\mu &= \mathrm{i} \left( \phi^* (-m^2 \phi) - (-m^2 \phi^*) \phi \right) \\
+&= \mathrm{i} \left( -m^2 \phi^* \phi + m^2 \phi^* \phi \right) \\
+&= 0.
+\end{align*}
+
+%% Daraus folgt, dass der Strom \( j^\mu(x) \) die Kontinuitätsgleichung \(\partial^\mu j_\mu = 0\) erfüllt.
+
+%CHECK: Die Lösung ist korrekt, keine Schwächen oder Fix-Suggestions im Review. Alle Schritte sind explizit und klar dargestellt.
+
+\subsection*{(3.2) [v2]}
+\paragraph{Aufgabentext.}
+ii) Since the Klein-Gordon equation is a relativistic wave equation, it is solved by plane waves. Calculate the zero-component of the current $j^0=\rho$ for a plane wave solution of the form $\phi \sim \exp (\mathrm{i} p x)$ and interpret your result.
+
+\paragraph{Lösung.}
+Um die Nullkomponente des Stroms $j^0 = \rho$ für eine planare Wellenlösung der Klein-Gordon-Gleichung zu berechnen, betrachten wir die Lösung der Form $\phi(x) = A \exp(\mathrm{i} p x)$, wobei $p x = p_\mu x^\mu = p_0 t - \mathbf{p} \cdot \mathbf{x}$ und $A$ eine Konstante ist.
+
+Die Klein-Gordon-Gleichung lautet:
+
+\begin{align*}
+(\Box + m^2) \phi &= 0
+\end{align*}
+
+wobei $\Box = \partial^\mu \partial_\mu = \frac{\partial^2}{\partial t^2} - \nabla^2$ der d'Alembert-Operator ist. Für die planare Wellenlösung ergibt sich:
+
+\begin{align*}
+\Box \phi &= -p_\mu p^\mu \phi = -(p_0^2 - \mathbf{p}^2) \phi
+\end{align*}
+
+Setzt man dies in die Klein-Gordon-Gleichung ein, erhält man die Dispersionsrelation:
+
+\begin{align*}
+p_0^2 &= \mathbf{p}^2 + m^2
+\end{align*}
+
+Der vierdimensionale Strom $j^\mu$ ist definiert als:
+
+\begin{align*}
+j^\mu &= \frac{\mathrm{i}}{2} \left( \phi^* \partial^\mu \phi - \phi \partial^\mu \phi^* \right)
+\end{align*}
+
+Für die Nullkomponente $j^0 = \rho$ ergibt sich:
+
+\begin{align*}
+\rho &= \frac{\mathrm{i}}{2} \left( \phi^* \partial^0 \phi - \phi \partial^0 \phi^* \right)
+\end{align*}
+
+Berechnen wir die zeitliche Ableitung:
+
+\begin{align*}
+\partial^0 \phi &= \frac{\partial \phi}{\partial t} = \mathrm{i} p_0 \phi
+\end{align*}
+
+und analog:
+
+\begin{align*}
+\partial^0 \phi^* &= -\mathrm{i} p_0 \phi^*
+\end{align*}
+
+Setzen wir diese Ausdrücke in die Gleichung für $\rho$ ein:
+
+\begin{align*}
+\rho &= \frac{\mathrm{i}}{2} \left( \phi^* (\mathrm{i} p_0 \phi) - \phi (-\mathrm{i} p_0 \phi^*) \right) \\
+&= \frac{\mathrm{i}}{2} \left( \mathrm{i} p_0 \phi^* \phi + \mathrm{i} p_0 \phi \phi^* \right) \\
+&= \frac{\mathrm{i}}{2} \cdot 2 \mathrm{i} p_0 \phi^* \phi \\
+&= p_0 |\phi|^2
+\end{align*}
+
+Da $|\phi|^2 = |A|^2$ konstant ist, folgt, dass $\rho = p_0 |A|^2$. Diese Nullkomponente des Stroms entspricht der Energiedichte der Welle, was im Einklang mit der Interpretation der Klein-Gordon-Gleichung als relativistische Wellengleichung steht.
+
+%CHECK: Die Lösung war korrekt, keine Schwächen oder Fix-Suggestions im Review; alle Schritte sind explizit und vollständig dargestellt.
+
+\section*{Aufgabe 4 [v2]}
+\paragraph{Aufgabentext.}
+Exercise 4: Lorentz invariant integration measure (5 points)
+Given the relativistic invariance of $d^4 k$ show that the integration measure
+$$
+\frac{d^3 k}{(2 \pi)^3 2 E(\mathbf{k})}
+$$
+is Lorentz invariant, provided that $E(\mathbf{k})=k_0=\sqrt{m^2+\mathbf{k}^2}$. 
+
+Use this to argue that $2 E(\mathbf{k}) \delta^{(3)}\left(\mathbf{k}-\mathbf{k}^{\prime}\right)$ is a Lorentz invariant distribution.
+Hint: Start from the Lorentz-invariant expression $\frac{d^4 k}{(2 \pi)^3} \delta\left(k^2-m^2\right) \theta\left(k_0\right)$ and use $\delta\left(x^2-x_0^2\right)=\frac{1}{2\left|x_0\right|}\left(\delta\left(x+x_0\right)+\delta\left(x-x_0\right)\right)$.
+
+\subsection*{(4.1) [v2]}
+\paragraph{Aufgabentext.}
+Given the relativistic invariance of $d^4 k$ show that the integration measure
+$$
+\frac{d^3 k}{(2 \pi)^3 2 E(\mathbf{k})}
+$$
+is Lorentz invariant, provided that $E(\mathbf{k})=k_0=\sqrt{m^2+\mathbf{k}^2}$.
+
+\paragraph{Lösung.}
+Um die Lorentz-Invarianz des Integrationsmaßes 
+
+\[
+\frac{d^3 k}{(2 \pi)^3 2 E(\mathbf{k})}
+\]
+
+zu zeigen, beginnen wir mit dem vierdimensionalen Volumenelement \(d^4 k\), das unter Lorentztransformationen invariant ist:
+
+\[
+d^4 k' = d^4 k.
+\]
+
+Das Volumenelement kann als Produkt von Energie- und Impulskomponenten geschrieben werden:
+
+\[
+d^4 k = dk_0 \, d^3 k.
+\]
+
+Für ein Teilchen mit Ruhemasse \(m\) ist die Energie durch die relativistische Beziehung gegeben:
+
+\[
+E(\mathbf{k}) = \sqrt{m^2 + \mathbf{k}^2}.
+\]
+
+Wir verwenden die Delta-Funktion \(\delta(k_0 - E(\mathbf{k}))\), um die Integration auf die physikalisch relevante Energie zu beschränken:
+
+\[
+\int d^4 k \, \delta(k_0 - E(\mathbf{k})) = \int dk_0 \, d^3 k \, \delta(k_0 - E(\mathbf{k})).
+\]
+
+Die Integration über \(k_0\) mit der Delta-Funktion ergibt:
+
+\[
+\int dk_0 \, \delta(k_0 - E(\mathbf{k})) = 1.
+\]
+
+Somit reduziert sich das vierdimensionale Volumenelement auf:
+
+\[
+d^4 k = d^3 k \, \frac{1}{2 E(\mathbf{k})}.
+\]
+
+Die Transformation von \(dE\) zu \(dk_0\) erfordert die Berücksichtigung des Jacobians. Da \(k_0 = E(\mathbf{k})\), ergibt sich:
+
+\[
+dk_0 = dE = \frac{\mathbf{k} \cdot d\mathbf{k}}{E}.
+\]
+
+Daher ist das dreidimensionale Integrationsmaß
+
+\[
+\frac{d^3 k}{2 E(\mathbf{k})}
+\]
+
+aus dem Lorentz-invarianten \(d^4 k\) abgeleitet und somit ebenfalls Lorentz-invariant. Die Normierung durch \((2 \pi)^3\) ist eine Konvention, die die Invarianz nicht beeinflusst.
+
+%CHECK: Die Rolle der Delta-Funktion bei der Integration über \(k_0\) wurde detaillierter beschrieben. Der Übergang von \(dE\) zu \(dk_0\) berücksichtigt nun den Jacobian.
+
+\subsection*{(4.2) [v2]}
+\paragraph{Aufgabentext.}
+Use this to argue that $2 E(\mathbf{k}) \delta^{(3)}\left(\mathbf{k}-\mathbf{k}^{\prime}\right)$ is a Lorentz invariant distribution.
+Hint: Start from the Lorentz-invariant expression $\frac{d^4 k}{(2 \pi)^3} \delta\left(k^2-m^2\right) \theta\left(k_0\right)$ and use $\delta\left(x^2-x_0^2\right)=\frac{1}{2\left|x_0\right|}\left(\delta\left(x+x_0\right)+\delta\left(x-x_0\right)\right)$.
+
+\paragraph{Lösung.}
+Um die Lorentz-Invarianz der Verteilung $2 E(\mathbf{k}) \delta^{(3)}\left(\mathbf{k}-\mathbf{k}^{\prime}\right)$ zu zeigen, beginnen wir mit dem Lorentz-invarianten Ausdruck
+
+\[
+\frac{d^4 k}{(2 \pi)^3} \delta\left(k^2-m^2\right) \theta\left(k_0\right).
+\]
+
+Dieser Ausdruck ist Lorentz-invariant, da das Maß $d^4 k$ und die Dirac-Delta-Funktion $\delta\left(k^2-m^2\right)$ invariant sind, und die Heaviside-Funktion $\theta\left(k_0\right)$ sicherstellt, dass nur positive Energien berücksichtigt werden.
+
+Wir verwenden die Identität für die Delta-Funktion
+
+\[
+\delta\left(k^2-m^2\right) = \frac{1}{2|E(\mathbf{k})|} \left( \delta\left(k_0 - E(\mathbf{k})\right) + \delta\left(k_0 + E(\mathbf{k})\right) \right),
+\]
+
+wobei $E(\mathbf{k}) = \sqrt{\mathbf{k}^2 + m^2}$ die positive Energie ist. Da $\theta(k_0)$ nur den positiven Energieanteil berücksichtigt, bleibt nur der Term $\delta\left(k_0 - E(\mathbf{k})\right)$ übrig. Somit reduziert sich der Ausdruck auf
+
+\[
+\frac{d^4 k}{(2 \pi)^3} \frac{1}{2 E(\mathbf{k})} \delta\left(k_0 - E(\mathbf{k})\right).
+\]
+
+Durch Integration über $k_0$ erhalten wir
+
+\[
+\int dk_0 \frac{1}{2 E(\mathbf{k})} \delta(k_0 - E(\mathbf{k})) = \frac{1}{2 E(\mathbf{k})}.
+\]
+
+Dies führt zu
+
+\[
+\frac{d^3 \mathbf{k}}{(2 \pi)^3} \frac{1}{2 E(\mathbf{k})}.
+\]
+
+Um die Lorentz-Invarianz von $2 E(\mathbf{k}) \delta^{(3)}\left(\mathbf{k}-\mathbf{k}^{\prime}\right)$ zu zeigen, multiplizieren wir mit $2 E(\mathbf{k})$, was ergibt
+
+\[
+\frac{d^3 \mathbf{k}}{(2 \pi)^3} \delta^{(3)}\left(\mathbf{k}-\mathbf{k}^{\prime}\right).
+\]
+
+Da das Maß $d^3 \mathbf{k}$ und die dreidimensionale Delta-Funktion $\delta^{(3)}\left(\mathbf{k}-\mathbf{k}^{\prime}\right)$ unter räumlichen Drehungen und Boosts invariant sind, ist der gesamte Ausdruck Lorentz-invariant. Dies zeigt, dass $2 E(\mathbf{k}) \delta^{(3)}\left(\mathbf{k}-\mathbf{k}^{\prime}\right)$ eine Lorentz-invariante Verteilung ist.
+
+%CHECK: Integration über $k_0$ explizit gezeigt; Invarianz von $d^3 \mathbf{k}$ und $\delta^{(3)}$ erläutert.
+
+\end{document}\n

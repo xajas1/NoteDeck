@@ -1,0 +1,20 @@
+{
+  "score": 0.7,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details zur Transformation und zum Jacobian.",
+  "weaknesses": [
+    {
+      "code": "missing_jacobian",
+      "msg": "Der Jacobian bei der Transformation von $dE$ zu $dk_0$ ist nicht korrekt behandelt.",
+      "math_hint": "Es fehlt die korrekte Anwendung des Jacobians: $dk_0 = dE = \\frac{\\partial E}{\\partial k_i} dk_i$."
+    },
+    {
+      "code": "delta_function_integration",
+      "msg": "Die Rolle der Delta-Funktion bei der Integration über $k_0$ ist nicht vollständig erklärt.",
+      "math_hint": "Die Integration über $k_0$ sollte explizit die Delta-Funktion verwenden: $\\int dk_0 \\, \\delta(k_0 - E(\\mathbf{k})) f(k_0) = f(E(\\mathbf{k}))$."
+    }
+  ],
+  "fix_suggestions": [
+    "\\int dk_0 \\, \\delta(k_0 - E(\\mathbf{k})) = 1",
+    "dk_0 = \\frac{\\partial E}{\\partial k_i} dk_i = \\frac{k_i}{E} dk_i"
+  ]
+}

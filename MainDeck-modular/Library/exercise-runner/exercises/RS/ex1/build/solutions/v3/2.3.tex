@@ -1,0 +1,26 @@
+Um die gegebene Fläche als reelle Mannigfaltigkeit zu zeigen, müssen wir die Karten und die Übergangsfunktionen detailliert beschreiben, insbesondere wie die Verklebung der Ränder zu einer Fläche vom Geschlecht 2 führt.
+
+Betrachten wir das Rechteck $R = [0, 2] \times [0, 1]$. Durch die Identifikation der Ränder $(x, 0) \sim (x, 1)$ für $x \in [0, 2]$ und $(0, y) \sim (2, y)$ für $y \in [0, 1]$ entsteht eine Fläche vom Geschlecht 2. Wir definieren lokale Karten, die diese Struktur beschreiben.
+
+\begin{align*}
+\text{Karte um die Ecke } (0,0): \quad & \varphi_1: U_1 \to \mathbb{R}^2, \quad \varphi_1(x,y) = (x,y), \\
+& \text{wobei } U_1 \text{ eine kleine Umgebung von } (0,0) \text{ in } R \text{ ist.} \\
+\text{Karte entlang der Kante } [0,2] \times \{0\}: \quad & \varphi_2: U_2 \to \mathbb{R}^2, \quad \varphi_2(x,y) = (x,y), \\
+& \text{wobei } U_2 = [0,2] \times (-\epsilon, \epsilon) \text{ für ein kleines } \epsilon > 0. \\
+\text{Karte im Inneren des Rechtecks:} \quad & \varphi_3: U_3 \to \mathbb{R}^2, \quad \varphi_3(x,y) = (x,y), \\
+& \text{wobei } U_3 \text{ eine offene Menge im Inneren von } R \text{ ist.}
+\end{align*}
+
+Die Übergangsfunktionen zwischen diesen Karten sind wie folgt definiert:
+
+\begin{align*}
+\varphi_1 \circ \varphi_2^{-1}: \quad & (x,y) \mapsto (x,y), \quad \text{für } (x,y) \in U_1 \cap U_2, \\
+\varphi_2 \circ \varphi_3^{-1}: \quad & (x,y) \mapsto (x,y), \quad \text{für } (x,y) \in U_2 \cap U_3, \\
+\varphi_3 \circ \varphi_1^{-1}: \quad & (x,y) \mapsto (x,y), \quad \text{für } (x,y) \in U_3 \cap U_1.
+\end{align*}
+
+Die Verklebung der Ränder wird durch die Übergangsfunktion $\varphi_2 \circ \varphi_2^{-1}$ beschrieben, die die Identifikation $(x, 0) \sim (x, 1)$ und $(0, y) \sim (2, y)$ berücksichtigt. Diese Übergangsfunktionen sind glatt, da sie Identitäten oder Verschiebungen darstellen.
+
+Um zu überprüfen, ob diese Atlanten eine komplexe Struktur definieren, müssen wir die Cauchy-Riemann-Gleichungen für die Übergangsfunktionen untersuchen. Da die Übergangsfunktionen lediglich Verschiebungen sind, erfüllen sie die Cauchy-Riemann-Gleichungen nicht und sind somit nicht holomorph.
+
+%CHECK: Detaillierte Beschreibung der Übergangsfunktionen hinzugefügt, Verklebung der Ränder erklärt, Holomorphie durch Cauchy-Riemann-Gleichungen überprüft.

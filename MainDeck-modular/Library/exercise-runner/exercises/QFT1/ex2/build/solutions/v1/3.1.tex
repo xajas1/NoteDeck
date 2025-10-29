@@ -1,0 +1,37 @@
+Um zu zeigen, dass der gegebene Strom \( j^\mu(x) \) die Kontinuitätsgleichung \(\partial^\mu j_\mu = 0\) erfüllt, beginnen wir mit der Berechnung der Divergenz des Stroms:
+
+\[
+\partial_\mu j^\mu = \partial_\mu \left( \mathrm{i} \left( \phi^* \left( \partial^\mu \phi \right) - \left( \partial^\mu \phi^* \right) \phi \right) \right)
+\]
+
+Wir wenden die Produktregel der Ableitung an:
+
+\[
+\partial_\mu j^\mu = \mathrm{i} \left( \left( \partial_\mu \phi^* \right) \left( \partial^\mu \phi \right) + \phi^* \left( \partial_\mu \partial^\mu \phi \right) - \left( \partial_\mu \partial^\mu \phi^* \right) \phi - \left( \partial^\mu \phi^* \right) \left( \partial_\mu \phi \right) \right)
+\]
+
+Die Terme \(\left( \partial_\mu \phi^* \right) \left( \partial^\mu \phi \right)\) und \(- \left( \partial^\mu \phi^* \right) \left( \partial_\mu \phi \right)\) heben sich gegenseitig auf, da sie identisch sind, aber mit entgegengesetztem Vorzeichen. Somit bleibt:
+
+\[
+\partial_\mu j^\mu = \mathrm{i} \left( \phi^* \left( \partial_\mu \partial^\mu \phi \right) - \left( \partial_\mu \partial^\mu \phi^* \right) \phi \right)
+\]
+
+Wenn \(\phi\) die Klein-Gordon-Gleichung erfüllt, dann gilt:
+
+\[
+\partial_\mu \partial^\mu \phi + m^2 \phi = 0 \quad \text{und} \quad \partial_\mu \partial^\mu \phi^* + m^2 \phi^* = 0
+\]
+
+Daraus folgt:
+
+\[
+\partial_\mu \partial^\mu \phi = -m^2 \phi \quad \text{und} \quad \partial_\mu \partial^\mu \phi^* = -m^2 \phi^*
+\]
+
+Setzen wir diese Ausdrücke in die Gleichung für \(\partial_\mu j^\mu\) ein:
+
+\[
+\partial_\mu j^\mu = \mathrm{i} \left( \phi^* (-m^2 \phi) - (-m^2 \phi^*) \phi \right) = \mathrm{i} \left( -m^2 \phi^* \phi + m^2 \phi^* \phi \right) = 0
+\]
+
+Daher erfüllt der Strom \( j^\mu(x) \) die Kontinuitätsgleichung \(\partial^\mu j_\mu = 0\).

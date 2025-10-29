@@ -1,0 +1,20 @@
+{
+  "score": 0.7,
+  "verdict": "Die Lösung enthält einige konzeptionelle Fehler und Unklarheiten.",
+  "weaknesses": [
+    {
+      "code": "incorrect_group_intersection",
+      "msg": "Die Definition von $\text{O}(2n)$ ist falsch, da sie nicht auf $n \times n$ Matrizen angewendet werden kann.",
+      "math_hint": "Die Bedingung $A^T A = I_{2n}$ ist nicht korrekt für $n \times n$ Matrizen."
+    },
+    {
+      "code": "incorrect_intersection_argument",
+      "msg": "Die Argumentation für die Gleichheit $\text{GL}_n(\text{C}) \\\\cap \text{O}(2n) = \text{U}(n)$ ist unklar und fehlerhaft.",
+      "math_hint": "Es fehlt eine klare Herleitung, warum $A^T A = I_{2n}$ für $n \times n$ Matrizen gelten soll."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Korrigiere die Definition von } \\text{O}(2n) \\text{ und erkläre, warum die Bedingung } A^T A = I_{2n} \\text{ für } n \\times n \\text{ Matrizen nicht zutrifft.}",
+    "\\text{Zeige, dass eine Matrix } A \\in \\text{GL}_n(\\mathbb{C}) \\text{ in } \\text{U}(n) \\text{ liegt, indem du die Bedingung } A^* A = I_n \\text{ korrekt herleitest.}"
+  ]
+}

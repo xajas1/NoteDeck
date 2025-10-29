@@ -1,0 +1,20 @@
+{
+  "score": 0.7,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details und Klarstellungen.",
+  "weaknesses": [
+    {
+      "code": "MISSING_REALITY_CONDITION",
+      "msg": "Die Schlussfolgerung, dass $C$ reell sein muss, ist nicht ausreichend begründet.",
+      "math_hint": "Es fehlt eine explizite Herleitung, warum $C^T C = I$ und $C^* C = I$ implizieren, dass $C$ reell ist."
+    },
+    {
+      "code": "MISSING_DETERMINANT_CONDITION",
+      "msg": "Die Bedingung für die Determinante wird nicht ausreichend diskutiert.",
+      "math_hint": "Es fehlt eine explizite Überprüfung, dass $\text{det}(C) = 1$ für $C \to \text{SO}(n)$ gilt."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Zeige, dass } C^T C = I \\text{ und } C^* C = I \\Rightarrow C \\text{ ist reell: } C^* = \\overline{C^T} \\Rightarrow C = \\overline{C} \\text{ (reell)}.",
+    "\\text{Überprüfe, dass } \\det(C) = 1 \\text{ für } C \\in \\text{SO}(n) \\text{ gilt.}"
+  ]
+}

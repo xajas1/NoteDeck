@@ -1,0 +1,18 @@
+Um die Gleichheit $\mathrm{GL}_n(\mathbb{C}) \cap \mathrm{O}(2n) = \mathrm{U}(n)$ korrekt zu zeigen, müssen wir die Definitionen der beteiligten Gruppen präzisieren und die Bedingungen für die Zugehörigkeit zu diesen Gruppen korrekt herleiten.
+
+Zunächst ist die allgemeine lineare Gruppe $\mathrm{GL}_n(\mathbb{C})$ die Gruppe aller invertierbaren $n \times n$ Matrizen mit komplexen Einträgen. Die unitäre Gruppe $\mathrm{U}(n)$ besteht aus allen $n \times n$ Matrizen $U$ mit komplexen Einträgen, die die Bedingung $U^* U = I_n$ erfüllen, wobei $U^*$ die konjugiert-transponierte Matrix von $U$ ist.
+
+Die orthogonale Gruppe $\mathrm{O}(n)$ besteht aus allen $n \times n$ Matrizen $A$ mit reellen Einträgen, die die Bedingung $A^T A = I_n$ erfüllen. Die Definition der orthogonalen Gruppe $\mathrm{O}(2n)$ ist hier irrelevant, da wir mit $n \times n$ Matrizen arbeiten.
+
+Um zu zeigen, dass $\mathrm{GL}_n(\mathbb{C}) \cap \mathrm{O}(2n) = \mathrm{U}(n)$, betrachten wir eine Matrix $A \in \mathrm{GL}_n(\mathbb{C})$. Diese liegt in $\mathrm{U}(n)$, wenn $A^* A = I_n$. Da $A$ komplex ist, ist die Bedingung $A^* A = I_n$ genau die Bedingung für $A \in \mathrm{U}(n)$.
+
+Für die zweite Gleichheit $\mathrm{GL}_n(\mathbb{R}) \cap \mathrm{U}(n) = \mathrm{O}(n)$ gilt:
+
+\begin{align*}
+A \in \mathrm{GL}_n(\mathbb{R}) &\implies A \text{ ist eine invertierbare } n \times n \text{ Matrix mit reellen Einträgen}, \\
+A \in \mathrm{U}(n) &\implies A^* A = I_n.
+\end{align*}
+
+Da $A$ reell ist, folgt $A^* = A^T$. Somit ist $A^* A = I_n$ äquivalent zu $A^T A = I_n$, was genau die Bedingung für $A \in \mathrm{O}(n)$ ist. Daher ist $\mathrm{GL}_n(\mathbb{R}) \cap \mathrm{U}(n) = \mathrm{O}(n)$.
+
+%CHECK: Korrigierte die Definitionen und Herleitungen für die Gruppen $\mathrm{GL}_n(\mathbb{C})$, $\mathrm{U}(n)$ und $\mathrm{O}(n)$; klärte die Bedingungen für die Zugehörigkeit zu diesen Gruppen.

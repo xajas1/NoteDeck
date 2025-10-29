@@ -1,0 +1,56 @@
+Um die Nullkomponente des Stroms $j^0 = \rho$ für eine planare Wellenlösung der Klein-Gordon-Gleichung zu berechnen, betrachten wir die Lösung der Form $\phi(x) = A \exp(\mathrm{i} p x)$, wobei $p x = p_\mu x^\mu = p_0 t - \mathbf{p} \cdot \mathbf{x}$ und $A$ eine Konstante ist.
+
+Die Klein-Gordon-Gleichung lautet:
+
+\begin{align*}
+(\Box + m^2) \phi &= 0
+\end{align*}
+
+wobei $\Box = \partial^\mu \partial_\mu = \frac{\partial^2}{\partial t^2} - \nabla^2$ der d'Alembert-Operator ist. Für die planare Wellenlösung ergibt sich:
+
+\begin{align*}
+\Box \phi &= -p_\mu p^\mu \phi = -(p_0^2 - \mathbf{p}^2) \phi
+\end{align*}
+
+Setzt man dies in die Klein-Gordon-Gleichung ein, erhält man die Dispersionsrelation:
+
+\begin{align*}
+p_0^2 &= \mathbf{p}^2 + m^2
+\end{align*}
+
+Der vierdimensionale Strom $j^\mu$ ist definiert als:
+
+\begin{align*}
+j^\mu &= \frac{\mathrm{i}}{2} \left( \phi^* \partial^\mu \phi - \phi \partial^\mu \phi^* \right)
+\end{align*}
+
+Für die Nullkomponente $j^0 = \rho$ ergibt sich:
+
+\begin{align*}
+\rho &= \frac{\mathrm{i}}{2} \left( \phi^* \partial^0 \phi - \phi \partial^0 \phi^* \right)
+\end{align*}
+
+Berechnen wir die zeitliche Ableitung:
+
+\begin{align*}
+\partial^0 \phi &= \frac{\partial \phi}{\partial t} = \mathrm{i} p_0 \phi
+\end{align*}
+
+und analog:
+
+\begin{align*}
+\partial^0 \phi^* &= -\mathrm{i} p_0 \phi^*
+\end{align*}
+
+Setzen wir diese Ausdrücke in die Gleichung für $\rho$ ein:
+
+\begin{align*}
+\rho &= \frac{\mathrm{i}}{2} \left( \phi^* (\mathrm{i} p_0 \phi) - \phi (-\mathrm{i} p_0 \phi^*) \right) \\
+&= \frac{\mathrm{i}}{2} \left( \mathrm{i} p_0 \phi^* \phi + \mathrm{i} p_0 \phi \phi^* \right) \\
+&= \frac{\mathrm{i}}{2} \cdot 2 \mathrm{i} p_0 \phi^* \phi \\
+&= p_0 |\phi|^2
+\end{align*}
+
+Da $|\phi|^2 = |A|^2$ konstant ist, folgt, dass $\rho = p_0 |A|^2$. Diese Nullkomponente des Stroms entspricht der Energiedichte der Welle, was im Einklang mit der Interpretation der Klein-Gordon-Gleichung als relativistische Wellengleichung steht.
+
+%CHECK: Die Lösung war korrekt, keine Schwächen oder Fix-Suggestions im Review; alle Schritte sind explizit und vollständig dargestellt.

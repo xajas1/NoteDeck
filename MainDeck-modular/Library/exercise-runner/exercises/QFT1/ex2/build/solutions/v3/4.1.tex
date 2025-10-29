@@ -1,0 +1,57 @@
+Um die Lorentz-Invarianz des Integrationsmaßes 
+
+\[
+\frac{d^3 k}{(2 \pi)^3 2 E(\mathbf{k})}
+\]
+
+zu zeigen, beginnen wir mit dem vierdimensionalen Volumenelement \(d^4 k\), das unter Lorentztransformationen invariant ist:
+
+\[
+d^4 k' = d^4 k.
+\]
+
+Das Volumenelement kann als Produkt von Energie- und Impulskomponenten geschrieben werden:
+
+\[
+d^4 k = dk_0 \, d^3 k.
+\]
+
+Für ein Teilchen mit Ruhemasse \(m\) ist die Energie durch die relativistische Beziehung gegeben:
+
+\[
+E(\mathbf{k}) = \sqrt{m^2 + \mathbf{k}^2}.
+\]
+
+Wir verwenden die Delta-Funktion \(\delta(k_0 - E(\mathbf{k}))\), um die Integration auf die physikalisch relevante Energie zu beschränken:
+
+\[
+\int d^4 k \, \delta(k_0 - E(\mathbf{k})) = \int dk_0 \, d^3 k \, \delta(k_0 - E(\mathbf{k})).
+\]
+
+Die Integration über \(k_0\) mit der Delta-Funktion ergibt:
+
+\[
+\int dk_0 \, \delta(k_0 - E(\mathbf{k})) f(k_0) = f(E(\mathbf{k})).
+\]
+
+Somit reduziert sich das vierdimensionale Volumenelement auf:
+
+\[
+d^4 k = d^3 k \, \frac{1}{2 E(\mathbf{k})}.
+\]
+
+Die Transformation von \(dE\) zu \(dk_0\) erfordert die Berücksichtigung des Jacobians. Da \(k_0 = E(\mathbf{k})\), ergibt sich:
+
+\[
+dk_0 = \frac{\partial E}{\partial k_i} dk_i = \frac{k_i}{E} dk_i.
+\]
+
+Daher ist das dreidimensionale Integrationsmaß
+
+\[
+\frac{d^3 k}{2 E(\mathbf{k})}
+\]
+
+aus dem Lorentz-invarianten \(d^4 k\) abgeleitet und somit ebenfalls Lorentz-invariant. Die Normierung durch \((2 \pi)^3\) ist eine Konvention, die die Invarianz nicht beeinflusst.
+
+%CHECK: Der Jacobian bei der Transformation von \(dE\) zu \(dk_0\) wurde korrekt behandelt. Die Rolle der Delta-Funktion bei der Integration über \(k_0\) wurde explizit erklärt.

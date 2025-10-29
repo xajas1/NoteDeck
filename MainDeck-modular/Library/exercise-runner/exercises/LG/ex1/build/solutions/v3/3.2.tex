@@ -1,0 +1,32 @@
+Um die Gleichheit $\mathrm{O}(n, \mathbb{C}) \cap \mathrm{U}(n) = \mathrm{O}(n)$ zu zeigen, betrachten wir die Definitionen der beteiligten Gruppen. Eine Matrix $C$ liegt im Schnitt $\mathrm{O}(n, \mathbb{C}) \cap \mathrm{U}(n)$, wenn sie sowohl orthogonal als auch unitär ist, das heißt, wenn sie die Bedingungen $C^T C = I$ und $C^* C = I$ erfüllt. 
+
+\begin{align*}
+C^T C &= I, \\
+C^* C &= I.
+\end{align*}
+
+Da $C^* = \overline{C^T}$, folgt aus $C^* C = I$, dass
+
+\begin{align*}
+\overline{C^T} C &= I.
+\end{align*}
+
+Vergleichen wir dies mit $C^T C = I$, so erhalten wir
+
+\begin{align*}
+C^T &= \overline{C^T}.
+\end{align*}
+
+Dies impliziert, dass $C = \overline{C}$, da $C^T = \overline{C^T}$ für alle Einträge von $C$ gilt. Somit ist $C$ reell, und daher $C \in \mathrm{O}(n)$, der Gruppe der reellen orthogonalen Matrizen. Daher gilt $\mathrm{O}(n, \mathbb{C}) \cap \mathrm{U}(n) = \mathrm{O}(n)$.
+
+Für die zweite Gleichheit $\mathrm{SO}(n, \mathbb{C}) \cap \mathrm{SU}(n) = \mathrm{SO}(n)$ betrachten wir die spezielle orthogonale Gruppe $\mathrm{SO}(n, \mathbb{C})$, die aus Matrizen $A \in \mathrm{O}(n, \mathbb{C})$ mit $\det(A) = 1$ besteht, und die spezielle unitäre Gruppe $\mathrm{SU}(n)$, die aus Matrizen $B \in \mathrm{U}(n)$ mit $\det(B) = 1$ besteht.
+
+Eine Matrix $C$ liegt im Schnitt $\mathrm{SO}(n, \mathbb{C}) \cap \mathrm{SU}(n)$, wenn sie sowohl in $\mathrm{SO}(n, \mathbb{C})$ als auch in $\mathrm{SU}(n)$ liegt, das heißt, wenn sie die Bedingungen $C^T C = I$, $C^* C = I$ und $\det(C) = 1$ erfüllt. Wie zuvor folgt aus $C^T C = I$ und $C^* C = I$, dass $C$ reell ist. Da $C$ reell und $\det(C) = 1$ ist, folgt, dass $C \in \mathrm{SO}(n)$.
+
+\begin{align*}
+\det(C) &= 1 \quad \text{(da $C \in \mathrm{SO}(n)$)}.
+\end{align*}
+
+Daher gilt $\mathrm{SO}(n, \mathbb{C}) \cap \mathrm{SU}(n) = \mathrm{SO}(n)$.
+
+%CHECK: Adressiert MISSING_REALITY_CONDITION durch explizite Herleitung, dass $C = \overline{C}$ aus $C^T = \overline{C^T}$ folgt. MISSING_DETERMINANT_CONDITION durch Überprüfung von $\det(C) = 1$ für $C \in \mathrm{SO}(n)$.

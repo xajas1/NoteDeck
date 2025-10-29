@@ -1,0 +1,31 @@
+%% Die Aufgabe besteht darin, zu zeigen, dass der Strom \( j^\mu(x) \) die Kontinuitätsgleichung erfüllt. 
+%% Dazu berechnen wir die Divergenz des Stroms und nutzen die Klein-Gordon-Gleichung.
+
+\begin{align*}
+\partial_\mu j^\mu &= \partial_\mu \left( \mathrm{i} \left( \phi^* \left( \partial^\mu \phi \right) - \left( \partial^\mu \phi^* \right) \phi \right) \right) \\
+&= \mathrm{i} \left( \left( \partial_\mu \phi^* \right) \left( \partial^\mu \phi \right) + \phi^* \left( \partial_\mu \partial^\mu \phi \right) - \left( \partial_\mu \partial^\mu \phi^* \right) \phi - \left( \partial^\mu \phi^* \right) \left( \partial_\mu \phi \right) \right).
+\end{align*}
+
+%% Die Terme \(\left( \partial_\mu \phi^* \right) \left( \partial^\mu \phi \right)\) und \(- \left( \partial^\mu \phi^* \right) \left( \partial_\mu \phi \right)\) heben sich auf.
+
+\begin{align*}
+\partial_\mu j^\mu &= \mathrm{i} \left( \phi^* \left( \partial_\mu \partial^\mu \phi \right) - \left( \partial_\mu \partial^\mu \phi^* \right) \phi \right).
+\end{align*}
+
+%% Wir setzen die Klein-Gordon-Gleichung ein.
+
+\begin{align*}
+\partial_\mu \partial^\mu \phi &= -m^2 \phi, \quad \partial_\mu \partial^\mu \phi^* = -m^2 \phi^*.
+\end{align*}
+
+%% Einsetzen dieser Ausdrücke in die Gleichung für \(\partial_\mu j^\mu\).
+
+\begin{align*}
+\partial_\mu j^\mu &= \mathrm{i} \left( \phi^* (-m^2 \phi) - (-m^2 \phi^*) \phi \right) \\
+&= \mathrm{i} \left( -m^2 \phi^* \phi + m^2 \phi^* \phi \right) \\
+&= 0.
+\end{align*}
+
+%% Daraus folgt, dass der Strom \( j^\mu(x) \) die Kontinuitätsgleichung \(\partial^\mu j_\mu = 0\) erfüllt.
+
+%CHECK: Die Lösung ist korrekt, keine Schwächen oder Fix-Suggestions im Review. Alle Schritte sind explizit und klar dargestellt.

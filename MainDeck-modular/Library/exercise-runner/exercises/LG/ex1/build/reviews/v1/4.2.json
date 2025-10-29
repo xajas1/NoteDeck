@@ -1,0 +1,14 @@
+{
+  "score": 0.8,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+  "weaknesses": [
+    {
+      "code": "missing_normality_proof",
+      "msg": "Die Normalität von \\(\\operatorname{SUT}_n(\\mathbb{K})\\) in \\(\\operatorname{UT}_n(\\mathbb{K})\\) wird nicht vollständig bewiesen.",
+      "math_hint": "Es fehlt die explizite Überprüfung, dass \\(DAD^{-1} \\in \\operatorname{SUT}_n(\\mathbb{K})\\) für alle \\(A \\in \\operatorname{SUT}_n(\\mathbb{K})\\) und \\(D \\in \\operatorname{Diag}_n(\\mathbb{K})\\)."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Zeige explizit, dass } DAD^{-1} \\text{ die Form einer Matrix in } \\operatorname{SUT}_n(\\mathbb{K}) \\text{ hat, indem die Diagonalelemente von } D \\text{ und } D^{-1} \\text{ sich aufheben.}"
+  ]
+}

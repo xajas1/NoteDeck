@@ -1,0 +1,26 @@
+{
+  "score": 0.8,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+  "weaknesses": [
+    {
+      "code": "missing_equation",
+      "msg": "Die Definition der Projektion \\(\\pi\\) ist nicht vollständig erklärt.",
+      "math_hint": "\\(\\pi(x,y) = (x \\mod 1, y \\mod 1)\\)"
+    },
+    {
+      "code": "incomplete_proof",
+      "msg": "Die Erklärung, warum die Karten Homöomorphismen sind, ist unvollständig.",
+      "math_hint": "Zeige explizit, dass \\(\\pi\\) lokal ein Homöomorphismus ist."
+    },
+    {
+      "code": "missing_step",
+      "msg": "Die Begründung für die Glattheit der Übergangsfunktionen ist zu knapp.",
+      "math_hint": "Erkläre, warum Translationen in \\(\\mathbb{R}^2\\) glatt sind."
+    }
+  ],
+  "fix_suggestions": [
+    "\\pi(x,y) = (x \\mod 1, y \\mod 1)",
+    "Zeige, dass \\pi lokal ein Homöomorphismus ist, indem du die Inverse lokal angibst.",
+    "Translationen in \\mathbb{R}^2 sind glatt, da sie durch \\(f(x,y) = (x+a, y+b)\\) mit konstanten \\(a, b\\) gegeben sind."
+  ]
+}

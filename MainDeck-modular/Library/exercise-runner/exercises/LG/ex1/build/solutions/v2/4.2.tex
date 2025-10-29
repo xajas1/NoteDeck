@@ -1,0 +1,49 @@
+Um zu zeigen, dass $\operatorname{UT}_n(\mathbb{K}) = \operatorname{SUT}_n(\mathbb{K}) \rtimes \operatorname{Diag}_n(\mathbb{K})$, betrachten wir die Struktur der beteiligten Gruppen und die Bedingungen für das semidirekte Produkt.
+
+Die Gruppe $\operatorname{UT}_n(\mathbb{K})$ besteht aus allen oberen Dreiecksmatrizen mit Einträgen aus einem Körper $\mathbb{K}$ und nicht verschwindenden Diagonaleinträgen. Die Gruppe $\operatorname{SUT}_n(\mathbb{K})$ ist die Untergruppe von $\operatorname{UT}_n(\mathbb{K})$, die aus oberen Dreiecksmatrizen mit Einsen auf der Diagonale besteht. Schließlich ist $\operatorname{Diag}_n(\mathbb{K})$ die Gruppe der diagonalen Matrizen mit nicht verschwindenden Einträgen aus $\mathbb{K}$.
+
+Um die semidirekte Produktstruktur zu zeigen, müssen wir zwei Dinge nachweisen: Erstens, dass $\operatorname{SUT}_n(\mathbb{K})$ ein Normalteiler von $\operatorname{UT}_n(\mathbb{K})$ ist, und zweitens, dass jede Matrix in $\operatorname{UT}_n(\mathbb{K})$ eindeutig als Produkt einer Matrix aus $\operatorname{SUT}_n(\mathbb{K})$ und einer Matrix aus $\operatorname{Diag}_n(\mathbb{K})$ geschrieben werden kann.
+
+Zunächst zeigen wir die Normalität von $\operatorname{SUT}_n(\mathbb{K})$ in $\operatorname{UT}_n(\mathbb{K})$. Sei $A \in \operatorname{SUT}_n(\mathbb{K})$ und $D \in \operatorname{Diag}_n(\mathbb{K})$. Wir betrachten das Produkt $DAD^{-1}$:
+
+\begin{align*}
+D &= \operatorname{diag}(d_1, d_2, \ldots, d_n), \\
+D^{-1} &= \operatorname{diag}(d_1^{-1}, d_2^{-1}, \ldots, d_n^{-1}).
+\end{align*}
+
+Dann ist
+
+\begin{align*}
+DAD^{-1} &= \begin{pmatrix}
+d_1 & 0 & \cdots & 0 \\
+0 & d_2 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & d_n
+\end{pmatrix}
+\begin{pmatrix}
+1 & a_{12} & \cdots & a_{1n} \\
+0 & 1 & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & 1
+\end{pmatrix}
+\begin{pmatrix}
+d_1^{-1} & 0 & \cdots & 0 \\
+0 & d_2^{-1} & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & d_n^{-1}
+\end{pmatrix} \\
+&= \begin{pmatrix}
+1 & d_1 a_{12} d_2^{-1} & \cdots & d_1 a_{1n} d_n^{-1} \\
+0 & 1 & \cdots & d_2 a_{2n} d_n^{-1} \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & 1
+\end{pmatrix}.
+\end{align*}
+
+Da die Diagonalelemente von $DAD^{-1}$ Einsen sind, folgt $DAD^{-1} \in \operatorname{SUT}_n(\mathbb{K})$, was die Normalität zeigt.
+
+Nun zur Eindeutigkeit der Darstellung. Sei $U \in \operatorname{UT}_n(\mathbb{K})$. Dann kann $U$ als Produkt $U = SD$ geschrieben werden, wobei $S \in \operatorname{SUT}_n(\mathbb{K})$ und $D \in \operatorname{Diag}_n(\mathbb{K})$. Die Matrix $D$ wird gebildet, indem man die Diagonalelemente von $U$ nimmt, und $S$ erhält man, indem man $U$ durch $D$ von rechts multipliziert, also $S = UD^{-1}$. Da $D$ eindeutig durch die Diagonalelemente von $U$ bestimmt ist, ist auch $S$ eindeutig bestimmt.
+
+Daher ist $\operatorname{UT}_n(\mathbb{K})$ tatsächlich das semidirekte Produkt von $\operatorname{SUT}_n(\mathbb{K})$ und $\operatorname{Diag}_n(\mathbb{K})$, was die Behauptung beweist.
+
+%CHECK: Explizite Berechnung von DAD^{-1} zur Bestätigung der Normalität hinzugefügt.

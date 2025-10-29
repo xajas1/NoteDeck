@@ -1,0 +1,18 @@
+Um zu zeigen, dass $\operatorname{Isom}_n(\mathbb{R}) = \operatorname{Trans}_n(\mathbb{R}) \rtimes \mathrm{O}(n)$, müssen wir verstehen, was die einzelnen Begriffe bedeuten und wie sie zusammenhängen.
+
+Die Gruppe $\operatorname{Isom}_n(\mathbb{R})$ ist die Gruppe aller Isometrien des $\mathbb{R}^n$. Eine Isometrie ist eine Abbildung $f: \mathbb{R}^n \to \mathbb{R}^n$, die Distanzen erhält, das heißt, für alle $x, y \in \mathbb{R}^n$ gilt $\|f(x) - f(y)\| = \|x - y\|$.
+
+Die Gruppe $\operatorname{Trans}_n(\mathbb{R})$ besteht aus allen Translationen im $\mathbb{R}^n$. Eine Translation ist eine Abbildung der Form $T_a(x) = x + a$ für ein festes $a \in \mathbb{R}^n$.
+
+Die Gruppe $\mathrm{O}(n)$ ist die orthogonale Gruppe, bestehend aus allen linearen Abbildungen $A: \mathbb{R}^n \to \mathbb{R}^n$, die Längen erhalten, also $A^T A = I$, wobei $I$ die Einheitsmatrix ist.
+
+Das semidirekte Produkt $\operatorname{Trans}_n(\mathbb{R}) \rtimes \mathrm{O}(n)$ beschreibt eine Gruppe, die aus Paaren $(a, A)$ besteht, wobei $a \in \mathbb{R}^n$ und $A \in \mathrm{O}(n)$. Die Gruppenoperation ist gegeben durch
+\[
+(a_1, A_1) \cdot (a_2, A_2) = (a_1 + A_1 a_2, A_1 A_2).
+\]
+
+Um zu zeigen, dass jede Isometrie $f \in \operatorname{Isom}_n(\mathbb{R})$ als ein Element von $\operatorname{Trans}_n(\mathbb{R}) \rtimes \mathrm{O}(n)$ dargestellt werden kann, betrachten wir die Form einer allgemeinen Isometrie. Jede Isometrie $f$ kann als $f(x) = Ax + b$ geschrieben werden, wobei $A \in \mathrm{O}(n)$ und $b \in \mathbb{R}^n$. Dies folgt aus der Tatsache, dass jede Isometrie eine affine Abbildung ist, die sich in eine orthogonale Transformation und eine Translation zerlegen lässt.
+
+Umgekehrt ist jede Abbildung der Form $f(x) = Ax + b$ mit $A \in \mathrm{O}(n)$ und $b \in \mathbb{R}^n$ offensichtlich eine Isometrie, da sie sowohl die Translation als auch die orthogonale Transformation Längen erhalten.
+
+Daher ist die Gruppe der Isometrien $\operatorname{Isom}_n(\mathbb{R})$ isomorph zu dem semidirekten Produkt $\operatorname{Trans}_n(\mathbb{R}) \rtimes \mathrm{O}(n)$, was die Behauptung beweist.

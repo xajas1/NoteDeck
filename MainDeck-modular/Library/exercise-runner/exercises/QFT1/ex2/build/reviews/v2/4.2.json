@@ -1,0 +1,14 @@
+{
+  "score": 0.8,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details zur vollständigen Herleitung der Lorentz-Invarianz.",
+  "weaknesses": [
+    {
+      "code": "missing_invariance_proof",
+      "msg": "Die Herleitung der Invarianz von $d^3 \\mathbf{k}$ und $\\delta^{(3)}(\\mathbf{k}-\\mathbf{k}^{\\prime})$ ist unvollständig.",
+      "math_hint": "Es fehlt eine explizite Darstellung, warum $d^3 \\mathbf{k}$ und $\\delta^{(3)}(\\mathbf{k}-\\mathbf{k}^{\\prime})$ unter Lorentz-Transformationen invariant sind."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Füge eine detaillierte Erklärung hinzu, warum } d^3 \\mathbf{k} \\text{ und } \\delta^{(3)}(\\mathbf{k}-\\mathbf{k}^{\\prime}) \\text{ unter Lorentz-Transformationen invariant sind.}"
+  ]
+}

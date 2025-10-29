@@ -1,0 +1,19 @@
+Um zu zeigen, dass die gegebene Fläche eine reelle Mannigfaltigkeit ist, müssen wir einen Atlas angeben, der die Fläche abdeckt. Ein Atlas ist eine Sammlung von Karten, die die Fläche lokal auf offene Mengen des $\mathbb{R}^2$ abbilden. 
+
+Betrachten wir das Rechteck $R = [0, 2] \times [0, 1]$, das durch die Verklebung der gegenüberliegenden Ränder zu einer Fläche vom Geschlecht 2 wird. Wir definieren lokale Karten, die die Struktur dieser Fläche beschreiben.
+
+1. **Karten um die Ecken des Rechtecks:**
+
+   Um die Ecke $(0,0)$ definieren wir eine Karte $\varphi_1: U_1 \to \mathbb{R}^2$, wobei $U_1$ eine kleine Umgebung von $(0,0)$ in $R$ ist. Da die gegenüberliegenden Ränder verklebt sind, wird $(0,0)$ mit $(2,0)$ und $(0,1)$ identifiziert. Die Karte $\varphi_1$ kann so gewählt werden, dass sie $(0,0)$ auf $(0,0)$ in $\mathbb{R}^2$ abbildet und die Umgebung auf eine offene Menge in $\mathbb{R}^2$.
+
+2. **Karten entlang der Kanten:**
+
+   Für die Kante $[0,2] \times \{0\}$ definieren wir eine Karte $\varphi_2: U_2 \to \mathbb{R}^2$, wobei $U_2$ eine Umgebung dieser Kante ist. Diese Karte kann als Identität auf $[0,2] \times (-\epsilon, \epsilon)$ für ein kleines $\epsilon > 0$ gewählt werden.
+
+3. **Karten im Inneren des Rechtecks:**
+
+   Für das Innere des Rechtecks definieren wir eine Karte $\varphi_3: U_3 \to \mathbb{R}^2$, wobei $U_3$ eine offene Menge im Inneren von $R$ ist. Diese Karte kann ebenfalls als Identität auf einer offenen Teilmenge von $R$ gewählt werden.
+
+Diese Karten überlappen sich auf den entsprechenden offenen Mengen, und die Übergangsfunktionen zwischen den Karten sind glatt, da sie im Wesentlichen Verschiebungen und Identitäten sind. Daher ist die resultierende Fläche eine reelle Mannigfaltigkeit.
+
+Um zu bestimmen, ob diese Atlanten eine komplexe Struktur definieren, müssen die Übergangsfunktionen zwischen den Karten holomorph sein. Da die Übergangsfunktionen in diesem Fall lediglich aus Verschiebungen bestehen, sind sie nicht-holomorph, da sie nicht die Cauchy-Riemann-Gleichungen erfüllen. Somit definieren diese Atlanten keine komplexe Struktur auf der Fläche.

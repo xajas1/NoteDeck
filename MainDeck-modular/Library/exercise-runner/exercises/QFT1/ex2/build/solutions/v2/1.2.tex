@@ -1,0 +1,42 @@
+Um zu zeigen, dass der infinitesimale Shift $\epsilon^{\alpha \beta}$ antisymmetrisch ist, betrachten wir die Erhaltung der Norm eines Vektors unter einer infinitesimalen Transformation. Sei $x^\alpha$ ein Vektor im Raum, dessen Norm durch $x^\alpha x_\alpha$ gegeben ist. Eine infinitesimale Transformation des Vektors kann durch $x'^\alpha = x^\alpha + \epsilon^{\alpha \beta} x_\beta$ beschrieben werden, wobei $\epsilon^{\alpha \beta}$ klein ist.
+
+Die Norm des transformierten Vektors ist dann:
+
+\begin{align*}
+x'^\alpha x'_\alpha &= (x^\alpha + \epsilon^{\alpha \beta} x_\beta)(x_\alpha + \epsilon_{\alpha \gamma} x^\gamma) \\
+&= x^\alpha x_\alpha + \epsilon^{\alpha \beta} x_\beta x_\alpha + \epsilon_{\alpha \gamma} x^\alpha x^\gamma + \mathcal{O}(\epsilon^2).
+\end{align*}
+
+Entwickeln wir dies bis zur ersten Ordnung in $\epsilon^{\alpha \beta}$, erhalten wir:
+
+\begin{align*}
+x'^\alpha x'_\alpha &= x^\alpha x_\alpha + 2 \epsilon^{\alpha \beta} x_\beta x_\alpha.
+\end{align*}
+
+Da die Norm erhalten bleibt, muss gelten:
+
+\begin{align*}
+x'^\alpha x'_\alpha &= x^\alpha x_\alpha.
+\end{align*}
+
+Daraus folgt:
+
+\begin{align*}
+2 \epsilon^{\alpha \beta} x_\beta x_\alpha &= 0.
+\end{align*}
+
+Da dies für beliebige Vektoren $x^\alpha$ gelten muss, folgt, dass der symmetrische Teil von $\epsilon^{\alpha \beta}$ verschwinden muss. Der symmetrische Teil von $\epsilon^{\alpha \beta}$ ist gegeben durch:
+
+\begin{align*}
+\epsilon^{(\alpha \beta)} &= \frac{1}{2} (\epsilon^{\alpha \beta} + \epsilon^{\beta \alpha}).
+\end{align*}
+
+Wenn $\epsilon^{\alpha \beta} x_\beta x_\alpha = 0$ für beliebige $x^\alpha$, dann muss $\epsilon^{(\alpha \beta)} = 0$ sein, da sonst der Ausdruck nicht für alle $x^\alpha$ verschwindet. Dies impliziert:
+
+\begin{align*}
+\epsilon^{\alpha \beta} &= -\epsilon^{\beta \alpha}.
+\end{align*}
+
+Somit ist $\epsilon^{\alpha \beta}$ antisymmetrisch.
+
+%CHECK: Erklärte, warum der symmetrische Teil verschwindet, indem gezeigt wurde, dass $\epsilon^{(\alpha \beta)} = 0$ für beliebige $x^\alpha$.

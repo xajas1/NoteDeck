@@ -1,0 +1,14 @@
+{
+  "score": 0.8,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+  "weaknesses": [
+    {
+      "code": "missing_details",
+      "msg": "Die Herleitung der Beschränktheit ist nicht vollständig klar.",
+      "math_hint": "Die Argumentation zur Beschränktheit sollte die Definition der Frobenius-Norm explizit verwenden und die Beziehung zu den Singulärwerten klarer darstellen."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Die Frobenius-Norm einer Matrix } A \\text{ ist definiert als } \\|A\\|_F = \\sqrt{\\sum_{i,j} a_{ij}^2}. \\text{ Da } A \\text{ orthogonal ist, sind die Singulärwerte von } A \\text{ alle 1, was bedeutet, dass } \\|A\\|_F = \\sqrt{n}."
+  ]
+}

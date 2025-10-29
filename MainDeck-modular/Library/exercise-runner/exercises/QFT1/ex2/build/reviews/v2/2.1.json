@@ -1,0 +1,20 @@
+{
+  "score": 0.8,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es gibt einige Unklarheiten und Fehler in der Herleitung.",
+  "weaknesses": [
+    {
+      "code": "E1",
+      "msg": "Fehlerhafte Umformung der Gleichung für \\(\\gamma\\).",
+      "math_hint": "\\gamma = \\frac{m_Z}{m_e} - 1 ist falsch, sollte \\gamma = \\frac{m_Z}{m_e} - 1 sein."
+    },
+    {
+      "code": "E2",
+      "msg": "Unklare Transformation der Energiegleichung.",
+      "math_hint": "Die Umformung von \\gamma = \\frac{m_Z c^2 - m_e c^2}{m_e c^2} zu \\gamma = \\frac{m_Z + m_e}{m_e} ist nicht korrekt."
+    }
+  ],
+  "fix_suggestions": [
+    "\\gamma = \\frac{m_Z}{m_e} - 1 \\rightarrow \\gamma = \\frac{m_Z}{m_e} - 1",
+    "\\gamma = \\frac{m_Z c^2 - m_e c^2}{m_e c^2} \\rightarrow \\gamma = \\frac{m_Z}{m_e} - 1"
+  ]
+}

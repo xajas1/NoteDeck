@@ -1,0 +1,24 @@
+Um zu zeigen, dass die spezielle lineare Gruppe $\mathrm{SL}_n(\mathbb{K})$ für $n > 1$ nicht kompakt ist, betrachten wir die Definition der Gruppe. Die Gruppe $\mathrm{SL}_n(\mathbb{K})$ besteht aus allen $n \times n$ Matrizen mit Einträgen aus einem Körper $\mathbb{K}$, deren Determinante gleich 1 ist. Eine topologische Gruppe ist kompakt, wenn sie als topologischer Raum kompakt ist, das heißt, jede offene Überdeckung hat eine endliche Teilüberdeckung. 
+
+Für $\mathrm{SL}_n(\mathbb{K})$ mit $n > 1$ und $\mathbb{K} = \mathbb{R}$ oder $\mathbb{C}$ ist dies nicht der Fall. Betrachten wir den Fall $\mathbb{K} = \mathbb{R}$. Die Gruppe $\mathrm{SL}_n(\mathbb{R})$ ist eine nicht-kompakte Lie-Gruppe, da sie nicht beschränkt ist. Um dies zu zeigen, betrachten wir die Diagonalmatrizen der Form
+
+\[
+A_t = \begin{pmatrix}
+t & 0 & \cdots & 0 \\
+0 & t^{-1} & \cdots & 0 \\
+0 & 0 & \ddots & 0 \\
+0 & 0 & \cdots & 1
+\end{pmatrix}
+\]
+
+für $t > 0$. Diese Matrizen liegen in $\mathrm{SL}_n(\mathbb{R})$, da ihre Determinante gleich $t \cdot t^{-1} \cdot 1 \cdots 1 = 1$ ist. Die Norm von $A_t$ ist gegeben durch
+
+\[
+\|A_t\| = \sqrt{t^2 + t^{-2} + 1 + \cdots + 1} = \sqrt{t^2 + t^{-2} + (n-2)}
+\]
+
+Für $t \to \infty$ divergiert $\|A_t\|$, was zeigt, dass $\mathrm{SL}_n(\mathbb{R})$ nicht beschränkt ist. In einem metrischen Raum ist eine kompakte Menge immer beschränkt. Da $\mathrm{SL}_n(\mathbb{R})$ unbeschränkt ist, kann sie nicht kompakt sein.
+
+Ein ähnliches Argument gilt für $\mathbb{K} = \mathbb{C}$. Auch hier kann man Matrizen konstruieren, deren Norm unbeschränkt ist, was die Nichtkompaktheit von $\mathrm{SL}_n(\mathbb{C})$ zeigt.
+
+%CHECK: Die Verbindung zwischen unbeschränkter Norm und Nichtkompaktheit wurde explizit hergestellt. Die Herleitung der Norm und deren Divergenz wurde detailliert ausgeführt.

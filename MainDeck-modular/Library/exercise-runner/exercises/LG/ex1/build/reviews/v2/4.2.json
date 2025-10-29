@@ -1,0 +1,20 @@
+{
+  "score": 0.8,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+  "weaknesses": [
+    {
+      "code": "missing_proof_details",
+      "msg": "Die Eindeutigkeit der Darstellung wird nicht vollständig bewiesen.",
+      "math_hint": "Es fehlt eine detaillierte Herleitung, warum $S = UD^{-1}$ eindeutig ist."
+    },
+    {
+      "code": "incomplete_normality_proof",
+      "msg": "Die Normalität wird nicht vollständig gezeigt.",
+      "math_hint": "Es fehlt die Überprüfung, dass $DAD^{-1}$ für alle $A \\in \\operatorname{SUT}_n(\\mathbb{K})$ und $D \\in \\operatorname{Diag}_n(\\mathbb{K})$ in $\\operatorname{SUT}_n(\\mathbb{K})$ bleibt."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Füge eine detaillierte Herleitung hinzu, warum } S = UD^{-1} \\text{ eindeutig ist.}",
+    "\\text{Zeige explizit, dass } DAD^{-1} \\in \\operatorname{SUT}_n(\\mathbb{K}) \\text{ für alle } A \\in \\operatorname{SUT}_n(\\mathbb{K}) \\text{ und } D \\in \\operatorname{Diag}_n(\\mathbb{K})."
+  ]
+}

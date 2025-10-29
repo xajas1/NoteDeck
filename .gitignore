@@ -8,3 +8,8 @@ MainDeck-modular/Library/Library.pdf
 MainDeck-modular/Library/Images/Art/Galleries/*.pdf
 MainDeck-modular/api/venv/
 Overleaf/
+
+# Env files
+.env
+*.env
+MainDeck-modular/Library/exercise-runner/.env

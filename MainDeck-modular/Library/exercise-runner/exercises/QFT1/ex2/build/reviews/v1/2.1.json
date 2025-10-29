@@ -1,0 +1,14 @@
+{
+  "score": 0.9,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es gibt kleinere Unklarheiten.",
+  "weaknesses": [
+    {
+      "code": "missing_explanation",
+      "msg": "Die Herleitung der Gleichung für den Lorentzfaktor im zweiten Szenario ist nicht vollständig erklärt.",
+      "math_hint": "Die Transformation von \\(\\gamma m_e c^2 + m_e c^2 = m_Z c^2\\) zu \\(\\gamma = \\frac{m_Z + m_e}{m_e}\\) sollte klarer dargestellt werden."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Füge eine detaillierte Herleitung für } \\gamma = \\frac{m_Z + m_e}{m_e} \\text{ hinzu, indem du die Schritte explizit aufzeigst.}"
+  ]
+}

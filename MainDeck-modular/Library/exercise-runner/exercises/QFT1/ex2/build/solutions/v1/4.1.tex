@@ -1,0 +1,61 @@
+Um zu zeigen, dass das Integrationsmaß 
+
+\[
+\frac{d^3 k}{(2 \pi)^3 2 E(\mathbf{k})}
+\]
+
+Lorentz-invariant ist, beginnen wir mit der Betrachtung des vierdimensionalen Volumenelements \(d^4 k\), das Lorentz-invariant ist. Das bedeutet, dass unter einer Lorentztransformation \(\Lambda\) das Volumenelement unverändert bleibt:
+
+\[
+d^4 k' = d^4 k.
+\]
+
+Das vierdimensionale Volumenelement kann in der Energie-Komponenten-Darstellung geschrieben werden als
+
+\[
+d^4 k = dk_0 \, d^3 k.
+\]
+
+Um das dreidimensionale Integrationsmaß zu erhalten, betrachten wir die Energie-Komponente \(k_0\) des Vierervektors \(k^\mu = (k_0, \mathbf{k})\). Für ein Teilchen mit Ruhemasse \(m\) ist die Energie durch die relativistische Energie-Masse-Beziehung gegeben:
+
+\[
+E(\mathbf{k}) = k_0 = \sqrt{m^2 + \mathbf{k}^2}.
+\]
+
+Wir können das vierdimensionale Volumenelement \(d^4 k\) in Bezug auf die Energie \(E\) und das dreidimensionale Volumenelement \(d^3 k\) ausdrücken. Da \(k_0 = E(\mathbf{k})\), können wir schreiben:
+
+\[
+d^4 k = dE \, d^3 k.
+\]
+
+Da \(E = \sqrt{m^2 + \mathbf{k}^2}\), ergibt sich die Beziehung
+
+\[
+dE = \frac{\mathbf{k} \cdot d\mathbf{k}}{E}.
+\]
+
+Für das dreidimensionale Integrationsmaß interessiert uns die Integration über die Energie, wobei wir die delta-Funktion \(\delta(k_0 - E(\mathbf{k}))\) verwenden, um die Energie auf die physikalisch relevante Schale zu beschränken:
+
+\[
+\int d^4 k \, \delta(k_0 - E(\mathbf{k})) = \int dk_0 \, d^3 k \, \delta(k_0 - E(\mathbf{k})).
+\]
+
+Die Integration über \(k_0\) mit der delta-Funktion ergibt
+
+\[
+\int dk_0 \, \delta(k_0 - E(\mathbf{k})) = 1.
+\]
+
+Daher reduziert sich das vierdimensionale Volumenelement auf das dreidimensionale Maß:
+
+\[
+d^4 k = d^3 k \, \frac{1}{2 E(\mathbf{k})}.
+\]
+
+Das bedeutet, dass das dreidimensionale Integrationsmaß
+
+\[
+\frac{d^3 k}{2 E(\mathbf{k})}
+\]
+
+aus dem Lorentz-invarianten \(d^4 k\) abgeleitet wird und somit ebenfalls Lorentz-invariant ist. Die zusätzliche Normierung durch \((2 \pi)^3\) ist eine Konvention, die die Invarianz nicht beeinflusst. Daher ist das gegebene Integrationsmaß Lorentz-invariant.

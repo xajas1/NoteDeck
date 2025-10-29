@@ -1,0 +1,56 @@
+{
+  "tasks": [
+    {
+      "task_id": "1",
+      "body_tex": "",
+      "subtasks": [
+        {
+          "sub_id": "1.1",
+          "body_tex": "(i) $\\mathrm{O}(n)$ ist kompakt."
+        },
+        {
+          "sub_id": "1.2",
+          "body_tex": "(ii) $\\mathrm{SL}_n(\\mathbb{K})$ ist nicht kompakt (für $n>1$ )."
+        }
+      ]
+    },
+    {
+      "task_id": "2",
+      "body_tex": "",
+      "subtasks": [
+        {
+          "sub_id": "2.1",
+          "body_tex": "2. Zeigen sie: Für jede Matrix $A \\in M_n(\\mathbb{C})$ ist $\\|A\\|^2=\\left\\|A^* A\\right\\|=\\lambda_{\\max }\\left(A^* A\\right)$.\n\nHier bezeichnet $\\lambda_{\\max }(B) \\in \\mathbb{R}$ den größten Eigenwert einer hermiteschen Matrix $B \\in M_n(\\mathbb{C})$."
+        }
+      ]
+    },
+    {
+      "task_id": "3",
+      "body_tex": "3. Im folgenden fassen wir $M_n(\\mathbb{C})$ vermöge der Abbildung $\\rho_n^{\\prime}: M_n(\\mathbb{C}) \\rightarrow M_{2 n}(\\mathbb{R})$ als Teilmenge von $M_{2 n}(\\mathbb{R})$ auf und wir definieren\n$$\n\\begin{aligned}\n\\mathrm{O}(n, \\mathbb{C}) & :=\\left\\{A \\in \\mathrm{GL}_n(\\mathbb{C}): A^{\\top} A=I_n\\right\\} \\\\\n\\mathrm{SO}(n, \\mathbb{C}) & :=\\left\\{A \\in \\mathrm{GL}_n(\\mathbb{C}): A^{\\top} A=I_n \\text { und } \\operatorname{det} A=1\\right\\} .\n\\end{aligned}\n$$",
+      "subtasks": [
+        {
+          "sub_id": "3.1",
+          "body_tex": "(i) Zeigen Sie: $\\mathrm{GL}_n(\\mathbb{C}) \\cap \\mathrm{O}(2 n)=\\mathrm{U}(n)$ und $\\mathrm{GL}_n(\\mathbb{R}) \\cap \\mathrm{U}(n)=\\mathrm{O}(n)$."
+        },
+        {
+          "sub_id": "3.2",
+          "body_tex": "(ii)  Zeigen Sie: $\\mathrm{O}(n, \\mathbb{C}) \\cap \\mathrm{U}(n)=\\mathrm{O}(n)$ und $\\mathrm{SO}(n, \\mathbb{C}) \\cap \\mathrm{SU}(n)=\\mathrm{SO}(n)$."
+        }
+      ]
+    },
+    {
+      "task_id": "4",
+      "body_tex": "Definition. Sei $G$ eine Gruppe, $N \\unlhd G$ ein Normalteiler und $H \\leq G$ eine Untergruppe sodass $G=N H$ und $N \\cap H=\\{e\\}$ ist. Dann ist $G$ das semidirekte Produkt von $N$ und $H$ und wir schreiben $G=N \\rtimes H=H \\ltimes N$.\n4. Wir definieren die Translationsgruppe $\\operatorname{Trans}_n(\\mathbb{R})$ als\n$$\n\\operatorname{Trans}_n(\\mathbb{R})=\\left\\{\\left(\\begin{array}{cc}\nI_n & t \\\\\n0 & 1\n\\end{array}\\right): t \\in \\mathbb{R}^n\\right\\}\n$$",
+      "subtasks": [
+        {
+          "sub_id": "4.1",
+          "body_tex": "Zeigen Sie:\n(i) $\\operatorname{Isom}_n(\\mathbb{R})=\\operatorname{Trans}_n(\\mathbb{R}) \\rtimes \\mathrm{O}(n)$."
+        },
+        {
+          "sub_id": "4.2",
+          "body_tex": "Zeigen Sie:\n(ii) $\\operatorname{UT}_n(\\mathbb{K})=\\operatorname{SUT}_n(\\mathbb{K}) \\rtimes \\operatorname{Diag}_n(\\mathbb{K})$."
+        }
+      ]
+    }
+  ]
+}

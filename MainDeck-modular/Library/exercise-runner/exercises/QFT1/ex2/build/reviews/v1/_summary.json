@@ -1,0 +1,103 @@
+{
+  "tasks": {
+    "1.1": {
+      "score": 0.5,
+      "verdict": "Unvollständige Herleitung",
+      "weaknesses": [
+        {
+          "code": "missing_proof_step",
+          "msg": "Die Herleitung der Beziehung $\\epsilon^{\\prime \\alpha \\beta} = -\\epsilon^{\\alpha \\beta}$ ist unvollständig.",
+          "math_hint": "Es fehlt die explizite Verwendung der Determinante der Transformation, um die Beziehung zu zeigen."
+        },
+        {
+          "code": "incorrect_conclusion",
+          "msg": "Die Schlussfolgerung $\\epsilon^{\\prime \\alpha \\beta} = -\\epsilon^{\\alpha \\beta}$ ist nicht korrekt hergeleitet.",
+          "math_hint": "Die Determinante der Transformation sollte berücksichtigt werden, um die Vorzeichenänderung zu rechtfertigen."
+        }
+      ],
+      "fix_suggestions": [
+        "\\epsilon^{\\prime \\alpha \\beta} = \\det(A) A^\\alpha_{\\ \\gamma} A^\\beta_{\\ \\delta} \\epsilon^{\\gamma \\delta}"
+      ]
+    },
+    "1.2": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist fast korrekt, aber es fehlt eine explizite Erklärung, warum der symmetrische Teil verschwindet.",
+      "weaknesses": [
+        {
+          "code": "missing_symmetry_argument",
+          "msg": "Es fehlt eine explizite Erklärung, warum der symmetrische Teil von \\( \\\\epsilon^{\\alpha \\beta} \\) verschwindet.",
+          "math_hint": "Erkläre, warum \\( \\\\epsilon^{\\alpha \\beta} x_\\beta x_\\alpha = 0 \\) für beliebige \\( x^\\alpha \\) den symmetrischen Teil von \\( \\\\epsilon^{\\alpha \\beta} \\) eliminiert."
+        }
+      ],
+      "fix_suggestions": [
+        "Füge eine Erklärung hinzu, dass \\( \\\\epsilon^{\\alpha \\beta} x_\\beta x_\\alpha = 0 \\) für beliebige \\( x^\\alpha \\) nur erfüllt ist, wenn \\( \\\\epsilon^{\\alpha \\beta} = -\\\\epsilon^{\\beta \\alpha} \\), da der symmetrische Teil sonst nicht verschwindet."
+      ]
+    },
+    "2.1": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es gibt kleinere Unklarheiten.",
+      "weaknesses": [
+        {
+          "code": "missing_explanation",
+          "msg": "Die Herleitung der Gleichung für den Lorentzfaktor im zweiten Szenario ist nicht vollständig erklärt.",
+          "math_hint": "Die Transformation von \\(\\gamma m_e c^2 + m_e c^2 = m_Z c^2\\) zu \\(\\gamma = \\frac{m_Z + m_e}{m_e}\\) sollte klarer dargestellt werden."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Füge eine detaillierte Herleitung für } \\gamma = \\frac{m_Z + m_e}{m_e} \\text{ hinzu, indem du die Schritte explizit aufzeigst.}"
+      ]
+    },
+    "3.1": {
+      "score": 1,
+      "verdict": "Korrekt",
+      "weaknesses": [],
+      "fix_suggestions": []
+    },
+    "3.2": {
+      "score": 1,
+      "verdict": "Korrekte Lösung",
+      "weaknesses": [],
+      "fix_suggestions": []
+    },
+    "4.1": {
+      "score": 0.8,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+      "weaknesses": [
+        {
+          "code": "missing_delta_function_step",
+          "msg": "Die Rolle der Delta-Funktion bei der Integration über k_0 ist nicht vollständig erklärt.",
+          "math_hint": "Die genaue Anwendung der Delta-Funktion bei der Integration über k_0 sollte detaillierter beschrieben werden."
+        },
+        {
+          "code": "missing_jacobian_step",
+          "msg": "Der Übergang von dE zu dk_0 erfordert eine genauere Betrachtung des Jacobians.",
+          "math_hint": "Der Schritt von dE = \\frac{\\mathbf{k} \\cdot d\\mathbf{k}}{E} zu dk_0 sollte den Jacobian berücksichtigen."
+        }
+      ],
+      "fix_suggestions": [
+        "\\int d^4 k \\, \\delta(k_0 - E(\\mathbf{k})) = \\int dk_0 \\, d^3 k \\, \\delta(k_0 - E(\\mathbf{k})) \\Rightarrow \\int dk_0 \\, \\delta(k_0 - E(\\mathbf{k})) = 1",
+        "dE = \\frac{\\mathbf{k} \\cdot d\\mathbf{k}}{E} \\Rightarrow dk_0 = dE = \\frac{\\mathbf{k} \\cdot d\\mathbf{k}}{E}"
+      ]
+    },
+    "4.2": {
+      "score": 0.8,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Details.",
+      "weaknesses": [
+        {
+          "code": "missing_step",
+          "msg": "Der Übergang von der Integration über $k_0$ zu $d^3 \\mathbf{k}$ ist nicht vollständig erklärt.",
+          "math_hint": "Es fehlt die explizite Darstellung der Integration über $k_0$ mit der Delta-Funktion."
+        },
+        {
+          "code": "incomplete_argument",
+          "msg": "Die Argumentation zur Lorentz-Invarianz des Endausdrucks ist nicht vollständig.",
+          "math_hint": "Es fehlt eine detaillierte Erklärung, warum $d^3 \\mathbf{k}$ und $\\delta^{(3)}(\\mathbf{k}-\\mathbf{k}^{\\prime})$ Lorentz-invariant sind."
+        }
+      ],
+      "fix_suggestions": [
+        "\\int dk_0 \\frac{1}{2 E(\\mathbf{k})} \\delta(k_0 - E(\\mathbf{k})) = \\frac{1}{2 E(\\mathbf{k})}",
+        "Erkläre, dass $d^3 \\mathbf{k}$ und $\\delta^{(3)}(\\mathbf{k}-\\mathbf{k}^{\\prime})$ unter Lorentz-Transformationen invariant sind, da sie nur räumliche Komponenten betreffen."
+      ]
+    }
+  }
+}

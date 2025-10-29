@@ -373,16 +373,76 @@
   "GA_L09": {
     "sourceFile": "GA_Lee09/GA_Lee09.tex",
     "snipMeta": {
-      "Subject": "LIE",
-      "Topic": "Lie Algebra",
+      "Subject": "GA",
+      "Topic": "De Rham Kohomologie",
       "LitID": "L09",
-      "CTyp": "EXE",
+      "CTyp": "DEF",
       "ParentTopic": "",
-      "Content": "Lie Algebra Homomorphismus",
+      "Content": "de\\,Rham-Kohomologie als kontravarianter Funktor",
       "selectedProject": "GA_Lee09/GA_Lee09.tex"
     },
     "tableMeta": {
       "selectedSource": "GA_Lee09/GA_Lee09.tex"
+    }
+  },
+  "FA_W25": {
+    "sourceFile": "FA_Weth25/FA_Weth25.tex",
+    "snipMeta": {
+      "Subject": "FA",
+      "Topic": "Normtopologie",
+      "LitID": "W25",
+      "CTyp": "DEF",
+      "ParentTopic": "",
+      "Content": "",
+      "selectedProject": "FA_Ackermann25/FA_Ackermann25.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "FA_Weth25/FA_Weth25.tex"
+    }
+  },
+  "FA_A25": {
+    "sourceFile": "FA_Ackermann25/FA_Ackermann25.tex",
+    "snipMeta": {
+      "Subject": "FA",
+      "Topic": "Normtopologie",
+      "LitID": "A25",
+      "CTyp": "DEF",
+      "ParentTopic": "",
+      "Content": "",
+      "selectedProject": "FA_Ackermann25/FA_Ackermann25.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "FA_Ackermann25/FA_Ackermann25.tex"
+    }
+  },
+  "RS_M25": {
+    "sourceFile": "RS_Möller25/RS_Möller25.tex",
+    "snipMeta": {
+      "Subject": "RS",
+      "Topic": "Riemannsche Flächen",
+      "LitID": "M25",
+      "CTyp": "DEF",
+      "ParentTopic": "",
+      "Content": "",
+      "selectedProject": "RS_Möller25/RS_Möller25.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "RS_Möller25/RS_Möller25.tex"
+    }
+  },
+  "LIE_B26": {
+    "sourceFile": "LIE_Bernig26/LIE_Bernig26.tex",
+    "snipMeta": {
+      "Subject": "LIE",
+      "Topic": "Exponentialabbildung",
+      "LitID": "B26",
+      "CTyp": "PROOF",
+      "ParentTopic": "",
+      "Content": "P: Charakterisierung von 1\\,-Parameter-Gruppen durch $\\exp$-Abbildung",
+      "selectedProject": "LIE_Bernig26/LIE_Bernig26.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "LIE_Bernig26/LIE_Bernig26.tex"
     }
   }
 }

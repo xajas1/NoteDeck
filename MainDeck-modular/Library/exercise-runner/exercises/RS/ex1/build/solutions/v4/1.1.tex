@@ -1,0 +1,45 @@
+%% --- BEGIN SOLUTION ---
+Um zu zeigen, dass die Karten $\left(S^2 \backslash N, \phi_N\right)$ und $\left(S^2 \backslash S, \phi_S\right)$ einen komplexen Atlas von $S^2$ bilden, definieren wir die Umkehrabbildungen in Bezug auf die stereographische Projektion und zeigen die Holomorphie der Übergangsabbildungen durch Anwendung der Cauchy-Riemannschen Gleichungen.
+
+Die Umkehrabbildung $\phi_N^{-1}: \mathbb{C} \to S^2 \backslash \{N\}$ ist gegeben durch:
+
+\[
+\phi_N^{-1}(z) = \left( \frac{2\text{Re}(z)}{1 + |z|^2}, \frac{2\text{Im}(z)}{1 + |z|^2}, \frac{-1 + |z|^2}{1 + |z|^2} \right).
+\]
+
+Analog ist die Umkehrabbildung $\phi_S^{-1}: \mathbb{C} \to S^2 \backslash \{S\}$ gegeben durch:
+
+\[
+\phi_S^{-1}(z) = \left( \frac{2\text{Re}(z)}{1 + |z|^2}, \frac{2\text{Im}(z)}{1 + |z|^2}, \frac{1 - |z|^2}{1 + |z|^2} \right).
+\]
+
+Die Übergangsabbildung $\phi_S \circ \phi_N^{-1}: \mathbb{C} \to \mathbb{C}$ ist dann korrekt definiert als:
+
+\[
+\phi_S \circ \phi_N^{-1}(z) = \frac{1}{z}.
+\]
+
+Um die Holomorphie zu zeigen, betrachten wir die komplexe Funktion $f(z) = \frac{1}{z}$. Die Cauchy-Riemannschen Gleichungen lauten:
+
+\[
+\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}, \quad \frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x},
+\]
+
+wobei $z = x + iy$ und $f(z) = u(x, y) + iv(x, y)$ mit $u(x, y) = \frac{x}{x^2 + y^2}$ und $v(x, y) = -\frac{y}{x^2 + y^2}$.
+
+Berechnen wir die Ableitungen:
+
+\[
+\frac{\partial u}{\partial x} = \frac{y^2 - x^2}{(x^2 + y^2)^2}, \quad \frac{\partial v}{\partial y} = \frac{y^2 - x^2}{(x^2 + y^2)^2},
+\]
+
+\[
+\frac{\partial u}{\partial y} = -\frac{2xy}{(x^2 + y^2)^2}, \quad \frac{\partial v}{\partial x} = \frac{2xy}{(x^2 + y^2)^2}.
+\]
+
+Da die Cauchy-Riemannschen Gleichungen erfüllt sind, ist $f$ holomorph auf $\mathbb{C} \setminus \{0\}$.
+
+Analog zeigt man die Holomorphie der Übergangsabbildung $\phi_N \circ \phi_S^{-1}$ durch ähnliche Berechnungen.
+
+%CHECK: Korrekte Definition der Übergangsabbildung $\phi_S \circ \phi_N^{-1}(z) = \frac{1}{z}$; Cauchy-Riemann explizit überprüft. Holomorphie auf $\mathbb{C} \setminus \{0\}$ gezeigt. 
+%% --- END SOLUTION ---

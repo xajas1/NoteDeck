@@ -1,0 +1,371 @@
+{
+  "projectName": "LIE_L09",
+  "structure": [
+    {
+      "id": "sec-1760953684956",
+      "name": "Lie Gruppen",
+      "subsections": [
+        {
+          "id": "sub-1760953688934",
+          "name": "Definitionen",
+          "unitUIDs": [
+            "66e504a8-7ee6-4468-8f01-c3e622810178",
+            "03ad5a2f-1d96-44f8-be64-5e13bf56a368",
+            "ee9fb29e-5cdf-45f3-9e99-752a9a7e47ea",
+            "f3675761-cf81-4b7c-acb7-6600d5b24a42",
+            "083df28e-ee6c-47bf-a4f1-4aa4b85d48a6",
+            "6419e9b5-1c5e-4df0-8ccf-1182c47a409d",
+            "92f1880b-b9a7-41fc-a503-dd157f59f72d",
+            "d2f5d973-d30a-44d9-867d-34f7887d9ac4",
+            "230ed78a-f918-4805-a02a-9a2435b390ca",
+            "1cabec1b-606d-46ef-8c85-ca7c180c116e",
+            "652d6f9b-73d6-4733-839a-32437fca85ca",
+            "cefe693e-b8ac-4b9c-9372-f53af0a92b93",
+            "93dee8c5-8a8d-452e-a2e4-0eeb40a552b4",
+            "fc96f437-ca17-4871-9000-4ba8fdb16a1d",
+            "f816f1e1-3423-4143-a7f5-0f39865930c7",
+            "76a099f7-4743-4145-9686-f0d69c8c6ad6",
+            "b249125e-b277-4fdb-87c2-bae85125878c",
+            "705b8fe0-eba5-432e-b0a9-9059b53a76d1"
+          ]
+        },
+        {
+          "id": "sub-1760953695259",
+          "name": "Exampel",
+          "unitUIDs": [
+            "5adb8c8d-0810-4f38-9cd7-96071d78b1c0",
+            "2f1cbc5d-9cd3-44e6-9aa6-fedbd1d34f07",
+            "cd3961a8-b221-4f6a-827f-7a13b755928b",
+            "7b3503b1-cf5e-48aa-b85c-1eb518b6788f",
+            "842c8e73-c180-4942-9868-f6f8520732e6",
+            "eff39d7c-a2df-4fb2-882a-cfaaf0b6a52d",
+            "2bc80ef4-9a5f-4cee-922d-5747cbf9abb2",
+            "e07bc79d-c44d-4daa-96c9-5d87cf3d9f6d",
+            "05ac1a77-5fcb-4aa6-ab06-9a187fa002c5",
+            "eb309832-c00a-46b7-a550-3ca2c2d52572",
+            "9bf124f2-49d3-494e-8727-28a27c7b4fc2",
+            "9332ec1b-17d8-44d1-bbcc-451a648d4088",
+            "99756da9-7cbe-4375-bdd1-0c76894cd356",
+            "ceb24164-9b58-4df5-9864-02f8bea3b036",
+            "d5df0656-6c89-45f9-a6ef-42aa678f33c5",
+            "a3c8c2cd-9499-41d7-92d2-81de4b795345",
+            "aa5db85d-fd9f-4abe-a7dc-11113742d8fd",
+            "885b7cf9-89c3-4cc3-a9cb-f3202109a588",
+            "dc978cd3-ae11-45a4-b11d-0fd85aaf0b7e",
+            "4d590440-5735-49fe-8777-c7b2e3dc343b",
+            "56b82271-1d86-48e3-82c9-aa51ebda6a77",
+            "f248865a-a175-4ab8-982b-3f27c7f8be94",
+            "25acfd05-9eff-4bbc-ad64-1f0524c33f81",
+            "a6dbb270-9fb5-40a6-a70e-8d5091083100",
+            "785c3c1b-fb30-44e0-a2e2-a71472afdd7f",
+            "4e08e942-d8d0-463c-8fcc-5516a451096d",
+            "38647b8f-713b-4bb2-a361-c7cc13a4d5bf"
+          ]
+        },
+        {
+          "id": "sub-1760953698202",
+          "name": "Propositionen",
+          "unitUIDs": [
+            "168c58b3-9bf7-4b44-a9ba-05ce49c133bd",
+            "cb3ba099-dccd-40b6-b55e-5f242eb4b3b8",
+            "a154335e-113f-467f-acf4-03c302e1276a",
+            "b15d2f0d-78f8-4c4e-b101-1890a5c67df8",
+            "61aaa6a4-7d7b-4f68-b880-e898350e1a1a",
+            "4580f1ae-ffc5-4895-8002-d826f2a3350b",
+            "8a884122-38f2-4f46-813e-7bd370a5f793",
+            "bba10f79-21d6-470b-a4aa-b3a6db8781ff",
+            "d1bd9fbe-fea6-4ffa-b9f8-c5cd5f356cca",
+            "e5b07a1d-d3e9-475f-801c-209b1634bc47",
+            "954bc440-7741-4345-9510-0125694d5323"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-1760953739971",
+      "name": "Lie Algebren",
+      "subsections": [
+        {
+          "id": "sub-1760953748172",
+          "name": "Definitionen",
+          "unitUIDs": [
+            "7b80c077-908a-4e20-969d-ab7c9b4a354a",
+            "43d9e6a4-efa6-4fd1-863d-971206bac44e",
+            "b23a4b82-690c-4457-8f37-eb7e3f107134",
+            "00e530c2-4f81-4df2-9749-a3f8af2e7c25",
+            "21fcd949-622e-4cec-9f9b-9eec92e6db75",
+            "88387738-74c2-4d54-a52c-6807b6b8cde5",
+            "636a17cc-7b17-44aa-9b49-8451175aee15",
+            "9ccd5a2d-3cc7-47f4-8888-be98f736808c",
+            "ed99e6bd-2fba-49fa-b071-f24e75a6601f",
+            "204e82a7-e45a-4dc6-9b3b-4ba83dbacc7a",
+            "83e5a1e3-f024-4e77-86c4-1cdee6788219",
+            "a61c486c-9fe9-4726-88b5-a3c061fd38d4",
+            "bc91fa4f-a6c0-4507-8f3d-e8764f427612",
+            "d51f5629-f2f6-424b-99b9-bf76f598a2b3",
+            "e2f6a57b-c392-40a7-8472-ff9cbeaaa4e4",
+            "b4fbb555-aeb6-4152-ac88-40674a6f6f58"
+          ]
+        },
+        {
+          "id": "sub-1760953752426",
+          "name": "Exampel",
+          "unitUIDs": [
+            "da11475f-1f6d-4c6a-8f3c-d56502baee41",
+            "2d91086a-3e44-4ebf-a655-70e19d398dcb",
+            "889720aa-eeb7-45a1-9e89-b63f42e3ccd6"
+          ]
+        },
+        {
+          "id": "sub-1760953755042",
+          "name": "Propositionen",
+          "unitUIDs": [
+            "0f294aa3-a140-4f78-8fb9-fe788d69df55",
+            "f6b146f8-5823-4024-9c55-9170fa5d83da",
+            "8b90b879-78f1-4b38-b495-56705a8cfccd",
+            "9db4b1f2-57ab-496c-8d62-e695273108a4",
+            "2b0f1fa9-a5d6-4d73-9068-a9fea4207b8d",
+            "40ac80ab-a513-43b4-a924-177126ddd9a2",
+            "05d1d358-7831-49a1-98d5-d23721a27a18",
+            "321bd9d5-a026-464d-9146-07ff1fb2e453",
+            "236bbf01-ce48-4f0c-97e4-27ee29dfe96b",
+            "c6d1468f-3a92-4d3f-91f7-8da89a6008ec",
+            "317ccf60-0af0-4a6c-a969-9b81e3dc181d",
+            "a2ccc199-7d3e-4568-a230-1af5a9a7a4fc",
+            "d1a5ff6c-caf5-4164-9ffc-31a79689ae02",
+            "9c7bcdcd-5e38-447c-ba5a-49217b4282d6",
+            "2b10f567-29f2-4f6f-87dd-b5b947caa401",
+            "80d652d8-0926-418f-a093-293a7e793427",
+            "569f13b4-ac3b-4e07-ba4c-deda8a735cf9",
+            "e290e73d-3997-4a29-8017-bd37c092ff09",
+            "1f1bd85b-5985-4126-89b0-2726f4c80afd",
+            "f9e35fc4-a396-4b3a-81df-d3cac755d459",
+            "4e539ba3-2beb-4014-bb1a-6e05028b6ae4",
+            "881236ae-fa8d-488d-92ac-817f4d7986ea",
+            "1ec12d6b-5bbd-4abb-ad05-51b088c88501",
+            "bef8d619-eabe-488c-8575-84e83ecb1843",
+            "1fde6b18-37cc-4b16-b07e-64942ba5f42f",
+            "dbbd7664-392c-45eb-899a-348fbe1bbddf",
+            "f90c4644-c47d-4f8b-806f-fdec2fd53e34",
+            "4ac55cd8-430b-4026-a8a9-37aed19d56dd",
+            "dbbf6abd-dd52-4f79-81e7-1c77f185ff4f",
+            "150409dd-9255-4fc5-9ac4-24221d81cad2",
+            "ab8a0ecc-1bc2-491f-bc1d-c56ab9f24ef1",
+            "454e1c8c-c59d-4c5b-bfe3-b20885ccdb8c",
+            "b36b6559-32fa-4292-90f8-a44269980f60",
+            "73cbf9d6-efc4-4b33-8e45-79bb6b3019ab",
+            "ffa7a0ed-ca19-4b57-a7bc-e24517ddbe4d",
+            "358edba9-29a2-4ccc-b19f-0972db15ad14",
+            "74c37bf9-11d5-4163-b2dd-6de21c1192e4",
+            "c87a4c2e-9619-4b58-9aec-5663aeb0bc45"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-1760953772408",
+      "name": "Exponentialabbildung",
+      "subsections": [
+        {
+          "id": "sub-1760953796458",
+          "name": "Definitionen",
+          "unitUIDs": [
+            "bc23d137-6fe0-4926-8bcb-693c44c9d7c3"
+          ]
+        },
+        {
+          "id": "sub-1760953911510",
+          "name": "Exampel",
+          "unitUIDs": []
+        },
+        {
+          "id": "sub-1760953914186",
+          "name": "Propositionen",
+          "unitUIDs": [
+            "0227f163-b272-4472-9485-f551c09c00e8",
+            "7d64543c-12b8-466b-a6ed-b1aeaa8bc607",
+            "9dea8fb9-6d48-4cba-9b2e-eac2822f45d3",
+            "8422dca9-4a7d-430c-a885-6477a1775ab2",
+            "fdc20844-f56d-4352-88df-f2e472424ccb",
+            "4b2cdae0-0bea-4226-8fa7-3e150fa89b40",
+            "00ea7831-1a0a-42e6-8dc0-62fa262ad7f7",
+            "4ab1a299-69d0-4a96-8673-a59167366942",
+            "c66a7695-e5af-45a8-be43-6bc71241ebb0",
+            "4651557e-beee-4a7e-a455-10a0f7247b61",
+            "56d25747-af4e-476c-b86c-03f0f311afc7",
+            "0a29867c-c56a-4cc1-9dc8-0dd1ccf3dd44",
+            "186a61be-741a-4d40-a66f-d886d42d119a",
+            "d2b9264b-f2ec-4d53-bd4c-f48b382ac265",
+            "bc154e10-02fc-48ee-b574-07dd9f9c62ad",
+            "649c96f0-4530-47e4-a509-6b8c0a0afc67",
+            "d2922a59-6d61-4ca7-9863-190cbdecae59",
+            "3a0192c1-a679-417c-a880-7027722d2499",
+            "397964ef-3882-418d-8654-fe50d948dc4c"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-1760953781247",
+      "name": "Adjungierte Darstellung",
+      "subsections": [
+        {
+          "id": "sub-1760953956775",
+          "name": "Definitionen",
+          "unitUIDs": [
+            "83cd42a0-aef6-437a-a61d-e2f6ff28e85d",
+            "ef7d1526-1cd7-4f41-afce-a62dbae9627a",
+            "b56b0568-dc84-4ee7-ae55-965d0d0de43b"
+          ]
+        },
+        {
+          "id": "sub-1760953960078",
+          "name": "Exampel",
+          "unitUIDs": []
+        },
+        {
+          "id": "sub-1760953962722",
+          "name": "Propositionen",
+          "unitUIDs": [
+            "2e234651-78ab-4ee6-b492-f34d78d9ae40",
+            "a96f42ab-49b9-4d54-8afc-ccc72e4f8a3b",
+            "8b9d97f1-4cda-478e-83d0-1eca0219e031",
+            "37a65394-6a4e-4527-80bc-12acb323c405",
+            "695d9065-fcb3-43f1-9241-2322de08c273",
+            "ac702f6c-2a6e-46b6-ada7-07780d370c2f",
+            "f287dfe8-7f7a-47a1-a327-5268e4de63f7",
+            "efe9b59c-1269-4c51-b230-1529bb9243d7",
+            "fd243186-ec88-4b41-8453-b79eca88ceb4",
+            "75b74a61-f7f1-4e9c-94c9-8da5af1515b1",
+            "c3973a2c-bf83-4844-a479-00dc2962b8ed",
+            "eb0ebe13-a51f-4a6c-b0c7-0d738d793eb4",
+            "e3d21670-b165-4bb5-8012-b9107511919f",
+            "96b1fef4-c6ec-4b41-82bf-4a862b90a316",
+            "707f53d3-c939-436c-9801-a53dacb7196f",
+            "af1f0bf9-0e30-433e-95d4-a79a5df7b7f4",
+            "768c38e9-2c4b-4ee8-a713-619a408f168e",
+            "6cb3f2c6-cb4b-4cc9-ba55-c8f0a94e6afd"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-1760953791098",
+      "name": "Lie Gruppen Wirkung",
+      "subsections": [
+        {
+          "id": "sub-1760953852338",
+          "name": "Definitionen",
+          "unitUIDs": [
+            "d2f1d2ff-3377-47c5-8251-2175f56afa80",
+            "daeda09e-8c38-42de-95af-c00982c3a330",
+            "dec922a8-3c86-4705-8947-1d6a957838a1",
+            "8a127cbc-efac-40a6-baf6-3dc7ba726126",
+            "962a9ec0-677e-4122-b7db-bc878ed562a4",
+            "6b6df947-1157-4752-8e45-09954adb90ae",
+            "cb137f11-d474-49ae-a5b8-679b3b5a669f",
+            "64f04096-2536-4094-8d2d-d86837e2b247",
+            "036c914a-8717-42c5-8466-4932272de1b0",
+            "f0c20ca8-3ad0-487b-ab16-24365db8be71",
+            "011ad5dc-24ad-4235-becb-764758ce33dd",
+            "b2644c5f-a782-47f4-8f36-030ff1763950",
+            "8eabb13c-a33e-43b9-af9b-5cf33bb17a12"
+          ]
+        },
+        {
+          "id": "sub-1760953854539",
+          "name": "Exampel",
+          "unitUIDs": [
+            "8e684448-683f-4957-8ecc-391cdc44e106",
+            "4b333ccd-cba8-4d7d-a2e2-21a575728c1c",
+            "965349d3-7f05-4e3f-9b74-7c3fb5e9bc5e",
+            "51f8b661-8a64-4c92-a099-fee9b58bdec1",
+            "ddc40199-67a2-4be1-837c-e14000074a53",
+            "ed792cef-012c-4465-b259-8eb5653cc562",
+            "91f8ca20-e0db-4f81-b1d1-aa8f6aa489b1",
+            "9ad88f43-b862-4d7d-bb38-7dbb582ecd54",
+            "936dcc77-1240-4e9a-88d0-44d0e7ee637f",
+            "30eecf87-4d0f-421f-bd85-632da55f76fa",
+            "802ffa27-cdd0-41a4-8424-58f0071502d0",
+            "d98dad25-9068-473a-b365-4272f3a2f2e1",
+            "386e8b69-013d-4aef-ad47-523134201d26",
+            "485ef064-3703-4c9d-9720-dccf7f70b44d"
+          ]
+        },
+        {
+          "id": "sub-1760953858861",
+          "name": "Propositionen",
+          "unitUIDs": [
+            "2c99f4f5-c45b-43d2-b249-201ee11aeb94",
+            "ac48b728-1b41-4bf2-9092-300606dc9aad",
+            "f8318b0e-619b-418e-9eb0-f56f40cd6356",
+            "af3a7914-ab78-40a5-bb4e-9055f235ad9d",
+            "c998ec9d-91f0-46c2-aec6-e48d98cca27c",
+            "964fc3bc-191e-4513-b492-0bc3d4983a21",
+            "e32a683e-2ead-41a2-b309-3c69aef1ec13",
+            "f6d23d4e-9b56-4763-9db4-f859accc650f",
+            "27425bfb-1780-4b10-a6bb-cb6cc7495a75",
+            "de6ba536-e567-4de5-98a5-b966bf2ababa",
+            "b7515d7b-b957-40b4-a328-26ae3c081c7e",
+            "04e44c73-aee6-43da-bd41-5969ac727ab3",
+            "8a50fe1c-3252-4a84-b3b5-49a906f4c216",
+            "e0f2aa45-3680-468e-b5ba-11062708ca2d",
+            "65d6fde7-e5f6-4beb-a4fd-dfb430cdb31e",
+            "f9b4dcb9-d8cc-436c-b176-117a83d534a5",
+            "64747faf-2ed1-4f0c-bfeb-acbab73f349f",
+            "86f1c660-7388-4843-b082-a91e7e65e9c3",
+            "ab3aefbc-8080-4802-abe0-9617b60f683e",
+            "20d3ea24-06b6-4243-8e19-86e8e6e400d5",
+            "4ae9053a-420f-41f5-90e3-93ee5c7427a6",
+            "09383140-dadb-42e9-9649-ea323ab7e9ff",
+            "90a4f864-23cf-4325-bd7b-2c54c68411b1",
+            "2e79050e-b4fd-4c95-805d-46e2b6308205",
+            "ffaa9b4f-95aa-4734-94e5-8a031ddfa0d6",
+            "b8b8bffc-7505-45ef-ad5b-d57448219c6b",
+            "c95ddbbb-4ef8-4fde-9c95-6099a178e9fb",
+            "27c2c98c-ac65-4b8c-8d43-36d3236f52ab",
+            "40e2010f-75f3-4120-8381-cbda987ee0fb",
+            "4814dcba-c41a-43c1-bb08-ac21e347fb4a"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sec-1761321684801",
+      "name": "Maurer-Cartan Form",
+      "subsections": [
+        {
+          "id": "sub-1761321691978",
+          "name": "Definitionen",
+          "unitUIDs": [
+            "6bbb1c1d-cb07-4e63-bd0b-0e1a6ef8715a",
+            "40a83563-3c3c-4460-aa00-01a0af9e7167",
+            "f46360ac-5a60-4691-813e-1c2397b1e10c"
+          ]
+        },
+        {
+          "id": "sub-1761321696709",
+          "name": "Exampel",
+          "unitUIDs": [
+            "1e1c6453-9e6f-4f40-8c3a-493599100d70"
+          ]
+        },
+        {
+          "id": "sub-1761321699854",
+          "name": "Propositionen",
+          "unitUIDs": [
+            "8bed06e2-b271-430c-84ce-c6e4db33ccf7",
+            "e5d23470-6ae9-47b0-bdd3-4ae7131ab8fd",
+            "9973a966-03dc-4a6a-a6a9-c59279196e8d",
+            "9ae9e358-a6ee-40b1-a964-f6da32894edd",
+            "07a4563d-6917-4092-9312-4d585d9b5b98",
+            "15136208-e4f5-4e7f-9f60-c415c894903a",
+            "496a60eb-5c27-449d-8c02-603cbdf4039e",
+            "9aedb03c-c046-456a-9bff-6f46cb3a8d2d",
+            "b313cb27-950c-4bc5-beef-e59dca20e69e"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+Um die Holomorphie der Übergangsabbildung $\phi_S \circ \phi_N^{-1}$ zu diskutieren, betrachten wir die Funktion $f(z) = \frac{1}{z}$. Diese Funktion ist auf $\mathbb{C} \setminus \{0\}$ holomorph, da sie dort differenzierbar ist und die Cauchy-Riemannschen Gleichungen erfüllt. Wir zeigen dies durch Berechnung der Ableitungen.
+
+Sei $z = x + iy$, dann ist $f(z) = u(x, y) + iv(x, y)$ mit $u(x, y) = \frac{x}{x^2 + y^2}$ und $v(x, y) = -\frac{y}{x^2 + y^2}$. Die Ableitungen sind:
+
+\begin{align*}
+\frac{\partial u}{\partial x} &= \frac{y^2 - x^2}{(x^2 + y^2)^2}, \\
+\frac{\partial v}{\partial y} &= \frac{y^2 - x^2}{(x^2 + y^2)^2}, \\
+\frac{\partial u}{\partial y} &= -\frac{2xy}{(x^2 + y^2)^2}, \\
+\frac{\partial v}{\partial x} &= \frac{2xy}{(x^2 + y^2)^2}.
+\end{align*}
+
+Da $\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y}$ und $\frac{\partial u}{\partial y} = -\frac{\partial v}{\partial x}$, sind die Cauchy-Riemannschen Gleichungen erfüllt, und $f$ ist holomorph auf $\mathbb{C} \setminus \{0\}$.
+
+Jedoch ist $f(z) = \frac{1}{z}$ nicht auf ganz $\mathbb{C}$ holomorph, da sie bei $z=0$ eine Polstelle hat. Dies zeigt, dass die Übergangsabbildung $\phi_S \circ \phi_N^{-1}$ nicht auf ganz $\mathbb{C}$ holomorph ist, sondern nur auf $\mathbb{C} \setminus \{0\}$.
+
+%CHECK: Holomorphie der Übergangsabbildung $\phi_S \circ \phi_N^{-1}$ auf $\mathbb{C} \setminus \{0\}$ gezeigt; Polstelle bei $z=0$ explizit diskutiert.

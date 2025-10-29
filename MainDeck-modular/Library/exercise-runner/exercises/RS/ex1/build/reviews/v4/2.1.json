@@ -1,0 +1,20 @@
+{
+  "score": 0.7,
+  "verdict": "Die Lösung ist im Wesentlichen korrekt, aber es fehlen einige präzise mathematische Details.",
+  "weaknesses": [
+    {
+      "code": "MISSING_INVERSE_DETAIL",
+      "msg": "Die Beschreibung der Inversenabbildung \u0003c0^{-1} ist nicht präzise genug.",
+      "math_hint": "Die genaue Definition der Inversenabbildung \u0003c0^{-1} sollte spezifiziert werden, insbesondere wie die Wahl von k und l erfolgt."
+    },
+    {
+      "code": "TRANSITION_FUNCTION_DETAIL",
+      "msg": "Die Glattheit der Übergangsfunktionen wird nicht ausreichend begründet.",
+      "math_hint": "Es sollte gezeigt werden, dass die Übergangsfunktionen zwischen Karten tatsächlich glatt sind, indem die explizite Form der Translationen und deren Glattheit detailliert beschrieben wird."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Präzisiere die Inversenabbildung:} \\quad \\pi^{-1}(x,y) = (x+k, y+l) \\text{ mit } k, l \\in \\mathbb{Z} \\text{ so gewählt, dass } (x+k, y+l) \\in U.",
+    "\\text{Zeige die Glattheit der Übergangsfunktionen:} \\quad f(x,y) = (x+a, y+b) \\text{ ist glatt, da alle Ableitungen konstant sind.}"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "score": 0.9,
+  "verdict": "Die Herleitung ist fast korrekt, aber es fehlt eine explizite Darstellung der Vorzeichenänderung.",
+  "weaknesses": [
+    {
+      "code": "MISSING_EXPLICIT_SIGN_CHANGE",
+      "msg": "Die explizite Herleitung der Vorzeichenänderung bei Spiegelung ist nicht vollständig ausgeführt.",
+      "math_hint": "Es fehlt die explizite Darstellung, dass bei einer Spiegelung die Determinante -1 ist und dies zu einer Vorzeichenänderung führt."
+    }
+  ],
+  "fix_suggestions": [
+    "\\epsilon^{\\prime \\alpha \\beta} = \\det(A) A^\\alpha_{\\ \\gamma} A^\\beta_{\\ \\delta} \\epsilon^{\\gamma \\delta} = - A^\\alpha_{\\ \\gamma} A^\\beta_{\\ \\delta} \\epsilon^{\\gamma \\delta} \\text{ für eine Spiegelung, da } \\det(A) = -1."
+  ]
+}

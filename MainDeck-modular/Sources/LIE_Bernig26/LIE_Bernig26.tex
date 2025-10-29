@@ -1,0 +1,1971 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17  Graphik
+% 18  Extra
+% 00. Titel und Autor
+
+\usepackage{slashed}
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\Sp}{\mathrm{Sp}}
+\newcommand{\Ogroup}{\mathrm{O}}
+\newcommand{\U}{\mathrm{U}}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\graphicspath{{../../Library/Images/}}
+\usepackage[export]{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+% Hellblau definieren
+\definecolor{hellblau}{rgb}{0.3,0.6,1}
+\newenvironment{note}{\par\begingroup\color{hellblau}\itshape}{\par\endgroup}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\begin{unitbox}\CustomHeading{Definition}{#1}{#2}}{\end{unitbox}}
+\newenvironment{PROP}[2]{\begin{unitbox}\CustomHeading{Proposition}{#1}{#2}}{\end{unitbox}}
+\newenvironment{THEO}[2]{\begin{unitbox}\CustomHeading{Theorem}{#1}{#2}}{\end{unitbox}}
+\newenvironment{LEM}[2]{\begin{unitbox}\CustomHeading{Lemma}{#1}{#2}}{\end{unitbox}}
+\newenvironment{KORO}[2]{\begin{unitbox}\CustomHeading{Corollar}{#1}{#2}}{\end{unitbox}}
+\newenvironment{REM}[2]{\begin{unitbox}\CustomHeading{Remark}{#1}{#2}}{\end{unitbox}}
+\newenvironment{EXA}[2]{\begin{unitbox}\CustomHeading{Example}{#1}{#2}}{\end{unitbox}}
+\newenvironment{STUD}[2]{\begin{unitbox}\CustomHeading{Study}{#1}{#2}}{\end{unitbox}}
+\newenvironment{CONC}[2]{\begin{unitbox}\CustomHeading{Concept}{#1}{#2}}{\end{unitbox}}
+\newenvironment{OTH}[2]{\begin{unitbox}\CustomHeading{Other}{#1}{#2}}{\end{unitbox}}
+\newenvironment{EXE}[2]{\begin{unitbox}\CustomHeading{Exercise}{#1}{#2}}{\end{unitbox}}
+\newenvironment{MOT}[2]{\begin{unitbox}\CustomHeading{Motivation}{#1}{#2}}{\end{unitbox}}
+\newenvironment{PROOF}[2]{\begin{unitbox}\CustomHeading{Proof}{#1}{#2}}{\end{unitbox}}
+
+% --- Unit Umgebung für Source-Inhalte ---
+\usepackage{mdframed}
+\newmdenv[
+  linewidth=1pt,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftmargin=0cm,
+  rightmargin=0cm,
+  skipabove=10pt,
+  skipbelow=10pt,
+  innertopmargin=0.5\baselineskip,
+  innerbottommargin=0.5\baselineskip,
+  backgroundcolor=gray!10,
+  linecolor=gray
+]{unitbox}
+
+\newenvironment{unit}[1]
+  {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
+  {\end{unitbox}}
+
+% --- 17. ... ---
+
+% --- 18. Extras ---
+\usepackage{stmaryrd}
+\usepackage{bbold}  % falls du \mathbb{1} nutzen willst
+
+% --- 00. Titel und Autor ---
+\title{Mein Titel}
+\author{Tim Jaschik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+Kurze Beschreibung …
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\tableofcontents
+
+\pagebreak
+
+\section*{Matrixgruppen}
+
+
+
+Sei $\mathbb{K}$ ein Körper, typischerweise $\mathbb{K}=\mathbb{R}$ oder $\mathbb{K}=\mathbb{C} . M_{m, n}(\mathbb{K})$ ist die Menge der $m \times n$-Matrizen mit Einträgen in $\mathbb{K} . M_{n}(\mathbb{K})=M_{n, n}(\mathbb{K})$ ist die Menge der quadratischen Matrizen. Weiterhin ist $\mathbb{K}^{n}=M_{n, 1}(\mathbb{K})$. $M_{m, n}(\mathbb{K})$ ist ein Vektorraum der Dimension $m n$, eine Basis ist gegeben durch die Matrizen $E^{r, s}, 1 \leq r \leq m, 1 \leq s \leq n$, welche an der Stelle $(r, s)$ eine 1 stehen haben und sonst Nullen. Der Raum $M_{n}(\mathbb{K})$ ist abgeschlossen unter Matrixmultiplikation und bildet eine Algebra.
+
+Die Determinantenfunktion det : $M_{n}(\mathbb{K}) \rightarrow \mathbb{K}$ hat folgende Eigenschaften:\\
+(1) $\operatorname{det}(A B)=\operatorname{det} A \cdot \operatorname{det} B$.\\
+(2) $\operatorname{det} I_{n}=1$, wobei $I_{n}$ die Einheitsmatrix ist.\\
+(3) $A \in M_{n}(\mathbb{K})$ ist invertierbar genau dann, wenn $\operatorname{det} A \neq 0$.
+
+
+\begin{DEF}{LIE-B26-01-01}{Matrizenräume und Determinante}
+Sei $\mathbb{K}$ ein Körper, typischerweise $\mathbb{K}=\mathbb{R}$ oder $\mathbb{K}=\mathbb{C}$.  
+
+\textbf{(a) Matrizenräume.}  
+\begin{itemize}
+  \item $M_{m,n}(\mathbb{K})$ bezeichnet den $\mathbb{K}$-Vektorraum aller $m\times n$-Matrizen mit Einträgen in $\mathbb{K}$.
+  \item Für $n\in\mathbb{N}$ gilt $M_{n}(\mathbb{K}) := M_{n,n}(\mathbb{K})$ (Raum der quadratischen Matrizen).
+  \item Der Spaltenvektorraum $\mathbb{K}^{n}$ wird identifiziert mit $M_{n,1}(\mathbb{K})$.
+\end{itemize}
+Der Raum $M_{m,n}(\mathbb{K})$ hat Dimension $mn$. Eine kanonische Basis ist gegeben durch die Matrizen
+\[
+E^{r,s},\quad 1\le r\le m,\ 1\le s\le n,
+\]
+wobei $E^{r,s}$ an der Stelle $(r,s)$ den Eintrag $1$ und sonst $0$ besitzt:
+\[
+(E^{r,s})_{ij} = \delta_{ir}\delta_{js}.
+\]
+
+\textbf{(b) Algebraeigenschaft.}  
+Der Raum $M_{n}(\mathbb{K})$ ist unter der Matrixmultiplikation abgeschlossen und bildet mit dieser Operation eine \textbf{$\mathbb{K}$-Algebra}.
+
+\textbf{(c) Determinantenfunktion.}  
+Die Determinantenabbildung
+\[
+\det : M_{n}(\mathbb{K}) \longrightarrow \mathbb{K}
+\]
+erfüllt die folgenden fundamentalen Eigenschaften:
+\begin{enumerate}
+  \item \textbf{Multiplikativität:} $\det(AB) = (\det A)\cdot(\det B)$ für alle $A,B\in M_{n}(\mathbb{K})$.
+  \item \textbf{Normierung:} $\det(I_n)=1$, wobei $I_n$ die $n\times n$-Einheitsmatrix ist.
+  \item \textbf{Kriterium der Invertierbarkeit:}  
+  Eine Matrix $A\in M_{n}(\mathbb{K})$ ist genau dann invertierbar, wenn $\det(A)\ne 0$ gilt.
+\end{enumerate}
+\end{DEF}
+
+
+Definition 1. 
+
+(1) $\mathrm{GL}_{n}(\mathbb{K})=\left\{A \in M_{n}(\mathbb{K}): \operatorname{det} A \neq 0\right\}$ ist die allgemeine lineare Gruppe.\\
+(2) $\mathrm{SL}_{n}(\mathbb{K})=\left\{A \in M_{n}(\mathbb{K}): \operatorname{det} A=1\right\}$ ist die spezielle lineare Gruppe.\\
+Offensichtlich sind $\mathrm{GL}_{n}(\mathbb{K})$ und $\mathrm{SL}_{n}(\mathbb{K})$ Gruppen. $\mathrm{SL}_{n}(\mathbb{K})$ ist eine Untergruppe von $\mathrm{GL}_{n}(\mathbb{K})$.
+
+Definition 2. Sei $\mathbb{K}=\mathbb{R}$ oder $\mathbb{C}$.\\
+(1) Ist $x=\left(x_{1}, \ldots, x_{n}\right)^{T} \in \mathbb{K}^{n}$, so setzen wir
+
+$$
+|x|=\sqrt{\left|x_{1}\right|^{2}+\ldots+\left|x_{n}\right|^{2}}
+$$
+
+(2) Ist $A \in M_{n}(\mathbb{K})$, so setzen wir
+
+$$
+\|A\|:=\sup \left\{|A x|: x \in \mathbb{K}^{n},|x|=1\right\}
+$$
+
+(3) $\rho(A, B):=\|A-B\|$ definiert eine Metrik und somit auch eine Topologie auf $\mathrm{GL}_{n}(\mathbb{K})$.
+
+
+
+\begin{EXA}{LIE-B26-01-02}{Allgemeine und spezielle lineare Gruppe}
+\textbf{(1) Allgemeine lineare Gruppe.}  
+Für einen Körper $\mathbb{K}$ definieren wir
+\[
+\mathrm{GL}_{n}(\mathbb{K}) := \{\,A \in M_{n}(\mathbb{K}) \mid \det(A) \neq 0\,\}.
+\]
+$\mathrm{GL}_{n}(\mathbb{K})$ ist die \textbf{allgemeine lineare Gruppe} der invertierbaren $n\times n$-Matrizen über $\mathbb{K}$.
+
+\textbf{(2) Spezielle lineare Gruppe.}  
+\[
+\mathrm{SL}_{n}(\mathbb{K}) := \{\,A \in M_{n}(\mathbb{K}) \mid \det(A) = 1\,\}.
+\]
+$\mathrm{SL}_{n}(\mathbb{K})$ ist die \textbf{spezielle lineare Gruppe} und eine Untergruppe von $\mathrm{GL}_{n}(\mathbb{K})$.
+\end{EXA}
+
+
+
+\begin{DEF}{LIE-B26-01-03}{Norm und Topologie auf Matrixgruppen}
+\textbf{(1) Normen auf $\mathbb{K}^{n}$ und $M_{n}(\mathbb{K})$.}\\
+Sei $\mathbb{K}=\mathbb{R}$ oder $\mathbb{C}$.
+\begin{enumerate}
+  \item Für $x=(x_{1},\ldots,x_{n})^{T}\in \mathbb{K}^{n}$ definieren wir die euklidische Norm durch
+  \[
+  |x| := \sqrt{|x_{1}|^{2}+\dots+|x_{n}|^{2}}.
+  \]
+  \item Für $A\in M_{n}(\mathbb{K})$ setzen wir die induzierte Operatornorm
+  \[
+  \|A\| := \sup\{\,|A x| : x\in \mathbb{K}^{n},\ |x|=1\,\}.
+  \]
+  Sie misst den größten Streckungsfaktor, den $A$ auf die Einheitskugel ausübt.
+\end{enumerate}
+
+\textbf{(2) Metrische Struktur.}  
+Die Abbildung
+\[
+\rho(A,B):=\|A-B\|,\quad A,B\in M_{n}(\mathbb{K}),
+\]
+definiert eine Metrik auf $M_{n}(\mathbb{K})$ und induziert insbesondere eine \textbf{Topologie auf} $\mathrm{GL}_{n}(\mathbb{K})$ (als offene Teilmenge von $M_{n}(\mathbb{K})$).  
+Damit wird $\mathrm{GL}_{n}(\mathbb{K})$ ein topologischer Gruppenraum.
+
+Bemerkung: da $M_{n}(\mathbb{K})$ ein endlichdimensionaler Vektorraum ist, sind alle Normen äquivalent. Wir wählen diese spezielle Norm wegen ihrer im Lemma genannten Eigenschaften.
+\end{DEF}
+
+
+
+Lemma 3. 
+
+
+\begin{LEM}{LIE-B26-01-04}{Elementare Eigenschaften der Operatornorm}
+Es gilt $\|A \cdot B\| \leq\|A\| \cdot\|B\|$ und $\left\|I_{n}\right\|=1$.
+\end{LEM}
+
+Beweis.
+
+\begin{PROOF}{LIE-B26-01-05}{P: Elementare Eigenschaften der Operatornorm}
+$$
+\begin{aligned}
+\|A \cdot B\| & =\sup \{|A \cdot B \cdot x|:|x|=1\} \\
+& =\sup \left\{\frac{|A \cdot B \cdot x|}{|B \cdot x|} \cdot|B \cdot x|:|x|=1\right\} \\
+& =\sup \{[|A \cdot \underbrace{\frac{B x}{|B x|}}_{|\bullet|=1}| \cdot|B x|:|x|=1\} \\
+& \leq \sup \{|A \cdot y|:|y|=1\} \cdot \sup \{[B x|:|x| \leq 1\} \\
+& =\|A\| \cdot\|B\| .
+\end{aligned}
+$$
+\end{PROOF}
+
+
+
+Lemma 4. 
+
+
+\begin{LEM}{LIE-B26-01-06}{Koordinantenfunktion, Determinante und Spur sind stetig auf $M_{n}(\mathbb{K})$}
+Die Koordinatenfunktionen $M_{n}(\mathbb{K}) \rightarrow \mathbb{K}, A \mapsto A_{r s}, 1 \leq r, s \leq n$ sind stetig. Insbesondere sind $\operatorname{det}: M_{n}(\mathbb{K}) \rightarrow \mathbb{K}$ und $\operatorname{tr}: M_{n}(\mathbb{K}) \rightarrow \mathbb{K}, A \mapsto \sum_{i=1}^{n} A_{i i}$ stetig.
+\end{LEM}
+
+Beweis. 
+
+\begin{PROOF}{LIE-B26-01-07}{P: Koordinantenfunktion, Determinante und Spur sind stetig auf $M_{n}(\mathbb{K})$}
+Sei $e_{i}$ der $i$-te Standardbasisvektor. Dann ist
+$$
+\left|A_{r s}\right| \leq \sqrt{\sum_{i=1}^{n}\left|A_{i s}\right|^{2}}=\left|\sum_{i=1}^{n} A_{i s} e_{i}\right|=\left|A e_{s}\right| \leq\|A\|
+$$
+also folgt $\left|A_{r s}^{\prime}-A_{r s}\right| \leq\left\|A^{\prime}-A\right\|$.
+\end{PROOF}
+
+
+
+Definition 5. 
+
+Sei $G$ eine Gruppe, versehen mit einer Topologie. Dann heisst $G$ eine topologische Gruppe, wenn die Multiplikation $m$ : $G \times G \rightarrow G,(g, h) \mapsto g h$ und die Inversenbildung $i: G \rightarrow G, g \mapsto g^{-1}$ stetig sind.
+
+
+\begin{DEF}{LIE-B26-01-08}{Topologische Gruppe}
+Sei $G$ eine Gruppe, versehen mit einer Topologie.  
+Dann heißt $G$ eine \textbf{topologische Gruppe}, wenn die folgenden beiden Abbildungen stetig sind:
+\begin{align*}
+m &: G \times G \longrightarrow G, \quad (g,h) \longmapsto g h 
+&& \text{(\textit{Multiplikation})},\\[3pt]
+i &: G \longrightarrow G, \quad g \longmapsto g^{-1} 
+&& \text{(\textit{Inversenbildung})}.
+\end{align*}
+Das heißt, sowohl die Verknüpfung zweier Gruppen­elemente als auch das Bilden des Inversen sind stetige Operationen bezüglich der gegebenen Topologie auf $G$.
+
+\textbf{Bemerkung.}  
+Eine topologische Gruppe ist damit gleichzeitig ein \textit{Gruppenobjekt} in der Kategorie der topologischen Räume:  
+Die algebraische und die topologische Struktur sind kompatibel.
+\end{DEF}
+
+
+Lemma 6. 
+
+
+\begin{EXA}{LIE-B26-01-09}{$\mathrm{GL}_{n}(\mathbb{K}), \mathrm{SL}_{n}(\mathbb{K})$ sind topologische Gruppen}
+$\mathrm{GL}_{n}(\mathbb{K})$ und $\mathrm{SL}_{n}(\mathbb{K})$ sind topologische Gruppen.
+
+Beweis. Stetitgkeit von $m$ ist klar. Stetigkeit von $i$ folgt aus der Tatsache, dass jeder Eintrag von $A^{-1}$ von der Gestalt
+$$
+(\operatorname{det} A)^{-1} \cdot \text { Polynom in den Einträgen von } A
+$$
+ist.
+\end{EXA}
+
+
+Definition 7. 
+
+(1) Eine abgeschlossene Untergruppe von $\mathrm{GL}_{n}(\mathbb{K})$ heisst Matrixgruppe.\\
+(2) Ist $G$ eine Matrixgruppe und $H \subset G$ eine abgeschlossene Untergruppe, so heisst $H$ Matrixuntergruppe von $G$.
+
+Bemerkung: Ist $K$ Matrixuntergruppe von $G$ und $H$ Matrixuntergruppe von $K$, so ist $H$ auch Matrixuntergruppe von $G$.
+
+
+\begin{DEF}{LIE-B26-01-10}{Matrixgruppen und Matrixuntergruppen}
+\textbf{(1) Matrixgruppe.}  
+Eine \textbf{Matrixgruppe} ist eine \emph{abgeschlossene Untergruppe} von $\mathrm{GL}_{n}(\mathbb{K})$, d.\,h.
+\[
+G \subseteq \mathrm{GL}_{n}(\mathbb{K}), \qquad G \text{ ist eine Gruppe und abgeschlossen in } \mathrm{GL}_{n}(\mathbb{K})
+\]
+(bezüglich der von der Operatornorm induzierten Topologie).
+
+\textbf{(2) Matrixuntergruppe.}  
+Sei $G$ eine Matrixgruppe.  
+Eine \textbf{Matrixuntergruppe} von $G$ ist eine abgeschlossene Untergruppe $H \subseteq G$.
+
+Ist $K$ eine Matrixuntergruppe von $G$ und $H$ eine Matrixuntergruppe von $K$,  
+so ist $H$ ebenfalls eine Matrixuntergruppe von $G$.  
+Mit anderen Worten: die Eigenschaft „Matrixuntergruppe“ ist \emph{transitiv}.
+\end{DEF}
+
+
+
+
+\section*{Beispiele:}
+
+
+(1) $\mathrm{GL}_{n}(\mathbb{K})$ ist eine Matrixgruppe. Achtung: als Teilmenge von $M_{n}(\mathbb{K})$ ist $\mathrm{GL}_{n}(\mathbb{K})$ nicht abgeschlossen, sondern offen. Als Teilmenge von sich selbst ist es sowohl offen als auch abgeschlossen.\\
+(2) $\mathrm{SL}_{n}(\mathbb{K})$ ist eine Matrixgruppe.\\
+(3) Unter der Abbildung $A \mapsto\left(\begin{array}{cc}A & 0 \\ 0 & 1\end{array}\right)$ wird $\mathrm{GL}_{n}(\mathbb{K})$ zu einer Matrixuntergruppe von $\mathrm{GL}_{n+1}(\mathbb{K})$ und $\mathrm{SL}_{n}(\mathbb{K})$ zu einer Matrixuntergruppe von $\mathrm{SL}_{n+1}(\mathbb{K})$.\\
+(4) $\mathrm{UT}_{n}(\mathbb{K})$ die Gruppe der oberen triangulären Matrizen.\\
+(5) $\operatorname{SUT}_{n}(\mathbb{K})$ die Gruppe der unipotenten oberen triangulären Matrizen, d.h. derjenigen, bei denen auf der Diagonalen nur Einsen stehen.\\
+(6) $\theta: \mathbb{K} \rightarrow \operatorname{SUT}_{2}(\mathbb{K}), t \mapsto\left(\begin{array}{cc}1 & t \\ 0 & 1\end{array}\right)$ ist ein Homomorphismus und ein Gruppenisomorphismus. Also ist ( $\mathbb{K},+$ ) eine Matrixgruppe.\\
+(7)
+
+$$
+\operatorname{Aff}_{n}(\mathbb{K})=\left\{\left(\begin{array}{cc}
+A & t \\
+0 & 1
+\end{array}\right): A \in \mathrm{GL}_{n}(\mathbb{K}), t \in \mathbb{K}^{n}\right\}
+$$
+
+ist eine Matrixgruppe, die affine Gruppe genannt wird. Sie operiert auf $\mathbb{K}^{n}$ durch affine Transformationen $(A, t) x:=A x+ t$.\\
+
+
+
+\begin{EXA}{LIE-B26-01-11}{Allgemeine lineare Gruppe als Matrixgruppe}
+$\mathrm{GL}_{n}(\mathbb{K})$ ist eine \textbf{Matrixgruppe}.  
+Sie ist als Untergruppe von $(M_{n}(\mathbb{K}),\cdot)$ abgeschlossen unter Matrixmultiplikation und Inversenbildung.  
+Als Teilmenge von $M_{n}(\mathbb{K})$ ist $\mathrm{GL}_{n}(\mathbb{K})$ \emph{offen}, da die Determinantenabbildung $\det : M_{n}(\mathbb{K}) \to \mathbb{K}$ stetig ist und $\mathrm{GL}_{n}(\mathbb{K}) = \det^{-1}(\mathbb{K}\setminus\{0\})$.  
+Als Teilmenge von sich selbst ist sie jedoch sowohl offen als auch abgeschlossen.
+\end{EXA}
+
+
+
+\begin{EXA}{LIE-B26-01-12}{Spezielle lineare Gruppe}
+$\mathrm{SL}_{n}(\mathbb{K}) := \{A \in \mathrm{GL}_{n}(\mathbb{K}) : \det A = 1\}$  
+ist eine \textbf{Matrixgruppe}.  
+Sie ist eine abgeschlossene Untergruppe von $\mathrm{GL}_{n}(\mathbb{K})$, da $\mathrm{SL}_{n}(\mathbb{K}) = \det^{-1}(\{1\})$ und $\det$ stetig ist.
+\end{EXA}
+
+
+
+\begin{EXA}{LIE-B26-01-13}{Einbettung von $\GL,\SL$ in höhere Dimensionen}
+Unter der Abbildung
+\[
+A \longmapsto 
+\begin{pmatrix}
+A & 0 \\[3pt]
+0 & 1
+\end{pmatrix}
+\]
+wird $\mathrm{GL}_{n}(\mathbb{K})$ zu einer \textbf{Matrixuntergruppe} von $\mathrm{GL}_{n+1}(\mathbb{K})$  
+und $\mathrm{SL}_{n}(\mathbb{K})$ zu einer Matrixuntergruppe von $\mathrm{SL}_{n+1}(\mathbb{K})$.
+\end{EXA}
+
+
+
+\begin{EXA}{LIE-B26-01-14}{$\operatorname{UT}$ Gruppe der oberen Dreiecksmatrizen}
+\[
+\mathrm{UT}_{n}(\mathbb{K}) := 
+\left\{
+A = (a_{ij}) \in \mathrm{GL}_{n}(\mathbb{K}) : a_{ij} = 0 \text{ für } i > j
+\right\}
+\]
+ist eine \textbf{Matrixgruppe}.  
+Sie ist abgeschlossen in $\mathrm{GL}_{n}(\mathbb{K})$, da die Bedingung $a_{ij}=0$ für $i>j$ durch stetige Gleichungen beschrieben wird.
+\end{EXA}
+
+
+
+\begin{EXA}{LIE-B26-01-15}{$\operatorname{SUT}$ unipotente obere Dreiecksmatrixgruppe}
+\[
+\mathrm{SUT}_{n}(\mathbb{K}) := 
+\left\{
+A = (a_{ij}) \in \mathrm{UT}_{n}(\mathbb{K}) : a_{ii} = 1 \text{ für alle } i
+\right\}
+\]
+heißt \textbf{unipotente obere Dreiecksmatrixgruppe}.  
+Sie ist ebenfalls abgeschlossen, da sie durch die zusätzlichen Gleichungen $a_{ii}=1$ charakterisiert ist.
+\end{EXA}
+
+
+
+\begin{EXA}{LIE-B26-01-16}{Additive Gruppe als Matrixgruppe}
+Die Abbildung
+\[
+\theta: \mathbb{K} \longrightarrow \mathrm{SUT}_{2}(\mathbb{K}), 
+\quad t \longmapsto 
+\begin{pmatrix}
+1 & t \\[3pt]
+0 & 1
+\end{pmatrix}
+\]
+ist ein \textbf{Gruppenisomorphismus}.  
+Damit ist $(\mathbb{K},+)$ als additive Gruppe isomorph zu einer Matrixgruppe.
+\end{EXA}
+
+
+
+\begin{EXA}{LIE-B26-01-17}{Affine Gruppe}
+\[
+\mathrm{Aff}_{n}(\mathbb{K}) :=
+\left\{
+\begin{pmatrix}
+A & t \\[3pt]
+0 & 1
+\end{pmatrix}
+: A \in \mathrm{GL}_{n}(\mathbb{K}),\ t \in \mathbb{K}^{n}
+\right\}
+\]
+ist eine \textbf{Matrixgruppe}, genannt die \emph{affine Gruppe}.  
+Sie operiert auf $\mathbb{K}^{n}$ durch affine Transformationen:
+\[
+(A,t)\cdot x := A x + t.
+\]
+\end{EXA}
+
+
+
+
+
+(8) $\mathrm{O}(n):=\left\{A \in \mathrm{GL}_{n}(\mathbb{R}): A^{t} A=I_{n}\right\} \subset \mathrm{GL}_{n}(\mathbb{R})$ die orthogonale Gruppe.\\
+(9) $\mathrm{SO}(n):=\{A \in \mathrm{O}(n): \operatorname{det} A=1\}$ die spezielle orthogonale Gruppe.\\
+(10) $\operatorname{Isom}_{n}(\mathbb{R})=\left\{\left(\begin{array}{cc}A & t \\ 0 & 1\end{array}\right): A \in \mathrm{O}_{n}(\mathbb{R}), t \in \mathbb{R}^{n}\right\}$ die Isometriegruppe von $\mathbb{R}^{n}$.\\
+(11)
+
+$$
+\text { Lor }:=\left\{A \in \mathrm{GL}_{4}(\mathbb{R}): A t Q A=Q\right\}
+$$
+
+wobei $Q:=\left(\begin{array}{cccc}1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & -1\end{array}\right)$ heisst Lorentzgruppe.\\
+(12) Sei $J=\left(\begin{array}{cc}0 & 1 \\ -1 & 0\end{array}\right)$ und $J_{2 m}$ die Blockdiagonalmatrix mit $2 \times 2$-Blöcken $J$ auf der Diagonale. Die reelle symplektische Gruppe ist
+
+$$
+\operatorname{Symp}_{2 n}(\mathbb{R}):=\left\{A \in \mathrm{GL}_{n}(\mathbb{R}): A^{t} J_{2 m} A=J_{2 m}\right\}
+$$
+
+(13) $\mathrm{U}(n):=\left\{A \in \mathrm{GL}_{n}(\mathbb{C}): A^{*} A=I_{n}\right\} \subset \mathrm{GL}_{n}(\mathbb{C})$ die unitäre Gruppe.\\
+(14) $\operatorname{SU}(n):=\left\{A \in \mathrm{U}_{n}(\mathbb{C}): \operatorname{det} A=1\right\}$ die spezielle unitäre Gruppe.\\
+
+
+
+\begin{EXA}{LIE-B26-01-18}{Orthogonale Gruppe}
+Die \textbf{orthogonale Gruppe} ist definiert durch
+\[
+\mathrm{O}(n)
+:= \left\{ A \in \mathrm{GL}_{n}(\mathbb{R}) \; : \; A^{\mathsf{T}} A = I_{n} \right\}.
+\]
+Sie besteht aus allen reellen Matrizen, die das Standardskalarprodukt auf $\mathbb{R}^{n}$ erhalten.  
+$\mathrm{O}(n)$ ist eine abgeschlossene Untergruppe von $\mathrm{GL}_{n}(\mathbb{R})$, da die Bedingung $A^{\mathsf{T}}A = I_{n}$ stetig ist.
+\end{EXA}
+
+
+
+\begin{EXA}{LIE-B26-01-19}{Spezielle orthogonale Gruppe}
+Die \textbf{spezielle orthogonale Gruppe} ist
+\[
+\mathrm{SO}(n)
+:= \left\{ A \in \mathrm{O}(n) \; : \; \det A = 1 \right\}.
+\]
+Sie besteht aus den orientierungserhaltenden orthogonalen Transformationen und ist eine abgeschlossene Untergruppe von $\mathrm{O}(n)$.
+\end{EXA}
+
+
+
+\begin{EXA}{LIE-B26-01-20}{Isometriegruppe des euklidischen Raumes}
+Die \textbf{Isometriegruppe} des $\mathbb{R}^{n}$ ist
+\[
+\mathrm{Isom}_{n}(\mathbb{R})
+:= \left\{
+\begin{pmatrix}
+A & t \\[3pt]
+0 & 1
+\end{pmatrix}
+: A \in \mathrm{O}(n),\ t \in \mathbb{R}^{n}
+\right\}.
+\]
+Diese Gruppe beschreibt alle euklidischen Bewegungen (Drehungen, Spiegelungen und Translationen).  
+Sie operiert auf $\mathbb{R}^{n}$ durch $(A,t)\cdot x = A x + t$.
+\end{EXA}
+
+
+
+\begin{EXA}{LIE-B26-01-21}{Lorentzgruppe}
+Die \textbf{Lorentzgruppe} ist definiert als
+\[
+\mathrm{Lor}
+:= \left\{
+A \in \mathrm{GL}_{4}(\mathbb{R}) \; : \; A^{\mathsf{T}} Q A = Q
+\right\},
+\qquad
+Q :=
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & -1
+\end{pmatrix}.
+\]
+Sie besteht aus allen linearen Transformationen des Minkowski-Raums $\mathbb{R}^{1,3}$, die die Lorentz-Metrik erhalten.  
+$\mathrm{Lor}$ ist eine Matrixgruppe, die in der Relativitätstheorie zentrale Bedeutung hat.
+\end{EXA}
+
+
+
+\begin{EXA}{LIE-B26-01-22}{Reelle symplektische Gruppe}
+Sei $J = 
+\begin{pmatrix}
+0 & 1 \\[3pt]
+-1 & 0
+\end{pmatrix}$ 
+und $J_{2m}$ die Blockdiagonalmatrix mit $m$ Blöcken $J$ auf der Diagonale.  
+Dann heißt
+\[
+\mathrm{Symp}_{2m}(\mathbb{R})
+:= \left\{ A \in \mathrm{GL}_{2m}(\mathbb{R}) \; : \; A^{\mathsf{T}} J_{2m} A = J_{2m} \right\}
+\]
+die \textbf{reelle symplektische Gruppe}.  
+Sie besteht aus allen linearen Transformationen, die die Standard-Symplektikform auf $\mathbb{R}^{2m}$ erhalten.
+\end{EXA}
+
+
+
+\begin{EXA}{LIE-B26-01-23}{Unitäre Gruppe}
+Die \textbf{unitäre Gruppe} ist definiert durch
+\[
+\mathrm{U}(n)
+:= \left\{ A \in \mathrm{GL}_{n}(\mathbb{C}) \; : \; A^{*} A = I_{n} \right\},
+\]
+wobei $A^{*} = \overline{A}^{\mathsf{T}}$ die adjungierte Matrix ist.  
+$\mathrm{U}(n)$ besteht aus allen linearen Transformationen, die das Standardhermitesche Skalarprodukt auf $\mathbb{C}^{n}$ erhalten.
+\end{EXA}
+
+
+
+\begin{EXA}{LIE-B26-01-24}{Spezielle unitäre Gruppe}
+Die \textbf{spezielle unitäre Gruppe} ist
+\[
+\mathrm{SU}(n)
+:= \left\{ A \in \mathrm{U}(n) \; : \; \det A = 1 \right\}.
+\]
+Sie besteht aus den orientierungserhaltenden unitären Transformationen.  
+$\mathrm{SU}(n)$ ist eine abgeschlossene Untergruppe von $\mathrm{U}(n)$ und spielt eine fundamentale Rolle in der Differentialgeometrie und in der theoretischen Physik (z.\,B. als Eichgruppe in der Quantenfeldtheorie).
+\end{EXA}
+
+
+
+
+Bemerkung: komplexe Matrixgruppen wie $\mathrm{U}(n)$ kann man auch als reelle auffassen. Definiere dazu $\rho_{n}^{\prime}: M_{n}(\mathbb{C}) \rightarrow M_{2 n}(\mathbb{R})$ durch $X+i Y \mapsto \left(\begin{array}{cc}X & -Y \\ Y & X\end{array}\right)$. Dann ist $\rho_{n}^{\prime} M_{n}(\mathbb{C})=\left\{A \in M_{2 n}(\mathbb{R}): A J_{2 n}^{\prime}=J_{2 n}^{\prime} A\right\}$, wobei $J_{2 n}^{\prime}=\left(\begin{array}{cc}0 & I_{n} \\ -I_{n} & 0\end{array}\right)$. Ist nämlich $A=\left(\begin{array}{cc}A_{11} & A_{12} \\ A_{21} & A_{22}\end{array}\right)$, so ist $A J_{2 n}^{\prime}=J_{2 n}^{\prime} A$ genau dann, wenn $\left(\begin{array}{cc}-A_{12} & A_{11} \\ -A_{22} & A_{21}\end{array}\right)=\left(\begin{array}{cc}A_{21} & A_{22} \\ -A_{11} & -A_{12}\end{array}\right)$
+
+
+
+\begin{CONC}{LIE-B26-01-25}{Reelle Realisierung komplexer Matrixgruppen}
+Komplexe Matrixgruppen wie etwa $\mathrm{U}(n)$ können auch als reelle Matrixgruppen aufgefasst werden.  
+Dazu definiert man die Abbildung
+\[
+\rho_n' : M_n(\mathbb{C}) \longrightarrow M_{2n}(\mathbb{R}), \qquad
+X + iY \longmapsto
+\begin{pmatrix}
+X & -Y \\[3pt]
+Y & X
+\end{pmatrix},
+\]
+wobei $X, Y \in M_n(\mathbb{R})$ sind.
+
+\textbf{Eigenschaften:}
+\begin{enumerate}
+\item $\rho_n'$ ist ein reeller Algebrenhomomorphismus, d.\,h.
+\[
+\rho_n'(A + B) = \rho_n'(A) + \rho_n'(B), \qquad
+\rho_n'(A B) = \rho_n'(A)\rho_n'(B).
+\]
+\item Das Bild von $\rho_n'$ ist gegeben durch
+\[
+\rho_n'(M_n(\mathbb{C})) =
+\left\{
+A \in M_{2n}(\mathbb{R}) \; : \; A J_{2n}' = J_{2n}' A
+\right\},
+\]
+wobei
+\[
+J_{2n}' =
+\begin{pmatrix}
+0 & I_n \\[3pt]
+- I_n & 0
+\end{pmatrix}.
+\]
+\item Ist $A = 
+\begin{pmatrix}
+A_{11} & A_{12} \\[3pt]
+A_{21} & A_{22}
+\end{pmatrix}
+\in M_{2n}(\mathbb{R})$, so gilt
+\[
+A J_{2n}' = J_{2n}' A
+\quad \Longleftrightarrow \quad
+\begin{pmatrix}
+- A_{12} & A_{11} \\[3pt]
+- A_{22} & A_{21}
+\end{pmatrix}
+=
+\begin{pmatrix}
+A_{21} & A_{22} \\[3pt]
+- A_{11} & - A_{12}
+\end{pmatrix}.
+\]
+Diese Bedingung charakterisiert also genau diejenigen reellen Matrizen, die aus komplexen Matrizen via $\rho_n'$ entstehen.
+\end{enumerate}
+
+\textbf{Interpretation:}  
+Unter der Identifikation $\mathbb{C}^n \cong \mathbb{R}^{2n}$ mit komplexer Struktur $J_{2n}'$ wird eine komplexe Matrix $A \in M_n(\mathbb{C})$ durch $\rho_n'(A)$ als reelle lineare Abbildung beschrieben, die mit $J_{2n}'$ kommutiert.  
+Somit kann jede komplexe Matrixgruppe, insbesondere $\mathrm{U}(n)$ oder $\mathrm{SU}(n)$, als reelle Matrixgruppe in $\mathrm{GL}_{2n}(\mathbb{R})$ aufgefasst werden.
+\end{CONC}
+
+
+
+Definition 8. 
+
+
+Seien $G, H$ Matrixgruppen. Ein Gruppenhomomorphismus $\phi: G \rightarrow H$ ist ein stetiger Homomorphismus von Matrixgruppen, wenn $\phi$ stetig ist und das Bild $\phi(G)$ abgeschlossen in $H$ ist.
+
+
+\begin{DEF}{LIE-B26-01-26}{Stetiger Homomorphismus von Matrixgruppen}
+Seien $G$ und $H$ Matrixgruppen.  
+Ein Gruppenhomomorphismus
+\[
+\phi : G \longrightarrow H
+\]
+heißt \textbf{stetiger Homomorphismus von Matrixgruppen}, wenn folgende Bedingungen erfüllt sind:
+\begin{enumerate}
+  \item $\phi$ ist \textbf{stetig} in der durch die Einbettung von $G, H \subseteq M_n(\mathbb{K})$ induzierten Topologie,
+  \item das Bild $\phi(G)$ ist \textbf{abgeschlossen} in $H$.
+\end{enumerate}
+In diesem Fall schreibt man oft
+\[
+\phi : G \twoheadrightarrow \phi(G) \subseteq H
+\]
+und bezeichnet $\phi(G)$ als das \textbf{abgeschlossene Bild} von $\phi$ in $H$.  
+Stetige Homomorphismen zwischen Matrixgruppen sind damit sowohl algebraisch (Gruppenhomomorphismen) als auch topologisch (stetige Abbildungen) verträglich mit der Struktur der Matrixgruppen.
+\end{DEF}
+
+
+
+
+Beispiel: Sei
+
+$$
+G:=\left\{\left(\begin{array}{cc}
+1 & n \\
+0 & 1
+\end{array}\right): n \in \mathbb{Z}\right\}
+$$
+
+$\phi: G \rightarrow \mathrm{U}(1)=S^{1},\left(\begin{array}{cc}1 & n \\ 0 & 1\end{array}\right) \mapsto e^{2 \pi r n i}$, wobei $r$ eine feste irrationale Zahl ist. Dann ist $\phi(G)$ dicht in $\mathrm{U}(1)$, aber eine echte Teilmenge. Also ist $\phi$ kein stetiger Homomorphismus von Matrixgruppen.
+
+
+
+\begin{EXA}{LIE-B26-01-27}{Nicht-abgeschlossenes Bild eines Homomorphismus}
+Sei
+\[
+G := 
+\left\{
+\begin{pmatrix}
+1 & n \\[3pt]
+0 & 1
+\end{pmatrix}
+: n \in \mathbb{Z}
+\right\}
+\subset \mathrm{GL}_{2}(\mathbb{R})
+\]
+eine diskrete Matrixgruppe (isomorph zu $(\mathbb{Z}, +)$),
+und definiere den Gruppenhomomorphismus
+\[
+\phi : G \longrightarrow \mathrm{U}(1) = S^{1}, 
+\qquad
+\begin{pmatrix}
+1 & n \\[3pt]
+0 & 1
+\end{pmatrix}
+\longmapsto e^{2 \pi i r n},
+\]
+wobei $r \in \mathbb{R}$ eine feste irrationale Zahl sei.
+\smallskip
+
+\textbf{Analyse:}
+\begin{itemize}
+  \item $\phi$ ist ein \emph{Gruppenhomomorphismus}, da 
+  \[
+  \phi\!\left(
+  \begin{pmatrix}1 & n_1 \\ 0 & 1\end{pmatrix}
+  \begin{pmatrix}1 & n_2 \\ 0 & 1\end{pmatrix}
+  \right)
+  = \phi\!\left(
+  \begin{pmatrix}1 & n_1 + n_2 \\ 0 & 1\end{pmatrix}
+  \right)
+  = e^{2\pi i r (n_1+n_2)}
+  = e^{2\pi i r n_1} e^{2\pi i r n_2}.
+  \]
+  \item Das Bild ist gegeben durch
+  \[
+  \phi(G) = \{ e^{2\pi i r n} : n \in \mathbb{Z} \}.
+  \]
+  Da $r$ irrational ist, ist die Menge 
+  $\{ e^{2\pi i r n} : n \in \mathbb{Z} \}$
+  \emph{dicht} in $S^1$, aber keine abgeschlossene Teilmenge.
+\end{itemize}
+
+\textbf{Folgerung:}
+Das Bild $\phi(G)$ ist dicht, aber nicht abgeschlossen in $\mathrm{U}(1)$.  
+Somit ist $\phi$ zwar ein stetiger Gruppenhomomorphismus, aber \emph{kein stetiger Homomorphismus von Matrixgruppen} im Sinne der Definition, da die Abgeschlossenheitsbedingung verletzt ist.
+\end{EXA}
+
+
+Definition 9. Ist $\phi: G \rightarrow H$ ein Homomorphismus von $M a$ trixgruppen und ist $\phi$ ein Homöomorphismus, dann heisst $\phi$ stetiger Isomorphismus von Matrixgruppen.
+
+
+
+\begin{DEF}{LIE-B26-01-28}{Stetiger Isomorphismus von Matrixgruppen}
+Seien $G$ und $H$ Matrixgruppen.  
+Ein Gruppenhomomorphismus
+\[
+\phi : G \longrightarrow H
+\]
+heißt \textbf{stetiger Isomorphismus von Matrixgruppen},  
+wenn gilt:
+\begin{enumerate}
+  \item $\phi$ ist ein \textbf{Homomorphismus von Matrixgruppen}, d.\,h. $\phi$ ist stetig und $\phi(G)$ ist abgeschlossen in $H$;
+  \item $\phi$ ist ein \textbf{Homöomorphismus}, d.\,h. bijektiv, stetig und die Umkehrabbildung $\phi^{-1}$ ist ebenfalls stetig.
+\end{enumerate}
+
+In diesem Fall sind $G$ und $H$ nicht nur als Gruppen, sondern auch als topologische Räume (in der von $M_n(\mathbb{K})$ induzierten Topologie) isomorph.  
+Man schreibt dann kurz
+\[
+G \cong_{\text{top}} H
+\quad \text{oder} \quad
+G \simeq H,
+\]
+und bezeichnet $\phi$ als \emph{stetigen Isomorphismus von Matrixgruppen}.
+\end{DEF}
+
+
+
+SATZ 10. 
+
+Sei $\phi: G \rightarrow H$ ein stetiger Homomorphismus von $M a_{-}$ trixgruppen. Dann ist $\operatorname{ker} \phi$ eine Matrixuntergruppe von $G$ und die induzierte Abbildung $\bar{\phi}: G / \operatorname{ker} \phi \rightarrow \phi(G)$ ist ein Isomorphismus.
+
+Beweis. Sei $\left(A_{n}\right)$ eine Folge in $\operatorname{ker} \phi$, die gegen $A \in G$ konvergiert. Da $\phi$ stetig ist, gilt $\phi(A)=\phi\left(\lim _{n} A_{n}\right)=\lim \phi\left(A_{n}\right)=1$. Die zweite Aussage folgt aus dem ersten Isomorphiesatz.
+
+
+\begin{PROP}{LIE-B26-01-29}{Erster Isomorphiesatz für Matrixgruppen}
+Sei $\phi: G \to H$ ein stetiger Homomorphismus von Matrixgruppen
+(d.\,h. $\phi$ ist stetig und $\phi(G)$ ist abgeschlossen in $H$). Dann gilt:
+\begin{enumerate}
+  \item $\ker\phi$ ist eine \textbf{Matrixuntergruppe} von $G$ (insbesondere abgeschlossen und normal).
+  \item Die induzierte Abbildung
+  \[
+    \bar\phi:\; G/\ker\phi \longrightarrow \phi(G),\qquad g\,\ker\phi \longmapsto \phi(g)
+  \]
+  ist ein \textbf{Isomorphismus von Matrixgruppen} (Gruppenisomorphismus und Homöomorphismus).
+\end{enumerate}
+\end{PROP}
+
+
+
+\begin{PROOF}{LIE-B26-01-30}{P: Erster Isomorphiesatz für Matrixgruppen}
+(1) \emph{$\ker\phi$ ist abgeschlossen und damit Matrixuntergruppe.}
+Sei $(A_n)$ eine Folge in $\ker\phi$ mit $A_n \to A \in G$. Aus der Stetigkeit von $\phi$ folgt
+\[
+\phi(A)\;=\;\phi\!\big(\lim_n A_n\big)\;=\;\lim_n \phi(A_n)\;=\;\lim_n e\;=\;e,
+\]
+also $A\in\ker\phi$. Damit ist $\ker\phi$ abgeschlossen in $G$. Als Kern eines Homomorphismus ist $\ker\phi$ zudem normal; somit ist $\ker\phi$ eine Matrixuntergruppe von $G$.
+
+\smallskip
+(2) \emph{Algebraischer Isomorphismus.}
+Nach dem Ersten Isomorphiesatz für Gruppen ist
+\[
+\bar\phi:\; G/\ker\phi \to \phi(G),\quad g\ker\phi \mapsto \phi(g)
+\]
+ein wohldefinierter bijektiver Gruppenhomomorphismus.
+
+\smallskip
+(3) \emph{Topologie und Stetigkeit.}
+Da $\ker\phi$ abgeschlossen ist, ist der Quotient $G/\ker\phi$ ein Hausdorff’scher topologischer Gruppenraum; die kanonische Projektion
+$\pi:G\to G/\ker\phi$ ist offen und stetig.
+Die Abbildung $\bar\phi$ ist stetig, denn $\bar\phi\circ\pi=\phi$ und $\phi$ ist stetig, während $\pi$ surjektiv ist.
+
+\smallskip
+(4) \emph{$\bar\phi$ ist ein Homöomorphismus.}
+Das Bild $\phi(G)$ ist nach Voraussetzung in $H$ abgeschlossen und damit eine Matrixgruppe. Die Umkehrabbildung
+\[
+\bar\phi^{-1}:\; \phi(G)\to G/\ker\phi,\qquad \bar\phi^{-1}(\phi(g))=g\ker\phi,
+\]
+ist stetig: Schreibe $\bar\phi^{-1} = \pi\circ s$, wobei $s:\phi(G)\to G$ eine (beliebige) Wahl einer Repräsentantenabbildung lokal verifiziert; allgemeiner folgt die Stetigkeit aus der universellen Eigenschaft des Quotienten: Ist $f:G\to \phi(G)$ stetig und konstant auf den Nebenklassen von $\ker\phi$ (hier $f=\phi$), so faktorisert $f$ eindeutig über eine stetige $\tilde f:G/\ker\phi\to \phi(G)$. Da $\bar\phi$ bijektiv ist, ist auch die inverse Faktorisierung stetig. Alternativ kann man verwenden, dass $\bar\phi$ eine stetige, offene Bijektion ist: Offenheit folgt, weil $\pi$ offen ist und $\phi=\bar\phi\circ\pi$ stetig-offen auf Nebenklassen konstant ist.
+
+\smallskip
+Damit ist $\bar\phi$ ein Gruppenisomorphismus und Homöomorphismus, also ein stetiger Isomorphismus von Matrixgruppen.
+\end{PROOF}
+
+
+Achtung: $G / \operatorname{ker} \phi$ ist im Allgemeinen keine Matrixgruppe. Das ist ein Grund, warum wir später Liegruppen studieren werden.
+
+Definition 11. (1) Sei $G$ eine Gruppe und $X$ eine Menge. Eine Operation von $G$ auf $X$ ist eine Abbildung $\mu: G \times X \rightarrow X,(g, x) \mapsto g x$, so dass $(g h) x=g(h x), 1 x=x$ für alle $x \in G, g, h \in G$.\\
+(2) Der Stabilisator im Punkt $x$ ist
+
+$$
+\operatorname{Stab}_{G}(x)=\{g \in G: g x=x\} \subset G .
+$$
+
+(3) Das Orbit von $x$ ist
+
+$$
+\operatorname{Orb}_{G}(x)=\{g x: g \in G\} \subset X
+$$
+
+
+
+\begin{DEF}{LIE-B26-07-01}{Gruppenoperation, Stabilisator und Orbit}
+\begin{enumerate}
+\item
+Sei $G$ eine Gruppe und $X$ eine Menge.  
+Eine \textbf{(Links-)Operation} von $G$ auf $X$ ist eine Abbildung
+\[
+\mu : G \times X \longrightarrow X,\qquad (g,x) \longmapsto g x,
+\]
+so dass für alle $g,h \in G$ und $x \in X$ gilt:
+\begin{align*}
+(\text{A1}) \quad &(g h) x = g (h x) &&\text{(Assoziativität der Wirkung)},\\
+(\text{A2}) \quad &1 x = x &&\text{(Neutrales Element wirkt trivial).}
+\end{align*}
+In diesem Fall sagt man: $G$ \emph{operiert (von links)} auf $X$.  
+Manchmal schreibt man $\mu(g,x)$ statt $g x$.
+
+\item
+Für ein festes $x \in X$ heißt
+\[
+\operatorname{Stab}_{G}(x)
+:= \{\, g \in G : g x = x \,\}
+\]
+der \textbf{Stabilisator} (oder die \textbf{Isotropiegruppe}) von $x$.  
+Er ist eine Untergruppe von $G$.
+
+\item
+Für ein festes $x \in X$ heißt
+\[
+\operatorname{Orb}_{G}(x)
+:= \{\, g x : g \in G \,\}
+\]
+die \textbf{Bahn} (oder das \textbf{Orbit}) von $x$ unter der Wirkung von $G$.
+
+\end{enumerate}
+\end{DEF}
+
+
+
+
+
+Satz 12. (1) $\operatorname{Stab}_{G}(x)$ ist eine Untergruppe von $G$.\\
+(2) $y \in \operatorname{Orb}_{G}(x) \Longleftrightarrow \operatorname{Orb}_{G}(x)=\operatorname{Orb}_{G}(y)$.\\
+(3) Für $x \in X$ gibt es eine Bijektion
+
+$$
+\phi: G / \operatorname{Stab}_{G}(x) \rightarrow \operatorname{Orb}_{G}(x),[g] \mapsto g x .
+$$
+
+(4) Ist $y=t x, t \in G$, so gilt
+
+$$
+\operatorname{Stab}_{G}(y)=t \operatorname{Stab}_{G}(x) t^{-1}
+$$
+
+Beweis. Nachrechnen.
+
+
+
+\begin{PROP}{LIE-B26-07-02}{Elementare Eigenschaften zu Stabilisator, Bahn und Nebenklassen}
+Sei $G$ eine Gruppe, die (von links) auf einer Menge $X$ operiert. Dann gilt für jedes $x\in X$:
+\begin{enumerate}
+\item $\operatorname{Stab}_G(x)$ ist eine Untergruppe von $G$.
+\item Für $y\in X$ gilt: $y\in \operatorname{Orb}_G(x)$ genau dann, wenn $\operatorname{Orb}_G(y)=\operatorname{Orb}_G(x)$.
+\item Die Abbildung
+\[
+\phi:\; G/\operatorname{Stab}_G(x)\longrightarrow \operatorname{Orb}_G(x),\qquad [g]\longmapsto g\cdot x,
+\]
+ist eine wohldefinierte Bijektion.
+\item Ist $y=t\cdot x$ für ein $t\in G$, so gilt
+\[
+\operatorname{Stab}_G(y)=t\,\operatorname{Stab}_G(x)\,t^{-1}.
+\]
+\end{enumerate}
+\end{PROP}
+
+
+
+\begin{PROOF}{LIE-B26-07-03}{P: Elementare Eigenschaften zu Stabilisator, Bahn und Nebenklassen}
+\textbf{(1) $\operatorname{Stab}_G(x)\le G$.}
+(Neutral) $1\cdot x=x$, also $1\in\operatorname{Stab}_G(x)$. 
+(Abgeschlossenheit) Sind $g,h\in\operatorname{Stab}_G(x)$, so $(gh)\cdot x=g\cdot(h\cdot x)=g\cdot x=x$, also $gh\in\operatorname{Stab}_G(x)$.
+(Inverses) Ist $g\in\operatorname{Stab}_G(x)$, so $g\cdot x=x$. Wirkt man links mit $g^{-1}$, erhält man $x=g^{-1}\cdot x$, also $g^{-1}\in\operatorname{Stab}_G(x)$.
+
+\smallskip
+\textbf{(2) Gleiche Bahnen genau bei Erreichbarkeit.}
+“Ist-Richtung”: $y\in\operatorname{Orb}_G(x)$, d.\,h. $y=g\cdot x$ für ein $g$. Für jedes $h\in G$ ist $h\cdot y=h\cdot(g\cdot x)=(hg)\cdot x\in\operatorname{Orb}_G(x)$, also $\operatorname{Orb}_G(y)\subseteq\operatorname{Orb}_G(x)$. Umgekehrt: $x=g^{-1}\cdot y$, also $\operatorname{Orb}_G(x)\subseteq\operatorname{Orb}_G(y)$. Damit $\operatorname{Orb}_G(x)=\operatorname{Orb}_G(y)$.
+“Nur-wenn”: Trivial, denn $y\in\operatorname{Orb}_G(y)=\operatorname{Orb}_G(x)$.
+
+\smallskip
+\textbf{(3) Bahnen–Nebenklassen-Bijektion.}
+\emph{Wohldefiniertheit:} Ist $[g]=[g']$ in $G/\operatorname{Stab}_G(x)$, so $g'=g s$ mit $s\in\operatorname{Stab}_G(x)$. Dann $g'\cdot x=(g s)\cdot x=g\cdot(s\cdot x)=g\cdot x$.
+\emph{Surjektivität:} Jedes $y\in\operatorname{Orb}_G(x)$ hat die Form $y=g\cdot x$; dann ist $\phi([g])=y$.
+\emph{Injektivität:} $\phi([g_1])=\phi([g_2])\Rightarrow g_1\cdot x=g_2\cdot x\Rightarrow g_2^{-1}g_1\cdot x=x$, also $g_2^{-1}g_1\in\operatorname{Stab}_G(x)$, d.\,h. $[g_1]=[g_2]$.
+
+\smallskip
+\textbf{(4) Konjugation der Stabilisatoren entlang der Bahn.}
+Sei $y=t\cdot x$. Dann:
+\[
+g\in\operatorname{Stab}_G(y)
+\ \Longleftrightarrow\ 
+g\cdot (t\cdot x)=t\cdot x
+\ \Longleftrightarrow\ 
+t^{-1} g t \cdot x = x
+\ \Longleftrightarrow\
+t^{-1} g t \in \operatorname{Stab}_G(x).
+\]
+Also $g\in t\,\operatorname{Stab}_G(x)\,t^{-1}$ und damit $\operatorname{Stab}_G(y)=t\,\operatorname{Stab}_G(x)\,t^{-1}$.
+\end{PROOF}
+
+
+
+
+Definition 13. Sei $G$ eine topologische Gruppe, $X$ ein topologischer Raum. Eine Operation $\mu: G \times X \rightarrow X$ heisst stetige Gruppenoperation, wenn $\mu$ stetig ist.
+
+
+
+\begin{DEF}{LIE-B26-07-04}{Stetige Gruppenoperation}
+Sei $G$ eine \textbf{topologische Gruppe} und $X$ ein \textbf{topologischer Raum}.  
+Eine Abbildung
+\[
+\mu : G \times X \longrightarrow X, \qquad (g, x) \longmapsto g \cdot x,
+\]
+heißt \textbf{stetige Gruppenoperation}, wenn gilt:
+\begin{enumerate}
+    \item $\mu$ ist eine Gruppenoperation, d.\,h.
+    \[
+    (g h)\cdot x = g\cdot(h\cdot x), \qquad e\cdot x = x \quad \text{für alle } g,h \in G,\, x \in X,
+    \]
+    wobei $e$ das neutrale Element von $G$ ist;
+    \item $\mu$ ist \textbf{stetig} bezüglich der Produkttopologie auf $G\times X$ und der gegebenen Topologie auf $X$.
+\end{enumerate}
+In diesem Fall sagt man: \emph{$G$ operiert stetig auf $X$} oder \emph{$(G,X)$ ist ein topologisches Wirkungs­paar}.
+\end{DEF}
+
+
+
+\begin{EXA}{LIE-B26-07-05}{Darstellungen von topologischen Gruppen}
+Sei $G$ eine topologische Gruppe und 
+\[
+\phi : G \longrightarrow \mathrm{GL}(n,\mathbb{K})
+\]
+ein \textbf{stetiger Gruppenhomomorphismus}.  
+Dann induziert $\phi$ eine stetige Gruppenoperation
+\[
+G \times \mathbb{K}^{n} \longrightarrow \mathbb{K}^{n}, 
+\qquad (g, x) \longmapsto \phi(g)\,x.
+\]
+Diese Operation heißt eine \textbf{Darstellung} von $G$ auf dem Vektorraum 
+$V := \mathbb{K}^{n}$.
+
+\smallskip
+Man nennt $(V,\phi)$ auch ein \textbf{Darstellungspaar} von $G$.  
+Die Abbildung $\phi$ beschreibt, wie die Gruppenstruktur von $G$ 
+durch lineare Abbildungen auf $V$ „realisiert“ wird.
+\end{EXA}
+
+
+
+Beispiel: Sei $\phi: G \rightarrow \mathrm{GL}(n, \mathbb{K})$ ein stetiger Gruppenhomomorphismus. Die induzierte Operation $(g, x) \mapsto \phi(g) x, g \in G, x \in \mathbb{K}^{n}$ heisst Darstellung von $G$ auf $V$. Die Darstellungstheorie von Liegruppen ist ein sehr tiefes und spannendes Forschungsgebiet.
+
+
+
+
+\pagebreak
+
+
+
+\section{Die Exponentialabbildung}
+Zur Erinnerung: die Taylorreihe der Exponentialfunktion ist
+
+$$
+\operatorname{Exp} x=\sum_{k=0}^{\infty} \frac{x^{k}}{k!},
+$$
+
+ihr Konvergenzradius ist $+\infty$. Die Taylorreihe der Funktion $\log (x):= \log (1+x)$ ist
+
+$$
+\log (x)=\sum_{i=1}^{\infty} \frac{(-1)^{i+1}}{i} x^{i},
+$$
+
+ihr Konvergenzradius ist 1 . Insbesondere bekommt man für $x \approx 1$
+
+$$
+\log (x)=\log (1+(x-1))=\sum_{i=1}^{\infty} \frac{(-1)^{i+1}}{i}(x-1)^{i} .
+$$
+
+Sei wieder $\mathbb{K}=\mathbb{R}$ oder $\mathbb{C}$.
+
+
+
+
+\begin{DEF}{LIE-B26-02-01}{Matrix-Exponential und -Logarithmus}
+Sei $\mathbb{K} \in \{\mathbb{R}, \mathbb{C}\}$ und $M_n(\mathbb{K})$ der Raum der $n \times n$-Matrizen.
+\begin{enumerate}
+\item \textbf{Matrix-Exponential.} Für $A \in M_n(\mathbb{K})$ definieren wir
+\[
+\exp(A) := \sum_{k=0}^{\infty} \frac{A^k}{k!}.
+\]
+Diese Reihe konvergiert absolut (bzgl. jeder submultiplikativen Norm) und liefert eine glatte Abbildung
+\[
+\exp : M_n(\mathbb{K}) \to \mathrm{GL}_n(\mathbb{K}).
+\]
+
+\item \textbf{Matrix-Logarithmus (lokal um die Eins).}  
+Für $B \in M_n(\mathbb{K})$ mit $\|B\| < 1$ definieren wir
+\[
+\log(I + B) := \sum_{i=1}^{\infty} \frac{(-1)^{i+1}}{i} B^i.
+\]
+Die Reihe konvergiert absolut. Damit ist der \emph{Matrix-Logarithmus}
+\[
+\log : \{ X \in \mathrm{GL}_n(\mathbb{K}) : \|X - I\| < 1 \} \to M_n(\mathbb{K}),
+\quad X \mapsto \log(X)
+\]
+eine glatte Abbildung, gegeben durch die obige Potenzreihe.
+\end{enumerate}
+\end{DEF}
+
+
+
+\begin{PROP}{LIE-B26-02-02}{Grundlegende Eigenschaften von $\exp$ und $\log$}
+Für $A, B \in M_n(\mathbb{K})$ gelten:
+\begin{enumerate}
+\item \textbf{Analytizität:} Die Reihe für $\exp$ konvergiert für alle $A$, also ist $\exp$ auf $M_n(\mathbb{K})$ wohldefiniert, analytisch und $\exp(0)=I$.
+\item \textbf{Kommutierender Fall:} Falls $AB = BA$, dann gilt
+\[
+\exp(A + B) = \exp(A)\exp(B) = \exp(B)\exp(A).
+\]
+\item \textbf{Ähnlichkeitsinvarianz:} Für $S \in \mathrm{GL}_n(\mathbb{K})$ gilt
+\[
+\exp(SAS^{-1}) = S\,\exp(A)\,S^{-1}.
+\]
+\item \textbf{Determinante und Spur:}
+\[
+\det(\exp A) = e^{\operatorname{tr}(A)}.
+\]
+\item \textbf{Differentialgleichung:} Für $t \in \mathbb{R}$ ist $\alpha(t) := \exp(tA)$ die eindeutige Lösung der linearen DGL
+\[
+\alpha'(t) = A\,\alpha(t), \qquad \alpha(0) = I.
+\]
+\item \textbf{Lokale Inversen:}  
+Es existieren offene Umgebungen $U \subset M_n(\mathbb{K})$ von $0$ und $V \subset \mathrm{GL}_n(\mathbb{K})$ von $I$ mit
+\[
+\exp : U \to V
+\]
+ein Diffeomorphismus und $\log : V \to U$ die glatte Inverse.
+\item \textbf{Ableitung von $\exp$:} Für $A,H \in M_n(\mathbb{K})$ gilt
+\[
+D(\exp)_A[H] = \int_0^1 \exp((1-s)A)\, H\, \exp(sA)\, ds.
+\]
+Insbesondere $D(\exp)_0[H] = H$.
+\item \textbf{Kommutatorformel:} Für $t \in \mathbb{R}$ gilt
+\[
+\exp(tA)\,B\,\exp(-tA) = \sum_{k=0}^{\infty} \frac{t^k}{k!}\,(\operatorname{ad}_A)^k(B),
+\qquad \operatorname{ad}_A(B) := [A,B] = AB - BA.
+\]
+\end{enumerate}
+\end{PROP}
+
+
+
+\begin{PROP}{LIE-B26-02-03}{Matrix-Logarithmus: Eindeutigkeit und Spektralbedingung}
+\begin{enumerate}
+\item \textbf{Eindeutigkeit nahe $I$:} Gibt es eine Norm mit $\|X - I\| < 1$, so ist $\log(X)$ eindeutig bestimmt und die einzige Lösung von $\exp(A) = X$ mit kleinem $\|A\|$.
+\item \textbf{Spektralkriterium:}  
+Ist $X \in \mathrm{GL}_n(\mathbb{C})$ ohne Eigenwerte auf $(-\infty,0]$, so existiert ein (holomorph gewählter) \emph{Hauptlogarithmus} $\mathrm{Log}(X)$ mit $\exp(\mathrm{Log}(X)) = X$ und $\sigma(\mathrm{Log}(X)) \subset \{ z \in \mathbb{C} : -\pi < \Im z < \pi \}$.
+\item \textbf{Reeller Fall:} Für $X \in \mathrm{GL}_n(\mathbb{R})$ mit $\|X - I\| < 1$ ist $\log(X)$ reell und durch die reelle Potenzreihe definiert.
+\end{enumerate}
+\end{PROP}
+
+
+{Bezug zur Lie-Gruppen-Theorie}
+\begin{enumerate}
+\item Für eine lineare Lie-Gruppe $G \subset \mathrm{GL}_n(\mathbb{K})$ gilt $\exp(\mathfrak{g}) \subset G$, wobei $\mathfrak{g} = T_I G$ die Lie-Algebra ist. Die Kurve $t \mapsto \exp(tA)$ ($A \in \mathfrak{g}$) ist eine \emph{eindimensionale Untergruppe} von $G$.
+\item Für $G = \mathrm{GL}_n(\mathbb{K})$ stimmen die Matrixreihen exakt mit der Exponential- bzw. Logarithmusabbildung der Lie-Gruppe überein; insbesondere gilt $\det(\exp A) = e^{\operatorname{tr}(A)}$.
+\end{enumerate}
+
+
+
+
+
+
+Definition 14. (1) Sei $A \in M_{n}(\mathbb{K})$. Setze
+
+$$
+\exp (A)=\sum_{k=0}^{\infty} \frac{1}{k!} A^{k} .
+$$
+
+(2) Sei $A \in M_{n}(\mathbb{K})$ mit $\|A-I\|<1$. Setze
+
+$$
+\log (A):=\sum_{i=1}^{\infty} \frac{(-1)^{i+1}}{i} A^{i} .
+$$
+
+
+
+
+
+\begin{LEM}{MAT-L03-05}{Grundlegende Rechenregeln der Matrix-Exponentialfunktion}
+Sei $A \in M_n(\mathbb{K})$ und $u,v \in \mathbb{K}$. Dann gilt:
+\begin{enumerate}
+\item $\exp\big((u+v)A\big) = \exp(uA)\,\exp(vA)$.
+\item $\exp(A)^{-1} = \exp(-A)$.
+\item Seien $A,B\in M_n(\mathbb{K})$ mit $AB=BA$. Dann gilt
+\[
+\exp(A+B)\;=\;\exp(A)\,\exp(B).
+\]
+\item Ist $A\in \mathrm{GL}_n(\mathbb{K})$ mit $\|A-I\|<1$, so gilt
+\[
+\exp(\log A)=A,
+\]
+wobei $\log A:=\sum_{i=1}^{\infty}\frac{(-1)^{i+1}}{i}(A-I)^i$.
+
+Ist $A\in M_n(\mathbb{K})$ so, dass $\|\exp(A)-I\|<1$, dann gilt
+\[
+\log(\exp A)=A,
+\]
+wobei $\log$ durch die Reihe in (1) auf der Umgebung $\{X\in \mathrm{GL}_n(\mathbb{K}) : \|X-I\|<1\}$ definiert ist.
+\end{enumerate}
+
+\textit{Beweis.}
+\begin{enumerate}
+\item
+Da die Reihen für $\exp(uA)$ und $\exp(vA)$ absolut konvergieren, darf man die Glieder beliebig umordnen:
+\[
+\begin{aligned}
+\exp(uA)\,\exp(vA)
+&= \left(\sum_{i=0}^{\infty} \frac{u^i}{i!} A^i \right)
+   \left(\sum_{j=0}^{\infty} \frac{v^j}{j!} A^j \right)
+= \sum_{i,j=0}^{\infty} \frac{u^i v^j}{i!\,j!} A^{i+j} \\
+&= \sum_{k=0}^{\infty} \left( \sum_{r=0}^k \frac{u^r v^{k-r}}{r!\,(k-r)!} \right) A^k
+= \sum_{k=0}^{\infty} \frac{(u+v)^k}{k!} A^k
+= \exp((u+v)A).
+\end{aligned}
+\]
+\item
+Die Aussage folgt aus (1) durch Wahl von $v=-u$:
+\[
+\exp(uA)\exp(-uA)=\exp(0)=I
+\quad \Rightarrow \quad
+\exp(A)^{-1} = \exp(-A).
+\]
+
+\textit{Folgerung.}
+Damit ist die Abbildung
+\[
+\exp : M_n(\mathbb{K}) \longrightarrow \mathrm{GL}_n(\mathbb{K})
+\]
+wohldefiniert und bildet den Raum aller Matrizen in die allgemeine lineare Gruppe ab.
+
+Zur Definition des Matrixlogarithmus schreiben wir für $A \in M_n(\mathbb{K})$ mit $\|A - I\| < 1$:
+\[
+\log A := \log(A - I) = \sum_{k=1}^{\infty} \frac{(-1)^{k+1}}{k} (A - I)^k.
+\]
+
+\item Wegen absoluter Konvergenz der Reihen darf umgruppiert werden:
+\[
+\begin{aligned}
+\exp(A)\exp(B)
+&=\left(\sum_{i=0}^{\infty}\frac{A^i}{i!}\right)
+  \left(\sum_{j=0}^{\infty}\frac{B^j}{j!}\right)
+= \sum_{i=0}^{\infty}\sum_{j=0}^{\infty}\frac{A^i B^j}{i!\,j!}.
+\end{aligned}
+\]
+Da $A$ und $B$ kommutieren, gilt für jedes $k\in\mathbb{N}_0$ der binomiale Lehrsatz
+\[
+(A+B)^k=\sum_{r=0}^{k}\binom{k}{r}A^{\,r}B^{\,k-r}.
+\]
+Somit
+\[
+\sum_{i,j=0}^{\infty}\frac{A^i B^j}{i!\,j!}
+=\sum_{k=0}^{\infty}\sum_{r=0}^{k}\frac{1}{r!\,(k-r)!}\,A^{\,r}B^{\,k-r}
+=\sum_{k=0}^{\infty}\frac{1}{k!}\sum_{r=0}^{k}\binom{k}{r}A^{\,r}B^{\,k-r}
+=\sum_{k=0}^{\infty}\frac{(A+B)^k}{k!}.
+\]
+Die rechte Seite ist per Definition $\exp(A+B)$.
+
+
+\item \textbf{Schritt 0 (Vorbereitung).}  
+Seien $f(z)=\log(1+z)=\sum_{i=1}^{\infty}\frac{(-1)^{i+1}}{i}z^i$ (Konvergenz für $|z|<1$)
+und $g(z)=\exp z=\sum_{m=0}^{\infty}\frac{z^m}{m!}$ (Konvergenz für alle $z$).  
+Dann gelten für reelle/komplexe Skalare die Identitäten
+\[
+g(f(z))=1+z \quad (|z|<1),
+\qquad
+f(g(z)-1)=z \quad (|g(z)-1|<1).
+\]
+Da diese Gleichungen auf einer Umgebung des Nullpunkts als Funktionen übereinstimmen,
+stimmen ihre Potenzreihen \emph{als formale Reihen} koeffizientenweise überein.
+
+\smallskip
+\textbf{Zu (1).}  
+Setze $B:=A-I$. Wegen $\|B\|<1$ konvergiert die Reihe
+$$\log(I+B)=\sum_{i\ge1}\frac{(-1)^{i+1}}{i}B^i$$ absolut.  
+Damit konvergiert auch die zusammengesetzte Matrixreihe
+\[
+\exp(\log(I+B))=\sum_{m=0}^{\infty}\frac{1}{m!}\Big(\sum_{i=1}^{\infty}\frac{(-1)^{i+1}}{i}B^i\Big)^{\! m},
+\]
+und absolute Konvergenz erlaubt Umordnen/Assoziieren der Glieder.  
+Da $g\circ f=1+z$ als formale Reihe gilt, erhält man nach Ersetzen von $z$ durch $B$
+(und Nutzung der gleichen Cauchy-Produktregeln im Matrizenfall) die Identität
+\[
+\exp(\log(I+B))=I+B=A.
+\]
+
+\smallskip
+\textbf{Zu (2).}  
+Angenommen $\|\exp(A)-I\|<1$. Dann ist $X:=\exp(A)$ in der Definitionsmenge der Logarithmusreihe,
+und wir können schreiben
+\[
+\log(\exp A)=\sum_{i=1}^{\infty}\frac{(-1)^{i+1}}{i}\,(\exp A - I)^i.
+\]
+Auch hier konvergiert die Reihe absolut.  
+Da $f(g(z)-1)=z$ als formale Reihe gilt, folgt durch Ersetzen von $z$ durch die Matrix $A$ (und
+absolutes Konvergieren der beteiligten Reihen), dass
+\[
+\log(\exp A)=A.
+\]
+\end{enumerate}
+
+\end{LEM}
+
+
+
+
+Lemma 15. Für $A \in M_{n}(\mathbb{K}), u, v \in \mathbb{K}$ gilt\\
+(1) $\exp ((u+v) A)=\exp (u A) \exp (v A)$.\\
+(2) $\exp (A)^{-1}=\exp (-A)$.
+
+Beweis. (1) Die folgenden Reihen sind absolut konvergent, also darf beliebig umgeordnet werden. Es ist
+
+$$
+\begin{aligned}
+\operatorname{Exp}(u A) \operatorname{Exp}(v A) & =\left(\sum_{i=0}^{\infty} \frac{u^{i}}{i!} A^{i}\right) \cdot\left(\sum_{j=0}^{\infty} \frac{v^{j}}{i!} A^{j}\right) \\
+& =\sum_{i, j=0}^{\infty} \frac{u^{i} v^{j}}{i!j!} A^{i+j} \\
+& =\sum_{k=0}^{\infty} \sum_{r=0}^{k} \frac{u^{r} v^{k-r}}{r!(k-r)!} A^{k} \\
+& =\sum_{k=0}^{\infty} \frac{(u+v)^{k}}{k!} A^{k} \\
+& =\operatorname{Exp}((u+v) A)
+\end{aligned}
+$$
+
+(2) Folgt aus i).
+
+Insbesondere gilt
+
+$$
+\exp : M_{n}(\mathbb{K}) \rightarrow \mathrm{GL}_{n}(\mathbb{K})
+$$
+
+Wir setzen
+
+$$
+\log A:=\log (A-I)
+$$
+
+Lemma 16. Ist $A B=B A$, so gilt $\exp (A+B)=\exp (A) \exp (B)$.\\
+Beweis.
+
+$$
+\begin{aligned}
+\exp (A) \exp (B) & =\sum_{i=0}^{\infty} \frac{1}{i!} A^{i} \sum_{j=0}^{\infty} \frac{1}{j!} B^{j} \\
+& =\sum_{k=0}^{\infty} \sum_{r=0}^{k} \frac{1}{k!}\binom{k}{r} A^{r} B^{k-r} \\
+& =\sum_{k=0}^{\infty} \frac{1}{k!}(A+B)^{k} \\
+& =\exp (A+B)
+\end{aligned}
+$$
+
+Lemma 17. (1) Ist $\|A-I\|<1$, so ist $\exp \log A=A$.\\
+(2) Ist $\|\exp A-I\|<1$, so ist $\log \exp A=A$.
+
+Beweis. Die folgenden Gleichungen sind Gleichungen für formale Potenzreihen:
+
+$$
+\begin{aligned}
+\sum_{m=0}^{\infty} \frac{1}{m!}\left(\sum_{i=1}^{\infty} \frac{(-1)^{i+1}}{i}(X-1)^{i}\right)^{m} & =X \\
+\sum_{i=1}^{\infty} \frac{(-1)^{i+1}}{i}\left(\sum_{m=0}^{\infty} \frac{1}{m} X^{m}\right)^{i} & =X
+\end{aligned}
+$$
+
+Für reelle $X \approx 1$ gelten diese Gleichungen, also stimmen alle Koeffizienten überein und diese Gleichungen gelten auch für beliebige $X$. Ersetzt man $X$ durch $A$, so folgen die Behauptungen.
+
+
+
+Korollar 18. 
+
+Die Einschränkung von $\exp$ auf
+$$
+N_{\left.M_{n}(\mathbb{K})\right)}(0, \log 2)=\left\{A \in M_{n}(\mathbb{K}):\|A\|<\log 2\right\}
+$$
+ist ein lokaler Diffeomorphismus mit lokaler Inverser $\log$.
+
+
+Beweis. exp und log sind unendlich oft differenzierbar, da Potenzreihen. Es gilt
+
+$$
+\|\exp (A)-I\| \leq \sum_{i=1}^{\infty} \frac{1}{i!}\left\|A^{i}\right\| \leq \sum_{i=1}^{\infty} \frac{1}{i!}\|A\|^{i}=e^{\|A\|}-1
+$$
+
+also ist $\|\exp (A)-I\|<1$ falls $\|A\|<\log 2$.\\
+
+
+
+\begin{KORO}{LIE-B26-02-04}{Lokaler Diffeomorphismus der Exponentialabbildung}
+Sei $\|\cdot\|$ eine submultiplikative Matrixnorm auf $M_n(\mathbb{K})$ und
+\[
+N := N_{M_n(\mathbb{K})}(0,\log 2)=\{A\in M_n(\mathbb{K}): \|A\|<\log 2\}.
+\]
+Dann ist die Einschränkung
+\[
+\exp\big|_{N} : N \longrightarrow \mathrm{GL}_n(\mathbb{K})
+\]
+ein (auf sein Bild) lokaler Diffeomorphismus mit lokaler Inversen $\log$; genauer gilt
+\[
+\exp(N)\subset U:=\{X\in \mathrm{GL}_n(\mathbb{K}) : \|X-I\|<1\},
+\quad\text{und}\quad
+\log:U\to M_n(\mathbb{K})
+\]
+ist glatt sowie $\log\circ\exp=\mathrm{id}_{N}$ und $\exp\circ\log=\mathrm{id}_{U}$.
+\end{KORO}
+
+
+\begin{PROOF}{LIE-B26-02-05}{P: Lokaler Diffeomorphismus der Exponentialabbildung}
+(1) \textit{Bild liegt in $U$.} Für $A\in M_n(\mathbb{K})$ gilt wegen submultiplikativität
+\[
+\|\exp(A)-I\| \le \sum_{k=1}^\infty \frac{\|A\|^k}{k!} = e^{\|A\|}-1.
+\]
+Insbesondere ist für $\|A\|<\log 2$ die rechte Seite $<1$, also $\exp(A)\in U$ und damit $\exp(N)\subset U$.
+
+(2) \textit{Glatte Inversenbeziehung.} Nach Lemma~\textit{(Wechselseitigkeit von $\exp$ und $\log$ im Konvergenzbereich)} gilt
+\[
+\log(\exp A)=A \quad\text{für }\|A\|<\log 2,
+\qquad
+\exp(\log X)=X \quad\text{für }\|X-I\|<1.
+\]
+Damit sind $\log$ und $\exp$ auf $U$ bzw. $N$ wechselseitige Inversen. Beide sind als Potenzreihen glatt.
+
+(3) \textit{Lokaler Diffeomorphismus.} Aus (2) folgt bereits, dass $\exp\big|_{N}$ ein Diffeomorphismus zwischen $N$ und $U$ ist (insbesondere ein lokaler Diffeomorphismus). Alternativ: $T_{0}\exp=\mathrm{id}$ (Theorem über die Ableitung der Exponentialabbildung), so dass der lokale Diffeomorphismus am Ursprung auch unmittelbar aus dem inversen Funktionensatz folgt; Schritt (2) liefert explizit die Inverse $\log$ auf $U$.
+\end{PROOF}
+
+
+
+
+
+Satz 19. Für $A, B \in M_{n}(\mathbb{C})$ gilt
+
+$$
+\left.\frac{d}{d t}\right|_{t=0} \exp (A+t B)=F(\operatorname{ad} A)(B) \exp (A)
+$$
+
+wobei
+
+$$
+\operatorname{ad} A: M_{n}(\mathbb{C}) \rightarrow M_{n}(\mathbb{C}), C \mapsto A C-C A=[A, C]
+$$
+
+die adjungierte Operation ist und
+
+$$
+F(t)=\sum_{r=0}^{\infty} \frac{1}{(r+1)!} t^{r}=\frac{e^{t}-1}{t}
+$$
+
+Speziell gilt
+
+$$
+\left.\frac{d}{d t}\right|_{t=0} \exp (t B)=B
+$$
+
+Beweis. 
+
+\begin{PROOF}{LIE-B26-02-08}{P:(2) Ableitung der Matrix-Exponentialfunktion entlang einer Richtung}
+Per Induktion zeigt man leicht
+$$
+\sum_{k=0}^{m-1}\binom{k}{i}=\binom{m}{i+1}
+$$
+Per Induktion zeit man weiterhin
+$$
+A^{k} B=\sum_{i=0}^{k}\binom{k}{i}(\operatorname{ad} A)^{i} B \cdot A^{k-i}
+$$
+Der Induktionsanfang $k=0$ ist trivial. Induktionsschritt:
+$$
+\begin{aligned}
+A^{k+1} B & =A\left(A^{k} B\right) \\
+& =A \sum_{i=0}^{k}\binom{k}{i}(\operatorname{ad} A)^{i} B \cdot A^{k-i} \\
+& =\sum_{i=0}^{k}\binom{k}{i}\left[\left(A \cdot(\operatorname{ad} A)^{i} B-(\operatorname{ad} A)^{i} B A\right) \cdot A^{k-i}+(\operatorname{ad} A)^{i} B \cdot A^{k+1-i}\right] \\
+& =\sum_{i=0}^{k}\binom{k}{i}\left[(\operatorname{ad} A)^{i+1} B A^{k-i}+(\operatorname{ad} A)^{i} B A^{k+1-i}\right] \\
+& =\sum_{i=1}^{k+1}\left[\binom{k}{i-1}(\operatorname{ad} A)^{i} B A^{k+1-i}+\binom{k}{i}(\operatorname{ad} A)^{i} B A^{k+1-i}\right]+B A^{k+1} \\
+& =\sum_{i=1}^{k+1}\binom{k+1}{i}(\operatorname{ad} A)^{i} B A^{k+1-i}+B A^{k+1} \\
+& =\sum_{i=0}^{k+1}\binom{k+1}{i}(\operatorname{ad} A)^{i} B A^{k+1-i} .
+\end{aligned}
+$$
+Wegen
+$$
+\left.\frac{d}{d t}\right|_{t=0}(A+t B)^{m}=\sum_{k=0}^{m-1} A^{k} B A^{m-1-k}
+$$
+folgt
+$$
+\begin{aligned}
+\left.\frac{d}{d t}\right|_{t=0} \exp (A+t B) & =\left.\sum_{m=0}^{\infty} \frac{1}{m!} \frac{d}{d t}\right|_{t=0}(A+t B)^{m} \\
+& =\sum_{m=0}^{\infty} \frac{1}{m!} \sum_{k=0}^{m-1} \sum_{i=0}^{k}\binom{k}{i}(\operatorname{ad} A)^{i} B A^{m-i-1} \\
+& =\sum_{m=0}^{\infty} \frac{1}{m!} \sum_{i=0}^{m-1}\left(\sum_{k=i}^{m-1}\binom{k}{i}\right)(\operatorname{ad} A)^{i} B A^{m-i-1} \\
+& =\sum_{m=0}^{\infty} \frac{1}{m!} \sum_{i=0}^{m-1}\binom{m}{i+1}(\operatorname{ad} A)^{i} B A^{m-1-i} \\
+& =\sum_{i=0}^{\infty} \frac{(\operatorname{ad} A)^{i} B}{(i+1)!} \sum_{m=i+1}^{\infty} \frac{1}{(m-i-1)!} A^{m-i-1} \\
+& =F(\operatorname{ad} A) B \cdot \exp A
+\end{aligned}
+$$
+\end{PROOF}
+
+
+
+\begin{THEO}{LIE-B26-02-06}{Ableitung der Matrix-Exponentialfunktion entlang einer Richtung}
+Seien $A,B \in M_{n}(\mathbb{C})$. Dann gilt
+\[
+\left.\frac{d}{dt}\right|_{t=0} \exp(A+tB)
+ \;=\; F(\operatorname{ad}A)(B)\,\exp(A),
+\]
+wobei $\operatorname{ad}A : M_n(\mathbb{C}) \to M_n(\mathbb{C}),\; C \mapsto [A,C]=AC-CA$ 
+die adjungierte Operation ist und
+\[
+F(t) \;=\; \sum_{r=0}^{\infty} \frac{t^{r}}{(r+1)!} \;=\; \frac{e^{t}-1}{t}.
+\]
+Insbesondere gilt
+\[
+\left.\frac{d}{dt}\right|_{t=0} \exp(tB) \;=\; B.
+\]
+\end{THEO}
+
+
+
+\begin{PROOF}{LIE-B26-02-07}{P: Ableitung der Matrix-Exponentialfunktion entlang einer Richtung}
+Zunächst zeigen wir zwei elementare Summenidentitäten per Induktion:
+\begin{enumerate}\itemsep0.2em
+\item[(S1)] Für $m\in\mathbb{N}$ und $i\in\{0,\dots,m-1\}$ gilt 
+\[
+\sum_{k=0}^{m-1} \binom{k}{i} \;=\; \binom{m}{i+1}.
+\]
+\item[(S2)] Für $k\in\mathbb{N}_0$ gilt
+\[
+A^{k}B \;=\; \sum_{i=0}^{k} \binom{k}{i} (\operatorname{ad}A)^{i}(B)\; A^{k-i}.
+\]
+\end{enumerate}
+Der Induktionsanfang von (S2) ist klar für $k=0$. Für den Schritt $k\mapsto k+1$ verwenden wir
+\[
+\begin{aligned}
+A^{k+1}B &= A(A^{k}B)
+= A \sum_{i=0}^{k} \binom{k}{i} (\operatorname{ad}A)^{i}(B)\,A^{k-i}\\
+&=\sum_{i=0}^{k} \binom{k}{i} 
+\Big( \underbrace{A(\operatorname{ad}A)^{i}(B) - (\operatorname{ad}A)^{i}(B)A}_{(\operatorname{ad}A)^{i+1}(B)} \Big) A^{k-i}
+\;+\; \sum_{i=0}^{k} \binom{k}{i} (\operatorname{ad}A)^{i}(B)\,A^{k+1-i}\\
+&=\sum_{i=1}^{k+1} \bigg[ \binom{k}{i-1} + \binom{k}{i} \bigg] (\operatorname{ad}A)^{i}(B) A^{k+1-i} \;+\; (\operatorname{ad}A)^{0}(B)A^{k+1}\\
+&=\sum_{i=0}^{k+1} \binom{k+1}{i} (\operatorname{ad}A)^{i}(B) A^{k+1-i},
+\end{aligned}
+\]
+womit (S2) gezeigt ist. Die Identität (S1) ist der bekannte Summationssatz für Binomialkoeffizienten.
+
+Nun leiten wir die Exponentialreihe gliedweise ab (absolut konvergent in jeder Matrixnorm):
+\[
+\left.\frac{d}{dt}\right|_{t=0} (A+tB)^{m}
+= \sum_{k=0}^{m-1} A^{k} B A^{m-1-k}.
+\]
+Mit (S2) erhalten wir für jedes $k$
+\[
+A^{k} B = \sum_{i=0}^{k} \binom{k}{i} (\operatorname{ad}A)^{i}(B) A^{k-i}.
+\]
+Somit
+\[
+\begin{aligned}
+\left.\frac{d}{dt}\right|_{t=0} \exp(A+tB)
+&= \sum_{m=0}^{\infty} \frac{1}{m!} \left.\frac{d}{dt}\right|_{t=0} (A+tB)^{m}
+= \sum_{m=0}^{\infty} \frac{1}{m!} \sum_{k=0}^{m-1} A^{k} B A^{m-1-k}\\
+&= \sum_{m=0}^{\infty} \frac{1}{m!} \sum_{k=0}^{m-1} \sum_{i=0}^{k} \binom{k}{i} (\operatorname{ad}A)^{i}(B) A^{m-1-i}\\
+&= \sum_{m=0}^{\infty} \frac{1}{m!} \sum_{i=0}^{m-1} \Big(\sum_{k=i}^{m-1} \binom{k}{i}\Big) (\operatorname{ad}A)^{i}(B) A^{m-1-i}\\
+&\stackrel{(S1)}{=} \sum_{m=0}^{\infty} \frac{1}{m!} \sum_{i=0}^{m-1} \binom{m}{i+1} (\operatorname{ad}A)^{i}(B) A^{m-1-i}.
+\end{aligned}
+\]
+Vertauschen der Summation (absolut konvergent) liefert
+\[
+\begin{aligned}
+\left.\frac{d}{dt}\right|_{t=0} \exp(A+tB)
+&= \sum_{i=0}^{\infty} \frac{(\operatorname{ad}A)^{i}(B)}{(i+1)!} \sum_{m=i+1}^{\infty} \frac{A^{m-1-i}}{(m-1-i)!}\\
+&= \Big(\sum_{i=0}^{\infty} \frac{(\operatorname{ad}A)^{i}}{(i+1)!}\Big)(B) \cdot \Big(\sum_{r=0}^{\infty} \frac{A^{r}}{r!}\Big)\\
+&= F(\operatorname{ad}A)(B)\,\exp(A),
+\end{aligned}
+\]
+wobei $F(t)=\sum_{r=0}^{\infty}\frac{t^{r}}{(r+1)!}=\frac{e^{t}-1}{t}$.  
+Für den Spezialfall $A=0$ folgt sofort
+\[
+\left.\frac{d}{dt}\right|_{t=0} \exp(tB) = B.
+\]
+\end{PROOF}
+
+
+Satz 20. Seien $A, C \in M_{n}(\mathbb{R}), a<0<b$. Dann hat die Differentialgleichung
+
+$$
+\begin{aligned}
+\alpha^{\prime}(t) & =\alpha(t) A \\
+\alpha(0) & =C
+\end{aligned}
+$$
+
+genau eine Lösung $\alpha:(a, b) \rightarrow M_{n}(\mathbb{R})$, nämlich $\alpha(t)=C \exp (t A)$.
+
+
+Beweis. Es ist
+
+$$
+\begin{aligned}
+\alpha^{\prime}(t) & =C \sum_{m=0}^{\infty} \frac{d}{d t} \frac{(t A)^{m}}{m!} \\
+& =C \sum_{m=1}^{\infty} \frac{t^{m-1} A^{m}}{(m-1)!} \\
+& =C \sum_{m=0}^{\infty} \frac{t^{m} A^{m-1}}{m!} A \\
+& =\alpha(t) A
+\end{aligned}
+$$
+
+Ist $\beta(t)$ eine weitere Lösung, so gilt mit $\gamma(t)=\beta(t) \exp (-t A)$
+
+$$
+\begin{aligned}
+\gamma^{\prime}(t) & =\beta^{\prime}(t) \exp (-t A)-\beta(t) \exp (-t A) A \\
+& =\beta(t) A \exp (-t A)-\beta(t) \exp (-t A) A \\
+& =0
+\end{aligned}
+$$
+
+also ist $\gamma$ konstant. Wegen $\gamma(0)=\beta(0)=C$ folgt $\beta(t)=C \exp (t A)= \alpha(t)$.
+
+
+
+\begin{THEO}{LIE-B26-02-09}{Lineare Matrix-DGL mit konstanter Koeffizientenmatrix}
+Seien $A,C\in M_n(\mathbb{R})$ und $a<0<b$. Die Anfangswertaufgabe
+\[
+\alpha'(t)=\alpha(t)\,A,\qquad \alpha(0)=C,
+\]
+besitzt auf $(a,b)$ genau eine Lösung, nämlich
+\[
+\alpha(t)=C\,\exp(tA).
+\]
+\end{THEO}
+
+
+
+\begin{PROOF}{LIE-B26-02-10}{P: Lineare Matrix-DGL mit konstanter Koeffizientenmatrix}
+\textbf{Existenz.} Definiere $\alpha(t):=C\exp(tA)=C\sum_{m=0}^\infty \frac{(tA)^m}{m!}$. Dann gilt wegen gliedweiser Ableitbarkeit der absolut konvergenten Reihe:
+\[
+\begin{aligned}
+\alpha'(t)
+&= C\sum_{m=0}^\infty \frac{d}{dt}\Big(\frac{t^m}{m!}A^m\Big)
+= C\sum_{m=1}^\infty \frac{t^{m-1}}{(m-1)!}A^m \\
+&= C\sum_{m=0}^\infty \frac{t^{m}}{m!}A^{m}A
+= \big(C\sum_{m=0}^\infty \frac{t^{m}}{m!}A^{m}\big)A
+= \alpha(t)A,
+\end{aligned}
+\]
+und $\alpha(0)=C\exp(0)=C$.
+
+\medskip
+\textbf{Eindeutigkeit.} Sei $\beta:(a,b)\to M_n(\mathbb{R})$ eine weitere Lösung. Setze
+\[
+\gamma(t):=\beta(t)\exp(-tA).
+\]
+Dann
+\[
+\begin{aligned}
+\gamma'(t)
+&=\beta'(t)\exp(-tA)+\beta(t)\,\frac{d}{dt}\exp(-tA) \\
+&=\beta(t)A\exp(-tA)-\beta(t)\exp(-tA)A
+=0,
+\end{aligned}
+\]
+da $\frac{d}{dt}\exp(-tA)=-\exp(-tA)A$. Also ist $\gamma$ konstant, mithin
+\[
+\gamma(t)\equiv \gamma(0)=\beta(0)\exp(0)=C.
+\]
+Folglich $\beta(t)=\gamma(t)\exp(tA)=C\exp(tA)=\alpha(t)$.
+\end{PROOF}
+
+
+
+
+Definition 21. 
+
+
+Sei $G$ eine Matrixgruppe. Eine 1-Parameter-Semigruppe ist eine stetige Funktion $\gamma:(-\epsilon, \epsilon) \rightarrow G$, die in 0 differenzierbar ist (d.h. $\lim _{t \rightarrow 0} \frac{\gamma(t)-\gamma(0)}{t} \in M_{n}(\mathbb{K})$ existiert) und $\gamma(s+t)=\gamma(s) \gamma(t)$ für alle $s, t, s+t \in(-\epsilon, \epsilon)$ erfüllt. Ist $\epsilon=\infty$, so heisst $\gamma$ eine 1-ParameterUntergruppe von $G$.
+
+
+
+\begin{DEF}{LIE-B26-02-11}{1-Parameter-(Semi)gruppe in einer Matrixgruppe}
+Sei $G\subset \GL_n(\mathbb{K})$ eine Matrixgruppe und $\epsilon\in(0,\infty]$.
+\begin{enumerate}\itemsep0.2em
+\item Eine \emph{1-Parameter-Semigruppe in $G$} ist eine stetige Abbildung
+\[
+\gamma:(-\epsilon,\epsilon)\longrightarrow G,
+\]
+die in $0$ differenzierbar ist (d.\,h. der Grenzwert
+$\displaystyle\lim_{t\to 0}\frac{\gamma(t)-\gamma(0)}{t}\in M_n(\mathbb{K})$ existiert) und die \emph{Semigruppeneigenschaft}
+\[
+\gamma(s+t)=\gamma(s)\,\gamma(t)
+\quad\text{für alle $s,t$ mit $s,t,s+t\in(-\epsilon,\epsilon)$}
+\]
+erfüllt.
+\item Ist zusätzlich $\epsilon=\infty$ (d.\,h. $\gamma:\mathbb{R}\to G$) und gilt die obige Gleichung für alle $s,t\in\mathbb{R}$, so heißt $\gamma$ eine \emph{1-Parameter-Untergruppe von $G$}.
+\end{enumerate}
+\end{DEF}
+
+
+
+
+SATZ 22. 
+
+Sei $\gamma:(-\epsilon, \epsilon) \rightarrow G$ eine 1-Parameter-Semigruppe. Dann ist $\gamma$ differenzierbar und $\gamma^{\prime}(t)=\gamma^{\prime}(0) \gamma(t)=\gamma(t) \gamma^{\prime}(0)$.
+
+Beweis.
+
+$$
+\gamma^{\prime}(t)=\lim _{h \rightarrow 0} \frac{1}{h}(\gamma(t+h)-\gamma(t))=\lim _{h \rightarrow 0} \frac{1}{h}(\gamma(h)-I d) \gamma(t)=\gamma^{\prime}(0) \gamma(t)
+$$
+
+
+
+\begin{PROP}{LIE-B26-02-12}{Ableitung von 1-Parameter-Semigruppen}
+Sei $G\subset \GL_n(\mathbb{K})$ eine Matrixgruppe und
+$\gamma:(-\varepsilon,\varepsilon)\to G$ eine 1-Parameter-Semigruppe,
+d.\,h. $\gamma$ ist stetig, in $0$ differenzierbar und erfüllt
+$\gamma(s+t)=\gamma(s)\gamma(t)$, sofern $s,t,s+t\in(-\varepsilon,\varepsilon)$.
+Dann gilt:
+\begin{enumerate}\itemsep0.2em
+\item $\gamma$ ist in jedem $t\in(-\varepsilon,\varepsilon)$ differenzierbar.
+\item Für alle $t$ gilt
+\[
+\gamma'(t)=\gamma'(0)\,\gamma(t)=\gamma(t)\,\gamma'(0).
+\]
+\end{enumerate}
+\end{PROP}
+
+
+
+\begin{PROOF}{LIE-B26-02-13}{P: Ableitung von 1-Parameter-Semigruppen}
+Fixiere $t\in(-\varepsilon,\varepsilon)$. Für hinreichend kleines $h$ ist auch $t+h\in(-\varepsilon,\varepsilon)$ und nach der Semigruppeneigenschaft
+\[
+\gamma(t+h)=\gamma(t)\gamma(h)=\gamma(h)\gamma(t).
+\]
+Dann
+\[
+\frac{\gamma(t+h)-\gamma(t)}{h}
+=\frac{\gamma(t)\gamma(h)-\gamma(t)}{h}
+=\gamma(t)\,\frac{\gamma(h)-I}{h},
+\]
+und wegen der Existenz des Grenzwerts $\lim_{h\to 0}\frac{\gamma(h)-I}{h}=\gamma'(0)$ folgt
+\[
+\gamma'(t)=\lim_{h\to 0}\frac{\gamma(t+h)-\gamma(t)}{h}
+=\gamma(t)\,\gamma'(0).
+\]
+Analog, aus $\gamma(t+h)=\gamma(h)\gamma(t)$ erhalten wir
+\[
+\frac{\gamma(t+h)-\gamma(t)}{h}
+=\frac{\gamma(h)-I}{h}\,\gamma(t)\;\xrightarrow{h\to 0}\;\gamma'(0)\,\gamma(t),
+\]
+also auch $\gamma'(t)=\gamma'(0)\gamma(t)$. Damit ist $\gamma$ überall differenzierbar und beide Darstellungen der Ableitung gelten.
+\end{PROOF}
+
+
+
+
+Satz 23. Sei $\gamma:(-\epsilon, \epsilon) \rightarrow G$ eine 1-Parameter-Semigruppe. Dann lässt sich $\gamma$ eindeutig fortsetzen zu einer 1-Parameter-Untergruppe $\tilde{\gamma}$ : $\mathbb{R} \rightarrow G$.
+
+Beweis. Eindeutigkeit: Angenommen $\tilde{\gamma}$ existiert. Dann gilt für alle $m \in \mathbb{N}, t \in \mathbb{R}$
+
+$$
+\tilde{\gamma}(t)=\tilde{\gamma}\left(m \cdot \frac{t}{m}\right)=\tilde{\gamma}\left(\frac{t}{m}\right)^{m}
+$$
+
+Ist $m$ genügend groß, so dass $\frac{t}{m} \in(-\epsilon, \epsilon)$, so folgt $\tilde{\gamma}(t)=\gamma\left(\frac{t}{m}\right)^{m}$. Das zeigt die Eindeutigkeit.
+
+Nun zur Existenz. Wir definieren $\tilde{\gamma}(t):=\gamma\left(\frac{t}{m}\right)^{m}$, wobei $m \in \mathbb{N}$ so groß ist, dass $\frac{t}{m} \in(-\epsilon, \epsilon)$. Zu zeigen: das ist wohldefiniert, also unabhängig von der Wahl von $m$. Sei $k \in \mathbb{N}$ mit $\frac{t}{k} \in(-\epsilon, \epsilon)$. Dann gilt
+
+$$
+\gamma\left(\frac{t}{k}\right)^{k}=\gamma\left(m \frac{t}{m k}\right)^{k}=\gamma\left(\frac{t}{m k}\right)^{m k}
+$$
+
+und
+
+$$
+\gamma\left(\frac{t}{m}\right)^{m}=\gamma\left(k \frac{t}{m k}\right)^{m}=\gamma\left(\frac{t}{m k}\right)^{m k} .
+$$
+
+Also ist $\gamma\left(\frac{t}{k}\right)^{k}=\gamma\left(\frac{t}{m}\right)^{m}$ und $\tilde{\gamma}$ ist wohldefiniert.\\
+Für $t, s \in \mathbb{R}$ wähle $m$ so groß, dass $\frac{t}{m}, \frac{s}{m}, \frac{t+s}{m} \in(-\epsilon, \epsilon)$. Dann ist
+
+$$
+\tilde{\gamma}(s+t)=\gamma\left(\frac{t+s}{m}\right)^{m}=\gamma\left(\frac{t}{m}\right)^{m} \gamma\left(\frac{s}{m}\right)^{m}=\tilde{\gamma}(t) \tilde{\gamma}(s)
+$$
+
+
+
+\begin{PROP}{LIE-B26-02-14}{Eindeutige Fortsetzung einer 1-Parameter-Semigruppe}
+Sei $G\subset \GL_n(\mathbb{K})$ eine Matrixgruppe und 
+$\gamma:(-\varepsilon,\varepsilon)\to G$ eine 1\,-Parameter-Semigruppe.
+Dann existiert genau eine 1\,-Parameter-Untergruppe
+\[
+\tilde{\gamma}:\mathbb{R}\longrightarrow G,\qquad
+\text{stetig mit }\ \tilde{\gamma}(s+t)=\tilde{\gamma}(s)\tilde{\gamma}(t)\ \ (\forall s,t\in\mathbb{R}),
+\]
+die $\gamma$ auf $(-\varepsilon,\varepsilon)$ fortsetzt.
+\end{PROP}
+
+
+
+\begin{PROOF}{LIE-B26-02-15}{P: Eindeutige Fortsetzung einer 1-Parameter-Semigruppe}
+\textbf{Eindeutigkeit.}
+Ist $\tilde{\gamma}$ eine Fortsetzung mit der Homomorphieeigenschaft,
+so gilt für $m\in\mathbb{N}$ und $t\in\mathbb{R}$:
+\[
+\tilde{\gamma}(t)=\tilde{\gamma}\!\left(m\cdot\frac{t}{m}\right)
+=\big(\tilde{\gamma}(t/m)\big)^{m}.
+\]
+Für $m$ so groß, dass $t/m\in(-\varepsilon,\varepsilon)$, folgt
+$\tilde{\gamma}(t)=\gamma(t/m)^{m}$. Damit ist $\tilde{\gamma}$ durch $\gamma$
+eindeutig bestimmt.
+
+\medskip
+\textbf{Existenz / Definition.}
+Für $t\in\mathbb{R}$ wähle $m\in\mathbb{N}$ mit $t/m\in(-\varepsilon,\varepsilon)$
+und setze
+\[
+\tilde{\gamma}(t):=\gamma(t/m)^{\,m}.
+\]
+\emph{Wohldefiniertheit:}
+Seien $m,k\in\mathbb{N}$ mit $t/m,t/k\in(-\varepsilon,\varepsilon)$. Dann
+\[
+\gamma(t/k)^{k}
+=\gamma\!\left(m\cdot \frac{t}{mk}\right)^{k}
+=\big(\gamma(t/(mk))^{\,m}\big)^{k}
+=\gamma(t/(mk))^{\,mk}
+=\big(\gamma(t/(mk))^{\,k}\big)^{m}
+=\gamma(t/m)^{m}.
+\]
+Also ist $\tilde{\gamma}$ wohldefiniert.
+
+\medskip
+\textbf{Homomorphieeigenschaft.}
+Für $s,t\in\mathbb{R}$ wähle $m\in\mathbb{N}$ mit
+$t/m,\ s/m,\ (s+t)/m \in(-\varepsilon,\varepsilon)$. Dann
+\[
+\tilde{\gamma}(s+t)=\gamma\!\left(\tfrac{s+t}{m}\right)^{m}
+=\big(\gamma(s/m)\,\gamma(t/m)\big)^{m}
+=\gamma(s/m)^{m}\,\gamma(t/m)^{m}
+=\tilde{\gamma}(s)\,\tilde{\gamma}(t),
+\]
+wobei die Semigruppeneigenschaft von $\gamma$ auf $(-\varepsilon,\varepsilon)$ benutzt wurde.
+
+\medskip
+\textbf{Stetigkeit.}
+Stetigkeit an $0$: Sei $t\to 0$. Wähle $m$ so groß, dass 
+$t/m\in(-\varepsilon,\varepsilon)$ und $|t|$ so klein, dass ein fixes $m$ genügt.
+Dann
+\[
+\tilde{\gamma}(t)=\gamma(t/m)^{\,m}\to \gamma(0)^{\,m}=I^{m}=I=\tilde{\gamma}(0),
+\]
+da $\gamma$ in $0$ stetig ist. Für allgemeines $t_0$ nutze Homomorphie:
+\[
+\tilde{\gamma}(t)=\tilde{\gamma}\big((t-t_0)+t_0\big)
+=\tilde{\gamma}(t-t_0)\,\tilde{\gamma}(t_0)\xrightarrow[t\to t_0]{}\tilde{\gamma}(0)\,\tilde{\gamma}(t_0)=\tilde{\gamma}(t_0).
+\]
+Damit ist $\tilde{\gamma}$ stetig auf $\mathbb{R}$.
+
+\medskip
+Somit ist $\tilde{\gamma}:\mathbb{R}\to G$ eine stetige Gruppenhomomorphie
+von $(\mathbb{R},+)$ nach $G$ und eine Fortsetzung von $\gamma$, und wegen des ersten Teils eindeutig.
+\end{PROOF}
+
+
+
+Theorem 24. Jede 1-Parameter-Gruppe $\gamma: \mathbb{R} \rightarrow G$ hat die Form $\gamma(t)=\exp (t A)$ mit $A \in M_{n}(\mathbb{K})$.
+
+Beweis. Ist $A=\gamma^{\prime}(0)$, so erfüllt $\gamma$ die DFL $\gamma^{\prime}(t)=A \gamma(t), \gamma(0)=$ Id. Die eindeutige Lösung ist $\gamma(t)=\exp (t A)$.
+
+
+
+\begin{THEO}{LIE-B26-02-16}{Charakterisierung von 1\,-Parameter-Gruppen durch $\exp$-Abbildung}
+Sei $G\subset \GL_n(\mathbb{K})$ eine Matrixgruppe. Jede 1\,-Parameter-Gruppe 
+$\gamma:\mathbb{R}\to G$ besitzt die Form
+\[
+\gamma(t)=\exp(tA)\quad\text{für ein eindeutig bestimmtes }A\in M_n(\mathbb{K}).
+\]
+\end{THEO}
+
+
+
+\begin{PROOF}{LIE-B26-02-17}{P: Charakterisierung von 1\,-Parameter-Gruppen durch $\exp$-Abbildung}
+Setze $A:=\gamma'(0)\in M_n(\mathbb{K})$, deren Existenz aus der
+Gruppenstruktur von $\gamma$ folgt. Nach Proposition \textsc{GRP-LIN-02} gilt für alle $t\in\mathbb{R}$:
+\[
+\gamma'(t)=\gamma'(0)\,\gamma(t)=A\,\gamma(t),\qquad \gamma(0)=I.
+\]
+Damit ist $\gamma$ Lösung des linearen Matrix-AWPs
+\[
+\alpha'(t)=A\,\alpha(t),\qquad \alpha(0)=I.
+\]
+Die eindeutige (globale) Lösung dieses Anfangswertproblems ist bekanntlich
+$\alpha(t)=\exp(tA)$ (vgl.\ Definition der Matrix-Exponentialfunktion und
+Satz zur Eindeutigkeit linearer Systeme). Also $\gamma(t)=\exp(tA)$ für alle $t$.
+
+\emph{Eindeutigkeit von $A$:}
+Aus $\gamma(t)=\exp(tA)=\exp(tB)$ für alle $t$ folgt durch Ableiten in $t=0$,
+dass $A=\gamma'(0)=B$.
+\end{PROOF}
+
+
+
+\pagebreak
+\printbibliography
+\end{document}
