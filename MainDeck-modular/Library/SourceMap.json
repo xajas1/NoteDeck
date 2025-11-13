@@ -1,6 +1,7 @@
 {
   "GPDE_Andrews11/GPDE_Andrews11.tex": "A11",
   "FA_Ackermann25/FA_Ackermann25.tex": "A25",
+  "LIE_Baker02/LIE_Baker02.tex": "B02",
   "SG_Bär11/SG_Bär11.tex": "B11",
   "KNO_Burde14/KNO_Burde14.tex": "B14",
   "RG_Bernig25/RG_Bernig25.tex": "B25",
@@ -22,6 +23,7 @@
   "GA_Lee13/GA_Lee13.tex": "L13",
   "DT_Milnor65/DT_Milnor65.tex": "M65",
   "RS_Möller25/RS_Möller25.tex": "M25",
+  "QFT_Philipsen18/QFT_Philipsen18.tex": "P18",
   "HA_Rotman79/HA_Rotman79.tex": "R79",
   "QMS_Rischke25/QMS_Rischke25.tex": "R25",
   "KNO_Scharlemann92/KNO_Scharlemann92.tex": "S92",

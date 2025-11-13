@@ -1,0 +1,49 @@
+Um zu zeigen, dass der Strom $j^\mu(x) = \bar{\psi} \gamma^\mu \psi$ die Kontinuitätsgleichung $\partial_\mu j^\mu(x) = 0$ erfüllt, beginnen wir mit der Dirac-Gleichung für das Dirac-Feld $\psi(x)$:
+
+\[
+(i \gamma^\mu \partial_\mu - m) \psi(x) = 0.
+\]
+
+Die adjungierte Dirac-Gleichung für das adjungierte Feld $\bar{\psi}(x) = \psi^\dagger(x) \gamma^0$ lautet:
+
+\[
+\bar{\psi}(x) (i \overleftarrow{\partial_\mu} \gamma^\mu + m) = 0,
+\]
+
+wobei $\overleftarrow{\partial_\mu}$ die Ableitung ist, die nach links wirkt. Um die Kontinuitätsgleichung zu überprüfen, berechnen wir die Divergenz des Stroms:
+
+\[
+\partial_\mu j^\mu(x) = \partial_\mu (\bar{\psi} \gamma^\mu \psi).
+\]
+
+Anwenden der Produktregel ergibt:
+
+\[
+\partial_\mu j^\mu(x) = (\partial_\mu \bar{\psi}) \gamma^\mu \psi + \bar{\psi} \gamma^\mu (\partial_\mu \psi).
+\]
+
+Verwenden wir nun die Dirac-Gleichung und ihre adjungierte Form, um die Ableitungen zu ersetzen. Für $\partial_\mu \psi$ ergibt sich aus der Dirac-Gleichung:
+
+\[
+\partial_\mu \psi = -i \gamma_\mu^{-1} m \psi.
+\]
+
+Für $\partial_\mu \bar{\psi}$ ergibt sich aus der adjungierten Dirac-Gleichung:
+
+\[
+\partial_\mu \bar{\psi} = i \bar{\psi} \gamma_\mu^{-1} m.
+\]
+
+Setzen wir diese Ausdrücke in die Divergenz ein:
+
+\[
+\partial_\mu j^\mu(x) = (i \bar{\psi} \gamma_\mu^{-1} m) \gamma^\mu \psi + \bar{\psi} \gamma^\mu (-i \gamma_\mu^{-1} m \psi).
+\]
+
+Da $\gamma^\mu \gamma_\mu^{-1} = 1$, vereinfacht sich der Ausdruck zu:
+
+\[
+\partial_\mu j^\mu(x) = i \bar{\psi} m \psi - i \bar{\psi} m \psi = 0.
+\]
+
+Somit ist gezeigt, dass die Divergenz des Stroms verschwindet, und der Strom $j^\mu(x)$ erfüllt die Kontinuitätsgleichung $\partial_\mu j^\mu(x) = 0$.

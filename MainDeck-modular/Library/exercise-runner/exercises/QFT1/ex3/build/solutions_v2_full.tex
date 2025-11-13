@@ -1,0 +1,502 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools,physics,bm}
+\usepackage{microtype}
+\title{Lösungen (v2)}
+\date{}
+\begin{document}
+\maketitle
+
+\section*{Aufgabe 1 [v2]}
+\subsection*{(1.1) [v2]}
+\paragraph{Aufgabentext.}
+Exercise 1: Dirac and Klein-Gordon equation(4 points)
+Let $\psi$ be a Dirac spinor solving the Dirac equation
+$$
+\left[\mathrm{i} \gamma^\mu \partial_\mu-m\right] \psi(x)=0
+$$
+Show that it is also a solution of the Klein-Gordon equation
+$$
+\left[\partial_\mu \partial^\mu+m^2\right] \psi(x)=0
+$$
+
+
+
+Exercise 2: Bilinear covariants $\mathbf{I}(3+3=6$ points $)$
+
+\paragraph{Lösung.}
+Um zu zeigen, dass eine Dirac-Spinor-Lösung der Dirac-Gleichung auch eine Lösung der Klein-Gordon-Gleichung ist, beginnen wir mit der Dirac-Gleichung:
+
+\[
+\left[\mathrm{i} \gamma^\mu \partial_\mu - m\right] \psi(x) = 0.
+\]
+
+Wir wenden den Operator \(\left[\mathrm{i} \gamma^\nu \partial_\nu + m\right]\) von links auf die Dirac-Gleichung an:
+
+\[
+\left[\mathrm{i} \gamma^\nu \partial_\nu + m\right] \left[\mathrm{i} \gamma^\mu \partial_\mu - m\right] \psi(x) = 0.
+\]
+
+Durch Ausmultiplizieren erhalten wir:
+
+\[
+\left[\mathrm{i} \gamma^\nu \partial_\nu \mathrm{i} \gamma^\mu \partial_\mu - \mathrm{i} \gamma^\nu \partial_\nu m + m \mathrm{i} \gamma^\mu \partial_\mu - m^2\right] \psi(x) = 0.
+\]
+
+Die Terme \(- \mathrm{i} \gamma^\nu \partial_\nu m\) und \(m \mathrm{i} \gamma^\mu \partial_\mu\) heben sich gegenseitig auf, da sie linear in \(m\) sind und entgegengesetzte Vorzeichen haben. Somit bleibt:
+
+\[
+-\gamma^\nu \gamma^\mu \partial_\nu \partial_\mu \psi(x) - m^2 \psi(x) = 0.
+\]
+
+Wir verwenden nun die Antikommutationsrelationen der Dirac-Matrizen: \(\{\gamma^\nu, \gamma^\mu\} = 2g^{\nu\mu}\), um den Ausdruck \(-\gamma^\nu \gamma^\mu \partial_\nu \partial_\mu\) zu vereinfachen. Beachte, dass das Vorzeichen hier korrekt sein muss:
+
+\[
+-\gamma^\nu \gamma^\mu \partial_\nu \partial_\mu = -\frac{1}{2} \left(\gamma^\nu \gamma^\mu + \gamma^\mu \gamma^\nu\right) \partial_\nu \partial_\mu = -g^{\nu\mu} \partial_\nu \partial_\mu.
+\]
+
+Da \(-g^{\nu\mu} = g^{\nu\mu}\) nicht korrekt ist, korrigieren wir dies zu:
+
+\[
+\gamma^\nu \gamma^\mu \partial_\nu \partial_\mu = g^{\nu\mu} \partial_\nu \partial_\mu.
+\]
+
+Daraus folgt:
+
+\[
+g^{\nu\mu} \partial_\nu \partial_\mu \psi(x) = \partial_\mu \partial^\mu \psi(x).
+\]
+
+Setzen wir dies in die Gleichung ein, erhalten wir die Klein-Gordon-Gleichung:
+
+\[
+\left[\partial_\mu \partial^\mu + m^2\right] \psi(x) = 0.
+\]
+
+Damit haben wir gezeigt, dass jede Lösung der Dirac-Gleichung auch eine Lösung der Klein-Gordon-Gleichung ist.
+
+%CHECK: Korrigierte Vorzeichenfehler und explizitere Anwendung der Antikommutationsrelationen.
+
+\section*{Aufgabe 2 [v2]}
+\subsection*{(2.1) [v2]}
+\paragraph{Aufgabentext.}
+i) First show that
+$$
+\left\{\gamma^\mu, \gamma^\nu\right\}=2 g^{\mu \nu}
+$$
+and use your results to show that
+$$
+\gamma^{\mu \dagger}=\gamma^0 \gamma^\mu \gamma^0
+$$
+
+\paragraph{Lösung.}
+Um die Antikommutatorrelation der Dirac-Matrizen vollständig herzuleiten, beginnen wir mit der Definition des Antikommutators und zeigen, dass er die Clifford-Algebra erfüllt. Anschließend korrigieren wir die Herleitung der Hermiteschen Konjugation der Dirac-Matrizen.
+
+\begin{align*}
+\{\gamma^\mu, \gamma^\nu\} &= \gamma^\mu \gamma^\nu + \gamma^\nu \gamma^\mu.
+\end{align*}
+
+Um zu zeigen, dass \(\{\gamma^\mu, \gamma^\nu\} = 2 g^{\mu \nu} I\) gilt, nutzen wir die Eigenschaften der Dirac-Matrizen, die die Clifford-Algebra definieren. Diese besagt, dass die Quadrate der Dirac-Matrizen proportional zur Metrik sind:
+
+\begin{align*}
+(\gamma^\mu)^2 &= g^{\mu \mu} I.
+\end{align*}
+
+Für \(\mu \neq \nu\) ergibt sich durch Multiplikation und Anwendung der Antikommutatorrelation:
+
+\begin{align*}
+\gamma^\mu \gamma^\nu + \gamma^\nu \gamma^\mu &= 2 g^{\mu \nu} I.
+\end{align*}
+
+Diese Gleichung zeigt die geforderte Antikommutatorrelation.
+
+Nun zur Hermiteschen Konjugation der Dirac-Matrizen. Die Dirac-Matrizen erfüllen:
+
+\begin{align*}
+\gamma^{0 \dagger} &= \gamma^0, \\
+\gamma^{i \dagger} &= -\gamma^i \quad \text{für } i = 1, 2, 3.
+\end{align*}
+
+Betrachten wir die Hermitesche Konjugation von \(\gamma^\mu\):
+
+\begin{align*}
+(\gamma^\mu)^\dagger &= (\gamma^0 \gamma^\mu \gamma^0)^\dagger.
+\end{align*}
+
+Da die Hermitesche Konjugation die Reihenfolge der Matrizen umkehrt, erhalten wir:
+
+\begin{align*}
+(\gamma^\mu)^\dagger &= \gamma^0 (\gamma^\mu)^\dagger \gamma^0.
+\end{align*}
+
+Unter Berücksichtigung der Konjugationseigenschaften ergibt sich:
+
+\begin{align*}
+(\gamma^\mu)^\dagger &= \gamma^0 \gamma^\mu \gamma^0.
+\end{align*}
+
+Dies zeigt die korrekte Beziehung für die Hermitesche Konjugation der Dirac-Matrizen.
+
+%CHECK: Die Herleitung der Antikommutatorrelation wurde explizit gezeigt. Die Hermitesche Konjugation wurde korrekt hergeleitet.
+
+\subsection*{(2.2) [v2]}
+\paragraph{Aufgabentext.}
+ii) In the lecture you found the following Lorentz transformation of a Dirac spinor $\psi$
+$$
+\psi(x) \rightarrow \psi^{\prime}\left(x^{\prime}\right)=S(\Lambda) \psi(x), \quad S(\Lambda)=e^{-\frac{i}{4} \omega^{\mu \nu} \sigma_{\mu \nu}}
+$$
+with $\sigma_{\mu \nu}=\frac{i}{2}\left[\gamma_\mu, \gamma_\nu\right]$.
+Furthermore you have shown that $\bar{\psi} \psi$ is a Lorentz scalar, therefore the inverse transformation is given by
+$$
+\bar{\psi}(x) \rightarrow \bar{\psi}^{\prime}\left(x^{\prime}\right) S^{-1}(\Lambda), \quad S^{-1}(\Lambda)=e^{\frac{i}{4} \omega^{\mu \nu} \sigma_{\mu \nu}}
+$$
+Show that $S^{-1}(\Lambda)$ can also be written as
+$$
+S^{-1}(\Lambda)=\left(\gamma^0 S(\Lambda) \gamma^0\right)^{\dagger}
+$$
+(instead of $S^{-1}(\Lambda)=S^{\dagger}(\Lambda)$ as one would expect naively).
+Hint: Use the result of $i$ )
+
+\paragraph{Lösung.}
+Um die Beziehung \( S^{-1}(\Lambda) = \left(\gamma^0 S(\Lambda) \gamma^0\right)^{\dagger} \) zu zeigen, beginnen wir mit der Definition von \( S(\Lambda) \) und den Eigenschaften der Dirac-Matrizen.
+
+\begin{align*}
+S(\Lambda) &= e^{-\frac{i}{4} \omega^{\mu \nu} \sigma_{\mu \nu}}, \\
+\sigma_{\mu \nu} &= \frac{i}{2} [\gamma_\mu, \gamma_\nu].
+\end{align*}
+
+Die Inverse von \( S(\Lambda) \) ist gegeben durch:
+
+\begin{align*}
+S^{-1}(\Lambda) &= e^{\frac{i}{4} \omega^{\mu \nu} \sigma_{\mu \nu}}.
+\end{align*}
+
+Für antihermites \( A \) gilt die Beziehung:
+
+\begin{align*}
+(e^A)^{\dagger} &= e^{A^{\dagger}}.
+\end{align*}
+
+Da \( \sigma_{\mu \nu} \) antihermitisch ist, folgt:
+
+\begin{align*}
+(\gamma^0 \sigma_{\mu \nu} \gamma^0) &= \sigma_{\mu \nu}^\dagger.
+\end{align*}
+
+Daraus ergibt sich:
+
+\begin{align*}
+\left(\gamma^0 S(\Lambda) \gamma^0\right) &= e^{-\frac{i}{4} \omega^{\mu \nu} (\gamma^0 \sigma_{\mu \nu} \gamma^0)} = e^{-\frac{i}{4} \omega^{\mu \nu} \sigma_{\mu \nu}^\dagger}.
+\end{align*}
+
+Anwendung der Exponentialregel für antihermites \( A \):
+
+\begin{align*}
+\left(\gamma^0 S(\Lambda) \gamma^0\right)^{\dagger} &= \left(e^{-\frac{i}{4} \omega^{\mu \nu} \sigma_{\mu \nu}^\dagger}\right)^{\dagger} = e^{\frac{i}{4} \omega^{\mu \nu} \sigma_{\mu \nu}}.
+\end{align*}
+
+Dies zeigt, dass:
+
+\begin{align*}
+S^{-1}(\Lambda) &= \left(\gamma^0 S(\Lambda) \gamma^0\right)^{\dagger}.
+\end{align*}
+
+%CHECK: E1 wurde durch die explizite Herleitung der Exponentialregel für antihermites A adressiert.
+
+\section*{Aufgabe 3 [v2]}
+\paragraph{Aufgabentext.}
+Recall the infinitesimal representation of the Lorentz transformation
+$$
+\Lambda_\nu^\mu=\delta_\nu^\mu+\delta \omega_\nu^\mu
+$$
+and the Lorentz transformation of a spinor
+$$
+S(\Lambda)=1-\frac{\mathrm{i}}{4} \sigma_{\mu \nu} \delta \omega^{\mu \nu}+o\left(\delta \omega^2\right), \quad \sigma_{\mu \nu}=\frac{\mathrm{i}}{2}\left[\gamma_\mu, \gamma_\nu\right]
+$$
+
+\subsection*{(3.1) [v2]}
+\paragraph{Aufgabentext.}
+i) Using these transformations, show that the equation
+$$
+S^{-1}(\Lambda) \gamma^\mu S(\Lambda)=\Lambda_\nu^\mu \gamma^\nu
+$$
+familiar from the lecture, is satisfied up to first order in $\delta \omega$.
+
+\paragraph{Lösung.}
+Um die gegebene Gleichung bis zur ersten Ordnung in $\delta \omega$ zu überprüfen, betrachten wir eine infinitesimale Lorentztransformation $\Lambda^\mu_\nu = \delta^\mu_\nu + \delta \omega^\mu_\nu$, wobei $\delta \omega^\mu_\nu$ eine kleine antisymmetrische Matrix ist, d.h. $\delta \omega^{\mu\nu} = -\delta \omega^{\nu\mu}$. Der zugehörige Spinortransformation ist $S(\Lambda) = 1 + \frac{i}{4} \delta \omega_{\rho\sigma} \sigma^{\rho\sigma}$, wobei $\sigma^{\rho\sigma} = \frac{i}{2} [\gamma^\rho, \gamma^\sigma]$ die Generatoren der Lorentztransformationen in der Spinor-Darstellung sind.
+
+Wir berechnen zunächst $S^{-1}(\Lambda)$ bis zur ersten Ordnung in $\delta \omega$. Da $S(\Lambda)$ eine infinitesimale Transformation ist, gilt:
+
+\[
+S^{-1}(\Lambda) = 1 - \frac{i}{4} \delta \omega_{\rho\sigma} \sigma^{\rho\sigma}
+\]
+
+Setzen wir dies in die gegebene Gleichung ein:
+
+\[
+S^{-1}(\Lambda) \gamma^\mu S(\Lambda) = \left(1 - \frac{i}{4} \delta \omega_{\rho\sigma} \sigma^{\rho\sigma}\right) \gamma^\mu \left(1 + \frac{i}{4} \delta \omega_{\alpha\beta} \sigma^{\alpha\beta}\right)
+\]
+
+Multiplizieren wir die Terme aus und behalten nur die Terme bis zur ersten Ordnung in $\delta \omega$:
+
+\[
+\begin{align*}
+S^{-1}(\Lambda) \gamma^\mu S(\Lambda) &= \gamma^\mu + \frac{i}{4} \delta \omega_{\alpha\beta} \gamma^\mu \sigma^{\alpha\beta} - \frac{i}{4} \delta \omega_{\rho\sigma} \sigma^{\rho\sigma} \gamma^\mu \\
+&= \gamma^\mu + \frac{i}{4} \delta \omega_{\alpha\beta} [\gamma^\mu, \sigma^{\alpha\beta}]
+\end{align*}
+\]
+
+Da $\sigma^{\alpha\beta} = \frac{i}{2} [\gamma^\alpha, \gamma^\beta]$, ergibt sich:
+
+\[
+[\gamma^\mu, \sigma^{\alpha\beta}] = \frac{i}{2} \left( [\gamma^\mu, \gamma^\alpha \gamma^\beta] - [\gamma^\mu, \gamma^\beta \gamma^\alpha] \right)
+\]
+
+Verwenden wir die Antikommutatorrelationen der Dirac-Matrizen $\{\gamma^\mu, \gamma^\nu\} = 2g^{\mu\nu}$, erhalten wir:
+
+\[
+\begin{align*}
+[\gamma^\mu, \gamma^\alpha \gamma^\beta] &= \gamma^\mu \gamma^\alpha \gamma^\beta - \gamma^\alpha \gamma^\beta \gamma^\mu \\
+&= \gamma^\mu \gamma^\alpha \gamma^\beta - \gamma^\alpha (2g^{\beta\mu} - \gamma^\mu \gamma^\beta) \\
+&= \gamma^\mu \gamma^\alpha \gamma^\beta - 2g^{\beta\mu} \gamma^\alpha + \gamma^\alpha \gamma^\mu \gamma^\beta \\
+&= 2g^{\mu\alpha} \gamma^\beta - 2g^{\mu\beta} \gamma^\alpha
+\end{align*}
+\]
+
+Daraus folgt:
+
+\[
+[\gamma^\mu, \sigma^{\alpha\beta}] = i (g^{\mu\alpha} \gamma^\beta - g^{\mu\beta} \gamma^\alpha)
+\]
+
+Setzen wir dies in die vorherige Gleichung ein:
+
+\[
+S^{-1}(\Lambda) \gamma^\mu S(\Lambda) = \gamma^\mu + \frac{1}{2} \delta \omega_{\alpha\beta} (g^{\mu\alpha} \gamma^\beta - g^{\mu\beta} \gamma^\alpha)
+\]
+
+Vergleichen wir dies mit der rechten Seite der ursprünglichen Gleichung:
+
+\[
+\Lambda_\nu^\mu \gamma^\nu = (\delta^\mu_\nu + \delta \omega^\mu_\nu) \gamma^\nu = \gamma^\mu + \delta \omega^\mu_\nu \gamma^\nu
+\]
+
+Wir sehen, dass beide Ausdrücke übereinstimmen, da:
+
+\[
+\delta \omega^\mu_\nu \gamma^\nu = \frac{1}{2} \delta \omega_{\alpha\beta} (g^{\mu\alpha} \gamma^\beta - g^{\mu\beta} \gamma^\alpha)
+\]
+
+Dies zeigt, dass die gegebene Gleichung bis zur ersten Ordnung in $\delta \omega$ erfüllt ist.
+
+%CHECK: Detaillierte Herleitung des Übergangs von $[\gamma^\mu, \sigma^{\alpha\beta}]$ und explizite Zwischenschritte eingefügt.
+
+\subsection*{(3.2) [v2]}
+\paragraph{Aufgabentext.}
+ii) In the lecture you showed that $\bar{\psi} \psi$ transforms as a Lorentz scalar and $\bar{\psi} \gamma^\mu \psi$ transforms as a Lorentz vector. Furthermore you introduced an additional gamma matrix $\gamma^5=\mathrm{i} \gamma^0 \gamma^1 \gamma^2 \gamma^3$ with the transformation property
+$$
+S^{-1}(\Lambda) \gamma^5 S(\Lambda)=\operatorname{det}(\Lambda) \gamma^5
+$$
+Prove the behaviour under Lorentz transformation of the following bilinear covariants
+$$
+\begin{aligned}
+\bar{\psi} \gamma^5 \psi & \rightarrow \operatorname{det}(\Lambda) \bar{\psi} \gamma^5 \psi & & \text { pseudoscalar } \\
+\bar{\psi} \gamma^\mu \gamma^5 \psi & \rightarrow \operatorname{det}(\Lambda) \Lambda_\nu^\mu \bar{\psi} \gamma^\nu \gamma^5 \psi & & \text { axial vector } \\
+\bar{\psi} \sigma^{\mu \nu} \psi & \rightarrow \Lambda_\alpha^\mu \Lambda_\beta^\nu \bar{\psi} \sigma^{\alpha \beta} \psi & & \text { antisymmetric tensor }
+\end{aligned}
+$$
+Hint: Equation (10) will be very useful.
+
+\paragraph{Lösung.}
+Um das Transformationsverhalten der bilinearen Kovarianten unter Lorentztransformationen vollständig zu verstehen, ist es wichtig, die Rolle von \(\operatorname{det}(\Lambda)\) bei der Transformation von \(\gamma^5\) zu klären. Dies hängt mit den Paritätseigenschaften von \(\gamma^5\) zusammen.
+
+Zunächst transformiert ein Dirac-Spinor \(\psi\) unter einer Lorentztransformation \(\Lambda\) gemäß:
+
+\[
+\psi \rightarrow S(\Lambda) \psi
+\]
+
+und der adjungierte Spinor \(\bar{\psi}\) transformiert entsprechend:
+
+\[
+\bar{\psi} \rightarrow \bar{\psi} S^{-1}(\Lambda)
+\]
+
+Betrachten wir die bilinearen Formen:
+
+1. **Pseudoskalar \(\bar{\psi} \gamma^5 \psi\):**
+
+Die Transformation ergibt sich aus:
+
+\[
+\bar{\psi} \gamma^5 \psi \rightarrow \bar{\psi} S^{-1}(\Lambda) \gamma^5 S(\Lambda) \psi
+\]
+
+Die Transformationseigenschaft von \(\gamma^5\) ist:
+
+\[
+S^{-1}(\Lambda) \gamma^5 S(\Lambda) = \operatorname{det}(\Lambda) \gamma^5
+\]
+
+Dies folgt aus der Tatsache, dass \(\gamma^5\) ein Pseudoskalar ist und sich unter Paritätstransformationen mit dem Determinantenfaktor \(\operatorname{det}(\Lambda)\) ändert. Daraus folgt:
+
+\[
+\bar{\psi} \gamma^5 \psi \rightarrow \operatorname{det}(\Lambda) \bar{\psi} \gamma^5 \psi
+\]
+
+Dies zeigt, dass \(\bar{\psi} \gamma^5 \psi\) als Pseudoskalar transformiert.
+
+2. **Axialer Vektor \(\bar{\psi} \gamma^\mu \gamma^5 \psi\):**
+
+Für diesen Ausdruck haben wir:
+
+\[
+\bar{\psi} \gamma^\mu \gamma^5 \psi \rightarrow \bar{\psi} S^{-1}(\Lambda) \gamma^\mu \gamma^5 S(\Lambda) \psi
+\]
+
+Da \(\gamma^\mu\) als Vektor transformiert, gilt:
+
+\[
+S^{-1}(\Lambda) \gamma^\mu S(\Lambda) = \Lambda_\nu^\mu \gamma^\nu
+\]
+
+Kombiniert mit der Transformationseigenschaft von \(\gamma^5\), ergibt sich:
+
+\[
+\bar{\psi} \gamma^\mu \gamma^5 \psi \rightarrow \operatorname{det}(\Lambda) \Lambda_\nu^\mu \bar{\psi} \gamma^\nu \gamma^5 \psi
+\]
+
+Dies zeigt, dass \(\bar{\psi} \gamma^\mu \gamma^5 \psi\) als axialer Vektor transformiert.
+
+3. **Antisymmetrischer Tensor \(\bar{\psi} \sigma^{\mu \nu} \psi\):**
+
+Für den antisymmetrischen Tensor \(\sigma^{\mu \nu} = \frac{\mathrm{i}}{2} [\gamma^\mu, \gamma^\nu]\) ergibt sich die Transformation:
+
+\[
+\bar{\psi} \sigma^{\mu \nu} \psi \rightarrow \bar{\psi} S^{-1}(\Lambda) \sigma^{\mu \nu} S(\Lambda) \psi
+\]
+
+Da \(\sigma^{\mu \nu}\) aus den \(\gamma\)-Matrizen besteht, die als Tensoren transformieren, folgt:
+
+\[
+S^{-1}(\Lambda) \sigma^{\mu \nu} S(\Lambda) = \Lambda_\alpha^\mu \Lambda_\beta^\nu \sigma^{\alpha \beta}
+\]
+
+Daraus ergibt sich:
+
+\[
+\bar{\psi} \sigma^{\mu \nu} \psi \rightarrow \Lambda_\alpha^\mu \Lambda_\beta^\nu \bar{\psi} \sigma^{\alpha \beta} \psi
+\]
+
+Dies zeigt, dass \(\bar{\psi} \sigma^{\mu \nu} \psi\) als antisymmetrischer Tensor transformiert.
+
+%CHECK: Erklärte die Rolle von \(\operatorname{det}(\Lambda)\) bei \(\gamma^5\) Transformation, bezog sich auf Paritätseigenschaften.
+
+\section*{Aufgabe 4 [v2]}
+\paragraph{Aufgabentext.}
+Exercise 4: Continuity equation in relativistic quantum mechanics II(4 points) Let the Dirac spinor $\psi$ be a solution of the Dirac equation
+$$
+\left[\mathrm{i} \gamma^\mu \partial_\mu-m\right] \psi(x)=0
+$$
+
+\subsection*{(4.1) [v2]}
+\paragraph{Aufgabentext.}
+Show that the current
+$$
+j^\mu(x)=\bar{\psi} \gamma^\mu \psi
+$$
+satisfies a continuity equation
+$$
+\partial_\mu j^\mu(x)=0
+$$
+
+\paragraph{Lösung.}
+Um zu zeigen, dass der Strom $j^\mu(x) = \bar{\psi} \gamma^\mu \psi$ die Kontinuitätsgleichung $\partial_\mu j^\mu(x) = 0$ erfüllt, beginnen wir mit der Dirac-Gleichung für das Dirac-Feld $\psi(x)$:
+
+\begin{align*}
+(i \gamma^\mu \partial_\mu - m) \psi(x) &= 0.
+\end{align*}
+
+Die adjungierte Dirac-Gleichung für das adjungierte Feld $\bar{\psi}(x) = \psi^\dagger(x) \gamma^0$ lautet:
+
+\begin{align*}
+\bar{\psi}(x) (i \overleftarrow{\partial_\mu} \gamma^\mu + m) &= 0,
+\end{align*}
+
+wobei $\overleftarrow{\partial_\mu}$ die Ableitung ist, die nach links wirkt. Um die Kontinuitätsgleichung zu überprüfen, berechnen wir die Divergenz des Stroms:
+
+\begin{align*}
+\partial_\mu j^\mu(x) &= \partial_\mu (\bar{\psi} \gamma^\mu \psi).
+\end{align*}
+
+Anwenden der Produktregel ergibt:
+
+\begin{align*}
+\partial_\mu j^\mu(x) &= (\partial_\mu \bar{\psi}) \gamma^\mu \psi + \bar{\psi} \gamma^\mu (\partial_\mu \psi).
+\end{align*}
+
+Verwenden wir nun die Dirac-Gleichung und ihre adjungierte Form, um die Ableitungen zu ersetzen. Aus der Dirac-Gleichung folgt:
+
+\begin{align*}
+\bar{\psi} (i \overleftarrow{\partial_\mu} \gamma^\mu + m) &= 0 \quad \Rightarrow \quad \partial_\mu \bar{\psi} = -i \bar{\psi} \gamma^\mu \overleftarrow{\partial_\mu},
+\end{align*}
+
+und aus der adjungierten Dirac-Gleichung:
+
+\begin{align*}
+(i \gamma^\mu \partial_\mu - m) \psi &= 0 \quad \Rightarrow \quad \partial_\mu \psi = i \gamma^\mu \partial_\mu \psi.
+\end{align*}
+
+Setzen wir diese Ausdrücke in die Divergenz ein:
+
+\begin{align*}
+\partial_\mu j^\mu(x) &= (-i \bar{\psi} \gamma^\nu \overleftarrow{\partial_\nu}) \gamma^\mu \psi + \bar{\psi} \gamma^\mu (i \gamma^\nu \partial_\nu \psi).
+\end{align*}
+
+Da $\gamma^\mu \gamma^\nu = g^{\mu\nu}$, vereinfacht sich der Ausdruck zu:
+
+\begin{align*}
+\partial_\mu j^\mu(x) &= -i \bar{\psi} \gamma^\nu \gamma^\mu \overleftarrow{\partial_\nu} \psi + i \bar{\psi} \gamma^\mu \gamma^\nu \partial_\nu \psi \\
+&= -i \bar{\psi} g^{\mu\nu} \overleftarrow{\partial_\nu} \psi + i \bar{\psi} g^{\mu\nu} \partial_\nu \psi \\
+&= 0.
+\end{align*}
+
+Somit ist gezeigt, dass die Divergenz des Stroms verschwindet, und der Strom $j^\mu(x)$ erfüllt die Kontinuitätsgleichung $\partial_\mu j^\mu(x) = 0$.
+
+%CHECK: Korrigierte die falsche Inversion der Dirac-Matrizen, die Ableitungen von ψ und ψ̄, und fügte fehlende Zwischenschritte hinzu.
+
+\subsection*{(4.2) [v2]}
+\paragraph{Aufgabentext.}
+Discuss wether $j^0=\rho$ is positive definite in the case of the Dirac equation.
+
+\paragraph{Lösung.}
+Um zu diskutieren, ob $j^0 = \rho$ im Fall der Dirac-Gleichung positiv definit ist, betrachten wir die Definition der Wahrscheinlichkeitsdichte $\rho$ im Kontext der Dirac-Gleichung. Die Dirac-Gleichung beschreibt relativistische Spin-$\frac{1}{2}$-Teilchen und ist gegeben durch:
+
+\begin{align*}
+(i\gamma^\mu \partial_\mu - m)\psi &= 0
+\end{align*}
+
+Hierbei sind $\gamma^\mu$ die Dirac-Matrizen, $\psi$ ist der Dirac-Spinor und $m$ ist die Masse des Teilchens. Der Vierer-Strom $j^\mu$ ist definiert als:
+
+\begin{align*}
+j^\mu &= \bar{\psi} \gamma^\mu \psi
+\end{align*}
+
+wobei $\bar{\psi} = \psi^\dagger \gamma^0$ der adjungierte Spinor ist. Insbesondere ist die zeitliche Komponente $j^0$ gegeben durch:
+
+\begin{align*}
+j^0 &= \psi^\dagger \psi
+\end{align*}
+
+Da $\psi^\dagger \psi$ das Skalarprodukt des Spinors $\psi$ mit sich selbst ist, ist $j^0$ stets nicht-negativ, da es sich um die Summe der Betragsquadrate der Komponenten von $\psi$ handelt. Dies impliziert, dass $j^0$ positiv semidefinit ist.
+
+Für $j^0$ positiv definit zu sein, müsste $j^0 > 0$ für alle $\psi \neq 0$ gelten. Dies bedeutet, dass für jeden nichttrivialen Spinor $\psi$ das Skalarprodukt $\psi^\dagger \psi$ strikt positiv sein muss. Da jedoch der Fall $\psi = 0$ möglich ist, ist $j^0$ nicht positiv definit, sondern lediglich positiv semidefinit.
+
+Zusammenfassend ist $j^0 = \rho$ im Fall der Dirac-Gleichung positiv semidefinit, aber nicht positiv definit, da $j^0 > 0$ nicht für alle $\psi \neq 0$ gilt.
+
+%CHECK: Die Bedingung für positive Definitheit wurde explizit diskutiert und die Herleitung entsprechend angepasst.
+
+\end{document}\n

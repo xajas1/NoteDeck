@@ -444,5 +444,35 @@
     "tableMeta": {
       "selectedSource": "LIE_Bernig26/LIE_Bernig26.tex"
     }
+  },
+  "SG_B11": {
+    "sourceFile": "SG_Bär11/SG_Bär11.tex",
+    "snipMeta": {
+      "Subject": "SG",
+      "Topic": "",
+      "LitID": "B11",
+      "CTyp": "DEF",
+      "ParentTopic": "",
+      "Content": "",
+      "selectedProject": "SG_Bär11/SG_Bär11.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "SG_Bär11/SG_Bär11.tex"
+    }
+  },
+  "LIE_B02": {
+    "sourceFile": "LIE_Baker02/LIE_Baker02.tex",
+    "snipMeta": {
+      "Subject": "LIE",
+      "Topic": "Lorentz Gruppe",
+      "LitID": "B02",
+      "CTyp": "THEO",
+      "ParentTopic": "",
+      "Content": "Dirac-Faktorisierung und Darstellung von \\(\\Cl_{3,1}\\)",
+      "selectedProject": "LIE_Baker02/LIE_Baker02.tex"
+    },
+    "tableMeta": {
+      "selectedSource": "LIE_Baker02/LIE_Baker02.tex"
+    }
   }
 }

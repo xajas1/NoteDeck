@@ -1,0 +1,20 @@
+{
+  "score": 0.7,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es gibt einige Fehler und Unklarheiten.",
+  "weaknesses": [
+    {
+      "code": "E1",
+      "msg": "Falsche Anwendung der Dirac-Gleichung auf die Ableitung von \\( \\psi \\)",
+      "math_hint": "\\( \\partial_\\mu \\psi = i \\gamma^\\mu \\partial_\\mu \\psi \\) ist nicht korrekt. Es sollte \\( \\partial_\\mu \\psi = i m \\psi \\) sein."
+    },
+    {
+      "code": "E2",
+      "msg": "Fehlerhafte Inversion der Dirac-Matrizen",
+      "math_hint": "Die Beziehung \\( \\gamma^\\mu \\gamma^\\nu = g^{\\mu\\nu} \\) ist nicht korrekt. Es sollte \\( \\gamma^\\mu \\gamma^\\nu + \\gamma^\\nu \\gamma^\\mu = 2g^{\\mu\\nu} \\) sein."
+    }
+  ],
+  "fix_suggestions": [
+    "\\begin{align*} \\partial_\\mu \\psi &= -i m \\psi \\end{align*}",
+    "\\begin{align*} \\gamma^\\mu \\gamma^\\nu + \\gamma^\\nu \\gamma^\\mu &= 2g^{\\mu\\nu} \\end{align*}"
+  ]
+}

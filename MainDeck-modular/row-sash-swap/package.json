@@ -1,0 +1,14 @@
+{
+  "name": "row-sash-swap",
+  "displayName": "Row Sash Swap",
+  "version": "0.0.1",
+  "publisher": "local",
+  "engines": { "vscode": "^1.80.0" },
+  "activationEvents": ["onCommand:rowSash.swapRows"],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      { "command": "rowSash.swapRows", "title": "Swap Top/Bottom Rows" }
+    ]
+  }
+}

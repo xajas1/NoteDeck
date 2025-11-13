@@ -44,12 +44,15 @@
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\C}{\mathbb{C}}
+\newcommand{\Cl}{\mathrm{Cl}}
 \newcommand{\entwurf}[1]{\textcolor{red}{#1}}
 \newcommand{\GL}{\mathrm{GL}}
+\newcommand{\Mat}{\mathrm{Mat}}
 \newcommand{\SL}{\mathrm{SL}}
 \newcommand{\SO}{\mathrm{SO}}
 \newcommand{\SU}{\mathrm{SU}}
 \newcommand{\Sp}{\mathrm{Sp}}
+\newcommand{\Spin}{\mathrm{Spin}}
 \newcommand{\Ogroup}{\mathrm{O}}
 \newcommand{\U}{\mathrm{U}}
 
@@ -60,6 +63,7 @@
 \usepackage{tikz}
 \usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
 \usepackage{tikz-cd}
+
 
 % --- 6. Tabellen und Aufzählungen ---
 \usepackage{enumitem}
@@ -223,9 +227,22 @@ Kurze Beschreibung …
 
 \pagebreak
 
-\section*{Spinors and the classical Dirac operator}
-\subsection*{Clifford algebras}
-Definition 2.1.1. Let $\mathbb{K}=\mathbb{R}$ or $\mathbb{C}$ and let $V$ be a finite-dimensional $\mathbb{K}$-vector space equipped with a symmetric bilinear form $\beta$.\\
+
+
+\section{Spinors and the classical Dirac operator}
+
+
+
+\subsection{Clifford algebras}
+
+
+
+Definition 2.1.1. 
+
+
+Let $\mathbb{K}=\mathbb{R}$ or $\mathbb{C}$ and let $V$ be a finite-dimensional $\mathbb{K}$-vector space equipped with a symmetric bilinear form $\beta$.
+
+
 A Clifford algebra for ( $V, \beta$ ) is a unital $\mathbb{K}$-algebra $A$ together with a linear map $\imath: V \rightarrow A$ such that the following properties hold:\\
 i) $\imath(v)^{2}=-\beta(v, v) \cdot 1, \quad$ for all $v \in V$,\\
 ii) ( $A, \imath$ ) is universal with respect to i), i.e.:
@@ -234,13 +251,174 @@ Whenever $A^{\prime}$ is a unital $\mathbb{K}$-algebra with a linear map $\imath
 \includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-071}\\
 commutes. In other words: $A$ is the smallest algebra that satisfies property i ).
 
+
+
+
+\begin{DEF}{SG-B11-01-01}{Clifford-Algebra (universelle Definition)}
+Sei $\mathbb K\in\{\mathbb R,\mathbb C\}$ und $(V,\beta)$ ein endlichdimensionaler
+$\mathbb K$-Vektorraum mit symmetrischer Bilinearform $\beta:V\times V\to\mathbb K$.
+Eine \emph{Clifford-Algebra} zu $(V,\beta)$ ist ein unitaler $\mathbb K$-Algebra
+$A$ zusammen mit einer linearen Abbildung $\iota:V\to A$ derart, dass
+\begin{enumerate}\itemsep0.2em
+\item[(i)] $\iota(v)^2=-\beta(v,v)\,1_A$ für alle $v\in V$,
+\item[(ii)] $(A,\iota)$ universell bzgl. (i) ist: Für jede unitalen $\mathbb K$-Algebra
+$A'$ und jede lineare Abbildung $\iota':V\to A'$ mit $(\iota'(v))^2=-\beta(v,v)\,1_{A'}$
+existiert genau ein Algebra-Homomorphismus $\phi:A\to A'$ mit $\phi\circ\iota=\iota'$, d.h. das Diagramm kommutiert
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+V \arrow[r, "\iota"] \arrow[dr, "\iota'"'] & A \arrow[d, "\phi"] \\
+& A'
+\end{tikzcd}
+\]
+\end{enumerate}
+$A$ heißt dann (bis eindeutigem Isomorphismus) die Clifford-Algebra und wird mit
+$\Cl(V,\beta)$ bezeichnet.
+\end{DEF}
+
+
+Konstruktion via Tensoralgebra
+
+\begin{DEF}{SG-B11-01-02}{Konstruktion von Clifford-Algebra durch Tensoralgebra}
+Sei $T(V)=\bigoplus_{k\ge0}V^{\otimes k}$ die Tensoralgebra und $1\in T(V)$ ihr Einselement.
+Sei $I\lhd T(V)$ das zweiseitig erzeugte Ideal durch die Elemente
+\[
+v\otimes v + \beta(v,v)\,1\qquad (v\in V).
+\]
+Setze
+\[
+\Cl(V,\beta)\ :=\ T(V)\big/I,\qquad \iota:V\hookrightarrow T(V)\twoheadrightarrow \Cl(V,\beta).
+\]
+Dann gilt:
+\begin{enumerate}\itemsep0.2em
+\item $\iota(v)^2= -\beta(v,v)\,1$ in $\Cl(V,\beta)$.
+\item $(\Cl(V,\beta),\iota)$ erfüllt die obige Universal­eigenschaft, d.\,h. es ist
+eine Clifford-Algebra zu $(V,\beta)$.
+\end{enumerate}
+
+
+\begin{proof}[Beweisskizze zur Universalität]
+(1) folgt direkt aus der Definition des Ideals $I$.
+Für (2): Sei $\iota':V\to A'$ linear mit $(\iota'(v))^2=-\beta(v,v)1$. Nach der
+Universal­eigenschaft der Tensoralgebra existiert ein eindeutiger Algebrahomomorphismus
+$\widehat{\iota'}:T(V)\to A'$ mit $\widehat{\iota'}|_V=\iota'$. Aus
+$\widehat{\iota'}(v\otimes v+\beta(v,v)1)=\iota'(v)^2+\beta(v,v)1=0$ folgt $I\subset\ker\widehat{\iota'}$,
+also faktorisiert $\widehat{\iota'}$ eindeutig zu einem Homomorphismus
+$\phi:\Cl(V,\beta)\to A'$ mit $\phi\circ\iota=\iota'$. Eindeutigkeit von $\phi$
+ist klar.
+\end{proof}
+\end{DEF}
+
+
+Bemerkungen und Standardfakten.
+
+\begin{DEF}{SG-B11-01-03}{Elementare Eigenschaften der Clifford Algebra}
+\begin{enumerate}\itemsep0.2em
+\item (Äquivalente Relationen) Aus Polarisation folgt in $\Cl(V,\beta)$ die Relation
+\[
+\iota(u)\iota(v)+\iota(v)\iota(u)=-2\,\beta(u,v)\,1\qquad(u,v\in V).
+\]
+\item (Graduierung/Filterung) $T(V)$ trägt die Längen­filtration; sie induziert eine
+Filtration auf $\Cl(V,\beta)$. Die assoziierte gradierte Algebra ist kanonisch isomorph
+zur Exterioralgebra: $\operatorname{gr}\Cl(V,\beta)\cong\Lambda V$.
+\item (Dimension) Ist $\beta$ nichtausgeartet und $\dim V=n$, so ist
+$\dim_{\mathbb K}\Cl(V,\beta)=2^n$.
+\item (Signkonvention) Manche Autoren verwenden $\iota(v)^2=+\beta(v,v)1$. Das führt
+zu der Algebra $\Cl(V,-\beta)$ in obiger Konvention.
+\item (Standardbasis) Wählt man eine Basis $(e_i)$ mit $\beta(e_i,e_j)=\varepsilon_i\delta_{ij}$,
+$\varepsilon_i\in\{\pm1,0\}$, so gelten
+\[
+e_i e_j + e_j e_i = -2\,\varepsilon_i\,\delta_{ij}.
+\]
+Für eine reelle Signatur $(p,q)$ schreibt man entsprechend $\Cl_{p,q}(\mathbb R)$.
+\item (Functorialität) Ist $f:(V,\beta)\to(V',\beta')$ linear mit $\beta' (f(u),f(v))=\beta(u,v)$,
+so induziert $f$ einen eindeutigen Algebrahomomorphismus $\Cl(V,\beta)\to\Cl(V',\beta')$
+mit $v\mapsto f(v)$.
+\end{enumerate}
+\end{DEF}
+
+
+
+
+
 Remark 2.1.2. By a polarization argument, one immediately sees that property i) above is equivalent to the Clifford relation
 
 $$
 \left.\mathrm{i}^{\prime}\right) \quad \imath(v) \cdot \imath(w)+\imath(w) \cdot \imath(v)=-2 \beta(v, w) \cdot 1, \quad \text { for all } v, w \in V .
 $$
 
+
+\begin{DEF}{SG-B11-01-04}{Clifford-Relation via Polarisierung}
+Durch eine \emph{Polarisierung} der Bedingung (i)
+\[
+\iota(v)^2=-\beta(v,v)\,1
+\]
+erhält man die äquivalente Form der sogenannten \textbf{Clifford-Relation}:
+\[
+\tag{$\mathrm{i}'$}
+\iota(v)\,\iota(w)+\iota(w)\,\iota(v)=-2\,\beta(v,w)\,1,
+\qquad\forall\,v,w\in V.
+\]
+
+\begin{proof}[Herleitung]
+Setze in (i) $v+w$ anstelle von $v$:
+\[
+\iota(v+w)^2=-\beta(v+w,v+w)\,1.
+\]
+Entwickle die linke Seite:
+\[
+\iota(v+w)^2=\iota(v)^2+\iota(v)\iota(w)+\iota(w)\iota(v)+\iota(w)^2.
+\]
+Setze (i) für $\iota(v)^2$ und $\iota(w)^2$ ein und vergleiche:
+\[
+-\beta(v+w,v+w)\,1=-\beta(v,v)\,1-\beta(w,w)\,1-\big(\iota(v)\iota(w)+\iota(w)\iota(v)\big).
+\]
+Da $\beta$ symmetrisch ist, gilt $\beta(v+w,v+w)=\beta(v,v)+2\beta(v,w)+\beta(w,w)$.
+Durch Kürzen der Terme folgt
+\[
+\iota(v)\iota(w)+\iota(w)\iota(v)=-2\,\beta(v,w)\,1.
+\]
+Damit ist (i)$\iff$(i').
+\end{proof}
+\end{DEF}
+
+
+
+
 Remark 2.1.3. Let ( $M, g$ ) be a Riemannian manifold and let $D \in$ Diff $_{1}(E, E)$ be a formally self-adjoint Dirac-type operator. By equation (1.18), property i) holds for $(V, \beta)=\left(T_{x}^{*} M,\left.g\right|_{x}\right), A=\operatorname{End}\left(E_{x}\right)$, and $\imath=\sigma_{1}(D, \cdot)$. However, ii), does not hold in general.
+
+
+\begin{CONC}{SG-B11-01-05}{Geometrische Realisierung der Clifford-Relation}
+Sei $(M,g)$ eine Riemannsche Mannigfaltigkeit und 
+$D \in \mathrm{Diff}_1(E,E)$ ein formal selbstadjungierter Dirac-Typ-Operator
+auf einem Vektorbündel $E \to M$.  
+
+Nach Gleichung~(1.18) erfüllt das Symbol $\sigma_1(D,\cdot)$ die
+\emph{Clifford-Relation} der Form
+\[
+\sigma_1(D,\xi)^2 = -\,g_x(\xi,\xi)\,\mathrm{Id}_{E_x},
+\qquad
+\xi \in T_x^*M.
+\]
+Damit gilt Eigenschaft (i) der Clifford-Algebra für das Tripel
+\[
+(V,\beta) = \bigl(T_x^*M,\ g|_x\bigr),
+\qquad
+A = \mathrm{End}(E_x),
+\qquad
+\iota = \sigma_1(D,\cdot).
+\]
+
+Allerdings ist die zugehörige Universaleigenschaft~(ii) im Allgemeinen
+\emph{nicht} erfüllt:
+$\bigl(\mathrm{End}(E_x),\,\sigma_1(D,\cdot)\bigr)$ bildet zwar eine
+\emph{Darstellung} der Clifford-Relation, aber im Allgemeinen nicht die
+universelle Clifford-Algebra $\Cl(T_x^*M,g_x)$.  
+Nur in speziellen Fällen (etwa für den klassischen Dirac-Operator auf einem
+Spin-Bündel) realisiert $\sigma_1(D,\cdot)$ tatsächlich die universelle
+Darstellung der Clifford-Algebra.
+\end{CONC}
+
+
 
 Example 2.1.4. Let $\beta=0$. The Clifford relation (2.1) yields $\imath(v) \cdot \imath(w)=-\imath(w) \cdot \imath(v)$ for all $v, w \in V$. Let $n=\operatorname{dim}(V)$ and let $A:=\Lambda^{\bullet} V=\bigoplus_{k=0}^{n} \Lambda^{k} V$ be the exterior algebra\\
 of $V$. The map $\imath: V \xrightarrow{\cong} \Lambda^{1} V \hookrightarrow \Lambda^{\bullet} V=A$ obviously satisfies property i).\\
@@ -256,70 +434,136 @@ $$
 
 Hence $\phi$ is uniquely determined. Clearly, $\phi: \Lambda^{k} V \rightarrow A^{\prime}$ defined by this formula yields a homomorphism with $\phi \circ \imath=\imath^{\prime}$.
 
+
+\begin{EXA}{SG-B11-01-06}{Clifford-Algebra im entarteten Fall \texorpdfstring{$\beta=0$}{β=0}}
+Sei $(V,\beta)$ ein endlichdimensionaler $\mathbb K$-Vektorraum mit \emph{entarteter} Bilinearform 
+$\beta=0$.  
+Dann reduziert sich die Clifford-Relation
+\[
+\iota(v)\iota(w)+\iota(w)\iota(v)=-2\beta(v,w)\,1
+\]
+auf
+\[
+\iota(v)\iota(w)=-\,\iota(w)\iota(v),\qquad \forall\,v,w\in V,
+\]
+d.\,h. die eingebetteten Vektoren \emph{antikommutieren}.
+
+Sei $n=\dim V$ und $A:=\Lambda^{\bullet}V=\bigoplus_{k=0}^{n}\Lambda^{k}V$
+die \textbf{äußere Algebra} von $V$.  
+Die kanonische Inklusion
+\[
+\iota:V\xrightarrow{\cong}\Lambda^{1}V\hookrightarrow\Lambda^{\bullet}V=A
+\]
+erfüllt offensichtlich Eigenschaft~(i), da für $v\in V$ gilt
+$\iota(v)^2=v\wedge v=0=-\beta(v,v)\,1$.
+
+\emph{Universaleigenschaft.}
+Sei nun $A'$ eine $\mathbb K$-Algebra und 
+$\iota':V\to A'$ eine lineare Abbildung mit $(\iota'(v))^2=-\beta(v,v)\,1=0$,
+also $\iota'(v)\iota'(w)=-\iota'(w)\iota'(v)$.
+Dann existiert genau ein Algebrahomomorphismus
+$\phi:A\to A'$ mit $\phi\circ\iota=\iota'$.
+Dieser wird eindeutig durch seine Wirkung auf einfachen Wedge-Produkten bestimmt:
+\[
+\begin{aligned}
+\phi(v_1\wedge\dots\wedge v_k)
+&=\phi\bigl(\iota(v_1)\wedge\dots\wedge\iota(v_k)\bigr)
+ =\phi\bigl(\iota(v_1)\bigr)\cdots\phi\bigl(\iota(v_k)\bigr)\\
+&=\iota'(v_1)\cdots\iota'(v_k).
+\end{aligned}
+\]
+Die Abbildung $\phi$ ist wohldefiniert, da die Antikommutativität der $\iota'(v)$
+die Alternierbarkeit der Wedge-Produkte widerspiegelt.
+Somit erfüllt $(A,\iota)=(\Lambda^{\bullet}V,\iota)$
+die Universaleigenschaft der Clifford-Algebra für $\beta=0$.
+
+\emph{Schlussfolgerung.}
+Damit gilt der kanonische Isomorphismus
+\[
+\Cl(V,0)\;\cong\;\Lambda^{\bullet}V,
+\]
+d.\,h. die Clifford-Algebra eines rein entarteten bilinearen Raums
+reduziert sich zur äußeren Algebra von $V$.
+\end{EXA}
+
+
+
 Proposition 2.1.5. Let $V$ be a finite-dimensional $\mathbb{K}$-vector space and let $\beta$ be a symmetric bilinear form on $V$.\\
 Then there exists a Clifford algebra ( $A, \imath$ ) for ( $V, \beta$ ). The pair ( $A, \imath$ ) is unique up to isomorphism.
 
-Proof.\\
-Uniqueness: Let ( $A, \imath$ ) and ( $A^{\prime}, \imath^{\prime}$ ) be two Clifford algebras for ( $V, \beta$ ).\\
-By the universal property for $A$, there exists an algebra homomorphism
 
+
+
+
+\begin{DEF}{SG-B11-01-07}{Existenz und Eindeutigkeit der Clifford-Algebra}
+Sei $V$ ein endlichdimensionaler $\mathbb K$-Vektorraum und $\beta$ eine symmetrische Bilinearform auf $V$.  
+Dann existiert eine Clifford-Algebra $(A,\iota)$ zu $(V,\beta)$, und sie ist bis auf eindeutigen Algebraisomorphismus eindeutig.
+
+
+\begin{proof} \emph{Uniqueness}: Let ( $A, \imath$ ) and ( $A^{\prime}, \imath^{\prime}$ ) be two Clifford algebras for ( $V, \beta$ ).
+
+By the universal property for $A$, there exists an algebra homomorphism
 $$
 \phi: A \rightarrow A^{\prime},
 $$
-
 such that diagram 1 commutes.
-
-\begin{figure}[h]
-\begin{center}
-  \includegraphics[scale=0.3]{2025_10_29_567e9a909b434280ddc6g-072(1)}
-\end{center}
-\end{figure}
-
+\[
+% --- Diagramm 1 ---
+\begin{tikzcd}[row sep=large, column sep=large]
+V \arrow[r, "\iota"] \arrow[dr, "\iota'"'] & A \arrow[d, "\phi"] \\
+& A'
+\end{tikzcd}
+\]
 Similarly, by the universal property for $A^{\prime}$, there exists an algebra homomorphism
-
 $$
 \psi: A^{\prime} \rightarrow A,
 $$
-
 such that diagram 2 commutes.
-
-\begin{figure}[h]
-\begin{center}
-  \includegraphics[scale=0.3]{2025_10_29_567e9a909b434280ddc6g-072}
-\end{center}
-\end{figure}
-
+\[
+% --- Diagramm 2 ---
+\begin{tikzcd}[row sep=large, column sep=large]
+V \arrow[r, "\iota'"] \arrow[dr, "\iota"'] & A' \arrow[d, "\psi"] \\
+& A
+\end{tikzcd}
+\]
 We now combine both diagrams to the alongside commutative diagram. The uniqueness in the universal property of ( $A, \imath$ ) yields
-
 $$
 \psi \circ \phi=\operatorname{id}_{A}
 $$
-
-\begin{center}
-\includegraphics[scale=0.3]{2025_10_29_567e9a909b434280ddc6g-073(2)}
-\end{center}
-
+\[
+% --- Zweites Diagramm (mit allen drei Diagonalen) ---
+\begin{tikzcd}[row sep=large, column sep=large]
+& A \arrow[d, "\phi"] \\
+V \arrow[ur, "\iota"] \arrow[r, "\iota'"'] \arrow[dr, "\iota"'] & A' \arrow[d, "\psi"] \\
+& A
+\end{tikzcd}
+\]
 Analogously, we combine the first two diagrams to the alongside commutative diagram. Then the uniqueness in the universal property of ( $A^{\prime}, \imath^{\prime}$ ) yields
-
 $$
 \phi \circ \psi=\operatorname{id}_{A^{\prime}}
 $$
-
-\begin{center}
-\includegraphics[scale=0.3]{2025_10_29_567e9a909b434280ddc6g-073}
-\end{center}
-
+\[
+% --- Zweites Diagramm (mit allen drei Diagonalen) ---
+\begin{tikzcd}[row sep=large, column sep=large]
+& A' \arrow[d, "\psi"] \\
+V \arrow[ur, "\iota'"'] \arrow[r, "\iota"] \arrow[dr, "\iota'"'] & A \arrow[d, "\phi"] \\
+& A'
+\end{tikzcd}
+\]
 Thus $\phi$ is an isomorphism with inverse $\psi$.
 
-Existence: We consider the tensor algebra $\mathcal{T}(V):=\bigoplus_{k=0}^{\infty} \otimes^{k} V$ and define the inclusion $\imath_{0}: V \xrightarrow{\cong} \otimes^{1} V \hookrightarrow \mathcal{T}(V)$. Let $I \subset \mathcal{T}(V)$ be the two-sided ideal generated by all elements of the form
-
+\emph{Existence}: We consider the tensor algebra $\mathcal{T}(V):=\bigoplus_{k=0}^{\infty} \otimes^{k} V$ and define the inclusion $\imath_{0}: V \xrightarrow{\cong} \otimes^{1} V \hookrightarrow \mathcal{T}(V)$. Let $I \subset \mathcal{T}(V)$ be the two-sided ideal generated by all elements of the form
 $$
 v \otimes w+w \otimes v+2 \beta(v, w) \cdot 1, \quad v, w \in V
 $$
-
-Put $A:=\mathcal{T}(V) / I$ and denote by $\pi: \mathcal{T}(V) \rightarrow A$ the quotient homomorphism. Then define $\imath$ by the alongside commutative diagram, i.e., $\imath=\pi \circ \imath_{0}$.\\
-\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-073(1)}
-
+Put $A:=\mathcal{T}(V) / I$ and denote by $\pi: \mathcal{T}(V) \rightarrow A$ the quotient homomorphism. Then define $\imath$ by the alongside commutative diagram, i.e., $\imath=\pi \circ \imath_{0}$.
+\[
+% --- Diagramm 1 ---
+\begin{tikzcd}[row sep=large, column sep=large]
+V \arrow[r, "\iota_0"] \arrow[dr, "\iota"'] & \mathcal{T}(V) \arrow[d, "\pi"] \\
+& A
+\end{tikzcd}
+\]
 We check that the Clifford relation 2.1 (property i') in Definition 2.1.1) holds:
 
 $$
@@ -332,9 +576,9 @@ $$
 \end{aligned}
 $$
 
-We check that property ii) of Definition 2.1.1 holds: Let $A^{\prime}$ be any unital $\mathbb{K}$-algebra, together with a linear map $\imath^{\prime}: V \rightarrow A^{\prime}$ satisfying property i) of Definition 2.1.1.\\
-a) Uniqueness of $\phi$ : Let $\phi: A=\mathcal{T}(V) / I \rightarrow A^{\prime}$ be a homomorphism satisfying $\phi \circ \imath=\imath^{\prime}$. Then we have:
+We check that property ii) of Definition 2.1.1 holds: Let $A^{\prime}$ be any unital $\mathbb{K}$-algebra, together with a linear map $\imath^{\prime}: V \rightarrow A^{\prime}$ satisfying property i) of Definition 2.1.1.
 
+a) \emph{Uniqueness of $\phi$}: Let $\phi: A=\mathcal{T}(V) / I \rightarrow A^{\prime}$ be a homomorphism satisfying $\phi \circ \imath=\imath^{\prime}$. Then we have:
 $$
 \begin{aligned}
 \phi\left(\pi\left(v_{1} \otimes \ldots \otimes v_{k}\right)\right) & =\phi\left(\pi\left(\imath_{0}\left(v_{1}\right)\right)\right) \cdot \ldots \cdot \phi\left(\pi\left(\imath_{0}\left(v_{k}\right)\right)\right) \\
@@ -342,17 +586,21 @@ $$
 & =\imath^{\prime}\left(v_{1}\right) \cdot \ldots \cdot \imath^{\prime}\left(v_{k}\right) .
 \end{aligned}
 $$
+Thus $\phi$ is uniquely determined.
 
-Thus $\phi$ is uniquely determined.\\
-b) Existence of $\phi$ : Consider the unique homomorphism $\psi: \mathcal{T}(V) \rightarrow A^{\prime}$, such that the following diagram commutes. Then we have:\\
-\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-074(2)}
 
+b) \emph{Existence of $\phi$}: Consider the unique homomorphism $\psi: \mathcal{T}(V) \rightarrow A^{\prime}$, such that the following diagram commutes. Then we have:\\
+\[
+% --- Diagramm 2 ---
+\begin{tikzcd}[row sep=large, column sep=large]
+V \arrow[r, "\iota_0"] \arrow[dr, "\iota'"'] & \mathcal{T}(V) \arrow[d, "\psi"] \\
+& A'
+\end{tikzcd}
+\]
 $$
 \psi\left(v_{1} \otimes \ldots \otimes v_{k}\right)=\imath^{\prime}\left(v_{1}\right) \cdot \ldots \cdot \imath^{\prime}\left(v_{k}\right) .
 $$
-
 We need to check that the diagram factorizes through $A$, i.e., $\psi$ vanishes on the ideal $I$ and hence descends to the quotient $A=\mathcal{T}(V) / I$. For $v, w \in V$, we compute:
-
 $$
 \begin{aligned}
 & \psi(v \otimes w+w \otimes v+2 \beta(v, w) 1) \\
@@ -362,61 +610,170 @@ $$
 & \quad=0
 \end{aligned}
 $$
+In the last equality we have used property i) from Definition 2.1.1 for $\imath^{\prime}: V \rightarrow A^{\prime}$.
 
-In the last equality we have used property i) from Definition 2.1.1 for $\imath^{\prime}: V \rightarrow A^{\prime}$.\\
 Thus $\psi: \mathcal{T}(V) \rightarrow A^{\prime}$ descends to a homomorphism
-
 $$
 \phi: A=\mathcal{T}(V) / I \rightarrow A^{\prime},
 $$
+such that the alongside diagram commutes. Clearly, the homomorphism $\phi$ is uniquely determined by the homomorphism $\psi$.
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+\mathcal{T}(V) \arrow[r, "\pi"] \arrow[dr, "\psi"'] & A \arrow[d, "\phi"] \\
+& A'
+\end{tikzcd}
+\]
+Moreover, the alongside diagram commutes. We have thus constructed a homomorphism $\phi: A \rightarrow A^{\prime}$ satisfying $\phi \circ \imath=\imath^{\prime}$.
+\[
+\begin{tikzcd}[row sep=large, column sep=huge]
+V
+  & \mathcal{T}(V) \arrow[d, "\psi"]
+  & A 
+\\
+{} & A' & {}
+%
+\arrow[from=1-1, to=1-2, "\iota_0"]               % V -> T(V)
+\arrow[from=1-2, to=1-3, "\pi"]               % T(V) -> A
+\arrow[from=1-1, to=2-2, "\iota'"']               % V -> A'
+\arrow[from=1-3, to=2-2, "\phi"']             % A -> A'  (senkrecht rechts)
+\arrow[from=1-1, to=1-3, bend left=35, "\iota"]   % gebogener Pfeil V -> A
+\end{tikzcd}
+\]
+\end{proof}
+\end{DEF}
 
-such that the alongside diagram commutes. Clearly, the homomorphism $\phi$ is uniquely determined by the homomorphism $\psi$.\\
-\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-074(1)}
 
-Moreover, the alongside diagram commutes. We have thus constructed a homomorphism $\phi: A \rightarrow A^{\prime}$ satisfying $\phi \circ \imath=\imath^{\prime}$.\\
-\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-074}
 
-Definition 2.1.6. Let $V$ be a finite-dimensional $\mathbb{K}$-vector space, equipped with a symmetric bilinear form $\beta$. We denote the Clifford algebra for ( $V, \beta$ ) by $\mathbf{C l}(\boldsymbol{V}, \boldsymbol{\beta})$.
+
+
+
+Definition 2.1.6. 
+
+Let $V$ be a finite-dimensional $\mathbb{K}$-vector space, equipped with a symmetric bilinear form $\beta$. We denote the Clifford algebra for ( $V, \beta$ ) by $\mathbf{C l}(\boldsymbol{V}, \boldsymbol{\beta})$.
 
 Remark 2.1.7. Let $V$ be a finite-dimensional $\mathbb{K}$-vector space, and let $\beta$ be a symmetric bilinear form on $V$. For any Clifford algebra ( $A, \imath$ ) the map $\imath: V \rightarrow A$ is injective:
 
 If the symmetric form $\beta$ is definite then this is clear from i ) of Definition 2.1.1:
-
 $$
 \imath(v)^{2}=-\beta(v, v) \cdot 1
 $$
-
-In the general case, we have the alongside commutative diagram. Since $\imath_{1}(v)=v \notin I$, the map $\imath_{1}$ is injective. Hence so\\
-\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-075}\\
+In the general case, we have the alongside commutative diagram. Since $\imath_{1}(v)=v \notin I$, the map $\imath_{1}$ is injective. Hence so
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+V \arrow[r, "\iota"] \arrow[dr, "\iota_1"'] & A \arrow[d, "\cong"] \\
+& \mathcal{T}(V)/I
+\end{tikzcd}
+\]
 is $\imath$.
 
-Remark 2.1.8. Let $V$ be a $\mathbb{K}$-vector space, and let $b_{1}, \ldots, b_{n} \in V$ be a basis of $V$. Then
 
+
+\begin{CONC}{SG-B11-01-08}{Injektivität der kanonischen Einbettung}
+Sei $V$ ein endlichdimensionaler $\mathbb K$-Vektorraum und $\beta$ eine symmetrische Bilinearform auf $V$.
+Für jede Clifford-Algebra $(A,\iota)$ zu $(V,\beta)$ ist die kanonische Abbildung
+\[
+\iota:V\longrightarrow A
+\]
+\textbf{injektiv}.
+
+\smallskip
+\noindent
+Im \emph{definiten Fall} folgt dies unmittelbar aus der Relation
+\[
+\iota(v)^2=-\,\beta(v,v)\,1,
+\]
+da $\beta(v,v)=0$ genau dann gilt, wenn $v=0$.
+
+\smallskip
+\noindent
+Im \emph{allgemeinen Fall} erhält man das Resultat durch Betrachtung des kanonischen Diagramms
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+V \arrow[r, "\iota"] \arrow[dr, "\iota_1"'] & A \arrow[d, "\cong"] \\
+& \mathcal{T}(V)/I
+\end{tikzcd}
+\]
+wobei $\mathcal{T}(V)$ die Tensoralgebra und $I$ das von den Relationen
+$v\otimes v + \beta(v,v)\,1$ erzeugte Ideal ist.
+Da $\iota_1(v)=v\notin I$ gilt, ist $\iota_1$ injektiv — und damit auch $\iota$.
+\end{CONC}
+
+
+Remark 2.1.8. 
+
+Let $V$ be a $\mathbb{K}$-vector space, and let $b_{1}, \ldots, b_{n} \in V$ be a basis of $V$. Then
 $$
 \left\{b_{i_{1}} \otimes \ldots \otimes b_{i_{k}}\right\} \underset{\substack{k \in \mathbb{N}_{0} \\ 1 \leq i_{1}, \ldots, i_{k} \leq n}}{ }
 $$
-
 is a basis of the vector space $\mathcal{T}(V)$. Thus the elements
-
 $$
 \left\{b_{i_{1}} \cdot \ldots \cdot b_{i_{k}}\right\} \underset{\substack{k \in \mathbb{N}_{0} \\ 1 \leq i_{1}, \ldots, i_{k} \leq n}}{ }
 $$
-
 generate the Clifford algebra $\mathcal{T}(V) / I$ as a vector space. We use the Clifford relations $b_{i} \cdot b_{j}=-b_{j} \cdot b_{i}-2 \beta\left(b_{i}, b_{j}\right) \cdot 1$ to express all elements of $\mathcal{T}(V) / I$ as linear combinations of
-
 $$
 \left\{b_{i_{1}} \cdot \ldots \cdot b_{i_{k}}\right\} \underset{1 \leq i_{1} \leq i_{2} \leq \ldots \leq i_{k} \leq n}{ }
 $$
-
 Moreover, we use the relation $b_{i} \cdot b_{i}=-\beta\left(b_{i}, b_{i}\right) \cdot 1$ to express all elements of $\mathcal{T}(V) / I$ as linear combinations of
-
 $$
 \left\{b_{i_{1}} \cdot \ldots \cdot b_{i_{k}}\right\}_{\substack{k=0,1, \ldots n \\ 1 \leq i_{1}<i_{2}<\ldots<i_{k} \leq n}}
 $$
-
 In particular, $\operatorname{dim} A \leq 2^{n}<\infty$. We will see later that $\operatorname{dim} A=2^{n}$, hence this generating system is a basis of the Clifford algebra $\operatorname{Cl}(V, \beta)$.
 
-Example 2.1.9. Consider $V=\mathbb{R}$ with the symmetric bilinear form $\beta(x, y):=x \cdot y$. Let $e_{1}$ be the standard basis of $\mathbb{R}$.
+
+
+\begin{DEF}{SG-B11-01-09}{Erzeugendensystem und Dimension der Clifford-Algebra}
+Sei $V$ ein $\mathbb K$-Vektorraum mit Basis $b_{1},\dots,b_{n}$ und $\mathcal{T}(V)$ die Tensoralgebra über $V$.
+
+\begin{enumerate}
+\item Die Menge
+\[
+\left\{\,b_{i_{1}}\otimes\cdots\otimes b_{i_{k}}\,\right\}_{\substack{k\in\mathbb N_{0}\\ 1\le i_{1},\dots,i_{k}\le n}}
+\]
+bildet eine Basis des Vektorraums $\mathcal{T}(V)$.
+
+\item Damit wird die Clifford-Algebra $\mathcal{T}(V)/I$ (mit dem von den Relationen
+$v\otimes v+\beta(v,v)\,1$ erzeugten Ideal $I$)
+als Vektorraum erzeugt durch die Bilder der Elemente
+\[
+\left\{\,b_{i_{1}}\cdot\cdots\cdot b_{i_{k}}\,\right\}_{\substack{k\in\mathbb N_{0}\\1\le i_{1},\dots,i_{k}\le n}}.
+\]
+
+\item Mithilfe der Clifford-Relation
+\[
+b_i\cdot b_j=-\,b_j\cdot b_i-2\,\beta(b_i,b_j)\cdot 1
+\]
+kann man alle Elemente der Clifford-Algebra als Linearkombinationen von Produkten mit \emph{nicht fallenden Indizes}
+\[
+\left\{\,b_{i_{1}}\cdot\cdots\cdot b_{i_{k}}\,\right\}_{1\le i_{1}\le i_{2}\le\cdots\le i_{k}\le n}
+\]
+darstellen.
+
+\item Schließlich erlaubt die Relation
+\[
+b_i\cdot b_i=-\,\beta(b_i,b_i)\,1
+\]
+jede weitere Reduktion auf linear unabhängige Monome mit \emph{streng wachsenden Indizes}:
+\[
+\left\{\,b_{i_{1}}\cdot\cdots\cdot b_{i_{k}}\,\right\}_{\substack{k=0,1,\dots,n\\ 1\le i_{1}<i_{2}<\cdots<i_{k}\le n}}.
+\]
+
+\item Daher gilt:
+\[
+\dim A \le 2^{n} < \infty.
+\]
+Später wird gezeigt, dass tatsächlich $\dim A = 2^{n}$, also dieses Erzeugendensystem eine Basis der Clifford-Algebra
+\[
+\Cl(V,\beta)
+\]
+bildet.
+\end{enumerate}
+\end{DEF}
+
+
+
+Example 2.1.9. 
+
+Consider $V=\mathbb{R}$ with the symmetric bilinear form $\beta(x, y):=x \cdot y$. Let $e_{1}$ be the standard basis of $\mathbb{R}$.
 
 \begin{itemize}
   \item The elements 1 and $e_{1}$ generate $\operatorname{Cl}(\mathbb{R}, \beta)$ as a vector space. If $1, e_{1} \in \operatorname{Cl}(\mathbb{R}, \beta)$ were linearly dependent, i.e., $e_{1}=\alpha \cdot 1$ for some $\alpha \in \mathbb{R}$ then it would follow
@@ -436,42 +793,62 @@ $$
 
 is also an algebra homomorphism. Hence, $\operatorname{Cl}(\mathbb{R}, \beta) \cong \mathbb{C}$.
 
-Example 2.1.10. Consider $V=\mathbb{R}$ with the symmetric bilinear form $\gamma(x, y):=-x \cdot y$. Let $e_{1}$ be the standard basis of $\mathbb{R}$. Then $e_{1}^{2}=-\gamma\left(e_{1}, e_{1}\right) 1=1$.
 
+\begin{EXA}{SG-B11-01-10}{Clifford-Algebra über $(\mathbb{R},\beta)$}
+Betrachte $V=\mathbb{R}$ mit der symmetrischen Bilinearform $\beta(x,y):=x\cdot y$.  
+Sei $e_{1}$ die Standardbasis von $\mathbb{R}$.
+
+\begin{enumerate}
+\item Die Elemente $1$ und $e_{1}$ erzeugen den Vektorraum $\Cl(\mathbb{R},\beta)$.
+Angenommen, sie wären linear abhängig, d.\,h. $e_{1}=\alpha\cdot 1$ für ein $\alpha\in\mathbb{R}$, so ergäbe sich
+\[
+\alpha^{2}\cdot 1 = e_{1}^{2} = -\,\beta(e_{1},e_{1})\cdot 1 = -1,
+\]
+was einen Widerspruch liefert. Also sind $1$ und $e_{1}$ linear unabhängig.
+
+\item Damit ist $\Cl(\mathbb{R},\beta)$ zweidimensional mit Basis $\{1,e_{1}\}$.
+
+\item Der Vektorraum-Isomorphismus
+\[
+\phi:\Cl(\mathbb{R},\beta)\longrightarrow\mathbb{C}, \qquad
+\phi(\alpha\cdot 1+\beta e_{1})=\alpha+\beta i,
+\]
+ist zugleich ein Algebrenhomomorphismus, da $\phi(e_{1})=i$ und $i^{2}=-1$ gilt.
+
+\item Folglich erhält man den kanonischen Isomorphismus von $\mathbb{R}$-Algebren:
+\[
+\Cl(\mathbb{R},\beta)\;\cong\;\mathbb{C}.
+\]
+\end{enumerate}
+\end{EXA}
+
+
+Example 2.1.10. 
+
+Consider $V=\mathbb{R}$ with the symmetric bilinear form $\gamma(x, y):=-x \cdot y$. Let $e_{1}$ be the standard basis of $\mathbb{R}$. Then $e_{1}^{2}=-\gamma\left(e_{1}, e_{1}\right) 1=1$.
 \begin{itemize}
   \item Again, 1 and $e_{1}$ generate $\mathrm{Cl}(\mathbb{R}, \gamma)$ as a vector space. If $1, e_{1} \in \mathrm{Cl}(\mathbb{R}, \gamma)$ were linearly dependent, i.e., $e_{1}=\alpha \cdot 1$ for some $\alpha \in \mathbb{R}$ then it would follow that
 \end{itemize}
-
 $$
 e_{1}-\alpha \cdot 1 \text { as an element of } \mathcal{T}(\mathbb{R}) \text { was contained in } I,
 $$
-
 in other words,
-
 $$
 e_{1}-\alpha \cdot 1=x \otimes\left(e_{1} \otimes e_{1}-1\right) \otimes y, \quad \text { for some } x, y \in \mathcal{T}(\mathbb{R}) .
 $$
-
 We write
-
 $$
 x=x_{\max }+x_{\text {lower }} \quad \text { and } \quad y=y_{\max }+y_{\text {lower }},
 $$
-
 where $x_{\text {max }} \neq 0$ and $y_{\text {max }} \neq 0$ are homogeneous of maximal degree. Then
-
 $$
 \underbrace{e_{1}-\alpha \cdot 1}_{\text {degree } \leq 1}=\underbrace{x_{\max } \otimes e_{1} \otimes e_{1} \otimes y_{\max }}_{\text {degree }=\operatorname{deg}\left(x_{\max }\right)+2+\operatorname{deg}\left(y_{\max }\right) \geq 2}+\underbrace{\text { l.o.t. }}_{\text {lower degree }}
 $$
-
 Thus,
-
 $$
 x_{\max } \otimes e_{1} \otimes e_{1} \otimes y_{\max }=0 \quad \downarrow \text { to } x_{\max } \neq 0, y_{\max } \neq 0
 $$
-
 Hence, $1, e_{1}$ form a vector space basis of $\operatorname{Cl}(\mathbb{R}, \gamma)$. Thus, $\frac{1}{2}\left(1+e_{1}\right), \frac{1}{2}\left(1-e_{1}\right)$ is also a vector space basis. Moreover, we have:
-
 $$
 \begin{aligned}
 & \frac{1}{2}\left(1 \pm e_{1}\right) \cdot \frac{1}{2}\left(1 \pm e_{1}\right)=\frac{1}{4}\left(1 \pm e_{1} \pm e_{1}+e_{1}^{2}\right)=\frac{1}{2}\left(1 \pm e_{1}\right) \\
@@ -479,16 +856,72 @@ $$
 \end{aligned}
 $$
 
+
+
+\begin{EXA}{SG-B11-01-11}{Clifford-Algebra über $(\mathbb{R},\gamma)$ mit $\gamma(x,y)=-x\,y$}
+Betrachte $V=\mathbb{R}$ mit der symmetrischen Bilinearform $\gamma(x,y):=-x\cdot y$.
+Sei $e_{1}$ die Standardbasis von $\mathbb{R}$.
+Dann gilt
+\[
+e_{1}^{2}=-\gamma(e_{1},e_{1})\,1=1.
+\]
+
+\begin{enumerate}
+\item Wie zuvor erzeugen $1$ und $e_{1}$ den Vektorraum $\Cl(\mathbb{R},\gamma)$.
+Angenommen, $e_{1}=\alpha\cdot 1$ für ein $\alpha\in\mathbb{R}$, so wäre
+\[
+e_{1}-\alpha\cdot 1\in I,\qquad
+\text{d.\,h. } e_{1}-\alpha\cdot 1 = x\otimes (e_{1}\otimes e_{1}-1)\otimes y
+\]
+für gewisse $x,y\in\mathcal{T}(\mathbb{R})$.
+
+\item Schreibe $x=x_{\max}+x_{\mathrm{lower}}$ und $y=y_{\max}+y_{\mathrm{lower}}$, wobei
+$x_{\max},y_{\max}$ homogene Terme maximalen Grades sind und $x_{\max},y_{\max}\neq 0$.
+Dann folgt
+\[
+\underbrace{e_{1}-\alpha\cdot 1}_{\deg\le1}
+=\underbrace{x_{\max}\otimes e_{1}\otimes e_{1}\otimes y_{\max}}_{\deg(x_{\max})+2+\deg(y_{\max})\ge2}
++\text{(Terme niedrigerer Ordnung)},
+\]
+ein Widerspruch, da $x_{\max},y_{\max}\neq0$.
+Also sind $1$ und $e_{1}$ linear unabhängig und bilden eine Basis.
+
+\item Somit ist $\Cl(\mathbb{R},\gamma)$ zweidimensional mit Basis $\{1,e_{1}\}$.
+Eine alternative Basis ist gegeben durch
+\[
+\frac{1}{2}(1+e_{1}),\quad \frac{1}{2}(1-e_{1}).
+\]
+Für diese gilt:
+\[
+\begin{aligned}
+\frac{1}{2}(1\pm e_{1})\cdot \frac{1}{2}(1\pm e_{1})
+&=\frac{1}{4}(1\pm e_{1}\pm e_{1}+e_{1}^{2})
+=\frac{1}{2}(1\pm e_{1}),\\[4pt]
+\frac{1}{2}(1+e_{1})\cdot \frac{1}{2}(1-e_{1})
+&=\frac{1}{4}(1-e_{1}+e_{1}-e_{1}^{2})=0.
+\end{aligned}
+\]
+
+\item Damit erhält man zwei orthogonale Idempotente
+\[
+p_{+}=\tfrac{1}{2}(1+e_{1}),\quad p_{-}=\tfrac{1}{2}(1-e_{1}),
+\]
+und die Algebra zerfällt als
+\[
+\Cl(\mathbb{R},\gamma)\;\cong\;\mathbb{R}\oplus\mathbb{R}.
+\]
+\end{enumerate}
+\end{EXA}
+
+
+Consider $V=\mathbb{R}$ with the symmetric bilinear form $\gamma(x, y):=-x \cdot y$. Let $e_{1}$ be the standard basis of $\mathbb{R}$. Then $e_{1}^{2}=-\gamma\left(e_{1}, e_{1}\right) 1=1$.
 \begin{itemize}
   \item Consider the vector space isomorphism $\phi: \operatorname{Cl}(\mathbb{R}, \gamma) \rightarrow \mathbb{R} \oplus \mathbb{R}$,
 \end{itemize}
-
 $$
 \alpha \cdot \frac{1}{2}\left(1+e_{1}\right)+\beta \cdot \frac{1}{2}\left(1-e_{1}\right) \longmapsto(\alpha, \beta) .
 $$
-
 We check that $\phi$ is also an algebra homomorphism, where the multiplication in $\mathbb{R} \oplus \mathbb{R}$ is defined componentwise:
-
 $$
 \begin{aligned}
 & \phi\left(\left(\alpha \cdot \frac{1}{2}\left(1+e_{1}\right)+\beta \cdot \frac{1}{2}\left(1-e_{1}\right)\right) \cdot\left(\alpha^{\prime} \cdot \frac{1}{2}\left(1+e_{1}\right)+\beta^{\prime} \cdot \frac{1}{2}\left(1-e_{1}\right)\right)\right) \\
@@ -499,68 +932,189 @@ $$
 \end{aligned}
 $$
 
-The tensor algebra $\mathcal{T}(V)$ is $\mathbb{Z}$-graded, i.e., it admits a decomposition
 
+
+\begin{EXA}{SG-B11-01-12}{Algebraisomorphismus $\Cl(\mathbb{R},\gamma)\cong \mathbb{R}\oplus\mathbb{R}$}
+Sei $V=\mathbb{R}$ mit $\gamma(x,y)=-x\,y$ und Basisvektor $e_1$. Setze
+\[
+p_{+}:=\tfrac12(1+e_1),\qquad p_{-}:=\tfrac12(1-e_1).
+\]
+Dann gilt $p_{\pm}^2=p_{\pm}$, $p_{+}p_{-}=p_{-}p_{+}=0$ und $p_{+}+p_{-}=1$.
+Die Abbildung
+\[
+\phi:\Cl(\mathbb{R},\gamma)\longrightarrow \mathbb{R}\oplus\mathbb{R},\qquad 
+\alpha\,p_{+}+\beta\,p_{-}\longmapsto (\alpha,\beta)
+\]
+ist ein Algebraisomorphismus (mit komponentenweiser Multiplikation auf $\mathbb{R}\oplus\mathbb{R}$).
+
+\medskip
+\emph{Beweis.}
+\textbf{(Linearität, Bijektivität)} Klar, da $\{p_{+},p_{-}\}$ eine Basis von $\Cl(\mathbb{R},\gamma)$ bildet.
+
+\smallskip
+\textbf{(Multiplikativität)}
+Für beliebige $\alpha,\beta,\alpha',\beta'\in\mathbb{R}$ nutzen wir die Relationen der Idempotenten:
+\[
+(\alpha p_{+}+\beta p_{-})(\alpha' p_{+}+\beta' p_{-})
+=\alpha\alpha'\,p_{+}^2+\alpha\beta'\,p_{+}p_{-}+\beta\alpha'\,p_{-}p_{+}+\beta\beta'\,p_{-}^2
+=\alpha\alpha'\,p_{+}+\beta\beta'\,p_{-}.
+\]
+Damit
+\[
+\phi\big((\alpha p_{+}+\beta p_{-})(\alpha' p_{+}+\beta' p_{-})\big)
+=(\alpha\alpha',\beta\beta')
+=(\alpha,\beta)\cdot(\alpha',\beta')
+=\phi(\alpha p_{+}+\beta p_{-})\,\phi(\alpha' p_{+}+\beta' p_{-}).
+\]
+
+\smallskip
+\textbf{(Einheit)} $\phi(1)=\phi(p_{+}+p_{-})=(1,1)$ ist die Einheitskomponente in $\mathbb{R}\oplus\mathbb{R}$.
+
+\smallskip
+\textbf{(Inverse)}
+Die inverse Algebraabbildung ist gegeben durch
+\[
+\psi:\mathbb{R}\oplus\mathbb{R}\to \Cl(\mathbb{R},\gamma),\qquad (\alpha,\beta)\mapsto \alpha p_{+}+\beta p_{-}.
+\]
+Dann $\phi\circ\psi=\mathrm{id}$ und $\psi\circ\phi=\mathrm{id}$.
+
+\smallskip
+Also ist $\phi$ ein Algebraisomorphismus.
+\end{EXA}
+
+
+
+
+The tensor algebra $\mathcal{T}(V)$ is $\mathbb{Z}$-graded, i.e., it admits a decomposition
 $$
 \mathcal{T}(V)=\bigoplus_{i \in \mathbb{Z}} \mathcal{T}^{i}(V)
 $$
-
 such that the multiplication of the homogeneous components corresponds to the addition of the degrees:
-
 $$
 \mathcal{T}^{i}(V) \cdot \mathcal{T}^{j}(V) \subset \mathcal{T}^{i+j}(V)
 $$
-
 where
-
 $$
 \mathcal{T}^{i}(V)= \begin{cases}\otimes^{i} V, & i \geq 0 \\ 0 & i<0\end{cases}
 $$
+This $\mathbb{Z}$-grading does not descend to a $\mathbb{Z}$-grading of $\mathrm{Cl}(V, \beta)$, unless $\beta=0$, because the ideal $I$ is not generated by homogeneous elements. In the generating elements $v \otimes w+w \otimes v+2 \beta(v, w) 1$ of the ideal $I$, the part $v \otimes w+w \otimes v$ has degree 2 , whereas $\beta(v, w) \cdot 1$ has degree 0.
 
-This $\mathbb{Z}$-grading does not descend to a $\mathbb{Z}$-grading of $\mathrm{Cl}(V, \beta)$, unless $\beta=0$, because the ideal $I$ is not generated by homogeneous elements. In the generating elements $v \otimes w+w \otimes v+2 \beta(v, w) 1$ of the ideal $I$, the part $v \otimes w+w \otimes v$ has degree 2 , whereas $\beta(v, w) \cdot 1$ has degree 0.\\
+
 Instead of the $\mathbb{Z}$-grading of the tensor algebra, consider the $\mathbb{Z}_{2}$-grading
-
 $$
 \mathcal{T}(V)=\mathcal{T}^{\text {even }}(V) \bigoplus \mathcal{T}^{\text {odd }}(V)
 $$
-
 where
-
 $$
 \mathcal{T}^{\text {even }}(V)=\bigoplus_{i \text { even }} \mathcal{T}^{i}(V), \quad \mathcal{T}^{\text {odd }}(V)=\bigoplus_{i \text { odd }} \mathcal{T}^{i}(V)
 $$
+This grading descends to the Clifford algebra $\mathrm{Cl}(V, \beta)$, since the ideal $I$ is generated by elements in the even part.
 
-This grading descends to the Clifford algebra $\mathrm{Cl}(V, \beta)$, since the ideal $I$ is generated by elements in the even part.\\
+
 A more intrinsic definition of the $\mathbb{Z}_{2}$-grading is given as follows: Let $\imath: V \rightarrow \mathrm{Cl}(V, \beta)$ be the standard embedding. Consider $\imath^{\prime}: V \rightarrow \mathrm{Cl}(V, \beta)$, defined by
-
 $$
 \imath^{\prime}(v)=-\imath(v), \quad \forall v \in V
 $$
-
 Then $\imath^{\prime}$ satisfies
-
 $$
 \imath^{\prime}(v)^{2}=\imath(v)^{2}=-\beta(v, v) \cdot 1
 $$
+Thus, there exists an algebra homomorphism $\phi: \mathrm{Cl}(V, \beta) \rightarrow \mathrm{Cl}(V, \beta)$, such that the alongside diagram commutes.
 
-Thus, there exists an algebra homomorphism $\phi: \mathrm{Cl}(V, \beta) \rightarrow \mathrm{Cl}(V, \beta)$, such that the alongside diagram commutes.\\
-Upon identification of $\imath(V) \subset \mathrm{Cl}(V, \beta)$ with $V$ we have $\left.\phi\right|_{V}=-\mathrm{id}$.\\
-\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-077}
-
+Upon identification of $\imath(V) \subset \mathrm{Cl}(V, \beta)$ with $V$ we have $\left.\phi\right|_{V}=-\mathrm{id}$.
+\begin{tikzcd}[row sep=large, column sep=large]
+V \arrow[r, "\iota"] \arrow[dr, "\iota'"'] & \mathrm{Cl}(V,\beta) \arrow[d, "\phi"] \\
+& \mathrm{Cl}(V,\beta)
+\end{tikzcd}
 This yields a decomposition
-
 $$
 \mathrm{Cl}(V, \beta)=\mathrm{Cl}^{0}(V, \beta) \oplus \mathrm{Cl}^{1}(V, \beta)
 $$
-
 where
-
 $$
 \begin{aligned}
 & \mathrm{Cl}^{0}(V, \beta)=+1-\text { eigenspace of } \phi \\
 & \mathrm{Cl}^{1}(V, \beta)=-1-\text { eigenspace of } \phi .
 \end{aligned}
 $$
+
+
+
+
+\begin{DEF}{SG-B11-01-13}{\(\mathbb{Z}_2\)-Gradierung der Clifford-Algebra}
+Sei $V$ ein endlichdimensionaler $\mathbb{K}$-Vektorraum mit symmetrischer Bilinearform $\beta$.
+Die Tensoralgebra
+\[
+\mathcal{T}(V)=\bigoplus_{i\in\mathbb{Z}} \mathcal{T}^{i}(V), \qquad
+\mathcal{T}^{i}(V)=
+\begin{cases}
+\otimes^{i}V, & i\ge0,\\
+0, & i<0,
+\end{cases}
+\]
+ist $\mathbb{Z}$-graduiert, wobei
+\[
+\mathcal{T}^{i}(V)\cdot \mathcal{T}^{j}(V)\subseteq \mathcal{T}^{i+j}(V).
+\]
+Diese $\mathbb{Z}$-Graduierung überträgt sich im Allgemeinen \emph{nicht} auf die Clifford-Algebra
+\(\Cl(V,\beta)=\mathcal{T}(V)/I\), da das Ideal
+\[
+I=\langle\,v\otimes w+w\otimes v+2\beta(v,w)\,1 \mid v,w\in V\rangle
+\]
+nicht durch homogene Elemente erzeugt wird (die Terme $v\otimes w+w\otimes v$ haben Grad $2$, der Skalarterm Grad $0$).
+
+\medskip
+\textbf{Induzierte \(\mathbb{Z}_{2}\)-Gradierung.}
+Statt der $\mathbb{Z}$-Graduierung betrachtet man die paritätsreduzierte Zerlegung
+\[
+\mathcal{T}(V)
+=\mathcal{T}^{\mathrm{even}}(V)\oplus \mathcal{T}^{\mathrm{odd}}(V),
+\quad
+\text{wobei}\quad
+\mathcal{T}^{\mathrm{even}}(V)=\bigoplus_{i\ \mathrm{gerade}}\mathcal{T}^{i}(V),\quad
+\mathcal{T}^{\mathrm{odd}}(V)=\bigoplus_{i\ \mathrm{ungerade}}\mathcal{T}^{i}(V).
+\]
+Da das Ideal $I$ durch \emph{gerade} Elemente erzeugt wird, induziert diese Zerlegung eine
+$\mathbb{Z}_{2}$-Gradierung der Clifford-Algebra:
+\[
+\Cl(V,\beta)=\Cl^{0}(V,\beta)\oplus \Cl^{1}(V,\beta),
+\]
+wobei $\Cl^{0}$ (gerader Teil) und $\Cl^{1}$ (ungerader Teil) jeweils stabile Unterräume bilden und gilt
+\[
+\Cl^{i}(V,\beta)\cdot \Cl^{j}(V,\beta)\subseteq \Cl^{i+j\ (\mathrm{mod}\ 2)}(V,\beta).
+\]
+
+\medskip
+\textbf{Intrinsische Charakterisierung.}
+Sei $\iota:V\to \Cl(V,\beta)$ die kanonische Einbettung und definiere
+\[
+\iota'(v):=-\iota(v),\qquad v\in V.
+\]
+Dann erfüllt $\iota'(v)^{2}=-\beta(v,v)\,1$, also existiert ein eindeutiger
+Algebrenhomomorphismus
+\[
+\phi:\Cl(V,\beta)\longrightarrow \Cl(V,\beta),
+\]
+so dass das Diagramm
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+V \arrow[r, "\iota"] \arrow[dr, "\iota'"'] & \Cl(V,\beta) \arrow[d, "\phi"] \\
+& \Cl(V,\beta)
+\end{tikzcd}
+\]
+kommutiert.
+Auf der kanonischen Identifikation $\iota(V)\subseteq \Cl(V,\beta)$ gilt also
+\[
+\phi|_{V}=-\mathrm{id}_{V}.
+\]
+Die Eigenräume von $\phi$ liefern genau die obige $\mathbb{Z}_{2}$-Zerlegung:
+\[
+\Cl^{0}(V,\beta)=\{a\in \Cl(V,\beta)\mid \phi(a)=a\},\qquad
+\Cl^{1}(V,\beta)=\{a\in \Cl(V,\beta)\mid \phi(a)=-a\}.
+\]
+\end{DEF}
+
+
 
 Definition 2.1.11. Let $A=A^{0} \oplus A^{1}$ and $B=B^{0} \oplus B^{1}$ be $\mathbb{Z}_{2}$-graded $\mathbb{K}$-algebras, where $\mathbb{K}=\mathbb{R}, \mathbb{C}$, i.e.
 
@@ -591,24 +1145,83 @@ $$
 
 Let $\left(V_{i}, \beta_{i}\right), i=1,2$, be finite dimensional $\mathbb{K}$-vector spaces, equipped with symmetric bilinear forms. By $\beta_{1} \oplus \beta_{2}$, we denote the uniquely determined symmetric bilinear form on $V_{1} \oplus V_{2}$ which restricts to $\beta_{i}$ on $V_{i}$ and for which the subspaces $V_{i} \subset V_{1} \oplus V_{2}, i=1,2$, are mutually orthogonal.
 
-Proposition 2.1.12. Let $V_{i}, i=1,2$, be finite-dimensional $\mathbb{K}$-vector spaces, and let $\beta_{i}$ be symmetric bilinear forms on $V_{i}$. Then we have:
 
+
+\begin{DEF}{SG-B11-01-14}{\(\mathbb{Z}_2\)-gradierter Tensorproduktraum und orthogonale Summe}
+Seien $A=A^{0}\oplus A^{1}$ und $B=B^{0}\oplus B^{1}$ $\mathbb{Z}_{2}$\textit{-graduierte} $\mathbb{K}$-Algebren ($\mathbb{K}=\mathbb{R}$ oder $\mathbb{C}$), d.\,h.
+\[
+A^{0}A^{0}+A^{1}A^{1}\subseteq A^{0}, \qquad
+A^{0}A^{1}+A^{1}A^{0}\subseteq A^{1}.
+\]
+Dann heißt
+\[
+A\;\hat{\otimes}\; B
+\]
+das \emph{$\mathbb{Z}_{2}$-graduierte Tensorprodukt} von $A$ und $B$, definiert durch
+\[
+A\hat{\otimes}B := A\otimes B \quad \text{(als Vektorraum)},
+\]
+versehen mit der graduierung
+\[
+\begin{aligned}
+(A\hat{\otimes}B)^{0} &= (A^{0}\otimes B^{0})\;\oplus\;(A^{1}\otimes B^{1}),\\
+(A\hat{\otimes}B)^{1} &= (A^{0}\otimes B^{1})\;\oplus\;(A^{1}\otimes B^{0}),
+\end{aligned}
+\]
+und der \emph{vertauschten Multiplikation}
+\[
+(a\otimes b)\,(a'\otimes b')
+:= (-1)^{ij}\, (a a')\otimes (b b'),
+\qquad a'\in A^{i},\; b\in B^{j}.
+\]
+Die Exponenten $i,j\in\{0,1\}$ bezeichnen dabei die Paritäten der homogenen Elemente.
+
+\medskip
+\textbf{Orthogonale Summe von bilinearen Formen.}
+Seien nun $(V_{1},\beta_{1})$ und $(V_{2},\beta_{2})$ endlichdimensionale $\mathbb{K}$-Vektorräume mit symmetrischen Bilinearformen.
+Die \emph{orthogonale Summe}
+\[
+(V_{1}\oplus V_{2},\,\beta_{1}\oplus \beta_{2})
+\]
+ist definiert durch die eindeutige symmetrische Bilinearform $\beta_{1}\oplus \beta_{2}$ auf $V_{1}\oplus V_{2}$, die
+\begin{enumerate}
+\item auf $V_{i}$ mit $\beta_{i}$ übereinstimmt, d.\,h.\ $\left.(\beta_{1}\oplus \beta_{2})\right|_{V_{i}\times V_{i}}=\beta_{i}$,
+\item und für $v_{1}\in V_{1}$, $v_{2}\in V_{2}$ die Orthogonalitätsbedingung
+\[
+(\beta_{1}\oplus \beta_{2})(v_{1},v_{2})=0
+\]
+erfüllt.
+\end{enumerate}
+Diese Konstruktion wird insbesondere bei der Bildung von Clifford-Algebren
+\(\Cl(V_{1}\oplus V_{2},\,\beta_{1}\oplus \beta_{2})\)
+verwendet, wo sie mit dem graduierten Tensorprodukt
+\(\Cl(V_{1},\beta_{1})\;\hat{\otimes}\;\Cl(V_{2},\beta_{2})\)
+in natürlicher Weise korrespondiert.
+\end{DEF}
+
+
+
+
+Proposition 2.1.12. 
+
+
+\begin{PROP}{SG-B11-01-15}{Isomorphismus für orthogonale Summen von Clifford Algebren}
+Let $V_{i}, i=1,2$, be finite-dimensional $\mathbb{K}$-vector spaces, and let $\beta_{i}$ be symmetric bilinear forms on $V_{i}$. Then we have:
 $$
 \mathrm{Cl}\left(V_{1} \oplus V_{2}, \beta_{1} \oplus \beta_{2}\right) \cong \mathrm{Cl}\left(V_{1}, \beta_{1}\right) \hat{\otimes} \mathrm{Cl}\left(V_{2}, \beta_{2}\right)
 $$
+\end{PROP}
 
-Proof.\\
+
+\begin{PROOF}{SG-B11-01-16}{P: Isomorphismus für orthogonale Summen von Clifford Algebren}
 a) Consider the linear map
-
 $$
 \begin{aligned}
 j: V_{1} \oplus V_{2} & \rightarrow \mathrm{Cl}\left(V_{1}, \beta_{1}\right) \hat{\otimes} \mathrm{Cl}\left(V_{2}, \beta_{2}\right) \\
 v_{1}+v_{2} & \mapsto \imath_{1}\left(v_{1}\right) \otimes 1+1 \otimes \imath_{2}\left(v_{2}\right) .
 \end{aligned}
 $$
-
 By Definition 2.1.11, we have:
-
 $$
 \begin{aligned}
 j\left(v_{1}+v_{2}\right)^{2}= & \left(\imath_{1}\left(v_{1}\right) \otimes 1+1 \otimes \imath_{2}\left(v_{2}\right)\right)^{2} \\
@@ -620,30 +1233,39 @@ j\left(v_{1}+v_{2}\right)^{2}= & \left(\imath_{1}\left(v_{1}\right) \otimes 1+1 
 = & -\left(\beta_{1} \oplus \beta_{2}\right)\left(v_{1}+v_{2}, v_{1}+v_{2}\right) 1 \otimes 1 .
 \end{aligned}
 $$
-
 In the last step we used the fact that the mixed terms in $\beta_{1} \oplus \beta_{2}\left(v_{1}+v_{2}, v_{1}+v_{2}\right)$ cancel, since $V_{1}, V_{2} \subset V_{1} \oplus V_{2}$ are mutually perpendicular with respect to $\beta_{1} \oplus \beta_{2}$.\\
 Thus, by the universal property for $\operatorname{Cl}\left(V_{1} \oplus V_{2}, \beta_{1} \oplus \beta_{2}\right)$ there exists an algebra homomorphism
-
 $$
 \phi: \operatorname{Cl}\left(V_{1} \oplus V_{2}, \beta_{1} \oplus \beta_{2}\right) \rightarrow \operatorname{Cl}\left(V_{1}, \beta_{1}\right) \hat{\otimes} \operatorname{Cl}\left(V_{2}, \beta_{2}\right)
 $$
+such that the diagram
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+V_1 \oplus V_2 \arrow[r, "i"] \arrow[dr, "j"'] &
+\mathrm{Cl}(V_1 \oplus V_2,\, \beta_1 \oplus \beta_2)
+\arrow[d, "\phi"] \\
+& \mathrm{Cl}(V_1, \beta_1) \,\widehat{\otimes}\, \mathrm{Cl}(V_2, \beta_2)
+\end{tikzcd}
+\]
+commutes.
 
-such that the diagram\\
-\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-079(1)}\\
-commutes.\\
-b) To show that $\phi$ is an isomorphism, we construct its inverse:
 
-By the universal property for $\operatorname{Cl}\left(V_{i}, \beta_{i}\right), i=1,2$, there exist unique algebra homomorphisms $\psi_{i}$ such that the diagrams\\
-\includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-079}\\
-commute for $i=1,2$.\\
+
+b) To show that $\phi$ is an isomorphism, we construct its inverse: By the universal property for $\operatorname{Cl}\left(V_{i}, \beta_{i}\right), i=1,2$, there exist unique algebra homomorphisms $\psi_{i}$ such that the diagrams
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+V_i \arrow[r, "\iota_i"] \arrow[dr, "\iota|_{V_i}"'] &
+\mathrm{Cl}(V_i, \beta_i) \arrow[d, "\psi_i"] \\
+& \mathrm{Cl}(V_1 \oplus V_2,\, \beta_1 \oplus \beta_2)
+\end{tikzcd}
+\]
+commute for $i=1,2$.
+
 We define the map $\psi: \operatorname{Cl}\left(V_{1}, \beta_{1}\right) \hat{\otimes} \operatorname{Cl}\left(V_{2}, \beta_{2}\right) \rightarrow \operatorname{Cl}\left(V_{1} \oplus V_{2}, \beta_{1} \oplus \beta_{2}\right)$ by
-
 $$
 \psi(a \otimes b):=\psi_{1}(a) \cdot \psi_{2}(b), \quad \text { for all } a \in \operatorname{Cl}\left(V_{1}, \beta_{1}\right), b \in \operatorname{Cl}\left(V_{2}, \beta_{2}\right) .
 $$
-
 The map $\psi$ is linear and also multiplicative: By Definition 2.1.11, we have for all $a \in \mathrm{Cl}\left(V_{1}, \beta_{1}\right), a^{\prime} \in \mathrm{Cl}\left(V_{1}, \beta_{1}\right)^{i}, b \in \mathrm{Cl}\left(V_{2}, \beta_{2}\right)^{j}, b^{\prime} \in \mathrm{Cl}\left(V_{2}, \beta_{2}\right):$
-
 $$
 \begin{aligned}
 \psi\left((a \otimes b)\left(a^{\prime} \otimes b^{\prime}\right)\right) & =\psi\left((-1)^{i j} a a^{\prime} \otimes b b^{\prime}\right) \\
@@ -653,14 +1275,16 @@ $$
 & =\psi(a \otimes b) \cdot \psi\left(a^{\prime} \otimes b^{\prime}\right) .
 \end{aligned}
 $$
+Hence, $\psi: \operatorname{Cl}\left(V_{1}, \beta_{1}\right) \hat{\otimes} \operatorname{Cl}\left(V_{2}, \beta_{2}\right) \rightarrow \operatorname{Cl}\left(V_{1} \oplus V_{2}, \beta_{1} \oplus \beta_{2}\right)$ is an algebra homomorphism.
 
-Hence, $\psi: \operatorname{Cl}\left(V_{1}, \beta_{1}\right) \hat{\otimes} \operatorname{Cl}\left(V_{2}, \beta_{2}\right) \rightarrow \operatorname{Cl}\left(V_{1} \oplus V_{2}, \beta_{1} \oplus \beta_{2}\right)$ is an algebra homomorphism.\\
-c) We check that $\psi$ is the inverse to $\phi$. We have the following commutative diagram:\\
+
+c) We check that $\psi$ is the inverse to $\phi$. We have the following commutative diagram:
+
 \includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-080}
 
-The uniqueness in the universal property for $\operatorname{Cl}\left(V_{1} \oplus V_{2}\right)$ yields $\psi \circ \phi=\mathrm{id}$.\\
-To show that $\phi \circ \psi=\mathrm{id}$, we compute:
+The uniqueness in the universal property for $\operatorname{Cl}\left(V_{1} \oplus V_{2}\right)$ yields $\psi \circ \phi=\mathrm{id}$.
 
+To show that $\phi \circ \psi=\mathrm{id}$, we compute:
 $$
 \begin{aligned}
 \phi\left(\psi\left(\imath_{1}\left(v_{1}\right) \otimes \imath_{2}\left(v_{2}\right)\right)\right) & =\phi\left(\psi_{1}\left(\imath_{1}\left(v_{1}\right)\right) \cdot \psi_{2}\left(\imath_{2}\left(v_{2}\right)\right)\right) \\
@@ -670,30 +1294,42 @@ $$
 & =\left(\imath_{1}\left(v_{1}\right) \otimes 1\right)\left(1 \otimes \imath_{2}\left(v_{2}\right)\right) \\
 & =\imath_{1}\left(v_{1}\right) \otimes \imath_{2}\left(v_{2}\right) .
 \end{aligned}
-$$ \(\square\)
+$$
+\end{PROOF}
 
-Corollary 2.1.13. Let $(V, \beta)$ be a finite dimensional $\mathbb{K}$-vector space, equipped with a symmetric bilinear form $\beta$. Then we have $\operatorname{dim}_{\mathbb{K}} \operatorname{Cl}(V, \beta)=2^{\operatorname{dim}_{\mathbb{K}} V}$.
 
-Proof. a) If $\left(V_{i}, \beta_{i}\right), i=1,2$, are $\mathbb{K}$-vector spaces with symmetric bilinear forms $\beta_{i}$ and if $f: V_{1} \rightarrow V_{2}$ is a $\mathbb{K}$-linear isomorphism such that for all $v, w \in V_{1}$ we have $\beta_{2}(f(v), f(w))=\beta_{1}(v, w)$, then the Clifford algebras $\mathrm{Cl}\left(V_{1}, \beta_{1}\right)$ and $\mathrm{Cl}\left(V_{2}, \beta_{2}\right)$ are isomorphic. The proof of this statement is an exercise.\\
+
+
+
+Corollary 2.1.13. 
+
+\begin{KORO}{SG-B11-01-17}{Dimensionsformel für Clifford Algebren}
+Let $(V, \beta)$ be a finite dimensional $\mathbb{K}$-vector space, equipped with a symmetric bilinear form $\beta$. Then we have $\operatorname{dim}_{\mathbb{K}} \operatorname{Cl}(V, \beta)=2^{\operatorname{dim}_{\mathbb{K}} V}$.
+\end{KORO}
+
+Proof. 
+
+\begin{PROOF}{SG-B11-01-18}{P: Dimensionsformel für Clifford Algebren}
+a) If $\left(V_{i}, \beta_{i}\right), i=1,2$, are $\mathbb{K}$-vector spaces with symmetric bilinear forms $\beta_{i}$ and if $f: V_{1} \rightarrow V_{2}$ is a $\mathbb{K}$-linear isomorphism such that for all $v, w \in V_{1}$ we have $\beta_{2}(f(v), f(w))=\beta_{1}(v, w)$, then the Clifford algebras $\mathrm{Cl}\left(V_{1}, \beta_{1}\right)$ and $\mathrm{Cl}\left(V_{2}, \beta_{2}\right)$ are isomorphic. The proof of this statement is an exercise.
+
+
 b) We prove the statement of the corollary by induction on $n:=\operatorname{dim}_{\mathbb{K}} V$.
 
-Let $n=1$. By part a) we may assume that $V=\mathbb{K}$ and that there exists $a \in \mathbb{K}$ such that for all $v, w \in \mathbb{K}$ we have $\beta(v, w)=a \cdot v \cdot w$.\\
-For $\mathbb{K}=\mathbb{R}$ and $a \neq 0$ the map $f: \mathbb{R} \rightarrow \mathbb{R}, f(x):=\sqrt{|a|} \cdot x$ is an isomorphism such that $\beta(v, w)= \pm f(v) \cdot f(w)$ for all $v, w \in V$. By part a) it is thus sufficient to consider $\beta(x, y)= \pm x \cdot y$ and $\beta=0$. We have already computed these Clifford algebras $\mathrm{Cl}(V, \beta)$ in Examples 2.1.4, 2.1.9 and 2.1.10. In either case, we obtained $\operatorname{dim}_{\mathbb{R}} \mathrm{Cl}(V, \beta)=2=2^{1}$.\\
-For $\mathbb{K}=\mathbb{C}$ it is by part a) sufficient to consider $\beta(x, y)=-x \cdot y$ and $\beta=0$. For $\beta(x, y)=-x \cdot y$ an argument as in Example 2.1.10 shows that $\operatorname{Cl}(\mathbb{C}, \beta) \cong \mathbb{C} \oplus \mathbb{C}$, for $\beta=0$ we have the result from Example 2.1.4. Again, we have $\operatorname{dim}_{\mathbb{C}} \operatorname{Cl}(V, \beta)=2^{1}$.\\
-Now let $n \in \mathbb{N}$ be arbitrary. Assume that $\operatorname{dim}_{\mathbb{K}} \mathrm{Cl}\left(W, \beta^{\prime}\right)=2^{n-1}$ for any $\left(W, \beta^{\prime}\right)$ with $\operatorname{dim}_{\mathbb{K}} W=n-1$. Let $b_{1}, \ldots, b_{n} \in V$ be a basis such that the $b_{i}$ are mutually perpendicular with respect to $\beta$. Consider the splitting
+Let $n=1$. By part a) we may assume that $V=\mathbb{K}$ and that there exists $a \in \mathbb{K}$ such that for all $v, w \in \mathbb{K}$ we have $\beta(v, w)=a \cdot v \cdot w$.
 
+For $\mathbb{K}=\mathbb{R}$ and $a \neq 0$ the map $f: \mathbb{R} \rightarrow \mathbb{R}, f(x):=\sqrt{|a|} \cdot x$ is an isomorphism such that $\beta(v, w)= \pm f(v) \cdot f(w)$ for all $v, w \in V$. By part a) it is thus sufficient to consider $\beta(x, y)= \pm x \cdot y$ and $\beta=0$. We have already computed these Clifford algebras $\mathrm{Cl}(V, \beta)$ in Examples 2.1.4, 2.1.9 and 2.1.10. In either case, we obtained $\operatorname{dim}_{\mathbb{R}} \mathrm{Cl}(V, \beta)=2=2^{1}$.
+
+For $\mathbb{K}=\mathbb{C}$ it is by part a) sufficient to consider $\beta(x, y)=-x \cdot y$ and $\beta=0$. For $\beta(x, y)=-x \cdot y$ an argument as in Example 2.1.10 shows that $\operatorname{Cl}(\mathbb{C}, \beta) \cong \mathbb{C} \oplus \mathbb{C}$, for $\beta=0$ we have the result from Example 2.1.4. Again, we have $\operatorname{dim}_{\mathbb{C}} \operatorname{Cl}(V, \beta)=2^{1}$.
+
+Now let $n \in \mathbb{N}$ be arbitrary. Assume that $\operatorname{dim}_{\mathbb{K}} \mathrm{Cl}\left(W, \beta^{\prime}\right)=2^{n-1}$ for any $\left(W, \beta^{\prime}\right)$ with $\operatorname{dim}_{\mathbb{K}} W=n-1$. Let $b_{1}, \ldots, b_{n} \in V$ be a basis such that the $b_{i}$ are mutually perpendicular with respect to $\beta$. Consider the splitting
 $$
 V=\underbrace{\mathbb{K} \cdot b_{1}}_{=: V_{1}} \oplus \underbrace{\left(\mathbb{K} \cdot b_{2} \oplus \ldots \oplus \mathbb{K} \cdot b_{n}\right)}_{=: V_{2}}
 $$
-
 By Proposition 2.1.12, we have:
-
 $$
 \mathrm{Cl}(V, \beta) \cong \mathrm{Cl}\left(V_{1},\left.\beta\right|_{V_{1} \times V_{1}}\right) \hat{\otimes} \mathrm{Cl}\left(V_{2},\left.\beta\right|_{V_{2} \times V_{2}}\right)
 $$
-
 In particular, we have:
-
 $$
 \begin{aligned}
 \operatorname{dim} \mathrm{Cl}(V, \beta) & =\operatorname{dim}\left(\mathrm{Cl}\left(V_{1},\left.\beta\right|_{V_{1} \times V_{1}}\right) \hat{\otimes} \mathrm{Cl}\left(V_{2},\left.\beta\right|_{V_{2} \times V_{2}}\right)\right) \\
@@ -702,16 +1338,20 @@ $$
 & =2^{n}
 \end{aligned}
 $$
+\end{PROOF}
 
-Example 2.1.14. Let $\beta_{\text {eucl }}$ denote the standard Euclidean scalar product on $\mathbb{R}^{n}$ for any $n \in \mathbb{N}$. Consider $\operatorname{Cl}\left(\mathbb{R}^{2}, \beta_{\text {eucl }}\right)$. By Proposition 2.1.12, we have:
 
+
+
+Example 2.1.14. 
+
+
+Let $\beta_{\text {eucl }}$ denote the standard Euclidean scalar product on $\mathbb{R}^{n}$ for any $n \in \mathbb{N}$. Consider $\operatorname{Cl}\left(\mathbb{R}^{2}, \beta_{\text {eucl }}\right)$. By Proposition 2.1.12, we have:
 $$
 \mathrm{Cl}\left(\mathbb{R}^{2}, \beta_{\text {eucl }}\right) \cong \mathrm{Cl}\left(\mathbb{R}, \beta_{\text {eucl }}\right) \hat{\otimes} \mathrm{Cl}\left(\mathbb{R}, \beta_{\text {eucl }}\right) \cong \mathbb{C} \otimes \mathbb{C}
 $$
-
 Let $e_{1}, e_{2}$ be the standard othonormal basis of $\mathbb{R}^{2}$. Then a vector space basis of $\operatorname{Cl}\left(\mathbb{R}^{2}, \beta_{\text {eucl }}\right)$ is given by $1, e_{1}, e_{2}, e_{1} \cdot e_{2}$. We then have the following identities for the\\
 basis elements:
-
 $$
 \begin{aligned}
 e_{1}^{2} & =-1 \\
@@ -719,9 +1359,7 @@ e_{2}^{2} & =-1 \\
 \left(e_{1} \cdot e_{2}\right)^{2} & =e_{1} \cdot e_{2} \cdot e_{1} \cdot e_{2}=-e_{1}^{2} \cdot e_{2}^{2}=-1
 \end{aligned}
 $$
-
 Hence there is an algebra isomorphism $\operatorname{Cl}\left(\mathbb{R}^{2}, \beta_{\text {eucl }}\right) \rightarrow \mathbb{H}$, given by
-
 $$
 \begin{aligned}
 1 & \mapsto 1 \\
@@ -730,24 +1368,95 @@ e_{2} & \mapsto j \\
 e_{1} \cdot e_{2} & \mapsto k .
 \end{aligned}
 $$
-
 Here $\mathbb{H}$ denotes the quaternions. Hence $\operatorname{Cl}\left(\mathbb{R}^{2}, \beta_{\text {eucl }}\right) \cong \mathbb{H}$.
 
-Remark 2.1.15. Let $V$ be a $\mathbb{K}$-vector space with a symmetric bilinear form $\beta$ and let $\Lambda^{\bullet} V:=\oplus_{k=0}^{n} \Lambda^{k} V$ be the exterior algebra of $V$. If $v_{1}, \ldots, v_{n}$ is a basis of $V$ then the vectors
 
+
+\begin{EXA}{SG-B11-01-19}{Clifford-Algebra-Isomorphismus für \(\Cl(\mathbb{R}^2,\beta_{\mathrm{eucl}})\)}
+Sei \(\beta_{\mathrm{eucl}}\) das Standardskalarprodukt auf \(\mathbb{R}^n\) für beliebiges \(n\in\mathbb{N}\).
+Betrachten wir \(\Cl(\mathbb{R}^2,\beta_{\mathrm{eucl}})\).
+Nach Proposition~\ref{PROP:CLIFF-TENSOR-ISO} gilt:
+\[
+\Cl(\mathbb{R}^2,\beta_{\mathrm{eucl}})
+\;\cong\;
+\Cl(\mathbb{R},\beta_{\mathrm{eucl}})\;\hat{\otimes}\;
+\Cl(\mathbb{R},\beta_{\mathrm{eucl}})
+\;\cong\;
+\mathbb{C}\otimes\mathbb{C}.
+\]
+
+Seien \(e_{1},e_{2}\) die Standardbasisvektoren von \(\mathbb{R}^{2}\).
+Eine Vektorraum-Basis von \(\Cl(\mathbb{R}^2,\beta_{\mathrm{eucl}})\) ist
+\[
+1,\quad e_{1},\quad e_{2},\quad e_{1}\cdot e_{2}.
+\]
+Für die Basis-Elemente gelten die Relationen:
+\[
+e_{1}^{2}=-1,\qquad e_{2}^{2}=-1,\qquad
+(e_{1}\cdot e_{2})^{2}=e_{1}\cdot e_{2}\cdot e_{1}\cdot e_{2}
+=-e_{1}^{2}\cdot e_{2}^{2}=-1.
+\]
+
+Damit erhält man einen Algebren-Isomorphismus
+\(\Cl(\mathbb{R}^2,\beta_{\mathrm{eucl}})\to\mathbb{H}\),
+gegeben durch
+\[
+1\mapsto 1,\qquad e_{1}\mapsto i,\qquad e_{2}\mapsto j,\qquad
+e_{1}\cdot e_{2}\mapsto k.
+\]
+Hier bezeichnet \(\mathbb{H}\) die Quaternionenalgebra.
+Also gilt:
+\[
+\boxed{\Cl(\mathbb{R}^2,\beta_{\mathrm{eucl}})\;\cong\;\mathbb{H}.}
+\]
+\end{EXA}
+
+
+
+Remark 2.1.15. 
+
+
+Let $V$ be a $\mathbb{K}$-vector space with a symmetric bilinear form $\beta$ and let $\Lambda^{\bullet} V:=\oplus_{k=0}^{n} \Lambda^{k} V$ be the exterior algebra of $V$. If $v_{1}, \ldots, v_{n}$ is a basis of $V$ then the vectors
 $$
 v_{i_{1}} \wedge \ldots \wedge v_{i_{k}} \in \Lambda^{\bullet} V, \quad v_{i_{1}} \cdot \ldots \cdot v_{i_{k}} \in \operatorname{Cl}(V, \beta),
 $$
-
 $1 \leq i_{1}<\ldots<i_{k} \leq n, 0 \leq k \leq n$, form a basis of $\Lambda^{\bullet} V$ and $\mathrm{Cl}(V, \beta)$ respectively. One shows easily by induction on $n=\operatorname{dim} V$ that there exists a $\beta$-orthogonal basis $v_{1}, \ldots, v_{n}$ of $V$, i.e., $\beta\left(v_{i}, v_{j}\right)=0$ for $i \neq j$. For such a basis $v_{1}, \ldots, v_{n}$ of $V$ the map
-
 $$
 \Phi: \quad \Lambda^{\bullet} V \rightarrow \mathrm{Cl}(V, \beta) \quad \text { given by } \quad v_{i_{1}} \wedge \ldots \wedge v_{i_{k}} \mapsto v_{i_{1}} \cdot \ldots \cdot v_{i_{k}}
 $$
-
 and linear extension is independent of the choice of $\beta$-orthogonal basis. $\Phi$ is an isomorphism of vector spaces but not an isomorphism of algebras.
 
-\subsection*{The Spin Group}
+
+
+
+\begin{CONC}{SG-B11-01-20}{Kan. Vektorraumisomorphismus \(\Lambda^\bullet V \cong \Cl(V,\beta)\)}
+Sei \(V\) ein \(\mathbb{K}\)-Vektorraum mit symmetrischer Bilinearform \(\beta\), und
+\(\Lambda^\bullet V=\bigoplus_{k=0}^n \Lambda^k V\) die äußere Algebra.
+Wähle eine \(\beta\)-orthogonale Basis \(v_1,\dots,v_n\) von \(V\) (d.\,h. \(\beta(v_i,v_j)=0\) für \(i\neq j\)).
+Definiere eine lineare Abbildung
+\[
+\Phi:\ \Lambda^\bullet V \longrightarrow \Cl(V,\beta),\qquad
+\Phi\!\left(v_{i_1}\wedge\cdots\wedge v_{i_k}\right):=
+v_{i_1}\cdot\cdots\cdot v_{i_k}
+\quad(1\le i_1<\cdots<i_k\le n),
+\]
+und setze \(\Phi(1)=1\).
+
+Dann gilt:
+\begin{enumerate}
+\item \(\Phi\) ist unabhängig von der Wahl der \(\beta\)-orthogonalen Basis.
+\item \(\Phi\) ist ein Isomorphismus von Vektorräumen (beide Seiten haben Basis
+\(\{v_{i_1}\wedge\cdots\wedge v_{i_k}\}\) bzw. \(\{v_{i_1}\cdot\cdots\cdot v_{i_k}\}\) und Dimension \(2^n\)).
+\item \(\Phi\) ist im Allgemeinen \emph{kein} Algebra-Isomorphismus (außer im degenerierten Fall \(\beta=0\)).
+Insbesondere gilt \(v\wedge v=0\), während in \(\Cl(V,\beta)\) \(v\cdot v=-\beta(v,v)\,1\).
+\end{enumerate}
+\end{CONC}
+
+
+
+\pagebreak
+
+\subsection{The Spin Group}
 Notation 2.2.1. In the following, we denote the Clifford algebra of $\mathbb{R}^{n}$ with the standard Euclidean scalar product by $\mathbf{C l}_{n}:=\mathrm{Cl}\left(\mathbb{R}^{n}, \beta_{\text {eucl }}\right)$.
 
 Remark 2.2.2. Upon identifying $\mathbb{R}^{n}$ with $\imath\left(\mathbb{R}^{n}\right) \subset \mathrm{Cl}_{n}$, for every $v \in \mathbb{R}^{n} \backslash\{0\}$, we have $v^{2}=-|v|^{2} \cdot 1$ and thus
@@ -916,7 +1625,8 @@ $$
 
 Now we proceed inductively and obtain $|\alpha|=\left|v_{1}\right|=1$. Hence, $\alpha= \pm 1$ and thus $a \in\{1,-1\}$. Therefore, $\operatorname{ker}(\varrho) \subset\{1,-1\}$.
 
-\section*{Remark 2.2.11.}
+Remark 2.2.11.
+
 Let $\mathrm{Cl}_{n}^{\times}:=\left\{x \in \mathrm{Cl}_{n} \mid \exists y \in \mathrm{Cl}_{n}\right.$ s.t. $\left.x \cdot y=1\right\}$ be the group of invertible elements in the Clifford algebra $\mathrm{Cl}_{n}$. Then we have:\\
 i) The map
 
@@ -1052,7 +1762,7 @@ $$
 \end{array}\right) .
 $$
 
-\subsection*{Spinors}
+\subsection{Spinors}
 Definition 2.3.1. A representation of a group $G$ on a vector space $V$ is a group homomorphism $\lambda: G \rightarrow \mathrm{GL}(V)$.\\
 A representation $\lambda: G \rightarrow \mathrm{GL}(V)$ on a Euclidean or Hermitian vector space $(V, \beta)$ is called orthogonal or unitary, if $\lambda(G) \subset \mathrm{O}(V, \beta)$ or $\lambda(G) \subset \mathrm{U}(V, \beta)$, respectively.
 
@@ -1195,7 +1905,11 @@ Remark 2.3.5. If $\lambda: \operatorname{Spin}(n) \rightarrow \mathrm{GL}(V)$ is
 Since $\varrho$ is surjective, there is a map $\lambda^{\prime}: \mathrm{SO}(n) \rightarrow \mathrm{GL}(V)$ such that the alongside diagram commutes.\\
 \includegraphics[scale=0.3, center]{2025_10_29_567e9a909b434280ddc6g-091}
 
-\section*{The even dimensional case}
+
+\pagebreak
+
+\textbf{The even dimensional case}
+
 In the following, let $n=2 m$. Let $\mathrm{Cl}_{n}$ be the Clifford algebra of $\mathbb{R}^{n}$ with the standard Euclidean scalar product and let $\mathbb{C l}_{n}:=\mathrm{Cl}_{n} \otimes_{\mathbb{R}} \mathbb{C}$ be its complexification. Let $e_{1}, \ldots, e_{2 m}$ be the standard basis of $\mathbb{R}^{n}$. For $j=1, \ldots, m$ define
 
 $$
@@ -1554,7 +2268,12 @@ $$
 
 Thus every endomorphism of $\Sigma_{n}$ can be obtained by composing endomorphisms of the form $\Phi\left(\bar{z}_{K^{c}} \cdot z_{1} \cdot \ldots \cdot z_{m} \cdot \bar{z}_{I}\right)$. This shows that $\Phi$ is surjective. Since $\mathbb{C l}_{n}$ and $\operatorname{End}\left(\Sigma_{n}\right)$ have the same dimension we conclude that $\Phi$ is an isomorphism. \(\square\)
 
-\section*{The odd dimensional case}
+
+\pagebreak
+
+
+\textbf{The odd dimensional case}
+
 In the following, let $n=2 m-1$. To construct the spinor space $\Sigma_{n}$, we make the following observation:
 
 Lemma 2.3.12. Let $n \in \mathbb{N}$. The linear map $j: \mathbb{R}^{n} \rightarrow \mathrm{Cl}_{n+1}^{0}$,
@@ -1691,7 +2410,11 @@ i & 0
 \end{aligned}
 $$
 
-\subsection*{Spin Structures}
+
+\pagebreak
+
+
+\subsection{Spin Structures}
 Let $M$ be an $n$-dimensional oriented Riemannian manifold. For $x \in M$ put
 
 $$
@@ -1882,7 +2605,10 @@ are called the positive and the negative spinor bundle of $M$ for the spin struc
 
 If $n$ is even we have the decomposition $\Sigma M=\Sigma^{+} M \oplus \Sigma^{-} M$.
 
-\section*{Example 2.4.8}
+
+
+Example 2.4.8
+
 \begin{enumerate}
   \item For the trivial spin structure $P_{\text {triv }}^{\text {Spin }}\left(S^{1}\right)$ of $S^{1}$ we get
 \end{enumerate}
@@ -1938,7 +2664,10 @@ $$
 \left\langle\llbracket H \cdot a, \sigma_{n}\left(a^{-1}\right) \varphi \rrbracket, \llbracket H \cdot a, \sigma_{n}\left(a^{-1}\right) \psi \rrbracket\right\rangle=\left\langle\sigma_{n}\left(a^{-1}\right) \varphi, \sigma_{n}\left(a^{-1}\right) \psi\right\rangle=\langle\varphi, \psi\rangle .
 $$
 
-\section*{Clifford multiplication}
+
+\pagebreak
+\subsection{Clifford multiplication}
+
 In the following definition of the Clifford multiplication, we use the fact that for an oriented Riemannian manifold, the tangent bundle $T M$ is isomorphic to the vector bundle associated to $P^{\mathrm{SO}}(M)$ via the standard representation $\lambda_{\text {st }}$ of $\mathrm{SO}(n)$ on $\mathbb{R}^{n}$.
 
 Definition 2.4.9. Let $M$ be a Riemannian spin manifold with spinor bundle $\Sigma M$, and let $x \in M$. The map
@@ -1988,7 +2717,10 @@ $$
 \left\langle X^{\prime} \cdot \phi, \psi\right\rangle=-\left\langle\phi, X^{\prime} \cdot \psi\right\rangle .
 $$
 
-\section*{The spinor connection}
+
+\pagebreak
+\subsection{The spinor connection}
+
 As above, let $M$ be a Riemannian spin manifold. The Levi-Civita connection $\nabla$ on $T M$ induces a connection 1 -form $\omega^{\mathrm{LC}} \in \Omega^{1}\left(P^{\mathrm{SO}}(M), \mathfrak{s o}(n)\right)$. By pull-back with $\bar{\varrho}$, we obtain an $\mathfrak{s o}(n)$-valued 1-form $\bar{\varrho}^{*} \omega^{\mathrm{LC}} \in \Omega^{1}\left(P^{\operatorname{Spin}}(M), \mathfrak{s o}(n)\right)$. Applying the isomorphism $\varrho_{*}^{-1}: \mathfrak{s o}(n) \rightarrow \mathfrak{s p i n}(n)$ yields the connection 1-form
 
 $$
@@ -2082,7 +2814,8 @@ $$
 \end{aligned}
 $$
 
-\section*{Remark 2.4.11}
+Remark 2.4.11
+
 a) The spinor connection $\nabla^{\Sigma}$ is a metric connection on the spinor bundle $\Sigma M$. Hence for all smooth spinor fields $\phi, \psi$ and every tangent vector $X$, we have
 
 $$
@@ -2184,7 +2917,11 @@ $$
 
 We conclude that $\left(R^{\Sigma}\left(b_{i}, b_{j}\right) \phi\right)(x)=-\frac{1}{4} \sum_{\alpha}\left(R\left(b_{i}, b_{j}\right) b_{\alpha}\right) \cdot b_{\alpha} \cdot \phi(x)$.
 
-\subsection*{The classical Dirac operator on spinors}
+
+\pagebreak
+
+\subsection{The classical Dirac operator on spinors}
+
 Let $M$ be an $n$-dimensional Riemannian spin manifold. Clifford multiplication in the spinor bundle $\Sigma M$ defines a smooth section $A \in C^{\infty}\left(M, \operatorname{Hom}\left(T^{*} M \otimes \Sigma M, \Sigma M\right)\right)$ by $A(\xi \otimes \phi)=\xi^{\sharp} \cdot \phi$.
 
 Definition 2.5.1. Let $M$ be a Riemannian spin manifold with spinor bundle $\Sigma M$. The classical Dirac operator is the first order operator
@@ -2278,7 +3015,10 @@ $$
 
 Here $\nu$ denotes the exterior unit normal vector field on $\partial M$.
 
-\section*{Example 2.5.8}
+
+
+Example 2.5.8
+
 (i) Consider $M=S^{1}$ with the trivial spin structure. Let $b_{1}=\frac{\partial}{\partial t}$. Then we have
 
 $$
@@ -2579,7 +3319,10 @@ $$
 
 In particular, by the estimate (2.40), 0 can not be an eigenvalue of $D$ for any metric on $S^{2}$.
 
-\section*{Remark 2.5.18}
+
+
+Remark 2.5.18
+
 \begin{enumerate}
   \item Equality in (2.40) (for the eigenvalue with the smallest absolute value) is achieved iff the curvature of $M$ is constant.
   \item Lott (1986) proved with different methods the estimate:
@@ -2693,7 +3436,1083 @@ $$
 
 Observe that only in this last step, we used the fact that $M=S^{2}$.
 
-\subsection*{Hypersurfaces}
+
+
+\pagebreak
+
+\subsection{Dirac-Spinoren in der Signatur $(1,3)$ und die Dirac-Gleichung}
+
+\emph{Clifford-Algebra und Spin-Gruppe in $(1,3)$}
+
+
+[Reelle und komplexe Clifford-Algebra]
+
+Sei $\eta = \mathrm{diag}(-,+,+,+)$ die Minkowski-Metrik auf $\R^{1,3}$ und $\langle v,w\rangle:=\eta_{\mu\nu} v^\mu w^\nu$. 
+Die \emph{reelle Clifford-Algebra} $\Cl_{1,3}:=\Cl(\R^{1,3},\langle\cdot,\cdot\rangle)$ ist die unitalen Algebra, erzeugt von $\R^{1,3}$ mit Relationen
+\[
+v\cdot w + w\cdot v = -2\,\eta(v,w)\,1.
+\]
+Ihre \emph{Komplexifizierung} ist $\Cl_{1,3}^{\C}:=\Cl_{1,3}\otimes_\R \C$.
+
+
+
+
+[Struktur]
+
+Es gilt ein kanonischer Algebra-Isomorphismus 
+\[
+\Cl_{1,3}^{\C}\;\cong\; \Mat_{4}(\C).
+\]
+Insbesondere besitzt $\Cl_{1,3}^{\C}$ eine treue irreduzible Darstellung auf $\C^4$, die man als Raum der (Dirac-)\,Spinoren verwendet.
+
+
+
+[Spin-Gruppe und Vektor-Darstellung]
+
+Die \emph{Spin-Gruppe} $\Spin(1,3)\subset \Cl_{1,3}$ ist die aus Einheitsprodukten von zeit- oder raumartigen Einheitsvektoren mit gerader Länge erzeugte Untergruppe. Die adjungierte Wirkung auf $\R^{1,3}\subset \Cl_{1,3}$ deckt die Zusammenhangskomponente $\SO^+(1,3)$ doppelt: 
+\[
+\rho:\Spin(1,3)\to \SO^+(1,3),\qquad \rho(a)(v):=a v a^{-1}.
+\]
+Über $\C$ identifiziert sich $\Spin^0(1,3)\simeq \SL(2,\C)$.
+
+
+
+
+[Weyl- und Majorana-Blicke]
+
+Über $\C$ spaltet die (komplexe) Spinor-Darstellung in zwei 2-dimensionale irreduzible \emph{Weyl-Darstellungen} (Chiralität). Über $\R$ existiert in Signatur $(1,3)$ eine Majorana-Realform; der Dirac-Spinor ist dann die direkte Summe zweier Weyl-Spinoren.
+
+
+\emph{Spinoren, Clifford-Multiplikation und Spinorverbindung}
+
+
+[Spinorbündel in der flachen Raumzeit]
+
+Sei $(\R^{1,3},\eta)$ die Minkowski-Raumzeit. Wähle die kanonische Spin-Struktur. Das komplexe Spinorbündel ist das triviale Bündel 
+\(\Sigma := \R^{1,3}\times \C^4\).
+Die \emph{Clifford-Multiplikation} ist eine glatte Bündelabbildung
+\[
+\cdot: T\R^{1,3}\otimes \Sigma \to \Sigma,\qquad X\cdot\psi := \gamma(X)\psi,
+\]
+wobei die Feldoperatoren $\gamma(X)$ die Clifford-Relationen
+\(\gamma_\mu\gamma_\nu+\gamma_\nu\gamma_\mu=-2\eta_{\mu\nu}\mathrm{id}\)
+erfüllen.
+
+
+
+[Gamma-Matrizen]
+
+In einer globalen Lorentzbasis $(\partial_\mu)$ kann man z.\,B. die Weyl- oder Dirac-Darstellung wählen. Jede Wahl $\gamma^\mu$ mit
+\(\{\gamma^\mu,\gamma^\nu\}=-2\eta^{\mu\nu}\)
+liefert dieselbe Geometrie bis zu Bündeläquivalenz.
+
+
+
+
+[Spinorverbindung]
+
+Die Levi-Civita-Verbindung von $(\R^{1,3},\eta)$ induziert eine \emph{Spinorverbindung} 
+\(\nabla^\Sigma\) auf \(\Sigma\).
+In der flachen Karte ist \(\nabla^\Sigma_\mu=\partial_\mu\), in gekrümmter Geometrie kommen die \emph{Spin-Connection-Koeffizienten} \(\omega_{\mu}^{ab}\) hinzu:
+\[
+\nabla^\Sigma_\mu = \partial_\mu + \tfrac{1}{4}\,\omega_{\mu}^{ab}\,\gamma_{ab},\qquad \gamma_{ab}:=\tfrac{1}{2}[\gamma_a,\gamma_b].
+\]
+
+
+
+Die Konstruktion entspricht exakt der riemannschen Theorie (Kap.\,2 bei Bär) und ihrer semi-riemannschen Variante (Kap.\,6): Spinstruktur, assoziiertes Spinorbündel, kanonische Hermite-Struktur/indefinite Sesquilinearform und kompatible Verbindung; die Clifford-Multiplikation ist punktweise adjungiert-schief bzgl. der natürlichen Metrik auf Spinoren.
+
+
+\emph{(Freier) Dirac-Operator und Dirac-Gleichung}
+
+
+
+[Geometrischer Dirac-Operator]
+
+Der \emph{Dirac-Operator} auf Spinoren ist
+\[
+\slashed{\nabla}:=\gamma^\mu\nabla^\Sigma_\mu.
+\]
+In der flachen Minkowski-Raumzeit reduziert er sich zu \(\slashed{\partial}=\gamma^\mu\partial_\mu\).
+
+
+
+[Freie Dirac-Gleichung]
+
+Ein (massiver) freier Dirac-Spinor ist eine Spinor-Sektion \(\psi\) mit
+\[
+(i\slashed{\nabla}-m)\psi=0\qquad
+(\text{in Minkowski: } (i\slashed{\partial}-m)\psi=0).
+\]
+
+
+
+[U(1)- und SU(N)-Kopplung (Minimal Coupling)]
+
+Sei \(A_\mu\) ein Eichpotential (U(1) oder eine Matrix \(A_\mu=A_\mu^a T^a\) in einer endlichen Darstellung). Die gekoppelter Dirac-Operator ist
+\[
+\slashed{D}:=\gamma^\mu(\nabla^\Sigma_\mu + i q A_\mu)\quad\text{bzw.}\quad 
+\slashed{D}:=\gamma^\mu\Big(\nabla^\Sigma_\mu + i g A_\mu^a T^a\Big),
+\]
+und die Feldgleichung lautet \((i\slashed{D}-m)\psi=0\).
+
+
+
+[Kovarianz]
+
+Unter lokalen Lorentztransformationen (Lift zu \(\Spin(1,3)\)) und Eichtransformationen transformiert \(\slashed{\nabla}\) bzw. \(\slashed{D}\) äquivariant; die Gleichungen sind wohldefiniert auf dem Spinorbündel.
+
+
+\begin{proof}[Skizze]
+Die Spinorverbindung entsteht aus der Levi-Civita-Verbindung via Pullback und Lie-Algebra-Isomorphismus \(\mathfrak{so}(1,3)\cong\mathfrak{spin}(1,3)\); die Clifford-Multiplikation ist \(\Spin(1,3)\)-äquivariant. Für die Eichkopplung nutzt man die direkte Summe der Spinorverbindung mit der Eichverbindung in der gegebenen Darstellung.
+\end{proof}
+
+\emph{Chiralität, Konjugationen, Bilineare}
+
+
+
+[Chirale Zerlegung]
+
+In gerader Dimension definiert das Volumenelement \(\omega:= i\,\gamma^0\gamma^1\gamma^2\gamma^3\) die Projektoren 
+\(P_\pm=\tfrac{1}{2}(1\pm\gamma_5)\) mit \(\gamma_5:=i\gamma^0\gamma^1\gamma^2\gamma^3\). 
+Damit zerlegt sich der Dirac-Spinor als \(\psi=\psi_+\oplus\psi_-\) (Weyl-Spinoren).
+
+
+
+
+[Lagrangedichte]
+
+Die freie Dirac-Lagrange-Dichte ist
+\[
+\mathcal{L}=\bar\psi\,(i\slashed{\nabla}-m)\psi,\qquad 
+\bar\psi:=\psi^\dagger \gamma^0,
+\]
+und mit Eichkopplung \(\mathcal{L}=\bar\psi\,(i\slashed{D}-m)\psi\).
+
+
+
+
+\emph{Geometrische Identitäten (flach vs. gekrümmt)}
+
+
+
+[Lichnerowicz-Typ-Formel (Riemannianer Kontext)]
+
+Auf einer (pseudo)-riemannschen Spin-Mannigfaltigkeit gilt für den riemannschen Dirac-Operator schematisch 
+\[
+\slashed{\nabla}^2 = \nabla^{\Sigma\,*}\nabla^\Sigma + \tfrac{1}{4}\,\mathrm{scal} + \text{(Eich-Krümmungsterm)},
+\]
+wobei \(\mathrm{scal}\) die Skalar­krümmung ist. In Minkowski-Raum (\(\mathrm{scal}=0\)) und ohne Feldstärken reduziert sich dies lokal auf die d’Alambert- bzw. Laplace-Operatorik auf Spinoren.
+
+
+
+
+Für Anwendungen in QFT auf gekrümmten Hintergründen liefert diese Formel (und ihre semi-riemannsche Variante) Spektralabschätzungen und Energie-Identitäten; im flachen Fall resultiert die Klein-Gordon-Gleichung durch Linksanwendung von \(i\slashed{\partial}+m\) auf die Dirac-Gleichung.
+
+
+\pagebreak
+
+\subsection{Lorentz-Gruppe, Spin-Gruppe und Spinortransformationen}
+
+\emph{1. Die Lorentz-Gruppe als Lie-Gruppe.}
+Die \emph{Lorentz-Gruppe} ist definiert durch
+\[
+O(1,3)
+:= \{\Lambda \in GL(4,\R)\mid \Lambda^T g\,\Lambda = g\},
+\qquad g=\mathrm{diag}(1,-1,-1,-1).
+\]
+Ihre Zusammenhangskomponente der Identität, die \emph{eigentliche orthochrone Lorentz-Gruppe}, ist
+\[
+SO^+(1,3)
+:= \{\Lambda\in O(1,3)\mid \det\Lambda=1,\ \Lambda^0{}_0>0\}.
+\]
+Dies ist eine nicht-kompakte, zusammenhängende Lie-Gruppe der Dimension $6$.
+
+\emph{2. Die Lie-Algebra $\mathfrak{so}(1,3)$.}
+Die zugehörige Lie-Algebra besteht aus Matrizen $X$ mit
+\[
+X^T g + g X = 0.
+\]
+Eine Basis bilden die antisymmetrischen Generatoren $M_{\mu\nu}=-M_{\nu\mu}$ mit Kommutatorrelationen
+\[
+[M_{\mu\nu}, M_{\rho\sigma}]
+= g_{\nu\rho} M_{\mu\sigma} - g_{\mu\rho} M_{\nu\sigma}
+ - g_{\nu\sigma} M_{\mu\rho} + g_{\mu\sigma} M_{\nu\rho}.
+\]
+Physikalisch kann man sie als
+\[
+J_i = \tfrac12\epsilon_{ijk}M_{jk}\quad (\text{Rotationen}),\qquad
+K_i = M_{0i}\quad (\text{Boosts})
+\]
+interpretieren.
+
+\emph{3. Die Spin-Gruppe als zweifache Überlagerung.}
+Da $SO^+(1,3)$ nicht einfach zusammenhängend ist ($\pi_1(SO^+(1,3))\cong \Z_2$), existiert eine zweifache Überlagerung
+\[
+\rho:\Spin(1,3)\longrightarrow SO^+(1,3).
+\]
+Die Spin-Gruppe kann innerhalb der Clifford-Algebra $\Cl_{1,3}$ definiert werden als
+\[
+\Spin(1,3)
+=\{a\in \Cl_{1,3}^{\text{even}}\mid a v a^{-1}\in V,\ \forall v\in V,\ a\tilde a=1\},
+\]
+wobei $\tilde a$ die Clifford-Involution bezeichnet. Die Wirkung auf $V=\R^{1,3}$ erfolgt durch Konjugation:
+\[
+v\longmapsto a v a^{-1}.
+\]
+Diese Wirkung induziert die Lorentztransformation $\Lambda=\rho(a)$.
+
+\emph{4. Spinor-Darstellung.}
+Eine Darstellung der Spin-Gruppe auf dem Spinorraum $S$ ist ein Homomorphismus
+\[
+\sigma:\Spin(1,3)\longrightarrow GL(S)
+\]
+mit der Kovarianzeigenschaft
+\[
+\sigma(a)^{-1}\gamma^\mu\sigma(a) = \Lambda^\mu{}_\nu \gamma^\nu,
+\qquad \Lambda=\rho(a)\in SO^+(1,3).
+\]
+Infinitesimal ergibt dies eine Darstellung der Lie-Algebra $\mathfrak{so}(1,3)$ auf $S$:
+\[
+\sigma_*: \mathfrak{so}(1,3)\longrightarrow \mathfrak{gl}(S),\qquad
+\sigma_*(M_{\mu\nu}) = \frac{i}{4}[\gamma_\mu,\gamma_\nu]
+=: \frac{i}{2}\sigma_{\mu\nu}.
+\]
+Für infinitesimale Parameter $\omega_{\mu\nu}=-\omega_{\nu\mu}$ gilt dann
+\[
+S(\Lambda)
+=\exp\!\Big(-\frac{i}{4}\omega_{\mu\nu}\sigma^{\mu\nu}\Big),
+\qquad
+\psi \mapsto S(\Lambda)\psi.
+\]
+
+\emph{5. Kovarianz der Dirac-Gleichung.}
+Die Dirac-Gleichung
+\[
+(i\gamma^\mu\partial_\mu - m)\psi(x)=0
+\]
+ist invariant unter Lorentz-Transformationen, wenn
+\[
+\psi'(x') = S(\Lambda)\psi(x),\qquad x'=\Lambda x,
+\]
+und $\gamma^\mu$ kovariant transformiert:
+\[
+S(\Lambda)^{-1}\gamma^\mu S(\Lambda)=\Lambda^\mu{}_\nu\gamma^\nu.
+\]
+Dann gilt
+\[
+(i\gamma^\mu\partial_\mu - m)\psi(x)=0
+\quad\Longleftrightarrow\quad
+(i\gamma^\mu\partial'_\mu - m)\psi'(x')=0.
+\]
+
+\emph{6. Diagrammatische Darstellung.}
+Die Struktur lässt sich im folgenden kommutativen Diagramm zusammenfassen:
+\[
+\begin{array}{ccc}
+\Spin(1,3) & \xrightarrow{\ \sigma\ } & GL(S)\\[0.4em]
+\downarrow\rho & & \downarrow\mathrm{Ad}\\[0.4em]
+SO^+(1,3) & \xrightarrow{\ \mathrm{Ad}\ } & GL(V)
+\end{array}
+\]
+Hierbei gilt:
+\begin{itemize}
+\item $V=\R^{1,3}$ ist der Raum der Vierervektoren,
+\item $S=\C^4$ der Spinorraum,
+\item $\rho$ die zweifache Überlagerung $\Spin(1,3)\to SO^+(1,3)$,
+\item $\sigma$ die Spinor-Darstellung, welche $\gamma^\mu$ kovariant hält:
+  \[
+  \sigma(a)^{-1}\gamma^\mu\sigma(a)=\Lambda^\mu{}_\nu\gamma^\nu.
+  \]
+\end{itemize}
+
+\emph{7. Lie-theoretische Zusammenfassung.}
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lll}
+Objekt & Bedeutung & Struktur\\
+\hline
+$V=\R^{1,3}$ & Raumzeit-Vektoren & Standarddarstellung von $SO^+(1,3)$\\
+$\mathfrak{so}(1,3)$ & Generatoren $M_{\mu\nu}$ & Lie-Algebra der Lorentzgruppe\\
+$\Spin(1,3)$ & zweifache Überlagerung & Realisierung in $\Cl_{1,3}$\\
+$\sigma(a)$ & Spinor-Darstellung auf $S=\C^4$ & Homomorphismus $\Spin(1,3)\to GL(S)$\\
+$\sigma_*(M_{\mu\nu})=\frac{i}{4}[\gamma_\mu,\gamma_\nu]$ & Generatoren auf $S$ & Darstellung der Lie-Algebra\\
+Dirac-Gleichung $(i\gamma^\mu\partial_\mu-m)\psi=0$ & Spin-$\tfrac12$-Feld & Invariant unter $\sigma(\Spin(1,3))$
+\end{tabular}
+\end{center}
+
+\emph{8. Intuition.}
+Die Lorentzgruppe beschreibt die Transformation von Vektoren,
+die Spin-Gruppe deren „Quadratwurzeln“.
+Die Gamma-Matrizen verknüpfen beide Ebenen über
+\[
+\sigma(a)^{-1}\gamma^\mu\sigma(a)=\Lambda^\mu{}_\nu\gamma^\nu,
+\]
+und garantieren so die Lorentz-Kovarianz der Dirac-Gleichung.
+
+
+\pagebreak
+
+\subsection{Formale Struktur der Clifford-Operator-Konstruktion}
+
+\emph{Ziel.}
+Gesucht ist ein linearer Differentialoperator erster Ordnung
+\[
+\mathcal D := A^\mu \partial_\mu,
+\]
+der auf Feldern $\psi:\R^{1,3}\to S$ mit Werten in einem komplexen Vektorraum $S$ wirkt und folgende Eigenschaften erfüllt:
+\begin{enumerate}
+\item[(i)] \textbf{Faktorisierung:}
+\[
+(\mathcal D - m)(\mathcal D + m) = \Box + m^2,
+\qquad \Box := g^{\mu\nu}\partial_\mu\partial_\nu;
+\]
+\item[(ii)] \textbf{Lorentz-Kovarianz:}
+unter $\Lambda\in\SO^+(1,3)$ soll $(i\mathcal D - m)\psi=0$ forminvariant bleiben;
+\item[(iii)] \textbf{Adjungierung:}
+es existiert eine hermitesche Struktur auf $S$, die einen wohldefinierten Viererstrom
+$j^\mu = \bar\psi A^\mu \psi$ mit $\partial_\mu j^\mu=0$ liefert.
+\end{enumerate}
+
+\emph{Operatorraum und Darstellungsraum.}
+Sei $V:=\R^{1,3}$ der Minkowski-Raum mit Bilinearform $g=\mathrm{diag}(1,-1,-1,-1)$.
+Wir suchen eine lineare Abbildung
+\[
+A:\;V\longrightarrow \operatorname{End}(S),
+\qquad v\longmapsto A(v),
+\]
+die jedem Tangentialvektor einen linearen Operator auf einem komplexen Raum $S$ zuordnet.
+$S$ heißt dabei \emph{Spinorraum} oder \emph{Darstellungsraum}.
+
+\emph{Forderung an die Operatoren.}
+Damit die Faktorisierungsbedingung (i) erfüllt ist, muss gelten
+\[
+\frac12(A^\mu A^\nu + A^\nu A^\mu) = g^{\mu\nu}\,\mathbf 1_S
+\quad\Longleftrightarrow\quad
+\{A^\mu,A^\nu\}=2g^{\mu\nu}\mathbf 1_S.
+\]
+Dies ist die \emph{Clifford-Relation} in Operatorform.
+
+\emph{Universelle Eigenschaft.}
+Die Clifford-Algebra $\Cl(V,g)$ ist definiert als
+\[
+\Cl(V,g)
+:= T(V)\Big/\big\langle v\otimes w + w\otimes v - 2g(v,w)\,1\big\rangle,
+\]
+wobei $T(V)$ die Tensoralgebra von $V$ ist.  
+Sie besitzt die \emph{universelle Eigenschaft}:  
+Für jede lineare Abbildung $\Gamma:V\to\operatorname{End}(S)$ mit
+\[
+\Gamma(v)\Gamma(w)+\Gamma(w)\Gamma(v)=2g(v,w)\mathbf 1_S
+\]
+existiert ein eindeutiger Algebra-Homomorphismus
+\[
+\rho:\Cl(V,g)\longrightarrow\operatorname{End}(S)
+\quad\text{mit}\quad \rho(v)=\Gamma(v).
+\]
+Umgekehrt liefert jede Darstellung $\rho$ von $\Cl(V,g)$ eine solche Abbildung durch $\Gamma(v):=\rho(v)$.
+
+\emph{Interpretation.}
+Eine Lösung der Operatorbedingung ist also genau eine Darstellung
+\[
+\rho:\Cl(V,g)\longrightarrow\operatorname{End}(S).
+\]
+Wir setzen $A^\mu := \rho(e^\mu)$ für eine Basis $\{e^\mu\}$ von $V$.
+Dann gilt automatisch
+\[
+\{A^\mu,A^\nu\}=2g^{\mu\nu}\mathbf 1_S,
+\]
+und die Faktorisierung
+\[
+(i\mathcal D - m)(i\mathcal D + m) = g^{\mu\nu}\partial_\mu\partial_\nu + m^2 = \Box + m^2
+\]
+folgt unmittelbar, da der antisymmetrische Teil $[A^\mu,A^\nu]\partial_\mu\partial_\nu$ wegen der Symmetrie der Ableitungen verschwindet.
+
+\emph{Existenz und Struktur.}
+Für den Minkowski-Raum gilt
+\[
+\Cl_{1,3}^{\C} := \Cl(V,g)\otimes_\R\C \;\cong\; \Mat_4(\C).
+\]
+Daher existiert eine treue irreduzible Darstellung $\rho:\Cl_{1,3}^{\C}\to\operatorname{End}(\C^4)$.
+Wir wählen $S:=\C^4$ und definieren
+\[
+A^\mu := \rho(e^\mu) =: \gamma^\mu.
+\]
+Diese Operatoren erfüllen die Clifford-Relation und liefern damit eine konkrete Lösung.
+
+\emph{Lorentz-Kovarianz.}
+Die Spin-Gruppe $\Spin(1,3)\subset \Cl_{1,3}^{\mathrm{even}}$ wirkt auf $V$ durch
+\[
+v\longmapsto a v a^{-1},
+\qquad a\in\Spin(1,3),
+\]
+und überlagert $\SO^+(1,3)$ doppelt:
+$\rho(a)=\Lambda$.  
+Eine Darstellung $\sigma:\Spin(1,3)\to\GL(S)$ ist \emph{kompatibel} mit der Clifford-Struktur, wenn
+\[
+\sigma(a)^{-1}A(v)\sigma(a)=A(\Lambda v).
+\]
+Dann gilt für $A^\mu=A(e^\mu)$ und $\Lambda^\mu{}_\nu$:
+\[
+\sigma(a)^{-1}A^\mu\sigma(a)=\Lambda^\mu{}_\nu A^\nu.
+\]
+Im Infinitesimalen folgt daraus
+\[
+S(\Lambda)
+=\exp\!\Big(-\frac{i}{4}\omega_{\mu\nu}\Sigma^{\mu\nu}\Big),
+\qquad
+\Sigma^{\mu\nu}=\frac{i}{2}[A^\mu,A^\nu],
+\]
+womit die Lorentz-Kovarianz der Gleichung $(iA^\mu\partial_\mu-m)\psi=0$ gesichert ist.
+
+\emph{Adjungierung und Stromerhaltung.}
+Wählt man eine hermitesche Struktur auf $S$ so, dass
+\[
+(A^0)^\dagger=A^0,\qquad (A^i)^\dagger=-A^i,
+\]
+und definiert $\bar\psi:=\psi^\dagger A^0$, so ist der Viererstrom
+\[
+j^\mu:=\bar\psi A^\mu \psi
+\]
+reell und erfüllt für Lösungen der Dirac-Gleichung $\partial_\mu j^\mu=0$.
+
+\emph{Tangentialraumweise Interpretation.}
+In geometrischer Sprache ist für jede Lorentz-Mannigfaltigkeit $(M,g)$ der Tangentialraum $T_xM$ an jedem Punkt $x\in M$ ein Minkowski-Raum $(T_xM,g_x)$.
+Die Clifford-Algebra wird \emph{punktweise} definiert:
+\[
+\Cl(M,g):=\bigsqcup_{x\in M}\Cl(T_xM,g_x).
+\]
+Ein \emph{Spinorbündel} $S\to M$ ist ein Vektorbündel, das lokal den Darstellungsraum $S_x\cong\C^4$ trägt, und auf dem das Clifford-Bündel durch
+\[
+\gamma:\Cl(M,g)\longrightarrow\operatorname{End}(S)
+\]
+faserweise wirkt.
+Im flachen Fall $M=\R^{1,3}$ ist $\Cl(M,g)$ trivial, und die Operatoren $A^\mu=\gamma^\mu$ sind global konstant.
+
+\emph{Zusammenfassung.}
+\begin{itemize}
+\item Die Operatorbedingung $\{A^\mu,A^\nu\}=2g^{\mu\nu}\mathbf 1$ definiert eine Darstellung der Clifford-Algebra $(\Cl(V,g),V,g)$.
+\item Die Faktorisierungsforderung $(\mathcal D - m)(\mathcal D + m)=\Box+m^2$ folgt automatisch aus dieser Struktur.
+\item Der Spinorraum $S$ ist der Darstellungsraum der Clifford-Algebra, auf dem die $\Spin(1,3)$-Gruppe wirkt.
+\item Im Minkowski-Fall gilt $\Cl_{1,3}^{\C}\cong\Mat_4(\C)$, also $S\cong\C^4$ und $A^\mu=\gamma^\mu$.
+\item Tangentialraumweise betrachtet liefert dies den Ausgangspunkt der Spinorgeometrie in der Quantenfeldtheorie.
+\end{itemize}
+
+
+\pagebreak
+
+
+\emph{Problemstellung (Operatorgleichung).}
+Gesucht ist ein komplexer Spinorraum $S$ (endlichdimensionaler $\C$–Vektorraum) und ein linearer Differentialoperator erster Ordnung
+\[
+\mathcal D := A^\mu \partial_\mu \quad\text{mit}\quad A^\mu\in \operatorname{End}(S),
+\]
+sowie $m\in\R_{\ge 0}$, so dass die Feldgleichung
+\[
+(\mathcal D - m)\psi \;=\; 0 \qquad\text{für}\quad \psi:\R^{1,3}\to S
+\]
+die folgenden Eigenschaften erfüllt.
+
+\emph{Zentrale Forderung (Faktorisierung auf Klein–Gordon).}
+Das Quadrat von $(\mathcal D - m)$ soll die Klein–Gordon-Gleichung liefern:
+\[
+(\mathcal D - m)(\mathcal D + m)
+= A^\mu A^\nu \,\partial_\mu\partial_\nu - m^2
+\stackrel{!}{=} g^{\mu\nu}\partial_\mu\partial_\nu + m^2
+=: \Box + m^2,
+\]
+wobei $g=\mathrm{diag}(1,-1,-1,-1)$ Minkowski-Metrik ist und $\Box=\partial^\mu\partial_\mu$.
+Da $\partial_\mu\partial_\nu$ symmetrisch ist, ist dies äquivalent zur algebraischen Bedingung
+\[
+\frac12\big(A^\mu A^\nu + A^\nu A^\mu\big) \;=\; g^{\mu\nu}\,\mathbf 1_S
+\quad\Longleftrightarrow\quad
+\{A^\mu,A^\nu\} = 2 g^{\mu\nu}\,\mathbf 1_S.
+\]
+Dies ist die \emph{Clifford-Relation} in Operatorform.
+
+\emph{Zusatzbedingung 1 (Lorentz-Kovarianz).}
+Es gebe eine (treue) Darstellung $S:\Spin(1,3)\to \GL(S)$, die die Koeffizienten $A^\mu$ wie einen Vierervektor transformiert:
+\[
+S(a)^{-1} A^\mu S(a) \;=\; \Lambda^\mu{}_\nu\, A^\nu
+\qquad\text{für}\quad \Lambda=\rho(a)\in \SO^+(1,3),
+\]
+wobei $\rho:\Spin(1,3)\to\SO^+(1,3)$ die kanonische Überlagerung ist. Infinitesimal:
+\[
+S(\Lambda)=\exp\!\Big(-\frac{i}{4}\,\omega_{\mu\nu}\,\Sigma^{\mu\nu}\Big),
+\qquad
+\Sigma^{\mu\nu}:=\frac{i}{2}[A^\mu,A^\nu],
+\]
+und $\omega_{\mu\nu}=-\omega_{\nu\mu}$.
+
+\emph{Zusatzbedingung 2 (Adjungierung / Strompositivität).}
+Es existiert eine nicht-entartete Sesquilinearform $\langle\cdot,\cdot\rangle_S$ auf $S$ und eine Wahl von $A^\mu$ mit
+\[
+(A^0)^\dagger = A^0,\qquad (A^i)^\dagger = -A^i,
+\]
+so dass für $\bar\psi:=\psi^\dagger A^0$ der Viererstrom $j^\mu:=\bar\psi A^\mu \psi$ reell ist und (bei Lösungen) $\partial_\mu j^\mu=0$ gilt. Dies gewährleistet eine probabilistische Interpretation (insb. $j^0=\psi^\dagger\psi\ge 0$ in der Dirac-Darstellung).
+
+\emph{Lösungsräume.}
+Als Testfunktionenraum wähle $\mathcal S(\R^{1,3};S)$ (Schwartz) oder $C_0^\infty(\R^{1,3};S)$.
+Die Gleichung $(\mathcal D - m)\psi=0$ definiert den Lösungsraum
+\[
+\mathrm{Sol}(\mathcal D - m)
+:= \{\psi\in \mathcal D'(\R^{1,3};S)\mid (\mathcal D - m)\psi=0\}
+\]
+im distributionswertigen Sinn. Alternative: Sobolev-Räume $H^s(\R^{1,3};S)$.
+Für glatte Daten mit kompakter Trägerunterstützung auf einer Cauchy-Hyperfläche ist die Cauchy-Problem-Stellung für $\mathcal D - m$ (in Minkowski) wohldefiniert und glatt lösbar (erster Ordnung, strikt hyperbolisch).
+
+\emph{Rein mathematischer Lösungsnachweis (Existenz von $A^\mu$).}
+\begin{itemize}\itemsep0.25ex
+\item \emph{Notwendigkeit:} Angenommen, es gibt $A^\mu\in\operatorname{End}(S)$, die die Faktorisierungsforderung erfüllen. Dann gilt für alle $\mu,\nu$ die Relation $\{A^\mu,A^\nu\}=2g^{\mu\nu}\mathbf 1_S$. Setze $V:=\R^{1,3}$, $v=e^\mu\mapsto A^\mu$. Damit definiert $v\mapsto A(v)$ eine lineare Abbildung $A:V\to \operatorname{End}(S)$, die die Clifford-Relation erfüllt.
+Nach der universellen Eigenschaft der Clifford-Algebra existiert ein eindeutiger Algebra-Homomorphismus
+\[
+\rho:\Cl(V,g)\to \operatorname{End}(S)\quad\text{mit}\quad \rho(e^\mu)=A^\mu.
+\]
+Mit anderen Worten: \emph{Jede} Lösung der Operatorforderung ist eine Darstellung der Clifford-Algebra.
+\item \emph{Hinreichend:} Umgekehrt, existiert eine Darstellung $\rho:\Cl_{1,3}^{\C}\to \operatorname{End}(S)$, so erfüllen $A^\mu:=\rho(e^\mu)$ automatisch die Clifford-Relation. Setze $\mathcal D:=A^\mu\partial_\mu$; dann folgt unmittelbar
+\[
+(\mathcal D - m)(\mathcal D + m)
+= \frac12\{A^\mu,A^\nu\}\partial_\mu\partial_\nu - m^2
+= g^{\mu\nu}\partial_\mu\partial_\nu + m^2,
+\]
+weil der antisymmetrische Anteil $[A^\mu,A^\nu]\partial_\mu\partial_\nu$ verschwindet (Symmetrie der Ableitungen). Damit ist die Faktorisierung bewiesen.
+\item \emph{Existenz und Minimalität der Dimension:} Strukturtheorie liefert $\Cl_{1,3}^{\C}\cong \Mat_4(\C)$. Insbesondere existiert eine \emph{treue} irreduzible Darstellung auf $S\cong \C^4$. Wähle $A^\mu:=\gamma^\mu$ (Gamma-Matrizen). Somit existieren Lösungen; die minimale komplexe Darstellungsdimension ist $2^{\lfloor 4/2\rfloor}=4$.
+\item \emph{Eindeutigkeit bis Äquivalenz:} Sind $(A^\mu)$ und $(\tilde A^\mu)$ zwei Sätze von Koeffizienten, die die Clifford-Relation auf demselben $S$ erfüllen und $\rho,\tilde\rho$ irreduzible Darstellungen sind, so gibt es $S\in\GL(S)$ mit $\tilde A^\mu = S^{-1}A^\mu S$ (Schur). Physikalisch: unterschiedliche Gamma-Darstellungen sind basisäquivalent.
+\end{itemize}
+
+\emph{Rein mathematischer Nachweis der Lorentz-Kovarianz.}
+\begin{itemize}\itemsep0.25ex
+\item \emph{Spin-Lift:} Die Spin-Gruppe $\Spin(1,3)\subset \Cl_{1,3}^{\mathrm{even}}$ wirkt auf $V$ durch $v\mapsto a v a^{-1}$ und überlagert $\SO^+(1,3)$ doppelt: $\rho(a)=\Lambda$.
+\item \emph{Implementierung auf $S$:} Definiere auf $S$ die Darstellung $S(a):=\rho(a)$ (bzw. deren geeigneten unitären Faktor). Dann
+\[
+S(a)^{-1}\,A(v)\,S(a)
+= S(a)^{-1}\rho(v)S(a)
+= \rho(a^{-1} v a)
+= A(\Lambda v)
+= \Lambda^\mu{}_\nu \, A^\nu,
+\]
+also genau die geforderte Transformationsregel. Infinitesimal folgt daraus $S(\Lambda)=\exp(-\frac{i}{4}\omega_{\mu\nu}\Sigma^{\mu\nu})$ mit $\Sigma^{\mu\nu}=\frac{i}{2}[A^\mu,A^\nu]$.
+\end{itemize}
+
+\emph{Operatorentheoretische Aspekte (Cauchy-Problem, Greensche Funktionen).}
+\begin{itemize}\itemsep0.25ex
+\item \emph{Hyperbolizität und Wohlgestelltheit:} In Minkowski ist $\mathcal D - m$ ein symmetrisch-hyperbolischer Operator erster Ordnung. Für glatte kompakt getragene Anfangsdaten auf $t=\mathrm{const}$ existieren eindeutige globale glatte Lösungen; kontinuierliche Abhängigkeit von den Daten gilt (Energieabschätzung über $j^0$).
+\item \emph{Fundamentallösungen:} Es existieren retartierte/advance Greensche Funktionen $S_{\mathrm{ret/adv}}$ für $(i\mathcal D - m)$, konstruiert z.\,B. via Fouriertransform einer Distribution $(\slashed p - m)^{-1}$ mit kausaler Vorschrift ($p^0\pm i0$). Damit lässt sich das inhomogene Problem lösen.
+\item \emph{Spektrale Projektionen (freie Theorie):} Im Impulsraum diagonalisiert $(\slashed p - m)$ auf der Massenschale $p^2=m^2$ mit Projektoren $\frac{\slashed p \pm m}{2m}$ (Vollständigkeitsrelationen der $u/v$-Spinoren). Dies liefert die Zerlegung von $\mathrm{Sol}(\mathcal D - m)$ in positive/negative “Frequenz”-Unterräume.
+\end{itemize}
+
+\emph{Kompakte Charakterisierung.}
+\begin{align*}
+&\text{(i) \;Finde}\; A^\mu\in\operatorname{End}(S)\ \text{mit}\ \{A^\mu,A^\nu\}=2g^{\mu\nu}\mathbf 1_S,\\
+&\text{(ii) \;setze}\ \mathcal D = A^\mu\partial_\mu,\ \text{dann}\ (\mathcal D - m)(\mathcal D + m)=\Box+m^2,\\
+&\text{(iii) \;verlange}\ \exists S:\Spin(1,3)\to\GL(S)\ \text{sodass}\ S^{-1}A^\mu S=\Lambda^\mu{}_\nu A^\nu,\\
+&\text{(iv) \;nutze}\ \Cl_{1,3}^{\C}\cong \Mat_4(\C)\ \Rightarrow\ \exists\ \gamma^\mu\ \text{auf}\ S=\C^4\ \text{mit (i)--(iii)},\\
+&\text{(v) \;Eindeutigkeit bis Äquivalenz}\ \Rightarrow\ \text{alle Lösungen sind durch Basiswechsel verwandt.}
+\end{align*}
+
+\[
+\begin{tikzcd}[row sep=2.5em, column sep=2.8em, ampersand replacement=\&]
+(\mathbb{R}^{1,3}, g)
+  \arrow[d, "{\text{Metrik } g}"']
+  \arrow[dr, phantom, "{\text{\footnotesize definiert}}" description]
+  \arrow[r, "{\text{Basis } e^\mu}"]
+  \& V=\mathbb{R}^{1,3}
+      \arrow[d, dashed, "{\text{Einbettung}}" description]
+  \\[0.7ex]
+\text{Metrikstruktur}
+  \arrow[r, Rightarrow, "{\text{definiert Clifford-Algebra}}"]
+  \& \mathrm{Cl}(V,g)
+      \arrow[r, "{\text{Darstellung } \rho}"]
+      \arrow[d, "{\mathrm{Spin}(1,3)\subset \mathrm{Cl}_{1,3}^{\mathrm{even}}}" left]
+  \& \operatorname{End}(S)
+      \arrow[r, "{\text{Operatorbilder}}"]
+      \arrow[d, phantom, "{\substack{A^\mu = \rho(e^\mu)\\[0.2ex]\{A^\mu,A^\nu\}=2g^{\mu\nu}}}"]
+  \& \mathcal{D} = A^\mu \partial_\mu
+  \\[2.1ex]
+\mathrm{SO}^{+}(1,3)
+  \arrow[u, dashed, "{\text{Überlagerung}}" left]
+  \arrow[r, hook, "{\text{Lorentz-Darstellung auf } V}"]
+  \& \mathrm{Spin}(1,3)
+      \arrow[r, "{\text{Spinor-Darstellung } S(a)}"]
+  \& \mathrm{GL}(S)
+      \arrow[r, Rightarrow, "{\text{Kovarianz: } S^{-1}A^\mu S = \Lambda^\mu{}_\nu A^\nu}"]
+  \& (i\mathcal{D} - m)\psi = 0
+\end{tikzcd}
+\]
+
+
+\pagebreak
+
+\subsection{Dirac-Spinoren im flachen Minkowski-Raum $(\R^{1,3},g)$}
+
+\emph{Minkowski-Raum, Lorentzgruppe, Poincar\'e-Gruppe}
+
+[Minkowski-Raum und Metrik]
+
+Sei $\R^{1,3}$ der vierdimensionale Vektorraum mit kanonischer Basis $e_\mu$, $\mu=0,1,2,3$, versehen mit der bilinearen Form
+\[
+g(v,w)=v^\mu g_{\mu\nu} w^\nu, \qquad g_{\mu\nu}=\mathrm{diag}(1,-1,-1,-1).
+\]
+Wir schreiben $x^\mu=(t,\mathbf x)$, $x\cdot y := g_{\mu\nu} x^\mu y^\nu$ und $x^2:=x\cdot x$.
+
+
+[Lorentz- und Poincar\'e-Gruppe]
+
+Die \emph{Lorentzgruppe} ist
+\[
+O(1,3):=\{\Lambda\in \mathrm{GL}(4,\R)\mid \Lambda^T g \,\Lambda = g\}.
+\]
+Die Zusammenhangskomponente der Eins hei\ss t $\SO^+(1,3)$. Die \emph{Poincar\'e-Gruppe} ist das semidirekte Produkt
+\[
+\mathcal P := \R^{1,3} \rtimes \SO^+(1,3),
+\]
+wirkened auf $\R^{1,3}$ durch $(a,\Lambda)\cdot x = \Lambda x + a$.
+
+
+[Lie-Algebra $\mathfrak{so}(1,3)$]
+
+Die Lie-Algebra $\mathfrak{so}(1,3)=\{X\in \mathfrak{gl}(4,\R)\mid X^T g + gX =0\}$ wird von $M_{\mu\nu}=-M_{\nu\mu}$ erzeugt mit Klammer
+\[
+[M_{\mu\nu},M_{\rho\sigma}]
+= g_{\nu\rho} M_{\mu\sigma}-g_{\mu\rho} M_{\nu\sigma}
+ - g_{\nu\sigma} M_{\mu\rho}+g_{\mu\sigma} M_{\nu\rho}.
+\]
+
+
+\emph{Clifford-Algebra, Gamma-Matrizen und ihre physikalische Notwendigkeit}
+
+\emph{Physikalische Motivation.}
+\emph{Ausgangsproblem und gewünschte Operator-Eigenschaft.}
+Wir suchen eine \emph{lineare} relativistische Feldgleichung erster Ordnung
+\[
+(\mathcal D - m)\psi=0,\qquad \mathcal D := A^\mu \partial_\mu,
+\]
+deren Quadrat die Klein--Gordon-Gleichung liefert:
+\[
+(\mathcal D - m)(\mathcal D + m) = A^\mu A^\nu \partial_\mu\partial_\nu - m^2
+\stackrel{!}{=} g^{\mu\nu}\partial_\mu\partial_\nu + m^2.
+\]
+Da $\partial_\mu\partial_\nu$ symmetrisch in $(\mu,\nu)$ ist, muss der \emph{symmetrische Teil} der Koeffizienten $A^\mu A^\nu$ gleich $g^{\mu\nu}\mathbf 1$ sein:
+\[
+\frac12\big(A^\mu A^\nu + A^\nu A^\mu\big) \;=\; g^{\mu\nu}\,\mathbf 1.
+\]
+Dies ist genau die Clifford-Relation in Operatorform.
+
+\emph{Universelle Konstruktion via Clifford-Algebra.}
+Sei $V:=\R^{1,3}$ mit Metrik $g$. Die Clifford-Algebra $\Cl(V,g)$ ist per Definition der Quotient der Tensoralgebra $T(V)$ durch die Idealrelationen
+\[
+v\otimes w + w\otimes v \;=\; 2g(v,w)\,1 \qquad (v,w\in V).
+\]
+Die \emph{universelle Eigenschaft} besagt:
+Gibt es einen komplexen Vektorraum $S$ und eine lineare Abbildung
+$\,\Gamma:V\to \operatorname{End}(S)\,$, die die Clifford-Relation
+\[
+\Gamma(v)\Gamma(w)+\Gamma(w)\Gamma(v)=2g(v,w)\,\mathbf 1_S
+\]
+erfüllt, dann existiert genau ein eindeutiger Algebra-Homomorphismus
+\[
+\rho:\Cl(V,g)\longrightarrow \operatorname{End}(S),
+\]
+so dass $\rho(v)=\Gamma(v)$ für alle $v\in V$ gilt. Umgekehrt liefert jede Darstell\-ung $\rho$ von $\Cl(V,g)$ eine solche $\Gamma$ durch Restriktion auf $V$.
+
+\emph{Kanonische Wahl der Koeffizientenoperators $A^\mu$.}
+Wählen wir nun eine (treue) Darstellung $\rho:\Cl_{1,3}^\C\to \operatorname{End}(\Sigma)$ auf einem komplexen Spinorraum $\Sigma\cong\C^4$, so setzen wir
+\[
+A^\mu \;:=\; \rho(e^\mu) \;=: \gamma^\mu,
+\]
+wobei $\{e^\mu\}$ die duale Basis von $V$ bezeichnet. Dann gilt automatisch
+\[
+\{\gamma^\mu,\gamma^\nu\}=2g^{\mu\nu}\mathbf 1,\qquad
+\slashed{\partial}:=\gamma^\mu\partial_\mu,
+\]
+und damit die gewünschte Faktorisierung
+\[
+(i\slashed{\partial}-m)(i\slashed{\partial}+m)=\Box+m^2.
+\]
+Die Existenz solcher $\gamma^\mu$ folgt aus der Struktur von $\Cl_{1,3}^\C\cong \Mat_4(\C)$; ihre Minimaldimension $4$ ist $2^{\lfloor 4/2\rfloor}$.
+
+\emph{Zerlegung in symmetrischen und antisymmetrischen Teil.}
+Für jedes Produkt der Koeffizientenoperatoren erhalten wir
+\[
+A^\mu A^\nu \;=\; \underbrace{\frac12\{A^\mu,A^\nu\}}_{\text{symmetrisch}} 
+\;+\; \underbrace{\frac12[A^\mu,A^\nu]}_{\text{antisymmetrisch}}.
+\]
+Mit $A^\mu=\gamma^\mu$ ist der symmetrische Teil \emph{per Konstruktion} $g^{\mu\nu}\mathbf 1$, so dass
+\[
+A^\mu A^\nu \partial_\mu\partial_\nu
+= g^{\mu\nu}\partial_\mu\partial_\nu \;+\; \frac12[\gamma^\mu,\gamma^\nu]\partial_\mu\partial_\nu.
+\]
+Der antisymmetrische Anteil verschwindet hier, weil $\partial_\mu\partial_\nu$ symmetrisch ist:
+\(
+[\gamma^\mu,\gamma^\nu]\partial_\mu\partial_\nu
+=0.
+\)
+Diese einfache Beobachtung ist der Kern der Faktorisierung.
+
+\emph{Lorentz-Kovarianz als Zusatzbedingung.}
+Neben der Faktorisierung fordern wir Lorentz-Kovarianz. Sei $\Lambda\in \SO^+(1,3)$ und $S(\Lambda)$ ein Lift in die Spin-Gruppe. Dann wollen wir
+\[
+S(\Lambda)^{-1}\,\gamma^\mu\,S(\Lambda) \;=\; \Lambda^\mu{}_\nu \,\gamma^\nu.
+\]
+Infinitesimal (mit $\omega_{\mu\nu}=-\omega_{\nu\mu}$) wird dies erfüllt, falls die Generatoren
+\[
+\sigma^{\mu\nu}:=\frac{i}{2}[\gamma^\mu,\gamma^\nu]
+\]
+die Lorentz-Algebra realisieren und $S(\Lambda)=\exp\!\big(-\tfrac{i}{4}\omega_{\mu\nu}\sigma^{\mu\nu}\big)$ gilt. Damit transformiert $\slashed{\partial}$ wie ein Skalaroperator und $(i\slashed{\partial}-m)\psi=0$ bleibt in Form invariant.
+
+\emph{Hermitezität und Strompositivität.}
+In Signatur $(+,-,-,-)$ wählt man häufig
+\[
+(\gamma^0)^\dagger=\gamma^0,\qquad (\gamma^i)^\dagger=-\gamma^i,
+\]
+so dass $\bar\psi:=\psi^\dagger\gamma^0$ die adjungierte Gleichung liefert und der Viererstrom
+\[
+j^\mu:=\bar\psi\,\gamma^\mu\,\psi
+\]
+bei freien Feldern erhalten ist ($\partial_\mu j^\mu=0$) und $j^0=\psi^\dagger\psi\ge 0$ (Interpretation als Dichte). Diese Wahl ist kompatibel mit der Clifford-Relation und ändert nichts an der obigen Konstruktion.
+
+\emph{Eindeutigkeit bis Äquivalenz.}
+Sind $\{\gamma^\mu\}$ und $\{\tilde\gamma^\mu\}$ zwei Realisierungen der Clifford-Relation auf demselben Spinorraum, so existiert $S\in \GL(4,\C)$ mit
+\[
+\tilde\gamma^\mu = S^{-1}\gamma^\mu S.
+\]
+Physikalisch bedeutet das: Die konkrete Matrixform der $A^\mu$ ist eine Basiswahl im Spinorraum; alle Wahlmöglichkeiten sind äquivalent und führen zu derselben Dynamik und denselben Observablen.
+
+\emph{Zusammenfassung des Konstruktionsschemas.}
+\begin{enumerate}\itemsep0.3ex
+\item Vorgabe: Lineare relativistische Gleichung erster Ordnung, deren Quadrat Klein--Gordon ergibt.
+\item Forderung: Symmetrischer Teil von $A^\mu A^\nu$ muss $g^{\mu\nu}\mathbf 1$ sein.
+\item Lösung: Erzeuge die Koeffizienten $A^\mu$ als Bilder einer Darstellung der Clifford-Algebra: $A^\mu=\rho(e^\mu)=\gamma^\mu$.
+\item Folge: Automatisch $\{A^\mu,A^\nu\}=2g^{\mu\nu}\mathbf 1$, also Faktorisierung $(i\slashed{\partial}-m)(i\slashed{\partial}+m)=\Box+m^2$.
+\item Zusatz: Wähle $S(\Lambda)$ aus der Spin-Gruppe, damit $S^{-1}\gamma^\mu S=\Lambda^\mu{}_\nu \gamma^\nu$ (Lorentz-Kovarianz).
+\end{enumerate}
+
+\emph{Definition (Clifford-Algebra).}
+Die reelle Clifford-Algebra $\Cl_{1,3}$ ist die universelle assoziative Algebra, erzeugt von den Basisvektoren \( e_\mu \in \R^{1,3} \) unter der Relation
+\[
+e_\mu e_\nu + e_\nu e_\mu = 2 g_{\mu\nu}\,1 .
+\]
+Sie enthält somit die Metrikstruktur als multiplikative Beziehung.
+Die komplexifizierte Algebra ist $\Cl_{1,3}^{\C} := \Cl_{1,3}\otimes_\R \C$.
+
+\emph{Struktureigenschaft.}
+Über $\C$ sind alle nichtausgearteten bilinearen Formen äquivalent;
+daher gilt der Isomorphismus
+\[
+\Cl_{1,3}^{\C} \cong \Mat_{4}(\C).
+\]
+Die irreduzible Darstellung dieser Algebra wirkt auf einem
+vierdimensionalen komplexen Raum $\C^4$, der als Raum der \emph{Dirac-Spinoren} dient.
+
+\emph{Physikalischer Kontext.}
+Die Clifford-Relation stellt sicher, dass der Dirac-Operator
+\(
+\slashed{\partial} := \gamma^\mu \partial_\mu
+\)
+beim Quadrieren wieder die d’Alembert-Operatorik liefert:
+\[
+(i\slashed{\partial}-m)(i\slashed{\partial}+m)=\Box+m^2.
+\]
+Damit ist die korrekte relativistische Dispersionsrelation
+\(E^2 = \mathbf p^2 + m^2\) automatisch erfüllt.
+
+\emph{Gamma-Matrizen.}
+Eine konkrete Realisierung der Clifford-Relation ist eine lineare Abbildung
+\[
+\gamma:\R^{1,3}\to \operatorname{End}(\C^4),\qquad 
+\{\gamma^\mu,\gamma^\nu\} := \gamma^\mu\gamma^\nu+\gamma^\nu\gamma^\mu = 2 g^{\mu\nu}\mathbf 1_4 .
+\]
+Für jeden Vierervektor $a=a_\mu e^\mu$ schreibt man $\slashed{a}:=\gamma^\mu a_\mu$.
+Typische Realisierungen sind die \emph{Dirac-} oder \emph{Weyl-Darstellung}.
+Alle Darstellungen sind äquivalent; für zwei Mengen $\{\gamma^\mu\}$ und
+$\{\tilde\gamma^\mu\}$ existiert ein $S\in\GL(4,\C)$ mit
+$\tilde\gamma^\mu = S^{-1}\gamma^\mu S$.
+
+\emph{Hermitezitätseigenschaften.}
+In der Standard-Dirac-Darstellung wählt man
+\[
+(\gamma^0)^\dagger = \gamma^0, \qquad (\gamma^i)^\dagger = -\,\gamma^i ,
+\]
+sodass die Dichte $j^\mu = \bar\psi \gamma^\mu \psi$ reell wird,
+wenn man $\bar\psi := \psi^\dagger \gamma^0$ definiert.
+
+\emph{Faktorisierung der Klein–Gordon-Operatorik.}
+Aus der Clifford-Relation folgt unmittelbar
+\[
+(i\slashed{\partial}-m)(i\slashed{\partial}+m)
+= \partial^\mu\partial_\mu + m^2 = \Box + m^2 ,
+\]
+denn die antisymmetrische Komponente
+$[\gamma^\mu,\gamma^\nu]\partial_\mu\partial_\nu$ verschwindet
+wegen der Symmetrie der Ableitungen.
+
+\bigskip
+
+\emph{Spin-Gruppe und Spinor-Darstellung.}
+Die Untergruppe
+\[
+\Spin(1,3) \subset \Cl_{1,3}^{\mathrm{even}}
+\]
+besteht aus Produkten geradzahlig vieler Einheitsvektoren
+und wirkt auf $\R^{1,3}\subset\Cl_{1,3}$ durch
+\[
+v \longmapsto a v a^{-1}.
+\]
+Diese Wirkung deckt die Zusammenhangskomponente der Lorentzgruppe doppelt ab:
+\[
+\rho:\Spin(1,3)\to \SO^+(1,3),
+\qquad
+\rho(a)(v)=a v a^{-1}.
+\]
+Die zusammenhängende Komponente ist isomorph zu $\SL(2,\C)$.
+
+\emph{Physikalischer Kontext.}
+Vierervektoren transformieren unter $\SO^+(1,3)$, Spinoren dagegen unter der
+zweifachen Überlagerung $\Spin(1,3)\simeq \SL(2,\C)$.
+Diese Gruppenerweiterung erklärt, warum Spinoren beim
+Umlauf um $2\pi$ ein Vorzeichen ändern (Spin-$\tfrac12$).
+
+\emph{Spinor-Darstellung.}
+Sei $\Sigma := \C^4$ der Spinorraum.
+Eine Spinor-Darstellung ist ein Homomorphismus
+\[
+\sigma:\Spin(1,3)\to \GL(\Sigma)
+\]
+mit der Kovarianzeigenschaft
+\[
+\sigma(a)^{-1}\gamma^\mu \sigma(a)
+ = \Lambda^\mu{}_\nu \gamma^\nu,
+\qquad
+\Lambda = \rho(a)\in\SO^+(1,3).
+\]
+Infinitesimal lässt sich jede Lorentztransformation schreiben als
+$\Lambda = \exp(\tfrac12\omega_{\mu\nu}M^{\mu\nu})$
+mit antisymmetrischem $\omega_{\mu\nu}$,
+und die Spinor-Darstellung lautet
+\[
+S(\Lambda)
+ = \exp\!\Big(-\frac{i}{4}\,\omega_{\mu\nu}\,\sigma^{\mu\nu}\Big),
+\qquad
+\sigma^{\mu\nu}:=\frac{i}{2}[\gamma^\mu,\gamma^\nu].
+\]
+
+\emph{Physikalische Bedeutung.}
+Die Operatoren $\sigma^{\mu\nu}$ sind die Generatoren der Lorentz-Algebra
+im Spinorraum. Die Unteralgebra der räumlichen Rotationen
+$(\sigma^{ij})$ erzeugt eine $\mathfrak{su}(2)$-Struktur,
+deren zweidimensionale irreduzible Darstellung genau
+dem Spin-$\tfrac12$ entspricht. Die Dirac-Gleichung
+\[
+(i\slashed{\partial}-m)\psi=0
+\]
+beschreibt damit ein Feld, das unter Lorentztransformationen
+wie ein Spin-$\tfrac12$-Objekt transformiert und die korrekte
+relativistische Energie–Impuls-Beziehung erfüllt.
+
+\emph{Chiralität und $\gamma^5$.}
+In gerader Dimension definiert
+\[
+\gamma^5 := i\,\gamma^0\gamma^1\gamma^2\gamma^3 ,
+\qquad
+(\gamma^5)^2 = 1 , \qquad
+\{\gamma^5,\gamma^\mu\}=0.
+\]
+Die Projektoren $P_\pm = \tfrac12(1\pm\gamma^5)$
+zerlegen den Spinorraum in
+\(\Sigma = \Sigma^+\oplus\Sigma^-\),
+die Räume der linken und rechten Weyl-Spinoren.
+Für masselose Felder entkoppeln diese beiden
+Chiralitäten und transformieren unabhängig;
+der Masseterm \(m\bar\psi\psi\) koppelt sie wieder.
+
+\emph{Zusammenfassend.}
+\begin{itemize}
+\item Die Clifford-Algebra implementiert die Minkowski-Metrik auf Operatorniveau.  
+\item Gamma-Matrizen sind konkrete Vertreter dieser Algebra.  
+\item Die Spin-Gruppe ist die zweifache Überlagerung der Lorentzgruppe und wirkt natürlich auf Spinoren.  
+\item Die Spinor-Darstellung macht die Dirac-Gleichung Lorentz-kovariant.  
+\item $\gamma^5$ spaltet den Spinorraum in linke und rechte Komponenten und erklärt die Chiralität masseloser Fermionen.  
+\end{itemize}
+
+
+\emph{Chiralit\"at, $\gamma^5$, Projektionen}
+
+[Volumenelement und Chiralit\"at]
+
+Setze $\gamma^5 := i\,\gamma^0\gamma^1\gamma^2\gamma^3$. Dann gilt $(\gamma^5)^2=\mathbf 1$, $\{\gamma^5,\gamma^\mu\}=0$.
+Die Projektoren $P_\pm := \tfrac12(\mathbf 1 \pm \gamma^5)$ definieren die chirale Zerlegung $\Sigma=\Sigma^+\oplus \Sigma^-$ mit $\Sigma^\pm:=P_\pm \Sigma$ (Weyl-Spinoren).
+
+
+\emph{Adjungierter Spinor, bilineare Kovarianten und Tensorbasis}
+
+[Adjungierter Spinor und bilineare]
+
+Der adjungierte Spinor ist $\bar\psi := \psi^\dagger \gamma^0$. Für $\Gamma \in \{\mathbf 1,\gamma^\mu,\sigma^{\mu\nu},\gamma^\mu\gamma^5,\gamma^5\}$ sind die \emph{bilinearen Kovarianten}
+\[
+\bar\psi \psi \ (\text{Skalar}),\quad \bar\psi\gamma^\mu\psi \ (\text{Vektor}),\quad 
+\bar\psi\sigma^{\mu\nu}\psi \ (\text{Tensor}),\quad 
+\bar\psi\gamma^\mu\gamma^5\psi \ (\text{Axialvektor}),\quad 
+\bar\psi\gamma^5\psi \ (\text{Pseudoskalar}).
+\]
+
+
+
+[Transformationsverhalten]
+
+Unter $\psi'(x')=S(\Lambda)\psi(x)$ mit $S(\Lambda)$ wie in Def.~\ref{def:spinrep} transformieren die Bilinearen als entsprechende Tensoren (Skalar, Vektor, \dots) mit dem selben $\Lambda$-Tensor.
+
+
+\subsection{Freie Dirac-Gleichung, Kovarianz, Klein--Gordon-Faktorisation}
+
+[Freie Dirac-Gleichung]
+
+Eine (massive) Dirac-Spinorwellenfunktion ist eine glatte Abbildung $\psi:\R^{1,3}\to \Sigma$ mit
+\[
+(i\slashed{\partial}-m)\psi=0,\qquad \slashed{\partial}:=\gamma^\mu \partial_\mu.
+\]
+
+
+[Lorentz-Kovarianz]
+
+Ist $\psi$ Lösung von \eqref{def:dirac}, so ist $\psi'(x'):=S(\Lambda)\psi(x)$ ebenfalls Lösung, wobei $x'=\Lambda x+a$ und $S(\Lambda)$ wie in Def.
+
+
+\begin{proof}[Beweis (formal)]
+Aus $S^{-1}\gamma^\mu S = \Lambda^\mu{}_\nu \gamma^\nu$ und $\partial_\mu = \Lambda_\mu{}^\rho \partial'_\rho$ folgt
+\[
+(i\gamma^\mu \partial_\mu - m)\psi
+= S^{-1}\,(i\gamma^\rho \partial'_\rho - m)\,S\,\psi
+\quad\Rightarrow\quad (i\slashed{\partial'}-m)\psi'=0.
+\]
+\end{proof}
+
+[Klein--Gordon-Faktorisation]
+
+Es gilt identisch
+\[
+(i\slashed{\partial}-m)(i\slashed{\partial}+m) = \partial^\mu\partial_\mu + m^2 =: \Box + m^2.
+\]
+
+
+\begin{proof}
+Nutze $\gamma^\mu\gamma^\nu = g^{\mu\nu} + \sigma^{\mu\nu}$ und die Symmetrie von $\partial_\mu\partial_\nu$:
+\[
+(i\slashed{\partial}-m)(i\slashed{\partial}+m) 
+= -\gamma^\mu\gamma^\nu \partial_\mu\partial_\nu + m^2
+= -(g^{\mu\nu}\partial_\mu\partial_\nu) + m^2 = \Box + m^2.
+\]
+\end{proof}
+
+\emph{Erhaltener Viererstrom und Noether-Struktur}
+
+[Stromerhaltung]
+
+Für $j^\mu:=\bar\psi \gamma^\mu \psi$ gilt $\partial_\mu j^\mu=0$, sofern $\psi$ die Dirac-Gleichung und $\bar\psi$ die adjungierte Gleichung
+\(
+\bar\psi\, (i\overleftarrow{\slashed{\partial}} + m)=0
+\)
+erfüllen.
+
+
+\begin{proof}
+\[
+\partial_\mu(\bar\psi \gamma^\mu \psi)
+= (\partial_\mu\bar\psi)\gamma^\mu \psi + \bar\psi \gamma^\mu \partial_\mu \psi
+= \bar\psi (-i\overleftarrow{\slashed{\partial}})\psi + \bar\psi (i\slashed{\partial})\psi = 0.
+\]
+\end{proof}
+
+
+[Lagrange-Dichte]
+
+Die freie Dirac-Lagrange-Dichte 
+\(
+\mathcal L = \bar\psi (i\slashed{\partial}-m)\psi
+\)
+ist invariant unter globaler $U(1)$-Phasenrotation $\psi\mapsto e^{-iq\alpha}\psi$; Noether liefert den Strom aus Prop.~\ref{prop:current}.
+
+
+\emph{Ebenen Wellen, $u/v$-Spinoren, Orthonormalit\"at, Vollst\"andigkeit}
+
+[Ebenen Wellen und on-shell Bedingung]
+
+Sei $p^\mu=(E_{\mathbf p},\mathbf p)$ mit $E_{\mathbf p}=\sqrt{\mathbf p^2+m^2}$. Definiere $u_s(p),v_s(p)\in\Sigma$ ($s=\pm\frac12$) durch
+\[
+(\slashed p - m)u_s(p)=0,\qquad (\slashed p + m)v_s(p)=0.
+\]
+
+
+[Normierung und Vollst\"andigkeit]
+
+Es gibt eine Normierung mit
+\[
+\bar u_r(p)u_s(p)=2m\,\delta_{rs},\qquad \bar v_r(p)v_s(p)=-2m\,\delta_{rs},
+\]
+und die Projektionsidentitäten
+\[
+\sum_{s} u_s(p)\,\bar u_s(p)=\slashed p + m,\qquad 
+\sum_{s} v_s(p)\,\bar v_s(p)=\slashed p - m.
+\]
+
+
+[Allgemeine L\"osung (Fourierzerlegung)]
+
+Jede glatte Lösung der freien Dirac-Gleichung lässt sich schreiben als
+\[
+\psi(x)=\int \frac{d^3\mathbf p}{(2\pi)^3\,2E_{\mathbf p}} 
+\sum_{s=\pm\frac12}\big( b_s(\mathbf p)\,u_s(p)\,e^{-ip\cdot x} + d_s^\ast(\mathbf p)\,v_s(p)\,e^{+ip\cdot x}\big).
+\]
+
+
+\emph{Minimale Kopplung an U(1) (QED im flachen Raum)}
+
+[Kovariante Ableitung und Dirac-Operator mit Eichfeld]
+
+Für ein $U(1)$-Potential $A_\mu$ und Ladung $q$ setze
+\[
+D_\mu := \partial_\mu + i q A_\mu,\qquad \slashed{D}:=\gamma^\mu D_\mu.
+\]
+Die gekoppelte Dirac-Gleichung lautet
+\[
+(i\slashed{D}-m)\psi=0.
+\]
+
+
+
+[Eichkovarianz]
+
+Unter $\psi\mapsto e^{-iq\alpha(x)}\psi$ und $A_\mu\mapsto A_\mu+\partial_\mu \alpha$ ist $(i\slashed D - m)\psi=0$ invariant.
+
+
+\emph{Diskrete Symmetrien $C$, $P$ (flacher Raum, Darstellungsspezifisch)}
+
+[Parit\"at $P$]
+
+In einer Dirac-Darstellung definiert $P$ die Transformation 
+\[
+\psi'(t,\mathbf x)=\gamma^0 \psi(t,-\mathbf x),
+\]
+unter der die freie Dirac-Gleichung invariant ist.
+
+
+[Ladungskonjugation $C$]
+
+In einer Dirac-Darstellung kann man $C:= i\,\gamma^2\gamma^0$ wählen und setzt
+\[
+\psi^C := C\,\bar\psi^{\,T}.
+\]
+Dann ist $\psi^C$ ebenfalls Lösung der freien Dirac-Gleichung (mit umgekehrter Ladung bei Kopplung an $A_\mu$).
+
+
+
+
+
+
+\pagebreak
+
+\subsection{Hypersurfaces}
+
+
 Let $M$ be an ( $n+1$ )-dimensional Riemannian spin manifold, and let $N \subset M$ be an oriented hypersurface. We want to construct a spin structure on $N$ and relate the spinor bundles $\Sigma M$ and $\Sigma N$ and the Dirac operators $D^{M}$ and $D^{N}$.
 
 Let $\nu$ be the unit normal vector field along $N$ such that ( $b_{1}, \ldots, b_{n}$ ) is a positively oriented basis of $T_{x} N$ if and only if ( $b_{1}, \ldots, b_{n}, \nu(x)$ ) is a positively oriented basis of $T_{x} M$. Using the canonical embedding
@@ -2758,7 +4577,11 @@ Thus $H \cdot a \in P^{\operatorname{Spin}}(N)$.
 
 In particular, orientable hypersurfaces of spinnable manifolds are again spinnable.
 
-\section*{Spinor bundles}
+
+\pagebreak
+
+\section{Spinor bundles}
+
 We study how the spinor bundles of $N$ and $M$ are related to one another.
 
 Case 1: $\mathbf{n}+\mathbf{1}$ is even\\
@@ -2805,7 +4628,8 @@ $$
 \Sigma^{(+)} M:= \begin{cases}\Sigma^{+} M & \text { if } n+1 \text { is even }, \\ \Sigma M & \text { if } n+1 \text { is odd } .\end{cases}
 $$
 
-\section*{Spinor connections}
+\subsection{Spinor connections}
+
 The Levi-Civita connections on $T M$ and $T N$ are related by the Gauß equation
 
 $$
@@ -2866,7 +4690,12 @@ $$
 { }^{M} \nabla_{X}^{\Sigma} \phi={ }^{N} \nabla_{X}^{\Sigma} \phi+\frac{1}{2} B(X) \cdot \nu \cdot \phi
 $$
 
-\section*{Dirac operators}
+
+
+\pagebreak
+
+
+\subsection{Dirac operators}
 For a spinor field $\phi \in C^{\infty}\left(M, \Sigma^{(+)} M\right)$ we have along the hypersurface $N$ :
 
 $$

@@ -1,0 +1,3264 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17  Graphik
+% 18  Extra
+% 00. Titel und Autor
+
+\usepackage{slashed}
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Ad}{\operatorname{Ad}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\QU}{\mathbb{H}}
+\newcommand{\Cinf}{C^{\infty}}
+\newcommand{\Mod}{\mathrm{Mod}}
+\newcommand{\Alg}{\mathrm{Alg}}
+\newcommand{\Aut}{\mathrm{Aut}}
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Cl}{\mathrm{Cl}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\Mat}{\mathrm{Mat}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\Sp}{\mathrm{Sp}}
+\newcommand{\Spin}{\mathrm{Spin}}
+\newcommand{\Pin}{\mathrm{Pin}}
+\newcommand{\Lor}{\mathrm{Lor}}
+\newcommand{\Ogroup}{\mathrm{O}}
+\newcommand{\U}{\mathrm{U}}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\graphicspath{{../../Library/Images/}}
+\usepackage[export]{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+% Hellblau definieren
+\definecolor{hellblau}{rgb}{0.3,0.6,1}
+\newenvironment{note}{\par\begingroup\color{hellblau}\itshape}{\par\endgroup}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\begin{unitbox}\CustomHeading{Definition}{#1}{#2}}{\end{unitbox}}
+\newenvironment{PROP}[2]{\begin{unitbox}\CustomHeading{Proposition}{#1}{#2}}{\end{unitbox}}
+\newenvironment{THEO}[2]{\begin{unitbox}\CustomHeading{Theorem}{#1}{#2}}{\end{unitbox}}
+\newenvironment{LEM}[2]{\begin{unitbox}\CustomHeading{Lemma}{#1}{#2}}{\end{unitbox}}
+\newenvironment{KORO}[2]{\begin{unitbox}\CustomHeading{Corollar}{#1}{#2}}{\end{unitbox}}
+\newenvironment{REM}[2]{\begin{unitbox}\CustomHeading{Remark}{#1}{#2}}{\end{unitbox}}
+\newenvironment{EXA}[2]{\begin{unitbox}\CustomHeading{Example}{#1}{#2}}{\end{unitbox}}
+\newenvironment{STUD}[2]{\begin{unitbox}\CustomHeading{Study}{#1}{#2}}{\end{unitbox}}
+\newenvironment{CONC}[2]{\begin{unitbox}\CustomHeading{Concept}{#1}{#2}}{\end{unitbox}}
+\newenvironment{OTH}[2]{\begin{unitbox}\CustomHeading{Other}{#1}{#2}}{\end{unitbox}}
+\newenvironment{EXE}[2]{\begin{unitbox}\CustomHeading{Exercise}{#1}{#2}}{\end{unitbox}}
+\newenvironment{MOT}[2]{\begin{unitbox}\CustomHeading{Motivation}{#1}{#2}}{\end{unitbox}}
+\newenvironment{PROOF}[2]{\begin{unitbox}\CustomHeading{Proof}{#1}{#2}}{\end{unitbox}}
+
+% --- Unit Umgebung für Source-Inhalte ---
+\usepackage{mdframed}
+\newmdenv[
+  linewidth=1pt,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftmargin=0cm,
+  rightmargin=0cm,
+  skipabove=10pt,
+  skipbelow=10pt,
+  innertopmargin=0.5\baselineskip,
+  innerbottommargin=0.5\baselineskip,
+  backgroundcolor=gray!10,
+  linecolor=gray
+]{unitbox}
+
+\newenvironment{unit}[1]
+  {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
+  {\end{unitbox}}
+
+% --- 17. ... ---
+
+% --- 18. Extras ---
+\usepackage{stmaryrd}
+\usepackage{bbold}  % falls du \mathbb{1} nutzen willst
+
+% --- 00. Titel und Autor ---
+\title{Mein Titel}
+\author{Tim Jaschik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+Kurze Beschreibung …
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\tableofcontents
+
+\pagebreak
+
+\subsection{Formelle Ausarbeitung des abstrakten Modellrahmens (I)}
+
+\emph{Ziel.}
+Wir präzisieren die Grundkomponenten eines allgemeinen physikalischen Modells
+in einer rein strukturellen Formulierung. Die Entwicklung orientiert sich an den
+Punkten (1)--(5) des vorangegangenen Schemas und stellt alle Objekte und
+Morphismen explizit als Kategorien oder Funktoren dar.
+
+\bigskip
+\emph{1. Arenen und äußere Symmetrien.}
+
+\textbf{(a) Kategorie der Arenen.}
+Wir definieren eine Unterkategorie
+\[
+\mathbf{Geom} \subset \mathbf{Man},
+\]
+deren Objekte glatte Mannigfaltigkeiten $M$ mit zusätzlicher geometrischer
+Struktur sind (z.\,B.\ Metrik, Orientierung, Spin-Struktur, Volumenform),
+und deren Morphismen Struktur-erhaltende glatte Abbildungen sind.
+
+Ein typischer morphismus-spezifischer Begriff:
+\[
+\mathrm{Hom}_{\mathbf{Geom}}(M_1,M_2)
+:=\{f:M_1\to M_2\mid f^\ast(g_2)=g_1,\text{ ggf.\ weitere Strukturerhaltung}\}.
+\]
+Damit ist $\mathbf{Geom}$ eine (ggf.\ große) Unterkategorie von $\mathbf{Man}$,
+die die kinematisch zulässigen Arenen und Koordinatenwechsel enthält.
+
+\textbf{(b) Externe Symmetriegruppen.}
+Sei $G_{\mathrm{ext}}$ eine Lie-Gruppe mit einer glatten Linksaktion auf $\mathcal A\in\mathbf{Geom}$:
+\[
+\alpha_{\mathrm{ext}}: G_{\mathrm{ext}}\times \mathcal A \to \mathcal A,
+\quad (\Lambda,x)\mapsto \Lambda\cdot x.
+\]
+Diese Aktion definiert einen Funktor
+\[
+\alpha_{\mathrm{ext}}: BG_{\mathrm{ext}} \to \mathbf{Geom},\qquad
+(\bullet\mapsto \mathcal A,\; \Lambda\mapsto\alpha_{\mathrm{ext}}(\Lambda)).
+\]
+Wir identifizieren $\alpha_{\mathrm{ext}}$ mit einem Gruppenhomomorphismus
+\[
+G_{\mathrm{ext}}\longrightarrow \Aut_{\mathbf{Geom}}(\mathcal A),
+\]
+wobei $\Aut_{\mathbf{Geom}}(\mathcal A)$ die Gruppe der invertierbaren Morphismen
+$\mathcal A\to \mathcal A$ in $\mathbf{Geom}$ ist.
+
+\textbf{(c) Hintergrundkategorie.}
+Aus der Wirkung von $G_{\mathrm{ext}}$ erzeugt man eine kleine Unterkategorie
+\[
+\mathbf{Back}(\mathcal A):
+=\big(\ \mathrm{Obj}=\{\mathcal A\},\;
+\mathrm{Mor}=\{\alpha_{\mathrm{ext}}(\Lambda)\mid \Lambda\in G_{\mathrm{ext}}\}\ \big),
+\]
+die das geometrische Hintergrundsystem beschreibt.
+Alle kovarianten Objekte (Felder, Operatoren, Gleichungen) sind Funktoren
+\[
+\mathbf{Back}(\mathcal A)\longrightarrow\mathbf{C}
+\]
+in eine geeignete Zielkategorie $\mathbf{C}$ (z.\,B.\ $\mathbf{Bund}$, $\mathbf{Set}$, $\mathbf{Vec}$).
+
+\bigskip
+\emph{2. Innere Symmetrien und Bündelstruktur.}
+
+\textbf{(a) Strukturgruppe.}
+Es sei $G_{\mathrm{int}}$ eine Lie-Gruppe, die als \emph{innere Symmetriegruppe}
+fungiert. Ihr geometrisches Trägerobjekt ist ein Hauptbündel
+\[
+\pi_P:P\longrightarrow \mathcal A
+\]
+mit freier, glatter Rechtsaktion $R_g:P\to P$, $(p,g)\mapsto p\cdot g$.
+
+\textbf{(b) Kategorie der Hauptbündel.}
+Die Objekte sind Paare $(P\to\mathcal A,G_{\mathrm{int}})$,
+die Morphismen $f:P_1\to P_2$ sind glatte, $G_{\mathrm{int}}$–äquivariante
+Bündelabbildungen über der Identität $\mathrm{id}_\mathcal A$.
+\[
+\mathbf{Prin}_{G_{\mathrm{int}}}(\mathcal A)
+:=\big\{P\to\mathcal A\text{ Hauptbündel mit Strukturgruppe }G_{\mathrm{int}}\big\}.
+\]
+
+\textbf{(c) Assoziierte Bündel.}
+Für jede Darstellung $\rho_{\mathrm{int}}:G_{\mathrm{int}}\to \mathrm{GL}(F_0)$
+definiere das \emph{assoziierte Bündel}
+\[
+\pi:\ \mathcal F := P\times_{\rho_{\mathrm{int}}}F_0 \longrightarrow \mathcal A,
+\]
+als den Quotienten $(P\times F_0)/{\sim}$ mit $(p\cdot g, f)\sim(p,\rho_{\mathrm{int}}(g)f)$.
+
+\textbf{(d) Lokale Trivialisierungen.}
+Für offene Mengen $U\subset \mathcal A$ und lokale Schnitte $s:U\to P$ ergibt sich
+eine lokale Darstellung
+\[
+\mathcal F|_U \cong U\times F_0,\quad
+[(p,f)]\mapsto (\pi(p), \rho_{\mathrm{int}}(g(s(\pi(p)),p))f).
+\]
+Diese Darstellung definiert eine Garbe $\mathfrak F$ lokaler Abschnitte
+$U\mapsto\Gamma(U,\mathcal F|_U)$.
+
+\bigskip
+\emph{3. Feldfunktor und Garbenstruktur.}
+
+\textbf{(a) Definition.}
+Der \emph{Feldfunktor} eines Modells ist der Garben-Funktor
+\[
+\mathfrak F:\ \mathrm{Open}(\mathcal A)^{\mathrm{op}}\longrightarrow\mathbf{Set},
+\qquad
+U\longmapsto \mathfrak F(U):=\Gamma(U,\mathcal F|_U),
+\]
+mit Restriktionsabbildungen $r_{U,V}$ für $U\subseteq V$.
+
+\textbf{(b) Garbenaxiome.}
+Für eine Überdeckung $U=\bigcup_i U_i$ gilt:
+\begin{enumerate}
+\item (\emph{Konsistenz}) Wenn $\phi_i\in\mathfrak F(U_i)$ mit
+$r_{U_i\cap U_j,U_i}\phi_i=r_{U_i\cap U_j,U_j}\phi_j$ für alle $i,j$,
+dann existiert $\phi\in\mathfrak F(U)$ mit $r_{U_i,U}\phi=\phi_i$.
+\item (\emph{Eindeutigkeit}) Wenn $\phi,\psi\in\mathfrak F(U)$ mit
+$r_{U_i,U}\phi=r_{U_i,U}\psi$ für alle $i$, dann $\phi=\psi$.
+\end{enumerate}
+Damit ist $\mathfrak F$ eine (prä)Garbenstruktur im Sinn der lokalen Feldbeschreibung.
+
+\textbf{(c) Lokale und globale Beschreibungen.}
+Ein \emph{globale Beschreibung} ist $\phi\in\mathfrak F(\mathcal A)$,
+eine \emph{lokale Beschreibung} ein Paar $(U,\phi)$ mit $\phi\in\mathfrak F(U)$.
+Die Gesamtheit aller lokalen Beschreibungen bildet die kolimitartige Familie
+$\mathrm{colim}_{U\subset\mathcal A}\mathfrak F(U)$.
+
+\bigskip
+\emph{4. Wirkungen der Symmetrien auf Feldern.}
+
+\textbf{(a) Externe Wirkung.}
+Die Aktion $G_{\mathrm{ext}}\curvearrowright\mathcal A$ induziert auf $\mathcal F$
+eine \emph{kovariante} Wirkung durch Bündelautomorphismen
+\[
+\rho_{\mathrm{ext}}(\Lambda):\mathcal F\to \mathcal F,
+\quad \pi\circ\rho_{\mathrm{ext}}(\Lambda)=\alpha_{\mathrm{ext}}(\Lambda)\circ\pi,
+\]
+die die Faserstruktur respektieren.  
+Die induzierte Wirkung auf Abschnitten:
+\[
+(\rho_{\mathrm{ext}}(\Lambda)\cdot \phi)(x)
+:=\rho_{\mathrm{ext}}(\Lambda)\big(\phi(\Lambda^{-1}\cdot x)\big),
+\qquad \phi\in\Gamma(\mathcal F).
+\]
+
+\textbf{(b) Innere Wirkung.}
+Die Eichgruppe $\mathcal G_{\mathrm{int}}(U)$ wirkt \emph{vertikal} auf
+$\mathcal F|_U$:
+\[
+(\rho_{\mathrm{int}}(\gamma)\cdot \phi)(x)
+:=\rho_{\mathrm{int}}\big(\gamma(x)\big)\,\phi(x),
+\qquad \gamma\in\mathcal G_{\mathrm{int}}(U).
+\]
+Für eine globale Darstellung $\rho_{\mathrm{int}}:G_{\mathrm{int}}\to GL(F_0)$
+reduziert sich dies zu einer Punkt-für-Punkt-Wirkung auf jeder Faser.
+
+\textbf{(c) Kombinierte Wirkung.}
+Die kombinierte Gruppe $G_{\mathrm{tot}}=G_{\mathrm{ext}}\ltimes\mathcal G_{\mathrm{int}}(-)$
+wirkt auf den Feldfunktor $\mathfrak F$ als Garben-Automorphismengruppe:
+\[
+(\Lambda,\gamma)\cdot\phi
+:=\rho_{\mathrm{ext}}(\Lambda)\big(\rho_{\mathrm{int}}(\gamma)\phi\big).
+\]
+Formal: $\mathfrak F$ ist ein $G_{\mathrm{tot}}$–äquivarianter Funktor
+\[
+\mathfrak F: (\mathrm{Open}(\mathcal A)^{\mathrm{op}}\times G_{\mathrm{tot}})\longrightarrow\mathbf{Set}.
+\]
+
+\bigskip
+\emph{5. Gruppoid der Beschreibungen.}
+
+\textbf{(a) Objekte und Morphismen.}
+Definiere das \emph{Beschreibungsgrouppoid}
+\[
+\mathsf{Desc}(\mathsf{Sys})
+:=\Big(
+\mathrm{Obj}=\{(U,\phi)\mid U\subset\mathcal A,\ \phi\in\mathfrak F(U)\},\quad
+\mathrm{Mor}=\{(\Lambda,\gamma):(U,\phi)\to(U',\phi')\}\Big),
+\]
+wobei $(\Lambda,\gamma)$ genau dann ein Morphismus ist, wenn
+\[
+\alpha_{\mathrm{ext}}(\Lambda)(U)=U',\qquad
+\rho_{\mathrm{ext}}(\Lambda)\rho_{\mathrm{int}}(\gamma)\phi=\phi'\ \text{auf}\ U\cap U'.
+\]
+Komposition ist punktweise definiert:
+\[
+(\Lambda_2,\gamma_2)\circ(\Lambda_1,\gamma_1)
+=(\Lambda_2\Lambda_1,\,\gamma_2\,\rho_{\mathrm{int}}(\Lambda_2)\gamma_1),
+\]
+Identität $(\mathrm{id}_{\mathcal A},e)$.
+
+\textbf{(b) Struktur.}
+$\mathsf{Desc}(\mathsf{Sys})$ ist eine interne Kategorie in $\mathbf{Set}$
+(bzw.\ ein Gruppoid in Garben über $\mathcal A$).
+\begin{itemize}
+\item Jede Beschreibung $(U,\phi)$ ist ein Objekt.
+\item Jeder zulässige Transformationswechsel ist ein Isomorphismus.
+\item Die Stabilisatorgruppe eines $\phi$ ist
+\[
+\mathrm{Stab}(\phi)
+=\{(\Lambda,\gamma)\in G_{\mathrm{tot}}(U)\mid
+ (\Lambda,\gamma)\cdot\phi=\phi\}.
+\]
+\end{itemize}
+
+\textbf{(c) Orbitraum und Zustände.}
+Der \emph{Orbit} eines $\phi\in\mathfrak F(U)$ ist
+$G_{\mathrm{tot}}(U)\cdot\phi$.  
+Die Menge der Orbits bildet den \emph{Zustandsraum}
+\[
+\mathcal{S}tate(\mathsf{Sys})
+:= \Gamma(\mathcal F)\big/\big(G_{\mathrm{ext}}\times\mathcal G_{\mathrm{int}}(\mathcal A)\big),
+\]
+d.\,h.\ die Raumzeit- und Eichäquivalenzklassen der Feldkonfigurationen.
+
+\textbf{(d) Funktorielle Sicht.}
+$\mathsf{Desc}(\mathsf{Sys})$ ist ein Gruppoid-Objekt in der 2-Kategorie der
+Garben über $\mathcal A$,
+\[
+\mathsf{Desc}(\mathsf{Sys}) \in \mathbf{Gpd}(\mathbf{Sh}(\mathcal A)).
+\]
+In dieser Sprache wird der gesamte Raum der Beschreibungen mitsamt den
+Wechseln (Bezugssystemen, Eichtransformationen) als einheitliches geometrisches
+Objekt modelliert. Physikalisch relevante Objekte sind Funktoren oder
+natürliche Transformationen auf diesem Gruppoid.
+
+
+\emph{6. Natürliche Differentialoperatoren und Kovarianz.}
+
+\textbf{(a) Differentialoperatoren als natürliche Transformationen.}
+Sei $J^k\mathcal F$ das $k$-Jet-Bündel des Bündels $\mathcal F\to\mathcal A$.
+Ein \emph{lokaler Differentialoperator der Ordnung $\le k$} von $\mathcal F$
+nach einem Zielbündel $\mathcal E\to\mathcal A$ ist eine Bündelabbildung
+\[
+D:\ J^k\mathcal F \longrightarrow \mathcal E,
+\]
+die glatte Abbildungen zwischen den jeweiligen Totalräumen induziert und sich zu einem
+Funktor auf offenen Teilmengen fortsetzt:
+\[
+D_U:\ J^k(\mathfrak F(U)) \longrightarrow \mathfrak E(U),
+\qquad
+\mathfrak E(U):=\Gamma(U,\mathcal E|_U).
+\]
+$D$ ist \emph{natürlich} relativ zur Kategorie $\mathbf{Back}(\mathcal A)$,
+wenn für alle Morphismen $\Lambda:\mathcal A\to\mathcal A$ gilt:
+\[
+\rho_{\mathrm{ext}}(\Lambda)\circ D_U
+= D_{\Lambda U}\circ J^k(\rho_{\mathrm{ext}}(\Lambda)),
+\]
+und analog für innere Transformationen $\gamma$.
+
+\textbf{(b) Lokale Ausdrücke.}
+In lokalen Koordinaten $(x^i,u^\alpha,u^\alpha_I)$ des Jetbündels
+($I$ multiindex) besitzt $D$ die Form
+\[
+(D\phi)^\beta(x)
+= F^\beta\big(x,u^\alpha(x),\partial_I u^\alpha(x)\big)
+\]
+für glatte Funktionen $F^\beta$.
+Natürliche Operatoren sind genau diejenigen, deren $F^\beta$ tensorielle
+Verhaltensregeln erfüllen, die aus der Geometrie von $\mathcal A$ folgen.
+
+\textbf{(c) Gleichungsmenge als Nullstellenfunktor.}
+Definiere für jedes offene $U\subseteq\mathcal A$
+\[
+\mathcal E(U) := \{\phi\in\mathfrak F(U)\mid D_U(j^k\phi)=0\}.
+\]
+Dies definiert einen Unterfunktor $\mathcal E\subset\mathfrak F$,
+den \emph{Gleichungsfunktor}.
+Kovarianz von $\mathcal E$ folgt unmittelbar aus Natürlichkeit von $D$:
+\[
+D_{\Lambda U}(j^k((\Lambda,\gamma)\cdot\phi))
+= \rho_{\mathrm{ext}}(\Lambda)\rho_{\mathrm{int}}(\gamma)
+\big(D_U(j^k\phi)\big),
+\]
+woraus $(\Lambda,\gamma)\cdot\mathcal E(U)=\mathcal E(\Lambda U)$ folgt.
+
+\textbf{(d) Äquivarianzstruktur.}
+$D$ ist damit ein $G_{\mathrm{tot}}$-äquivarianter Morphismus in der Kategorie
+der Bündel über $\mathcal A$,
+\[
+D:\ J^k\mathcal F \longrightarrow \mathcal E,\qquad
+D\in \mathrm{Hom}_{\mathbf{Bund}_{G_{\mathrm{tot}}}}(J^k\mathcal F,\mathcal E).
+\]
+
+\textbf{(e) Kommutative Diagrammform.}
+\[
+\begin{array}{ccc}
+J^k\mathfrak F(U) & \xrightarrow{D_U} & \mathfrak E(U)\\
+\downarrow J^k(\rho(\Lambda,\gamma)) & & \downarrow \rho(\Lambda,\gamma)\\
+J^k\mathfrak F(\Lambda U) & \xrightarrow{D_{\Lambda U}} & \mathfrak E(\Lambda U)
+\end{array}
+\quad
+\Rightarrow\quad
+\mathcal E(U)=\ker D_U\ \text{ ist kovariant.}
+\]
+
+\bigskip
+\emph{7. Variations- und Lagrangeformalismus.}
+
+\textbf{(a) Lagrangedichten.}
+Eine \emph{Lagrangedichte der Ordnung $\le k$} ist eine horizontale $n$-Form
+\[
+\mathcal L\in \Omega^{n,0}(J^k\mathcal F),
+\qquad n=\dim\mathcal A,
+\]
+die als natürliches Objekt unter $\mathbf{Back}(\mathcal A)$ transformiert,
+d.\,h.
+\[
+(\Lambda,\gamma)^\ast\mathcal L = \mathcal L
+\]
+bis auf eine total-derivative Form $d_h\Theta$.
+Dies garantiert Kovarianz der entstehenden Euler–Lagrange-Gleichungen.
+
+\textbf{(b) Variationsbikomplex.}
+Im Variationsbikomplex auf $J^k\mathcal F$ werden die Differentiale
+$d=d_h+d_v$ in horizontale und vertikale Komponenten zerlegt.
+Die Euler–Lagrange-Form $EL(\mathcal L)$ ist durch
+\[
+d_v\mathcal L = EL(\mathcal L) + d_h\Theta
+\]
+definiert; sie bestimmt den natürlichen Differentialoperator
+$EL(\mathcal L):J^{2k}\mathcal F\to V^\ast(\mathcal F)\otimes\Lambda^nT^\ast\mathcal A$,
+wobei $V^\ast(\mathcal F)$ das duale Vertikalbündel ist.
+
+\textbf{(c) Gleichungen aus der Variation.}
+\[
+\mathcal E_{\mathcal L}(U)
+=\{\phi\in\mathfrak F(U)\mid EL(\mathcal L)_U(j^{2k}\phi)=0\}.
+\]
+$EL(\mathcal L)$ ist ein natürlicher Differentialoperator,
+daher ist $\mathcal E_{\mathcal L}$ automatisch $G_{\mathrm{tot}}$-kovariant.
+
+\textbf{(d) Noether-1-Struktur.}
+Jede einparametrige Familie $(\Lambda_t,\gamma_t)\in G_{\mathrm{tot}}$
+mit infinitesimalem Generator $\xi$ und
+$\mathcal L$-Symmetrieeigenschaft
+$\mathcal L((\Lambda_t,\gamma_t)\cdot\phi)=\mathcal L(\phi)+d_h\Theta_\xi$
+liefert einen (lokal definierten) Strom $J_\xi$ mit
+$d_h J_\xi = EL(\mathcal L)\cdot \delta_\xi\phi$.
+Auf der Lösungsmenge $EL(\mathcal L)=0$ gilt $d_h J_\xi=0$,
+d.\,h. lokale Erhaltungsgesetze sind exakt
+die homologische Folge natürlicher Symmetrien der Lagrange-Garbenstruktur.
+
+\bigskip
+\emph{8. Funktor der Lösungen und Observablen.}
+
+\textbf{(a) Lösungsfunktor.}
+Der Lösungsfunktor ist
+\[
+\mathcal S ol:\ \mathrm{Open}(\mathcal A)^{\mathrm{op}}\longrightarrow \mathbf{Set},
+\quad
+U\longmapsto \mathcal E(U).
+\]
+Er ist ein Unterfunktor von $\mathfrak F$ und $G_{\mathrm{tot}}$-äquivariant:
+\[
+(\Lambda,\gamma)\cdot \mathcal S ol(U)
+= \mathcal S ol(\Lambda U).
+\]
+
+\textbf{(b) Natur und Monoidalstruktur.}
+$\mathcal S ol$ kann als Objekt einer monoidalen Kategorie betrachtet werden,
+wenn $\mathfrak F$ eine additive oder tensorielle Struktur trägt
+(z.\,B. direkte Summe oder Produkt von Feldern).
+Kovarianz entspricht dann der Monoidalkompatibilität
+\[
+\mathcal S ol(\Lambda U)\cong\rho(\Lambda)\mathcal S ol(U).
+\]
+
+\textbf{(c) Observablen als natürliche Transformationen.}
+Eine \emph{Observable} ist eine natürliche Transformation
+\[
+O:\ \mathcal S ol \Rightarrow \underline{\mathbb K},
+\]
+wobei $\underline{\mathbb K}$ der konstante Funktor auf einem Körper
+$\mathbb K$ ist.  
+$O$ ist $G_{\mathrm{tot}}$-invariant, wenn
+\[
+O_U = O_{\Lambda U}\circ (\Lambda,\gamma),
+\quad \forall (\Lambda,\gamma).
+\]
+Die Familie aller Observablen bildet die Kategorie
+\[
+\mathcal O := \mathrm{Nat}(\mathcal S ol,\underline{\mathbb K}).
+\]
+
+\textbf{(d) Algebraische Strukturen.}
+Falls $\mathcal S ol(U)$ eine algebraische Struktur trägt
+(z.\,B. Poisson-Struktur, symplektische Form),
+induzieren die Observablen durch Auswertung
+eine kommutative oder *-Algebra
+\[
+\mathcal O(U)=\mathrm{Fun}_{\mathrm{alg}}(\mathcal S ol(U),\mathbb K),
+\]
+die wieder zu einem Garben- oder Prägarben-Objekt wird.
+
+\bigskip
+\emph{9. Quotienten und Stack-Struktur.}
+
+\textbf{(a) Quotienten-Gruppoid.}
+Da die $G_{\mathrm{tot}}$-Wirkung typischerweise nicht frei ist,
+ist der Raum physikalischer Zustände kein Mengenquotient, sondern
+ein Gruppoid- oder Stack-Quotient:
+\[
+[\mathcal S ol / G_{\mathrm{tot}}]
+\in \mathbf{Gpd}(\mathbf{Sh}(\mathcal A)).
+\]
+Objekte sind Lösungen, Morphismen Eich-/Bezugstransformationen.
+
+\textbf{(b) Invariante Observablen.}
+Physikalische Observablen sind Funktoren auf diesem Stack:
+\[
+\mathcal O_{\mathrm{phys}}
+=\mathrm{Funct}\big([\mathcal S ol / G_{\mathrm{tot}}],\,\mathbf{Set}\big)
+\simeq \mathrm{Nat}\big(\mathcal S ol,\underline{\mathbb K}\big)^{G_{\mathrm{tot}}}.
+\]
+Invarianz bedeutet Funktorialität über den Quotienten.
+
+\bigskip
+\emph{10. Zusammenfassende Diagrammatische Struktur.}
+
+\[
+\begin{array}{ccccc}
+G_{\mathrm{tot}}
+& \curvearrowright & \mathfrak F & \xrightarrow{D} & \mathfrak E\\[0.4em]
+& & \rotatebox{90}{$\subset$} & & \\[-0.1em]
+& & \mathcal S ol=\ker D & &
+\end{array}
+\qquad
+\begin{array}{l}
+\text{Kovarianz: } D\text{ natürlich}\\[0.3em]
+\text{Invarianz: } O\in\mathrm{Nat}(\mathcal S ol,\underline{\mathbb K})
+\end{array}
+\]
+
+Alle Gleichungen, Operatoren und Observablen sind damit als
+natürliche oder äquivariante Transformationen zwischen Funktoren modelliert.
+Invarianz physikalischer Gleichungen entspricht der
+Kommutativität solcher Diagramme; die Kategorie der möglichen
+Beschreibungen (Bezugssysteme und Eichungen) bildet die
+Struktur, über der diese Natürlichkeit definiert ist.
+
+\pagebreak
+
+
+\subsection{Beispiel: Freies Dirac-Feld auf dem Minkowski-Raum}
+
+\emph{Ziel.}
+Wir instanziieren den abstrakten Rahmen
+\[
+\mathsf{Sys}=(\mathcal A,\,G_{\mathrm{ext}},\,G_{\mathrm{int}},\,\mathcal F,\,\rho_{\mathrm{ext}},\,\rho_{\mathrm{int}},\,\mathcal E,\,\mathcal O)
+\]
+für das freie Dirac-Feld in spezieller Relativität (ohne Eichkopplung).
+
+\medskip
+\emph{1. Arena \(\mathcal A\).}
+\[
+\mathcal A=(M,g),\qquad M=\R^{1,3},\qquad g=\mathrm{diag}(1,-1,-1,-1).
+\]
+Die Kategorie \(\mathbf{Geom}\) sei „pseudoriemannsche Mannigfaltigkeiten mit Isometrien“.
+
+\medskip
+\emph{2. Äußere Symmetrie \(G_{\mathrm{ext}}\).}
+\[
+G_{\mathrm{ext}}=\mathcal P:=\R^{1,3}\rtimes SO^+(1,3)
+\]
+(Poincaré-Gruppe). Wirkung auf der Arena:
+\[
+\alpha_{\mathrm{ext}}(a,\Lambda):\ x\mapsto \Lambda x + a.
+\]
+Isometrien: \(\Lambda^T g\,\Lambda=g\), \(\det\Lambda=1\), \(\Lambda^0{}_0>0\).
+
+\medskip
+\emph{3. Innere Symmetrie \(G_{\mathrm{int}}\).}
+Im freien Dirac-Modell ohne Ladung setzen wir
+\[
+G_{\mathrm{int}}=\{e\}\quad(\text{trivial}).
+\]
+(Bei QED wäre \(G_{\mathrm{int}}=U(1)\), siehe Hinweis unten.)
+
+\medskip
+\emph{4. Feldbündel \(\mathcal F\).}
+Spin-Struktur auf \((M,g)\) ist trivial; das zugehörige Spinor\,-\,Bündel ist global trivial:
+\[
+\pi:\ \mathcal F=M\times \Sigma \longrightarrow M,\qquad \Sigma=\C^4.
+\]
+Abschnitte \(\psi\in\Gamma(\mathcal F)\cong C^\infty(M,\C^4)\) heißen Dirac-Spinorfelder.
+
+\medskip
+\emph{5. Darstellungen \(\rho_{\mathrm{ext}},\rho_{\mathrm{int}}\).}
+\[
+\rho_{\mathrm{ext}}|_{SO^+(1,3)}=\sigma:\ \Spin(1,3)\to GL(\Sigma),
+\quad \sigma\ \text{kompatibel mit}\ \gamma^\mu:
+\]
+\[
+\sigma(a)^{-1}\,\gamma^\mu\,\sigma(a)=\Lambda^\mu{}_\nu\,\gamma^\nu,\qquad \Lambda=\rho(a)\in SO^+(1,3).
+\]
+Auf Translationen wirkt \(\rho_{\mathrm{ext}}(a,\mathbf 1)\) durch Pullback:
+\((\rho_{\mathrm{ext}}(a,\mathbf 1)\psi)(x)=\psi(x-a)\).
+Da \(G_{\mathrm{int}}\) trivial ist, gilt \(\rho_{\mathrm{int}}=\mathrm{id}\).
+
+\medskip
+\emph{6. Feldfunktor und Beschreibungen.}
+Für offene \(U\subset M\):
+\[
+\mathfrak F(U):=\Gamma(U,\mathcal F|_U)\cong C^\infty(U,\C^4),\qquad
+r_{U,V}:\phi\mapsto \phi|_U.
+\]
+Eine \emph{Beschreibung} ist \((U,\phi)\) mit \(\phi\in \mathfrak F(U)\).
+
+\medskip
+\emph{7. Natürlicher Differentialoperator \(D\).}
+Wähle Gamma-Matrizen \(\gamma^\mu\in \End(\Sigma)\) mit
+\(\{\gamma^\mu,\gamma^\nu\}=2g^{\mu\nu}\mathbf 1\).
+Definiere den natürlichen Operator erster Ordnung
+\[
+D:\ J^1\mathcal F\to \mathcal E\ (=\mathcal F),\qquad
+(D\psi)(x):= i\,\gamma^\mu\,\partial_\mu \psi(x)-m\,\psi(x).
+\]
+Natürlichkeit (Kovarianz) heißt:
+\[
+\rho_{\mathrm{ext}}(a,\Lambda)\circ D
+= D\circ J^1(\rho_{\mathrm{ext}}(a,\Lambda)),
+\]
+was wegen \(\sigma(a)^{-1}\gamma^\mu\sigma(a)=\Lambda^\mu{}_\nu\gamma^\nu\) erfüllt ist.
+
+\medskip
+\emph{8. Gleichungsmenge \(\mathcal E\).}
+Für \(U\subset M\):
+\[
+\mathcal E(U):=\{\psi\in\mathfrak F(U)\mid (i\gamma^\mu\partial_\mu-m)\psi=0\ \text{auf }U\}.
+\]
+Das ist die (lokale) Lösungsmenge der Dirac-Gleichung. Kovarianz:
+\((a,\Lambda)\cdot \mathcal E(U)=\mathcal E(\Lambda U+a)\).
+
+\medskip
+\emph{9. Gruppoid der Beschreibungen.}
+Objekte \((U,\psi)\), Morphismus \((a,\Lambda):(U,\psi)\to(U',\psi')\) genau dann, wenn
+\[
+U'=\Lambda U + a,\qquad
+\psi'(x')=S(\Lambda)\,\psi(\Lambda^{-1}(x'-a)),\quad S(\Lambda)=\sigma(a)\in \Spin(1,3).
+\]
+Alle Morphismen sind Isomorphismen; Orbits sind Bezugssystemäquivalenzklassen von Lösungen.
+
+\medskip
+\emph{10. Observablen \(\mathcal O\).}
+Beispiel eines natürlichen (lokalen) Funktionals:
+\[
+j^\mu(\psi):=\bar\psi\,\gamma^\mu\,\psi,\qquad \bar\psi:=\psi^\dagger\gamma^0,
+\]
+mit \(\partial_\mu j^\mu=0\) auf \(\mathcal E\).
+Globale Observablen entstehen durch Integration (sofern wohldefiniert):
+\[
+Q(\psi):=\int_\Sigma j^\mu n_\mu\, d\Sigma
+\]
+(unabhängig von \(\Sigma\) für geeignete Abklingbedingungen). Invarianz: \(Q\) ist \(G_{\mathrm{ext}}\)-invariant.
+
+\medskip
+\emph{11. Diagrammatische Kovarianz.}
+\[
+\begin{array}{ccc}
+J^1\mathfrak F(U) & \xrightarrow{\ \ D_U\ \ } & \mathfrak F(U)\\[0.3em]
+\downarrow J^1(\rho_{\mathrm{ext}}(a,\Lambda)) & & \downarrow \rho_{\mathrm{ext}}(a,\Lambda)\\[0.3em]
+J^1\mathfrak F(\Lambda U{+}a) & \xrightarrow{\ \ D_{\Lambda U{+}a}\ \ } & \mathfrak F(\Lambda U{+}a)
+\end{array}
+\qquad\Rightarrow\qquad
+\mathcal E(U)=\ker D_U\ \text{ ist kovariant.}
+\]
+
+\medskip
+\emph{12. Spezifikation der \(\gamma\)-Struktur.}
+Wähle etwa Dirac-Darstellung:
+\[
+\gamma^0=\begin{pmatrix} I & 0\\ 0 & -I\end{pmatrix},\qquad
+\gamma^i=\begin{pmatrix} 0 & \sigma^i\\ -\sigma^i & 0\end{pmatrix},\quad
+\gamma^5:=i\gamma^0\gamma^1\gamma^2\gamma^3.
+\]
+Dann \(\Sigma=\C^4\), \(\sigma^{\mu\nu}:=\tfrac{i}{2}[\gamma^\mu,\gamma^\nu]\),
+\(S(\Lambda)=\exp\!\big(-\tfrac{i}{4}\omega_{\mu\nu}\sigma^{\mu\nu}\big)\).
+
+\medskip
+\emph{13. Zusammenfassung der Identifikationen.}
+\[
+\begin{array}{ll}
+\text{Arena} & \mathcal A=(\R^{1,3},g)\\
+\text{äußere Gruppe} & G_{\mathrm{ext}}=\R^{1,3}\rtimes SO^+(1,3)\\
+\text{innere Gruppe} & G_{\mathrm{int}}=\{e\}\\
+\text{Feldbündel} & \mathcal F=M\times \C^4\\
+\text{Darstellungen} & \rho_{\mathrm{ext}}:\ \text{Poincaré}\to \Aut(\mathcal F),\ \rho_{\mathrm{int}}=\mathrm{id}\\
+\text{Operator} & D=i\gamma^\mu\partial_\mu - m\\
+\text{Gleichungen} & \mathcal E=\{\psi\mid D\psi=0\}\\
+\text{Observablen} & \mathcal O:\ \psi\mapsto \text{invariante Funktionale (z.\,B.\ Ladung)}\\
+\text{Gruppoid} & \mathsf{Desc}:\ \text{alle }(U,\psi)\ \text{und Poincaré-Wechsel}
+\end{array}
+\]
+
+\medskip
+\emph{Hinweis (Eichkopplung/QED).}
+Für QED ersetzt man \(G_{\mathrm{int}}=\{e\}\) durch \(U(1)\), wählt ein Hauptbündel
+\(P\to M\), das assoziierte Spinorbündel \(\mathcal F\) und den Anschluss \(A\) auf \(P\).
+Der natürliche Operator wird \(D=i\gamma^\mu(\partial_\mu + iq A_\mu) - m\),
+die innere Wirkung \(\rho_{\mathrm{int}}(e^{i\alpha}):\ \psi\mapsto e^{-iq\alpha}\psi\),
+\(A\mapsto A+d\alpha\). Alle obigen Punkte bleiben formal gleich, mit zusätzlicher
+\(U(1)\)-Äquivarianz.
+
+
+\pagebreak
+
+\subsection{Konzeptuelle Analyse: Warum äußere und innere Symmetrien als Gruppenaktionen auftreten}
+
+\emph{Ausgangspunkt.}
+Ein physikalisches System wird durch eine Menge von Beschreibungen (Felder, Koordinaten, Bezugssysteme)
+repräsentiert.  
+Zwischen diesen Beschreibungen existieren „Wechsel“, die die gleiche physikalische Situation
+in verschiedenen Darstellungsformen ausdrücken.
+Die Struktur dieser Wechsel erzwingt, dass sie algebraisch durch Gruppen- oder Gruppoidaktionen
+modelliert werden.  
+
+Am Beispiel des freien Dirac-Feldes im Minkowski-Raum lässt sich dies formal nachvollziehen.
+
+\bigskip
+\emph{1. Kinematische Arena als geometrische Kategorie.}
+
+Die Raumzeit selbst ist ein Objekt einer geometrischen Kategorie:
+\[
+\mathcal A=(M,g)\in\mathbf{Geom},\qquad M=\R^{1,3},\ g=\mathrm{diag}(1,-1,-1,-1).
+\]
+Jede Transformation, die den geometrischen Aufbau (Metrikstruktur) erhält, ist ein
+Automorphismus in dieser Kategorie.
+Die Gesamtheit dieser Automorphismen bildet eine Lie-Gruppe:
+\[
+\Aut_{\mathbf{Geom}}(\mathcal A)=\mathrm{Isom}(M,g)=\mathcal P
+=\R^{1,3}\rtimes SO^+(1,3).
+\]
+\textbf{Erkenntnis:}
+Jede physikalische Theorie auf $(M,g)$, deren Gleichungen die Metrikstruktur respektieren,
+muss invariant unter diesen Isometrien sein.
+Dadurch wird \emph{äußere Symmetrie} notwendigerweise durch Gruppenaktionen beschrieben.
+
+\bigskip
+\emph{2. Äußere Symmetrien als Automorphismen der Arena.}
+
+Eine äußere Transformation ist eine Abbildung der Arena auf sich selbst:
+\[
+\alpha_{\mathrm{ext}}(\Lambda,a):\ x\mapsto \Lambda x + a.
+\]
+Sie ist invertierbar und die Komposition ist wieder vom gleichen Typ:
+\[
+\alpha_{\mathrm{ext}}(\Lambda_2,a_2)\circ\alpha_{\mathrm{ext}}(\Lambda_1,a_1)
+=\alpha_{\mathrm{ext}}(\Lambda_2\Lambda_1,\Lambda_2 a_1+a_2).
+\]
+\textbf{Erkenntnis:}
+Die Menge aller solcher Abbildungen bildet algebraisch eine Gruppe
+— die Poincaré-Gruppe —, und diese Gruppenstruktur entspricht genau der Kompositionsstruktur
+von Koordinatenwechseln.  
+Die äußere Symmetriegruppe ist also nichts anderes als die interne Automorphismengruppe
+der geometrischen Arena.
+
+\bigskip
+\emph{3. Warum Felder als Bündelobjekte modelliert werden.}
+
+Ein Feld ist lokal eine Funktion \(x\mapsto \psi(x)\), deren Werte nicht in \(\R\),
+sondern in einem linearen Raum \(F_0\) liegen (z.\,B. $\C^4$ für Spinoren).  
+Um lokale Koordinatenwechsel konsistent zu formulieren, muss das Feld unter
+einer Transformation der Basis (Bezugssystemwechsel) eine lineare Abbildung
+auf seinen Werten induzieren:
+\[
+x\mapsto \Lambda x\ \Rightarrow\
+\psi'(x')=S(\Lambda)\psi(x),
+\]
+wobei \(S(\Lambda)\) eine lineare Automorphismusgruppe des Faserraums $F_0$ ist.
+Damit wird jedes Feld formal ein Schnitt eines Faserbündels
+\[
+\pi:\ \mathcal F = M\times F_0 \to M.
+\]
+\textbf{Erkenntnis:}
+Damit äußere Transformationen die gleiche physikalische Feldstruktur erhalten,
+muss ihre Wirkung durch lineare Automorphismen auf den Fasern vermittelt werden.
+Dies ist die Definition einer \emph{Darstellung der Symmetriegruppe} auf dem Faserraum.  
+
+Das Bündel wird so zu einem \emph{repräsentierenden Objekt} der externen Symmetrie.
+
+\bigskip
+\emph{4. Warum interne Symmetrien als vertikale Automorphismen erscheinen.}
+
+Physikalische Theorien enthalten oft Freiheitsgrade, die nicht durch Raumzeitbewegung,
+sondern durch \emph{interne Wahl von Bezugssystemen in der Faser} beschrieben werden:
+die Eichfreiheit.
+
+Eine Eichtransformation ändert nur die lokale Faserbasis,
+nicht den Basispunkt:
+\[
+(\rho_{\mathrm{int}}(\gamma)\psi)(x)
+=\rho_{\mathrm{int}}(\gamma(x))\,\psi(x),
+\quad \gamma(x)\in G_{\mathrm{int}}.
+\]
+Dies sind genau die \emph{vertikalen Automorphismen} des Faserbündels $\mathcal F$,
+da sie die Projektion $\pi$ unverändert lassen:
+\[
+\pi\circ\rho_{\mathrm{int}}(\gamma)=\pi.
+\]
+\textbf{Erkenntnis:}
+Die Forderung, dass man lokal eine Faserbasis frei wählen darf (lokale Eichfreiheit),
+impliziert strukturell, dass die Gesamtheit solcher Vertikaltransformationen eine
+Lie-Gruppe bilden muss, die faserweise wirkt — also eine
+Garbenstruktur $U\mapsto\mathcal G_{\mathrm{int}}(U)$.
+
+\bigskip
+\emph{5. Vereinheitlichung durch Funktorialität.}
+
+Sowohl äußere als auch innere Symmetrien wirken funktoriell:
+\begin{align*}
+\rho_{\mathrm{ext}}:&\ G_{\mathrm{ext}}\to \Aut_{\mathbf{Bund}}(\mathcal F),
+&
+(\Lambda,a)\mapsto\rho_{\mathrm{ext}}(\Lambda,a),\\[0.3em]
+\rho_{\mathrm{int}}:&\ G_{\mathrm{int}}\to \Aut_{\mathbf{Bund}}(\mathcal F),
+&
+\gamma\mapsto\rho_{\mathrm{int}}(\gamma).
+\end{align*}
+Da beide Abbildungen Gruppenhomomorphismen sind, folgen sie denselben
+Kompositionsregeln wie ihre Ursprungsgruppen.
+Dies gewährleistet, dass hintereinander ausgeführte Transformationen
+wieder eine Transformation gleicher Art ergeben — genau die Eigenschaft,
+die physikalisch \emph{Konsistenz von Koordinatenwechseln und Eichwechseln}
+ausdrückt.
+
+\bigskip
+\emph{6. Äquivariante Garbenstruktur als formaler Ausdruck der Invarianz.}
+
+Die Aktion $(\Lambda,\gamma)$ auf der Garbe der Felder
+\[
+\mathfrak F(U)=\Gamma(U,\mathcal F|_U)
+\]
+wird als natürliche Transformation von Funktoren formuliert:
+\[
+\rho(\Lambda,\gamma):\ \mathfrak F(U)\longrightarrow\mathfrak F(\Lambda U),
+\quad
+\psi\mapsto\rho_{\mathrm{ext}}(\Lambda)\rho_{\mathrm{int}}(\gamma)\psi.
+\]
+Die Natürlichkeit (Kommutativität der Diagramme)
+\[
+\rho(\Lambda_2,\gamma_2)\circ\rho(\Lambda_1,\gamma_1)
+=\rho((\Lambda_2,\gamma_2)\circ(\Lambda_1,\gamma_1))
+\]
+ist formal die Kategorieversion der Forderung:
+„Wechsel von Beschreibungen ist assoziativ und invertierbar.“
+Das macht $\mathfrak F$ zu einem $G_{\mathrm{tot}}$–äquivarianten Funktor.
+
+\bigskip
+\emph{7. Warum dies physikalisch unvermeidlich ist.}
+
+\textbf{(i) Beobachterwechsel (äußere Symmetrie).}
+Dasselbe physikalische Ereignis wird in verschiedenen Koordinatensystemen
+unterschiedlich beschrieben.  
+Damit „dieselbe Physik“ vorliegt, muss es eine konsistente Übersetzung
+zwischen Beschreibungen geben — formal ein Isomorphismus.
+Daher ist der Raum der möglichen Beschreibungen ein \emph{Gruppoid}:
+Objekte sind lokale Darstellungen, Morphismen die Wechsel.
+
+\textbf{(ii) Eichfreiheit (innere Symmetrie).}
+Auch ohne Wechsel des Beobachters kann man lokal die Faserbasis ändern,
+ohne die Physik zu ändern.
+Diese zusätzliche Freiheit ist wieder ein System von Isomorphismen,
+das über jeder offenen Menge wirkt — also ein
+„faserweises Gruppoid in Garben“ (die Eichgarbe).
+
+\textbf{(iii) Strukturelle Notwendigkeit.}
+Sobald man fordert:
+\begin{itemize}
+\item die Existenz mehrerer äquivalenter Beschreibungen eines Zustands,
+\item deren Zusammensetzung wieder eine Beschreibung liefert,
+\item und die Umkehrbarkeit jedes Wechsels,
+\end{itemize}
+ergibt sich zwingend die Gruppoidstruktur.
+Die klassischen „Symmetriegruppen“ sind ihre Automorphismengruppen.
+
+\bigskip
+\emph{8. Anwendung auf das Dirac-Feld.}
+
+Im Dirac-Beispiel konkretisiert sich dies zu:
+\[
+\begin{array}{ll}
+\text{äußere Symmetrie} &
+G_{\mathrm{ext}}=\mathcal P=\R^{1,3}\rtimes SO^+(1,3),\\[0.2em]
+\text{Darstellung auf Arena} &
+\alpha_{\mathrm{ext}}(a,\Lambda):x\mapsto \Lambda x+a,\\[0.2em]
+\text{Darstellung auf Faser} &
+\rho_{\mathrm{ext}}(\Lambda):\psi(x)\mapsto S(\Lambda)\psi(\Lambda^{-1}x),\\[0.2em]
+\text{innere Symmetrie} &
+G_{\mathrm{int}}=\{e\},\text{ (trivial für freies Feld)}.\\[0.2em]
+\end{array}
+\]
+Das Kommutativitätsdiagramm
+\[
+\begin{array}{ccc}
+J^1\mathfrak F(U) & \xrightarrow{D_U} & \mathfrak F(U)\\
+\downarrow J^1(\rho_{\mathrm{ext}}(\Lambda)) & & \downarrow \rho_{\mathrm{ext}}(\Lambda)\\
+J^1\mathfrak F(\Lambda U) & \xrightarrow{D_{\Lambda U}} & \mathfrak F(\Lambda U)
+\end{array}
+\]
+formalisiert den Satz:
+„Die Gestalt der Gleichung ändert sich unter Beobachterwechsel nicht.“
+Damit ist der formale Begriff \emph{Invarianz} eine Eigenschaft der
+Natürlichkeit des Differentialoperators \(D\).
+
+\bigskip
+\emph{9. Fazit.}
+\begin{enumerate}
+\item Äußere Symmetrien realisieren den Wechsel des Bezugssystems:
+\(\Aut_{\mathbf{Geom}}(\mathcal A)\).
+\item Innere Symmetrien realisieren den Wechsel der Faserbasis:
+\(\Aut_{\mathbf{Bund}}(\mathcal F\mid_{\mathrm{id}_\mathcal A})\).
+\item Beide setzen sich zu einer gemeinsamen Gruppoid-Struktur zusammen,
+deren Aktion auf der Feldgarbe \(\mathfrak F\) formal die
+„Möglichkeit äquivalenter Beschreibungen“ ausdrückt.
+\item Invarianz physikalischer Gleichungen ist dann eine Natürlichkeitseigenschaft:
+\[
+D\circ J^k(\rho(\Lambda,\gamma))
+=\rho(\Lambda,\gamma)\circ D.
+\]
+Dies ist die mathematisch präzise Form der Aussage:
+„Das physikalische Gesetz gilt in allen Bezugssystemen gleichermaßen.“
+\end{enumerate}
+
+
+\pagebreak
+
+
+\subsection{Formale Bedeutung der Invarianz als Natürlichkeitseigenschaft}
+
+\emph{1. Formale Struktur.}
+Seien gegeben:
+\begin{itemize}
+\item eine geometrische Arena $(\mathcal A,g)$ mit Symmetriegruppe $G_{\mathrm{ext}}$,
+\item ein Feldbündel $\pi:\mathcal F\to\mathcal A$ mit kombinierter Aktion
+      $\rho:G_{\mathrm{ext}}\times G_{\mathrm{int}}\to\Aut_{\mathbf{Bund}}(\mathcal F)$,
+\item ein $k$-ter natürlicher Differentialoperator
+      \[
+      D:J^k\mathcal F\longrightarrow\mathcal E
+      \]
+      zwischen Bündeln über $\mathcal A$ (im einfachsten Fall $\mathcal E=\mathcal F$).
+\end{itemize}
+Für $U\subset\mathcal A$ bezeichnet $D_U:\Gamma(U,\mathcal F|_U)\to\Gamma(U,\mathcal E|_U)$
+die lokal induzierte Abbildung.  
+
+\textbf{Definition.}
+Der Operator $D$ heißt \emph{$G_{\mathrm{tot}}$-kovariant} (oder „invariant in Form“),
+wenn für jedes Paar $(\Lambda,\gamma)\in G_{\mathrm{tot}}=G_{\mathrm{ext}}\ltimes G_{\mathrm{int}}$
+und alle offenen Mengen $U\subset\mathcal A$ das Diagramm kommutiert:
+\[
+\begin{array}{ccc}
+J^k\mathfrak F(U) & \xrightarrow{\quad D_U\quad} & \mathfrak E(U)\\[0.4em]
+\downarrow J^k(\rho(\Lambda,\gamma)) & & \downarrow \rho(\Lambda,\gamma)\\[0.4em]
+J^k\mathfrak F(\Lambda U) & \xrightarrow{\quad D_{\Lambda U}\quad} & \mathfrak E(\Lambda U)
+\end{array}
+\]
+Dies ist äquivalent zur Gleichung
+\[
+D_{\Lambda U}\circ J^k(\rho(\Lambda,\gamma))
+= \rho(\Lambda,\gamma)\circ D_U.
+\]
+Formal ist dies die \emph{Natürlichkeit} von $D$ als Transformation
+zwischen Funktoren $\mathfrak F$ und $\mathfrak E$ mit $G_{\mathrm{tot}}$-Aktion:
+\[
+D:\ J^k\mathfrak F\Rightarrow \mathfrak E
+\quad\text{in der Kategorie } [\mathbf{Open}(\mathcal A)^{\mathrm{op}},\mathbf{Set}]^{G_{\mathrm{tot}}}.
+\]
+
+\textbf{Interpretation.}
+Diese Natürlichkeit bedeutet:
+- Die „Gestalt“ des Gesetzes $D(\psi)=0$ bleibt nach einem zulässigen
+  Wechsel der Beschreibung unverändert.
+- Der Transformationswechsel $(\Lambda,\gamma)$ überführt Lösungen in Lösungen,
+  ohne die Funktionsform des Gesetzes zu ändern.
+
+\bigskip
+\emph{2. Anwendung: Dirac-Gleichung.}
+
+\textbf{Daten.}
+\begin{align*}
+\mathcal A &= (\R^{1,3},g),\qquad g=\mathrm{diag}(1,-1,-1,-1),\\
+\mathcal F &= M\times\C^4,\qquad
+D\psi = i\gamma^\mu\partial_\mu\psi - m\psi.
+\end{align*}
+\[
+\rho_{\mathrm{ext}}(a,\Lambda)\psi(x)
+= S(\Lambda)\,\psi(\Lambda^{-1}(x-a)),
+\quad
+S(\Lambda)=\exp\!\Big(-\tfrac{i}{4}\omega_{\mu\nu}\sigma^{\mu\nu}\Big).
+\]
+
+\textbf{Operatorvergleich vor und nach Transformation.}
+Wir wollen zeigen:
+\[
+D'(\psi')(x') = 0 \quad\Longleftrightarrow\quad D(\psi)(x)=0,
+\]
+d.\,h. die Gleichung behält dieselbe Form in allen Bezugssystemen.
+
+Berechne:
+\begin{align*}
+(D'\psi')(x')
+&= i\gamma^\mu\partial'_\mu\psi'(x') - m\psi'(x')\\
+&= i\gamma^\mu\Lambda_\mu{}^\nu\partial_\nu
+\big(S(\Lambda)\psi(\Lambda^{-1}(x'-a))\big) - m S(\Lambda)\psi(\Lambda^{-1}(x'-a)).
+\end{align*}
+Da $S(\Lambda)$ konstant ist (unabhängig von $x$) und
+$\gamma^\mu\Lambda_\mu{}^\nu=S(\Lambda)\gamma^\nu S(\Lambda)^{-1}$,
+folgt
+\begin{align*}
+(D'\psi')(x')
+&= i S(\Lambda)\gamma^\nu\partial_\nu\psi(\Lambda^{-1}(x'-a)) - mS(\Lambda)\psi(\Lambda^{-1}(x'-a))\\
+&= S(\Lambda)\big(i\gamma^\nu\partial_\nu\psi(x)-m\psi(x)\big)\\
+&= S(\Lambda)\,(D\psi)(x).
+\end{align*}
+Damit gilt:
+\[
+D'(\psi')=S(\Lambda)\,(D\psi)\circ\Lambda^{-1}.
+\]
+\textbf{Schluss:}
+$D\psi=0$ impliziert $D'\psi'=0$,
+und die Gleichung bleibt \emph{formgleich} unter Lorentztransformationen.  
+
+Dies ist exakt die Instanziierung der formalen Bedingung
+\[
+D_{\Lambda U}\circ J^1(\rho_{\mathrm{ext}}(\Lambda))
+= \rho_{\mathrm{ext}}(\Lambda)\circ D_U.
+\]
+
+\bigskip
+\emph{3. Diagrammatische Lesart.}
+\[
+\begin{array}{ccc}
+\psi \in \Gamma(U,\mathcal F) & \mapsto{\ D\ } & D\psi \in \Gamma(U,\mathcal F)\\[0.4em]
+\downarrow \rho_{\mathrm{ext}}(\Lambda) & & \downarrow \rho_{\mathrm{ext}}(\Lambda)\\[0.4em]
+\psi'=\rho_{\mathrm{ext}}(\Lambda)\psi \in \Gamma(\Lambda U,\mathcal F)
+& \mapsto{\ D'\ } &
+D'\psi' = \rho_{\mathrm{ext}}(\Lambda)D\psi \in \Gamma(\Lambda U,\mathcal F)
+\end{array}
+\]
+Das Diagramm kommutiert, d.\,h.\ die Transformation „zieht durch den Operator hindurch“:
+\[
+\rho_{\mathrm{ext}}(\Lambda)\circ D = D\circ \rho_{\mathrm{ext}}(\Lambda).
+\]
+\emph{Folge:}
+Die Gleichung $D\psi=0$ hat dieselbe Form in allen Darstellungen —  
+formal: sie ist ein \emph{natürliches Gesetz} im Sinn der Kategorie der Bündel über $\mathcal A$.
+
+\bigskip
+\emph{4. Konzeptionelle Deutung.}
+
+Die Natürlichkeitseigenschaft
+\[
+D\circ J^k(\rho(\Lambda,\gamma)) = \rho(\Lambda,\gamma)\circ D
+\]
+impliziert:
+\begin{enumerate}
+\item Die Form der Gesetzesabbildung $D$ hängt nicht von der Wahl des Bezugssystems
+      oder der Eichwahl ab.
+\item Die Menge der Lösungen $\mathcal E=\ker D$ ist stabil unter allen zulässigen
+      Transformationswechseln.
+\item Das Gesetz ist somit \emph{objektiv}: seine Struktur ist eine Eigenschaft
+      des physikalischen Systems selbst, nicht der Beschreibung.
+\end{enumerate}
+
+Im Dirac-Beispiel konkret:
+der Operator \(i\gamma^\mu\partial_\mu - m\) enthält nur Tensorobjekte
+($\gamma^\mu$ bilden eine Darstellung des Clifford-Algebra-Tensorsystems,
+$\partial_\mu$ sind Komponenten eines 4-Vektors);
+daher transformiert er kovariant, und die Form der Gleichung bleibt erhalten.
+Diese algebraische Invarianz \(\gamma^\mu\Lambda_\mu{}^\nu=S(\Lambda)\gamma^\nu S(\Lambda)^{-1}\)
+ist die konkrete Realisierung der Natürlichkeit von \(D\).
+
+\textbf{Zusammenfassung:}
+\[
+\boxed{
+\text{„Natürlichkeit“ $=$ algebraische Forminvarianz der Feldgleichung unter Beschreibungwechseln.}
+}
+\]
+
+\pagebreak
+
+\subsection{Formalisierung von Beschreibungswechsel und Forminvarianz}
+
+\emph{Ausgangsstruktur.}
+Fixiere eine Arena $\mathcal A$ (Objekt in $\mathbf{Geom}$) und ein Feldbündel
+$\pi:\mathcal F\to\mathcal A$. Schreibe $\mathfrak F(U)=\Gamma(U,\mathcal F|_U)$
+für die Garbe der lokalen Felder. Eine \emph{Beschreibung} ist ein Paar
+$(U,\phi)$ mit $U\subset\mathcal A$ offen und $\phi\in\mathfrak F(U)$.
+
+\emph{Kategorie der Beschreibungen.}
+Definiere das Gruppoid
+\[
+\mathsf{Desc}(\mathsf{Sys})
+=\Big(\ \mathrm{Obj}=\{(U,\phi)\},\ \mathrm{Mor}((U,\phi),(U',\phi'))=\{(\Lambda,\gamma)\mid \alpha_{\mathrm{ext}}(\Lambda)U=U',\ \rho(\Lambda,\gamma)\phi=\phi'\ \text{auf }U\cap U'\}\ \Big),
+\]
+wobei $\rho(\Lambda,\gamma):\mathfrak F(U)\to\mathfrak F(\Lambda U)$ der durch äußere
+und innere Symmetrien induzierte Feldübersetzer ist.
+
+\emph{Gesetze als natürliche (Differential-)Relationen.}
+Ein \emph{Gesetz} ist ein Unterfunktor $\mathcal E\subset \mathfrak F$
+(\emph{Lösungsfunktor}) oder äquivalent die Nullstellenmenge eines natürlichen
+Differentialoperators $D:J^k\mathfrak F\Rightarrow \mathfrak E$:
+\[
+\mathcal E(U)=\{\phi\in\mathfrak F(U)\mid D_U(j^k\phi)=0\}.
+\]
+Die konzeptuelle Rolle von \emph{Gesetz} im abstrakten Setting:
+\begin{itemize}
+\item \emph{Selektion}: $\mathcal E$ selektiert aus allen Beschreibungen diejenigen, die dem Modell genügen.
+\item \emph{Strukturverträglichkeit}: Natürlichkeit von $D$ verankert $\mathcal E$ in den zulässigen Morphismen (Wechseln).
+\item \emph{Objektivität}: Forminvarianz (s.u.) macht $\mathcal E$ unabhängig von der Wahl der Beschreibung.
+\end{itemize}
+
+\emph{Übersetzungen (Wechsel der Beschreibung).}
+Ein Morphismus $(\Lambda,\gamma):(U,\phi)\to(U',\phi')$ besteht aus
+\[
+U'=\alpha_{\mathrm{ext}}(\Lambda)U,\qquad
+\phi'=\rho(\Lambda,\gamma)\phi,
+\]
+wobei
+\[
+\rho(\Lambda,\gamma)=\rho_{\mathrm{ext}}(\Lambda)\,\rho_{\mathrm{int}}(\gamma):\ \mathfrak F(U)\to \mathfrak F(U').
+\]
+Für Jets wird die kanonische Fortsetzung $J^k(\rho(\Lambda,\gamma)):J^k\mathfrak F(U)\to J^k\mathfrak F(U')$ benutzt.
+
+\emph{Forminvarianz als Natürlichkeit.}
+Der Operator $D$ heißt \emph{forminvariant} (kovariant) unter den Wechseln, wenn
+für alle Morphismen $(\Lambda,\gamma)$ das Diagramm
+\[
+\begin{array}{ccc}
+J^k\mathfrak F(U) & \xrightarrow{\ \ D_U\ \ } & \mathfrak E(U)\\[0.4em]
+\downarrow J^k(\rho(\Lambda,\gamma)) & & \downarrow \rho(\Lambda,\gamma)\\[0.4em]
+J^k\mathfrak F(U') & \xrightarrow{\ \ D_{U'}\ \ } & \mathfrak E(U')
+\end{array}
+\]
+kommutiert, d.h.
+\[
+D_{U'}\circ J^k(\rho(\Lambda,\gamma))=\rho(\Lambda,\gamma)\circ D_U.
+\]
+Dies ist exakt die Natürlichkeit von $D:J^k\mathfrak F\Rightarrow \mathfrak E$
+in der funktoriell mit $G_{\mathrm{tot}}$-Aktion versehenen Funktorkategorie.
+
+\emph{Beweisprinzip (Forminvarianz $\Rightarrow$ Lösungserhalt).}
+Sei $(U,\phi)$ eine Beschreibung mit erfülltem Gesetz $D_U(j^k\phi)=0$.
+Sei $(\Lambda,\gamma):(U,\phi)\to(U',\phi')$ ein Beschreibungswechsel, also $\phi'=\rho(\Lambda,\gamma)\phi$.
+Dann gilt:
+\[
+\underbrace{D_{U'}\big(j^k\phi'\big)}_{\text{Gesetz in neuer Beschreibung}}
+= D_{U'}\big(J^k(\rho(\Lambda,\gamma))\,j^k\phi\big)
+= \rho(\Lambda,\gamma)\,D_U(j^k\phi)
+= \rho(\Lambda,\gamma)\,0
+= 0.
+\]
+Erste Gleichheit: Definition von $D_{U'}$ auf $\phi'$,
+zweite: Natürlichkeit,
+dritte: Gesetz in alter Beschreibung,
+vierte: Funktorialität. Damit ist das Gesetz \emph{formgleich} und lösungserhaltend.
+
+\emph{Lesart im Gruppoid.}
+Die Zuordnung
+\[
+(U,\phi)\ \mapsto\ D_U(j^k\phi)
+\]
+ist ein natürlicher Transformator $\mathsf{Desc}(\mathsf{Sys})\to \mathbf{Vec}$.
+Forminvarianz ist die Aussage, dass diese Zuordnung mit allen Morphismen
+$(\Lambda,\gamma)$ kommutiert. Der Lösungsfunktor $\mathcal E=\ker D$ ist dann
+ein Untergruppoid von $\mathsf{Desc}(\mathsf{Sys})$.
+
+\emph{Explizites Beispiel: Dirac-Operator.}
+Arena $\mathcal A=(\R^{1,3},g)$, Feldgarbe $\mathfrak F(U)=C^\infty(U,\C^4)$,
+Operator $D\psi=i\gamma^\mu\partial_\mu\psi - m\psi$.
+Ein äußerer Wechsel sei $\Lambda\in SO^+(1,3)$, $(\rho_{\mathrm{int}}=\mathrm{id})$.
+Die Übersetzung ist
+\[
+(\rho(\Lambda)\psi)(x')=S(\Lambda)\,\psi(\Lambda^{-1}x'),\qquad
+S(\Lambda)^{-1}\gamma^\mu S(\Lambda)=\Lambda^\mu{}_\nu\,\gamma^\nu.
+\]
+Berechne:
+\[
+D_{U'}(\rho(\Lambda)\psi)(x')
+= i\gamma^\mu\partial'_\mu\big(S(\Lambda)\psi(\Lambda^{-1}x')\big)-mS(\Lambda)\psi(\Lambda^{-1}x').
+\]
+Mit $\partial'_\mu=\Lambda_\mu{}^\nu\partial_\nu$ und der Clifford-Kovarianz folgt
+\[
+= i\,S(\Lambda)\gamma^\nu\partial_\nu\psi(\Lambda^{-1}x')-m\,S(\Lambda)\psi(\Lambda^{-1}x')
+= S(\Lambda)\,(D_U\psi)(\Lambda^{-1}x').
+\]
+Damit
+\[
+D_{U'}\circ \rho(\Lambda)=\rho(\Lambda)\circ D_U
+\quad\Rightarrow\quad
+D_U\psi=0\ \Longrightarrow\ D_{U'}(\rho(\Lambda)\psi)=0,
+\]
+und die Form des Gesetzes ist erhalten.
+
+\emph{Begriffsrelationen (Synopsis).}
+\begin{itemize}
+\item \emph{Beschreibung}: Objekt $(U,\phi)$ im Gruppoid $\mathsf{Desc}$.
+\item \emph{Wechsel/Übersetzung}: Morphismus $(\Lambda,\gamma):(U,\phi)\to(U',\phi')$, realisiert durch $\rho(\Lambda,\gamma)$.
+\item \emph{Gesetz}: natürlicher Differentialoperator $D$ (oder dessen Kern $\mathcal E$) als natürlicher Unterfunktor von $\mathfrak F$.
+\item \emph{Forminvarianz}: Natürlichkeit von $D$; Kommutativität mit allen Übersetzungen.
+\item \emph{Objektivität}: Stabilität des Lösungsgruppoids $\mathcal E$ unter $\mathsf{Desc}$-Morphismen.
+\end{itemize}
+
+\emph{Minimalaxiome für Forminvarianz.}
+\begin{enumerate}
+\item (Garbigkeit) $U\mapsto\mathfrak F(U)$ ist eine Garbe mit Funktorialität $r_{U,V}$.
+\item (Äquivariante Aktion) Es existiert $\rho(\cdot):\mathsf{Mor}(\mathsf{Desc})\to \mathrm{Iso}$ mit
+$\rho(\mathrm{id})=\mathrm{id}$ und $\rho(\beta\circ\alpha)=\rho(\beta)\circ\rho(\alpha)$.
+\item (Natürlichkeit) $D:J^k\mathfrak F\Rightarrow\mathfrak E$ mit
+$D_{U'}\circ J^k(\rho)=\rho\circ D_U$ für alle Morphismen $\rho$.
+\end{enumerate}
+Dann ist $\ker D$ ein unter Morphismen abgeschlossenes Untergruppoid – das \emph{Gesetz} ist formgleich in allen Beschreibungen.
+
+\pagebreak
+
+\subsection{Jets, Natürlichkeit von Differentialoperatoren und Unterfunktoren}
+
+\emph{Ziel.}
+Wir präzisieren drei Bausteine des abstrakten Rahmens:
+(1) $k$-Jets als kanonische Träger für „bis zur $k$-ten Ableitung“
+von Feldern, (2) \emph{Natürlichkeit} lokaler Differentialoperatoren
+als Kommutativität mit allen zulässigen Wechseln der Beschreibung,
+(3) \emph{Unterfunktor} (Subfunktor) als formale Fassung einer
+gleichungsdefinierten Teilgarbe (Lösungsfunktor).
+
+\bigskip
+\emph{1. $k$-Jet-Bündel $J^k\mathcal F$.}
+
+\textbf{(a) $k$-Jets von Abschnitten.}
+Sei $\pi:\mathcal F\to \mathcal A$ ein glattes Vektorbündel über
+einer $n$-dimensionalen glatten Mannigfaltigkeit $\mathcal A$.
+Für $x\in\mathcal A$ seien $\phi,\psi\in\Gamma(\mathcal F)$ zwei glatte Abschnitte.
+Wir schreiben
+\[
+j_x^k\phi = j_x^k\psi \quad \Longleftrightarrow \quad
+\text{$\phi$ und $\psi$ stimmen in $x$ bis zur $k$-ten Ableitung überein.}
+\]
+Die Äquivalenzklassen $j_x^k\phi$ heißen \emph{$k$-Jets von $\phi$ in $x$}.
+Die Vereinigung aller $k$-Jets
+\[
+J^k\mathcal F := \bigsqcup_{x\in\mathcal A} J_x^k\mathcal F,
+\qquad J_x^k\mathcal F:=\{j_x^k\phi\mid \phi\in\Gamma(\mathcal F)\},
+\]
+trägt eine kanonische glatte Bündelstruktur
+\[
+\pi_k:\ J^k\mathcal F \longrightarrow \mathcal A,\qquad j_x^k\phi \mapsto x.
+\]
+
+\textbf{(b) Funktorialität (Jet-Prolongation).}
+Ein Bündelmorphismus $F:\mathcal F\to\mathcal F'$ über $f:\mathcal A\to\mathcal A'$
+induziert den \emph{$k$-Jet-Prolongationsmorphismus}
+\[
+J^kF:\ J^k\mathcal F \longrightarrow J^k\mathcal F',
+\qquad
+J^kF\big(j_x^k\phi\big) := j_{f(x)}^k\big(F\circ \phi \circ f^{-1}\big),
+\]
+sofern $f$ ein Diffeomorphismus (hier in unseren Symmetrieanwendungen: Isomorphie der Arena) ist.
+Damit wird $J^k$ zum Funktor auf der Kategorie der Bündelmorphismen.
+
+\textbf{(c) Lokale Beschreibung.}
+In lokalen Koordinaten $(x^i)$ und Faserkoordinaten $(u^\alpha)$ mit Partials
+$u^\alpha_I = \partial_I u^\alpha$ (Multiindex $I$ mit $|I|\le k$)
+werden Punkte von $J^k\mathcal F$ durch
+\[
+(x^i, u^\alpha, u^\alpha_{i}, u^\alpha_{i j}, \dots, u^\alpha_{I})
+\]
+parametrisiert. Die Projektion $\pi_k$ vergisst die Ableitungen.
+
+\textbf{(d) Affine/lineare Struktur.}
+Für $k\ge 1$ ist $\pi_k:J^k\mathcal F\to \mathcal A$ ein \emph{affines} Bündel
+über $J^{k-1}\mathcal F$, modelliert auf
+\[
+\mathrm{Sym}^k(T^\ast\mathcal A)\otimes \mathcal F,
+\]
+und $J^0\mathcal F=\mathcal F$. Diese affine Struktur kodiert,
+dass die $k$-ten Ableitungen linear aufsetzen.
+
+\bigskip
+\emph{2. Lokale Differentialoperatoren als natürliche Transformationen.}
+
+\textbf{(a) Definition (koordinatenfrei).}
+Ein \emph{lokaler Differentialoperator der Ordnung $\le k$} von $\mathcal F$
+in ein Zielbündel $\mathcal E\to\mathcal A$ ist eine glatte Bündelabbildung
+\[
+D:\ J^k\mathcal F \longrightarrow \mathcal E,
+\]
+die sich auf offene Mengen $U\subset\mathcal A$ als Abbildung
+\[
+D_U:\ \Gamma(U,\mathcal F|_U)\ \longrightarrow\ \Gamma(U,\mathcal E|_U),
+\qquad
+\phi\ \mapsto\ D\circ j^k\phi
+\]
+faktorisieren lässt. Hier ist $j^k\phi:U\to J^k\mathcal F|_U$ der \emph{$k$-Jet-Auftrieb}
+von $\phi$.
+
+\textbf{(b) Natürlichkeit (Forminvarianz).}
+Sei $\rho(\Lambda,\gamma):\mathcal F\to\mathcal F$ ein Bündelautomorphismus
+über $\alpha_{\mathrm{ext}}(\Lambda):\mathcal A\to\mathcal A$ (äußerer Wechsel)
+mit ggf. vertikaler innerer Wirkung $\gamma$ auf den Fasern.
+Dann heißt $D$ \emph{natürlich} (bzw. \emph{forminvariant}) unter $\rho$, wenn
+für alle $U\subset\mathcal A$ das Diagramm kommutiert:
+\[
+\begin{array}{ccc}
+J^k\mathfrak F(U) & \xrightarrow{\ \ D_U\ \ } & \mathfrak E(U)\\[0.4em]
+\downarrow J^k\big(\rho(\Lambda,\gamma)\big) & & \downarrow \rho(\Lambda,\gamma)\\[0.4em]
+J^k\mathfrak F(\Lambda U) & \xrightarrow{\ \ D_{\Lambda U}\ \ } & \mathfrak E(\Lambda U)
+\end{array}
+\]
+d.\,h.
+\[
+D_{\Lambda U}\circ J^k\big(\rho(\Lambda,\gamma)\big)
+=\rho(\Lambda,\gamma)\circ D_U.
+\]
+Interpretation: „Der Wechsel \emph{zieht durch} den Operator hindurch“,
+die Form des Gesetzes bleibt erhalten.
+
+\textbf{(c) Lokale Formulierung.}
+In lokalen Koordinaten besitzt $D$ die Form
+\[
+(D\phi)^\beta(x)=F^\beta\big(x,\,u^\alpha(x),\,\partial_I u^\alpha(x)\big),\quad |I|\le k,
+\]
+wobei \emph{Natürlichkeit} bedeutet, dass die $F^\beta$ die Tensor-/Darstellungsregeln
+unter $(\Lambda,\gamma)$ erfüllen (kein expliziter Koordinaten-/Basisbruch).
+
+\bigskip
+\emph{3. Gesetze als Unterfunktoren (Subgarben).}
+
+\textbf{(a) Prägarben- und Garbensicht.}
+Der Feldfunktor
+\[
+\mathfrak F:\ \mathrm{Open}(\mathcal A)^{\mathrm{op}}\longrightarrow \mathbf{Set},\quad
+U\mapsto \Gamma(U,\mathcal F|_U)
+\]
+ist eine Prägarbe (mit Sheaf-Eigenschaft). Ein \emph{Unterfunktor}
+\[
+\mathcal E\ \subset\ \mathfrak F
+\]
+ist gegeben durch Teilmengen $\mathcal E(U)\subset\mathfrak F(U)$ für alle
+$U$, die \emph{mit den Restriktionen verträglich} sind:
+$r_{U,V}(\mathcal E(V))\subset \mathcal E(U)$ für $U\subset V$.
+Ist $\mathfrak F$ eine Garbe, so ist $\mathcal E$ eine \emph{Untergarbe},
+wenn zusätzlich die Sheaf-Axiome für $\mathcal E$ gelten (lokales Kleben).
+
+\textbf{(b) Gesetz = Nullstellen-Unterfunktor.}
+Ein \emph{Gesetz} definieren wir als Nullstellenmenge eines natürlichen
+Differentialoperators $D$:
+\[
+\mathcal E(U)=\big\{\ \phi\in\mathfrak F(U)\ \big|\ D_U(j^k\phi)=0\ \big\}.
+\]
+Dann ist $\mathcal E$ (i) ein Unterfunktor von $\mathfrak F$ und (ii) $G_{\mathrm{tot}}$-kovariant,
+denn Natürlichkeit liefert für $(\Lambda,\gamma)$:
+\[
+D_{\Lambda U}\big(j^k(\rho(\Lambda,\gamma)\phi)\big)
+=\rho(\Lambda,\gamma)\,D_U(j^k\phi).
+\]
+Insbesondere: $D_U(j^k\phi)=0\ \Rightarrow\ D_{\Lambda U}(j^k\phi')=0$
+für $\phi'=\rho(\Lambda,\gamma)\phi$.
+
+\textbf{(c) Morphismus-Sicht (natürliche Monomorphismen).}
+Die Inklusionen $\iota_U:\mathcal E(U)\hookrightarrow\mathfrak F(U)$ bilden
+einen natürlichen Monomorphismus von Prägarben
+\[
+\iota:\ \mathcal E \Rightarrow \mathfrak F.
+\]
+„Unterfunktor“ heißt hier: \emph{natürliche} Teilmengenwahl kompatibel mit allen
+Restriktionen; die $G_{\mathrm{tot}}$-Kovarianz macht $\iota$ zu einem
+$G_{\mathrm{tot}}$-äquivarianten Monomorphismus.
+
+\bigskip
+\emph{4. Zusammenspiel der drei Konzepte im Beweis der Forminvarianz.}
+
+\textbf{(i) Start.}
+Wähle eine Beschreibung $(U,\phi)$ und setze voraus, dass das Gesetz auf $U$
+erfüllt ist:
+\[
+\phi\in\mathcal E(U)
+\quad\Longleftrightarrow\quad
+D_U\big(j^k\phi\big)=0.
+\]
+
+\textbf{(ii) Wechsel.}
+Nimm einen Morphismus (Beschreibungswechsel)
+\[
+(\Lambda,\gamma):(U,\phi)\longrightarrow (U',\phi'),\quad
+U'=\Lambda U,\ \ \phi'=\rho(\Lambda,\gamma)\phi.
+\]
+Auf Jet-Ebene wirkt $J^k(\rho(\Lambda,\gamma))$.
+
+\textbf{(iii) Natürlichkeit anwenden.}
+Kommutativität liefert:
+\[
+D_{U'}\big(j^k\phi'\big)
+= D_{U'}\circ J^k(\rho(\Lambda,\gamma))\big(j^k\phi\big)
+= \rho(\Lambda,\gamma)\circ D_U\big(j^k\phi\big)
+= \rho(\Lambda,\gamma)\,0
+=0.
+\]
+
+\textbf{(iv) Schluss.}
+Damit $\phi'\in\mathcal E(U')$.  
+Die \emph{Form} der Gleichung (als Gleichheitsrelation im Zielbündel) ist unverändert,
+und der Lösungsraum wird durch den Wechsel isomorph auf den Lösungsraum in der
+neuen Beschreibung transportiert.  
+Formal: $\mathcal E$ ist ein $G_{\mathrm{tot}}$-äquivariant definierter \emph{Unterfunktor}
+von $\mathfrak F$, erzeugt als Kern eines \emph{natürlichen} Operators $D$.
+
+\bigskip
+\emph{5. Minimaler formaler Kern (in einem Satz).}
+
+$k$-Jets machen „bis zur $k$-ten Ableitung“ funktoriell; \
+„Gesetz“ $=$ Kern eines natürlichen $D:J^k\mathfrak F\Rightarrow\mathfrak E$; Unterfunktor $\mathcal E\subset\mathfrak F$ ist dadurch $G_{\mathrm{tot}}$-kovariant und forminvariant.
+
+\pagebreak
+
+\subsection{Systematische und formelle Fassung von Beschreibungswechsel, Pullbacks und Forminvarianz}
+
+\emph{Ziel.}
+Wir formulieren den Wechsel von Beschreibungen (Koordinaten/Wahl der Referenzsysteme) und die
+Forminvarianz physikalischer Gesetze in einem strikt koordinatenfreien Rahmen. Koordinatenformeln
+entstehen dann als Darstellungen der intrinsischen Aussagen.
+
+\bigskip
+\emph{1. Kategorien und Grundobjekte.}
+\begin{itemize}
+\item \emph{Arena-Kategorie} $\mathbf{Geom}$: Objekte sind glatte Mannigfaltigkeiten mit Struktur
+(z.\,B. pseudo\-riemann\-sche Metrik $g$); Morphismen sind Struktur-erhaltende Diffeomorphismen.
+\item \emph{Bündelkategorie} $\mathbf{Bund}(\mathcal A)$: Objekte sind glatte (Vektor-)Bündel $\pi:\mathcal F\to\mathcal A$;
+Morphismen sind Bündelabbildungen über der Identität von $\mathcal A$.
+\item \emph{Feldgarbe} $\mathfrak F:\mathrm{Open}(\mathcal A)^{\mathrm{op}}\to\mathbf{Set}$,
+$U\mapsto \Gamma(U,\mathcal F|_U)$.
+\end{itemize}
+
+\bigskip
+\emph{2. Beschreibungswechsel als Pullback.}
+\begin{itemize}
+\item \emph{Geometrischer Wechsel} ist ein Diffeomorphismus $f:\mathcal A\to\mathcal A$.
+\item \emph{Feld-Transformation} (Skalarfeld): $f^*:\ C^\infty(\mathcal A)\to C^\infty(\mathcal A)$, $(f^*\phi)(p):=\phi(f(p))$.
+\item \emph{Allgemeines Bündel}: Für ein Bündel $\pi:\mathcal F\to\mathcal A$ entsteht das Pullback-Bündel
+$f^*\mathcal F:=\{(p,v)\in \mathcal A\times\mathcal F\mid f(p)=\pi(v)\}\to\mathcal A$ mit kanonischer Projektion.
+Abschnitte transformieren via
+\[
+f^*:\ \Gamma(U,\mathcal F)\longrightarrow \Gamma\big(f^{-1}(U), f^*\mathcal F\big),\qquad
+\phi\mapsto f^*\phi.
+\]
+\item \emph{Isometrien}: Ist $g$ eine Pseudo\-metrik, so induziert $f$ die Metrik $f^*g$; bei Isometrien gilt $f^*g=g$.
+\end{itemize}
+
+\bigskip
+\emph{3. Natürliche Differentialoperatoren.}
+\begin{itemize}
+\item \emph{Jet-Funktor}: Für ein Bündel $\mathcal F\to\mathcal A$ sei $J^k\mathcal F\to\mathcal A$ das $k$-Jet-Bündel.
+Jeder Bündelmorphismus $F:\mathcal F\to\mathcal F'$ über $f:\mathcal A\to\mathcal A'$ induziert
+$J^kF:J^k\mathcal F\to J^k\mathcal F'$ (Funktorialität).
+\item \emph{Lokaler Operator Ordnung $\le k$}:
+eine glatte Bündelabbildung $D:J^k\mathcal F\to\mathcal E$ (Zielbündel $\mathcal E\to\mathcal A$), die lokal
+$D_U:\Gamma(U,\mathcal F)\to\Gamma(U,\mathcal E)$ durch $D_U(\phi)=D\circ j^k\phi$ faktorisieren lässt.
+\item \emph{Natürlichkeit (Forminvarianz)}:
+Für jeden Diffeomorphismus $f$ ist $D$ \emph{natürlich}, falls
+\[
+\boxed{ \quad D\_{f(U)}\circ J^k(f^*) \;=\; f^*\circ D_U \quad }
+\]
+als Abbildungen $J^k\Gamma(U,\mathcal F)\to \Gamma(f(U),\mathcal E)$ gilt. Diagrammatisch:
+\[
+\begin{array}{ccc}
+J^k\mathfrak F(U) & \xrightarrow{\ \ D_U\ \ } & \mathfrak E(U)\\[0.2em]
+\downarrow J^k(f^*) & & \downarrow f^*\\[0.2em]
+J^k\mathfrak F(f(U)) & \xrightarrow{\ \ D_{f(U)}\ \ } & \mathfrak E(f(U))
+\end{array}
+\]
+\end{itemize}
+
+\bigskip
+\emph{4. Gesetze als Unterfunktoren.}
+\begin{itemize}
+\item \emph{Gesetz} (auf $\mathcal A$) ist der Nullstellen-Unterfunktor eines natürlichen Operators $D$:
+\[
+\mathcal E(U):=\{\ \phi\in\mathfrak F(U)\mid D_U(j^k\phi)=0\ \}\ \subset\ \mathfrak F(U).
+\]
+\item \emph{Kovarianz des Gesetzes}: Aus Natürlichkeit folgt
+\[
+f^*(\mathcal E(U))=\mathcal E(f(U)) \quad\text{(Lösungen werden auf Lösungen abgebildet).}
+\]
+\end{itemize}
+
+\bigskip
+\emph{5. Koordinaten als Darstellungen.}
+\begin{itemize}
+\item Karten $x:U\to\R^n$ und $x':U'\to\R^n$ sind Darstellungen. Der Kartenwechsel ist
+$\Phi:=x'\circ x^{-1}:\ x(U\cap U')\to x'(U\cap U')$.
+\item Für einen geometrischen Wechsel $f:\mathcal A\to\mathcal A$ wähle $x' := x\circ f^{-1}$.
+Dann ist die \emph{Darstellung} des Pullbacks $f^*\phi$ genau die übliche Formel
+\[
+\phi'(x')=(f^*\phi)(x')=\phi\big(x\big)=\phi\big(\Phi^{-1}(x')\big).
+\]
+Differentialoperatoren in Koordinaten entstehen durch Kettenregel aus der intrinsischen
+Natürlichkeit (kein „Variablen-Mixen“ nötig).
+\end{itemize}
+
+\bigskip
+\emph{6. Beispiel A: Klein–Gordon operatoriell (koordinatenfrei).}
+\begin{itemize}
+\item \emph{Operator}: $\square_g:=\mathrm{div}_g\circ\nabla^g = g^{ab}\nabla_a\nabla_b$ auf $C^\infty(\mathcal A)$.
+\item \emph{Naturtreue}: Für jeden Diffeomorphismus $f$ gilt
+\[
+\boxed{\quad f^*\big(\square_g\,\phi\big)\ =\ \square_{f^*g}\,\big(f^*\phi\big). \quad}
+\]
+\item \emph{Isometrie-Fall}: $f^*g=g \ \Rightarrow\  f^*\circ(\square_g+m^2)=(\square_g+m^2)\circ f^*$.
+Damit ist $\mathcal D_g:=\square_g+m^2$ natürlich und das Gesetz
+$\mathcal E_g:=\ker\mathcal D_g$ kovariant.
+\end{itemize}
+
+\bigskip
+\emph{7. Beispiel B: Dirac operatoriell (Strichskizze).}
+\begin{itemize}
+\item \emph{Spin-Hauptbündel} $P_{\mathrm{Spin}}\to(\mathcal A,g)$, zugehöriges Spinorbündel
+$\Sigma\to\mathcal A$, Levi-Civita-Spinverbindung $\nabla^\Sigma$.
+\item \emph{Clifford-Multiplikation} $c:T^*\mathcal A\otimes\Sigma\to\Sigma$,
+Dirac-Operator $\slashed{D}:=c\circ\nabla^\Sigma:\Gamma(\Sigma)\to\Gamma(\Sigma)$.
+\item \emph{Natürliche Kovarianz}: Für Isometrie $f$ hebt sich $f$ zu einem
+$f^\Sigma:\Sigma\to\Sigma$ an (über die Spinstruktur) und es gilt
+\[
+\boxed{\quad f^{\Sigma\,\*}\big(\slashed{D}\,\psi\big)\ =\ \slashed{D}\,\big(f^{\Sigma\,\*}\psi\big). \quad}
+\]
+Mit Masse $m$: $(\slashed{D}-m)$ ist natürlich, das Dirac-Gesetz $\ker(\slashed{D}-m)$ ist kovariant.
+\end{itemize}
+
+\bigskip
+\emph{8. Formeller Nachweis der Forminvarianz (Schema).}
+Sei $D:J^k\mathcal F\to\mathcal E$ natürlich und $(U,\phi)$ mit $D_U(j^k\phi)=0$. Für Diffeo $f$:
+\[
+D_{f(U)}\big(j^k(f^*\phi)\big)
+= D_{f(U)}\big(J^k(f^*)\,j^k\phi\big)
+= f^*\big(D_U(j^k\phi)\big)
+= f^*(0)=0.
+\]
+Damit $f^*\phi\in\mathcal E(f(U))$. \emph{Gesetz bleibt in Form gleich.}
+
+\bigskip
+\emph{9. Koordinaten-Korollar (Darstellung der obigen Aussagen).}
+Wähle Karten $x$ und $x':=x\circ f^{-1}$. Für ein Skalarfeld gilt in Darstellung:
+\[
+\partial'_\mu = \frac{\partial x^\nu}{\partial x'^\mu}\,\partial_\nu,\qquad
+\phi'(x')=\phi\big(\Phi^{-1}(x')\big).
+\]
+Ist $f$ Lorentz (Isometrie), folgt unmittelbar
+\[
+(\square'+m^2)\phi' \ =\ \big((\square+m^2)\phi\big)\circ f^{-1},
+\]
+und analog (über Spin-Lift) für den Dirac-Operator:
+\[
+(i\gamma^\mu\partial'_\mu - m)\psi' \ =\ S(\Lambda)\,(i\gamma^\mu\partial_\mu - m)\psi\circ f^{-1}.
+\]
+
+\bigskip
+\emph{10. Zusammenfassung (Minimalaxiome).}
+\begin{enumerate}
+\item (\emph{Garbigkeit}) $U\mapsto \mathfrak F(U)$ ist eine Garbe.
+\item (\emph{Pullback-Funktorialität}) Diffeomorphismen $f$ induzieren $f^*:\mathfrak F\Rightarrow \mathfrak F$.
+\item (\emph{Natürlichkeit}) $D:J^k\mathfrak F\Rightarrow \mathfrak E$ erfüllt $D\circ J^k(f^*)=f^*\circ D$.
+\end{enumerate}
+Dann ist das \emph{Gesetz} $\mathcal E=\ker D$ ein $f^*$-invarianter Unterfunktor; in Koordinaten
+erscheint dies als \emph{Forminvarianz} der Gleichung unter zulässigen Beschreibungswechseln.
+
+
+\pagebreak
+
+\subsection{Ein formeller Rahmen für Beschreibungswechsel und Variablenreferenz}
+
+\emph{Motivation.}
+In physikalischen Formeln wie $\phi(x)$ wird $x$ oft stillschweigend als
+„Raumzeitpunkt“ aufgefasst. Formal ist dies jedoch eine \emph{Koordinatenwahl}
+oder \emph{Darstellungsvorschrift} eines Punktes $p\in M$ durch ein Symbol
+$x$. Wir entwickeln einen Formalismus, der diese Unterscheidung explizit macht.
+
+\bigskip
+\emph{1. Geometrischer Grundraum.}
+\begin{itemize}
+\item Sei $M$ eine glatte Mannigfaltigkeit („Raumzeit“).
+\item Punkte $p\in M$ sind abstrakte Elemente, \emph{nicht} identisch mit Koordinaten.
+\end{itemize}
+
+\bigskip
+\emph{2. Koordinaten als Repräsentationsvorschriften.}
+\begin{itemize}
+\item Eine \emph{Darstellungsvorschrift} (Koordinatenkarte) ist eine glatte Abbildung
+\[
+x:U\subset M \longrightarrow \mathbb{R}^n,
+\]
+die jedem Punkt $p\in U$ einen Zahlenvektor $x(p)$ zuweist.
+\item $x$ ist kein intrinsischer Bestandteil des Systems, sondern ein
+\emph{Bezeichnungsmechanismus}.  
+Man schreibt \(\phi(x)\) nur dann, wenn zuvor
+\[
+\phi(x) := \phi\circ x^{-1},
+\]
+also die Darstellung der Funktion $\phi:M\to V$ in der Karte $x$ definiert wurde.
+\end{itemize}
+
+\bigskip
+\emph{3. Beschreibungen als Paare.}
+\begin{itemize}
+\item Eine \emph{Beschreibung} ist ein Paar
+\[
+\mathbf{B} = (U,x),
+\]
+bestehend aus einem offenen Bereich $U\subset M$ und einer Darstellungsvorschrift $x:U\to\R^n$.
+\item Eine Feldbeschreibung in dieser Karte ist
+\[
+\phi^{[\mathbf B]} := \phi\circ x^{-1} : x(U)\to V,
+\]
+die in Komponenten durch die Variable $x\in\R^n$ beschrieben wird.
+\end{itemize}
+
+\bigskip
+\emph{4. Beschreibungswechsel als Morphismus.}
+\begin{itemize}
+\item Zwei Beschreibungen $\mathbf B=(U,x)$ und $\mathbf B'=(U',x')$
+seien gegeben mit $U\cap U'\ne\emptyset$.
+\item Der \emph{Koordinatenwechsel} (oder „Übersetzungsmechanismus“) zwischen beiden ist die Abbildung
+\[
+\Phi_{\mathbf{B}\to\mathbf{B}'} := x'\circ x^{-1}:\ x(U\cap U')\longrightarrow x'(U\cap U').
+\]
+\item Der \emph{geometrische Beschreibungswechsel} (z.\,B. Poincaré-Transformation) sei ein Diffeomorphismus
+\[
+f:M\to M.
+\]
+Er wirkt auf Beschreibungen durch
+\[
+f\cdot(U,x) := \big(f(U),\ x\circ f^{-1}\big),
+\]
+und auf Felder durch Pullback
+\[
+(f^*\phi)(p) := \phi(f(p)).
+\]
+\end{itemize}
+
+\bigskip
+\emph{5. Evaluationsregel.}
+Um den Wert einer Feldbeschreibung in einer bestimmten Variablen zu berechnen,
+muss explizit angegeben werden, in welchem \emph{Darstellungssystem} die Auswertung erfolgt:
+\[
+\mathrm{ev}_{\mathbf B}(\phi,p) := \phi^{[\mathbf B]}(x(p)) = \phi(p),
+\]
+wobei $x$ die aktuell gültige Darstellung ist.  
+Das Symbol $x$ ist somit kein geometrisches Argument, sondern die Repräsentation des Punktes $p$
+unter der aktiven Beschreibung $\mathbf B$.
+
+\bigskip
+\emph{6. Umweisung der Variablen.}
+Ein Beschreibungswechsel $\mathbf B\to\mathbf B'$ ändert die Zuordnung von Symbolen zu Punkten:
+\[
+x' = x\circ f^{-1},\qquad
+p' = f(p).
+\]
+Damit transformiert die Darstellung des Feldes nach der Regel
+\[
+\phi^{[\mathbf B']}(x') 
+= (\phi')\circ (x')^{-1}(x')
+= (\phi\circ f)\circ f^{-1}\circ x^{-1}(x')
+= \phi^{[\mathbf B]}(x),
+\]
+mit $x=x'\circ f$ als Komposition der Vorschriften.
+
+In Worten:
+\emph{Der gleiche geometrische Punkt wird durch unterschiedliche Variablen dargestellt,
+aber die zusammengesetzte Auswertung führt zum gleichen Funktionswert.}
+
+\bigskip
+\emph{7. Koordinatenfreie Form der Transformation.}
+Sei $f:M\to M$ Diffeomorphismus, $x' = x\circ f^{-1}$.
+Dann gilt:
+\[
+\boxed{
+\phi^{[\mathbf B']}(x') = (\phi^{[\mathbf B]}\circ \Phi_{\mathbf B'\to\mathbf B})(x'),
+\qquad
+\Phi_{\mathbf B'\to\mathbf B} = x\circ f^{-1}\circ x'^{-1}.
+}
+\]
+Dies ist die exakte formale Grundlage der in der Physik üblichen Schreibweise
+\(\phi'(x') = \phi(x)\), die kurz für
+\[
+\phi'(x') = (\phi\circ f)(p') = \phi(p),
+\]
+steht, wobei \(p'=f^{-1}(p)\) und die jeweilige Darstellung implizit ist.
+
+\bigskip
+\emph{8. Operatorische Transformation.}
+Ein Differentialoperator $D$ auf $C^\infty(M,V)$ (z.\,B. $\Box_g+m^2$) ist \emph{natürlich}, wenn
+\[
+f^*\circ D = D\circ f^*.
+\]
+Im Darstellungsformalismus entspricht dies:
+\[
+D^{[\mathbf B']}\big(\phi^{[\mathbf B']}\big)
+= D^{[\mathbf B]}\big(\phi^{[\mathbf B]}\big)\circ \Phi_{\mathbf B'\to\mathbf B}.
+\]
+Damit:
+\[
+D^{[\mathbf B']}\big(\phi^{[\mathbf B']}\big)(x') = 0
+\quad\Longleftrightarrow\quad
+D^{[\mathbf B]}\big(\phi^{[\mathbf B]}\big)(x)=0.
+\]
+Der \emph{Gesetzesausdruck bleibt formgleich}, wenn die Übersetzungsregeln für Variablen
+und Funktionsauswertungen explizit berücksichtigt werden.
+
+\bigskip
+\emph{9. Interpretation.}
+\begin{itemize}
+\item $x$ ist nicht „der Punkt selbst“, sondern eine \emph{Darstellungsvorschrift}.
+\item $\phi$ ist eine geometrische Funktion, deren \emph{Darstellung} $\phi^{[\mathbf B]}$
+erst durch Wahl von $x$ entsteht.
+\item Der Übergang $x\to x'$ ist eine Änderung der symbolischen Referenz, nicht der
+physikalischen Größe.
+\item Die Forminvarianz folgt aus der Funktorialität der Pullbacks: Die Gleichungen
+werden nur dann identisch aussehen, wenn alle symbolischen Umweisungen korrekt
+in den Evaluationsketten mitgeführt werden.
+\end{itemize}
+
+\bigskip
+\emph{10. Schema (kommutatives Diagramm).}
+
+\[
+\begin{array}{ccccc}
+p & \mapsto{f} & f(p) & & \\
+\downarrow x & & \downarrow x' & & \\
+x(p) & \mapsto{\Phi_{\mathbf B\to\mathbf B'}} & x'(f(p)) & \text{in Variablenebene} &
+\end{array}
+\]
+und
+\[
+\phi^{[\mathbf B]}(x(p)) = \phi(p) = \phi'(f(p)) = \phi^{[\mathbf B']}(x'(f(p))).
+\]
+
+\textbf{Schlussfolgerung:}
+\[
+\boxed{
+\text{In jedem Ausdruck $\phi(x)$ ist $x$ eine gewählte Repräsentationsvorschrift; 
+ein Beschreibungswechsel ersetzt simultan die Zuordnung $x$ und den Feldfunktor.}
+}
+\]
+Dies liefert eine formelle Grundlage, um „naive Variablen“ stets als 
+\emph{parametrisierte Bezeichnungsfunktionen} zu behandeln, die explizit
+in die Transformation mit einbezogen werden.
+
+
+
+\subsection{Explizite Fassung des Beschreibungswechsels auf $(\R^{1,3},g)$ unter Poincaré-Transformationen}
+
+\emph{Ziel.}
+Wir wenden den zuvor entwickelten formellen Rahmen konkret auf die spezielle Relativitätstheorie an:
+Raumzeit $(M,g)=(\R^{1,3},\eta)$ mit Minkowski-Metrik $\eta=\mathrm{diag}(1,-1,-1,-1)$
+und Symmetriegruppe der Poincaré-Transformationen.
+
+\bigskip
+\emph{1. Geometrische und algebraische Ausgangsdaten.}
+\begin{itemize}
+\item \textbf{Arena:} $M=\R^{1,3}$, Punkte $p=(t,\mathbf x)\in\R^4$.
+\item \textbf{Metrik:} $\eta(v,w)=v^0w^0-\mathbf v\cdot\mathbf w$.
+\item \textbf{Symmetriegruppe:} 
+\[
+\mathcal P := \R^{1,3}\rtimes SO^+(1,3),
+\quad
+(a,\Lambda)\cdot (a',\Lambda')=(a+\Lambda a',\Lambda\Lambda').
+\]
+\item \textbf{Wirkung auf Punkte:}
+\[
+f_{(a,\Lambda)}:M\longrightarrow M,
+\qquad
+f_{(a,\Lambda)}(p)=\Lambda p + a.
+\]
+\end{itemize}
+
+\bigskip
+\emph{2. Beschreibungen und Koordinatenvorschriften.}
+\begin{itemize}
+\item Eine \emph{Beschreibung} ist ein Paar $\mathbf B=(U,x)$ mit $U\subset M$ offen und
+$x:U\to\R^4$ einer glatten Vorschrift, die jedem Punkt $p\in U$ Koordinaten $x(p)$ zuordnet.
+\item Standardbeschreibung: $\mathbf B_0=(M,\mathrm{id})$ mit $x(p)=p$ (Inertialsystem $S$).
+\item Transformierte Beschreibung (neues Bezugssystem):
+\[
+\mathbf B_{(a,\Lambda)} := f_{(a,\Lambda)}\cdot\mathbf B_0
+= \big(M,\ x_{(a,\Lambda)}:=x\circ f_{(a,\Lambda)}^{-1}\big),
+\]
+d.h.
+\[
+x_{(a,\Lambda)}(p) = \Lambda^{-1}(p - a).
+\]
+Dies sind die „Koordinaten im System $S'$“, das relativ zu $S$ um $(a,\Lambda)$ transformiert ist.
+\end{itemize}
+
+\bigskip
+\emph{3. Felder und ihre Darstellungen.}
+\begin{itemize}
+\item Sei $\phi:M\to V$ ein (z.\,B. komplexes skalares) Feld.
+\item In der Beschreibung $\mathbf B=(U,x)$ lautet die Darstellung:
+\[
+\phi^{[\mathbf B]} := \phi\circ x^{-1}: x(U)\subset\R^4 \to V.
+\]
+\item Speziell für $\mathbf B_0=(M,\mathrm{id})$:
+\[
+\phi^{[\mathbf B_0]}(x) = \phi(x),
+\]
+die „Standarddarstellung“.
+\end{itemize}
+
+\bigskip
+\emph{4. Beschreibungswechsel durch $(a,\Lambda)$.}
+\begin{itemize}
+\item \textbf{Geometrischer Effekt:}
+$f_{(a,\Lambda)}:p\mapsto p'=\Lambda p + a$.
+\item \textbf{Feld-Pullback:}
+\[
+(f_{(a,\Lambda)}^*\phi)(p) = \phi(f_{(a,\Lambda)}(p))
+= \phi(\Lambda p + a).
+\]
+Dies ist das „gleiche physikalische Feld“, gesehen vom neuen Bezugssystem.
+\item \textbf{Darstellung in der neuen Beschreibung} $\mathbf B_{(a,\Lambda)}=(M,x_{(a,\Lambda)})$:
+\[
+\phi^{[\mathbf B_{(a,\Lambda)}]}(x')
+:= (f_{(a,\Lambda)}^*\phi)\circ (x_{(a,\Lambda)})^{-1}(x')
+= \phi\circ f_{(a,\Lambda)}\circ f_{(a,\Lambda)}(x')
+= \phi(\Lambda x' + a).
+\]
+\item \textbf{Wechselabbildung zwischen Koordinaten:}
+\[
+\Phi_{\mathbf B_0\to \mathbf B_{(a,\Lambda)}} = x_{(a,\Lambda)}\circ x^{-1} = \Lambda^{-1}(x - a).
+\]
+\end{itemize}
+
+\bigskip
+\emph{5. Zusammenhänge der Darstellungen.}
+Die beiden Beschreibungen stehen im formalen Verhältnis:
+\[
+\boxed{
+\phi^{[\mathbf B_{(a,\Lambda)}]}(x')
+= \phi^{[\mathbf B_0]}\big(\Lambda x' + a\big).
+}
+\]
+Diese Relation ist die koordinatenfreie Form der physikalisch üblichen Schreibweise:
+\[
+\phi'(x') = \phi(x),\qquad x = \Lambda^{-1}(x'-a).
+\]
+
+\bigskip
+\emph{6. Ableitungen und Operatoren.}
+\begin{itemize}
+\item Ableitungsoperatoren transformieren nach der Kettenregel:
+\[
+\partial'_\mu = \frac{\partial x^\nu}{\partial x'^\mu}\,\partial_\nu
+= (\Lambda^{-1})^\nu{}_\mu\,\partial_\nu.
+\]
+\item Damit wirkt der D’Alembert-Operator
+\[
+\Box' = \eta^{\mu\nu}\partial'_\mu\partial'_\nu
+= \eta^{\mu\nu}(\Lambda^{-1})^\alpha{}_\mu(\Lambda^{-1})^\beta{}_\nu \partial_\alpha\partial_\beta
+= \eta^{\alpha\beta}\partial_\alpha\partial_\beta = \Box,
+\]
+weil $\Lambda$ Lorentz ist ($\Lambda^T\eta\Lambda=\eta$).
+\item Der Operator $(\Box+m^2)$ ist daher \emph{natürlich}:
+\[
+D_{\mathbf B_{(a,\Lambda)}}\circ J^2(f_{(a,\Lambda)}^*)
+= f_{(a,\Lambda)}^*\circ D_{\mathbf B_0}.
+\]
+\end{itemize}
+
+\bigskip
+\emph{7. Beispiel 1 – Translation.}
+\begin{itemize}
+\item Transformation: $(a,\Lambda)=(a,\mathrm{id})$, also $p'=p+a$.
+\item Feldabbildung:
+\[
+\phi'(x')=\phi(x' + a).
+\]
+\item Ableitungen:
+\(\partial'_\mu=\partial_\mu\), also $\Box'=\Box$.
+\item Gesetz:
+\[
+(\Box'+m^2)\phi'(x')=(\Box+m^2)\phi(x'+a)=0
+\quad\text{falls}\quad
+(\Box+m^2)\phi=0.
+\]
+\item \textbf{Interpretation:}
+Reine Translation verändert nur den Bezugspunkt, nicht die Struktur der Gleichung.
+\end{itemize}
+
+\bigskip
+\emph{8. Beispiel 2 – Lorentz-Boost.}
+\begin{itemize}
+\item Boost in $z$-Richtung mit Geschwindigkeit $v$, Lorentzmatrix
+\[
+\Lambda(v)=
+\begin{pmatrix}
+\gamma & 0 & 0 & -\gamma v\\
+0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0\\
+-\gamma v & 0 & 0 & \gamma
+\end{pmatrix},
+\quad \gamma=(1-v^2)^{-1/2}.
+\]
+\item Transformation des Feldes:
+\[
+\phi'(t',x',y',z')=\phi(\gamma(t'+vz'),\,x',\,y',\,\gamma(z'+vt')).
+\]
+\item Kettenregel:
+\[
+\partial'_{t'}=\gamma(\partial_t+v\partial_z),\quad
+\partial'_{z'}=\gamma(\partial_z+v\partial_t),
+\quad
+\partial'_{x'}=\partial_x,\ \partial'_{y'}=\partial_y.
+\]
+Damit:
+\[
+\Box'=\partial'^2_{t'}-\partial'^2_{x'}-\partial'^2_{y'}-\partial'^2_{z'}
+=\partial_t^2-\partial_x^2-\partial_y^2-\partial_z^2=\Box.
+\]
+\item \textbf{Folge:}
+\[
+(\Box'+m^2)\phi'=(\Box+m^2)\phi\circ f_{(a,\Lambda)}=0.
+\]
+\end{itemize}
+
+\bigskip
+\emph{9. Beispiel 3 – Spinorische Erweiterung.}
+\begin{itemize}
+\item Spinor-Feld $\psi:M\to\C^4$.
+\item Transformation:
+\[
+\psi'(x') = S(\Lambda)\,\psi(\Lambda^{-1}(x'-a)),
+\quad
+S(\Lambda)^{-1}\gamma^\mu S(\Lambda)=\Lambda^\mu{}_\nu\gamma^\nu.
+\]
+\item Differentialoperator:
+\[
+D = i\gamma^\mu\partial_\mu - m.
+\]
+\item Kettenregel und Clifford-Kovarianz ergeben:
+\[
+D'\psi'(x') = S(\Lambda)\,(D\psi)(\Lambda^{-1}(x'-a)),
+\]
+und somit:
+\[
+(D'\psi')(x')=0\quad\Longleftrightarrow\quad(D\psi)(x)=0.
+\]
+\item \textbf{Forminvarianz:}
+Der Dirac-Operator ist natürlich unter der Spin-Lift-Aktion der Lorentzgruppe.
+\end{itemize}
+
+\bigskip
+\emph{10. Fazit.}
+In diesem Formalismus werden alle Ausdrücke wie $\phi(x)$ oder $\psi(x)$
+erst sinnvoll, nachdem ein Paar $(U,x)$, also eine Beschreibung, fixiert wurde.
+Ein Beschreibungswechsel $(a,\Lambda)$:
+\begin{itemize}
+\item verändert simultan die Zuordnung der Variablen $x\mapsto x'=\Lambda^{-1}(x-a)$,
+\item ändert die Funktionsdarstellung durch Pullback $\phi\mapsto f_{(a,\Lambda)}^*\phi$,
+\item erhält den geometrischen Operator $(\Box+m^2)$ bzw.\ $(i\slashed{\partial}-m)$ invariant,
+\item und garantiert durch Natürlichkeit:
+\[
+D_{(a,\Lambda)}\big(f_{(a,\Lambda)}^*\phi\big)
+= f_{(a,\Lambda)}^*(D\phi),
+\]
+was sich in Koordinaten als
+\[
+(D'\phi')(x') = (D\phi)(x)
+\]
+darstellt — die präzise Bedeutung der üblichen Forminvarianz.
+\end{itemize}
+
+\[
+\boxed{
+\text{Poincaré-Beschreibungswechsel = simultane Änderung von (i) Variablenvorschrift, (ii) Funktionsdarstellung, und (iii) Pullback des Operators.}
+}
+\]
+
+
+\pagebreak
+
+
+
+\subsection{Zwei explizite Beispiele im vollen Formalismus}
+Wir rechnen die Natürlichkeit (Forminvarianz) \emph{explizit} durch für
+\begin{enumerate}
+\item das \textbf{Klein–Gordon-Feld} (2.\ Ordnung: $k=2$), und
+\item das \textbf{Dirac-Feld} (1.\ Ordnung: $k=1$).
+\end{enumerate}
+Arena jeweils $\mathcal A=(M,g)$ mit $M=\R^{1,3}$, $g=\mathrm{diag}(1,-1,-1,-1)$,
+äußere Symmetrie $G_{\mathrm{ext}}=\mathcal P=\R^{1,3}\rtimes SO^+(1,3)$.
+Wir notieren den \emph{Beschreibungwechsel}
+\[
+x'=\alpha_{\mathrm{ext}}(a,\Lambda)(x)=\Lambda x + a,
+\qquad (\Lambda\in SO^+(1,3),\ a\in\R^{1,3}).
+\]
+
+\bigskip
+\emph{Vorbereitung: Jet-Prolongation und Übersetzer.}
+
+Sei $\pi:\mathcal F\to M$ ein (triviales) Feldbündel mit Faser $F_0$ und Feldgarbe
+$\mathfrak F(U)=\Gamma(U,\mathcal F|_U)$.
+
+\textbf{(1) Jet-Prolongation.} Für $k\in\N$ ist $J^k\mathcal F\to M$ das $k$-Jet-Bündel.
+Für $\phi\in\mathfrak F(U)$ ist $j^k\phi:U\to J^k\mathcal F|_U$ der $k$-Jet-Auftrieb.
+Ein Bündelautomorphismus $\rho(\Lambda):\mathcal F\to\mathcal F$ über $\alpha_{\mathrm{ext}}(\Lambda)$
+induziert $J^k(\rho(\Lambda)) : J^k\mathcal F\to J^k\mathcal F$ mit
+\[
+J^k(\rho(\Lambda))(j_x^k\phi)=j_{\Lambda x+a}^k\!\big(\rho(\Lambda)\phi\big).
+\]
+
+\textbf{(2) Feldübersetzer (äußere Aktion).} 
+\[
+\rho_{\mathrm{ext}}(a,\Lambda):\ \mathfrak F(U)\longrightarrow \mathfrak F(\Lambda U + a),
+\qquad
+(\rho_{\mathrm{ext}}(a,\Lambda)\phi)(x') := \Phi(\Lambda)\,\phi(\Lambda^{-1}(x'-a)).
+\]
+Dabei ist $\Phi(\Lambda)$ die (evtl. triviale) Darstellungswirkung auf der Faser.
+Für Skalare: $\Phi(\Lambda)=\mathrm{id}$;
+für Dirac-Spinoren: $\Phi(\Lambda)=S(\Lambda)$ mit $S(\Lambda)^{-1}\gamma^\mu S(\Lambda)=\Lambda^\mu{}_\nu\gamma^\nu$.
+
+\textbf{(3) Natürlichkeit (Forminvarianz).}
+Ein lokaler Differentialoperator $D:J^k\mathcal F\to\mathcal E$ heißt \emph{natürlich}
+unter $(a,\Lambda)$, wenn
+\[
+D_{\Lambda U + a}\circ J^k(\rho_{\mathrm{ext}}(a,\Lambda))
+=\rho_{\mathrm{ext}}(a,\Lambda)\circ D_U.
+\]
+Dies ist die Kommutativität des Diagramms
+\[
+\begin{array}{ccc}
+J^k\mathfrak F(U) & \xrightarrow{D_U} & \mathfrak E(U)\\
+\downarrow J^k(\rho_{\mathrm{ext}}(a,\Lambda)) & & \downarrow \rho_{\mathrm{ext}}(a,\Lambda)\\
+J^k\mathfrak F(\Lambda U + a) & \xrightarrow{D_{\Lambda U+a}} & \mathfrak E(\Lambda U+a)
+\end{array}
+\]
+und bedeutet: „Die Form des Gesetzes bleibt unter dem Wechsel erhalten.“
+
+\bigskip
+\subsubsection*{A. Beispiel (2.\ Ordnung): Klein–Gordon}
+
+\emph{Feld, Operator, Gesetz.}
+\[
+\mathcal F=M\times\C,\quad \mathfrak F(U)=C^\infty(U,\C),
+\qquad
+D\phi := (\Box + m^2)\phi,
+\quad \Box = g^{\mu\nu}\partial_\mu\partial_\nu.
+\]
+Dies ist ein Operator $D:J^2\mathcal F\to \mathcal F$ (Ordnung $k=2$).
+Gesetz: $\mathcal E(U)=\{\phi\in\mathfrak F(U)\mid D_U(j^2\phi)=0\}$.
+
+\emph{Übersetzer (äußere Symmetrie).} Für Skalare $\Phi(\Lambda)=\mathrm{id}$,
+also
+\[
+(\rho_{\mathrm{ext}}(a,\Lambda)\phi)(x')=\phi(\Lambda^{-1}(x'-a)).
+\]
+
+\emph{Expliziter Nachweis der Natürlichkeit.}
+Wir zeigen
+\[
+D_{\Lambda U+a}\big(\rho_{\mathrm{ext}}(a,\Lambda)\phi\big)
+=\rho_{\mathrm{ext}}(a,\Lambda)\big(D_U\phi\big),
+\quad\text{d.\,h.}\quad
+(\Box_{x'}+m^2)\phi'(x') = (\Box_x+m^2)\phi(x)\ \circ\ \Lambda^{-1}(\cdot-a),
+\]
+mit $\phi'=\rho_{\mathrm{ext}}(a,\Lambda)\phi$ und $x=\Lambda^{-1}(x'-a)$.
+
+Kettenregel (Translationsanteil ist trivial, Lorentzanteil linear):
+\[
+\partial'_\mu = \frac{\partial x^\nu}{\partial x'^\mu}\, \partial_\nu
+= (\Lambda^{-1})^\nu{}_\mu\,\partial_\nu.
+\]
+Dann
+\[
+\partial'_\mu\partial'_\nu \phi'(x')
+= (\Lambda^{-1})^\alpha{}_\mu(\Lambda^{-1})^\beta{}_\nu
+\,\partial_\alpha\partial_\beta\ \phi(x).
+\]
+Kontrahiere mit $g^{\mu\nu}$ und nutze Lorentz-Invarianz $g^{\mu\nu}(\Lambda^{-1})^\alpha{}_\mu(\Lambda^{-1})^\beta{}_\nu
+= g^{\alpha\beta}$:
+\[
+\Box_{x'}\phi'(x')
+= g^{\mu\nu}\partial'_\mu\partial'_\nu \phi'(x')
+= g^{\alpha\beta}\partial_\alpha\partial_\beta \phi(x)
+= (\Box_x\phi)(x).
+\]
+Damit
+\[
+(\Box_{x'}+m^2)\phi'(x') = \big((\Box_x+m^2)\phi\big)(x).
+\]
+Dies ist genau die Gleichung
+\[
+D_{\Lambda U+a}\circ J^2(\rho_{\mathrm{ext}}(a,\Lambda))
+=\rho_{\mathrm{ext}}(a,\Lambda)\circ D_U.
+\]
+\emph{Folge (Lösungserhalt):}
+Ist $D_U(j^2\phi)=0$ auf $U$, so gilt
+$D_{\Lambda U+a}\big(j^2(\rho_{\mathrm{ext}}(a,\Lambda)\phi)\big)=0$ auf $\Lambda U+a$.
+Die Gesetzesform bleibt unverändert.
+
+\bigskip
+\subsubsection*{B. Beispiel (1.\ Ordnung): Dirac}
+
+\emph{Feld, Operator, Gesetz.}
+\[
+\mathcal F=M\times\C^4,\quad \mathfrak F(U)=C^\infty(U,\C^4),
+\qquad
+D\psi := i\gamma^\mu\partial_\mu\psi - m\psi,
+\]
+$D:J^1\mathcal F\to \mathcal F$ (Ordnung $k=1$).
+Gamma-Matrizen erfüllen $\{\gamma^\mu,\gamma^\nu\}=2g^{\mu\nu}\mathbf 1$.
+
+\emph{Übersetzer (äußere Symmetrie).}
+\[
+(\rho_{\mathrm{ext}}(a,\Lambda)\psi)(x')
+:= S(\Lambda)\,\psi(\Lambda^{-1}(x'-a)),
+\quad
+S(\Lambda)^{-1}\gamma^\mu S(\Lambda)=\Lambda^\mu{}_\nu\gamma^\nu.
+\]
+
+\emph{Expliziter Nachweis der Natürlichkeit.}
+Setze $\psi'=\rho_{\mathrm{ext}}(a,\Lambda)\psi$.
+Wir berechnen $D_{x'}\psi'(x')$:
+\[
+\partial'_\mu \psi'(x')
+= \partial'_\mu\big(S(\Lambda)\psi(\Lambda^{-1}(x'-a))\big)
+= S(\Lambda)\,(\Lambda^{-1})^\nu{}_\mu\,\partial_\nu\psi(x),
+\]
+da $S(\Lambda)$ konstant (vom Raumzeitpunkt unabhängig) ist.
+Dann
+\[
+i\gamma^\mu\partial'_\mu\psi'(x')
+= i\gamma^\mu S(\Lambda)\,(\Lambda^{-1})^\nu{}_\mu\,\partial_\nu\psi(x)
+= i\,S(\Lambda)\, S(\Lambda)^{-1}\gamma^\mu S(\Lambda)\,(\Lambda^{-1})^\nu{}_\mu\,\partial_\nu\psi(x).
+\]
+Mit der Kovarianz der Gamma-Matrizen
+$S(\Lambda)^{-1}\gamma^\mu S(\Lambda)=\Lambda^\mu{}_\rho\gamma^\rho$
+und $(\Lambda^{-1})^\nu{}_\mu \Lambda^\mu{}_\rho=\delta^\nu{}_\rho$ folgt
+\[
+i\gamma^\mu\partial'_\mu\psi'(x')
+= i\,S(\Lambda)\,\gamma^\nu\,\partial_\nu\psi(x).
+\]
+Somit
+\[
+D_{x'}\psi'(x')
+= i\gamma^\mu\partial'_\mu\psi'(x')-m\psi'(x')
+= S(\Lambda)\,\big(i\gamma^\nu\partial_\nu\psi(x)-m\psi(x)\big)
+= \rho_{\mathrm{ext}}(a,\Lambda)\big(D_x\psi\big)(x').
+\]
+In Funktornotation:
+\[
+D_{\Lambda U+a}\circ J^1(\rho_{\mathrm{ext}}(a,\Lambda))
+= \rho_{\mathrm{ext}}(a,\Lambda)\circ D_U.
+\]
+\emph{Folge (Lösungserhalt):}
+Erfüllt $\psi$ die Dirac-Gleichung auf $U$, dann erfüllt
+$\psi'=\rho_{\mathrm{ext}}(a,\Lambda)\psi$ sie auf $\Lambda U + a$;
+die Form des Gesetzes bleibt identisch.
+
+\bigskip
+\subsubsection*{C. Fazit in der Sprach der Unterfunktoren}
+
+In beiden Beispielen ist das \emph{Gesetz} der \emph{Nullstellen-Unterfunktor}
+\[
+\mathcal E \subset \mathfrak F,\qquad \mathcal E(U)=\{\Phi\in\mathfrak F(U)\mid D_U(j^k\Phi)=0\}.
+\]
+Die obigen Rechnungen zeigen die \emph{Natürlichkeit} von $D$:
+\[
+D_{\Lambda U+a}\circ J^k(\rho_{\mathrm{ext}}(a,\Lambda))
+=\rho_{\mathrm{ext}}(a,\Lambda)\circ D_U,
+\]
+und damit die \emph{Kovarianz} des Unterfunktors:
+\[
+\rho_{\mathrm{ext}}(a,\Lambda)\big(\mathcal E(U)\big)=\mathcal E(\Lambda U+a).
+\]
+Genau dies ist die präzise (jettheoretische) Aussage:
+\[
+\boxed{\text{„Gesetz ist forminvariant unter Beschreibungswechseln“}}
+\]
+— als Kommutativität eines natürlichen Differentialoperators mit den
+durch die Symmetriegruppe induzierten Übersetzern.
+
+\pagebreak
+
+\subsection{Explizites Beispiel mit konkreter Lösung: Forminvarianz unter Lorentz-Transformationen}
+
+\emph{Ziel.}  
+Wir betrachten zwei explizite Fälle — das Klein–Gordon-Feld und das Dirac-Feld — 
+und zeigen durch konkrete Lösungen, dass die Gleichung nach einem 
+Beschreibungswechsel (Translation + Lorentz-Transformation) \emph{forminvariant} bleibt, 
+also dieselbe Gestalt behält und der transformierte Ausdruck wieder eine Lösung ist.
+
+\bigskip
+\subsubsection*{A. Klein–Gordon-Feld}
+
+\textbf{Gesetz:}
+\[
+(\Box + m^2)\,\phi = 0, 
+\qquad 
+\Box = g^{\mu\nu}\partial_\mu\partial_\nu,
+\qquad
+g = \mathrm{diag}(1,-1,-1,-1).
+\]
+
+\textbf{Feldbündel:}
+\(\mathcal F = M\times\C,\)
+\(\mathfrak F(U)=C^\infty(U,\C).\)
+
+\textbf{Operator:}
+\[
+D = \Box + m^2 : J^2\mathcal F \to \mathcal F.
+\]
+
+\textbf{Konkrete Lösung:}
+\[
+\phi(x) = e^{-ip\cdot x} = e^{-i(Et-\mathbf{p}\cdot\mathbf{x})},
+\quad
+E=\sqrt{|\mathbf p|^2+m^2},
+\]
+und
+\[
+(\Box + m^2)\phi = (-p_\mu p^\mu + m^2)\phi = 0.
+\]
+
+\textbf{Beschreibungswechsel:}  
+Für $(a,\Lambda)\in \R^{1,3}\rtimes SO^+(1,3)$ setze
+\[
+x'=\Lambda x + a,
+\qquad
+\phi'(x') := \phi(\Lambda^{-1}(x'-a)).
+\]
+Einsetzen ergibt
+\[
+\phi'(x') 
+= e^{-ip\cdot\Lambda^{-1}(x'-a)}
+= e^{+i(\Lambda p)\cdot a}\, e^{-i(\Lambda p)\cdot x'}.
+\]
+Bis auf die irrelevante globale Phase $e^{+i(\Lambda p)\cdot a}$ ist
+\(\phi'\) wieder eine ebene Welle mit neuem Impuls
+\[
+p' = \Lambda p.
+\]
+
+\textbf{Überprüfung der Forminvarianz:}
+\[
+(\Box' + m^2)\phi'
+= \big(-(p')^2 + m^2\big)\phi' 
+= ( -p_\mu p^\mu + m^2)\phi' 
+= 0.
+\]
+Damit gilt
+\[
+D_{\Lambda U + a}\big(\rho_{\mathrm{ext}}(a,\Lambda)\phi\big)
+= \rho_{\mathrm{ext}}(a,\Lambda)\big(D_U\phi\big),
+\]
+also:
+\[
+D\circ J^2(\rho_{\mathrm{ext}}(a,\Lambda)) = \rho_{\mathrm{ext}}(a,\Lambda)\circ D.
+\]
+Dies ist die explizite Realisierung der \emph{Natürlichkeit} und Forminvarianz.
+
+\bigskip
+\textbf{Spezifisches Beispiel: Boost entlang der $z$-Achse.}
+
+\[
+\Lambda(v) =
+\begin{pmatrix}
+\gamma & 0 & 0 & -\gamma v\\
+0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0\\
+-\gamma v & 0 & 0 & \gamma
+\end{pmatrix},
+\qquad
+\gamma = (1-v^2)^{-1/2}.
+\]
+Für
+\[
+p=(E,0,0,k),
+\quad
+p'=\Lambda(v)p=(\gamma(E-vk),0,0,\gamma(k-vE)),
+\]
+gilt
+\[
+\phi'(t',z') = e^{-ip'\cdot x'} = e^{-i(\gamma(E-vk)t' - \gamma(k-vE)z')},
+\]
+und $(\Box' + m^2)\phi' = 0$.  
+Die Gleichung bleibt formgleich.
+
+
+
+\textbf{Gegeben:}
+\[
+\phi'(x') = \phi(\Lambda^{-1}(x' - a)),
+\qquad
+x' = \Lambda x + a,
+\]
+mit Lorentztransformation $\Lambda\in SO^+(1,3)$ und Translation $a\in \R^{1,3}$.
+Wir wollen berechnen, wie der D’Alembert-Operator auf $\phi'$ wirkt.
+
+\bigskip
+\textbf{1. Erste Ableitung.}
+
+Nach der Kettenregel:
+\[
+\partial'_\mu \phi'(x') 
+= \frac{\partial x^\nu}{\partial x'^\mu}\, \partial_\nu \phi(x)
+= (\Lambda^{-1})^\nu{}_\mu \, \partial_\nu \phi(x),
+\]
+wobei $x = \Lambda^{-1}(x' - a)$.
+
+\textbf{2. Zweite Ableitung.}
+
+Wende erneut $\partial'_\nu$ an:
+\[
+\partial'_\nu \partial'_\mu \phi'(x')
+= (\Lambda^{-1})^\alpha{}_\nu (\Lambda^{-1})^\beta{}_\mu \,
+\partial_\alpha \partial_\beta \phi(x),
+\]
+da $(\Lambda^{-1})^\alpha{}_\nu$ konstant ist (Lorentz-Transformation ist linear).
+
+\textbf{3. Wirkung des D’Alembert-Operators.}
+
+\[
+\Box' \phi'(x') 
+:= g^{\mu\nu} \partial'_\mu \partial'_\nu \phi'(x')
+= g^{\mu\nu} (\Lambda^{-1})^\alpha{}_\mu (\Lambda^{-1})^\beta{}_\nu \,
+\partial_\alpha \partial_\beta \phi(x).
+\]
+
+\textbf{4. Lorentz-Invarianz der Metrik.}
+
+Für $\Lambda\in SO(1,3)$ gilt
+\[
+g^{\mu\nu} (\Lambda^{-1})^\alpha{}_\mu (\Lambda^{-1})^\beta{}_\nu
+= g^{\alpha\beta},
+\]
+denn per Definition: \(\Lambda^T g \Lambda = g \iff g = \Lambda^{-T} g \Lambda^{-1}\).
+
+\textbf{Damit folgt:}
+\[
+\Box'\phi'(x') = g^{\alpha\beta} \partial_\alpha \partial_\beta \phi(x)
+= (\Box \phi)(x).
+\]
+
+\textbf{5. Zusammen mit der Masse.}
+
+Der Operator $(\Box + m^2)$ wirkt also kommutativ mit der Feldtransformation:
+\[
+(\Box' + m^2)\phi'(x') 
+= (\Box + m^2)\phi(x).
+\]
+Daraus folgt sofort:
+
+\[
+(\Box + m^2)\phi = 0
+\quad\Longrightarrow\quad
+(\Box' + m^2)\phi' = 0.
+\]
+
+\textbf{6. Kontrolle am konkreten Beispiel.}
+
+Setze $\phi(x)=e^{-ip\cdot x}$, dann:
+\[
+\phi'(x')=\phi(\Lambda^{-1}(x'-a)) = e^{-ip\cdot\Lambda^{-1}(x'-a)}
+= e^{+i(\Lambda p)\cdot a}\, e^{-i(\Lambda p)\cdot x'}.
+\]
+Daher:
+\[
+\partial'_\mu \phi'(x') = -i (\Lambda p)_\mu\, \phi'(x'),
+\qquad
+\partial'_\mu \partial'_\nu \phi'(x') 
+= -(\Lambda p)_\mu(\Lambda p)_\nu\, \phi'(x').
+\]
+Kontraktion:
+\[
+\Box'\phi'(x') = - g^{\mu\nu}(\Lambda p)_\mu(\Lambda p)_\nu\, \phi'(x')
+= -p_\mu p^\mu\, \phi'(x'),
+\]
+da \(p'_\mu = \Lambda_\mu{}^\nu p_\nu\) und \(p'^2=p^2\).
+Somit:
+\[
+(\Box'+m^2)\phi' = (-p'^2+m^2)\phi' = 0.
+\]
+
+\bigskip
+\textbf{Fazit:}
+\[
+\boxed{
+(\Box + m^2)\phi = 0
+\quad\Longrightarrow\quad
+(\Box' + m^2)\phi' = 0,
+\qquad
+\phi'(x')=\phi(\Lambda^{-1}(x'-a)).
+}
+\]
+Damit ist die \emph{Forminvarianz} des Klein–Gordon-Gesetzes unter 
+Translations- und Lorentz-Transformationen explizit bestätigt.
+
+
+\bigskip
+\subsubsection*{B. Dirac-Feld}
+
+\textbf{Gesetz:}
+\[
+(i\gamma^\mu\partial_\mu - m)\,\psi = 0,
+\qquad
+\{\gamma^\mu,\gamma^\nu\} = 2g^{\mu\nu}\mathbf 1.
+\]
+
+\textbf{Feldbündel:}
+\(\mathcal F = M\times\C^4,\)
+\(\mathfrak F(U)=C^\infty(U,\C^4).\)
+
+\textbf{Operator:}
+\[
+D = i\gamma^\mu\partial_\mu - m : J^1\mathcal F \to \mathcal F.
+\]
+
+\textbf{Konkrete Lösung:}
+\[
+\psi(x) = u_s(\mathbf p)\,e^{-ip\cdot x},
+\qquad
+(\slashed{p}-m)u_s(\mathbf p)=0,
+\]
+wobei
+\[
+u_s(\mathbf p)
+=\sqrt{\frac{E+m}{2m}}
+\begin{pmatrix}
+\chi_s\\[2pt]
+\frac{\boldsymbol{\sigma}\cdot\mathbf p}{E+m}\chi_s
+\end{pmatrix},
+\qquad
+\chi_\uparrow=\binom10,\ \chi_\downarrow=\binom01.
+\]
+
+\textbf{Beschreibungswechsel:}  
+Für $(a,\Lambda)$ definiere den Übersetzer
+\[
+\psi'(x') = S(\Lambda)\psi(\Lambda^{-1}(x'-a)),
+\quad
+S(\Lambda)^{-1}\gamma^\mu S(\Lambda)=\Lambda^\mu{}_\nu\gamma^\nu.
+\]
+Einsetzen der Lösung ergibt
+\[
+\psi'(x') = S(\Lambda)u_s(\mathbf p)\,e^{-ip\cdot\Lambda^{-1}(x'-a)}
+= S(\Lambda)u_s(\mathbf p)\,e^{-i(\Lambda p)\cdot x'}\,e^{+i(\Lambda p)\cdot a}.
+\]
+Definiere
+\[
+p'=\Lambda p,
+\qquad
+u'_s(\mathbf p'):=S(\Lambda)u_s(\mathbf p).
+\]
+Dann ist
+\[
+\psi'(x')=u'_s(\mathbf p')\,e^{-ip'\cdot x'},
+\]
+wobei $(\slashed{p'}-m)u'_s(\mathbf p')=0$.
+
+\textbf{Überprüfung der Forminvarianz:}
+\[
+(i\gamma^\mu\partial'_\mu - m)\psi'
+= i\gamma^\mu S(\Lambda)(\Lambda^{-1})^\nu{}_\mu \partial_\nu \psi(\Lambda^{-1}x')
+- mS(\Lambda)\psi(\Lambda^{-1}x').
+\]
+Mit $\gamma^\mu (\Lambda^{-1})^\nu{}_\mu = S(\Lambda)\gamma^\nu S(\Lambda)^{-1}$ folgt
+\[
+(i\gamma^\mu\partial'_\mu - m)\psi'
+= S(\Lambda)(i\gamma^\nu\partial_\nu - m)\psi(\Lambda^{-1}x')
+= S(\Lambda)\big(D\psi\big)(\Lambda^{-1}x')
+= 0.
+\]
+Also:
+\[
+D_{\Lambda U + a}\big(\rho_{\mathrm{ext}}(a,\Lambda)\psi\big)
+= \rho_{\mathrm{ext}}(a,\Lambda)\big(D_U\psi\big),
+\]
+d.h. $D$ ist natürlich und die Dirac-Gleichung formgleich.
+
+\bigskip
+\textbf{Explizit: Ruhespinor + Boost entlang der $z$-Achse.}
+
+Für $p=(m,0,0,0)$ und $s=\uparrow$:
+\[
+u_\uparrow(\mathbf 0)=
+\begin{pmatrix}1\\0\\1\\0\end{pmatrix},
+\qquad
+\psi(x)=u_\uparrow(\mathbf 0)\,e^{-imt}.
+\]
+Boost mit Geschwindigkeit $v$ in $z$-Richtung:
+\[
+S(\Lambda)=\exp\!\Big(-\frac{\eta}{2}\gamma^0\gamma^3\Big),
+\quad
+\tanh\eta=v,\quad
+\gamma=\cosh\eta.
+\]
+Dann:
+\[
+u'_\uparrow(\mathbf p')
+=S(\Lambda)u_\uparrow(\mathbf 0)
+=\sqrt{\frac{E+m}{2m}}
+\begin{pmatrix}
+1\\[2pt]0\\[2pt]\frac{p'_z}{E+m}\\[2pt]0
+\end{pmatrix},
+\quad
+p'=(\gamma m,0,0,\gamma v m).
+\]
+Die transformierte Lösung:
+\[
+\psi'(t',z')=u'_\uparrow(\mathbf p')\,e^{-i(\gamma m\, t' - \gamma v m\, z')},
+\]
+erfüllt wieder
+\[
+(i\gamma^\mu\partial'_\mu - m)\psi'=0.
+\]
+
+\bigskip
+\textbf{Fazit:}
+\begin{itemize}
+\item Die Übersetzungsabbildung $(a,\Lambda)$ transportiert die Lösung auf eine neue Lösung.
+\item Der Operator $D$ kommutiert mit dieser Übersetzung auf Jet-Ebene:
+\[
+D_{\Lambda U + a}\circ J^k(\rho_{\mathrm{ext}}(a,\Lambda))
+= \rho_{\mathrm{ext}}(a,\Lambda)\circ D_U.
+\]
+\item Die \emph{Form} der Gleichung bleibt identisch; nur die Parameter 
+(Frequenz, Impuls, Spinor) transformieren.
+\end{itemize}
+Dies ist die konkrete, berechnete Veranschaulichung des Prinzips:
+\[
+\boxed{
+\text{„Natürlichkeit eines Differentialoperators“}
+\;\Longleftrightarrow\;
+\text{Forminvarianz des physikalischen Gesetzes.}
+}
+\]
+
+\pagebreak
+
+\subsection{Abstrakte Formulierung physikalischer Modelle}
+
+\emph{1. Vorbereitende Kategorien.}
+
+Sei $\mathbf{Man}$ die Kategorie der glatten Mannigfaltigkeiten und glatten Abbildungen.  
+Sei $\mathbf{Bund}$ die Kategorie der glatten Vektorbündel (oder allgemeiner: Faserbündel) und glatten Bündelmorphismen.  
+
+Wir betrachten einen allgemeinen Funktor
+\[
+\mathcal{F}: \mathbf{Man}^{\mathrm{op}} \longrightarrow \mathbf{Bund},
+\]
+der jeder Mannigfaltigkeit $M$ den „Raum der Felder“ $\mathcal{F}(M)\to M$ zuordnet.  
+Abschnitte $\phi\in \Gamma(\mathcal{F}(M))$ sind potentielle \emph{Beschreibungen} des Systems auf der Arena $M$.
+
+\bigskip
+\emph{2. Strukturelle Daten.}
+
+Ein \emph{physikalisches Modell} ist ein Tupel
+\[
+\mathsf{Sys}
+= (\mathcal{A}, G_{\mathrm{ext}}, G_{\mathrm{int}},
+  \mathcal{F}, \rho_{\mathrm{ext}}, \rho_{\mathrm{int}},
+  \mathcal{E}, \mathcal{O})
+\]
+mit folgenden abstrakten Komponenten:
+
+\begin{enumerate}
+\item $\mathcal{A}$: ein Objekt einer geeigneten geometrischen Kategorie $\mathbf{Geom}$ (z.\,B.\ Mannigfaltigkeit mit Struktur).  
+Dies ist die \emph{kinematische Arena}.
+
+\item $G_{\mathrm{ext}}$: eine Lie-Gruppe mit einer treuen Aktion
+\[
+\alpha_{\mathrm{ext}}: G_{\mathrm{ext}} \curvearrowright \mathcal{A}
+\]
+in der Kategorie $\mathbf{Geom}$.  
+Diese Aktion beschreibt die zulässigen Endomorphismen der Arena.
+
+\item $G_{\mathrm{int}}$: eine Lie-Gruppe, deren Elemente als interne Automorphismen der Faserstruktur wirken; formal
+\[
+\alpha_{\mathrm{int}}: G_{\mathrm{int}} \curvearrowright \mathcal{F},
+\]
+wobei $\pi\circ \alpha_{\mathrm{int}}(g)=\pi$.
+
+\item $\mathcal{F}$: ein Objekt in $\mathbf{Bund}$, ein glattes Bündel $\pi:\mathcal{F}\to\mathcal{A}$,
+dessen Fasern $F_x$ den lokalen Zustandsraum bilden.
+
+\item $\rho_{\mathrm{ext}}$ und $\rho_{\mathrm{int}}$: Gruppenhomomorphismen
+\[
+\rho_{\mathrm{ext}}: G_{\mathrm{ext}} \longrightarrow \Aut_{\mathbf{Bund}}(\mathcal{F}),
+\qquad
+\rho_{\mathrm{int}}: G_{\mathrm{int}} \longrightarrow \Aut_{\mathbf{Bund}}(\mathcal{F}),
+\]
+die die Wirkungen auf dem Bündel implementieren.  
+Beide Wirkungen kommutieren in geeigneter Weise (semi-direktes Produkt oder Produktstruktur).
+
+\item $\mathcal{E}\subset \Gamma(\mathcal{F})$: eine Untervarietät oder ein Unterfunktor, der die
+zulässigen Feldkonfigurationen bestimmt (z.\,B.\ Lösungsraum einer Differentialrelation).  
+Formal: $\mathcal{E}$ ist ein Unterfunktor von $\Gamma\circ\mathcal{F}$,
+\[
+\mathcal{E}(U) \subset \Gamma(U,\mathcal{F}|_U)
+\quad\text{für jedes }U\subseteq\mathcal{A}.
+\]
+
+\item $\mathcal{O}$: eine strukturierte Kategorie oder Algebra von Funktionalen auf $\mathcal{E}$,
+\[
+\mathcal{O} = \mathrm{Hom}_{\mathbf{Set}}(\mathcal{E}, \mathbb{K})
+\]
+mit geeigneter algebraischer oder topologischer Struktur (*-Algebra, symplektischer Raum etc.).
+\end{enumerate}
+
+\bigskip
+\emph{3. Beschreibungen als lokale Funktorobjekte.}
+
+Für $U\subseteq\mathcal{A}$ offen sei
+\[
+\mathsf{Desc}(U) = \Gamma(U,\mathcal{F}|_U),
+\]
+die Kategorie (bzw.\ Menge) lokaler Feldkonfigurationen auf $U$.  
+Die Einschränkungsabbildungen $r_{U,V}: \mathsf{Desc}(V)\to \mathsf{Desc}(U)$
+für $U\subset V$ machen $U\mapsto\mathsf{Desc}(U)$ zu einem Präschemen (präfaserbündelartigen Funktor).
+
+\bigskip
+\emph{4. Transformationen.}
+
+Definiere eine Kategorie der \emph{zulässigen Transformationen}:
+\[
+\mathbf{Transf} = G_{\mathrm{ext}}\times G_{\mathrm{int}},
+\]
+deren Objekte die Einheitsgruppe ist und deren Morphismen die Paare $(\Lambda,\gamma)$ mit
+Kombinationsgesetz $(\Lambda_1,\gamma_1)\circ(\Lambda_2,\gamma_2)=(\Lambda_1\Lambda_2,\gamma_1\gamma_2)$.
+Sie wirken auf $\mathsf{Desc}(\mathsf{Sys})$ als
+\[
+(\Lambda,\gamma)\cdot \phi
+= \rho_{\mathrm{ext}}(\Lambda)\,\rho_{\mathrm{int}}(\gamma)\,\phi.
+\]
+
+\bigskip
+\emph{5. Gruppoid der Beschreibungen.}
+
+Die Daten
+\[
+\mathsf{Desc}(\mathsf{Sys})
+=(\mathrm{Obj}=\{\text{lokale Felder}\},
+ \mathrm{Mor}=\mathbf{Transf})
+\]
+bilden ein Gruppoid.  
+Jedes Objekt $\phi$ besitzt als Isomorphiegruppe die Stabilitätsuntergruppe
+\[
+\mathrm{Stab}(\phi)
+=\{(\Lambda,\gamma)\mid (\Lambda,\gamma)\cdot\phi=\phi\}.
+\]
+Der Orbitraum $\mathcal{E}/\mathbf{Transf}$ ist die Menge der \emph{physikalischen Zustände}.
+
+\bigskip
+\emph{6. Kovarianz und Invarianz.}
+
+Eine Gleichungsmenge $\mathcal{E}\subset \Gamma(\mathcal{F})$ heißt
+\emph{kovariant}, falls
+\[
+(\Lambda,\gamma)\cdot \mathcal{E} = \mathcal{E}
+\quad\forall (\Lambda,\gamma)\in\mathbf{Transf}.
+\]
+Eine Observable $O\in\mathcal{O}$ heißt \emph{invariant}, falls
+\[
+O(\phi)=O\!\big((\Lambda,\gamma)\cdot\phi\big)
+\quad\forall \phi\in\mathcal{E},\ (\Lambda,\gamma)\in\mathbf{Transf}.
+\]
+Diese Definitionen sind rein kategorial und unabhängig von der
+konkreten Natur der Objekte.
+
+\bigskip
+\emph{7. Struktur der Funktorialität.}
+
+Die Konstruktion $U\mapsto\mathsf{Desc}(U)$ und $(\Lambda,\gamma)\mapsto(\Lambda,\gamma)\cdot-$
+definiert einen Funktor
+\[
+\mathsf{Desc}(\mathsf{Sys}): \mathbf{Transf}^{\mathrm{op}} \longrightarrow \mathbf{Set},
+\]
+der jedem Transformationspaar den Automorphismus seiner Wirkung auf dem
+Beschreibungssatz zuordnet.  Die Kovarianz der Gleichungen entspricht der
+\emph{Natürlichkeit} des Unterfunktors $\mathcal{E}$ bzgl.\ dieser Wirkung:
+\[
+\mathcal{E}\circ(\Lambda,\gamma)
+= \mathcal{E}.
+\]
+
+\bigskip
+\emph{8. Funktor der Lösungen und Observablen.}
+
+Der \emph{Lösungsfunktor}
+\[
+\mathcal{S}ol: \mathbf{Transf}^{\mathrm{op}} \longrightarrow \mathbf{Set},
+\qquad
+(\Lambda,\gamma)\longmapsto
+\{\phi\in\mathcal{E}\mid (\Lambda,\gamma)\cdot\phi\in\mathcal{E}\}
+\]
+ist ein $G_{\mathrm{ext}}\times G_{\mathrm{int}}$-äquivarianter Funktor.  
+
+Observablen sind dann \emph{natürliche Transformationen}
+\[
+O:\mathcal{S}ol \Rightarrow \underline{\mathbb{K}},
+\]
+wobei $\underline{\mathbb{K}}$ der konstante Funktor auf dem Skalarkörper ist.
+Invarianz entspricht der Natürlichkeitseigenschaft
+\[
+O_{\mathcal{E}} = O_{\mathcal{E}}\circ(\Lambda,\gamma).
+\]
+
+\bigskip
+\emph{9. Abstrakte Lesart.}
+
+Das formale Gerüst liefert folgende begriffliche Ebenen:
+\begin{itemize}
+\item Die \emph{Arena} $\mathcal{A}$: Träger der kinematischen Struktur.
+\item Die \emph{Gruppen} $G_{\mathrm{ext}}, G_{\mathrm{int}}$: Generatoren zulässiger Transformationen.
+\item Das \emph{Feldbündel} $\mathcal{F}$: Objekt, auf dem diese Gruppen wirken.
+\item Die \emph{Darstellungen} $\rho_{\mathrm{ext}},\rho_{\mathrm{int}}$: Vermittlung zwischen Struktur und Wirkung.
+\item Die \emph{Gleichungen} $\mathcal{E}$: Selektionsprinzip innerhalb des Feldraums.
+\item Die \emph{Observablen} $\mathcal{O}$: Funktoren auf den Lösungsfunktor, invariant unter Transformationen.
+\item Die \emph{Invarianz- und Kovarianzprinzipien}: Natürlichkeitsbedingungen der beteiligten Funktoren.
+\end{itemize}
+
+\emph{10. Zusammenfassung.}
+
+Ein physikalisches System ist damit ein \emph{objektives Strukturensemble}, bestehend aus
+\begin{enumerate}
+\item einem \emph{Bezugssystem-Raum} (Arena $\mathcal{A}$ und externe Symmetrie $G_{\mathrm{ext}}$),
+\item einem \emph{internen Zustandsraum} (Faserstruktur und interne Symmetrie $G_{\mathrm{int}}$),
+\item einem \emph{Feldfunktor} $\mathcal{F}$, auf dem beide Gruppen durch Darstellungen wirken,
+\item einem \emph{Lösungsfunktor} $\mathcal{E}$, kovariant unter diesen Wirkungen,
+\item und einer \emph{Observablen-Kategorie} $\mathcal{O}$, deren Objekte natürliche Transformationen auf $\mathcal{E}$ sind.
+\end{enumerate}
+
+
+\subsection{Abstrakter Modellrahmen: formelle Ausarbeitung}
+
+\emph{Notation.}
+Es seien $\mathbf{Man}$ die Kategorie glatter, parakompakter Mannigfaltigkeiten mit glatten Abbildungen
+und $\mathbf{Bund}$ die $\,\mathbf{Man}$–faserte Kategorie glatter (reeller/komplexer) Vektorbündel
+mit Bündelmorphismen über der Identität. 
+Für $M\in\mathrm{Obj}(\mathbf{Man})$ bezeichne $\Gamma(E\to M)$ die glatten Abschnitte.
+Für eine Lie-Gruppe $G$ bezeichne $BG$ die Ein-Objekt-Kategorie (Klassenifying-Stack-Sicht).
+
+\bigskip
+\emph{1. Arenen und äußere Symmetrien.}
+\begin{itemize}
+\item Eine \emph{kinematische Arena} ist ein Objekt $\mathcal A$ einer geometrischen Unterkategorie
+$\mathbf{Geom}\subset\mathbf{Man}$ (z.\,B.\ orientierte, pseudo-Riemannsche Mannigfaltigkeiten).
+\item Eine \emph{äußere Symmetrie} ist eine glatte Linksaktion einer Lie-Gruppe $G_{\mathrm{ext}}$ auf $\mathcal A$ in $\mathbf{Geom}$:
+\[
+\alpha_{\mathrm{ext}}:G_{\mathrm{ext}}\times \mathcal A \to \mathcal A,\qquad
+(\Lambda,x)\mapsto \Lambda\cdot x,
+\]
+äquivalent zu einem Funktor $G_{\mathrm{ext}}\to\mathrm{Aut}_{\mathbf{Geom}}(\mathcal A)$.
+\item Die Kategorie der \emph{Hintergrund-Morphismen} ist die von $G_{\mathrm{ext}}$ erzeugte Unterkategorie
+$\mathbf{Back}(\mathcal A)$ mit Objekten $\mathcal A$ und Morphismen $\{\Lambda:\mathcal A\to \mathcal A\}$.
+\end{itemize}
+
+\bigskip
+\emph{2. Innere Symmetrien und Bündelstruktur.}
+\begin{itemize}
+\item Eine \emph{innere Symmetriegruppe} ist eine Lie-Gruppe $G_{\mathrm{int}}$.
+\item Ein \emph{Hauptbündel} $P\to \mathcal A$ mit Strukturgruppe $G_{\mathrm{int}}$ ist gegeben durch eine freie, eigentliche Rechtsaktion
+$P\times G_{\mathrm{int}}\to P$ mit Quotient $\mathcal A$.
+\item Für eine Darstellung $\rho_{\mathrm{int}}:G_{\mathrm{int}}\to GL(F_0)$ ist das \emph{assoziierte Feldbündel}
+\[
+\pi:\ \mathcal F := P\times_{\rho_{\mathrm{int}}} F_0 \longrightarrow \mathcal A
+\]
+definiert. Eine \emph{Feldkonfiguration} ist $\phi\in\Gamma(\mathcal F)$.
+\item Die \emph{Eichgruppe auf $U\subset\mathcal A$} ist die Gruppe der $G_{\mathrm{int}}$–äquivarianten Automorphismen von $P|_U$ über $\mathrm{id}_U$:
+\[
+\mathcal G_{\mathrm{int}}(U):=\mathrm{Aut}_{G_{\mathrm{int}}}(P|_U\to U).
+\]
+Sie bildet einen Prägarben-Funktor $U\mapsto\mathcal G_{\mathrm{int}}(U)$.
+\end{itemize}
+
+\bigskip
+\emph{3. Feldfunktor, Beschreibungen und Restriktionen.}
+\begin{itemize}
+\item Der \emph{Feldfunktor} ist ein (prä-)Garben-Funktor
+\[
+\mathfrak F:\ \mathrm{Open}(\mathcal A)^{\mathrm{op}}\longrightarrow \mathbf{Set},\qquad
+U\longmapsto \mathfrak F(U):=\Gamma(\mathcal F|_U).
+\]
+\item Für $U\subset V$ ist die Restriktion $r_{U,V}:\mathfrak F(V)\to \mathfrak F(U)$ natürlich.
+\item Eine \emph{Beschreibung} ist ein Paar $(U,\phi)$ mit $U\subset \mathcal A$ offen, $\phi\in\mathfrak F(U)$.
+\end{itemize}
+
+\bigskip
+\emph{4. Aktionen auf Feldern (äußere und innere).}
+\begin{itemize}
+\item Die äußere Symmetrie wirkt (kovariant) über einen Bündel-Automorphismus-Funktor
+\[
+\rho_{\mathrm{ext}}:\ G_{\mathrm{ext}}\longrightarrow \mathrm{Aut}_{\mathbf{Bund}}(\mathcal F),\qquad
+\phi\ \mapsto\ \rho_{\mathrm{ext}}(\Lambda)\cdot \phi,
+\]
+kompatibel mit der Basiswirkung $\alpha_{\mathrm{ext}}(\Lambda)$ (Kartentransform).
+\item Die innere Symmetrie wirkt vertikal
+\[
+\rho_{\mathrm{int}}:\ \mathcal G_{\mathrm{int}}(-)\longrightarrow \mathrm{Aut}_{\mathbf{Bund}}(\mathcal F|-),\qquad
+\phi\ \mapsto\ \rho_{\mathrm{int}}(\gamma)\cdot \phi,
+\]
+faserweise über der Identität auf $U$.
+\item Zusammen definiert $(\Lambda,\gamma)$ eine \emph{Transformation}
+\[
+(\Lambda,\gamma)\cdot (U,\phi)\ :=\ \big(\alpha_{\mathrm{ext}}(\Lambda)U,\ \rho_{\mathrm{ext}}(\Lambda)\rho_{\mathrm{int}}(\gamma)\,\phi\big).
+\]
+\end{itemize}
+
+\bigskip
+\emph{5. Gruppoid der Beschreibungen.}
+\begin{itemize}
+\item Das \emph{Transformationsobjekt} ist das semidirekte Produkt
+$G_{\mathrm{tot}}:=G_{\mathrm{ext}}\ltimes \mathcal G_{\mathrm{int}}(-)$ (als Garbe in Gruppen).
+\item Das \emph{Beschreibungsgrouppoid} ist
+\[
+\mathsf{Desc}(\mathsf{Sys})\ :=\
+\Big(\ \mathrm{Obj}=\big\{(U,\phi)\big\},\ 
+\mathrm{Mor}\big((U,\phi)\to(U',\phi')\big)=\big\{(\Lambda,\gamma)\mid (\Lambda,\gamma)\cdot(U,\phi)=(U',\phi')\big\}\ \Big).
+\]
+\item Der \emph{Orbit} eines $\phi\in\mathfrak F(U)$ ist $G_{\mathrm{tot}}(U)\cdot\phi$.
+\end{itemize}
+
+\bigskip
+\emph{6. Natürliche Differentialoperatoren und Kovarianz.}
+\begin{itemize}
+\item Ein (lokaler) \emph{natürlicher Differentialoperator} $D$ Ordnung $\le k$ ist eine natürliche Transformation
+\[
+D:\ J^k\mathfrak F \Longrightarrow \mathfrak E,
+\]
+zwischen dem $k$-Jetfunktor $J^k\mathfrak F$ und einem Zielbündel-Funktor $\mathfrak E$,
+so dass für jede Hintergrundmorphismen $\Lambda$ ein Kommutativitätsdiagramm gilt:
+\[
+\begin{array}{ccc}
+J^k\mathfrak F(U) & \xrightarrow{\ \ D_U\ \ } & \mathfrak E(U)\\
+\downarrow J^k(\rho_{\mathrm{ext}}(\Lambda)) & & \downarrow \rho_{\mathrm{ext}}(\Lambda) \\
+J^k\mathfrak F(\Lambda U) & \xrightarrow{\ \ D_{\Lambda U}\ \ } & \mathfrak E(\Lambda U)
+\end{array}
+\]
+und analog für $\rho_{\mathrm{int}}$.
+\item Eine \emph{Gleichungsmenge} ist der Nullstellenfunktor eines natürlichen Operators:
+\[
+\mathcal E(U):=\{\ \phi\in\mathfrak F(U)\mid D_U(j^k\phi)=0\ \}.
+\]
+\item \emph{Kovarianz der Gleichungen} bedeutet Natürlichkeit:
+\[
+(\Lambda,\gamma)\cdot \mathcal E(U)=\mathcal E(\Lambda U),\quad
+\text{d.\,h.}\quad
+D_{\Lambda U}\circ J^k(\rho(\Lambda,\gamma))=\rho(\Lambda,\gamma)\circ D_U.
+\]
+\end{itemize}
+
+\bigskip
+\emph{7. Variationaler Formalismus (präzise).}
+\begin{itemize}
+\item Eine \emph{Lagrangedichte} ist eine natürliche horizontale $n$-Form
+$\mathcal L\in\Omega^{n,0}(J^k\mathcal F)$ im Variationsbikomplex.
+\item Der \emph{Euler–Lagrange-Operator} ist eine natürliche Transformation
+$EL(\mathcal L):J^{2k}\mathfrak F\Rightarrow \mathfrak E^\vee$ der Form
+\[
+\mathcal E(U)=\{\phi\mid EL(\mathcal L)_U(j^{2k}\phi)=0\},
+\]
+und ist \emph{automatisch kovariant}, falls $\mathcal L$ natürlich ist.
+\item \emph{Noether 1}: Eine einparametrige natürliche Symmetrie
+$(\Lambda_t,\gamma_t)$ der Lagrangefunktionalität erzeugt (unter Regularität) einen horizontal geschlossenen Noether-Strom $J$, d.\,h.
+$d_h J = EL(\mathcal L)\cdot \delta_\xi\phi$.
+\end{itemize}
+
+\bigskip
+\emph{8. Observablen als natürliche Transformationen.}
+\begin{itemize}
+\item Der \emph{Lösungsfunktor} $\mathcal S ol:\mathrm{Open}(\mathcal A)^{\mathrm{op}}\to\mathbf{Set}$,
+$U\mapsto \mathcal E(U)$, ist $G_{\mathrm{tot}}$–äquivariant.
+\item Ein \emph{(klassisches) Observablen-Funktor} ist eine natürliche Transformation
+\[
+\mathcal O:\ \mathcal S ol \Longrightarrow \underline{\mathbb K}
+\quad(\mathbb K=\R\ \text{oder}\ \C),
+\]
+die zusätzlich $G_{\mathrm{tot}}$–invariant ist (Natürlichkeit relativ zur Aktion).
+\item Algebraische Struktur (Poisson, *-Algebra) wird als Monoidal-/*-Struktur in der Zielkategorie codiert und über Natürlichkeit bewahrt.
+\end{itemize}
+
+\bigskip
+\emph{9. Quotienten, Moduli, Stack-Sicht.}
+\begin{itemize}
+\item Die \emph{Moduli der Lösungen bis Transformation} ist kein gutes Mengenkquotient; korrekt ist das \emph{Quotienten-Gruppoid} bzw.\ der \emph{Quotienten-Stack}
+\[
+\big[\ \mathcal S ol / G_{\mathrm{tot}}\ \big],
+\]
+dessen Objekte Lösungen, Morphismen Eich-/Bezugstransformationen sind.
+\item Invariante Observablen sind Funktoren auf diesem Quotienten-Stack.
+\end{itemize}
+
+\bigskip
+\emph{10. Zusammenfassende Axiome.}
+Ein Datensatz
+\[
+\mathsf{Sys}=(\mathcal A, G_{\mathrm{ext}}, G_{\mathrm{int}}, \mathcal F,
+\rho_{\mathrm{ext}},\rho_{\mathrm{int}}, \mathcal E, \mathcal O)
+\]
+heißt \emph{wohlgeformtes (klassisches) Modell}, falls:
+\begin{enumerate}
+\item (Feldgarbe) $U\mapsto \mathfrak F(U)=\Gamma(\mathcal F|_U)$ ist eine Prägarbe mit Sheaf-Eigenschaft (Gluing/Uniqueness).
+\item (Natürliche Operatoren) Es existiert ein natürlicher Differentialoperator $D$ mit $\mathcal E=\ker D$.
+\item (Kovarianz) Für alle $(\Lambda,\gamma)$ gilt Natürlichkeit
+$D\circ J^k(\rho(\Lambda,\gamma))=\rho(\Lambda,\gamma)\circ D$.
+\item (Gruppoid) $\mathsf{Desc}(\mathsf{Sys})$ ist ein wohldefiniertes Transformationsgruppoid, der Lösungsfunktor ist $G_{\mathrm{tot}}$–äquivariant.
+\item (Observablen) $\mathcal O$ ist eine Kategorie natürlicher Transformationen 
+$\mathcal S ol\Rightarrow\underline{\mathbb K}$, monoidal/*-stabil und $G_{\mathrm{tot}}$–invariant.
+\item (Variational optional) Falls $\mathcal L$ existiert, ist $EL(\mathcal L)=0$ äquivalent zu $\mathcal E$, und Symmetrien induzieren Noether-Ströme.
+\end{enumerate}
+
+\bigskip
+\emph{11. Diagrammatische Übersicht.}
+\[
+\begin{array}{ccccc}
+G_{\mathrm{ext}}\times \mathcal G_{\mathrm{int}}(U) 
+& \curvearrowright & \mathfrak F(U) & \xrightarrow{\ D_U\ } & \mathfrak E(U)\\[0.4em]
+\downarrow & & \downarrow r_{U,V} & & \downarrow r_{U,V}\\[0.4em]
+G_{\mathrm{ext}}\times \mathcal G_{\mathrm{int}}(V) 
+& \curvearrowright & \mathfrak F(V) & \xrightarrow{\ D_V\ } & \mathfrak E(V)
+\end{array}
+\qquad
+\begin{array}{c}
+\mathcal E(U)=\ker D_U \\[0.3em]
+\rotatebox{90}{$\subset$}\\[0.3em]
+\mathfrak F(U)
+\end{array}
+\]
+Natürlichkeit $\Leftrightarrow$ Kommutativität der Rechtecke; 
+Kovarianz $\Leftrightarrow$ Stabilität von $\ker D$ unter der linken Wirkung.
+
+\bigskip
+\emph{12. Einsatzpunkte für weitere Präzisierungen.}
+\begin{itemize}
+\item (Jet-Bündel) Explizite Ordnung/Regularität von $D$ via $J^k\mathcal F$.
+\item (Hyperbolizität) Wohlgestelltheit des Cauchy-Problems: symmetrisch-/normal-hyperbolische Klassen.
+\item (Bikomplex) Variationsbikomplex, homologische Ableitungen, Horiz./Vert.-Differentiale.
+\item (Quantisierung) Algebraisierung der $\mathcal O$ (Poisson $\to$ *-Algebra), lokalkovariante QFT als Funktor $\mathbf{Loc}\to\mathbf{Alg}$.
+\end{itemize}
+
+
+\subsection{Ein formaler Rahmen für Beschreibungen physikalischer Systeme}
+
+\emph{Daten eines Modells.}
+Ein (klassisch-feldtheoretisches) physikalisches System wird durch folgende Basisdaten beschrieben:
+\[
+\mathsf{Sys}
+\;=\;
+(\mathcal{A},\,G_{\mathrm{ext}},\,G_{\mathrm{int}},\,\mathcal{F},\,\rho_{\mathrm{ext}},\,\rho_{\mathrm{int}},\,\mathcal{E},\,\mathcal{O})
+\]
+\begin{itemize}
+\item $\mathcal{A}$: \emph{kinematische Arena} (z.\,B. Raumzeit $(M,g)$; in SR: $M=\R^{1,3}$ mit Minkowski-Metrik $g$).
+\item $G_{\mathrm{ext}}$: \emph{äußere Symmetriegruppe} der Arena (z.\,B. Poincaré-Gruppe, Diff$(M)$, Isometriegruppe).
+\item $G_{\mathrm{int}}$: \emph{innere (Eich-)Symmetriegruppe} (z.\,B. $U(1),\, SU(2),\, SU(3)$).
+\item $\mathcal{F}$: \emph{Feldbündel/Träger} der Freiheitsgrade (Abschnitte sind Feldkonfigurationen).
+\item $\rho_{\mathrm{ext}},\rho_{\mathrm{int}}$: \emph{Darstellungen/Anbindungen} von $G_{\mathrm{ext}}$ und $G_{\mathrm{int}}$ auf $\mathcal{F}$ (z.\,B. Spin-Darstellung, Eichdarstellung).
+\item $\mathcal{E}\subset \Gamma(\mathcal{F})$: \emph{Gleichungsmenge} (Lösungsmenge) als Untermenge/Untervarietät der Feldkonfigurationen (z.\,B. Euler–Lagrange-Gleichungen).
+\item $\mathcal{O}$: \emph{Observablenraum} (z.\,B. Funktionale $\mathcal{E}\to \R/\C$, algebraische Struktur, *-Algebra).
+\end{itemize}
+
+\emph{Beschreibungen und Wechsel.}
+\begin{itemize}
+\item Eine \emph{Beschreibung} ist ein Paar $(U,\phi)$, wobei $U\subseteq \mathcal{A}$ (z.\,B. Kartenbereich/Trivialisierung) und
+$\phi\in \Gamma(\mathcal{F}|_U)$ eine lokale Feldkonfiguration ist.
+\item Ein \emph{Wechsel der Beschreibung} ist ein Morphismus
+\[
+(\Lambda,\gamma): (U,\phi)\longrightarrow (U',\phi')
+\]
+bestehend aus einer \emph{äußeren} Transformation $\Lambda\in G_{\mathrm{ext}}$ (Referenzrahmenwechsel) und einer \emph{inneren} Transformation $\gamma\in \mathcal{G}_{\mathrm{int}}(U)$
+(lokale Eichtransformation), so dass
+\[
+\phi' \;=\; \rho_{\mathrm{ext}}(\Lambda)\;\rho_{\mathrm{int}}(\gamma)\;\phi
+\quad\text{auf}\quad U\cap U'.
+\]
+\end{itemize}
+Die Gesamtheit der Beschreibungen und Wechsel bildet eine \emph{Gruppoid}-Struktur
+\[
+\mathsf{Desc}(\mathsf{Sys})
+\]
+(Objekte: Beschreibungen, Pfeile: zulässige Wechsel). Physikalische \emph{Zustände} sind dann \emph{Orbits} dieser Gruppoidwirkung
+(„die gleiche Physik, unterschiedliche Beschreibungen“).
+
+\emph{Kovarianz und Invarianz.}
+\begin{itemize}
+\item \emph{Kovarianz} der Gleichungen bedeutet:
+\[
+(\Lambda,\gamma)\cdot \mathcal{E} \;=\; \mathcal{E}
+\quad\text{für alle}\quad (\Lambda,\gamma).
+\]
+Also: Die Lösungsmenge ist \emph{stabil} unter Referenzrahmen- und Eichwechseln (Gleichungsform bleibt erhalten).
+\item \emph{Invarianz} einer Observablen $O\in\mathcal{O}$ bedeutet:
+\[
+O(\phi) \;=\; O\!\big((\Lambda,\gamma)\cdot\phi\big)
+\quad\text{für alle}\quad \phi\in \mathcal{E},\;(\Lambda,\gamma).
+\]
+Physikalisch messbare Größen sind \emph{gruppoid-invariant}.
+\end{itemize}
+
+\emph{Äußere vs. innere Symmetrien.}
+\begin{itemize}
+\item $G_{\mathrm{ext}}$ wirkt auf der Arena (Koordinaten/Frames) und auf Tensorspuren (z.\,B. $V=\R^{1,3}$, Poincaré-Wirkung).
+\item $G_{\mathrm{int}}$ wirkt \emph{fasertreu} auf $\mathcal{F}$ (interne Freiheitsgrade), typischerweise als Strukurgruppe eines Hauptbündels $P\to \mathcal{A}$, mit $\mathcal{F}$ assoziiert: $\mathcal{F}=P\times_\rho F$.
+\end{itemize}
+
+\emph{Darstellungen (Rollenklärung).}
+\begin{itemize}
+\item $\rho_{\mathrm{ext}}: G_{\mathrm{ext}}\to \mathrm{Aut}(\mathcal{F})$ implementiert den Wechsel der Bezugssysteme (z.\,B. Spin-Lift von Lorentz auf Spinoren).
+\item $\rho_{\mathrm{int}}: G_{\mathrm{int}}\to \mathrm{Aut}(\mathcal{F})$ implementiert interne Symmetrien (z.\,B. Phasen für $U(1)$).
+\item \emph{Equivarianzbedingung}: Strukturobjekte (z.\,B. Dirac-$\gamma$) müssen die natürliche Kompatibilität erfüllen:
+\[
+\rho_{\mathrm{ext}}(\Lambda)^{-1}\,\gamma^\mu\,\rho_{\mathrm{ext}}(\Lambda)
+\;=\; \Lambda^\mu{}_\nu \,\gamma^\nu,
+\]
+damit $i\gamma^\mu\partial_\mu$ als natürlicher (erster Ordnung) Operator zwischen Beschreibungen fungiert.
+\end{itemize}
+
+\emph{Lagrange-zu-Gleichungen.}
+Gegeben eine dichte Lagrange-Form $\mathcal{L}(\phi,\partial\phi; \text{Hintergrund})$, definiere die Euler–Lagrange-Gleichungen
+$\mathrm{EL}(\mathcal{L})=0$.
+Kovarianz/Invarianz auf Lagrange-Ebene bedeutet Naturtreue:
+\[
+\mathcal{L}\big((\Lambda,\gamma)\cdot\phi\big)
+\;=\; \mathcal{L}(\phi) \;+\; \partial_\mu(\cdots)^\mu
+\]
+(bis auf Totalableitungen). Kontinuierliche Symmetrien $\Rightarrow$ Noether-Ströme.
+
+\emph{Kategorien-/Funktor-Sicht.}
+\begin{itemize}
+\item Kategorie der Beschreibungen $\mathsf{Desc}(\mathsf{Sys})$ und Funktor der \emph{Lösungen}
+\[
+\mathcal{S}ol:\;\mathsf{Desc}(\mathsf{Sys}) \longrightarrow \mathsf{Set},\qquad
+(U,\phi)\longmapsto \{\psi\in\Gamma(\mathcal{F}|_U)\mid \psi\ \text{löst}\ \mathcal{E}\}.
+\]
+\item \emph{Kovarianz} $\Leftrightarrow$ \emph{Natürlichkeit} von $\mathcal{S}ol$ bzgl. Morphismen (Wechseln).
+\item Observablen als natürl. Transformationen $\mathcal{S}ol\Rightarrow \underline{\C}$, die auf Isomorphismen (Wechsel) invariant sind.
+\end{itemize}
+
+\emph{Kommutatives Diagramm der Symmetrien.}
+\[
+\begin{array}{ccc}
+G_{\mathrm{ext}} \times G_{\mathrm{int}}
+ & \xrightarrow{\ \rho_{\mathrm{ext}}\times\rho_{\mathrm{int}} \ } &
+\mathrm{Aut}(\mathcal{F}) \\[0.4em]
+\downarrow &  & \downarrow \mathrm{induz.} \\[0.4em]
+\mathrm{Aut}(\mathcal{A})
+ & \xrightarrow{\ \text{Pull/Push}\ } &
+\mathrm{Aut}(\Gamma(\mathcal{F}))
+\end{array}
+\]
+Stabilität von $\mathcal{E}$ unter der rechten Wirkung ist die präzise Form von \emph{Gleichungs-Kovarianz}.
+
+\bigskip
+
+\subsubsection*{Instanziierung: Dirac-Feld im Minkowski-Raum (QFT-Setting)}
+
+\emph{Arena und Gruppen.}
+\[
+\mathcal{A}=(M,g)=(\R^{1,3},\,\mathrm{diag}(1,-1,-1,-1)),\quad
+G_{\mathrm{ext}}=\mathcal{P}=\R^{1,3}\rtimes SO^+(1,3),\quad
+G_{\mathrm{int}}=U(1).
+\]
+
+\emph{Feldträger und Darstellungen.}
+\[
+\mathcal{F}= M\times \Sigma,\quad \Sigma=\C^4,\quad
+\rho_{\mathrm{ext}}|_{SO^+(1,3)}=\sigma:\Spin(1,3)\to GL(\Sigma),
+\]
+\[
+\text{Clifford: }\ \{\gamma^\mu,\gamma^\nu\}=2g^{\mu\nu}\mathbf{1},
+\qquad
+\rho_{\mathrm{int}}(e^{i\alpha})\psi = e^{-iq\alpha}\psi.
+\]
+Equivarianz der $\gamma$:
+\[
+\sigma(a)^{-1}\gamma^\mu\sigma(a)=\Lambda^\mu{}_\nu\gamma^\nu,\qquad \Lambda=\rho(a).
+\]
+
+\emph{Dynamik (frei bzw. minimal gekoppelt).}
+\[
+\mathcal{L}_{\mathrm{Dirac}}=\bar\psi\,(i\gamma^\mu\partial_\mu - m)\,\psi,
+\qquad
+\text{bzw.}\quad
+\mathcal{L}_{\mathrm{QED}}=\bar\psi\,(i\gamma^\mu D_\mu - m)\psi - \tfrac{1}{4}F_{\mu\nu}F^{\mu\nu},
+\]
+\[
+D_\mu=\partial_\mu + i q A_\mu,\quad
+\psi \mapsto e^{-iq\alpha(x)}\psi,\quad
+A_\mu\mapsto A_\mu+\partial_\mu\alpha.
+\]
+Euler–Lagrange:
+\[
+(i\gamma^\mu\partial_\mu - m)\psi=0
+\quad\text{bzw.}\quad
+(i\gamma^\mu D_\mu - m)\psi=0.
+\]
+
+\emph{Kovarianz/Invarianz.}
+\begin{itemize}
+\item \textbf{Äußere Symmetrie (Poincaré):} $x'=\Lambda x + a$, $\psi'(x')=S(\Lambda)\psi(x)$ mit $S=\sigma(a)\in \Spin(1,3)$,
+\[
+S^{-1}\gamma^\mu S=\Lambda^\mu{}_\nu\gamma^\nu,
+\quad\Rightarrow\quad
+(i\gamma^\mu\partial_\mu - m)\psi=0\ \Leftrightarrow\ (i\gamma^\mu\partial'_\mu - m)\psi'=0.
+\]
+\item \textbf{Innere Symmetrie ($U(1)$):}
+$\psi\mapsto e^{-iq\alpha(x)}\psi$, $A\mapsto A+d\alpha$ lässt $(i\gamma^\mu D_\mu - m)\psi=0$ invariant.
+\end{itemize}
+
+\emph{Observablen.}
+\[
+j^\mu=\bar\psi\gamma^\mu\psi \quad (\text{Noether-Strom für }U(1)),\qquad
+\partial_\mu j^\mu=0.
+\]
+Messbare Größen sind Funktionen auf dem Orbitraum $\mathcal{E}/(G_{\mathrm{ext}}\times \mathcal{G}_{\mathrm{int}})$.
+
+\bigskip
+
+\emph{Lesart in einem Satz.}
+Bezugssysteme und Eichwahlen sind \emph{Beschreibungen} desselben physikalischen Zustands.
+Die Menge aller Beschreibungen bildet ein Gruppoid, dessen Wirkung auf Feldern die
+\emph{Gleichungsmenge} stabil lässt (Kovarianz). Physikalische Observablen sind Funktionen auf dem \emph{Orbitraum} (Invarianz). Darstellungen von $G_{\mathrm{ext}}$ (Spin-Lift) und $G_{\mathrm{int}}$ (Eichdarstellung) implementieren die Wechsel zwischen Beschreibungen; Strukturobjekte (z.\,B. $\gamma^\mu$) sind equivariant, sodass die Form der Gleichungen bewahrt bleibt.
+
+
+\pagebreak
+\printbibliography
+\end{document}

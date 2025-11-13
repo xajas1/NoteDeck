@@ -1,0 +1,67 @@
+Um die gegebene Gleichung bis zur ersten Ordnung in $\delta \omega$ zu überprüfen, betrachten wir eine infinitesimale Lorentztransformation $\Lambda^\mu_\nu = \delta^\mu_\nu + \delta \omega^\mu_\nu$, wobei $\delta \omega^\mu_\nu$ eine kleine antisymmetrische Matrix ist, d.h. $\delta \omega^{\mu\nu} = -\delta \omega^{\nu\mu}$. Der zugehörige Spinortransformation ist $S(\Lambda) = 1 + \frac{i}{4} \delta \omega_{\rho\sigma} \sigma^{\rho\sigma}$, wobei $\sigma^{\rho\sigma} = \frac{i}{2} [\gamma^\rho, \gamma^\sigma]$ die Generatoren der Lorentztransformationen in der Spinor-Darstellung sind.
+
+Wir berechnen zunächst $S^{-1}(\Lambda)$ bis zur ersten Ordnung in $\delta \omega$. Da $S(\Lambda)$ eine infinitesimale Transformation ist, gilt:
+
+\[
+S^{-1}(\Lambda) = 1 - \frac{i}{4} \delta \omega_{\rho\sigma} \sigma^{\rho\sigma}
+\]
+
+Setzen wir dies in die gegebene Gleichung ein:
+
+\[
+S^{-1}(\Lambda) \gamma^\mu S(\Lambda) = \left(1 - \frac{i}{4} \delta \omega_{\rho\sigma} \sigma^{\rho\sigma}\right) \gamma^\mu \left(1 + \frac{i}{4} \delta \omega_{\alpha\beta} \sigma^{\alpha\beta}\right)
+\]
+
+Multiplizieren wir die Terme aus und behalten nur die Terme bis zur ersten Ordnung in $\delta \omega$:
+
+\[
+\begin{align*}
+S^{-1}(\Lambda) \gamma^\mu S(\Lambda) &= \gamma^\mu + \frac{i}{4} \delta \omega_{\alpha\beta} \gamma^\mu \sigma^{\alpha\beta} - \frac{i}{4} \delta \omega_{\rho\sigma} \sigma^{\rho\sigma} \gamma^\mu \\
+&= \gamma^\mu + \frac{i}{4} \delta \omega_{\alpha\beta} [\gamma^\mu, \sigma^{\alpha\beta}]
+\end{align*}
+\]
+
+Da $\sigma^{\alpha\beta} = \frac{i}{2} [\gamma^\alpha, \gamma^\beta]$, ergibt sich:
+
+\[
+[\gamma^\mu, \sigma^{\alpha\beta}] = \frac{i}{2} \left( [\gamma^\mu, \gamma^\alpha \gamma^\beta] - [\gamma^\mu, \gamma^\beta \gamma^\alpha] \right)
+\]
+
+Verwenden wir die Antikommutatorrelationen der Dirac-Matrizen $\{\gamma^\mu, \gamma^\nu\} = 2g^{\mu\nu}$, erhalten wir:
+
+\[
+\begin{align*}
+[\gamma^\mu, \gamma^\alpha \gamma^\beta] &= \gamma^\mu \gamma^\alpha \gamma^\beta - \gamma^\alpha \gamma^\beta \gamma^\mu \\
+&= \gamma^\mu \gamma^\alpha \gamma^\beta - \gamma^\alpha (2g^{\beta\mu} - \gamma^\mu \gamma^\beta) \\
+&= \gamma^\mu \gamma^\alpha \gamma^\beta - 2g^{\beta\mu} \gamma^\alpha + \gamma^\alpha \gamma^\mu \gamma^\beta \\
+&= 2g^{\mu\alpha} \gamma^\beta - 2g^{\mu\beta} \gamma^\alpha
+\end{align*}
+\]
+
+Daraus folgt:
+
+\[
+[\gamma^\mu, \sigma^{\alpha\beta}] = i (g^{\mu\alpha} \gamma^\beta - g^{\mu\beta} \gamma^\alpha)
+\]
+
+Setzen wir dies in die vorherige Gleichung ein:
+
+\[
+S^{-1}(\Lambda) \gamma^\mu S(\Lambda) = \gamma^\mu + \frac{1}{2} \delta \omega_{\alpha\beta} (g^{\mu\alpha} \gamma^\beta - g^{\mu\beta} \gamma^\alpha)
+\]
+
+Vergleichen wir dies mit der rechten Seite der ursprünglichen Gleichung:
+
+\[
+\Lambda_\nu^\mu \gamma^\nu = (\delta^\mu_\nu + \delta \omega^\mu_\nu) \gamma^\nu = \gamma^\mu + \delta \omega^\mu_\nu \gamma^\nu
+\]
+
+Wir sehen, dass beide Ausdrücke übereinstimmen, da:
+
+\[
+\delta \omega^\mu_\nu \gamma^\nu = \frac{1}{2} \delta \omega_{\alpha\beta} (g^{\mu\alpha} \gamma^\beta - g^{\mu\beta} \gamma^\alpha)
+\]
+
+Dies zeigt, dass die gegebene Gleichung bis zur ersten Ordnung in $\delta \omega$ erfüllt ist.
+
+%CHECK: Detaillierte Herleitung des Übergangs von $[\gamma^\mu, \sigma^{\alpha\beta}]$ und explizite Zwischenschritte eingefügt.

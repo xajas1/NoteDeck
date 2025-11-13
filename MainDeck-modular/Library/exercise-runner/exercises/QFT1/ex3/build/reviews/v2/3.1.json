@@ -1,0 +1,20 @@
+{
+  "score": 0.8,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Zwischenschritte und Erklärungen.",
+  "weaknesses": [
+    {
+      "code": "MISSING_STEPS",
+      "msg": "Zwischenschritte bei der Berechnung von $[\text{S}^{-1}(\text{Λ}) \text{γ}^\text{μ} \text{S}(\text{Λ})]$ fehlen.",
+      "math_hint": "Die explizite Berechnung von $[\text{γ}^\text{μ}, \text{σ}^{\text{αβ}}]$ könnte detaillierter sein."
+    },
+    {
+      "code": "INCOMPLETE_EXPLANATION",
+      "msg": "Die Herleitung der Antikommutatorrelationen ist nicht vollständig erklärt.",
+      "math_hint": "Die Verwendung der Antikommutatorrelationen $\text{γ}^\text{μ} \text{γ}^\text{ν} + \text{γ}^\text{ν} \text{γ}^\text{μ} = 2\text{g}^{\text{μν}}$ sollte klarer dargestellt werden."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Berechne explizit: } [\\gamma^\\mu, \\sigma^{\\alpha\\beta}] = \\frac{i}{2} \\left( [\\gamma^\\mu, \\gamma^\\alpha \\gamma^\\beta] - [\\gamma^\\mu, \\gamma^\\beta \\gamma^\\alpha] \\right)",
+    "\\text{Verwende: } \\{\\gamma^\\mu, \\gamma^\\nu\\} = 2g^{\\mu\\nu} \\text{ explizit in den Berechnungen.}"
+  ]
+}

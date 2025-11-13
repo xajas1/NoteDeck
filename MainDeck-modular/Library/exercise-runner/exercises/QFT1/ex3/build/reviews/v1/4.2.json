@@ -1,0 +1,14 @@
+{
+  "score": 0.9,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlt eine explizite Diskussion über die Bedingung für positive Definitheit.",
+  "weaknesses": [
+    {
+      "code": "MISSING_POSITIVE_DEFINITENESS_CONDITION",
+      "msg": "Die Bedingung für positive Definitheit wird nicht explizit diskutiert.",
+      "math_hint": "Erkläre, dass positive Definitheit $j^0 > 0$ für alle $\bar{\rho} \neq 0$ erfordert."
+    }
+  ],
+  "fix_suggestions": [
+    "Füge eine Erklärung hinzu, dass positive Definitheit bedeutet, dass $j^0 > 0$ für alle $\bar{\rho} \neq 0$ gelten muss."
+  ]
+}

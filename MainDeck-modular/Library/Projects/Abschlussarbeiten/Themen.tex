@@ -39,17 +39,25 @@
 % --- 4. Eigene Makros ---
 \usepackage{xcolor}
 \newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\id}{\operatorname{id}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\Z}{\mathbb{Z}}
+\newcommand{\QU}{\mathbb{H}}
+\newcommand{\Aut}{\mathrm{Aut}}
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\QUom}{\mathrm{Hom}}
 \newcommand{\C}{\mathbb{C}}
+\newcommand{\Cl}{\mathrm{Cl}}
 \newcommand{\entwurf}[1]{\textcolor{red}{#1}}
 \newcommand{\GL}{\mathrm{GL}}
+\newcommand{\Mat}{\mathrm{Mat}}
 \newcommand{\SL}{\mathrm{SL}}
 \newcommand{\SO}{\mathrm{SO}}
 \newcommand{\SU}{\mathrm{SU}}
 \newcommand{\Sp}{\mathrm{Sp}}
+\newcommand{\Spin}{\mathrm{Spin}}
 \newcommand{\Ogroup}{\mathrm{O}}
 \newcommand{\U}{\mathrm{U}}
 
@@ -490,13 +498,1874 @@ der Krümmungsformen ergeben.
 \pagebreak
 
 
+\section{Spinorial Valuations}
+
+\begin{abstract}
+We lay out the basic setting of the \emph{Valuation $\times$ Spin} project.
+The goal is to combine smooth valuations (Alesker--Bernig--Fu) with spin/Chern--Weil data
+into a compact top-degree cohomological object whose classes evaluate on subsets via normal cycles.
+This script records the core definitions, canonical examples, and the minimal functorial framework.
+\end{abstract}
+
+
+
+\begin{MOT}{SV.6}{Conceptual background of spinorial valuations}
+
+Spinorial valuations arise from the idea that intrinsic and extrinsic geometric information of a subset $K\subset M$ should be encoded simultaneously in a single cohomological framework.  
+They generalize classical curvature measures and characteristic integrals by coupling \emph{volume} and \emph{boundary} data through a differential compatibility condition.
+
+\medskip\noindent
+\textbf{(1) Boundary--volume duality.}
+In the classical valuation formula
+\[
+\mu_{(\Phi,\Psi)}(K)=\int_{N(K)}\Phi+\int_K\Psi,
+\]
+the term $\int_K\Psi$ measures intrinsic geometry (\emph{bulk contribution}), while $\int_{N(K)}\Phi$ measures extrinsic geometry along the boundary (\emph{boundary contribution}).
+The condition $d\Phi+\pi^*\Psi=0$ enforces a Stokes-type balance: boundary and volume contributions fit together coherently so that $\mu_{(\Phi,\Psi)}$ becomes additive.
+Geometrically, $\Phi$ lives on the contact manifold $(SM,\alpha)$ and records oriented normal data of $\partial K$, while $\Psi$ lives on $(M,g)$ and captures intrinsic curvature or spinorial densities inside $K$.
+
+\medskip\noindent
+\textbf{(2) Spinorial enrichment and index-theoretic analogy.}
+On spin manifolds, local topological invariants such as the Dirac index or the $\widehat A$--genus have the schematic form
+\[
+\mathrm{ind}(\slashed D)=\int_M \widehat A(M).
+\]
+If $M$ has boundary, additional correction terms appear, involving the $\eta$--invariant of $\partial M$.
+This bulk--boundary decomposition mirrors the valuation identity above.
+Spinorial valuations can thus be viewed as a geometric generalization of the Atiyah--Patodi--Singer paradigm:
+they encode simultaneously the interior Chern--Weil term and its boundary transgression form within a single cohomology class $[(\Phi,\Psi)]$.
+
+\medskip\noindent
+\textbf{(3) Why the coupled version is natural.}
+Neither $\Phi$ nor $\Psi$ alone carries complete geometric information:
+\begin{itemize}
+  \item $\Psi$ alone describes global curvature densities but ignores how $K$ sits in $M$.
+  \item $\Phi$ alone describes shape and extrinsic curvature but misses interior topology.
+\end{itemize}
+Only the coupled condition $d\Phi+\pi^*\Psi=0$ unifies both in a closed, functorial structure.
+This produces a genuine cohomology theory $H^{\operatorname{SV}}(M)$ and a well-defined pairing
+\[
+\langle (\Phi,\Psi),(N(K),K)\rangle=\int_{N(K)}\Phi+\int_K\Psi,
+\]
+combining boundary and interior information analogously to how bulk Lagrangians and boundary terms form a single invariant action functional in field theory.
+
+\medskip\noindent
+\textbf{(4) Information content and geometric meaning.}
+\begin{center}
+\begin{tabular}{l|l|l|l}
+Component & Domain & Geometric meaning & Information type \\
+\hline
+$\Psi\in\Omega^n(M)$ & $M$ & intrinsic curvature, Chern--Weil densities & bulk (topological) \\
+$\Phi\in\Omega^{n-1}(SM)$ & $SM$ & extrinsic curvature, shape of $\partial K$ & boundary (geometric) \\
+$d\Phi+\pi^*\Psi=0$ & --- & compatibility / Stokes condition & coupling relation \\
+$\mu_{(\Phi,\Psi)}(K)$ & regular $K\subset M$ & additive invariant & global geometric functional
+\end{tabular}
+\end{center}
+
+\medskip\noindent
+\textbf{(5) Conceptual payoff.}
+\begin{itemize}
+  \item Provides a bridge between \emph{integral geometry} and \emph{spin geometry}.
+  \item Encodes both local curvature and global topology in one additive invariant.
+  \item Offers a differential--topological model unifying Chern--Weil forms and curvature measures.
+  \item Serves as a natural setting for geometric flows, stability, and microlocal analysis.
+\end{itemize}
+Hence, spinorial valuations are of intrinsic interest because they realise in finite dimensions what index theory and field theory express analytically:
+a coherent coupling between bulk geometry and boundary phenomena within a single, closed cohomological framework.
+
+\end{MOT}
+
+
+\subsection{Ambient geometric data}
+
+
+
+\begin{DEF}{SV.1}{Spin background and unit sphere bundle}
+Let $(M^n,g)$ be a smooth oriented \emph{spin} manifold.
+Write $\pi: SM \to M$ for the unit sphere bundle with contact form $\alpha$ and Levi--Civita connection $\theta$.
+Let $\omega_{\mathrm{spin}}$ be the spin connection on the principal $\Spin(n)$-bundle and
+$\Omega_{\mathrm{spin}}$ its curvature. We freely use Chern--Weil polynomials in $\Omega_{\mathrm{spin}}$.
+\end{DEF}
+
+\begin{DEF}{SV.2}{Normal cycle and ambient geometry}
+Let $(M^n,g)$ be a smooth oriented Riemannian (spin) manifold and $\pi:SM\to M$ its unit sphere bundle with contact form $\alpha$ and Reeb vector field $\mathcal R$.
+Each fiber $S_xM\cong S^{n-1}$ carries the natural orientation induced by $g$.
+
+For a compact subset $K\subset M$ with $C^2$ boundary (or more generally, of \emph{positive reach} in the sense of Federer),
+the \emph{normal cycle} $N(K)\subset SM$ is defined as the closed Legendrian $(n-1)$-cycle
+\[
+N(K):=\{\, (x,\nu_x)\in SM\;|\; x\in\partial K,\ \nu_x\text{ is the outward unit normal to }\partial K\,\}.
+\]
+Geometrically, $N(K)$ collects all oriented unit normals along the boundary of $K$; it is invariant under orientation-preserving diffeomorphisms, satisfies $\alpha|_{N(K)}=0$, and represents the ``contact lift'' of $\partial K$ to the unit sphere bundle.
+
+Analytically, $N(K)$ is an integral Legendrian current in $SM$, i.e. a generalized submanifold calibrated by the contact structure $\ker(\alpha)$. It forms the geometric bridge between boundary integrals on $\partial K$ and valuations defined via differential forms on $SM$.
+\end{DEF}
+
+\subsection{Pairs of forms and the top-degree SV-complex}
+\begin{DEF}{SV.3}{Spinorial Valuation complex (top degree)}
+The \emph{spinorial valuation complex} combines differential forms on $M$ and on its unit sphere bundle $SM$ into one two-term complex:
+\[
+\Omega^{\operatorname{SV}}(M):=\Omega^{n-1}(SM)\oplus\Omega^n(M),
+\qquad
+d_{\operatorname{SV}}(\Phi,\Psi):=(d\Phi+\pi^*\Psi,\ d\Psi).
+\]
+Here $\Phi$ is a form on $SM$ encoding boundary-type data, while $\Psi$ is a top-degree form on $M$ capturing volume-type contributions.
+
+The cohomology of this complex,
+\[
+H^{\operatorname{SV}}(M):=\ker d_{\operatorname{SV}} / \operatorname{im} d_{\operatorname{SV}},
+\]
+is concentrated in degree $n$. A closed pair $(\Phi,\Psi)$ satisfies
+\[
+d\Phi+\pi^*\Psi=0, \qquad d\Psi=0,
+\]
+and represents a cohomology class $[(\Phi,\Psi)]$ modulo exact shifts
+$(\Phi,\Psi)\sim(\Phi+d\Xi+\pi^*\zeta,\ \Psi+d\zeta)$.
+This structure parallels the de~Rham complex on $M$ but is augmented by an additional \emph{Legendrian sector} on $SM$ coupling the intrinsic curvature of $M$ to its contact geometry.
+
+Conceptually, $\Omega^{n-1}(SM)$ controls integrals over the normal cycle $N(K)$ (boundary-type quantities), whereas $\Omega^n(M)$ governs integrals over the body $K$ itself. The operator $d_{\operatorname{SV}}$ enforces a compatibility condition between the two, so that their contributions glue together coherently across $\partial K$.
+\end{DEF}
+
+\begin{REM}{SV.4}{Why $d_{\operatorname{SV}}^2=0$ and what it means}
+Formally, $d_{\operatorname{SV}}^2=0$ follows from $d^2=0$ and $d\pi^*=\pi^*d$:
+\[
+d_{\operatorname{SV}}\!\circ d_{\operatorname{SV}}(\Phi,\Psi)
+=(d^2\Phi+d\pi^*\Psi+\pi^*d\Psi,\ d^2\Psi)=(0,0).
+\]
+Geometrically, this expresses the exact balance between bulk and boundary terms:
+the coboundary of a compatible pair $(\Phi,\Psi)$ is zero precisely when the Stokes-type relation
+$d\Phi=-\pi^*\Psi$ holds along $N(K)$, ensuring that integration over $(N(K),K)$ is invariant under infinitesimal deformations.
+\end{REM}
+
+\subsection{Evaluation on subsets and smooth valuations}
+\begin{DEF}{SV.5}{Spinorial valuation and geometric evaluation}
+For a regular compact subset $K\subset M$, the \emph{spinorial valuation} associated with $(\Phi,\Psi)$ is defined by
+\[
+\mu_{(\Phi,\Psi)}(K):=\int_{N(K)}\Phi+\int_K\Psi.
+\]
+The first integral captures \emph{boundary} contributions through the geometry of $N(K)\subset SM$, while the second represents \emph{interior} or \emph{volume} contributions on $M$ itself.
+
+The pair $(\Phi,\Psi)$ thus plays the role of a ``boundary–volume coupling'': $\Phi$ lives on the bundle of unit directions and encodes curvature-type data of $\partial K$, while $\Psi$ encodes intrinsic spinorial or Chern–Weil densities on $M$. Together they provide a unified functional on subsets of $M$.
+
+If $d_{\operatorname{SV}}(\Phi,\Psi)=0$, then $\mu_{(\Phi,\Psi)}$ is \emph{additive}:
+\[
+\mu(K\cup L)=\mu(K)+\mu(L)-\mu(K\cap L)
+\]
+whenever all involved sets are regular. Exact variations of $(\Phi,\Psi)$ do not affect the valuation:
+\[
+(\Phi,\Psi)\mapsto(\Phi,\Psi)+d_{\operatorname{SV}}(\Xi,\zeta)
+\quad\Rightarrow\quad
+\mu_{(\Phi,\Psi)}\text{ unchanged,}
+\]
+because the Stokes theorem and $\alpha|_{N(K)}=0$ annihilate total derivatives along $N(K)$.
+
+\medskip
+Hence, $H^{\operatorname{SV}}(M)$ can be interpreted as the \emph{space of spinorial smooth valuations}, i.e. cohomology classes whose evaluation on $(K,\partial K)$ produces well-defined additive geometric functionals encoding both curvature and volume data in a spinorial background.
+\end{DEF}
+
+
+\begin{PROP}{SV.6}{Naturality and homotopy}
+Let $f:(M,g)\to (M',g')$ be a spin diffeomorphism. Then
+$f^*(\Phi,\Psi):=((Sf)^*\Phi,f^*\Psi)$ descends to $f^*:H^{\operatorname{SV}}(M')\to H^{\operatorname{SV}}(M)$ and
+$\mu_{f^*(\Phi,\Psi)}(K)=\mu_{(\Phi,\Psi)}(f(K))$.
+If $f_0,f_1$ are spin-homotopic, then $f_0^*=f_1^*$ on $H^{\operatorname{SV}}$.
+\end{PROP}
+
+\subsection{Relative theory and Mayer--Vietoris}
+\begin{DEF}{SV.7}{Relative SV-cohomology}
+For open $U\subset M$ set
+\[
+\Omega^{\operatorname{SV}}(M,U)\ :=\ \{(\Phi,\Psi)\in \Omega^{\operatorname{SV}}(M):\ \mathrm{supp}\,\Phi\subset \pi^{-1}(M\!\setminus\!U),\ \mathrm{supp}\,\Psi\subset M\!\setminus\!U\},
+\]
+with the induced $d_{\operatorname{SV}}$ and $H^{\operatorname{SV}}(M,U):=\ker/\mathrm{im}$ on this subcomplex.
+\end{DEF}
+
+\begin{PROP}{SV.8}{Excision and Mayer--Vietoris}
+If $\overline U\subset V\subset M$ are open, the inclusion $(M\setminus U, V\setminus U)\hookrightarrow (M,V)$
+induces an isomorphism $H^{\operatorname{SV}}(M\setminus U,V\setminus U)\cong H^{\operatorname{SV}}(M,V)$.
+For $M=U\cup V$ open there is a short exact MV-sequence
+\[
+0\to H^{\operatorname{SV}}(M)\xrightarrow{(r_U,r_V)} H^{\operatorname{SV}}(U)\oplus H^{\operatorname{SV}}(V)\xrightarrow{r_{UV}} H^{\operatorname{SV}}(U\cap V)\to 0.
+\]
+\end{PROP}
+
+\subsection{Canonical examples (spin/Chern--Weil part)}
+\begin{EXA}{SV.9}{Pure de Rham top-degree}
+If $\Psi\in\Omega^n(M)$ is closed and $\Phi=0$, then $[(0,\Psi)]\in H^{\operatorname{SV}}(M)$.
+Evaluation gives $\mu_{(0,\Psi)}(K)=\int_K\Psi$ (a basic smooth valuation).
+\end{EXA}
+
+\begin{EXA}{SV.10}{Chern--Weil classes and index}
+Let $p(\cdot)$ be an $\mathrm{Ad}$-invariant polynomial and $\Psi_p:=p(\Omega_{\mathrm{spin}})\in\Omega^n(M)$ its top-degree representative.
+Then $[(0,\Psi_p)]\in H^{\operatorname{SV}}(M)$ and on closed $M$:
+$\int_M \Psi_{\widehat A}=\mathrm{index}(\slashed{D})$ (Dirac index).
+Thus $[(0,\Psi_{\widehat A})]$ globalizes to the index and localizes to $\mu_{(0,\Psi_{\widehat A})}(K)=\int_K \Psi_{\widehat A}$.
+\end{EXA}
+
+\begin{EXA}{SV.11}{Classical curvature measures as $\Phi$-part}
+In flat space $(\R^n,\delta)$ with trivial spin curvature $\Omega_{\mathrm{spin}}=0$,
+pairs of the form $(\Phi,0)$ reproduce classical smooth valuations (intrinsic volumes/curvature measures)
+via $\mu(K)=\int_{N(K)}\Phi$.
+\end{EXA}
+
+\subsection{Product in the Chern--Weil top-part}
+\begin{PROP}{SV.12}{Top-degree product (CW-part)}
+For $[(0,\Psi_p)],[(0,\Psi_q)]\in H^{\operatorname{SV}}(M)$ (Chern--Weil top-degree forms) define
+\[
+[(0,\Psi_p)]\smile [(0,\Psi_q)]\ :=\ [(0,\Psi_p\wedge \Psi_q)]\ \in H^{\operatorname{SV}}(M).
+\]
+This is well-defined, natural under pullback, and satisfies
+$\int_M \Psi_{p\wedge q}=\int_M \Psi_p\wedge \Psi_q$ on closed $M$.
+\end{PROP}
+
+\subsection{Minimal calculus and normalization}
+\begin{DEF}{SV.13}{Normalization and representatives}
+Two representatives $(\Phi,\Psi)$ and $(\Phi',\Psi')$ of the same class can be related by
+$(\Phi',\Psi')=(\Phi,\Psi)+d_{\operatorname{SV}}(\Xi,\zeta)$ with
+$\Phi'-\Phi=d\Xi+\pi^*\zeta$ and $\Psi'-\Psi=d\zeta$.
+When convenient, one may choose \emph{contact-calibrated} $\Phi$ so that $d\Phi+\pi^*\Psi=0$ holds along $N(K)$.
+\end{DEF}
+
+\begin{REM}{SV.14}{Why the top degree only}
+Smooth valuations on $n$-manifolds are scalar-valued and realized by integrating $(n-1)$- and $n$-forms.
+Thus the valuation-relevant cohomology concentrates in degree $n$.
+Lower degrees can be introduced for algebraic filtrations, but the geometric content sits in the top degree.
+\end{REM}
+
+\subsection{Foundational checklist (to prove)}
+\begin{LEM}{SV.15}{Well-defined evaluation}
+If $d_{\operatorname{SV}}(\Phi,\Psi)=0$, then $\mu_{(\Phi,\Psi)}$ is additive and only depends on the class $[(\Phi,\Psi)]$.
+Exact changes integrate to zero by Stokes and $\alpha|_{N(K)}=0$.
+\end{LEM}
+
+\begin{LEM}{SV.16}{Homotopy operator}
+A standard homotopy operator on $SN\times I$ and $N\times I$ gives
+$F_1^*-F_0^*=d_{\operatorname{SV}}H+Hd_{\operatorname{SV}}$, hence homotopy invariance of $H^{\operatorname{SV}}$.
+\end{LEM}
+
+\begin{LEM}{SV.17}{Excision/MV}
+Partition-of-unity with separate support control on $SM$ and $M$ yields excision and the short exact Mayer--Vietoris sequence for $H^{\operatorname{SV}}$.
+\end{LEM}
+
+\begin{REM}{SV.18}{Road to enriched structures}
+The full Alesker product (including $\Phi$-parts) and kinematic formulas can be attached later
+by adding Rumin-type correction terms.
+The present top-degree core is sufficient for localized Chern--Weil/Index applications and functorial foundations.
+\end{REM}
+
+
+
+\subsection{Possible Research Directions}
+
+\begin{CONC}{RD.1}{Cohomological enrichment, product, and duality}
+Extend the top-degree SV-complex to a full \emph{graded} cochain complex
+\[
+\Omega^{\operatorname{SV},k}(M):=\Omega^{k-1}(SM)\oplus\Omega^k(M),
+\qquad
+d_{\operatorname{SV}}(\Phi,\Psi):=(d\Phi+\pi^*\Psi,\ d\Psi),
+\]
+for all $k\in\mathbb Z$ with $\Omega^{-1}(SM)=0$.
+This yields a cohomology $H^{\operatorname{SV},k}(M)$ concentrated in $0\le k\le n$.
+
+\medskip\noindent\textbf{Product (model A: fiberwise wedge + pushforward).}
+Let $\pi:SM\to M$ be the unit-sphere bundle with fiber $S^{n-1}$.
+Define on representatives
+\[
+(\Phi_1,\Psi_1)\smile(\Phi_2,\Psi_2)
+:=\Big(
+\Phi_1\wedge\Phi_2,\ 
+\Psi_1\wedge\Psi_2+\pi_*(\alpha\wedge\Phi_1\wedge\Phi_2)
+\Big),
+\]
+where $\alpha$ is the contact form on $SM$ and $\pi_*$ denotes fiber integration.
+Then $d_{\operatorname{SV}}$ acts as a graded derivation (up to curvature terms from $d\alpha=\pi^*\omega_g$), and the product descends to cohomology for classes satisfying $d\Phi+\pi^*\Psi=0$ along Legendrian cycles.
+This recovers the de~Rham wedge for pure $\Psi$-terms and coincides with Alesker’s product when $\Omega_{\Spin}=0$.
+
+\medskip\noindent\textbf{Pairing and Poincaré-type duality.}
+Define a pairing
+\[
+\langle[(\Phi,\Psi)],[(\Phi',\Psi')]\rangle
+:=\int_{SM}\Phi\wedge\Phi'\wedge\alpha+\int_M\Psi\wedge\Psi',
+\]
+well-defined for complementary degrees $p+q=n$.
+Conjecturally, for closed spin $M$ the induced map
+\[
+H^{\operatorname{SV},p}(M)\xrightarrow{\ \cap[M]_{\operatorname{SV}}\ }(H^{\operatorname{SV},n-p}(M))^\vee
+\]
+is an isomorphism (SV–Poincaré duality).
+
+\medskip\noindent\textbf{Coefficients and comparison to spin cohomology.}
+There is a natural morphism
+\[
+\mathcal F:H^{\operatorname{SV},\bullet}(M)\to H^\bullet(M;\R),\quad[(\Phi,\Psi)]\mapsto[\Psi],
+\]
+and a conjectural functor
+\[
+\mathcal C:H^\bullet(M;\Spin\text{-coeff.})\to H^{\operatorname{SV},\bullet}(M),
+\]
+built from Chern--Weil representatives and the Rumin complex on $SM$.
+Hypothesis: $\mathcal F\circ\mathcal C=\mathrm{id}$ on $\widehat A$-classes, giving a cohomological model for the Alesker--Bernig product.
+
+\medskip\noindent\textbf{Milestones.}
+\begin{enumerate}[label=(\roman*)]
+\item Construct $\smile$ and prove the $d_{\operatorname{SV}}$-Leibniz rule.
+\item Establish graded commutativity up to signs using Legendrian properties.
+\item Prove SV–Poincaré duality on closed $M$ via a contact–de~Rham argument.
+\end{enumerate}
+\end{CONC}
+
+\begin{CONC}{RD.2}{Normal-cycle flows, transport, and stability}
+Let $K\subset M$ be regular and $N_t(K)\subset SM$ a smooth Legendrian deformation (e.g.\ mean curvature or spinorial curvature flow).
+For a time-dependent class $[(\Phi_t,\Psi_t)]$, define
+\[
+\mu_t(K):=\int_{N_t(K)}\Phi_t+\int_K\Psi_t.
+\]
+Then the Reynolds transport formula on currents yields
+\[
+\frac{d}{dt}\mu_t(K)
+=\int_{N_t(K)}(\dot\Phi_t+\mathcal L_V\Phi_t)+\int_K\dot\Psi_t,
+\]
+where $V$ is the variational vector field.
+Using $\mathcal L_V=d\iota_V+\iota_V d$ and $d_{\operatorname{SV}}(\Phi_t,\Psi_t)=0$ gives
+\[
+\frac{d}{dt}\mu_t(K)
+=\int_{N_t(K)}d(\iota_V\Phi_t)
++\int_{N_t(K)}(-\pi^*\dot\Psi_t+\iota_V\pi^*\Psi_t)
++\int_K\dot\Psi_t.
+\]
+\textbf{Exactness criterion:}
+If there exist $(\Xi_t,\zeta_t)$ such that
+\[
+\dot\Phi_t+\mathcal L_V\Phi_t=d\Xi_t+\pi^*\zeta_t,\qquad
+\dot\Psi_t=d\zeta_t,
+\]
+then $\frac{d}{dt}\mu_t(K)=0$; equivalently, $[(\Phi_t,\Psi_t)]$ is constant in $H^{\operatorname{SV}}(M)$.
+
+\medskip
+Define the \emph{SV–entropy} along the flow,
+\[
+\mathcal E(t):=\int_K\Psi_t+\int_{N_t(K)}\Phi_t,
+\]
+and seek curvature conditions implying $\mathcal E'(t)\le0$.
+For spinorial mean curvature flow, inserting $\Psi_t=\widehat A(\Omega_{\Spin,t})$ tests monotonicity under $\partial_t\Omega_{\Spin,t}=d_{\nabla_t}\dot\omega_t$.
+
+An obstruction to exactness is the class
+\[
+\mathfrak o_t:=[\iota_V\pi^*\Psi_t]\in H^{n-1}(SM),
+\]
+whose nontriviality signals valuation bifurcation.
+
+\medskip\noindent\textbf{Goals.}
+\begin{enumerate}[label=(\roman*)]
+\item Derive a sharp transport identity for $\mu_t$ via normal-cycle calculus.
+\item Identify geometric conditions for $\mathfrak o_t=0$.
+\item Prove a Łojasiewicz–Simon-type stability of $\mathcal E$ near SV–critical points.
+\end{enumerate}
+\end{CONC}
+
+\begin{PROP}{RD.3}{Spinorial Chern--Weil correspondence and exact sequence}
+Define the graded ring map
+\[
+\mathrm{CW}_{\Spin}:H^{\operatorname{SV},\bullet}(M)\to H^{\mathrm{even}}(M;\R),
+\quad[(\Phi,\Psi)]\mapsto[\Psi].
+\]
+\textbf{Kernel:}
+\[
+\ker(\mathrm{CW}_{\Spin})=\{[(\Phi,0)]:d\Phi=0,\ \Phi\sim\Phi+d\Xi+\pi^*\zeta\}.
+\]
+These are purely geometric valuations supported on the normal-cycle sector.
+
+\textbf{Image:} 
+Contains all $\widehat A$-polynomials in spin curvature. Conjecturally,
+\[
+\operatorname{im}(\mathrm{CW}_{\Spin})=\R[\widehat A_1,\widehat A_2,\ldots]\cap H^{\mathrm{even}}(M;\R).
+\]
+
+\textbf{Exact sequence:}
+\[
+0\to \mathcal V_{\mathrm{geom}}(M)
+\to H^{\operatorname{SV},\bullet}(M)
+\xrightarrow{\ \mathrm{CW}_{\Spin}\ }
+\R[\widehat A(\Omega_{\Spin})]
+\to0,
+\]
+where $\mathcal V_{\mathrm{geom}}(M)$ is the closure under $\smile$ of the kernel.
+\end{PROP}
+
+\begin{EXA}{RD.4}{Dirac index and APS boundary via SV-classes}
+On a closed spin manifold $(M,g)$,
+\[
+\mathrm{ind}(\slashed D)=\int_M\widehat A(M)=\mu_{(0,\Psi_{\widehat A})}(M).
+\]
+For a compact spin manifold with boundary $(X,\partial X)$, APS theory gives
+\[
+\mathrm{ind}(\slashed D_{\operatorname{APS}})
+=\int_X\widehat A(X)
+-\tfrac12(\eta(\slashed D_{\partial X})+\dim\ker\slashed D_{\partial X}).
+\]
+\textbf{SV viewpoint:}
+choose $(\Phi,\Psi)$ with $\Psi=\widehat A(X)$ and boundary contact term $\Phi_{\partial}$ on $S\partial X$ satisfying
+\[
+d\Phi_{\partial}+\pi^*\Psi|_{\partial X}=0.
+\]
+Then
+\[
+\mu_{(\Phi,\Psi)}(X)=\int_X\widehat A(X)+\int_{N(\partial X)}\Phi_{\partial},
+\]
+and conjecturally
+\[
+\int_{N(\partial X)}\Phi_{\partial}
+\equiv-\tfrac12(\eta+\dim\ker\slashed D_{\partial X})\ (\mathrm{mod}\ \mathbb Z).
+\]
+This realizes the APS correction as an SV boundary valuation.
+
+\textbf{Tests:} verify on cylinders and mapping tori, compare $\Phi_{\partial}$ to transgressed $\widehat A$- and Bismut–Cheeger $\hat\eta$-forms.
+\end{EXA}
+
+\begin{CONC}{RD.5}{Algebraic topology of SV-classes and secondary invariants}
+Define
+\[
+C_k^{\operatorname{SV}}(M):=C_{k-1}(SM)\oplus C_k(M),
+\qquad
+\partial_{\operatorname{SV}}(c_{k-1},c_k):=(\partial c_{k-1}+\pi^*c_k,\ \partial c_k).
+\]
+Then $H_k^{\operatorname{SV}}(M):=\ker\partial_{\operatorname{SV}}/\mathrm{im}\,\partial_{\operatorname{SV}}$ is dual to $H^{\operatorname{SV},k}(M)$ via
+$\langle(\Phi,\Psi),(c_{k-1},c_k)\rangle=\int_{c_{k-1}}\Phi+\int_{c_k}\Psi$.
+
+\textbf{Long exact sequence:}
+Viewing $C_\bullet^{\operatorname{SV}}(M)$ as the mapping cone of $\pi_*:C_\bullet(SM)\to C_{\bullet-1}(M)$ gives
+\[
+\cdots\to H_k^{\operatorname{SV}}(M)
+\to H_{k-1}(SM)\oplus H_k(M)
+\to H_{k-1}^{\operatorname{SV}}(M)\to\cdots.
+\]
+
+\textbf{Secondary (Chern–Simons) classes:}
+The SES
+\[
+0\to\Omega^\bullet(M)\xrightarrow{\iota}\Omega^{\operatorname{SV},\bullet}(M)\xrightarrow{\mathrm{pr}}\Omega^{\bullet-1}(SM)\to0
+\]
+induces a transgression
+\[
+\mathsf T:H^{k-1}(SM)\to H^{\operatorname{SV},k}(M).
+\]
+For a Chern–Weil polynomial $p$, set
+\[
+[(\Phi,\Psi)]:=\mathsf T([\mathrm{CS}_p(\omega_{\Spin})]),
+\]
+giving SV \emph{secondary invariants} pairing with $H_k^{\operatorname{SV}}(M)$ and detecting differences of spin connections.
+
+\textbf{Goals:}
+\begin{enumerate}[label=(\roman*)]
+\item Identify the SV mapping cone and compute $H_\bullet^{\operatorname{SV}}(S^n)$, $H_\bullet^{\operatorname{SV}}(\mathbb CP^m)$.
+\item Build a spectral sequence with $E_2^{p,q}=H^p(M;H^q(S^{n-1}))$ converging to $H^{\operatorname{SV},\bullet}(M)$.
+\item Relate $\mathsf T$ to classical Chern–Simons classes.
+\end{enumerate}
+\end{CONC}
+
+\begin{REM}{RD.6}{Bridges to contemporary geometry — concrete projects}
+\begin{itemize}
+  \item \textbf{GmT / curvature measures (Schneider--Fu):}
+        Compare $\Phi$-only classes with curvature measures via $N(K)$ and show the SV-product restricts to the Alesker product when $\Psi=0$.
+  \item \textbf{Spinorial mean curvature flow (Scheuer):}
+        Use RD.2’s exactness criterion to derive monotonicity for $\Psi_t=\widehat A(\Omega_{\Spin,t})$; test on mean-convex flows.
+  \item \textbf{Integral geometry of calibrated cycles (Bernig):}
+        For calibrated $G_2$/$\Spin(7)$ structures, construct SV-classes from calibration forms; study kinematic formulas.
+  \item \textbf{Moduli of spin/complex structures (Möller):}
+        Track $[(\Phi,\Psi)]$ along Teichmüller/Spin moduli and analyze the obstruction $\mathfrak o_t\in H^{n-1}(SM)$ for degenerations.
+  \item \textbf{Spectral geometry:}
+        Relate heat-kernel coefficients $a_k(\slashed D)$ to SV-classes $[(\Phi_k,\Psi_k)]$ and test whether $\sum_k a_k t^{k-n/2}$ generates $\mathrm{CW}_{\Spin}$.
+\end{itemize}
+\end{REM}
+
+\begin{CONC}{RD.7}{Equivariant SV-theory and gauged valuations}
+Let a compact Lie group $G$ act isometrically and spin-preservingly on $(M,g)$ and $SM$.
+
+\medskip\noindent\textbf{Equivariant complex.}
+Define
+\[
+\Omega_G^{\operatorname{SV},k}(M):=\big(\Omega^{k-1}(SM)^G\oplus\Omega^k(M)^G\big)\ \widehat\otimes\ S(\mathfrak g^\vee)[2],
+\]
+with Cartan differential
+\[
+d_{\operatorname{SV},G}(\Phi,\Psi)(\xi)=\Big(d\Phi+\pi^*\Psi-\iota_{\xi_{SM}}\Phi,\ d\Psi-\iota_{\xi_M}\Psi\Big),\quad \xi\in\mathfrak g.
+\]
+Then $H_G^{\operatorname{SV},\bullet}(M)$ encodes \emph{gauged valuations} invariant under $G$.
+
+\medskip\noindent\textbf{Localization.}
+For Hamiltonian actions (e.g.\ $M$ Kähler), conjecturally a Berline–Vergne–Atiyah–Bott localization holds:
+\[
+\int_{N(K)}\Phi_G+\int_K\Psi_G=\sum_{F\subset M^G}\operatorname{Res}_F\!\Big(\frac{\Phi_G|_{SF}+\pi^*\Psi_G|_F}{e_G(\nu_F)}\Big).
+\]
+
+\medskip\noindent\textbf{Milestones.}
+\begin{enumerate}[label=(\roman*)]
+\item Construct $H_G^{\operatorname{SV},\bullet}$; prove functoriality and a Kirwan-type map to $H^{\operatorname{SV},\bullet}(M{/}{/}G)$.
+\item Establish ABBV localization for SV-classes; test on spheres, complex projective spaces, toric varieties.
+\end{enumerate}
+\end{CONC}
+
+\begin{CONC}{RD.8}{Microlocal analysis and wavefront control}
+Develop a microlocal SV-calculus controlling $\mathrm{WF}$-sets along the Legendrian normal cycle.
+
+\medskip\noindent\textbf{Microlocal SV-classes.}
+Restrict to pairs $(\Phi,\Psi)$ with Hörmander wavefront sets conic over the contact distribution so that
+pairings $\int_{N(K)}\Phi$ are defined for $C^{1,1}$-sets via current extension.
+
+\medskip\noindent\textbf{Propagation and stability.}
+For curvature-driven flows $N_t(K)$, prove \emph{propagation of conormality} and stability of $\mu_{(\Phi,\Psi)}(K_t)$.
+Relate to Rumin–type complexes and contact Sobolev spaces.
+
+\medskip\noindent\textbf{Milestones.}
+\begin{enumerate}[label=(\roman*)]
+\item SV-version of Hörmander’s product/pullback criterion on $SM$.
+\item Semicontinuity of SV-evaluations under Hausdorff convergence $K_j\to K$.
+\end{enumerate}
+\end{CONC}
+
+\begin{CONC}{RD.9}{Manifolds with boundary and corners; APS-type packages}
+Extend the SV-framework to manifolds with boundary and corners, refining Example~RD.4.
+
+\medskip\noindent\textbf{Corner transgression.}
+Construct boundary/corner forms $\Phi_{\partial},\Phi_{\partial\partial}$ with
+\[
+d\Phi_{\partial}+\pi^*\Psi|_{\partial M}=0,\qquad
+d\Phi_{\partial\partial}+\iota^*\Phi_{\partial}=0,
+\]
+so that
+\[
+\mu_{(\Phi,\Psi)}(X)=\int_X\Psi+\int_{N(\partial X)}\Phi_{\partial}+\int_{N(\partial^2 X)}\Phi_{\partial\partial}
+\]
+is homotopy invariant.
+
+\medskip\noindent\textbf{Milestones.}
+\begin{enumerate}[label=(\roman*)]
+\item Compare $\Phi_{\partial}$ to Bismut–Cheeger $\hat\eta$-forms; derive an SV–APS index.
+\item Treat wedge/cone metrics (Mazzeo–Melrose) and compute model cases (cylinders, orthants).
+\end{enumerate}
+\end{CONC}
+
+\begin{CONC}{RD.10}{Random geometry and Gaussian kinematic formulas}
+Study $\mathbb E[\mu_{(\Phi,\Psi)}(K_f)]$ for excursion sets $K_f=\{x\in M: f(x)\ge 0\}$ of random fields $f$.
+
+\medskip\noindent\textbf{SV–GKF.}
+For Gaussian isotropic $f$, aim for an SV-analogue of the Gaussian kinematic formula:
+\[
+\mathbb E\big[\mu_{(\Phi,\Psi)}(K_f)\big]=\sum_{j=0}^n c_j(\Phi,\Psi)\,\Lambda_j(M),
+\]
+with curvature measures $\Lambda_j$ and coefficients from jets of $f$.
+
+\medskip\noindent\textbf{Milestones.}
+\begin{enumerate}[label=(\roman*)]
+\item Wick-type contractions for contact integrals on $SM$.
+\item Tests on $\mathbb S^n$ (random spherical harmonics); links to Kac–Rice/Euler characteristic.
+\end{enumerate}
+\end{CONC}
+
+\begin{CONC}{RD.11}{$K$-theoretic and noncommutative refinements}
+Lift $H^{\operatorname{SV},\bullet}(M)$ to a bivariant framework with $K$-theory and cyclic cohomology.
+
+\medskip\noindent\textbf{Chern character.}
+Construct
+\[
+\mathrm{ch}_{\operatorname{SV}}:K^0(M)\longrightarrow H^{\operatorname{SV},\mathrm{even}}(M),
+\]
+compatible with the de~Rham Chern character under $(\Phi,\Psi)\mapsto[\Psi]$.
+For spectral triples $(\mathcal A,\mathcal H,D)$, define $\tau_{\operatorname{SV}}\in HC^{\bullet}(\mathcal A)$ via SV-transgression.
+
+\medskip\noindent\textbf{Milestones.}
+\begin{enumerate}[label=(\roman*)]
+\item Show $\mathrm{CW}_{\Spin}\circ \mathrm{ch}_{\operatorname{SV}}=\mathrm{ch}_{\mathrm{dR}}$.
+\item Explore NCG examples (foliations, groupoids); compute pairings with Connes cocycles.
+\end{enumerate}
+\end{CONC}
+
+\begin{CONC}{RD.12}{Algorithms, datasets, and experimental SV-geometry}
+Build a computational toolbox for SV-classes and valuations on meshes/point clouds.
+
+\medskip\noindent\textbf{Discrete SV.}
+Define discrete analogues $(\Phi_h,\Psi_h)$ on triangulations with convergence
+\[
+\mu_{(\Phi_h,\Psi_h)}(K_h)\xrightarrow[h\to 0]{}\mu_{(\Phi,\Psi)}(K).
+\]
+
+\medskip\noindent\textbf{Open-source suite.}
+Implement:
+\begin{itemize}
+\item fiber-integration on $SM$ via quadrature on discrete unit bundles,
+\item normal-cycle extraction for polyhedral sets,
+\item libraries of canonical classes (Chern–Weil reps, curvature measures).
+\end{itemize}
+
+\medskip\noindent\textbf{Milestones.}
+\begin{enumerate}[label=(\roman*)]
+\item $\Gamma$-/Mosco-Konvergenz für $\mu_{(\Phi_h,\Psi_h)}$.
+\item Benchmarks auf $M=\mathbb S^2,\mathbb T^2,\mathbb{CP}^1$; synthetic/real datasets.
+\end{enumerate}
+\end{CONC}
+
+
+\subsection{Microlocal analysis and wavefront control}
+
+\begin{CONC}{RD.8}{Microlocal analysis and wavefront control}
+We develop a microlocal SV–calculus that controls Hörmander wavefront sets along the Legendrian normal cycle and guarantees well-definedness, stability, and propagation under geometric flows.
+
+\medskip\noindent\textbf{Setting and conormal geometry.}
+Let $\pi:SM\to M$ be the unit sphere bundle with contact form $\alpha$ and contact distribution $\mathcal H:=\ker\alpha$.
+For a regular compact $K\subset M$, the normal cycle $N(K)\subset SM$ is a compact Legendrian current with conormal bundle
+$N^*N(K)\subset T^*(SM)\!\setminus\!0$ contained in the conic set dual to $\mathcal H$.  
+We define the \emph{contact conormal cone}
+\[
+\mathcal C_{\mathrm{contact}}
+:=\{(y,\eta)\in T^*(SM)\!\setminus\!0:\ \eta|_{\mathcal H_y}=0\},
+\]
+the geometric locus of wavefront directions compatible with Legendrian currents.
+
+\begin{DEF}{SV.19}{Microlocally admissible SV-pairs}
+A pair $(\Phi,\Psi)\in \Omega^{n-1}(SM)\oplus\Omega^n(M)$ is \emph{microlocally admissible} if:
+\begin{enumerate}[label=(\alph*)]
+\item It is closed in the SV-complex: $d\Phi+\pi^*\Psi=0$, $d\Psi=0$.
+\item $\WF(\Phi)\subset \mathcal C_{\mathrm{contact}}$ and $\WF(\Psi)$ is arbitrary (top degree).
+\item The Hörmander pairing criterion holds: $\WF(\Phi)\cap N^*N(K)^{\mathrm{op}}=\varnothing$
+for all regular $K$.
+\end{enumerate}
+The space $\Omega^{\operatorname{SV}}_{\mathrm{micro}}(M)$ consists of such pairs,
+and its cohomology $H^{\operatorname{SV}}_{\mathrm{micro}}(M)$
+is defined modulo $d_{\operatorname{SV}}$-exact pairs preserving the microlocal bounds.
+\end{DEF}
+
+\begin{PROP}{SV.20}{Product, pullback, and pushforward on $SM$}
+Let $(\Phi_i,\Psi_i)\in\Omega^{\operatorname{SV}}_{\mathrm{micro}}(M)$.
+\begin{enumerate}[label=(\roman*)]
+\item \textbf{Wedge product:} If $\WF(\Phi_1)\oplus\WF(\Phi_2)$ avoids the zero section and Hörmander’s transversality condition holds,
+then $\Phi_1\wedge\Phi_2$ is defined with
+$\WF(\Phi_1\wedge\Phi_2)\subset \WF(\Phi_1)\widehat{+}\WF(\Phi_2)$.
+\item \textbf{Pullback:} For a contact map $F:SM'\to SM$ with $F^*\alpha'=\lambda\,\alpha$ ($\lambda>0$),
+if ${}^tF'(\WF(\Phi))$ avoids the zero section, then $F^*\Phi$ is defined and
+$\WF(F^*\Phi)\subset {}^tF'(\WF(\Phi))$.
+\item \textbf{Fiber integration:} If $\pi_*:SM\to M$ is proper on $\operatorname{supp}\Phi$ and $\WF(\Phi)$ contains no vertical covectors,
+then $\pi_*(\alpha\wedge\Phi)$ is defined and
+$\WF\!\big(\pi_*(\alpha\wedge\Phi)\big)\subset \pi_\sharp(\WF(\Phi))$.
+\end{enumerate}
+These are the Hörmander product, pullback, and pushforward theorems adapted to the contact geometry of $SM$.
+\end{PROP}
+
+\begin{PROP}{SV.21}{Well-defined pairing with $N(K)$}
+For any $(\Phi,\Psi)\in\Omega^{\operatorname{SV}}_{\mathrm{micro}}(M)$ and $C^{1,1}$ compact $K\subset M$,
+the current $N(K)$ is a Legendrian integral current, and
+\[
+\int_{N(K)}\Phi
+\quad\text{is well-defined as a distributional pairing.}
+\]
+Hence the valuation $\mu_{(\Phi,\Psi)}(K):=\int_{N(K)}\Phi+\int_K\Psi$
+is a well-defined smooth valuation,
+depending only on the cohomology class $[(\Phi,\Psi)]\in H^{\operatorname{SV}}_{\mathrm{micro}}(M)$.
+\end{PROP}
+
+\begin{REM}{SV.22}{Rumin-type control and contact Sobolev spaces}
+Let $\mathrm d_c$ denote the Rumin differential on $(SM,\alpha)$
+and $H^s_{\mathrm{cont}}(SM)$ the associated anisotropic Sobolev space adapted to the contact structure $(\mathcal H,\mathrm d_c)$.
+If $\Phi\in H^s_{\mathrm{cont}}$ with $s$ above the critical contact dimension, then $\WF(\Phi)\subset\mathcal C_{\mathrm{contact}}$.
+Thus these functional spaces provide microlocal compactness and regularity control for sequences $(\Phi_j)$ in the SV-setting.
+\end{REM}
+
+\medskip\noindent\textbf{Propagation and stability.}
+Let $t\mapsto K_t$ be a $C^{1,1}$ family of regular sets with Legendrian normal cycles $N_t:=N(K_t)$,
+evolving under a contact vector field $V$ on $SM$ (e.g.\ from a curvature flow on $M$).
+
+\begin{THEO}{SV.23}{Propagation of conormality under Legendrian flows}
+Assume $N_0$ is Legendrian and $(\Phi,\Psi)\in\Omega^{\operatorname{SV}}_{\mathrm{micro}}(M)$.
+If $t\mapsto N_t$ satisfies $\partial_t N_t+\mathcal L_V N_t=0$ with $V$ contact and $C^1$ in $t$, then:
+\begin{enumerate}[label=(\alph*)]
+\item $N_t$ remains Legendrian and $N^*N_t$ is transported by the contact flow.
+\item The map $t\mapsto \int_{N_t}\Phi$ is $C^1$ and obeys the transport identity
+\[
+\frac{d}{dt}\int_{N_t}\Phi=\int_{N_t}(\dot\Phi+\mathcal L_V\Phi),
+\]
+hence
+$\displaystyle \frac{d}{dt}\mu_{(\Phi,\Psi)}(K_t)
+=\int_{N_t}(\dot\Phi+\mathcal L_V\Phi)+\int_{K_t}\dot\Psi$.
+\end{enumerate}
+\end{THEO}
+
+\begin{KORO}{SV.24}{Microlocal stability of valuations}
+If there exist forms $(\Xi_t,\zeta_t)$ satisfying
+$\dot\Phi+\mathcal L_V\Phi=d\Xi_t+\pi^*\zeta_t$ and $\dot\Psi=d\zeta_t$,
+then $\mu_{(\Phi,\Psi)}(K_t)$ is constant in $t$.
+Thus SV-classes fixed in $H^{\operatorname{SV}}_{\mathrm{micro}}(M)$
+yield \emph{conserved valuations} under the flow.
+\end{KORO}
+
+\begin{THEO}{SV.25}{Semicontinuity under Hausdorff convergence}
+Let $K_j\to K$ in Hausdorff topology with uniformly bounded second fundamental forms (e.g.\ $C^{1,1}$ constants).
+If $(\Phi,\Psi)\in\Omega^{\operatorname{SV}}_{\mathrm{micro}}(M)$ and $\Phi\ge0$ as a current along $N(K)$, then
+\[
+\liminf_{j\to\infty}\ \mu_{(\Phi,\Psi)}(K_j)\ \ge\ \mu_{(\Phi,\Psi)}(K).
+\]
+If $\Phi$ is locally contact-exact, $\Phi=d\Xi+\pi^*\zeta$ near $\bigcup_j N(K_j)$,
+then $\mu_{(\Phi,\Psi)}(K_j)\to\mu_{(\Phi,\Psi)}(K)$.
+\end{THEO}
+
+\begin{EXA}{SV.26}{Canonical microlocal SV-classes}
+\begin{enumerate}[label=(1)]
+\item \emph{Pure de Rham:} $(0,\Psi)$ with $d\Psi=0$ — always admissible.
+\item \emph{Contact curvature measures:} if $\Phi$ is Rumin-harmonic ($\mathrm d_c\Phi=0$, $\alpha\wedge\Phi=0$),
+then $(\Phi,0)$ is admissible with $\WF(\Phi)\subset\mathcal C_{\mathrm{contact}}$.
+\item \emph{Mixed Chern–Weil/contact:} for a Chern–Weil form $\Psi_p$ and contact $\Phi$ with small wavefront,
+$(\Phi,\Psi_p)$ yields stable index-type valuations under Legendrian variation.
+\end{enumerate}
+\end{EXA}
+
+\medskip\noindent\textbf{Milestones (microlocal program).}
+\begin{enumerate}[label=(\roman*)]
+\item Prove a full SV–Hörmander theorem on $SM$:
+product, pullback by contact maps, and $\pi_*$–pushforward with sharp WF-bounds.
+\item Establish contact Sobolev compactness:
+bounded sets in $H^s_{\mathrm{cont}}$ (above threshold) are precompact modulo $d_{\operatorname{SV}}$-exact forms.
+\item Develop quantitative semicontinuity estimates for $\mu_{(\Phi,\Psi)}$ under $K_j\to K$,
+in terms of reach, curvature, and contact defect.
+\end{enumerate}
+\end{CONC}
+
+\begin{MOT}{RD.8$^\star$}{Warum Mikrolokalanalysis für SV? Chancen \& Potenziale}
+
+Die mikrolokale Perspektive (Hörmander–WF, Fourier-Integral-/Legendrian-Distributionen) ist für spinorial valuations (SV) deshalb natürlich, weil die Normalzyklen $N(K)\subset SM$ \emph{Legendrian} sind und damit ihre zulässigen Testformen/Ströme durch \emph{konormale} Wellenfront-Geometrie kontrolliert werden müssen. Dadurch öffnet sich ein präziser Rahmen, um Integrale
+\[
+\mu_{(\Phi,\Psi)}(K)=\int_{N(K)}\Phi+\int_K\Psi
+\]
+\emph{unter minimaler Regularität} (z.\,B.\ $C^{1,1}$ oder positive reach) sinnvoll zu definieren und stabilitätsanalytisch zu untersuchen.
+
+\medskip\noindent
+\textbf{(1) Wohlgestellt­heit jenseits glatter Ränder.}
+\begin{itemize}
+  \item \emph{WF-Kontrolle} für $\Phi$: Wählt man Klassen von $(n\!-\!1)$-Formen auf $SM$ mit Hörmander-Wellenfront in der konormalen Richtung der Kontaktverteilung, wird der Pullback auf $N(K)$ (als Legendrianer Strom) wohldefiniert. So lassen sich SV-Auswertungen auf $C^{1,1}$-Mengen und Mengen positiver Reichweite robust machen.
+  \item \emph{Produkt-/Zugriffs-Kriterien}: Eine SV-Version der Hörmander-Produkt-/Rückzugs-Kriterien auf $SM$ liefert scharfe notwendige und hinreichende Bedingungen, wann $\int_{N(K)}\Phi$ sinnvoll und stetig in $K$ ist.
+\end{itemize}
+
+\medskip\noindent
+\textbf{(2) Stabilität unter geometrischen Flüssen.}
+\begin{itemize}
+  \item \emph{Propagation of conormality}: Für krümmungsgetriebene Flüsse $K_t$ (z.\,B.\ mittlere Krümmung, anisotrope Flüsse) kann man beweisen, dass $N(K_t)$ Legendrian-konormal bleibt und die zulässigen WF-Klassen von $\Phi$ unter der zugehörigen Kontakt-Dynamik invariant sind.
+  \item \emph{Stabilität von SV}: Daraus folgt Semikontinuität/Konvergenz $t\mapsto \mu_{(\Phi,\Psi)}(K_t)$ und quantitative Fehlerabschätzungen (z.\,B.\ via kontakt-sobolevsche Normen).
+\end{itemize}
+
+\medskip\noindent
+\textbf{(3) Brücke zu Rumin-Komplex \& Kontakt-Hodge-Theorie.}
+\begin{itemize}
+  \item \emph{Rumin-Typ-Komplex}: Ersetzt man $d$ auf $SM$ durch einen kontaktadaptierten Rumin-Differentialoperator, erhält man eine mikrolokal gutgestellte Koflotations-Theorie für die $\Phi$-Komponente, kompatibel mit $d_{\mathrm{SV}}(\Phi,\Psi)=(d\Phi+\pi^*\Psi,d\Psi)$.
+  \item \emph{Regularisierung}: Pseudodifferentiale Parametrix-Operatoren auf $SM$ erlauben kanonische Glättungen innerhalb zulässiger WF-Klassen, ohne die Legendrian-Struktur zu verletzen.
+\end{itemize}
+
+\medskip\noindent
+\textbf{(4) Neue kinematische und Integralgeometrie-Formeln.}
+\begin{itemize}
+  \item \emph{Transversalitätsfenster}: WF-Kalkül liefert präzise Transversalitätsbedingungen, unter denen kinematische Formeln (Mittelwerte über Gruppenaktionen) für SV (mit Spin-/Chern–Weil-Kopplung) gültig sind.
+  \item \emph{Slicing \& Pushforward}: Mikrolokale Abschätzungen kontrollieren Schubabbildungen $\pi_*$ und Schnitte $i^*$ (z.\,B.\ Level-Set-Slices), was neue Verknüpfungen zwischen Volumen-/Randanteilen erlaubt.
+\end{itemize}
+
+\medskip\noindent
+\textbf{(5) Anwendungen: von singulären Geometrien bis Inversionsproblemen.}
+\begin{itemize}
+  \item \emph{Singuläre Geometrien}: Polygonale/Polyedermengen, Stratifizierungen, Reifenberg-flache Sets; SV bleiben definierbar und stabil unter Approximation (Hausdorff-/Federer-Konvergenz).
+  \item \emph{Tomographie \& inverse Probleme}: Konormale Klassen sind die natürliche Sprache für Radon-/X-Ray-artige Operatoren; SV bieten skalare, additive \emph{Mikro-Invarianten} als robuste Merkmale in Rekonstruktionsaufgaben.
+  \item \emph{Spektral-/semiklassische Asymptotik}: Stationary-phase auf $SM$ für Legendrian-Integrale liefert asymptotische Expansionen von $\mu_{(\Phi,\Psi)}$ bei Skalen-/Frequenzgrenzen (Link zu Toeplitz-/Kontaktquantisierung).
+\end{itemize}
+
+\medskip\noindent
+\textbf{(6) Konkrete Meilensteine.}
+\begin{enumerate}[label=(\roman*)]
+  \item \emph{SV-Hörmander-Kriterium} auf $SM$: Produkt-/Pullback-Satz für Paare $(\Phi,\Psi)$ mit WF-Bounds, angewandt an $N(K)$.
+  \item \emph{Semikontinuität/$\Gamma$-Konvergenz}: $\mu_{(\Phi,\Psi)}(K_j)\to \mu_{(\Phi,\Psi)}(K)$ bei $K_j\to K$ (Hausdorff/varifold), inkl.\ Quantifizierung.
+  \item \emph{Flow-Stabilität}: Erhalt der Zulässigkeitsklasse und Lipschitz-/Hölder-Kontrolle $t\mapsto \mu_{(\Phi,\Psi)}(K_t)$ unter kurvenabhängiger Kontakt-Dynamik.
+\end{enumerate}
+
+\medskip\noindent
+\textbf{(7) Warum das strategisch wichtig ist.}
+Mikrolokale Kontrolle macht die SV-Theorie \emph{robust} (geringe Regularität, Singularitäten, Flüsse) und \emph{präzise} (WF-Bedingungen ersetzen grobe Glattheitsannahmen). Sie verbindet Integralgeometrie, Kontakt-/Spin-Geometrie und PDO/FIO-Technik zu einem Werkzeugkasten, der neue kinematische Formeln, Stabilitätssätze und Anwendungen in Geometrie, Bildgebung und mathematischer Physik eröffnet.
+
+\end{MOT}
+
+\pagebreak
+
+% Kapitel 2 — Geometrische Grundlagen der spinorial valuation theory
+\subsection{Sphärenbündel und Kontaktstruktur}\label{subsec:SV-2.1}
+
+\begin{DEF}{SV-2.1-1}{Einheits-Sphärenbündel}
+Sei $(M^n,g)$ eine glatte, orientierte Riemannsche Mannigfaltigkeit. Das \emph{Einheits-Sphärenbündel}
+\[
+\pi: SM \longrightarrow M,\qquad SM:=\{(x,v)\in TM \mid g_x(v,v)=1\},
+\]
+ist die Untermannigfaltigkeit der Einheitsvektoren im Tangentialbündel, versehen mit der Bündelprojektion $\pi(x,v)=x$.
+\end{DEF}
+
+\begin{DEF}{SV-2.1-2}{Kan. Kontaktform und Kontaktverteilung}
+Auf $SM$ ist die \emph{kanonische Kontaktform} $\alpha\in\Omega^1(SM)$ durch
+\[
+\alpha_{(x,v)}(X):=g_x\big(v,\ \pi_* X\big)\qquad (X\in T_{(x,v)}SM)
+\]
+definiert. Die \emph{Kontaktverteilung} ist $\xi:=\ker(\alpha)\subset TSM$. Die Paarung
+$\alpha\wedge (d\alpha)^{n-1}$ ist überall von oben her induzierter Rang, also eine Volumenform auf $SM$.
+\end{DEF}
+
+\begin{DEF}{SV-2.1-3}{Normalzyklus}
+Sei $K\subset M$ kompakt mit $C^2$-Rand. Der \emph{Normalzyklus} $N(K)\subset SM$ ist die glatte, kompakte, $(n{-}1)$-dimensionale Untermannigfaltigkeit
+\[
+N(K):=\{(x,\nu_x)\in SM\mid x\in \partial K,\ \nu_x\ \text{äußerer Einheitsnormalenvektor an }\partial K\}.
+\]
+Für Mengen mit positivem \emph{reach} wird $N(K)$ als (ränderloser) Legendrian-Zyklus im Sinn der geometrischen Maßtheorie definiert und ist glatt auf einer dichten Teilmenge.
+\end{DEF}
+
+\begin{PROP}{SV-2.1-4}{Legendrizität des Normalzyklus}
+Für jede reguläre kompakte Menge $K\subset M$ gilt
+\[
+\alpha\big|_{N(K)}=0,\qquad \text{d.\,h.\ } N(K)\ \text{ist Legendrian in }(SM,\alpha).
+\]
+\end{PROP}
+
+\begin{REM}{SV-2.1-5}{Rolle der Kontaktstruktur für Additivität}
+Die Legendrizität bewirkt, dass Zusatzterme der Form $\alpha\wedge\eta$ bei Integralen über $N(K)$ verschwinden. In Kombination mit Stokes auf $SM$ liefert dies die additiven Ausgleichsrelationen, die den Valuationscharakter der späteren Funktionale sicherstellen.
+\end{REM}
+
+
+\subsection{Spinstrukturen und Spin-Verbindung}\label{subsec:SV-2.2}
+
+\begin{DEF}{SV-2.2-1}{Spin-Prinzipalbündel}
+Eine \emph{Spinstruktur} auf $(M^n,g)$ ist ein $\mathrm{Spin}(n)$-Prinzipalbündel
+\[
+\pi_{\mathrm{Spin}}:\mathrm{Spin}(M)\to M
+\]
+zusammen mit einer $2{:}1$-Überlagerung $\mathrm{Spin}(M)\!\times_{\mathrm{Spin}(n)}\!\mathbb R^n \to SO(M)\!\times_{SO(n)}\!\mathbb R^n$, die mit den Strukturgruppen verträglich ist. Existenz setzt $w_2(M)=0$ voraus.
+\end{DEF}
+
+\begin{DEF}{SV-2.2-2}{Spin-Verbindung und Krümmung}
+Die Levi-Civita-Verbindung induziert eine eindeutige \emph{Spin-Verbindung}
+$\omega_{\mathrm{spin}}\in \Omega^1\big(\mathrm{Spin}(M);\mathfrak{spin}(n)\big)$.
+Ihre Krümmung ist
+\[
+\Omega_{\mathrm{spin}}:=d\omega_{\mathrm{spin}}+\tfrac12[\omega_{\mathrm{spin}}\!,\omega_{\mathrm{spin}}]\in
+\Omega^2\big(\mathrm{Spin}(M);\mathfrak{spin}(n)\big),
+\]
+die zu $M$ äquivariant absteigt.
+\end{DEF}
+
+\begin{DEF}{SV-2.2-3}{Clifford-Algebra und Invarianz}
+Bezeichne mit $\mathrm{Cl}(T_xM)$ die reelle Clifford-Algebra zu $(T_xM,g_x)$.
+Eine Form $P(\Omega_{\mathrm{spin}})$ heißt \emph{Spin(n)-invariant}, wenn sie aus Ad-invarianten Polynomen in $\Omega_{\mathrm{spin}}$ gebildet ist (Chern--Weil). Die \emph{Clifford-Spur} $\mathrm{Tr}_{\mathrm{Cl}}$ ist die Bündelspur der natürlichen Darstellung auf den Spinoren.
+\end{DEF}
+
+\begin{EXA}{SV-2.2-4}{Chern--Weil in Top-Grad}
+Klassische Beispiele sind Pontrjagin- und $\widehat A$-Dichten:
+\[
+\Psi_{\widehat A}=(2\pi i)^{-n/2}\,\widehat A\!\big(\Omega_{\mathrm{spin}}\big)\in \Omega^{n}(M),\qquad d\Psi_{\widehat A}=0.
+\]
+\end{EXA}
+
+
+\subsection{Kopplung von Kontakt- und Spin-Geometrie}\label{subsec:SV-2.3}
+
+\begin{PROP}{SV-2.3-1}{Faserweise Darstellung von $SM$}
+Es gilt die $\mathrm{Spin}(n)$-äquivariante Beschreibung
+\[
+SM \;\cong\; \mathrm{Spin}(M)\times_{\mathrm{Spin}(n)} S^{n-1},
+\]
+wobei $S^{n-1}\subset \mathbb R^n$ die Einheitsphäre in der Standarddarstellung ist.
+\end{PROP}
+
+\begin{DEF}{SV-2.3-2}{Lift der Kontaktform}
+Die Kontaktform $\alpha$ auf $SM$ hebt zu einer $\mathrm{Spin}(n)$-äquivarianten $1$-Form $\widetilde\alpha$ auf $\mathrm{Spin}(M)\times S^{n-1}$, die über den Quotienten die ursprüngliche $\alpha$ induziert.
+\end{DEF}
+
+\begin{DEF}{SV-2.3-3}{Spin-äquivariante Bewertungsformen}
+Eine \emph{spin-äquivariante Bewertungsform} ist ein Paar
+\[
+(\Phi,\Psi)\in \Omega^{n-1}(SM)\oplus \Omega^n(M),
+\]
+wobei $\Phi$ lokal als Kombination
+\[
+\Phi=\mathrm{Tr}_{\mathrm{Cl}}\!\Big(\alpha\wedge F(\theta,\Omega_{\mathrm{spin}})\Big)
+\]
+mit $\theta$ der horizontalen LC-Verbindung auf $SM$ und einem $\mathrm{Spin}(n)$-invarianten Tensorfunktor $F$ gegeben ist; $\Psi$ ist eine Chern--Weil-Dichte in $\Omega_{\mathrm{spin}}$.
+\end{DEF}
+
+\begin{REM}{SV-2.3-4}{Bedeutung der Clifford-Spur}
+Die Spur $\mathrm{Tr}_{\mathrm{Cl}}$ projiziert aus der Clifford-Algebra auf skalare Differentialformen. Dadurch werden spinoriale Beiträge mit der kontaktgeometrischen $1$-Form $\alpha$ kohärent gekoppelt.
+\end{REM}
+
+
+\subsection{Der spinorial valuation Komplex}\label{subsec:SV-2.4}
+
+\begin{DEF}{SV-2.4-1}{Spinorial Valuation Differential}
+Definiere den (obergradigen) Komplex
+\[
+\Omega^{\operatorname{SV}}(M):=\Omega^{n-1}(SM)\oplus \Omega^{n}(M),\qquad
+d_{\operatorname{SV}}(\Phi,\Psi):=\big(d\Phi+\pi^*\Psi,\ d\Psi\big),
+\]
+wobei $\pi:SM\to M$ die Projektion ist.
+\end{DEF}
+
+\begin{LEM}{SV-2.4-2}{Nilpotenz}
+Es gilt $d_{\operatorname{SV}}\circ d_{\operatorname{SV}}=0$. Insbesondere
+\[
+d(d\Phi+\pi^*\Psi)+\pi^*(d\Psi)=0,\qquad d(d\Psi)=0.
+\]
+\end{LEM}
+
+\begin{DEF}{SV-2.4-3}{SV-Kohomologie (Top-Grad)}
+Die \emph{spinorial valuation Kohomologie} im Top-Grad ist
+\[
+H^{\operatorname{SV}}(M):=\ker(d_{\operatorname{SV}})/\mathrm{im}(d_{\operatorname{SV}}).
+\]
+Ein Paar $(\Phi,\Psi)$ heißt \emph{geschlossen}, falls $d\Phi+\pi^*\Psi=0$ und $d\Psi=0$; es heißt \emph{exakt}, falls $(\Phi,\Psi)=d_{\operatorname{SV}}(\Xi,\zeta)$ für ein $(\Xi,\zeta)$.
+\end{DEF}
+
+\begin{PROP}{SV-2.4-4}{Additivität und Stokes-Mechanismus}
+Sei $K\subset M$ regulär kompakt. Für geschlossenes $(\Phi,\Psi)$ gilt
+\[
+\mu(K):=\int_{N(K)}\Phi+\int_K\Psi
+\]
+und für reguläre $K,L$:
+\[
+\mu(K\cup L)+\mu(K\cap L)=\mu(K)+\mu(L).
+\]
+\emph{Begründung:} Legendrizität $\alpha|_{N(\cdot)}=0$ eliminiert $\alpha$-Terme; Stokes auf $N(K)$ und auf $K$ kompensiert $d\Phi$ und $\pi^*\Psi$ bzw.\ $d\Psi$.
+\end{PROP}
+
+\begin{EXA}{SV-2.4-5}{Top-Grad-Beispiel $\widehat A$}
+Setze $\Phi_{\widehat A}:=0$, $\Psi_{\widehat A}:=(2\pi i)^{-n/2}\,\widehat A(\Omega_{\mathrm{spin}})$. Dann ist $d_{\operatorname{SV}}(\Phi_{\widehat A},\Psi_{\widehat A})=(\pi^*\Psi_{\widehat A},0)$; auf $N(K)$ trägt nur $\int_K\Psi_{\widehat A}$ bei. Für $K=M$ ist $\mu(M)=\int_M\Psi_{\widehat A}=\mathrm{index}(D)$.
+\end{EXA}
+
+
+\subsection{Bedeutung der Kontaktgeometrie im Additivitätsbeweis}\label{subsec:SV-2.5}
+
+\begin{PROP}{SV-2.5-1}{Verschwinden von Kontakttermen}
+Für jede glatte $(n-2)$-Form $\Xi$ und jede glatte $(n-2)$-Form $\eta$ auf $SM$ gilt
+\[
+\int_{N(K)}\big(d\Xi+\alpha\wedge \eta\big)=0.
+\]
+Insbesondere ist die Klasse $[(\Phi,\Psi)]\in H^{\operatorname{SV}}(M)$ unabhängig von der Wahl von Repräsentanten modulo $d_{\operatorname{SV}}$-exakten Paaren.
+\end{PROP}
+
+\begin{REM}{SV-2.5-2}{Warum $SM$ der natürliche Träger ist}
+Die Richtungsinformation der Randgeometrie von $K$ ist in $N(K)\subset SM$ kodiert; die Kontaktstruktur stellt sicher, dass diese Information invariant und additiv integrierbar ist. Ohne Kontaktstruktur fehlte die kanonische Legendrian-Klasse und damit die Additivität.
+\end{REM}
+
+\begin{REM}{SV-2.5-3}{Vergleich zu Alesker–Bernig–Fu}
+Im klassischen ABF-Rahmen werden glatte Valuations durch Paare $(\Phi,\Psi)$ auf $(SM,M)$ mit demselben Koppel-Differential beschrieben. Die Kontaktgeometrie ist dort das zentrale Hilfsmittel, um Produkt, Poincaré-Dualität und kinematische Formeln zu formulieren. Die spinoriale Erweiterung ersetzt die rein $SO(n)$-invarianten Zutaten durch Spin(n)-invariante (Clifford-)Beiträge.
+\end{REM}
 
 
 
 
+\pagebreak
 
 
+\subsection{ABF-Schwerpunkte und spinoriale Entsprechungen}\label{subsec:ABF-to-SV}
 
+\begin{DEF}{ABF.1}{ABF-Komplex und Additivität}
+Sei $M$ eine orientierte Riemannsche Mannigfaltigkeit, $\pi:SM\to M$ das Einheits-Sphärenbündel.
+Ein \emph{glattes Valuation-Paar} ist $(\Phi,\Psi)\in\Omega^{n-1}(SM)\oplus\Omega^{n}(M)$ mit
+\[
+d_{\mathrm{ABF}}(\Phi,\Psi):=\big(d\Phi+\pi^*\Psi,\ d\Psi\big).
+\]
+\emph{Geschlossen} $\iff d\Phi+\pi^*\Psi=0,\ d\Psi=0$. Für reguläre kompakte $K\subset M$ setzt man
+\[
+\mu_{(\Phi,\Psi)}(K):=\int_{N(K)}\Phi+\int_K\Psi.
+\]
+Dann ist $\mu$ additiv: $\mu(K\cup L)+\mu(K\cap L)=\mu(K)+\mu(L)$.
+\end{DEF}
+
+\begin{REM}{SV.1}{Spinoriale Spiegelung zu ABF.1}
+Im spinorialen Kontext ersetzt man $d_{\mathrm{ABF}}$ durch
+\[
+d_{\mathrm{SV}}(\Phi,\Psi):=\big(d\Phi+\pi^*\Psi,\ d\Psi\big),
+\]
+jedoch wählt man $(\Phi,\Psi)$ \emph{Spin(n)-äquivariant}, z.\,B.
+\[
+\Phi=\mathrm{Tr}_{\mathrm{Cl}}\!\big(\alpha\wedge F(\theta,\Omega_{\mathrm{spin}})\big),\qquad
+\Psi=P(\Omega_{\mathrm{spin}})\ \text{(Chern--Weil)}.
+\]
+Dadurch koppeln Kontakt-Geometrie auf $SM$ und Spin-Geometrie auf $M$.
+\end{REM}
+
+
+\begin{DEF}{ABF.2}{Algebraische Struktur (Produkt)}
+Auf $\operatorname{Val}^\infty(M)$ existiert ein natürliches, kommutatives, graduiertes Produkt
+\[
+\cdot:\ \operatorname{Val}^\infty(M)\times\operatorname{Val}^\infty(M)\longrightarrow \operatorname{Val}^\infty(M),
+\]
+das auf Repräsentanten $(\Phi_i,\Psi_i)$ durch Faserintegration/Wedge auf $SM$ resp.\ $M$ induziert wird und mit $d_{\mathrm{ABF}}$ verträglich ist.
+\end{DEF}
+
+\begin{PROP}{SV.2}{Spinoriales Produkt}
+Die gleiche Bauweise definiert auf $\operatorname{Val}^\infty_{\Spin}(M)$ ein Produkt, wobei $\Phi$-Teile über
+$\mathrm{Tr}_{\mathrm{Cl}}$ und ggf.\ Clifford-Multiplikation kombiniert werden.
+Erwartet wird eine kommutative graduierte Algebra, deren reine $M$-Komponente
+die Chern--Weil-Algebra (z.\,B.\ $\widehat A$) reflektiert.
+\end{PROP}
+
+
+\begin{DEF}{ABF.3}{Poincaré–Dualität}
+Die Paarung
+\[
+\langle \mu_1,\mu_2\rangle \ :=\ (\mu_1\cdot\mu_2)(M)
+\]
+induziert eine nicht entartete, graduierte Poincaré–Dualität auf $\operatorname{Val}^\infty(M)$ (unter geeigneten Hypothesen).
+\end{DEF}
+
+\begin{REM}{SV.3}{Spinoriale Dualität \& Index}
+In $\operatorname{Val}^\infty_{\Spin}(M)$ koppeln $\Phi$-Teile mit $\alpha$ und horizontale Geometrie auf $SM$, während $\Psi$-Teile z.\,B.\ $\widehat A(\Omega_{\mathrm{spin}})$ tragen. Die Paarung kann Index-artige Terme $\int_M\widehat A$ (Dirac-Index) reproduzieren und so eine SV-Version der Poincaré–Dualität stützen.
+\end{REM}
+
+
+\begin{DEF}{ABF.4}{Kinematische Operatoren (Integralgeometrie)}
+Für eine kompakte Isometriegruppe $G\curvearrowright M$ definiert der \emph{kinematische Operator}
+\[
+k(\mu)(A,B):=\int_G \mu\big(A\cap gB\big)\,dg
+\]
+eine bilineare, $G$-invariante Form, die algebraisch durch die Produkt-/Kohomologiestruktur kontrolliert wird.
+\end{DEF}
+
+\begin{PROP}{SV.4}{Spinoriale Kinematik}
+Für $G$-invariante spinoriale Paare $(\Phi,\Psi)$ existiert eine analoge Konstruktion.
+Erwartet werden kinematische Formeln mit spinorialen Koeffizienten (Clifford-Spuren, Chern–Weil-Klassen)
+und möglichen Bezügen zu kalibrierten Geometrien (G\textsubscript{2}, $\Spin(7)$) und Dirac-Indizes.
+\end{PROP}
+
+
+\begin{DEF}{ABF.5}{Curvature Measures \& lokale Valuations}
+Lokale Valuations $\mu(K,U)$ werden über die Normalzyklus-Kalküle auf $SM$
+als Integrale von \emph{Krümmungsmaßen} beschrieben; global erhält man $\mu(K)$ durch Integration über $M$.
+\end{DEF}
+
+\begin{EXA}{SV.5}{Spinoriale Krümmungsmaße}
+Aus $\Phi=\mathrm{Tr}_{\mathrm{Cl}}(\alpha\wedge F(\theta,\Omega_{\mathrm{spin}}))$ ergeben sich lokale Maße,
+deren Faserintegration (ggf.\ kombiniert mit $\Psi$) globale spinoriale Valuations liefert.
+Spezialfall: $\Psi=\widehat A(\Omega_{\mathrm{spin}})$, $\Phi=0$.
+\end{EXA}
+
+
+\begin{DEF}{ABF.6}{Rumin-Komplex und Kontakt-Hodge}
+Auf $(SM,\alpha)$ ersetzt man $d$ in Grad $n{-}1$ durch den kontakt-adaptierten Rumin-Differentialoperator $D$.
+Das ist zentral für Regularität, Funktorialität und die Produktkonstruktion in $\operatorname{Val}^\infty$.
+\end{DEF}
+
+\begin{REM}{SV.6}{Clifford–Rumin-Ansatz}
+SV nutzt dieselbe kontaktgeometrische Infrastruktur, jedoch mit Spin-Äquivarianz:
+$D$ auf $SM$ (Rumin) steuert die $\Phi$-Komponente, Chern–Weil $d$ auf $M$ steuert die $\Psi$-Komponente,
+gekoppelt durch $d_{\mathrm{SV}}(\Phi,\Psi)=(d\Phi+\pi^*\Psi,d\Psi)$.
+Mikrolokale Varianten (WF-Kontrolle) sichern Wohldefiniertheit auf $C^{1,1}$-Mengen.
+\end{REM}
+
+
+\begin{DEF}{ABF.7}{Equivarianz und Darstellungstheorie}
+Für $G\curvearrowright M$ studiert man $\operatorname{Val}^\infty(M)^G$ und deren Zerlegung in irreduzible $G$-Darstellungen.
+\end{DEF}
+
+\begin{PROP}{SV.7}{Spinoriale Equivarianz}
+Für spin-erhaltende Isometrien liefert $\operatorname{Val}^\infty_{\Spin}(M)^G$
+eine „spinorial harmonic analysis“ auf $SM$ (Fasern $\simeq S^{n-1}$),
+bei der $\mathrm{Tr}_{\mathrm{Cl}}$ und Chern–Weil-Polynome die $G$-invarianten Klassen erzeugen.
+\end{PROP}
+
+
+\begin{REM}{MAP.1}{Schnellüberblick: ABF $\longleftrightarrow$ SV}
+\begin{itemize}
+\item \textbf{Komplex:} $d_{\mathrm{ABF}} \leftrightarrow d_{\mathrm{SV}}$ (formal identisch, Inhalte Spin-äquivariant).
+\item \textbf{Produkt:} Wedge/Faserintegration $\leftrightarrow$ Clifford-/Chern–Weil-gekoppelte Produkte.
+\item \textbf{Dualität:} ABF-Paarung $\leftrightarrow$ SV-Paarung mit Index-Termen ($\widehat A$).
+\item \textbf{Kinematik:} $G$-integrale Formeln $\leftrightarrow$ spinoriale kinematische Formeln (Kontakt+Spin).
+\item \textbf{Lokal/kurv.:} Krümmungsmaße $\leftrightarrow$ spinoriale Krümmungsdichten auf $SM$.
+\item \textbf{Kontaktanalyse:} Rumin/Hodge $\leftrightarrow$ Rumin+Spin, mikrolokal robust gemacht.
+\item \textbf{Equivarianz:} $G$-Harmonische Analyse $\leftrightarrow$ spinoriale $G$-Harmonische Analyse.
+\end{itemize}
+\end{REM}
+
+
+\begin{EXA}{SV.8}{Basisklassen und Testfälle}
+\begin{enumerate}[label=(\alph*)]
+\item \emph{Rein de-Rham:} $(0,\Psi)$ mit $d\Psi=0$ (ABF und SV identisch auf $M$).
+\item \emph{Rein kontakt:} $(\Phi,0)$ mit $\alpha\!\wedge\!\Phi=0$, $D\Phi=0$ (Rumin-harmonisch).
+\item \emph{Gemischt:} $(\Phi,\Psi_{\widehat A})$ mit $\Psi_{\widehat A}=(2\pi i)^{-n/2}\widehat A(\Omega_{\mathrm{spin}})$;
+liefert SV-Valuations mit topologischer Signatur (Index) und kontaktgeometrischer Sensitivität.
+\end{enumerate}
+\end{EXA}
+
+
+\begin{PROP}{RD.9}{Welche ABF-Themen sind für SV besonders fruchtbar?}
+\begin{enumerate}[label=\roman*)]
+\item \textbf{Produkt/Dualität:} Spinoriale Erweiterung klärt, wie Clifford-Strukturen das ABF-Produkt verfeinern und
+wie Index-Terme in der Paarung erscheinen.
+\item \textbf{Kinematik:} Spin(n)-invariante Formeln mit Chern–Weil-Gewichten eröffnen neue Integralgeometrien.
+\item \textbf{Curvature measures:} Lokale spinoriale Dichten führen zu invarianten, additiven Mikro-Invarianten.
+\item \textbf{Rumin/mikrolokal:} Kontakt-Rumin + WF-Kontrolle macht SV robust bei geringer Regularität (Flows, $C^{1,1}$).
+\item \textbf{Equivarianz:} Representation-theoretische Klassifikation von $\operatorname{Val}^\infty_{\Spin}(M)^G$.
+\end{enumerate}
+\end{PROP}
+
+
+\begin{REM}{OUT.1}{Konkrete nächste Schritte (implementierbar)}
+\begin{enumerate}[label=\alph*)]
+\item Definiere eine explizite Klasse $\Phi_{\mathrm{cl}}$ als Rumin-harmonische $(n{-}1)$-Form auf $SM$, setze $\Psi_{\widehat A}$ auf $M$;
+untersuche $[(\Phi_{\mathrm{cl}},\Psi_{\widehat A})]\in H^{\mathrm{SV}}(M)$.
+\item Beweise Wohldefiniertheit/Kontinuität $\mu_{(\Phi,\Psi)}(K)$ via WF-Kriterien (Hörmander) für $C^{1,1}$-Mengen.
+\item Baue die SV-Paarung und überprüfe auf Modellräumen ($\mathbb S^n$, $\mathbb{CP}^m$) die Dualität/Index-Bezüge.
+\item Leite erste spinoriale kinematische Identitäten unter $G$-Symmetrien (z.\,B.\ $SO(n)$, $U(m)$) her.
+\end{enumerate}
+\end{REM}
+
+
+\pagebreak
+
+\subsection{Bezüge zu Modulräumen von Verbindungen}\label{subsec:SV-Moduli}
+
+\begin{DEF}{SV-M.1}{Modulraum von Verbindungen}
+Sei $P\to M$ ein $G$-Prinzipalbündel mit Lie-Algebra $\mathfrak g$.
+Der Raum aller glatten Verbindungen $\mathcal A(P)$ trägt eine natürliche
+unendliche-dimensionale affine Struktur mit Tangentialräumen $T_A\mathcal A\simeq \Omega^1(M;\mathfrak g)$.
+Die Quotientenbildung
+\[
+\mathcal M(P):=\mathcal A(P)/\mathcal G(P)
+\]
+nach der Gauge-Gruppe $\mathcal G(P)$ definiert den \emph{Modulraum der Verbindungen}.
+\end{DEF}
+
+\begin{REM}{SV-M.2}{Analogie der Differentialsysteme}
+Die Krümmung $F_A=dA+\tfrac12[A,A]$ auf $\mathcal A(P)$ erfüllt $d_AF_A=0$ (Bianchi).
+Diese Struktur spiegelt in endlicher Dimension die Bedingung
+$d_{\operatorname{SV}}(\Phi,\Psi)=0$ wider, also $d\Phi+\pi^*\Psi=0$ und $d\Psi=0$.
+Formal gilt die Korrespondenz
+\[
+\Phi \leftrightarrow \text{Chern--Simons-Form},\qquad
+\Psi \leftrightarrow \text{Chern--Weil-Form}.
+\]
+\end{REM}
+
+\begin{PROP}{SV-M.3}{Additivität und Gluing-Struktur}
+Für kompakte Teilmengen $K,L\subset M$ liefert die Additivität
+\[
+\mu(K\cup L)=\mu(K)+\mu(L)-\mu(K\cap L)
+\]
+ein lokales Pendant zur Gluing-Struktur von Yang--Mills- oder ASD-Modulräumen:
+$\mathcal M_{K\cup L}\simeq \mathcal M_K\times_{\mathcal M_{\partial K\cap \partial L}}\mathcal M_L$.
+\end{PROP}
+
+\begin{REM}{SV-M.4}{Chern--Weil und Chern--Simons-Analogie}
+Im ABF/SV-Formalismus erscheinen Paare $(\Phi,\Psi)$,
+wobei $\Psi$ geschlossen und $\Phi$ eine Randkorrektur ist.
+In der Gauge-Theorie entsprechen dem
+\[
+d\,CS(A)=\operatorname{Tr}(F_A\wedge F_A),\qquad d_{\operatorname{SV}}(\Phi,\Psi)=(d\Phi+\pi^*\Psi,d\Psi)=0.
+\]
+Beide liefern topologische Invarianten:
+\[
+\int_M \Psi_{\widehat A} \ \longleftrightarrow\ \int_M \operatorname{Tr}(F_A\wedge F_A)
+\]
+und induzieren Grenzterme auf $\partial M$, die kontakt-geometrisch durch $\Phi$ modelliert werden.
+\end{REM}
+
+\begin{EXA}{SV-M.5}{Lokalisierte Index-Dichte}
+Für $(\Phi,\Psi_{\widehat A})$ mit $\Psi_{\widehat A}$ der $\widehat A$-Dichte
+gilt $\mu(K)=\int_{N(K)}\Phi+\int_K\Psi_{\widehat A}$.
+Interpretiert man $K$ als Teilraum, über dem eine Connection $A$ lebt,
+so liefert $\mu(K)$ eine lokalisierte Indexzahl, analog zu einem \emph{relativen} Dirac-Index
+im Sinn von Atiyah--Patodi--Singer.
+\end{EXA}
+
+\begin{PROP}{SV-M.6}{Homologische Analogie}
+Der SV-Komplex $(\Omega^{\operatorname{SV}}(M),d_{\operatorname{SV}})$
+entspricht konzeptionell dem BRST-Komplex $(\Omega^\bullet(\mathcal A/\mathcal G),d_{\mathrm{BRST}})$
+der Feldtheorie. Formal:
+\[
+d_{\operatorname{SV}}\ \leftrightarrow\ d_{\mathrm{BRST}},\qquad
+\Omega_{\mathrm{spin}}\ \leftrightarrow\ F_A.
+\]
+Beide erzeugen top-graded Kohomologien,
+deren Integrale topologische Invarianten darstellen (Index bzw.\ Instanton-Zahlen).
+\end{PROP}
+
+\begin{REM}{SV-M.7}{Perspektive}
+Die spinoriale Valuation Theory könnte somit als
+\emph{lokalisierte additive Variante}
+der Chern--Weil--Chern--Simons–Kohomologie betrachtet werden.
+Sie verbindet:
+\begin{itemize}
+\item die kontaktgeometrische Additivität auf $SM$,
+\item die spinoriale Chern--Weil-Struktur auf $M$,
+\item und die kohomologische Funktorialität von Moduli-Räumen der Connections.
+\end{itemize}
+\end{REM}
+
+\pagebreak
+
+\subsection{Physikalische Perspektiven und Quantenfeldtheorie}\label{subsec:SV-QFT}
+
+\begin{DEF}{SV-QFT.1}{Physikalische Interpretation der SV-Paare}
+Ein spinoriales Valuation-Paar $(\Phi,\Psi)$ kann formal als \emph{lokale Wirkungsdichte}
+\[
+S(K):=\int_{N(K)}\Phi+\int_K\Psi
+\]
+interpretiert werden, wobei
+\begin{itemize}
+\item $\Psi$ einer volumetrischen Lagrange-Dichte entspricht (z.\,B.\ einer Chern--Weil- oder Dirac-Dichte),
+\item $\Phi$ einen Randterm liefert (z.\,B.\ eine Chern--Simons- oder symplektische Form),
+\item $d_{\operatorname{SV}}(\Phi,\Psi)=0$ die Eich- bzw.\ Bianchi-Invarianz ausdrückt.
+\end{itemize}
+\end{DEF}
+
+\begin{REM}{SV-QFT.2}{BRST- und BV-Analogie}
+Das Differential $d_{\operatorname{SV}}$ erfüllt $d_{\operatorname{SV}}^2=0$ und wirkt auf Paaren unterschiedlicher Gradstruktur.
+Dies ist strukturell identisch mit dem BRST-Differential $s$ in der Eichtheorie:
+\[
+d_{\operatorname{SV}}\ \leftrightarrow\ s,\qquad H^{\operatorname{SV}}(M)\ \leftrightarrow\ \text{physikalische Observablen}.
+\]
+Damit kann $H^{\operatorname{SV}}(M)$ als geometrisch-realisiertes Analogon des BRST-Kohomologie-Raums angesehen werden.
+\end{REM}
+
+\begin{PROP}{SV-QFT.3}{Kontaktstruktur als Phasenraum}
+Das Kontaktmanifold $(SM,\alpha)$ liefert eine klassische Phasenraumstruktur:
+$d\alpha$ ist symplektisch auf $\xi=\ker\alpha$.
+Die Legendrizität $N(K)\subset SM$ stellt Randbedingungen dar, die mit symplektischen Reduktionen
+in kanonischer Quantisierung und Chern--Simons-Theorien korrespondieren.
+\end{PROP}
+
+\begin{REM}{SV-QFT.4}{Spinorialität und Supersymmetrie}
+Die Clifford-Spur $\mathrm{Tr}_{\mathrm{Cl}}$ in $\Phi=\mathrm{Tr}_{\mathrm{Cl}}(\alpha\wedge F(\theta,\Omega_{\mathrm{spin}}))$
+entspricht der Integration über fermionische Variablen im Pfadintegral einer supersymmetrischen Theorie.
+Dadurch ist $H^{\operatorname{SV}}(M)$ eine natürliche mathematische Umgebung für supersymmetrische Indexformeln
+und Anomalie-Kompensationen.
+\end{REM}
+
+\begin{EXA}{SV-QFT.5}{Chern--Simons-Analogie}
+Setze $\Psi=\operatorname{Tr}(F_A\wedge F_A)$ und $\Phi=\operatorname{Tr}(A\wedge dA+\tfrac23A^3)$
+für eine $G$-Connection $A$.
+Dann gilt $d\Phi+\pi^*\Psi=0$ (Bianchi), und $S(K)=\int_{N(K)}\Phi+\int_K\Psi$
+ist formal identisch mit der Chern--Simons-Wirkung auf Teilräumen $K\subset M$.
+\end{EXA}
+
+\begin{PROP}{SV-QFT.6}{Additivität und lokale Feldtheorie}
+Die Additivität der Valuations
+\[
+\mu(K\cup L)=\mu(K)+\mu(L)-\mu(K\cap L)
+\]
+erfüllt die \emph{Atiyah–Segal-TQFT-Axiome}:
+\begin{itemize}
+\item \emph{Lokalisierbarkeit:} die Wirkungsdichte zerlegt sich in Teilräume,
+\item \emph{Randkompatibilität:} $\Phi$ liefert korrekte Randterme,
+\item \emph{Functorialität:} Disjunkte Vereinigungen werden zu Tensorprodukten.
+\end{itemize}
+Somit kann $(M\mapsto H^{\operatorname{SV}}(M))$ als lokal funktorielle TQFT interpretiert werden.
+\end{PROP}
+
+\begin{REM}{SV-QFT.7}{Bezug zur Quanten- und Spin-Geometrie}
+Im Kontext der Quantengravitation modelliert $SM$ die Menge lokaler Raumrichtungen (Frames),
+die in spinfoam- oder loop-quantisierten Theorien als „Knotenrichtungen“ auftreten.
+Spinoriale Valuations liefern dort additive, invariant definierte Observablen
+(z.\,B.\ Flächen-, Volumen- oder Krümmungsmaße),
+die mit klassischen Spin-Netz-Operatoren übereinstimmen.
+\end{REM}
+
+\begin{EXA}{SV-QFT.8}{Index-Theorie und Anomalien}
+Die top-gradige Klasse $[0,\Psi_{\widehat A}]$ mit $\Psi_{\widehat A}=(2\pi i)^{-n/2}\,\widehat A(\Omega_{\mathrm{spin}})$
+liefert den Dirac-Index $\int_M\Psi_{\widehat A}$.
+In der QFT entspricht dies der Zählung von Fermion-Zuständen und der Anomaliefreiheit
+in supersymmetrischen und topologischen Theorien.
+\end{EXA}
+
+\pagebreak
+
+\subsection{Physikalische Perspektiven und lokale TQFT-Struktur}
+
+\begin{PROP}{SV-QFT.6}{Additivität und lokale Feldtheorie (ausgeführt)}
+Die Additivität der Valuations
+\[
+\mu(K\cup L)=\mu(K)+\mu(L)-\mu(K\cap L)
+\]
+implementiert eine \emph{lokale Feldtheorie-/TQFT-Struktur} im folgenden präzisen Sinn:
+\begin{enumerate}[label=\alph*)]
+  \item (\emph{Lokalisierbarkeit / Cosheaf-Eigenschaft})
+  Die Zuordnung
+  \[
+    U\ \longmapsto\ H^{\operatorname{SV}}(U)
+  \]
+  ist ein (prä-)Faktorisation-/Cosheaf auf $M$ mit Mayer--Vietoris-Exaktheit:
+  Für offene $U,V\subset M$ ist die Sequenz
+  \[
+  0\ \longrightarrow\ H^{\operatorname{SV}}(U\cup V)\xrightarrow{(r_U,r_V)} H^{\operatorname{SV}}(U)\oplus H^{\operatorname{SV}}(V)
+     \xrightarrow{r_{U\cap V}^-} H^{\operatorname{SV}}(U\cap V)\ \longrightarrow\ 0
+  \]
+  exakt, wobei $r_{U\cap V}^-(\alpha,\beta):=\alpha|_{U\cap V}-\beta|_{U\cap V}$.
+  \item (\emph{Randkompatibilität / Stokes-Gesetz})
+  Für ein geschlossenes Paar $(\Phi,\Psi)$ mit $d_{\operatorname{SV}}(\Phi,\Psi)=0$ gilt
+  \[
+    d\Phi+\pi^*\Psi=0,\qquad d\Psi=0,
+  \]
+  und damit die Identität
+  \[
+    \int_{N(K\cap L)}\!\!\!\!\Phi\;+\;\int_{K\cap L}\!\Psi
+    \;=\;
+    \int_{N(K)}\!\!\Phi+\int_{K}\!\Psi\;+\;\int_{N(L)}\!\!\Phi+\int_{L}\!\Psi\;-\;\int_{N(K\cup L)}\!\!\!\!\Phi-\int_{K\cup L}\!\Psi,
+  \]
+  d.\,h. die Korrektheit der Randterme ist in $d\Phi=-\pi^*\Psi$ eingebaut.
+  \item (\emph{Functorialität / Monoidalität})
+  Ein Spin-Diffeomorphismus $f:M\to M'$ induziert einen Pullback
+  \[
+  f^*:H^{\operatorname{SV}}(M')\longrightarrow H^{\operatorname{SV}}(M),\qquad f^*[(\Phi,\Psi)]=[((Sf)^*\Phi,f^*\Psi)],
+  \]
+  und für disjunkte Vereinigungen gilt die monoidale Kompatibilität
+  \[
+  H^{\operatorname{SV}}(M\sqcup N)\ \cong\ H^{\operatorname{SV}}(M)\ \widehat{\otimes}\ H^{\operatorname{SV}}(N),
+  \]
+  wobei $\widehat{\otimes}$ die äußere (projektive) Monoidalisierung der Bewertungsfunktionale bezeichnet.\footnote{Auf der Ebene der Auswertung ist dies die komponentenweise Kopplung 
+  $(\mu\boxtimes\nu)(K\sqcup L):=\mu(K)\cdot\nu(\emptyset)+\mu(\emptyset)\cdot\nu(L)$; in der praxis wählt man die Einheitsklasse als $\mu(\emptyset)=\nu(\emptyset)=1$ und identifiziert $H^{\operatorname{SV}}(M\sqcup N)\simeq H^{\operatorname{SV}}(M)\oplus H^{\operatorname{SV}}(N)$ bzw. über eine Künneth-Identifikation mit einem Tensorprodukt.}
+\end{enumerate}
+Somit kann $M\mapsto H^{\operatorname{SV}}(M)$ als \emph{lokal funktorielle TQFT} (prä-TQFT im Sinne einer Faktorisationstheorie) interpretiert werden: Lokalität folgt aus (a), korrekte Randterme aus (b), und kovariante Funktorialität (samt Monoidalität) aus (c).
+\end{PROP}
+
+\begin{PROOF}{SV-QFT.6}{Beweisskizze}
+\emph{Zu (a).} Auf Komplexebene ist
+\[
+\Omega^{\operatorname{SV}}(U):=\Omega^{n-1}(SU)\oplus\Omega^n(U),
+\qquad
+d_{\operatorname{SV}}(\Phi,\Psi)=(d\Phi+\pi^*\Psi,\ d\Psi).
+\]
+Die üblichen Beweise für Mayer--Vietoris/Exzision in de~Rham-Kohomologie übertragen sich wortwörtlich, da $d$ und $\pi^*$ restriktionskompatibel sind und $d_{\operatorname{SV}}^2=0$ gilt. Die Additivität der Auswertung 
+\[
+\mu_{(\Phi,\Psi)}(K):=\int_{N(K)}\Phi+\int_K\Psi
+\]
+liefert die Klebebedingung: Aus $\mu(K\cup L)=\mu(K)+\mu(L)-\mu(K\cap L)$ folgt die Surjektivität von $(r_U,r_V)$ und die Exaktheit in der Mitte.
+
+\smallskip
+\emph{Zu (b).} Sei $(\Phi,\Psi)$ $d_{\operatorname{SV}}$-geschlossen. Für glatte $K$ schreibt Stokes auf $N(K)$
+\[
+\int_{N(K)}d\Phi\;=\;-\int_{N(K)}\pi^*\Psi
+\]
+und die Identität
+\(
+\alpha|_{N(K)}=0
+\)
+stellt sicher, daß keine zusätzlichen Randanteile auf $SM$ entstehen. Anwenden auf die Inklusions-Exklusions-Zerlegung $(K,L,K\cap L,K\cup L)$ liefert genau die Randkompatibilität.
+
+\smallskip
+\emph{Zu (c).} Naturverträglichkeit folgt aus Funktorialität von Pullbacks und der Naturverträglichkeit des Normalzyklus: $f_*(N(K))=N(f(K))$. Für disjunkte Vereinigungen zerfällt $SU\sqcup SV$ in die disjunkte Summe der Kontaktbündel; damit spalten Formen und Auswertungen komponentenweise. Dies definiert die externe Monoidalisierung, die (bei geeigneter Wahl der Einheitsklasse) mit der üblichen TQFT-Regel $Z(M\sqcup N)\simeq Z(M)\otimes Z(N)$ kompatibel ist (Künneth).
+\end{PROOF}
+
+\begin{REM}{SV-QFT.6a}{Faktorisation-Algebra und \texorpdfstring{$E_n$}{En}-Struktur}
+Die Familie $U\mapsto H^{\operatorname{SV}}(U)$ bildet ein Prä-Cosheaf mit Verklebung entlang disjunkter Vereinigungen. Mit der Alesker-Produktstruktur auf glatten Valuations erhält man zusätzlich eine lokale Multiplikation, die (auf geeigneten Klassen) eine $E_n$-ähnliche Struktur induziert. Dies ist die präzise Variante der Aussage „lokale TQFT“.
+\end{REM}
+
+\begin{EXA}{SV-QFT.6b}{Explizites Kleben für $K=K_1\cup K_2$}
+Sei $(\Phi,\Psi)$ geschlossen. Dann
+\[
+\mu(K_1\cup K_2)=\int_{N(K_1\cup K_2)}\Phi+\int_{K_1\cup K_2}\Psi.
+\]
+Schreibe $N(K_1\cup K_2)=N(K_1)\cup N(K_2)\cup C$, wobei $C$ der „Ecken“-Anteil über $N(K_1\cap K_2)$ ist. Wegen $d\Phi=-\pi^*\Psi$ heben sich die Zusatzbeiträge aus $C$ exakt mit $\int_{K_1\cap K_2}\Psi$ auf, so dass
+\[
+\mu(K_1\cup K_2)=\mu(K_1)+\mu(K_2)-\mu(K_1\cap K_2).
+\]
+Dies ist die geometrische Form der MV-Gleichung.
+\end{EXA}
+
+
+\pagebreak
+
+\section{Poincare-Welten und Modallogik}
+
+\textbf{Definition (Symmetrie-Relation).}
+Sei $T$ eine Theorie und $\mathrm{Sym}(T)$ ihre Symmetriegruppe.
+Definiere eine Relation $\mathcal{R}_T$ auf $\mathrm{Mod}(T)$ durch
+\[
+\mathcal{M}\,\mathcal{R}_T\,\mathcal{M}' \;\Longleftrightarrow\;
+\exists S\in\mathrm{Sym}(T):\ \mathcal{M}' = S(\mathcal{M}).
+\]
+Dann gilt:
+\[
+\Box_T\varphi := \text{„$\varphi$ gilt in allen $\mathcal{R}_T$-verwandten Welten“}.
+\]
+
+\textbf{Fakt.}
+Ist $S$ eine Isometrie der Minkowski-Metrik, so ist
+\[
+(M,\eta)\,\mathcal{R}_T\,(M,\eta),
+\]
+d.h. alle Poincaré-transformierten Raumzeiten sind modallogisch identisch.
+Unterscheidung entsteht erst durch zusätzliche Inhalte $(M,\eta,\phi)$ mit $\phi\neq S^*\phi$.
+
+\paragraph{Modal-funktoriale Struktur zwischen Raumzeit und Feldern.}
+
+Sei $T$ eine relativistische Feldtheorie mit Raumzeit $(M,g)$ und Symmetriegruppe
+$\mathrm{Sym}(T)\subseteq \mathrm{Iso}(M,g)$.
+Die Felder der Theorie sind als Schnitte eines Faserbündels
+$\pi:E_\rho\to M$ mit typischem Faserraum $V_\rho$
+und einer Darstellung $\rho:\mathrm{Sym}(T)\to\mathrm{GL}(V_\rho)$ modelliert.
+
+Die Wirkung der Symmetriegruppe auf den Raum der Schnitte
+$\Gamma(E_\rho)$ kann dann als \emph{Modalfunktor}
+\[
+\rho:\ \mathrm{Sym}(T)\ \longrightarrow\ \mathrm{Aut}\!\big(\Gamma(E_\rho)\big)
+\]
+interpretiert werden, wobei
+\[
+\rho(S)(\phi)\;=\;\rho(S)\circ \phi\circ S^{-1},
+\qquad S\in\mathrm{Sym}(T),\;\phi\in\Gamma(E_\rho).
+\]
+Formal beschreibt $\rho$ die \emph{modale Zugänglichkeit} zwischen
+verschiedenen physikalischen Beschreibungen:
+jedes $S$ verbindet zwei mögliche Welten (Modelle) $(M,g,\phi)$ und $(M,g,\rho(S)\phi)$,
+die durch die Symmetriebeziehung $\mathcal{R}_T$ äquivalent sind.
+Der Funktor
+\[
+\rho:\ (\mathrm{Sym}(T),\circ)\longrightarrow(\mathrm{Aut}(\Gamma(E_\rho)),\circ)
+\]
+bildet somit Gruppenkomposition auf die Komposition von
+Automorphismen ab und implementiert eine \emph{modallogische Semantik} der Form
+\[
+\Box_S\,\varphi \;:\Longleftrightarrow\;
+\forall \phi'\,(\phi'\!=\!\rho(S)\phi\ \Rightarrow\ \varphi(\phi')).
+\]
+Diese Struktur verknüpft drei bisher weitgehend getrennte Bereiche:
+
+\begin{enumerate}
+\item \textbf{Bündelgeometrie:} Felder als Schnitte von assoziierten Bündeln mit Gruppenwirkung.
+\item \textbf{Darstellungstheorie:} Implementierung der Raumzeit-Symmetrien auf Zustandsräumen und Operatoren (Wigner-Darstellungen, Haag–Kastler-Netze).
+\item \textbf{Modallogik:} Interpretation von Symmetrien als modale Erreichbarkeitsrelationen zwischen isomorphen physikalischen Welten.
+\end{enumerate}
+
+Eine offene Forschungsfrage ergibt sich aus der Verbindung zu algebraischer Quantenfeldtheorie (AQFT):
+\[
+\text{Wie lassen sich modallogische Strukturen
+(Accessibility, Necessity)
+im Rahmen der AQFT rekonstruieren?}
+\]
+Insbesondere stellt sich die Frage, ob sich der lokale Operatoralgebra-Funktor
+\[
+\mathcal{O}\ \longmapsto\ \mathfrak{A}(\mathcal{O})
+\]
+in einen erweiterten modalen Funktorrahmen einbetten lässt,
+der die Lorentz-Kovarianz und Kausalstruktur als
+modallogische Zugänglichkeit abbildet.
+
+\bigskip
+
+\paragraph{Weiterführende Literatur.}
+\begin{itemize}
+\item J. Earman, \emph{World Enough and Space-Time}, MIT Press, 1989.
+\item G. Belot, „Symmetry and Equivalence,“ in \emph{The Stanford Encyclopedia of Philosophy}, 2022.
+\item J. Weatherall, „Are Newtonian Gravitation and Geometrized Newtonian Gravitation Theoretically Equivalent?“, \emph{Erkenntnis} 81(5), 2016.
+\item J. Butterfield \& C. J. Isham, „A Topos Perspective on the Kochen–Specker Theorem,“ \emph{Int. J. Theor. Phys.} 37 (1998).
+\item H. Ruetsche, \emph{Interpreting Quantum Theories}, Oxford University Press, 2011.
+\item H. Halvorson \& M. Müger, „Algebraic Quantum Field Theory,“ in: \emph{Handbook of the Philosophy of Physics}, Elsevier, 2007.
+\item R. Clifton \& H. Halvorson, „Are Haags and Isomorphisms Equivalent?“, \emph{Foundations of Physics} 33, 2003.
+\item S. de Haro, „Symmetries and Equivalence in Physics,“ \emph{Studies in History and Philosophy of Modern Physics} 71, 2020.
+\end{itemize}
+
+\paragraph{(D) Equivalence and Identity in the Moduli Space of Physical Models.}
+
+Sei $T$ eine physikalische Theorie im semantischen Sinn, deren Modelle
+$\mathrm{Mod}(T)$ jeweils vollständige physikalisch mögliche Welten repräsentieren.
+Zwei Modelle $\mathcal{M}_1,\mathcal{M}_2\in\mathrm{Mod}(T)$ heißen
+\emph{äquivalent}, wenn sie durch eine Symmetrie der Theorie ineinander überführbar sind:
+\[
+\mathcal{M}_1 \sim_T \mathcal{M}_2
+\quad\Longleftrightarrow\quad
+\exists\,S\in\mathrm{Sym}(T):\ \mathcal{M}_2 = S(\mathcal{M}_1).
+\]
+Die Äquivalenzrelation $\sim_T$ induziert die Faktorisierung
+\[
+\mathrm{Mod}(T)/\mathrm{Sym}(T)\;=\;\mathfrak{M}_T,
+\]
+die als \emph{Moduli-Raum physikalischer Modelle} interpretiert werden kann.
+Dieser Raum kodiert alle \emph{physikalisch unterschiedlichen Welten}
+unter Quotientierung der reinen Redundanzen (Symmetrien) der Beschreibung.
+
+\smallskip
+Jeder Punkt $[\mathcal{M}]\in \mathfrak{M}_T$ steht somit für eine Äquivalenzklasse
+von Modellen, die dieselben physikalischen Sachverhalte,
+aber möglicherweise unterschiedliche Repräsentationen besitzen.
+Formal kann man dies als Kategorie-Autokollaps auffassen:
+\[
+\mathbf{Mod}(T) \;\longrightarrow\; \mathbf{Mod}(T)/\mathrm{Sym}(T),
+\]
+wobei die Objekte Modelle und die Morphismen Symmetrie-Isomorphismen sind.
+
+\smallskip
+Der Moduli-Raum $\mathfrak{M}_T$ besitzt eine natürliche modallogische Struktur.
+Definiert man die Relation
+\[
+[\mathcal{M}]\,R_T\,[\mathcal{M}']\quad:\Longleftrightarrow\quad
+\exists\,S\in\mathrm{Sym}(T):\ \mathcal{M}'=S(\mathcal{M}),
+\]
+so ist $(\mathfrak{M}_T,R_T)$ ein Kripke-Rahmen,
+in dem $\Box_T\varphi$ die Invarianz einer Aussage $\varphi$
+unter allen Symmetrien ausdrückt.
+Die modale Logik dieses Rahmens beschreibt die \emph{Struktur der theoretischen Identität}:
+Wann zwei formale Repräsentationen denselben physikalischen Gehalt besitzen.
+
+\smallskip
+Eine Forschungsrichtung besteht darin, die logischen und kategorialen Eigenschaften
+von $\mathfrak{M}_T$ systematisch zu untersuchen:
+\begin{itemize}
+\item Welche Topologie oder Differenzierbarkeit kann $\mathfrak{M}_T$ tragen?
+\item Wie lässt sich Identität innerhalb eines Modells formal von Äquivalenz zwischen Modellen unterscheiden?
+\item Gibt es einen Funktor $\mathfrak{M}:(\text{Theories})\to(\text{ModalFrames})$, der Theorien auf ihre Moduli-Räume und Invarianzlogiken abbildet?
+\end{itemize}
+Diese Fragen verbinden Physikphilosophie, mathematische Physik und Kategorientheorie
+in einem einheitlichen modalen Rahmen und erlauben, physikalische Äquivalenz als
+eine Form logischer Identität zu verstehen.
+
+\bigskip
+
+\paragraph{Weiterführende Literatur.}
+\begin{itemize}
+\item J. Earman, \emph{World Enough and Space-Time}, MIT Press, 1989.
+\item G. Belot, „Symmetry and Equivalence,“ \emph{Stanford Encyclopedia of Philosophy}, 2022.
+\item J. Weatherall, „Category Theory and the Structure of Space-Time,“
+      \emph{Philosophy of Science} 81 (2014).
+\item S. de Haro, „Symmetries and Equivalence in Physics,“
+      \emph{Studies in History and Philosophy of Modern Physics} 71 (2020).
+\item E. Curiel, „Classical Spacetime Structure,“
+      \emph{Stanford Encyclopedia of Philosophy}, 2021.
+\item J. Butterfield \& C. Isham, „A Topos Perspective on Physics,“
+      \emph{Int. J. Theor. Phys.} 37 (1998–2000).
+\item N. Swanson \& H. Halvorson, „On North’s Argument for the Nonfundamentality of Symmetries,“
+      \emph{The British Journal for the Philosophy of Science} 63 (2012).
+\item E. Knox, „Spacetime Structuralism and the Symmetry Problem,“
+      \emph{Erkenntnis} 79 (2014).
+\end{itemize}
+
+
+\paragraph{Ein Funktor $\mathfrak{M}:(\mathbf{Theories})\to(\mathbf{ModalFrames})$.}
+Wir skizzieren eine präzise, aber flexible Funktorkonstruktion, die einer physikalischen
+Theorie einen Moduli-Raum von Modellen \emph{mitsamt} einer kanonischen Invarianz- (bzw.\ 
+Erreichbarkeits-)Relation zuordnet und so einen Kripke-Rahmen erzeugt.
+
+\subsubsection*{1. Quellen- und Zielkategorie}
+
+\begin{itemize}
+\item \textbf{Quellkategorie $\mathbf{Theories}$.}
+Ein Objekt $T\in\mathbf{Theories}$ bestehe aus:
+\[
+T=(\mathrm{Mod}(T),\,\mathrm{Sym}(T),\,\curvearrowright),
+\]
+wobei $\mathrm{Mod}(T)$ die Klasse/der Raum der Modelle von $T$ ist, 
+$\mathrm{Sym}(T)$ eine \emph{Symmetriegruppe} (oder -gruppeoid) der Theorie und
+$\curvearrowright:\mathrm{Sym}(T)\curvearrowright \mathrm{Mod}(T)$ eine (links-)Aktion, die 
+\emph{theoretische Äquivalenz} generiert. 
+Ein Morphismus $F:T\to T'$ ist ein Paar $(F_{\!*},F^\sharp)$ mit
+\[
+F_{\!*}:\mathrm{Mod}(T)\to\mathrm{Mod}(T'),\qquad
+F^\sharp:\mathrm{Sym}(T)\to\mathrm{Sym}(T'),
+\]
+so dass $F_{\!*}$ \emph{äquivariant} bzgl.\ der Aktionen ist:
+\[
+F_{\!*}(g\cdot M)\;=\;F^\sharp(g)\cdot F_{\!*}(M)\qquad(\forall\,g\in\mathrm{Sym}(T),\,M\in\mathrm{Mod}(T)).
+\]
+(Dies umfasst Interpretations- oder „Übersetzungs“-Morphismen zwischen Theorien.)
+
+\item \textbf{Zielkategorie $\mathbf{ModalFrames}$.}
+Ein Objekt ist ein (evtl.\ strukturierter) Kripke-Rahmen 
+\[
+\mathcal{F}=(W,R)
+\]
+(mit optionaler Topologie $\tau$, d.h.\ \emph{topologischer Kripke-Rahmen} $(W,\tau,R)$). 
+Ein Morphismus $h:(W,R)\to(W',R')$ sei ein \emph{bounded morphism} (auch $p$-Morphismus):
+\[
+\text{(i) } h \text{ surjektiv/„p-bounded“, }\quad
+\text{(ii) } w\,R\,v \Rightarrow h(w)\,R'\,h(v),\quad
+\text{(iii) } h(w)\,R'\,v' \Rightarrow \exists\,v\ (w\,R\,v\ \&\ h(v)=v').
+\]
+(Bei topologischer Zusatzstruktur fordern wir Stetigkeit von $h$.)
+\end{itemize}
+
+\subsubsection*{2. Konstruktion auf Objekten: Moduli-Raum und Invarianzlogik}
+
+Für $T=(\mathrm{Mod}(T),\mathrm{Sym}(T),\curvearrowright)$ definieren wir:
+\[
+\mathfrak{M}(T)\ :=\ \bigl(W_T,R_T\bigr),
+\]
+wobei
+\[
+W_T\ :=\ \mathrm{Mod}(T)/\!\sim_T\quad\text{mit}\quad 
+M\sim_T M'\iff \exists g\in\mathrm{Sym}(T):\ M'=g\cdot M
+\]
+der \emph{Moduli-Raum} (Orbitraum) ist, und $R_T$ die \emph{Erreichbarkeitsrelation}:
+\[
+[\,M\,]\;R_T\;[\,M'\,] \quad:\Longleftrightarrow\quad
+\exists\,g\in\mathrm{Sym}(T):\ M'=g\cdot M.
+\]
+Damit wird $\mathfrak{M}(T)$ zu einem Kripke-Rahmen, dessen $\Box$-Operator die 
+\emph{Symmetrie-Invarianz} ausdrückt: $\Box\varphi$ heißt „$\varphi$ gilt in allen
+Symmetrie-Varianten dieses Modells“. Optional:
+\begin{itemize}
+\item Trägt $\mathrm{Mod}(T)$ eine kanonische Topologie (z.B.\ Whitney-/Kompakt-offen, 
+Fell, Gelfand), so erhält $W_T$ die Quotiententopologie; mit ihr wird 
+$(W_T,\tau_T,R_T)$ zum topologischen Kripke-Rahmen.
+\item Anstelle des Orbits \emph{Raums} kann man die \emph{Aktionsgruppeoid-Stack}
+$[\mathrm{Mod}(T)/\mathrm{Sym}(T)]$ verwenden; modallogisch entspricht dies
+der „differenzierten“ Unterscheidung von Repräsentanten innerhalb der Orbitklasse.
+\end{itemize}
+
+\paragraph{Bemerkung (Äquivalente algebraische Fassung).}
+Über Jónsson–Tarski/Stone-Dualität kann man $\mathfrak{M}(T)$ äquivalent als 
+\emph{modale Algebra} (Boole’sche Algebra mit einem Normaloperator $\Box_T$) auffassen:
+\[
+\mathcal{A}_T\ :=\ \bigl(\mathsf{Clop}(W_T),\,\Box_T\bigr),\qquad
+\Box_T U\ :=\ \{\,w\in W_T: R_T(w)\subseteq U\,\}.
+\]
+
+\subsubsection*{3. Konstruktion auf Morphismen: Funktorialität}
+
+Sei $F=(F_{\!*},F^\sharp):T\to T'$ ein Theorie-Morphismus (äquivariant).
+Wir definieren
+\[
+\mathfrak{M}(F)\ :=\ h_F:\ \mathfrak{M}(T)=(W_T,R_T)\ \longrightarrow\ \mathfrak{M}(T')=(W_{T'},R_{T'})
+\]
+durch
+\[
+h_F\big([M]\big)\ :=\ \big[\,F_{\!*}(M)\,\big].
+\]
+\emph{Wohldefiniertheit:} Ist $M'\sim_T M$, so $M'=g\cdot M$ für ein $g\in\mathrm{Sym}(T)$.
+Äquivariantheit liefert
+\[
+F_{\!*}(M')=F_{\!*}(g\cdot M)=F^\sharp(g)\cdot F_{\!*}(M)\ \sim_{T'}\ F_{\!*}(M),
+\]
+also $[F_{\!*}(M')]=[F_{\!*}(M)]$. 
+
+\emph{$p$-Morphismen-Eigenschaften:} 
+\begin{align*}
+&\text{(Preservation)}\quad [M]\,R_T\,[N]\ \Rightarrow\ \exists g:\ N=g\cdot M 
+\\[-2pt]
+&\hspace{1.5cm}\Rightarrow\ h_F([N])=[F_{\!*}(N)]=[F^\sharp(g)\cdot F_{\!*}(M)]\ =\ R_{T'}(h_F([M])),\\[4pt]
+&\text{(Back condition)}\quad 
+h_F([M])\,R_{T'}\,[N']\ \Rightarrow\ \exists g'\in\mathrm{Sym}(T'): N'=g'\cdot F_{\!*}(M)\\[-2pt]
+&\hspace{1.5cm}\Rightarrow\ \text{(unter milder Vollständigkeit von $F^\sharp$):}\ 
+\exists g\in\mathrm{Sym}(T)\ \text{mit }F^\sharp(g)=g'
+\\[-2pt]
+&\hspace{1.5cm}\Rightarrow\ h_F([g\cdot M])=[g'\cdot F_{\!*}(M)]=[N']\ \text{ und } [M]\,R_T\,[g\cdot M].
+\end{align*}
+Damit ist $h_F$ ein Morphismus in $\mathbf{ModalFrames}$. 
+Identitäten und Kompositionen sind offensichtlich funktoriell:
+\[
+\mathfrak{M}(\mathrm{id}_T)=\mathrm{id}_{\mathfrak{M}(T)},\qquad 
+\mathfrak{M}(F'\circ F)=\mathfrak{M}(F')\circ\mathfrak{M}(F).
+\]
+
+\subsubsection*{4. Beispiele}
+
+\begin{romanenum}[Beispiele]
+\item \textbf{SRT mit skalaren Feldern.} 
+$\mathrm{Mod}(T)$ = Menge glatter Lösungen $\phi$ von $(\Box_\eta+m^2)\phi=0$, 
+$\mathrm{Sym}(T)=\mathcal{P}=\mathbb{R}^{1,3}\rtimes SO^+(1,3)$, 
+$(a,\Lambda)\cdot \phi=\phi\circ(\Lambda^{-1}(\,\cdot\,-a))$.
+Dann ist $W_T=\mathrm{Sol}/\mathcal{P}$, $R_T$ die von $\mathcal{P}$ induzierte Erreichbarkeit;
+$\Box$ entspricht Poincaré-Invarianz.
+Ein Masseskalenwechsel $m\mapsto m'$ definiert $F:T_m\to T_{m'}$ mit $F_{\!*}=0$ (falls $m\neq m'$),
+oder die Identität (falls $m=m'$); entsprechend trivial/nichttrivial ist $h_F$.
+
+\item \textbf{Yang–Mills (klassisch, fixierte Topologie).} 
+$\mathrm{Mod}(T)$ = Raum glatter Verbindungen modulo \emph{passender} Eichäquivalenz,
+$\mathrm{Sym}(T)$ = (globale) Raumzeit-Isometrien \emph{und} interne globale Symmetrien.
+$\mathfrak{M}(T)$ trennt physikalische von rein darstellungsbedingten Äquivalenzen; 
+$R_T$ kodiert Symmetrie-„Modality“ (z.B.\ Topologie der Orbiträume, Strata).
+
+\item \textbf{AQFT.}
+$T$ sei ein Haag–Kastler-Netz $O\mapsto \mathcal{A}(O)$ auf Minkowski;
+$\mathrm{Mod}(T)$ = (repräsentierte) Zustands-/Darstellungsräume mit Netzinvarianz,
+$\mathrm{Sym}(T)$ = Poincaré (+ interne Automorphismen). 
+$\mathfrak{M}(T)$ liefert einen modalen Rahmen über Sektoren/Phasen, 
+$R_T$: Erreichbarkeit per Symmetrie-Induktion.
+\end{romanenum}
+
+\subsubsection*{5. Varianten und Verfeinerungen}
+
+\begin{itemize}
+\item \textbf{Coalgebraische Fassung.} 
+Wähle ein Endofunktor $F:\mathbf{Set}\to\mathbf{Set}$, der die Symmetrie-Dynamik kodiert
+(z.B.\ $F(X)=\mathcal{P}(G\times X)$). Ein \emph{coalgebraisches Modell} 
+$\gamma:W\to F(W)$ erzeugt eine kanonische Modalität. 
+Dann faktorisiert $\mathfrak{M}$ über eine Kategorie geeigneter $F$-Coalgebren.
+
+\item \textbf{Stacks/Groupoids.}
+Ersetze den Orbitraum durch die \emph{Aktionsgruppeoid-Stack} $[\mathrm{Mod}/\mathrm{Sym}]$.
+Modallogik wirkt via interner (2-)Morphismen; Identität/Äquivalenz wird feiner differenziert.
+
+\item \textbf{Modale Algebren.}
+Per Jónsson–Tarski erhält man $\widehat{\mathfrak{M}}(T)=\mathcal{A}_T$ 
+(Boole + $\Box_T$) und Funktorialität via modale Homomorphismen.
+\end{itemize}
+
+\subsubsection*{6. Inhaltliche Bedeutung}
+$\mathfrak{M}$ macht die Unterscheidung \emph{„Gleichheit bis Symmetrie“} vs.\ 
+\emph{„physikalisch unterschiedliche Welten“} logisch sichtbar:
+\[
+\begin{cases}
+\text{Orbitpunkte }[M]\in W_T:\ \text{physikalische Identitäten (Moduli)}\\
+R_T:\ \text{„Möglichkeiten“ erzeugt durch Theoriesymmetrien}\\
+\Box_T:\ \text{Notwendigkeit = Invarianz unter allen Symmetrien.}
+\end{cases}
+\]
+Damit erhält man einen präzisen Brückenschlag zwischen Bündel-/Symmetriegeometrie, 
+Modell-Theorie der Physik und Modallogik.
+
+\bigskip
+\paragraph{Literaturhinweise (Auswahl).}
+\begin{itemize}
+\item J. Earman, \emph{World Enough and Space-Time}, MIT Press, 1989.
+\item H. Halvorson \& M. Müger (eds.), \emph{Deep Beauty}, CUP, 2011.
+\item C. J. Isham \& J. Butterfield, „A Topos Perspective on Physics,“ \emph{Int.\ J.\ Theor.\ Phys.} 37 (1998–2000).
+\item J. Weatherall, „Category Theory and the Structure of Space-Time,“ \emph{Phil.\ Sci.} 81 (2014).
+\item S. de Haro, „Symmetries and Equivalence in Physics,“ \emph{SHPPMP} 71 (2020).
+\item H. Ruetsche, \emph{Interpreting Quantum Theories}, OUP, 2011.
+\item A. Baltag, „Coalgebraic Modal Logic,“ in: \emph{Handbook of Modal Logic}, Elsevier, 2006.
+\item P. Blackburn, M. de Rijke, Y. Venema, \emph{Modal Logic}, CUP, 2001.
+\item S. Abramsky, „Domain Theory in Logical Form,“ \emph{Annals of Pure and Applied Logic} 51 (1991).
+\end{itemize}
+
+
+\section*{Epistemische und logische Dynamik im relativistischen Rahmen}
+
+\subsection*{1. Semantischer Grundaufbau (Welten, Relationen, Modalitäten)}
+\begin{itemize}
+\item \emph{Weltenraum.} Sei
+\[
+W\ :=\ \Big\{\, w=(M,\eta;\,F;\,e)\ \Big|\ (M,\eta)\ \text{Minkowski-Raumzeit},\ F\ \text{(Skalar- oder Spinor-)Feldkonfiguration},\ e
+\ \text{inertiales Bezugstripel}\ \Big\}.
+\]
+Für konkrete Rechnungen kann man $(M,\eta)=(\mathbb R^4,\eta)$ annehmen und $e=(x,u)$ aus einem Bezugspunkt $x$ und einer zukunftsgerichteten Einheits\-viergeschwindigkeit $u$.
+
+\item \emph{Symmetriegruppe.} $G:=\mathrm{Poinc}=\mathbb R^{1,3}\rtimes \mathrm{Lor}^\uparrow_+$ wirkt \emph{links} auf $W$ via
+\[
+g\cdot (x,u;F)\ :=\ \big(\Lambda x+a,\ \Lambda u;\ \rho(g)F\big),\qquad g=(a,\Lambda)\in G,
+\]
+wobei $\rho$ eine (unitäre bzw.\ geometrische) Darstellung auf dem Felderraum ist (bei Skalarfeldern $\rho(g)F=F\circ g^{-1}$).
+
+\item \emph{Lorentz-Accessibility (physikalische Möglichkeit durch Symmetrie).}
+\[
+R_L\ \subseteq\ W\times W,\qquad w\,R_L\,w' \iff \exists g\in \mathrm{Lor}^\uparrow_+:\ w'=g\cdot w.
+\]
+Der $\Box$-Operator für diese Relation sei $\Box_L$; seine Semantik ist:
+\[
+w\models \Box_L\varphi\quad\Longleftrightarrow\quad \forall w'\ (w\,R_L\,w'\ \Rightarrow\ w'\models \varphi).
+\]
+Intuitiv: $\varphi$ ist \emph{Lorentz-notwendig}.
+
+\item \emph{Epistemische Accessibility pro Beobachter $i$.} Für einen Agenten/Beobachter $i$ mit Weltlinie $\gamma_i$ definieren wir eine \emph{Indistinguishbarkeitsrelation}
+\[
+R_i\ \subseteq\ W\times W,\qquad
+w\,R_i\,w' \iff \mathcal O_i\!\big(w\mid J^-(\gamma_i)\big)=\mathcal O_i\!\big(w'\mid J^-(\gamma_i)\big),
+\]
+d.\,h.\ alle von $i$ prinzipiell zugänglichen Beobachtungsdaten in der eigenen Vergangenheitslichtkegel-Region stimmen überein. (Äquivalent: gleiche Realisierung einer von $i$ beherrschten $\sigma$-Algebra messbarer Observablen.)
+Der zugehörige Wissensoperator ist $K_i$ mit Semantik
+\[
+w\models K_i\varphi\quad\Longleftrightarrow\quad \forall w'\ (w\,R_i\,w'\ \Rightarrow\ w'\models \varphi).
+\]
+Je nach Messmodell ist $R_i$ typischerweise eine Äquivalenzrelation (S5) oder eine
+prä\-ordnung (S4).
+
+\item \emph{Gemeinsames Wissen.} Für eine Menge $I$ von Beobachtern:
+$E\varphi:=\bigwedge_{i\in I} K_i\varphi$ und \emph{common knowledge}
+$C\varphi:=\bigwedge_{n\ge 0} E^n\varphi$.
+\end{itemize}
+
+\subsection*{2. Interaktionsaxiome zwischen Physik ($\Box_L$) und Wissen ($K_i$)}
+\begin{description}
+\item[(Inv)] \emph{Invarianz der Gesetze.} Für jede Gesetzesformel $\mathsf{Law}$ gilt
+\[
+\Box_L\,\mathsf{Law}.
+\]
+\item[(Sym-K)] \emph{Erhobene Symmetriewahrheit wird (gemeinsames) Wissen.} Wenn Agenten das Symmetrieprinzip als solches kennen, formalisierbar durch eine Meta-Prämisse
+\[
+\mathsf{KnowSym}:=\bigwedge_{i\in I}\ K_i\big(\varphi\leftrightarrow \Box_L\varphi\ \text{für alle Gesetzesformeln }\varphi\big),
+\]
+dann folgt für jede Lorentz-invariante Aussage $\varphi$:
+\[
+\Box_L\varphi\ \Longrightarrow\ C\,\varphi.
+\]
+\emph{Lesart:} Invarianz hebt Aussagen von bloßer Welt- zu gemeinsamer Wissensebene.
+
+\item[(Lift)] \emph{Symmetrie-Wissen-Lift für Beobachter.} Falls $\varphi$ ein Lorentz-Skalar ist (z.\,B.\ $F_{\mu\nu}F^{\mu\nu}$ oder $s^2=\eta_{\mu\nu}\Delta x^\mu\Delta x^\nu$), dann
+\[
+\Box_L\varphi\ \Rightarrow\ K_i\varphi\quad\text{für alle }i.
+\]
+\emph{Intuition:} Ein Lorentzskalare Aussage bleibt wahr in allen $R_i$-Welten, sobald der Beobachter $i$ das Invarianzprinzip internalisiert.
+
+\item[(Mix)] \emph{Gekreuzte Modalität.} Für jede Formel $\psi$:
+\[
+\Box_L K_i\psi\ \Longrightarrow\ K_i\Box_L\psi.
+\]
+\emph{Lesart:} Wenn in allen Lorentz-bezogenen Welten $i$ weiß, dass $\psi$, dann weiß $i$ (in der aktuellen Welt), dass $\psi$ Lorentz-notwendig ist.
+\end{description}
+
+\subsection*{3. Dynamische Epistemik: Mess-Updates als Aktionsmodelle}
+\begin{itemize}
+\item \emph{Messereignis.} Ein Experiment $E$ (z.\,B.\ Frequenzmessung einer Lichtquelle bei Relativgeschwindigkeit) wird als öffentlicher Aktionsoperator $[!E]$ modelliert, der $R_i$ zu $R_i^{\,E}$ verfeinert:
+\[
+R_i^{\,E}\ :=\ R_i\ \cap\ \{(w,w')\mid \text{$E$ liefert identische Ausgänge in $w,w'$}\}.
+\]
+\item \emph{Update-Gesetz.} Nach Ausführung von $E$ gilt:
+\[
+w \models [!E]\varphi\quad\Longleftrightarrow\quad \text{im $E$-restriktierten Modell gilt }\varphi.
+\]
+\item \emph{Beispiel (Rapidity-Schätzung).} Misst $i$ eine Rapidity $y$ relativ zu einer Quelle, so erzwingt $[!\,y]$ die Relation
+\[
+K_i\big(v=\tanh y,\ \gamma=\cosh y\big)\ \ \text{nach dem Update,}
+\]
+und für jeden Lorentz-Skalar $\sigma(F)$:
+\[
+[!\,y]\ \Box_L\,\sigma(F)\quad\Rightarrow\quad [!\,y]\ K_i\,\sigma(F).
+\]
+\emph{Lesart:} Messungen reduzieren epistemische Unsicherheit (Verfeinerung von $R_i$), Invarianz hebt Resultate in Wissen.
+\end{itemize}
+
+\subsection*{4. Kanonische Beispiele und Rechnungen}
+\begin{enumerate}
+\item \emph{Intervall-Invarianz wird Wissen.} Für $s^2=\eta_{\mu\nu}\Delta x^\mu\Delta x^\nu$:
+\[
+\Box_L(s^2=\text{const})\quad\Rightarrow\quad K_i(s^2=\text{const})\quad(\forall i).
+\]
+\emph{Begründung:} $s^2$ ist Lorentz-Skalar; (Lift) liefert die $K_i$-Hebung.
+
+\item \emph{Doppler-Formel als Wissens-Update.} Misst $i$ die Frequenz $\nu'$ eines monochromatischen Signals bekannter Quellenfrequenz $\nu$, so gilt nach $[!\,y]$:
+\[
+K_i\Big(\nu'=\nu\,e^{-y}\Big),
+\]
+und sofern $\nu$ als Lorentz-Skalarer Parameter gilt, bleibt $K_i(\nu)$ durch (Lift) stabil.
+
+\item \emph{No-Signalling als epistemische Monotonie.} Wenn $R_i$ durch Kausalstruktur ($J^-$) bestimmt ist, dann erzwingt jede Aktion $[!E]$, deren Träger raumartig zu $\gamma_i$ liegt, 
+\[
+[!E]\ K_i\varphi\ \leftrightarrow\ K_i\varphi,
+\]
+d.\,h.\ raumartige Events ändern $i$'s Wissen nicht (keine $R_i$-Verfeinerung).
+\end{enumerate}
+
+\subsection*{5. Verknüpfung mit Bündeln und Darstellungen}
+Sei $\pi:E\to M$ das assoziierte Bündel eines $\mathrm{Lor}^\uparrow_+$-Prinzipalbündels; Felder sind Schnitte $\Gamma(E)$. Die Gruppenwirkung induziert
+\[
+\rho:\ \mathrm{Lor}^\uparrow_+\ \longrightarrow\ \mathrm{Aut}\big(\Gamma(E)\big),\qquad 
+(\rho(\Lambda)\phi)(x)\ :=\ \Lambda\cdot \phi(\Lambda^{-1}x).
+\]
+Die modale Operatorik ergibt sich funktoriell:
+\[
+\Box_L\ \text{entspricht dem Orbitabschluss in }W,\qquad
+K_i\ \text{entspricht dem Quotienten nach }R_i\ \text{(Informationspartition)}.
+\]
+Invarianten sind Schnitte/Observablen in $\Gamma(E)^{\mathrm{Lor}}$, und (Lift) sagt:
+\[
+\Gamma(E)^{\mathrm{Lor}}\ \subseteq\ \text{Fix}(K_i)\quad(\forall i).
+\]
+
+\subsection*{6. Meta-Theoreme (Schema)}
+\begin{description}
+\item[Soundness.] Jedes Axiom aus (Inv), (Sym-K), (Lift), (Mix) ist korrekt bzgl.\ obiger Kripke-Semantik mit $R_L$ und $R_i$.
+\item[Kompositionalität.] Für Symmetrien $G,H$ gilt auf Accessibility-Ebene:
+\[
+R_{G\times H}\ =\ R_G\circ R_H,\qquad
+\Box_{G\times H}\varphi\ \Longleftrightarrow\ \Box_G\Box_H\varphi,
+\]
+und die entsprechenden Wissenslifts verketten sich: $\Box_G\Box_H\varphi\Rightarrow K_i\varphi$.
+\end{description}
+
+\subsection*{7. Konzeptuelle Quintessenz}
+Der Operator $\Box_L$ macht „physikalische Möglichkeit durch Symmetrie“ explizit, $K_i$ macht „Wissen unter kausaler/experimenteller Limitierung“ explizit. Ihre \emph{Interaktion} (Lift, Mix) formalisiert, dass \emph{Invarianten} zugleich \emph{epistemisch stabil} sind, während Messungen ($[!E]$) epistemische Relationen verfeinern, ohne Lorentz-Invarianz zu verletzen. So entsteht ein einheitlicher Kalkül, in dem Relativität (Perspektivwechsel) und Erkenntnis (Informationszustand) \emph{im selben modalen Raum} behandelt werden.
 
 
 \pagebreak

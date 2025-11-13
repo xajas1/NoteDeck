@@ -1,0 +1,1724 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17  Graphik
+% 18  Extra
+% 00. Titel und Autor
+
+\usepackage{slashed}
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Ad}{\operatorname{Ad}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\QU}{\mathbb{H}}
+\newcommand{\Cinf}{C^{\infty}}
+\newcommand{\Mod}{\mathrm{Mod}}
+\newcommand{\Alg}{\mathrm{Alg}}
+\newcommand{\Diff}{\mathrm{Diff}}
+\newcommand{\Iso}{\mathrm{Iso}}
+\newcommand{\Aut}{\mathrm{Aut}}
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Cl}{\mathrm{Cl}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\Mat}{\mathrm{Mat}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\Sp}{\mathrm{Sp}}
+\newcommand{\Spin}{\mathrm{Spin}}
+\newcommand{\Pin}{\mathrm{Pin}}
+\newcommand{\Lor}{\mathrm{Lor}}
+\newcommand{\Ogroup}{\mathrm{O}}
+\newcommand{\U}{\mathrm{U}}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\graphicspath{{../../Library/Images/}}
+\usepackage[export]{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+% Hellblau definieren
+\definecolor{hellblau}{rgb}{0.3,0.6,1}
+\newenvironment{note}{\par\begingroup\color{hellblau}\itshape}{\par\endgroup}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\begin{unitbox}\CustomHeading{Definition}{#1}{#2}}{\end{unitbox}}
+\newenvironment{PROP}[2]{\begin{unitbox}\CustomHeading{Proposition}{#1}{#2}}{\end{unitbox}}
+\newenvironment{THEO}[2]{\begin{unitbox}\CustomHeading{Theorem}{#1}{#2}}{\end{unitbox}}
+\newenvironment{LEM}[2]{\begin{unitbox}\CustomHeading{Lemma}{#1}{#2}}{\end{unitbox}}
+\newenvironment{KORO}[2]{\begin{unitbox}\CustomHeading{Corollar}{#1}{#2}}{\end{unitbox}}
+\newenvironment{REM}[2]{\begin{unitbox}\CustomHeading{Remark}{#1}{#2}}{\end{unitbox}}
+\newenvironment{EXA}[2]{\begin{unitbox}\CustomHeading{Example}{#1}{#2}}{\end{unitbox}}
+\newenvironment{STUD}[2]{\begin{unitbox}\CustomHeading{Study}{#1}{#2}}{\end{unitbox}}
+\newenvironment{CONC}[2]{\begin{unitbox}\CustomHeading{Concept}{#1}{#2}}{\end{unitbox}}
+\newenvironment{OTH}[2]{\begin{unitbox}\CustomHeading{Other}{#1}{#2}}{\end{unitbox}}
+\newenvironment{EXE}[2]{\begin{unitbox}\CustomHeading{Exercise}{#1}{#2}}{\end{unitbox}}
+\newenvironment{MOT}[2]{\begin{unitbox}\CustomHeading{Motivation}{#1}{#2}}{\end{unitbox}}
+\newenvironment{PROOF}[2]{\begin{unitbox}\CustomHeading{Proof}{#1}{#2}}{\end{unitbox}}
+
+% --- Unit Umgebung für Source-Inhalte ---
+\usepackage{mdframed}
+\newmdenv[
+  linewidth=1pt,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftmargin=0cm,
+  rightmargin=0cm,
+  skipabove=10pt,
+  skipbelow=10pt,
+  innertopmargin=0.5\baselineskip,
+  innerbottommargin=0.5\baselineskip,
+  backgroundcolor=gray!10,
+  linecolor=gray
+]{unitbox}
+
+\newenvironment{unit}[1]
+  {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
+  {\end{unitbox}}
+
+% --- 17. ... ---
+
+% --- 18. Extras ---
+\usepackage{stmaryrd}
+\usepackage{bbold}  % falls du \mathbb{1} nutzen willst
+
+% --- 00. Titel und Autor ---
+\title{Mein Titel}
+\author{Tim Jaschik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+Kurze Beschreibung …
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\tableofcontents
+
+\pagebreak
+
+\subsection{Formelle Charakterisierung der Speziellen Relativitätstheorie (SRT)}
+
+\emph{Motivation.}
+Die klassische Mechanik beschreibt physikalische Prozesse in der euklidischen Raumzeit
+$\R^3\times\R$ mit absoluter Zeit.  
+Experimentell (Michelson–Morley, Maxwell-Theorie) zeigte sich jedoch, 
+dass die Lichtgeschwindigkeit $c$ unabhängig vom Beobachter ist.  
+Dies erfordert eine Raumzeitstruktur, in der
+\[
+\text{(i) keine ausgezeichnete Zeitrichtung existiert,}\qquad
+\text{(ii) $c$ eine absolute Invariante ist.}
+\]
+Diese Forderungen führen zu einer geometrischen Raumzeitstruktur mit \emph{Minkowski-Metrik}.
+Die SRT ist daher keine Dynamik, sondern eine \emph{Raumzeit-Theorie} —  
+sie liefert den geometrischen Rahmen, in dem Dynamiken (Felder, Teilchenbewegungen) 
+formuliert werden.
+
+\bigskip
+\emph{1. Geometrische Grundstruktur.}
+\begin{itemize}
+\item Die physikalische Arena ist die \emph{Minkowski-Raumzeit}
+\[
+(M,g) = (\R^{1,3}, \eta),
+\quad
+\eta = \mathrm{diag}(1,-1,-1,-1),
+\]
+eine glatte vierdimensionale Mannigfaltigkeit mit pseudo\-riemann\-scher Metrik $\eta$.
+\item Die Metrik definiert die \emph{kausale Struktur}:
+\[
+ds^2 = \eta_{\mu\nu}dx^\mu dx^\nu
+=
+c^2dt^2 - d\mathbf{x}^2.
+\]
+\item Ereignisse $p,q\in M$ heißen
+zeitartig ($ds^2>0$), lichtartig ($ds^2=0$), oder raumartig ($ds^2<0$).
+\item Die Menge aller linearen Isometrien von $(M,\eta)$ bildet die \emph{Lorentzgruppe}
+\[
+O(1,3)
+= \{\Lambda\in \mathrm{GL}(4,\R)\mid \Lambda^T\eta\Lambda = \eta\}.
+\]
+Deren zusammenhängende und orientierungs-/zeit-orientierte Komponente ist
+\[
+SO^+(1,3) = \{\Lambda\in O(1,3)\mid \det\Lambda=+1,\ \Lambda^0{}_0>0\}.
+\]
+\item Ergänzt durch Raumzeit-Translationen $(a,\Lambda)$ entsteht die \emph{Poincaré-Gruppe}
+\[
+\mathcal P = \R^{1,3}\rtimes SO^+(1,3),
+\]
+die vollständige Isometriegruppe der Minkowski-Raumzeit.
+\end{itemize}
+
+\bigskip
+\emph{2. Physikalische Symmetrieprinzipien.}
+\begin{itemize}
+\item (\textbf{Relativitätsprinzip})  
+Die Form physikalischer Gesetze ist in allen Inertialsystemen gleich.
+\item (\textbf{Konstanz der Lichtgeschwindigkeit})  
+Für alle Beobachter gilt $|v_{\text{Licht}}| = c$.
+\end{itemize}
+Diese beiden Prinzipien implizieren die Existenz einer Metrik $\eta$, deren Isometriegruppe
+$\mathcal P$ die Symmetrie aller Naturgesetze bildet.
+
+\bigskip
+\emph{3. Formeller Kern: Natürlichkeit physikalischer Operatoren.}
+
+Ein physikalisches Gesetz ist eine Gleichung
+\[
+D(\phi) = 0,
+\]
+wobei
+\begin{itemize}
+\item $\phi$ ein physikalisches Feld (z.\,B. elektromagnetisch, spinorial, skalars) auf $M$ ist,
+\item $D$ ein geometrischer Differentialoperator (z.\,B. $\Box_\eta+m^2$, $i\slashed{\partial}-m$) ist.
+\end{itemize}
+
+\textbf{Forderung der Forminvarianz (Naturtreue):}
+Für jede Isometrie $f\in\mathrm{Iso}(M,\eta)$ gilt
+\[
+\boxed{
+\quad f^*\circ D = D\circ f^* \quad
+\text{auf allen Feldern }\phi.
+}
+\]
+Damit:
+\[
+D(\phi)=0 \quad\Longleftrightarrow\quad D(f^*\phi)=0.
+\]
+Das Gesetz ist also unabhängig von der Wahl des Inertialsystems.
+
+\bigskip
+\emph{4. Funktorielle Formulierung.}
+
+Wir definieren die Kategorie
+\[
+\mathbf{Sys}_{\eta} :=
+\{(M,\eta,\mathcal F,D)\mid (M,\eta)\ \text{Minkowski-Raumzeit},\ 
+\mathcal F\to M\ \text{Feldbündel},\ D:J^k\mathcal F\to \mathcal E \text{ natürlich}\}.
+\]
+
+Ein Diffeomorphismus $f:(M,\eta)\to(M,\eta)$ mit $f^*\eta=\eta$ 
+induziert Bündelabbildungen und Pullbacks $f^*:\mathfrak F\to\mathfrak F$.
+Dann ist die SRT charakterisiert durch die Funktorialität:
+\[
+D_{f(U)}\circ J^k(f^*) = f^*\circ D_U.
+\]
+
+\textbf{Interpretation:}  
+Die spezielle Relativitätstheorie ist die Forderung, dass die physikalischen 
+Gesetze $D(\phi)=0$ auf der Minkowski-Raumzeit natürliche Transformationen unter 
+den Isometrien $(M,\eta)$ sind.
+
+\bigskip
+\emph{5. Physikalische Bedeutung.}
+\begin{itemize}
+\item Die SRT stellt den \emph{universellen Raumzeitrahmen} bereit, in dem 
+alle physikalischen Prozesse lokal stattfinden.  
+Felder $\phi$ modellieren physikalische Größen (Materie, Strahlung, Energieverteilung).
+\item Die Theorie selbst liefert keine Dynamik — sie \emph{definiert die Invarianzstruktur}, 
+innerhalb derer alle Dynamiken (Maxwell, Klein–Gordon, Dirac, Yang–Mills) formuliert werden.
+\item Die Metrik $\eta$ und die Poincaré-Gruppe kodieren alle experimentell bestätigten 
+Symmetrien freier Raumzeitprozesse:
+\begin{align*}
+&\text{(Translationsinvarianz)} &&\Rightarrow \text{Impuls- und Energieerhaltung},\\
+&\text{(Lorentz-Invarianz)} &&\Rightarrow \text{Erhaltung von Drehimpuls und Boostgeneratoren}.
+\end{align*}
+\item Somit ist die SRT kein einzelnes Gesetz, sondern die \emph{geometrische Theorie} 
+aller Prozesse, deren Dynamik Lorentz-kovariant ist.
+\end{itemize}
+
+\bigskip
+\emph{6. Formale Charakterisierung in einem Satz.}
+
+Die spezielle Relativitätstheorie ist die Theorie physikalischer Systeme $(\mathcal F,D)$ auf $(\R^{1,3},\eta)$, deren Gesetze natürliche Operatoren unter der Poincaré-Gruppe sind.
+
+Oder äquivalent:
+\[
+\forall f\in\mathrm{Iso}(\R^{1,3},\eta):\quad
+f^*\circ D = D\circ f^*,
+\qquad
+\text{d.h.}\quad D(\phi)=0 \iff D(f^*\phi)=0.
+\]
+
+\bigskip
+\emph{7. Physikalischer Gehalt.}
+\begin{itemize}
+\item \emph{Raumzeitstruktur:} Minkowski-Geometrie $(M,\eta)$, Lichtkegelstruktur invariant.
+\item \emph{Symmetrien:} Poincaré-Gruppe $\mathcal P$ als Gruppe der Beobachterwechsel.
+\item \emph{Physikalische Prozesse:} Geodätische, Teilchenbewegungen, Feldkonfigurationen
+$\phi$ auf $(M,\eta)$.
+\item \emph{Theoretischer Inhalt:} Alle physikalischen Gleichungen $D(\phi)=0$
+sind Poincaré-invariant, d.\,h.:
+\[
+f^*\eta=\eta \ \Rightarrow\ f^*(D\phi)=D(f^*\phi).
+\]
+\end{itemize}
+
+\bigskip
+\textbf{In einem Satz:}
+
+Die spezielle Relativitätstheorie ist die Geometrisierung des Relativitätsprinzips: Physik = Tensoranalysis auf $(\R^{1,3},\eta)$.
+
+\pagebreak
+
+\subsection{Vom experimentellen Denken zur Forminvarianz $f^*\circ D = D\circ f^*$}
+
+\emph{Ziel.} 
+Wir entwickeln eine bottom–up-Argumentationskette von konkreten, experimentell motivierten
+Überlegungen hin zur abstrakten Forderung
+\[
+\forall f\in\mathrm{Iso}(\R^{1,3},\eta):\quad
+f^*\circ D = D\circ f^*,\qquad
+\text{also}\qquad D(\phi)=0 \iff D(f^*\phi)=0,
+\]
+ohne anfänglich Tensorrechnung vorauszusetzen. Hierbei steht $f$ für einen zulässigen
+\emph{Beobachterwechsel} (Isometrie), $\phi$ für eine physikalische Größe (Feld/Konfiguration),
+und $D$ für den \emph{Gesetzesoperator} (Gleichung).
+
+\bigskip
+\emph{A. Startpunkt: Was soll „gleiche Physik aus verschiedenen Blickwinkeln“ heißen?}
+
+\textbf{A1. Beobachter und Messprozeduren.}
+Ein \emph{Bezugssystem} (Inertialsystem) ist eine komplette Messanordnung aus synchronisierten Uhren
+und starren Maßstäben. Zwei Beobachter $S,S'$ vergleichen Messungen desselben Vorgangs
+(freier Fall, Lichtimpuls, Teilchendekay, Interferenzmuster).
+
+\textbf{A2. Empirische Forderung 1 (Vergleichbarkeit).}
+Wenn $S$ eine Versuchsanordnung beschreibt (Geometrie des Aufbaus, Startzeitpunkt, gemessene Werte),
+muss $S'$ eine \emph{systematische} Vorschrift besitzen, wie er: 
+(i) dieselben Ereignisse identifiziert, 
+(ii) deren Messwerte berechnet.
+\emph{Konsequenz:} Es braucht eine Abbildung $f$ auf der Ereignismenge (Raumzeit), die „Gleiches zu Gleichem“ zuordnet.
+
+\textbf{A3. Empirische Forderung 2 (Lichtkonstanz \& Kausalität).}
+Lichtlaufzeiten, Koinzidenzen („Detektor triggert beim Eintreffen des Photons“),
+und die Einteilung in zeit-/raum-/lichtartige Abstände müssen übereinstimmen.
+\emph{Konsequenz:} $f$ darf Lichtkegel nicht verbiegen und muss Abstände $ds^2$ erhalten:
+$ds'^2 = ds^2$. Das ist genau die Bedingung $f\in \mathrm{Iso}(\R^{1,3},\eta)$.
+
+\textbf{A4. Empirische Forderung 3 (Gleiche Struktur der Gesetze).}
+Freiheit (Trägheitsbewegung geradlinig–gleichförmig), Interferenzfiguren, Zerfallsraten, 
+Maxwell- und Dirac-Gleichungen sollen \emph{im selben funktionalen Muster} erscheinen.
+\emph{Konsequenz:} Wenn $S$ für eine Größe $\phi$ eine Gesetzesbeziehung „$D(\phi)=0$“ notiert,
+muss $S'$ für die entsprechend übersetzte Größe $\phi'$ \emph{dieselbe Gleichungsform} haben.
+
+\bigskip
+\emph{B. Modellierungsprinzipien: Wie kodiert man die Übersetzung präzise?}
+
+\textbf{B1. Raumzeit als Ereignismenge.}
+Wir modellieren die Menge der Ereignisse als Minkowski-Raum $(M,g)=(\R^{1,3},\eta)$.
+Ein Beobachterwechsel ist eine Isometrie $f:M\to M$ (Translation $+$ Lorentz-Abbildung).
+
+\textbf{B2. Physikalische Größen als Funktionen/Felder.}
+Skalare Größen (Temperatur, Wahrscheinlichkeit, Phase) sind Abbildungen $\phi:M\to\C$.
+Vektor-/Spinorgrößen werden später durch zusätzliche lineare Strukturen modelliert.
+\emph{Beobachter-$S$-Darstellung:} $\phi^{[S]}$.
+\emph{Beobachter-$S'$-Darstellung:} $\phi^{[S']}$.
+
+\textbf{B3. Übersetzungsoperator (Pullback) für Daten.}
+„Dasselbe physikalische Objekt aus Sicht $S'$“ ist die \emph{umgezogene} Größe
+\[
+\phi' := f^*\phi := \phi\circ f.
+\]
+Dieser einfache Zug-Operator (Pullback) implementiert die Regel: 
+„Bewerte die alte Größe am zugehörigen Ereignis“.
+
+\textbf{B4. Gesetze als Operatorgleichungen.}
+Ein Gesetz wird als Operatorgleichung $D(\phi)=0$ notiert. 
+Beispiele:
+$D=\Box_\eta+m^2$ (Klein–Gordon), $D=i\slashed{\partial}-m$ (Dirac), $D=\mathrm{d}^*\mathrm{d}$ (Maxwell in Potentialform).
+$D$ ist \emph{lokal} (differentiell) und hängt von $g$ nur über $g$-kompatible Ableitungen ab.
+
+\bigskip
+\emph{C. Warum muss $f^*\!\circ D = D\circ f^*$ gelten? (Notwendigkeit aus den Axiomen)}
+
+\textbf{C1. Operationales Kriterium „gleiche Vorhersagen“.}
+Wenn $S$ eine Lösung $\phi$ (Messdaten/Initialdaten $\to$ Vorhersage) besitzt, muss $S'$ für dieselbe Versuchsanordnung die \emph{korrespondierende} Lösung $\phi':=f^*\phi$ besitzen. 
+Andernfalls könnten $S$ und $S'$ in Widerspruch über beobachtbare Ereignisse geraten.
+
+\textbf{C2. Forminvarianz als \underline{minimale} Strukturforderung.}
+Die schwächste präzise Forderung, die das leistet, ist Kommutation:
+\[
+D(\phi)=0 \ \Longrightarrow\ D(f^*\phi)=0
+\qquad\Longleftrightarrow\qquad
+f^*\circ D = D\circ f^*.
+\]
+(Die Umkehrung ist ebenso notwendig, da $f$ invertierbar ist.)
+Damit werden \emph{Gesetzesform} und \emph{Lösungsmenge} zwischen Beobachtern identifiziert.
+
+\textbf{C3. Warum genau Isometrien?}
+Nur wenn $f$ die Metrik erhält ($f^*g=g$), bleiben Lichtkegel und zeit-/raum-/lichtartige Klassen unverändert; andernfalls würden elementare Messprotokolle (Lichtuhren, Radarentfernung, Kausalordnung) zwischen Beobachtern nicht konsistent sein. 
+Daraus folgt: $f\in\mathrm{Iso}(M,g)$ ist die maximale Verträglichkeitsklasse.
+
+\bigskip
+\emph{D. Konkrete Mikroszenarien, die die Forderung erzwingen}
+
+\textbf{D1. Lichtuhr und Invarianz der Lichtgeschwindigkeit.}
+Ein Lichtpuls zwischen zwei Spiegeln definiert eine Zeitnormale $\Delta\tau$. 
+Zwei Beobachter müssen übereinstimmen, ob die Pulsbahn lichtartig ist. 
+Dies erzwingt $f^*g=g$ und damit die Lorentzform von $f$.
+
+\textbf{D2. Interferenzmuster eines Doppelspalts.}
+Die Intensität $I(x)$ am Schirm ist eine Funktion der Phase $\Phi(x)$, die entlang $f$ umgezogen wird:
+$I'(x')=I(f(x'))$. 
+Das Muster (Nullstellen, Maxima) darf nicht vom Beobachter abhängen $\Rightarrow$ 
+Gleichungsform (Wellengleichung/Phasenakkumulation) muss stabil sein $\Rightarrow$ 
+$D$ kommutiert mit $f^*$.
+
+\textbf{D3. Zerfallsstatistik eines instabilen Teilchens.}
+Die Zerfallswahrscheinlichkeit $P(\text{„noch nicht zerfallen“};\tau)$ hängt von der Eigenzeit ab; 
+deren Bestimmung nutzt $g$. 
+In verschiedenen Inertialsystemen müssen dieselben Lebensdauergesetze gelten; 
+nur die Darstellung (Zeitdilatation) ändert sich. 
+Erneut folgt die Notwendigkeit der Kommutation.
+
+\bigskip
+\emph{E. Mathematische Verdichtung: Natürlichkeit von Operatoren}
+
+\textbf{E1. Operatoren als geometrische Bauteile.}
+Die Gesetzesoperatoren werden aus $g$ und der zugehörigen Levi-Civita-Verbindung gebaut 
+(Laplace–Beltrami, D’Alembertian, Dirac via Spinverbindung). 
+Diese Konstruktionen sind \emph{funktoriell}: 
+zieht man Geometrie und Felder via $f^*$ um, ziehen sich auch die Operatoren mit.
+
+\textbf{E2. Natürlichkeit.}
+Formal heißt das
+\[
+f^*\big(D_g(\phi)\big) = D_{f^*g}\big(f^*\phi\big).
+\]
+Für Isometrien $f^*g=g$ reduziert sich dies zu
+\[
+\boxed{\quad f^*\circ D_g = D_g\circ f^* \quad}
+\]
+— genau unsere Forderung.
+
+\bigskip
+\emph{F. Zwei elementare Rechenchecks (Heuristik statt Tensorik)}
+
+\textbf{F1. Klein–Gordon.}
+$D=\Box_\eta+m^2$, $\phi'(x'):=\phi(\Lambda^{-1}x')$. 
+Kettenregel $\partial'_\mu=(\Lambda^{-1})^\nu{}_\mu\partial_\nu$ und $\Lambda^T\eta\Lambda=\eta$ liefern
+\[
+(\Box'+m^2)\phi'(x') = \big((\Box+m^2)\phi\big)(\Lambda^{-1}x')=0.
+\]
+
+\textbf{F2. Dirac.}
+$D=i\gamma^\mu\partial_\mu-m$, $\psi'(x')=S(\Lambda)\psi(\Lambda^{-1}x')$, 
+$S^{-1}\gamma^\mu S=\Lambda^\mu{}_\nu\gamma^\nu$ liefert
+\[
+(i\gamma^\mu\partial'_\mu-m)\psi' = S(\Lambda)\,(i\gamma^\nu\partial_\nu-m)\psi\circ\Lambda^{-1}=0.
+\]
+
+\bigskip
+\emph{G. Fazit (Logik der Konstruktion in drei Zeilen)}
+\begin{enumerate}
+\item Empirische Anforderungen (Vergleichbarkeit, Lichtkonstanz, gleiche Gesetzesform)
+$\Longrightarrow$ Beobachterwechsel $f$ ist Isometrie und muss Lösungen auf Lösungen schicken.
+\item Kodierung „gleicher physikalischer Zustand unter $f$“ als Pullback: $\phi\mapsto f^*\phi$.
+\item Minimalpräzision der Gleichungsform: \emph{Kommutation mit Pullback}
+\[
+\boxed{\forall f\in\mathrm{Iso}(\R^{1,3},\eta):\quad f^*\circ D = D\circ f^*,\qquad
+D(\phi)=0 \iff D(f^*\phi)=0.}
+\]
+\end{enumerate}
+
+\bigskip
+
+\emph{H. Was ist daran „Theorie“? – Der theoretische Charakter der SRT.}
+
+Die Spezielle Relativitätstheorie ist keine einzelne Dynamik, sondern eine 
+\emph{Meta-Theorie}, d.\,h. ein konsistentes geometrisches Rahmenwerk, das 
+die Form aller physikalisch zulässigen Gleichungen einschränkt. 
+Ihr „Theorie“-Charakter besteht also darin, dass sie definiert, 
+\emph{welche Strukturen ein physikalisches Gesetz überhaupt haben darf}, 
+damit es empirisch konsistent beschreibbar ist.  
+
+\begin{enumerate}
+  \item \textbf{Geometrischer Träger.}
+  Die SRT postuliert, dass alle physikalischen Prozesse auf einer vierdimensionalen
+  glatten Mannigfaltigkeit $M=\R^{1,3}$ stattfinden, ausgestattet mit der 
+  Minkowski-Metrik $\eta$. 
+  Diese Struktur ist nicht dynamisch: sie ist der feste Hintergrund, 
+  auf dem Dynamiken ablaufen. 
+  Das entspricht der empirischen Einsicht, dass Raum und Zeit nicht getrennt, 
+  sondern untrennbar als einheitliche Raumzeit verstanden werden müssen.
+
+  \item \textbf{Symmetriegruppe.}
+  Die Menge der zulässigen Bezugssystemwechsel ist die Isometriegruppe
+  $\mathrm{Iso}(M,\eta)=\mathcal P=\R^{1,3}\rtimes SO^+(1,3)$.
+  Diese Gruppe ist physikalisch beobachtbar: sie beschreibt die Menge aller möglichen
+  Inertialsysteme, zwischen denen experimentell kein Unterschied gemacht werden kann.
+  Ihre Wirkung auf physikalische Felder modelliert die Transformation von Beschreibungen
+  zwischen Beobachtern.
+
+  \item \textbf{Funktionsprinzip.}
+  Die Übersetzungsvorschrift $f^*$ zwischen Beobachterdarstellungen
+  ist keine Zusatzannahme, sondern eine formale Konsequenz aus der Forderung,
+  dass physikalische Größen geometrische Objekte auf $(M,\eta)$ sind.
+  Der Pullback $f^*$ ist der natürliche Funktor, der „dasselbe physikalische Objekt“
+  in unterschiedlichen Koordinatendarstellungen ausdrückt.
+
+  \item \textbf{Kriterium theoretischer Zulässigkeit.}
+  Eine Gleichung $D(\phi)=0$ beschreibt genau dann ein physikalisches Gesetz im Sinn der SRT,
+  wenn sie \emph{natürlich} unter allen Isometrien ist, also
+  \[
+  f^*\circ D = D\circ f^*.
+  \]
+  Dies ist die präzise mathematische Übersetzung des Relativitätsprinzips:
+  die Form der Gleichung ist unabhängig vom gewählten Inertialsystem.
+
+  \item \textbf{Konkrete Theorien als Realisierungen.}
+  Einzelne physikalische Theorien (Klein–Gordon, Maxwell, Dirac, Yang–Mills)
+  sind dann Spezialisierungen dieses Rahmens:
+  \[
+  D_{\text{KG}}=\Box_\eta+m^2,\qquad 
+  D_{\text{Max}}=\mathrm{d}^*\mathrm{d},\qquad
+  D_{\text{Dir}}=i\gamma^\mu\partial_\mu-m,\quad\text{etc.}
+  \]
+  Jede erfüllt die Bedingung $f^*\circ D = D\circ f^*$ für alle $f\in\mathcal P$.
+  Ihre Verschiedenheit liegt nur in der Wahl des Feldbündels $\mathcal F$
+  (Skalar-, Vektor-, Spinorbündel) und der daraus konstruierten natürlichen Operatoren.
+
+  \item \textbf{Theorie als geometrisches Postulat.}
+  In diesem Sinn ist die SRT eine \emph{geometrische Theoriekategorie}:
+  sie postuliert, dass „Physik = Geometrie“ auf $(M,\eta)$ ist.
+  Jede zulässige physikalische Größe ist ein geometrischer Abschnitt eines
+  Bündels über $(M,\eta)$, jede zulässige Gleichung ein natürlicher Differentialoperator.
+  Damit reduziert sich die empirische Forderung „gleiche Physik in allen Bezugssystemen“
+  auf eine rein formale Invarianzforderung.
+\end{enumerate}
+
+\textbf{Zusammenfassung.}
+\begin{itemize}
+  \item Die SRT liefert den \emph{geometrischen Rahmen}, nicht die Dynamik.
+  \item Sie definiert, was ein „Bezugssystem“ und ein „Gesetz“ überhaupt formal bedeutet.
+  \item Sie garantiert die Vergleichbarkeit physikalischer Aussagen zwischen Beobachtern.
+  \item Dynamische Theorien (Maxwell, Dirac, etc.) sind \emph{Modelle innerhalb dieses Rahmens}.
+\end{itemize}
+
+Damit ist die Spezielle Relativitätstheorie die mathematische Formalisierung
+des Relativitätsprinzips selbst — eine Theorie \emph{zweiter Ordnung}, 
+deren Inhalt nicht ein bestimmtes Gesetz, sondern der Begriff von Gesetzmäßigkeit ist.
+
+
+\pagebreak
+
+
+\subsection{Bezugssystemwechsel als Rahmenwechsel im Minkowski-Raum}
+
+\emph{Motivation.}
+Ein physikalisches \emph{Bezugssystem} (Inertialsystem) ist konzeptionell eine Wahl von 
+Zeit- und Raumrichtungen, mit denen man physikalische Größen als Komponenten beschreibt.
+Differentialgeometrisch entspricht dies einer Wahl eines \emph{orthonormalen Rahmens} 
+auf der Raumzeitmannigfaltigkeit.  
+Ein Wechsel des Bezugssystems wird dann zu einem \emph{Rahmenwechsel}, der durch eine
+Lorentztransformation beschrieben wird.  
+In diesem Sinn ist der Begriff „Beobachterwechsel“ äquivalent zur 
+Wahl eines anderen lokalen Rahmens im Tangentialraum.
+
+\bigskip
+\emph{1. Orthonormale Rahmen.}
+
+Sei $(M,g)$ eine vierdimensionale Lorentz-Mannigfaltigkeit.
+Ein \emph{(lokaler) Rahmen} am Punkt $p\in M$ ist eine geordnete Basis
+\[
+e(p)=(e_0(p),e_1(p),e_2(p),e_3(p))
+\]
+des Tangentialraums $T_pM$.
+Der Rahmen heißt \emph{orthonormal}, wenn gilt
+\[
+g(e_\mu,e_\nu) = \eta_{\mu\nu} = \mathrm{diag}(1,-1,-1,-1).
+\]
+Solche Rahmen bilden das \emph{Lorentz-Rahmenbündel}
+\[
+\mathrm{Fr}_\eta(M)
+= \{ (p,e) \mid e=(e_0,\ldots,e_3) \text{ orthonormal bzgl. } g \}.
+\]
+Dieses ist ein \emph{Hauptbündel} mit Strukturgruppe $O(1,3)$.
+
+\bigskip
+\emph{2. Gruppenwirkung und Beobachterwechsel.}
+
+Die Lorentzgruppe $O(1,3)$ wirkt \emph{rechts} auf $\mathrm{Fr}_\eta(M)$ durch
+\[
+e \cdot \Lambda := (e'_\mu), \qquad e'_\mu := e_\nu \Lambda^\nu{}_\mu.
+\]
+Dies ist eine freie und transitive Wirkung auf jeder Faser:
+alle orthonormalen Rahmen in $T_pM$ sind durch eine eindeutige
+Lorentztransformation ineinander überführbar.
+
+\textbf{Interpretation:}
+\begin{itemize}
+  \item Ein bestimmter Rahmen $e=(e_0,e_1,e_2,e_3)$ entspricht einem 
+  Inertialsystem (Beobachter) mit Zeitrichtung $e_0$ und Raumbasis $e_i$.
+  \item Ein neues Bezugssystem wird durch Anwendung einer Lorentztransformation 
+  $\Lambda$ beschrieben: $e\mapsto e\cdot\Lambda$.
+  \item In der Sprache der Physik: dieselben Ereignisse werden 
+  in einem \emph{verkippten} Zeit-/Raumraster dargestellt.
+\end{itemize}
+
+\bigskip
+\emph{3. Der Fall des Minkowski-Raums.}
+
+Sei $(M,g)=(\R^{1,3},\eta)$ mit $\eta=\mathrm{diag}(1,-1,-1,-1)$.
+Dann ist jeder Rahmen global trivial, und das Rahmenbündel ist
+\[
+\mathrm{Fr}_\eta(\R^{1,3}) \cong \R^{1,3}\times O(1,3).
+\]
+
+\textbf{Standardrahmen:}
+\[
+e = (\partial_t, \partial_x, \partial_y, \partial_z),
+\qquad
+g(e_\mu,e_\nu)=\eta_{\mu\nu}.
+\]
+
+\textbf{Lorentz-Boost in $z$-Richtung:}
+Für eine Rapidität $\eta$ (mit $\tanh\eta=v$) sei
+\[
+\Lambda(\eta)
+=
+\begin{pmatrix}
+\cosh\eta & 0 & 0 & -\sinh\eta\\
+0 & 1 & 0 & 0\\
+0 & 0 & 1 & 0\\
+-\sinh\eta & 0 & 0 & \cosh\eta
+\end{pmatrix}.
+\]
+Dann ist der neue Rahmen
+\[
+e' = e \cdot \Lambda(\eta),
+\]
+d.\,h.
+\[
+\begin{aligned}
+e'_0 &= \cosh\eta\,\partial_t - \sinh\eta\,\partial_z,\\
+e'_3 &= -\sinh\eta\,\partial_t + \cosh\eta\,\partial_z,\\
+e'_1 &= \partial_x,\quad e'_2=\partial_y.
+\end{aligned}
+\]
+Man überprüft direkt:
+\[
+g(e'_\mu,e'_\nu)=\eta_{\mu\nu}.
+\]
+Physikalisch beschreibt $e'_0$ den Vierergeschwindigkeitsvektor eines Beobachters,
+der sich mit Geschwindigkeit $v=\tanh\eta$ entlang der $z$-Achse bewegt.
+
+\bigskip
+\emph{4. Komponentenwechsel physikalischer Größen.}
+
+Sei $T$ ein Tensorfeld auf $M$, dessen Komponenten im Rahmen $e$ gegeben sind durch
+\[
+T = T^{\mu_1\ldots}_{\nu_1\ldots}\, e_{\mu_1}\otimes\cdots\otimes e^{\nu_k}.
+\]
+Unter dem Rahmenwechsel $e\mapsto e'=e\cdot\Lambda$ transformieren die Komponenten
+nach der bekannten Regel:
+\[
+T'^{\mu_1\ldots}_{\nu_1\ldots}
+= 
+\Lambda^{\mu_1}{}_{\rho_1}\cdots
+\Lambda_{\nu_1}{}^{\sigma_1}\cdots
+T^{\rho_1\ldots}_{\sigma_1\ldots}.
+\]
+Somit wird der „Bezugssystemwechsel“ im physikalischen Sinn formal als 
+\emph{lineare Gruppenwirkung der Lorentzgruppe auf die Komponenten im Rahmenbündel}
+realisiert.
+
+\bigskip
+\emph{5. Physikalische Interpretation.}
+
+\begin{itemize}
+  \item Ein \emph{Beobachter} wird durch einen zeitartigen Einheitsvektor $u(p)$
+  beschrieben (der $e_0$-Richtung des Rahmens entspricht).
+  \item Ein \emph{Bezugssystem} ist die Erweiterung dieses Vektors zu einem
+  vollständigen orthonormalen Rahmen $(e_0,\ldots,e_3)$.
+  \item Ein \emph{Wechsel des Bezugssystems} ist eine Transformation 
+  $e\mapsto e\cdot\Lambda$, bei der sich sowohl Zeit- als auch Raumachsen
+  hyperbolisch „verkippen“ (Lorentz-Boost).
+  \item Physikalische Gleichungen sind \emph{invariant} unter dieser Gruppenwirkung,
+  d.\,h. die Operatoren $D$ erfüllen $f^*\circ D = D\circ f^*$, 
+  wobei $f$ die durch $\Lambda$ induzierte Isometrie ist.
+\end{itemize}
+
+\bigskip
+\emph{6. Fazit.}
+\begin{itemize}
+  \item Der \textbf{Bezugssystemwechsel} ist geometrisch identisch mit einem
+  \textbf{Rahmenwechsel} im orthonormalen Rahmenbündel $\mathrm{Fr}_\eta(M)$.
+  \item Die \textbf{Lorentztransformationen} sind genau die 
+  \textbf{Strukturgruppenoperationen} dieses Bündels.
+  \item Die \textbf{Forminvarianz physikalischer Gesetze} 
+  entspricht der \textbf{Natürlichkeit} der zugehörigen Operatoren unter dieser Gruppenwirkung.
+\end{itemize}
+
+Somit erhält der intuitive Begriff „Beobachterwechsel“ seine mathematisch präzise 
+Gestalt als \emph{Hauptbündelaktion} der Lorentzgruppe auf den orthonormalen Rahmen 
+des Minkowski-Raums.
+
+\subsection{Bündeltheorie $\to$ „Lorentztrafos in der Praxis“ (Top–Down)}
+
+\emph{Ziel.} Wir geben eine bündeltheoretische Formulierung der SRT und leiten daraus
+in einem \emph{Top–Down}-Sinn die üblichen Transformationsregeln im Minkowski-Raum
+$\R^{1,3}$ her. Leitidee: \emph{Bezugssystemwechsel} = \emph{Rahmenwechsel} im
+orthonormalen Rahmenbündel; \emph{Felder} = \emph{Schnitte assoziierter Bündel};
+\emph{Lorentztransformation} = \emph{rechte Hauptbündelaktion}.
+
+\bigskip
+\emph{1. Hauptbündel der orthonormalen Rahmen.}
+
+Sei $(M,g)$ eine Lorentz-Mannigfaltigkeit (in SRT: $M=\R^{1,3}$, $g=\eta$).
+Das \emph{Lorentz-Rahmenbündel}
+\[
+\mathrm{Fr}_\eta(M)\;:=\;\bigl\{(p,e)\mid p\in M,\ e=(e_0,\dots,e_3)\text{ Basis von }T_pM,\ g(e_\mu,e_\nu)=\eta_{\mu\nu}\bigr\}
+\]
+ist ein \emph{Hauptbündel} mit Strukturgruppe $O(1,3)$:
+\[
+\mathrm{Fr}_\eta(M)\xrightarrow{\ \pi\ }M,\qquad
+R_\Lambda:\mathrm{Fr}_\eta(M)\to\mathrm{Fr}_\eta(M),\quad (p,e)\mapsto (p,e\cdot\Lambda),\quad \Lambda\in O(1,3).
+\]
+Die zusammenhängende, orientierungs- und zeitorientierungserhaltende Komponente ist $SO^+(1,3)$.
+
+\smallskip
+\emph{Physik:} Ein Punkt $e\in\mathrm{Fr}_\eta(M)$ ist ein \emph{Beobachterrahmen} am Ereignis $p$.
+Die rechte Gruppenwirkung $R_\Lambda$ realisiert den \emph{Bezugssystemwechsel}.
+
+\bigskip
+\emph{2. Assoziierte Bündel und Felder als Schnitte.}
+
+Sei $\rho:G\to\GL(V)$ eine (endlichdimensionale) Darstellung von $G:=SO^+(1,3)$
+(z.\,B. die triviale Darstellung für Skalare, die Standarddarstellung für Vektoren,
+oder die Spinor-Darstellung nach Hebung auf $\Spin(1,3)$).
+Dann ist das \emph{assoziierte Vektorbündel}
+\[
+E_\rho \;:=\; \mathrm{Fr}_\eta(M)\times_\rho V\ \ \longrightarrow\ \ M
+\]
+über die Äquivalenz $(e,v)\sim (e\Lambda,\rho(\Lambda)^{-1}v)$ definiert.
+Ein \emph{Feld} vom Typ $\rho$ ist ein glatter Schnitt $\phi\in\Gamma(E_\rho)$.
+
+\smallskip
+\emph{Physik:} „Ein skalares Feld“ $\phi$ ist $\rho=\mathbf{1}$; „Vierervektorfeld“ ist
+$\rho=\text{Std}$; \emph{Spinorfeld} benötigt eine Spin-Struktur
+$\widetilde{\mathrm{Fr}}_\eta(M)\to\mathrm{Fr}_\eta(M)$ und eine Darstellung $\rho:\Spin(1,3)\to\GL(\mathbb{C}^4)$.
+
+\bigskip
+\emph{3. Lokale Darstellungen und Eichsicht („lokale Lorentzsymmetrie“).}
+
+Eine lokale \emph{Rahmensektion} $s:U\subset M\to\mathrm{Fr}_\eta(M)$ (ein \emph{Vierbein/Tetrad})
+wählt in jedem Punkt $p\in U$ einen orthonormalen Rahmen $e_\mu(p)$.
+Über $s$ identifiziert man $E_\rho|_U \cong U\times V$ und erhält Komponenten
+\[
+\phi^{[s]}:U\to V,\qquad \text{„Feld in der Darstellung relativ zum Rahmen }s\text{“}.
+\]
+Wechselt man den Rahmen lokal durch $s' = s\cdot\Lambda$ (mit glattem $\Lambda:U\to SO^+(1,3)$),
+so transformiert die Komponentendarstellung \emph{punktweise} durch die Faseraktion:
+\[
+\phi^{[s']}(p)\;=\;\rho\bigl(\Lambda(p)\bigr)\,\phi^{[s]}(p).
+\]
+Dies ist genau die \emph{(lokale) Lorentz-„Eichtransformation“}.
+
+\smallskip
+\emph{Physik:} Komponenten eines Feldes hängen von der Rahmenwahl ab; die \emph{Geometrie} des Felds
+(i.\,e. der Schnitt) ist rahmenunabhängig. „Beobachterwechsel“ ist die \emph{Gleichheit des Schnitts}
+bei veränderter Komponentendarstellung.
+
+\bigskip
+\emph{4. Verbindungen und kovariante Ableitungen.}
+
+Eine \emph{(Ehresmann-)Verbindung} auf $\mathrm{Fr}_\eta(M)$ ist eine $ \mathfrak{so}(1,3)$-wertige 1-Form
+$\omega$ auf $\mathrm{Fr}_\eta(M)$ mit den üblichen Äquivarianzeigenschaften. Für einen lokalen Rahmen $s$
+ist die \emph{lokale Verbindungsform} $\omega^{[s]}:=s^*\omega\in\Omega^1\bigl(U,\mathfrak{so}(1,3)\bigr)$.
+Die zu $\rho$ induzierte \emph{kovariante Ableitung} auf $E_\rho$ hat in Komponenten die Gestalt
+\[
+\nabla^{[s]} \phi^{[s]}\;=\; d\phi^{[s]} \;+\; \rho_*\bigl(\omega^{[s]}\bigr)\,\phi^{[s]},
+\quad
+\rho_*:\mathfrak{so}(1,3)\to\mathfrak{gl}(V).
+\]
+Unter einem lokalen Rahmenwechsel $s\mapsto s\cdot\Lambda$ transformieren
+\[
+\begin{aligned}
+\phi^{[s]} &\mapsto \phi^{[s']}\;=\;\rho(\Lambda)\,\phi^{[s]},\\
+\omega^{[s]} &\mapsto \omega^{[s']} \;=\; \Lambda^{-1}\omega^{[s]}\Lambda + \Lambda^{-1}d\Lambda,
+\end{aligned}
+\]
+und \emph{kompatibel} dazu
+\[
+\nabla^{[s']} \phi^{[s']} \;=\; \rho(\Lambda)\,\bigl(\nabla^{[s]} \phi^{[s]}\bigr).
+\]
+Damit ist die kovariante Ableitung ein \emph{natürlicher Operator}.
+
+\smallskip
+\emph{Physik:} In SR (Minkowski, global inertial) kann man $s$ global so wählen, dass
+$\omega^{[s]}=0$ (flache, torsionsfreie Levi-Civita-Verbindung, globale Lorentz-Rahmen):
+dann reduziert sich $\nabla$ auf \emph{partielle Ableitungen} (für Tensorfelder).
+Für Spinorfelder verbleibt bei Wahl eines global konstanten Vierbeins ebenfalls $\omega=0$,
+sodass die \emph{Spinverbindung} in kartesischen Inertialkoordinaten verschwindet
+(Dirac-Operator $i\gamma^\mu\partial_\mu$).
+
+\bigskip
+\emph{5. Natürliche Differentialoperatoren und Lorentz-Kovarianz.}
+
+Ein (lokal definierter) Differentialoperator
+\[
+D:\Gamma(E_\rho)\longrightarrow \Gamma(E_\sigma)
+\]
+heißt \emph{natürlich (Lorentz-kovariant)}, wenn für jede Isometrie
+$f\in\Iso(M,g)$ und die induzierte Bündelabbildung $f^*:E_\rho\to E_\rho$ gilt:
+\[
+f^*\circ D \;=\; D\circ f^*.
+\]
+Lokal in einem Rahmen $s$ liest sich das als \emph{Rahmenwechsel-Kovarianz}:
+wechselt man $s\mapsto s\cdot\Lambda$, so gehen die Komponenten von $D$ durch die
+darstellungsinduzierte Konjugation über (die Operatorform bleibt gleich).
+
+\smallskip
+\emph{Physik:} Genau dies ist die präzise Fassung der „Forminvarianz der Gesetze“.
+Beispiele (SR, flach, globaler Inertialrahmen):
+\[
+\begin{aligned}
+&\text{Klein–Gordon:}& D_{\text{KG}} &= \Box_\eta + m^2,\\[2pt]
+&\text{Maxwell (in Potentialform):}& D_{\text{Max}} &= d^\dagger d \quad \text{auf 1-Formen},\\[2pt]
+&\text{Dirac:}& D_{\text{Dir}} &= i\gamma^\mu\partial_\mu - m.
+\end{aligned}
+\]
+Unter einem globalen Lorentzboost $\Lambda\in SO^+(1,3)$ wirken die Felder über $\rho(\Lambda)$
+und die Ableitungen gemäß Kettenregel; wegen $\Lambda^T\eta\Lambda=\eta$ bleibt die Form der
+Operatoren erhalten: $f^*D = D f^*$.
+
+\bigskip
+\emph{6. Spezialisierung: Minkowski-Raum als trivialer Fall.}
+Für $(M,g)=(\R^{1,3},\eta)$ ist $\mathrm{Fr}_\eta(M)\cong \R^{1,3}\times SO^+(1,3)$ \emph{trivial}.
+Wählt man eine globale Sektion $s$ (z.\,B. den Standardrahmen $e_\mu=\partial_\mu$),
+so sind:
+\begin{itemize}
+\item alle assoziierten Bündel \emph{global trivial}, $E_\rho\cong \R^{1,3}\times V$,
+\item die Levi-Civita-Verbindung ist \emph{flach und inerten}: $\omega^{[s]}=0$,
+\item kovariante Ableitungen sind \emph{partielle Ableitungen} (für Tensor- und Spinorfelder),
+\item globale Lorentztrafos $\Lambda$ handeln \emph{konstant} in der Faser: 
+$\phi(x)\mapsto \rho(\Lambda)\,\phi(\Lambda^{-1}x)$.
+\end{itemize}
+Damit reduziert sich der bündeltheoretische Apparat exakt auf die vertrauten
+Regeln der SRT: „Feld transformiert mit einer (Spin-)Darstellung, Argument mit
+der inversen Lorentzmatrix“.
+
+\bigskip
+\emph{7. „Physikalischer Stil“ – Arbeitsrezept aus der Bündelsicht.}
+\begin{enumerate}
+\item \textbf{Feldtyp wählen:} Wähle eine Darstellungsart $\rho$ von $SO^+(1,3)$ 
+(oder von $\Spin(1,3)$ für Spinoren).
+\item \textbf{Bündel und Rahmen:} Identifiziere $E_\rho=\mathrm{Fr}_\eta(M)\times_\rho V$. 
+Fixiere einen globalen Inertialrahmen $s$ (Minkowski).
+\item \textbf{Operatorbau:} Baue $D$ aus $g$ und $\nabla$ (hier: $\partial$) \emph{representationstreu} 
+(d.\,h. alle Indizes mit $\eta$ heben/senken, $\gamma^\mu$ für Spinoren etc.).
+\item \textbf{Lorentztest (Kovarianz):} Prüfe $f^*D = D f^*$ für $f$ aus $\Iso(M,\eta)$
+(äquivalent: Forminvarianz der Komponenten unter $s\mapsto s\cdot\Lambda$).
+\item \textbf{Rechnen:} Nutze globale Trivialität: Komponentenrechnung in $s$,
+Lorentzboost via konstante $\Lambda$ und $\rho(\Lambda)$; Kettenregel für Argumente.
+\end{enumerate}
+
+\bigskip
+\emph{8. Zwei explizite Mikrotests.}
+
+\emph{(i) Klein–Gordon.} $\phi:\R^{1,3}\to\C$, $\rho=\mathbf{1}$.
+Unter $x'=\Lambda x$ und $\phi'(x')=\phi(\Lambda^{-1}x')$:
+\[
+(\Box'+m^2)\phi'(x') \;=\; (\Box+m^2)\phi(\Lambda^{-1}x') \;=\; 0,
+\quad \text{da }\Lambda^T\eta\Lambda=\eta.
+\]
+\emph{(ii) Dirac.} $\psi:\R^{1,3}\to\C^4$, $\rho=S:\Spin(1,3)\to\GL(\C^4)$ mit
+$S^{-1}\gamma^\mu S=\Lambda^\mu{}_\nu\gamma^\nu$.
+Setze $\psi'(x')=S(\Lambda)\psi(\Lambda^{-1}x')$:
+\[
+(i\gamma^\mu\partial'_\mu-m)\psi' \;=\; S(\Lambda)\,(i\gamma^\nu\partial_\nu-m)\psi\;\circ\Lambda^{-1}\;=\;0.
+\]
+Beide Tests sind Sichtbarmachungen von $f^*D=Df^*$ im trivialen Bündelfall.
+
+\bigskip
+\emph{9. Warum diese Sicht „mehr ist als Koordinatenrechnung“.}
+
+Die Bündel- und Hauptbündelsicht
+\begin{itemize}
+\item erklärt \emph{konzeptuell}, warum Komponentenformeln so (und nur so) transformieren,
+\item trennt \emph{Geometrie} (Schnitt, natürliche Operatoren) von \emph{Darstellung}
+(Rahmen-/Eichwahl),
+\item generalisiert reibungslos zu gekrümmten Hintergründen (GR): 
+$e^a{}_\mu$ (Vierbein), $\omega^a{}_b$ (Spinverbindung), 
+lokale Lorentzsymmetrie als \emph{innere Eichgruppe} des Rahmenbündels,
+\item macht den \emph{Theorieinhalt} „Forminvarianz/Natürlichkeit“ präzise
+und unabhängig von Koordinaten.
+\end{itemize}
+
+\bigskip
+\emph{10. Quintessenz.}
+
+\emph{Top–Down} vom Hauptbündel $\mathrm{Fr}_\eta(M)$ über assoziierte Bündel $E_\rho$
+zu natürlichen Operatoren $D$ ist der präzise mathematische Kern hinter der
+physikalischen Aussage „Lorentzkovarianz“. Im Minkowski-Raum führt die
+Trivialität des Bündels direkt zu den gewohnten Transformationsregeln:
+\[
+\boxed{\ \phi'(x')=\rho(\Lambda)\,\phi(\Lambda^{-1}x'),\qquad
+D' = D,\ \ f^*D=Df^*.\ }
+\]
+Diese Formulierung ist nicht nur „schön“, sondern liefert die exakte Brücke
+zwischen \emph{Bezugssystemwechsel} (Rahmenwechsel) und \emph{praktischer
+Rechnung} im physikalischen Alltag.
+
+
+%–– Klein–Gordon im Minkowski-Rahmen: Felder als Schnitte, Operator, Lösungen, Transformationen ––%
+
+\subsection*{Klein–Gordon im SRT-Rahmen – formale Fassung des physikalischen Jargons}
+
+\emph{Raumzeit.}
+Sei die Minkowski-Raumzeit
+\[
+(M,g)=(\R^{1,3},\eta),\qquad 
+\eta=\mathrm{diag}(1,-1,-1,-1),
+\]
+mit globalen Inertialkoordinaten $x=(x^\mu)=(t,\mathbf x)$ und $\partial_\mu=\frac{\partial}{\partial x^\mu}$.
+Die Isometriegruppe ist die Poincaré-Gruppe
+\[
+\mathcal P=\R^{1,3}\rtimes SO^+(1,3)=:\{(a,\Lambda)\},
+\]
+mit Wirkung auf $M$ gegeben durch $(a,\Lambda)\cdot x := \Lambda x + a$.
+
+\emph{Feld als Schnitt.}
+Ein (komplexes) skalares Klein–Gordon-Feld ist ein glatter Schnitt des trivialen Linienbündels
+\[
+E:=M\times\C \;\longrightarrow\; M,\qquad 
+\Gamma(E)\cong C^\infty(M,\C).
+\]
+Physikalischer Jargon „\emph{$\phi$ ist ein (Skalar-)Feld}“ entspricht formal
+\[
+\phi\in \Gamma(E).
+\]
+
+\emph{D’Alembert-Operator und Klein–Gordon-Operator.}
+Mit $\eta^{\mu\nu}$ der inversen Metrik ist der D’Alembert-Operator
+\[
+\square_\eta \;:=\; \eta^{\mu\nu}\,\partial_\mu\partial_\nu \;=\; \partial_t^2-\Delta_{\mathbf x}.
+\]
+Für eine feste Masse $m\ge 0$ ist der Klein–Gordon-Operator
+\[
+P_m \;:=\; \square_\eta + m^2 \;:\; C^\infty(M)\longrightarrow C^\infty(M).
+\]
+Jargon „\emph{der Klein–Gordon-Operator wirkt auf $\phi$}“ heißt formal: $P_m(\phi)$ wird punktweise
+durch obige Differentialausdrücke berechnet.
+
+\emph{Lösungen.}
+„\emph{$\phi$ ist Lösung der Klein–Gordon-Gleichung}“ bedeutet formal:
+\[
+P_m(\phi)=0\qquad\Longleftrightarrow\qquad \phi\in\ker P_m \;=:\; \mathrm{Sol}_m^{\infty}.
+\]
+Je nach Regularitätsklasse nutzt man dieselbe Definition in verallgemeinerten Räumen:
+\[
+\mathrm{Sol}_m^{\mathrm{test}}:=\{\phi\in C_c^\infty(M):P_m\phi=0\},\quad
+\mathrm{Sol}_m^{\mathcal S}:=\{\phi\in\mathcal S(M):P_m\phi=0\},\quad
+\mathrm{Sol}_m^{\mathcal D'}:=\{u\in\mathcal D'(M):P_m u=0\}.
+\]
+Im Cauchy-Bild sind klassische Lösungen durch Anfangsdaten auf $\Sigma=\{t=0\}\cong\R^3$ parametrisiert:
+\[
+\phi|_\Sigma=f,\qquad \partial_t\phi|_\Sigma=g,
+\]
+wobei $(f,g)$ geeignete Regularität (z.\,B. Schwarz- oder Sobolev-Daten) erfüllen; dann existiert eindeutig
+$\phi\in \mathrm{Sol}_m^{\infty}$ mit diesen Daten.
+
+\emph{Poincaré-Wirkung auf Schnitte (Bezugssystemwechsel).}
+Die Isometrie $(a,\Lambda)\in\mathcal P$ induziert einen \emph{Pullback} auf Schnitten:
+\[
+\bigl((a,\Lambda)^*\phi\bigr)(x)
+\;:=\; \phi\bigl((a,\Lambda)\cdot x\bigr)
+\;=\; \phi(\Lambda x + a).
+\]
+Jargon „\emph{Rahmenwechsel/Boost/Translation wirkt auf das Feld}“ heißt formal:
+\[
+\phi \;\longmapsto\; (a,\Lambda)^*\phi.
+\]
+Für Ableitungen gilt die Kettenregel
+\[
+\partial_\mu\bigl((a,\Lambda)^*\phi\bigr)(x)
+= \Lambda^\nu{}_{\mu}\, (\partial_\nu\phi)\bigl(\Lambda x+a\bigr),
+\]
+und daher
+\[
+\square_\eta\bigl((a,\Lambda)^*\phi\bigr)(x)
+= \eta^{\mu\nu}\Lambda^\rho{}_{\mu}\Lambda^\sigma{}_{\nu}\,
+(\partial_\rho\partial_\sigma\phi)\bigl(\Lambda x+a\bigr)
+= \square_\eta \phi\bigl(\Lambda x+a\bigr),
+\]
+weil $\Lambda^T\eta\Lambda=\eta$. Also \emph{kommutiert} der Operator mit dem Pullback:
+\[
+\boxed{\quad (a,\Lambda)^*\circ P_m \;=\; P_m\circ (a,\Lambda)^* \quad}
+\]
+(„\emph{Lorentz/Poincaré-Kovarianz}“). Insbesondere ist der Lösungsraum invariant:
+\[
+\phi\in\mathrm{Sol}_m^\infty \;\Longrightarrow\; (a,\Lambda)^*\phi\in\mathrm{Sol}_m^\infty.
+\]
+
+\emph{Fourier-/Massenschalen-Charakterisierung (optional präzisiert).}
+Für temperierte Lösungen $\phi\in \mathcal S'(M)$ gilt äquivalent
+\[
+P_m\phi=0 
+\quad\Longleftrightarrow\quad
+\widehat{\phi}(p)\ \text{ist auf der Massenschale } \{p\in\R^{1,3}:p^2=m^2\} \text{ getragen,}
+\]
+wobei $p^2=\eta^{\mu\nu}p_\mu p_\nu$ und die Fourier-Transformation mit Konvention
+$\widehat{\phi}(p)=\int e^{ip\cdot x}\phi(x)\,dx$ genommen sei. 
+Die Poincaré-Wirkung entspricht in Impulsraum der Darstellung
+\[
+\widehat{(a,\Lambda)^*\phi}(p) \;=\; e^{+i\,a\cdot p}\,\widehat{\phi}(\Lambda^{-1}p),
+\]
+die die Massenschale invariant lässt.
+
+\emph{Physik $\leftrightarrow$ Formal – Mini-Wörterbuch.}
+\begin{itemize}
+  \item „\emph{Skalares Feld in der SRT}“ $\;\rightsquigarrow\;$ Schnitt $\phi\in\Gamma(E)\cong C^\infty(M)$.
+  \item „\emph{Klein–Gordon-Gleichung}“ $\;\rightsquigarrow\;$ $P_m\phi=0$ mit $P_m=\square_\eta+m^2$.
+  \item „\emph{Wechsel des Bezugssystems/Boost/Translation}“ $\;\rightsquigarrow\;$ Pullback $(a,\Lambda)^*$.
+  \item „\emph{Gleichungsform bleibt gleich}“ $\;\rightsquigarrow\;$ $(a,\Lambda)^* P_m = P_m (a,\Lambda)^*$.
+  \item „\emph{Lösung transformiert wieder zu Lösung}“ $\;\rightsquigarrow\;$ $(a,\Lambda)^*(\ker P_m)=\ker P_m$.
+\end{itemize}
+
+\emph{Zusammenfassung.}
+Im SRT-Rahmen ist ein Klein–Gordon-Feld ein Schnitt des trivialen Linienbündels über $(\R^{1,3},\eta)$.
+Der Klein–Gordon-Operator $P_m=\square_\eta+m^2$ ist ein natürlicher, von der Metrik induzierter
+Differentialoperator. Lösungen sind genau die Schnitte im Kern von $P_m$; sie bilden einen
+Poincaré-invarianten Unterraum von $\Gamma(E)$, da $P_m$ mit der Pullback-Wirkung der
+Poincaré-Gruppe kommutiert.
+
+
+\pagebreak
+
+%–– Bezugssystemwechsel via Rahmenbündel & Schnitträume; Verhalten von Differentialoperatoren ––%
+
+\subsection*{Bezugssystemwechsel aus der Bündel-/Schnitt-Perspektive}
+
+\emph{Grunddaten.}
+Sei $(M,g)$ eine Lorentz-Mannigfaltigkeit (in der SRT: $M=\R^{1,3}$, $g=\eta$).
+Das \emph{Lorentz-Rahmenbündel} (Hauptbündel)
+\[
+\mathrm{Fr}_\eta(M):=\{(p,e)\mid p\in M,\ e=(e_0,\dots,e_3)\text{ Basis von }T_pM,\ g(e_\mu,e_\nu)=\eta_{\mu\nu}\}
+\]
+trägt die rechte $G$-Wirkung mit $G:=SO^+(1,3)$:
+\[
+R_\Lambda:\ (p,e)\mapsto (p,e\cdot\Lambda),\qquad (e\cdot\Lambda)_\mu:=e_\nu\,\Lambda^\nu{}_\mu.
+\]
+Für eine (endlichdimensionale) Darstellung $\rho:G\to\GL(V)$ sei das \emph{assoziierte Bündel}
+\[
+E_\rho:=\mathrm{Fr}_\eta(M)\times_\rho V\ \longrightarrow\ M,
+\qquad (e,v)\sim (e\cdot\Lambda,\rho(\Lambda)^{-1}v).
+\]
+Ein \emph{Feld vom Typ $\rho$} ist ein glatter Schnitt $\phi\in\Gamma(E_\rho)$.
+
+\emph{Schnitte als äquivariante Abbildungen.}
+Jeder Schnitt $\phi\in\Gamma(E_\rho)$ entspricht eindeutig einer glatten Abbildung
+\[
+\Phi:\mathrm{Fr}_\eta(M)\to V,\qquad \Phi(e\cdot\Lambda)=\rho(\Lambda)^{-1}\,\Phi(e)
+\quad\text{(Rechts-$G$-Äquivarianz),}
+\]
+via $\phi(p)=[e,\Phi(e)]$ (unabhängig von der Wahl $e\in\mathrm{Fr}_\eta(M)_p$).
+Dies identifiziert den \emph{Raum der Schnitte} mit einem Äquivariantenraum:
+\[
+\Gamma(E_\rho)\ \cong\ C^\infty(\mathrm{Fr}_\eta(M),V)^{G\text{-eq}}.
+\]
+
+\emph{Bezugssystem (lokaler Rahmen) und seine Änderung.}
+Eine (lokale) \emph{Rahmensektion} $s:U\to\mathrm{Fr}_\eta(M)$ (auch Vierbein/Tetrad) liefert
+eine triviale Identifikation $E_\rho|_U\simeq U\times V$ über
+\[
+\phi\ \longleftrightarrow\ \phi^{[s]}:U\to V,\qquad
+\phi(p)=[s(p),\,\phi^{[s]}(p)].
+\]
+Wechselt man den Rahmen lokal durch $s' = s\cdot\Lambda$ (mit glatter $\Lambda:U\to G$), so gilt
+\[
+\phi^{[s']}(p)\;=\;\rho\!\big(\Lambda(p)\big)\,\phi^{[s]}(p).
+\]
+Dies ist der \emph{passive} Komponentenwechsel („Bezugssystemwechsel“ als \emph{Rahmenwechsel}).
+
+\emph{Isometrien als aktive Beobachterwechsel.}
+Sei $f\in\Iso(M,g)$ eine Isometrie. Es existiert eine eindeutige liftende Bündelabbildung
+\[
+\tilde f:\mathrm{Fr}_\eta(M)\to \mathrm{Fr}_\eta(M),\qquad \tilde f(p,e)=(f(p),\ d f_p\circ e),
+\]
+mit $\tilde f\circ R_\Lambda=R_\Lambda\circ \tilde f$.
+Auf Schnitten (als äquivariante $\Phi$) wirkt $f$ durch \emph{Pullback}
+\[
+(f^*_\rho\phi)\ \widehat{=}\ \Phi\circ \tilde f:\quad
+\Phi_f(e):=\Phi\!\big(\tilde f(e)\big).
+\]
+Im Trivialisat $s$ liest sich das als
+\[
+(f^*_\rho\phi)^{[s]}(p)
+=\rho\!\big(\Lambda_f(p)\big)\,\phi^{[s_f]}\!\big(f(p)\big),
+\]
+wobei $s_f:=\tilde f\circ s$ und $\Lambda_f:U\to G$ durch $s_f=\big(s\cdot\Lambda_f\big)\circ f^{-1}$ bestimmt ist.
+\emph{In Minkowski} mit globalem konstantem Rahmen und linearem $f=(a,\Lambda)$ vereinfacht sich
+\[
+(f^*_\rho\phi)(x)=\rho(\Lambda)\,\phi(\Lambda x + a).
+\]
+
+\emph{Differentialoperatoren: Natürlichkeit, Symbol, Verbindungen}
+
+\emph{Kovariante Ableitung und ihr Transformationsgesetz.}
+Eine $G$-Verbindung auf $\mathrm{Fr}_\eta(M)$ ist eine $\frak g$-wertige 1-Form $\omega$,
+lokal $\omega^{[s]}:=s^*\omega\in\Omega^1(U,\frak g)$.
+Sie induziert auf $E_\rho$ die kovariante Ableitung
+\[
+\nabla^{[s]}\phi^{[s]}=d\phi^{[s]}+\rho_*\!\big(\omega^{[s]}\big)\,\phi^{[s]}.
+\]
+Unter einem \emph{Rahmenwechsel} $s\mapsto s\cdot\Lambda$ gilt das Eichgesetz
+\[
+\omega^{[s]}\mapsto \omega^{[s']}=\Lambda^{-1}\omega^{[s]}\Lambda+\Lambda^{-1}d\Lambda,
+\qquad
+\nabla^{[s']}\phi^{[s']}=\rho(\Lambda)\,\big(\nabla^{[s]}\phi^{[s]}\big).
+\]
+Unter einer \emph{Isometrie} $f$ gilt (mit $\tilde f^*\omega=\omega$ für Levi-Civita)
+\[
+f_\rho^*(\nabla\phi)=\nabla(f_\rho^*\phi),
+\]
+d.\,h. Pullback und kovariante Ableitung \emph{kommutieren}.
+
+\emph{Natürliche Differentialoperatoren.}
+Ein lokaler Differentialoperator $D:\Gamma(E_\rho)\to\Gamma(E_\sigma)$ heißt \emph{natürlich} (Lorentz-kovariant), wenn
+\[
+\boxed{\quad f^*_\sigma\circ D \;=\; D\circ f^*_\rho \quad\ \text{für alle }f\in\Iso(M,g).}
+\]
+In einem Rahmen $s$ bedeutet dies Kompatibilität mit den Transformationsgesetzen von
+$\phi^{[s]}$, $\omega^{[s]}$ und den Metrik-/Clifford-Daten.
+
+\emph{Hauptsymbol.}
+Für einen Operator $D$ erster Ordnung ist sein Hauptsymbol $\sigma_1(D):T^*M\otimes E_\rho\to E_\sigma$
+bündelmorphismus-linear. Natürlichkeit impliziert
+\[
+\sigma_1(D)_{f(p)}\big((d f_p^{-1})^T\xi\big)
+\;=\; \rho_\sigma(\Lambda_f(p))\,\sigma_1(D)_p(\xi)\,\rho_\rho(\Lambda_f(p))^{-1}.
+\]
+Beispiel: Dirac-Operator $D_{\text{Dir}}=i\slashed{\nabla}-m$ hat
+$\sigma_1(D_{\text{Dir}})(\xi)=\gamma(\xi^\sharp)$ und ist natürlich, weil
+$\gamma$ und $\nabla$ aus $g$ und der Spinverbindung stammen.
+
+\emph{Kanonische Beispiele (SRT, global inertial).}
+\begin{itemize}
+\item \textbf{Skalar (Klein–Gordon):} $\rho=\mathbf{1}$, $E_\rho=M\times\C$,
+\[
+D_{\mathrm{KG}}=\Box_\eta+m^2,\qquad
+\big(D_{\mathrm{KG}}\circ f^*\big)\phi=\big(f^*\circ D_{\mathrm{KG}}\big)\phi.
+\]
+In Komponenten: $\partial'_\mu=(\Lambda^{-1})^\nu{}_\mu\partial_\nu$, $\Lambda^T\eta\Lambda=\eta$.
+
+\item \textbf{Vektor-/1-Form-Feld (Maxwell in Potentialform):}
+$A\in\Omega^1(M)$, $F=dA$, $D_{\mathrm{Max}}=d^\dagger d$.
+Isometrien sind $g$-verträglich $\Rightarrow$ $d$ und $d^\dagger$ sind natürlich,
+also $f^* D_{\mathrm{Max}}=D_{\mathrm{Max}} f^*$.
+
+\item \textbf{Spinorfeld (Dirac):}
+Spin-Struktur $\widetilde{\mathrm{Fr}}_\eta(M)\to\mathrm{Fr}_\eta(M)$,
+$\rho:\Spin(1,3)\to\GL(\C^4)$, $\psi\in\Gamma(S)$.
+Für $f$ mit Lift $\tilde f_{\Spin}$ und zugehörigem $S(\Lambda_f)$ gilt
+\[
+\psi\mapsto f^*_\rho\psi,\quad
+(i\gamma^\mu\nabla_\mu-m)(f^*_\rho\psi)=f_\rho^*((i\gamma^\mu\nabla_\mu-m)\psi).
+\]
+In Minkowski und globalem Inertialrahmen: $\psi'(x)=S(\Lambda)\psi(\Lambda x+a)$.
+\end{itemize}
+
+\emph{Distributionen, Greensche Operatoren, Impulsraum}
+
+\emph{Distributionelle Schnitte.}
+Setze $\Gamma^{-\infty}(E_\rho):=\big(\Gamma_c^\infty(E_\rho^\vee\otimes\mathrm{Vol}_g)\big)^\prime$.
+Ist $D$ natürlich und formal adjungiert $\!D^\dagger$, so kommutiert der Pullback auch im distributionellen Sinn:
+\[
+\langle f^*_\sigma D\phi,\,\varphi\rangle
+=\langle \phi,\, D^\dagger f_*^\sigma\varphi\rangle
+=\langle \phi,\, f_*^\rho D^\dagger\varphi\rangle
+=\langle D\phi,\, f_*^\sigma\varphi\rangle
+=\langle D f^*_\rho\phi,\,\varphi\rangle.
+\]
+
+\emph{Greensche Operatoren.}
+Für hyperbolische, natürliche Operatoren (KG, Dirac) sind die kausalen Greenschen Operatoren
+$E^{\mathrm{ret/adv}}$ ebenfalls natürlich:
+\[
+f^*_\rho\circ E^{\mathrm{ret/adv}} \;=\; E^{\mathrm{ret/adv}}\circ f^*_\rho.
+\]
+
+\emph{Impulsraum (Minkowski).}
+Für temperierte Felder $\phi$ bewirkt $f=(a,\Lambda)$
+\[
+\widehat{(f^*_\rho\phi)}(p)=\rho(\Lambda)\,e^{+i\,a\cdot p}\,\hat\phi(\Lambda^{-1}p),
+\]
+die Massenschale $p^2=m^2$ bleibt invariant; das ist die unitäre (projektive) Darstellung der Poincaré-Gruppe
+im Einteilchenbild.
+
+\emph{„Arbeitsrezept“ (Beobachterwechsel im Detail)}
+
+\begin{enumerate}
+\item \textbf{Feldtyp fixieren:} Wähle $\rho:G\to\GL(V)$ und das assoziierte Bündel $E_\rho$.
+\item \textbf{Schnittsicht:} Schreibe $\phi\in\Gamma(E_\rho)$ als äquivariante $\Phi:\mathrm{Fr}_\eta(M)\to V$.
+\item \textbf{Passiver Wechsel (Rahmen):} $s\mapsto s\cdot\Lambda$ induziert
+$\phi^{[s]}\mapsto \phi^{[s']}(p)=\rho(\Lambda(p))\,\phi^{[s]}(p)$,
+und für jede kovariante Ableitung $\nabla$:
+$\nabla^{[s']}\phi^{[s']}=\rho(\Lambda)\,\nabla^{[s]}\phi^{[s]}$.
+\item \textbf{Aktiver Wechsel (Isometrie):} $f\in\Iso(M,g)$ mit Lift $\tilde f$ liefert
+$f^*_\rho\phi$ via $\Phi\mapsto \Phi\circ\tilde f$.
+In Minkowski: $(f^*_\rho\phi)(x)=\rho(\Lambda)\,\phi(\Lambda x+a)$.
+\item \textbf{Operatorverhalten:} Für natürliche $D$ gilt stets
+\[
+\boxed{\,f^*_\sigma\circ D = D\circ f^*_\rho\,}.
+\]
+Lokal: Rahmenwechsel-/Eichgesetz für $\omega^{[s]}$, Kettenregel für Ableitungen,
+und $G$-Kovarianz der Darstellung reichen aus.
+\end{enumerate}
+
+\emph{Zwei Mikro-Beispiele}
+
+\emph{(i) Klein–Gordon (Skalar).}
+$E_{\mathbf 1}=M\times\C$, $\nabla=d$, $D=\Box_\eta+m^2$.
+Für $f=(a,\Lambda)$:
+\[
+\phi'(x):=(f^* \phi)(x)=\phi(\Lambda x+a),\qquad
+(\Box_\eta+m^2)\phi'= \big((\Box_\eta+m^2)\phi\big)\!\circ f.
+\]
+
+\emph{(ii) Dirac (Spinor).}
+$S\to M$ Spinorbündel, $\nabla^S$ Spinverbindung, $D=i\slashed{\nabla} - m$.
+In Minkowski (globaler Vierbein, $\omega=0$):
+\[
+\psi'(x)=S(\Lambda)\,\psi(\Lambda x+a),\qquad
+(i\gamma^\mu\partial_\mu-m)\psi' = S(\Lambda)\,(i\gamma^\mu\partial_\mu-m)\psi\circ f.
+\]
+
+\emph{Fazit}
+
+Bezugssystemwechsel sind \emph{entweder} (passiv) Rahmenwechsel im Hauptbündel $\mathrm{Fr}_\eta(M)$
+\emph{oder} (aktiv) Isometrien des Basisraums mit induzierter Lift-Wirkung.
+Felder sind Schnitte assoziierter Bündel bzw. äquivariante Funktionen auf $\mathrm{Fr}_\eta(M)$.
+Natürliche (geometrisch konstruierte) Differentialoperatoren kommutieren
+mit beiden Arten des Wechsels. In der SRT (Minkowski, global inertial)
+reduziert sich der gesamte Apparat auf die üblichen, komponentenweisen Lorentz- und
+Translationsgesetze.
+
+\pagebreak
+
+\subsection{Aktive vs. Passive Transformationen – konzeptionelle Trennung und physikalische Bedeutung}
+
+\emph{1. Grundidee.}
+In der formalen bündeltheoretischen Sprache sind \emph{passive} und \emph{aktive} Transformationen
+zwei konzeptionell verschiedene, aber mathematisch eng verwandte Vorgänge:
+
+\begin{itemize}
+  \item Der \textbf{passive Wechsel} betrifft die \emph{Darstellung desselben Feldes}
+  in einem \emph{anderen lokalen Rahmen} oder Koordinatensystem.
+  Er verändert nicht das Feld als geometrisches Objekt, sondern nur seine \emph{Komponentendarstellung}.
+
+  \item Der \textbf{aktive Wechsel} betrifft eine \emph{tatsächliche Transformation des Feldes selbst}
+  durch eine Isometrie der Raumzeit.
+  Er beschreibt die \emph{Abbildung physikalischer Konfigurationen auf neue Konfigurationen}
+  – etwa das „Verschieben“ oder „Verkippen“ eines Feldes im Raumzeitkontinuum.
+\end{itemize}
+
+Beide Transformationen sind formal durch dieselbe Gruppenstruktur
+($SO^+(1,3)$ bzw. Poincaré-Gruppe) beschrieben,
+aber sie wirken auf \emph{verschiedenen Ebenen der Beschreibung}.
+
+\bigskip
+\emph{2. Passiver Bezugssystemwechsel (Rahmenwechsel).}
+
+Sei $s:U\to \mathrm{Fr}_\eta(M)$ ein lokaler orthonormaler Rahmen.
+Das Feld $\phi\in\Gamma(E_\rho)$ erscheint darin als lokale Darstellung
+$\phi^{[s]}:U\to V$ mit
+\[
+\phi(p) = [\,s(p),\,\phi^{[s]}(p)\,].
+\]
+Wählt man nun einen neuen Rahmen $s' = s\cdot\Lambda$ mit glatter $\Lambda:U\to SO^+(1,3)$, so
+ändert sich die lokale Darstellung zu
+\[
+\boxed{\quad
+\phi^{[s']}(p)=\rho\!\big(\Lambda(p)\big)\,\phi^{[s]}(p).
+\quad}
+\]
+Dabei bleibt der geometrische Schnitt $\phi$ \emph{identisch}.
+Es wird lediglich eine andere \emph{Komponentenbeschreibung} gewählt.
+
+\smallskip
+\emph{Anschaulich:}
+Man „dreht oder boostet das Koordinatengitter“, ohne das physikalische Objekt selbst zu verändern.
+Wie in der linearen Algebra bleibt der geometrische Vektor derselbe, aber seine Koordinaten ändern sich.
+
+\smallskip
+\emph{Formales Verhalten der Ableitung:}
+Für eine kovariante Ableitung $\nabla$ gilt das Eichgesetz
+\[
+\nabla^{[s']}\phi^{[s']}=\rho(\Lambda)\,\nabla^{[s]}\phi^{[s]}.
+\]
+Das heißt: die Gleichungsform $D(\phi)=0$ bleibt erhalten, wenn Operatoren und Felder
+gemeinsam in den neuen Rahmen überführt werden.
+
+\bigskip
+\emph{3. Aktiver Bezugssystemwechsel (Isometrie).}
+
+Eine Isometrie $f\in\Iso(M,g)$ beschreibt einen \emph{aktiven Vorgang}:
+das Feld selbst wird in der Raumzeit verschoben oder transformiert.
+Die induzierte Bündelabbildung $\tilde f:\mathrm{Fr}_\eta(M)\to \mathrm{Fr}_\eta(M)$ lautet
+\[
+\tilde f(p,e)=(f(p),df_p\circ e).
+\]
+Der Pullback $f^*_\rho$ wirkt dann auf einem Schnitt $\phi$ (äquivalent auf der äquivarianten Darstellung
+$\Phi:\mathrm{Fr}_\eta(M)\to V$) durch
+\[
+(f^*_\rho\phi)\;\widehat{=}\;\Phi\circ\tilde f,
+\quad\text{d.\,h.}\quad
+(f^*_\rho\phi)(p)=[\,e,\;\Phi(\tilde f(e))\,].
+\]
+In einem lokalen Trivialisat (mit Rahmen $s$) liest sich das konkret als
+\[
+\boxed{\quad
+(f^*_\rho\phi)^{[s]}(p)
+=\rho\!\big(\Lambda_f(p)\big)\,\phi^{[s_f]}\!\big(f(p)\big),
+\quad s_f=\tilde f\circ s.
+\quad}
+\]
+
+\smallskip
+\emph{Physikalisch:}
+$f$ beschreibt hier einen realen \emph{Beobachterwechsel im physikalischen Sinne}:
+man betrachtet dieselbe physikalische Situation \emph{aus einem anderen Inertialsystem}.
+Dabei werden:
+\begin{itemize}
+  \item die \emph{Ereignispunkte} verschoben: $p\mapsto f(p)$,
+  \item das \emph{Feld} entlang dieser Verschiebung mittransportiert (Pullback),
+  \item die \emph{internen Komponenten} des Feldes durch $\rho(\Lambda_f)$ transformiert.
+\end{itemize}
+
+\smallskip
+Im Minkowski-Fall $(M,g)=(\R^{1,3},\eta)$ mit $f(x)=\Lambda x + a$
+und konstanter Darstellung $\rho(\Lambda)$ vereinfacht sich das zu:
+\[
+\boxed{\quad
+(f^*_\rho\phi)(x)=\rho(\Lambda)\,\phi(\Lambda x + a).
+\quad}
+\]
+Dies ist genau die übliche \emph{aktive Poincaré-Transformation}
+eines Feldes in der Physik.
+
+\bigskip
+\emph{4. Vergleich und physikalische Relevanz.}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}lll@{}}
+\textbf{Aspekt} & \textbf{Passiver Wechsel} & \textbf{Aktiver Wechsel} \\
+Objekt & Darstellung $\phi^{[s]}$ & Feld $\phi$ selbst \\
+Wirkung & $s\mapsto s\cdot\Lambda$ & $f:M\to M$, $\tilde f$ auf Bündel \\
+Verändert & nur Komponenten & Argument und interne Struktur \\
+Interpretation & Änderung des Koordinatensystems & reale Transformation des physikalischen Systems \\
+Mathematisch & lokale Eichtransformation & Pullback durch Isometrie \\
+In Minkowski & \textit{„Wechsel der Messbasis“} & \textit{„Poincaré-Aktion auf Feldern“} \\
+\end{tabular}
+\end{center}
+
+\smallskip
+\emph{Physikalisch relevant:}
+In der \textbf{speziellen Relativitätstheorie} (flacher Minkowski-Raum)
+interessiert man sich primär für den \emph{aktiven Wechsel}, 
+weil er die tatsächliche Symmetrie der Naturgesetze beschreibt:
+\[
+D(\phi)=0 \quad\Longleftrightarrow\quad D(f^*_\rho\phi)=0,
+\quad f\in\Iso(\R^{1,3},\eta).
+\]
+Der passive Wechsel ist dagegen eine rein \emph{deskriptive Freiheit}:
+er ändert nur, wie man dieselbe Situation im selben System beschreibt.
+
+\bigskip
+\emph{5. Informationsfluss bei aktiver Transformation.}
+
+Sei $\phi(x)$ ein Feld in einem Inertialsystem $S$.  
+Ein zweiter Beobachter $S'$ bewegt sich relativ zu $S$ durch $f(x)=\Lambda x+a$.
+Dann gilt:
+
+\[
+\begin{aligned}
+&\text{(i) Ereigniszuordnung:} &&x' = f^{-1}(x) = \Lambda^{-1}(x - a),\\[2pt]
+&\text{(ii) Feldzuordnung:} &&\phi'(x') = \rho(\Lambda)\,\phi(x),\\[2pt]
+&\text{(iii) Informationsfluss:} &&\phi'(x')\ \text{trägt dieselbe physikalische Information über Ereignis }x=f(x'). 
+\end{aligned}
+\]
+Somit beschreibt die aktive Transformation die \emph{Übertragung physikalischer Information}
+zwischen Beobachtern: jedes Ereignis $x$ im alten System entspricht einem Ereignis $x'$
+im neuen, und das Feld $\phi'(x')$ kodiert die gleiche physikalische Realität, nur in
+anderen Koordinaten und mit transformierten internen Komponenten.
+
+
+\pagebreak
+\subsection{Lorentztransformationen als Rechts-/Linkswirkungen auf Bündeln}
+
+\emph{Framenbündel und Strukturgruppe}
+Sei $(M,g)$ eine Lorentz-Mannigfaltigkeit (in der SRT: $M=\mathbb{R}^{1,3}$, $g=\eta$).
+Das \emph{Lorentz-Rahmenbündel}
+\[
+\mathrm{Fr}_\eta(M)
+:=\bigl\{(p,e)\ \big|\ p\in M,\ e=(e_0,\dots,e_3)\text{ Basis von }T_pM,\ g(e_\mu,e_\nu)=\eta_{\mu\nu}\bigr\}
+\]
+ist ein Hauptbündel über $M$ mit Strukturgruppe $G:=O(1,3)$ (bzw.\ $SO^+(1,3)$ in der orientierten/zeitorientierten Komponente).
+
+
+\emph{Rechtswirkung der Lorentzgruppe}
+Die Gruppenwirkung
+\[
+R_\Lambda:\ \mathrm{Fr}_\eta(M)\to\mathrm{Fr}_\eta(M),\qquad
+(p,e)\mapsto(p,e\cdot\Lambda),\quad (e\cdot\Lambda)_\mu:=e_\nu\,\Lambda^\nu{}_\mu,\ \ \Lambda\in G,
+\]
+ist frei und transitiv auf jeder Faser und \emph{definiert} die Hauptbündelstruktur. 
+Diese \emph{Rechtswirkung} modelliert den \textbf{passiven Rahmenwechsel} (Bezugssystemwechsel am selben Raumzeitpunkt).
+
+
+\emph{Linkswirkung durch Isometrien der Basis}
+Jede Isometrie $f\in\Iso(M,g)$ hebt sich kanonisch zu einer \emph{Linkswirkung}
+\[
+\tilde f:\ \mathrm{Fr}_\eta(M)\to\mathrm{Fr}_\eta(M),\qquad
+\tilde f(p,e):=(f(p),\,df_p\circ e)
+\]
+an. Es gilt die Kommutativität mit der Rechtswirkung:
+\[
+\tilde f\big((p,e)\cdot\Lambda\big)=\tilde f(p,e)\cdot\Lambda,\qquad \forall\,\Lambda\in G.
+\]
+Diese \emph{Linkswirkung} entspricht dem \textbf{aktiven Beobachterwechsel} (Raumzeit-Isometrie auf der Basis).
+
+
+\emph{Assoziierte Bündel und Felder}
+Sei $\rho:G\to\GL(V)$ eine Darstellung. Das \emph{assoziierte Bündel}
+\[
+E_\rho\ :=\ \mathrm{Fr}_\eta(M)\times_\rho V\ \longrightarrow\ M,\qquad
+(e,v)\sim(e\cdot\Lambda,\ \rho(\Lambda)^{-1}v),
+\]
+trägt natürliche Links-/Rechtswirkungen:
+\begin{itemize}
+  \item \textbf{Rechts (Lorentz, passiv):} $R_\Lambda:[e,v]\mapsto[e\cdot\Lambda,\ v]$, was auf der Faser den Komponentenwechsel $v\mapsto \rho(\Lambda)\,v$ in einer gewählten lokalen Rahmensektion induziert.
+  \item \textbf{Links (Isometrie, aktiv):} $\tilde f:[e,v]\mapsto[\tilde f(e),\ v]$, was dem Pullback $f^*$ von Schnitten entspricht.
+\end{itemize}
+Ein \emph{Feld} vom Typ $\rho$ ist ein Schnitt $\phi\in\Gamma(E_\rho)$, äquivalent eine äquivariante Abbildung
+\[
+\Phi:\mathrm{Fr}_\eta(M)\to V,\qquad \Phi(e\cdot\Lambda)=\rho(\Lambda)^{-1}\Phi(e).
+\]
+
+
+\emph{Aktiv vs.\ Passiv auf Feldern}
+Für $\phi\in\Gamma(E_\rho)$, dargestellt durch eine äquivariante $\Phi$, gilt:
+\begin{enumerate}
+  \item \textbf{Passiver Rahmenwechsel (Rechtswirkung).} Wählt man lokal einen Rahmen $s:U\to\mathrm{Fr}_\eta(M)$, so sind die Komponenten $\phi^{[s]}:U\to V$ durch $\phi^{[s]}(p)=\Phi(s(p))$ gegeben und transformieren bei $s\mapsto s\cdot\Lambda$ punktweise durch
+  \[
+  \phi^{[s\cdot\Lambda]}(p)=\rho\big(\Lambda(p)\big)\,\phi^{[s]}(p).
+  \]
+  \item \textbf{Aktiver Beobachterwechsel (Linkswirkung).} Für $f\in\Iso(M,g)$ ist das transformierte Feld
+  \[
+  (f^*\phi)(p)\ :=\ [\tilde f^{-1}(s(p)),\,\phi^{[s]}(f(p))]
+  \quad\Longleftrightarrow\quad
+  \Phi\ \mapsto\ \Phi\circ\tilde f.
+  \]
+\end{enumerate}
+
+
+\emph{Kovarianz natürlicher Differentialoperatoren}
+Sei $D:\Gamma(E_\rho)\to\Gamma(E_\sigma)$ ein \emph{natürlicher} Differentialoperator (aus $g$ und der zugehörigen Verbindung gebaut). Dann gilt für alle $f\in\Iso(M,g)$
+\[
+f^*\circ D\ =\ D\circ f^*.
+\]
+In lokaler Rahmendarstellung bedeutet dies Rahmenwechsel-Kovarianz: wechselt $s\mapsto s\cdot\Lambda$, so transformieren die Komponenten von $D$ darstellungsgetreu, die \emph{Operatorform} bleibt erhalten.
+
+
+\emph{Minkowski-Spezialfall}
+Für $(M,g)=(\mathbb{R}^{1,3},\eta)$ ist das Rahmenbündel trivial:
+\[
+\mathrm{Fr}_\eta(\mathbb{R}^{1,3})\cong \mathbb{R}^{1,3}\times SO^+(1,3).
+\]
+\begin{itemize}
+  \item \textbf{Rechts (passiv):} $(x,e)\cdot\Lambda=(x,e\Lambda)$ entspricht dem klassischen Lorentz-\emph{Komponentenwechsel} im selben Ereignis.
+  \item \textbf{Links (aktiv, Poincaré):} Für $(a,\Lambda)$ wirkt
+  \[
+  (a,\Lambda)\cdot(x,e)\ =\ \big(\Lambda x+a,\ \Lambda e\big),
+  \]
+  und auf einem $\rho$-Feld
+  \[
+  \phi(x)\ \longmapsto\ \big((a,\Lambda)^*\phi\big)(x)\ =\ \rho(\Lambda)\,\phi(\Lambda^{-1}(x-a)).
+  \]
+  \item Natürliche Operatoren (z.\,B.\ Klein–Gordon $D=\Box_\eta+m^2$, Dirac $D=i\gamma^\mu\partial_\mu-m$, Maxwell in Potentialform $D=d^\dagger d$) erfüllen
+  \[
+  (a,\Lambda)^*\circ D\ =\ D\circ (a,\Lambda)^*.
+  \]
+\end{itemize}
+
+
+\emph{Konzeptuelle Zuordnung}
+\begin{itemize}
+  \item \textbf{Rechtswirkung} $R_\Lambda$ auf $\mathrm{Fr}_\eta(M)$: \emph{passiver} Wechsel des lokalen orthonormalen Rahmens (Darstellung/Komponentenwechsel).
+  \item \textbf{Linkswirkung} $\tilde f$ durch $f\in\Iso(M,g)$: \emph{aktiver} Beobachterwechsel (Isometrie der Basis, Pullback $f^*$ auf Feldern).
+  \item Die \textbf{Forminvarianz} der Gesetze ist die \textbf{Natürlichkeit} der entsprechenden Differentialoperatoren bzgl.\ der Linkswirkung, kompatibel mit der darstellungsinduzierten Rechtswirkung.
+\end{itemize}
+
+
+\pagebreak
+
+\subsection{Aktive Poincaré-Transformationen auf skalaren Feldern im Minkowski-Raum}
+
+\emph{Setting und Notation.}
+Sei $(M,g)=(\mathbb{R}^{1,3},\eta)$ mit $\eta=\mathrm{diag}(1,-1,-1,-1)$.
+Die Poincaré-Gruppe ist das semidirekte Produkt
+\[
+\mathcal{P}\;=\;\mathbb{R}^{1,3}\rtimes SO^+(1,3)
+\;=\;\{(a,\Lambda)\mid a\in\mathbb{R}^{1,3},\ \Lambda\in SO^+(1,3)\},
+\]
+mit Gruppenmultiplikation
+\[
+(a_2,\Lambda_2)\cdot(a_1,\Lambda_1)\;=\;(a_2+\Lambda_2 a_1,\ \Lambda_2\Lambda_1),
+\qquad (0,\mathbf{1})\ \text{neutral},\quad (a,\Lambda)^{-1}=(-\Lambda^{-1}a,\Lambda^{-1}).
+\]
+
+\emph{Aktive Wirkung auf der Basis (Ereignisraum).}
+Die \emph{aktive} Poincaré-Wirkung auf $M$ ist die linke Gruppenwirkung
+\[
+\begin{aligned}
+\Phi:\ \mathcal{P}\times M&\longrightarrow M,\\
+\bigl((a,\Lambda),x\bigr)&\longmapsto \Phi\bigl((a,\Lambda),x\bigr):=\Lambda x + a.
+\end{aligned}
+\]
+Damit wird ein Ereignis $x$ in ein \emph{neues} Ereignis $\Lambda x+a$ überführt.
+
+\emph{Skalares Feld als Schnitt.}
+Ein (komplexes) skalares Feld ist ein Schnitt des trivialen Linienbündels
+$E:=M\times\mathbb{C}\to M$; äquivalent ist $\Gamma(E)\cong C^\infty(M,\mathbb{C})$.
+Wir schreiben ein Feld als Funktion $\phi:M\to\mathbb{C}$, $x\mapsto \phi(x)$.
+
+\emph{Induzierte Links\-wirkung auf Schnitten (Pullback-Definition).}
+Die aktive Basiswirkung $\Phi$ induziert eine \emph{linke} Gruppenwirkung
+\[
+\Pi:\ \mathcal{P}\times\Gamma(E)\longrightarrow\Gamma(E),
+\]
+definiert durch \emph{Pullback entlang der Basiswirkung}:
+\[
+\boxed{\quad
+\bigl(\Pi((a,\Lambda),\phi)\bigr)(x)
+:= \phi\!\bigl(\Phi((a,\Lambda),x)\bigr)
+= \phi(\Lambda x + a).
+\quad}
+\]
+Kurzschreibweise: $(a,\Lambda)^*\,\phi := \phi\circ(\Lambda(\cdot)+a)$.
+Dies ist genau die aktive Poincaré-Transformation eines \emph{skalaren} Feldes.
+
+\emph{Axiome einer Gruppenwirkung (Nachweis).}
+Für alle $(a_i,\Lambda_i)\in\mathcal{P}$, $\phi\in\Gamma(E)$ und $x\in M$ gilt:
+\[
+\begin{aligned}
+\text{(i) Einheit:}\quad & (0,\mathbf{1})^*\phi(x)=\phi(\mathbf{1}\,x+0)=\phi(x),\\[2pt]
+\text{(ii) Verträglichkeit:}\quad &
+\bigl((a_2,\Lambda_2)\cdot(a_1,\Lambda_1)\bigr)^*\phi(x)
+= \phi\bigl(\Lambda_2(\Lambda_1 x+a_1)+a_2\bigr)\\
+&= \bigl((a_1,\Lambda_1)^*\phi\bigr)\bigl(\Lambda_2 x+a_2\bigr)
+= (a_2,\Lambda_2)^*\bigl((a_1,\Lambda_1)^*\phi\bigr)(x).
+\end{aligned}
+\]
+Also ist $\Pi$ eine wohldefinierte \emph{linke} Gruppenwirkung.
+
+\emph{Abbildungsvorschrift (explizit zum Ausrechnen).}
+Um $(a,\Lambda)^*\phi$ an einem Punkt $x$ zu berechnen:
+\begin{enumerate}
+  \item \textbf{Bildpunkt bestimmen:} $x'=\Lambda x + a$.
+  \item \textbf{Feld am Bildpunkt auswerten:} $((a,\Lambda)^*\phi)(x)=\phi(x')$.
+\end{enumerate}
+Für Ableitungen folgt aus der Kettenregel:
+\[
+\partial_\mu\bigl((a,\Lambda)^*\phi\bigr)(x)
+= \Lambda^\nu{}_{\mu}\,(\partial_\nu\phi)(\Lambda x+a),\qquad
+\square_\eta\bigl((a,\Lambda)^*\phi\bigr)=\bigl(\square_\eta\phi\bigr)\circ(\Lambda(\cdot)+a).
+\]
+Insbesondere kommutiert der Klein–Gordon-Operator $P_m=\square_\eta+m^2$ mit der Wirkung:
+\[
+(a,\Lambda)^*\,P_m\phi \;=\; P_m\bigl((a,\Lambda)^*\phi\bigr).
+\]
+
+\emph{Alternativ (gleichwertige „Inertialbeobachter“-Schreibweise).}
+Man stellt oft auf „neue“ Koordinaten $x':=\Lambda x + a$ um und definiert das transformierte Feld
+\[
+\phi'(x')\ :=\ (a,\Lambda)^*\phi\bigl(\Lambda^{-1}(x'-a)\bigr)
+=\phi(x')\quad\text{(skalar!)}.
+\]
+Schreibt man alles wieder als Funktion von $x$, erhält man die übliche kompakte Formel
+\[
+\boxed{\quad \phi'(x) = \bigl((a,\Lambda)^*\phi\bigr)(x)
+\;=\; \phi(\Lambda x + a).\quad}
+\]
+Beide Notationen sind identisch; sie unterscheiden nur, ob man $x$ oder $x'$ als freies Argument wählt.
+
+\emph{Bemerkung (Darstellungen und Spin).}
+Für Nicht-Skalarfelder (Vektoren/Spinoren) tritt zusätzlich die \emph{interne} Darstellung
+$\rho(\Lambda)$ in der Faser auf; für Skalarfelder ist $\rho=\mathbf{1}$ trivial und obige Formel
+reduziert sich auf den reinen Pullback auf der Basis. Deshalb steht beim Skalarfeld \emph{kein}
+präfaktor $\rho(\Lambda)$ vor $\phi$.
+
+\emph{Verallgemeinerung (Distributionen).}
+Die gleiche Vorschrift definiert eine stetige linke Gruppenwirkung auf temperierten
+Distributionen $\mathcal{S}'(M)$ durch Dualität:
+\[
+\langle (a,\Lambda)^*u,\; \varphi\rangle
+:= \langle u,\; \varphi\circ(\Lambda^{-1}(\cdot - a)) \rangle,
+\qquad u\in\mathcal{S}'(M),\ \varphi\in\mathcal{S}(M).
+\]
+Bei glattem $u=\phi$ fällt dies mit der obigen Formel zusammen.
+
+\emph{Zusammenfassung (kompakte Definition).}
+Die \emph{aktive Poincaré-Transformation} eines skalaren Feldes
+$\phi\in\Gamma(M\times\mathbb{C})\cong C^\infty(M)$ ist die linke Gruppenwirkung
+\[
+\boxed{\;
+\begin{aligned}
+\Pi:\ \mathcal{P}\times C^\infty(M)&\longrightarrow C^\infty(M),\\
+\bigl((a,\Lambda),\phi\bigr)&\longmapsto (a,\Lambda)^*\phi:=\phi\circ(\Lambda(\cdot)+a),
+\end{aligned}
+\;}
+\]
+die die Gruppenaxiome erfüllt und mit allen natürlichen (Poincaré-kovarianten)
+Differentialoperatoren (z.\,B.\ $P_m$) kommutiert.
+
+\pagebreak
+\printbibliography
+\end{document}

@@ -1,0 +1,20 @@
+{
+  "score": 0.7,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es gibt einige Unklarheiten und Fehler bei den Vorzeichen und der Anwendung der Antikommutationsrelationen.",
+  "weaknesses": [
+    {
+      "code": "incorrect_sign",
+      "msg": "Das Vorzeichen in der Umformung von \\(-\\gamma^\\nu \\gamma^\\mu \\partial_\\nu \\partial_\\mu\\) ist falsch.",
+      "math_hint": "-\\gamma^\\nu \\gamma^\\mu \\partial_\\nu \\partial_\\mu = g^{\\nu\\mu} \\partial_\\nu \\partial_\\mu sollte korrekt sein."
+    },
+    {
+      "code": "anticommutation_misuse",
+      "msg": "Die Anwendung der Antikommutationsrelationen ist nicht korrekt dargestellt.",
+      "math_hint": "\\{\\gamma^\\nu, \\gamma^\\mu\\} = 2g^{\\nu\\mu} sollte korrekt verwendet werden."
+    }
+  ],
+  "fix_suggestions": [
+    "\\gamma^\\nu \\gamma^\\mu \\partial_\\nu \\partial_\\mu = g^{\\nu\\mu} \\partial_\\nu \\partial_\\mu",
+    "\\{\\gamma^\\nu, \\gamma^\\mu\\} = 2g^{\\nu\\mu} \\Rightarrow \\gamma^\\nu \\gamma^\\mu = g^{\\nu\\mu} - \\gamma^\\mu \\gamma^\\nu"
+  ]
+}

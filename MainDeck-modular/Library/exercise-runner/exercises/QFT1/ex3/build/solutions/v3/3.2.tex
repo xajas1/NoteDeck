@@ -1,0 +1,83 @@
+Um das Transformationsverhalten der bilinearen Kovarianten unter Lorentztransformationen vollständig zu verstehen, ist es wichtig, die Rolle von \(\operatorname{det}(\Lambda)\) bei der Transformation von \(\gamma^5\) zu klären. Dies hängt mit den Paritätseigenschaften von \(\gamma^5\) zusammen.
+
+Zunächst transformiert ein Dirac-Spinor \(\psi\) unter einer Lorentztransformation \(\Lambda\) gemäß:
+
+\[
+\psi \rightarrow S(\Lambda) \psi
+\]
+
+und der adjungierte Spinor \(\bar{\psi}\) transformiert entsprechend:
+
+\[
+\bar{\psi} \rightarrow \bar{\psi} S^{-1}(\Lambda)
+\]
+
+Betrachten wir die bilinearen Formen:
+
+1. **Pseudoskalar \(\bar{\psi} \gamma^5 \psi\):**
+
+Die Transformation ergibt sich aus:
+
+\[
+\bar{\psi} \gamma^5 \psi \rightarrow \bar{\psi} S^{-1}(\Lambda) \gamma^5 S(\Lambda) \psi
+\]
+
+Um die Transformationseigenschaft von \(\gamma^5\) zu verstehen, betrachten wir:
+
+\[
+S^{-1}(\Lambda) \gamma^5 S(\Lambda) = \gamma^5 \cdot \operatorname{det}(\Lambda)
+\]
+
+Dies folgt aus der Tatsache, dass \(\gamma^5\) ein Pseudoskalar ist und sich unter Paritätstransformationen mit dem Determinantenfaktor \(\operatorname{det}(\Lambda)\) ändert. Für Paritätstransformationen gilt \(\operatorname{det}(\Lambda) = -1\), da sie die Orientierung des Raumes umkehren. Daraus folgt:
+
+\[
+\bar{\psi} \gamma^5 \psi \rightarrow \operatorname{det}(\Lambda) \bar{\psi} \gamma^5 \psi
+\]
+
+Dies zeigt, dass \(\bar{\psi} \gamma^5 \psi\) als Pseudoskalar transformiert.
+
+2. **Axialer Vektor \(\bar{\psi} \gamma^\mu \gamma^5 \psi\):**
+
+Für diesen Ausdruck haben wir:
+
+\[
+\bar{\psi} \gamma^\mu \gamma^5 \psi \rightarrow \bar{\psi} S^{-1}(\Lambda) \gamma^\mu \gamma^5 S(\Lambda) \psi
+\]
+
+Da \(\gamma^\mu\) als Vektor transformiert, gilt:
+
+\[
+S^{-1}(\Lambda) \gamma^\mu S(\Lambda) = \Lambda_\nu^\mu \gamma^\nu
+\]
+
+Kombiniert mit der Transformationseigenschaft von \(\gamma^5\), ergibt sich:
+
+\[
+\bar{\psi} \gamma^\mu \gamma^5 \psi \rightarrow \operatorname{det}(\Lambda) \Lambda_\nu^\mu \bar{\psi} \gamma^\nu \gamma^5 \psi
+\]
+
+Dies zeigt, dass \(\bar{\psi} \gamma^\mu \gamma^5 \psi\) als axialer Vektor transformiert.
+
+3. **Antisymmetrischer Tensor \(\bar{\psi} \sigma^{\mu \nu} \psi\):**
+
+Für den antisymmetrischen Tensor \(\sigma^{\mu \nu} = \frac{\mathrm{i}}{2} [\gamma^\mu, \gamma^\nu]\) ergibt sich die Transformation:
+
+\[
+\bar{\psi} \sigma^{\mu \nu} \psi \rightarrow \bar{\psi} S^{-1}(\Lambda) \sigma^{\mu \nu} S(\Lambda) \psi
+\]
+
+Da \(\sigma^{\mu \nu}\) aus den \(\gamma\)-Matrizen besteht, die als Tensoren transformieren, folgt:
+
+\[
+S^{-1}(\Lambda) \sigma^{\mu \nu} S(\Lambda) = \Lambda_\alpha^\mu \Lambda_\beta^\nu \sigma^{\alpha \beta}
+\]
+
+Daraus ergibt sich:
+
+\[
+\bar{\psi} \sigma^{\mu \nu} \psi \rightarrow \Lambda_\alpha^\mu \Lambda_\beta^\nu \bar{\psi} \sigma^{\alpha \beta} \psi
+\]
+
+Dies zeigt, dass \(\bar{\psi} \sigma^{\mu \nu} \psi\) als antisymmetrischer Tensor transformiert.
+
+%CHECK: Erklärte die Rolle von \(\operatorname{det}(\Lambda)\) bei \(\gamma^5\) Transformation, bezog sich auf Paritätseigenschaften und hergeleitet, warum \(\operatorname{det}(\Lambda) = -1\) für Paritätstransformationen gilt.

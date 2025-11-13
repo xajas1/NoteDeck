@@ -1,0 +1,77 @@
+Um die Transformationsverhalten der gegebenen bilinearen Kovarianten unter Lorentztransformationen zu beweisen, verwenden wir die Transformationseigenschaften der Dirac-Spinoren und der Gamma-Matrizen.
+
+Zunächst erinnern wir uns daran, dass ein Dirac-Spinor $\psi$ unter einer Lorentztransformation $\Lambda$ wie folgt transformiert:
+
+\[
+\psi \rightarrow S(\Lambda) \psi
+\]
+
+wobei $S(\Lambda)$ die Spinor-Repräsentation der Lorentztransformation ist. Die adjungierte Spinor $\bar{\psi}$ transformiert entsprechend:
+
+\[
+\bar{\psi} \rightarrow \bar{\psi} S^{-1}(\Lambda)
+\]
+
+Nun betrachten wir die einzelnen bilinearen Formen:
+
+1. **Pseudoskalar $\bar{\psi} \gamma^5 \psi$:**
+
+Die Transformation dieser Größe ergibt sich aus:
+
+\[
+\bar{\psi} \gamma^5 \psi \rightarrow \bar{\psi} S^{-1}(\Lambda) \gamma^5 S(\Lambda) \psi
+\]
+
+Unter Verwendung der gegebenen Transformationseigenschaft von $\gamma^5$, nämlich $S^{-1}(\Lambda) \gamma^5 S(\Lambda) = \operatorname{det}(\Lambda) \gamma^5$, erhalten wir:
+
+\[
+\bar{\psi} \gamma^5 \psi \rightarrow \operatorname{det}(\Lambda) \bar{\psi} \gamma^5 \psi
+\]
+
+Dies zeigt, dass $\bar{\psi} \gamma^5 \psi$ als Pseudoskalar transformiert.
+
+2. **Axialer Vektor $\bar{\psi} \gamma^\mu \gamma^5 \psi$:**
+
+Für diesen Ausdruck haben wir:
+
+\[
+\bar{\psi} \gamma^\mu \gamma^5 \psi \rightarrow \bar{\psi} S^{-1}(\Lambda) \gamma^\mu \gamma^5 S(\Lambda) \psi
+\]
+
+Da $\gamma^\mu$ als Vektor transformiert, gilt:
+
+\[
+S^{-1}(\Lambda) \gamma^\mu S(\Lambda) = \Lambda_\nu^\mu \gamma^\nu
+\]
+
+Kombiniert mit der Transformationseigenschaft von $\gamma^5$, ergibt sich:
+
+\[
+\bar{\psi} \gamma^\mu \gamma^5 \psi \rightarrow \operatorname{det}(\Lambda) \Lambda_\nu^\mu \bar{\psi} \gamma^\nu \gamma^5 \psi
+\]
+
+Dies zeigt, dass $\bar{\psi} \gamma^\mu \gamma^5 \psi$ als axialer Vektor transformiert.
+
+3. **Antisymmetrischer Tensor $\bar{\psi} \sigma^{\mu \nu} \psi$:**
+
+Für den antisymmetrischen Tensor $\sigma^{\mu \nu} = \frac{\mathrm{i}}{2} [\gamma^\mu, \gamma^\nu]$ ergibt sich die Transformation:
+
+\[
+\bar{\psi} \sigma^{\mu \nu} \psi \rightarrow \bar{\psi} S^{-1}(\Lambda) \sigma^{\mu \nu} S(\Lambda) \psi
+\]
+
+Da $\sigma^{\mu \nu}$ aus den $\gamma$-Matrizen besteht, die als Tensoren transformieren, folgt:
+
+\[
+S^{-1}(\Lambda) \sigma^{\mu \nu} S(\Lambda) = \Lambda_\alpha^\mu \Lambda_\beta^\nu \sigma^{\alpha \beta}
+\]
+
+Daraus ergibt sich:
+
+\[
+\bar{\psi} \sigma^{\mu \nu} \psi \rightarrow \Lambda_\alpha^\mu \Lambda_\beta^\nu \bar{\psi} \sigma^{\alpha \beta} \psi
+\]
+
+Dies zeigt, dass $\bar{\psi} \sigma^{\mu \nu} \psi$ als antisymmetrischer Tensor transformiert. 
+
+Zusammenfassend haben wir gezeigt, dass die bilinearen Formen die angegebenen Transformationseigenschaften unter Lorentztransformationen besitzen.

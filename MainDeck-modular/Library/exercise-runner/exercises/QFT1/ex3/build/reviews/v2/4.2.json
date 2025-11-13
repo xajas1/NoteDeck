@@ -1,0 +1,14 @@
+{
+  "score": 0.9,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlt eine explizite Diskussion über die Bedingung für positive Definitheit im Kontext der Dirac-Gleichung.",
+  "weaknesses": [
+    {
+      "code": "MISSING_POSITIVE_DEFINITENESS_DISCUSSION",
+      "msg": "Die Bedingung für positive Definitheit wird nicht explizit im Kontext der Dirac-Gleichung diskutiert.",
+      "math_hint": "Diskussion über $j^0 > 0$ für alle $\\\\psi \\\\neq 0$ fehlt."
+    }
+  ],
+  "fix_suggestions": [
+    "Füge eine explizite Diskussion über die Bedingung $j^0 > 0$ für alle $\\psi \\neq 0$ hinzu, um die positive Definitheit zu überprüfen."
+  ]
+}

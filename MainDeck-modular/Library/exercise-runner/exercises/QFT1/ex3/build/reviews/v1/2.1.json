@@ -1,0 +1,20 @@
+{
+  "score": 0.6,
+  "verdict": "Teilweise korrekt, aber unvollständig und fehlerhaft.",
+  "weaknesses": [
+    {
+      "code": "MISSING_PROOF",
+      "msg": "Die Herleitung der Antikommutatorrelation ist unvollständig.",
+      "math_hint": "\\{\\gamma^\\mu, \\gamma^\\nu\\} = 2 g^{\\mu \\nu} I sollte hergeleitet werden, nicht nur als gegeben angenommen."
+    },
+    {
+      "code": "HERMITIAN_CONJUGATION_ERROR",
+      "msg": "Fehler in der Herleitung der Hermiteschen Konjugation.",
+      "math_hint": "(\\gamma^\\mu)^\\dagger = \\gamma^0 \\gamma^\\mu \\gamma^0 ist nicht korrekt hergeleitet."
+    }
+  ],
+  "fix_suggestions": [
+    "\\{\\gamma^\\mu, \\gamma^\\nu\\} = \\gamma^\\mu \\gamma^\\nu + \\gamma^\\nu \\gamma^\\mu = 2 g^{\\mu \\nu} I \\text{ sollte explizit gezeigt werden.}",
+    "(\\gamma^\\mu)^\\dagger = \\gamma^0 \\gamma^\\mu \\gamma^0 \\text{ sollte korrekt hergeleitet werden, indem die Eigenschaften der Dirac-Matrizen verwendet werden.}"
+  ]
+}

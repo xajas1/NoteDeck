@@ -1633,14 +1633,14 @@ Besitzt $A$ einen Häufungspunkt, so ist $A$ nach Proposition~2.16 gleich $X$ (d
 \pagebreak
 
 
-\section {3 Überlagerungen und Fundamentalgruppen}
+\section {Überlagerungen und Fundamentalgruppen}
 
 
 Das erste Beispiel einer Überlagerung steckt implizit in der Einleitung. Ist $X$ die Riemannsche Fläche des Logarithmus, so definiert die Abbildung, die jeder Karte (bestehend aus einer geschlitzten Ebene) in die Ebene abbildet, eine wohldefinierte surjektive Abbildung $X \rightarrow \mathbb{C}^{*}$. Abbildungen, die so aussehen, werden wir als unverzweigte Überlagerungen bezeichnen. Der allgemeine Begriff der Überlagerung lässt lokal noch etwas mehr Flexibilität zu.
 
 Fundamentalgruppen beschreiben, welche unverzweigten Überlagerungen eine Riemannsche Fläche zulässt. Sie sind die erste Invariante, die uns erlaubt, Riemannsche Flächen zu unterscheiden. Allerdings ist diese Invariante rein topologischer Natur und daher recht grob.
 
-\section {1 Überlagerungen}
+\subsection {Überlagerungen}
 Seien $X$ und $Y$ Riemannsche Flächen. Wir setzen in diesem Abschnitt generall $X$ und $Y$ als nichtleer und zusammenhängend voraus. In Proposition 2.11 haben wir jede nicht-konstante holomorphe Abbildung $f: X \rightarrow Y$ lokal in $X$ in geeigneten Karten als $z \mapsto z^{n}$ beschrieben. 
 
 Der im folgenden definierte Begriff der Überlagerung beschreibt holomorphe Abbildungen lokal aus der Sichtweise von $Y$. In manchen Quellen wird dieser verzweigte Überlagerung genannt. Der Begriff der Überlagerung aus der Topologie korrespondiert zu dem unten definierten Begriff einer unverzweigten Überlagerung.
@@ -1710,60 +1710,235 @@ Die Mengen $U_i$ und $V$ heißen \emph{Standardkarten} der Überlagerung.
 
 Die Nützlichkeit des Begriffs "eigentlich" zeigt sich an folgender Beobachtung. Ist $f: X \rightarrow Y$ eine holomorphe Abbildung und $X$ kompakt, so ist $f$ insbesondere eigentlich. Aber auch die Einschränkung einer solchen Abbildung $f: X \backslash f^{-1}(A) \rightarrow Y \backslash A$ für eine abgeschlossene Teilmenge $A \subset Y$ ist noch immer eigentlich, obwohl der Definitionsbereich nun nicht mehr kompakt ist.
 
-Lemma 3.2 Jede eigentliche holomorphe Abbildung $f: X \rightarrow Y$ ist abgeschlossen.\\
-Beweis: Sei $A \subset X$ abgeschlossen und $b \in Y \backslash f(A)$. Sei $V$ eine Umgebung von $b$ mit kompakter Hülle $\bar{V}$. Dann ist $f^{-1}(\bar{V}) \cap A$ kompakt. Es gilt stets $f\left(f^{-1}(\bar{V}) \cap A\right)=\bar{V} \cap f(A)$ und diese Menge ist als stetiges Bild einer kompakten Menge wieder kompakt. Folglich ist $V \backslash(\bar{V} \cap f(A))$ eine Umgebung von $b$, die $f(A)$ nicht trifft.
+\begin{REM}{AG-02-04}{Eigentliche Abbildungen und kompakte Urbilder}
+Die Nützlichkeit des Begriffs der \emph{Eigentlichkeit} zeigt sich an folgender Beobachtung:
+
+Sei \(f:X\to Y\) eine holomorphe Abbildung zwischen Riemannschen Flächen.  
+Ist \(X\) kompakt, so ist \(f\) insbesondere \emph{eigentlich}, da für jede kompakte Teilmenge \(K\subseteq Y\) auch das Urbild \(f^{-1}(K)\subseteq X\) kompakt ist.
+
+Bemerkenswerterweise bleibt diese Eigenschaft erhalten, wenn man \(f\) auf den komplementären offenen Teilbereich zu einer abgeschlossenen Teilmenge einschränkt:
+\[
+f|_{X\setminus f^{-1}(A)}: X\setminus f^{-1}(A)\longrightarrow Y\setminus A,
+\qquad A\subseteq Y\ \text{abgeschlossen.}
+\]
+Obwohl der neue Definitionsbereich \(X\setminus f^{-1}(A)\) im Allgemeinen \emph{nicht mehr kompakt} ist,
+bleibt die Abbildung weiterhin \emph{eigentlich}.
+Dies illustriert, dass Eigentlichkeit eine stabilere Eigenschaft ist als Kompaktheit des Definitionsbereichs.
+\end{REM}
+
+Lemma 3.2 Jede eigentliche holomorphe Abbildung $f: X \rightarrow Y$ ist abgeschlossen.
+
+
+Ist \(f:X\to Y\) \emph{eigentlich} und holomorph, so ist \(f\) eine
+\emph{abgeschlossene Abbildung}, d.\,h.
+für jede abgeschlossene Teilmenge \(A\subseteq X\) ist auch \(f(A)\subseteq Y\) abgeschlossen.
+
+
+Beweis: 
+
+Sei $A \subset X$ abgeschlossen und $b \in Y \backslash f(A)$. Sei $V$ eine Umgebung von $b$ mit kompakter Hülle $\bar{V}$. Dann ist $f^{-1}(\bar{V}) \cap A$ kompakt. Es gilt stets $f\left(f^{-1}(\bar{V}) \cap A\right)=\bar{V} \cap f(A)$ und diese Menge ist als stetiges Bild einer kompakten Menge wieder kompakt. Folglich ist $V \backslash(\bar{V} \cap f(A))$ eine Umgebung von $b$, die $f(A)$ nicht trifft.
 
 Satz 3.3 Sei $f: X \rightarrow Y$ eine holomorphe Abbildung.\\
 a) $f$ ist genau dann endlich, wenn $f$ eigentlich und nicht-konstant ist.\\
 b) Ist $f$ endlich, so ist $f$ eine Überlagerung.\\
 c) Ist $f$ eine Überlagerung und zudem für einen Punkt $y \in Y$ die Indexmenge $I=I_{y}$ aus der Definition endlich, so ist $f$ endlich und somit insbesondere eigentlich.
 
-Beweis: a) Wenn $f$ endlich ist, dann ist für alle $y \in Y$ die Faser $f^{-1}(y)$ endlich, also insbesondere verschieden von $X$, da $X \neq \emptyset$. Damit ist $f$ eigentlich und nicht-konstant. Ist $f$ eigentlich, so ist $f^{-1}(y)$ kompakt. Die Faser ist aber auch eine analytische Menge und von $X$ verschieden, also lokal endlich und somit endlich.\\
-b) Sei $y \in Y$. Da $f$ eigentlich und nicht konstant ist, und da $Y$ zusammenhängend und $X \neq \emptyset$ ist, muss $f$ surjektiv sein (Übung). Also ist $f^{-1}(y)= \left\{x_{1}, \ldots, x_{d}\right\}$. Wir wählen Karten ( $V, h$ ) um $y$ mit $h(y)=0$ und ( $U_{i}, g_{i}$ ) um $x_{i}$ mit $g\left(x_{i}\right)=0$ und können hierbei nach Verkleinern der Umgebungen $U_{i}$ ohne Einschränkung annehmen, dass $f\left(U_{i}\right) \subset V$ gilt und dass die $U_{i}$ disjunkt sind. Nach Proposition 2.11und deren Beweis finden wir für jedes $i$ eine Karte ( $\widetilde{U}_{i}, \widetilde{g}_{i}$ ) mit $\widetilde{U}_{i} \subset U_{i}$ so dass
 
+\begin{THEO}{AG-03-03}{Charakterisierung endlicher holomorpher Abbildungen zwischen Riemannschen Flächen}
+Sei \(f:X\to Y\) eine holomorphe Abbildung zwischen zusammenhängenden,
+nichtleeren Riemannschen Flächen.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item
+\(f\) ist genau dann \emph{endlich}, wenn \(f\) \emph{eigentlich} und
+\emph{nicht-konstant} ist.
+
+\item
+Ist \(f\) endlich, so ist \(f\) eine \emph{Überlagerung}, d.\,h.\
+jedes \(y\in Y\) besitzt eine Umgebung \(V\subseteq Y\), so dass
+\(f^{-1}(V)\) eine endliche disjunkte Vereinigung offener Mengen
+\(U_1,\dots,U_n\subseteq X\) mit
+\[
+f|_{U_j}:U_j\longrightarrow V
+\]
+biholomorph für alle \(j=1,\dots,n\) ist.
+
+\item
+Ist \(f\) eine Überlagerung und existiert ein Punkt \(y\in Y\),
+für den die zugehörige Indexmenge \(I_y\) (der Blätter über \(y\))
+endlich ist, so ist \(f\) \emph{endlich} und damit insbesondere \emph{eigentlich}.
+\end{enumerate}
+\end{THEO}
+
+Beweis: 
+
+a) Wenn $f$ endlich ist, dann ist für alle $y \in Y$ die Faser $f^{-1}(y)$ endlich, also insbesondere verschieden von $X$, da $X \neq \emptyset$. Damit ist $f$ eigentlich und nicht-konstant. Ist $f$ eigentlich, so ist $f^{-1}(y)$ kompakt. Die Faser ist aber auch eine analytische Menge und von $X$ verschieden, also lokal endlich und somit endlich.
+
+b) Sei $y \in Y$. Da $f$ eigentlich und nicht konstant ist, und da $Y$ zusammenhängend und $X \neq \emptyset$ ist, muss $f$ surjektiv sein (Übung). Also ist $f^{-1}(y)= \left\{x_{1}, \ldots, x_{d}\right\}$. Wir wählen Karten ( $V, h$ ) um $y$ mit $h(y)=0$ und ( $U_{i}, g_{i}$ ) um $x_{i}$ mit $g\left(x_{i}\right)=0$ und können hierbei nach Verkleinern der Umgebungen $U_{i}$ ohne Einschränkung annehmen, dass $f\left(U_{i}\right) \subset V$ gilt und dass die $U_{i}$ disjunkt sind. Nach Proposition 2.11und deren Beweis finden wir für jedes $i$ eine Karte ( $\widetilde{U}_{i}, \widetilde{g}_{i}$ ) mit $\widetilde{U}_{i} \subset U_{i}$ so dass
 $$
 h \circ f \circ \widetilde{g}_{i}^{-1}: \widetilde{g}_{i}\left(\widetilde{U}_{i}\right) \rightarrow h(V), \quad z \mapsto z^{n_{i}}
 $$
+mit einem $n_{i}=e_{x_{i}}(f) \in \mathbb{N}$ gilt. Indem wir zunächst $V$ durch den Schnitt 
+$$V \cap \bigcap_{i=1}^{d} f\left(\widetilde{U}_{i}\right)$$ 
+und dann $\widetilde{U}_{i}$ durch $U_{i}=\widetilde{U}_{i} \cap f^{-1}(V)$ ersetzen, können wir $f\left(U_{i}\right)=V$ sicherstellen. Da $f$ eigentlich ist, gibt es zu jedem $i$ ein $r_{i}$, sodass $h^{-1}$ auf $\Delta_{r_{i}}$ und $g_{i}^{-1}$ auf $\Delta_{r_{i}^{1 / n} i}$ definiert ist. Wir nehmen $r$ als das Minimum der $r_{i}$ und schließlich $V=h^{-1}\left(\Delta_{r}\right)$ sowie $U_{i}=g_{i}^{-1}\left(\Delta_{r^{1 / n}}\right)$.
 
-mit einem $n_{i}=e_{x_{i}}(f) \in \mathbb{N}$ gilt. Indem wir zunächst $V$ durch den Schnitt $V \cap \bigcap_{i=1}^{d} f\left(\widetilde{U}_{i}\right)$ und dann $\widetilde{U}_{i}$ durch $U_{i}=\widetilde{U}_{i} \cap f^{-1}(V)$ ersetzen, können wir $f\left(U_{i}\right)=V$ sicherstellen. Da $f$ eigentlich ist, gibt es zu jedem $i$ ein $r_{i}$, sodass $h^{-1}$ auf $\Delta_{r_{i}}$ und $g_{i}^{-1}$ auf $\Delta_{r_{i}^{1 / n} i}$ definiert ist. Wir nehmen $r$ als das Minimum der $r_{i}$ und schließlich $V=h^{-1}\left(\Delta_{r}\right)$ sowie $U_{i}=g_{i}^{-1}\left(\Delta_{r^{1 / n}}\right)$.\\
 c) Wir zeigen zunächst, dass $f^{-1}(y)$ für jedes $y \in Y$ endlich ist. Dazu definieren wir
-
 $$
 \operatorname{deg}(f, y): Y \rightarrow \mathbb{N} \cup\{\infty\}, y \mapsto \sum_{x \in f^{-1}(y)} e_{x}(f) .
 $$
+Da $f$ eine Überlagerung ist, ist diese Abbildung lokal konstant, also konstant, da $Y$ zusammenhängend ist. Nach Voraussetzung ist die Konstante endlich, da $I=I_{y}$ in einem Punkt endlich ist. Es fehlt noch, die Eigentlichkeit zu zeigen. Sei dazu $K \subset Y$ kompakt. Für jedes $y \in Y$ gibt es Umgebungen $V_{y}$ und $U_{y, i}$ aus der Definition von Überlagerung. Da $Y$ lokal kompakt ist, finden wir auch offene Umgebungen $V_{y}^{\prime}$ von $y$, so dass $\overline{V_{y}^{\prime}}$ kompakt und in $V_{y}$ enthalten sind. Da $K$ kompakt ist, reichen endlich viele $V_{1}^{\prime}, \ldots, V_{r}^{\prime}$ um $K$ zu überdecken. Es reicht nun zu zeigen, dass $f^{-1}\left(\overline{V_{i}^{\prime}}\right)$ für alle $i=1, \ldots, r$ kompakt ist. Denn die endliche Vereinigung von Kompakta ist kompakt und 
+$$f^{-1}(K) \subset \bigcup_{i=1}^{r} f^{-1}\left(\overline{V_{i}^{\prime}}\right)$$ 
+ist als abgeschlossene Menge in einem Kompaktum ebenfalls kompakt. Dafür reicht es zu zeigen, dass 
+$$\left.f\right|_{U_{i j}}: U_{i j} \rightarrow V_{i}$$ 
+eigentlich ist. Dies kann man, da die Karten $h$ und $g_{i}$ Homöomorphismen sind, genauso gut für $h \circ f \circ g_{i}^{-1}$ nachprüfen. Die Abbildung $z \mapsto z^{n}$ ist aber eigentlich, denn das Urbild einer kompakten Menge ist beschränkt - da das Urbild von $B_{r}(0)$ in $B_{\sqrt[n]{r}}(0)$ liegt und abgeschlossen, also kompakt.
 
-Da $f$ eine Überlagerung ist, ist diese Abbildung lokal konstant, also konstant, da $Y$ zusammenhängend ist. Nach Voraussetzung ist die Konstante endlich, da $I=I_{y}$ in einem Punkt endlich ist. Es fehlt noch, die Eigentlichkeit zu zeigen. Sei dazu $K \subset Y$ kompakt. Für jedes $y \in Y$ gibt es Umgebungen $V_{y}$ und $U_{y, i}$\\
-aus der Definition von Überlagerung. Da $Y$ lokal kompakt ist, finden wir auch offene Umgebungen $V_{y}^{\prime}$ von $y$, so dass $\overline{V_{y}^{\prime}}$ kompakt und in $V_{y}$ enthalten sind. Da $K$ kompakt ist, reichen endlich viele $V_{1}^{\prime}, \ldots, V_{r}^{\prime}$ um $K$ zu überdecken. Es reicht nun zu zeigen, dass $f^{-1}\left(\overline{V_{i}^{\prime}}\right)$ für alle $i=1, \ldots, r$ kompakt ist. Denn die endliche Vereinigung von Kompakta ist kompakt und $f^{-1}(K) \subset \bigcup_{i=1}^{r} f^{-1}\left(\overline{V_{i}^{\prime}}\right)$ ist als abgeschlossene Menge in einem Kompaktum ebenfalls kompakt. Dafür reicht es zu zeigen, dass $\left.f\right|_{U_{i j}}: U_{i j} \rightarrow V_{i}$ eigentlich ist. Dies kann man, da die Karten $h$ und $g_{i}$ Homöomorphismen sind, genauso gut für $h \circ f \circ g_{i}^{-1}$ nachprüfen. Die Abbildung $z \mapsto z^{n}$ ist aber eigentlich, denn das Urbild einer kompakten Menge ist beschränkt - da das Urbild von $B_{r}(0)$ in $B_{\sqrt[n]{r}}(0)$ liegt und abgeschlossen, also kompakt.
+
 
 Die in obigem Beweis definierte Funktion $\operatorname{deg}(f)$ heißt Grad der endlichen Abbildung. Die Punkte $x \in X$ mit $e_{x}(f)>1$ heißen Verzweigungspunkte der Überlagerungsabbildung. Überlagerungsabbildungen ohne Verzweigungspunkte heißen unverzweigt.
 
+\begin{DEF}{AG-03-04}{Grad und Verzweigungspunkte endlicher holomorpher Abbildungen}
+Sei \(f:X\to Y\) eine endliche holomorphe Abbildung zwischen Riemannschen Flächen.
+Dann ist für jedes \(y\in Y\) das Urbild \(f^{-1}(y)\) endlich.
+Wir definieren die \emph{lokale Verzweigungszahl} \(e_x(f)\in\mathbb{N}\)
+für \(x\in X\) gemäß der lokalen Normalform \(f(z)=z^{\,e_x(f)}\) (vgl.\ Proposition~2.11).
+
+\medskip
+\noindent
+\textbf{Definition des Grades.}
+Der \emph{Grad} der Abbildung \(f\) ist die Funktion
+\[
+\deg(f):Y\longrightarrow \mathbb{N}\cup\{\infty\},\qquad
+\deg(f,y)=\sum_{x\in f^{-1}(y)} e_x(f).
+\]
+Ist \(f\) endlich, so ist die Summe für jedes \(y\in Y\) endlich,
+und der Grad \(\deg(f)\) ist konstant auf ganz \(Y\).
+
+\medskip
+\noindent
+\textbf{Verzweigungspunkte.}
+Ein Punkt \(x\in X\) heißt \emph{Verzweigungspunkt} von \(f\),
+falls seine lokale Verzweigungszahl größer als eins ist, also
+\[
+e_x(f)>1.
+\]
+Die Menge aller solcher Punkte wird mit
+\[
+\operatorname{Br}(f)=\{x\in X\mid e_x(f)>1\}
+\]
+bezeichnet.
+
+\medskip
+\noindent
+\textbf{Unverzweigte Überlagerungen.}
+Eine endliche Überlagerungsabbildung \(f:X\to Y\) heißt
+\emph{unverzweigt}, wenn keine Verzweigungspunkte auftreten, d.\,h.\
+wenn für alle \(x\in X\) gilt:
+\[
+e_x(f)=1.
+\]
+\end{DEF}
+
+
 Beispiel 3.4 Die Abbildung $\exp (\cdot): \mathbb{C} \longrightarrow \mathbb{C}^{*}$ ist eine unverzweigte Überlagerung, aber keine endliche Abbildung.
+
+\begin{EXA}{AG-03-04}{Exponentialabbildung als unverzweigte, nicht-endliche Überlagerung}
+Betrachte die holomorphe Abbildung
+\[
+\exp:\C\longrightarrow\C^*,\qquad z\longmapsto e^{z}.
+\]
+Diese Abbildung ist eine \emph{unverzweigte Überlagerung}, denn für jedes
+\(w\in\C^*\) gilt
+\[
+\exp^{-1}(w)=\{\log w+2\pi i k \mid k\in\Z\},
+\]
+und die Ableitung \(\exp'(z)=e^z\) verschwindet nirgends,
+also existieren keine Verzweigungspunkte (\(e_z(\exp)=1\) für alle \(z\in\C\)).
+
+Allerdings ist \(\exp\) \emph{nicht endlich}, da die Urbilder
+\(\exp^{-1}(w)\) unendlich viele Punkte enthalten.
+Insbesondere ist die Exponentialabbildung nicht eigentlich:
+das Urbild einer kompakten Teilmenge von \(\C^*\)
+ist im Allgemeinen nicht kompakt in \(\C\).
+\end{EXA}
 
 Die Abbildung $z \mapsto z^{2}$ is eine Überlagerung, da aber nicht unverzweigt ist. Der Nullpunkt ist ein Verzweigungspunkt.
 
-\subsection {Wege und Homotopien}
+\begin{EXA}{AG-03-05}{Quadratabbildung als verzweigte Überlagerung}
+Die Abbildung
+\[
+f:\C\longrightarrow\C,\qquad z\longmapsto z^{2},
+\]
+ist eine \emph{Überlagerungsabbildung}, jedoch \emph{nicht unverzweigt}.
+
+\medskip
+\noindent
+Für jedes \(w\in\C\setminus\{0\}\) gilt
+\[
+f^{-1}(w)=\{\sqrt{w},\,-\sqrt{w}\},
+\]
+und in einer Umgebung jedes solchen \(w\) ist \(f\) eine zweiblättrige
+Überlagerung. Dagegen gilt im Punkt \(z=0\)
+\[
+f'(z)=2z \quad\Rightarrow\quad f'(0)=0,
+\]
+also verschwindet die Ableitung dort, und die lokale Form
+\(f(z)=z^{2}\) zeigt, dass
+\[
+e_{0}(f)=2.
+\]
+Daher ist \(z=0\) ein \emph{Verzweigungspunkt} der Überlagerungsabbildung.
+
+\medskip
+\noindent
+Die Abbildung \(z\mapsto z^{2}\) ist somit eine \emph{verzweigte Überlagerung}
+vom Grad \(2\) mit genau einem Verzweigungspunkt bei \(z=0\).
+\end{EXA}
+
+\pagebreak
+
+\subsection{Wege und Homotopien}
 Der Begriff eines Weges lässt sich in offensichtlicher Weise von Gebieten in $\mathbb{C}$ auf topologische Räume, also insbesondere auf Riemannsche Flächen verallgemeinern.
 
 Definition 3.5 (Wege) Eine stetige Abbildung $\gamma:[0,1] \longrightarrow X$ in einen topologischen Raum $X$ heißt Weg von $\gamma(\alpha)$ nach $\gamma(\beta)$. Der Raum $X$ heißt wegzusammenhängend, falls es zwischen je zwei Punkten $a, b \in X$ einen Weg von a nach $b$ gibt.
 
+\begin{DEF}{AG-03-05}{Wege und Wegzusammenhang}
+Sei \(X\) ein topologischer Raum.
+
+\medskip
+\noindent
+Eine \emph{stetige Abbildung}
+\[
+\gamma:[0,1]\longrightarrow X
+\]
+heißt \emph{Weg in \(X\)} (oder \emph{Pfad}), wobei
+\(\gamma(0)\) als \emph{Anfangspunkt} und \(\gamma(1)\) als \emph{Endpunkt}
+des Weges bezeichnet wird.
+Man sagt, \(\gamma\) ist ein \emph{Weg von} \(\gamma(0)\) \emph{nach} \(\gamma(1)\).
+
+\medskip
+\noindent
+Ein topologischer Raum \(X\) heißt \emph{wegzusammenhängend},
+falls es zu je zwei Punkten \(a,b\in X\)
+einen Weg \(\gamma:[0,1]\to X\) mit
+\[
+\gamma(0)=a,\qquad \gamma(1)=b
+\]
+gibt.
+\end{DEF}
+
 Wege gibt es auf Riemannschen Flächen viele, zu viele um daraus eine interessante Invariante zu erhalten. Wir wollen nur Klassen von Wegen modulo der Relation „daran wackeln" betrachten.
 
 Definition 3.6 (Homotopie) Zwei Wege $\gamma_{0}, \gamma_{1}: I=[0,1] \rightarrow X$ von a nach $b$ heißen homotop, falls es eine Schar von Wegen gibt, d.h. eine stetige Abbildung
-
 $$
 h: I \times I \rightarrow X, \gamma_{t}(s):=h(s, t)
 $$
-
 sodass $h(0, t)=a$ und $h(1, t)=b$ für alle $t \in I$ gilt und sodass $h(s, 0)=\gamma_{0}(s)$ und $h(s, 1)=\gamma_{1}(s)$ ist. $h$ wird Homotopie genannt.
 
-Lemma 3.7 „Homotop sein" ist eine Äquivalenzrelation.
 
-\begin{figure}[h]
-\begin{center}
-  \includegraphics[scale=0.2]{2025_10_06_374d4cfa8b1948eb4c41g-019}
- 
-\caption{Abbildung 3.2: Eine Homotopie zwischen \$\textbackslash gamma\_\{0}\$ und $\gamma_{1}$\}\end{center}
-\end{figure}
+
+
+
+Lemma 3.7 „Homotop sein" ist eine Äquivalenzrelation.
 
 Beweis: Die Homotopien $h(s, t):=\gamma(s)$ und $\widetilde{h}(s, t)=h(s, 1-t)$ beweisen Reflexivität und Symmetrie. Ist $h$ eine Homotopie zwischen $\gamma_{0}$ und $\gamma_{1}$ und $h_{2}$ eine Homotopie zwischen $\gamma_{1}$ und $\gamma_{2}$, so ist
 

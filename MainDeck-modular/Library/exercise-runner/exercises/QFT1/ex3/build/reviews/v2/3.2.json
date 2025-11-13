@@ -1,0 +1,20 @@
+{
+  "score": 0.8,
+  "verdict": "Gute Herleitung mit kleineren Lücken",
+  "weaknesses": [
+    {
+      "code": "missing_explanation",
+      "msg": "Die Rolle von \\(\\operatorname{det}(\\Lambda)\\) bei \\(\\gamma^5\\) Transformation ist nicht vollständig erklärt.",
+      "math_hint": "Erkläre, warum \\(\\operatorname{det}(\\Lambda) = -1\\) für Paritätstransformationen gilt."
+    },
+    {
+      "code": "incomplete_transformation",
+      "msg": "Transformation von \\(\\gamma^5\\) nicht vollständig hergeleitet.",
+      "math_hint": "Zeige explizit, wie \\(S^{-1}(\\Lambda) \\gamma^5 S(\\Lambda) = \\operatorname{det}(\\Lambda) \\gamma^5\\) hergeleitet wird."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Füge eine Erklärung hinzu, warum } \\operatorname{det}(\\Lambda) = -1 \\text{ für Paritätstransformationen gilt.}",
+    "S^{-1}(\\Lambda) \\gamma^5 S(\\Lambda) = \\operatorname{det}(\\Lambda) \\gamma^5 \\text{ explizit herleiten, indem die Eigenschaften von } \\gamma^5 \\text{ und } S(\\Lambda) \\text{ verwendet werden.}"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "tasks": [
+    {
+      "task_id": "1",
+      "body_tex": "",
+      "subtasks": [
+        {
+          "sub_id": "1.1",
+          "body_tex": "Exercise 1: Dirac and Klein-Gordon equation(4 points)\nLet $\\psi$ be a Dirac spinor solving the Dirac equation\n$$\n\\left[\\mathrm{i} \\gamma^\\mu \\partial_\\mu-m\\right] \\psi(x)=0\n$$\nShow that it is also a solution of the Klein-Gordon equation\n$$\n\\left[\\partial_\\mu \\partial^\\mu+m^2\\right] \\psi(x)=0\n$$\n\n\n\nExercise 2: Bilinear covariants $\\mathbf{I}(3+3=6$ points $)$"
+        }
+      ]
+    },
+    {
+      "task_id": "2",
+      "body_tex": "",
+      "subtasks": [
+        {
+          "sub_id": "2.1",
+          "body_tex": "i) First show that\n$$\n\\left\\{\\gamma^\\mu, \\gamma^\\nu\\right\\}=2 g^{\\mu \\nu}\n$$\nand use your results to show that\n$$\n\\gamma^{\\mu \\dagger}=\\gamma^0 \\gamma^\\mu \\gamma^0\n$$"
+        },
+        {
+          "sub_id": "2.2",
+          "body_tex": "ii) In the lecture you found the following Lorentz transformation of a Dirac spinor $\\psi$\n$$\n\\psi(x) \\rightarrow \\psi^{\\prime}\\left(x^{\\prime}\\right)=S(\\Lambda) \\psi(x), \\quad S(\\Lambda)=e^{-\\frac{i}{4} \\omega^{\\mu \\nu} \\sigma_{\\mu \\nu}}\n$$\nwith $\\sigma_{\\mu \\nu}=\\frac{i}{2}\\left[\\gamma_\\mu, \\gamma_\\nu\\right]$.\nFurthermore you have shown that $\\bar{\\psi} \\psi$ is a Lorentz scalar, therefore the inverse transformation is given by\n$$\n\\bar{\\psi}(x) \\rightarrow \\bar{\\psi}^{\\prime}\\left(x^{\\prime}\\right) S^{-1}(\\Lambda), \\quad S^{-1}(\\Lambda)=e^{\\frac{i}{4} \\omega^{\\mu \\nu} \\sigma_{\\mu \\nu}}\n$$\nShow that $S^{-1}(\\Lambda)$ can also be written as\n$$\nS^{-1}(\\Lambda)=\\left(\\gamma^0 S(\\Lambda) \\gamma^0\\right)^{\\dagger}\n$$\n(instead of $S^{-1}(\\Lambda)=S^{\\dagger}(\\Lambda)$ as one would expect naively).\nHint: Use the result of $i$ )"
+        }
+      ]
+    },
+    {
+      "task_id": "3",
+      "body_tex": "Recall the infinitesimal representation of the Lorentz transformation\n$$\n\\Lambda_\\nu^\\mu=\\delta_\\nu^\\mu+\\delta \\omega_\\nu^\\mu\n$$\nand the Lorentz transformation of a spinor\n$$\nS(\\Lambda)=1-\\frac{\\mathrm{i}}{4} \\sigma_{\\mu \\nu} \\delta \\omega^{\\mu \\nu}+o\\left(\\delta \\omega^2\\right), \\quad \\sigma_{\\mu \\nu}=\\frac{\\mathrm{i}}{2}\\left[\\gamma_\\mu, \\gamma_\\nu\\right]\n$$",
+      "subtasks": [
+        {
+          "sub_id": "3.1",
+          "body_tex": "i) Using these transformations, show that the equation\n$$\nS^{-1}(\\Lambda) \\gamma^\\mu S(\\Lambda)=\\Lambda_\\nu^\\mu \\gamma^\\nu\n$$\nfamiliar from the lecture, is satisfied up to first order in $\\delta \\omega$."
+        },
+        {
+          "sub_id": "3.2",
+          "body_tex": "ii) In the lecture you showed that $\\bar{\\psi} \\psi$ transforms as a Lorentz scalar and $\\bar{\\psi} \\gamma^\\mu \\psi$ transforms as a Lorentz vector. Furthermore you introduced an additional gamma matrix $\\gamma^5=\\mathrm{i} \\gamma^0 \\gamma^1 \\gamma^2 \\gamma^3$ with the transformation property\n$$\nS^{-1}(\\Lambda) \\gamma^5 S(\\Lambda)=\\operatorname{det}(\\Lambda) \\gamma^5\n$$\nProve the behaviour under Lorentz transformation of the following bilinear covariants\n$$\n\\begin{aligned}\n\\bar{\\psi} \\gamma^5 \\psi & \\rightarrow \\operatorname{det}(\\Lambda) \\bar{\\psi} \\gamma^5 \\psi & & \\text { pseudoscalar } \\\\\n\\bar{\\psi} \\gamma^\\mu \\gamma^5 \\psi & \\rightarrow \\operatorname{det}(\\Lambda) \\Lambda_\\nu^\\mu \\bar{\\psi} \\gamma^\\nu \\gamma^5 \\psi & & \\text { axial vector } \\\\\n\\bar{\\psi} \\sigma^{\\mu \\nu} \\psi & \\rightarrow \\Lambda_\\alpha^\\mu \\Lambda_\\beta^\\nu \\bar{\\psi} \\sigma^{\\alpha \\beta} \\psi & & \\text { antisymmetric tensor }\n\\end{aligned}\n$$\nHint: Equation (10) will be very useful."
+        }
+      ]
+    },
+    {
+      "task_id": "4",
+      "body_tex": "Exercise 4: Continuity equation in relativistic quantum mechanics II(4 points) Let the Dirac spinor $\\psi$ be a solution of the Dirac equation\n$$\n\\left[\\mathrm{i} \\gamma^\\mu \\partial_\\mu-m\\right] \\psi(x)=0\n$$",
+      "subtasks": [
+        {
+          "sub_id": "4.1",
+          "body_tex": "Show that the current\n$$\nj^\\mu(x)=\\bar{\\psi} \\gamma^\\mu \\psi\n$$\nsatisfies a continuity equation\n$$\n\\partial_\\mu j^\\mu(x)=0\n$$"
+        },
+        {
+          "sub_id": "4.2",
+          "body_tex": "Discuss wether $j^0=\\rho$ is positive definite in the case of the Dirac equation."
+        }
+      ]
+    }
+  ]
+}

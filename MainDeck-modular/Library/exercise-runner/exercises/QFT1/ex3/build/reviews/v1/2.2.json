@@ -1,0 +1,14 @@
+{
+  "score": 0.9,
+  "verdict": "Fast korrekt, aber ein kleiner Fehler in der Argumentation.",
+  "weaknesses": [
+    {
+      "code": "E1",
+      "msg": "Unklare Herleitung der Exponentialtransformation",
+      "math_hint": "Die Herleitung der Beziehung $(\text{exp}(A))^\text{dagger} = \text{exp}(A^\text{dagger})$ für antihermites $A$ fehlt."
+    }
+  ],
+  "fix_suggestions": [
+    "\\text{Für antihermites } A, \\text{ gilt: } (e^A)^{\\dagger} = e^{A^{\\dagger}}."
+  ]
+}

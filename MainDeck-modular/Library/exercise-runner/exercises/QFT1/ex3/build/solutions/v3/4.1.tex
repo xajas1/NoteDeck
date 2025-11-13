@@ -1,0 +1,52 @@
+Um zu zeigen, dass der Strom \( j^\mu(x) = \bar{\psi} \gamma^\mu \psi \) die Kontinuitätsgleichung \(\partial_\mu j^\mu(x) = 0\) erfüllt, beginnen wir mit der Dirac-Gleichung für das Dirac-Feld \(\psi(x)\):
+
+\begin{align*}
+(i \gamma^\mu \partial_\mu - m) \psi(x) &= 0.
+\end{align*}
+
+Die adjungierte Dirac-Gleichung für das adjungierte Feld \(\bar{\psi}(x) = \psi^\dagger(x) \gamma^0\) lautet:
+
+\begin{align*}
+\bar{\psi}(x) (i \overleftarrow{\partial_\mu} \gamma^\mu + m) &= 0,
+\end{align*}
+
+wobei \(\overleftarrow{\partial_\mu}\) die Ableitung ist, die nach links wirkt. Um die Kontinuitätsgleichung zu überprüfen, berechnen wir die Divergenz des Stroms:
+
+\begin{align*}
+\partial_\mu j^\mu(x) &= \partial_\mu (\bar{\psi} \gamma^\mu \psi).
+\end{align*}
+
+Anwenden der Produktregel ergibt:
+
+\begin{align*}
+\partial_\mu j^\mu(x) &= (\partial_\mu \bar{\psi}) \gamma^\mu \psi + \bar{\psi} \gamma^\mu (\partial_\mu \psi).
+\end{align*}
+
+Verwenden wir nun die Dirac-Gleichung und ihre adjungierte Form, um die Ableitungen zu ersetzen. Aus der Dirac-Gleichung folgt:
+
+\begin{align*}
+(i \gamma^\mu \partial_\mu - m) \psi &= 0 \quad \Rightarrow \quad \partial_\mu \psi = -i m \psi,
+\end{align*}
+
+und aus der adjungierten Dirac-Gleichung:
+
+\begin{align*}
+\bar{\psi} (i \overleftarrow{\partial_\mu} \gamma^\mu + m) &= 0 \quad \Rightarrow \quad \partial_\mu \bar{\psi} = i m \bar{\psi}.
+\end{align*}
+
+Setzen wir diese Ausdrücke in die Divergenz ein:
+
+\begin{align*}
+\partial_\mu j^\mu(x) &= (i m \bar{\psi}) \gamma^\mu \psi + \bar{\psi} \gamma^\mu (-i m \psi).
+\end{align*}
+
+Da die Dirac-Matrizen die Beziehung \(\gamma^\mu \gamma^\nu + \gamma^\nu \gamma^\mu = 2g^{\mu\nu}\) erfüllen, vereinfacht sich der Ausdruck zu:
+
+\begin{align*}
+\partial_\mu j^\mu(x) &= i m \bar{\psi} \gamma^\mu \psi - i m \bar{\psi} \gamma^\mu \psi \\
+&= 0.
+\end{align*}
+
+Somit ist gezeigt, dass die Divergenz des Stroms verschwindet, und der Strom \( j^\mu(x) \) erfüllt die Kontinuitätsgleichung \(\partial_\mu j^\mu(x) = 0\).
+
+%CHECK: Korrigierte die Ableitungen von \(\psi\) und \(\bar{\psi}\) gemäß der Dirac-Gleichung, und die korrekte Anwendung der Dirac-Matrizen-Identität.

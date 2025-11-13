@@ -1,0 +1,132 @@
+{
+  "tasks": {
+    "1.1": {
+      "score": 0.7,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es gibt einige Unklarheiten und Fehler bei den Vorzeichen und der Anwendung der Antikommutationsrelationen.",
+      "weaknesses": [
+        {
+          "code": "incorrect_sign",
+          "msg": "Das Vorzeichen in der Umformung von \\(-\\gamma^\\nu \\gamma^\\mu \\partial_\\nu \\partial_\\mu\\) ist falsch.",
+          "math_hint": "-\\gamma^\\nu \\gamma^\\mu \\partial_\\nu \\partial_\\mu = g^{\\nu\\mu} \\partial_\\nu \\partial_\\mu sollte korrekt sein."
+        },
+        {
+          "code": "anticommutation_misuse",
+          "msg": "Die Anwendung der Antikommutationsrelationen ist nicht korrekt dargestellt.",
+          "math_hint": "\\{\\gamma^\\nu, \\gamma^\\mu\\} = 2g^{\\nu\\mu} sollte korrekt verwendet werden."
+        }
+      ],
+      "fix_suggestions": [
+        "\\gamma^\\nu \\gamma^\\mu \\partial_\\nu \\partial_\\mu = g^{\\nu\\mu} \\partial_\\nu \\partial_\\mu",
+        "\\{\\gamma^\\nu, \\gamma^\\mu\\} = 2g^{\\nu\\mu} \\Rightarrow \\gamma^\\nu \\gamma^\\mu = g^{\\nu\\mu} - \\gamma^\\mu \\gamma^\\nu"
+      ]
+    },
+    "2.1": {
+      "score": 0.7,
+      "verdict": "Teilweise korrekt, aber unvollständig.",
+      "weaknesses": [
+        {
+          "code": "MISSING_STEPS",
+          "msg": "Die Herleitung der Antikommutatorrelation ist unvollständig.",
+          "math_hint": "Es fehlt eine explizite Herleitung, warum \\(\\gamma^\\mu \\gamma^\\nu + \\gamma^\\nu \\gamma^\\mu = 2 g^{\\mu \\nu} I\\) aus der Clifford-Algebra folgt."
+        },
+        {
+          "code": "INCONSISTENT_NOTATION",
+          "msg": "Inkonsequente Notation bei der Hermiteschen Konjugation.",
+          "math_hint": "Die Notation \\((\\gamma^\\mu)^\\dagger = \\gamma^0 \\gamma^\\mu \\gamma^0\\) ist inkonsistent mit der vorherigen Gleichung."
+        }
+      ],
+      "fix_suggestions": [
+        "\\begin{align*} \\{\\gamma^\\mu, \\gamma^\\nu\\} &= \\gamma^\\mu \\gamma^\\nu + \\gamma^\\nu \\gamma^\\mu = 2 g^{\\mu \\nu} I \\end{align*}",
+        "\\begin{align*} (\\gamma^\\mu)^\\dagger &= \\gamma^0 \\gamma^\\mu \\gamma^0 \\end{align*}"
+      ]
+    },
+    "2.2": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist fast korrekt, aber es gibt kleinere Lücken in der Herleitung.",
+      "weaknesses": [
+        {
+          "code": "M1",
+          "msg": "Die Herleitung der Beziehung für antihermites A ist nicht vollständig erklärt.",
+          "math_hint": "Es fehlt eine explizite Herleitung oder Begründung, warum \\((e^A)^{\\dagger} = e^{A^{\\dagger}}\\) für antihermites A gilt."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Füge eine detaillierte Herleitung oder Begründung für die Beziehung } (e^A)^{\\dagger} = e^{A^{\\dagger}} \\text{ für antihermites } A \\text{ hinzu.}"
+      ]
+    },
+    "3.1": {
+      "score": 0.8,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlen einige Zwischenschritte und Erklärungen.",
+      "weaknesses": [
+        {
+          "code": "MISSING_STEPS",
+          "msg": "Zwischenschritte bei der Berechnung von $[\text{S}^{-1}(\text{Λ}) \text{γ}^\text{μ} \text{S}(\text{Λ})]$ fehlen.",
+          "math_hint": "Die explizite Berechnung von $[\text{γ}^\text{μ}, \text{σ}^{\text{αβ}}]$ könnte detaillierter sein."
+        },
+        {
+          "code": "INCOMPLETE_EXPLANATION",
+          "msg": "Die Herleitung der Antikommutatorrelationen ist nicht vollständig erklärt.",
+          "math_hint": "Die Verwendung der Antikommutatorrelationen $\text{γ}^\text{μ} \text{γ}^\text{ν} + \text{γ}^\text{ν} \text{γ}^\text{μ} = 2\text{g}^{\text{μν}}$ sollte klarer dargestellt werden."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Berechne explizit: } [\\gamma^\\mu, \\sigma^{\\alpha\\beta}] = \\frac{i}{2} \\left( [\\gamma^\\mu, \\gamma^\\alpha \\gamma^\\beta] - [\\gamma^\\mu, \\gamma^\\beta \\gamma^\\alpha] \\right)",
+        "\\text{Verwende: } \\{\\gamma^\\mu, \\gamma^\\nu\\} = 2g^{\\mu\\nu} \\text{ explizit in den Berechnungen.}"
+      ]
+    },
+    "3.2": {
+      "score": 0.8,
+      "verdict": "Gute Herleitung mit kleineren Lücken",
+      "weaknesses": [
+        {
+          "code": "missing_explanation",
+          "msg": "Die Rolle von \\(\\operatorname{det}(\\Lambda)\\) bei \\(\\gamma^5\\) Transformation ist nicht vollständig erklärt.",
+          "math_hint": "Erkläre, warum \\(\\operatorname{det}(\\Lambda) = -1\\) für Paritätstransformationen gilt."
+        },
+        {
+          "code": "incomplete_transformation",
+          "msg": "Transformation von \\(\\gamma^5\\) nicht vollständig hergeleitet.",
+          "math_hint": "Zeige explizit, wie \\(S^{-1}(\\Lambda) \\gamma^5 S(\\Lambda) = \\operatorname{det}(\\Lambda) \\gamma^5\\) hergeleitet wird."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Füge eine Erklärung hinzu, warum } \\operatorname{det}(\\Lambda) = -1 \\text{ für Paritätstransformationen gilt.}",
+        "S^{-1}(\\Lambda) \\gamma^5 S(\\Lambda) = \\operatorname{det}(\\Lambda) \\gamma^5 \\text{ explizit herleiten, indem die Eigenschaften von } \\gamma^5 \\text{ und } S(\\Lambda) \\text{ verwendet werden.}"
+      ]
+    },
+    "4.1": {
+      "score": 0.7,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es gibt einige Fehler und Unklarheiten.",
+      "weaknesses": [
+        {
+          "code": "E1",
+          "msg": "Falsche Anwendung der Dirac-Gleichung auf die Ableitung von \\( \\psi \\)",
+          "math_hint": "\\( \\partial_\\mu \\psi = i \\gamma^\\mu \\partial_\\mu \\psi \\) ist nicht korrekt. Es sollte \\( \\partial_\\mu \\psi = i m \\psi \\) sein."
+        },
+        {
+          "code": "E2",
+          "msg": "Fehlerhafte Inversion der Dirac-Matrizen",
+          "math_hint": "Die Beziehung \\( \\gamma^\\mu \\gamma^\\nu = g^{\\mu\\nu} \\) ist nicht korrekt. Es sollte \\( \\gamma^\\mu \\gamma^\\nu + \\gamma^\\nu \\gamma^\\mu = 2g^{\\mu\\nu} \\) sein."
+        }
+      ],
+      "fix_suggestions": [
+        "\\begin{align*} \\partial_\\mu \\psi &= -i m \\psi \\end{align*}",
+        "\\begin{align*} \\gamma^\\mu \\gamma^\\nu + \\gamma^\\nu \\gamma^\\mu &= 2g^{\\mu\\nu} \\end{align*}"
+      ]
+    },
+    "4.2": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlt eine explizite Diskussion über die Bedingung für positive Definitheit im Kontext der Dirac-Gleichung.",
+      "weaknesses": [
+        {
+          "code": "MISSING_POSITIVE_DEFINITENESS_DISCUSSION",
+          "msg": "Die Bedingung für positive Definitheit wird nicht explizit im Kontext der Dirac-Gleichung diskutiert.",
+          "math_hint": "Diskussion über $j^0 > 0$ für alle $\\\\psi \\\\neq 0$ fehlt."
+        }
+      ],
+      "fix_suggestions": [
+        "Füge eine explizite Diskussion über die Bedingung $j^0 > 0$ für alle $\\psi \\neq 0$ hinzu, um die positive Definitheit zu überprüfen."
+      ]
+    }
+  }
+}

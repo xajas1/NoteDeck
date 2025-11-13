@@ -1,0 +1,45 @@
+Um die Beziehung \( S^{-1}(\Lambda) = \left(\gamma^0 S(\Lambda) \gamma^0\right)^{\dagger} \) zu zeigen, beginnen wir mit der Definition von \( S(\Lambda) \) und den Eigenschaften der Dirac-Matrizen. Wir ergänzen die Herleitung der Beziehung für antihermites \( A \).
+
+\begin{align*}
+S(\Lambda) &= e^{-\frac{i}{4} \omega^{\mu \nu} \sigma_{\mu \nu}}, \\
+\sigma_{\mu \nu} &= \frac{i}{2} [\gamma_\mu, \gamma_\nu].
+\end{align*}
+
+Die Inverse von \( S(\Lambda) \) ist gegeben durch:
+
+\begin{align*}
+S^{-1}(\Lambda) &= e^{\frac{i}{4} \omega^{\mu \nu} \sigma_{\mu \nu}}.
+\end{align*}
+
+Für eine antihermites Matrix \( A \) gilt \( A^{\dagger} = -A \). Daraus folgt:
+
+\begin{align*}
+(e^A)^{\dagger} &= \left(\sum_{n=0}^{\infty} \frac{A^n}{n!}\right)^{\dagger} = \sum_{n=0}^{\infty} \frac{(A^n)^{\dagger}}{n!} = \sum_{n=0}^{\infty} \frac{(A^{\dagger})^n}{n!} \\
+&= \sum_{n=0}^{\infty} \frac{(-A)^n}{n!} = e^{-A} = e^{A^{\dagger}}.
+\end{align*}
+
+Da \( \sigma_{\mu \nu} \) antihermitisch ist, folgt:
+
+\begin{align*}
+(\gamma^0 \sigma_{\mu \nu} \gamma^0) &= \sigma_{\mu \nu}^\dagger.
+\end{align*}
+
+Daraus ergibt sich:
+
+\begin{align*}
+\left(\gamma^0 S(\Lambda) \gamma^0\right) &= e^{-\frac{i}{4} \omega^{\mu \nu} (\gamma^0 \sigma_{\mu \nu} \gamma^0)} = e^{-\frac{i}{4} \omega^{\mu \nu} \sigma_{\mu \nu}^\dagger}.
+\end{align*}
+
+Anwendung der Exponentialregel für antihermites \( A \):
+
+\begin{align*}
+\left(\gamma^0 S(\Lambda) \gamma^0\right)^{\dagger} &= \left(e^{-\frac{i}{4} \omega^{\mu \nu} \sigma_{\mu \nu}^\dagger}\right)^{\dagger} = e^{\frac{i}{4} \omega^{\mu \nu} \sigma_{\mu \nu}}.
+\end{align*}
+
+Dies zeigt, dass:
+
+\begin{align*}
+S^{-1}(\Lambda) &= \left(\gamma^0 S(\Lambda) \gamma^0\right)^{\dagger}.
+\end{align*}
+
+%CHECK: M1 wurde durch die explizite Herleitung der Exponentialregel für antihermites A adressiert.

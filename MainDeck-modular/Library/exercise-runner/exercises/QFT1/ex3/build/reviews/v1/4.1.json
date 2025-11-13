@@ -1,0 +1,26 @@
+{
+  "score": 0.5,
+  "verdict": "Die Lösung enthält mehrere mathematische Fehler und Unklarheiten.",
+  "weaknesses": [
+    {
+      "code": "WRONG_INV_GAMMA",
+      "msg": "Die Inverse der Dirac-Matrizen ist nicht korrekt definiert.",
+      "math_hint": "\\gamma^\\mu \\gamma_\\mu^{-1} = 1 ist nicht korrekt, da \\gamma^\\mu \\gamma_\\nu = g^\\mu_\\nu."
+    },
+    {
+      "code": "WRONG_DERIVATION",
+      "msg": "Die Ableitungen von \\psi und \\bar{\\psi} sind falsch.",
+      "math_hint": "\\partial_\\mu \\psi = -i m \\gamma_\\mu \\psi ist nicht korrekt."
+    },
+    {
+      "code": "MISSING_STEPS",
+      "msg": "Fehlende Zwischenschritte bei der Anwendung der Dirac-Gleichung.",
+      "math_hint": "Verwende die Dirac-Gleichung direkt: (i \\gamma^\\mu \\partial_\\mu - m) \\psi = 0."
+    }
+  ],
+  "fix_suggestions": [
+    "\\partial_\\mu \\psi = -i m \\gamma^\\mu \\psi \\text{ ist falsch, es sollte } (i \\gamma^\\mu \\partial_\\mu - m) \\psi = 0 \\text{ verwendet werden.}",
+    "\\partial_\\mu \\bar{\\psi} = i \\bar{\\psi} \\gamma_\\mu^{-1} m \\text{ ist falsch, es sollte } \\bar{\\psi} (i \\overleftarrow{\\partial_\\mu} \\gamma^\\mu + m) = 0 \\text{ verwendet werden.}",
+    "\\gamma^\\mu \\gamma_\\mu^{-1} = 1 \\text{ ist falsch, es sollte } \\gamma^\\mu \\gamma_\\nu = g^\\mu_\\nu \\text{ verwendet werden.}"
+  ]
+}

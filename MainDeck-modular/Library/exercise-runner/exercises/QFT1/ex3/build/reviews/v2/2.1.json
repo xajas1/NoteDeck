@@ -1,0 +1,20 @@
+{
+  "score": 0.7,
+  "verdict": "Teilweise korrekt, aber unvollständig.",
+  "weaknesses": [
+    {
+      "code": "MISSING_STEPS",
+      "msg": "Die Herleitung der Antikommutatorrelation ist unvollständig.",
+      "math_hint": "Es fehlt eine explizite Herleitung, warum \\(\\gamma^\\mu \\gamma^\\nu + \\gamma^\\nu \\gamma^\\mu = 2 g^{\\mu \\nu} I\\) aus der Clifford-Algebra folgt."
+    },
+    {
+      "code": "INCONSISTENT_NOTATION",
+      "msg": "Inkonsequente Notation bei der Hermiteschen Konjugation.",
+      "math_hint": "Die Notation \\((\\gamma^\\mu)^\\dagger = \\gamma^0 \\gamma^\\mu \\gamma^0\\) ist inkonsistent mit der vorherigen Gleichung."
+    }
+  ],
+  "fix_suggestions": [
+    "\\begin{align*} \\{\\gamma^\\mu, \\gamma^\\nu\\} &= \\gamma^\\mu \\gamma^\\nu + \\gamma^\\nu \\gamma^\\mu = 2 g^{\\mu \\nu} I \\end{align*}",
+    "\\begin{align*} (\\gamma^\\mu)^\\dagger &= \\gamma^0 \\gamma^\\mu \\gamma^0 \\end{align*}"
+  ]
+}

@@ -1176,6 +1176,13 @@
         "litIDs": {
           "L09": "LIE-L09-8"
         }
+      },
+      "Lorentz Gruppe": {
+        "index": 9,
+        "parent": null,
+        "litIDs": {
+          "B02": "LIE-B02-9"
+        }
       }
     }
   },
@@ -1213,6 +1220,32 @@
         "parent": null,
         "litIDs": {
           "M25": "RS-M25-2"
+        }
+      }
+    }
+  },
+  "SG": {
+    "index": 20,
+    "topics": {
+      "Clifford Algebra": {
+        "index": 1,
+        "parent": null,
+        "litIDs": {
+          "B11": "SG-B11-1"
+        }
+      },
+      "Clifford Gruppe": {
+        "index": 2,
+        "parent": null,
+        "litIDs": {
+          "B02": "SG-B02-2"
+        }
+      },
+      "Spin und Pinor Gruppe": {
+        "index": 3,
+        "parent": null,
+        "litIDs": {
+          "B02": "SG-B02-3"
         }
       }
     }

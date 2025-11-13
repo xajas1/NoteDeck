@@ -1,0 +1,14 @@
+{
+  "score": 0.9,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es gibt kleinere Lücken.",
+  "weaknesses": [
+    {
+      "code": "MISSING_DET_EXPLANATION",
+      "msg": "Die Rolle von \\(\\operatorname{det}(\\Lambda)\\) bei der Transformation von \\(\\gamma^5\\) ist nicht vollständig erklärt.",
+      "math_hint": "Erkläre, warum \\(\\operatorname{det}(\\Lambda)\\) bei der Transformation von \\(\\gamma^5\\) auftritt."
+    }
+  ],
+  "fix_suggestions": [
+    "Erkläre die Rolle von \\(\\operatorname{det}(\\Lambda)\\) bei der Transformation von \\(\\gamma^5\\) ausführlicher, z.B. durch den Hinweis auf die Paritätseigenschaften von \\(\\gamma^5\\)."
+  ]
+}

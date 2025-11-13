@@ -1,0 +1,125 @@
+{
+  "tasks": {
+    "1.1": {
+      "score": 0.8,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es gibt kleinere Ungenauigkeiten.",
+      "weaknesses": [
+        {
+          "code": "missing_step",
+          "msg": "Der Schritt zur Vereinfachung von \\\\(-\\gamma^\\nu \\gamma^\\mu \\partial_\\nu \\partial_\\mu\\\\) ist unklar.",
+          "math_hint": "Die Anwendung der Antikommutationsrelation sollte expliziter sein."
+        },
+        {
+          "code": "incorrect_sign",
+          "msg": "Das Vorzeichen in der Vereinfachung von \\\\(-\\gamma^\\nu \\gamma^\\mu \\partial_\\nu \\partial_\\mu\\\\) ist falsch.",
+          "math_hint": "Das Vorzeichen sollte positiv sein, da \\\\(-g^{\\nu\\mu} = g^{\\nu\\mu}\\\\) nicht korrekt ist."
+        }
+      ],
+      "fix_suggestions": [
+        "\\[-\\gamma^\\nu \\gamma^\\mu \\partial_\\nu \\partial_\\mu = \\frac{1}{2} \\left(\\gamma^\\nu \\gamma^\\mu + \\gamma^\\mu \\gamma^\\nu\\right) \\partial_\\nu \\partial_\\mu = g^{\\nu\\mu} \\partial_\\nu \\partial_\\mu\\]"
+      ]
+    },
+    "2.1": {
+      "score": 0.6,
+      "verdict": "Teilweise korrekt, aber unvollständig und fehlerhaft.",
+      "weaknesses": [
+        {
+          "code": "MISSING_PROOF",
+          "msg": "Die Herleitung der Antikommutatorrelation ist unvollständig.",
+          "math_hint": "\\{\\gamma^\\mu, \\gamma^\\nu\\} = 2 g^{\\mu \\nu} I sollte hergeleitet werden, nicht nur als gegeben angenommen."
+        },
+        {
+          "code": "HERMITIAN_CONJUGATION_ERROR",
+          "msg": "Fehler in der Herleitung der Hermiteschen Konjugation.",
+          "math_hint": "(\\gamma^\\mu)^\\dagger = \\gamma^0 \\gamma^\\mu \\gamma^0 ist nicht korrekt hergeleitet."
+        }
+      ],
+      "fix_suggestions": [
+        "\\{\\gamma^\\mu, \\gamma^\\nu\\} = \\gamma^\\mu \\gamma^\\nu + \\gamma^\\nu \\gamma^\\mu = 2 g^{\\mu \\nu} I \\text{ sollte explizit gezeigt werden.}",
+        "(\\gamma^\\mu)^\\dagger = \\gamma^0 \\gamma^\\mu \\gamma^0 \\text{ sollte korrekt hergeleitet werden, indem die Eigenschaften der Dirac-Matrizen verwendet werden.}"
+      ]
+    },
+    "2.2": {
+      "score": 0.9,
+      "verdict": "Fast korrekt, aber ein kleiner Fehler in der Argumentation.",
+      "weaknesses": [
+        {
+          "code": "E1",
+          "msg": "Unklare Herleitung der Exponentialtransformation",
+          "math_hint": "Die Herleitung der Beziehung $(\text{exp}(A))^\text{dagger} = \text{exp}(A^\text{dagger})$ für antihermites $A$ fehlt."
+        }
+      ],
+      "fix_suggestions": [
+        "\\text{Für antihermites } A, \\text{ gilt: } (e^A)^{\\dagger} = e^{A^{\\dagger}}."
+      ]
+    },
+    "3.1": {
+      "score": 0.8,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es gibt kleinere Lücken in der Herleitung.",
+      "weaknesses": [
+        {
+          "code": "missing_step",
+          "msg": "Der Schritt von $[\text{S}^{-1}(\text{Λ}) \text{γ}^\text{μ} \text{S}(\text{Λ})]$ zu $[\text{γ}^\text{μ} + \frac{1}{2} \text{δω}_{\text{αβ}} (\text{g}^{\text{μα}} \text{γ}^\text{β} - \text{g}^{\text{μβ}} \text{γ}^\text{α})]$ ist nicht vollständig erklärt.",
+          "math_hint": "Es fehlt eine detaillierte Erklärung, wie die Terme $\frac{i}{4} \text{δω}_{\text{αβ}} [\text{γ}^\text{μ}, \text{σ}^{\text{αβ}}]$ zu $\frac{1}{2} \text{δω}_{\text{αβ}} (\text{g}^{\text{μα}} \text{γ}^\text{β} - \text{g}^{\text{μβ}} \text{γ}^\text{α})$ führen."
+        }
+      ],
+      "fix_suggestions": [
+        "Erkläre den Übergang von $\\frac{i}{4} \\delta \\omega_{\\alpha\\beta} [\\gamma^\\mu, \\sigma^{\\alpha\\beta}]$ zu $\\frac{1}{2} \\delta \\omega_{\\alpha\\beta} (g^{\\mu\\alpha} \\gamma^\\beta - g^{\\mu\\beta} \\gamma^\\alpha)$ detaillierter, indem du die Zwischenschritte explizit darstellst."
+      ]
+    },
+    "3.2": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es gibt kleinere Lücken.",
+      "weaknesses": [
+        {
+          "code": "MISSING_DET_EXPLANATION",
+          "msg": "Die Rolle von \\(\\operatorname{det}(\\Lambda)\\) bei der Transformation von \\(\\gamma^5\\) ist nicht vollständig erklärt.",
+          "math_hint": "Erkläre, warum \\(\\operatorname{det}(\\Lambda)\\) bei der Transformation von \\(\\gamma^5\\) auftritt."
+        }
+      ],
+      "fix_suggestions": [
+        "Erkläre die Rolle von \\(\\operatorname{det}(\\Lambda)\\) bei der Transformation von \\(\\gamma^5\\) ausführlicher, z.B. durch den Hinweis auf die Paritätseigenschaften von \\(\\gamma^5\\)."
+      ]
+    },
+    "4.1": {
+      "score": 0.5,
+      "verdict": "Die Lösung enthält mehrere mathematische Fehler und Unklarheiten.",
+      "weaknesses": [
+        {
+          "code": "WRONG_INV_GAMMA",
+          "msg": "Die Inverse der Dirac-Matrizen ist nicht korrekt definiert.",
+          "math_hint": "\\gamma^\\mu \\gamma_\\mu^{-1} = 1 ist nicht korrekt, da \\gamma^\\mu \\gamma_\\nu = g^\\mu_\\nu."
+        },
+        {
+          "code": "WRONG_DERIVATION",
+          "msg": "Die Ableitungen von \\psi und \\bar{\\psi} sind falsch.",
+          "math_hint": "\\partial_\\mu \\psi = -i m \\gamma_\\mu \\psi ist nicht korrekt."
+        },
+        {
+          "code": "MISSING_STEPS",
+          "msg": "Fehlende Zwischenschritte bei der Anwendung der Dirac-Gleichung.",
+          "math_hint": "Verwende die Dirac-Gleichung direkt: (i \\gamma^\\mu \\partial_\\mu - m) \\psi = 0."
+        }
+      ],
+      "fix_suggestions": [
+        "\\partial_\\mu \\psi = -i m \\gamma^\\mu \\psi \\text{ ist falsch, es sollte } (i \\gamma^\\mu \\partial_\\mu - m) \\psi = 0 \\text{ verwendet werden.}",
+        "\\partial_\\mu \\bar{\\psi} = i \\bar{\\psi} \\gamma_\\mu^{-1} m \\text{ ist falsch, es sollte } \\bar{\\psi} (i \\overleftarrow{\\partial_\\mu} \\gamma^\\mu + m) = 0 \\text{ verwendet werden.}",
+        "\\gamma^\\mu \\gamma_\\mu^{-1} = 1 \\text{ ist falsch, es sollte } \\gamma^\\mu \\gamma_\\nu = g^\\mu_\\nu \\text{ verwendet werden.}"
+      ]
+    },
+    "4.2": {
+      "score": 0.9,
+      "verdict": "Die Lösung ist größtenteils korrekt, aber es fehlt eine explizite Diskussion über die Bedingung für positive Definitheit.",
+      "weaknesses": [
+        {
+          "code": "MISSING_POSITIVE_DEFINITENESS_CONDITION",
+          "msg": "Die Bedingung für positive Definitheit wird nicht explizit diskutiert.",
+          "math_hint": "Erkläre, dass positive Definitheit $j^0 > 0$ für alle $\bar{\rho} \neq 0$ erfordert."
+        }
+      ],
+      "fix_suggestions": [
+        "Füge eine Erklärung hinzu, dass positive Definitheit bedeutet, dass $j^0 > 0$ für alle $\bar{\rho} \neq 0$ gelten muss."
+      ]
+    }
+  }
+}

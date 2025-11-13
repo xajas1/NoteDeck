@@ -1,0 +1,14 @@
+{
+  "score": 0.8,
+  "verdict": "Die Lösung ist größtenteils korrekt, aber es gibt kleinere Lücken in der Herleitung.",
+  "weaknesses": [
+    {
+      "code": "missing_step",
+      "msg": "Der Schritt von $[\text{S}^{-1}(\text{Λ}) \text{γ}^\text{μ} \text{S}(\text{Λ})]$ zu $[\text{γ}^\text{μ} + \frac{1}{2} \text{δω}_{\text{αβ}} (\text{g}^{\text{μα}} \text{γ}^\text{β} - \text{g}^{\text{μβ}} \text{γ}^\text{α})]$ ist nicht vollständig erklärt.",
+      "math_hint": "Es fehlt eine detaillierte Erklärung, wie die Terme $\frac{i}{4} \text{δω}_{\text{αβ}} [\text{γ}^\text{μ}, \text{σ}^{\text{αβ}}]$ zu $\frac{1}{2} \text{δω}_{\text{αβ}} (\text{g}^{\text{μα}} \text{γ}^\text{β} - \text{g}^{\text{μβ}} \text{γ}^\text{α})$ führen."
+    }
+  ],
+  "fix_suggestions": [
+    "Erkläre den Übergang von $\\frac{i}{4} \\delta \\omega_{\\alpha\\beta} [\\gamma^\\mu, \\sigma^{\\alpha\\beta}]$ zu $\\frac{1}{2} \\delta \\omega_{\\alpha\\beta} (g^{\\mu\\alpha} \\gamma^\\beta - g^{\\mu\\beta} \\gamma^\\alpha)$ detaillierter, indem du die Zwischenschritte explizit darstellst."
+  ]
+}
