@@ -278,19 +278,1975 @@ Kurze Beschreibung …
     \item Interpretation von Lorentztransformationen
   \end{enumerate}
   \end{enumerate}
-  \item Relativistische Wellengleichungen
-  \begin{enumerate}
-    \item Klein Gordon Gleichung
-    \item Dirac Gleichung 
-    \begin{enumerate}
-      \item Kovarianz bzgl. $\Spin^+(1,3)$
-    \end{enumerate}
-  \end{enumerate}
   \item Quantisierung von klassischer Feldtheorie
   \begin{enumerate}
     \item Konstruktion von Fock-Raum
   \end{enumerate}
 \end{enumerate}
+
+\pagebreak
+
+
+\section{Quantenmechanische Theorien}
+
+\begin{enumerate}
+  \item Erwartungshaltung an quantenmechanische Theorien
+  \item Axiomatiken
+  \item Allgemeiner vs. spezifischer Rahmen (QFT)
+\end{enumerate}
+
+
+\begin{unit}
+\emph{Zwischenebene: Abstrakte Heisenberg--/Weyl-Kinematik für QM und QFT}
+
+In diesem Abschnitt formulieren wir einen abstrakten Rahmen, der
+\emph{sowohl} die klassische Quantenmechanik mit endlich vielen
+Freiheitsgraden \((X=\mathbb{R}^{2n})\),
+\emph{als auch} freie (bosonische oder fermionische) Quantenfeldtheorien
+\((X\ \text{unendlichdimensional})\)
+und sogar die üblichen einfachen Wechselwirkungen der QFT1/2
+gemeinsam erfasst.
+Diese Ebene liegt strenger und allgemeiner als die kanonische
+Heisenberg-/Weyl-Algebra über \(\mathbb{R}^{2n}\),
+aber konkreter als der vollabstrakte C$^\ast$-/von-Neumann-Formalismus.
+Wir nennen sie die \emph{Zwischenebene der Einteilchenräume und CCR/CAR-Algebren}.
+
+%---------------------------------------------------------
+\emph{1. Einteilchenraum und symplektische/skalare Struktur}
+
+\emph{Bosonische Systeme.}
+Sei \(X\) ein reeller lokalkonvexer Vektorraum
+(oft endlichdimensional, oder ein Testfunktionenraum wie \(\mathcal{S}(\mathbb{R}^d)\)),
+versehen mit einer nichtausgearteten, antisymmetrischen Bilinearform
+\[
+\sigma : X\times X \to \mathbb{R}.
+\]
+Das Paar \((X,\sigma)\) heißt \emph{symplektischer Einteilchenraum}.
+\begin{itemize}
+  \item QM: \(X=\mathbb{R}^{2n}\) mit der kanonischen Form \(\sigma((x,p),(x',p'))=p\cdot x'-p'\cdot x\).
+  \item Freie QFT: \(X\) ist der Raum reeller Testfunktionen oder Cauchy-Daten;
+        \(\sigma\) ist z.\,B. durch das Pauli–Jordan-Funktional gegeben.
+\end{itemize}
+
+\emph{Fermionische Systeme.}
+Sei \(Y\) ein reeller Hilbertraum
+mit innerem Produkt \(\langle\cdot,\cdot\rangle_Y\).
+Dies ist der \emph{Einteilchenraum für Fermionen}.
+\begin{itemize}
+  \item QM (Spin): \(Y=\mathbb{R}^n\), inneres Produkt gewöhnlich.
+  \item Freies Dirac- oder Majorana-Feld: \(Y\) ist ein Raum glatter kompakter Spinorfunktionen.
+\end{itemize}
+
+Diese Wahl \((X,\sigma)\) bzw. \((Y,\langle\cdot,\cdot\rangle)\) ist der
+\emph{kinematische Kern} der Theorie: sie entspricht dem klassischen
+Phasenraum (bosonisch) bzw. klassischen Konfigurationsraum (fermionisch).
+
+%---------------------------------------------------------
+\emph{2. Abstrakte Heisenberg-Lie-Algebra}
+
+Zu einem symplektischen Einteilchenraum \((X,\sigma)\) definieren wir:
+
+\begin{DEF}{MID-HEIS}{Abstrakte Heisenberg-Algebra}
+\[
+\mathfrak{h}(X) := X \oplus \mathbb{R}Z
+\]
+mit Lie-Klammer
+\[
+[(f,\alpha Z),(g,\beta Z)]
+= (0,\ \sigma(f,g)\,Z),
+\qquad [Z,\cdot]=0.
+\]
+\end{DEF}
+
+Ein Element \(f\in X\) wird physikalisch als „abstrakter Feldmodus“
+oder „abstrakte Kanonische Observable“ interpretiert;
+\(Z\) spielt die Rolle von \(i\hbar\).
+
+Dies umfasst:
+\begin{itemize}
+  \item QM: \(\mathfrak{h}(\mathbb{R}^{2n})\) ist die übliche Heisenberg-Algebra
+        mit endlich vielen \(X_j,P_k\).
+  \item Freie QFT: \(\mathfrak{h}(X)\) ist unendlichdimensional und kodiert
+        \([\,\phi(f),\pi(g)\,]= i\int f g\).
+\end{itemize}
+
+Zu \(\mathfrak{h}(X)\) gehört die universelle Hüllalgebra
+\(U(\mathfrak{h}(X))\), die die polynomiellen Kombinationen dieser
+abstrakten Observablen enthält.
+
+%---------------------------------------------------------
+\emph{3. CCR- und CAR-C$^\ast$-Algebren (Weyl- und Clifford-Ebene)}
+
+Die Heisenberg-Algebra ist nur die infinitesimale Struktur.
+Die physikalisch sinnvolle Observablenalgebra für QM und freie QFT
+ist die exponentialisierte C$^\ast$-Algebra.
+
+\begin{DEF}{MID-CCR}{CCR-Weyl-C$^\ast$-Algebra (bosonisch)}
+Für \((X,\sigma)\) ist die \emph{Weyl- bzw. CCR-C$^\ast$-Algebra}
+\(\mathrm{CCR}(X,\sigma)\)
+die vollständige C$^\ast$-Algebra, erzeugt durch Symbole \(W(f)\) (\(f\in X\))
+mit den Weyl-Relationen
+\[
+W(f)W(g)=e^{-\,\frac{i}{2}\sigma(f,g)}\,W(f+g),\qquad W(f)^\ast=W(-f).
+\]
+\end{DEF}
+
+\begin{DEF}{MID-CAR}{CAR-C$^\ast$-Algebra (fermionisch)}
+Für einen reellen Hilbertraum \(Y\) ist die \emph{CAR-Algebra}
+\(\mathrm{CAR}(Y)\) die C$^\ast$-Algebra, erzeugt durch Symbole \(a(f)\) (\(f\in Y\))
+mit den Relationen
+\[
+\{a(f),a(g)\}=0,\qquad
+\{a(f),a(g)^\ast\}=\langle f,g\rangle_Y\mathbf{1}.
+\]
+\end{DEF}
+
+Diese Konstruktionen umfassen:
+\begin{itemize}
+  \item gewöhnliche QM (\(X\) endlichdimensional),
+  \item freie skalare und elektromagnetische Felder (CCR),
+  \item freie Dirac- und Majorana-Felder (CAR),
+  \item alle Standardbeispiele aus QFT1/2 auf einer gemeinsamen algebraischen Ebene.
+\end{itemize}
+
+%---------------------------------------------------------
+\emph{4. Dynamik als Automorphismengruppe der CCR/CAR-Algebra}
+
+\begin{DEF}{MID-DYN}{Abstrakte Dynamik}
+Eine (Heisenberg-)Dynamik ist eine stark-stetige Gruppe von *-Automorphismen
+\[
+\alpha : \mathbb{R} \to \mathrm{Aut}(\mathcal{A}),\qquad
+t\mapsto \alpha_t,
+\]
+wobei \(\mathcal{A}=\mathrm{CCR}(X,\sigma)\) oder \(\mathrm{CAR}(Y)\).
+\end{DEF}
+
+\begin{itemize}
+  \item \textbf{Freie Theorien:}  
+        Die Einteilchen-Dynamik \(T_t:X\to X\) (oder \(Y\to Y\))
+        induziert eine Automorphismengruppe
+        \[
+        \alpha_t(W(f)) = W(T_tf),\qquad
+        \alpha_t(a(f)) = a(T_t f).
+        \]
+  \item \textbf{Wechselwirkungen in QFT1/2 (formal):}  
+        dieselbe Algebra bleibt gültig, aber die Zeitentwicklung wird
+        durch einen formalen Hamiltonoperator \(H=H_0+V\) bestimmt:
+        \[
+        \frac{d}{dt}\alpha_t(A)=i[H,A].
+        \]
+        Die Algebra ändert sich also nicht – nur die Dynamik.
+\end{itemize}
+
+Damit lassen sich alle Standardmodelle einer QFT-Einführung
+(Klein–Gordon, Dirac, Yukawa, \(\phi^4\), QED in der kanonischen Form)
+im selben algebraischen Rahmen behandeln.
+
+%---------------------------------------------------------
+\emph{5. Darstellungen (GNS) und Fockräume}
+
+Ein Zustand \(\omega\) auf \(\mathrm{CCR}(X,\sigma)\) oder \(\mathrm{CAR}(Y)\)
+definiert über die GNS-Konstruktion eine Darstellung
+\[
+(\pi_\omega,\mathcal{H}_\omega,\Omega_\omega).
+\]
+
+\begin{itemize}
+  \item Für freie Theorien sind \(\omega\) \emph{quasi-freie Zustände},
+        und die GNS-Darstellung ist die übliche \emph{bosonische} bzw.
+        \emph{fermionische Fock-Darstellung}.
+  \item Für Wechselwirkungen in QFT1/2 bleibt formal dieselbe Algebra bestehen,
+        aber der Zustand \(\omega_V\) (interacting vacuum) ist i.\,Allg.
+        nichtunitär äquivalent zum freien Zustand \(\omega_0\).
+\end{itemize}
+
+%---------------------------------------------------------
+\emph{6. Charakterisierung dieser Zwischenebene}
+
+\begin{REM}{MID-SUM}{Zusammenfassung}
+Die hier eingeführte Ebene
+\[
+(X,\sigma)\longmapsto \mathrm{CCR}(X,\sigma),\qquad
+Y\longmapsto\mathrm{CAR}(Y)
+\]
+liefert einen abstrakten Rahmen, der
+\begin{itemize}
+  \item die kinematische Struktur der QM 
+        (endlichdimensionaler symplektischer Raum),
+  \item die kinematische Struktur aller freien Feldtheorien
+        (unendlichdimensionale Einteilchenräume),
+  \item sowie die formale Behandlung einfacher/interagierender QFT-Modelle
+        (gleiche Algebra, veränderte Dynamik/Zustände)
+\end{itemize}
+einheitlich beschreibt.
+
+Diese Ebene ist damit:
+\begin{enumerate}
+  \item \emph{allgemeiner} als die klassische Heisenberg-/Weyl-Algebra über \(\mathbb{R}^{2n}\),
+  \item \emph{konkret genug}, um die vollständige Standard-QFT1/2-Abdeckung zu gewährleisten,
+  \item \emph{kompatibel} mit dem noch allgemeineren C$^\ast$-/von-Neumann-Formalismus,
+        in dem CCR/CAR-Algebren als strukturierte Spezialfälle erscheinen.
+\end{enumerate}
+\end{REM}
+\end{unit}
+
+
+\begin{unit}
+\emph{Endliche Quantenmechanik als Spezialfall der abstrakten CCR-Struktur}
+
+In diesem Abschnitt zeigen wir explizit, wie die gewöhnliche nichtrelativistische
+Quantenmechanik mit endlich vielen Freiheitsgraden in den abstrakten Rahmen
+\[
+(X,\sigma)\;\longmapsto\;\mathrm{CCR}(X,\sigma)
+\]
+eingebettet ist. Ziel ist es, die üblichen Objekte
+\[
+\mathcal{H}=L^2(\mathbb{R}^n),\quad
+\hat{x}_j,\hat{p}_k,\quad
+H=\tfrac{1}{2m}\hat{p}^2+V(\hat{x})
+\]
+als konkrete Realisierung der abstrakten Heisenberg- und CCR-Struktur zu identifizieren.
+
+%--------------------------------------------------------------------
+\emph{1. Kinematik: Der symplektische Einteilchenraum}
+
+\emph{Abstrakt.}
+Sei \(V\simeq\mathbb{R}^n\) der klassische Konfigurationsraum.
+Der \emph{klassische Phasenraum} ist \(T^\ast V\simeq \mathbb{R}^{2n}\).
+Wir setzen
+\[
+X := V_x \oplus V_p \;\cong\; \mathbb{R}^n_x\oplus\mathbb{R}^n_p\cong\mathbb{R}^{2n}
+\]
+mit der kanonischen symplektischen Form
+\[
+\sigma\bigl((x,p),(x',p')\bigr)
+:= p\cdot x' - p'\cdot x.
+\]
+Damit ist \((X,\sigma)\) ein endlichdimensionaler symplektischer Raum.
+
+\emph{Interpretation.}
+Die Paare \((x,p)\in X\) repräsentieren klassische Zustände
+\((\text{Ort},\text{Impuls})\), und \(\sigma\) ist die übliche symplektische Struktur
+des Phasenraums.
+
+%--------------------------------------------------------------------
+\emph{2. Abstrakte Heisenberg-Algebra \texorpdfstring{$\mathfrak{h}(X)$}{h(X)}}
+
+Nach der allgemeinen Definition (vgl.\ \textsc{MID-HEIS}) ist die
+\emph{Heisenberg-Lie-Algebra}
+\[
+\mathfrak{h}(X) := X \oplus \mathbb{R}Z
+\]
+mit Lie-Klammer
+\[
+[(f,\alpha Z),(g,\beta Z)]
+= (0,\ \sigma(f,g)\,Z).
+\]
+Wählt man eine Basis \(\{e_j\}_{j=1}^n\) von \(V_x\) und \(\{e^j\}_{j=1}^n\) von \(V_p\),
+so kann man
+\[
+X_j := (e_j,0),\qquad
+P_j := (0,e^j)
+\]
+als Erzeuger wählen. Dann lauten die Relationen
+\[
+[X_j,P_k] = \delta_{jk}\,Z,\qquad
+[X_j,X_k]=[P_j,P_k]=[Z,\cdot]=0.
+\]
+Identifiziert man formal \(Z\sim i\hbar\), erhält man die bekannten
+kanonischen Kommutationsrelationen:
+\[
+[X_j,P_k] = i\hbar\,\delta_{jk}.
+\]
+
+Die universelle Hüllalgebra \(U(\mathfrak{h}(X))\) enthält dann
+Polynome in den \(X_j,P_k\), z.\,B. Hamiltonoperatoren der Form
+\[
+H = \frac{1}{2m}\sum_{j=1}^n P_j^2 + V(X_1,\dots,X_n).
+\]
+
+%--------------------------------------------------------------------
+\emph{3. Die CCR-Weyl-C$^\ast$-Algebra \texorpdfstring{$\mathrm{CCR}(X,\sigma)$}{CCR(X,sigma)}}
+
+\emph{Abstrakte Definition.}
+Die CCR- (oder Weyl-) C$^\ast$-Algebra \(\mathrm{CCR}(X,\sigma)\)
+ist die C$^\ast$-Vervollständigung der *-Algebra,
+erzeugt von Symbolen \(W(f)\) (\(f\in X\)) mit den Weyl-Relationen
+\[
+W(f)W(g) = e^{-\frac{i}{2}\sigma(f,g)}W(f+g),\qquad
+W(f)^\ast = W(-f).
+\]
+
+Diese Algebra ist ein abstrakter Vertreter der kanonischen
+Kommutationsrelationen. Die \emph{infinitesimale} Heisenberg-Algebra
+\(\mathfrak{h}(X)\) kann als Lie-Algebra der „logarithmischen Ableitungen“
+der \(W(f)\) verstanden werden.
+
+%--------------------------------------------------------------------
+\emph{4. Schrödinger-Darstellung als konkrete Realisierung}
+
+\emph{Hilbertraum.}
+Wir wählen als Zustandsraum den Hilbertraum
+\[
+\mathcal{H} := L^2(\mathbb{R}^n,dx),
+\]
+mit kanonischem Skalarprodukt
+\[
+\langle \psi,\varphi\rangle = \int_{\mathbb{R}^n} \overline{\psi(x)}\varphi(x)\,dx.
+\]
+
+\emph{Ort- und Impulsoperatoren.}
+Wir definieren (zunächst auf einem dichten Unterraum, etwa den Schwartzfunktionen)
+\[
+(\hat{X}_j\psi)(x) := x_j\psi(x),\qquad
+(\hat{P}_j\psi)(x) := -\,i\hbar\,\frac{\partial}{\partial x_j}\psi(x).
+\]
+Dann gilt (formal)
+\[
+[\hat{X}_j,\hat{P}_k]\psi
+= i\hbar\,\delta_{jk}\,\psi,\qquad
+[\hat{X}_j,\hat{X}_k]=[\hat{P}_j,\hat{P}_k]=0,
+\]
+d.\,h. \(\hat{X}_j,\hat{P}_k\) realisieren die Relationen der Heisenberg-Algebra
+\(\mathfrak{h}(X)\).
+
+\emph{Weyl-Operatoren in der Schrödinger-Darstellung.}
+Zu jedem \(f=(x,p)\in X\) definieren wir einen unitären Operator
+\(\pi_{\mathrm{Sch}}(W(f))\) auf \(\mathcal{H}\) durch
+\[
+\bigl(\pi_{\mathrm{Sch}}(W(x,p))\psi\bigr)(y)
+:= e^{\frac{i}{\hbar}\left(p\cdot y - \tfrac{1}{2}p\cdot x\right)}\,
+   \psi(y-x).
+\]
+
+Man überprüft:
+\begin{align*}
+\pi_{\mathrm{Sch}}(W(x,p))\pi_{\mathrm{Sch}}(W(x',p'))
+&= e^{-\frac{i}{2\hbar}\sigma((x,p),(x',p'))}\,
+   \pi_{\mathrm{Sch}}(W(x+x',p+p')),\\
+\pi_{\mathrm{Sch}}(W(x,p))^\ast
+&= \pi_{\mathrm{Sch}}(W(-x,-p)),
+\end{align*}
+also erfüllt \(\pi_{\mathrm{Sch}}\) genau die Weyl-Relationen.
+Damit ist
+\[
+\pi_{\mathrm{Sch}}:\mathrm{CCR}(X,\sigma)\longrightarrow \mathcal{B}(\mathcal{H})
+\]
+eine \emph{konkrete Darstellung} der abstrakten CCR-Algebra.
+
+\emph{Infinitesimale Generatoren.}
+Differenziert man \(t\mapsto \pi_{\mathrm{Sch}}(W(t e_j,0))\) und
+\(t\mapsto \pi_{\mathrm{Sch}}(W(0,t e^j))\) bei \(t=0\), so erhält man
+\[
+\hat{X}_j = i\hbar\,\frac{d}{dt}\pi_{\mathrm{Sch}}(W(t e_j,0))\bigg|_{t=0},
+\quad
+\hat{P}_j = i\hbar\,\frac{d}{dt}\pi_{\mathrm{Sch}}(W(0,t e^j))\bigg|_{t=0}.
+\]
+Damit erscheinen die üblichen Ort- und Impulsoperatoren
+als \emph{infinitesimale Generatoren} der Weyl-Darstellung
+von \(\mathrm{CCR}(X,\sigma)\).
+
+%--------------------------------------------------------------------
+\emph{5. Stone--von Neumann und Eindeutigkeit (bis auf Äquivalenz)}
+
+\begin{THEO}{SvN-1}{Stone--von Neumann (informell)}
+Sei \(\pi:\mathrm{CCR}(X,\sigma)\to \mathcal{B}(\mathcal{H}_\pi)\)
+eine irreduzible, \emph{regular} (d.\,h. stetige) Darstellung
+der CCR-Algebra für endlichdimensionales \(X\).
+Dann ist \(\pi\) zu der Schrödinger-Darstellung \(\pi_{\mathrm{Sch}}\)
+unitär äquivalent.
+\end{THEO}
+
+\emph{Interpretation.}
+Für eine gegebene endliche Anzahl von Freiheitsgraden \(n\) ist die
+Struktur der Hilbertraumdarstellung der Heisenberg-/Weyl-Algebra
+durch \(L^2(\mathbb{R}^n)\) (bis auf unitäre Äquivalenz) \emph{eindeutig}.
+Damit ist der abstrakte Rahmen \((X,\sigma)\mapsto\mathrm{CCR}(X,\sigma)\)
+für die endliche QM nicht nur realisierbar, sondern im Wesentlichen
+\emph{vollständig}.
+
+%--------------------------------------------------------------------
+\emph{6. Hamiltonoperatoren und Dynamik in \texorpdfstring{$U(\mathfrak{h}(X))$}{U(h(X))}}
+
+\emph{Hamiltonoperatoren als Elemente der Hüllalgebra.}
+In der abstrakten Hüllalgebra \(U(\mathfrak{h}(X))\) können wir
+Hamiltonoperatoren als Polynome in \(X_j,P_k\) definieren, z.\,B.
+\[
+H = \frac{1}{2m}\sum_{j=1}^n P_j^2 + V(X_1,\dots,X_n).
+\]
+In der Schrödinger-Darstellung wird daraus der übliche Operator
+\[
+\hat{H} = -\frac{\hbar^2}{2m}\Delta + V(x)
+\]
+auf \(L^2(\mathbb{R}^n)\).
+
+\emph{Dynamik.}
+Die Heisenberg-Zeitentwicklung eines Observablenoperators \(A\) wird
+abstrakt durch die innere Derivation
+\[
+\dot{A}(t) = \frac{i}{\hbar}[H,A(t)]
+\]
+in \(U(\mathfrak{h}(X))\) beschrieben.
+In der Schrödinger-Darstellung entspricht dies der üblichen Formel
+\[
+A_H(t) = e^{\frac{i}{\hbar}t\hat{H}} A_S e^{-\frac{i}{\hbar}t\hat{H}},
+\]
+während die Zustandsdynamik (Schrödinger-Bild) durch
+\(i\hbar\partial_t\psi = \hat{H}\psi\) gegeben ist.
+
+Damit ist die volle Dynamik der nichtrelativistischen QM
+ein Spezialfall der abstrakten Dynamik in \(U(\mathfrak{h}(X))\)
+und ihrer Darstellung auf \(L^2(\mathbb{R}^n)\).
+
+%--------------------------------------------------------------------
+\emph{7. Fazit: Endliche QM als Spezialfall der Zwischenebene}
+
+\begin{REM}{QM-SPECIAL}{Zusammenfassung}
+Die gewöhnliche Quantenmechanik mit endlich vielen Freiheitsgraden
+entsteht aus der Zwischenebene
+\[
+(X,\sigma)\longmapsto \mathrm{CCR}(X,\sigma)
+\]
+spezifisch durch die Wahl:
+\begin{itemize}
+  \item \(X = \mathbb{R}^{2n}\) mit kanonischer symplektischer Form \(\sigma\).
+  \item CCR-Weyl-C$^\ast$-Algebra \(\mathcal{A} = \mathrm{CCR}(X,\sigma)\) als Observablenalgebra.
+  \item Schrödinger-Darstellung \(\pi_{\mathrm{Sch}}:\mathcal{A}\to\mathcal{B}(L^2(\mathbb{R}^n))\),
+        die nach Stone--von Neumann (unter Regularität) bis auf unitäre Äquivalenz eindeutig ist.
+  \item Heisenberg-Algebra \(\mathfrak{h}(X)\) und Hüllalgebra \(U(\mathfrak{h}(X))\),
+        deren Generatoren sich als die üblichen Ort- und Impulsoperatoren
+        realisieren.
+  \item Hamiltonoperatoren \(H \in U(\mathfrak{h}(X))\) und die daraus
+        abgeleitete Dynamik \(\dot{A}=\frac{i}{\hbar}[H,A]\) im Heisenberg-Bild
+        bzw.\ \(i\hbar\partial_t\psi=\hat{H}\psi\) im Schrödinger-Bild.
+\end{itemize}
+
+In diesem präzisen Sinn ist die endliche nichtrelativistische QM
+ein \emph{Spezialfall} der abstrakten Heisenberg-/CCR-Struktur:
+die allgemeineren Konstruktionen (symplektischer Einteilchenraum,
+Heisenberg-Algebra, CCR-Algebra, Automorphismengruppe)
+reduzieren sich für \(X=\mathbb{R}^{2n}\) genau auf das übliche
+Quantensystem \((L^2(\mathbb{R}^n),\hat{x},\hat{p},\hat{H})\).
+\end{REM}
+
+
+\end{unit}
+
+
+\section{Kinematik einer Quantenmechanischen Theorie}
+
+
+\begin{enumerate}
+  \item Heisenberg Algebra
+  \item Elementare Observablen
+  \item Zustandsräume
+\end{enumerate}
+
+
+\section{Dynamik einer Quantenmechanischen Theorie}
+
+\begin{enumerate}
+  \item Heisenberg Bild
+  \item Weyl Algebra und Polynome in elementaren Observablen
+  \item Auswahlverfahren / Kriterien für interessante Hamiltonians
+  \item Schrödinger Bild
+\end{enumerate}
+
+
+\section{Symmetrien in Theoriebildung}
+
+  \begin{enumerate}
+  \item Physikalisch motivierte Invarainten-Forderungen und Lie Formalismus
+  \item Physikalische Lie Gruppen (Lorentz, Poincare, Galilei, Pin, Spin, SO, SU, U)
+  \item Lie Theorie in QM
+  \item SRT und Kovarainzbedingungen an Theorien
+  \begin{enumerate}
+    \item SRT
+    \item Lorentzgruppe 
+    \item Poincare Gruppe
+    \item Konzept der Kovarianz von Theorien
+    \item Interpretation von Lorentztransformationen
+  \end{enumerate}
+  \item CPT Trafos
+  \end{enumerate}
+
+
+\section{Relativistische Wellengleichungsmodelle}
+
+\begin{enumerate}
+  \item Rolle von RWG-Modellen
+  \item Beziehung zu quantisierten Feldtheorien
+  \item Unitär äquivalente Darstellungen und Fourier Trafo
+\end{enumerate}
+
+
+\subsection{Klein Gordon}
+
+
+
+\subsection{Dirac}
+
+\begin{enumerate}
+  \item Dirac Gleichungen (Schrödinger / Kovariant / Adjungiert / Charge Konjugiert)
+  \item Parameter Charakterisierung
+  \item Kovarianz bzgl $\Spin^+(1,3)$
+  \item Lösungsentwicklung
+  \item Verträglichkeit mit Grenzbereichen des Parameterraumes
+  \item Nichtrelativistischer Bereich
+  \item Ultrarelativistischer Bereich
+\end{enumerate}
+
+
+
+\section{Quantisierung von Feldtheorien}
+
+\begin{enumerate}
+  \item Motivation für Quantisierung von Feldtheorien
+\end{enumerate}
+
+
+\pagebreak
+
+\section{Body}
+
+
+\subsection{Abstraktes Setting}
+
+\begin{unit}
+\emph{Zwischenebene: Abstrakte Heisenberg--/Weyl-Kinematik für QM und QFT}
+
+In diesem Abschnitt formulieren wir einen abstrakten Rahmen, der
+\emph{sowohl} die klassische Quantenmechanik mit endlich vielen
+Freiheitsgraden \((X=\mathbb{R}^{2n})\),
+\emph{als auch} freie (bosonische oder fermionische) Quantenfeldtheorien
+\((X\ \text{unendlichdimensional})\)
+und sogar die üblichen einfachen Wechselwirkungen der QFT1/2
+gemeinsam erfasst.
+Diese Ebene liegt strenger und allgemeiner als die kanonische
+Heisenberg-/Weyl-Algebra über \(\mathbb{R}^{2n}\),
+aber konkreter als der vollabstrakte C$^\ast$-/von-Neumann-Formalismus.
+Wir nennen sie die \emph{Zwischenebene der Einteilchenräume und CCR/CAR-Algebren}.
+
+%---------------------------------------------------------
+\emph{1. Einteilchenraum und symplektische/skalare Struktur}
+
+\emph{Bosonische Systeme.}
+Sei \(X\) ein reeller lokalkonvexer Vektorraum
+(oft endlichdimensional, oder ein Testfunktionenraum wie \(\mathcal{S}(\mathbb{R}^d)\)),
+versehen mit einer nichtausgearteten, antisymmetrischen Bilinearform
+\[
+\sigma : X\times X \to \mathbb{R}.
+\]
+Das Paar \((X,\sigma)\) heißt \emph{symplektischer Einteilchenraum}.
+\begin{itemize}
+  \item QM: \(X=\mathbb{R}^{2n}\) mit der kanonischen Form \(\sigma((x,p),(x',p'))=p\cdot x'-p'\cdot x\).
+  \item Freie QFT: \(X\) ist der Raum reeller Testfunktionen oder Cauchy-Daten;
+        \(\sigma\) ist z.\,B. durch das Pauli–Jordan-Funktional gegeben.
+\end{itemize}
+
+\emph{Fermionische Systeme.}
+Sei \(Y\) ein reeller Hilbertraum
+mit innerem Produkt \(\langle\cdot,\cdot\rangle_Y\).
+Dies ist der \emph{Einteilchenraum für Fermionen}.
+\begin{itemize}
+  \item QM (Spin): \(Y=\mathbb{R}^n\), inneres Produkt gewöhnlich.
+  \item Freies Dirac- oder Majorana-Feld: \(Y\) ist ein Raum glatter kompakter Spinorfunktionen.
+\end{itemize}
+
+Diese Wahl \((X,\sigma)\) bzw. \((Y,\langle\cdot,\cdot\rangle)\) ist der
+\emph{kinematische Kern} der Theorie: sie entspricht dem klassischen
+Phasenraum (bosonisch) bzw. klassischen Konfigurationsraum (fermionisch).
+
+%---------------------------------------------------------
+\emph{2. Abstrakte Heisenberg-Lie-Algebra}
+
+Zu einem symplektischen Einteilchenraum \((X,\sigma)\) definieren wir:
+
+\begin{DEF}{MID-HEIS}{Abstrakte Heisenberg-Algebra}
+\[
+\mathfrak{h}(X) := X \oplus \mathbb{R}Z
+\]
+mit Lie-Klammer
+\[
+[(f,\alpha Z),(g,\beta Z)]
+= (0,\ \sigma(f,g)\,Z),
+\qquad [Z,\cdot]=0.
+\]
+\end{DEF}
+
+Ein Element \(f\in X\) wird physikalisch als „abstrakter Feldmodus“
+oder „abstrakte Kanonische Observable“ interpretiert;
+\(Z\) spielt die Rolle von \(i\hbar\).
+
+Dies umfasst:
+\begin{itemize}
+  \item QM: \(\mathfrak{h}(\mathbb{R}^{2n})\) ist die übliche Heisenberg-Algebra
+        mit endlich vielen \(X_j,P_k\).
+  \item Freie QFT: \(\mathfrak{h}(X)\) ist unendlichdimensional und kodiert
+        \([\,\phi(f),\pi(g)\,]= i\int f g\).
+\end{itemize}
+
+Zu \(\mathfrak{h}(X)\) gehört die universelle Hüllalgebra
+\(U(\mathfrak{h}(X))\), die die polynomiellen Kombinationen dieser
+abstrakten Observablen enthält.
+
+%---------------------------------------------------------
+\emph{3. CCR- und CAR-C$^\ast$-Algebren (Weyl- und Clifford-Ebene)}
+
+Die Heisenberg-Algebra ist nur die infinitesimale Struktur.
+Die physikalisch sinnvolle Observablenalgebra für QM und freie QFT
+ist die exponentialisierte C$^\ast$-Algebra.
+
+\begin{DEF}{MID-CCR}{CCR-Weyl-C$^\ast$-Algebra (bosonisch)}
+Für \((X,\sigma)\) ist die \emph{Weyl- bzw. CCR-C$^\ast$-Algebra}
+\(\mathrm{CCR}(X,\sigma)\)
+die vollständige C$^\ast$-Algebra, erzeugt durch Symbole \(W(f)\) (\(f\in X\))
+mit den Weyl-Relationen
+\[
+W(f)W(g)=e^{-\,\frac{i}{2}\sigma(f,g)}\,W(f+g),\qquad W(f)^\ast=W(-f).
+\]
+\end{DEF}
+
+\begin{DEF}{MID-CAR}{CAR-C$^\ast$-Algebra (fermionisch)}
+Für einen reellen Hilbertraum \(Y\) ist die \emph{CAR-Algebra}
+\(\mathrm{CAR}(Y)\) die C$^\ast$-Algebra, erzeugt durch Symbole \(a(f)\) (\(f\in Y\))
+mit den Relationen
+\[
+\{a(f),a(g)\}=0,\qquad
+\{a(f),a(g)^\ast\}=\langle f,g\rangle_Y\mathbf{1}.
+\]
+\end{DEF}
+
+Diese Konstruktionen umfassen:
+\begin{itemize}
+  \item gewöhnliche QM (\(X\) endlichdimensional),
+  \item freie skalare und elektromagnetische Felder (CCR),
+  \item freie Dirac- und Majorana-Felder (CAR),
+  \item alle Standardbeispiele aus QFT1/2 auf einer gemeinsamen algebraischen Ebene.
+\end{itemize}
+
+%---------------------------------------------------------
+\emph{4. Dynamik als Automorphismengruppe der CCR/CAR-Algebra}
+
+\begin{DEF}{MID-DYN}{Abstrakte Dynamik}
+Eine (Heisenberg-)Dynamik ist eine stark-stetige Gruppe von *-Automorphismen
+\[
+\alpha : \mathbb{R} \to \mathrm{Aut}(\mathcal{A}),\qquad
+t\mapsto \alpha_t,
+\]
+wobei \(\mathcal{A}=\mathrm{CCR}(X,\sigma)\) oder \(\mathrm{CAR}(Y)\).
+\end{DEF}
+
+\begin{itemize}
+  \item \textbf{Freie Theorien:}  
+        Die Einteilchen-Dynamik \(T_t:X\to X\) (oder \(Y\to Y\))
+        induziert eine Automorphismengruppe
+        \[
+        \alpha_t(W(f)) = W(T_tf),\qquad
+        \alpha_t(a(f)) = a(T_t f).
+        \]
+  \item \textbf{Wechselwirkungen in QFT1/2 (formal):}  
+        dieselbe Algebra bleibt gültig, aber die Zeitentwicklung wird
+        durch einen formalen Hamiltonoperator \(H=H_0+V\) bestimmt:
+        \[
+        \frac{d}{dt}\alpha_t(A)=i[H,A].
+        \]
+        Die Algebra ändert sich also nicht – nur die Dynamik.
+\end{itemize}
+
+Damit lassen sich alle Standardmodelle einer QFT-Einführung
+(Klein–Gordon, Dirac, Yukawa, \(\phi^4\), QED in der kanonischen Form)
+im selben algebraischen Rahmen behandeln.
+
+%---------------------------------------------------------
+\emph{5. Darstellungen (GNS) und Fockräume}
+
+Ein Zustand \(\omega\) auf \(\mathrm{CCR}(X,\sigma)\) oder \(\mathrm{CAR}(Y)\)
+definiert über die GNS-Konstruktion eine Darstellung
+\[
+(\pi_\omega,\mathcal{H}_\omega,\Omega_\omega).
+\]
+
+\begin{itemize}
+  \item Für freie Theorien sind \(\omega\) \emph{quasi-freie Zustände},
+        und die GNS-Darstellung ist die übliche \emph{bosonische} bzw.
+        \emph{fermionische Fock-Darstellung}.
+  \item Für Wechselwirkungen in QFT1/2 bleibt formal dieselbe Algebra bestehen,
+        aber der Zustand \(\omega_V\) (interacting vacuum) ist i.\,Allg.
+        nichtunitär äquivalent zum freien Zustand \(\omega_0\).
+\end{itemize}
+
+%---------------------------------------------------------
+\emph{6. Charakterisierung dieser Zwischenebene}
+
+\begin{REM}{MID-SUM}{Zusammenfassung}
+Die hier eingeführte Ebene
+\[
+(X,\sigma)\longmapsto \mathrm{CCR}(X,\sigma),\qquad
+Y\longmapsto\mathrm{CAR}(Y)
+\]
+liefert einen abstrakten Rahmen, der
+\begin{itemize}
+  \item die kinematische Struktur der QM 
+        (endlichdimensionaler symplektischer Raum),
+  \item die kinematische Struktur aller freien Feldtheorien
+        (unendlichdimensionale Einteilchenräume),
+  \item sowie die formale Behandlung einfacher/interagierender QFT-Modelle
+        (gleiche Algebra, veränderte Dynamik/Zustände)
+\end{itemize}
+einheitlich beschreibt.
+
+Diese Ebene ist damit:
+\begin{enumerate}
+  \item \emph{allgemeiner} als die klassische Heisenberg-/Weyl-Algebra über \(\mathbb{R}^{2n}\),
+  \item \emph{konkret genug}, um die vollständige Standard-QFT1/2-Abdeckung zu gewährleisten,
+  \item \emph{kompatibel} mit dem noch allgemeineren C$^\ast$-/von-Neumann-Formalismus,
+        in dem CCR/CAR-Algebren als strukturierte Spezialfälle erscheinen.
+\end{enumerate}
+\end{REM}
+\end{unit}
+
+
+
+\subsection{Endlich dimensionale QMs}
+
+\begin{unit}
+\emph{Endliche Quantenmechanik als Spezialfall der abstrakten CCR-Struktur}
+
+In diesem Abschnitt zeigen wir explizit, wie die gewöhnliche nichtrelativistische
+Quantenmechanik mit endlich vielen Freiheitsgraden in den abstrakten Rahmen
+\[
+(X,\sigma)\;\longmapsto\;\mathrm{CCR}(X,\sigma)
+\]
+eingebettet ist. Ziel ist es, die üblichen Objekte
+\[
+\mathcal{H}=L^2(\mathbb{R}^n),\quad
+\hat{x}_j,\hat{p}_k,\quad
+H=\tfrac{1}{2m}\hat{p}^2+V(\hat{x})
+\]
+als konkrete Realisierung der abstrakten Heisenberg- und CCR-Struktur zu identifizieren.
+
+%--------------------------------------------------------------------
+\emph{1. Kinematik: Der symplektische Einteilchenraum}
+
+\emph{Abstrakt.}
+Sei \(V\simeq\mathbb{R}^n\) der klassische Konfigurationsraum.
+Der \emph{klassische Phasenraum} ist \(T^\ast V\simeq \mathbb{R}^{2n}\).
+Wir setzen
+\[
+X := V_x \oplus V_p \;\cong\; \mathbb{R}^n_x\oplus\mathbb{R}^n_p\cong\mathbb{R}^{2n}
+\]
+mit der kanonischen symplektischen Form
+\[
+\sigma\bigl((x,p),(x',p')\bigr)
+:= p\cdot x' - p'\cdot x.
+\]
+Damit ist \((X,\sigma)\) ein endlichdimensionaler symplektischer Raum.
+
+\emph{Interpretation.}
+Die Paare \((x,p)\in X\) repräsentieren klassische Zustände
+\((\text{Ort},\text{Impuls})\), und \(\sigma\) ist die übliche symplektische Struktur
+des Phasenraums.
+
+%--------------------------------------------------------------------
+\emph{2. Abstrakte Heisenberg-Algebra \texorpdfstring{$\mathfrak{h}(X)$}{h(X)}}
+
+Nach der allgemeinen Definition (vgl.\ \textsc{MID-HEIS}) ist die
+\emph{Heisenberg-Lie-Algebra}
+\[
+\mathfrak{h}(X) := X \oplus \mathbb{R}Z
+\]
+mit Lie-Klammer
+\[
+[(f,\alpha Z),(g,\beta Z)]
+= (0,\ \sigma(f,g)\,Z).
+\]
+Wählt man eine Basis \(\{e_j\}_{j=1}^n\) von \(V_x\) und \(\{e^j\}_{j=1}^n\) von \(V_p\),
+so kann man
+\[
+X_j := (e_j,0),\qquad
+P_j := (0,e^j)
+\]
+als Erzeuger wählen. Dann lauten die Relationen
+\[
+[X_j,P_k] = \delta_{jk}\,Z,\qquad
+[X_j,X_k]=[P_j,P_k]=[Z,\cdot]=0.
+\]
+Identifiziert man formal \(Z\sim i\hbar\), erhält man die bekannten
+kanonischen Kommutationsrelationen:
+\[
+[X_j,P_k] = i\hbar\,\delta_{jk}.
+\]
+
+Die universelle Hüllalgebra \(U(\mathfrak{h}(X))\) enthält dann
+Polynome in den \(X_j,P_k\), z.\,B. Hamiltonoperatoren der Form
+\[
+H = \frac{1}{2m}\sum_{j=1}^n P_j^2 + V(X_1,\dots,X_n).
+\]
+
+%--------------------------------------------------------------------
+\emph{3. Die CCR-Weyl-C$^\ast$-Algebra \texorpdfstring{$\mathrm{CCR}(X,\sigma)$}{CCR(X,sigma)}}
+
+\emph{Abstrakte Definition.}
+Die CCR- (oder Weyl-) C$^\ast$-Algebra \(\mathrm{CCR}(X,\sigma)\)
+ist die C$^\ast$-Vervollständigung der *-Algebra,
+erzeugt von Symbolen \(W(f)\) (\(f\in X\)) mit den Weyl-Relationen
+\[
+W(f)W(g) = e^{-\frac{i}{2}\sigma(f,g)}W(f+g),\qquad
+W(f)^\ast = W(-f).
+\]
+
+Diese Algebra ist ein abstrakter Vertreter der kanonischen
+Kommutationsrelationen. Die \emph{infinitesimale} Heisenberg-Algebra
+\(\mathfrak{h}(X)\) kann als Lie-Algebra der „logarithmischen Ableitungen“
+der \(W(f)\) verstanden werden.
+
+%--------------------------------------------------------------------
+\emph{4. Schrödinger-Darstellung als konkrete Realisierung}
+
+\emph{Hilbertraum.}
+Wir wählen als Zustandsraum den Hilbertraum
+\[
+\mathcal{H} := L^2(\mathbb{R}^n,dx),
+\]
+mit kanonischem Skalarprodukt
+\[
+\langle \psi,\varphi\rangle = \int_{\mathbb{R}^n} \overline{\psi(x)}\varphi(x)\,dx.
+\]
+
+\emph{Ort- und Impulsoperatoren.}
+Wir definieren (zunächst auf einem dichten Unterraum, etwa den Schwartzfunktionen)
+\[
+(\hat{X}_j\psi)(x) := x_j\psi(x),\qquad
+(\hat{P}_j\psi)(x) := -\,i\hbar\,\frac{\partial}{\partial x_j}\psi(x).
+\]
+Dann gilt (formal)
+\[
+[\hat{X}_j,\hat{P}_k]\psi
+= i\hbar\,\delta_{jk}\,\psi,\qquad
+[\hat{X}_j,\hat{X}_k]=[\hat{P}_j,\hat{P}_k]=0,
+\]
+d.\,h. \(\hat{X}_j,\hat{P}_k\) realisieren die Relationen der Heisenberg-Algebra
+\(\mathfrak{h}(X)\).
+
+\emph{Weyl-Operatoren in der Schrödinger-Darstellung.}
+Zu jedem \(f=(x,p)\in X\) definieren wir einen unitären Operator
+\(\pi_{\mathrm{Sch}}(W(f))\) auf \(\mathcal{H}\) durch
+\[
+\bigl(\pi_{\mathrm{Sch}}(W(x,p))\psi\bigr)(y)
+:= e^{\frac{i}{\hbar}\left(p\cdot y - \tfrac{1}{2}p\cdot x\right)}\,
+   \psi(y-x).
+\]
+
+Man überprüft:
+\begin{align*}
+\pi_{\mathrm{Sch}}(W(x,p))\pi_{\mathrm{Sch}}(W(x',p'))
+&= e^{-\frac{i}{2\hbar}\sigma((x,p),(x',p'))}\,
+   \pi_{\mathrm{Sch}}(W(x+x',p+p')),\\
+\pi_{\mathrm{Sch}}(W(x,p))^\ast
+&= \pi_{\mathrm{Sch}}(W(-x,-p)),
+\end{align*}
+also erfüllt \(\pi_{\mathrm{Sch}}\) genau die Weyl-Relationen.
+Damit ist
+\[
+\pi_{\mathrm{Sch}}:\mathrm{CCR}(X,\sigma)\longrightarrow \mathcal{B}(\mathcal{H})
+\]
+eine \emph{konkrete Darstellung} der abstrakten CCR-Algebra.
+
+\emph{Infinitesimale Generatoren.}
+Differenziert man \(t\mapsto \pi_{\mathrm{Sch}}(W(t e_j,0))\) und
+\(t\mapsto \pi_{\mathrm{Sch}}(W(0,t e^j))\) bei \(t=0\), so erhält man
+\[
+\hat{X}_j = i\hbar\,\frac{d}{dt}\pi_{\mathrm{Sch}}(W(t e_j,0))\bigg|_{t=0},
+\quad
+\hat{P}_j = i\hbar\,\frac{d}{dt}\pi_{\mathrm{Sch}}(W(0,t e^j))\bigg|_{t=0}.
+\]
+Damit erscheinen die üblichen Ort- und Impulsoperatoren
+als \emph{infinitesimale Generatoren} der Weyl-Darstellung
+von \(\mathrm{CCR}(X,\sigma)\).
+
+%--------------------------------------------------------------------
+\emph{5. Stone--von Neumann und Eindeutigkeit (bis auf Äquivalenz)}
+
+\begin{THEO}{SvN-1}{Stone--von Neumann (informell)}
+Sei \(\pi:\mathrm{CCR}(X,\sigma)\to \mathcal{B}(\mathcal{H}_\pi)\)
+eine irreduzible, \emph{regular} (d.\,h. stetige) Darstellung
+der CCR-Algebra für endlichdimensionales \(X\).
+Dann ist \(\pi\) zu der Schrödinger-Darstellung \(\pi_{\mathrm{Sch}}\)
+unitär äquivalent.
+\end{THEO}
+
+\emph{Interpretation.}
+Für eine gegebene endliche Anzahl von Freiheitsgraden \(n\) ist die
+Struktur der Hilbertraumdarstellung der Heisenberg-/Weyl-Algebra
+durch \(L^2(\mathbb{R}^n)\) (bis auf unitäre Äquivalenz) \emph{eindeutig}.
+Damit ist der abstrakte Rahmen \((X,\sigma)\mapsto\mathrm{CCR}(X,\sigma)\)
+für die endliche QM nicht nur realisierbar, sondern im Wesentlichen
+\emph{vollständig}.
+
+%--------------------------------------------------------------------
+\emph{6. Hamiltonoperatoren und Dynamik in \texorpdfstring{$U(\mathfrak{h}(X))$}{U(h(X))}}
+
+\emph{Hamiltonoperatoren als Elemente der Hüllalgebra.}
+In der abstrakten Hüllalgebra \(U(\mathfrak{h}(X))\) können wir
+Hamiltonoperatoren als Polynome in \(X_j,P_k\) definieren, z.\,B.
+\[
+H = \frac{1}{2m}\sum_{j=1}^n P_j^2 + V(X_1,\dots,X_n).
+\]
+In der Schrödinger-Darstellung wird daraus der übliche Operator
+\[
+\hat{H} = -\frac{\hbar^2}{2m}\Delta + V(x)
+\]
+auf \(L^2(\mathbb{R}^n)\).
+
+\emph{Dynamik.}
+Die Heisenberg-Zeitentwicklung eines Observablenoperators \(A\) wird
+abstrakt durch die innere Derivation
+\[
+\dot{A}(t) = \frac{i}{\hbar}[H,A(t)]
+\]
+in \(U(\mathfrak{h}(X))\) beschrieben.
+In der Schrödinger-Darstellung entspricht dies der üblichen Formel
+\[
+A_H(t) = e^{\frac{i}{\hbar}t\hat{H}} A_S e^{-\frac{i}{\hbar}t\hat{H}},
+\]
+während die Zustandsdynamik (Schrödinger-Bild) durch
+\(i\hbar\partial_t\psi = \hat{H}\psi\) gegeben ist.
+
+Damit ist die volle Dynamik der nichtrelativistischen QM
+ein Spezialfall der abstrakten Dynamik in \(U(\mathfrak{h}(X))\)
+und ihrer Darstellung auf \(L^2(\mathbb{R}^n)\).
+
+%--------------------------------------------------------------------
+\emph{7. Fazit: Endliche QM als Spezialfall der Zwischenebene}
+
+\begin{REM}{QM-SPECIAL}{Zusammenfassung}
+Die gewöhnliche Quantenmechanik mit endlich vielen Freiheitsgraden
+entsteht aus der Zwischenebene
+\[
+(X,\sigma)\longmapsto \mathrm{CCR}(X,\sigma)
+\]
+spezifisch durch die Wahl:
+\begin{itemize}
+  \item \(X = \mathbb{R}^{2n}\) mit kanonischer symplektischer Form \(\sigma\).
+  \item CCR-Weyl-C$^\ast$-Algebra \(\mathcal{A} = \mathrm{CCR}(X,\sigma)\) als Observablenalgebra.
+  \item Schrödinger-Darstellung \(\pi_{\mathrm{Sch}}:\mathcal{A}\to\mathcal{B}(L^2(\mathbb{R}^n))\),
+        die nach Stone--von Neumann (unter Regularität) bis auf unitäre Äquivalenz eindeutig ist.
+  \item Heisenberg-Algebra \(\mathfrak{h}(X)\) und Hüllalgebra \(U(\mathfrak{h}(X))\),
+        deren Generatoren sich als die üblichen Ort- und Impulsoperatoren
+        realisieren.
+  \item Hamiltonoperatoren \(H \in U(\mathfrak{h}(X))\) und die daraus
+        abgeleitete Dynamik \(\dot{A}=\frac{i}{\hbar}[H,A]\) im Heisenberg-Bild
+        bzw.\ \(i\hbar\partial_t\psi=\hat{H}\psi\) im Schrödinger-Bild.
+\end{itemize}
+
+In diesem präzisen Sinn ist die endliche nichtrelativistische QM
+ein \emph{Spezialfall} der abstrakten Heisenberg-/CCR-Struktur:
+die allgemeineren Konstruktionen (symplektischer Einteilchenraum,
+Heisenberg-Algebra, CCR-Algebra, Automorphismengruppe)
+reduzieren sich für \(X=\mathbb{R}^{2n}\) genau auf das übliche
+Quantensystem \((L^2(\mathbb{R}^n),\hat{x},\hat{p},\hat{H})\).
+\end{REM}
+
+
+
+
+\emph{Ergänzung 1: Abstrakte vs.\ konkrete Operatoren, Heisenberg- und Schrödinger-Bild}
+
+\emph{(a) Abstrakte vs.\ konkrete Ebene.}
+
+Im abstrakten CCR-Rahmen unterscheidet man streng zwischen
+
+\begin{itemize}
+  \item der \emph{abstrakten Observablenalgebra}
+  \[
+    \mathcal{A} := \mathrm{CCR}(X,\sigma),
+  \]
+  einer C$^\ast$-Algebra, deren Elemente wir formal als
+  \emph{Observablen} (bzw.\ deren „exponentialisierte“ Versionen) interpretieren,
+  und
+
+  \item einer \emph{konkreten Darstellung}
+  \[
+    \pi : \mathcal{A} \longrightarrow \mathcal{B}(\mathcal{H}),
+  \]
+  die jedem abstrakten Observablen-Element \(A\in \mathcal{A}\) 
+  einen \emph{beschränkten Operator} \(\pi(A)\) auf einem Hilbertraum \(\mathcal{H}\) zuordnet.
+\end{itemize}
+
+Die abstrakte Ebene \(\mathcal{A}\) ist „repräsentationsfrei“;
+erst durch \(\pi\) werden die Algebraelemente als konkrete Operatoren auf Zuständen 
+(konkret: Vektoren \(\psi\in\mathcal{H}\)) realisiert.
+
+\emph{Wichtig:}  
+\(\mathcal{A}\) ist \emph{kein} Unterraum von \(\mathcal{B}(\mathcal{H})\) per se, 
+sondern ein separates Objekt; erst die Darstellung \(\pi\) stellt eine Brücke her:
+\[
+A\in\mathcal{A}\quad\mapsto\quad \pi(A)\in\mathcal{B}(\mathcal{H}).
+\]
+
+\medskip
+
+\emph{(b) Abstrakte Dynamik vs.\ konkrete Dynamik.}
+
+Auf der abstrakten Ebene  
+ist eine \emph{Dynamik} gegeben durch eine einparametrige Gruppe von
+$\ast$-Automorphismen
+\[
+  \alpha_t:\mathcal{A}\to\mathcal{A},\qquad
+  \alpha_{t+s} = \alpha_t\circ\alpha_s,\quad\alpha_0=\mathrm{id}.
+\]
+Man schreibt (formal)
+\[
+  \frac{d}{dt}\,\alpha_t(A) = \delta(A_t),\qquad \delta:\mathcal{A}\to\mathcal{A}
+\]
+für eine (oft innere) Derivation \(\delta\).
+
+In einer Darstellung \(\pi\) auf \(\mathcal{H}\) ist diese abstrakte Dynamik
+durch eine strongly continuous unitäre Gruppe
+\[
+  U(t):\mathcal{H}\to\mathcal{H},\qquad U(t)U(s)=U(t+s),
+\]
+realisiert, so dass
+\[
+  \pi(\alpha_t(A)) = U(t)\,\pi(A)\,U(t)^{-1}.
+\]
+
+\medskip
+
+\emph{(c) Heisenberg- und Schrödinger-Bild präzise getrennt.}
+
+\textbf{Heisenberg-Bild (algebraischer Standpunkt).}
+\begin{itemize}
+  \item Auf der abstrakten Ebene: wir betrachten \(\alpha_t(A)\in\mathcal{A}\), d.\,h.\ 
+        die Observablen selbst sind zeitabhängig.
+  \item In einer Darstellung \(\pi\): 
+        \[
+          A_H(t) := \pi(\alpha_t(A)) = U(t)\pi(A)U(t)^{-1}.
+        \]
+        Zustände bleiben (formal) zeitlich konstant.
+\end{itemize}
+
+\textbf{Schrödinger-Bild (zustandsorientierter Standpunkt).}
+\begin{itemize}
+  \item Man fixiert die Observablen \(\pi(A)\) als zeitunabhängig.
+  \item Die Zeitentwicklung wird stattdessen auf Zustände verschoben:
+        \[
+          \psi_S(t) := U(t)^{-1}\psi(0),
+        \]
+        und Erwartungswerte werden durch
+        \[
+          \langle \psi_S(t), \pi(A)\psi_S(t)\rangle
+        \]
+        gegeben.
+\end{itemize}
+
+Formal sind beide Bilder äquivalent, da
+\[
+  \langle \psi, A_H(t)\psi\rangle
+  \;=\;
+  \langle \psi_S(t), \pi(A)\psi_S(t)\rangle
+\]
+für alle \(A\in\mathcal{A}\) und initialen Zustände \(\psi\) gilt.
+
+\medskip
+
+\emph{(d) Zustände vs.\ Operatoren.}
+
+\begin{itemize}
+  \item Ein \emph{(algebraischer) Zustand} auf \(\mathcal{A}\)
+        ist eine positive normierte Linearform
+        \(\omega:\mathcal{A}\to\mathbb{C}\) mit \(\omega(\mathbf{1})=1\).
+  \item In einer Darstellung \(\pi\) mit Hilbertraum \(\mathcal{H}\)
+        entspricht ein Vektorzustand \(\omega_\psi(A):=\langle \psi,\pi(A)\psi\rangle\)
+        einem \emph{Zustandsvektor} \(\psi\in\mathcal{H}\).
+\end{itemize}
+
+Damit ist klar:
+\[
+\boxed{
+\text{Zustände leben (repräsentiert) als Vektoren } \psi\in\mathcal{H},\;
+\text{Observablen als Operatoren } \pi(A)\in\mathcal{B}(\mathcal{H}).
+}
+\]
+
+Die abstrakte CCR-/Weyl-Algebra \(\mathcal{A}\) kodiert die Struktur der Observablen,
+die Darstellung \(\pi\) und ein Zustand \(\psi\) kodieren die konkrete Physik
+(Erwartungswerte, Spektren, Dynamik).
+
+
+%====================================================================
+\emph{Ergänzung 2: CCR als Ursprung der Observablen und ihre Generatorenrolle}
+
+\emph{(a) CCR als abstrakte Quelle der üblichen Operatoren.}
+
+In vielen QM-Vorlesungen erscheinen die Orts- und Impulsoperatoren
+\(\hat{x}_j,\hat{p}_k\) zunächst „ad hoc“ als
+\[
+(\hat{x}_j\psi)(x) = x_j\psi(x),\qquad
+(\hat{p}_j\psi)(x) = -i\hbar\partial_{x_j}\psi(x).
+\]
+
+Im CCR-Rahmen sieht man diese Operatoren als \emph{konkrete Realisierung}
+von abstrakten Strukturelementen:
+\begin{itemize}
+  \item Man startet mit dem symplektischen Raum \((X,\sigma)\).
+  \item Bildet daraus die abstrakte CCR-C$^\ast$-Algebra \(\mathcal{A}=\mathrm{CCR}(X,\sigma)\)
+        mit Weyl-Generatoren \(W(f)\), \(f\in X\).
+  \item Wählt dann eine Darstellung \(\pi:\mathcal{A}\to\mathcal{B}(\mathcal{H})\).
+\end{itemize}
+
+Erst in dieser Darstellung erscheinen die „bekannten“ Operatoren
+\(\hat{x}_j,\hat{p}_k\) als abgeleitete Objekte,
+nämlich als \emph{infinitesimale Generatoren} bestimmter unitärer Einparametergruppen
+\(t\mapsto \pi(W(tf))\).
+
+Dies macht klar:
+\[
+\boxed{
+\text{„Ort“ und „Impuls“ sind nicht primäre Operatoren, 
+sondern Generatoren der abstrakten CCR-Struktur.}
+}
+\]
+
+\medskip
+
+\emph{(b) Weyl-Relationen und Generatoren (Stone-Theorem).}
+
+Für \(f\in X\) liefert \(t\mapsto W(tf)\) in \(\mathcal{A}\)
+eine abstrakte Einparametergruppe.
+In einer (regularen) Darstellung \(\pi\) wird daraus
+eine strongly continuous unitäre Gruppe
+\[
+U_f(t) := \pi(W(tf)) \in \mathcal{B}(\mathcal{H}).
+\]
+
+Nach dem Satz von Stone existiert ein (wesentlich) selbstadjungierter Operator
+\(A_f\) auf \(\mathcal{H}\) mit
+\[
+U_f(t) = e^{itA_f}.
+\]
+Man nennt \(A_f\) den \emph{(infinitesimalen) Generator} der Gruppe \(U_f(t)\).
+
+\emph{Beispiele.}
+\begin{itemize}
+  \item Wählt man \(f\) so, dass \(W(tf)\) räumliche Translationen generiert,
+        dann ist der Generator der Impulsoperator \(\hat{p}\).
+  \item Wählt man \(f\) so, dass \(W(tf)\) Phasenmodulationen generiert,
+        dann ist der Generator der Ortsoperator \(\hat{x}\).
+\end{itemize}
+
+Damit werden Observablen als „Differentialquotienten“ von physikalisch
+bedeutenden Symmetrien (Translationsgruppen, Phasenrotationen, etc.)
+sichtbar:
+\[
+\hat{A}_f = \left.\frac{1}{i}\frac{d}{dt}U_f(t)\right|_{t=0}.
+\]
+
+\medskip
+
+\emph{(c) Konsequenzen: Symmetrien, Spektraltheorie, Messinterpretation.}
+
+\begin{itemize}
+  \item \textbf{Symmetrien als unitäre Gruppen:}
+        Jede physikalisch relevante kontinuierliche Symmetrie
+        wird durch eine unitäre Gruppe \(U(t)\) auf \(\mathcal{H}\) beschrieben.
+        Der zugehörige selbstadjungierte Generator \(A\) ist die „zugehörige Observable“
+        (z.\,B.\ Energie, Impuls, Drehimpuls).
+
+  \item \textbf{Spectrum = mögliche Messergebnisse:}
+        Die Spektralzerlegung eines selbstadjungierten Operators \(A\)
+        gibt die möglichen Messergebnisse dieser Observable wieder.
+        Die CCR-/Weyl-Struktur legt fest, wie diese Spektren
+        zueinander in Relation stehen (z.\,B.\ Unschärferelationen).
+
+  \item \textbf{Dynamik als Generator:}
+        Der Hamiltonoperator \(\hat{H}\) ist der Generator der Zeittranslationsgruppe
+        \(U(t)=e^{-i t\hat{H}/\hbar}\).
+        Damit ist die Dynamik konsequent als weitere Einparametergruppe
+        im selben abstrakten CCR-/C$^\ast$-Rahmen beschrieben.
+\end{itemize}
+
+\medskip
+
+\emph{(d) Zusammenfassung der „Generator-Perspektive“.}
+
+\[
+\boxed{
+\begin{aligned}
+&\text{Abstrakt: } (X,\sigma)\ \leadsto\ \mathrm{CCR}(X,\sigma)
+\text{ mit Weyl-Generatoren }W(f).\\[4pt]
+&\text{Darstellung: } \pi(W(f)) \text{ ergibt unitäre Gruppen }U_f(t),\\
+&\text{deren Generatoren }A_f \text{ als Observablen interpretiert werden.}\\[4pt]
+&\Rightarrow\ \text{„Ort“, „Impuls“, „Energie“ usw.\ sind keine ad hoc-Operatoren,}\\
+&\quad\text{sondern infinitesimale Generatoren von Symmetrien, die bereits in den CCR stecken.}
+\end{aligned}
+}
+\]
+
+In diesem Sinn liefert der abstrakte CCR-Rahmen eine \emph{konzeptionelle Rechtfertigung}
+der im Vorlesungsalltag oft „einfach eingeführten“ Operatoren:
+sie sind nicht zufällig gewählt, sondern entstehen systematisch als Generatoren
+von unitären Darstellungen der zugrundeliegenden symplektischen Struktur \((X,\sigma)\)
+und ihrer Symmetrien.
+
+\end{unit}
+
+
+
+\begin{unit}
+\emph{Einbettung des Lie--Gruppen- und Flussbildes in den CCR-Rahmen}
+
+In diesem Abschnitt wird präzisiert, wie die zuvor entwickelte
+\emph{Heisenberg/CCR-/Weyl-Struktur} mit dem \emph{Lie-Gruppen- und Flussbild}
+(Zeitentwicklung, Symmetrien, Orbits) zusammenhängt.
+Grobes Bild:
+
+\[
+\boxed{
+\text{CCR-/Heisenberg-Algebra} \;\;+\;\; \text{unitäre Darstellung von $G$}
+\;\Longrightarrow\; \text{Flüsse von Zuständen \& Observablen}
+}
+\]
+
+Wir ordnen dazu die Bausteine deines Lie-Gruppen-Textes in den CCR-Rahmen ein
+und machen die Verknüpfungen explizit.
+
+%---------------------------------------------------------------
+\emph{Horizontale Achse: Kinematik über CCR und Heisenberg-Algebra}
+
+\emph{Abstrakte kinematische Seite.}
+
+\begin{itemize}
+  \item Ausgangspunkt ist ein symplektischer Raum \((X,\sigma)\)
+        (klassischer Phasenraum / Einteilchenraum).
+  \item Daraus konstruieren wir
+        \begin{itemize}
+          \item die \emph{Heisenberg-Lie-Algebra} \(\mathfrak{h}(X) = X\oplus\R Z\),
+          \item ihre Hüllalgebra \(U(\mathfrak{h}(X))\),
+          \item und die CCR-/Weyl-C$^\ast$-Algebra
+                \(\mathcal{A} := \mathrm{CCR}(X,\sigma)\).
+        \end{itemize}
+  \item \(\mathcal{A}\) ist die \emph{abstrakte Observablenalgebra}:
+        ihre (selbstadjungierten) Elemente modellieren mögliche Observablen.
+\end{itemize}
+
+\emph{Konkrete kinematische Realisierung.}
+
+\begin{itemize}
+  \item Eine Schrödinger-Darstellung
+        \(\pi:\mathcal{A}\to\mathcal{B}(\mathcal{H})\) auf einem Hilbertraum
+        \(\mathcal{H}=L^2(\R^n)\) realisiert die abstrakten \(W(f)\) als konkrete
+        Operatoren \(\pi(W(f))\) (Translation, Phasenrotation usw.).
+  \item Die infinitesimalen Generatoren der Weyl-Operatoren sind die üblichen
+        \(\hat x_j,\hat p_k\), die wir aus der Vorlesung kennen; sie leben als
+        unbeschränkte, selbstadjungierte Operatoren in \(\mathcal{B}(\mathcal{H})\).
+\end{itemize}
+
+Bis hierher wird \emph{nur} festgelegt, welche Observablen existieren und wie
+sie kommutieren: reine Kinematik.
+
+%---------------------------------------------------------------
+\emph{Vertikale Achse: Lie-Gruppen, Flüsse und Zustandsentwicklung}
+
+Jetzt kommt der Teil ins Spiel, den du in deinem Abschnitt
+\emph{„Lie-Gruppen, Flüsse und die Entwicklung von Zustandsbeschreibungen“}
+formuliert hast. Dort sind die Grundobjekte:
+
+\begin{itemize}
+  \item Eine Lie-Gruppe \(G\) mit Lie-Algebra \(\mathfrak g\).
+  \item Eine unitäre Darstellung
+        \[
+          U:G\to\mathcal{U}(\mathcal{H}),
+        \]
+        die jeder Symmetrie (oder Zeitentwicklung) ein unitäres \(U(g)\) zuordnet.
+  \item Flüsse \(t\mapsto \exp(tX)\) in \(G\) (Einparameteruntergruppen)
+        und induzierte Flüsse
+        \(\Phi_X(t,p)=\exp(tX)\cdot p\) auf einem Zustandsraum \(M\).
+\end{itemize}
+
+Im Quantenkontext setzen wir dabei:
+\[
+M := \mathbb{P}(\mathcal{H})
+\quad\text{(projektiver Hilbertraum, Raum der Strahlen)}.
+\]
+Ein Fluss in \(G\) erzeugt via \(U\) einen Fluss von Zustandsbeschreibungen
+\(\psi(t)=U(\exp tX)\psi_0\) und damit einen Fluss von physikalischen Zuständen
+\([\,\psi(t)\,]\in\mathbb{P}(\mathcal{H})\).
+
+\emph{Dein Text zu Lie-Gruppenwirkungen, Flüssen und Orbits
+beschreibt genau diese \emph{vertikale} Ebene:  
+wie Symmetriegruppen und Zeitentwicklung auf den Zustand(sbeschreibungen)
+wirken.}
+
+%---------------------------------------------------------------
+\emph{Brücke 1: Von CCR-Automorphismen zu $G$-Flüssen auf Zuständen}
+
+\emph{Abstrakte Symmetrie auf der Observablen-Ebene.}
+
+Sei \(G\) nun eine Symmetriegruppe (z.\,B.\ Translationen, Rotationen,
+Zeittranslationen), die \emph{abstrakt} auf der CCR-Algebra \(\mathcal{A}\)
+agiert:
+\[
+\alpha: G\to\mathrm{Aut}(\mathcal{A}),
+\qquad
+g\mapsto\alpha_g,
+\]
+wobei \(\alpha_g\) ein $\ast$-Automorphismus ist (Observablen werden zu
+Observablen, Spektrum bleibt erhalten etc.).
+
+Beispiel:
+\[
+\alpha_g(W(f)) = W(S_g f),\qquad S_g\in\mathrm{Sp}(X,\sigma)
+\]
+für eine symplektische Transformation \(S_g\) des Einteilchenraums.
+
+\emph{Implementierung durch unitäre Darstellung.}
+
+In einer Darstellung \(\pi:\mathcal{A}\to\mathcal{B}(\mathcal{H})\)
+sollen die abstrakten Symmetrien \(\alpha_g\) durch unitäre Operatoren
+\(U(g)\) implementiert werden:
+\[
+\pi(\alpha_g(A)) = U(g)\,\pi(A)\,U(g)^{-1},
+\qquad A\in\mathcal{A}.
+\]
+Dies ist genau die Kovarianzbedingung, die du in deinem Lie-Gruppen-Teil
+als
+\[
+dU(\mathrm{Ad}_g X)=\mathrm{Ad}_{U(g)}(dU(X))
+\]
+auf Generatorniveau formuliert hast.
+
+\emph{Zustandsflüsse.}
+
+Auf Zuständen (Vektoren) definiert \(U(g)\) dann den Fluss
+\[
+\psi\mapsto U(g)\psi,\qquad
+[\psi]\mapsto [U(g)\psi],
+\]
+so dass Erwartungswerte kovariant sind:
+\[
+\langle \psi,\pi(A)\psi\rangle
+=
+\langle U(g)\psi,\pi(\alpha_g(A))U(g)\psi\rangle.
+\]
+
+Damit ist der Abschnitt über
+\emph{„Lie-Gruppenwirkungen, Flüsse und die Entwicklung von Zustandsbeschreibungen“}
+genau die \emph{konkrete realisierte} Form der abstrakten Symmetrie-Automorphismen
+\(\alpha_g\) der CCR-Algebra.
+
+%---------------------------------------------------------------
+\emph{Brücke 2: Generatoren als Observablen \& CCR als Herkunft}
+
+Deine Lie-Gruppen-Abschnitte arbeiten intensiv mit Generatoren:
+
+\begin{itemize}
+  \item Für eine Einparameteruntergruppe
+        \(t\mapsto g(t)=\exp(tX)\in G\) gilt
+        \[
+          U(g(t)) = e^{t\,dU(X)} = e^{-\frac{i}{\hbar}t\hat{X}}.
+        \]
+  \item Die \(\hat{X}=i\hbar dU(X)\) sind \emph{selbstadjungierte Observablen}
+        (Energie, Impuls, Drehimpuls, Ladung, \dots).
+  \item Dein „Flows on $M$“–Teil beschreibt:
+        \[
+          \psi(t)=U(g(t))\psi_0,\qquad
+          [\psi(t)]\in\mathbb{P}(\mathcal{H})
+        \]
+        als Entwicklung von Zustandsbeschreibungen.
+\end{itemize}
+
+Im CCR-Rahmen sehen wir jetzt:
+
+\begin{itemize}
+  \item Die abstrakte Heisenberg-/CCR-Algebra bestimmt, welche
+        Kommutatoren \([\hat X,\hat P]\), \([\hat J_i,\hat J_j]\), \dots
+        zulässig sind (CCR-Relationen, Lie-Algebra-Relationen).
+  \item Die Lie-Gruppen-Darstellung \(U:G\to\mathcal{U}(\mathcal{H})\)
+        ist nichts anderes als die exponentielle Integration der Generatoren,
+        die \emph{Elemente der CCR-/Heisenberg-/Lie-Algebra} sind.
+  \item Deine Flussgleichungen
+        \[
+          \dot g(t)=(L_{g(t)})_*X,\quad
+          \dot\psi(t)=-\frac{i}{\hbar}\hat{H}\psi(t)
+        \]
+        sind genau die global integrierte Form dessen, was wir auf
+        \emph{algebraischer Seite} als
+        \(\dot{A}(t)=\frac{i}{\hbar}[H,A(t)]\)
+        und \(\dot{\omega}_t(\cdot)=\omega_t(i[H,\cdot])\) schreiben.
+\end{itemize}
+
+Kurz:
+\[
+\boxed{
+\text{Generatoren } \hat X
+\text{ sind Observablen in der CCR-Algebra,}
+\quad
+\text{Lie-Flüsse sind ihre exponentiellen Einparametergruppen.}
+}
+\]
+
+%---------------------------------------------------------------
+\emph{Brücke 3: Deine „Flüsse in der Lie-Gruppe“ als universeller Oberbau}
+
+Dein Abschnitt
+
+\begin{quote}
+\emph{„Flüsse in der Lie-Gruppe und induzierte Flüsse“} \\
+\emph{„Zeitunabhängige vs. zeitabhängige Generatoren“} \\
+\emph{„Invarianz, Orbits und Erhaltung“}
+\end{quote}
+
+passt in den CCR-Rahmen wie folgt:
+
+\emph{(i) Zeitunabhängige und zeitabhängige Generatoren.}
+
+\begin{itemize}
+  \item Zeitunabhängiger Generator \(X\in\mathfrak g\):  
+        \(g(t)=\exp(tX)\), \(U(t)=U(\exp tX)\), Heisenberg-Bild:
+        \[
+        \psi(t)=U(t)\psi_0
+        \quad\text{oder}\quad
+        A_H(t)=U(t)^{-1} A_S U(t).
+        \]
+        Das ist genau das, was im CCR-Bild durch einen festen Hamiltonoperator \(H\in U(\mathfrak{h}(X))\)
+        beschrieben wird.
+  \item Zeitabhängiger Generator \(X(t)\):  
+        \(g(t)=\mathcal{P}\exp\!\int_0^t X(s)\,ds\).
+        Im CCR-/QM-Setting ist dies ein zeitabhängiger Hamiltonoperator
+        \(\hat H(t)\) und eine zeitgeordnete Entwicklung
+        \[
+          U(t)=\mathcal{P}\exp\!\Big(-\frac{i}{\hbar}\int_0^t\hat H(s)\,ds\Big).
+        \]
+        Hier sind deine \(\mathcal{P}\)-Exponentialabbildungen direkt die
+        in der Physik übliche zeitgeordnete Exponentialentwicklung (Dyson-Reihen).
+\end{itemize}
+
+\emph{(ii) Invarianz, Orbits, Erhaltung.}
+
+\begin{itemize}
+  \item Invariante Funktion \(f\) auf \(M\):  
+        \(f(g\cdot p)=f(p)\).  
+        Im QM/CCR-Setting: Erwartungswertfunktion
+        \(\psi\mapsto\langle\psi,\hat A\psi\rangle\) ist invariant unter \(U(G)\)
+        genau dann, wenn
+        \[
+          U(g)\hat A U(g)^{-1}=\hat A,\quad \forall g\in G,
+        \]
+        bzw.\ infinitesimal \([\hat A, dU(\mathfrak g)]=0\).
+  \item Orbits \(\mathcal{O}_\psi = \{U(g)\psi\mid g\in G\}\):  
+        Alle Beschreibungen desselben physikalischen Zustands (bis zu Symmetrien).
+        Das passt zur Interpretation der CCR-Algebra:
+        dieselbe physikalische Observable \(\hat A\) kann in verschiedenen
+        Darstellungen (z.\,B.\ verschiedenen Beobachterrahmen) unterschiedlich aussehen,
+        bleibt aber durch die Adjoint-Aktion \(U(g)\hat A U(g)^{-1}\) verbunden.
+  \item Casimirs: In deinem Text als invariantes \(f\) oder zentraler Operator;  
+        im CCR-/Lie-Algebra-Rahmen sind Casimir-Operatoren zentrale Elemente,
+        deren Eigenwerte \emph{Quantenzahlen} (Spin, Masse, Ladung) klassifizieren.
+\end{itemize}
+
+%---------------------------------------------------------------
+\emph{Brücke 4: Integration in die Skript-Struktur}
+
+Didaktisch kannst du die Integration etwa so anordnen:
+
+\begin{enumerate}
+  \item \textbf{Kinematische Ebene (Heisenberg/CCR):}
+        \begin{itemize}
+          \item Definition von \((X,\sigma)\), \(\mathfrak{h}(X)\), \(U(\mathfrak{h}(X))\),
+                \(\mathrm{CCR}(X,\sigma)\).
+          \item Schrödinger-Darstellung als Spezialfall.
+        \end{itemize}
+  \item \textbf{Dynamik und Hamiltonoperatoren:}
+        \begin{itemize}
+          \item Hamiltonoperator \(H\in U(\mathfrak{h}(X))\),
+                Heisenberg-Gleichung \( \dot A = \frac{i}{\hbar}[H,A] \),
+                Schrödinger-Gleichung \( i\hbar\dot\psi=\hat H\psi \).
+        \end{itemize}
+  \item \textbf{Symmetrien als Lie-Gruppenaktionen:}
+        \begin{itemize}
+          \item Hier fügst du \emph{deinen gesamten Lie-Gruppen-Text} ein:
+            \begin{itemize}
+              \item Grundobjekte \(G,\mathfrak g,\mathcal{H}\).
+              \item Flüsse in \(G\) und induzierte Flüsse auf \(\mathbb{P}(\mathcal{H})\).
+              \item Zeitunabhängige vs.\ zeitabhängige Generatoren (\(\mathcal{P}\exp\)).
+              \item Invarianz, Orbits, Noether-Idee, Casimirs.
+            \end{itemize}
+          \item Parallel deutest du an, wie \(G\) als Symmetriegruppe
+                von \(\mathcal{A}=\mathrm{CCR}(X,\sigma)\) verweist:
+                \(\alpha_g\in\mathrm{Aut}(\mathcal{A})\), implementiert durch \(U(g)\).
+        \end{itemize}
+  \item \textbf{Zusammenführung:}
+        \begin{itemize}
+          \item Diagramm:
+            \[
+            \begin{tikzcd}[column sep=huge,row sep=large]
+            (X,\sigma) \arrow{r}{\text{CCR}} \arrow{d}{S_g}
+              & \mathcal{A}=\mathrm{CCR}(X,\sigma)
+                \arrow{d}{\alpha_g} \arrow{r}{\pi}
+              & \pi(\mathcal{A})\subset\mathcal{B}(\mathcal{H}) \arrow{d}{\mathrm{Ad}_{U(g)}}\\
+            (X,\sigma) \arrow{r}{\text{CCR}}
+              & \mathcal{A} \arrow{r}{\pi}
+              & \pi(\mathcal{A})
+            \end{tikzcd}
+            \]
+          \item Lie-Flüsse in \(G\) correspondieren zu unitären Flüssen in \(\mathcal{U}(\mathcal{H})\),
+                die wiederum Flüsse von Zustandsbeschreibungen und Observablen induzieren.
+        \end{itemize}
+\end{enumerate}
+
+%---------------------------------------------------------------
+\emph{Bemerkung zur Rollenverteilung}
+
+\begin{REM}{Lie-CCR-Integration}{Rollenverteilung}
+Die beiden Blöcke \emph{CCR/Heisenberg} und \emph{Lie-Gruppen/Flüsse} 
+spielen unterschiedliche, aber komplementäre Rollen:
+
+\begin{itemize}
+  \item Die CCR-/Heisenberg-Struktur beschreibt die \emph{interne Nichtkommutativität}
+        der Observablen (Ort, Impuls, Spin \dots), also die kinematische Quantenstruktur.
+  \item Die Lie-Gruppen-/Fluss-Struktur beschreibt die \emph{äußeren Transformationen}
+        (Symmetrien, Zeitentwicklung) als Flüsse in \(G\) und \(\mathcal{U}(\mathcal{H})\),
+        und wie sie Zustände und Observablen bewegen.
+  \item Die Verbindung besteht darin, dass die Generatoren der Lie-Gruppenflüsse
+        selbst Elemente der Heisenberg-/CCR-/Lie-Algebren sind:  
+        sie sind \emph{Observablen}, deren Flüsse wir als Prozesse (Dynamik,
+        Symmetrieoperationen) interpretieren.
+\end{itemize}
+
+Integriert man diese Sichtweisen, erhält man ein sehr einheitliches Bild:
+\[
+\boxed{
+\begin{aligned}
+&\text{CCR/Heisenberg beschreiben, \emph{was} beobachtbar ist (Struktur der Operatoren).}\\
+&\text{Lie-Gruppen und Flüsse beschreiben, \emph{wie} sich diese Beobachtungen transformieren.}
+\end{aligned}
+}
+\]
+\end{REM}
+
+\end{unit}
+
+
+
+\begin{unit}
+\emph{Top--Down-Architektur: Von Physik zu CCR, Lie-Gruppen und Flüssen}
+
+Ziel dieses Abschnitts ist eine \emph{konzeptionelle} Herleitung der verwendeten
+Objekte und ihrer Funktionen, mit explizitem Blick auf den diagrammatischen Zusammenhang.
+
+Ganz grob:
+
+\[
+\boxed{
+\text{Physikalische Wünsche (Zustände, Observablen, Symmetrien, Dynamik)}
+\;\leadsto\;
+\text{Mathematische Objekte (CCR, Hilberträume, Lie-Gruppen, Flüsse)}
+}
+\]
+
+Wir gehen in Schichten vor.
+
+%--------------------------------------------------------------------
+\emph{Schicht 0: Physikalische Anforderungen}
+
+\emph{Ausgangspunkt:} Welche Struktur soll eine Theorie \emph{mindestens} liefern?
+
+\begin{itemize}
+  \item[(a)] \textbf{Zustände:} 
+  Es soll eine Menge \(\mathcal{S}\) von Zuständen geben (z.\,B. klassische
+  Phasenraumspunkte, quantenmechanische Zustände), die das System beschreiben.
+
+  \item[(b)] \textbf{Observablen:}
+  Es soll eine Menge \(\mathcal{O}\) messbarer Größen geben (Ort, Impuls, Energie, \dots),
+  die reelle Messwerte liefern und auf Zuständen ausgewertet werden können.
+  Erwartungswerte sollen sinnvoll definiert sein.
+
+  \item[(c)] \textbf{Symmetrien:}
+  Es gibt Transformationen \(g\) (Beobachterwechsel, Rotationen, Translationen, Eichungen),
+  die Zustände und Observablen verändern, aber physikalische Aussagen invariant lassen.
+
+  \item[(d)] \textbf{Dynamik (Zeitentwicklung):}
+  Es gibt eine ausgezeichnete „Zeit“-Transformation (oder Gruppe \(\mathbb{R}\)),
+  die beschreibt, wie sich Zustände und Observablen zeitlich entwickeln.
+\end{itemize}
+
+Wir wollen Objekte konstruieren, die \emph{genau diese Funktionen} mathematisch realisieren.
+
+%--------------------------------------------------------------------
+\emph{Schicht 1: Klassische Kinematik -- symplektischer Phasenraum}
+
+\emph{Funktion dieser Schicht:} 
+Kodierung von \emph{Zuständen und Observablen} in der klassischen Mechanik,
+ohne Quantisierung und ohne explizite Symmetrien.
+
+\begin{itemize}
+  \item Der \textbf{Zustandsraum} ist ein glatter Phasenraum
+        \[
+          M \cong T^\ast V \cong \R^{2n},
+        \]
+        versehen mit einer symplektischen Form \(\omega\).
+
+  \item \textbf{Observablen} sind glatte Funktionen
+        \[
+          f:M\to\R.
+        \]
+        Sie bilden eine Poisson-Algebra
+        \((C^\infty(M),\{\cdot,\cdot\})\), mit
+        \[
+          \{f,g\}=\omega(X_f,X_g),
+        \]
+        und \(X_f\) dem hamiltonschen Vektorfeld.
+
+  \item \textbf{Kinematik}:
+        Die Struktur \((M,\omega)\) kodiert, wie Observablen \emph{zueinander stehen};
+        Dynamik entsteht erst mit der Wahl einer speziellen Funktion \(H\) (Hamiltonfunktion).
+\end{itemize}
+
+In der endlichdimensionalen QM-Vorlesung wählen wir typischerweise
+\[
+X:=V_x\oplus V_p \cong \R^{2n}
+\]
+mit kanonischer symplektischer Form \(\sigma\).
+Damit spielen \((X,\sigma)\) die Rolle der \emph{linearen Version} des klassischen Phasenraums.
+
+%--------------------------------------------------------------------
+\emph{Schicht 2: Quantenkinematik -- Heisenberg- und CCR-Algebra}
+
+\emph{Funktion dieser Schicht:}
+Kodierung der \emph{quantenmechanischen Kinematik}:  
+nichtkommutative Observablen, Unschärferelationen, Operatorstruktur.
+
+\emph{(1) Heisenberg-Lie-Algebra \(\mathfrak{h}(X)\).}
+
+Aus \((X,\sigma)\) wird zunächst eine Lie-Algebra konstruiert:
+
+\[
+\mathfrak{h}(X) := X \oplus \R Z,
+\qquad
+[(f,\alpha Z),(g,\beta Z)] = (0,\sigma(f,g)Z).
+\]
+
+In Koordinaten:
+\[
+[X_j,P_k] = i\hbar\,\delta_{jk},\qquad [X_j,X_k]=[P_j,P_k]=[Z,\cdot]=0.
+\]
+
+\begin{itemize}
+  \item \(\mathfrak{h}(X)\) ist die \emph{infinitesimale} Kodierung der 
+        kanonischen Kommutationsrelationen: sie ersetzt die klassische Poisson-Klammer
+        durch einen Kommutator.
+  \item Sie ist rein \emph{kinematisch}: sie sagt nur, wie „Ort“ und „Impuls“ 
+        zueinander stehen, nicht, wie sie sich in der Zeit entwickeln.
+\end{itemize}
+
+\emph{(2) Hüllalgebra \(U(\mathfrak{h}(X))\).}
+
+Die universelle Hüllalgebra
+\[
+U(\mathfrak{h}(X))
+= T(\mathfrak{h}(X)) / \langle xy-yx-[x,y]\rangle
+\]
+ist die kleinste assoziative Algebra, die \(\mathfrak{h}(X)\) und ihre Klammer enthält.
+
+\begin{itemize}
+  \item Sie enthält alle \emph{Operatorpolynome in \(X_j,P_k\)}:
+        \[
+        H = \frac{1}{2m} P^2 + V(X)
+        \]
+        lebt \emph{abstrakt} in \(U(\mathfrak{h}(X))\).
+  \item Diese Ebene beschreibt die \emph{Dynamik der Observablen} als innere Derivationen:
+        \(\dot A = \frac{i}{\hbar}[H,A]\).
+\end{itemize}
+
+\emph{(3) CCR-/Weyl-C$^\ast$-Algebra \(\mathrm{CCR}(X,\sigma)\).}
+
+Um eine C$^\ast$-Struktur und beschränkte Operatoren zu bekommen, exponentiieren wir
+die Heisenberg-Algebra:
+
+\[
+\mathrm{CCR}(X,\sigma)
+:= C^\ast\bigl(\,W(f)\mid f\in X\ \text{mit Weyl-Relationen}\,\bigr),
+\]
+\[
+W(f)W(g)=e^{-\frac{i}{2}\sigma(f,g)}W(f+g),\quad W(f)^\ast=W(-f).
+\]
+
+\begin{itemize}
+  \item \(\mathrm{CCR}(X,\sigma)\) ist die \emph{abstrakte Observablenalgebra}:
+    selbstadjungierte Elemente \(A=A^\ast\) sind abstrakte Observablen.
+  \item Sie verallgemeinert die Heisenberg-Algebra auf beschränkte, 
+        exponentialisierte Operatoren.
+\end{itemize}
+
+\medskip
+
+\noindent
+\textbf{Diagramm (kinematisch):}
+
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+(X,\sigma) \arrow{r}{\text{Heisenberg}} 
+  \arrow[bend right=20]{rr}[swap]{\text{CCR/Weyl}}
+& \mathfrak{h}(X) \arrow{r}{\text{Hülle / Exponential}}
+& U(\mathfrak{h}(X)),\ \mathrm{CCR}(X,\sigma)
+\end{tikzcd}
+\]
+
+Diese Schicht beantwortet: \emph{Welche Observablen gibt es, und wie kommutieren sie?}
+
+%--------------------------------------------------------------------
+\emph{Schicht 3: Hilbertraum und Zustände -- Darstellungen}
+
+\emph{Funktion dieser Schicht:}
+Übergang von \emph{abstrakten} Observablen zu \emph{konkreten} Operatoren und Zuständen.
+
+\emph{(1) Darstellung der CCR-Algebra.}
+
+Eine (nichtdegenerierte) *-Darstellung
+\[
+\pi:\mathrm{CCR}(X,\sigma)\longrightarrow\mathcal{B}(\mathcal{H})
+\]
+ordnet jedem abstrakten Observable \(A\in\mathrm{CCR}(X,\sigma)\)
+einen konkreten beschränkten Operator \(\pi(A)\) zu.
+
+\begin{itemize}
+  \item \(\mathcal{H}\) ist der \emph{Zustandsraum der Beschreibungen}.
+  \item Vektoren \(\psi\in\mathcal{H}\) beschreiben Zustände (bis auf Phase);
+        physikalische Zustände sind Strahlen \([\psi]\in\mathbb{P}(\mathcal{H})\).
+  \item Erwartungswerte:
+        \[
+        \langle A\rangle_\psi := \langle\psi,\pi(A)\psi\rangle.
+        \]
+\end{itemize}
+
+\emph{(2) Endliche QM als Spezialfall.}
+
+Für \(X\cong\R^{2n}\):
+
+\[
+\mathcal{H}=L^2(\R^n),\quad \pi_{\mathrm{Sch}}(W(x,p))\psi(y)
+= e^{\frac{i}{\hbar}(p\cdot y - \frac12 p\cdot x)}\psi(y-x).
+\]
+
+Die infinitesimalen Generatoren \(\hat X_j,\hat P_k\) der \(W(x,p)\) sind
+\[
+(\hat X_j\psi)(x)=x_j\psi(x),\quad
+(\hat P_j\psi)(x)=-i\hbar\,\partial_{x_j}\psi(x).
+\]
+
+\medskip
+
+\noindent
+\textbf{Diagramm (kinematik + Zustände):}
+
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+(X,\sigma) \arrow{r}{\mathrm{CCR}}
+& \mathcal{A}:=\mathrm{CCR}(X,\sigma) \arrow{r}{\pi}
+& \pi(\mathcal{A})\subset\mathcal{B}(\mathcal{H})
+\\
+& & \mathcal{H} \arrow{u}[swap]{\psi\mapsto \langle\psi,\pi(\cdot)\psi\rangle}
+\end{tikzcd}
+\]
+
+Diese Schicht beantwortet: \emph{Wie werden abstrakte Observablen als konkrete Operatoren realisiert, und was ist ein Zustand?}
+
+%--------------------------------------------------------------------
+\emph{Schicht 4: Symmetriegruppen $G$ und ihre Generatoren}
+
+\emph{Funktion dieser Schicht:}
+Kodierung von \emph{Symmetrien und Flüssen} (inklusive Zeitentwicklung) und ihrer Wirkung
+auf Zustände und Observablen.
+
+\emph{(1) Abstrakte Symmetrie auf der CCR-Ebene.}
+
+Sei \(G\) eine Lie-Gruppe (Translationen, Rotationen, Zeitentwicklung, Gauge).
+Wir verlangen eine \emph{Automorphismengruppe} der Observablenalgebra:
+
+\[
+\alpha:G\longrightarrow\mathrm{Aut}(\mathcal{A}),\qquad
+g\mapsto\alpha_g,
+\]
+so dass
+\[
+\alpha_g:\mathcal{A}\to\mathcal{A}
+\]
+ein *-Automorphismus ist (Spektrum und Produktstruktur bleiben erhalten).
+
+\emph{(2) Implementierung durch unitäre Darstellung.}
+
+In einer Darstellung \(\pi\) soll \(\alpha\) durch unitäre Operatoren implementiert werden:
+
+\[
+\pi(\alpha_g(A)) = U(g)\,\pi(A)\,U(g)^{-1},\qquad U(g)\in\mathcal{U}(\mathcal{H}).
+\]
+
+Das ist genau die „Ad-Brücke“ aus deinem Lie-Gruppen-Text:
+\[
+dU(\mathrm{Ad}_g X) = \mathrm{Ad}_{U(g)}(dU(X)).
+\]
+
+\emph{(3) Generatoren als Observablen.}
+
+Die zugehörige Lie-Algebra-Darstellung
+\[
+dU:\mathfrak g\to\mathfrak u(\mathcal{H})
+\]
+liefert die \emph{Generatoren}:
+\[
+\hat X := i\hbar\,dU(X),
+\]
+selbstadjungierte Operatoren, die physikalische Observablen sind (Impuls, Drehimpuls, Ladung, Energie).
+
+\begin{itemize}
+  \item Einparameteruntergruppe:
+        \[
+        g(t)=\exp(tX) \in G,\quad
+        U(t):=U(g(t))=\exp\!\big(-\tfrac{i}{\hbar}t\hat X\big).
+        \]
+  \item Diese Flüsse realisieren \emph{Symmetrie- oder Zeitentwicklung} auf Zuständen:
+        \(\psi(t)=U(t)\psi_0\), und auf Observablen: 
+        \(A(t)=U(t)^{-1}AU(t)\).
+\end{itemize}
+
+\medskip
+
+\noindent
+\textbf{Diagramm (Symmetrieebene):}
+
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+G \arrow{r}{\alpha} \arrow{d}{U}
+& \mathrm{Aut}(\mathcal{A})
+\\
+\mathcal{U}(\mathcal{H}) \arrow{ur}[swap]{\mathrm{Ad}}
+\end{tikzcd}
+\]
+
+Infinitesimal:
+
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+\mathfrak g \arrow{r}{d\alpha} \arrow{d}{dU}
+& \mathrm{Der}(\mathcal{A})
+\\
+\mathfrak u(\mathcal{H}) \arrow{ur}[swap]{\mathrm{ad}}
+\end{tikzcd}
+\]
+
+wobei \(\mathrm{Der}(\mathcal{A})\) Derivationen der Algebra (z.\,B.\ Heisenberg-Gleichung)
+und \(\mathrm{ad}_K(A)=[K,A]\) sind.
+
+%--------------------------------------------------------------------
+\emph{Schicht 5: Dynamik als spezieller Symmetriefluss}
+
+\emph{Funktion dieser Schicht:}
+Auswahl einer ausgezeichneten Einparametergruppe (Zeitentwicklung).
+
+\begin{itemize}
+  \item \textbf{Abstrakt (CCR-Ebene):}
+        Eine Zeitentwicklungs-Automorphismengruppe
+        \[
+        \alpha_t:\mathcal{A}\to\mathcal{A},\quad t\in\R,
+        \]
+        mit \(\alpha_{t+s}=\alpha_t\circ\alpha_s\), \(\alpha_0=\mathrm{id}\).
+        Infinitesimal:
+        \[
+        \frac{d}{dt}\alpha_t(A)\big|_{t=0} = \delta(A),
+        \]
+        wobei \(\delta\) eine Derivation ist (oft inner: \(\delta(A)=\frac{i}{\hbar}[H,A]\)).
+
+  \item \textbf{Konkrete Realisierung:}
+        In einer Darstellung \(\pi\) gibt es eine unitäre Einparametergruppe
+        \[
+        U(t)=e^{-\frac{i}{\hbar}t\hat H},\qquad \hat H \text{ selbstadjungiert},
+        \]
+        mit
+        \[
+        \pi(\alpha_t(A)) = U(t)\,\pi(A)\,U(t)^{-1}.
+        \]
+
+  \item \textbf{Zustandsentwicklung:}
+        Schrödinger-Bild:
+        \[
+        i\hbar\frac{d}{dt}\psi(t) = \hat H \psi(t).
+        \]
+        Heisenberg-Bild:
+        \[
+        \frac{d}{dt}\hat A_H(t) = \frac{i}{\hbar}[\hat H,\hat A_H(t)].
+        \]
+\end{itemize}
+
+\medskip
+
+\noindent
+\textbf{Gesamtbild (kommutatives Hauptdiagramm):}
+
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+(X,\sigma) \arrow{r}{\mathrm{CCR}} \arrow{d}{S_g\in\mathrm{Sp}(X,\sigma)}
+& \mathcal{A} \arrow{r}{\pi} \arrow{d}{\alpha_g}
+& \pi(\mathcal{A})\subset\mathcal{B}(\mathcal{H}) \arrow{d}{\mathrm{Ad}_{U(g)}}
+\\
+(X,\sigma) \arrow{r}{\mathrm{CCR}}
+& \mathcal{A} \arrow{r}{\pi}
+& \pi(\mathcal{A})
+\end{tikzcd}
+\]
+
+\[
+\begin{tikzcd}[column sep=huge,row sep=large]
+\mathfrak g \arrow{r}{d\alpha} \arrow{d}{dU}
+& \mathrm{Der}(\mathcal{A}) \arrow{d}{d\pi}
+\\
+\mathfrak u(\mathcal{H}) \arrow{r}{\mathrm{ad}}
+& \mathrm{Der}(\pi(\mathcal{A}))
+\end{tikzcd}
+\]
+
+Zeitentwicklung ist der Spezialfall, bei dem \(G=\R\), \(X\in\mathfrak g\simeq\R\)
+und der Generator \(\hat H\) die Energie (Hamiltonoperator) ist.
+
+%--------------------------------------------------------------------
+\emph{Kurzinterpretation der Rollen}
+
+\begin{REM}{TopDown-Funktionen}{Funktionsübersicht}
+\begin{center}
+\renewcommand{\arraystretch}{1.25}
+\begin{tabular}{lll}
+\textbf{Objekt} & \textbf{Ebene} & \textbf{Funktion} \\ \hline
+\((X,\sigma)\) & klassisch & linearisierter Phasenraum; klassische Kinematik \\
+\(\mathfrak{h}(X)\) & Lie-Algebra & infinitesimale CCR, nichtkommutative Kinematik \\
+\(U(\mathfrak{h}(X))\) & assoz. Algebra & polynomiale Observablen, Heisenberg-Dynamik \\
+\(\mathrm{CCR}(X,\sigma)\) & C$^\ast$-Algebra & abstrakte Observablenalgebra (beschränkt) \\
+\(\pi:\mathrm{CCR}\to\mathcal{B}(\mathcal{H})\) & Darstellung & konkrete Operatoren, Zustandsbeschreibungen \\
+\(\mathcal{H},\mathbb{P}(\mathcal{H})\) & Zustände & Beschreibungen / physikalische Zustände \\
+\(G,\mathfrak g\) & Symmetriegruppe & Raum der Beschreibungstransformationen \\
+\(U:G\to\mathcal{U}(\mathcal{H})\) & unitäre Darstellung & Wirkung von Symmetrien auf Zustände \\
+\(\hat X=i\hbar dU(X)\) & Observablen & Generatoren von Flüssen (Impuls, Drehimpuls, Energie) \\
+\(\alpha:G\to\mathrm{Aut}(\mathcal{A})\) & Automorphismen & Wirkung von Symmetrien auf Observablen \\
+\(\hat H\) & Hamiltonian & Generator der Zeitentwicklung
+\end{tabular}
+\end{center}
+
+Konzeptionell:
+
+\[
+\boxed{
+\begin{aligned}
+&\text{CCR-/Heisenberg-Struktur:}\;\;\text{„Was sind die Observablen, wie kommutieren sie?“}\\
+&\text{Hilbertraum + Darstellung:}\;\;\text{„Wie sehen sie als Operatoren aus, was ist ein Zustand?“}\\
+&\text{Lie-Gruppen + Flüsse:}\;\;\text{„Wie transformieren Zustände und Observablen (Symmetrien, Zeit)?“}
+\end{aligned}
+}
+\]
+\end{REM}
+
+
+\end{unit}
+
 
 
 
@@ -428,6 +2384,398 @@ Die CPT-Invarianz garantiert u.a. Massen- und Lebensdauer-Gleichheit von Teilche
 
 
 
+\section{Archiv}
+
+\begin{unit}{}
+\emph{Abstrakte Heisenberg- und Weyl-Struktur}
+
+\emph{1. Abstrakter symplektischer Phasenraum}
+
+Sei \(X\) ein reeller lokalkonvexer Vektorraum (typisch: endlichdimensional
+\(X\simeq\R^{2n}\) oder ein Raum von Testfunktionen), versehen mit einer
+bilinearen, antisymmetrischen Form
+\[
+\sigma : X\times X \longrightarrow \R,
+\qquad \sigma(f,g) = -\sigma(g,f),
+\]
+die nichtausgeartet ist. Das Paar \((X,\sigma)\) heißt \emph{(abstrakter) symplektischer Raum}.
+
+\begin{EXA}{HEIS-ABS.1}{Beispiele}
+\begin{enumerate}
+\item \emph{Endlichdimensional (QM):}
+      \(X = V_x\oplus V_p\simeq\R^{2n}\) mit
+      \(\sigma((x,p),(x',p')) = p\cdot x' - p'\cdot x\).
+\item \emph{Feldtheorie (freie bosonische Felder):}
+      \(X\) ist ein Raum reeller Testfunktionen,
+      z.\,B. \(X=\mathcal{S}(\R^d)\),
+      und \(\sigma\) ist durch ein zweipoliges Kernel gegeben
+      (z.\,B. das Pauli--Jordan-Funktional).
+\end{enumerate}
+\end{EXA}
+
+\emph{2. Abstrakte Heisenberg-Lie-Algebra}
+
+\begin{DEF}{HEIS-ABS.2}{Abstrakte Heisenberg-Algebra}
+Zu einem symplektischen Raum \((X,\sigma)\) definieren wir die
+\emph{abstrakte Heisenberg-Lie-Algebra}
+\[
+\mathfrak{h}(X) := X \oplus \R Z
+\]
+mit Lie-Klammer
+\[
+[(f,\alpha Z),(g,\beta Z)]
+:= \bigl(0,\ \sigma(f,g)\,Z\bigr),
+\]
+d.\,h.
+\[
+[f,g] = \sigma(f,g)\,Z,\qquad [Z,\cdot]=0.
+\]
+\end{DEF}
+
+\begin{REM}{HEIS-ABS.3}{Interpretation}
+\begin{itemize}
+\item Für \(X=\R^{2n}\) mit kanonischer symplektischer Form
+      reproduziert \(\mathfrak{h}(X)\) die übliche Heisenberg-Algebra
+      mit endlich vielen \(X_j,P_k\).
+\item Für \(X\) als Raum von Testfunktionen entsteht eine
+      \emph{unendlichdimensionale} Heisenberg-Algebra, deren Generatoren
+      man physikalisch als „abstrakte Feldmoden“ interpretieren kann:
+      \(f\mapsto \Phi(f)\) mit
+      \([\,\Phi(f),\Phi(g)\,]= i\,\sigma(f,g)\,\id\).
+\end{itemize}
+\end{REM}
+
+Die zugehörige \emph{universelle Hüllalgebra} \(U(\mathfrak{h}(X))\)
+ist dann die assoziative (algebraische) Umgebung aller polynomiellen
+Kombinationen solcher „abstrakter Observablen“.
+
+\emph{3. Abstrakte Weyl-Algebra (CCR-Algebra)}
+
+\begin{DEF}{Weyl-ABS.1}{Abstrakte Weyl- (CCR-) Algebra}
+Sei \((X,\sigma)\) wie oben.
+Die \emph{Weyl-Algebra} \(\mathcal{W}(X,\sigma)\) ist die
+assoziative *-Algebra, erzeugt von formalen Symbolen \(W(f)\) (\(f\in X\)),
+unter den \emph{Weyl-Relationen}
+\begin{align*}
+W(f)W(g) &= e^{-\frac{i}{2}\sigma(f,g)}\,W(f+g),\\
+W(f)^\ast &= W(-f),\\
+W(0) &= \mathbf{1}.
+\end{align*}
+\end{DEF}
+
+Man kann daraus durch Vervollständigung eine C\(^\ast\)-Algebra
+\(\mathrm{CCR}(X,\sigma)\) konstruieren
+(\emph{Weyl--C\(^\ast\)-Algebra} oder \emph{CCR-Algebra}),
+die als abstrakte Observablenalgebra der bosonischen Theorie dient.
+
+\begin{EXA}{Weyl-ABS.2}{QM und QFT als Spezialfälle}
+\begin{enumerate}
+\item \emph{QM (endlichdimensional):}
+      \(X=\R^{2n}\) mit kanonischer \(\sigma\).
+      Die Weyl-Algebra \(\mathcal{W}(X,\sigma)\) ist
+      (bis auf Isomorphie) die bekannte Weyl-Algebra der Operatoren
+      \(e^{\frac{i}{\hbar}(p\cdot X - x\cdot P)}\).
+      Nach dem Satz von Stone--von Neumann sind alle irreduziblen
+      Darstellungen (unter milden Bedingungen) unitar äquivalent.
+\item \emph{Freie bosonische QFT:}
+      \(X\) ist ein (realer) Raum von Lösungen der klassischen Feldgleichung
+      modulo Nebenbedingungen, \(\sigma\) ist die entsprechende
+      symplektische Form (z.\,B. durch das Pauli--Jordan-Funktional).
+      Die Weyl-C\(^\ast\)-Algebra \(\mathrm{CCR}(X,\sigma)\) ist die
+      abstrakte Observablenalgebra des freien Feldes.
+      Es gibt nun \emph{viele} unitär nichtäquivalente Darstellungen,
+      die jeweils unterschiedliche physikalische Vakuumzustände,
+      Temperaturzustände oder Hintergrundgeometrien repräsentieren.
+\end{enumerate}
+\end{EXA}
+
+\emph{4. Dynamik als Automorphismengruppe}
+
+Auf dieser Ebene kann man Dynamik abstrakt fassen als
+eindimensionale Gruppen von *-Automorphismen:
+\begin{DEF}{DYN-ABS.1}{Abstrakte Dynamik}
+Eine (Heisenberg-)Dynamik auf \(\mathcal{W}(X,\sigma)\) ist
+eine stark-stetige Gruppe von *-Automorphismen
+\[
+\alpha : \R \to \mathrm{Aut}(\mathcal{W}(X,\sigma)),\qquad
+t\mapsto \alpha_t,
+\]
+die (formal) durch einen „Hamiltonoperator“ \(H\) implementiert wird:
+\[
+\frac{d}{dt}\alpha_t(A)\big|_{t=0}
+= \delta(A) = i[H,A] \quad \text{(wo sinnvoll definiert)}.
+\]
+\end{DEF}
+
+In einer konkreten Darstellung \(\pi:\mathcal{W}(X,\sigma)\to\mathcal{B}(\mathcal{H})\)
+wird diese Dynamik durch eine unitäre Gruppe \(U(t)\) implementiert:
+\[
+\pi(\alpha_t(A)) = U(t)\,\pi(A)\,U(t)^\ast.
+\]
+
+\emph{5. Kritische Bewertung der Allgemeinheit}
+
+\begin{REM}{GEN-ABS.3}{Reichweite und Grenzen}
+\begin{itemize}
+\item Die abstrakte Konstruktion \((X,\sigma)\mapsto \mathfrak{h}(X)\mapsto \mathcal{W}(X,\sigma)\)
+      erfasst \emph{alle bosonischen Theorien mit kanonischen Kommutationsrelationen}:
+      \begin{itemize}
+      \item gewöhnliche QM (endlichdimensionales \(X\)),
+      \item freie bosonische QFT (unendlichdimensionales \(X\)).
+      \end{itemize}
+\item Fermionische Theorien (Dirac-Feld) erfordern statt \((X,\sigma)\)
+      einen reellen Hilbertraum \((Y,\langle\cdot,\cdot\rangle)\)
+      und die CAR-Algebra \(\mathrm{CAR}(Y)\); formal ist dies
+      die „Clifford-Version“ der obigen Konstruktion.
+\item Allgemeine quantenmechanische Systeme können Observablenalgebren
+      besitzen, die \emph{nicht} durch CCR/CAR beschreibbar sind
+      (z.\,B. reine Spin-Systeme mit \(\mathfrak{su}(2)\)-Algebra,
+      quantisierte Gauge-Theorien mit Nebenbedingungen etc.).
+      In voller Allgemeinheit arbeitet man daher mit einer
+      abstrakten C\(^\ast\)- oder von-Neumann-Algebra \(\mathcal{A}\)
+      und deren Darstellungen.
+\end{itemize}
+
+\emph{Fazit.}
+Die abstrakte Heisenberg-/Weyl-Formalisierung über \((X,\sigma)\)
+liefert einen einheitlichen Rahmen, in dem
+\begin{itemize}
+\item endliche QM und freie bosonische QFT
+      als Spezialfälle desselben kinematischen Prinzips erscheinen,
+\item Dynamik als Automorphismengruppe der Observablenalgebra formuliert wird,
+\item und Zustände erst in einem zweiten Schritt als positive Funktionale
+      auf dieser Algebra eingeführt werden.
+\end{itemize}
+Für eine vollständig allgemeine Charakterisierung \emph{aller} quantenmechanischen
+Theorien reicht sie jedoch nicht aus; dort benötigt man
+den abstrakten Rahmen der Operatoralgebren, in dem die CCR/CAR/Weyl-Algebren
+wichtige, aber nicht die einzigen Beispiele sind.
+\end{REM}
+\end{unit}
+
+\begin{unit}
+\emph{Abstrakter Observablen-Formalismus via C$^\ast$- und von-Neumann-Algebren}
+
+In diesem Abschnitt heben wir den zuvor beschriebenen Heisenberg-/Weyl-Formalismus
+auf eine noch allgemeinere Ebene:
+Statt CCR/CAR-spezifischer Algebren betrachten wir \emph{abstrakte Operatoralgebren}
+(C$^\ast$- und von-Neumann-Algebren) als Träger der Quantenmechanik.
+Die Heisenberg- und Weyl-Algebren erscheinen dann als wichtige Spezialfälle.
+
+%---------------------------------------------------------
+\emph{1. C$^\ast$-Algebren als abstrakte Observablenalgebren}
+
+\begin{DEF}{CSTAR-1}{C$^\ast$-Algebra}
+Eine \emph{C$^\ast$-Algebra} ist eine komplexe Banach-Algebra \((\mathcal{A},\|\cdot\|)\)
+mit involutiver Antilinearität \(^{\ast}:\mathcal{A}\to\mathcal{A}\),
+die die folgenden Eigenschaften erfüllt:
+\begin{enumerate}
+  \item \((ab)^\ast = b^\ast a^\ast,\quad (\lambda a + \mu b)^\ast = \overline{\lambda}a^\ast + \overline{\mu}b^\ast\).
+  \item \(\|a^\ast a\| = \|a\|^2\) für alle \(a\in\mathcal{A}\).
+  \item \(\mathcal{A}\) ist vollständig bezüglich der Norm \(\|\cdot\|\).
+\end{enumerate}
+\end{DEF}
+
+\begin{REM}{CSTAR-2}{Interpretation als Observablenalgebra}
+\begin{itemize}
+  \item Die selbstadjungierten Elemente \(a=a^\ast\in\mathcal{A}\) werden als \emph{Observablen} interpretiert.
+  \item Die Algebra selbst beschreibt die \emph{vollständige Menge} aller beobachtbaren Größen
+        und ihrer algebraischen Relationen (Produkt, Spektrum, funktionale Kalküle).
+  \item Eine \emph{konkrete Darstellung} \(\pi:\mathcal{A}\to\mathcal{B}(\mathcal{H})\) auf einem Hilbertraum \(\mathcal{H}\)
+        ist nur eine (mögliche) Realisierung; die abstrakte Algebra \(\mathcal{A}\) ist primär.
+\end{itemize}
+\end{REM}
+
+\begin{EXA}{CSTAR-3}{Wichtige Beispiele}
+\begin{enumerate}
+  \item \emph{Quantenmechanik mit endlich vielen Freiheitsgraden:}
+        \(\mathcal{A} = \mathcal{B}(\mathcal{H})\), die Algebra der beschränkten Operatoren
+        auf einem separablen Hilbertraum \(\mathcal{H}\) (z.\,B. \(\mathcal{H}=L^2(\R^n)\)).
+  \item \emph{CCR- und CAR-Algebren:}
+        Für einen symplektischen Raum \((X,\sigma)\) ist \(\mathrm{CCR}(X,\sigma)\) 
+        die Weyl-C$^\ast$-Algebra; für einen reellen Hilbertraum \(Y\) ist \(\mathrm{CAR}(Y)\)
+        die CAR-C$^\ast$-Algebra. Beide sind spezielle C$^\ast$-Algebren.
+  \item \emph{Kommutative C$^\ast$-Algebren:}
+        Jede kommutative C$^\ast$-Algebra ist isomorph zu \(C_0(M)\) für einen
+        lokalkompakten Hausdorffraum \(M\) (Gelfand-Naimark-Theorem).
+        Dies liefert die Brücke zur klassischen Mechanik: Phasenraum \(M\) $\Leftrightarrow$ kommutative Observablenalgebra \(C_0(M)\).
+\end{enumerate}
+\end{EXA}
+
+%---------------------------------------------------------
+\emph{2. Zustände und GNS-Konstruktion}
+
+\begin{DEF}{STATE-1}{Zustand auf einer C$^\ast$-Algebra}
+Ein \emph{Zustand} auf einer C$^\ast$-Algebra \(\mathcal{A}\) ist ein lineares Funktional
+\(\omega:\mathcal{A}\to\C\), das folgende Eigenschaften erfüllt:
+\begin{enumerate}
+  \item \emph{Positivität:} \(\omega(a^\ast a)\ge0\) für alle \(a\in\mathcal{A}\).
+  \item \emph{Normierung:} \(\omega(\mathbf{1})=1\) (falls \(\mathcal{A}\) eine Eins besitzt).
+\end{enumerate}
+\end{DEF}
+
+\begin{REM}{STATE-2}{Physikalische Bedeutung}
+\begin{itemize}
+  \item Der Erwartungswert einer Observablen \(A=A^\ast\in\mathcal{A}\) im Zustand \(\omega\)
+        ist \(\omega(A)\).
+  \item Zustände sind also die abstrakte Form dessen, was in konkreten Darstellungen
+        durch Vektoren \(\psi\in\mathcal{H}\) oder Dichtematrizen \(\rho\) beschrieben wird.
+\end{itemize}
+\end{REM}
+
+\begin{THEO}{GNS-1}{GNS-Konstruktion (Gelfand--Naimark--Segal)}
+Zu jedem Zustand \(\omega\) auf einer C$^\ast$-Algebra \(\mathcal{A}\) existiert ein Tripel
+\((\pi_\omega,\mathcal{H}_\omega,\Omega_\omega)\), bestehend aus
+\begin{enumerate}
+  \item einer Hilbertraumdarstellung \(\pi_\omega:\mathcal{A}\to\mathcal{B}(\mathcal{H}_\omega)\),
+  \item einem zyklischen Vektor \(\Omega_\omega\in\mathcal{H}_\omega\)
+        (d.\,h. \(\pi_\omega(\mathcal{A})\Omega_\omega\) ist dicht in \(\mathcal{H}_\omega\)),
+\end{enumerate}
+so dass
+\[
+\omega(A) = \langle \Omega_\omega,\,\pi_\omega(A)\Omega_\omega\rangle_{\mathcal{H}_\omega}
+\quad\text{für alle }A\in\mathcal{A}.
+\]
+Dieses Tripel ist bis auf unitären Isomorphismus eindeutig.
+\end{THEO}
+
+\begin{REM}{GNS-2}{Interpretation}
+\begin{itemize}
+  \item Die GNS-Konstruktion zeigt: \emph{Jeder abstrakte Zustand definiert seinen eigenen Hilbertraum}
+        und eine Darstellung der Observablenalgebra.
+  \item Dies ist in der QFT essentiell: unterschiedliche Vakuumzustände (Minkowski, Rindler, Thermalzustände)
+        führen i.\,Allg. zu nicht-unitär äquivalenten Darstellungen.
+  \item Die „Welt“ eines Beobachters ist also \((\pi_\omega(\mathcal{A}),\mathcal{H}_\omega,\Omega_\omega)\).
+\end{itemize}
+\end{REM}
+
+%---------------------------------------------------------
+\emph{3. Dynamik und Symmetrien als Automorphismen}
+
+\begin{DEF}{DYN-ABS}{Automorphismen und Dynamik}
+Sei \(\mathcal{A}\) eine C$^\ast$-Algebra.
+\begin{enumerate}
+  \item Ein *-Automorphismus \(\alpha:\mathcal{A}\to\mathcal{A}\) ist ein bijektiver *-Homomorphismus.
+  \item Eine \emph{(Heisenberg-)Dynamik} ist eine stark-stetige Einparametergruppe
+        \(\alpha:\R\to\mathrm{Aut}(\mathcal{A})\), \(t\mapsto\alpha_t\):
+        \[
+        \alpha_0=\id,\quad \alpha_{t+s}=\alpha_t\circ\alpha_s,\quad
+        t\mapsto\alpha_t(A)\text{ stetig für alle }A\in\mathcal{A}.
+        \]
+\end{enumerate}
+\end{DEF}
+
+\begin{REM}{DYN-IMP}{Physikalische Bedeutung}
+\begin{itemize}
+  \item \(\alpha_t\) beschreibt die Zeitentwicklung der Observablen im Heisenberg-Bild: 
+        \(\alpha_t(A)\) ist die Observable „\(A\) zur Zeit \(t\)“.
+  \item In einer GNS-Darstellung \((\pi_\omega,\mathcal{H}_\omega,\Omega_\omega)\)
+        wird \(\alpha_t\) oft (unter geeigneten Bedingungen) durch eine unitäre Gruppe \(U_\omega(t)\)
+        implementiert:
+        \[
+        \pi_\omega(\alpha_t(A)) = U_\omega(t)\,\pi_\omega(A)\,U_\omega(t)^\ast.
+        \]
+  \item Analog werden Symmetriegruppen (z.\,B. Poincaré-Gruppe) durch
+        Automorphismengruppen \(\beta_g\in\mathrm{Aut}(\mathcal{A})\) repräsentiert,
+        die in Darstellungen durch unitäre (oder projektiv unitäre) Gruppen realisiert werden.
+\end{itemize}
+\end{REM}
+
+%---------------------------------------------------------
+\emph{4. von-Neumann-Algebren und lokale Strukturen}
+
+\begin{DEF}{VN-1}{von-Neumann-Algebra}
+Eine \emph{von-Neumann-Algebra} ist eine *-Unteralgebra
+\(\mathcal{M}\subset \mathcal{B}(\mathcal{H})\), die
+\begin{enumerate}
+  \item schwach operator-topologisch abgeschlossen ist,
+  \item die Eins \(\mathbf{1}\) enthält.
+\end{enumerate}
+Äquivalent: \(\mathcal{M} = \mathcal{M}''\), d.\,h. \(\mathcal{M}\) ist gleich ihrem Bicommutant.
+\end{DEF}
+
+\begin{REM}{VN-2}{Rolle in QFT}
+\begin{itemize}
+  \item In der algebraischen QFT (Haag–Kastler-Formalismus) ordnet man jeder
+        (geeigneten) Raumzeitregion \(\mathcal{O}\) eine von-Neumann-Algebra
+        \(\mathcal{A}(\mathcal{O})\subset\mathcal{B}(\mathcal{H})\) zu, die die
+        \emph{lokalen Observablen in \(\mathcal{O}\)} beschreibt.
+  \item Die Gesamtheit \(\{\mathcal{A}(\mathcal{O})\}_{\mathcal{O}}\) bildet ein
+        \emph{lokales Netz von Operatoralgebren}, das Kovarianz- und Lokalitätsaxiome erfüllt.
+  \item Die Struktur solcher Netze (Typ von von-Neumann-Algebren, Superselektionssektoren, etc.)
+        trägt tiefe Informationen über die Feldtheorie.
+\end{itemize}
+\end{REM}
+
+%---------------------------------------------------------
+\emph{5. Einordnung der CCR/CAR/Weyl-Algebren in diesen Rahmen}
+
+\begin{EXA}{ABSTR-CCR-1}{CCR/CAR/Weyl als Spezialfälle}
+\begin{itemize}
+  \item Für einen symplektischen Raum \((X,\sigma)\) ist
+        \(\mathrm{CCR}(X,\sigma)\) eine C$^\ast$-Algebra,
+        die die Weyl-Relationen kodiert.
+        Sie ist ein Spezialfall des allgemeinen C$^\ast$-Formalismus.
+  \item Für einen reellen Hilbertraum \(Y\) ist
+        \(\mathrm{CAR}(Y)\) die C$^\ast$-Algebra der Canonical Anti-commutation Relations,
+        zentral für fermionische Systeme.
+  \item Die früher eingeführten Heisenberg- und Weyl-Algebren
+        können als \emph{dichte *-Unteralgebren} dieser C$^\ast$-Algebren
+        aufgefasst werden (auf algebraischer Ebene).
+\end{itemize}
+\end{EXA}
+
+\begin{REM}{ABSTR-CCR-2}{Abstrakter Oberbegriff}
+\begin{itemize}
+  \item Der C$^\ast$- bzw. von-Neumann-Formalismus liefert einen \emph{Oberbegriff}
+        für quantenmechanische Theorien: Eine Theorie ist charakterisiert durch
+        \[
+        (\mathcal{A},\mathcal{S},\alpha_t,G),
+        \]
+        wobei \(\mathcal{A}\) eine C$^\ast$- oder W$^\ast$-Algebra von Observablen ist,
+        \(\mathcal{S}\) eine Menge zulässiger Zustände,
+        \(\alpha_t\) eine Dynamik (Automorphismengruppe)
+        und \(G\) eine Symmetriegruppe mit Automorphismen \(\beta_g\).
+  \item CCR-/CAR-/Weyl-Algebren sind dann konkrete Beispiele solcher \(\mathcal{A}\),
+        insbesondere für feldtheoretische Modelle mit kanonischen Relationen.
+  \item Spin-Systeme, Lattice-Modelle, topologische Quantensysteme etc.\ lassen sich
+        ebenfalls in diesen Rahmen integrieren, ohne CCR/CAR-Struktur vorauszusetzen.
+\end{itemize}
+\end{REM}
+
+%---------------------------------------------------------
+\emph{6. Zusammenfassung: Allgemeinheit und Stringenz}
+
+\begin{REM}{ABSTR-SUM}{Reichweite des C$^\ast$/vN-Standpunkts}
+\begin{itemize}
+  \item \textbf{Formale Stringenz:}
+        Der C$^\ast$-algebraische Zugang ist vollständig funktionalanalytisch fundiert;
+        GNS sichert die Verbindung zur üblichen Hilbertraum-Formulierung.
+  \item \textbf{Allgemeinheit:}
+        Er umfasst sowohl
+        \begin{itemize}
+          \item gewöhnliche Quantenmechanik (endlich viele Freiheitsgrade),
+          \item freie und (in geeigneten Konstruktionen) interagierende QFT,
+          \item nicht-kanonische Systeme (Spin, Lattice-Modelle, topologische Theorien).
+        \end{itemize}
+  \item \textbf{Einordnung der Heisenberg-/Weyl-Struktur:}
+        Die zuvor eingeführten Heisenberg-, Hüll- und Weyl-Algebren
+        sind in diesem Rahmen als besonders strukturierte Beispiele von
+        Observablenalgebren zu verstehen, die zusätzlich eine klare
+        symplektische Herkunft (CCR) haben.
+        Sie liefern einen sehr transparenten kinematischen Kern,
+        aber nicht die einzig mögliche Algebra-Architektur.
+\end{itemize}
+
+\emph{Fazit.}
+Während die abstrakte Heisenberg-/Weyl-Formalisierung über \((X,\sigma)\)
+bosonische Systeme mit kanonischen Relationen sehr elegant erfasst,
+bietet der C$^\ast$/von-Neumann-Formalismus eine noch allgemeinere,
+operatoralgebraische Bühne, in der „Quantenmechanik“ im weitesten Sinn
+als Struktur aus \emph{Observablenalgebra, Zuständen, Dynamik und Symmetrien}
+definiert werden kann.
+\end{REM}
+\end{unit}
 
 \pagebreak
 \printbibliography

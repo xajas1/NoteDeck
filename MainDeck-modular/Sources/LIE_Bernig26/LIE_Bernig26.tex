@@ -223,7 +223,7 @@ Kurze Beschreibung …
 
 \pagebreak
 
-\section*{Matrixgruppen}
+\section{Matrixgruppen}
 
 
 
@@ -445,7 +445,7 @@ Mit anderen Worten: die Eigenschaft „Matrixuntergruppe“ ist \emph{transitiv}
 
 
 
-\section*{Beispiele:}
+Beispiele:
 
 
 (1) $\mathrm{GL}_{n}(\mathbb{K})$ ist eine Matrixgruppe. Achtung: als Teilmenge von $M_{n}(\mathbb{K})$ ist $\mathrm{GL}_{n}(\mathbb{K})$ nicht abgeschlossen, sondern offen. Als Teilmenge von sich selbst ist es sowohl offen als auch abgeschlossen.\\
@@ -1963,6 +1963,894 @@ Satz zur Eindeutigkeit linearer Systeme). Also $\gamma(t)=\exp(tA)$ für alle $t
 Aus $\gamma(t)=\exp(tA)=\exp(tB)$ für alle $t$ folgt durch Ableiten in $t=0$,
 dass $A=\gamma'(0)=B$.
 \end{PROOF}
+
+
+
+\pagebreak
+
+
+\section{Liealgebren}
+
+
+Definition 25. 
+
+Eine Liealgebra über $\mathbb{K}$ ist ein Vektorraum $\mathfrak{a}$ mit einer $\mathbb{K}$-bilinearen Abbildung (Lieklammer)
+$$
+[\bullet, \bullet]: \mathfrak{a} \times \mathfrak{a} \rightarrow \mathfrak{a}
+$$
+so dass für alle $x, y, z \in \mathfrak{a}$ gilt
+
+(1) $[x, y]=-[y, x]$ (Schiefsymmetrie)
+
+(2) $[x,[y, z]]+[y,[z, x]]+[z,[x, y]]=0$ (Jacobiidentität).
+
+Beispiele:
+
+(1) Sei $A$ eine $\mathbb{K}$-Algebra, d.h. ein $\mathbb{K}$-Vektorraum mit einem $\mathbb{K}$ bilinearem, assoziativem Produkt $A \times A \rightarrow A$. Dann wird $A$ durch $[x, y]:=x y-y x$ zu einer Liealgebra.\\
+(2) Speziell ist $M_{n}(\mathbb{K})$ eine Liealgebra mit Lieklammer $[A, B]= A B-B A$.
+
+Definition 26. (1) Ein $\mathbb{K}$-Untervektorraum $\mathfrak{b} \subset \mathfrak{a}$ heisst LieUnteralgebra von $\mathfrak{a}$, falls $[x, y] \in \mathfrak{b}$ für alle $x, y \in \mathfrak{b}$. Notation $\mathfrak{b} \leq \mathfrak{a}$.\\
+(2) Ein $\mathbb{K}$-Untervektorraum $\mathfrak{n} \subset \mathfrak{a}$ heisst Lie-Ideal, falls $[z, x] \in \mathfrak{n}$ für alle $z \in \mathfrak{n}, x \in \mathfrak{a}$. Notation $\mathfrak{n} \triangleleft \mathfrak{a}$.\\
+(3) Das Zentrum von $\mathfrak{a}$ ist
+
+$$
+\mathfrak{z}(\mathfrak{a})=\{z \in \mathfrak{a}:[z, x]=0 \forall x \in \mathfrak{a}\} .
+$$
+
+(4) Der Kommutator von $\mathfrak{a}$ ist der Vektorraum, der von den Elementen $[x, y], x, y \in \mathfrak{a}$ erzeugt wird. Notation $\mathfrak{a}^{\prime}$.
+
+Lemma 27. $\mathfrak{z}(\mathfrak{a})$ und $\mathfrak{a}^{\prime}$ sind Lie-Ideale.\\
+Beweis. Sei $z \in \mathfrak{z}(\mathfrak{a}), x \in \mathfrak{a}$. Dann ist $[z, x]=0 \in \mathfrak{z}(\mathfrak{a})$, also folgt $\mathfrak{z}(\mathfrak{a}) \triangleleft \mathfrak{a}$. Sind $x, y, z \in \mathfrak{a}$, so ist $[x,[y, z]] \in \mathfrak{a}^{\prime}$, also folgt $\mathfrak{a}^{\prime} \triangleleft \mathfrak{a}$.
+
+Definition 28. $\mathfrak{a}$ heisst einfach, wenn $\mathfrak{a}$ nur die Ideale $\{0\}$ und $\mathfrak{a}$ besitzt.
+
+Definition 29. Seien $\mathfrak{g}, \mathfrak{h}$ Lie-Algebren. Eine $\mathbb{K}$-lineare Abbildung $\Phi: \mathfrak{g} \rightarrow \mathfrak{h}$ heisst Homomorphismus von Lie-Algebren, wenn
+
+$$
+[\Phi(x), \Phi(y)]=\Phi([x, y])
+$$
+
+für alle $x, y \in \mathfrak{g}$. Ist $\Phi$ zusätzlich ein Isomorphismus von Vektorräumen, so heisst $\Phi$ Isomorphismus von Lie-Algebren.
+
+Satz 30. Sei $\mathfrak{n} \triangleleft \mathfrak{a}$. Dann wird durch
+
+$$
+[x+\mathfrak{n}, y+\mathfrak{n}]:=[x, y]+\mathfrak{n}
+$$
+
+eine Lie-Algebrastruktur auf $\mathfrak{a} / \mathfrak{n}$ definiert. $\mathfrak{a} / \mathfrak{n}$ heisst Quotienten-LieAlgebra.
+
+Beweis. Wohldefiniertheit: sei $x+\mathfrak{n}=x^{\prime}+\mathfrak{n}$, also $x-x^{\prime} \in \mathfrak{n}$. Dann ist $[x, y]-\left[x^{\prime}, y\right]=\left[x-x^{\prime}, y\right] \in \mathfrak{n}$, da $\mathfrak{n}$ ein Ideal ist. Analog für $y$.
+
+Die Symmetrie und Jacobi-Identität folgen aus den analogen Aussagen für $\mathfrak{a}$.
+
+Definition 31. (1) Sei $\mathfrak{a}$ eine Lie-Algebra, $\mathfrak{b} \leq \mathfrak{a}$ und $\mathfrak{n} \triangleleft \mathfrak{a}$. Falls $\mathfrak{b} \cap \mathfrak{n}=\{0\}$ und $\mathfrak{a}=\mathfrak{b}+\mathfrak{n}$ (als Vektorräume), so heisst $\mathfrak{a}$ das semidirekte Produkt, Notation $\mathfrak{a}=\mathfrak{n} \ltimes \mathfrak{n}$.
+
+Definition 32. Sei $G \leq \mathrm{GL}_{n}(\mathbb{K})$ eine Matrixgruppe. Für $U \in G$ heisst\\
+$T_{U} G:=\left\{\gamma^{\prime}(0) \in M_{n}(\mathbb{K}): \gamma\right.$ ist differenzierbare Kurve in $G$ mit $\left.\gamma(0)=U\right\}$\\
+der Tangentialraum an $G$ im Punkt $U$.\\
+Bemerkung: später werden wir sehen, dass Matrixgruppen Untermannigfaltigkeiten sind und dass diese Definition des Tangentialraums dieselbe ist wie die bei Untermannigfaltigkeiten.
+
+Lemma 33. $T_{U} G$ ist ein $\mathbb{K}$-Vektorraum.\\
+Beweis. Seien $\alpha, \beta$ differenzierbare Kurven in $G$ mit $\alpha(0)=\beta(0)= U$. Setze $\gamma(t)=\alpha(t) U^{-1} \beta(t)$. Dann ist $\gamma(0)=U$ und $\gamma^{\prime}(0)=\alpha^{\prime}(0)+ \beta^{\prime}(0)$, also ist $T_{U} G$ abgeschlossen unter Addition. Setzt man $\eta(t)= \alpha(r t)$, so gilt $\eta^{\prime}(0)=r \alpha^{\prime}(0)$, also ist $T_{U} G$ auch unter skalarer Multiplikation abgeschlossen.
+
+Theorem 34. Ist $G \leq \mathrm{GL}_{n}(\mathbb{K})$ eine Matrixgruppe, so ist $\mathfrak{g}:=T_{\mathrm{Id}} G$ eine $\mathbb{K}$-Lie-Unteralgebra von $M_{n}(\mathbb{K})$.
+
+Beweis. $\mathfrak{g}$ ist ein Untervektorraum nach Lemma 33. Zu zeigen ist, dass $\mathfrak{g}$ abgeschlossen bzgl. der Lieklammer ist. Seien $\alpha, \beta$ differenzierbare Kurven in $G$ mit $\alpha(0)=\beta(0)=I$. Setze $F(s, t)=\alpha(s) \beta(t) \alpha(s)^{-1}$. Für genügend kleine $s$ ist $F(s, \bullet)$ eine differenzierbare Kurve in $G$ mit $F(s, 0)=$ Id. Nach Definition von $\mathfrak{g}$ folgt
+
+$$
+\left.\frac{d}{d t}\right|_{t=0} F(s, t)=\alpha(s) \beta^{\prime}(0) \alpha(s)^{-1} \in \mathfrak{g}
+$$
+
+Da $\mathfrak{g}$ als Untervektorraum des endlichdimensionalen Vektorraums $M_{n}(\mathbb{K})$ abgeschlossen ist, folgt
+
+$$
+\left.\left.\frac{d}{d s}\right|_{s=0} \frac{d}{d t}\right|_{t=0} F(s, t) \in \mathfrak{g}
+$$
+
+Andererseits ist
+
+$$
+\begin{aligned}
+\left.\left.\frac{d}{d s}\right|_{s=0} \frac{d}{d t}\right|_{t=0} F(s, t) & =\left.\frac{d}{d s}\right|_{s=0} \alpha(s) \beta^{\prime}(0) \alpha(s)^{-1} \\
+& =\alpha^{\prime}(0) \beta^{\prime}(0)-\beta^{\prime}(0) \alpha^{\prime}(0) \\
+& =\left[\alpha^{\prime}(0), \beta^{\prime}(0)\right] .
+\end{aligned}
+$$
+
+Dabei haben wir die Gleichung $\frac{d}{d s} \alpha(s)^{-1}=-\alpha(s)^{-1} \alpha^{\prime}(s) \alpha(s)^{-1}$ benutzt, welche sich durch Ableiten von $\alpha(s) \alpha(s)^{-1}=$ Id ergibt.
+
+Definition 35. Seien $G \leq \mathrm{GL}_{n}(\mathbb{K}), H \leq \mathrm{GL}_{m}(\mathbb{K})$ Matrixgruppen. Eine stetige Abbildung $\phi: G \rightarrow H$ heisst differenzierbar, wenn\\
+(1) Für jede differenzierbare Kurve $\gamma:(-\epsilon, \epsilon) \rightarrow G$ ist $\phi \circ \gamma$ : $(-\epsilon, \epsilon) \rightarrow H$ differenzierbar.\\
+(2) $(\phi \circ \gamma)^{\prime}(0)$ hängt nur von $\gamma^{\prime}(0)$ ab.
+
+Definition 36. (1) Sei $\phi: G \rightarrow H$ ein differenzierbarer Homomorphismus von Matrixgruppen. Für $A \in G$ heisst
+
+$$
+\left.d \phi\right|_{A}: T_{A} G \rightarrow T_{\phi(A)} H, \gamma^{\prime}(0) \mapsto(\phi \circ \gamma)^{\prime}(0)
+$$
+
+das Differential von $\phi$ in $A$.\\
+(2) Speziell heisst $d \phi:=\left.d \phi\right|_{\mathrm{Id}}: T_{\mathrm{Id}} G=\mathfrak{g} \rightarrow \mathfrak{h}=T_{\mathrm{Id}} H$ die Ableitung von $\phi$.\\
+Bemerkung: es gilt die Kettenregel: für $\phi: G \rightarrow H, \theta: H \rightarrow K$ gilt
+
+$$
+\left.d(\theta \circ \phi)\right|_{A}=\left.\left.d \theta\right|_{\phi(A)} \circ d \phi\right|_{A}
+$$
+
+Satz 37. $d \phi: \mathfrak{g} \rightarrow \mathfrak{h}$ ist ein Homomorphismus von Lie-Algebren.\\
+Beweis. $d \phi$ ist offensichtlich linear. Seien $\alpha, \beta$ Kurven in $G$ mit $\alpha(0)=\beta(0)=\mathrm{Id}$. Setze $F(s, t)=\alpha(s) \beta(t) \alpha(s)^{-1}$. Dann ist
+
+$$
+\phi \circ F(s, t)=\phi(\alpha(s)) \phi(\beta(t)) \phi(\alpha(s))^{-1}
+$$
+
+Ableiten nach $t$ und anschliessend nach $s$ liefert
+
+$$
+d \phi\left(\left[\alpha^{\prime}(0), \beta^{\prime}(0)\right]\right)=\left[d \phi\left(\alpha^{\prime}(0)\right), d \phi\left(\beta^{\prime}(0)\right)\right]
+$$
+
+Definition 38. Sei $\chi_{A}: G \rightarrow G, U \mapsto A U A^{-1}$ die Konjugation mit A. Dann heisst $\operatorname{Ad}_{A}=d \chi_{A}: \mathfrak{g} \rightarrow \mathfrak{g}$ die adjungierte Darstellung von $G$ auf $\mathfrak{g}$.
+
+Lemma 39. Es gilt $\mathrm{Ad}_{A B}=\mathrm{Ad}_{A} \circ \mathrm{Ad}_{B}$. Insbesondere ist $\mathrm{Ad}_{A} \in \mathrm{GL}(\mathfrak{g})$ für alle $A \in G$.
+
+Beweis. Es ist
+
+$$
+\chi_{A B}(U)=A B U(A B)^{-1}=A\left(B U B^{-1}\right) A^{-1}=\chi_{A}\left(\chi_{B}(U)\right),
+$$
+
+also $\chi_{A B}=\chi_{A} \circ \chi_{B}$. Die Kettenregel liefert
+
+$$
+\operatorname{Ad}_{A} \circ \operatorname{Ad}_{B}=\operatorname{Ad}_{A B}
+$$
+
+Insbesondere ist $\left(\mathrm{Ad}_{A}\right)^{-1}=\mathrm{Ad}_{A^{-1}}$.\\
+Lemma 40. Die Ableitung des Lie-Gruppenhomomorphismus Ad: $G \rightarrow \mathrm{GL}(\mathfrak{g}), A \mapsto \mathrm{Ad}_{A}$ ist gegegen durch
+
+$$
+\operatorname{ad}: \mathfrak{g} \rightarrow \operatorname{End}(\mathfrak{g}), \quad U \mapsto(X \mapsto[U, X]) .
+$$
+
+Beweis. Seien $\alpha, \beta$ Kurven in $G$ mit $\alpha(0)=\beta(0)=\operatorname{Id}$. Sei $F(s, t)= \alpha(s) \beta(t) \alpha(s)^{-1}=\chi_{\alpha(s)}(\beta(t))$. Wir wissen bereits, dass
+
+$$
+\left.\frac{\partial^{2}}{\partial s \partial t}\right|_{t=s=0} F(s, t)=\left[\alpha^{\prime}(0), \beta^{\prime}(0)\right]
+$$
+
+Andererseits ist
+
+$$
+\left.\frac{\partial}{\partial t}\right|_{t=0} F(s, t)=d \chi_{\alpha(s)}\left(\beta^{\prime}(0)\right)=\operatorname{Ad}_{\alpha(s)}\left(\beta^{\prime}(0)\right)
+$$
+
+und somit
+
+$$
+\left.\frac{\partial^{2}}{\partial s \partial t}\right|_{t=s=0} F(s, t)=\operatorname{ad}_{\alpha^{\prime}(0)}\left(\beta^{\prime}(0)\right.
+$$
+
+Ist $\alpha^{\prime}(0)=U, \beta^{\prime}(0)=X$, so folgt $[U, X]=\operatorname{ad}_{U}(X)$.\\
+Lemma 41. Sei $\alpha:(-\epsilon, \epsilon) \rightarrow M_{n}(\mathbb{R})$ differenzierbar mit $\alpha(0)=\mathrm{Id}$. Dann gilt
+
+$$
+\left.\frac{d}{d t}\right|_{t=0} \operatorname{det} \alpha(t)=\operatorname{tr} \alpha^{\prime}(0)
+$$
+
+Beweis. Setze $\partial:=\left.\frac{d}{d t}\right|_{t=0}$. Wir entwickeln $\operatorname{det} \alpha(t)$ nach der $n$-ten Zeile:
+
+$$
+\operatorname{det} \alpha(t)=\sum_{j=1}^{n}(-1)^{n+j} a_{n j}(t) \operatorname{det} C_{n j}(t),
+$$
+
+wobei $C_{n j}(t)$ aus $\alpha(t)$ durch Streichen der $n$-ten Zeile und der $j$-ten Spalte entsteht. Dann folgt
+
+$$
+\begin{aligned}
+\partial \operatorname{det} \alpha(t)= & \sum_{j=1}^{n}(-1)^{n+j} \partial a_{n j}(t) \operatorname{det} C_{n j}(0) \\
+& +\sum_{j=1}^{n}(-1)^{n+j} a_{n j}(0) \partial, C_{n j}(t)
+\end{aligned}
+$$
+
+Wegen $\alpha\left((0)=\right.$ Id ist $a_{n j}(0)=0$ und $\operatorname{det} C_{n j}(0)=0$ für $j \neq n$. Also ist
+
+$$
+\partial \operatorname{det} \alpha(t)=\partial a_{n n}(t)+\partial C_{n n}(t)
+$$
+
+Induktiv folgt
+
+$$
+\partial \operatorname{det} \alpha(t)=\partial a_{n n}(t)+\cdots+\partial a_{11}(t)=\partial \operatorname{tr} \alpha(t)
+$$
+
+Lemma 42. Für $A \in M_{n}(\mathbb{C})$ gilt
+
+$$
+\operatorname{det} \exp A=e^{\operatorname{tr} A}
+$$
+
+Beweis. Sei $\gamma(t)=\operatorname{det} \exp (t A)$. Dann ist $\gamma(0)=1$ und
+
+$$
+\begin{aligned}
+\gamma^{\prime}(t) & =\lim _{h \rightarrow 0} \frac{1}{h}(\gamma(t+h)-\gamma(t)) \\
+& =\lim _{h \rightarrow 0} \frac{1}{h}(\operatorname{det} \exp ((t+h) A)-\operatorname{det} \exp (t A)) \\
+& =\lim _{h \rightarrow 0} \frac{1}{h} \operatorname{det} \exp (t A)(\operatorname{det} \exp (h A)-1) \\
+& =\operatorname{det} \exp (t A) \operatorname{tr}(A) \\
+& =\gamma(t) \operatorname{tr}(A)
+\end{aligned}
+$$
+
+Die Kurve $\alpha(t)=e^{t \operatorname{tr} A}$ erfüllt dieselbe DGL, nämlich $\alpha(0)= 1, \alpha^{\prime}(t)=\alpha(t) \operatorname{tr} A$. Nach Eindeutigkeit von Lösungen gewöhnlicher DGL folgt $\gamma(t)=\alpha(t)$.
+
+Beispiele\\
+(1) $\operatorname{GL}(n, \mathbb{R})$. Sei $A \in M_{n}(\mathbb{R})$. Setze $\alpha(t)=\operatorname{Id}+t A$. $\operatorname{Da} \operatorname{det}(\operatorname{Id}+t A)$ ein Polynom in $t$ ist und $\alpha(0)=\mathrm{Id}$ invertierbar ist, ist $\alpha(t) \in \operatorname{GL}(n, \mathbb{R})$ für kleine $t$. Es ist $\alpha^{\prime}(0)=A$ und somit $\mathfrak{g} \mathfrak{l}(n, \mathbb{R})= M_{n}(\mathbb{R})$. Speziell ist $\operatorname{dimGL}(n, \mathbb{R})=\operatorname{dim} M_{n}(\mathbb{R})=n^{2}$. Analog gilt $\mathfrak{g} \mathfrak{l}_{n}(\mathbb{C})=M_{n}(\mathbb{C}), \operatorname{dim} \mathrm{GL}_{n}(\mathbb{C})=2 n^{2}$.\\
+(2) $\operatorname{SL}(n, \mathbb{R})$. Wir behaupten, dass die zugehörige Lie-Algebra gegeben ist durch $\mathfrak{s} \mathfrak{l}(n, \mathbb{R})=\left\{A \in M_{n}(\mathbb{R}): \operatorname{tr} A=0\right\}$. Sei dazu $\alpha$ eine Kurve in $\operatorname{SL}(n, \mathbb{R})$ mit $\alpha(0)=\operatorname{Id}$. Dann ist
+
+$$
+0=\left.\frac{d}{d t}\right|_{t=0} \operatorname{det} \alpha(t)=\operatorname{tr} \alpha^{\prime}(0)
+$$
+
+also $\mathfrak{s l}(n, \mathbb{R}) \subset\left\{A \in M_{n}(\mathbb{R}): \operatorname{tr} A=0\right\}$.\\
+Sei umgekehrt $A \in M_{n}(\mathbb{R})$ mit $\operatorname{tr} A=0$. Setze $\alpha(t)= \exp (t A)$. Dann ist $\alpha(0)=\operatorname{Id}$ und $\operatorname{det} \alpha(t)=\operatorname{det} \exp (t A)= e^{\operatorname{tr}(t A)}=1$, also $\alpha(t) \in \mathrm{SL}(n, \mathbb{R})$ und somit $A \in \mathfrak{s l}(n, \mathbb{R})$. Es folgt $\operatorname{dimSL}(n, \mathbb{R})=\operatorname{dimsl}(n, \mathbb{R})=n^{2}-1$. Analog ist $\mathfrak{s} \mathfrak{l}(n, \mathbb{C})=\left\{A \in M_{n}(\mathbb{C}): \operatorname{tr} A=0\right\}$ und $\operatorname{dimSL}(n, \mathbb{C})= \operatorname{dim} \mathfrak{s l}(n, \mathbb{C})=2 n^{2}-2$.\\
+(3) Sei
+
+$$
+\begin{aligned}
+\operatorname{Aff}_{n}(\mathbb{K} & =\mathrm{GL}_{n}(\mathbb{K}) \ltimes \mathbb{K}^{n} \\
+& =\left\{\left(\begin{array}{cc}
+A & t \\
+0 & 0
+\end{array}\right): A \in \mathrm{GL}_{n}(\mathbb{K}), t \in \mathbb{K}^{n}\right\} \subset \mathrm{GL}_{n+1}(\mathbb{K})
+\end{aligned}
+$$
+
+die affine Gruppe.\\
+Dann ist
+
+$$
+\mathfrak{a f f}_{n}(\mathbb{K})=\left\{\left(\begin{array}{cc}
+A & t \\
+0 & 0
+\end{array}\right): A \in \mathfrak{g l}_{n}(\mathbb{K})=M_{n}(\mathbb{K}), t \in \mathbb{K}^{n}\right\}
+$$
+
+Die Lie-Klammer ist gegeben durch
+
+$$
+\left[\left(\begin{array}{cc}
+A_{1} & t_{1} \\
+0 & 0
+\end{array}\right),\left(\begin{array}{cc}
+A_{2} & t_{2} \\
+0 & 0
+\end{array}\right)\right]=\left(\begin{array}{cc}
+{\left[A_{1}, A_{2}\right]} & A_{1} t_{2}-A_{2} t_{1} \\
+0 & 0
+\end{array}\right)
+$$
+
+Definiert man $\operatorname{Trans}_{n}(\mathbb{K})=\mathbb{K}^{n}$, so ist $\mathfrak{t r a n s}_{n}(\mathbb{K})=\mathbb{K}^{n}= \left\{\left(\begin{array}{cc}0 & t \\ 0 & 0\end{array}\right): t \in \mathbb{K}^{n}\right\}$ ein Lie-Ideal in $\mathfrak{a f f}_{n}(\mathbb{K})$. Ausserdem ist $\mathfrak{g} \mathfrak{l}_{n}(\mathbb{K})$ eine Unter-Liealgebra in $\mathfrak{a f f}(\mathbb{K})$. Also ist $\mathfrak{a f f}{ }_{n}(\mathbb{K})= \mathfrak{g} \mathfrak{l}_{n}(\mathbb{K}) \ltimes \mathfrak{t r a n s}_{n}(\mathbb{K})$. Für die Dimensionen ergibt sich\\
+$\operatorname{dim}_{\mathbb{K}} \mathfrak{a f f}{ }_{n}(\mathbb{K})=\operatorname{dim}_{\mathbb{K}} \mathfrak{g} \mathfrak{l}_{n}(\mathbb{K})+\operatorname{dim}_{\mathbb{K}} \mathfrak{t r a n s}_{n}(\mathbb{K})=n^{2}+n=n(n+1)$\\
+und somit
+
+$$
+\operatorname{dim}_{\mathbb{R}} \operatorname{Aff}_{n}(\mathbb{K})=n(n+1) \operatorname{dim}_{\mathbb{R}} \mathbb{K}
+$$
+
+(4) $\mathrm{UT}_{n}(\mathbb{K})$ die invertierbaren oberen Dreiecksmatrizen. Dann ist $\mathfrak{u t}_{n}(\mathbb{K})$ die Menge aller oberen Dreiecksmatrizen. Es ist
+
+$$
+\operatorname{dim} \mathrm{UT}_{n}(\mathbb{K})=\binom{n+1}{2} \operatorname{dim}_{\mathbb{R}} \mathbb{K}
+$$
+
+(5) $\operatorname{SUT}_{n}(\mathbb{K})$ die oberen Dreiecksmatrizen mit Einsen auf der Diagonale. Dann ist $\mathfrak{s u t}_{n}(\mathbb{K})$ die Menge der strikt oberen Dreiecksmatrizen. Es ist
+
+$$
+\operatorname{dim} \operatorname{SUT}_{n}(\mathbb{K})=\operatorname{dim}_{\mathbb{K}} \mathfrak{s u t}(\mathbb{K}) \cdot \operatorname{dim}_{\mathbb{R}} \mathbb{K}=\binom{n}{2} \operatorname{dim}_{\mathbb{R}} \mathbb{K}
+$$
+
+(6) $\mathrm{O}(n)=\left\{A \in \mathrm{GL}_{n}(\mathbb{R}): A^{t} A=\mathrm{Id}\right\}$ orthogonale Gruppe. Ist $\alpha:(-\epsilon, \epsilon) \rightarrow G$ mit $\alpha(0)=\mathrm{Id}$, so gilt
+
+$$
+0=\left.\frac{d}{d t}\right|_{t=0} \alpha(t)^{T} \alpha(t)=\alpha^{\prime}(0)^{T}+\alpha^{\prime}(0)
+$$
+
+also ist $\alpha^{\prime}(0)$ schiefsymmetrisch. Ist umgekehrt $A$ schiefsymmetrisch, so setze $\alpha(t)=\exp (t A)$. Dann ist
+
+$$
+\alpha(t)^{T} \alpha(t)=\exp \left(t A^{T}\right) \exp (t A)=\exp (-t A) \exp (t A)=\mathrm{Id}
+$$
+
+Es folgt
+
+$$
+\mathfrak{o}(n)=\left\{A \in \mathfrak{g} \mathfrak{l}_{n}(\mathbb{R}): A^{T}=-A\right\} .
+$$
+
+Wegen Stetigkeit gilt sogar $\operatorname{det} \alpha(t)=1$ für alle $t$, deswegen ist $\mathfrak{s o}(n)=\mathfrak{o}(n)$. Es folgt
+
+$$
+\operatorname{dim} \mathrm{SO}(n)=\operatorname{dim} \mathrm{O}(n)=\binom{n}{2}
+$$
+
+(7) $\mathrm{U}(n)=\left\{A \in \mathrm{GL}_{n}(\mathbb{C}): A^{*} A=\mathrm{Id}\right\}$ unitäre Gruppe. Wie oben berechnet man
+
+$$
+\mathfrak{u}(n)=\left\{A \in \mathfrak{g} \mathfrak{l}_{n}(\mathbb{C}): A^{*}=-A\right\}
+$$
+
+das sind die hermitesch schiefsymmetrischen Matrizen. Man beachte, dass $\mathfrak{u}(n)$ kein komplexer Unterraum von $M_{n}(\mathbb{C})$ ist. Es gilt
+
+$$
+\operatorname{dim} \mathrm{U}(n)=\operatorname{dim} \mathfrak{u}(n)=n^{2}
+$$
+
+(8) $\mathrm{SU}(n)=\left\{A \in \mathrm{GL}_{n}(\mathbb{C}): A^{*} A=\mathrm{Id}, \operatorname{det} A=1\right\}$ spezielle unitäre Gruppe. Es ist
+
+$$
+\mathfrak{s} \mathfrak{u}(n)=\left\{A \in \mathfrak{g} \mathfrak{l}_{n}(\mathbb{C}): A^{*}=-A, \operatorname{tr} A=0\right\}
+$$
+
+und
+
+$$
+\operatorname{dim} \mathrm{SU}(n)=\operatorname{dim} \mathfrak{s u}(n)=n^{2}-1
+$$
+
+Definition 43. Sei $\mathfrak{g}$ eine Liealgebra über $\mathbb{R}, \mathfrak{g}^{\prime}$ eine Liealgebra über $\mathbb{C}$. Ist $\mathfrak{g} \leq \mathfrak{g}^{\prime}$ eine $\mathbb{R}$-Lieunteralgebra und $\operatorname{dim}_{\mathbb{C}} \mathfrak{g}^{\prime}=\operatorname{dim}_{\mathbb{R}} \mathfrak{g}$, so heisst $\mathfrak{g}^{\prime}$ Komplexifizierung von $\mathfrak{g}$.
+
+Bemerkung: $\mathfrak{g}^{\prime}$ ist bis auf Isomorphie eindeutig, nämlich $\mathfrak{g}^{\prime}=\mathfrak{g} \otimes \mathbb{C}$. Wir schreiben $\mathfrak{g}_{\mathbb{C}}$ für die Komplexifizierung.
+
+Beispiele.\\
+(1) $\mathfrak{g} \mathfrak{l}_{n}(\mathbb{R})_{\mathbb{C}}=\mathfrak{g} \mathfrak{l}_{n}(\mathbb{C})$.\\
+(2) $\mathfrak{u}(n)_{\mathbb{C}}=\mathfrak{g} \mathfrak{l}_{n}(\mathbb{C})$.\\
+(3) $\mathfrak{s} \mathfrak{l}_{n}(\mathbb{C})=\mathfrak{s} \mathfrak{l}_{n}(\mathbb{C})$.\\
+(4) $\mathfrak{s u}(n)_{\mathbb{C}}=\mathfrak{s} \mathfrak{l}_{n}(\mathbb{C})$.
+
+Allgemein gilt: Ist $\mathfrak{g} \leq \mathfrak{u}(n)$, so besitzt $\mathfrak{g}$ eine Komplexifizierung $\mathfrak{g}_{\mathbb{C}} \leq \mathfrak{g} \mathfrak{l}_{n}(\mathbb{C})$. Ist $\mathfrak{g} \leq \mathfrak{s} \mathfrak{u}(n)$, so besitzt $\mathfrak{g}$ eine Komplexifizierung $\mathfrak{g}_{\mathbb{C}} \leq \mathfrak{s} \mathfrak{l}_{n}(\mathbb{C})$.
+
+Definition 44. Sei $G \leq H$ eine Lieuntergruppe. Ist $\mathfrak{h}=\mathfrak{g}_{\mathbb{C}}$, so heisst $H$ die Komplexifizierung von $G$ und $G$ heisst reelle Form von $H$.
+
+Beispiele.\\
+(1) $\mathrm{GL}_{n}(\mathbb{C})$ besitzt reelle Formen $\mathrm{U}(n)$ und $\mathrm{GL}_{n}(\mathbb{R})$.\\
+(2) $\mathrm{SL}_{n}(\mathbb{C})$ besitzt reelle Formen $\mathrm{SU}(n)$ und $\mathrm{SL}_{n}(\mathbb{R})$.
+
+
+
+\pagebreak
+
+
+\section{Liegruppen}
+
+Definition 45. Sei $G$ eine glatte Mannigfaltigkeit, versehen mit einer Gruppenstruktur, so dass die Multiplikation $G \times G \rightarrow G$ und die Inversenbildung $G \rightarrow G$ glatte Abbildungen sind. Dann heisst $G$ eine Liegruppe.
+
+Definition 46. Ist $H \subset G$ eine abgeschlossene Untergruppe, die auch eine Untermannigfaltigkeit ist, so heisst $H$ eine Lie-Untergruppe. Dann ist auch $H$ eine Liegruppe.
+
+Lemma 47. Für $g \in G$ setze
+
+$$
+L_{g}: G \rightarrow G, x \mapsto g x, \quad R_{g}: G \rightarrow G, x \mapsto x g, \chi_{g}: G \rightarrow G, x \mapsto g x g^{-1}
+$$
+
+(Links- und Rechtsmultiplikation sowie Konjugation). Dann sind $L_{g}, R_{g}, \chi_{g}$ Diffeomorphismen mit Inversen $L_{g}^{-1}=L_{g^{-1}}, R_{g}^{-1}=R_{g^{-1}}, \chi_{g}^{-1}=\chi_{g^{-1}}$.
+
+Beweis. Da $\{g\}$ eine 0 dimensionale Untermannigfaltigkeit ist, ist $\{g\} \times G \subset G \times G$ eine Untermannigfaltigkeit. $L_{g}$ ist die Einschränkung von mult auf $\{g\} \times G$ und somit glatt. Da $L_{g}^{-1}=L_{g^{-1}}$ auch glatt ist, ist $L_{g}$ ein Diffeomorphismus. Analog für $R_{g}$ und $\chi_{g}$.
+
+
+
+Sei $G$ eine Liegruppe und $e$ das Einselement. Wir möchten $\mathfrak{g}:=T_{e} G$ mit einer Liealgebrastruktur versehen. Dazu sei $\chi(G)$ die Menge der glatten Vektorfelder auf $G$, d.h. Abbildungen $X$, die jedem Punkt $g \in G$ einen Tangentialvektor $X_{g} \in T_{g} G$ zuordnen, und die (bzgl. Karten) glatte Koordinaten haben.
+
+Definition 48. $X \in \chi(G)$ heisst linksinvariant, wenn $d L_{h}(X)= X$ für alle $h \in G$, d.h. $X_{h g}=d L_{h}\left(X_{g}\right)$ für alle $g, h \in G$. $\chi_{l}(G)$ ist die Menge der linksinvarianten Vektorfelder.
+
+Lemma 49. Die Einschränkung $r: \chi_{l}(G) \rightarrow \mathfrak{g}, X \mapsto X_{e}$ ist ein Vektorraumisomorphismus.
+
+Beweis. Injektivität: ist $X_{e}=0$, so ist $X_{g}=X_{g e}=d L_{g}\left(X_{e}\right)=0$ für alle $g$.
+
+Surjektivität: Sei $v \in \mathfrak{g}$. Definiere $X$ durch $X_{g}=d L_{g}(v)$. Dann ist $X \in \chi_{l}(G)$, denn $X_{h g}=d L_{h g}(v)=d L_{h} \circ d L_{g}(v)=d L_{h}\left(X_{g}\right)$.
+
+
+
+Ist $X \in \chi(G)$ ein Vektorfeld und $f \in C^{\infty}(G)$ eine glatte Funktion, so ist $X f(p):=X_{p}(f)$ eine glatte Funktion auf $G$. Die Abbildung $X: C^{\infty}(G) \rightarrow C^{\infty}(G), f \mapsto X f$ ist $\mathbb{R}$-linear und erfüllt die Leibnizregel
+
+$$
+X(f g)=X(f) g+f X(g), \quad f, g \in C^{\infty}(G)
+$$
+
+Man sagt auch, dass $X$ eine Derivation ist. Umgekehrt ist jede Derivation von dieser Gestalt.
+
+Definition 50. Sind $X, Y \in \chi(G)$, so auch $[X, Y]$, wobei $[X, Y] f:= X(Y f)-Y(X f)$ die Lieklammer von $X$ und $Y$ ist.
+
+Beweis. $\mathbb{R}$-Linearität ist klar. Es gilt
+
+$$
+\begin{aligned}
+{[X, Y](f g)=} & X(Y(f g))-Y(X(f g)) \\
+= & X(Y(f) g+f Y(g))-Y(X(f) g+f X(g)) \\
+= & X(Y f) g+Y(f) X(g)+X(f) Y(g)+f X(Y g) \\
+& -Y(X f) g-X(f) Y(g)-Y(f) X(g)-f Y(X g) \\
+= & {[X, Y](f) \cdot g+f \cdot[X, Y](g) }
+\end{aligned}
+$$
+
+
+Lemma 51. 
+
+Sind $X, Y$ linksinvariant, so auch $[X, Y]$.
+
+Beweis. $X$ ist linksinvariant genau dann, wenn für jedes $f \in C^{\infty}(G)$ und jedes $g \in G$
+
+$$
+X\left(f \circ L_{g}\right)=X(f) \circ L_{g}
+$$
+
+Sind $X, Y$ linksinvariant, so ist
+
+$$
+\begin{aligned}
+{[X, Y]\left(f \circ L_{g}\right) } & =X\left(Y\left(f \circ L_{g}\right)\right)-Y\left(X\left(f \circ L_{g}\right)\right) \\
+& =X\left(Y(f) \circ L_{g}\right)-Y\left(X(f) \circ L_{g}\right) \\
+& =X(Y f) \circ L_{g}-Y(X f) \circ L_{g} \\
+& =[X, Y](f) \circ L_{g}
+\end{aligned}
+$$
+
+Definition 52. $\mathfrak{g} \cong \chi_{l}(G)$, versehen mit der Lieklammer $[X, Y]$, heisst Liealgebra von $G$.
+
+Zur Erinnerung: die Abbildung $\chi_{g}: G \rightarrow G, x \mapsto g x g^{-1}$ ist eine glatte Abbildung und es gilt $\chi_{g}(e)=e$.
+
+Definition 53. Das Differential $\operatorname{Ad}_{g}:=\left.d \chi_{g}\right|_{e}: \mathfrak{g} \rightarrow \mathfrak{g}$ heisst adjungierte Operation von $g$ auf $\mathfrak{g}$. Die induzierte Abbildung $G \rightarrow \operatorname{GL}(\mathfrak{g}), g \mapsto \operatorname{Ad}_{g}$ heisst adjungierte Darstellung von $G$ auf $\mathfrak{g}$.
+
+Definition 54. Eine Abbildung $\phi: G \rightarrow H$ zwischen Liegruppen heisst Liegruppenhomomorphismus, wenn $\phi$ glatt ist und ein Gruppenhomomorphismus.
+
+SATZ 55. Ist $\phi$ ein Liegruppenhomomorphismus, so ist $\left.d \phi\right|_{e}: \mathfrak{g} \rightarrow \mathfrak{h}$ ein Liealgebrahomomorphismus.
+
+Beweis. Analog zum Fall von Matrixgruppen.
+
+
+Lemma 56. $\mathrm{GL}_{n} \mathbb{K}$ und $\mathrm{SL}_{n} \mathbb{K}$ sind Liegruppen.
+
+Beweis. 
+
+(1) $\mathrm{GL}_{n} \mathbb{K} \subset \mathbb{K}^{n^{2}}$ ist offen, also eine Untermannigfaltigkeit.
+
+(2) $\mathrm{SL}_{n} \mathbb{K}=\operatorname{det}^{-1}(1)$, wobei det : $\mathrm{GL}_{n} \mathbb{K} \rightarrow \mathbb{K}$ glatt ist. Wir müssen zeigen, dass 1 ein regulärer Wert ist, d.h. dass $\left.d \operatorname{det}\right|_{A}$ : $T_{A} \mathrm{GL}_{n} \mathbb{K} \rightarrow \mathbb{K}$ für jedes $A \in \mathrm{SL}_{n} \mathbb{K}$ surjektiv ist.
+
+Sei $\alpha:(-\epsilon, \epsilon) \rightarrow \mathrm{GL}_{n} \mathbb{K}$ mit $\alpha(0)=A$. Setze $\alpha_{0}(t):= A^{-1} \alpha(t)$, dann ist $\alpha_{0}(0)=$ Id. Es gilt
+
+$$
+\begin{aligned}
+\left.d \operatorname{det}\right|_{A}\left(\alpha^{\prime}(0)\right) & =\left.\frac{d}{d t}\right|_{t=0} \operatorname{det} \alpha(t) \\
+& =\left.\frac{d}{d t}\right|_{t=0} \operatorname{det} A \alpha_{0}(t) \\
+& =\left.\operatorname{det} A \frac{d}{d t}\right|_{t=0} \operatorname{det} \alpha_{0}(t) \\
+& =\operatorname{det} A \cdot \operatorname{tr} \alpha_{0}^{\prime}(0)
+\end{aligned}
+$$
+
+Wählt man $\alpha$ derart, dass $\operatorname{tr} \alpha_{0}^{\prime}(0) \neq 0$, so folgt die Behauptung.
+
+Sei $G \leq \mathrm{GL}_{n}(\mathbb{R})$ eine Matrixuntergruppe. Für $r \leq \frac{1}{2}$ ist exp injektiv auf 
+$$N_{M_{n}(\mathbb{R})}(0, r)=\left\{C \in M_{n}(\mathbb{R}):\|C\|<r\right\}$$ 
+Also gibt es für $A, B \in M_{n}(\mathbb{R})$ mit $\|A\|,\|B\|<r$ ein eindeutiges $C \in M_{n}(\mathbb{R})$ mit $\exp (A) \exp (B)=\exp (C)$. Es gilt $\|C\|<\frac{1}{2}$. Das Ziel ist, $C$ nur mittels iterierter Lieklammern zu berechnen. In diesem Abschnitt bestimmen wir die ersten beiden Terme von $C$, später wird die CBH-Formel bewiesen, die alle Terme beinhaltet.
+
+Satz 57. 
+
+Für $A, B \in M_{n}(\mathbb{R})$ mit $\|A\|,\|B\|<\frac{1}{2}$ gilt
+$$
+\exp A \exp B=\exp (A+B+R)
+$$
+mit
+$$
+\|R\| \leq 17(\|A\|+\|B\|)^{2}
+$$
+sowie
+$$
+\exp A \exp B=\exp \left(A+B+\frac{1}{2}[A, B]+S\right)
+$$
+mit $\|S\| \leq 65(\|A\|+\|B\|)^{3}$.
+
+
+
+Beweis. 
+
+Für $X \in M_{n}(\mathbb{R})$ schreibe $\exp (X)=\operatorname{Id}+X+R_{1}(X)$. Dann ist
+
+$$
+R_{1}(X)=\sum_{k=2}^{\infty} \frac{1}{k!} X^{k}
+$$
+
+also $\left\|R_{1}(X)\right\| \leq\|X\|^{2} \sum_{k=2}^{\infty} \frac{1}{k!}\|X\|^{k-2}$. Für $\|X\|<1$ gilt
+
+$$
+\left\|R_{1}(X)\right\| \leq\|X\|^{2} \sum_{k=2}^{\infty} \frac{1}{k!}=\|X\|^{2}(e-2)<\|X\|^{2} .
+$$
+
+Nun schreiben wir
+
+$$
+\exp (C)=\exp (A) \exp (B)=\mathrm{Id}+A+B+R_{1}(A, B)
+$$
+
+mit
+
+$$
+R_{1}(A, B)=\sum_{k=2}^{\infty} \frac{1}{k!} \sum_{r=0}^{k}\binom{k}{r} A^{r} B^{k-r}
+$$
+
+Dann ist für $\|A\|,\|B\|<\frac{1}{2}$
+
+$$
+\begin{aligned}
+\left\|R_{1}(A, B)\right\| & \leq \sum_{k=2}^{\infty} \frac{1}{k!} \sum_{r=0}^{k}\binom{k}{r}\|A\|^{r}\|B\|^{k-r} \\
+& =\sum_{k=2}^{\infty} \frac{1}{k!}(\|A\|+\|B\|)^{k} \\
+& =(\|A\|+\|B\|)^{2}(e-2) \\
+& <(\|A\|+\|B\|)^{2}
+\end{aligned}
+$$
+
+Es folgt
+
+$$
+I+C+R_{1}(C)=\exp C=\exp A \exp B=I+A+B+R_{1}(A, B)
+$$
+
+also
+
+$$
+C=A+B+R_{1}(A, B)+R_{1}(C)
+$$
+
+Einsetzen der bewiesenen Ungleichungen liefert
+
+$$
+\|C\| \leq\|A\|+\|B\|+(\|A\|+\|B\|)^{2}+\|C\|^{2} \leq 2(\|A\|+\|B\|)+\frac{1}{2}\|C\|,
+$$
+
+wobei wir $\|A\|,\|B\|,\|C\|<\frac{1}{2}$ benutzt haben. Insgesamt finden wir $\|C\| \leq 4(\|A\|+\|B\|)$. Einsetzen in (1) liefert
+
+$$
+\begin{aligned}
+\|C-A-B\| & \leq\left\|R_{1}(A, B)\right\|+\left\|R_{1}(C)\right\| \\
+& \leq(\|A\|+\|B\|)^{2}+16(\|A\|+\|B\|)^{2} \\
+& =17(\|A\|+\|B\|)^{2}
+\end{aligned}
+$$
+
+Das liefert die erste Behauptung. Nun schreiben wir $\exp C=I+ C+\frac{C^{2}}{2}+R_{2}(C)$ mit $R_{2}(C)=\sum_{k=3}^{\infty} \frac{1}{k!} C^{k}$. Dann ist
+
+$$
+\left\|R_{2}(C)\right\| \leq\|C\|^{2}\left(e-1-1-\frac{1}{2}\right)<\frac{1}{3}\|C\|^{3},
+$$
+
+denn $\|C\|<1$.\\
+Setze $S:=C-A-B-\frac{1}{2}[A, B]$ und $T=S+\frac{1}{2}\left(C^{2}-(A+B)^{2}\right)+R_{2}(C)$. Dann ist
+
+$$
+\begin{aligned}
+\exp C & =I+C+\frac{C^{2}}{2}+R_{2}(C) \\
+& =I+A+B+\frac{1}{2}[A, B]+S+\frac{C^{2}}{2}+R_{2}(C) \\
+& =I+A+B+\frac{1}{2}[A, B]+\frac{1}{2}(A+B)^{2}+T \\
+& =I+A+B+\frac{1}{2}\left(A^{2}+2 A B+B^{2}\right)+T
+\end{aligned}
+$$
+
+Andererseits ist
+
+$$
+\exp A \exp B=I+A+B+\frac{1}{2}\left(A^{2}+2 A B+B^{2}\right)+R_{2}(A, B)
+$$
+
+mit
+
+$$
+R_{2}(A, B)=\sum_{k=3}^{\infty} \frac{1}{k!} \sum_{r=0}^{k}\binom{k}{r} A^{r} B^{k-r} .
+$$
+
+Es folgt $\left\|R_{2}(A, B)\right\| \leq \frac{1}{3}(\|A\|+\|B\|)^{3}$.\\
+
+
+Setzen wir alle Ungleichungen zusammen, so bekommen wir
+$$
+\begin{aligned}
+& \exp C=I+A+B+\frac{1}{2}\left(A^{2}+2 A B+B^{2}\right)+T \\
+& \exp C=\exp A \exp B=I+A+B+\frac{1}{2}\left(A^{2}+2 A B+B^{2}\right)+R_{2}(A, B)
+\end{aligned}
+$$
+d.h. $T=R_{2}(A, B)$. Also ist $S=R_{2}(A, B)+\frac{1}{2}\left((A+B)^{2}-C^{2}\right)-R_{2}(C)$.
+Damit bekommen wir
+$$
+\begin{aligned}
+\|S\| \leq & \left\|R_{2}(A, B)\right\|+\frac{1}{2}\|(A+B)(A+B-C)+(A+B-C) C\|+\left\|R_{2}(C)\right\| \\
+\leq & \frac{1}{3}(\|A\|+\|B\|)^{3}+\frac{1}{2}(\|A\|+\|B\|+\|C\|)\|A+B-C\|+\frac{1}{3}\|C\|^{3} \\
+\leq & \frac{1}{3}(\|A\|+\|B\|)^{3}+\frac{5}{2}(\|A\|+\|B\|) \cdot 17(\|A\|+\|B\|)^{2} \\
+& +\frac{1}{3}(4\|A\|+\|B\|)^{3} \\
+\leq & 65(\|A\|+\|B\|)^{3} .
+\end{aligned}
+$$
+
+
+
+Theorem 58. 
+
+Für $U, V \in M_{n}(\mathbb{R})$ gelten die folgenden Formeln:
+
+(1) $\exp (U+V)=\lim _{r \rightarrow \infty}\left(\exp \left(\frac{1}{r} U\right) \exp \left(\frac{1}{r} V\right)\right)^{r}$ (Trotterproduktformel)\\
+
+(2) $\exp [U, V]=\lim _{r \rightarrow \infty}\left(\exp \left(\frac{1}{r} U\right) \exp \left(\frac{1}{r} V\right) \exp \left(-\frac{1}{r} U\right) \exp \left(-\frac{1}{r} V\right)\right)^{r^{2}}$ (Kommutatorformel)\\
+
+
+Beweis. 
+
+(1) Setze $A:=\frac{1}{r} U, B:=\frac{1}{r} V$. Für große $r$ ist $\|A\|,\|B\|< \frac{1}{2}$. Dann ist $\exp \frac{1}{r} U \exp \frac{1}{r} V=\exp C_{r}$ mit
+$$
+\left\|C_{r}-\frac{U+V}{r}\right\| \leq \frac{17\|U\|^{2}+\|V\|^{2}}{r^{2}}
+$$
+Es folgt $\left\|r C_{r}-(U+V)\right\| \rightarrow 0$, also $r C_{r} \rightarrow U+V$. Wegen $\exp \left(r C_{r}\right)=\left(\exp C_{r}\right)^{r}$ und Stetigkeit von exp folgt
+$$\lim _{r \rightarrow \infty}\left(\exp \left(\frac{1}{r} U\right) \exp \left(\frac{1}{r} V\right)\right)^{r}=\lim _{r \rightarrow \infty}\left(\exp C_{r}\right)^{r}=\lim _{r \rightarrow \infty} \exp \left(r C_{r}\right)=\exp (U+V)$$
+
+(2) Es ist $C_{r}=A+B+\frac{1}{2}[A, B]+S=\frac{1}{r}(U+V)+\frac{1}{r^{2}} \frac{1}{2}[U, V]+S_{r}$ wobei $\left\|S_{r}\right\| \leq 65 \frac{\|U\|+\|V\|)^{2}}{r^{2}}$.
+
+Ersetzt man $r$ durch $-r$, so folgt $\exp \left(-\frac{1}{r} U\right) \exp \left(-\frac{1}{r} V\right)=\exp C_{r}^{\prime}$ mit $C_{r}^{\prime}=-\frac{1}{r}(U+V)+\frac{1}{2 r^{2}}[U, V]+S_{r}^{\prime}$ mit $\left\|S_{r}^{\prime}\right\| \leq 65 \frac{\|U\|+\|V\|)^{2}}{r^{2}}$.
+
+Es folgt
+$$
+\exp \left(\frac{1}{r} U\right) \exp \left(\frac{1}{r} V\right) \exp \left(-\frac{1}{r} U\right) \exp \left(-\frac{1}{r} V\right)=\exp C_{r} \exp C_{r}^{\prime}
+$$
+Wir schreiben nun $\exp C_{r} \exp C_{r}^{\prime}=\exp E_{r}$ und $T_{r}:=E_{r}-C_{r}- C_{r}^{\prime}-\frac{1}{2}\left[C_{r}, C_{r}^{\prime}\right]$. Dann ist
+$$
+E_{r}=\frac{1}{r}[U, V]+\frac{1}{2}\left[C_{r}, C_{r}^{\prime}\right]+S_{r}+S_{r}^{\prime}+T_{r}
+$$
+Weiterhin gilt
+$$
+\begin{aligned}
+{\left[C_{r}, C_{r}^{\prime}\right]=} & {\left[\frac{1}{r}(U+V)+\frac{1}{2 r^{2}}[U, V]+S_{r},-\frac{1}{r}(U+V)+\frac{1}{2 r^{2}}[U, V]+S_{r}^{\prime}\right] } \\
+= & \frac{1}{r^{3}}[U+V,[U, V]]+\frac{1}{r}\left[U+V,-S_{r}+S_{r}^{\prime}\right] \\
+& +\frac{1}{2 r^{2}}\left[[U, V], S_{r}^{\prime}-S_{r}\right]+\left[S_{r}, S_{r}^{\prime}\right]
+\end{aligned}
+$$
+Jeder dieser Terme ist in $O\left(\frac{1}{r^{2}}\right)$. Setzt man $Q_{r}:=r^{2} E_{e}-[U, V]$, so folgt
+$$
+\left\|Q_{r}\right\|=r^{2}\left\|E_{r}-\frac{[U, V]}{r^{2}}\right\|=r^{2}\left\|\frac{1}{2}\left[C_{r}, C_{r}^{\prime}\right]+S_{r}+S_{r}^{\prime}+T_{r}\right\|=O\left(\frac{1}{r}\right) \rightarrow 0 .
+$$
+Also ist
+$$
+\exp \left(E_{r}\right)^{r^{2}}=\exp \left(Q_{r}+[U, V]\right) \rightarrow \exp ([U, V])
+$$
+
+
+
+Korollar 59. 
+
+Für $A, B \in M_{n}(\mathbb{C})$ gilt $\operatorname{det} \exp A=\exp \operatorname{tr} A$.
+
+
+Beweis. 
+
+Für $U, V \in M_{n}(\mathbb{C})$ gilt
+$$
+\begin{aligned}
+\operatorname{det} \exp (U+V) & =\operatorname{det} \lim _{r \rightarrow \infty}\left(\exp \left(\frac{1}{r} U \exp \frac{1}{r} V\right)\right)^{r} \\
+& =\lim \operatorname{det}\left(\exp \left(\frac{1}{r} U\right)^{r}\left(\exp \frac{1}{r} V\right)\right)^{r} \\
+& =\operatorname{det} \exp U \cdot \operatorname{det} \exp V
+\end{aligned}
+$$
+Allgemeiner folgt
+$$
+\operatorname{det} \exp \left(U_{1}+\ldots+U_{k}\right)=\operatorname{det} \exp U_{1} \cdots \cdots \operatorname{det} \exp U_{k}
+$$
+Es reicht daher aus, die Identität $\operatorname{det} \exp A=\exp \operatorname{det} A$ für eine Basismatrix $z E^{r s}, z \in \mathbb{C}$ zu zeigen. Für $r \neq s$ ist $\left(E^{r s}\right)^{2}=0$ und für $r=s$ ist $\left(E^{r s}\right)^{2}=E^{r s}$. Für $z \in \mathbb{C}$ folgt daher
+$$
+\operatorname{det} \exp z E^{r s}= \begin{cases}\operatorname{det}\left(I+z E^{r s}\right) & r \neq s \\ \operatorname{det}\left(\left(e^{z}-1\right) E^{r s}+I\right) & r=s\end{cases}
+$$
+Andererseits ist
+$$
+\operatorname{tr} z E^{r s}= \begin{cases}0 & r \neq s \\ z & r=s\end{cases}
+$$
+und somit folgt $\exp \operatorname{tr} z E^{r s}=\operatorname{det} \exp z E^{r s}$.
+
+\pagebreak
+
+Sei $G \leq \mathrm{GL}_{n}(\mathbb{R})$ eine Matrixgruppe und $\mathfrak{g}=T_{I d} G$ die zugehörige Liealgebra. Unser Ziel ist es zu zeigen, dass $G$ eine Liegruppe ist und $\mathfrak{g}$ die zugehörige Liealgebra im Sinne von Liegruppen/algebren.
+
+Lemma 60. Sei
+
+$$
+\overline{\mathfrak{g}}:=\left\{A \in M_{n}(\mathbb{R}): \exp (t A) \in G \forall t\right\}
+$$
+
+Dann ist $\overline{\mathfrak{g}}$ eine Lieunteralgebra von $\mathfrak{g}$. Später werden wir sogar $\overline{\mathfrak{g}}=\mathfrak{g}$ zeigen.
+
+Beweis. (1) Sei $A \in \overline{\mathfrak{g}}, \gamma(t)=\exp (t A)$. Dann ist $\gamma(t) \in G$ für alle $t$ und somit $A=\gamma^{\prime}(0) \in T_{I d} G=\mathfrak{g}$. Also ist $\overline{\mathfrak{g}} \subset \mathfrak{g}$.\\
+(2) Zu zeigen: $\overline{\mathfrak{g}}$ ist eine Lieunteralgebra von $M_{n}(\mathbb{R})$.
+
+Ist $A \in \overline{\mathfrak{g}}$, so auch $s A$ für alle $s \in \mathbb{R}$, denn $\exp (t(s A))= \exp ((t s) A)$. Seien $U, V \in \overline{\mathfrak{g}}$. da $G$ eine Gruppe ist, ist für jedes $r \in \mathbb{N}$
+
+$$
+\left(\exp \left(\frac{1}{r} U\right) \exp \left(\frac{1}{r} V\right)\right)^{r} \in G
+$$
+
+und
+
+$$
+\left(\exp \left(\frac{1}{r} U\right) \exp \left(\frac{1}{r} V\right) \exp \left(-\frac{1}{r} U\right) \exp \left(-\frac{1}{r} V\right)\right)^{r^{2}} \in G
+$$
+
+Bildet man den Grenzwert für $t \rightarrow \infty$, so folgt
+$$
+\exp (t U+t V)=\lim _{r \rightarrow \infty}\left(\exp \frac{1}{r} t U \exp \frac{1}{r} t V\right)^{r} \in G
+$$
+und
+$$\exp (t[U, V])=\exp [t U, V]=\lim _{r \rightarrow \infty}\left[\exp \frac{1}{r} t U \exp \frac{1}{r} V \exp \left(-\frac{1}{r} t U\right) \exp \left(-\frac{1}{r} V\right)\right]^{r^{2}} \in G$$
+Es folgt, dass $\overline{\mathfrak{g}}$ unter Addition und Lieklammer abgeschlossen ist.
+
+
+
+Lemma 61. 
+
+Sei ( $A_{m}$ ) eine Folge in $G,\left(s_{m}\right)$ eine Folge in $\mathbb{R}$, so dass $\exp A_{m} \in G, A_{m} \rightarrow 0$ und $s_{m} A_{m} \rightarrow A \in M_{n}(\mathbb{R})$. Dann ist $A \in \overline{\mathfrak{g}}$.
+
+Beweis. 
+
+Für $t \in \mathbb{R}$ wähle $a_{m} \in \mathbb{Z}$ mit $\left|t s_{m}-a_{m}\right| \leq 1$. Dann ist
+$$
+\begin{aligned}
+\left\|a_{m} A_{m}-t A\right\| & \leq\left\|\left(a_{m}-t s_{m}\right) A_{m}\right\|+\left\|t s_{m} A_{m}-t A\right\| \\
+& =\underbrace{\left|a_{m}-t s_{m}\right|}_{\leq 1} \underbrace{\left\|A_{m}\right\|}_{\rightarrow 0}+|t| \underbrace{\left\|s A_{m}-A\right\|}_{\rightarrow 0} .
+\end{aligned}
+$$
+Es folgt $\lim _{m \rightarrow \infty} a_{m} A_{m}=t A$. Andererseits ist $\exp \left(a_{m} A_{m}\right)=\exp \left(A_{m}\right)^{a_{m}} \in G$, da $G$ eine Gruppe ist. Da $G$ abgeschlossen ist, folgt $\exp (t A)= \lim _{m \rightarrow \infty} \exp \left(a_{m} A_{m}\right) \in G$. Da $t$ beliebig war, folgt $A \in \overline{\mathfrak{g}}$.
+
+
+
+
+Theorem 62. 
+
+Jede Matrixgruppe ist eine Liegruppe und die zugehörigen Liealgebren sind die gleichen.
+
+
+Beweis. 
+
+(1) Wähle ein Vektorraumkomplement von $\overline{\mathfrak{g}} \subset M_{n}(\mathbb{R})$, d.h. einen Vektorraum $\mathfrak{m} \subset M_{n}(\mathbb{R})$ mit $\overline{\mathfrak{g}} \oplus \mathfrak{m}=M_{n}(\mathbb{R})$. Insbesondere gilt $\operatorname{dim} \mathfrak{m}=\operatorname{dim} M_{n}(\mathbb{R})-\operatorname{dim} \overline{\mathfrak{g}}, \mathfrak{m} \cap \overline{\mathfrak{g}}=\{0\}$. Jede Matrix $X \in M_{n}(\mathbb{R})$ lässt sich eindeutig zerlegen als $X= U+V, U \in \overline{\mathfrak{g}}, V \in \mathfrak{m}$.
+
+
+(2) Definiere $\Phi: M_{n}(\mathbb{R}) \rightarrow \mathrm{GL}_{n}(\mathbb{R}), U+V \mapsto \exp (U) \exp (V), U \in \overline{\mathfrak{g}}, V \in \mathfrak{m}$. Wir behaupten $\left.d \Phi\right|_{0}(A+B)=A+B, A \in \overline{\mathfrak{g}}, B \in \mathfrak{m}$.
+
+Wähle zunächst $A, B$ mit genügend kleiner Norm. Dann ist $\Phi(t(A+B))=\exp (t A) \exp (t B)=\exp C(t)$, wobei
+$$
+\left\|C(t)-t A-t B-\frac{t^{2}}{2}[A, B]\right\| \leq 65|t|^{3}(\|A\|+\|B\|)^{3}
+$$
+Nach Dreieecksungleichung folgt
+$$\|C(t)-t A-t B\| \leq \frac{t^{2}}{2}\left(\|[A, B]\|+130 t(\|A\|+\|B\|)^{3}\right)$$
+Ableiten nach $t$ bei $t=0$ liefert $\left.\frac{d}{d t}\right|_{t=0} \phi(t(A+B))=\left.\frac{d}{d t}\right|_{t=0} \exp C(t)= \left.\frac{d}{d t}\right|_{t=0} C(t)=A+B$. Wegen Linearität von $\left.d \Phi\right|_{0}$ folgt $\left.d \Phi\right|_{0}(A+ B)=A+B$ für alle $A \in \overline{\mathfrak{g}}, B \in \mathfrak{m}$.
+
+(3) Nach dem Satz über die Umkehrfunktion ist die Einschränkung von $\Phi$ auf eine kleine Umgebung $N_{M_{n}(\mathbb{R})}(0, \delta), \delta>0$ von 0 ein Diffeomorphismus auf sein Bild.
+
+(4) Wir behaupten, dass $\Phi$ eine offene Umgebung von 0 in $N_{M_{n}(\mathbb{R})}(0, \delta) \cap \overline{\mathfrak{g}}$ auf eine offene Umgebung von $I d$ in $G$ abbildet. Anderenfalls gibt es eine Folge von Elementen $U_{m} \in G$ mit $U_{m} \rightarrow 0, U_{m} \notin \Phi(\overline{\mathfrak{g}})$. Für große $m$ ist $U_{m} \in \Phi\left(N_{M_{n}(\mathbb{R})}(0, \delta)\right)$, also $U_{m}=\Phi\left(A_{m}+B_{m}\right)$ mit $A_{m} \in \overline{\mathfrak{g}}, B_{m} \in \mathfrak{m}$. Dann ist $B_{m} \neq 0, A_{m}, B_{m} \rightarrow 0$.
+Es gilt
+$$
+\exp B_{M}=\underbrace{\exp A_{m}}_{\in G} \cdot \underbrace{U_{m}}_{\in G} \in G
+$$
+Setze $\tilde{B}_{m}:=\frac{B_{m}}{\left\|B_{m}\right\|}$. Wegen $\left\|\tilde{B}_{m}\right\|=1$ gibt es eine konvergente Teilfolge, die o.E. wieder mit $\tilde{B}_{m}$ bezeichnet wird. Sei $\tilde{B}:= \lim _{m \rightarrow \infty} \tilde{B}_{m}$. Nach Lemma 61 (mit $s_{m}=\frac{1}{\left\|B_{m}\right\|}, A_{m}:=B_{m}$ folgt $B \in \overline{\mathfrak{g}}$. das ist ein Widerspruch, da $B \neq 0$ und $\overline{\mathfrak{g}} \cap \mathfrak{m}=\{0\}$.
+
+(5) Aus der Behauptung folgt, dass es eine offene Umgebung $N_{\overline{\mathfrak{g}}}\left(0, \delta_{1}\right)= N_{M_{n}(\mathbb{R})}\left(0, \delta_{1}\right) \cap \overline{\mathfrak{g}}$ gibt, die unter $\Phi$ auf eine offene Umgebung von $I d$ in $G$ abgebildet wird. Ist $A \in G$ beliebig, so benutze Linksmultiplikation, um die Karte $\Phi$ in den Punkt $A$ zu verschieben. Es folgt, dass $G \subset \mathrm{GL}_{n}(\mathbb{R})$ eine Untermannigfaltigkeit ist.
+
+(6) Nach Konstruktion ist die Dimension von $G$ (als Untermannigfaltigkeit) gleich der Dimension von $\overline{\mathfrak{g}}$. Somit ist
+$$
+\operatorname{dim} \mathfrak{g}=\operatorname{dim} T_{I d} G=\operatorname{dim} G=\operatorname{dim} \overline{\mathfrak{g}}
+$$
+und $\overline{\mathfrak{g}} \subset \mathfrak{g}$, also $\overline{\mathfrak{g}}=\mathfrak{g}$.
+
+
+
+
+Korollar 63. 
+
+Ist $G$ eine Matrixgruppe, so ist $\exp \mathfrak{g} \subset G$. $\exp$ ist ein lokaler Diffeomorphismus bei 0 , der eine Umgebung von 0 auf eine Umgebung von Id abbildet.
+
+Achtung: Im allgemeinen ist exp nicht surjektiv, z.B. ist exp : $\mathfrak{s} \mathfrak{l}(2, \mathbb{R}) \rightarrow \mathrm{SL}(2, \mathbb{R})$ nicht surjektiv.
+
+
+
+Theorem 64. 
+
+Eine Untergruppe einer Liegruppe ist eine Lieuntergruppe genau dann, wenn sie abgeschlossen ist.
+
+Beweis. Ähnlich wie voriger Beweis.
+
+
+Definition 65. 
+
+Sei SUT $_{n}:=\left\{\left(\begin{array}{ccc}1 & & * \\ & \ddots & \\ 0 & & 1\end{array}\right)\right\}$. Dann ist
+$$
+Z_{n}:=\left\{\left(\begin{array}{ccc}
+1 & 0 & m \\
+& \ddots & \\
+0 & & 1
+\end{array}\right), m \in \mathbb{Z}\right\}
+$$
+ein zu $\mathbb{N}$ isomorpher Normalteiler. Der Quotient Heis ${ }_{n}:=\mathrm{SUT}_{n} / Z_{n}$ heisst Heisenberggruppe. Versieht man $\mathrm{Heis}_{n}$ mit der Quotiententopologie, so wird $\mathrm{Heis}_{n}$ zu einer Liegruppe.
+
+
+
+Beispiel. 
+
+Für $n=3$ ist
+$$
+\mathrm{SUT}_{3}:=\left\{\left(\begin{array}{ccc}
+1 & x & t \\
+0 & 1 & y \\
+0 & 0 & 1
+\end{array}\right), x, y, t \in \mathbb{R}\right\}
+$$
+und
+$$
+\mathrm{Heis}_{3}=\left\{\left(\begin{array}{ccc}
+1 & x & t \\
+0 & 1 & y \\
+0 & 0 & 1
+\end{array}\right), x, y \in \mathbb{R}, t \in \mathbb{R} / \mathbb{Z}\right\}
+$$
+Die Liealgebra ist
+$$
+\mathfrak{H e i s}_{3}=\left\{\left(\begin{array}{ccc}
+0 & x & t \\
+0 & 0 & y \\
+0 & 0 & 0
+\end{array}\right), x, y, t \in \mathbb{R}\right\}
+$$
+mit der Lieklammer
+$$
+\left[\left(x_{1}, y_{1}, t_{1}\right),\left(x_{2}, y_{2}, t_{2}\right)\right]=\left(0,0, x_{1} y_{2}-y_{1} x_{2}\right)
+$$
+Die Multiplikation ist gegeben durch
+$$
+\left(x_{1}, y_{1}, t_{1}\right) \cdot\left(x_{2}, y_{2}, t_{2}\right)=\left(x_{1}+x_{2}, y_{1}+y_{2}, t_{1}+t_{2}+x_{1} y_{2}\right), x_{i}, y_{i} \in \mathbb{R}, t_{i} \in \mathbb{R} / \mathbb{Z} .
+$$
+
+
+
+SATZ 66. 
+
+Heis ${ }_{3}$ ist keine Matrixgruppe, d.h. es gibt keinen injektiven stetigen Homomorphismus $\phi: \mathrm{Heis}_{3} \rightarrow \mathrm{GL}_{m}(\mathbb{C})$.
+
+Beweis. 
+
+(1) Sei $\mathbb{T}:=\{z \in \mathbb{C}| | z \mid=1\}=S^{1}$ und $\rho: \mathbb{T} \rightarrow \mathrm{Heis}_{3}, e^{2 \pi i t} \mapsto\left[\left(\begin{array}{lll}1 & 0 & t \\ 0 & 1 & 0 \\ 0 & 0 & 1\end{array}\right)\right]$ Offensichtlich ist $\rho$ wohldefiniert. Das Bild von $\rho$ ist genau das Zentrum von Heis ${ }_{3}$, also alle Matrizen der Form $\left(\begin{array}{lll}1 & 0 & * \\ 0 & 1 & 0 \\ 0 & 0 & 1\end{array}\right)$.
+
+(2) Wähle $r \in \mathbb{R} \backslash \mathbb{Q}$ und setze $z_{0}:=e^{2 \pi i r} \in \mathbb{T}$. Dann ist die von $z_{0}$ erzeugte Untergruppe in $\mathbb{T}$ dicht. Sei $\lambda \in \mathbb{C}$ ein Eigenwert von $\phi\left(z_{0}\right)$ mit Eigendvektor $v$. da $\phi\left(z_{0}\right) \neq I d$ können wir $\lambda \neq 1$ annehmen. Da $z_{0}$ durch $z_{0}^{-1}$ ersetzt werden kann, können wir $|\lambda| \geq 1$ annehmen. Ist $|\lambda|>1$, so folgt $\phi\left(z_{0}^{k}\right) v=\phi\left(z_{0}\right)^{k} v=\lambda^{k} v$, also $\left\|\phi\left(z_{0}^{k}\right)\right\| \geq|\lambda|^{k}$. Aber die Funktion $z \mapsto\|\phi(z)\|$ ist stetig auf $S^{1}$, also beschränkt. Das ist ein Widerspruch, also muss $|\lambda|=1$ sein.
+
+(3) Für $g \in$ Heis $_{3}$ gilt
+$$
+\phi\left(z_{0}\right) \phi(g) v=\phi\left(z_{0} g\right) v=\phi\left(g z_{0}\right) v=\phi(g) \phi\left(z_{0}\right) v=\lambda \phi(g) v
+$$
+also ist $\phi(g) v$ ebenfalls Eigenvektor von $\phi\left(z_{0}\right)$ mit Eigenwert $\lambda$.
+
+
+(4) Setze $V_{\lambda}:=\left\{v \in \mathbb{C}^{m}: \exists k \geq 1,\left(\phi\left(z_{0}\right)-\lambda I d\right)^{k} v=0\right\}$. Dann ist $V_{\lambda}$ ein Vektorraum, der unter allen Operationen $\phi(g), g \in \mathrm{Heis}_{3}$ invariant ist. Sei $k_{0}$ maximal mit der Eigenschaft, dass es $v_{0} \in V_{\lambda}$ gibt mit $\left(\phi\left(z_{0}\right)-\lambda I d\right)^{k_{0}} v_{0}=0,\left(\phi\left(z_{0}\right)-\lambda I d\right)^{k_{0}-1} v_{0} \neq 0$. Ist $k_{0}>1$, so setze $u:=\left(\phi\left(z_{0}\right)-\lambda I d\right)^{k_{0}-2} v_{0}, v:=\left(\phi\left(z_{0}\right)-\right. \lambda I d)^{k_{0}-1} v_{0} \neq 0$.
+
+Dann ist
+$$
+\phi\left(z_{0}\right) u=\lambda u+v, \quad \phi\left(z_{0}\right) v=\lambda v
+$$
+Iterieren liefert $\phi\left(z_{0}^{k}\right) u=\lambda^{k} u+k \lambda^{k-1} v$ und es folgt $\left\|\phi\left(z_{0}^{k}\right) u\right\|= \left\|\lambda^{k} u+k \lambda^{k-1} v\right\|=\{\lambda u+k v \| \rightarrow \infty$. Das ist ein Widerspruch, denn $\|\phi(z) u\|, z \in \mathbb{T}$ ist beschränkt auf $\mathbb{T}$. Also ist $k_{0}=1$, d.h. $V_{\lambda}$ ist der Eigenraum zum Eigenwert $\lambda$.
+
+
+(5) Sei $d:=\operatorname{dim} V_{\lambda}$. Wählen wir eine Basis von $V_{\lambda}$, so liefert die Gruppenwirkung von $\mathrm{Heis}_{3}$ auf $V_{\lambda}$ einen stetigen Homomorphismus $\theta: \mathrm{Heis}_{3} \rightarrow \mathrm{GL}_{d}(\mathbb{C})$ mit $\theta\left(z_{0}\right)=\lambda I d$.
+
+
+(6) Es gilt
+$$
+\left[x_{1}, y_{1}, z_{1}\right]\left[x_{2}, y_{2}, z_{2}\right]\left[x_{1}, y_{1}, z_{1}\right]^{-1}\left[x_{2}, y_{2}, z_{2}\right]^{-1}=\left[0,0, e^{2 \pi i\left(x_{1} y_{2}-x_{2} y_{1}\right)}\right]
+$$
+d.h. jedes $z \in \mathbb{T}$ ist ein Kommutator, d.h. von der Form $z= g h g^{-1} h^{-1}$. Es folgt $\operatorname{det} \theta(z)=\operatorname{det} \theta(g) \theta(h) \theta\left(g^{-1}\right) \theta\left(h^{-1}\right)=1$.
+
+
+Da $\theta\left(z_{0}^{k}\right)=\lambda^{k} I d_{n}$ folgt wegen Stetigkeit $\theta(z)=\mu(z) I d_{d}$ mit $\mu: \mathbb{T} \rightarrow \mathbb{C}^{*}$ stetig und $\mu(z)^{d}=1$ wegen $\operatorname{det} \theta(z)=1$. Da $\mu(1)=1$ und $\mathbb{T}$ zusammenhängend ist, folgt $\mu(z)=1$ für alle $z \in \mathbb{T}$. Aber $\theta\left(z_{0}\right)=\lambda I d_{d}, \lambda \neq 1$, d.h. $\mu\left(z_{0}\right) \neq 1$, was ein Widerspruch ist.
+
+Bemerkung: Das Theorem von Peter-Weyl impliziert unter anderem, dass jede kompakte Liegruppe $G$ einen injektiven stetigen Gruppenhomomorphismus $\phi: G \rightarrow \mathrm{GL}_{n}(\mathbb{C})$ besitzt. Aber Heis ${ }_{3}$ ist nicht kompakt.
 
 
 

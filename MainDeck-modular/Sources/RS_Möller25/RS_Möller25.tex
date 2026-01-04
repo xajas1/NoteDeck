@@ -1935,21 +1935,64 @@ $$
 sodass $h(0, t)=a$ und $h(1, t)=b$ für alle $t \in I$ gilt und sodass $h(s, 0)=\gamma_{0}(s)$ und $h(s, 1)=\gamma_{1}(s)$ ist. $h$ wird Homotopie genannt.
 
 
+\begin{DEF}{AG-03-06}{Homotopie von Wegen}
+Sei \(X\) ein topologischer Raum und \(I=[0,1]\) das Einheitsintervall.
 
+\medskip
+\noindent
+Zwei Wege \(\gamma_0,\gamma_1:I\to X\), die beide denselben Anfangs- und Endpunkt besitzen,
+\[
+\gamma_0(0)=\gamma_1(0)=a, \qquad \gamma_0(1)=\gamma_1(1)=b,
+\]
+heißen \emph{homotop} (relativ zu den Endpunkten),
+wenn es eine stetige Abbildung
+\[
+h:I\times I\longrightarrow X,\qquad (s,t)\longmapsto h(s,t)
+\]
+gibt, sodass gilt:
+\[
+\begin{aligned}
+h(0,t)&=a, & h(1,t)&=b \quad &\text{für alle } t\in I,\\
+h(s,0)&=\gamma_0(s), & h(s,1)&=\gamma_1(s) \quad &\text{für alle } s\in I.
+\end{aligned}
+\]
+Die Abbildung \(h\) heißt \emph{Homotopie zwischen \(\gamma_0\) und \(\gamma_1\)}.
+
+\medskip
+\noindent
+Man schreibt in diesem Fall
+\[
+\gamma_0 \simeq \gamma_1 \quad (\text{rel } \{0,1\}).
+\]
+\end{DEF}
 
 
 Lemma 3.7 „Homotop sein" ist eine Äquivalenzrelation.
 
-Beweis: Die Homotopien $h(s, t):=\gamma(s)$ und $\widetilde{h}(s, t)=h(s, 1-t)$ beweisen Reflexivität und Symmetrie. Ist $h$ eine Homotopie zwischen $\gamma_{0}$ und $\gamma_{1}$ und $h_{2}$ eine Homotopie zwischen $\gamma_{1}$ und $\gamma_{2}$, so ist
+\begin{LEM}{AG-03-07}{Homotopie als Äquivalenzrelation}
+Die Relation „homotop sein“ auf der Menge der Wege in einem topologischen Raum \(X\)
+mit festen Endpunkten ist eine \emph{Äquivalenzrelation}.
+\medskip
+\noindent
+Das heißt, für alle Wege \(\gamma_0,\gamma_1,\gamma_2:[0,1]\to X\) mit
+\(\gamma_i(0)=a\) und \(\gamma_i(1)=b\) gilt:
+\begin{enumerate}
+  \item \emph{(Reflexivität)} \(\gamma_0 \simeq \gamma_0\),
+  \item \emph{(Symmetrie)} Aus \(\gamma_0 \simeq \gamma_1\) folgt \(\gamma_1 \simeq \gamma_0\),
+  \item \emph{(Transitivität)} Aus \(\gamma_0 \simeq \gamma_1\) und \(\gamma_1 \simeq \gamma_2\)
+        folgt \(\gamma_0 \simeq \gamma_2\).
+\end{enumerate}
+\end{LEM}
 
+Beweis: Die Homotopien $h(s, t):=\gamma(s)$ und $\widetilde{h}(s, t)=h(s, 1-t)$ beweisen Reflexivität und Symmetrie. Ist $h$ eine Homotopie zwischen $\gamma_{0}$ und $\gamma_{1}$ und $h_{2}$ eine Homotopie zwischen $\gamma_{1}$ und $\gamma_{2}$, so ist
 $$
 h(s, t)= \begin{cases}h_{1}(s, 2 t) & \text { für } \quad 0 \leq t \leq \frac{1}{2} \\ h_{2}(s, 2 t-1) & \text { für } \quad \frac{1}{2}<t \leq 1\end{cases}
 $$
+eine Homotopie zwischen $\gamma_{0}$ und $\gamma_{2}$. Man beachte die Stetigkeit der Abbildung $h$ bei $t=1 / 2$. 
 
-eine Homotopie zwischen $\gamma_{0}$ und $\gamma_{2}$. Man beachte die Stetigkeit der Abbildung $h$ bei $t=1 / 2$. \(\square\)
+
 
 Ist $\gamma_{1}: I \rightarrow X$ ein Weg von $a$ nach $b$ und $\gamma_{2}: I \rightarrow X$ ein Weg von $b$ nach $c$, so definieren wir die Verkettung von Wegen als
-
 $$
 \gamma_{2} \cdot \gamma_{1}:\left\{\begin{array}{l}
 I \longrightarrow X \\
@@ -1958,51 +2001,236 @@ s \longmapsto \begin{cases}\gamma_{1}(2 s) & \text { für } 0 \leq s \leq \frac{
 \end{array}\right.
 $$
 
-Lemma 3.8 Verkettung von Wegen ist assoziativ auf Homotopieklassen:\\
-Beweis: Sei $\omega_{0}=\gamma_{3} \cdot\left(\gamma_{2} \cdot \gamma_{1}\right)$ und $\omega_{1}=\left(\gamma_{3} \cdot \gamma_{2}\right) \cdot \gamma_{1}$.\\
-Die beiden Wege beschreiben dieselbe Bildmenge, die Homotopie muss nur die Umparametrisierung durchführen. Die Homotopie
 
+
+Lemma 3.8 Verkettung von Wegen ist assoziativ auf Homotopieklassen:
+
+\begin{LEM}{AG-03-08}{Assoziativität der Wegverkettung bis auf Homotopie}
+Seien \(X\) ein topologischer Raum und 
+\[
+\gamma_1:[0,1]\to X,\quad \gamma_2:[0,1]\to X,\quad \gamma_3:[0,1]\to X
+\]
+drei Wege mit gemeinsamen Endpunkten, sodass
+\[
+\gamma_1(1)=\gamma_2(0), \qquad \gamma_2(1)=\gamma_3(0).
+\]
+Dann gilt für ihre Homotopieklassen (relativ zu den Endpunkten)
+\[
+[\gamma_1 * \gamma_2] * \gamma_3 \;\simeq\; \gamma_1 * [\gamma_2 * \gamma_3],
+\]
+d.\,h. die Verkettung von Wegen ist auf Homotopieklassen \emph{assoziativ}.
+\end{LEM}
+
+
+Beweis: 
+
+Sei $\omega_{0}=\gamma_{3} \cdot\left(\gamma_{2} \cdot \gamma_{1}\right)$ und $\omega_{1}=\left(\gamma_{3} \cdot \gamma_{2}\right) \cdot \gamma_{1}$.
+
+Die beiden Wege beschreiben dieselbe Bildmenge, die Homotopie muss nur die Umparametrisierung durchführen. Die Homotopie
 $$
 h(s, t)= \begin{cases}\gamma_{1}(2(2-t) \cdot s) & 0 \leq s \leq \frac{1}{2(2-t)} \\ \gamma_{2}\left(\left(s-\frac{1}{2(2-t)}\right) \cdot \frac{2(2-t)(1+t)}{1+2 t-2 t^{2}}\right) & \frac{1}{2(2-t)}<s \leq 1-\frac{1}{2(1+t)} \\ \gamma_{3}\left(2 \cdot(1+t) \cdot\left(s-1+\frac{1}{2(1+t)}\right)\right) & 1-\frac{1}{2(1+t)}<s \leq 1\end{cases}
 $$
+leistet das Verlangte.
 
-leistet das Verlangte. \(\square\)
 
-Definition 3.9 Ein Weg $\gamma$ von a nach a heißt geschlossen oder Schleife. Der Weg $\gamma^{-1}(t)=\gamma(1-t)$ heißt umgekehrter Weg. Mit $\pi_{1}(X, a, b)$ bezeichnen wir die Menge der Homotopieklassen von Wegen von a nach b.
+Definition 3.9 
 
-Definition und Proposition 3.10 Die Homotopieklassen von Wegen von a nach a bilden eine Gruppe
+Ein Weg $\gamma$ von a nach a heißt geschlossen oder Schleife. Der Weg $\gamma^{-1}(t)=\gamma(1-t)$ heißt umgekehrter Weg. Mit $\pi_{1}(X, a, b)$ bezeichnen wir die Menge der Homotopieklassen von Wegen von a nach b.
 
+\begin{DEF}{AG-03-09}{Geschlossene Wege und Fundamentalgruppe}
+Sei \(X\) ein topologischer Raum und \(a,b\in X\).
+
+\begin{enumerate}
+\item Ein Weg \(\gamma:[0,1]\to X\) mit \(\gamma(0)=a\) und \(\gamma(1)=a\) 
+      heißt \emph{geschlossen} oder \emph{Schleife um \(a\)}.
+\item Der \emph{umgekehrte Weg} zu einem Weg \(\gamma:[0,1]\to X\) ist definiert durch
+      \[
+      \gamma^{-1}(t)=\gamma(1-t), \qquad t\in[0,1].
+      \]
+      Er läuft denselben Pfad in entgegengesetzter Richtung.
+\item Mit
+      \[
+      \pi_1(X,a,b)
+      \]
+      bezeichnen wir die Menge der Homotopieklassen (relativ zu den Endpunkten)
+      von Wegen \(\gamma:[0,1]\to X\) mit \(\gamma(0)=a\), \(\gamma(1)=b\).
+\end{enumerate}
+Im Spezialfall \(a=b\) spricht man von der \emph{Fundamentalgruppe} von \(X\) im Punkt \(a\):
+\[
+\pi_1(X,a):=\pi_1(X,a,a).
+\]
+\end{DEF}
+
+
+Definition und Proposition 
+
+3.10 
+
+Die Homotopieklassen von Wegen von a nach a bilden eine Gruppe
 $$
 \pi_{1}(X, a):=\pi_{1}(X, a, a),
 $$
-
 die Fundamentalgruppe von $X$ mit Basispunkt a. Ist b ein weiterer Punkt in $X$ und ist $X$ wegzusammenhängend, so ist $\pi_{1}(X, b)$ isomorph zu $\pi_{1}(X, a)$.
 
-Beweis: Neutrales Element ist $\gamma(t):=a$, inverses Element ist der umgekehrte Weg. Ist $\eta$ ein Weg von $a$ nach $b$, so definiert
+\begin{DEF}{AG-03-10}{Fundamentalgruppe und Basispunktunabhängigkeit}
+\begin{enumerate}
+\item
+Die Menge der Homotopieklassen von geschlossenen Wegen (Schleifen) 
+in einem topologischen Raum \(X\) mit Basispunkt \(a\in X\),
+\[
+\pi_1(X,a):=\pi_1(X,a,a),
+\]
+bildet eine \emph{Gruppe}, die \emph{Fundamentalgruppe von \(X\) im Punkt \(a\)} genannt wird.
+\end{enumerate}
 
+\begin{proof}[Gruppenstruktur]
+Die Verknüpfung zweier Homotopieklassen \([\gamma_1],[\gamma_2]\in\pi_1(X,a)\)
+wird durch die Verkettung der Wege definiert:
+\[
+[\gamma_1]\cdot[\gamma_2]:=[\gamma_1 * \gamma_2].
+\]
+Diese Operation ist wohldefiniert und assoziativ (nach Lemma~\ref{LEM:AG-03-08}).  
+Das neutrale Element ist die konstante Schleife \(e_a(t)\equiv a\),
+und das Inverse zu \([\gamma]\) ist \([\gamma^{-1}]\). 
+\end{proof}
+
+\begin{enumerate}\setcounter{enumi}{1}
+\item
+Sind \(a,b\in X\) zwei Punkte in einem \emph{wegzusammenhängenden} Raum \(X\),
+so sind die Fundamentalgruppen \(\pi_1(X,a)\) und \(\pi_1(X,b)\) \emph{isomorph}.
+\end{enumerate}
+\end{DEF}
+
+Beweis: 
+
+Neutrales Element ist $\gamma(t):=a$, inverses Element ist der umgekehrte Weg. Ist $\eta$ ein Weg von $a$ nach $b$, so definiert
 $$
 \gamma \mapsto \eta \cdot \gamma \cdot \eta^{-1}: \pi_{1}(X, a) \rightarrow \pi_{1}(X, b)
 $$
+den gewünschten Isomorphismus. 
 
-den gewünschten Isomorphismus. \(\square\)
 
-Definition 3.11 (Einfach zusammenhängend) Ein zusammenhängender topologischer Raum $X$ heißt einfach zusammenhängend, falls $\pi_{1}(X, a)=\{i d\}$ für ein $a \in X$ ist.
 
-Proposition 3.12 Ist $X \subset \mathbb{C}$ sternförmig, so ist $X$ einfach zusammenhängend.\\
-Beweis: Sei $a$ der Referenzpunkt des Sterns und $\gamma$ ein Weg. Dann ist
+Definition 3.11 
 
+(Einfach zusammenhängend) 
+
+Ein zusammenhängender topologischer Raum $X$ heißt einfach zusammenhängend, falls $\pi_{1}(X, a)=\{i d\}$ für ein $a \in X$ ist.
+
+\begin{DEF}{AG-03-11}{Einfach zusammenhängende Räume}
+Ein zusammenhängender topologischer Raum \(X\) heißt \emph{einfach zusammenhängend},  
+falls seine Fundamentalgruppe trivial ist, d.\,h. es existiert (und damit für alle) ein Punkt \(a\in X\) mit
+\[
+\pi_1(X,a)=\{\mathrm{id}\}.
+\]
+Äquivalent bedeutet dies: Jeder geschlossene Weg (Schleife) in \(X\) ist zu einer konstanten Schleife im selben Punkt homotop.
+\end{DEF}
+
+Proposition 3.12 Ist $X \subset \mathbb{C}$ sternförmig, so ist $X$ einfach zusammenhängend.
+
+
+\begin{PROP}{AG-03-12}{Sternförmige Mengen sind einfach zusammenhängend}
+Sei \(X \subset \mathbb{C}\) eine sternförmige Menge, d.\,h.\ es existiert ein Punkt \(x_0 \in X\), sodass  
+für alle \(x \in X\) das Verbindungssegment
+\[
+[x_0,x]:=\{\, (1-t)x_0 + t x \mid t \in [0,1] \,\}
+\subset X
+\]
+liegt.
+
+Dann ist \(X\) \emph{einfach zusammenhängend}, d.\,h.
+\[
+\pi_1(X,x_0)=\{\mathrm{id}\}.
+\]
+\end{PROP}
+
+
+Sei \(\gamma:[0,1]\to X\) eine geschlossene Schleife mit \(\gamma(0)=\gamma(1)=x_0\).
+Wir definieren eine Homotopie, welche \(\gamma\) stetig auf die konstante Schleife am Basispunkt \(x_0\) zusammenzieht:
+\[
+H:[0,1]\times[0,1]\to X,\qquad H(s,t) := (1-t)x_0 + t\,\gamma(s).
+\]
+Da \(X\) sternförmig bezüglich \(x_0\) ist, liegt für jedes \(s,t\in[0,1]\) der Punkt \(H(s,t)\in X\).
+Es gilt:
+\[
+H(s,0)=x_0,\quad H(s,1)=\gamma(s),\quad
+H(0,t)=H(1,t)=x_0.
+\]
+Damit ist \(H\) eine Homotopie zwischen \(\gamma\) und der konstanten Schleife bei \(x_0\),
+also ist jede Schleife in \(X\) nullhomotop.
+Somit ist \(\pi_1(X,x_0)=\{\mathrm{id}\}\).
+
+
+
+Beweis: 
+
+Sei $a$ der Referenzpunkt des Sterns und $\gamma$ ein Weg. Dann ist
 $$
 h(s, t)=t \gamma(s)+(1-t) a
 $$
+eine Homotopie von $\gamma$ zum konstanten Weg am Punkt $a$. 
 
-eine Homotopie von $\gamma$ zum konstanten Weg am Punkt $a$. \(\square\)
+
+
 
 Oftmals ist es nützlich, einen Weg lokal zu modifizieren. Dazu verwendet man folgenden Zerlegungssatz.
 
-Proposition 3.13 Sei $\gamma: I \rightarrow X$ ein Weg und $U=\left\{U_{i}\right\}$ eine offene Überdeckung von $X$. Dann gibt es eine Zerlegung $0=s_{0}<s_{1}<\ldots<s_{n}=1$, sodass jeder Teilweg $\gamma\left(\left[s_{j}, s_{j+1}\right]\right)$ in einem $U_{i}$ enthalten ist.
+
+Proposition 3.13 
+
+Sei $\gamma: I \rightarrow X$ ein Weg und $U=\left\{U_{i}\right\}$ eine offene Überdeckung von $X$. Dann gibt es eine Zerlegung $0=s_{0}<s_{1}<\ldots<s_{n}=1$, sodass jeder Teilweg $\gamma\left(\left[s_{j}, s_{j+1}\right]\right)$ in einem $U_{i}$ enthalten ist.
+
+\begin{LEM}{AG-03-13}{Zerlegung eines Weges unter offener Überdeckung}
+Sei \(X\) ein topologischer Raum, \(\gamma:I=[0,1]\to X\) ein stetiger Weg und
+\(\mathcal U=\{U_i\}_{i\in I_0}\) eine offene Überdeckung von \(X\).
+Dann existiert eine Zerlegung
+\[
+0=s_0<s_1<\dots<s_n=1
+\]
+und Indizes \(i_0,\dots,i_{n-1}\in I_0\) mit
+\[
+\gamma\big([s_j,s_{j+1}]\big)\subset U_{i_j}\quad\text{für alle }j=0,\dots,n-1.
+\]
+\end{LEM}
+
+\begin{proof}
+Da \(\gamma\) stetig ist und \(\mathcal U\) eine offene Überdeckung von \(X\) ist,
+bildet die Familie
+\[
+\mathcal V:=\{\gamma^{-1}(U_i)\subset[0,1]\mid i\in I_0\}
+\]
+eine offene Überdeckung des kompakten Intervalls \([0,1]\).
+Nach Endlichkeitssatz der Kompaktheit (Heine--Borel) existiert eine
+endliche Teilüberdeckung \(\gamma^{-1}(U_{i_1}),\dots,\gamma^{-1}(U_{i_m})\).
+
+Da \([0,1]\) linear geordnet ist, können wir diese offenen Mengen durch
+endlich viele offene Intervalle \(J_k=(a_k,b_k)\) mit
+\(\overline{J_k}\subset\gamma^{-1}(U_{i_{\ell(k)}})\) überdecken und so wählen,
+dass die Vereinigung \(\bigcup_k J_k\) bereits \([0,1]\) überdeckt
+(benutze die Regularität von \(\mathbb R\) bzw.\ die Existenz lokaler Intervalle
+um jeden Punkt und Kompaktheit zur Wahl einer endlichen, sogar
+lokal-endlichen Familie mit \(\overline{J_k}\subset \gamma^{-1}(U_{i_{\ell(k)}})\)).
+
+Ordne die endlich vielen Endpunkte \(\{a_k,b_k\}_k\) streng aufsteigend
+und ergänze \(0\) und \(1\);
+dies liefert eine Zerlegung \(0=s_0<s_1<\dots<s_n=1\).
+Für jedes Teilintervall \([s_j,s_{j+1}]\) existiert (wegen der Überdeckung
+durch die \(J_k\)) ein Index \(k(j)\) mit
+\([s_j,s_{j+1}]\subset \overline{J_{k(j)}}\subset \gamma^{-1}(U_{i_{\ell(k(j))}})\).
+Damit folgt
+\(\gamma([s_j,s_{j+1}])\subset U_{i_{\ell(k(j))}}\), wie behauptet.
+\end{proof}
+
+\begin{REM}
+Eine alternative, oft zitierte Argumentation benutzt das \emph{Lebesgue-Zahl-Lemma}:
+Da \(\gamma([0,1])\) kompakt ist, besitzt die Überdeckung
+\(\{U_i\cap \gamma([0,1])\}\) eine Lebesgue-Zahl \(\delta>0\).
+Wählt man eine äquidistante Zerlegung mit Maschenweite \(<\delta\),
+liegt jedes Bildsegment \(\gamma([s_j,s_{j+1}])\) vollständig in einem \(U_i\).
+\end{REM}
+
 
 Die Beweisidee veranschaulicht das Bild, die Details sind eine einfache Übung.
-
 \begin{figure}[h]
 \begin{center}
   \includegraphics[scale=0.2]{2025_10_06_374d4cfa8b1948eb4c41g-020}
@@ -2011,29 +2239,104 @@ Die Beweisidee veranschaulicht das Bild, die Details sind eine einfache Übung.
 \end{center}
 \end{figure}
 
+
+
+
 Korollar 3.14 Sei $A \subset X$ lokal endlich und $\gamma: I \rightarrow X$ ein Weg. Dann gibt es einen Weg $\widetilde{\gamma}: I \rightarrow X$ homotop zu $\gamma$ mit $\widetilde{\gamma}(I) \cap A=\phi$.
 
-Beweis: Überdecke $X$ durch Wahl von je einer Kreisscheibe $U_{a}$ für jeden Punkt $a \in A$ mit der Eigenschaft $U_{a} \cap A=\{a\}$ und durch das Komplement $X \backslash A$. Wir wenden nun den Satz an und nehmen durch Zusammenfassen von Teilwegen an, dass kein Teilweg $\gamma\left(\left[s_{k}, s_{k+1}\right]\right)$ ausschließlich in einem $U_{a}$ liegt. Folglich liegt kein Teilungspunkt in $A$. Jeder Teilweg in einem $U_{a}$ trifft maximal einen Punkt in $A$. Wir ersetzen ihn durch einen anderen Weg in $U_{a}$, der $A$ nicht trifft. Da $U_{a}$ sternförmig, also einfach zusammenhängend ist, sind diese Wege homotop.
+\begin{KORO}{AG-03-14}{Ausweichhomotopie um lokal endliche Teilmengen}
+Sei $X$ eine Riemannsche Fläche, $A\subset X$ lokal endlich (d.\,h.\ jede kompakte Teilmenge von $X$ schneidet $A$ nur endlich oft), und
+$\gamma:I=[0,1]\to X$ ein Weg. Dann existiert ein Weg $\widetilde\gamma:I\to X$, der zu $\gamma$ homotop ist, mit
+\[
+\widetilde\gamma(I)\cap A=\varnothing.
+\]
+\end{KORO}
 
-Korollar 3.15 Die Zahlenkugel $\mathbb{P}_{\mathbb{C}}^{1}$ ist einfach zusammenhängend.\\
-Beweis: Wir können nach Korollar 3.14 annehmen, dass der Weg $\infty=\mathbb{P}_{\mathbb{C}}^{1} \backslash X_{1}$ vermeidet, also in $X_{1} \cong \mathbb{C}$ verläuft. Da $\mathbb{C}$ sternförmig ist, folgt die Behauptung aus Proposition 3.12.
+Beweis: 
+
+Überdecke $X$ durch Wahl von je einer Kreisscheibe $U_{a}$ für jeden Punkt $a \in A$ mit der Eigenschaft $U_{a} \cap A=\{a\}$ und durch das Komplement $X \backslash A$. Wir wenden nun den Satz an und nehmen durch Zusammenfassen von Teilwegen an, dass kein Teilweg $\gamma\left(\left[s_{k}, s_{k+1}\right]\right)$ ausschließlich in einem $U_{a}$ liegt. Folglich liegt kein Teilungspunkt in $A$. Jeder Teilweg in einem $U_{a}$ trifft maximal einen Punkt in $A$. Wir ersetzen ihn durch einen anderen Weg in $U_{a}$, der $A$ nicht trifft. Da $U_{a}$ sternförmig, also einfach zusammenhängend ist, sind diese Wege homotop.
+
+
+
+Korollar 3.15 Die Zahlenkugel $\mathbb{P}_{\mathbb{C}}^{1}$ ist einfach zusammenhängend.
+
+\begin{KORO}{AG-03-15}{Einfachzusammenhängendheit der Zahlenkugel $\mathbb{P}^1_\C$}
+Die komplexe projektive Gerade $\mathbb{P}^1_\C$ (Riemannsche Zahlenkugel) ist einfach zusammenhängend.
+\end{KORO}
+
+
+Beweis: 
+
+Wir können nach Korollar 3.14 annehmen, dass der Weg $\infty=\mathbb{P}_{\mathbb{C}}^{1} \backslash X_{1}$ vermeidet, also in $X_{1} \cong \mathbb{C}$ verläuft. Da $\mathbb{C}$ sternförmig ist, folgt die Behauptung aus Proposition 3.12.
+
+
 
 Selbst die Bestimmung der einfachsten Fundamentalgruppe, die der punktierten Ebene oder punktierten Kreisscheibe, verwendet den Begriff der Liftung auf eine Überlagerung, und dies werden wir im folgenden Abschnitt allgemein untersuchen.
 
-\subsection {Unverzweigte Überlagerungen}
+
+
+\pagebreak
+
+\subsection{Unverzweigte Überlagerungen}
 Wir wollen die Fundamentalgruppen von $X$ und $Y$ miteinander vergleichen, falls es eine unverzweigte Überlagerung von $X$ nach $Y$ gibt. In diesem Abschnitt seien $X$ und $Y$ stets zusammenhängend. Sei zunächst $f: X \rightarrow Y$ nur eine stetige Abbildung und $\gamma: I \rightarrow Y$ ein Weg. Ein Weg $\eta: I \rightarrow X$ heißt Liftung oder Hochhebung von $\gamma$, falls $\gamma=f \circ \eta$ gilt.
 
 Die Abbildung $f$ heißt unbegrenzt, falls jeder Weg $\gamma:[0,1) \rightarrow X$ sich stetig nach 1 fortsetzen lässt, sofern dies schon für den Weg $f \circ \gamma:[0,1) \rightarrow Y$ gilt.
 
-Proposition 3.16 Ist $f: X \rightarrow Y$ eine unverzweigte Überlagerung, so sind Liftungen von Wegen eindeutig durch den Anfangspunkt bestimmt, d.h. zwei Liftungen $\gamma_{1}, \gamma_{2}$ des Weges $\gamma: I \rightarrow Y$ stimmen überein, sobald sie an einem Punkt $c \in I$ übereinstimmen. Außerdem ist $f$ unbegrenzt.
+
+\begin{DEF}{CV-04-01}{Weghebung und Unbegrenztheit}
+Seien $X,Y$ zusammenhängende topologische Räume und $f:X\to Y$ stetig.
+\begin{enumerate}
+\item Für einen Weg $\gamma:I\to Y$ heißt ein Weg $\eta:I\to X$ \emph{Lift} (oder \emph{Hochhebung}) von $\gamma$, falls $f\circ\eta=\gamma$ gilt.
+\item Die Abbildung $f$ heißt \emph{unbegrenzt}, wenn für jeden Weg $\gamma:[0,1)\to X$ gilt:
+Lässt sich $f\circ\gamma$ stetig in $t=1$ fortsetzen, so lässt sich auch $\gamma$ stetig in $t=1$ fortsetzen.
+\end{enumerate}
+\end{DEF}
+
+Proposition 3.16 
+
+Ist $f: X \rightarrow Y$ eine unverzweigte Überlagerung, so sind Liftungen von Wegen eindeutig durch den Anfangspunkt bestimmt, d.h. zwei Liftungen $\gamma_{1}, \gamma_{2}$ des Weges $\gamma: I \rightarrow Y$ stimmen überein, sobald sie an einem Punkt $c \in I$ übereinstimmen. Außerdem ist $f$ unbegrenzt.
+
+\begin{PROP}{AG-03-16}{Eindeutigkeit von Weghebungen und Unbegrenztheit}
+Sei $f:X\to Y$ eine unverzweigte Überlagerung zusammenhängender Riemannscher Flächen.
+
+\begin{enumerate}
+\item (\emph{Eindeutigkeit der Liftung})  
+Sind $\gamma_1,\gamma_2:I\to X$ zwei Liftungen desselben Weges $\gamma:I\to Y$ mit  
+\[
+f\circ\gamma_1=f\circ\gamma_2=\gamma,
+\]
+und existiert ein Punkt $c\in I$ mit $\gamma_1(c)=\gamma_2(c)$, so gilt bereits
+\[
+\gamma_1=\gamma_2 \text{ auf } I.
+\]
+
+\item (\emph{Unbegrenztheit})  
+Die Abbildung $f$ ist unbegrenzt, d.\,h.\ jeder Weg $\eta:[0,1)\to X$ lässt sich stetig in $t=1$ fortsetzen, sobald dies für $f\circ\eta$ möglich ist.
+\end{enumerate}
+\end{PROP}
+
 
 Beweis: Zum Beweis der Eindeutigkeitsaussage betrachten wir die Menge $W=\left\{s \in I: \gamma_{1}(s)=\gamma_{2}(s)\right\} \subseteq I$, an der die Liftungen übereinstimmen. Diese ist nicht leer, abgeschlossen, da $X$ hausdorffsch ist und offen, da $f$ lokal ein Biholomorphismus ist und beide Wege Lifts desselben $\gamma$ sind. Da $I$ zusammenhängend ist, muss $W=I$ sein.
 
 Für die zweite Aussage wähle eine Umgebung $V$ von $f \circ \gamma(1)$, sodass $f$ auf jeder Komponenten von $f^{-1}(V)$ die Identität ist. Dann ist die Fortsetzbarkeit klar.
 
+
+
 Unbegrenztheit ist die wesentliche Voraussetzung, um allgemein Wege zu liften.
 
+
 Proposition 3.17 Ist $f: X \rightarrow Y$ eine unverzweigte Überlagerung und $\eta: I \rightarrow Y$ ein Weg, so gibt es zu jedem $x \in X$ mit $f(x)=\eta(0)$ einen Weg $\gamma: I \rightarrow X$ mit $\gamma(0)=x$, welcher $\eta$ liftet, d.h. sodass $f \circ \gamma=\eta$.
+
+\begin{PROP}{AG-03-17}{Existenz von Weghebungen für unverzweigte Überlagerungen}
+Sei $f:X\to Y$ eine unverzweigte Überlagerung zusammenhängender Riemannscher Flächen
+und $\eta:I=[0,1]\to Y$ ein stetiger Weg. Für jeden Punkt $x\in X$ mit
+$f(x)=\eta(0)$ existiert ein Weg $\gamma:I\to X$ mit
+\[
+\gamma(0)=x \quad\text{und}\quad f\circ\gamma=\eta,
+\]
+d.\,h.\ $\gamma$ ist eine Liftung (Hochhebung) von $\eta$ durch $f$ mit vorgegebenem Anfangspunkt.
+\end{PROP}
+
 
 Beweis: Wir überdecken das Bild des Wegs $\eta$ mit $V_{i}$ wie in der Definition einer Überlagerung und zerlegen den Weg $\eta$ in Teilwege $\eta_{i}:\left[s_{i}, s_{i+1}\right] \rightarrow Y$, sodass $\eta_{i}\left(\left[s_{i}, s_{i+1}\right]\right) \subset V_{i+1}$. Wir zeigen die Existenz eines Lifts auf [ $0, s_{k}$ ] durch Induktion nach $k$. Für $k=1$ leistet dies die lokale Umkehrabbildung aus der Definition einer unverzweigten Überlagerung. Wenn wir $\gamma$ auf $\left[0, s_{k-1}\right]$ bereits konstruiert haben, so gibt es genau eine Komponente $U_{k}$ von $f^{-1}\left(V_{k}\right)$, die $\gamma\left(s_{k-1}\right)$ enthält. Sei also $\tau_{k}: V_{k} \rightarrow U_{k}$ die Umkehrabbildung mit dieser Komponente als Bildbereich. Dann setzen wir $\gamma$ auf $\left[s_{k-1}, s_{k}\right]$ durch $\tau_{k} \circ \eta$ fort.
 
@@ -2088,7 +2391,11 @@ Korollar 3.23 Jede einfach zusammenhängende, unverzweigte Überlagerung ist uni
 
 Die obere Halbebene $\mathbb{H}$ ist die universelle Überlagerung der punktierten Kreisscheibe $\triangle^{*}$, denn sie ist einfach zusammenhängend und $z \mapsto \exp (2 \pi i z)$ ist eine unverzweigte Überlagerungsabbildung, wie man durch Einschränken auf die Streifen $k<\operatorname{Re}(z)<k+1$ für $k \in \mathbb{Z}$ und $k \in \mathbb{Z}+\frac{1}{2}$ erkennt.
 
+
+\pagebreak
+
 \subsection {Fundamentalgruppenbestimmung I}
+
 Von der punktierten Ebene bestimmen wir die Fundamentalgruppe mit Hilfe der Liftungseigenschaften aus dem vorigen Abschnitt direkt.
 
 Proposition 3.24 Die Fundamentalgruppe von $\mathbb{C}^{*}$, von $\Delta^{*}$ und von $S^{1}$ ist jeweils isomorph zu $\mathbb{Z}$.
@@ -2127,16 +2434,17 @@ Seien $x_{i j}=\left(s_{i}, r_{j}\right)$ die Eckpunkte dieser Rechtecke und $\e
 Ist insbesondere $U \cap V$ einfach zusammenhängend, so ist $\pi_{1}(X)$ ein freies Produkt von $\pi_{1}(U)$ und $\pi_{1}(V)$.
 
 Eine einfache Schleife um $a_{j} \in X$ mit Basispunkt $a$ ist ein Weg $\gamma: I \rightarrow X$ der folgenden Gestalt: Es gibt eine Karte $h: U \rightarrow \mathbb{C}$ mit $h\left(a_{j}\right)=0$, einen Punkt $\widetilde{a} \in U \backslash a_{j}$ in der Nähe von $a_{j}$, und einen Weg $\widetilde{\gamma}$ von $a$ nach $\widetilde{a}$, sodass $\gamma$ zur
-
 Verkettung
-
 $$
 \widetilde{\gamma}^{-1} \cdot\left(h^{-1} \circ\left(t \mapsto e^{2 \pi i t} h(\widetilde{a})\right) \circ h\right) \cdot \widetilde{\gamma}
 $$
+homotop ist.
 
-homotop ist.\\
-Satz 3.26 Seien $a_{0} \ldots, a_{r} \in \mathbb{P}_{\mathbb{C}}^{1}$ paarweise verschieden mit $r \geq 1$. Es gibt einfache Schleifen $\gamma_{j}$ um die Punkte $a_{j}$ für $j=0, \ldots, r$, sodass
 
+
+Satz 3.26 
+
+Seien $a_{0} \ldots, a_{r} \in \mathbb{P}_{\mathbb{C}}^{1}$ paarweise verschieden mit $r \geq 1$. Es gibt einfache Schleifen $\gamma_{j}$ um die Punkte $a_{j}$ für $j=0, \ldots, r$, sodass
 $$
 \pi_{1}\left(\mathbb{P}_{\mathbb{C}}^{1} \backslash\left\{a_{0}, \ldots, a_{r}\right\}\right) \cong F_{\left\{\gamma_{1}, \ldots, \gamma_{r}\right\}} \quad \text { und } \quad \prod_{j=0}^{r} \gamma_{i}=i d
 $$
@@ -2159,6 +2467,9 @@ $$
 
 da alle Wege durch zentrische Streckung zu einem Weg in $R$ homotop sind. Wir beweisen die Aussage durch Induktion nach $r$. Für $r=1$ ist $\gamma_{1}=\gamma_{0}^{-1}$ eine gesuchte einfache Schleife um $a_{1}$. Für den Induktionsschritt wenden wir den Satz 3.25 von Seifert/van Kampen auf die Überdeckung von $R$ durch $U$ und $V$ (spezifiziert durch den im Bild markierten Realteil) an.
 
+
+\pagebreak
+
 \subsection {Triangulierung und kanonische Zerschneidung}
 Ziel dieses Abschnittes ist es, jede kompakte Riemannsche Fläche topologisch aus einem relativ einfachen Polygon zu kontruieren. Hilfsmittel hierfür sind Triangulierungen, die wir nun definieren.
 
@@ -2167,12 +2478,90 @@ Sei $S$ das Dreieck mit Ecken $0,1, e^{2 \pi i / 3}$ in $\mathbb{C} \cong \mathb
 Eine Triangulierung von $X$ ist eine Kollektion von 2-Simplices $\alpha_{i}: S \rightarrow X$ mit $\bigcup_{i} \alpha_{i}(S)=X$ und folgenden Eigenschaften. Für jeden Punkt $a \in X$ gilt:\\
 i) Liegt $a \in X$ im Bild von $\alpha_{i}$, aber nicht auf dessen Kante, so gibt es genau ein $i$ mit $a \in$ Bild $\left(\alpha_{i}\right)$. In diesem Fall ist $\alpha_{i}(S)$ eine Umgebung von $a$ in $X$.\\
 ii) Liegt $a$ auf der offenen Kante $K$ eines Simplexes, so gibt es genau zwei Indices $i, j$ mit $K=\alpha_{i}(S) \cap \alpha_{j}(S)$ und $\alpha_{i}(S) \cup \alpha_{j}(S)$ ist Umgebung von $a$.\\
-iii) Andernfalls gibt es eine endliche Zahl von Indices $i_{k}, k=1 \ldots n$, sodass $a$ eine Ecke von jedem $\alpha_{i_{k}}(S)$ ist, $\cup_{k=1}^{n} \alpha_{i_{k}}(S)$ ist eine Umgebung von $a$ und in geeigneter Nummerierung haben $\alpha_{i_{k}}(S)$ und $\alpha_{i_{k+1}}(S)$ sowie $\alpha_{i_{n}}(S)$ und $\alpha_{i_{1}}(S)$ genau eine Kante gemeinsam und alle anderen $\alpha_{i_{k}}(S)$, $\alpha_{i_{l}}(S)$ mit $k \neq l$ haben genau den Punkt $a$ gemeinsam.\\
+iii) Andernfalls gibt es eine endliche Zahl von Indices $i_{k}, k=1 \ldots n$, sodass $a$ eine Ecke von jedem $\alpha_{i_{k}}(S)$ ist, $\cup_{k=1}^{n} \alpha_{i_{k}}(S)$ ist eine Umgebung von $a$ und in geeigneter Nummerierung haben $\alpha_{i_{k}}(S)$ und $\alpha_{i_{k+1}}(S)$ sowie $\alpha_{i_{n}}(S)$ und $\alpha_{i_{1}}(S)$ genau eine Kante gemeinsam und alle anderen $\alpha_{i_{k}}(S)$, $\alpha_{i_{l}}(S)$ mit $k \neq l$ haben genau den Punkt $a$ gemeinsam.
+
 Kurz gesagt ist es also bei einer Triangulierung nicht gestattet, dass der Eckpunkt eines Simplexes in der Mitte der Kante eines anderen Simplexes liegt.
 
-Satz 3.27 Jede kompakte Riemannsche Fläche besitzt eine Triangulierung.\\
-Beispiel 3.28 Das folgende Bild erhält ein Beispiel für eine Triangulierung des Torus mit 18 Dreiecken.
+\begin{DEF}{AG-03-18}{Triangulierung einer Riemannschen Fläche}
+Sei 
+\[
+S \subset \C \cong \R^2
+\]
+das (abgeschlossene) Dreieck mit Ecken \(0,1,e^{2\pi i/3}\).
+Eine stetige Abbildung
+\[
+\alpha:S\to X
+\]
+in eine Riemannsche Fläche \(X\) heißt \emph{\(2\)-Simplex} von \(X\), falls
+\(\alpha\) ein Homöomorphismus auf ihr Bild ist. Die Bilder der Punkte
+\(0,1,e^{2\pi i/3}\) heißen \emph{Ecken} des Simplexes, die Bilder der
+Geradensegmente \([0,1], [1,e^{2\pi i/3}], [0,e^{2\pi i/3}]\) heißen
+\emph{Kanten}, und die Bilder der entsprechenden offenen Segmente heißen
+\emph{offene Kanten}.
 
+Eine \emph{Triangulierung} von \(X\) ist eine Familie von \(2\)-Simplexes
+\(\{\alpha_i:S\to X\}_{i\in I}\) mit
+\[
+X = \bigcup_{i\in I} \alpha_i(S),
+\]
+die folgende Eigenschaften erfüllt. Für jeden Punkt \(a\in X\) gilt:
+
+\begin{enumerate}[label=\roman*)]
+\item Liegt \(a\) im Inneren eines Simplexes, d.\,h.\ 
+\(a\in \alpha_i(S)\) und \(a\) liegt nicht auf einer Kante von \(\alpha_i(S)\),
+so existiert genau ein Index \(i\) mit \(a\in \alpha_i(S)\), und
+\(\alpha_i(S)\) ist eine Umgebung von \(a\) in \(X\).
+
+\item Liegt \(a\) auf einer offenen Kante \(K\) eines Simplexes,
+so gibt es genau zwei Indizes \(i,j\) mit
+\[
+K = \alpha_i(S)\cap \alpha_j(S),
+\]
+und die Vereinigung \(\alpha_i(S)\cup \alpha_j(S)\) ist eine Umgebung von \(a\).
+
+\item Andernfalls ist \(a\) eine Ecke von endlich vielen Simplexes:
+es existieren Indizes \(i_1,\dots,i_n\) mit
+\[
+a \text{ Ecke von } \alpha_{i_k}(S) \quad (k=1,\dots,n),
+\]
+\(\bigcup_{k=1}^n \alpha_{i_k}(S)\) ist eine Umgebung von \(a\),
+und in geeigneter Nummerierung haben
+\(\alpha_{i_k}(S)\) und \(\alpha_{i_{k+1}}(S)\) (sowie
+\(\alpha_{i_n}(S)\) und \(\alpha_{i_1}(S)\)) genau \emph{eine} Kante
+gemeinsam, während für alle übrigen Paare \(k\neq \ell\) gilt, dass
+\(\alpha_{i_k}(S)\) und \(\alpha_{i_\ell}(S)\) nur den Punkt \(a\) gemeinsam haben.
+\end{enumerate}
+\end{DEF}
+
+\begin{REM}{AG-03-19}{Geometrische Intuition}
+Die obigen Bedingungen schließen insbesondere Konfigurationen aus, in denen
+eine Ecke eines Simplexes im \emph{Inneren} der Kante eines anderen Simplexes
+liegt. Kanten treffen sich also nur vollständig (als ganze Kanten) oder
+punktweise in gemeinsamen Ecken.
+\end{REM}
+
+
+
+Satz 3.27 
+
+Jede kompakte Riemannsche Fläche besitzt eine Triangulierung.
+
+\begin{PROP}{AG-03-27}{Triangulierbarkeit kompakter Riemannscher Flächen}
+Jede kompakte Riemannsche Fläche besitzt eine Triangulierung.
+\end{PROP}
+
+\begin{proof}[Idee des Beweises]
+Da die Fläche kompakt ist, besitzt sie eine endliche atlasartige Überdeckung durch holomorphe Karten. In jeder Karte können kleine Dreiecke in der komplexen Ebene gewählt werden, deren Bilder unter den Kartenabbildungen
+Simplexes in der Fläche liefern. Durch geeignete Verfeinerung und Anpassung der Kanten über den Überlappungsbereichen erhält man eine endliche Familie solcher Simplexes, deren Vereinigung die gesamte Fläche überdeckt und die die Bedingungen einer Triangulierung erfüllen.
+\end{proof}
+
+>> Ausführlicherer Beweis: Geometric Topology in Dimensions 2 and 3
+
+
+
+Beispiel 3.28 
+
+Das folgende Bild erhält ein Beispiel für eine Triangulierung des Torus mit 18 Dreiecken.
 \begin{figure}[h]
 \begin{center}
   \includegraphics[scale=0.2]{2025_10_06_374d4cfa8b1948eb4c41g-028}
@@ -2181,7 +2570,9 @@ Beispiel 3.28 Das folgende Bild erhält ein Beispiel für eine Triangulierung de
 \end{center}
 \end{figure}
 
-Beweis: Wegen der vorausgesetzten Kompaktheit können wir $X$ mit endlich vielen Kreisscheiben überdecken und annehmen, dass keine dieser Scheiben ganz in einer anderen enthalten ist, d.h. $X=\bigcup_{i=1}^{n} D_{i}$ mit $D_{i}=\Delta_{\varepsilon_{i}}\left(a_{i}\right)$ für geeignete Punkte $a_{i} \in X$ und Radien $\varepsilon_{i} \in \mathbb{R}$ und $D_{i} \nsubseteq D_{j}$ für $i \neq j$. Ein topologisches Lemma (z.B. das Lemma auf S. 20 in [Rey89], Induktion nach $n$ und geeignetes leichtes Vergrößern der Kreisscheiben) erlaubt anzunehmen, dass $\bigcup_{i=1}^{n} \partial \triangle_{\varepsilon_{i}}\left(a_{i}\right)$ eine endliche Vereinigung von Bögen $A$ zwischen der Menge von Schnittpunkten
+Beweis: 
+
+Wegen der vorausgesetzten Kompaktheit können wir $X$ mit endlich vielen Kreisscheiben überdecken und annehmen, dass keine dieser Scheiben ganz in einer anderen enthalten ist, d.h. $X=\bigcup_{i=1}^{n} D_{i}$ mit $D_{i}=\Delta_{\varepsilon_{i}}\left(a_{i}\right)$ für geeignete Punkte $a_{i} \in X$ und Radien $\varepsilon_{i} \in \mathbb{R}$ und $D_{i} \nsubseteq D_{j}$ für $i \neq j$. Ein topologisches Lemma (z.B. das Lemma auf S. 20 in [Rey89], Induktion nach $n$ und geeignetes leichtes Vergrößern der Kreisscheiben) erlaubt anzunehmen, dass $\bigcup_{i=1}^{n} \partial \triangle_{\varepsilon_{i}}\left(a_{i}\right)$ eine endliche Vereinigung von Bögen $A$ zwischen der Menge von Schnittpunkten
 
 $$
 S=\bigcup_{i<j} \partial \Delta_{\varepsilon_{i}}\left(a_{i}\right) \cap \partial \Delta_{\varepsilon_{j}}\left(a_{j}\right)
@@ -2191,22 +2582,130 @@ ist. Falls es kein Paar $(i, j)$ gibt mit $\partial D_{i} \subseteq D_{j}$, so e
 
 Triangulierungen kann man auch für topologische Flächen (mit Karten in $\mathbb{R}^{2}$ und Homomorphismen als Kartenwechselabbildungen) definieren. Triangulierbarkeit für Riemannsche Flächen ist auch ohne die Kompaktheitsvoraussetzung richtig, aber hierzu benötigt man die Methoden aus Abschnitt 7 . Im allgemeineren topologischen Kontext benötigt man eine topologische Gutartigkeitsvoraussetzung (Abzählbarkeit).
 
+\begin{REM}{AG-03-28}{Triangulierbarkeit in weiteren Kategorien}
+Triangulierungen lassen sich nicht nur in der Kategorie der
+Riemannschen Flächen formulieren: Auch \emph{topologische Flächen},
+also zweidimensionale Mannigfaltigkeiten mit Karten in $\mathbb{R}^2$
+und Homöomorphismen als Kartenwechselabbildungen, können
+trianguliert werden.
+
+\medskip
+
+Für Riemannsche Flächen gilt die Triangulierbarkeit sogar \emph{ohne}
+Kompaktheitsannahme; der Beweis erfordert jedoch die analytischen
+Methoden von Abschnitt~7 (insbesondere Normalformen holomorpher
+Abbildungen und Kontrollargumente für lokale Gitterstrukturen).
+
+\medskip
+
+Im rein topologischen Rahmen ist die Situation subtiler:
+Eine allgemeine topologische Fläche ist genau dann triangulierbar,
+wenn sie eine \emph{topologische Abzählbarkeitsbedingung} erfüllt
+(etwa „zweite Abzählbarkeit“). Diese Voraussetzung garantiert, daß
+sich die lokale Struktur der Fläche durch eine zählbare Menge von
+Karten kontrollieren lässt, was die Konstruktion kompatibler Simplexe
+erst ermöglicht.
+
+\medskip
+
+Kurz gesagt:
+\begin{itemize}
+  \item Triangulierbarkeit kompakter Riemannscher Flächen ist einfach,
+        weil Kompaktheit eine endliche Kontrolle ermöglicht.
+  \item Nicht-kompakte Riemannsche Flächen sind ebenfalls triangulierbar,
+        erfordern aber analytische Werkzeuge.
+  \item Topologische Flächen benötigen für Triangulierbarkeit
+        eine zusätzliche Gutartigkeitsvoraussetzung
+        (etwa zweite Abzählbarkeit).
+\end{itemize}
+\end{REM}
+
 Die Umkehrung des Satzes gilt auch. Dazu erinneren wir, dass eine topologische Fläche mit Karten in $\mathbb{R}^{2}$ orientierbar genannt wird, wenn die Kartenwechselabbildungen die Orientierung von $\mathbb{R}^{2}$ respektieren. Holomorphe Kartenwechselabbildungen haben diese Eigenschaft, weswegen Riemannsche Flächen stets orientierbar sind.
 
-Proposition 3.29 Jede orientierbare triangulierbare topologische Fläche besitzt einen komplexen Atlas.
 
-Beweis: Siehe z.B. Théorème 2.3 in Rey89.\\
-Wir können nun das Hauptresultat des Abschnitts formulieren.\\
-Satz 3.30 Jede kompakte Riemannsche Fläche $X$ ist homöomorph zu $S^{2}$ oder (als topologischer Raum) zur Verklebung wie in Abbildung 3.6 eines Polygons mit $2 g$ Kanten, wobei Kanten mit gleichem Symbol (bis auf Potenz) unter Beachtung der Pfeilrichtung identifiziert werden.
+\begin{PROP}{AG-03-29}{Orientierbarkeit als Charakterisierung der Triangulierbarkeit}
+Die Umkehrung des vorangegangenen Satzes gilt ebenfalls:  
+Eine topologische Fläche ist triangulierbar genau dann, wenn sie
+orientierbar ist.
 
-Man beachte, dass bei der Zerschneidung wie in Abbildung 3.6 die Anfangsund Endpunkte aller Kanten zu einem einzigen Punkt in der Riemannschen Fläche $X$ identifiziert werden.\\
-Beweis: Man pflastere einen zusammenhängenden und einfach zusammenhängenden Teil der Ebene mit den Dreiecken der Triangulierung. Man nummeriere Kanten am Rand des Polygons, die auf $X$ identifiziert waren mit den Kanten-Symbolen $a_{i}$ und $a_{i}^{-1}, i \in I_{K}$. Man identifiziere weitere Ecken, die dem gleichen Punkt in $X$ entsprechen, mit demselben Ecken-Symbol $P_{i}$ mit $i \in I_{E}$. Dieses Polygon wird mit den folgenden Modifikationen in Normalform gebracht.
+\medskip
 
+\noindent
+Erinnerung:  
+Eine topologische Fläche mit Karten $(U_i,\phi_i)$ in $\mathbb{R}^2$
+heißt \emph{orientierbar}, wenn alle Kartenwechselabbildungen
+\[
+\phi_j\circ \phi_i^{-1} : \phi_i(U_i\cap U_j)\longrightarrow \phi_j(U_i\cap U_j)
+\]
+die Standardorientierung von $\mathbb{R}^2$ respektieren.  
+Holomorphe Kartenwechsel sind stets orientierungserhaltend, sodass
+jede Riemannsche Fläche automatisch eine orientierbare
+topologische Fläche ist.
+
+\medskip
+
+\noindent
+Damit gilt:
+\begin{itemize}
+  \item Jede Riemannsche Fläche ist orientierbar und somit triangulierbar.
+  \item Umgekehrt besitzt jede orientierbare topologische Fläche eine
+        kompatible Triangulierung.
+\end{itemize}
+
+\medskip
+
+\noindent
+Die Orientierbarkeit ist also die präzise topologische Bedingung, die
+Triangulierungen in zwei Dimensionen ermöglicht.
+\end{PROP}
+
+Proposition 3.29 
+
+Jede orientierbare triangulierbare topologische Fläche besitzt einen komplexen Atlas.
+
+
+Beweis: Siehe z.B. Théorème 2.3 in Rey89.
+
+
+\begin{PROP}{RF-03-29}{Komplexe Struktur auf orientierbaren triangulierbaren Flächen}
+Jede orientierbare triangulierbare topologische Fläche besitzt einen komplexen Atlas, d.\,h.\ sie trägt eine Struktur einer Riemannschen Fläche.
+\end{PROP}
+
+\begin{proof}
+Der Beweis findet sich z.\,B.\ in \textsc{Reynaud}, Théorème~2.3 in~\cite{Rey89}.
+\end{proof}
+
+Wir können nun das Hauptresultat des Abschnitts formulieren.
+
+
+>> Kanonische Zerschneidung: Jede kompakte Riemannsche Fläche (nicht homöomorph zu $S^2$) besitzt Triangulierung mit kanonischer Zerschneidung (mit invariante $g$) :: Das ist 3.30
+
+
+
+Satz 3.30 
+
+Jede kompakte Riemannsche Fläche $X$ ist homöomorph zu $S^{2}$ oder (als topologischer Raum) zur Verklebung wie in Abbildung 3.6 eines Polygons mit $2 g$ Kanten, wobei Kanten mit gleichem Symbol (bis auf Potenz) unter Beachtung der Pfeilrichtung identifiziert werden.
+
+\begin{THEO}{RF-03-30}{Topologische Klassifikation kompakter Riemannscher Flächen}
+Jede kompakte Riemannsche Fläche $X$ ist (als topologischer Raum) homöomorph zu genau einem der folgenden Räume:
+\begin{enumerate}
+  \item der $2$-Sphäre $S^{2}$ (entspricht dem Fall $g=0$);
+  \item der durch Verklebung eines $4g$-Polygons gemäß dem kanonischen Zerschneidung (in Abbildung~3.6 dargestellten Identifikationsschema) entstehenden Fläche, wobei jeweils die Kantenpaare mit gleichem Symbol (bis auf Potenz) unter Beachtung der Orientierungen miteinander identifiziert werden.
+\end{enumerate}
+Damit ist jede kompakte Riemannsche Fläche durch genau ein Geschlecht $g\ge 0$
+klassifiziert, und topologisch homöomorph zu einer Fläche vom Geschlecht $g$.
+
+Man beachte, dass bei der Zerschneidung wie in Abbildung 3.6 die Anfangsund Endpunkte aller Kanten zu einem einzigen Punkt in der Riemannschen Fläche $X$ identifiziert werden.
+\end{THEO}
+
+
+Beweis: 
+
+Man pflastere einen zusammenhängenden und einfach zusammenhängenden Teil der Ebene mit den Dreiecken der Triangulierung. Man nummeriere Kanten am Rand des Polygons, die auf $X$ identifiziert waren mit den Kanten-Symbolen $a_{i}$ und $a_{i}^{-1}, i \in I_{K}$. Man identifiziere weitere Ecken, die dem gleichen Punkt in $X$ entsprechen, mit demselben Ecken-Symbol $P_{i}$ mit $i \in I_{E}$. Dieses Polygon wird mit den folgenden Modifikationen in Normalform gebracht.
 \begin{enumerate}
   \item Falls es nur zwei Seiten $a$ und $a^{-1}$ gibt, so ist $X \sim S^{2}$.
-  \item Falls es mehr als zwei Seiten gibt, sorgt man zunächst dafür, dass nur ein Ecksymbol, sagen wir $p$ auftritt. Denn gibt es noch ein weiteres Symbol $q$, so sorgt das Abtrennen und Neuverkleben in Figur (untenstehend)
+  \item Falls es mehr als zwei Seiten gibt, sorgt man zunächst dafür, dass nur ein Ecksymbol, sagen wir $p$ auftritt. Denn gibt es noch ein weiteres Symbol $q$, so sorgt das Abtrennen und Neuverkleben in Figur (untenstehend) dafür, dass die Anzahl der Ecken mit Symbol $q$ um eins erniedrigt und die mit Symbol $p$ um eins erhöht wird.
 \end{enumerate}
-
 \begin{figure}[h]
 \begin{center}
   \includegraphics[scale=0.2]{2025_10_06_374d4cfa8b1948eb4c41g-030}
@@ -2214,48 +2713,41 @@ Beweis: Man pflastere einen zusammenhängenden und einfach zusammenhängenden Te
 \caption{Abbildung 3.6: Kanonische Zerschneidung}
 \end{center}
 \end{figure}
-
-dafür, dass die Anzahl der Ecken mit Symbol $q$ um eins erniedrigt und die mit Symbol $p$ um eins erhöht wird.
-
 \begin{figure}[h]
 \begin{center}
   \includegraphics[scale=0.2]{2025_10_06_374d4cfa8b1948eb4c41g-030(1)}
- 
 \caption{Abbildung 3.7: Schritt 2 von Satz 3.30}
 \end{center}
 \end{figure}
-
 \begin{enumerate}
   \setcounter{enumi}{2}
   \item Benachbarte $a$ und $a^{-1}$ werden verklebt. (Die Aussage des Satzes ist topologisch, die Einbettung der Figur in die Ebene ist irrelevant.)
   \item Zu jeder Kante $a$ gibt es eine Kante $b$, sodass $a$ und $b$ verschachtelt sind, d.h. dass die zugehörigen Symbole in der zyklischen Reihenfolge $\ldots a \ldots b \ldots a^{-1} \ldots b^{-1} \ldots$ beim Umlauf der Kantensymbole am Rand auftreten. Denn andernfalls könnte man das Polygon wie in Abbildung 3.8 längs einer Kante $c$ von $a$ nach $a^{-1}$ in $P_{1}$ und $P_{2}$ zerschneiden und entsprechend der Seitenidentifikationen verkleben. Man erhält so eine berandete Riemannsche Fläche $X_{0}$ mit Rand $c$, sodass $X$ durch Verkleben entlang $c$ entsteht. Sei $V$ eine beliebige Umgebung von $P$ in $X$. In der Riemannschen Fläche $X$ zerfällt $V \backslash\{P\}$ in zwei Zusammenhangskomponenten. Dies ist ein Widerspruch und folglich kann die Riemannsche Fläche nicht die angenommene Gestalt haben.
-  \item Zu jedem Paar verschachtelter Kanten kann man durch die Wiederver-
+  \item Zu jedem Paar verschachtelter Kanten kann man durch die Wiederverklebung wie skizziert in Abbildung 3.9 ein paar aufeinanderfolgender verschachtelter Kanten herstellen.
 \end{enumerate}
-
 \begin{figure}[h]
 \begin{center}
   \includegraphics[scale=0.2]{2025_10_06_374d4cfa8b1948eb4c41g-031}
- 
 \caption{Abbildung 3.8: Schritt 4 von Satz 3.30}
 \end{center}
 \end{figure}
-
-klebung wie skizziert in Abbildung 3.9 ein paar aufeinanderfolgender verschachtelter Kanten herstellen.
-
 \begin{figure}[h]
 \begin{center}
   \includegraphics[scale=0.2]{2025_10_06_374d4cfa8b1948eb4c41g-031(1)}
- 
 \caption{Abbildung 3.9: Schritt 5 von Satz 3.30}
 \end{center}
 \end{figure}
-
 \begin{enumerate}
   \setcounter{enumi}{5}
-  \item Die gestrichelten Abschnitte bleiben in Schritt 5 unberührt. Man kann also die Schritte 3 und 5 wiederholen, bis alle verschachtelten Paare aufeinanderfolgen. \(\square\)
+  \item Die gestrichelten Abschnitte bleiben in Schritt 5 unberührt. Man kann also die Schritte 3 und 5 wiederholen, bis alle verschachtelten Paare aufeinanderfolgen.
 \end{enumerate}
 
+
+
 Bemerkung 3.31 Beim Wiederverkleben bilden Paare aufeinanderfolgender verschachtelter Kanten eine „Henkelzerschneidung" der Riemannschen Fläche, wie in Abbildung 3.10 für $g=2$ dargestellt.
+
+
+\pagebreak
 
 \subsection {Fundamentalgruppenbestimmung II}
 Die Anzahl der Kanten der kanonischen Zerschneidung einer kompakten Riemannschen Fläche ist die erste fundamentale Invariante dieser Objekte.
@@ -2306,6 +2798,10 @@ i) $E-K+F$ bleibt beim Verfeinern einer Triangulierung invariant.\\
 ii) Diese Größe bleibt auch invariant, wenn man ein zusammenhängendes und einfach zusammenhängendes $n$-gon zu einer Triangulierung verfeinert.\\
 iii) Die Formel ist richtig für die Triangulierung einer kanonischen Zerschneidung einer Riemannschen Fläche mit $g \geq 1$, die man erhält, in dem man die Eckpunkte und Seitenmitten mit einem Punkt im Innern des $4 g$-gons verbindet. Sie ist auch für eine Triangulierung der Sphäre richtig.\\
 Aus diesen Aussagen folgt der Satz.
+
+
+
+\pagebreak
 
 \subsection {Galoisgruppen von Überlagerungen, normale Überlagerungen}
 In diesem Abschnitt untersuchen wir, welche Überlagerungen vollständig durch Gruppentheorie beschrieben sind. Der gesamte Abschnitt ist vollkommen analog zur Galoistheorie von Körpererweiterungen.
@@ -2388,6 +2884,10 @@ zu einem Weg in $X$ beginnend mit $a$. Diese endet in einem Punkt $\widetilde{a}
 
 Ist $f_{*}\left(\pi_{1}(X, a)\right)$ ein Normalteiler, so können wir das Liftungslemma 3.21 auf $f$, auf $g=f$ und zwei beliebige Punkte $a, \widetilde{a} \in f^{-1}(b)$ anwenden. Der so erhaltene Lift ist das gesuchte Element von $\operatorname{Gal}(f)$. Damit erhält man auch die Abbildung von rechts nach links im gesuchten Isomorphismus. Die Umkehrabbildung haben wir bereits oben kennengelernt, denn Nebenklassen $\pi_{1}(Y, b) / f_{*}\left(\pi_{1}(X, a)\right)$ entsprechen den Punkten im Urbild von $b$ und $\operatorname{Gal}(f)$ operiert frei auf diesen.
 
+
+
+\pagebreak
+
 \subsection {Unverzweigte Überlagerungen zu gegebenen Untergruppen}
 Satz 3.43 Zu jeder Untergruppe $H<\pi_{1}(Y, b)$ gibt es (bis auf Isomorphie) genau eine zusammenhängende unverzweigte Überlagerung $f: X \rightarrow Y$ mit gewähltem Basispunkt $a \in X$, sodass $f(a)=b$ und $f_{*}\left(\pi_{1}(X, a)\right)=H$. Weiterhin ist $\left[\pi_{1}(Y, b):\right. H]=\operatorname{deg}(f)$.
 
@@ -2417,6 +2917,10 @@ Das Bild dieses Homomorphismus wird Monodromiegruppe der Überlagerung genannt.
 
 Ist $f$ normal, so faktorisiert Mon über die Untergruppe $\pi_{1}(X, a)$ und der Quotientenhomomorphismus ist gerade die Permutationsdarstellung der Galoisgruppen.
 
+
+
+\pagebreak
+
 \subsection {Der Satz von Riemann-Hurwitz}
 Die Geschlechter der Riemannschen Fläche in einer Überlagerung erfüllen folgende fundamentale Beziehung.
 
@@ -2434,6 +2938,11 @@ $$
 $$
 
 Zusammen mit $2-2 g=E-K+F$ aus Satz 3.35 folgt die Behauptung.
+
+
+
+\pagebreak
+
 
 \section {Differentialformen}
 Ziel der nächten Abschnitte ist es, eine holomorphe Funktion $f: X \longrightarrow \mathbb{P}_{\mathbb{C}}^{1}$ für eine kompakte Riemannsche Fläche $X$ zu konstruieren. Dazu müssen wir in der Lage sein, $f$ abzuleiten und wir untersuchen hier, welches Objekt wir auf einer Riemannschen Fläche erhalten. Ableiten wollen und können wir nur kartenweise. Sei dazu $U \subset X$ genügend klein sodass $f(U) \subset \mathbb{C} \subset \mathbb{P}^{1}$ und sei $g: U \longrightarrow \mathbb{C}$ eine Karte von $X$. Dann kennen wir die Definition von $\frac{\partial\left(f \circ g^{-1}\right)}{\partial x}$ und $\frac{\partial\left(f \circ g^{-1}\right)}{\partial y}$. Wir bezeichnen nun die Kartenabbildung nicht mit $g$, sondern suggestiver mit $z: U \longrightarrow \mathbb{C} \cong \mathbb{R}^{2}$ und nennen die Koordinatenabbildungen $x$ und $y$, also $z=x+i y$. Sei $z_{1}=x_{1}+i y_{1}$ eine weitere Karte von $U$. Dann ist nach der Kettenregel

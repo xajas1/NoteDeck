@@ -4738,6 +4738,279 @@ H=H(\rho(X),\rho(P)) & \text{dynamisch} & \text{Zeitentwicklung, Energie} \\[3pt
 \]
 
 
+\pagebreak
+
+
+
+\subsection{Zwei Heisenberg-Kontexte: Analysis vs.\ Quantenkinematik}
+
+In diesem Abschnitt trennen wir klar zwei konzeptionell verschiedene,
+aber formal ähnliche Erscheinungsformen der Heisenberg-Struktur:
+\begin{enumerate}
+  \item die \emph{analytische Heisenberg-Struktur} in Funktionalanalysis und Fourieranalyse,
+  \item die \emph{quantenmechanische Heisenberg-/CCR-/Weyl-Struktur} als Kinematik der QM/QFT.
+\end{enumerate}
+Beide verwenden Kommutatoren vom Typ \([X,P]=i\), haben aber unterschiedliche
+Trägerobjekte und physikalische Interpretation.
+
+%------------------------------------------------------------
+\emph{\emph{A. Analytische Heisenberg-Struktur (Fourier/PDE-Kontext)}}
+
+\emph{1. Ausgangspunkt: Funktionen und Distributionen.}
+
+Sei \(V\simeq\R^n\) ein reeller Vektorraum und \(\mathcal{S}(V)\) der Schwartzraum,
+\(\mathcal{S}'(V)\) der Raum temperierter Distributionen.
+
+Wir betrachten zwei grundlegende Operatorfamilien:
+\begin{itemize}
+  \item \textbf{Multiplikation:}
+  \[
+  (M_{\xi}f)(x):=\xi(x)f(x),\qquad \xi\in C^\infty(V),
+  \]
+  insbesondere \(M_{x_j}: f(x)\mapsto x_j f(x)\).
+
+  \item \textbf{Ableitung:}
+  \[
+  (D_j f)(x):=-i\,\partial_{x_j} f(x),
+  \]
+  bzw.\ allgemein gerichtete Ableitungen \(D_v=-i\,\frac{d}{dt}f(x+tv)\big|_{t=0}\).
+\end{itemize}
+
+Diese Operatoren wirken zunächst auf \(\mathcal{S}(V)\)
+und setzen sich stetig auf \(\mathcal{S}'(V)\) fort (via adjungierter Konstruktion).
+
+\emph{2. Analytische Heisenberg-Relation.}
+
+Zwischen \(M_{x_j}\) und \(D_k\) gilt die formale Vertauschungsrelation
+\[
+[D_k,M_{x_j}] = D_k M_{x_j} - M_{x_j} D_k
+= -i\,\delta_{jk}\,\id.
+\]
+Das sieht wie eine Heisenberg-Relation aus, aber:
+\begin{itemize}
+  \item hier ist \([\,\cdot,\cdot\,]\) der \emph{Operator-Kommutator} auf Funktionsräumen,
+  \item \(-i\) erscheint aus der Wahl der Ableitungsnormalisierung, nicht als \(\hbar\),
+  \item \(M_{x_j},D_k\) haben (zunächst) \emph{keine Physik-Bedeutung}, sondern sind reine Analyse-Objekte.
+\end{itemize}
+
+Wir können die von diesen Operatoren erzeugte Lie-Algebra
+\(\mathfrak{h}^{\mathrm{an}}_V\) formal wie eine Heisenberg-Algebra schreiben,
+aber sie lebt in \(\End(\mathcal{S}(V))\) bzw.\ \(\End(\mathcal{S}'(V))\)
+und beschreibt die Struktur von Übersetzungen, Ableitungen und Multiplikationen.
+
+\emph{3. Fouriertransformation als Darstellungswechsel.}
+
+Die Fouriertransformation
+\[
+\mathcal{F}:\mathcal{S}(V)\to\mathcal{S}(V^\ast),\quad
+(\mathcal{F}f)(p) = \int_V e^{-i\langle p,x\rangle}f(x)\,dx
+\]
+erfüllt die fundamentalen Intertwining-Relationen:
+\[
+\mathcal{F}\,M_{x_j}\,\mathcal{F}^{-1} = i\,\partial_{p_j},\qquad
+\mathcal{F}\,(-i\partial_{x_j})\,\mathcal{F}^{-1} = M_{p_j}.
+\]
+
+Das bedeutet:
+\begin{itemize}
+  \item in der \emph{Ortsdarstellung} sind \(x_j\) Multiplikationsoperatoren
+        und \(-i\partial_{x_j}\) Ableitungen;
+  \item in der \emph{Impulsdarstellung} sind \(p_j\) Multiplikationsoperatoren
+        und \(i\partial_{p_j}\) Ableitungen.
+\end{itemize}
+
+Die Fouriertransformation implementiert also eine \emph{unitäre Äquivalenz}
+zweier Darstellungen der analytischen Heisenberg-Struktur:
+\[
+\mathcal{F}\circ \rho_x(a)\circ\mathcal{F}^{-1} = \rho_p(a),\qquad a\in\mathfrak{h}^{\mathrm{an}}_V.
+\]
+
+\emph{4. Rolle in der Dirac- und PDE-Theorie.}
+
+Im Kontext einer linearen Wellengleichung (z.\,B.\ Dirac oder Klein–Gordon)
+arbeiten wir typischerweise mit
+\[
+\psi\in\mathcal{S}'(\R^{1,3};W),
+\]
+und Differentialoperatoren der Form
+\[
+(i\partial_\mu)\psi,\qquad
+(\gamma^\mu\partial_\mu)\psi,
+\]
+sowie Multiplikationen mit Funktionen \(x^\mu\) oder \(p_\mu\) nach Fouriertransform.
+
+Hier ist die Heisenberg-artige Struktur lediglich:
+\begin{itemize}
+  \item ein \emph{funktionalanalytischer Rahmen},
+  \item ein Werkzeug, um PDEs via Fourierharmonik zu diagonalisieren,
+  \item Grundlage für Begriffe wie „Orts-“ vs. „Impulsraum“-Darstellung,
+  \item aber \emph{ohne} direkte Operator-Interpretation im Sinn von Observablen und Messungen.
+\end{itemize}
+
+Zusammengefasst:
+\[
+\boxed{
+\text{Analytische Heisenberg-Struktur: } [x,-i\partial] = i\ \text{als Rechenregel auf Funktions-/Distributionsräumen.}
+}
+\]
+
+%------------------------------------------------------------
+\emph{B. Quantenmechanische Heisenberg-/CCR-/Weyl-Struktur}
+
+\emph{1. Abstrakte Heisenberg-Algebra \(\mathfrak{h}_V\).}
+
+Für einen reellen Vektorraum \(V\simeq\R^n\) definieren wir
+die \textbf{quantenmechanische Heisenberg-Algebra} als Lie-Algebra
+\[
+\mathfrak{h}_V := V_x \oplus V_p \oplus \C Z
+\]
+mit Erzeugern \(X(v),P(\alpha),Z\) und Relationen
+\[
+[X(v),P(\alpha)] = i\hbar\,\alpha(v)\,Z,\qquad [Z,\cdot]=0.
+\]
+Hier ist \(\hbar\) explizit die Planck-Konstante,
+und \(\mathfrak{h}_V\) wird als \emph{Zentralerweiterung} der abelschen Algebra
+\(V_x\oplus V_p\) verstanden.
+
+\emph{Interpretation.}
+\begin{itemize}
+  \item \(\mathfrak{h}_V\) ist der \emph{kinematische Kern} einer Quantenmechanik:
+        sie kodiert die Nichtkommutativität von Orts- und Impulsobservablen.
+  \item Sie ist die quantisierte Version der klassischen Poisson-Struktur.
+\end{itemize}
+
+\emph{2. Universelle Hüllalgebra und Dynamik.}
+
+Die \textbf{universelle Hüllalgebra} \(U(\mathfrak{h}_V)\)
+ist die kleinste assoziative Algebra, welche die Heisenberg-Relationen enthält.
+Sie repräsentiert alle „Operatorpolynome in Ort und Impuls“:
+\[
+U(\mathfrak{h}_V)
+= \C\langle X_j,P_k,Z\rangle / \langle [X_j,P_k]-i\hbar\delta_{jk}Z,[Z,\cdot]\rangle.
+\]
+
+Ein Hamiltonoperator ist dann ein spezielles Element
+\[
+H = H(X,P) \in U(\mathfrak{h}_V),
+\]
+dessen Wahl die \emph{Dynamik} bestimmt.  
+Im Heisenberg-Bild gilt für Observablen \(A\in U(\mathfrak{h}_V)\):
+\[
+\dot{A}(t) = \frac{i}{\hbar}[H,A(t)],
+\]
+d.\,h.\ die Zeitentwicklung ist eine \emph{innere Derivation} in \(U(\mathfrak{h}_V)\).
+
+\emph{3. Weyl- und CCR-Algebren.}
+
+Exponentiell betrachtet führt \(\mathfrak{h}_V\) zur Weyl- bzw.\ CCR-Algebra:
+\begin{itemize}
+  \item \textbf{Weyl-Operatoren} \(W(f)\) (für \(f\in X\)) erfüllen
+        \[
+        W(f)W(g)=e^{-\frac{i}{2}\sigma(f,g)}\,W(f+g),
+        \]
+        mit symplektischer Form \(\sigma\).
+  \item Die C$^\ast$-Algebra \(\mathrm{CCR}(X,\sigma)\) ist die \emph{quantenmechanische Observablenalgebra}
+        eines bosonischen Systems.
+\end{itemize}
+
+Analog für Fermionen liefert ein Einteilchenraum \(Y\) die CAR-C$^\ast$-Algebra
+\(\mathrm{CAR}(Y)\).
+
+\emph{4. Darstellungen auf Hilberträumen.}
+
+Eine konkrete Quantenmechanik erhält man durch eine *-Darstellung
+\[
+\pi:\mathrm{CCR}(X,\sigma)\to\mathcal{B}(\mathcal{H}),
+\]
+wobei \(\mathcal{H}\) ein Hilbertraum ist
+(z.\,B.\ \(\mathcal{H}=L^2(\R^n)\) in der Schrödinger-Darstellung).
+
+In dieser Darstellung realisieren sich die Generatoren als
+\emph{quantum-mechanische Observablen}:
+\[
+\hat{X}_j = \pi(X_j),\qquad \hat{P}_k = \pi(P_k),
+\]
+mit \([\hat{X}_j,\hat{P}_k]=i\hbar\delta_{jk}\id\) als \emph{Nichtkommutativität von Messgrößen}.
+
+\emph{5. Fouriertransformation als Darstellungsgleichwertigkeit.}
+
+In der quantenmechanischen Schrödinger-/Heisenberg-Welt
+gibt es ebenfalls Orts- und Impulsdarstellung auf demselben Hilbertraum,
+verbunden durch die unitäre Fouriertransformation
+\(\mathcal{F}:L^2(\R^n_x)\to L^2(\R^n_p)\).
+
+Dort ist \(\mathcal{F}\) ein unitärer Operator zwischen
+\emph{Hilbertraumdarstellungen} der CCR-Algebra:
+\[
+\mathcal{F}\,\hat{X}_j\,\mathcal{F}^{-1} = i\hbar\,\partial_{p_j},\qquad
+\mathcal{F}\,\hat{P}_j\,\mathcal{F}^{-1} = p_j\cdot,
+\]
+aber jetzt mit expliziter Interpretation als Operatoren auf Zuständen.
+
+\emph{6. Physikalische Rolle.}
+
+In diesem Kontext ist:
+\begin{itemize}
+  \item die Algebra (Heisenberg/CCR) = \emph{Raum der Observablen},
+  \item die Darstellung \((\pi,\mathcal{H})\) = \emph{konkreter quantenmechanischer Zustandsraum},
+  \item die Hüllalgebra \(U(\mathfrak{h}_V)\) = \emph{Dynamik-Algebra}
+        mit Zeitentwicklung als innerer Automorphismenfluss.
+\end{itemize}
+
+Zusammengefasst:
+\[
+\boxed{
+\text{Quantenmechanische Heisenberg-Struktur: } [\hat X,\hat P]=i\hbar\ \text{als Observablenalgebra auf einem Hilbertraum.}
+}
+\]
+
+%------------------------------------------------------------
+\emph{C. Vergleich und Unterscheidung}
+
+Die formalen Kommutatorrelationen in beiden Kontexten sehen ähnlich aus:
+\[
+[x,-i\partial] = i \quad\text{vs.}\quad [\hat X,\hat P]=i\hbar.
+\]
+Dennoch beschreiben sie konzeptionell verschiedenes:
+
+\begin{center}
+\begin{tabular}{lll}
+\textbf{Aspekt} & \textbf{Analytische Heisenberg-Struktur} & \textbf{Quanten-Heisenberg-Struktur} \\[4pt]
+Trägerobjekt & \(\mathcal{S}(V),\mathcal{S}'(V)\) & Hilbertraum \(\mathcal{H}\) von Zuständen \\[4pt]
+Operatoren & Multiplikation, Ableitung & Observablen \(\hat X,\hat P\) \\[4pt]
+Bedeutung von \([X,P]\) & Rechenregel (Fourier, PDE) & Nichtkommutativität von Messgrößen \\[4pt]
+\(\hbar\) & nicht notwendig & fundamental, fest eingebaut \\[4pt]
+Dynamik & PDE auf Feldern (klassisch) & Heisenberg-Gleichung \(\dot A = \tfrac{i}{\hbar}[H,A]\) \\[4pt]
+Algebra & „Heisenberg-artig“ in \(\End(\mathcal{S})\) & Heisenberg-/CCR-/Weyl-Algebra von Observablen
+\end{tabular}
+\end{center}
+
+\begin{quote}
+\textbf{Bemerkung.}
+Formal taucht dieselbe Heisenberg-Algebra in zwei Rollen auf:
+\begin{itemize}
+  \item als \emph{analytisches Werkzeug} zur Beschreibung von Translationen,
+        Ableitungen und Fouriertransformationen auf Funktions- und Distributionsräumen,
+  \item als \emph{quantenmechanische Kinematik} der Observablenalgebra
+        (Ort/Impuls, CCR, Weyl-Algebra).
+\end{itemize}
+Die Gleichung \([X,P]=i\) allein entscheidet daher nicht,
+in welchem Kontext man sich befindet:
+entscheidend ist, ob
+\begin{enumerate}
+  \item die Operatoren auf \emph{Funktionen/Feldern} ohne Messinterpretation wirken
+        (PDE-/Fourieranalyse) oder
+  \item auf einem \emph{Hilbertraum physikalischer Zustände} mit\linebreak
+        Interpretationen von Spektren, Erwartungswerten und Zeitentwicklung
+        (Quantenmechanik/-feldtheorie).
+\end{enumerate}
+Bewusst zwischen diesen beiden Kontexten zu unterscheiden,
+verhindert begriffliche Verwechslungen:
+man erkennt, dass dieselbe algebraische Form
+in der Analysis als Rechenstruktur,
+in der Quantenphysik als physikalische Kinematik fungiert.
+\end{quote}
+
 
 \pagebreak
 
@@ -9402,74 +9675,6 @@ Physikalisch entspricht dies dem Übergang von einem vorwärts laufenden Teilche
 \end{CONC}
 
 
-\subsection{Charge Conjugation im elektromagnetischen Feld}
-
-\emph{Setup und Konventionen}
-Wir betrachten die Diracgleichung mit minimaler Kopplung
-\[
-\bigl(i\gamma^\mu D_\mu - m\bigr)\,\psi \;=\;0, 
-\qquad D_\mu:=\partial_\mu + i q A_\mu,
-\]
-wobei $A_\mu$ als klassisches (reelles) externes Potential aufgefasst wird. 
-Die \emph{Ladungskonjugation} eines Dirac-Spinors ist definiert durch
-\[
-\psi^C \;:=\; C\,\bar\psi^{\,T}
-\;=\; i\gamma^2\gamma^0\,\bar\psi^{\,T}
-\;=\; i\gamma^2\,\psi^*,
-\]
-wobei $C$ die \emph{Charge-Conjugation-Matrix} ist mit den Standard-Eigenschaften
-\begin{equation}\label{eq:C-properties}
-C\,\gamma^\mu\,C^{-1} \;=\; -\,(\gamma^\mu)^{T},
-\qquad C^T=-C,
-\qquad C^\dagger C=\id.
-\end{equation}
-
-\emph{Herleitung der Gleichung für \texorpdfstring{$\psi^C$}{psiC}}
-Aus
-\[
-\bigl(i\gamma^\mu D_\mu - m\bigr)\psi \;=\;0
-\]
-folgt nach komplexer Konjugation (unter der Annahme $A_\mu\in\R$):
-\[
-\bigl(-i\,(\gamma^\mu)^* D_\mu^* - m\bigr)\,\psi^* \;=\;0,
-\qquad D_\mu^* \;=\; \partial_\mu - i q A_\mu.
-\]
-Multiplizieren wir von links mit $C$ und benutzen \eqref{eq:C-properties} in einer basisunabhängigen Form
-\[
-C\,(\gamma^\mu)^*\,C^{-1} \;=\; +\,\gamma^\mu,
-\]
-(diese Relation ist äquivalent zu $C\gamma^\mu C^{-1}=-(\gamma^\mu)^T$, kombiniert mit $(\cdot)^*=(\cdot)^{T}$ für reelle Matrizenanteile in einer geeigneten Darstellung),
-so erhalten wir
-\[
-\Bigl(-i\,\gamma^\mu\,D_\mu^* - m\Bigr)\,(C\,\psi^*) \;=\;0.
-\]
-Mit $D_\mu^*=\partial_\mu - i q A_\mu$ und $C\,\psi^*=\psi^C$ folgt
-\[
-\Bigl(i\,\gamma^\mu(\partial_\mu + i(-q)A_\mu) - m\Bigr)\,\psi^C \;=\;0.
-\]
-
-
-\textbf{Resultat.} Ist $\psi$ Lösung von
-\[
-\bigl(i\gamma^\mu(\partial_\mu + i q A_\mu) - m\bigr)\psi=0,
-\]
-so erfüllt der ladungskonjugierte Spinor
-\[
-\psi^C \;=\; C\,\bar\psi^{\,T} \;=\; i\gamma^2\,\psi^*
-\]
-die Diracgleichung mit \emph{invertiertem Vorzeichen der Ladung}:
-\[
-\boxed{\;\bigl(i\gamma^\mu(\partial_\mu + i(-q)A_\mu) - m\bigr)\,\psi^C \;=\; 0.\;}
-\]
-
-
-\emph{Kommentar zum Namen „charge conjugation“}
-Die Operation $C$ vertauscht Teilchen- mit Antiteilchenfreiheitsgraden, indem sie \emph{alle additiven Eichladungen} (hier die elektrische Ladung) im Kopplungsterm an das Eichpotential $A_\mu$ das Vorzeichen wechseln lässt:
-\[
-q \;\longmapsto\; -q,
-\qquad A_\mu \;\text{unverändert (äußeres Feld)}.
-\]
-Daher der Name \emph{Ladungskonjugation}: $\psi \mapsto \psi^C$ beschreibt das Feld des Antiteilchens zur Lösung $\psi$ im selben elektromagnetischen Hintergrund.
 
 
 
@@ -9933,7 +10138,10 @@ $$
 
 Als reelles Feld ist $A^{\mu}(x)$ identisch mit seinem ladungskonjugierten Feld und somit neutral.
 
-\subsection*{Relativistische Quantenmechanik oder Quantenfeldtheorie}
+
+\pagebreak
+
+\subsection{Relativistische Quantenmechanik oder Quantenfeldtheorie}
 Fassen wir unsere bisherigen Ergebnisse zusammen. Wir haben nun drei verschiedene relativistisch kovariante Wellengleichungen, die aufgrund unterschiedlicher Freiheitsgrade und ihres Verhaltens unter Lorentztransformationen Objekte mit Spins $0, \frac{1}{2}$ und 1 beschreiben. Alle drei besitzen Lösungen mit scheinbar negativer Energie, die aber rückwärts in der Zeit laufende Wellen bzw. Teilchen und somit vorwärtslaufende Antiteilchen positiver Energie darstellen. Damit beinhalten relativistische Theorien zwei physikalische Phänomene, die in nichtrelativistischen Theorien ,,von Hand"eingebaut werden müssen: Spin und Antimaterie.
 
 Hinsichtlich einer möglichen quantenmechanischen Interpretation ist die Lage jedoch für jede Wellengleichung unterschiedlich: die elektromagnetische Wellengleichung ist rein klassisch und hat keinerlei Bezug zur Quantenmechanik. Die Klein-Gordon-Gleichung impliziert eine Kontinuitätsgleichung, die die Interpretation der Ladungsdichte als Wahrscheinlichkeitsdichte im Sinne der Quantenmechanik verbietet. Lediglich die Diracgleichung und ihre zugehörige Kontinuitätsgleichung lassen
@@ -10091,24 +10299,16 @@ $$
 
 Welches sind die Eigenwerte? Gilt dies auch für $m \neq 0$ ?
 
-\section*{Klassische Feldtheorie}
-\section*{4}
-\section*{Inhaltsverzeichnis}
-4.1 Von N-Punktmechanik zu relativistischer Feldtheorie ..... 70\\
-4.2 Die Funktionalableitung ..... 72\\
-4.3 Die Euler-Lagrange-Gleichungen für Felder ..... 73\\
-4.4 Wirkung und Lagrangedichte elementarer Felder ..... 75\\
-4.4.1 Reelles Skalarfeld ..... 76\\
-4.4.2 Komplexes Skalarfeld ..... 77\\
-4.4.3 Diracfeld ..... 78\\
-4.4.4 Maxwellfeld ..... 79\\
-4.4.5 Massives Vektorfeld ..... 80\\
-4.5 Symmetrien und Erhaltungssätze ..... 81\\
-Aufgaben ..... 87
+
+\pagebreak
+
+\section{Klassische Feldtheorie}
+
+
 
 Gemäß den Überlegungen des letzten Abschnitts starten wir in diesem Kapitel neu und formulieren zunächst klassische Theorien für Felder verschiedenen Verhaltens unter Lorentztransformationen, die dann im nächsten Kapitel den Ausgangspunkt für die Quantisierung bilden werden. Wir beginnen mit der Übertragung des Hamilton-Lagrange-Formalismus von Mehrteilchensystemen auf relativistische Felder und lernen dabei, wie man mit Funktionalen rechnet. Dann formulieren wir einige grundlegende Axiome, die Wirkungen erfüllen müssen, um physikalische Systeme beschreiben zu können. Damit ausgestattet konstruieren wir die einfachsten Wirkungen für freie Felder. Am Beispiel des skalaren Feldes beweisen wir schließlich das im Folgenden sehr wichtige Noethertheorem, wonach die Invarianz der Wirkung unter einer kontinuierlichen Symmetrietransformation ein Erhaltungsgesetz zur Folge hat.
 
-\subsection*{Von N-Punktmechanik zu relativistischer Feldtheorie}
+\subsection{Von N-Punktmechanik zu relativistischer Feldtheorie}
 Klassische Felder sind uns vertraut aus der Kontinuumsmechanik und der Elektrodynamik, für eine ausführliche Darstellung siehe z. B. [2]. Um den Übergang von Vielteilchensystemen zu Feldtheorien sowie deren Hamilton-Lagrange-Formalismus zu verstehen, betrachten wir als Beispiel die Beschreibung einer Saite in der Kontinuumsmechanik. Zunächst approximiert man die Saite durch eine Federkette aus $N$ Massenpunkten mit Masse $m$, die durch jeweils eine masselose Feder der Federkonstanten $k$ an ihre Nachbarn gekoppelt sind, wie in Abb. 4.1. Der Einfachkeit halber nehmen wir an, dass sich die Massenpunkte nur in einer Dimension (vertikal) bewegen können. Das System besitzt $2 N$ Freiheitsgrade, die Auslenkungen aus den Ruhelagen der Massenpunkte und die zugehörigen Impulse,
 
 $$
@@ -10185,7 +10385,10 @@ $$
 
 Die Lagrangedichte ist somit für relativistisch kovariante Theorien ein Lorentzskalar (die Lagrangefunktion dagegen nicht). Im Allgemeinen kann die Lagrangedichte natürlich eine Funktion beliebiger und verschiedener Felder sein, wir beschränken uns zur Entwicklung des Formalismus zunächst auf skalare Felder.
 
-\subsection*{Die Funktionalableitung}
+
+\pagebreak
+
+\subsection{Die Funktionalableitung}
 Es ist nützlich, sich vor der Durchführung praktischer Rechnungen noch einmal an die Definition der Funktionalableitung zu erinnern. Sei $x(s)$ eine Funktion einer reellen Variablen $s$. Die Variation eines Funktionals $F[x]$ ist definiert als
 
 $$
@@ -10237,7 +10440,10 @@ $$
 
 Diese bildet die Basis für die Entwicklung des Wirkungsfunktionals in den folgenden Abschnitten.
 
-\subsection*{Die Euler-Lagrange-Gleichungen für Felder}
+
+\pagebreak
+
+\subsection{Die Euler-Lagrange-Gleichungen für Felder}
 Die dynamischen Variablen eines kontinuierlichen Systems sind Felder und ihre Ableitungen, für die wir nun die Bewegungsgleichungen finden wollen. Die Dynamik folgt dabei wieder dem Hamilton'schen Prinzip, wonach die Lösungen von Bewegungsgleichungen die Wirkung minimieren. Zum Auffinden der Gleichungen\\
 betrachten wir daher kleine Variationen $\delta_{0} \phi$ und $\delta_{0}\left(\partial_{\mu} \phi\right)$ um die physikalischen Lösungen, für die $\delta S=0$ sein muss. Hierbei bezeichnen $\delta_{0} \phi$ und $\delta_{0}\left(\partial_{\mu} \phi\right)$ Variationen des funktionalen Zusammenhangs an jedem festen Raumzeitpunkt (im Gegensatz zur Veränderung des Funktionswerts durch Ändern des Arguments),
 
@@ -10308,7 +10514,9 @@ $$
 \mu \partial_{t}^{2} \phi-\kappa \partial_{x}^{2} \phi=0
 $$
 
-\subsection*{Wirkung und Lagrangedichte elementarer Felder}
+\pagebreak
+
+\subsection{Wirkung und Lagrangedichte elementarer Felder}
 Bisher haben wir einen kovarianten Formalismus für die Herleitung der klassischen Feldgleichungen aus einer beliebigen Wirkung für ein reelles Skalarfeld entwickelt. Nun ist die Frage, welche Wirkungen bzw. Lagrangedichten teilchenphysikalische Systeme beschreiben können. Dazu stellen wir weitere physikalisch notwendige Forderungen auf:
 
 \begin{itemize}
@@ -10533,7 +10741,10 @@ $$
 \end{aligned}
 $$
 
-\subsection*{Symmetrien und Erhaltungssätze}
+
+\pagebreak
+
+\subsection{Symmetrien und Erhaltungssätze}
 Die herausragende Bedeutung von Symmetrien für die klassische Physik wird im Noethertheorem zusammengefasst: Die Invarianz der Wirkung unter einer kontinuierlichen globalen Transformation impliziert einen erhaltenen Strom und damit eine erhaltene Ladung. In der Mechanik von Massenpunkten folgen Energie- und Impulserhaltung aus der Invarianz der Wirkung unter Translationen in Zeit und Raum,\\
 die Drehimpulserhaltung aus der Invarianz unter räumlichen Rotationen. Wir wollen uns in diesem Abschnitt überzeugen, dass dieses Theorem auch für Feldtheorien und Transformationen der Felder, nicht nur der Koordinaten, gültig ist. Wir besprechen exemplarisch den Fall eines reellen skalaren Feldes mit der nicht weiter spezifizierten Lagrangedichte $\mathscr{L}\left(\phi, \partial_{\mu} \phi\right)$ und betrachten eine kombinierte, infinitesimale Transformation von Koordinaten und Feld,
 

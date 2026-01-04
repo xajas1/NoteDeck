@@ -1,0 +1,986 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17  Graphik
+% 18  Extra
+% 00. Titel und Autor
+
+\usepackage{slashed}
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Ad}{\operatorname{Ad}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\QU}{\mathbb{H}}
+\newcommand{\Cinf}{C^{\infty}}
+\newcommand{\Mod}{\mathrm{Mod}}
+\newcommand{\Alg}{\mathrm{Alg}}
+\newcommand{\Diff}{\mathrm{Diff}}
+\newcommand{\Iso}{\mathrm{Iso}}
+\newcommand{\Aut}{\mathrm{Aut}}
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Cl}{\mathrm{Cl}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\Mat}{\mathrm{Mat}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\Sp}{\mathrm{Sp}}
+\newcommand{\Spin}{\mathrm{Spin}}
+\newcommand{\Pin}{\mathrm{Pin}}
+\newcommand{\Lor}{\mathrm{Lor}}
+\newcommand{\Ogroup}{\mathrm{O}}
+\newcommand{\U}{\mathrm{U}}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\graphicspath{{../../Library/Images/}}
+\usepackage[export]{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+% Hellblau definieren
+\definecolor{hellblau}{rgb}{0.3,0.6,1}
+\newenvironment{note}{\par\begingroup\color{hellblau}\itshape}{\par\endgroup}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\begin{unitbox}\CustomHeading{Definition}{#1}{#2}}{\end{unitbox}}
+\newenvironment{PROP}[2]{\begin{unitbox}\CustomHeading{Proposition}{#1}{#2}}{\end{unitbox}}
+\newenvironment{THEO}[2]{\begin{unitbox}\CustomHeading{Theorem}{#1}{#2}}{\end{unitbox}}
+\newenvironment{LEM}[2]{\begin{unitbox}\CustomHeading{Lemma}{#1}{#2}}{\end{unitbox}}
+\newenvironment{KORO}[2]{\begin{unitbox}\CustomHeading{Corollar}{#1}{#2}}{\end{unitbox}}
+\newenvironment{REM}[2]{\begin{unitbox}\CustomHeading{Remark}{#1}{#2}}{\end{unitbox}}
+\newenvironment{EXA}[2]{\begin{unitbox}\CustomHeading{Example}{#1}{#2}}{\end{unitbox}}
+\newenvironment{STUD}[2]{\begin{unitbox}\CustomHeading{Study}{#1}{#2}}{\end{unitbox}}
+\newenvironment{CONC}[2]{\begin{unitbox}\CustomHeading{Concept}{#1}{#2}}{\end{unitbox}}
+\newenvironment{OTH}[2]{\begin{unitbox}\CustomHeading{Other}{#1}{#2}}{\end{unitbox}}
+\newenvironment{EXE}[2]{\begin{unitbox}\CustomHeading{Exercise}{#1}{#2}}{\end{unitbox}}
+\newenvironment{MOT}[2]{\begin{unitbox}\CustomHeading{Motivation}{#1}{#2}}{\end{unitbox}}
+\newenvironment{PROOF}[2]{\begin{unitbox}\CustomHeading{Proof}{#1}{#2}}{\end{unitbox}}
+
+% --- Unit Umgebung für Source-Inhalte ---
+\usepackage{mdframed}
+\newmdenv[
+  linewidth=1pt,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftmargin=0cm,
+  rightmargin=0cm,
+  skipabove=10pt,
+  skipbelow=10pt,
+  innertopmargin=0.5\baselineskip,
+  innerbottommargin=0.5\baselineskip,
+  backgroundcolor=gray!10,
+  linecolor=gray
+]{unitbox}
+
+\newenvironment{unit}[1]
+  {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
+  {\end{unitbox}}
+
+% --- 17. ... ---
+
+% --- 18. Extras ---
+\usepackage{stmaryrd}
+\usepackage{bbold}  % falls du \mathbb{1} nutzen willst
+
+% --- 00. Titel und Autor ---
+\title{Mein Titel}
+\author{Tim Jaschik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+Kurze Beschreibung …
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\tableofcontents
+
+\pagebreak
+
+
+
+% ---------------------------------------------------------------------------
+% Body sketch for a 60min talk:
+% Spin geometry on compact homogeneous spaces + Parthasarathy formula
+% (Definitions + statements (no proofs) + examples)
+% ---------------------------------------------------------------------------
+
+\section{Scope and guiding thread}
+
+\begin{MOT}{SG-00-01}{Why Dirac on homogeneous spaces?}
+We want a clean bridge
+\[
+\text{Riemannian spin geometry (Dirac operator)}\quad \longleftrightarrow\quad
+\text{representation theory (Casimir, highest weights)}.
+\]
+On a compact homogeneous space $M=G/K$ (in particular on a compact Lie group $G$), symmetry forces $D^2$ to be expressible in terms of Casimir elements. This culminates in Parthasarathy's formula
+\[
+D^2 = \Omega_{\mathfrak g}-\Omega_{\mathfrak k}+\big(\|\rho_{\mathfrak g}\|^2-\|\rho_{\mathfrak k}\|^2\big)
+\]
+(up to normalization conventions), which immediately turns geometric spectral questions into algebraic ones.
+\end{MOT}
+
+\begin{CONC}{SG-00-02}{Talk format}
+We present:
+\begin{romanenum}[Structure:]
+\item geometric setup: spin structures, spinor bundles, Dirac operator;
+\item homogeneous spaces $G/K$: invariant metric, isotropy representation, spin condition;
+\item Casimir elements and the $\rho$-shift;
+\item Parthasarathy formula (statement) and consequences;
+\item examples: $S^n$, $SU(2)\cong S^3$, and the group case $G$.
+\end{romanenum}
+\end{CONC}
+
+\section{Spin structures and Dirac operators: geometric basics}
+
+\begin{DEF}{SG-01-01}{Spin structure on a Riemannian manifold}
+Let $(M^n,g)$ be an oriented Riemannian manifold and $P_{\SO}(M)\to M$ its oriented orthonormal frame bundle.
+A \emph{spin structure} on $M$ is a principal $\Spin(n)$-bundle $P_{\Spin}(M)\to M$ together with a $2$-fold covering map
+\[
+\lambda:P_{\Spin}(M)\longrightarrow P_{\SO}(M)
+\]
+which is $\Spin(n)$-equivariant w.r.t.\ the standard covering $\rho:\Spin(n)\to \SO(n)$, i.e.\ $\lambda(u\cdot a)=\lambda(u)\cdot \rho(a)$.
+\end{DEF}
+
+\begin{THEO}{SG-01-02}{Topological existence criterion (classical)}
+An oriented manifold $M$ admits a spin structure if and only if
+\[
+w_2(TM)=0 \in H^2(M;\Z_2).
+\]
+Moreover, the set of spin structures (if non-empty) is a torsor over $H^1(M;\Z_2)$.
+\end{THEO}
+
+\begin{DEF}{SG-01-03}{Spinor bundle and Clifford multiplication}
+Assume $M$ is spin. Let $\Sigma_n$ be the complex spin representation of $\Spin(n)$.
+The \emph{spinor bundle} is the associated complex vector bundle
+\[
+S:=P_{\Spin}(M)\times_{\Spin(n)} \Sigma_n.
+\]
+It carries \emph{Clifford multiplication} $c:T^*M\otimes S\to S$ induced by the Clifford action on $\Sigma_n$, characterized by
+\[
+c(\alpha)c(\beta)+c(\beta)c(\alpha)=-2\,g^{-1}(\alpha,\beta)\,\id_S.
+\]
+\end{DEF}
+
+\begin{DEF}{SG-01-04}{Spin connection and Dirac operator}
+The Levi-Civita connection on $P_{\SO}(M)$ lifts to a connection $\nabla^S$ on $S$ (the \emph{spin connection}).
+The \emph{Dirac operator} is the first-order differential operator
+\[
+D := c\circ \nabla^S:\Gamma(S)\longrightarrow \Gamma(S),
+\qquad
+D\psi=\sum_{i=1}^n c(e^i)\,\nabla^S_{e_i}\psi
+\]
+for any local orthonormal frame $(e_i)$ with dual coframe $(e^i)$.
+\end{DEF}
+
+\begin{THEO}{SG-01-05}{Lichnerowicz--Weitzenb\"ock formula (statement)}
+On a Riemannian spin manifold,
+\[
+D^2 = (\nabla^S)^*\nabla^S + \frac{1}{4}\,\mathrm{scal}_g.
+\]
+In particular, on compact $M$, if $\mathrm{scal}_g>0$ everywhere then $\ker D=\{0\}$.
+\end{THEO}
+
+\begin{REM}{SG-01-06}{Why we go beyond Lichnerowicz}
+Lichnerowicz relates $D^2$ to curvature, but does not identify \emph{eigenvalues}.
+On homogeneous spaces $G/K$ we can exploit symmetry to express $D^2$ in representation-theoretic terms (Casimir operators).
+\end{REM}
+
+\section{Compact homogeneous spaces $G/K$ and spinors}
+
+\begin{DEF}{SG-02-01}{Reductive decomposition and isotropy representation}
+Let $G$ be a compact Lie group, $K\subset G$ a closed subgroup, and $\mathfrak g,\mathfrak k$ their Lie algebras.
+Fix an $\Ad(G)$-invariant inner product $B$ on $\mathfrak g$ and set $\mathfrak p:=\mathfrak k^\perp$.
+Then
+\[
+\mathfrak g=\mathfrak k\oplus \mathfrak p,\qquad [\mathfrak k,\mathfrak p]\subset \mathfrak p,
+\]
+and the \emph{isotropy representation} is
+\[
+\Ad|_K:K\to \SO(\mathfrak p,B|_{\mathfrak p}).
+\]
+\end{DEF}
+
+\begin{DEF}{SG-02-02}{Invariant metric on $G/K$}
+The $B$-inner product on $\mathfrak p$ defines a $G$-invariant Riemannian metric on the homogeneous space
+\[
+M:=G/K
+\]
+by identifying $T_{eK}(G/K)\cong \mathfrak p$ and translating by $G$.
+\end{DEF}
+
+\begin{DEF}{SG-02-03}{Spin condition for $G/K$}
+The homogeneous space $G/K$ is \emph{spin} if the isotropy representation lifts to $\Spin(\mathfrak p)$, i.e.\ there exists a homomorphism
+\[
+\widetilde{\Ad}:K\to \Spin(\mathfrak p)
+\quad\text{with}\quad
+\rho\circ \widetilde{\Ad}=\Ad|_K.
+\]
+In this case the spinor bundle on $G/K$ is
+\[
+S \;=\; G\times_K \Sigma_{\mathfrak p},
+\]
+where $\Sigma_{\mathfrak p}$ is the complex spin module for $\Cl(\mathfrak p)$.
+\end{DEF}
+
+\begin{REM}{SG-02-04}{Sections as equivariant functions}
+A section of $S=G\times_K \Sigma_{\mathfrak p}$ can be identified with a smooth map $f:G\to \Sigma_{\mathfrak p}$
+satisfying $f(gk)=k^{-1}\cdot f(g)$. This is the entry point for bringing in $U(\mathfrak g)$ and Peter--Weyl.
+\end{REM}
+
+\section{Representation-theoretic ingredients: Casimir and the $\rho$-shift}
+
+\begin{DEF}{SG-03-01}{Universal enveloping algebra and invariant differential operators}
+Let $U(\mathfrak g)$ be the universal enveloping algebra of $\mathfrak g$.
+Elements of $\mathfrak g$ act as left-invariant vector fields on $G$, hence as left-invariant differential operators.
+Products in $U(\mathfrak g)$ correspond to compositions of these operators.
+\end{DEF}
+
+\begin{DEF}{SG-03-02}{Casimir elements}
+Fix $B$ as above.
+For a $B$-orthonormal basis $(X_i)$ of $\mathfrak g$ and $(Y_a)$ of $\mathfrak k$ define
+\[
+\Omega_{\mathfrak g}:=\sum_i X_i^2\in U(\mathfrak g),
+\qquad
+\Omega_{\mathfrak k}:=\sum_a Y_a^2\in U(\mathfrak k).
+\]
+These lie in the centers $Z(U(\mathfrak g))$ and $Z(U(\mathfrak k))$ and act by scalars on irreducible representations.
+\end{DEF}
+
+\begin{DEF}{SG-03-03}{Roots and the Weyl vector $\rho$}
+Assume $G$ is connected and choose a maximal torus $T\subset K\subset G$ (equal rank case is the cleanest setting).
+Let $\Delta_{\mathfrak g}$ and $\Delta_{\mathfrak k}$ be the corresponding root systems and fix positive systems.
+Define
+\[
+\rho_{\mathfrak g}=\frac12\sum_{\alpha\in \Delta_{\mathfrak g}^+}\alpha,
+\qquad
+\rho_{\mathfrak k}=\frac12\sum_{\alpha\in \Delta_{\mathfrak k}^+}\alpha,
+\]
+and use $B$ to define norms $\|\cdot\|$ on weights.
+\end{DEF}
+
+\begin{THEO}{SG-03-04}{Casimir eigenvalue (highest weight form)}
+Let $V_\lambda$ be an irreducible (complex) representation of $G$ with highest weight $\lambda$.
+Then $\Omega_{\mathfrak g}$ acts on $V_\lambda$ as scalar multiplication by
+\[
+c_{\mathfrak g}(\lambda)=\|\lambda+\rho_{\mathfrak g}\|^2-\|\rho_{\mathfrak g}\|^2,
+\]
+(with normalization determined by $B$). Likewise for $K$ and $\Omega_{\mathfrak k}$.
+\end{THEO}
+
+\section{Dirac on $G/K$ and Parthasarathy's formula}
+
+\begin{CONC}{SG-04-02a}{Equivariant functions and induced bundles}
+Let $M=G/K$ be a compact homogeneous space and assume $M$ is spin. Fix a lift
+$\widetilde{\Ad}:K\to \Spin(\mathfrak p)$ of the isotropy representation $\Ad|_K:K\to \SO(\mathfrak p)$
+and let $\Sigma_{\mathfrak p}$ be the complex spin module of $\Cl(\mathfrak p)$.
+Then the spinor bundle is $S=G\times_K \Sigma_{\mathfrak p}$.
+
+A section $\psi\in\Gamma(S)$ can be identified with a smooth function $f:G\to \Sigma_{\mathfrak p}$
+satisfying the $K$-equivariance condition
+\[
+f(gk)=\widetilde{\Ad}(k)^{-1}f(g)\qquad (g\in G,\ k\in K).
+\]
+We denote this space by
+\[
+\Cinf(G,\Sigma_{\mathfrak p})^{K}:=\{f\in \Cinf(G,\Sigma_{\mathfrak p})\mid f(gk)=k^{-1}\cdot f(g)\}.
+\]
+\end{CONC}
+
+\begin{DEF}{SG-04-02b}{Left-invariant differential operators from $U(\mathfrak g)$}
+For $X\in\mathfrak g$ let $X^L$ be the corresponding left-invariant vector field on $G$:
+\[
+(X^L f)(g):=\left.\frac{d}{dt}\right|_{t=0} f(\exp(-tX)\,g).
+\]
+This yields a representation $\pi_L:\mathfrak g\to \Diff^1(G)$ which extends uniquely
+to an algebra homomorphism
+\[
+\pi_L:U(\mathfrak g)\longrightarrow \Diff(G)
+\]
+from the universal enveloping algebra to the algebra of left-invariant differential operators on $G$.
+\end{DEF}
+
+\begin{REM}{SG-04-02c}{Why $\mathfrak p$ (not $\mathfrak g$) appears}
+The tangent space at the base point $o=eK\in G/K$ is identified with $\mathfrak p$.
+Hence a first-order operator on $G/K$ is governed by derivatives along $\mathfrak p$-directions.
+In the induced picture $\Gamma(S)\cong \Cinf(G,\Sigma_{\mathfrak p})^K$ this corresponds to acting by
+left-invariant vector fields $Z^L$ with $Z\in\mathfrak p$.
+\end{REM}
+
+\begin{DEF}{SG-04-02d}{Clifford action on the model spin module}
+Let $c:\mathfrak p\to \End(\Sigma_{\mathfrak p})$ be the Clifford action, i.e.
+\[
+c(Z)c(W)+c(W)c(Z)=-2\,B(Z,W)\,\id_{\Sigma_{\mathfrak p}}.
+\]
+Via the natural embedding $\mathfrak p\hookrightarrow C(\mathfrak p)$ we identify $Z\in\mathfrak p$
+with its Clifford generator (and similarly denote its action on $\Sigma_{\mathfrak p}$ by $c(Z)$).
+\end{DEF}
+
+\begin{CONC}{SG-04-02e}{From the algebraic element $\mathcal D$ to a differential operator}
+Fix a $B$-orthonormal basis $(Z_i)$ of $\mathfrak p$.
+Define an operator on $\Cinf(G,\Sigma_{\mathfrak p})^K$ by
+\[
+(D_0 f)(g) \;:=\; \sum_i c(Z_i)\, (Z_i^L f)(g).
+\]
+This is the \emph{principal (first-order) part} of the geometric Dirac operator on $G/K$.
+
+Equivalently, using the algebraic Dirac element
+\[
+\mathcal D=\sum_i Z_i\otimes Z_i\in U(\mathfrak g)\otimes C(\mathfrak p),
+\]
+one may write symbolically
+\[
+D_0 \;=\; (\pi_L\otimes c)(\mathcal D),
+\]
+where $\pi_L$ acts on the $G$-variable and $c$ acts on $\Sigma_{\mathfrak p}$.
+\end{CONC}
+
+\begin{REM}{SG-04-02f}{Where the ``lower order term'' comes from}
+The geometric Dirac operator $D$ is not merely $D_0$.
+It also contains a $0$-th order term coming from the spin connection on $S$.
+On a general homogeneous space $G/K$ this term is expressed via the $\mathfrak k$-component of brackets
+$[Z_i,Z_j]_{\mathfrak k}$ (i.e.\ the curvature of the canonical connection).
+In the symmetric space case $[\,\mathfrak p,\mathfrak p\,]\subset\mathfrak k$ the formula simplifies drastically
+and leads to Parthasarathy's identity.
+\end{REM}
+
+\begin{CONC}{SG-04-02g}{A clean formulation (symmetric / naturally reductive case)}
+Assume $G/K$ is naturally reductive for the metric induced by $B$ (in particular, for compact symmetric spaces).
+Then the geometric Dirac operator can be written in the induced picture as
+\[
+D \;=\; \sum_i c(Z_i)\,Z_i^L \;+\; \frac{1}{4}\sum_{i<j} c(Z_i)c(Z_j)\,c([Z_i,Z_j]_{\mathfrak p}),
+\]
+and in the symmetric case the second term becomes a \emph{constant} Clifford element.
+Consequently, $D^2$ can be computed inside $U(\mathfrak g)\otimes C(\mathfrak p)$.
+\end{CONC}
+
+\begin{THEO}{SG-04-02h}{Parthasarathy identity (conceptual version)}
+Let $G$ be compact semisimple, $K\subset G$ closed, and assume $G/K$ is spin and symmetric (or equal-rank compact type).
+Then, as an operator on $\Gamma(S)\cong \Cinf(G,\Sigma_{\mathfrak p})^K$, one has
+\[
+D^2 \;=\; \Omega_{\mathfrak g} \;-\; \Omega_{\mathfrak k}^{\Delta} \;+\; \big(\|\rho_{\mathfrak g}\|^2-\|\rho_{\mathfrak k}\|^2\big),
+\]
+where $\Omega_{\mathfrak g}$ acts via the left regular representation and
+$\Omega_{\mathfrak k}^{\Delta}$ is the Casimir for the \emph{diagonal} $\mathfrak k$-action
+(right differentiation on $G$ together with the spin action on $\Sigma_{\mathfrak p}$).
+In particular, $D^2$ is ``Casimir + constant'' on each $G$-type.
+\end{THEO}
+
+\begin{REM}{SG-04-02i}{Diagonal $\mathfrak k$-action (what $\Omega_{\mathfrak k}^{\Delta}$ means)}
+On $\Cinf(G,\Sigma_{\mathfrak p})$ there are two natural $\mathfrak k$-actions:
+\begin{romanenum}[Actions:]
+\item Right differentiation: for $Y\in\mathfrak k$,
+\[
+(Y^R f)(g):=\left.\frac{d}{dt}\right|_{t=0} f(g\exp(tY)).
+\]
+\item Spin action on $\Sigma_{\mathfrak p}$: the differential of $\widetilde{\Ad}:K\to \Spin(\mathfrak p)$ yields
+a Lie algebra homomorphism $\mathfrak k\to \mathfrak{spin}(\mathfrak p)\subset C(\mathfrak p)$ and hence an action
+$Y\mapsto \sigma(Y)\in \End(\Sigma_{\mathfrak p})$.
+\end{romanenum}
+The \emph{diagonal} action is $Y\mapsto Y^R+\sigma(Y)$.
+Its Casimir is the operator denoted $\Omega_{\mathfrak k}^{\Delta}$ in the Parthasarathy formula.
+\end{REM}
+
+\begin{EXA}{SG-04-02j}{Sanity check: the group case $G$}
+If $K=\{e\}$ then $\mathfrak p=\mathfrak g$ and $\Omega_{\mathfrak k}=0$. The induced picture becomes
+$\Gamma(S)\cong \Cinf(G,\Sigma_{\mathfrak g})$ and the Dirac operator is (up to a constant term)
+\[
+D \simeq \sum_i c(X_i)\,X_i^L,
+\]
+so that $D^2$ is ``Casimir + constant'', in accordance with the special case of Parthasarathy's formula.
+\end{EXA}
+
+\begin{EXA}{SG-04-02k}{The sphere $S^n=SO(n+1)/SO(n)$ (what the formula predicts)}
+For $G=SO(n+1)$ and $K=SO(n)$, one has $G/K\simeq S^n$.
+Parthasarathy's identity implies that the eigenvalues of $D^2$ arise from Casimir eigenvalues of $SO(n+1)$
+restricted to those $G$-types whose $K$-types occur in the spin module $\Sigma_{\mathfrak p}$.
+This yields the classical discrete spectrum of the Dirac operator on the round sphere.
+\end{EXA}
+
+
+\begin{CONC}{SG-04-04a}{What ``central'' buys you}
+Let $H$ be a compact Lie group and $U(\mathfrak h)$ the enveloping algebra of $\mathfrak h$.
+If $\Omega_{\mathfrak h}\in Z(U(\mathfrak h))$ is central, then in every irreducible unitary representation
+$(\pi,W)$ of $H$ one has
+\[
+\pi(\Omega_{\mathfrak h}) = c_{\mathfrak h}(\pi)\,\id_W
+\]
+for some scalar $c_{\mathfrak h}(\pi)\in\R$ (the Casimir eigenvalue).
+Thus, whenever an operator is built purely from $\Omega_{\mathfrak h}$, it acts by a scalar on each $H$-type.
+\end{CONC}
+
+\begin{CONC}{SG-04-04b}{Casimir eigenvalues in highest weight form}
+Assume $G$ is connected compact and fix an $\Ad(G)$-invariant inner product $B$ on $\mathfrak g$.
+Choose a maximal torus $T\subset G$, a positive root system, and let $\rho_{\mathfrak g}$ be the corresponding Weyl vector.
+If $V_\lambda$ is the irreducible $G$-representation with highest weight $\lambda$, then
+\[
+\Omega_{\mathfrak g}\big|_{V_\lambda}
+\;=\;
+c_{\mathfrak g}(\lambda)\,\id_{V_\lambda},
+\qquad
+c_{\mathfrak g}(\lambda)=\|\lambda+\rho_{\mathfrak g}\|^2-\|\rho_{\mathfrak g}\|^2
+\]
+(with the norm induced by $B$, and up to standard normalization conventions).
+Likewise, for $K$ one has $c_{\mathfrak k}(\mu)=\|\mu+\rho_{\mathfrak k}\|^2-\|\rho_{\mathfrak k}\|^2$ on $K$-types $W_\mu$.
+\end{CONC}
+
+\begin{REM}{SG-04-04c}{The role of the diagonal $\mathfrak k$-Casimir}
+On the induced model $\Cinf(G,\Sigma_{\mathfrak p})$ there is a \emph{diagonal} $\mathfrak k$-action
+\[
+Y \;\mapsto\; Y^R + \sigma(Y),\qquad Y\in\mathfrak k,
+\]
+where $Y^R$ is right differentiation and $\sigma$ is the spin action on $\Sigma_{\mathfrak p}$.
+Its Casimir is the operator $\Omega_{\mathfrak k}^{\Delta}$ that appears in the precise Parthasarathy identity.
+On the $K$-equivariant subspace $\Cinf(G,\Sigma_{\mathfrak p})^K$ this is the natural $\Omega_{\mathfrak k}$ contribution.
+\end{REM}
+
+\begin{KORO}{SG-04-04d}{Immediate spectral reduction principle (expanded)}
+Let $M=G/K$ be compact spin with the $G$-invariant metric induced by $B$.
+Assume Parthasarathy's formula in the form
+\[
+D^2 = \Omega_{\mathfrak g} - \Omega_{\mathfrak k}^{\Delta} + \big(\|\rho_{\mathfrak g}\|^2-\|\rho_{\mathfrak k}\|^2\big).
+\]
+Then, on every $G$-isotypic summand of $L^2(M,S)$ associated to an irreducible $G$-representation $V_\lambda$,
+the operator $\Omega_{\mathfrak g}$ contributes the scalar $c_{\mathfrak g}(\lambda)$.
+Hence, restricting $D^2$ to that summand, one reduces the problem to understanding how
+$\Omega_{\mathfrak k}^{\Delta}$ acts on the finite-dimensional $K$-multiplicity space.
+
+More concretely, on the $\lambda$-block one has
+\[
+D^2\Big|_{V_\lambda\otimes \Hom_K(V_\lambda,\Sigma_{\mathfrak p})}
+\;=\;
+c_{\mathfrak g}(\lambda)\,\id
+\;-\;
+\Omega_{\mathfrak k}^{\Delta}\Big|_{\Hom_K(V_\lambda,\Sigma_{\mathfrak p})}
+\;+\;
+\big(\|\rho_{\mathfrak g}\|^2-\|\rho_{\mathfrak k}\|^2\big)\,\id.
+\]
+Thus:
+\begin{romanenum}[Reduction:]
+\item compute the scalar Casimir eigenvalue $c_{\mathfrak g}(\lambda)$ (highest weight input);
+\item determine which $K$-types occur in $V_\lambda\otimes \Sigma_{\mathfrak p}$ (branching / $K$-type input);
+\item on each occurring $K$-type, $\Omega_{\mathfrak k}^{\Delta}$ acts by a scalar $c_{\mathfrak k}(\mu)$.
+\end{romanenum}
+\end{KORO}
+
+\subsection{Peter--Weyl input and the induced decomposition}
+
+\begin{THEO}{SG-04-05a}{Peter--Weyl for $L^2(G)$ (recall)}
+For a compact Lie group $G$,
+\[
+L^2(G)\;\cong\;\widehat{\bigoplus}_{\lambda\in\widehat G}\; V_\lambda\otimes V_\lambda^*
+\]
+as a $G\times G$-representation (left $\times$ right regular action).
+In particular, as a left $G$-representation, each $V_\lambda$ occurs with multiplicity $\dim V_\lambda$.
+\end{THEO}
+
+\begin{CONC}{SG-04-05b}{Sections of $G\times_K E$ as $K$-equivariant functions}
+Let $(\tau,E)$ be a finite-dimensional unitary representation of $K$ and form the homogeneous bundle
+$E_M:=G\times_K E\to G/K$.
+Then
+\[
+L^2(G/K,E_M)\;\cong\; \{f\in L^2(G,E)\mid f(gk)=\tau(k)^{-1}f(g)\}
+\]
+as Hilbert spaces, with left $G$-action $(g_0\cdot f)(g)=f(g_0^{-1}g)$.
+For the spinor bundle $S=G\times_K \Sigma_{\mathfrak p}$ this yields
+\[
+L^2(G/K,S)\;\cong\; L^2(G,\Sigma_{\mathfrak p})^K.
+\]
+\end{CONC}
+
+\begin{THEO}{SG-04-05c}{Peter--Weyl for homogeneous bundles (multiplicity formula)}
+Let $E$ be a finite-dimensional $K$-module and consider $L^2(G/K,G\times_KE)$.
+Then there is a $G$-equivariant Hilbert direct sum decomposition
+\[
+L^2(G/K,G\times_KE)
+\;\cong\;
+\widehat{\bigoplus}_{\lambda\in\widehat G}\;
+V_\lambda \otimes \Hom_K(V_\lambda,E).
+\]
+In particular, the multiplicity of $V_\lambda$ in $L^2(G/K,G\times_KE)$ is $\dim\Hom_K(V_\lambda,E)$.
+For $E=\Sigma_{\mathfrak p}$ this becomes
+\[
+L^2(G/K,S)\;\cong\;\widehat{\bigoplus}_{\lambda\in\widehat G}\; V_\lambda \otimes \Hom_K(V_\lambda,\Sigma_{\mathfrak p}).
+\]
+\end{THEO}
+
+\begin{REM}{SG-04-05d}{Equivalent tensor product form}
+Using $\Hom_K(V_\lambda,E)\cong (V_\lambda^*\otimes E)^K$, one can also write
+\[
+L^2(G/K,G\times_KE)
+\;\cong\;
+\widehat{\bigoplus}_{\lambda\in\widehat G}\;
+V_\lambda \otimes (V_\lambda^*\otimes E)^K.
+\]
+This is often convenient when discussing ``which $K$-types occur''.
+\end{REM}
+
+\begin{KORO}{SG-04-05e}{Block diagonal action of $D$ and $D^2$}
+Since the Dirac operator $D$ is $G$-equivariant (for the left $G$-action on $G/K$),
+it preserves each isotypic component in the decomposition of Theorem~SG-04-05c.
+Hence there exist operators
+\[
+D_\lambda:\Hom_K(V_\lambda,\Sigma_{\mathfrak p})\to \Hom_K(V_\lambda,\Sigma_{\mathfrak p})
+\]
+such that, on the $\lambda$-summand,
+\[
+D \;=\; \id_{V_\lambda}\otimes D_\lambda,
+\qquad
+D^2 \;=\; \id_{V_\lambda}\otimes D_\lambda^2.
+\]
+In particular, eigenvalue questions for $D$ reduce to finite-dimensional linear algebra on the multiplicity spaces,
+with the Casimir data entering via Parthasarathy's formula.
+\end{KORO}
+
+\begin{EXA}{SG-04-05f}{How this looks in the simplest cases}
+\begin{romanenum}[Cases:]
+\item If $K=\{e\}$ (the group case), then $\Hom_K(V_\lambda,\Sigma)\cong V_\lambda^*\otimes \Sigma$, so each $V_\lambda$ occurs with multiplicity $\dim(V_\lambda)\cdot \dim(\Sigma)$.
+\item If $G/K=S^n=SO(n+1)/SO(n)$, then $\Hom_K(V_\lambda,\Sigma_{\mathfrak p})$ is nonzero only for a specific family of highest weights $\lambda$; this family produces the classical Dirac spectrum on the round sphere.
+\end{romanenum}
+\end{EXA}
+
+\begin{REM}{SG-04-05g}{What remains to get explicit eigenvalues}
+To explicitly list $\mathrm{Spec}(D)$ one needs:
+\begin{romanenum}[Input:]
+\item Casimir eigenvalues $c_{\mathfrak g}(\lambda)$ and $c_{\mathfrak k}(\mu)$ in highest weight form;
+\item branching rules describing the $K$-types $W_\mu$ occurring in $V_\lambda\otimes \Sigma_{\mathfrak p}$ (or equivalently in $V_\lambda|_K$).
+\end{romanenum}
+For a talk, one typically treats branching as a black box and works out one concrete example (e.g.\ $SU(2)$ or $S^n$).
+\end{REM}
+
+
+\section{Examples}
+
+\subsection{$S^n$ as a homogeneous space}
+\begin{EXA}{SG-05-01}{The sphere $S^n=SO(n+1)/SO(n)$}
+Let $G=SO(n+1)$ and $K=SO(n)$. Then $G/K\cong S^n$ with the round metric.
+The spin condition holds for $n\ge 2$ (with the standard spin structure on the sphere).
+Parthasarathy's formula yields explicit eigenvalues for $D^2$ in terms of highest weights; in particular the Dirac spectrum is discrete and symmetric about $0$.
+\end{EXA}
+
+\begin{REM}{SG-05-02}{What one can state without branching computations}
+Even without full branching rules, Parthasarathy's identity explains why the spectrum is governed by Casimir eigenvalues,
+and why a universal $\rho$-shift appears. For an explicit list of eigenvalues/multiplicities one inputs known representation theory of $SO(n+1)$.
+\end{REM}
+
+\subsection{$SU(2)\cong S^3$}
+\begin{EXA}{SG-05-03}{$SU(2)$ and the round $3$-sphere}
+With the biinvariant metric induced by $-\,\mathrm{Killing}$, $SU(2)$ is (up to scale) the round $S^3$.
+The Dirac spectrum (radius $1$ convention) is
+\[
+\mathrm{Spec}(D)=\left\{\pm\left(k+\tfrac32\right)\;:\;k\in\N_0\right\},
+\]
+with multiplicities $(k+1)(k+2)$.
+\end{EXA}
+
+\begin{REM}{SG-05-04}{How the rep.\ theory enters for $SU(2)$}
+Irreducible representations are indexed by highest weight $k\in\N_0$ (spin $k/2$).
+The Casimir acts by a scalar $\sim k(k+2)$ (depending on normalization),
+and Parthasarathy's formula turns this into the explicit Dirac eigenvalues after the universal shift.
+\end{REM}
+
+\subsection{The group case $G$ itself}
+\begin{EXA}{SG-05-05}{Compact Lie group as a homogeneous space}
+A compact Lie group $G$ with a biinvariant metric can be viewed as the homogeneous space
+\[
+G \;\cong\; (G\times G)/\Delta G,
+\]
+where $\Delta G$ is the diagonal subgroup. This realizes the Dirac operator on $G$ as a special case of the $G/K$-construction,
+and Parthasarathy's formula reduces to a ``Casimir + constant'' expression for $D^2$.
+\end{EXA}
+
+\begin{KORO}{SG-05-06}{Conceptual consequence}
+On compact Lie groups with biinvariant metrics, the Dirac spectrum is controlled by highest weights via the Casimir eigenvalues,
+with a universal $\rho$-shift. This explains why representation theory is the natural language for explicit spectral computations.
+\end{KORO}
+
+\section{Outlook and references (informal)}
+
+\begin{CONC}{SG-06-01}{Where to read next (very short map)}
+\begin{romanenum}[Pointers:]
+\item Spin geometry background: Lawson--Michelsohn, Friedrich.
+\item Dirac on homogeneous spaces and explicit spectra: B\"ar, Ginoux (survey-style).
+\item Algebraic/rep.-theoretic Dirac and Parthasarathy/Kostant: Parthasarathy (original), Huang--Pand\v{z}i\'c (monograph), Kostant (cubic Dirac).
+\end{romanenum}
+\end{CONC}
+
+
+
+\pagebreak
+
+% ---------------------------------------------------------------------------
+% Lernzettel (Spin-Geometry Talk: Dirac on G/K, Parthasarathy formula)
+% ---------------------------------------------------------------------------
+
+\section*{Lernzettel: Spin-Geometrie auf homogenen R\"aumen und Parthasarathy-Formel}
+
+\begin{CONC}{LZ-00-01}{Zielbild (was am Ende sicher sitzen soll)}
+Du willst in der Lage sein,
+\begin{romanenum}[Endziel:]
+\item den Dirac-Operator $D$ geometrisch zu definieren (Spin-Struktur, Spinorb\"undel, Spin-Zusammenhang),
+\item auf $M=G/K$ Sektionen als $K$-\"aquivariante Funktionen $f:G\to\Sigma_{\mathfrak p}$ zu identifizieren,
+\item die Operatorformel (Parthasarathy) sauber zu formulieren:
+\[
+D^{2}=\Omega_{\mathfrak g}-\Omega_{\mathfrak k}^{\Delta}+\big(\|\rho_{\mathfrak g}\|^{2}-\|\rho_{\mathfrak k}\|^{2}\big),
+\]
+\item daraus die Spektralreduktion per Peter--Weyl abzuleiten,
+\item mindestens ein Beispiel (idealerweise $SU(2)\cong S^{3}$) konsistent auszurechnen (bis auf Normierung).
+\end{romanenum}
+\end{CONC}
+
+\section{Block A: Spin-Geometrie (Pflichtfundament)}
+
+\begin{CONC}{LZ-A-01}{Rahmenb\"undel und Spin-Struktur}
+Beherrsche:
+\begin{romanenum}[Check:]
+\item Definition $P_{\SO}(M)\to M$ (orientiertes orthonormales Rahmenb\"undel).
+\item Definition Spin-Struktur $P_{\Spin}(M)\xrightarrow{\lambda}P_{\SO}(M)$ als Lift via $\Spin(n)\to\SO(n)$.
+\item Existenzaussage: $M$ ist spin $\Longleftrightarrow w_2(TM)=0$.
+\item Klassifikation: Spin-Strukturen als Torsor \"uber $H^1(M;\Z_2)$.
+\end{romanenum}
+\end{CONC}
+
+\begin{CONC}{LZ-A-02}{Clifford-Algebra, Spinormodul, Clifford-Multiplikation}
+Beherrsche:
+\begin{romanenum}[Check:]
+\item Definition $\Cl(V,B)$: $vw+wv=-2B(v,w)$.
+\item Komplexes Spinormodul $\Sigma_n$ (nur Existenz/Grundfakten).
+\item Konstruktion Spinorb\"undel $S=P_{\Spin}(M)\times_{\Spin(n)}\Sigma_n$.
+\item Clifford-Multiplikation $c:T^*M\otimes S\to S$ und Relation $c(\alpha)c(\beta)+c(\beta)c(\alpha)=-2g^{-1}(\alpha,\beta)\id$.
+\end{romanenum}
+\end{CONC}
+
+\begin{CONC}{LZ-A-03}{Spin-Zusammenhang und Dirac-Operator}
+Beherrsche:
+\begin{romanenum}[Check:]
+\item Levi--Civita-Verbindung $\nabla$ auf $TM$ induziert Verbindung auf $P_{\SO}(M)$.
+\item Lift zur Spin-Verbindung $\nabla^S$ auf $S$.
+\item Definition $D=c\circ \nabla^S$ und lokale Formel $D=\sum_i c(e^i)\nabla^S_{e_i}$.
+\item Formal: $D$ ist elliptisch; auf kompakter Mannigfaltigkeit diskretes Spektrum.
+\end{romanenum}
+\end{CONC}
+
+\begin{CONC}{LZ-A-04}{Weitzenb\"ock/Lichnerowicz (nur als Kontext)}
+Merke:
+\[
+D^2 = (\nabla^S)^*\nabla^S + \frac14\,\mathrm{scal}.
+\]
+Nutze im Vortrag als Motivation: ``Quadrat = Laplace + Kr\"ummung'' $\leadsto$ ``Quadrat = Casimir + Konstante''.
+\end{CONC}
+
+\section{Block B: Homogene R\"aume $G/K$ (Br\"ucke Geometrie $\to$ Algebra)}
+
+\begin{CONC}{LZ-B-01}{Reduktive Zerlegung und invariante Metrik}
+Setze $G$ kompakt, $K\subset G$ geschlossen, $\mathfrak g,\mathfrak k$ Liealgebren.
+W\"ahle $B$ $\Ad(G)$-invariant und definiere $\mathfrak p:=\mathfrak k^\perp$.
+Beherrsche:
+\begin{romanenum}[Check:]
+\item $\mathfrak g=\mathfrak k\oplus \mathfrak p$, $[\mathfrak k,\mathfrak p]\subset \mathfrak p$.
+\item Identifikation $T_{eK}(G/K)\cong \mathfrak p$.
+\item $B|_{\mathfrak p}$ induziert $G$-invariante Metrik auf $M=G/K$.
+\item Isotropiedarstellung $\Ad|_K:K\to \SO(\mathfrak p)$.
+\end{romanenum}
+\end{CONC}
+
+\begin{CONC}{LZ-B-02}{Spin-Bedingung und Spinorb\"undel auf $G/K$}
+Beherrsche:
+\begin{romanenum}[Check:]
+\item Spin-Bedingung: Lift $\widetilde{\Ad}:K\to \Spin(\mathfrak p)$ der Isotropiedarstellung.
+\item Spinormodul $\Sigma_{\mathfrak p}$ als $\Cl(\mathfrak p)$-Modul; wird via Lift zu $K$-Modul.
+\item Spinorb\"undel: $S=G\times_K \Sigma_{\mathfrak p}$.
+\end{romanenum}
+\end{CONC}
+
+\begin{CONC}{LZ-B-03}{Sektionen als $K$-\"aquivariante Funktionen (induzierte Realisierung)}
+Beherrsche die Identifikation
+\[
+\Gamma(S)\;\cong\;\{f:G\to\Sigma_{\mathfrak p}\mid f(gk)=k^{-1}\cdot f(g)\}.
+\]
+Analog f\"ur $L^2$:
+\[
+L^2(G/K,S)\;\cong\;L^2(G,\Sigma_{\mathfrak p})^{K}.
+\]
+Dies ist die Stelle, an der $U(\mathfrak g)$ (links-invariante Ableitungen) hinein kommt.
+\end{CONC}
+
+\section{Block C: Kompakte Darstellungstheorie (minimaler Satz an Tools)}
+
+\begin{CONC}{LZ-C-01}{Peter--Weyl f\"ur $L^2(G)$}
+Beherrsche als Statement:
+\[
+L^2(G)\;\cong\;\widehat{\bigoplus}_{\lambda\in\widehat G}\; V_\lambda\otimes V_\lambda^*
+\]
+als $G\times G$-Darstellung, mit (links) $G$-\"aquivarianter Zerlegung in Isotypen.
+Konsequenz: $G$-\"aquivariante Operatoren (wie $D$) sind blockdiagonal nach $\lambda$.
+\end{CONC}
+
+\begin{CONC}{LZ-C-02}{Homogener Peter--Weyl (Induktion)}
+Beherrsche:
+\[
+L^2(G/K,\,G\times_KE)
+\;\cong\;
+\widehat{\bigoplus}_{\lambda\in\widehat G}\;
+V_\lambda\otimes \Hom_K(V_\lambda,E).
+\]
+Spezialfall $E=\Sigma_{\mathfrak p}$:
+\[
+L^2(G/K,S)
+\;\cong\;
+\widehat{\bigoplus}_{\lambda\in\widehat G}\;
+V_\lambda\otimes \Hom_K(V_\lambda,\Sigma_{\mathfrak p}).
+\]
+Interpretation: $\dim\Hom_K(V_\lambda,\Sigma_{\mathfrak p})$ ist die Multiplizit\"at von $V_\lambda$ im Spinor-Hilbertraum.
+\end{CONC}
+
+\begin{CONC}{LZ-C-03}{Universal enveloping algebra und Casimir}
+Beherrsche:
+\begin{romanenum}[Check:]
+\item $U(\mathfrak g)$, $Z(U(\mathfrak g))$, Schur-Lemma: zentrale Elemente wirken skalar auf irreps.
+\item Casimir $\Omega_{\mathfrak g}=\sum_i X_i^2$ (bzgl.\ $B$-ONB $(X_i)$), analog $\Omega_{\mathfrak k}$.
+\end{romanenum}
+\end{CONC}
+
+\begin{CONC}{LZ-C-04}{H\"ochste Gewichte und $\rho$-Shift (nur was du f\"ur Casimir brauchst)}
+Beherrsche in minimaler Form:
+\begin{romanenum}[Check:]
+\item Wahl maximaler Torus $T$ und positives Wurzelsystem.
+\item Definition $\rho=\frac12\sum_{\alpha>0}\alpha$.
+\item Casimir-Eigenwertformel: auf $V_\lambda$ wirkt $\Omega_{\mathfrak g}$ als
+\[
+c_{\mathfrak g}(\lambda)=\|\lambda+\rho_{\mathfrak g}\|^2-\|\rho_{\mathfrak g}\|^2
+\]
+(und analog f\"ur $K$).
+\end{romanenum}
+\end{CONC}
+
+\section{Block D: Dirac-Operator im algebraischen Modell und Parthasarathy}
+
+\begin{CONC}{LZ-D-01}{Algebraischer Dirac und geometrischer Dirac (Interpretation)}
+Beherrsche die \emph{Bedeutung} der Formel:
+\[
+\mathcal D=\sum_i Z_i\otimes Z_i \in U(\mathfrak g)\otimes C(\mathfrak p),
+\]
+und warum sie als ``Prinzipalteil'' von $D$ erscheint:
+\begin{romanenum}[Key points:]
+\item $Z_i\in\mathfrak p$ wirkt als links-invariante Ableitung $Z_i^L$ auf Funktionen $G\to \Sigma_{\mathfrak p}$.
+\item das zweite $Z_i$ wirkt als Clifford-Multiplikation auf $\Sigma_{\mathfrak p}$.
+\item $D$ unterscheidet sich von diesem Prinzipalteil durch einen $0$-ten Ordnungsterm aus der Spin-Verbindung.
+\end{romanenum}
+\end{CONC}
+
+\begin{CONC}{LZ-D-02}{Diagonale $\mathfrak k$-Wirkung}
+Beherrsche, was mit dem $\mathfrak k$-Term gemeint ist:
+\[
+Y\mapsto Y^R+\sigma(Y)\quad (Y\in\mathfrak k),
+\]
+und dass dessen Casimir $\Omega_{\mathfrak k}^{\Delta}$ der richtige $\Omega_{\mathfrak k}$-Beitrag in $D^2$ ist.
+\end{CONC}
+
+\begin{CONC}{LZ-D-03}{Parthasarathy-Formel (Statement + Normierungshinweis)}
+Sei klar, welche Form du im Vortrag verwendest, z.B.
+\[
+D^2 = \Omega_{\mathfrak g}-\Omega_{\mathfrak k}^{\Delta}+\big(\|\rho_{\mathfrak g}\|^2-\|\rho_{\mathfrak k}\|^2\big),
+\]
+und erw\"ahne:
+\begin{romanenum}[Caveats:]
+\item Vorzeichen/Numerik h\"angen von der Normierung von $B$ und der Casimir-Konvention ab.
+\item Der $\rho$-Shift ist invariant (bis zur selben Normierung) und konzeptionell die ``Weyl correction''.
+\end{romanenum}
+\end{CONC}
+
+\begin{CONC}{LZ-D-04}{Spektralreduktion (Peter--Weyl + Casimir)}
+Du solltest sicher sagen k\"onnen:
+\begin{romanenum}[Pipeline:]
+\item Peter--Weyl: Zerlegung $L^2(G/K,S)=\widehat{\oplus}_\lambda V_\lambda\otimes \Hom_K(V_\lambda,\Sigma)$.
+\item Auf jedem $\lambda$-Block wirkt $\Omega_{\mathfrak g}$ als Skalar $c_{\mathfrak g}(\lambda)$.
+\item Der Rest reduziert sich auf die endlichdimensionale Analyse der $K$-Typen in $\Hom_K(V_\lambda,\Sigma)$
+(bzw.\ in $V_\lambda\otimes \Sigma$).
+\end{romanenum}
+\end{CONC}
+
+\section{Block E: Beispiele (mindestens eins wirklich ausrechnen)}
+
+\begin{CONC}{LZ-E-01}{Empfohlenes Kernbeispiel: $SU(2)\cong S^3$}
+Vorbereitung:
+\begin{romanenum}[Check:]
+\item Klassifikation der irreps $V_k$ (highest weight $k\in\N_0$).
+\item Casimir-Eigenwert f\"ur $SU(2)$ in deiner Normierung (typisch $\sim k(k+2)$).
+\item Dirac-Spektrum auf $S^3$ (Radius $1$): $\mathrm{Spec}(D)=\{\pm(k+\tfrac32)\}_{k\ge 0}$ (Skalierung beachten).
+\end{romanenum}
+\end{CONC}
+
+\begin{CONC}{LZ-E-02}{Optional: $S^n=SO(n+1)/SO(n)$}
+N\"utzlich, aber rep.-theoretisch schwerer (Branching). Du kannst:
+\begin{romanenum}[Strategy:]
+\item Spektren als bekanntes Resultat zitieren,
+\item erkl\"aren, wie Parthasarathy + Branching prinzipiell die Eigenwerte liefert.
+\end{romanenum}
+\end{CONC}
+
+\section*{Quick self-test (10 Minuten vor dem Vortrag)}
+\begin{EXE}{LZ-Q-01}{Definition drill}
+Gib aus dem Stegreif:
+\begin{romanenum}[Tasks:]
+\item Definition Spin-Struktur und Spinorb\"undel.
+\item Definition Dirac-Operator $D$.
+\item Identifikation $\Gamma(G\times_K\Sigma)\cong\{f:G\to\Sigma\mid f(gk)=k^{-1}f(g)\}$.
+\item Peter--Weyl-Zerlegung f\"ur $L^2(G/K,S)$.
+\item Casimir-Eigenwertformel $c(\lambda)=\|\lambda+\rho\|^2-\|\rho\|^2$ (und was $\rho$ ist).
+\item Parthasarathy-Formel (in deiner Konvention) plus eine klare Normierungswarnung.
+\end{romanenum}
+\end{EXE}
+
+\begin{REM}{LZ-Q-02}{Was du im Vortrag als Black Box deklarieren darfst}
+Branching-Regeln $V_\lambda|_K$ und die vollst\"andige algebraische Quadratisierung von $\mathcal D$
+kannst du als ``bekannt'' deklarieren, solange du die Struktur erkl\"arst und ein Beispiel sauber pr\"asentierst.
+\end{REM}
+
+
+
+\pagebreak
+\printbibliography
+\end{document}
