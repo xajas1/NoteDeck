@@ -1,0 +1,3731 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17  Graphik
+% 18  Extra
+% 00. Titel und Autor
+
+\usepackage{slashed}
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Ad}{\operatorname{Ad}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\QU}{\mathbb{H}}
+\newcommand{\Cinf}{C^{\infty}}
+\newcommand{\Mod}{\mathrm{Mod}}
+\newcommand{\Alg}{\mathrm{Alg}}
+\newcommand{\Diff}{\mathrm{Diff}}
+\newcommand{\Iso}{\mathrm{Iso}}
+\newcommand{\Aut}{\mathrm{Aut}}
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Cl}{\mathrm{Cl}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\Mat}{\mathrm{Mat}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\Sp}{\mathrm{Sp}}
+\newcommand{\Spin}{\mathrm{Spin}}
+\newcommand{\Pin}{\mathrm{Pin}}
+\newcommand{\Lor}{\mathrm{Lor}}
+\newcommand{\Ogroup}{\mathrm{O}}
+\newcommand{\U}{\mathrm{U}}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\graphicspath{{../../Library/Images/}}
+\usepackage[export]{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+% Hellblau definieren
+\definecolor{hellblau}{rgb}{0.3,0.6,1}
+\newenvironment{note}{\par\begingroup\color{hellblau}\itshape}{\par\endgroup}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\CustomHeading{Definition}{#1}{#2}}{}
+\newenvironment{PROP}[2]{\CustomHeading{Proposition}{#1}{#2}}{}
+\newenvironment{THEO}[2]{\CustomHeading{Theorem}{#1}{#2}}{}
+\newenvironment{LEM}[2]{\CustomHeading{Lemma}{#1}{#2}}{}
+\newenvironment{KORO}[2]{\CustomHeading{Corollar}{#1}{#2}}{}
+\newenvironment{REM}[2]{\CustomHeading{Remark}{#1}{#2}}{}
+\newenvironment{EXA}[2]{\CustomHeading{Example}{#1}{#2}}{}
+\newenvironment{STUD}[2]{\CustomHeading{Study}{#1}{#2}}{}
+\newenvironment{CONC}[2]{\CustomHeading{Concept}{#1}{#2}}{}
+\newenvironment{OTH}[2]{\CustomHeading{Other}{#1}{#2}}{}
+\newenvironment{EXE}[2]{\CustomHeading{Exercise}{#1}{#2}}{}
+\newenvironment{MOT}[2]{\CustomHeading{Motivation}{#1}{#2}}{}
+\newenvironment{PROOF}[2]{\CustomHeading{Proof}{#1}{#2}}{}
+
+% --- Unit Umgebung für Source-Inhalte ---
+\usepackage{mdframed}
+\newmdenv[
+  linewidth=1pt,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftmargin=0cm,
+  rightmargin=0cm,
+  skipabove=10pt,
+  skipbelow=10pt,
+  innertopmargin=0.5\baselineskip,
+  innerbottommargin=0.5\baselineskip,
+  backgroundcolor=gray!10,
+  linecolor=gray
+]{unitbox}
+
+\newenvironment{unit}[1]
+  {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
+  {\end{unitbox}}
+
+% --- 17. ... ---
+
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{pdflscape}  % für landscape-Umgebung
+\usepackage{multicol}   % optional (meist nicht nötig)
+% optional, aber praktisch für p{..}-Spalten:
+\usepackage{ragged2e}
+
+
+% Requires: \usepackage{longtable,booktabs,array}
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+
+
+% --- 18. Extras ---
+\usepackage{stmaryrd}
+\usepackage{bbold}  % falls du \mathbb{1} nutzen willst
+
+% --- 00. Titel und Autor ---
+\title{Mein Titel}
+\author{Tim Jaschik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+Kurze Beschreibung …
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\tableofcontents
+
+
+
+\pagebreak
+
+
+\section{Klassifikation von Teilchen}
+
+
+
+\begin{longtable}{@{}p{1.5cm}p{2cm}c c c c c c p{3.6cm}r@{}}
+\toprule
+Teilchen &
+Quark &
+$Q$ &
+$B$ &
+$S$ &
+$Y$ &
+$I_3$ &
+$I$ &
+Zugehöriges Multiplett &
+Masse [MeV]
+\\
+\midrule
+\endfirsthead
+
+\toprule
+Teilchen &
+Quark &
+$Q$ &
+$B$ &
+$S$ &
+$Y$ &
+$I_3$ &
+$I$ &
+Zugehöriges Multiplett &
+Masse [MeV]
+\\
+\midrule
+\endhead
+
+\midrule
+\multicolumn{10}{r}{\footnotesize Fortsetzung auf der nächsten Seite}
+\\
+\endfoot
+
+\bottomrule
+\endlastfoot
+
+% ---------------- Mesonen: Pseudoskalar ----------------
+$\pi^+$ & $u\bar d$ & $+1$ & $0$ & $0$ & $0$ & $+1$ & $1$ &
+Isotriplet $I=1$: $(\pi^+,\pi^0,\pi^-)$ & 139.57
+\\
+$\pi^0$ & $(u\bar u-d\bar d)/\sqrt2$ & $0$ & $0$ & $0$ & $0$ & $0$ & $1$ &
+Isotriplet $I=1$: $(\pi^+,\pi^0,\pi^-)$ & 134.98
+\\
+$\pi^-$ & $d\bar u$ & $-1$ & $0$ & $0$ & $0$ & $-1$ & $1$ &
+Isotriplet $I=1$: $(\pi^+,\pi^0,\pi^-)$ & 139.57
+\\[2pt]
+
+$K^+$ & $u\bar s$ & $+1$ & $0$ & $+1$ & $+1$ & $+1/2$ & $1/2$ &
+Isodublett $I=1/2$ (Sektor $S=+1$): $(K^+,K^0)$ & 493.68
+\\
+$K^0$ & $d\bar s$ & $0$ & $0$ & $+1$ & $+1$ & $-1/2$ & $1/2$ &
+Isodublett $I=1/2$ (Sektor $S=+1$): $(K^+,K^0)$ & 497.61
+\\
+$\bar K^0$ & $s\bar d$ & $0$ & $0$ & $-1$ & $-1$ & $+1/2$ & $1/2$ &
+Isodublett $I=1/2$ (Sektor $S=-1$): $(\bar K^0,K^-)$ & 497.61
+\\
+$K^-$ & $s\bar u$ & $-1$ & $0$ & $-1$ & $-1$ & $-1/2$ & $1/2$ &
+Isodublett $I=1/2$ (Sektor $S=-1$): $(\bar K^0,K^-)$ & 493.68
+\\[2pt]
+
+$\eta$ & (dominant isoskal.) & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ &
+Isosingulett $I=0$ & 547.86
+\\
+$\eta'$ & (dominant isoskal.) & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ &
+Isosingulett $I=0$ & 957.78
+\\[6pt]
+
+% ---------------- Mesonen: Vektor ----------------
+$\rho^+$ & $u\bar d$ & $+1$ & $0$ & $0$ & $0$ & $+1$ & $1$ &
+Isotriplet $I=1$: $(\rho^+,\rho^0,\rho^-)$ & 775.26
+\\
+$\rho^0$ & $(u\bar u-d\bar d)/\sqrt2$ & $0$ & $0$ & $0$ & $0$ & $0$ & $1$ &
+Isotriplet $I=1$: $(\rho^+,\rho^0,\rho^-)$ & 775.26
+\\
+$\rho^-$ & $d\bar u$ & $-1$ & $0$ & $0$ & $0$ & $-1$ & $1$ &
+Isotriplet $I=1$: $(\rho^+,\rho^0,\rho^-)$ & 775.26
+\\
+$\omega$ & $(u\bar u+d\bar d)/\sqrt2$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ &
+Isosingulett $I=0$ & 782.65
+\\[2pt]
+
+$K^{*+}$ & $u\bar s$ & $+1$ & $0$ & $+1$ & $+1$ & $+1/2$ & $1/2$ &
+Isodublett $I=1/2$ (Sektor $S=+1$): $(K^{*+},K^{*0})$ & 891.66
+\\
+$K^{*0}$ & $d\bar s$ & $0$ & $0$ & $+1$ & $+1$ & $-1/2$ & $1/2$ &
+Isodublett $I=1/2$ (Sektor $S=+1$): $(K^{*+},K^{*0})$ & 895.55
+\\
+$\bar K^{*0}$ & $s\bar d$ & $0$ & $0$ & $-1$ & $-1$ & $+1/2$ & $1/2$ &
+Isodublett $I=1/2$ (Sektor $S=-1$): $(\bar K^{*0},K^{*-})$ & 895.55
+\\
+$K^{*-}$ & $s\bar u$ & $-1$ & $0$ & $-1$ & $-1$ & $-1/2$ & $1/2$ &
+Isodublett $I=1/2$ (Sektor $S=-1$): $(\bar K^{*0},K^{*-})$ & 891.66
+\\[2pt]
+
+$\phi$ & $s\bar s$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ &
+Isosingulett $I=0$ (``hidden strangeness'') & 1019.46
+\\[8pt]
+
+
+
+% ---------------- Baryonen ----------------
+$p$ & $uud$ & $+1$ & $1$ & $0$ & $+1$ & $+1/2$ & $1/2$ &
+Isodublett $I=1/2$: $(p,n)$ & 938.27
+\\
+$n$ & $udd$ & $0$ & $1$ & $0$ & $+1$ & $-1/2$ & $1/2$ &
+Isodublett $I=1/2$: $(p,n)$ & 939.57
+\\[2pt]
+
+$\Lambda^0$ & $uds$ & $0$ & $1$ & $-1$ & $0$ & $0$ & $0$ &
+Isosingulett $I=0$ (bei $B=1,S=-1$) & 1115.68
+\\[2pt]
+
+$\Sigma^+$ & $uus$ & $+1$ & $1$ & $-1$ & $0$ & $+1$ & $1$ &
+Isotriplet $I=1$: $(\Sigma^+,\Sigma^0,\Sigma^-)$ & 1189.37
+\\
+$\Sigma^0$ & $uds$ & $0$ & $1$ & $-1$ & $0$ & $0$ & $1$ &
+Isotriplet $I=1$: $(\Sigma^+,\Sigma^0,\Sigma^-)$ & 1192.64
+\\
+$\Sigma^-$ & $dds$ & $-1$ & $1$ & $-1$ & $0$ & $-1$ & $1$ &
+Isotriplet $I=1$: $(\Sigma^+,\Sigma^0,\Sigma^-)$ & 1197.45
+\\[2pt]
+
+$\Xi^0$ & $uss$ & $0$ & $1$ & $-2$ & $-1$ & $+1/2$ & $1/2$ &
+Isodublett $I=1/2$: $(\Xi^0,\Xi^-)$ & 1314.86
+\\
+$\Xi^-$ & $dss$ & $-1$ & $1$ & $-2$ & $-1$ & $-1/2$ & $1/2$ &
+Isodublett $I=1/2$: $(\Xi^0,\Xi^-)$ & 1321.71
+\\[6pt]
+
+$\Delta^{++}$ & $uuu$ & $+2$ & $1$ & $0$ & $+1$ & $+3/2$ & $3/2$ &
+Isoquartett $I=3/2$: $(\Delta^{++},\Delta^+,\Delta^0,\Delta^-)$ & 1232
+\\
+$\Delta^{+}$ & $uud$ & $+1$ & $1$ & $0$ & $+1$ & $+1/2$ & $3/2$ &
+Isoquartett $I=3/2$: $(\Delta^{++},\Delta^+,\Delta^0,\Delta^-)$ & 1232
+\\
+$\Delta^{0}$ & $udd$ & $0$ & $1$ & $0$ & $+1$ & $-1/2$ & $3/2$ &
+Isoquartett $I=3/2$: $(\Delta^{++},\Delta^+,\Delta^0,\Delta^-)$ & 1232
+\\
+$\Delta^{-}$ & $ddd$ & $-1$ & $1$ & $0$ & $+1$ & $-3/2$ & $3/2$ &
+Isoquartett $I=3/2$: $(\Delta^{++},\Delta^+,\Delta^0,\Delta^-)$ & 1232
+\\
+
+\end{longtable}
+
+
+\pagebreak
+
+% Requires: \usepackage{longtable,booktabs,array,pdflscape,ragged2e}
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.12}
+
+% (optional) etwas kleinere Schrift nur für die Tabelle:
+\begin{landscape}
+\scriptsize
+
+\begin{longtable}{@{}
+p{1.05cm} % Teilchen
+p{1cm}  % Quark
+c         % J^P
+c         % J^PC
+c c c c c c % Q B S Y I3 I
+p{3.1cm}  % Multiplett
+r         % Masse
+r         % Gamma
+r         % tau
+p{5.3cm}  % Zerfälle
+@{}}
+\toprule
+Teilchen & Quark & $J^P$ & $J^{PC}$ & $Q$ & $B$ & $S$ & $Y$ & $I_3$ & $I$ &
+Multiplett &  [MeV] & $\Gamma$ [MeV] & $\tau$ [s] & Dominant (Art / Kanäle)
+\\
+\midrule
+\endfirsthead
+
+\toprule
+Teilchen & Quark & $J^P$ & $J^{PC}$ & $Q$ & $B$ & $S$ & $Y$ & $I_3$ & $I$ &
+Multiplett & Masse [MeV] & $\Gamma$ [MeV] & $\tau$ [s] & Dominant (Art / Kanäle)
+\\
+\midrule
+\endhead
+
+\midrule
+\multicolumn{15}{r}{\footnotesize Fortsetzung auf der nächsten Seite}
+\\
+\endfoot
+
+\bottomrule
+\endlastfoot
+
+% ---------------- Pseudoskalare Mesonen ----------------
+$\pi^+$ & $u\bar d$ & $0^-$ & --- & $+1$ & $0$ & $0$ & $0$ & $+1$ & $1$
+& $I=1$ Triplet $(\pi^+,\pi^0,\pi^-)$
+& 139.57 & $2.53\times10^{-14}$ & $2.60\times10^{-8}$
+& schwach: $\pi^+\to \mu^+\nu_\mu$ (dominant), auch $e^+\nu_e$
+\\
+
+$\pi^0$ & $(u\bar u-d\bar d)/\sqrt2$ & $0^-$ & $0^{-+}$ & $0$ & $0$ & $0$ & $0$ & $0$ & $1$
+& $I=1$ Triplet $(\pi^+,\pi^0,\pi^-)$
+& 134.98 & $7.73\times10^{-6}$ & $8.52\times10^{-17}$
+& EM: $\pi^0\to \gamma\gamma$ (dominant)
+\\
+
+$\pi^-$ & $d\bar u$ & $0^-$ & --- & $-1$ & $0$ & $0$ & $0$ & $-1$ & $1$
+& $I=1$ Triplet $(\pi^+,\pi^0,\pi^-)$
+& 139.57 & $2.53\times10^{-14}$ & $2.60\times10^{-8}$
+& schwach: $\pi^-\to \mu^-\bar\nu_\mu$ (dominant)
+\\[2pt]
+
+$K^+$ & $u\bar s$ & $0^-$ & --- & $+1$ & $0$ & $+1$ & $+1$ & $+1/2$ & $1/2$
+& $I=\tfrac12$ Dublett (Sektor $S=+1$): $(K^+,K^0)$
+& 493.68 & $5.32\times10^{-14}$ & $1.24\times10^{-8}$
+& schwach: $K^+\to \mu^+\nu_\mu$, $\pi^+\pi^0$, $\pi\pi\pi$, $\pi^0 e^+\nu_e$
+\\
+
+$K^0$ & $d\bar s$ & $0^-$ & --- & $0$ & $0$ & $+1$ & $+1$ & $-1/2$ & $1/2$
+& $I=\tfrac12$ Dublett (Sektor $S=+1$): $(K^+,K^0)$
+& 497.61 & \begin{tabular}[c]{@{}r@{}}$7.35\times10^{-12}$\\$1.29\times10^{-14}$\end{tabular}
+& \begin{tabular}[c]{@{}r@{}}$8.95\times10^{-11}$\\$5.12\times10^{-8}$\end{tabular}
+& schwach (phys. $K_S/K_L$):
+$K_S\to \pi\pi$ (dominant),\quad
+$K_L\to \pi e\nu,\ \pi\mu\nu,\ 3\pi$
+\\
+
+$\bar K^0$ & $s\bar d$ & $0^-$ & --- & $0$ & $0$ & $-1$ & $-1$ & $+1/2$ & $1/2$
+& $I=\tfrac12$ Dublett (Sektor $S=-1$): $(\bar K^0,K^-)$
+& 497.61 & \begin{tabular}[c]{@{}r@{}}$7.35\times10^{-12}$\\$1.29\times10^{-14}$\end{tabular}
+& \begin{tabular}[c]{@{}r@{}}$8.95\times10^{-11}$\\$5.12\times10^{-8}$\end{tabular}
+& schwach (phys. $K_S/K_L$):
+$K_S\to \pi\pi$,\quad $K_L\to \pi \ell \nu,\ 3\pi$
+\\
+
+$K^-$ & $s\bar u$ & $0^-$ & --- & $-1$ & $0$ & $-1$ & $-1$ & $-1/2$ & $1/2$
+& $I=\tfrac12$ Dublett (Sektor $S=-1$): $(\bar K^0,K^-)$
+& 493.68 & $5.32\times10^{-14}$ & $1.24\times10^{-8}$
+& schwach: $K^-\to \mu^-\bar\nu_\mu$, $\pi\pi\pi$, $\pi^0 \ell^- \bar\nu_\ell$
+\\[2pt]
+
+$\eta$ & (isoskal.) & $0^-$ & $0^{-+}$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$
+& $I=0$ Singulett
+& 547.86 & $1.31\times10^{-3}$ & $5.02\times10^{-19}$
+& stark (isospin-viol.)/EM: $\eta\to 3\pi$, $\gamma\gamma$
+\\
+
+$\eta'$ & (isoskal.) & $0^-$ & $0^{-+}$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$
+& $I=0$ Singulett
+& 957.78 & $1.98\times10^{-1}$ & $3.32\times10^{-21}$
+& stark: $\eta'\to \eta\pi\pi$ (dominant), auch $\rho\gamma$ usw.
+\\[6pt]
+
+% ---------------- Vektormesonen ----------------
+$\rho^+$ & $u\bar d$ & $1^-$ & --- & $+1$ & $0$ & $0$ & $0$ & $+1$ & $1$
+& $I=1$ Triplet $(\rho^+,\rho^0,\rho^-)$
+& 775.26 & $1.49\times10^{2}$ & $4.41\times10^{-24}$
+& stark: $\rho\to \pi\pi$ (dominant)
+\\
+
+$\rho^0$ & $(u\bar u-d\bar d)/\sqrt2$ & $1^-$ & $1^{--}$ & $0$ & $0$ & $0$ & $0$ & $0$ & $1$
+& $I=1$ Triplet $(\rho^+,\rho^0,\rho^-)$
+& 775.26 & $1.49\times10^{2}$ & $4.41\times10^{-24}$
+& stark: $\rho^0\to \pi^+\pi^-$ (dominant)
+\\
+
+$\rho^-$ & $d\bar u$ & $1^-$ & --- & $-1$ & $0$ & $0$ & $0$ & $-1$ & $1$
+& $I=1$ Triplet $(\rho^+,\rho^0,\rho^-)$
+& 775.26 & $1.49\times10^{2}$ & $4.41\times10^{-24}$
+& stark: $\rho\to \pi\pi$ (dominant)
+\\
+
+$\omega$ & $(u\bar u+d\bar d)/\sqrt2$ & $1^-$ & $1^{--}$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$
+& $I=0$ Singulett
+& 782.65 & $8.49$ & $7.75\times10^{-23}$
+& stark: $\omega\to \pi^+\pi^-\pi^0$ (dominant)
+\\[2pt]
+
+$K^{*+}$ & $u\bar s$ & $1^-$ & --- & $+1$ & $0$ & $+1$ & $+1$ & $+1/2$ & $1/2$
+& $I=\tfrac12$ Dublett: $(K^{*+},K^{*0})$
+& 891.66 & $5.08\times10^{1}$ & $1.30\times10^{-23}$
+& stark: $K^*\to K\pi$ (dominant)
+\\
+
+$K^{*0}$ & $d\bar s$ & $1^-$ & --- & $0$ & $0$ & $+1$ & $+1$ & $-1/2$ & $1/2$
+& $I=\tfrac12$ Dublett: $(K^{*+},K^{*0})$
+& 895.55 & $5.08\times10^{1}$ & $1.30\times10^{-23}$
+& stark: $K^*\to K\pi$ (dominant)
+\\
+
+$\bar K^{*0}$ & $s\bar d$ & $1^-$ & --- & $0$ & $0$ & $-1$ & $-1$ & $+1/2$ & $1/2$
+& $I=\tfrac12$ Dublett: $(\bar K^{*0},K^{*-})$
+& 895.55 & $5.08\times10^{1}$ & $1.30\times10^{-23}$
+& stark: $K^*\to K\pi$ (dominant)
+\\
+
+$K^{*-}$ & $s\bar u$ & $1^-$ & --- & $-1$ & $0$ & $-1$ & $-1$ & $-1/2$ & $1/2$
+& $I=\tfrac12$ Dublett: $(\bar K^{*0},K^{*-})$
+& 891.66 & $5.08\times10^{1}$ & $1.30\times10^{-23}$
+& stark: $K^*\to K\pi$ (dominant)
+\\[2pt]
+
+$\phi$ & $s\bar s$ & $1^-$ & $1^{--}$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$
+& $I=0$ Singulett (hidden strangeness)
+& 1019.46 & $4.249$ & $1.55\times10^{-22}$
+& stark: $\phi\to K^+K^-,\ K^0\bar K^0$ (dominant)
+\\[8pt]
+
+% ---------------- Baryonen ----------------
+$p$ & $uud$ & $\tfrac12^+$ & --- & $+1$ & $1$ & $0$ & $+1$ & $+1/2$ & $1/2$
+& $I=\tfrac12$ Dublett $(p,n)$
+& 938.27 & $0$ & $>10^{34}\,\mathrm{a}$
+& stabil (keine Zerfälle beobachtet)
+\\
+
+$n$ & $udd$ & $\tfrac12^+$ & --- & $0$ & $1$ & $0$ & $+1$ & $-1/2$ & $1/2$
+& $I=\tfrac12$ Dublett $(p,n)$
+& 939.57 & $7.48\times10^{-25}$ & $8.79\times10^{2}$
+& schwach: $n\to p e^- \bar\nu_e$
+\\[2pt]
+
+$\Lambda^0$ & $uds$ & $\tfrac12^+$ & --- & $0$ & $1$ & $-1$ & $0$ & $0$ & $0$
+& $I=0$ Singulett (bei $B=1,S=-1$)
+& 1115.68 & $2.50\times10^{-12}$ & $2.63\times10^{-10}$
+& schwach: $\Lambda\to p\pi^-$, $n\pi^0$
+\\[2pt]
+
+$\Sigma^+$ & $uus$ & $\tfrac12^+$ & --- & $+1$ & $1$ & $-1$ & $0$ & $+1$ & $1$
+& $I=1$ Triplet $(\Sigma^+,\Sigma^0,\Sigma^-)$
+& 1189.37 & $8.21\times10^{-12}$ & $8.02\times10^{-11}$
+& schwach: $\Sigma^+\to p\pi^0,\ n\pi^+$
+\\
+
+$\Sigma^0$ & $uds$ & $\tfrac12^+$ & --- & $0$ & $1$ & $-1$ & $0$ & $0$ & $1$
+& $I=1$ Triplet $(\Sigma^+,\Sigma^0,\Sigma^-)$
+& 1192.64 & $8.89\times10^{-3}$ & $7.4\times10^{-20}$
+& EM: $\Sigma^0\to \Lambda\gamma$ (dominant)
+\\
+
+$\Sigma^-$ & $dds$ & $\tfrac12^+$ & --- & $-1$ & $1$ & $-1$ & $0$ & $-1$ & $1$
+& $I=1$ Triplet $(\Sigma^+,\Sigma^0,\Sigma^-)$
+& 1197.45 & $4.45\times10^{-12}$ & $1.48\times10^{-10}$
+& schwach: $\Sigma^-\to n\pi^-$ (dominant)
+\\[2pt]
+
+$\Xi^0$ & $uss$ & $\tfrac12^+$ & --- & $0$ & $1$ & $-2$ & $-1$ & $+1/2$ & $1/2$
+& $I=\tfrac12$ Dublett $(\Xi^0,\Xi^-)$
+& 1314.86 & $2.27\times10^{-12}$ & $2.90\times10^{-10}$
+& schwach: $\Xi^0\to \Lambda\pi^0$ (dominant)
+\\
+
+$\Xi^-$ & $dss$ & $\tfrac12^+$ & --- & $-1$ & $1$ & $-2$ & $-1$ & $-1/2$ & $1/2$
+& $I=\tfrac12$ Dublett $(\Xi^0,\Xi^-)$
+& 1321.71 & $4.02\times10^{-12}$ & $1.64\times10^{-10}$
+& schwach: $\Xi^-\to \Lambda\pi^-$ (dominant)
+\\[6pt]
+
+$\Delta^{++}$ & $uuu$ & $\tfrac32^+$ & --- & $+2$ & $1$ & $0$ & $+1$ & $+3/2$ & $3/2$
+& $I=\tfrac32$ Quartett $(\Delta^{++},\Delta^+,\Delta^0,\Delta^-)$
+& 1232 & $1.17\times10^{2}$ & $5.63\times10^{-24}$
+& stark: $\Delta\to N\pi$ (dominant)
+\\
+$\Delta^{+}$ & $uud$ & $\tfrac32^+$ & --- & $+1$ & $1$ & $0$ & $+1$ & $+1/2$ & $3/2$
+& $I=\tfrac32$ Quartett $(\Delta^{++},\Delta^+,\Delta^0,\Delta^-)$
+& 1232 & $1.17\times10^{2}$ & $5.63\times10^{-24}$
+& stark: $\Delta\to N\pi$ (dominant)
+\\
+$\Delta^{0}$ & $udd$ & $\tfrac32^+$ & --- & $0$ & $1$ & $0$ & $+1$ & $-1/2$ & $3/2$
+& $I=\tfrac32$ Quartett $(\Delta^{++},\Delta^+,\Delta^0,\Delta^-)$
+& 1232 & $1.17\times10^{2}$ & $5.63\times10^{-24}$
+& stark: $\Delta\to N\pi$ (dominant)
+\\
+$\Delta^{-}$ & $ddd$ & $\tfrac32^+$ & --- & $-1$ & $1$ & $0$ & $+1$ & $-3/2$ & $3/2$
+& $I=\tfrac32$ Quartett $(\Delta^{++},\Delta^+,\Delta^0,\Delta^-)$
+& 1232 & $1.17\times10^{2}$ & $5.63\times10^{-24}$
+& stark: $\Delta\to N\pi$ (dominant)
+\\
+
+\end{longtable}
+
+\normalsize
+\end{landscape}
+
+
+
+% Requires: \usepackage{pdflscape,longtable,booktabs,array}
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+\begin{landscape}
+\small
+
+% longtable an die (nun breite) Seite anpassen
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{0pt}
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.08}
+
+\begin{longtable}{@{}
+L{2.2cm}  % Teilchen
+L{2.6cm}  % "Inhalt"/Feld
+C{0.55cm} % Q
+C{0.55cm} % B
+C{0.55cm} % L
+C{1.6cm}  % (Le,Lmu,Ltau)
+C{0.95cm} % T3 (LH)
+C{0.75cm} % T (LH)
+L{3.2cm}  % SU(2)L-Einordnung
+C{0.70cm} % Y_L
+L{1.9cm}  % Masse
+C{0.85cm} % J^P
+L{2.1cm}  % Lebensdauer
+L{4.1cm}  % Dominante Zerfälle / Notizen
+@{}}
+
+\caption{Leptonen im Standardmodell (Teilchen; Antiteilchen über Vorzeichenwechsel bei $Q$ und $L$).}\label{tab:leptons-sm}\\
+
+\toprule
+Teilchen &
+\textquotedbl Inhalt\textquotedbl/Feld &
+$Q$ & $B$ & $L$ &
+$(L_e,L_\mu,L_\tau)$ &
+$T_3$ (LH) &
+$T$ (LH) &
+$SU(2)_L$-Einordnung &
+$Y_L$ &
+Masse &
+$J^P$ &
+Lebensdauer &
+Dominante Zerfälle / Notizen \\
+\midrule
+\endfirsthead
+
+\toprule
+Teilchen &
+\textquotedbl Inhalt\textquotedbl/Feld &
+$Q$ & $B$ & $L$ &
+$(L_e,L_\mu,L_\tau)$ &
+$T_3$ (LH) &
+$T$ (LH) &
+$SU(2)_L$-Einordnung &
+$Y_L$ &
+Masse &
+$J^P$ &
+Lebensdauer &
+Dominante Zerfälle / Notizen \\
+\midrule
+\endhead
+
+\midrule
+\multicolumn{14}{r}{\emph{Fortsetzung auf der nächsten Seite}}\\
+\endfoot
+
+\bottomrule
+\endlastfoot
+
+% -------------------------
+% Charged leptons
+% -------------------------
+Elektron &
+elementar ($e^-$) &
+$-1$ & $0$ & $+1$ &
+$(1,0,0)$ &
+$-\tfrac12$ & $\tfrac12$ &
+Mitglied des LH-Dubletts $(\nu_e,e^-)_L$; RH-Singulett $e^-_R$ &
+$-1$ &
+$0.51099895~\mathrm{MeV}$ &
+$\tfrac12^+$ &
+stabil &
+stabil (im SM); beteiligt an EM/Schwach \\
+
+\addlinespace[2pt]
+Myon &
+elementar ($\mu^-$) &
+$-1$ & $0$ & $+1$ &
+$(0,1,0)$ &
+$-\tfrac12$ & $\tfrac12$ &
+Mitglied des LH-Dubletts $(\nu_\mu,\mu^-)_L$; RH-Singulett $\mu^-_R$ &
+$-1$ &
+$105.658~\mathrm{MeV}$ &
+$\tfrac12^+$ &
+$2.197\times10^{-6}\,\mathrm{s}$ &
+$\mu^- \to e^-+\bar\nu_e+\nu_\mu$ (schwach) \\
+
+\addlinespace[2pt]
+Tau &
+elementar ($\tau^-$) &
+$-1$ & $0$ & $+1$ &
+$(0,0,1)$ &
+$-\tfrac12$ & $\tfrac12$ &
+Mitglied des LH-Dubletts $(\nu_\tau,\tau^-)_L$; RH-Singulett $\tau^-_R$ &
+$-1$ &
+$1776.86~\mathrm{MeV}$ &
+$\tfrac12^+$ &
+$2.90\times10^{-13}\,\mathrm{s}$ &
+schwach: $\tau^- \to e^- \bar\nu_e \nu_\tau$, $\mu^- \bar\nu_\mu \nu_\tau$; hadronisch $+\nu_\tau$ (dominant) \\
+
+\addlinespace[6pt]
+% -------------------------
+% Neutrinos (LH)
+% -------------------------
+Elektron-Neutrino &
+elementar ($\nu_e$) &
+$0$ & $0$ & $+1$ &
+$(1,0,0)$ &
+$+\tfrac12$ & $\tfrac12$ &
+Mitglied des LH-Dubletts $(\nu_e,e^-)_L$; (minimal SM: kein $\nu_{eR}$) &
+$-1$ &
+$\lesssim \mathcal O(1\,\mathrm{eV})$ &
+$\tfrac12^+$ &
+stabil &
+nur schwach; Oszillationen $\Rightarrow m_\nu\neq 0$ (Skala sub-eV) \\
+
+\addlinespace[2pt]
+Myon-Neutrino &
+elementar ($\nu_\mu$) &
+$0$ & $0$ & $+1$ &
+$(0,1,0)$ &
+$+\tfrac12$ & $\tfrac12$ &
+Mitglied des LH-Dubletts $(\nu_\mu,\mu^-)_L$; (minimal SM: kein $\nu_{\mu R}$) &
+$-1$ &
+$\lesssim \mathcal O(1\,\mathrm{eV})$ &
+$\tfrac12^+$ &
+stabil &
+nur schwach; Oszillationen \\
+
+\addlinespace[2pt]
+Tau-Neutrino &
+elementar ($\nu_\tau$) &
+$0$ & $0$ & $+1$ &
+$(0,0,1)$ &
+$+\tfrac12$ & $\tfrac12$ &
+Mitglied des LH-Dubletts $(\nu_\tau,\tau^-)_L$; (minimal SM: kein $\nu_{\tau R}$) &
+$-1$ &
+$\lesssim \mathcal O(1\,\mathrm{eV})$ &
+$\tfrac12^+$ &
+stabil &
+nur schwach; Oszillationen \\
+
+\end{longtable}
+\end{landscape}
+
+
+
+
+% ------------------------------------------------------------
+% Zusatznotiz (optional im Text):
+% ------------------------------------------------------------
+% (1) Antiteilchen: gleiche Masse und gleicher Spin, aber Q -> -Q und L -> -L.
+% (2) Elektroschwacher Check: Q = T_3 + Y/2 (hier für die linkshändigen Dublett-Komponenten mit Y_L = -1).
+% (3) Familienzahlen L_e, L_mu, L_tau sind im SM (nahezu) erhalten; Neutrino-Oszillationen verletzen sie effektiv,
+%     während das totale Leptonenzahl-Konzept (L) modellabhängig (Dirac vs Majorana) ist.
+
+
+
+
+
+
+
+% ============================================================
+% Cheat Sheet: Wie bestimmt man, welche WW (stark/EM/schwach)
+% einen Zerfall oder Streuprozess dominiert?
+% ============================================================
+
+\subsection*{Bestimmung der dominierenden Wechselwirkung (Zerfall / Streuung)}
+
+\paragraph{Prinzip (Selektionsregeln).}
+Ist ein Operator $Q$ eine Erhaltungsgröße der Dynamik, d.\,h. $[H,Q]=0$, so gilt für die
+$S$-Matrix $[S,Q]=0$. Für Eigenzustände $|i\rangle,|f\rangle$ folgt:
+\[
+\langle f|S|i\rangle\neq 0 \quad\Rightarrow\quad q_f=q_i .
+\]
+Daher entscheiden Erhaltungssätze und Symmetrien darüber, ob ein Kanal überhaupt
+zulässig ist und welche Wechselwirkung dominieren kann.
+
+\subsubsection*{Arbeitsrezept}
+
+\begin{enumerate}
+\item \textbf{Kinematik (Schwellenbedingung).}\\
+Für einen Zerfall $A\to B+C+\cdots$ muss gelten
+\[
+m_A \ge m_B+m_C+\cdots.
+\]
+Falls nicht, ist der Kanal verboten (unabhängig von der Wechselwirkung).
+
+\item \textbf{Additive Quantenzahlen (härteste Selektionsregeln).}\\
+\begin{itemize}
+\item \textbf{Immer erhalten:} elektrische Ladung $Q$, Energie-Impuls $P^\mu$.
+\item \textbf{Stark/EM erhalten:} Netto-Flavourzahlen wie Strangeness $S$, Charm $C$, Bottom $b$
+(sowie in der Praxis meist $B$ und $L$).
+\item \textbf{Schwach kann verletzen:} $S,C,b$ etc.\ (Flavourwechsel).
+\end{itemize}
+\textbf{Diagnose:} Wenn $\Delta S\neq 0$ (oder allgemeiner $\Delta\text{Flavour}\neq 0$), dann
+ist der Prozess \emph{nicht} stark/EM und muss (dominant) \textbf{schwach} sein.
+
+\item \textbf{Diskrete Symmetrien (wenn stark/EM in Frage kommt).}\\
+\begin{itemize}
+\item \textbf{Parität $P$:} in starker und elektromagnetischer WW (sehr gut) erhalten,
+in schwacher WW verletzt.
+\item \textbf{$C$-Parität:} für neutrale, selbstkonjugierte Mesonen in stark/EM erhalten.
+\end{itemize}
+\textbf{Diagnose:} Ein Kanal, der $P$ oder $C$ verletzen müsste, ist in stark/EM verboten
+(bzw.\ stark unterdrückt) und wird, falls möglich, schwach realisiert.
+
+\item \textbf{Zeitskalen: Breite $\Gamma$ und Lebensdauer $\tau$.}\\
+\[
+\Gamma=\frac{\hbar}{\tau}.
+\]
+Typische Grössenordnungen:
+\[
+\text{stark: }\tau\sim 10^{-23}\,\mathrm{s}\quad (\Gamma\sim \mathrm{MeV}\text{--}100\,\mathrm{MeV}),
+\]
+\[
+\text{EM: }\tau\sim 10^{-16}\text{--}10^{-19}\,\mathrm{s},
+\qquad
+\text{schwach: }\tau\sim 10^{-8}\text{--}10^{-13}\,\mathrm{s}.
+\]
+\textbf{Diagnose:} Sehr große $\Gamma$ (extrem kurze $\tau$) $\Rightarrow$ stark;
+Photonenkanäle mit mittleren Zeitskalen $\Rightarrow$ EM;
+langlebige Hadronen $\Rightarrow$ schwach.
+
+\item \textbf{Endzustandsmuster (Pattern Recognition).}\\
+\begin{itemize}
+\item \textbf{Neutrinos im Endzustand} $\Rightarrow$ \textbf{schwach}.
+\item \textbf{Photon(en) im Endzustand} $\Rightarrow$ häufig \textbf{EM}
+(sofern ein starker Kanal verboten/unterdrückt ist).
+\item \textbf{Nur Hadronen, kein Flavourwechsel} $\Rightarrow$ meist \textbf{stark}
+(sofern kinematisch erlaubt).
+\end{itemize}
+\end{enumerate}
+
+\subsubsection*{Typische Zerfälle nach Wechselwirkung}
+
+\paragraph{Starke Zerfälle (QCD).}
+\begin{itemize}
+\item Charakter: sehr schnell, große Breite, Netto-Flavour erhalten.
+\item Beispiele: $\rho\to\pi\pi$, $\Delta\to N\pi$, $K^*\to K\pi$, $\phi\to K\bar K$.
+\end{itemize}
+
+\paragraph{Elektromagnetische Zerfälle (QED).}
+\begin{itemize}
+\item Charakter: langsamer als stark, schneller als schwach; Photonen oder Leptonpaare.
+\item Beispiele: $\pi^0\to\gamma\gamma$, $\Sigma^0\to\Lambda\gamma$, $\omega\to\pi^0\gamma$,
+Dalitz: $\pi^0\to \gamma e^+e^-$.
+\item Heuristik: wenn stark verboten/kinematisch geschlossen, dominiert oft EM.
+\end{itemize}
+
+\paragraph{Schwache Zerfälle.}
+\begin{itemize}
+\item Charakter: Flavourwechsel möglich; häufig Neutrinos; deutlich längere Lebensdauer.
+\item Beispiele (Hadronen): $\Lambda\to p\pi^-$, $K\to\pi\pi$, $K\to \pi \ell\nu$, $\Xi\to\Lambda\pi$.
+\item Beispiele (Leptonen): $\mu\to e\,\bar\nu_e\,\nu_\mu$, $\tau$-Zerfälle.
+\end{itemize}
+
+\subsubsection*{Kurzdiagnosen an Standardbeispielen}
+
+\begin{itemize}
+\item $\rho^0\to\pi^+\pi^-$: keine Flavouränderung, nur Hadronen, große Breite $\Rightarrow$ \textbf{stark}.
+\item $\pi^0\to\gamma\gamma$: Photonen-Endzustand, EM-Prozess $\Rightarrow$ \textbf{EM}.
+\item $\Lambda\to p\pi^-$: $\Delta S\neq 0$ $\Rightarrow$ \textbf{schwach}.
+\item $\Sigma^0\to\Lambda\gamma$: Hadron + Photon, starker Kanal nicht verfügbar $\Rightarrow$ \textbf{EM}.
+\end{itemize}
+
+\subsubsection*{Streuprozesse (gleiche Logik)}
+
+\begin{itemize}
+\item Nur Hadronen, kein Flavourwechsel: meist \textbf{stark} (z.\,B.\ $\pi N\to\pi N$, $pp\to pp$).
+\item Lepton--Hadron mit Photon-Austausch: meist \textbf{EM} (z.\,B.\ $e^-p\to e^-p$ bei moderaten Energien).
+\item Neutrino-Prozesse: \textbf{schwach}.
+\item Flavourwechsel in Quarks (z.\,B.\ $s\to u$ in Reaktionen): \textbf{schwach}.
+\end{itemize}
+
+
+% ============================================================
+% Quarkbilanz-Regeln / Selektionsregeln (Kurz-Zusammenfassung)
+% ============================================================
+
+\subsection*{Quarkbilanz-Regeln und Selektionsregeln in Hadronprozessen}
+
+\paragraph{Grundidee.}
+Ein Hadronprozess ist auf Quarkniveau konsistent, wenn die in der jeweiligen Wechselwirkung
+erhaltenen \emph{Quarkzahlen} (bzw.\ daraus abgeleitete Quantenzahlen) zwischen Ein- und Ausgängen
+übereinstimmen. Man unterscheidet dabei harte (exakte) von näherungsweisen Regeln.
+
+\subsubsection*{1. Quarkzahlen und Netto-Flavourzahlen}
+
+Für jeden Flavour $f\in\{u,d,s,c,b,t\}$ definiere die Netto-Flavourzahl
+\[
+F_f := N_f - N_{\bar f}.
+\]
+Dann gilt:
+
+\begin{enumerate}
+\item \textbf{(QCD/QED: Flavour-diagonal)}\\
+In starker und elektromagnetischer Wechselwirkung sind die Kopplungen flavour-diagonal, d.\,h.
+kein Quark ändert seinen Flavour am Vertex. Konsequenz:
+\[
+\boxed{\Delta F_f = 0 \quad \text{für alle } f \text{ in QCD und QED.}}
+\]
+Insbesondere kann man in QCD/QED keine \glqq einzelne\grqq\ Strangeness erzeugen:
+$s$ entsteht nur zusammen mit $\bar s$ (Paarerzeugung).
+
+\item \textbf{(Schwache WW: Flavourwechsel möglich)}\\
+In der schwachen Wechselwirkung sind Flavourwechsel erlaubt (geladene Ströme, CKM-Mischung):
+\[
+\Delta F_f \neq 0 \ \text{ist möglich, z.\,B.}\ \Delta S=\pm 1,\ \Delta C=\pm 1,\ldots
+\]
+\end{enumerate}
+
+\subsubsection*{2. Abgeleitete harte Quantenzahlen aus Quarkbilanz}
+
+\begin{enumerate}
+\item \textbf{Baryonzahl $B$ (in QCD/QED exakt erhalten)}\\
+\[
+B = \frac{1}{3}\sum_f (N_f - N_{\bar f}) = \frac{1}{3}\sum_f F_f,
+\qquad
+\boxed{\Delta B = 0 \text{ in QCD/QED (und perturbativ auch in der schwachen WW).}}
+\]
+Folge: Baryon--Antibaryon-Paare können erzeugt werden, aber nur so, dass $B_{\rm ges}$ konstant bleibt
+(z.\,B. $pp\to pp\,p\bar p$ ist möglich, wenn kinematisch offen).
+
+\item \textbf{Elektrische Ladung $Q$ (immer erhalten)}\\
+Auf Quarkebene:
+\[
+Q = \frac{2}{3}F_u - \frac{1}{3}F_d - \frac{1}{3}F_s + \frac{2}{3}F_c - \frac{1}{3}F_b + \frac{2}{3}F_t,
+\qquad
+\boxed{\Delta Q = 0 \text{ immer.}}
+\]
+
+\item \textbf{Strangeness, Charm, Bottomness als Netto-Flavourzahlen}\\
+Mit Konventionen:
+\[
+S = -(N_s-N_{\bar s}) = -F_s,\qquad
+C = +(N_c-N_{\bar c}) = +F_c,
+\]
+\[
+B_{\text{bottom}} = -(N_b-N_{\bar b}) = -F_b \quad
+(\text{Achtung: nicht mit Baryonzahl } B \text{ verwechseln}).
+\]
+Dann gilt in QCD/QED:
+\[
+\boxed{\Delta S=\Delta C=\Delta B_{\text{bottom}}=0 \text{ (stark/EM).}}
+\]
+In der schwachen WW sind diese Grössen i.\,A. \emph{nicht} erhalten.
+
+\end{enumerate}
+
+\subsubsection*{3. Nützliche Relationsformeln (insb. für $u,d,s$-Hadronen)}
+
+\begin{enumerate}
+\item \textbf{Hyperladung $Y$ und Gell-Mann--Nishijima}\\
+Für Hadronen aus $u,d,s$ (ohne Charm/Bottom):
+\[
+Y := B + S,
+\qquad
+Q = I_3 + \frac{Y}{2}.
+\]
+Daraus folgt: Wenn in einem Prozess $Q$ und $B$ erhalten sind und (näherungsweise) $I_3$ erhalten ist,
+dann muss auch $Y$ (und damit $S$) erhalten sein.
+
+\item \textbf{Isospin $SU(2)$ (näherungsweise)}\\
+Isospin ist eine \emph{approximate} Symmetrie der starken WW (gut, aber nicht exakt), gebrochen durch
+$m_u\neq m_d$ und elektromagnetische Effekte. Typische Konsequenz:
+\[
+I,\ I_3 \ \text{werden in starker WW sehr gut erhalten (bis auf kleine Korrekturen).}
+\]
+Isospin-Argumente liefern Relationsformeln zwischen Ladungskanälen (Clebsch--Gordan-Faktoren).
+\end{enumerate}
+
+\subsubsection*{4. Kinematik und \glqq Kanal\grqq-Logik}
+
+\paragraph{Kanal.} Ein \emph{Kanal} ist ein konkreter Endzustand $f$ in einem Zerfall/Streuprozess $i\to f$.
+
+\begin{enumerate}
+\item \textbf{Kinematische Schwelle (offen/geschlossen)}\\
+Ein Kanal ist nur möglich, wenn
+\[
+m_i \ge \sum_{k\in f} m_k.
+\]
+Wenn alle starken (und ggf.\ EM) Kanäle kinematisch geschlossen oder durch Quantenzahlen verboten sind,
+dominiert der schwache Zerfall.
+
+\item \textbf{Skalenheuristik (Dominanz)}\\
+Typische Zeitskalen:
+\[
+\tau_{\text{stark}}\sim 10^{-23}\,\mathrm s \ll 
+\tau_{\text{EM}}\sim 10^{-16}\text{--}10^{-19}\,\mathrm s \ll
+\tau_{\text{schwach}}\sim 10^{-8}\text{--}10^{-13}\,\mathrm s.
+\]
+\end{enumerate}
+
+\subsubsection*{5. Praktische Checkliste für Hadronprozesse}
+
+Für einen Prozess $i\to f$:
+
+\begin{enumerate}
+\item \textbf{(Kinematik)} Prüfe Schwelle: $m_i \ge \sum m_f$.
+\item \textbf{(Harte Erhaltung)} Prüfe $Q$ und $B$.
+\item \textbf{(Stark/EM)} Prüfe Netto-Flavourzahlen $F_f$ (insb.\ $S,C,b$).
+\item \textbf{(Approx.)} Prüfe $I_3$ (Isospin) und ggf.\ weitere Auswahlregeln.
+\item \textbf{(Signaturen)} Neutrinos $\Rightarrow$ schwach; Photonen $\Rightarrow$ oft EM.
+\end{enumerate}
+
+\paragraph{Beispiel: $\pi^-p\to K^-p$ (stark/EM verboten).}
+\[
+\pi^-=d\bar u,\quad p=uud \Rightarrow \text{in: } uud + d\bar u,
+\]
+\[
+K^-=s\bar u,\quad p=uud \Rightarrow \text{out: } uud + s\bar u.
+\]
+Netto entsteht ein $s$ ohne $\bar s$, also $\Delta F_s\neq 0$ (bzw.\ $\Delta S\neq 0$):
+\[
+\boxed{\text{in QCD/QED verboten, nur schwach möglich.}}
+\]
+
+
+
+\pagebreak
+
+
+\section{Diagramme, Amplituden, Wirkungsquerschnitte}
+
+\subsection{25/26}
+
+
+\subsubsection{10: 1: Muon pair production $(4+4+4$ points $)$}
+the theory of Quantum Electrodynamics,
+
+$$
+E D=\sum_{f=1}^2 \bar{\psi}_f\left[\mathrm{i} \not D-m_f\right] \psi_f-\frac{1}{4} F^{\mu \nu} F_{\mu \nu}=\bar{\psi}\left[\mathrm{i} \gamma^\mu\left(\partial_\mu+\mathrm{i} e A_\mu\right)-m\right] \psi-\frac{1}{4} F^{\mu \nu} F_{\mu \nu},
+$$
+
+
+1 denoting the electron and positron fields with electron mass $m_1=m_e$ and $f=2$ and anti-muon fields with muon mass $m_2=m_\mu$.
+the creation of a muon ( $\mu^{-}$) and an anti-muon ( $\mu^{+}$) from electron ( $e^{-}$) positron ( $e^{+}$) on
+
+$$
+e^{+}\left(p_1, r_1\right)+e^{-}\left(p_2, r_2\right) \rightarrow \mu^{+}\left(p_1^{\prime}, s_1\right)+\mu^{-}\left(p_2^{\prime}, s_2\right) .
+$$
+
+tify all the Feynman diagrams contributing at tree level ( $\mathcal{O}\left(e^2\right)$ ) and write down the esponding matrix elements in momentum space using the Feynman rules familiar from lecture.
+npute the spin averaged, squared absolute value of the amplitudes in the high energy t and in the center of mass frame using Feynman gauge ( $\xi=1$ ).
+your result from sheet 8 for the differential cross section of a $2 \rightarrow 2$ particle process show that the differential cross section in the case of muon-pair-production is given
+
+$$
+\frac{d \sigma}{d \Omega}=\frac{\alpha^2}{4 s}\left(1+\cos ^2 \theta\right),
+$$
+
+re $\alpha=\frac{e^2}{4 \pi}$ is the fine-structure constant, $\theta$ the scattering angle. Also determine the l cross-section $\sigma$.
+
+
+\subsubsection{10: Exercise 2: Bhabha-scattering( $4+4$ points +5 bonuspoints)}
+Consider the theory of Quantum Electrodynamics for electrons, positrons and photons,
+
+$$
+\mathcal{L}_{Q E D}=\bar{\psi}[\mathrm{i} \not D-m] \psi-\frac{1}{4} F^{\mu \nu} F_{\mu \nu}=\bar{\psi}\left[\mathrm{i} \gamma^\mu\left(\partial_\mu+\mathrm{i} e A_\mu\right)-m\right] \psi-\frac{1}{4} F^{\mu \nu} F_{\mu \nu}
+$$
+
+
+Electron ( $e^{-}$) - Positron ( $e^{+}$) scattering is referred to as Bhabha-scattering
+
+$$
+e^{+}\left(p_1, r_1\right)+e^{-}\left(p_2, r_2\right) \rightarrow e^{+}\left(p_1^{\prime}, r_1^{\prime}\right)+e^{-}\left(p_2^{\prime}, r_2^{\prime}\right)
+$$
+
+i) Identify all the Feynman diagrams contributing at tree level ( $\mathcal{O}\left(e^2\right)$ ) and write down the corresponding matrix elements in momentum space using the Feynman rules familiar from the lecture.
+ii) Compute the spin averaged squared absolute value of the amplitudes (keep in mind that there could be interference terms!) in the high energy limit and in the center of mass frame using Feynman gauge ( $\xi=1$ ).
+
+Bonus Part********************************
+iii) Recall from sheet 8 that the differential cross section of a $2 \rightarrow 2$ particle process was given as
+
+$$
+\frac{d \sigma}{d \Omega}=\frac{1}{64 \pi^2 s}\left|M_{f_i}\right|^2
+$$
+
+in the case of equal masses for incoming and outgoing particles. Use your previous result to show that the differential cross section in the case of Bhabha-scattering is
+
+$$
+\frac{d \sigma}{d \Omega}=\frac{\alpha^2}{8 E^2}\left(\frac{1+\cos ^4(\theta / 2)}{\sin ^4(\theta / 2)}+\frac{1+\cos ^2(\theta)}{2}-2 \frac{\cos ^4(\theta / 2)}{\sin ^2(\theta / 2)}\right)
+$$
+
+where $\alpha=\frac{e^2}{4 \pi}$ is the fine-structure constant, $\theta$ the scattering angle and E is the respective energy of electron and positron in the center-of-mass system.
+
+Hint: Use Mandelstam variables.
+
+
+\subsubsection{11: Exercise 1: Compton-scattering ( $4+6+4$ points)}
+
+{\color{blue}
+Consider the theory of Quantum Electrodynamics for electrons, positrons and photons,
+
+$$
+\mathcal{L}_{Q E D}=\bar{\psi}[\mathrm{i} \not D-m] \psi-\frac{1}{4} F^{\mu \nu} F_{\mu \nu}=\bar{\psi}\left[\mathrm{i} \gamma^\mu\left(\partial_\mu+\mathrm{i} e A_\mu\right)-m\right] \psi-\frac{1}{4} F^{\mu \nu} F_{\mu \nu} .
+$$
+
+
+Compton-scattering is the process of electron-photon scattering
+
+$$
+e^{-}\left(p_1, r_1\right)+\gamma\left(p_2, \lambda\right) \rightarrow e^{-}\left(p_1^{\prime}, r_1^{\prime}\right)+\gamma\left(p_2^{\prime}, \lambda^{\prime}\right) .
+$$
+
+i) Identify all tree level Feynman diagrams of the scattering process and calculate the matrix elements in momentum space using the Feynman rules.
+ii) Compute the squared matrix element in the massless limit and average over spins and polarization states by calculating the corresponding sums, leading to
+
+$$
+\overline{\left|\mathcal{M}_f\right|^2}=2 e^4\left(-\frac{u}{s}-\frac{s}{u}\right),
+$$
+
+with Mandelstam variables $s$ and $u$.
+
+
+iii) Use your result to calculate the differential cross section in the center-of-mass frame. Why is it not possible to integrate the cross section and obtain the total cross section? How can the problem be fixed?
+
+Hint: For each process involving two external photons the matrix element can be written as
+
+$$
+\mathcal{M}_{f_i}=\mathcal{M}_{\alpha \beta}\left(k, k^{\prime}, \ldots\right) \epsilon_\lambda^\alpha(k) \epsilon_{\lambda^{\prime}}^{\beta \star}\left(k^{\prime}\right) .
+$$
+
+
+As a consequence of gauge invariance one has
+
+$$
+k^\alpha \mathcal{M}_{\alpha \beta}=k^\beta \mathcal{M}_{\alpha \beta}=0 .
+$$
+
+
+Therefore the second term in the completeness relation of the polarization vectors
+
+$$
+\sum_{\lambda=1}^2 \epsilon_\lambda^{\alpha \star}(k) \epsilon_\lambda^\beta(k)=-\left(g^{\alpha \beta}-\frac{k^\alpha k^\beta}{k^2}\right)
+$$
+
+will not contribute to the matrix element $\mathcal{M}$ and can be discarded.
+}
+
+
+\subsubsection{11: Exercise 2: Electron-electron scattering (4 points)}
+
+
+Draw and label the Feynman diagrams contributing to this process to leading order. Derive the spin-summed and averaged squared matrix element $\overline{\left|M_{f i}\right|^2}$ from that for electronpositron scattering by comparing the respective diagrams and making appropriate momentum substitutions.
+
+
+
+
+
+
+\subsubsection{13: Exercise 3: Quark-antiquark scattering ( $4+4+4$ points)}
+
+{\color{blue} Quarks carry electric charge as well as color charge and hence interact both via the electromagnetic as well as the strong interaction.
+
+i) Draw all tree level Feynman diagrams for quark-antiquark scattering of an up and an antidown quark
+
+$$
+u+\bar{d} \rightarrow u+\bar{d}
+$$
+
+both for QED and QCD.
+
+ii) Write down the corresponding scattering amplitudes $\mathrm{i} \mathcal{M}_{Q E D}$ and $\mathrm{i} \mathcal{M}_{Q C D}$. Use the QCD Feynman rules in momentum space familiar from exercise 1 for the latter one.
+
+iii) The spin sums of QCD in the case of massless quarks take the following form
+
+$$
+\sum_s u_s^i(\mathbf{p}) \bar{u}_s^j(\mathbf{p})=\not p \delta^{i j}, \quad \sum_s v_s^i(\mathbf{p}) \bar{v}_s^j(\mathbf{p})=\not p \delta^{i j}
+$$
+
+with $i, j \in\{1, \ldots 3\}$ the group indices of the fundamental representation of the gauge group $S U(3)$. Use these sums to average over initial spins and colors and sum over final spins and colors to relate the scattering amplitude of QCD to the scattering amplitude of QED
+
+$$
+\left|\mathcal{M}_{Q C D}\right|^2=R\left|\mathcal{M}_{Q E D}\right|^2
+$$
+
+
+Determine the factor R as a function of strong coupling $g_s$ and the QED quark charges $q_u$ and $q_d$.
+
+Hint: You do not have to carry out any traces of gamma matrices after performing the spin sums. It is sufficient to look at the Kronecker deltas and group generators of the $S U(3)$ gauge group to evaluate $R$.}
+
+
+
+\pagebreak
+
+\subsection{11}
+
+
+\subsubsection{8.1} 
+
+Evaluate, in the high-energy limit, the differential cross section $d \sigma / d \Omega$ and the total cross section to order $\alpha$ for the muon pair production process $e^{-}+e^{+} \longrightarrow \mu^{-}+\mu^{+}$.
+
+
+\subsubsection{8.2} 
+
+
+{\color{blue}
+Show that the spin summed/averaged square matrix element for Compton scattering in the massless limit is given by
+
+$$
+\left|M_{f i}\right|^2=2 e^4\left(-\frac{u}{s}-\frac{s}{u}\right) .
+$$
+
+
+Evaluate the total cross section in the center of mass frame. Why is there a problem?
+}
+
+\subsubsection{11.3} 
+
+Hadron production in electron-positron scattering: quarks carry electric charge and therefore participate in the electromagnetic interactions. Up to the modified charge, they couple to photons in the same way as electrons. Draw all leading order Feynman diagrams for the following processes:
+
+$$
+\begin{aligned}
+& e^{+}(1) e^{-}(2) \longrightarrow q(3) \bar{q}(4) g(5) g(6) \\
+& e^{+}(1) e^{-}(2) \longrightarrow q(3) \bar{q}(4) Q(5) \bar{Q}(6), \quad Q \neq q \\
+& e^{+}(1) e^{-}(2) \longrightarrow q(3) \bar{q}(4) q(5) \bar{q}(6)
+\end{aligned}
+$$
+
+
+Determine the relative signs between the diagrams according to Bose-Einstein and FermiDirac statistics.
+
+\subsubsection{13.1 }
+
+Consider the following terms of the electroweak Lagrangian for the first generation of leptons:
+
+$$
+\mathcal{L}_f=\bar{\ell}_L i \gamma^\mu \widetilde{D}_\mu \ell_L+\bar{e}_R i \gamma^\mu D_\mu e_R,
+$$
+
+where $\ell_L$ is the left-handed ( $\nu_L, e_L$ ) isospin doublet and ( $e_R$ ) is the right-handed singlet, with covariant derivatives
+
+$$
+\begin{aligned}
+\left(\widetilde{D}_\mu\right)_{b c} & =\left(\partial_\mu \delta_{b c}-\frac{i g^{\prime}}{2} Y B_\mu-i g T_{b c}^a W_\mu^a\right) \\
+\left(D_\mu\right) & =\left(\partial_\mu-\frac{i g^{\prime}}{2} Y B_\mu\right)
+\end{aligned}
+$$
+
+
+Identify the interaction terms between leptons and the physical gauge bosons $\left\{W^{ \pm}, Z, A\right\}$, as given in the lecture: to which currents and with which coupling do they couple?
+
+
+\pagebreak
+
+
+\subsection{21/22}
+
+
+\subsubsection{Exercise 1: Quark-gluon scattering}
+Consider the theory of massless QCD with one quark flavour, denoted $q$
+
+$$
+\mathcal{L}=\bar{q}\left(\mathrm{i} \gamma^\mu D_\mu\right) q-\frac{1}{4} F_{\mu \nu}^a F^{\mu \nu a}
+$$
+
+
+Here $D_\mu=\partial_\mu-\mathrm{i} g T^a A_\mu^a$ is the covariant derivative with $\operatorname{SU}(3)$ gauge fields $A_\mu^a$ describing gluons, and the generators $T^a$ of $\operatorname{SU}(3)$.
+Let us have a look at quark gluon scattering
+
+$$
+q(p, r)+g(k) \rightarrow q\left(p^{\prime}, s\right)+g\left(k^{\prime}\right)
+$$
+
+with incoming momenta $p, k$ and outgoing momenta $p^{\prime}, k^{\prime}$ and spins $r, s$.
+i) Identify all contributing Feynman diagrams up to order $\mathcal{O}\left(g^2\right)$. (Self interaction!)
+ii) The relevant QCD Feynman rules in this case are
+- A quark-gluon vertex has a contribution of
+
+$$
+\sim \mathrm{i} g \gamma_\mu T_{i j}^a
+$$
+
+- A gluon three-vertex, has a contribution of
+
+$$
+\sim g f_{a b c}\left(g_{\mu \nu}\left(p_1-p_2\right)_\rho+g_{\nu \rho}\left(p_2-p_3\right)_\mu+g_{\rho \mu}\left(p_3-p_1\right)_\nu\right)
+$$
+
+where by convention all momenta $p_i$ of the gluons are denoted as incoming.
+- An internal quark line gets a factor of
+
+$$
+\sim \mathrm{i} \frac{\not p \delta_{i j}}{p^2+\mathrm{i} \epsilon}
+$$
+
+with $\delta_{i j}$ being a Kronecker delta for color indices $i, j \in\{1, \ldots, N\}$ of the fundamental representation.
+- An internal gluon line (in Feynman gauge $\xi=1$ ) gets a factor of
+
+$$
+\sim-\mathrm{i} \frac{g_{\mu \nu} \delta_{a b}}{p^2+\mathrm{i} \epsilon},
+$$
+
+with $\delta_{a b}$ being a Kronecker delta for color indices $a, b \in\left\{1, \ldots, N^2-1\right\}$ of the adjoint representation (gluons).
+- An incoming/outgoing quark gets a factor of $u_{i, r}(p) / \bar{u}_{i, r}(p)$, an incoming/outgoing gluon a factor of $\epsilon_\lambda^{\mu a}(k) / \epsilon_\lambda^{\star \nu a}$.
+
+Give the matrix element of each Feynman diagram from i) using the given Feynman rules. Hint: Use Mandelstam variables.
+
+
+\pagebreak
+
+\subsection{Buch}
+
+11.1 Man betrachte die QCD mit nur einem Quarkflavour und zeichne die Feynmandiagramme führender Ordnung in der starken Kopplungskonstanten für den zur Comptonstreuung analogen Prozess $q+g \longrightarrow q+g$. Mithilfe der Feynmanregeln sind die zugehörigen Ausdrücke anzugeben.
+
+
+11.3 Man betrachte die Hadronproduktion in Elektron-Positron-Streuung mittels der Prozesse
+
+$$
+\begin{aligned}
+& e^{-}+e^{+} \longrightarrow q+\bar{q}+g+g \\
+& e^{-}+e^{+} \longrightarrow q+\bar{q}+Q+\bar{Q} \\
+& e^{-}+e^{+} \longrightarrow q+\bar{q}+q+\bar{q}
+\end{aligned}
+$$
+
+wobei $Q \neq q$. Zeichnen Sie die Feynmandiagramme führender Ordnung und bestimmen Sie die relativen Vorzeichen entsprechend der Bose- bzw. Fermistatistik der beteiligten Teilchen.
+
+
+\pagebreak
+
+
+\section{Lagrangians und Trafo-Verhalten}
+
+
+\subsection{21/22}
+
+
+\subsubsection{12: Exercise 1: Adjoint Representation of $\operatorname{SU}(N)$}
+Consider the Lie group $S U(N)$. The fundamental representation of the group is given by the $N \times N$ matrices $U \in S U(N)$
+
+$$
+U=e^{-\mathrm{i} \theta^a T^a}, \quad a=1, \ldots, N^2-1,
+$$
+
+with generators $T^a$ of the Lie group and antisymmetric structure constants $f^{a b c}$, that satisfy the Lie algebra
+
+$$
+\left[T^a, T^b\right]=\mathrm{i} f^{a b c} T^c,
+$$
+
+and are normalized as
+
+$$
+\operatorname{tr}\left(T^a T^b\right)=\frac{1}{2} \delta^{a b} .
+$$
+
+
+A field $\phi^a$ is said to transform with the adjoint representation of the group $\operatorname{SU}(N)$ if the associated matrix valued field, defined by $\phi:=\phi^a T^a$ transforms as
+
+$$
+\phi^{\prime}=U \phi U^{\dagger} .
+$$
+
+i) Show that the transformation of the components $\phi^a$, and therefore the adjoint representation $D^{a b}(U)$ is given as
+
+$$
+\phi^a \rightarrow \phi^{a \prime}=D^{a b}(U) \phi^b=2 \operatorname{tr}\left(U^{\dagger} T^a U T^b\right) \phi^b .
+$$
+
+ii) The covariant derivative acting on the matrix valued field $\phi=\phi^a T^a$ is defined as
+
+$$
+D_\mu \phi(x)=\partial_\mu \phi(x)-\mathrm{i} g\left[A_\mu, \phi(x)\right] .
+$$
+
+
+Show that this indeed transforms as the adjoint representation
+
+$$
+\left(D_\mu \phi\right)^{\prime}(x)=U(x)\left(D_\mu \phi(x)\right) U^{\dagger}(x),
+$$
+
+with $U(x) \in S U(N)$ and that
+
+$$
+\left(D_\mu \phi\right)^a=\partial_\mu \phi^a-g f^{a b c} A_\mu^c \phi^b .
+$$
+
+iii) Prove that for two matrices $U, U^{\prime} \in S U(N)$ in fundamental representation, one has
+
+$$
+D^{a b}(U) D^{b c}\left(U^{\prime}\right)=D^{a c}\left(U U^{\prime}\right),
+$$
+
+by making use of the following relation
+
+$$
+T_{l i}^a T_{n o}^a=\frac{1}{2}\left(\delta_{l o} \delta_{i n}-\frac{1}{N} \delta_{l i} \delta_{n o}\right) .
+$$
+
+
+\subsubsection{12: Exercise 2: Yang-Mills theory}
+In the lecture you derived the covariant derivative of $\operatorname{SU}(N)$ gauge theory
+
+$$
+D_\mu=\partial_\mu-\mathrm{i} g A_\mu^a T^a
+$$
+
+with $\operatorname{SU}(N)$ gauge field $A_\mu^a$ and the generators $T^a$ of the $\operatorname{SU}(N)$ group, normalized to $\operatorname{tr}\left(T^a T^b\right)= \frac{1}{2} \delta^{a b}$.
+i) Use the covariant derivative to calculate the field strength tensor $F_{\mu \nu}^a$ of $\operatorname{SU}(N)$ gauge theory via
+
+$$
+F_{\mu \nu}=\frac{\mathrm{i}}{g}\left[D_\mu, D_\nu\right] .
+$$
+
+ii) The Lagrangian of Yang-Mills theory is constructed from the field strength tensor $F^{\mu \nu}$ in the following, gauge invariant way
+
+$$
+\mathcal{L}_{Y M}=-\frac{1}{2} \operatorname{tr}\left(F^{\mu \nu} F_{\mu \nu}\right) .
+$$
+
+
+Use your result from i) to express the Lagrangian in terms of $A^{\mu a}$ and identify the self interaction terms.
+
+
+\subsubsection{13: Exercise 2: Vektor and axial flavour symmetry of QCD}
+
+Consider the quark sector of the QCD Lagrangian with $N_f$ flavours $\psi_f=\left(\psi_1, \psi_2, \ldots, \psi_{N_f}\right)$
+
+$$
+\mathcal{L}=\sum_{f=1}^{N_f} \bar{\psi}_f\left(\mathrm{i} \gamma^\mu D_\mu-m_f\right) \psi_f
+$$
+
+i) Show that in case of degenerate quark masses, $m_f=m$ with $f \in\left\{1, \ldots, N_f\right\}$, the theory is invariant under the following global flavour transformation,
+
+$$
+\psi \rightarrow \psi^{\prime}=U \psi=e^{-\mathrm{i} \theta^a T^a} \psi
+$$
+
+with $U \in S U\left(N_f\right)$, constant parameters $\theta^a$ and the generators $T^a$ of the $S U\left(N_f\right)$ group.
+ii) Consider the following axial flavour transformation of Dirac spinors
+
+$$
+\psi \rightarrow \psi^{\prime}=U \psi=e^{-\mathrm{i} \omega^a T^a \gamma_5} \psi
+$$
+
+
+Determine first the corresponding transformation of $\bar{\psi}$, and then show that the Lagrangian is invariant only if $m=0$
+
+
+
+\pagebreak
+
+\subsection{Buch}
+
+9.3 Man zeige, dass ein Massenterm für die nichtabelschen Eichfelder, $\frac{m^2}{2} A^{a \mu}(x) A_\mu^a(x)$, nicht invariant unter $S U(N)$-Eichtransformationen ist.
+
+
+12.1 Ausgehend von der Procagleichung (4.61) und der zugehörigen Greenfunktion für massive Vektorbosonen leite man die Form (12.30) des massiven Vektorbosonpropagators her.
+
+13.1 Betrachten Sie die elektroschwache Lagrangedichte mit einer Leptonfamilie,
+
+$$
+\mathscr{L}_f=\bar{\ell}_L i \gamma^\mu \widetilde{D}_\mu \ell_L+\bar{e}_R i \gamma^\mu D_\mu e_R,
+$$
+
+wobei $\ell_L$ das linkhändige Isospindublett ( $\nu_L, e_L$ ) darstellt und ( $e_R$ ) das rechtshändige Singulett. Die kovarianten Ableitungen sind
+
+$$
+\begin{aligned}
+\left(\widetilde{D}_\mu\right)_{b c} & =\left(\partial_\mu \delta_{b c}-\frac{i g^{\prime}}{2} Y B_\mu \delta_{b c}-i g T_{b c}^a W_\mu^a\right) \\
+\left(D_\mu\right) & =\left(\partial_\mu-\frac{i g^{\prime}}{2} Y B_\mu\right)
+\end{aligned}
+$$
+
+
+Führen Sie alle Rechenschritte explizit aus, die zur Identifikation der Wechselwirkungsterme zwischen den Leptonen und den physikalischen Eichbosonen $\left\{W^{ \pm}, Z, A\right\}$ in Abschn. 13.4 führen. Zu welchen Strömen gehören die einzelnen Terme und mit welchen Kopplungen? 
+
+
+\pagebreak
+
+\subsection{22/23}
+
+\subsubsection{Exercise 1: Isospin ( $4+3$ points)}
+
+{\color{blue}
+In the lecture you discussed the following interaction term for a nucleon $N=(p, n)$, pion $\phi=T^a \phi^a=\mathbf{T} \cdot\left(\frac{1}{\sqrt{2}}\left(\pi^{+}+\pi^{-}\right), \frac{i}{\sqrt{2}}\left(\pi^{+}-\pi^{-}\right), \pi^0\right)$ interaction
+
+$$
+\bar{N} \gamma^5 T^a N \phi^a,
+$$
+
+with $T^a$ the generators of $\operatorname{SU}(2)$.
+
+i) Show that the interaction term is invariant under isospin transformations. Recall that the nucleon transforms with the fundamental representation of $\operatorname{SU}(2)$ and the components of the pion field with the adjoint representation.
+Hint: Make use of the relation for group generators $T^a$ given in exercise 1 iii).
+
+ii) Can you think of alternative pion nucleon interaction terms respecting isospin, baryon number, parity and Lorentz invariance?
+}
+
+\pagebreak
+
+\section{LSZ Formel}
+
+
+\subsection{22/23}
+
+\subsubsection{Bonus Exercise: The LSZ-reduction formula (8 Bonuspoints)}
+
+Let us discuss the derivation of the LSZ-reduction formula for a two point function in $\phi^4$-theory.
+
+$$
+S_{f i}=\frac{\mathrm{i}^2}{\sqrt{Z^2}} \int d^4 x \int d^4 y e^{-\mathrm{i} p x+\mathrm{i} k y}\left(\square_x+m^2\right)\left(\square_y+m^2\right)\langle\Omega| T[\phi(y) \phi(x)]|\Omega\rangle
+$$
+
+where $S_{f i}=\langle\mathbf{k} ;$ out $\mid \mathbf{p} ; i n\rangle$ gives the S-matrix of the transition process.
+i) Starting from the definition rewrite
+
+$$
+\begin{aligned}
+S_{f i} & \left.=\langle\mathbf{k} ; \text { out }| \mathbf{p} ; \text { in }\rangle=\langle\mathbf{k} ; \text { out }| a_{\text {in }}^{\dagger}(\mathbf{p}) \mid \Omega ; \text { in }\right\rangle \\
+& =\langle\mathbf{k} ; \text { out }| a_{\text {out }}^{\dagger}(\mathbf{p})|\Omega\rangle+\langle\mathbf{k} ; \text { out }|\left(a_{\text {in }}^{\dagger}(\mathbf{p})-a_{\text {out }}^{\dagger}(\mathbf{p})\right)|\Omega\rangle
+\end{aligned}
+$$
+
+
+In which case is the first term $\langle\mathbf{k} ;$ out $| a_{\text {out }}^{\dagger}(\mathbf{p})|\Omega\rangle \neq 0$ ? Discuss whether it contributes.
+ii) Next have a look at the second term $\langle\mathbf{k}$; out $|\left(a_{\text {in }}^{\dagger}(\mathbf{p})-a_{\text {out }}^{\dagger}(\mathbf{p})\right)|\Omega\rangle$. Use the expression of $a^{\dagger}(\mathbf{p})$ obtained in the lecture,
+
+$$
+\hat{a}^{\dagger}(\mathbf{p})=\int d^3 x\left[E(\mathbf{p}) \phi(x)-\mathrm{i} \partial_0 \phi(x) e^{-\mathrm{i} p x}\right]
+$$
+
+to rewrite the term. Since the S matrix is not explicitly time dependent use the relations for $\phi_{i n / o u t}$ familiar from the lecture
+
+$$
+\lim _{t \rightarrow-\infty} \phi(x)=\sqrt{Z} \phi_{i n}(x), \quad \lim _{t \rightarrow \infty} \phi(x)=\sqrt{Z} \phi_{\text {out }}(x)
+$$
+
+to rewrite the result.
+iii) Make use of the relation
+
+$$
+\left(\lim _{t \rightarrow-\infty}-\lim _{t \rightarrow \infty}\right) f(t)=\int_{-\infty}^{\infty} \frac{d}{d t} f(t) d t
+$$
+
+and carry out the time derivative. Finally use partial integration so that all differential operators act on the field operator. You should obtain
+
+$$
+\left.\left.S_{f i}=\frac{\mathrm{i}}{\sqrt{Z}} \int d^4 x e^{-\mathrm{i} p x}\left(\square_x+m^2\right)\langle\mathbf{k} ; \text { out }| \phi(x) \right\rvert\, \Omega ; \text { in }\right\rangle
+$$
+
+
+Hint: Recall that you can write $\mathbf{p}^2 e^{-i p x}=-\nabla^2 e^{-i p x}$.
+iv) Repeat all the steps for
+
+$$
+\langle\mathbf{k} ; \text { out }| \phi(x)|\Omega\rangle=\langle\Omega| \phi(x) a_{\text {in }}(\mathbf{k})|\Omega\rangle+\langle\Omega| a_{\text {out }}(\mathbf{k}) \phi(x)-\phi(x) a_{\text {in }}(\mathbf{k})|\Omega\rangle .
+$$
+
+
+Hint: Keep in mind that you have to take care of time ordering.
+
+
+\pagebreak
+
+
+
+\section{Exam 2011}
+
+
+\subsection{Aufgabe 1 [Georgi-Glashow-Modell, 10 Punkte]:}
+
+Man betrachte das $S U(2)$ Higgs-Modell mit einem Triplett reeller Skalarfelder in der adjungierten Darstellung. Die Lagrangedichte lautet
+
+$$
+\mathcal{L}=-\frac{1}{4} F_{\mu \nu}^a(x) F^{a \mu \nu}(x)+\frac{1}{2} D_\mu^{a b} \Phi^b(x) D^{a c \mu} \Phi^c(x)-\frac{\mu^2}{2} \Phi^a(x) \Phi^a(x)-\frac{\lambda}{4!}\left(\Phi^a(x) \Phi^a(x)\right)^2
+$$
+mit der adjungierten kovarianten Ableitung $D_\mu^{a b}=\partial_\mu \delta^{a b}-g \epsilon^{a b c} A_\mu^c$ und $a, b, c=1,2,3$. Für welche Parameterwahl gibt es spontane Symmetriebrechung? Wie lautet der Vakuumerwartungswert $v$ des Higgs-Feldes? Wieviele Eichfelder werden dabei massiv und wie lauten ihre Massen?
+
+[Tipp: Wählen Sie einen Vakuumerwartungswert $\mathbf{\Phi}_0$ von der Form $\mathbf{\Phi}_0=(0,0, v)^T$ in der gebrochenen Phase. Nützliche Relation: $\epsilon^{a b c} \epsilon^{a d e}=\delta^{b d} \delta^{c e}-\delta^{b e} \delta^{c d}$ ].
+
+\subsection{Aufgabe 2 [Abelsche und nichtabelsche Eichtheorie, 11 Punkte]:}
+
+Man zeige durch explizite Rechnung, dass in QED mit $D_\mu=\partial_\mu-i e A_\mu$ gilt:
+
+$$
+\left[D_\mu, D_\nu\right]=-i e F_{\mu \nu}
+$$
+
+
+Für nicht-abelsche Theorien wird diese Relation benutzt, um den Feldstärketensor zu definieren. Man leite daraus die Matrixform $F_{\mu \nu}$ sowie die Komponentenform $F_{\mu \nu}^a$ her.
+
+Zeichnen Sie die Feynman-Diagramme der führenden Ordnung für :
+
+(i) Photon-Photon-Streuung $\quad \gamma \gamma \longrightarrow \gamma \gamma$
+
+(ii) Gluon-Gluon-Streuung $\quad g g \longrightarrow g g$.
+
+
+\subsection{Aufgabe 3 [Pion-Nukleon Wechselwirkung, 17 Punkte]:}
+
+Gegeben seien ein Nukleon-Isodublett $N=(p, n)^T$ und ein Pion-Isotriplett $\boldsymbol{\pi}=\left(\pi^1, \pi^2, \pi^3\right)^T$ :
+
+(i) Geben Sie die Transformationseigenschaften der folgenden Terme unter Isospin- , Paritäts- und Lorentztransformation an (Beweis nicht nötig):
+
+(Singulett, Dublett, ...; gerade, ungerade; Skalar,Vektor, ...)
+
+(a) $\bar{N} N$
+
+(b) $\bar{N} \gamma^5 \gamma^\mu N$
+
+(c) $\bar{N} \gamma^5 N$
+
+(d) $\boldsymbol{\pi}$
+
+(e) $\boldsymbol{\pi}^T \cdot \boldsymbol{\pi}$
+
+(f) $\partial^\mu \boldsymbol{\pi}$
+
+(g) $\bar{N} \gamma^5 \gamma^\mu T^a N$
+
+(h) $\bar{N} \gamma^\mu T^a N$
+
+(i) $\epsilon^{a b c} \pi^b \partial_\mu \pi^c$.
+
+(ii) Konstruieren Sie mit den Bausteinen von (i) mögliche Pion-Nukleon Wechselwirkungsterme, die die oben genannten Transformationen als Symmetrie besitzen (Potenzen eines Terms oder zusätzliche Matrizen sind nicht erlaubt).
+
+\subsection{Aufgabe 4 [Varia, 14 Punkte]:}
+Beantworten Sie die folgenden Fragen durch Angabe weniger prägnanter Stichworte oder Formeln.
+
+(i) Durch welches Merkmal wird in der theoretischen Formulierung der schwachen Wechselwirkung die Parität verletzt?
+
+(ii) Das Quarkmodell und die QCD weisen jeweils eine Invarianz unter SU(3)-Transformationen auf. In welchen Räumen wirken diese und worin unterscheiden sie sich?
+
+(iii) Nennen Sie zwei neue phys.e Phänomene, die beim Übergang von der nichtrelativistischen zur relativistischen Quantentheorie auftreten.
+
+(iv) Wieviele Freiheitsgrade benötigt man, um ein masseloses Fermion zu beschreiben?
+
+(v) Geben Sie den Helizitätsoperator an. Ist sein Eigenwert eine lorentzinvariante Quantenzahl?
+
+(vi) Nennen Sie zwei Gründe, weshalb bei der kanonischen Feldquantisierung von Fermionen Antikommutatoren anstelle von Kommutatoren verwendet werden.
+
+(vii) Welche der folgenden Prozesse sind phys. nicht "erlaubt"? Begründen Sie Ihre Aussage.
+
+(a) $\pi^0 \rightarrow e^{+}+e^{-}$
+
+(b) $e^{-}+p \rightarrow n+\nu_e$
+
+(c) $e^{+}+e^{-} \rightarrow \gamma$
+
+(d) $e^{+}+e^{-} \rightarrow 2 \gamma$
+
+\pagebreak
+
+\section{Exam 08.03.2016}
+
+\subsection{Problem 1 [Free fermionic quantum fields, 10 points]:}
+Consider the operator
+
+$$
+\mathbf{P} \equiv-i \int d^3 x \psi^{\dagger}(x) \nabla \psi(x)
+$$
+
+
+Use the solution to the free Dirac equation,
+
+$$
+\psi(\mathbf{x}, t=0)=\int \frac{d^3 p}{(2 \pi)^3 2 E(\mathbf{p})} \sum_s\left(a_s(p) u_s(p) e^{i \mathbf{p} \cdot \mathbf{x}}+b_s^{\dagger}(p) v_s(p) e^{-i \mathbf{p} \cdot \mathbf{x}}\right),
+$$
+
+to show that
+
+$$
+\mathbf{P}=\int \frac{d^3 p}{(2 \pi)^3} \mathbf{f}\left(a_s^{\dagger}(p) a_s(p)+g b_s(p) b_s^{\dagger}(p)\right) .
+$$
+
+(i) Calculate $\mathbf{f}, g$
+
+(ii) What is the meaning of the operators $a_s(p), a_s^{\dagger}(p), b_s(p), b_s^{\dagger}(p), \mathbf{P}$ ?
+
+(iii) Write down the definition for a one-fermion state $|f(\mathbf{p}, s)\rangle$ and calculate $: \mathbf{P}:|f(\mathbf{p}, s)\rangle$.
+
+Hint: $u_s^{\dagger}(p) u_{s^{\prime}}(p)=v_s^{\dagger}(p) v_{s^{\prime}}(p)=2 E(\mathbf{p}) \delta_{s s^{\prime}}, \quad u_s^{\dagger}(\mathbf{p}) v_{s^{\prime}}(-\mathbf{p})=0$.
+
+
+
+\subsection{Problem 2 [Abelian and non-abelian gauge theory, 13 points]:}
+Prove by explicit calculation that with $D_\mu=\partial_\mu-i e A_\mu$ (here $e=|e|$ ) the abelian field strength tensor obeys
+
+$$
+\left[D_\mu, D_\nu\right]=-i e F_{\mu \nu}
+$$
+
+
+Specify the non-abelian covariant derivative with a coupling $g$ and use this relation to define the field strength tensor for a $\operatorname{SU}(N)$ theory. Give the matrix form $F_{\mu \nu}$ as well as the component form $F_{\mu \nu}^a$ in terms of the non-abelian gauge fields.
+Draw the Feynman diagrams to leading non-vanishing order in the respective coupling constants for
+
+(i) photon-photon-scattering in QED $\quad \gamma+\gamma \longrightarrow \gamma+\gamma$
+
+(ii) gluon-gluon-scattering in QCD $g+g \longrightarrow g+g$.
+
+What is the leading power in $\alpha$ and $\alpha_s$ for the cross sections? Does process (i) also occur in classical electrodynamics? Interpret your finding qualitatively.
+
+
+\subsection{Problem 3 [Pion-nucleon interaction, 15 points]:}
+
+Consider the nucleon iso-doublet $N=(p, n)^T$ and the pion iso-triplet $\boldsymbol{\pi}=\left(\pi^1, \pi^2, \pi^3\right)^T$, where all $\pi^a$ have negative parity, i.e. they are pseudo-scalar fields.
+
+(i) Specify (without proof) the properties of the following terms under isospin (singlet, doublet, …), parity (,+- ) and Lorentz transformations (scalar, vector, …):
+
+(a) $\bar{N} N$
+
+(b) $\bar{N} \gamma^5 \gamma^\mu N$
+
+(c) $\bar{N} \gamma^5 N$
+
+(d) $\pi$
+
+(e) $\boldsymbol{\pi}^T \cdot \boldsymbol{\pi}$
+
+(f) $\partial^\mu \boldsymbol{\pi}$
+
+(g) $\bar{N} \gamma^5 \gamma^\mu T^a N$
+
+(h) $\bar{N} \gamma^\mu T^a N$
+
+(i) $\epsilon^{a b c} \pi^b \partial_\mu \pi^c$.
+
+(ii) By combining two terms from (i), construct all possible pion-nucleon interactions which are invariant under isospin, parity and Lorentz transformations. (Higher powers of the given terms or additional matrices are not allowed).
+
+
+\subsection{Problem 4 [Varia, 14 points]:}
+
+Answer the following questions by a few brief words or formulae.
+
+(i) How do the weak interaction couplings violate parity ?
+
+(ii) The quark model and QCD both have a symmetry under $\mathrm{SU}(3)$-transformations. On which spaces do these act and in which way are they different?
+
+(iii) Give two reasons, why the description of particle physics requires relativistic quantum field theories rather than a relativistic version of quantum mechanis.
+
+(iv) Write down the helicity operator for Dirac fermions. Are free Dirac fermions eigenstates of the helicity operator?
+
+(v) How many and which degrees of freedom are needed to describe a massless fermion?
+
+(vi) Give two reasons for specifying anti-commutators instead of commutators for fermion fields in the canonical quantisation procedure.
+
+(vii) Which of the following processes do not happen in nature? Give a reason for the forbidden ones.
+
+(a) $\pi^0 \rightarrow e^{+}+e^{-}$
+
+(b) $e^{-}+p \rightarrow n+\nu_e$
+
+(c) $e^{+}+e^{-} \rightarrow \gamma$
+
+(d) $e^{+}+e^{-} \rightarrow 2 \gamma$
+
+
+(viii) Man begründe mathematisch, warum virtuelle Teilchen mit kleinen Massen größere Beiträge zu physikalischen Prozessen liefern als schwere.
+\pagebreak
+
+\section{Exam 29.03.2016}
+
+
+\subsection{Problem 1 [Massless vector field, 10 points]:}
+
+a) Consider the classical field theory of a vector field $A^\mu(x)$ with the action
+
+$$
+\mathcal{S}_1=\int d^4 x \mathcal{L}_1 \quad \text { with } \quad \mathcal{L}_1=-\frac{1}{2}\left(\partial_\mu A_\nu\right)\left(\partial^\mu A^\nu\right)
+$$
+
+Find the field equations for $A^\mu(x)$ which follow from Hamilton's principle of least action.
+
+b) The action of the electromagnetic field in the vacuum reads
+
+$$
+\mathcal{S}_2=\int d^4 x \mathcal{L}_2 \quad \text { with } \quad \mathcal{L}_2=-\frac{1}{4} F^{\mu \nu}(x) F_{\mu \nu}(x), \quad F^{\mu \nu}=\partial^\mu A^\nu-\partial^\nu A^\mu
+$$
+
+
+Find a gauge condition for $A^\mu$ such that $\mathcal{S}_2$ in that gauge agrees with $\mathcal{S}_1$.
+
+
+\subsection{Problem 2 [Quark-antiquark scattering, 13 points ]:}
+Quarks carry electric charge as well as colour charge and hence interact both via the electromagnetic as well as the strong interaction.
+
+a) Draw the tree level Feynman diagrams for the quark scattering process
+
+$$
+u+\bar{d} \rightarrow u+\bar{d}
+$$
+
+both for QED and for QCD.
+
+b) Use the Feynman rules to write down the expression for the corresponding scattering amplitudes $i M_{\text {e.m. }}$ and $i M_s$. The QCD Feynman rules are:
+
+c) Now construct $\overline{\left|M_s\right|^2}$ by averaging over initial quark spins and colours and summing over final quark spins and colours, and express it as
+
+$$
+\overline{\left|M_s\right|^2}=R \overline{\left|M_{e . m .}\right|^2}
+$$
+
+What is the value of R ?
+
+Hint: Use approximately massless quarks with spins $s$, colours $c, c^{\prime}$ and
+
+$$
+\sum_s u_s^c(p) \bar{u}_s^{c^{\prime}}=\not p \delta_{c c^{\prime}}
+$$
+
+d) Can the processes be observed directly or indirectly?
+
+
+
+\subsection{Problem 3 [Fermion mass generation, 15 points]:}
+
+
+Consider the theory for real scalar fields and fermions,
+
+$$
+\mathcal{L}=\frac{1}{2} \partial_\mu \phi \partial^\mu \phi-V(\phi)+\bar{\psi} i \gamma^\mu \partial_\mu \psi-g \phi \bar{\psi} \psi, \quad V(\phi)=\frac{\lambda}{4!}\left(\phi^2-v^2\right)^2 .
+$$
+
+a) Sketch the potential $V(\phi)$ of the scalar field. What is its vacuum expectation value $\langle\phi\rangle \equiv\langle 0| \phi|0\rangle$ ?
+
+b) Reparametrise the scalar field by its fluctuations about this value, $\phi=\langle\phi\rangle+\chi$ and express $\mathcal{L}$ in terms of the field variables $\psi, \chi$.
+
+c) What are the particle masses in this theory? Is there a Goldstone boson? Sketch the basic vertices for all interaction terms without specifying the Feynman rules.
+
+d) How does the mass spectrum change for the case of a complex scalar field (no proof)? What is the reason?
+
+
+
+
+\subsection{Problem 4 [Varia, 14 points]:}
+
+Answer the following questions by a few brief words or formulae.
+
+(i) Specify two quantum numbers that are conserved in the strong interactions but violated in the weak interactions.
+
+(ii) In proton proton collisions, the process $p+p \rightarrow p+p+p+\bar{p}$ has the minimal possible final state containing an anti-proton. Why are so many protons required in the final state? Is the number of mesons in the final state constrained?
+
+(iii) What is the mathematical reason that for the colour gauge group $\operatorname{SU}(3)$ there are three different types of quarks but eight different types of gluons?
+
+(iv) Specify an observable particle phenomenon which in the Dirac equation is contained automatically while it has to be included by hand in the Schrödinger equation. Under which condition does the Schrödinger equation give a good description of particles?
+
+(v) At tree level, the photon exchange diagram and the pair annihilation diagram contribute to the amplitude of the process $e^{+}+e^{-} \rightarrow e^{+}+e^{-}$. Which diagrams contribute to the process $e^{+}+e^{-} \rightarrow l^{+}+l^{-}$with leptons $l \neq e$ ?
+
+(vi) Which of the following diagrams do not contribute to the 2 particles $\rightarrow 2$ particles scattering in $\phi^4$ theory? Give a reason for the forbidden ones.
+
+\pagebreak
+
+
+
+\section{Exam 06.03.2017}
+
+
+\subsection{Problem 1 [Bose Statistics, 10 points]:}
+
+The normal-ordered Hamiltonian of a real scalar field reads
+$$
+: H:=\int \frac{\mathrm{d}^3 p}{(2 \pi)^3 2 E(\mathbf{p})} E(\mathbf{p}) a^{\dagger}(\mathbf{p}) a(\mathbf{p})
+$$
+
+For notational convenience, we omit the double dots in the following expressions.
+
+(i) Show that for $\beta \in \mathbb{R}$
+
+$$
+e^{-\beta H} a^{\dagger}(\mathbf{p})=a^{\dagger}(\mathbf{p}) e^{-\beta(H+E(\mathbf{p}))} .
+$$
+
+
+Hint: Start by showing $H a^{\dagger}(\mathbf{p})=a^{\dagger}(\mathbf{p})(H+E(\mathbf{p}))$.
+
+For a thermal state with temperature $T=\frac{1}{\beta}$ expectation values of the operator $\mathcal{O}$ are calculated via
+
+$$
+\langle\mathcal{O}\rangle_\beta=\frac{\operatorname{tr}\left(\mathcal{O} e^{-\beta H}\right)}{\operatorname{tr}\left(e^{-\beta H}\right)},
+$$
+
+where the trace is over all quantum mechanical states of the system.
+
+(ii) Using the result from the previous part, show that
+
+$$
+\left\langle a^{\dagger}(\mathbf{p}) a(\mathbf{q})\right\rangle_\beta=(2 \pi)^3 2 E(\mathbf{p}) \delta^3(\mathbf{p}-\mathbf{q}) \frac{1}{e^{\beta E(\mathbf{p})}-1} .
+$$
+
+
+
+
+
+\subsection{Problem 2 [Mott scattering, 9 points]:}
+
+Consider the polarized differential cross section for Mott scattering, which is the scattering of an $e^{-}$with incoming momentum $\mathbf{p}$ and spin index $r$, and outgoing momentum $\mathbf{p}^{\prime}$ and spin index $s$, by a heavy nucleus of charge ( $-z e$ ) treated as a static, spinless point charge,
+
+$$
+\frac{\mathrm{d} \sigma(r, s)}{\mathrm{d} \Omega}=\frac{4 z^2 \alpha^2}{|\mathbf{q}|^4}\left|\bar{u}_s\left(\mathbf{p}^{\prime}\right) \gamma^0 u_r(\mathbf{p})\right|^2 .
+$$
+
+Here $\alpha=e^2 / 4 \pi$ is the fine structure constant, $|\mathbf{q}|=\left|\mathbf{p}^{\prime}-\mathbf{p}\right|$ and $\theta$ is the scattering angle between $\mathbf{p}$ and $\mathbf{p}^{\prime}$.
+
+(i) Compute the unpolarized cross section, where no spin is observed,
+
+$$
+\left(\frac{\mathrm{d} \sigma}{\mathrm{~d} \Omega}\right)_{N . P .}=\frac{8 z^2 \alpha^2}{|\mathbf{q}|^4}\left[E E^{\prime}+\mathbf{p} \cdot \mathbf{p}^{\prime}+m^2\right]
+$$
+
+(ii) Show that in the non-relativistic limit one obtains the Rutherford scattering formula (use the trigonometric identity $\cos \theta=1-2 \sin ^2(\theta / 2)$ )
+
+$$
+\left(\frac{\mathrm{d} \sigma}{\mathrm{~d} \Omega}\right)_{N . P .}=\frac{z^2 \alpha^2 m^2}{|\mathbf{p}|^4 \sin ^4(\theta / 2)}
+$$
+
+
+
+
+\subsection{Problem 3 [Chiral transformations of Dirac spinors, 5 points]:}
+
+Consider the chiral transformation for a Dirac spinor $\psi \rightarrow \psi^{\prime}=e^{i \alpha \gamma^5} \psi$
+
+(i) Find out the corresponding transformation law for the conjugate spinor $\bar{\psi}$ and for the vector current $V^\mu=\bar{\psi} \gamma^\mu \psi$.
+
+(ii) Show that the Dirac Lagrangian $\mathcal{L}_{\text {Dirac }}=\bar{\psi}\left(i \gamma^\mu \partial_\mu-m\right) \psi$ is invariant under the given chiral transformation in the massless case, while this is not the case if $m \neq 0$.
+
+\subsection{Problem 4 [Eigenvalues of Dirac-operator, 2 points]:}
+
+Given an $\operatorname{SU}(N)$-gauge field $A_\mu=A_\mu^a T^a$, the covariant Dirac-operator $D[A]$ is defined as
+
+$$
+D[A]=i \gamma^\mu\left(\partial_\mu-i g A_\mu\right) .
+$$
+
+Its eigenfunctions $\phi_i(x)$ satisfy
+
+$$
+D[A] \phi_i(x)=\lambda_i \phi_i(x), \quad \text { where } \quad \lambda \in \mathbb{C} .
+$$
+
+Show that its eigenvalues are gauge invariant, i.e. show that given $\phi_i$ transforms as $\phi^{\prime}(x)= U(x) \phi(x)$ with $U(x) \in S U(N)$, then
+
+$$
+D\left[A^{\prime}\right] \phi_i^{\prime}(x)=\lambda_i \phi_i^{\prime}(x) .
+$$
+
+
+
+\subsection{Problem 5 [Varia, 25 points]:}
+
+Answer the following questions by a few brief words or formulae.
+
+(i) Which quantity do we need to calculate in a quantum field theory in order to describe $2 \rightarrow n$ scattering processes?
+
+(ii) In which case is it possible to find a non-trivial Dirac-spinor that is an eigenvector for the spin and simultaneously the helicity operator?
+
+(iii) Discuss the differences between photons and massless quanta of the complex KleinGordon field by comparing the corresponding:
+
+(a) equations of motion (free propagation);
+
+(b) transformation properties under Lorentz transformation;
+
+(c) transformation properties under parity conjugation $\mathcal{P}$;
+
+(d) transformation properties under charge conjugation $\mathcal{C}$;
+
+(e) number of dynamical degrees of freedom described by the equations of motion.
+
+(iv) What is the difference between the "Feynman propagator" and the " 2 -point function" for a given field?
+
+(v) Provide two reasons why relativistic quantum mechanics is not sufficient for a full description of particle physics.
+
+(vi) Which of the following processes are physically allowed? Give a reason for the forbidden ones.
+
+(a) $e^{+}+e^{-} \rightarrow \gamma$;
+
+(b) $e^{+}+e^{-} \rightarrow 2 \gamma$;
+
+(c) $e^{+}+e^{-} \rightarrow 3 \gamma$;
+
+(d) $p+p \rightarrow p+p+p+\bar{p}$;
+
+(e) $\pi^{-}+p \rightarrow K^{-}+p \quad$ in 1) QCD and 2.) the Standard Model;
+
+(f) $p \rightarrow \pi^{+}+\pi^0$;
+
+(g) $\Delta^{++} \rightarrow p+\pi^{+}$;
+
+
+
+\pagebreak
+
+\section{Exam 27.03.2017}
+
+
+\subsection{Problem 1 [Massless fermion scattering in Yukawa theory, 14 points]:}
+
+Consider the Yukawa theory
+
+$$
+\mathcal{L}_{\text {Yukawa }}=\bar{\psi}\left(i \gamma^\mu \partial_\mu-m_f\right) \psi+\frac{1}{2}\left(\partial_\mu \phi\right)^2-\frac{1}{2} m_\phi^2 \phi^2-g \bar{\psi} \psi \phi
+$$
+
+with the corresponding Feynman rules:
+
+(i) Draw all diagrams to leading order contributing to the process of scattering of two massless fermions $m_f=0$ in this theory
+
+$$
+e^{-}(p) e^{-}\left(p^{\prime}\right) \longrightarrow e^{-}(k) e^{-}\left(k^{\prime}\right)
+$$
+
+and write the corresponding amplitudes.
+
+
+(ii) Show that the squared amplitude for unobserved spins is
+
+$$
+\overline{|\mathcal{M}|^2}=g^4\left\{\frac{t^2}{\left(t-m_\phi^2\right)^2}+\frac{u^2}{\left(u-m_\phi^2\right)^2}+\frac{t u}{\left(t-m_\phi^2\right)\left(u-m_\phi^2\right)}\right\},
+$$
+
+in terms of the Mandelstam variables which are
+
+$$
+\begin{aligned}
+s & =2 p \cdot p^{\prime}=2 k \cdot k^{\prime} \\
+t & =-2 p \cdot k=-2 p^{\prime} \cdot k^{\prime} \\
+u & =-2 p \cdot k^{\prime}=-2 p^{\prime} \cdot k
+\end{aligned}
+$$
+
+and satisfy $s+t+u=0$ in the massless limit.
+
+
+(iii) Consider also $m_\phi=0$, simplify $\overline{|\mathcal{M}|^2}$ accordingly and compute the total cross section.
+
+Hint: In the center-of-mass frame, the differential cross section for a scattering of two massless particles into two massless particles is given by
+
+$$
+\frac{\mathrm{d} \sigma}{\mathrm{~d} \Omega}=\frac{\overline{|\mathcal{M}|^2}}{64 \pi^2 s}
+$$
+
+
+
+
+\subsection{Problem 2 [Covariant derivative and the adjoint representation, 12 points]: }
+
+A scalar field $\phi^a$ is said to transform with the adjoint representation of $\operatorname{SU}(N)$ if for $U \in \operatorname{SU}(N)$ the associated matrix field $\phi=\phi^a T^a$ transforms as
+
+$$
+\phi^{\prime}=U \phi U^{\dagger} .
+$$
+
+(i) Show that the components $\phi^a$ transform in the following way:
+
+$$
+\phi^{\prime a}=2 \operatorname{tr}\left(U^{\dagger} T^a U T^b\right) \phi^b .
+$$
+
+(ii) The covariant derivative is defined as
+
+$$
+\mathcal{D}_\mu \phi(x)=\partial_\mu \phi(x)-i g\left[A_\mu(x), \phi(x)\right] .
+$$
+
+
+Using this definition demonstrate that under a gauge transformation $U(x) \in S U(N)$ the covariant derivative transforms as
+
+$$
+\left(\mathcal{D}_\mu \phi\right)^{\prime}(x)=U(x)\left(\mathcal{D}_\mu \phi(x)\right) U^{\dagger}(x)
+$$
+
+(iii) Show that
+
+$$
+\left(\mathcal{D}_\mu \phi\right)^a=\partial_\mu \phi^a-g f^{a b c} \phi^b A_\mu^c
+$$
+
+
+Hint: The structure constants are completely antisymmetric.
+
+(iv) Can you construct a kinetic term for $\phi$ that is gauge and Lorentz invariant?
+
+
+
+
+\subsection{Problem 3 [Varia, 25 points]:}
+
+Answer the following questions by a few brief words or formulae.
+
+(i) Give one physical effect of a QFT that is due to quantum theory and one due to special relativity.
+
+(ii) Draw all Feynman diagrams to order $\alpha_{\text {e.m. }}$ in the Standard Model for the processes $e^{+} e^{-} \rightarrow \mu^{+} \mu^{-}$and $e^{+} e^{-} \rightarrow e^{+} e^{-}$
+
+(iii) Under which circumstances is a particle well described by:
+
+(a) the Schrödinger equation?
+
+(b) the Weyl equation?
+
+(iv) What motivates the gauge group $\operatorname{SU}(2)$ for the weak interactions?
+
+(v) Discuss the qualitative behavior with CoM energy $E$ of the ratio
+
+$$
+R(E)=\frac{\sigma\left(e^{+} e^{-} \rightarrow \text { hadrons }\right)}{\sigma\left(e^{+} e^{-} \rightarrow \mu^{+} \mu^{-}\right)}
+$$
+
+(a) Draw the Feynman diagram for the process in the numerator.
+
+(b) What properties of the quarks involved in the reaction do play a role?
+
+
+(vi) Write down the relativistic wave equations for massive particles of spin $0,1 / 2,1$ and massless particles of spin 1 and the behavior under Lorentz transformation of the corresponding fields.
+
+(vii) Consider the part of a matrix element $i \mathcal{M}=\beta \bar{u}_r(\mathbf{p}) \gamma_\mu\left(1-\gamma_5\right) u_s(\mathbf{q}) \epsilon_\lambda^\mu(\mathbf{k})$, with $\beta$ a coupling constant.
+
+(a) Argue which interaction in the Standard Model can produce this expression.
+
+(b) What are the participating particles? Draw the corresponding Feynman diagram.
+
+(c) Which is the symmetry that is explicitly broken by this interaction?
+
+
+
+\pagebreak
+
+
+\section{Exam 2011}
+
+
+\subsection{Aufgabe 1 [Georgi-Glashow-Modell, 10 Punkte]:}
+
+Man betrachte das $S U(2)$ Higgs-Modell mit einem Triplett reeller Skalarfelder in der adjungierten Darstellung. Die Lagrangedichte lautet
+
+$$
+\mathcal{L}=-\frac{1}{4} F_{\mu \nu}^a(x) F^{a \mu \nu}(x)+\frac{1}{2} D_\mu^{a b} \Phi^b(x) D^{a c \mu} \Phi^c(x)-\frac{\mu^2}{2} \Phi^a(x) \Phi^a(x)-\frac{\lambda}{4!}\left(\Phi^a(x) \Phi^a(x)\right)^2
+$$
+mit der adjungierten kovarianten Ableitung $D_\mu^{a b}=\partial_\mu \delta^{a b}-g \epsilon^{a b c} A_\mu^c$ und $a, b, c=1,2,3$. Für welche Parameterwahl gibt es spontane Symmetriebrechung? Wie lautet der Vakuumerwartungswert $v$ des Higgs-Feldes? Wieviele Eichfelder werden dabei massiv und wie lauten ihre Massen?
+
+[Tipp: Wählen Sie einen Vakuumerwartungswert $\mathbf{\Phi}_0$ von der Form $\mathbf{\Phi}_0=(0,0, v)^T$ in der gebrochenen Phase. Nützliche Relation: $\epsilon^{a b c} \epsilon^{a d e}=\delta^{b d} \delta^{c e}-\delta^{b e} \delta^{c d}$ ].
+
+
+
+Solution: Aus der Lagrangedichte $\mathcal{L}=T-V$, mit:
+
+$$
+\mathcal{L}=\underbrace{-\frac{1}{4} F_{\mu \nu}^a(x) F^{a \mu \nu}(x)+\frac{1}{2} D_\mu^{a b} \Phi^b(x) D^{a c \mu} \Phi^c(x)}_T \underbrace{-\frac{\mu^2}{2} \Phi^a(x) \Phi^a(x)-\frac{\lambda}{4!}\left(\Phi^a(x) \Phi^a(x)\right)^2}_{-V},
+$$
+
+erhalten wir für das Potential
+
+$$
+V(\boldsymbol{\Phi})=\frac{\mu^2}{2}\left(\Phi^a \Phi^a\right)+\frac{\lambda}{4!}\left(\Phi^a \Phi^a\right)^2 .
+$$
+
+
+Nehmen wir $\lambda>0$ an (Stabilität), so folgen aus der Extremalbedingung $\nabla_{\Phi^a} V=0$ folgende Werte konstanter Feldkonfigurationen
+(i) $\Phi^a=0, \forall a$,
+(ii) $\Phi^a \Phi^a=-\frac{6 \mu^2}{\lambda}$.
+
+Für $\mu^2>0$ ist nur (i) ein Minimum. Die Symmetrie ist nicht gebrochen ( $\left\langle\Phi^a\right\rangle=0$ ). 
+
+Für $\mu^2<0$ ist dies nicht mehr der Fall. Das Potential hat ein Minimum bei $\Phi^a \Phi^a=\frac{6\left|\mu^2\right|}{\lambda}$ und vorliegende $\mathrm{O}(3)$-Symmetrie ist spontan gebrochen. Letztere Bedingung legt jedoch nur den Betrag des Vektors $\Phi$ fest. Im Folgenden betrachten wir daher einen Erwartungswert $\Phi_0^a=v \delta_{a, 3}$, mit $v=\sqrt{\frac{6\left|\mu^2\right|}{\lambda}}$ oder
+
+$$
+\Phi_0=\left(\begin{array}{l}
+0 \\
+0 \\
+v
+\end{array}\right) .
+$$
+
+
+Die Massenterme der Eichfelder in der spontan gebrochenen Phase sollten von der Form $\sim \frac{1}{2} m^2 A^2$ sein. Diese Terme erhalten wir aus der kovarianten Ableitung:
+
+$$
+\frac{1}{2} D_\mu^{a b} \phi^b D^{\mu a c} \phi^c=\frac{1}{2}\left(\ldots-g \epsilon^{a b d} A_\mu^d\right)\left(v \delta^{b 3}\right)\left(\ldots-g \epsilon^{a c e} A^{\mu e}\right)\left(v \delta^{c 3}\right) .
+$$
+
+
+Der Massenterm lautet also
+
+$$
+\begin{aligned}
+& \frac{1}{2} g^2 v^2 A_\mu^d A^{\mu e}\left(\epsilon^{a b d} \epsilon^{a c e}\right) \delta^{b 3} \delta^{c 3}= \\
+= & \frac{1}{2} g^2 v^2 A_\mu^d A^{\mu e}\left(\delta^{b c} \delta^{d e}-\delta^{b e} \delta^{d c}\right) \delta^{b 3} \delta^{c 3}= \\
+= & \frac{1}{2} g^2 v^2\{A_\mu^e A^{\mu e} \underbrace{\delta^{33}}_{=1}-A_\mu^3 A^{\mu 3}\}= \\
+= & \frac{1}{2} g^2 v^2\{A_\mu^1 A^{\mu 1}+A_\mu^2 A^{\mu 2} \underbrace{+A_\mu^3 A^{\mu 3}-A_\mu^3 A^{\mu 3}}_0\}= \\
+= & \frac{1}{2} g^2 v^2\left\{A_\mu^1 A^{\mu 1}+A_\mu^2 A^{\mu 2}\right\} .
+\end{aligned}
+$$
+
+Es folgt:
+
+- Das Feld $A_\mu^3$ bleibt masselos;
+
+- Die Felder $A_\mu^1$ und $A_\mu^2$ erhalten Massen $m=g v$.
+
+Bemerkungen: Dieses Resultat ist konsistent, wenn man die Anzahl der Freiheitsgrade und das Goldstone-Theorem beachtet. Die kontinuierliche SO(3)-Symmetrie des Modells bricht spontan zu $\mathrm{O}(2)$ (Rotationen in zwei Dimensionen um den Vektor $\Phi_0$ in Gleichung (3).), man erwarten also 2 Goldstone-Bosonen. Diese Freiheitsgrade werden aber von 2 zuvor masselosen Eichfeldern absorbiert (Engl. "eaten up"): Die nun massiven Eichfelder habe 3 Freiheitsgrade, anstelle von 2 im masselosen Fall.
+
+\subsection{Aufgabe 2 [Abelsche und nichtabelsche Eichtheorie, 11 Punkte]:}
+
+Man zeige durch explizite Rechnung, dass in QED mit $D_\mu=\partial_\mu-i e A_\mu$ gilt:
+
+$$
+\left[D_\mu, D_\nu\right]=-i e F_{\mu \nu}
+$$
+
+
+Für nicht-abelsche Theorien wird diese Relation benutzt, um den Feldstärketensor zu definieren. Man leite daraus die Matrixform $F_{\mu \nu}$ sowie die Komponentenform $F_{\mu \nu}^a$ her.
+
+Zeichnen Sie die Feynman-Diagramme der führenden Ordnung für :
+
+(i) Photon-Photon-Streuung $\quad \gamma \gamma \longrightarrow \gamma \gamma$
+
+(ii) Gluon-Gluon-Streuung $\quad g g \longrightarrow g g$.
+
+
+
+Solution: Mit der auf dem Aufgabenblatt gegebenen Definition $D_\mu=\partial_\mu-i e A_\mu$ (beachte hier $e=|e|$ ) ergibt sich mit einer beliebigen diffbaren Funktion $\psi$ :
+
+$$
+\begin{aligned}
+{\left[D_\mu, D_\nu\right] \psi } & =\underbrace{\left[\partial_\mu, \partial_\nu\right] \psi}_0-i e\left[A_\mu, \partial_\nu\right] \psi-i e\left[\partial_\mu, A_\nu\right] \psi-e^2 \underbrace{\left[A_\mu, A_\nu\right]}_0 \psi \\
+& =-i e\left(A_\mu \partial_\nu \psi-\partial_\nu\left(A_\mu \psi\right)+\partial_\mu\left(A_\nu \psi\right)-A_\nu \partial_\nu \psi\right)=-i e\left(\partial_\mu A_\nu-\partial_\nu A_\mu\right) \psi
+\end{aligned}
+$$
+
+
+Au der rechten Seite identifizieren wir $F_{\mu \nu}=\partial_\mu A_\nu-\partial_\nu A_\mu$ und erhalten $\left[D_\mu, D_\nu\right]=-i e F_{\mu \nu}$. Im nicht-abelschen Fall erhalten wir einen zusätzliche Beitrag durch den nun nicht verschwindenden Kommutator $\left[A_\mu, A_\nu\right]$, wobei nun $A_\kappa=A_\kappa^a T^a$ mit $\left[T^a, T^b\right]=i f^{a b c} T^c$. Damit ergibt sich (wir setzen $e=g$ )
+
+$$
+\left[D_\mu, D_\nu\right] \psi=-i g\left(\partial_\mu A_\nu-\partial_\nu A_\mu+g A_\mu^a A_\nu^b f^{a b c} T^c\right) \psi,
+$$
+
+und wir folgern $F_{\mu \nu}=\partial_\mu A_\nu-\partial_\nu A_\mu+g A_\mu^a A_\nu^b f^{a b c} T^c$, bzw. wegen $F_{\mu \nu}=F_{\mu \nu}^c T^c$
+
+$$
+F_{\mu \nu}^c=\partial_\mu A_\nu^c-\partial_\nu A_\mu^c+g A_\mu^a A_\nu^b f^{a b c}
+$$
+
+(i) Für den Prozeß $\gamma \gamma \rightarrow \gamma \gamma$ haben wir zu führender Ordnung in $e$ Diagramme (bis auf Kreuzungen) der Ordnung $\mathcal{O}\left(e^4\right)$
+(ii) Für den Prozeß $g g \rightarrow g g$ ergeben sich in führender Ordnung in der Eichkopplung $g$ folgende Diagramme (bis auf Kreuzungen) zur Ordnung $\mathcal{O}\left(g^2\right)$
+
+
+\subsection{Aufgabe 3 [Pion-Nukleon Wechselwirkung, 17 Punkte]:}
+
+Gegeben seien ein Nukleon-Isodublett $N=(p, n)^T$ und ein Pion-Isotriplett $\boldsymbol{\pi}=\left(\pi^1, \pi^2, \pi^3\right)^T$ :
+
+(i) Geben Sie die Transformationseigenschaften der folgenden Terme unter Isospin- , Paritäts- und Lorentztransformation an (Beweis nicht nötig):
+
+(Singulett, Dublett, ...; gerade, ungerade; Skalar,Vektor, ...)
+
+(a) $\bar{N} N$
+
+(b) $\bar{N} \gamma^5 \gamma^\mu N$
+
+(c) $\bar{N} \gamma^5 N$
+
+(d) $\boldsymbol{\pi}$
+
+(e) $\boldsymbol{\pi}^T \cdot \boldsymbol{\pi}$
+
+(f) $\partial^\mu \boldsymbol{\pi}$
+
+(g) $\bar{N} \gamma^5 \gamma^\mu T^a N$
+
+(h) $\bar{N} \gamma^\mu T^a N$
+
+(i) $\epsilon^{a b c} \pi^b \partial_\mu \pi^c$.
+
+(ii) Konstruieren Sie mit den Bausteinen von (i) mögliche Pion-Nukleon Wechselwirkungsterme, die die oben genannten Transformationen als Symmetrie besitzen (Potenzen eines Terms oder zusätzliche Matrizen sind nicht erlaubt).
+
+
+(i) Wir geben die Transformationseigenschaften der Terme in der folgenden Tabelle an. Dabei ist $(-1)^\mu=1$ für $\mu=0$ und $(-1)^\mu=-1$ für $\mu=i$ in Peskin-Notation.
+
+\begin{tabular}{|c|c|c|c|}
+\hline Term & Isospin & Parität & Lorentz- \\
+\hline $\bar{N} N$ & Singulett & +1 & Skalar \\
+\hline $\bar{N} \gamma^5 \gamma^\mu N$ & Singulett & $-(-1)^\mu$ & Pseudovektor \\
+\hline $\bar{N} \gamma^5 N$ & Singulett & -1 & Pseudoskalar \\
+\hline $\boldsymbol{\pi}$ & Triplett & -1 & Pseudoskalar \\
+\hline $\boldsymbol{\pi}^T \boldsymbol{\pi}$ & Singulett & +1 & Skalar \\
+\hline$\partial^\mu \boldsymbol{\pi}$ & Triplett & $-(-1)^\mu$ & Pseudovektor \\
+\hline $\bar{N} \gamma^5 \gamma^\mu T^a N$ & Triplett & $-(-1)^\mu$ & Pseudovektor \\
+\hline $\bar{N} \gamma^\mu T^a N$ & Triplett & $(-1)^\mu$ & Vektor \\
+\hline$\epsilon^{a b c} \pi^b \partial_\mu \pi^c$ & Triplett & $(-1)^\mu$ & Vektor \\
+\hline
+\end{tabular}
+
+(ii) Mit den oben aufgelisteten Eigenschaften sind als Wechselwirkungsterme zugelassen:
+
+$$
+\bar{N} N \boldsymbol{\pi}^T \boldsymbol{\pi}, \quad \bar{N} \gamma^5 \gamma^\mu T^a N \partial_\mu \pi^a, \quad \bar{N} \gamma^\mu T^a N \epsilon^{a b c} \pi^b \partial_\mu \pi^c .
+$$
+
+
+Ein weiterer möglicher Term, $\bar{N} \gamma^5 T^a N \pi^a$, kann nicht mit den in der Tabelle enthaltenen Termen konstruiert werden.
+
+
+\subsection{Aufgabe 4 [Varia, 14 Punkte]:}
+Beantworten Sie die folgenden Fragen durch Angabe weniger prägnanter Stichworte oder Formeln.
+
+(i) Durch welches Merkmal wird in der theoretischen Formulierung der schwachen Wechselwirkung die Parität verletzt?
+
+(ii) Das Quarkmodell und die QCD weisen jeweils eine Invarianz unter SU(3)-Transformationen auf. In welchen Räumen wirken diese und worin unterscheiden sie sich?
+
+(iii) Nennen Sie zwei neue phys.e Phänomene, die beim Übergang von der nichtrelativistischen zur relativistischen Quantentheorie auftreten.
+
+(iv) Wieviele Freiheitsgrade benötigt man, um ein masseloses Fermion zu beschreiben?
+
+(v) Geben Sie den Helizitätsoperator an. Ist sein Eigenwert eine lorentzinvariante Quantenzahl?
+
+(vi) Nennen Sie zwei Gründe, weshalb bei der kanonischen Feldquantisierung von Fermionen Antikommutatoren anstelle von Kommutatoren verwendet werden.
+
+(vii) Welche der folgenden Prozesse sind phys. nicht "erlaubt"? Begründen Sie Ihre Aussage.
+
+(a) $\pi^0 \rightarrow e^{+}+e^{-}$
+
+(b) $e^{-}+p \rightarrow n+\nu_e$
+
+(c) $e^{+}+e^{-} \rightarrow \gamma$
+
+(d) $e^{+}+e^{-} \rightarrow 2 \gamma$
+
+
+(i) Im Rahmen der V-A-Theorie koppeln W-Boson an die Differenz von Vektor-u. Axialvektorströmen. Letztere Kopplung führt zur Paritätsverletzung.
+
+(ii) Wir unterscheiden die globale $S U(3)$ Flavor-Symmetrie, wirkend auf den Raum der Quark-Flavor, von der lokalen (Eich-)Symmetrie der Farbladung, welche auf den Farbraum wirkt. Erstere ist nur näherungsweise realisiert, während letztere exakt gilt.
+
+(iii) Zum einen erhalten wir den Spin als Freiheitsgrad, zum anderen hat die DiracGleichung auch Anti-Teilchen zur Lösung. Genauer gesagt können wir die Lösungen der Gleichung im Impulsraum in positive und negative Frequenzlösungen $\left(u^s(p) \mathrm{e}^{-i p x}\right.$ bzw. $\left.v^s(p) \mathrm{e}^{i p x}\right)$ aufteilen. Dabei wird der Spin durch $s=1,2$ indiziert und $u(p), v(p)$ sind die Amplituden für Teilchen-u.Antiteilchen-Vernichtung- bzw. Erzeugung.
+
+(iv) Es werden zwei Freiheitsgrade benötigt: Man muss zwischen Teilchen und Antiteilchen unterscheiden, der Helizitätszustand liegt bereits fest.
+
+(v) $h=\frac{1}{2|\mathbf{p}|} \vec{\Sigma} \cdot \mathbf{p}$ mit $\vec{\Sigma}=\left(\begin{array}{cc}\vec{\sigma} & 0 \\ 0 & \vec{\sigma}\end{array}\right)$. Für ein massives Teilchen kann man stets in Bezugssystem boosten, in welchem der Impuls sein Vorzeichen ändert. Eigenwerte von $h$ sind daher keine Lorentzinvarianten. Anders für ein masseloses Teilchen: Dieses bewegt sich mit $v=c$ und ein solcher boost ist nicht möglich.
+
+(vi) Zu einen hat damit ein Zustand die richtige (fermionische) Spin-Statistik, denn aus $\left\{a_{\mathbf{p}}^{\dagger, s}, a_{\mathbf{p}}^{\dagger, s}\right\}=0$ folgt $a_{\mathbf{p}}^{\dagger, s} a_{\mathbf{p}}^{\dagger, s}=0=a_{\mathbf{p}}^{\dagger, s} a_{\mathbf{p}}^{\dagger, s}|0\rangle$, i.e. man kann denselben Zustand $(\mathbf{p}, s)$ nicht doppelt besetzen (Pauli-Prinzip für Fermionen). Zum anderen würde eine Kommutationsbeziehung die Mikrokausalitätsbedingung, zumindest mit den Definitionen von $\psi, \bar{\psi}$ wie sie in der Vorlesung angegeben wurden, verletzen. Genauer, es ergäbe sich $\left[\psi_\alpha(x), \bar{\psi}_\beta(y)\right] \neq 0$ für $(x-y)^2<0$, d.h. Ereignisse mit raumartigem Abstand könnten einen kausalen Zusammenhang aufweisen.
+
+(vii) (a) Erlaubt.
+
+(b) Erlaubt.
+
+(c) Nicht erlaubt aufgrund der Kinematik: $p_\gamma^2=0 \neq\left(p_{e^{+}}+p_{e^{-}}\right)^2$.
+
+(d) Erlaubt.
+
+\pagebreak
+
+
+\section{Solution Exam 08.03.2016}
+
+\subsection{Problem 1 [Free fermionic quantum fields, 10 points]:}
+Consider the operator
+
+$$
+\mathbf{P} \equiv-i \int d^3 x \psi^{\dagger}(x) \nabla \psi(x)
+$$
+
+
+Use the solution to the free Dirac equation,
+
+$$
+\psi(\mathbf{x}, t=0)=\int \frac{d^3 p}{(2 \pi)^3 2 E(\mathbf{p})} \sum_s\left(a_s(p) u_s(p) e^{i \mathbf{p} \cdot \mathbf{x}}+b_s^{\dagger}(p) v_s(p) e^{-i \mathbf{p} \cdot \mathbf{x}}\right),
+$$
+
+to show that
+
+$$
+\mathbf{P}=\int \frac{d^3 p}{(2 \pi)^3} \mathbf{f}\left(a_s^{\dagger}(p) a_s(p)+g b_s(p) b_s^{\dagger}(p)\right) .
+$$
+
+(i) Calculate $\mathbf{f}, g$
+
+(ii) What is the meaning of the operators $a_s(p), a_s^{\dagger}(p), b_s(p), b_s^{\dagger}(p), \mathbf{P}$ ?
+
+(iii) Write down the definition for a one-fermion state $|f(\mathbf{p}, s)\rangle$ and calculate $: \mathbf{P}:|f(\mathbf{p}, s)\rangle$.
+
+Hint: $u_s^{\dagger}(p) u_{s^{\prime}}(p)=v_s^{\dagger}(p) v_{s^{\prime}}(p)=2 E(\mathbf{p}) \delta_{s s^{\prime}}, \quad u_s^{\dagger}(\mathbf{p}) v_{s^{\prime}}(-\mathbf{p})=0$.
+
+
+
+
+(i) It is
+
+$$
+\begin{aligned}
+\psi(\mathbf{x}, t=0)^{\dagger} & =\int \frac{d^3 p}{(2 \pi)^3 2 E(\mathbf{p})} \sum_s\left(a_s^{\dagger}(\mathbf{p}) u_s^{\dagger}(\mathbf{p}) e^{-i \mathbf{p} \cdot \mathbf{x}}+b_s(\mathbf{p}) v_s^{\dagger}(\mathbf{p}) e^{i \mathbf{p} \cdot \mathbf{x}}\right) \\
+-i \nabla \psi(\mathbf{x}, t=0) & =\int \frac{d^3 p}{(2 \pi)^3 2 E(\mathbf{p})} \sum_s \mathbf{p}\left(a_s(\mathbf{p}) u_s(\mathbf{p}) e^{i \mathbf{p} \cdot \mathbf{x}}-b_s^{\dagger}(\mathbf{p}) v_s(\mathbf{p}) e^{-i \mathbf{p} \cdot \mathbf{x}}\right)
+\end{aligned}
+$$
+
+and therefore
+
+$$
+\begin{aligned}
+\mathbf{P}=\int & d^3 x \int \frac{d^3 p}{(2 \pi)^3 2 E(\mathbf{p})} \int \frac{d^3 p^{\prime}}{(2 \pi)^3 2 E\left(\mathbf{p}^{\prime}\right)} \sum_{s s^{\prime}} \mathbf{p}^{\prime} \\
+& \left(a_s^{\dagger}(\mathbf{p}) a_{s^{\prime}}\left(\mathbf{p}^{\prime}\right) u_s^{\dagger}(\mathbf{p}) u_{s^{\prime}}\left(\mathbf{p}^{\prime}\right) e^{i\left(\mathbf{p}^{\prime}-\mathbf{p}\right) \cdot \mathbf{x}}-b_s(\mathbf{p}) b_{s^{\prime}}^{\dagger}\left(\mathbf{p}^{\prime}\right) v_s^{\dagger}(\mathbf{p}) v_{s^{\prime}}\left(\mathbf{p}^{\prime}\right) e^{i\left(\mathbf{p}-\mathbf{p}^{\prime}\right) \cdot \mathbf{x}}\right. \\
+& \left.\quad+b_s(\mathbf{p}) a_{s^{\prime}}\left(\mathbf{p}^{\prime}\right) v_s^{\dagger}(\mathbf{p}) u_s^{\prime}\left(\mathbf{p}^{\prime}\right) e^{i\left(\mathbf{p}+\mathbf{p}^{\prime}\right) \cdot \mathbf{x}}-a_s^{\dagger}(\mathbf{p}) b_{s^{\prime}}^{\dagger}\left(\mathbf{p}^{\prime}\right) u_s^{\dagger}(\mathbf{p}) v_{s^{\prime}}\left(\mathbf{p}^{\prime}\right) e^{i\left(-\mathbf{p}-\mathbf{p}^{\prime}\right) \cdot \mathbf{x}}\right) \\
+& (+1 \text { point })
+\end{aligned}
+$$
+
+
+Using that
+
+$$
+\begin{aligned}
+& \int d^3 x e^{i\left(\mathbf{p}-\mathbf{p}^{\prime}\right) \cdot \mathbf{x}}=(2 \pi)^3 \delta^{(3)}\left(\mathbf{p}-\mathbf{p}^{\prime}\right) \\
+& \int d^3 x e^{i\left(\mathbf{p}+\mathbf{p}^{\prime}\right) \cdot \mathbf{x}}=(2 \pi)^3 \delta^{(3)}\left(\mathbf{p}+\mathbf{p}^{\prime}\right), \quad(+1 \text { point })
+\end{aligned}
+$$
+
+one can get rid of one momentum integration resulting in
+
+$$
+\begin{aligned}
+\mathbf{P}=\int & \frac{d^3 p}{(2 \pi)^3(2 E(\mathbf{p}))^2} \sum_{s s^{\prime}} \mathbf{p} \\
+& \left(a_s^{\dagger}(\mathbf{p}) a_{s^{\prime}}(\mathbf{p}) u_s^{\dagger}(\mathbf{p}) u_{s^{\prime}}(\mathbf{p})-b_s(\mathbf{p}) b_{s^{\prime}}^{\dagger}(\mathbf{p}) v_s^{\dagger}(\mathbf{p}) v_{s^{\prime}}(\mathbf{p})\right. \\
+& \left.\quad-b_s(\mathbf{p}) a_{s^{\prime}}(-\mathbf{p}) v_s^{\dagger}(\mathbf{p}) u_{s^{\prime}}(-\mathbf{p})+a_s^{\dagger}(\mathbf{p}) b_{s^{\prime}}^{\dagger}(-\mathbf{p}) u_s^{\dagger}(\mathbf{p}) v_{s^{\prime}}(-\mathbf{p})\right)
+\end{aligned}
+$$
+
+
+Now we can make use of the hint from the sheet to conclude that
+
+$$
+\mathbf{P}=\int \frac{d^3 p}{(2 \pi)^3} \frac{\mathbf{p}}{2 E(\mathbf{p})} \sum_s\left(a_s^{\dagger}(\mathbf{p}) a_s(\mathbf{p})-b_s(\mathbf{p}) b_s^{\dagger}(\mathbf{p})\right)
+$$
+
+
+This means that that
+
+$$
+\begin{aligned}
+& \mathbf{f}=\frac{\mathbf{p}}{2 E(\mathbf{p})} \sum_s(+1 \text { point }) \\
+& g=-1 . \quad(+1 \text { point })
+\end{aligned}
+$$
+
+(ii) 
+
+- $a_s^{\dagger}(\mathbf{p}) / a_s(\mathbf{p})$ : creation/annihilation of a particle with spin $s$ and momentum $\mathbf{p}$ ( +1 point)
+
+- $b_s^{\dagger}(\mathbf{p}) / b_s(\mathbf{p})$ : creation/annihilation of an anti-particle with spin $s$ and momentum $\mathbf{p} \quad$ (+1 point)
+
+- $\mathbf{P}$ : momentum operator (+1 point)
+
+
+
+(iii) To get the normal ordered momentum operator we use (paying attention to fermion statistics) that
+
+$$
+\begin{aligned}
+& : a_s^{\dagger}(\mathbf{p}) a_s(\mathbf{p}):=a_s^{\dagger}(\mathbf{p}) a_s(\mathbf{p}) \\
+& : b_s(\mathbf{p}) b_s^{\dagger}(\mathbf{p}):=-b_s^{\dagger}(\mathbf{p}) b_s(\mathbf{p})
+\end{aligned}
+$$
+
+resulting in
+
+$$
+: \mathbf{P}:=\int \frac{d^3 p}{(2 \pi)^3} \frac{\mathbf{p}}{2 E(\mathbf{p})} \sum_s\left(a_s^{\dagger}(\mathbf{p}) a_s(\mathbf{p})+b_s^{\dagger}(\mathbf{p}) b_s(\mathbf{p})\right)
+$$
+
+
+A one-fermion state can be obtained by applying a creation operator to the vacuum
+
+$$
+|f(\mathbf{p}, s)\rangle=a_s^{\dagger}(\mathbf{p})|0\rangle . \quad(+1 \text { point })
+$$
+
+
+Applying the normal ordered momentum operator to this state results in
+
+$$
+\begin{aligned}
+: \mathbf{P}:|f(\mathbf{p}, s)\rangle= & \int \frac{d^3 p^{\prime}}{(2 \pi)^3} \frac{\mathbf{p}^{\prime}}{2 E\left(\mathbf{p}^{\prime}\right)} \sum_{s^{\prime}}\left(a_{s^{\prime}}^{\dagger}\left(\mathbf{p}^{\prime}\right) a_{s^{\prime}}\left(\mathbf{p}^{\prime}\right)+b_{s^{\prime}}^{\dagger}\left(\mathbf{p}^{\prime}\right) b_{s^{\prime}}\left(\mathbf{p}^{\prime}\right)\right) a_s^{\dagger}(\mathbf{p})|0\rangle \\
+= & \int \frac{d^3 p^{\prime}}{(2 \pi)^3} \frac{\mathbf{p}^{\prime}}{2 E\left(\mathbf{p}^{\prime}\right)} \sum_{s^{\prime}}\left(a_{s^{\prime}}^{\dagger}\left(\mathbf{p}^{\prime}\right)(2 \pi)^3 2 E(\mathbf{p}) \delta^{(3)}\left(\mathbf{p}^{\prime}-\mathbf{p}\right) \delta_{s s^{\prime}}\right. \\
+& \left.-a_{s^{\prime}}^{\dagger}\left(\mathbf{p}^{\prime}\right) a_s^{\dagger}(\mathbf{p}) a_{s^{\prime}}\left(\mathbf{p}^{\prime}\right)-b_{s^{\prime}}^{\dagger}\left(\mathbf{p}^{\prime}\right) a_s^{\dagger}(\mathbf{p}) b_{s^{\prime}}\left(\mathbf{p}^{\prime}\right)\right)|0\rangle
+\end{aligned}
+$$
+
+where we have made use of the following fermionic anti-commutation relations:
+
+$$
+\begin{aligned}
+\left\{a_{s^{\prime}}\left(\mathbf{p}^{\prime}\right), a_s^{\dagger}(\mathbf{p})\right\} & =(2 \pi)^3 2 E(\mathbf{p}) \delta^{(3)}\left(\mathbf{p}^{\prime}-\mathbf{p}\right) \delta_{s s^{\prime}} \\
+\left\{b_{s^{\prime}}\left(\mathbf{p}^{\prime}\right), a_s^{\dagger}(\mathbf{p})\right\} & =0 \quad(+1 \text { point })
+\end{aligned}
+$$
+
+$a_{s^{\prime}}\left(\mathbf{p}^{\prime}\right)$ and $b_{s^{\prime}}\left(\mathbf{p}^{\prime}\right)$ both annihilate the vacuum and the remaining term can easily be integrated by making use of the Dirac delta. What we are left with is
+
+$$
+\begin{aligned}
+: \mathbf{P}:|f(\mathbf{p}, s)\rangle & =\mathbf{p} \sum_{s^{\prime}} a_{s^{\prime}}^{\dagger}(\mathbf{p}) \delta_{s s^{\prime}}|0\rangle \\
+& =\mathbf{p} a_s^{\dagger}(\mathbf{p})|0\rangle \\
+& =\mathbf{p}|f(\mathbf{p}, s)\rangle \quad(+1 \text { point })
+\end{aligned}
+$$
+
+
+
+
+\subsection{Problem 2 [Abelian and non-abelian gauge theory, 13 points]:}
+Prove by explicit calculation that with $D_\mu=\partial_\mu-i e A_\mu$ (here $e=|e|$ ) the abelian field strength tensor obeys
+
+$$
+\left[D_\mu, D_\nu\right]=-i e F_{\mu \nu}
+$$
+
+
+Specify the non-abelian covariant derivative with a coupling $g$ and use this relation to define the field strength tensor for a $\operatorname{SU}(N)$ theory. Give the matrix form $F_{\mu \nu}$ as well as the component form $F_{\mu \nu}^a$ in terms of the non-abelian gauge fields.
+Draw the Feynman diagrams to leading non-vanishing order in the respective coupling constants for
+
+(i) photon-photon-scattering in QED $\quad \gamma+\gamma \longrightarrow \gamma+\gamma$
+
+(ii) gluon-gluon-scattering in QCD $g+g \longrightarrow g+g$.
+
+What is the leading power in $\alpha$ and $\alpha_s$ for the cross sections? Does process (i) also occur in classical electrodynamics? Interpret your finding qualitatively.
+
+
+
+Solution: With the definition from the sheet $D_\mu=\partial_\mu-i e A_\mu$ (note that $e=|e|$ ) one gets for a two times continuously differentiable function $\psi$
+
+$$
+\begin{aligned}
+{\left[D_\mu, D_\nu\right] \psi } & =\underbrace{\left[\partial_\mu, \partial_\nu\right] \psi}_0-i e\left[A_\mu, \partial_\nu\right] \psi-i e\left[\partial_\mu, A_\nu\right] \psi-e^2 \underbrace{\left[A_\mu, A_\nu\right]}_0 \psi \\
+& =-i e\left(A_\mu \partial_\nu \psi-\partial_\nu\left(A_\mu \psi\right)+\partial_\mu\left(A_\nu \psi\right)-A_\nu \partial_\mu \psi\right)=-i e\left(\partial_\mu A_\nu-\partial_\nu A_\mu\right) \psi \\
+(+1 \text { point }) &
+\end{aligned}
+$$
+
+On the right hand side we identify $F_{\mu \nu}=\partial_\mu A_\nu-\partial_\nu A_\mu$ and obtain $\left[D_\mu, D_\nu\right]=-i e F_{\mu \nu}$. For the non-abelian case the covariant derivative analogously reads $D_\mu=\partial_\mu-i g A_\mu$. In this case, however, $A_\mu=A_\mu^a T^a \in \mathfrak{s u}(N)$, so one gets an additional contribution due to the non vanishing commutator $\left[A_\mu, A_\nu\right]$. Using $\left[T^a, T^b\right]=i f^{a b c} T^c \quad(+1$ point) results in
+
+$$
+\left[D_\mu, D_\nu\right] \psi=-i g\left(\partial_\mu A_\nu-\partial_\nu A_\mu+g A_\mu^a A_\nu^b f^{a b c} T^c\right) \psi .
+$$
+
+
+From this we conclude
+
+$$
+F_{\mu \nu}=\partial_\mu A_\nu-\partial_\nu A_\mu+g A_\mu^a A_\nu^b f^{a b c} T^c, \quad \text { (+1 point) }
+$$
+
+or alternatively, using $F_{\mu \nu}=F_{\mu \nu}^c T^c$
+
+$$
+F_{\mu \nu}^c=\partial_\mu A_\nu^c-\partial_\nu A_\mu^c+g A_\mu^a A_\nu^b f^{a b c} . \quad(+1 \text { point })
+$$
+
+(i) For the process $\gamma \gamma \rightarrow \gamma \gamma$ the leading order contribution in $e$ comes from the diagram (crossings excluded).
+
+DIAGRAMM
+
+While the amplitude is of order $\mathcal{O}\left(e^4\right)$ the cross section is of order $\mathcal{O}\left(e^8\right)=\mathcal{O}\left(\alpha^4\right)$. (+1 point)
+
+
+(ii) For the process $g g \rightarrow g g$ the diagrams leading order in $\alpha_s$ are (up to crossings)
+
+DIAGRAMM
+
+The amplitudes are of order $\mathcal{O}\left(g^2\right)$ and the cross section is of order $\mathcal{O}\left(g^4\right)=\mathcal{O}\left(\alpha_s^4\right)$. (+2 points)
+
+Process (i) does not occur in classical electrodynamics since an $A^4$-interaction would spoil the linearity of the Maxwell equations. An alternative explanation is that there is no creation of virtual particle-antiparticle pairs in classical electrodynamics. ( +1 point)
+With $\alpha_s \sim 1$ and $\alpha \sim 10^{-2}$ we see that in contrast to gluon-gluon scattering photon-photon scattering is heavily suppressed, which is good because otherwise this would contradict the everyday experience of being able to see. ( +1 point)
+
+
+
+\subsection{Problem 3 [Pion-nucleon interaction, 15 points]:}
+
+Consider the nucleon iso-doublet $N=(p, n)^T$ and the pion iso-triplet $\boldsymbol{\pi}=\left(\pi^1, \pi^2, \pi^3\right)^T$, where all $\pi^a$ have negative parity, i.e. they are pseudo-scalar fields.
+
+(i) Specify (without proof) the properties of the following terms under isospin (singlet, doublet, …), parity (,+- ) and Lorentz transformations (scalar, vector, …):
+
+(a) $\bar{N} N$
+
+(b) $\bar{N} \gamma^5 \gamma^\mu N$
+
+(c) $\bar{N} \gamma^5 N$
+
+(d) $\pi$
+
+(e) $\boldsymbol{\pi}^T \cdot \boldsymbol{\pi}$
+
+(f) $\partial^\mu \boldsymbol{\pi}$
+
+(g) $\bar{N} \gamma^5 \gamma^\mu T^a N$
+
+(h) $\bar{N} \gamma^\mu T^a N$
+
+(i) $\epsilon^{a b c} \pi^b \partial_\mu \pi^c$.
+
+(ii) By combining two terms from (i), construct all possible pion-nucleon interactions which are invariant under isospin, parity and Lorentz transformations. (Higher powers of the given terms or additional matrices are not allowed).
+
+
+(i) The transformation properties can be summarized in the following table.
+(Each correct row $\rightarrow+1$ point)
+
+\begin{tabular}{|c|c|c|c|}
+\hline Term & Isospin & Parity & Lorentz \\
+\hline $\bar{N} N$ & Singlet & +1 & Scalar \\
+\hline$N \gamma^5 \gamma^\mu N$ & Singlet & $-(-1)^\mu$ & Pseudovector \\
+\hline$N \gamma^5 N$ & Singlet & -1 & Pseudoscalar \\
+\hline $\boldsymbol{\pi}$ & Triplet & -1 & Pseudoscalar \\
+\hline $\boldsymbol{\pi}^T \boldsymbol{\pi}$ & Singlet & +1 & Scalar \\
+\hline$\partial^\mu \boldsymbol{\pi}$ & Triplet & $-(-1)^\mu$ & Pseudovector \\
+\hline$N \gamma^5 \gamma^\mu T^a N$ & Triplet & $-(-1)^\mu$ & Pseudovector \\
+\hline$N \gamma^\mu T^a N$ & Triplet & $(-1)^\mu$ & Vector \\
+\hline$\epsilon^{a b c} \pi^b \partial_\mu \pi^c$ & Triplet & $(-1)^\mu$ & Vector \\
+\hline
+\end{tabular}
+
+It holds $(-1)^\mu=1$ for $\mu=0$ and $(-1)^\mu=-1$ for $\mu=i$ in Peskin-notation.
+(ii) With the required symmetries, one can build, from the combination of pairs of the terms in (i), the following interaction terms (2 points for each term)
+
+$$
+\bar{N} N \boldsymbol{\pi}^T \boldsymbol{\pi}, \quad \bar{N} \gamma^5 \gamma^\mu T^a N \partial_\mu \pi^a, \quad \bar{N} \gamma^\mu T^a N \epsilon^{a b c} \pi^b \partial_\mu \pi^c .
+$$
+
+
+A further possible interaction term would be $\bar{N} \gamma^5 T^a N \pi^a$, but it cannot be built out of the terms included in (i).
+
+
+\subsection{Problem 4 [Varia, 14 points]:}
+
+Answer the following questions by a few brief words or formulae.
+
+(i) How do the weak interaction couplings violate parity ?
+
+(ii) The quark model and QCD both have a symmetry under $\mathrm{SU}(3)$-transformations. On which spaces do these act and in which way are they different?
+
+(iii) Give two reasons, why the description of particle physics requires relativistic quantum field theories rather than a relativistic version of quantum mechanis.
+
+(iv) Write down the helicity operator for Dirac fermions. Are free Dirac fermions eigenstates of the helicity operator?
+
+(v) How many and which degrees of freedom are needed to describe a massless fermion?
+
+(vi) Give two reasons for specifying anti-commutators instead of commutators for fermion fields in the canonical quantisation procedure.
+
+(vii) Which of the following processes do not happen in nature? Give a reason for the forbidden ones.
+
+(a) $\pi^0 \rightarrow e^{+}+e^{-}$
+
+(b) $e^{-}+p \rightarrow n+\nu_e$
+
+(c) $e^{+}+e^{-} \rightarrow \gamma$
+
+(d) $e^{+}+e^{-} \rightarrow 2 \gamma$
+
+
+(i) Parity violation follows from the so-called 'V-A' interaction. The current from which the interaction term is built up can be written as the difference $j^a(x)=j_V^a(x)-j_A^a(x)$ of the vector current and the axial vector current. Under parity transformation $j_V^a(x)$ changes its sign while $j_A^a(x)$ does not, hence parity is not conserved. For massless particles parity violation implies that, in weak interactions, only negative (positive) helicity particles (antiparticles) can be created/annihilated and participates in the interaction;
+
+(ii) We distinguish the flavor global $S U(3)$ symmetry acting in quark-flavor space, from the local color (gauge-)symmetry acting in quark-color space. They are different in the global vs (gauge) local nature of the symmetry;
+
+
+(iii) That relativistic quantum mechanics is not an adequate description of particle physics can be seen from many inconsistencies arising in the physical interpretation:
+
+(a) The Klein-Gordon equation, even after the anti-particle interpretation of the negative energy solutions, prevents a probabilistic interpretation of the time component of the conserved current.
+
+(b) While a solution for the problem stressed in (a) is provided by the Dirac equation for the case of spin-1/2, only in quantum field theory we have a coherent description for all spins;
+
+(c) The possibilities of pair creation and annihilation requires an infinite number of degrees of freedom.
+
+(d) In the context of radiation-matter interaction the e.m. field needs to be quantized for a coherent description: semiclassical approach (quantum-mechanical matter vs classical backgorund e.m. fields) still works for the description of stimulated emission/absorption of radiation, while spontaneous emission needs second quantization in the field-theoretical approach;
+
+(iv) $h=\frac{1}{2|\mathbf{p}|} \vec{\Sigma} \cdot \mathbf{p}$ with $\vec{\Sigma}=\left(\begin{array}{cc}\vec{\sigma} & 0 \\ 0 & \vec{\sigma}\end{array}\right)$. Free Dirac fermions are eigenstates of the helicity operator with Lorentz-invariant eigenvalues only if they are massless. For a massive particle one can, instead, perform a Lorentz boost to a reference frame in which the sign of $\mathbf{p}$ is changed, so that its helicity depends on the reference frame.
+
+(v) To describe a massless spin $1 / 2$ fermion we only need two degrees of freedom to tell a massless particle from a massless antiparticle. The helicity state is indeed fixed: we only have right-handed (positive helicity) particles solution and left-handed (negative helicity) antiparticle solutions.
+
+
+(vi) Imposing anti-commutation relations for fermion fields guarantees that:
+
+- the Pauli principle for fermions is fulfilled: $\left\{a_{\mathbf{p}}^{\dagger, s}, a_{\mathbf{p}}^{\dagger, s}\right\}=0$ imply $a_{\mathbf{p}}^{\dagger, s} a_{\mathbf{p}}^{\dagger, s}=0= a_{\mathbf{p}}^{\dagger, s} a_{\mathbf{p}}^{\dagger, s}|0\rangle$ i.e. two identical fermions cannot occupy simultaneously the same quantum state;
+
+- energy is positive-definite. In case commutation relations were imposed energy would be unbounded from below;
+
+(vii) 
+
+(a) Allowed.
+
+(b) Allowed.
+
+(c) Forbidden for kinematical reasons: $p_\gamma^2=0 \neq\left(p_{e^{+}}+p_{e^{-}}\right)^2$.
+
+(d) Allowed.
+
+\pagebreak
+
+\section{Solution Exam 29.03.2016}
+
+
+\subsection{Problem 1 [Massless vector field, 10 points]:}
+
+a) Consider the classical field theory of a vector field $A^\mu(x)$ with the action
+
+$$
+\mathcal{S}_1=\int d^4 x \mathcal{L}_1 \quad \text { with } \quad \mathcal{L}_1=-\frac{1}{2}\left(\partial_\mu A_\nu\right)\left(\partial^\mu A^\nu\right)
+$$
+
+Find the field equations for $A^\mu(x)$ which follow from Hamilton's principle of least action.
+
+b) The action of the electromagnetic field in the vacuum reads
+
+$$
+\mathcal{S}_2=\int d^4 x \mathcal{L}_2 \quad \text { with } \quad \mathcal{L}_2=-\frac{1}{4} F^{\mu \nu}(x) F_{\mu \nu}(x), \quad F^{\mu \nu}=\partial^\mu A^\nu-\partial^\nu A^\mu
+$$
+
+
+Find a gauge condition for $A^\mu$ such that $\mathcal{S}_2$ in that gauge agrees with $\mathcal{S}_1$.
+
+
+a) Field equations for $A^\mu(x)$
+
+$$
+\partial_\mu \frac{\partial \mathcal{L}}{\partial\left(\partial_\mu A_\nu\right)}-\frac{\partial \mathcal{L}}{\partial A_\nu}=0, \quad(+2 \text { points })
+$$
+
+where
+
+$$
+\begin{aligned}
+\frac{\partial \mathcal{L}}{\partial\left(\partial_\mu A_\nu\right)} & =\frac{\partial}{\partial\left(\partial_\mu A_\nu\right)}\left[-\frac{1}{2}\left(\partial_\alpha A_\beta\right) g^{\gamma \alpha} g^{\delta \beta}\left(\partial_\gamma A_\delta\right)\right] \\
+& =-\frac{1}{2}\left[\partial^\mu A^\nu+\partial^\mu A^\nu\right]=-\partial^\mu A^\nu, \quad(+2 \text { points })
+\end{aligned}
+$$
+
+and
+
+$$
+\frac{\partial \mathcal{L}}{\partial A_\nu}=0 . \quad(+1 \text { point })
+$$
+
+
+Collecting these results we have
+
+$$
+\partial_\mu\left(\partial^\mu A^\nu\right)=0 \quad(+1 \text { point })
+$$
+
+b) To find out under which gauge condition $\mathcal{S}_2$ agrees with $\mathcal{S}_1$ we rewrite $\mathcal{L}_2$ as follows
+
+$$
+\begin{aligned}
+\mathcal{L}_2 & =-\frac{1}{4}\left(\partial^\mu A^\nu-\partial^\nu A^\mu\right)\left(\partial_\mu A_\nu-\partial_\nu A_\mu\right) \\
+& =-\frac{1}{4}\left[\partial^\mu A^\nu \partial_\mu A_\nu-\partial^\mu A^\nu \partial_\nu A_\mu-\partial^\nu A^\mu \partial_\mu A_\nu+\partial^\nu A^\mu \partial_\nu A_\mu\right] \\
+& =-\frac{1}{4}\left[2 \partial^\mu A^\nu \partial_\mu A_\nu-2 \partial^\mu A^\nu \partial_\nu A_\mu\right] \\
+& =\underbrace{-\frac{1}{2} \partial^\mu A^\nu \partial_\mu A_\nu}_{\mathcal{L}_1}+\underbrace{\frac{1}{2} \partial^\mu A^\nu \partial_\nu A_\mu}_{\mathcal{L}^{\prime}} \cdot \text { (+1 point) }
+\end{aligned}
+$$
+
+
+We find the contribution to $\mathcal{S}_2$ of $\mathcal{L}^{\prime}$ upon using the product rule for the derivatives and applying Stoke's theorem
+
+$$
+\int d^4 x \mathcal{L}^{\prime}=\underbrace{\frac{1}{2} \int_{\partial V} d \Sigma_{\partial}\left(\partial^\mu A^\nu\right) A_\mu}_{\text {vanishing surface terms (+1 point) }}-\frac{1}{2} \int_V d^4 x A_\mu \partial^\mu\left(\partial_\nu A^\nu\right) \quad(+1 \text { point }),(6)
+$$
+
+where, from the second term, we see that the gauge condition $\partial_\mu A^\mu=0(+1$ point), i.e. the Lorenz gauge condition, is such that $\mathcal{S}_2$ agrees with $\mathcal{S}_1$.
+
+\subsection{Problem 2 [Quark-antiquark scattering, 13 points ]:}
+Quarks carry electric charge as well as colour charge and hence interact both via the electromagnetic as well as the strong interaction.
+
+a) Draw the tree level Feynman diagrams for the quark scattering process
+
+$$
+u+\bar{d} \rightarrow u+\bar{d}
+$$
+
+both for QED and for QCD.
+
+b) Use the Feynman rules to write down the expression for the corresponding scattering amplitudes $i M_{\text {e.m. }}$ and $i M_s$. The QCD Feynman rules are:
+
+c) Now construct $\overline{\left|M_s\right|^2}$ by averaging over initial quark spins and colours and summing over final quark spins and colours, and express it as
+
+$$
+\overline{\left|M_s\right|^2}=R \overline{\left|M_{e . m .}\right|^2}
+$$
+
+What is the value of R ?
+
+Hint: Use approximately massless quarks with spins $s$, colours $c, c^{\prime}$ and
+
+$$
+\sum_s u_s^c(p) \bar{u}_s^{c^{\prime}}=\not p \delta_{c c^{\prime}}
+$$
+
+d) Can the processes be observed directly or indirectly?
+
+
+
+a) Both in the QED (left) and in the QCD (right) case, only the t-channel diagram is allowed (time flows up) since quarks in the initial, as well as in the final, state are of different flavors.
+$u\left(\mathbf{p}^{\prime}, s^{\prime}\right)$
+$\bar{d}\left(\mathbf{k}^{\prime}, r^{\prime}\right)$
+$u\left(\mathbf{p}^{\prime}, s^{\prime}, i^{\prime}\right)$
+$\bar{d}\left(\mathbf{k}^{\prime}, r^{\prime}, j^{\prime}\right)$
+
+DIAGRAMM
+
+b) The amplitudes are
+
+$$
+i \mathcal{M}_{e . m .}=-i q_u q_d\left[\bar{u}_{s^{\prime}}\left(\mathbf{p}^{\prime}\right) \gamma^\mu u_s(\mathbf{p})\right] \frac{g_{\mu \nu}}{\left(p-p^{\prime}\right)^2}\left[\bar{v}_r(\mathbf{k}) \gamma^\mu v_{r^{\prime}}\left(\mathbf{k}^{\prime}\right)\right] \quad \text { (+1.5 points) }
+$$
+
+where $q_u$ and $q_d$ are the electrical charges of the up and down quark, respectively
+
+$$
+i \mathcal{M}_\delta=-i g_s^2\left[\bar{u}_{s^{\prime}, i^{\prime}}\left(\mathbf{p}^{\prime}\right) \gamma^\mu\left(T^a\right)_{i^{\prime}, i} u_{s, i}(\mathbf{p})\right] \frac{g_{\mu \nu} \delta_{a b}}{\left(p-p^{\prime}\right)^2}\left[\bar{v}_{r, j}(\mathbf{k}) \gamma^\mu\left(T^b\right)_{j, j^{\prime}} v_{r^{\prime}, j^{\prime}}\left(\mathbf{k}^{\prime}\right)\right]
+$$
+
+c) Comparing the amplitudes, we observe that the differences reside in the replacement $q_u q_d \rightarrow g_s^2$ and in the color factor present in the QCD case that we have to compute
+
+$$
+\overline{\left|\mathcal{M}_s\right|^2}=\frac{1}{4} \sum_{\text {spins }} \frac{1}{9} \sum_{\text {colors }} \mathcal{M}_s^* \mathcal{M}_s, \quad \quad \overline{\left|\mathcal{M}_{e . m .}\right|^2}=\frac{1}{4} \sum_{\text {spins }} \mathcal{M}_{e . m .}^* \mathcal{M}_{e . m}
+$$
+
+
+Then we need
+
+$$
+i \mathcal{M}_s^*=-i g_s^2\left[\bar{u}_{q, l}(\mathbf{p}) \gamma^\alpha\left(T^c\right)_{l, l^{\prime}} u_{q^{\prime}, l^{\prime}}\left(\mathbf{p}^{\prime}\right)\right] \frac{g_{\alpha \beta} \delta_{c d}}{\left(p-p^{\prime}\right)^2}\left[\bar{v}_{t^{\prime}, m^{\prime}}\left(\mathbf{k}^{\prime}\right) \gamma^\beta\left(T^d\right)_{m^{\prime}, m} v_{t, m}(\mathbf{k})\right],
+$$
+
+to compute $\left|\mathcal{M}_s\right|^2$. (+1 point) For approximately massless quarks we can use the completeness relation $\sum_s u_s^c(p) \bar{u}_s^{c^{\prime}}=\not p \delta_{c c^{\prime}}$ to write the color factor
+
+$$
+\begin{aligned}
+\frac{1}{9} \underbrace{\delta_{a b} \delta_{c d} \delta_{l^{\prime}, i^{\prime}} \delta_{l, i} \delta_{m, j} \delta_{m^{\prime}, j^{\prime}}}_{(+1 \text { point })}\left(T^a\right)_{i^{\prime}, i}\left(T^c\right)_{l, l^{\prime}}\left(T^b\right)_{j, j^{\prime}}\left(T^d\right)_{m^{\prime}, m} & =\frac{1}{9}\left(T^a\right)_{i^{\prime}, i}\left(T^c\right)_{i, i^{\prime}}\left(T^a\right)_{j, j^{\prime}}\left(T^c\right)_{j^{\prime}, j} \\
+& =\frac{1}{9} \operatorname{Tr}\left(T^a T^b\right) \operatorname{Tr}\left(T^a T^b\right) \\
+& =\frac{1}{9}\left(\frac{1}{2} \delta^{a b}\right)\left(\frac{1}{2} \delta^{a b}\right)(+1 \text { point }) \\
+& =\frac{1}{9} \cdot \frac{1}{2} \cdot \frac{1}{2} \cdot 8=\frac{2}{9}
+\end{aligned}
+$$
+
+
+(+1 point)
+
+Collecting everything together
+
+$$
+\overline{\left|\mathcal{M}_s\right|^2}=\frac{2}{9} \cdot \frac{g_s^4}{q_u^2 q_d^2} \overline{\left|\mathcal{M}_{\text {e.m. }}\right|^2} \quad(+1 \text { point })
+$$
+
+d) Because of quark confinement the process $u+\bar{d} \rightarrow u+\bar{d}$ can only be detected indirectly in deep inelastic scattering. (+2 points)
+
+
+\subsection{Problem 3 [Fermion mass generation, 15 points]:}
+
+
+Consider the theory for real scalar fields and fermions,
+
+$$
+\mathcal{L}=\frac{1}{2} \partial_\mu \phi \partial^\mu \phi-V(\phi)+\bar{\psi} i \gamma^\mu \partial_\mu \psi-g \phi \bar{\psi} \psi, \quad V(\phi)=\frac{\lambda}{4!}\left(\phi^2-v^2\right)^2 .
+$$
+
+a) Sketch the potential $V(\phi)$ of the scalar field. What is its vacuum expectation value $\langle\phi\rangle \equiv\langle 0| \phi|0\rangle$ ?
+
+b) Reparametrise the scalar field by its fluctuations about this value, $\phi=\langle\phi\rangle+\chi$ and express $\mathcal{L}$ in terms of the field variables $\psi, \chi$.
+
+c) What are the particle masses in this theory? Is there a Goldstone boson? Sketch the basic vertices for all interaction terms without specifying the Feynman rules.
+
+d) How does the mass spectrum change for the case of a complex scalar field (no proof)? What is the reason?
+
+
+
+a) To find the vacuum expectation value for the scalar field, $\langle\phi\rangle \equiv\langle 0| \phi|0\rangle$ the potential is studied
+
+$$
+V(\phi)=\frac{\lambda}{4!}\left(\phi^2-v^2\right)^2 .
+$$
+
+
+The position of the extrema of $V(\phi)$ can be deduced from its derivative
+$$
+\frac{d V(\phi)}{d \phi}=\frac{\lambda}{3!}\left(\phi^2-v^2\right) \phi, \quad(+1 \text { point })
+$$
+and they are $\phi=0$ and $\phi= \pm v$. ( +1 point)
+Assuming $v^2$ to be a real positive number, it can be shown, by computing the second order derivative, that the potential admits two equivalent minima in $\phi= \pm v$, meaning that $\langle\phi\rangle \equiv\langle 0| \phi|0\rangle= \pm v$. ( +1 point)
+(+2 point)
+
+b) For the reparametrisation, one has to choose one of the two minima. The choice $\langle\phi\rangle \equiv\langle 0| \phi|0\rangle=v$ brings $\mathcal{L}$ in the form
+
+$$
+\mathcal{L}=\frac{1}{2} \partial_\mu \chi \partial^\mu \chi-\frac{\lambda}{4!}\left(\chi^4+4 v \chi^3+4 v^2 \chi^2\right)+\bar{\psi} i \gamma^\mu \partial_\mu \psi-g v \bar{\psi} \psi-g \chi \bar{\psi} \psi \quad \text { (+1 point) }
+$$
+
+c) - The particle masses in this theory are:
+
+(a) $m_\chi=\sqrt{\frac{\lambda}{3!}} v$, for the Higgs field $\chi$ ( +1 point);
+
+(b) $m_\psi=g v$, for the fermion field $\psi \quad(+1$ point).
+
+- The basic interaction vertices are: (Each correct column $\rightarrow+1$ point)
+
+\begin{tabular}{|l|l|l|l|}
+\hline Vertex: & & & \\
+\hline Interaction term: & $-\frac{\lambda}{3!} v \chi^3$ & $-\frac{\lambda}{4!} \chi^4$ & $-g \chi \bar{\psi} \psi$ \\
+\hline
+\end{tabular}
+
+- There is no (Nambu-)Goldstone boson, since the broken symmetry is a discrete symmetry $\simeq \mathbb{Z}_2 \quad$ (+1 point)
+
+
+d) For the case of a complex scalar field the fermion mass spectrum would stay unchanged with respect to the real scalar case. We would, instead, get both a massive scalar particle with mass $m_\chi$ as above, and a massless (Nambu-)Goldstone boson connected with oscillations of the $\phi$ field around a chosen minimum in a direction which is tangent to the circle of equivalent minima produced by the continuous global $U(1)$ symmetry of the Lagrangian. ( +3 points)
+
+
+
+\subsection{Problem 4 [Varia, 14 points]:}
+
+Answer the following questions by a few brief words or formulae.
+
+(i) Specify two quantum numbers that are conserved in the strong interactions but violated in the weak interactions.
+
+(ii) In proton proton collisions, the process $p+p \rightarrow p+p+p+\bar{p}$ has the minimal possible final state containing an anti-proton. Why are so many protons required in the final state? Is the number of mesons in the final state constrained?
+
+(iii) What is the mathematical reason that for the colour gauge group $\operatorname{SU}(3)$ there are three different types of quarks but eight different types of gluons?
+
+(iv) Specify an observable particle phenomenon which in the Dirac equation is contained automatically while it has to be included by hand in the Schrödinger equation. Under which condition does the Schrödinger equation give a good description of particles?
+
+(v) At tree level, the photon exchange diagram and the pair annihilation diagram contribute to the amplitude of the process $e^{+}+e^{-} \rightarrow e^{+}+e^{-}$. Which diagrams contribute to the process $e^{+}+e^{-} \rightarrow l^{+}+l^{-}$with leptons $l \neq e$ ?
+
+(vi) Which of the following diagrams do not contribute to the 2 particles $\rightarrow 2$ particles scattering in $\phi^4$ theory? Give a reason for the forbidden ones.
+
+
+(i) Parity and flavor quantum numbers are conserved in the strong interactions, but violated in the weak interactions; (+2 points)
+
+(ii) Baryon number conservation is the reason for having three protons in the final state for it to contain also an anti-proton. The number of mesons in the final state is not constrained since, provided that there is enough energy, it is always possible for a $q \bar{q}$ to be produced. When the three quarks forming a baryon are created, instead, as many antiquarks are produced as well; ( +2 points)
+
+(iii) Quarks live in the fundamental 3-D representation of the color gauge group $\operatorname{SU}(3)$, while gluons live in the adjoint 8-D representation of the same $\operatorname{SU}(3)$ color symmetry group; (+2 points)
+
+(iv) Spin is contained automatically in the Dirac equation, while it has to be included by hand in the Schrödinger equation. This last equation gives a good description of particles only in the non relativistic limit $|\vec{p}| \ll m$; (+2 points)
+
+
+(v) For $l \neq e$ only the annihilation diagram contributes to the amplitude of the process. There cannot be an exchange diagram due to lepton number conservation per species at each vertex. The interaction term in the QED Lagrangian is, indeed $-e \sum_l N\left[\bar{\psi}_l(x) / A(x) \psi_l(x)\right]$, with each term in the sum involving one kind of lepton only; (+2 points)
+
+(vi) All but
+
+- the second, since it is not a 2 particle $\rightarrow 2$ particle scattering; ( +2 points)
+
+- the fourth, since to each vertex only three legs are attached instead of four. (+2 points)
+
+
+\pagebreak
+
+
+
+\section{Exam 06.03.2017}
+
+
+\subsection{Problem 1 [Bose Statistics, 10 points]:}
+
+The normal-ordered Hamiltonian of a real scalar field reads
+$$
+: H:=\int \frac{\mathrm{d}^3 p}{(2 \pi)^3 2 E(\mathbf{p})} E(\mathbf{p}) a^{\dagger}(\mathbf{p}) a(\mathbf{p})
+$$
+
+For notational convenience, we omit the double dots in the following expressions.
+
+(i) Show that for $\beta \in \mathbb{R}$
+
+$$
+e^{-\beta H} a^{\dagger}(\mathbf{p})=a^{\dagger}(\mathbf{p}) e^{-\beta(H+E(\mathbf{p}))} .
+$$
+
+
+Hint: Start by showing $H a^{\dagger}(\mathbf{p})=a^{\dagger}(\mathbf{p})(H+E(\mathbf{p}))$.
+
+For a thermal state with temperature $T=\frac{1}{\beta}$ expectation values of the operator $\mathcal{O}$ are calculated via
+
+$$
+\langle\mathcal{O}\rangle_\beta=\frac{\operatorname{tr}\left(\mathcal{O} e^{-\beta H}\right)}{\operatorname{tr}\left(e^{-\beta H}\right)},
+$$
+
+where the trace is over all quantum mechanical states of the system.
+
+(ii) Using the result from the previous part, show that
+
+$$
+\left\langle a^{\dagger}(\mathbf{p}) a(\mathbf{q})\right\rangle_\beta=(2 \pi)^3 2 E(\mathbf{p}) \delta^3(\mathbf{p}-\mathbf{q}) \frac{1}{e^{\beta E(\mathbf{p})}-1} .
+$$
+
+
+a) To show the identity from the hint we compute the commutator
+
+$$
+\begin{aligned}
+{\left[H, a^{\dagger}(\mathbf{p})\right] } & =\left[\int \frac{\mathrm{d}^3 q}{(2 \pi)^3 2 E(\mathbf{q})} E(\mathbf{q}) a^{\dagger}(\mathbf{q}) a(\mathbf{q}), a^{\dagger}(\mathbf{p})\right](+1 \text { point }) \\
+& =\int \frac{\mathrm{d}^3 q}{(2 \pi)^3 2 E(\mathbf{q})} E(\mathbf{q})\left[a^{\dagger}(\mathbf{q}) a(\mathbf{q}), a^{\dagger}(\mathbf{p})\right] \\
+& =\int \frac{\mathrm{d}^3 q}{(2 \pi)^3 2 E(\mathbf{q})} E(\mathbf{q}) a^{\dagger}(\mathbf{q})\left[a(\mathbf{q}), a^{\dagger}(\mathbf{p})\right](+1 \text { point }) \\
+& =\int \frac{\mathrm{d}^3 q}{(2 \pi)^3 2 E(\mathbf{q})} E(\mathbf{q}) a^{\dagger}(\mathbf{q}) 2 E(\mathbf{q})(2 \pi)^3 \delta^{(3)}(\mathbf{q}-\mathbf{p})(+1 \text { point }) \\
+& =\int \mathrm{d}^3 q E(\mathbf{q}) a^{\dagger}(\mathbf{q}) \delta^{(3)}(\mathbf{q}-\mathbf{p}) \\
+& =E(\mathbf{p}) a^{\dagger}(\mathbf{p}),(+1 \text { point })
+\end{aligned}
+$$
+
+from which we conclude that
+
+$$
+\begin{aligned}
+H a^{\dagger}(\mathbf{p}) & =a^{\dagger}(\mathbf{p}) H+\left[H, a^{\dagger}(\mathbf{p})\right] \\
+& =a^{\dagger}(\mathbf{p})(H+E(\mathbf{p})) .(+1 \text { point })
+\end{aligned}
+$$
+
+
+This can easily be generalised to higher powers of $H$ (whenever $a^{\dagger}$ is commuted with $H, H$ turns into $H+E$ ):
+
+$$
+H^n a^{\dagger}(\mathbf{p})=a^{\dagger}(\mathbf{p})(H+E(\mathbf{p}))^n \cdot(+1 \text { point })
+$$
+
+
+Therefore
+
+$$
+\begin{aligned}
+e^{\beta H} a^{\dagger}(\mathbf{p}) & =\sum_{n=0}^{\infty} \frac{(\beta)^n}{n!} H^n a^{\dagger}(\mathbf{p}) \\
+& =\sum_{n=0}^{\infty} \frac{(\beta)^n}{n!} a^{\dagger}(\mathbf{p})(H+E(\mathbf{p}))^n \\
+& =a^{\dagger}(\mathbf{p}) e^{\beta(H+E(\mathbf{p}))} \cdot(+1 \text { point })
+\end{aligned}
+$$
+
+
+b) Using the cyclic property of the trace we get ( +1 point)
+
+$$
+\begin{aligned}
+\operatorname{tr}\left(a^{\dagger}(\mathbf{p}) a(\mathbf{q}) e^{-\beta H}\right)= & \operatorname{tr}\left(e^{-\beta H} a^{\dagger}(\mathbf{p}) a(\mathbf{q})\right) \\
+= & \operatorname{tr}\left(a^{\dagger}(\mathbf{p}) e^{-\beta(H+E(\mathbf{p}))} a(\mathbf{q})\right) \\
+= & \operatorname{tr}\left(a(\mathbf{q}) a^{\dagger}(\mathbf{p}) e^{-\beta(H+E(\mathbf{p}))}\right) \\
+= & \operatorname{tr}\left(a(\mathbf{q}) a^{\dagger}(\mathbf{p}) e^{-\beta H}\right) e^{-\beta E(\mathbf{p})} \\
+= & \operatorname{tr}\left(a^{\dagger}(\mathbf{p}) a(\mathbf{q}) e^{-\beta H}\right) e^{-\beta E(\mathbf{p})} \\
+& +(2 \pi)^3 2 E(\mathbf{p}) \delta^{(3)}(\mathbf{p}-\mathbf{q}) \operatorname{tr}\left(e^{\beta H}\right) e^{-\beta E(\mathbf{p})} .(+1 \text { point })
+\end{aligned}
+$$
+
+
+Rearranging this identity results in
+
+$$
+\begin{aligned}
+\left(1-e^{-\beta E(\mathbf{p})}\right) \operatorname{tr}\left(a^{\dagger}(\mathbf{p}) a(\mathbf{q}) e^{-\beta H}\right) & =(2 \pi)^3 2 E(\mathbf{p}) \delta^{(3)}(\mathbf{p}-\mathbf{q}) \operatorname{tr}\left(e^{\beta H}\right) e^{-\beta E(\mathbf{p})} \\
+\Rightarrow \operatorname{tr}\left(a^{\dagger}(\mathbf{p}) a(\mathbf{q}) e^{-\beta H}\right) & =\frac{(2 \pi)^3 2 E(\mathbf{p}) \delta^{(3)}(\mathbf{p}-\mathbf{q}) \operatorname{tr}\left(e^{\beta H}\right)}{e^{\beta E(\mathbf{p})}-1},
+\end{aligned}
+$$
+
+and therefore
+
+$$
+\begin{aligned}
+\left\langle a^{\dagger}(\mathbf{p}) a(\mathbf{q})\right\rangle_\beta & =\frac{\operatorname{tr}\left(a^{\dagger}(\mathbf{p}) a(\mathbf{q}) e^{-\beta H}\right)}{\operatorname{tr}\left(e^{-\beta H}\right)} \\
+& =\frac{(2 \pi)^3 2 E(\mathbf{p}) \delta^{(3)}(\mathbf{p}-\mathbf{q})}{e^{\beta E(\mathbf{p})}-1} \cdot(+1 \text { point })
+\end{aligned}
+$$
+
+
+\subsection{Problem 2 [Mott scattering, 9 points]:}
+
+Consider the polarized differential cross section for Mott scattering, which is the scattering of an $e^{-}$with incoming momentum $\mathbf{p}$ and spin index $r$, and outgoing momentum $\mathbf{p}^{\prime}$ and spin index $s$, by a heavy nucleus of charge ( $-z e$ ) treated as a static, spinless point charge,
+
+$$
+\frac{\mathrm{d} \sigma(r, s)}{\mathrm{d} \Omega}=\frac{4 z^2 \alpha^2}{|\mathbf{q}|^4}\left|\bar{u}_s\left(\mathbf{p}^{\prime}\right) \gamma^0 u_r(\mathbf{p})\right|^2 .
+$$
+
+Here $\alpha=e^2 / 4 \pi$ is the fine structure constant, $|\mathbf{q}|=\left|\mathbf{p}^{\prime}-\mathbf{p}\right|$ and $\theta$ is the scattering angle between $\mathbf{p}$ and $\mathbf{p}^{\prime}$.
+
+(i) Compute the unpolarized cross section, where no spin is observed,
+
+$$
+\left(\frac{\mathrm{d} \sigma}{\mathrm{~d} \Omega}\right)_{N . P .}=\frac{8 z^2 \alpha^2}{|\mathbf{q}|^4}\left[E E^{\prime}+\mathbf{p} \cdot \mathbf{p}^{\prime}+m^2\right]
+$$
+
+(ii) Show that in the non-relativistic limit one obtains the Rutherford scattering formula (use the trigonometric identity $\cos \theta=1-2 \sin ^2(\theta / 2)$ )
+
+$$
+\left(\frac{\mathrm{d} \sigma}{\mathrm{~d} \Omega}\right)_{N . P .}=\frac{z^2 \alpha^2 m^2}{|\mathbf{p}|^4 \sin ^4(\theta / 2)}
+$$
+
+
+
+(i) We compute the unpolarized cross section by averaging over polarizations for the electron in the initial state and summing over its polarizations in the final state:
+
+$$
+\begin{aligned}
+\left(\frac{\mathrm{d} \sigma}{\mathrm{~d} \Omega}\right)_{N . P .}^{M o t t} & =\frac{4 z^2 \alpha^2}{|\mathbf{q}|^4} \frac{1}{2} \sum_{r, s}\left|\bar{u}_s\left(\mathbf{p}^{\prime}\right) \gamma^0 u_r(\mathbf{p})\right|^2(+2 \text { points }) \\
+& =\frac{2 z^2 \alpha^2}{|\mathbf{q}|^4} \operatorname{tr}\left[\gamma^0(\not p+m) \gamma^0\left(\not p^{\prime}+m\right)\right](+2 \text { points }) \\
+& =\frac{2 z^2 \alpha^2}{|\mathbf{q}|^4}\left[p_\alpha p_\beta^{\prime} \operatorname{tr}\left(\gamma^0 \gamma^\alpha \gamma^0 \gamma^\beta\right)+m^2 \operatorname{tr}\left(\gamma^0\right)^2\right](+1 \text { point }) \\
+& =\frac{2 z^2 \alpha^2}{|\mathbf{q}|^4}\left[4 p_\alpha p_\beta^{\prime}\left(g^{0 \alpha} g^{0 \beta}-g^{00} g^{\alpha \beta}+g^{0 \beta} g^{\alpha 0}\right)+4 m^2\right] \\
+& =\frac{2 z^2 \alpha^2}{|\mathbf{q}|^4}\left[8 p^0 p^{\prime 0}-4 p \cdot p^{\prime}+4 m^2\right] \\
+& =\frac{8 z^2 \alpha^2}{|\mathbf{q}|^4}\left[E E^{\prime}+\mathbf{p} \cdot \mathbf{p}^{\prime}+m^2\right](+1 \text { point }) \\
+& =\frac{8 z^2 \alpha^2}{16|\mathbf{p}|^4 \sin ^4(\theta / 2)}\left[E^2-2|\mathbf{p}|^2 \sin ^2(\theta / 2)+|\mathbf{p}|^2+m^2\right](+1 \text { point }) \\
+& =\frac{8 z^2 \alpha^2\left(2 m^2\right)}{16|\mathbf{p}|^4 \sin ^4(\theta / 2)}\left[1+\frac{|\mathbf{p}|^2}{m^2}\left(1-\sin ^2(\theta / 2)\right)\right] \\
+& =\frac{z^2 \alpha^2 m^2}{|\mathbf{p}|^4 \sin ^4(\theta / 2)}\left[1+\frac{|\mathbf{p}|^2}{m^2}\left(1-\sin ^2(\theta / 2)\right)\right],(+1 \text { point })
+\end{aligned}
+$$
+
+where we have used $|\mathbf{q}|=\left|\mathbf{p}^{\prime}-\mathbf{p}\right|=2|\mathbf{p}| \sin (\theta / 2)$ thanks to the fact that, being the nucleus static we can neglect its recoil energy, hence $E^{\prime}=E,\left|\mathbf{p}^{\prime}\right|=|\mathbf{p}|$ and $\mathbf{p} \cdot \mathbf{p}^{\prime}=|\mathbf{p}|^2 \cos (\theta)=|\mathbf{p}|^2\left[\cos ^2(\theta / 2)-\sin ^2(\theta / 2)\right]=|\mathbf{p}|^2\left[1-2 \sin ^2(\theta / 2)\right]$.
+(ii) From the obtained expression which is known as Mott cross section we can obtain the Rutherford cross section in the non-relativistic limit $\frac{|\mathbf{p}|^2}{m^2} \ll 1$ :
+
+$$
+\left(\frac{\mathrm{d} \sigma}{\mathrm{~d} \Omega}\right)_{N . P .}^{\text {Rutherford }}=\frac{z^2 \alpha^2 m^2}{|\mathbf{p}|^4 \sin ^4(\theta / 2)}(+1 \text { point })
+$$
+
+\subsection{Problem 3 [Chiral transformations of Dirac spinors, 5 points]:}
+
+Consider the chiral transformation for a Dirac spinor $\psi \rightarrow \psi^{\prime}=e^{i \alpha \gamma^5} \psi$
+
+(i) Find out the corresponding transformation law for the conjugate spinor $\bar{\psi}$ and for the vector current $V^\mu=\bar{\psi} \gamma^\mu \psi$.
+
+(ii) Show that the Dirac Lagrangian $\mathcal{L}_{\text {Dirac }}=\bar{\psi}\left(i \gamma^\mu \partial_\mu-m\right) \psi$ is invariant under the given chiral transformation in the massless case, while this is not the case if $m \neq 0$.
+
+
+Given that a Dirac spinor $\psi$ transforms under a chiral transformation as $\psi \rightarrow e^{i \alpha \gamma^5} \psi$
+
+(i) The corresponding transformation law for the conjugate spinor $\bar{\psi}$ is
+
+$$
+\bar{\psi} \longrightarrow \bar{\psi}^{\prime}=\psi^{\prime \dagger} \gamma^0=\left(e^{i \alpha \gamma^5} \psi\right)^{\dagger} \gamma^0=\psi^{\dagger} e^{-i \alpha \gamma^5} \gamma^0=\bar{\psi} e^{i \alpha \gamma^5}, \quad \text { (+2 points) }
+$$
+
+where in the last step the property of $\gamma^5$ to anticommute with $\gamma^0$ (as well as with any gamma ${ }^\mu$ ) is the reason for the change of sign in the exponent.
+Now to the transformation property of the vector current $V^\mu$
+
+$$
+V^\mu \longrightarrow V^{\prime \mu}=\bar{\psi} e^{i \alpha \gamma^5} \gamma^\mu e^{i \alpha \gamma^5} \psi=\bar{\psi} \gamma^\mu e^{-i \alpha \gamma^5} e^{i \alpha \gamma^5} \psi=\bar{\psi} \gamma^\mu \psi=V^\mu \text { ( }+1 \text { point) }
+$$
+
+(ii) Finally, for the Dirac Lagrangian $\mathcal{L}_{\text {Dirac }}=\bar{\psi}\left(i \gamma^\mu \partial_\mu-m\right) \psi$ we consider the $m=0$ case for which we get
+
+$$
+\begin{aligned}
+\left.\mathcal{L}_{\text {Dirac }}\right|_{m=0} \longrightarrow\left(\left.\mathcal{L}_{\text {Dirac }}\right|_{m=0}\right)^{\prime} & =\bar{\psi} e^{i \alpha \gamma^5} i \gamma^\mu \partial_\mu e^{i \alpha \gamma^5} \psi \\
+& =\bar{\psi} i \gamma^\mu \partial_\mu e^{-i \alpha \gamma^5} e^{i \alpha \gamma^5} \psi=\left.\mathcal{L}_{\text {Dirac }}\right|_{m=0}
+\end{aligned}
+$$
+
+i.e. $\left.\quad \mathcal{L}_{\text {Dirac }}\right|_{m=0}$ is invariant under the given chiral transformation in the massless case, while this is not the case if $m \neq 0$ as we can easily check
+
+$$
+\mathcal{L}=\left.\mathcal{L}_{\text {Dirac }}\right|_{m=0}-\bar{\psi} m \psi \longrightarrow \mathcal{L}^{\prime}=\left.\mathcal{L}_{\text {Dirac }}\right|_{m=0}-\bar{\psi} m e^{2 i \alpha \gamma^5} \psi \neq \mathcal{L}(+1 \text { point })
+$$
+
+
+\subsection{Problem 4 [Eigenvalues of Dirac-operator, 2 points]:}
+
+Given an $\operatorname{SU}(N)$-gauge field $A_\mu=A_\mu^a T^a$, the covariant Dirac-operator $D[A]$ is defined as
+
+$$
+D[A]=i \gamma^\mu\left(\partial_\mu-i g A_\mu\right) .
+$$
+
+Its eigenfunctions $\phi_i(x)$ satisfy
+
+$$
+D[A] \phi_i(x)=\lambda_i \phi_i(x), \quad \text { where } \quad \lambda \in \mathbb{C} .
+$$
+
+Show that its eigenvalues are gauge invariant, i.e. show that given $\phi_i$ transforms as $\phi^{\prime}(x)= U(x) \phi(x)$ with $U(x) \in S U(N)$, then
+
+$$
+D\left[A^{\prime}\right] \phi_i^{\prime}(x)=\lambda_i \phi_i^{\prime}(x) .
+$$
+
+
+Under the gauge transformation $U(x) \in S U(N)$ the fields in this exercise transform in the following way:
+
+$$
+\begin{aligned}
+A_\mu^{\prime}(x) & =U(x) A_\mu(x) U(x)^{\dagger}-\frac{i}{g}\left(\partial_\mu U(x)\right) U(x)^{\dagger} \\
+\phi_i^{\prime}(x) & =U(x) \phi_i(x)
+\end{aligned}
+$$
+
+which directly implies
+
+$$
+\begin{aligned}
+D\left[A^{\prime}\right] \phi_i^{\prime}(x)= & i \gamma^\mu\left[\partial_\mu-i g A_\mu^{\prime}\right] \phi_i^{\prime}(x) \\
+= & i \gamma^\mu\left[\partial_\mu-i g U(x) A_\mu(x) U(x)^{\dagger}-\left(\partial_\mu U(x)\right) U(x)^{\dagger}\right] U(x) \phi_i(x) \\
+= & i \gamma^\mu\left[\partial_\mu\left(U(x) \phi_i(x)\right)-i g U(x) A_\mu(x) \phi_i(x)-\left(\partial_\mu U(x)\right) \phi_i(x)\right] \\
+= & i \gamma^\mu\left[\left(\partial_\mu U(x)\right) \phi_i(x)+U(x)\left(\partial_\mu \phi_i(x)\right)\right. \\
+& \left.\quad-i g U(x) A_\mu(x) \phi_i(x)-\left(\partial_\mu U(x)\right) \phi_i(x)\right] \\
+= & i \gamma^\mu\left[U(x)\left(\partial_\mu \phi_i(x)\right)-i g U(x) A_\mu(x) \phi_i(x)\right] \\
+= & U(x) i \gamma^\mu\left[\partial_\mu-i g A_\mu(x)\right] \phi_i(x) \\
+= & U(x) \lambda_i \phi_i(x) \\
+= & \lambda_i \phi^{\prime}(x),
+\end{aligned}
+$$
+
+where we used that $U^{\dagger}(x) U(x)=\mathbb{1}$ in the third step.
+Of course one alternatively could simply notice that $D[A]=i \gamma^\mu D_\mu$ and by construction of the covariant derivative
+
+$$
+\begin{aligned}
+D\left[A^{\prime}\right] \phi_i^{\prime}(x) & =U(x) i \gamma^\mu D_\mu \phi_i(x) \\
+& =\lambda_i U(x) \phi_i(x) \\
+& =\lambda_i(x) \phi_i^{\prime}(x)
+\end{aligned}
+$$
+
+(+2 points for either or method used)
+
+
+\subsection{Problem 5 [Varia, 25 points]:}
+
+Answer the following questions by a few brief words or formulae.
+
+(i) Which quantity do we need to calculate in a quantum field theory in order to describe $2 \rightarrow n$ scattering processes?
+
+(ii) In which case is it possible to find a non-trivial Dirac-spinor that is an eigenvector for the spin and simultaneously the helicity operator?
+
+(iii) Discuss the differences between photons and massless quanta of the complex KleinGordon field by comparing the corresponding:
+
+(a) equations of motion (free propagation);
+
+(b) transformation properties under Lorentz transformation;
+
+(c) transformation properties under parity conjugation $\mathcal{P}$;
+
+(d) transformation properties under charge conjugation $\mathcal{C}$;
+
+(e) number of dynamical degrees of freedom described by the equations of motion.
+
+(iv) What is the difference between the "Feynman propagator" and the " 2 -point function" for a given field?
+
+(v) Provide two reasons why relativistic quantum mechanics is not sufficient for a full description of particle physics.
+
+(vi) Which of the following processes are physically allowed? Give a reason for the forbidden ones.
+
+(a) $e^{+}+e^{-} \rightarrow \gamma$;
+
+(b) $e^{+}+e^{-} \rightarrow 2 \gamma$;
+
+(c) $e^{+}+e^{-} \rightarrow 3 \gamma$;
+
+(d) $p+p \rightarrow p+p+p+\bar{p}$;
+
+(e) $\pi^{-}+p \rightarrow K^{-}+p \quad$ in 1) QCD and 2.) the Standard Model;
+
+(f) $p \rightarrow \pi^{+}+\pi^0$;
+
+(g) $\Delta^{++} \rightarrow p+\pi^{+}$;
+
+
+(i) The scattering matrix for the specific process or, to be more specific, the $(2+n)$-point function; (+2 points)
+
+(ii) It is possible to find a non-trivial Dirac-spinor that is simultaneously an eigenvector for both the spin and helicity projection operators in the massless case; (+2 points)
+
+(iii) Massless quanta of the complex Klein-Gordon field vs photons:
+
+(a) (+3 points)
+
+$$
+\square \phi=\square \phi^{\dagger}=0 \quad \text { vs }\left\{\begin{array}{l}
+\square A^\mu=0\left\{\begin{array}{l}
+\text { in radiation gauge: } A^0=0, \nabla \cdot \mathbf{A}=0 \\
+\text { in Lorenz gauge: } \partial_\mu A^\mu=0
+\end{array}\right. \\
+\partial_\mu F^{\mu \nu}=0 \text { in a covariant language, NO gauge fixing; }
+\end{array}\right.
+$$
+
+(b) Scalar $v s$ vector; (+2 points)
+
+(c) $\phi^{\prime}=\phi(-\mathbf{x}, t)$ vs $A^{\prime \mu}=\Lambda(P)^\mu{ }_\nu A^\nu(-\mathbf{x}, t)$; (+2 points)
+
+(d) Charged vs neutral; (+2 points)
+
+(e) $\phi, \phi^{\dagger}$ vs $A_i^\mu, i=1,2$ due to transversality (i.e. 2 dynamical dof in both cases). (+2 points)
+
+
+
+(iv) The Feynman propagator is the 2-point function of the free theory, which differs from the 2 -point function of the full interacting theory. In fact, the propagator represents the dominant contribution to the 2 -point function in its perturbative expansion (for weak coupling); (+2 points)
+
+
+(v) That relativistic quantum mechanics is not an adequate description of particle physics can be seen from many inconsistencies arising in the physical interpretation: (+2 points)
+
+(a) The Klein-Gordon equation, even after the anti-particle interpretation of the negative energy solutions, prevents a probabilistic interpretation of the time component of the conserved current.
+
+(b) While a solution for the problem stressed in (a) is provided by the Dirac equation for the case of spin- $1 / 2$, only in quantum field theory we have a coherent description for all spins;
+
+(c) The possibilities of pair creation and annihilation requires an infinite number of degrees of freedom.
+
+(d) In the context of radiation-matter interaction the e.m. field needs to be quantized for a coherent description: semiclassical approach (quantum-mechanical matter vs classical backgorund e.m. fields) still works for the description of stimulated emission/absorption of radiation, while spontaneous emission needs second quantization in the field-theoretical approach;
+
+
+(vi) 
+
+(a) Forbidden for kinematical reasons $p_\gamma^2=0 \neq\left(p_{e^{+}}+p_{e^{-}}\right)^2$; ( +2 points)
+
+(b) Allowed;
+
+(c) Allowed;
+
+(d) Allowed;
+
+(e) Forbidden in QCD due to conservation of strangeness. Allowed in the SM via weak interaction; (+2 points)
+
+(f) Forbidden: baryon number NOT conserved; (+2 points)
+
+(g) Allowed.
+
+\pagebreak
+
+\section{Exam 27.03.2017}
+
+
+\subsection{Problem 1 [Massless fermion scattering in Yukawa theory, 14 points]:}
+
+Consider the Yukawa theory
+
+$$
+\mathcal{L}_{\text {Yukawa }}=\bar{\psi}\left(i \gamma^\mu \partial_\mu-m_f\right) \psi+\frac{1}{2}\left(\partial_\mu \phi\right)^2-\frac{1}{2} m_\phi^2 \phi^2-g \bar{\psi} \psi \phi
+$$
+
+with the corresponding Feynman rules:
+
+(i) Draw all diagrams to leading order contributing to the process of scattering of two massless fermions $m_f=0$ in this theory
+
+$$
+e^{-}(p) e^{-}\left(p^{\prime}\right) \longrightarrow e^{-}(k) e^{-}\left(k^{\prime}\right)
+$$
+
+and write the corresponding amplitudes.
+
+
+(ii) Show that the squared amplitude for unobserved spins is
+
+$$
+\overline{|\mathcal{M}|^2}=g^4\left\{\frac{t^2}{\left(t-m_\phi^2\right)^2}+\frac{u^2}{\left(u-m_\phi^2\right)^2}+\frac{t u}{\left(t-m_\phi^2\right)\left(u-m_\phi^2\right)}\right\},
+$$
+
+in terms of the Mandelstam variables which are
+
+$$
+\begin{aligned}
+s & =2 p \cdot p^{\prime}=2 k \cdot k^{\prime} \\
+t & =-2 p \cdot k=-2 p^{\prime} \cdot k^{\prime} \\
+u & =-2 p \cdot k^{\prime}=-2 p^{\prime} \cdot k
+\end{aligned}
+$$
+
+and satisfy $s+t+u=0$ in the massless limit.
+
+
+(iii) Consider also $m_\phi=0$, simplify $\overline{|\mathcal{M}|^2}$ accordingly and compute the total cross section.
+
+Hint: In the center-of-mass frame, the differential cross section for a scattering of two massless particles into two massless particles is given by
+
+$$
+\frac{\mathrm{d} \sigma}{\mathrm{~d} \Omega}=\frac{\overline{|\mathcal{M}|^2}}{64 \pi^2 s}
+$$
+
+
+
+The diagrams contributing to the process of scattering of two massless fermions in Yukawa theory are (time flowing from left to right)
+
+
+DIAGRAMM
+
+And the corresponding full amplitude for the process is
+
+$$
+\begin{aligned}
+i \mathcal{M} & =\left(-i g^2\right)\left(\bar{u}_{r^{\prime}}(\mathbf{k}) u_r(\mathbf{p}) \frac{1}{(k-p)^2-m_\phi^2} \bar{u}_{s^{\prime}}\left(\mathbf{k}^{\prime}\right) u_s\left(\mathbf{p}^{\prime}\right)\right. \\
+& \left.-\bar{u}_{r^{\prime}}(\mathbf{k}) u_s\left(\mathbf{p}^{\prime}\right) \frac{1}{\left(p-k^{\prime}\right)^2-m_\phi^2} \bar{u}_{s^{\prime}}\left(\mathbf{k}^{\prime}\right) u_r(\mathbf{p})\right)(+2 \text { points })
+\end{aligned}
+$$
+
+
+We want to get the non-polarized square of the amplitude $\overline{|\mathcal{M}|^2}$ and, as hinted, we can simplify the computation by identifying from the beginning the Mandelstam variables in the massless limit, which are given by
+
+$$
+\begin{aligned}
+s & =\left(p+p^{\prime}\right)^2=\left(k+k^{\prime}\right)^2=2 p \cdot p^{\prime}=2 k \cdot k^{\prime} \\
+t & =(k-p)^2=\left(k^{\prime}-p^{\prime}\right)^2=-2 p \cdot k=-2 p^{\prime} \cdot k^{\prime} \\
+u & =\left(k^{\prime}-p\right)^2=\left(k-p^{\prime}\right)^2=-2 p \cdot k^{\prime}=-2 p^{\prime} \cdot k
+\end{aligned}
+$$
+
+
+When computing $\overline{|\mathcal{M}|^2}$ we also use from the beginning that $m_f=0$ to simplify all expressions and get
+
+$$
+\begin{aligned}
+\overline{|\mathcal{M}|^2} & =\frac{g^4}{4} \sum_{r, s, r^{\prime}, s^{\prime}}\left\{\frac{1}{\left(t-m_\phi^2\right)^2} \bar{u}_{r^{\prime}}(\mathbf{k}) u_r(\mathbf{p}) \bar{u}_r(\mathbf{p}) u_{r^{\prime}}(\mathbf{k}) \bar{u}_{s^{\prime}}\left(\mathbf{k}^{\prime}\right) u_s\left(\mathbf{p}^{\prime}\right) \bar{u}_s\left(\mathbf{p}^{\prime}\right) u_{s^{\prime}}\left(\mathbf{k}^{\prime}\right)\right. \\
+& +\frac{1}{\left(u-m_\phi^2\right)^2} \bar{u}_{r^{\prime}}(\mathbf{k}) u_s\left(\mathbf{p}^{\prime}\right) \bar{u}_s\left(\mathbf{p}^{\prime}\right) u_{r^{\prime}}(\mathbf{k}) \bar{u}_{s^{\prime}}\left(\mathbf{k}^{\prime}\right) u_r(\mathbf{p}) \bar{u}_r(\mathbf{p}) u_{s^{\prime}}\left(\mathbf{k}^{\prime}\right) \\
+& \left.-\frac{1}{\left(t-m_\phi^2\right)\left(u-m_\phi^2\right)} \bar{u}_{r^{\prime}}(\mathbf{k}) u_s\left(\mathbf{p}^{\prime}\right) \bar{u}_{s^{\prime}}\left(\mathbf{k}^{\prime}\right) u_r(\mathbf{p}) \bar{u}_s\left(\mathbf{p}^{\prime}\right) u_{s^{\prime}}\left(\mathbf{k}^{\prime}\right) \bar{u}_r(\mathbf{p}) u_{r^{\prime}}(\mathbf{k})\right\}(+2 \text { points }) \\
+& =\frac{g^4}{4}\left\{\frac{1}{\left(t-m_\phi^2\right)^2} \operatorname{tr}\left[\not p \not l^{\prime}\right] \operatorname{tr}\left[p^{\prime} k \nmid\right]+\frac{1}{\left(u-m_\phi^2\right)^2} \operatorname{tr}\left[\not p^{\prime \prime}\right]\right] \operatorname{tr}\left[p^{\prime} \not l^{\prime \prime}\right]
+\end{aligned}
+$$
+
+
+$$
+\begin{aligned}
+& \left.-\frac{1}{\left(t-m_\phi^2\right)\left(u-m_\phi^2\right)} \operatorname{tr}\left[\not k^{\prime} p^{\prime} k^{\prime} \not p^{\prime}\right]\right\}(+2 \text { points }) \\
+& =\frac{g^4}{4}\left\{\frac{16(p \cdot k)(p \cdot k)}{\left(t-m_\phi^2\right)^2}+\frac{16\left(p \cdot k^{\prime}\right)\left(p^{\prime} \cdot k\right)}{\left(u-m_\phi^2\right)^2}\right. \\
+& \left.-\frac{8\left[(p \cdot k)\left(k^{\prime} \cdot p^{\prime}\right)+\left(p^{\prime} \cdot k\right)\left(p \cdot k^{\prime}\right)-\left(p \cdot p^{\prime}\right)\left(k \cdot k^{\prime}\right)\right]}{\left(t-m_\phi^2\right)\left(u-m_\phi^2\right)}\right\}(+2 \text { points }) \\
+& =\frac{g^4}{4}\left\{\frac{4 t^2}{\left(t-m_\phi^2\right)^2}+\frac{4 u^2}{\left(u-m_\phi^2\right)^2}-\frac{2\left[t^2+u^2-s^2\right]}{\left(t-m_\phi^2\right)\left(u-m_\phi^2\right)}\right\} \\
+& =g^4\left\{\frac{t^2}{\left(t-m_\phi^2\right)^2}+\frac{u^2}{\left(u-m_\phi^2\right)^2}-\frac{t^2+u^2-s^2}{2\left(t-m_\phi^2\right)\left(u-m_\phi^2\right)}\right\}(+1 \text { point })
+\end{aligned}
+$$
+
+
+Here one can use that $s+t+u=\sum_i m_i=0$ because we are considering the massless limit. Then it is $s^2=(t+u)^2 \rightarrow t^2+u^2-s^2=-2 t u$ simplify the result accordingly to
+
+$$
+\overline{|\mathcal{M}|^2}=g^4\left\{\frac{t^2}{\left(t-m_\phi^2\right)^2}+\frac{u^2}{\left(u-m_\phi^2\right)^2}+\frac{t u}{\left(t-m_\phi^2\right)\left(u-m_\phi^2\right)}\right\}(+1 \text { point })
+$$
+
+
+Now we can take also $m_\phi=0$ and observe that in this case the non-polarized squared amplitude gives
+
+$$
+\overline{|\mathcal{M}|^2}=3 g^4(+1 \text { point })
+$$
+
+
+We can finally use the fact that in the center-of-mass frame, the differential cross section for a scattering of two massless particles into two massless particles is given by
+
+$$
+\frac{\mathrm{d} \sigma}{\mathrm{~d} \Omega}=\frac{\overline{|\mathcal{M}|^2}}{64 \pi^2 s}=\frac{3 g^4}{64 \pi^2 s}
+$$
+
+
+The total cross section is then obtained by integrating over the angular dependence
+
+$$
+\sigma_{\mathrm{tot}}=\int_0^{2 \pi} \mathrm{~d} \phi \int_{-1}^1 \mathrm{~d} \cos (\theta) \frac{3 g^4}{64 \pi^2 s}=4 \pi \frac{3 g^4}{64 \pi^2 s}=\frac{3 g^4}{16 \pi s}=\frac{3 g^4}{64 \pi E^2}(+1 \text { point })
+$$
+
+
+
+\subsection{Problem 2 [Covariant derivative and the adjoint representation, 12 points]: }
+
+A scalar field $\phi^a$ is said to transform with the adjoint representation of $\operatorname{SU}(N)$ if for $U \in \operatorname{SU}(N)$ the associated matrix field $\phi=\phi^a T^a$ transforms as
+
+$$
+\phi^{\prime}=U \phi U^{\dagger} .
+$$
+
+(i) Show that the components $\phi^a$ transform in the following way:
+
+$$
+\phi^{\prime a}=2 \operatorname{tr}\left(U^{\dagger} T^a U T^b\right) \phi^b .
+$$
+
+(ii) The covariant derivative is defined as
+
+$$
+\mathcal{D}_\mu \phi(x)=\partial_\mu \phi(x)-i g\left[A_\mu(x), \phi(x)\right] .
+$$
+
+
+Using this definition demonstrate that under a gauge transformation $U(x) \in S U(N)$ the covariant derivative transforms as
+
+$$
+\left(\mathcal{D}_\mu \phi\right)^{\prime}(x)=U(x)\left(\mathcal{D}_\mu \phi(x)\right) U^{\dagger}(x)
+$$
+
+(iii) Show that
+
+$$
+\left(\mathcal{D}_\mu \phi\right)^a=\partial_\mu \phi^a-g f^{a b c} \phi^b A_\mu^c
+$$
+
+
+Hint: The structure constants are completely antisymmetric.
+
+(iv) Can you construct a kinetic term for $\phi$ that is gauge and Lorentz invariant?
+
+
+
+a) The generators are normalized to fulfill
+
+$$
+\operatorname{tr}\left(T^a T^b\right)=\frac{1}{2} \delta^{a b}
+$$
+
+and therefore
+
+$$
+\phi^a=2 \operatorname{tr}\left(\phi T^a\right) \cdot(+1 \text { point })
+$$
+
+
+Consequently $\phi^a$ transforms in the following way:
+
+$$
+\begin{aligned}
+\phi^{\prime a} & =2 \operatorname{tr}\left(\phi^{\prime} T^a\right) \\
+& =2 \operatorname{tr}\left(U T^b U^{\dagger} T^a\right) \phi^b \\
+& =2 \operatorname{tr}\left(U^{\dagger} T^a U T^b\right) \phi^b,(+1 \text { point })
+\end{aligned}
+$$
+
+where we used the cyclicity of the trace in the last step.
+
+
+
+b) Under a gauge-transformation $U(x)$, the covariant derivative transforms in the following way (the spatio-temporal dependence of $U(x)$ will be suppressed in the following):
+
+$$
+\begin{aligned}
+\left(\mathcal{D}_\mu \phi\right)^{\prime}= & \partial_\mu \phi^{\prime}-i g\left[A_\mu^{\prime}, \phi^{\prime}\right](+1 \text { point }) \\
+= & \partial_\mu\left(U \phi U^{\dagger}\right)-i g\left[U A_\mu U^{\dagger}-\frac{i}{g}\left(\partial_\mu U\right) U^{\dagger}, U \phi U^{\dagger}\right](+1 \text { point }) \\
+= & \left(\partial_\mu U\right) \phi U^{\dagger}+U\left(\partial_\mu \phi\right) U^{\dagger}+U \phi\left(\partial_\mu U^{\dagger}\right) \\
+& -i g U\left[A^\mu, \phi\right] U^{\dagger}-\left[\left(\partial_\mu U\right) U^{\dagger}, U \phi U^{\dagger}\right],(+1 \text { point })
+\end{aligned}
+$$
+
+where we made use of the multilinearity of the commutator in the last step. Using
+
+$$
+\begin{aligned}
+\mathbb{1} & =U U^{\dagger} \\
+\Rightarrow 0 & =\left(\partial_\mu U\right) U^{\dagger}+U\left(\partial_\mu U^{\dagger}\right),(+1 \text { point })
+\end{aligned}
+$$
+
+one can reexpress the second commutator in equation (15):
+
+$$
+\begin{aligned}
+{\left[\left(\partial_\mu U\right) U^{\dagger}, U \phi U^{\dagger}\right] } & =\left(\partial_\mu U\right) \phi U^{\dagger}-U \phi U^{\dagger}\left(\partial_\mu U\right) U^{\dagger} \\
+& =\left(\partial_\mu U\right) \phi U^{\dagger}+U \phi\left(\partial_\mu U^{\dagger}\right),
+\end{aligned}
+$$
+
+collecting all results we get
+
+$$
+\begin{aligned}
+\left(\mathcal{D}_\mu \phi\right)^{\prime} & =U\left(\partial_\mu \phi\right) U^{\dagger}-i g U\left[A^\mu, \phi\right] U^{\dagger} \\
+& =U\left(\left(\partial_\mu \phi\right)-i g\left[A^\mu, \phi\right]\right) U^{\dagger} \\
+& =U\left(\mathcal{D}_\mu \phi\right) U^{\dagger},(+1 \text { point })
+\end{aligned}
+$$
+
+which is exactly the transformation property one should expect from a covariant derivative acting on fields that transform under the adjoint representation.
+c) Reexpressing the covariant derivative in terms of the generators one gets:
+
+$$
+\begin{aligned}
+\mathcal{D}_\mu \phi & =\partial_\mu \phi-i g\left[A_\mu, \phi\right] \\
+& =\partial_\mu \phi^a T^a-i g\left[A_\mu^c T^c, \phi^b T^b\right](+1 \text { point }) \\
+& =\partial_\mu \phi^a T^a-i g A_\mu^c \phi^b\left[T^c, T^b\right] \\
+& =\partial_\mu \phi^a T^a+g A_\mu^c \phi^b f^{c b a} T^a(+1 \text { point }) \\
+& =\partial_\mu \phi^a T^a-g f^{a b c} \phi^b A_\mu^c T^a(+1 \text { point }) \\
+& =\left(\partial_\mu \phi^a-g f^{a b c} \phi^b A_\mu^c\right) T^a \\
+& =\left(\mathcal{D}_\mu \phi\right)^a T^a(+1 \text { point })
+\end{aligned}
+$$
+
+d) Using the cyclic property of the trace one can easily show that the following term is Lorentz and gauge invariant:
+
+$$
+\operatorname{tr}\left(\left(\mathcal{D}_\mu \phi\right)\left(\mathcal{D}^\mu \phi\right)\right)(+1 \text { point })
+$$
+
+\subsection{Problem 3 [Varia, 25 points]:}
+
+Answer the following questions by a few brief words or formulae.
+
+(i) Give one physical effect of a QFT that is due to quantum theory and one due to special relativity.
+
+(ii) Draw all Feynman diagrams to order $\alpha_{\text {e.m. }}$ in the Standard Model for the processes $e^{+} e^{-} \rightarrow \mu^{+} \mu^{-}$and $e^{+} e^{-} \rightarrow e^{+} e^{-}$
+
+(iii) Under which circumstances is a particle well described by:
+
+(a) the Schrödinger equation?
+
+(b) the Weyl equation?
+
+(iv) What motivates the gauge group $\operatorname{SU}(2)$ for the weak interactions?
+
+(v) Discuss the qualitative behavior with CoM energy $E$ of the ratio
+
+$$
+R(E)=\frac{\sigma\left(e^{+} e^{-} \rightarrow \text { hadrons }\right)}{\sigma\left(e^{+} e^{-} \rightarrow \mu^{+} \mu^{-}\right)}
+$$
+
+(a) Draw the Feynman diagram for the process in the numerator.
+
+(b) What properties of the quarks involved in the reaction do play a role?
+
+
+(vi) Write down the relativistic wave equations for massive particles of spin $0,1 / 2,1$ and massless particles of spin 1 and the behavior under Lorentz transformation of the corresponding fields.
+
+(vii) Consider the part of a matrix element $i \mathcal{M}=\beta \bar{u}_r(\mathbf{p}) \gamma_\mu\left(1-\gamma_5\right) u_s(\mathbf{q}) \epsilon_\lambda^\mu(\mathbf{k})$, with $\beta$ a coupling constant.
+
+(a) Argue which interaction in the Standard Model can produce this expression.
+
+(b) What are the participating particles? Draw the corresponding Feynman diagram.
+
+(c) Which is the symmetry that is explicitly broken by this interaction?
+
+
+
+(i) The creation and annihilation of particles is possible due to the energy-mass equivalence of special relativity. The fact that one has to compute interference terms for certain matrix elements is due to quantum theory. ( +2 points)
+
+(ii) In the following diagrams, time flows from left to right
+
+
+DIAGRAMM
+
+
+- $e^{-} e^{+} \rightarrow e^{-} e^{+}$(+2 points)
+
+- $e^{-} e^{+} \rightarrow \mu^{-} \mu^{+}$( +2 points)
+
+
+(iii) :
+
+(a) The Schrödinger equation is appropriate for massive particles in the nonrelativistic, low-energy limit. (+1 point)
+
+(b) The Weyl equation describes massless spin- $\frac{1}{2}$ particles. ( +1 point)
+
+(iv) There are two charged currents and one conserved current corresponding to the three gauge boson associated with weak interaction: $W^{ \pm}$and $Z^0$. The adjoint representation of $S U(2)$ has dimension $2^2-1=3$ which matches the number of gauge bosons. (+2 points)
+
+(v) The behavior as a function of the CoM energy $E$ is of discontinuous growth because while $E$ grows thresholds for the production of heavier $q \bar{q}$ pairs are reached. $(+1$ point) Heavier and heavier flavors participate in the production of hadrons with weights in the cross section given by their fractional charge squared. On top, the existence of a color degree of freedom gives an additional factor of 3. Hence the list of properties that play a role:
+
+(a) Charges; ( +1 point)
+
+(b) Masses; (+1 point)
+
+
+(c) Color. (+1 point)
+
+(vi) 
+
+(a) massive spin 0: (+1 point)
+
+- Klein-Gordon equation: $\left(\partial_\mu \partial^\mu+m^2\right)=0$
+
+- Lorentz transformations: $\phi^{\prime}\left(x^{\prime}\right)=\phi(x)$
+
+(b) massive spin 1/2: (+1 point)
+
+- Dirac equation: $\left(i \gamma^\mu \partial_\mu-m\right) \psi(x)=0$
+
+- Lorentz transformations: $\psi^{\prime}\left(x^{\prime}\right)=S(\Lambda) \psi(x)$, where $S(\Lambda) \gamma^\mu \Lambda^\sigma{ }_\mu S^{-1}(\Lambda)=\gamma^\sigma$
+
+(c) massive spin 1: (+1 point)
+
+- Proca equation: $\partial_\nu F^{\mu \nu}+m^2 A^\mu=0$, which implies $\partial_\mu A^\mu=0$ and $(\square+ \left.m^2\right) A^\mu=0$
+
+- Lorentz transformations: $A^\mu\left(x^{\prime}\right)=\Lambda^\mu{ }_\nu A^\nu(x)$
+
+(d) massless spin 1: (+1 point)
+
+- Maxwell equations: $\partial_\mu F^{\mu \nu}$, which read $\square A^\mu=0$ in radiation or Lorentz gauge
+
+- Lorentz transformations: same as in massive case
+
+(vii) :
+
+(a) The matrix element contains the projector on left handed components and therefore it must come from the weak interaction. (+2 points)
+
+(b) In case $u$ and $\bar{u}$ correspond to the same particle, the two participating left handed fermions must be two neutrinos from the same letpon species $\left(\nu_e, \nu_\mu\right.$ or $\left.\nu_\tau\right)$ interacting with a neutral current ( $Z$ Boson). ( +2 points) The associated Feyman graph is (with time flowing from left to right):
+
+DIAGRAMM
+
+(+1 point)
+
+Alternatively, if the fermions correspond to different particles one can have the process $e^{-} / \mu^{-} / \tau^{-}+W^{+} \rightarrow \nu_{e / \mu / \tau}$
+
+
+(c) The process explicitly violates parity. (+2 points)
+
+\printbibliography
+\end{document}

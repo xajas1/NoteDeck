@@ -1,0 +1,153 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{anyt/global//global/global/global}
+    \entry{BaerSpin}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=156d2c984fab3af07234e57bc99024c9}{%
+           family={Baer},
+           familyi={B\bibinitperiod},
+           given={Christian},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{156d2c984fab3af07234e57bc99024c9}
+      \strng{fullhash}{156d2c984fab3af07234e57bc99024c9}
+      \strng{fullhashraw}{156d2c984fab3af07234e57bc99024c9}
+      \strng{bibnamehash}{156d2c984fab3af07234e57bc99024c9}
+      \strng{authorbibnamehash}{156d2c984fab3af07234e57bc99024c9}
+      \strng{authornamehash}{156d2c984fab3af07234e57bc99024c9}
+      \strng{authorfullhash}{156d2c984fab3af07234e57bc99024c9}
+      \strng{authorfullhashraw}{156d2c984fab3af07234e57bc99024c9}
+      \field{labelalpha}{Bae18}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Spin Geometry}
+      \field{year}{2018}
+    \endentry
+    \entry{HilgertNeeb2012}{book}{}{}
+      \name{author}{2}{}{%
+        {{hash=95d2ea3b325ad80303101ea2eb35eb91}{%
+           family={Hilgert},
+           familyi={H\bibinitperiod},
+           given={Joachim},
+           giveni={J\bibinitperiod}}}%
+        {{hash=ee56dd1fa5317f17beb15bfe7237d675}{%
+           family={Neeb},
+           familyi={N\bibinitperiod},
+           given={Karl-Hermann},
+           giveni={K\bibinithyphendelim H\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {New York}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{95c3f373716e87486025ef2fca983a1f}
+      \strng{fullhash}{95c3f373716e87486025ef2fca983a1f}
+      \strng{fullhashraw}{95c3f373716e87486025ef2fca983a1f}
+      \strng{bibnamehash}{95c3f373716e87486025ef2fca983a1f}
+      \strng{authorbibnamehash}{95c3f373716e87486025ef2fca983a1f}
+      \strng{authornamehash}{95c3f373716e87486025ef2fca983a1f}
+      \strng{authorfullhash}{95c3f373716e87486025ef2fca983a1f}
+      \strng{authorfullhashraw}{95c3f373716e87486025ef2fca983a1f}
+      \field{labelalpha}{HN12}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{series}{Springer Monographs in Mathematics}
+      \field{title}{Structure and Geometry of Lie Groups}
+      \field{year}{2012}
+    \endentry
+    \entry{Kraus2025}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=97259961adc03e806f479b3ccee58fe3}{%
+           family={Kraus},
+           familyi={K\bibinitperiod},
+           given={Margarita},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Johannes Gutenberg-Universität Mainz, Institut für Mathematik}%
+      }
+      \strng{namehash}{97259961adc03e806f479b3ccee58fe3}
+      \strng{fullhash}{97259961adc03e806f479b3ccee58fe3}
+      \strng{fullhashraw}{97259961adc03e806f479b3ccee58fe3}
+      \strng{bibnamehash}{97259961adc03e806f479b3ccee58fe3}
+      \strng{authorbibnamehash}{97259961adc03e806f479b3ccee58fe3}
+      \strng{authornamehash}{97259961adc03e806f479b3ccee58fe3}
+      \strng{authorfullhash}{97259961adc03e806f479b3ccee58fe3}
+      \strng{authorfullhashraw}{97259961adc03e806f479b3ccee58fe3}
+      \field{labelalpha}{Kra25}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{19}
+      \field{month}{7}
+      \field{note}{Lecture notes}
+      \field{title}{Eichtheorie}
+      \field{year}{2025}
+      \field{dateera}{ce}
+    \endentry
+    \entry{LawsonMichelsohn2016}{book}{}{}
+      \name{author}{2}{}{%
+        {{hash=d3d74179af1b78aa7d8b267d0216ad0d}{%
+           family={Lawson},
+           familyi={L\bibinitperiod},
+           given={Blaine},
+           giveni={B\bibinitperiod}}}%
+        {{hash=f5699c7a2e136fc198535ae79b4dacc7}{%
+           family={Michelsohn},
+           familyi={M\bibinitperiod},
+           given={Marie-Louise},
+           giveni={M\bibinithyphendelim L\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Princeton, NJ}%
+      }
+      \list{publisher}{1}{%
+        {Princeton University Press}%
+      }
+      \strng{namehash}{9cb2123195d93eeed0107df04cfb37da}
+      \strng{fullhash}{9cb2123195d93eeed0107df04cfb37da}
+      \strng{fullhashraw}{9cb2123195d93eeed0107df04cfb37da}
+      \strng{bibnamehash}{9cb2123195d93eeed0107df04cfb37da}
+      \strng{authorbibnamehash}{9cb2123195d93eeed0107df04cfb37da}
+      \strng{authornamehash}{9cb2123195d93eeed0107df04cfb37da}
+      \strng{authorfullhash}{9cb2123195d93eeed0107df04cfb37da}
+      \strng{authorfullhashraw}{9cb2123195d93eeed0107df04cfb37da}
+      \field{labelalpha}{LM16}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{series}{Princeton Mathematical Series}
+      \field{title}{Spin Geometry}
+      \field{volume}{38}
+      \field{year}{2016}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

@@ -556,4 +556,546 @@ H_0=\frac{\hbar\omega_0}{2}\sigma_z,\quad V(t)=\hbar\Omega\cos(\omega t)\sigma_x
 \end{enumerate}
 
 
+
+
+\pagebreak
+
+
+
+Klausur - Quantenmechanik I SS 08
+Samstag, 21.06.2008, 10.00-11.30 Uhr
+Version A
+
+1. Richtig/Falsch-Fragen (20Pkte)
+
+Kreuzen Sie an, welche der folgenden Aussagen richtig oder falsch sind:
+
+
+a) Nur hermitesche Operatoren ( $\hat{A}^{\dagger}=\hat{A}$ ) haben eine orthonormale Basis aus
+b) Zwei normale, kommutierende Matrizen $A$ und $B\left(A A^{\dagger}=A^{\dagger} A, B B^{\dagger}=B^{\dagger}\right.$, haben immer eine gemeinsame Basis von Eigenvektoren.
+c) Wenn Operator $\hat{A}$ (der nicht explizit von der Zeit abhängt) mit dem Hamil vertauscht $([\hat{A}, \hat{\mathcal{H}} \mid=0)$, ist $\langle\dot{A}\rangle$ zeitunabhängig.
+d) Die Existenz des quantenmechanischen Spins wurde schon von Isaac Newto
+e) Der Messprozess in der Quantenmechanik ist nach heutigem Verständnis de
+f) Der Impulsoperator generiert Translationen.
+g) Physikalische Observablen (Messgrößen) kömen auch durch nicht-hermitesa dargestellt werden.
+h) Wenn ein quantenmechanisches Teilchen mit der Energie $E>V_0$ über eine der Höhe $V_0$ fliegt, kann keine Reflexion stattfinden.
+i) Im Schrödinger/Heisenberg Bild gilt: Wenn $\left|\hat{A}_{I I}(t=0), \hat{\mathcal{H}}\right|=0$ und $\hat{\mathcal{H}}$ zeitu ist $\hat{A}_H(t)=\hat{A}_H(t-0) \quad \hat{A}_s$.
+j) Der Bahndrehimpuls $L_z$ kann Werte $\frac{n}{2} t$ init $n \in \mathbb{Z}$ annehmen.
+
+
+
+2. Multiple-Choice-Fragen (8 Punkte)
+
+Zu jeder Teilaufgabe gibt es nur eine richtige Antwort, welche zwei Punkte bringt. Teilaufgaben mit mehreren angekreuzten Antworten sind ungültig. Im Falle einer falschen Antwort findet kein Punkteabzug statt.
+1) Der Drehimpulszustand $|j, m\rangle$ mit $\hat{\mathbf{J}}^2|j, m\rangle-\hbar^2 j(j+1)|j, m\rangle$ und $j_z|j, m\rangle=h m|j, m\rangle$ ist ein Eigenzustand von
+
+1) Der Drehimpulszustand $|j, m\rangle$ mit $\hat{\mathbf{J}}^2|j, m\rangle-\hbar^2 j(j+1)|j, m\rangle$ und $j_z|j, m\rangle=h m \mid j, m$ Eigenzustand von
+- $\hat{J}_z+i \hat{J}_y$
+- $\hat{j}_x+\hat{j}_y$
+- $\hat{J}_x^2-\hat{J}_y^2$
+- $\quad \hat{J}_x^2+\hat{J}_y^2$
+2) Wir betrachten ein quantenmechanisches Teilchen in einem eindimensionalen Potentia attraktiven $\delta$-Funktion entspricht: $V(x)=-g \delta(x)$ mit $g>0$. Wieviele antisymmetrische Zustände können maximal in diesem Potential vorkommen?
+- 0
+- 1
+$\square \quad 2$
+$\square \infty$
+3) Welcher der angegebenen Ausdrücke entspricht der Ortswellenfunktion $\psi_\alpha(x)$ eines Z
+- $\int d x|x\rangle\langle x \mid \alpha\rangle$
+ $\int d x \int d x^{\prime}\left|x^{\prime}\right\rangle\langle x \mid \alpha\rangle$
+$\square\langle x \mid \alpha\rangle$
+- $|x\rangle\langle\alpha|$
+4) Wir addieren zwei Drehimpulszustände mit $j_1=\frac{5}{2}$ und $j_2=6$. Welcher resultierende Zustand ist möglich für den Gesamtdrehimpuls $\mathbf{J}=\mathbf{J}_1+\mathbf{J}_2$ ?
+- $\left.\mid j=6, j_z=1 / 2\right\}$.
+$\square \quad\left|j=5 / 2, j_z=3 / 2\right\rangle$.
+$\square \quad\left|j=5 / 2, j_z=1 / 2\right\rangle$.
+- $\left|j=9 / 2, j_z=1 / 2\right\rangle$.
+
+
+
+3. Teilchen im endlichen Potentialtopf (12Pkte)
+
+Wir betrachten ein quantenmechanisches Teilchen in einem eindimensionalen endlichen Potentialtopf $V(x)$
+
+$$
+V(x)=\left\{\begin{array}{ll}
+-V_0(2+\cos (\pi x / a)), & \text { für }|x|<\frac{a}{2} \\
+0 & \text { sonst }
+\end{array}, \text { mit } V_0>0,\right.
+$$
+
+beschrieben durch die Schrödingergleichung
+
+$$
+\left(-\frac{\hbar^2}{2 M} \frac{\partial^2}{\partial x^2}+V(x)\right) v(x)=E \psi(x)
+$$
+
+a) (4Pkte) Kreuzen Sie an, welche der folgenden Aussagen richtig oder falsch sind:
+
+\begin{tabular}{ll} 
+Richtig & Falsch \\
+$\square$ & $\square$ \\
+$\square$ & $\square$
+\end{tabular}
+
+Für die Existenz eines gebundenen Zustands braucht man einen minimalen Wert von $V_0$. Die Wellenfunktion des Grundzustands in diesem Potential ist ungerade: $\phi(-x)--\phi(x)$.
+b) (8Pkte) Im Bild ist ein gebundener Eigenzustand dieses Potentials eingezeichnet. Zählen Sie stichpunktartig alle Fehler auf und geben sie eine kurze Begründung an.
+
+
+4. Verschobener harmonischer Oszillator (30Pkte)
+
+In dieser Aufgabe betrachten wir den eindimensionalen verschobenen harmonischen Oszillator. Der Hamiltonoperator ist gegeben durch
+
+$$
+\hat{\mathcal{H}}=\frac{\hat{p}^2}{2 M}+\frac{M \omega^2}{2} \hat{x}^2+\lambda \dot{x}
+$$
+
+mit $|\hat{x}, \hat{p}|=i h$ und $\lambda$ ist eine reelle Konstante. Wir definieren
+
+$$
+\hat{b}=\sqrt{\frac{M \omega}{2 \hbar}}\left(\hat{x}+\frac{i \hat{p}}{M \omega}+\frac{\lambda}{M \omega^2}\right), \quad \hat{b}^{\dagger}=\sqrt{\frac{M \omega}{2 \hbar}}\left(\hat{x}-\frac{i \hat{p}}{M \omega}+\frac{\lambda}{M \omega^2}\right) .
+$$
+
+a) (10Pkte) Zeigen Sie, dass $\left[\hat{b}, \hat{b}^{\dagger}\right]=1$.
+b) (10Pkte) Schreiben Sie den Hamiltonoperator mit Hilse von $\hat{b}$ und $\hat{b}^{\dagger}$ um. Zeigen Sie, dass man den Hamiltonoperator durch den Anzahloperator $\hat{N}_b=\hat{b}^{\dagger} \hat{b}$ ausdrücken kann als
+
+$$
+\hat{\mathcal{H}}=\hbar \omega \hat{N}_b+\text { Konstante }
+$$
+
+und bestimmen Sie die Konstante.
+c) (10Pkte) Es sci $|0\rangle$ der Zustand mit $\hat{b}|0\rangle=0$. Zeigen Sie, dass der Zustand $|n\rangle=\frac{\left(\hat{b}^t\right)^n}{\sqrt{n!}}|0\rangle$ ein Eigenzustand des Hamiltonoperators ist, und berechnen Sie den zugchörigen Eigenwert.
+
+
+Sie haben die Wahl entweder Aufgabe 5 oder Aufgabe 6 zu machen. Wenn beide bearbeitet werden, werden maximal 30 Punkte aus Aufgabe 5 und 6 angerechnet.
+
+5: Messung von Spin- $\frac{1}{2}$ Teilchen (30 Punkte)
+Wir betrachten ein Spin- $\frac{1}{2}$ Teilchen im Zustand
+
+$$
+|\psi\rangle=\frac{3}{5}\left|S_z,+\right\rangle+\frac{4}{5}\left|S_z,-\right\rangle \doteq\left(\frac{\frac{3}{5}}{\frac{4}{5}}\right)
+$$
+
+
+Jetzt wird $\hat{S}_x$ gemessen.
+a) (10Pkte) Was sind die möglichen Ergebnisse einer cinzelnen Messung?
+b) (12Pkte) Berechnen Sie für jede Möglichkeit die Wahrscheinlichkeit, den zugehörigen Projektor und den Zustand des Teilchens nach der Messung.
+c) (8Pkte) Berechnen Sie auch den Erwartungswert $\left\langle\hat{S}_x\right\rangle$ im Zustand $|\psi\rangle$.
+
+6: Spinpräzession (30 Punkte)
+Flcktronen besitzen ein intrinsisches magnetisches Dipolmoment $\underline{\hat{\mu}}=\left(\hat{\mu}_x, \hat{\mu}_y, \hat{\mu}_z\right)$, das proportional zum Spin ist:
+
+$$
+\hat{\underline{\mu}}=\frac{e g}{2 m} \hat{\mathbf{S}},
+$$
+
+wobei hier die elektrische Ladung $e<0$ definiert ist. Wir betrachten ein Elektron in einem homogenen Magnetfeld $\mathbf{B}=(0,0, B)$. Der Hamiltonoperator des Systems ist durch die potentielle Energie des magnetischen Dipols im Feld B gegeben:
+
+$$
+\hat{\mathcal{H}}=-\hat{\mu} \cdot \mathbf{B} .
+$$
+
+
+Das Elektron befinde sich zur Zeit $t=0$ im Zustand $|\psi(0)\rangle=\frac{3}{5}\left|S_z, 1\right\rangle$ | $\frac{4}{5}\left|S_z,-\right\rangle$ ).
+a) (15Pkte) Berechnen Sie die Zeitentwicklung des Zustands des Elektrons $|\psi(t)\rangle$.
+b) (15Pkte) Berechnen Sie die Erwartungswerte von $\hat{S}_x, \hat{S}_y$ und $\hat{S}_z$ als Funktion der Zeit. Welche dieser Erwartungswerte sind zeitunabhängig? Geben Sie eine physikalische Erklärung dafür.
+
+\pagebreak
+
+
+
+Nachklausur - Quantenmechanik I SS 08
+Preitag, $10.10 .2008,10.00-11.30 \mathrm{Uhr}$
+Version B
+
+
+
+1. Richtig/Falsch-Fragen (20 Punkte)
+
+Kreuzen Sie an, welche der folgenden Aussagen richtig oder falsch sind:
+
+a) Antihermitesche Operatoren (d.h. $\hat{A}^{\dagger}=-\hat{A}$ ) haben rein imaginäre Eigenwerte.
+b) Unitäre Operatoren (d.h. $\hat{A}^{\dagger} \hat{A}=\hat{A} \hat{A}^{\dagger}=1$ ) sind immer auch hermitesch (d.h. $\hat{A}^{\dagger}=\hat{A}$ ).
+c) Kommutierende Observablen $\hat{A}$ und $\hat{B}$ können gleichzeitig gemessen werden.
+d) Die Ortswellenfunktion $\psi(x)$ eines Teilchens entspricht der Wahrscheinlichkeit, das Teilchen am Ort $\mathbf{x}$ zu messen.
+e) Die Eigenzustände eines Teilchens in einem symmetrischen Potential können immer symmetrisch oder antisymmetrisch gewählt werden.
+f) In der Quantenmechanik sind nicht nur Effekte der Felder, sondern auch Effekte der Potentiale allein messbar.
+g) Es wird ein hermitescher Operator $\hat{A}$ mit Eigenwerten $a_n$ einmal gemessen. Als Messergebnis können nur die Werte $a_n$ auftreten.
+h) Der Drehimpulsoperator generiert Translationen.
+i) Normierbare Eigenzustände (d.h. gebundene Zustände) der Schrödingergleichung in einer Dimension sind nicht entartet.
+j) Wir betrachten ein Teilchen in drei Raumdimensionen in einem Zentralpotential $V(\tau)$. Ein endliches Zentralpotential $V(r)$ muss eine Mindeststärke überschreiten, damit das dreidimensionale Schrödinger-Problem einen Bindungszustand hat.
+
+
+
+
+
+2. Multiple-Choice-Fragen (8 Punkte)
+
+Zu jeder Teilaufgabe gibt es nur eine richtige Antwort, welche zwei Punkte bringt. Teilaufgaben mit mehreren angekreuzten Antworten sind ungültig. Im Falle einer falschen Antwort findet kein Punkteabzug statt.
+1) Wir betrachten ein quantenmechanisches Teilchen in einem eindimensionalen endlichen Potentialtop $f(x)$
+
+$$
+V(x)= \begin{cases}-V_{01}, & \text { für }|x|<\frac{c}{2} \\ 0 & \text { sonst }, \text { mit } V_0>0 .\end{cases}
+$$
+
+
+Wievicle antisymmetrische gebundene Zustände können maximal in diesem Potential vorkommen?
+
+0
+
+1
+$\infty$
+
+Das hängt von $V_0 \mathrm{ab}$.
+2) Wir betrachten ein Spin- $\frac{1}{2}$-Teilchen im Zustand $|\psi\rangle$. Was ist der kleinste Winkel, um welchen das Teilchen gedreht werden muss, damit man genau den Zustand $-|\psi\rangle$ bekommt?
+$\pi / 2$
+$\pi$.
+$2 \pi$
+$4 \pi$
+3) Wir addieren zwei Drehimpulszustände mit $j_1=\frac{7}{2}$ und $j_2=4$. Welcher resultierende Zustand ist möglich für den Gesamtdrehimpuls $\mathrm{J}=\mathrm{J}_1+\mathrm{J}_2$ ?
+
+$$
+\begin{aligned}
+& \left|j=6, j_z=1 / 2\right\rangle . \\
+& \left|j=5 / 2, j_z=3 / 2\right\rangle . \\
+& \left|j=5 / 2, j_z=7 / 2\right\rangle . \\
+& \left|j=4, j_z=0\right\rangle .
+\end{aligned}
+$$
+
+4)Das Atommodell mit quantisierten Elektronbahnen wurde vorgeschlagen von
+
+Albert Einstein
+Lukas Podolski
+Niels Bohr
+Erwin Schrödinger
+
+
+Wir betrachten ein quantenmechanisches Teilchen in einem eindimensionalen endlichen Potentialtopf $V(x)$
+
+$$
+V(x)= \begin{cases}-V_0 & \text { für }|x|<\frac{a}{2} \\ -V_1 & \text { für } \frac{a}{2}<|x|<\frac{b}{2} \quad, \quad \text { mit } V_0>V_1>0, \\ 0 & \text { sonst }\end{cases}
+$$
+
+beschrieben durch die Schrödingergleichung
+
+$$
+\left(-\frac{\hbar^2}{2 M} \frac{\partial^2}{\partial x^2}+V(x)\right) \psi(x)=E \psi(x)
+$$
+
+
+Geben Sle die allgemeine Form der Wellenfunktion in den Bereichen $|x|<\frac{a}{2}, \frac{a}{2}<|x|<\frac{b}{2}$, und $|x|>\frac{b}{2}$ für die folgenden Fälle an (Beachten Sie: die unbekannten Koeffzienten müssen nicht mithilfe der Anschlussbedingungen bestimmt werden):
+a) (6Pkte) $E<-V_1$
+b) (6Pkte) $-V_1<E<0$
+c) (6Pkte) $E>0$
+d) (8Pkte) Skizzieren Sie für alle diese Fälle auch die Wellenfunktion. Achten Sie in der Skizze auch auf die Anschlussbedingungen und die (Anti-)Symmetrie der Wellenfunktion.
+
+
+4: Stern-Gerlach Experin
+
+Wir betrachten folgendes Stern-Gerlach Experiment. An einem gleichmäßig gemischten Strahl bestehend aus je $50 \%\left|S_z,+\right\rangle$ und $\left|S_z,-\right\rangle$ Elektronen wird zunächst der Spin in $\hat{z}$-Richtung gemessen. Nur Teilchen mit Eigenwert $\hbar / 2$ werden durchgelassen, die Teilchen mit Eigenwert $-\hbar / 2$ werden abgefangen. Danach wird die Spinkomponente in Richtung $\cos \theta \hat{\mathrm{e}}_z+\sin \theta \hat{\mathrm{e}}_z$ gemessen. Wieder gilt, dass nur Teilchen mit Eigenwert $\hbar / 2$ durchgelassen werden und die Teilchen mit Eigenwert $-\hbar / 2$ abgefangen werden. Schließlich wird wieder der Spin in $\hat{z}$-Richtung gemessen und nur Teilchen mit Eigenwert $\hbar / 2$ werden durchgelassen, die Teilchen mit Eigenwert $-\hbar / 2$ werden abgefangen
+a) (8Pkte) Beweisen Sie, dass der Operator $\cos \theta \hat{S}_z+\sin \theta \hat{S}_z$ die Eigenwerte $\pm \hbar / 2$ hat und zeigen Sie, dass die Eigenvektoren gegeben sind durch $\left|\cos \theta \hat{S}_z+\sin \theta S_z,+\right\rangle \doteqdot\binom{\cos (\theta / 2)}{\sin (\theta / 2)}$ und $\left|\cos \theta \hat{S}_z+\sin \theta S_x,-\right\rangle \doteq\binom{\sin (\theta / 2)}{-\cos (\theta / 2)}$
+b) (8Pkte) Bestimmen Sie den Anteil der Teilchen, die durch den ganzen Versuchsaufbau durchgelassen werden als Funktion von $\theta$. Erklären Sie die Minima und Maxíma dieser Funktion.
+
+Sie haben die Wahl entweder Aufgabe 5 oder Aufgabe 6 zu machen. Wenn beide bearbeitet werden, werden maximal 30 Punkte aus Aufgabe 5 und 6 angerechnet.
+
+
+5. Zweidimensionaler harmonischer Oszillator (30 Punkte)
+
+In dieser Aufgabe betrachten wir den zweidimensionalen isotropen harmonischen Oszillator. Der Hamiltonoperatc ist gegeben durch
+
+$$
+\hat{\mathcal{H}}=\frac{\hat{p}_x^2+\hat{p}_y^2}{2 M}+\frac{\omega^2 M}{2}\left(\hat{x}^2+\hat{y}^2\right),
+$$
+
+mit $\left[\hat{x}, \hat{p}_x\right]=\left[\hat{y}, \hat{p}_y\right]=i \hbar$ und $\left[\hat{x}, \hat{p}_y\right]=\left[\hat{y}, \hat{p}_x\right]=0$. Wir definieren
+
+$$
+\hat{a}_x=\sqrt{\frac{M \omega}{2 \hbar}}\left(\hat{x}+\frac{i \hat{p}_x}{M \omega}\right), \quad \hat{a}{ }_z^{\dagger}=\sqrt{\frac{M \omega}{2 \hbar}}\left(\hat{x}-\frac{i \hat{p}_z}{M \omega}\right), \quad \hat{a}_y=\sqrt{\frac{M \omega}{2 \hbar}}\left(\hat{y}+\frac{i \hat{p}_y}{M \omega}\right), \quad \hat{a}_y^{\dagger}=\sqrt{\frac{M \omega}{2 \hbar}}\left(\hat{y}-\frac{i \hat{p}_y}{M \omega}\right)
+$$
+
+a) (6Pkte) Zeigen Sie, dass $\left[\hat{a}_\alpha, \hat{a}_\beta^{\dagger}\right]=\delta_{\alpha \beta}, \alpha, \beta \in\{x, y\}$.
+b) (9Pkte) Schreiben Sie den Hamiltonoperator mit Hilfe von $\hat{a}_a$ und $\hat{a}_\alpha^{\dagger}$.
+
+Es sei $|0\rangle$ der Zustand mit $\hat{a}_\alpha|0\rangle=0$ und $\left|n_x, n_y\right\rangle=\frac{\left(a_x^t\right)^{n_z}\left(a_y^t\right)^{n_y}}{\sqrt{\left(n_z l\right)\left(n_y l\right)}}|0\rangle$.
+c) (12Pkte) Zeigen Sie, dass der Zustand $\left|n_z, n_y\right\rangle$ ein Eigenzustand des Hamiltonoperators ist mit Energieeigenwert $E_{n_z, n_y}=\pi \omega\left(n_z+n_y+1\right)$.
+d) (3Pkte) Bestimmen Sie den Entartungsgrad eines beliebigen Eigenwerts $E_N=\hbar \omega(N+1)$, wobei $N \in \mathbb{N}$.
+
+
+
+
+
+
+Aufgabe 6: Elektromagnetische Felder: Landau-Niveaus (30 Punkte)
+Der Hamiltonoperator eines Teilchens mit Masse $m$ in einem elektromagnetischen Feld, beschrieben durch das Vektorpotential $\mathrm{A}(\mathrm{x}, t)$ und das Skalarpotential $\phi(\mathrm{x}, t)$, lautet
+
+Wir definieren
+
+$$
+\hat{H}=\frac{1}{2 m}\left(\hat{\mathrm{p}}-\frac{e}{c} \mathbf{A}(\hat{\mathrm{x}}, t)\right)^2+e \phi(\hat{\mathrm{x}}, t)
+$$
+
+mit
+
+$$
+m \dot{\hat{\mathbf{x}}}=\hat{\mathbf{p}}-\frac{e}{c} \boldsymbol{A}(\hat{\mathbf{x}}, t)
+$$
+
+so dass der Hamiltonoperator lautet
+
+$$
+\left[m \dot{\tilde{x}}_\alpha, m \dot{\tilde{x}}_\beta\right]=i \hbar \frac{e}{c} \epsilon_{\alpha \beta} \hat{B}_\gamma, \quad \alpha, \beta, \gamma \in\{1,2,3\} \doteq\{x, y, z\}
+$$
+
+
+$$
+\hat{\mathcal{H}}=\frac{1}{2 m}(m \hat{\dot{x}})^2+e \phi(\hat{\mathbf{x}}, t)
+$$
+
+
+Wir betrachten ein magnetisches Feld in $z$-Richtung: $\mathrm{B}(\mathrm{x}, t)=B \mathrm{e}_z$ und $\phi(\hat{\mathrm{x}}, t)=0$.
+
+a) (2Pkt) Zeigen Sie, dass in diesem Fall die folgenden Kommutatorbeziehungen gelten:
+
+$$
+[m \hat{\dot{x}}, m \hat{\dot{y}}]=i \hbar \frac{e}{c} B, \quad[m \hat{\dot{x}}, m \hat{\dot{z}}]=[m \hat{\dot{y}}, m \hat{\dot{z}}]=0
+$$
+
+
+Wir konnen den Hamiltonoperator daher in zwei Teile aufteilen: $\mathcal{H}=\hat{\mathcal{H}}_{x y}+\hat{\mathcal{H}}_z$ mit $\hat{\mathcal{H}}_{x y}=\frac{1}{2 m}\left[(m \hat{\dot{x}})^2+(m \hat{\dot{y}})^2\right]$ und $\hat{\mathcal{H}}_z=\frac{1}{2 m}(m \hat{\dot{z}})^2$.
+
+
+b) (6Pkte) Prüfen Sie nach, dass $\left[\hat{\mathcal{H}}_{x y}, \hat{\mathcal{H}}_z\right]=0$. Was folgt daraus für die Eigenzustände von $\hat{\mathcal{H}}_{x y}, \hat{\mathcal{H}}_z$ und $\mathcal{H}$ ? Um die Eigenwerte und Eigenzustände von $\hat{\mathcal{H}}_{x y}$ zu finden, definieren wir $\hat{b}=\sqrt{\frac{c}{2 \mu_e B}}(m \hat{\dot{x}}+i m \hat{\dot{y}})$ und $\hat{b}^{\dagger}= \sqrt{\frac{\epsilon}{2 \hbar e B}}(m \hat{x}-i m \hat{y})$
+c) (4Pkt) Zeigen Sie, dass $\left[\hat{b}, \hat{b}^{\dagger}\right]=1$.
+d) (8Pkt) Zeigen Sie, dass
+
+$$
+\hat{\mathcal{H}}_{x y}=\hbar \omega_c \hat{b} \hat{b}+\text { Konstante. }
+$$
+
+
+Bestimmen Sie die Konstante und drücken Sie die Zyklotronfrequenz $\omega_c$ durch $e, B, m$, und $c$ aus.
+Es sei $|0\rangle$ der Zustand mit $\hat{b}|0\rangle=0$ und $|n\rangle=\frac{\left(b^{\dagger}\right)^n}{\sqrt{n!}}|0\rangle$.
+e) (10Pkt) Zeigen Sie, dass der Zustand $|n\rangle$ ein Eigenzustand des Hamiltonoperators $\hat{\mathcal{H}}_{x y}$ ist und berechnen Sie den zugehörigen Energieeigenwert $E_n$.
+
+
+
+\pagebreak
+
+
+\subsection{Übungsklausur - Quantenmechanik SS 2013}
+
+1. Richtig/Falsch-Fragen (24 Pkte)
+
+Es ist jeweils nur eine Antwort richtig, mehrfach angekreuzte Fragen werden nicht bewertet. Für jede richtige Antwort bekommt man drei Punkte, für jede falsche werden jedoch drei Punkte abgezogen. Man kann die Fragen auch unbeantwortet lassen, dafür gibt es dann null Punkte. Im Falle, dass die Gesamtpunktzahl der gesamten Aufgabe 1 negativ ist, wird die Aufgabe mit null Punkten bewertet.
+
+Wenn $\hat{A}$ und $\hat{B}$ antihermitesch sind, dann gilt $[\hat{A}, \hat{B}]=0$.
+Nur hermitesche Operatoren ( $\hat{A}^{\dagger}=\hat{A}$ ) haben eine orthonormale Basis aus Eigenvektoren.
+
+Zwei verschiedene Koordinaten (z.B. $x$ und $y$ ) des Teilchens können in der Quantenmechanik nicht gleichzeitig scharf bestimmt werden.
+
+Der Impulsoperator erzeugt Translationen.
+Wenn ein quantenmechanisches Teilchen mit der Energie $E>V_0$ über eine Potentialbarriere der Höhe $V_0$ fliegt, kann keine Reflektion stattfinden.
+
+Im Schrödinger/Heisenberg Bild gilt: Wenn $\left[\hat{A}_H(t=0), \hat{\mathcal{H}}\right]=0$ und $\hat{\mathcal{H}}$ zeitunabhängig ist, ist $\hat{A}_H(t)=\hat{A}_H(t=0)=\hat{A}_S$.
+
+Der Drehimpulsoperator $\hat{J}_z$ kommutiert mit $\hat{J}_x^2+\hat{J}_y^2$.
+Der Bahndrehimpuls $L_x$ kann Werte $\frac{n}{2} \hbar$ mit $n \in \mathbb{Z}$ annehmen.
+
+
+
+2. Multiple-Choice Aufgaben (16 Pkte)
+
+Es ist jeweils nur eine Antwort richtig, mehrfach angekreuzte Fragen werden nicht bewertet. Für jede richtige Antwort bekommt man vier Punkte, für falsche Antworten oder unbeantwortete Fragen gibt es null Punkte.
+
+1. (4) Pkte) Die Wellenfunktion $\psi(x)$ und ihre Ableitung $\psi^{\prime}(x)$ des Teilchens im unendlich tiefen Potentialtopf sind
+
+beide stetig an den Wänden.
+
+stetig bzw. unstetig an den Wänden.
+
+unstetig bzw. stetig an den Wänden.
+
+beide unstetig an den Wänden.
+
+2. (4 Pkte) Wir betrachten den eindimensionalen harmonischen Oszillator. Die Größe $\hbar \omega$ ist
+
+die Nullpunktenergie.
+
+die Energiedifferenz zwischen zwei energetisch benachbarten Zuständen.
+
+die Energiedifferenz nur zwischen den ersten zwei Zuständen.
+
+die Energie des höchstes gebundenes Zustandes.
+
+
+3. (4 Pkte) In sphärischen Koordinaten ist der folgende Operator, der mit dem Impuls des Teilchens in Zusammenhang steht, nicht hermitesch:
+
+$\hat{A}=\frac{\hbar}{i} \frac{\partial}{\partial r}$.
+
+$\hat{B}=\frac{\hbar}{i}\left(\frac{\partial}{\partial r}+\frac{1}{r}\right)$.
+
+$C=-\hbar^2 \nabla_r^2$.
+
+$\hat{D}=-\hbar^2\left(\nabla_r^2+\nabla_{\theta, \varphi}^2\right)$
+
+4. (4 Pkte) Wir addieren die zwei Drehimpulszustände mit $j_1=\frac{5}{2}$ und $j_2=6$. Welcher resultierende Zustand ist möglich für den Gesamtdrehimpuls $\mathbf{J}=\mathbf{J}_2+\mathbf{J}_2$ ?
+
+$\left|j=6, j_z=1 / 2\right\rangle$.
+
+$\left.j=5 / 2, j_z=3 / 2\right\rangle$.
+
+$\left.j=5 / 2, j_z=1 / 2\right\rangle$.
+
+$\left|j=9 / 2, j_z=1 / 2\right\rangle$.
+
+
+
+3. Messung von Spin-1 Teilchen (20 Pkte)
+
+Wir betrachten Spin-1 Teilchen. Die Physik von Spin-1 Teilchen wird durch die Operatoren $\hat{S}_x$, $\hat{S}_y, \hat{S}_z$ beschrieben. In der Basis der Eigenzustănde von $\hat{S}_z:\left|S_z=+\hbar\right\rangle,\left|S_z=0\right\rangle,\left|S_z=-\hbar\right\rangle$ sind diese Operatoren gegeben als
+
+$$
+\hat{S}_z=\frac{\hbar}{\sqrt{2}}\left(\begin{array}{lll}
+0 & 1 & 0 \\
+1 & 0 & 1 \\
+0 & 1 & 0
+\end{array}\right), \quad \hat{S}_y=\frac{\hbar}{\sqrt{2}}\left(\begin{array}{ccc}
+0 & -i & 0 \\
+i & 0 & -i \\
+0 & i & 0
+\end{array}\right), \quad \hat{S}_z \hat{=} \hbar\left(\begin{array}{ccc}
+1 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & -1
+\end{array}\right) .
+$$
+
+
+Wir betrachten ein Teilchen im Zustand
+
+$$
+|\psi\rangle=\left|S_z=+\hbar\right\rangle \hat{=}\left(\begin{array}{l}
+1 \\
+0 \\
+0
+\end{array}\right) .
+$$
+
+
+Wir messen nun $\hat{S}_x$.
+a) (9 Pkte) Was sind die möglichen Ergebnisse einer einzelnen Messung? Berechnen Sie für jede Möglichkeit die Wahrscheinlichkeit, den zugehörigen Projektor und den Zustand des Teilchens nach der Messung. Berechnen Sie auch den Erwartungswert $\left\langle\hat{S}_x\right\rangle$ im Zustand $|\psi\rangle$.
+b) (7 Pkte) Beantworten Sie die Frage a) für den Fall, dass $\hat{S}_x^2$ statt $\hat{S}_x$ gemessen wird. Berechnen Sie auch den Erwartungswert $\left\langle\hat{S}_x^2\right\rangle$ im Zustand $|\psi\rangle$.
+c) (4 Pkte) Nun wird zunächst $\hat{S}_x^2$ gemessen und man erhält das Messergebnis $\hbar^2$. Anschließend wird $\hat{S}_x$ gemessen. Was sind die möglichen Ergebnisse und mit welcher Wahrscheinlichkeit treten diese auf?
+
+
+
+4. Schrödinger-Gleichung (20 Pkte)
+
+Ein spinloses Teilchen der Masse $m$ werde durch die folgende Wellenfunktion beschrieben:
+
+$$
+\psi(\mathbf{r}, t)=A \cdot r \exp \left(-\frac{r}{2 a}+i \frac{\hbar t}{8 m a^2}+i \varphi\right) \sin \theta .
+$$
+
+a) (4 Pkte) Zeigen Sie, dass die Normierungskonstante $A=\frac{1}{8 \sqrt{\pi a^5}}$.
+b) (5 Pkte) Bestimmen Sie die Wahrscheinlichkeitsstromdichte $\mathbf{j}(\mathbf{r}, t)$.
+
+Hinweis: Die Separation $\psi(\mathbf{r}, t)=R(r) \Theta(\theta) f(\varphi, t)$ mit $R^*(r)=R(r)$ und $\Theta^*(\theta)=\Theta(\theta)$ kann nützlich sein, um ohne große Rechnungen zu zeigen, dass $j_r=j_\theta=0$.
+c) (3 Pkte) Geben Sie den Energieeigenwert $E$ an.
+d) (8 Pkte) Berechnen Sie die potentielle Energie $V(\mathbf{r})$ des Teilchens. Identifizieren Sie die Konstante $a$ mit dem Bohrschen Radius, $a=\frac{4 \pi \epsilon_{\mathrm{o}} \hbar^2}{m \mathrm{e}^2}$.
+
+Nützliche Formeln:
+- Gammafunktion: $\quad \Gamma(n)=\int_0^{\infty} x^{n-1} e^{-x} d x, \quad \Gamma(n)=(n-1)!\quad n \in \mathbb{N}$.
+- Identitäten für sphärische Geometrien, $\mathrm{r}=(r, \theta, \varphi): \nabla_r f=\frac{\partial f}{\partial r}, \nabla_\theta f=\frac{1}{r} \frac{\partial f}{\partial \theta}, \nabla_{\varphi} f=\frac{1}{r \sin \theta} \frac{\partial f}{\partial \varphi}$;
+
+$$
+\begin{gathered}
+\nabla^2=\frac{1}{r^2} \frac{\partial}{\partial r} r^2 \frac{\partial}{\partial r}+\frac{1}{r^2 \sin \theta} \frac{\partial}{\partial \theta} \sin \theta \frac{\partial}{\partial \theta}+\frac{1}{r^2 \sin ^2 \theta} \frac{\partial^2}{\partial \varphi^2} \\
+r^2 \nabla^2 Y_{l m}(\theta, \varphi)=-l(l+1) Y_{l m}(\theta, \varphi), \quad Y_{00}=\frac{1}{\sqrt{4 \pi}}, \quad Y_{11}=-\sqrt{\frac{3}{8 \pi}} \sin \theta e^{i \varphi}, \quad Y_{10}=\sqrt{\frac{3}{8 \pi}} \cos \theta
+\end{gathered}
+$$
+
+
+
+
+5. Berry-Phase (20 Pkte)
+
+In dieser Aufgabe betrachten wir die Dynamik eines Teilchens mit Spin $s=1 / 2$ in einem zeitabhängigen Magnetfeld $\mathbf{B}(t)$,
+
+$$
+\mathbf{B}(t)=B_0 \mathbf{b}(t)=B_0(\cos \omega t \sin \theta, \sin \omega t \sin \theta, \cos \theta),
+$$
+
+wobei $\omega$ die Kreisfrequenz des Magnetfelds und $\theta$ der Polarwinkel ist (siehe Bild).
+
+Der Hamiltonoperator des Systems ist gegeben durch
+
+$$
+\mathcal{H}=\frac{g e}{2 m} \mathbf{B} \cdot \mathbf{S}=\hbar \omega_0 \mathbf{b}(t) \cdot \boldsymbol{\sigma},
+$$
+
+wobei $\boldsymbol{\sigma}=\sum_i \sigma_i \mathrm{e}_i(i=x, y, z), \sigma_i$ die Pauli-Matrizen des
+Teichens mit Spin $s=1 / 2$ sind und $\omega_0=\frac{\omega_2}{2} \equiv \frac{g e B_0}{4 m}$.
+a) (2 Pkte) Finden Sie die Darstellung ( $2 \times 2$ Matrix) für $\mathcal{H}$ in der Basis von $\sigma_z$.
+b) (2 Pkte) Berechnen Sie die Eigenwerte des Hamiltonoperators $\mathcal{H}$.
+c) (4 Pkte) Prüfen Sie, dass die Eigenvektoren in der folgenden Form geschrieben werden können:
+
+$$
+\left|\phi_{+}(t)\right\rangle=\binom{\cos \frac{\theta}{2}}{\sin \frac{\theta}{2} e^{i \omega t}} \quad \text { und } \quad\left|\phi_{-}(t)\right\rangle=\binom{\sin \frac{\theta}{2}}{-\cos \frac{\theta}{2} e^{i \omega t}} .
+$$
+
+d) (4 Pkte) Nun betrachten wir den Zustand in der zeitabhängigen Basis:
+
+$$
+|\psi(t)\rangle=c_{+}(t)\left|\phi_{+}(t)\right\rangle+c_{-}(t)\left|\phi_{-}(t)\right\rangle .
+$$
+
+
+Zeigen Sie, dass die Gleichung für die Koeffizienten $c_{ \pm}(t)$ die folgende Form hat:
+
+$$
+i\binom{\dot{c}_{+}(t)}{\dot{c}_{-}(t)}=\left[\left(\begin{array}{cc}
+\omega_0 & 0 \\
+0 & -\omega_0
+\end{array}\right)-\mathcal{A}(t)\right]\binom{c_{+}(t)}{c_{-}(t)},
+$$
+
+wobei $\mathcal{A}(t)$ eine $2 \times 2$ Matrix mit den folgenden Matrixelementen ist:
+
+$$
+\mathcal{A}_{ \pm, \pm}(t)=i\left\langle\phi_{ \pm}(t)\right| \frac{d}{d t}\left|\phi_{ \pm}(t)\right\rangle .
+$$
+
+
+Die Größe $\mathcal{A}_{ \pm, \pm}(t)$ wird das Eichpotential genannt.
+
+
+
+e) (3 Pkte) Zeigen Sie, dass
+
+$$
+\mathcal{A}(t)=-\frac{\omega}{2}\left(\begin{array}{cc}
+1-\cos \theta & -\sin \theta \\
+-\sin \theta & \cos \theta+1
+\end{array}\right) .
+$$
+
+f) (2 Pkte) Nun betrachten wir den Fall, wenn $|\psi(0)\rangle=\left|\phi_{+}(0)\right\rangle$ und der Spin adiabatisch der Richtung des Magnetfelds folgt. Was können Sie in diesem Fall über die Nicht-Diagonalelemente der Matrix in Gl. (1) sagen? Argumentieren Sie, dass in diesem Grenzfall die Gleichung (1) durch
+
+$$
+i \dot{c}_{+}(t)=\left[\omega_0+\frac{\omega}{2}(1-\cos \theta)\right] c_{+}(t)
+$$
+
+ausgedruckt werden kann.
+g) (3 Pkte) Lösen Sie die Differentialgleichung (2). Finden Sie die Form der Wellenfunktion nach einen Periode der Oszillation des Magnetfelds. Geben Sie eine physikalische Erklärung für Ihr Ergebnis.
+
+Nützliche Formeln: $\quad \cos \theta=2 \cos ^2 \frac{\theta}{2}-1=1-2 \sin ^2 \frac{\theta}{2}, \quad \sin \theta=2 \sin \frac{\theta}{2} \cos \frac{\theta}{2}$.
+
+
+
+
+
+
+
+
 \end{document}

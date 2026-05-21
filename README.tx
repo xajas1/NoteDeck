@@ -90,3 +90,20 @@ Tipp: Nutze ein Tool wie „Tab Session Manager“, um Tabs zu speichern.
 [ ] Units und Struktur werden korrekt angezeigt
 
 Letztes Update: Juni 2025
+
+
+
+
+
+GITHUB
+
+# Prüfen, was sich geändert hat
+git status
+
+# (Optional) Safety: sicherstellen, dass keine .env im Index landet
+git diff --cached --name-only | grep -E '(^|/)\.env$' && { echo "❌ .env ist gestaged!"; exit 1; } || true
+
+# Alles hinzufügen, Commit & Push
+git add -A
+git commit -m "Backup: $(date '+%Y-%m-%d %H:%M')"
+git push

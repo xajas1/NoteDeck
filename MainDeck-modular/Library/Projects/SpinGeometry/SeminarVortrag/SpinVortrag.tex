@@ -17,11 +17,10 @@
 % 14. Hyperlinks
 % 15. Absatzeinstellungen
 % 16. Umgebungen
-% 17. Titel und Autor
+% 17  Graphik
+% 18  Extra
+% 00. Titel und Autor
 
-% --- 0. Allgemeine Pakete ---
-\usepackage{booktabs}
-\usepackage{makecell}
 \usepackage{slashed}
 
 % --- 1. Seitenlayout und Ränder ---
@@ -43,12 +42,13 @@
 \newcommand{\id}{\operatorname{id}}
 \newcommand{\sgn}{\operatorname{sgn}}
 \newcommand{\Ad}{\operatorname{Ad}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\K}{\mathbb{K}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\C}{\mathbb{C}}
-\newcommand{\K}{\mathbb{K}}
 \newcommand{\QU}{\mathbb{H}}
 \newcommand{\Cinf}{C^{\infty}}
 \newcommand{\Mod}{\mathrm{Mod}}
@@ -71,13 +71,12 @@
 \newcommand{\Lor}{\mathrm{Lor}}
 \newcommand{\Ogroup}{\mathrm{O}}
 \newcommand{\U}{\mathrm{U}}
-\newcommand{\CP}{\mathbb{C}P}
-\newcommand{\RP}{\mathbb{R}P}
-
+\newcommand{\CP}{\mathbb{C} P}
+\newcommand{\RP}{\mathbb{R} P}
 
 % --- 5. Diagramme und Grafiken ---
 \usepackage{graphicx}
-\graphicspath{{../../Images/}}
+\graphicspath{{../../Library/Images/}}
 \usepackage[export]{adjustbox}
 \usepackage{tikz}
 \usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
@@ -132,8 +131,6 @@
 \usepackage{todonotes}
 % Hellblau definieren
 \definecolor{hellblau}{rgb}{0.3,0.6,1}
-
-% Eigene Umgebung »notiz«
 \newenvironment{note}{\par\begingroup\color{hellblau}\itshape}{\par\endgroup}
 
 % --- 11. Rahmen/Box-Umgebungen ---
@@ -200,10 +197,8 @@
 \newenvironment{EXE}[2]{\CustomHeading{Exercise}{#1}{#2}}{}
 \newenvironment{MOT}[2]{\CustomHeading{Motivation}{#1}{#2}}{}
 \newenvironment{PROOF}[2]{\CustomHeading{Proof}{#1}{#2}}{}
-\newenvironment{STR}[2]{\CustomHeading{Structure}{#1}{#2}}{}
 
-
-% --- Unit Umgebung ---
+% --- Unit Umgebung für Source-Inhalte ---
 \usepackage{mdframed}
 \newmdenv[
   linewidth=1pt,
@@ -224,8 +219,13 @@
   {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
   {\end{unitbox}}
 
+% --- 17. ... ---
 
-% --- 17. Titel und Autor ---
+% --- 18. Extras ---
+\usepackage{stmaryrd}
+\usepackage{bbold}  % falls du \mathbb{1} nutzen willst
+
+% --- 00. Titel und Autor ---
 \title{Mein Titel}
 \author{Tim Jaschik}
 \date{\today}
@@ -244,6 +244,82 @@ Kurze Beschreibung …
 
 \pagebreak
 
-……CONTENT
+\section{Natürliche Clifford-Strukturen}
 
+\subsection{Laplace-Typ-Bedingung $\Rightarrow$ Clifford-Relation}
+
+Sei $(e_1,\dots,e_n)$ ein lokaler orthonormaler Rahmen von $TM$ und
+\[
+D=\sum_{i=1}^n a_i\nabla^E_{e_i}+\text{0.\,O.},
+\qquad a_i\in \Gamma(\End(E)).
+\]
+Dann ist der Term zweiter Ordnung von $D^2$
+\[
+D^2\sim \sum_{i,j} a_i a_j\,\nabla^E_{e_i}\nabla^E_{e_j}
+\]
+und nach Symmetrisierung
+\[
+D^2\sim
+\sum_i a_i^2\,\nabla^E_{e_i}\nabla^E_{e_i}
++\frac12\sum_{i\neq j}(a_i a_j+a_j a_i)\,\nabla^E_{e_i}\nabla^E_{e_j}.
+\]
+Soll $D^2$ vom Laplace-Typ sein, so folgt notwendig
+\[
+a_i^2=-\id,
+\qquad
+a_i a_j+a_j a_i=0 \quad (i\neq j),
+\]
+also insgesamt
+\[
+a_i a_j+a_j a_i=-2\delta_{ij}\id.
+\]
+Die Koeffizienten $a_i$ sind also faserweise Endomorphismen, die punktweise
+die Clifford-Relation realisieren.
+
+
+
+\subsection{Clifford-Algebra und Clifford-Modul}
+
+Sei $(V,\beta)$ ein endlichdimensionaler $\K$-Vektorraum ($\K=\R$ oder $\C$)
+mit symmetrischer Bilinearform $\beta$.
+
+Die Clifford-Algebra von $(V,\beta)$ ist die unitale Algebra
+\[
+\Cl(V,\beta)
+:=
+T(V)\big/\big\langle v\otimes v+\beta(v,v)\,1 \;|\; v\in V\big\rangle.
+\]
+Äquivalent gilt in $\Cl(V,\beta)$:
+\[
+vw+w v=-2\beta(v,w)\,1.
+\]
+
+Ist $V$ reell, so setzen wir
+\[
+\C l(V,\beta):=\Cl(V,\beta)\otimes_\R \C.
+\]
+
+Ein komplexes Clifford-Modul ist ein komplexer Vektorraum $W$ mit einer
+Algebrenabbildung
+\[
+\rho:\C l(V,\beta)\longrightarrow \End_\C(W).
+\]
+Die zugehörige Clifford-Multiplikation ist die Einschränkung
+\[
+c:=\rho|_V:V\to \End_\C(W),
+\qquad c(v)\psi=v\cdot\psi,
+\]
+und sie erfüllt
+\[
+c(v)c(w)+c(w)c(v)=-2\beta(v,w)\id_W.
+\]
+Umgekehrt bestimmt jede lineare Abbildung
+\[
+c:V\to \End_\C(W)
+\]
+mit dieser Relation wegen der universellen Eigenschaft eindeutig eine Darstellung
+$\rho$ von $\C l(V,\beta)$.
+
+\pagebreak
+\printbibliography
 \end{document}

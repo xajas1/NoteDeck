@@ -1,0 +1,691 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17  Graphik
+% 18  Extra
+% 00. Titel und Autor
+
+\usepackage{slashed}
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Ad}{\operatorname{Ad}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\QU}{\mathbb{H}}
+\newcommand{\Cinf}{C^{\infty}}
+\newcommand{\Mod}{\mathrm{Mod}}
+\newcommand{\Alg}{\mathrm{Alg}}
+\newcommand{\Diff}{\mathrm{Diff}}
+\newcommand{\Iso}{\mathrm{Iso}}
+\newcommand{\Aut}{\mathrm{Aut}}
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Cl}{\mathrm{Cl}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\Mat}{\mathrm{Mat}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\Sp}{\mathrm{Sp}}
+\newcommand{\Spin}{\mathrm{Spin}}
+\newcommand{\Pin}{\mathrm{Pin}}
+\newcommand{\Lor}{\mathrm{Lor}}
+\newcommand{\Ogroup}{\mathrm{O}}
+\newcommand{\U}{\mathrm{U}}
+\newcommand{\CP}{\mathbb{C} P}
+\newcommand{\RP}{\mathbb{R} P}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\graphicspath{{../../Library/Images/}}
+\usepackage[export]{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+% Hellblau definieren
+\definecolor{hellblau}{rgb}{0.3,0.6,1}
+\newenvironment{note}{\par\begingroup\color{hellblau}\itshape}{\par\endgroup}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\CustomHeading{Definition}{#1}{#2}}{}
+\newenvironment{PROP}[2]{\CustomHeading{Proposition}{#1}{#2}}{}
+\newenvironment{THEO}[2]{\CustomHeading{Theorem}{#1}{#2}}{}
+\newenvironment{LEM}[2]{\CustomHeading{Lemma}{#1}{#2}}{}
+\newenvironment{KORO}[2]{\CustomHeading{Corollar}{#1}{#2}}{}
+\newenvironment{REM}[2]{\CustomHeading{Remark}{#1}{#2}}{}
+\newenvironment{EXA}[2]{\CustomHeading{Example}{#1}{#2}}{}
+\newenvironment{STUD}[2]{\CustomHeading{Study}{#1}{#2}}{}
+\newenvironment{CONC}[2]{\CustomHeading{Concept}{#1}{#2}}{}
+\newenvironment{OTH}[2]{\CustomHeading{Other}{#1}{#2}}{}
+\newenvironment{EXE}[2]{\CustomHeading{Exercise}{#1}{#2}}{}
+\newenvironment{MOT}[2]{\CustomHeading{Motivation}{#1}{#2}}{}
+\newenvironment{PROOF}[2]{\CustomHeading{Proof}{#1}{#2}}{}
+
+% --- Unit Umgebung für Source-Inhalte ---
+\usepackage{mdframed}
+\newmdenv[
+  linewidth=1pt,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftmargin=0cm,
+  rightmargin=0cm,
+  skipabove=10pt,
+  skipbelow=10pt,
+  innertopmargin=0.5\baselineskip,
+  innerbottommargin=0.5\baselineskip,
+  backgroundcolor=gray!10,
+  linecolor=gray
+]{unitbox}
+
+\newenvironment{unit}[1]
+  {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
+  {\end{unitbox}}
+
+% --- 17. ... ---
+
+% --- 18. Extras ---
+\usepackage{stmaryrd}
+\usepackage{bbold}  % falls du \mathbb{1} nutzen willst
+
+% --- 19. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+
+% Abstand zwischen Einträgen
+\setlength{\cftbeforesecskip}{2pt}      % Sections
+\setlength{\cftbeforesubsecskip}{1pt}   % Subsections
+\setlength{\cftbeforesubsubsecskip}{0pt}
+\renewcommand{\cfttoctitlefont}{\large\bfseries}
+
+% --- 00. Titel und Autor ---
+\title{Matlab Dictionary}
+\author{Tim Jaschik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+Kurze Beschreibung …
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\tableofcontents
+
+\pagebreak
+
+\section{Systematische Übersicht zu \texttt{fprintf} in MATLAB}
+
+\subsection{Grundidee}
+
+Der Befehl \texttt{fprintf} dient in MATLAB dazu, formatierte Ausgaben im Command Window zu erzeugen. Die Grundstruktur lautet:
+
+\begin{verbatim}
+fprintf(formatString, value1, value2, ...)
+\end{verbatim}
+
+Dabei ist \texttt{formatString} eine Zeichenkette, die sowohl normalen Text als auch sogenannte Platzhalter enthält. Die Werte \texttt{value1}, \texttt{value2}, \dots werden der Reihe nach in diese Platzhalter eingesetzt.
+
+Ein einfaches Beispiel ist:
+
+\begin{verbatim}
+x = 3.14159;
+fprintf('Der Wert von x ist %.2f\n', x);
+\end{verbatim}
+
+Die Ausgabe ist:
+
+\begin{verbatim}
+Der Wert von x ist 3.14
+\end{verbatim}
+
+Der Ausdruck \texttt{\%.2f} bedeutet: Setze hier eine Dezimalzahl mit zwei Nachkommastellen ein. Der Ausdruck \texttt{\textbackslash n} erzeugt einen Zeilenumbruch.
+
+\subsection{Allgemeine Struktur eines Platzhalters}
+
+Ein Platzhalter hat typischerweise die Form
+
+\[
+\texttt{\%[flags][width][.precision]type}.
+\]
+
+Die wichtigsten Bestandteile sind:
+
+\begin{enumerate}
+    \item \texttt{\%}: Beginn eines Platzhalters.
+    \item \texttt{width}: minimale Gesamtbreite der Ausgabe.
+    \item \texttt{.precision}: Anzahl der Nachkommastellen oder signifikanten Stellen.
+    \item \texttt{type}: Datentyp beziehungsweise Ausgabeformat.
+\end{enumerate}
+
+Beispiel:
+
+\begin{verbatim}
+fprintf('%8.2f\n', 3.14159);
+\end{verbatim}
+
+Hier bedeutet:
+
+\[
+\texttt{\%8.2f}
+\]
+
+\begin{enumerate}
+    \item \texttt{8}: mindestens acht Zeichen Gesamtbreite,
+    \item \texttt{.2}: zwei Nachkommastellen,
+    \item \texttt{f}: Ausgabe als Dezimalzahl.
+\end{enumerate}
+
+Die Ausgabe ist ungefähr:
+
+\begin{verbatim}
+    3.14
+\end{verbatim}
+
+\subsection{Wichtige Formattypen}
+
+\begin{center}
+\begin{tabular}{lll}
+\hline
+Platzhalter & Bedeutung & Beispielausgabe \\
+\hline
+\texttt{\%d} & Ganze Zahl & \texttt{42} \\
+\texttt{\%i} & Ganze Zahl & \texttt{42} \\
+\texttt{\%f} & Dezimalzahl & \texttt{3.141593} \\
+\texttt{\%.2f} & Dezimalzahl mit 2 Nachkommastellen & \texttt{3.14} \\
+\texttt{\%e} & Wissenschaftliche Schreibweise & \texttt{3.141593e+00} \\
+\texttt{\%.2e} & Wissenschaftliche Schreibweise mit 2 Nachkommastellen & \texttt{3.14e+00} \\
+\texttt{\%g} & Kompakte Darstellung & \texttt{3.14159} \\
+\texttt{\%s} & Zeichenkette/String & \texttt{Hallo} \\
+\texttt{\%c} & Einzelnes Zeichen & \texttt{A} \\
+\texttt{\%\%} & Prozentzeichen & \texttt{\%} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Ausgabe ganzer Zahlen}
+
+Für ganze Zahlen verwendet man meistens \texttt{\%d}.
+
+\begin{verbatim}
+k = 17;
+fprintf('Die Anzahl der Iterationen ist %d.\n', k);
+\end{verbatim}
+
+Ausgabe:
+
+\begin{verbatim}
+Die Anzahl der Iterationen ist 17.
+\end{verbatim}
+
+Typische Anwendung bei numerischen Algorithmen:
+
+\begin{verbatim}
+fprintf('k_GS = %d\n', k_GS);
+\end{verbatim}
+
+\subsection{Ausgabe von Dezimalzahlen}
+
+Für Dezimalzahlen verwendet man \texttt{\%f}. Standardmäßig werden sechs Nachkommastellen angezeigt.
+
+\begin{verbatim}
+x = 3.1415926535;
+fprintf('x = %f\n', x);
+\end{verbatim}
+
+Ausgabe:
+
+\begin{verbatim}
+x = 3.141593
+\end{verbatim}
+
+Möchte man die Anzahl der Nachkommastellen kontrollieren, verwendet man zum Beispiel:
+
+\begin{verbatim}
+fprintf('x = %.2f\n', x);
+fprintf('x = %.6f\n', x);
+fprintf('x = %.10f\n', x);
+\end{verbatim}
+
+Ausgabe:
+
+\begin{verbatim}
+x = 3.14
+x = 3.141593
+x = 3.1415926535
+\end{verbatim}
+
+\subsection{Wissenschaftliche Schreibweise}
+
+Für sehr kleine oder sehr große Zahlen ist \texttt{\%e} oft besser geeignet.
+
+\begin{verbatim}
+err = 0.00000012345;
+fprintf('error = %.4e\n', err);
+\end{verbatim}
+
+Ausgabe:
+
+\begin{verbatim}
+error = 1.2345e-07
+\end{verbatim}
+
+Das ist besonders nützlich für Fehler, Toleranzen und Residuen:
+
+\begin{verbatim}
+fprintf('residual norm = %.4e\n', norm(A*x-b));
+\end{verbatim}
+
+\subsection{Kompakte numerische Darstellung mit \texttt{\%g}}
+
+Der Platzhalter \texttt{\%g} wählt automatisch eine kompakte Darstellung. MATLAB entscheidet also je nach Zahl, ob eine normale Dezimaldarstellung oder wissenschaftliche Schreibweise sinnvoller ist.
+
+\begin{verbatim}
+fprintf('x = %g\n', 3.1415926535);
+fprintf('x = %g\n', 0.00000012345);
+\end{verbatim}
+
+Mögliche Ausgabe:
+
+\begin{verbatim}
+x = 3.14159
+x = 1.2345e-07
+\end{verbatim}
+
+\subsection{Ausgabe von Strings}
+
+Für Textvariablen verwendet man \texttt{\%s}.
+
+\begin{verbatim}
+method = 'Gauss-Seidel';
+fprintf('Method: %s\n', method);
+\end{verbatim}
+
+Ausgabe:
+
+\begin{verbatim}
+Method: Gauss-Seidel
+\end{verbatim}
+
+Mehrere Werte werden der Reihe nach eingesetzt:
+
+\begin{verbatim}
+method = 'Gauss-Seidel';
+k = 23;
+fprintf('%s converged after %d iterations.\n', method, k);
+\end{verbatim}
+
+Ausgabe:
+
+\begin{verbatim}
+Gauss-Seidel converged after 23 iterations.
+\end{verbatim}
+
+\subsection{Zeilenumbrüche und Sonderzeichen}
+
+Wichtige Steuerzeichen sind:
+
+\begin{center}
+\begin{tabular}{ll}
+\hline
+Code & Bedeutung \\
+\hline
+\texttt{\textbackslash n} & Zeilenumbruch \\
+\texttt{\textbackslash t} & Tabulator \\
+\texttt{\textbackslash\textbackslash} & Backslash ausgeben \\
+\texttt{\%\%} & Prozentzeichen ausgeben \\
+\hline
+\end{tabular}
+\end{center}
+
+Beispiel:
+
+\begin{verbatim}
+fprintf('Name:\tGauss-Seidel\n');
+fprintf('Tolerance:\t%.2e\n', 1e-8);
+\end{verbatim}
+
+Ausgabe:
+
+\begin{verbatim}
+Name:       Gauss-Seidel
+Tolerance:  1.00e-08
+\end{verbatim}
+
+\subsection{Breite und Ausrichtung}
+
+Man kann festlegen, wie viel Platz eine Zahl mindestens einnehmen soll. Das ist besonders nützlich für tabellarische Ausgaben.
+
+\begin{verbatim}
+fprintf('%10.4f\n', 3.14159);
+fprintf('%10.4f\n', 123.456);
+\end{verbatim}
+
+Ausgabe:
+
+\begin{verbatim}
+    3.1416
+  123.4560
+\end{verbatim}
+
+Hier bedeutet:
+
+\[
+\texttt{\%10.4f}
+\]
+
+\begin{enumerate}
+    \item \texttt{10}: mindestens zehn Zeichen Breite,
+    \item \texttt{.4}: vier Nachkommastellen,
+    \item \texttt{f}: Dezimalzahl.
+\end{enumerate}
+
+Linksbündige Ausgabe erhält man mit einem Minuszeichen:
+
+\begin{verbatim}
+fprintf('%-10.4f Ende\n', 3.14159);
+\end{verbatim}
+
+Ausgabe:
+
+\begin{verbatim}
+3.1416     Ende
+\end{verbatim}
+
+\subsection{Ausgabe von Vektoren}
+
+Wenn man einen Vektor direkt mit \texttt{fprintf} ausgibt, wird derselbe Platzhalter auf alle Einträge angewendet.
+
+\begin{verbatim}
+x = [1.23456; 2.34567; 3.45678];
+
+fprintf('x = [');
+fprintf(' %.4f', x);
+fprintf(' ]\n');
+\end{verbatim}
+
+Ausgabe:
+
+\begin{verbatim}
+x = [ 1.2346 2.3457 3.4568 ]
+\end{verbatim}
+
+Für einen Spaltenvektor mit Komponentenbeschriftung:
+
+\begin{verbatim}
+for j = 1:length(x)
+    fprintf('x_%d = %.6f\n', j, x(j));
+end
+\end{verbatim}
+
+Ausgabe:
+
+\begin{verbatim}
+x_1 = 1.234560
+x_2 = 2.345670
+x_3 = 3.456780
+\end{verbatim}
+
+\subsection{Tabellarische Ausgabe}
+
+Für Ergebnisse verschiedener Algorithmen kann man eine einfache Tabelle im Command Window erzeugen.
+
+\begin{verbatim}
+fprintf('\n%-15s %10s %15s\n', 'Method', 'Iter', 'Residual');
+fprintf('%-15s %10d %15.4e\n', 'Jacobi', k_GJ, norm(A*x_GJ-b));
+fprintf('%-15s %10d %15.4e\n', 'Gauss-Seidel', k_GS, norm(A*x_GS-b));
+\end{verbatim}
+
+Mögliche Ausgabe:
+
+\begin{verbatim}
+Method                Iter        Residual
+Jacobi                  42      3.2154e-09
+Gauss-Seidel            18      7.4512e-10
+\end{verbatim}
+
+Dabei bedeutet:
+
+\begin{enumerate}
+    \item \texttt{\%-15s}: String, linksbündig, Breite 15.
+    \item \texttt{\%10d}: Ganze Zahl, rechtsbündig, Breite 10.
+    \item \texttt{\%15.4e}: Wissenschaftliche Zahl, Breite 15, vier Nachkommastellen.
+\end{enumerate}
+
+\subsection{Typische Formatierungen für numerische Algorithmen}
+
+Für Iterationszahlen:
+
+\begin{verbatim}
+fprintf('iterations = %d\n', k);
+\end{verbatim}
+
+Für Lösungen mit sechs Nachkommastellen:
+
+\begin{verbatim}
+fprintf('x = %.6f\n', x);
+\end{verbatim}
+
+Für Fehler oder Residuen:
+
+\begin{verbatim}
+fprintf('error = %.4e\n', err);
+fprintf('residual = %.4e\n', norm(A*x-b));
+\end{verbatim}
+
+Für kompakte Parameterwerte:
+
+\begin{verbatim}
+fprintf('lambda = %.2f\n', lambda);
+\end{verbatim}
+
+Für eine kombinierte Ausgabe:
+
+\begin{verbatim}
+fprintf('lambda = %.2f, iterations = %d, residual = %.4e\n', ...
+    lambda, k, norm(A*x-b));
+\end{verbatim}
+
+\subsection{Häufige Fehler}
+
+\subsubsection{Falscher Platzhalter}
+
+Für Dezimalzahlen sollte man nicht \texttt{\%d}, sondern \texttt{\%f}, \texttt{\%e} oder \texttt{\%g} verwenden.
+
+Ungünstig:
+
+\begin{verbatim}
+fprintf('x = %d\n', 3.14159);
+\end{verbatim}
+
+Besser:
+
+\begin{verbatim}
+fprintf('x = %.6f\n', 3.14159);
+\end{verbatim}
+
+\subsubsection{Zu wenige oder zu viele Werte}
+
+Die Anzahl der Platzhalter sollte zur Anzahl der eingefügten Werte passen.
+
+\begin{verbatim}
+fprintf('x = %.2f, y = %.2f\n', x, y);
+\end{verbatim}
+
+Hier gibt es zwei Platzhalter und zwei Werte.
+
+\subsubsection{Prozentzeichen vergessen zu escapen}
+
+Ungünstig:
+
+\begin{verbatim}
+fprintf('Convergence rate = 95%\n');
+\end{verbatim}
+
+Besser:
+
+\begin{verbatim}
+fprintf('Convergence rate = 95%%\n');
+\end{verbatim}
+
+\subsection{Merkschema}
+
+Für die meisten numerischen Anwendungen reichen die folgenden Muster:
+
+\begin{center}
+\begin{tabular}{ll}
+\hline
+Zweck & MATLAB-Code \\
+\hline
+Ganze Zahl & \texttt{fprintf('k = \%d\textbackslash n', k)} \\
+Dezimalzahl & \texttt{fprintf('x = \%.6f\textbackslash n', x)} \\
+Kleine/große Zahl & \texttt{fprintf('err = \%.4e\textbackslash n', err)} \\
+String & \texttt{fprintf('Method = \%s\textbackslash n', method)} \\
+Prozentzeichen & \texttt{fprintf('rate = 95\%\%\textbackslash n')} \\
+Vektor in einer Zeile & \texttt{fprintf(' \%.6f', x)} \\
+\hline
+\end{tabular}
+\end{center}
+
+\pagebreak
+\printbibliography
+\end{document}

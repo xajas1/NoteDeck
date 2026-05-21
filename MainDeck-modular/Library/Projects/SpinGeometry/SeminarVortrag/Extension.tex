@@ -1,0 +1,707 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17  Graphik
+% 18  Extra
+% 00. Titel und Autor
+
+\usepackage{slashed}
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Ad}{\operatorname{Ad}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\QU}{\mathbb{H}}
+\newcommand{\Cinf}{C^{\infty}}
+\newcommand{\Mod}{\mathrm{Mod}}
+\newcommand{\Alg}{\mathrm{Alg}}
+\newcommand{\Diff}{\mathrm{Diff}}
+\newcommand{\Iso}{\mathrm{Iso}}
+\newcommand{\Aut}{\mathrm{Aut}}
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Cl}{\mathrm{Cl}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\Mat}{\mathrm{Mat}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\Sp}{\mathrm{Sp}}
+\newcommand{\Spin}{\mathrm{Spin}}
+\newcommand{\Pin}{\mathrm{Pin}}
+\newcommand{\Lor}{\mathrm{Lor}}
+\newcommand{\Ogroup}{\mathrm{O}}
+\newcommand{\U}{\mathrm{U}}
+\newcommand{\CP}{\mathbb{C} P}
+\newcommand{\RP}{\mathbb{R} P}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\graphicspath{{../../Library/Images/}}
+\usepackage[export]{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+% Hellblau definieren
+\definecolor{hellblau}{rgb}{0.3,0.6,1}
+\newenvironment{note}{\par\begingroup\color{hellblau}\itshape}{\par\endgroup}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\CustomHeading{Definition}{#1}{#2}}{}
+\newenvironment{PROP}[2]{\CustomHeading{Proposition}{#1}{#2}}{}
+\newenvironment{THEO}[2]{\CustomHeading{Theorem}{#1}{#2}}{}
+\newenvironment{LEM}[2]{\CustomHeading{Lemma}{#1}{#2}}{}
+\newenvironment{KORO}[2]{\CustomHeading{Corollar}{#1}{#2}}{}
+\newenvironment{REM}[2]{\CustomHeading{Remark}{#1}{#2}}{}
+\newenvironment{EXA}[2]{\CustomHeading{Example}{#1}{#2}}{}
+\newenvironment{STUD}[2]{\CustomHeading{Study}{#1}{#2}}{}
+\newenvironment{CONC}[2]{\CustomHeading{Concept}{#1}{#2}}{}
+\newenvironment{OTH}[2]{\CustomHeading{Other}{#1}{#2}}{}
+\newenvironment{EXE}[2]{\CustomHeading{Exercise}{#1}{#2}}{}
+\newenvironment{MOT}[2]{\CustomHeading{Motivation}{#1}{#2}}{}
+\newenvironment{PROOF}[2]{\CustomHeading{Proof}{#1}{#2}}{}
+
+% --- Unit Umgebung für Source-Inhalte ---
+\usepackage{mdframed}
+\newmdenv[
+  linewidth=1pt,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftmargin=0cm,
+  rightmargin=0cm,
+  skipabove=10pt,
+  skipbelow=10pt,
+  innertopmargin=0.5\baselineskip,
+  innerbottommargin=0.5\baselineskip,
+  backgroundcolor=gray!10,
+  linecolor=gray
+]{unitbox}
+
+\newenvironment{unit}[1]
+  {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
+  {\end{unitbox}}
+
+% --- 17. ... ---
+
+% --- 18. Extras ---
+\usepackage{stmaryrd}
+\usepackage{bbold}  % falls du \mathbb{1} nutzen willst
+
+% --- 00. Titel und Autor ---
+\title{Mein Titel}
+\author{Tim Jaschik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+Kurze Beschreibung …
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\tableofcontents
+
+\pagebreak
+
+\subsubsection{Die Spin-Gruppe als gerade Untergruppe der Clifford-Einheiten}
+
+Sei $(\R^n,\langle\cdot,\cdot\rangle)$ ein euklidischer Vektorraum und 
+$\Cl_n$ die zugehörige Clifford-Algebra.
+
+\begin{DEF}{}{Pin- und Spin-Gruppe}
+\begin{enumerate}
+\item Die \emph{Pin-Gruppe} ist definiert als die von den Einheitsvektoren erzeugte Untergruppe
+\[
+\Pin(n):=\langle S^{n-1}\rangle \subset \Cl_n^\times.
+\]
+
+\item Die \emph{Spin-Gruppe} ist der gerade Teil davon:
+\[
+\Spin(n):=\Pin(n)\cap \Cl_n^+.
+\]
+\end{enumerate}
+\end{DEF}
+
+\begin{DEF}{}{Adjungierte Wirkung}
+Sei $\alpha:\Cl_n\to\Cl_n$ die Gradinvolution, d.h.
+\[
+\alpha(v)=-v \quad \text{für } v\in \R^n,
+\qquad
+\alpha(x)=(-1)^k x \text{ für } x\in \Cl_n^{(k)}.
+\]
+Dann definiert man für $u\in \Pin(n)$ eine lineare Abbildung
+\[
+\rho(u):\R^n\to \R^n,\qquad
+\rho(u)(x):=\alpha(u)\,x\,u^{-1}.
+\]
+\end{DEF}
+
+\begin{PROP}{}{Geometrische Bedeutung von $\rho$}
+\begin{enumerate}
+\item Für $u\in S^{n-1}$ ist $\rho(u)$ die Spiegelung an der Hyperebene orthogonal zu $u$.
+\item Für allgemeines $u\in \Pin(n)$ ist $\rho(u)$ eine orthogonale Transformation.
+\item Es gilt:
+\[
+\rho:\Pin(n)\to \mathrm{O}(n)
+\quad \text{ist ein surjektiver Gruppenhomomorphismus mit } \ker\rho=\{\pm 1\}.
+\]
+\end{enumerate}
+\end{PROP}
+
+\begin{PROP}{}{Einschränkung auf die Spin-Gruppe}
+Für $u\in \Spin(n)\subset \Cl_n^+$ gilt
+\[
+\alpha(u)=u.
+\]
+Damit vereinfacht sich die Wirkung zu
+\[
+\rho(u)(x)=u\,x\,u^{-1}.
+\]
+\end{PROP}
+
+\begin{KORO}{}{Doppelüberlagerung von $\SO(n)$}
+Die Einschränkung von $\rho$ liefert einen surjektiven Gruppenhomomorphismus
+\[
+\rho:\Spin(n)\to \SO(n),
+\qquad
+\rho(u)(x)=u x u^{-1},
+\]
+mit
+\[
+\ker\rho=\{\pm 1\}.
+\]
+Insbesondere ist $\Spin(n)$ eine zweifache Überlagerung von $\SO(n)$.
+\end{KORO}
+
+\begin{REM}{}{Konzeptuelle Interpretation}
+\begin{enumerate}
+\item Die Verwendung von $\alpha$ ist notwendig, um auf ganz $\Pin(n)$ eine orthogonale Wirkung zu erhalten (insbesondere für Spiegelungen).
+\item Auf $\Spin(n)$ wird $\alpha$ trivial, da alle Elemente gerade sind.
+\item Die Wirkung
+\[
+x \mapsto u x u^{-1}
+\]
+ist daher die intrinsische geometrische Realisierung von Rotationen in der Clifford-Algebra.
+\end{enumerate}
+\end{REM}
+
+
+
+\pagebreak
+
+\subsubsection{Kompatibilität von Spin-Wirkung und Clifford-Multiplikation}
+
+Sei $(M,g)$ eine orientierte Riemannsche Mannigfaltigkeit mit Spin-Struktur
+\[
+P^{\Spin}\xrightarrow{\;\pi\;} M.
+\]
+
+Sei ferner
+\[
+\rho:\Spin(n)\to \Aut(\Sigma_n)
+\]
+die Spinor-Darstellung und
+\[
+\lambda:\Spin(n)\to \SO(n)
+\]
+die kanonische Überlagerung.
+
+\medskip
+
+\textbf{Ziel:} Konstruktion einer globalen Clifford-Multiplikation
+\[
+c:TM\longrightarrow \End(\Sigma M).
+\]
+
+\paragraph{Lokale Definition}
+
+Für $q\in P^{\Spin}_x$ sei
+\[
+u_q:\R^n \xrightarrow{\sim} T_xM
+\]
+die durch den Rahmen gegebene Isometrie.
+
+Dann definieren wir lokal für $v\in T_xM$:
+\[
+c_x(v):=c_0\bigl(u_q^{-1}(v)\bigr),
+\]
+wobei
+\[
+c_0:\R^n\to \End(\Sigma_n)
+\]
+die Standard-Clifford-Wirkung ist.
+
+\paragraph{Problem: Abhängigkeit von der Wahl von $q$}
+
+Für $g\in \Spin(n)$ gilt:
+\[
+q' = q\cdot g
+\quad \Longrightarrow \quad
+u_{q'} = u_q \circ \lambda(g).
+\]
+
+Damit folgt:
+\[
+u_{q'}^{-1}(v)
+=
+\lambda(g)^{-1}\,u_q^{-1}(v).
+\]
+
+Also ergibt sich für die alternative Wahl:
+\[
+c_x'(v)
+=
+c_0\bigl(\lambda(g)^{-1} u_q^{-1}(v)\bigr).
+\]
+
+\paragraph{Transformationsverhalten der Spinoren}
+
+Ein Spinorfeld transformiert unter Rahmenwechsel durch
+\[
+\psi \longmapsto \rho(g)\psi.
+\]
+
+\paragraph{Konsistenzforderung}
+
+Damit die Clifford-Multiplikation wohldefiniert ist, muss gelten:
+\[
+c_x'(v)\,\rho(g)\psi
+=
+\rho(g)\,c_x(v)\psi.
+\]
+
+Einsetzen liefert:
+\[
+c_0(\lambda(g)^{-1} w)\,\rho(g)
+=
+\rho(g)\,c_0(w),
+\quad w:=u_q^{-1}(v).
+\]
+
+Äquivalent:
+\[
+\rho(g)\,c_0(w)\,\rho(g)^{-1}
+=
+c_0(\lambda(g) w).
+\]
+
+\paragraph{Zentrale Kompatibilitätsbedingung}
+
+\begin{equation}
+\boxed{
+c_0(\lambda(g) v)
+=
+\rho(g)\,c_0(v)\,\rho(g)^{-1}
+}
+\end{equation}
+
+\paragraph{Interpretation}
+
+\begin{enumerate}
+\item Die Spin-Darstellung $\rho$ ist so gewählt, dass sie die
+\emph{Clifford-Multiplikation äquivariant} macht.
+\item Die Wirkung von $\Spin(n)$ auf $\R^n$ über $\lambda$ entspricht genau der
+\emph{Konjugationswirkung} in der Clifford-Algebra:
+\[
+\lambda(g)v = g v g^{-1}.
+\]
+\item Die Relation
+\[
+\rho(g)(v\cdot \psi)
+=
+(\lambda(g)v)\cdot (\rho(g)\psi)
+\]
+ist genau die Bündelversion dieser Kompatibilität.
+\end{enumerate}
+
+\paragraph{Schluss}
+
+Diese Bedingung ist notwendig und hinreichend dafür, dass die lokal definierte Abbildung
+\[
+c_x(v):=c_0(u_q^{-1}(v))
+\]
+\emph{unabhängig von der Wahl des Spin-Rahmens} ist und somit eine globale Bündelabbildung
+\[
+c:TM\to \End(\Sigma M)
+\]
+definiert.
+
+
+\pagebreak
+
+\begin{THEO}{}{Äquivarianz der Clifford-Multiplikation unter der Spin-Wirkung}
+Sei $\Cl_n$ die Clifford-Algebra über $(\R^n,\langle\cdot,\cdot\rangle)$,
+$\Sigma_n$ ein $\Cl_n$-Modul und
+\[
+\rho:\Spin(n)\to \Aut(\Sigma_n)
+\]
+die durch Einschränkung der Clifford-Wirkung definierte Darstellung,
+d.h.
+\[
+\rho(g)\psi := g\cdot \psi.
+\]
+
+Dann gilt für alle $g\in \Spin(n)$ und $v\in \R^n$:
+\[
+\rho(g)\,c_0(v)\,\rho(g)^{-1}
+=
+c_0(\lambda(g)v),
+\]
+wobei
+\[
+\lambda(g)v := g v g^{-1}.
+\]
+\end{THEO}
+
+\begin{proof}
+Sei $\psi\in \Sigma_n$.
+
+Dann gilt zunächst nach Definition der Clifford-Multiplikation:
+\[
+c_0(v)\psi = v\cdot \psi.
+\]
+
+Weiter ist
+\[
+\rho(g)\psi = g\cdot \psi,
+\qquad
+\rho(g)^{-1}\psi = g^{-1}\cdot \psi.
+\]
+
+Damit ergibt sich:
+\[
+\begin{aligned}
+\rho(g)\,c_0(v)\,\rho(g)^{-1}(\psi)
+&=
+\rho(g)\bigl(v\cdot (g^{-1}\cdot \psi)\bigr) \\
+&=
+g\cdot \bigl(v\cdot (g^{-1}\cdot \psi)\bigr).
+\end{aligned}
+\]
+
+Da $\Sigma_n$ ein Modul über der assoziativen Algebra $\Cl_n$ ist,
+gilt die Assoziativität:
+\[
+g\cdot (v\cdot \phi) = (g v)\cdot \phi.
+\]
+
+Somit folgt:
+\[
+\begin{aligned}
+g\cdot \bigl(v\cdot (g^{-1}\cdot \psi)\bigr)
+&=
+(g v)\cdot (g^{-1}\cdot \psi) \\
+&=
+(g v g^{-1})\cdot \psi.
+\end{aligned}
+\]
+
+Nach Definition von $\lambda$ ist
+\[
+\lambda(g)v = g v g^{-1}.
+\]
+
+Also erhalten wir:
+\[
+\rho(g)\,c_0(v)\,\rho(g)^{-1}(\psi)
+=
+(\lambda(g)v)\cdot \psi
+=
+c_0(\lambda(g)v)\psi.
+\]
+
+Da dies für alle $\psi\in \Sigma_n$ gilt, folgt die Behauptung.
+\end{proof}
+
+\pagebreak
+\begin{THEO}{}{Existenz der globalen Clifford-Multiplikation auf dem Spinorbündel}
+Sei $(M,g)$ eine orientierte Riemannsche Spin-Mannigfaltigkeit mit Spin-Struktur
+\[
+\pi: P^{\Spin}(M) \longrightarrow M
+\]
+und zugehörigem Spinorbündel
+\[
+\Sigma M := P^{\Spin}(M)\times_{\rho} \Sigma_n,
+\]
+wobei $\rho:\Spin(n)\to \Aut(\Sigma_n)$ die Spin-Darstellung ist.
+Dann existiert eine eindeutig bestimmte glatte Bündelabbildung
+\[
+c: TM \longrightarrow \End(\Sigma M),
+\]
+so dass für jedes $x\in M$ eine Darstellung der Clifford-Algebra
+\[
+c_x: \Cl(T_xM,g_x)\longrightarrow \End(\Sigma_x M)
+\]
+induziert wird. Insbesondere gilt punktweise die Clifford-Relation
+\[
+c_x(v)c_x(w)+c_x(w)c_x(v) = -2g_x(v,w)\id_{\Sigma_x M}.
+\]
+\end{THEO}
+
+\begin{proof}
+Wir verwenden die Darstellung des Tangentialbündels und des Spinorbündels als assoziierte Bündel:
+\[
+TM \cong P^{\Spin}\times_{\lambda} \R^n,
+\qquad
+\Sigma M \cong P^{\Spin}\times_{\rho} \Sigma_n,
+\]
+wobei $\lambda:\Spin(n)\to \SO(n)$ die Standardwirkung ist.
+
+\medskip
+
+\noindent
+\textbf{1. Definition.}
+Sei $x\in M$, $q\in P^{\Spin}_x$, $v\in T_xM$ und $\psi\in \Sigma_n$.
+Über die durch $q$ induzierte Identifikation
+\[
+u_q:\R^n \xrightarrow{\sim} T_xM
+\]
+definieren wir
+\[
+c_x(v)[q,\psi] := [q,\,u_q^{-1}(v)\cdot \psi],
+\]
+wobei die rechte Seite die Clifford-Multiplikation im Modellraum $\Sigma_n$ bezeichnet.
+
+\medskip
+
+\noindent
+\textbf{2. Wohldefiniertheit.}
+Wir müssen zeigen, dass die Definition unabhängig von der Wahl des Repräsentanten ist.
+
+Sei $g\in \Spin(n)$. Dann gilt
+\[
+(q,\psi) \sim (qg,\rho(g^{-1})\psi).
+\]
+Zugleich transformiert die Identifikation nach
+\[
+u_{qg} = u_q \circ \lambda(g).
+\]
+Daher folgt
+\[
+u_{qg}^{-1}(v) = \lambda(g)^{-1} u_q^{-1}(v).
+\]
+
+Somit ergibt sich
+\[
+\begin{aligned}
+c_x(v)[qg,\rho(g^{-1})\psi]
+&= [qg,\,\lambda(g)^{-1}u_q^{-1}(v)\cdot \rho(g^{-1})\psi].
+\end{aligned}
+\]
+
+Nun verwenden wir die $\Spin(n)$-Äquivarianz der Clifford-Multiplikation
+\[
+\rho(g^{-1})(v\cdot \psi)
+=
+(\lambda(g^{-1})v)\cdot (\rho(g^{-1})\psi),
+\]
+um zu erhalten
+\[
+\lambda(g)^{-1}u_q^{-1}(v)\cdot \rho(g^{-1})\psi
+=
+\rho(g^{-1})\bigl(u_q^{-1}(v)\cdot \psi\bigr).
+\]
+
+Damit folgt
+\[
+\begin{aligned}
+c_x(v)[qg,\rho(g^{-1})\psi]
+&=
+[qg,\,\rho(g^{-1})(u_q^{-1}(v)\cdot \psi)] \\
+&=
+[q,\,u_q^{-1}(v)\cdot \psi].
+\end{aligned}
+\]
+
+Also ist $c_x(v)$ wohldefiniert.
+
+\medskip
+
+\noindent
+\textbf{3. Glattheit und Linearität.}
+Die Konstruktion ist lokal durch glatte Funktionen in Trivialisierungen gegeben und daher glatt.
+Die Linearität in $v$ folgt unmittelbar aus der Linearität der Clifford-Multiplikation im Modellraum.
+
+\medskip
+
+\noindent
+\textbf{4. Clifford-Relation.}
+Für $v,w\in T_xM$ gilt
+\[
+\begin{aligned}
+c_x(v)c_x(w)[q,\psi]
+&=
+[q,\,u_q^{-1}(v)\cdot (u_q^{-1}(w)\cdot \psi)].
+\end{aligned}
+\]
+Da im Modellraum $\Sigma_n$ die Clifford-Relation gilt,
+\[
+u_q^{-1}(v)\cdot u_q^{-1}(w)
++
+u_q^{-1}(w)\cdot u_q^{-1}(v)
+=
+-2g_x(v,w),
+\]
+folgt unmittelbar
+\[
+c_x(v)c_x(w)+c_x(w)c_x(v)
+=
+-2g_x(v,w)\id.
+\]
+
+\medskip
+
+\noindent
+\textbf{5. Eindeutigkeit.}
+Die Abbildung ist durch die Forderung bestimmt, lokal mit der Modell-Clifford-Multiplikation übereinzustimmen. Daher ist sie eindeutig.
+
+\medskip
+
+Damit ist die globale Clifford-Multiplikation konstruiert.
+\end{proof}
+
+
+\pagebreak
+\printbibliography
+\end{document}

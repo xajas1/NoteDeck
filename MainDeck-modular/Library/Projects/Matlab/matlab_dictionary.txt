@@ -1,0 +1,181 @@
+MATLAB-Lexikon — kompakte Lernnotizen
+=====================================
+
+Projekt: Computational Economics mit MATLAB
+Stand: Lektion 1, Teil 1
+
+[1] Grundidee von MATLAB
+------------------------
+MATLAB ist eine Rechenumgebung für mathematische Objekte.
+Man gibt Befehle ein, MATLAB führt sie aus, speichert Resultate in Variablen
+und kann diese weiterverarbeiten, visualisieren oder in Dateien schreiben.
+
+Mentales Schema:
+Input -> Berechnung -> Speicherung -> Ausgabe
+
+[2] Wichtige Bereiche der Oberfläche
+------------------------------------
+Files:
+    Zeigt Dateien und Ordner auf der Festplatte im aktuellen Arbeitskontext.
+
+Command Window:
+    Hier werden direkte Befehle eingegeben und sofort ausgeführt.
+
+Workspace:
+    Zeigt die aktuell im Speicher vorhandenen Variablen.
+
+Editor:
+    Hier schreibt man Scripts und Functions in Dateien.
+
+[3] Script vs. Function
+-----------------------
+Script:
+    Eine .m-Datei mit Befehlen, die der Reihe nach ausgeführt werden.
+    Arbeitet im gemeinsamen Workspace.
+
+Function:
+    Eine .m-Datei mit klar definiertem Input und Output.
+    Hat einen eigenen lokalen Workspace.
+
+Faustregel:
+    Einstieg -> Script
+    Sauberer modularer Code -> Function
+
+[4] Arbeitsordner und Path
+--------------------------
+Current Folder / Arbeitsordner:
+    Der Ordner, in dem MATLAB aktuell arbeitet und zuerst nach Dateien sucht.
+
+Wichtige Anfängerregel:
+    Lieber in den richtigen Ordner wechseln ("Change Folder")
+    statt sofort mit "Add to Path" zu arbeiten.
+
+[5] Variablen
+-------------
+Eine Variable ist ein Name für einen gespeicherten Wert.
+
+Beispiele:
+    x = 1
+    x = x + 1
+    y = 2*x
+
+Bedeutung:
+    Zuerst wird ein Wert gespeichert, später kann mit dem Namen weitergerechnet werden.
+
+[6] Semikolon
+-------------
+Ohne Semikolon:
+    MATLAB zeigt das Ergebnis im Command Window an.
+
+Mit Semikolon:
+    MATLAB führt den Befehl aus, unterdrückt aber die Ausgabe.
+
+Beispiel:
+    a = 5
+    b = 6;
+
+[7] Wichtige Grundbefehle
+-------------------------
+clear;
+    Löscht Variablen aus dem Workspace.
+
+clc;
+    Löscht die Anzeige im Command Window.
+
+close all;
+    Schließt alle offenen Figuren/Plots.
+
+Typischer Anfang eines Scripts:
+    clear;
+    clc;
+    close all;
+
+[8] Einige eingebaute mathematische Befehle
+-------------------------------------------
+sqrt(9)
+    Quadratwurzel
+
+exp(1)
+    e
+
+pi
+    Kreiszahl pi
+
+1i
+    imaginäre Einheit
+
+[9] Approximation von e
+-----------------------
+Wichtige erste Formel:
+    (1 + 1/n)^n
+
+Sie approximiert e für große n.
+
+Typischer Ablauf:
+    n = 1000;
+    approx = (1 + 1/n)^n;
+    true_value = exp(1);
+    error_value = abs(true_value - approx);
+
+[10] fprintf
+------------
+Zweck:
+    Strukturierte formatierte Ausgabe von Text und Variablenwerten.
+
+Beispiel:
+    fprintf('n = %d, Fehler = %.10f\n', n1, error1);
+
+Bedeutung:
+    %d      -> ganze Zahl
+    %.10f   -> Fließkommazahl mit 10 Nachkommastellen
+    \n     -> Zeilenumbruch
+
+Logik:
+    Der erste Platzhalter bekommt den ersten Wert nach dem Formatstring,
+    der zweite Platzhalter den zweiten Wert usw.
+
+[11] Sections / Blöcke
+----------------------
+Mit %% kann man ein Script in Abschnitte gliedern.
+
+Beispiel:
+    %% Setup
+    clear;
+    clc;
+    close all;
+
+    %% Phase 1
+    x = 1;
+    y = x + 2;
+
+Vorteil:
+    Einzelne Abschnitte können separat ausgeführt werden.
+
+Wichtiger Hinweis:
+    Alle Sections eines Scripts teilen sich denselben Workspace.
+    Deshalb können Variablen aus früheren Blöcken spätere Blöcke beeinflussen.
+
+[12] Gute Arbeitsregeln
+-----------------------
+1. Den richtigen Arbeitsordner setzen.
+2. Scripts sauber mit Sections strukturieren.
+3. Nicht auf alte Workspace-Variablen vertrauen.
+4. Rechenschritte explizit formulieren.
+5. Erst einfache, kontrollierte Beispiele testen.
+
+[13] Merksätze
+--------------
+- Files = Dateien auf der Festplatte
+- Workspace = aktuell geladene Variablen
+- Script = Abfolge von Befehlen
+- Function = Input-Output-Baustein
+- Sections mit %% helfen bei der Struktur
+- Scripts teilen Workspace, Functions nicht
+
+[14] Offene nächste Themen
+--------------------------
+- Vektoren
+- Matrizen
+- elementweise Operationen
+- Unterschiede zwischen ^ und .^
+- erste systematische numerische Rechnungen

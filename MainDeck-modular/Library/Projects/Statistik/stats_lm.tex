@@ -1,0 +1,1487 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17  Graphik
+% 18  Extra
+% 00. Titel und Autor
+
+\usepackage{slashed}
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Ad}{\operatorname{Ad}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\QU}{\mathbb{H}}
+\newcommand{\Cinf}{C^{\infty}}
+\newcommand{\Mod}{\mathrm{Mod}}
+\newcommand{\Alg}{\mathrm{Alg}}
+\newcommand{\Diff}{\mathrm{Diff}}
+\newcommand{\Iso}{\mathrm{Iso}}
+\newcommand{\Aut}{\mathrm{Aut}}
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Cl}{\mathrm{Cl}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\Mat}{\mathrm{Mat}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\Sp}{\mathrm{Sp}}
+\newcommand{\Spin}{\mathrm{Spin}}
+\newcommand{\Pin}{\mathrm{Pin}}
+\newcommand{\Lor}{\mathrm{Lor}}
+\newcommand{\Ogroup}{\mathrm{O}}
+\newcommand{\U}{\mathrm{U}}
+\newcommand{\CP}{\mathbb{C} P}
+\newcommand{\RP}{\mathbb{R} P}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\graphicspath{{../../Library/Images/}}
+\usepackage[export]{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+% Hellblau definieren
+\definecolor{hellblau}{rgb}{0.3,0.6,1}
+\newenvironment{note}{\par\begingroup\color{hellblau}\itshape}{\par\endgroup}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\CustomHeading{Definition}{#1}{#2}}{}
+\newenvironment{PROP}[2]{\CustomHeading{Proposition}{#1}{#2}}{}
+\newenvironment{THEO}[2]{\CustomHeading{Theorem}{#1}{#2}}{}
+\newenvironment{LEM}[2]{\CustomHeading{Lemma}{#1}{#2}}{}
+\newenvironment{KORO}[2]{\CustomHeading{Corollar}{#1}{#2}}{}
+\newenvironment{REM}[2]{\CustomHeading{Remark}{#1}{#2}}{}
+\newenvironment{EXA}[2]{\CustomHeading{Example}{#1}{#2}}{}
+\newenvironment{STUD}[2]{\CustomHeading{Study}{#1}{#2}}{}
+\newenvironment{CONC}[2]{\CustomHeading{Concept}{#1}{#2}}{}
+\newenvironment{OTH}[2]{\CustomHeading{Other}{#1}{#2}}{}
+\newenvironment{EXE}[2]{\CustomHeading{Exercise}{#1}{#2}}{}
+\newenvironment{MOT}[2]{\CustomHeading{Motivation}{#1}{#2}}{}
+\newenvironment{PROOF}[2]{\CustomHeading{Proof}{#1}{#2}}{}
+
+% --- Unit Umgebung für Source-Inhalte ---
+\usepackage{mdframed}
+\newmdenv[
+  linewidth=1pt,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftmargin=0cm,
+  rightmargin=0cm,
+  skipabove=10pt,
+  skipbelow=10pt,
+  innertopmargin=0.5\baselineskip,
+  innerbottommargin=0.5\baselineskip,
+  backgroundcolor=gray!10,
+  linecolor=gray
+]{unitbox}
+
+\newenvironment{unit}[1]
+  {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
+  {\end{unitbox}}
+
+% --- 17. ... ---
+
+% --- 18. Extras ---
+\usepackage{stmaryrd}
+\usepackage{bbold}  % falls du \mathbb{1} nutzen willst
+
+% --- 19. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+
+% Abstand zwischen Einträgen
+\setlength{\cftbeforesecskip}{2pt}      % Sections
+\setlength{\cftbeforesubsecskip}{1pt}   % Subsections
+\setlength{\cftbeforesubsubsecskip}{0pt}
+\renewcommand{\cfttoctitlefont}{\large\bfseries}
+
+% --- 00. Titel und Autor ---
+\title{Mein Titel}
+\author{Tim Jaschik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+Kurze Beschreibung …
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\tableofcontents
+
+\pagebreak
+
+
+\section{Verständnisansatz: Lineares Modell, Schätzung und Testlogik}
+
+
+\section{Beschreibende Vorgehensweise: Vom inhaltlichen Problem zum statistischen Test}
+
+Man beginnt mit einer inhaltlichen Fragestellung, zum Beispiel:
+
+\[
+\text{Hat eine Medikation einen Effekt auf einen bestimmten Outcome?}
+\]
+
+Diese Frage ist zunächst noch zu ungenau für eine statistische Analyse. Deshalb übersetzt man sie in eine präzisere Modellfrage:
+
+\[
+\text{Unterscheiden sich Personen mit Medikation und Personen ohne Medikation im erwarteten Outcome,}
+\]
+\[
+\text{wenn relevante Ausgangswerte oder Kovariaten berücksichtigt werden?}
+\]
+
+Als Nächstes legt man fest, welche Informationen in das Modell eingehen sollen. Man entscheidet also, welche Variable der Outcome ist, welche Variable die Gruppenzugehörigkeit beschreibt und welche weiteren Kovariaten berücksichtigt werden sollen. Im Drugtest-Beispiel wären das etwa der spätere Symptomwert als Zielvariable, die Gruppenzugehörigkeit als Medikationsindikator und ein Baseline-Wert als Kontrollvariable.
+
+Dann formuliert man ein statistisches Modell. Dieses Modell ist ein Vorschlag dafür, wie der erwartete Outcome systematisch von den erklärenden Variablen abhängen könnte. Die Medikation wird dabei durch einen eigenen Modellbestandteil repräsentiert. Dieser Modellbestandteil steht für den Unterschied zwischen Medikations- und Kontrollgruppe, nachdem die übrigen berücksichtigten Variablen konstant gehalten werden.
+
+Wichtig ist: Dieser modellierte Unterschied ist zunächst nur ein statistischer Gruppenunterschied. Ob er als kausaler Medikamenteneffekt interpretiert werden darf, hängt zusätzlich vom Studiendesign ab, insbesondere davon, ob randomisiert wurde oder ob relevante Störvariablen kontrolliert wurden.
+
+Aus den beobachteten Daten baut man anschließend die konkrete Modellstruktur auf. Man übersetzt also die vorhandenen Informationen in eine Form, mit der gerechnet werden kann: Gruppenzugehörigkeiten werden kodiert, Kovariaten werden eingetragen, mögliche Interaktionen werden ergänzt. Diese Struktur legt fest, welche Art von Effekten das Modell überhaupt schätzen kann.
+
+Danach werden die unbekannten Modellparameter aus den Daten geschätzt. Man sucht also diejenigen Werte für die Modellkoeffizienten, bei denen die vorhergesagten Werte möglichst gut zu den beobachteten Werten passen. Dabei erhält man zum Beispiel eine geschätzte Größe für den Medikationsunterschied. Zusätzlich berechnet man, wie stark die beobachteten Werte von den durch das Modell vorhergesagten Werten abweichen. Aus diesen Abweichungen wird die Fehlervarianz geschätzt.
+
+Damit hat man aber noch nicht automatisch entschieden, ob der geschätzte Medikationsunterschied statistisch überzeugend ist. Ein geschätzter Unterschied kann groß wirken, aber zugleich sehr unsicher sein. Deshalb bestimmt man zusätzlich die Unsicherheit dieses Schätzwerts. Diese Unsicherheit wird durch den Standardfehler beschrieben. Er sagt, wie stark der geschätzte Effekt unter vergleichbaren Stichproben typischerweise schwanken würde, wenn das Modell zutrifft.
+
+Nun formuliert man eine Nullhypothese. Im Drugtest-Beispiel wäre das die Annahme, dass es keinen Medikationsunterschied gibt. Anschließend konstruiert man eine Testgröße, die den geschätzten Medikationsunterschied ins Verhältnis zu seiner Unsicherheit setzt. Die Grundidee lautet:
+
+\[
+\text{Ein geschätzter Effekt ist umso überzeugender,}
+\]
+\[
+\text{je größer er im Vergleich zu seiner eigenen statistischen Unsicherheit ist.}
+\]
+
+Diese Testgröße hat unter der Nullhypothese und unter den Modellannahmen eine bekannte Verteilung. Dadurch kann man beurteilen, wie extrem der tatsächlich beobachtete Wert dieser Testgröße wäre, falls es in Wahrheit keinen Medikationsunterschied gäbe. Daraus ergibt sich der p-Wert.
+
+Der p-Wert beantwortet also nicht die Frage, wie wahrscheinlich die Nullhypothese ist. Er beantwortet vielmehr die Frage:
+
+\[
+\text{Wenn es tatsächlich keinen Medikationsunterschied gäbe und das Modell korrekt wäre,}
+\]
+\[
+\text{wie wahrscheinlich wäre dann ein Ergebnis, das mindestens so stark gegen die Nullhypothese spricht}
+\]
+\[
+\text{wie das beobachtete?}
+\]
+
+Wenn dieser p-Wert klein ist, wertet man die Daten als statistische Evidenz gegen die Nullhypothese. Man sagt dann: Die beobachteten Daten wären unter der Annahme ``kein Medikationsunterschied'' eher ungewöhnlich.
+
+Wenn der p-Wert nicht klein ist, bedeutet das nicht, dass es sicher keinen Effekt gibt. Es bedeutet nur, dass die Daten keine ausreichende Evidenz gegen die Nullhypothese liefern. Das kann an einem tatsächlich kleinen Effekt liegen, aber auch an einer kleinen Stichprobe, großer Streuung, unpassender Modellierung oder schlechten Daten.
+
+Die ganze Vorgehensweise ist daher ein kontrollierter Übersetzungsprozess:
+
+\[
+\text{inhaltliche Frage}
+\longrightarrow
+\text{statistisches Modell}
+\longrightarrow
+\text{Schätzung}
+\longrightarrow
+\text{Unsicherheit}
+\longrightarrow
+\text{Testgröße}
+\longrightarrow
+\text{Nullverteilung}
+\longrightarrow
+\text{Interpretation}.
+\]
+
+Kritisch bleibt dabei: Die Aussage ist immer modellabhängig. Wenn man andere Kovariaten einbezieht, Interaktionen zulässt oder das Modell anders spezifiziert, ändert sich auch die Bedeutung des geschätzten Effekts. Ebenso ist ein statistisch signifikanter Unterschied nicht automatisch ein kausaler oder praktisch relevanter Effekt. Dafür braucht man zusätzlich inhaltliche Theorie, gutes Studiendesign und eine sorgfältige Prüfung der Modellannahmen.
+
+\subsection{Intro}
+
+Wir beobachten in einem statistischen Anwendungskontext Daten der Form
+\[
+(y_i,d_i,x_i),\qquad i=1,\dots,n,
+\]
+wobei beispielsweise
+\[
+y_i=\text{Outcome},
+\]
+\[
+d_i=\text{Medikationsindikator},
+\]
+und
+\[
+x_i=\text{Baseline-Wert oder Kovariate}
+\]
+ist. Vor der Beobachtung können diese Größen als Zufallsvariablen aufgefasst werden. In der klassischen linearen Modellierung interessiert man sich jedoch meist primär für die \emph{bedingte Verteilung} von \(Y\) gegeben die beobachteten Prädiktoren. Man modelliert also nicht notwendigerweise die vollständige gemeinsame Verteilung von \((X,Y)\), sondern setzt an bei
+\[
+Y\mid X\sim N(X\beta,\sigma^2I_n).
+\]
+
+Das bedeutet:
+\[
+\mathbb E(Y\mid X)=X\beta
+\]
+und
+\[
+\operatorname{Var}(Y\mid X)=\sigma^2I_n.
+\]
+
+Die Designmatrix \(X\) kodiert dabei die Informationen, die man als systematisch relevant betrachtet: Gruppenindikatoren, Kovariaten, Interaktionen usw.
+
+\subsection{Modellierungsidee}
+
+Im Drugtest-Beispiel könnte man etwa das Modell
+\[
+Y_i=\beta_0+\alpha D_i+\beta_1x_i+\varepsilon_i
+\]
+ansetzen, wobei
+\[
+D_i=
+\begin{cases}
+1, & \text{Medikation},\\
+0, & \text{Kontrolle},
+\end{cases}
+\]
+und
+\[
+\varepsilon_i\overset{\mathrm{ind}}{\sim}N(0,\sigma^2).
+\]
+
+Die zugehörige Erwartungswertstruktur lautet
+\[
+\mathbb E(Y_i\mid D_i,x_i)
+=
+\beta_0+\alpha D_i+\beta_1x_i.
+\]
+
+Der Parameter
+\[
+\alpha
+\]
+ist in diesem Modell der mittlere Unterschied zwischen Medikations- und Kontrollgruppe bei gleichem Baseline-Wert \(x_i\). Er ist zunächst ein \emph{modellinterner adjustierter Gruppenunterschied}. Ob er als kausaler Medikamenteneffekt interpretiert werden darf, hängt von zusätzlichen Annahmen ab, insbesondere vom Studiendesign, etwa Randomisierung oder Kontrolle von Confounding.
+
+\subsection{Von inhaltlichen Informationen zur Designmatrix}
+
+Aus den beobachteten Prädiktoren wird eine konkrete Designmatrix gebaut:
+\[
+X=
+\begin{pmatrix}
+1 & D_1 & x_1\\
+1 & D_2 & x_2\\
+\vdots & \vdots & \vdots\\
+1 & D_n & x_n
+\end{pmatrix}.
+\]
+
+Diese Matrix ist für die konkrete Analyse fixiert. Auch wenn die \(x_i\) oder \(D_i\) ursprünglich als Zufallsvariablen aufgefasst werden könnten, arbeitet die klassische Inferenz oft \emph{bedingt auf die beobachtete Designmatrix}.
+
+Man fragt also:
+Gegeben diese konkrete Designmatrix $X$, wie plausibel ist das beobachtete $Y$-Muster unter bestimmten Modellannahmen?
+
+\subsection{Schätzung}
+
+Mit den beobachteten Outcomes
+\[
+y=
+\begin{pmatrix}
+y_1\\
+\vdots\\
+y_n
+\end{pmatrix}
+\]
+und der Designmatrix \(X\) schätzt man die unbekannten Parameter durch kleinste Quadrate:
+\[
+\widehat\beta
+=
+(X^TX)^{-1}X^Ty.
+\]
+
+Im Beispiel ist
+\[
+\widehat\beta=
+\begin{pmatrix}
+\widehat\beta_0\\
+\widehat\alpha\\
+\widehat\beta_1
+\end{pmatrix}.
+\]
+
+Dabei ist
+\[
+\widehat\alpha
+\]
+der geschätzte adjustierte Medikationsunterschied.
+
+Danach berechnet man die vorhergesagten Werte
+\[
+\widehat y=X\widehat\beta,
+\]
+die Residuen
+\[
+\widehat\varepsilon=y-\widehat y,
+\]
+die Residuenquadratsumme
+\[
+RSS=\widehat\varepsilon^T\widehat\varepsilon,
+\]
+und die geschätzte Fehlervarianz
+\[
+s^2=\widehat\sigma^2=\frac{RSS}{n-p}.
+\]
+
+Diese Größen sind Funktionen der beobachteten Daten und der gewählten Designmatrix.
+
+\subsection{Unsicherheit der Schätzer}
+
+Unter den Modellannahmen gilt bedingt auf \(X\):
+\[
+\widehat\beta\mid X
+\sim
+N\left(\beta,\sigma^2(X^TX)^{-1}\right).
+\]
+
+Da \(\sigma^2\) unbekannt ist, ersetzt man es durch
+\[
+s^2=\frac{RSS}{n-p}.
+\]
+
+Daraus erhält man die geschätzte Kovarianzmatrix der Koeffizientenschätzer:
+\[
+\widehat{\operatorname{Var}}(\widehat\beta)
+=
+s^2(X^TX)^{-1}.
+\]
+
+Insbesondere ist der Standardfehler von \(\widehat\alpha\)
+\[
+\operatorname{se}(\widehat\alpha)
+=
+s\sqrt{[(X^TX)^{-1}]_{\alpha\alpha}}.
+\]
+
+Der Standardfehler beschreibt, wie stark der Schätzer \(\widehat\alpha\) unter wiederholter Stichprobenziehung typischerweise schwanken würde, wenn das Modell korrekt ist.
+
+\subsection{Testidee}
+
+Nach der Schätzung weiß man noch nicht, ob der geschätzte Effekt statistisch überzeugend ist. Man hat zunächst nur eine Zahl:
+\[
+\widehat\alpha.
+\]
+
+Um zu prüfen, ob die Daten gegen die Nullhypothese
+\[
+H_0:\alpha=0
+\]
+sprechen, konstruiert man eine Teststatistik:
+\[
+T_\alpha(Y;X)
+=
+\frac{\widehat\alpha(Y;X)}
+{\operatorname{se}(\widehat\alpha)(Y;X)}.
+\]
+
+Sie misst:
+\[
+\text{geschätzter Effekt in Einheiten seiner geschätzten Standardunsicherheit}.
+\]
+
+Nach Einsetzen der beobachteten Daten erhält man den beobachteten Testwert
+\[
+t_{\mathrm{obs}}
+=
+T_\alpha(y;X).
+\]
+
+\subsection{Nullverteilung und p-Wert}
+
+Unter der Nullhypothese
+\[
+H_0:\alpha=0
+\]
+und unter den Modellannahmen gilt bedingt auf \(X\):
+\[
+T_\alpha(Y;X)\mid X
+\sim
+t_{n-p}.
+\]
+
+Das ist der zentrale inferenzstatistische Schritt: Man hat eine aus den Daten berechnete Größe konstruiert, deren Verteilung unter der Nullhypothese bekannt ist.
+
+Der zweiseitige p-Wert ist
+\[
+p=
+P_{H_0}\left(
+|T_\alpha(Y;X)|\geq |t_{\mathrm{obs}}|
+\mid X
+\right).
+\]
+
+Das bedeutet:
+
+Wenn tatsächlich $\alpha=0$ gilt und das lineare Modell korrekt ist, wie wahrscheinlich wäre dann ein mindestens so extremer t-Wert wie der beobachtete?
+
+
+Wichtig ist:
+\[
+p\neq P(H_0\mid y,X).
+\]
+
+Der p-Wert ist also nicht die Wahrscheinlichkeit, dass die Nullhypothese wahr ist. Er ist eine Wahrscheinlichkeit für extreme Teststatistiken unter der Annahme, dass die Nullhypothese wahr ist.
+
+\subsection{Interpretation}
+
+Wenn der p-Wert klein ist, sagt man:
+
+Die beobachteten Daten sind unter der Nullhypothese $\alpha=0$ und den Modellannahmen schwer vereinbar.
+
+
+Es gibt dann statistische Evidenz gegen \(H_0\).
+
+Wenn der p-Wert nicht klein ist, sagt man:
+
+\[
+\text{Die Daten liefern keine ausreichende Evidenz gegen }H_0.
+\]
+
+Aber daraus folgt nicht:
+\[
+\alpha=0 \text{ ist wahr}.
+\]
+
+Es kann auch sein, dass der Effekt klein ist, die Stichprobe zu klein ist, die Unsicherheit groß ist oder das Modell unpassend spezifiziert wurde.
+
+\subsection{Kompakte Gesamtfassung}
+
+Man kann den vollständigen Ablauf so zusammenfassen:
+\[
+\boxed{
+\text{Fragestellung}
+\longrightarrow
+\text{Erwartungswertstruktur}
+\longrightarrow
+\text{Designmatrix}
+\longrightarrow
+\text{Schätzung}
+\longrightarrow
+\text{Unsicherheit}
+\longrightarrow
+\text{Teststatistik}
+\longrightarrow
+\text{Nullverteilung}
+\longrightarrow
+\text{p-Wert}
+\longrightarrow
+\text{Interpretation}.
+}
+\]
+
+Im Drugtest-Beispiel heißt das:
+\[
+\boxed{
+\text{Hat die Medikation einen Effekt?}
+}
+\]
+
+Diese Frage wird präzisiert zu
+\[
+\boxed{
+H_0:\alpha=0
+}
+\]
+im Modell
+\[
+Y_i=\beta_0+\alpha D_i+\beta_1x_i+\varepsilon_i.
+\]
+
+Aus den beobachteten Daten und der konkreten Designmatrix \(X\) berechnet man
+\[
+\widehat\alpha,
+\qquad
+\operatorname{se}(\widehat\alpha),
+\qquad
+t_{\mathrm{obs}}
+=
+\frac{\widehat\alpha}{\operatorname{se}(\widehat\alpha)}.
+\]
+
+Dann verwendet man
+\[
+T_\alpha\mid X,H_0\sim t_{n-p},
+\]
+um zu bestimmen, wie extrem der beobachtete Wert unter der Nullhypothese wäre.
+
+\subsection{Kritischer Zusatz}
+
+Diese ganze Argumentation ist nur so gut wie ihre Voraussetzungen:
+\[
+Y\mid X\sim N(X\beta,\sigma^2I_n),
+\]
+korrekte Spezifikation der relevanten Kovariaten,
+unabhängige Beobachtungen,
+gleiche Fehlervarianz,
+keine problematischen Ausreißer,
+und bei kausaler Interpretation zusätzlich ein geeignetes Studiendesign.
+
+Daher liefert das lineare Modell nicht automatisch Wahrheit, sondern einen formal kontrollierten Rahmen, um unter klaren Annahmen aus Daten Schätzungen, Unsicherheit und Hypothesentests abzuleiten.
+
+
+\pagebreak
+
+
+\section{Übungsfälle zur Wahl der Designmatrix}
+
+In diesem Abschnitt soll systematisch geübt werden, wie man aus einem konkreten Modellierungskontext die passende Designmatrix \(X\) im normalen linearen Modell
+\[
+Y=X\beta+\sigma Z,
+\qquad Z\sim N(0,I_n),
+\]
+ableitet.
+
+Die Grundfrage lautet jeweils:
+\[
+\text{Kontext}
+\longrightarrow
+\text{passende } \operatorname{lm}\text{-Formel}
+\longrightarrow
+\text{Designmatrix }X.
+\]
+
+Dabei sollte man stets fragen:
+\begin{enumerate}
+    \item Ist \(Y\) metrisch?
+    \item Gibt es metrische Kovariaten?
+    \item Gibt es kategoriale Faktoren?
+    \item Sollen Gruppen nur verschiedene Niveaus haben oder auch verschiedene Steigungen?
+    \item Gibt es Interaktionen?
+\end{enumerate}
+
+\subsection{Case 1: Nur ein Mittelwert}
+
+\subsubsection*{Fragestellung}
+
+Man misst bei \(n=6\) Personen einen Stressscore \(Y\). Es gibt keine Gruppen und keine Kovariaten. Ziel ist nur, den mittleren Stressscore zu schätzen.
+
+Die Datenstruktur ist
+\[
+Y_1,\dots,Y_6.
+\]
+
+Gesucht ist die passende Designmatrix \(X\).
+
+\subsubsection*{Lösung}
+
+Das Modell lautet
+\[
+Y_i=\beta_0+\sigma Z_i.
+\]
+
+Die Designmatrix ist
+\[
+X=
+\begin{pmatrix}
+1\\
+1\\
+1\\
+1\\
+1\\
+1
+\end{pmatrix}.
+\]
+
+Die entsprechende R-Formel ist
+\[
+\texttt{y \textasciitilde{} 1}.
+\]
+
+In diesem Modell ist
+\[
+\mathbb E(Y_i)=\beta_0
+\]
+für alle Beobachtungen \(i=1,\dots,6\). Es wird also nur ein gemeinsames Niveau geschätzt.
+
+\subsection{Case 2: Eine metrische Kovariate}
+
+\subsubsection*{Fragestellung}
+
+Man misst bei \(n=8\) Personen
+\[
+Y=\text{Reaktionszeit},
+\qquad
+x=\text{Alter}.
+\]
+Man vermutet einen linearen Zusammenhang zwischen Alter und Reaktionszeit.
+
+Gesucht ist die passende Designmatrix \(X\).
+
+\subsubsection*{Lösung}
+
+Das Modell lautet
+\[
+Y_i=\beta_0+\beta_1x_i+\sigma Z_i.
+\]
+
+Die Designmatrix ist
+\[
+X=
+\begin{pmatrix}
+1 & x_1\\
+1 & x_2\\
+\vdots & \vdots\\
+1 & x_8
+\end{pmatrix}.
+\]
+
+Die entsprechende R-Formel ist
+\[
+\texttt{y \textasciitilde{} x}.
+\]
+
+Hier ist
+\[
+\mathbb E(Y_i)=\beta_0+\beta_1x_i.
+\]
+Der Parameter \(\beta_1\) beschreibt die Veränderung des erwarteten Reaktionszeitwertes pro Einheit Alter.
+
+\subsection{Case 3: Drei Gruppenmittelwerte}
+
+\subsubsection*{Fragestellung}
+
+Man vergleicht die mittlere Konzentration eines Schadstoffs an drei Orten:
+\[
+g\in\{A,B,C\}.
+\]
+Es gibt keine weitere Kovariate. Die inhaltliche Frage lautet:
+\[
+\text{Unterscheiden sich die Ortsmittelwerte?}
+\]
+
+Gesucht sind:
+\begin{enumerate}
+    \item die Designmatrix für das volle Modell,
+    \item die Designmatrix für das Nullmodell gleicher Mittelwerte.
+\end{enumerate}
+
+\subsubsection*{Lösung}
+
+Das volle Modell lautet
+\[
+Y_i=\mu_{g_i}+\sigma Z_i.
+\]
+
+Mit Zellmittelwertkodierung erhält man
+\[
+X_M=
+\begin{pmatrix}
+D_A & D_B & D_C
+\end{pmatrix},
+\]
+wobei
+\[
+D_A(i)=
+\begin{cases}
+1, & g_i=A,\\
+0, & \text{sonst},
+\end{cases}
+\]
+und analog für \(D_B,D_C\).
+
+Die zugehörige R-Formel lautet
+\[
+\texttt{y \textasciitilde{} 0 + g}.
+\]
+
+Dann sind die Koeffizienten direkt
+\[
+\mu_A,\mu_B,\mu_C.
+\]
+
+Mit R-Referenzkodierung erhält man alternativ
+\[
+X_M=
+\begin{pmatrix}
+1 & D_B & D_C
+\end{pmatrix},
+\]
+mit R-Formel
+\[
+\texttt{y \textasciitilde{} g}.
+\]
+
+Dann gilt bei Referenzgruppe \(A\):
+\[
+\mathbb E(Y_i\mid g_i=A)=\beta_0,
+\]
+\[
+\mathbb E(Y_i\mid g_i=B)=\beta_0+\alpha_B,
+\]
+\[
+\mathbb E(Y_i\mid g_i=C)=\beta_0+\alpha_C.
+\]
+
+Das Nullmodell gleicher Mittelwerte lautet
+\[
+Y_i=\mu+\sigma Z_i.
+\]
+
+Daher ist
+\[
+X_D=\mathbf 1.
+\]
+
+Die zugehörige R-Formel ist
+\[
+\texttt{y \textasciitilde{} 1}.
+\]
+
+Der Modellvergleich lautet in R:
+\[
+\texttt{anova(lm(y \textasciitilde{} 1, data=df), lm(y \textasciitilde{} g, data=df))}.
+\]
+
+Formal testet man
+\[
+H_0:\mu_A=\mu_B=\mu_C.
+\]
+
+\subsection{Case 4: Zwei Gruppen und eine Kovariate}
+
+\subsubsection*{Fragestellung}
+
+Man misst bei Patientinnen und Patienten einen Symptomscore \(Y\). Es gibt zwei Therapiegruppen:
+\[
+g\in\{\text{Kontrolle},\text{Therapie}\},
+\]
+und zusätzlich den Baseline-Score
+\[
+x=\text{Symptomscore vor Behandlung}.
+\]
+Man möchte den Therapieeffekt prüfen, aber für den Baseline-Score kontrollieren.
+
+Gesucht sind:
+\begin{enumerate}
+    \item die Designmatrix für das Modell mit Therapieeffekt,
+    \item die Designmatrix für das Nullmodell ohne Therapieeffekt.
+\end{enumerate}
+
+\subsubsection*{Lösung}
+
+Definiere die Dummyvariable
+\[
+D_T(i)=
+\begin{cases}
+1, & g_i=\text{Therapie},\\
+0, & g_i=\text{Kontrolle}.
+\end{cases}
+\]
+
+Das volle Modell mit Therapieeffekt lautet
+\[
+Y_i=\beta_0+\alpha D_T(i)+\beta_1x_i+\sigma Z_i.
+\]
+
+Die Designmatrix ist
+\[
+X_M=
+\begin{pmatrix}
+1 & D_T & x
+\end{pmatrix}.
+\]
+
+Die entsprechende R-Formel ist
+\[
+\texttt{y \textasciitilde{} g + x}.
+\]
+
+Für die Kontrollgruppe gilt
+\[
+\mathbb E(Y_i\mid g_i=\text{Kontrolle},x_i)
+=
+\beta_0+\beta_1x_i.
+\]
+
+Für die Therapiegruppe gilt
+\[
+\mathbb E(Y_i\mid g_i=\text{Therapie},x_i)
+=
+\beta_0+\alpha+\beta_1x_i.
+\]
+
+Der Parameter \(\alpha\) beschreibt also den Gruppenunterschied bei gleichem Baseline-Score.
+
+Das Nullmodell ohne Therapieeffekt lautet
+\[
+Y_i=\beta_0+\beta_1x_i+\sigma Z_i.
+\]
+
+Die Designmatrix ist
+\[
+X_D=
+\begin{pmatrix}
+1 & x
+\end{pmatrix}.
+\]
+
+Die entsprechende R-Formel ist
+\[
+\texttt{y \textasciitilde{} x}.
+\]
+
+Der Modellvergleich lautet:
+\[
+\texttt{anova(lm(y \textasciitilde{} x, data=df), lm(y \textasciitilde{} g + x, data=df))}.
+\]
+
+Formal testet man
+\[
+H_0:\alpha=0.
+\]
+
+\subsection{Case 5: Zwei Gruppen mit unterschiedlichen Steigungen}
+
+\subsubsection*{Fragestellung}
+
+Wie in Case 4, aber zusätzlich vermutet man:
+\[
+\text{Der Zusammenhang zwischen Baseline-Score und Endscore ist in der Therapiegruppe anders als in der Kontrollgruppe.}
+\]
+
+Gesucht sind:
+\begin{enumerate}
+    \item die passende Designmatrix,
+    \item die zusätzliche Spalte gegenüber Case 4.
+\end{enumerate}
+
+\subsubsection*{Lösung}
+
+Nun erlaubt man unterschiedliche Steigungen in den beiden Gruppen. Das Modell lautet
+\[
+Y_i
+=
+\beta_0+\alpha D_T(i)+\beta_1x_i+\delta D_T(i)x_i+\sigma Z_i.
+\]
+
+Die Designmatrix ist
+\[
+X=
+\begin{pmatrix}
+1 & D_T & x & D_Tx
+\end{pmatrix}.
+\]
+
+Die entsprechende R-Formel lautet
+\[
+\texttt{y \textasciitilde{} g * x}.
+\]
+
+Gegenüber Case 4 kommt die zusätzliche Spalte
+\[
+D_Tx
+\]
+hinzu.
+
+Für die Kontrollgruppe gilt
+\[
+\mathbb E(Y_i\mid g_i=\text{Kontrolle},x_i)
+=
+\beta_0+\beta_1x_i.
+\]
+
+Für die Therapiegruppe gilt
+\[
+\mathbb E(Y_i\mid g_i=\text{Therapie},x_i)
+=
+(\beta_0+\alpha)+(\beta_1+\delta)x_i.
+\]
+
+Der Parameter \(\delta\) beschreibt also die Differenz der Steigungen zwischen Therapie- und Kontrollgruppe.
+
+Der Test auf unterschiedliche Steigungen erfolgt durch den Modellvergleich
+\[
+\texttt{anova(lm(y \textasciitilde{} g + x, data=df), lm(y \textasciitilde{} g * x, data=df))}.
+\]
+
+Formal testet man
+\[
+H_0:\delta=0.
+\]
+
+\subsection{Case 6: Zwei metrische Variablen ohne Interaktion}
+
+\subsubsection*{Fragestellung}
+
+Man möchte den Blutdruck \(Y\) durch Alter \(x_1\) und BMI \(x_2\) erklären. Es wird angenommen, dass sich die Effekte additiv verhalten.
+
+Gesucht ist die passende Designmatrix.
+
+\subsubsection*{Lösung}
+
+Das additive multiple Regressionsmodell lautet
+\[
+Y_i=\beta_0+\beta_1x_{i1}+\beta_2x_{i2}+\sigma Z_i.
+\]
+
+Die Designmatrix ist
+\[
+X=
+\begin{pmatrix}
+1 & x_1 & x_2
+\end{pmatrix}.
+\]
+
+Die entsprechende R-Formel lautet
+\[
+\texttt{y \textasciitilde{} x1 + x2}.
+\]
+
+Hier gilt
+\[
+\mathbb E(Y_i\mid x_{i1},x_{i2})
+=
+\beta_0+\beta_1x_{i1}+\beta_2x_{i2}.
+\]
+
+Der Effekt von \(x_1\) ist konstant gleich \(\beta_1\), unabhängig vom Wert von \(x_2\). Entsprechend ist der Effekt von \(x_2\) konstant gleich \(\beta_2\), unabhängig vom Wert von \(x_1\).
+
+\subsection{Case 7: Zwei metrische Variablen mit Interaktion}
+
+\subsubsection*{Fragestellung}
+
+Wie in Case 6, aber man vermutet:
+\[
+\text{Der Effekt des BMI auf den Blutdruck hängt vom Alter ab.}
+\]
+
+Gesucht sind:
+\begin{enumerate}
+    \item die passende Designmatrix,
+    \item die formale Bedeutung des Interaktionsterms.
+\end{enumerate}
+
+\subsubsection*{Lösung}
+
+Das Interaktionsmodell lautet
+\[
+Y_i
+=
+\beta_0+\beta_1x_{i1}+\beta_2x_{i2}
++\beta_{12}x_{i1}x_{i2}
++\sigma Z_i.
+\]
+
+Die Designmatrix ist
+\[
+X=
+\begin{pmatrix}
+1 & x_1 & x_2 & x_1x_2
+\end{pmatrix}.
+\]
+
+Die entsprechende R-Formel lautet
+\[
+\texttt{y \textasciitilde{} x1 * x2}.
+\]
+
+Formal gilt:
+\[
+\mathbb E(Y_i\mid x_{i1},x_{i2})
+=
+\beta_0+\beta_1x_{i1}+\beta_2x_{i2}
++\beta_{12}x_{i1}x_{i2}.
+\]
+
+Der Effekt von \(x_2\) ist
+\[
+\frac{\partial}{\partial x_2}
+\mathbb E(Y_i\mid x_1,x_2)
+=
+\beta_2+\beta_{12}x_1.
+\]
+
+Der Effekt von \(x_2\) hängt also vom Wert von \(x_1\) ab.
+
+Analog gilt
+\[
+\frac{\partial}{\partial x_1}
+\mathbb E(Y_i\mid x_1,x_2)
+=
+\beta_1+\beta_{12}x_2.
+\]
+
+\subsection{Case 8: Zweifaktorielle ANOVA ohne Interaktion}
+
+\subsubsection*{Fragestellung}
+
+Man untersucht eine Lernleistung \(Y\). Es gibt zwei Faktoren:
+\[
+A=\text{Lernmethode}\in\{A_1,A_2\},
+\]
+\[
+B=\text{Tageszeit}\in\{B_1,B_2,B_3\}.
+\]
+Man möchte Haupteffekte von Lernmethode und Tageszeit prüfen, geht aber zunächst davon aus, dass keine Interaktion nötig ist.
+
+Gesucht sind:
+\begin{enumerate}
+    \item die passende Designmatrix,
+    \item die Anzahl der Parameter bei R-Referenzkodierung.
+\end{enumerate}
+
+\subsubsection*{Lösung}
+
+Für \(A\) mit zwei Stufen gibt es bei R-Referenzkodierung eine Dummyvariable
+\[
+D_{A2}.
+\]
+
+Für \(B\) mit drei Stufen gibt es zwei Dummyvariablen
+\[
+D_{B2},D_{B3}.
+\]
+
+Das additive Modell lautet
+\[
+Y_i
+=
+\beta_0+\alpha D_{A2}(i)
++\beta_2D_{B2}(i)+\beta_3D_{B3}(i)
++\sigma Z_i.
+\]
+
+Die Designmatrix ist
+\[
+X=
+\begin{pmatrix}
+1 & D_{A2} & D_{B2} & D_{B3}
+\end{pmatrix}.
+\]
+
+Die R-Formel lautet
+\[
+\texttt{y \textasciitilde{} A + B}.
+\]
+
+Die Parameteranzahl beträgt
+\[
+1+(2-1)+(3-1)=4.
+\]
+
+Das Modell erlaubt einen Haupteffekt von \(A\) und einen Haupteffekt von \(B\), aber keinen Interaktionseffekt. Das bedeutet: Der Unterschied zwischen den Lernmethoden ist in diesem Modell unabhängig von der Tageszeit.
+
+\subsection{Case 9: Zweifaktorielle ANOVA mit Interaktion}
+
+\subsubsection*{Fragestellung}
+
+Wie in Case 8, aber man vermutet:
+\[
+\text{Der Effekt der Lernmethode hängt von der Tageszeit ab.}
+\]
+
+Gesucht sind:
+\begin{enumerate}
+    \item die passende Designmatrix,
+    \item die Produktspalten, die durch die Interaktion hinzukommen.
+\end{enumerate}
+
+\subsubsection*{Lösung}
+
+Das Interaktionsmodell lautet
+\[
+Y_i
+=
+\beta_0+\alpha D_{A2}(i)
++\beta_2D_{B2}(i)+\beta_3D_{B3}(i)
++\gamma_2 D_{A2}(i)D_{B2}(i)
++\gamma_3 D_{A2}(i)D_{B3}(i)
++\sigma Z_i.
+\]
+
+Die Designmatrix ist
+\[
+X=
+\begin{pmatrix}
+1 & D_{A2} & D_{B2} & D_{B3}
+& D_{A2}D_{B2} & D_{A2}D_{B3}
+\end{pmatrix}.
+\]
+
+Die R-Formel lautet
+\[
+\texttt{y \textasciitilde{} A * B}.
+\]
+
+Die Parameteranzahl beträgt
+\[
+1+(2-1)+(3-1)+(2-1)(3-1)=6.
+\]
+
+Die Produktspalten sind
+\[
+D_{A2}D_{B2}
+\qquad\text{und}\qquad
+D_{A2}D_{B3}.
+\]
+
+Diese erlauben, dass der Effekt von \(A\) je nach Stufe von \(B\) verschieden ist.
+
+\subsection{Case 10: Quadratischer Zusammenhang}
+
+\subsubsection*{Fragestellung}
+
+Man misst
+\[
+Y=\text{Leistung},
+\qquad
+x=\text{Stressniveau}.
+\]
+Man vermutet eine umgekehrt U-förmige Beziehung: moderate Stresswerte sind günstig, sehr niedrige oder sehr hohe Stresswerte ungünstig.
+
+Gesucht sind:
+\begin{enumerate}
+    \item die passende Designmatrix,
+    \item die passende R-Formel.
+\end{enumerate}
+
+\subsubsection*{Lösung}
+
+Das quadratische Modell lautet
+\[
+Y_i=\beta_0+\beta_1x_i+\beta_2x_i^2+\sigma Z_i.
+\]
+
+Die Designmatrix ist
+\[
+X=
+\begin{pmatrix}
+1 & x & x^2
+\end{pmatrix}.
+\]
+
+Die passende R-Formel lautet
+\[
+\texttt{y \textasciitilde{} x + I(x\textasciicircum{}2)}.
+\]
+
+Nicht korrekt im Sinne einer quadratischen Regression ist dagegen
+\[
+\texttt{y \textasciitilde{} x\textasciicircum{}2},
+\]
+weil \(\texttt{\textasciicircum{}}\) in R-Formeln eine spezielle Modellformel-Bedeutung besitzt.
+
+Für eine umgekehrt U-förmige Beziehung erwartet man typischerweise
+\[
+\beta_2<0.
+\]
+
+\subsection{Case 11: Drei Gruppen, aber direkte Gruppenmittelwerte}
+
+\subsubsection*{Fragestellung}
+
+Man möchte für drei Gruppen \(A,B,C\) direkt die drei Gruppenmittelwerte als Koeffizienten erhalten, also nicht eine Referenzgruppe plus Differenzen.
+
+Gesucht sind:
+\begin{enumerate}
+    \item die passende Designmatrix,
+    \item die passende R-Formel.
+\end{enumerate}
+
+\subsubsection*{Lösung}
+
+Das Modell mit direkten Gruppenmittelwerten lautet
+\[
+Y_i=\mu_AD_A(i)+\mu_BD_B(i)+\mu_CD_C(i)+\sigma Z_i.
+\]
+
+Die Designmatrix ist
+\[
+X=
+\begin{pmatrix}
+D_A & D_B & D_C
+\end{pmatrix}.
+\]
+
+Die passende R-Formel lautet
+\[
+\texttt{y \textasciitilde{} 0 + g}.
+\]
+
+Die Koeffizienten sind direkt
+\[
+\widehat\mu_A,\widehat\mu_B,\widehat\mu_C.
+\]
+
+Diese Parametrisierung beschreibt denselben Modellraum wie
+\[
+\texttt{y \textasciitilde{} g},
+\]
+aber die Koeffizienten haben eine andere Interpretation.
+
+\subsection{Case 12: Geschlecht, Alter und Interaktion}
+
+\subsubsection*{Fragestellung}
+
+Man modelliert einen Depressionsscore \(Y\) durch Alter \(x\) und Geschlecht
+\[
+g\in\{m,w\}.
+\]
+Man möchte testen, ob der Alterseffekt zwischen den Geschlechtern verschieden ist.
+
+Gesucht sind:
+\begin{enumerate}
+    \item die passende Designmatrix,
+    \item das Nullmodell für gleiche Alterseffekte,
+    \item das Alternativmodell für unterschiedliche Alterseffekte.
+\end{enumerate}
+
+\subsubsection*{Lösung}
+
+Sei
+\[
+D_w(i)=
+\begin{cases}
+1, & g_i=w,\\
+0, & g_i=m.
+\end{cases}
+\]
+
+Das Alternativmodell mit unterschiedlichem Alterseffekt lautet
+\[
+Y_i
+=
+\beta_0+\alpha D_w(i)+\beta_1x_i+\delta D_w(i)x_i+\sigma Z_i.
+\]
+
+Die Designmatrix ist
+\[
+X_M=
+\begin{pmatrix}
+1 & D_w & x & D_wx
+\end{pmatrix}.
+\]
+
+Die R-Formel lautet
+\[
+\texttt{y \textasciitilde{} g * x}.
+\]
+
+Für Männer gilt
+\[
+\mathbb E(Y_i\mid g_i=m,x_i)
+=
+\beta_0+\beta_1x_i.
+\]
+
+Für Frauen gilt
+\[
+\mathbb E(Y_i\mid g_i=w,x_i)
+=
+(\beta_0+\alpha)+(\beta_1+\delta)x_i.
+\]
+
+Das Nullmodell mit gleichem Alterseffekt lautet
+\[
+Y_i=\beta_0+\alpha D_w(i)+\beta_1x_i+\sigma Z_i.
+\]
+
+Die Designmatrix ist
+\[
+X_D=
+\begin{pmatrix}
+1 & D_w & x
+\end{pmatrix}.
+\]
+
+Die R-Formel lautet
+\[
+\texttt{y \textasciitilde{} g + x}.
+\]
+
+Der Test auf unterschiedliche Alterseffekte erfolgt durch
+\[
+\texttt{anova(lm(y \textasciitilde{} g + x, data=df), lm(y \textasciitilde{} g * x, data=df))}.
+\]
+
+Formal testet man
+\[
+H_0:\delta=0.
+\]
+
+\subsection{Mini-Checkliste}
+
+Für einen neuen Modellierungskontext schreibe man zuerst:
+\[
+\mathbb E(Y_i)=?
+\]
+
+Dann ergänzt man systematisch die folgenden Bausteine:
+\[
+\beta_0
+\]
+für ein gemeinsames Grundniveau,
+\[
++\beta x_i
+\]
+für metrische Kovariaten,
+\[
++\alpha_{g_i}
+\]
+für Gruppen- oder Faktoreffekte,
+\[
++\delta_{g_i}x_i
+\]
+für gruppenspezifische Steigungen,
+\[
++\gamma_{ab}
+\]
+für Faktor-Faktor-Interaktionen,
+\[
++\beta_2x_i^2
+\]
+für quadratische Zusammenhänge.
+
+Danach ist die Designmatrix \(X\) durch die entsprechenden Spalten automatisch bestimmt.
+
+
+
+
+
+\pagebreak
+\printbibliography
+\end{document}

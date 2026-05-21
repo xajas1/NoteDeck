@@ -1,0 +1,804 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17  Graphik
+% 18  Extra
+% 00. Titel und Autor
+
+\usepackage{slashed}
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Ad}{\operatorname{Ad}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\QU}{\mathbb{H}}
+\newcommand{\Cinf}{C^{\infty}}
+\newcommand{\Mod}{\mathrm{Mod}}
+\newcommand{\Alg}{\mathrm{Alg}}
+\newcommand{\Diff}{\mathrm{Diff}}
+\newcommand{\Iso}{\mathrm{Iso}}
+\newcommand{\Aut}{\mathrm{Aut}}
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Cl}{\mathrm{Cl}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\Mat}{\mathrm{Mat}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\Sp}{\mathrm{Sp}}
+\newcommand{\Spin}{\mathrm{Spin}}
+\newcommand{\Pin}{\mathrm{Pin}}
+\newcommand{\Lor}{\mathrm{Lor}}
+\newcommand{\Ogroup}{\mathrm{O}}
+\newcommand{\U}{\mathrm{U}}
+\newcommand{\CP}{\mathbb{C} P}
+\newcommand{\RP}{\mathbb{R} P}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\graphicspath{{../../Library/Images/}}
+\usepackage[export]{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+% Hellblau definieren
+\definecolor{hellblau}{rgb}{0.3,0.6,1}
+\newenvironment{note}{\par\begingroup\color{hellblau}\itshape}{\par\endgroup}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\CustomHeading{Definition}{#1}{#2}}{}
+\newenvironment{PROP}[2]{\CustomHeading{Proposition}{#1}{#2}}{}
+\newenvironment{THEO}[2]{\CustomHeading{Theorem}{#1}{#2}}{}
+\newenvironment{LEM}[2]{\CustomHeading{Lemma}{#1}{#2}}{}
+\newenvironment{KORO}[2]{\CustomHeading{Corollar}{#1}{#2}}{}
+\newenvironment{REM}[2]{\CustomHeading{Remark}{#1}{#2}}{}
+\newenvironment{EXA}[2]{\CustomHeading{Example}{#1}{#2}}{}
+\newenvironment{STUD}[2]{\CustomHeading{Study}{#1}{#2}}{}
+\newenvironment{CONC}[2]{\CustomHeading{Concept}{#1}{#2}}{}
+\newenvironment{OTH}[2]{\CustomHeading{Other}{#1}{#2}}{}
+\newenvironment{EXE}[2]{\CustomHeading{Exercise}{#1}{#2}}{}
+\newenvironment{MOT}[2]{\CustomHeading{Motivation}{#1}{#2}}{}
+\newenvironment{PROOF}[2]{\CustomHeading{Proof}{#1}{#2}}{}
+
+% --- Unit Umgebung für Source-Inhalte ---
+\usepackage{mdframed}
+\newmdenv[
+  linewidth=1pt,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftmargin=0cm,
+  rightmargin=0cm,
+  skipabove=10pt,
+  skipbelow=10pt,
+  innertopmargin=0.5\baselineskip,
+  innerbottommargin=0.5\baselineskip,
+  backgroundcolor=gray!10,
+  linecolor=gray
+]{unitbox}
+
+\newenvironment{unit}[1]
+  {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
+  {\end{unitbox}}
+
+% --- 17. ... ---
+
+% --- 18. Extras ---
+\usepackage{stmaryrd}
+\usepackage{bbold}  % falls du \mathbb{1} nutzen willst
+
+% --- 19. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+
+% Abstand zwischen Einträgen
+\setlength{\cftbeforesecskip}{2pt}      % Sections
+\setlength{\cftbeforesubsecskip}{1pt}   % Subsections
+\setlength{\cftbeforesubsubsecskip}{0pt}
+\renewcommand{\cfttoctitlefont}{\large\bfseries}
+
+% --- 00. Titel und Autor ---
+\title{Computational Economics}
+\author{Tim Jaschik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+Kurze Beschreibung …
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\tableofcontents
+
+\pagebreak
+
+
+\section{Mathematischer Hintergrund der Output-Gap-Berechnung}
+
+In dieser Aufgabe wird aus beobachteten quartalsweisen BIP-Daten für Deutschland und Griechenland der sogenannte \emph{Output Gap} bestimmt. Mathematisch stehen dabei mehrere Konzepte im Hintergrund: diskrete Zeitreihen, Logarithmierung, Trend-Zyklus-Zerlegung, lineare Regression durch gewöhnliche kleinste Quadrate und der Hodrick-Prescott-Filter.
+
+\begin{MOT}{}{Ziel der Output-Gap-Analyse}
+Gegeben seien für zwei Länder \(j\in\{\mathrm{Germany},\mathrm{Greece}\}\) beobachtete Zeitreihen des realen Bruttoinlandsprodukts
+\[
+Y_{j,t}>0,
+\qquad t=1,\dots,T.
+\]
+Der Output Gap soll messen, wie stark das beobachtete BIP \(Y_{j,t}\) relativ zu einem geschätzten langfristigen Trend- oder Potentialniveau \(\widehat{Y}_{j,t}\) abweicht. Formal ist der Output Gap definiert durch
+\[
+G_{j,t}
+=
+100\frac{Y_{j,t}-\widehat{Y}_{j,t}}{\widehat{Y}_{j,t}}.
+\]
+Positive Werte von \(G_{j,t}\) bedeuten, dass das beobachtete BIP oberhalb des geschätzten Trends liegt. Negative Werte bedeuten, dass das beobachtete BIP unterhalb des geschätzten Trends liegt.
+\end{MOT}
+
+\subsection{Zeitreihen als mathematische Objekte}
+
+\begin{DEF}{}{Diskrete Zeitreihe}
+Eine \emph{diskrete Zeitreihe} ist eine Folge von Beobachtungen
+\[
+(y_t)_{t=1}^T,
+\]
+wobei \(t\) einen diskreten Zeitindex bezeichnet. In der vorliegenden Aufgabe ist der Zeitindex durch Quartale gegeben, also etwa
+\[
+1995Q1,\;1995Q2,\;1995Q3,\;\dots.
+\]
+Für jedes Land \(j\) erhalten wir eine Zeitreihe
+\[
+(Y_{j,t})_{t=1}^T.
+\]
+\end{DEF}
+
+In der MATLAB-Implementierung werden die Daten zweckmäßig als Matrix organisiert:
+\[
+Y
+=
+\begin{pmatrix}
+Y_{1,1} & Y_{2,1}\\
+Y_{1,2} & Y_{2,2}\\
+\vdots & \vdots\\
+Y_{1,T} & Y_{2,T}
+\end{pmatrix},
+\]
+wobei die Zeilen den Zeitpunkten und die Spalten den Ländern entsprechen. In MATLAB entspricht dies schematisch
+\[
+\texttt{GDP}(t,j).
+\]
+
+\begin{REM}{}{Rolle des Zeitindex}
+Für die ökonometrische Regression genügt oft ein abstrakter Zeitindex
+\[
+t=1,\dots,T.
+\]
+Für die graphische Darstellung ist es dagegen sinnvoll, die tatsächlichen Kalenderzeitpunkte, also die Quartale, zu verwenden. Deshalb unterscheidet man praktisch zwischen einem Regressionsindex \(t\) und einer Datumsvariable, die für die \(x\)-Achse in den Plots verwendet wird.
+\end{REM}
+
+\subsection{Logarithmische Transformation}
+
+Die Aufgabe verlangt zunächst, für beide Länder das logarithmierte BIP zu berechnen:
+\[
+y_{j,t}:=\log Y_{j,t}.
+\]
+
+\begin{CONC}{}{Warum logarithmiert man makroökonomische Zeitreihen?}
+Die Logarithmierung hat in der Makroökonometrie mehrere Vorteile.
+\begin{enumerate}
+    \item Wachstumsraten können näherungsweise als Differenzen von Logarithmen dargestellt werden.
+    \item Exponentielles Wachstum wird durch Logarithmierung näherungsweise linearisiert.
+    \item Prozentuale Abweichungen lassen sich durch Log-Differenzen approximieren.
+\end{enumerate}
+\end{CONC}
+
+Für aufeinanderfolgende Beobachtungen gilt
+\[
+\Delta \log Y_t
+=
+\log Y_t-\log Y_{t-1}
+=
+\log\left(\frac{Y_t}{Y_{t-1}}\right).
+\]
+Für kleine Wachstumsraten gilt näherungsweise
+\[
+\log\left(\frac{Y_t}{Y_{t-1}}\right)
+\approx
+\frac{Y_t-Y_{t-1}}{Y_{t-1}}.
+\]
+Daher kann man
+\[
+100\Delta \log Y_t
+\]
+als approximative prozentuale Wachstumsrate interpretieren.
+
+Außerdem wird ein exponentieller Wachstumspfad
+\[
+Y_t \approx A e^{gt}
+\]
+durch Logarithmieren zu
+\[
+\log Y_t \approx \log A + gt.
+\]
+Ein exponentieller Trend in den Levels entspricht also einem linearen Trend in den Logarithmen.
+
+\subsection{Trend-Zyklus-Zerlegung}
+
+Die zentrale ökonomische Idee der Aufgabe ist die Zerlegung einer makroökonomischen Zeitreihe in eine langfristige Trendkomponente und eine kurzfristige zyklische Komponente.
+
+\begin{DEF}{}{Trend-Zyklus-Zerlegung}
+Sei
+\[
+y_{j,t}:=\log Y_{j,t}
+\]
+das logarithmierte BIP von Land \(j\). Eine \emph{Trend-Zyklus-Zerlegung} schreibt
+\[
+y_{j,t}
+=
+\tau_{j,t}+c_{j,t},
+\]
+wobei
+\begin{enumerate}
+    \item \(\tau_{j,t}\) die langfristige Trendkomponente bezeichnet,
+    \item \(c_{j,t}\) die kurzfristige zyklische Abweichung bezeichnet.
+\end{enumerate}
+\end{DEF}
+
+In dieser Aufgabe werden zwei verschiedene Methoden zur Bestimmung von \(\tau_{j,t}\) verglichen:
+\begin{enumerate}
+    \item ein linearer Trend durch OLS-Regression,
+    \item ein glatter Trend durch den Hodrick-Prescott-Filter.
+\end{enumerate}
+
+\subsection{Linearer Trend durch OLS}
+
+Beim linearen Trend wird für jedes Land \(j\) ein Modell der Form
+\[
+\log Y_{j,t}
+=
+\beta_{0,j}
++
+\beta_{1,j}t
++
+\varepsilon_{j,t}
+\]
+geschätzt. Hierbei bezeichnet \(\beta_{0,j}\) den Achsenabschnitt, \(\beta_{1,j}\) die lineare Wachstumsrate im logarithmierten Maßstab und \(\varepsilon_{j,t}\) den Fehlerterm.
+
+\begin{DEF}{}{Lineares Regressionsmodell für log-BIP}
+Für ein festes Land \(j\) sei
+\[
+y_j
+=
+\begin{pmatrix}
+\log Y_{j,1}\\
+\log Y_{j,2}\\
+\vdots\\
+\log Y_{j,T}
+\end{pmatrix}
+\in \R^T.
+\]
+Die Designmatrix für einen linearen Trend ist
+\[
+X
+=
+\begin{pmatrix}
+1 & 1\\
+1 & 2\\
+\vdots & \vdots\\
+1 & T
+\end{pmatrix}
+\in \R^{T\times 2}.
+\]
+Das lineare Regressionsmodell lautet dann
+\[
+y_j=X\beta_j+\varepsilon_j,
+\qquad
+\beta_j=
+\begin{pmatrix}
+\beta_{0,j}\\
+\beta_{1,j}
+\end{pmatrix}.
+\]
+\end{DEF}
+
+Der OLS-Schätzer ist definiert als Lösung des Minimierungsproblems
+\[
+\widehat{\beta}_j
+=
+\arg\min_{\beta\in\R^2}
+\|y_j-X\beta\|_2^2.
+\]
+Explizit gilt, falls \(X^TX\) invertierbar ist,
+\[
+\widehat{\beta}_j
+=
+(X^TX)^{-1}X^Ty_j.
+\]
+
+\begin{REM}{}{MATLAB-Notation}
+In MATLAB kann dieser Schätzer numerisch stabil durch den Backslash-Operator berechnet werden:
+\[
+\texttt{betaOLS = X \textbackslash\ logGDP}.
+\]
+Dabei werden bei mehreren Spalten in \(\texttt{logGDP}\) die Regressionskoeffizienten für beide Länder gleichzeitig berechnet.
+\end{REM}
+
+Der geschätzte lineare Trend des logarithmierten BIP ist
+\[
+\widehat{\log Y}_{j,t}^{OLS}
+=
+\widehat{\beta}_{0,j}
++
+\widehat{\beta}_{1,j}t.
+\]
+In Matrixform:
+\[
+\widehat{y}_j^{OLS}
+=
+X\widehat{\beta}_j.
+\]
+
+\begin{CONC}{}{Geometrische Interpretation von OLS}
+OLS kann als orthogonale Projektion verstanden werden. Der Datenvektor \(y_j\in\R^T\) wird auf den zweidimensionalen Unterraum
+\[
+\operatorname{span}
+\left\{
+\begin{pmatrix}
+1\\
+1\\
+\vdots\\
+1
+\end{pmatrix},
+\begin{pmatrix}
+1\\
+2\\
+\vdots\\
+T
+\end{pmatrix}
+\right\}
+\subset \R^T
+\]
+projiziert. Der resultierende Vektor \(X\widehat{\beta}_j\) ist die beste lineare Approximation an \(y_j\) im Sinne der euklidischen Fehlerquadratsumme.
+\end{CONC}
+
+\begin{REM}{}{Ökonomische Bedeutung des linearen Log-Trends}
+Ein linearer Trend in \(\log Y_t\) bedeutet
+\[
+\log Y_t \approx \beta_0+\beta_1t.
+\]
+Zurücktransformiert in Levels ergibt sich
+\[
+Y_t \approx e^{\beta_0+\beta_1t}
+=
+e^{\beta_0}e^{\beta_1t}.
+\]
+Der lineare Trend in Logarithmen entspricht also einem exponentiellen Wachstumspfad mit konstanter Wachstumsrate.
+\end{REM}
+
+\subsection{Hodrick-Prescott-Filter}
+
+Der Hodrick-Prescott-Filter bestimmt den Trend nicht als Gerade, sondern als möglichst glatte Zeitreihe \((\tau_t)_{t=1}^T\), die nahe an den beobachteten Daten liegt.
+
+\begin{DEF}{}{Hodrick-Prescott-Filter}
+Sei
+\[
+y_t=\log Y_t
+\]
+eine beobachtete Zeitreihe. Der Hodrick-Prescott-Filter bestimmt eine Trendkomponente \((\tau_t)_{t=1}^T\) als Lösung des Optimierungsproblems
+\[
+\min_{\tau_1,\dots,\tau_T}
+\left[
+\sum_{t=1}^T (y_t-\tau_t)^2
++
+\lambda
+\sum_{t=2}^{T-1}
+\left(
+(\tau_{t+1}-\tau_t)-(\tau_t-\tau_{t-1})
+\right)^2
+\right].
+\]
+\end{DEF}
+
+Der erste Term
+\[
+\sum_{t=1}^T (y_t-\tau_t)^2
+\]
+misst die Nähe des Trends zu den beobachteten Daten. Der zweite Term
+\[
+\sum_{t=2}^{T-1}
+\left(
+(\tau_{t+1}-\tau_t)-(\tau_t-\tau_{t-1})
+\right)^2
+\]
+bestraft starke Änderungen in der Steigung des Trends.
+
+Da
+\[
+(\tau_{t+1}-\tau_t)-(\tau_t-\tau_{t-1})
+=
+\tau_{t+1}-2\tau_t+\tau_{t-1},
+\]
+ist dieser Ausdruck die diskrete zweite Differenz von \(\tau_t\). Der HP-Filter bestraft also die Krümmung des Trends.
+
+Man kann das Optimierungsproblem daher auch schreiben als
+\[
+\min_{\tau}
+\left[
+\sum_{t=1}^T (y_t-\tau_t)^2
++
+\lambda
+\sum_{t=2}^{T-1}
+(\Delta^2\tau_t)^2
+\right],
+\]
+wobei
+\[
+\Delta^2\tau_t
+=
+\tau_{t+1}-2\tau_t+\tau_{t-1}.
+\]
+
+\begin{CONC}{}{Rolle des Glättungsparameters \(\lambda\)}
+Der Parameter \(\lambda\geq 0\) kontrolliert, wie glatt der geschätzte Trend sein soll.
+\begin{enumerate}
+    \item Für kleines \(\lambda\) darf der Trend den Daten stärker folgen.
+    \item Für großes \(\lambda\) wird der Trend stärker geglättet.
+    \item Im Grenzfall \(\lambda\to\infty\) wird die zweite Differenz stark bestraft, sodass der Trend näherungsweise linear wird.
+\end{enumerate}
+Für quartalsweise makroökonomische Daten wird häufig
+\[
+\lambda=1600
+\]
+verwendet.
+\end{CONC}
+
+\begin{REM}{}{Vergleich von HP-Trend und OLS-Trend}
+Der OLS-Trend ist eine Gerade in den logarithmierten Daten:
+\[
+\tau_t^{OLS}=\widehat{\beta}_0+\widehat{\beta}_1t.
+\]
+Der HP-Trend dagegen ist eine glatte, aber flexible Kurve:
+\[
+\tau_t^{HP}.
+\]
+Der HP-Filter kann daher längerfristige Wachstumsverlangsamungen oder Strukturbrüche stärker abbilden als ein rein linearer Trend.
+\end{REM}
+
+\subsection{Zurücktransformation von Log-Trends in Levels}
+
+Die Trends werden in der Aufgabe auf dem logarithmierten BIP geschätzt. Für den Output Gap benötigt man jedoch Trends in den ursprünglichen BIP-Levels.
+
+Wenn
+\[
+\widehat{\log Y}_{j,t}
+\]
+ein geschätzter Log-Trend ist, dann ist der zugehörige Trend in Levels
+\[
+\widehat{Y}_{j,t}
+=
+\exp\left(\widehat{\log Y}_{j,t}\right).
+\]
+
+Für die beiden Methoden erhält man also
+\[
+\widehat{Y}_{j,t}^{HP}
+=
+\exp\left(\widehat{\log Y}_{j,t}^{HP}\right)
+\]
+und
+\[
+\widehat{Y}_{j,t}^{OLS}
+=
+\exp\left(\widehat{\log Y}_{j,t}^{OLS}\right).
+\]
+
+\subsection{Output Gap}
+
+\begin{DEF}{}{Output Gap}
+Für ein Land \(j\) und einen Zeitpunkt \(t\) ist der Output Gap relativ zu einem geschätzten Trend \(\widehat{Y}_{j,t}\) definiert als
+\[
+G_{j,t}
+=
+100
+\frac{
+Y_{j,t}-\widehat{Y}_{j,t}
+}{
+\widehat{Y}_{j,t}
+}.
+\]
+\end{DEF}
+
+Für den HP-Trend ergibt sich
+\[
+G_{j,t}^{HP}
+=
+100
+\frac{
+Y_{j,t}-\widehat{Y}_{j,t}^{HP}
+}{
+\widehat{Y}_{j,t}^{HP}
+},
+\]
+und für den linearen OLS-Trend
+\[
+G_{j,t}^{OLS}
+=
+100
+\frac{
+Y_{j,t}-\widehat{Y}_{j,t}^{OLS}
+}{
+\widehat{Y}_{j,t}^{OLS}
+}.
+\]
+
+\begin{REM}{}{Interpretation des Vorzeichens}
+Es gilt:
+\begin{enumerate}
+    \item \(G_{j,t}>0\): Das beobachtete BIP liegt oberhalb des geschätzten Trends.
+    \item \(G_{j,t}=0\): Das beobachtete BIP liegt genau auf dem geschätzten Trend.
+    \item \(G_{j,t}<0\): Das beobachtete BIP liegt unterhalb des geschätzten Trends.
+\end{enumerate}
+Die Nulllinie in den Output-Gap-Plots markiert daher die Grenze zwischen positiven und negativen Abweichungen vom Trend.
+\end{REM}
+
+\subsection{Log-Gap und Level-Gap}
+
+Manchmal wird der Output Gap näherungsweise auch über Log-Differenzen gemessen:
+\[
+100\left(\log Y_{j,t}-\widehat{\log Y}_{j,t}\right).
+\]
+Dies ist eine Approximation der prozentualen Abweichung, denn
+\[
+\log Y_{j,t}-\log \widehat{Y}_{j,t}
+=
+\log\left(\frac{Y_{j,t}}{\widehat{Y}_{j,t}}\right).
+\]
+Für kleine Abweichungen gilt näherungsweise
+\[
+\log\left(\frac{Y_{j,t}}{\widehat{Y}_{j,t}}\right)
+\approx
+\frac{Y_{j,t}-\widehat{Y}_{j,t}}{\widehat{Y}_{j,t}}.
+\]
+Die Aufgabe verlangt jedoch explizit die Rücktransformation in Levels und danach die Berechnung
+\[
+G_{j,t}
+=
+100
+\frac{
+Y_{j,t}-\widehat{Y}_{j,t}
+}{
+\widehat{Y}_{j,t}
+}.
+\]
+
+\subsection{Methodischer Vergleich}
+
+\begin{CONC}{}{Vergleich von OLS und HP-Filter}
+Die Aufgabe vergleicht zwei unterschiedliche Vorstellungen von Trend.
+\begin{enumerate}
+    \item Der OLS-Trend nimmt an, dass das logarithmierte BIP langfristig ungefähr linear wächst. Dies entspricht in Levels einem exponentiellen Wachstumspfad mit konstanter Wachstumsrate.
+    \item Der HP-Filter erlaubt einen flexibleren, zeitvariierenden Trend. Er trennt die Zeitreihe in eine glatte Trendkomponente und eine zyklische Komponente.
+\end{enumerate}
+\end{CONC}
+
+\begin{REM}{}{Vorteile und Nachteile des linearen OLS-Trends}
+Der lineare OLS-Trend ist einfach, transparent und gut interpretierbar. Er ist aber sehr starr. Strukturbrüche, Finanzkrisen oder längerfristige Veränderungen der Wachstumsdynamik können nur schlecht abgebildet werden.
+\end{REM}
+
+\begin{REM}{}{Vorteile und Nachteile des HP-Filters}
+Der HP-Filter ist flexibler und kann Änderungen in der langfristigen Wachstumsdynamik besser erfassen. Allerdings hängt das Ergebnis vom Glättungsparameter \(\lambda\) ab. Außerdem besitzt der HP-Filter ein sogenanntes Endpunktproblem: Am Anfang und Ende der Zeitreihe ist die Schätzung des Trends oft weniger zuverlässig.
+\end{REM}
+
+\subsection{Gesamtstruktur der Berechnung}
+
+Die gesamte Berechnung lässt sich mathematisch folgendermaßen zusammenfassen.
+
+Zunächst werden die beobachteten BIP-Daten logarithmiert:
+\[
+y_{j,t}
+=
+\log Y_{j,t}.
+\]
+
+Dann werden zwei Trends für \(y_{j,t}\) geschätzt:
+\[
+\widehat{y}_{j,t}^{HP}
+=
+\widehat{\log Y}_{j,t}^{HP},
+\]
+und
+\[
+\widehat{y}_{j,t}^{OLS}
+=
+\widehat{\log Y}_{j,t}^{OLS}.
+\]
+
+Diese Log-Trends werden in Levels zurücktransformiert:
+\[
+\widehat{Y}_{j,t}^{HP}
+=
+\exp\left(\widehat{y}_{j,t}^{HP}\right),
+\]
+\[
+\widehat{Y}_{j,t}^{OLS}
+=
+\exp\left(\widehat{y}_{j,t}^{OLS}\right).
+\]
+
+Schließlich werden die Output Gaps berechnet:
+\[
+G_{j,t}^{HP}
+=
+100
+\frac{
+Y_{j,t}-\widehat{Y}_{j,t}^{HP}
+}{
+\widehat{Y}_{j,t}^{HP}
+},
+\]
+\[
+G_{j,t}^{OLS}
+=
+100
+\frac{
+Y_{j,t}-\widehat{Y}_{j,t}^{OLS}
+}{
+\widehat{Y}_{j,t}^{OLS}
+}.
+\]
+
+\begin{CONC}{}{Kernidee}
+Der mathematische Kern der Aufgabe ist die Schätzung einer nicht beobachtbaren Trendkomponente. Aus beobachteten Daten \(Y_{j,t}\) wird ein geschätztes Potential- oder Trendniveau \(\widehat{Y}_{j,t}\) konstruiert. Der Output Gap misst dann die relative Abweichung des beobachteten BIP von diesem geschätzten Trend.
+\[
+\text{Beobachtung}
+=
+\text{Trend}
++
+\text{Zyklus}.
+\]
+OLS modelliert den Trend als Gerade in Logarithmen. Der HP-Filter modelliert den Trend als glatte Kurve. Die unterschiedlichen Trendkonzepte führen daher zu unterschiedlichen Output-Gap-Schätzungen.
+\end{CONC}
+
+
+
+\pagebreak
+\printbibliography
+\end{document}

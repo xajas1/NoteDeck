@@ -1,0 +1,1695 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17  Graphik
+% 18  Extra
+% 00. Titel und Autor
+
+\usepackage{slashed}
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Ad}{\operatorname{Ad}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\QU}{\mathbb{H}}
+\newcommand{\Cinf}{C^{\infty}}
+\newcommand{\Mod}{\mathrm{Mod}}
+\newcommand{\Alg}{\mathrm{Alg}}
+\newcommand{\Diff}{\mathrm{Diff}}
+\newcommand{\Iso}{\mathrm{Iso}}
+\newcommand{\Aut}{\mathrm{Aut}}
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Cl}{\mathrm{Cl}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\Mat}{\mathrm{Mat}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\Sp}{\mathrm{Sp}}
+\newcommand{\Spin}{\mathrm{Spin}}
+\newcommand{\Pin}{\mathrm{Pin}}
+\newcommand{\Lor}{\mathrm{Lor}}
+\newcommand{\Ogroup}{\mathrm{O}}
+\newcommand{\U}{\mathrm{U}}
+\newcommand{\CP}{\mathbb{C} P}
+\newcommand{\RP}{\mathbb{R} P}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\graphicspath{{../../Library/Images/}}
+\usepackage[export]{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+% Hellblau definieren
+\definecolor{hellblau}{rgb}{0.3,0.6,1}
+\newenvironment{note}{\par\begingroup\color{hellblau}\itshape}{\par\endgroup}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\CustomHeading{Definition}{#1}{#2}}{}
+\newenvironment{PROP}[2]{\CustomHeading{Proposition}{#1}{#2}}{}
+\newenvironment{THEO}[2]{\CustomHeading{Theorem}{#1}{#2}}{}
+\newenvironment{LEM}[2]{\CustomHeading{Lemma}{#1}{#2}}{}
+\newenvironment{KORO}[2]{\CustomHeading{Corollar}{#1}{#2}}{}
+\newenvironment{REM}[2]{\CustomHeading{Remark}{#1}{#2}}{}
+\newenvironment{EXA}[2]{\CustomHeading{Example}{#1}{#2}}{}
+\newenvironment{STUD}[2]{\CustomHeading{Study}{#1}{#2}}{}
+\newenvironment{CONC}[2]{\CustomHeading{Concept}{#1}{#2}}{}
+\newenvironment{OTH}[2]{\CustomHeading{Other}{#1}{#2}}{}
+\newenvironment{EXE}[2]{\CustomHeading{Exercise}{#1}{#2}}{}
+\newenvironment{MOT}[2]{\CustomHeading{Motivation}{#1}{#2}}{}
+\newenvironment{PROOF}[2]{\CustomHeading{Proof}{#1}{#2}}{}
+
+% --- Unit Umgebung für Source-Inhalte ---
+\usepackage{mdframed}
+\newmdenv[
+  linewidth=1pt,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftmargin=0cm,
+  rightmargin=0cm,
+  skipabove=10pt,
+  skipbelow=10pt,
+  innertopmargin=0.5\baselineskip,
+  innerbottommargin=0.5\baselineskip,
+  backgroundcolor=gray!10,
+  linecolor=gray
+]{unitbox}
+
+\newenvironment{unit}[1]
+  {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
+  {\end{unitbox}}
+
+% --- 17. ... ---
+
+% --- 18. Extras ---
+\usepackage{stmaryrd}
+\usepackage{bbold}  % falls du \mathbb{1} nutzen willst
+
+% --- 19. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+
+% Abstand zwischen Einträgen
+\setlength{\cftbeforesecskip}{2pt}      % Sections
+\setlength{\cftbeforesubsecskip}{1pt}   % Subsections
+\setlength{\cftbeforesubsubsecskip}{0pt}
+\renewcommand{\cfttoctitlefont}{\large\bfseries}
+
+% --- 00. Titel und Autor ---
+
+\title{Crashkurs zur Ontologie der Statistik}
+\author{Tim Jaschik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+Dieses Skript legt in kompakter, aber systematischer Form die begrifflichen und mathematischen Grundlagen bereit, die für die frühe Statistik-2-Vorlesung zentral sind. Im Mittelpunkt stehen Zufallsvariablen, Verteilungen, Erwartungswert, Varianz, Kovarianz, statistische Modelle und Schätzer sowie die Geometrie des allgemeinen linearen Modells. Ziel ist es, die elementaren Objekte, ihre Beziehungen und die daraus entstehenden Standardtechniken so zu ordnen, dass spätere Themen wie Regression, ANOVA, ANCOVA, multivariate Normalverteilung und asymptotische Methoden als natürliche Fortsetzung erscheinen.
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\tableofcontents
+
+\pagebreak
+
+\section{Leitidee und Grundperspektive}
+
+Statistik beginnt nicht mit Tests oder Softwarebefehlen, sondern mit einer geordneten Schichtung von Objekten:
+
+\begin{enumerate}
+    \item Ein \emph{Zufallsexperiment} erzeugt Ergebnisse.
+    \item Daraus entstehen \emph{Zufallsvariablen} und \emph{Zufallsvektoren}.
+    \item Diese besitzen \emph{Verteilungen}, \emph{Dichten} und \emph{Kenngrößen}.
+    \item Ein \emph{statistisches Modell} beschreibt, welche Verteilungen als plausible Datenquellen zugelassen werden.
+    \item Ein \emph{Schätzer} oder eine \emph{Teststatistik} ist eine Funktion der beobachteten Daten.
+    \item Im linearen Modell wird diese Struktur zusätzlich geometrisch: Schätzung wird zu Projektion, Residuen werden zu Orthogonalitätsaussagen, und Tests werden aus Zerlegungen des Datenraums gewonnen.
+\end{enumerate}
+
+Dieses Skript verfolgt genau diese Ontologie: erst die Objekte, dann ihre Eigenschaften, dann die Geometrie der Verfahren.
+
+\section{Zufallsvariablen und Verteilungen}
+
+\subsection{Wahrscheinlichkeitsraum und Zufallsvariable}
+
+\begin{DEF}{1.1}{Wahrscheinlichkeitsraum}
+Ein \emph{Wahrscheinlichkeitsraum} ist ein Tripel
+\[
+(\Omega,\mathcal F,\mathbb P),
+\]
+bestehend aus einer Ergebnismenge \(\Omega\), einer \(\sigma\)-Algebra \(\mathcal F\) von Ereignissen und einem Wahrscheinlichkeitsmaß
+\[
+\mathbb P:\mathcal F \to [0,1]
+\]
+mit \(\mathbb P(\Omega)=1\).
+\end{DEF}
+
+\begin{REM}{1.2}{Interpretation}
+\(\Omega\) enthält die elementaren Ausgänge des Experiments. Die \(\sigma\)-Algebra \(\mathcal F\) beschreibt, welche Teilmengen von \(\Omega\) überhaupt als beobachtbare Ereignisse zugelassen sind. Das Maß \(\mathbb P\) quantifiziert ihre Wahrscheinlichkeit.
+\end{REM}
+
+\begin{DEF}{1.3}{Zufallsvariable}
+Eine \emph{reellwertige Zufallsvariable} ist eine messbare Abbildung
+\[
+X:(\Omega,\mathcal F)\to (\R,\mathcal B(\R)).
+\]
+Allgemeiner heißt
+\[
+X=(X_1,\dots,X_d)^t:\Omega\to\R^d
+\]
+ein \(\R^d\)-wertiger Zufallsvektor.
+\end{DEF}
+
+\begin{REM}{1.4}{Ontologische Stellung}
+Eine Zufallsvariable ist nicht einfach ``eine zufällige Zahl'', sondern eine Funktion auf dem Ergebnisraum. Der Zufall steckt in \(\omega\in\Omega\); die Zahl \(X(\omega)\) ist das Bild des realisierten Ergebnisses.
+\end{REM}
+
+\subsection{Verteilungen}
+
+\begin{DEF}{1.5}{Verteilung}
+Die \emph{Verteilung} einer Zufallsvariable \(X\) ist das Bildmaß
+\[
+\mathbb P_X(B):=\mathbb P(X\in B),\qquad B\in\mathcal B(\R).
+\]
+Für Zufallsvektoren \(X:\Omega\to\R^d\) definiert man analog
+\[
+\mathbb P_X(B):=\mathbb P(X\in B),\qquad B\in\mathcal B(\R^d).
+\]
+\end{DEF}
+
+\begin{DEF}{1.6}{Verteilungsfunktion}
+Die \emph{Verteilungsfunktion} einer reellwertigen Zufallsvariable \(X\) ist gegeben durch
+\[
+F_X(x):=\mathbb P(X\le x),\qquad x\in\R.
+\]
+\end{DEF}
+
+\begin{PROP}{1.7}{Eigenschaften der Verteilungsfunktion}
+Für jede Verteilungsfunktion \(F_X\) gilt:
+\begin{romanenum}
+    \item \(F_X\) ist monoton wachsend,
+    \item \(F_X\) ist rechtsstetig,
+    \item \(\lim_{x\to -\infty}F_X(x)=0\),
+    \item \(\lim_{x\to +\infty}F_X(x)=1\).
+\end{romanenum}
+\end{PROP}
+
+\begin{PROOF}{1.8}{Beweisskizze}
+Alle Aussagen folgen direkt aus den Maßaxiomen von \(\mathbb P\) und aus elementaren Eigenschaften der Mengen \(\{X\le x\}\).
+\end{PROOF}
+
+\subsection{Diskrete und stetige Verteilungen}
+
+\begin{DEF}{1.9}{Diskrete Zufallsvariable}
+\(X\) heißt \emph{diskret}, wenn eine endliche oder abzählbare Menge \(\{x_i\}\subset\R\) existiert mit
+\[
+\mathbb P(X\in \{x_i\,:\,i\in I\})=1.
+\]
+Dann heißt
+\[
+p_X(x):=\mathbb P(X=x)
+\]
+die Wahrscheinlichkeitsfunktion von \(X\).
+\end{DEF}
+
+\begin{DEF}{1.10}{Stetige Zufallsvariable mit Dichte}
+\(X\) heißt \emph{stetig mit Dichte} \(f_X\), wenn eine messbare Funktion \(f_X:\R\to [0,\infty)\) existiert mit
+\[
+\mathbb P(X\in B)=\int_B f_X(x)\,dx
+\]
+für alle Borelmengen \(B\subset\R\).
+\end{DEF}
+
+\begin{REM}{1.11}{Wichtige Konsequenz}
+Falls \(X\) eine Dichte besitzt, dann gilt für alle \(a<b\)
+\[
+\mathbb P(a\le X\le b)=\int_a^b f_X(x)\,dx,
+\qquad
+F_X(x)=\int_{-\infty}^x f_X(t)\,dt.
+\]
+Insbesondere gilt dann \(\mathbb P(X=x)=0\) für jedes \(x\in\R\).
+\end{REM}
+
+\subsection{Gemeinsame Verteilungen und Unabhängigkeit}
+
+\begin{DEF}{1.12}{Gemeinsame Verteilung}
+Für einen Zufallsvektor \(X=(X_1,\dots,X_d)^t\) heißt \(\mathbb P_X\) die \emph{gemeinsame Verteilung}. Die Verteilungen der einzelnen Komponenten heißen \emph{Randverteilungen}.
+\end{DEF}
+
+\begin{DEF}{1.13}{Unabhängigkeit}
+Zufallsvariablen \(X_1,\dots,X_d\) heißen \emph{unabhängig}, wenn für alle Borelmengen \(B_1,\dots,B_d\subset\R\) gilt
+\[
+\mathbb P(X_1\in B_1,\dots,X_d\in B_d)
+=
+\prod_{j=1}^d \mathbb P(X_j\in B_j).
+\]
+\end{DEF}
+
+\begin{REM}{1.14}{Bedeutung}
+Unabhängigkeit ist eine Aussage über die gemeinsame Verteilung, nicht nur über einzelne Kennzahlen. Insbesondere impliziert \(\operatorname{Cov}(X,Y)=0\) im Allgemeinen \emph{nicht} die Unabhängigkeit von \(X\) und \(Y\).
+\end{REM}
+
+\section{Erwartungswert, Varianz, Kovarianz}
+
+\subsection{Erwartungswert}
+
+\begin{DEF}{2.1}{Erwartungswert}
+Für eine integrierbare Zufallsvariable \(X\) heißt
+\[
+\mathbb E[X]
+\]
+ihr \emph{Erwartungswert}. Diskret gilt
+\[
+\mathbb E[X]=\sum_x x\,\mathbb P(X=x),
+\]
+stetig mit Dichte \(f_X\) gilt
+\[
+\mathbb E[X]=\int_{\R} x f_X(x)\,dx.
+\]
+\end{DEF}
+
+\begin{REM}{2.2}{Interpretation}
+Der Erwartungswert ist keine zwingend beobachtbare Einzelrealisierung, sondern eine Lagegröße der Verteilung. Er beschreibt das theoretische Zentrum im Mittel über unendlich viele Wiederholungen.
+\end{REM}
+
+\begin{PROP}{2.3}{Linearität}
+Für integrierbare Zufallsvariablen \(X,Y\) und \(a,b\in\R\) gilt
+\[
+\mathbb E[aX+bY]=a\mathbb E[X]+b\mathbb E[Y].
+\]
+\end{PROP}
+
+\subsection{Varianz}
+
+\begin{DEF}{2.4}{Varianz}
+Für quadratintegrierbares \(X\) heißt
+\[
+\operatorname{Var}(X):=\mathbb E\bigl[(X-\mathbb E[X])^2\bigr]
+\]
+die \emph{Varianz} von \(X\). Die Standardabweichung ist
+\[
+\operatorname{SD}(X):=\sqrt{\operatorname{Var}(X)}.
+\]
+\end{DEF}
+
+\begin{PROP}{2.5}{Rechenformel}
+Für quadratintegrierbares \(X\) gilt
+\[
+\operatorname{Var}(X)=\mathbb E[X^2]-\bigl(\mathbb E[X]\bigr)^2.
+\]
+\end{PROP}
+
+\begin{PROOF}{2.6}{Beweis}
+Durch Ausmultiplizieren erhält man
+\[
+(X-\mathbb E[X])^2=X^2-2X\mathbb E[X]+\bigl(\mathbb E[X]\bigr)^2.
+\]
+Nach Erwartungsbildung folgt
+\[
+\operatorname{Var}(X)
+=
+\mathbb E[X^2]-2(\mathbb E[X])^2+(\mathbb E[X])^2
+=
+\mathbb E[X^2]-(\mathbb E[X])^2.
+\]
+\end{PROOF}
+
+\begin{PROP}{2.7}{Affine Transformation}
+Für \(a,b\in\R\) gilt
+\[
+\operatorname{Var}(aX+b)=a^2\operatorname{Var}(X).
+\]
+\end{PROP}
+
+\subsection{Kovarianz und Korrelation}
+
+\begin{DEF}{2.8}{Kovarianz}
+Für quadratintegrierbare Zufallsvariablen \(X,Y\) heißt
+\[
+\operatorname{Cov}(X,Y)
+:=
+\mathbb E\bigl[(X-\mathbb E[X])(Y-\mathbb E[Y])\bigr]
+\]
+die \emph{Kovarianz} von \(X\) und \(Y\).
+\end{DEF}
+
+\begin{PROP}{2.9}{Rechenformel}
+Es gilt
+\[
+\operatorname{Cov}(X,Y)=\mathbb E[XY]-\mathbb E[X]\mathbb E[Y].
+\]
+\end{PROP}
+
+\begin{DEF}{2.10}{Korrelation}
+Falls \(\operatorname{Var}(X),\operatorname{Var}(Y)>0\), heißt
+\[
+\operatorname{Cor}(X,Y)
+=
+\frac{\operatorname{Cov}(X,Y)}{\sqrt{\operatorname{Var}(X)\operatorname{Var}(Y)}}
+\]
+der \emph{Korrelationskoeffizient}.
+\end{DEF}
+
+\begin{REM}{2.11}{Interpretation}
+Die Kovarianz misst lineares gemeinsames Schwanken in Originaleinheiten. Die Korrelation normiert dieses Maß auf die dimensionslose Skala \([-1,1]\).
+\end{REM}
+
+\begin{PROP}{2.12}{Unabhängigkeit impliziert Kovarianz \(0\)}
+Sind \(X\) und \(Y\) unabhängig und quadratintegrierbar, dann gilt
+\[
+\operatorname{Cov}(X,Y)=0.
+\]
+\end{PROP}
+
+\begin{PROOF}{2.13}{Beweis}
+Wegen der Unabhängigkeit gilt \(\mathbb E[XY]=\mathbb E[X]\mathbb E[Y]\). Damit folgt die Behauptung direkt aus Proposition 2.9.
+\end{PROOF}
+
+\section{Statistische Modelle, Stichproben und Schätzer}
+
+\subsection{Daten als Realisierung}
+
+\begin{DEF}{3.1}{Stichprobe}
+Eine \emph{Stichprobe} vom Umfang \(n\) ist typischerweise ein Zufallsvektor
+\[
+X=(X_1,\dots,X_n)^t,
+\]
+oft mit unabhängigen und identisch verteilten Komponenten \(X_1,\dots,X_n\).
+Eine konkrete beobachtete Realisierung schreiben wir als
+\[
+x=(x_1,\dots,x_n)^t.
+\]
+\end{DEF}
+
+\begin{REM}{3.2}{Ontologische Trennung}
+Diese Unterscheidung ist zentral:
+\begin{itemize}
+    \item \(X\) ist zufällig,
+    \item \(x\) ist beobachtet und damit fest.
+\end{itemize}
+Ein Schätzer ist eine Funktion von \(X\), sein beobachteter Wert eine Funktion von \(x\).
+\end{REM}
+
+\subsection{Statistische Modelle}
+
+\begin{DEF}{3.3}{Statistisches Modell}
+Ein \emph{statistisches Modell} ist eine Familie von Wahrscheinlichkeitsmaßen
+\[
+\mathcal P=\{P_\theta:\theta\in\Theta\},
+\]
+wobei \(\Theta\) der \emph{Parameterraum} ist.
+\end{DEF}
+
+\begin{REM}{3.4}{Bedeutung}
+Ein statistisches Modell sagt nicht, welche Daten sicher auftreten, sondern welche Verteilungen als plausible Erzeugungsmechanismen zugelassen werden. Statistik ist daher die Kunst, aus einer Realisierung \(x\) Rückschlüsse auf \(\theta\) oder auf Strukturen in \(\mathcal P\) zu ziehen.
+\end{REM}
+
+\begin{EXA}{3.5}{Bernoulli-Modell}
+Bei einem Bernoulli-Experiment mit Trefferwahrscheinlichkeit \(p\in[0,1]\) lautet das Modell
+\[
+\mathcal P=\{\operatorname{Ber}(p):p\in[0,1]\}.
+\]
+Der Parameter ist \(p\).
+\end{EXA}
+
+\begin{EXA}{3.6}{Normalmodell}
+Für normalverteilte Daten mit unbekanntem Mittelwert \(\mu\) und unbekannter Varianz \(\sigma^2\) lautet das Modell
+\[
+\mathcal P=\{N(\mu,\sigma^2):\mu\in\R,\ \sigma^2>0\}.
+\]
+\end{EXA}
+
+\subsection{Schätzer und Teststatistiken}
+
+\begin{DEF}{3.7}{Schätzer}
+Ein \emph{Schätzer} für einen Parameter \(\tau(\theta)\) ist eine messbare Funktion der Daten,
+\[
+T=T(X_1,\dots,X_n).
+\]
+\end{DEF}
+
+\begin{EXA}{3.8}{Stichprobenmittel}
+Für i.i.d.\ Daten \(X_1,\dots,X_n\) ist
+\[
+\bar X=\frac1n\sum_{i=1}^n X_i
+\]
+ein Schätzer für den Erwartungswert \(\mu=\mathbb E[X_1]\).
+\end{EXA}
+
+\begin{DEF}{3.9}{Erwartungstreue}
+Ein Schätzer \(T\) für \(\tau(\theta)\) heißt \emph{erwartungstreu}, wenn
+\[
+\mathbb E_\theta[T]=\tau(\theta)
+\]
+für alle \(\theta\in\Theta\) gilt.
+\end{DEF}
+
+\begin{DEF}{3.10}{Konsistenz}
+Eine Schätzerfolge \(T_n\) für \(\tau(\theta)\) heißt \emph{konsistent}, wenn
+\[
+T_n \xrightarrow[n\to\infty]{\mathbb P} \tau(\theta)
+\]
+gilt.
+\end{DEF}
+
+
+\begin{DEF}{3.11}{Statistische Hypothese}
+Eine \emph{statistische Hypothese} ist eine Aussage darüber, zu welchem Teil des statistischen Modells die wahre Datenverteilung gehört. Formal beschreibt sie eine Teilmenge
+\[
+\mathcal H \subset \mathcal P
+\]
+des zugelassenen Modells
+\[
+\mathcal P=\{P_\theta:\theta\in\Theta\}.
+\]
+\end{DEF}
+
+\begin{DEF}{3.12}{Nullhypothese und Alternativhypothese}
+Ein \emph{statistischer Test} vergleicht typischerweise zwei konkurrierende Hypothesen:
+\[
+H_0:\ P \in \mathcal H_0
+\qquad\text{gegen}\qquad
+H_1:\ P \in \mathcal H_1.
+\]
+Hierbei heißt \(H_0\) die \emph{Nullhypothese} und \(H_1\) die \emph{Alternativhypothese}. Meist ist \(\mathcal H_0\) das einfachere, restriktivere oder zu widerlegende Modell, während \(\mathcal H_1\) eine Modellerweiterung beschreibt.
+\end{DEF}
+
+\begin{REM}{3.13}{Interpretation}
+Die Nullhypothese ist nicht notwendig die Hypothese, die man ``glaubt'', sondern diejenige, deren Konsequenzen man mathematisch kontrollieren kann. Ein Test untersucht dann, ob die beobachteten Daten mit \(H_0\) vereinbar erscheinen oder ob sie so stark von \(H_0\) abweichen, dass man \(H_0\) verwirft.
+\end{REM}
+
+\begin{DEF}{3.14}{Teststatistik}
+Eine \emph{Teststatistik} ist eine messbare Funktion der Daten,
+\[
+T=T(X_1,\dots,X_n),
+\]
+mit deren Hilfe die Vereinbarkeit der beobachteten Daten mit der Nullhypothese beurteilt wird. Ihre Verteilung unter \(H_0\) ist entweder exakt bekannt oder für große Stichproben asymptotisch kontrollierbar.
+
+Typischerweise ist die Teststatistik so konstruiert, dass \emph{große} oder \emph{kleine} Werte von \(T\) gegen \(H_0\) sprechen. Der zugehörige Test besteht dann darin, die beobachtete Realisierung \(T(x_1,\dots,x_n)\) mit der Verteilung von \(T\) unter \(H_0\) zu vergleichen.
+\end{DEF}
+
+\begin{EXA}{3.15}{Grundidee}
+Ist etwa \(X_1,\dots,X_n\) eine Stichprobe und soll geprüft werden, ob ihr Mittelwert gleich einem vorgegebenen Wert \(\mu_0\) ist, so kann eine Teststatistik die Form
+\[
+T=\frac{\bar X-\mu_0}{\text{geschätzter Standardfehler}}
+\]
+haben. Dann misst \(T\), wie stark der beobachtete Mittelwert vom unter \(H_0\) postulierten Wert entfernt ist, relativ zur erwartbaren Zufallsschwankung.
+\end{EXA}
+
+
+\section{Zufallsvektoren und multivariate Normalverteilung}
+
+\subsection{Kovarianzmatrix}
+
+\begin{DEF}{4.1}{Erwartungswert und Kovarianzmatrix eines Zufallsvektors}
+Für einen \(\R^d\)-wertigen Zufallsvektor \(X=(X_1,\dots,X_d)^t\) definiert man
+\[
+\mathbb E[X]
+=
+\begin{pmatrix}
+\mathbb E[X_1]\\
+\vdots\\
+\mathbb E[X_d]
+\end{pmatrix}
+\in\R^d
+\]
+und
+\[
+\Sigma_X
+=
+\operatorname{Cov}(X)
+=
+\bigl(\operatorname{Cov}(X_i,X_j)\bigr)_{i,j=1}^d.
+\]
+\end{DEF}
+
+\begin{PROP}{4.2}{Struktureigenschaften der Kovarianzmatrix}
+Für jeden quadratintegrierbaren Zufallsvektor \(X\) gilt:
+\begin{romanenum}
+    \item \(\Sigma_X\) ist symmetrisch,
+    \item \(\Sigma_X\) ist positiv semidefinit, d.h.
+    \[
+    a^t\Sigma_X a\ge 0\qquad\forall a\in\R^d.
+    \]
+\end{romanenum}
+\end{PROP}
+
+\begin{PROOF}{4.3}{Beweis}
+Symmetrie folgt aus \(\operatorname{Cov}(X_i,X_j)=\operatorname{Cov}(X_j,X_i)\). Ferner gilt
+\[
+a^t\Sigma_X a
+=
+\operatorname{Var}(a^tX)\ge 0.
+\]
+\end{PROOF}
+
+\subsection{Definition der multivariaten Normalverteilung}
+
+\begin{DEF}{4.4}{Standardnormalverteilung im \(\R^d\)}
+Ein Zufallsvektor \(Z=(Z_1,\dots,Z_d)^t\) heißt \emph{standardnormalverteilt im \(\R^d\)}, wenn seine Komponenten unabhängig und identisch \(N(0,1)\)-verteilt sind. Man schreibt
+\[
+Z\sim N_d(0,I_d).
+\]
+\end{DEF}
+
+\begin{DEF}{4.5}{Multivariate Normalverteilung}
+Ein \(\R^d\)-wertiger Zufallsvektor \(X\) heißt \emph{multivariat normalverteilt} mit Mittelwert \(\mu\in\R^d\) und Kovarianzmatrix \(\Sigma\), wenn
+\[
+X=\mu + AZ
+\]
+für ein \(d\times d\)-Matrix \(A\) und \(Z\sim N_d(0,I_d)\) gilt, wobei
+\[
+\Sigma=AA^t.
+\]
+Man schreibt dann
+\[
+X\sim N_d(\mu,\Sigma).
+\]
+\end{DEF}
+
+\begin{REM}{4.6}{Geometrische Interpretation}
+Die Standardnormalverteilung ist rotationssymmetrisch. Die Transformation \(x\mapsto \mu+Ax\) verschiebt, dreht und streckt diese isotrope Wolke. So entstehen allgemeine multivariate Normalverteilungen mit ellipsoiden Niveaumengen.
+\end{REM}
+
+\begin{PROP}{4.7}{Lineare Bilder}
+Ist \(X\sim N_d(\mu,\Sigma)\) und \(B\) eine \(k\times d\)-Matrix, so gilt
+\[
+BX \sim N_k(B\mu,B\Sigma B^t).
+\]
+\end{PROP}
+
+\begin{PROOF}{4.8}{Beweis}
+Aus \(X=\mu+AZ\) folgt
+\[
+BX=B\mu + BAZ.
+\]
+Also ist \(BX\) wieder affine Transformation eines standardnormalverteilten Vektors. Seine Kovarianzmatrix ist
+\[
+\operatorname{Cov}(BX)=B\operatorname{Cov}(X)B^t=B\Sigma B^t.
+\]
+\end{PROOF}
+
+\begin{REM}{4.9}{Relevanz für die Vorlesung}
+Diese Aussage ist der Grund, warum Regressionsschätzer, Projektionsanteile und viele Teststatistiken im linearen Normalmodell explizite Verteilungen besitzen.
+\end{REM}
+
+\section{Geometrischer Vorlauf: Projektionen in \(\R^n\)}
+
+\subsection{Datenraum und Modellraum}
+
+\begin{MOT}{5.1}{Warum Geometrie?}
+Im allgemeinen linearen Modell lebt der beobachtete Datenvektor
+\[
+Y=(Y_1,\dots,Y_n)^t
+\]
+in \(\R^n\). Modelle werden als Unterräume dieses Datenraums beschrieben. Schätzung wird dadurch zu einem geometrischen Approximationsproblem.
+\end{MOT}
+
+\begin{DEF}{5.2}{Skalarprodukt und Norm}
+Auf \(\R^n\) verwenden wir das Standardskalarprodukt
+\[
+\SKP{x,y}=x^t y=\sum_{i=1}^n x_i y_i
+\]
+und die zugehörige Norm
+\[
+\|x\|=\sqrt{\SKP{x,x}}.
+\]
+\end{DEF}
+
+\begin{DEF}{5.3}{Orthogonale Projektion}
+Sei \(M\subset \R^n\) ein Unterraum. Die \emph{orthogonale Projektion} von \(y\in\R^n\) auf \(M\) ist der eindeutig bestimmte Vektor \(P_M y\in M\) mit
+\[
+y-P_M y \in M^\perp.
+\]
+\end{DEF}
+
+\begin{PROP}{5.4}{Bestapproximation}
+Für jedes \(y\in\R^n\) ist \(P_My\) der eindeutige Minimierer von
+\[
+m\mapsto \|y-m\|^2,\qquad m\in M.
+\]
+\end{PROP}
+
+\begin{PROOF}{5.5}{Beweisskizze}
+Für \(m\in M\) gilt
+\[
+y-m=(y-P_My)+(P_My-m),
+\]
+wobei die beiden Summanden orthogonal sind. Nach Pythagoras folgt
+\[
+\|y-m\|^2=\|y-P_My\|^2+\|P_My-m\|^2 \ge \|y-P_My\|^2.
+\]
+\end{PROOF}
+
+\begin{REM}{5.6}{Statistische Bedeutung}
+Diese Aussage ist die geometrische Essenz der Methode der kleinsten Quadrate.
+\end{REM}
+
+\section{Das allgemeine lineare Modell}
+
+\subsection{Definition}
+
+\begin{DEF}{6.1}{Allgemeines lineares Modell}
+Das \emph{allgemeine lineare Modell} in \(\R^n\) hat die Form
+\[
+Y=\mu+\sigma Z,
+\qquad
+\mu\in M,\quad \sigma>0,\quad Z\sim N_n(0,I_n),
+\]
+wobei \(M\subset\R^n\) ein linearer Unterraum ist.
+\end{DEF}
+
+\begin{REM}{6.2}{Ontologische Lesart}
+Das Modell trennt streng zwischen
+\begin{itemize}
+    \item \(\mu\): systematischer, strukturierter Anteil,
+    \item \(\sigma Z\): zufälliger Fehleranteil.
+\end{itemize}
+Die Statistik versucht, aus \(Y\) Informationen über den unbekannten systematischen Anteil \(\mu\) zu rekonstruieren.
+\end{REM}
+
+\subsection{Kleinste Quadrate als Projektion}
+
+\begin{PROP}{6.3}{Schätzer des Mittelvektors}
+Im allgemeinen linearen Modell ist der Kleinste-Quadrate-Schätzer von \(\mu\) gegeben durch
+\[
+\hat\mu=P_M Y.
+\]
+\end{PROP}
+
+\begin{PROOF}{6.4}{Beweis}
+Nach Proposition 5.4 minimiert die orthogonale Projektion \(P_M Y\) den Ausdruck
+\[
+m\mapsto \|Y-m\|^2,\qquad m\in M.
+\]
+Genau dies ist die Definition des Kleinste-Quadrate-Schätzers.
+\end{PROOF}
+
+\begin{REM}{6.5}{Residuum}
+Das Residuum ist
+\[
+R:=Y-\hat\mu=(I-P_M)Y.
+\]
+Es liegt in \(M^\perp\) und erfüllt die Orthogonalitätsbedingung
+\[
+\SKP{R,m}=0\qquad \forall m\in M.
+\]
+\end{REM}
+
+\begin{PROP}{6.6}{Erwartungstreue}
+Es gilt
+\[
+\mathbb E[\hat\mu]=\mu.
+\]
+\end{PROP}
+
+\begin{PROOF}{6.7}{Beweis}
+Da \(\mu\in M\) ist, gilt \(P_M\mu=\mu\). Daher
+\[
+\mathbb E[\hat\mu]
+=
+\mathbb E[P_MY]
+=
+P_M\mathbb E[Y]
+=
+P_M\mu
+=
+\mu.
+\]
+\end{PROOF}
+
+\subsection{Test linearer Hypothesen}
+
+\begin{MOT}{6.8}{Grundidee}
+Häufig möchte man nicht das ganze Modell \(M\) testen, sondern eine kleinere Hypothese
+\[
+H_0:\mu\in D
+\]
+für einen Unterraum \(D\subset M\). Dann misst man, ob der beobachtete Datenvektor einen nennenswerten Anteil in den Richtungen besitzt, die in \(M\) liegen, aber nicht in \(D\).
+\end{MOT}
+
+\begin{DEF}{6.9}{Zerlegung}
+Sei \(D\subset M\). Dann zerlegt man
+\[
+M=D\oplus E,
+\]
+wobei \(E\) das orthogonale Komplement von \(D\) innerhalb von \(M\) ist.
+\end{DEF}
+
+\begin{REM}{6.10}{Bedeutung der drei orthogonalen Teile}
+Man erhält die orthogonale Zerlegung
+\[
+\R^n = D \oplus E \oplus M^\perp.
+\]
+Daher zerfällt der Beobachtungsvektor in
+\[
+Y=P_DY + P_EY + P_{M^\perp}Y.
+\]
+Hierbei gilt:
+\begin{itemize}
+    \item \(P_DY\): Anteil, der schon unter \(H_0\) erlaubt ist,
+    \item \(P_EY\): Zusatzanteil, der nur unter der Alternative nötig wird,
+    \item \(P_{M^\perp}Y\): Residualanteil.
+\end{itemize}
+\end{REM}
+
+\begin{CONC}{6.11}{Geometrische Form des \(F\)-Tests}
+Unter \(H_0:\mu\in D\) vergleicht man die mittlere Quadratlänge im Zusatzraum \(E\) mit der mittleren Quadratlänge im Fehlerraum \(M^\perp\). Formal führt dies zur Teststatistik
+\[
+F
+=
+\frac{\|P_EY\|^2/\dim(E)}{\|P_{M^\perp}Y\|^2/\dim(M^\perp)}.
+\]
+Im Normalmodell besitzt diese Statistik unter \(H_0\) eine \(F\)-Verteilung.
+\end{CONC}
+
+\begin{REM}{6.12}{Zentrale Einsicht}
+Das ist die geometrische Klammer hinter ANOVA, Regression, ANCOVA und vielen weiteren Verfahren: Man zerlegt den Datenvektor orthogonal in \emph{erklärte} und \emph{nicht erklärte} Komponenten und vergleicht ihre quadratischen Größen.
+\end{REM}
+
+\section{Ausblick auf die nächsten Bausteine}
+
+Auf Basis der bisherigen Struktur ergeben sich die nächsten Kapitel fast zwingend:
+
+\begin{enumerate}
+    \item \textbf{Einfache lineare Regression:}
+    Modellräume, Regressionsgerade, Normalengleichungen, Interpretation von \(\beta_0,\beta_1\).
+    \item \textbf{Multiple lineare Regression:}
+    Designmatrix \(C\), Darstellung
+    \[
+    Y=C\beta+\sigma Z,
+    \qquad
+    \hat\beta=(C^tC)^{-1}C^tY.
+    \]
+    \item \textbf{ANOVA und ANCOVA:}
+    Vergleich verschachtelter Modellräume.
+    \item \textbf{Multivariate Normalverteilung:}
+    Kovarianzgeometrie als Grundlage der Verteilungen von \(\hat\beta\) und von Quadratsummen.
+    \item \textbf{Asymptotik und Delta-Methode:}
+    Wie Verteilungen von Schätzern und transformierten Schätzern approximiert werden.
+\end{enumerate}
+
+\begin{CONC}{7.1}{Kernbotschaft des bisherigen Skripts}
+Die Grundobjekte der Statistik sind nicht isolierte Formeln, sondern ein zusammenhängendes Gefüge:
+\[
+\text{Zufallsvariable}
+\longrightarrow
+\text{Verteilung}
+\longrightarrow
+\text{Kenngrößen}
+\longrightarrow
+\text{Modell}
+\longrightarrow
+\text{Schätzer/Test}
+\longrightarrow
+\text{Geometrie des Datenraums}.
+\]
+Erst auf dieser Grundlage werden die konkreten Verfahren der Vorlesung systematisch durchsichtig.
+\end{CONC}
+
+
+\section{Einfache lineare Regression}
+
+\subsection{Das Modell}
+
+\begin{MOT}{8.1}{Von der Geometrie zur Regressionsgeraden}
+Im allgemeinen linearen Modell wurde ein Datenvektor \(Y\in \R^n\) auf einen linearen Modellraum projiziert. Die einfache lineare Regression ist der Spezialfall, in dem der Modellraum von zwei vorgegebenen Vektoren aufgespannt wird: dem konstanten Vektor \(1=(1,\dots,1)^t\) und dem Regressorvektor
+\[
+x=(x_1,\dots,x_n)^t.
+\]
+Die geometrische Projektion auf diesen zweidimensionalen Raum entspricht der Schätzung einer Regressionsgeraden.
+\end{MOT}
+
+\begin{DEF}{8.2}{Modell der einfachen linearen Regression}
+Seien \(x_1,\dots,x_n\in \R\) fest vorgegeben. Das Modell der einfachen linearen Regression lautet
+\[
+Y_i=\beta_0+\beta_1 x_i+\sigma Z_i,\qquad i=1,\dots,n,
+\]
+wobei \(Z_1,\dots,Z_n\) unabhängig und standardnormalverteilt sind.
+In Vektorform schreibt man
+\[
+Y=C\beta+\sigma Z,
+\]
+mit
+\[
+C=
+\begin{pmatrix}
+1 & x_1\\
+\vdots & \vdots\\
+1 & x_n
+\end{pmatrix},
+\qquad
+\beta=
+\begin{pmatrix}
+\beta_0\\
+\beta_1
+\end{pmatrix}.
+\]
+\end{DEF}
+
+\begin{REM}{8.3}{Modellraum}
+Der zugehörige Modellraum ist
+\[
+M=\{C\beta:\beta\in \R^2\}=\operatorname{span}\{1,x\}\subset \R^n.
+\]
+Die beobachteten Daten werden also durch die beste Approximation im von \(1\) und \(x\) aufgespannten Unterraum beschrieben.
+\end{REM}
+
+\subsection{Kleinste Quadrate und Projektion}
+
+\begin{DEF}{8.4}{Kleinste-Quadrate-Schätzer}
+Der Kleinste-Quadrate-Schätzer \(\hat\beta=(\hat\beta_0,\hat\beta_1)^t\) ist derjenige Parametervektor, für den
+\[
+\|Y-C\beta\|^2
+\]
+minimal wird. Äquivalent dazu ist \(C\hat\beta=P_M Y\).
+\end{DEF}
+
+\begin{PROP}{8.5}{Normalengleichungen}
+Der Schätzer \(\hat\beta\) erfüllt die Normalengleichungen
+\[
+C^T(Y-C\hat\beta)=0,
+\]
+also
+\[
+C^TC\,\hat\beta=C^TY.
+\]
+Falls \(x\) nicht konstant ist, so ist \(C^TC\) invertierbar und damit
+\[
+\hat\beta=(C^TC)^{-1}C^TY.
+\]
+\end{PROP}
+
+\begin{PROOF}{8.6}{Beweisskizze}
+Da \(C\hat\beta=P_MY\) die orthogonale Projektion von \(Y\) auf den Spaltenraum von \(C\) ist, ist das Residuum
+\[
+R:=Y-C\hat\beta
+\]
+orthogonal zu jeder Spalte von \(C\). Dies ist genau die Gleichung \(C^TR=0\).
+\end{PROOF}
+
+\begin{REM}{8.7}{Interpretation der Orthogonalität}
+Die Gleichung
+\[
+C^T(Y-C\hat\beta)=0
+\]
+bedeutet, dass das Residuum orthogonal zum konstanten Vektor \(1\) und orthogonal zum Regressorvektor \(x\) ist. Daraus folgen bereits die beiden wichtigsten Strukturaussagen der einfachen Regression.
+\end{REM}
+
+\subsection{Explizite Formeln}
+
+\begin{PROP}{8.8}{Schwerpunkt-Eigenschaft}
+Für die geschätzte Regressionsgerade gilt
+\[
+\bar y=\hat\beta_0+\hat\beta_1\bar x,
+\]
+wobei
+\[
+\bar x=\frac1n\sum_{i=1}^n x_i,
+\qquad
+\bar y=\frac1n\sum_{i=1}^n y_i.
+\]
+Die Regressionsgerade geht also durch den Schwerpunkt \((\bar x,\bar y)\) der Daten.
+\end{PROP}
+
+\begin{PROOF}{8.9}{Beweis}
+Aus der Orthogonalität zum konstanten Vektor folgt
+\[
+0=\sum_{i=1}^n (y_i-\hat\beta_0-\hat\beta_1x_i).
+\]
+Umstellen liefert
+\[
+n\bar y-n\hat\beta_0-\hat\beta_1 n\bar x=0,
+\]
+also die Behauptung.
+\end{PROOF}
+
+\begin{PROP}{8.10}{Formel für die Steigung}
+Es gilt
+\[
+\hat\beta_1
+=
+\frac{\sum_{i=1}^n (x_i-\bar x)(y_i-\bar y)}
+{\sum_{i=1}^n (x_i-\bar x)^2}.
+\]
+Ferner ist
+\[
+\hat\beta_0=\bar y-\hat\beta_1\bar x.
+\]
+\end{PROP}
+
+\begin{PROOF}{8.11}{Beweisskizze}
+Aus der Orthogonalität von \(R\) zu \(x-\bar x\,1\) folgt
+\[
+0=\sum_{i=1}^n \bigl(y_i-\hat\beta_0-\hat\beta_1x_i\bigr)(x_i-\bar x).
+\]
+Nach Einsetzen von \(\hat\beta_0=\bar y-\hat\beta_1\bar x\) und Umformen ergibt sich die Formel.
+\end{PROOF}
+
+\begin{REM}{8.12}{Korrelation und Steigung}
+Mit empirischer Kovarianz und empirischer Korrelation kann man die Steigung auch in der Form
+\[
+\hat\beta_1=r_{xy}\frac{s_y}{s_x}
+\]
+schreiben. Damit wird deutlich, dass die Steigung aus einem dimensionslosen linearen Zusammenhang \(r_{xy}\) und einem reinen Skalierungsfaktor \(s_y/s_x\) zusammengesetzt ist.
+\end{REM}
+
+\subsection{Verteilung der Schätzer}
+
+\begin{PROP}{8.13}{Normalverteilung von \(\hat\beta\)}
+Im Regressionsmodell gilt
+\[
+\hat\beta \sim N_2\bigl(\beta,\sigma^2(C^TC)^{-1}\bigr).
+\]
+Insbesondere ist \(\hat\beta\) erwartungstreu:
+\[
+\mathbb E[\hat\beta]=\beta.
+\]
+\end{PROP}
+
+\begin{PROOF}{8.14}{Beweis}
+Aus
+\[
+Y=C\beta+\sigma Z
+\]
+folgt
+\[
+\hat\beta=(C^TC)^{-1}C^TY
+=
+(C^TC)^{-1}C^T(C\beta+\sigma Z)
+=
+\beta+\sigma (C^TC)^{-1}C^TZ.
+\]
+Da lineare Bilder eines multivariat normalverteilten Vektors wieder normalverteilt sind, ist \(\hat\beta\) normalverteilt. Die Kovarianzmatrix ergibt sich zu
+\[
+\operatorname{Cov}(\hat\beta)
+=
+\sigma^2(C^TC)^{-1}C^T C (C^TC)^{-1}
+=
+\sigma^2(C^TC)^{-1}.
+\]
+\end{PROOF}
+
+\section{Multiple lineare Regression}
+
+\subsection{Das Modell}
+
+\begin{DEF}{9.1}{Modell der multiplen linearen Regression}
+Seien \(x_{i1},\dots,x_{ip}\in \R\) feste Regressoren. Das multiple lineare Regressionsmodell lautet
+\[
+Y_i=\beta_0+\beta_1x_{i1}+\cdots+\beta_p x_{ip}+\sigma Z_i,\qquad i=1,\dots,n.
+\]
+In Matrixform:
+\[
+Y=C\beta+\sigma Z,
+\]
+mit
+\[
+C=
+\begin{pmatrix}
+1 & x_{11} & \cdots & x_{1p}\\
+\vdots & \vdots & & \vdots\\
+1 & x_{n1} & \cdots & x_{np}
+\end{pmatrix},
+\qquad
+\beta=
+\begin{pmatrix}
+\beta_0\\
+\beta_1\\
+\vdots\\
+\beta_p
+\end{pmatrix}.
+\]
+\end{DEF}
+
+\begin{REM}{9.2}{Geometrie}
+Der Modellraum ist der Spaltenraum von \(C\):
+\[
+M=\operatorname{span}\{C_{\cdot 1},\dots,C_{\cdot,p+1}\}.
+\]
+Schätzen heißt wieder: projiziere \(Y\) orthogonal auf \(M\).
+\end{REM}
+
+\subsection{Schätzung und Normalengleichungen}
+
+\begin{PROP}{9.3}{Kleinste Quadrate in Matrixform}
+Falls \(C\) vollen Spaltenrang besitzt, ist der Kleinste-Quadrate-Schätzer eindeutig bestimmt durch
+\[
+\hat\beta=(C^TC)^{-1}C^TY.
+\]
+\end{PROP}
+
+\begin{REM}{9.4}{Bedeutung des vollen Rangs}
+Voller Rang bedeutet, dass keine Spalte von \(C\) als Linearkombination der übrigen geschrieben werden kann. Fehlt diese Eigenschaft, sind die Koeffizienten nicht eindeutig identifizierbar.
+\end{REM}
+
+\begin{PROP}{9.5}{Verteilung von \(\hat\beta\)}
+Im multiplen linearen Modell gilt
+\[
+\hat\beta\sim N_{p+1}\bigl(\beta,\sigma^2(C^TC)^{-1}\bigr).
+\]
+\end{PROP}
+
+\begin{REM}{9.6}{Interpretation der Koeffizienten}
+Im multiplen Modell ist \(\beta_j\) im Allgemeinen kein ``bloßer'' Anstieg von \(Y\) in Richtung der \(j\)-ten Variablen, sondern der partielle Effekt der \(j\)-ten Variable \emph{bei konstant gehaltenen übrigen Regressoren}. Gerade dies erklärt, warum sich Koeffizienten beim Übergang von einfachen zu multiplen Modellen erheblich ändern können.
+\end{REM}
+
+\subsection{Verschachtelte Modelle und partielle Tests}
+
+\begin{MOT}{9.7}{Warum \(F\)-Tests in der Regression natürlich sind}
+Hat man zwei verschachtelte Regressionsmodelle
+\[
+D\subset M,
+\]
+so ist die Frage, ob zusätzliche Kovariaten wirklich benötigt werden, genau dieselbe geometrische Frage wie im allgemeinen linearen Modell: Ist der zusätzliche Projektionsanteil im Ergänzungsraum \(E\) groß genug im Vergleich zur Residualstreuung?
+\end{MOT}
+
+\begin{CONC}{9.8}{Allgemeine Form des Regressions-\(F\)-Tests}
+Für zwei verschachtelte lineare Modelle \(D\subset M\) mit \(M=D\oplus E\) verwendet man
+\[
+F=\frac{\|P_EY\|^2/\dim(E)}{\|P_{M^\perp}Y\|^2/\dim(M^\perp)}.
+\]
+Äquivalent in Residuenquadratsummen:
+\[
+F=
+\frac{(\operatorname{RSS}_D-\operatorname{RSS}_M)/(\dim(M)-\dim(D))}
+{\operatorname{RSS}_M/(n-\dim(M))}.
+\]
+Unter \(H_0:\mu\in D\) besitzt \(F\) im Normalmodell eine \(F\)-Verteilung.
+\end{CONC}
+
+\section{ANOVA und ANCOVA als lineare Modelle}
+
+\subsection{Einfaktorielle ANOVA}
+
+\begin{DEF}{10.1}{ANOVA-Modell}
+Bei \(k\) Gruppen und Beobachtungen \(Y_{ij}\) in Gruppe \(i\) lautet das Modell
+\[
+Y_{ij}=\mu_i+\sigma Z_{ij},
+\qquad i=1,\dots,k.
+\]
+Die Nullhypothese gleicher Mittelwerte lautet
+\[
+H_0:\mu_1=\cdots=\mu_k.
+\]
+\end{DEF}
+
+\begin{REM}{10.2}{Unterräume}
+Im Datenraum \(\R^n\) ist
+\[
+D=\{c\,1:c\in\R\}
+\]
+der Nullraum konstanter Mittelwerte. Der größere Modellraum \(M\) besteht aus allen gruppenkonstanten Vektoren. Die zusätzliche Information des Gruppenfaktors lebt im Ergänzungsraum \(E\) mit
+\[
+M=D\oplus E.
+\]
+\end{REM}
+
+\begin{CONC}{10.3}{ANOVA als \(F\)-Test}
+Die klassische ANOVA ist genau der \(F\)-Test des kleineren Modells ``ein gemeinsamer Mittelwert'' gegen das größere Modell ``gruppenspezifische Mittelwerte''. Die Statistik vergleicht also zusätzliche zwischen-Gruppen-Variation mit der innerhalb der Gruppen verbleibenden Residualvariation.
+\end{CONC}
+
+\subsection{ANCOVA}
+
+\begin{DEF}{10.4}{ANCOVA-Modell}
+Sei zusätzlich eine Kovariate \(x_{ij}\) gegeben. Dann lautet ein ANCOVA-Modell mit gruppenspezifischen Achsenabschnitten und gemeinsamer Steigung
+\[
+Y_{ij}=\beta_{0i}+\beta_1 x_{ij}+\sigma Z_{ij}.
+\]
+\end{DEF}
+
+\begin{REM}{10.5}{Interpretation}
+ANCOVA verbindet Varianzanalyse und lineare Regression. Der Gruppenfaktor modelliert Lageunterschiede zwischen Gruppen, während die Kovariate eine lineare Erklärung systematischer Variation innerhalb und zwischen den Gruppen liefert.
+\end{REM}
+
+\begin{MOT}{10.6}{Warum ANCOVA wichtig ist}
+Eine Kovariate kann Gruppenunterschiede verschleiern, wenn sich die Gruppen systematisch in dieser Kovariate unterscheiden. Dann kann eine reine ANOVA zu dem Ergebnis kommen, dass keine signifikanten Mittelwertsunterschiede vorliegen, obwohl nach Adjustierung für die Kovariate deutliche Unterschiede sichtbar werden.
+\end{MOT}
+
+\begin{CONC}{10.7}{Drei natürliche Modellvergleiche}
+Im Rahmen der ANCOVA treten drei besonders natürliche verschachtelte Vergleiche auf:
+\begin{romanenum}
+    \item \textbf{ANOVA gegen konstantes Modell:}
+    Prüft, ob überhaupt Gruppenunterschiede vorliegen.
+    \item \textbf{ANCOVA gegen reine Regression:}
+    Prüft, ob nach Kontrolle der Kovariate noch Gruppenunterschiede bestehen.
+    \item \textbf{Modell mit gemeinsamer Steigung gegen Modell mit gruppenspezifischen Steigungen:}
+    Prüft, ob die lineare Abhängigkeit von der Kovariate in allen Gruppen gleich ist.
+\end{romanenum}
+In allen drei Fällen ist die Teststatistik eine \(F\)-Statistik für zwei verschachtelte lineare Modelle.
+\end{CONC}
+
+\section{Zusammenfassung des roten Fadens}
+
+\begin{CONC}{11.1}{Einheitliche Struktur}
+Einfache Regression, multiple Regression, ANOVA und ANCOVA sind keine voneinander getrennten Methoden, sondern Spezialfälle desselben Schemas:
+\[
+Y=C\beta+\sigma Z.
+\]
+Schätzung bedeutet orthogonale Projektion auf den Spaltenraum von \(C\). Hypothesentests bedeuten Vergleich verschachtelter Unterräume mittels Quadratsummen und \(F\)-Statistik.
+\end{CONC}
+
+\begin{REM}{11.2}{Ausblick}
+Der nächste natürliche Schritt ist nun, die multivariate Normalverteilung und die Struktur von Kovarianzmatrizen systematisch auszubauen. Erst damit werden die Verteilungen der Regressionsschätzer, die Mahalanobis-Geometrie und später auch PCA und weitere multivariate Verfahren vollständig transparent.
+\end{REM}
+
+
+\pagebreak
+
+\section{Einheit 5: \texttt{summary()} und \texttt{anova()} wirklich lesen}
+
+Bis jetzt konnten wir Modelle in \texttt{R} aufrufen. Nun geht es darum, die Ausgaben von \texttt{summary()} und \texttt{anova()} mathematisch korrekt zu interpretieren. Das ist zentral, denn erst dadurch wird klar, was genau geschätzt und getestet wird.
+
+\subsection{Ausgangspunkt: ein einfaches lineares Modell}
+
+Wir betrachten zunächst das lineare Regressionsmodell
+\[
+Y_i=\beta_0+\beta_1 x_i+\varepsilon_i.
+\]
+In \texttt{R} wird ein solches Modell etwa durch
+\begin{verbatim}
+fit_reg <- lm(y ~ x, data = dat)
+summary(fit_reg)
+\end{verbatim}
+geschätzt.
+
+\subsection{Der Block \texttt{Call}}
+
+Am Anfang der Ausgabe steht meist
+\begin{verbatim}
+Call:
+lm(formula = y ~ x, data = dat)
+\end{verbatim}
+Dies ist lediglich eine Erinnerung daran, welches Modell mit welchen Daten geschätzt wurde. Inhaltlich liefert dieser Teil noch keine statistische Aussage.
+
+\subsection{Der Block \texttt{Residuals}}
+
+Die Residuen sind definiert als
+\[
+r_i=y_i-\hat y_i.
+\]
+Sie messen also für jede Beobachtung die Differenz zwischen beobachtetem und vorhergesagtem Wert.
+
+In der Ausgabe von \texttt{summary()} erscheint oft eine grobe Zusammenfassung der Residuen:
+\begin{verbatim}
+Residuals:
+    Min      1Q  Median      3Q     Max
+...
+\end{verbatim}
+Dabei bedeuten:
+\begin{itemize}
+    \item \texttt{Min}: kleinstes Residuum,
+    \item \texttt{1Q}: erstes Quartil,
+    \item \texttt{Median}: Median der Residuen,
+    \item \texttt{3Q}: drittes Quartil,
+    \item \texttt{Max}: größtes Residuum.
+\end{itemize}
+
+Diese Zusammenfassung gibt einen ersten Eindruck über Lage und Streuung der Residuen. Ein Median nahe \(0\) und eine gewisse Symmetrie sind günstige Zeichen, ersetzen aber keine eigentliche Modelldiagnostik.
+
+\subsection{Der Block \texttt{Coefficients}}
+
+Der wichtigste Teil der Ausgabe ist die Koeffiziententabelle:
+\begin{verbatim}
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)
+(Intercept)   ...
+x             ...
+\end{verbatim}
+
+\subsubsection{\texttt{Estimate}}
+
+Die Spalte \texttt{Estimate} enthält die geschätzten Modellparameter. Im linearen Modell
+\[
+Y_i=\beta_0+\beta_1 x_i+\varepsilon_i
+\]
+sind dies
+\[
+\hat\beta_0 \quad \text{und} \quad \hat\beta_1.
+\]
+Damit lautet die geschätzte Regressionsgerade
+\[
+\hat y=\hat\beta_0+\hat\beta_1 x.
+\]
+
+\subsubsection{\texttt{Std. Error}}
+
+Die Spalte \texttt{Std. Error} enthält die geschätzten Standardfehler der Koeffizientenschätzer. Der Standardfehler misst die Unsicherheit der jeweiligen Parameterschätzung. Ein kleiner Standardfehler bedeutet, dass der Parameter vergleichsweise präzise geschätzt wurde.
+
+\subsubsection{\texttt{t value}}
+
+Die Spalte \texttt{t value} enthält die Teststatistik
+\[
+t=\frac{\text{Estimate}}{\text{Std. Error}}
+\]
+für den Test
+\[
+H_0:\beta_j=0.
+\]
+Je größer der Betrag dieses Wertes, desto stärker spricht die Datenlage gegen die Nullhypothese.
+
+\subsubsection{\texttt{Pr(>|t|)}}
+
+Diese Spalte enthält den zugehörigen zweiseitigen \(p\)-Wert für den Test
+\[
+H_0:\beta_j=0.
+\]
+Ein kleiner \(p\)-Wert liefert Evidenz gegen die Nullhypothese, ein großer \(p\)-Wert nicht.
+
+\subsection{Interpretation im einfachen Regressionsmodell}
+
+Angenommen, die Ausgabe enthalte näherungsweise:
+\begin{verbatim}
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)
+(Intercept)   4.80      0.20      24.0   0.0000
+x             0.12      0.01      12.0   0.0000
+\end{verbatim}
+Dann ergibt sich die geschätzte Gerade
+\[
+\hat y=4.80+0.12x.
+\]
+Die Interpretation lautet:
+\begin{itemize}
+    \item \(\hat\beta_0=4.80\): vorhergesagter Wert bei \(x=0\),
+    \item \(\hat\beta_1=0.12\): steigt \(x\) um \(1\), so steigt der erwartete Wert von \(y\) im Mittel um \(0.12\).
+\end{itemize}
+
+\subsection{Der Fall eines Faktors: \texttt{lm(y ~ g)}}
+
+Nun betrachten wir ein Gruppenmodell mit Faktor \(g\):
+\[
+Y_{ij}=\mu_i+\varepsilon_{ij}.
+\]
+In \texttt{R} wird dies etwa durch
+\begin{verbatim}
+fit_anova <- lm(y ~ g, data = dat)
+summary(fit_anova)
+\end{verbatim}
+geschätzt.
+
+Wenn \(A\) die Referenzgruppe ist, dann hat die Koeffiziententabelle typischerweise die Form
+\begin{verbatim}
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)
+(Intercept)   5.90
+gB            0.50
+gC            1.10
+\end{verbatim}
+Dies ist zu interpretieren als:
+\[
+E(Y\mid g=A)=\beta_0,
+\]
+\[
+E(Y\mid g=B)=\beta_0+\beta_B,
+\]
+\[
+E(Y\mid g=C)=\beta_0+\beta_C.
+\]
+Also:
+\begin{itemize}
+    \item \((\texttt{Intercept})\) ist der Mittelwert der Referenzgruppe \(A\),
+    \item \(\texttt{gB}\) ist die Differenz \(\mu_B-\mu_A\),
+    \item \(\texttt{gC}\) ist die Differenz \(\mu_C-\mu_A\).
+\end{itemize}
+
+\subsection{Wichtiger Unterschied: \texttt{summary(lm(y ~ g))} vs. \texttt{anova(lm(y ~ g))}}
+
+Die \texttt{summary()}-Ausgabe testet bei einem Faktor mit Referenzkodierung nur einzelne Kontraste, etwa
+\[
+H_0:\mu_B-\mu_A=0
+\qquad \text{oder} \qquad
+H_0:\mu_C-\mu_A=0.
+\]
+Das ist nicht dasselbe wie der globale ANOVA-Test
+\[
+H_0:\mu_A=\mu_B=\mu_C.
+\]
+Für diesen globalen Test benötigt man die \texttt{anova()}-Ausgabe.
+
+\subsection{Die ANOVA-Tabelle}
+
+Für
+\begin{verbatim}
+anova(fit_anova)
+\end{verbatim}
+erhält man typischerweise
+\begin{verbatim}
+Analysis of Variance Table
+
+Response: y
+          Df Sum Sq Mean Sq F value Pr(>F)
+g          2  ...
+Residuals  6  ...
+\end{verbatim}
+
+\subsubsection{\texttt{Df}}
+
+Dies sind die Freiheitsgrade. Bei einem Faktor mit drei Gruppen gilt:
+\[
+\text{Df}_{g}=3-1=2.
+\]
+Die Residuen-Freiheitsgrade sind entsprechend
+\[
+n-3,
+\]
+da drei Gruppenmittel geschätzt werden.
+
+\subsubsection{\texttt{Sum Sq}}
+
+Diese Spalte enthält Quadratsummen:
+\begin{itemize}
+    \item die Faktor-Quadratsumme: erklärte Variation zwischen den Gruppen,
+    \item die Residuen-Quadratsumme: unerklärte Variation innerhalb der Gruppen.
+\end{itemize}
+
+\subsubsection{\texttt{Mean Sq}}
+
+Dies ist die normierte Quadratsumme:
+\[
+\text{Mean Sq}=\frac{\text{Sum Sq}}{\text{Df}}.
+\]
+
+\subsubsection{\texttt{F value}}
+
+Die \(F\)-Statistik vergleicht die erklärte mittlere Variation mit der Residualvariation:
+\[
+F=\frac{\text{mittlere erklärte Variation}}{\text{mittlere Residualvariation}}.
+\]
+Im ANOVA-Kontext ist dies der Vergleich von Variation \emph{zwischen} den Gruppen zu Variation \emph{innerhalb} der Gruppen.
+
+\subsubsection{\texttt{Pr(>F)}}
+
+Dies ist der \(p\)-Wert des globalen \(F\)-Tests
+\[
+H_0:\mu_A=\mu_B=\mu_C.
+\]
+Ein kleiner \(p\)-Wert liefert Evidenz dafür, dass sich die Gruppenmittel unterscheiden.
+
+\subsection{Modellvergleich mit \texttt{anova(modell1, modell2)}}
+
+Nun betrachten wir zwei geschachtelte Modelle:
+\begin{verbatim}
+fit_small <- lm(y ~ x, data = dat)
+fit_big   <- lm(y ~ x + g, data = dat)
+
+anova(fit_small, fit_big)
+\end{verbatim}
+
+\subsubsection{Geschachtelte Modelle}
+
+Das kleine Modell ist im großen Modell enthalten. Hier ist
+\[
+y\sim x
+\]
+das kleinere Modell und
+\[
+y\sim x+g
+\]
+das größere Modell.
+
+\subsubsection{Getestete Hypothese}
+
+Es wird getestet,
+\[
+H_0:\text{die zusätzlichen Gruppenterme bringen keinen zusätzlichen Erklärungsbeitrag}
+\]
+gegen
+\[
+H_1:\text{die zusätzlichen Gruppenterme verbessern das Modell.}
+\]
+
+\subsubsection{Aufbau der Vergleichstabelle}
+
+Typischerweise erscheint eine Tabelle der Form
+\begin{verbatim}
+Analysis of Variance Table
+
+Model 1: y ~ x
+Model 2: y ~ x + g
+  Res.Df    RSS Df Sum of Sq      F Pr(>F)
+1      7 0.420
+2      5 0.120  2    0.300   6.25  0.04
+\end{verbatim}
+
+Dabei bedeutet:
+\begin{itemize}
+    \item \texttt{Res.Df}: Residuen-Freiheitsgrade,
+    \item \texttt{RSS}: Residual Sum of Squares,
+    \item \texttt{Df}: Zahl der zusätzlich eingeführten Parameter,
+    \item \texttt{Sum of Sq}: Reduktion der Residuenquadratsumme durch das größere Modell,
+    \item \texttt{F}: Teststatistik für die Modellerweiterung,
+    \item \texttt{Pr(>F)}: zugehöriger \(p\)-Wert.
+\end{itemize}
+
+\subsection{Interaktionsmodelle}
+
+Betrachte nun
+\begin{verbatim}
+fit_anc <- lm(y ~ g + x, data = dat)
+fit_int <- lm(y ~ g * x, data = dat)
+
+summary(fit_int)
+anova(fit_anc, fit_int)
+\end{verbatim}
+Da in \texttt{R}
+\[
+g*x \equiv g + x + g:x
+\]
+gilt, ist dies ein Modell mit Haupttermen und Interaktionen.
+
+\subsubsection{Interpretation der Interaktionsterme}
+
+In der \texttt{summary()}-Ausgabe erscheinen dann typischerweise zusätzlich Terme wie
+\begin{verbatim}
+gB:x
+gC:x
+\end{verbatim}
+Dabei gilt:
+\begin{itemize}
+    \item \(\texttt{x}\): Steigung der Referenzgruppe,
+    \item \(\texttt{gB:x}\): zusätzliche Steigungsänderung von Gruppe \(B\) relativ zur Referenzgruppe,
+    \item \(\texttt{gC:x}\): zusätzliche Steigungsänderung von Gruppe \(C\) relativ zur Referenzgruppe.
+\end{itemize}
+
+\subsubsection{Globaler Test auf gleiche Steigungen}
+
+Der Vergleich
+\begin{verbatim}
+anova(fit_anc, fit_int)
+\end{verbatim}
+testet
+\[
+H_0:\text{alle Gruppen haben dieselbe Steigung}
+\]
+gegen
+\[
+H_1:\text{mindestens eine Gruppe hat eine andere Steigung.}
+\]
+
+\subsection{Residual Standard Error}
+
+In der \texttt{summary()}-Ausgabe erscheint zudem der \emph{Residual standard error}. Dieser entspricht näherungsweise
+\[
+\hat\sigma=\sqrt{\frac{RSS}{n-p}},
+\]
+wobei \(p\) die Anzahl der geschätzten Parameter ist. Er misst die typische Größe der Restabweichungen.
+
+\subsection{Das Bestimmtheitsmaß \(R^2\)}
+
+Weiter erscheint oft das Bestimmtheitsmaß
+\[
+R^2=1-\frac{RSS}{TSS},
+\]
+also der Anteil der Gesamtvariation, den das Modell erklärt.
+
+Dabei gilt:
+\begin{itemize}
+    \item \(R^2=0\): das Modell erklärt keine Variation,
+    \item \(R^2=1\): das Modell erklärt die gesamte Variation.
+\end{itemize}
+Allerdings ist ein großes \(R^2\) allein kein Beweis für ein gutes oder inhaltlich sinnvolles Modell.
+
+\subsection{Praktisches Leseschema}
+
+Bei jeder Ausgabe sollte man systematisch fragen:
+
+\subsubsection*{Bei \texttt{summary()}}
+\begin{enumerate}
+    \item Welches Modell wurde geschätzt?
+    \item Was ist die Referenzgruppe?
+    \item Welche Koeffizienten werden dargestellt?
+    \item Welche Nullhypothese testet jeder \(t\)-Test?
+    \item Ist der Intercept sinnvoll interpretierbar?
+\end{enumerate}
+
+\subsubsection*{Bei \texttt{anova(fit)}}
+\begin{enumerate}
+    \item Welcher Term wird global getestet?
+    \item Wie groß sind die Freiheitsgrade?
+    \item Wie groß ist die erklärte Variation relativ zur Residualvariation?
+\end{enumerate}
+
+\subsubsection*{Bei \texttt{anova(fit1, fit2)}}
+\begin{enumerate}
+    \item Sind die Modelle geschachtelt?
+    \item Welche zusätzlichen Terme kommen im größeren Modell hinzu?
+    \item Testet man Gruppenunterschiede, Interaktionen oder etwas anderes?
+\end{enumerate}
+
+\subsection{Kernpunkte}
+
+Nach diesem Abschnitt sollte klar sein:
+\begin{itemize}
+    \item \texttt{Estimate} gibt den geschätzten Parameter an,
+    \item \texttt{Std. Error} misst die Unsicherheit des Schätzers,
+    \item \texttt{t value} und \texttt{Pr(>|t|)} testen einzelne Koeffizienten,
+    \item \texttt{F value} und \texttt{Pr(>F)} testen globale Modell- oder Termhypothesen,
+    \item \texttt{summary()} und \texttt{anova()} beantworten unterschiedliche statistische Fragen,
+    \item \texttt{anova(modell1, modell2)} testet den zusätzlichen Beitrag einer Modellerweiterung.
+\end{itemize}
+
+\pagebreak
+\printbibliography
+\end{document}

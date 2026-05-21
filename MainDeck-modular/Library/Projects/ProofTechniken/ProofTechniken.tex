@@ -17,11 +17,10 @@
 % 14. Hyperlinks
 % 15. Absatzeinstellungen
 % 16. Umgebungen
-% 17. Titel und Autor
+% 17  Graphik
+% 18  Extra
+% 00. Titel und Autor
 
-% --- 0. Allgemeine Pakete ---
-\usepackage{booktabs}
-\usepackage{makecell}
 \usepackage{slashed}
 
 % --- 1. Seitenlayout und Ränder ---
@@ -43,12 +42,12 @@
 \newcommand{\id}{\operatorname{id}}
 \newcommand{\sgn}{\operatorname{sgn}}
 \newcommand{\Ad}{\operatorname{Ad}}
+\newcommand{\ad}{\operatorname{ad}}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\C}{\mathbb{C}}
-\newcommand{\K}{\mathbb{K}}
 \newcommand{\QU}{\mathbb{H}}
 \newcommand{\Cinf}{C^{\infty}}
 \newcommand{\Mod}{\mathrm{Mod}}
@@ -71,13 +70,10 @@
 \newcommand{\Lor}{\mathrm{Lor}}
 \newcommand{\Ogroup}{\mathrm{O}}
 \newcommand{\U}{\mathrm{U}}
-\newcommand{\CP}{\mathbb{C}P}
-\newcommand{\RP}{\mathbb{R}P}
-
 
 % --- 5. Diagramme und Grafiken ---
 \usepackage{graphicx}
-\graphicspath{{../../Images/}}
+\graphicspath{{../../Library/Images/}}
 \usepackage[export]{adjustbox}
 \usepackage{tikz}
 \usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
@@ -132,8 +128,6 @@
 \usepackage{todonotes}
 % Hellblau definieren
 \definecolor{hellblau}{rgb}{0.3,0.6,1}
-
-% Eigene Umgebung »notiz«
 \newenvironment{note}{\par\begingroup\color{hellblau}\itshape}{\par\endgroup}
 
 % --- 11. Rahmen/Box-Umgebungen ---
@@ -200,10 +194,8 @@
 \newenvironment{EXE}[2]{\CustomHeading{Exercise}{#1}{#2}}{}
 \newenvironment{MOT}[2]{\CustomHeading{Motivation}{#1}{#2}}{}
 \newenvironment{PROOF}[2]{\CustomHeading{Proof}{#1}{#2}}{}
-\newenvironment{STR}[2]{\CustomHeading{Structure}{#1}{#2}}{}
 
-
-% --- Unit Umgebung ---
+% --- Unit Umgebung für Source-Inhalte ---
 \usepackage{mdframed}
 \newmdenv[
   linewidth=1pt,
@@ -224,8 +216,13 @@
   {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
   {\end{unitbox}}
 
+% --- 17. ... ---
 
-% --- 17. Titel und Autor ---
+% --- 18. Extras ---
+\usepackage{stmaryrd}
+\usepackage{bbold}  % falls du \mathbb{1} nutzen willst
+
+% --- 00. Titel und Autor ---
 \title{Mein Titel}
 \author{Tim Jaschik}
 \date{\today}
@@ -244,6 +241,32 @@ Kurze Beschreibung …
 
 \pagebreak
 
-……CONTENT
 
+
+\section{Lie Gruppen}
+
+\subsection{Notizen}
+
+\begin{itemize}
+    \item \emph{Arbeiten mit Lie Algebra von Lie Gruppen}: 
+    \begin{itemize}
+        \item Tangentialraum als Menge der Kurven durch $\id$ mit Tangentialvektor via Ableitung
+        \item Linksinvariante Vektorfelder
+    \end{itemize}
+    \item \emph{Lie Algebren zu Lie Gruppen bestimmen}: Falls Lie Algebra bereits bekannt, Nachweis: Prüfe beidseitige Inklusion zwischen Tangentialraum $T_{\id}G$ und vermuteter Lie Algebra:
+    \begin{itemize}
+        \item Tangentialraum: 
+    \end{itemize}  
+    \item \emph{Zeitabhängige 2-Parameter Konjugation mit Basispunkt Bedingung}: Definiere 
+    $$F: (-\varepsilon,\varepsilon)^2\to G;\ (s,t)\mapsto F(s,t)=\chi_{\alpha(s)}(\beta(t))=\alpha(s)\beta(t)\alpha(s)^{-1}$$
+    als Komposition
+    $$(-\varepsilon,\varepsilon)^2 \overset{(\alpha(s),\beta(t))}{\to} G \times G \overset{\chi_{(\cdot_1)}(\cdot_2)}{\to} G$$
+\end{itemize}
+
+
+
+
+
+\pagebreak
+\printbibliography
 \end{document}

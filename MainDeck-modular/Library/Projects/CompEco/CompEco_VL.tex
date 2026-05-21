@@ -1,0 +1,4009 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17  Graphik
+% 18  Extra
+% 00. Titel und Autor
+
+\usepackage{slashed}
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Ad}{\operatorname{Ad}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\QU}{\mathbb{H}}
+\newcommand{\Cinf}{C^{\infty}}
+\newcommand{\Mod}{\mathrm{Mod}}
+\newcommand{\Alg}{\mathrm{Alg}}
+\newcommand{\Diff}{\mathrm{Diff}}
+\newcommand{\Iso}{\mathrm{Iso}}
+\newcommand{\Aut}{\mathrm{Aut}}
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Cl}{\mathrm{Cl}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\Mat}{\mathrm{Mat}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\Sp}{\mathrm{Sp}}
+\newcommand{\Spin}{\mathrm{Spin}}
+\newcommand{\Pin}{\mathrm{Pin}}
+\newcommand{\Lor}{\mathrm{Lor}}
+\newcommand{\Ogroup}{\mathrm{O}}
+\newcommand{\U}{\mathrm{U}}
+\newcommand{\CP}{\mathbb{C} P}
+\newcommand{\RP}{\mathbb{R} P}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\graphicspath{{../../Library/Images/}}
+\usepackage[export]{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+% Hellblau definieren
+\definecolor{hellblau}{rgb}{0.3,0.6,1}
+\newenvironment{note}{\par\begingroup\color{hellblau}\itshape}{\par\endgroup}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\CustomHeading{Definition}{#1}{#2}}{}
+\newenvironment{PROP}[2]{\CustomHeading{Proposition}{#1}{#2}}{}
+\newenvironment{THEO}[2]{\CustomHeading{Theorem}{#1}{#2}}{}
+\newenvironment{LEM}[2]{\CustomHeading{Lemma}{#1}{#2}}{}
+\newenvironment{KORO}[2]{\CustomHeading{Corollar}{#1}{#2}}{}
+\newenvironment{REM}[2]{\CustomHeading{Remark}{#1}{#2}}{}
+\newenvironment{EXA}[2]{\CustomHeading{Example}{#1}{#2}}{}
+\newenvironment{STUD}[2]{\CustomHeading{Study}{#1}{#2}}{}
+\newenvironment{CONC}[2]{\CustomHeading{Concept}{#1}{#2}}{}
+\newenvironment{OTH}[2]{\CustomHeading{Other}{#1}{#2}}{}
+\newenvironment{EXE}[2]{\CustomHeading{Exercise}{#1}{#2}}{}
+\newenvironment{MOT}[2]{\CustomHeading{Motivation}{#1}{#2}}{}
+\newenvironment{PROOF}[2]{\CustomHeading{Proof}{#1}{#2}}{}
+
+% --- Unit Umgebung für Source-Inhalte ---
+\usepackage{mdframed}
+\newmdenv[
+  linewidth=1pt,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftmargin=0cm,
+  rightmargin=0cm,
+  skipabove=10pt,
+  skipbelow=10pt,
+  innertopmargin=0.5\baselineskip,
+  innerbottommargin=0.5\baselineskip,
+  backgroundcolor=gray!10,
+  linecolor=gray
+]{unitbox}
+
+\newenvironment{unit}[1]
+  {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
+  {\end{unitbox}}
+
+% --- 17. ... ---
+
+% --- 18. Extras ---
+\usepackage{stmaryrd}
+\usepackage{bbold}  % falls du \mathbb{1} nutzen willst
+
+% --- 19. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+
+% Abstand zwischen Einträgen
+\setlength{\cftbeforesecskip}{2pt}      % Sections
+\setlength{\cftbeforesubsecskip}{1pt}   % Subsections
+\setlength{\cftbeforesubsubsecskip}{0pt}
+\renewcommand{\cfttoctitlefont}{\large\bfseries}
+
+% --- 00. Titel und Autor ---
+\title{Computational Economics}
+\author{Tim Jaschik}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\rule{\textwidth}{0.5pt}
+\begin{abstract}
+Kurze Beschreibung …
+\end{abstract}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5cm}
+
+\tableofcontents
+
+\pagebreak
+
+
+
+\section{Systems of Linear Equations}
+
+\subsection{Short Orientation of the Lecture}
+
+This lecture is concerned with systems of linear equations and their numerical solution. The central mathematical object is a system of the form
+\[
+Ax=b,
+\]
+where
+\[
+A\in \R^{n\times n},\qquad x\in \R^n,\qquad b\in \R^n.
+\]
+Here \(A\) is the coefficient matrix, \(x\) is the vector of unknowns, and \(b\) is the right-hand side.
+
+The lecture first recalls basic vector and matrix algebra, then motivates linear systems by a small numerical example and a simple economic market-equilibrium example. After that, it compares direct methods, such as Cramer's rule, Gaussian elimination, LU factorization, and QR decomposition, with iterative methods, such as the Jacobi method, the Gauss-Seidel method, and successive over-relaxation.
+
+The leading computational question is not merely how to solve a small system by hand, but how to solve large systems efficiently and accurately. In economic applications, the dimension \(n\) may be very large, for instance \(n>10{,}000\). Therefore, speed, memory requirements, convergence, and numerical stability become central issues.
+
+\begin{REM}{L2-REM-AnimationContent}{Animated slides}
+The slides titled \emph{Jacobi Method: Economic Example} and \emph{Gauss-Seidel: Economic Example} appear to depend on animations. The available PDF text contains the slide titles, but not the actual animated intermediate content. Therefore, only the surrounding mathematical method is reconstructed below.
+\end{REM}
+
+\subsection{Vector and Matrix Algebra}
+
+\subsubsection{Vector Algebra}
+
+\begin{DEF}{L2-DEF-Vector}{Vector in \(\R^n\)}
+A vector
+\[
+x\in \R^n
+\]
+is an \(n\)-dimensional object with components
+\[
+x=
+\begin{pmatrix}
+x_1\\
+x_2\\
+\vdots\\
+x_n
+\end{pmatrix}.
+\]
+The component \(x_i\) is called the \(i\)-th element of \(x\).
+\end{DEF}
+
+If \(x,y\in\R^n\), then their sum is defined componentwise:
+\[
+z=x+y\in\R^n,
+\qquad
+z_i=x_i+y_i.
+\]
+
+If \(\alpha\in\R\) and \(x\in\R^n\), scalar multiplication is defined componentwise:
+\[
+z=\alpha x=x\alpha\in \R^n,
+\qquad
+z_i=\alpha x_i.
+\]
+
+The slides also mention scalar addition:
+\[
+z=\alpha+x=x+\alpha,
+\qquad
+z_i=\alpha+x_i.
+\]
+Strictly speaking, scalar addition to a vector is not part of the abstract vector-space axioms. It is, however, a common computational convention in Matlab: adding a scalar to a vector means adding that scalar to every component.
+
+\subsubsection{Vector Norms}
+
+\begin{DEF}{L2-DEF-Norm}{Norm}
+A norm on a vector space \(X\) is a function
+\[
+\|\cdot\|:X\to \R_{\geq 0}
+\]
+which measures the size of vectors.
+\end{DEF}
+
+The lecture introduces three important norms on \(\R^n\).
+
+\paragraph{The sum norm or \(1\)-norm.}
+\[
+\|x\|_1=\sum_i |x_i|.
+\]
+This norm measures the total absolute mass of the vector.
+
+\paragraph{The Euclidean norm or \(2\)-norm.}
+\[
+\|x\|_2=\sqrt{\sum_i |x_i|^2}.
+\]
+This is the usual geometric length of a vector.
+
+\paragraph{The sup norm or \(\infty\)-norm.}
+\[
+\|x\|_\infty=\max_i |x_i|.
+\]
+This norm measures the largest absolute component of the vector.
+
+\begin{EXA}{L2-EXA-Norms}{Basic norm computation}
+Let
+\[
+x=
+\begin{pmatrix}
+-2\\
+3\\
+1
+\end{pmatrix}.
+\]
+Then
+\[
+\|x\|_1=|-2|+|3|+|1|=6,
+\]
+\[
+\|x\|_2=\sqrt{(-2)^2+3^2+1^2}=\sqrt{14},
+\]
+and
+\[
+\|x\|_\infty=\max\{2,3,1\}=3.
+\]
+\end{EXA}
+
+In Matlab, these norms can be computed by
+\begin{verbatim}
+norm(x,1)
+norm(x,2)
+norm(x,inf)
+\end{verbatim}
+
+Every norm induces a metric by
+\[
+d(x,y)=\|x-y\|.
+\]
+This is important for numerical algorithms because it allows us to measure whether an approximation is close to another approximation or close to the exact solution.
+
+For example, iterative algorithms often stop once two successive iterates are sufficiently close:
+\[
+\|x^{(i+1)}-x^{(i)}\|\leq \varepsilon.
+\]
+
+\subsubsection{Matrix Algebra}
+
+\begin{DEF}{L2-DEF-Matrix}{Matrix}
+A matrix
+\[
+A\in\R^{m\times n}
+\]
+has \(m\) rows and \(n\) columns. Its entry in row \(i\) and column \(j\) is denoted by
+\[
+A_{ij}.
+\]
+Thus
+\[
+A=
+\begin{pmatrix}
+A_{11} & A_{12} & \cdots & A_{1n}\\
+A_{21} & A_{22} & \cdots & A_{2n}\\
+\vdots & \vdots & \ddots & \vdots\\
+A_{m1} & A_{m2} & \cdots & A_{mn}
+\end{pmatrix}.
+\]
+\end{DEF}
+
+\paragraph{Matrix addition.}
+If
+\[
+A,B\in\R^{m\times n},
+\]
+then their sum is defined componentwise:
+\[
+C=A+B,
+\qquad
+C_{ij}=A_{ij}+B_{ij}.
+\]
+Both matrices must have the same dimensions.
+
+\paragraph{Matrix multiplication.}
+If
+\[
+A\in\R^{m\times p},
+\qquad
+B\in\R^{p\times n},
+\]
+then the matrix product
+\[
+C=AB\in\R^{m\times n}
+\]
+is defined by
+\[
+C_{ij}=\sum_{k=1}^p A_{ik}B_{kj}.
+\]
+The inner dimensions must match:
+\[
+(m\times p)(p\times n)=(m\times n).
+\]
+
+\paragraph{Elementwise multiplication.}
+If
+\[
+A,B\in\R^{m\times n},
+\]
+then Matlab also allows elementwise multiplication:
+\[
+C=A.*B,
+\qquad
+C_{ij}=A_{ij}B_{ij}.
+\]
+This operation is distinct from matrix multiplication.
+
+In Matlab notation:
+\begin{verbatim}
+A*B      % matrix multiplication
+A.*B     % elementwise multiplication
+\end{verbatim}
+
+\paragraph{Transposition.}
+If
+\[
+A\in\R^{m\times n},
+\]
+then its transpose is
+\[
+A'=A^\top\in\R^{n\times m},
+\]
+with entries
+\[
+(A^\top)_{ij}=A_{ji}.
+\]
+In Matlab:
+\begin{verbatim}
+A'
+\end{verbatim}
+
+For real matrices this is the transpose. For complex matrices, Matlab's \verb|'| gives the conjugate transpose; the non-conjugate transpose is \verb|.'|.
+
+\subsubsection{Important Types of Matrices}
+
+\begin{DEF}{L2-DEF-SquareMatrix}{Square matrix}
+A matrix
+\[
+A\in\R^{m\times m}
+\]
+is called square if it has the same number of rows and columns.
+\end{DEF}
+
+\begin{DEF}{L2-DEF-UpperTriangular}{Upper triangular matrix}
+A square matrix \(A\in\R^{n\times n}\) is upper triangular if
+\[
+A_{ij}=0
+\qquad
+\text{for } i>j.
+\]
+Equivalently, all entries below the diagonal vanish:
+\[
+A=
+\begin{pmatrix}
+A_{11} & A_{12} & A_{13}\\
+0 & A_{22} & A_{23}\\
+0 & 0 & A_{33}
+\end{pmatrix}.
+\]
+\end{DEF}
+
+\begin{DEF}{L2-DEF-LowerTriangular}{Lower triangular matrix}
+A square matrix \(A\in\R^{n\times n}\) is lower triangular if
+\[
+A_{ij}=0
+\qquad
+\text{for } i<j.
+\]
+Equivalently, all entries above the diagonal vanish:
+\[
+A=
+\begin{pmatrix}
+A_{11} & 0 & 0\\
+A_{21} & A_{22} & 0\\
+A_{31} & A_{32} & A_{33}
+\end{pmatrix}.
+\]
+\end{DEF}
+
+\begin{DEF}{L2-DEF-DiagonalMatrix}{Diagonal matrix}
+A square matrix \(A\in\R^{n\times n}\) is diagonal if
+\[
+A_{ij}=0
+\qquad
+\text{for } i\neq j.
+\]
+Only the entries \(A_{11},\dots,A_{nn}\) may be nonzero.
+\end{DEF}
+
+\begin{DEF}{L2-DEF-IdentityMatrix}{Identity matrix}
+The identity matrix \(I\in\R^{n\times n}\) is the diagonal matrix with
+\[
+I_{ii}=1
+\]
+for all \(i\). It satisfies
+\[
+AI=A,
+\qquad
+IA=A,
+\]
+whenever the dimensions match.
+\end{DEF}
+
+\begin{DEF}{L2-DEF-OrthogonalMatrix}{Orthogonal matrix}
+A square matrix \(Q\in\R^{n\times n}\) is orthogonal if
+\[
+Q^\top Q=I.
+\]
+For square \(Q\), this also implies
+\[
+QQ^\top=I,
+\qquad
+Q^{-1}=Q^\top.
+\]
+\end{DEF}
+
+Orthogonal matrices preserve Euclidean lengths:
+\[
+\|Qx\|_2=\|x\|_2.
+\]
+This is one reason why orthogonal transformations are numerically attractive.
+
+\subsubsection{Inverse of a Matrix}
+
+\begin{DEF}{L2-DEF-InverseMatrix}{Invertible matrix}
+Let
+\[
+A\in\R^{n\times n}.
+\]
+The matrix \(A\) is invertible if there exists a matrix \(A^{-1}\in\R^{n\times n}\) such that
+\[
+AA^{-1}=A^{-1}A=I.
+\]
+If an inverse exists, it is unique.
+\end{DEF}
+
+The formal solution of
+\[
+Ax=b
+\]
+is obtained by multiplying both sides by \(A^{-1}\):
+\[
+Ax=b
+\]
+\[
+\Longleftrightarrow
+A^{-1}Ax=A^{-1}b
+\]
+\[
+\Longleftrightarrow
+Ix=A^{-1}b
+\]
+\[
+\Longleftrightarrow
+x=A^{-1}b.
+\]
+
+Thus, theoretically,
+\[
+x^\ast=A^{-1}b.
+\]
+Computationally, however, explicitly computing \(A^{-1}\) is often not the best method. It can be slow and can amplify numerical errors. Therefore, numerical methods often solve \(Ax=b\) without explicitly forming the inverse.
+
+This problem is important in many applications, including ordinary least squares and Newton's method.
+
+\subsection{Motivation and Examples}
+
+\subsubsection{A Simple Linear Equation System}
+
+The lecture introduces the system
+\[
+2x_1+x_3=30,
+\]
+\[
+4x_2+x_3=40,
+\]
+\[
+x_1-x_2+4x_3=15.
+\]
+
+In matrix notation:
+\[
+Ax=b,
+\]
+with
+\[
+A=
+\begin{pmatrix}
+2 & 0 & 1\\
+0 & 4 & 1\\
+1 & -1 & 4
+\end{pmatrix},
+\qquad
+x=
+\begin{pmatrix}
+x_1\\
+x_2\\
+x_3
+\end{pmatrix},
+\qquad
+b=
+\begin{pmatrix}
+30\\
+40\\
+15
+\end{pmatrix}.
+\]
+
+The solution is denoted by \(x^\ast\). The computational question is not only how to solve this small example, but what to do when the dimension \(n\) is very large, for example \(n>10{,}000\).
+
+The solution, derived later using LU factorization, is
+\[
+x^\ast
+=
+\frac{1}{3}
+\begin{pmatrix}
+41\\
+28\\
+8
+\end{pmatrix}
+=
+\begin{pmatrix}
+41/3\\
+28/3\\
+8/3
+\end{pmatrix}.
+\]
+
+Indeed,
+\[
+2\cdot \frac{41}{3}+\frac{8}{3}
+=
+\frac{82+8}{3}
+=
+30,
+\]
+\[
+4\cdot \frac{28}{3}+\frac{8}{3}
+=
+\frac{112+8}{3}
+=
+40,
+\]
+and
+\[
+\frac{41}{3}-\frac{28}{3}+4\cdot \frac{8}{3}
+=
+\frac{41-28+32}{3}
+=
+15.
+\]
+
+\subsubsection{Economic Example: Market Equilibrium}
+
+The lecture next introduces a simple market-equilibrium model with a demand function and a supply function:
+\[
+\text{Demand:}\qquad p=a-bq,
+\]
+\[
+\text{Supply:}\qquad p=c+dq.
+\]
+Here:
+\[
+p=\text{price},\qquad q=\text{quantity},
+\]
+and \(a,b,c,d\) are parameters.
+
+The equilibrium requires demand price to equal supply price. The system can be written in canonical matrix form
+\[
+Ax=b
+\]
+with
+\[
+A=
+\begin{pmatrix}
+1 & b\\
+1 & -d
+\end{pmatrix},
+\qquad
+x=
+\begin{pmatrix}
+p\\
+q
+\end{pmatrix},
+\qquad
+b=
+\begin{pmatrix}
+a\\
+c
+\end{pmatrix}.
+\]
+
+This corresponds to
+\[
+p+bq=a,
+\]
+\[
+p-dq=c.
+\]
+
+Subtracting the second equation from the first gives
+\[
+(p+bq)-(p-dq)=a-c,
+\]
+and hence
+\[
+(b+d)q=a-c.
+\]
+If
+\[
+b+d\neq 0,
+\]
+then
+\[
+q^\ast=\frac{a-c}{b+d}.
+\]
+The corresponding equilibrium price is
+\[
+p^\ast=a-bq^\ast
+=
+a-b\frac{a-c}{b+d}.
+\]
+Equivalently,
+\[
+p^\ast=c+dq^\ast
+=
+c+d\frac{a-c}{b+d}.
+\]
+
+This example illustrates why linear systems arise naturally in economics. Equilibrium conditions often define endogenous variables implicitly through equations, and these equations can frequently be written as \(Ax=b\).
+
+\subsection{Direct Methods}
+
+Direct methods try to compute the solution of \(Ax=b\) through a finite sequence of algebraic operations, up to numerical precision. The lecture discusses:
+\begin{enumerate}
+    \item Cramer's rule,
+    \item Gaussian elimination,
+    \item LU factorization,
+    \item QR decomposition.
+\end{enumerate}
+
+\subsubsection{Cramer's Rule}
+
+\begin{PROP}{L2-PROP-CramerRule}{Cramer's rule}
+Let
+\[
+A\in\R^{n\times n}
+\]
+be invertible, so that
+\[
+\det(A)\neq 0.
+\]
+Let \(A_j\) be the matrix obtained from \(A\) by replacing its \(j\)-th column by \(b\). Then the solution of
+\[
+Ax=b
+\]
+is given componentwise by
+\[
+x_j^\ast=\frac{\det(A_j)}{\det(A)}.
+\]
+\end{PROP}
+
+In the notation of the slides:
+\[
+x_j^\ast=\frac{|A_j|}{|A|}.
+\]
+
+Cramer's rule is theoretically elegant but computationally slow. It reduces solving a linear system to computing determinants, but determinant computations become expensive very quickly. Therefore, Cramer's rule is not a practical method for large numerical systems.
+
+\subsubsection{Gaussian Elimination and Explicit Matrix Inversion}
+
+Gaussian elimination can be used to compute \(A^{-1}\). Once \(A^{-1}\) is known, one solves
+\[
+x^\ast=A^{-1}b.
+\]
+
+The method starts from the augmented matrix
+\[
+[A\mid I].
+\]
+One then applies elementary row operations until the left block becomes the identity matrix:
+\[
+[A\mid I]\longrightarrow [I\mid A^{-1}].
+\]
+
+The allowed elementary row operations are:
+\begin{enumerate}
+    \item multiplication of a row by a scalar,
+    \item row permutation,
+    \item addition or subtraction of a row to or from another row.
+\end{enumerate}
+
+Once the form
+\[
+[I\mid A^{-1}]
+\]
+has been reached, the solution is obtained from
+\[
+x^\ast=A^{-1}b.
+\]
+
+This method may be useful when one needs to solve systems with the same matrix \(A\) but many different right-hand sides \(b\). However, explicitly computing the inverse can lead to numerical errors and is usually not the preferred method for a single system.
+
+\subsubsection{Gaussian Elimination in the Lecture Example}
+
+For
+\[
+A=
+\begin{pmatrix}
+2&0&1\\
+0&4&1\\
+1&-1&4
+\end{pmatrix},
+\]
+the augmented matrix is
+\[
+\left[
+\begin{array}{ccc|ccc}
+2&0&1&1&0&0\\
+0&4&1&0&1&0\\
+1&-1&4&0&0&1
+\end{array}
+\right].
+\]
+
+Applying elementary row operations gives the inverse
+\[
+A^{-1}
+=
+\begin{pmatrix}
+\frac{17}{30} & -\frac{1}{30} & -\frac{2}{15}\\
+\frac{1}{30} & \frac{7}{30} & -\frac{1}{15}\\
+-\frac{2}{15} & \frac{1}{15} & \frac{4}{15}
+\end{pmatrix}.
+\]
+
+Therefore
+\[
+x^\ast=A^{-1}b.
+\]
+With
+\[
+b=
+\begin{pmatrix}
+30\\
+40\\
+15
+\end{pmatrix},
+\]
+we obtain
+\[
+x^\ast
+=
+\begin{pmatrix}
+41/3\\
+28/3\\
+8/3
+\end{pmatrix}.
+\]
+
+\begin{REM}{L2-REM-GaussianOCR}{Minor reconstruction}
+The appendix arithmetic in the PDF contains some OCR ambiguities. The inverse displayed above is the consistent reconstruction of the row operations and the final solution stated in the lecture.
+\end{REM}
+
+\subsubsection{LU Factorization: Motivation}
+
+The key idea behind LU factorization is that linear systems are easy to solve when the coefficient matrix is triangular. Therefore, instead of explicitly computing \(A^{-1}\), one decomposes \(A\) into triangular matrices.
+
+The goal is to find matrices \(L\) and \(U\) such that
+\[
+A=LU,
+\]
+where:
+\begin{enumerate}
+    \item \(L\) is lower triangular with diagonal entries equal to \(1\),
+    \item \(U\) is upper triangular.
+\end{enumerate}
+
+Then
+\[
+Ax=b
+\]
+becomes
+\[
+LUx=b.
+\]
+Define
+\[
+y=Ux.
+\]
+Then
+\[
+Ly=b.
+\]
+
+Hence solving \(Ax=b\) is reduced to two triangular systems:
+\[
+Ly=b,
+\]
+which is solved by forward substitution, and
+\[
+Ux=y,
+\]
+which is solved by backward substitution.
+
+\subsubsection{Forward Substitution}
+
+Suppose \(A\) is lower triangular:
+\[
+A=
+\begin{pmatrix}
+A_{11} & 0 & 0\\
+A_{21} & A_{22} & 0\\
+A_{31} & A_{32} & A_{33}
+\end{pmatrix}.
+\]
+The system
+\[
+Ax=b
+\]
+means
+\[
+A_{11}x_1=b_1,
+\]
+\[
+A_{21}x_1+A_{22}x_2=b_2,
+\]
+\[
+A_{31}x_1+A_{32}x_2+A_{33}x_3=b_3.
+\]
+Thus one solves from top to bottom:
+\[
+x_1^\ast=\frac{b_1}{A_{11}},
+\]
+\[
+x_2^\ast
+=
+\frac{b_2-A_{21}x_1^\ast}{A_{22}},
+\]
+\[
+x_3^\ast
+=
+\frac{b_3-A_{31}x_1^\ast-A_{32}x_2^\ast}{A_{33}}.
+\]
+
+More generally,
+\[
+x_j^\ast
+=
+\frac{1}{A_{jj}}
+\left(
+b_j-\sum_{k<j}A_{jk}x_k^\ast
+\right).
+\]
+
+\subsubsection{Backward Substitution}
+
+Suppose \(A\) is upper triangular:
+\[
+A=
+\begin{pmatrix}
+A_{11} & A_{12} & A_{13}\\
+0 & A_{22} & A_{23}\\
+0 & 0 & A_{33}
+\end{pmatrix}.
+\]
+The system
+\[
+Ax=b
+\]
+is solved from bottom to top:
+\[
+x_3^\ast=\frac{b_3}{A_{33}},
+\]
+\[
+x_2^\ast
+=
+\frac{b_2-A_{23}x_3^\ast}{A_{22}},
+\]
+\[
+x_1^\ast
+=
+\frac{b_1-A_{12}x_2^\ast-A_{13}x_3^\ast}{A_{11}}.
+\]
+
+More generally,
+\[
+x_j^\ast
+=
+\frac{1}{A_{jj}}
+\left(
+b_j-\sum_{k>j}A_{jk}x_k^\ast
+\right).
+\]
+
+\subsubsection{LU Factorization in the Lecture Example}
+
+Consider again
+\[
+A=
+\begin{pmatrix}
+2&0&1\\
+0&4&1\\
+1&-1&4
+\end{pmatrix}.
+\]
+
+Start with
+\[
+L=
+\begin{pmatrix}
+1&0&0\\
+0&1&0\\
+0&0&1
+\end{pmatrix},
+\qquad
+U=A.
+\]
+
+First eliminate the entry below \(U_{11}=2\). Since \(U_{31}=1\), the multiplier is
+\[
+\frac{1}{2}.
+\]
+Thus
+\[
+L=
+\begin{pmatrix}
+1&0&0\\
+0&1&0\\
+\frac12&0&1
+\end{pmatrix},
+\qquad
+U=
+\begin{pmatrix}
+2&0&1\\
+0&4&1\\
+0&-1&\frac72
+\end{pmatrix}.
+\]
+
+Next eliminate the entry below \(U_{22}=4\). Since \(U_{32}=-1\), the multiplier is
+\[
+-\frac14.
+\]
+Thus
+\[
+L=
+\begin{pmatrix}
+1&0&0\\
+0&1&0\\
+\frac12&-\frac14&1
+\end{pmatrix},
+\qquad
+U=
+\begin{pmatrix}
+2&0&1\\
+0&4&1\\
+0&0&\frac{15}{4}
+\end{pmatrix}.
+\]
+
+Hence
+\[
+A=LU.
+\]
+
+Now solve
+\[
+Ly=b.
+\]
+With
+\[
+b=
+\begin{pmatrix}
+30\\
+40\\
+15
+\end{pmatrix},
+\]
+we obtain
+\[
+y_1=30,
+\]
+\[
+y_2=40,
+\]
+and
+\[
+y_3
+=
+15-\frac12\cdot 30+\frac14\cdot 40
+=
+15-15+10
+=
+10.
+\]
+Therefore
+\[
+y=
+\begin{pmatrix}
+30\\
+40\\
+10
+\end{pmatrix}.
+\]
+
+Now solve
+\[
+Ux=y.
+\]
+The third equation gives
+\[
+\frac{15}{4}x_3=10,
+\]
+so
+\[
+x_3=\frac{40}{15}=\frac{8}{3}.
+\]
+
+The second equation gives
+\[
+4x_2+x_3=40,
+\]
+so
+\[
+x_2
+=
+\frac{40-\frac83}{4}
+=
+\frac{\frac{120}{3}-\frac83}{4}
+=
+\frac{\frac{112}{3}}{4}
+=
+\frac{28}{3}.
+\]
+
+The first equation gives
+\[
+2x_1+x_3=30,
+\]
+so
+\[
+x_1
+=
+\frac{30-\frac83}{2}
+=
+\frac{\frac{90}{3}-\frac83}{2}
+=
+\frac{\frac{82}{3}}{2}
+=
+\frac{41}{3}.
+\]
+
+Hence
+\[
+x^\ast
+=
+\frac13
+\begin{pmatrix}
+41\\
+28\\
+8
+\end{pmatrix}.
+\]
+
+\subsubsection{Comparison of Direct Methods and Matlab Commands}
+
+The lecture compares the number of operations required to solve a \(10\times 10\) system:
+\begin{enumerate}
+    \item Cramer's rule: around \(100\) million operations,
+    \item Gaussian elimination to compute \(A^{-1}\): \(1090\) operations,
+    \item LU factorization: \(615\) operations.
+\end{enumerate}
+
+The exact operation count depends on implementation and on what is counted as one operation, but the qualitative conclusion is clear:
+\[
+\text{Cramer's rule is much too slow,}
+\]
+\[
+\text{explicit inversion is better but not ideal,}
+\]
+\[
+\text{LU factorization is fast and practical.}
+\]
+
+In Matlab:
+\begin{verbatim}
+x = inv(A)*b
+\end{verbatim}
+computes the solution via explicit inversion, while
+\begin{verbatim}
+[L,U] = lu(A)
+\end{verbatim}
+computes an LU factorization.
+
+The recommended command for solving \(Ax=b\) is usually
+\begin{verbatim}
+x = A\b
+\end{verbatim}
+because Matlab then chooses an appropriate numerical method without explicitly forming \(A^{-1}\).
+
+\subsubsection{QR Decomposition}
+
+The lecture next discusses QR decomposition. Here one allows rectangular matrices
+\[
+A\in\R^{m\times n},
+\qquad
+m\geq n.
+\]
+This is important for overdetermined systems and for linear regression.
+
+Instead of solving \(Ax=b\) exactly, one solves the least-squares problem
+\[
+x^\ast
+=
+\operatorname*{argmin}_{x} F(x),
+\]
+where
+\[
+F(x)=\|Ax-b\|_2.
+\]
+
+The vector
+\[
+r(x)=Ax-b
+\]
+is the residual vector. Least squares chooses \(x\) such that the Euclidean size of the residual is as small as possible.
+
+QR decomposition writes
+\[
+A=QR,
+\]
+where \(Q\) is orthogonal and \(R\) is upper triangular. Since \(R\) is triangular, the resulting system can again be solved efficiently.
+
+QR decomposition is also useful for square systems because orthogonal transformations tend to amplify numerical errors less than some other procedures.
+
+\subsubsection{Rounding Errors and Pivoting}
+
+Gaussian elimination and LU decomposition can suffer from rounding errors. The lecture illustrates this with a two-dimensional example. Let \(M\in\R_+\) be very large and consider
+\[
+\begin{pmatrix}
+-M^{-1} & 1\\
+1 & 1
+\end{pmatrix}
+\begin{pmatrix}
+x_1\\
+x_2
+\end{pmatrix}
+=
+\begin{pmatrix}
+1\\
+2
+\end{pmatrix}.
+\]
+
+The theoretical solution is
+\[
+x^\ast
+=
+\begin{pmatrix}
+\frac{M}{M+1}\\
+\frac{M+2}{M+1}
+\end{pmatrix}
+\approx
+\begin{pmatrix}
+1\\
+1
+\end{pmatrix}
+\]
+for large \(M\).
+
+However, finite precision arithmetic may produce an inaccurate solution. Since
+\[
+x_2^\ast
+=
+\frac{M+2}{M+1}
+\approx
+\frac{M}{M}
+=
+1,
+\]
+one may obtain
+\[
+x_1^\ast=-M(1-x_2)\approx 0,
+\]
+which is incorrect because the true value is close to \(1\).
+
+The remedy is pivoting. Pivoting means interchanging rows so that diagonal elements used as pivots are as large as possible. Reordering gives
+\[
+\begin{pmatrix}
+1 & 1\\
+-M^{-1} & 1
+\end{pmatrix}
+\begin{pmatrix}
+x_1\\
+x_2
+\end{pmatrix}
+=
+\begin{pmatrix}
+2\\
+1
+\end{pmatrix}.
+\]
+This improves numerical stability.
+
+The practical warning is to avoid, when possible:
+\begin{enumerate}
+    \item adding or subtracting values of vastly different magnitudes,
+    \item multiplying or dividing values with tiny differences.
+\end{enumerate}
+
+
+
+\pagebreak
+
+
+\subsection{Indirect Methods}
+
+\subsubsection{Direct Versus Iterative Methods}
+
+The lecture next compares direct and iterative methods.
+
+\paragraph{Direct methods.}
+Direct methods are usually based on Gaussian elimination or matrix factorizations. Their advantages are:
+\begin{enumerate}
+    \item good performance for moderately sized problems,
+    \item robustness,
+    \item they are known to yield a solution if the problem is well-posed,
+    \item they are implemented in established numerical software.
+\end{enumerate}
+Their disadvantages are:
+\begin{enumerate}
+    \item sensitivity to round-off errors,
+    \item potentially high storage requirements,
+    \item potentially high cost for very large systems.
+\end{enumerate}
+
+\paragraph{Iterative methods.}
+Iterative methods construct a sequence
+\[
+x^{(0)},x^{(1)},x^{(2)},\dots
+\]
+which hopefully converges to the true solution \(x^\ast\).
+
+Their advantages are:
+\begin{enumerate}
+    \item good performance for large problems,
+    \item often lower storage requirements,
+    \item relevance for nonlinear equation systems,
+    \item potentially less sensitivity to some round-off issues.
+\end{enumerate}
+Their disadvantages are:
+\begin{enumerate}
+    \item they require convergence conditions,
+    \item they may fail to converge,
+    \item they require a stopping rule.
+\end{enumerate}
+
+\subsubsection{General Idea of Iterative Methods}
+
+Start from
+\[
+Ax=b.
+\]
+Decompose
+\[
+A=Q+N,
+\]
+where \(Q\) is chosen to be easily invertible.
+
+Then
+\[
+(Q+N)x=b.
+\]
+Rearranging gives
+\[
+Qx=b-Nx.
+\]
+Multiplying by \(Q^{-1}\) yields
+\[
+x=Q^{-1}(b-Nx).
+\]
+Since
+\[
+N=A-Q,
+\]
+we get
+\[
+x=Q^{-1}(b-(A-Q)x).
+\]
+Expanding:
+\[
+x=Q^{-1}b-Q^{-1}Ax+Q^{-1}Qx.
+\]
+Since
+\[
+Q^{-1}Q=I,
+\]
+this becomes
+\[
+x=Q^{-1}b+(I-Q^{-1}A)x.
+\]
+
+Thus the system is rewritten as a fixed-point equation
+\[
+x=T(x),
+\]
+where
+\[
+T(x)=Q^{-1}b+(I-Q^{-1}A)x.
+\]
+
+Given an initial guess \(x^{(0)}\), define
+\[
+x^{(i+1)}
+=
+Q^{-1}b+(I-Q^{-1}A)x^{(i)}.
+\]
+
+Under suitable conditions, this sequence converges to the solution \(x^\ast\). The lecture refers to Banach's fixed point theorem as the conceptual convergence background.
+
+A typical stopping rule is
+\[
+\|x^{(i+1)}-x^{(i)}\|\leq \varepsilon.
+\]
+The lecture's algorithm uses the scale-adjusted rule
+\[
+\|x^{(i+1)}-x^{(i)}\|
+\leq
+\varepsilon\bigl(1+\|x^{(i+1)}\|\bigr).
+\]
+The factor
+\[
+1+\|x^{(i+1)}\|
+\]
+makes the stopping criterion more robust with respect to the scale of the solution.
+
+\subsubsection{How to Choose \(Q\)}
+
+Different iterative methods correspond to different choices of \(Q\).
+
+\paragraph{Gauss-Jacobi method.}
+For the Jacobi method, \(Q\) is the diagonal matrix formed from the diagonal entries of \(A\).
+
+\paragraph{Gauss-Seidel method.}
+For the Gauss-Seidel method, \(Q\) is the lower triangular part of \(A\), including the diagonal.
+
+Thus:
+\[
+\text{Jacobi: } Q=\text{diagonal part of }A,
+\]
+\[
+\text{Gauss-Seidel: } Q=\text{lower triangular part of }A.
+\]
+
+The essential algorithmic difference is:
+\begin{enumerate}
+    \item Jacobi updates all components using only the old vector \(x^{(i)}\).
+    \item Gauss-Seidel immediately uses newly computed values within the same iteration.
+\end{enumerate}
+
+\subsubsection{Convergence and Diagonal Dominance}
+
+\begin{DEF}{L2-DEF-RowDiagonalDominance}{Row diagonal dominance}
+A matrix \(A\in\R^{n\times n}\) is row diagonally dominant if
+\[
+|a_{ii}|
+\geq
+\sum_{j\neq i}|a_{ij}|
+\]
+for all
+\[
+i=1,\dots,n.
+\]
+It is strictly row diagonally dominant if
+\[
+|a_{ii}|
+>
+\sum_{j\neq i}|a_{ij}|
+\]
+for all \(i\).
+\end{DEF}
+
+\begin{DEF}{L2-DEF-ColumnDiagonalDominance}{Column diagonal dominance}
+A matrix \(A\in\R^{n\times n}\) is column diagonally dominant if
+\[
+|a_{jj}|
+\geq
+\sum_{i\neq j}|a_{ij}|
+\]
+for all
+\[
+j=1,\dots,n.
+\]
+It is strictly column diagonally dominant if
+\[
+|a_{jj}|
+>
+\sum_{i\neq j}|a_{ij}|
+\]
+for all \(j\).
+\end{DEF}
+
+The lecture states:
+\begin{enumerate}
+    \item Every strictly row diagonally dominant matrix is invertible.
+    \item If \(A\) is strictly row or column diagonally dominant, then the Gauss-Jacobi and Gauss-Seidel methods converge.
+\end{enumerate}
+
+\subsubsection{Checking Diagonal Dominance in the Lecture Example}
+
+Recall
+\[
+A=
+\begin{pmatrix}
+2&0&1\\
+0&4&1\\
+1&-1&4
+\end{pmatrix}.
+\]
+
+\paragraph{Row dominance.}
+Row \(1\):
+\[
+|2|>|0|+|1|=1.
+\]
+Row \(2\):
+\[
+|4|>|0|+|1|=1.
+\]
+Row \(3\):
+\[
+|4|>|1|+|-1|=2.
+\]
+Hence \(A\) is strictly row diagonally dominant.
+
+\paragraph{Column dominance.}
+Column \(1\):
+\[
+|2|>|0|+|1|=1.
+\]
+Column \(2\):
+\[
+|4|>|0|+|-1|=1.
+\]
+Column \(3\):
+\[
+|4|>|1|+|1|=2.
+\]
+Hence \(A\) is also strictly column diagonally dominant.
+
+Therefore the solution is unique, and both Gauss-Jacobi and Gauss-Seidel converge to \(x^\ast\).
+
+\subsection{Jacobi Method}
+
+\subsubsection{Choice of \(Q\)}
+
+For the example matrix
+\[
+A=
+\begin{pmatrix}
+2&0&1\\
+0&4&1\\
+1&-1&4
+\end{pmatrix},
+\]
+the Jacobi method takes
+\[
+Q=
+\begin{pmatrix}
+2&0&0\\
+0&4&0\\
+0&0&4
+\end{pmatrix}.
+\]
+Therefore
+\[
+Q^{-1}
+=
+\begin{pmatrix}
+1/2&0&0\\
+0&1/4&0\\
+0&0&1/4
+\end{pmatrix}.
+\]
+
+The iteration is
+\[
+x^{(i+1)}
+=
+Q^{-1}b+(I-Q^{-1}A)x^{(i)}.
+\]
+
+Componentwise:
+\[
+x_j^{(i+1)}
+=
+\frac{1}{A_{jj}}
+\left(
+b_j-\sum_{k\neq j}A_{jk}x_k^{(i)}
+\right).
+\]
+
+\subsubsection{Intuition of the Jacobi Method}
+
+The \(j\)-th row of
+\[
+Ax=b
+\]
+is
+\[
+A_{j1}x_1+\cdots+A_{jj}x_j+\cdots+A_{jn}x_n=b_j.
+\]
+Solving for \(x_j\) gives
+\[
+x_j
+=
+\frac{1}{A_{jj}}
+\left(
+b_j-\sum_{k\neq j}A_{jk}x_k
+\right).
+\]
+
+The Jacobi method turns this identity into an iteration by inserting the previous approximation \(x^{(i)}\) on the right-hand side:
+\[
+x_j^{(i+1)}
+=
+\frac{1}{A_{jj}}
+\left(
+b_j-\sum_{k\neq j}A_{jk}x_k^{(i)}
+\right).
+\]
+
+The important point is that all components \(x_j^{(i+1)}\) are computed from the old vector \(x^{(i)}\), not from partially updated values.
+
+\subsubsection{Jacobi Update for the Lecture Example}
+
+For
+\[
+A=
+\begin{pmatrix}
+2&0&1\\
+0&4&1\\
+1&-1&4
+\end{pmatrix},
+\qquad
+b=
+\begin{pmatrix}
+30\\
+40\\
+15
+\end{pmatrix},
+\]
+the equations are
+\[
+2x_1+x_3=30,
+\]
+\[
+4x_2+x_3=40,
+\]
+\[
+x_1-x_2+4x_3=15.
+\]
+
+Solving each equation for its diagonal variable gives
+\[
+x_1=\frac{30-x_3}{2},
+\]
+\[
+x_2=\frac{40-x_3}{4},
+\]
+\[
+x_3=\frac{15-x_1+x_2}{4}.
+\]
+
+Therefore the Jacobi iteration is
+\[
+x_1^{(i+1)}
+=
+\frac{30-x_3^{(i)}}{2},
+\]
+\[
+x_2^{(i+1)}
+=
+\frac{40-x_3^{(i)}}{4},
+\]
+\[
+x_3^{(i+1)}
+=
+\frac{15-x_1^{(i)}+x_2^{(i)}}{4}.
+\]
+
+\subsubsection{Gauss-Jacobi Algorithm}
+
+The lecture gives the following algorithmic structure.
+
+Inputs:
+\[
+A\in\R^{n\times n},
+\qquad
+b\in\R^n,
+\qquad
+x_0\in\R^n,
+\qquad
+\varepsilon>0,
+\qquad
+I\in\N.
+\]
+
+Here \(x_0\) is the initial guess, \(\varepsilon\) is the tolerance level, and \(I\) is the maximum number of iterations.
+
+\begin{enumerate}
+    \item Set \(n=\operatorname{length}(b)\).
+    \item Initialize \(x=x_0\).
+    \item For \(k=0,1,\dots,I\):
+    \begin{enumerate}
+        \item Store the old vector:
+        \[
+        x^{old}=x.
+        \]
+        \item For each \(j=1,\dots,n\), compute
+        \[
+        x_j
+        =
+        \frac{1}{A_{jj}}
+        \left(
+        b_j-\sum_{w\neq j}A_{jw}x_w^{old}
+        \right).
+        \]
+        \item Check the stopping rule:
+        \[
+        \|x-x^{old}\|
+        \leq
+        \varepsilon(1+\|x\|).
+        \]
+        \item If the stopping rule is satisfied, return \(x^\ast=x\).
+    \end{enumerate}
+\end{enumerate}
+
+\subsubsection{Matlab Implementation of the Jacobi Method}
+
+The lecture gives the function:
+\begin{verbatim}
+function xstar = fGaussJacobi(A,b,x0,epsilon,I)
+
+n = length(b);
+x = x0;
+xstar = x*0;
+
+for k = 0:I
+
+    x_old = x;
+
+    for j = 1:n
+        x(j) = 1/A(j,j)*(b(j) ...
+             - A(j,1:j-1)*x_old(1:j-1) ...
+             - A(j,j+1:n)*x_old(j+1:n));
+    end
+
+    if norm(x-x_old) <= epsilon*(1+norm(x))
+        xstar = x;
+        break
+    end
+end
+
+end
+\end{verbatim}
+
+The key line is
+\begin{verbatim}
+x_old = x;
+\end{verbatim}
+because Jacobi must update every component using the old vector.
+
+The expression
+\begin{verbatim}
+A(j,1:j-1)*x_old(1:j-1)
+\end{verbatim}
+computes the contribution of the variables before index \(j\), while
+\begin{verbatim}
+A(j,j+1:n)*x_old(j+1:n)
+\end{verbatim}
+computes the contribution of the variables after index \(j\). Together they represent
+\[
+\sum_{w\neq j}A_{jw}x_w^{old}.
+\]
+
+The function can be called from a main script:
+\begin{verbatim}
+A = [2,0,1;0,4,1;1,-1,4];
+b = [30,40,15]';
+
+tolx = 1e-8;
+maxiter = 100;
+
+xstar = fGaussJacobi(A,b,x0,tolx,maxiter)
+\end{verbatim}
+
+Variable names inside the function do not need to be the same as variable names in the main script. For example, the function input \(I\) corresponds to \verb|maxiter| in the main script.
+
+\subsection{Gauss-Seidel Method}
+
+\subsubsection{Choice of \(Q\)}
+
+For Gauss-Seidel, \(Q\) is the lower triangular part of \(A\), including the diagonal.
+
+For the lecture example,
+\[
+A=
+\begin{pmatrix}
+2&0&1\\
+0&4&1\\
+1&-1&4
+\end{pmatrix},
+\]
+one takes
+\[
+Q=
+\begin{pmatrix}
+2&0&0\\
+0&4&0\\
+1&-1&4
+\end{pmatrix}.
+\]
+
+The lecture gives
+\[
+Q^{-1}
+=
+\begin{pmatrix}
+1/2&0&0\\
+0&1/4&0\\
+-1/8&1/16&1/4
+\end{pmatrix}.
+\]
+
+The iteration is still
+\[
+x^{(i+1)}
+=
+Q^{-1}b+(I-Q^{-1}A)x^{(i)}.
+\]
+
+Componentwise:
+\[
+x_j^{(i+1)}
+=
+\frac{1}{A_{jj}}
+\left(
+b_j
+-
+\sum_{k<j}A_{jk}x_k^{(i+1)}
+-
+\sum_{k>j}A_{jk}x_k^{(i)}
+\right).
+\]
+
+\subsubsection{Intuition of the Gauss-Seidel Method}
+
+Gauss-Seidel is similar to Jacobi, but it uses newly computed values immediately. When computing \(x_j^{(i+1)}\), it uses:
+\begin{enumerate}
+    \item already updated values \(x_k^{(i+1)}\) for \(k<j\),
+    \item old values \(x_k^{(i)}\) for \(k>j\).
+\end{enumerate}
+
+This often leads to faster convergence than Jacobi, although convergence is still not automatic for all matrices.
+
+\subsubsection{Gauss-Seidel Update for the Lecture Example}
+
+The equations are
+\[
+2x_1+x_3=30,
+\]
+\[
+4x_2+x_3=40,
+\]
+\[
+x_1-x_2+4x_3=15.
+\]
+
+Solving for the diagonal variable in each equation gives
+\[
+x_1=\frac{30-x_3}{2},
+\]
+\[
+x_2=\frac{40-x_3}{4},
+\]
+\[
+x_3=\frac{15-x_1+x_2}{4}.
+\]
+
+Gauss-Seidel updates in order:
+\[
+x_1^{(i+1)}
+=
+\frac{30-x_3^{(i)}}{2},
+\]
+then
+\[
+x_2^{(i+1)}
+=
+\frac{40-x_3^{(i)}}{4},
+\]
+then
+\[
+x_3^{(i+1)}
+=
+\frac{15-x_1^{(i+1)}+x_2^{(i+1)}}{4}.
+\]
+
+The third equation now uses the new values of \(x_1\) and \(x_2\).
+
+\subsection{When Iterative Methods Do Not Work}
+
+If \(A\) is not strictly diagonally dominant, the iterative algorithm may fail to converge.
+
+For small systems, one can sometimes reorder the equations to make \(A\) strictly diagonally dominant. Reordering equations corresponds to permuting rows of \(A\) and the corresponding entries of \(b\). This may change which coefficients appear on the diagonal.
+
+For larger systems, the lecture suggests damping:
+\[
+x^{(i+1)}
+=
+(1-\lambda)x^{(i)}
++
+\lambda \widetilde{x}^{(i+1)},
+\qquad
+\lambda\in(0,1).
+\]
+Here \(\widetilde{x}^{(i+1)}\) is the raw update produced by the iterative method, while \(x^{(i+1)}\) is the damped update that is actually accepted.
+
+The intuition is that if the iteration oscillates or overshoots, one takes only a fraction of the proposed update.
+
+\subsection{Successive Over-Relaxation}
+
+Successive over-relaxation, abbreviated SOR, is a variant of the Gauss-Seidel method.
+
+First compute the Gauss-Seidel candidate
+\[
+\widetilde{x}_j^{(i+1)}
+=
+\frac{1}{A_{jj}}
+\left(
+b_j
+-
+\sum_{k<j}A_{jk}x_k^{(i+1)}
+-
+\sum_{k>j}A_{jk}x_k^{(i)}
+\right).
+\]
+
+Then apply relaxation:
+\[
+x_j^{(i+1)}
+=
+(1-\lambda)x_j^{(i)}
++
+\lambda \widetilde{x}_j^{(i+1)}.
+\]
+
+The parameter \(\lambda\) is the relaxation factor.
+
+If
+\[
+\lambda<1,
+\]
+the update is damped. This can help if the process oscillates or overshoots.
+
+If
+\[
+\lambda>1,
+\]
+the method over-relaxes. This can speed up convergence if the original method converges but does so slowly.
+
+The lecture notes that SOR is often used in numerical solutions of economic models.
+
+\subsection{Final Remarks}
+
+The lecture ends with several methodological conclusions:
+\begin{enumerate}
+    \item The solution of linear equation systems is a very well-developed field.
+    \item There are many specific algorithms.
+    \item Matrix inversion is still computationally challenging.
+    \item Established software, code, and algorithms should be used whenever available.
+    \item The accuracy of a computed solution should always be checked.
+\end{enumerate}
+
+A practical accuracy check is to compute the residual
+\[
+r=Ax^\ast-b.
+\]
+If \(x^\ast\) is accurate, then
+\[
+\|r\|
+\]
+should be small.
+
+A scale-adjusted residual check is, for example,
+\[
+\frac{\|Ax^\ast-b\|}{1+\|b\|}.
+\]
+
+This residual criterion complements the iterative stopping rule. The stopping rule checks whether iterates stop changing, while the residual checks whether the computed vector actually approximately solves the original system.
+
+\subsection{Central Formulas and Statements}
+
+\subsubsection{Linear System}
+
+\[
+Ax=b.
+\]
+
+If \(A\) is invertible:
+\[
+x^\ast=A^{-1}b.
+\]
+
+\subsubsection{Matrix Multiplication}
+
+If
+\[
+A\in\R^{m\times p},
+\qquad
+B\in\R^{p\times n},
+\]
+then
+\[
+(AB)_{ij}
+=
+\sum_{k=1}^{p}A_{ik}B_{kj}.
+\]
+
+\subsubsection{Vector Norms}
+
+\[
+\|x\|_1=\sum_i |x_i|,
+\]
+\[
+\|x\|_2=\sqrt{\sum_i |x_i|^2},
+\]
+\[
+\|x\|_\infty=\max_i |x_i|.
+\]
+
+\subsubsection{Forward Substitution}
+
+For a lower triangular system:
+\[
+x_j
+=
+\frac{1}{A_{jj}}
+\left(
+b_j-\sum_{k<j}A_{jk}x_k
+\right).
+\]
+
+\subsubsection{Backward Substitution}
+
+For an upper triangular system:
+\[
+x_j
+=
+\frac{1}{A_{jj}}
+\left(
+b_j-\sum_{k>j}A_{jk}x_k
+\right).
+\]
+
+\subsubsection{LU Decomposition}
+
+\[
+A=LU.
+\]
+Solve
+\[
+Ly=b
+\]
+by forward substitution and then
+\[
+Ux=y
+\]
+by backward substitution.
+
+\subsubsection{QR Least Squares}
+
+For
+\[
+A\in\R^{m\times n},
+\qquad
+m\geq n,
+\]
+solve
+\[
+x^\ast
+=
+\operatorname*{argmin}_x \|Ax-b\|_2.
+\]
+
+QR decomposition:
+\[
+A=QR.
+\]
+
+\subsubsection{General Iterative Method}
+
+Given
+\[
+A=Q+N,
+\]
+derive
+\[
+x
+=
+Q^{-1}b+(I-Q^{-1}A)x.
+\]
+
+The iteration is
+\[
+x^{(i+1)}
+=
+Q^{-1}b+(I-Q^{-1}A)x^{(i)}.
+\]
+
+\subsubsection{Jacobi Update}
+
+\[
+x_j^{(i+1)}
+=
+\frac{1}{A_{jj}}
+\left(
+b_j-\sum_{k\neq j}A_{jk}x_k^{(i)}
+\right).
+\]
+
+\subsubsection{Gauss-Seidel Update}
+
+\[
+x_j^{(i+1)}
+=
+\frac{1}{A_{jj}}
+\left(
+b_j
+-
+\sum_{k<j}A_{jk}x_k^{(i+1)}
+-
+\sum_{k>j}A_{jk}x_k^{(i)}
+\right).
+\]
+
+\subsubsection{SOR Update}
+
+\[
+x_j^{(i+1)}
+=
+(1-\lambda)x_j^{(i)}
++
+\lambda \widetilde{x}_j^{(i+1)},
+\]
+where
+\[
+\widetilde{x}_j^{(i+1)}
+=
+\frac{1}{A_{jj}}
+\left(
+b_j
+-
+\sum_{k<j}A_{jk}x_k^{(i+1)}
+-
+\sum_{k>j}A_{jk}x_k^{(i)}
+\right).
+\]
+
+\subsubsection{Diagonal Dominance}
+
+Row diagonal dominance:
+\[
+|a_{ii}|
+\geq
+\sum_{j\neq i}|a_{ij}|.
+\]
+
+Strict row diagonal dominance:
+\[
+|a_{ii}|
+>
+\sum_{j\neq i}|a_{ij}|.
+\]
+
+Column diagonal dominance:
+\[
+|a_{jj}|
+\geq
+\sum_{i\neq j}|a_{ij}|.
+\]
+
+Strict column diagonal dominance:
+\[
+|a_{jj}|
+>
+\sum_{i\neq j}|a_{ij}|.
+\]
+
+Strict diagonal dominance gives a practical sufficient condition for invertibility and for the convergence of Jacobi and Gauss-Seidel in the setting discussed in the lecture.
+
+\subsection{Intuition and Conceptual Connection}
+
+The whole lecture is organized around the problem
+\[
+Ax=b.
+\]
+
+There are two broad solution philosophies.
+
+\subsubsection{Direct Philosophy}
+
+Direct methods transform the system algebraically until the solution is obtained. Typical objects are:
+\[
+A^{-1},
+\qquad
+LU,
+\qquad
+QR.
+\]
+
+The central computational trick is:
+\[
+\text{general matrix}
+\longrightarrow
+\text{triangular matrices}
+\longrightarrow
+\text{forward/backward substitution}.
+\]
+
+Triangular systems are easy, so direct methods try to reduce general systems to triangular ones.
+
+\subsubsection{Iterative Philosophy}
+
+Iterative methods do not solve the system immediately. Instead, they rewrite it as a fixed-point problem
+\[
+x=T(x)
+\]
+and generate a sequence
+\[
+x^{(0)},x^{(1)},x^{(2)},\dots
+\]
+which should converge to \(x^\ast\).
+
+The guiding idea is:
+\[
+\text{hard inverse } A^{-1}
+\quad\leadsto\quad
+\text{easy inverse } Q^{-1}.
+\]
+
+Choosing \(Q\) as the diagonal part of \(A\) gives the Jacobi method. Choosing \(Q\) as the lower triangular part of \(A\) gives the Gauss-Seidel method.
+
+\subsubsection{Why Diagonal Dominance Matters}
+
+Diagonal dominance means that, in each equation, the coefficient of the equation's own variable dominates the cross-effects from the other variables.
+
+In row \(i\), the diagonal term is
+\[
+a_{ii}x_i,
+\]
+whereas the off-diagonal terms are
+\[
+\sum_{j\neq i}a_{ij}x_j.
+\]
+
+If the diagonal term dominates, then solving each equation for its own variable produces stable updates. This explains why diagonal dominance is a natural sufficient convergence condition for Jacobi and Gauss-Seidel.
+
+\subsubsection{Why Numerical Stability Matters}
+
+The formal identity
+\[
+x=A^{-1}b
+\]
+does not imply that computing \(A^{-1}\) is the best numerical method. Computers use finite precision, so mathematically equivalent algorithms can behave differently numerically.
+
+Important lessons are:
+\begin{enumerate}
+    \item Avoid explicit inverses when possible.
+    \item Use stable factorizations and established software.
+    \item Use pivoting when necessary.
+    \item Check residuals after computing a solution.
+\end{enumerate}
+
+\subsection{Exam-Relevant Core Ideas}
+
+After this lecture, one should be able to do the following.
+
+\subsubsection{Translate Equations into Matrix Form}
+
+Given equations such as
+\[
+2x_1+x_3=30,
+\qquad
+4x_2+x_3=40,
+\qquad
+x_1-x_2+4x_3=15,
+\]
+one should be able to write
+\[
+Ax=b
+\]
+with the correct \(A\), \(x\), and \(b\).
+
+\subsubsection{Recognize Important Matrix Types}
+
+One should know the meaning of:
+\begin{enumerate}
+    \item square matrix,
+    \item diagonal matrix,
+    \item identity matrix,
+    \item lower triangular matrix,
+    \item upper triangular matrix,
+    \item orthogonal matrix.
+\end{enumerate}
+
+\subsubsection{Solve Triangular Systems}
+
+One should be able to perform forward substitution and backward substitution for small systems.
+
+\subsubsection{Explain LU Factorization}
+
+One should know the workflow:
+\[
+A=LU,
+\]
+\[
+Ly=b,
+\]
+\[
+Ux=y.
+\]
+The point is that \(L\) and \(U\) are triangular, and triangular systems are easy to solve.
+
+\subsubsection{Use Matlab Correctly}
+
+For solving
+\[
+Ax=b,
+\]
+one should usually use
+\begin{verbatim}
+x = A\b
+\end{verbatim}
+rather than
+\begin{verbatim}
+x = inv(A)*b
+\end{verbatim}
+because explicit inversion is often less stable and less efficient.
+
+\subsubsection{Derive the Jacobi Update}
+
+From row \(j\) of \(Ax=b\),
+\[
+\sum_{k=1}^n A_{jk}x_k=b_j,
+\]
+solve for \(x_j\):
+\[
+x_j
+=
+\frac{1}{A_{jj}}
+\left(
+b_j-\sum_{k\neq j}A_{jk}x_k
+\right).
+\]
+
+Then turn this into the Jacobi iteration:
+\[
+x_j^{(i+1)}
+=
+\frac{1}{A_{jj}}
+\left(
+b_j-\sum_{k\neq j}A_{jk}x_k^{(i)}
+\right).
+\]
+
+\subsubsection{Distinguish Jacobi and Gauss-Seidel}
+
+Jacobi uses only old values:
+\[
+x_j^{(i+1)}
+\text{ uses } x_k^{(i)}.
+\]
+
+Gauss-Seidel uses new values as soon as they are available:
+\[
+x_j^{(i+1)}
+\text{ uses } x_k^{(i+1)}
+\text{ for } k<j.
+\]
+
+This is the main algorithmic distinction between the two methods.
+
+\subsubsection{Check Diagonal Dominance}
+
+For each row, check whether
+\[
+|a_{ii}|
+>
+\sum_{j\neq i}|a_{ij}|.
+\]
+
+If this holds for all rows, the matrix is strictly row diagonally dominant. In the context of the lecture, this gives a sufficient condition for convergence of Jacobi and Gauss-Seidel.
+
+\subsubsection{Understand Relaxation}
+
+One should know the SOR formula
+\[
+x_j^{(i+1)}
+=
+(1-\lambda)x_j^{(i)}
++
+\lambda \widetilde{x}_j^{(i+1)}.
+\]
+
+The interpretation is:
+\[
+\lambda<1
+\quad\Rightarrow\quad
+\text{damping},
+\]
+\[
+\lambda>1
+\quad\Rightarrow\quad
+\text{over-relaxation}.
+\]
+
+\subsubsection{Check Accuracy}
+
+Given a computed solution \(x^\ast\), compute the residual
+\[
+r=Ax^\ast-b.
+\]
+A reliable numerical solution should satisfy
+\[
+\|r\|\approx 0.
+\]
+
+This is the final practical lesson of the lecture: solving linear systems is not only about writing formulas, but about obtaining numerically reliable answers.
+
+\pagebreak
+
+\section{Nonlinear Equations}
+
+\subsection{Kurze Einordnung der Vorlesung}
+
+Diese Vorlesung behandelt numerische Verfahren zur Lösung eindimensionaler nichtlinearer Gleichungen. Der Grundtyp des Problems ist
+\[
+f(x)=0,
+\qquad
+f:\mathbb{R}\to\mathbb{R}.
+\]
+Gesucht ist also ein Punkt \(x^\ast\in\mathbb{R}\), sodass
+\[
+f(x^\ast)=0.
+\]
+Solche Probleme treten in ökonomischen Modellen immer dann auf, wenn Gleichgewichtsbedingungen, First-Order Conditions oder Modellrestriktionen nicht mehr linear sind und daher keine einfache analytische Lösung besitzen.
+
+Der rote Faden der Vorlesung ist:
+\[
+\text{ökonomisches Modell}
+\quad\Longrightarrow\quad
+\text{nichtlineare Gleichung}
+\quad\Longrightarrow\quad
+\text{iteratives numerisches Lösungsverfahren}.
+\]
+Alle behandelten Verfahren erzeugen aus einem Startwert oder Startintervall eine Folge von Näherungen
+\[
+x_0,x_1,x_2,\dots
+\]
+mit dem Ziel
+\[
+x_i\to x^\ast.
+\]
+Die behandelten Verfahren sind:
+\[
+\text{Fixpunktiteration},\qquad
+\text{Bisektion},\qquad
+\text{Sekantenverfahren},\qquad
+\text{Brent-Verfahren},\qquad
+\text{Newton-Verfahren}.
+\]
+Ein zentrales Thema ist dabei der Trade-off zwischen Robustheit und Geschwindigkeit. Das Bisektionsverfahren ist sehr robust, aber langsam. Das Newton-Verfahren ist oft sehr schnell, kann aber bei schlechten Startwerten oder ungünstiger Krümmung scheitern. Brent's Methode kombiniert robuste Intervallsicherung mit schnelleren Interpolationsschritten.
+
+\subsection{Einführung: Nichtlineare Gleichungen aus ökonomischen Modellen}
+
+\subsubsection{Beispiel: Nachfrage und Angebot}
+
+Die Vorlesung beginnt mit einem einfachen Marktmodell. Gegeben seien eine Nachfragefunktion und eine Angebotsfunktion:
+\[
+\text{Demand:}\qquad p=a-bq,
+\]
+\[
+\text{Supply:}\qquad p=c+dq^\psi.
+\]
+Dabei bezeichnet
+\[
+p=\text{Preis},\qquad q=\text{Menge},
+\]
+und
+\[
+a,b,c,d,\psi
+\]
+sind Modellparameter. Es wird angenommen:
+\[
+\psi\in(0,1].
+\]
+
+Ein Marktgleichgewicht liegt vor, wenn Nachfragepreis und Angebotspreis übereinstimmen:
+\[
+a-bq=c+dq^\psi.
+\]
+Durch Umstellen erhält man
+\[
+bq+dq^\psi-(a-c)=0.
+\]
+Definiert man
+\[
+f(q):=bq+dq^\psi-(a-c),
+\]
+dann wird das ökonomische Gleichgewichtsproblem zu einem Nullstellenproblem:
+\[
+f(q)=0.
+\]
+
+Für spezielle Werte von \(\psi\) besitzt das Problem eine geschlossene Lösung. Für \(\psi=1\) erhält man
+\[
+bq+dq-(a-c)=0,
+\]
+also
+\[
+(b+d)q=a-c.
+\]
+Falls \(b+d\neq 0\), ist
+\[
+q^\ast=\frac{a-c}{b+d}.
+\]
+Für \(\psi=\frac12\) kann man die Substitution
+\[
+z=\sqrt{q}
+\]
+verwenden. Dann ist \(q=z^2\), und die Gleichung wird zu
+\[
+bz^2+dz-(a-c)=0.
+\]
+Das ist eine quadratische Gleichung in \(z\). Für allgemeines \(\psi\) ist dagegen keine einfache geschlossene Lösung garantiert. Dann behandelt man das Problem numerisch als Root-Finding-Problem.
+
+\subsubsection{Allgemeine Form des Problems}
+
+Allgemein lautet das Problem:
+\[
+f:\mathbb{R}\to\mathbb{R},
+\qquad
+f(x)=0.
+\]
+Gesucht ist
+\[
+x^\ast\in\mathbb{R}
+\]
+mit
+\[
+f(x^\ast)=0.
+\]
+Wenn keine analytische Lösung verfügbar ist, konstruiert man ein iteratives Verfahren. Ausgehend von einem Startwert \(x_0\) erzeugt man eine Folge
+\[
+x_0,x_1,x_2,\dots
+\]
+durch eine Vorschrift der Form
+\[
+x_{i+1}=h(x_i).
+\]
+Je nach Verfahren ist die Iterationsfunktion \(h\) anders konstruiert.
+
+\subsection{Wann soll ein iterativer Prozess stoppen?}
+
+\subsubsection{Grundproblem}
+
+Wenn ein Algorithmus konvergiert, gilt idealerweise
+\[
+\lim_{i\to\infty}x_i=x^\ast.
+\]
+In endlicher Zeit kann man jedoch nur endlich viele Iterationen durchführen. Man erhält also lediglich eine Approximation
+\[
+x_i\approx x^\ast.
+\]
+Daher braucht man eine Abbruchregel.
+
+Eine konvergente Folge ist eine Cauchy-Folge. Das bedeutet:
+\[
+\forall \varepsilon>0\ \exists N\in\mathbb{N}\ \text{s.t.}\ \forall i>N:
+\|x_{i+1}-x_i\|\leq \varepsilon.
+\]
+Eine naheliegende Abbruchregel wäre also
+\[
+\|x_{i+1}-x_i\|\leq \varepsilon.
+\]
+Diese Regel ist aber problemabhängig, weil sie von der Skalierung des Problems und von der Größenordnung der Lösung abhängt. Ein absoluter Fehler von \(10^{-6}\) kann bei einer Lösung nahe \(10^6\) sehr klein sein, bei einer Lösung nahe \(10^{-8}\) aber groß.
+
+\subsubsection{Relative und kombinierte Abbruchregel}
+
+Eine relative Regel wäre
+\[
+\|x_{i+1}-x_i\|\leq \varepsilon \|x_i\|.
+\]
+Diese Regel bedeutet: Die neue Iteration darf sich relativ zur aktuellen Größenordnung von \(x_i\) nur wenig ändern.
+
+Problematisch ist diese Regel, wenn die Lösung nahe bei Null liegt. Dann ist \(\|x_i\|\) klein und die rechte Seite
+\[
+\varepsilon\|x_i\|
+\]
+wird ebenfalls sehr klein. Die Regel wird dann unter Umständen zu streng.
+
+Die in der Vorlesung empfohlene Abbruchregel lautet daher:
+\[
+\boxed{
+\|x_{i+1}-x_i\|
+\leq
+\varepsilon(1+\|x_{i+1}\|).
+}
+\]
+Diese Regel kombiniert eine absolute und eine relative Toleranz.
+
+Falls
+\[
+\|x_{i+1}\|\approx 0,
+\]
+dann ist
+\[
+1+\|x_{i+1}\|\approx 1,
+\]
+und die Regel verhält sich wie eine absolute Toleranz.
+
+Falls dagegen
+\[
+\|x_{i+1}\|\gg 0,
+\]
+dann dominiert der relative Anteil
+\[
+\varepsilon\|x_{i+1}\|.
+\]
+Damit wird die Regel weitgehend skalenunabhängig.
+
+\subsubsection{Residualprüfung}
+
+Eine kleine Schrittweite garantiert nicht automatisch, dass man nahe an einer Nullstelle ist. Ein Algorithmus kann auch stagnieren, ohne eine gute Lösung gefunden zu haben. Deshalb sollte man nach dem Abbruch zusätzlich prüfen, ob der Funktionswert klein ist:
+\[
+\boxed{
+\|f(x_{i+1})\|\leq \delta,
+}
+\]
+wobei \(\delta>0\) klein ist.
+
+Man unterscheidet also zwei Kriterien:
+\[
+\text{Schrittweitenkriterium:}
+\qquad
+\|x_{i+1}-x_i\|
+\leq
+\varepsilon(1+\|x_{i+1}\|),
+\]
+und
+\[
+\text{Residualkriterium:}
+\qquad
+\|f(x_{i+1})\|\leq \delta.
+\]
+Das erste Kriterium sagt, dass sich die Iteration kaum noch bewegt. Das zweite Kriterium sagt, dass die gefundene Näherung tatsächlich fast eine Nullstelle ist.
+
+\subsection{Fixpunktiteration}
+
+\subsubsection{Vom Nullstellenproblem zum Fixpunktproblem}
+
+Das ursprüngliche Problem lautet:
+\[
+f(x^\ast)=0.
+\]
+Dieses Problem kann als Fixpunktproblem formuliert werden. Sei \(\alpha(x)\neq 0\). Definiere
+\[
+g(x):=x-\alpha(x)f(x).
+\]
+Dann gilt:
+\[
+g(x)=x
+\]
+genau dann, wenn
+\[
+x-\alpha(x)f(x)=x.
+\]
+Das ist äquivalent zu
+\[
+-\alpha(x)f(x)=0.
+\]
+Da \(\alpha(x)\neq 0\), folgt
+\[
+f(x)=0.
+\]
+Also gilt:
+\[
+\boxed{
+g(x)=x
+\quad\Longleftrightarrow\quad
+f(x)=0.
+}
+\]
+Man kann daher statt einer Nullstelle von \(f\) einen Fixpunkt von \(g\) suchen.
+
+\subsubsection{Iterationsvorschrift}
+
+Das Fixpunktproblem lautet:
+\[
+g(x)=x.
+\]
+Die Fixpunktiteration erzeugt aus einem Startwert \(x_0\) eine Folge durch
+\[
+\boxed{
+x_{i+1}=g(x_i).
+}
+\]
+Wenn die Folge konvergiert und \(g\) stetig ist, dann gilt
+\[
+x_i\to x^\ast
+\]
+und daher
+\[
+x^\ast
+=
+\lim_{i\to\infty}x_{i+1}
+=
+\lim_{i\to\infty}g(x_i)
+=
+g\left(\lim_{i\to\infty}x_i\right)
+=
+g(x^\ast).
+\]
+Der Grenzwert ist also tatsächlich ein Fixpunkt.
+
+\subsubsection{Konvergenzbedingung: Kontraktion}
+
+Eine zentrale Konvergenzidee ist der Banachsche Fixpunktsatz. Im eindimensionalen Fall ist eine lokale hinreichende Bedingung:
+\[
+|g'(x)|<1
+\]
+für alle \(x\) in einer Umgebung des Fixpunktes \(x^\ast\).
+
+Genauer: Gibt es ein \(\delta>0\), sodass
+\[
+|g'(x)|<1
+\qquad
+\text{für alle }
+x\in[x^\ast-\delta,x^\ast+\delta],
+\]
+und liegt der Startwert \(x_0\) in dieser Umgebung, dann ist lokale Konvergenz zu erwarten.
+
+Intuitiv bedeutet
+\[
+|g'(x)|<1,
+\]
+dass \(g\) Abstände verkleinert. Die Iteration
+\[
+x_{i+1}=g(x_i)
+\]
+zieht Punkte dann in Richtung des Fixpunktes.
+
+\subsubsection{Algorithmus der Fixpunktiteration}
+
+Gegeben seien
+\[
+g,\qquad x_0,\qquad \varepsilon>0,\qquad \delta>0,\qquad I\in\mathbb{N}.
+\]
+Dabei ist \(I\) die maximale Anzahl der Iterationen.
+
+Initialisierung:
+\[
+x^\ast\leftarrow 0,
+\qquad
+\text{flag}\leftarrow 0.
+\]
+
+Für
+\[
+i=1,2,\dots,I
+\]
+berechnet man
+\[
+x_{i+1}=g(x_i).
+\]
+Dann prüft man
+\[
+|x_{i+1}-x_i|
+\leq
+\varepsilon(1+|x_{i+1}|).
+\]
+Falls diese Bedingung erfüllt ist, setzt man
+\[
+x^\ast\leftarrow x_{i+1},
+\qquad
+\text{flag}\leftarrow 1,
+\]
+und bricht die Iteration ab.
+
+Nach dem Abbruch wird zusätzlich geprüft:
+\[
+|g(x_{i+1})-x_{i+1}|\leq \delta.
+\]
+Falls ja, setzt man
+\[
+\text{flag}\leftarrow 2.
+\]
+Der Algorithmus gibt \(x^\ast\) und \(\text{flag}\) zurück.
+
+\subsubsection{MATLAB-Implementierung}
+
+Eine mögliche MATLAB-Implementierung ist:
+
+\begin{verbatim}
+function [x,gx,ef] = fpiter(g,x,tole,told,max_iter)
+
+% fixed-point iteration
+ef = 0;
+
+for j = 1:max_iter
+    xp = g(x);
+
+    if norm(x-xp) <= tole*(1+norm(xp))
+        ef = 1;
+        break;
+    else
+        x = xp;
+        gx = g(x);
+    end
+end
+
+if norm(g(x)-x) <= told
+    ef = 2;
+end
+
+end
+\end{verbatim}
+
+In der Folie steht in der Funktionssignatur \texttt{max\_iter}, in der Schleife aber teilweise \texttt{maxiter}. In MATLAB müssen diese Namen identisch sein. Inhaltlich bezeichnet dieser Parameter die maximale Anzahl der Iterationen.
+
+\subsubsection{Bemerkungen zur Fixpunktiteration}
+
+Die Fixpunktiteration ist einfach zu implementieren und wird häufig in ökonomischen Anwendungen verwendet. Sie nutzt außer Stetigkeit und Kontraktionseigenschaften keine weitere Struktur der Funktion. Sie lässt sich formal fast unverändert auf mehrdimensionale Probleme übertragen:
+\[
+g:\mathbb{R}^n\to\mathbb{R}^n,
+\qquad
+x_{i+1}=g(x_i).
+\]
+Für große \(n\) kann sie attraktiv sein. Der Nachteil ist, dass Konvergenz stark von der Wahl der Funktion \(g\) abhängt.
+
+\subsection{Einschub: Konvergenzordnung}
+
+Sei \((x_k)\) eine Folge mit
+\[
+x_k\to x^\ast.
+\]
+Man sagt, die Folge habe Konvergenzordnung \(q\geq 1\) und Konvergenzrate \(\mu\), wenn
+\[
+\boxed{
+\lim_{k\to\infty}
+\frac{|x_{k+1}-x^\ast|}
+{|x_k-x^\ast|^q}
+=
+\mu.
+}
+\]
+
+Für
+\[
+q=1
+\]
+spricht man von linearer Konvergenz. Dann ist \(\mu\in[0,1)\) die asymptotische Schrumpfungsrate des Fehlers. Falls zum Beispiel
+\[
+\mu=0.5,
+\]
+dann halbiert sich der Abstand zur Lösung asymptotisch in jedem Schritt.
+
+Für
+\[
+q=2
+\]
+spricht man von quadratischer Konvergenz. Dann gilt näherungsweise
+\[
+|x_{k+1}-x^\ast|
+\approx
+\mu |x_k-x^\ast|^2.
+\]
+Wenn beispielsweise
+\[
+|x_k-x^\ast|\leq 10^{-2}
+\]
+und \(\mu\approx 1\), dann ist
+\[
+|x_{k+1}-x^\ast|\lesssim 10^{-4}.
+\]
+Bei quadratischer Konvergenz verdoppelt sich daher ungefähr die Anzahl signifikanter Stellen pro Iteration.
+
+Für Fixpunktiteration hängt die Konvergenzrate direkt mit dem Kontraktionskoeffizienten zusammen. Durch eine geeignete Wahl von \(\alpha(x)\) in
+\[
+g(x)=x-\alpha(x)f(x)
+\]
+kann man die Konvergenzeigenschaften stark beeinflussen.
+
+\subsection{Bisektionsverfahren}
+
+\subsubsection{Grundidee}
+
+Das Bisektionsverfahren ist ein robustes Verfahren zur Nullstellensuche für stetige Funktionen
+\[
+f:[a,b]\to\mathbb{R}.
+\]
+Die zentrale Voraussetzung ist:
+\[
+f(a)f(b)<0.
+\]
+Dann haben \(f(a)\) und \(f(b)\) unterschiedliche Vorzeichen. Nach dem Zwischenwertsatz existiert mindestens ein
+\[
+x^\ast\in[a,b]
+\]
+mit
+\[
+f(x^\ast)=0.
+\]
+
+Das Verfahren halbiert nun iterativ das Intervall. Der Mittelpunkt ist
+\[
+m=\frac{a+b}{2}.
+\]
+Dann prüft man, in welchem Teilintervall der Vorzeichenwechsel liegt.
+
+Falls
+\[
+f(a)f(m)<0,
+\]
+dann liegt eine Nullstelle in \([a,m]\), und man setzt
+\[
+b\leftarrow m.
+\]
+Andernfalls liegt der Vorzeichenwechsel in \([m,b]\), und man setzt
+\[
+a\leftarrow m.
+\]
+Dadurch bleibt die Nullstelle in jeder Iteration im aktuellen Intervall eingeschlossen.
+
+\subsubsection{Algorithmus}
+
+Gegeben seien
+\[
+a_{\mathrm{init}}<b_{\mathrm{init}},
+\qquad
+f(a_{\mathrm{init}})f(b_{\mathrm{init}})<0,
+\]
+sowie
+\[
+\varepsilon>0,\qquad \delta>0,\qquad I\in\mathbb{N}.
+\]
+
+Initialisierung:
+\[
+a\leftarrow a_{\mathrm{init}},
+\qquad
+b\leftarrow b_{\mathrm{init}},
+\qquad
+\text{flag}\leftarrow 0.
+\]
+
+Für
+\[
+i=0,1,\dots,I
+\]
+berechnet man
+\[
+m=\frac{a+b}{2}.
+\]
+Falls
+\[
+f(a)f(m)<0,
+\]
+setzt man
+\[
+b\leftarrow m.
+\]
+Sonst setzt man
+\[
+a\leftarrow m.
+\]
+
+Die Abbruchregel lautet:
+\[
+\boxed{
+|b-a|
+\leq
+\varepsilon(1+|a|+|b|).
+}
+\]
+Nach dem Abbruch prüft man zusätzlich:
+\[
+|f(m)|\leq \delta.
+\]
+Falls ja, setzt man
+\[
+\text{flag}\leftarrow 2.
+\]
+Der Algorithmus gibt \(m\) und \(\text{flag}\) zurück.
+
+\subsubsection{MATLAB-Implementierung}
+
+Eine mögliche MATLAB-Implementierung ist:
+
+\begin{verbatim}
+function [x,fx,ef] = fbisection(f,x,tole,told,max_iter)
+
+% check initial values
+a = x(1); 
+fa = f(a); 
+ef = 0;
+
+if abs(fa) <= told
+    disp('abs(fa) less than tolerance')
+    x = a; 
+    fx = fa; 
+    ef = 2;
+    return
+end
+
+b = x(2); 
+fb = f(b);
+
+if abs(fb) <= told
+    disp('abs(fb) less than tolerance')
+    x = b; 
+    fx = fb; 
+    ef = 2;
+    return
+end
+
+% check initialization
+if fb*fa > 0
+    disp('initial [a,b] does not bracket a root')
+    x = -Inf; 
+    fx = -Inf; 
+    ef = 0;
+    return
+end
+
+% bisection
+for iter = 1:max_iter
+
+    xm = (a+b)/2; 
+    fm = f(xm);
+
+    if fa*fm < 0
+        b = xm; 
+        fb = fm;
+    else
+        a = xm; 
+        fa = fm;
+    end
+
+    if abs(b-a) <= tole*(1+abs(a)+abs(b))
+        disp('distance of x is small')
+        ef = 1;
+        break
+    end
+end
+
+x = xm; 
+fx = fm;
+
+if abs(fm) <= told
+    disp('successful convergence')
+    ef = 2;
+end
+
+end
+\end{verbatim}
+
+\subsubsection{Bemerkungen zur Bisektion}
+
+Das Bisektionsverfahren ist sehr robust, wenn die Startbedingungen erfüllt sind. Es benötigt nur Stetigkeit und ein Intervall, das eine Nullstelle bracketed. Der Nachteil ist die langsame, lineare Konvergenz. Außerdem ist das Verfahren im Allgemeinen nicht sinnvoll auf mehrdimensionale Probleme übertragbar.
+
+Die Methode nutzt keine Ableitungen und keine Krümmungsinformation. Sie ist daher ein topologisches Verfahren: Wenn ein stetiger Graph von negativ nach positiv wechselt, muss er die \(x\)-Achse schneiden.
+
+\subsection{Sekantenverfahren}
+
+\subsubsection{Grundidee}
+
+Das Sekantenverfahren ersetzt das nichtlineare Problem lokal durch ein lineares Problem. Man startet mit zwei Punkten
+\[
+x_1,\qquad x_2
+\]
+und den zugehörigen Funktionswerten
+\[
+f(x_1),\qquad f(x_2).
+\]
+Die Sekante durch diese Punkte hat Steigung
+\[
+m=
+\frac{f(x_2)-f(x_1)}{x_2-x_1}.
+\]
+Man approximiert
+\[
+f(x)\approx f(x_2)+m(x-x_2).
+\]
+Die Nullstelle dieser linearen Approximation erfüllt
+\[
+f(x_2)+m(x-x_2)=0.
+\]
+Also
+\[
+x=x_2-\frac{f(x_2)}{m}.
+\]
+Einsetzen von \(m\) ergibt
+\[
+x=x_2-
+\frac{x_2-x_1}{f(x_2)-f(x_1)}
+f(x_2).
+\]
+
+Die Iterationsregel lautet daher:
+\[
+\boxed{
+x_{i+1}
+=
+x_i
+-
+\frac{x_i-x_{i-1}}
+{f(x_i)-f(x_{i-1})}
+f(x_i).
+}
+\]
+
+\subsubsection{Interpretation}
+
+Das Sekantenverfahren ist eng mit dem Newton-Verfahren verwandt. Newton verwendet die exakte Ableitung \(f'(x_i)\). Das Sekantenverfahren ersetzt sie durch den Differenzenquotienten
+\[
+f'(x_i)
+\approx
+\frac{f(x_i)-f(x_{i-1})}{x_i-x_{i-1}}.
+\]
+Damit benötigt das Sekantenverfahren keine analytische Ableitung, aber zwei Startwerte.
+
+\subsubsection{Algorithmus}
+
+Gegeben seien
+\[
+x_0,\qquad x_1,\qquad f,\qquad \varepsilon,\qquad \delta,\qquad I.
+\]
+Für
+\[
+i=1,2,\dots,I
+\]
+berechnet man
+\[
+x_{i+1}
+=
+x_i
+-
+\frac{x_i-x_{i-1}}
+{f(x_i)-f(x_{i-1})}
+f(x_i).
+\]
+Dann prüft man
+\[
+|x_{i+1}-x_i|
+\leq
+\varepsilon(1+|x_{i+1}|).
+\]
+Falls ja, setzt man
+\[
+x^\ast\leftarrow x_{i+1},
+\qquad
+\text{flag}\leftarrow 1.
+\]
+Nach dem Abbruch prüft man
+\[
+|f(x_{i+1})|\leq \delta.
+\]
+Falls ja:
+\[
+\text{flag}\leftarrow 2.
+\]
+
+\subsubsection{Eigenschaften}
+
+Die Konvergenz des Sekantenverfahrens ist nicht garantiert. Die Startwerte müssen hinreichend nahe an der Lösung liegen. Wenn das Verfahren konvergiert, ist es meist schneller als Bisektion. Die Konvergenzordnung ist ungefähr
+\[
+q\approx 1.618.
+\]
+Das Verfahren approximiert \(f\) lokal durch ein Polynom erster Ordnung, also durch eine Gerade. Es ist außerdem ein Baustein komplexerer Routinen, insbesondere von Brent's Methode. In mehrdimensionalen Problemen erscheint eine verwandte Idee im Broyden-Verfahren.
+
+\subsection{Brent-Verfahren}
+
+\subsubsection{Grundidee}
+
+Brent's Methode kombiniert die Robustheit des Bisektionsverfahrens mit der höheren Geschwindigkeit von Interpolationsverfahren. Das Ziel ist:
+\[
+\text{Robustheit der Bisektion}
+\quad+\quad
+\text{schnellere Konvergenz durch Interpolation}.
+\]
+
+Die Methode hält in jeder Iteration ein Intervall aufrecht, das eine Nullstelle bracketed. Gleichzeitig versucht sie, bessere Kandidaten als den Mittelpunkt zu verwenden.
+
+\subsubsection{Iterationselemente}
+
+Die erste Iteration verwendet typischerweise einen Sekantenschritt. In späteren Iterationen verwendet das Verfahren eine Approximation durch ein Polynom zweiter Ordnung. Dazu braucht man drei Punkte.
+
+Die Idee besteht darin, eine bessere lokale Approximation der Nullstelle zu erhalten als durch reine Intervallhalbierung. In der Vorlesung wird dies als inverse quadratische Approximation angekündigt; die Details gehören zur späteren Interpolationsvorlesung.
+
+\subsubsection{Fallback-Logik}
+
+Brent's Methode fällt auf einfachere Verfahren zurück, wenn die schnelle Approximation nicht zuverlässig ist.
+
+Ein Rückfall auf das Sekantenverfahren erfolgt, wenn inverse quadratische Approximation nicht möglich ist, etwa weil Punkte zusammenfallen und effektiv nur zwei verschiedene Punkte verfügbar sind.
+
+Ein Rückfall auf Bisektion erfolgt, wenn:
+\[
+\text{der neue Kandidat außerhalb des Bracketing-Intervalls liegt,}
+\]
+\[
+\text{der neue Kandidat keine Verbesserung des Funktionswerts bringt,}
+\]
+oder
+\[
+\text{das Intervall nicht schnell genug schrumpft.}
+\]
+Dadurch bleibt das Verfahren robust.
+
+\subsubsection{MATLAB-Bezug}
+
+In MATLAB ist die Routine
+\[
+\texttt{fzero}
+\]
+mit diesem Methodentyp verbunden. Praktisch ist \texttt{fzero} daher für viele eindimensionale Nullstellensuchen eine gute Standardwahl, insbesondere wenn man ein Bracketing-Intervall oder einen geeigneten Startwert hat.
+
+\subsection{Newton-Verfahren}
+
+\subsubsection{Grundidee}
+
+Das Newton-Verfahren, auch Newton-Raphson-Verfahren genannt, verwendet die lokale lineare Approximation einer differenzierbaren Funktion.
+
+Sei
+\[
+f:\mathbb{R}\to\mathbb{R}
+\]
+differenzierbar. Am aktuellen Punkt \(x_i\) approximiert man \(f\) durch die Taylor-Approximation erster Ordnung:
+\[
+f(x)
+\approx
+f(x_i)+f'(x_i)(x-x_i).
+\]
+Nun setzt man diese lineare Approximation gleich Null:
+\[
+f(x_i)+f'(x_i)(x-x_i)=0.
+\]
+Daraus folgt
+\[
+f'(x_i)(x-x_i)=-f(x_i).
+\]
+Falls \(f'(x_i)\neq 0\), erhält man
+\[
+x-x_i=-\frac{f(x_i)}{f'(x_i)}.
+\]
+Also lautet die Newton-Iteration:
+\[
+\boxed{
+x_{i+1}
+=
+x_i-\frac{f(x_i)}{f'(x_i)}.
+}
+\]
+Äquivalent schreibt man:
+\[
+x_{i+1}
+=
+x_i-f'(x_i)^{-1}f(x_i).
+\]
+
+\subsubsection{Geometrische Interpretation}
+
+Newton ersetzt den Graphen von \(f\) im Punkt \(x_i\) durch seine Tangente. Der Schnittpunkt dieser Tangente mit der \(x\)-Achse ist der nächste Iterationspunkt \(x_{i+1}\).
+
+Wenn der Graph nahe der Nullstelle gut durch seine Tangente approximiert wird, konvergiert Newton sehr schnell. Wenn die Tangente ungünstig liegt, etwa wegen starker Krümmung, flacher Ableitung oder schlechtem Startwert, kann Newton divergieren oder in unerwünschte Bereiche springen.
+
+\subsubsection{Algorithmus}
+
+Gegeben seien
+\[
+f,\qquad f',\qquad x_0,\qquad \varepsilon,\qquad \delta,\qquad I.
+\]
+Initialisierung:
+\[
+x^\ast\leftarrow 0,
+\qquad
+\text{flag}\leftarrow 0.
+\]
+Für
+\[
+i=0,1,\dots,I
+\]
+berechnet man
+\[
+x_{i+1}
+=
+x_i-f'(x_i)^{-1}f(x_i).
+\]
+Dann prüft man
+\[
+|x_{i+1}-x_i|
+\leq
+\varepsilon(1+|x_{i+1}|).
+\]
+Falls ja:
+\[
+x^\ast\leftarrow x_{i+1},
+\qquad
+\text{flag}\leftarrow 1.
+\]
+Nach dem Loop wird geprüft:
+\[
+|f(x_{i+1})|\leq \delta.
+\]
+Falls ja:
+\[
+\text{flag}\leftarrow 2.
+\]
+
+\subsubsection{MATLAB-Implementierung}
+
+Eine mögliche MATLAB-Implementierung lautet:
+
+\begin{verbatim}
+function [x,fx,ef] = fnewton(f,x,tole,told,max_iter)
+
+% Newton's method for root-finding
+ef = 0;
+
+for iter = 1:max_iter
+
+    [fx,dfx] = f(x);
+    xp = x - dfx\fx; % same as xp = x - inv(dfx)*fx
+
+    if norm(x-xp) <= tole*(1+norm(xp))
+        ef = 1;
+        break;
+    else
+        x = xp;
+    end
+end
+
+if norm(fx) <= told
+    ef = 2;
+end
+
+end
+\end{verbatim}
+
+Die Zeile
+\[
+\texttt{xp = x - dfx\textbackslash fx}
+\]
+bedeutet in MATLAB, dass das lineare System
+\[
+dfx\cdot s=fx
+\]
+gelöst wird. Im eindimensionalen Fall ist dies einfach
+\[
+s=\frac{fx}{dfx}.
+\]
+Dann gilt
+\[
+x_{p}=x-s.
+\]
+
+In höherer Dimension ist \(dfx\) die Jacobi-Matrix \(J_f(x)\), und man löst
+\[
+J_f(x_i)s_i=f(x_i),
+\]
+um dann
+\[
+x_{i+1}=x_i-s_i
+\]
+zu setzen.
+
+\subsubsection{Eigenschaften}
+
+Das Newton-Verfahren benötigt kein Bracketing der Nullstelle, obwohl Bracketing aus Robustheitsgründen dennoch hilfreich sein kann. Das Verfahren lässt sich direkt auf mehrdimensionale Probleme erweitern. Es benötigt jedoch die erste Ableitung beziehungsweise im mehrdimensionalen Fall die Jacobi-Matrix.
+
+Wenn die Voraussetzungen günstig sind, konvergiert Newton quadratisch. Das macht das Verfahren sehr schnell. Allerdings kann es bei schlechten Startwerten, flachen Ableitungen, starken Krümmungen oder mehreren Nullstellen scheitern.
+
+\subsection{Theoretischer Hintergrund zur Konvergenz von Newton}
+
+\subsubsection{Newton als Fixpunktiteration}
+
+Newton ist ein Spezialfall der Fixpunktiteration. Setze
+\[
+\alpha(x)=f'(x)^{-1}.
+\]
+Dann ist
+\[
+g(x)=x-\alpha(x)f(x)
+\]
+gleich
+\[
+g(x)=x-\frac{f(x)}{f'(x)}.
+\]
+Die Newton-Iteration ist also
+\[
+x_{i+1}=g(x_i).
+\]
+
+\subsubsection{Ableitung der Newton-Fixpunktfunktion}
+
+Für
+\[
+g(x)=x-\frac{f(x)}{f'(x)}
+\]
+gilt:
+\[
+g'(x)
+=
+1-
+\left(\frac{f(x)}{f'(x)}\right)'.
+\]
+Mit der Quotientenregel:
+\[
+\left(\frac{f(x)}{f'(x)}\right)'
+=
+\frac{f'(x)f'(x)-f(x)f''(x)}
+{(f'(x))^2}.
+\]
+Also:
+\[
+\left(\frac{f(x)}{f'(x)}\right)'
+=
+1-
+\frac{f(x)f''(x)}{(f'(x))^2}.
+\]
+Damit:
+\[
+g'(x)
+=
+\frac{f(x)f''(x)}
+{(f'(x))^2}.
+\]
+Also gilt:
+\[
+\boxed{
+|g'(x)|
+=
+\left|
+\frac{f''(x)f(x)}
+{[f'(x)]^2}
+\right|.
+}
+\]
+
+Um den Banachschen Fixpunktsatz anwenden zu können, benötigt man lokal eine Kontraktion:
+\[
+\boxed{
+\left|
+\frac{f''(x)f(x)}
+{[f'(x)]^2}
+\right|
+<1.
+}
+\]
+
+\subsubsection{Lokale Konvergenzbedingungen}
+
+Hinreichende Bedingungen für lokale Konvergenz in einer Umgebung
+\[
+B_\varepsilon(x^\ast)
+\]
+einer Nullstelle \(x^\ast\) sind:
+
+\[
+f\in C^2(B_\varepsilon(x^\ast)),
+\]
+\[
+|g'(x)|<1
+\qquad
+\text{für alle }
+x\in B_\varepsilon(x^\ast),
+\]
+und
+\[
+f'(x)\neq 0
+\qquad
+\text{für alle }
+x\in B_\varepsilon(x^\ast)\setminus\{x^\ast\}.
+\]
+
+Für quadratische Konvergenz wird zusätzlich eine Bedingung der Form
+\[
+M\varepsilon<1
+\]
+angegeben, wobei
+\[
+M=
+\frac12
+\left(
+\sup_{x,y\in B_\varepsilon(x^\ast)}
+\frac{|f''(x)|}{|f'(y)|}
+\right).
+\]
+Diese Bedingung impliziert insbesondere:
+\[
+f'(x^\ast)\neq 0.
+\]
+
+Die Intuition ist: Die Nullstelle sollte einfach sein, damit der Newton-Schritt
+\[
+\frac{f(x)}{f'(x)}
+\]
+nicht explodiert. Außerdem darf die Funktion in der relevanten Umgebung nicht zu stark gekrümmt sein, weil sonst Zyklen, Sprünge oder Konvergenz zu unerwünschten Punkten auftreten können.
+
+\subsubsection{Beispiel: \(f(x)=x^8\)}
+
+Betrachte
+\[
+f(x)=x^8.
+\]
+Dann ist
+\[
+x^\ast=0
+\]
+eine Nullstelle. Es gilt
+\[
+f'(x)=8x^7,
+\]
+also
+\[
+f'(0)=0.
+\]
+Die Nullstelle ist also keine einfache Nullstelle.
+
+Für \(x\neq 0\) lautet die Newton-Fixpunktabbildung:
+\[
+g(x)
+=
+x-\frac{f(x)}{f'(x)}
+=
+x-\frac{x^8}{8x^7}
+=
+x-\frac{x}{8}
+=
+\frac78x.
+\]
+Also gilt
+\[
+g'(x)=\frac78.
+\]
+Damit ist
+\[
+|g'(x)|=\frac78<1.
+\]
+Newton konvergiert daher für alle Startwerte \(x_0\neq 0\) gegen \(0\).
+
+Die Konvergenz ist aber nicht quadratisch, weil
+\[
+f'(x^\ast)=f'(0)=0.
+\]
+Die Bedingung für quadratische Konvergenz ist verletzt. Das Beispiel zeigt: Newton kann auch bei mehrfachen Nullstellen konvergieren, verliert dort aber typischerweise seine quadratische Konvergenzordnung.
+
+\subsection{Schlussbemerkungen}
+
+Die vorgestellten Verfahren beantworten für sich genommen nicht die folgenden Fragen:
+\[
+\text{Existiert eine Lösung?}
+\]
+\[
+\text{Ist die Lösung eindeutig?}
+\]
+\[
+\text{Wie viele Lösungen gibt es?}
+\]
+Ohne weitere mathematische Struktur ist es schwierig, alle Lösungen eines nichtlinearen Problems zu finden.
+
+Daher ist Sensitivitätsanalyse wichtig. Man sollte verschiedene Startwerte \(x_0\) ausprobieren und prüfen, ob das Verfahren zu unterschiedlichen Lösungen konvergiert. Das ist insbesondere relevant bei multiplen Lösungen und bei Fragen der Stabilität des ökonomischen Modells oder des numerischen Algorithmus.
+
+\subsection{Entscheidungsschema für die Methodenwahl}
+
+Ein praktisches Entscheidungsschema lautet:
+
+\begin{enumerate}
+    \item Ist \(f\) glatt, mindestens \(C^1\)?
+    \begin{enumerate}
+        \item Falls nein: Verwende Brent's Methode oder Bisektion.
+        \item Falls ja: Prüfe, ob eine analytische Ableitung verfügbar ist.
+    \end{enumerate}
+
+    \item Ist \(f'\) analytisch verfügbar?
+    \begin{enumerate}
+        \item Falls ja: Verwende Newton-Raphson, möglichst mit Bookkeeping der Bounds.
+        \item Falls nein: Verwende Brent's Methode.
+    \end{enumerate}
+\end{enumerate}
+
+Kurz:
+\[
+\text{Ableitung verfügbar und Funktion glatt}
+\quad\Longrightarrow\quad
+\text{Newton}.
+\]
+\[
+\text{Keine Ableitung oder höhere Robustheit gewünscht}
+\quad\Longrightarrow\quad
+\text{Brent}.
+\]
+\[
+\text{Nur Stetigkeit und Bracketing verfügbar}
+\quad\Longrightarrow\quad
+\text{Bisektion}.
+\]
+
+\subsection{Zusatzmaterial: Monopoly-Beispiel}
+
+Im Appendix wird ein Monopolproblem formuliert. Sei
+\[
+Q
+\]
+die Menge eines Konsumguts,
+\[
+P(Q)
+\]
+die inverse Nachfragefunktion und
+\[
+C(Q)
+\]
+die Kostenfunktion.
+
+Ein monopolistisches Unternehmen maximiert
+\[
+\max_{Q\geq 0}\Pi(Q),
+\]
+wobei
+\[
+\Pi(Q)=P(Q)Q-C(Q).
+\]
+Die First-Order Condition lautet:
+\[
+\Pi'(Q)=0.
+\]
+Da
+\[
+\Pi'(Q)=P'(Q)Q+P(Q)-C'(Q),
+\]
+erhält man:
+\[
+\boxed{
+P'(Q)Q+P(Q)=C'(Q).
+}
+\]
+Die optimale Produktionsmenge \(Q^\ast\) löst also diese Gleichung.
+
+Als Beispiel werden Funktionen der Form
+\[
+P(Q)=Q^{-1/\lambda},
+\qquad
+C(Q)=\frac12\zeta Q^2
+\]
+genannt. Die zugehörige First-Order Condition ist nichtlinear. Der sichere methodische Punkt ist: Monopolistische Optimierungsprobleme führen über ihre First-Order Conditions häufig auf nichtlineare Gleichungen, die numerisch als Root-Finding-Probleme gelöst werden.
+
+\subsection{Zentrale Formeln und Aussagen}
+
+\subsubsection{Root-Finding-Problem}
+
+\[
+\boxed{
+f(x^\ast)=0.
+}
+\]
+
+\subsubsection{Allgemeine Iteration}
+
+\[
+\boxed{
+x_{i+1}=h(x_i).
+}
+\]
+
+\subsubsection{Empfohlene Abbruchregel}
+
+\[
+\boxed{
+\|x_{i+1}-x_i\|
+\leq
+\varepsilon(1+\|x_{i+1}\|).
+}
+\]
+
+\subsubsection{Residualprüfung}
+
+\[
+\boxed{
+\|f(x_{i+1})\|\leq \delta.
+}
+\]
+
+\subsubsection{Fixpunktumformung}
+
+\[
+\boxed{
+g(x)=x-\alpha(x)f(x),
+\qquad
+\alpha(x)\neq 0.
+}
+\]
+Dann:
+\[
+\boxed{
+g(x)=x
+\quad\Longleftrightarrow\quad
+f(x)=0.
+}
+\]
+
+\subsubsection{Fixpunktiteration}
+
+\[
+\boxed{
+x_{i+1}=g(x_i).
+}
+\]
+
+\subsubsection{Kontraktionsbedingung}
+
+\[
+\boxed{
+|g'(x)|<1.
+}
+\]
+
+\subsubsection{Konvergenzordnung}
+
+\[
+\boxed{
+\lim_{k\to\infty}
+\frac{|x_{k+1}-x^\ast|}
+{|x_k-x^\ast|^q}
+=
+\mu.
+}
+\]
+
+\subsubsection{Bisektion}
+
+\[
+\boxed{
+f(a)f(b)<0.
+}
+\]
+\[
+\boxed{
+m=\frac{a+b}{2}.
+}
+\]
+
+\subsubsection{Sekantenverfahren}
+
+\[
+\boxed{
+x_{i+1}
+=
+x_i
+-
+\frac{x_i-x_{i-1}}
+{f(x_i)-f(x_{i-1})}
+f(x_i).
+}
+\]
+
+\subsubsection{Newton-Verfahren}
+
+\[
+\boxed{
+x_{i+1}
+=
+x_i-\frac{f(x_i)}{f'(x_i)}.
+}
+\]
+
+\subsubsection{Newton als Fixpunktiteration}
+
+\[
+\boxed{
+g(x)=x-\frac{f(x)}{f'(x)}.
+}
+\]
+\[
+\boxed{
+g'(x)
+=
+\frac{f(x)f''(x)}
+{[f'(x)]^2}.
+}
+\]
+
+\subsubsection{Einfache Nullstelle als zentrale Newton-Bedingung}
+
+\[
+\boxed{
+f'(x^\ast)\neq 0.
+}
+\]
+
+\subsection{Intuition und Zusammenhang}
+
+Die behandelten Verfahren unterscheiden sich darin, welche Information sie über \(f\) verwenden.
+
+Das Bisektionsverfahren verwendet nur Stetigkeit und Vorzeichenwechsel. Es ist robust, aber langsam.
+
+Die Fixpunktiteration verwendet eine selbstgewählte Umformung
+\[
+g(x)=x.
+\]
+Ihre Qualität hängt stark davon ab, ob \(g\) kontrahierend ist.
+
+Das Sekantenverfahren verwendet eine lokale lineare Approximation durch zwei Funktionswerte. Es benötigt keine analytische Ableitung, ist aber nicht garantiert konvergent.
+
+Das Newton-Verfahren verwendet die Tangente, also die analytische Ableitung. Es ist oft sehr schnell, aber empfindlich gegenüber Startwerten und Krümmung.
+
+Brent's Methode kombiniert Intervallsicherung mit schnelleren Interpolationsschritten. Sie ist daher oft eine gute praktische Standardmethode für eindimensionale Nullstellensuche.
+
+Geometrisch kann man die Verfahren so einordnen:
+\[
+\text{Bisektion: Intervallhalbierung,}
+\]
+\[
+\text{Sekante: Nullstelle einer Gerade durch zwei Punkte,}
+\]
+\[
+\text{Newton: Nullstelle der Tangente,}
+\]
+\[
+\text{Fixpunktiteration: Schnitt von } y=g(x) \text{ und } y=x,
+\]
+\[
+\text{Brent: Interpolation plus Sicherheitsintervall.}
+\]
+
+\subsection{Prüfungsrelevante Kerngedanken}
+
+Nach dieser Vorlesung sollte man sicher können:
+
+\begin{enumerate}
+    \item Ein ökonomisches Gleichgewichtsproblem als Nullstellenproblem formulieren.
+
+    \item Die Gleichung
+    \[
+    a-bq=c+dq^\psi
+    \]
+    in die Form
+    \[
+    bq+dq^\psi-(a-c)=0
+    \]
+    bringen.
+
+    \item Erklären, warum nichtlineare Gleichungen im Allgemeinen iterative numerische Verfahren benötigen.
+
+    \item Die empfohlene Abbruchregel angeben:
+    \[
+    \|x_{i+1}-x_i\|
+    \leq
+    \varepsilon(1+\|x_{i+1}\|).
+    \]
+
+    \item Die Residualprüfung angeben:
+    \[
+    \|f(x_{i+1})\|\leq \delta.
+    \]
+
+    \item Das Nullstellenproblem in ein Fixpunktproblem umformen:
+    \[
+    g(x)=x-\alpha(x)f(x).
+    \]
+
+    \item Die Kontraktionsbedingung
+    \[
+    |g'(x)|<1
+    \]
+    als zentrale Konvergenzidee der Fixpunktiteration erklären.
+
+    \item Die Konvergenzordnung definieren:
+    \[
+    \lim_{k\to\infty}
+    \frac{|x_{k+1}-x^\ast|}
+    {|x_k-x^\ast|^q}
+    =
+    \mu.
+    \]
+
+    \item Das Bisektionsverfahren aus dem Zwischenwertsatz herleiten.
+
+    \item Die Sekantenformel herleiten:
+    \[
+    x_{i+1}
+    =
+    x_i
+    -
+    \frac{x_i-x_{i-1}}
+    {f(x_i)-f(x_{i-1})}
+    f(x_i).
+    \]
+
+    \item Die Newton-Formel aus der Taylor-Approximation erster Ordnung herleiten:
+    \[
+    x_{i+1}=x_i-\frac{f(x_i)}{f'(x_i)}.
+    \]
+
+    \item Die Verfahren vergleichen:
+    \[
+    \text{Bisektion: robust, langsam,}
+    \]
+    \[
+    \text{Sekante: schneller, keine Ableitung, aber nicht garantiert,}
+    \]
+    \[
+    \text{Newton: sehr schnell, braucht Ableitung, startwertsensitiv,}
+    \]
+    \[
+    \text{Brent: robuste Hybridmethode.}
+    \]
+
+    \item Verstehen, warum Newton bei einfachen Nullstellen quadratisch konvergieren kann, bei mehrfachen Nullstellen aber typischerweise nicht.
+
+    \item Für
+    \[
+    f(x)=x^8
+    \]
+    erklären können, dass
+    \[
+    g(x)=\frac78x
+    \]
+    gilt und Newton daher für \(x_0\neq 0\) konvergiert, aber nicht quadratisch, weil
+    \[
+    f'(0)=0.
+    \]
+
+    \item Verschiedene Startwerte testen, weil die Verfahren allein keine Garantie über Existenz, Eindeutigkeit oder Anzahl der Lösungen liefern.
+\end{enumerate}
+
+
+
+\pagebreak
+\printbibliography
+\end{document}

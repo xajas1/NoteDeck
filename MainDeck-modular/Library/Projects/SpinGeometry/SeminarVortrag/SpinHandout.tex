@@ -1,0 +1,517 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Inhaltsverzeichnis für Pakettypen (nur für Übersicht im Header, wird nicht im Dokument angezeigt)
+% 1. Seitenlayout und Ränder
+% 2. Sprache und Zeichensatz
+% 3. Mathematik und Theorem-Umgebungen
+% 4. Eigene Makros
+% 5. Diagramme und Grafiken
+% 6. Tabellen und Aufzählungen
+% 7. Inhaltsverzeichnis
+% 8. Abschnittsüberschriften
+% 9. Abstrakt-Umgebung
+% 10. Todos/Notizen
+% 11. Rahmen/Box-Umgebungen
+% 12. Python-Integration
+% 13. Literaturverwaltung
+% 14. Hyperlinks
+% 15. Absatzeinstellungen
+% 16. Umgebungen
+% 17  Graphik
+% 18  Extra
+% 00. Titel und Autor
+
+\usepackage{slashed}
+
+% --- 1. Seitenlayout und Ränder ---
+\usepackage[margin=3cm]{geometry}
+
+% --- 2. Sprache und Zeichensatz ---
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- 3. Mathematik und Theorem-Umgebungen ---
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\DeclareMathOperator{\WF}{WF}
+
+% --- 4. Eigene Makros ---
+\usepackage{xcolor}
+\newcommand{\SKP}{\langle\cdot,\cdot\rangle}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\Ad}{\operatorname{Ad}}
+\newcommand{\ad}{\operatorname{ad}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\QU}{\mathbb{H}}
+\newcommand{\Cinf}{C^{\infty}}
+\newcommand{\Mod}{\mathrm{Mod}}
+\newcommand{\Alg}{\mathrm{Alg}}
+\newcommand{\Diff}{\mathrm{Diff}}
+\newcommand{\Iso}{\mathrm{Iso}}
+\newcommand{\Aut}{\mathrm{Aut}}
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\Cl}{\mathrm{Cl}}
+\newcommand{\entwurf}[1]{\textcolor{red}{#1}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\Mat}{\mathrm{Mat}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\SO}{\mathrm{SO}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\Sp}{\mathrm{Sp}}
+\newcommand{\Spin}{\mathrm{Spin}}
+\newcommand{\Pin}{\mathrm{Pin}}
+\newcommand{\Lor}{\mathrm{Lor}}
+\newcommand{\Ogroup}{\mathrm{O}}
+\newcommand{\U}{\mathrm{U}}
+\newcommand{\CP}{\mathbb{C} P}
+\newcommand{\RP}{\mathbb{R} P}
+
+% --- 5. Diagramme und Grafiken ---
+\usepackage{graphicx}
+\graphicspath{{../../Library/Images/}}
+\usepackage[export]{adjustbox}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathreplacing, arrows.meta, positioning}
+\usepackage{tikz-cd}
+
+% --- 6. Tabellen und Aufzählungen ---
+\usepackage{enumitem}
+\setlist[itemize]{left=0.5cm}
+
+\newenvironment{romanenum}[1][]
+  {%
+    \ifx&#1&
+    \else
+      \textbf{#1}\quad
+    \fi
+    \begin{enumerate}[label=\roman*)]
+  }
+  {%
+    \end{enumerate}%
+  }
+
+% --- 7. Inhaltsverzeichnis ---
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\footnotesize}
+\renewcommand{\cftsubsecfont}{\footnotesize}
+\renewcommand{\cftsubsubsecfont}{\footnotesize}
+\renewcommand{\cftsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsecpagefont}{\footnotesize}
+\renewcommand{\cftsubsubsecpagefont}{\footnotesize}
+\usepackage{etoc}
+
+% --- 8. Abschnittsüberschriften ---
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection}{0.5em}{}
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+\setcounter{secnumdepth}{4}
+
+% --- 9. Abstrakt-Umgebung ---
+\usepackage{changepage}
+\renewenvironment{abstract}
+  {
+    \begin{adjustwidth}{1.5cm}{1.5cm}
+    \small
+    \textsc{Abstract. –}%
+  }
+  {
+    \end{adjustwidth}
+  }
+
+% --- 10. Todos/Notizen ---
+\usepackage{todonotes}
+% Hellblau definieren
+\definecolor{hellblau}{rgb}{0.3,0.6,1}
+\newenvironment{note}{\par\begingroup\color{hellblau}\itshape}{\par\endgroup}
+
+% --- 11. Rahmen/Box-Umgebungen ---
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\colorlet{shadecolor}{gray!25}
+
+\newenvironment{customTheorem}
+  {\vspace{10pt}%
+   \begin{mdframed}[
+     backgroundcolor=gray!20,
+     linewidth=0pt,
+     innertopmargin=10pt,
+     innerbottommargin=10pt,
+     skipabove=\dimexpr\topsep+\ht\strutbox\relax,
+     skipbelow=\topsep,
+   ]}
+  {\end{mdframed}
+   \vspace{10pt}%
+  }
+
+% --- 12. Python-Integration ---
+% (Deaktiviert in dieser Version, aktiviere bei Bedarf)
+% \usepackage{pythontex}
+% \usepackage[makestderr]{pythontex}
+
+% --- 13. Literaturverwaltung ---
+\usepackage{csquotes}
+\usepackage[backend=biber, style=alphabetic, citestyle=alphabetic]{biblatex}
+\addbibresource{bibliography.bib}
+
+% --- 14. Hyperlinks ---
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks   = true,
+  urlcolor     = blue,
+  linkcolor    = blue,
+  citecolor    = blue,
+  frenchlinks  = true
+}
+
+% --- 15. Absatzeinstellungen ---
+\usepackage[parfill]{parskip}
+\sloppy
+
+% --- 16. Umgebungen ---
+\usepackage{thmtools}
+
+\newcommand{\CustomHeading}[3]{%
+  \par\medskip\noindent%
+  \textbf{#1 #2} \textnormal{(#3)}.\enskip%
+}
+
+\newenvironment{DEF}[2]{\CustomHeading{Definition}{#1}{#2}}{}
+\newenvironment{PROP}[2]{\CustomHeading{Proposition}{#1}{#2}}{}
+\newenvironment{THEO}[2]{\CustomHeading{Theorem}{#1}{#2}}{}
+\newenvironment{LEM}[2]{\CustomHeading{Lemma}{#1}{#2}}{}
+\newenvironment{KORO}[2]{\CustomHeading{Corollar}{#1}{#2}}{}
+\newenvironment{REM}[2]{\CustomHeading{Remark}{#1}{#2}}{}
+\newenvironment{EXA}[2]{\CustomHeading{Example}{#1}{#2}}{}
+\newenvironment{STUD}[2]{\CustomHeading{Study}{#1}{#2}}{}
+\newenvironment{CONC}[2]{\CustomHeading{Concept}{#1}{#2}}{}
+\newenvironment{OTH}[2]{\CustomHeading{Other}{#1}{#2}}{}
+\newenvironment{EXE}[2]{\CustomHeading{Exercise}{#1}{#2}}{}
+\newenvironment{MOT}[2]{\CustomHeading{Motivation}{#1}{#2}}{}
+\newenvironment{PROOF}[2]{\CustomHeading{Proof}{#1}{#2}}{}
+
+% --- Unit Umgebung für Source-Inhalte ---
+\usepackage{mdframed}
+\newmdenv[
+  linewidth=1pt,
+  topline=false,
+  bottomline=false,
+  rightline=false,
+  leftmargin=0cm,
+  rightmargin=0cm,
+  skipabove=10pt,
+  skipbelow=10pt,
+  innertopmargin=0.5\baselineskip,
+  innerbottommargin=0.5\baselineskip,
+  backgroundcolor=gray!10,
+  linecolor=gray
+]{unitbox}
+
+\newenvironment{unit}[1]
+  {\begin{unitbox}\textbf{Unit #1}\par\smallskip}
+  {\end{unitbox}}
+
+% --- 17. ... ---
+
+% --- 18. Extras ---
+\usepackage{stmaryrd}
+\usepackage{bbold}  % falls du \mathbb{1} nutzen willst
+
+\begin{document}
+
+\section{Einführung Riemannsche Spin-Geometrie (Handout)}
+
+\subsection{Bündeltheorie}
+
+\begin{DEF}{}{Faserbündel}
+Seien $E$, $M$ und $F$ glatte Mannigfaltigkeiten. Ein \emph{Faserbündel} mit Totalraum $E$, Basisraum $M$ und typischer Faser $F$
+ist eine glatte surjektive Abbildung
+\[
+\pi:E\to M,
+\]
+so dass es zu jedem $x\in M$ eine offene Umgebung $U\subset M$ und einen Diffeomorphismus
+\[
+\Phi_U:\pi^{-1}(U)\to U\times F
+\]
+gibt mit kommutierenden Diagramm
+\[
+\begin{tikzcd}
+\pi^{-1}(U) \arrow[r,"\Phi_U"] \arrow[d,"\pi"'] & U\times F \arrow[dl,"\operatorname{pr}_1"] \\
+U &
+\end{tikzcd}
+\]
+Insbesondere ist für jedes $y\in U$ die \emph{Faser} $E_y:=\pi^{-1}(y)$ \emph{über} $y$ isomorph zu $\{y\}\times F\cong F$.
+\end{DEF}
+
+\begin{DEF}{}{Vektorbündel}
+Ein \emph{Vektorbündel} ist ein Faserbündel $\pi:E\to M$ mit typischer Faser $V$ einem endlichdimensionalen Vektorraum $V$, sodass gilt:
+\begin{enumerate}
+  \item Jede Faser $E_x=\pi^{-1}(x)$ trägt die Struktur eines Vektorraums.
+  \item Die lokalen Trivialisierungen
+        \[
+        \Phi_U:\pi^{-1}(U)\to U\times V
+        \]
+        sind faserweise linear.
+\end{enumerate}
+\end{DEF}
+
+\begin{DEF}{}{Prinzipalbündel}
+Sei $G$ eine Lie-Gruppe. Ein \emph{Prinzipalbündel}
+mit Strukturgruppe $G$ ist ein Faserbündel $\pi:P\to M$ zusammen mit einer rechten Wirkung
+\[
+R: P\times G\to P,\qquad (p,g)\mapsto p\cdot g,
+\]
+so dass gilt:
+\begin{enumerate}
+    \item die Rechtswirkung \emph{erhält die Faser unter} $\pi$, d.h. 
+    \[
+    \begin{tikzcd}
+    P \arrow[r,"R_g"] \arrow[dr,"\pi"'] & P \arrow[d,"\pi"] \\
+    & M
+    \end{tikzcd}
+    \]
+    kommutiert für alle $g\in G$,
+    \item die Wirkung ist \emph{frei}, d.\,h.
+    \[
+    p\cdot g=p \;\Rightarrow\; g=e,
+    \]
+    \item die Wirkung ist auf jeder Faser $P_x:=\pi^{-1}(x)$ \emph{transitiv}, d.h. für alle $p,q\in P_x$ existiert ein $g\in G$, sodass 
+    $$p\cdot g=q$$
+    \item lokale Tivialisierungen $\Phi_u:\pi^{-1}(U)\to U\times G$ sind $G$-\emph{äquivariant}, d.h. das Diagramm
+    \[
+    \begin{tikzcd}
+    \pi^{-1}(U)\times G \arrow[r,"\ \ R_G\ "] \arrow[d,"\Phi_U\times \id_G"'] & \pi^{-1}(U) \arrow[d,"\Phi_U"] \\
+    (U\times G)\times G \arrow[r,"\ \ r_G\ "] & U\times G
+    \end{tikzcd}
+    \]
+    kommutiert bzw. es gilt $(x,h)\cdot g=(x,hg)$.
+\end{enumerate}
+\end{DEF}
+
+
+\begin{DEF}{}{Assoziiertes Vektorbündel}
+Sei \(\pi:P\to M\) ein Prinzipalbündel mit Strukturgruppe \(G\) und $\rho:G\to \GL(V)$ eine lineare Darstellung auf einem Vektorraum \(V\). Das \emph{assoziierte Vektorbündel}
+ist der Quotient
+\[
+P\times_\rho V:=(P\times V)/\sim,
+\]
+wobei
+\[
+(p,v)\sim (p\cdot g,\rho(g^{-1})v).
+\]
+Die Projektion
+\[
+[p,v]\mapsto \pi(p)
+\]
+macht \(P\times_\rho V\) zu einem Vektorbündel über \(M\) mit typischer Faser \(V\) und Vektorraumstruktur auf jeder Faser durch
+\[
+[p,v]+[p,w]:=[p,v+w],
+\qquad
+\lambda [p,v]:=[p,\lambda v].
+\]
+\end{DEF}
+
+
+
+\subsection{Clifford-Algebra von Vektorräumen mit symmetrischen Bilinearformen}
+
+\begin{DEF}{}{Unitale $\mathbb{K}$-Algebra}
+Eine \emph{unitale $\mathbb{K}$-Algebra} ist ein $\mathbb{K}$-Vektorraum $A$ zusammen mit
+einer bilinearen Multiplikation
+\[
+A\times A\to A,\qquad (a,b)\mapsto ab,
+\]
+so dass $A$ mit dieser Multiplikation ein assoziativer Ring ist mit einem Einselement
+\[
+1_A\in A \quad \text{ mit}\quad 1_Aa=a1_A=a
+\qquad\text{für alle }a\in A.
+\]
+\end{DEF}
+
+\begin{DEF}{}{Algebrenhomomorphismus}
+Seien $A$ und $B$ unitale $\mathbb{K}$-Algebren. Eine Abbildung $\varphi:A\to B$
+heißt \emph{$\mathbb{K}$-Algebrenhomomorphismus}, falls gilt:
+\begin{enumerate}
+    \item \(\varphi\) ist \(\mathbb{K}\)-linear,
+    \item \(\varphi\) ist multiplikativ, d.h.
+    \[
+    \varphi(ab)=\varphi(a)\varphi(b)
+    \qquad\text{für alle }a,b\in A,
+    \]
+    \item \(\varphi\) erhält das Einselement, d.h.
+    \[
+    \varphi(1_A)=1_B.
+    \]
+\end{enumerate}
+\end{DEF}
+
+\begin{DEF}{}{Clifford-Algebra von \((V,\beta)\)}
+Sei \(\mathbb{K}=\mathbb{R}\) oder \(\mathbb{C}\), und sei \(V\) ein endlichdimensionaler \(\mathbb{K}\)-Vektorraum, ausgestattet mit einer symmetrischen Bilinearform
+\[
+\beta:V\times V\to \mathbb{K}.
+\]
+
+\begin{enumerate}
+\item Eine \emph{Clifford-Algebra} zu \((V,\beta)\) ist eine unitale \(\mathbb{K}\)-Algebra
+\(\Cl(V,\beta)\) zusammen mit einer linearen Abbildung
+\[
+\iota:V\to \Cl(V,\beta),
+\]
+so dass die folgenden Eigenschaften erfüllt sind:
+
+\begin{enumerate}
+    \item Für alle \(v\in V\) gilt
+    \[
+    \iota(v)^2=-\beta(v,v)\cdot 1.
+    \]
+    Äquivalent dazu gilt für alle \(v,w\in V\):
+    \[
+    \iota(v)\iota(w)+\iota(w)\iota(v)=-2\beta(v,w)\cdot 1.
+    \]
+
+    \item Das Paar \((\Cl(V,\beta),\iota)\) ist universal bezüglich der Clifford-Relation, d.h.:
+    Ist \(A\) eine unitale \(\mathbb{K}\)-Algebra und
+    \[
+    \iota':V\to A
+    \]
+    eine lineare Abbildung mit
+    \[
+    \iota'(v)^2=-\beta(v,v)\cdot 1
+    \qquad\text{für alle }v\in V,
+    \]
+    so existiert genau ein Algebra-Homomorphismus
+    \[
+    \varphi:\Cl(V,\beta)\to A,
+    \]
+    so dass das Diagramm
+    \[
+    \begin{tikzcd}
+    V \arrow[r, "\iota"] \arrow[dr, "\iota'"'] & \Cl(V,\beta) \arrow[d, "\varphi"] \\
+    & A
+    \end{tikzcd}
+    \]
+    kommutiert.
+\end{enumerate}
+
+\item Falls der Vektorraum $V$ reell ist, ist die komplexifizierte Clifford-Algebra von $\Cl_n(V,\beta)$ definiert durch 
+  \[
+  \C l(V,g):=\Cl(V,g)\otimes_{\R}\C.
+  \]
+\end{enumerate}
+\end{DEF}
+
+
+
+\begin{REM}{}{Eigenschaften der Clifford-Algebra}
+\begin{enumerate}
+  \item \emph{Basis von $\Cl(V,\beta)$}: Sei $V$ ein $\K$-Vektorraum mit Basis $b_1, \ldots, b_n \in V$. Dann ist 
+    $$
+    \left\{b_{i_1} \cdot \ldots \cdot b_{i_k}\right\}_{\substack{k=0,1, \ldots n \\ 1 \leq i_1<i_2<\ldots<i_k \leq n}}
+    $$
+    eine Basis der Clifford-Algebra mit Dimension $\operatorname{dim}_{\mathbb{K}} \mathrm{Cl}(V, \beta)=2^{\operatorname{dim}_{\mathbb{K}} V}$.
+  \item \emph{$\Z^2$-Graduierung der Clifford Algebra und kanonischer Automorphismus}: Sei $\imath: V \rightarrow \mathrm{Cl}(V, \beta)$ die Standardeinbettung und $\imath^{\prime}: V \rightarrow \mathrm{Cl}(V, \beta)$ definiert durch
+    $$
+    \imath^{\prime}(v)=-\imath(v), \quad  v \in V .
+    $$
+    Da $\imath^{\prime}(v)^2=\imath(v)^2=-\beta(v, v) \cdot 1$ gilt, existiert wegen universeller Eigenschaft der eindeutige \emph{kanonische Algebren-Automorphismus} $\phi: \mathrm{Cl}(V, \beta) \rightarrow \mathrm{Cl}(V, \beta)$, so dass das Diagramm
+    \[
+    \begin{tikzcd}
+    V \arrow[r, "\iota"] \arrow[dr, "\iota'"'] & \Cl(V,\beta) \arrow[d, "\phi"] \\
+    & \Cl(V,\beta)
+    \end{tikzcd}
+    \]
+    kommutiert. Durch Identifikation $\imath(V) \subset \mathrm{Cl}(V, \beta)$ mit $V$ haben wir $\left.\phi\right|_V=-\mathrm{id}$. Das induziert eine Dekomposition 
+    $$
+    \mathrm{Cl}(V, \beta)=\mathrm{Cl}^0(V, \beta) \oplus \mathrm{Cl}^1(V, \beta),
+    $$
+    mit
+    $$
+    \begin{aligned}
+    & \mathrm{Cl}^0(V, \beta)=+1-\text {Eigenraum von } \phi \\
+    & \mathrm{Cl}^1(V, \beta)=-1-\text {Eigenraum von } \phi.
+    \end{aligned}
+    $$
+\end{enumerate}
+\end{REM}
+
+\begin{DEF}{}{Clifford-Modul}
+Sei $\C l(V,\beta)$ eine komplexifizierte Clifford-Algebra einer reellen Clifford-Algebra. Ein \emph{Clifford-Modul} über $\C l(V,\beta)$ ist ein komplexer Vektorraum $W$ zusammen mit einer Algebrenabbildung
+\[
+\rho:\C l(V,\beta)\longrightarrow \End_{\C}(W).
+\]
+oder äquivalent einer \emph{Wirkung der Clifford-Algebra auf $W$}:
+\[
+\C l(V,\beta)\times W\longrightarrow W,\qquad
+(z,\psi)\longmapsto z\cdot \psi:=\rho(z)(\psi)
+\]
+Eine Clifford-Moduln-Struktur induziert eine \emph{Clifford-Multiplikation} auf $W$ über
+$\C l(V,\beta)$:
+\[
+c:=\rho|_V:V\to \End_{\C}(W)
+\]
+und man schreibt
+\[
+c(v)\psi=v\cdot\psi \qquad v\in V,\ \psi\in W.
+\]
+Die Clifford-Relation lautet dann
+\[
+c(v)c(w)+c(w)c(v)=-2\,g(v,w)\,\id_{W}.
+\]
+Wegen der Clifford-Relation bestimmt $c$ mittels der universellen Eigenschaft von $\C l(V, \beta)$ eindeutig die Darstellung $\rho$.
+
+\end{DEF}
+
+
+\begin{DEF}{}{Pin- und Spin-Gruppe}
+\begin{enumerate}
+\item Die \emph{Pin-Gruppe} ist definiert als die von den Einheitsvektoren erzeugte Untergruppe
+\[
+\Pin(n):=\langle S^{n-1}\rangle = \left\{v_1 \cdot \ldots \cdot v_m \in \mathrm{Cl}_n \mid v_j \in S^{n-1} \subset \mathbb{R}^n, m \in \mathbb{N}_0\right\} \subset \Cl_n^\times.
+\]
+
+\item Die \emph{Spin-Gruppe} ist der gerade Teil von der Pin Gruppe:
+$$
+\begin{aligned}
+\operatorname{Spin}(n) & :=\operatorname{Pin}(n) \cap \mathrm{Cl}_n^0 \\
+& =\left\{v_1 \cdot \ldots \cdot v_m \in \mathrm{Cl}_n \mid v_j \in S^{n-1}, m \in 2 \mathbb{N}_0\right\} .
+\end{aligned}
+$$
+\end{enumerate}
+\end{DEF}
+
+
+\begin{REM}{}{Eigenschaften der Spin Gruppe}
+  \begin{enumerate}
+    \item \emph{Lie-Untergruppe}: $\Spin(n)$ ist eine abgeschlossene Lie-Untergruppe von $\Cl_n^\times$ und $\Pin(n)$.
+    \item \emph{Zweifache Überlagerung}: Man definiert durch  
+    \[
+    \Lambda:\Pin(n)\to \mathrm{O}(n);\ u\mapsto [x\mapsto \Lambda(u)(x):=\alpha(u)\,x\,u^{-1}]
+    \]
+    ein surjektiver Gruppenhomomorphismus mit $\ker\Lambda=\{\pm 1\}$, wobei $\alpha:\Cl_n\to\Cl_n$ die Gradinvolution ist, d.h.
+    \[
+    \alpha(v)=-v \quad \text{für } v\in \R^n,
+    \qquad
+    \alpha(x)=(-1)^k x \text{ für } x\in \Cl_n^{(k)}.
+    \]
+    Einschränkung von $\Lambda$ auf die Spin Gruppe $\Spin(n)\subset\Pin(n)$ liefert einen surjektiven Liegruppenhomomorphismus
+    \[
+    \lambda:=\Lambda|_{\Spin(n)}:\Spin(n)\to \SO(n),
+    \qquad
+    \lambda(u)(x)=u x u^{-1},
+    \]
+    auch mit $\ker\lambda=\{\pm 1\}$, die kanonische zweifache Überlagerung von $\SO(n)$ durch $\Spin(n)$.
+  \end{enumerate}
+\end{REM}
+
+
+
+
+\end{document}
